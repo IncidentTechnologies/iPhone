@@ -1,0 +1,319 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC2609AD159545A500DA6FCA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2609AC159545A500DA6FCA /* UIKit.framework */; };
+		EC2609AF159545A500DA6FCA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2609AE159545A500DA6FCA /* Foundation.framework */; };
+		EC2609B1159545A500DA6FCA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2609B0159545A500DA6FCA /* CoreGraphics.framework */; };
+		EC2609B7159545A500DA6FCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC2609B5159545A500DA6FCA /* InfoPlist.strings */; };
+		EC2609B9159545A500DA6FCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2609B8159545A500DA6FCA /* main.m */; };
+		EC2609BD159545A500DA6FCA /* VAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2609BC159545A500DA6FCA /* VAAppDelegate.m */; };
+		EC2609C0159545A500DA6FCA /* VAViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC2609BF159545A500DA6FCA /* VAViewController.mm */; };
+		EC2609C3159545A500DA6FCA /* VAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC2609C1159545A500DA6FCA /* VAViewController.xib */; };
+		EC2609F81597EBE900DA6FCA /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2609F71597EBE900DA6FCA /* libGtarController.a */; };
+		EC260A141597F29000DA6FCA /* VAChecklist.m in Sources */ = {isa = PBXBuildFile; fileRef = EC260A131597F29000DA6FCA /* VAChecklist.m */; };
+		EC260A171597FEB300DA6FCA /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = EC260A151597FEB200DA6FCA /* checkbox_unchecked.png */; };
+		EC260A181597FEB300DA6FCA /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = EC260A161597FEB200DA6FCA /* checkbox_checked.png */; };
+		EC260A311598D8DA00DA6FCA /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC260A301598D8DA00DA6FCA /* CoreMIDI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		EC2609A8159545A500DA6FCA /* gTarVerificationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarVerificationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC2609AC159545A500DA6FCA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EC2609AE159545A500DA6FCA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EC2609B0159545A500DA6FCA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EC2609B4159545A500DA6FCA /* gTarVerificationApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gTarVerificationApp-Info.plist"; sourceTree = "<group>"; };
+		EC2609B6159545A500DA6FCA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EC2609B8159545A500DA6FCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EC2609BA159545A500DA6FCA /* gTarVerificationApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gTarVerificationApp-Prefix.pch"; sourceTree = "<group>"; };
+		EC2609BB159545A500DA6FCA /* VAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VAAppDelegate.h; sourceTree = "<group>"; };
+		EC2609BC159545A500DA6FCA /* VAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VAAppDelegate.m; sourceTree = "<group>"; };
+		EC2609BE159545A500DA6FCA /* VAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VAViewController.h; sourceTree = "<group>"; };
+		EC2609BF159545A500DA6FCA /* VAViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VAViewController.mm; sourceTree = "<group>"; };
+		EC2609C2159545A500DA6FCA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/VAViewController.xib; sourceTree = "<group>"; };
+		EC2609F71597EBE900DA6FCA /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
+		EC260A121597F29000DA6FCA /* VAChecklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VAChecklist.h; sourceTree = "<group>"; };
+		EC260A131597F29000DA6FCA /* VAChecklist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VAChecklist.m; sourceTree = "<group>"; };
+		EC260A151597FEB200DA6FCA /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
+		EC260A161597FEB200DA6FCA /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
+		EC260A301598D8DA00DA6FCA /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC2609A5159545A500DA6FCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC2609F81597EBE900DA6FCA /* libGtarController.a in Frameworks */,
+				EC260A311598D8DA00DA6FCA /* CoreMIDI.framework in Frameworks */,
+				EC2609AD159545A500DA6FCA /* UIKit.framework in Frameworks */,
+				EC2609AF159545A500DA6FCA /* Foundation.framework in Frameworks */,
+				EC2609B1159545A500DA6FCA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC26099D159545A500DA6FCA = {
+			isa = PBXGroup;
+			children = (
+				EC2609B2159545A500DA6FCA /* gTarVerificationApp */,
+				EC2609AB159545A500DA6FCA /* Frameworks */,
+				EC2609A9159545A500DA6FCA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC2609A9159545A500DA6FCA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC2609A8159545A500DA6FCA /* gTarVerificationApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC2609AB159545A500DA6FCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC2609F71597EBE900DA6FCA /* libGtarController.a */,
+				EC260A301598D8DA00DA6FCA /* CoreMIDI.framework */,
+				EC2609AC159545A500DA6FCA /* UIKit.framework */,
+				EC2609AE159545A500DA6FCA /* Foundation.framework */,
+				EC2609B0159545A500DA6FCA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC2609B2159545A500DA6FCA /* gTarVerificationApp */ = {
+			isa = PBXGroup;
+			children = (
+				EC2609BB159545A500DA6FCA /* VAAppDelegate.h */,
+				EC2609BC159545A500DA6FCA /* VAAppDelegate.m */,
+				EC2609BE159545A500DA6FCA /* VAViewController.h */,
+				EC2609BF159545A500DA6FCA /* VAViewController.mm */,
+				EC2609C1159545A500DA6FCA /* VAViewController.xib */,
+				EC260A121597F29000DA6FCA /* VAChecklist.h */,
+				EC260A131597F29000DA6FCA /* VAChecklist.m */,
+				EC260A151597FEB200DA6FCA /* checkbox_unchecked.png */,
+				EC260A161597FEB200DA6FCA /* checkbox_checked.png */,
+				EC2609B3159545A500DA6FCA /* Supporting Files */,
+			);
+			path = gTarVerificationApp;
+			sourceTree = "<group>";
+		};
+		EC2609B3159545A500DA6FCA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC2609B4159545A500DA6FCA /* gTarVerificationApp-Info.plist */,
+				EC2609B5159545A500DA6FCA /* InfoPlist.strings */,
+				EC2609B8159545A500DA6FCA /* main.m */,
+				EC2609BA159545A500DA6FCA /* gTarVerificationApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC2609A7159545A500DA6FCA /* gTarVerificationApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC2609C6159545A500DA6FCA /* Build configuration list for PBXNativeTarget "gTarVerificationApp" */;
+			buildPhases = (
+				EC2609A4159545A500DA6FCA /* Sources */,
+				EC2609A5159545A500DA6FCA /* Frameworks */,
+				EC2609A6159545A500DA6FCA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gTarVerificationApp;
+			productName = gTarVerificationApp;
+			productReference = EC2609A8159545A500DA6FCA /* gTarVerificationApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC26099F159545A500DA6FCA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = VA;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = EC2609A2159545A500DA6FCA /* Build configuration list for PBXProject "gTarVerificationApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EC26099D159545A500DA6FCA;
+			productRefGroup = EC2609A9159545A500DA6FCA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC2609A7159545A500DA6FCA /* gTarVerificationApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC2609A6159545A500DA6FCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC2609B7159545A500DA6FCA /* InfoPlist.strings in Resources */,
+				EC2609C3159545A500DA6FCA /* VAViewController.xib in Resources */,
+				EC260A171597FEB300DA6FCA /* checkbox_unchecked.png in Resources */,
+				EC260A181597FEB300DA6FCA /* checkbox_checked.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC2609A4159545A500DA6FCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC2609B9159545A500DA6FCA /* main.m in Sources */,
+				EC2609BD159545A500DA6FCA /* VAAppDelegate.m in Sources */,
+				EC2609C0159545A500DA6FCA /* VAViewController.mm in Sources */,
+				EC260A141597F29000DA6FCA /* VAChecklist.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EC2609B5159545A500DA6FCA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC2609B6159545A500DA6FCA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EC2609C1159545A500DA6FCA /* VAViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC2609C2159545A500DA6FCA /* en */,
+			);
+			name = VAViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC2609C4159545A500DA6FCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EC2609C5159545A500DA6FCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC2609C7159545A500DA6FCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gTarVerificationApp/gTarVerificationApp-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				INFOPLIST_FILE = "gTarVerificationApp/gTarVerificationApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Release-iphoneos\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EC2609C8159545A500DA6FCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gTarVerificationApp/gTarVerificationApp-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				INFOPLIST_FILE = "gTarVerificationApp/gTarVerificationApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Release-iphoneos\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC2609A2159545A500DA6FCA /* Build configuration list for PBXProject "gTarVerificationApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC2609C4159545A500DA6FCA /* Debug */,
+				EC2609C5159545A500DA6FCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC2609C6159545A500DA6FCA /* Build configuration list for PBXNativeTarget "gTarVerificationApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC2609C7159545A500DA6FCA /* Debug */,
+				EC2609C8159545A500DA6FCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC26099F159545A500DA6FCA /* Project object */;
+}

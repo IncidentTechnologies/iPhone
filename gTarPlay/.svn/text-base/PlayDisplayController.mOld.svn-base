@@ -1,0 +1,78 @@
+//
+//  PlayDisplayController.m
+//  gTarPlay
+//
+//  Created by Marty Greenia on 3/9/11.
+//  Copyright 2011 Msft. All rights reserved.
+//
+
+#import "PlayDisplayController.h"
+
+@implementation PlayDisplayController
+
+//- (id)initWithSong:(SongModel*)song andView:(BaseEAGLView*)playView
+- (id)initWithSong:(SongModel*)song andView:(PlayView*)playView
+{
+
+	if ( self = [super init] )
+	{
+		
+		m_songModel = song;
+
+		m_playView = playView;
+
+		//create a renderer and give it to the view
+		PlayES1Renderer * renderer = [[PlayES1Renderer alloc] initWithSong:m_songModel];
+		
+		m_playView.m_renderer = renderer;
+				
+		// don't need it anymore
+		[renderer release];
+		
+	}
+	
+	return self;
+	
+}
+
+- (void)dealloc
+{
+
+	// TODO its unclear where this reference is coming from
+	// IB adds two references, and a 3rd one is being added somewhere
+	// This is needed for now to dealloc this.
+	[m_playView release];
+
+	[super dealloc];
+	
+}
+
+- (void)drawView
+{
+	
+	[m_playView drawView];
+	
+}
+
+
+- (void)countdownOn:(NSInteger)count
+{
+	[m_playView.m_renderer countdownOn:count];
+}
+
+- (void)countdownOff
+{
+	[m_playView.m_renderer countdownOff];
+}
+
+- (void)animateNoteWithIndex:(NSInteger)index
+{
+	[m_playView.m_renderer animateNoteWithIndex:index];
+}
+
+- (void)resetAnimations
+{
+	[m_playView.m_renderer resetAnimations];
+}
+	
+@end

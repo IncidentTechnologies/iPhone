@@ -1,0 +1,1078 @@
+TAudioJunk1
+v7
+r0
+t310670176.200852
+cCheck dependencies
+cProcessInfoPlistFile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/Info.plist AudioJunk1-Info.plist
+cCompileXIB /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/MainWindow.xib
+cCompileXIB /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1ViewController.xib
+cProcessPCH /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fwjjrakzzzslwggxjdnuihovpjpv/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cProcessPCH++ /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dumumibiynthifbofltasgkxrhyr/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 objective-c++ com.apple.compilers.gcc.4_2
+cProcessPCH++ /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dwrzdcfkulwtiaaeratwpeflrhgh/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 c++ com.apple.compilers.gcc.4_2
+cCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/main.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.mm normal i386 objective-c++ com.apple.compilers.gcc.4_2
+cCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm normal i386 objective-c++ com.apple.compilers.gcc.4_2
+cCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/CAStreamBasicDescription.o /Developer/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+cCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioController.mm normal i386 objective-c++ com.apple.compilers.gcc.4_2
+cCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/FretButton.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/FretButton.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cLd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1 normal i386
+cGenerateDSYMFile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app.dSYM /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1
+cTouch /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app
+
+N/Dev/Junk/AudioJunk1/AudioJunk1ViewController.xib
+c000000004CAE4D0000000000000053CC
+t1286491392
+s21452
+
+N/Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch
+c000000004CA75B3D00000000000000BD
+t1286036285
+s189
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Dev/Junk/AudioJunk1/Classes/AudioController.h
+c000000004CACE4220000000000000D99
+t1286399010
+s3481
+i<Foundation/Foundation.h>
+i<AudioToolbox/AudioToolbox.h>
+i"CAStreamBasicDescription.h"
+
+N/Dev/Junk/AudioJunk1/Classes/AudioController.m
+c000000004CA75F7D00000000000000D3
+t1286037373
+s211
+i"AudioController.h"
+
+N/Dev/Junk/AudioJunk1/Classes/AudioController.mm
+c000000004CACE30E0000000000002BA0
+t1286398734
+s11168
+i"AudioController.h"
+
+N/Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.h
+c000000004CA75B3D00000000000001EE
+t1286036285
+s494
+i<UIKit/UIKit.h>
+
+N/Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.m
+c000000004CA75B3D0000000000000A97
+t1286036285
+s2711
+i"AudioJunk1AppDelegate.h"
+i"AudioJunk1ViewController.h"
+
+N/Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.mm
+c000000004CA75B3D0000000000000A97
+t1286036285
+s2711
+i"AudioJunk1AppDelegate.h"
+i"AudioJunk1ViewController.h"
+
+N/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.h
+c000000004CAE9ABD00000000000005DA
+t1286511293
+s1498
+i<UIKit/UIKit.h>
+i"AudioController.h"
+i"FretButton.h"
+i"SerialPort.h"
+
+N/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.m
+c000000004CA75B3D00000000000005C2
+t1286036285
+s1474
+i"AudioJunk1ViewController.h"
+
+N/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm
+c000000004CAF69180000000000001B8A
+t1286564120
+s7050
+i"AudioJunk1ViewController.h"
+
+N/Dev/Junk/AudioJunk1/Classes/FretButton.h
+c000000004CACCFC6000000000000014E
+t1286393798
+s334
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Dev/Junk/AudioJunk1/Classes/FretButton.m
+c000000004CACC9A900000000000000E4
+t1286392233
+s228
+i"FretButton.h"
+
+N/Dev/Junk/AudioJunk1/MainWindow.xib
+c000000004CA75B3D0000000000004E4D
+t1286036285
+s20045
+
+N/Dev/Junk/AudioJunk1/SerialPort.h
+c000000004CAEA1FA000000000000122D
+t1286513146
+s4653
+i<stdio.h>
+i<string.h>
+i<unistd.h>
+i<fcntl.h>
+i<errno.h>
+i<termios.h>
+i<sys/ioctl.h>
+
+N/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o
+t1286490983
+s38980
+
+N/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1.LinkFileList
+c000000004CAE4B6400000000000002DE
+t1286490980
+s734
+
+N/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o
+t1286491159
+s50524
+
+N/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o
+t1286491426
+s66744
+
+N/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/CAStreamBasicDescription.o
+t1286490983
+s34156
+
+N/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/FretButton.o
+t1286490983
+s11656
+
+N/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/main.o
+t1286490983
+s5920
+
+N/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app
+t1286491426
+s238
+
+N/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app.dSYM
+t1286491426
+s102
+
+N/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1
+t1286491426
+s57120
+
+N/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1ViewController.nib
+t1286491426
+s4697
+
+N/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/Info.plist
+t1286490980
+s576
+
+N/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/MainWindow.nib
+t1286490981
+s1501
+
+N/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/PkgInfo
+t1286490980
+s8
+
+N/Dev/Junk/AudioJunk1/main.m
+c000000004CA75B3D0000000000000169
+t1286036285
+s361
+i<UIKit/UIKit.h>
+
+N/Developer/Extras/CoreAudio/PublicUtility/CADebugMacros.h
+c000000004C904DEB0000000000004FAE
+t1284525547
+s20398
+i<CoreAudio/CoreAudioTypes.h>
+i"CoreAudioTypes.h"
+i"CADebugPrintf.h"
+i<pthread.h>
+i"CAHostTimeBase.h"
+i"CAHostTimeBase.h"
+i"CADebugger.h"
+
+N/Developer/Extras/CoreAudio/PublicUtility/CADebugPrintf.h
+c000000004C904DEB000000000000111C
+t1284525547
+s4380
+i<CoreAudio/CoreAudioTypes.h>
+i"CoreAudioTypes.h"
+i<sys/syslog.h>
+i<stdio.h>
+i<stdio.h>
+
+N/Developer/Extras/CoreAudio/PublicUtility/CADebugger.h
+c000000004C904DEB0000000000000A9C
+t1284525547
+s2716
+
+N/Developer/Extras/CoreAudio/PublicUtility/CAHostTimeBase.h
+c000000004C904DEB0000000000001C6C
+t1284525547
+s7276
+i<CoreAudio/CoreAudioTypes.h>
+i<CoreAudioTypes.h>
+i<mach/mach_time.h>
+i<windows.h>
+i"CADebugMacros.h"
+
+N/Developer/Extras/CoreAudio/PublicUtility/CALogMacros.h
+c000000004C904DEB00000000000019A2
+t1284525547
+s6562
+i"CADebugMacros.h"
+i"CADebugPrintf.h"
+i<stdio.h>
+i<string.h>
+
+N/Developer/Extras/CoreAudio/PublicUtility/CAMath.h
+c000000004C904DEB0000000000000C6B
+t1284525547
+s3179
+i<CoreAudio/CoreAudioTypes.h>
+i<CoreAudioTypes.h>
+
+N/Developer/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.cpp
+c000000004C904DEB0000000000004E32
+t1284525547
+s20018
+i"CAStreamBasicDescription.h"
+i"CAMath.h"
+i<CoreFoundation/CFByteOrder.h>
+i<CFByteOrder.h>
+i"CALogMacros.h"
+
+N/Developer/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.h
+c000000004C904DEB0000000000002E6C
+t1284525547
+s11884
+i<CoreAudio/CoreAudioTypes.h>
+i<CoreFoundation/CoreFoundation.h>
+i"CoreAudioTypes.h"
+i"CoreFoundation.h"
+i"CADebugMacros.h"
+i<string.h>
+i<stdio.h>
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk
+c000000004CACEC5C00000000000000EE
+t1286401116
+s238
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+c000000004B2B4D460000000000193960
+t1261129030
+s1653088
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioToolbox.h
+c000000004B2B4D2F0000000000000A22
+t1261129007
+s2594
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/CoreAudio.framework/Headers/CoreAudioTypes.h
+c000000004B2B4CBD000000000000F342
+t1261128893
+s62274
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFByteOrder.h
+c000000004B2B4C150000000000001983
+t1261128725
+s6531
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h
+c000000004B2B4C170000000000000A99
+t1261128727
+s2713
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004B2B4CC3000000000026EE30
+t1261128899
+s2551344
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004B2B4DC8000000000027E880
+t1261129160
+s2615424
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004B2B4DAE0000000000001355
+t1261129134
+s4949
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004B2B61620000000000000788
+t1261134178
+s1928
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004B2B62B500000000016721E0
+t1261134517
+s23536096
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/errno.h
+c000000004748A13100000000000003EB
+t1195942193
+s1003
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/fcntl.h
+c000000004748A13100000000000003EA
+t1195942193
+s1002
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/mach/mach_time.h
+c000000004763449D0000000000000746
+t1197687965
+s1862
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/pthread.h
+c000000004748A133000000000000380F
+t1195942195
+s14351
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/stdio.h
+c000000004748A1330000000000003D1D
+t1195942195
+s15645
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/string.h
+c000000004748A1330000000000001731
+t1195942195
+s5937
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/sys/ioctl.h
+c00000000476344BF00000000000011D1
+t1197687999
+s4561
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/sys/syslog.h
+c00000000476344C000000000000021EC
+t1197688000
+s8684
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/termios.h
+c000000004748A13100000000000004D4
+t1195942193
+s1236
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk/usr/include/unistd.h
+c000000004748A13300000000000053FF
+t1195942195
+s21503
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk
+c000000004C6C30170000000000000110
+t1282158615
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+c000000004C5A4D1600000000001E06E0
+t1280986390
+s1967840
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioToolbox.h
+c000000004C5A4D020000000000000A23
+t1280986370
+s2595
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/CoreAudio.framework/Headers/CoreAudioTypes.h
+c000000004C5A4CE5000000000001032E
+t1280986341
+s66350
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFByteOrder.h
+c000000004C5A4C8C0000000000001983
+t1280986252
+s6531
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h
+c000000004C5A4C8C0000000000000AB3
+t1280986252
+s2739
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004C5A4DB60000000000295900
+t1280986550
+s2709760
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004C5A4DB0000000000029D580
+t1280986544
+s2741632
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004C5A4DA10000000000001466
+t1280986529
+s5222
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004C6241ED00000000000009CD
+t1281507821
+s2509
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004C6242840000000001E228C0
+t1281507972
+s31598784
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/errno.h
+c000000004C57909100000000000003EB
+t1280807057
+s1003
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/fcntl.h
+c000000004C57909100000000000003EA
+t1280807057
+s1002
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/mach/mach_time.h
+c000000004C5799000000000000000746
+t1280809216
+s1862
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/pthread.h
+c000000004C57909200000000000038F0
+t1280807058
+s14576
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/stdio.h
+c000000004C57909200000000000040AC
+t1280807058
+s16556
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/string.h
+c000000004C5790920000000000001731
+t1280807058
+s5937
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/sys/ioctl.h
+c000000004C5798EB000000000000116C
+t1280809195
+s4460
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/sys/syslog.h
+c000000004C5798ED00000000000021EC
+t1280809197
+s8684
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/termios.h
+c000000004C57909100000000000004D4
+t1280807057
+s1236
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/unistd.h
+c000000004C579092000000000000563E
+t1280807058
+s22078
+
+N/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+c000000004C91794F00000000004D2720
+t1284602191
+s5056288
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1ViewController.xib
+c000000004CC5260400000000000053CC
+t1287988740
+s21452
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1_Prefix.pch
+c000000004CC5260400000000000000BD
+t1287988740
+s189
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioController.h
+c000000004D3DFF530000000000000EAF
+t1295908691
+s3759
+i<Foundation/Foundation.h>
+i<AudioToolbox/AudioToolbox.h>
+i"CAStreamBasicDescription.h"
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioController.mm
+c000000004CD76EE60000000000002BA0
+t1289187046
+s11168
+i"AudioController.h"
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.h
+c000000004CC5260400000000000001EE
+t1287988740
+s494
+i<UIKit/UIKit.h>
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.mm
+c000000004CC526040000000000000A97
+t1287988740
+s2711
+i"AudioJunk1AppDelegate.h"
+i"AudioJunk1ViewController.h"
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.h
+c000000004CD054FA00000000000005DA
+t1288721658
+s1498
+i<UIKit/UIKit.h>
+i"AudioController.h"
+i"FretButton.h"
+i"SerialPort.h"
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm
+c000000004CD3BE770000000000001B8A
+t1288945271
+s7050
+i"AudioJunk1ViewController.h"
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/FretButton.h
+c000000004CC52604000000000000014E
+t1287988740
+s334
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/FretButton.m
+c000000004CC5260400000000000000E4
+t1287988740
+s228
+i"FretButton.h"
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/MainWindow.xib
+c000000004CC526040000000000004E4D
+t1287988740
+s20045
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/SerialPort.h
+c000000004CC52604000000000000122D
+t1287988740
+s4653
+i<stdio.h>
+i<string.h>
+i<unistd.h>
+i<fcntl.h>
+i<errno.h>
+i<termios.h>
+i<sys/ioctl.h>
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o
+t1288977376
+s40264
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1.LinkFileList
+c000000004CC667160000000000000410
+t1288070934
+s1040
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o
+t1288976151
+s57024
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o
+t1288976151
+s77464
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/CAStreamBasicDescription.o
+t1288070939
+s34156
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/FretButton.o
+t1288070939
+s34644
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/main.o
+t1288674494
+s6368
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app
+t1288977376
+s272
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app.dSYM
+t1288977376
+s136
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1
+t1288977376
+s61424
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1ViewController.nib
+t1288070936
+s5385
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/Info.plist
+t1288070934
+s603
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/MainWindow.nib
+t1288070936
+s1687
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/PkgInfo
+t1288070934
+s8
+
+N/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/main.m
+c000000004CC714760000000000000169
+t1288115318
+s361
+i<UIKit/UIKit.h>
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dfzvgjojauzfpnasorffibkuctrf/AudioJunk1_Prefix.pch.gch
+t1286490982
+s13972912
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-euewvxojiurhjjcxkzggypirrvut/AudioJunk1_Prefix.pch.gch
+t1286143205
+s16223120
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-ezdrrsrszobizjgmalzccfngnwzc/AudioJunk1_Prefix.pch.gch
+t1286143203
+s2515312
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fznuwvhfpkgoerguqxsszuqelxfl/AudioJunk1_Prefix.pch.gch
+t1286490982
+s13034960
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gbvdyodwdtavbhbfsloufvsolvrc/AudioJunk1_Prefix.pch.gch
+t1286036373
+s15211536
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gsdssygyjlfelvbgcszmoskrwosa/AudioJunk1_Prefix.pch.gch
+t1286490982
+s2519408
+
+N/var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dumumibiynthifbofltasgkxrhyr/AudioJunk1_Prefix.pch.gch
+t2
+s0
+
+N/var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dwrzdcfkulwtiaaeratwpeflrhgh/AudioJunk1_Prefix.pch.gch
+t2
+s0
+
+N/var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fwjjrakzzzslwggxjdnuihovpjpv/AudioJunk1_Prefix.pch.gch
+t2
+s0
+
+NAudioJunk1-Info.plist
+c000000004CC52604000000000000038D
+t1287988740
+s909
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies310670175#310670175#0(0"0(0#1#0"8631192768#0"0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o /Dev/Junk/AudioJunk1/Classes/AudioController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o /Dev/Junk/AudioJunk1/Classes/AudioController.mm normal i386 objective-c++ com.apple.compilers.gcc.4_2
+s308183783.268566
+e308183783.411493
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o
+x/Dev/Junk/AudioJunk1/Classes/AudioController.mm
+xnormal
+xi386
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@55"Compile /Dev/Junk/AudioJunk1/Classes/AudioController.mm308183783#308183783#0(0"0(0#0#47"/Dev/Junk/AudioJunk1/Classes/AudioController.mm4300885448#1773"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dfzvgjojauzfpnasorffibkuctrf/AudioJunk1_Prefix.pch -c /Dev/Junk/AudioJunk1/Classes/AudioController.mm -o /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioController.mm normal i386 objective-c++ com.apple.compilers.gcc.4_2
+s310670175.926435
+e310670176.079588
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioController.mm
+xnormal
+xi386
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@106"Compile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioController.mm310670175#310670176#0(0"0(0#0#98"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioController.mm8629686912#2389"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/include -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dumumibiynthifbofltasgkxrhyr/AudioJunk1_Prefix.pch -c /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioController.mm -o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioController.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o /Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s307729173.819245
+e307729173.963000
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o
+x/Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@60"Compile /Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.m307729173#307729173#0(0"0(0#0#52"/Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.m8602617632#1818"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gbvdyodwdtavbhbfsloufvsolvrc/AudioJunk1_Prefix.pch -c /Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.m -o /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o /Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.mm normal i386 objective-c++ com.apple.compilers.gcc.4_2
+s308183959.126425
+e308183959.265575
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o
+x/Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.mm
+xnormal
+xi386
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@61"Compile /Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.mm308183959#308183959#0(0"0(0#0#53"/Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.mm4300885448#1785"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dfzvgjojauzfpnasorffibkuctrf/AudioJunk1_Prefix.pch -c /Dev/Junk/AudioJunk1/Classes/AudioJunk1AppDelegate.mm -o /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.mm normal i386 objective-c++ com.apple.compilers.gcc.4_2
+s310668950.018200
+e310668951.055085
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.mm
+xnormal
+xi386
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@112"Compile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.mm310668950#310668951#0(0"0(0#0#104"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.mm8629299808#2401"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/include -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dumumibiynthifbofltasgkxrhyr/AudioJunk1_Prefix.pch -c /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.mm -o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1AppDelegate.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o /Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s307729173.928614
+e307729173.997794
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o
+x/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@63"Compile /Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.m307729173#307729173#0(0"0(0#0#55"/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.m8599310816#1824"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gbvdyodwdtavbhbfsloufvsolvrc/AudioJunk1_Prefix.pch -c /Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.m -o /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o /Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm normal i386 objective-c++ com.apple.compilers.gcc.4_2
+s308184226.680697
+e308184226.833169
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o
+x/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm
+xnormal
+xi386
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+o/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController pluckButtonClick:](AudioJunk1ViewController*, objc_selector*, objc_object*)':
+o/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm:60: warning: deprecated conversion from string constant to 'char*'
+o/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController pluckButtonClickDown:](AudioJunk1ViewController*, objc_selector*, objc_object*)':
+o/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm:74: warning: deprecated conversion from string constant to 'char*'
+lSLF07#2@64"Compile /Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm308184226#308184226#0(614"/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController pluckButtonClick:](AudioJunk1ViewController*, objc_selector*, objc_object*)':/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm:60: warning: deprecated conversion from string constant to 'char*'/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController pluckButtonClickDown:](AudioJunk1ViewController*, objc_selector*, objc_object*)':/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm:74: warning: deprecated conversion from string constant to 'char*'2(22@53"Deprecated conversion from string constant to 'char*'308184226#181#124#0(6@56"/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm308184224#60#0#60#0#49"deprecated conversion from string constant to '*'0(22@53"Deprecated conversion from string constant to 'char*'308184226#490#124#0(6@56"/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm308184224#74#0#74#0#49"deprecated conversion from string constant to '*'0(0#0#56"/Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm4300885448#1791"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dfzvgjojauzfpnasorffibkuctrf/AudioJunk1_Prefix.pch -c /Dev/Junk/AudioJunk1/Classes/AudioJunk1ViewController.mm -o /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm normal i386 objective-c++ com.apple.compilers.gcc.4_2
+s310668950.019539
+e310668951.120596
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm
+xnormal
+xi386
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController pluckButtonClick:](AudioJunk1ViewController*, objc_selector*, objc_object*)':
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:60: warning: deprecated conversion from string constant to 'char*'
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController pluckButtonClickDown:](AudioJunk1ViewController*, objc_selector*, objc_object*)':
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:76: warning: deprecated conversion from string constant to 'char*'
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController checkRxSerialInput](AudioJunk1ViewController*, objc_selector*)':
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:101: warning: unused variable 'midinote'
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:102: warning: unused variable 'vel'
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:103: warning: unused variable 'strfret'
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:117: warning: unused variable 'midinote'
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:118: warning: unused variable 'vel'
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:137: warning: unused variable 'updown'
+o/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:138: warning: unused variable 'strfret'
+lSLF07#2@115"Compile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310668950#310668951#0(2066"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController pluckButtonClick:](AudioJunk1ViewController*, objc_selector*, objc_object*)':/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:60: warning: deprecated conversion from string constant to 'char*'/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController pluckButtonClickDown:](AudioJunk1ViewController*, objc_selector*, objc_object*)':/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:76: warning: deprecated conversion from string constant to 'char*'/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm: In function 'void -[AudioJunk1ViewController checkRxSerialInput](AudioJunk1ViewController*, objc_selector*)':/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:101: warning: unused variable 'midinote'/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:102: warning: unused variable 'vel'/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:103: warning: unused variable 'strfret'/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:117: warning: unused variable 'midinote'/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:118: warning: unused variable 'vel'/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:137: warning: unused variable 'updown'/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm:138: warning: unused variable 'strfret'9(22@53"Deprecated conversion from string constant to 'char*'310668950#232#175#0(6@107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310638071#60#0#60#0#49"deprecated conversion from string constant to '*'0(22@53"Deprecated conversion from string constant to 'char*'310668950#643#175#0(6@107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310638071#76#0#76#0#49"deprecated conversion from string constant to '*'0(22@26"Unused variable 'midinote'310668950#1037#149#0(6@107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310638071#101#0#101#0#19"unused variable '*'0(22@21"Unused variable 'vel'310668950#1186#144#0(6@107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310638071#102#0#102#0#19"unused variable '*'0(22@25"Unused variable 'strfret'310668950#1330#148#0(6@107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310638071#103#0#103#0#19"unused variable '*'0(22@26"Unused variable 'midinote'310668950#1478#149#0(6@107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310638071#117#0#117#0#19"unused variable '*'0(22@21"Unused variable 'vel'310668950#1627#144#0(6@107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310638071#118#0#118#0#19"unused variable '*'0(22@24"Unused variable 'updown'310668950#1771#147#0(6@107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310638071#137#0#137#0#19"unused variable '*'0(22@25"Unused variable 'strfret'310668950#1918#148#0(6@107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm310638071#138#0#138#0#19"unused variable '*'0(0#0#107"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm8628995040#2407"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/include -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dumumibiynthifbofltasgkxrhyr/AudioJunk1_Prefix.pch -c /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm -o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1ViewController.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/CAStreamBasicDescription.o /Developer/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+s309763738.769425
+e309763739.146834
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/CAStreamBasicDescription.o
+x/Developer/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@78"Compile /Developer/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.cpp309763738#309763739#0(0"0(0#0#70"/Developer/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.cpp8604364800#2316"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/include -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dwrzdcfkulwtiaaeratwpeflrhgh/AudioJunk1_Prefix.pch -c /Developer/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.cpp -o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/CAStreamBasicDescription.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/FretButton.o /Dev/Junk/AudioJunk1/Classes/FretButton.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s308183783.411605
+e308183783.464580
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/FretButton.o
+x/Dev/Junk/AudioJunk1/Classes/FretButton.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@49"Compile /Dev/Junk/AudioJunk1/Classes/FretButton.m308183783#308183783#0(0"0(0#0#41"/Dev/Junk/AudioJunk1/Classes/FretButton.m4300885448#1741"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fznuwvhfpkgoerguqxsszuqelxfl/AudioJunk1_Prefix.pch -c /Dev/Junk/AudioJunk1/Classes/FretButton.m -o /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/FretButton.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/FretButton.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/FretButton.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s309763739.048678
+e309763739.119408
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/FretButton.o
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/FretButton.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@100"Compile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/FretButton.m309763739#309763739#0(0"0(0#0#92"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/FretButton.m8449086488614758400#2357"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/include -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fwjjrakzzzslwggxjdnuihovpjpv/AudioJunk1_Prefix.pch -c /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/Classes/FretButton.m -o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/FretButton.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/main.o /Dev/Junk/AudioJunk1/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s308183783.031528
+e308183783.090231
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/main.o
+x/Dev/Junk/AudioJunk1/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@35"Compile /Dev/Junk/AudioJunk1/main.m308183783#308183783#0(0"0(0#0#27"/Dev/Junk/AudioJunk1/main.m4300885448#1721"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fznuwvhfpkgoerguqxsszuqelxfl/AudioJunk1_Prefix.pch -c /Dev/Junk/AudioJunk1/main.m -o /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/main.o0#
+
+CCompileC build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/main.o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s310367292.859116
+e310367294.061375
+r1
+xCompileC
+xbuild/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/main.o
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@86"Compile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/main.m310367292#310367294#0(0"0(0#0#78"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/main.m8618718720#2337"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/include -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -include /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fwjjrakzzzslwggxjdnuihovpjpv/AudioJunk1_Prefix.pch -c /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/main.m -o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/main.o0#
+
+CCompileXIB /Dev/Junk/AudioJunk1/AudioJunk1ViewController.xib
+s308184226.293462
+e308184226.680104
+r1
+xCompileXIB
+x/Dev/Junk/AudioJunk1/AudioJunk1ViewController.xib
+lSLF07#2@39"CompileXIB AudioJunk1ViewController.xib308184226#308184226#0(0"0(0#0#49"/Dev/Junk/AudioJunk1/AudioJunk1ViewController.xib4300885448#459"    cd /Dev/Junk/AudioJunk1    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1.3    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1ViewController.nib /Dev/Junk/AudioJunk1/AudioJunk1ViewController.xib0#
+
+CCompileXIB /Dev/Junk/AudioJunk1/MainWindow.xib
+s308183780.787869
+e308183781.440359
+r1
+xCompileXIB
+x/Dev/Junk/AudioJunk1/MainWindow.xib
+lSLF07#2@25"CompileXIB MainWindow.xib308183780#308183781#0(0"0(0#0#35"/Dev/Junk/AudioJunk1/MainWindow.xib4300885448#431"    cd /Dev/Junk/AudioJunk1    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1.3    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/MainWindow.nib /Dev/Junk/AudioJunk1/MainWindow.xib0#
+
+CCompileXIB /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1ViewController.xib
+s309763734.747995
+e309763736.726073
+r1
+xCompileXIB
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1ViewController.xib
+lSLF07#2@39"CompileXIB AudioJunk1ViewController.xib309763734#309763736#0(0"0(0#0#100"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1ViewController.xib8606041248#700"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1ViewController.nib /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1ViewController.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk0#
+
+CCompileXIB /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/MainWindow.xib
+s309763734.731633
+e309763736.670287
+r1
+xCompileXIB
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/MainWindow.xib
+lSLF07#2@25"CompileXIB MainWindow.xib309763734#309763736#0(0"0(0#0#86"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/MainWindow.xib8605581888#672"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/MainWindow.nib /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/MainWindow.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk0#
+
+CGenerateDSYMFile /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app.dSYM /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1
+s308184226.861660
+e308184226.884111
+r1
+xGenerateDSYMFile
+x/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app.dSYM
+x/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1
+lSLF07#2@118"GenerateDSYMFile build/Debug-iphonesimulator/AudioJunk1.app.dSYM build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1308184226#308184226#0(0"0(0#0#74"/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk14300885448#338"    cd /Dev/Junk/AudioJunk1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1 -o /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app.dSYM0#
+
+CGenerateDSYMFile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app.dSYM /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1
+s310670176.168356
+e310670176.196698
+r1
+xGenerateDSYMFile
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app.dSYM
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1
+lSLF07#2@118"GenerateDSYMFile build/Debug-iphonesimulator/AudioJunk1.app.dSYM build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1310670176#310670176#0(0"0(0#0#125"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk18632214752#491"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1 -o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app.dSYM0#
+
+CLd /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1 normal i386
+s308184226.833440
+e308184226.861546
+r1
+xLd
+x/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1
+xnormal
+xi386
+lSLF07#2@79"Link /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1308184226#308184226#0(0"0(0#0#0"4300885448#813"    cd /Dev/Junk/AudioJunk1    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk -L/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -filelist /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1.LinkFileList -mmacosx-version-min=10.5 -framework Foundation -framework UIKit -framework CoreGraphics -framework AudioToolbox -o /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk10#
+
+CLd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1 normal i386
+s310670176.079685
+e310670176.168226
+r1
+xLd
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1
+xnormal
+xi386
+lSLF07#2@130"Link /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk1310670176#310670176#0(0"0(0#0#0"8629580192#1104"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -L/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -filelist /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/Objects-normal/i386/AudioJunk1.LinkFileList -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -framework Foundation -framework UIKit -framework CoreGraphics -framework AudioToolbox -o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/AudioJunk10#
+
+CProcessInfoPlistFile /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/Info.plist AudioJunk1-Info.plist
+s308183780.782444
+e308183780.787766
+r1
+xProcessInfoPlistFile
+x/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/Info.plist
+xAudioJunk1-Info.plist
+lSLF07#2@29"Process AudioJunk1-Info.plist308183780#308183780#0(0"0(0#0#42"/Dev/Junk/AudioJunk1/AudioJunk1-Info.plist4300885448#434"    cd /Dev/Junk/AudioJunk1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility AudioJunk1-Info.plist -genpkginfo /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/Info.plist0#
+
+CProcessInfoPlistFile /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/Info.plist AudioJunk1-Info.plist
+s309763734.707623
+e309763734.731541
+r1
+xProcessInfoPlistFile
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/Info.plist
+xAudioJunk1-Info.plist
+lSLF07#2@29"Process AudioJunk1-Info.plist309763734#309763734#0(0"0(0#0#93"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1-Info.plist29273878621126700#587"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility AudioJunk1-Info.plist -genpkginfo /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app/Info.plist0#
+
+CProcessPCH /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fznuwvhfpkgoerguqxsszuqelxfl/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s308183781.583706
+e308183782.637260
+r1
+xProcessPCH
+x/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fznuwvhfpkgoerguqxsszuqelxfl/AudioJunk1_Prefix.pch.gch
+xAudioJunk1_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@32"Precompile AudioJunk1_Prefix.pch308183781#308183782#0(0"0(0#0#42"/Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch4300885448#1628"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -c /Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch -o /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fznuwvhfpkgoerguqxsszuqelxfl/AudioJunk1_Prefix.pch.gch0#
+
+CProcessPCH /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gbvdyodwdtavbhbfsloufvsolvrc/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s307729172.703607
+e307729173.817579
+r1
+xProcessPCH
+x/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gbvdyodwdtavbhbfsloufvsolvrc/AudioJunk1_Prefix.pch.gch
+xAudioJunk1_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@32"Precompile AudioJunk1_Prefix.pch307729172#307729173#0(0"0(0#0#42"/Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch8603152768#1683"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -c /Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch -o /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gbvdyodwdtavbhbfsloufvsolvrc/AudioJunk1_Prefix.pch.gch0#
+
+CProcessPCH /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fwjjrakzzzslwggxjdnuihovpjpv/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s309763736.726247
+e309763738.108788
+r1
+xProcessPCH
+x/var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fwjjrakzzzslwggxjdnuihovpjpv/AudioJunk1_Prefix.pch.gch
+xAudioJunk1_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@32"Precompile AudioJunk1_Prefix.pch309763736#309763738#0(0"0(0#0#93"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1_Prefix.pch8606008160#2193"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/include -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -c /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1_Prefix.pch -o /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-fwjjrakzzzslwggxjdnuihovpjpv/AudioJunk1_Prefix.pch.gch0#
+
+CProcessPCH++ /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dfzvgjojauzfpnasorffibkuctrf/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 objective-c++ com.apple.compilers.gcc.4_2
+s308183781.584684
+e308183783.031390
+r1
+xProcessPCH++
+x/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dfzvgjojauzfpnasorffibkuctrf/AudioJunk1_Prefix.pch.gch
+xAudioJunk1_Prefix.pch
+xnormal
+xi386
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@32"Precompile AudioJunk1_Prefix.pch308183781#308183783#0(0"0(0#0#42"/Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch4300885448#1649"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c++-header -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -c /Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch -o /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dfzvgjojauzfpnasorffibkuctrf/AudioJunk1_Prefix.pch.gch0#
+
+CProcessPCH++ /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-euewvxojiurhjjcxkzggypirrvut/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 objective-c++ com.apple.compilers.gcc.4_2
+s307836003.130530
+e307836005.132441
+r1
+xProcessPCH++
+x/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-euewvxojiurhjjcxkzggypirrvut/AudioJunk1_Prefix.pch.gch
+xAudioJunk1_Prefix.pch
+xnormal
+xi386
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@32"Precompile AudioJunk1_Prefix.pch307836003#307836005#0(0"0(0#0#42"/Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch8621609760#1704"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c++-header -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -c /Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch -o /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-euewvxojiurhjjcxkzggypirrvut/AudioJunk1_Prefix.pch.gch0#
+
+CProcessPCH++ /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-ezdrrsrszobizjgmalzccfngnwzc/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 c++ com.apple.compilers.gcc.4_2
+s307836003.131598
+e307836004.253486
+r1
+xProcessPCH++
+x/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-ezdrrsrszobizjgmalzccfngnwzc/AudioJunk1_Prefix.pch.gch
+xAudioJunk1_Prefix.pch
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@32"Precompile AudioJunk1_Prefix.pch307836003#307836004#0(0"0(0#0#42"/Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch8619457376#1650"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c++-header -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -c /Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch -o /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-ezdrrsrszobizjgmalzccfngnwzc/AudioJunk1_Prefix.pch.gch0#
+
+CProcessPCH++ /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gsdssygyjlfelvbgcszmoskrwosa/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 c++ com.apple.compilers.gcc.4_2
+s308183782.637525
+e308183782.826915
+r1
+xProcessPCH++
+x/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gsdssygyjlfelvbgcszmoskrwosa/AudioJunk1_Prefix.pch.gch
+xAudioJunk1_Prefix.pch
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@32"Precompile AudioJunk1_Prefix.pch308183782#308183782#0(0"0(0#0#42"/Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch4300885448#1639"    cd /Dev/Junk/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c++-header -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator -I/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/include -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/Dev/Junk/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -c /Dev/Junk/AudioJunk1/AudioJunk1_Prefix.pch -o /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-gsdssygyjlfelvbgcszmoskrwosa/AudioJunk1_Prefix.pch.gch0#
+
+CProcessPCH++ /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dumumibiynthifbofltasgkxrhyr/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 objective-c++ com.apple.compilers.gcc.4_2
+s309763736.727397
+e309763738.457630
+r1
+xProcessPCH++
+x/var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dumumibiynthifbofltasgkxrhyr/AudioJunk1_Prefix.pch.gch
+xAudioJunk1_Prefix.pch
+xnormal
+xi386
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@32"Precompile AudioJunk1_Prefix.pch309763736#309763738#0(0"0(0#0#93"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1_Prefix.pch8594378080#2214"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c++-header -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/include -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -c /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1_Prefix.pch -o /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dumumibiynthifbofltasgkxrhyr/AudioJunk1_Prefix.pch.gch0#
+
+CProcessPCH++ /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dwrzdcfkulwtiaaeratwpeflrhgh/AudioJunk1_Prefix.pch.gch AudioJunk1_Prefix.pch normal i386 c++ com.apple.compilers.gcc.4_2
+s309763738.108906
+e309763738.333273
+r1
+xProcessPCH++
+x/var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dwrzdcfkulwtiaaeratwpeflrhgh/AudioJunk1_Prefix.pch.gch
+xAudioJunk1_Prefix.pch
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@32"Precompile AudioJunk1_Prefix.pch309763738#309763738#0(0"0(0#0#93"/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1_Prefix.pch8604870368#2160"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c++-header -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-generated-files.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-own-target-headers.hmap -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-all-target-headers.hmap -iquote /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/AudioJunk1-project-headers.hmap -F/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/include -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources/i386 -I/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/AudioJunk1.build/Debug-iphonesimulator/AudioJunk1.build/DerivedSources -c /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/AudioJunk1_Prefix.pch -o /var/folders/gR/gRNe84dXH3ekgz97yH1YSU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AudioJunk1_Prefix-dwrzdcfkulwtiaaeratwpeflrhgh/AudioJunk1_Prefix.pch.gch0#
+
+CTouch /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app
+s308184226.884210
+e308184226.915515
+r1
+xTouch
+x/Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app
+lSLF07#2@69"Touch /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app308184226#308184226#0(0"0(0#0#0"4300885448#245"    cd /Dev/Junk/AudioJunk1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Dev/Junk/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app0#
+
+CTouch /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app
+s310670176.196796
+e310670176.200803
+r1
+xTouch
+x/developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app
+lSLF07#2@120"Touch /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app310670176#310670176#0(0"0(0#0#0"8631193888#347"    cd /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /developer/IncidentTechMain/IncidentTechMain/Software/iPhone/AudioJunk1/build/Debug-iphonesimulator/AudioJunk1.app0#
+

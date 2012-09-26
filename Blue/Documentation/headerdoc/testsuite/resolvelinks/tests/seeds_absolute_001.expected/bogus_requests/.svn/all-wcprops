@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/seeds_absolute_001.expected/bogus_requests
+END
+bogus_link_1.html
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/seeds_absolute_001.expected/bogus_requests/bogus_link_1.html
+END
+bogus_link_2.html
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/seeds_absolute_001.expected/bogus_requests/bogus_link_2.html
+END
+bogus_link_3.html
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/seeds_absolute_001.expected/bogus_requests/bogus_link_3.html
+END
+bogus_request_1.html
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/seeds_absolute_001.expected/bogus_requests/bogus_request_1.html
+END

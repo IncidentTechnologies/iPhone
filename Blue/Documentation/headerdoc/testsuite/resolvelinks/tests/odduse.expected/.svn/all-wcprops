@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/odduse.expected
+END
+seed1.xref
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/odduse.expected/seed1.xref
+END
+seed2.xref
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/odduse.expected/seed2.xref
+END
+testout
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/odduse.expected/testout
+END
+xref_out
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/tests/odduse.expected/xref_out
+END

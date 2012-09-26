@@ -1,0 +1,670 @@
+TSerialPortJunk1
+v7
+r0
+t308204275.432241
+cCheck dependencies
+cCpResource build/Debug-iphoneos/SerialPortJunk1.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist
+cProcessInfoPlistFile /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/Info.plist SerialPortJunk1-Info.plist
+cCompileXIB /Dev/Junk/SerialPortJunk1/MainWindow.xib
+cCompileXIB /Dev/Junk/SerialPortJunk1/SerialPortJunk1ViewController.xib
+cProcessPCH++ /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dqsmefzqmdlvluapwphgmbwcvsin/SerialPortJunk1_Prefix.pch.gch SerialPortJunk1_Prefix.pch normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+cCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/main.o /Dev/Junk/SerialPortJunk1/main.m normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+cCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1AppDelegate.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+cCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1ViewController.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+cLd /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1 normal armv6
+cGenerateDSYMFile /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app.dSYM /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1
+cProcessProductPackaging "/Users/ib54/Library/MobileDevice/Provisioning Profiles/822D17DD-316F-41D6-8CC8-0AE168B58310.mobileprovision" /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision
+cTouch /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app
+cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent
+cCodeSign /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app
+
+N/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.h
+c000000004CAA69A2000000000000020C
+t1286236578
+s524
+i<UIKit/UIKit.h>
+
+N/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m
+c000000004CAA69A20000000000000AB0
+t1286236578
+s2736
+i"SerialPortJunk1AppDelegate.h"
+i"SerialPortJunk1ViewController.h"
+
+N/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h
+c000000004CAE9320000000000000037D
+t1286509344
+s893
+i<UIKit/UIKit.h>
+i"SerialPort.h"
+
+N/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m
+c000000004CAD1611000000000000073D
+t1286411793
+s1853
+i"SerialPortJunk1ViewController.h"
+
+N/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm
+c000000004CAE9B7C0000000000000A9B
+t1286511484
+s2715
+i"SerialPortJunk1ViewController.h"
+
+N/Dev/Junk/SerialPortJunk1/MainWindow.xib
+c000000004CAA69A20000000000004E89
+t1286236578
+s20105
+
+N/Dev/Junk/SerialPortJunk1/SerialPort.h
+c000000004CAE49C20000000000001212
+t1286490562
+s4626
+i<stdio.h>
+i<string.h>
+i<unistd.h>
+i<fcntl.h>
+i<errno.h>
+i<termios.h>
+i<sys/ioctl.h>
+
+N/Dev/Junk/SerialPortJunk1/SerialPortJunk1ViewController.xib
+c000000004CAE91AF0000000000003DAD
+t1286508975
+s15789
+
+N/Dev/Junk/SerialPortJunk1/SerialPortJunk1_Prefix.pch
+c000000004CAA69A200000000000000C7
+t1286236578
+s199
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app
+t1286511475
+s374
+
+N/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app.dSYM
+t1286511475
+s102
+
+N/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/Info.plist
+t1286401796
+s668
+
+N/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/MainWindow.nib
+t1286401797
+s1511
+
+N/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/PkgInfo
+t1286401796
+s8
+
+N/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/ResourceRules.plist
+t1286401796
+s485
+
+N/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1
+t1286511475
+s32272
+
+N/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1ViewController.nib
+t1286510035
+s4118
+
+N/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision
+t1286257726
+s7234
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1
+t1286258393
+s23152
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1.LinkFileList
+c000000004CAAAA360000000000000194
+t1286253110
+s404
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1AppDelegate.o
+t1286510036
+s47508
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1ViewController.o
+t1286511475
+s59688
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/main.o
+t1286401799
+s6564
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1
+t1286258394
+s23076
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1.LinkFileList
+c000000004CAAAA360000000000000194
+t1286253110
+s404
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1AppDelegate.o
+t1286258394
+s48092
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1ViewController.o
+t1286258394
+s40472
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/main.o
+t1286253112
+s6500
+
+N/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent
+t1286401799
+s328
+
+N/Dev/Junk/SerialPortJunk1/main.m
+c000000004CAA69A2000000000000016E
+t1286236578
+s366
+i<UIKit/UIKit.h>
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk
+c000000004B2FA6BF0000000000000110
+t1261414079
+s272
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist
+c000000004B2B3B9F00000000000000DD
+t1261124511
+s221
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist
+c000000004B2B3B9F00000000000001E5
+t1261124511
+s485
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004B2B537900000000005F4900
+t1261130617
+s6244608
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004B2B551F0000000000501370
+t1261131039
+s5247856
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004B2B54F40000000000001355
+t1261130996
+s4949
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004B2B61610000000000000788
+t1261134177
+s1928
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004B2B63DA0000000001B3F450
+t1261134810
+s28570704
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/usr/include/errno.h
+c000000004B2B3F0F00000000000003EB
+t1261125391
+s1003
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/usr/include/fcntl.h
+c000000004B2B3F0F00000000000003EA
+t1261125391
+s1002
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/usr/include/stdio.h
+c000000004B2B3F100000000000003D1D
+t1261125392
+s15645
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/usr/include/string.h
+c000000004B2B3F100000000000001731
+t1261125392
+s5937
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/usr/include/sys/ioctl.h
+c000000004B2B49EC00000000000011D1
+t1261128172
+s4561
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/usr/include/termios.h
+c000000004B2B3F0F00000000000004D4
+t1261125391
+s1236
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/usr/include/unistd.h
+c000000004B2B3F1000000000000053FF
+t1261125392
+s21503
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk
+c000000004C6DE9E30000000000000110
+t1282271715
+s272
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/Entitlements.plist
+c000000004C578FA900000000000001A7
+t1280806825
+s423
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/ResourceRules.plist
+c000000004C578FA900000000000001E5
+t1280806825
+s485
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004C5A51050000000000345F00
+t1280987397
+s3432192
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004C5A52B100000000003E1EF0
+t1280987825
+s4071152
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004C5A527F0000000000001466
+t1280987775
+s5222
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004C62427000000000000009CD
+t1281507952
+s2509
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004C62430F0000000002EBC2B0
+t1281508111
+s49005232
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/usr/include/errno.h
+c000000004C57909100000000000003EB
+t1280807057
+s1003
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/usr/include/fcntl.h
+c000000004C57909100000000000003EA
+t1280807057
+s1002
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/usr/include/stdio.h
+c000000004C57909100000000000040AC
+t1280807057
+s16556
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/usr/include/string.h
+c000000004C5790910000000000001731
+t1280807057
+s5937
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/usr/include/sys/ioctl.h
+c000000004C5A4AB1000000000000116C
+t1280985777
+s4460
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/usr/include/termios.h
+c000000004C57909100000000000004D4
+t1280807057
+s1236
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/usr/include/unistd.h
+c000000004C579091000000000000563E
+t1280807057
+s22078
+
+N/Users/ib54/Library/MobileDevice/Provisioning Profiles/822D17DD-316F-41D6-8CC8-0AE168B58310.mobileprovision
+c000000004CAAA8B10000000000001C42
+t1286252721
+s7234
+
+N/Users/ib54/Library/MobileDevice/Provisioning Profiles/8CFC24CD-5321-49F1-81D5-2099E0621A48.mobileprovision
+c000000004CAA72D60000000000001C31
+t1286238934
+s7217
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-akblfqmznnurxwbpjgljukabqfod/SerialPortJunk1_Prefix.pch.gch
+t2
+s0
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dottjazzabhdobgwwyxlzmjwrhql/SerialPortJunk1_Prefix.pch.gch
+t1286253112
+s10888640
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dqsmefzqmdlvluapwphgmbwcvsin/SerialPortJunk1_Prefix.pch.gch
+t1286401798
+s8368284
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-frnnamasreclndbenjonsudnfzir/SerialPortJunk1_Prefix.pch.gch
+t1286253111
+s10433984
+
+N/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-ggncorlmdqvmupbpgyllulztzkfy/SerialPortJunk1_Prefix.pch.gch
+t2
+s0
+
+NSerialPortJunk1-Info.plist
+c000000004CAA69A2000000000000038D
+t1286236578
+s909
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies308204275#308204275#0(0"0(0#1#0"4300885448#0"0#
+
+CCodeSign /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app
+s308204275.291269
+e308204275.432199
+r1
+xCodeSign
+x/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app
+lSLF07#2@49"CodeSign build/Debug-iphoneos/SerialPortJunk1.app308204275#308204275#0(0"0(0#0#66"/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app4300885448#631"    cd /Dev/Junk/SerialPortJunk1    setenv CODESIGN_ALLOCATE /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/codesign -f -s "iPhone Developer: Idan Beck (SHJK6G48LJ)" --resource-rules=/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/ResourceRules.plist --entitlements /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app0#
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1AppDelegate.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1AppDelegate.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+s308202835.224211
+e308202836.173696
+r1
+xCompileC
+xbuild/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1AppDelegate.o
+x/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m
+xnormal
+xarmv6
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@70"Compile /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m308202835#308202836#0(0"0(0#0#62"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m4300885448#1835"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv6 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++ -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dqsmefzqmdlvluapwphgmbwcvsin/SerialPortJunk1_Prefix.pch -c /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1AppDelegate.o0#
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1ViewController.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1ViewController.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+s308104601.736862
+e308104601.784498
+r0
+xCompileC
+xbuild/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1ViewController.o
+x/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m
+xnormal
+xarmv6
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+oIn file included from /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m:9:
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: can not use an object as parameter to a method
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: can not use an object as parameter to a method
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: property 'readLabel' with 'retain' attribute must be of object type
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: can not use an object as parameter to a method
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: can not use an object as parameter to a method
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: property 'readButton' with 'retain' attribute must be of object type
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m:13: error: type of property 'readLabel' does not match type of ivar 'readLabel'
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m:13: error: type of property 'readButton' does not match type of ivar 'readButton'
+lSLF07#2@73"Compile /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104601#308104601#0(1172"In file included from /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m:9:/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: can not use an object as parameter to a method/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: can not use an object as parameter to a method/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: property 'readLabel' with 'retain' attribute must be of object type/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: can not use an object as parameter to a method/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: can not use an object as parameter to a method/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h:24: error: property 'readButton' with 'retain' attribute must be of object type/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m:13: error: type of property 'readLabel' does not match type of ivar 'readLabel'/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m:13: error: type of property 'readButton' does not match type of ivar 'readButton'8(4@46"Can not use an object as parameter to a method308104601#91#124#2(7@87"In file included from /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104593#9#0#9#0#0"0(13@115"Can not use an object as parameter to a method in /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(4@46"Can not use an object as parameter to a method308104601#215#124#2(7@87"In file included from /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104593#9#0#9#0#0"0(13@115"Can not use an object as parameter to a method in /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(4@67"Property 'readLabel' with 'retain' attribute must be of object type308104601#339#145#2(7@87"In file included from /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104593#9#0#9#0#0"0(13@136"Property 'readLabel' with 'retain' attribute must be of object type in /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(4@46"Can not use an object as parameter to a method308104601#484#124#2(7@87"In file included from /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104593#9#0#9#0#0"0(13@115"Can not use an object as parameter to a method in /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(4@46"Can not use an object as parameter to a method308104601#608#124#2(7@87"In file included from /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104593#9#0#9#0#0"0(13@115"Can not use an object as parameter to a method in /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(4@68"Property 'readButton' with 'retain' attribute must be of object type308104601#732#146#2(7@87"In file included from /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104593#9#0#9#0#0"0(13@137"Property 'readButton' with 'retain' attribute must be of object type in /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#18446744073709551615#0#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.h308104601#24#0#24#0#0"0(4@68"Type of property 'readLabel' does not match type of ivar 'readLabel'308104601#878#146#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104593#13#0#13#0#0"0(4@70"Type of property 'readButton' does not match type of ivar 'readButton'308104601#1024#148#0(6@65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m308104593#13#0#13#0#0"0(0#0#65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m4300885448#1841"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv6 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++ -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dqsmefzqmdlvluapwphgmbwcvsin/SerialPortJunk1_Prefix.pch -c /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1ViewController.o1#
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1ViewController.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+s308204275.084894
+e308204275.240894
+r1
+xCompileC
+xbuild/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1ViewController.o
+x/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm
+xnormal
+xarmv6
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm: In function 'void -[SerialPortJunk1ViewController WriteButtonTouchUpInside:](SerialPortJunk1ViewController*, objc_selector*, objc_object*)':
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm:70: warning: 'getCString:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:348)
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm: At global scope:
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm:120: warning: property 'writeTextField' requires method '-writeTextField' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm:120: warning: property 'writeTextField' requires the method 'setWriteTextField:' to be defined - use @synthesize, @dynamic or provide a method implementation
+lSLF07#2@74"Compile /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm308204275#308204275#0(1001"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm: In function 'void -[SerialPortJunk1ViewController WriteButtonTouchUpInside:](SerialPortJunk1ViewController*, objc_selector*, objc_object*)':/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm:70: warning: 'getCString:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:348)/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm: At global scope:/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm:120: warning: property 'writeTextField' requires method '-writeTextField' to be defined - use @synthesize, @dynamic or provide a method implementation/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm:120: warning: property 'writeTextField' requires the method 'setWriteTextField:' to be defined - use @synthesize, @dynamic or provide a method implementation4(22@183"'getCString:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:348)308204275#209#264#0(6@66"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm308204274#70#0#70#0#33"'*' is deprecated (declared at *)0(23@16"At global scope:308204275#473#85#0(6@66"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm308204274#0#0#0#0#0"0(22@136"Property 'writeTextField' requires method '-writeTextField' to be defined - use @synthesize, @dynamic or provide a method implementation308204275#558#218#0(6@66"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm308204274#120#0#120#0#0"0(22@143"Property 'writeTextField' requires the method 'setWriteTextField:' to be defined - use @synthesize, @dynamic or provide a method implementation308204275#776#225#0(6@66"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm308204274#120#0#120#0#0"0(0#0#66"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm4300885448#1842"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv6 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++ -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dqsmefzqmdlvluapwphgmbwcvsin/SerialPortJunk1_Prefix.pch -c /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.mm -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1ViewController.o0#
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/main.o /Dev/Junk/SerialPortJunk1/main.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/main.o /Dev/Junk/SerialPortJunk1/main.m normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+s308094599.094117
+e308094599.193438
+r1
+xCompileC
+xbuild/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/main.o
+x/Dev/Junk/SerialPortJunk1/main.m
+xnormal
+xarmv6
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@40"Compile /Dev/Junk/SerialPortJunk1/main.m308094599#308094599#0(0"0(0#0#32"/Dev/Junk/SerialPortJunk1/main.m4300885448#1783"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv6 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++ -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dqsmefzqmdlvluapwphgmbwcvsin/SerialPortJunk1_Prefix.pch -c /Dev/Junk/SerialPortJunk1/main.m -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/main.o0#
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1AppDelegate.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1AppDelegate.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m normal armv7 objective-c++ com.apple.compilers.gcc.4_2
+s307951193.906460
+e307951194.027724
+r1
+xCompileC
+xbuild/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1AppDelegate.o
+x/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m
+xnormal
+xarmv7
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@70"Compile /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m307951193#307951194#0(0"0(0#0#62"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m8617721120#1831"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv7 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++ -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dottjazzabhdobgwwyxlzmjwrhql/SerialPortJunk1_Prefix.pch -c /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1AppDelegate.m -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1AppDelegate.o0#
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1ViewController.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1ViewController.o /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m normal armv7 objective-c++ com.apple.compilers.gcc.4_2
+s307951193.965682
+e307951194.057583
+r1
+xCompileC
+xbuild/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1ViewController.o
+x/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m
+xnormal
+xarmv7
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@73"Compile /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m307951193#307951194#0(0"0(0#0#65"/Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m8622364640#1837"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv7 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++ -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dottjazzabhdobgwwyxlzmjwrhql/SerialPortJunk1_Prefix.pch -c /Dev/Junk/SerialPortJunk1/Classes/SerialPortJunk1ViewController.m -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1ViewController.o0#
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/main.o /Dev/Junk/SerialPortJunk1/main.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/main.o /Dev/Junk/SerialPortJunk1/main.m normal armv7 objective-c++ com.apple.compilers.gcc.4_2
+s307945912.159860
+e307945912.215638
+r1
+xCompileC
+xbuild/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/main.o
+x/Dev/Junk/SerialPortJunk1/main.m
+xnormal
+xarmv7
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@40"Compile /Dev/Junk/SerialPortJunk1/main.m307945912#307945912#0(0"0(0#0#32"/Dev/Junk/SerialPortJunk1/main.m8617421568#1779"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv7 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++ -include /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dottjazzabhdobgwwyxlzmjwrhql/SerialPortJunk1_Prefix.pch -c /Dev/Junk/SerialPortJunk1/main.m -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/main.o0#
+
+CCompileXIB /Dev/Junk/SerialPortJunk1/MainWindow.xib
+s308094596.146146
+e308094597.850277
+r1
+xCompileXIB
+x/Dev/Junk/SerialPortJunk1/MainWindow.xib
+lSLF07#2@25"CompileXIB MainWindow.xib308094596#308094597#0(0"0(0#0#40"/Dev/Junk/SerialPortJunk1/MainWindow.xib4300885448#437"    cd /Dev/Junk/SerialPortJunk1    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/MainWindow.nib /Dev/Junk/SerialPortJunk1/MainWindow.xib0#
+
+CCompileXIB /Dev/Junk/SerialPortJunk1/SerialPortJunk1ViewController.xib
+s308202834.501277
+e308202835.223871
+r1
+xCompileXIB
+x/Dev/Junk/SerialPortJunk1/SerialPortJunk1ViewController.xib
+lSLF07#2@44"CompileXIB SerialPortJunk1ViewController.xib308202834#308202835#0(0"0(0#0#59"/Dev/Junk/SerialPortJunk1/SerialPortJunk1ViewController.xib4300885448#475"    cd /Dev/Junk/SerialPortJunk1    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1ViewController.nib /Dev/Junk/SerialPortJunk1/SerialPortJunk1ViewController.xib0#
+
+CCpResource build/Debug-iphoneos/SerialPortJunk1.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist
+s308094596.110944
+e308094596.146037
+r1
+xCpResource
+xbuild/Debug-iphoneos/SerialPortJunk1.app/ResourceRules.plist
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist
+lSLF07#2@96"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist308094596#308094596#0(0"0(0#0#91"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist7579403464993878016#464"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app0#
+
+CCpResource build/Debug-iphoneos/SerialPortJunk1.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/ResourceRules.plist
+s307945910.374336
+e307945910.382062
+r1
+xCpResource
+xbuild/Debug-iphoneos/SerialPortJunk1.app/ResourceRules.plist
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/ResourceRules.plist
+lSLF07#2@94"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/ResourceRules.plist307945910#307945910#0(0"0(0#0#89"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/ResourceRules.plist8607975808#462"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/ResourceRules.plist /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app0#
+
+CCreateUniversalBinary /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1 normal "armv6 armv7"
+s307951194.091042
+e307951194.094311
+r1
+xCreateUniversalBinary
+x/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1
+xnormal
+xarmv6 armv7
+lSLF07#2@99"CreateUniversalBinary build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1 normal "armv6 armv7"307951194#307951194#0(0"0(0#0#37"/Dev/Junk/SerialPortJunk1/armv6 armv78621949152#530"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/lipo -create /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1 /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1 -output /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk10#
+
+CGenerateDSYMFile /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app.dSYM /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1
+s308204275.272810
+e308204275.288039
+r1
+xGenerateDSYMFile
+x/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app.dSYM
+x/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1
+lSLF07#2@119"GenerateDSYMFile build/Debug-iphoneos/SerialPortJunk1.app.dSYM build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1308204275#308204275#0(0"0(0#0#82"/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk14300885448#347"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1 -o /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app.dSYM0#
+
+CLd /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1 normal armv6
+s308204275.240996
+e308204275.272698
+r1
+xLd
+x/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1
+xnormal
+xarmv6
+lSLF07#2@87"Link /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk1308204275#308204275#0(0"0(0#0#0"4300885448#870"    cd /Dev/Junk/SerialPortJunk1    setenv IPHONEOS_DEPLOYMENT_TARGET 3.1.3    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/g++-4.2 -arch armv6 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -L/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -filelist /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1.LinkFileList -mmacosx-version-min=10.5 -dead_strip -miphoneos-version-min=3.1.3 -framework Foundation -framework UIKit -framework CoreGraphics -o /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/SerialPortJunk10#
+
+CLd /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1 normal armv6
+s307951193.908081
+e307951193.965579
+r1
+xLd
+x/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1
+xnormal
+xarmv6
+lSLF07#2@132"Link /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1307951193#307951193#0(0"0(0#0#0"8615533664#842"    cd /Dev/Junk/SerialPortJunk1    setenv IPHONEOS_DEPLOYMENT_TARGET 4.1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/g++-4.2 -arch armv6 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk -L/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -filelist /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk1.LinkFileList -dead_strip -miphoneos-version-min=4.1 -framework Foundation -framework UIKit -framework CoreGraphics -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv6/SerialPortJunk10#
+
+CLd /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1 normal armv7
+s307951194.057683
+e307951194.090929
+r1
+xLd
+x/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1
+xnormal
+xarmv7
+lSLF07#2@132"Link /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1307951194#307951194#0(0"0(0#0#0"8622056608#842"    cd /Dev/Junk/SerialPortJunk1    setenv IPHONEOS_DEPLOYMENT_TARGET 4.1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/g++-4.2 -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk -L/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -filelist /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk1.LinkFileList -dead_strip -miphoneos-version-min=4.1 -framework Foundation -framework UIKit -framework CoreGraphics -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/Objects-normal/armv7/SerialPortJunk10#
+
+CProcessInfoPlistFile /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/Info.plist SerialPortJunk1-Info.plist
+s308094596.111738
+e308094596.128696
+r1
+xProcessInfoPlistFile
+x/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/Info.plist
+xSerialPortJunk1-Info.plist
+lSLF07#2@34"Process SerialPortJunk1-Info.plist308094596#308094596#0(0"0(0#0#52"/Dev/Junk/SerialPortJunk1/SerialPortJunk1-Info.plist4300885448#542"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility SerialPortJunk1-Info.plist -genpkginfo /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/ResourceRules.plist -o /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/Info.plist0#
+
+CProcessPCH /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-akblfqmznnurxwbpjgljukabqfod/SerialPortJunk1_Prefix.pch.gch SerialPortJunk1_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CProcessPCH /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-ggncorlmdqvmupbpgyllulztzkfy/SerialPortJunk1_Prefix.pch.gch SerialPortJunk1_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CProcessPCH++ /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dottjazzabhdobgwwyxlzmjwrhql/SerialPortJunk1_Prefix.pch.gch SerialPortJunk1_Prefix.pch normal armv7 objective-c++ com.apple.compilers.gcc.4_2
+s307945910.841675
+e307945912.068637
+r1
+xProcessPCH++
+x/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dottjazzabhdobgwwyxlzmjwrhql/SerialPortJunk1_Prefix.pch.gch
+xSerialPortJunk1_Prefix.pch
+xnormal
+xarmv7
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@37"Precompile SerialPortJunk1_Prefix.pch307945910#307945912#0(0"0(0#0#52"/Dev/Junk/SerialPortJunk1/SerialPortJunk1_Prefix.pch8617254720#1689"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++-header -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv7 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++-header -c /Dev/Junk/SerialPortJunk1/SerialPortJunk1_Prefix.pch -o /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dottjazzabhdobgwwyxlzmjwrhql/SerialPortJunk1_Prefix.pch.gch0#
+
+CProcessPCH++ /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dqsmefzqmdlvluapwphgmbwcvsin/SerialPortJunk1_Prefix.pch.gch SerialPortJunk1_Prefix.pch normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+s308094597.853807
+e308094599.094012
+r1
+xProcessPCH++
+x/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dqsmefzqmdlvluapwphgmbwcvsin/SerialPortJunk1_Prefix.pch.gch
+xSerialPortJunk1_Prefix.pch
+xnormal
+xarmv6
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@37"Precompile SerialPortJunk1_Prefix.pch308094597#308094599#0(0"0(0#0#52"/Dev/Junk/SerialPortJunk1/SerialPortJunk1_Prefix.pch4300885448#1693"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++-header -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv6 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++-header -c /Dev/Junk/SerialPortJunk1/SerialPortJunk1_Prefix.pch -o /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-dqsmefzqmdlvluapwphgmbwcvsin/SerialPortJunk1_Prefix.pch.gch0#
+
+CProcessPCH++ /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-frnnamasreclndbenjonsudnfzir/SerialPortJunk1_Prefix.pch.gch SerialPortJunk1_Prefix.pch normal armv6 objective-c++ com.apple.compilers.gcc.4_2
+s307945910.840687
+e307945911.865256
+r1
+xProcessPCH++
+x/var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-frnnamasreclndbenjonsudnfzir/SerialPortJunk1_Prefix.pch.gch
+xSerialPortJunk1_Prefix.pch
+xnormal
+xarmv6
+xobjective-c++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@37"Precompile SerialPortJunk1_Prefix.pch307945910#307945911#0(0"0(0#0#52"/Dev/Junk/SerialPortJunk1/SerialPortJunk1_Prefix.pch8617499552#1689"    cd /Dev/Junk/SerialPortJunk1    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++-header -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk -fvisibility=hidden -fvisibility-inlines-hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-generated-files.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-own-target-headers.hmap -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-all-target-headers.hmap -iquote /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1-project-headers.hmap -F/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos -I/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/include -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources/armv6 -I/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/DerivedSources -x objective-c++-header -c /Dev/Junk/SerialPortJunk1/SerialPortJunk1_Prefix.pch -o /var/folders/Mt/Mt5UlSJRG-ORQrEdIjO3qE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SerialPortJunk1_Prefix-frnnamasreclndbenjonsudnfzir/SerialPortJunk1_Prefix.pch.gch0#
+
+CProcessProductPackaging "/Users/ib54/Library/MobileDevice/Provisioning Profiles/822D17DD-316F-41D6-8CC8-0AE168B58310.mobileprovision" /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision
+s307950526.451757
+e307950526.453046
+r1
+xProcessProductPackaging
+x/Users/ib54/Library/MobileDevice/Provisioning Profiles/822D17DD-316F-41D6-8CC8-0AE168B58310.mobileprovision
+x/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision
+lSLF07#2@199"ProcessProductPackaging "/Users/ib54/Library/MobileDevice/Provisioning Profiles/822D17DD-316F-41D6-8CC8-0AE168B58310.mobileprovision" build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision307950526#307950526#0(0"0(0#0#91"/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision8608927296#404"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/ib54/Library/MobileDevice/Provisioning Profiles/822D17DD-316F-41D6-8CC8-0AE168B58310.mobileprovision" -o /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision0#
+
+CProcessProductPackaging "/Users/ib54/Library/MobileDevice/Provisioning Profiles/8CFC24CD-5321-49F1-81D5-2099E0621A48.mobileprovision" /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision
+s307945912.404764
+e307945912.406130
+r1
+xProcessProductPackaging
+x/Users/ib54/Library/MobileDevice/Provisioning Profiles/8CFC24CD-5321-49F1-81D5-2099E0621A48.mobileprovision
+x/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision
+lSLF07#2@199"ProcessProductPackaging "/Users/ib54/Library/MobileDevice/Provisioning Profiles/8CFC24CD-5321-49F1-81D5-2099E0621A48.mobileprovision" build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision307945912#307945912#0(0"0(0#0#91"/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision8608438528#404"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/ib54/Library/MobileDevice/Provisioning Profiles/8CFC24CD-5321-49F1-81D5-2099E0621A48.mobileprovision" -o /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app/embedded.mobileprovision0#
+
+CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent
+s308094599.737898
+e308094599.757682
+r1
+xProcessProductPackaging
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist
+x/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent
+lSLF07#2@201"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent308094599#308094599#0(0"0(0#0#112"/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent4300885448#432"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist -entitlements -format xml -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent0#
+
+CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/Entitlements.plist /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent
+s307945912.409331
+e307945912.420156
+r1
+xProcessProductPackaging
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/Entitlements.plist
+x/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent
+lSLF07#2@199"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/Entitlements.plist build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent307945912#307945912#0(0"0(0#0#112"/Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent8616595168#430"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/Entitlements.plist -entitlements -format xml -o /Dev/Junk/SerialPortJunk1/build/SerialPortJunk1.build/Debug-iphoneos/SerialPortJunk1.build/SerialPortJunk1.xcent0#
+
+CTouch /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app
+s308204275.288428
+e308204275.291098
+r1
+xTouch
+x/Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app
+lSLF07#2@72"Touch /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app308204275#308204275#0(0"0(0#0#0"4300885448#246"    cd /Dev/Junk/SerialPortJunk1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Dev/Junk/SerialPortJunk1/build/Debug-iphoneos/SerialPortJunk1.app0#
+

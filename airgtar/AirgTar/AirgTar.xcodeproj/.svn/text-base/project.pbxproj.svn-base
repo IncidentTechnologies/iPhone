@@ -1,0 +1,356 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* AirgTarAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AirgTarAppDelegate.mm */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2624E3F6129989D60099003C /* airgTarButtonOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 2624E3F0129989D60099003C /* airgTarButtonOff.png */; };
+		2624E3F7129989D60099003C /* airgTarButtonOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2624E3F1129989D60099003C /* airgTarButtonOn.png */; };
+		2624E3F8129989D60099003C /* PickButtonOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 2624E3F2129989D60099003C /* PickButtonOff.png */; };
+		2624E3F9129989D60099003C /* PickButtonOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2624E3F3129989D60099003C /* PickButtonOn.png */; };
+		2624E3FA129989D60099003C /* PlayChordBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2624E3F4129989D60099003C /* PlayChordBackground.png */; };
+		2624E3FB129989D60099003C /* StartScreenBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2624E3F5129989D60099003C /* StartScreenBackground.png */; };
+		263DC58512829119000B8904 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 263DC58312829119000B8904 /* RootViewController.mm */; };
+		263DC58612829119000B8904 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263DC58412829119000B8904 /* RootViewController.xib */; };
+		263DC5B2128293CD000B8904 /* ChordViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 263DC5B0128293CD000B8904 /* ChordViewController.mm */; };
+		263DC5B3128293CD000B8904 /* ChordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263DC5B1128293CD000B8904 /* ChordViewController.xib */; };
+		26A5460B1282A04000BC5723 /* mahagony.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 26A5460A1282A04000BC5723 /* mahagony.jpeg */; };
+		26A546C012836F4300BC5723 /* flat.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 26A546BE12836F4300BC5723 /* flat.jpeg */; };
+		26A546C112836F4300BC5723 /* sharp.gif in Resources */ = {isa = PBXBuildFile; fileRef = 26A546BF12836F4300BC5723 /* sharp.gif */; };
+		26A5479A1283F1C000BC5723 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26A547991283F1C000BC5723 /* AudioController.mm */; };
+		26A547BE1283F3AF00BC5723 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26A547BC1283F3AF00BC5723 /* CAStreamBasicDescription.cpp */; };
+		26A547C81283F3E000BC5723 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A547C71283F3E000BC5723 /* AudioToolbox.framework */; };
+		26A548B31284B71300BC5723 /* gTarState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26A548B21284B71300BC5723 /* gTarState.mm */; };
+		26A5494C1286337100BC5723 /* NoteViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26A5494B1286337100BC5723 /* NoteViewController.mm */; };
+		26A5494E128633B400BC5723 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A5494D128633B400BC5723 /* NoteViewController.xib */; };
+		26A54A281287CE1F00BC5723 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A54A271287CE1F00BC5723 /* GameKit.framework */; };
+		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* AirgTarAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirgTarAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* AirgTarAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AirgTarAppDelegate.mm; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* AirgTar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirgTar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2624E3F0129989D60099003C /* airgTarButtonOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airgTarButtonOff.png; sourceTree = "<group>"; };
+		2624E3F1129989D60099003C /* airgTarButtonOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airgTarButtonOn.png; sourceTree = "<group>"; };
+		2624E3F2129989D60099003C /* PickButtonOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PickButtonOff.png; sourceTree = "<group>"; };
+		2624E3F3129989D60099003C /* PickButtonOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PickButtonOn.png; sourceTree = "<group>"; };
+		2624E3F4129989D60099003C /* PlayChordBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayChordBackground.png; sourceTree = "<group>"; };
+		2624E3F5129989D60099003C /* StartScreenBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StartScreenBackground.png; sourceTree = "<group>"; };
+		263DC58212829119000B8904 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		263DC58312829119000B8904 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
+		263DC58412829119000B8904 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RootViewController.xib; path = Classes/RootViewController.xib; sourceTree = "<group>"; };
+		263DC5AF128293CD000B8904 /* ChordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChordViewController.h; sourceTree = "<group>"; };
+		263DC5B0128293CD000B8904 /* ChordViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChordViewController.mm; sourceTree = "<group>"; };
+		263DC5B1128293CD000B8904 /* ChordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChordViewController.xib; path = Classes/ChordViewController.xib; sourceTree = "<group>"; };
+		26A5460A1282A04000BC5723 /* mahagony.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mahagony.jpeg; sourceTree = "<group>"; };
+		26A546BE12836F4300BC5723 /* flat.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flat.jpeg; sourceTree = "<group>"; };
+		26A546BF12836F4300BC5723 /* sharp.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sharp.gif; sourceTree = "<group>"; };
+		26A547981283F1C000BC5723 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
+		26A547991283F1C000BC5723 /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
+		26A547B91283F3AF00BC5723 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADebugMacros.h; path = Extras/CoreAudio/PublicUtility/CADebugMacros.h; sourceTree = DEVELOPER_DIR; };
+		26A547BA1283F3AF00BC5723 /* CAException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAException.h; path = Extras/CoreAudio/PublicUtility/CAException.h; sourceTree = DEVELOPER_DIR; };
+		26A547BB1283F3AF00BC5723 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAMath.h; path = Extras/CoreAudio/PublicUtility/CAMath.h; sourceTree = DEVELOPER_DIR; };
+		26A547BC1283F3AF00BC5723 /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAStreamBasicDescription.cpp; path = Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.cpp; sourceTree = DEVELOPER_DIR; };
+		26A547BD1283F3AF00BC5723 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAStreamBasicDescription.h; path = Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.h; sourceTree = DEVELOPER_DIR; };
+		26A547C71283F3E000BC5723 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		26A548B11284B71300BC5723 /* gTarState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarState.h; sourceTree = "<group>"; };
+		26A548B21284B71300BC5723 /* gTarState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = gTarState.mm; sourceTree = "<group>"; };
+		26A5494A1286337100BC5723 /* NoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteViewController.h; sourceTree = "<group>"; };
+		26A5494B1286337100BC5723 /* NoteViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NoteViewController.mm; sourceTree = "<group>"; };
+		26A5494D128633B400BC5723 /* NoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteViewController.xib; sourceTree = "<group>"; };
+		26A54A271287CE1F00BC5723 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* AirgTar_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirgTar_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* AirgTar-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AirgTar-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				26A547C81283F3E000BC5723 /* AudioToolbox.framework in Frameworks */,
+				26A54A281287CE1F00BC5723 /* GameKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				26A547981283F1C000BC5723 /* AudioController.h */,
+				26A547991283F1C000BC5723 /* AudioController.mm */,
+				1D3623240D0F684500981E51 /* AirgTarAppDelegate.h */,
+				1D3623250D0F684500981E51 /* AirgTarAppDelegate.mm */,
+				263DC58212829119000B8904 /* RootViewController.h */,
+				263DC58312829119000B8904 /* RootViewController.mm */,
+				263DC5AF128293CD000B8904 /* ChordViewController.h */,
+				263DC5B0128293CD000B8904 /* ChordViewController.mm */,
+				26A548B11284B71300BC5723 /* gTarState.h */,
+				26A548B21284B71300BC5723 /* gTarState.mm */,
+				26A5494A1286337100BC5723 /* NoteViewController.h */,
+				26A5494B1286337100BC5723 /* NoteViewController.mm */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* AirgTar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		26A547B81283F36000BC5723 /* iPublicUtility */ = {
+			isa = PBXGroup;
+			children = (
+				26A547B91283F3AF00BC5723 /* CADebugMacros.h */,
+				26A547BA1283F3AF00BC5723 /* CAException.h */,
+				26A547BB1283F3AF00BC5723 /* CAMath.h */,
+				26A547BC1283F3AF00BC5723 /* CAStreamBasicDescription.cpp */,
+				26A547BD1283F3AF00BC5723 /* CAStreamBasicDescription.h */,
+			);
+			name = iPublicUtility;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				26A547B81283F36000BC5723 /* iPublicUtility */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* AirgTar_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2624E3F0129989D60099003C /* airgTarButtonOff.png */,
+				2624E3F1129989D60099003C /* airgTarButtonOn.png */,
+				2624E3F2129989D60099003C /* PickButtonOff.png */,
+				2624E3F3129989D60099003C /* PickButtonOn.png */,
+				2624E3F4129989D60099003C /* PlayChordBackground.png */,
+				2624E3F5129989D60099003C /* StartScreenBackground.png */,
+				26A546BE12836F4300BC5723 /* flat.jpeg */,
+				26A546BF12836F4300BC5723 /* sharp.gif */,
+				26A5460A1282A04000BC5723 /* mahagony.jpeg */,
+				263DC5B1128293CD000B8904 /* ChordViewController.xib */,
+				263DC58412829119000B8904 /* RootViewController.xib */,
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* AirgTar-Info.plist */,
+				26A5494D128633B400BC5723 /* NoteViewController.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
+				26A547C71283F3E000BC5723 /* AudioToolbox.framework */,
+				26A54A271287CE1F00BC5723 /* GameKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* AirgTar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "AirgTar" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirgTar;
+			productName = AirgTar;
+			productReference = 1D6058910D05DD3D006BFB54 /* AirgTar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "AirgTar" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* AirgTar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				263DC58612829119000B8904 /* RootViewController.xib in Resources */,
+				263DC5B3128293CD000B8904 /* ChordViewController.xib in Resources */,
+				26A5460B1282A04000BC5723 /* mahagony.jpeg in Resources */,
+				26A546C012836F4300BC5723 /* flat.jpeg in Resources */,
+				26A546C112836F4300BC5723 /* sharp.gif in Resources */,
+				26A5494E128633B400BC5723 /* NoteViewController.xib in Resources */,
+				2624E3F6129989D60099003C /* airgTarButtonOff.png in Resources */,
+				2624E3F7129989D60099003C /* airgTarButtonOn.png in Resources */,
+				2624E3F8129989D60099003C /* PickButtonOff.png in Resources */,
+				2624E3F9129989D60099003C /* PickButtonOn.png in Resources */,
+				2624E3FA129989D60099003C /* PlayChordBackground.png in Resources */,
+				2624E3FB129989D60099003C /* StartScreenBackground.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* AirgTarAppDelegate.mm in Sources */,
+				263DC58512829119000B8904 /* RootViewController.mm in Sources */,
+				263DC5B2128293CD000B8904 /* ChordViewController.mm in Sources */,
+				26A5479A1283F1C000BC5723 /* AudioController.mm in Sources */,
+				26A547BE1283F3AF00BC5723 /* CAStreamBasicDescription.cpp in Sources */,
+				26A548B31284B71300BC5723 /* gTarState.mm in Sources */,
+				26A5494C1286337100BC5723 /* NoteViewController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AirgTar_Prefix.pch;
+				INFOPLIST_FILE = "AirgTar-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				PRODUCT_NAME = AirgTar;
+				SDKROOT = iphoneos3.2;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AirgTar_Prefix.pch;
+				INFOPLIST_FILE = "AirgTar-Info.plist";
+				PRODUCT_NAME = AirgTar;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "AirgTar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "AirgTar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

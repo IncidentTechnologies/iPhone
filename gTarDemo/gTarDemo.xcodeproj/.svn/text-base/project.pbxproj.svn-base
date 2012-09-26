@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ECAC04B31477023100AB8718 /* gTarApp_Icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAC04B21477023100AB8718 /* gTarApp_Icon114x114.png */; };
+		ECAC04C91478F76F00AB8718 /* FourthViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECAC04C71478F76E00AB8718 /* FourthViewController.mm */; };
+		ECAC04CA1478F76F00AB8718 /* FourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECAC04C81478F76E00AB8718 /* FourthViewController.xib */; };
+		ECB5B91B1473892400484486 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B91A1473892400484486 /* UIKit.framework */; };
+		ECB5B91D1473892400484486 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B91C1473892400484486 /* Foundation.framework */; };
+		ECB5B91F1473892400484486 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B91E1473892400484486 /* CoreGraphics.framework */; };
+		ECB5B9251473892400484486 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B9231473892400484486 /* InfoPlist.strings */; };
+		ECB5B9271473892400484486 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B9261473892400484486 /* main.m */; };
+		ECB5B92B1473892400484486 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B92A1473892400484486 /* AppDelegate.mm */; };
+		ECB5B92E1473892400484486 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B92D1473892400484486 /* FirstViewController.m */; };
+		ECB5B9301473892400484486 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B92F1473892400484486 /* first.png */; };
+		ECB5B9321473892400484486 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B9311473892400484486 /* first@2x.png */; };
+		ECB5B9351473892400484486 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B9341473892400484486 /* SecondViewController.m */; };
+		ECB5B9371473892400484486 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B9361473892400484486 /* second.png */; };
+		ECB5B9391473892400484486 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B9381473892400484486 /* second@2x.png */; };
+		ECB5B93C1473892400484486 /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B93A1473892400484486 /* FirstViewController.xib */; };
+		ECB5B9421473892400484486 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B9401473892400484486 /* SecondViewController.xib */; };
+		ECB5B94D1473892400484486 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B94C1473892400484486 /* SenTestingKit.framework */; };
+		ECB5B94E1473892400484486 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B91A1473892400484486 /* UIKit.framework */; };
+		ECB5B94F1473892400484486 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B91C1473892400484486 /* Foundation.framework */; };
+		ECB5B9571473892400484486 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B9551473892400484486 /* InfoPlist.strings */; };
+		ECB5B95A1473892400484486 /* gTarDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B9591473892400484486 /* gTarDemoTests.m */; };
+		ECB5B9651473906B00484486 /* ThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B9631473906B00484486 /* ThirdViewController.xib */; };
+		ECB5B968147390F900484486 /* ThirdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B967147390F900484486 /* ThirdViewController.mm */; };
+		ECB5B96B1473993C00484486 /* GuitarEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B96A1473993B00484486 /* GuitarEffect.m */; };
+		ECB5B9711473A02E00484486 /* GuitarEffectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B9701473A02E00484486 /* GuitarEffectCell.m */; };
+		ECB5B9731473A04F00484486 /* GuitarEffectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B9721473A04F00484486 /* GuitarEffectCell.xib */; };
+		ECB5B9761474306200484486 /* GuitarEffectSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B9751474306200484486 /* GuitarEffectSequence.m */; };
+		ECB5B979147431DD00484486 /* GuitarEffectSerialized.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B978147431DD00484486 /* GuitarEffectSerialized.m */; };
+		ECB5B97C147440B000484486 /* gTarApp_Icon640X960_B.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B97A147440AF00484486 /* gTarApp_Icon640X960_B.png */; };
+		ECB5B97D147440B000484486 /* gTarApp_Icon640X960_W.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B97B147440AF00484486 /* gTarApp_Icon640X960_W.png */; };
+		ECB5B97F147451A700484486 /* libgTarGuitarInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B97E147451A700484486 /* libgTarGuitarInterface.a */; };
+		ECB5B9861474550D00484486 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B9851474550D00484486 /* CoreMIDI.framework */; };
+		ECB5B98E1474873E00484486 /* gTarApp_Icon640X960_W_portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B98D1474873E00484486 /* gTarApp_Icon640X960_W_portrait.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ECB5B9501473892400484486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECB5B90D1473892400484486 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECB5B9151473892400484486;
+			remoteInfo = gTarDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ECAC04B21477023100AB8718 /* gTarApp_Icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon114x114.png; sourceTree = "<group>"; };
+		ECAC04C61478F76E00AB8718 /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
+		ECAC04C71478F76E00AB8718 /* FourthViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FourthViewController.mm; sourceTree = "<group>"; };
+		ECAC04C81478F76E00AB8718 /* FourthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourthViewController.xib; sourceTree = "<group>"; };
+		ECB5B9161473892400484486 /* gTarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECB5B91A1473892400484486 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		ECB5B91C1473892400484486 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		ECB5B91E1473892400484486 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		ECB5B9221473892400484486 /* gTarDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gTarDemo-Info.plist"; sourceTree = "<group>"; };
+		ECB5B9241473892400484486 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ECB5B9261473892400484486 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ECB5B9281473892400484486 /* gTarDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gTarDemo-Prefix.pch"; sourceTree = "<group>"; };
+		ECB5B9291473892400484486 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ECB5B92A1473892400484486 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		ECB5B92C1473892400484486 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		ECB5B92D1473892400484486 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		ECB5B92F1473892400484486 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		ECB5B9311473892400484486 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		ECB5B9331473892400484486 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		ECB5B9341473892400484486 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		ECB5B9361473892400484486 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		ECB5B9381473892400484486 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		ECB5B93B1473892400484486 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController.xib; sourceTree = "<group>"; };
+		ECB5B9411473892400484486 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController.xib; sourceTree = "<group>"; };
+		ECB5B94B1473892400484486 /* gTarDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gTarDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECB5B94C1473892400484486 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		ECB5B9541473892400484486 /* gTarDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gTarDemoTests-Info.plist"; sourceTree = "<group>"; };
+		ECB5B9561473892400484486 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ECB5B9581473892400484486 /* gTarDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gTarDemoTests.h; sourceTree = "<group>"; };
+		ECB5B9591473892400484486 /* gTarDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gTarDemoTests.m; sourceTree = "<group>"; };
+		ECB5B9641473906B00484486 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ThirdViewController.xib; sourceTree = "<group>"; };
+		ECB5B966147390F900484486 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
+		ECB5B967147390F900484486 /* ThirdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ThirdViewController.mm; sourceTree = "<group>"; };
+		ECB5B9691473993B00484486 /* GuitarEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarEffect.h; sourceTree = "<group>"; };
+		ECB5B96A1473993B00484486 /* GuitarEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarEffect.m; sourceTree = "<group>"; };
+		ECB5B96F1473A02E00484486 /* GuitarEffectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarEffectCell.h; sourceTree = "<group>"; };
+		ECB5B9701473A02E00484486 /* GuitarEffectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarEffectCell.m; sourceTree = "<group>"; };
+		ECB5B9721473A04F00484486 /* GuitarEffectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GuitarEffectCell.xib; path = ../GuitarEffectCell.xib; sourceTree = "<group>"; };
+		ECB5B9741474306100484486 /* GuitarEffectSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarEffectSequence.h; sourceTree = "<group>"; };
+		ECB5B9751474306200484486 /* GuitarEffectSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarEffectSequence.m; sourceTree = "<group>"; };
+		ECB5B977147431DC00484486 /* GuitarEffectSerialized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarEffectSerialized.h; sourceTree = "<group>"; };
+		ECB5B978147431DD00484486 /* GuitarEffectSerialized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarEffectSerialized.m; sourceTree = "<group>"; };
+		ECB5B97A147440AF00484486 /* gTarApp_Icon640X960_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon640X960_B.png; sourceTree = "<group>"; };
+		ECB5B97B147440AF00484486 /* gTarApp_Icon640X960_W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon640X960_W.png; sourceTree = "<group>"; };
+		ECB5B97E147451A700484486 /* libgTarGuitarInterface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarGuitarInterface.a; path = ../Staticlibs/Release/gTarGuitarInterface/libgTarGuitarInterface.a; sourceTree = "<group>"; };
+		ECB5B9851474550D00484486 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		ECB5B98D1474873E00484486 /* gTarApp_Icon640X960_W_portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon640X960_W_portrait.png; sourceTree = "<group>"; };
+		ECB5B9951474C5C300484486 /* valid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = valid.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/valid.h; sourceTree = "<group>"; };
+		ECB5B9961474C5C300484486 /* RESULT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RESULT.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/RESULT.h; sourceTree = "<group>"; };
+		ECB5B9971474C5C300484486 /* GuitarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuitarController.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/GuitarController.h; sourceTree = "<group>"; };
+		ECB5B9981474C5C300484486 /* EHM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EHM.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/EHM.h; sourceTree = "<group>"; };
+		ECB5B9991474C5C300484486 /* CoreMidiInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreMidiInterface.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/CoreMidiInterface.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ECB5B9131473892400484486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB5B9861474550D00484486 /* CoreMIDI.framework in Frameworks */,
+				ECB5B97F147451A700484486 /* libgTarGuitarInterface.a in Frameworks */,
+				ECB5B91B1473892400484486 /* UIKit.framework in Frameworks */,
+				ECB5B91D1473892400484486 /* Foundation.framework in Frameworks */,
+				ECB5B91F1473892400484486 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECB5B9471473892400484486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB5B94D1473892400484486 /* SenTestingKit.framework in Frameworks */,
+				ECB5B94E1473892400484486 /* UIKit.framework in Frameworks */,
+				ECB5B94F1473892400484486 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ECB5B90B1473892400484486 = {
+			isa = PBXGroup;
+			children = (
+				ECAC04B21477023100AB8718 /* gTarApp_Icon114x114.png */,
+				ECB5B9201473892400484486 /* gTarDemo */,
+				ECB5B9521473892400484486 /* gTarDemoTests */,
+				ECB5B9191473892400484486 /* Frameworks */,
+				ECB5B9171473892400484486 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ECB5B9171473892400484486 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ECB5B9161473892400484486 /* gTarDemo.app */,
+				ECB5B94B1473892400484486 /* gTarDemoTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ECB5B9191473892400484486 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ECB5B9951474C5C300484486 /* valid.h */,
+				ECB5B9961474C5C300484486 /* RESULT.h */,
+				ECB5B9971474C5C300484486 /* GuitarController.h */,
+				ECB5B9981474C5C300484486 /* EHM.h */,
+				ECB5B9991474C5C300484486 /* CoreMidiInterface.h */,
+				ECB5B97E147451A700484486 /* libgTarGuitarInterface.a */,
+				ECB5B9851474550D00484486 /* CoreMIDI.framework */,
+				ECB5B91A1473892400484486 /* UIKit.framework */,
+				ECB5B91C1473892400484486 /* Foundation.framework */,
+				ECB5B91E1473892400484486 /* CoreGraphics.framework */,
+				ECB5B94C1473892400484486 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ECB5B9201473892400484486 /* gTarDemo */ = {
+			isa = PBXGroup;
+			children = (
+				ECB5B92F1473892400484486 /* first.png */,
+				ECB5B9311473892400484486 /* first@2x.png */,
+				ECB5B9361473892400484486 /* second.png */,
+				ECB5B9381473892400484486 /* second@2x.png */,
+				ECB5B9291473892400484486 /* AppDelegate.h */,
+				ECB5B92A1473892400484486 /* AppDelegate.mm */,
+				ECB5B92C1473892400484486 /* FirstViewController.h */,
+				ECB5B92D1473892400484486 /* FirstViewController.m */,
+				ECB5B9331473892400484486 /* SecondViewController.h */,
+				ECB5B9341473892400484486 /* SecondViewController.m */,
+				ECB5B966147390F900484486 /* ThirdViewController.h */,
+				ECB5B967147390F900484486 /* ThirdViewController.mm */,
+				ECAC04C61478F76E00AB8718 /* FourthViewController.h */,
+				ECAC04C71478F76E00AB8718 /* FourthViewController.mm */,
+				ECB5B93A1473892400484486 /* FirstViewController.xib */,
+				ECB5B9401473892400484486 /* SecondViewController.xib */,
+				ECB5B9631473906B00484486 /* ThirdViewController.xib */,
+				ECAC04C81478F76E00AB8718 /* FourthViewController.xib */,
+				ECB5B97A147440AF00484486 /* gTarApp_Icon640X960_B.png */,
+				ECB5B97B147440AF00484486 /* gTarApp_Icon640X960_W.png */,
+				ECB5B98D1474873E00484486 /* gTarApp_Icon640X960_W_portrait.png */,
+				ECB5B9211473892400484486 /* Supporting Files */,
+				ECB5B9691473993B00484486 /* GuitarEffect.h */,
+				ECB5B96A1473993B00484486 /* GuitarEffect.m */,
+				ECB5B9741474306100484486 /* GuitarEffectSequence.h */,
+				ECB5B9751474306200484486 /* GuitarEffectSequence.m */,
+				ECB5B977147431DC00484486 /* GuitarEffectSerialized.h */,
+				ECB5B978147431DD00484486 /* GuitarEffectSerialized.m */,
+				ECB5B96F1473A02E00484486 /* GuitarEffectCell.h */,
+				ECB5B9701473A02E00484486 /* GuitarEffectCell.m */,
+				ECB5B9721473A04F00484486 /* GuitarEffectCell.xib */,
+			);
+			path = gTarDemo;
+			sourceTree = "<group>";
+		};
+		ECB5B9211473892400484486 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ECB5B9221473892400484486 /* gTarDemo-Info.plist */,
+				ECB5B9231473892400484486 /* InfoPlist.strings */,
+				ECB5B9261473892400484486 /* main.m */,
+				ECB5B9281473892400484486 /* gTarDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ECB5B9521473892400484486 /* gTarDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				ECB5B9581473892400484486 /* gTarDemoTests.h */,
+				ECB5B9591473892400484486 /* gTarDemoTests.m */,
+				ECB5B9531473892400484486 /* Supporting Files */,
+			);
+			path = gTarDemoTests;
+			sourceTree = "<group>";
+		};
+		ECB5B9531473892400484486 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ECB5B9541473892400484486 /* gTarDemoTests-Info.plist */,
+				ECB5B9551473892400484486 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ECB5B9151473892400484486 /* gTarDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECB5B95D1473892400484486 /* Build configuration list for PBXNativeTarget "gTarDemo" */;
+			buildPhases = (
+				ECB5B9121473892400484486 /* Sources */,
+				ECB5B9131473892400484486 /* Frameworks */,
+				ECB5B9141473892400484486 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gTarDemo;
+			productName = gTarDemo;
+			productReference = ECB5B9161473892400484486 /* gTarDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ECB5B94A1473892400484486 /* gTarDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECB5B9601473892400484486 /* Build configuration list for PBXNativeTarget "gTarDemoTests" */;
+			buildPhases = (
+				ECB5B9461473892400484486 /* Sources */,
+				ECB5B9471473892400484486 /* Frameworks */,
+				ECB5B9481473892400484486 /* Resources */,
+				ECB5B9491473892400484486 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ECB5B9511473892400484486 /* PBXTargetDependency */,
+			);
+			name = gTarDemoTests;
+			productName = gTarDemoTests;
+			productReference = ECB5B94B1473892400484486 /* gTarDemoTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ECB5B90D1473892400484486 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Incident Technologies";
+			};
+			buildConfigurationList = ECB5B9101473892400484486 /* Build configuration list for PBXProject "gTarDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ECB5B90B1473892400484486;
+			productRefGroup = ECB5B9171473892400484486 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ECB5B9151473892400484486 /* gTarDemo */,
+				ECB5B94A1473892400484486 /* gTarDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ECB5B9141473892400484486 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB5B9251473892400484486 /* InfoPlist.strings in Resources */,
+				ECB5B9301473892400484486 /* first.png in Resources */,
+				ECB5B9321473892400484486 /* first@2x.png in Resources */,
+				ECB5B9371473892400484486 /* second.png in Resources */,
+				ECB5B9391473892400484486 /* second@2x.png in Resources */,
+				ECB5B93C1473892400484486 /* FirstViewController.xib in Resources */,
+				ECB5B9421473892400484486 /* SecondViewController.xib in Resources */,
+				ECB5B9651473906B00484486 /* ThirdViewController.xib in Resources */,
+				ECB5B9731473A04F00484486 /* GuitarEffectCell.xib in Resources */,
+				ECB5B97C147440B000484486 /* gTarApp_Icon640X960_B.png in Resources */,
+				ECB5B97D147440B000484486 /* gTarApp_Icon640X960_W.png in Resources */,
+				ECB5B98E1474873E00484486 /* gTarApp_Icon640X960_W_portrait.png in Resources */,
+				ECAC04B31477023100AB8718 /* gTarApp_Icon114x114.png in Resources */,
+				ECAC04CA1478F76F00AB8718 /* FourthViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECB5B9481473892400484486 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB5B9571473892400484486 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ECB5B9491473892400484486 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ECB5B9121473892400484486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB5B9271473892400484486 /* main.m in Sources */,
+				ECB5B92B1473892400484486 /* AppDelegate.mm in Sources */,
+				ECB5B92E1473892400484486 /* FirstViewController.m in Sources */,
+				ECB5B9351473892400484486 /* SecondViewController.m in Sources */,
+				ECB5B968147390F900484486 /* ThirdViewController.mm in Sources */,
+				ECB5B96B1473993C00484486 /* GuitarEffect.m in Sources */,
+				ECB5B9711473A02E00484486 /* GuitarEffectCell.m in Sources */,
+				ECB5B9761474306200484486 /* GuitarEffectSequence.m in Sources */,
+				ECB5B979147431DD00484486 /* GuitarEffectSerialized.m in Sources */,
+				ECAC04C91478F76F00AB8718 /* FourthViewController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECB5B9461473892400484486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB5B95A1473892400484486 /* gTarDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ECB5B9511473892400484486 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECB5B9151473892400484486 /* gTarDemo */;
+			targetProxy = ECB5B9501473892400484486 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ECB5B9231473892400484486 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECB5B9241473892400484486 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		ECB5B93A1473892400484486 /* FirstViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECB5B93B1473892400484486 /* en */,
+			);
+			name = FirstViewController.xib;
+			sourceTree = "<group>";
+		};
+		ECB5B9401473892400484486 /* SecondViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECB5B9411473892400484486 /* en */,
+			);
+			name = SecondViewController.xib;
+			sourceTree = "<group>";
+		};
+		ECB5B9551473892400484486 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECB5B9561473892400484486 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		ECB5B9631473906B00484486 /* ThirdViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECB5B9641473906B00484486 /* en */,
+			);
+			name = ThirdViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ECB5B95B1473892400484486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ECB5B95C1473892400484486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ECB5B95E1473892400484486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gTarDemo/gTarDemo-Prefix.pch";
+				INFOPLIST_FILE = "gTarDemo/gTarDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Staticlibs/Release/gTarGuitarInterface\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ECB5B95F1473892400484486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gTarDemo/gTarDemo-Prefix.pch";
+				INFOPLIST_FILE = "gTarDemo/gTarDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Staticlibs/Release/gTarGuitarInterface\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		ECB5B9611473892400484486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/gTarDemo.app/gTarDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gTarDemo/gTarDemo-Prefix.pch";
+				INFOPLIST_FILE = "gTarDemoTests/gTarDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		ECB5B9621473892400484486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/gTarDemo.app/gTarDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gTarDemo/gTarDemo-Prefix.pch";
+				INFOPLIST_FILE = "gTarDemoTests/gTarDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ECB5B9101473892400484486 /* Build configuration list for PBXProject "gTarDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECB5B95B1473892400484486 /* Debug */,
+				ECB5B95C1473892400484486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECB5B95D1473892400484486 /* Build configuration list for PBXNativeTarget "gTarDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECB5B95E1473892400484486 /* Debug */,
+				ECB5B95F1473892400484486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECB5B9601473892400484486 /* Build configuration list for PBXNativeTarget "gTarDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECB5B9611473892400484486 /* Debug */,
+				ECB5B9621473892400484486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ECB5B90D1473892400484486 /* Project object */;
+}

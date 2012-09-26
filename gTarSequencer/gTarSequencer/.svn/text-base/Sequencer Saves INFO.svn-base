@@ -1,0 +1,10 @@
+
+
+A complete sequencer save involves three things:
+
+1) Instruments array (NSData) ----> key: @"Instruments Data"
+2) Tempo (int) -------------------> key: @"Tempo"
+3) SelectedInstrumentIndex (int) -> key: @"Selected Instrument Index"
+
+
+

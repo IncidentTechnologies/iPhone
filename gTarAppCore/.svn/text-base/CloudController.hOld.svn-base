@@ -1,0 +1,100 @@
+//
+//  CloudController2.h
+//  gTarAppCore
+//
+//  Created by Marty Greenia on 4/24/11.
+//  Copyright 2011 IncidentTech. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@class UserProfile;
+@class UserSong;
+@class UserSongSession;
+@class CloudRequest;
+@class CloudResponse;
+
+@interface CloudController : NSObject
+{
+
+    BOOL m_loggedIn;
+    NSString * m_username;
+    
+	// Request->Response mapping
+	NSMutableDictionary * m_requestResponseDictionary;
+	
+}
+
+@property (nonatomic, readonly) BOOL m_loggedIn;
+@property (nonatomic, readonly) NSString * m_username;
+
+//
+// Syncronous convenience functions
+//
+- (UIImage*)requestImage:(NSString*)urlPath;
+- (BOOL)requestServerStatus;
+- (BOOL)requestItunesServerStatus;
+- (NSNumber*)requestUserCredits;
+
+- (void)songOldListXmlResponseFunction:(CloudRequest*)cloudRequest;
+- (void)songListXmlResponseFunction:(CloudRequest*)cloudRequest;
+- (void)defaultXmlReponseFunction:(CloudRequest*)cloudRequest;
+- (CloudResponse*)ackMsgXmlReponseFunction:(CloudRequest*)cloudRequest;
+
+//
+// internal callbacks for request-responses
+//
+- (void)requestLoginCallback:(CloudRequest*)cloudRequest;
+- (void)requestLogoutCallback:(CloudRequest*)cloudRequest;
+- (void)requestRegisterCallback:(CloudRequest*)cloudRequest;
+- (void)requestRegisterFacebookCallback:(CloudRequest*)cloudRequest;
+- (void)requestUserProfileCallback:(CloudRequest*)cloudRequest;
+- (void)requestEditUserProfileCallback:(CloudRequest*)cloudRequest;
+
+- (void)requestSongListCallback:(CloudRequest*)cloudRequest;
+- (void)requestFeaturedSongListCallback:(CloudRequest*)cloudRequest;
+- (void)requestUserSongXmpCallback:(CloudRequest*)cloudRequest;
+
+- (void)requestSongStoreListCallback:(CloudRequest*)cloudRequest;
+
+- (void)requestNewsHeadlinesCallback:(CloudRequest*)cloudRequest;
+
+- (void)requestVerifyReceiptCallback:(CloudRequest*)cloudRequest;
+- (void)requestPurchaseSongCallback:(CloudRequest*)cloudRequest;
+- (void)requestVerifyReceiptAndPurchaseSongCallback:(CloudRequest*)cloudRequest;
+- (void)requestUploadUserSongSessionCallback:(CloudRequest*)cloudRequest;
+- (void)requestFacebookLoginWithTokenCallback:(CloudRequest*)cloudRequest;
+- (void)requestFacebookPostUserSongSessionCallback:(CloudRequest*)cloudRequest;
+- (void)requestRedeemCreditCodeCallback:(CloudRequest*)cloudRequest;
+
+//
+// external request access
+//
+- (void)requestLoginUsername:(NSString*)username andPassword:(NSString*)password andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestLogoutUsername:(NSString*)username andPassword:(NSString*)password andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestLogoutCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestRegisterUsername:(NSString*)username andPassword:(NSString*)password andEmail:(NSString*)email andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestRegisterUsername:(NSString*)username andFacebookAccessToken:(NSString*)facebookAccessToken andEmail:(NSString*)email andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestUserProfileCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestEditUserProfile:(UserProfile*)userProfile andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+
+- (void)requestSongListCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestFeaturedSongListCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestSongXmp:(UserSong*)userSong andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+
+- (void)requestSongStoreListSearch:(NSString*)search andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+
+- (void)requestNewsHeadlinesResults:(NSInteger)count andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+
+- (void)requestVerifyReceipt:(NSData*)receipt andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestPurchaseSong:(UserSong*)userSong andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestVerifyReceipt:(NSData*)receipt andPurchaseSong:(UserSong*)userSong andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+
+- (void)requestUploadUserSongSession:(UserSongSession*)songSession andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+
+- (void)requestFacebookLoginWithToken:(NSString*)accessToken andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestFacebookPostUserSongSession:(UserSongSession*)songSession andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+
+- (void)requestRedeemCreditCode:(NSString*)creditCode andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+
+@end

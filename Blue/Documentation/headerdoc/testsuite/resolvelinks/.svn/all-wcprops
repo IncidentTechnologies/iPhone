@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks
+END
+cvsfixup.sh
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/cvsfixup.sh
+END
+runtests.sh
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/runtests.sh
+END
+gitfixup.sh
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/gitfixup.sh
+END
+update.sh
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/update.sh
+END
+checkintest.sh
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/IncidentTechMain/!svn/ver/908/Software/iPhone/Blue/Documentation/headerdoc/testsuite/resolvelinks/checkintest.sh
+END

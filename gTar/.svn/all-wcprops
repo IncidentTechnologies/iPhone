@@ -1,0 +1,1811 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/IncidentTechMain/!svn/ver/711/Software/iPhone/gTar
+END
+PlayControllerProgressView.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/PlayControllerProgressView.h
+END
+JamIntranetMultiplayerShared.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/JamIntranetMultiplayerShared.h
+END
+JamIntranetMultiplayerServer.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/JamIntranetMultiplayerServer.h
+END
+GuitarModel.mm
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/GuitarModel.mm
+END
+PlayControllerProgressView.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/PlayControllerProgressView.m
+END
+JamIntranetMultiplayerServer.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/JamIntranetMultiplayerServer.m
+END
+ES1Renderer.mm
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/367/Software/iPhone/gTar/ES1Renderer.mm
+END
+lcd-x.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-x.png
+END
+PlayScoreController.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/PlayScoreController.h
+END
+fill-gauge-lcd-0.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/fill-gauge-lcd-0.png
+END
+note-blank2.png
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/note-blank2.png
+END
+PlayScoreController.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/PlayScoreController.m
+END
+ScoreController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/ScoreController.xib
+END
+fill-gauge-lcd-4.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/fill-gauge-lcd-4.png
+END
+blank-note-left.png
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/blank-note-left.png
+END
+etar.learn.button.play1.png
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/etar.learn.button.play1.png
+END
+fill-gauge2-lcd.png
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/fill-gauge2-lcd.png
+END
+gtar-logo-bw.png
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/gtar-logo-bw.png
+END
+note-3.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-3.png
+END
+jam_background.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_background.png
+END
+DeviceController.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/393/Software/iPhone/gTar/DeviceController.h
+END
+jam_preview.png
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_preview.png
+END
+SongParser.mm
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/SongParser.mm
+END
+lcd-mid.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-mid.png
+END
+JamController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/JamController.xib
+END
+note-7.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-7.png
+END
+outline_button.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/outline_button.png
+END
+SongMerger.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/SongMerger.h
+END
+SaysScoreController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/SaysScoreController.xib
+END
+IntranetMultiplayerClient.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetMultiplayerClient.h
+END
+jam_pad_onlight.png
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_pad_onlight.png
+END
+ExperienceController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/ExperienceController.mm
+END
+ES1Renderer.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/367/Software/iPhone/gTar/ES1Renderer.h
+END
+ES1SaysObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/ES1SaysObject.h
+END
+IntranetMultiplayerClient.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetMultiplayerClient.m
+END
+CGSaysObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/CGSaysObject.h
+END
+ES1SaysObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/ES1SaysObject.m
+END
+CGSaysObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/CGSaysObject.m
+END
+Chapter.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Chapter.h
+END
+Chapter.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Chapter.m
+END
+lcd-1.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-1.png
+END
+DeviceController.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/DeviceController.cpp
+END
+Model.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/Model.h
+END
+lcd-5.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-5.png
+END
+Lesson2.xmp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/Lesson2.xmp
+END
+Model.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/Model.m
+END
+lcd-9.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-9.png
+END
+fill-gauge2-lcd-border.png
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/fill-gauge2-lcd-border.png
+END
+fill-gauge-lcd.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/fill-gauge-lcd.png
+END
+jam_pad_offlight.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_pad_offlight.png
+END
+select_background.png
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/select_background.png
+END
+note-11.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-11.png
+END
+select_background_blank.png
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/select_background_blank.png
+END
+jam_pad_off.png
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_pad_off.png
+END
+GLModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/GLModel.h
+END
+Background-no-logo.png
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/Background-no-logo.png
+END
+note-15.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-15.png
+END
+blank-note.png
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/blank-note.png
+END
+GLModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/GLModel.m
+END
+UserSongs.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/356/Software/iPhone/gTar/UserSongs.h
+END
+fill-gauge2-lcd-0.png
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/fill-gauge2-lcd-0.png
+END
+note-19.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-19.png
+END
+Shaders.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/Shaders.h
+END
+digit-lcd2-border.png
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/digit-lcd2-border.png
+END
+UserSongs.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/UserSongs.m
+END
+Shaders.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/Shaders.m
+END
+SaysModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/SaysModel.h
+END
+LearnChapterCell.xib
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/LearnChapterCell.xib
+END
+CSong.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/CSong.cpp
+END
+UserSong.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/UserSong.h
+END
+SaysModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/SaysModel.m
+END
+LessonModel.mm
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/LessonModel.mm
+END
+lcd-ul copy.png
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-ul%20copy.png
+END
+UserSong.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/UserSong.m
+END
+SongCreator.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/SongCreator.h
+END
+SongCreator.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/SongCreator.m
+END
+Segment.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Segment.cpp
+END
+LcdView.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/LcdView.h
+END
+LcdView.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/LcdView.m
+END
+fill-gauge-lcd-1.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/fill-gauge-lcd-1.png
+END
+etar.lear.logo.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/etar.lear.logo.png
+END
+amp.png
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/amp.png
+END
+note-blank3.png
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/note-blank3.png
+END
+GuitarModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/GuitarModel.h
+END
+SaysController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/393/Software/iPhone/gTar/SaysController.xib
+END
+ScoreController.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/ScoreController.h
+END
+lcd-ur.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-ur.png
+END
+ScoreController.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/ScoreController.m
+END
+title_background_blank.png
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/title_background_blank.png
+END
+knob.png
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/knob.png
+END
+NoteModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/NoteModel.h
+END
+SongModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/SongModel.h
+END
+NoteModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/NoteModel.m
+END
+note-0.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-0.png
+END
+lcd-mid copy.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-mid%20copy.png
+END
+Segment.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Segment.h
+END
+EAGLView.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/393/Software/iPhone/gTar/EAGLView.h
+END
+note-4.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-4.png
+END
+Segment.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Segment.m
+END
+note-8.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-8.png
+END
+EAGLView.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/393/Software/iPhone/gTar/EAGLView.m
+END
+IntranetMultiplayerPicker.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetMultiplayerPicker.h
+END
+SongRecorder.mm
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/SongRecorder.mm
+END
+SaysScoreController.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/SaysScoreController.h
+END
+IntranetMultiplayerPicker.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetMultiplayerPicker.m
+END
+digit-lcd2.png
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/digit-lcd2.png
+END
+SaysScoreController.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/SaysScoreController.m
+END
+jam_menu.png
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_menu.png
+END
+BackgroundWithLogo.png
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/BackgroundWithLogo.png
+END
+PlayController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/PlayController.mm
+END
+amp_popup.png
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/amp_popup.png
+END
+lcd-2.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-2.png
+END
+Chord.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/Chord.h
+END
+lcd-6.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-6.png
+END
+LessonParser.mm
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/LessonParser.mm
+END
+CNote.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/315/Software/iPhone/gTar/CNote.cpp
+END
+tuner_practice.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/tuner_practice.png
+END
+ES1PlayObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/ES1PlayObject.h
+END
+lcd-off.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-off.png
+END
+score-lcd.png
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/score-lcd.png
+END
+CSong.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/CSong.h
+END
+ES1PlayObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/ES1PlayObject.m
+END
+CloudController.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/CloudController.h
+END
+gstar.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/gstar.png
+END
+etar.learn.button.account1.png
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/etar.learn.button.account1.png
+END
+CloudController.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/CloudController.m
+END
+gTarGL.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/gTarGL.h
+END
+LessonParser.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/LessonParser.h
+END
+note-12.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-12.png
+END
+AccountButton.png
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/AccountButton.png
+END
+note-16.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-16.png
+END
+fill-gauge2-lcd-1.png
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/fill-gauge2-lcd-1.png
+END
+ExperienceController.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/ExperienceController.h
+END
+GLGuitarModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/GLGuitarModel.h
+END
+JamIntranetMultiplayerClient.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/JamIntranetMultiplayerClient.h
+END
+GLGuitarModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/GLGuitarModel.m
+END
+IntranetMultiplayerPicker.xib
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetMultiplayerPicker.xib
+END
+JamIntranetMultiplayerClient.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/JamIntranetMultiplayerClient.m
+END
+lcd-lr.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-lr.png
+END
+blank-note-middle.png
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/blank-note-middle.png
+END
+title_background_guitar.png
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/title_background_guitar.png
+END
+DisplayController2.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/DisplayController2.h
+END
+PlayLcdScoreDigitView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/PlayLcdScoreDigitView.xib
+END
+JamController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/JamController.mm
+END
+DisplayController2.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/DisplayController2.m
+END
+PlayScoreController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/PlayScoreController.xib
+END
+ViewRenderer.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/ViewRenderer.h
+END
+fill-gauge-lcd-2.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/fill-gauge-lcd-2.png
+END
+DisplayController.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/DisplayController.h
+END
+led-off.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/led-off.png
+END
+border.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/border.png
+END
+note-blank4.png
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/note-blank4.png
+END
+lcd-bot copy.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-bot%20copy.png
+END
+DisplayController.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/DisplayController.m
+END
+CGObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/CGObject.h
+END
+Chapter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Chapter.cpp
+END
+SongsButton.png
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/SongsButton.png
+END
+ViewRenderer.mm
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/ViewRenderer.mm
+END
+jam_menu_button.png
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_menu_button.png
+END
+LedMarquee.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/LedMarquee.h
+END
+SerialPort.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/SerialPort.h
+END
+CGObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/CGObject.m
+END
+Texture2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/Texture2D.h
+END
+BackButton.png
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/BackButton.png
+END
+SongMerger.mm
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/SongMerger.mm
+END
+Texture2D.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Texture2D.m
+END
+etar.learn.heading.song.png
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/etar.learn.heading.song.png
+END
+LearnScoreController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/LearnScoreController.xib
+END
+gTar.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/gTar.h
+END
+lcd-ll copy.png
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-ll%20copy.png
+END
+note-1.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-1.png
+END
+LearnScoreController.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/LearnScoreController.h
+END
+string.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/string.png
+END
+note-5.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-5.png
+END
+LearnScoreController.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/LearnScoreController.m
+END
+note-9.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-9.png
+END
+lcd-ur copy.png
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-ur%20copy.png
+END
+PlayLcdScoreView.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/PlayLcdScoreView.h
+END
+LearnLessonCell.xib
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/LearnLessonCell.xib
+END
+PlayControllerNew.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/PlayControllerNew.h
+END
+PlayLcdScoreView.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/PlayLcdScoreView.m
+END
+PlayLcdMultView.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/PlayLcdMultView.h
+END
+3DModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/3DModel.h
+END
+CloudCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/356/Software/iPhone/gTar/CloudCache.h
+END
+BackgroundNoLogo.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/BackgroundNoLogo.png
+END
+PlayLcdMultView.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/PlayLcdMultView.m
+END
+gTarRootViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/gTarRootViewController.xib
+END
+SongRecorder.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/SongRecorder.h
+END
+MultiplayerController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/MultiplayerController.mm
+END
+PlayButton.png
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/PlayButton.png
+END
+CloudCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/356/Software/iPhone/gTar/CloudCache.m
+END
+lcd-3.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-3.png
+END
+lcd-top.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-top.png
+END
+IntranetMultiplayerServer.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetMultiplayerServer.h
+END
+lcd-7.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-7.png
+END
+CMeasure.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/315/Software/iPhone/gTar/CMeasure.h
+END
+MainWindow.xib
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/MainWindow.xib
+END
+IntranetMultiplayerServer.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetMultiplayerServer.m
+END
+TempoRegulator.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/TempoRegulator.h
+END
+XYInputView.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/XYInputView.h
+END
+LcdDigitView.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/LcdDigitView.h
+END
+TempoRegulator.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/TempoRegulator.m
+END
+XYInputView.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/393/Software/iPhone/gTar/XYInputView.m
+END
+note-13.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-13.png
+END
+LcdDigitView.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/LcdDigitView.m
+END
+LessonSegment.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/LessonSegment.h
+END
+note-17.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-17.png
+END
+etar.learn.bolt.png
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/etar.learn.bolt.png
+END
+gTar-Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/gTar-Info.plist
+END
+lcd-top copy.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-top%20copy.png
+END
+fill-gauge2-lcd-2.png
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/fill-gauge2-lcd-2.png
+END
+LessonSegment.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/LessonSegment.m
+END
+gstar_fade.png
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/gstar_fade.png
+END
+ESObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/367/Software/iPhone/gTar/ESObject.h
+END
+textured_background.png
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/textured_background.png
+END
+JamIntranetMultiplayerPicker.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/JamIntranetMultiplayerPicker.h
+END
+ES2Renderer.mm
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/ES2Renderer.mm
+END
+ESObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/367/Software/iPhone/gTar/ESObject.m
+END
+AudioController.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/AudioController.h
+END
+JamIntranetMultiplayerPicker.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/JamIntranetMultiplayerPicker.m
+END
+CNote.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/IncidentTechMain/!svn/ver/315/Software/iPhone/gTar/CNote.h
+END
+SongModel.mm
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/SongModel.mm
+END
+jam_pad_left_blank.png
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_pad_left_blank.png
+END
+LedMarquee.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/LedMarquee.cpp
+END
+ES2Renderer.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/367/Software/iPhone/gTar/ES2Renderer.h
+END
+ESRenderer.mm
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/ESRenderer.mm
+END
+top_menu.png
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/top_menu.png
+END
+multiplier-lcd.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/multiplier-lcd.png
+END
+Tears_in_Heaven_Eric_Clapton.xmp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/Tears_in_Heaven_Eric_Clapton.xmp
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/main.m
+END
+JamPad.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/IncidentTechMain/!svn/ver/393/Software/iPhone/gTar/JamPad.h
+END
+JamPad.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/JamPad.m
+END
+ES1LearnObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/ES1LearnObject.h
+END
+Lesson.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Lesson.h
+END
+PlayControllerNew.mm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/PlayControllerNew.mm
+END
+ES1LearnObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/ES1LearnObject.m
+END
+Lesson.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Lesson.m
+END
+title_background_no_tuners.png
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/title_background_no_tuners.png
+END
+fill-gauge-lcd-3.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/fill-gauge-lcd-3.png
+END
+color_background.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/color_background.png
+END
+lcd-ul.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-ul.png
+END
+tuner_play.png
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/tuner_play.png
+END
+tuner.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/tuner.png
+END
+FillGaugeView.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/FillGaugeView.h
+END
+jam_pad_right_blank.png
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_pad_right_blank.png
+END
+JamIntranetMultiplayerPicker.xib
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/JamIntranetMultiplayerPicker.xib
+END
+gTar_Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/gTar_Prefix.pch
+END
+Lesson.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/Lesson.cpp
+END
+CMeasure.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/315/Software/iPhone/gTar/CMeasure.cpp
+END
+FillGaugeView.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/FillGaugeView.m
+END
+note-2.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-2.png
+END
+blank-note-right.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/blank-note-right.png
+END
+PlayController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/PlayController.xib
+END
+note-6.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-6.png
+END
+PlayController.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/PlayController.h
+END
+ADisplayController.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/ADisplayController.h
+END
+JamController.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/394/Software/iPhone/gTar/JamController.h
+END
+CloudCacheEntry.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/356/Software/iPhone/gTar/CloudCacheEntry.h
+END
+jam_preview_blank.png
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/jam_preview_blank.png
+END
+note-radial-zoom.png
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/note-radial-zoom.png
+END
+ADisplayController.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/ADisplayController.m
+END
+CloudCacheEntry.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/356/Software/iPhone/gTar/CloudCacheEntry.m
+END
+lcd-bot.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-bot.png
+END
+led-green-bulb.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/led-green-bulb.png
+END
+etar.learn.button.learn1.png
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/etar.learn.button.learn1.png
+END
+play-top-bar-blank.png
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/play-top-bar-blank.png
+END
+IntranetMultiplayerRemoteState.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetMultiplayerRemoteState.h
+END
+lcd-0.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-0.png
+END
+ESRenderer.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/367/Software/iPhone/gTar/ESRenderer.h
+END
+IntranetMultiplayerRemoteState.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetMultiplayerRemoteState.m
+END
+lcd-4.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-4.png
+END
+etar.learn.button.back.png
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/etar.learn.button.back.png
+END
+JamDisplayController.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/JamDisplayController.h
+END
+Lesson1.xmp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/Lesson1.xmp
+END
+ESRenderer.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/ESRenderer.m
+END
+lcd-8.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-8.png
+END
+JamDisplayController.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/JamDisplayController.m
+END
+note-10.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-10.png
+END
+LessonA.xmp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/LessonA.xmp
+END
+SongParser.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/SongParser.h
+END
+DrawObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/406/Software/iPhone/gTar/DrawObject.h
+END
+IntranetClientState.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetClientState.h
+END
+note-14.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-14.png
+END
+note-18.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/note-18.png
+END
+DrawObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/DrawObject.m
+END
+IntranetClientState.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/IntranetClientState.m
+END
+Chord.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/IncidentTechMain/!svn/ver/321/Software/iPhone/gTar/Chord.cpp
+END
+LearnButton.png
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/LearnButton.png
+END
+fill-gauge2-lcd-3.png
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/fill-gauge2-lcd-3.png
+END
+matrix.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/matrix.c
+END
+PlayCell.xib
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/PlayCell.xib
+END
+matrix.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/IncidentTechMain/!svn/ver/307/Software/iPhone/gTar/matrix.h
+END
+lcd-ll.png
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-ll.png
+END
+lcd-lr copy.png
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/lcd-lr%20copy.png
+END
+play_background_blank.png
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/IncidentTechMain/!svn/ver/373/Software/iPhone/gTar/play_background_blank.png
+END
+MultiplayerController.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/MultiplayerController.h
+END
+BackingTrackDictionary.plist
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/IncidentTechMain/!svn/ver/391/Software/iPhone/gTar/BackingTrackDictionary.plist
+END
+CGRenderer.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/CGRenderer.h
+END
+LessonModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/327/Software/iPhone/gTar/LessonModel.h
+END
+CGRenderer.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/IncidentTechMain/!svn/ver/368/Software/iPhone/gTar/CGRenderer.m
+END
+AudioController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/IncidentTechMain/!svn/ver/407/Software/iPhone/gTar/AudioController.mm
+END

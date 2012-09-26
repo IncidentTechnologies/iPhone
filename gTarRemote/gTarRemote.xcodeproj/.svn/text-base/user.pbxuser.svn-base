@@ -1,0 +1,94 @@
+// !$*UTF8*$!
+{
+	0867D690FE84028FC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeTarget = D2AAC07D0554694100DB518D /* gTarRemote */;
+		addToTargets = (
+			D2AAC07D0554694100DB518D /* gTarRemote */,
+		);
+		codeSenseManager = CEBE60CD12924DD800987BAD /* Code sense */;
+		perUserDictionary = {
+			PBXPerProjectTemplateStateSaveDate = 311578044;
+			PBXWorkspaceStateSaveDate = 311578044;
+		};
+		perUserProjectItems = {
+			CEBE60E4129256BB00987BAD /* XCBuildMessageTextBookmark */ = CEBE60E4129256BB00987BAD /* XCBuildMessageTextBookmark */;
+			CEBE60E5129256BB00987BAD /* PBXTextBookmark */ = CEBE60E5129256BB00987BAD /* PBXTextBookmark */;
+			CEBE60EA129256D100987BAD /* XCBuildMessageTextBookmark */ = CEBE60EA129256D100987BAD /* XCBuildMessageTextBookmark */;
+			CEBE60EB129256D100987BAD /* PBXTextBookmark */ = CEBE60EB129256D100987BAD /* PBXTextBookmark */;
+		};
+		sourceControlManager = CEBE60CC12924DD800987BAD /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	CEBE60C812924DD800987BAD /* gTarRemote.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {740, 1287}}";
+			sepNavSelRange = "{2111, 12}";
+			sepNavVisRange = "{1196, 1067}";
+		};
+	};
+	CEBE60C912924DD800987BAD /* gTarRemote.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {789, 4693}}";
+			sepNavSelRange = "{7462, 0}";
+			sepNavVisRange = "{6879, 588}";
+			sepNavWindowFrame = "{{38, 96}, {1179, 656}}";
+		};
+	};
+	CEBE60CC12924DD800987BAD /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	CEBE60CD12924DD800987BAD /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	CEBE60E4129256BB00987BAD /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Class 'gTarRemote' does not implement the 'GKPeerPickerControllerDelegate' protocol";
+		fRef = CEBE60C912924DD800987BAD /* gTarRemote.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 83;
+		rType = 1;
+	};
+	CEBE60E5129256BB00987BAD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CEBE60C912924DD800987BAD /* gTarRemote.m */;
+		name = "gTarRemote.m: 84";
+		rLen = 0;
+		rLoc = 1276;
+		rType = 0;
+		vrLen = 321;
+		vrLoc = 1023;
+	};
+	CEBE60EA129256D100987BAD /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Method definition for '-ledOffLedString:andFret:' not found";
+		fRef = CEBE60C912924DD800987BAD /* gTarRemote.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 347;
+		rType = 1;
+	};
+	CEBE60EB129256D100987BAD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CEBE60C912924DD800987BAD /* gTarRemote.m */;
+		name = "gTarRemote.m: 348";
+		rLen = 0;
+		rLoc = 7462;
+		rType = 0;
+		vrLen = 243;
+		vrLoc = 7224;
+	};
+	D2AAC07D0554694100DB518D /* gTarRemote */ = {
+		activeExec = 0;
+	};
+}

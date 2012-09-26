@@ -1,0 +1,982 @@
+//
+//  PlayController.m
+//  gTar
+//
+//  Created by Marty Greenia on 2/21/11.
+//  Copyright 2011 IncidentTech. All rights reserved.
+//
+
+#import "PlayController.h"
+
+#import "CSong.h"
+#import "NSSong.h"
+#import "SongRecorder.h"
+
+#import <MediaPlayer/MediaPlayer.h>
+
+@implementation PlayController
+
+@synthesize m_cloudCache;
+@synthesize m_song;
+@synthesize m_xmpBlob;
+@synthesize m_difficulty;
+//@synthesize m_tempo;
+//@synthesize m_accuracy;
+@synthesize m_tempoModifier;
+//@synthesize m_penalty;
+@synthesize m_playView;
+@synthesize m_blackView;
+@synthesize m_ampView;
+@synthesize m_topmenuView;
+@synthesize m_menuView;
+@synthesize m_scoreView;
+@synthesize m_volumeView;
+@synthesize m_activityIndicator;
+@synthesize m_progressView;
+@synthesize m_playScoreController;
+@synthesize m_lcdScoreView;
+@synthesize m_lcdMultView;
+@synthesize m_fillGaugeView;
+@synthesize m_titleLabel;
+@synthesize m_menuButton;
+@synthesize m_menuLabel;
+@synthesize m_audioRouteButton;
+
+#define AUDIO_CONTROLLER_ATTENUATION 0.99f
+
+#define AMP_HEIGHT (90.0)
+#define CHORD_FRAME_DURATION (50.0f) // milliseconds
+
+- (void)initControllers
+{
+
+    // SongModel
+    m_songModel = new SongModel( m_xmpBlob );
+
+    // Recorder
+    m_songRecorder = [[SongRecorder alloc] initWithTempo:m_songModel->m_song->m_tempo];
+    
+    // DisplayController
+    m_displayController = [[PlayDisplayController alloc] initWithSong:m_songModel andView:m_playView];
+
+    // initWithTempo doesn't honor its argument for now .. don't think we need it
+    m_tempoRegulator = [[TempoRegulator alloc] initWithTempo:0];
+    
+    NoteArray * noteArray = m_songModel->GetNoteArray();
+    MeasureArray * measureArray = m_songModel->GetMeasureArray();
+    
+    [m_progressView setNoteArray:noteArray];
+    [m_progressView setMeasureArray:measureArray];
+    
+    [super initControllers];
+
+}
+
+- (void)resetAndRun
+{
+    
+    //
+    // Set the difficulty parameters
+    //
+    switch ( m_difficulty )
+    {
+        case PlayControllerDifficultyEasy:
+        {
+            
+            m_tempo = TempoNone;
+            m_accuracy = AccuracyStringOnly;
+            m_penalty = NO;
+                        
+        }; break;
+            
+        default:
+        case PlayControllerDifficultyMedium:
+        {
+            
+            m_tempo = TempoNone;
+            m_accuracy = AccuracyExactNote;
+            m_penalty = NO;
+
+        }; break;
+            
+        case PlayControllerDifficultyHard:
+        {
+            
+            m_tempo = TempoReal;
+            m_accuracy = AccuracyExactNote;
+            m_penalty = NO;
+            
+        }; break;
+            
+    }
+
+    //
+    // Init a second in the past so the person has time to respond in Real mode
+    //
+    m_songModel->StartModelAtTime(-0.5);
+
+    m_songModel->ResetScore();
+
+    // this will reset the song recorder
+    [m_songRecorder beginSong];
+    
+    if ( m_tempo != TempoNone )
+    {
+        char upcomingNotes[ GTAR_GUITAR_STRING_COUNT ];
+        
+        m_songModel->GetUpcomingNotesBytes( upcomingNotes );
+        
+        [self turnOnNotesColor:upcomingNotes];
+    }
+    
+    m_chordFrameBegin = 0;
+    
+    // turn on leds if there are already target notes
+    if ( m_songModel->TargetNotesRemaining() > 0 )
+    {
+        char targetNotes[ GTAR_GUITAR_STRING_COUNT ];
+        
+        m_songModel->GetTargetNotesBytes( targetNotes );
+        
+        if ( m_tempo != TempoNone )
+        {
+            [self turnOnNotesWhite:targetNotes];
+        }
+        else 
+        {                
+            [self turnOnNotesColor:targetNotes];
+        }
+    }
+    
+    [m_lcdMultView clearDigits];
+    [m_lcdScoreView clearDigits];
+    
+//    m_loopDelay = 3.99f;
+    
+    // reset the note images
+    [m_displayController resetAnimations];
+    
+    [self updateScoreDisplay];
+    
+    [super resetAndRun];
+    
+}
+
+- (void)viewDidLoad
+{
+    // This calls the initControllers function for us
+    [super viewDidLoad];
+    
+    //
+    // Add the progress view to the top
+    //
+    [self.view addSubview:m_topmenuView];
+    
+    //
+    // Now layer the rest of the views on top of the border
+    //
+    NSInteger height = self.view.frame.size.height - AMP_HEIGHT;
+    m_ampView.transform = CGAffineTransformMakeTranslation( 0, height );
+    
+    [self.view addSubview:m_blackView];
+    
+    [self.view addSubview:m_ampView];
+    
+    [m_titleLabel setText:m_song.m_title];
+    
+    [m_lcdMultView initDigits];
+    [m_lcdScoreView initDigits];
+    
+    //
+    // Connect the volume view
+    //
+    MPVolumeView * myVolumeView = [[MPVolumeView alloc] initWithFrame:m_volumeView.bounds];
+
+    [myVolumeView sizeToFit];
+    [myVolumeView setShowsRouteButton:YES];
+    [m_volumeView addSubview:myVolumeView];
+    [myVolumeView release];
+    
+    //
+    // Set the audio reroute button
+    //
+    [m_audioRouteButton setTitle:@"Auxillary" forState:UIControlStateNormal];
+
+
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    self.m_playView = nil;
+    
+    self.m_blackView = nil;
+    self.m_ampView = nil;
+    self.m_topmenuView = nil;
+    self.m_menuView = nil;
+    self.m_scoreView = nil;
+    
+    self.m_activityIndicator = nil;
+    
+    self.m_progressView = nil;
+    self.m_playScoreController = nil;
+    
+    self.m_lcdScoreView = nil;
+    self.m_lcdMultView = nil;
+    self.m_fillGaugeView = nil;
+    
+    self.m_titleLabel = nil;
+    self.m_menuButton = nil;
+    self.m_menuLabel = nil;
+    
+    self.m_volumeView = nil;
+    self.m_audioRouteButton = nil;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self resetAndRun];
+}
+
+- (void)dealloc
+{
+
+    [m_displayController release];
+    
+    if ( m_songModel != NULL )
+    {
+        delete m_songModel;
+        m_songModel = NULL;
+    }
+    
+    [m_tempoRegulator release];
+    
+    [m_cloudCache release];
+    
+    [m_song release];
+    [m_xmpBlob release];
+    
+    [m_playView release];
+    
+    [m_blackView release];
+    [m_ampView release];
+    [m_topmenuView release];
+    [m_menuView release];
+    [m_scoreView release];
+    
+    [m_activityIndicator release];
+    
+    [m_progressView release];
+    [m_playScoreController release];
+    
+    [m_lcdScoreView release];
+    [m_lcdMultView release];
+    [m_fillGaugeView release];
+    
+    [m_titleLabel release];
+    [m_menuButton release];
+    [m_menuLabel release];
+    
+    [m_volumeView release];
+    [m_audioRouteButton release];
+    
+    [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Button click handling
+
+- (IBAction)replayButtonClicked
+{
+    
+    // add the replay view button?
+    [self resetAndRun];
+    
+    // send down the modal
+    [self animateModal:NO];
+    
+    [m_menuButton setEnabled:YES];
+//    [m_menuLabel setEnabled:YES];
+    
+    // remove any views that might have been added
+    [m_menuView removeFromSuperview];
+    [m_playScoreController.view removeFromSuperview];
+    
+}
+
+- (IBAction)menuButtonClicked
+{
+    // if we are paused
+    [self stopMainEventLoop];
+    
+    [m_scoreView addSubview:m_menuView];
+    
+    [self animateModal:YES];
+    
+    [m_menuButton setEnabled:NO];    
+//    [m_menuLabel setEnabled:NO];
+    
+}
+
+- (IBAction)menuDoneButtonClicked
+{
+    [self startMainEventLoop];
+    
+    [self animateModal:NO];
+    
+    [m_menuButton setEnabled:YES];
+//    [m_menuLabel setEnabled:YES];
+    
+//    m_loopDelay = 0.99f;
+    
+    [m_menuView removeFromSuperview];
+    
+}
+
+- (IBAction)audioRouteButton
+{
+    
+    NSString * currentRoute = m_audioRouteButton.titleLabel.text;
+    
+    if ( [currentRoute isEqualToString:@"Speaker"] )
+    {
+        [m_audioRouteButton setTitle:@"Auxillary" forState:UIControlStateNormal];
+        [m_audioController RouteAudioToDefault];
+    }
+    else
+    {
+        [m_audioRouteButton setTitle:@"Speaker" forState:UIControlStateNormal];
+        [m_audioController RouteAudioToSpeaker];
+    }
+    
+}
+
+#pragma mark -
+#pragma mark Main event loop
+- (void)delayLoop
+{
+    
+    // take down the delay over time
+    NSInteger intValueBefore = [[NSNumber numberWithDouble:m_loopDelay] integerValue];    
+    m_loopDelay -= m_loopTimeDelta;
+    NSInteger intValueAfter = [[NSNumber numberWithDouble:m_loopDelay] integerValue];
+    
+    // play a beep on the transition between stages
+    if ( intValueBefore != intValueAfter && m_loopDelay < 3.0 )
+    {
+        [m_audioController SetAttentuation:0.925f];
+        [self emitBeepSound];
+    }
+    
+    // also beep when we are done delaying
+    if ( m_loopDelay < 0.0 )
+    {
+        [m_audioController SetAttentuation:0.5f];
+        [self emitBeepSound];
+    }
+    
+    // the loop delay varies from 4.0->0.0
+    if ( m_loopDelay > 0.0 && m_loopDelay < 4.0)
+    {
+        [m_displayController countdownOn:intValueAfter];
+    }
+    else 
+    {
+        [m_displayController countdownOff];
+        [m_audioController SetAttentuation:AUDIO_CONTROLLER_ATTENUATION];
+        
+    }
+    
+    [self updateDisplay];
+    
+}
+
+- (void)handleDevice
+{
+
+    //
+    // Get any new input from the device 
+    //
+    char previousNotesOn[ GTAR_GUITAR_STRING_COUNT ];
+    char currentNotesOn[ GTAR_GUITAR_STRING_COUNT ];
+    
+    m_guitarInterface->GetNotesOn( previousNotesOn );
+    
+    m_guitarInterface->HandleDeviceOutput();
+    
+    m_guitarInterface->GetNotesOn( currentNotesOn );
+    
+    
+    // debuggy stuff
+    if ( m_skipNotes == YES ) 
+    {
+        m_skipNotes = NO;
+        
+        if ( m_songModel->TargetNotesRemaining() > 0 )
+        {
+            m_songModel->GetUnHitTargetNotesBytes( currentNotesOn );
+            
+            // turn off everything except one
+            BOOL first = YES;
+            for ( unsigned int i = 0; i < GTAR_GUITAR_STRING_COUNT; i++ )
+            {
+                if ( first == YES && currentNotesOn[i] != -1 )
+                {
+                    first = NO;
+                }
+                else
+                {
+                    currentNotesOn[i] = -1;
+                }
+            }
+            
+        }
+        else 
+        {
+            m_songModel->GetUpcomingNotesBytes( currentNotesOn );
+        }
+    }
+    
+    // make the notes failure notes, fret 99 that doesn't exist.
+    if ( m_screenTouchedBad == YES )
+    {
+        char failNotes[ GTAR_GUITAR_STRING_COUNT ] = { 99, 99, 99, 99, 99, 99 };
+        memcpy( currentNotesOn, failNotes, GTAR_GUITAR_STRING_COUNT );
+    }
+    
+    // we skip handling input for a few loops
+    // to avoid awkwardness
+    if ( m_inputDelayLoops > 0 )
+    {
+        m_inputDelayLoops--;
+        
+        return;
+    }
+    
+    // flash the indicator light to show whats going on
+    [m_activityIndicator setHidden:YES];
+    
+    for ( unsigned int i = 0; i < GTAR_GUITAR_STRING_COUNT; i++ )
+    {
+        //
+        // Look for note deltas ('edge triggered')
+        //
+        if ( currentNotesOn[i] != GTAR_GUITAR_NOTE_OFF )
+        {
+            int str = i;
+            int fret = currentNotesOn[i];
+            
+            // flash the indicator light to show whats going on
+            [m_activityIndicator setHidden:NO];
+            
+            // Record the note
+            // NOTE we record everything they play. 
+            // Server side we can handle it approprately
+            [m_songRecorder playString:str andFret:fret];
+            
+            if ( m_accuracy == AccuracyExactNote )
+            {
+                // testing an incorrect note will reset the combo regardless
+                if ( m_songModel->HitTestNote( str, fret ) )
+                {
+                    // Send output to the AC
+                    [self playNoteAtString:str andFret:fret];
+                    
+                    // Turn off the LED for this note
+                    [self turnOffNoteAtString:str andFret:fret];
+                    
+                    // Animate the note
+                    NSInteger index = m_songModel->TargetNoteIndex( str, fret );
+                    [m_displayController animateNoteWithIndex:index];
+                    
+                    // If this is a chord (i.e. more than 1 target note) then
+                    // we start the frame timer.
+                    unsigned int remaining = m_songModel->TargetNotesRemaining();
+                    
+                    if ( m_chordFrameBegin <= 0 && remaining > 0 )
+                    {
+                        m_chordFrameBegin = m_loopTimeDelta * 4;
+                    }
+
+                }
+                else
+                {
+                    // we technically missed the note, but it isn't the end of the world
+                    
+                    if ( m_tempo == TempoAutoAdjust )
+                    {
+                        
+                        // see if we just played a note early
+                        if ( m_songModel->TestUpcomingNote( str, fret ) )
+                        {
+                            // jump towards the real sets of target notes
+                            //m_songModel->AdvanceModelToNextTargetNotes();
+                            m_songModel->AdvanceModelToNextTargetNotesFromBeat();
+                            
+                            // hit the note anyways
+                            m_songModel->HitTestNote( str, fret );
+                            
+                            // Send output to the AC
+                            [self playNoteAtString:str andFret:fret];
+                            
+                            // Turn off the LED for this note
+                            [self turnOffNoteAtString:str andFret:fret];
+
+                            // Animate the note
+                            NSInteger index = m_songModel->TargetNoteIndex( str, fret );
+                            [m_displayController animateNoteWithIndex:index];
+                            
+                            // increase the tempo a bit
+                            [m_tempoRegulator increaseTempo];
+                            
+                        }
+                        else if ( m_penalty == YES )
+                        { 
+                            [self playUglyNoteAtString:str andFret:fret];
+                        }
+                        
+                    }
+                    else if ( m_penalty == YES )
+                    { 
+                        [self playUglyNoteAtString:str andFret:fret];
+                    }
+                    
+                }
+                
+            }
+            else if ( m_accuracy == AccuracyStringOnly )
+            {
+                
+                char unHitNotes[ GTAR_GUITAR_STRING_COUNT ];
+                
+                m_songModel->GetUnHitTargetNotesBytes( unHitNotes );
+                
+                if ( m_songModel->HitTestString( str ) )
+                {
+                    // Send output to the AC
+                    [m_audioController PluckStringFret:str atFret:unHitNotes[str]];
+                    
+                    // Turn off the LED for this note
+                    [self turnOffNoteAtString:str andFret:unHitNotes[str]];
+
+                    // Animate the note
+                    NSInteger index = m_songModel->TargetNoteIndex( str, unHitNotes[str] );
+                    [m_displayController animateNoteWithIndex:index];
+                    
+                    // If this is a chord (i.e. more than 1 target note) then
+                    // we start the frame timer.
+                    if ( m_chordFrameBegin != 0 && m_songModel->TargetNotesRemaining() > 1 )
+                    {
+                        m_chordFrameBegin = m_currentLoopTime;
+                    }
+                }
+                else
+                {
+                    
+                    if ( m_penalty == YES )
+                    {
+                        [self playUglyNoteAtString:str andFret:unHitNotes[str]];
+                        //[self playDissonantChord];
+                    }
+                    
+                    if ( m_tempo == TempoAutoAdjust )
+                    {
+                        //[m_tempoRegulator playIncorrectNote];
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+- (void)advanceModels
+{
+    
+    // Advance our recording
+    // The recording is always in 'real time' so we don't need scale anything.
+    [m_songRecorder advanceRecordingByTimeDelta:m_loopTimeDelta];
+        
+    if ( m_tempo != TempoNone )
+    {
+        NoteArrayRange previousTargetNotes = m_songModel->GetTargetNotes();
+        
+        char targetNotes[ GTAR_GUITAR_STRING_COUNT ];
+        char unHitNotes[ GTAR_GUITAR_STRING_COUNT ];
+        
+        m_songModel->GetTargetNotesBytes( targetNotes );
+        m_songModel->GetUnHitTargetNotesBytes( unHitNotes );
+        
+        // Advance our song model
+        if ( m_tempo == TempoAutoAdjust )
+        {
+            double tempoTimeScaler = [m_tempoRegulator currentTempoTimeScaler];
+            m_songModel->AdvanceModelByDeltaTimeSeconds( m_loopTimeDelta * tempoTimeScaler );            
+        }
+        else if ( m_tempo == TempoReal )
+        {
+            m_songModel->AdvanceModelByDeltaTimeSeconds( m_loopTimeDelta * m_tempoModifier );
+        }
+        else
+        {
+            m_songModel->AdvanceModelByDeltaTimeSeconds( m_loopTimeDelta );
+        }
+        
+        NoteArrayRange currentTargetNotes = m_songModel->GetTargetNotes();
+        
+        //
+        // If the notes expired un-hit, turn off the LEDs.
+        //
+        if ( currentTargetNotes.m_index != previousTargetNotes.m_index ||
+             currentTargetNotes.m_count != previousTargetNotes.m_count )
+        {
+            
+            // commit what points they did get.
+            m_songModel->CalculateAndAccumulateScore( targetNotes, unHitNotes );
+            
+            if ( m_accuracy == AccuracyExactNote )
+            {
+                
+                if ( previousTargetNotes.m_count > 0 )
+                {
+                    [self turnOffNotes:unHitNotes];
+                    
+                    // some notes may have expired, turne them off
+                    for ( unsigned int str = 0; str < GTAR_GUITAR_STRING_COUNT; str++ )
+                    {
+                        if ( unHitNotes[str] != -1 )
+                        {
+                            // play a bad sound if appropriated
+                            if ( m_penalty == YES )
+                            { 
+                                [self playUglyNotes:unHitNotes];
+                                //[self playDissonantChord];
+                            }
+                            
+                            // adjust their tempo
+                            if ( m_tempo == TempoAutoAdjust )
+                            {
+                                [m_tempoRegulator decreaseTempo];
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                // we might need to light up some upcoming notes
+                if ( currentTargetNotes.m_count == 0 )
+                {
+                    char upcomingNotes[ GTAR_GUITAR_STRING_COUNT ];
+                    
+                    m_songModel->GetUpcomingNotesBytes( upcomingNotes );
+                    
+                    [self turnOnNotesColor:upcomingNotes];
+                }
+                
+                // we might need to light some current notes
+                if ( currentTargetNotes.m_count > 0 )
+                {
+                    char targetNotes[ GTAR_GUITAR_STRING_COUNT ];
+                    
+                    m_songModel->GetTargetNotesBytes( targetNotes );
+                    
+                    [self turnOnNotesWhite:targetNotes];
+                }
+                
+                
+            } 
+            else if ( m_accuracy == AccuracyStringOnly )
+            {
+                if ( previousTargetNotes.m_count > 0 )
+                {
+                    //[self turnOffStrings:unHitNotes];
+                    [self turnOffNotes:unHitNotes];
+                }
+                
+                if ( currentTargetNotes.m_count == 0 )
+                {
+                    char upcomingNotes[ GTAR_GUITAR_STRING_COUNT ];
+                    
+                    m_songModel->GetUpcomingNotesBytes( upcomingNotes );
+                    
+                    //[self turnOnStrings:upcomingNotes];
+                    [self turnOnNotesColor:upcomingNotes];
+                }
+            }
+            
+        }
+        
+    }
+    else 
+    {
+        // If the chord timer expires, then advance anyways.
+        if ( m_chordFrameBegin > 0 )
+        {
+            m_chordFrameBegin -= m_loopTimeDelta;
+            
+            if ( m_chordFrameBegin <= 0 &&
+                m_songModel->TargetNotesRemaining() > 0 )
+            {
+                
+                char unHitNotes[ GTAR_GUITAR_STRING_COUNT ];
+                
+                m_songModel->GetUnHitTargetNotesBytes( unHitNotes );
+                
+                // we need to hit them so we can advance
+                for ( unsigned int str = 0; str < GUITAR_INTERFACE_STRING_COUNT; str++ )
+                {
+                    if ( unHitNotes[str] != GTAR_GUITAR_NOTE_OFF &&
+                         m_songModel->HitTestNote( str, unHitNotes[str] ) )
+                    {
+                        // Send output to the AC
+//                        [self playNoteAtString:str andFret:unHitNotes[str]];
+                        
+                        // Turn off the LED for this note
+                        [self turnOffNoteAtString:str andFret:unHitNotes[str]];
+                    }
+                }
+            }
+        }
+        
+        // All notes have been hit.
+        if ( m_songModel->TargetNotesRemaining() == 0 )
+        {
+            
+            // delay handling input for a few loops to avoid 
+            // advancing too quickly
+            m_inputDelayLoops = 2; // ~66 ms
+            
+            // commit the points they got
+            m_songModel->CalculateAndAccumulateScore();
+            
+            // If we are in step-mode, and all the notes are hit, we advance
+            m_songModel->AdvanceModelToNextTargetNotes();
+            
+            char unHitNotes[ GTAR_GUITAR_STRING_COUNT ];
+            
+            m_songModel->GetUnHitTargetNotesBytes( unHitNotes );
+            
+            if ( m_accuracy == AccuracyExactNote )
+            {
+                // Turn on new LEDs
+                [self turnOnNotesColor:unHitNotes];
+            }
+            else
+            {
+                //[self turnOnStrings:unHitNotes];
+                [self turnOnNotesColor:unHitNotes];
+            }
+            
+        }
+        
+    }
+    
+    // If the song is done, this will be our last loop.
+//    if ( m_songModel->IsEndOfSong() == YES )
+//    {
+//        [self stopMainEventLoop];
+//    }
+}
+
+- (void)updateDisplay
+{
+
+    double currentBeat = m_songModel->GetCurrentBeat();
+    
+    m_progressView.m_currentBeat = currentBeat;
+    
+    [m_progressView setNeedsDisplay];
+    
+    [self updateScoreDisplay];
+    
+    // if this is the end of the song, pop up the score screen
+    if ( m_songModel->IsEndOfSong() == YES )
+    {
+        [self endOfSong];
+    }
+    else 
+    {
+        [m_displayController drawView];
+    }
+    
+}
+
+#pragma mark -
+#pragma mark Modals
+
+- (void)animateModal:(BOOL)popup
+{
+    
+    //NSInteger height = self.view.frame.size.height / 2 + AMP_HEIGHT;
+    NSInteger height = self.view.frame.size.height - AMP_HEIGHT;
+    
+    // slide the popup off the screen
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3f];
+    
+    if ( popup == YES )
+    {
+        // so make it visible
+        
+        m_ampView.transform = CGAffineTransformMakeTranslation( 0, 0 );
+        
+        m_topmenuView.transform = CGAffineTransformMakeTranslation( 0, -height );
+        
+        m_blackView.alpha = 0.8;
+    }
+    else 
+    {
+        // so hide it
+        
+        m_ampView.transform = CGAffineTransformMakeTranslation( 0, height );
+        
+        m_topmenuView.transform = CGAffineTransformMakeTranslation( 0, 0 );
+        
+        m_blackView.alpha = 0.0;
+    }
+    
+    [UIView commitAnimations];
+    
+}    
+
+#pragma mark -
+#pragma mark Helpers
+
+- (void)endOfSong
+{
+    [self stopMainEventLoop];
+    
+    [m_songRecorder finishSong];
+    
+    [self displayScoreScreen];
+    
+    [self uploadUserSongSession];
+        
+}
+
+- (void)updateScoreDisplay
+{
+    
+    unsigned int score = m_songModel->GetScore();
+    unsigned int combo = m_songModel->GetCombo();
+    //    unsigned int hits = m_songModel->GetNotesHit();
+    unsigned int multiplier = m_songModel->GetMultiplier();
+    
+    [m_lcdScoreView setDigitsValue:score];
+    [m_lcdMultView setDigitsValue:multiplier];
+    
+    if ( multiplier >= SONG_MODEL_COMBO_MULTIPLIER )
+    {
+        [m_fillGaugeView setLevelToMax];
+    }
+    else
+    {
+        [m_fillGaugeView setLevelWithRollover:combo];
+    }
+    
+}
+
+- (void)displayScoreScreen
+{
+    PlayScoreController * playSc = m_playScoreController;
+    
+    playSc.m_score = m_songModel->GetScore();
+    playSc.m_scoreMax = m_songModel->GetScoreMax();
+    
+    playSc.m_notesHit = m_songModel->GetNotesHit();
+    playSc.m_notesMax = m_songModel->GetNotesTotal();
+    playSc.m_combo = m_songModel->GetComboMax();
+    playSc.m_stars = [self calculateStars];
+    
+    playSc.m_songName = m_song.m_title;
+    
+    [playSc updateScores];
+    
+    [m_scoreView addSubview:playSc.view];
+    
+    [self animateModal:YES];
+    
+}
+
+- (void)uploadUserSongSession
+{
+
+    // update session    
+    UserSongSession * songSession = [[UserSongSession alloc] init];
+    
+    songSession.m_userSong = m_song;
+    
+    songSession.m_score = m_songModel->GetScore();;
+    songSession.m_scoreMax = m_songModel->GetScoreMax();;
+    songSession.m_combo = m_songModel->GetCombo();
+    songSession.m_stars = [self calculateStars];
+    
+    songSession.m_notes = [NSString stringWithFormat:@"gTar Play"];
+
+    // Create the xmp
+    CSong * song = [m_songRecorder.m_song convertToCSong];
+    
+    songSession.m_xmpBlob = [SongCreator xmpBlobWithSong:song];
+    
+    delete song;
+
+    // Upload the session
+    [m_cloudCache uploadUserSongSession:songSession];
+    
+    // Done
+    [songSession release];
+    
+}
+
+- (NSInteger)calculateStars
+{
+
+    NSInteger stars = 0;
+
+    CGFloat percentScore = (CGFloat)(m_songModel->GetScore()) / (CGFloat)(m_songModel->GetScoreMax());
+
+    if ( percentScore > 0.20 )
+    {
+        stars++;
+    }
+    if ( percentScore > 0.40 )
+    {
+        stars++;
+    }
+    if ( percentScore > 0.60 )
+    {
+        stars++;
+    }
+    if ( percentScore > 0.80 )
+    {
+        stars++;
+    }
+    if ( percentScore > 0.90 )
+    {
+        stars++;
+    }
+    
+    return stars;
+    
+}
+
+- (void)emitBeepSound
+{
+    
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    //AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+    [m_audioController PluckStringFret:0 atFret:0];
+    
+}
+
+@end

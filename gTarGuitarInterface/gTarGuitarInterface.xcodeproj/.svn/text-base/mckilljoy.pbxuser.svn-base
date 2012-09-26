@@ -1,0 +1,183 @@
+// !$*UTF8*$!
+{
+	0867D690FE84028FC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeSDKPreference = iphoneos4.2;
+		activeTarget = D2AAC07D0554694100DB518D /* gTarGuitarInterface */;
+		addToTargets = (
+			D2AAC07D0554694100DB518D /* gTarGuitarInterface */,
+		);
+		codeSenseManager = EC87EB521325C0D7007DAEC9 /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					652,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					612,
+					60,
+					20,
+					48.16259765625,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 326499407;
+			PBXWorkspaceStateSaveDate = 326499407;
+		};
+		perUserProjectItems = {
+			EC24A80113482C0600EA2FED /* PBXTextBookmark */ = EC24A80113482C0600EA2FED /* PBXTextBookmark */;
+			EC24A80213482C0600EA2FED /* PBXTextBookmark */ = EC24A80213482C0600EA2FED /* PBXTextBookmark */;
+			EC24A80313482C0600EA2FED /* PBXTextBookmark */ = EC24A80313482C0600EA2FED /* PBXTextBookmark */;
+			EC24B2AC135A4D0F00EA2FED /* PBXTextBookmark */ = EC24B2AC135A4D0F00EA2FED /* PBXTextBookmark */;
+			EC87F29F132AD34A007DAEC9 /* PBXTextBookmark */ = EC87F29F132AD34A007DAEC9 /* PBXTextBookmark */;
+			ECC82D161376174F004C70AF /* PBXTextBookmark */ = ECC82D161376174F004C70AF /* PBXTextBookmark */;
+		};
+		sourceControlManager = EC87EB511325C0D7007DAEC9 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	AA747D9E0F9514B9006C5449 /* gTarGuitarInterface_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {845, 416}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 188}";
+		};
+	};
+	D2AAC07D0554694100DB518D /* gTarGuitarInterface */ = {
+		activeExec = 0;
+	};
+	EC24A80113482C0600EA2FED /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EC87EB6513260EB6007DAEC9 /* GuitarInterface.cpp */;
+		name = "GuitarInterface.cpp: 11";
+		rLen = 0;
+		rLoc = 177;
+		rType = 0;
+		vrLen = 1321;
+		vrLoc = 0;
+	};
+	EC24A80213482C0600EA2FED /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EC87EB6413260EB6007DAEC9 /* GuitarInterface.h */;
+		name = "GuitarInterface.h: 9";
+		rLen = 0;
+		rLoc = 145;
+		rType = 0;
+		vrLen = 610;
+		vrLoc = 0;
+	};
+	EC24A80313482C0600EA2FED /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EC87EB611325CD11007DAEC9 /* DeviceInterface.cpp */;
+		name = "DeviceInterface.cpp: 118";
+		rLen = 0;
+		rLoc = 3247;
+		rType = 0;
+		vrLen = 677;
+		vrLoc = 4047;
+	};
+	EC24B2AC135A4D0F00EA2FED /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EC87EB601325CD11007DAEC9 /* DeviceInterface.h */;
+		name = "DeviceInterface.h: 28";
+		rLen = 22;
+		rLoc = 660;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 434;
+	};
+	EC87EB511325C0D7007DAEC9 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	EC87EB521325C0D7007DAEC9 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	EC87EB601325CD11007DAEC9 /* DeviceInterface.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {830, 1365}}";
+			sepNavSelRange = "{660, 22}";
+			sepNavVisRange = "{434, 323}";
+		};
+	};
+	EC87EB611325CD11007DAEC9 /* DeviceInterface.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {830, 5408}}";
+			sepNavSelRange = "{3247, 0}";
+			sepNavVisRange = "{4047, 677}";
+		};
+	};
+	EC87EB6413260EB6007DAEC9 /* GuitarInterface.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {830, 1196}}";
+			sepNavSelRange = "{145, 0}";
+			sepNavVisRange = "{0, 610}";
+		};
+	};
+	EC87EB6513260EB6007DAEC9 /* GuitarInterface.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1132, 2704}}";
+			sepNavSelRange = "{177, 0}";
+			sepNavVisRange = "{0, 1321}";
+		};
+	};
+	EC87F29F132AD34A007DAEC9 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = AA747D9E0F9514B9006C5449 /* gTarGuitarInterface_Prefix.pch */;
+		name = "gTarGuitarInterface_Prefix.pch: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 188;
+		vrLoc = 0;
+	};
+	ECC82D161376174F004C70AF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EC87EB601325CD11007DAEC9 /* DeviceInterface.h */;
+		name = "DeviceInterface.h: 28";
+		rLen = 22;
+		rLoc = 660;
+		rType = 0;
+		vrLen = 323;
+		vrLoc = 434;
+	};
+}

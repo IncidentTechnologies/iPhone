@@ -1,0 +1,498 @@
+//
+//  UserProfileNavigationController.m
+//  gTarPlay
+//
+//  Created by Marty Greenia on 9/13/11.
+//  Copyright 2011 Incident Technologies. All rights reserved.
+//
+
+#import "UserProfileNavigationController.h"
+#import "UserProfileViewController.h"
+#import "UserProfileSearchViewController.h"
+#import "UserProfile.h"
+#import "UserSongSession.h"
+#import "UserSong.h"
+#import "CloudController.h"
+#import "CloudResponse.h"
+#import "SongPlayerViewController.h"
+#import "UserEntry.h"
+#import "CustomSegmentedControl.h"
+#import "FileController.h"
+
+extern CloudController * g_cloudController;
+extern FileController * g_fileController;
+
+@implementation UserProfileNavigationController
+
+@synthesize m_delegate;
+@synthesize m_shortcutUserProfile;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if ( self )
+    {
+
+        self.m_title = @"Profile";
+        
+        // UserProfile VC
+        m_userProfileViewController = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil];
+        m_userProfileSearchViewController = [[UserProfileSearchViewController alloc] initWithNibName:@"UserProfileSearchViewController" bundle:nil];
+        
+        // UserController
+        NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+        
+        NSData * userControllerData = [settings objectForKey:@"UserController"];
+        
+        if ( userControllerData == nil )
+        {
+            m_userController = [[UserController alloc] init];
+            m_userController.m_cloudController = g_cloudController;
+            m_userController.m_delegate = self;
+        }
+        else
+        {
+//            m_userController = [[UserController alloc] init];
+            m_userController = [[NSKeyedUnarchiver unarchiveObjectWithData:userControllerData] retain];
+            m_userController.m_cloudController = g_cloudController;
+            m_userController.m_delegate = self;            
+        }
+        
+        // Song playback VC
+        m_songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
+        m_songPlaybackViewController.m_delegate = self;
+        
+    }
+    
+    return self;
+    
+}
+
+- (void)dealloc
+{
+    
+    [m_userProfileViewController release];
+    [m_userProfileSearchViewController release];
+    
+    [m_userController release];
+    
+    [m_fetchingProfileToDisplay release];
+    [m_songPlaybackViewController release];
+    [m_facebookActivityIndicator release];
+    
+    [m_shortcutUserProfile release];
+    
+    [super dealloc];
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    [m_notifyButton setImage:[UIImage imageNamed:@"FacebookIcon.png"] forState:UIControlStateNormal];
+    [m_notifyButton setImageEdgeInsets:UIEdgeInsetsMake(7.0, 13.0, 7.0, 13.0)];
+    
+    [m_homeButton setHidden:NO];
+    [m_notifyButton setHidden:NO];
+//    [m_notifyButton setHidden:YES];
+    
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    [self clearViewController];
+    
+    UserEntry * userEntry = [m_userController getUserEntry:0];
+    
+    // if we loaded from the cache, we already have some data to display
+    if ( userEntry != nil )
+    {
+        m_fetchingProfileToDisplay = [userEntry.m_userProfile retain];
+        m_userProfileViewController.m_displayedUserProfile = m_fetchingProfileToDisplay;
+        
+        [self userUpdateSucceeded];
+    }
+    else
+    {
+        [m_activityIndicatorView startAnimating];
+    }
+    
+    
+    // update everything anyways
+    [m_userController requestUserProfile:0];
+    [m_userController requestUserSessions:0];
+    [m_userController requestUserFollows:0];
+    [m_userController requestUserFollowedBy:0];
+
+    if ( m_shortcutUserProfile != nil )
+    {
+        
+        m_displayCurrentUserProfile = NO;
+        
+        [self getAndDisplayUserProfile:m_shortcutUserProfile];
+         
+        self.m_shortcutUserProfile = nil;
+        
+    }
+    else
+    {
+        m_displayCurrentUserProfile = YES;
+    }
+    
+    [super viewWillAppear:animated];
+    
+}
+
+#pragma mark - UserControllerDelegate
+
+- (void)userLoggedOut
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)userUpdateSucceeded
+{
+    
+    // Save the user entry with these new results
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    [settings setObject:[NSKeyedArchiver archivedDataWithRootObject:m_userController] forKey:@"UserController"];
+
+    [settings synchronize];
+    
+    UserEntry * userEntry = [m_userController getUserEntry:0];
+    
+    // first time we load up, we need to display the users profile
+    if ( userEntry.m_userProfile != nil && m_displayCurrentUserProfile == YES)
+    {
+        m_displayCurrentUserProfile = NO;
+        [m_fetchingProfileToDisplay release];
+        m_fetchingProfileToDisplay = [userEntry.m_userProfile retain];
+    }
+    
+    //
+    // Update the logged in user's lists
+    //
+    m_userProfileViewController.m_userProfile = userEntry.m_userProfile;
+    m_userProfileViewController.m_userFriendList = userEntry.m_followsList;
+    
+    m_userProfileSearchViewController.m_userProfile = userEntry.m_userProfile;
+    m_userProfileSearchViewController.m_userFriendList = userEntry.m_followsList;
+    m_userProfileSearchViewController.m_resultsArray = userEntry.m_facebookFriendsList;
+    
+    [g_fileController precacheFile:userEntry.m_userProfile.m_imgFileId];
+    
+    //
+    // Update the displayed user's state
+    // 
+    UserEntry * displayedEntry = [m_userController getUserEntry:m_userProfileViewController.m_displayedUserProfile.m_userId];
+    
+    // its ok if these are nil
+    m_userProfileViewController.m_displayedUserProfile = displayedEntry.m_userProfile;
+    m_userProfileViewController.m_displayedSessionsArray = displayedEntry.m_sessionsList;
+    m_userProfileViewController.m_displayedFollowsArray = displayedEntry.m_followsList;
+    m_userProfileViewController.m_displayedFollowedArray = displayedEntry.m_followedByList;
+    
+    // get profile images if we need them
+    [g_fileController precacheFile:displayedEntry.m_userProfile.m_imgFileId];
+    
+    for ( UserProfile * userProfile in displayedEntry.m_followsList )
+    {
+        [g_fileController precacheFile:userProfile.m_imgFileId];
+    }
+    
+    for ( UserProfile * userProfile in displayedEntry.m_followedByList )
+    {
+        [g_fileController precacheFile:userProfile.m_imgFileId];
+    }
+    
+    // refresh everything with the new status
+    [m_userProfileViewController refreshTable];
+    [m_userProfileViewController updateRelationship];
+    [m_userProfileSearchViewController refreshTable];
+    
+    //
+    // If the profile we want is ready, show it
+    //
+    if ( m_fetchingProfileToDisplay != nil )
+    {
+        UserEntry * displayedEntry = [m_userController getUserEntry:m_fetchingProfileToDisplay.m_userId];
+        
+        if ( displayedEntry != nil )
+        {
+            
+            [m_fetchingProfileToDisplay release];
+            
+            m_fetchingProfileToDisplay = nil;
+            
+            [g_fileController precacheFile:displayedEntry.m_userProfile.m_imgFileId];
+            
+            [self displayUserProfile:displayedEntry.m_userProfile];
+            
+            return;
+        }
+    }
+    
+}
+
+- (void)userUpdateFailed:(NSString*)reason
+{
+    // This signals 'offline' mode, but we don't necesarrily need back out
+//    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)userProfileSearchSucceeded:(NSArray*)foundUserProfiles
+{
+    
+    // pull down all the images
+    for ( UserProfile * userProfile in foundUserProfiles )
+    {
+        [g_fileController precacheFile:userProfile.m_imgFileId];
+    }
+    
+    [m_userProfileSearchViewController displayResults:foundUserProfiles];
+    
+}
+
+- (void)userProfileSearchFailed:(NSString*)reason
+{
+    
+    
+}
+
+- (void)userFacebookFriendsSearch
+{
+
+    UserEntry * userEntry = [m_userController getUserEntry:0];
+    
+    [m_facebookActivityIndicator stopAnimating];
+    [m_facebookActivityIndicator removeFromSuperview];
+    [m_facebookActivityIndicator release];
+    m_facebookActivityIndicator = nil;
+    
+    [m_notifyButton setHidden:NO];
+    
+    if ( userEntry.m_facebookFriendsList != nil )
+    {
+                
+        // pull down all the images
+        for ( UserProfile * userProfile in userEntry.m_facebookFriendsList )
+        {
+            [userProfile getProfileImageFromCloud:g_cloudController];
+        }
+        
+        [m_userProfileSearchViewController displayResults:userEntry.m_facebookFriendsList];
+        
+        [self switchInViewController:m_userProfileSearchViewController];
+        
+        
+    }
+    
+}
+
+- (void)userFacebookFriendsSearchFailed:(NSString*)reason
+{
+    
+    [m_facebookActivityIndicator stopAnimating];
+    [m_facebookActivityIndicator removeFromSuperview];
+    [m_facebookActivityIndicator release];
+    m_facebookActivityIndicator = nil;
+    
+    [m_notifyButton setHidden:NO];
+    
+}
+
+
+#pragma mark - Animation helpers
+
+- (void)getAndDisplayUserProfile:(UserProfile*)userProfile
+{
+    
+    m_userProfileViewController.m_displayedUserProfile = userProfile;
+//    m_userProfileViewController.m_displayedSessionsArray = nil;
+//    m_userProfileViewController.m_displayedFollowsArray = nil;
+//    m_userProfileViewController.m_displayedFollowedArray = nil;
+    
+    [m_userController requestUserProfile:userProfile.m_userId];
+    [m_userController requestUserSessions:userProfile.m_userId];
+    [m_userController requestUserFollows:userProfile.m_userId];
+    [m_userController requestUserFollowedBy:userProfile.m_userId];
+    
+    [m_fetchingProfileToDisplay release];
+    
+    m_fetchingProfileToDisplay = [userProfile retain];
+    
+}
+
+- (void)displayUserProfile:(UserProfile*)userProfile
+{
+    
+//    if ( m_userProfileViewController.m_displayedUserProfile != userProfile )
+    {
+                
+        if ( m_userProfileViewController == m_currentViewController )
+        {
+            // clear the VC so we get the animation in
+            [self clearViewController];
+        }
+
+        // reset the index to the friends list
+        [m_userProfileViewController.m_feedSegmentedButton setSelectedIndex:0];
+
+    }
+    
+    [self contractSearchBar];
+    
+    m_userProfileViewController.m_displayedUserProfile = userProfile;
+    
+    [m_userProfileViewController refreshTable];
+    [m_userProfileViewController updateRelationship];
+    
+    [self switchInViewController:m_userProfileViewController];
+        
+}
+
+- (void)playUserSongSession:(UserSongSession*)userSongSession
+{
+    
+    NSString * xmpBlob = [g_fileController getFileOrDownloadSync:userSongSession.m_xmpFileId];
+    
+    userSongSession.m_xmpBlob = xmpBlob;
+    
+    [m_songPlaybackViewController attachToSuperView:self.view andPlaySongSession:userSongSession];
+    
+}
+
+//- (void)receivedSongXmp:(CloudResponse*)response
+//{
+//    
+//    if ( response.m_status == CloudResponseStatusSuccess )
+//    {
+//        // successfully downloaded song
+//        NSString * sessionXmp = response.m_responseString;
+//        UserSongSession * userSongSession = response.m_responseUserSongSession;
+//        
+//        userSongSession.m_xmpBlob = sessionXmp;
+//        
+//        [m_songPlaybackViewController attachToSuperView:self.view andPlaySongSession:userSongSession];
+//
+//    }
+//    else
+//    {
+//        // failed to download
+//    }
+//    
+//}
+
+#pragma mark - Button click handlers
+
+- (IBAction)homeButtonClicked:(id)sender
+{
+
+    UserEntry * userEntry = [m_userController getUserEntry:0];
+    
+    [self displayUserProfile:userEntry.m_userProfile];
+    
+}
+
+- (IBAction)notifyButtonClicked:(id)sender
+{
+
+    [m_notifyButton setHidden:YES];
+    
+    m_facebookActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    m_facebookActivityIndicator.center = m_notifyButton.center;
+    [m_facebookActivityIndicator startAnimating];
+    [[m_notifyButton superview] addSubview:m_facebookActivityIndicator];
+    
+    [m_userController requestUserFacebookFriends:g_cloudController.m_facebookAccessToken];
+
+}
+
+#pragma mark - Misc
+
+- (void)addUserFollows:(UserProfile*)userProfile
+{
+    [m_userController requestAddUserFollow:userProfile.m_userId];
+}
+
+- (void)removeUserFollows:(UserProfile*)userProfile
+{
+    [m_userController requestRemoveUserFollow:userProfile.m_userId];
+}
+
+- (void)logoutUser
+{
+    [m_userController requestLogoutUser];    
+}
+
+- (void)beginSearch
+{
+    // switch over to the search view 
+    m_userProfileSearchViewController.m_previousViewController = m_currentViewController;
+
+    [self switchInViewController:m_userProfileSearchViewController];
+    
+}
+
+- (void)cancelSearch
+{
+    
+    // return back to the previous controller
+    [self switchInViewController:m_userProfileViewController];
+    
+}
+
+- (void)searchForString:(NSString*)searchString
+{
+    
+//    [m_userProfileSearchViewController startIndicator];
+    
+    [m_userController requestUserProfileSearch:searchString];
+    
+}
+
+#pragma mark - SongPlayerDelegate
+
+- (void)songPlayerDisplayUserProfile:(UserProfile*)userProfile
+{
+    [self getAndDisplayUserProfile:userProfile];
+}
+
+- (void)songPlayerDisplayUserSong:(UserSong*)userSong
+{
+    [m_delegate userProfileNavControllerDisplaySong:userSong];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+@end

@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes
+END
+AudioJunk1ViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.h
+END
+AudioJunk1ViewController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/AudioJunk1ViewController.mm
+END
+FretButton.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/IncidentTechMain/!svn/ver/310/Software/iPhone/AudioJunk1/Classes/FretButton.h
+END
+MidiMonitorView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/MidiMonitorView.xib
+END
+FretButton.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/IncidentTechMain/!svn/ver/310/Software/iPhone/AudioJunk1/Classes/FretButton.m
+END
+CoreMidiObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/CoreMidiObject.h
+END
+CoreMidiObject.mm
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/CoreMidiObject.mm
+END
+AudioController.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/AudioController.h
+END
+MidiMonitorView.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/MidiMonitorView.h
+END
+AudioJunk1AppDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.h
+END
+AudioController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/AudioController.mm
+END
+MidiMonitorView.mm
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/MidiMonitorView.mm
+END
+AudioJunk1AppDelegate.mm
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/IncidentTechMain/!svn/ver/459/Software/iPhone/AudioJunk1/Classes/AudioJunk1AppDelegate.mm
+END

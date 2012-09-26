@@ -1,0 +1,1723 @@
+//
+//  CloudController2.m
+//  gTarAppCore
+//
+//  Created by Marty Greenia on 4/24/11.
+//  Copyright 2011 IncidentTech. All rights reserved.
+//
+
+#import "CloudController.h"
+
+#import "CloudResponse.h"
+#import "CloudRequest.h"
+#import "UserProfile.h"
+#import "UserSong.h"
+#import "UserSongs.h"
+#import "UserSongSession.h"
+#import "NewsTicker.h"
+#import "StoreFeatureCollection.h"
+#import "FeaturedSong.h"
+
+#import "XmlDictionary.h"
+#import "XmlDom.h"
+
+// defines 
+
+//#define SERVER_NAME @"http://www.strumhub.com/v1m1"
+#define SERVER_NAME @"http://mcbookpro.local:8888"
+#define SERVER_STATUS @"main/serverStatus/xml"
+#define SERVER_ITUNES_STATUS @"main/itunesStatus/xml"
+#define SERVER_USER_CREDITS @"users/GetUserCredits/xml"
+
+#define SERVER_LOGIN_URL @"users/loginxml"
+#define SERVER_REGISTER_URL @"users/registerxml"
+#define SERVER_USER_PROFILE_URL @"users/GetUserInfo"
+#define SERVER_EDIT_USER_PROFILE_URL @"UserProfiles/editxml"
+#define SERVER_GET_SONGS_XML @"UserSongs/getUserSongs/xml"
+#define SERVER_GET_FEATURED_SONGS_XML @"UserSongs/getFeaturedNewAndPopularSongs/xml"
+//#define SERVER_SONG_STORE_LIST @"Main/browsexml"
+#define SERVER_SONG_STORE_LIST @"Main/getSongs/xml"
+#define SERVER_NEWS_TICKER @"Main/newsticker"
+#define SERVER_VERIFY_AND_PURCHASE @"Users/VerifyReceiptAndPurchaseSong"
+#define SERVER_VERIFY_RECEIPT @"Users/VerifyItunesPurchase"
+#define SERVER_PURCHASE_SONG @"Users/PurchaseSongXml"
+#define SERVER_ADD_USER_SONG_SESSION @"UserSongSessions/addxml"
+#define SERVER_LOGIN_FACEBOOK_URL @"Users/LoginWithUserFacebookAccessToken/xml"
+#define SERVER_USER_SONG_SESSION_FACEBOOK_POST @"UserSongSessions/postToFacebook/xml"
+#define SERVER_REDEEM_CREDIT_CODE @"UserCodeRedemptions/RedeemCode"
+
+
+// TODO append a clock() or tick() to this thing
+#define POST_BOUNDARY @"------gTarPlayFormBoundary0123456789"
+
+@implementation CloudController
+
+@synthesize m_loggedIn;
+@synthesize m_username;
+
+- (id)init
+{
+	
+    self = [super init];
+    
+	if ( self )
+	{
+		
+        m_loggedIn = NO;
+        
+		m_requestResponseDictionary = [[NSMutableDictionary alloc] init];
+		
+	}
+	
+	return self;
+	
+}
+
+- (void)dealloc
+{
+    
+    [m_username release];
+    
+    [super dealloc];
+    
+}
+
+#pragma mark -
+#pragma mark Syncronous convenience
+
+- (UIImage*)requestImage:(NSString*)urlPath
+{
+    NSString * imgUrlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, urlPath];
+    
+    return [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgUrlString]]];
+}
+
+- (BOOL)requestServerStatus
+{
+    
+    NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_STATUS];
+    
+    XmlDom * dom = [[XmlDom alloc] initWithXmlData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
+    
+    NSString * response = [dom getTextFromChildWithName:@"ACK"];
+    
+    BOOL status = NO;
+    
+    // The request succeeded, the server is there
+    if ( [response isEqualToString:@"success"] )
+    {
+        status = YES;
+    }
+    else 
+    {
+        status = NO;
+    }
+
+    [dom release];
+    
+    return status;
+    
+}
+
+
+- (BOOL)requestItunesServerStatus
+{
+    
+    NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_ITUNES_STATUS];
+    
+    XmlDom * dom = [[XmlDom alloc] initWithXmlData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
+    
+    NSString * response = [dom getTextFromChildWithName:@"ACK"];
+    
+    BOOL status = NO;
+    
+    // The request succeeded, the server is there
+    if ( [response isEqualToString:@"success"] )
+    {
+        status = YES;
+    }
+    else 
+    {
+        status = NO;
+    }
+    
+    [dom release];
+    
+    return status;
+    
+}
+
+- (NSNumber*)requestUserCredits
+{
+
+    NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_USER_CREDITS];
+    
+    XmlDom * dom = [[XmlDom alloc] initWithXmlData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
+    
+    NSString * response = [dom getTextFromChildWithName:@"ACK"];
+    
+    NSNumber * credits = nil;
+    
+    // The request succeeded, the server is there
+    if ( [response isEqualToString:@"success"] )
+    {
+        
+        credits = [dom getNumberFromChildWithName:@"credits"];
+        
+    }
+    else 
+    {
+        credits = nil;
+    }
+    
+    [dom release];
+    
+    return credits;
+
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (void)songOldListXmlResponseFunction:(CloudRequest*)cloudRequest
+{
+    
+    NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	CloudResponse * cloudResponse = [m_requestResponseDictionary objectForKey:key];
+	
+	[m_requestResponseDictionary removeObjectForKey:key];
+	
+	if ( cloudRequest.m_status == CloudRequestStatusSuccess )
+	{
+		
+        cloudResponse.m_status = CloudResponseStatusSuccess;
+        cloudResponse.m_statusText = @"Song list request successful.";
+        NSLog(@"%@", cloudRequest.m_responseString);
+        // the result is an XML blob. we parse this into a dictionary here.
+        NSString * xmlBlob = cloudRequest.m_responseString;
+        
+        UserSongs * userSongs = [[UserSongs alloc] initWithXmlBlob:xmlBlob];
+        
+        cloudResponse.m_responseUserSongs = userSongs;
+        
+        [userSongs release];
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Not logged in"] == YES )
+        {
+            m_loggedIn = NO;
+        }
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Login successful"] == YES )
+        {
+            m_loggedIn = YES;
+        }
+
+        
+	}
+	else 
+	{
+		// otherwise something went wrong. this is nil by default but nil it out to be explicit.
+		cloudResponse.m_responseUserSongs = nil;
+		cloudResponse.m_status = CloudResponseStatusConnectionError;
+		cloudResponse.m_statusText = @"Connection error";
+	}
+
+    cloudResponse.m_loggedIn = self.m_loggedIn;
+
+	[cloudResponse returnResponse];
+	
+	[cloudResponse release];
+	[cloudRequest release];
+
+    
+}
+
+- (void)songListXmlResponseFunction:(CloudRequest*)cloudRequest
+{
+
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	CloudResponse * cloudResponse = [m_requestResponseDictionary objectForKey:key];
+	
+	[m_requestResponseDictionary removeObjectForKey:key];
+	
+	if ( cloudRequest.m_status == CloudRequestStatusSuccess )
+	{
+		/*
+		cloudResponse.m_status = CloudResponseStatusSuccess;
+		cloudResponse.m_statusText = @"Song list request successful.";
+		NSLog(cloudRequest.m_responseString);
+		// the result is an XML blob. we parse this into a dictionary here.
+		NSString * xmlBlob = cloudRequest.m_responseString;
+        
+		UserSongs * userSongs = [[UserSongs alloc] initWithXml:xmlBlob];
+		
+		cloudResponse.m_responseUserSongs = userSongs;
+        
+		[userSongs release];
+		*/
+        
+        NSDictionary * responseDictionary = [[XmlDictionary dictionaryFromXmlBlobData:cloudRequest.m_receivedData] retain];
+
+		NSDictionary * ackNode = [responseDictionary objectForKey:@"ACK"];
+		NSString * result = [ackNode objectForKey:XML_DICTIONARY_TEXT_NODE];
+		
+		// The request succeeded, but did the authentication
+		if ( [result isEqualToString:@"success"] )
+		{
+            
+			cloudResponse.m_status = CloudResponseStatusSuccess;
+            
+            // Parse the results
+            NSLog(@"%@", cloudRequest.m_responseString);
+
+            UserSongs * userSongs = [[UserSongs alloc] initWithXml:responseDictionary];
+            
+            cloudResponse.m_responseUserSongs = userSongs;
+            
+            [userSongs release];
+            
+		}
+		else 
+		{
+			cloudResponse.m_status = CloudResponseStatusFailure;
+		}
+		
+        NSDictionary * msgNode = [responseDictionary objectForKey:@"msg"];
+		cloudResponse.m_statusText = [msgNode objectForKey:XML_DICTIONARY_TEXT_NODE];
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Not logged in"] == YES )
+        {
+            m_loggedIn = NO;
+        }
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Login successful"] == YES )
+        {
+            m_loggedIn = YES;
+        }
+        
+	}
+	else 
+	{
+		// otherwise something went wrong. this is nil by default but nil it out to be explicit.
+		cloudResponse.m_responseUserSongs = nil;
+		cloudResponse.m_status = CloudResponseStatusConnectionError;
+		cloudResponse.m_statusText = @"Connection error";
+	}
+	
+    cloudResponse.m_loggedIn = self.m_loggedIn;
+
+	[cloudResponse returnResponse];
+	
+	[cloudResponse release];
+	[cloudRequest release];
+    
+}
+
+- (void)defaultXmlReponseFunction:(CloudRequest*)cloudRequest
+{
+
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+
+	CloudResponse * cloudResponse = [m_requestResponseDictionary objectForKey:key];
+	
+	[m_requestResponseDictionary removeObjectForKey:key];
+	
+	if ( cloudRequest.m_status == CloudRequestStatusSuccess )
+	{
+		
+		NSDictionary * responseDictionary = [XmlDictionary dictionaryFromXmlBlobData:cloudRequest.m_receivedData];
+        
+        cloudResponse.m_responseXmlDictionary = responseDictionary;
+        
+		NSDictionary * resultNode = [responseDictionary objectForKey:@"result"];
+		
+		NSString * result = [resultNode objectForKey:@"value"];
+		
+		// The request succeeded, but did the authentication
+		if ( [result isEqualToString:@"success"] )
+		{
+			cloudResponse.m_status = CloudResponseStatusSuccess;
+		}
+		else 
+		{
+			cloudResponse.m_status = CloudResponseStatusFailure;
+		}
+		
+		cloudResponse.m_statusText = [resultNode objectForKey:XML_DICTIONARY_TEXT_NODE];
+
+        if ( [cloudResponse.m_statusText isEqualToString:@"Not logged in"] == YES )
+        {
+            m_loggedIn = NO;
+        }
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Login successful"] == YES )
+        {
+            m_loggedIn = YES;
+        }
+        
+		// this is being auto released in the static dictionary function
+        // TODO i dont think it is anymore .. check on this when things are stable, might be leaking
+//		[responseDictionary release];
+        
+	}
+	else 
+	{
+		cloudResponse.m_status = CloudResponseStatusConnectionError;
+		cloudResponse.m_statusText = @"Connection error";
+	}
+	
+    cloudResponse.m_loggedIn = self.m_loggedIn;
+
+	[cloudResponse returnResponse];
+	
+	[cloudResponse release];
+	[cloudRequest release];
+	
+}
+
+- (CloudResponse*)ackMsgXmlReponseFunction:(CloudRequest*)cloudRequest
+{
+    
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+    
+	CloudResponse * cloudResponse = [m_requestResponseDictionary objectForKey:key];
+	
+	[m_requestResponseDictionary removeObjectForKey:key];
+	
+	if ( cloudRequest.m_status == CloudRequestStatusSuccess )
+	{
+
+        // make the XmlDom
+        XmlDom * dom = [[XmlDom alloc] initWithXmlData:cloudRequest.m_receivedData];
+        
+        cloudResponse.m_responseXmlDom = dom;
+
+        NSString * result = [dom getTextFromChildWithName:@"ACK"];
+        
+        // The request succeeded, but did the authentication
+		if ( [result isEqualToString:@"success"] )
+		{
+			cloudResponse.m_status = CloudResponseStatusSuccess;
+		}
+		else 
+		{
+			cloudResponse.m_status = CloudResponseStatusFailure;
+		}
+
+        cloudResponse.m_statusText = [dom getTextFromChildWithName:@"msg"];
+
+        NSLog(@"Response msg: %@", cloudResponse.m_statusText);
+        
+        // also see if we have been logged in / out as a result of this
+        if ( [cloudResponse.m_statusText isEqualToString:@"Not logged in"] == YES )
+        {
+            m_loggedIn = NO;
+        }
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Login successful"] == YES )
+        {
+            m_loggedIn = YES;
+        }
+
+        // grab the username if its there.
+        NSString * username = [[dom getTextFromChildWithName:@"username"] retain];
+        
+        if ( username != nil )
+        {
+            [m_username release];
+
+            m_username = username;
+        }
+
+        // done
+        [dom release];
+        
+	}
+	else 
+	{
+		cloudResponse.m_status = CloudResponseStatusConnectionError;
+		cloudResponse.m_statusText = @"Connection error";
+	}
+	
+    cloudResponse.m_loggedIn = self.m_loggedIn;
+
+    // done with this guy
+    [cloudRequest release];
+
+    // let the caller return this, after optionally doing other stuff
+    return cloudResponse;
+
+}
+
+#pragma mark -
+#pragma mark Request Callbacks
+- (void)requestLoginCallback:(CloudRequest*)cloudRequest
+{
+	
+	[self defaultXmlReponseFunction:cloudRequest];
+	
+}
+
+- (void)requestLogoutCallback:(CloudRequest*)cloudRequest
+{
+
+	// todo
+//	[cloudResponse returnResponse];
+    
+    m_loggedIn = NO;
+	
+//	[cloudResponse release];
+//	[cloudRequest release];
+
+}
+
+- (void)requestRegisterCallback:(CloudRequest*)cloudRequest
+{
+	
+	[self defaultXmlReponseFunction:cloudRequest];
+	
+}
+
+- (void)requestRegisterFacebookCallback:(CloudRequest*)cloudRequest
+{
+	
+	[self defaultXmlReponseFunction:cloudRequest];
+	
+}
+
+- (void)requestUserProfileCallback:(CloudRequest*)cloudRequest
+{
+
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	CloudResponse * cloudResponse = [m_requestResponseDictionary objectForKey:key];
+	
+	[m_requestResponseDictionary removeObjectForKey:key];
+
+	if ( cloudRequest.m_status == CloudRequestStatusSuccess )
+	{
+		// if everything is good, make a user profile object
+
+		cloudResponse.m_status = CloudResponseStatusSuccess;
+		cloudResponse.m_statusText = @"User profile request successful.";
+		
+		// the result is an XML (XMP) blob. we parse this into a dictionary here.
+		XmlDictionary * xmlDictionary = [[XmlDictionary alloc] initWithXmlBlobData:cloudRequest.m_receivedData];
+	
+		// with that xml dictionary we can make a well defined user profile objet to return.
+		UserProfile * userProfile = [[UserProfile alloc] initWithXmlDictionary:xmlDictionary];
+		
+		cloudResponse.m_responseUserProfile = userProfile;
+		
+		[userProfile release];
+		[xmlDictionary release];
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Not logged in"] == YES )
+        {
+            m_loggedIn = NO;
+        }
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Login successful"] == YES )
+        {
+            m_loggedIn = YES;
+        }    
+		
+	}
+	else 
+	{
+		// otherwise something went wrong. this is nil by default but nil it out to be explicit.
+		cloudResponse.m_responseUserProfile = nil;
+		cloudResponse.m_status = CloudResponseStatusConnectionError;
+		cloudResponse.m_statusText = @"Connection error";
+	}
+	
+    cloudResponse.m_loggedIn = self.m_loggedIn;
+    
+	[cloudResponse returnResponse];
+	
+	[cloudResponse release];
+	[cloudRequest release];
+	
+}
+
+- (void)requestEditUserProfileCallback:(CloudRequest*)cloudRequest
+{
+
+	[self defaultXmlReponseFunction:cloudRequest];
+
+}
+
+- (void)requestSongListCallback:(CloudRequest*)cloudRequest
+{
+
+    [self songListXmlResponseFunction:cloudRequest];
+
+}
+
+- (void)requestFeaturedSongListCallback:(CloudRequest*)cloudRequest
+{
+
+    CloudResponse * cloudResponse = [self ackMsgXmlReponseFunction:cloudRequest];
+
+    XmlDom * responseDom = cloudResponse.m_responseXmlDom;
+
+    // create the collection
+    StoreFeatureCollection * featureCollection = [[StoreFeatureCollection alloc] initWithXmlDom:responseDom];
+    
+    cloudResponse.m_responseStoreFeatureCollection = featureCollection;
+    
+    [featureCollection release];
+    
+    // return to sender
+    [cloudResponse returnResponse];
+	
+	[cloudResponse release];
+
+}
+
+- (void)requestUserSongXmpCallback:(CloudRequest*)cloudRequest
+{
+	
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	CloudResponse * cloudResponse = [m_requestResponseDictionary objectForKey:key];
+	
+	[m_requestResponseDictionary removeObjectForKey:key];
+	
+	if ( cloudRequest.m_status == CloudRequestStatusSuccess )
+	{
+		// if everything is good, make a user profile object
+		
+		cloudResponse.m_status = CloudResponseStatusSuccess;
+		cloudResponse.m_statusText = @"User song XMP request successful.";
+		
+		// the result is an XML blob. we parse this into a dictionary here.
+		cloudResponse.m_responseString = cloudRequest.m_responseString;
+		
+        if ( [cloudResponse.m_statusText isEqualToString:@"Not logged in"] == YES )
+        {
+            m_loggedIn = NO;
+        }
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Login successful"] == YES )
+        {
+            m_loggedIn = YES;
+        }
+        
+	}
+	else 
+	{
+		// otherwise something went wrong. this is nil by default but nil it out to be explicit.
+		cloudResponse.m_responseString = nil;
+		cloudResponse.m_status = CloudResponseStatusConnectionError;
+		cloudResponse.m_statusText = @"Connection error";
+	}
+	
+    cloudResponse.m_loggedIn = self.m_loggedIn;
+    
+	[cloudResponse returnResponse];
+	
+	[cloudResponse release];
+	[cloudRequest release];
+
+}
+
+- (void)requestSongStoreListCallback:(CloudRequest*)cloudRequest
+{
+    
+//    [self songOldListXmlResponseFunction:cloudRequest];
+    
+    CloudResponse * cloudResponse = [self ackMsgXmlReponseFunction:cloudRequest];
+    
+    XmlDom * responseDom = cloudResponse.m_responseXmlDom;
+    
+    // create the user songs
+    cloudResponse.m_responseUserSongs = [[UserSongs alloc] initWithXmlDom:[responseDom getChildWithName:@"usersongs"]];
+       
+    // return to sender
+    [cloudResponse returnResponse];
+	
+	[cloudResponse release];
+
+
+}
+
+- (void)requestNewsHeadlinesCallback:(CloudRequest*)cloudRequest
+{
+    
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	CloudResponse * cloudResponse = [m_requestResponseDictionary objectForKey:key];
+	
+	[m_requestResponseDictionary removeObjectForKey:key];
+	
+	if ( cloudRequest.m_status == CloudRequestStatusSuccess )
+	{
+
+		cloudResponse.m_status = CloudResponseStatusSuccess;
+		cloudResponse.m_statusText = @"News headlines request successful.";
+		
+		// the result is an XML (XMP) blob. we parse this into a dictionary here.
+		XmlDictionary * xmlDictionary = [[XmlDictionary alloc] initWithXmlBlobData:cloudRequest.m_receivedData];
+        
+		// with that xml dictionary we can make a well defined news ticker object to return.
+		NewsTicker * newsTicker = [[NewsTicker alloc] initWithXmlDictionary:xmlDictionary];
+		
+		cloudResponse.m_responseNewsTicker = newsTicker;
+		
+		[newsTicker release];
+		[xmlDictionary release];
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Not logged in"] == YES )
+        {
+            m_loggedIn = NO;
+        }
+        
+        if ( [cloudResponse.m_statusText isEqualToString:@"Login successful"] == YES )
+        {
+            m_loggedIn = YES;
+        }
+		
+	}
+	else 
+	{
+		// otherwise something went wrong. this is nil by default but nil it out to be explicit.
+		cloudResponse.m_responseString = nil;
+		cloudResponse.m_status = CloudResponseStatusConnectionError;
+		cloudResponse.m_statusText = @"Connection error";
+	}
+	
+    cloudResponse.m_loggedIn = self.m_loggedIn;
+    
+	[cloudResponse returnResponse];
+	
+	[cloudResponse release];
+	[cloudRequest release];
+    
+    
+}
+
+- (void)requestVerifyReceiptCallback:(CloudRequest*)cloudRequest
+{
+    
+    [self defaultXmlReponseFunction:cloudRequest];
+    
+}
+
+- (void)requestPurchaseSongCallback:(CloudRequest*)cloudRequest
+{
+    
+    [self defaultXmlReponseFunction:cloudRequest];
+    
+}
+
+- (void)requestVerifyReceiptAndPurchaseSongCallback:(CloudRequest*)cloudRequest
+{
+    
+    [self defaultXmlReponseFunction:cloudRequest];
+    
+}
+
+- (void)requestUploadUserSongSessionCallback:(CloudRequest*)cloudRequest
+{
+    
+    [self defaultXmlReponseFunction:cloudRequest];
+    
+}
+
+- (void)requestFacebookLoginWithTokenCallback:(CloudRequest*)cloudRequest
+{
+
+	// Use the new ack-msg xml handler instead of the old one
+	//[self defaultXmlReponseFunction:cloudRequest];
+    CloudResponse * cloudResponse = [self ackMsgXmlReponseFunction:cloudRequest];
+    
+    // return to sender
+    [cloudResponse returnResponse];
+	
+	[cloudResponse release];
+
+	
+}
+
+- (void)requestFacebookPostUserSongSessionCallback:(CloudRequest*)cloudRequest
+{
+    
+    CloudResponse * cloudResponse = [self ackMsgXmlReponseFunction:cloudRequest];
+    
+    // return to sender
+    [cloudResponse returnResponse];
+	
+	[cloudResponse release];
+    
+}
+
+- (void)requestRedeemCreditCodeCallback:(CloudRequest*)cloudRequest
+{
+    
+    CloudResponse * cloudResponse = [self ackMsgXmlReponseFunction:cloudRequest];
+    
+    // return to sender
+    [cloudResponse returnResponse];
+	
+	[cloudResponse release];
+
+}
+
+#pragma mark - Server requests
+
+- (void)requestLoginUsername:(NSString*)username
+				 andPassword:(NSString*)password
+			  andCallbackObj:(id)obj
+			  andCallbackSel:(SEL)sel
+{
+	
+    [m_username release];
+    m_username = [username retain];
+    
+	// Set the cookie storage appropriately
+	[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+
+	// setup the post data
+	NSString * post = [NSString stringWithFormat:@"data[User][username]=%@&data[User][password]=%@", username, password];
+    NSData * postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];  	
+    NSString * postLength = [NSString stringWithFormat:@"%d", [postData length]];  
+
+	// setup the request
+	NSString * loginUrl = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_LOGIN_URL];
+	
+    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+	
+    [request setURL:[NSURL URLWithString:loginUrl]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];	
+
+
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestLoginCallback:)];
+
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+	
+}
+
+- (void)requestLogoutUsername:(NSString*)username
+				  andPassword:(NSString*)password
+			   andCallbackObj:(id)obj
+			   andCallbackSel:(SEL)sel
+{
+	
+	// Remove all associate cookiess
+	NSString * loginUrl = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_LOGIN_URL];
+	NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:loginUrl]];
+	
+	for ( unsigned int index = 0; index < [cookies count]; index++ )
+	{
+		
+		NSHTTPCookie * cookie = [cookies objectAtIndex:index];
+		
+		[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+		
+	}
+
+	
+	// TODO
+	// Do we need to inform the server that we are logging off e.g. so it can invalidate the session?
+
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+	
+	cloudResponse.m_status = CloudResponseStatusSuccess;
+    
+    cloudResponse.m_loggedIn = m_loggedIn = NO;
+	
+	[cloudResponse returnResponse];
+	
+	[cloudResponse release];
+	
+}
+
+- (void)requestLogoutCallbackObj:(id)obj
+                  andCallbackSel:(SEL)sel
+{
+
+    NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:SERVER_NAME]];
+	
+	for ( unsigned int index = 0; index < [cookies count]; index++ )
+	{
+		
+		NSHTTPCookie * cookie = [cookies objectAtIndex:index];
+		
+		[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+		
+	}
+	
+	// TODO
+	// Do we need to inform the server that we are logging off e.g. so it can invalidate the session?
+    
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+	
+	cloudResponse.m_status = CloudResponseStatusSuccess;
+	
+    cloudResponse.m_loggedIn = m_loggedIn = NO;
+	
+    [cloudResponse returnResponse];
+	
+	[cloudResponse release];
+
+}
+
+- (void)requestRegisterUsername:(NSString*)username
+					andPassword:(NSString*)password
+					   andEmail:(NSString*)email
+				 andCallbackObj:(id)obj
+				 andCallbackSel:(SEL)sel
+{
+	
+
+	// create post data
+	NSString * post = [NSString stringWithFormat:@"data[User][username]=%@&data[User][password]=%@&data[User][password_verification]=%@&data[User][email]=%@", username, password, password, email];
+    NSData * postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];  
+    NSString * postLength = [NSString stringWithFormat:@"%d", [postData length]];  
+
+	// create the request	
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_REGISTER_URL];
+
+    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+
+    [request setURL:[NSURL URLWithString:urlString]];
+	
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];	
+	
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestRegisterCallback:)];
+
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+
+}
+
+- (void)requestRegisterUsername:(NSString*)username
+         andFacebookAccessToken:(NSString*)facebookAccessToken
+					   andEmail:(NSString*)email
+				 andCallbackObj:(id)obj
+				 andCallbackSel:(SEL)sel
+{
+    
+	// create post data
+	NSString * post = [NSString stringWithFormat:@"data[User][username]=%@&data[User][access_token]=%@&data[User][email]=%@", username, facebookAccessToken, email];
+    NSData * postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];  
+    NSString * postLength = [NSString stringWithFormat:@"%d", [postData length]];  
+    
+	// create the request	
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_REGISTER_URL];
+    
+    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+    
+    [request setURL:[NSURL URLWithString:urlString]];
+	
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];	
+	
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+    
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestRegisterFacebookCallback:)];
+    
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+
+}
+
+
+- (void)requestUserProfileCallbackObj:(id)obj
+					   andCallbackSel:(SEL)sel
+{
+	
+	// Note that you must already be logged in in order for this to succeed
+	
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+	
+	// create the request	
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_USER_PROFILE_URL];
+
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+	
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestUserProfileCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+	
+}
+
+- (void)requestEditUserProfile:(UserProfile*)userProfile
+				andCallbackObj:(id)obj
+				andCallbackSel:(SEL)sel
+{
+	
+	// Note that you must already be logged in in order for this to succeed
+	
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+		
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@/%u", SERVER_NAME, SERVER_EDIT_USER_PROFILE_URL, userProfile.m_userId];
+	
+    [request setURL:[NSURL URLWithString:urlString]];
+
+	[request setHTTPMethod:@"POST"];
+	
+	//
+	// Set up the header
+	//
+	
+	// Content type
+	NSString * boundary = POST_BOUNDARY;
+	NSString * contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+	
+	[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+	
+	//
+	// Create the post body
+	//
+	NSMutableData * postbody = [NSMutableData data];
+	
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	
+	// Add all the fields
+	
+	// Method = post
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"_method\"\r\n\r\nPOST"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// Userid
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserProfile][id]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"%u", userProfile.m_userId] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// Firstname
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserProfile][firstname]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"%@", userProfile.m_firstName] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// Middlename
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserProfile][firstname]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"%@", userProfile.m_middleName] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// Lastname
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserProfile][firstname]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"%@", userProfile.m_lastName] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// Email
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserProfile][email]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"%@", userProfile.m_email] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// Profile text
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserProfile][profiletext]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"%@", userProfile.m_profileText] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// Profile pic
+	// convert to data
+	NSData * imageData = UIImagePNGRepresentation( userProfile.m_profilePic );
+	
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserProfile][fileProfilePic]\"; filename=\"profilepic.png\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	//[postbody appendData:[imageData dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:imageData];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// stick the post body into the request
+	[request setHTTPBody:postbody];
+	
+	// Update content length in the header
+	[request addValue:[NSString stringWithFormat:@"%u", [postbody length]] forHTTPHeaderField:@"Content-Length"];
+	
+	// We are ready to go!
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestEditUserProfileCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+
+	[request release];
+	 
+}
+
+- (void)requestSongListCallbackObj:(id)obj
+					andCallbackSel:(SEL)sel
+{
+
+	// The song list returned is based on the current logged in user
+	
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+	
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_GET_SONGS_XML];
+	
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+	
+	// send it up to the cloud
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestSongListCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+	
+}
+
+- (void)requestFeaturedSongListCallbackObj:(id)obj
+                            andCallbackSel:(SEL)sel
+{
+    
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+	
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_GET_FEATURED_SONGS_XML];
+	
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+	
+	// send it up to the cloud
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+    
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestFeaturedSongListCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+	
+}
+
+- (void)requestSongXmp:(UserSong*)userSong
+		andCallbackObj:(id)obj
+		andCallbackSel:(SEL)sel
+
+{
+
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+	
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, userSong.m_xmpUrlPath];
+
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+	
+	// send it up to the cloud
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+	
+	cloudResponse.m_responseUserSong = userSong;
+	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestUserSongXmpCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+	
+}
+
+- (void)requestSongStoreListSearch:(NSString*)search
+                    andCallbackObj:(id)obj
+                    andCallbackSel:(SEL)sel
+{
+    
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+	
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_SONG_STORE_LIST];
+    
+    if ( search != nil )
+    {
+        NSString * encodedSearch = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                                       (CFStringRef)search,
+                                                                                       NULL,
+                                                                                       (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                       kCFStringEncodingUTF8 );
+        
+        urlString = [NSString stringWithFormat:@"%@/BySearchField/%@", urlString, encodedSearch];
+    }
+//    else
+//    {
+//        urlString = [NSString stringWithFormat:@"%@/all/all", urlString, encodedSearch];
+//    }
+    
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+	
+	// send it up to the cloud
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestSongStoreListCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+    
+}
+
+- (void)requestNewsHeadlinesResults:(NSInteger)count
+                     andCallbackObj:(id)obj
+                     andCallbackSel:(SEL)sel
+{
+    
+    // create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+	
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_NEWS_TICKER];
+    
+    // Optionally specify how many results we want. 
+    // Zero (or less) just lets the server decide for us.
+    if ( count > 0 )
+    {
+        urlString = [NSString stringWithFormat:@"%@/%u", urlString, count];
+    }
+    
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+	
+	// send it up to the cloud
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestNewsHeadlinesCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+    
+}
+
+- (void)requestVerifyReceipt:(NSData*)receipt
+              andCallbackObj:(id)obj
+              andCallbackSel:(SEL)sel
+{
+    
+	// Note that you must already be logged in in order for this to succeed
+	
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+    
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_VERIFY_RECEIPT];
+	
+    [request setURL:[NSURL URLWithString:urlString]];
+    
+	[request setHTTPMethod:@"POST"];
+	
+	//
+	// Set up the header
+	//
+	
+	// Content type
+	NSString * boundary = POST_BOUNDARY;
+	NSString * contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+	
+	[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+	
+	//
+	// Create the post body
+	//
+	NSMutableData * postbody = [NSMutableData data];
+	
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	
+	// Add all the fields
+	
+	// Method = post
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"_method\"\r\n\r\nPOST"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// Receipt -- do we need to use a specific encoding
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[Users][receipt]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:receipt];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// stick the post body into the request
+	[request setHTTPBody:postbody];
+	
+	// Update content length in the header
+	[request addValue:[NSString stringWithFormat:@"%u", [postbody length]] forHTTPHeaderField:@"Content-Length"];
+	
+	// We are ready to go!
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestVerifyReceiptCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+    
+	[request release];
+
+}
+
+- (void)requestPurchaseSong:(UserSong*)userSong
+             andCallbackObj:(id)obj
+             andCallbackSel:(SEL)sel
+{
+    
+	// Note that you must already be logged in in order for this to succeed
+	
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+    
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_PURCHASE_SONG];
+	
+    [request setURL:[NSURL URLWithString:urlString]];
+    
+	[request setHTTPMethod:@"POST"];
+	
+	//
+	// Set up the header
+	//
+	
+	// Content type
+	NSString * boundary = POST_BOUNDARY;
+	NSString * contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+	
+	[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+	
+	//
+	// Create the post body
+	//
+	NSMutableData * postbody = [NSMutableData data];
+	
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	
+	// Add all the fields
+	
+	// Method = post
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"_method\"\r\n\r\nPOST"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// SongId
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[Users][songIdToPurchase]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"%u", userSong.m_songId] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+	// stick the post body into the request
+	[request setHTTPBody:postbody];
+	
+	// Update content length in the header
+	[request addValue:[NSString stringWithFormat:@"%u", [postbody length]] forHTTPHeaderField:@"Content-Length"];
+	
+	// We are ready to go!
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestPurchaseSongCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+    
+	[request release];
+    
+}
+
+- (void)requestVerifyReceipt:(NSData*)receipt
+             andPurchaseSong:(UserSong*)userSong
+              andCallbackObj:(id)obj
+              andCallbackSel:(SEL)sel
+{
+    
+	// Note that you must already be logged in in order for this to succeed
+	
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+    
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_VERIFY_AND_PURCHASE];
+	
+    [request setURL:[NSURL URLWithString:urlString]];
+    
+	[request setHTTPMethod:@"POST"];
+	
+	//
+	// Set up the header
+	//
+	
+	// Content type
+	NSString * boundary = POST_BOUNDARY;
+	NSString * contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+	
+	[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+	
+	//
+	// Create the post body
+	//
+	NSMutableData * postbody = [NSMutableData data];
+	
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	
+	// Add all the fields
+	
+	// Method = post
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"_method\"\r\n\r\nPOST"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// Receipt -- do we need to use a specific encoding
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[Users][receipt]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:receipt];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// SongId
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[Users][songIdToPurchase]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"%u", userSong.m_songId] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+	// stick the post body into the request
+	[request setHTTPBody:postbody];
+	
+	// Update content length in the header
+	[request addValue:[NSString stringWithFormat:@"%u", [postbody length]] forHTTPHeaderField:@"Content-Length"];
+	
+	// We are ready to go!
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestVerifyReceiptAndPurchaseSongCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+    
+	[request release];
+    
+}
+
+- (void)requestUploadUserSongSession:(UserSongSession*)songSession
+                      andCallbackObj:(id)obj
+                      andCallbackSel:(SEL)sel
+{
+    
+	// Note that you must already be logged in in order for this to succeed
+	
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+    
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_ADD_USER_SONG_SESSION];
+	
+    [request setURL:[NSURL URLWithString:urlString]];
+    
+	[request setHTTPMethod:@"POST"];
+
+	//
+	// Set up the header
+	//
+	
+	// Content type
+	NSString * boundary = POST_BOUNDARY;
+	NSString * contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+	
+	[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+	
+	//
+	// Create the post body
+	//
+	NSMutableData * postbody = [NSMutableData data];
+	
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	
+	// Add all the fields
+	
+	// Method = post
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"_method\"\r\n\r\nPOST"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+    // SongId
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][user_song_id]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%u", songSession.m_userSong.m_songId] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Score
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][score]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%u", songSession.m_score] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // ScoreMax
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][maxscore]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%u", songSession.m_scoreMax] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Combo (topstreak)
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][topstreak]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%u", songSession.m_combo] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Notes
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][notes]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%@", songSession.m_notes] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    // Upload the xmp
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[Document][sessionxmp]\"; filename=\"sessionxmp.xmp\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[songSession.m_xmpBlob dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+
+	// stick the post body into the request
+	[request setHTTPBody:postbody];
+	
+	// Update content length in the header
+	[request addValue:[NSString stringWithFormat:@"%u", [postbody length]] forHTTPHeaderField:@"Content-Length"];
+	
+	// We are ready to go!
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+    
+    // Save this so we can recover it later
+    cloudResponse.m_responseUserSongSession = songSession;
+	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestUploadUserSongSessionCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+    
+	[request release];
+    
+}
+
+- (void)requestFacebookLoginWithToken:(NSString*)accessToken
+                       andCallbackObj:(id)obj
+                       andCallbackSel:(SEL)sel
+{
+	
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+    
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_LOGIN_FACEBOOK_URL ];
+	
+    [request setURL:[NSURL URLWithString:urlString]];
+    
+	[request setHTTPMethod:@"POST"];
+	NSLog(@"%@", urlString);
+	//
+	// Set up the header
+	//
+	
+	// Content type
+	NSString * boundary = POST_BOUNDARY;
+	NSString * contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+	
+	[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+	
+	//
+	// Create the post body
+	//
+	NSMutableData * postbody = [NSMutableData data];
+	
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	
+	// Add all the fields
+	
+	// Method = post
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"_method\"\r\n\r\nPOST"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+    // Access Token
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[Users][access_token]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%@", accessToken] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+	// stick the post body into the request
+	[request setHTTPBody:postbody];
+	
+	// Update content length in the header
+	[request addValue:[NSString stringWithFormat:@"%u", [postbody length]] forHTTPHeaderField:@"Content-Length"];
+	
+	// We are ready to go!
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+    	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestFacebookLoginWithTokenCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+    
+	[request release];
+    
+}
+
+- (void)requestFacebookPostUserSongSession:(UserSongSession*)songSession andCallbackObj:(id)obj andCallbackSel:(SEL)sel
+{
+    
+    // Note that you must already be logged in in order for this to succeed
+	
+	// create the request
+	NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+    
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@", SERVER_NAME, SERVER_USER_SONG_SESSION_FACEBOOK_POST];
+	
+    [request setURL:[NSURL URLWithString:urlString]];
+    
+	[request setHTTPMethod:@"POST"];
+    
+	//
+	// Set up the header
+	//
+	
+	// Content type
+	NSString * boundary = POST_BOUNDARY;
+	NSString * contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+	
+	[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+	
+	//
+	// Create the post body
+	//
+	NSMutableData * postbody = [NSMutableData data];
+	
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	
+	// Add all the fields
+	
+	// Method = post
+	[postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"_method\"\r\n\r\nPOST"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+    // SongId
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][user_song_id]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%u", songSession.m_userSong.m_songId] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Score
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][score]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%u", songSession.m_score] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // ScoreMax
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][maxscore]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%u", songSession.m_scoreMax] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Combo (topstreak)
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][topstreak]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%u", songSession.m_combo] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Notes
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[UserSongSession][notes]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"%@", songSession.m_notes] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    // Upload the xmp
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"data[Document][sessionxmp]\"; filename=\"sessionxmp.xmp\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[songSession.m_xmpBlob dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+	// stick the post body into the request
+	[request setHTTPBody:postbody];
+	
+	// Update content length in the header
+	[request addValue:[NSString stringWithFormat:@"%u", [postbody length]] forHTTPHeaderField:@"Content-Length"];
+	
+	// We are ready to go!
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+    
+    // Save this so we can recover it later
+    cloudResponse.m_responseUserSongSession = songSession;
+	
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestFacebookPostUserSongSessionCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+    
+	[request release];
+    
+}
+
+- (void)requestRedeemCreditCode:(NSString*)creditCode andCallbackObj:(id)obj andCallbackSel:(SEL)sel
+{
+    
+    // they must be logged in or the will fail on the server
+    
+    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+	
+	NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@/xml", SERVER_NAME, SERVER_REDEEM_CREDIT_CODE, creditCode];
+        
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+	
+	// send it up to the cloud
+	CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCallbackObject:obj andSelector:sel];
+    
+	CloudRequest * cloudRequest = [[CloudRequest alloc] initWithRequest:request andCallbackObject:self andCallbackSelector:@selector(requestRedeemCreditCodeCallback:)];
+	
+	// need to make the object a NSValue in order to use it as a key 
+	NSValue * key = [NSValue valueWithNonretainedObject:cloudRequest];
+	
+	[m_requestResponseDictionary setObject:cloudResponse forKey:key];
+	
+	[request release];
+    
+}
+
+@end

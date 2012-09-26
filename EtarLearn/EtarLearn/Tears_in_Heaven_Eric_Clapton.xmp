@@ -1,0 +1,211 @@
+<song>
+  <header>
+    <id value="53" />
+    <title>Tears in Heaven</title>
+    <author>Eric Clapton</author>
+    <description>http://www.ultimate-guitar.com/tabs/e/eric_clapton/tears_in_heaven_tab.htm</description>
+    <tempo value="120" />
+  </header>
+  <content>
+    <track name="main">
+      <measure>
+        <startbeat value="0" />
+        <beatcount value="4" />
+        <beatvalue value="1" />
+        <note value="F#3" duration="0.313138686131387" measurestart="4.30036496350365">
+          <guitarposition string="1" fret="2" />
+        </note>
+        <note value="E3" duration="0.406569343065693" measurestart="3.80985401459854">
+          <guitarposition string="1" fret="0" />
+        </note>
+      </measure>
+      <measure>
+        <startbeat value="4" />
+        <beatcount value="4" />
+        <beatvalue value="1" />
+        <note value="A3" duration="0.336496350364964" measurestart="1">
+          <guitarposition string="2" fret="0" />
+        </note>
+        <note value="C#5" duration="0.336496350364964" measurestart="1.57335766423358">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="A4" duration="0.28978102189781" measurestart="2.22262773722628">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="D5" duration="0.383211678832117" measurestart="1.76021897810219">
+          <guitarposition string="5" fret="3" />
+        </note>
+        <note value="C#5" duration="0.313138686131387" measurestart="1.95875912408759">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="A4" duration="0.336496350364964" measurestart="1.31642335766423">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="G#3" duration="0.406569343065693" measurestart="2.78321167883212">
+          <guitarposition string="1" fret="4" />
+        </note>
+        <note value="E5" duration="0.467153284671533" measurestart="2.79270072992701">
+          <guitarposition string="5" fret="5" />
+        </note>
+        <note value="E5" duration="0.397080291970803" measurestart="3.56350364963504">
+          <guitarposition string="5" fret="5" />
+        </note>
+        <note value="C#5" duration="0.5" measurestart="4.20802919708029">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="A4" duration="0.476642335766423" measurestart="4.23138686131387">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="F#3" duration="0.453284671532847" measurestart="4.2478102189781">
+          <guitarposition string="1" fret="2" />
+        </note>
+        <note value="G#3" duration="0.383211678832117" measurestart="3.23175182481752">
+          <guitarposition string="1" fret="4" />
+        </note>
+      </measure>
+      <measure>
+        <startbeat value="8" />
+        <beatcount value="4" />
+        <beatvalue value="1" />
+        <note value="C#5" duration="0.42992700729927" measurestart="1.81970802919708">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="A4" duration="0.406569343065693" measurestart="1.81277372262774">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="F#3" duration="0.383211678832117" measurestart="1.28722627737226">
+          <guitarposition string="1" fret="2" />
+        </note>
+        <note value="F#3" duration="0.42992700729927" measurestart="2.33832116788321">
+          <guitarposition string="1" fret="2" />
+        </note>
+        <note value="C#5" duration="0.383211678832117" measurestart="2.8521897810219">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="A4" duration="0.476642335766423" measurestart="2.82408759124088">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="E3" duration="0.42992700729927" measurestart="2.8521897810219">
+          <guitarposition string="1" fret="0" />
+        </note>
+        <note value="E3" duration="0.546715328467153" measurestart="3.42445255474453">
+          <guitarposition string="1" fret="0" />
+        </note>
+        <note value="A4" duration="0.383211678832117" measurestart="3.97335766423358">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="C#5" duration="0.35985401459854" measurestart="4.00839416058394">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="E3" duration="0.5" measurestart="4.40547445255475">
+          <guitarposition string="1" fret="0" />
+        </note>
+      </measure>
+      <measure>
+        <startbeat value="12" />
+        <beatcount value="4" />
+        <beatvalue value="1" />
+        <note value="F#3" duration="0.406569343065693" measurestart="1.08284671532847">
+          <guitarposition string="1" fret="2" />
+        </note>
+        <note value="A4" duration="0.42992700729927" measurestart="1.09452554744526">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="D5" duration="0.453284671532847" measurestart="1.10620437956204">
+          <guitarposition string="5" fret="3" />
+        </note>
+        <note value="F#3" duration="0.476642335766423" measurestart="1.65036496350365">
+          <guitarposition string="1" fret="2" />
+        </note>
+        <note value="D5" duration="0.476642335766423" measurestart="2.16423357664234">
+          <guitarposition string="5" fret="3" />
+        </note>
+        <note value="A4" duration="0.406569343065693" measurestart="2.20401459854015">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="E3" duration="0.383211678832117" measurestart="3.31350364963504">
+          <guitarposition string="1" fret="0" />
+        </note>
+        <note value="F#3" duration="0.406569343065693" measurestart="2.69452554744526">
+          <guitarposition string="1" fret="2" />
+        </note>
+        <note value="E3" duration="0.42992700729927" measurestart="3.77591240875912">
+          <guitarposition string="1" fret="0" />
+        </note>
+        <note value="E3" duration="0.476642335766423" measurestart="4.29452554744525">
+          <guitarposition string="1" fret="0" />
+        </note>
+        <note value="A4" duration="0.5" measurestart="3.25510948905109">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="D5" duration="0.476642335766423" measurestart="3.26678832116788">
+          <guitarposition string="5" fret="3" />
+        </note>
+        <note value="G#4" duration="0.476642335766423" measurestart="4.31313868613139">
+          <guitarposition string="4" fret="1" />
+        </note>
+        <note value="D5" duration="0.42992700729927" measurestart="4.29452554744525">
+          <guitarposition string="5" fret="3" />
+        </note>
+      </measure>
+      <measure>
+        <startbeat value="16" />
+        <beatcount value="4" />
+        <beatvalue value="1" />
+        <note value="A3" duration="0.453284671532847" measurestart="1">
+          <guitarposition string="2" fret="0" />
+        </note>
+        <note value="A4" duration="0.406569343065693" measurestart="1.01386861313869">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="C#5" duration="0.42043795620438" measurestart="1">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="C#5" duration="0.5" measurestart="1.92481751824818">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="A4" duration="0.5" measurestart="1.91788321167883">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="A3" duration="0.5" measurestart="1.49744525547445">
+          <guitarposition string="2" fret="0" />
+        </note>
+        <note value="A3" duration="0.406569343065693" measurestart="3.93357664233577">
+          <guitarposition string="2" fret="0" />
+        </note>
+        <note value="A3" duration="0.406569343065693" measurestart="2.40839416058394">
+          <guitarposition string="2" fret="0" />
+        </note>
+        <note value="A3" duration="0.406569343065693" measurestart="2.87554744525547">
+          <guitarposition string="2" fret="0" />
+        </note>
+        <note value="A4" duration="0.35985401459854" measurestart="2.92226277372263">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="C#5" duration="0.453284671532847" measurestart="2.92226277372263">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="A3" duration="0.406569343065693" measurestart="3.41277372262774">
+          <guitarposition string="2" fret="0" />
+        </note>
+        <note value="A4" duration="0.35985401459854" measurestart="3.97335766423357">
+          <guitarposition string="4" fret="2" />
+        </note>
+        <note value="C#5" duration="0.42992700729927" measurestart="3.96167883211679">
+          <guitarposition string="5" fret="2" />
+        </note>
+        <note value="E3" duration="0.42992700729927" measurestart="4.26532846715329">
+          <guitarposition string="1" fret="0" />
+        </note>
+        <note value="F#3" duration="0.406569343065693" measurestart="4.60401459854015">
+          <guitarposition string="1" fret="2" />
+        </note>
+      </measure>
+      <measure>
+        <startbeat value="20" />
+        <beatcount value="4" />
+        <beatvalue value="1" />
+      </measure>
+    </track>
+  </content>
+</song>

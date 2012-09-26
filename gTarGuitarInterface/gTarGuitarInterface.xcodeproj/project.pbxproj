@@ -1,0 +1,501 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		EC8D469513860E9A0096575B /* gTarGuitarInterfaceDeployHeaders */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = EC8D469613860E9A0096575B /* Build configuration list for PBXAggregateTarget "gTarGuitarInterfaceDeployHeaders" */;
+			buildPhases = (
+				EC8D469913860E9E0096575B /* CopyFiles */,
+				EC8D469A13860EA00096575B /* CopyFiles */,
+			);
+			dependencies = (
+				EC8D469C13860EA70096575B /* PBXTargetDependency */,
+			);
+			name = gTarGuitarInterfaceDeployHeaders;
+			productName = gTarGuitarInterfaceDeployHeaders;
+		};
+		ECE8893E138598F300BA4C82 /* gTarGuitarInterfaceDeploy */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ECE88941138598F300BA4C82 /* Build configuration list for PBXAggregateTarget "gTarGuitarInterfaceDeploy" */;
+			buildPhases = (
+				ECE889421385990600BA4C82 /* ShellScript */,
+			);
+			dependencies = (
+				EC8D44221385E4C30096575B /* PBXTargetDependency */,
+			);
+			name = gTarGuitarInterfaceDeploy;
+			productName = "gTarGuitarInterface0.1-ios4.3";
+		};
+		ECE889531385A9E900BA4C82 /* gTarGuitarInterfaceBuildAll */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ECE889541385A9E900BA4C82 /* Build configuration list for PBXAggregateTarget "gTarGuitarInterfaceBuildAll" */;
+			buildPhases = (
+				ECE889571385A9F000BA4C82 /* ShellScript */,
+			);
+			dependencies = (
+				EC8D44081385DB180096575B /* PBXTargetDependency */,
+			);
+			name = gTarGuitarInterfaceBuildAll;
+			productName = gTarGuitarInterfaceBuild;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		2619E94C142C4BE100D78985 /* valid.h in Headers */ = {isa = PBXBuildFile; fileRef = 2619E94B142C4BE100D78985 /* valid.h */; };
+		267CB82E1490B1C2005D663F /* NetSockConn.h in Headers */ = {isa = PBXBuildFile; fileRef = 267CB82C1490B1C2005D663F /* NetSockConn.h */; };
+		267CB82F1490B1C2005D663F /* NetSockConn.mm in Sources */ = {isa = PBXBuildFile; fileRef = 267CB82D1490B1C2005D663F /* NetSockConn.mm */; };
+		26F0B4F6142B7A0100687AFA /* EHM.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F0B4F4142B7A0100687AFA /* EHM.h */; };
+		26F0B4F7142B7A0100687AFA /* RESULT.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F0B4F5142B7A0100687AFA /* RESULT.h */; };
+		AA747D9F0F9514B9006C5449 /* gTarGuitarInterface_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* gTarGuitarInterface_Prefix.pch */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		EC1FE60413EA277700C2A280 /* GuitarController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1FE60213EA277700C2A280 /* GuitarController.h */; };
+		EC1FE60513EA277700C2A280 /* GuitarController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC1FE60313EA277700C2A280 /* GuitarController.mm */; };
+		EC71FA31142991EC00F06996 /* CoreMidiInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC71FA2F142991EB00F06996 /* CoreMidiInterface.mm */; };
+		EC71FA32142991EC00F06996 /* CoreMidiInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = EC71FA30142991EB00F06996 /* CoreMidiInterface.h */; };
+		EC71FA3F1429CCBF00F06996 /* CoreMidiInterface.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC71FA30142991EB00F06996 /* CoreMidiInterface.h */; };
+		EC71FA401429CCC500F06996 /* CoreMidiInterface.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC71FA30142991EB00F06996 /* CoreMidiInterface.h */; };
+		EC71FA541429D0B700F06996 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC71FA531429D0B700F06996 /* CoreMIDI.framework */; };
+		EC7D44C313EB17C700BC76A5 /* GuitarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC1FE60213EA277700C2A280 /* GuitarController.h */; };
+		EC7D44C413EB17CB00BC76A5 /* GuitarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC1FE60213EA277700C2A280 /* GuitarController.h */; };
+		ECF50CE11432BC7D001F65B7 /* valid.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2619E94B142C4BE100D78985 /* valid.h */; };
+		ECF50CE21432BC7D001F65B7 /* EHM.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26F0B4F4142B7A0100687AFA /* EHM.h */; };
+		ECF50CE31432BC7D001F65B7 /* RESULT.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26F0B4F5142B7A0100687AFA /* RESULT.h */; };
+		ECF50CE41432BC81001F65B7 /* valid.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2619E94B142C4BE100D78985 /* valid.h */; };
+		ECF50CE51432BC81001F65B7 /* EHM.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26F0B4F4142B7A0100687AFA /* EHM.h */; };
+		ECF50CE61432BC81001F65B7 /* RESULT.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26F0B4F5142B7A0100687AFA /* RESULT.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC8D44071385DB180096575B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = gTarGuitarInterface;
+		};
+		EC8D44211385E4C30096575B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECE889531385A9E900BA4C82;
+			remoteInfo = gTarGuitarInterfaceBuildAll;
+		};
+		EC8D469B13860EA70096575B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECE8893E138598F300BA4C82;
+			remoteInfo = gTarGuitarInterfaceDeploy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EC8D469913860E9E0096575B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${DEPLOY_PATH}/Release/${PROJECT_NAME}/Headers";
+			dstSubfolderSpec = 0;
+			files = (
+				ECF50CE41432BC81001F65B7 /* valid.h in CopyFiles */,
+				ECF50CE51432BC81001F65B7 /* EHM.h in CopyFiles */,
+				ECF50CE61432BC81001F65B7 /* RESULT.h in CopyFiles */,
+				EC71FA401429CCC500F06996 /* CoreMidiInterface.h in CopyFiles */,
+				EC7D44C313EB17C700BC76A5 /* GuitarController.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC8D469A13860EA00096575B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${DEPLOY_PATH}/Debug/${PROJECT_NAME}/Headers";
+			dstSubfolderSpec = 0;
+			files = (
+				ECF50CE11432BC7D001F65B7 /* valid.h in CopyFiles */,
+				ECF50CE21432BC7D001F65B7 /* EHM.h in CopyFiles */,
+				ECF50CE31432BC7D001F65B7 /* RESULT.h in CopyFiles */,
+				EC71FA3F1429CCBF00F06996 /* CoreMidiInterface.h in CopyFiles */,
+				EC7D44C413EB17CB00BC76A5 /* GuitarController.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2619E94B142C4BE100D78985 /* valid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = valid.h; path = ../Common/valid.h; sourceTree = "<group>"; };
+		267CB82C1490B1C2005D663F /* NetSockConn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetSockConn.h; sourceTree = "<group>"; };
+		267CB82D1490B1C2005D663F /* NetSockConn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetSockConn.mm; sourceTree = "<group>"; };
+		26F0B4F4142B7A0100687AFA /* EHM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EHM.h; path = ../Common/EHM.h; sourceTree = "<group>"; };
+		26F0B4F5142B7A0100687AFA /* RESULT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RESULT.h; path = ../Common/RESULT.h; sourceTree = "<group>"; };
+		AA747D9E0F9514B9006C5449 /* gTarGuitarInterface_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarGuitarInterface_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libgTarGuitarInterface.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libgTarGuitarInterface.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC1FE60213EA277700C2A280 /* GuitarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarController.h; sourceTree = "<group>"; };
+		EC1FE60313EA277700C2A280 /* GuitarController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GuitarController.mm; sourceTree = "<group>"; };
+		EC71FA2F142991EB00F06996 /* CoreMidiInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CoreMidiInterface.mm; sourceTree = "<group>"; };
+		EC71FA30142991EB00F06996 /* CoreMidiInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMidiInterface.h; sourceTree = "<group>"; };
+		EC71FA531429D0B700F06996 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC71FA541429D0B700F06996 /* CoreMIDI.framework in Frameworks */,
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libgTarGuitarInterface.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* gTarGuitarInterface */ = {
+			isa = PBXGroup;
+			children = (
+				26F0B4F2142B7A0100687AFA /* RESULT */,
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = gTarGuitarInterface;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC71FA531429D0B700F06996 /* CoreMIDI.framework */,
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EC71FA30142991EB00F06996 /* CoreMidiInterface.h */,
+				EC71FA2F142991EB00F06996 /* CoreMidiInterface.mm */,
+				EC1FE60213EA277700C2A280 /* GuitarController.h */,
+				EC1FE60313EA277700C2A280 /* GuitarController.mm */,
+				267CB82C1490B1C2005D663F /* NetSockConn.h */,
+				267CB82D1490B1C2005D663F /* NetSockConn.mm */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		26F0B4F2142B7A0100687AFA /* RESULT */ = {
+			isa = PBXGroup;
+			children = (
+				2619E94B142C4BE100D78985 /* valid.h */,
+				26F0B4F4142B7A0100687AFA /* EHM.h */,
+				26F0B4F5142B7A0100687AFA /* RESULT.h */,
+			);
+			name = RESULT;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AA747D9E0F9514B9006C5449 /* gTarGuitarInterface_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA747D9F0F9514B9006C5449 /* gTarGuitarInterface_Prefix.pch in Headers */,
+				EC1FE60413EA277700C2A280 /* GuitarController.h in Headers */,
+				EC71FA32142991EC00F06996 /* CoreMidiInterface.h in Headers */,
+				26F0B4F6142B7A0100687AFA /* EHM.h in Headers */,
+				26F0B4F7142B7A0100687AFA /* RESULT.h in Headers */,
+				2619E94C142C4BE100D78985 /* valid.h in Headers */,
+				267CB82E1490B1C2005D663F /* NetSockConn.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* gTarGuitarInterface */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "gTarGuitarInterface" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gTarGuitarInterface;
+			productName = gTarGuitarInterface;
+			productReference = D2AAC07E0554694100DB518D /* libgTarGuitarInterface.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "gTarGuitarInterface" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* gTarGuitarInterface */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* gTarGuitarInterface */,
+				ECE889531385A9E900BA4C82 /* gTarGuitarInterfaceBuildAll */,
+				ECE8893E138598F300BA4C82 /* gTarGuitarInterfaceDeploy */,
+				EC8D469513860E9A0096575B /* gTarGuitarInterfaceDeployHeaders */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ECE889421385990600BA4C82 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "for DEPLOY_CONFIG_NAME in Debug Release \ndo\n\n    DEPLOY_DESTINATION=\"${DEPLOY_PATH}/${DEPLOY_CONFIG_NAME}/${PROJECT_NAME}\"\n\n    rm -rf \"${DEPLOY_DESTINATION}\"\n\n    mkdir \"${DEPLOY_DESTINATION}\"\n\n    lipo -create \\\n    \"${SYMROOT}/${DEPLOY_CONFIG_NAME}-iphonesimulator/lib${PROJECT_NAME}.a\" \\\n    \"${SYMROOT}/${DEPLOY_CONFIG_NAME}-iphoneos/lib${PROJECT_NAME}.a\" \\\n    -output \"${DEPLOY_DESTINATION}/lib${PROJECT_NAME}.a\"\n\ndone";
+		};
+		ECE889571385A9F000BA4C82 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\nxcodebuild -configuration Debug -target ${PROJECT_NAME} -sdk iphoneos SYMROOT=${SYMROOT}\nxcodebuild -configuration Release -target ${PROJECT_NAME} -sdk iphoneos SYMROOT=${SYMROOT}\nxcodebuild -configuration Debug -target ${PROJECT_NAME} -sdk iphonesimulator SYMROOT=${SYMROOT}\nxcodebuild -configuration Release -target ${PROJECT_NAME} -sdk iphonesimulator SYMROOT=${SYMROOT}\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC1FE60513EA277700C2A280 /* GuitarController.mm in Sources */,
+				EC71FA31142991EC00F06996 /* CoreMidiInterface.mm in Sources */,
+				267CB82F1490B1C2005D663F /* NetSockConn.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC8D44081385DB180096575B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC07D0554694100DB518D /* gTarGuitarInterface */;
+			targetProxy = EC8D44071385DB180096575B /* PBXContainerItemProxy */;
+		};
+		EC8D44221385E4C30096575B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECE889531385A9E900BA4C82 /* gTarGuitarInterfaceBuildAll */;
+			targetProxy = EC8D44211385E4C30096575B /* PBXContainerItemProxy */;
+		};
+		EC8D469C13860EA70096575B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECE8893E138598F300BA4C82 /* gTarGuitarInterfaceDeploy */;
+			targetProxy = EC8D469B13860EA70096575B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/gTarGuitarInterface.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = gTarGuitarInterface_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = gTarGuitarInterface;
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/gTarGuitarInterface.dst;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = gTarGuitarInterface_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = gTarGuitarInterface;
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEPLOY_PATH = "${SRCROOT}/../Staticlibs";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEPLOY_PATH = "${SRCROOT}/../Staticlibs";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		EC8D469713860E9A0096575B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EC8D469813860E9A0096575B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		ECE8893F138598F300BA4C82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ECE88940138598F300BA4C82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		ECE889551385A9E900BA4C82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ECE889561385A9E900BA4C82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "gTarGuitarInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "gTarGuitarInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC8D469613860E9A0096575B /* Build configuration list for PBXAggregateTarget "gTarGuitarInterfaceDeployHeaders" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC8D469713860E9A0096575B /* Debug */,
+				EC8D469813860E9A0096575B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECE88941138598F300BA4C82 /* Build configuration list for PBXAggregateTarget "gTarGuitarInterfaceDeploy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECE8893F138598F300BA4C82 /* Debug */,
+				ECE88940138598F300BA4C82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECE889541385A9E900BA4C82 /* Build configuration list for PBXAggregateTarget "gTarGuitarInterfaceBuildAll" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECE889551385A9E900BA4C82 /* Debug */,
+				ECE889561385A9E900BA4C82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

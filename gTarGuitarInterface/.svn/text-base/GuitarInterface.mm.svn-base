@@ -1,0 +1,228 @@
+/*
+ *  GuitarInterface.cpp
+ *  gTarGuitarInterface
+ *
+ *  Created by Marty Greenia on 3/7/11.
+ *  Copyright 2011 IncidentTech. All rights reserved.
+ *
+ */
+
+#include "GuitarInterface.h"
+
+void GuitarInterface::ClearArrays()
+{
+	char allNotesOff[] = { DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF };
+	char allFretsUp[] = { DEVICE_INTERFACE_GUITAR_FRET_UP, DEVICE_INTERFACE_GUITAR_FRET_UP, DEVICE_INTERFACE_GUITAR_FRET_UP, DEVICE_INTERFACE_GUITAR_FRET_UP, DEVICE_INTERFACE_GUITAR_FRET_UP, DEVICE_INTERFACE_GUITAR_FRET_UP };
+	
+	memcpy( m_fretsDownPrevious, allFretsUp, GUITAR_INTERFACE_STRING_COUNT );
+	memcpy( m_fretsDown, allFretsUp, GUITAR_INTERFACE_STRING_COUNT );
+	memcpy( m_notesOnPrevious, allNotesOff , GUITAR_INTERFACE_STRING_COUNT );
+	memcpy( m_notesOn, allNotesOff, GUITAR_INTERFACE_STRING_COUNT );
+}
+
+void GuitarInterface::HandleDeviceOutput()
+{
+	// Save the current values, before we get the new ones.
+	memcpy( m_fretsDownPrevious, m_fretsDown, GUITAR_INTERFACE_STRING_COUNT );
+	memcpy( m_notesOnPrevious, m_notesOn , GUITAR_INTERFACE_STRING_COUNT );
+	
+	//  clear the current notes
+	char allNotesOff[] = { DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF, DEVICE_INTERFACE_GUITAR_NOTE_OFF };
+	memcpy( m_notesOn, allNotesOff, GUITAR_INTERFACE_STRING_COUNT );
+	
+	m_deviceInterface->ReceiveDeviceOutput( m_fretsDown, m_notesOn );
+}
+
+unsigned int GuitarInterface::GetNoteIndexFromString( GuitarString str, GuitarFret fret )
+{
+	// string x fret = 'width' x 'height'
+	return ((str * GUITAR_INTERFACE_FRET_COUNT) + fret);
+}
+
+void GuitarInterface::GetFretsDown( GuitarFret * output )
+{
+	memcpy( output, m_fretsDown, GUITAR_INTERFACE_STRING_COUNT);
+}
+
+void GuitarInterface::GetFretsDownDelta( GuitarFret * output )
+{
+	for ( unsigned int i = 0; i < GUITAR_INTERFACE_STRING_COUNT; i++ )
+	{
+		if ( m_fretsDownPrevious[i] != m_fretsDown[i] )
+		{
+			output[i] = m_fretsDown[i];
+		}
+	}
+}
+
+void GuitarInterface::GetNotesOn( GuitarFret * output )
+{
+	memcpy( output, m_notesOn, GUITAR_INTERFACE_STRING_COUNT );
+}
+
+void GuitarInterface::GetNotesOnDelta( GuitarFret * output )
+{
+	for ( unsigned int i = 0; i < GUITAR_INTERFACE_STRING_COUNT; i++ )
+	{
+		if ( m_notesOnPrevious[i] != m_notesOn[i] )
+		{
+			output[i] = m_notesOn[i];
+		}
+	}
+}
+
+void GuitarInterface::TurnOffLed( GuitarString str, GuitarFret fret )
+{
+	m_deviceInterface->TurnOffLED( str, fret );
+}
+
+void GuitarInterface::TurnOffAllLeds()
+{
+	for ( unsigned int str = 0; str < GUITAR_INTERFACE_STRING_COUNT; str++ )
+	{
+		TurnOffLed(str, 0);
+		usleep(DEVICE_INTERFACE_GUITAR_MESSAGE_DELAY);
+	}
+}
+
+void GuitarInterface::TurnOnLedColor( GuitarString str, GuitarFret fret )
+{
+	m_deviceInterface->TurnOnLEDStringColor( str, fret );
+}
+
+void GuitarInterface::TurnOnLedWhite( GuitarString str, GuitarFret fret )
+{
+	m_deviceInterface->TurnOnLED( str, fret );
+}
+
+
+void GuitarInterface::EnableFretFollow()
+{
+	if ( m_currentState == StateLightningMode )
+	{
+		DisableState();
+	}
+	
+	m_deviceInterface->TurnOnStateFretFollow(3, 0, 0);
+	
+	if ( m_currentState == StateNoteActive )
+	{
+		m_currentState = StateFretFollowNoteActive;
+	}
+	else 
+	{
+		m_currentState = StateFretFollow;
+	}
+}
+
+void GuitarInterface::EnableNoteActive()
+{
+	if ( m_currentState == StateLightningMode )
+	{
+		DisableState();
+	}
+	
+	m_deviceInterface->TurnOnStateNoteActive(3, 0, 0);
+	
+	if ( m_currentState == StateFretFollow )
+	{
+		m_currentState = StateFretFollowNoteActive;
+	}
+	else 
+	{
+		m_currentState = StateNoteActive;
+	}
+}
+
+void GuitarInterface::EnableLightningMode()
+{
+	DisableState();
+	
+	m_deviceInterface->TurnOnStateLightning(3, 0, 0);
+	
+	m_currentState = StateLightningMode;
+
+}
+
+void GuitarInterface::DisableState()
+{
+	switch ( m_currentState )
+	{
+			
+		case StateFretFollow:
+		{
+			m_deviceInterface->TurnOffStateFretFollow();
+		} break;
+			
+		case StateNoteActive:
+		{
+			m_deviceInterface->TurnOffStateNoteActive();
+		} break;
+			
+		case StateFretFollowNoteActive:
+		{
+			m_deviceInterface->TurnOffStateNoteActive();
+			m_deviceInterface->TurnOffStateFretFollow();
+		} break;
+			
+		case StateLightningMode:
+		{
+			m_deviceInterface->TurnOffStateLightning();
+		} break;
+			
+		case StateNone:
+		default:
+		{
+			// nothing
+		} break;
+			
+	}
+}
+
+void GuitarInterface::ChangeStateColor( char red, char green, char blue )
+{
+	switch ( m_currentState )
+	{
+		case StateFretFollow:
+		{
+			//			m_deviceController->TurnOnStateFretFollow(red, green, blue);
+		} break;
+			
+		case StateNoteActive:
+		{
+			m_deviceInterface->TurnOnStateNoteActive(red, green, blue);
+		} break;
+			
+		case StateFretFollowNoteActive:
+		{
+			//			m_deviceController->TurnOnStateFretFollow(red, green, blue);
+			m_deviceInterface->TurnOnStateNoteActive(red, green, blue);
+		} break;
+			
+		case StateLightningMode:
+		{
+			m_deviceInterface->TurnOnStateLightning(red, green, blue);
+		} break;
+			
+		case StateNone:
+		default:
+		{
+			// nothing
+		} break;
+	}		
+}
+
+void GuitarInterface::ChangeFretFollowColor( char red, char green, char blue )
+{
+	m_deviceInterface->TurnOnStateFretFollow(red, green, blue);
+}
+
+void GuitarInterface::ChangeNoteActiveColor( char red, char green, char blue )
+{
+	m_deviceInterface->TurnOnStateNoteActive(red, green, blue);
+}
+
+void GuitarInterface::ChangeLightningColor( char red, char green, char blue )
+{
+	m_deviceInterface->TurnOnStateLightning(red, green, blue);
+}

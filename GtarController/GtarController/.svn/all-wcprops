@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/IncidentTechMain/!svn/ver/879/Software/iPhone/GtarController/GtarController
+END
+EHM.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/IncidentTechMain/!svn/ver/865/Software/iPhone/GtarController/GtarController/EHM.h
+END
+CoreMidiInterface.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/IncidentTechMain/!svn/ver/879/Software/iPhone/GtarController/GtarController/CoreMidiInterface.h
+END
+CoreMidiInterface.mm
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/IncidentTechMain/!svn/ver/879/Software/iPhone/GtarController/GtarController/CoreMidiInterface.mm
+END
+GtarControllerInternal.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/IncidentTechMain/!svn/ver/865/Software/iPhone/GtarController/GtarController/GtarControllerInternal.h
+END
+RESULT.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/IncidentTechMain/!svn/ver/865/Software/iPhone/GtarController/GtarController/RESULT.h
+END
+GtarController-Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/IncidentTechMain/!svn/ver/865/Software/iPhone/GtarController/GtarController/GtarController-Prefix.pch
+END
+valid.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/IncidentTechMain/!svn/ver/865/Software/iPhone/GtarController/GtarController/valid.h
+END
+GtarController.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/IncidentTechMain/!svn/ver/879/Software/iPhone/GtarController/GtarController/GtarController.h
+END
+GtarController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/IncidentTechMain/!svn/ver/879/Software/iPhone/GtarController/GtarController/GtarController.mm
+END
+NetSockConn.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/IncidentTechMain/!svn/ver/865/Software/iPhone/GtarController/GtarController/NetSockConn.h
+END
+NetSockConn.mm
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/IncidentTechMain/!svn/ver/865/Software/iPhone/GtarController/GtarController/NetSockConn.mm
+END

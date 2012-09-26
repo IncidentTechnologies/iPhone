@@ -1,0 +1,164 @@
+//
+//  PlayController.h
+//  gTar
+//
+//  Created by Marty Greenia on 2/21/11.
+//  Copyright 2011 IncidentTech. All rights reserved.
+//
+
+#import "PlayDisplayController.h"
+#import "PlayControllerProgressView.h"
+#import "PlayScoreController.h"
+#import "PlayLcdScoreView.h"
+#import "PlayLcdMultView.h"
+#import "FillGaugeView.h"
+#import "TempoRegulator.h"
+
+#import <SongRecorder.h>
+#import <SongCreator.h>
+#import <ExperienceController.h>
+#import <CloudCache.h>
+
+#import <SongModel.h>
+#import <UserSong.h>
+#import <UserSongs.h>
+#import <UserSongSession.h>
+
+
+enum PlayControllerDifficulty
+{
+    PlayControllerDifficultyEasy,
+    PlayControllerDifficultyMedium,
+    PlayControllerDifficultyHard
+};
+
+enum PlayControllerAccuracy
+{
+    AccuracyStringOnly = 0,
+    AccuracyExactNote
+};
+
+enum PlayControllerTempo
+{
+    TempoNone = 0,
+    TempoAutoAdjust,
+    TempoReal
+};
+
+@interface PlayController : ExperienceController
+{
+    
+    // Provides the OpenGL main screen
+    PlayDisplayController * m_displayController;
+    
+    // SongModel
+    SongModel * m_songModel;
+    
+    // Recorder
+    SongRecorder * m_songRecorder;
+    
+    // Tempo regulator for harder modes
+    TempoRegulator * m_tempoRegulator;
+    
+    // Cloud cache for storing results
+    CloudCache * m_cloudCache;
+    
+    // State for the song we are playing
+    UserSong * m_song;
+    NSString * m_xmpBlob;
+
+    PlayControllerDifficulty m_difficulty;
+    PlayControllerTempo m_tempo;
+    PlayControllerAccuracy m_accuracy;
+    double m_tempoModifier;
+    
+    bool m_penalty;
+    
+    // IB connections
+    IBOutlet PlayView * m_playView;
+
+    IBOutlet UIView * m_blackView;
+    IBOutlet UIView * m_ampView;
+    IBOutlet UIView * m_topmenuView;
+    IBOutlet UIView * m_menuView;
+    IBOutlet UIView * m_scoreView;
+    
+    IBOutlet UIImageView * m_activityIndicator;
+    
+    IBOutlet PlayControllerProgressView * m_progressView;
+    IBOutlet PlayScoreController * m_playScoreController;
+    
+    IBOutlet PlayLcdScoreView * m_lcdScoreView;
+    IBOutlet PlayLcdMultView * m_lcdMultView;
+    IBOutlet FillGaugeView * m_fillGaugeView;
+    
+    IBOutlet UILabel * m_titleLabel;
+    IBOutlet UIButton * m_menuButton;
+    IBOutlet UILabel * m_menuLabel;
+    
+    IBOutlet UIView * m_volumeView;
+    IBOutlet UIButton * m_audioRouteButton;
+    
+    // Misc
+    NSInteger m_inputDelayLoops;
+    
+    double m_chordFrameBegin;
+    
+}
+
+@property (nonatomic, retain) CloudCache * m_cloudCache;
+
+@property (nonatomic, retain) UserSong * m_song;
+@property (nonatomic, retain) NSString * m_xmpBlob;
+
+@property (nonatomic, assign) PlayControllerDifficulty m_difficulty;
+//@property (nonatomic, assign) PlayControllerTempo m_tempo;
+//@property (nonatomic, assign) bool m_penalty;
+//@property (nonatomic, assign) PlayControllerAccuracy m_accuracy;
+@property (nonatomic, assign) double m_tempoModifier;
+
+@property (nonatomic, retain) PlayView * m_playView;
+
+@property (nonatomic, retain) UIView * m_blackView;
+@property (nonatomic, retain) UIView * m_ampView;
+@property (nonatomic, retain) UIView * m_topmenuView;
+@property (nonatomic, retain) UIView * m_menuView;
+@property (nonatomic, retain) UIView * m_scoreView;
+
+@property (nonatomic, retain) UIImageView * m_activityIndicator;
+
+@property (nonatomic, retain) PlayControllerProgressView * m_progressView;
+@property (nonatomic, retain) PlayScoreController * m_playScoreController;
+
+@property (nonatomic, retain) PlayLcdScoreView * m_lcdScoreView;
+@property (nonatomic, retain) PlayLcdMultView * m_lcdMultView;
+@property (nonatomic, retain) FillGaugeView * m_fillGaugeView;
+
+@property (nonatomic, retain) UILabel * m_titleLabel;
+@property (nonatomic, retain) UIButton * m_menuButton;
+@property (nonatomic, retain) UILabel * m_menuLabel;
+
+@property (nonatomic, retain) UIView * m_volumeView;
+@property (nonatomic, retain) UIButton * m_audioRouteButton;
+
+// Button click handlers
+- (IBAction)replayButtonClicked;
+- (IBAction)menuButtonClicked;
+- (IBAction)menuDoneButtonClicked;
+- (IBAction)audioRouteButton;
+
+// Main event loop
+- (void)mainEventLoop;
+- (void)startMainEventLoop;
+- (void)stopMainEventLoop;
+
+- (void)animateModal:(BOOL)popup;
+
+- (void)endOfSong;
+- (void)updateScoreDisplay;
+- (void)displayScoreScreen;
+- (void)uploadUserSongSession;
+- (NSInteger)calculateStars;
+- (void)emitBeepSound;
+
+@end

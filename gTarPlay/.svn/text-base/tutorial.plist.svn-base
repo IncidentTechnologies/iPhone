@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Welcome</key>
+	<dict>
+		<key>Text</key>
+		<array>
+			<string>By default, the gTar plays through your iPhone speaker. You can also plug in headphones (with the included adapter) or connect the gTar to your home stereo/amplifier.</string>
+			<string>You can strum a string with your fingers or the Smart Pick</string>
+			<string>Power on the gTar by pressing the button. Charge the gTar by plugging it into USB power.</string>
+		</array>
+		<key>Images</key>
+		<array>
+			<string>gtarTutorial-01.png</string>
+			<string>gtarTutorial-02.png</string>
+			<string>gtarTutorial-03.png</string>
+		</array>
+	</dict>
+	<key>Play</key>
+	<dict>
+		<key>Text</key>
+		<array>
+			<string>In Play mode you can play your favorite songs. The lights on the neck of the gTar light up to show you where to put your fingers on the fretboard.</string>
+			<string>When a whole string on the gTar lights up, pluck that open string without putting your fingers down on a fret.</string>
+			<string>A single light indicates which note to play. Press down the string at the lit fret position and pluck the string.</string>
+			<string>Multiple lights on at the same time indicate which chord to play. Place your fingers down on all the lights and pluck the corresponding strings.</string>
+			<string>In easy mode, all you have to do is pluck the correct string, regardless of your finger position. If you pluck the incorrect string, you won’t hear the sound through your speaker.</string>
+			<string>In medium mode, you must pluck the correct string while pressing your fingers to the correct frets. You will not hear incorrect notes played.</string>
+			<string>In hard mode, you must pluck the correct string, have your fingers down on the correct frets, and play with the tempo of the song. Upcoming notes will blink to indicate when it is time to play them.</string>
+			<string>Now you’re ready to start playing! Pick up your gTar and go for it!</string>
+		</array>
+		<key>Images</key>
+		<array>
+			<string></string>
+			<string>gtarTutorial-04.png</string>
+			<string>gtarTutorial-05.png</string>
+			<string>gtarTutorial-06.png</string>
+			<string></string>
+			<string></string>
+			<string></string>
+			<string></string>
+		</array>
+	</dict>
+	<key>FreePlay</key>
+	<dict>
+		<key>Images</key>
+		<array>
+			<string></string>
+		</array>
+		<key>Text</key>
+		<array>
+			<string>Freestyle lets you play whatever you want without the lights as a guide. Several different effects are available from the menu.</string>
+		</array>
+	</dict>
+	<key>Store</key>
+	<dict>
+		<key>Images</key>
+		<array>
+			<string></string>
+			<string></string>
+		</array>
+		<key>Text</key>
+		<array>
+			<string>You can purchase new songs for your gTar from the Incident Store. Songs purchased here will be permanently added to your gTar account.</string>
+			<string>If there are credits in your account, those will automatically be used towards the purchase of new songs.</string>
+		</array>
+	</dict>
+</dict>
+</plist>
