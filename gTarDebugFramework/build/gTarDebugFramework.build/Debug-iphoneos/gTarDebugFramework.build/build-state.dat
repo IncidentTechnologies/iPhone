@@ -1,187 +1,0 @@
-TgTarDebugFramework
-v7
-r0
-t320720950.758592
-cCheck dependencies
-cProcessPCH /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-bkoehnkolyohgvedallfxqulfjnb/gTarDebugFramework_Prefix.pch.gch gTarDebugFramework_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-cProcessPCH /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-detzoshcmdixcabtxocppafomibr/gTarDebugFramework_Prefix.pch.gch gTarDebugFramework_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/gTarDebug.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/gTarDebug.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-cLibtool /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/libgTarDebugFramework.a normal armv7
-cLibtool /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/libgTarDebugFramework.a normal armv6
-cCreateUniversalBinary /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos/libgTarDebugFramework.a normal "armv6 armv7"
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk
-c000000004CC7DC9E0000000000000110
-t1288166558
-s272
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004CC10F4700000000003E1F20
-t1287720775
-s4071200
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004CC10F1C0000000000001466
-t1287720732
-s5222
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/GameKit.framework/GameKit
-c000000004CC129A40000000000289BB0
-t1287727524
-s2661296
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/GameKit.framework/Headers/GameKit.h
-c000000004CC129850000000000000348
-t1287727493
-s840
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos/libgTarDebugFramework.a
-t1299028150
-s72240
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/gTarDebug.o
-t1299028150
-s35316
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/gTarDebugFramework.LinkFileList
-c000000004D6D98B600000000000000AD
-t1299028150
-s173
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/libgTarDebugFramework.a
-t1299028150
-s36392
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/gTarDebug.o
-t1299028150
-s34724
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/gTarDebugFramework.LinkFileList
-c000000004D6D98B600000000000000AD
-t1299028150
-s173
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/libgTarDebugFramework.a
-t1299028150
-s35800
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.h
-c000000004D66EA9D0000000000000892
-t1298590365
-s2194
-i<Foundation/Foundation.h>
-i<GameKit/GameKit.h>
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m
-c000000004D66EA9D0000000000001D01
-t1298590365
-s7425
-i"gTarDebug.h"
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebugFramework_Prefix.pch
-c000000004D66EA9D00000000000000BC
-t1298590365
-s188
-i<Foundation/Foundation.h>
-
-N/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-bkoehnkolyohgvedallfxqulfjnb/gTarDebugFramework_Prefix.pch.gch
-t1299028150
-s6736452
-
-N/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-detzoshcmdixcabtxocppafomibr/gTarDebugFramework_Prefix.pch.gch
-t1299028150
-s7199300
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies320720949#320720950#0(0"0(0#1#0"9007637348679712#0"0#
-
-CCompileC build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/gTarDebug.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s320720950.607513
-e320720950.728177
-r1
-xCompileC
-xbuild/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/gTarDebug.o
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m:346: warning: incomplete implementation of class 'gTarDebug'
-o/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m:346: warning: method definition for '-ledOffLedString:andFret:' not found
-lSLF07#2@88"Compile /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m320720950#320720950#0(297"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m:346: warning: incomplete implementation of class 'gTarDebug'/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m:346: warning: method definition for '-ledOffLedString:andFret:' not found2(22@46"Incomplete implementation of class 'gTarDebug'320720950#0#142#0(6@80"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m320283165#346#0#346#0#38"incomplete implementation of class '*'0(22@59"Method definition for '-ledOffLedString:andFret:' not found320720950#142#155#0(6@80"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m320283165#346#0#346#0#35"method definition for '*' not found0(0#0#80"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m8673116224#2283"    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-project-headers.hmap -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/DerivedSources/armv6 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/DerivedSources -include /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-bkoehnkolyohgvedallfxqulfjnb/gTarDebugFramework_Prefix.pch -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/gTarDebug.o0#
-
-CCompileC build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/gTarDebug.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-s320720950.609170
-e320720950.722101
-r1
-xCompileC
-xbuild/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/gTarDebug.o
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m:346: warning: incomplete implementation of class 'gTarDebug'
-o/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m:346: warning: method definition for '-ledOffLedString:andFret:' not found
-lSLF07#2@88"Compile /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m320720950#320720950#0(297"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m:346: warning: incomplete implementation of class 'gTarDebug'/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m:346: warning: method definition for '-ledOffLedString:andFret:' not found2(22@46"Incomplete implementation of class 'gTarDebug'320720950#0#142#0(6@80"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m320283165#346#0#346#0#38"incomplete implementation of class '*'0(22@59"Method definition for '-ledOffLedString:andFret:' not found320720950#142#155#0(6@80"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m320283165#346#0#346#0#35"method definition for '*' not found0(0#0#80"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m8665753984#2283"    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-project-headers.hmap -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/DerivedSources/armv7 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/DerivedSources -include /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-detzoshcmdixcabtxocppafomibr/gTarDebugFramework_Prefix.pch -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebug.m -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/gTarDebug.o0#
-
-CCreateUniversalBinary /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos/libgTarDebugFramework.a normal "armv6 armv7"
-s320720950.753816
-e320720950.758550
-r1
-xCreateUniversalBinary
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos/libgTarDebugFramework.a
-xnormal
-xarmv6 armv7
-lSLF07#2@87"CreateUniversalBinary build/Debug-iphoneos/libgTarDebugFramework.a normal "armv6 armv7"320720950#320720950#0(0"0(0#0#80"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/armv6 armv78667249504#764"    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/libgTarDebugFramework.a /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/libgTarDebugFramework.a -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos/libgTarDebugFramework.a0#
-
-CLibtool /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/libgTarDebugFramework.a normal armv6
-s320720950.728271
-e320720950.753757
-r1
-xLibtool
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/libgTarDebugFramework.a
-xnormal
-xarmv6
-o/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
-lSLF07#2@136"Libtool build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/libgTarDebugFramework.a normal armv6320720950#320720950#0(129"/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 0(0#0#0"8669407232#948"    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework    setenv IPHONEOS_DEPLOYMENT_TARGET 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static -arch_only armv6 -syslibroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -L/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos -filelist /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/gTarDebugFramework.LinkFileList -ObjC -framework Foundation -framework GameKit -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv6/libgTarDebugFramework.a0#
-
-CLibtool /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/libgTarDebugFramework.a normal armv7
-s320720950.722183
-e320720950.753502
-r1
-xLibtool
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/libgTarDebugFramework.a
-xnormal
-xarmv7
-o/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
-lSLF07#2@136"Libtool build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/libgTarDebugFramework.a normal armv7320720950#320720950#0(129"/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 0(0#0#0"8663332896#948"    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework    setenv IPHONEOS_DEPLOYMENT_TARGET 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static -arch_only armv7 -syslibroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -L/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos -filelist /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/gTarDebugFramework.LinkFileList -ObjC -framework Foundation -framework GameKit -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/Objects-normal/armv7/libgTarDebugFramework.a0#
-
-CProcessPCH /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-bkoehnkolyohgvedallfxqulfjnb/gTarDebugFramework_Prefix.pch.gch gTarDebugFramework_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-s320720950.041586
-e320720950.607333
-r1
-xProcessPCH
-x/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-bkoehnkolyohgvedallfxqulfjnb/gTarDebugFramework_Prefix.pch.gch
-xgTarDebugFramework_Prefix.pch
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@40"Precompile gTarDebugFramework_Prefix.pch320720950#320720950#0(0"0(0#0#98"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebugFramework_Prefix.pch3276484617421606912#2130"    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-project-headers.hmap -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/DerivedSources/armv6 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/DerivedSources -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebugFramework_Prefix.pch -o /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-bkoehnkolyohgvedallfxqulfjnb/gTarDebugFramework_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-detzoshcmdixcabtxocppafomibr/gTarDebugFramework_Prefix.pch.gch gTarDebugFramework_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
-s320720950.042637
-e320720950.562261
-r1
-xProcessPCH
-x/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-detzoshcmdixcabtxocppafomibr/gTarDebugFramework_Prefix.pch.gch
-xgTarDebugFramework_Prefix.pch
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@40"Precompile gTarDebugFramework_Prefix.pch320720950#320720950#0(0"0(0#0#98"/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebugFramework_Prefix.pch8676235072#2130"    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/gTarDebugFramework-project-headers.hmap -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/Debug-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/DerivedSources/armv7 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/build/gTarDebugFramework.build/Debug-iphoneos/gTarDebugFramework.build/DerivedSources -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarDebugFramework/gTarDebugFramework_Prefix.pch -o /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarDebugFramework_Prefix-detzoshcmdixcabtxocppafomibr/gTarDebugFramework_Prefix.pch.gch0#
-
