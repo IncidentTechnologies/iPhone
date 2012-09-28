@@ -34,6 +34,13 @@ static const NSInteger GtarLedCount = 96;
 static const NSInteger GtarMaxLedIntensity = 3;
 
 /*!
+ @abstract The maximum pluck velocity.
+ @discussion When a string is plucked, its velocity is given a number from [0..GtarMaxPluckVelocity],
+ where 0 is off and 'GtarMaxPluckVelocity' is full speed.
+ */
+static const NSInteger GtarMaxPluckVelocity = 127;
+
+/*!
  @abstract A guitar string.
  @discussion A data type representing a string on the Gtar. The range of string values are [1..GtarStringCount], 
  corresponding to the strings of the Gtar device.
@@ -55,6 +62,12 @@ typedef unsigned char GtarFret;
 typedef unsigned char GtarLedIntensity;
 
 /*!
+ @abstract A pluck velocity.
+ @discussion A data type representing the velocity of a guitar pluc. Acceptable values are in the range [0..GtarMaxPluckVelocity].
+ */
+typedef unsigned char GtarPluckVelocity;
+
+/*!
  @abstract A position on the fretboard.
  @discussion A GtarPosition is a string-fret pair, often used as a representation for a plucked note from the Gtar. The range
  of 'fret' and 'string' is [1..GtarFretCount] and [1..GtarStringCount] respectively. A 'fret' value of
@@ -67,7 +80,19 @@ typedef struct
     GtarFret fret;
     GtarString string;
 } GtarPosition;
-//typedef struct GtarPluck GtarPluck;
+
+/*!
+ @abstract A pluck on the guitar.
+ @discussion A GtarPluck combines a GtarPosition (string-fret pair) with a GtarVelocity corresponding to the velocity
+ of the pluck.
+ @field position The GtarPosition of this pluck.
+ @field string The GtarPluckVelocity of this pluck.
+ */
+typedef struct
+{
+    GtarPosition position;
+    GtarPluckVelocity velocity;
+} GtarPluck;
 
 /*!
  @abstract The RGB color components of a guitar LED.

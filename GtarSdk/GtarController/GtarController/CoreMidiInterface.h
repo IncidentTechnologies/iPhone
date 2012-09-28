@@ -21,6 +21,9 @@ typedef enum GTAR_MSG_TYPE
     GTAR_MSG_REQ_CERT_DOWNLOAD = 0x03,
     GTAR_MSG_REQ_FW_VERSION = 0x04,
     GTAR_MSG_DWLD_FW_PAGE = 0x05,
+    GTAR_MSG_DBG_ENABLE = 0x11,
+    GTAR_MSG_DBG_DISABLE = 0x12,
+    GTAR_MSG_REQ_BAT_STATUS = 0x0E,
     GTAR_MSG_INVALID
 } gTarMsgType;
 
@@ -58,9 +61,14 @@ void MIDIReadHandler(const MIDIPacketList *pPacketList, void *pReadProcCon, void
 - (BOOL)sendBuffer:(unsigned char*)buffer withLength:(int)bufferLength;
 - (BOOL)sendSysExBuffer:(unsigned char*)buffer withLength:(int)bufferLength;
 
-// Send API
+// Effects
 - (BOOL)sendSetNoteActiveRed:(unsigned char)red andGreen:(unsigned char) green andBlue:(unsigned char)blue;
 - (BOOL)sendSetFretFollowRed:(unsigned char)red andGreen:(unsigned char)green andBlue:(unsigned char)blue;
+
+// Requests
+- (BOOL)sendRequestBatteryStatus;
+- (BOOL)sendEnableDebug;
+- (BOOL)sendDisableDebug;
 
 - (BOOL)sendRequestCertDownload;
 - (BOOL)sendRequestFirmwareVersion;

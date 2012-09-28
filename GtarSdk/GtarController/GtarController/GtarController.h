@@ -116,11 +116,11 @@ typedef enum GtarControllerEffect GtarControllerEffect;
 
 /*!
  @abstract Note on notifications.
- @param position The position where the note on event occurred.
+ @param pluck The pluck that occurred.
  @discussion This function is called when a user plucks a note. If a string is plucked while no frets have been pressed 
-    (the "open string"), the 'fret' value will be 0. This is a normal and valid value.
+    (the "open string"), the 'fret' value in GtarPosition will be 0. This is a normal and valid value.
  */
-- (void)gtarNoteOn:(GtarPosition)position;
+- (void)gtarNoteOn:(GtarPluck)pluck;
 
 /*!
  @abstract Note off notification.

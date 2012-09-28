@@ -81,6 +81,9 @@ typedef enum GTAR_RX_MSG_TYPE
 //- (RESULT)ccTurnOnLedWithColorMappingAtString:(GtarString)str andFret:(GtarFret)fret;
 
 // Requests
+- (BOOL)sendRequestBatteryStatus;
+- (BOOL)sendEnableDebug;
+- (BOOL)sendDisableDebug;
 - (BOOL)sendRequestFirmwareVersion;
 - (BOOL)sendFirmwarePackagePage:(void*)pBuffer bufferSize:(int)pBuffer_n fwSize:(int)fwSize fwPages:(int)fwPages curPage:(int)curPage withCheckSum:(unsigned char)checkSum;
 

@@ -242,6 +242,7 @@
         {
             
             unsigned char fret = [m_coreMidiInterface getFretFromMidiNote:data[1] andString:(str-1)];
+            unsigned char velocity = data[2];
             
             if ( [self checkNoteInterarrivalTime:currentTime forFret:fret andString:str] == YES )
             {
@@ -250,6 +251,7 @@
                 [responseDictionary setValue:@"notifyObserversGtarNoteOn" forKey:@"Selector"];
                 [responseDictionary setValue:[[NSNumber alloc] initWithChar:fret] forKey:@"Fret"];
                 [responseDictionary setValue:[[NSNumber alloc] initWithChar:str] forKey:@"String"];
+                [responseDictionary setValue:[[NSNumber alloc] initWithChar:velocity] forKey:@"Velocity"];
                 
                 [self midiCallbackDispatch:responseDictionary];
                 
@@ -335,6 +337,11 @@
 
 - (void)midiCallbackDispatch:(NSDictionary*)dictionary
 {
+    
+    // Hold onto the dictionary before we queue up a worker thread.
+    // This is primarily important for the async case.
+    [dictionary retain];
+
     if ( m_responseThread == GtarControllerThreadMain )
     {
         // This queues up request asynchronously
@@ -354,6 +361,10 @@
     SEL selector = NSSelectorFromString(selectorString);
     
     [self performSelector:selector withObject:dictionary];
+    
+    // Release the dictionary that was retained in the dispatcher.
+    // This is primarily important for the async case.
+    [dictionary release];
     
 }
 
@@ -439,11 +450,13 @@
     
     NSNumber * fretNumber = [dictionary objectForKey:@"Fret"];
     NSNumber * stringNumber = [dictionary objectForKey:@"String"];
+    NSNumber * velocityNumber = [dictionary objectForKey:@"Velocity"];
     
-    GtarPosition gtarPosition;
+    GtarPluck gtarPluck;
     
-    gtarPosition.fret = [fretNumber integerValue];
-    gtarPosition.string = [stringNumber integerValue];
+    gtarPluck.position.fret = [fretNumber integerValue];
+    gtarPluck.position.string = [stringNumber integerValue];
+    gtarPluck.velocity = [velocityNumber integerValue];
     
     for ( NSValue * nonretainedObserver in m_observerList )
     {
@@ -451,7 +464,7 @@
         
         if ( [observer respondsToSelector:@selector(gtarNoteOn:)] == YES )
         {
-            [observer gtarNoteOn:gtarPosition];
+            [observer gtarNoteOn:gtarPluck];
         }
     }
 }
@@ -1048,6 +1061,108 @@
 #endif
 
 #pragma mark - Requests
+
+- (BOOL)sendRequestBatteryStatus
+{
+    
+    if ( m_spoofed == YES )
+    {
+        [self logMessage:@"SendRequestBatteryStatus: Connection spoofed, no-op"
+              atLogLevel:GtarControllerLogLevelInfo];
+        return NO;
+    }
+    else if ( m_connected == NO )
+    {
+        [self logMessage:@"SendRequestBatteryStatus: Not connected"
+              atLogLevel:GtarControllerLogLevelWarn];
+        return NO;
+    }
+    else if ( m_coreMidiInterface == nil )
+    {
+        [self logMessage:@"SendRequestBatteryStatus: CoreMidiInterface is invalid"
+              atLogLevel:GtarControllerLogLevelError];
+        return NO;
+    }
+    
+    BOOL result = [m_coreMidiInterface sendRequestBatteryStatus];
+    
+    if ( result == NO )
+    {
+        [self logMessage:@"SendRequestBatteryStatus: SendRequestBatteryStatus failed"
+              atLogLevel:GtarControllerLogLevelError];
+    }
+    
+    return result;
+
+}
+
+- (BOOL)sendEnableDebug
+{
+    
+    if ( m_spoofed == YES )
+    {
+        [self logMessage:@"SendEnableDebug: Connection spoofed, no-op"
+              atLogLevel:GtarControllerLogLevelInfo];
+        return NO;
+    }
+    else if ( m_connected == NO )
+    {
+        [self logMessage:@"SendEnableDebug: Not connected"
+              atLogLevel:GtarControllerLogLevelWarn];
+        return NO;
+    }
+    else if ( m_coreMidiInterface == nil )
+    {
+        [self logMessage:@"SendEnableDebug: CoreMidiInterface is invalid"
+              atLogLevel:GtarControllerLogLevelError];
+        return NO;
+    }
+    
+    BOOL result = [m_coreMidiInterface sendEnableDebug];
+    
+    if ( result == NO )
+    {
+        [self logMessage:@"SendEnableDebug: SendEnableDebug failed"
+              atLogLevel:GtarControllerLogLevelError];
+    }
+    
+    return result;
+
+}
+
+- (BOOL)sendDisableDebug
+{
+    
+    if ( m_spoofed == YES )
+    {
+        [self logMessage:@"SendDisableDebug: Connection spoofed, no-op"
+              atLogLevel:GtarControllerLogLevelInfo];
+        return NO;
+    }
+    else if ( m_connected == NO )
+    {
+        [self logMessage:@"SendDisableDebug: Not connected"
+              atLogLevel:GtarControllerLogLevelWarn];
+        return NO;
+    }
+    else if ( m_coreMidiInterface == nil )
+    {
+        [self logMessage:@"SendDisableDebug: CoreMidiInterface is invalid"
+              atLogLevel:GtarControllerLogLevelError];
+        return NO;
+    }
+    
+    BOOL result = [m_coreMidiInterface sendDisableDebug];
+    
+    if ( result == NO )
+    {
+        [self logMessage:@"SendDisableDebug: SendDisableDebug failed"
+              atLogLevel:GtarControllerLogLevelError];
+    }
+    
+    return result;
+
+}
 
 - (BOOL)sendRequestFirmwareVersion
 {

@@ -514,6 +514,68 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     return result;
 }
 
+#pragma mark - State Requests
+
+- (BOOL)sendRequestBatteryStatus
+{
+    
+    int sendBufferLength = 3;
+    unsigned char sendBuffer[sendBufferLength];
+    
+    sendBuffer[0] = 0xF0; // SysEx Message
+    sendBuffer[1] = GTAR_DEVICE_ID;
+    sendBuffer[2] = (unsigned char)GTAR_MSG_REQ_BAT_STATUS;
+    //sendBuffer[4] = 0xF7; // End SysEx Message  
+    
+    BOOL result = [self sendSysExBuffer:sendBuffer withLength:sendBufferLength];
+    
+    [m_gtarController logMessage:[NSString stringWithFormat:@"SendRequestBatteryStatus: Failed to send SysEx Buffer"]
+                      atLogLevel:GtarControllerLogLevelError];
+    
+    return result;
+
+}
+
+- (BOOL)sendEnableDebug
+{
+    
+    int sendBufferLength = 3;
+    unsigned char sendBuffer[sendBufferLength];
+    
+    sendBuffer[0] = 0xF0; // SysEx Message
+    sendBuffer[1] = GTAR_DEVICE_ID;
+    sendBuffer[2] = (unsigned char)GTAR_MSG_DBG_ENABLE;
+    //sendBuffer[4] = 0xF7; // End SysEx Message  
+    
+    BOOL result = [self sendSysExBuffer:sendBuffer withLength:sendBufferLength];
+    
+    [m_gtarController logMessage:[NSString stringWithFormat:@"SendEnableDebug: Failed to send SysEx Buffer"]
+                      atLogLevel:GtarControllerLogLevelError];
+    
+    return result;
+    
+}
+
+- (BOOL)sendDisableDebug
+{
+    
+    int sendBufferLength = 3;
+    unsigned char sendBuffer[sendBufferLength];
+    
+    sendBuffer[0] = 0xF0; // SysEx Message
+    sendBuffer[1] = GTAR_DEVICE_ID;
+    sendBuffer[2] = (unsigned char)GTAR_MSG_DBG_DISABLE;
+    //sendBuffer[4] = 0xF7; // End SysEx Message  
+    
+    BOOL result = [self sendSysExBuffer:sendBuffer withLength:sendBufferLength];
+    
+    [m_gtarController logMessage:[NSString stringWithFormat:@"SendDisableDebug: Failed to send SysEx Buffer"]
+                      atLogLevel:GtarControllerLogLevelError];
+    
+    return result;
+
+}
+
 #pragma mark - Firmware and Certs
 
 - (BOOL)sendRequestCertDownload
