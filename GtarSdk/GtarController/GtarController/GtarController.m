@@ -40,22 +40,6 @@
         
         m_responseThread = GtarControllerThreadMain;
         
-        // set a default color mapping
-//        char stringColorMap[6][3] = 
-//        {
-//            {3, 0, 0},
-//            {2, 1, 0},
-//            {3, 3, 0},
-//            {0, 3, 0},
-//            {0, 0, 3},
-//            {2, 0, 2}
-//        };
-//        
-//        for ( GtarString str = 0; str < GtarControllerStringCount; str++ )
-//        {
-//            [self setStringColorMapping:str toRed:stringColorMap[str][0] andGreen:stringColorMap[str][1] andBlue:stringColorMap[str][2]];
-//        }
-        
         // Set a default color map
         GtarLedColorMap colorMap;
         

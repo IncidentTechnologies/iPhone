@@ -3,8 +3,8 @@
     Common constants and macros used througout the Gtar SDK
  @author Marty Greenia
  @copyright Incident Technologies.
- @version 0.4
- @updated 2012-06-28
+ @version 1.0.5
+ @updated 2012-09-28
  @unsorted
  */
 
@@ -63,7 +63,7 @@ typedef unsigned char GtarLedIntensity;
 
 /*!
  @abstract A pluck velocity.
- @discussion A data type representing the velocity of a guitar pluc. Acceptable values are in the range [0..GtarMaxPluckVelocity].
+ @discussion A data type representing the velocity of a guitar pluck. Acceptable values are in the range [0..GtarMaxPluckVelocity].
  */
 typedef unsigned char GtarPluckVelocity;
 
@@ -86,7 +86,7 @@ typedef struct
  @discussion A GtarPluck combines a GtarPosition (string-fret pair) with a GtarVelocity corresponding to the velocity
  of the pluck.
  @field position The GtarPosition of this pluck.
- @field string The GtarPluckVelocity of this pluck.
+ @field velocity The GtarPluckVelocity of this pluck.
  */
 typedef struct
 {
@@ -134,8 +134,8 @@ typedef struct
 /*!
  @abstract A string-to-GtarLedColor color mapping.
  @discussion Define a per-string default color mapping. Each GtarLedColor in the 'stringColor' array maps to a string of
- the Gtar device. Note that C-style arrays are 0-based while GtarStrings are 1-based, so 'stringColor' index [0..GtarStringCount-1]
- maps to GtarString [1..GtarStringCount].
+ the Gtar device. Note that 'stringColor' is a 0-based, C-style array, while GtarStrings are 1-based. So 'stringColor' ranges 
+ from [0..GtarStringCount-1] and maps to string [1..GtarStringCount].
  @field stringColor Each string of the Gtar device has a GtarLedColor intensity associated with it.
  */
 typedef struct

@@ -217,7 +217,7 @@ function disclosure_triangle(elt) {
 </tr>
 <tr>
 <td scope="row"><b>Version:</b></td>
-<td><div style="margin-bottom:1px"><div class="content_text">0.4</div></div></td>
+<td><div style="margin-bottom:1px"><div class="content_text">1.0.5</div></div></td>
 </tr>
 </table></div>
 <h2>Introduction</h2>
@@ -225,7 +225,7 @@ function disclosure_triangle(elt) {
 </p>
 <dl>
 <dt><b>Updated:</b></dt>
-<dd>Thursday, June 28, 2012</dd>
+<dd>Friday, September 28, 2012</dd>
 </dl>
 <hr class="afterClassOrHeaderInfo">
 <br><a name="HeaderDoc_functions"></a>
@@ -297,6 +297,9 @@ function disclosure_triangle(elt) {
 <dt><tt><a href="index.html#//apple_ref/c/data/Gtar.h/GtarMaxLedIntensity" target="_top">GtarMaxLedIntensity</a></tt></dt>
 <dd><p>The maximum LED intensity.
 </p></dd>
+<dt><tt><a href="index.html#//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity" target="_top">GtarMaxPluckVelocity</a></tt></dt>
+<dd><p>The maximum pluck velocity.
+</p></dd>
 </dl>
 <hr class="betweenAPIEntries">
 <!-- headerDoc=data;  uid=//apple_ref/c/data/Gtar.h/GtarStringCount;   name=GtarStringCount --><a name="//apple_ref/c/data/Gtar.h/GtarStringCount"></a>
@@ -355,6 +358,21 @@ function disclosure_triangle(elt) {
 where 0 is off and 'GtarMaxLedIntensity' is full brightness.
 <!-- headerDoc=discussion;uid=//apple_ref/c/data/Gtar.h/GtarMaxLedIntensity;name=end --><!-- end discussion -->
 </p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=data;  uid=//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity;   name=GtarMaxPluckVelocity --><a name="//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity"></a>
+<h3><a name="GtarMaxPluckVelocity">GtarMaxPluckVelocity</a></h3>
+<hr class="afterName">
+<p><!-- headerDoc=abstract;uid=//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity;name=start --><!-- begin abstract --></p>
+<p>The maximum pluck velocity.
+<!-- end abstract --><!-- headerDoc=abstract;uid=//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity;name=end --></p>
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity;name=start --><span class="keyword">static</span> <span class="keyword">const</span> <!-- a logicalPath="//apple_ref/c/cl/NSInteger //apple_ref/c/tdef/NSInteger //apple_ref/c/tag/NSInteger //apple_ref/c/struct/NSInteger //apple_ref/c/intf/NSInteger //apple_ref/doc/anysymbol/NSInteger" machineGenerated="true" --><span class="type">NSInteger</span><!-- /a --> <a machinegenerated="true" href="index.html#//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity" logicalPath="//apple_ref/c/cl/GtarMaxPluckVelocity //apple_ref/c/tdef/GtarMaxPluckVelocity //apple_ref/c/tag/GtarMaxPluckVelocity //apple_ref/c/struct/GtarMaxPluckVelocity //apple_ref/c/intf/GtarMaxPluckVelocity //apple_ref/doc/anysymbol/GtarMaxPluckVelocity" target="_top"><span class="type">GtarMaxPluckVelocity</span></a> = <span class="number">127</span>;  <!-- headerDoc=declaration;uid=//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity;name=start --><p>When a string is plucked, its velocity is given a number from [0..GtarMaxPluckVelocity],
+where 0 is off and 'GtarMaxPluckVelocity' is full speed.
+<!-- headerDoc=discussion;uid=//apple_ref/c/data/Gtar.h/GtarMaxPluckVelocity;name=end --><!-- end discussion -->
+</p>
 <hr class="betweenSections">
 <a name="HeaderDoc_datatypes"></a>
 <h2 class="h2tight">Typedefs</h2>
@@ -368,8 +386,14 @@ where 0 is off and 'GtarMaxLedIntensity' is full brightness.
 <dt><tt><a href="index.html#//apple_ref/c/tdef/GtarLedIntensity" target="_top">GtarLedIntensity</a></tt></dt>
 <dd><p>An LED intensity value.
 </p></dd>
+<dt><tt><a href="index.html#//apple_ref/c/tdef/GtarPluckVelocity" target="_top">GtarPluckVelocity</a></tt></dt>
+<dd><p>A pluck velocity.
+</p></dd>
 <dt><tt><a href="index.html#//apple_ref/c/tdef/GtarPosition" target="_top">GtarPosition</a></tt></dt>
 <dd><p>A position on the fretboard.
+</p></dd>
+<dt><tt><a href="index.html#//apple_ref/c/tdef/GtarPluck" target="_top">GtarPluck</a></tt></dt>
+<dd><p>A pluck on the guitar.
 </p></dd>
 <dt><tt><a href="index.html#//apple_ref/c/tdef/GtarLedColor" target="_top">GtarLedColor</a></tt></dt>
 <dd><p>The RGB color components of a guitar LED.
@@ -424,6 +448,20 @@ without any fret being pressed. This is a common and valid value.
 <!-- headerDoc=discussion;uid=//apple_ref/c/tdef/GtarLedIntensity;name=end --><!-- end discussion -->
 </p>
 <hr class="betweenAPIEntries">
+<!-- headerDoc=tdef;  uid=//apple_ref/c/tdef/GtarPluckVelocity;   name=GtarPluckVelocity --><a name="//apple_ref/c/tdef/GtarPluckVelocity"></a>
+<h3><a name="GtarPluckVelocity">GtarPluckVelocity</a></h3>
+<hr class="afterName">
+<p><!-- headerDoc=abstract;uid=//apple_ref/c/tdef/GtarPluckVelocity;name=start --><!-- begin abstract --></p>
+<p>A pluck velocity.
+<!-- end abstract --><!-- headerDoc=abstract;uid=//apple_ref/c/tdef/GtarPluckVelocity;name=end --></p>
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/c/tdef/GtarPluckVelocity;name=start --><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <!-- a logicalPath="//apple_ref/c/cl/char //apple_ref/c/tdef/char //apple_ref/c/tag/char //apple_ref/c/struct/char //apple_ref/c/intf/char //apple_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <!-- a logicalPath="//apple_ref/c/econst/GtarPluckVelocity //apple_ref/c/data/GtarPluckVelocity //apple_ref/c/clconst/GtarPluckVelocity " machineGenerated="true" --><span class="var">GtarPluckVelocity</span><!-- /a -->;  <!-- headerDoc=declaration;uid=//apple_ref/c/tdef/GtarPluckVelocity;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/c/tdef/GtarPluckVelocity;name=start --><p>A data type representing the velocity of a guitar pluck. Acceptable values are in the range [0..GtarMaxPluckVelocity].
+<!-- headerDoc=discussion;uid=//apple_ref/c/tdef/GtarPluckVelocity;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
 <!-- headerDoc=tdef;  uid=//apple_ref/c/tdef/GtarPosition;   name=GtarPosition --><a name="//apple_ref/c/tdef/GtarPosition"></a>
 <h3><a name="GtarPosition">GtarPosition</a></h3>
 <hr class="afterName">
@@ -458,6 +496,41 @@ without any fret being pressed. This is a common and valid value.
 of 'fret' and 'string' is [1..GtarFretCount] and [1..GtarStringCount] respectively. A 'fret' value of
 0 is a special value for the 'open-string', when a string is plucked without any fret being pressed.
 <!-- headerDoc=discussion;uid=//apple_ref/c/tdef/GtarPosition;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=tdef;  uid=//apple_ref/c/tdef/GtarPluck;   name=GtarPluck --><a name="//apple_ref/c/tdef/GtarPluck"></a>
+<h3><a name="GtarPluck">GtarPluck</a></h3>
+<hr class="afterName">
+<p><!-- headerDoc=abstract;uid=//apple_ref/c/tdef/GtarPluck;name=start --><!-- begin abstract --></p>
+<p>A pluck on the guitar.
+<!-- end abstract --><!-- headerDoc=abstract;uid=//apple_ref/c/tdef/GtarPluck;name=end --></p>
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/c/tdef/GtarPluck;name=start --><span class="keyword">typedef</span> <span class="keyword">struct</span> { 
+    <a machinegenerated="true" href="index.html#//apple_ref/c/tdef/GtarPosition" logicalPath="//apple_ref/c/cl/GtarPosition //apple_ref/c/tdef/GtarPosition" target="_top"><span class="type">GtarPosition</span></a> <!-- a logicalPath="//apple_ref/c/econst/position //apple_ref/c/data/position //apple_ref/c/clconst/position " machineGenerated="true" --><span class="var">position</span><!-- /a -->; 
+    <a machinegenerated="true" href="index.html#//apple_ref/c/tdef/GtarPluckVelocity" logicalPath="//apple_ref/c/cl/GtarPluckVelocity //apple_ref/c/tdef/GtarPluckVelocity" target="_top"><span class="type">GtarPluckVelocity</span></a> <!-- a logicalPath="//apple_ref/c/econst/velocity //apple_ref/c/data/velocity //apple_ref/c/clconst/velocity " machineGenerated="true" --><span class="var">velocity</span><!-- /a -->; 
+} <!-- a logicalPath="//apple_ref/c/econst/GtarPluck //apple_ref/c/data/GtarPluck //apple_ref/c/clconst/GtarPluck " machineGenerated="true" --><span class="var">GtarPluck</span><!-- /a -->;  <!-- headerDoc=declaration;uid=//apple_ref/c/tdef/GtarPluck;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/GtarPluck/position;   name=position -->
+<a name="//apple_ref/doc/typedeffield/GtarPluck/position"></a>
+<code>position</code>
+</dt>
+<dd><p>The GtarPosition of this pluck.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//apple_ref/doc/typedeffield/GtarPluck/velocity;   name=velocity -->
+<a name="//apple_ref/doc/typedeffield/GtarPluck/velocity"></a>
+<code>velocity</code>
+</dt>
+<dd><p>The GtarPluckVelocity of this pluck.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/c/tdef/GtarPluck;name=start --><p>A GtarPluck combines a GtarPosition (string-fret pair) with a GtarVelocity corresponding to the velocity
+of the pluck.
+<!-- headerDoc=discussion;uid=//apple_ref/c/tdef/GtarPluck;name=end --><!-- end discussion -->
 </p>
 <hr class="betweenAPIEntries">
 <!-- headerDoc=tdef;  uid=//apple_ref/c/tdef/GtarLedColor;   name=GtarLedColor --><a name="//apple_ref/c/tdef/GtarLedColor"></a>
@@ -547,8 +620,8 @@ where 0 is off and 'GtarMaxLedIntensity' is full brightness. A GtarLedColor of (
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
 <!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/c/tdef/GtarLedColorMap;name=start --><p>Define a per-string default color mapping. Each GtarLedColor in the 'stringColor' array maps to a string of
-the Gtar device. Note that C-style arrays are 0-based while GtarStrings are 1-based, so 'stringColor' index [0..GtarStringCount-1]
-maps to GtarString [1..GtarStringCount].
+the Gtar device. Note that 'stringColor' is a 0-based, C-style array, while GtarStrings are 1-based. So 'stringColor' ranges 
+from [0..GtarStringCount-1] and maps to string [1..GtarStringCount].
 <!-- headerDoc=discussion;uid=//apple_ref/c/tdef/GtarLedColorMap;name=end --><!-- end discussion -->
 </p>
 <p class="gapBeforeFooter">&nbsp;</p>
@@ -556,7 +629,7 @@ maps to GtarString [1..GtarStringCount].
 <div class="hd_copyright_and_timestamp">
 <p class="hd_copyright">&copy; Incident Technologies.
  </p>
-<p class="hd_timestamp">Last Updated: Thursday, June 28, 2012
+<p class="hd_timestamp">Last Updated: Friday, September 28, 2012
 </p>
 </div>
 </td>

@@ -3,8 +3,8 @@
     An iOS library to connect to the Gtar MIDI device.
  @author Marty Greenia
  @copyright Incident Technologies.
- @version 0.4
- @updated 2012-06-28
+ @version 1.0.5
+ @updated 2012-09-28
  @unsorted
  */
 
