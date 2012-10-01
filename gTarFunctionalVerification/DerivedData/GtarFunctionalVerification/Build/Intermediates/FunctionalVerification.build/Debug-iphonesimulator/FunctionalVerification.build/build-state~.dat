@@ -1,0 +1,177 @@
+TFunctionalVerification
+v5
+r1
+cCheck dependencies
+cProcessInfoPlistFile /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/Info.plist FunctionalVerification/FunctionalVerification-Info.plist
+cProcessPCH /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch.pth FunctionalVerification/FunctionalVerification-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/main.o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/AppDelegate.o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk
+c000000004F453DF80000000000000110
+t1329937912
+s272
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004F6E63660000000000244490
+t1332634470
+s2376848
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004F6E63670000000000353830
+t1332634471
+s3487792
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004F6E636B0000000000905E40
+t1332634475
+s9461312
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/AppDelegate.o
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/FunctionalVerification.LinkFileList
+c000000005069D9A900000000000001E3
+t1349114281
+s483
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/main.o
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch.pth
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app.dSYM
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/FunctionalVerification
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/Info.plist
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/PkgInfo
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/en.lproj/InfoPlist.strings
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/../../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m
+c000000005066513600000000000008D1
+t1348882742
+s2257
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/FunctionalVerification-Prefix.pch
+c00000000506635A9000000000000015B
+t1348875689
+s347
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/en.lproj/InfoPlist.strings
+c00000000506635A9000000000000002D
+t1348875689
+s45
+
+N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/main.m
+c00000000506635A90000000000000166
+t1348875689
+s358
+
+NFunctionalVerification/FunctionalVerification-Info.plist
+c00000000506635A90000000000000499
+t1348875689
+s1177
+
+CBuild AST from /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m
+r0
+
+CBuild AST from /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/main.m
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies4b910029111ab641^94fb0529111ab641^---0#1#0#--18"Check dependencies36"96D6CFAE-6181-44FD-B291-58DF1BFF667D-
+
+CCompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/AppDelegate.o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s370807083.954430
+e370807084.765564
+r0
+xCompileC
+x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/AppDelegate.o
+x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m:11:9: fatal error: 'GtarController.h' file not found
+o#import "GtarController.h"
+o        ^
+o1 error generated.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection139"Compile /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.mc974f42b111ab641^a3e6c32c111ab641^-241"/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m:11:9: fatal error: 'GtarController.h' file not found#import "GtarController.h"        ^1 error generated.1(36%IDEClangDiagnosticActivityLogMessage2@33"'GtarController.h' file not found-370807084#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@147"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m0000000000000000^10#8#10#8#191#0#29"Lexical or Preprocessor Issue--0#0#0#-19%DVTDocumentLocation4@147"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m0000000000000000^4232"CompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/AppDelegate.o FunctionalVerification/AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50100 -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/FunctionalVerification.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/include -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/.. -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/DerivedSources/i386 -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/DerivedSources -F/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator -include /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch -MMD -MT dependencies -MF /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/AppDelegate.d --serialize-diagnostics /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/AppDelegate.dia -c /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/AppDelegate.m -o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/AppDelegate.o36"010F5129-E15A-4DA8-A4E5-9F680791E8A3-
+
+CCompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/main.o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s370807083.954424
+e370807084.455895
+r1
+xCompileC
+x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/main.o
+x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection132"Compile /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/main.m4f75f42b111ab641^aab5742c111ab641^---0#0#0#-19%DVTDocumentLocation2@140"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/main.m0000000000000000^4190"CompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/main.o FunctionalVerification/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50100 -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/FunctionalVerification.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/include -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/.. -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/DerivedSources/i386 -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/DerivedSources -F/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator -include /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch -MMD -MT dependencies -MF /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/main.d --serialize-diagnostics /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/main.dia -c /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/main.m -o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/Objects-normal/i386/main.o36"306800E8-535A-4624-AC58-7A06865D0986-
+
+CCopyStringsFile /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/en.lproj/InfoPlist.strings FunctionalVerification/en.lproj/InfoPlist.strings
+r0
+
+CGenerateDSYMFile /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app.dSYM /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/FunctionalVerification
+r0
+
+CLd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/FunctionalVerification normal i386
+r0
+
+CProcessInfoPlistFile /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/Info.plist FunctionalVerification/FunctionalVerification-Info.plist
+s370807081.027110
+e370807081.032221
+r1
+xProcessInfoPlistFile
+x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/Info.plist
+xFunctionalVerification/FunctionalVerification-Info.plist
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection64"Process FunctionalVerification/FunctionalVerification-Info.plist8a040729111ab641^29400829111ab641^---0#0#0#-19%DVTDocumentLocation2@167"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/FunctionalVerification-Info.plist0000000000000000^1093"ProcessInfoPlistFile /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/Info.plist FunctionalVerification/FunctionalVerification-Info.plist    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility FunctionalVerification/FunctionalVerification-Info.plist -genpkginfo /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app/Info.plist36"DFA60017-3558-4287-AD4B-BE0AE04E1E62-
+
+CProcessPCH /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch.pth FunctionalVerification/FunctionalVerification-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s370807081.040231
+e370807083.948097
+r1
+xProcessPCH
+x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch.pth
+xFunctionalVerification/FunctionalVerification-Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection67"Precompile FunctionalVerification/FunctionalVerification-Prefix.pch25790a29111ab641^d8b8f22b111ab641^---0#0#0#-19%DVTDocumentLocation2@167"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/FunctionalVerification-Prefix.pch0000000000000000^4033"ProcessPCH /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch.pth FunctionalVerification/FunctionalVerification-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch i386 -fmessage-length=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50100 -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/FunctionalVerification.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/include -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/.. -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/DerivedSources/i386 -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/FunctionalVerification.build/Debug-iphonesimulator/FunctionalVerification.build/DerivedSources -F/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator --serialize-diagnostics /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch.dia -c /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/FunctionalVerification-Prefix.pch -o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch.pth -MMD -MT dependencies -MF /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/FunctionalVerification-Prefix-dipdqjepwxkmwiayxcnlpwkwyezw/FunctionalVerification-Prefix.pch.d36"69B1A976-6718-4E68-961F-62F83717434F-
+
+CProcessPCH /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Index/PrecompiledHeaders/FunctionalVerification-Prefix-ejojuftlqjondnciukathrqczwyg_ast/FunctionalVerification-Prefix.pch.pth FunctionalVerification/FunctionalVerification-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CTouch /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Debug-iphonesimulator/FunctionalVerification.app
+r0
+

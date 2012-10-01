@@ -2,11 +2,13 @@
 //  AppDelegate.m
 //  FunctionalVerification
 //
-//  Created by Joel Greenia on 9/26/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Joel Greenia on 9/28/12.
+//  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 
 #import "AppDelegate.h"
+
+#import <GtarController.h>
 
 @implementation AppDelegate
 
@@ -14,10 +16,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+
     return YES;
 }
 

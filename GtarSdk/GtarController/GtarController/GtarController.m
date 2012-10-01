@@ -292,7 +292,10 @@
                     unsigned char majorVersion = (data[2] & 0xF0) >> 4;
                     unsigned char minorVersion = (data[2] & 0x0F);
                     
-                    [m_delegate ReceivedFWVersion:(int)majorVersion andMinorVersion:(int)minorVersion];
+                    if ( [m_delegate respondsToSelector:@selector(ReceivedFWVersion:andMinorVersion:)] == YES )
+                    {
+                        [m_delegate ReceivedFWVersion:(int)majorVersion andMinorVersion:(int)minorVersion];
+                    }
                     
                 } break;
                     
@@ -301,9 +304,45 @@
                     // Firmware Ack
                     unsigned char status = data[2];
                     
-                    [m_delegate RxFWUpdateACK:status];
+                    if ( [m_delegate respondsToSelector:@selector(RxFWUpdateACK:)] == YES )
+                    {
+                        [m_delegate RxFWUpdateACK:status];
+                    }
                     
                 } break;
+                    
+                case RX_BATTERY_STATUS:
+                {
+                    // Battery status Ack
+                    unsigned char battery = data[2];
+                    
+                    if ( [m_delegate respondsToSelector:@selector(RxBatteryStatus:)] == YES )
+                    {
+                        [m_delegate RxBatteryStatus:(BOOL)battery];
+                    }
+                    
+                } break;
+                    
+                case RX_BATTERY_CHARGE:
+                {
+                    // Battery charge Ack
+                    unsigned char percentage = data[2];
+                    
+                    if ( [m_delegate respondsToSelector:@selector(RxBatteryCharge::)] == YES )
+                    {
+                        [m_delegate RxBatteryCharge:percentage];
+                    }
+                    
+                } break;
+                    
+                default:
+                {
+                    
+                    [self logMessage:[NSString stringWithFormat:@"Unhandled control msg of type 0x%x", gTarMsgType]
+                          atLogLevel:GtarControllerLogLevelError];
+                    
+                } break;
+
             }
             
         } break;

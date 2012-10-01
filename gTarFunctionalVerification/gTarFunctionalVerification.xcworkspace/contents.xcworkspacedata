@@ -2,12 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../GtarSdk/GtarController/GtarController.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:FunctionalVerification/FunctionalVerification.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../GtarSdk/GtarController.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:gTarFunctionalVerification.xcodeproj">
    </FileRef>
 </Workspace>

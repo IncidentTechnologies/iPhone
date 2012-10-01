@@ -13,7 +13,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EC275FD3161382A10037A387"
+               BlueprintIdentifier = "EC27605016166D290037A387"
                BuildableName = "FunctionalVerification.app"
                BlueprintName = "FunctionalVerification"
                ReferencedContainer = "container:FunctionalVerification.xcodeproj">
@@ -31,7 +31,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EC275FD3161382A10037A387"
+            BlueprintIdentifier = "EC27605016166D290037A387"
             BuildableName = "FunctionalVerification.app"
             BlueprintName = "FunctionalVerification"
             ReferencedContainer = "container:FunctionalVerification.xcodeproj">
@@ -50,7 +50,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EC275FD3161382A10037A387"
+            BlueprintIdentifier = "EC27605016166D290037A387"
             BuildableName = "FunctionalVerification.app"
             BlueprintName = "FunctionalVerification"
             ReferencedContainer = "container:FunctionalVerification.xcodeproj">
@@ -68,7 +68,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EC275FD3161382A10037A387"
+            BlueprintIdentifier = "EC27605016166D290037A387"
             BuildableName = "FunctionalVerification.app"
             BlueprintName = "FunctionalVerification"
             ReferencedContainer = "container:FunctionalVerification.xcodeproj">

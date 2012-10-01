@@ -1,0 +1,2 @@
+dependencies: \
+  /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/FunctionalVerification/FunctionalVerification/FunctionalVerification-Prefix.pch
