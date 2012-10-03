@@ -597,6 +597,7 @@ BOOL m_skipNotes = NO;
             
             m_previousChordPluckTime = CACurrentMediaTime();
             m_previousChordPluckString = str;
+            m_previousChordPluckVelocity = velocity;
             m_previousChordPluckDirection = 0;
             
         }
@@ -742,7 +743,7 @@ BOOL m_skipNotes = NO;
     {
         
         // Play the note
-        [self pluckString:str andFret:fret];
+        [self pluckString:str andFret:fret andVelocity:m_previousChordPluckString];
         
         // Record the note
         [m_songRecorder playString:str andFret:fret];
@@ -820,20 +821,6 @@ BOOL m_skipNotes = NO;
     else
     {
         [g_gtarController turnOffLedAtPosition:GtarPositionMake(fret, str)];
-    }
-    
-}
-
-- (void)pluckString:(GtarString)str andFret:(GtarFret)fret
-{
-    
-    if ( fret == GTAR_GUITAR_FRET_MUTED )
-    {
-        [g_audioController PluckMutedString:str - 1];
-    }
-    else
-    {
-        [g_audioController PluckString:str-1 atFret:fret];
     }
     
 }
@@ -927,7 +914,7 @@ BOOL m_skipNotes = NO;
         // On easy mode, we play the notes that haven't been hit yet
         for ( NSNote * note in frame.m_notesPending )
         {
-            [self pluckString:note.m_string andFret:note.m_fret];
+            [self pluckString:note.m_string andFret:note.m_fret andVelocity:1.0f];
         }
 
         [self songModelExitFrame:m_currentFrame];

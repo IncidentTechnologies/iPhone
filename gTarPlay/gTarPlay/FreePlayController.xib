@@ -10244,7 +10244,7 @@ AAEAAQABA</bytes>
 					<object class="IBUIImageView" id="51030098">
 						<reference key="NSNextResponder" ref="274854468"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{146, 307}</string>
+						<string key="NSFrameSize">{127, 296}</string>
 						<reference key="NSSuperview" ref="274854468"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="554447421"/>
@@ -10563,7 +10563,7 @@ AAEAAQABA</bytes>
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{132, 307}</string>
+				<string key="NSFrameSize">{127, 296}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="51030098"/>
@@ -10582,7 +10582,7 @@ AAEAAQABA</bytes>
 					<object class="IBUIImageView" id="173653071">
 						<reference key="NSNextResponder" ref="120752385"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{146, 307}</string>
+						<string key="NSFrameSize">{127, 296}</string>
 						<reference key="NSSuperview" ref="120752385"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="888448362"/>
@@ -10630,7 +10630,7 @@ AAEAAQABA</bytes>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{132, 307}</string>
+				<string key="NSFrameSize">{127, 296}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="173653071"/>
@@ -10646,7 +10646,7 @@ AAEAAQABA</bytes>
 					<object class="IBUIImageView" id="282564696">
 						<reference key="NSNextResponder" ref="243079941"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{480, 307}</string>
+						<string key="NSFrameSize">{468, 296}</string>
 						<reference key="NSSuperview" ref="243079941"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="521104646"/>
@@ -10661,7 +10661,7 @@ AAEAAQABA</bytes>
 					<object class="IBUIView" id="521104646">
 						<reference key="NSNextResponder" ref="243079941"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{9, 22}, {401, 148}}</string>
+						<string key="NSFrame">{{9, 22}, {401, 149}}</string>
 						<reference key="NSSuperview" ref="243079941"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="720482228"/>
@@ -11153,7 +11153,7 @@ AAEAAQABA</bytes>
 						<reference key="IBUIFont" ref="949742403"/>
 					</object>
 				</object>
-				<string key="NSFrameSize">{480, 307}</string>
+				<string key="NSFrameSize">{468, 296}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="282564696"/>
@@ -11173,7 +11173,7 @@ AAEAAQABA</bytes>
 					<object class="IBUIImageView" id="236678451">
 						<reference key="NSNextResponder" ref="444838405"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{360, 307}</string>
+						<string key="NSFrameSize">{350, 296}</string>
 						<reference key="NSSuperview" ref="444838405"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="918657193"/>
@@ -11300,13 +11300,13 @@ AAEAAQABA</bytes>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="130879569"/>
-						<object class="NSCustomResource" key="IBUISelectedImage" id="714040291">
+						<object class="NSCustomResource" key="IBUISelectedImage" id="601067304">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">SwitchUpFree.png</string>
+							<string key="NSResourceName">SwitchUp.png</string>
 						</object>
-						<object class="NSCustomResource" key="IBUINormalImage" id="939158761">
+						<object class="NSCustomResource" key="IBUINormalImage" id="694318630">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">SwitchDownFree.png</string>
+							<string key="NSResourceName">SwitchDown.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="756500023"/>
 						<reference key="IBUIFont" ref="949742403"/>
@@ -11329,13 +11329,13 @@ AAEAAQABA</bytes>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="130879569"/>
-						<reference key="IBUISelectedImage" ref="714040291"/>
-						<reference key="IBUINormalImage" ref="939158761"/>
+						<reference key="IBUISelectedImage" ref="601067304"/>
+						<reference key="IBUINormalImage" ref="694318630"/>
 						<reference key="IBUIFontDescription" ref="756500023"/>
 						<reference key="IBUIFont" ref="949742403"/>
 					</object>
 				</object>
-				<string key="NSFrameSize">{360, 307}</string>
+				<string key="NSFrameSize">{350, 296}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="236678451"/>
@@ -12238,9 +12238,9 @@ AAEAAQABA</bytes>
 						<reference key="object" ref="120752385"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="173653071"/>
 							<reference ref="888448362"/>
 							<reference ref="239617495"/>
+							<reference ref="173653071"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Instrument Tab</string>
@@ -12567,7 +12567,7 @@ AAEAAQABA</bytes>
 					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="0.0"/>
+					<real value="1"/>
 					<string>CustomComboBox</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>TransparentAreaView</string>
@@ -12608,7 +12608,7 @@ AAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="0.0"/>
+					<real value="2"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -13145,8 +13145,8 @@ AAEAAQABA</bytes>
 				<string>OrangeButton.png</string>
 				<string>RedButton.png</string>
 				<string>SmSquareButton.png</string>
-				<string>SwitchDownFree.png</string>
-				<string>SwitchUpFree.png</string>
+				<string>SwitchDown.png</string>
+				<string>SwitchUp.png</string>
 				<string>WETDRY_Border.png</string>
 				<string>WhiteButton.png</string>
 				<string>YellowButton.png</string>
@@ -13161,22 +13161,22 @@ AAEAAQABA</bytes>
 				<string>{70, 70}</string>
 				<string>{70, 70}</string>
 				<string>{70, 70}</string>
-				<string>{292, 614}</string>
+				<string>{253, 591}</string>
 				<string>{146, 75}</string>
 				<string>{960, 640}</string>
 				<string>{70, 70}</string>
 				<string>{136, 70}</string>
-				<string>{292, 614}</string>
+				<string>{253, 591}</string>
 				<string>{136, 70}</string>
-				<string>{960, 614}</string>
+				<string>{935, 591}</string>
 				<string>{70, 70}</string>
-				<string>{720, 614}</string>
+				<string>{700, 591}</string>
 				<string>{70, 70}</string>
 				<string>{70, 70}</string>
 				<string>{70, 70}</string>
 				<string>{136, 70}</string>
-				<string>{16, 16}</string>
-				<string>{16, 16}</string>
+				<string>{96, 120}</string>
+				<string>{96, 120}</string>
 				<string>{151, 565}</string>
 				<string>{70, 70}</string>
 				<string>{70, 70}</string>

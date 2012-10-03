@@ -464,7 +464,7 @@ extern TelemetryController * g_telemetryController;
     }
     else
     {
-        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0) 
+        [g_gtarController turnOnLedAtPosition:GtarPositionMake(m_sequenceFret, 0) 
                                     withColor:GtarLedColorMake(0, 0, 3)];
     }
     

@@ -94,6 +94,7 @@ enum SongViewControllerDifficulty
     
     double m_previousChordPluckTime;
     GtarString m_previousChordPluckString;
+    GtarPluckVelocity m_previousChordPluckVelocity;
     NSInteger m_previousChordPluckDirection;
     
     NSInteger m_delayedChordsCount;
@@ -131,7 +132,6 @@ enum SongViewControllerDifficulty
 - (void)turnOnWhiteString:(GtarString)str andFret:(GtarFret)fret;
 - (void)turnOffString:(GtarString)str andFret:(GtarFret)fret;
 
-- (void)pluckString:(GtarString)str andFret:(GtarFret)fret;
 - (void)pluckString:(GtarString)str andFret:(GtarFret)fret andVelocity:(GtarPluckVelocity)velocity;
 
 - (void)requestUploadUserSongSessionCallback:(UserResponse*)userResponse;

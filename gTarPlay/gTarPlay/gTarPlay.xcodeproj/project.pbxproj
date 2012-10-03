@@ -716,7 +716,6 @@
 		EC24DEDF161A8A1B00016B78 /* SwitchUpFree.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC994E015C9E4C3008C8948 /* SwitchUpFree.png */; };
 		EC24DEE0161A8A1B00016B78 /* ExitButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC994DB15C9A852008C8948 /* ExitButton.png */; };
 		EC24DEE1161A8A1B00016B78 /* Knob_BlueLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB82FA215ACE535002A8B34 /* Knob_BlueLine.png */; };
-		EC24DEE2161A8A1B00016B78 /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D007260152FAE3100FB26DD /* LightsTab.png */; };
 		EC24DEE3161A8A1B00016B78 /* AutoplayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDE46A5152D1EBD002CD6AA /* AutoplayButton.png */; };
 		EC24DEE4161A8A1B00016B78 /* LgSquareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDE46A6152D1EBD002CD6AA /* LgSquareButton.png */; };
 		EC24DEE5161A8A1B00016B78 /* SmSquareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDE46A7152D1EBD002CD6AA /* SmSquareButton.png */; };
@@ -734,15 +733,12 @@
 		EC24DEF1161A8A1B00016B78 /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDE4655152A6285002CD6AA /* RedButton.png */; };
 		EC24DEF2161A8A1B00016B78 /* WhiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDE4659152A6285002CD6AA /* WhiteButton.png */; };
 		EC24DEF3161A8A1B00016B78 /* YellowButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDE468E152A737E002CD6AA /* YellowButton.png */; };
-		EC24DEF4161A8A1B00016B78 /* InstrumentTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D0BFA2014F5E7C400D05B04 /* InstrumentTab.png */; };
 		EC24DEF5161A8A1B00016B78 /* AuxSpeakerSlider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D26A217149BEB4C008CA090 /* AuxSpeakerSlider.png */; };
 		EC24DEF6161A8A1B00016B78 /* AuxSpeakerSwitch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D26A218149BEB4C008CA090 /* AuxSpeakerSwitch.png */; };
 		EC24DEF7161A8A1B00016B78 /* SliderKnob.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D1157491496D91E0058734F /* SliderKnob.png */; };
 		EC24DEF8161A8A1B00016B78 /* HomeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D1157411495A0D80058734F /* HomeButton.png */; };
-		EC24DEF9161A8A1B00016B78 /* MenuTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D11573D14959A650058734F /* MenuTab.png */; };
 		EC24DEFA161A8A1B00016B78 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D115739149599500058734F /* SliderEndMax.png */; };
 		EC24DEFB161A8A1B00016B78 /* SliderEndMin.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D11573A149599500058734F /* SliderEndMin.png */; };
-		EC24DEFC161A8A1B00016B78 /* EffectsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D0EECA71492CD5000832909 /* EffectsTab.png */; };
 		EC24DEFD161A8A1B00016B78 /* EffectOffButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91973149159DF00BE8751 /* EffectOffButton.png */; };
 		EC24DEFE161A8A1B00016B78 /* EffectOnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91974149159DF00BE8751 /* EffectOnButton.png */; };
 		EC24DEFF161A8A1B00016B78 /* EffectSelectOffButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91975149159DF00BE8751 /* EffectSelectOffButton.png */; };
@@ -955,7 +951,6 @@
 		EC24DFCF161A8AD500016B78 /* AccountViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECCED1EF1461C8A60006AB51 /* AccountViewCell.xib */; };
 		EC24DFD0161A8ADD00016B78 /* TransitionRectangleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC603E8613A1D15A00699EB7 /* TransitionRectangleViewController.xib */; };
 		EC24DFD1161A8ADD00016B78 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
-		EC24DFD2161A8AE300016B78 /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE30291133039CE002812B6 /* FreePlayController.xib */; };
 		EC24DFD3161A8AE900016B78 /* SongViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC7D44E913EB3B8800BC76A5 /* SongViewController.xib */; };
 		EC24DFD4161A8AEA00016B78 /* AmpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC6BD1E913F353C30068E25C /* AmpViewController.xib */; };
 		EC24DFD5161A8AEA00016B78 /* SongProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC6BD1F313F356EA0068E25C /* SongProgressViewController.xib */; };
@@ -990,6 +985,11 @@
 		EC24DFF2161A8B0A00016B78 /* StoreBuyCreditsPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC31BB8A14E3474C00DC7083 /* StoreBuyCreditsPopupViewController.xib */; };
 		EC24DFF3161A8B0A00016B78 /* CustomNavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC18A6EE13D90249004A2667 /* CustomNavigationViewController.xib */; };
 		EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */; };
+		ECBBBF6C161CF1F400BC5BE2 /* InstrumentTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF68161CF1F400BC5BE2 /* InstrumentTab.png */; };
+		ECBBBF6D161CF1F400BC5BE2 /* MenuTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF69161CF1F400BC5BE2 /* MenuTab.png */; };
+		ECBBBF6E161CF1F400BC5BE2 /* EffectsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6A161CF1F400BC5BE2 /* EffectsTab.png */; };
+		ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1005,14 +1005,10 @@
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RootViewController.xib; path = ../RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* gTarPlay-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "gTarPlay-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		9D007260152FAE3100FB26DD /* LightsTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightsTab.png; path = images/FreePlay/LightsTab.png; sourceTree = "<group>"; };
 		9D0BFA1B14F5D5DA00D05B04 /* TransparentAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentAreaView.h; sourceTree = "<group>"; };
 		9D0BFA1C14F5D5DA00D05B04 /* TransparentAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentAreaView.m; sourceTree = "<group>"; };
-		9D0BFA2014F5E7C400D05B04 /* InstrumentTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InstrumentTab.png; path = images/FreePlay/InstrumentTab.png; sourceTree = "<group>"; };
-		9D0EECA71492CD5000832909 /* EffectsTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsTab.png; path = images/FreePlay/EffectsTab.png; sourceTree = "<group>"; };
 		9D115739149599500058734F /* SliderEndMax.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderEndMax.png; path = images/FreePlay/SliderEndMax.png; sourceTree = "<group>"; };
 		9D11573A149599500058734F /* SliderEndMin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderEndMin.png; path = images/FreePlay/SliderEndMin.png; sourceTree = "<group>"; };
-		9D11573D14959A650058734F /* MenuTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuTab.png; path = images/FreePlay/MenuTab.png; sourceTree = "<group>"; };
 		9D1157411495A0D80058734F /* HomeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HomeButton.png; path = images/FreePlay/HomeButton.png; sourceTree = "<group>"; };
 		9D1157491496D91E0058734F /* SliderKnob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderKnob.png; path = images/FreePlay/SliderKnob.png; sourceTree = "<group>"; };
 		9D26A217149BEB4C008CA090 /* AuxSpeakerSlider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AuxSpeakerSlider.png; path = images/FreePlay/AuxSpeakerSlider.png; sourceTree = "<group>"; };
@@ -1609,9 +1605,9 @@
 		EC24A67E1342A7F600EA2FED /* fill-gauge2-lcd-off-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fill-gauge2-lcd-off-2.png"; sourceTree = "<group>"; };
 		EC24A67F1342A7F600EA2FED /* fill-gauge2-lcd-off-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fill-gauge2-lcd-off-3.png"; sourceTree = "<group>"; };
 		EC24DC06161A821200016B78 /* gTarPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC24DC24161A847A00016B78 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libAudioController.a; path = "../../GtarSdk/AudioController/build/Release-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
-		EC24DC25161A847A00016B78 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libgTarAppCore.a; path = "../../gTarAppCore/gTarAppCore/build/Release-iphoneos/libgTarAppCore.a"; sourceTree = "<group>"; };
-		EC24DC26161A847A00016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libGtarController.a; path = "../../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
+		EC24DC24161A847A00016B78 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioController.a; path = "../../GtarSdk/AudioController/build/Release-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
+		EC24DC25161A847A00016B78 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarAppCore.a; path = "../../gTarAppCore/gTarAppCore/build/Release-iphoneos/libgTarAppCore.a"; sourceTree = "<group>"; };
+		EC24DC26161A847A00016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
 		EC26080F1582C11800DA6FCA /* ShareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShareButton.png; sourceTree = "<group>"; };
 		EC2608101582C11800DA6FCA /* SharedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SharedButton.png; sourceTree = "<group>"; };
 		EC2E4B2D14F1EED0008663B1 /* CustomComboBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomComboBox.h; sourceTree = "<group>"; };
@@ -2009,6 +2005,11 @@
 		ECB4592D1488208C00B04D06 /* CustomBeveledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBeveledView.h; sourceTree = "<group>"; };
 		ECB4592E1488208C00B04D06 /* CustomBeveledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBeveledView.m; sourceTree = "<group>"; };
 		ECB4593214885C4200B04D06 /* gTar_UI_TitleScreenNeckBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_UI_TitleScreenNeckBG.png; sourceTree = "<group>"; };
+		ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightsTab.png; sourceTree = "<group>"; };
+		ECBBBF68161CF1F400BC5BE2 /* InstrumentTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InstrumentTab.png; sourceTree = "<group>"; };
+		ECBBBF69161CF1F400BC5BE2 /* MenuTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuTab.png; sourceTree = "<group>"; };
+		ECBBBF6A161CF1F400BC5BE2 /* EffectsTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EffectsTab.png; sourceTree = "<group>"; };
+		ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreePlayController.xib; sourceTree = "<group>"; };
 		ECBC9E2213C65DEA00E9D5C5 /* StoreFeaturedGenreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreFeaturedGenreViewController.h; sourceTree = "<group>"; };
 		ECBC9E2313C65DEB00E9D5C5 /* StoreFeaturedGenreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreFeaturedGenreViewController.m; sourceTree = "<group>"; };
 		ECBC9E2C13C66A4C00E9D5C5 /* StoreSubcategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSubcategoryCell.h; sourceTree = "<group>"; };
@@ -2034,7 +2035,6 @@
 		ECD553541492C323001C932F /* gTar_UI_TitleScreen_EDITStrings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_UI_TitleScreen_EDITStrings.png; sourceTree = "<group>"; };
 		ECDF5E5C14687F7200AB1CD0 /* gTarApp_Icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon114x114.png; sourceTree = "<group>"; };
 		ECE30033132D9290002812B6 /* string.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = string.png; sourceTree = "<group>"; };
-		ECE30291133039CE002812B6 /* FreePlayController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FreePlayController.xib; sourceTree = "<group>"; };
 		ECE3FC9F132CA6E5002812B6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ECE3FE28132CB5F9002812B6 /* gstar_fade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gstar_fade.png; sourceTree = "<group>"; };
 		ECE5642A13BD0D0200FEF024 /* StoreSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSearchViewController.h; sourceTree = "<group>"; };
@@ -2700,11 +2700,14 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */,
+				ECBBBF68161CF1F400BC5BE2 /* InstrumentTab.png */,
+				ECBBBF69161CF1F400BC5BE2 /* MenuTab.png */,
+				ECBBBF6A161CF1F400BC5BE2 /* EffectsTab.png */,
 				9DC994DF15C9E4C3008C8948 /* SwitchDownFree.png */,
 				9DC994E015C9E4C3008C8948 /* SwitchUpFree.png */,
 				9DC994DB15C9A852008C8948 /* ExitButton.png */,
 				9DB82FA215ACE535002A8B34 /* Knob_BlueLine.png */,
-				9D007260152FAE3100FB26DD /* LightsTab.png */,
 				9DDE46A5152D1EBD002CD6AA /* AutoplayButton.png */,
 				9DDE46A6152D1EBD002CD6AA /* LgSquareButton.png */,
 				9DDE46A7152D1EBD002CD6AA /* SmSquareButton.png */,
@@ -2722,15 +2725,12 @@
 				9DDE4655152A6285002CD6AA /* RedButton.png */,
 				9DDE4659152A6285002CD6AA /* WhiteButton.png */,
 				9DDE468E152A737E002CD6AA /* YellowButton.png */,
-				9D0BFA2014F5E7C400D05B04 /* InstrumentTab.png */,
 				9D26A217149BEB4C008CA090 /* AuxSpeakerSlider.png */,
 				9D26A218149BEB4C008CA090 /* AuxSpeakerSwitch.png */,
 				9D1157491496D91E0058734F /* SliderKnob.png */,
 				9D1157411495A0D80058734F /* HomeButton.png */,
-				9D11573D14959A650058734F /* MenuTab.png */,
 				9D115739149599500058734F /* SliderEndMax.png */,
 				9D11573A149599500058734F /* SliderEndMin.png */,
-				9D0EECA71492CD5000832909 /* EffectsTab.png */,
 				9DD91973149159DF00BE8751 /* EffectOffButton.png */,
 				9DD91974149159DF00BE8751 /* EffectOnButton.png */,
 				9DD91975149159DF00BE8751 /* EffectSelectOffButton.png */,
@@ -3674,7 +3674,7 @@
 				9D0BFA1C14F5D5DA00D05B04 /* TransparentAreaView.m */,
 				9DCB6F5F15C767050086249B /* FreePlayController.h */,
 				9DCB6F6015C767050086249B /* FreePlayController.m */,
-				ECE30291133039CE002812B6 /* FreePlayController.xib */,
+				ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */,
 				9D9BAE9C15266CD900AA62C9 /* RGBColor.h */,
 				9D9BAE9D15266CD900AA62C9 /* RGBColor.m */,
 				9DF47986159155080047953A /* Harmonizer.h */,
@@ -4359,7 +4359,6 @@
 				EC24DEDF161A8A1B00016B78 /* SwitchUpFree.png in Resources */,
 				EC24DEE0161A8A1B00016B78 /* ExitButton.png in Resources */,
 				EC24DEE1161A8A1B00016B78 /* Knob_BlueLine.png in Resources */,
-				EC24DEE2161A8A1B00016B78 /* LightsTab.png in Resources */,
 				EC24DEE3161A8A1B00016B78 /* AutoplayButton.png in Resources */,
 				EC24DEE4161A8A1B00016B78 /* LgSquareButton.png in Resources */,
 				EC24DEE5161A8A1B00016B78 /* SmSquareButton.png in Resources */,
@@ -4377,15 +4376,12 @@
 				EC24DEF1161A8A1B00016B78 /* RedButton.png in Resources */,
 				EC24DEF2161A8A1B00016B78 /* WhiteButton.png in Resources */,
 				EC24DEF3161A8A1B00016B78 /* YellowButton.png in Resources */,
-				EC24DEF4161A8A1B00016B78 /* InstrumentTab.png in Resources */,
 				EC24DEF5161A8A1B00016B78 /* AuxSpeakerSlider.png in Resources */,
 				EC24DEF6161A8A1B00016B78 /* AuxSpeakerSwitch.png in Resources */,
 				EC24DEF7161A8A1B00016B78 /* SliderKnob.png in Resources */,
 				EC24DEF8161A8A1B00016B78 /* HomeButton.png in Resources */,
-				EC24DEF9161A8A1B00016B78 /* MenuTab.png in Resources */,
 				EC24DEFA161A8A1B00016B78 /* SliderEndMax.png in Resources */,
 				EC24DEFB161A8A1B00016B78 /* SliderEndMin.png in Resources */,
-				EC24DEFC161A8A1B00016B78 /* EffectsTab.png in Resources */,
 				EC24DEFD161A8A1B00016B78 /* EffectOffButton.png in Resources */,
 				EC24DEFE161A8A1B00016B78 /* EffectOnButton.png in Resources */,
 				EC24DEFF161A8A1B00016B78 /* EffectSelectOffButton.png in Resources */,
@@ -4598,7 +4594,6 @@
 				EC24DFCF161A8AD500016B78 /* AccountViewCell.xib in Resources */,
 				EC24DFD0161A8ADD00016B78 /* TransitionRectangleViewController.xib in Resources */,
 				EC24DFD1161A8ADD00016B78 /* RootViewController.xib in Resources */,
-				EC24DFD2161A8AE300016B78 /* FreePlayController.xib in Resources */,
 				EC24DFD3161A8AE900016B78 /* SongViewController.xib in Resources */,
 				EC24DFD4161A8AEA00016B78 /* AmpViewController.xib in Resources */,
 				EC24DFD5161A8AEA00016B78 /* SongProgressViewController.xib in Resources */,
@@ -4633,6 +4628,11 @@
 				EC24DFF2161A8B0A00016B78 /* StoreBuyCreditsPopupViewController.xib in Resources */,
 				EC24DFF3161A8B0A00016B78 /* CustomNavigationViewController.xib in Resources */,
 				EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */,
+				ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */,
+				ECBBBF6C161CF1F400BC5BE2 /* InstrumentTab.png in Resources */,
+				ECBBBF6D161CF1F400BC5BE2 /* MenuTab.png in Resources */,
+				ECBBBF6E161CF1F400BC5BE2 /* EffectsTab.png in Resources */,
+				ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4908,6 +4908,7 @@
 				EC24DC1B161A821200016B78 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

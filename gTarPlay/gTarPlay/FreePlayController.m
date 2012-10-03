@@ -235,9 +235,9 @@ extern TelemetryController * g_telemetryController;
     CGRect menuTabFrame = m_menuTab.frame;
     CGRect largeTabFrame = m_LEDTab.frame;
     
-    smallTabFrame.origin.x = -104;
-    menuTabFrame.origin.x = -327;
-    largeTabFrame.origin.x = -445;
+    smallTabFrame.origin.x = -105; 
+    menuTabFrame.origin.x = -328; 
+    largeTabFrame.origin.x = -446; 
     // move tab up to align with wet/dry frame
     smallTabFrame.origin.y = 0;
     largeTabFrame.origin.y = 0;
@@ -572,23 +572,27 @@ extern TelemetryController * g_telemetryController;
     // reset the the last touch point
     m_lastLEDTouch = CGPointMake(-1, -1);
     
-    // Take all the touch ended points and turn off LED at those positions
-	for (UITouch *touch in touches) 
+    // Check that last touchBegan was inside an LED touch area
+    if (LEDTouchNone != m_LEDTouchArea)
     {
-        CGPoint stringFret = [self getFretPositionFromTouch:touch];
-        
-        int string = stringFret.x;
-        int fret = stringFret.y;
-        if (string < 0 || fret < 0)
+        // Take all the touch ended points and turn off LED at those positions
+        for (UITouch *touch in touches) 
         {
-            return;
+            CGPoint stringFret = [self getFretPositionFromTouch:touch];
+            
+            int string = stringFret.x;
+            int fret = stringFret.y;
+            if (string < 0 || fret < 0)
+            {
+                return;
+            }
+            
+            // Turn off LED when finger touch ends
+            [self turnOffLED:string AndFret:fret];
         }
-        
-        // Turn off LED when finger touch ends
-        [self turnOffLED:string AndFret:fret];
     }
+	
 }
-
 
 #pragma mark - LED light logic
 
