@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FourthViewController : UIViewController
+#import <GtarController/GtarController.h>
+
+@interface FourthViewController : UIViewController <GtarControllerObserver>
 {
     NSMutableDictionary * m_stringDict;
     NSMutableDictionary * m_fretDict;

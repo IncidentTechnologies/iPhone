@@ -13,9 +13,9 @@
 #import "ThirdViewController.h"
 #import "FourthViewController.h"
 
-#import "GuitarController.h"
+#import <GtarController/GtarController.h>
 
-GuitarController * g_guitarController;
+GtarController * g_gtarController;
 
 @implementation AppDelegate
 
@@ -28,11 +28,9 @@ GuitarController * g_guitarController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    g_guitarController = [[GuitarController alloc] init];
+    g_gtarController = [[GtarController alloc] init];
     
-    g_guitarController.m_delegate = (id<GuitarControllerDelegate>)nil;
-    
-    [g_guitarController turnOffAllEffects];
+    [g_gtarController turnOffAllEffects];
 
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

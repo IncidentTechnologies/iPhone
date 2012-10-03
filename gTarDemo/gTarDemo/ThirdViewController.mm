@@ -10,9 +10,8 @@
 
 #import "GuitarEffectSequence.h"
 #import "GuitarEffectSerialized.h"
-#import "GuitarController.h"
 
-extern GuitarController * g_guitarController;
+extern GtarController * g_gtarController;
 
 @implementation ThirdViewController
 
@@ -81,9 +80,9 @@ extern GuitarController * g_guitarController;
 {
     [super viewWillAppear:animated];
     
-    g_guitarController.m_delegate = (id<GuitarControllerDelegate>)self;
+    [g_gtarController addObserver:self];
     
-    if ( g_guitarController.m_connected == YES )
+    if ( g_gtarController.connected == YES )
     {
         [m_connectionLabel setText:@"Connected"];
         [m_connectionLabel setTextColor:[UIColor greenColor]];
@@ -212,7 +211,7 @@ extern GuitarController * g_guitarController;
     
     m_effectsSequenceSerialized = [NSMutableArray arrayWithArray:seq.m_effectSequenceSerialized];
     
-    [g_guitarController turnOffAllLeds];
+    [g_gtarController turnOffAllLeds];
     
 }
 
@@ -240,7 +239,7 @@ extern GuitarController * g_guitarController;
     
 	[UIView commitAnimations];
     
-    [g_guitarController turnOffAllLeds];
+    [g_gtarController turnOffAllLeds];
 
 }
 
@@ -254,7 +253,6 @@ extern GuitarController * g_guitarController;
     
 	[UIView commitAnimations];
     
-//    [self startEffectsSequence];
     [self startEffectsSequenceLoop];
     
 }
@@ -327,42 +325,17 @@ extern GuitarController * g_guitarController;
     
     if ( effect.m_effectType == GuitarEffectTypeClear )
     {
-        [g_guitarController turnOffAllLeds];
+        [g_gtarController turnOffAllLeds];
     }
     else if ( effect.m_effectType == GuitarEffectTypeLedOn )
     {
-        
-        [g_guitarController turnOnLedAtString:effect.m_string
-                                      andFret:effect.m_fret
-                                      withRed:effect.m_red
-                                     andGreen:effect.m_green
-                                      andBlue:effect.m_blue];
-        
+        [g_gtarController turnOnLedAtPosition:GtarPositionMake(effect.m_fret, effect.m_string)
+                                    withColor:GtarLedColorMake(effect.m_red, effect.m_green, effect.m_blue)];
     }
     
 }
 
-#pragma mark - GuitarControllerDelegate
-
-- (void)guitarFretDown:(GuitarFret)fret atString:(GuitarString)str
-{
-    
-}
-
-- (void)guitarFretUp:(GuitarFret)fret atString:(GuitarString)str
-{
-    
-}
-
-- (void)guitarNotesOnFret:(GuitarFret)fret andString:(GuitarString)str
-{
-    
-}
-
-- (void)guitarNotesOffFret:(GuitarFret)fret andString:(GuitarString)str
-{
-    
-}
+#pragma mark - GtarControllerObserver
 
 - (void)guitarConnected
 {

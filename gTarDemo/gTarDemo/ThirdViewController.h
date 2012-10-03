@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "GuitarController.h"
 
-@class GuitarController;
+#import <GtarController/GtarController.h>
+
 @class GuitarEffectSerialized;
 
-@interface ThirdViewController : UIViewController
+@interface ThirdViewController : UIViewController <GtarControllerObserver>
 {
     NSInteger m_preDelay;
     NSInteger m_postDelay;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC24E06F161CB1B500016B78 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24E06E161CB1B500016B78 /* libGtarController.a */; };
 		ECAC04B31477023100AB8718 /* gTarApp_Icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAC04B21477023100AB8718 /* gTarApp_Icon114x114.png */; };
 		ECAC04C91478F76F00AB8718 /* FourthViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECAC04C71478F76E00AB8718 /* FourthViewController.mm */; };
 		ECAC04CA1478F76F00AB8718 /* FourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECAC04C81478F76E00AB8718 /* FourthViewController.xib */; };
@@ -38,7 +39,6 @@
 		ECB5B979147431DD00484486 /* GuitarEffectSerialized.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB5B978147431DD00484486 /* GuitarEffectSerialized.m */; };
 		ECB5B97C147440B000484486 /* gTarApp_Icon640X960_B.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B97A147440AF00484486 /* gTarApp_Icon640X960_B.png */; };
 		ECB5B97D147440B000484486 /* gTarApp_Icon640X960_W.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B97B147440AF00484486 /* gTarApp_Icon640X960_W.png */; };
-		ECB5B97F147451A700484486 /* libgTarGuitarInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B97E147451A700484486 /* libgTarGuitarInterface.a */; };
 		ECB5B9861474550D00484486 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB5B9851474550D00484486 /* CoreMIDI.framework */; };
 		ECB5B98E1474873E00484486 /* gTarApp_Icon640X960_W_portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB5B98D1474873E00484486 /* gTarApp_Icon640X960_W_portrait.png */; };
 /* End PBXBuildFile section */
@@ -54,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC24E06E161CB1B500016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
 		ECAC04B21477023100AB8718 /* gTarApp_Icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon114x114.png; sourceTree = "<group>"; };
 		ECAC04C61478F76E00AB8718 /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
 		ECAC04C71478F76E00AB8718 /* FourthViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FourthViewController.mm; sourceTree = "<group>"; };
@@ -98,14 +99,8 @@
 		ECB5B978147431DD00484486 /* GuitarEffectSerialized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarEffectSerialized.m; sourceTree = "<group>"; };
 		ECB5B97A147440AF00484486 /* gTarApp_Icon640X960_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon640X960_B.png; sourceTree = "<group>"; };
 		ECB5B97B147440AF00484486 /* gTarApp_Icon640X960_W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon640X960_W.png; sourceTree = "<group>"; };
-		ECB5B97E147451A700484486 /* libgTarGuitarInterface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarGuitarInterface.a; path = ../Staticlibs/Release/gTarGuitarInterface/libgTarGuitarInterface.a; sourceTree = "<group>"; };
 		ECB5B9851474550D00484486 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		ECB5B98D1474873E00484486 /* gTarApp_Icon640X960_W_portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon640X960_W_portrait.png; sourceTree = "<group>"; };
-		ECB5B9951474C5C300484486 /* valid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = valid.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/valid.h; sourceTree = "<group>"; };
-		ECB5B9961474C5C300484486 /* RESULT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RESULT.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/RESULT.h; sourceTree = "<group>"; };
-		ECB5B9971474C5C300484486 /* GuitarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuitarController.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/GuitarController.h; sourceTree = "<group>"; };
-		ECB5B9981474C5C300484486 /* EHM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EHM.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/EHM.h; sourceTree = "<group>"; };
-		ECB5B9991474C5C300484486 /* CoreMidiInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreMidiInterface.h; path = ../Staticlibs/Release/gTarGuitarInterface/Headers/CoreMidiInterface.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC24E06F161CB1B500016B78 /* libGtarController.a in Frameworks */,
 				ECB5B9861474550D00484486 /* CoreMIDI.framework in Frameworks */,
-				ECB5B97F147451A700484486 /* libgTarGuitarInterface.a in Frameworks */,
 				ECB5B91B1473892400484486 /* UIKit.framework in Frameworks */,
 				ECB5B91D1473892400484486 /* Foundation.framework in Frameworks */,
 				ECB5B91F1473892400484486 /* CoreGraphics.framework in Frameworks */,
@@ -157,12 +152,7 @@
 		ECB5B9191473892400484486 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ECB5B9951474C5C300484486 /* valid.h */,
-				ECB5B9961474C5C300484486 /* RESULT.h */,
-				ECB5B9971474C5C300484486 /* GuitarController.h */,
-				ECB5B9981474C5C300484486 /* EHM.h */,
-				ECB5B9991474C5C300484486 /* CoreMidiInterface.h */,
-				ECB5B97E147451A700484486 /* libgTarGuitarInterface.a */,
+				EC24E06E161CB1B500016B78 /* libGtarController.a */,
 				ECB5B9851474550D00484486 /* CoreMIDI.framework */,
 				ECB5B91A1473892400484486 /* UIKit.framework */,
 				ECB5B91C1473892400484486 /* Foundation.framework */,
@@ -285,7 +275,7 @@
 		ECB5B90D1473892400484486 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Incident Technologies";
 			};
 			buildConfigurationList = ECB5B9101473892400484486 /* Build configuration list for PBXProject "gTarDemo" */;
@@ -454,6 +444,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/usr/local/include";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -473,6 +464,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/usr/local/include";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;

@@ -8,9 +8,9 @@
 
 #import "FourthViewController.h"
 
-#import "GuitarController.h"
+#import <GtarController/GtarController.h>
 
-extern GuitarController * g_guitarController;
+extern GtarController * g_gtarController;
 
 @implementation FourthViewController
 @synthesize m_redControl;
@@ -100,10 +100,10 @@ extern GuitarController * g_guitarController;
     
     [super viewWillAppear:animated];
     
-    g_guitarController.m_delegate = (id<GuitarControllerDelegate>)self;
+    [g_gtarController addObserver:self];
     
-    [g_guitarController turnOffAllLeds];
-    [g_guitarController turnOffAllEffects];
+    [g_gtarController turnOffAllLeds];
+    [g_gtarController turnOffAllEffects];
     
 }
 
@@ -121,7 +121,8 @@ extern GuitarController * g_guitarController;
     NSInteger green = m_greenControl.selectedSegmentIndex;
     NSInteger blue = m_blueControl.selectedSegmentIndex;
     
-    [g_guitarController turnOnLedAtString:0 andFret:0 withRed:red andGreen:green andBlue:blue];
+    [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0)
+                                withColor:GtarLedColorMake(red, green, blue)];
     
     NSArray * array = [m_fretDict allKeys];
     
@@ -142,11 +143,8 @@ extern GuitarController * g_guitarController;
     NSInteger fret = [[m_fretDict objectForKey:[NSValue valueWithNonretainedObject:sender]] integerValue];
     NSInteger str = [[m_stringDict objectForKey:[NSValue valueWithNonretainedObject:sender]] integerValue];
     
-    [g_guitarController turnOnLedAtString:str+1
-                                  andFret:fret+1
-                                  withRed:red
-                                 andGreen:green
-                                  andBlue:blue];
+    [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret+1, str+1) 
+                                withColor:GtarLedColorMake(red, green, blue)];
     
     ((UIButton*)sender).backgroundColor = [UIColor colorWithRed:red/3.0 green:green/3.0 blue:blue/3.0 alpha:1.0];
 
