@@ -526,7 +526,7 @@
     }
 }
 
-- (void) PluckString:(int)string atFret:(int)fret
+- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amplitude
 {
     // turn on this channel (string) and reset the sample number
     m_channelOn[string] = true;
@@ -550,7 +550,7 @@
         m_attenuation[string] = 0.00082;
     }
     
-    [self PluckString:string atFret:0];
+    [self PluckString:string atFret:0 withAmplitude:1.0f];
     m_sampleNumber[string] = 5512;
 }
 

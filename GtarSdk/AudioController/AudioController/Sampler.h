@@ -84,7 +84,7 @@ typedef struct
 - (void) setupStereoStreamFormat;
 - (bool) readAudioFilesIntoMemory;
 
-- (void) PluckString:(int)string atFret:(int)fret;
+- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amplitude;
 - (void) PluckMutedString:(int)string;
 - (float) getNextSample;
 - (void) Reset;

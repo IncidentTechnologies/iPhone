@@ -220,7 +220,19 @@ const float g_GraphSampleRate = 44100.0f;
 	[self startAUGraph];	// this should also reset the phase
 }
 
+// TODO: get rid of this method and only use the one with amplitude.
 - (void) PluckString:(int)string atFret:(int)fret
+{
+    if (string < 0 || string > 5 || fret < 0 || fret > 16)
+    {
+        NSLog(@"invalid plucking position, string:%d fret:%d", string, fret);
+        return;
+    }
+    
+    [self PluckString:string atFret:fret withAmplitude:1.0f];
+}
+
+- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amp
 {
     if (string < 0 || string > 5 || fret < 0 || fret > 16)
     {
@@ -230,21 +242,16 @@ const float g_GraphSampleRate = 44100.0f;
     
     if (KarplusStrong == m_audioSource)
     {
-        [self PluckString:string atFret:fret withAmplitude:1.0f];
+        m_pksobjects[string].Pluck(KSObject::GuitarFreqLookup(string, fret), amp);
     }
     else if (SamplerSource == m_audioSource)
     {
-        [m_sampler PluckString:string atFret:fret];
+        [m_sampler PluckString:string atFret:fret withAmplitude:amp];
     }
-    else
+    else // synth
     {
         [self NoteOnAtString:string andFret:fret];
     }
-}
-
-- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amp
-{
-	m_pksobjects[string].Pluck(KSObject::GuitarFreqLookup(string, fret), amp);
 }
 
 - (void) PluckMutedString:(int)string

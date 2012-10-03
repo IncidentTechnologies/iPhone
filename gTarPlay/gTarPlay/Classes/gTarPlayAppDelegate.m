@@ -78,6 +78,7 @@ TelemetryController * g_telemetryController;
         // Connect to the gtar device
         //
         g_gtarController = [[GtarController alloc] init];
+        g_gtarController.responseThread = GtarControllerThreadMain;
         
         // Create the audio controller
         g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];

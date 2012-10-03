@@ -119,9 +119,8 @@ enum SongViewControllerDifficulty
 - (void)disableInput;
 - (void)enableInput;
 
-- (void)guitarInputHandling:(NSDictionary*)dict;
-- (void)correctHitFret:(GtarFret)fret andString:(GtarString)str;
-- (void)incorrectHitFret:(GtarFret)fret andString:(GtarString)str;
+- (void)correctHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity;
+- (void)incorrectHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity;
 - (void)handleDirectionChange:(GtarString)str;
 - (void)handleDelayedChord;
 
@@ -133,6 +132,7 @@ enum SongViewControllerDifficulty
 - (void)turnOffString:(GtarString)str andFret:(GtarFret)fret;
 
 - (void)pluckString:(GtarString)str andFret:(GtarFret)fret;
+- (void)pluckString:(GtarString)str andFret:(GtarFret)fret andVelocity:(GtarPluckVelocity)velocity;
 
 - (void)requestUploadUserSongSessionCallback:(UserResponse*)userResponse;
 

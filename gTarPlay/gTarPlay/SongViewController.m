@@ -449,11 +449,29 @@ BOOL m_skipNotes = NO;
 	
 }
 
-#pragma mark - Offline Guitar Handling
+#pragma mark - GuitarControllerObserver
 
-// This function is to be run on the main RunLoop thread.
-- (void)guitarInputHandling:(NSDictionary*)dict
+- (void)gtarFretDown:(GtarPosition)position
 {
+    
+}
+
+- (void)gtarFretUp:(GtarPosition)position
+{
+    
+}
+
+- (void)gtarNoteOn:(GtarPluck)pluck
+{
+
+    GtarFret fret = pluck.position.fret;
+    GtarString str = pluck.position.string;
+    
+    // If we are not running (i.e. paused) then we ignore input from the midi
+    if ( m_isRunning == NO )
+    {
+        return;
+    }
     
     // This should only be used sparingly, but sometimes we 
     // just want to completely drop the input e.g. in certain 
@@ -464,14 +482,6 @@ BOOL m_skipNotes = NO;
     }
     
     m_refreshDisplay = YES;
-    
-    NSNumber * value;
-    
-    value = [dict objectForKey:@"String"];
-    GtarString str = [value integerValue];
-    
-    value = [dict objectForKey:@"Fret"];
-    GtarString fret = [value integerValue];
     
     // Tell the user that the input is working
     [m_ampView flickerIndicator];
@@ -497,63 +507,13 @@ BOOL m_skipNotes = NO;
     // Handle the hit
     if ( hit != nil )
     {
-        [self correctHitFret:hit.m_fret andString:hit.m_string];
+        [self correctHitFret:hit.m_fret andString:hit.m_string andVelocity:pluck.velocity];
     }
     else
     {
-        [self incorrectHitFret:fret andString:str];
+        [self incorrectHitFret:fret andString:str andVelocity:pluck.velocity];
     }
     
-}
-
-#pragma mark - GuitarControllerObserver
-
-// The MIDI run loop is in a different thread than the main thread, so there 
-// is some funny behavior when certain things are done in here. Especially
-// things having to do with NSTimers and UI manipulation. The safest things is 
-// to just run everything in the main thread.
-- (void)gtarFretDown:(GtarPosition)position
-{
-    
-}
-
-- (void)gtarFretUp:(GtarPosition)position
-{
-    
-}
-
-- (void)gtarNoteOn:(GtarPluck)pluck
-{
-
-    GtarFret fret = pluck.position.fret;
-    GtarString str = pluck.position.string;
-    
-    // If we are not running (i.e. paused) then we ignore input from the midi
-    if ( m_isRunning == NO )
-    {
-        return;
-    }
-    
-    // This selector is called from the midi stack running in a separate thread.
-    // We need to be running in the main thread in order to do anything UI related,
-    // so we need to schedule a work item to run for us
-    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
-    
-    NSNumber * strValue = [[NSNumber alloc] initWithInteger:str];
-    NSNumber * fretValue = [[NSNumber alloc] initWithInteger:fret];
-    
-    [dict setObject:strValue forKey:@"String"];
-    [dict setObject:fretValue forKey:@"Fret"];
-    
-    // Run in the main thread
-    [self performSelectorOnMainThread:@selector(guitarInputHandling:)
-                           withObject:dict
-                        waitUntilDone:YES];
-    
-    [strValue release];
-    [fretValue release];
-    [dict release];
-        
 }
 
 - (void)gtarNoteOff:(GtarPosition)position
@@ -587,7 +547,7 @@ BOOL m_skipNotes = NO;
 
 // These functions need to be called from the main thread RunLoop.
 // If they are called from a MIDI interrupt thread, stuff won't work properly.
-- (void)correctHitFret:(GtarFret)fret andString:(GtarString)str
+- (void)correctHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity
 {
     
     // set it to the correct attenuation
@@ -595,7 +555,7 @@ BOOL m_skipNotes = NO;
     {
                 
         // Play the note
-        [self pluckString:str andFret:fret];
+        [self pluckString:str andFret:fret andVelocity:velocity];
         
         // Record the note
         [m_songRecorder playString:str andFret:fret];
@@ -670,7 +630,7 @@ BOOL m_skipNotes = NO;
 
 }
 
-- (void)incorrectHitFret:(GtarFret)fret andString:(GtarString)str
+- (void)incorrectHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity
 {
 //    NSLog(@"Incorrect on %u %u", fret, str);
     
@@ -691,7 +651,7 @@ BOOL m_skipNotes = NO;
         else if ( m_difficulty == SongViewControllerDifficultyHard )
         {
             // Play the note at normal intensity
-            [self pluckString:str andFret:fret];
+            [self pluckString:str andFret:fret andVelocity:velocity];
             
             // Record the note
             [m_songRecorder playString:str andFret:fret];
@@ -874,6 +834,20 @@ BOOL m_skipNotes = NO;
     else
     {
         [g_audioController PluckString:str-1 atFret:fret];
+    }
+    
+}
+
+- (void)pluckString:(GtarString)str andFret:(GtarFret)fret andVelocity:(GtarPluckVelocity)velocity
+{
+    
+    if ( fret == GTAR_GUITAR_FRET_MUTED )
+    {
+        [g_audioController PluckMutedString:str-1];
+    }
+    else
+    {
+        [g_audioController PluckString:str-1 atFret:fret withAmplitude:((float)velocity)/127.0];
     }
     
 }
