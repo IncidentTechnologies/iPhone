@@ -21,7 +21,7 @@
     {
         measure = nil;
         
-        guitar = [[GuitarController alloc] init];
+        guitar = [[GtarController alloc] init];
         
         [self clearData];
     }
@@ -74,17 +74,18 @@
             if ( [measure isNoteOnAtString:s andFret:f] && !notesOn[s][f] ) 
             {
                 notesOn[s][f] = YES;
-                [guitar turnOnLedWithColorMappingAtString:s+1 andFret:f+1];
+                [guitar turnOnLedAtPositionWithColorMap:GtarPositionMake(f+1, s+1)];
             }
             else if ( ![measure isNoteOnAtString:s andFret:f] && notesOn[s][f] )
             {
                 notesOn[s][f] = NO;
-                [guitar turnOffLedAtString:s+1 andFret:f+1];
+                [guitar turnOffLedAtPosition:GtarPositionMake(f+1, s+1)];
             }
             
             if ( playband == f )
             {
-                [guitar turnOnLedAtString:s+1 andFret:f+1 withRed:3 andGreen:3 andBlue:3];
+                [guitar turnOnLedAtPosition:GtarPositionMake(f+1, s+1) 
+                                  withColor:GtarLedColorMake(3, 3, 3)];
             }
         }
     }
@@ -98,7 +99,8 @@
     {
         playband = whichFret;
         
-        [guitar turnOnLedAtString:0 andFret:whichFret+1 withRed:3 andGreen:3 andBlue:3];
+        [guitar turnOnLedAtPosition:GtarPositionMake(whichFret+1, 0)
+                          withColor:GtarLedColorMake(3, 3, 3)];
     }
 }
 
@@ -116,9 +118,13 @@
     for (int i=0;i<STRINGS_ON_GTAR;i++)
     {
         if ( [measure isNoteOnAtString:i andFret:whichFret] )
-            [guitar turnOnLedWithColorMappingAtString:i+1 andFret:whichFret+1];
+        {
+            [guitar turnOnLedAtPositionWithColorMap:GtarPositionMake(whichFret+1, i+1)];
+        }
         else
-            [guitar turnOffLedAtString:i+1 andFret:whichFret+1];
+        {
+            [guitar turnOffLedAtPosition:GtarPositionMake(whichFret+1, i+1)];
+        }
     }
 }
 
@@ -133,16 +139,16 @@
     }
 }
 
-#pragma mark - Guitar Observer
+#pragma mark - Gtar Observer
 
-- (void)guitarNotesOnFret:(GuitarFret)fr andString:(GuitarString)str
+- (void)gtarNoteOn:(GtarPluck)pluck
 {
     NSLog(@"Note played");
     
-    [delegate notePlayedAtString:str andFret:fr];
+    [delegate notePlayedAtString:pluck.position.string andFret:pluck.position.fret];
 }
 
-- (void)guitarConnected
+- (void)gtarConnected
 {
     NSLog(@"Guitar connected");
     
@@ -158,12 +164,23 @@
     [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(turnOffEffects) userInfo:nil repeats:NO];
     
     // Set color mapping
-    [guitar setStringColorMapping:0 toRed:3 andGreen:0 andBlue:0];
-    [guitar setStringColorMapping:1 toRed:0 andGreen:3 andBlue:0];
-    [guitar setStringColorMapping:2 toRed:0 andGreen:0 andBlue:3];
-    [guitar setStringColorMapping:3 toRed:3 andGreen:3 andBlue:0];
-    [guitar setStringColorMapping:4 toRed:0 andGreen:3 andBlue:3];
-    [guitar setStringColorMapping:5 toRed:3 andGreen:0 andBlue:3];
+//    [guitar setStringColorMapping:0 toRed:3 andGreen:0 andBlue:0];
+//    [guitar setStringColorMapping:1 toRed:0 andGreen:3 andBlue:0];
+//    [guitar setStringColorMapping:2 toRed:0 andGreen:0 andBlue:3];
+//    [guitar setStringColorMapping:3 toRed:3 andGreen:3 andBlue:0];
+//    [guitar setStringColorMapping:4 toRed:0 andGreen:3 andBlue:3];
+//    [guitar setStringColorMapping:5 toRed:3 andGreen:0 andBlue:3];
+    
+    GtarLedColorMap map;
+    
+    map.stringColor[0] = GtarLedColorMake(3, 0, 0);
+    map.stringColor[1] = GtarLedColorMake(0, 3, 0);
+    map.stringColor[2] = GtarLedColorMake(0, 0, 3);
+    map.stringColor[3] = GtarLedColorMake(3, 3, 0);
+    map.stringColor[4] = GtarLedColorMake(0, 3, 3);
+    map.stringColor[5] = GtarLedColorMake(3, 0, 3);
+    
+    [guitar setColorMap:map];
     
     [delegate guitarConnected];
     
@@ -182,24 +199,11 @@
     [guitar turnOffAllEffects];
 }
 
-- (void)guitarDisconnected
+- (void)gtarDisconnected
 {
     NSLog(@"Guitar disconnected");
     
     [delegate guitarDisconnected];
 }
-
-- (void)guitarFretDown:(GuitarFret)fret andString:(GuitarString)str
-{
-}
-
-- (void)guitarFretUp:(GuitarFret)fret andString:(GuitarString)str
-{
-}
-
-- (void)guitarNotesOffFret:(GuitarFret)fret andString:(GuitarString)str
-{
-}
-
 
 @end

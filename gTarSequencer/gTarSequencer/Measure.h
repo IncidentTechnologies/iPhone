@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GuitarController.h"
+#import <GtarController/GtarController.h>
+
 #import "SoundMaker.h"
 
 #define MAX_NOTES 96

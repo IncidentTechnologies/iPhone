@@ -39,7 +39,7 @@ extern TouchCatcher * touchCatcher;
     UIButton * previouslySelectedPatternButton;
 }
 
-- (IBAction)userDidTouchDownOnPattern:(id)sender;
+//- (IBAction)userDidTouchDownOnPattern:(id)sender;
 - (IBAction)userDidSelectNewPattern:(id)sender;
 - (IBAction)userDidSelectNewMeasure:(id)sender;
 - (IBAction)userDidTapInstrumentIcon:(id)sender;

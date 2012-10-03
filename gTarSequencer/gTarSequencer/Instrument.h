@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GuitarController.h"
+#import <GtarController/GtarController.h>
 #import "Pattern.h"
 #import "SoundMaker.h" 
 
@@ -16,7 +16,7 @@
 #define LAST_FRET 15
 
 extern SoundMaker * audio;
-extern GuitarController * guitar;
+extern GtarController * guitar;
 
 @interface Instrument : NSObject <NSCoding>
 {

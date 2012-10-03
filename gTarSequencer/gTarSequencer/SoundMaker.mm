@@ -7,7 +7,7 @@
 //
 
 #import "SoundMaker.h"
-#import "AudioController.h"
+#import <AudioController/AudioController.h>
 
 @implementation SoundMaker
 

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GuitarController.h"
+#import <GtarController/GtarController.h>
 #import "Measure.h"
 
 @protocol GuitarViewDelegate <NSObject>
@@ -23,14 +23,14 @@
 //      to act similarly to MeasureView, in that it displays a single measure to the gTar fretboard. Like MV, it has a measure ptr
 //      and pulls the necessary data when updating. The user must manage the Measure ptr and make sure it accurately reflects
 //      whichever measure should be displayed to the gTar.
-@interface GuitarView : NSObject <GuitarControllerObserver>
+@interface GuitarView : NSObject <GtarControllerObserver>
 {
     char notesOn[STRINGS_ON_GTAR][FRETS_ON_GTAR];
     
     int playband;
 }
 
-@property (retain, nonatomic) GuitarController * guitar;
+@property (retain, nonatomic) GtarController * guitar;
 @property (weak, nonatomic) Measure * measure;
 @property (weak, nonatomic) id <GuitarViewDelegate> delegate;
 

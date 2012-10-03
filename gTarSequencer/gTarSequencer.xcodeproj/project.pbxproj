@@ -66,12 +66,11 @@
 		6D99130315B0D4E100B32116 /* Percussion 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912DA15B0D4E100B32116 /* Percussion 9.mp3 */; };
 		6D99E68A159396B8005F1119 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D99E689159396B7005F1119 /* CheckBox.m */; };
 		6D9CF03E159A36CC00DCDFD2 /* GuitarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9CF03D159A36CC00DCDFD2 /* GuitarView.m */; };
-		6DBE6043157D591B00729E25 /* libgTarAppCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBE6040157D591B00729E25 /* libgTarAppCore.a */; };
-		6DBE6044157D591B00729E25 /* libgTarAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBE6041157D591B00729E25 /* libgTarAudioController.a */; };
-		6DBE6045157D591B00729E25 /* libgTarGuitarInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBE6042157D591B00729E25 /* libgTarGuitarInterface.a */; };
 		6DBE633C157D612B00729E25 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE610C157D612B00729E25 /* instruments.plist */; };
 		6DBE64BE157D645B00729E25 /* SEQNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE64BD157D645B00729E25 /* SEQNote.m */; };
 		6DD8EAB515B73960004B5AAF /* MeasureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD8EAB415B73960004B5AAF /* MeasureView.m */; };
+		EC24E031161BD71900016B78 /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24E02F161BD71800016B78 /* libAudioController.a */; };
+		EC24E032161BD71900016B78 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24E030161BD71800016B78 /* libGtarController.a */; };
 		EC37BE47160C42F100E6277D /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE46160C42F100E6277D /* RadialDisplay.m */; };
 		EC37BE48160C42F100E6277D /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE46160C42F100E6277D /* RadialDisplay.m */; };
 		EC37BE4B160C430B00E6277D /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE4A160C430B00E6277D /* ScrollingSelector.m */; };
@@ -279,15 +278,14 @@
 		6D99E689159396B7005F1119 /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
 		6D9CF03C159A36CC00DCDFD2 /* GuitarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarView.h; sourceTree = "<group>"; };
 		6D9CF03D159A36CC00DCDFD2 /* GuitarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarView.m; sourceTree = "<group>"; };
-		6DBE6040157D591B00729E25 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarAppCore.a; path = ../Staticlibs/Release/gTarAppCore/libgTarAppCore.a; sourceTree = "<group>"; };
-		6DBE6041157D591B00729E25 /* libgTarAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarAudioController.a; path = ../Staticlibs/Release/gTarAudioController/libgTarAudioController.a; sourceTree = "<group>"; };
-		6DBE6042157D591B00729E25 /* libgTarGuitarInterface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarGuitarInterface.a; path = ../Staticlibs/Release/gTarGuitarInterface/libgTarGuitarInterface.a; sourceTree = "<group>"; };
 		6DBE610C157D612B00729E25 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
 		6DBE64BC157D645B00729E25 /* SEQNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEQNote.h; sourceTree = "<group>"; };
 		6DBE64BD157D645B00729E25 /* SEQNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEQNote.m; sourceTree = "<group>"; };
 		6DBE64C2157E7A4C00729E25 /* Measure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Measure.h; sourceTree = "<group>"; };
 		6DD8EAB315B73960004B5AAF /* MeasureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureView.h; sourceTree = "<group>"; };
 		6DD8EAB415B73960004B5AAF /* MeasureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureView.m; sourceTree = "<group>"; };
+		EC24E02F161BD71800016B78 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libAudioController.a; path = "../GtarSdk/AudioController/build/Release-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
+		EC24E030161BD71800016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libGtarController.a; path = "../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
 		EC37BE45160C42F000E6277D /* RadialDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialDisplay.h; sourceTree = "<group>"; };
 		EC37BE46160C42F100E6277D /* RadialDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialDisplay.m; sourceTree = "<group>"; };
 		EC37BE49160C430A00E6277D /* ScrollingSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingSelector.h; sourceTree = "<group>"; };
@@ -369,9 +367,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DBE6043157D591B00729E25 /* libgTarAppCore.a in Frameworks */,
-				6DBE6044157D591B00729E25 /* libgTarAudioController.a in Frameworks */,
-				6DBE6045157D591B00729E25 /* libgTarGuitarInterface.a in Frameworks */,
+				EC24E031161BD71900016B78 /* libAudioController.a in Frameworks */,
+				EC24E032161BD71900016B78 /* libGtarController.a in Frameworks */,
 				6D331B55157D585F00AA27A1 /* CoreMIDI.framework in Frameworks */,
 				6D331B53157D585600AA27A1 /* AudioToolbox.framework in Frameworks */,
 				6D331B14157D40A100AA27A1 /* UIKit.framework in Frameworks */,
@@ -415,9 +412,8 @@
 		6D331B12157D40A100AA27A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6DBE6040157D591B00729E25 /* libgTarAppCore.a */,
-				6DBE6041157D591B00729E25 /* libgTarAudioController.a */,
-				6DBE6042157D591B00729E25 /* libgTarGuitarInterface.a */,
+				EC24E02F161BD71800016B78 /* libAudioController.a */,
+				EC24E030161BD71800016B78 /* libGtarController.a */,
 				6D331B54157D585F00AA27A1 /* CoreMIDI.framework */,
 				6D331B52157D585600AA27A1 /* AudioToolbox.framework */,
 				6D331B13157D40A100AA27A1 /* UIKit.framework */,
@@ -1007,14 +1003,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"../Staticlibs/Release/gTarAppCore/Headers/**",
-					"../Staticlibs/Release/gTarAudioController/Headers/**",
-					"../Staticlibs/Release/gTarGuitarInterface/Headers/**",
-				);
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/usr/local/include";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "../Staticlibs/Release/gTarAppCore/Headers/** ../Staticlibs/Release/gTarAudioController/Headers/** ../Staticlibs/Release/gTarGuitarInterface/Headers/**";
 			};
 			name = Debug;
 		};
@@ -1031,15 +1022,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"../Staticlibs/Release/gTarAppCore/Headers/**",
-					"../Staticlibs/Release/gTarAudioController/Headers/**",
-					"../Staticlibs/Release/gTarGuitarInterface/Headers/**",
-				);
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/usr/local/include";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "../Staticlibs/Release/gTarAppCore/Headers/** ../Staticlibs/Release/gTarAudioController/Headers/** ../Staticlibs/Release/gTarGuitarInterface/Headers/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1049,21 +1035,9 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"${SRCROOT}/../Staticlibs/Release/gTarAudioController/Headers\"/**",
-					"\"${SRCROOT}/../Staticlibs/Release/gTarGuitarInterface/Headers\"/**",
-					"\"${SRCROOT}/../Staticlibs/Release/gTarAppCore/Headers\"/**",
-				);
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../Staticlibs/Release/gTarAppCore\"",
-					"\"$(SRCROOT)/../Staticlibs/Release/gTarAudioController\"",
-					"\"$(SRCROOT)/../Staticlibs/Release/gTarGuitarInterface\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}/../Staticlibs/Release/gTarAppCore/Headers\"/** \"${SRCROOT}/../Staticlibs/Release/gTarAudioController/Headers\"/** \"${SRCROOT}/../Staticlibs/Release/gTarGuitarInterface/Headers\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1073,21 +1047,9 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"${SRCROOT}/../Staticlibs/Release/gTarAudioController/Headers\"/**",
-					"\"${SRCROOT}/../Staticlibs/Release/gTarGuitarInterface/Headers\"/**",
-					"\"${SRCROOT}/../Staticlibs/Release/gTarAppCore/Headers\"/**",
-				);
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../Staticlibs/Release/gTarAppCore\"",
-					"\"$(SRCROOT)/../Staticlibs/Release/gTarAudioController\"",
-					"\"$(SRCROOT)/../Staticlibs/Release/gTarGuitarInterface\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}/../Staticlibs/Release/gTarAppCore/Headers\"/** \"${SRCROOT}/../Staticlibs/Release/gTarAudioController/Headers\"/** \"${SRCROOT}/../Staticlibs/Release/gTarGuitarInterface/Headers\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
