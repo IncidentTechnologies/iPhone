@@ -14,9 +14,6 @@
 		EC27606216166D290037A387 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC27606116166D290037A387 /* main.m */; };
 		EC27606616166D290037A387 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC27606516166D290037A387 /* AppDelegate.m */; };
 		EC27607416167CC10037A387 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC27607316167CC10037A387 /* libGtarController.a */; };
-		EC7A0D35161A19F2005BF0E5 /* gtar-verif57.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D32161A19F2005BF0E5 /* gtar-verif57.png */; };
-		EC7A0D36161A19F2005BF0E5 /* gtar-verif104.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D33161A19F2005BF0E5 /* gtar-verif104.png */; };
-		EC7A0D37161A19F2005BF0E5 /* gtar-verif114.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D34161A19F2005BF0E5 /* gtar-verif114.png */; };
 		EC7A0D3B161A1A54005BF0E5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D3A161A1A54005BF0E5 /* MainStoryboard.storyboard */; };
 		EC7A0D4E161A1A89005BF0E5 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D3D161A1A88005BF0E5 /* RootViewController.mm */; };
 		EC7A0D4F161A1A89005BF0E5 /* ConnectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D3F161A1A88005BF0E5 /* ConnectionViewController.mm */; };
@@ -27,6 +24,24 @@
 		EC7A0D54161A1A89005BF0E5 /* LineOutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D49161A1A89005BF0E5 /* LineOutViewController.m */; };
 		EC7A0D55161A1A89005BF0E5 /* BatteryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D4B161A1A89005BF0E5 /* BatteryViewController.m */; };
 		EC7A0D56161A1A89005BF0E5 /* SummaryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D4D161A1A89005BF0E5 /* SummaryViewController.mm */; };
+		EC7A0D58161A1CB1005BF0E5 /* gtar-verif57.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D57161A1CB1005BF0E5 /* gtar-verif57.png */; };
+		EC7A0D5A161A1CBA005BF0E5 /* gtar-verif114.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D59161A1CBA005BF0E5 /* gtar-verif114.png */; };
+		EC7A0D60161A2B1F005BF0E5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7A0D5F161A2B1F005BF0E5 /* AVFoundation.framework */; };
+		EC7A0D62161A2B28005BF0E5 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7A0D61161A2B28005BF0E5 /* CoreMIDI.framework */; };
+		EC7A0D71161A3F7D005BF0E5 /* Audo_Jack.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D63161A3F75005BF0E5 /* Audo_Jack.JPG */; };
+		EC7A0D72161A3F7D005BF0E5 /* Audio_JackGtar.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D64161A3F76005BF0E5 /* Audio_JackGtar.JPG */; };
+		EC7A0D73161A3F7D005BF0E5 /* Battery_Switch.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D65161A3F76005BF0E5 /* Battery_Switch.JPG */; };
+		EC7A0D74161A3F7D005BF0E5 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D66161A3F77005BF0E5 /* checkbox_checked.png */; };
+		EC7A0D75161A3F7D005BF0E5 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D67161A3F78005BF0E5 /* checkbox_unchecked.png */; };
+		EC7A0D76161A3F7D005BF0E5 /* Green_Button.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D68161A3F79005BF0E5 /* Green_Button.JPG */; };
+		EC7A0D77161A3F7D005BF0E5 /* Phone_In.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D69161A3F79005BF0E5 /* Phone_In.JPG */; };
+		EC7A0D78161A3F7D005BF0E5 /* Phone_Out.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6A161A3F7A005BF0E5 /* Phone_Out.JPG */; };
+		EC7A0D79161A3F7D005BF0E5 /* sth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6B161A3F7C005BF0E5 /* sth.mp3 */; };
+		EC7A0D7A161A3F7D005BF0E5 /* Blue_Leds.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6C161A3F7C005BF0E5 /* Blue_Leds.JPG */; };
+		EC7A0D7B161A3F7D005BF0E5 /* Green_Leds.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6D161A3F7C005BF0E5 /* Green_Leds.JPG */; };
+		EC7A0D7C161A3F7D005BF0E5 /* Red_Leds.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6E161A3F7C005BF0E5 /* Red_Leds.JPG */; };
+		EC7A0D7D161A3F7D005BF0E5 /* White_Leds.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6F161A3F7C005BF0E5 /* White_Leds.JPG */; };
+		EC7A0D7E161A3F7D005BF0E5 /* Piezo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D70161A3F7D005BF0E5 /* Piezo.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,9 +56,6 @@
 		EC27606416166D290037A387 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EC27606516166D290037A387 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		EC27607316167CC10037A387 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
-		EC7A0D32161A19F2005BF0E5 /* gtar-verif57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gtar-verif57.png"; sourceTree = "<group>"; };
-		EC7A0D33161A19F2005BF0E5 /* gtar-verif104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gtar-verif104.png"; sourceTree = "<group>"; };
-		EC7A0D34161A19F2005BF0E5 /* gtar-verif114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gtar-verif114.png"; sourceTree = "<group>"; };
 		EC7A0D39161A1A2F005BF0E5 /* Checklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checklist.h; sourceTree = "<group>"; };
 		EC7A0D3A161A1A54005BF0E5 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		EC7A0D3C161A1A88005BF0E5 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -64,6 +76,24 @@
 		EC7A0D4B161A1A89005BF0E5 /* BatteryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryViewController.m; sourceTree = "<group>"; };
 		EC7A0D4C161A1A89005BF0E5 /* SummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryViewController.h; sourceTree = "<group>"; };
 		EC7A0D4D161A1A89005BF0E5 /* SummaryViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SummaryViewController.mm; sourceTree = "<group>"; };
+		EC7A0D57161A1CB1005BF0E5 /* gtar-verif57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gtar-verif57.png"; sourceTree = "<group>"; };
+		EC7A0D59161A1CBA005BF0E5 /* gtar-verif114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gtar-verif114.png"; sourceTree = "<group>"; };
+		EC7A0D5F161A2B1F005BF0E5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		EC7A0D61161A2B28005BF0E5 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		EC7A0D63161A3F75005BF0E5 /* Audo_Jack.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Audo_Jack.JPG; sourceTree = "<group>"; };
+		EC7A0D64161A3F76005BF0E5 /* Audio_JackGtar.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Audio_JackGtar.JPG; sourceTree = "<group>"; };
+		EC7A0D65161A3F76005BF0E5 /* Battery_Switch.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Battery_Switch.JPG; sourceTree = "<group>"; };
+		EC7A0D66161A3F77005BF0E5 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
+		EC7A0D67161A3F78005BF0E5 /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
+		EC7A0D68161A3F79005BF0E5 /* Green_Button.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Green_Button.JPG; sourceTree = "<group>"; };
+		EC7A0D69161A3F79005BF0E5 /* Phone_In.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Phone_In.JPG; sourceTree = "<group>"; };
+		EC7A0D6A161A3F7A005BF0E5 /* Phone_Out.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Phone_Out.JPG; sourceTree = "<group>"; };
+		EC7A0D6B161A3F7C005BF0E5 /* sth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sth.mp3; sourceTree = "<group>"; };
+		EC7A0D6C161A3F7C005BF0E5 /* Blue_Leds.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Blue_Leds.JPG; sourceTree = "<group>"; };
+		EC7A0D6D161A3F7C005BF0E5 /* Green_Leds.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Green_Leds.JPG; sourceTree = "<group>"; };
+		EC7A0D6E161A3F7C005BF0E5 /* Red_Leds.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Red_Leds.JPG; sourceTree = "<group>"; };
+		EC7A0D6F161A3F7C005BF0E5 /* White_Leds.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = White_Leds.JPG; sourceTree = "<group>"; };
+		EC7A0D70161A3F7D005BF0E5 /* Piezo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Piezo.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +102,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC27607416167CC10037A387 /* libGtarController.a in Frameworks */,
+				EC7A0D62161A2B28005BF0E5 /* CoreMIDI.framework in Frameworks */,
+				EC7A0D60161A2B1F005BF0E5 /* AVFoundation.framework in Frameworks */,
 				EC27605616166D290037A387 /* UIKit.framework in Frameworks */,
 				EC27605816166D290037A387 /* Foundation.framework in Frameworks */,
 				EC27605A16166D290037A387 /* CoreGraphics.framework in Frameworks */,
@@ -84,6 +116,8 @@
 		EC27604616166D290037A387 = {
 			isa = PBXGroup;
 			children = (
+				EC7A0D59161A1CBA005BF0E5 /* gtar-verif114.png */,
+				EC7A0D57161A1CB1005BF0E5 /* gtar-verif57.png */,
 				EC27605B16166D290037A387 /* FunctionalVerification */,
 				EC27605416166D290037A387 /* Frameworks */,
 				EC27605216166D290037A387 /* Products */,
@@ -102,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				EC27607316167CC10037A387 /* libGtarController.a */,
+				EC7A0D61161A2B28005BF0E5 /* CoreMIDI.framework */,
+				EC7A0D5F161A2B1F005BF0E5 /* AVFoundation.framework */,
 				EC27605516166D290037A387 /* UIKit.framework */,
 				EC27605716166D290037A387 /* Foundation.framework */,
 				EC27605916166D290037A387 /* CoreGraphics.framework */,
@@ -112,9 +148,7 @@
 		EC27605B16166D290037A387 /* FunctionalVerification */ = {
 			isa = PBXGroup;
 			children = (
-				EC7A0D32161A19F2005BF0E5 /* gtar-verif57.png */,
-				EC7A0D33161A19F2005BF0E5 /* gtar-verif104.png */,
-				EC7A0D34161A19F2005BF0E5 /* gtar-verif114.png */,
+				EC7A0D7F161A3F8C005BF0E5 /* Images */,
 				EC7A0D39161A1A2F005BF0E5 /* Checklist.h */,
 				EC7A0D3A161A1A54005BF0E5 /* MainStoryboard.storyboard */,
 				EC27606416166D290037A387 /* AppDelegate.h */,
@@ -151,6 +185,27 @@
 				EC27606316166D290037A387 /* FunctionalVerification-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC7A0D7F161A3F8C005BF0E5 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EC7A0D63161A3F75005BF0E5 /* Audo_Jack.JPG */,
+				EC7A0D64161A3F76005BF0E5 /* Audio_JackGtar.JPG */,
+				EC7A0D65161A3F76005BF0E5 /* Battery_Switch.JPG */,
+				EC7A0D66161A3F77005BF0E5 /* checkbox_checked.png */,
+				EC7A0D67161A3F78005BF0E5 /* checkbox_unchecked.png */,
+				EC7A0D68161A3F79005BF0E5 /* Green_Button.JPG */,
+				EC7A0D69161A3F79005BF0E5 /* Phone_In.JPG */,
+				EC7A0D6A161A3F7A005BF0E5 /* Phone_Out.JPG */,
+				EC7A0D6B161A3F7C005BF0E5 /* sth.mp3 */,
+				EC7A0D6C161A3F7C005BF0E5 /* Blue_Leds.JPG */,
+				EC7A0D6D161A3F7C005BF0E5 /* Green_Leds.JPG */,
+				EC7A0D6E161A3F7C005BF0E5 /* Red_Leds.JPG */,
+				EC7A0D6F161A3F7C005BF0E5 /* White_Leds.JPG */,
+				EC7A0D70161A3F7D005BF0E5 /* Piezo.JPG */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,10 +259,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC27606016166D290037A387 /* InfoPlist.strings in Resources */,
-				EC7A0D35161A19F2005BF0E5 /* gtar-verif57.png in Resources */,
-				EC7A0D36161A19F2005BF0E5 /* gtar-verif104.png in Resources */,
-				EC7A0D37161A19F2005BF0E5 /* gtar-verif114.png in Resources */,
 				EC7A0D3B161A1A54005BF0E5 /* MainStoryboard.storyboard in Resources */,
+				EC7A0D58161A1CB1005BF0E5 /* gtar-verif57.png in Resources */,
+				EC7A0D5A161A1CBA005BF0E5 /* gtar-verif114.png in Resources */,
+				EC7A0D71161A3F7D005BF0E5 /* Audo_Jack.JPG in Resources */,
+				EC7A0D72161A3F7D005BF0E5 /* Audio_JackGtar.JPG in Resources */,
+				EC7A0D73161A3F7D005BF0E5 /* Battery_Switch.JPG in Resources */,
+				EC7A0D74161A3F7D005BF0E5 /* checkbox_checked.png in Resources */,
+				EC7A0D75161A3F7D005BF0E5 /* checkbox_unchecked.png in Resources */,
+				EC7A0D76161A3F7D005BF0E5 /* Green_Button.JPG in Resources */,
+				EC7A0D77161A3F7D005BF0E5 /* Phone_In.JPG in Resources */,
+				EC7A0D78161A3F7D005BF0E5 /* Phone_Out.JPG in Resources */,
+				EC7A0D79161A3F7D005BF0E5 /* sth.mp3 in Resources */,
+				EC7A0D7A161A3F7D005BF0E5 /* Blue_Leds.JPG in Resources */,
+				EC7A0D7B161A3F7D005BF0E5 /* Green_Leds.JPG in Resources */,
+				EC7A0D7C161A3F7D005BF0E5 /* Red_Leds.JPG in Resources */,
+				EC7A0D7D161A3F7D005BF0E5 /* White_Leds.JPG in Resources */,
+				EC7A0D7E161A3F7D005BF0E5 /* Piezo.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

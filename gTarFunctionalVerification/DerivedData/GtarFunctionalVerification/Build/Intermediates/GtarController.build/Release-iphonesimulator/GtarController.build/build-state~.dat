@@ -1,170 +1,0 @@
-TGtarController
-v5
-r1
-cCheck dependencies
-cProcessPCH /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch.pth GtarController/GtarController-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/CoreMidiInterface.o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/CoreMidiInterface.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cLibtool /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a normal i386
-cPBXCp GtarController/GtarController.h ../PublicProducts/Release-iphonesimulator/GtarController.h
-cPBXCp ../Gtar.h ../PublicProducts/Release-iphonesimulator/Gtar.h
-cPBXCp /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a ../PublicProducts/Release-iphonesimulator/libGtarController.a
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk
-c000000004F453DF80000000000000110
-t1329937912
-s272
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004F6E63670000000000353830
-t1332634471
-s3487792
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/CoreMidiInterface.o
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.LinkFileList
-c000000005069D9EA00000000000001D7
-t1349114346
-s471
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.o
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch.pth
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../Gtar.h
-c000000005066321D00000000000015B4
-t1348874781
-s5556
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator/Gtar.h
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator/GtarController.h
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator/libGtarController.a
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/CoreMidiInterface.m
-c00000000506624D6000000000000670C
-t1348871382
-s26380
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController-Prefix.pch
-c000000004FE50FD800000000000000A9
-t1340411864
-s169
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.h
-c000000005066320F0000000000003C33
-t1348874767
-s15411
-
-N/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.m
-c0000000050662FF90000000000009DCB
-t1348874233
-s40395
-
-CBuild AST from /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/CoreMidiInterface.m
-r0
-
-CBuild AST from /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.m
-r0
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesdf6d066a111ab641^c212236a111ab641^---0#1#0#--18"Check dependencies36"2F6CB124-18FD-49B6-8248-38FA40935993-
-
-CCompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/CoreMidiInterface.o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/CoreMidiInterface.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s370807147.197449
-e370807147.505203
-r1
-xCompileC
-x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/CoreMidiInterface.o
-x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/CoreMidiInterface.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection110"Compile /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/CoreMidiInterface.m82a9326b111ab641^1d55816b111ab641^---0#0#0#-19%DVTDocumentLocation2@118"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/CoreMidiInterface.m0000000000000000^4788"CompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/CoreMidiInterface.o GtarController/CoreMidiInterface.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50100 -iquote /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-generated-files.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-project-headers.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/include -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/.. -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/DerivedSources/i386 -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/DerivedSources -F/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator -include /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch -MMD -MT dependencies -MF /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/CoreMidiInterface.d --serialize-diagnostics /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/CoreMidiInterface.dia -c /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/CoreMidiInterface.m -o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/CoreMidiInterface.o36"5572BA92-FBF3-48B7-8E51-1BEB10F77B47-
-
-CCompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s370807147.197419
-e370807147.528497
-r1
-xCompileC
-x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.o
-x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection107"Compile /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.m9faa326b111ab641^624b876b111ab641^---0#0#0#-19%DVTDocumentLocation2@115"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.m0000000000000000^4770"CompileC /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.o GtarController/GtarController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50100 -iquote /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-generated-files.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-project-headers.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/include -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/.. -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/DerivedSources/i386 -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/DerivedSources -F/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator -include /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch -MMD -MT dependencies -MF /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.d --serialize-diagnostics /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.dia -c /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.m -o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.o36"082EC33F-807F-4C95-BCE6-3FA3966C9159-
-
-CLibtool /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a normal i386
-s370807147.536297
-e370807147.567784
-r1
-xLibtool
-x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a
-xnormal
-xi386
-o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection189"Libtool /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a normal i3864a5e896b111ab641^6c5e916b111ab641^-159"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC -0#0#0#--1360"Libtool /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a normal i386    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only i386 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -L/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator -filelist /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/Objects-normal/i386/GtarController.LinkFileList -ObjC -framework Foundation -o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a36"8518E309-68AF-40B7-94A9-AC5FD11CB227-
-
-CPBXCp ../Gtar.h ../PublicProducts/Release-iphonesimulator/Gtar.h
-s370807147.576071
-e370807147.579469
-r1
-xPBXCp
-x../Gtar.h
-x../PublicProducts/Release-iphonesimulator/Gtar.h
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection53"Copy ../PublicProducts/Release-iphonesimulator/Gtar.h198e936b111ab641^5858946b111ab641^---0#0#0#-19%DVTDocumentLocation2@132"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator/Gtar.h000000000080d041^761"PBXCp ../Gtar.h ../PublicProducts/Release-iphonesimulator/Gtar.h    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-debug-symbols -resolve-src-symlinks -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../Gtar.h /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator36"46065D4C-2071-4842-9718-89DE59166D5C-
-
-CPBXCp /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a ../PublicProducts/Release-iphonesimulator/libGtarController.a
-s370807147.576237
-e370807147.813794
-r1
-xPBXCp
-x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a
-x../PublicProducts/Release-iphonesimulator/libGtarController.a
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection66"Copy ../PublicProducts/Release-iphonesimulator/libGtarController.a6897936b111ab641^6555d06b111ab641^-400"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -S /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a -o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator/libGtarController.a -0#0#0#-19%DVTDocumentLocation2@145"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator/libGtarController.a000000000080d041^1026"PBXCp /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a ../PublicProducts/Release-iphonesimulator/libGtarController.a    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-debug-symbols -resolve-src-symlinks -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/libGtarController.a /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator36"87470379-6EED-4A2A-9D1D-30459E684C81-
-
-CPBXCp GtarController/GtarController.h ../PublicProducts/Release-iphonesimulator/GtarController.h
-s370807147.576066
-e370807147.579238
-r1
-xPBXCp
-xGtarController/GtarController.h
-x../PublicProducts/Release-iphonesimulator/GtarController.h
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection63"Copy ../PublicProducts/Release-iphonesimulator/GtarController.hd28a936b111ab641^ed49946b111ab641^---0#0#0#-19%DVTDocumentLocation2@142"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator/GtarController.h000000000080d041^815"PBXCp GtarController/GtarController.h ../PublicProducts/Release-iphonesimulator/GtarController.h    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-debug-symbols -resolve-src-symlinks -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController.h /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/../PublicProducts/Release-iphonesimulator36"366ECDA4-A87F-479A-8489-A3E54D3E717C-
-
-CProcessPCH /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch.pth GtarController/GtarController-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s370807146.141092
-e370807147.190634
-r1
-xProcessPCH
-x/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch.pth
-xGtarController/GtarController-Prefix.pch
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection51"Precompile GtarController/GtarController-Prefix.pch0c3b246a111ab641^4ed2406b111ab641^---0#0#0#-19%DVTDocumentLocation2@124"file://localhost/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController-Prefix.pch0000000000000000^4545"ProcessPCH /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch.pth GtarController/GtarController-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch i386 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50100 -iquote /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-generated-files.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/GtarController-project-headers.hmap -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator/include -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/.. -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/DerivedSources/i386 -I/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/GtarController.build/Release-iphonesimulator/GtarController.build/DerivedSources -F/Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Products/Release-iphonesimulator --serialize-diagnostics /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch.dia -c /Users/mckilljoy/IncidentTechnologies/iPhone/GtarSdk/GtarController/GtarController/GtarController-Prefix.pch -o /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch.pth -MMD -MT dependencies -MF /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Build/Intermediates/PrecompiledHeaders/GtarController-Prefix-apwgrwaknxglhohdqblzlkyzpnku/GtarController-Prefix.pch.d36"C2827D10-E76A-482E-87F2-BB5A731EF679-
-
-CProcessPCH /Users/mckilljoy/IncidentTechnologies/iPhone/GtarFunctionalVerification/DerivedData/GtarFunctionalVerification/Index/PrecompiledHeaders/GtarController-Prefix-golyocohbyjdjfgvxrialcnvenck_ast/GtarController-Prefix.pch.pth GtarController/GtarController-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
-r0
-
