@@ -7,12 +7,12 @@
 		<key>FunctionalVerification.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>EC275FD3161382A10037A387</key>
+		<key>EC27605016166D290037A387</key>
 		<dict>
 			<key>primary</key>
 			<true/>

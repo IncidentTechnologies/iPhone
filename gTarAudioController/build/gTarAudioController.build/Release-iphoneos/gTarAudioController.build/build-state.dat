@@ -1,326 +1,0 @@
-TgTarAudioController
-v3
-r1
-cCheck dependencies
-cProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dzgzntruyvmwgvbbsoqubegbgyow/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv6 objective-c++ com.apple.compilers.gcc.4_2
-cProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dfuphsijpeepoggffikylpcuqata/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv7 objective-c++ com.apple.compilers.gcc.4_2
-cProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-aviqsrpaficgvzfrrupxajbfxuly/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv6 c++ com.apple.compilers.gcc.4_2
-cProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-fwtldjrtcytpdwccqogegefglbyl/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv7 c++ com.apple.compilers.gcc.4_2
-cCompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/CAStreamBasicDescription.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp normal armv6 c++ com.apple.compilers.gcc.4_2
-cCompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/CAStreamBasicDescription.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp normal armv7 c++ com.apple.compilers.gcc.4_2
-cCompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/AudioController.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm normal armv6 objective-c++ com.apple.compilers.gcc.4_2
-cCompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/AudioController.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm normal armv7 objective-c++ com.apple.compilers.gcc.4_2
-cLibtool /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/libgTarAudioController.a normal armv7
-cLibtool /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/libgTarAudioController.a normal armv6
-cCreateUniversalBinary /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/libgTarAudioController.a normal "armv6 armv7"
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
-c000000004D9A119B0000000000000110
-t1301942683
-s272
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
-c000000004D99F8B000000000003FF380
-t1301936304
-s4191104
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioToolbox.h
-c000000004D99F8830000000000000A23
-t1301936259
-s2595
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreAudio.framework/Headers/CoreAudioTypes.h
-c000000004D93E0EA00000000000104EC
-t1301537002
-s66796
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFByteOrder.h
-c000000004D93DFE90000000000001983
-t1301536745
-s6531
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h
-c000000004D93DFEB0000000000000AB3
-t1301536747
-s2739
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004D93E1FD00000000003E22F0
-t1301537277
-s4072176
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004D93E1E60000000000001466
-t1301537254
-s5222
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/pthread.h
-c000000004D4F6E910000000000003BF6
-t1297051281
-s15350
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdio.h
-c000000004D4F6E910000000000004763
-t1297051281
-s18275
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/string.h
-c000000004D4F6E910000000000001A3A
-t1297051281
-s6714
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.h
-c000000004DD5BAE40000000000000FFC
-t1305852644
-s4092
-i<Foundation/Foundation.h>
-i<AudioToolbox/AudioToolbox.h>
-i"CAStreamBasicDescription.h"
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm
-c000000004DD5BAE40000000000003204
-t1305852644
-s12804
-i"AudioController.h"
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CADebugMacros.h
-c000000004D75F70C0000000000004FAE
-t1299576588
-s20398
-i<CoreAudio/CoreAudioTypes.h>
-i"CoreAudioTypes.h"
-i"CADebugPrintf.h"
-i<pthread.h>
-i"CAHostTimeBase.h"
-i"CAHostTimeBase.h"
-i"CADebugger.h"
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAMath.h
-c000000004D75F70C0000000000000C6B
-t1299576588
-s3179
-i<CoreAudio/CoreAudioTypes.h>
-i<CoreAudioTypes.h>
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp
-c000000004D75F70C0000000000004E32
-t1299576588
-s20018
-i"CAStreamBasicDescription.h"
-i"CAMath.h"
-i<CoreFoundation/CFByteOrder.h>
-i<CFByteOrder.h>
-i"CALogMacros.h"
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.h
-c000000004DD5BBCC0000000000002E6E
-t1305852876
-s11886
-i<CoreAudio/CoreAudioTypes.h>
-i<CoreFoundation/CoreFoundation.h>
-i"CoreAudioTypes.h"
-i"CoreFoundation.h"
-i"CADebugMacros.h"
-i<string.h>
-i<stdio.h>
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/libgTarAudioController.a
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/AudioController.o
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/CAStreamBasicDescription.o
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/gTarAudioController.LinkFileList
-c000000004DD5C4C10000000000000179
-t1305855169
-s377
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/libgTarAudioController.a
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/AudioController.o
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/CAStreamBasicDescription.o
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/gTarAudioController.LinkFileList
-c000000004DD5C4C10000000000000179
-t1305855169
-s377
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/libgTarAudioController.a
-t2
-s0
-
-N/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/gTarAudioController_Prefix.pch
-c000000004D75F62B00000000000000BC
-t1299576363
-s188
-i<Foundation/Foundation.h>
-
-N/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-aviqsrpaficgvzfrrupxajbfxuly/gTarAudioController_Prefix.pch.gch
-t2
-s0
-
-N/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dfuphsijpeepoggffikylpcuqata/gTarAudioController_Prefix.pch.gch
-t2
-s0
-
-N/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dzgzntruyvmwgvbbsoqubegbgyow/gTarAudioController_Prefix.pch.gch
-t2
-s0
-
-N/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-fwtldjrtcytpdwccqogegefglbyl/gTarAudioController_Prefix.pch.gch
-t2
-s0
-
-CCheck dependencies
-r0
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies39458b40fc85b341^79ea8541fc85b341^---0#1#0#--18"Check dependencies
-
-CCompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/AudioController.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm normal armv6 objective-c++ com.apple.compilers.gcc.4_2
-s327547970.669914
-e327547970.870121
-r1
-xCompileC
-xbuild/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/AudioController.o
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm
-xnormal
-xarmv6
-xobjective-c++
-xcom.apple.compilers.gcc.4_2
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection96"Compile /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm91b4ab42fc85b341^cbbfde42fc85b341^---0#0#0#-19%DVTDocumentLocation2@104"file://localhost/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm0000000000000000^2544"CompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/AudioController.o AudioController.mm normal armv6 objective-c++ com.apple.compilers.gcc.4_2    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-project-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources/armv6 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -include /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dzgzntruyvmwgvbbsoqubegbgyow/gTarAudioController_Prefix.pch -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/AudioController.o
-
-CCompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/CAStreamBasicDescription.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp normal armv6 c++ com.apple.compilers.gcc.4_2
-s327547969.828667
-e327547970.294527
-r1
-xCompileC
-xbuild/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/CAStreamBasicDescription.o
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp
-xnormal
-xarmv6
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cppf33cd441fc85b341^88654b42fc85b341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp0000000000000000^2562"CompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/CAStreamBasicDescription.o CAStreamBasicDescription.cpp normal armv6 c++ com.apple.compilers.gcc.4_2    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c++ -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-project-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources/armv6 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -include /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-aviqsrpaficgvzfrrupxajbfxuly/gTarAudioController_Prefix.pch -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/CAStreamBasicDescription.o
-
-CCompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/AudioController.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm normal armv7 objective-c++ com.apple.compilers.gcc.4_2
-s327547970.673524
-e327547970.859595
-r1
-xCompileC
-xbuild/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/AudioController.o
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm
-xnormal
-xarmv7
-xobjective-c++
-xcom.apple.compilers.gcc.4_2
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection96"Compile /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm69a9ac42fc85b341^a20ddc42fc85b341^---0#0#0#-19%DVTDocumentLocation2@104"file://localhost/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm0000000000000000^2544"CompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/AudioController.o AudioController.mm normal armv7 objective-c++ com.apple.compilers.gcc.4_2    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++ -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-project-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources/armv7 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -include /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dfuphsijpeepoggffikylpcuqata/gTarAudioController_Prefix.pch -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/AudioController.mm -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/AudioController.o
-
-CCompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/CAStreamBasicDescription.o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp normal armv7 c++ com.apple.compilers.gcc.4_2
-s327547970.003726
-e327547970.365772
-r1
-xCompileC
-xbuild/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/CAStreamBasicDescription.o
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp
-xnormal
-xarmv7
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cppd80f0142fc85b341^59a45d42fc85b341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp0000000000000000^2562"CompileC build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/CAStreamBasicDescription.o CAStreamBasicDescription.cpp normal armv7 c++ com.apple.compilers.gcc.4_2    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c++ -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-project-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources/armv7 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -include /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-fwtldjrtcytpdwccqogegefglbyl/gTarAudioController_Prefix.pch -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/CAStreamBasicDescription.cpp -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/CAStreamBasicDescription.o
-
-CCreateUniversalBinary /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/libgTarAudioController.a normal "armv6 armv7"
-s327547970.876684
-e327547970.885219
-r1
-xCreateUniversalBinary
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/libgTarAudioController.a
-xnormal
-xarmv6 armv7
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection141"Create universal binary /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/libgTarAudioController.a917de042fc85b341^529de242fc85b341^---0#0#0#-19%DVTDocumentLocation2@133"file://localhost/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/libgTarAudioController.a0000204dfb01f041^900"CreateUniversalBinary build/Release-iphoneos/libgTarAudioController.a normal "armv6 armv7"    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/libgTarAudioController.a /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/libgTarAudioController.a -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/libgTarAudioController.a
-
-CLibtool /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/libgTarAudioController.a normal armv6
-s327547970.870326
-e327547970.876499
-r1
-xLibtool
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/libgTarAudioController.a
-xnormal
-xarmv6
-o/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection141"Libtool build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/libgTarAudioController.a normal armv6e6ebde42fc85b341^e961e042fc85b341^-129"/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC -0#0#0#--1139"Libtool build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/libgTarAudioController.a normal armv6    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv IPHONEOS_DEPLOYMENT_TARGET 4.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static -arch_only armv6 -syslibroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -filelist /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/gTarAudioController.LinkFileList -ObjC -framework Foundation -framework AudioToolbox -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv6/libgTarAudioController.a
-
-CLibtool /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/libgTarAudioController.a normal armv7
-s327547970.860324
-e327547970.866471
-r1
-xLibtool
-x/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/libgTarAudioController.a
-xnormal
-xarmv7
-o/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection141"Libtool build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/libgTarAudioController.a normal armv7ec51dc42fc85b341^d9d0dd42fc85b341^-129"/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC -0#0#0#--1139"Libtool build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/libgTarAudioController.a normal armv7    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv IPHONEOS_DEPLOYMENT_TARGET 4.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static -arch_only armv7 -syslibroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -filelist /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/gTarAudioController.LinkFileList -ObjC -framework Foundation -framework AudioToolbox -o /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/Objects-normal/armv7/libgTarAudioController.a
-
-CProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-aviqsrpaficgvzfrrupxajbfxuly/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv6 c++ com.apple.compilers.gcc.4_2
-s327547969.534723
-e327547969.828092
-r1
-xProcessPCH++
-x/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-aviqsrpaficgvzfrrupxajbfxuly/gTarAudioController_Prefix.pch.gch
-xgTarAudioController_Prefix.pch
-xnormal
-xarmv6
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection41"Precompile gTarAudioController_Prefix.pch410f8941fc85b341^44fcd341fc85b341^---0#0#0#-19%DVTDocumentLocation2@116"file://localhost/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/gTarAudioController_Prefix.pch0000000000000000^2445"ProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-aviqsrpaficgvzfrrupxajbfxuly/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv6 c++ com.apple.compilers.gcc.4_2    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c++-header -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-project-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources/armv6 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/gTarAudioController_Prefix.pch -o /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-aviqsrpaficgvzfrrupxajbfxuly/gTarAudioController_Prefix.pch.gch
-
-CProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dfuphsijpeepoggffikylpcuqata/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv7 objective-c++ com.apple.compilers.gcc.4_2
-s327547969.534715
-e327547970.673172
-r1
-xProcessPCH++
-x/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dfuphsijpeepoggffikylpcuqata/gTarAudioController_Prefix.pch.gch
-xgTarAudioController_Prefix.pch
-xnormal
-xarmv7
-xobjective-c++
-xcom.apple.compilers.gcc.4_2
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection41"Precompile gTarAudioController_Prefix.pch910c8941fc85b341^f453ac42fc85b341^---0#0#0#-19%DVTDocumentLocation2@116"file://localhost/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/gTarAudioController_Prefix.pch0000000000000000^2465"ProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dfuphsijpeepoggffikylpcuqata/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv7 objective-c++ com.apple.compilers.gcc.4_2    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++-header -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-project-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources/armv7 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/gTarAudioController_Prefix.pch -o /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dfuphsijpeepoggffikylpcuqata/gTarAudioController_Prefix.pch.gch
-
-CProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dzgzntruyvmwgvbbsoqubegbgyow/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv6 objective-c++ com.apple.compilers.gcc.4_2
-s327547969.534509
-e327547970.668991
-r1
-xProcessPCH++
-x/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dzgzntruyvmwgvbbsoqubegbgyow/gTarAudioController_Prefix.pch.gch
-xgTarAudioController_Prefix.pch
-xnormal
-xarmv6
-xobjective-c++
-xcom.apple.compilers.gcc.4_2
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection41"Precompile gTarAudioController_Prefix.pch3d0c8941fc85b341^7044ab42fc85b341^---0#0#0#-19%DVTDocumentLocation2@116"file://localhost/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/gTarAudioController_Prefix.pch0000000000000000^2465"ProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dzgzntruyvmwgvbbsoqubegbgyow/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv6 objective-c++ com.apple.compilers.gcc.4_2    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c++-header -arch armv6 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-project-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources/armv6 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/gTarAudioController_Prefix.pch -o /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-dzgzntruyvmwgvbbsoqubegbgyow/gTarAudioController_Prefix.pch.gch
-
-CProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-fwtldjrtcytpdwccqogegefglbyl/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv7 c++ com.apple.compilers.gcc.4_2
-s327547969.534725
-e327547970.002982
-r1
-xProcessPCH++
-x/var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-fwtldjrtcytpdwccqogegefglbyl/gTarAudioController_Prefix.pch.gch
-xgTarAudioController_Prefix.pch
-xnormal
-xarmv7
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection41"Precompile gTarAudioController_Prefix.pchbb0a8941fc85b341^b9c10042fc85b341^---0#0#0#-19%DVTDocumentLocation2@116"file://localhost/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/gTarAudioController_Prefix.pch0000000000000000^2445"ProcessPCH++ /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-fwtldjrtcytpdwccqogegefglbyl/gTarAudioController_Prefix.pch.gch gTarAudioController_Prefix.pch normal armv7 c++ com.apple.compilers.gcc.4_2    cd /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c++-header -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-generated-files.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-own-target-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-all-target-headers.hmap -iquote /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/gTarAudioController-project-headers.hmap -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos/include -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources/armv7 -I/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/gTarAudioController.build/Release-iphoneos/gTarAudioController.build/DerivedSources -F/Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/build/Release-iphoneos -c /Users/mckilljoy/IncidentTechMain/Software/iPhone/gTarAudioController/gTarAudioController_Prefix.pch -o /var/folders/yw/ywcRHYK8HWeW01iUF3nne++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/gTarAudioController_Prefix-fwtldjrtcytpdwccqogegefglbyl/gTarAudioController_Prefix.pch.gch
-

@@ -17,8 +17,11 @@ typedef SInt32 MIDINotificationMessageID;
 // The delegate is only used for internal use. Normal communications (fret on, fret off, ..)
 // only goes to the public observers
 @protocol GtarControllerDelegate <NSObject>
+@optional
 - (void)ReceivedFWVersion:(int)MajorVersion andMinorVersion:(int)MinorVersion;
 - (void)RxFWUpdateACK:(unsigned char)status;
+- (void)RxBatteryStatus:(BOOL)charging;
+- (void)RxBatteryCharge:(unsigned char)percentage;
 
 - (void)SocketRxBytes:(NSString *)pstrRx;
 - (void)SocketConnected;
@@ -31,7 +34,9 @@ typedef enum GTAR_RX_MSG_TYPE
     RX_FRET_UP = 0x30,
     RX_FRET_DOWN = 0x31,
     RX_FW_VERSION = 0x32,
-    RX_FW_UPDATE_ACK = 0x35
+    RX_FW_UPDATE_ACK = 0x35,
+    RX_BATTERY_STATUS = 0x36,
+    RX_BATTERY_CHARGE = 0x37
 } gTarRxMsgType;
 
 // This class is an Objective C class that users sends a delegate update when events happen.

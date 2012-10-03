@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'AudioController' target in the 'AudioController' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

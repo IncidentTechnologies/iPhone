@@ -1,0 +1,381 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC7A0DC3161A4AD3005BF0E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7A0DC2161A4AD3005BF0E5 /* Foundation.framework */; };
+		EC7A0DD6161A4B37005BF0E5 /* AudioController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DD2161A4B37005BF0E5 /* AudioController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC7A0DD7161A4B37005BF0E5 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0DD3161A4B37005BF0E5 /* AudioController.mm */; };
+		EC7A0DD8161A4B37005BF0E5 /* Sampler.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DD4161A4B37005BF0E5 /* Sampler.h */; };
+		EC7A0DD9161A4B37005BF0E5 /* Sampler.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0DD5161A4B37005BF0E5 /* Sampler.mm */; };
+		EC7A0DE0161A4BAF005BF0E5 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0DDB161A4BAF005BF0E5 /* CAStreamBasicDescription.cpp */; };
+		EC7A0DE1161A4BAF005BF0E5 /* CAStreamBasicDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DDC161A4BAF005BF0E5 /* CAStreamBasicDescription.h */; };
+		EC7A0DE2161A4BAF005BF0E5 /* CADebugMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DDD161A4BAF005BF0E5 /* CADebugMacros.h */; };
+		EC7A0DE3161A4BAF005BF0E5 /* CAMath.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DDE161A4BAF005BF0E5 /* CAMath.h */; };
+		EC7A0DE4161A4BAF005BF0E5 /* CAXException.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DDF161A4BAF005BF0E5 /* CAXException.h */; };
+		EC7A0DF9161A4BCC005BF0E5 /* ButterWorthFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DE6161A4BCC005BF0E5 /* ButterWorthFilter.h */; };
+		EC7A0DFA161A4BCC005BF0E5 /* ButterWorthFilterElement.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DE7161A4BCC005BF0E5 /* ButterWorthFilterElement.h */; };
+		EC7A0DFB161A4BCC005BF0E5 /* ChorusEffect.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DE8161A4BCC005BF0E5 /* ChorusEffect.h */; };
+		EC7A0DFC161A4BCC005BF0E5 /* DelayEffect.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DE9161A4BCC005BF0E5 /* DelayEffect.h */; };
+		EC7A0DFD161A4BCC005BF0E5 /* DiffusionTank.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DEA161A4BCC005BF0E5 /* DiffusionTank.h */; };
+		EC7A0DFE161A4BCC005BF0E5 /* Effect.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DEB161A4BCC005BF0E5 /* Effect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC7A0DFF161A4BCC005BF0E5 /* FirstOrderFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DEC161A4BCC005BF0E5 /* FirstOrderFilter.h */; };
+		EC7A0E00161A4BCC005BF0E5 /* FuzzExpDistortion.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DED161A4BCC005BF0E5 /* FuzzExpDistortion.h */; };
+		EC7A0E01161A4BCC005BF0E5 /* HardCutoffDistortion.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DEE161A4BCC005BF0E5 /* HardCutoffDistortion.h */; };
+		EC7A0E02161A4BCC005BF0E5 /* KSObject.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DEF161A4BCC005BF0E5 /* KSObject.h */; };
+		EC7A0E03161A4BCC005BF0E5 /* LocalMax.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF0161A4BCC005BF0E5 /* LocalMax.h */; };
+		EC7A0E04161A4BCC005BF0E5 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF1161A4BCC005BF0E5 /* Overdrive.h */; };
+		EC7A0E05161A4BCC005BF0E5 /* Parameter.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF2161A4BCC005BF0E5 /* Parameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC7A0E06161A4BCC005BF0E5 /* Reverb.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF3161A4BCC005BF0E5 /* Reverb.h */; };
+		EC7A0E07161A4BCC005BF0E5 /* SoftClippingOverdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF4161A4BCC005BF0E5 /* SoftClippingOverdrive.h */; };
+		EC7A0E08161A4BCC005BF0E5 /* TanhDistortion.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF5161A4BCC005BF0E5 /* TanhDistortion.h */; };
+		EC7A0E09161A4BCC005BF0E5 /* EnvelopeFollower.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF6161A4BCC005BF0E5 /* EnvelopeFollower.h */; };
+		EC7A0E0A161A4BCC005BF0E5 /* Compressor.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF7161A4BCC005BF0E5 /* Compressor.h */; };
+		EC7A0E0B161A4BCC005BF0E5 /* Distortion.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF8161A4BCC005BF0E5 /* Distortion.h */; };
+		EC7A0E0D161A4C0A005BF0E5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7A0E0C161A4C0A005BF0E5 /* AudioToolbox.framework */; };
+		EC7A0E15161A5411005BF0E5 /* AudioController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DD2161A4B37005BF0E5 /* AudioController.h */; };
+		EC7A0E16161A5411005BF0E5 /* libAudioController.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DBF161A4AD3005BF0E5 /* libAudioController.a */; };
+		EC7A0E17161A5448005BF0E5 /* Effect.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DEB161A4BCC005BF0E5 /* Effect.h */; };
+		EC7A0E18161A5448005BF0E5 /* Parameter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DF2161A4BCC005BF0E5 /* Parameter.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EC7A0E14161A5403005BF0E5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SRCROOT)/../PublicProducts/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/AudioController";
+			dstSubfolderSpec = 0;
+			files = (
+				EC7A0E17161A5448005BF0E5 /* Effect.h in CopyFiles */,
+				EC7A0E18161A5448005BF0E5 /* Parameter.h in CopyFiles */,
+				EC7A0E15161A5411005BF0E5 /* AudioController.h in CopyFiles */,
+				EC7A0E16161A5411005BF0E5 /* libAudioController.a in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		EC7A0DBF161A4AD3005BF0E5 /* libAudioController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAudioController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC7A0DC2161A4AD3005BF0E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EC7A0DC6161A4AD3005BF0E5 /* AudioController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AudioController-Prefix.pch"; sourceTree = "<group>"; };
+		EC7A0DD2161A4B37005BF0E5 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
+		EC7A0DD3161A4B37005BF0E5 /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
+		EC7A0DD4161A4B37005BF0E5 /* Sampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sampler.h; sourceTree = "<group>"; };
+		EC7A0DD5161A4B37005BF0E5 /* Sampler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Sampler.mm; sourceTree = "<group>"; };
+		EC7A0DDB161A4BAF005BF0E5 /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
+		EC7A0DDC161A4BAF005BF0E5 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		EC7A0DDD161A4BAF005BF0E5 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		EC7A0DDE161A4BAF005BF0E5 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
+		EC7A0DDF161A4BAF005BF0E5 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
+		EC7A0DE6161A4BCC005BF0E5 /* ButterWorthFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButterWorthFilter.h; sourceTree = "<group>"; };
+		EC7A0DE7161A4BCC005BF0E5 /* ButterWorthFilterElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButterWorthFilterElement.h; sourceTree = "<group>"; };
+		EC7A0DE8161A4BCC005BF0E5 /* ChorusEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChorusEffect.h; sourceTree = "<group>"; };
+		EC7A0DE9161A4BCC005BF0E5 /* DelayEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayEffect.h; sourceTree = "<group>"; };
+		EC7A0DEA161A4BCC005BF0E5 /* DiffusionTank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiffusionTank.h; sourceTree = "<group>"; };
+		EC7A0DEB161A4BCC005BF0E5 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
+		EC7A0DEC161A4BCC005BF0E5 /* FirstOrderFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstOrderFilter.h; sourceTree = "<group>"; };
+		EC7A0DED161A4BCC005BF0E5 /* FuzzExpDistortion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuzzExpDistortion.h; sourceTree = "<group>"; };
+		EC7A0DEE161A4BCC005BF0E5 /* HardCutoffDistortion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HardCutoffDistortion.h; sourceTree = "<group>"; };
+		EC7A0DEF161A4BCC005BF0E5 /* KSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSObject.h; sourceTree = "<group>"; };
+		EC7A0DF0161A4BCC005BF0E5 /* LocalMax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalMax.h; sourceTree = "<group>"; };
+		EC7A0DF1161A4BCC005BF0E5 /* Overdrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
+		EC7A0DF2161A4BCC005BF0E5 /* Parameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parameter.h; sourceTree = "<group>"; };
+		EC7A0DF3161A4BCC005BF0E5 /* Reverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reverb.h; sourceTree = "<group>"; };
+		EC7A0DF4161A4BCC005BF0E5 /* SoftClippingOverdrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftClippingOverdrive.h; sourceTree = "<group>"; };
+		EC7A0DF5161A4BCC005BF0E5 /* TanhDistortion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TanhDistortion.h; sourceTree = "<group>"; };
+		EC7A0DF6161A4BCC005BF0E5 /* EnvelopeFollower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvelopeFollower.h; sourceTree = "<group>"; };
+		EC7A0DF7161A4BCC005BF0E5 /* Compressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compressor.h; sourceTree = "<group>"; };
+		EC7A0DF8161A4BCC005BF0E5 /* Distortion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Distortion.h; sourceTree = "<group>"; };
+		EC7A0E0C161A4C0A005BF0E5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC7A0DBC161A4AD3005BF0E5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7A0E0D161A4C0A005BF0E5 /* AudioToolbox.framework in Frameworks */,
+				EC7A0DC3161A4AD3005BF0E5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC7A0DB4161A4AD3005BF0E5 = {
+			isa = PBXGroup;
+			children = (
+				EC7A0DC4161A4AD3005BF0E5 /* AudioController */,
+				EC7A0DC1161A4AD3005BF0E5 /* Frameworks */,
+				EC7A0DC0161A4AD3005BF0E5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC7A0DC0161A4AD3005BF0E5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC7A0DBF161A4AD3005BF0E5 /* libAudioController.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC7A0DC1161A4AD3005BF0E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC7A0E0C161A4C0A005BF0E5 /* AudioToolbox.framework */,
+				EC7A0DC2161A4AD3005BF0E5 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC7A0DC4161A4AD3005BF0E5 /* AudioController */ = {
+			isa = PBXGroup;
+			children = (
+				EC7A0DDA161A4B9D005BF0E5 /* iPublicUtility */,
+				EC7A0DE5161A4BBF005BF0E5 /* Effects */,
+				EC7A0DD2161A4B37005BF0E5 /* AudioController.h */,
+				EC7A0DD3161A4B37005BF0E5 /* AudioController.mm */,
+				EC7A0DD4161A4B37005BF0E5 /* Sampler.h */,
+				EC7A0DD5161A4B37005BF0E5 /* Sampler.mm */,
+				EC7A0DC5161A4AD3005BF0E5 /* Supporting Files */,
+			);
+			path = AudioController;
+			sourceTree = "<group>";
+		};
+		EC7A0DC5161A4AD3005BF0E5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC7A0DC6161A4AD3005BF0E5 /* AudioController-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC7A0DDA161A4B9D005BF0E5 /* iPublicUtility */ = {
+			isa = PBXGroup;
+			children = (
+				EC7A0DDB161A4BAF005BF0E5 /* CAStreamBasicDescription.cpp */,
+				EC7A0DDC161A4BAF005BF0E5 /* CAStreamBasicDescription.h */,
+				EC7A0DDD161A4BAF005BF0E5 /* CADebugMacros.h */,
+				EC7A0DDE161A4BAF005BF0E5 /* CAMath.h */,
+				EC7A0DDF161A4BAF005BF0E5 /* CAXException.h */,
+			);
+			name = iPublicUtility;
+			sourceTree = "<group>";
+		};
+		EC7A0DE5161A4BBF005BF0E5 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				EC7A0DE6161A4BCC005BF0E5 /* ButterWorthFilter.h */,
+				EC7A0DE7161A4BCC005BF0E5 /* ButterWorthFilterElement.h */,
+				EC7A0DE8161A4BCC005BF0E5 /* ChorusEffect.h */,
+				EC7A0DE9161A4BCC005BF0E5 /* DelayEffect.h */,
+				EC7A0DEA161A4BCC005BF0E5 /* DiffusionTank.h */,
+				EC7A0DEB161A4BCC005BF0E5 /* Effect.h */,
+				EC7A0DEC161A4BCC005BF0E5 /* FirstOrderFilter.h */,
+				EC7A0DED161A4BCC005BF0E5 /* FuzzExpDistortion.h */,
+				EC7A0DEE161A4BCC005BF0E5 /* HardCutoffDistortion.h */,
+				EC7A0DEF161A4BCC005BF0E5 /* KSObject.h */,
+				EC7A0DF0161A4BCC005BF0E5 /* LocalMax.h */,
+				EC7A0DF1161A4BCC005BF0E5 /* Overdrive.h */,
+				EC7A0DF2161A4BCC005BF0E5 /* Parameter.h */,
+				EC7A0DF3161A4BCC005BF0E5 /* Reverb.h */,
+				EC7A0DF4161A4BCC005BF0E5 /* SoftClippingOverdrive.h */,
+				EC7A0DF5161A4BCC005BF0E5 /* TanhDistortion.h */,
+				EC7A0DF6161A4BCC005BF0E5 /* EnvelopeFollower.h */,
+				EC7A0DF7161A4BCC005BF0E5 /* Compressor.h */,
+				EC7A0DF8161A4BCC005BF0E5 /* Distortion.h */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		EC7A0DBD161A4AD3005BF0E5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7A0DD6161A4B37005BF0E5 /* AudioController.h in Headers */,
+				EC7A0DFE161A4BCC005BF0E5 /* Effect.h in Headers */,
+				EC7A0E05161A4BCC005BF0E5 /* Parameter.h in Headers */,
+				EC7A0DD8161A4B37005BF0E5 /* Sampler.h in Headers */,
+				EC7A0DE1161A4BAF005BF0E5 /* CAStreamBasicDescription.h in Headers */,
+				EC7A0DE2161A4BAF005BF0E5 /* CADebugMacros.h in Headers */,
+				EC7A0DE3161A4BAF005BF0E5 /* CAMath.h in Headers */,
+				EC7A0DE4161A4BAF005BF0E5 /* CAXException.h in Headers */,
+				EC7A0DF9161A4BCC005BF0E5 /* ButterWorthFilter.h in Headers */,
+				EC7A0DFA161A4BCC005BF0E5 /* ButterWorthFilterElement.h in Headers */,
+				EC7A0DFB161A4BCC005BF0E5 /* ChorusEffect.h in Headers */,
+				EC7A0DFC161A4BCC005BF0E5 /* DelayEffect.h in Headers */,
+				EC7A0DFD161A4BCC005BF0E5 /* DiffusionTank.h in Headers */,
+				EC7A0DFF161A4BCC005BF0E5 /* FirstOrderFilter.h in Headers */,
+				EC7A0E00161A4BCC005BF0E5 /* FuzzExpDistortion.h in Headers */,
+				EC7A0E01161A4BCC005BF0E5 /* HardCutoffDistortion.h in Headers */,
+				EC7A0E02161A4BCC005BF0E5 /* KSObject.h in Headers */,
+				EC7A0E03161A4BCC005BF0E5 /* LocalMax.h in Headers */,
+				EC7A0E04161A4BCC005BF0E5 /* Overdrive.h in Headers */,
+				EC7A0E06161A4BCC005BF0E5 /* Reverb.h in Headers */,
+				EC7A0E07161A4BCC005BF0E5 /* SoftClippingOverdrive.h in Headers */,
+				EC7A0E08161A4BCC005BF0E5 /* TanhDistortion.h in Headers */,
+				EC7A0E09161A4BCC005BF0E5 /* EnvelopeFollower.h in Headers */,
+				EC7A0E0A161A4BCC005BF0E5 /* Compressor.h in Headers */,
+				EC7A0E0B161A4BCC005BF0E5 /* Distortion.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		EC7A0DBE161A4AD3005BF0E5 /* AudioController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC7A0DCC161A4AD3005BF0E5 /* Build configuration list for PBXNativeTarget "AudioController" */;
+			buildPhases = (
+				EC7A0DBB161A4AD3005BF0E5 /* Sources */,
+				EC7A0DBC161A4AD3005BF0E5 /* Frameworks */,
+				EC7A0DBD161A4AD3005BF0E5 /* Headers */,
+				EC7A0E14161A5403005BF0E5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AudioController;
+			productName = AudioController;
+			productReference = EC7A0DBF161A4AD3005BF0E5 /* libAudioController.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC7A0DB6161A4AD3005BF0E5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = EC7A0DB9161A4AD3005BF0E5 /* Build configuration list for PBXProject "AudioController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EC7A0DB4161A4AD3005BF0E5;
+			productRefGroup = EC7A0DC0161A4AD3005BF0E5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC7A0DBE161A4AD3005BF0E5 /* AudioController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC7A0DBB161A4AD3005BF0E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7A0DD7161A4B37005BF0E5 /* AudioController.mm in Sources */,
+				EC7A0DD9161A4B37005BF0E5 /* Sampler.mm in Sources */,
+				EC7A0DE0161A4BAF005BF0E5 /* CAStreamBasicDescription.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		EC7A0DCA161A4AD3005BF0E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/..\"";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include/AudioController;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/AudioController;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EC7A0DCB161A4AD3005BF0E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/..\"";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include/AudioController;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/AudioController;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC7A0DCD161A4AD3005BF0E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/AudioController.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AudioController/AudioController-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EC7A0DCE161A4AD3005BF0E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/AudioController.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AudioController/AudioController-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC7A0DB9161A4AD3005BF0E5 /* Build configuration list for PBXProject "AudioController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC7A0DCA161A4AD3005BF0E5 /* Debug */,
+				EC7A0DCB161A4AD3005BF0E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC7A0DCC161A4AD3005BF0E5 /* Build configuration list for PBXNativeTarget "AudioController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC7A0DCD161A4AD3005BF0E5 /* Debug */,
+				EC7A0DCE161A4AD3005BF0E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC7A0DB6161A4AD3005BF0E5 /* Project object */;
+}

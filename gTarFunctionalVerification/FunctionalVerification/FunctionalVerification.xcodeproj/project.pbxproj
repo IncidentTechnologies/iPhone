@@ -7,108 +7,217 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC275FD9161382A10037A387 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC275FD8161382A10037A387 /* UIKit.framework */; };
-		EC275FDB161382A10037A387 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC275FDA161382A10037A387 /* Foundation.framework */; };
-		EC275FDD161382A10037A387 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC275FDC161382A10037A387 /* CoreGraphics.framework */; };
-		EC275FE3161382A10037A387 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC275FE1161382A10037A387 /* InfoPlist.strings */; };
-		EC275FE5161382A10037A387 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC275FE4161382A10037A387 /* main.m */; };
-		EC275FE9161382A10037A387 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC275FE8161382A10037A387 /* AppDelegate.m */; };
-		EC275FF2161382CB0037A387 /* gtar-verif57.png in Resources */ = {isa = PBXBuildFile; fileRef = EC275FEF161382CB0037A387 /* gtar-verif57.png */; };
-		EC275FF3161382CB0037A387 /* gtar-verif104.png in Resources */ = {isa = PBXBuildFile; fileRef = EC275FF0161382CB0037A387 /* gtar-verif104.png */; };
-		EC275FF4161382CB0037A387 /* gtar-verif114.png in Resources */ = {isa = PBXBuildFile; fileRef = EC275FF1161382CB0037A387 /* gtar-verif114.png */; };
+		EC27605616166D290037A387 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC27605516166D290037A387 /* UIKit.framework */; };
+		EC27605816166D290037A387 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC27605716166D290037A387 /* Foundation.framework */; };
+		EC27605A16166D290037A387 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC27605916166D290037A387 /* CoreGraphics.framework */; };
+		EC27606016166D290037A387 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC27605E16166D290037A387 /* InfoPlist.strings */; };
+		EC27606216166D290037A387 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC27606116166D290037A387 /* main.m */; };
+		EC27606616166D290037A387 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC27606516166D290037A387 /* AppDelegate.m */; };
+		EC27607416167CC10037A387 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC27607316167CC10037A387 /* libGtarController.a */; };
+		EC7A0D3B161A1A54005BF0E5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D3A161A1A54005BF0E5 /* MainStoryboard.storyboard */; };
+		EC7A0D4E161A1A89005BF0E5 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D3D161A1A88005BF0E5 /* RootViewController.mm */; };
+		EC7A0D4F161A1A89005BF0E5 /* ConnectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D3F161A1A88005BF0E5 /* ConnectionViewController.mm */; };
+		EC7A0D50161A1A89005BF0E5 /* LedAllViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D41161A1A88005BF0E5 /* LedAllViewController.mm */; };
+		EC7A0D51161A1A89005BF0E5 /* FretViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D43161A1A88005BF0E5 /* FretViewController.mm */; };
+		EC7A0D52161A1A89005BF0E5 /* FretboardElectricalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D45161A1A88005BF0E5 /* FretboardElectricalViewController.m */; };
+		EC7A0D53161A1A89005BF0E5 /* FirmwareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D47161A1A88005BF0E5 /* FirmwareViewController.m */; };
+		EC7A0D54161A1A89005BF0E5 /* LineOutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D49161A1A89005BF0E5 /* LineOutViewController.m */; };
+		EC7A0D55161A1A89005BF0E5 /* BatteryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D4B161A1A89005BF0E5 /* BatteryViewController.m */; };
+		EC7A0D56161A1A89005BF0E5 /* SummaryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0D4D161A1A89005BF0E5 /* SummaryViewController.mm */; };
+		EC7A0D58161A1CB1005BF0E5 /* gtar-verif57.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D57161A1CB1005BF0E5 /* gtar-verif57.png */; };
+		EC7A0D5A161A1CBA005BF0E5 /* gtar-verif114.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D59161A1CBA005BF0E5 /* gtar-verif114.png */; };
+		EC7A0D60161A2B1F005BF0E5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7A0D5F161A2B1F005BF0E5 /* AVFoundation.framework */; };
+		EC7A0D62161A2B28005BF0E5 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7A0D61161A2B28005BF0E5 /* CoreMIDI.framework */; };
+		EC7A0D71161A3F7D005BF0E5 /* Audo_Jack.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D63161A3F75005BF0E5 /* Audo_Jack.JPG */; };
+		EC7A0D72161A3F7D005BF0E5 /* Audio_JackGtar.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D64161A3F76005BF0E5 /* Audio_JackGtar.JPG */; };
+		EC7A0D73161A3F7D005BF0E5 /* Battery_Switch.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D65161A3F76005BF0E5 /* Battery_Switch.JPG */; };
+		EC7A0D74161A3F7D005BF0E5 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D66161A3F77005BF0E5 /* checkbox_checked.png */; };
+		EC7A0D75161A3F7D005BF0E5 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D67161A3F78005BF0E5 /* checkbox_unchecked.png */; };
+		EC7A0D76161A3F7D005BF0E5 /* Green_Button.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D68161A3F79005BF0E5 /* Green_Button.JPG */; };
+		EC7A0D77161A3F7D005BF0E5 /* Phone_In.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D69161A3F79005BF0E5 /* Phone_In.JPG */; };
+		EC7A0D78161A3F7D005BF0E5 /* Phone_Out.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6A161A3F7A005BF0E5 /* Phone_Out.JPG */; };
+		EC7A0D79161A3F7D005BF0E5 /* sth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6B161A3F7C005BF0E5 /* sth.mp3 */; };
+		EC7A0D7A161A3F7D005BF0E5 /* Blue_Leds.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6C161A3F7C005BF0E5 /* Blue_Leds.JPG */; };
+		EC7A0D7B161A3F7D005BF0E5 /* Green_Leds.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6D161A3F7C005BF0E5 /* Green_Leds.JPG */; };
+		EC7A0D7C161A3F7D005BF0E5 /* Red_Leds.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6E161A3F7C005BF0E5 /* Red_Leds.JPG */; };
+		EC7A0D7D161A3F7D005BF0E5 /* White_Leds.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D6F161A3F7C005BF0E5 /* White_Leds.JPG */; };
+		EC7A0D7E161A3F7D005BF0E5 /* Piezo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EC7A0D70161A3F7D005BF0E5 /* Piezo.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EC275FD4161382A10037A387 /* FunctionalVerification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunctionalVerification.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC275FD8161382A10037A387 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		EC275FDA161382A10037A387 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		EC275FDC161382A10037A387 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		EC275FE0161382A10037A387 /* FunctionalVerification-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FunctionalVerification-Info.plist"; sourceTree = "<group>"; };
-		EC275FE2161382A10037A387 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EC275FE4161382A10037A387 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		EC275FE6161382A10037A387 /* FunctionalVerification-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FunctionalVerification-Prefix.pch"; sourceTree = "<group>"; };
-		EC275FE7161382A10037A387 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		EC275FE8161382A10037A387 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EC275FEF161382CB0037A387 /* gtar-verif57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gtar-verif57.png"; path = "../gtar-verif57.png"; sourceTree = "<group>"; };
-		EC275FF0161382CB0037A387 /* gtar-verif104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gtar-verif104.png"; path = "../gtar-verif104.png"; sourceTree = "<group>"; };
-		EC275FF1161382CB0037A387 /* gtar-verif114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gtar-verif114.png"; path = "../gtar-verif114.png"; sourceTree = "<group>"; };
+		EC27605116166D290037A387 /* FunctionalVerification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunctionalVerification.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC27605516166D290037A387 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EC27605716166D290037A387 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EC27605916166D290037A387 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EC27605D16166D290037A387 /* FunctionalVerification-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FunctionalVerification-Info.plist"; sourceTree = "<group>"; };
+		EC27605F16166D290037A387 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EC27606116166D290037A387 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EC27606316166D290037A387 /* FunctionalVerification-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FunctionalVerification-Prefix.pch"; sourceTree = "<group>"; };
+		EC27606416166D290037A387 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EC27606516166D290037A387 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EC27607316167CC10037A387 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
+		EC7A0D39161A1A2F005BF0E5 /* Checklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checklist.h; sourceTree = "<group>"; };
+		EC7A0D3A161A1A54005BF0E5 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		EC7A0D3C161A1A88005BF0E5 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		EC7A0D3D161A1A88005BF0E5 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
+		EC7A0D3E161A1A88005BF0E5 /* ConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionViewController.h; sourceTree = "<group>"; };
+		EC7A0D3F161A1A88005BF0E5 /* ConnectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConnectionViewController.mm; sourceTree = "<group>"; };
+		EC7A0D40161A1A88005BF0E5 /* LedAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LedAllViewController.h; sourceTree = "<group>"; };
+		EC7A0D41161A1A88005BF0E5 /* LedAllViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LedAllViewController.mm; sourceTree = "<group>"; };
+		EC7A0D42161A1A88005BF0E5 /* FretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FretViewController.h; sourceTree = "<group>"; };
+		EC7A0D43161A1A88005BF0E5 /* FretViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FretViewController.mm; sourceTree = "<group>"; };
+		EC7A0D44161A1A88005BF0E5 /* FretboardElectricalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FretboardElectricalViewController.h; sourceTree = "<group>"; };
+		EC7A0D45161A1A88005BF0E5 /* FretboardElectricalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FretboardElectricalViewController.m; sourceTree = "<group>"; };
+		EC7A0D46161A1A88005BF0E5 /* FirmwareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirmwareViewController.h; sourceTree = "<group>"; };
+		EC7A0D47161A1A88005BF0E5 /* FirmwareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirmwareViewController.m; sourceTree = "<group>"; };
+		EC7A0D48161A1A89005BF0E5 /* LineOutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineOutViewController.h; sourceTree = "<group>"; };
+		EC7A0D49161A1A89005BF0E5 /* LineOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineOutViewController.m; sourceTree = "<group>"; };
+		EC7A0D4A161A1A89005BF0E5 /* BatteryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryViewController.h; sourceTree = "<group>"; };
+		EC7A0D4B161A1A89005BF0E5 /* BatteryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryViewController.m; sourceTree = "<group>"; };
+		EC7A0D4C161A1A89005BF0E5 /* SummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryViewController.h; sourceTree = "<group>"; };
+		EC7A0D4D161A1A89005BF0E5 /* SummaryViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SummaryViewController.mm; sourceTree = "<group>"; };
+		EC7A0D57161A1CB1005BF0E5 /* gtar-verif57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gtar-verif57.png"; sourceTree = "<group>"; };
+		EC7A0D59161A1CBA005BF0E5 /* gtar-verif114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gtar-verif114.png"; sourceTree = "<group>"; };
+		EC7A0D5F161A2B1F005BF0E5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		EC7A0D61161A2B28005BF0E5 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		EC7A0D63161A3F75005BF0E5 /* Audo_Jack.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Audo_Jack.JPG; sourceTree = "<group>"; };
+		EC7A0D64161A3F76005BF0E5 /* Audio_JackGtar.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Audio_JackGtar.JPG; sourceTree = "<group>"; };
+		EC7A0D65161A3F76005BF0E5 /* Battery_Switch.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Battery_Switch.JPG; sourceTree = "<group>"; };
+		EC7A0D66161A3F77005BF0E5 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
+		EC7A0D67161A3F78005BF0E5 /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
+		EC7A0D68161A3F79005BF0E5 /* Green_Button.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Green_Button.JPG; sourceTree = "<group>"; };
+		EC7A0D69161A3F79005BF0E5 /* Phone_In.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Phone_In.JPG; sourceTree = "<group>"; };
+		EC7A0D6A161A3F7A005BF0E5 /* Phone_Out.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Phone_Out.JPG; sourceTree = "<group>"; };
+		EC7A0D6B161A3F7C005BF0E5 /* sth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sth.mp3; sourceTree = "<group>"; };
+		EC7A0D6C161A3F7C005BF0E5 /* Blue_Leds.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Blue_Leds.JPG; sourceTree = "<group>"; };
+		EC7A0D6D161A3F7C005BF0E5 /* Green_Leds.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Green_Leds.JPG; sourceTree = "<group>"; };
+		EC7A0D6E161A3F7C005BF0E5 /* Red_Leds.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Red_Leds.JPG; sourceTree = "<group>"; };
+		EC7A0D6F161A3F7C005BF0E5 /* White_Leds.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = White_Leds.JPG; sourceTree = "<group>"; };
+		EC7A0D70161A3F7D005BF0E5 /* Piezo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Piezo.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		EC275FD1161382A10037A387 /* Frameworks */ = {
+		EC27604E16166D290037A387 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC275FD9161382A10037A387 /* UIKit.framework in Frameworks */,
-				EC275FDB161382A10037A387 /* Foundation.framework in Frameworks */,
-				EC275FDD161382A10037A387 /* CoreGraphics.framework in Frameworks */,
+				EC27607416167CC10037A387 /* libGtarController.a in Frameworks */,
+				EC7A0D62161A2B28005BF0E5 /* CoreMIDI.framework in Frameworks */,
+				EC7A0D60161A2B1F005BF0E5 /* AVFoundation.framework in Frameworks */,
+				EC27605616166D290037A387 /* UIKit.framework in Frameworks */,
+				EC27605816166D290037A387 /* Foundation.framework in Frameworks */,
+				EC27605A16166D290037A387 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EC275FC9161382A10037A387 = {
+		EC27604616166D290037A387 = {
 			isa = PBXGroup;
 			children = (
-				EC275FEF161382CB0037A387 /* gtar-verif57.png */,
-				EC275FF0161382CB0037A387 /* gtar-verif104.png */,
-				EC275FF1161382CB0037A387 /* gtar-verif114.png */,
-				EC275FDE161382A10037A387 /* FunctionalVerification */,
-				EC275FD7161382A10037A387 /* Frameworks */,
-				EC275FD5161382A10037A387 /* Products */,
+				EC7A0D59161A1CBA005BF0E5 /* gtar-verif114.png */,
+				EC7A0D57161A1CB1005BF0E5 /* gtar-verif57.png */,
+				EC27605B16166D290037A387 /* FunctionalVerification */,
+				EC27605416166D290037A387 /* Frameworks */,
+				EC27605216166D290037A387 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		EC275FD5161382A10037A387 /* Products */ = {
+		EC27605216166D290037A387 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EC275FD4161382A10037A387 /* FunctionalVerification.app */,
+				EC27605116166D290037A387 /* FunctionalVerification.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EC275FD7161382A10037A387 /* Frameworks */ = {
+		EC27605416166D290037A387 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EC275FD8161382A10037A387 /* UIKit.framework */,
-				EC275FDA161382A10037A387 /* Foundation.framework */,
-				EC275FDC161382A10037A387 /* CoreGraphics.framework */,
+				EC27607316167CC10037A387 /* libGtarController.a */,
+				EC7A0D61161A2B28005BF0E5 /* CoreMIDI.framework */,
+				EC7A0D5F161A2B1F005BF0E5 /* AVFoundation.framework */,
+				EC27605516166D290037A387 /* UIKit.framework */,
+				EC27605716166D290037A387 /* Foundation.framework */,
+				EC27605916166D290037A387 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EC275FDE161382A10037A387 /* FunctionalVerification */ = {
+		EC27605B16166D290037A387 /* FunctionalVerification */ = {
 			isa = PBXGroup;
 			children = (
-				EC275FE7161382A10037A387 /* AppDelegate.h */,
-				EC275FE8161382A10037A387 /* AppDelegate.m */,
-				EC275FDF161382A10037A387 /* Supporting Files */,
+				EC7A0D7F161A3F8C005BF0E5 /* Images */,
+				EC7A0D39161A1A2F005BF0E5 /* Checklist.h */,
+				EC7A0D3A161A1A54005BF0E5 /* MainStoryboard.storyboard */,
+				EC27606416166D290037A387 /* AppDelegate.h */,
+				EC27606516166D290037A387 /* AppDelegate.m */,
+				EC7A0D3C161A1A88005BF0E5 /* RootViewController.h */,
+				EC7A0D3D161A1A88005BF0E5 /* RootViewController.mm */,
+				EC7A0D3E161A1A88005BF0E5 /* ConnectionViewController.h */,
+				EC7A0D3F161A1A88005BF0E5 /* ConnectionViewController.mm */,
+				EC7A0D40161A1A88005BF0E5 /* LedAllViewController.h */,
+				EC7A0D41161A1A88005BF0E5 /* LedAllViewController.mm */,
+				EC7A0D42161A1A88005BF0E5 /* FretViewController.h */,
+				EC7A0D43161A1A88005BF0E5 /* FretViewController.mm */,
+				EC7A0D44161A1A88005BF0E5 /* FretboardElectricalViewController.h */,
+				EC7A0D45161A1A88005BF0E5 /* FretboardElectricalViewController.m */,
+				EC7A0D46161A1A88005BF0E5 /* FirmwareViewController.h */,
+				EC7A0D47161A1A88005BF0E5 /* FirmwareViewController.m */,
+				EC7A0D48161A1A89005BF0E5 /* LineOutViewController.h */,
+				EC7A0D49161A1A89005BF0E5 /* LineOutViewController.m */,
+				EC7A0D4A161A1A89005BF0E5 /* BatteryViewController.h */,
+				EC7A0D4B161A1A89005BF0E5 /* BatteryViewController.m */,
+				EC7A0D4C161A1A89005BF0E5 /* SummaryViewController.h */,
+				EC7A0D4D161A1A89005BF0E5 /* SummaryViewController.mm */,
+				EC27605C16166D290037A387 /* Supporting Files */,
 			);
 			path = FunctionalVerification;
 			sourceTree = "<group>";
 		};
-		EC275FDF161382A10037A387 /* Supporting Files */ = {
+		EC27605C16166D290037A387 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EC275FE0161382A10037A387 /* FunctionalVerification-Info.plist */,
-				EC275FE1161382A10037A387 /* InfoPlist.strings */,
-				EC275FE4161382A10037A387 /* main.m */,
-				EC275FE6161382A10037A387 /* FunctionalVerification-Prefix.pch */,
+				EC27605D16166D290037A387 /* FunctionalVerification-Info.plist */,
+				EC27605E16166D290037A387 /* InfoPlist.strings */,
+				EC27606116166D290037A387 /* main.m */,
+				EC27606316166D290037A387 /* FunctionalVerification-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC7A0D7F161A3F8C005BF0E5 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EC7A0D63161A3F75005BF0E5 /* Audo_Jack.JPG */,
+				EC7A0D64161A3F76005BF0E5 /* Audio_JackGtar.JPG */,
+				EC7A0D65161A3F76005BF0E5 /* Battery_Switch.JPG */,
+				EC7A0D66161A3F77005BF0E5 /* checkbox_checked.png */,
+				EC7A0D67161A3F78005BF0E5 /* checkbox_unchecked.png */,
+				EC7A0D68161A3F79005BF0E5 /* Green_Button.JPG */,
+				EC7A0D69161A3F79005BF0E5 /* Phone_In.JPG */,
+				EC7A0D6A161A3F7A005BF0E5 /* Phone_Out.JPG */,
+				EC7A0D6B161A3F7C005BF0E5 /* sth.mp3 */,
+				EC7A0D6C161A3F7C005BF0E5 /* Blue_Leds.JPG */,
+				EC7A0D6D161A3F7C005BF0E5 /* Green_Leds.JPG */,
+				EC7A0D6E161A3F7C005BF0E5 /* Red_Leds.JPG */,
+				EC7A0D6F161A3F7C005BF0E5 /* White_Leds.JPG */,
+				EC7A0D70161A3F7D005BF0E5 /* Piezo.JPG */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EC275FD3161382A10037A387 /* FunctionalVerification */ = {
+		EC27605016166D290037A387 /* FunctionalVerification */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EC275FEC161382A10037A387 /* Build configuration list for PBXNativeTarget "FunctionalVerification" */;
+			buildConfigurationList = EC27606916166D290037A387 /* Build configuration list for PBXNativeTarget "FunctionalVerification" */;
 			buildPhases = (
-				EC275FD0161382A10037A387 /* Sources */,
-				EC275FD1161382A10037A387 /* Frameworks */,
-				EC275FD2161382A10037A387 /* Resources */,
+				EC27604D16166D290037A387 /* Sources */,
+				EC27604E16166D290037A387 /* Frameworks */,
+				EC27604F16166D290037A387 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -116,65 +225,88 @@
 			);
 			name = FunctionalVerification;
 			productName = FunctionalVerification;
-			productReference = EC275FD4161382A10037A387 /* FunctionalVerification.app */;
+			productReference = EC27605116166D290037A387 /* FunctionalVerification.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		EC275FCB161382A10037A387 /* Project object */ = {
+		EC27604816166D290037A387 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = EC275FCE161382A10037A387 /* Build configuration list for PBXProject "FunctionalVerification" */;
+			buildConfigurationList = EC27604B16166D290037A387 /* Build configuration list for PBXProject "FunctionalVerification" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = EC275FC9161382A10037A387;
-			productRefGroup = EC275FD5161382A10037A387 /* Products */;
+			mainGroup = EC27604616166D290037A387;
+			productRefGroup = EC27605216166D290037A387 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EC275FD3161382A10037A387 /* FunctionalVerification */,
+				EC27605016166D290037A387 /* FunctionalVerification */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		EC275FD2161382A10037A387 /* Resources */ = {
+		EC27604F16166D290037A387 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC275FE3161382A10037A387 /* InfoPlist.strings in Resources */,
-				EC275FF2161382CB0037A387 /* gtar-verif57.png in Resources */,
-				EC275FF3161382CB0037A387 /* gtar-verif104.png in Resources */,
-				EC275FF4161382CB0037A387 /* gtar-verif114.png in Resources */,
+				EC27606016166D290037A387 /* InfoPlist.strings in Resources */,
+				EC7A0D3B161A1A54005BF0E5 /* MainStoryboard.storyboard in Resources */,
+				EC7A0D58161A1CB1005BF0E5 /* gtar-verif57.png in Resources */,
+				EC7A0D5A161A1CBA005BF0E5 /* gtar-verif114.png in Resources */,
+				EC7A0D71161A3F7D005BF0E5 /* Audo_Jack.JPG in Resources */,
+				EC7A0D72161A3F7D005BF0E5 /* Audio_JackGtar.JPG in Resources */,
+				EC7A0D73161A3F7D005BF0E5 /* Battery_Switch.JPG in Resources */,
+				EC7A0D74161A3F7D005BF0E5 /* checkbox_checked.png in Resources */,
+				EC7A0D75161A3F7D005BF0E5 /* checkbox_unchecked.png in Resources */,
+				EC7A0D76161A3F7D005BF0E5 /* Green_Button.JPG in Resources */,
+				EC7A0D77161A3F7D005BF0E5 /* Phone_In.JPG in Resources */,
+				EC7A0D78161A3F7D005BF0E5 /* Phone_Out.JPG in Resources */,
+				EC7A0D79161A3F7D005BF0E5 /* sth.mp3 in Resources */,
+				EC7A0D7A161A3F7D005BF0E5 /* Blue_Leds.JPG in Resources */,
+				EC7A0D7B161A3F7D005BF0E5 /* Green_Leds.JPG in Resources */,
+				EC7A0D7C161A3F7D005BF0E5 /* Red_Leds.JPG in Resources */,
+				EC7A0D7D161A3F7D005BF0E5 /* White_Leds.JPG in Resources */,
+				EC7A0D7E161A3F7D005BF0E5 /* Piezo.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		EC275FD0161382A10037A387 /* Sources */ = {
+		EC27604D16166D290037A387 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC275FE5161382A10037A387 /* main.m in Sources */,
-				EC275FE9161382A10037A387 /* AppDelegate.m in Sources */,
+				EC27606216166D290037A387 /* main.m in Sources */,
+				EC27606616166D290037A387 /* AppDelegate.m in Sources */,
+				EC7A0D4E161A1A89005BF0E5 /* RootViewController.mm in Sources */,
+				EC7A0D4F161A1A89005BF0E5 /* ConnectionViewController.mm in Sources */,
+				EC7A0D50161A1A89005BF0E5 /* LedAllViewController.mm in Sources */,
+				EC7A0D51161A1A89005BF0E5 /* FretViewController.mm in Sources */,
+				EC7A0D52161A1A89005BF0E5 /* FretboardElectricalViewController.m in Sources */,
+				EC7A0D53161A1A89005BF0E5 /* FirmwareViewController.m in Sources */,
+				EC7A0D54161A1A89005BF0E5 /* LineOutViewController.m in Sources */,
+				EC7A0D55161A1A89005BF0E5 /* BatteryViewController.m in Sources */,
+				EC7A0D56161A1A89005BF0E5 /* SummaryViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EC275FE1161382A10037A387 /* InfoPlist.strings */ = {
+		EC27605E16166D290037A387 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EC275FE2161382A10037A387 /* en */,
+				EC27605F16166D290037A387 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -182,10 +314,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		EC275FEA161382A10037A387 /* Debug */ = {
+		EC27606716166D290037A387 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -202,15 +334,16 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/usr/local/include";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		EC275FEB161382A10037A387 /* Release */ = {
+		EC27606816166D290037A387 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -220,6 +353,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/usr/local/include";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
@@ -227,7 +361,7 @@
 			};
 			name = Release;
 		};
-		EC275FED161382A10037A387 /* Debug */ = {
+		EC27606A16166D290037A387 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -238,7 +372,7 @@
 			};
 			name = Debug;
 		};
-		EC275FEE161382A10037A387 /* Release */ = {
+		EC27606B16166D290037A387 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -252,24 +386,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EC275FCE161382A10037A387 /* Build configuration list for PBXProject "FunctionalVerification" */ = {
+		EC27604B16166D290037A387 /* Build configuration list for PBXProject "FunctionalVerification" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EC275FEA161382A10037A387 /* Debug */,
-				EC275FEB161382A10037A387 /* Release */,
+				EC27606716166D290037A387 /* Debug */,
+				EC27606816166D290037A387 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EC275FEC161382A10037A387 /* Build configuration list for PBXNativeTarget "FunctionalVerification" */ = {
+		EC27606916166D290037A387 /* Build configuration list for PBXNativeTarget "FunctionalVerification" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EC275FED161382A10037A387 /* Debug */,
-				EC275FEE161382A10037A387 /* Release */,
+				EC27606A16166D290037A387 /* Debug */,
+				EC27606B16166D290037A387 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = EC275FCB161382A10037A387 /* Project object */;
+	rootObject = EC27604816166D290037A387 /* Project object */;
 }
