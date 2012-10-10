@@ -337,7 +337,7 @@
         // Instantiate an extended audio file object.
         ExtAudioFileRef audioFileObject = 0;
         
-        NSLog(@"Opening URL: %@", m_sampleNameArray[noteNum]);
+//        NSLog(@"Opening URL: %@", m_sampleNameArray[noteNum]);
         
         // Open an audio file and associate it with the extended audio file objects;
         OSStatus result = ExtAudioFileOpenURL(m_sampleNameArray[noteNum], &audioFileObject);

@@ -31,7 +31,7 @@
     if ( self ) 
     {
         
-        m_info = @"GtarController v1";
+        m_info = @"GtarController v1.0.5";
         
         m_spoofed = NO;
         m_connected = NO;
@@ -127,7 +127,7 @@
     
     NSMutableDictionary * responseDictionary = [[NSMutableDictionary alloc] init];
     
-    [responseDictionary setValue:@"notifyObserversGtarDisconnected" forKey:@"Selector"];
+    [responseDictionary setValue:@"notifyObserversGtarConnected:" forKey:@"Selector"];
     
     [self midiCallbackDispatch:responseDictionary];
     
@@ -149,7 +149,7 @@
     
     NSMutableDictionary * responseDictionary = [[NSMutableDictionary alloc] init];
     
-    [responseDictionary setValue:@"notifyObserversGtarDisconnected" forKey:@"Selector"];
+    [responseDictionary setValue:@"notifyObserversGtarDisconnected:" forKey:@"Selector"];
     
     [self midiCallbackDispatch:responseDictionary];
     
@@ -175,7 +175,7 @@
         m_connected = YES;
         m_spoofed = NO;
         
-        [responseDictionary setValue:@"notifyObserversGtarConnectedM" forKey:@"Selector"];
+        [responseDictionary setValue:@"notifyObserversGtarConnected:" forKey:@"Selector"];
     }
     else
     {
@@ -185,7 +185,7 @@
         m_connected = NO;
         m_spoofed = NO;
         
-        [responseDictionary setValue:@"notifyObserversGtarDisconnected" forKey:@"Selector"];
+        [responseDictionary setValue:@"notifyObserversGtarDisconnected:" forKey:@"Selector"];
     }
     
     [self midiCallbackDispatch:responseDictionary];
@@ -211,7 +211,7 @@
             
             NSMutableDictionary * responseDictionary = [[NSMutableDictionary alloc] init];
             
-            [responseDictionary setValue:@"notifyObserversGtarNoteOff" forKey:@"Selector"];
+            [responseDictionary setValue:@"notifyObserversGtarNoteOff:" forKey:@"Selector"];
             [responseDictionary setValue:[[NSNumber alloc] initWithChar:fret] forKey:@"Fret"];
             [responseDictionary setValue:[[NSNumber alloc] initWithChar:str] forKey:@"String"];
             
@@ -232,7 +232,7 @@
             {
                 NSMutableDictionary * responseDictionary = [[NSMutableDictionary alloc] init];
                 
-                [responseDictionary setValue:@"notifyObserversGtarNoteOn" forKey:@"Selector"];
+                [responseDictionary setValue:@"notifyObserversGtarNoteOn:" forKey:@"Selector"];
                 [responseDictionary setValue:[[NSNumber alloc] initWithChar:fret] forKey:@"Fret"];
                 [responseDictionary setValue:[[NSNumber alloc] initWithChar:str] forKey:@"String"];
                 [responseDictionary setValue:[[NSNumber alloc] initWithChar:velocity] forKey:@"Velocity"];
@@ -277,8 +277,8 @@
                     NSMutableDictionary * responseDictionary = [[NSMutableDictionary alloc] init];
                     
                     [responseDictionary setValue:@"notifyObserversGtarFretDown:" forKey:@"Selector"];
-                    [responseDictionary setValue:[NSNumber numberWithChar:fret] forKey:@"Fret"];
-                    [responseDictionary setValue:[NSNumber numberWithChar:str] forKey:@"String"];
+                    [responseDictionary setValue:[[NSNumber alloc] initWithChar:fret] forKey:@"Fret"];
+                    [responseDictionary setValue:[[NSNumber alloc] initWithChar:str] forKey:@"String"];
                     
                     [self midiCallbackDispatch:responseDictionary];
                     
@@ -381,6 +381,9 @@
     
     NSString * selectorString = [dictionary objectForKey:@"Selector"];
     
+//    NSLog(@"Selector string: %@", selectorString);
+//    NSLog(@"Dictionary %@", dictionary);
+    
     SEL selector = NSSelectorFromString(selectorString);
     
     [self performSelector:selector withObject:dictionary];
@@ -435,6 +438,9 @@
     gtarPosition.fret = [fretNumber integerValue];
     gtarPosition.string = [stringNumber integerValue];
     
+    [fretNumber release];
+    [stringNumber release];
+    
     for ( NSValue * nonretainedObserver in m_observerList )
     {
         id observer = [nonretainedObserver nonretainedObjectValue];
@@ -456,6 +462,9 @@
     
     gtarPosition.fret = [fretNumber integerValue];
     gtarPosition.string = [stringNumber integerValue];
+    
+    [fretNumber release];
+    [stringNumber release];
     
     for ( NSValue * nonretainedObserver in m_observerList )
     {
@@ -481,6 +490,10 @@
     gtarPluck.position.string = [stringNumber integerValue];
     gtarPluck.velocity = [velocityNumber integerValue];
     
+    [fretNumber release];
+    [stringNumber release];
+    [velocityNumber release];
+    
     for ( NSValue * nonretainedObserver in m_observerList )
     {
         id observer = [nonretainedObserver nonretainedObjectValue];
@@ -503,6 +516,9 @@
     gtarPosition.fret = [fretNumber integerValue];
     gtarPosition.string = [stringNumber integerValue];
     
+    [fretNumber release];
+    [stringNumber release];
+    
     for ( NSValue * nonretainedObserver in m_observerList )
     {
         id observer = [nonretainedObserver nonretainedObjectValue];
@@ -514,7 +530,7 @@
     }
 }
 
-- (void)notifyObserversGtarConnectedM:(NSDictionary*)dictionary
+- (void)notifyObserversGtarConnected:(NSDictionary*)dictionary
 {
     
     // The dictionary will be nil and unused
@@ -550,6 +566,9 @@
 
 - (BOOL)checkNoteInterarrivalTime:(double)time forFret:(GtarFret)fret andString:(GtarString)str
 {
+    
+    // zero base the string
+    str--;
     
     if ( (time - m_previousPluckTime[str][fret]) >= m_minimumInterarrivalTime )
     {
@@ -651,6 +670,9 @@
 
 - (GtarControllerStatus)turnOffAllLeds
 {
+    
+    [self logMessage:@"Turning off all LEDs"
+          atLogLevel:GtarControllerLogLevelInfo];
     
     GtarControllerStatus status = GtarControllerStatusOk;
     
@@ -859,9 +881,9 @@
             {
                 
                 BOOL result = [m_coreMidiInterface sendSetLedStateFret:fret andString:(str+1)
-                                                                andRed:m_stringColorMapping[str][0]
-                                                              andGreen:m_stringColorMapping[str][1]
-                                                               andBlue:m_stringColorMapping[str][2]
+                                                                andRed:m_colorMap.stringColor[str].red
+                                                              andGreen:m_colorMap.stringColor[str].green
+                                                               andBlue:m_colorMap.stringColor[str].blue
                                                             andMessage:0];
                 
                 if ( result == NO )
@@ -879,9 +901,9 @@
             
             // subtract one to zero-base the string
             BOOL result = [m_coreMidiInterface sendSetLedStateFret:fret andString:str
-                                                            andRed:m_stringColorMapping[str-1][0]
-                                                          andGreen:m_stringColorMapping[str-1][1]
-                                                           andBlue:m_stringColorMapping[str-1][2]
+                                                            andRed:m_colorMap.stringColor[str-1].red
+                                                          andGreen:m_colorMap.stringColor[str-1].green
+                                                           andBlue:m_colorMap.stringColor[str-1].blue
                                                         andMessage:0];
 
             if ( result == NO )
@@ -1265,45 +1287,48 @@
 
 #pragma mark - Color mapping manipulation
 
-- (GtarControllerStatus)setStringsColorMapping:(char**)colorMap
-{
-    
-    for ( GtarString str = 0; str < GtarStringCount; str++ )
-    {
-        [self setStringColorMapping:str toRed:colorMap[str][0] andGreen:colorMap[str][1] andBlue:colorMap[str][2]];
-    }
-    
-    return GtarControllerStatusOk;
-    
-}
+// Currently the only way to change the color mapping is by setting 'colorMap' directly.
+// I think that is sufficient.
 
-- (GtarControllerStatus)setStringColorMapping:(GtarString)str toRed:(char)red andGreen:(char)green andBlue:(char)blue
-{
-    // Sanity check arguments. We could chose to return 
-    // a GtarControllerStatusInvalidParamter status, but its a lot
-    // friendlier to just fix it.
-    if ( red > 3 ) 
-    {
-        red = 3;
-    }
-    
-    if ( green > 3 )
-    {
-        green = 3;
-    }
-    
-    if ( blue > 3 )
-    {
-        blue = 3;
-    }
-    
-    m_stringColorMapping[str][0] = red;
-    m_stringColorMapping[str][1] = green;
-    m_stringColorMapping[str][2] = blue;
-    
-    return GtarControllerStatusOk;
-    
-}
+//- (GtarControllerStatus)setStringsColorMapping:(char**)colorMap
+//{
+//    
+//    for ( GtarString str = 0; str < GtarStringCount; str++ )
+//    {
+//        [self setStringColorMapping:str toRed:colorMap[str][0] andGreen:colorMap[str][1] andBlue:colorMap[str][2]];
+//    }
+//    
+//    return GtarControllerStatusOk;
+//    
+//}
+
+//- (GtarControllerStatus)setStringColorMapping:(GtarString)str toRed:(GtarLedIntensity)red andGreen:(GtarLedIntensity)green andBlue:(GtarLedIntensity)blue
+//{
+//    // Sanity check arguments. We could chose to return 
+//    // a GtarControllerStatusInvalidParamter status, but its a lot
+//    // friendlier to just fix it.
+//    if ( red > GtarMaxLedIntensity ) 
+//    {
+//        red = GtarMaxLedIntensity;
+//    }
+//    
+//    if ( green > GtarMaxLedIntensity )
+//    {
+//        green = GtarMaxLedIntensity;
+//    }
+//    
+//    if ( blue > GtarMaxLedIntensity )
+//    {
+//        blue = GtarMaxLedIntensity;
+//    }
+//    
+//    m_colorMap.stringColor[str].red = red;
+//    m_colorMap.stringColor[str].green = green;
+//    m_colorMap.stringColor[str].blue = blue;
+//    
+//    return GtarControllerStatusOk;
+//    
+//}
 
 #pragma mark - Effect handling
 

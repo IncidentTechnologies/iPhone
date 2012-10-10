@@ -474,6 +474,7 @@ extern TelemetryController * g_telemetryController;
     {
         // Do it one more time
         [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
+//        [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
     }
     else
     {

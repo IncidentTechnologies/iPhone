@@ -1,6 +1,6 @@
 #!/bin/sh
 
-perl headerdoc/headerDoc2HTML.pl ../GtarController/GtarController.h -o .
-perl headerdoc/headerDoc2HTML.pl ../Gtar.h -o .
+perl headerdoc/headerDoc2HTML.pl ../GtarController/GtarController/GtarController.h -o ./Documents
+perl headerdoc/headerDoc2HTML.pl ../Gtar.h -o ./Documents
 
-perl headerdoc/gatherHeaderDoc.pl .
+perl headerdoc/gatherHeaderDoc.pl ./Documents

@@ -141,6 +141,8 @@ extern TelemetryController * g_telemetryController;
     // disable idle sleeping
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     
+    [g_gtarController removeObserver:self];
+    
     [m_volumeView release];
     [m_activityIndicatorView release];
     [m_connectingView release];
@@ -371,6 +373,8 @@ extern TelemetryController * g_telemetryController;
 //    {
 //        //[self.view addSubview:m_connectingView];
 //    }
+    
+    [g_gtarController addObserver:self];
 }
 
 - (void)viewDidUnload
@@ -459,14 +463,10 @@ extern TelemetryController * g_telemetryController;
     [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
 }
 
-- (void)guitarConnected
+- (void)gtarConnected
 {
     
 //    [m_activityIndicatorView stopAnimating];
-    [g_gtarController turnOffAllEffects];
-    [g_gtarController turnOffAllLeds];
-    [g_gtarController setMinimumInterarrivalTime:0.05f];
-    
     [m_connectingView removeFromSuperview];
     
     [g_gtarController turnOffAllEffects];
@@ -477,7 +477,7 @@ extern TelemetryController * g_telemetryController;
     
 }
 
-- (void)guitarDisconnected
+- (void)gtarDisconnected
 {
     if (m_LEDTimer != nil)
     {

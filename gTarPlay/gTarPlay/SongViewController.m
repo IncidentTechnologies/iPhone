@@ -104,8 +104,8 @@ extern TelemetryController * g_telemetryController;
     // enable idle sleeping
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     
-//    [m_audioPlayer stop];
-//    [m_audioPlayer release];
+    [g_gtarController turnOffAllLeds];
+    [g_gtarController removeObserver:self];
     
     g_songViewController = nil;
     
@@ -203,10 +203,12 @@ extern TelemetryController * g_telemetryController;
     
     // Observe the global guitar controller. This will call guitarConnected when it is connected.
     [g_gtarController addObserver:self];
+    [g_gtarController turnOffAllLeds];
     
     // testing
 //    if ( g_gtarController.connected == NO )
 //    {
+//        NSLog(@"debugging this thing");
 //        [g_gtarController debugSpoofConnected];
 //    }
     
@@ -391,13 +393,23 @@ BOOL m_skipNotes = NO;
         {
             NSNote * note = [m_songModel.m_currentFrame.m_notesPending objectAtIndex:0];
             
-            [self guitarNotesOnFret:note.m_fret andString:note.m_string];
+            GtarPluck pluck;
+            pluck.velocity = GtarMaxPluckVelocity;
+            pluck.position.fret = note.m_fret;
+            pluck.position.string = note.m_string;
+            
+            [self gtarNoteOn:pluck];
         }
         else if ( [m_songModel.m_nextFrame.m_notesPending count] > 0 )
         {
             NSNote * note = [m_songModel.m_nextFrame.m_notesPending objectAtIndex:0];
             
-            [self guitarNotesOnFret:note.m_fret andString:note.m_string];
+            GtarPluck pluck;
+            pluck.velocity = GtarMaxPluckVelocity;
+            pluck.position.fret = note.m_fret;
+            pluck.position.string = note.m_string;
+            
+            [self gtarNoteOn:pluck];
         }
         
         m_refreshDisplay = YES;
@@ -534,7 +546,7 @@ BOOL m_skipNotes = NO;
     
 }
 
--(void)gtarDisconnected
+- (void)gtarDisconnected
 {
     
     NSLog(@"SongViewController: gTar has been disconnected");

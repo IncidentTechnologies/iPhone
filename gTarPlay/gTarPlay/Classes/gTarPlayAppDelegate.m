@@ -62,7 +62,7 @@ TelemetryController * g_telemetryController;
         
         //	g_cloudController = [[CloudController alloc] init];
 //        g_cloudController = [[CloudController alloc] initWithServer:@"http://50.18.250.24/v0.12"];
-        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v0.13"];
+        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
       
         //
         // Restore the file controller so we can get all the cached content
@@ -78,14 +78,17 @@ TelemetryController * g_telemetryController;
         // Connect to the gtar device
         //
         g_gtarController = [[GtarController alloc] init];
+        
         g_gtarController.responseThread = GtarControllerThreadMain;
+        g_gtarController.logLevel = GtarControllerLogLevelInfo;
         
         // Create the audio controller
         g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
         [g_audioController initializeAUGraph];
         
+        [g_gtarController debugSpoofConnected];
 #if TARGET_IPHONE_SIMULATOR
-//        [g_guitarController debugSpoofConnected];
+        [g_gtarController debugSpoofConnected];
         
 //        [NSTimer scheduledTimerWithTimeInterval:5.0f target:g_guitarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:nil];
 //        [NSTimer scheduledTimerWithTimeInterval:9.0f target:g_guitarController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:nil];

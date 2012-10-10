@@ -231,11 +231,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SongViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371520874.251827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "945"
-         endingLineNumber = "945"
+         startingLineNumber = "916"
+         endingLineNumber = "916"
          landmarkName = "-songModelNextFrame:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1279,20 +1279,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Classes/RootViewController.m"
-         timestampString = "370917626.930434"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "871"
-         endingLineNumber = "871"
-         landmarkName = "-gtarConnected"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "../gTarAppCore/CloudController.m"
          timestampString = "363823236.384832"
@@ -1449,11 +1435,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SongViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371520874.251827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "961"
-         endingLineNumber = "961"
+         startingLineNumber = "932"
+         endingLineNumber = "932"
          landmarkName = "-songModelFrameExpired:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1501,11 +1487,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/RootViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371515870.736452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "951"
-         endingLineNumber = "951"
+         startingLineNumber = "952"
+         endingLineNumber = "952"
          landmarkName = "-fbSessionInvalidated"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1579,11 +1565,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/RootViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371515870.736452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "930"
-         endingLineNumber = "930"
+         startingLineNumber = "931"
+         endingLineNumber = "931"
          landmarkName = "-fbDidNotLogin:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1592,11 +1578,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/RootViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371515870.736452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "936"
-         endingLineNumber = "936"
+         startingLineNumber = "937"
+         endingLineNumber = "937"
          landmarkName = "-fbDidLogout"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1605,11 +1591,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/RootViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371515870.736452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "573"
-         endingLineNumber = "573"
+         startingLineNumber = "574"
+         endingLineNumber = "574"
          landmarkName = "-attachFullScreenDialog:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1722,11 +1708,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SongViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371520874.251827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "896"
-         endingLineNumber = "896"
+         startingLineNumber = "867"
+         endingLineNumber = "867"
          landmarkName = "-songModelEnterFrame:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1735,11 +1721,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SongViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371520874.251827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "921"
-         endingLineNumber = "921"
+         startingLineNumber = "892"
+         endingLineNumber = "892"
          landmarkName = "-songModelExitFrame:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1748,11 +1734,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SongViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371520874.251827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "950"
-         endingLineNumber = "950"
+         startingLineNumber = "921"
+         endingLineNumber = "921"
          landmarkName = "-songModelFrameExpired:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1930,11 +1916,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/RootViewController.m"
-         timestampString = "370917626.930434"
+         timestampString = "371515870.736452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "643"
-         endingLineNumber = "643"
+         startingLineNumber = "644"
+         endingLineNumber = "644"
          landmarkName = "-checkUserLoggedIn"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2021,11 +2007,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/gTarPlayAppDelegate.m"
-         timestampString = "370917626.930434"
+         timestampString = "371521037.080729"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "241"
-         endingLineNumber = "241"
+         startingLineNumber = "245"
+         endingLineNumber = "245"
          landmarkName = "-applicationWillTerminate:"
          landmarkType = "5">
       </FileBreakpoint>

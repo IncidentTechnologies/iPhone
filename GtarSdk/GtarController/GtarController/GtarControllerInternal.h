@@ -55,7 +55,7 @@ typedef enum GTAR_RX_MSG_TYPE
     
     NSTimer * m_eventLoopTimer;
     
-    char m_stringColorMapping[GtarStringCount][3];
+//    char m_stringColorMapping[GtarStringCount][3];
     
     double m_previousPluckTime[GtarStringCount][GtarFretCount];
     
@@ -75,7 +75,7 @@ typedef enum GTAR_RX_MSG_TYPE
 - (void)notifyObserversGtarFretUp:(NSDictionary*)dictionary;
 - (void)notifyObserversGtarNoteOn:(NSDictionary*)dictionary;
 - (void)notifyObserversGtarNoteOff:(NSDictionary*)dictionary;
-- (void)notifyObserversGtarConnectedM:(NSDictionary*)dictionary;
+- (void)notifyObserversGtarConnected:(NSDictionary*)dictionary;
 - (void)notifyObserversGtarDisconnected:(NSDictionary*)dictionary;
 
 
