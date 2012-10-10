@@ -213,7 +213,7 @@
 
 - (void)resumeUploadLogMessages
 {
-    [m_cloudController requestLogUpload:m_pendingUpload andVersion:m_appVersion andDevice:m_deviceId andApp:m_appVersion andCallbackObj:self andCallbackSel:@selector(uploadLogMessagesComplete:)];
+    [m_cloudController requestLogUpload:m_pendingUpload andVersion:m_appVersion andDevice:m_deviceId andApp:m_appName andCallbackObj:self andCallbackSel:@selector(uploadLogMessagesComplete:)];
 }
 
 - (void)uploadLogMessagesComplete:(CloudResponse*)cloudResponse

@@ -131,7 +131,8 @@ TelemetryController * g_telemetryController;
 
         g_telemetryController = [[TelemetryController alloc] initWithCloudController:g_cloudController];
         g_telemetryController.m_compileDate = @__DATE__;
-        g_telemetryController.m_appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+//        g_telemetryController.m_appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersionKey"];
+        g_telemetryController.m_appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         g_telemetryController.m_appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
         g_telemetryController.m_deviceId = uuidString;
         
