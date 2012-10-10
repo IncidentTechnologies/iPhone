@@ -22,11 +22,6 @@ typedef SInt32 MIDINotificationMessageID;
 - (void)RxFWUpdateACK:(unsigned char)status;
 - (void)RxBatteryStatus:(BOOL)charging;
 - (void)RxBatteryCharge:(unsigned char)percentage;
-
-- (void)SocketRxBytes:(NSString *)pstrRx;
-- (void)SocketConnected;
-- (void)SocketConnectionError;
-- (void)SocketDisconnected;
 @end
 
 typedef enum GTAR_RX_MSG_TYPE
@@ -54,8 +49,6 @@ typedef enum GTAR_RX_MSG_TYPE
     NSMutableArray * m_observerList;
     
     NSTimer * m_eventLoopTimer;
-    
-//    char m_stringColorMapping[GtarStringCount][3];
     
     double m_previousPluckTime[GtarStringCount][GtarFretCount];
     

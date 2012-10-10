@@ -27,9 +27,9 @@
                           atLogLevel:GtarControllerLogLevelInfo];
         
         // Create arrays
-        m_pSources = [[NSMutableArray alloc] init];
-        m_pDestinations = [[NSMutableArray alloc] init];
-        m_pSendQueue = [[NSMutableArray alloc] init];
+        m_midiSources = [[NSMutableArray alloc] init];
+        m_midiDestinations = [[NSMutableArray alloc] init];
+        m_sendQueue = [[NSMutableArray alloc] init];
         
         m_connected = NO;
         
@@ -84,14 +84,14 @@
         m_pMidiClient = NULL;
     }
     
-    [m_pSources release];
+    [m_midiSources release];
     
-    [m_pDestinations release];
+    [m_midiDestinations release];
     
     // We have to nullify the requests that have already been sent out.
-    @synchronized( m_pSendQueue )
+    @synchronized( m_sendQueue )
     {
-        for ( NSValue * sendPtr in m_pSendQueue )
+        for ( NSValue * sendPtr in m_sendQueue )
         {
             MIDISysexSendRequest * sendRequest = (MIDISysexSendRequest*)[sendPtr pointerValue];
             
@@ -99,7 +99,7 @@
         }
     }
     
-    [m_pSendQueue release];
+    [m_sendQueue release];
     
     [super dealloc];
 }
@@ -108,10 +108,10 @@
 - (void)processSendQueue
 {
     
-    @synchronized( m_pSendQueue )
+    @synchronized( m_sendQueue )
     {
         
-        NSValue * ptr = [m_pSendQueue objectAtIndex:0];
+        NSValue * ptr = [m_sendQueue objectAtIndex:0];
         
         // We are done with this pointer
         MIDISysexSendRequest * sendRequest = (MIDISysexSendRequest *)[ptr pointerValue];
@@ -119,12 +119,12 @@
         // This will apply to the data buffer as well since they are alloc'd in one malloc
         free(sendRequest);
         
-        [m_pSendQueue removeObject:ptr];
+        [m_sendQueue removeObject:ptr];
         
         // See if we have anything else queued up
-        if ( [m_pSendQueue count] > 0 )
+        if ( [m_sendQueue count] > 0 )
         {
-            sendRequest = (MIDISysexSendRequest*)[[m_pSendQueue objectAtIndex:0] pointerValue];
+            sendRequest = (MIDISysexSendRequest*)[[m_sendQueue objectAtIndex:0] pointerValue];
             
             OSStatus oss = MIDISendSysex(sendRequest);
             
@@ -187,7 +187,7 @@
     
     int sourceCount = MIDIGetNumberOfSources();
     
-    [m_pSources removeAllObjects];
+    [m_midiSources removeAllObjects];
     
     m_sourceConnected = NO;
     
@@ -220,7 +220,7 @@
                     }
                     else
                     {
-                        [m_pSources addObject:[NSValue valueWithPointer:sourceEndpoint]];
+                        [m_midiSources addObject:[NSValue valueWithPointer:sourceEndpoint]];
                         
                         [m_gtarController logMessage:[NSString stringWithFormat:@"Gtar source connected"]
                                           atLogLevel:GtarControllerLogLevelInfo];
@@ -240,7 +240,7 @@
     
     int destinationCount = MIDIGetNumberOfDestinations();
     
-    [m_pDestinations removeAllObjects];
+    [m_midiDestinations removeAllObjects];
     
     m_destinationConnected = NO;
     
@@ -262,7 +262,7 @@
                 // Only connect the 'gTar' destination for now
                 if ( [((NSString*)destinationName) isEqualToString:@"gTar"] == YES )
                 {
-                    [m_pDestinations addObject:[NSValue valueWithPointer:destinationEndpoint]];
+                    [m_midiDestinations addObject:[NSValue valueWithPointer:destinationEndpoint]];
                     
                     [m_gtarController logMessage:[NSString stringWithFormat:@"Gtar destination connected"]
                                       atLogLevel:GtarControllerLogLevelInfo];
@@ -418,7 +418,7 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     packetList.packet[0] = packet;
     
     // Broadcast it on all endpoints for now
-    for ( NSValue * destPtr in m_pDestinations )
+    for ( NSValue * destPtr in m_midiDestinations )
     {
         
         MIDIEndpointRef endpoint = (MIDIEndpointRef)[destPtr pointerValue];
@@ -441,11 +441,11 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
 - (BOOL)sendSysExBuffer:(unsigned char*)buffer withLength:(int)bufferLength
 {
     
-    @synchronized(m_pSendQueue)
+    @synchronized(m_sendQueue)
     {
         
         // There is currently only a single destination in this loop
-        for ( NSValue * destPtr in m_pDestinations )
+        for ( NSValue * destPtr in m_midiDestinations )
         {
             
             // Allocate the packet and the buffer simultaneously
@@ -471,10 +471,10 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
             
             NSValue * sendPtr = [NSValue valueWithPointer:sendRequest];
             
-            [m_pSendQueue addObject:sendPtr];
+            [m_sendQueue addObject:sendPtr];
             
             // If nothing else is on the queue, send this now
-            if ( [m_pSendQueue count] == 1 )
+            if ( [m_sendQueue count] == 1 )
             {
                 OSStatus oss = MIDISendSysex(sendRequest);
                 

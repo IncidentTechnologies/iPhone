@@ -48,9 +48,9 @@ void MIDIReadHandler(const MIDIPacketList *pPacketList, void *pReadProcCon, void
     MIDIPortRef m_pMidiInputPort;
     MIDIPortRef m_pMidiOutputPort;
     
-    NSMutableArray * m_pSendQueue;
-    NSMutableArray * m_pSources;
-    NSMutableArray * m_pDestinations;
+    NSMutableArray * m_sendQueue;
+    NSMutableArray * m_midiSources;
+    NSMutableArray * m_midiDestinations;
     
 }
 
