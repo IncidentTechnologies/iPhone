@@ -203,7 +203,7 @@ extern TelemetryController * g_telemetryController;
     
     // Observe the global guitar controller. This will call guitarConnected when it is connected.
     [g_gtarController addObserver:self];
-    [g_gtarController turnOffAllLeds];
+//    [g_gtarController turnOffAllLeds];
     
     // testing
 //    if ( g_gtarController.connected == NO )
@@ -241,6 +241,7 @@ extern TelemetryController * g_telemetryController;
 - (void)startWithSongXmlDom
 {
     
+    [g_gtarController turnOffAllLeds];
     [m_displayController cancelPreloading];
     [m_displayController release];
     [m_songModel release];

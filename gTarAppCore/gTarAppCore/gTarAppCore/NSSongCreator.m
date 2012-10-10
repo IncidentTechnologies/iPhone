@@ -86,7 +86,7 @@
         for ( NSNote * note in measure.m_notes )
 		{
 			
-			OUTPUT_XMP("<note value=\"%s\" duration=\"%f\" measurestart=\"%f\">", note.m_value, note.m_duration, note.m_measureStart );
+			OUTPUT_XMP("<note value=\"%@\" duration=\"%f\" measurestart=\"%f\">", note.m_value, note.m_duration, note.m_measureStart );
 			INCREASE_INDENT;
             
             if ( note.m_fret == GTAR_GUITAR_FRET_MUTED )

@@ -549,7 +549,12 @@ extern TelemetryController * g_telemetryController;
         int fret = point.y / (320/GTAR_GUITAR_FRET_COUNT);
         if ( fret >= GTAR_GUITAR_FRET_COUNT ) fret = (GTAR_GUITAR_FRET_COUNT-1);
         
-        [self guitarNotesOnFret:(GTAR_GUITAR_FRET_COUNT-fret-1) andString:str + 1];
+        GtarPluck pluck;
+        pluck.velocity = GtarMaxPluckVelocity;
+        pluck.position.fret = (GTAR_GUITAR_FRET_COUNT-fret-1);
+        pluck.position.string = (str+1);
+        
+        [self gtarNoteOn:pluck];
 #endif
         m_LEDTouchArea = LEDTouchNone;
         return;
