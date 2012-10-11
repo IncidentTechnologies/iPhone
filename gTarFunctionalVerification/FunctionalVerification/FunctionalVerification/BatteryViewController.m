@@ -42,14 +42,21 @@ extern Checklist g_checklist;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    g_gtarController.m_delegate = self;
-    
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    g_gtarController.m_delegate = self;
+    
+    [super viewDidAppear:animated];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -95,18 +102,22 @@ extern Checklist g_checklist;
     
     if ( charging == YES )
     {
-        _chargingLabel.text = @"Battery Status: Charging!";
+        [_chargingLabel performSelectorOnMainThread:@selector(setText:) withObject:@"Battery Status: Charging!" waitUntilDone:YES];
     }
     else
     {
-        _chargingLabel.text = @"Battery Status: Not Charging";
+        [_chargingLabel performSelectorOnMainThread:@selector(setText:) withObject:@"Battery Status: Not Charging" waitUntilDone:YES];
     }
 }
 
 - (void)RxBatteryCharge:(unsigned char)percentage
 {
-    NSLog(@"Battert percentage received");
-    _percentageLabel.text = [[NSString alloc] initWithFormat:@"Battery Percentage: %u%", percentage];
+    NSLog(@"Battery percentage received");
+    
+    NSString * msg = [[NSString alloc] initWithFormat:@"Battery Percentage: %u%", percentage];
+    
+    [_percentageLabel performSelectorOnMainThread:@selector(setText:) withObject:msg waitUntilDone:YES];
+    
 }
 
 @end

@@ -558,8 +558,11 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     
     BOOL result = [self sendSysExBuffer:sendBuffer withLength:sendBufferLength];
     
-    [m_gtarController logMessage:[NSString stringWithFormat:@"SendRequestBatteryStatus: Failed to send SysEx Buffer"]
-                      atLogLevel:GtarControllerLogLevelError];
+    if ( result == NO )
+    {
+        [m_gtarController logMessage:[NSString stringWithFormat:@"SendRequestBatteryStatus: Failed to send SysEx Buffer"]
+                          atLogLevel:GtarControllerLogLevelError];
+    }
     
     return result;
 
@@ -578,9 +581,12 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     
     BOOL result = [self sendSysExBuffer:sendBuffer withLength:sendBufferLength];
     
-    [m_gtarController logMessage:[NSString stringWithFormat:@"SendEnableDebug: Failed to send SysEx Buffer"]
-                      atLogLevel:GtarControllerLogLevelError];
-    
+    if ( result == NO )
+    {
+        [m_gtarController logMessage:[NSString stringWithFormat:@"SendEnableDebug: Failed to send SysEx Buffer"]
+                          atLogLevel:GtarControllerLogLevelError];
+    }
+        
     return result;
     
 }
@@ -598,8 +604,11 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     
     BOOL result = [self sendSysExBuffer:sendBuffer withLength:sendBufferLength];
     
-    [m_gtarController logMessage:[NSString stringWithFormat:@"SendDisableDebug: Failed to send SysEx Buffer"]
-                      atLogLevel:GtarControllerLogLevelError];
+    if ( result == NO )
+    {
+        [m_gtarController logMessage:[NSString stringWithFormat:@"SendDisableDebug: Failed to send SysEx Buffer"]
+                          atLogLevel:GtarControllerLogLevelError];
+    }
     
     return result;
 

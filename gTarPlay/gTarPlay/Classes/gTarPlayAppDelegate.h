@@ -8,16 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+#import <GtarController/GtarController.h>
+
 #import "FBConnect.h"
 
-@interface gTarPlayAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate>
+@class gTarPlayApplication;
+
+@interface gTarPlayAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate, GtarControllerObserver>
 {
     UIWindow * window;
     UINavigationController * navigationController;
+    gTarPlayApplication * playApplication;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow * window;
 @property (nonatomic, retain) IBOutlet UINavigationController * navigationController;
+@property (nonatomic, assign) gTarPlayApplication * playApplication;
 
 - (void)checkAndClearCache;
 - (void)installPreloadedContent;

@@ -7,6 +7,7 @@
 //
 
 #import "gTarPlayAppDelegate.h"
+#import "gTarPlayApplication.h"
 
 #import <CoreFoundation/CoreFoundation.h>
 
@@ -20,8 +21,6 @@
 #import <gTarAppCore/FileController.h>
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/TelemetryController.h>
-
-#import <GtarController/GtarController.h>
 
 #import <AudioController/AudioController.h>
 
@@ -42,6 +41,7 @@ TelemetryController * g_telemetryController;
 
 @synthesize window;
 @synthesize navigationController;
+@synthesize playApplication;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -53,14 +53,9 @@ TelemetryController * g_telemetryController;
     if ( self )
     {
         //
-        // Load the global controllers
-        //
-        
-        //
         // Init the cloud controller
         //
         
-        //	g_cloudController = [[CloudController alloc] init];
 //        g_cloudController = [[CloudController alloc] initWithServer:@"http://50.18.250.24/v0.12"];
         g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
       
@@ -86,12 +81,8 @@ TelemetryController * g_telemetryController;
         g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
         [g_audioController initializeAUGraph];
         
-        [g_gtarController debugSpoofConnected];
 #if TARGET_IPHONE_SIMULATOR
         [g_gtarController debugSpoofConnected];
-        
-//        [NSTimer scheduledTimerWithTimeInterval:5.0f target:g_guitarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:nil];
-//        [NSTimer scheduledTimerWithTimeInterval:9.0f target:g_guitarController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:nil];
 #endif
         
         //
@@ -131,7 +122,6 @@ TelemetryController * g_telemetryController;
 
         g_telemetryController = [[TelemetryController alloc] initWithCloudController:g_cloudController];
         g_telemetryController.m_compileDate = @__DATE__;
-//        g_telemetryController.m_appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersionKey"];
         g_telemetryController.m_appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         g_telemetryController.m_appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
         g_telemetryController.m_deviceId = uuidString;
@@ -158,6 +148,8 @@ TelemetryController * g_telemetryController;
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
     [g_telemetryController logMessage:@"Application launched" withType:TelemetryControllerMessageTypeInfo];
+    
+    self.playApplication = application;
     
     return YES;
 }
@@ -274,7 +266,7 @@ TelemetryController * g_telemetryController;
     [settings synchronize];
     
     BOOL clearCache = [settings boolForKey:@"ClearCache"];
-    BOOL runBefore = [settings boolForKey:@"RunBefore"];
+//    BOOL runBefore = [settings boolForKey:@"RunBefore"];
     
     if ( clearCache == YES )
     {
@@ -287,43 +279,40 @@ TelemetryController * g_telemetryController;
         
         [settings synchronize];
         
-//        [self installPreloadedContent];
-        
     }
-    else if ( runBefore == NO )
-    {
-        // If this is the first time we run, preinstall the content
-//        [self installPreloadedContent];
-    }
+//    else if ( runBefore == NO )
+//    {
+//        // If this is the first time we run, preinstall the content
+//    }
     
 }
 
-- (void)installPreloadedContent
-{
-    
-    // 'install' the preloaded content into the FileController
-    NSString * plistName = [[NSBundle mainBundle] pathForResource:@"preloaded-content" ofType:@"plist"];
-    NSDictionary * preloadedContentDict = [NSDictionary dictionaryWithContentsOfFile:plistName];
-    NSArray * preloadedContentArray = [preloadedContentDict objectForKey:@"PreloadedContent"];
-    
-    for ( NSString * fileName in preloadedContentArray )
-    {
-        
-        NSString * filePath = [[NSBundle mainBundle] pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]];
-        
-        NSLog(@"Installing %@", filePath);
-        
-        // this gets us the file id
-        NSString * fileIdStr = [[fileName lastPathComponent] stringByDeletingPathExtension];
-        
-        BOOL result = [g_fileController saveFilePath:filePath withFileId:[fileIdStr integerValue]];
-        
-        if ( result == NO )
-        {
-            NSLog(@"Failed to install fileid %@ %@", fileIdStr, filePath);
-        }
-    }
-}
+//- (void)installPreloadedContent
+//{
+//    
+//    // 'install' the preloaded content into the FileController
+//    NSString * plistName = [[NSBundle mainBundle] pathForResource:@"preloaded-content" ofType:@"plist"];
+//    NSDictionary * preloadedContentDict = [NSDictionary dictionaryWithContentsOfFile:plistName];
+//    NSArray * preloadedContentArray = [preloadedContentDict objectForKey:@"PreloadedContent"];
+//    
+//    for ( NSString * fileName in preloadedContentArray )
+//    {
+//        
+//        NSString * filePath = [[NSBundle mainBundle] pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]];
+//        
+//        NSLog(@"Installing %@", filePath);
+//        
+//        // this gets us the file id
+//        NSString * fileIdStr = [[fileName lastPathComponent] stringByDeletingPathExtension];
+//        
+//        BOOL result = [g_fileController saveFilePath:filePath withFileId:[fileIdStr integerValue]];
+//        
+//        if ( result == NO )
+//        {
+//            NSLog(@"Failed to install fileid %@ %@", fileIdStr, filePath);
+//        }
+//    }
+//}
 
 #pragma mark -
 #pragma mark Memory management
@@ -358,6 +347,14 @@ TelemetryController * g_telemetryController;
 	[window release];
     
 	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark GtarControllerObserver
+
+- (void)gtarNoteOn:(GtarPluck)pluck
+{
+    [playApplication resetIdleTimer];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import <GtarController.h>
+#import <GtarController/GtarController.h>
 
 @implementation AppDelegate
 

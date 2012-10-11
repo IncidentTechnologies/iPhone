@@ -40,19 +40,26 @@ extern Checklist g_checklist;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    g_gtarController.m_delegate = self;
-    
-    NSLog(@"Requesting FW version");
-    
-    [g_gtarController sendRequestFirmwareVersion];
-    
+        
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    g_gtarController.m_delegate = self;
+    
+    NSLog(@"Requesting FW version");
+    
+    [g_gtarController sendRequestFirmwareVersion];
+
+    [super viewDidAppear:animated];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated

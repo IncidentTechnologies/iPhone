@@ -248,7 +248,7 @@
         case 0xB:
         {
             
-            unsigned char gTarMsgType = data[1];                    
+            unsigned char gTarMsgType = data[1];
             
             switch ( gTarMsgType )
             {
@@ -296,7 +296,13 @@
                     {
                         [m_delegate ReceivedFWVersion:(int)majorVersion andMinorVersion:(int)minorVersion];
                     }
-                    
+                    else
+                    {
+                        [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to ReceivedFWVersion %@", m_delegate]
+                              atLogLevel:GtarControllerLogLevelWarn];
+                        
+                    }
+
                 } break;
                     
                 case RX_FW_UPDATE_ACK:
@@ -308,7 +314,13 @@
                     {
                         [m_delegate RxFWUpdateACK:status];
                     }
-                    
+                    else
+                    {
+                        [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to RxFWUpdateACK %@", m_delegate]
+                              atLogLevel:GtarControllerLogLevelWarn];
+                        
+                    }
+
                 } break;
                     
                 case RX_BATTERY_STATUS:
@@ -320,7 +332,13 @@
                     {
                         [m_delegate RxBatteryStatus:(BOOL)battery];
                     }
-                    
+                    else
+                    {
+                        [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to RxBatteryStatus %@", m_delegate]
+                              atLogLevel:GtarControllerLogLevelWarn];
+                        
+                    }
+
                 } break;
                     
                 case RX_BATTERY_CHARGE:
@@ -328,11 +346,17 @@
                     // Battery charge Ack
                     unsigned char percentage = data[2];
                     
-                    if ( [m_delegate respondsToSelector:@selector(RxBatteryCharge::)] == YES )
+                    if ( [m_delegate respondsToSelector:@selector(RxBatteryCharge:)] == YES )
                     {
                         [m_delegate RxBatteryCharge:percentage];
                     }
-                    
+                    else
+                    {
+                        [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to RxBatteryCharge %@", m_delegate]
+                              atLogLevel:GtarControllerLogLevelWarn];
+
+                    }
+
                 } break;
                     
                 default:
@@ -1202,6 +1226,40 @@
     if ( result == NO )
     {
         [self logMessage:@"SendDisableDebug: SendDisableDebug failed"
+              atLogLevel:GtarControllerLogLevelError];
+    }
+    
+    return result;
+
+}
+
+- (BOOL)sendRequestCertDownload
+{
+    
+    if ( m_spoofed == YES )
+    {
+        [self logMessage:@"SendRequestCertDownload: Connection spoofed, no-op"
+              atLogLevel:GtarControllerLogLevelInfo];
+        return NO;
+    }
+    else if ( m_connected == NO )
+    {
+        [self logMessage:@"SendRequestCertDownload: Not connected"
+              atLogLevel:GtarControllerLogLevelWarn];
+        return NO;
+    }
+    else if ( m_coreMidiInterface == nil )
+    {
+        [self logMessage:@"SendRequestCertDownload: CoreMidiInterface is invalid"
+              atLogLevel:GtarControllerLogLevelError];
+        return NO;
+    }
+    
+    BOOL result = [m_coreMidiInterface sendRequestCertDownload];
+    
+    if ( result == NO )
+    {
+        [self logMessage:@"SendRequestCertDownload: SendDisableDebug failed"
               atLogLevel:GtarControllerLogLevelError];
     }
     

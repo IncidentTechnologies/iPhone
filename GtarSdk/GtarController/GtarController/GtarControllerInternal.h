@@ -82,6 +82,8 @@ typedef enum GTAR_RX_MSG_TYPE
 - (BOOL)sendRequestBatteryStatus;
 - (BOOL)sendEnableDebug;
 - (BOOL)sendDisableDebug;
+
+- (BOOL)sendRequestCertDownload;
 - (BOOL)sendRequestFirmwareVersion;
 - (BOOL)sendFirmwarePackagePage:(void*)pBuffer bufferSize:(int)pBuffer_n fwSize:(int)fwSize fwPages:(int)fwPages curPage:(int)curPage withCheckSum:(unsigned char)checkSum;
 

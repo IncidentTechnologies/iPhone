@@ -46,6 +46,10 @@ extern Checklist g_checklist;
     
     [g_gtarController addObserver:self];
     
+#ifdef TARGET_IPHONE_SIMULATOR
+//    [NSTimer scheduledTimerWithTimeInterval:2.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+#endif
+    
 }
 
 - (void)viewDidUnload
@@ -86,14 +90,7 @@ extern Checklist g_checklist;
     
     [g_gtarController turnOffAllEffects];
     [g_gtarController turnOffAllLeds];
-    
-//    [NSTimer scheduledTimerWithTimeInterval:1.0 target:g_guitarController selector:@selector(turnOffAllEffects) userInfo:nil repeats:NO];
-//    [NSTimer scheduledTimerWithTimeInterval:2.0 target:g_guitarController selector:@selector(turnOffAllEffects) userInfo:nil repeats:NO];
-//    [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_guitarController selector:@selector(turnOffAllEffects) userInfo:nil repeats:NO];
-//    [NSTimer scheduledTimerWithTimeInterval:4.0 target:g_guitarController selector:@selector(turnOffAllEffects) userInfo:nil repeats:NO];
-//    [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_guitarController selector:@selector(turnOffAllEffects) userInfo:nil repeats:NO];
-//    [NSTimer scheduledTimerWithTimeInterval:6.0 target:g_guitarController selector:@selector(turnOffAllEffects) userInfo:nil repeats:NO];
-    [NSTimer scheduledTimerWithTimeInterval:7.0 target:g_gtarController selector:@selector(turnOffAllEffects) userInfo:nil repeats:NO];
+    [g_gtarController sendDisableDebug];
     
     if ( [_testType isEqualToString:@"Connect"] == YES )
     {

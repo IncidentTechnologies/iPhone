@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <GtarControllerInternal.h>
+#import <GtarController/GtarControllerInternal.h>
 
 @interface BatteryViewController : UIViewController<GtarControllerDelegate>
 

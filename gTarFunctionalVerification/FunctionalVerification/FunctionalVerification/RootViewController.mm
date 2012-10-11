@@ -8,7 +8,7 @@
 
 #import "RootViewController.h"
 
-#import <GtarController.h>
+#import <GtarController/GtarControllerInternal.h>
 
 #import "Checklist.h"
 
@@ -40,11 +40,9 @@ Checklist g_checklist;
         
         g_gtarController = [[GtarController alloc] init];
         
-//        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0) withColor:GtarLedColorMake(3, 3, 3)];
+        [g_gtarController sendRequestCertDownload];
         
         [g_gtarController addObserver:self];
-        
-//        [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(debugGo) userInfo:nil repeats:NO];
         
     }
 
