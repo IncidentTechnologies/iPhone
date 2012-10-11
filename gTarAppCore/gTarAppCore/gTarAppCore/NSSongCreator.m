@@ -49,7 +49,7 @@
 
 - (void)dealloc
 {
-	//[m_xmpBlob release];
+	[m_xmpBlob release];
 
 	[super dealloc];
 }

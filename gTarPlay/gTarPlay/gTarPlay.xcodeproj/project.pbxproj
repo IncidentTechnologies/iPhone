@@ -990,6 +990,7 @@
 		ECBBBF6D161CF1F400BC5BE2 /* MenuTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF69161CF1F400BC5BE2 /* MenuTab.png */; };
 		ECBBBF6E161CF1F400BC5BE2 /* EffectsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6A161CF1F400BC5BE2 /* EffectsTab.png */; };
 		ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */; };
+		ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC11D7816264220001A231A /* gTarPlayApplication.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2015,6 +2016,8 @@
 		ECBC9E2C13C66A4C00E9D5C5 /* StoreSubcategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSubcategoryCell.h; sourceTree = "<group>"; };
 		ECBC9E2D13C66A4C00E9D5C5 /* StoreSubcategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSubcategoryCell.m; sourceTree = "<group>"; };
 		ECBC9E3113C66B2300E9D5C5 /* StoreSubcategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreSubcategoryCell.xib; sourceTree = "<group>"; };
+		ECC11D7716264220001A231A /* gTarPlayApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlayApplication.h; sourceTree = "<group>"; };
+		ECC11D7816264220001A231A /* gTarPlayApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarPlayApplication.m; sourceTree = "<group>"; };
 		ECC5A99E15264CEE00CF3CCA /* EDIT-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EDIT-04.png"; sourceTree = "<group>"; };
 		ECC5A9A21526615B00CF3CCA /* Bear-09_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bear-09_small.png"; sourceTree = "<group>"; };
 		ECC5A9A31526615B00CF3CCA /* Bear-10_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bear-10_small.png"; sourceTree = "<group>"; };
@@ -2139,6 +2142,8 @@
 		29B97315FDCFA39411CA2CEA /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				ECC11D7716264220001A231A /* gTarPlayApplication.h */,
+				ECC11D7816264220001A231A /* gTarPlayApplication.m */,
 				1D3623240D0F684500981E51 /* gTarPlayAppDelegate.h */,
 				1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */,
 				28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */,
@@ -4730,6 +4735,7 @@
 				EC24DC81161A89B300016B78 /* CustomSegmentedControl.m in Sources */,
 				EC24DC82161A89B300016B78 /* CustomGradientView.m in Sources */,
 				EC24DC83161A89B300016B78 /* CustomBeveledView.m in Sources */,
+				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

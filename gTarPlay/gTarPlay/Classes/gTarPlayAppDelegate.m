@@ -80,7 +80,7 @@ TelemetryController * g_telemetryController;
         g_gtarController = [[GtarController alloc] init];
         
         g_gtarController.responseThread = GtarControllerThreadMain;
-        g_gtarController.logLevel = GtarControllerLogLevelInfo;
+//        g_gtarController.logLevel = GtarControllerLogLevelInfo;
         
         // Create the audio controller
         g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];

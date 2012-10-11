@@ -808,7 +808,6 @@
     {
         // Sync requests just go 
         return [self cloudProcessRequest:cloudRequest];
-        
     }
     else
     {
