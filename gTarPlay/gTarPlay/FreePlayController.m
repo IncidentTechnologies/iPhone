@@ -195,6 +195,12 @@ extern TelemetryController * g_telemetryController;
     // Unregister the AudioController Delegate
     g_audioController.m_delegate = nil;
     
+    // Turn off scale lights if they are on
+    if ([m_scaleSwitch isSelected])
+    {
+        [self toggleScaleLights:self];
+    }
+    
 	[super dealloc];	
 }
 
