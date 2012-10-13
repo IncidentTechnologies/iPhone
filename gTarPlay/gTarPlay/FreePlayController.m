@@ -195,12 +195,9 @@ extern TelemetryController * g_telemetryController;
     // Unregister the AudioController Delegate
     g_audioController.m_delegate = nil;
     
-    // Turn off scale lights if they are on
-    if ([m_scaleSwitch isSelected])
-    {
-        [self toggleScaleLights:self];
-    }
-    
+    // Turn off all LEDs
+    [g_gtarController turnOffAllLeds];
+
 	[super dealloc];	
 }
 
@@ -580,7 +577,7 @@ extern TelemetryController * g_telemetryController;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // reset the the last touch point
+    // reset the last touch point
     m_lastLEDTouch = CGPointMake(-1, -1);
     
     // Check that last touchBegan was inside an LED touch area
@@ -602,7 +599,6 @@ extern TelemetryController * g_telemetryController;
             [self turnOffLED:string AndFret:fret];
         }
     }
-	
 }
 
 #pragma mark - LED light logic
@@ -817,7 +813,6 @@ extern TelemetryController * g_telemetryController;
 // handles turning off LEDs based on the current m_LEDMode
 - (void) turnOffLED:(int)string AndFret:(int)fret
 {
-    
     if (LEDModeSingle == m_LEDMode)
     {
         [self turnOffLEDByShape:string AndFret:fret];
@@ -1185,8 +1180,6 @@ extern TelemetryController * g_telemetryController;
             break;
     }
 }
-
-#pragma mark - Popup helpers
 
 - (IBAction)setWet:(id)sender
 {
