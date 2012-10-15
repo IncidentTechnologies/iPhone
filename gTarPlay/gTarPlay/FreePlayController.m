@@ -577,28 +577,15 @@ extern TelemetryController * g_telemetryController;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // reset the last touch point
-    m_lastLEDTouch = CGPointMake(-1, -1);
-    
     // Check that last touchBegan was inside an LED touch area
     if (LEDTouchNone != m_LEDTouchArea)
     {
-        // Take all the touch ended points and turn off LED at those positions
-        for (UITouch *touch in touches) 
-        {
-            CGPoint stringFret = [self getFretPositionFromTouch:touch];
-            
-            int string = stringFret.x;
-            int fret = stringFret.y;
-            if (string < 0 || fret < 0)
-            {
-                return;
-            }
-            
-            // Turn off LED when finger touch ends
-            [self turnOffLED:string AndFret:fret];
-        }
+        // Turn off last LED touch point when finger touch ends
+        [self turnOffLED:m_lastLEDTouch.x AndFret:m_lastLEDTouch.y];
     }
+    
+    // reset the last touch point
+    m_lastLEDTouch = CGPointMake(-1, -1);
 }
 
 #pragma mark - LED light logic
