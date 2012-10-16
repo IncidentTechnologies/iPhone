@@ -1,4 +1,4 @@
 iPhone
 ======
 
-All of the iPhone related projects
+All of the iPhone related projects. 
