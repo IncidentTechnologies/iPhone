@@ -6,7 +6,7 @@
 //  Copyright 2011 Msft. All rights reserved.
 //
 
-#import <GtarController/Gtar.h>
+#import "AppCore.h"
 
 @class XmlDom;
 
