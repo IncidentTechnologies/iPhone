@@ -532,6 +532,7 @@
     m_channelOn[string] = true;
     m_sampleNumber[string] = 0;
     m_channelPositions[string][fret] = true;
+//    m_volume[string] = amplitude; // todo?
     // clear out any fret down bools for positions higher than 'fret'
     for (int i = fret + 1; i <= 16; i++)
     {

@@ -447,6 +447,8 @@ extern TelemetryController * g_telemetryController;
     GtarFret fret = pluck.position.fret;
     GtarString str = pluck.position.string;
     
+    GtarPluckVelocity velocity = pluck.velocity;
+    
     // zero base the string
     str--;
     
@@ -458,7 +460,7 @@ extern TelemetryController * g_telemetryController;
         fret = [[harmonizedValues valueForKey:@"Fret"] intValue];
     }
     
-    [g_audioController PluckString:str atFret:fret];
+    [g_audioController PluckString:str atFret:fret withAmplitude:(float)velocity/127.0f];
 }
 
 - (void)gtarNoteOff:(GtarPosition)position
