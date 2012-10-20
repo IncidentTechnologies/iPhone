@@ -521,8 +521,8 @@
         // beginning of the sound.
         m_sampleNumber[string] = 0;
         // initialize the volume and attenuation
-        m_volume[string] = 1;
-        m_attenuation[string] = 0;
+        m_volume[string] = 1.0f;
+        m_attenuation[string] = 0.0f;
     }
 }
 
@@ -532,12 +532,13 @@
     m_channelOn[string] = true;
     m_sampleNumber[string] = 0;
     m_channelPositions[string][fret] = true;
-//    m_volume[string] = amplitude; // todo?
     // clear out any fret down bools for positions higher than 'fret'
     for (int i = fret + 1; i <= 16; i++)
     {
         m_channelPositions[string][i] = false;
     }
+    m_attenuation[string] = 0.0f;
+    m_volume[string] = amplitude;
 }
 
 - (void) PluckMutedString:(int)string
@@ -614,8 +615,8 @@
                 m_sampleNumber[string] = 0;
                 m_channelPositions[string][fret] = false;
                 m_channelOn[string] = false;
-                m_volume[string] = 1;
-                m_attenuation[string] = 0;
+                m_volume[string] = 1.0f;
+                m_attenuation[string] = 0.0f;
             }
         }
     }
@@ -637,7 +638,23 @@
 
 - (void) FretUp:(int)fret onString:(int)string
 {
-    m_channelPositions[string][fret] = false;
+    // check how many frets are being held down on this string
+    int fretCount = 0;
+    for (int i = 1; i <= 16; i++)
+    {
+        if (m_channelPositions[string][i])
+        {
+            // if there are more than 1 fret still being pressed, just turn this one off
+            if (++fretCount > 1)
+            {
+                m_channelPositions[string][fret] = false;
+                return;
+            }
+        }
+    }
+    
+    // there are no other frets being pressed down, turn off the note via attenuation
+    m_attenuation[string] = 0.0003;
 }
 
 // Stop playing the note indicated by the string and fret position
