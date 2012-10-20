@@ -58,7 +58,9 @@ typedef enum
     
     CloudRequestTypeRedeemCreditCode,
     
-    CloudRequestTypePutLog
+    CloudRequestTypePutLog,
+    
+    CloudRequestTypeGetCurrentFirmwareVersion
     
 } CloudRequestType;
 

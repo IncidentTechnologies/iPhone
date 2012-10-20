@@ -194,6 +194,14 @@
         return str;
         
     }
+    else if ( [filePath hasSuffix:@".bin"] == YES )
+    {
+        
+        NSData * data = [NSData dataWithContentsOfFile:filePath];
+        
+        return data;
+        
+    }
     else
     {
         
@@ -235,6 +243,14 @@
         file = str;
         
     }
+    else if ( [filePath hasSuffix:@".bin"] == YES )
+    {
+        
+        NSData * data = [NSData dataWithContentsOfFile:filePath];
+        
+        file = data;
+        
+    }
     else
     {
         
@@ -273,6 +289,15 @@
         
         fileName = [NSString stringWithFormat:@"%u.xmp", fileId];
         fileContents = [str dataUsingEncoding:NSASCIIStringEncoding];
+        
+    }
+    else if ( [file isKindOfClass:[NSData class]] == YES )
+    {
+        
+        NSData * data = (NSData*)file;
+        
+        fileName = [NSString stringWithFormat:@"%u.bin", fileId];
+        fileContents = data;
         
     }
     else
@@ -473,14 +498,17 @@
         
         return xmpBlob;
     }
-    
-    if ( ([mimeType isEqualToString:@"image/png"] == YES) ||
-         ([mimeType isEqualToString:@"image/jpeg"] == YES) ||
-         ([mimeType isEqualToString:@"image/jpg"] == YES) )
+    else if ( ([mimeType isEqualToString:@"image/png"] == YES) ||
+              ([mimeType isEqualToString:@"image/jpeg"] == YES) ||
+              ([mimeType isEqualToString:@"image/jpg"] == YES) )
     {
         UIImage * image = [[[UIImage alloc] initWithData:data] autorelease];
         
         return image;
+    }
+    else if ( [mimeType isEqualToString:@"binary/octet-stream"] == YES )
+    {
+        return data;
     }
     
     return nil;

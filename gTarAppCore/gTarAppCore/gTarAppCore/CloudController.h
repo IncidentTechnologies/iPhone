@@ -86,7 +86,7 @@
 - (CloudRequest*)requestFollowsSessions:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestGlobalSessionsCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestLogUpload:(NSString*)log andVersion:(NSString*)version andDevice:(NSString*)device andApp:(NSString*)app andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
-
+- (CloudRequest*)requestCurrentFirmwareVersionCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 // new
 
 - (void)registerConnection:(NSURLConnection*)connection toResponse:(CloudResponse*)cloudResponse;

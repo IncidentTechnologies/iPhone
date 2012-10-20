@@ -257,7 +257,9 @@
     GtarFret fret = pluck.position.fret;
     GtarString str = pluck.position.string;
     
-    [m_audioController PluckString:str-1 atFret:fret];
+    GtarPluckVelocity velocity = pluck.velocity;
+    
+    [m_audioController PluckString:str-1 atFret:fret withAmplitude:(float)velocity/127.0f];
     
 }
 

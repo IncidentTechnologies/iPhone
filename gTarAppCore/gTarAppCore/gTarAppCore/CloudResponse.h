@@ -59,20 +59,9 @@ typedef enum
     UserSongSessions * m_responseUserSongSessions;
     StoreFeatureCollection * m_responseStoreFeatureCollection;
     NSArray * m_responseProductIds;
+    NSInteger m_responseFirmwareMajorVersion;
+    NSInteger m_responseFirmwareMinorVersion;
     
-    // ---
-    
-    
-    
-    
-    // I'm phasing out the xml dictionary in favor of the new+better xml dom
-//	NSDictionary * m_responseXmlDictionary;
-	
-	// specific response types. these can be null depending on what the request wanted
-//    NSString * m_responseFacebookAccessToken;
-//	UserSong * m_responseUserSong;
-//    NewsTicker * m_responseNewsTicker;
-
 }
 
 @property (nonatomic, readonly) CloudRequest * m_cloudRequest;
@@ -99,12 +88,8 @@ typedef enum
 @property (nonatomic, retain) UserSongSessions * m_responseUserSongSessions;
 @property (nonatomic, retain) StoreFeatureCollection * m_responseStoreFeatureCollection;
 @property (nonatomic, retain) NSArray * m_responseProductIds;
-
-// ---
-
-//@property (nonatomic, retain) NSString * m_responseFacebookAccessToken;
-//@property (nonatomic, retain) UserSong * m_responseUserSong;
-//@property (nonatomic, retain) NewsTicker * m_responseNewsTicker;
+@property (nonatomic, assign) NSInteger m_responseFirmwareMajorVersion;
+@property (nonatomic, assign) NSInteger m_responseFirmwareMinorVersion;
 
 - (id)initWithCloudRequest:(CloudRequest*)cloudRequest;
 
