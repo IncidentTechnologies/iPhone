@@ -14,7 +14,7 @@
 #import <gTarAppCore/TransitionRectangleViewController.h>
 #import <gTarAppCore/UserController.h>
 
-#import <GtarController/GtarController.h>
+#import <GtarController/GtarControllerInternal.h>
 
 #import "Facebook.h"
 #import "AccountViewController.h"
@@ -32,7 +32,7 @@
 
 @class AccountViewController;
 
-@interface RootViewController : UIViewController <UserProfileNavControllerDelegate, PopupViewControllerDelegate, GtarControllerObserver, FBSessionDelegate, SongPlayerDelegate>
+@interface RootViewController : UIViewController <UserProfileNavControllerDelegate, PopupViewControllerDelegate, GtarControllerObserver, FBSessionDelegate, SongPlayerDelegate, GtarControllerDelegate>
 {
 	
     BOOL m_requireLogin;
@@ -51,6 +51,9 @@
     IBOutlet PopupViewController * m_tutorialIndexPopup;
     IBOutlet PopupViewController * m_creditsPopup;
     IBOutlet PopupViewController * m_infoPopup;
+    
+    IBOutlet UILabel * m_firmwareCurrentVersion;
+    IBOutlet UILabel * m_firmwareAvailableVersion;
     
     TransitionRectangleViewController * m_tutorialViewController;
 
@@ -72,6 +75,9 @@
     NSInteger m_sequenceFret;
     
     BOOL m_waitingForFacebook;
+    
+    // Firmware reflashing
+    NSInteger m_firmwareFileId;
     
 }
 
@@ -95,6 +101,7 @@
 - (IBAction)freePlayButtonClicked:(id)sender;
 - (IBAction)storeButtonClicked:(id)sender;
 - (IBAction)tutorialButtonClicked:(id)sender;
+- (IBAction)infoButtonClicked:(id)sender;
 - (IBAction)logoutButtonClicked:(id)sender;
 - (IBAction)retryButtonClicked:(id)sender;
 
@@ -133,5 +140,10 @@
 - (void)accountViewDisplayUserProfile:(UserProfile*)userProfile;
 - (void)accountViewDisplayUserSong:(UserSong*)userSong;
 - (void)accountViewDisplayUserSongSession:(UserSongSession*)session;
+
+// firmware
+- (IBAction)updateFirmware:(id)sender;
+- (void)checkCurrentFirmwareVersion;
+- (void)checkAvailableFirmwareVersion;
 
 @end

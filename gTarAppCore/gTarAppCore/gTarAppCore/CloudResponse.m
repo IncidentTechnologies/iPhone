@@ -42,6 +42,8 @@
 @synthesize m_responseUserSongSessions;
 @synthesize m_responseStoreFeatureCollection;
 @synthesize m_responseProductIds;
+@synthesize m_responseFirmwareMajorVersion;
+@synthesize m_responseFirmwareMinorVersion;
 
 - (id)initWithCloudRequest:(CloudRequest*)cloudRequest
 {

@@ -195,6 +195,9 @@ extern TelemetryController * g_telemetryController;
     // Unregister the AudioController Delegate
     g_audioController.m_delegate = nil;
     
+    // Turn off all LEDs
+    [g_gtarController turnOffAllLeds];
+
 	[super dealloc];	
 }
 
@@ -444,6 +447,8 @@ extern TelemetryController * g_telemetryController;
     GtarFret fret = pluck.position.fret;
     GtarString str = pluck.position.string;
     
+    GtarPluckVelocity velocity = pluck.velocity;
+    
     // zero base the string
     str--;
     
@@ -455,12 +460,7 @@ extern TelemetryController * g_telemetryController;
         fret = [[harmonizedValues valueForKey:@"Fret"] intValue];
     }
     
-    [g_audioController PluckString:str atFret:fret];
-}
-
-- (void)gtarNoteOff:(GtarPosition)position
-{
-    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
+    [g_audioController PluckString:str atFret:fret withAmplitude:(float)velocity/127.0f];
 }
 
 - (void)gtarConnected
@@ -574,29 +574,15 @@ extern TelemetryController * g_telemetryController;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // reset the the last touch point
-    m_lastLEDTouch = CGPointMake(-1, -1);
-    
     // Check that last touchBegan was inside an LED touch area
     if (LEDTouchNone != m_LEDTouchArea)
     {
-        // Take all the touch ended points and turn off LED at those positions
-        for (UITouch *touch in touches) 
-        {
-            CGPoint stringFret = [self getFretPositionFromTouch:touch];
-            
-            int string = stringFret.x;
-            int fret = stringFret.y;
-            if (string < 0 || fret < 0)
-            {
-                return;
-            }
-            
-            // Turn off LED when finger touch ends
-            [self turnOffLED:string AndFret:fret];
-        }
+        // Turn off last LED touch point when finger touch ends
+        [self turnOffLED:m_lastLEDTouch.x AndFret:m_lastLEDTouch.y];
     }
-	
+    
+    // reset the last touch point
+    m_lastLEDTouch = CGPointMake(-1, -1);
 }
 
 #pragma mark - LED light logic
@@ -811,7 +797,6 @@ extern TelemetryController * g_telemetryController;
 // handles turning off LEDs based on the current m_LEDMode
 - (void) turnOffLED:(int)string AndFret:(int)fret
 {
-    
     if (LEDModeSingle == m_LEDMode)
     {
         [self turnOffLEDByShape:string AndFret:fret];
@@ -1179,8 +1164,6 @@ extern TelemetryController * g_telemetryController;
             break;
     }
 }
-
-#pragma mark - Popup helpers
 
 - (IBAction)setWet:(id)sender
 {
