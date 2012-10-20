@@ -18,6 +18,7 @@
 #import <gTarAppCore/TelemetryController.h>
 #import <gTarAppCore/UserSongSession.h>
 #import <gTarAppCore/UserProfile.h>
+#import <gTarAppCore/CloudResponse.h>
 
 #define FACEBOOK_CLIENT_ID @"285410511522607"
 #define FACEBOOK_PERMISSIONS [NSArray arrayWithObjects:@"email", nil]
@@ -149,8 +150,8 @@ extern TelemetryController * g_telemetryController;
     m_tutorialIndexPopup.m_popupTitle = @"Tutorials";
     m_creditsPopup.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
     m_creditsPopup.m_popupTitle = @"Incident Technologies";
-    m_infoPopup.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
-    m_infoPopup.m_popupTitle = @"Info";
+    m_infoPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
+//    m_infoPopup.m_popupTitle = @"Info";
     
     //
     // Setup the tutorial view
@@ -370,6 +371,13 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)tutorialButtonClicked:(id)sender
 {
     [self displayTutorialIndexPopup];
+}
+
+- (IBAction)infoButtonClicked:(id)sender
+{
+    [m_infoPopup attachToSuperView:self.view];
+    [self checkCurrentFirmwareVersion];
+    [self checkAvailableFirmwareVersion];
 }
 
 - (IBAction)logoutButtonClicked:(id)sender
@@ -950,6 +958,132 @@ extern TelemetryController * g_telemetryController;
 - (void)fbSessionInvalidated
 {
     [self displayWelcomeDialog];
+}
+
+#pragma mark - Firmware
+int pageCurrent = 0;
+int pagesTotal = 0;
+int pageSize = 0;
+NSData * firmware;
+int firmwareSize;
+char firmwareBytes[256*1024];
+
+- (IBAction)updateFirmware:(id)sender
+{
+    g_gtarController.m_delegate = self;
+    
+//    NSURL * url = [[NSBundle mainBundle] URLForResource:@"gTarFW_0.9.5"
+//                                          withExtension:@"bin"];
+//    
+//    firmware = [NSData dataWithContentsOfURL:url];
+    
+    firmware = [g_fileController getFileOrDownloadSync:m_firmwareFileId];
+    
+    firmwareSize = [firmware length];
+    
+    [firmware getBytes:firmwareBytes length:firmwareSize];
+    
+    pageSize = 1024;
+    pageCurrent = 0;
+    
+//    pagesTotal = (firmwareSize / pageSize);
+    pagesTotal = 60;
+    
+    // Add an overflow page
+//    if ( firmwareSize > (pagesTotal * pageSize) )
+//    {
+//        pagesTotal++;
+//    }
+    
+    unsigned char checksum = 0;
+    
+    for ( int i = 0; i < pageSize; i++ )
+    {
+        checksum += firmwareBytes[i];
+    }
+    
+    [g_gtarController sendFirmwarePackagePage:firmwareBytes
+                                   bufferSize:pageSize
+                                       fwSize:firmwareSize
+                                      fwPages:pagesTotal
+                                      curPage:pageCurrent++
+                                 withCheckSum:checksum];
+    
+}
+
+- (void)checkCurrentFirmwareVersion
+{
+    NSLog(@"Checking firmware version");
+    
+    g_gtarController.m_delegate = self;
+    
+    [g_gtarController sendRequestFirmwareVersion];
+}
+
+- (void)checkAvailableFirmwareVersion
+{
+    // Query the server
+    [g_cloudController requestCurrentFirmwareVersionCallbackObj:self andCallbackSel:@selector(receivedCurrentFirmwareVersion:)];
+    
+}
+
+- (void)receivedCurrentFirmwareVersion:(CloudResponse*)cloudResponse
+{
+    
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+    {
+        
+        [m_firmwareAvailableVersion performSelectorOnMainThread:@selector(setText:) withObject:[NSString stringWithFormat:@"Available: %d.%d", 
+                                                                                                cloudResponse.m_responseFirmwareMajorVersion, cloudResponse.m_responseFirmwareMinorVersion] waitUntilDone:NO];
+        
+        // Get the new binary
+        [g_fileController precacheFile:cloudResponse.m_responseFileId];
+        
+        m_firmwareFileId = cloudResponse.m_responseFileId;
+        
+    }
+    else
+    {
+        [m_firmwareAvailableVersion performSelectorOnMainThread:@selector(setText:) withObject:@"Available: Failed to update" waitUntilDone:NO];
+    }
+    
+}
+
+#pragma mark - GtarControllerDelegate
+
+- (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
+{
+    NSLog(@"Receiving firmware version");
+    
+    [m_firmwareCurrentVersion performSelectorOnMainThread:@selector(setText:) withObject:[NSString stringWithFormat:@"Current: %d.%d", majorVersion, minorVersion] waitUntilDone:NO];
+}
+
+- (void)receivedFirmwareUpdateAcknowledgement:(unsigned char)status
+{
+    
+    NSLog(@"Sending firmware page: %d", pageCurrent);
+    
+    if ( pageCurrent >= pagesTotal )
+    {
+        NSLog(@"Done sending firmware pages");
+        
+        return;
+    }
+    
+    unsigned char checksum = 0;
+    
+    for ( int i = 0; i < pageSize; i++ )
+    {
+        checksum += firmwareBytes[(pageCurrent*pageSize) + i];
+    }
+    
+    [g_gtarController sendFirmwarePackagePage:(firmwareBytes + (pageCurrent*pageSize))
+                                   bufferSize:pageSize
+                                       fwSize:firmwareSize
+                                      fwPages:pagesTotal
+                                      curPage:pageCurrent++
+                                 withCheckSum:checksum];
+    
 }
 
 @end
