@@ -113,7 +113,7 @@
 #define CloudRequestTypeGetUserFollowsSongSessionsUrl @"UserFollows/GetFollowsSessions"
 #define CloudRequestTypeRedeemCreditCodeUrl @"Users/RedeemCreditCode"
 #define CloudRequestTypePutLogUrl @"Telemetry/UploadLog"
-
+#define CloudRequestTypeGetCurrentFirmwareVersionUrl @"GtarFirmwares/GetCurrentFirmwareVersion"
 
 // maybe append a clock() or tick() to this thing
 #define POST_BOUNDARY @"------gTarPlayFormBoundary0123456789"
@@ -753,6 +753,18 @@
 
 }
 
+- (CloudRequest*)requestCurrentFirmwareVersionCallbackObj:(id)obj
+                                           andCallbackSel:(SEL)sel
+{
+    
+    // Create async request
+    CloudRequest * cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypeGetCurrentFirmwareVersion andCallbackObject:obj andCallbackSelector:sel];
+    
+    [self cloudSendRequest:cloudRequest];
+    
+    return cloudRequest;
+    
+}
 
 #pragma mark -
 #pragma mark Connection registration
@@ -1489,6 +1501,13 @@
             
         } break;
             
+        case CloudRequestTypeGetCurrentFirmwareVersion:
+        {
+            
+            url = CloudRequestTypeGetCurrentFirmwareVersionUrl;
+            
+        } break;
+            
         default:
         {
             
@@ -1976,14 +1995,26 @@
         case CloudRequestTypeRedeemCreditCode:
         {
             
-            XmlDom * dom = cloudResponse.m_responseXmlDom;
+            XmlDom * responseDom = cloudResponse.m_responseXmlDom;
             
-            cloudResponse.m_responseUserCredits = [dom getNumberFromChildWithName:@"Credits"];
+            cloudResponse.m_responseUserCredits = [responseDom getNumberFromChildWithName:@"Credits"];
             
         } break;
             
         case CloudRequestTypePutLog:
         {
+            // Nothing to do
+        } break;
+            
+        case CloudRequestTypeGetCurrentFirmwareVersion:
+        {
+            
+            XmlDom * responseDom = cloudResponse.m_responseXmlDom;
+            
+            cloudResponse.m_responseFirmwareMajorVersion = [responseDom getIntegerFromChildWithName:@"MajorVersion"];
+            cloudResponse.m_responseFirmwareMinorVersion = [responseDom getIntegerFromChildWithName:@"MinorVersion"];
+            cloudResponse.m_responseFileId = [responseDom getIntegerFromChildWithName:@"FileId"];
+            
             
         } break;
             

@@ -292,13 +292,13 @@
                     unsigned char majorVersion = (data[2] & 0xF0) >> 4;
                     unsigned char minorVersion = (data[2] & 0x0F);
                     
-                    if ( [m_delegate respondsToSelector:@selector(ReceivedFWVersion:andMinorVersion:)] == YES )
+                    if ( [m_delegate respondsToSelector:@selector(receivedFirmwareMajorVersion:andMinorVersion:)] == YES )
                     {
-                        [m_delegate ReceivedFWVersion:(int)majorVersion andMinorVersion:(int)minorVersion];
+                        [m_delegate receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion];
                     }
                     else
                     {
-                        [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to ReceivedFWVersion %@", m_delegate]
+                        [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareMajorVersion:andMinorVersion: %@", m_delegate]
                               atLogLevel:GtarControllerLogLevelWarn];
                         
                     }
@@ -310,9 +310,9 @@
                     // Firmware Ack
                     unsigned char status = data[2];
                     
-                    if ( [m_delegate respondsToSelector:@selector(RxFWUpdateACK:)] == YES )
+                    if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateAcknowledgement:)] == YES )
                     {
-                        [m_delegate RxFWUpdateACK:status];
+                        [m_delegate receivedFirmwareUpdateAcknowledgement:status];
                     }
                     else
                     {
@@ -328,9 +328,9 @@
                     // Battery status Ack
                     unsigned char battery = data[2];
                     
-                    if ( [m_delegate respondsToSelector:@selector(RxBatteryStatus:)] == YES )
+                    if ( [m_delegate respondsToSelector:@selector(receivedBatteryStatus:)] == YES )
                     {
-                        [m_delegate RxBatteryStatus:(BOOL)battery];
+                        [m_delegate receivedBatteryStatus:(BOOL)battery];
                     }
                     else
                     {
@@ -346,9 +346,9 @@
                     // Battery charge Ack
                     unsigned char percentage = data[2];
                     
-                    if ( [m_delegate respondsToSelector:@selector(RxBatteryCharge:)] == YES )
+                    if ( [m_delegate respondsToSelector:@selector(receivedBatteryCharge:)] == YES )
                     {
-                        [m_delegate RxBatteryCharge:percentage];
+                        [m_delegate receivedBatteryCharge:percentage];
                     }
                     else
                     {

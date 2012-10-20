@@ -18,10 +18,10 @@ typedef SInt32 MIDINotificationMessageID;
 // only goes to the public observers
 @protocol GtarControllerDelegate <NSObject>
 @optional
-- (void)ReceivedFWVersion:(int)MajorVersion andMinorVersion:(int)MinorVersion;
-- (void)RxFWUpdateACK:(unsigned char)status;
-- (void)RxBatteryStatus:(BOOL)charging;
-- (void)RxBatteryCharge:(unsigned char)percentage;
+- (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion;
+- (void)receivedFirmwareUpdateAcknowledgement:(unsigned char)status;
+- (void)receivedBatteryStatus:(BOOL)charging;
+- (void)receivedBatteryCharge:(unsigned char)percentage;
 @end
 
 typedef enum GTAR_RX_MSG_TYPE

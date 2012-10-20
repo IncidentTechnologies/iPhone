@@ -720,8 +720,13 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     
     memcpy(sendBuffer + 12, tempBuffer, j);
     
-    sendBuffer[j + 12] = checkSum;	
+    sendBuffer[j + 12] = (checkSum >> 1) & 0x7F;;	
     sendBuffer[j + 13] = 0xF7;
+    
+    NSLog(@"%x %x %x   %x %x %x   %x %x %x   %x %x %x", 
+          sendBuffer[0], sendBuffer[1], sendBuffer[2], sendBuffer[3], 
+          sendBuffer[4], sendBuffer[5], sendBuffer[6], sendBuffer[7], 
+          sendBuffer[8], sendBuffer[9], sendBuffer[10], sendBuffer[11] );
     
     BOOL result = [self sendSysExBuffer:sendBuffer withLength:sendBufferLength];
     
