@@ -123,7 +123,7 @@ extern AudioController * g_audioController;
     [self switchInViewController:m_selectListViewController];
         
     // If we recovered some cached song info, show it now
-    if ( m_userSongArray != nil )
+    if ( [m_userSongArray count] > 0 )
     {
         m_selectListViewController.m_userSongArray = m_userSongArray;
         
@@ -279,7 +279,13 @@ extern AudioController * g_audioController;
         [settings synchronize];
         
     }
-
+    else
+    {
+        [m_selectListViewController.m_tableView stopAnimating];
+        
+        [self backButtonClicked:nil];
+    }
+    
 }
 
 #pragma mark - Custom Nav controller Search handling

@@ -702,7 +702,7 @@ extern TelemetryController * g_telemetryController;
     }
     else
     {
-        
+        [self logoutButtonClicked:nil];
     }
     
 }
