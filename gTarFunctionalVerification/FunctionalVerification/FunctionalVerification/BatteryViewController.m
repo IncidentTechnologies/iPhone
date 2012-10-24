@@ -95,7 +95,7 @@ extern Checklist g_checklist;
 
 #pragma mark - GtarControllerDelegate
 
-- (void)RxBatteryStatus:(BOOL)charging
+- (void)receivedBatteryStatus:(BOOL)charging
 {
     
     NSLog(@"Battery status received");
@@ -110,7 +110,7 @@ extern Checklist g_checklist;
     }
 }
 
-- (void)RxBatteryCharge:(unsigned char)percentage
+- (void)receivedBatteryCharge:(unsigned char)percentage
 {
     NSLog(@"Battery percentage received");
     

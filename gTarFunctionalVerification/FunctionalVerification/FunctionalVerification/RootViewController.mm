@@ -40,7 +40,7 @@ Checklist g_checklist;
         
         g_gtarController = [[GtarController alloc] init];
         
-        [g_gtarController sendRequestCertDownload];
+//        [g_gtarController sendRequestCertDownload];
         
         [g_gtarController addObserver:self];
         

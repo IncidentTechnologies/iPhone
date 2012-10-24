@@ -78,12 +78,12 @@ extern Checklist g_checklist;
 
 #pragma mark - GtarControllerDelegate
 
-- (void)ReceivedFWVersion:(int)MajorVersion andMinorVersion:(int)MinorVersion
+- (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
 {
     
-    NSLog(@"Received FW Version %u %u", MajorVersion, MinorVersion);
+    NSLog(@"Received FW Version %u %u", majorVersion, minorVersion);
     
-    NSString * str = [[NSString alloc] initWithFormat:@"%u.%u", MajorVersion, MinorVersion];
+    NSString * str = [[NSString alloc] initWithFormat:@"%u.%u", majorVersion, minorVersion];
     
     [self performSelectorOnMainThread:@selector(updateLabel:) withObject:str waitUntilDone:NO];
     
