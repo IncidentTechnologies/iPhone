@@ -29,7 +29,7 @@
 #import "SongDisplayController.h"
 #import "AmpViewController.h"
 
-#define CHORD_DELAY_TIMER (0.01f)
+#define CHORD_DELAY_TIMER (0.020f)
 
 #define FRAME_TIMER_DURATION_MED (0.40f) // seconds
 #define FRAME_TIMER_DURATION_EASY (0.06f) // seconds
@@ -552,7 +552,14 @@ BOOL m_skipNotes = NO;
     
     NSLog(@"SongViewController: gTar has been disconnected");
     
-    [self backButtonClicked:nil];
+//    [self backButtonClicked:nil];
+    [m_metronomeTimer invalidate];
+    m_metronomeTimer = nil;
+    
+    [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode exiting from disconnect #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
+                             withType:TelemetryControllerMessageTypeInfo];
+
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
 }
 
@@ -568,7 +575,14 @@ BOOL m_skipNotes = NO;
     {
                 
         // Play the note
-        [self pluckString:str andFret:fret andVelocity:velocity];
+        if ( m_difficulty == SongViewControllerDifficultyHard )
+        {
+            [self pluckString:str andFret:fret andVelocity:velocity];
+        }
+        else
+        {
+            [self pluckString:str andFret:fret andVelocity:GtarMaxPluckVelocity];
+        }
         
         // Record the note
         [m_songRecorder playString:str andFret:fret];
@@ -654,25 +668,15 @@ BOOL m_skipNotes = NO;
         [self handleDirectionChange:str];
     }
     
-    if ( m_difficulty != SongViewControllerDifficultyEasy )
+    if ( m_difficulty == SongViewControllerDifficultyHard )
     {
+        // Play the note at normal intensity
+        [self pluckString:str andFret:fret andVelocity:velocity];
         
-        if ( m_difficulty == SongViewControllerDifficultyMedium )
-        {
-            // Play the note, but muffled
-//            [m_audioController PluckMutedString:str - 1];
-        }
-        else if ( m_difficulty == SongViewControllerDifficultyHard )
-        {
-            // Play the note at normal intensity
-            [self pluckString:str andFret:fret andVelocity:velocity];
-            
-            // Record the note
-            [m_songRecorder playString:str andFret:fret];
-        }
-        
+        // Record the note
+        [m_songRecorder playString:str andFret:fret];
     }
-
+    
 }
 
 - (void)handleDirectionChange:(GtarString)str
@@ -756,7 +760,14 @@ BOOL m_skipNotes = NO;
     {
         
         // Play the note
-        [self pluckString:str andFret:fret andVelocity:m_previousChordPluckString];
+        if ( m_difficulty == SongViewControllerDifficultyHard )
+        {
+            [self pluckString:str andFret:fret andVelocity:m_previousChordPluckString];
+        }
+        else
+        {
+            [self pluckString:str andFret:fret andVelocity:GtarMaxPluckVelocity];
+        }
         
         // Record the note
         [m_songRecorder playString:str andFret:fret];
@@ -927,7 +938,7 @@ BOOL m_skipNotes = NO;
         // On easy mode, we play the notes that haven't been hit yet
         for ( NSNote * note in frame.m_notesPending )
         {
-            [self pluckString:note.m_string andFret:note.m_fret andVelocity:1.0f];
+            [self pluckString:note.m_string andFret:note.m_fret andVelocity:GtarMaxPluckVelocity];
         }
 
         [self songModelExitFrame:m_currentFrame];
