@@ -108,11 +108,13 @@
     
     [m_eventLoopTimer invalidate];
     
+    [m_firmware release];
+    
     [super dealloc];
     
 }
 
-#pragma mark - External functions
+#pragma mark - External debug functions
 
 - (GtarControllerStatus)debugSpoofConnected
 {
@@ -161,6 +163,61 @@
 
 #pragma mark - Internal Functions
 
+- (BOOL)checkNoteInterarrivalTime:(double)time forFret:(GtarFret)fret andString:(GtarString)str
+{
+    
+    // zero base the string
+    str--;
+    
+    if ( (time - m_previousPluckTime[str][fret]) >= m_minimumInterarrivalTime )
+    {
+        m_previousPluckTime[str][fret] = time;
+        
+        return YES;
+    }
+    else
+    {
+        [self logMessage:[NSString stringWithFormat:@"Dropping double-triggered note: %f secs", (time - m_previousPluckTime[str][fret])]
+              atLogLevel:GtarControllerLogLevelInfo];
+        
+        return NO;
+    }
+    
+}
+
+- (void)logMessage:(NSString*)str atLogLevel:(GtarControllerLogLevel)level
+{
+    
+    if ( level <= m_logLevel )
+    {
+        switch (level)
+        {
+            case GtarControllerLogLevelError:
+            {
+                NSLog(@"GtarController: Error: %@", str );
+            } break;
+                
+            case GtarControllerLogLevelWarn:
+            {
+                NSLog(@"GtarController: Warning: %@", str );
+            } break;
+                
+            case GtarControllerLogLevelInfo:
+            {
+                NSLog(@"GtarController: Info: %@", str );
+            } break;
+                
+            default:
+            {
+                NSLog(@"GtarController: %@", str );
+            } break;
+                
+        }
+    }
+    
+}
+
+#pragma mark - Internal MIDI functions
 - (void)midiConnectionHandler:(BOOL)connected
 {
     
@@ -310,16 +367,7 @@
                     // Firmware Ack
                     unsigned char status = data[2];
                     
-                    if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateAcknowledgement:)] == YES )
-                    {
-                        [m_delegate receivedFirmwareUpdateAcknowledgement:status];
-                    }
-                    else
-                    {
-                        [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to RxFWUpdateACK %@", m_delegate]
-                              atLogLevel:GtarControllerLogLevelWarn];
-                        
-                    }
+                    [self firmwareResponseHandler:status];
 
                 } break;
                     
@@ -418,38 +466,7 @@
     
 }
 
-- (void)logMessage:(NSString*)str atLogLevel:(GtarControllerLogLevel)level
-{
-    
-    if ( level <= m_logLevel )
-    {
-        switch (level)
-        {
-            case GtarControllerLogLevelError:
-            {
-                NSLog(@"GtarController: Error: %@", str );
-            } break;
-                
-            case GtarControllerLogLevelWarn:
-            {
-                NSLog(@"GtarController: Warning: %@", str );
-            } break;
-                
-            case GtarControllerLogLevelInfo:
-            {
-                NSLog(@"GtarController: Info: %@", str );
-            } break;
-                
-            default:
-            {
-                NSLog(@"GtarController: %@", str );
-            } break;
-                
-        }
-    }
-    
-}
-
+#pragma Internal notification functions
 // Notifying observers
 - (void)notifyObserversGtarFretDown:(NSDictionary*)dictionary
 {
@@ -586,29 +603,150 @@
     }
 }
 
-#pragma mark - Observer management
+#pragma mark - Internal firmware handling
 
-- (BOOL)checkNoteInterarrivalTime:(double)time forFret:(GtarFret)fret andString:(GtarString)str
+- (void)firmwareResponseHandler:(unsigned char)status
 {
     
-    // zero base the string
-    str--;
-    
-    if ( (time - m_previousPluckTime[str][fret]) >= m_minimumInterarrivalTime )
+    if ( status == 0x00 )
     {
-        m_previousPluckTime[str][fret] = time;
         
-        return YES;
+        // success
+        if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateProgress:)] == YES )
+        {
+            [m_delegate receivedFirmwareUpdateProgress:(m_firmwareCurrentPage+1)/GTAR_CONTROLLER_MAX_FIRMWARE_PAGES];
+        }
+        else
+        {
+            [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateProgress: %@", m_delegate]
+                  atLogLevel:GtarControllerLogLevelWarn];
+            
+        }
+        
+        if ( m_firmwareCancelation == YES )
+        {
+            
+            m_firmwareCancelation = NO;
+            
+            // Cancel the transfer, abort now.
+            [self logMessage:[NSString stringWithFormat:@"Firmware update canceled, aborting transfer"]
+                  atLogLevel:GtarControllerLogLevelInfo];
+            
+            if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusFailed)] == YES )
+            {
+                [m_delegate receivedFirmwareUpdateStatusFailed];
+            }
+            else
+            {
+                [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateStatusFailed %@", m_delegate]
+                      atLogLevel:GtarControllerLogLevelWarn];
+                
+            }
+
+        }
+        else if ( m_firmwareCurrentPage < GTAR_CONTROLLER_MAX_FIRMWARE_PAGES )
+        {
+            // send the next page
+            m_firmwareCurrentPage++;
+            
+            [self sendFirmwarePage:m_firmwareCurrentPage];
+        }
+        else
+        {
+            // we are done
+            if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusCompleted)] == YES )
+            {
+                [m_delegate receivedFirmwareUpdateStatusCompleted];
+            }
+            else
+            {
+                [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateStatusCompleted %@", m_delegate]
+                      atLogLevel:GtarControllerLogLevelWarn];
+                
+            }
+
+        }
+
     }
     else
     {
-        [self logMessage:[NSString stringWithFormat:@"Dropping double-triggered note: %f secs", (time - m_previousPluckTime[str][fret])]
-              atLogLevel:GtarControllerLogLevelInfo];
+        // failure
+        switch ( status )
+        {
+            case 0x01:
+            {
+                [self logMessage:[NSString stringWithFormat:@"Firmware update invalid parameter"]
+                      atLogLevel:GtarControllerLogLevelError];
+            } break;
+                
+            case 0x02:
+            {
+                [self logMessage:[NSString stringWithFormat:@"Firmware update out of memory"]
+                      atLogLevel:GtarControllerLogLevelError];
+            } break;
+                
+            case 0x03:
+            {
+                [self logMessage:[NSString stringWithFormat:@"Firmware update will not fit in flash"]
+                      atLogLevel:GtarControllerLogLevelError];
+            } break;
+                
+            default:
+            case 0x04:
+            {
+                [self logMessage:[NSString stringWithFormat:@"Firmware update unknown error"]
+                      atLogLevel:GtarControllerLogLevelError];
+            } break;
+        }
         
-        return NO;
+        // If we already wanted to cancel the transfer, we can rest assured it will not continue
+        m_firmwareCancelation = NO;
+        
+        if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusFailed)] == YES )
+        {
+            [m_delegate receivedFirmwareUpdateStatusFailed];
+        }
+        else
+        {
+            [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateStatusFailed %@", m_delegate]
+                  atLogLevel:GtarControllerLogLevelWarn];
+            
+        }
+
     }
     
 }
+
+- (BOOL)sendFirmwarePage:(int)page
+{
+    
+    if ( [m_firmware length] == 0 )
+    {
+        return false;
+    }
+    
+    unsigned char * firmwareBytes = (unsigned char *)[m_firmware bytes];
+    
+    unsigned char checksum = 0;
+    
+    // Sum all the bytes
+    for ( int i = 0; i < GTAR_CONTROLLER_PAGE_SIZE; i++ )
+    {
+        checksum += firmwareBytes[(page*GTAR_CONTROLLER_PAGE_SIZE) + i];
+    }
+    
+    BOOL result = [m_coreMidiInterface sendFirmwarePackagePage:(firmwareBytes + (page * GTAR_CONTROLLER_PAGE_SIZE))
+                                                    withLength:[m_firmware length]
+                                                       andSize:GTAR_CONTROLLER_PAGE_SIZE
+                                                      andPages:GTAR_CONTROLLER_MAX_FIRMWARE_PAGES
+                                                    andCurPage:page
+                                                   andCheckSum:checksum];
+    
+    return result;
+}
+
+
+#pragma mark - Observer management
 
 // Observers should ultimately replace the delegate paradigm we have going.
 // I didn't want to rip out the delegate functionality since we use it all
@@ -1341,6 +1479,61 @@
     }
     
     return result; 
+}
+
+- (BOOL)sendFirmwareUpdate:(NSData*)firmware
+{
+    
+    if ( m_spoofed == YES )
+    {
+        [self logMessage:@"SendFirmwareUpdate: Connection spoofed, no-op"
+              atLogLevel:GtarControllerLogLevelInfo];
+        return NO;
+    }
+    else if ( m_connected == NO )
+    {
+        [self logMessage:@"SendFirmwareUpdate: Not connected"
+              atLogLevel:GtarControllerLogLevelWarn];
+        return NO;
+    }
+    else if ( m_coreMidiInterface == nil )
+    {
+        [self logMessage:@"SendFirmwareUpdate: CoreMidiInterface is invalid"
+              atLogLevel:GtarControllerLogLevelError];
+        return NO;
+    }
+    
+    if ( m_firmwareCancelation == YES )
+    {
+        [self logMessage:@"SendFirmwareUpdate: Cancellation in progress"
+              atLogLevel:GtarControllerLogLevelWarn];
+        return NO;
+    }
+    
+    [m_firmware release];
+    
+    m_firmware = [firmware retain];
+    
+    m_firmwareCurrentPage = 0;
+    
+    BOOL result = [self sendFirmwarePage:m_firmwareCurrentPage];
+    
+    if ( result == NO )
+    {
+        [self logMessage:@"SendFirmwareUpdate: Failed to send firmware package page"
+              atLogLevel:GtarControllerLogLevelError];
+    }
+    
+    return result; 
+}
+
+- (BOOL)sendFirmwareUpdateCancelation
+{
+    
+    m_firmwareCancelation = YES;
+    
+    return YES;
+    
 }
 
 #pragma mark - Color mapping manipulation
