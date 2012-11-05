@@ -150,13 +150,13 @@ TelemetryController * g_telemetryController;
     // Add the navigation controller's view to the window and display.
     [self.window addSubview:navigationController.view];
     [self.window makeKeyAndVisible];
-
+    
     // We never want to rotate
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
     [g_telemetryController logMessage:@"Application launched" withType:TelemetryControllerMessageTypeInfo];
     
-    self.playApplication = application;
+    self.playApplication = (gTarPlayApplication*)application;
     
     return YES;
 }
@@ -172,16 +172,13 @@ TelemetryController * g_telemetryController;
     // This gets called when the home button is pressed
     
     // if there is a currently running song player instance, pause that.
-    if ( g_songViewController != nil )
-    {
-        [g_songViewController pauseSong];
-    }
+    [g_songViewController pauseSong];
     
     // if they are listening to a song, pause that.
-    if ( g_songPlayerViewController != nil )
-    {
-        [g_songPlayerViewController pauseSongPlayback];
-    }
+    [g_songPlayerViewController pauseSongPlayback];
+    
+    // abort a firmware update, if in progress
+    [g_gtarController sendFirmwareUpdateCancelation];
     
 }
 

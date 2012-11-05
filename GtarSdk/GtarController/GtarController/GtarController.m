@@ -653,7 +653,11 @@
         }
         else
         {
-            // we are done
+            // we are done            
+            [m_firmware release];
+            
+            m_firmware = nil;
+            
             if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusSucceeded)] == YES )
             {
                 [m_delegate receivedFirmwareUpdateStatusSucceeded];
@@ -664,7 +668,7 @@
                       atLogLevel:GtarControllerLogLevelWarn];
                 
             }
-
+            
         }
 
     }
@@ -702,6 +706,10 @@
         // If we already wanted to cancel the transfer, we can rest assured it will not continue
         m_firmwareCancelation = NO;
         
+        [m_firmware release];
+        
+        m_firmware = nil;
+        
         if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusFailed)] == YES )
         {
             [m_delegate receivedFirmwareUpdateStatusFailed];
@@ -712,7 +720,7 @@
                   atLogLevel:GtarControllerLogLevelWarn];
             
         }
-
+        
     }
     
 }
@@ -1530,7 +1538,17 @@
 - (BOOL)sendFirmwareUpdateCancelation
 {
     
-    m_firmwareCancelation = YES;
+    // Only cancel if we are updating a firmware
+    if ( [m_firmware length] == 0 )
+    {
+        
+        m_firmwareCancelation = YES;
+        
+        [m_firmware release];
+        
+        m_firmware = nil;
+
+    }
     
     return YES;
     
