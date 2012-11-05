@@ -858,7 +858,7 @@ BOOL m_skipNotes = NO;
     }
     else
     {
-        [g_audioController PluckString:str-1 atFret:fret withAmplitude:((float)velocity)/127.0];
+        [g_audioController PluckString:str-1 atFret:fret withAmplitude:((float)velocity)/GtarMaxPluckVelocity];
     }
     
 }

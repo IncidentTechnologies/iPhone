@@ -77,16 +77,19 @@ TelemetryController * g_telemetryController;
         g_gtarController.responseThread = GtarControllerThreadMain;
         
         // By default it just outputs 'LevelError'
-        //g_gtarController.logLevel = GtarControllerLogLevelInfo;
+        g_gtarController.logLevel = GtarControllerLogLevelInfo;
         
         [g_gtarController addObserver:self];
         
         // Create the audio controller
         g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
         [g_audioController initializeAUGraph];
-        
+
 #if TARGET_IPHONE_SIMULATOR
-        [g_gtarController debugSpoofConnected];
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+//        [NSTimer scheduledTimerWithTimeInterval:10.0 target:g_gtarController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
+
+//        [g_gtarController debugSpoofConnected];
 #endif
         
         //

@@ -23,7 +23,7 @@
 - (void)receivedBatteryCharge:(unsigned char)percentage;
 - (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion;
 - (void)receivedFirmwareUpdateProgress:(unsigned char)percentage;
-- (void)receivedFirmwareUpdateStatusCompleted;
+- (void)receivedFirmwareUpdateStatusSucceeded;
 - (void)receivedFirmwareUpdateStatusFailed;
 @end
 

@@ -75,7 +75,8 @@ void MIDIReadHandler(const MIDIPacketList *pPacketList, void *pReadProcCon, void
 
 - (BOOL)sendRequestCertDownload;
 - (BOOL)sendRequestFirmwareVersion;
-- (BOOL)sendFirmwarePackagePage:(unsigned char*)buffer withLength:(int)bufferLength andSize:(int)totSize andPages:(int)totPages andCurPage:(int)curPage andCheckSum:(unsigned char)checkSum;
+- (BOOL)sendFirmwarePackagePage:(unsigned char*)page andPageSize:(int)pageSize andFirmwareSize:(int)firmwareSize andPageCount:(int)pageCount andCurrentPage:(int)currentPage andChecksum:(unsigned char)checksum;
+
 
 - (BOOL)sendCCSetLedStatusFret:(unsigned char)fret andString:(unsigned char)str andRed:(unsigned char)red andGreen:(unsigned char)green andBlue:(unsigned char)blue andMessage:(unsigned char)message;
 - (BOOL)sendSetLedStateFret:(unsigned char)fret andString:(unsigned char)str andRed:(unsigned char)red andGreen:(unsigned char)green andBlue:(unsigned char)blue andMessage:(unsigned char)message;

@@ -22,5 +22,4 @@
 - (void)attachToSuperview:(UIView*)view;
 - (void)detachFromSuperview;
 
-
 @end

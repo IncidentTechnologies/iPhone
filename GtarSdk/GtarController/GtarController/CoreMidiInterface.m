@@ -660,28 +660,28 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     return result;
 }
 
-- (BOOL)sendFirmwarePackagePage:(unsigned char*)buffer 
-                     withLength:(int)bufferLength
-                        andSize:(int)totSize
-                       andPages:(int)totPages
-                     andCurPage:(int)curPage
-                    andCheckSum:(unsigned char)checkSum
+- (BOOL)sendFirmwarePackagePage:(unsigned char*)page
+                    andPageSize:(int)pageSize
+                andFirmwareSize:(int)firmwareSize
+                   andPageCount:(int)pageCount
+                 andCurrentPage:(int)currentPage
+                    andChecksum:(unsigned char)checksum
 {
     
     // All data bytes must be converted to midi data bytes which have a zero for the MSB
     int j = 0;
-    unsigned char tempBuffer[bufferLength*2];
+    unsigned char tempBuffer[pageSize*2];
     
-    memset(tempBuffer, 0, bufferLength * 2);
+    memset(tempBuffer, 0, pageSize * 2);
     
     signed char startCounter = 1;
     signed char endCounter = 6;
     
-    for ( int i = 0; i < bufferLength; i++ )
+    for ( int i = 0; i < pageSize; i++ )
     {
         // add current fragment and begining of next 
-        tempBuffer[j] += (buffer[i] >> startCounter) & 0x7F;
-        tempBuffer[j + 1] = (0x7F & (buffer[i] << endCounter));
+        tempBuffer[j] += (page[i] >> startCounter) & 0x7F;
+        tempBuffer[j + 1] = (0x7F & (page[i] << endCounter));
         
         // var upkeep
         j += 1;
@@ -699,20 +699,20 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     
     j++;
     
-    unsigned char sendBuffer[bufferLength*2];
+    unsigned char sendBuffer[pageSize*2];
     
     int sendBufferLength = j + 14;
     
-    memset(sendBuffer, 0, bufferLength);
+    memset(sendBuffer, 0, pageSize);
     
     sendBuffer[0] = 0xF0; //SysEx
     sendBuffer[1] = GTAR_DEVICE_ID;    
     sendBuffer[2] = (unsigned char)GTAR_MSG_DWLD_FW_PAGE;
-    sendBuffer[3] = (totSize & 0xFF0000) >> 16;
-    sendBuffer[4] = (totSize & 0x00FF00) >> 8;
-    sendBuffer[5] = (totSize & 0x0000FF) >> 0;
-    sendBuffer[6] = (unsigned char)totPages;
-    sendBuffer[7] = (unsigned char)curPage;
+    sendBuffer[3] = (firmwareSize & 0xFF0000) >> 16;
+    sendBuffer[4] = (firmwareSize & 0x00FF00) >> 8;
+    sendBuffer[5] = (firmwareSize & 0x0000FF) >> 0;
+    sendBuffer[6] = (unsigned char)pageCount;
+    sendBuffer[7] = (unsigned char)currentPage;
     sendBuffer[8] = 0;
     sendBuffer[9] = (j & 0xFF00) >> 8;
     sendBuffer[10] = (j & 0x00FF);
@@ -720,7 +720,7 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     
     memcpy(sendBuffer + 12, tempBuffer, j);
     
-    sendBuffer[j + 12] = (checkSum >> 1) & 0x7F;;	
+    sendBuffer[j + 12] = (checksum >> 1) & 0x7F;;	
     sendBuffer[j + 13] = 0xF7;
     
     NSLog(@"%x %x %x   %x %x %x   %x %x %x   %x %x %x", 

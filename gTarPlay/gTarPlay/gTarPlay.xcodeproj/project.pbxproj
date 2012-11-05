@@ -990,6 +990,16 @@
 		ECBBBF6D161CF1F400BC5BE2 /* MenuTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF69161CF1F400BC5BE2 /* MenuTab.png */; };
 		ECBBBF6E161CF1F400BC5BE2 /* EffectsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6A161CF1F400BC5BE2 /* EffectsTab.png */; };
 		ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */; };
+		ECBF4FB216373E80003F0C8C /* gTarLogo_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FB116373E7F003F0C8C /* gTarLogo_Red.png */; };
+		ECBF4FB316373E80003F0C8C /* gTarLogo_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FB116373E7F003F0C8C /* gTarLogo_Red.png */; };
+		ECBF4FDD1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBF4FDB1638C591003F0C8C /* TitleFirmwareViewController.m */; };
+		ECBF4FDE1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBF4FDB1638C591003F0C8C /* TitleFirmwareViewController.m */; };
+		ECBF4FDF1638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FDC1638C591003F0C8C /* TitleFirmwareViewController.xib */; };
+		ECBF4FE01638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FDC1638C591003F0C8C /* TitleFirmwareViewController.xib */; };
+		ECBF4FFD1641E3C0003F0C8C /* TitleCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FFB1641E3C0003F0C8C /* TitleCancelButton.png */; };
+		ECBF4FFE1641E3C0003F0C8C /* TitleCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FFB1641E3C0003F0C8C /* TitleCancelButton.png */; };
+		ECBF4FFF1641E3C0003F0C8C /* TitleUpdateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FFC1641E3C0003F0C8C /* TitleUpdateButton.png */; };
+		ECBF50001641E3C0003F0C8C /* TitleUpdateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FFC1641E3C0003F0C8C /* TitleUpdateButton.png */; };
 		ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC11D7816264220001A231A /* gTarPlayApplication.m */; };
 		ECC11DEE162D07AD001A231A /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9D6EC014A11DC700AE374D /* Facebook.m */; };
 		ECC11DEF162D07AD001A231A /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9D6EC514A11DC700AE374D /* FBDialog.m */; };
@@ -3000,6 +3010,12 @@
 		ECBC9E2C13C66A4C00E9D5C5 /* StoreSubcategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSubcategoryCell.h; sourceTree = "<group>"; };
 		ECBC9E2D13C66A4C00E9D5C5 /* StoreSubcategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSubcategoryCell.m; sourceTree = "<group>"; };
 		ECBC9E3113C66B2300E9D5C5 /* StoreSubcategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreSubcategoryCell.xib; sourceTree = "<group>"; };
+		ECBF4FB116373E7F003F0C8C /* gTarLogo_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarLogo_Red.png; sourceTree = "<group>"; };
+		ECBF4FDA1638C591003F0C8C /* TitleFirmwareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleFirmwareViewController.h; sourceTree = "<group>"; };
+		ECBF4FDB1638C591003F0C8C /* TitleFirmwareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleFirmwareViewController.m; sourceTree = "<group>"; };
+		ECBF4FDC1638C591003F0C8C /* TitleFirmwareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleFirmwareViewController.xib; sourceTree = "<group>"; };
+		ECBF4FFB1641E3C0003F0C8C /* TitleCancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TitleCancelButton.png; sourceTree = "<group>"; };
+		ECBF4FFC1641E3C0003F0C8C /* TitleUpdateButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TitleUpdateButton.png; sourceTree = "<group>"; };
 		ECC11D7716264220001A231A /* gTarPlayApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlayApplication.h; sourceTree = "<group>"; };
 		ECC11D7816264220001A231A /* gTarPlayApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarPlayApplication.m; sourceTree = "<group>"; };
 		ECC121CB162D07AD001A231A /* gTarPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4220,6 +4236,9 @@
 				EC5DD6EA15007E2F00D33BA7 /* TitleTutorialViewController.h */,
 				EC5DD6EB15007E2F00D33BA7 /* TitleTutorialViewController.m */,
 				EC5DD6EC15007E2F00D33BA7 /* TitleTutorialViewController.xib */,
+				ECBF4FDA1638C591003F0C8C /* TitleFirmwareViewController.h */,
+				ECBF4FDB1638C591003F0C8C /* TitleFirmwareViewController.m */,
+				ECBF4FDC1638C591003F0C8C /* TitleFirmwareViewController.xib */,
 			);
 			name = "Full Screen Dialogs";
 			sourceTree = "<group>";
@@ -4237,6 +4256,8 @@
 				EC8AD89D1509D91E00B892B8 /* TitleSignUpButton.png */,
 				EC8AD89E1509D91E00B892B8 /* TitleSignUpButtonPRESSED.png */,
 				EC8AD89F1509D91E00B892B8 /* TitleWelcomeBG.png */,
+				ECBF4FFB1641E3C0003F0C8C /* TitleCancelButton.png */,
+				ECBF4FFC1641E3C0003F0C8C /* TitleUpdateButton.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -4644,6 +4665,7 @@
 				EC22A292160258B1009B4913 /* ProfileButtonON.png */,
 				EC22A293160258B1009B4913 /* ProfileButtonOFF.png */,
 				EC71F9E7141FFABE00F06996 /* gTar_Logo.png */,
+				ECBF4FB116373E7F003F0C8C /* gTarLogo_Red.png */,
 				EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */,
 				EC94136214858793000A6E64 /* Border_Strings_Shadow.png */,
 			);
@@ -5661,6 +5683,10 @@
 				ECBBBF6D161CF1F400BC5BE2 /* MenuTab.png in Resources */,
 				ECBBBF6E161CF1F400BC5BE2 /* EffectsTab.png in Resources */,
 				ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */,
+				ECBF4FB216373E80003F0C8C /* gTarLogo_Red.png in Resources */,
+				ECBF4FDF1638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */,
+				ECBF4FFD1641E3C0003F0C8C /* TitleCancelButton.png in Resources */,
+				ECBF4FFF1641E3C0003F0C8C /* TitleUpdateButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6552,6 +6578,10 @@
 				ECC121C5162D07AD001A231A /* MenuTab.png in Resources */,
 				ECC121C6162D07AD001A231A /* EffectsTab.png in Resources */,
 				ECC121C7162D07AD001A231A /* FreePlayController.xib in Resources */,
+				ECBF4FB316373E80003F0C8C /* gTarLogo_Red.png in Resources */,
+				ECBF4FE01638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */,
+				ECBF4FFE1641E3C0003F0C8C /* TitleCancelButton.png in Resources */,
+				ECBF50001641E3C0003F0C8C /* TitleUpdateButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6650,6 +6680,7 @@
 				EC24DC82161A89B300016B78 /* CustomGradientView.m in Sources */,
 				EC24DC83161A89B300016B78 /* CustomBeveledView.m in Sources */,
 				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
+				ECBF4FDD1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6745,6 +6776,7 @@
 				ECC11E43162D07AD001A231A /* CustomGradientView.m in Sources */,
 				ECC11E44162D07AD001A231A /* CustomBeveledView.m in Sources */,
 				ECC11E45162D07AD001A231A /* gTarPlayApplication.m in Sources */,
+				ECBF4FDE1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

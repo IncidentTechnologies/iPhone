@@ -607,7 +607,7 @@
 
 - (void)firmwareResponseHandler:(unsigned char)status
 {
-    
+    NSLog(@"Firmware response: %u", status);
     if ( status == 0x00 )
     {
         
@@ -654,13 +654,13 @@
         else
         {
             // we are done
-            if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusCompleted)] == YES )
+            if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusSucceeded)] == YES )
             {
-                [m_delegate receivedFirmwareUpdateStatusCompleted];
+                [m_delegate receivedFirmwareUpdateStatusSucceeded];
             }
             else
             {
-                [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateStatusCompleted %@", m_delegate]
+                [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateStatusSucceeded %@", m_delegate]
                       atLogLevel:GtarControllerLogLevelWarn];
                 
             }
@@ -736,11 +736,11 @@
     }
     
     BOOL result = [m_coreMidiInterface sendFirmwarePackagePage:(firmwareBytes + (page * GTAR_CONTROLLER_PAGE_SIZE))
-                                                    withLength:[m_firmware length]
-                                                       andSize:GTAR_CONTROLLER_PAGE_SIZE
-                                                      andPages:GTAR_CONTROLLER_MAX_FIRMWARE_PAGES
-                                                    andCurPage:page
-                                                   andCheckSum:checksum];
+                                                   andPageSize:GTAR_CONTROLLER_PAGE_SIZE
+                                               andFirmwareSize:[m_firmware length]
+                                                  andPageCount:GTAR_CONTROLLER_MAX_FIRMWARE_PAGES
+                                                andCurrentPage:page
+                                                   andChecksum:checksum];
     
     return result;
 }
@@ -1438,48 +1438,48 @@
     return result;
 }
 
-- (BOOL)sendFirmwarePackagePage:(void*)buffer
-                     bufferSize:(int)bufferLength
-                         fwSize:(int)fwSize 
-                        fwPages:(int)fwPages
-                        curPage:(int)curPage
-                   withCheckSum:(unsigned char)checkSum
-{
-
-    if ( m_spoofed == YES )
-    {
-        [self logMessage:@"SendRequestFirmwareVersion: Connection spoofed, no-op"
-              atLogLevel:GtarControllerLogLevelInfo];
-        return NO;
-    }
-    else if ( m_connected == NO )
-    {
-        [self logMessage:@"SendRequestFirmwareVersion: Not connected"
-              atLogLevel:GtarControllerLogLevelWarn];
-        return NO;
-    }
-    else if ( m_coreMidiInterface == nil )
-    {
-        [self logMessage:@"SendRequestFirmwareVersion: CoreMidiInterface is invalid"
-              atLogLevel:GtarControllerLogLevelError];
-        return NO;
-    }
-    
-    BOOL result = [m_coreMidiInterface sendFirmwarePackagePage:(unsigned char *)buffer
-                                                    withLength:bufferLength
-                                                       andSize:fwSize
-                                                      andPages:fwPages
-                                                    andCurPage:curPage
-                                                   andCheckSum:checkSum];
-    
-    if ( result == NO )
-    {
-        [self logMessage:@"SendFirmwarePackagePage: Failed to send firmware package page"
-              atLogLevel:GtarControllerLogLevelError];
-    }
-    
-    return result; 
-}
+//- (BOOL)sendFirmwarePackagePage:(void*)buffer
+//                     bufferSize:(int)bufferLength
+//                         fwSize:(int)fwSize 
+//                        fwPages:(int)fwPages
+//                        curPage:(int)curPage
+//                   withCheckSum:(unsigned char)checkSum
+//{
+//
+//    if ( m_spoofed == YES )
+//    {
+//        [self logMessage:@"SendRequestFirmwareVersion: Connection spoofed, no-op"
+//              atLogLevel:GtarControllerLogLevelInfo];
+//        return NO;
+//    }
+//    else if ( m_connected == NO )
+//    {
+//        [self logMessage:@"SendRequestFirmwareVersion: Not connected"
+//              atLogLevel:GtarControllerLogLevelWarn];
+//        return NO;
+//    }
+//    else if ( m_coreMidiInterface == nil )
+//    {
+//        [self logMessage:@"SendRequestFirmwareVersion: CoreMidiInterface is invalid"
+//              atLogLevel:GtarControllerLogLevelError];
+//        return NO;
+//    }
+//    
+//    BOOL result = [m_coreMidiInterface sendFirmwarePackagePage:(unsigned char *)buffer
+//                                                    withLength:bufferLength
+//                                                       andSize:fwSize
+//                                                      andPages:fwPages
+//                                                    andCurPage:curPage
+//                                                   andCheckSum:checkSum];
+//    
+//    if ( result == NO )
+//    {
+//        [self logMessage:@"SendFirmwarePackagePage: Failed to send firmware package page"
+//              atLogLevel:GtarControllerLogLevelError];
+//    }
+//    
+//    return result; 
+//}
 
 - (BOOL)sendFirmwareUpdate:(NSData*)firmware
 {
