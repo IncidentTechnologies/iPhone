@@ -42,6 +42,17 @@ extern Checklist g_checklist;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
     NSString * soundFilePath = [[NSBundle mainBundle] pathForResource:@"sth" ofType:@"mp3"];
     NSURL * newURL = [[NSURL alloc] initFileURLWithPath:soundFilePath];
     
@@ -49,7 +60,7 @@ extern Checklist g_checklist;
     
     _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:newURL error:&error];
     _audioPlayer.numberOfLoops = -1;
-
+    
     // Registers this class as the delegate of the audio session.
 	[[AVAudioSession sharedInstance] setDelegate: self];
     
@@ -59,16 +70,14 @@ extern Checklist g_checklist;
         // Handle the error here.
 		NSLog(@"Audio Session error %@, %@", error, [error userInfo] );
     }
-              
     
     [_audioPlayer play];
-
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    
+    // init test
+    g_checklist.lineOutTest = NO;
+    
+    [super viewDidAppear:animated];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated

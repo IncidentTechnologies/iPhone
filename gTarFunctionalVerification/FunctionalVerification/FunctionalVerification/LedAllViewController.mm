@@ -43,29 +43,6 @@ extern Checklist g_checklist;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    [g_gtarController addObserver:self];
-//    
-//    if ( [_testType isEqualToString:@"Red"] == YES )
-//    {
-//        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0) withColor:GtarLedColorMake(GtarMaxLedIntensity, 0, 0)];
-//    }
-//    if ( [_testType isEqualToString:@"Green"] == YES )
-//    {
-//        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0) withColor:GtarLedColorMake(0, GtarMaxLedIntensity, 0)];
-//    }
-//    if ( [_testType isEqualToString:@"Blue"] == YES )
-//    {
-//        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0) withColor:GtarLedColorMake(0, 0, GtarMaxLedIntensity)];
-//    }
-//    if ( [_testType isEqualToString:@"White"] == YES )
-//    {
-//        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0) withColor:GtarLedColorMake(GtarMaxLedIntensity, GtarMaxLedIntensity, GtarMaxLedIntensity)];
-//    }
-//    
-    
-    [g_gtarController addObserver:self];
-    
-    [g_gtarController turnOffAllEffects];
 }
 
 - (void)viewDidUnload
@@ -79,7 +56,6 @@ extern Checklist g_checklist;
 {
     
     [g_gtarController turnOffAllLeds];
-    [g_gtarController removeObserver:self];
 
     [super viewWillDisappear:animated];
     
@@ -88,6 +64,9 @@ extern Checklist g_checklist;
 - (void)viewDidAppear:(BOOL)animated
 {
     
+    [g_gtarController turnOffAllEffects];
+    
+    // init tests
     if ( [_testType isEqualToString:@"Red"] == YES )
     {
         [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0)
@@ -108,7 +87,25 @@ extern Checklist g_checklist;
         [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0)
                                     withColor:GtarLedColorMake(3, 3, 3)];
     }
-
+    
+    // initially set to fail
+    if ( [_testType isEqualToString:@"Red"] == YES )
+    {
+        g_checklist.redTestAll = NO;
+    }
+    if ( [_testType isEqualToString:@"Green"] == YES )
+    {
+        g_checklist.greenTestAll = NO;
+    }
+    if ( [_testType isEqualToString:@"Blue"] == YES )
+    {
+        g_checklist.blueTestAll = NO;
+    }
+    if ( [_testType isEqualToString:@"White"] == YES )
+    {
+        g_checklist.whiteTestAll = NO;
+    }
+    
     [super viewDidAppear:animated];
     
 }
@@ -140,6 +137,7 @@ extern Checklist g_checklist;
             g_checklist.whiteTestAll = YES;
         }
     }
+
 }
 
 @end

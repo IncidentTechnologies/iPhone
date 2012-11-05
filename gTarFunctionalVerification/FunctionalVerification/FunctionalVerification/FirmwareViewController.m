@@ -57,7 +57,9 @@ extern Checklist g_checklist;
     NSLog(@"Requesting FW version");
     
     [g_gtarController sendRequestFirmwareVersion];
-
+    
+    g_checklist.firmwareTest = NO;
+    
     [super viewDidAppear:animated];
     
 }
@@ -74,6 +76,20 @@ extern Checklist g_checklist;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([[segue identifier] isEqualToString:@"failSegue"])
+    {
+        g_checklist.firmwareTest = NO;
+    }
+    if ([[segue identifier] isEqualToString:@"passSegue"])
+    {
+        g_checklist.firmwareTest = YES;
+    }
+    
 }
 
 #pragma mark - GtarControllerDelegate

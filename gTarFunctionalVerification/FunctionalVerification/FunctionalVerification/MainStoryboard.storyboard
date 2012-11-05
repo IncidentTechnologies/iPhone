@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="oeN-8Z-XQx">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -32,7 +31,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2fI-Vl-oEq">
-                                <rect key="frame" x="325" y="199" width="135" height="37"/>
+                                <rect key="frame" x="287" y="72" width="135" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Functional Test">
@@ -47,7 +46,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hL0-FJ-vKX">
-                                <rect key="frame" x="20" y="199" width="142" height="37"/>
+                                <rect key="frame" x="57" y="19" width="142" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Main Board Test">
@@ -59,6 +58,66 @@
                                 </state>
                                 <connections>
                                     <segue destination="voI-Se-xbb" kind="push" id="wJS-dP-kLh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2qg-h7-r7r">
+                                <rect key="frame" x="56" y="64" width="144" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Neck Board Test">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="uQC-Wl-t7E" kind="push" id="ASp-O5-7Fr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HsJ-Bm-pgq">
+                                <rect key="frame" x="52" y="154" width="153" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Power Board Test">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="emW-Bb-7oB" kind="push" id="Yd4-XP-ZX5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j8L-dY-wpf">
+                                <rect key="frame" x="46" y="199" width="164" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Neck Pre-assembly">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ErI-ga-eD7" kind="push" id="ApE-dz-aFy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="myo-wB-q9J">
+                                <rect key="frame" x="52" y="109" width="153" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="PMCU Board Test">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="82a-3Z-tx0" kind="push" id="kcN-0A-aGO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -170,7 +229,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-687" y="733"/>
+            <point key="canvasLocation" x="-687" y="2509"/>
         </scene>
         <!--Led All View Controller - Red LED-->
         <scene sceneID="ksP-gX-9zN">
@@ -230,7 +289,7 @@
                     </userDefinedRuntimeAttributes>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-103" y="733"/>
+            <point key="canvasLocation" x="-103" y="2509"/>
         </scene>
         <!--Led All View Controller - Green LED-->
         <scene sceneID="qMY-fX-tB6">
@@ -290,7 +349,7 @@
                     </userDefinedRuntimeAttributes>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="470" y="733"/>
+            <point key="canvasLocation" x="470" y="2509"/>
         </scene>
         <!--Led All View Controller - Blue LED-->
         <scene sceneID="aqw-Ao-agi">
@@ -350,7 +409,7 @@
                     </userDefinedRuntimeAttributes>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1033" y="733"/>
+            <point key="canvasLocation" x="1033" y="2509"/>
         </scene>
         <!--Led All View Controller - White LED-->
         <scene sceneID="ibh-WX-SJf">
@@ -410,7 +469,7 @@
                     </userDefinedRuntimeAttributes>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1596" y="733"/>
+            <point key="canvasLocation" x="1596" y="2509"/>
         </scene>
         <!--Fret View Controller - Fret-->
         <scene sceneID="JbN-Q9-ru8">
@@ -474,7 +533,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2238" y="733"/>
+            <point key="canvasLocation" x="2238" y="2509"/>
         </scene>
         <!--Connection View Controller - Disconnect-->
         <scene sceneID="SoO-u4-Lis">
@@ -518,7 +577,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="5411" y="733"/>
+            <point key="canvasLocation" x="5411" y="2509"/>
         </scene>
         <!--Summary View Controller - Summary-->
         <scene sceneID="tb5-Yj-Bgh">
@@ -578,7 +637,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="6006" y="733"/>
+            <point key="canvasLocation" x="6006" y="2509"/>
         </scene>
         <!--Fret View Controller - Note On-->
         <scene sceneID="foc-RJ-KLp">
@@ -642,7 +701,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2815" y="733"/>
+            <point key="canvasLocation" x="2815" y="2509"/>
         </scene>
         <!--Led All View Controller - Red LED-->
         <scene sceneID="LnK-tB-Ca5">
@@ -1219,7 +1278,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3461" y="733"/>
+            <point key="canvasLocation" x="3461" y="2509"/>
         </scene>
         <!--Line Out View Controller - Audio-->
         <scene sceneID="lhp-Qf-c5V">
@@ -1360,6 +1419,1737 @@
             </objects>
             <point key="canvasLocation" x="4802" y="276"/>
         </scene>
+        <!--Led All View Controller - Red LED-->
+        <scene sceneID="w7l-dO-Bb2">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yc9-4u-nIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="hdZ-2o-J7O" customClass="LedAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3wo-8l-xbL">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aOO-VX-Oc8">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="KlX-mM-1hW" kind="push" identifier="passSegue" id="H3z-GM-9aJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jxw-hY-Ze3">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="KlX-mM-1hW" kind="push" identifier="failSegue" id="PEb-ve-GCP"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Red_Leds.JPG" id="st4-Dy-bpe">
+                                <rect key="frame" x="120" y="20" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Red LED" id="iEV-yA-4hj"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Red"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-103" y="728"/>
+        </scene>
+        <!--Led All View Controller - Green LED-->
+        <scene sceneID="DGL-rz-A8g">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Mj-RU-TAT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="KlX-mM-1hW" customClass="LedAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5VR-sJ-eLu">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Uoq-0F-UPo">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vyR-av-wNz" kind="push" identifier="passSegue" id="cMZ-ZP-PpE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JA4-Dm-Fk0">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vyR-av-wNz" kind="push" identifier="failSegue" id="f9n-ff-I3u"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Green_Leds.JPG" id="tg8-X7-g98">
+                                <rect key="frame" x="120" y="20" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Green LED" id="SYs-JM-sd5"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Green"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="470" y="728"/>
+        </scene>
+        <!--Led All View Controller - Blue LED-->
+        <scene sceneID="owX-Ca-RM9">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l9S-Nq-4Ni" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="vyR-av-wNz" customClass="LedAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZQU-qL-Wvf">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gY5-Bs-d7w">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="srH-lA-r77" kind="push" identifier="passSegue" id="fZv-2m-LvD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="691-pc-L34">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="srH-lA-r77" kind="push" identifier="failSegue" id="4BU-8z-xFu"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Blue_Leds.JPG" id="U2T-OJ-zwL">
+                                <rect key="frame" x="120" y="20" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Blue LED" id="IEc-SD-fHd"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Blue"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1033" y="728"/>
+        </scene>
+        <!--Led All View Controller - White LED-->
+        <scene sceneID="bs6-q1-Sql">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k8d-10-9oy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="srH-lA-r77" customClass="LedAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kzw-3u-gda">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ghj-Ab-b0F">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ieg-S6-mUC" kind="push" identifier="passSegue" id="0DI-Yq-EoS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ubj-Ud-3rI">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ieg-S6-mUC" kind="push" identifier="failSegue" id="Lhl-lI-ac3"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="White_Leds.JPG" id="7Gw-LS-MnM">
+                                <rect key="frame" x="120" y="20" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="White LED" id="C4z-vX-LRm"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="White"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1596" y="728"/>
+        </scene>
+        <!--Connection View Controller - Connect-->
+        <scene sceneID="Aiy-ns-8gB">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gJg-Qt-sfH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="uQC-Wl-t7E" customClass="ConnectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hbZ-1N-ePF">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h3w-K2-YTG">
+                                <rect key="frame" x="19" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="hdZ-2o-J7O" kind="push" identifier="failSegue" id="HNX-nj-xwa"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Phone_In.JPG" id="abe-if-SW3">
+                                <rect key="frame" x="120" y="20" width="240" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Connect" id="Ud1-Ls-vq4"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Connect"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="hdZ-2o-J7O" kind="push" identifier="passSegue" id="It8-hF-Rlx"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-687" y="728"/>
+        </scene>
+        <!--Summary View Controller - Summary-->
+        <scene sceneID="rOZ-Wj-8A4">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8UC-xe-0uA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="6IB-Rf-inK" customClass="SummaryViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SBa-DC-F26">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hQz-Cf-uI3">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonClicked:" destination="6IB-Rf-inK" eventType="touchUpInside" id="wao-EB-deG"/>
+                                </connections>
+                            </button>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ykS-xZ-NKS">
+                                <rect key="frame" x="20" y="20" width="440" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="9Yf-eb-0jb">
+                                <rect key="frame" x="177" y="73" width="126" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Summary" id="GVl-zT-Wz2"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="MainBoard"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="resultLabel" destination="9Yf-eb-0jb" id="rIS-1p-4En"/>
+                        <outlet property="summaryView" destination="ykS-xZ-NKS" id="2SG-VP-e1E"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="6006" y="728"/>
+        </scene>
+        <!--Connection View Controller - Disconnect-->
+        <scene sceneID="XGq-CL-sZc">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YGn-uQ-CbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="shb-ch-QxI" customClass="ConnectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e6T-zM-ehq">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l4n-eZ-Ij6">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="6IB-Rf-inK" kind="push" identifier="failSegue" id="Ozq-wg-LvU"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Phone_Out.JPG" id="kuW-XI-pJ9">
+                                <rect key="frame" x="120" y="20" width="240" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Disconnect" id="gQ0-hz-1cx"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Disconnect"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="6IB-Rf-inK" kind="push" identifier="passSegue" id="ktf-Dq-qgc"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="5411" y="728"/>
+        </scene>
+        <!--Fret View Controller - Fret-->
+        <scene sceneID="2fS-Xz-woJ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iaf-qX-E4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="ieg-S6-mUC" customClass="FretViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dp8-cp-65x">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Gbc-66-tEe">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="eML-jv-VYS" kind="push" identifier="passSegue" id="q1q-MJ-L4g"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dW9-Ng-gHD">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="eML-jv-VYS" kind="push" identifier="failSegue" id="0As-8w-RQn"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="63D-9P-7VG">
+                                <rect key="frame" x="56" y="37" width="368" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Fret" id="hYz-Kg-d4C"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="FretUpDown"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="checkboxesView" destination="63D-9P-7VG" id="uIm-AD-VJr"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2238" y="728"/>
+        </scene>
+        <!--Fret View Controller - Note On-->
+        <scene sceneID="8LG-zY-NVX">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hgW-gn-icz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="eML-jv-VYS" customClass="FretViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I9x-KU-QEl">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cw0-2Z-zxW">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="7bf-wX-kjl" kind="push" identifier="passSegue" id="DYJ-qd-qpN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d1O-Sf-abE">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="7bf-wX-kjl" kind="push" identifier="failSegue" id="a47-oE-iEx"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="NlY-Tl-nUt">
+                                <rect key="frame" x="56" y="37" width="368" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Note On" id="7qL-6q-OJv"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="NoteOn"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="checkboxesView" destination="NlY-Tl-nUt" id="orm-HQ-mYo"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2815" y="728"/>
+        </scene>
+        <!--Fretboard Electrical View Controller - Fret-->
+        <scene sceneID="I5a-KP-QUL">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="str-ir-rSA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="7bf-wX-kjl" customClass="FretboardElectricalViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O9X-b4-o8m">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mq4-xO-uBf">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="shb-ch-QxI" kind="push" identifier="passSegue" id="k8k-Zm-SxN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sOF-Y3-hRP">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="shb-ch-QxI" kind="push" identifier="failSegue" id="PLc-pi-Fyd"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="sYs-3X-bVj">
+                                <rect key="frame" x="68" y="20" width="344" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Green_Button.JPG" id="7mZ-jE-tls">
+                                <rect key="frame" x="144" y="20" width="193" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Fret" id="jha-jw-wqN"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="FretElectrical"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="checkboxesView" destination="sYs-3X-bVj" id="oGa-Xh-eiY"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3461" y="728"/>
+        </scene>
+        <!--Led All View Controller - White LED-->
+        <scene sceneID="Qsj-Qx-xHx">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ot2-xW-YVp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="qM2-3x-xLx" customClass="LedAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bsc-Uw-wzm">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="llY-F5-yUs">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="MTb-gw-46e" kind="push" identifier="passSegue" id="R0y-Oy-c8O"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ykg-xQ-Dzh">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="MTb-gw-46e" kind="push" identifier="failSegue" id="hef-wv-tWG"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="White_Leds.JPG" id="zY1-nT-X5N">
+                                <rect key="frame" x="120" y="20" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="White LED" id="icU-Kp-6P0"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="White"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1596" y="1576"/>
+        </scene>
+        <!--Connection View Controller - Connect-->
+        <scene sceneID="83i-4a-n0s">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s1Z-nI-7XS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="emW-Bb-7oB" customClass="ConnectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EeW-Oo-IK3">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hvK-rn-NGP">
+                                <rect key="frame" x="19" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qM2-3x-xLx" kind="push" identifier="failSegue" id="83B-4A-vcy"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Phone_In.JPG" id="pf4-tx-6bP">
+                                <rect key="frame" x="120" y="20" width="240" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Connect" id="PXV-LX-MCO"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Connect"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="qM2-3x-xLx" kind="push" identifier="passSegue" id="awp-gq-HLt"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-687" y="1576"/>
+        </scene>
+        <!--Summary View Controller - Summary-->
+        <scene sceneID="qP7-5N-Dfs">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZrT-7B-XFy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="9mY-NE-r4z" customClass="SummaryViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h2l-fO-9Fg">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gJY-rh-1HQ">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonClicked:" destination="9mY-NE-r4z" eventType="touchUpInside" id="wDk-2h-Sb5"/>
+                                </connections>
+                            </button>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1fX-u7-SsN">
+                                <rect key="frame" x="20" y="20" width="440" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="7NJ-g4-oEx">
+                                <rect key="frame" x="177" y="73" width="126" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Summary" id="qbP-9K-mBc"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="MainBoard"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="resultLabel" destination="7NJ-g4-oEx" id="WfV-46-0kx"/>
+                        <outlet property="summaryView" destination="1fX-u7-SsN" id="eyT-dm-w24"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="6006" y="1576"/>
+        </scene>
+        <!--Connection View Controller - Disconnect-->
+        <scene sceneID="b5T-Tw-QLH">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eft-rH-541" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="PS9-Wx-Vuf" customClass="ConnectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w15-6G-i0Y">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qU0-sI-1Sp">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="9mY-NE-r4z" kind="push" identifier="failSegue" id="aPF-JJ-Z0u"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Phone_Out.JPG" id="V98-hJ-vQr">
+                                <rect key="frame" x="120" y="20" width="240" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Disconnect" id="Adj-Ux-o1a"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Disconnect"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="9mY-NE-r4z" kind="push" identifier="passSegue" id="yzN-n1-g6W"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="5411" y="1576"/>
+        </scene>
+        <!--Line Out View Controller - Audio-->
+        <scene sceneID="2Gh-4k-hqM">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cb0-su-etN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="MTb-gw-46e" customClass="LineOutViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Oi-vJ-7nb">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="q7B-GU-4yl">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="DHT-6b-zVk" kind="push" identifier="passSegue" id="NMe-4G-1cf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sij-e3-PrZ">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="DHT-6b-zVk" kind="push" identifier="passSegue" id="2h9-At-J8R"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Audo_Jack.JPG" id="RU5-IQ-8kp">
+                                <rect key="frame" x="163" y="20" width="154" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Audio" id="n9N-7v-Nnd"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3469" y="1576"/>
+        </scene>
+        <!--Battery View Controller - Battery-->
+        <scene sceneID="1qP-zw-2He">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FH5-Ah-ize" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="DHT-6b-zVk" customClass="BatteryViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RwP-xo-93b">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N0C-4E-9Wp">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="PS9-Wx-Vuf" kind="push" identifier="passSegue" id="zMs-8P-ZJM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zAe-D8-Do8">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="PS9-Wx-Vuf" kind="push" identifier="failSegue" id="m3P-Bt-tzu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Battery Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="SQj-p3-CQ9">
+                                <rect key="frame" x="204" y="75" width="190" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Battery Percentage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="56w-Fr-bDa">
+                                <rect key="frame" x="204" y="109" width="190" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rdq-zH-hrf">
+                                <rect key="frame" x="204" y="20" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Test">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="testBatteryClicked:" destination="DHT-6b-zVk" eventType="touchUpInside" id="Cfc-DY-cCq"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Battery_Switch.JPG" id="fyP-XZ-Z3x">
+                                <rect key="frame" x="20" y="20" width="131" height="159"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Battery" id="8kg-jU-kpp"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="chargingLabel" destination="SQj-p3-CQ9" id="iSd-2z-eGW"/>
+                        <outlet property="percentageLabel" destination="56w-Fr-bDa" id="G5t-RV-2sd"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="4802" y="1576"/>
+        </scene>
+        <!--Led All View Controller - Red LED-->
+        <scene sceneID="6PK-Fq-5tD">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FYK-oM-019" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="3xR-Cy-fvr" customClass="LedAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zBs-AK-vXi">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VwM-kT-pol">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="8Kd-eS-QR5" kind="push" identifier="passSegue" id="pLl-f6-tSb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mWJ-Vm-OTF">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="8Kd-eS-QR5" kind="push" identifier="failSegue" id="Amu-9k-smS"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Red_Leds.JPG" id="dhx-Ve-xle">
+                                <rect key="frame" x="120" y="20" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Red LED" id="Xvw-KM-5Sp"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Red"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-103" y="2048"/>
+        </scene>
+        <!--Led All View Controller - Green LED-->
+        <scene sceneID="DN5-pV-t16">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B69-qc-r1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="8Kd-eS-QR5" customClass="LedAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qaj-jK-bbH">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UzA-ay-Eld">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="WDg-nc-yaL" kind="push" identifier="passSegue" id="9d2-Qq-IuU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yl3-h3-EHG">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="WDg-nc-yaL" kind="push" identifier="failSegue" id="Rx5-uw-uy9"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Green_Leds.JPG" id="iey-MK-sZ6">
+                                <rect key="frame" x="120" y="20" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Green LED" id="13C-kX-HP5"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Green"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="470" y="2048"/>
+        </scene>
+        <!--Led All View Controller - Blue LED-->
+        <scene sceneID="Q8l-t7-T0w">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gxf-3s-pbt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="WDg-nc-yaL" customClass="LedAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g9q-VV-zH2">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="B2a-FN-HRs">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aSM-6q-Nkh" kind="push" identifier="passSegue" id="vZn-tx-orJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="H4O-Ur-JnZ">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aSM-6q-Nkh" kind="push" identifier="failSegue" id="CuX-ph-8WZ"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Blue_Leds.JPG" id="EhU-1p-Jnu">
+                                <rect key="frame" x="120" y="20" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Blue LED" id="MPd-AJ-eai"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Blue"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1033" y="2048"/>
+        </scene>
+        <!--Led All View Controller - White LED-->
+        <scene sceneID="Lh7-nW-nyU">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hFb-v9-BcI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="aSM-6q-Nkh" customClass="LedAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EUh-rD-sKR">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ujX-GP-5ej">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Nek-Gb-3Ba" kind="push" identifier="passSegue" id="07m-Rd-jFD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="woV-0h-ST7">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Nek-Gb-3Ba" kind="push" identifier="failSegue" id="rDw-Z5-pAp"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="White_Leds.JPG" id="aCf-gz-hvZ">
+                                <rect key="frame" x="120" y="20" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="White LED" id="RtR-9R-JBc"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="White"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1596" y="2048"/>
+        </scene>
+        <!--Connection View Controller - Connect-->
+        <scene sceneID="xCs-De-JnZ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fJG-zg-h7Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="ErI-ga-eD7" customClass="ConnectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4rH-oY-SIh">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="t0N-5B-RZX">
+                                <rect key="frame" x="19" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="3xR-Cy-fvr" kind="push" identifier="failSegue" id="JcY-Ne-o0W"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Phone_In.JPG" id="UrR-5Z-PQF">
+                                <rect key="frame" x="120" y="20" width="240" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Connect" id="yUa-eQ-583"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Connect"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="3xR-Cy-fvr" kind="push" identifier="passSegue" id="FPu-CS-3Fy"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-687" y="2048"/>
+        </scene>
+        <!--Fretboard Electrical View Controller - Piezo-->
+        <scene sceneID="PlF-D2-qhL">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SF8-IQ-OfA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Nek-Gb-3Ba" customClass="FretboardElectricalViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Pmi-0d-HpC">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kYN-Z4-y7t" customClass="passSegue">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="fkb-8q-asA" kind="push" identifier="passSegue" id="Svl-aW-R8w"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NAf-Gg-fOP">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="fkb-8q-asA" kind="push" identifier="failSegue" id="e9T-CG-Wyh"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="I8g-s3-hrj">
+                                <rect key="frame" x="120" y="117" width="240" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Piezo.JPG" id="lvX-Vm-yGp">
+                                <rect key="frame" x="120" y="12" width="240" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Piezo" id="BAS-SW-HRq"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="PiezoElectrical"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="checkboxesView" destination="I8g-s3-hrj" id="qa9-mh-ugb"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2238" y="2048"/>
+        </scene>
+        <!--Summary View Controller - Summary-->
+        <scene sceneID="8E7-eS-cBX">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dZQ-HB-shn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="AhH-1p-I0p" customClass="SummaryViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yua-aS-Ggl">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3AM-x5-VHz">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonClicked:" destination="AhH-1p-I0p" eventType="touchUpInside" id="iqO-XL-nsh"/>
+                                </connections>
+                            </button>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Bps-2X-0xm">
+                                <rect key="frame" x="20" y="20" width="440" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="QPH-Z5-sYg">
+                                <rect key="frame" x="177" y="73" width="126" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Summary" id="Jyg-Et-gEi"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="MainBoard"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="resultLabel" destination="QPH-Z5-sYg" id="ipd-me-Ree"/>
+                        <outlet property="summaryView" destination="Bps-2X-0xm" id="yeU-fq-TM8"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="6006" y="2048"/>
+        </scene>
+        <!--Connection View Controller - Disconnect-->
+        <scene sceneID="SC2-xX-3Tb">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LkK-ej-TYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="7ko-bO-CmA" customClass="ConnectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T6O-3D-PpU">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cj7-nh-DcK">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="AhH-1p-I0p" kind="push" identifier="failSegue" id="yJn-wb-tic"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Phone_Out.JPG" id="TVk-DL-aAN">
+                                <rect key="frame" x="120" y="20" width="240" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Disconnect" id="cg4-g3-Yg1"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Disconnect"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="AhH-1p-I0p" kind="push" identifier="passSegue" id="fWD-pO-nkS"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="5411" y="2048"/>
+        </scene>
+        <!--Fret View Controller - Fret-->
+        <scene sceneID="CXj-c0-UMs">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gu6-9K-UCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="fkb-8q-asA" customClass="FretViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AsF-dW-kEp">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GIl-6M-SFe">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="cyl-0f-5FV" kind="push" identifier="passSegue" id="Nfd-vh-7Zk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mcg-rB-nUY">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="cyl-0f-5FV" kind="push" identifier="failSegue" id="tf8-kc-7Yk"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="qq1-Qq-bqb">
+                                <rect key="frame" x="56" y="37" width="368" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Fret" id="V1P-ga-o0o"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="FretUpDown"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="checkboxesView" destination="qq1-Qq-bqb" id="L5A-Wp-tv5"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2815" y="2048"/>
+        </scene>
+        <!--Fret View Controller - Note On-->
+        <scene sceneID="HGx-0V-TJw">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qmR-Tr-i5Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="cyl-0f-5FV" customClass="FretViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="puc-1w-Ddl">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fjS-5E-2u2">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="7ko-bO-CmA" kind="push" identifier="passSegue" id="9Hk-4S-xpY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Uu-VQ-KWG">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="7ko-bO-CmA" kind="push" identifier="failSegue" id="vlX-s7-MtH"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="Ig9-hY-WMs">
+                                <rect key="frame" x="56" y="37" width="368" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Note On" id="5QY-xU-g7a"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="NoteOn"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="checkboxesView" destination="Ig9-hY-WMs" id="k7g-Ub-ANC"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3392" y="2048"/>
+        </scene>
+        <!--Connection View Controller - Connect-->
+        <scene sceneID="UPw-Is-qa9">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eS4-q4-xvR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="82a-3Z-tx0" customClass="ConnectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dPN-NT-x9Z">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lf4-c0-Omf">
+                                <rect key="frame" x="19" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="rn6-Ej-tsR" kind="push" identifier="failSegue" id="Uf0-34-r7m"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Phone_In.JPG" id="6ZZ-xb-qSJ">
+                                <rect key="frame" x="120" y="20" width="240" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Connect" id="O4G-p5-4uh"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Connect"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="rn6-Ej-tsR" kind="push" identifier="passSegue" id="bCC-4a-fXx"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-687" y="1164"/>
+        </scene>
+        <!--Fretboard Electrical View Controller - Piezo-->
+        <scene sceneID="gNT-Vq-USN">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="575-T8-MMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="rn6-Ej-tsR" customClass="FretboardElectricalViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f31-P0-dNj">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jed-AE-0gK" customClass="passSegue">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="lQR-Cb-E7D" kind="push" identifier="passSegue" id="6SL-52-nCQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Zqm-yi-9Gq">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="lQR-Cb-E7D" kind="push" identifier="failSegue" id="Sre-aE-A0R"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="UHB-FH-Qq3">
+                                <rect key="frame" x="120" y="117" width="240" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Piezo.JPG" id="Ce9-UA-XIE">
+                                <rect key="frame" x="120" y="12" width="240" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Piezo" id="ZcE-yg-iBX"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="PiezoElectrical"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="checkboxesView" destination="UHB-FH-Qq3" id="9hQ-Sx-dxw"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2238" y="1164"/>
+        </scene>
+        <!--Summary View Controller - Summary-->
+        <scene sceneID="NuN-u9-yt5">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ENf-DF-gL8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Qtc-Jm-o94" customClass="SummaryViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ewl-Un-2KU">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HXK-hV-N7c">
+                                <rect key="frame" x="190" y="199" width="100" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonClicked:" destination="Qtc-Jm-o94" eventType="touchUpInside" id="AXy-My-Ecw"/>
+                                </connections>
+                            </button>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="nY5-p0-Hg2">
+                                <rect key="frame" x="20" y="20" width="440" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="2L7-dH-qap">
+                                <rect key="frame" x="177" y="73" width="126" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Summary" id="yBm-d7-SCY"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <nil key="simulatedDestinationMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="MainBoard"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="resultLabel" destination="2L7-dH-qap" id="wRD-Ih-nL7"/>
+                        <outlet property="summaryView" destination="nY5-p0-Hg2" id="ycW-Ws-b7G"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="6006" y="1164"/>
+        </scene>
+        <!--Connection View Controller - Disconnect-->
+        <scene sceneID="gaN-TF-USL">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h9g-pQ-SGS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="lQR-Cb-E7D" customClass="ConnectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ddo-5O-XXj">
+                        <rect key="frame" x="0.0" y="64" width="480" height="256"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KV1-Gp-DGE">
+                                <rect key="frame" x="20" y="199" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fail">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Qtc-Jm-o94" kind="push" identifier="failSegue" id="Ffx-oq-VwX"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Phone_Out.JPG" id="gdQ-mv-XgM">
+                                <rect key="frame" x="120" y="20" width="240" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Disconnect" id="hnJ-eU-f1g"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="testType" value="Disconnect"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="Qtc-Jm-o94" kind="push" identifier="passSegue" id="PH3-xP-DIR"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="5411" y="1164"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Audio_JackGtar.JPG" width="3264" height="2448"/>
@@ -1424,29 +3214,55 @@
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jWX-lT-CPn"/>
-        <segue reference="qEb-sy-w8m"/>
-        <segue reference="Ujl-bZ-4mH"/>
-        <segue reference="0oU-kZ-xF2"/>
-        <segue reference="q5g-1t-GF1"/>
-        <segue reference="6Df-vk-GcQ"/>
-        <segue reference="aYr-eE-xZa"/>
-        <segue reference="puY-SA-Qeu"/>
-        <segue reference="OFs-GE-Azd"/>
         <segue reference="hvr-oG-8eh"/>
         <segue reference="pam-Gv-vcs"/>
-        <segue reference="yQU-5q-rRq"/>
-        <segue reference="kGT-WL-3zC"/>
-        <segue reference="lhZ-yA-L85"/>
-        <segue reference="Z5c-QI-hWs"/>
+        <segue reference="DdR-yU-yBL"/>
+        <segue reference="WZF-2M-eeb"/>
+        <segue reference="ChV-HR-rQG"/>
+        <segue reference="VHt-dJ-RYf"/>
         <segue reference="YvH-Cj-yay"/>
         <segue reference="y0h-Ad-QE6"/>
         <segue reference="nJ4-FC-spH"/>
-        <segue reference="yiT-eA-ACv"/>
-        <segue reference="jYs-MI-I2M"/>
+        <segue reference="Spx-bc-cBM"/>
+        <segue reference="bak-V9-GL4"/>
+        <segue reference="HNX-nj-xwa"/>
+        <segue reference="H3z-GM-9aJ"/>
+        <segue reference="cMZ-ZP-PpE"/>
+        <segue reference="fZv-2m-LvD"/>
+        <segue reference="0DI-Yq-EoS"/>
+        <segue reference="q1q-MJ-L4g"/>
+        <segue reference="DYJ-qd-qpN"/>
+        <segue reference="k8k-Zm-SxN"/>
+        <segue reference="Ozq-wg-LvU"/>
+        <segue reference="JcY-Ne-o0W"/>
+        <segue reference="Amu-9k-smS"/>
+        <segue reference="Rx5-uw-uy9"/>
+        <segue reference="CuX-ph-8WZ"/>
+        <segue reference="07m-Rd-jFD"/>
+        <segue reference="e9T-CG-Wyh"/>
+        <segue reference="tf8-kc-7Yk"/>
+        <segue reference="vlX-s7-MtH"/>
+        <segue reference="fWD-pO-nkS"/>
+        <segue reference="MqC-8b-oqM"/>
+        <segue reference="qEb-sy-w8m"/>
+        <segue reference="Ujl-bZ-4mH"/>
+        <segue reference="0gl-46-Luw"/>
+        <segue reference="hn7-8c-v4q"/>
+        <segue reference="2ne-nc-F0L"/>
+        <segue reference="aYr-eE-xZa"/>
+        <segue reference="PSd-iv-k8q"/>
+        <segue reference="OFs-GE-Azd"/>
+        <segue reference="83B-4A-vcy"/>
+        <segue reference="hef-wv-tWG"/>
+        <segue reference="NMe-4G-1cf"/>
+        <segue reference="zMs-8P-ZJM"/>
+        <segue reference="aPF-JJ-Z0u"/>
+        <segue reference="Uf0-34-r7m"/>
+        <segue reference="Sre-aE-A0R"/>
+        <segue reference="PH3-xP-DIR"/>
     </inferredMetricsTieBreakers>
 </document>

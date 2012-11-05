@@ -55,6 +55,8 @@ extern Checklist g_checklist;
     
     g_gtarController.m_delegate = self;
     
+    g_checklist.batteryTest = NO;
+
     [super viewDidAppear:animated];
     
 }

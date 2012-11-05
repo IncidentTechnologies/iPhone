@@ -42,7 +42,7 @@ Checklist g_checklist;
         
 //        [g_gtarController sendRequestCertDownload];
         
-        [g_gtarController addObserver:self];
+//        [g_gtarController addObserver:self];
         
     }
 
@@ -85,7 +85,22 @@ Checklist g_checklist;
     {
         
         // zero out our checklist structure to init it
-        memset(&g_checklist, 0, sizeof(g_checklist));
+//        memset(&g_checklist, 0, sizeof(g_checklist));
+        
+        g_checklist.connectedTest = YES;
+        g_checklist.disconnectedTest = YES;
+        g_checklist.redTestAll = YES;
+        g_checklist.greenTestAll = YES;
+        g_checklist.blueTestAll = YES;
+        g_checklist.whiteTestAll = YES;
+        g_checklist.fretUpTest = YES;
+        g_checklist.fretDownTest = YES;
+        g_checklist.noteOnTest = YES;
+        g_checklist.fretElectricalTest = YES;
+        g_checklist.piezoElectricalTest = YES;
+        g_checklist.lineOutTest = YES;
+        g_checklist.batteryTest = YES;
+        g_checklist.firmwareTest = YES;
         
     }
     

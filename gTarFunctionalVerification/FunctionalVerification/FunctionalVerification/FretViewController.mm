@@ -56,12 +56,8 @@ extern Checklist g_checklist;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [g_gtarController addObserver:self];
-    
     CGFloat height = _checkboxesView.frame.size.height/6.0;
     CGFloat width = _checkboxesView.frame.size.width/16.0;
-    
-    UIImage * img = [UIImage imageNamed:@"checkbox_unchecked.png"];
     
     _img = [UIImage imageNamed:@"checkbox_checked.png"];
     
@@ -73,20 +69,55 @@ extern Checklist g_checklist;
             
             UIImageView * imgView = [[UIImageView alloc] initWithFrame:fr];
             
-            imgView.image = img;
-            
             [_checkboxesView addSubview:imgView];
             
             _imgView[str*16 + fret] = imgView;
+            
         }
     }
-    
+
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    [g_gtarController addObserver:self];
+    
+    UIImage * img = [UIImage imageNamed:@"checkbox_unchecked.png"];
+        
+    for ( NSInteger str = 0; str < 6; str++ )
+    {
+        for ( NSInteger fret = 0; fret < 16; fret++ )
+        {
+            
+            UIImageView * imgView = _imgView[str*16 + fret];
+            
+            imgView.image = img;
+            
+            _fretUp[str*16 + fret] = 0;
+            _fretDown[str*16 + fret] = 0;
+            _noteOn[str*16 + fret] = 0;
+        }
+    }
+    
+    // init tests
+    if ( [_testType isEqualToString:@"FretUpDown"] == YES )
+    {
+        g_checklist.fretUpTest = NO;
+        g_checklist.fretDownTest = NO;
+    }
+    if ( [_testType isEqualToString:@"NoteOn"] == YES )
+    {
+        g_checklist.noteOnTest = NO;
+    }
+    
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -106,72 +137,11 @@ extern Checklist g_checklist;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
+    [g_gtarController turnOffAllLeds];
+    
 }
 
 #pragma mark - GtarController
-
-//- (void)gtarFretDown:(GtarPosition)position
-//{
-//    
-//    if ( _fretDown[position.string * 16 + position.fret] == 0 )
-//    {
-//        _fretDown[position.string * 16 + position.fret] = 1;
-//        
-//        _fretDownCount++;
-//        
-//        if ( _fretDownCount == (16*6) )
-//        {
-////            g_checklist.fretTest
-//        }
-//        
-//    }
-//        
-//}
-//
-//- (void)gtarFretUp:(GtarPosition)position
-//{
-//    
-//    if ( _fretUp[position.string * 16 + position.fret] == 0 )
-//    {
-//        _fretUp[position.string * 16 + position.fret] = 1;
-//        
-//        _fretUpCount++;
-//        
-//        if ( _fretUpCount == (16*6) )
-//        {
-////            g_checklist.fretTest
-//        }
-//        
-//    }
-//    
-//}
-//
-//- (void)gtarNoteOn:(GtarPosition)position
-//{
-//    
-//    if ( _noteOn[position.string * 16 + position.fret] == 0 )
-//    {
-//        _noteOn[position.string * 16 + position.fret] = 1;
-//        
-//        UIImageView * imgView = _imgView[position.string * 16 + position.fret];
-//        
-//        UIImage * img = [UIImage imageNamed:@"checkbox_checked.png"];
-//
-//        imgView.image = img;
-//    
-//        _noteOnCount++;
-//        
-//        if ( _noteOnCount == (16*6) )
-//        {
-//            g_checklist.fretTest = YES;
-//        }
-//    }
-//}
-//
-//- (void)gtarNoteOff:(GtarPosition)position
-//{
-////    _fretDown[position.string * 16 + position.fret] = 1;
-//}
 
 - (void)testComplete
 {
