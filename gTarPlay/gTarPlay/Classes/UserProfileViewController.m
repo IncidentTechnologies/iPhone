@@ -631,26 +631,26 @@ extern UserController * g_userController;
     [picker release];
 }
 
-- (UIImage*)captureView:(UIView*)view
-{
-    
-//    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGRect screenRect = view.bounds;
-    
-    UIGraphicsBeginImageContext(screenRect.size);
-    
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    [[UIColor blackColor] set];
-    CGContextFillRect(ctx, screenRect);
-    
-    [view.layer renderInContext:ctx];
-    
-    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
+//- (UIImage*)captureView:(UIView*)view
+//{
+//    
+////    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    CGRect screenRect = view.bounds;
+//    
+//    UIGraphicsBeginImageContext(screenRect.size);
+//    
+//    CGContextRef ctx = UIGraphicsGetCurrentContext();
+//    [[UIColor blackColor] set];
+//    CGContextFillRect(ctx, screenRect);
+//    
+//    [view.layer renderInContext:ctx];
+//    
+//    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    
+//    UIGraphicsEndImageContext();
+//    
+//    return newImage;
+//}
 
 #pragma mark -
 #pragma mark UIImagePickerDelegate

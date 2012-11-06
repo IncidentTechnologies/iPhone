@@ -40,7 +40,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView * m_scoreSort;
 
 - (void)refreshDisplay;
-- (void)showSongDetails:(UserSong*)userSong;
+//- (void)showSongDetails:(UserSong*)userSong;
 
 - (IBAction)titleSorting:(id)sender;
 - (IBAction)artistSorting:(id)sender;

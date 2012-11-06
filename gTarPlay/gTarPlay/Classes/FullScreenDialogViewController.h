@@ -2,7 +2,7 @@
 //  FullScreenDialogViewController.h
 //  gTarPlay
 //
-//  Created by Joel Greenia on 3/2/12.
+//  Created by Marty Greenia on 3/2/12.
 //  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 

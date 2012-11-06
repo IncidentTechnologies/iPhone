@@ -97,6 +97,8 @@ extern TelemetryController * g_telemetryController;
     
     [super attachToSuperview:view];
     
+    [g_gtarController addObserver:self];
+    
     [m_statusLabel setHidden:YES];
     
     [m_leftButton setSelected:NO];
@@ -111,7 +113,10 @@ extern TelemetryController * g_telemetryController;
 - (void)detachFromSuperview
 {
     
+    [g_gtarController removeObserver:self];
+    
     [super detachFromSuperview];
+    
 }
 
 #pragma mark - Buttons
@@ -127,7 +132,7 @@ extern TelemetryController * g_telemetryController;
     {
         [self detachFromSuperview];
     }
-
+    
 }
 
 - (IBAction)rightButtonClicked:(id)sender
@@ -145,14 +150,6 @@ extern TelemetryController * g_telemetryController;
         
         [self updateFirmware];
         
-//        [m_leftButton setSelected:YES];
-//        [m_rightButton setEnabled:NO];
-//        
-//        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(receivedFirmwareUpdateProgress:) userInfo:nil repeats:NO];
-//        [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(receivedFirmwareUpdateProgress:) userInfo:nil repeats:NO];
-//        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(receivedFirmwareUpdateProgress:) userInfo:nil repeats:NO];
-//        [NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(receivedFirmwareUpdateProgress:) userInfo:nil repeats:NO];
-//        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(receivedFirmwareUpdateStatusSucceeded) userInfo:nil repeats:NO];
     }
 
 }
@@ -294,6 +291,13 @@ extern TelemetryController * g_telemetryController;
     
 }
 
+#pragma mark - GtarControllerObserver
+
+- (void)gtarDisconnected
+{
+    [self detachFromSuperview];
+}
+
 #pragma mark - GtarControllerDelegate
 
 - (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
@@ -307,7 +311,7 @@ extern TelemetryController * g_telemetryController;
     [msg release];
     
     [m_currentActivity performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
-
+    
     m_firmwareCurrentMajorVersion = majorVersion;
     m_firmwareCurrentMinorVersion = minorVersion;
     

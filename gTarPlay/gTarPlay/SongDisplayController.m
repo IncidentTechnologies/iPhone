@@ -91,7 +91,7 @@
         }
         else
         {
-            m_renderer = [m_glView.m_renderer retain];
+            m_renderer = (SongES1Renderer*)[m_glView.m_renderer retain];
         }
         
         [self createNoteTexture];

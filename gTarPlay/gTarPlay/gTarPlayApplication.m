@@ -2,7 +2,7 @@
 //  gTarPlayApplication.m
 //  gTarPlay
 //
-//  Created by Joel Greenia on 10/10/12.
+//  Created by Marty Greenia on 10/10/12.
 //  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 

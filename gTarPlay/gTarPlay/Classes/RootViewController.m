@@ -71,7 +71,7 @@ extern TelemetryController * g_telemetryController;
         // Consider doing this lazily since the AC sampler takes a fair bit of time to load
         m_songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
         m_songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
-        m_songPlaybackViewController.m_delegate = self;
+//        m_songPlaybackViewController.m_delegate = self;
         m_songPlaybackViewController.m_popupDelegate = self;
         
         m_titleGatekeeperViewController = [[TitleGatekeeperViewController alloc] initWithNibName:nil bundle:nil];
@@ -892,7 +892,7 @@ extern TelemetryController * g_telemetryController;
         m_songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
         m_songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
         
-        m_songPlaybackViewController.m_delegate = self;
+//        m_songPlaybackViewController.m_delegate = self;
         m_songPlaybackViewController.m_popupDelegate = self;
     }
     
@@ -1006,6 +1006,11 @@ extern TelemetryController * g_telemetryController;
 - (void)fbSessionInvalidated
 {
     [self displayWelcomeDialog];
+}
+
+- (void)fbDidExtendToken:(NSString*)accessToken expiresAt:(NSDate*)expiresAt
+{
+    
 }
 
 @end

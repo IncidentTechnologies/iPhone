@@ -99,11 +99,11 @@
 
 #pragma mark - Button clicked handlers
 
-- (IBAction)infoButtonClicked:(id)sender
-{
-    
-    [m_parent showSongDetails:m_userSong];
-    
-}
+//- (IBAction)infoButtonClicked:(id)sender
+//{
+//    
+//    [m_parent showSongDetails:m_userSong];
+//    
+//}
 
 @end

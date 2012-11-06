@@ -2,7 +2,7 @@
 //  ContentController.h
 //  gTarAppCore
 //
-//  Created by Joel Greenia on 2/23/12.
+//  Created by Marty Greenia on 2/23/12.
 //  Copyright (c) 2012 IncidentTech. All rights reserved.
 //
 

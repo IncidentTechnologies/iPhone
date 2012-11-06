@@ -31,7 +31,7 @@
 - (void)turnOffLedWidth:(NSInteger)width andHeight:(NSInteger)height;
 - (void)turnOnLedWidth:(NSInteger)width andHeight:(NSInteger)height;
 - (void)changeHalo:(BOOL)on atPosition:(CGPoint)position;
-- (void)clearHaloAtPosition:(CGPoint)position;
-- (void)moveHaloFromPosition:(CGPoint)position;
+//- (void)clearHaloAtPosition:(CGPoint)position;
+//- (void)moveHaloFromPosition:(CGPoint)position;
 
 @end

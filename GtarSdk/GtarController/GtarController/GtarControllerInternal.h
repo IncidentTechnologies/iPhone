@@ -95,7 +95,7 @@ typedef enum GTAR_RX_MSG_TYPE
 
 - (BOOL)sendRequestCertDownload;
 - (BOOL)sendRequestFirmwareVersion;
-- (BOOL)sendFirmwarePackagePage:(void*)pBuffer bufferSize:(int)pBuffer_n fwSize:(int)fwSize fwPages:(int)fwPages curPage:(int)curPage withCheckSum:(unsigned char)checkSum;
+//- (BOOL)sendFirmwarePackagePage:(void*)pBuffer bufferSize:(int)pBuffer_n fwSize:(int)fwSize fwPages:(int)fwPages curPage:(int)curPage withCheckSum:(unsigned char)checkSum;
 - (BOOL)sendFirmwareUpdate:(NSData*)firmware;
 - (BOOL)sendFirmwareUpdateCancelation;
 

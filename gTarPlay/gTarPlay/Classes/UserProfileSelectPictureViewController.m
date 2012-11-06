@@ -2,8 +2,8 @@
 //  UserProfileSelectPictureViewController.m
 //  gTarPlay
 //
-//  Created by Joel Greenia on 3/26/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Marty Greenia on 3/26/12.
+//  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 
 #import "UserProfileSelectPictureViewController.h"

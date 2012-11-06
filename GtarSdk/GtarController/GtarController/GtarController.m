@@ -614,7 +614,7 @@
         // success
         if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateProgress:)] == YES )
         {
-            [m_delegate receivedFirmwareUpdateProgress:(m_firmwareCurrentPage+1)/GTAR_CONTROLLER_MAX_FIRMWARE_PAGES];
+            [m_delegate receivedFirmwareUpdateProgress:((m_firmwareCurrentPage+1)*100)/GTAR_CONTROLLER_MAX_FIRMWARE_PAGES];
         }
         else
         {

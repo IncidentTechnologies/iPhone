@@ -12,7 +12,7 @@
 
 @class CloudResponse;
 
-@interface TitleFirmwareViewController : FullScreenDialogViewController <GtarControllerDelegate>
+@interface TitleFirmwareViewController : FullScreenDialogViewController <GtarControllerDelegate, GtarControllerObserver>
 {
     
     IBOutlet UIButton * m_leftButton;

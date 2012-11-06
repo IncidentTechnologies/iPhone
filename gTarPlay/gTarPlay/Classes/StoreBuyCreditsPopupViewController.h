@@ -2,7 +2,7 @@
 //  StoreBuyCreditsPopupViewController.h
 //  gTarPlay
 //
-//  Created by Joel Greenia on 2/8/12.
+//  Created by Marty Greenia on 2/8/12.
 //  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 

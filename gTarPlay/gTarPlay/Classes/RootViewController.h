@@ -33,7 +33,7 @@
 
 @class AccountViewController;
 
-@interface RootViewController : UIViewController <UserProfileNavControllerDelegate, PopupViewControllerDelegate, GtarControllerObserver, FBSessionDelegate, SongPlayerDelegate, GtarControllerDelegate>
+@interface RootViewController : UIViewController <UserProfileNavControllerDelegate, PopupViewControllerDelegate, GtarControllerObserver, FBSessionDelegate, GtarControllerDelegate>
 {
 	
     BOOL m_requireLogin;

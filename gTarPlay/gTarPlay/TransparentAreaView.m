@@ -73,6 +73,8 @@
 - (void) dealloc
 {
     [m_tranparentAreas release];
+    
+    [super dealloc];
 }
 
 @end
