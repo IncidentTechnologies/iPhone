@@ -2,8 +2,8 @@
 //  PullToUpdateTableView.h
 //  gTarPlay
 //
-//  Created by Joel Greenia on 4/26/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Marty Greenia on 4/26/12.
+//  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -39,7 +39,7 @@
 - (void)aboveThreshold;
 - (void)belowThreshold;
 - (void)changeUpdateDate;
-- (void)update;
+//- (void)update;
 
 
 @end

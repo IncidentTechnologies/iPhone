@@ -2,7 +2,7 @@
 //  TitleFacebookViewController.h
 //  gTarPlay
 //
-//  Created by Joel Greenia on 3/1/12.
+//  Created by Marty Greenia on 3/1/12.
 //  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 
@@ -36,7 +36,7 @@ extern Facebook * g_facebook;
 - (void)endSpinner;
 - (void)loginFailed;
 
-- (IBAction)fullScreenButtonClicked:(id)sender;
+//- (IBAction)fullScreenButtonClicked:(id)sender;
 
 - (IBAction)doneButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;

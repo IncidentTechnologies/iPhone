@@ -44,8 +44,6 @@ extern Checklist g_checklist;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [g_gtarController addObserver:self];
-    
 #ifdef TARGET_IPHONE_SIMULATOR
 //    [NSTimer scheduledTimerWithTimeInterval:2.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 #endif
@@ -56,6 +54,24 @@ extern Checklist g_checklist;
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    // init tests
+    if ( [_testType isEqualToString:@"Connect"] == YES )
+    {
+        g_checklist.connectedTest = NO;
+    }
+    if ( [_testType isEqualToString:@"Disconnect"] == YES )
+    {
+        g_checklist.disconnectedTest = NO;
+    }
+    
+    [g_gtarController addObserver:self];
+    
+    [super viewDidAppear:animated];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -75,10 +91,6 @@ extern Checklist g_checklist;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-//    if ( [segue.identifier isEqualToString:@"failSegue"] == YES )
-//    {
-//        
-//    }
 }
 
 #pragma mark - GtarControllerObserver

@@ -201,12 +201,12 @@ extern UserController * g_userController;
     
 }
 
-- (void)showSongDetails:(UserSong*)userSong
-{
-    
-    [(SelectNavigationViewController*)m_navigationController showSongDetails:userSong];
-    
-}
+//- (void)showSongDetails:(UserSong*)userSong
+//{
+//    
+//    [(SelectNavigationViewController*)m_navigationController showSongDetails:userSong];
+//    
+//}
 
 #pragma PullToUpdateDelegate
 

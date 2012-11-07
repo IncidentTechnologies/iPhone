@@ -2,7 +2,7 @@
 //  FileRequest.m
 //  gTarAppCore
 //
-//  Created by Joel Greenia on 11/14/11.
+//  Created by Marty Greenia on 11/14/11.
 //  Copyright (c) 2011 IncidentTech. All rights reserved.
 //
 

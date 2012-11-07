@@ -2,7 +2,7 @@
 //  CustomBeveledView.m
 //  gTarPlay
 //
-//  Created by Joel Greenia on 12/1/11.
+//  Created by Marty Greenia on 12/1/11.
 //  Copyright (c) 2011 Incident Technologies. All rights reserved.
 //
 

@@ -14,7 +14,7 @@
 
 @class gTarPlayApplication;
 
-@interface gTarPlayAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate, GtarControllerObserver>
+@interface gTarPlayAppDelegate : NSObject <UIApplicationDelegate, GtarControllerObserver>
 {
     UIWindow * window;
     UINavigationController * navigationController;
@@ -26,7 +26,7 @@
 @property (nonatomic, assign) gTarPlayApplication * playApplication;
 
 - (void)checkAndClearCache;
-- (void)installPreloadedContent;
+//- (void)installPreloadedContent;
 
 @end
 

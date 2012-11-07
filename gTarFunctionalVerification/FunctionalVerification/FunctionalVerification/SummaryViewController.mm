@@ -53,7 +53,7 @@ extern Checklist g_checklist;
 //    self.summaryView.text = summaryString;
     
     self.summaryView.text = @"";
-    
+#if 0
     if ( [_testType isEqualToString:@"Functional"] )
     {
     
@@ -97,13 +97,43 @@ extern Checklist g_checklist;
             self.resultLabel.text = @"Fail!";
         }
     }
+#else
     
+#endif
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ( g_checklist.connectedTest &&
+        g_checklist.disconnectedTest &&
+        g_checklist.redTestAll &&
+        g_checklist.greenTestAll &&
+        g_checklist.blueTestAll &&
+        g_checklist.whiteTestAll &&
+        g_checklist.fretUpTest &&
+        g_checklist.fretDownTest &&
+        g_checklist.noteOnTest &&
+        g_checklist.fretElectricalTest &&
+        g_checklist.piezoElectricalTest &&
+        g_checklist.lineOutTest &&
+        g_checklist.batteryTest &&
+        g_checklist.firmwareTest )
+    {
+        self.resultLabel.text = @"Pass";
+    }
+    else
+    {
+        self.resultLabel.text = @"Fail!";
+    }
+    
+    [super viewDidAppear:animated];
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

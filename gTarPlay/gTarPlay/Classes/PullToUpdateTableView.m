@@ -2,8 +2,8 @@
 //  PullToUpdateTableView.m
 //  gTarPlay
 //
-//  Created by Joel Greenia on 4/26/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Marty Greenia on 4/26/12.
+//  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 
 #import "PullToUpdateTableView.h"
@@ -17,6 +17,8 @@
 #define UPDATE_THRESHOLD HEADER_OFFSET
 
 @implementation PullToUpdateTableView
+
+@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {

@@ -2,7 +2,7 @@
 //  CustomGradientView.m
 //  gTarPlay
 //
-//  Created by Joel Greenia on 11/30/11.
+//  Created by Marty Greenia on 11/30/11.
 //  Copyright (c) 2011 Incident Technologies. All rights reserved.
 //
 

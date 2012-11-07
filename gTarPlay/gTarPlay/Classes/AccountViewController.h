@@ -26,7 +26,7 @@
 
 extern FileController * g_fileController;
 
-@interface AccountViewController : UIViewController <PullToUpdateTableViewDelegate, UITableViewDataSource, PopupViewControllerDelegate>
+@interface AccountViewController : UIViewController <PullToUpdateTableViewDelegate, UITableViewDataSource>
 {
 
     RootViewController * m_rootViewController;
@@ -71,11 +71,11 @@ extern FileController * g_fileController;
 - (void)playUserSongSession:(UserSongSession*)session;
 - (void)globalUpdateSucceeded:(CloudResponse*)cloudResponse;
 - (void)userUpdateSucceeded:(UserResponse*)userResponse;
-- (void)loginWithFacebookToken:(NSString*)accessToken;
-- (void)loginWithFacebookTokenCallback:(CloudResponse*)cloudResponse;
-- (void)requestUploadUserSongSessionCallback:(CloudResponse*)cloudResponse;
-- (void)requestLogoutCallback:(CloudResponse*)cloudResponse;
-- (void)authorizeFacebook;
+//- (void)loginWithFacebookToken:(NSString*)accessToken;
+//- (void)loginWithFacebookTokenCallback:(CloudResponse*)cloudResponse;
+//- (void)requestUploadUserSongSessionCallback:(CloudResponse*)cloudResponse;
+//- (void)requestLogoutCallback:(CloudResponse*)cloudResponse;
+//- (void)authorizeFacebook;
 
 - (IBAction)profileButtonClicked:(id)sender;
 - (IBAction)feedSelectorChanged:(id)sender;
