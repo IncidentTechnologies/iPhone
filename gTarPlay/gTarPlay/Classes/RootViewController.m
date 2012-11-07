@@ -520,11 +520,15 @@ extern TelemetryController * g_telemetryController;
     
     m_sequenceFret--;
     
-    if ( m_sequenceFret >= 0 )
+    if ( m_sequenceFret >= 8 )
     {
         // Do it one more time
-        [NSTimer scheduledTimerWithTimeInterval:0.08f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
-//        [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.10f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
+    }
+    else if ( m_sequenceFret >= 0 )
+    {
+        // Do it one more time
+        [NSTimer scheduledTimerWithTimeInterval:(0.01f*m_sequenceFret) target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
     }
     else
     {

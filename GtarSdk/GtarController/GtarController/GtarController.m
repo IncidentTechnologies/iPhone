@@ -1539,15 +1539,18 @@
 {
     
     // Only cancel if we are updating a firmware
-    if ( [m_firmware length] == 0 )
+    if ( [m_firmware length] > 0 )
     {
+        
+        [self logMessage:@"Canceling firmware update"
+              atLogLevel:GtarControllerLogLevelWarn];
         
         m_firmwareCancelation = YES;
         
         [m_firmware release];
         
         m_firmware = nil;
-
+        
     }
     
     return YES;

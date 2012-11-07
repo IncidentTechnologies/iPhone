@@ -8,7 +8,7 @@
 
 #import "gTarPlayApplication.h"
 
-#define IDLE_TIMEOUT 80
+#define IDLE_TIMEOUT 120
 
 @implementation gTarPlayApplication
 

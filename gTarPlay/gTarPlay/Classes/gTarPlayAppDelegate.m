@@ -158,6 +158,8 @@ TelemetryController * g_telemetryController;
     
     self.playApplication = (gTarPlayApplication*)application;
     
+    [self.playApplication resetIdleTimer];
+    
     return YES;
 }
 

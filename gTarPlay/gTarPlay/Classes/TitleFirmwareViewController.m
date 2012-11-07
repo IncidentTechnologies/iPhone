@@ -97,6 +97,8 @@ extern TelemetryController * g_telemetryController;
     
     [super attachToSuperview:view];
     
+    m_updating = NO;
+    
     [g_gtarController addObserver:self];
     
     [m_statusLabel setHidden:YES];
