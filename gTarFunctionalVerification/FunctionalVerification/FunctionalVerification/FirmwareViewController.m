@@ -57,7 +57,9 @@ extern Checklist g_checklist;
     NSLog(@"Requesting FW version");
     
     [g_gtarController sendRequestFirmwareVersion];
-
+    
+    g_checklist.firmwareTest = NO;
+    
     [super viewDidAppear:animated];
     
 }
@@ -76,14 +78,28 @@ extern Checklist g_checklist;
     return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
 }
 
-#pragma mark - GtarControllerDelegate
-
-- (void)ReceivedFWVersion:(int)MajorVersion andMinorVersion:(int)MinorVersion
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    NSLog(@"Received FW Version %u %u", MajorVersion, MinorVersion);
+    if ([[segue identifier] isEqualToString:@"failSegue"])
+    {
+        g_checklist.firmwareTest = NO;
+    }
+    if ([[segue identifier] isEqualToString:@"passSegue"])
+    {
+        g_checklist.firmwareTest = YES;
+    }
     
-    NSString * str = [[NSString alloc] initWithFormat:@"%u.%u", MajorVersion, MinorVersion];
+}
+
+#pragma mark - GtarControllerDelegate
+
+- (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
+{
+    
+    NSLog(@"Received FW Version %u %u", majorVersion, minorVersion);
+    
+    NSString * str = [[NSString alloc] initWithFormat:@"%u.%u", majorVersion, minorVersion];
     
     [self performSelectorOnMainThread:@selector(updateLabel:) withObject:str waitUntilDone:NO];
     

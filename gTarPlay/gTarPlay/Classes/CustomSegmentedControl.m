@@ -2,7 +2,7 @@
 //  CustomSegmentedControl.m
 //  gTarPlay
 //
-//  Created by Joel Greenia on 11/8/11.
+//  Created by Marty Greenia on 11/8/11.
 //  Copyright (c) 2011 Incident Technologies. All rights reserved.
 //
 

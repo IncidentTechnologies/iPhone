@@ -99,5 +99,5 @@
 
 // prof pic 
 - (void)displayImagePicker;
-- (UIImage*)captureView:(UIView*)view;
+//- (UIImage*)captureView:(UIView*)view;
 @end

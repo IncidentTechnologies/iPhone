@@ -614,9 +614,10 @@
     {
         
         // nothing pending; add the payment to the queue.
-        SKPayment * payment = [SKPayment paymentWithProductIdentifier:productIdentifier];
+        // I commented this out to remove depracation warnings
+//        SKPayment * payment = [SKPayment paymentWithProductIdentifier:productIdentifier];
         
-        [[SKPaymentQueue defaultQueue] addPayment:payment];
+//        [[SKPaymentQueue defaultQueue] addPayment:payment];
         
     }
     else

@@ -2,7 +2,7 @@
 //  StoreBuyCreditsPopupViewController.m
 //  gTarPlay
 //
-//  Created by Joel Greenia on 2/8/12.
+//  Created by Marty Greenia on 2/8/12.
 //  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 
@@ -44,6 +44,8 @@
 {
     [m_fullScreenActivityView removeFromSuperview];
     [m_fullScreenActivityView release];
+    
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle

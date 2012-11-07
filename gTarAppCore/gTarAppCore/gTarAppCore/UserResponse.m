@@ -2,7 +2,7 @@
 //  UserResponse.m
 //  gTarAppCore
 //
-//  Created by Joel Greenia on 3/6/12.
+//  Created by Marty Greenia on 3/6/12.
 //  Copyright (c) 2012 IncidentTech. All rights reserved.
 //
 

@@ -56,8 +56,6 @@ extern Checklist g_checklist;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [g_gtarController addObserver:self];
-    
     UIImage * img = [UIImage imageNamed:@"checkbox_unchecked.png"];
     
     _img = [UIImage imageNamed:@"checkbox_checked.png"];
@@ -122,6 +120,56 @@ extern Checklist g_checklist;
     // Release any retained subviews of the main view.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    [g_gtarController addObserver:self];
+    
+    UIImage * img = [UIImage imageNamed:@"checkbox_unchecked.png"];
+    
+    if ( [_testType isEqualToString:@"PiezoElectrical"] == YES )
+    {
+        
+        for ( NSInteger str = 0; str < 6; str++ )
+        {
+            UIImageView * imgView = _imgView[str];
+            
+            imgView.image = img;
+        }
+    }
+    
+    if ( [_testType isEqualToString:@"FretElectrical"] == YES )
+    {
+        
+        for ( NSInteger str = 0; str < 6; str++ )
+        {
+            UIImageView * imgView = _imgView[str];
+            
+            imgView.image = img;
+        }
+        
+        for ( NSInteger fret = 0; fret < 16; fret++ )
+        {
+            UIImageView * imgView = _imgView[6 + fret] ;
+            
+            imgView.image = img;
+        }
+        
+    }
+    
+    // init tests
+    if ( [_testType isEqualToString:@"FretElectrical"] == YES )
+    {
+        g_checklist.fretElectricalTest = NO;
+    }
+    if ( [_testType isEqualToString:@"PiezoElectrical"] == YES )
+    {
+        g_checklist.piezoElectricalTest = NO;
+    }
+    
+    [super viewDidAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     
@@ -139,6 +187,13 @@ extern Checklist g_checklist;
 - (void)testComplete
 {
     [self performSegueWithIdentifier:@"passSegue" sender:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    [g_gtarController turnOffAllLeds];
+    
 }
 
 #pragma mark -- GuitarController

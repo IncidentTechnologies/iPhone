@@ -10,7 +10,8 @@
 
 #import "GtarController.h"
 
-typedef SInt32 MIDINotificationMessageID;
+#define GTAR_CONTROLLER_MAX_FIRMWARE_PAGES 60
+#define GTAR_CONTROLLER_PAGE_SIZE 1024
 
 @class CoreMidiInterface;
 
@@ -18,11 +19,15 @@ typedef SInt32 MIDINotificationMessageID;
 // only goes to the public observers
 @protocol GtarControllerDelegate <NSObject>
 @optional
-- (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion;
-- (void)receivedFirmwareUpdateAcknowledgement:(unsigned char)status;
 - (void)receivedBatteryStatus:(BOOL)charging;
 - (void)receivedBatteryCharge:(unsigned char)percentage;
+- (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion;
+- (void)receivedFirmwareUpdateProgress:(unsigned char)percentage;
+- (void)receivedFirmwareUpdateStatusSucceeded;
+- (void)receivedFirmwareUpdateStatusFailed;
 @end
+
+typedef SInt32 MIDINotificationMessageID;
 
 typedef enum GTAR_RX_MSG_TYPE
 {
@@ -52,6 +57,10 @@ typedef enum GTAR_RX_MSG_TYPE
     
     double m_previousPluckTime[GtarStringCount][GtarFretCount];
     
+    NSData * m_firmware;
+    int m_firmwareCurrentPage;
+    BOOL m_firmwareCancelation;
+    
 }
 
 - (BOOL)checkNoteInterarrivalTime:(double)time forFret:(GtarFret)fret andString:(GtarString)str;
@@ -60,7 +69,6 @@ typedef enum GTAR_RX_MSG_TYPE
 
 - (void)midiConnectionHandler:(BOOL)connected;
 - (void)midiCallbackHandler:(char*)data;
-
 - (void)midiCallbackDispatch:(NSDictionary*)dictionary;
 - (void)midiCallbackWorkerThread:(NSDictionary*)dictionary;
 
@@ -71,6 +79,8 @@ typedef enum GTAR_RX_MSG_TYPE
 - (void)notifyObserversGtarConnected:(NSDictionary*)dictionary;
 - (void)notifyObserversGtarDisconnected:(NSDictionary*)dictionary;
 
+- (void)firmwareResponseHandler:(unsigned char)status;
+- (BOOL)sendFirmwarePage:(int)page;
 
 // CC style set LED messages (not async)
 //- (RESULT)ccTurnOffAllLeds;
@@ -85,7 +95,9 @@ typedef enum GTAR_RX_MSG_TYPE
 
 - (BOOL)sendRequestCertDownload;
 - (BOOL)sendRequestFirmwareVersion;
-- (BOOL)sendFirmwarePackagePage:(void*)pBuffer bufferSize:(int)pBuffer_n fwSize:(int)fwSize fwPages:(int)fwPages curPage:(int)curPage withCheckSum:(unsigned char)checkSum;
+//- (BOOL)sendFirmwarePackagePage:(void*)pBuffer bufferSize:(int)pBuffer_n fwSize:(int)fwSize fwPages:(int)fwPages curPage:(int)curPage withCheckSum:(unsigned char)checkSum;
+- (BOOL)sendFirmwareUpdate:(NSData*)firmware;
+- (BOOL)sendFirmwareUpdateCancelation;
 
 - (BOOL)sendNoteMessage:(unsigned char)midiVal channel:(unsigned char)channel withVelocity:(unsigned char)midiVel andType:(const char*)type;
 

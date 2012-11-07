@@ -47,6 +47,10 @@ extern TelemetryController * g_telemetryController;
 @synthesize m_tutorialIndexPopup;
 @synthesize m_creditsPopup;
 @synthesize m_infoPopup;
+@synthesize m_firmwareCurrentVersion;
+@synthesize m_firmwareAvailableVersion;
+@synthesize m_firmwareUpdateButton;
+@synthesize m_gtarLogoRed;
 @synthesize m_waitingForFacebook;
 
 #pragma mark -
@@ -67,7 +71,7 @@ extern TelemetryController * g_telemetryController;
         // Consider doing this lazily since the AC sampler takes a fair bit of time to load
         m_songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
         m_songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
-        m_songPlaybackViewController.m_delegate = self;
+//        m_songPlaybackViewController.m_delegate = self;
         m_songPlaybackViewController.m_popupDelegate = self;
         
         m_titleGatekeeperViewController = [[TitleGatekeeperViewController alloc] initWithNibName:nil bundle:nil];
@@ -76,6 +80,9 @@ extern TelemetryController * g_telemetryController;
         m_titleSignupViewController = [[TitleSignupViewController alloc] initWithNibName:nil bundle:nil];
         m_titleTutorialViewController = [[TitleTutorialViewController alloc] initWithNibName:nil bundle:nil];
         m_titleFacebookViewController = [[TitleFacebookViewController alloc] initWithNibName:nil bundle:nil];
+        m_titleFirmwareViewController = [[TitleFirmwareViewController alloc] initWithNibName:nil bundle:nil];
+        
+        // TODO title firm
         
         // we should just move the global UC into the controllers instead of doing this
         m_titleLoginViewController.m_userController = g_userController;
@@ -119,6 +126,12 @@ extern TelemetryController * g_telemetryController;
     [m_tutorialIndexPopup release];
     [m_infoPopup release];
     
+    [m_firmwareCurrentVersion release];
+    [m_firmwareAvailableVersion release];
+    [m_firmwareUpdateButton release];
+    
+    [m_gtarLogoRed release];
+    
     [m_tutorialViewController release];
     
     [m_accountViewController release];
@@ -151,7 +164,7 @@ extern TelemetryController * g_telemetryController;
     m_creditsPopup.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
     m_creditsPopup.m_popupTitle = @"Incident Technologies";
     m_infoPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
-//    m_infoPopup.m_popupTitle = @"Info";
+    m_disconnectedDevicePopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
     
     //
     // Setup the tutorial view
@@ -200,6 +213,11 @@ extern TelemetryController * g_telemetryController;
     self.m_creditsPopup = nil;
     self.m_infoPopup = nil;
     self.m_accountContainerView = nil;
+    
+    self.m_firmwareCurrentVersion = nil;
+    self.m_firmwareAvailableVersion = nil;
+    self.m_firmwareUpdateButton = nil;
+    self.m_gtarLogoRed = nil;
     
 }
 
@@ -307,6 +325,12 @@ extern TelemetryController * g_telemetryController;
 //        return;
 //    }
     
+    if ( g_gtarController.connected == NO )
+    {
+        [m_disconnectedDevicePopup attachToSuperView:self.view];
+        return;
+    }
+    
     m_requireLogin = YES;
     
     SelectNavigationViewController * select = [[SelectNavigationViewController alloc] initWithNibName:@"CustomNavigationViewController" bundle:nil];
@@ -326,6 +350,12 @@ extern TelemetryController * g_telemetryController;
 //        return;
 //    }
 
+    if ( g_gtarController.connected == NO )
+    {
+        [m_disconnectedDevicePopup attachToSuperView:self.view];
+        return;
+    }
+    
     m_requireLogin = NO;
     
 	FreePlayController * fpc = [[FreePlayController alloc] initWithNibName:nil bundle:nil];
@@ -375,9 +405,21 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)infoButtonClicked:(id)sender
 {
-    [m_infoPopup attachToSuperView:self.view];
-    [self checkCurrentFirmwareVersion];
-    [self checkAvailableFirmwareVersion];
+    
+    if ( g_gtarController.connected == NO )
+    {
+        [m_disconnectedDevicePopup attachToSuperView:self.view];
+        return;
+    }
+    
+//    [m_firmwareUpdateButton setEnabled:NO];
+//    
+//    [m_infoPopup attachToSuperView:self.view];
+//    [self checkCurrentFirmwareVersion];
+//    [self checkAvailableFirmwareVersion];
+    
+    [m_titleFirmwareViewController attachToSuperview:self.view];
+    
 }
 
 - (IBAction)logoutButtonClicked:(id)sender
@@ -478,11 +520,15 @@ extern TelemetryController * g_telemetryController;
     
     m_sequenceFret--;
     
-    if ( m_sequenceFret >= 0 )
+    if ( m_sequenceFret >= 8 )
     {
         // Do it one more time
-        [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
-//        [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.10f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
+    }
+    else if ( m_sequenceFret >= 0 )
+    {
+        // Do it one more time
+        [NSTimer scheduledTimerWithTimeInterval:(0.01f*m_sequenceFret) target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
     }
     else
     {
@@ -702,7 +748,7 @@ extern TelemetryController * g_telemetryController;
     }
     else
     {
-        
+        [self logoutButtonClicked:nil];
     }
     
 }
@@ -850,7 +896,7 @@ extern TelemetryController * g_telemetryController;
         m_songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
         m_songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
         
-        m_songPlaybackViewController.m_delegate = self;
+//        m_songPlaybackViewController.m_delegate = self;
         m_songPlaybackViewController.m_popupDelegate = self;
     }
     
@@ -876,6 +922,9 @@ extern TelemetryController * g_telemetryController;
 
 - (void)gtarConnected
 {
+    
+    [m_gtarLogoRed setHidden:YES];
+    
     // See if they are logged in, otherwise make them log in
 //    [self checkUserLoggedIn];
     
@@ -901,6 +950,7 @@ extern TelemetryController * g_telemetryController;
     
     [g_gtarController turnOffAllEffects];
     [g_gtarController turnOffAllLeds];
+    [g_gtarController sendDisableDebug];
     
     [self playStartupLightSequence];
     
@@ -908,7 +958,9 @@ extern TelemetryController * g_telemetryController;
 
 - (void)gtarDisconnected
 {
-    // ...
+    [m_infoPopup detachFromSuperView];
+    
+    [m_gtarLogoRed setHidden:NO];
 }
 
 #pragma mark - FacebookDelegate
@@ -952,7 +1004,7 @@ extern TelemetryController * g_telemetryController;
     [settings synchronize];
     
     [self displayWelcomeDialog];
-
+    
 }
 
 - (void)fbSessionInvalidated
@@ -960,129 +1012,8 @@ extern TelemetryController * g_telemetryController;
     [self displayWelcomeDialog];
 }
 
-#pragma mark - Firmware
-int pageCurrent = 0;
-int pagesTotal = 0;
-int pageSize = 0;
-NSData * firmware;
-int firmwareSize;
-char firmwareBytes[256*1024];
-
-- (IBAction)updateFirmware:(id)sender
+- (void)fbDidExtendToken:(NSString*)accessToken expiresAt:(NSDate*)expiresAt
 {
-    g_gtarController.m_delegate = self;
-    
-//    NSURL * url = [[NSBundle mainBundle] URLForResource:@"gTarFW_0.9.5"
-//                                          withExtension:@"bin"];
-//    
-//    firmware = [NSData dataWithContentsOfURL:url];
-    
-    firmware = [g_fileController getFileOrDownloadSync:m_firmwareFileId];
-    
-    firmwareSize = [firmware length];
-    
-    [firmware getBytes:firmwareBytes length:firmwareSize];
-    
-    pageSize = 1024;
-    pageCurrent = 0;
-    
-//    pagesTotal = (firmwareSize / pageSize);
-    pagesTotal = 60;
-    
-    // Add an overflow page
-//    if ( firmwareSize > (pagesTotal * pageSize) )
-//    {
-//        pagesTotal++;
-//    }
-    
-    unsigned char checksum = 0;
-    
-    for ( int i = 0; i < pageSize; i++ )
-    {
-        checksum += firmwareBytes[i];
-    }
-    
-    [g_gtarController sendFirmwarePackagePage:firmwareBytes
-                                   bufferSize:pageSize
-                                       fwSize:firmwareSize
-                                      fwPages:pagesTotal
-                                      curPage:pageCurrent++
-                                 withCheckSum:checksum];
-    
-}
-
-- (void)checkCurrentFirmwareVersion
-{
-    NSLog(@"Checking firmware version");
-    
-    g_gtarController.m_delegate = self;
-    
-    [g_gtarController sendRequestFirmwareVersion];
-}
-
-- (void)checkAvailableFirmwareVersion
-{
-    // Query the server
-    [g_cloudController requestCurrentFirmwareVersionCallbackObj:self andCallbackSel:@selector(receivedCurrentFirmwareVersion:)];
-    
-}
-
-- (void)receivedCurrentFirmwareVersion:(CloudResponse*)cloudResponse
-{
-    
-    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
-    {
-        
-        [m_firmwareAvailableVersion performSelectorOnMainThread:@selector(setText:) withObject:[NSString stringWithFormat:@"Available: %d.%d", 
-                                                                                                cloudResponse.m_responseFirmwareMajorVersion, cloudResponse.m_responseFirmwareMinorVersion] waitUntilDone:NO];
-        
-        // Get the new binary
-        [g_fileController precacheFile:cloudResponse.m_responseFileId];
-        
-        m_firmwareFileId = cloudResponse.m_responseFileId;
-        
-    }
-    else
-    {
-        [m_firmwareAvailableVersion performSelectorOnMainThread:@selector(setText:) withObject:@"Available: Failed to update" waitUntilDone:NO];
-    }
-    
-}
-
-#pragma mark - GtarControllerDelegate
-
-- (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
-{
-    NSLog(@"Receiving firmware version");
-    
-    [m_firmwareCurrentVersion performSelectorOnMainThread:@selector(setText:) withObject:[NSString stringWithFormat:@"Current: %d.%d", majorVersion, minorVersion] waitUntilDone:NO];
-}
-
-- (void)receivedFirmwareUpdateAcknowledgement:(unsigned char)status
-{
-    
-    NSLog(@"Sending firmware page: %d", pageCurrent);
-    
-    if ( pageCurrent >= pagesTotal )
-    {
-        NSLog(@"Done sending firmware pages");
-        
-        return;
-    }
-    
-    unsigned char checksum = 0;
-    
-    for ( int i = 0; i < pageSize; i++ )
-    {
-        checksum += firmwareBytes[(pageCurrent*pageSize) + i];
-    }
-    
-    [g_gtarController sendFirmwarePackagePage:(firmwareBytes + (pageCurrent*pageSize))
-                                   bufferSize:pageSize
-                                       fwSize:firmwareSize
-                                      fwPages:pagesTotal
-                                      curPage:pageCurrent++
-                                 withCheckSum:checksum];
     
 }
 

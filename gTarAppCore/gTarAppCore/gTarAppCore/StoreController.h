@@ -92,7 +92,7 @@
 @property (nonatomic, readonly) StoreFeatureCollection * m_featureCollection;
 @property (nonatomic, readonly) NSNumber * m_credits;
 
-- (id)initWithCloudController:(CloudController*)cloudController;
+//- (id)initWithCloudController:(CloudController*)cloudController;
 //- (void)tearDownController;
 
 - (BOOL)canMakePayments;

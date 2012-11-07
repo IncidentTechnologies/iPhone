@@ -2,7 +2,7 @@
 //  CustomComboBox.m
 //  gTarPlay
 //
-//  Created by Joel Greenia on 2/19/12.
+//  Created by Marty Greenia on 2/19/12.
 //  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 
@@ -55,12 +55,16 @@
 
 - (void)dealloc
 {
+    
     [m_scrollView removeFromSuperview];
     [m_scrollView release];
     [m_contentArray release];
     [m_headerIndices release];
     [m_contentSubviews release];
     [m_flickerTimer release];
+    
+    [super dealloc];
+    
 }
 
 - (void)populateWithImages:(NSArray*)images

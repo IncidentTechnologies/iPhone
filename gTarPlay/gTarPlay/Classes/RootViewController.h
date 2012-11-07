@@ -28,11 +28,12 @@
 #import "TitleSignupViewController.h"
 #import "TitleTutorialViewController.h"
 #import "TitleFacebookViewController.h"
+#import "TitleFirmwareViewController.h"
 #import "SongPlayerViewController.h"
 
 @class AccountViewController;
 
-@interface RootViewController : UIViewController <UserProfileNavControllerDelegate, PopupViewControllerDelegate, GtarControllerObserver, FBSessionDelegate, SongPlayerDelegate, GtarControllerDelegate>
+@interface RootViewController : UIViewController <UserProfileNavControllerDelegate, PopupViewControllerDelegate, GtarControllerObserver, FBSessionDelegate, GtarControllerDelegate>
 {
 	
     BOOL m_requireLogin;
@@ -54,6 +55,9 @@
     
     IBOutlet UILabel * m_firmwareCurrentVersion;
     IBOutlet UILabel * m_firmwareAvailableVersion;
+    IBOutlet UIButton * m_firmwareUpdateButton;
+    
+    IBOutlet UIImageView * m_gtarLogoRed;
     
     TransitionRectangleViewController * m_tutorialViewController;
 
@@ -69,16 +73,14 @@
     TitleSignupViewController * m_titleSignupViewController;
     TitleTutorialViewController * m_titleTutorialViewController;
     TitleFacebookViewController * m_titleFacebookViewController;
+    TitleFirmwareViewController * m_titleFirmwareViewController;
     
     SongPlayerViewController * m_songPlaybackViewController;
     
     NSInteger m_sequenceFret;
     
     BOOL m_waitingForFacebook;
-    
-    // Firmware reflashing
-    NSInteger m_firmwareFileId;
-    
+        
 }
 
 //@property (nonatomic, retain) IBOutlet UIView * m_disconnectedDeviceView;
@@ -93,6 +95,12 @@
 @property (nonatomic, retain) IBOutlet PopupViewController * m_tutorialIndexPopup;
 @property (nonatomic, retain) IBOutlet PopupViewController * m_creditsPopup;
 @property (nonatomic, retain) IBOutlet PopupViewController * m_infoPopup;
+
+@property (nonatomic, retain) IBOutlet UILabel * m_firmwareCurrentVersion;
+@property (nonatomic, retain) IBOutlet UILabel * m_firmwareAvailableVersion;
+@property (nonatomic, retain) IBOutlet UIButton * m_firmwareUpdateButton;
+
+@property (nonatomic, retain) IBOutlet UIImageView * m_gtarLogoRed;
 
 @property (nonatomic, retain) IBOutlet UIView * m_accountContainerView;
 @property (nonatomic, readonly) BOOL m_waitingForFacebook;
@@ -140,10 +148,5 @@
 - (void)accountViewDisplayUserProfile:(UserProfile*)userProfile;
 - (void)accountViewDisplayUserSong:(UserSong*)userSong;
 - (void)accountViewDisplayUserSongSession:(UserSongSession*)session;
-
-// firmware
-- (IBAction)updateFirmware:(id)sender;
-- (void)checkCurrentFirmwareVersion;
-- (void)checkAvailableFirmwareVersion;
 
 @end

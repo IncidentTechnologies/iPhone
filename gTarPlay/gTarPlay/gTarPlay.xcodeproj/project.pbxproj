@@ -985,23 +985,21 @@
 		EC24DFF2161A8B0A00016B78 /* StoreBuyCreditsPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC31BB8A14E3474C00DC7083 /* StoreBuyCreditsPopupViewController.xib */; };
 		EC24DFF3161A8B0A00016B78 /* CustomNavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC18A6EE13D90249004A2667 /* CustomNavigationViewController.xib */; };
 		EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
-		EC5C02481630F10400119F53 /* WorkingEVBuildFWBinary.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC5C02471630F10400119F53 /* WorkingEVBuildFWBinary.bin */; };
-		EC5C02491630F10400119F53 /* WorkingEVBuildFWBinary.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC5C02471630F10400119F53 /* WorkingEVBuildFWBinary.bin */; };
-		EC6757B916307FB7007F9B24 /* gTarFW_Apr2012.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC6757B616307FB7007F9B24 /* gTarFW_Apr2012.bin */; };
-		EC6757BA16307FB7007F9B24 /* gTarFW_Apr2012.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC6757B616307FB7007F9B24 /* gTarFW_Apr2012.bin */; };
-		EC6757BB16307FB7007F9B24 /* gTarFW_Feb2012.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC6757B716307FB7007F9B24 /* gTarFW_Feb2012.bin */; };
-		EC6757BC16307FB7007F9B24 /* gTarFW_Feb2012.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC6757B716307FB7007F9B24 /* gTarFW_Feb2012.bin */; };
-		EC6757BD16307FB7007F9B24 /* gTarFW_June2012.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC6757B816307FB7007F9B24 /* gTarFW_June2012.bin */; };
-		EC6757BE16307FB7007F9B24 /* gTarFW_June2012.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC6757B816307FB7007F9B24 /* gTarFW_June2012.bin */; };
-		EC85FDF9163215110068F757 /* gTarFW_0.10.0.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC85FDF8163215110068F757 /* gTarFW_0.10.0.bin */; };
-		EC85FDFA163215110068F757 /* gTarFW_0.10.0.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC85FDF8163215110068F757 /* gTarFW_0.10.0.bin */; };
-		EC85FDFD1632151E0068F757 /* gTarFW_0.9.5.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC85FDFC1632151E0068F757 /* gTarFW_0.9.5.bin */; };
-		EC85FDFE1632151E0068F757 /* gTarFW_0.9.5.bin in Resources */ = {isa = PBXBuildFile; fileRef = EC85FDFC1632151E0068F757 /* gTarFW_0.9.5.bin */; };
 		ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */; };
 		ECBBBF6C161CF1F400BC5BE2 /* InstrumentTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF68161CF1F400BC5BE2 /* InstrumentTab.png */; };
 		ECBBBF6D161CF1F400BC5BE2 /* MenuTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF69161CF1F400BC5BE2 /* MenuTab.png */; };
 		ECBBBF6E161CF1F400BC5BE2 /* EffectsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6A161CF1F400BC5BE2 /* EffectsTab.png */; };
 		ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */; };
+		ECBF4FB216373E80003F0C8C /* gTarLogo_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FB116373E7F003F0C8C /* gTarLogo_Red.png */; };
+		ECBF4FB316373E80003F0C8C /* gTarLogo_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FB116373E7F003F0C8C /* gTarLogo_Red.png */; };
+		ECBF4FDD1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBF4FDB1638C591003F0C8C /* TitleFirmwareViewController.m */; };
+		ECBF4FDE1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBF4FDB1638C591003F0C8C /* TitleFirmwareViewController.m */; };
+		ECBF4FDF1638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FDC1638C591003F0C8C /* TitleFirmwareViewController.xib */; };
+		ECBF4FE01638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FDC1638C591003F0C8C /* TitleFirmwareViewController.xib */; };
+		ECBF4FFD1641E3C0003F0C8C /* TitleCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FFB1641E3C0003F0C8C /* TitleCancelButton.png */; };
+		ECBF4FFE1641E3C0003F0C8C /* TitleCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FFB1641E3C0003F0C8C /* TitleCancelButton.png */; };
+		ECBF4FFF1641E3C0003F0C8C /* TitleUpdateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FFC1641E3C0003F0C8C /* TitleUpdateButton.png */; };
+		ECBF50001641E3C0003F0C8C /* TitleUpdateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBF4FFC1641E3C0003F0C8C /* TitleUpdateButton.png */; };
 		ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC11D7816264220001A231A /* gTarPlayApplication.m */; };
 		ECC11DEE162D07AD001A231A /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9D6EC014A11DC700AE374D /* Facebook.m */; };
 		ECC11DEF162D07AD001A231A /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9D6EC514A11DC700AE374D /* FBDialog.m */; };
@@ -2742,7 +2740,6 @@
 		EC5030E3142D9BD10096F88A /* StorePurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StorePurchaseViewController.xib; sourceTree = "<group>"; };
 		EC5A161B14B3F64F00551703 /* SwitchUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchUp.png; sourceTree = "<group>"; };
 		EC5A161C14B3F64F00551703 /* SwitchDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchDown.png; sourceTree = "<group>"; };
-		EC5C02471630F10400119F53 /* WorkingEVBuildFWBinary.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = WorkingEVBuildFWBinary.bin; path = ../../../../Downloads/WorkingEVBuildFWBinary.bin; sourceTree = "<group>"; };
 		EC5DD68F14FF012200D33BA7 /* MenuNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuNavigationViewController.h; sourceTree = "<group>"; };
 		EC5DD69014FF012200D33BA7 /* MenuNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuNavigationViewController.m; sourceTree = "<group>"; };
 		EC5DD69914FF05E300D33BA7 /* MenuLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuLoginViewController.h; sourceTree = "<group>"; };
@@ -2775,9 +2772,6 @@
 		EC5DD6FD1501876E00D33BA7 /* FullScreenDialogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenDialogViewController.h; sourceTree = "<group>"; };
 		EC5DD6FE1501876E00D33BA7 /* FullScreenDialogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenDialogViewController.m; sourceTree = "<group>"; };
 		EC603E8613A1D15A00699EB7 /* TransitionRectangleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransitionRectangleViewController.xib; sourceTree = "<group>"; };
-		EC6757B616307FB7007F9B24 /* gTarFW_Apr2012.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = gTarFW_Apr2012.bin; path = ../../../../Downloads/gTarFW_Apr2012.bin; sourceTree = "<group>"; };
-		EC6757B716307FB7007F9B24 /* gTarFW_Feb2012.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = gTarFW_Feb2012.bin; path = ../../../../Downloads/gTarFW_Feb2012.bin; sourceTree = "<group>"; };
-		EC6757B816307FB7007F9B24 /* gTarFW_June2012.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = gTarFW_June2012.bin; path = ../../../../Downloads/gTarFW_June2012.bin; sourceTree = "<group>"; };
 		EC67780B136B7B08005FE8D9 /* string-light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string-light.png"; sourceTree = "<group>"; };
 		EC677875136B7ECD005FE8D9 /* string-light-vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string-light-vertical.png"; sourceTree = "<group>"; };
 		EC6BD1D713F070660068E25C /* SongDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongDisplayController.h; sourceTree = "<group>"; };
@@ -2834,8 +2828,6 @@
 		EC8390F6151BDBAC004E66AE /* PlayerPlayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayerPlayButton.png; sourceTree = "<group>"; };
 		EC839100151BDDFA004E66AE /* SongSelectPlayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SongSelectPlayButton.png; sourceTree = "<group>"; };
 		EC856EA214D74AAE00BB7783 /* Settings.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = Settings.bundle; sourceTree = "<group>"; };
-		EC85FDF8163215110068F757 /* gTarFW_0.10.0.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = gTarFW_0.10.0.bin; path = ../../../../Downloads/gTarFW_0.10.0.bin; sourceTree = "<group>"; };
-		EC85FDFC1632151E0068F757 /* gTarFW_0.9.5.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = gTarFW_0.9.5.bin; path = ../../../../Downloads/gTarFW_0.9.5.bin; sourceTree = "<group>"; };
 		EC87EF721328AEBE007DAEC9 /* PlayControllerProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayControllerProgressView.h; sourceTree = "<group>"; };
 		EC87EF731328AEBE007DAEC9 /* PlayControllerProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayControllerProgressView.m; sourceTree = "<group>"; };
 		EC87EF741328AEBE007DAEC9 /* LcdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LcdView.h; sourceTree = "<group>"; };
@@ -3018,6 +3010,12 @@
 		ECBC9E2C13C66A4C00E9D5C5 /* StoreSubcategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSubcategoryCell.h; sourceTree = "<group>"; };
 		ECBC9E2D13C66A4C00E9D5C5 /* StoreSubcategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSubcategoryCell.m; sourceTree = "<group>"; };
 		ECBC9E3113C66B2300E9D5C5 /* StoreSubcategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreSubcategoryCell.xib; sourceTree = "<group>"; };
+		ECBF4FB116373E7F003F0C8C /* gTarLogo_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarLogo_Red.png; sourceTree = "<group>"; };
+		ECBF4FDA1638C591003F0C8C /* TitleFirmwareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleFirmwareViewController.h; sourceTree = "<group>"; };
+		ECBF4FDB1638C591003F0C8C /* TitleFirmwareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleFirmwareViewController.m; sourceTree = "<group>"; };
+		ECBF4FDC1638C591003F0C8C /* TitleFirmwareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleFirmwareViewController.xib; sourceTree = "<group>"; };
+		ECBF4FFB1641E3C0003F0C8C /* TitleCancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TitleCancelButton.png; sourceTree = "<group>"; };
+		ECBF4FFC1641E3C0003F0C8C /* TitleUpdateButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TitleUpdateButton.png; sourceTree = "<group>"; };
 		ECC11D7716264220001A231A /* gTarPlayApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlayApplication.h; sourceTree = "<group>"; };
 		ECC11D7816264220001A231A /* gTarPlayApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarPlayApplication.m; sourceTree = "<group>"; };
 		ECC121CB162D07AD001A231A /* gTarPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3152,12 +3150,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				EC6757B616307FB7007F9B24 /* gTarFW_Apr2012.bin */,
-				EC6757B716307FB7007F9B24 /* gTarFW_Feb2012.bin */,
-				EC6757B816307FB7007F9B24 /* gTarFW_June2012.bin */,
-				EC85FDF8163215110068F757 /* gTarFW_0.10.0.bin */,
-				EC85FDFC1632151E0068F757 /* gTarFW_0.9.5.bin */,
-				EC5C02471630F10400119F53 /* WorkingEVBuildFWBinary.bin */,
 				EC6BD1FF13F44E130068E25C /* gTarColors.h */,
 				EC9D6EBB14A11DC600AE374D /* Facebook */,
 				080E96DDFE201D6D7F000001 /* App Source */,
@@ -4244,6 +4236,9 @@
 				EC5DD6EA15007E2F00D33BA7 /* TitleTutorialViewController.h */,
 				EC5DD6EB15007E2F00D33BA7 /* TitleTutorialViewController.m */,
 				EC5DD6EC15007E2F00D33BA7 /* TitleTutorialViewController.xib */,
+				ECBF4FDA1638C591003F0C8C /* TitleFirmwareViewController.h */,
+				ECBF4FDB1638C591003F0C8C /* TitleFirmwareViewController.m */,
+				ECBF4FDC1638C591003F0C8C /* TitleFirmwareViewController.xib */,
 			);
 			name = "Full Screen Dialogs";
 			sourceTree = "<group>";
@@ -4261,6 +4256,8 @@
 				EC8AD89D1509D91E00B892B8 /* TitleSignUpButton.png */,
 				EC8AD89E1509D91E00B892B8 /* TitleSignUpButtonPRESSED.png */,
 				EC8AD89F1509D91E00B892B8 /* TitleWelcomeBG.png */,
+				ECBF4FFB1641E3C0003F0C8C /* TitleCancelButton.png */,
+				ECBF4FFC1641E3C0003F0C8C /* TitleUpdateButton.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -4668,6 +4665,7 @@
 				EC22A292160258B1009B4913 /* ProfileButtonON.png */,
 				EC22A293160258B1009B4913 /* ProfileButtonOFF.png */,
 				EC71F9E7141FFABE00F06996 /* gTar_Logo.png */,
+				ECBF4FB116373E7F003F0C8C /* gTarLogo_Red.png */,
 				EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */,
 				EC94136214858793000A6E64 /* Border_Strings_Shadow.png */,
 			);
@@ -5685,12 +5683,10 @@
 				ECBBBF6D161CF1F400BC5BE2 /* MenuTab.png in Resources */,
 				ECBBBF6E161CF1F400BC5BE2 /* EffectsTab.png in Resources */,
 				ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */,
-				EC6757B916307FB7007F9B24 /* gTarFW_Apr2012.bin in Resources */,
-				EC6757BB16307FB7007F9B24 /* gTarFW_Feb2012.bin in Resources */,
-				EC6757BD16307FB7007F9B24 /* gTarFW_June2012.bin in Resources */,
-				EC5C02481630F10400119F53 /* WorkingEVBuildFWBinary.bin in Resources */,
-				EC85FDF9163215110068F757 /* gTarFW_0.10.0.bin in Resources */,
-				EC85FDFD1632151E0068F757 /* gTarFW_0.9.5.bin in Resources */,
+				ECBF4FB216373E80003F0C8C /* gTarLogo_Red.png in Resources */,
+				ECBF4FDF1638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */,
+				ECBF4FFD1641E3C0003F0C8C /* TitleCancelButton.png in Resources */,
+				ECBF4FFF1641E3C0003F0C8C /* TitleUpdateButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6582,12 +6578,10 @@
 				ECC121C5162D07AD001A231A /* MenuTab.png in Resources */,
 				ECC121C6162D07AD001A231A /* EffectsTab.png in Resources */,
 				ECC121C7162D07AD001A231A /* FreePlayController.xib in Resources */,
-				EC6757BA16307FB7007F9B24 /* gTarFW_Apr2012.bin in Resources */,
-				EC6757BC16307FB7007F9B24 /* gTarFW_Feb2012.bin in Resources */,
-				EC6757BE16307FB7007F9B24 /* gTarFW_June2012.bin in Resources */,
-				EC5C02491630F10400119F53 /* WorkingEVBuildFWBinary.bin in Resources */,
-				EC85FDFA163215110068F757 /* gTarFW_0.10.0.bin in Resources */,
-				EC85FDFE1632151E0068F757 /* gTarFW_0.9.5.bin in Resources */,
+				ECBF4FB316373E80003F0C8C /* gTarLogo_Red.png in Resources */,
+				ECBF4FE01638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */,
+				ECBF4FFE1641E3C0003F0C8C /* TitleCancelButton.png in Resources */,
+				ECBF50001641E3C0003F0C8C /* TitleUpdateButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6686,6 +6680,7 @@
 				EC24DC82161A89B300016B78 /* CustomGradientView.m in Sources */,
 				EC24DC83161A89B300016B78 /* CustomBeveledView.m in Sources */,
 				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
+				ECBF4FDD1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6781,6 +6776,7 @@
 				ECC11E43162D07AD001A231A /* CustomGradientView.m in Sources */,
 				ECC11E44162D07AD001A231A /* CustomBeveledView.m in Sources */,
 				ECC11E45162D07AD001A231A /* gTarPlayApplication.m in Sources */,
+				ECBF4FDE1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,6 +31,7 @@ typedef struct
     BOOL piezoElectricalTest;
     BOOL lineOutTest;
     BOOL batteryTest;
+    BOOL firmwareTest;
     
 } Checklist;
 

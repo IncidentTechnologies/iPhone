@@ -28,6 +28,6 @@
 @property (nonatomic, retain) IBOutlet UIButton * m_infoButton;
 @property (nonatomic, assign) SelectListViewController * m_parent;
 
-- (IBAction)infoButtonClicked:(id)sender;
+//- (IBAction)infoButtonClicked:(id)sender;
 
 @end

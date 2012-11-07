@@ -56,6 +56,6 @@
 - (void)failedCacheLoginActivityIndicator;
 - (void)expandAccountView:(BOOL)animated;
 - (void)contractAccountView;
-- (void)setLoadingMessage;
+//- (void)setLoadingMessage;
 
 @end

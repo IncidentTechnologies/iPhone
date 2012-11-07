@@ -77,16 +77,19 @@ TelemetryController * g_telemetryController;
         g_gtarController.responseThread = GtarControllerThreadMain;
         
         // By default it just outputs 'LevelError'
-        //g_gtarController.logLevel = GtarControllerLogLevelInfo;
+        g_gtarController.logLevel = GtarControllerLogLevelInfo;
         
         [g_gtarController addObserver:self];
         
         // Create the audio controller
         g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
         [g_audioController initializeAUGraph];
-        
+
 #if TARGET_IPHONE_SIMULATOR
-        [g_gtarController debugSpoofConnected];
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+//        [NSTimer scheduledTimerWithTimeInterval:10.0 target:g_gtarController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
+
+//        [g_gtarController debugSpoofConnected];
 #endif
         
         //
@@ -147,13 +150,15 @@ TelemetryController * g_telemetryController;
     // Add the navigation controller's view to the window and display.
     [self.window addSubview:navigationController.view];
     [self.window makeKeyAndVisible];
-
+    
     // We never want to rotate
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
     [g_telemetryController logMessage:@"Application launched" withType:TelemetryControllerMessageTypeInfo];
     
-    self.playApplication = application;
+    self.playApplication = (gTarPlayApplication*)application;
+    
+    [self.playApplication resetIdleTimer];
     
     return YES;
 }
@@ -169,16 +174,13 @@ TelemetryController * g_telemetryController;
     // This gets called when the home button is pressed
     
     // if there is a currently running song player instance, pause that.
-    if ( g_songViewController != nil )
-    {
-        [g_songViewController pauseSong];
-    }
+    [g_songViewController pauseSong];
     
     // if they are listening to a song, pause that.
-    if ( g_songPlayerViewController != nil )
-    {
-        [g_songPlayerViewController pauseSongPlayback];
-    }
+    [g_songPlayerViewController pauseSongPlayback];
+    
+    // abort a firmware update, if in progress
+    [g_gtarController sendFirmwareUpdateCancelation];
     
 }
 
