@@ -18,7 +18,7 @@
 
 @implementation PullToUpdateTableView
 
-@synthesize delegate;
+//@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
