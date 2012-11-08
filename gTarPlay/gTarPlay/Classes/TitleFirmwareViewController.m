@@ -268,7 +268,7 @@ extern TelemetryController * g_telemetryController;
 - (void)compareVersions
 {
     
-    [m_rightButton setEnabled:YES];
+    [m_rightButton setEnabled:NO];
     
     if ( (m_firmwareCurrentMajorVersion == 0) && (m_firmwareCurrentMinorVersion == 0) )
     {
