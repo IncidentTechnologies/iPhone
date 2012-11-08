@@ -607,7 +607,7 @@
 
 - (void)firmwareResponseHandler:(unsigned char)status
 {
-    NSLog(@"Firmware response: %u", status);
+    
     if ( status == 0x00 )
     {
         
