@@ -104,6 +104,8 @@ extern TelemetryController * g_telemetryController;
     [m_statusLabel setHidden:YES];
     
     [m_leftButton setSelected:NO];
+    [m_leftButton setEnabled:YES];
+
     [m_rightButton setSelected:NO];
     [m_rightButton setEnabled:NO];
     
@@ -128,7 +130,7 @@ extern TelemetryController * g_telemetryController;
     
     if ( m_updating )
     {
-        [self cancelFirmware];
+        //[self cancelFirmware];
     }
     else
     {
@@ -187,7 +189,8 @@ extern TelemetryController * g_telemetryController;
         {
             m_updating = YES;
             
-            [m_leftButton setSelected:YES];
+//            [m_leftButton setSelected:YES];
+            [m_leftButton setEnabled:NO];
             [m_rightButton setEnabled:NO];   
         }
     }
@@ -359,9 +362,10 @@ extern TelemetryController * g_telemetryController;
 - (void)receivedFirmwareUpdateStatusFailedMain
 {
     
-    [m_statusLabel setText:@"Update Failed"];
+    [m_statusLabel setText:@"Update Failed -- Restart the gTar"];
     
-    [m_leftButton setSelected:NO];
+//    [m_leftButton setSelected:NO];
+    [m_leftButton setEnabled:YES];
     [m_rightButton setSelected:NO];
     
 }
