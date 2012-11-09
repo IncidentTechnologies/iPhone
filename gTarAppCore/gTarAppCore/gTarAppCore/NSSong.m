@@ -131,7 +131,11 @@
 {
 	
 	[m_measures release];
-	
+    [m_author release];
+	[m_title release];
+    [m_description release];
+    [m_instrument release];
+    
 	[super dealloc];
 	
 }

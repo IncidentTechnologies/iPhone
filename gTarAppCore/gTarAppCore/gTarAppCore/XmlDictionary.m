@@ -157,7 +157,9 @@
 	// save any text that was accumulated during this element
 	if ( [m_accumulatedText length] > 0 )
 	{
-		
+        
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
         // strip and whitespace
         NSString * stripString = [m_accumulatedText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
@@ -169,7 +171,9 @@
 		[m_accumulatedText release];
         
 		m_accumulatedText = [[NSMutableString alloc] init];
-		
+        
+        [pool release];
+        
 	}
 	
     // Hold onto this dictionary untill we can confirm we are done with it

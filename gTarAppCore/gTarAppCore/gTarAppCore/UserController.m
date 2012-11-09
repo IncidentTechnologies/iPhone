@@ -272,7 +272,7 @@
     
     NSString * cookiePath = [m_userFilePath stringByAppendingPathComponent:@"Cookie"];
     
-    NSDictionary * dict = [[NSKeyedUnarchiver unarchiveObjectWithFile:cookiePath] retain];
+    NSDictionary * dict = [NSKeyedUnarchiver unarchiveObjectWithFile:cookiePath];
     
     if ( dict == nil )
     {

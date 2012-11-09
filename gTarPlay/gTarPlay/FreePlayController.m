@@ -97,15 +97,15 @@ extern TelemetryController * g_telemetryController;
         //[g_audioController initializeAUGraph];
         [g_audioController startAUGraph];
         
-        RGBColor *white = [[RGBColor alloc] initWithRed:3 Green:3 Blue:3];
-        RGBColor *red = [[RGBColor alloc] initWithRed:3 Green:0 Blue:0];
-        RGBColor *green = [[RGBColor alloc] initWithRed:0 Green:3 Blue:0];
-        RGBColor *blue = [[RGBColor alloc] initWithRed:0 Green:0 Blue:3];
-        RGBColor *cyan = [[RGBColor alloc] initWithRed:0 Green:3 Blue:3];
-        RGBColor *magenta = [[RGBColor alloc] initWithRed:3 Green:0 Blue:3];
-        RGBColor *yellow = [[RGBColor alloc] initWithRed:3 Green:3 Blue:0];
-        RGBColor *orange = [[RGBColor alloc] initWithRed:3 Green:1 Blue:0];
-
+        RGBColor *white = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:3] autorelease];
+        RGBColor *red = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:0] autorelease];
+        RGBColor *green = [[[RGBColor alloc] initWithRed:0 Green:3 Blue:0] autorelease];
+        RGBColor *blue = [[[RGBColor alloc] initWithRed:0 Green:0 Blue:3] autorelease];
+        RGBColor *cyan = [[[RGBColor alloc] initWithRed:0 Green:3 Blue:3] autorelease];
+        RGBColor *magenta = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:3] autorelease];
+        RGBColor *yellow = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:0] autorelease];
+        RGBColor *orange = [[[RGBColor alloc] initWithRed:3 Green:1 Blue:0] autorelease];
+        
         m_colors = [[NSArray alloc] initWithObjects:white, red, magenta, blue, cyan, green, yellow, orange, nil];
         
         m_harmonizer = [[Harmonizer alloc] init];
@@ -143,6 +143,7 @@ extern TelemetryController * g_telemetryController;
     
     [g_gtarController removeObserver:self];
     
+    [m_harmonizer release];
     [m_volumeView release];
     [m_activityIndicatorView release];
     [m_connectingView release];
@@ -229,7 +230,10 @@ extern TelemetryController * g_telemetryController;
     [myVolumeView setShowsRouteButton:NO];
 	[m_volumeView addSubview:myVolumeView];
     [myVolumeView sizeToFit];
-
+    
+    // For some reason, releasing this crashes the app
+//    [myVolumeView release];
+    
     // centered in the x dimension (and y dimension, we change that in a moment)
     m_effectsTab.center = self.view.center;
     m_instrumentsTab.center = self.view.center;
@@ -283,6 +287,8 @@ extern TelemetryController * g_telemetryController;
     // not match directly the index in the instruments scroll, due to the extra header
     // entries
     [m_instrumentsScroll snapToIndex:0];
+    
+    [instrumentScrollText release];
     
     m_volumeView.transform = CGAffineTransformMakeRotation(-M_PI_2);
     m_effectsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);

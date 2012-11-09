@@ -40,8 +40,6 @@
 //    
 //}
 
-//#define SERVER_NAME @"http://mcbookpro.local:8888"
-//#define SERVER_ROOT @"http://mcbookpro.local:8888/app_iphone"
 #define SERVER_NAME_DEFAULT @"http://www.strumhub.com/v0.53"
 #define SERVER_ROOT_DEFAULT @"http://www.strumhub.com/v0.53/app_iphone"
 #define SERVER_NAME m_serverName
@@ -50,41 +48,6 @@
 #define GET_SERVER_STATUS @"Main/ServerStatus"
 #define GET_ITUNES_STATUS @"Main/ItunesStatus"
 
-// old stuff, don't delete yet
-
-//#define USER_REGISTER @"Users/Register"
-//#define USER_LOGIN @"Users/Login"
-//#define USER_LOGIN_FACEBOOK @"Users/LoginWithFacebookAccessToken"
-//#define USER_LOGOUT @"Users/Logout"
-//#define USER_GET_USER_PROFILE @"Users/GetUserProfile"
-//#define USER_FIND_USER_PROFILE @"Users/FindUserProfile"
-//#define USER_FIND_FACEBOOK_FRIENDS_USER_PROFILE @"Users/FindFacebookFriendsUserProfile"
-//#define USER_GET_USER_CREDITS @"Users/GetUserCredits"
-//#define USER_VERIFY_ITUNES_PURCHASE @"Users/VerifyItunesPurchase"
-//#define USER_REDEEM_CREDIT_CODE @"Users/RedeemCreditCode"
-//
-//#define USER_PURCHASE_SONG @"UserSongs/PurchaseSong"
-//#define USER_SONGS_GET_USER_SONGS_LIST @"UserSongs/GetUserSongsList"
-//#define USER_SONGS_GET_FEATURED_NEW_POPULAR_SONGS_LIST @"UserSongs/GetFeaturedNewAndPopularSongsList"
-//#define USER_SONGS_GET_ALL_SONGS_LIST @"UserSongs/GetAllSongsList"
-//#define USER_SONGS_GET_SONG_IMAGE @"UserSongs/GetSongImage"
-//#define USER_SONGS_GET_SONG_XMP @"UserSongs/GetSongXmp"
-////#define get song xmp
-//
-//#define USER_SONG_SESSIONS_GET_USER_SONG_SESSIONS @"UserSongSessions/GetUserSongSessions"
-//#define USER_SONG_SESSIONS_UPLOAD_SESSION @"UserSongSessions/UploadSession"
-//#define USER_SONG_SESSIONS_UPLOAD_SESSION_TO_FACEBOOK @"UserSongSessions/UploadSessionToFacebook"
-//#define USER_SONG_SESSIONS_GET_SESSION_XMP @"UserSongSessions/GetSessionXmp"
-//
-//#define USER_FOLLOWS_GET_FOLLOWS_LIST @"UserFollows/GetFollowsList"
-//#define USER_FOLLOWS_ADD_FOLLOWS @"UserFollows/AddFollows"
-//#define USER_FOLLOWS_REMOVE_FOLLOWS @"UserFollows/RemoveFollows"
-//#define USER_FOLLOWS_GET_FOLLOWED_BY_LIST @"UserFollows/GetFollowedByList"
-//#define USER_FOLLOWS_GET_FOLLOWS_SESSIONS @"UserFollows/GetFollowsSessions"
-//
-//#define USER_FILES_GET_FILE @"UserFiles/GetFile"
-
-// NEW STUFF
 #define CloudRequestTypeGetFileUrl @"UserFiles/GetFile"
 #define CloudRequestTypeRegisterUrl @"Users/Register"
 #define CloudRequestTypeLoginFacebookUrl @"Users/LoginWithFacebookAccessToken"
@@ -313,7 +276,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -349,7 +312,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -367,7 +330,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
 	
 }
 
@@ -383,7 +346,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -399,7 +362,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -426,7 +389,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
 	
 }
 
@@ -444,7 +407,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -460,7 +423,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
 
 }
 
@@ -478,7 +441,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -494,7 +457,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -507,7 +470,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -524,7 +487,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -541,7 +504,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -556,7 +519,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -569,7 +532,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -582,7 +545,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -598,7 +561,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -616,7 +579,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -634,7 +597,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -650,7 +613,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -666,7 +629,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -682,7 +645,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -698,7 +661,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -714,7 +677,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -727,7 +690,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -749,7 +712,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
 
 }
 
@@ -762,7 +725,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return cloudRequest;
+    return [cloudRequest autorelease];
     
 }
 
@@ -947,7 +910,9 @@
 
 - (void)cloudReceiveResponse:(CloudResponse*)cloudResponse
 {
-    
+    // This comes in from the 'NSUrl thread' so it doesn't have a pool
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
     // Parse the results
     [self parseResultsForResponse:cloudResponse];
     
@@ -956,6 +921,8 @@
     
     // Return to sender
     [self cloudReturnResponse:cloudResponse];
+    
+    [pool release];
     
 }
 

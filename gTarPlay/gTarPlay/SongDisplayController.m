@@ -124,6 +124,8 @@
 - (void)dealloc
 {
     
+    [m_noteTexture release];
+    
     [m_noteModelDictionary release];
     
     [m_undisplayedFrames release];
@@ -547,9 +549,7 @@
     UIGraphicsEndImageContext();
     
     m_noteTexture = [[Texture2D alloc] initWithImage:scaledImage];
-    
-    [image release];
-    
+        
 }
 
 - (void)createBackgroundTexture
