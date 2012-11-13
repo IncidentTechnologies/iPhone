@@ -985,6 +985,8 @@
 		EC24DFF2161A8B0A00016B78 /* StoreBuyCreditsPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC31BB8A14E3474C00DC7083 /* StoreBuyCreditsPopupViewController.xib */; };
 		EC24DFF3161A8B0A00016B78 /* CustomNavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC18A6EE13D90249004A2667 /* CustomNavigationViewController.xib */; };
 		EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
+		EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
 		ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */; };
 		ECBBBF6C161CF1F400BC5BE2 /* InstrumentTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF68161CF1F400BC5BE2 /* InstrumentTab.png */; };
 		ECBBBF6D161CF1F400BC5BE2 /* MenuTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF69161CF1F400BC5BE2 /* MenuTab.png */; };
@@ -2816,6 +2818,8 @@
 		EC7D5B5613D8EF9600FC2177 /* CustomNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationViewController.m; sourceTree = "<group>"; };
 		EC7D5B5A13D8EFD200FC2177 /* CustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomViewController.h; sourceTree = "<group>"; };
 		EC7D5B5B13D8EFD200FC2177 /* CustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomViewController.m; sourceTree = "<group>"; };
+		EC7D887A1651CE86002E2F77 /* gTarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarNavigationController.h; sourceTree = "<group>"; };
+		EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarNavigationController.m; sourceTree = "<group>"; };
 		EC8310651512A1F0003432B6 /* Options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Options.png; sourceTree = "<group>"; };
 		EC8310661512A1F0003432B6 /* OptionsPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OptionsPressed.png; sourceTree = "<group>"; };
 		EC8390DD15191B95004E66AE /* MenuSwitchON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuSwitchON.png; sourceTree = "<group>"; };
@@ -3163,12 +3167,14 @@
 		29B97315FDCFA39411CA2CEA /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
 				ECC11D7716264220001A231A /* gTarPlayApplication.h */,
 				ECC11D7816264220001A231A /* gTarPlayApplication.m */,
 				1D3623240D0F684500981E51 /* gTarPlayAppDelegate.h */,
 				1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */,
-				28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
+				EC7D887A1651CE86002E2F77 /* gTarNavigationController.h */,
+				EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */,
 			);
 			name = AppDelegate;
 			path = ..;
@@ -6681,6 +6687,7 @@
 				EC24DC83161A89B300016B78 /* CustomBeveledView.m in Sources */,
 				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
 				ECBF4FDD1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
+				EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6777,6 +6784,7 @@
 				ECC11E44162D07AD001A231A /* CustomBeveledView.m in Sources */,
 				ECC11E45162D07AD001A231A /* gTarPlayApplication.m in Sources */,
 				ECBF4FDE1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
+				EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6849,7 +6857,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6872,7 +6880,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
@@ -6904,7 +6912,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = gTarPlay;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -6929,7 +6937,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = gTarPlay;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

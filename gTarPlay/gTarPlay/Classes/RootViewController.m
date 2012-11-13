@@ -82,7 +82,7 @@ extern TelemetryController * g_telemetryController;
         m_titleFacebookViewController = [[TitleFacebookViewController alloc] initWithNibName:nil bundle:nil];
         m_titleFirmwareViewController = [[TitleFirmwareViewController alloc] initWithNibName:nil bundle:nil];
         
-        // TODO title firm
+        
         
         // we should just move the global UC into the controllers instead of doing this
         m_titleLoginViewController.m_userController = g_userController;
@@ -159,9 +159,9 @@ extern TelemetryController * g_telemetryController;
 	// Setup UI
 	//
     m_pleaseLoginPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
-    m_tutorialIndexPopup.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
+    m_tutorialIndexPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
     m_tutorialIndexPopup.m_popupTitle = @"Tutorials";
-    m_creditsPopup.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
+    m_creditsPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
     m_creditsPopup.m_popupTitle = @"Incident Technologies";
     m_infoPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
     m_disconnectedDevicePopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
@@ -311,6 +311,16 @@ extern TelemetryController * g_telemetryController;
 {
 	// Return YES for supported orientations.
 	return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
+}
+
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscapeLeft;
 }
 
 #pragma mark -

@@ -166,12 +166,12 @@ extern AudioController * g_audioController;
     
     m_progressUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_FREQUENCY target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
     
-    m_songPreviewScrubberView = [[SongPreviewScrubberView alloc] init];
-    [m_songPreviewScrubberView initWithFrame:m_previewView.frame andSongModel:m_playbackController.m_songModel];
+    m_songPreviewScrubberView = [[SongPreviewScrubberView alloc] initWithFrame:m_previewView.frame andSongModel:m_playbackController.m_songModel];
     
     m_songPreviewScrubberView.m_delegate = self;
     
     [m_background addSubview:m_songPreviewScrubberView];
+    [m_background bringSubviewToFront:m_songPreviewScrubberView];
     
     [super attachFinalize];
     

@@ -145,6 +145,16 @@ extern UserController * g_userController;
     
 }
 
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskPortrait;
+}
+
 #pragma mark - Misc
 
 - (IBAction)feedSelectionChanged:(id)sender
