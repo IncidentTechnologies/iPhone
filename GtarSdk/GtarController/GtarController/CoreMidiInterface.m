@@ -8,7 +8,9 @@
 
 #import "CoreMidiInterface.h"
 
-#include "GtarControllerInternal.h"
+#import "GtarControllerInternal.h"
+
+#import <UIKit/UIKit.h>
 
 @implementation CoreMidiInterface
 
@@ -60,6 +62,9 @@
             [m_gtarController logMessage:[NSString stringWithFormat:@"Failed to create output port: Error %ld", oss]
                               atLogLevel:GtarControllerLogLevelError];
         }
+        
+        // Wait for foreground notifications
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEndpoints) name:UIApplicationWillEnterForegroundNotification object:nil];
         
         [self updateEndpoints];
 
@@ -130,7 +135,7 @@
             
             if ( oss == -1 )
             {
-                [m_gtarController logMessage:[NSString stringWithFormat:@"SendSysExBuffer: MIDISend failed with status 0x%x", oss]
+                [m_gtarController logMessage:[NSString stringWithFormat:@"SendSysExBuffer: MIDISend failed with status 0x%lx", oss]
                                                     atLogLevel:GtarControllerLogLevelError];
             }
         }
@@ -154,9 +159,6 @@
     
     // Are we connected to something
     m_connected = (m_sourceConnected && m_destinationConnected);
-    
-//    [m_gtarController logMessage:[NSString stringWithFormat:@"Connected? now %d before %d", m_connected, previousConnected]
-//                      atLogLevel:GtarControllerLogLevelInfo];
     
     // See if the connection status changed from connected to !connected or vice versa
     if ( previousConnected == YES )
@@ -428,7 +430,7 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
         
         if ( oss == -1 )
         {
-            [m_gtarController logMessage:[NSString stringWithFormat:@"SendBuffer: MIDISend failed with status 0x%x", oss]
+            [m_gtarController logMessage:[NSString stringWithFormat:@"SendBuffer: MIDISend failed with status 0x%lx", oss]
                                                 atLogLevel:GtarControllerLogLevelError];
             
             return NO;
@@ -480,7 +482,7 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
                 
                 if ( oss == -1 )
                 {
-                    [m_gtarController logMessage:[NSString stringWithFormat:@"SendSysExBuffer: MIDISend failed with status 0x%x", oss]
+                    [m_gtarController logMessage:[NSString stringWithFormat:@"SendSysExBuffer: MIDISend failed with status 0x%lx", oss]
                                       atLogLevel:GtarControllerLogLevelError];
                     
                     return NO;
