@@ -105,9 +105,7 @@
     [m_coreMidiInterface release];
     
     [m_observerList release];
-    
-    [m_eventLoopTimer invalidate];
-    
+        
     [m_firmware release];
     
     [super dealloc];
@@ -217,7 +215,26 @@
     
 }
 
+- (int)getFretFromMidiNote:(int)midiNote andString:(int)str
+{
+    
+    if ( str < 0 || str > 5 )
+    {
+        return -1;
+    }
+    
+    int fret = midiNote - (40 + 5 * str);
+    
+    if (str > 3 )
+    {
+        fret += 1;
+    }
+    
+    return fret;
+}
+
 #pragma mark - Internal MIDI functions
+
 - (void)midiConnectionHandler:(BOOL)connected
 {
     
@@ -264,7 +281,7 @@
         case 0x8:
         {
             
-            unsigned char fret = [m_coreMidiInterface getFretFromMidiNote:data[1] andString:(str-1)];
+            unsigned char fret = [self getFretFromMidiNote:data[1] andString:(str-1)];
             
             NSMutableDictionary * responseDictionary = [[NSMutableDictionary alloc] init];
             
@@ -282,9 +299,10 @@
         case 0x9:
         {
             
-            unsigned char fret = [m_coreMidiInterface getFretFromMidiNote:data[1] andString:(str-1)];
+            unsigned char fret = [self getFretFromMidiNote:data[1] andString:(str-1)];
             unsigned char velocity = data[2];
             
+            // Filter out any messages that arrive within a certain time
             if ( [self checkNoteInterarrivalTime:currentTime forFret:fret andString:str] == YES )
             {
                 NSMutableDictionary * responseDictionary = [[NSMutableDictionary alloc] init];
