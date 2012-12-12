@@ -84,6 +84,5 @@ void MIDIReadHandler(const MIDIPacketList *pPacketList, void *pReadProcCon, void
 
 // Helpers
 - (unsigned char)encodeValueWithRed:(unsigned char)red andGreen:(unsigned char)green andBlue:(unsigned char)blue andMessage:(unsigned char)message;
-- (int)getFretFromMidiNote:(int)midiNote andString:(int)str;
 
 @end

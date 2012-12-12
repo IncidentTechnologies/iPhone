@@ -864,22 +864,4 @@ void MIDICompletionHander(MIDISysexSendRequest *request)
     return retVal;
 }
 
-- (int)getFretFromMidiNote:(int)midiNote andString:(int)str
-{
-    
-    if ( str < 0 || str > 5 )
-    {
-        return -1;
-    }
-    
-    int fret = midiNote - (40 + 5 * str);
-    
-    if (str > 3 )
-    {
-        fret += 1;
-    }
-    
-    return fret;
-}
-
 @end
