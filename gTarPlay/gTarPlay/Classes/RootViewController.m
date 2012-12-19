@@ -335,11 +335,13 @@ extern TelemetryController * g_telemetryController;
 //        return;
 //    }
     
+#ifndef Debug_BUILD
     if ( g_gtarController.connected == NO )
     {
         [m_disconnectedDevicePopup attachToSuperView:self.view];
         return;
     }
+#endif
     
     m_requireLogin = YES;
     
@@ -360,11 +362,13 @@ extern TelemetryController * g_telemetryController;
 //        return;
 //    }
 
+#ifndef Debug_BUILD
     if ( g_gtarController.connected == NO )
     {
         [m_disconnectedDevicePopup attachToSuperView:self.view];
         return;
     }
+#endif
     
     m_requireLogin = NO;
     

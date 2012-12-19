@@ -206,12 +206,14 @@ extern TelemetryController * g_telemetryController;
 //    [g_gtarController turnOffAllLeds];
     
     // testing
-//    if ( g_gtarController.connected == NO )
-//    {
-//        NSLog(@"debugging this thing");
-//        [g_gtarController debugSpoofConnected];
-//    }
-    
+#ifdef Debug_BUILD
+    if ( g_gtarController.connected == NO )
+    {
+        NSLog(@"debugging this thing");
+        
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+    }
+#endif
 }
 
 - (void)viewDidUnload
