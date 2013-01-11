@@ -17,13 +17,15 @@
 @synthesize m_gtarController;
 @synthesize m_connected;
 
-- (id)init
+- (id)initWithGtarController:(GtarController*)gtarController
 {
     
     self = [super init];
     
     if ( self ) 
     {
+        
+        m_gtarController = gtarController;
         
         [m_gtarController logMessage:[NSString stringWithFormat:@"CoreMidiInterface initializing"]
                           atLogLevel:GtarControllerLogLevelInfo];
@@ -64,7 +66,7 @@
         }
         
         // Wait for foreground notifications
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEndpoints) name:UIApplicationWillEnterForegroundNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEndpoints) name:UIApplicationWillEnterForegroundNotification object:nil];
         
         [self updateEndpoints];
 
@@ -148,7 +150,7 @@
 
 - (void)updateEndpoints
 {
-    
+    NSLog( @"Updating endpoints" );
     BOOL previousConnected = m_connected;
     
     int sourceCount = [self updateSources];
@@ -165,20 +167,20 @@
     {
         if ( m_connected == NO)
         {
-            [m_gtarController midiConnectionHandler:NO];
+//            [m_gtarController logMessage:[NSString stringWithFormat:@"Gtar Disconnected"]
+//                              atLogLevel:GtarControllerLogLevelInfo];
             
-            [m_gtarController logMessage:[NSString stringWithFormat:@"Gtar Disconnected"]
-                              atLogLevel:GtarControllerLogLevelInfo];
+            [m_gtarController midiConnectionHandler:NO];
         }
     }
     else
     {
         if ( m_connected == YES )
         {
-            [m_gtarController midiConnectionHandler:YES];
+//            [m_gtarController logMessage:[NSString stringWithFormat:@"Gtar Connected"]
+//                              atLogLevel:GtarControllerLogLevelInfo];
             
-            [m_gtarController logMessage:[NSString stringWithFormat:@"Gtar Connected"]
-                              atLogLevel:GtarControllerLogLevelInfo];
+            [m_gtarController midiConnectionHandler:YES];
         }
     }
     

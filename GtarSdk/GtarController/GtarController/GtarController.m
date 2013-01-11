@@ -36,7 +36,7 @@
         m_spoofed = NO;
         m_connected = NO;
         
-        m_logLevel = GtarControllerLogLevelError;
+        m_logLevel = GtarControllerLogLevelAll;
         
         m_responseThread = GtarControllerThreadMain;
         
@@ -78,10 +78,11 @@
             }
         }
         
+        [self logMessage:@"GtarController initializing"
+              atLogLevel:GtarControllerLogLevelInfo];
+
         // Create the midi interface
-        m_coreMidiInterface = [[CoreMidiInterface alloc] init];
-        
-        m_coreMidiInterface.m_gtarController = self;
+        m_coreMidiInterface = [[CoreMidiInterface alloc] initWithGtarController:self];
         
         m_observerList = [[NSMutableArray alloc] init];
         
