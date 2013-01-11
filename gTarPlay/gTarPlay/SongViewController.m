@@ -534,6 +534,8 @@ BOOL m_skipNotes = NO;
 - (void)gtarNoteOff:(GtarPosition)position
 {
     
+    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
+
 }
 
 - (void)gtarConnected
