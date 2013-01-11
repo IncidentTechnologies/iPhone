@@ -469,6 +469,11 @@ extern TelemetryController * g_telemetryController;
     [g_audioController PluckString:str atFret:fret withAmplitude:(float)velocity/127.0f];
 }
 
+- (void)gtarNoteOff:(GtarPosition)position
+{
+    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
+}
+
 - (void)gtarConnected
 {
     

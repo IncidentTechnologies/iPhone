@@ -660,6 +660,28 @@
 // Stop playing the note indicated by the string and fret position
 - (void) noteOffAtString:(int)string andFret:(int)fret
 {
+    // Only kill the string if the noteOff corresponds to the specific note being played now.
+    
+    // First check that this string/channel is active and that this specific fret is being pressed down.
+    if (m_channelOn[string] && m_channelPositions[string][fret])
+    {
+        // If this channel is on, and no higher frets are being press, then this is the note being played.
+        for (int i = fret+1; i <= 16; i++)
+        {
+            if (m_channelPositions[string][i])
+            {
+                // A higher fret is being played than the one this NoteOff message came in for, do nothing
+                return;
+            }
+        }
+    }
+    else
+    {
+        // This string & fret is not currently being played, do nothing.
+        return;
+    }
+    
+    // The noteOff msg corresponds to the note currently playing, kill the note via attenuation.
     m_attenuation[string] = 0.0003;
 }
 
