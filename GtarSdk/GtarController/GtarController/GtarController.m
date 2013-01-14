@@ -94,6 +94,8 @@
             m_connected = NO;
         }
         
+        m_firmwareUpdating = NO;
+        m_firmwareCancelation = NO;
     }
     
     return self;
@@ -645,7 +647,11 @@
         if ( m_firmwareCancelation == YES )
         {
             
-            m_firmwareCancelation = NO;
+            @synchronized ( self )
+            {
+                m_firmwareUpdating = NO;
+                m_firmwareCancelation = NO;
+            }
             
             // Cancel the transfer, abort now.
             [self logMessage:[NSString stringWithFormat:@"Firmware update canceled, aborting transfer"]
@@ -661,7 +667,7 @@
                       atLogLevel:GtarControllerLogLevelWarn];
                 
             }
-
+            
         }
         else if ( m_firmwareCurrentPage < GTAR_CONTROLLER_MAX_FIRMWARE_PAGES )
         {
@@ -672,10 +678,17 @@
         }
         else
         {
-            // we are done            
-            [m_firmware release];
             
-            m_firmware = nil;
+            @synchronized ( self )
+            {
+                // we are done
+                [m_firmware release];
+                
+                m_firmware = nil;
+                
+                m_firmwareUpdating = NO;
+                m_firmwareCancelation = NO;
+            }
             
             if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusSucceeded)] == YES )
             {
@@ -689,7 +702,7 @@
             }
             
         }
-
+        
     }
     else
     {
@@ -722,12 +735,15 @@
             } break;
         }
         
-        // If we already wanted to cancel the transfer, we can rest assured it will not continue
-        m_firmwareCancelation = NO;
-        
-        [m_firmware release];
-        
-        m_firmware = nil;
+        @synchronized ( self )
+        {
+            [m_firmware release];
+            
+            m_firmware = nil;
+            
+            m_firmwareUpdating = NO;
+            m_firmwareCancelation = NO;
+        }
         
         if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusFailed)] == YES )
         {
@@ -741,6 +757,7 @@
         }
         
     }
+    
     
 }
 
@@ -1530,46 +1547,60 @@
         return NO;
     }
     
-    if ( m_firmwareCancelation == YES )
+    @synchronized ( self )
     {
-        [self logMessage:@"SendFirmwareUpdate: Cancellation in progress"
-              atLogLevel:GtarControllerLogLevelWarn];
-        return NO;
+        
+        if ( m_firmwareCancelation == YES )
+        {
+            [self logMessage:@"SendFirmwareUpdate: Cancellation in progress"
+                  atLogLevel:GtarControllerLogLevelWarn];
+            return NO;
+        }
+        
+        if ( m_firmwareUpdating == YES )
+        {
+            [self logMessage:@"SendFirmwareUpdate: Firmware update in progress"
+                  atLogLevel:GtarControllerLogLevelWarn];
+            return NO;
+        }
+        
+        [m_firmware release];
+        
+        m_firmware = [firmware retain];
+        
+        m_firmwareCurrentPage = 0;
+        
+        BOOL result = [self sendFirmwarePage:m_firmwareCurrentPage];
+        
+        if ( result == NO )
+        {
+            [self logMessage:@"SendFirmwareUpdate: Failed to send firmware package page"
+                  atLogLevel:GtarControllerLogLevelError];
+        }
+        
+        return result;
     }
-    
-    [m_firmware release];
-    
-    m_firmware = [firmware retain];
-    
-    m_firmwareCurrentPage = 0;
-    
-    BOOL result = [self sendFirmwarePage:m_firmwareCurrentPage];
-    
-    if ( result == NO )
-    {
-        [self logMessage:@"SendFirmwareUpdate: Failed to send firmware package page"
-              atLogLevel:GtarControllerLogLevelError];
-    }
-    
-    return result; 
 }
 
 - (BOOL)sendFirmwareUpdateCancelation
 {
     
-    // Only cancel if we are updating a firmware
-    if ( [m_firmware length] > 0 )
+    @synchronized ( self )
     {
-        
-        [self logMessage:@"Canceling firmware update"
-              atLogLevel:GtarControllerLogLevelWarn];
-        
-        m_firmwareCancelation = YES;
-        
-        [m_firmware release];
-        
-        m_firmware = nil;
-        
+        // Only cancel if we are updating a firmware
+        if ( [m_firmware length] > 0 )
+        {
+            
+            [self logMessage:@"Canceling firmware update"
+                  atLogLevel:GtarControllerLogLevelWarn];
+            
+            m_firmwareCancelation = YES;
+            
+            [m_firmware release];
+            
+            m_firmware = nil;
+            
+        }
     }
     
     return YES;

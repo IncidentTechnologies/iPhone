@@ -322,13 +322,13 @@
         }
         else
         {
-            overlay = [m_numberModels objectAtIndex:note.m_fret];
+            overlay = [m_numberModels objectAtIndex:(note.m_fret%GTAR_GUITAR_FRET_COUNT) ];
         }
         
         NoteModel * model;
         
         model = [[NoteModel alloc] initWithCenter:center andColor:g_stringColors[note.m_string - 1] andTexture:m_noteTexture andOverlay:overlay];
-        
+            
         NSValue * key = [NSValue valueWithNonretainedObject:note];
         
         [m_noteModelDictionary setObject:model forKey:key];
@@ -510,7 +510,8 @@
 	size.width = GL_NOTE_HEIGHT;
 	size.height = GL_NOTE_HEIGHT;
 	
-	for ( unsigned int i = 0; i < GTAR_GUITAR_FRET_COUNT; i++ )
+    // Create number models for 0..16
+	for ( unsigned int i = 0; i < (GTAR_GUITAR_FRET_COUNT+1); i++ )
 	{
 		
 		NumberModel * numberModel = [[NumberModel alloc] initWithCenter:CGPointMake(0, 0)

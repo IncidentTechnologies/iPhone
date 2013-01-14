@@ -58,6 +58,7 @@ typedef enum GTAR_RX_MSG_TYPE
     NSData * m_firmware;
     int m_firmwareCurrentPage;
     BOOL m_firmwareCancelation;
+    BOOL m_firmwareUpdating;
     
 }
 

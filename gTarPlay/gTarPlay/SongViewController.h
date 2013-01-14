@@ -92,13 +92,15 @@ enum SongViewControllerDifficulty
     NSTimer * m_delayedChordTimer;
     NSTimer * m_metronomeTimer;
     
-    double m_previousChordPluckTime;
+//    double m_previousChordPluckTime;
     GtarString m_previousChordPluckString;
     GtarPluckVelocity m_previousChordPluckVelocity;
     NSInteger m_previousChordPluckDirection;
     
     NSInteger m_delayedChordsCount;
     GtarFret m_delayedChords[GTAR_GUITAR_STRING_COUNT];
+    
+    NSMutableArray * m_deferredNotesQueue;
     
 }
 

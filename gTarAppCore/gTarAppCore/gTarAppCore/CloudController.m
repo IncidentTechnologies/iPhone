@@ -2033,9 +2033,13 @@
     {
         cloudResponse.m_statusText = detail;
     }
-    else
+    else if ( result != nil )
     {
         cloudResponse.m_statusText = result;
+    }
+    else
+    {
+        cloudResponse.m_statusText = @"Response parsing issue";
     }
     
     [dom release];

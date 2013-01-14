@@ -35,6 +35,9 @@
 - (id)initWithStart:(double)absoluteBeatStart andDuration:(double)duration;
 
 - (void)addNote:(NSNote*)note;
+
+- (NSNote*)testString:(GtarString)str andFret:(GtarFret)fret;
+- (NSNote*)testString:(GtarString)str;
 - (NSNote*)hitTestAndRemoveString:(GtarString)str andFret:(GtarFret)fret;
 - (NSNote*)hitTestAndRemoveStringOnly:(GtarString)str;
 

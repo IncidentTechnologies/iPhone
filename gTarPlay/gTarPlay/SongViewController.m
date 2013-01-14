@@ -137,6 +137,8 @@ extern TelemetryController * g_telemetryController;
     [m_metronomeTimer invalidate];
     m_metronomeTimer = nil;
     
+    [m_deferredNotesQueue release];
+    
     g_audioController.m_delegate = nil;
     
     [g_audioController stopAUGraph];
@@ -340,6 +342,10 @@ extern TelemetryController * g_telemetryController;
         m_metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/m_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
     }
     
+    [m_deferredNotesQueue release];
+    
+    m_deferredNotesQueue = [[NSMutableArray alloc] init];
+    
     [self startMainEventLoop];
 
 }
@@ -387,11 +393,6 @@ BOOL m_skipNotes = NO;
         
         m_skipNotes = NO;
         
-//        if ( YES )
-//        {
-//            [self guitarNotesOnFret:15 andString:2];
-//        } 
-//        else
         if ( [m_songModel.m_currentFrame.m_notesPending count] > 0 )
         {
             NSNote * note = [m_songModel.m_currentFrame.m_notesPending objectAtIndex:0];
@@ -478,64 +479,137 @@ BOOL m_skipNotes = NO;
 
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
-
+    
     GtarFret fret = pluck.position.fret;
     GtarString str = pluck.position.string;
-    
-    // If we are not running (i.e. paused) then we ignore input from the midi
-    if ( m_isRunning == NO )
-    {
-        return;
-    }
-    
-    // This should only be used sparingly, but sometimes we 
-    // just want to completely drop the input e.g. in certain 
-    // chord strumming situations.
-    if ( m_ignoreInput == YES )
-    {
-        return;
-    }
-    
-    m_refreshDisplay = YES;
-    
-    // Tell the user that the input is working
-    [m_ampView flickerIndicator];
+    GtarPluckVelocity velocity = pluck.velocity;
     
     if ( m_currentFrame == nil )
     {
         [m_songModel skipToNextFrame];
     }
     
+    // Play a pluck noise immediately
     NSNote * hit;
     
     if ( m_difficulty == SongViewControllerDifficultyEasy )
     {
-        hit = [m_currentFrame hitTestAndRemoveStringOnly:str];
-//        hit = [m_nextFrame hitTestAndRemoveStringOnly:str];
+        hit = [m_currentFrame testString:str];
     }
     else
     {
-        hit = [m_currentFrame hitTestAndRemoveString:str andFret:fret];
-//        hit = [m_nextFrame hitTestAndRemoveString:str andFret:fret];
+        hit = [m_currentFrame testString:str andFret:fret];
     }
     
-    // Handle the hit
-    if ( hit != nil )
+    // Play the note.
+    if ( m_difficulty == SongViewControllerDifficultyHard )
     {
-        [self correctHitFret:hit.m_fret andString:hit.m_string andVelocity:pluck.velocity];
+        [self pluckString:str andFret:fret andVelocity:velocity];
     }
-    else
+    else if ( hit != nil )
     {
-        [self incorrectHitFret:fret andString:str andVelocity:pluck.velocity];
+        [self pluckString:hit.m_string andFret:hit.m_fret andVelocity:GtarMaxPluckVelocity];
+        
+        fret = hit.m_fret;
+    }
+
+    //
+    // The rest of the handling is deferred till later.
+    //
+    
+    // If this is called from the midi thread, there won't be an autorelease pool in place.
+    // I'll handle all the alloc's manually just in case.
+    NSNumber * fretNumber = [[NSNumber alloc] initWithChar:fret];
+    NSNumber * strNumber = [[NSNumber alloc] initWithChar:str];
+    NSNumber * velNumber = [[NSNumber alloc] initWithChar:velocity];
+
+    NSDate * when = [[NSDate alloc] initWithTimeIntervalSinceNow:0.060];
+    
+    NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                        fretNumber, @"Fret",
+                                        strNumber, @"String",
+                                        velNumber, @"Velocity",
+                                        nil];
+    
+    NSTimer * timer = [[NSTimer alloc] initWithFireDate:when
+                                               interval:0.0
+                                                 target:self
+                                               selector:@selector(deferredNoteOn:)
+                                               userInfo:dictionary
+                                                repeats:NO];
+    
+    [dictionary setObject:timer forKey:@"Timer"];
+    
+    @synchronized ( m_deferredNotesQueue )
+    {
+        [m_deferredNotesQueue addObject:dictionary];
     }
     
+    // Add the timer to the run loop
+    NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
+    
+    [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
+    
+    // release everything
+    [timer release];
+    
+    [when release];
+    
+    [fretNumber release];
+    [strNumber release];
+    [velNumber release];
+    
+    [dictionary release];
 }
 
 - (void)gtarNoteOff:(GtarPosition)position
 {
     
-    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
-
+    // Always mute notes on note-off for hard
+    if ( m_difficulty == SongViewControllerDifficultyHard )
+    {
+        [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
+    }
+    
+    @synchronized ( m_deferredNotesQueue )
+    {
+        NSDictionary * canceledPluck = nil;
+        
+        for ( NSDictionary * pluck in m_deferredNotesQueue )
+        {
+            
+            NSNumber * fretNumber = [pluck objectForKey:@"Fret"];
+            NSNumber * strNumber = [pluck objectForKey:@"String"];
+            
+            GtarFret fret = [fretNumber charValue];
+            GtarString str = [strNumber charValue];
+            
+            // If this is a cancelation, kill this timer.
+            // Break out of the loop because the for(...) doesn't like
+            // the array object mutating under it.
+            if ( fret == position.fret && str == position.string )
+            {
+                if ( m_difficulty != SongViewControllerDifficultyHard )
+                {
+                    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
+                }
+                
+                canceledPluck = pluck;
+                
+                break;
+            }
+        }
+        
+        if ( canceledPluck != nil )
+        {
+            
+            NSTimer * timer = [canceledPluck objectForKey:@"Timer"];
+            
+            [timer invalidate];
+            
+            [m_deferredNotesQueue removeObject:canceledPluck];
+        }
+    }
 }
 
 - (void)gtarConnected
@@ -569,6 +643,66 @@ BOOL m_skipNotes = NO;
 
 #pragma mark - Various helpers
 
+- (void)deferredNoteOn:(NSTimer*)timer
+{
+    
+    NSDictionary * pluck = timer.userInfo;
+    
+    NSNumber * fretNumber = [pluck objectForKey:@"Fret"];
+    NSNumber * strNumber = [pluck objectForKey:@"String"];
+    NSNumber * velNumber = [pluck objectForKey:@"Velocity"];
+    
+    GtarFret fret = [fretNumber charValue];
+    GtarString str = [strNumber charValue];
+    GtarPluckVelocity velocity = [velNumber charValue];
+    
+    @synchronized ( m_deferredNotesQueue )
+    {
+        [m_deferredNotesQueue removeObject:pluck];
+    }
+    
+    // If we are not running (i.e. paused) then we ignore input from the midi
+    if ( m_isRunning == NO )
+    {
+        return;
+    }
+    
+    // This should only be used sparingly, but sometimes we
+    // just want to completely drop the input e.g. in certain
+    // chord strumming situations.
+    if ( m_ignoreInput == YES )
+    {
+        return;
+    }
+    
+    m_refreshDisplay = YES;
+    
+    // Tell the user that the input is working
+    [m_ampView flickerIndicator];
+    
+    NSNote * hit;
+    
+    if ( m_difficulty == SongViewControllerDifficultyEasy )
+    {
+        hit = [m_currentFrame hitTestAndRemoveStringOnly:str];
+    }
+    else
+    {
+        hit = [m_currentFrame hitTestAndRemoveString:str andFret:fret];
+    }
+    
+    // Handle the hit
+    if ( hit != nil )
+    {
+        [self correctHitFret:hit.m_fret andString:hit.m_string andVelocity:velocity];
+    }
+    else
+    {
+        [self incorrectHitFret:fret andString:str andVelocity:velocity];
+    }
+
+}
+
 // These functions need to be called from the main thread RunLoop.
 // If they are called from a MIDI interrupt thread, stuff won't work properly.
 - (void)correctHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity
@@ -577,17 +711,6 @@ BOOL m_skipNotes = NO;
     // set it to the correct attenuation
     if ( m_interFrameDelayTimer == nil )
     {
-                
-        // Play the note
-        if ( m_difficulty == SongViewControllerDifficultyHard )
-        {
-            [self pluckString:str andFret:fret andVelocity:velocity];
-        }
-        else
-        {
-            [self pluckString:str andFret:fret andVelocity:GtarMaxPluckVelocity];
-        }
-        
         // Record the note
         [m_songRecorder playString:str andFret:fret];
     }
@@ -619,6 +742,27 @@ BOOL m_skipNotes = NO;
                 m_delayedChords[note.m_string-1] = note.m_fret;
             }
             
+            // We don't want to play notes that are already queues up.
+            @synchronized ( m_deferredNotesQueue )
+            {
+                for ( NSDictionary * pluck in m_deferredNotesQueue )
+                {
+                    
+                    NSNumber * fretNumber = [pluck objectForKey:@"Fret"];
+                    NSNumber * strNumber = [pluck objectForKey:@"String"];
+                    
+                    GtarFret fret = [fretNumber charValue];
+                    GtarString str = [strNumber charValue];
+                    
+                    // This one is queues up, so don't play it
+                    if ( m_delayedChords[str-1] == fret )
+                    {
+                        NSLog(@"Aborted delayed");
+                        m_delayedChords[str-1] = GTAR_GUITAR_NOTE_OFF;
+                    }
+                }
+            }
+            
             // Schedule an event to play the chords over time
             m_delayedChordsCount = 6;
             m_delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
@@ -626,7 +770,7 @@ BOOL m_skipNotes = NO;
             // Schedule an event to push us to the next frame after a moment
             m_interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:0.100 target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
             
-            m_previousChordPluckTime = CACurrentMediaTime();
+//            m_previousChordPluckTime = CACurrentMediaTime();
             m_previousChordPluckString = str;
             m_previousChordPluckVelocity = velocity;
             m_previousChordPluckDirection = 0;
@@ -645,8 +789,6 @@ BOOL m_skipNotes = NO;
         //
         // There are no notes left in this frame, skip along.
         //
-//        [m_songModel skipToNextFrame];
-//        [self songModelExitFrame:m_currentFrame];
         m_animateSongScrolling = YES;
         
         //
@@ -664,7 +806,6 @@ BOOL m_skipNotes = NO;
 
 - (void)incorrectHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity
 {
-//    NSLog(@"Incorrect on %u %u", fret, str);
     
     // See if we are trying to play a new chord
     if ( m_interFrameDelayTimer != nil )
@@ -675,7 +816,7 @@ BOOL m_skipNotes = NO;
     if ( m_difficulty == SongViewControllerDifficultyHard )
     {
         // Play the note at normal intensity
-        [self pluckString:str andFret:fret andVelocity:velocity];
+//        [self pluckString:str andFret:fret andVelocity:velocity];
         
         // Record the note
         [m_songRecorder playString:str andFret:fret];
@@ -766,7 +907,7 @@ BOOL m_skipNotes = NO;
         // Play the note
         if ( m_difficulty == SongViewControllerDifficultyHard )
         {
-            [self pluckString:str andFret:fret andVelocity:m_previousChordPluckString];
+            [self pluckString:str andFret:fret andVelocity:m_previousChordPluckVelocity];
         }
         else
         {
