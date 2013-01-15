@@ -254,9 +254,6 @@ extern TelemetryController * g_telemetryController;
         [settings setBool:YES forKey:@"RouteToSpeaker"];
         
         [settings synchronize];
-        
-//        [self welcomeTutorialButtonClicked:nil];
-        
 	}
     
     if ( guitarConnectedBefore == NO )
@@ -285,6 +282,7 @@ extern TelemetryController * g_telemetryController;
     if ( g_cloudController.m_loggedIn == YES )
     {
         [g_telemetryController uploadLogMessages];
+        [m_accountViewController updateFeeds];
     }
     
 }
@@ -1033,7 +1031,7 @@ extern TelemetryController * g_telemetryController;
         m_songPlaybackViewController.m_popupDelegate = self;
     }
     
-    [m_songPlaybackViewController attachToSuperView:[self.view superview] andPlaySongSession:session];
+    [m_songPlaybackViewController attachToSuperView:self.view andPlaySongSession:session];
 
 }
 

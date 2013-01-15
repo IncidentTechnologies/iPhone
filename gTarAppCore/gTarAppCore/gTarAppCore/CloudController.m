@@ -1069,8 +1069,8 @@
     // Convert the POST body to data bytes
 //    NSData * postBodyData = [postBody dataUsingEncoding:NSUTF8StringEncoding];
     
-//    NSString * postString = [[[NSString alloc] initWithData:postBodyData encoding:NSASCIIStringEncoding] autorelease];
-//    NSLog(postString);
+    NSString * postString = [[[NSString alloc] initWithData:postBodyData encoding:NSUTF8StringEncoding] autorelease];
+    NSLog(postString);
     
     // Stick the post body (now as encoded bytes) into the request
 	[request setHTTPBody:postBodyData];

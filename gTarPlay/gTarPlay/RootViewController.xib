@@ -142,6 +142,7 @@
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
 				</object>
+				<bool key="IBUIAutoresizesSubviews">NO</bool>
 				<bool key="IBUIClipsSubviews">YES</bool>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="IBUIInterfaceOrientation">3</int>
@@ -381,6 +382,7 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="106546257"/>
 				<reference key="IBUIBackgroundColor" ref="46158217"/>
+				<bool key="IBUIAutoresizesSubviews">NO</bool>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="IBUIInterfaceOrientation">3</int>
 					<int key="interfaceOrientation">3</int>
@@ -526,7 +528,6 @@
 							<string key="NSFrame">{{38, 20}, {218, 27}}</string>
 							<reference key="NSSuperview" ref="197536611"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<bool key="IBUIClipsSubviews">YES</bool>
 							<int key="IBUIContentMode">7</int>
@@ -776,7 +777,7 @@
 			<object class="IBUIViewController" id="77370834">
 				<bool key="IBUIAutoresizesArchivedViewToFullSize">NO</bool>
 				<object class="IBUIView" key="IBUIView" id="490061271">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">274</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -878,7 +879,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{276, 175}</string>
-					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="345918463"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">1</int>

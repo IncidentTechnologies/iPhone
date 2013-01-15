@@ -241,6 +241,8 @@ extern UserController * g_userController;
 - (void)refreshRelationship
 {
     
+    [m_nameLabel setText:m_displayedUserProfile.m_name];
+    
     // make the image view taller if need be
     UIImage * pic = [g_fileController getFileOrDownloadSync:m_displayedUserProfile.m_imgFileId];
     
@@ -264,11 +266,10 @@ extern UserController * g_userController;
 //        fr2.origin.y = fr.origin.y + fr.size.height + 4;
 //        [m_controlsView setFrame:fr2];
         
-        UIImage * image = [g_fileController getFileOrDownloadSync:m_displayedUserProfile.m_imgFileId];
+//        UIImage * image = [g_fileController getFileOrDownloadSync:m_displayedUserProfile.m_imgFileId];
         
-        [m_nameLabel setText:m_displayedUserProfile.m_name];
         [m_profileTextView setText:m_displayedUserProfile.m_profileText];
-        [m_profileImageView setImage:image];
+        [m_profileImageView setImage:pic];
         
     }
     

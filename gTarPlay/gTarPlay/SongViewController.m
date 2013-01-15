@@ -480,6 +480,20 @@ BOOL m_skipNotes = NO;
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
     
+    // If we are not running (i.e. paused) then we ignore input from the midi
+    if ( m_isRunning == NO )
+    {
+        return;
+    }
+    
+    // This should only be used sparingly, but sometimes we
+    // just want to completely drop the input e.g. in certain
+    // chord strumming situations.
+    if ( m_ignoreInput == YES )
+    {
+        return;
+    }
+    
     GtarFret fret = pluck.position.fret;
     GtarString str = pluck.position.string;
     GtarPluckVelocity velocity = pluck.velocity;
@@ -661,20 +675,6 @@ BOOL m_skipNotes = NO;
         [m_deferredNotesQueue removeObject:pluck];
     }
     
-    // If we are not running (i.e. paused) then we ignore input from the midi
-    if ( m_isRunning == NO )
-    {
-        return;
-    }
-    
-    // This should only be used sparingly, but sometimes we
-    // just want to completely drop the input e.g. in certain
-    // chord strumming situations.
-    if ( m_ignoreInput == YES )
-    {
-        return;
-    }
-    
     m_refreshDisplay = YES;
     
     // Tell the user that the input is working
@@ -736,10 +736,15 @@ BOOL m_skipNotes = NO;
                 m_delayedChords[index] = GTAR_GUITAR_NOTE_OFF;
             }
             
-            // Play the notes up front
+            m_delayedChordsCount = 0;
+            
+            // Figure out what notes we will be playing for each string.
+            // Also figure out what the max string we will be starting with.
             for ( NSNote * note in m_currentFrame.m_notesPending )
             {
                 m_delayedChords[note.m_string-1] = note.m_fret;
+                
+                m_delayedChordsCount = MAX(m_delayedChordsCount, note.m_string);
             }
             
             // We don't want to play notes that are already queues up.
@@ -764,7 +769,6 @@ BOOL m_skipNotes = NO;
             }
             
             // Schedule an event to play the chords over time
-            m_delayedChordsCount = 6;
             m_delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
             
             // Schedule an event to push us to the next frame after a moment
@@ -1239,45 +1243,45 @@ BOOL m_skipNotes = NO;
 - (void)toggleAudioRoute
 {
     
+//    m_bSpeakerRoute = !m_bSpeakerRoute;
+    
     if (m_bSpeakerRoute)
     {
         [g_audioController RouteAudioToDefault];
-        m_bSpeakerRoute = NO;
-        [m_ampView disableSpeaker];
-        [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode speaker off #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                                 withType:TelemetryControllerMessageTypeInfo];
+//        [m_ampView disableSpeaker];
+//        [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode speaker off #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
+//                                 withType:TelemetryControllerMessageTypeInfo];
 
     }
     else
     {
         [g_audioController RouteAudioToSpeaker];
-        m_bSpeakerRoute = YES;
-        [m_ampView enableSpeaker];
-        [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode speaker on #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                                 withType:TelemetryControllerMessageTypeInfo];
+//        [m_ampView enableSpeaker];
+//        [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode speaker on #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
+//                                 withType:TelemetryControllerMessageTypeInfo];
     }
     
     // The global volume slider is not available when audio is routed to lineout. 
     // If the audio is not being outputed to lineout hide the global volume slider,
     // and display our own slider that controlls volume in this mode.
-    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
+//    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
+//    
+//    if ([routeName isEqualToString:@"LineOut"])
+//    {
+//        [[m_ampView m_volumeSlider] setHidden:NO];
+//        [[m_ampView m_volumeView] setHidden:YES];
+//    }
+//    else
+//    {
+//        [[m_ampView m_volumeSlider] setHidden:YES];
+//        [[m_ampView m_volumeView] setHidden:NO];
+//    }
     
-    if ([routeName isEqualToString:@"LineOut"])
-    {
-        [[m_ampView m_volumeSlider] setHidden:NO];
-        [[m_ampView m_volumeView] setHidden:YES];
-    }
-    else
-    {
-        [[m_ampView m_volumeSlider] setHidden:YES];
-        [[m_ampView m_volumeView] setHidden:NO];
-    }
-    
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    
-    [settings setBool:m_bSpeakerRoute forKey:@"RouteToSpeaker"];
-    
-    [settings synchronize];
+//    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+//    
+//    [settings setBool:m_bSpeakerRoute forKey:@"RouteToSpeaker"];
+//    
+//    [settings synchronize];
     
 }
 
@@ -1320,10 +1324,27 @@ BOOL m_skipNotes = NO;
     if (m_bSpeakerRoute)
     {
         [m_ampView enableSpeaker];
+        [[m_ampView m_volumeSlider] setHidden:NO];
+        [[m_ampView m_volumeView] setHidden:YES];
     }
     else
     {
+        [[m_ampView m_volumeSlider] setHidden:YES];
+        [[m_ampView m_volumeView] setHidden:NO];
         [m_ampView disableSpeaker];
+    }
+    
+    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
+    
+    if ([routeName isEqualToString:@"LineOut"])
+    {
+        [[m_ampView m_volumeSlider] setHidden:NO];
+        [[m_ampView m_volumeView] setHidden:YES];
+    }
+    else
+    {
+        [[m_ampView m_volumeSlider] setHidden:YES];
+        [[m_ampView m_volumeView] setHidden:NO];
     }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];

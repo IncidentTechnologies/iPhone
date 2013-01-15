@@ -209,7 +209,7 @@ extern TelemetryController * g_telemetryController;
 
     // images for slider
     UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-    UIImage *sliderTrackMaxImage = [[UIImage imageNamed: @"SliderEndMax.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+    UIImage *sliderTrackMaxImage = [[UIImage imageNamed: @"SliderEndMax.png"] stretchableImageWithLeftCapWidth: 1 topCapHeight: 0];
 
     // Attach a volume view
     m_volumeView.backgroundColor = [UIColor clearColor];

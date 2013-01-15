@@ -127,7 +127,7 @@
     NSArray * subViews = volumeView.subviews;
     
     UIImage * sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth:9 topCapHeight:0];
-    UIImage * sliderTrackMaxImage = [[UIImage imageNamed: @"SliderEndMax.png"] stretchableImageWithLeftCapWidth:9 topCapHeight:0];
+    UIImage * sliderTrackMaxImage = [[UIImage imageNamed: @"SliderEndMax.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0];
     UIImage * sliderKnob = [UIImage imageNamed:@"VolumeSliderRev.png"];
     
     for (id current in subViews)
@@ -157,7 +157,6 @@
 - (void)viewDidUnload
 {
     
-    [self setM_volumeSlider:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -181,6 +180,7 @@
     self.m_songArtistMenuLabel = nil;
     self.m_scoreLabel = nil;
     self.m_starRatingView = nil;
+    self.m_volumeSlider = nil;
     
 }
 

@@ -286,7 +286,7 @@ extern UserController * g_userController;
 }
 
 
-#pragma mark - Update content calbacks
+#pragma mark - Update content callbacks
 
 - (void)userProfileCallback:(UserResponse*)userResponse
 {

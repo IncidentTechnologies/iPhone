@@ -89,6 +89,12 @@ extern AudioController * g_audioController;
 
 #pragma mark - View lifecycle
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
