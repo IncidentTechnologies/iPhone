@@ -56,6 +56,8 @@
         cloudRequest.m_cloudResponse = self;
         
         m_cloudRequest = [cloudRequest retain];
+        
+        self.m_statusText = @"Connection error";
     }
     
     return self;

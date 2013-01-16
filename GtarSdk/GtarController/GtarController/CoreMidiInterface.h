@@ -59,6 +59,8 @@ void MIDIReadHandler(const MIDIPacketList *pPacketList, void *pReadProcCon, void
 @property (nonatomic, readonly) BOOL m_connected;
 
 // Send related functions
+- (id)initWithGtarController:(GtarController*)gtarController;
+
 - (void)processSendQueue;
 
 - (BOOL)sendBuffer:(unsigned char*)buffer withLength:(int)bufferLength;
@@ -84,6 +86,5 @@ void MIDIReadHandler(const MIDIPacketList *pPacketList, void *pReadProcCon, void
 
 // Helpers
 - (unsigned char)encodeValueWithRed:(unsigned char)red andGreen:(unsigned char)green andBlue:(unsigned char)blue andMessage:(unsigned char)message;
-- (int)getFretFromMidiNote:(int)midiNote andString:(int)str;
 
 @end

@@ -80,6 +80,55 @@
     
 }
 
+- (NSNote*)testString:(GtarString)str andFret:(GtarFret)fret
+{
+    
+    NSNote * foundNote = nil;
+    
+    for ( NSNote * testNote in m_notesPending )
+    {
+        
+        if ( testNote.m_string == str &&
+            testNote.m_fret == fret )
+        {
+            foundNote = testNote;
+            break;
+        }
+        
+        if ( testNote.m_string == str &&
+            testNote.m_fret == GTAR_GUITAR_FRET_MUTED &&
+            fret == 0 )
+        {
+            foundNote = testNote;
+            break;
+        }
+        
+    }
+    
+    return foundNote;
+    
+}
+
+- (NSNote*)testString:(GtarString)str
+{
+    
+    NSNote * foundNote = nil;
+    
+    for ( NSNote * testNote in m_notesPending )
+    {
+        if ( testNote.m_string == str )
+        {
+            
+            foundNote = testNote;
+            break;
+            
+        }
+    }
+    
+    return foundNote;
+    
+}
+
 - (NSNote*)hitTestAndRemoveString:(GtarString)str andFret:(GtarFret)fret
 {
     
@@ -102,7 +151,7 @@
             foundNote = testNote;
             break;
         }
-            
+        
     }
     
     if ( foundNote != nil )

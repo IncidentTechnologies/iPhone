@@ -58,6 +58,16 @@
 	return self;	
 }
 
+- (void)dealloc
+{
+    
+    [m_song release];
+    [m_notes release];
+    
+    [super dealloc];
+    
+}
+
 - (void)beginSong
 {
 

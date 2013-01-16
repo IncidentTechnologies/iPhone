@@ -52,20 +52,21 @@ typedef enum GTAR_RX_MSG_TYPE
 //    GtarControllerEffect m_currentGuitarEffect;
     
     NSMutableArray * m_observerList;
-    
-    NSTimer * m_eventLoopTimer;
-    
+        
     double m_previousPluckTime[GtarStringCount][GtarFretCount];
     
     NSData * m_firmware;
     int m_firmwareCurrentPage;
     BOOL m_firmwareCancelation;
+    BOOL m_firmwareUpdating;
     
 }
 
 - (BOOL)checkNoteInterarrivalTime:(double)time forFret:(GtarFret)fret andString:(GtarString)str;
 
 - (void)logMessage:(NSString*)str atLogLevel:(GtarControllerLogLevel)level;
+
+- (int)getFretFromMidiNote:(int)midiNote andString:(int)str;
 
 - (void)midiConnectionHandler:(BOOL)connected;
 - (void)midiCallbackHandler:(char*)data;

@@ -39,9 +39,9 @@ TelemetryController * g_telemetryController;
 
 @implementation gTarPlayAppDelegate
 
-@synthesize window;
-@synthesize navigationController;
-@synthesize playApplication;
+@synthesize m_window;
+@synthesize m_navigationController;
+@synthesize m_playApplication;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -64,33 +64,9 @@ TelemetryController * g_telemetryController;
         //
         g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
         
-        //
-        // Create the content controller 
-        //
-//        g_contentController = [[ContentController alloc] initWithCloudController:g_cloudController];
-        
-        //
-        // Connect to the gtar device
-        //
-        g_gtarController = [[GtarController alloc] init];
-        
-        g_gtarController.responseThread = GtarControllerThreadMain;
-        
-        // By default it just outputs 'LevelError'
-        g_gtarController.logLevel = GtarControllerLogLevelInfo;
-        
-        [g_gtarController addObserver:self];
-        
         // Create the audio controller
         g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
         [g_audioController initializeAUGraph];
-
-#if TARGET_IPHONE_SIMULATOR
-        [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
-//        [NSTimer scheduledTimerWithTimeInterval:10.0 target:g_gtarController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
-
-//        [g_gtarController debugSpoofConnected];
-#endif
         
         //
         // Create the user controller to manage users
@@ -135,6 +111,25 @@ TelemetryController * g_telemetryController;
         
         [uuidString release];
         
+        //
+        // Connect to the gtar device
+        //
+        g_gtarController = [[GtarController alloc] init];
+        
+        g_gtarController.responseThread = GtarControllerThreadMain;
+        
+        // By default it just outputs 'LevelError'
+//        g_gtarController.logLevel = GtarControllerLogLevelInfo;
+        
+        [g_gtarController addObserver:self];
+        
+#if TARGET_IPHONE_SIMULATOR
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        //        [NSTimer scheduledTimerWithTimeInterval:10.0 target:g_gtarController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
+        
+        //        [g_gtarController debugSpoofConnected];
+#endif
+
     }
     
     return self;
@@ -145,20 +140,24 @@ TelemetryController * g_telemetryController;
 {    
     
     // Override point for customization after application launch.
-	navigationController.navigationBarHidden = YES;
+	m_navigationController.navigationBarHidden = YES;
     
     // Add the navigation controller's view to the window and display.
-    [self.window addSubview:navigationController.view];
-    [self.window makeKeyAndVisible];
+    m_window.rootViewController = m_navigationController;
     
+    [self.m_window addSubview:m_navigationController.view];
+    [self.m_window makeKeyAndVisible];
+
     // We never want to rotate
+//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+//    [[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeRight];
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
     [g_telemetryController logMessage:@"Application launched" withType:TelemetryControllerMessageTypeInfo];
     
-    self.playApplication = (gTarPlayApplication*)application;
+    self.m_playApplication = (gTarPlayApplication*)application;
     
-    [self.playApplication resetIdleTimer];
+    [self.m_playApplication resetIdleTimer];
     
     return YES;
 }
@@ -348,9 +347,9 @@ TelemetryController * g_telemetryController;
     
     [g_cloudController release];
     
-	[navigationController release];
+	[m_navigationController release];
     
-	[window release];
+	[m_window release];
     
 	[super dealloc];
 }
@@ -360,7 +359,7 @@ TelemetryController * g_telemetryController;
 
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
-    [playApplication resetIdleTimer];
+    [m_playApplication resetIdleTimer];
 }
 
 @end
