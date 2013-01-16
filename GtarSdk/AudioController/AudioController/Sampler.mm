@@ -543,6 +543,12 @@
 
 - (void) PluckMutedString:(int)string
 {
+    // call PluckString first, then set values for m_sampleNumber and m_sampleNumber, since
+    // PluckString resets them all
+    [self PluckString:string atFret:0 withAmplitude:1.0f];
+    
+    m_sampleNumber[string] = 5512;
+    
     if (string < 3)
     {
         m_attenuation[string] = 0.0007;
@@ -551,9 +557,6 @@
     {
         m_attenuation[string] = 0.00082;
     }
-    
-    [self PluckString:string atFret:0 withAmplitude:1.0f];
-    m_sampleNumber[string] = 5512;
 }
 
 - (float) getNextSample
