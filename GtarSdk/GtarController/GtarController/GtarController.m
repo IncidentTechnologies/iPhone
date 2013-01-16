@@ -1588,7 +1588,7 @@
     @synchronized ( self )
     {
         // Only cancel if we are updating a firmware
-        if ( [m_firmware length] > 0 )
+        if ( m_firmwareUpdating == YES )
         {
             
             [self logMessage:@"Canceling firmware update"

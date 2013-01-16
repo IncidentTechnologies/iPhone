@@ -200,21 +200,19 @@ extern TelemetryController * g_telemetryController;
     }
     else
     {
-        
         [self updateFirmware];
-        
     }
 
 }
 
 #pragma mark - Firmware
 
-- (void)cancelFirmware
-{
-    
-    [g_gtarController sendFirmwareUpdateCancelation];
-    
-}
+//- (void)cancelFirmware
+//{
+//    
+//    [g_gtarController sendFirmwareUpdateCancelation];
+//    
+//}
 
 - (void)updateFirmware
 {
@@ -225,13 +223,14 @@ extern TelemetryController * g_telemetryController;
     
     if ( firmware == nil )
     {
-        NSLog(@"Firmware is nil");
         
         NSString * msg = [[NSString alloc] initWithFormat:@"Firmware is nil"];
         
+        NSLog(@"%@", msg);
+        
         [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeError];
         
-        [m_statusLabel setText:@"Firmware is nil"];
+        [m_statusLabel setText:msg];
         [m_statusLabel setHidden:NO];
         
         [msg release];
@@ -259,6 +258,21 @@ extern TelemetryController * g_telemetryController;
         
         [m_leftButton setEnabled:NO];
         [m_rightButton setEnabled:NO];
+    }
+    else
+    {
+        
+        NSString * msg = [[NSString alloc] initWithFormat:@"Update failed to start"];
+        
+        NSLog(@"%@", msg);
+        
+        [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeError];
+        
+        [m_statusLabel setText:msg];
+        [m_statusLabel setHidden:NO];
+        
+        [msg release];
+
     }
     
 }
@@ -367,6 +381,7 @@ extern TelemetryController * g_telemetryController;
          (m_firmwareAvailableMinorVersion == m_firmwareCurrentMinorVersion) )
     {
         [m_leftButton setEnabled:YES];
+        [m_rightButton setEnabled:YES];
     }
 }
 

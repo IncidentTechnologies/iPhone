@@ -1040,8 +1040,11 @@
         
         if ( [fileData isKindOfClass:[UIImage class]] == YES )
         {
-            data = UIImagePNGRepresentation( (UIImage*)fileData );
-            contentType = @"image/png";
+            data = UIImageJPEGRepresentation((UIImage*)fileData, 0.1 );
+            contentType = @"image/jpg";
+            
+//            data = UIImagePNGRepresentation( (UIImage*)fileData );
+//            contentType = @"image/png";
         }
         
         if ( [fileData isKindOfClass:[NSString class]] == YES )
@@ -2059,6 +2062,8 @@
     cloudResponse.m_cloudRequest.m_status = CloudRequestStatusConnectionError;
     
     [self cloudReceiveResponse:cloudResponse];
+    
+    NSLog(@"URL error: %@", error);
 	
 }
 
@@ -2103,6 +2108,7 @@
 //    [self cloudReceiveResponse:cloudResponse];
     [self performSelectorInBackground:@selector(cloudReceiveResponse:) withObject:cloudResponse];
     
+    NSLog(@"%@",cloudResponse.m_receivedDataString);
 }
 
 @end

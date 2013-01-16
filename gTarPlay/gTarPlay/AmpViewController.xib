@@ -66,7 +66,6 @@
 						<string key="NSFrame">{{20, 93}, {440, 227}}</string>
 						<reference key="NSSuperview" ref="1052997435"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="189687149"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -1662,7 +1661,7 @@
 							</object>
 							<object class="IBUISlider" id="897961362">
 								<reference key="NSNextResponder" ref="400379816"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{144, 91}, {165, 23}}</string>
 								<reference key="NSSuperview" ref="400379816"/>
 								<reference key="NSWindow"/>
@@ -1676,7 +1675,7 @@
 							<object class="IBUIView" id="698123268">
 								<reference key="NSNextResponder" ref="400379816"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{144, 91}, {165, 23}}</string>
+								<string key="NSFrame">{{144, 91}, {165, 25}}</string>
 								<reference key="NSSuperview" ref="400379816"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="487502906"/>
@@ -1720,7 +1719,6 @@
 								<string key="NSFrame">{{280, 126}, {22, 14}}</string>
 								<reference key="NSSuperview" ref="400379816"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -2096,7 +2094,6 @@
 						<string key="NSFrame">{{284, 173}, {70, 37}}</string>
 						<reference key="NSSuperview" ref="416442823"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="189687149"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
