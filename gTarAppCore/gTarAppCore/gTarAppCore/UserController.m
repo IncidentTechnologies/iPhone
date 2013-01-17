@@ -25,23 +25,6 @@
 @synthesize m_loggedInUserProfile;
 @synthesize m_loggedInFacebookToken;
 
-//- (id)init
-//{
-//    
-//    self = [super init];
-//    
-//    if ( self )
-//    {
-//        
-//        m_userCache = [[NSMutableDictionary alloc] init];
-//        m_cloudToUserRequest = [[NSMutableDictionary alloc] init];
-//        
-//    }
-//    
-//    return self;
-//
-//}
-
 - (id)initWithCloudController:(CloudController*)cloudController
 {
     
@@ -188,8 +171,6 @@
     m_loggedInUsername = [[NSKeyedUnarchiver unarchiveObjectWithFile:usernamePath] retain];
     m_loggedInPassword = [[NSKeyedUnarchiver unarchiveObjectWithFile:passwordPath] retain];
     
-//    NSArray * arr = [NSKeyedUnarchiver unarchiveObjectWithFile:userProfilePath];
-//    m_loggedInUserProfile = [[arr lastObject] retain];
     m_loggedInUserProfile = [[NSKeyedUnarchiver unarchiveObjectWithFile:userProfilePath] retain];
     
     m_loggedInFacebookToken = [[NSKeyedUnarchiver unarchiveObjectWithFile:facebookTokenPath] retain];
@@ -240,7 +221,6 @@
     [NSKeyedArchiver archiveRootObject:m_loggedInUsername toFile:usernamePath];
     [NSKeyedArchiver archiveRootObject:m_loggedInPassword toFile:passwordPath];
     
-//    [NSKeyedArchiver archiveRootObject:[NSArray arrayWithObject:m_loggedInUserProfile] toFile:userProfilePath];
     [NSKeyedArchiver archiveRootObject:m_loggedInUserProfile toFile:userProfilePath];
     
     [NSKeyedArchiver archiveRootObject:m_loggedInFacebookToken toFile:facebookTokenPath];
@@ -251,39 +231,39 @@
     
 }
 
-- (void)saveCookie:(NSHTTPCookie*)cookie
-{
-    
-    if ( cookie == nil )
-    {
-        return;
-    }
-    
-    NSDictionary * dict = cookie.properties;
-    
-    NSString * cookiePath = [m_userFilePath stringByAppendingPathComponent:@"Cookie"];
-    
-    [NSKeyedArchiver archiveRootObject:dict toFile:cookiePath];
-    
-}
+//- (void)saveCookie:(NSHTTPCookie*)cookie
+//{
+//    
+//    if ( cookie == nil )
+//    {
+//        return;
+//    }
+//    
+//    NSDictionary * dict = cookie.properties;
+//    
+//    NSString * cookiePath = [m_userFilePath stringByAppendingPathComponent:@"Cookie"];
+//    
+//    [NSKeyedArchiver archiveRootObject:dict toFile:cookiePath];
+//    
+//}
 
-- (NSHTTPCookie*)loadCookie
-{
-    
-    NSString * cookiePath = [m_userFilePath stringByAppendingPathComponent:@"Cookie"];
-    
-    NSDictionary * dict = [NSKeyedUnarchiver unarchiveObjectWithFile:cookiePath];
-    
-    if ( dict == nil )
-    {
-        return nil;
-    }
-    
-    NSHTTPCookie * cookie = [NSHTTPCookie cookieWithProperties:dict];
-    
-    return cookie;
-    
-}
+//- (NSHTTPCookie*)loadCookie
+//{
+//    
+//    NSString * cookiePath = [m_userFilePath stringByAppendingPathComponent:@"Cookie"];
+//    
+//    NSDictionary * dict = [NSKeyedUnarchiver unarchiveObjectWithFile:cookiePath];
+//    
+//    if ( dict == nil )
+//    {
+//        return nil;
+//    }
+//    
+//    NSHTTPCookie * cookie = [NSHTTPCookie cookieWithProperties:dict];
+//    
+//    return cookie;
+//    
+//}
 
 - (void)requestLoginUserCachedCallbackObj:(id)obj
                            andCallbackSel:(SEL)sel
@@ -323,6 +303,17 @@
     UserRequest * userRequest = [[UserRequest alloc] initWithType:UserRequestTypeSignup
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
+    if ( username == nil || password == nil )
+    {
+        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        
+        userResponse.m_status = UserResponseStatusFailure;
+        userResponse.m_statusText = @"Invalid credentials";
+        
+        [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
+        
+        return;
+    }
     
     CloudRequest * cloudRequest = [m_cloudController requestRegisterUsername:username
                                                                  andPassword:password
@@ -387,6 +378,18 @@
     UserRequest * userRequest = [[UserRequest alloc] initWithType:UserRequestTypeLogin
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
+    
+    if ( username == nil || password == nil )
+    {
+        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        
+        userResponse.m_status = UserResponseStatusFailure;
+        userResponse.m_statusText = @"No login credentials";
+        
+        [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
+        
+        return;
+    }
     
     CloudRequest * cloudRequest = [m_cloudController requestLoginUsername:username
                                                               andPassword:password
@@ -457,6 +460,18 @@
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
     
+    if ( facebookToken == nil )
+    {
+        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        
+        userResponse.m_status = UserResponseStatusFailure;
+        userResponse.m_statusText = @"No facebook token";
+        
+        [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
+        
+        return;
+    }
+    
     [m_loggedInFacebookToken release];
     
     m_loggedInFacebookToken = nil;
@@ -485,11 +500,9 @@
     {
         userResponse.m_status = UserResponseStatusSuccess;
         
-//        [m_loggedInUsername release];
         [m_loggedInUserProfile release];
         [m_loggedInFacebookToken release];
         
-//        m_loggedInUsername = [cloudResponse.m_cloudRequest.m_username retain];
         m_loggedInUserProfile = [cloudResponse.m_responseUserProfile retain];
         m_loggedInFacebookToken = [cloudResponse.m_cloudRequest.m_facebookAccessToken retain];
         
@@ -514,71 +527,71 @@
 
 }
 
-- (void)requestLoginUserCookieCallbackObj:(id)obj
-                           andCallbackSel:(SEL)sel
-{
-    
-    UserRequest * userRequest = [[UserRequest alloc] initWithType:UserRequestTypeLoginCookie
-                                                andCallbackObject:obj
-                                              andCallbackSelector:sel];
-    
-    // Load the cookie before we begin
-    NSHTTPCookie * cookie = [self loadCookie];
-    
-    CloudRequest * cloudRequest = [m_cloudController requestLoginWithCookie:cookie
-                                                             andCallbackObj:self
-                                                             andCallbackSel:@selector(requestLoginUserCookieCallback:)];
-    
-    [m_cloudToUserRequest setObject:userRequest forKey:[NSValue valueWithNonretainedObject:cloudRequest]];
-    
-}
+//- (void)requestLoginUserCookieCallbackObj:(id)obj
+//                           andCallbackSel:(SEL)sel
+//{
+//    
+//    UserRequest * userRequest = [[UserRequest alloc] initWithType:UserRequestTypeLoginCookie
+//                                                andCallbackObject:obj
+//                                              andCallbackSelector:sel];
+//    
+//    // Load the cookie before we begin
+//    NSHTTPCookie * cookie = [self loadCookie];
+//    
+//    CloudRequest * cloudRequest = [m_cloudController requestLoginWithCookie:cookie
+//                                                             andCallbackObj:self
+//                                                             andCallbackSel:@selector(requestLoginUserCookieCallback:)];
+//    
+//    [m_cloudToUserRequest setObject:userRequest forKey:[NSValue valueWithNonretainedObject:cloudRequest]];
+//    
+//}
 
-- (void)requestLoginUserCookieCallback:(CloudResponse*)cloudResponse
-{
-    
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
-    
-    [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
-    
-    // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
-    
-    userResponse.m_loggedIn = m_cloudController.m_loggedIn;
-    
-    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
-    {
-        userResponse.m_status = UserResponseStatusSuccess;
-        
-        [m_loggedInUsername release];
-        
-        m_loggedInUsername = [m_cloudController.m_username retain];
-        
-        [self setUserProfileForUserId:0
-                            toProfile:m_loggedInUserProfile];
-        
-        if ( m_loggedInUsername )
-        {
-            [self saveCache];
-        }
-        
-        // Save the cookie before we return
-//        NSHTTPCookie * cookie = [m_cloudController getCakePhpCookie];
+//- (void)requestLoginUserCookieCallback:(CloudResponse*)cloudResponse
+//{
+//    
+//    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+//    
+//    [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
+//    
+//    // Create response
+//    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+//    
+//    userResponse.m_loggedIn = m_cloudController.m_loggedIn;
+//    
+//    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+//    {
+//        userResponse.m_status = UserResponseStatusSuccess;
 //        
-//        if ( cookie )
+//        [m_loggedInUsername release];
+//        
+//        m_loggedInUsername = [m_cloudController.m_username retain];
+//        
+//        [self setUserProfileForUserId:0
+//                            toProfile:m_loggedInUserProfile];
+//        
+//        if ( m_loggedInUsername )
 //        {
-//            [self saveCookie:cookie];
+//            [self saveCache];
 //        }
-
-    }
-    else
-    {
-        userResponse.m_status = UserResponseStatusFailure;
-        userResponse.m_statusText = cloudResponse.m_statusText;
-    }
-    
-    [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
-    
-}
+//        
+//        // Save the cookie before we return
+////        NSHTTPCookie * cookie = [m_cloudController getCakePhpCookie];
+////        
+////        if ( cookie )
+////        {
+////            [self saveCookie:cookie];
+////        }
+//
+//    }
+//    else
+//    {
+//        userResponse.m_status = UserResponseStatusFailure;
+//        userResponse.m_statusText = cloudResponse.m_statusText;
+//    }
+//    
+//    [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
+//    
+//}
 
 - (void)requestLogoutUserCallbackObj:(id)obj
                       andCallbackSel:(SEL)sel
@@ -674,6 +687,18 @@
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
     
+    if ( m_cloudController.m_loggedIn == NO )
+    {
+        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        
+        userResponse.m_status = UserResponseStatusFailure;
+        userResponse.m_statusText = @"Not logged in";
+        
+        [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
+        
+        return;
+    }
+
     CloudRequest * cloudRequest = [m_cloudController requestUserProfileEdit:nil
                                                                    andEmail:nil
                                                                    andImage:image 
@@ -820,6 +845,18 @@
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
     
+    if ( m_cloudController.m_loggedIn == NO )
+    {
+        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        
+        userResponse.m_status = UserResponseStatusFailure;
+        userResponse.m_statusText = @"Not logged in";
+        
+        [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
+        
+        return;
+    }
+    
     CloudRequest * cloudRequest = [m_cloudController requestAddFollowUser:friendUserId
                                                            andCallbackObj:self
                                                            andCallbackSel:@selector(requestAddUserFollowCallback:)];
@@ -876,6 +913,18 @@
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
     
+    if ( m_cloudController.m_loggedIn == NO )
+    {
+        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        
+        userResponse.m_status = UserResponseStatusFailure;
+        userResponse.m_statusText = @"Not logged in";
+        
+        [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
+        
+        return;
+    }
+    
     CloudRequest * cloudRequest = [m_cloudController requestRemoveFollowUser:friendUserId
                                                               andCallbackObj:self
                                                               andCallbackSel:@selector(requestRemoveUserFollowCallback:)];
@@ -931,6 +980,18 @@
     UserRequest * userRequest = [[UserRequest alloc] initWithType:UserRequestTypeUserFollowsSessions
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
+    
+    if ( m_cloudController.m_loggedIn == NO )
+    {
+        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        
+        userResponse.m_status = UserResponseStatusFailure;
+        userResponse.m_statusText = @"Not logged in";
+        
+        [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
+        
+        return;
+    }
     
     CloudRequest * cloudRequest = [m_cloudController requestFollowsSessions:userId
                                                              andCallbackObj:self
@@ -1120,6 +1181,18 @@
     UserRequest * userRequest = [[UserRequest alloc] initWithType:UserRequestTypeUserFacebookFriends
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
+    
+    if ( m_cloudController.m_loggedIn == NO )
+    {
+        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        
+        userResponse.m_status = UserResponseStatusFailure;
+        userResponse.m_statusText = @"Not logged in";
+        
+        [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
+        
+        return;
+    }
     
     CloudRequest * cloudRequest = [m_cloudController requestUserProfileFacebookSearch:accessToken
                                                                        andCallbackObj:self

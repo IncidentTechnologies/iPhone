@@ -42,8 +42,8 @@
 
 // Misc
 
-- (NSHTTPCookie*)getCakePhpCookie;
-- (void)setCakePhpCookie:(NSHTTPCookie*)cookie;
+//- (NSHTTPCookie*)getCakePhpCookie;
+//- (void)setCakePhpCookie:(NSHTTPCookie*)cookie;
 
 //
 // Syncronous convenience functions
@@ -60,7 +60,7 @@
 - (CloudRequest*)requestRegisterUsername:(NSString*)username andPassword:(NSString*)password andEmail:(NSString*)email andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 //- (void)requestRegisterUsername:(NSString*)username andFacebookAccessToken:(NSString*)facebookAccessToken andEmail:(NSString*)email andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestLoginUsername:(NSString*)username andPassword:(NSString*)password andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
-- (CloudRequest*)requestLoginWithCookie:(NSHTTPCookie*)cookie andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+//- (CloudRequest*)requestLoginWithCookie:(NSHTTPCookie*)cookie andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestFacebookLoginWithToken:(NSString*)accessToken andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestLogoutCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestUserProfile:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;

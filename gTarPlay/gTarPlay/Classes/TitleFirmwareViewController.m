@@ -125,7 +125,7 @@ extern TelemetryController * g_telemetryController;
     
     [self compareVersions];
     
-    [m_statusLabel setText:@"A new firmware version is available, please update to continue."];
+    [m_statusLabel setText:@"Please update to continue."];
     [m_statusLabel setHidden:NO];
     
     [m_currentFirmwareLabel setText:[NSString stringWithFormat:@"Current Version: %d.%d", m_firmwareCurrentMajorVersion, m_firmwareCurrentMinorVersion]];
