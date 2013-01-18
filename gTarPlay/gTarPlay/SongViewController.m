@@ -183,6 +183,15 @@ extern TelemetryController * g_telemetryController;
 
     [m_ampView attachToSuperview:self.view];
     
+    // Init the UI
+    [m_ampView resetView];
+    [m_ampView updateView];
+    
+    [self.view addSubview:m_connectingView];
+    
+    // Observe the global guitar controller. This will call guitarConnected when it is connected.
+    [g_gtarController addObserver:self];
+    
     //
     // Set the audio routing destination
     //
@@ -196,16 +205,6 @@ extern TelemetryController * g_telemetryController;
     
     // Toggle the route so that its what we actually want
     [self toggleAudioRoute];
-    
-    // Init the UI
-    [m_ampView resetView];
-    [m_ampView updateView];
-    
-    [self.view addSubview:m_connectingView];
-    
-    // Observe the global guitar controller. This will call guitarConnected when it is connected.
-    [g_gtarController addObserver:self];
-//    [g_gtarController turnOffAllLeds];
     
     // testing
 #ifdef Debug_BUILD
@@ -1243,46 +1242,55 @@ BOOL m_skipNotes = NO;
 - (void)toggleAudioRoute
 {
     
-//    m_bSpeakerRoute = !m_bSpeakerRoute;
+    m_bSpeakerRoute = !m_bSpeakerRoute;
     
     if (m_bSpeakerRoute)
     {
-        [g_audioController RouteAudioToDefault];
-//        [m_ampView disableSpeaker];
-//        [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode speaker off #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-//                                 withType:TelemetryControllerMessageTypeInfo];
-
+        [g_audioController RouteAudioToSpeaker];
     }
     else
     {
-        [g_audioController RouteAudioToSpeaker];
-//        [m_ampView enableSpeaker];
-//        [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode speaker on #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-//                                 withType:TelemetryControllerMessageTypeInfo];
+        [g_audioController RouteAudioToDefault];
+    }
+        
+}
+
+- (void)updateAudioState
+{
+    
+    if (m_bSpeakerRoute)
+    {
+        [m_ampView enableSpeaker];
+        [[m_ampView m_volumeSlider] setHidden:YES];
+        [[m_ampView m_volumeView] setHidden:NO];
+    }
+    else
+    {
+        [m_ampView disableSpeaker];
+        
+        // The global volume slider is not available when audio is routed to LineOut.
+        // If the audio is not being output to LineOut, hide the global volume slider,
+        // and display our own slider that controls volume in this mode.
+        NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
+        
+        if ([routeName isEqualToString:@"LineOut"])
+        {
+            [[m_ampView m_volumeSlider] setHidden:NO];
+            [[m_ampView m_volumeView] setHidden:YES];
+        }
+        else
+        {
+            [[m_ampView m_volumeSlider] setHidden:YES];
+            [[m_ampView m_volumeView] setHidden:NO];
+        }
     }
     
-    // The global volume slider is not available when audio is routed to lineout. 
-    // If the audio is not being outputed to lineout hide the global volume slider,
-    // and display our own slider that controlls volume in this mode.
-//    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-//    
-//    if ([routeName isEqualToString:@"LineOut"])
-//    {
-//        [[m_ampView m_volumeSlider] setHidden:NO];
-//        [[m_ampView m_volumeView] setHidden:YES];
-//    }
-//    else
-//    {
-//        [[m_ampView m_volumeSlider] setHidden:YES];
-//        [[m_ampView m_volumeView] setHidden:NO];
-//    }
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
-//    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-//    
-//    [settings setBool:m_bSpeakerRoute forKey:@"RouteToSpeaker"];
-//    
-//    [settings synchronize];
+    [settings setBool:m_bSpeakerRoute forKey:@"RouteToSpeaker"];
     
+    [settings synchronize];
+
 }
 
 - (void)toggleMetronome
@@ -1305,9 +1313,7 @@ BOOL m_skipNotes = NO;
 
 - (void)playMetronomeTick
 {
-    [g_audioController PluckMutedString:0];
-//    [m_audioPlayer play];
-    
+    [g_audioController PluckMutedString:0];    
 }
 
 - (void)setVolumeGain:(float)gain
@@ -1321,37 +1327,7 @@ BOOL m_skipNotes = NO;
 {
     m_bSpeakerRoute = routeIsSpeaker;
     
-    if (m_bSpeakerRoute)
-    {
-        [m_ampView enableSpeaker];
-        [[m_ampView m_volumeSlider] setHidden:NO];
-        [[m_ampView m_volumeView] setHidden:YES];
-    }
-    else
-    {
-        [[m_ampView m_volumeSlider] setHidden:YES];
-        [[m_ampView m_volumeView] setHidden:NO];
-        [m_ampView disableSpeaker];
-    }
-    
-    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-    
-    if ([routeName isEqualToString:@"LineOut"])
-    {
-        [[m_ampView m_volumeSlider] setHidden:NO];
-        [[m_ampView m_volumeView] setHidden:YES];
-    }
-    else
-    {
-        [[m_ampView m_volumeSlider] setHidden:YES];
-        [[m_ampView m_volumeView] setHidden:NO];
-    }
-    
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    
-    [settings setBool:m_bSpeakerRoute forKey:@"RouteToSpeaker"];
-    
-    [settings synchronize];
+    [self updateAudioState];
 }
 
 #pragma mark - Touches

@@ -64,6 +64,7 @@
     IBOutlet UILabel * m_songTitleMenuLabel;
     IBOutlet UILabel * m_songArtistMenuLabel;
     IBOutlet UILabel * m_scoreLabel;
+    IBOutlet UILabel * m_songSharedLabel;
     IBOutlet StarRatingView * m_starRatingView;
 
     BOOL m_isUp;
@@ -99,6 +100,7 @@
 @property (nonatomic, retain) IBOutlet UILabel * m_songTitleMenuLabel;
 @property (nonatomic, retain) IBOutlet UILabel * m_songArtistMenuLabel;
 @property (nonatomic, retain) IBOutlet UILabel * m_scoreLabel;
+@property (nonatomic, retain) IBOutlet UILabel * m_songSharedLabel;
 @property (nonatomic, retain) IBOutlet StarRatingView * m_starRatingView;
 
 @property (retain, nonatomic) IBOutlet UISlider * m_volumeSlider;
