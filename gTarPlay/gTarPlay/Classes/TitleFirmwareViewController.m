@@ -381,7 +381,6 @@ extern TelemetryController * g_telemetryController;
          (m_firmwareAvailableMinorVersion == m_firmwareCurrentMinorVersion) )
     {
         [m_leftButton setEnabled:YES];
-        [m_rightButton setEnabled:YES];
     }
 }
 

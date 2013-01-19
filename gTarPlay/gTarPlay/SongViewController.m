@@ -205,6 +205,7 @@ extern TelemetryController * g_telemetryController;
     
     // Toggle the route so that its what we actually want
     [self toggleAudioRoute];
+    [self updateAudioState];
     
     // testing
 #ifdef Debug_BUILD
@@ -1252,7 +1253,7 @@ BOOL m_skipNotes = NO;
     {
         [g_audioController RouteAudioToDefault];
     }
-        
+    
 }
 
 - (void)updateAudioState
@@ -1284,6 +1285,11 @@ BOOL m_skipNotes = NO;
             [[m_ampView m_volumeView] setHidden:NO];
         }
     }
+    
+    NSString * route = m_bSpeakerRoute ? @"Speaker" : @"Aux";
+    
+    [g_telemetryController logMessage:[NSString stringWithFormat:@"Audio Route in Play set to %@", route]
+                             withType:TelemetryControllerMessageTypeInfo];
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
