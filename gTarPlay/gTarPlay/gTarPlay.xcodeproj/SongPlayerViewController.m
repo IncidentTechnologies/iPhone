@@ -270,8 +270,7 @@ extern AudioController * g_audioController;
 
 - (IBAction)restartButtonClicked:(id)sender
 {
-//    [m_playPauseButton setImage:[UIImage imageNamed:@"PlayerPlayButtonOFF.png"] forState:UIControlStateNormal];
-    [m_playbackController seekToLocation:0]; 
+    [m_playbackController seekToLocation:0];
 }
 
 - (IBAction)songButtonClicked:(id)sender
@@ -293,6 +292,24 @@ extern AudioController * g_audioController;
 }
 
 #pragma mark - Scrubber callback
+
+- (void)haltPlayback
+{
+    m_wasPlaying = [m_playbackController isPlaying];
+    
+    [m_playbackController pauseSong];
+    
+    [m_playPauseButton setImage:[UIImage imageNamed:@"PlayerPlayButton.png"] forState:UIControlStateNormal];
+}
+
+- (void)restorePlayback
+{
+    if ( m_wasPlaying == YES )
+    {
+        [m_playbackController playSong];
+        [m_playPauseButton setImage:[UIImage imageNamed:@"PlayerPauseButton.png"] forState:UIControlStateNormal];
+    }
+}
 
 - (void)pauseSong
 {

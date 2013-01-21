@@ -250,7 +250,7 @@
         
         m_dragging = YES;
         
-        [m_delegate pauseSong];
+        [m_delegate haltPlayback];
         
         [self updateKnobWithPoint:point];
         
@@ -276,7 +276,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	m_dragging = NO;
+    if ( m_dragging == YES )
+    {
+        m_dragging = NO;
+        
+        [m_delegate restorePlayback];
+    }
 }
 
 - (void)updateKnobWithPoint:(CGPoint)point
