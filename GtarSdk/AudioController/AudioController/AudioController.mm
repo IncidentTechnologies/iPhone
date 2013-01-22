@@ -42,47 +42,6 @@ const float g_GraphSampleRate = 44100.0f;
 {
 	if(self = [super init])
 	{
-        // This overrides the 'mute' switch on the iPhone
-        OSStatus status = AudioSessionInitialize ( NULL, NULL, NULL, NULL );
-
-        if ( status == 0 )
-        {
-            
-            // do it
-            UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;
-            status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
-            
-            if ( status == 0 )
-            {
-                NSLog(@"Mute override enabled!");
-            }
-            else
-            {
-                NSError * error = [NSError errorWithDomain:NSOSStatusErrorDomain
-                                            code:status
-                                        userInfo:nil];
-                
-                NSLog(@"SetProp OSStatus: %@", [error description]);
-            }
-   
-        }
-        else
-        {
-            NSError * error = [NSError errorWithDomain:NSOSStatusErrorDomain
-                                                  code:status
-                                              userInfo:nil];
-            
-            NSLog(@"Init OSStatus: %@", [error description]);
-        }        
-        
-        // Register a property change handler
-        status = AudioSessionAddPropertyListener( kAudioSessionProperty_AudioRouteChange, &AudioControllerPropertyListener, self );
-        
-        if ( status != 0 )
-        {
-            NSLog(@"Failed to add property listener!");
-        }
-        
         // Default audio route to speaker
         [self RouteAudioToSpeaker];
         
@@ -588,9 +547,6 @@ const float g_GraphSampleRate = 44100.0f;
     return [m_sampler getCurrentSamplePackIndex];
 }
 
-// This function isn't being used right now, since the audio
-// route can't / won't ever practically change. If this changes,
-// we can come back to this function.
 void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID inID, UInt32 inDataSize, const void *inData)
 {
     if (inID != kAudioSessionProperty_AudioRouteChange) return;
@@ -611,6 +567,25 @@ void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID
     [ac.m_delegate audioRouteChanged:routeIsSpeaker];
     
     [ac AnnounceAudioRouteChange];
+}
+
+// Callback for audio interruption, e.g. a phone call coming in".
+void AudioInterruptionListener (void *inClientData, UInt32 inInterruptionState)
+{
+    AudioController *ac = (AudioController *)inClientData;
+    
+    // stop audio graph when an interruption comes in, and restart it when the interruption
+    // is done.
+    if (inInterruptionState == kAudioSessionBeginInterruption)
+    {
+        AudioSessionSetActive(false);
+        [ac stopAUGraph];
+    }
+    else if (inInterruptionState == kAudioSessionEndInterruption)
+    {
+        AudioSessionSetActive(true);
+        [ac startAUGraph];
+    }
 }
 
 // Audio Render Callback Procedure 
@@ -774,9 +749,53 @@ static OSStatus renderInput(void *inRefCon, AudioUnitRenderActionFlags *ioAction
 {
 	OSStatus result = noErr;
     frequency= 440;
+    
+    OSStatus status = AudioSessionInitialize ( NULL,
+                                              NULL,
+                                              AudioInterruptionListener,
+                                              self );
+    
+    if ( status == 0 )
+    {
+        
+        // do it
+        UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;
+        status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
+        
+        if ( status == 0 )
+        {
+            NSLog(@"Mute override enabled!");
+        }
+        else
+        {
+            NSError * error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                                  code:status
+                                              userInfo:nil];
+            
+            NSLog(@"SetProp OSStatus: %@", [error description]);
+        }
+        
+    }
+    else
+    {
+        NSError * error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                              code:status
+                                          userInfo:nil];
+        
+        NSLog(@"Init OSStatus: %@", [error description]);
+    }
+    
+    // Register a property change handler
+    status = AudioSessionAddPropertyListener( kAudioSessionProperty_AudioRouteChange, &AudioControllerPropertyListener, self );
+    
+    if ( status != 0 )
+    {
+        NSLog(@"Failed to add property listener!");
+    }
+
 	
 	// Create the AUGraph
-	result = NewAUGraph(&augraph);
+	NewAUGraph(&augraph);
 	
 	// AUNodes represent Audio Units on the AUGraph and provide
 	// an easy way to connect them together

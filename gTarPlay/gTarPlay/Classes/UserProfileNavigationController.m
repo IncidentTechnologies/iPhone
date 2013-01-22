@@ -296,7 +296,7 @@ extern UserController * g_userController;
     if ( userResponse.m_status != UserResponseStatusSuccess )
     {
         // Something failed, we are probably offline
-        [self.navigationController popViewControllerAnimated:YES];
+        [self backButtonClicked:nil];
         return;
     }
     
@@ -339,7 +339,6 @@ extern UserController * g_userController;
 //    }
     
     // refresh everything with the new status
-//    [m_userProfileViewController refreshTable];
     [m_userProfileViewController refreshRelationship];
     [m_userProfileSearchViewController refreshTable];
     
@@ -373,10 +372,10 @@ extern UserController * g_userController;
     
     [self endSpinner];
     
-    if ( userResponse.m_status != UserResponseStatusSuccess )
+    if ( userResponse.m_loggedIn == NO )
     {
         // Something failed, we are probably offline
-        [self.navigationController popViewControllerAnimated:YES];
+        [self backButtonClicked:nil];
         return;
     }
     
@@ -399,10 +398,10 @@ extern UserController * g_userController;
     
     [self endSpinner];
     
-    if ( userResponse.m_status != UserResponseStatusSuccess )
+    if ( userResponse.m_loggedIn == NO )
     {
         // Something failed, we are probably offline
-        [self.navigationController popViewControllerAnimated:YES];
+        [self backButtonClicked:nil];
         return;
     }
     
@@ -425,10 +424,10 @@ extern UserController * g_userController;
     
     [self endSpinner];
     
-    if ( userResponse.m_status != UserResponseStatusSuccess )
+    if ( userResponse.m_loggedIn == NO )
     {
         // Something failed, we are probably offline
-        [self.navigationController popViewControllerAnimated:YES];
+        [self backButtonClicked:nil];
         return;
     }
     
@@ -456,10 +455,10 @@ extern UserController * g_userController;
     
     [self endSpinner];
     
-    if ( userResponse.m_status != UserResponseStatusSuccess )
+    if ( userResponse.m_loggedIn == NO )
     {
         // Something failed, we are probably offline
-        [self.navigationController popViewControllerAnimated:YES];
+        [self backButtonClicked:nil];
         return;
     }
     
@@ -491,10 +490,10 @@ extern UserController * g_userController;
     
     [self endSpinner];
     
-    if ( userResponse.m_status != UserResponseStatusSuccess )
+    if ( userResponse.m_loggedIn == NO )
     {
         // Something failed, we are probably offline
-        [self.navigationController popViewControllerAnimated:YES];
+        [self backButtonClicked:nil];
         return;
     }
     
@@ -558,10 +557,10 @@ extern UserController * g_userController;
     
     [m_userProfileSearchViewController.m_activityIndicator stopAnimating];
     
-    if ( userResponse.m_status != UserResponseStatusSuccess )
+    if ( userResponse.m_loggedIn == NO )
     {
         // Something failed, we are probably offline
-        [self.navigationController popViewControllerAnimated:YES];
+        [self backButtonClicked:nil];
         return;
     }
     
@@ -580,10 +579,10 @@ extern UserController * g_userController;
 - (void)userFacebookFriendsSearchCallback:(UserResponse*)userResponse
 {
 
-    if ( userResponse.m_status != UserResponseStatusSuccess )
+    if ( userResponse.m_loggedIn == NO )
     {
         // Something failed, we are probably offline
-        [self.navigationController popViewControllerAnimated:YES];
+        [self backButtonClicked:nil];
         return;
     }
     
@@ -652,7 +651,6 @@ extern UserController * g_userController;
     [self updateDisplayedInfo];
     
     // Update the views
-//    [m_userProfileViewController refreshTable];
     [m_userProfileViewController refreshRelationship];
     
     [self switchInViewController:m_userProfileViewController];
@@ -690,10 +688,7 @@ extern UserController * g_userController;
 
 - (void)changeProfilePicturePopup
 {
-    
-//    [m_changePicturePopupViewController attachToSuperViewWithBlackBackground:self.view];
     [self displayImagePicker];
-    
 }
 
 - (void)updateProfilePicture:(UIImage*)image
@@ -816,7 +811,7 @@ extern UserController * g_userController;
 - (void)songPlayerDisplayUserSong:(UserSong*)userSong
 {
     [m_delegate userProfileNavControllerDisplaySong:userSong];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self backButtonClicked:nil];
 }
 
 #pragma mark -
@@ -888,7 +883,7 @@ extern UserController * g_userController;
 #pragma mark -
 #pragma mark UIImagePickerDelegate
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info
 {
     
     UIImage * pickedImage = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];

@@ -13,6 +13,8 @@
 
 @protocol SongPreviewScrubberViewDelegate <NSObject>
 
+- (void)haltPlayback;
+- (void)restorePlayback;
 - (void)pauseSong;
 
 @end
@@ -33,6 +35,7 @@
     CGFloat m_seekBarHeight;
     
     BOOL m_dragging;
+    
 }
 
 @property (nonatomic, assign) id<SongPreviewScrubberViewDelegate> m_delegate;
