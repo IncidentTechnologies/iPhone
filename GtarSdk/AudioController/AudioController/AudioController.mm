@@ -86,14 +86,15 @@ const float g_GraphSampleRate = 44100.0f;
         m_effects.push_back(m_pDelayEffect);
         
         // Set up the Reverb effect
-        m_pReverbEffect = new Reverb(0.22, g_GraphSampleRate);
+        m_pReverbEffect = new Reverb(0.75, g_GraphSampleRate);
         m_pReverbEffect->SetPassThru(true);
         m_effects.push_back(m_pReverbEffect);
         
         // Set up the distortion effects
-        m_pDistortion = new Distortion(3.78f, 1.0f, g_GraphSampleRate);
+        m_pDistortion = new Distortion(3.78f, 0.25f, g_GraphSampleRate);
         m_pDistortion->SetPassThru(true);
         m_effects.push_back(m_pDistortion);
+        m_pDistortion->getPrimaryParam().getValue();
 
         m_pTanhDistortion = new TanhDistortion(1.0, 1.0, g_GraphSampleRate);
         m_pTanhDistortion->SetPassThru(true);
