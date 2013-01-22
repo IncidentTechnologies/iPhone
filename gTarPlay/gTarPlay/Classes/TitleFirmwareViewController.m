@@ -28,6 +28,14 @@ extern TelemetryController * g_telemetryController;
 
 @synthesize m_currentActivity;
 @synthesize m_availableActivity;
+@synthesize m_buildVersionLabel;
+
+@synthesize m_firmwareFileId;
+
+@synthesize m_firmwareCurrentMajorVersion;
+@synthesize m_firmwareCurrentMinorVersion;
+@synthesize m_firmwareAvailableMajorVersion;
+@synthesize m_firmwareAvailableMinorVersion;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,6 +58,22 @@ extern TelemetryController * g_telemetryController;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    NSString * compileDate = [NSString stringWithUTF8String:__DATE__];
+    NSString * compileTime = [NSString stringWithUTF8String:__TIME__];
+    
+    NSString * dateTimeString = [NSString stringWithFormat:@"%@ %@", compileDate, compileTime];
+    
+    NSDateFormatter * formatter = [[[NSDateFormatter alloc] init] autorelease];
+    
+    [formatter setDateFormat:@"MMM d yyyy HH:mm:ss"];
+    
+    NSDate * date = [formatter dateFromString:dateTimeString];
+    
+    [formatter setDateFormat:@"YYYMMddHHmmss"];
+    
+    [m_buildVersionLabel setText:[NSString stringWithFormat:@"App Build: %@", [formatter stringFromDate:date]]];
+
 }
 
 - (void)viewDidUnload
@@ -66,6 +90,7 @@ extern TelemetryController * g_telemetryController;
     
     self.m_currentActivity = nil;
     self.m_availableActivity = nil;
+    self.m_buildVersionLabel = nil;
     
 }
 
@@ -77,6 +102,7 @@ extern TelemetryController * g_telemetryController;
     [m_statusLabel release];
     [m_currentFirmwareLabel release];
     [m_availableFirmwareLabel release];
+    [m_buildVersionLabel release];
     
     [m_currentActivity release];
     [m_availableActivity release];
@@ -91,6 +117,31 @@ extern TelemetryController * g_telemetryController;
 }
 
 #pragma mark - Attachments
+
+- (void)forceUpdate:(UIView*)view
+{
+    
+    [self attachToSuperview:view];
+    
+    [self compareVersions];
+    
+    [m_statusLabel setText:@"A new firmware version is available, please update to continue."];
+    [m_statusLabel setHidden:NO];
+    
+    [m_currentFirmwareLabel setText:[NSString stringWithFormat:@"Current Version: %d.%d", m_firmwareCurrentMajorVersion, m_firmwareCurrentMinorVersion]];
+    [m_availableFirmwareLabel setText:[NSString stringWithFormat:@"Available Version: %d.%d", m_firmwareAvailableMajorVersion, m_firmwareAvailableMinorVersion]];
+
+}
+
+- (void)softUpdate:(UIView*)view
+{
+    
+    [self attachToSuperview:view];
+    
+    [self checkCurrentFirmwareVersion];
+    [self checkAvailableFirmwareVersion];
+    
+}
 
 - (void)attachToSuperview:(UIView*)view
 {
@@ -109,8 +160,8 @@ extern TelemetryController * g_telemetryController;
     [m_rightButton setSelected:NO];
     [m_rightButton setEnabled:NO];
     
-    [self checkCurrentFirmwareVersion];
-    [self checkAvailableFirmwareVersion];
+//    [self checkCurrentFirmwareVersion];
+//    [self checkAvailableFirmwareVersion];
     
 }
 
@@ -145,27 +196,23 @@ extern TelemetryController * g_telemetryController;
     if ( m_updating )
     {
         // do nothing, this button is actually disabled
+        NSLog(@"Update already in progress");
     }
     else
     {
-        
-        [m_statusLabel setText:@"Progress: 0%"];
-        [m_statusLabel setHidden:NO];
-        
         [self updateFirmware];
-        
     }
 
 }
 
 #pragma mark - Firmware
 
-- (void)cancelFirmware
-{
-    
-    [g_gtarController sendFirmwareUpdateCancelation];
-    
-}
+//- (void)cancelFirmware
+//{
+//    
+//    [g_gtarController sendFirmwareUpdateCancelation];
+//    
+//}
 
 - (void)updateFirmware
 {
@@ -174,25 +221,58 @@ extern TelemetryController * g_telemetryController;
     
     NSData * firmware = [g_fileController getFileOrDownloadSync:m_firmwareFileId];
     
+    if ( firmware == nil )
+    {
+        
+        NSString * msg = [[NSString alloc] initWithFormat:@"Firmware is nil"];
+        
+        NSLog(@"%@", msg);
+        
+        [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeError];
+        
+        [m_statusLabel setText:msg];
+        [m_statusLabel setHidden:NO];
+        
+        [msg release];
+        
+        return;
+    }
+    
     // output some messages
     NSLog(@"Updating with firmware file id: %u length: %u", m_firmwareFileId, [firmware length]);
     
     NSString * msg = [[NSString alloc] initWithFormat:@"Updating with firmware file id: %u length: %u", m_firmwareFileId, [firmware length]];
     
-    [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeError];
+    [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeInfo];
     
     [msg release];
     
-    if ( [firmware length] > 0 )
+    if ( [g_gtarController sendFirmwareUpdate:firmware] == YES )
     {
-        if ( [g_gtarController sendFirmwareUpdate:firmware] == YES )
-        {
-            m_updating = YES;
-            
-//            [m_leftButton setSelected:YES];
-            [m_leftButton setEnabled:NO];
-            [m_rightButton setEnabled:NO];   
-        }
+        NSLog(@"Starting update");
+        
+        m_updating = YES;
+        
+        [m_statusLabel setText:@"Progress: 0%"];
+        [m_statusLabel setHidden:NO];
+        
+        [m_leftButton setEnabled:NO];
+        [m_rightButton setEnabled:NO];
+    }
+    else
+    {
+        
+        NSString * msg = [[NSString alloc] initWithFormat:@"Update failed to start"];
+        
+        NSLog(@"%@", msg);
+        
+        [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeError];
+        
+        [m_statusLabel setText:msg];
+        [m_statusLabel setHidden:NO];
+        
+        [msg release];
+
     }
     
 }
@@ -268,6 +348,7 @@ extern TelemetryController * g_telemetryController;
 - (void)compareVersions
 {
     
+    [m_leftButton setEnabled:NO];
     [m_rightButton setEnabled:NO];
     
     if ( (m_firmwareCurrentMajorVersion == 0) && (m_firmwareCurrentMinorVersion == 0) )
@@ -282,18 +363,26 @@ extern TelemetryController * g_telemetryController;
         return;
     }
     
+    // See if the new version is newer
     if ( m_firmwareAvailableMajorVersion > m_firmwareCurrentMajorVersion )
     {
         [m_rightButton setEnabled:YES];
     }
     
-    
+    // See if the new version is newer    
     if ( (m_firmwareAvailableMajorVersion == m_firmwareCurrentMajorVersion) &&
-        (m_firmwareAvailableMinorVersion > m_firmwareCurrentMinorVersion) )
+         (m_firmwareAvailableMinorVersion > m_firmwareCurrentMinorVersion) )
     {
         [m_rightButton setEnabled:YES];
     }
     
+    // See if we are done
+    if ( (m_firmwareAvailableMajorVersion == m_firmwareCurrentMajorVersion) &&
+         (m_firmwareAvailableMinorVersion == m_firmwareCurrentMinorVersion) )
+    {
+        [m_leftButton setEnabled:YES];
+        [m_rightButton setEnabled:YES];
+    }
 }
 
 #pragma mark - GtarControllerObserver
@@ -341,9 +430,8 @@ extern TelemetryController * g_telemetryController;
     
     [m_statusLabel setText:@"Update Succeeded"];
     
-    [m_leftButton setSelected:NO];
-    [m_rightButton setSelected:YES];
-//    [m_rightButton setEnabled:YES];    
+    [self checkCurrentFirmwareVersion];
+    
 }
 
 - (void)receivedFirmwareUpdateStatusFailed
@@ -365,7 +453,7 @@ extern TelemetryController * g_telemetryController;
     [m_statusLabel setText:@"Update Failed -- Restart the gTar"];
     
 //    [m_leftButton setSelected:NO];
-    [m_leftButton setEnabled:YES];
+//    [m_leftButton setEnabled:YES];
     [m_rightButton setSelected:NO];
     
 }

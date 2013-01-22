@@ -36,7 +36,7 @@
         m_spoofed = NO;
         m_connected = NO;
         
-        m_logLevel = GtarControllerLogLevelError;
+        m_logLevel = GtarControllerLogLevelAll;
         
         m_responseThread = GtarControllerThreadMain;
         
@@ -78,10 +78,11 @@
             }
         }
         
+        [self logMessage:@"GtarController initializing"
+              atLogLevel:GtarControllerLogLevelInfo];
+
         // Create the midi interface
-        m_coreMidiInterface = [[CoreMidiInterface alloc] init];
-        
-        m_coreMidiInterface.m_gtarController = self;
+        m_coreMidiInterface = [[CoreMidiInterface alloc] initWithGtarController:self];
         
         m_observerList = [[NSMutableArray alloc] init];
         
@@ -93,6 +94,8 @@
             m_connected = NO;
         }
         
+        m_firmwareUpdating = NO;
+        m_firmwareCancelation = NO;
     }
     
     return self;
@@ -105,9 +108,7 @@
     [m_coreMidiInterface release];
     
     [m_observerList release];
-    
-    [m_eventLoopTimer invalidate];
-    
+        
     [m_firmware release];
     
     [super dealloc];
@@ -217,7 +218,26 @@
     
 }
 
+- (int)getFretFromMidiNote:(int)midiNote andString:(int)str
+{
+    
+    if ( str < 0 || str > 5 )
+    {
+        return -1;
+    }
+    
+    int fret = midiNote - (40 + 5 * str);
+    
+    if (str > 3 )
+    {
+        fret += 1;
+    }
+    
+    return fret;
+}
+
 #pragma mark - Internal MIDI functions
+
 - (void)midiConnectionHandler:(BOOL)connected
 {
     
@@ -264,7 +284,7 @@
         case 0x8:
         {
             
-            unsigned char fret = [m_coreMidiInterface getFretFromMidiNote:data[1] andString:(str-1)];
+            unsigned char fret = [self getFretFromMidiNote:data[1] andString:(str-1)];
             
             NSMutableDictionary * responseDictionary = [[NSMutableDictionary alloc] init];
             
@@ -282,9 +302,10 @@
         case 0x9:
         {
             
-            unsigned char fret = [m_coreMidiInterface getFretFromMidiNote:data[1] andString:(str-1)];
+            unsigned char fret = [self getFretFromMidiNote:data[1] andString:(str-1)];
             unsigned char velocity = data[2];
             
+            // Filter out any messages that arrive within a certain time
             if ( [self checkNoteInterarrivalTime:currentTime forFret:fret andString:str] == YES )
             {
                 NSMutableDictionary * responseDictionary = [[NSMutableDictionary alloc] init];
@@ -626,7 +647,11 @@
         if ( m_firmwareCancelation == YES )
         {
             
-            m_firmwareCancelation = NO;
+            @synchronized ( self )
+            {
+                m_firmwareUpdating = NO;
+                m_firmwareCancelation = NO;
+            }
             
             // Cancel the transfer, abort now.
             [self logMessage:[NSString stringWithFormat:@"Firmware update canceled, aborting transfer"]
@@ -642,7 +667,7 @@
                       atLogLevel:GtarControllerLogLevelWarn];
                 
             }
-
+            
         }
         else if ( m_firmwareCurrentPage < GTAR_CONTROLLER_MAX_FIRMWARE_PAGES )
         {
@@ -653,10 +678,17 @@
         }
         else
         {
-            // we are done            
-            [m_firmware release];
             
-            m_firmware = nil;
+            @synchronized ( self )
+            {
+                // we are done
+                [m_firmware release];
+                
+                m_firmware = nil;
+                
+                m_firmwareUpdating = NO;
+                m_firmwareCancelation = NO;
+            }
             
             if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusSucceeded)] == YES )
             {
@@ -670,7 +702,7 @@
             }
             
         }
-
+        
     }
     else
     {
@@ -703,12 +735,15 @@
             } break;
         }
         
-        // If we already wanted to cancel the transfer, we can rest assured it will not continue
-        m_firmwareCancelation = NO;
-        
-        [m_firmware release];
-        
-        m_firmware = nil;
+        @synchronized ( self )
+        {
+            [m_firmware release];
+            
+            m_firmware = nil;
+            
+            m_firmwareUpdating = NO;
+            m_firmwareCancelation = NO;
+        }
         
         if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusFailed)] == YES )
         {
@@ -722,6 +757,7 @@
         }
         
     }
+    
     
 }
 
@@ -1511,46 +1547,60 @@
         return NO;
     }
     
-    if ( m_firmwareCancelation == YES )
+    @synchronized ( self )
     {
-        [self logMessage:@"SendFirmwareUpdate: Cancellation in progress"
-              atLogLevel:GtarControllerLogLevelWarn];
-        return NO;
+        
+        if ( m_firmwareCancelation == YES )
+        {
+            [self logMessage:@"SendFirmwareUpdate: Cancellation in progress"
+                  atLogLevel:GtarControllerLogLevelWarn];
+            return NO;
+        }
+        
+        if ( m_firmwareUpdating == YES )
+        {
+            [self logMessage:@"SendFirmwareUpdate: Firmware update in progress"
+                  atLogLevel:GtarControllerLogLevelWarn];
+            return NO;
+        }
+        
+        [m_firmware release];
+        
+        m_firmware = [firmware retain];
+        
+        m_firmwareCurrentPage = 0;
+        
+        BOOL result = [self sendFirmwarePage:m_firmwareCurrentPage];
+        
+        if ( result == NO )
+        {
+            [self logMessage:@"SendFirmwareUpdate: Failed to send firmware package page"
+                  atLogLevel:GtarControllerLogLevelError];
+        }
+        
+        return result;
     }
-    
-    [m_firmware release];
-    
-    m_firmware = [firmware retain];
-    
-    m_firmwareCurrentPage = 0;
-    
-    BOOL result = [self sendFirmwarePage:m_firmwareCurrentPage];
-    
-    if ( result == NO )
-    {
-        [self logMessage:@"SendFirmwareUpdate: Failed to send firmware package page"
-              atLogLevel:GtarControllerLogLevelError];
-    }
-    
-    return result; 
 }
 
 - (BOOL)sendFirmwareUpdateCancelation
 {
     
-    // Only cancel if we are updating a firmware
-    if ( [m_firmware length] > 0 )
+    @synchronized ( self )
     {
-        
-        [self logMessage:@"Canceling firmware update"
-              atLogLevel:GtarControllerLogLevelWarn];
-        
-        m_firmwareCancelation = YES;
-        
-        [m_firmware release];
-        
-        m_firmware = nil;
-        
+        // Only cancel if we are updating a firmware
+        if ( m_firmwareUpdating == YES )
+        {
+            
+            [self logMessage:@"Canceling firmware update"
+                  atLogLevel:GtarControllerLogLevelWarn];
+            
+            m_firmwareCancelation = YES;
+            
+            [m_firmware release];
+            
+            m_firmware = nil;
+            
+        }
     }
     
     return YES;

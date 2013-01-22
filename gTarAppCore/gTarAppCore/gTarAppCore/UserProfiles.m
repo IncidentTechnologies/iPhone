@@ -40,7 +40,6 @@
 - (void)addProfilesFromXmlDom:(XmlDom*)xmlDom
 {
     
-//    XmlDom * profilesDom = [xmlDom getChildWithName:@"UserProfiles"];
     NSArray * profilesArray = [xmlDom getChildArrayWithName:@"UserProfile"];
     
     for ( XmlDom * profileDom in profilesArray )
@@ -51,6 +50,15 @@
         
         [userProfile release];
     }
+    
+}
+
+- (void)dealloc
+{
+    
+    [m_profilesArray release];
+    
+    [super dealloc];
     
 }
 

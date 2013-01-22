@@ -31,8 +31,8 @@
         
         m_selectedIndex = 0;
 
-        self.m_scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        self.m_contentSubviews = [[NSMutableArray alloc] init];
+        m_scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+        m_contentSubviews = [[NSMutableArray alloc] init];
 
         m_scrollView.backgroundColor = [UIColor clearColor];
         m_scrollView.showsVerticalScrollIndicator = NO;

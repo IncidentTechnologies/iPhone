@@ -25,7 +25,7 @@
         // Get the Movie
 //        NSString * moviePath = [[NSBundle mainBundle] pathForResource:@"gTar Teaser Final Test" ofType:@"mov"];
         NSString * moviePath = [[NSBundle mainBundle] pathForResource:@"gTar Teaser Final Test 480" ofType:@"m4v"];
-        NSURL * movieURL = [[NSURL fileURLWithPath:moviePath] retain];
+        NSURL * movieURL = [NSURL fileURLWithPath:moviePath];
                 
         m_moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:movieURL];
         

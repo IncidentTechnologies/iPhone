@@ -31,9 +31,9 @@
         
         [self addSessionsFromXmlDom:xmlDom];
         
+        [m_sessionsArray sortUsingSelector:@selector(compareCreatedNewestFirst:)];
+        
     }
-    
-    [m_sessionsArray sortUsingSelector:@selector(compareCreatedNewestFirst:)];
     
     return self;
     

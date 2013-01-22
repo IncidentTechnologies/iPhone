@@ -50,8 +50,7 @@ enum GtarControllerLogLevel
     GtarControllerLogLevelError,
     GtarControllerLogLevelWarn,
     GtarControllerLogLevelInfo,
-    GtarControllerLogLevelAll,
-    
+    GtarControllerLogLevelAll
 };
 typedef enum GtarControllerLogLevel GtarControllerLogLevel;
 

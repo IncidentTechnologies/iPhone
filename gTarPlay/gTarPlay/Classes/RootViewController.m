@@ -82,7 +82,7 @@ extern TelemetryController * g_telemetryController;
         m_titleFacebookViewController = [[TitleFacebookViewController alloc] initWithNibName:nil bundle:nil];
         m_titleFirmwareViewController = [[TitleFirmwareViewController alloc] initWithNibName:nil bundle:nil];
         
-        // TODO title firm
+        
         
         // we should just move the global UC into the controllers instead of doing this
         m_titleLoginViewController.m_userController = g_userController;
@@ -159,9 +159,9 @@ extern TelemetryController * g_telemetryController;
 	// Setup UI
 	//
     m_pleaseLoginPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
-    m_tutorialIndexPopup.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
+    m_tutorialIndexPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
     m_tutorialIndexPopup.m_popupTitle = @"Tutorials";
-    m_creditsPopup.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
+    m_creditsPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
     m_creditsPopup.m_popupTitle = @"Incident Technologies";
     m_infoPopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
     m_disconnectedDevicePopup.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
@@ -254,9 +254,6 @@ extern TelemetryController * g_telemetryController;
         [settings setBool:YES forKey:@"RouteToSpeaker"];
         
         [settings synchronize];
-        
-//        [self welcomeTutorialButtonClicked:nil];
-        
 	}
     
     if ( guitarConnectedBefore == NO )
@@ -285,6 +282,7 @@ extern TelemetryController * g_telemetryController;
     if ( g_cloudController.m_loggedIn == YES )
     {
         [g_telemetryController uploadLogMessages];
+        [m_accountViewController updateFeeds];
     }
     
 }
@@ -313,6 +311,16 @@ extern TelemetryController * g_telemetryController;
 	return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
 }
 
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscapeLeft;
+}
+
 #pragma mark -
 #pragma mark Button click handling
 
@@ -325,11 +333,13 @@ extern TelemetryController * g_telemetryController;
 //        return;
 //    }
     
+#ifndef Debug_BUILD
     if ( g_gtarController.connected == NO )
     {
         [m_disconnectedDevicePopup attachToSuperView:self.view];
         return;
     }
+#endif
     
     m_requireLogin = YES;
     
@@ -350,11 +360,13 @@ extern TelemetryController * g_telemetryController;
 //        return;
 //    }
 
+#ifndef Debug_BUILD
     if ( g_gtarController.connected == NO )
     {
         [m_disconnectedDevicePopup attachToSuperView:self.view];
         return;
     }
+#endif
     
     m_requireLogin = NO;
     
@@ -418,7 +430,8 @@ extern TelemetryController * g_telemetryController;
 //    [self checkCurrentFirmwareVersion];
 //    [self checkAvailableFirmwareVersion];
     
-    [m_titleFirmwareViewController attachToSuperview:self.view];
+//    [m_titleFirmwareViewController attachToSuperview:self.view];
+    [m_titleFirmwareViewController softUpdate:self.view];
     
 }
 
@@ -500,7 +513,11 @@ extern TelemetryController * g_telemetryController;
     
     m_sequenceFret = 16;
     
-    [self sequenceIteration];
+    [NSTimer scheduledTimerWithTimeInterval:0.2
+                                     target:self
+                                   selector:@selector(sequenceIteration)
+                                   userInfo:nil
+                                    repeats:NO];
     
 }
 
@@ -523,17 +540,17 @@ extern TelemetryController * g_telemetryController;
     if ( m_sequenceFret >= 8 )
     {
         // Do it one more time
-        [NSTimer scheduledTimerWithTimeInterval:0.10f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.12f target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
     }
     else if ( m_sequenceFret >= 0 )
     {
         // Do it one more time
-        [NSTimer scheduledTimerWithTimeInterval:(0.01f*m_sequenceFret) target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:(0.012f*m_sequenceFret) target:self selector:@selector(sequenceIteration) userInfo:nil repeats:NO];
     }
     else
     {
         // We are done, turn the leds off after a pause
-        [NSTimer scheduledTimerWithTimeInterval:0.3f target:g_gtarController selector:@selector(turnOffAllLeds) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.4f target:g_gtarController selector:@selector(turnOffAllLeds) userInfo:nil repeats:NO];
     }
     
 }
@@ -812,6 +829,120 @@ extern TelemetryController * g_telemetryController;
     
 }
 
+#pragma mark - Firmware handlers.
+
+- (void)checkCurrentFirmwareVersion
+{
+    
+    NSLog(@"Checking gtar firmware version");
+    
+    g_gtarController.m_delegate = self;
+    
+    if ( [g_gtarController sendRequestFirmwareVersion] == NO )
+    {
+        
+        NSLog(@"Firmware failed to update");
+        
+        m_titleFirmwareViewController.m_firmwareCurrentMajorVersion = 0;
+        m_titleFirmwareViewController.m_firmwareCurrentMinorVersion = 0;
+        
+    }
+    
+}
+
+- (void)checkAvailableFirmwareVersion
+{
+    // Query the server
+    NSLog(@"Checking available gtar firmware version");
+    
+    [g_cloudController requestCurrentFirmwareVersionCallbackObj:self andCallbackSel:@selector(receivedAvailableFirmwareVersion:)];
+    
+}
+
+- (void)receivedAvailableFirmwareVersion:(CloudResponse*)cloudResponse
+{
+    
+    m_titleFirmwareViewController.m_firmwareFileId = 0;
+    m_titleFirmwareViewController.m_firmwareAvailableMajorVersion = 0;
+    m_titleFirmwareViewController.m_firmwareAvailableMinorVersion = 0;
+    
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+    {
+        
+        // Get the new binary
+        [g_fileController precacheFile:cloudResponse.m_responseFileId];
+        
+        m_titleFirmwareViewController.m_firmwareFileId = cloudResponse.m_responseFileId;
+        m_titleFirmwareViewController.m_firmwareAvailableMajorVersion = cloudResponse.m_responseFirmwareMajorVersion;
+        m_titleFirmwareViewController.m_firmwareAvailableMinorVersion = cloudResponse.m_responseFirmwareMinorVersion;
+        
+        NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+        
+        [settings setInteger:m_titleFirmwareViewController.m_firmwareFileId forKey:@"FirmwareFileId"];
+        [settings setInteger:m_titleFirmwareViewController.m_firmwareAvailableMajorVersion forKey:@"FirmwareMajorVersion"];
+        [settings setInteger:m_titleFirmwareViewController.m_firmwareAvailableMinorVersion forKey:@"FirmwareMinorVersion"];
+        
+        [settings synchronize];
+        
+    }
+    else
+    {
+        
+        //
+        // If we failed to get the new one, get the old one.
+        //
+        NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+        
+        NSInteger firmwareFileId = [settings integerForKey:@"FirmwareFileId"];
+        NSInteger firmwareMajorVersion = [settings integerForKey:@"FirmwareMajorVersion"];
+        NSInteger firmwareMinorVersion = [settings integerForKey:@"FirmwareMinorVersion"];
+        
+        if ( firmwareFileId != 0 &&
+             firmwareMajorVersion != 0 &&
+             firmwareMinorVersion != 0 )
+        {
+            m_titleFirmwareViewController.m_firmwareFileId = firmwareFileId;
+            m_titleFirmwareViewController.m_firmwareAvailableMajorVersion = firmwareMajorVersion;
+            m_titleFirmwareViewController.m_firmwareAvailableMinorVersion = firmwareMinorVersion;
+        }
+        
+    }
+    
+    [self compareVersions];
+    
+}
+
+- (void)compareVersions
+{
+    
+    if ( (m_titleFirmwareViewController.m_firmwareCurrentMajorVersion == 0) &&
+         (m_titleFirmwareViewController.m_firmwareCurrentMinorVersion == 0) )
+    {
+        // Not available
+        return;
+    }
+    
+    if ( (m_titleFirmwareViewController.m_firmwareAvailableMajorVersion == 0) &&
+         (m_titleFirmwareViewController.m_firmwareAvailableMinorVersion == 0) )
+    {
+        // Not available
+        return;
+    }
+    
+    if ( m_titleFirmwareViewController.m_firmwareAvailableMajorVersion >
+         m_titleFirmwareViewController.m_firmwareCurrentMajorVersion )
+    {
+        [m_titleFirmwareViewController forceUpdate:self.view];
+    }
+    
+    if ( (m_titleFirmwareViewController.m_firmwareAvailableMajorVersion == m_titleFirmwareViewController.m_firmwareCurrentMajorVersion) &&
+         (m_titleFirmwareViewController.m_firmwareAvailableMinorVersion > m_titleFirmwareViewController.m_firmwareCurrentMinorVersion) )
+    {
+        [m_titleFirmwareViewController forceUpdate:self.view];
+    }
+    
+}
+
 #pragma mark - PopupViewControllerDelegate
 
 - (void)popupClosed:(PopupViewController *)popup
@@ -900,7 +1031,7 @@ extern TelemetryController * g_telemetryController;
         m_songPlaybackViewController.m_popupDelegate = self;
     }
     
-    [m_songPlaybackViewController attachToSuperView:[self.view superview] andPlaySongSession:session];
+    [m_songPlaybackViewController attachToSuperView:self.view andPlaySongSession:session];
 
 }
 
@@ -924,9 +1055,6 @@ extern TelemetryController * g_telemetryController;
 {
     
     [m_gtarLogoRed setHidden:YES];
-    
-    // See if they are logged in, otherwise make them log in
-//    [self checkUserLoggedIn];
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
@@ -954,6 +1082,8 @@ extern TelemetryController * g_telemetryController;
     
     [self playStartupLightSequence];
     
+    [self checkCurrentFirmwareVersion];
+    
 }
 
 - (void)gtarDisconnected
@@ -961,6 +1091,20 @@ extern TelemetryController * g_telemetryController;
     [m_infoPopup detachFromSuperView];
     
     [m_gtarLogoRed setHidden:NO];
+}
+
+#pragma mark - GtarControllerDelegate
+
+- (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
+{
+    
+    NSLog(@"Receiving firmware version: %d.%d", majorVersion, minorVersion);
+    
+    m_titleFirmwareViewController.m_firmwareCurrentMajorVersion = majorVersion;
+    m_titleFirmwareViewController.m_firmwareCurrentMinorVersion = minorVersion;
+    
+    [self checkAvailableFirmwareVersion];
+    
 }
 
 #pragma mark - FacebookDelegate

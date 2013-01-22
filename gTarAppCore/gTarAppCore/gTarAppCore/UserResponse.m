@@ -27,7 +27,8 @@
     {
         
         m_userRequest = [userRequest retain];
-    
+        
+        self.m_statusText = @"Connection error";
     }
     
     return self;

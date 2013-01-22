@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
+		EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC24DC08161A821200016B78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		EC24DC09161A821200016B78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		EC24DC0A161A821200016B78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -737,7 +739,6 @@
 		EC24DEF6161A8A1B00016B78 /* AuxSpeakerSwitch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D26A218149BEB4C008CA090 /* AuxSpeakerSwitch.png */; };
 		EC24DEF7161A8A1B00016B78 /* SliderKnob.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D1157491496D91E0058734F /* SliderKnob.png */; };
 		EC24DEF8161A8A1B00016B78 /* HomeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D1157411495A0D80058734F /* HomeButton.png */; };
-		EC24DEFA161A8A1B00016B78 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D115739149599500058734F /* SliderEndMax.png */; };
 		EC24DEFB161A8A1B00016B78 /* SliderEndMin.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D11573A149599500058734F /* SliderEndMin.png */; };
 		EC24DEFD161A8A1B00016B78 /* EffectOffButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91973149159DF00BE8751 /* EffectOffButton.png */; };
 		EC24DEFE161A8A1B00016B78 /* EffectOnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91974149159DF00BE8751 /* EffectOnButton.png */; };
@@ -985,6 +986,8 @@
 		EC24DFF2161A8B0A00016B78 /* StoreBuyCreditsPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC31BB8A14E3474C00DC7083 /* StoreBuyCreditsPopupViewController.xib */; };
 		EC24DFF3161A8B0A00016B78 /* CustomNavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC18A6EE13D90249004A2667 /* CustomNavigationViewController.xib */; };
 		EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
+		EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
 		ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */; };
 		ECBBBF6C161CF1F400BC5BE2 /* InstrumentTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF68161CF1F400BC5BE2 /* InstrumentTab.png */; };
 		ECBBBF6D161CF1F400BC5BE2 /* MenuTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF69161CF1F400BC5BE2 /* MenuTab.png */; };
@@ -1732,7 +1735,6 @@
 		ECC120C8162D07AD001A231A /* AuxSpeakerSwitch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D26A218149BEB4C008CA090 /* AuxSpeakerSwitch.png */; };
 		ECC120C9162D07AD001A231A /* SliderKnob.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D1157491496D91E0058734F /* SliderKnob.png */; };
 		ECC120CA162D07AD001A231A /* HomeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D1157411495A0D80058734F /* HomeButton.png */; };
-		ECC120CB162D07AD001A231A /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D115739149599500058734F /* SliderEndMax.png */; };
 		ECC120CC162D07AD001A231A /* SliderEndMin.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D11573A149599500058734F /* SliderEndMin.png */; };
 		ECC120CD162D07AD001A231A /* EffectOffButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91973149159DF00BE8751 /* EffectOffButton.png */; };
 		ECC120CE162D07AD001A231A /* EffectOnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91974149159DF00BE8751 /* EffectOnButton.png */; };
@@ -2002,7 +2004,6 @@
 		8D1107310486CEB800E47090 /* gTarPlay-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "gTarPlay-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		9D0BFA1B14F5D5DA00D05B04 /* TransparentAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentAreaView.h; sourceTree = "<group>"; };
 		9D0BFA1C14F5D5DA00D05B04 /* TransparentAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentAreaView.m; sourceTree = "<group>"; };
-		9D115739149599500058734F /* SliderEndMax.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderEndMax.png; path = images/FreePlay/SliderEndMax.png; sourceTree = "<group>"; };
 		9D11573A149599500058734F /* SliderEndMin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderEndMin.png; path = images/FreePlay/SliderEndMin.png; sourceTree = "<group>"; };
 		9D1157411495A0D80058734F /* HomeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HomeButton.png; path = images/FreePlay/HomeButton.png; sourceTree = "<group>"; };
 		9D1157491496D91E0058734F /* SliderKnob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderKnob.png; path = images/FreePlay/SliderKnob.png; sourceTree = "<group>"; };
@@ -2518,6 +2519,7 @@
 		EC020DD0141EA28600627303 /* SongPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongPlayerViewController.h; path = ../gTarPlay.xcodeproj/SongPlayerViewController.h; sourceTree = "<group>"; };
 		EC020DD1141EA28700627303 /* SongPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SongPlayerViewController.m; path = ../gTarPlay.xcodeproj/SongPlayerViewController.m; sourceTree = "<group>"; };
 		EC020DD2141EA28A00627303 /* SongPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SongPlayerViewController.xib; path = ../gTarPlay.xcodeproj/SongPlayerViewController.xib; sourceTree = "<group>"; };
+		EC0B6E7416A5112800DB2917 /* SliderEndMax.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderEndMax.png; path = images/FreePlay/SliderEndMax.png; sourceTree = "<group>"; };
 		EC0B884414B3D20B00D40BC8 /* SubAmpMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SubAmpMenu.png; sourceTree = "<group>"; };
 		EC0B884514B3D20B00D40BC8 /* VolumeSlider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VolumeSlider.png; sourceTree = "<group>"; };
 		EC0B884814B3D20B00D40BC8 /* Amp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Amp.png; sourceTree = "<group>"; };
@@ -2816,6 +2818,8 @@
 		EC7D5B5613D8EF9600FC2177 /* CustomNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationViewController.m; sourceTree = "<group>"; };
 		EC7D5B5A13D8EFD200FC2177 /* CustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomViewController.h; sourceTree = "<group>"; };
 		EC7D5B5B13D8EFD200FC2177 /* CustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomViewController.m; sourceTree = "<group>"; };
+		EC7D887A1651CE86002E2F77 /* gTarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarNavigationController.h; sourceTree = "<group>"; };
+		EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarNavigationController.m; sourceTree = "<group>"; };
 		EC8310651512A1F0003432B6 /* Options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Options.png; sourceTree = "<group>"; };
 		EC8310661512A1F0003432B6 /* OptionsPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OptionsPressed.png; sourceTree = "<group>"; };
 		EC8390DD15191B95004E66AE /* MenuSwitchON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuSwitchON.png; sourceTree = "<group>"; };
@@ -3163,12 +3167,14 @@
 		29B97315FDCFA39411CA2CEA /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
 				ECC11D7716264220001A231A /* gTarPlayApplication.h */,
 				ECC11D7816264220001A231A /* gTarPlayApplication.m */,
 				1D3623240D0F684500981E51 /* gTarPlayAppDelegate.h */,
 				1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */,
-				28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
+				EC7D887A1651CE86002E2F77 /* gTarNavigationController.h */,
+				EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */,
 			);
 			name = AppDelegate;
 			path = ..;
@@ -3755,8 +3761,8 @@
 				9D26A218149BEB4C008CA090 /* AuxSpeakerSwitch.png */,
 				9D1157491496D91E0058734F /* SliderKnob.png */,
 				9D1157411495A0D80058734F /* HomeButton.png */,
-				9D115739149599500058734F /* SliderEndMax.png */,
 				9D11573A149599500058734F /* SliderEndMin.png */,
+				EC0B6E7416A5112800DB2917 /* SliderEndMax.png */,
 				9DD91973149159DF00BE8751 /* EffectOffButton.png */,
 				9DD91974149159DF00BE8751 /* EffectOnButton.png */,
 				9DD91975149159DF00BE8751 /* EffectSelectOffButton.png */,
@@ -5430,7 +5436,6 @@
 				EC24DEF6161A8A1B00016B78 /* AuxSpeakerSwitch.png in Resources */,
 				EC24DEF7161A8A1B00016B78 /* SliderKnob.png in Resources */,
 				EC24DEF8161A8A1B00016B78 /* HomeButton.png in Resources */,
-				EC24DEFA161A8A1B00016B78 /* SliderEndMax.png in Resources */,
 				EC24DEFB161A8A1B00016B78 /* SliderEndMin.png in Resources */,
 				EC24DEFD161A8A1B00016B78 /* EffectOffButton.png in Resources */,
 				EC24DEFE161A8A1B00016B78 /* EffectOnButton.png in Resources */,
@@ -5687,6 +5692,7 @@
 				ECBF4FDF1638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */,
 				ECBF4FFD1641E3C0003F0C8C /* TitleCancelButton.png in Resources */,
 				ECBF4FFF1641E3C0003F0C8C /* TitleUpdateButton.png in Resources */,
+				EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6325,7 +6331,6 @@
 				ECC120C8162D07AD001A231A /* AuxSpeakerSwitch.png in Resources */,
 				ECC120C9162D07AD001A231A /* SliderKnob.png in Resources */,
 				ECC120CA162D07AD001A231A /* HomeButton.png in Resources */,
-				ECC120CB162D07AD001A231A /* SliderEndMax.png in Resources */,
 				ECC120CC162D07AD001A231A /* SliderEndMin.png in Resources */,
 				ECC120CD162D07AD001A231A /* EffectOffButton.png in Resources */,
 				ECC120CE162D07AD001A231A /* EffectOnButton.png in Resources */,
@@ -6582,6 +6587,7 @@
 				ECBF4FE01638C591003F0C8C /* TitleFirmwareViewController.xib in Resources */,
 				ECBF4FFE1641E3C0003F0C8C /* TitleCancelButton.png in Resources */,
 				ECBF50001641E3C0003F0C8C /* TitleUpdateButton.png in Resources */,
+				EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6681,6 +6687,7 @@
 				EC24DC83161A89B300016B78 /* CustomBeveledView.m in Sources */,
 				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
 				ECBF4FDD1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
+				EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6777,6 +6784,7 @@
 				ECC11E44162D07AD001A231A /* CustomBeveledView.m in Sources */,
 				ECC11E45162D07AD001A231A /* gTarPlayApplication.m in Sources */,
 				ECBF4FDE1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
+				EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6849,7 +6857,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6861,7 +6869,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -6872,7 +6880,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
@@ -6904,7 +6912,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = gTarPlay;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -6929,7 +6937,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = gTarPlay;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

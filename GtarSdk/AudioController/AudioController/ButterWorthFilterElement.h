@@ -151,7 +151,7 @@ private:
          if(pSamples_n != m_order)
          return 0;          
          */
-        while(!m_fReady);   // wait until the filter is ready
+//        while(!m_fReady);   // wait until the filter is ready
         
         retVal = m_pAC[0]*pSamples[0] + m_pAC[1]*pSamples[1] + m_pAC[2]*pSamples[2] - m_pBC[1]*m_pDelayLine[0] - m_pBC[2]*m_pDelayLine[1];
         
