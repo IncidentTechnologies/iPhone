@@ -17,28 +17,34 @@ public:
     // provided
     bool CalculateCoefficients(int k, float cutoff, float SamplingFrequency)
     {
-        m_fReady = false;
         
-        m_k = k;
-        m_SamplingFrequency = SamplingFrequency;
-        m_cutoff = 2.0 * M_PI * cutoff;
-        double freqRatio = m_SamplingFrequency / cutoff;
-        double OmegaPrime = tan(M_PI / freqRatio);
-        double c = 1.0 + 2.0*cos((M_PI * (2*m_k + 1)) / (2 * m_order)) * OmegaPrime + pow(OmegaPrime, 2.0);
+        if ([lock tryLock])
+        {
+            m_fReady = false;
+            
+            m_k = k;
+            m_SamplingFrequency = SamplingFrequency;
+            m_cutoff = 2.0 * M_PI * cutoff;
+            double freqRatio = m_SamplingFrequency / cutoff;
+            double OmegaPrime = tan(M_PI / freqRatio);
+            double c = 1.0 + 2.0*cos((M_PI * (2*m_k + 1)) / (2 * m_order)) * OmegaPrime + pow(OmegaPrime, 2.0);
+            
+            // Set up A coefficients
+            // this assumes m_pAC is a valid 3 length double buffer
+            m_pAC[0] = m_pAC[2] = pow(OmegaPrime, 2.0) / c;
+            m_pAC[1] = m_pAC[0] * 2.0;
+            
+            // Set up B coefficients
+            // This assumes m_pBC is a valid 3 length double buffer
+            m_pBC[0] = 0;           // this coefficient is not used
+            m_pBC[1] = (2.0 * (pow(OmegaPrime, 2.0) - 1.0)) / c;
+            m_pBC[2] = (1.0 - 2.0*cos((M_PI * (2*m_k + 1)) / (2 * m_order)) * OmegaPrime + pow(OmegaPrime, 2.0)) / c;
+            
+            m_fReady = true;
+            
+            [lock unlock];
+        }
         
-        // Set up A coefficients
-        // this assumes m_pAC is a valid 3 length double buffer
-        m_pAC[0] = m_pAC[2] = pow(OmegaPrime, 2.0) / c;
-        m_pAC[1] = m_pAC[0] * 2.0;
-        
-        // Set up B coefficients
-        // This assumes m_pBC is a valid 3 length double buffer
-        m_pBC[0] = 0;           // this coefficient is not used
-        m_pBC[1] = (2.0 * (pow(OmegaPrime, 2.0) - 1.0)) / c;
-        m_pBC[2] = (1.0 - 2.0*cos((M_PI * (2*m_k + 1)) / (2 * m_order)) * OmegaPrime + pow(OmegaPrime, 2.0)) / c;
-        
-        
-        m_fReady = true;
         return true;
     }
     
@@ -53,6 +59,8 @@ public:
     m_pSampleDelay_n(0),
     m_fReady(false)
     {
+        lock = [[NSLock alloc] init];
+        
         // set up the sample delay line
         //m_pSampleDelay_n = m_order;
         m_pSampleDelay_n = 3;
@@ -149,27 +157,32 @@ private:
         
         /*
          if(pSamples_n != m_order)
-         return 0;          
+         return 0;
          */
-//        while(!m_fReady);   // wait until the filter is ready
-        
-        retVal = m_pAC[0]*pSamples[0] + m_pAC[1]*pSamples[1] + m_pAC[2]*pSamples[2] - m_pBC[1]*m_pDelayLine[0] - m_pBC[2]*m_pDelayLine[1];
-        
-        // prevent clip
-        if(retVal > 1.0) 
-            retVal = 1.0;
-        else if(retVal < -1.0) 
-            retVal = -1.0;
-        
-        // Shift over the delay line
-        for(int i = m_order - 1; i > 0; i--)
-            m_pDelayLine[i] = m_pDelayLine[i - 1];
-        m_pDelayLine[0] = retVal;
+        if ([lock tryLock])
+        {
+            retVal = m_pAC[0]*pSamples[0] + m_pAC[1]*pSamples[1] + m_pAC[2]*pSamples[2] - m_pBC[1]*m_pDelayLine[0] - m_pBC[2]*m_pDelayLine[1];
+            
+            // prevent clip
+            if(retVal > 1.0)
+                retVal = 1.0;
+            else if(retVal < -1.0)
+                retVal = -1.0;
+            
+            // Shift over the delay line
+            for(int i = m_order - 1; i > 0; i--)
+                m_pDelayLine[i] = m_pDelayLine[i - 1];
+            m_pDelayLine[0] = retVal;
+            
+            [lock unlock];
+        }
         
         return retVal;
     }
     
 private:
+    
+    NSLock *lock;
     int m_order;
     int m_k;
     double m_cutoff;
