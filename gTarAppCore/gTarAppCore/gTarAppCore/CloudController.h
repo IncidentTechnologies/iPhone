@@ -17,7 +17,9 @@
 @interface CloudController : NSObject
 {
     
+    BOOL m_online;
     BOOL m_loggedIn;
+    
     NSString * m_username;
     NSString * m_facebookAccessToken;
     
@@ -31,6 +33,8 @@
     
     NSString * m_serverName;
     NSString * m_serverRoot;
+    
+    NSInteger m_errorsRecently;
 	
 }
 
@@ -45,6 +49,11 @@
 //- (NSHTTPCookie*)getCakePhpCookie;
 //- (void)setCakePhpCookie:(NSHTTPCookie*)cookie;
 
+- (void)handleError;
+- (void)errorWindowFinished;
+- (void)queryOnlineStatus;
+- (void)receiveOnlineStatus:(CloudResponse*)cloudResponse;
+
 //
 // Syncronous convenience functions
 //
@@ -55,6 +64,7 @@
 //
 // external request access
 //
+- (CloudRequest*)requestServerStatusCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestFile:(NSInteger)fileId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 
 - (CloudRequest*)requestRegisterUsername:(NSString*)username andPassword:(NSString*)password andEmail:(NSString*)email andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
