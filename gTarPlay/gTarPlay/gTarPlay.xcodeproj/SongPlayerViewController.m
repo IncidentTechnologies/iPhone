@@ -116,6 +116,11 @@ extern AudioController * g_audioController;
     
 }
 
+- (IBAction)fullScreenButtonClicked:(id)sender
+{
+    // no-op 
+}
+
 - (void)attachToSuperView:(UIView*)superview andPlaySongSession:(UserSongSession*)userSongSessions
 {
     
