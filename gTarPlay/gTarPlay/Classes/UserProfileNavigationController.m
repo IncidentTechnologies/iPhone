@@ -888,7 +888,31 @@ extern UserController * g_userController;
     
     UIImage * pickedImage = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
     
-    [self updateProfilePicture:pickedImage];
+    UIImageOrientation orientation = pickedImage.imageOrientation;
+    
+    CGSize newSize = pickedImage.size;
+    
+    // Cap the size at something reasonable -- 500x500 is a good size.
+    if ( newSize.height >  500.0f )
+    {
+        newSize.width = (500.0f / newSize.height) * newSize.width;
+        newSize.height = 500.0f;
+    }
+    if ( newSize.width >  500.0f )
+    {
+        newSize.height = (500.0f / newSize.width) * newSize.height;
+        newSize.width = 500.0f;
+    }
+    
+    UIGraphicsBeginImageContext( newSize );
+    
+    // Resizing the image implicitly re-orients
+    
+    [pickedImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+
+    UIImage * editedImage =  UIGraphicsGetImageFromCurrentImageContext();
+
+    [self updateProfilePicture:editedImage];
     
     [pickedImage release];
     
