@@ -223,13 +223,15 @@ TelemetryController * g_telemetryController;
     // Clear the cache if this changes in the background
     [self checkAndClearCache];
     
+    [g_fileController checkCacheSize];
+    
     if ( g_rootViewController.m_waitingForFacebook == YES )
     {
         [g_rootViewController displayWelcomeDialog];
     }
     
     [g_facebook extendAccessTokenIfNeeded];
-
+    
 }
 
 

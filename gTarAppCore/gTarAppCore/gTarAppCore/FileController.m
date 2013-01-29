@@ -13,6 +13,9 @@
 #import "CloudResponse.h"
 #import "FileRequest.h"
 
+#define MAX_FILE_CACHE_SIZE 100*1024*1024 // 100 MB
+#define MAX_FILE_CACHE_SIZE_BUFFER 10*1024*1024 // 10 MB
+
 @implementation FileController
 
 @synthesize m_cloudController;
@@ -30,72 +33,16 @@
         m_fileCacheMap = [[NSMutableDictionary alloc] init];
         
         m_pendingFileRequests = [[NSMutableDictionary alloc] init];
-        
+                
         //
         // Scan the hdd for files that have been caches
         //
-        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString * cacheDirectory = [paths objectAtIndex:0];
-        NSString * cachePath = [cacheDirectory stringByAppendingPathComponent:@"File"];
-        
-        NSError * error = nil;
-        
-        if ( [[NSFileManager defaultManager] fileExistsAtPath:cachePath] == NO )
+        if ( [self enumerateFileCache] == NO )
         {
+            [self release];
             
-            // Cache is empty, create it
-            [[NSFileManager defaultManager] createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:&error];
-            
-            if ( error != nil )
-            {
-                NSLog(@"Error: '%@' creating File cache path: '%@'", [error localizedDescription], cachePath);
-                
-                [self release];
-                
-                return nil;
-            }
-            
+            return nil;
         }
-        else
-        {
-            
-            NSArray * cacheContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cachePath error:&error];
-            
-            if ( error != nil )
-            {
-                NSLog(@"Error: '%@' enumerating File cache path: '%@'", [error localizedDescription], cachePath);
-                
-                [self release];
-                
-                return nil;
-            }
-            
-            for ( NSString * fileName in cacheContents )
-            {
-                
-                NSArray * components = [fileName componentsSeparatedByString:@"."];
-                
-                NSString * keyStr = [components objectAtIndex:0];
-                
-                NSNumber * key = [NSNumber numberWithInteger:[keyStr integerValue]];
-                
-                NSString * filePath = [cachePath stringByAppendingPathComponent:fileName];
-                
-                if ( filePath == nil || key == nil )
-                {
-                    NSLog(@"Failed to map %@ to %@", key, filePath);
-                }
-                else
-                {
-                    [m_fileCacheMap setObject:filePath forKey:key];
-                    
-//                    NSLog(@"Mapped %@ to %@", key, filePath);
-                }
-                
-            }
-            
-        }
-        
     }
     
     return self;
@@ -109,7 +56,7 @@
     [m_pendingFileRequests release];
     
     [m_fileCacheMap release];
-    
+        
     [super dealloc];
 }
 
@@ -137,9 +84,7 @@
     }
     
     // Now that all the files are deleted, clear the mapping to them.
-    [m_fileCacheMap release];
-    
-    m_fileCacheMap = [[NSMutableDictionary alloc] init];
+    [m_fileCacheMap removeAllObjects];
     
     // Create a new cache folder
     result = [[NSFileManager defaultManager] createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:&error];
@@ -150,6 +95,70 @@
         
         return;
     }
+    
+}
+
+- (BOOL)enumerateFileCache
+{
+    
+    [m_fileCacheMap removeAllObjects];
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString * cacheDirectory = [paths objectAtIndex:0];
+    NSString * cachePath = [cacheDirectory stringByAppendingPathComponent:@"File"];
+    
+    NSError * error = nil;
+    
+    if ( [[NSFileManager defaultManager] fileExistsAtPath:cachePath] == NO )
+    {
+        
+        // Cache is empty, create it
+        [[NSFileManager defaultManager] createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:&error];
+        
+        if ( error != nil )
+        {
+            NSLog(@"Error: '%@' creating File cache path: '%@'", [error localizedDescription], cachePath);
+            
+            return NO;
+        }
+        
+    }
+    else
+    {
+        
+        NSArray * cacheContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cachePath error:&error];
+        
+        if ( error != nil )
+        {
+            NSLog(@"Error: '%@' enumerating File cache path: '%@'", [error localizedDescription], cachePath);
+            
+            return NO;
+        }
+        
+        for ( NSString * fileName in cacheContents )
+        {
+            
+            NSArray * components = [fileName componentsSeparatedByString:@"."];
+            
+            NSString * keyStr = [components objectAtIndex:0];
+            
+            NSNumber * key = [NSNumber numberWithInteger:[keyStr integerValue]];
+            
+            NSString * filePath = [cachePath stringByAppendingPathComponent:fileName];
+            
+            if ( filePath == nil || key == nil )
+            {
+                NSLog(@"Failed to map %@ to %@", key, filePath);
+            }
+            else
+            {
+                [m_fileCacheMap setObject:filePath forKey:key];
+            }
+            
+        }
+    }
+    
+    return YES;
     
 }
 
@@ -177,6 +186,16 @@
     {
         return nil;
     }
+    
+    // Refresh access time
+    NSError * error;
+    NSDate * now = [[NSDate alloc] init];
+    
+    [[NSFileManager defaultManager] setAttributes:[NSDictionary dictionaryWithObject:now forKey:NSFileModificationDate]
+                                     ofItemAtPath:filePath
+                                            error:&error];
+    
+    [now release];
     
     if ( [filePath hasSuffix:@".png"] == YES )
     {
@@ -318,10 +337,19 @@
     
     NSNumber * key = [NSNumber numberWithInteger:fileId];
     
-//    NSLog(@"Saved %@ to %@", key, filePath);
-    
     [m_fileCacheMap setObject:filePath forKey:key];
     
+    // Set the access time
+    NSError * error;
+    
+    NSDate * now = [[NSDate alloc] init];
+    
+    [[NSFileManager defaultManager] setAttributes:[NSDictionary dictionaryWithObject:now forKey:NSFileModificationDate]
+                                     ofItemAtPath:filePath
+                                            error:&error];
+    
+    [now release];
+
     // Don't backup this file
     [self addSkipBackupAttributeToFileId:fileId];
     
@@ -512,6 +540,115 @@
     }
     
     return nil;
+    
+}
+
+- (void)checkCacheSize
+{
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString * cacheDirectory = [paths objectAtIndex:0];
+    NSString * cachePath = [cacheDirectory stringByAppendingPathComponent:@"File"];
+    
+    NSArray * filesArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:cachePath error:nil];
+    
+    NSEnumerator * filesEnumerator = [filesArray objectEnumerator];
+    NSString * fileName;
+    
+    unsigned int fileSize = 0;
+    unsigned int fileCount = 0;
+    
+    while ( fileName = [filesEnumerator nextObject] )
+    {
+        NSDictionary * fileDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:[cachePath stringByAppendingPathComponent:fileName] error:nil];
+        fileSize += [fileDictionary fileSize];
+        fileCount++;
+    }
+    
+    NSLog(@"Cache size: %u KB (%u files)", fileSize/1024, fileCount);
+    
+    if ( fileSize > MAX_FILE_CACHE_SIZE )
+    {
+        [self pruneCache:(fileSize - MAX_FILE_CACHE_SIZE) + MAX_FILE_CACHE_SIZE_BUFFER];
+    }
+    
+}
+
+- (void)pruneCache:(NSInteger)bytesToPrune
+{
+    
+    if ( bytesToPrune <= 0 )
+    {
+        // nothing to do
+        return;
+    }
+    
+    NSLog(@"Pruning cache by %u bytes", bytesToPrune);
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString * cacheDirectory = [paths objectAtIndex:0];
+    NSString * cachePath = [cacheDirectory stringByAppendingPathComponent:@"File"];
+    
+    NSArray * filesArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:cachePath error:nil];
+    
+    NSMutableArray * filesAndProperties = [[NSMutableArray alloc] init];
+    
+    for ( NSString * fileName in filesArray )
+    {
+        
+        NSError * error;
+        
+        NSString * filePath = [cachePath stringByAppendingPathComponent:fileName];
+        
+        NSDictionary * propertiesDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
+        
+        NSDate * modDate = [propertiesDictionary objectForKey:NSFileModificationDate];
+        
+        if ( error == nil )
+        {
+            [filesAndProperties addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                           filePath, @"FilePath",
+                                           modDate, @"FileModDate",
+                                           nil]];
+        }
+        
+    }
+    
+    NSArray * sortedFiles = [filesAndProperties sortedArrayUsingComparator:
+                             ^(id dict1, id dict2)
+                             {
+                                 NSComparisonResult comp = [[dict1 objectForKey:@"FileModDate"] compare:
+                                                            [dict2 objectForKey:@"FileModDate"]];
+                                 
+                                 return comp;
+                             }];
+    
+    for ( NSDictionary * fileDictionary in sortedFiles )
+    {
+        // how big is this file
+        NSString * filePath = [fileDictionary objectForKey:@"FilePath"];
+        
+        NSError * error = nil;
+        
+        NSDictionary * propertiesDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+        
+        [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+        
+        if ( error == nil )
+        {
+            bytesToPrune -= [propertiesDictionary fileSize];
+            
+            if ( bytesToPrune <= 0 )
+            {
+                // we're done
+                break;
+            }
+        }
+        
+    }
+    
+    // Re-enumerate the files we have left
+    [self enumerateFileCache];
     
 }
 
