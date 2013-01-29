@@ -26,7 +26,7 @@ public:
     {
         m_pLFOFreq = new Parameter(1.2, 0.0, 10, "Delay Line LFO");
         m_pExcursion = new Parameter(27, 0.0, 50, "Excursion");
-        m_pDecay = new Parameter(0.15, 0.0, 1.0, "Decay");
+        m_pDecay = new Parameter(0.15, 0.0, 0.97, "Decay");
         m_currentDecay = m_pDecay->getValue();
         m_pBandwidth = new Parameter(0.75, 0.0, 1.0, "Bandwidth");
         m_currentBandwidth = m_pBandwidth->getValue();

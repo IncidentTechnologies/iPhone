@@ -49,6 +49,8 @@
     IBOutlet UILabel * m_trackTimeLabel;
     IBOutlet UIView * m_previewView;
     
+    BOOL m_wasPlaying;
+    
 }
 
 @property (nonatomic, assign) id<SongPlayerDelegate> m_delegate;

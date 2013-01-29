@@ -43,6 +43,7 @@
 @synthesize m_songTitleMenuLabel;
 @synthesize m_songArtistMenuLabel;
 @synthesize m_scoreLabel;
+@synthesize m_songSharedLabel;
 @synthesize m_starRatingView;
 @synthesize m_volumeSlider;
 
@@ -89,6 +90,7 @@
     [m_songTitleMenuLabel release];
     [m_songArtistMenuLabel release];
     [m_scoreLabel release];
+    [m_songSharedLabel release];
     [m_starRatingView release];
     
     [m_volumeSlider release];
@@ -179,6 +181,7 @@
     self.m_songTitleScoreLabel = nil;
     self.m_songArtistMenuLabel = nil;
     self.m_scoreLabel = nil;
+    self.m_songSharedLabel = nil;
     self.m_starRatingView = nil;
     self.m_volumeSlider = nil;
     
@@ -242,6 +245,9 @@
     
     [m_lcdMultView initDigits];
     [m_lcdMultView clearDigits];
+    
+    [m_songSharedLabel setHidden:YES];
+    [m_shareFailedLabel setHidden:YES];
     
     [m_menuButton setEnabled:YES];
     
@@ -326,7 +332,7 @@
 
     [m_shareFailedLabel setHidden:NO];
     
-    [m_shareButton setHidden:YES];
+//    [m_shareButton setHidden:YES];
     
 }
 
@@ -338,6 +344,8 @@
     [m_shareButton setHighlighted:YES];
     
     [m_customActivityView setHidden:YES];
+    
+    [m_songSharedLabel setHidden:NO];
 
 }
 

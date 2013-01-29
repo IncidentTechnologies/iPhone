@@ -52,7 +52,7 @@
 #define CloudRequestTypeRegisterUrl @"Users/Register"
 #define CloudRequestTypeLoginFacebookUrl @"Users/LoginWithFacebookAccessToken"
 #define CloudRequestTypeLoginUrl @"Users/Login"
-#define CloudRequestTypeLoginCookieUrl @"Users/LoginWithCookie"
+//#define CloudRequestTypeLoginCookieUrl @"Users/LoginWithCookie"
 #define CloudRequestTypeLogoutUrl @"Users/Logout"
 #define CloudRequestTypeGetUserProfileUrl @"Users/GetUserProfile"
 #define CloudRequestTypeSearchUserProfileUrl @"Users/FindUserProfile"
@@ -105,7 +105,7 @@
         m_serverRoot = [[NSString alloc]  initWithFormat:SERVER_ROOT_DEFAULT];
         
         // Set the cookie storage appropriately
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+//        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
 		
 	}
 	
@@ -149,40 +149,40 @@
 #pragma mark -
 #pragma mark Misc
 
-- (NSHTTPCookie*)getCakePhpCookie
-{
-    
-    NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:m_serverRoot]];
-//    NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"mcbookpro.local"]];
-    
-    for ( NSHTTPCookie * cookie in cookies )
-    {
-        if ( [cookie.name isEqualToString:@"CAKEPHP"] )
-        { 
-            return cookie;
-        }
-    }
-    
-    return nil;
-    
-}
-
-- (void)setCakePhpCookie:(NSHTTPCookie*)cookie
-{
-    
-    if ( cookie == nil )
-    {
-        // No cookies
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:[NSArray array] forURL:[NSURL URLWithString:m_serverName] mainDocumentURL:nil];
-    }
-    else
-    {
-        NSArray  * cookieArray = [NSArray arrayWithObject:cookie];
-        
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:cookieArray forURL:[NSURL URLWithString:m_serverName] mainDocumentURL:nil];
-    }
-    
-}
+//- (NSHTTPCookie*)getCakePhpCookie
+//{
+//    
+//    NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:m_serverRoot]];
+////    NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"mcbookpro.local"]];
+//    
+//    for ( NSHTTPCookie * cookie in cookies )
+//    {
+//        if ( [cookie.name isEqualToString:@"CAKEPHP"] )
+//        { 
+//            return cookie;
+//        }
+//    }
+//    
+//    return nil;
+//    
+//}
+//
+//- (void)setCakePhpCookie:(NSHTTPCookie*)cookie
+//{
+//    
+//    if ( cookie == nil )
+//    {
+//        // No cookies
+//        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:[NSArray array] forURL:[NSURL URLWithString:m_serverName] mainDocumentURL:nil];
+//    }
+//    else
+//    {
+//        NSArray  * cookieArray = [NSArray arrayWithObject:cookie];
+//        
+//        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:cookieArray forURL:[NSURL URLWithString:m_serverName] mainDocumentURL:nil];
+//    }
+//    
+//}
 
 #pragma mark -
 #pragma mark Syncronous convenience
@@ -350,21 +350,21 @@
     
 }
 
-- (CloudRequest*)requestLoginWithCookie:(NSHTTPCookie*)cookie 
-                         andCallbackObj:(id)obj
-                         andCallbackSel:(SEL)sel
-{
-    
-    // Create async request
-    CloudRequest * cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypeLoginCookie andCallbackObject:obj andCallbackSelector:sel];
-    
-    cloudRequest.m_cookie = cookie;
-    
-    [self cloudSendRequest:cloudRequest];
-    
-    return [cloudRequest autorelease];
-    
-}
+//- (CloudRequest*)requestLoginWithCookie:(NSHTTPCookie*)cookie 
+//                         andCallbackObj:(id)obj
+//                         andCallbackSel:(SEL)sel
+//{
+//    
+//    // Create async request
+//    CloudRequest * cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypeLoginCookie andCallbackObject:obj andCallbackSelector:sel];
+//    
+//    cloudRequest.m_cookie = cookie;
+//    
+//    [self cloudSendRequest:cloudRequest];
+//    
+//    return [cloudRequest autorelease];
+//    
+//}
 
 - (CloudRequest*)requestLogoutCallbackObj:(id)obj
                            andCallbackSel:(SEL)sel
@@ -374,16 +374,16 @@
     CloudRequest * cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypeLogout andCallbackObject:obj andCallbackSelector:sel];
     
     // Also Delete local cookies for good measure
-    NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:SERVER_NAME]];
-    
-	for ( unsigned int index = 0; index < [cookies count]; index++ )
-	{
-		
-		NSHTTPCookie * cookie = [cookies objectAtIndex:index];
-		
-		[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
-		
-	}
+//    NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:SERVER_NAME]];
+//    
+//	for ( unsigned int index = 0; index < [cookies count]; index++ )
+//	{
+//		
+//		NSHTTPCookie * cookie = [cookies objectAtIndex:index];
+//		
+//		[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+//		
+//	}
     
     m_loggedIn = NO;
     
@@ -974,8 +974,10 @@
     [self marshalArgumentsForRequest:cloudRequest withUrl:&urlString andParameters:&paramsArray andFiles:&filesArray];
     
     NSString * rootedUrlString = [NSString stringWithFormat:@"%@/%@", SERVER_ROOT, urlString];
-    
-    // Create a POST request object 
+#if TARGET_IPHONE_SIMULATOR
+    NSLog(@"%@", rootedUrlString);
+#endif
+    // Create a POST request object
     NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
 	
     [request setURL:[NSURL URLWithString:rootedUrlString]];
@@ -1071,10 +1073,10 @@
     
     // Convert the POST body to data bytes
 //    NSData * postBodyData = [postBody dataUsingEncoding:NSUTF8StringEncoding];
-    
+#if TARGET_IPHONE_SIMULATOR
     NSString * postString = [[[NSString alloc] initWithData:postBodyData encoding:NSUTF8StringEncoding] autorelease];
     NSLog(postString);
-    
+#endif
     // Stick the post body (now as encoded bytes) into the request
 	[request setHTTPBody:postBodyData];
 	
@@ -1164,15 +1166,15 @@
             
         } break;
             
-        case CloudRequestTypeLoginCookie:
-        {
-            
-            url = CloudRequestTypeLoginCookieUrl;
-            
-            // Update the cookies
-            [self setCakePhpCookie:cloudRequest.m_cookie];
-            
-        } break;
+//        case CloudRequestTypeLoginCookie:
+//        {
+//            
+//            url = CloudRequestTypeLoginCookieUrl;
+//            
+//            // Update the cookies
+//            [self setCakePhpCookie:cloudRequest.m_cookie];
+//            
+//        } break;
             
         case CloudRequestTypeLogout:
         {
@@ -1661,33 +1663,33 @@
             
         } break;
             
-        case CloudRequestTypeLoginCookie:
-        {
-            
-            [m_username release];
-            
-            m_username = [[cloudResponse.m_responseXmlDom getTextFromChildWithName:@"Username"] retain];
-            
-            XmlDom * dom = cloudResponse.m_responseXmlDom;
-            
-            NSString * result = [dom getTextFromChildWithName:@"StatusText"];
-            
-            if ( [result isEqualToString:@"Ok"] == YES )
-            {
-                m_loggedIn = YES;
-            }
-            else
-            {
-                m_loggedIn = NO;
-            }
-            
-            XmlDom * profileDom = [dom getChildWithName:@"UserProfile"];
-            
-            UserProfile * userProfile = [[[UserProfile alloc] initWithXmlDom:profileDom] autorelease];
-            
-            cloudResponse.m_responseUserProfile = userProfile;
-            
-        } break;
+//        case CloudRequestTypeLoginCookie:
+//        {
+//            
+//            [m_username release];
+//            
+//            m_username = [[cloudResponse.m_responseXmlDom getTextFromChildWithName:@"Username"] retain];
+//            
+//            XmlDom * dom = cloudResponse.m_responseXmlDom;
+//            
+//            NSString * result = [dom getTextFromChildWithName:@"StatusText"];
+//            
+//            if ( [result isEqualToString:@"Ok"] == YES )
+//            {
+//                m_loggedIn = YES;
+//            }
+//            else
+//            {
+//                m_loggedIn = NO;
+//            }
+//            
+//            XmlDom * profileDom = [dom getChildWithName:@"UserProfile"];
+//            
+//            UserProfile * userProfile = [[[UserProfile alloc] initWithXmlDom:profileDom] autorelease];
+//            
+//            cloudResponse.m_responseUserProfile = userProfile;
+//            
+//        } break;
             
         case CloudRequestTypeLogout:
         {
@@ -2063,8 +2065,9 @@
     
     [self cloudReceiveResponse:cloudResponse];
     
+#if TARGET_IPHONE_SIMULATOR
     NSLog(@"URL error: %@", error);
-	
+#endif
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response  
@@ -2108,7 +2111,9 @@
 //    [self cloudReceiveResponse:cloudResponse];
     [self performSelectorInBackground:@selector(cloudReceiveResponse:) withObject:cloudResponse];
     
+#if TARGET_IPHONE_SIMULATOR
     NSLog(@"%@",cloudResponse.m_receivedDataString);
+#endif
 }
 
 @end

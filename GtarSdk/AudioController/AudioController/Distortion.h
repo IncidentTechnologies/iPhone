@@ -14,6 +14,9 @@
 #import "TanhDistortion.h"
 #include "FuzzExpDistortion.h"
 
+static const float defaultDrive = 3.0;
+static const float defaultFuzz = 3.0;
+
 class Distortion : public Effect
 {
     
@@ -21,13 +24,13 @@ public:
     Distortion (double gain, double wet, double SamplingFrequency) :
     Effect("Distortion", wet, SamplingFrequency)
     {
-        m_pDrive = new Parameter(1.0f, 1.0f, 20.0f, "Drive");
-        m_pFuzzGain = new Parameter(1.0f, 1.0f, 20.0f, "Fuzz");
+        m_pDrive = new Parameter(defaultDrive, 1.0f, 20.0f, "Drive");
+        m_pFuzzGain = new Parameter(defaultFuzz, 1.0f, 20.0f, "Fuzz");
         
         m_gain = gain;
         m_pTanhDistortion = new TanhDistortion(1.0, 1.0, SamplingFrequency);
         setPrimaryParam(m_pDrive->getValue());
-        m_pFuzzExpDistortion = new FuzzExpDistortion(1.0, 1.0, SamplingFrequency);
+        m_pFuzzExpDistortion = new FuzzExpDistortion(m_pFuzzGain->getValue(), 1.0, SamplingFrequency);
     }
     
     inline double InputSample(double sample)
@@ -76,8 +79,8 @@ public:
     void Reset()
     {
         Effect::Reset();
-        setPrimaryParam(1.0);
-        setSecondaryParam(1.0);
+        setPrimaryParam(defaultDrive);
+        setSecondaryParam(defaultFuzz);
     }
     
     ~Distortion()

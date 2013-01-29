@@ -47,8 +47,8 @@
 - (void)clearCache;
 - (void)loadCache;
 - (void)saveCache;
-- (void)saveCookie:(NSHTTPCookie*)cookie;
-- (NSHTTPCookie*)loadCookie;
+//- (void)saveCookie:(NSHTTPCookie*)cookie;
+//- (NSHTTPCookie*)loadCookie;
 - (void)requestLoginUserCachedCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 
 // account
@@ -61,8 +61,8 @@
 - (void)requestLoginUserFacebookToken:(NSString*)facebookToken andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (void)requestLoginUserFacebookTokenCallback:(CloudResponse*)cloudResponse;
 
-- (void)requestLoginUserCookieCallbackObj:(id)obj andCallbackSel:(SEL)sel;
-- (void)requestLoginUserCookieCallback:(CloudResponse*)cloudResponse;
+//- (void)requestLoginUserCookieCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+//- (void)requestLoginUserCookieCallback:(CloudResponse*)cloudResponse;
 
 - (void)requestLogoutUserCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (void)requestLogoutUserCallback:(CloudResponse*)cloudResponse;

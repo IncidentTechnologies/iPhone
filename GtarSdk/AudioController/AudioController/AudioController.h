@@ -175,6 +175,11 @@ enum AudioSource
 - (NSArray*) getInstrumentNames;
 - (int) getCurrentSamplePackIndex;
 
+void AudioInterruptionListener (
+                             void     *inClientData,
+                             UInt32   inInterruptionState
+                             );
+
 // AudioSession callbacks
 void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID inID, UInt32 inDataSize, const void *inData);
 
