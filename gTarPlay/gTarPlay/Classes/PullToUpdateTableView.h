@@ -34,8 +34,10 @@
 
 - (void)startAnimating;
 - (void)stopAnimating;
+- (void)startAnimatingOffscreen;
 - (void)showHeader;
 - (void)hideHeader;
+- (void)showHeaderOffscreen;
 - (void)aboveThreshold;
 - (void)belowThreshold;
 - (void)changeUpdateDate;

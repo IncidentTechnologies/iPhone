@@ -237,7 +237,15 @@ extern AudioController * g_audioController;
 
 - (void)refreshSongList
 {
-    [m_selectListViewController.m_tableView startAnimating];
+    // If there are already songs, use the offscreen animation instead
+    if ( [m_userSongArray count] > 0 )
+    {
+        [m_selectListViewController.m_tableView startAnimatingOffscreen];
+    }
+    else
+    {
+        [m_selectListViewController.m_tableView startAnimating];
+    }
     
 	[g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
 }

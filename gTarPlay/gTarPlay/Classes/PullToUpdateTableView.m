@@ -169,11 +169,33 @@
     
 }
 
-- (void)showHeader
+- (void)startAnimatingOffscreen
 {
     
+    if ( m_animating == YES )
+    {
+        return;
+    }
+    
+    m_animating = YES;
+    
+    [m_updatingIndicatorView startAnimating];
+    [m_arrowImageView setHidden:YES];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    
+    [self showHeaderOffscreen];
+    
+    m_instructionsLabel.text = @"Updating...";
+    
+    [UIView commitAnimations];
+    
+}
+
+- (void)showHeader
+{
     self.contentInset = UIEdgeInsetsMake(HEADER_OFFSET, 0.0f, 0.0f, 0.0f);
-//    self.contentOffset = CGPointMake(0.0f, -HEADER_OFFSET);
     
     // Using this version looks better because it doesn't chop off the bottom row
     [self setContentOffset:CGPointMake(0.0f, -HEADER_OFFSET) animated:YES];
@@ -186,6 +208,14 @@
     
 }
 
+- (void)showHeaderOffscreen
+{
+    
+    self.contentInset = UIEdgeInsetsMake(HEADER_OFFSET, 0.0f, 0.0f, 0.0f);
+    
+    [self setContentOffset:CGPointMake(0.0f, 0.0f) animated:YES];
+    
+}
 
 - (void)aboveThreshold
 {
