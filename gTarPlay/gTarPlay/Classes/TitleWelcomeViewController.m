@@ -70,6 +70,12 @@
     
     [m_rootViewController displayFacebookDialog];
     
+    // force us to be removed before the app looses focus
+    [self.view removeFromSuperview];
+    
+    self.view.alpha = 0.0f;
+
+    
 }
 
 @end

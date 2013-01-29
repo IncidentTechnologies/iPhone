@@ -449,7 +449,6 @@ extern TelemetryController * g_telemetryController;
 
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
-    
     GtarFret fret = pluck.position.fret;
     GtarString str = pluck.position.string;
     
@@ -1294,7 +1293,6 @@ extern TelemetryController * g_telemetryController;
     {
         // open tab
         m_effectsTab.transform = CGAffineTransformMakeTranslation(-1 * m_effectsTab.frame.origin.x, 0);
-        // hide effectTabButton on menuTab view
         [self.view bringSubviewToFront:m_effectsTab];
     }
     else
@@ -1340,7 +1338,6 @@ extern TelemetryController * g_telemetryController;
     {
         // open tab
         m_LEDTab.transform = CGAffineTransformMakeTranslation(-1 * m_LEDTab.frame.origin.x, 0);
-        // hide effectTabButton on menuTab view
         [self.view bringSubviewToFront:m_LEDTab];
     }
     else

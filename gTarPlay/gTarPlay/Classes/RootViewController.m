@@ -381,19 +381,19 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)storeButtonClicked:(id)sender
 {
 #if 0
-    if ( g_cloudController.m_loggedIn == NO )
-    {
-        [self displayLoggedOutPopup];
-        return;
-    }
-
-    m_requireLogin = YES;
-    
-    StoreNavigationViewController * sfvc = [[StoreNavigationViewController alloc] initWithNibName:@"CustomNavigationViewController" bundle:nil];
-    
-    [self.navigationController pushViewController:sfvc animated:YES];
-    
-    [sfvc release];
+//    if ( g_cloudController.m_loggedIn == NO )
+//    {
+//        [self displayLoggedOutPopup];
+//        return;
+//    }
+//
+//    m_requireLogin = YES;
+//    
+//    StoreNavigationViewController * sfvc = [[StoreNavigationViewController alloc] initWithNibName:@"CustomNavigationViewController" bundle:nil];
+//    
+//    [self.navigationController pushViewController:sfvc animated:YES];
+//    
+//    [sfvc release];
 
 #else
     
@@ -406,6 +406,7 @@ extern TelemetryController * g_telemetryController;
 //    [m_infoPopup attachToSuperViewWithBlackBackground:self.view];
     
     [self accountViewDisplayUserProfile:nil];
+    
 #endif
     
 }
@@ -754,7 +755,6 @@ extern TelemetryController * g_telemetryController;
     
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
-        
         // we are logged in
         [g_userController sendPendingUploads];
         
@@ -765,7 +765,11 @@ extern TelemetryController * g_telemetryController;
     }
     else
     {
-        [self logoutButtonClicked:nil];
+//        [self logoutButtonClicked:nil];
+        [m_pleaseLoginPopup detachFromSuperView]; // This one might be dead?
+        [m_infoPopup detachFromSuperView];
+        
+        [self attachFullScreenDialog:m_titleWelcomeViewController];
     }
     
 }
@@ -962,7 +966,7 @@ extern TelemetryController * g_telemetryController;
     
     if ( g_cloudController.m_loggedIn == NO )
     {
-        [self displayLoggedOutPopup];
+        [self displayWelcomeDialog];
         return;
     }
     

@@ -140,4 +140,6 @@ enum SongViewControllerDifficulty
 
 - (void)playMetronomeTick;
 
+- (void)updateAudioState;
+
 @end

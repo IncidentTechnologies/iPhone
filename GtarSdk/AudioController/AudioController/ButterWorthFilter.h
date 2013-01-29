@@ -43,20 +43,27 @@ public:
         
         // propogate the change
         for(int i = 0; i < m_ppFilters_n; i++)
+        {
             if(!(retVal = m_ppFilters[i]->CalculateCoefficients(0, cutoff, m_SamplingFrequency)))
                 break;
+        }
         
         return retVal;
     }
     
     inline double InputSample(double sample)
     {
+        if(m_fPassThrough)
+            return sample;
+        
         double retVal = sample;
         
         //for(int i = 0; i < m_ppFilters_n; i++)
         
         if((m_order / 2) > m_ppFilters_n)     // error condition!
+        {
             return 0;
+        }
         
         for(int i = 0; i < (m_order / 2); i++)
             retVal = m_ppFilters[i]->InputSample(retVal);
