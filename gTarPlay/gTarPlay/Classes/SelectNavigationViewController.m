@@ -45,21 +45,6 @@ extern AudioController * g_audioController;
         
         m_playbackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
         
-        // Get preloaded song content
-        // We are Disabling this for now.
-//        NSString * filePath = [[NSBundle mainBundle] pathForResource:@"UserSongsList" ofType:@"xml"];
-//        NSString * xmlBlob = [NSString stringWithContentsOfFile:filePath encoding:NSASCIIStringEncoding error:nil];
-//        
-//        XmlDom * dom = [[XmlDom alloc] initWithXmlString:xmlBlob];
-//        
-//        UserSongs * userSongs = [[UserSongs alloc] initWithXmlDom:dom];
-//        
-//        m_preloadedUserSongArray = [userSongs.m_songsArray retain];
-//        
-//        [dom release];
-//        
-//        [userSongs release];
-        
         // See if we have any cached songs from previous runs
         NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
         
@@ -68,8 +53,25 @@ extern AudioController * g_audioController;
         if ( songArrayData == nil )
         {
             // If we don't have any cache data, just use the preload
-//            m_userSongArray = [m_preloadedUserSongArray retain];
-            m_userSongArray = [[NSArray alloc] init];
+            NSString * filePath = [[NSBundle mainBundle] pathForResource:@"UserSongsList" ofType:@"xml"];
+            NSString * xmlBlob = [NSString stringWithContentsOfFile:filePath encoding:NSASCIIStringEncoding error:nil];
+            
+            XmlDom * dom = [[XmlDom alloc] initWithXmlString:xmlBlob];
+            
+            UserSongs * userSongs = [[UserSongs alloc] initWithXmlDom:dom];
+            
+            m_userSongArray = [userSongs.m_songsArray retain];
+            
+            [dom release];
+            
+            [userSongs release];
+            
+            // If we still have nothing, use an empty array
+            if ( m_userSongArray == nil )
+            {
+                m_userSongArray = [[NSArray alloc] init];
+            }
+            
         }
         else
         {

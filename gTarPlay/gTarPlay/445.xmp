@@ -1,0 +1,227 @@
+
+	<song>
+		<header>
+			<id value="139" />
+			<title>
+				Yankee Doodle
+			</title>
+			<author>
+				Anonymous
+			</author>
+			<description>
+				Write about your song here
+			</description>
+			<tempo value="120" />
+		</header>
+		<content>
+			<track name="main">
+				<measure>
+					<startbeat value="0" />
+					<beatcount value="4" />
+					<beatvalue value="1" />
+					<note value="C5" duration="0.5" measurestart="1">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="1.5">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="D5" duration="0.5" measurestart="2">
+						<guitarposition string="5" fret="3" />
+					</note>
+					<note value="E5" duration="0.5" measurestart="2.5">
+						<guitarposition string="6" fret="0" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="3">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="E5" duration="0.5" measurestart="3.5">
+						<guitarposition string="6" fret="0" />
+					</note>
+					<note value="D5" duration="0.5" measurestart="4">
+						<guitarposition string="5" fret="3" />
+					</note>
+				</measure>
+				<measure>
+					<startbeat value="4" />
+					<beatcount value="4" />
+					<beatvalue value="1" />
+					<note value="B4" duration="0.5" measurestart="4">
+						<guitarposition string="5" fret="0" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="3">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="E5" duration="0.5" measurestart="2.5">
+						<guitarposition string="6" fret="0" />
+					</note>
+					<note value="D5" duration="0.5" measurestart="2">
+						<guitarposition string="5" fret="3" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="1.5">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="1">
+						<guitarposition string="5" fret="1" />
+					</note>
+				</measure>
+				<measure>
+					<startbeat value="8" />
+					<beatcount value="4" />
+					<beatvalue value="1" />
+					<note value="C5" duration="0.5" measurestart="1">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="1.5">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="D5" duration="0.5" measurestart="2">
+						<guitarposition string="5" fret="3" />
+					</note>
+					<note value="E5" duration="0.5" measurestart="2.5">
+						<guitarposition string="6" fret="0" />
+					</note>
+					<note value="F5" duration="0.5" measurestart="3">
+						<guitarposition string="6" fret="1" />
+					</note>
+					<note value="E5" duration="0.5" measurestart="3.5">
+						<guitarposition string="6" fret="0" />
+					</note>
+					<note value="D5" duration="0.5" measurestart="4">
+						<guitarposition string="5" fret="3" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="4.5">
+						<guitarposition string="5" fret="1" />
+					</note>
+				</measure>
+				<measure>
+					<startbeat value="12" />
+					<beatcount value="4" />
+					<beatvalue value="1" />
+					<note value="C5" duration="0.5" measurestart="4">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="B4" duration="0.5" measurestart="2.5">
+						<guitarposition string="5" fret="0" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="3">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="A4" duration="0.5" measurestart="2">
+						<guitarposition string="4" fret="2" />
+					</note>
+					<note value="G4" duration="0.5" measurestart="1.5">
+						<guitarposition string="4" fret="0" />
+					</note>
+					<note value="B4" duration="0.5" measurestart="1">
+						<guitarposition string="5" fret="0" />
+					</note>
+				</measure>
+				<measure>
+					<startbeat value="16" />
+					<beatcount value="4" />
+					<beatvalue value="1" />
+					<note value="B4" duration="0.5" measurestart="1.5">
+						<guitarposition string="5" fret="0" />
+					</note>
+					<note value="A4" duration="0.5" measurestart="1">
+						<guitarposition string="4" fret="2" />
+					</note>
+					<note value="A4" duration="0.5" measurestart="2">
+						<guitarposition string="4" fret="2" />
+					</note>
+					<note value="G4" duration="0.5" measurestart="2.5">
+						<guitarposition string="4" fret="0" />
+					</note>
+					<note value="A4" duration="0.5" measurestart="3">
+						<guitarposition string="4" fret="2" />
+					</note>
+					<note value="B4" duration="0.5" measurestart="3.5">
+						<guitarposition string="5" fret="0" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="4">
+						<guitarposition string="5" fret="1" />
+					</note>
+				</measure>
+				<measure>
+					<startbeat value="20" />
+					<beatcount value="4" />
+					<beatvalue value="1" />
+					<note value="G4" duration="0.5" measurestart="1">
+						<guitarposition string="4" fret="0" />
+					</note>
+					<note value="A4" duration="0.5" measurestart="1.5">
+						<guitarposition string="4" fret="2" />
+					</note>
+					<note value="G4" duration="0.5" measurestart="2">
+						<guitarposition string="4" fret="0" />
+					</note>
+					<note value="F4" duration="0.5" measurestart="2.5">
+						<guitarposition string="3" fret="3" />
+					</note>
+					<note value="E4" duration="0.5" measurestart="3">
+						<guitarposition string="3" fret="2" />
+					</note>
+					<note value="G4" duration="0.5" measurestart="4">
+						<guitarposition string="4" fret="0" />
+					</note>
+				</measure>
+				<measure>
+					<startbeat value="24" />
+					<beatcount value="4" />
+					<beatvalue value="1" />
+					<note value="A4" duration="0.5" measurestart="1">
+						<guitarposition string="4" fret="2" />
+					</note>
+					<note value="B4" duration="0.5" measurestart="1.5">
+						<guitarposition string="5" fret="0" />
+					</note>
+					<note value="A4" duration="0.5" measurestart="2">
+						<guitarposition string="4" fret="2" />
+					</note>
+					<note value="G4" duration="0.5" measurestart="2.5">
+						<guitarposition string="4" fret="0" />
+					</note>
+					<note value="A4" duration="0.5" measurestart="3">
+						<guitarposition string="4" fret="2" />
+					</note>
+					<note value="B4" duration="0.5" measurestart="3.5">
+						<guitarposition string="5" fret="0" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="4">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="A4" duration="0.5" measurestart="4.5">
+						<guitarposition string="4" fret="2" />
+					</note>
+				</measure>
+				<measure>
+					<startbeat value="28" />
+					<beatcount value="4" />
+					<beatvalue value="1" />
+					<note value="D5" duration="0.5" measurestart="2.5">
+						<guitarposition string="5" fret="3" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="3">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="4">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="B4" duration="0.5" measurestart="2">
+						<guitarposition string="5" fret="0" />
+					</note>
+					<note value="C5" duration="0.5" measurestart="1.5">
+						<guitarposition string="5" fret="1" />
+					</note>
+					<note value="G4" duration="0.5" measurestart="1">
+						<guitarposition string="4" fret="0" />
+					</note>
+				</measure>
+				<measure>
+					<startbeat value="32" />
+					<beatcount value="4" />
+					<beatvalue value="1" />
+				</measure>
+			</track>
+		</content>
+	</song>

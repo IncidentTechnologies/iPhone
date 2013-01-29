@@ -271,7 +271,7 @@ TelemetryController * g_telemetryController;
     [settings synchronize];
     
     BOOL clearCache = [settings boolForKey:@"ClearCache"];
-//    BOOL runBefore = [settings boolForKey:@"RunBefore"];
+    BOOL installContent = [settings boolForKey:@"InstallContent"];
     
     if ( clearCache == YES )
     {
@@ -280,44 +280,52 @@ TelemetryController * g_telemetryController;
         [g_userController clearCache];
         [g_facebook logout];
         
+        [self installPreloadedContent];
+        
         [settings setBool:NO forKey:@"ClearCache"];
         
         [settings synchronize];
         
     }
-//    else if ( runBefore == NO )
-//    {
-//        // If this is the first time we run, preinstall the content
-//    }
+    else if ( installContent == NO )
+    {
+        // If this is the first time we run, preinstall the content
+        [self installPreloadedContent];
+        
+        [settings setBool:YES forKey:@"InstallContent"];
+        
+        [settings synchronize];
+
+    }
     
 }
 
-//- (void)installPreloadedContent
-//{
-//    
-//    // 'install' the preloaded content into the FileController
-//    NSString * plistName = [[NSBundle mainBundle] pathForResource:@"preloaded-content" ofType:@"plist"];
-//    NSDictionary * preloadedContentDict = [NSDictionary dictionaryWithContentsOfFile:plistName];
-//    NSArray * preloadedContentArray = [preloadedContentDict objectForKey:@"PreloadedContent"];
-//    
-//    for ( NSString * fileName in preloadedContentArray )
-//    {
-//        
-//        NSString * filePath = [[NSBundle mainBundle] pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]];
-//        
-//        NSLog(@"Installing %@", filePath);
-//        
-//        // this gets us the file id
-//        NSString * fileIdStr = [[fileName lastPathComponent] stringByDeletingPathExtension];
-//        
-//        BOOL result = [g_fileController saveFilePath:filePath withFileId:[fileIdStr integerValue]];
-//        
-//        if ( result == NO )
-//        {
-//            NSLog(@"Failed to install fileid %@ %@", fileIdStr, filePath);
-//        }
-//    }
-//}
+- (void)installPreloadedContent
+{
+    
+    // 'install' the preloaded content into the FileController
+    NSString * plistName = [[NSBundle mainBundle] pathForResource:@"preloaded-content" ofType:@"plist"];
+    NSDictionary * preloadedContentDict = [NSDictionary dictionaryWithContentsOfFile:plistName];
+    NSArray * preloadedContentArray = [preloadedContentDict objectForKey:@"PreloadedContent"];
+    
+    for ( NSString * fileName in preloadedContentArray )
+    {
+        
+        NSString * filePath = [[NSBundle mainBundle] pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]];
+        
+        NSLog(@"Installing %@", filePath);
+        
+        // this gets us the file id
+        NSString * fileIdStr = [[fileName lastPathComponent] stringByDeletingPathExtension];
+        
+        BOOL result = [g_fileController saveFilePath:filePath withFileId:[fileIdStr integerValue]];
+        
+        if ( result == NO )
+        {
+            NSLog(@"Failed to install fileid %@ %@", fileIdStr, filePath);
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark Memory management
