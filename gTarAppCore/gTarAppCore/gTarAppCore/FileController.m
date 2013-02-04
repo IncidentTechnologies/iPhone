@@ -13,7 +13,7 @@
 #import "CloudResponse.h"
 #import "FileRequest.h"
 
-#define MAX_FILE_CACHE_SIZE 100*1024*1024 // 100 MB
+#define MAX_FILE_CACHE_SIZE 300*1024*1024 // 300 MB
 #define MAX_FILE_CACHE_SIZE_BUFFER 10*1024*1024 // 10 MB
 
 @implementation FileController
@@ -602,13 +602,19 @@
         
         NSDictionary * propertiesDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
         
+        // Modification date
         NSDate * modDate = [propertiesDictionary objectForKey:NSFileModificationDate];
+        
+        // File extension
+        NSArray * components = [fileName componentsSeparatedByString:@"."];
+        NSString * extension = [components objectAtIndex:1];
         
         if ( error == nil )
         {
             [filesAndProperties addObject:[NSDictionary dictionaryWithObjectsAndKeys:
                                            filePath, @"FilePath",
                                            modDate, @"FileModDate",
+                                           extension, @"FileExtension",
                                            nil]];
         }
         
@@ -617,6 +623,22 @@
     NSArray * sortedFiles = [filesAndProperties sortedArrayUsingComparator:
                              ^(id dict1, id dict2)
                              {
+                                 NSString * extension1 = [dict1 objectForKey:@"FileExtension"];
+                                 NSString * extension2 = [dict2 objectForKey:@"FileExtension"];
+                                 
+                                 // An XMP file is always more valuable than anything else
+                                 if ( [extension1 isEqualToString:@"xmp"] == YES &&
+                                      [extension2 isEqualToString:@"xmp"] == NO )
+                                 {
+                                     return (NSComparisonResult)NSOrderedDescending;
+                                 }
+                                 
+                                 if ( [extension1 isEqualToString:@"xmp"] == NO &&
+                                     [extension2 isEqualToString:@"xmp"] == YES )
+                                 {
+                                     return (NSComparisonResult)NSOrderedAscending;
+                                 }
+                                 
                                  NSComparisonResult comp = [[dict1 objectForKey:@"FileModDate"] compare:
                                                             [dict2 objectForKey:@"FileModDate"]];
                                  
