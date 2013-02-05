@@ -185,9 +185,10 @@ extern AudioController * g_audioController;
     {
         // Reload the table
         [m_selectListViewController.m_tableView stopAnimating];
-        [m_selectListViewController refreshDisplay];
     }
-    
+
+    [m_selectListViewController refreshDisplay];
+
 }
 
 #pragma mark - ViewController stuff
