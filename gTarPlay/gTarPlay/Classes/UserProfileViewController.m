@@ -378,6 +378,21 @@ extern UserController * g_userController;
     [(UserProfileViewController*)m_navigationController removeUserFollows:userProfile];
 }
 
+- (void)playCell:(UserProfileSessionCell*)cell
+{
+    
+    [(UserProfileNavigationController*)m_navigationController playUserSongSession:cell.m_userSongSession];
+    
+    [self performSelector:@selector(stopCell:) withObject:cell afterDelay:0.25];
+    
+}
+
+- (void)stopCell:(UserProfileSessionCell*)cell
+{
+    [cell.m_timeLabel setHidden:NO];
+    [cell.m_activityView stopAnimating];
+}
+
 #pragma mark -
 #pragma mark Table view data source
 
@@ -552,9 +567,14 @@ extern UserController * g_userController;
         if ( [m_displayedSessionsArray count] > row )
         {
             
-            UserSongSession * userSongSession = [m_displayedSessionsArray objectAtIndex:row];
+//            UserSongSession * userSongSession = [m_displayedSessionsArray objectAtIndex:row];
             
-            [(UserProfileNavigationController*)m_navigationController playUserSongSession:userSongSession];
+            UserProfileSessionCell * cell = (UserProfileSessionCell*)[m_tableView cellForRowAtIndexPath:indexPath];
+            
+            [cell.m_timeLabel setHidden:YES];
+            [cell.m_activityView startAnimating];
+            
+            [self performSelector:@selector(playCell:) withObject:cell afterDelay:0.05];
             
         }
         

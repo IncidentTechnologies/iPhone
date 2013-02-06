@@ -15,6 +15,7 @@
 @class CustomSegmentedControl;
 @class UserEntry;
 @class UserProfileSelectPictureViewController;
+@class UserProfileSessionCell;
 
 @interface UserProfileViewController : CustomViewController <PullToUpdateTableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
@@ -94,6 +95,8 @@
 
 - (void)addUserFollows:(UserProfile*)userProfile;
 - (void)removeUserFollows:(UserProfile*)userProfile;
+- (void)playCell:(UserProfileSessionCell*)cell;
+- (void)stopCell:(UserProfileSessionCell*)cell;
 
 - (void)updatingEverything;
 

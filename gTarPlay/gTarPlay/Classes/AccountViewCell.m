@@ -28,6 +28,7 @@ extern FileController * g_fileController;
 @synthesize m_playLabel;
 @synthesize m_jamLabel;
 @synthesize m_timeLabel;
+@synthesize m_activityView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -62,7 +63,8 @@ extern FileController * g_fileController;
     [m_playLabel release];
     [m_jamLabel release];
     [m_timeLabel release];
-
+    [m_activityView release];
+    
     [super dealloc];
     
 }

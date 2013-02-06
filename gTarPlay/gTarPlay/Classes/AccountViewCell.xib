@@ -13,6 +13,7 @@
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<string>IBProxyObject</string>
+			<string>IBUIActivityIndicatorView</string>
 			<string>IBUIImageView</string>
 			<string>IBUILabel</string>
 			<string>IBUIView</string>
@@ -135,6 +136,17 @@
 							<double key="NSSize">10</double>
 							<int key="NSfFlags">16</int>
 						</object>
+					</object>
+					<object class="IBUIActivityIndicatorView" id="122956682">
+						<reference key="NSNextResponder" ref="779185605"/>
+						<int key="NSvFlags">-2147483356</int>
+						<string key="NSFrame">{{180, 10}, {20, 20}}</string>
+						<reference key="NSSuperview" ref="779185605"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">2</int>
 					</object>
 				</object>
 				<string key="NSFrameSize">{220, 40}</string>
@@ -296,6 +308,14 @@
 					</object>
 					<int key="connectionID">15</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">m_activityView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="122956682"/>
+					</object>
+					<int key="connectionID">19</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -327,6 +347,7 @@
 							<reference ref="405591344"/>
 							<reference ref="75008526"/>
 							<reference ref="598933217"/>
+							<reference ref="122956682"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Accessory</string>
@@ -371,6 +392,11 @@
 						<reference key="object" ref="525068956"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">18</int>
+						<reference key="object" ref="122956682"/>
+						<reference key="parent" ref="779185605"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -381,6 +407,7 @@
 					<string>-1.IBPluginDependency</string>
 					<string>-2.CustomClassName</string>
 					<string>-2.IBPluginDependency</string>
+					<string>18.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
@@ -404,6 +431,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -418,7 +446,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">17</int>
+			<int key="maxID">19</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -430,6 +458,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>m_activityView</string>
 							<string>m_albumArt</string>
 							<string>m_jamLabel</string>
 							<string>m_playLabel</string>
@@ -439,6 +468,7 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIActivityIndicatorView</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -451,6 +481,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>m_activityView</string>
 							<string>m_albumArt</string>
 							<string>m_jamLabel</string>
 							<string>m_playLabel</string>
@@ -460,6 +491,10 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">m_activityView</string>
+								<string key="candidateClassName">UIActivityIndicatorView</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">m_albumArt</string>
 								<string key="candidateClassName">UIImageView</string>

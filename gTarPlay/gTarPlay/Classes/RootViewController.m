@@ -1031,7 +1031,6 @@ extern TelemetryController * g_telemetryController;
         m_songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
         m_songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
         
-//        m_songPlaybackViewController.m_delegate = self;
         m_songPlaybackViewController.m_popupDelegate = self;
     }
     

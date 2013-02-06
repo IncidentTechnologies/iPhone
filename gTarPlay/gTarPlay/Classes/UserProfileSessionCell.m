@@ -25,6 +25,7 @@
 @synthesize m_timeLabel;
 @synthesize m_playPauseButton;
 @synthesize m_userSongSession;
+@synthesize m_activityView;
 
 extern FileController * g_fileController;
 
@@ -60,6 +61,7 @@ extern FileController * g_fileController;
     [m_timeLabel release];
     [m_playPauseButton release];
     [m_userSongSession release];
+    [m_activityView release];
     
     [super dealloc];
     
