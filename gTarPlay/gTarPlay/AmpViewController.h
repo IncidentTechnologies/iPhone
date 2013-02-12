@@ -12,6 +12,7 @@
 
 - (void)menuButtonClicked;
 - (void)backButtonClicked;
+- (void)abortButtonClicked;
 - (void)restartButtonClicked;
 - (void)continueButtonClicked;
 - (void)shareButtonClicked;
@@ -119,6 +120,7 @@
 
 - (IBAction)menuButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;
+- (IBAction)abortButtonClicked:(id)sender;
 - (IBAction)restartButtonClicked:(id)sender;
 - (IBAction)continueButtonClicked:(id)sender;
 - (IBAction)shareButtonClicked:(id)sender;

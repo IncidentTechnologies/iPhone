@@ -48,6 +48,9 @@ extern AudioController * g_audioController;
         
         g_songPlayerViewController = self;
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEndpoints) name:UIApplicationWillResignActiveNotification object:nil];
+
+        
     }
     
     return self;
@@ -56,7 +59,9 @@ extern AudioController * g_audioController;
 
 - (void)dealloc
 {
-    
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+
     g_songPlayerViewController = nil;
     
     [m_playbackController release];
@@ -231,13 +236,6 @@ extern AudioController * g_audioController;
     double currentBeat = m_playbackController.m_songModel.m_currentBeat;
     double currentTime = currentBeat / m_playbackController.m_songModel.m_beatsPerSecond;
     
-//    NSString * trackTime = [NSString stringWithFormat:@"%u:%02u  %u.%u.%u", 
-//                            (NSInteger)(currentTime/60),
-//                            ((NSInteger)currentTime%60),
-//                            ((NSInteger)(currentBeat/4)+1),
-//                            (((NSInteger)currentBeat%4)+1),
-//                            (((NSInteger)(currentBeat*4)%4)+1)];
-
     NSString * trackTime = [NSString stringWithFormat:@"%02u:%02u",
                             (NSInteger)(currentTime/60),
                             ((NSInteger)currentTime%60)];

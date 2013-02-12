@@ -15,7 +15,7 @@
 #pragma mark -
 #pragma mark UIApplication
 
-- (void)sendEvent:(UIEvent *)event
+- (void)sendEvent:(UIEvent*)event
 {
     [super sendEvent:event];
     

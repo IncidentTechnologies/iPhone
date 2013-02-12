@@ -66,7 +66,6 @@
 						<string key="NSFrame">{{20, 93}, {440, 227}}</string>
 						<reference key="NSSuperview" ref="1052997435"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="189687149"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -1720,7 +1719,6 @@
 								<string key="NSFrame">{{280, 126}, {22, 14}}</string>
 								<reference key="NSSuperview" ref="400379816"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -2042,7 +2040,6 @@
 						<string key="NSFrame">{{284, 173}, {70, 37}}</string>
 						<reference key="NSSuperview" ref="416442823"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="189687149"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -2148,18 +2145,16 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="508535889">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">-2147483356</int>
 				<string key="NSFrameSize">{188, 37}</string>
-				<reference key="NSSuperview"/>
 				<reference key="IBUIBackgroundColor" ref="189687149"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="739276709">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">-2147483356</int>
 				<string key="NSFrameSize">{188, 37}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="508535889"/>
 				<reference key="IBUIBackgroundColor" ref="189687149"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -2999,12 +2994,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">backButtonClicked:</string>
+						<string key="label">abortButtonClicked:</string>
 						<reference key="source" ref="534318104"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">221</int>
+					<int key="connectionID">273</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -4306,7 +4301,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">272</int>
+			<int key="maxID">273</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4318,6 +4313,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>abortButtonClicked:</string>
 							<string>audioButtonClicked:</string>
 							<string>backButtonClicked:</string>
 							<string>continueButtonClicked:</string>
@@ -4329,6 +4325,7 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4343,6 +4340,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>abortButtonClicked:</string>
 							<string>audioButtonClicked:</string>
 							<string>backButtonClicked:</string>
 							<string>continueButtonClicked:</string>
@@ -4354,6 +4352,10 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">abortButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">audioButtonClicked:</string>
 								<string key="candidateClassName">id</string>

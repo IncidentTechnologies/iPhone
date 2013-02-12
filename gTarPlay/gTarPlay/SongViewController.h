@@ -102,6 +102,9 @@ enum SongViewControllerDifficulty
     
     NSMutableArray * m_deferredNotesQueue;
     
+    NSDate * m_playTimeStart;
+    NSTimeInterval m_playTimeAdjustment;
+    
 }
 
 @property (nonatomic, assign) SongViewControllerDifficulty m_difficulty;
@@ -115,6 +118,9 @@ enum SongViewControllerDifficulty
 @property (nonatomic, assign) BOOL m_bSpeakerRoute;
 
 - (IBAction)backButtonClicked:(id)sender;
+
+- (void)handleResignActive;
+- (void)handleBecomeActive;
 
 - (void)startWithSongXmlDom;
 - (void)pauseSong;
@@ -138,8 +144,10 @@ enum SongViewControllerDifficulty
 
 - (void)requestUploadUserSongSessionCallback:(UserResponse*)userResponse;
 
+- (void)updateAudioState;
+
+- (void)toggleMetronome;
 - (void)playMetronomeTick;
 
-- (void)updateAudioState;
 
 @end

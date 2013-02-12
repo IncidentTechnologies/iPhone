@@ -11,7 +11,7 @@
 #import "CloudController.h"
 #import "CloudResponse.h"
 
-#define MAX_QUEUE_SIZE 1000
+#define MAX_QUEUE_SIZE 999
 #define UPLOAD_BATCH_SIZE MAX_QUEUE_SIZE
 
 @implementation TelemetryController
@@ -89,40 +89,59 @@
 
 #pragma mark - Methods
 
-- (void)logMessage:(NSString*)message withType:(TelemetryControllerMessageType)type
+- (void)logMessage:(NSString*)message
 {
     
-    NSString * logMessage;
-    
-    switch ( type )
-    {
-        case TelemetryControllerMessageTypeError:
-        {
-            logMessage = [NSString stringWithFormat:@"Error: %@", message];
-        } break;
-            
-        case TelemetryControllerMessageTypeWarning:
-        {
-            logMessage = [NSString stringWithFormat:@"Warning: %@", message];
-        } break;
-            
-        case TelemetryControllerMessageTypeInfo:
-        {
-            logMessage = [NSString stringWithFormat:@"Info: %@", message];
-        } break;
-            
-        case TelemetryControllerMessageTypeUnknown:
-        default:
-        {
-            // Its not really a fatal error to not have a message type
-            logMessage = [NSString stringWithFormat:@"Unknown: %@", message];            
-        } break;
-    }
-    
-    
-    logMessage = [NSString stringWithFormat:@"%@| %@\n", [NSDate date], logMessage];
+    NSDate * date = [[NSDate alloc] init];
+    NSString * logMessage = [[NSString alloc] initWithFormat:@"%@|%@\n", date, message];
     
     [self addMessageToQueue:logMessage];
+    
+    [logMessage release];
+    [date release];
+    
+}
+
+//- (void)logMessage:(NSString*)message withType:(TelemetryControllerMessageType)type
+//{
+//    
+//    NSString * logMessage;
+//    
+//    switch ( type )
+//    {
+//        case TelemetryControllerMessageTypeError:
+//        {
+//            logMessage = [NSString stringWithFormat:@"Error: %@", message];
+//        } break;
+//            
+//        case TelemetryControllerMessageTypeWarning:
+//        {
+//            logMessage = [NSString stringWithFormat:@"Warning: %@", message];
+//        } break;
+//            
+//        case TelemetryControllerMessageTypeInfo:
+//        {
+//            logMessage = [NSString stringWithFormat:@"Info: %@", message];
+//        } break;
+//            
+//        case TelemetryControllerMessageTypeUnknown:
+//        default:
+//        {
+//            // Its not really a fatal error to not have a message type
+//            logMessage = [NSString stringWithFormat:@"Unknown: %@", message];            
+//        } break;
+//    }
+//    
+//    [self logMessage:logMessage];
+//    
+//}
+
+- (void)logEvent:(TelemetryControllerEvent)event withValue:(NSInteger)value andMessage:(NSString*)message
+{
+    
+    NSString * logMessage = [NSString stringWithFormat:@"%@,%u,%@\n", event, value, message];
+    
+    [self logMessage:logMessage];
     
 }
 
@@ -169,9 +188,10 @@
     {
         if ( m_droppedMessages > 0 )
         {
-            NSString * dropped = [NSString stringWithFormat:@"@ | %u messages dropped\n", [NSDate date], m_droppedMessages];
+            NSDate * date = [[NSDate alloc] init];
+            NSString * droppedMessage = [[NSString alloc] initWithFormat:@"%@|%@,%u,%@\n", date, DroppedTelemetryMessages, m_droppedMessages, @"Dropped telemetry messages"];
             
-            [logsToUpload appendString:dropped];
+            [m_messageQueue addObject:droppedMessage];
             
             m_droppedMessages = 0;
         }

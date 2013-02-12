@@ -7,17 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TelemetryEvents.h"
 
 @class CloudController;
 @class CloudResponse;
 
-typedef enum
-{
-    TelemetryControllerMessageTypeUnknown = 0,
-    TelemetryControllerMessageTypeError,
-    TelemetryControllerMessageTypeWarning,
-    TelemetryControllerMessageTypeInfo
-} TelemetryControllerMessageType;
+//typedef enum
+//{
+//    TelemetryControllerMessageTypeUnknown = 0,
+//    TelemetryControllerMessageTypeError,
+//    TelemetryControllerMessageTypeWarning,
+//    TelemetryControllerMessageTypeInfo
+//} TelemetryControllerMessageType;
 
 @interface TelemetryController : NSObject
 {
@@ -35,6 +36,7 @@ typedef enum
     NSString * m_pendingUpload;
     
     NSInteger m_droppedMessages;
+    
 }
 
 @property (nonatomic, retain) NSString * m_compileDate;
@@ -45,7 +47,10 @@ typedef enum
 
 - (id)initWithCloudController:(CloudController*)cloudController;
 
-- (void)logMessage:(NSString*)message withType:(TelemetryControllerMessageType)type;
+- (void)logMessage:(NSString*)message;
+//- (void)logMessage:(NSString*)message withType:(TelemetryControllerMessageType)type;
+
+- (void)logEvent:(TelemetryControllerEvent)event withValue:(NSInteger)value andMessage:(NSString*)message;
 
 - (void)addMessageToQueue:(NSString*)message;
 

@@ -21,6 +21,7 @@
 		EC24E01B161BBBA900016B78 /* FeaturedSong.m in Sources */ = {isa = PBXBuildFile; fileRef = EC24E00F161BBBA800016B78 /* FeaturedSong.m */; };
 		EC24E01F161BBC0C00016B78 /* SettingsController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC24E01D161BBC0C00016B78 /* SettingsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC24E020161BBC0C00016B78 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC24E01E161BBC0C00016B78 /* SettingsController.m */; };
+		EC354E0516C9B084009D472A /* TelemetryEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = EC354E0416C9B084009D472A /* TelemetryEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA851161A5D160015832E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA850161A5D160015832E /* Foundation.framework */; };
 		EC5DA873161A5D7A0015832E /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA871161A5D7A0015832E /* libAudioController.a */; };
 		EC5DA874161A5D7A0015832E /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA872161A5D7A0015832E /* libGtarController.a */; };
@@ -158,6 +159,7 @@
 		EC24E00F161BBBA800016B78 /* FeaturedSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedSong.m; sourceTree = "<group>"; };
 		EC24E01D161BBC0C00016B78 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		EC24E01E161BBC0C00016B78 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		EC354E0416C9B084009D472A /* TelemetryEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelemetryEvents.h; sourceTree = "<group>"; };
 		EC5DA84D161A5D160015832E /* libgTarAppCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libgTarAppCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC5DA850161A5D160015832E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EC5DA854161A5D160015832E /* gTarAppCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gTarAppCore-Prefix.pch"; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 			children = (
 				EC5DA876161A5EF40015832E /* TelemetryController.h */,
 				EC5DA877161A5EF40015832E /* TelemetryController.m */,
+				EC354E0416C9B084009D472A /* TelemetryEvents.h */,
 			);
 			name = TelemetryController;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				EC24E01A161BBBA900016B78 /* FeaturedSong.h in Headers */,
 				EC24E01F161BBC0C00016B78 /* SettingsController.h in Headers */,
 				EC5DA87D161A5F500015832E /* ContentController.h in Headers */,
+				EC354E0516C9B084009D472A /* TelemetryEvents.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

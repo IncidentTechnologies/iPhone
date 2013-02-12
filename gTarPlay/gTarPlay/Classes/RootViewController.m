@@ -758,8 +758,10 @@ extern TelemetryController * g_telemetryController;
         // we are logged in
         [g_userController sendPendingUploads];
         
-        [g_telemetryController logMessage:[NSString stringWithFormat:@"Logged in as %@", g_cloudController.m_username] withType:TelemetryControllerMessageTypeInfo];
-        
+        [g_telemetryController logEvent:GtarPlayAppLogin
+                              withValue:0
+                             andMessage:[NSString stringWithFormat:@"Logged in as %@", g_cloudController.m_username]];
+
         [g_telemetryController uploadLogMessages];
         
     }
@@ -801,8 +803,10 @@ extern TelemetryController * g_telemetryController;
     {
         [g_userController sendPendingUploads];
         
-        [g_telemetryController logMessage:[NSString stringWithFormat:@"Logged in as %@", g_cloudController.m_username] withType:TelemetryControllerMessageTypeInfo];
-        
+        [g_telemetryController logEvent:GtarPlayAppLogin
+                              withValue:0
+                             andMessage:[NSString stringWithFormat:@"Logged in as %@", g_cloudController.m_username]];
+
         [g_telemetryController uploadLogMessages];
     }
     

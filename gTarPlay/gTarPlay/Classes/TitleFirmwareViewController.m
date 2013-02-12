@@ -217,6 +217,17 @@ extern TelemetryController * g_telemetryController;
 - (void)updateFirmware
 {
     
+    // output some messages
+    NSString * msg = [[NSString alloc] initWithFormat:@"Firmware updating"];
+    
+    NSLog(@"%@", msg);
+    
+    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                          withValue:m_firmwareFileId
+                         andMessage:msg];
+    
+    [msg release];
+    
     g_gtarController.m_delegate = self;
     
     NSData * firmware = [g_fileController getFileOrDownloadSync:m_firmwareFileId];
@@ -228,8 +239,10 @@ extern TelemetryController * g_telemetryController;
         
         NSLog(@"%@", msg);
         
-        [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeError];
-        
+        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                              withValue:m_firmwareFileId
+                             andMessage:msg];
+
         [m_statusLabel setText:msg];
         [m_statusLabel setHidden:NO];
         
@@ -237,15 +250,6 @@ extern TelemetryController * g_telemetryController;
         
         return;
     }
-    
-    // output some messages
-    NSLog(@"Updating with firmware file id: %u length: %u", m_firmwareFileId, [firmware length]);
-    
-    NSString * msg = [[NSString alloc] initWithFormat:@"Updating with firmware file id: %u length: %u", m_firmwareFileId, [firmware length]];
-    
-    [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeInfo];
-    
-    [msg release];
     
     if ( [g_gtarController sendFirmwareUpdate:firmware] == YES )
     {
@@ -266,7 +270,9 @@ extern TelemetryController * g_telemetryController;
         
         NSLog(@"%@", msg);
         
-        [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeError];
+        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                              withValue:m_firmwareFileId
+                             andMessage:msg];
         
         [m_statusLabel setText:msg];
         [m_statusLabel setHidden:NO];
@@ -414,10 +420,14 @@ extern TelemetryController * g_telemetryController;
 
 - (void)receivedFirmwareUpdateStatusSucceeded
 {
-    NSLog(@"Firmware update succeeded");
+    NSString * msg = @"Firmware update succeeded";
+
+    NSLog(@"%@", msg);
     
-    [g_telemetryController logMessage:@"Firmware update succeeded" withType:TelemetryControllerMessageTypeInfo];
-    
+    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                          withValue:m_firmwareFileId
+                         andMessage:msg];
+
     m_updating = NO;
     
     [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusSucceededMain) withObject:nil waitUntilDone:YES];
@@ -436,10 +446,14 @@ extern TelemetryController * g_telemetryController;
 - (void)receivedFirmwareUpdateStatusFailed
 {
     
-    NSLog(@"Firmware update failed");
+    NSString * msg = @"Firmware update failed";
     
-    [g_telemetryController logMessage:@"Firmware update failed" withType:TelemetryControllerMessageTypeError];
+    NSLog(@"%@", msg);
     
+    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                          withValue:m_firmwareFileId
+                         andMessage:msg];
+
     m_updating = NO;
     
     [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusFailedMain) withObject:nil waitUntilDone:YES];

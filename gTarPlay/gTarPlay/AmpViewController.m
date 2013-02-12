@@ -389,10 +389,16 @@
     
     [m_menuView removeFromSuperview];
     [m_scoreView removeFromSuperview];
+    
+}
 
-//    [self slideViewDown];
-//    
-//    m_isUp = NO;
+- (IBAction)abortButtonClicked:(id)sender
+{
+    
+    [m_delegate abortButtonClicked];
+    
+    [m_menuView removeFromSuperview];
+    [m_scoreView removeFromSuperview];
     
 }
 
