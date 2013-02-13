@@ -119,30 +119,22 @@ TelemetryController * g_telemetryController;
     [self.m_playApplication resetIdleTimer];
     
     // Delay load some things
-//    m_delayedLoadView = [[UIView alloc] initWithFrame:m_navigationController.view.frame];
-//    
-//    UIImageView * imageView = [[UIImageView alloc] initWithFrame:m_delayedLoadView.frame];
-//    imageView.image = [UIImage imageNamed:@"DefaultRot.png"];
-////    imageView.transform = CGAffineTransformMakeRotation( M_PI_2 );
-//    imageView.center = m_delayedLoadView.center;
-//    
-//    UIActivityIndicatorView * indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    indicatorView.center = m_delayedLoadView.center;
-//    indicatorView.transform = CGAffineTransformMakeTranslation(0, 100);
-//    indicatorView.hidden = NO;
-//    [indicatorView startAnimating];
-//    
-//    [m_delayedLoadView addSubview:imageView];
-//    [m_delayedLoadView addSubview:indicatorView];
-//    
-//    [imageView release];
-//    [indicatorView release];
-//    
-//    [m_navigationController.view addSubview:m_delayedLoadView];
-//    [m_navigationController.view bringSubviewToFront:m_delayedLoadView];
+//    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
     
-    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
+    // Running it in the background is sufficient. We don't need to sync block the user.
+    [self performSelectorInBackground:@selector(delayedLoad) withObject:nil];
     
+    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
+
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:1.0f];
+    [UIView setAnimationDelegate:delayLoadView];
+    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+
+    delayLoadView.alpha = 0.0f;
+
+    [UIView commitAnimations];
+
     return YES;
 }
 
@@ -334,21 +326,25 @@ TelemetryController * g_telemetryController;
 - (void)delayedLoad
 {
     
+    NSLog(@"Begin delayed loading");
+    
     // Create the audio controller -- this can take awhile
     g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     [g_audioController initializeAUGraph];
     
     
-    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
+    NSLog(@"Finished delayed loading");
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:1.0f];
-    [UIView setAnimationDelegate:delayLoadView];
-    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
-
-    delayLoadView.alpha = 0.0f;
-    
-    [UIView commitAnimations];
+//    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
+//    
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDuration:1.0f];
+//    [UIView setAnimationDelegate:delayLoadView];
+//    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+//
+//    delayLoadView.alpha = 0.0f;
+//    
+//    [UIView commitAnimations];
     
 }
 
