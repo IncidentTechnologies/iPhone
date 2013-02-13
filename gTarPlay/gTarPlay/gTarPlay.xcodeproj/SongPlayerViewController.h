@@ -48,6 +48,7 @@
     IBOutlet UIButton * m_songNameButton;
     IBOutlet UILabel * m_trackTimeLabel;
     IBOutlet UIView * m_previewView;
+    IBOutlet UIActivityIndicatorView * m_activityView;
     
     BOOL m_wasPlaying;
     
@@ -60,6 +61,7 @@
 @property (nonatomic, retain) IBOutlet UIButton * m_songNameButton;
 @property (nonatomic, retain) IBOutlet UILabel * m_trackTimeLabel;
 @property (nonatomic, retain) IBOutlet UIView * m_previewView;
+@property (nonatomic, retain) UIActivityIndicatorView * m_activityView;
 
 - (void)handleResignActive;
 - (void)attachToSuperView:(UIView*)superview andPlaySongSession:(UserSongSession*)userSongSessions;

@@ -119,21 +119,21 @@ TelemetryController * g_telemetryController;
     [self.m_playApplication resetIdleTimer];
     
     // Delay load some things
-//    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
     
-    // Running it in the background is sufficient. We don't need to sync block the user.
-    [self performSelectorInBackground:@selector(delayedLoad) withObject:nil];
-    
-    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
-
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:1.0f];
-    [UIView setAnimationDelegate:delayLoadView];
-    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
-
-    delayLoadView.alpha = 0.0f;
-
-    [UIView commitAnimations];
+    // Run it in the background. This has pretty bad perf hit though, sticking with the sync version above
+//    [self performSelectorInBackground:@selector(delayedLoad) withObject:nil];
+//    
+//    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
+//
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDuration:1.0f];
+//    [UIView setAnimationDelegate:delayLoadView];
+//    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+//
+//    delayLoadView.alpha = 0.0f;
+//
+//    [UIView commitAnimations];
 
     return YES;
 }
@@ -332,19 +332,18 @@ TelemetryController * g_telemetryController;
     g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     [g_audioController initializeAUGraph];
     
-    
     NSLog(@"Finished delayed loading");
     
-//    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
-//    
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:1.0f];
-//    [UIView setAnimationDelegate:delayLoadView];
-//    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
-//
-//    delayLoadView.alpha = 0.0f;
-//    
-//    [UIView commitAnimations];
+    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:1.0f];
+    [UIView setAnimationDelegate:delayLoadView];
+    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+
+    delayLoadView.alpha = 0.0f;
+    
+    [UIView commitAnimations];
     
 }
 
