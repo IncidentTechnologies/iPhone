@@ -93,7 +93,7 @@
 {
     
     NSDate * date = [[NSDate alloc] init];
-    NSString * logMessage = [[NSString alloc] initWithFormat:@"%@|%@\n", date, message];
+    NSString * logMessage = [[NSString alloc] initWithFormat:@"%@,%@\n", date, message];
     
     [self addMessageToQueue:logMessage];
     
@@ -139,7 +139,7 @@
 - (void)logEvent:(TelemetryControllerEvent)event withValue:(NSInteger)value andMessage:(NSString*)message
 {
     
-    NSString * logMessage = [NSString stringWithFormat:@"%@,%u,%@\n", event, value, message];
+    NSString * logMessage = [NSString stringWithFormat:@"%@,%u,%@", event, value, message];
     
     [self logMessage:logMessage];
     
@@ -189,7 +189,7 @@
         if ( m_droppedMessages > 0 )
         {
             NSDate * date = [[NSDate alloc] init];
-            NSString * droppedMessage = [[NSString alloc] initWithFormat:@"%@|%@,%u,%@\n", date, DroppedTelemetryMessages, m_droppedMessages, @"Dropped telemetry messages"];
+            NSString * droppedMessage = [[NSString alloc] initWithFormat:@"%@,%@,%u,%@\n", date, DroppedTelemetryMessages, m_droppedMessages, @"Dropped telemetry messages"];
             
             [m_messageQueue addObject:droppedMessage];
             

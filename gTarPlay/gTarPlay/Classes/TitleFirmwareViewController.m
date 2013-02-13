@@ -61,6 +61,7 @@ extern TelemetryController * g_telemetryController;
     
     NSString * compileDate = [NSString stringWithUTF8String:__DATE__];
     NSString * compileTime = [NSString stringWithUTF8String:__TIME__];
+    NSString * compileVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
     NSString * dateTimeString = [NSString stringWithFormat:@"%@ %@", compileDate, compileTime];
     
@@ -72,7 +73,7 @@ extern TelemetryController * g_telemetryController;
     
     [formatter setDateFormat:@"YYYMMddHHmmss"];
     
-    [m_buildVersionLabel setText:[NSString stringWithFormat:@"App Build: %@", [formatter stringFromDate:date]]];
+    [m_buildVersionLabel setText:[NSString stringWithFormat:@"App Build: %@-%@", compileVersion, [formatter stringFromDate:date]]];
 
 }
 

@@ -95,7 +95,8 @@ extern TelemetryController * g_telemetryController;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResignActive) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
         
-        m_playTimeStart = [NSDate date];
+        [m_playTimeStart release];
+        m_playTimeStart = [[NSDate date] retain];
         m_playTimeAdjustment = 0;
         
         // Create audio controller
@@ -445,7 +446,8 @@ extern TelemetryController * g_telemetryController;
 
 - (void)handleBecomeActive
 {
-    m_playTimeStart = [NSDate date];
+    [m_playTimeStart release];
+    m_playTimeStart = [[NSDate date] retain];
 }
 
 #pragma mark - Main event loop

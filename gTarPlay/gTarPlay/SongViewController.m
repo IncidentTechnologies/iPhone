@@ -42,7 +42,6 @@
 
 #define TEMP_BASE_SCORE 10
 
-extern SongViewController * g_songViewController;
 extern CloudController * g_cloudController;
 extern GtarController * g_gtarController;
 extern UserController * g_userController;
@@ -68,9 +67,6 @@ extern TelemetryController * g_telemetryController;
     
     if ( self )
     {
-        // Custom initialization
-        g_songViewController = self;
-        
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
         
@@ -93,8 +89,6 @@ extern TelemetryController * g_telemetryController;
 
     [g_gtarController turnOffAllLeds];
     [g_gtarController removeObserver:self];
-    
-    g_songViewController = nil;
     
     [m_displayController cancelPreloading];
     [m_displayController release];
@@ -234,7 +228,8 @@ extern TelemetryController * g_telemetryController;
 
 - (void)handleBecomeActive
 {
-    m_playTimeStart = [NSDate date];
+    [m_playTimeStart release];
+    m_playTimeStart = [[NSDate date] retain];
 }
 
 - (void)startWithSongXmlDom
@@ -251,7 +246,9 @@ extern TelemetryController * g_telemetryController;
     m_currentFrame = nil;
     
     m_playTimeAdjustment = 0;
-    m_playTimeStart = [NSDate date];
+    
+    [m_playTimeStart release];
+    m_playTimeStart = [[NSDate date] retain];
     
     //
     // start off the song stuff

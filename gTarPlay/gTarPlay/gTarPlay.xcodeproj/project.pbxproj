@@ -986,6 +986,10 @@
 		EC24DFF2161A8B0A00016B78 /* StoreBuyCreditsPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC31BB8A14E3474C00DC7083 /* StoreBuyCreditsPopupViewController.xib */; };
 		EC24DFF3161A8B0A00016B78 /* CustomNavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC18A6EE13D90249004A2667 /* CustomNavigationViewController.xib */; };
 		EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		EC26A3A516CB198F006E97E2 /* DefaultRot.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A316CB198E006E97E2 /* DefaultRot.png */; };
+		EC26A3A616CB198F006E97E2 /* DefaultRot.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A316CB198E006E97E2 /* DefaultRot.png */; };
+		EC26A3A716CB198F006E97E2 /* DefaultRot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */; };
+		EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */; };
 		EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
 		EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
 		ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */; };
@@ -2607,6 +2611,8 @@
 		EC24DC26161A847A00016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGtarController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC26080F1582C11800DA6FCA /* ShareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShareButton.png; sourceTree = "<group>"; };
 		EC2608101582C11800DA6FCA /* SharedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SharedButton.png; sourceTree = "<group>"; };
+		EC26A3A316CB198E006E97E2 /* DefaultRot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultRot.png; sourceTree = "<group>"; };
+		EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultRot@2x.png"; sourceTree = "<group>"; };
 		EC2E4B2D14F1EED0008663B1 /* CustomComboBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomComboBox.h; sourceTree = "<group>"; };
 		EC2E4B2E14F1EED0008663B1 /* CustomComboBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomComboBox.m; sourceTree = "<group>"; };
 		EC2F25B11468B30300D0FC7F /* gTarApp_Icon320X480_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon320X480_B.png; sourceTree = "<group>"; };
@@ -4474,6 +4480,8 @@
 				ECC82CF11375FE0E004C70AF /* gTarLogo.png */,
 				EC2F25C51468B3C100D0FC7F /* Default.png */,
 				EC9A92021468BB33009CAC83 /* Default@2x.png */,
+				EC26A3A316CB198E006E97E2 /* DefaultRot.png */,
+				EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */,
 				EC2F25B11468B30300D0FC7F /* gTarApp_Icon320X480_B.png */,
 				EC2F25B21468B30400D0FC7F /* gTarApp_Icon320X480_W.png */,
 				EC2F25B31468B30400D0FC7F /* gTarApp_Icon640X960_B.png */,
@@ -5693,6 +5701,8 @@
 				ECBF4FFD1641E3C0003F0C8C /* TitleCancelButton.png in Resources */,
 				ECBF4FFF1641E3C0003F0C8C /* TitleUpdateButton.png in Resources */,
 				EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */,
+				EC26A3A516CB198F006E97E2 /* DefaultRot.png in Resources */,
+				EC26A3A716CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6588,6 +6598,8 @@
 				ECBF4FFE1641E3C0003F0C8C /* TitleCancelButton.png in Resources */,
 				ECBF50001641E3C0003F0C8C /* TitleUpdateButton.png in Resources */,
 				EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */,
+				EC26A3A616CB198F006E97E2 /* DefaultRot.png in Resources */,
+				EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

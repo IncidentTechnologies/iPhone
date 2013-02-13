@@ -61,6 +61,7 @@
 @property (nonatomic, retain) IBOutlet UILabel * m_trackTimeLabel;
 @property (nonatomic, retain) IBOutlet UIView * m_previewView;
 
+- (void)handleResignActive;
 - (void)attachToSuperView:(UIView*)superview andPlaySongSession:(UserSongSession*)userSongSessions;
 - (void)attachToSuperView:(UIView*)superview andPlayXmpBlob:(NSString*)xmpBlob;
 - (void)updateProgress;

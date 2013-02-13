@@ -40,6 +40,7 @@
     
 //    IBOutlet UIView * m_disconnectedDeviceView;
     
+    IBOutlet UIView * m_delayLoadView;
     IBOutlet UIView * m_buttonView;
     IBOutlet UIButton * m_button1;
     IBOutlet UIButton * m_button2;
@@ -85,6 +86,7 @@
 
 //@property (nonatomic, retain) IBOutlet UIView * m_disconnectedDeviceView;
 
+@property (nonatomic, retain) IBOutlet UIView * m_delayLoadView;
 @property (nonatomic, retain) IBOutlet UIView * m_buttonView;
 @property (nonatomic, retain) IBOutlet UIButton * m_button1;
 @property (nonatomic, retain) IBOutlet UIButton * m_button2;
@@ -104,6 +106,8 @@
 
 @property (nonatomic, retain) IBOutlet UIView * m_accountContainerView;
 @property (nonatomic, readonly) BOOL m_waitingForFacebook;
+
+- (void)handleBecomeActive;
 
 - (IBAction)playButtonClicked:(id)sender;
 - (IBAction)freePlayButtonClicked:(id)sender;

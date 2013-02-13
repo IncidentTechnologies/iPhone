@@ -10,9 +10,10 @@
 
 #import "RootViewController.h"
 
+extern UserController * g_userController;
+
 @implementation TitleSignupViewController
 
-@synthesize m_userController;
 @synthesize m_usernameTextField;
 @synthesize m_passwordTextField;
 @synthesize m_emailTextField;
@@ -35,7 +36,6 @@
 - (void)dealloc
 {
     
-    [m_userController release];
     [m_usernameTextField release];
     [m_passwordTextField release];
     [m_emailTextField release];
@@ -191,7 +191,7 @@
     
     [self startSpinner];
     
-    [m_userController requestSignupUser:m_usernameTextField.text
+    [g_userController requestSignupUser:m_usernameTextField.text
                             andPassword:m_passwordTextField.text
                                andEmail:m_emailTextField.text
                          andCallbackObj:self

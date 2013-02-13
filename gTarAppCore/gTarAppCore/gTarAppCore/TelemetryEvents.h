@@ -6,28 +6,33 @@
 //
 //
 
+#ifndef gTarAppCore_TelemetryEvents_h
+#define gTarAppCore_TelemetryEvents_h
+
 typedef NSString* TelemetryControllerEvent;
 
 // Internal TC events
-TelemetryControllerEvent DroppedTelemetryMessages = @"DroppedTelemetryMessages";
+#define DroppedTelemetryMessages ((TelemetryControllerEvent)@"DroppedTelemetryMessages")
 
 // gTarPlay events
-TelemetryControllerEvent GtarPlayAppOpened = @"GtarPlayAppOpened";
-TelemetryControllerEvent GtarPlayAppClosed = @"GtarPlayAppClosed";
-TelemetryControllerEvent GtarPlayAppMemWarning = @"GtarPlayAppMemWarning";
-TelemetryControllerEvent GtarPlayAppLogin = @"GtarPlayAppLogin";
-TelemetryControllerEvent GtarPlayAppLogout = @"GtarPlayAppLogout";
+#define GtarPlayAppOpened ((TelemetryControllerEvent)@"GtarPlayAppOpened")
+#define GtarPlayAppClosed ((TelemetryControllerEvent)@"GtarPlayAppClosed")
+#define GtarPlayAppMemWarning ((TelemetryControllerEvent)@"GtarPlayAppMemWarning")
+#define GtarPlayAppLogin ((TelemetryControllerEvent)@"GtarPlayAppLogin")
+#define GtarPlayAppLogout ((TelemetryControllerEvent)@"GtarPlayAppLogout")
 
-TelemetryControllerEvent GtarFirmwareUpdateStatus = @"GtarFirmwareUpdateStatus";
+#define GtarFirmwareUpdateStatus ((TelemetryControllerEvent)@"GtarFirmwareUpdateStatus")
 
-TelemetryControllerEvent GtarPlaySongCompleted = @"GtarPlaySongCompleted";
-TelemetryControllerEvent GtarPlaySongRestarted = @"GtarPlaySongRestarted";
-TelemetryControllerEvent GtarPlaySongDisconnected = @"GtarPlaySongDisconnected";
-TelemetryControllerEvent GtarPlaySongAborted = @"GtarPlaySongAborted";
-TelemetryControllerEvent GtarPlaySongShared = @"GtarPlaySongShared";
-TelemetryControllerEvent GtarPlayToggleFeature = @"GtarPlayToggleFeature";
+#define GtarPlaySongCompleted ((TelemetryControllerEvent)@"GtarPlaySongCompleted")
+#define GtarPlaySongRestarted ((TelemetryControllerEvent)@"GtarPlaySongRestarted")
+#define GtarPlaySongDisconnected ((TelemetryControllerEvent)@"GtarPlaySongDisconnected")
+#define GtarPlaySongAborted ((TelemetryControllerEvent)@"GtarPlaySongAborted")
+#define GtarPlaySongShared ((TelemetryControllerEvent)@"GtarPlaySongShared")
+#define GtarPlayToggleFeature ((TelemetryControllerEvent)@"GtarPlayToggleFeature")
 
-TelemetryControllerEvent GtarFreePlayCompleted = @"GtarFreePlayCompleted";
-TelemetryControllerEvent GtarFreePlayDisconnected = @"GtarFreePlayDisconnected";
-TelemetryControllerEvent GtarFreePlayToggleFeature = @"GtarFreePlayToggleFeature";
-TelemetryControllerEvent GtarFreePlayInstrument = @"GtarFreePlayInstrument";
+#define GtarFreePlayCompleted ((TelemetryControllerEvent)@"GtarFreePlayCompleted")
+#define GtarFreePlayDisconnected ((TelemetryControllerEvent)@"GtarFreePlayDisconnected")
+#define GtarFreePlayToggleFeature ((TelemetryControllerEvent)@"GtarFreePlayToggleFeature")
+#define GtarFreePlayInstrument ((TelemetryControllerEvent)@"GtarFreePlayInstrument")
+
+#endif

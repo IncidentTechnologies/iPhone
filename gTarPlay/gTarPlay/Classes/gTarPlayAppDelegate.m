@@ -24,9 +24,6 @@
 
 #import <AudioController/AudioController.h>
 
-SongViewController * g_songViewController;
-RootViewController * g_rootViewController;
-SongPlayerViewController * g_songPlayerViewController;
 Facebook * g_facebook;
 
 CloudController * g_cloudController;
@@ -35,7 +32,6 @@ FileController * g_fileController;
 GtarController * g_gtarController;
 UserController * g_userController;
 TelemetryController * g_telemetryController;
-//ContentController * g_contentController;
 
 @implementation gTarPlayAppDelegate
 
@@ -53,6 +49,42 @@ TelemetryController * g_telemetryController;
     if ( self )
     {
         
+        //
+        // Controller init stuff
+        //
+        
+        // Init the cloud controller
+        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
+        
+        // Restore the file controller so we can get all the cached content
+        g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
+        
+        // Create the user controller to manage users
+        g_userController = [[UserController alloc] initWithCloudController:g_cloudController];
+        
+        // Create the telemetry controller to upload log data
+        NSString * uuidString = [self generateUUID];
+        
+        g_telemetryController = [[TelemetryController alloc] initWithCloudController:g_cloudController];
+        g_telemetryController.m_compileDate = @__DATE__;
+        g_telemetryController.m_appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        g_telemetryController.m_appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
+        g_telemetryController.m_deviceId = uuidString;
+        
+        // Connect to the gtar device
+        g_gtarController = [[GtarController alloc] init];
+        
+        g_gtarController.responseThread = GtarControllerThreadMain;
+        
+        // By default it just outputs 'LevelError'
+//        g_gtarController.logLevel = GtarControllerLogLevelInfo;
+        
+        [g_gtarController addObserver:self];
+        
+#if TARGET_IPHONE_SIMULATOR
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+#endif
+        
     }
     
     return self;
@@ -61,56 +93,6 @@ TelemetryController * g_telemetryController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    //
-    // Controller init stuff
-    //
-    
-    // Init the cloud controller
-    g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
-    
-    // Restore the file controller so we can get all the cached content
-    g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
-    
-    // Create the audio controller
-    g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
-    [g_audioController initializeAUGraph];
-    
-    // Create the user controller to manage users
-    g_userController = [[UserController alloc] initWithCloudController:g_cloudController];
-    
-    // Create the telemetry controller to upload log data
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    
-    NSString * uuidString = [settings stringForKey:@"UUIDString"];
-    
-    if ( uuidString == nil )
-    {
-        uuidString = [self generateUUID];
-    }
-
-    g_telemetryController = [[TelemetryController alloc] initWithCloudController:g_cloudController];
-    g_telemetryController.m_compileDate = @__DATE__;
-    g_telemetryController.m_appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    g_telemetryController.m_appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
-    g_telemetryController.m_deviceId = uuidString;
-    
-    // Connect to the gtar device
-    g_gtarController = [[GtarController alloc] init];
-    
-    g_gtarController.responseThread = GtarControllerThreadMain;
-    
-    // By default it just outputs 'LevelError'
-//        g_gtarController.logLevel = GtarControllerLogLevelInfo;
-    
-    [g_gtarController addObserver:self];
-    
-#if TARGET_IPHONE_SIMULATOR
-    [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
-    //        [NSTimer scheduledTimerWithTimeInterval:10.0 target:g_gtarController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
-    
-    //        [g_gtarController debugSpoofConnected];
-#endif
     
     //
     // Typical UI setup stuff
@@ -126,8 +108,6 @@ TelemetryController * g_telemetryController;
     [self.m_window makeKeyAndVisible];
 
     // We never want to rotate
-//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-//    [[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeRight];
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
     [g_telemetryController logEvent:GtarPlayAppOpened
@@ -137,6 +117,31 @@ TelemetryController * g_telemetryController;
     self.m_playApplication = (gTarPlayApplication*)application;
     
     [self.m_playApplication resetIdleTimer];
+    
+    // Delay load some things
+//    m_delayedLoadView = [[UIView alloc] initWithFrame:m_navigationController.view.frame];
+//    
+//    UIImageView * imageView = [[UIImageView alloc] initWithFrame:m_delayedLoadView.frame];
+//    imageView.image = [UIImage imageNamed:@"DefaultRot.png"];
+////    imageView.transform = CGAffineTransformMakeRotation( M_PI_2 );
+//    imageView.center = m_delayedLoadView.center;
+//    
+//    UIActivityIndicatorView * indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    indicatorView.center = m_delayedLoadView.center;
+//    indicatorView.transform = CGAffineTransformMakeTranslation(0, 100);
+//    indicatorView.hidden = NO;
+//    [indicatorView startAnimating];
+//    
+//    [m_delayedLoadView addSubview:imageView];
+//    [m_delayedLoadView addSubview:indicatorView];
+//    
+//    [imageView release];
+//    [indicatorView release];
+//    
+//    [m_navigationController.view addSubview:m_delayedLoadView];
+//    [m_navigationController.view bringSubviewToFront:m_delayedLoadView];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
     
     return YES;
 }
@@ -150,12 +155,6 @@ TelemetryController * g_telemetryController;
      */
     
     // This gets called when the home button is pressed
-    
-    // if there is a currently running song player instance, pause that.
-//    [g_songViewController pauseSong];
-    
-    // if they are listening to a song, pause that.
-//    [g_songPlayerViewController pauseSongPlayback];
     
     // abort a firmware update, if in progress
     [g_gtarController sendFirmwareUpdateCancelation];
@@ -205,11 +204,6 @@ TelemetryController * g_telemetryController;
     
     // Clear the cache if this changes in the background
     [self checkAndClearCache];
-    
-    if ( g_rootViewController.m_waitingForFacebook == YES )
-    {
-        [g_rootViewController displayWelcomeDialog];
-    }
     
     [g_facebook extendAccessTokenIfNeeded];
 
@@ -307,18 +301,25 @@ TelemetryController * g_telemetryController;
 - (NSString*)generateUUID
 {
     
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    NSString * uuidString = [settings stringForKey:@"UUIDString"];
+    
+    if ( uuidString != nil )
+    {
+        return uuidString;
+    }
+    
     CFUUIDRef uuid = CFUUIDCreate(nil);
     
     CFStringRef uuidCFString = CFUUIDCreateString(nil, uuid);
     
     // Convert to NSString
-    NSString * uuidString = (NSString*)uuidCFString;
+    uuidString = (NSString*)uuidCFString;
     
     [uuidString retain];
     
     // Save this UUID
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    
     [settings setObject:uuidString forKey:@"UUIDString"];
     
     [settings synchronize];
@@ -327,6 +328,27 @@ TelemetryController * g_telemetryController;
     CFRelease(uuidCFString);
     
     return [uuidString autorelease];
+    
+}
+
+- (void)delayedLoad
+{
+    
+    // Create the audio controller -- this can take awhile
+    g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
+    [g_audioController initializeAUGraph];
+    
+    
+    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:1.0f];
+    [UIView setAnimationDelegate:delayLoadView];
+    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+
+    delayLoadView.alpha = 0.0f;
+    
+    [UIView commitAnimations];
     
 }
 
@@ -351,8 +373,6 @@ TelemetryController * g_telemetryController;
     [g_userController release];
     
     [g_gtarController release];
-    
-//    [g_contentController release];
     
     [g_fileController release];
     

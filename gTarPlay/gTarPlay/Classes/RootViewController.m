@@ -28,13 +28,13 @@ extern FileController * g_fileController;
 extern GtarController * g_gtarController;
 extern UserController * g_userController;
 extern Facebook * g_facebook;
-extern RootViewController * g_rootViewController;
 extern TelemetryController * g_telemetryController;
 
 @implementation RootViewController
 
 //@synthesize m_disconnectedDeviceView;
 
+@synthesize m_delayLoadView;
 @synthesize m_buttonView;
 @synthesize m_button1;
 @synthesize m_button2;
@@ -64,15 +64,7 @@ extern TelemetryController * g_telemetryController;
     if ( self )
     {
         
-        g_rootViewController = self;
-        
         // Keep this init brief so we don't slow down app loading
-        
-        // Consider doing this lazily since the AC sampler takes a fair bit of time to load
-        m_songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
-        m_songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
-//        m_songPlaybackViewController.m_delegate = self;
-        m_songPlaybackViewController.m_popupDelegate = self;
         
         m_titleGatekeeperViewController = [[TitleGatekeeperViewController alloc] initWithNibName:nil bundle:nil];
         m_titleWelcomeViewController = [[TitleWelcomeViewController alloc] initWithNibName:nil bundle:nil];
@@ -81,13 +73,6 @@ extern TelemetryController * g_telemetryController;
         m_titleTutorialViewController = [[TitleTutorialViewController alloc] initWithNibName:nil bundle:nil];
         m_titleFacebookViewController = [[TitleFacebookViewController alloc] initWithNibName:nil bundle:nil];
         m_titleFirmwareViewController = [[TitleFirmwareViewController alloc] initWithNibName:nil bundle:nil];
-        
-        
-        
-        // we should just move the global UC into the controllers instead of doing this
-        m_titleLoginViewController.m_userController = g_userController;
-        m_titleSignupViewController.m_userController = g_userController;
-        m_titleFacebookViewController.m_userController = g_userController;
         
         g_facebook = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
         
@@ -99,7 +84,9 @@ extern TelemetryController * g_telemetryController;
             g_facebook.accessToken = [settings objectForKey:@"FBAccessTokenKey"];
             g_facebook.expirationDate = [settings objectForKey:@"FBExpirationDateKey"];
         }
-
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
     }
     
     return self;
@@ -109,12 +96,13 @@ extern TelemetryController * g_telemetryController;
 - (void)dealloc
 {
     
-    g_rootViewController = nil;
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+
     [g_facebook release];
     
     g_facebook = nil;
     
+    [m_delayLoadView release];
     [m_buttonView release];
     [m_button1 release];
     [m_button2 release];
@@ -153,7 +141,11 @@ extern TelemetryController * g_telemetryController;
 
 - (void)viewDidLoad
 {
+    
 	[super viewDidLoad];
+    
+    // Add a loading screen. This gets removed by the AppDelegate when it is done with its delayed loading
+    [self.view addSubview:m_delayLoadView];
     
 	// 
 	// Setup UI
@@ -176,14 +168,12 @@ extern TelemetryController * g_telemetryController;
     //
     // Setup the account view
     //
-//    m_accountViewController = [[AccountViewController alloc] initWithFrame:m_accountContainerView.frame];
     m_accountViewController = [[AccountViewController alloc] initWithNibName:nil bundle:nil];
     m_accountViewController.m_rootViewController = self;
     
     [m_accountViewController.view setFrame:m_accountContainerView.frame];
-    [self.view addSubview:m_accountViewController.view];
-//    [m_accountViewController startSpinner];
-        
+    [self.view insertSubview:m_accountViewController.view belowSubview:m_delayLoadView];
+    
     //
     // Observe the device
     //
@@ -319,6 +309,16 @@ extern TelemetryController * g_telemetryController;
 -(NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskLandscapeLeft;
+}
+
+- (void)handleBecomeActive
+{
+    
+    if ( m_waitingForFacebook == YES )
+    {
+        [self displayWelcomeDialog];
+    }
+    
 }
 
 #pragma mark -
@@ -1029,12 +1029,11 @@ extern TelemetryController * g_telemetryController;
     
     session.m_xmpBlob = xmpBlob;
     
-    // Song playback view controller
+    // Song playback view controller, loaded lazily so as not to slow down app load
     if ( m_songPlaybackViewController == nil )
     {
         m_songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
-        m_songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButton.png"];
-        
+        m_songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
         m_songPlaybackViewController.m_popupDelegate = self;
     }
     

@@ -15,13 +15,8 @@
 
 #import "Facebook.h"
 
-extern UserController * g_userController;
-extern Facebook * g_facebook;
-
 @interface TitleFacebookViewController : FullScreenDialogViewController
 {
-    
-    UserController * m_userController;
     
     IBOutlet UILabel * m_statusLabel;
     
@@ -29,7 +24,6 @@ extern Facebook * g_facebook;
 
 }
 
-@property (nonatomic, retain) UserController * m_userController;
 @property (nonatomic, retain) IBOutlet UILabel * m_statusLabel;
 
 - (void)startSpinner;

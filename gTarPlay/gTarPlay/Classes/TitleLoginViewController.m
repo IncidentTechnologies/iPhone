@@ -12,10 +12,11 @@
 
 @implementation TitleLoginViewController
 
-@synthesize m_userController;
 @synthesize m_usernameTextField;
 @synthesize m_passwordTextField;
 @synthesize m_statusLabel;
+
+extern UserController * g_userController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,7 +37,6 @@
     
     [m_fullScreenSpinnerView removeFromSuperview];
     
-    [m_userController release];
     [m_usernameTextField release];
     [m_passwordTextField release];
     [m_statusLabel release];
@@ -153,10 +153,10 @@
     
     [m_statusLabel setHidden:YES];
     
-    [m_usernameTextField setText:m_userController.m_loggedInUsername];
+    [m_usernameTextField setText:g_userController.m_loggedInUsername];
     [m_passwordTextField setText:@"dummy password"];
     
-    [m_userController requestLoginUserCachedCallbackObj:self andCallbackSel:@selector(loginCallback:)];
+    [g_userController requestLoginUserCachedCallbackObj:self andCallbackSel:@selector(loginCallback:)];
 
 }
 
@@ -202,7 +202,7 @@
     
     [self startSpinner];
     
-    [m_userController requestLoginUser:m_usernameTextField.text
+    [g_userController requestLoginUser:m_usernameTextField.text
                            andPassword:m_passwordTextField.text
                         andCallbackObj:self
                         andCallbackSel:@selector(loginCallback:)];

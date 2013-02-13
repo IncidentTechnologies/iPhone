@@ -17,7 +17,6 @@
 
 //#import "RootViewController.h"
 
-extern SongPlayerViewController * g_songPlayerViewController;
 extern GtarController * g_gtarController;
 extern AudioController * g_audioController;
 
@@ -46,9 +45,7 @@ extern AudioController * g_audioController;
         
         self.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
         
-        g_songPlayerViewController = self;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEndpoints) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResignActive) name:UIApplicationWillResignActiveNotification object:nil];
 
         
     }
@@ -61,8 +58,6 @@ extern AudioController * g_audioController;
 {
 
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
-
-    g_songPlayerViewController = nil;
     
     [m_playbackController release];
     [m_songPreviewScrubberView removeFromSuperview];
@@ -119,6 +114,11 @@ extern AudioController * g_audioController;
     self.m_trackTimeLabel = nil;
     self.m_previewView = nil;
     
+}
+
+- (void)handleResignActive
+{
+    [self pauseSongPlayback];
 }
 
 - (IBAction)fullScreenButtonClicked:(id)sender
