@@ -28,6 +28,7 @@
     NSString * m_appName;
     NSString * m_appVersion;
     NSString * m_deviceId;
+    NSString * m_username;
     
     NSString * m_telemetryFilePath;
     
@@ -43,7 +44,7 @@
 @property (nonatomic, retain) NSString * m_appName;
 @property (nonatomic, retain) NSString * m_appVersion;
 @property (nonatomic, retain) NSString * m_deviceId;
-
+@property (nonatomic, retain) NSString * m_username;
 
 - (id)initWithCloudController:(CloudController*)cloudController;
 

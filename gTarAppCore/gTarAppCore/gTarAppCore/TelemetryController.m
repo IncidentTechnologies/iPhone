@@ -20,6 +20,7 @@
 @synthesize m_appName;
 @synthesize m_appVersion;
 @synthesize m_deviceId;
+@synthesize m_username;
 
 - (id)initWithCloudController:(CloudController*)cloudController
 {
@@ -36,6 +37,7 @@
         m_appName = @"default";
         m_appVersion = @"default";
         m_deviceId = @"default";
+        m_username = @"(none)";
         
         // Create a little place to store our content stuff
         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -82,7 +84,8 @@
     [m_appName release];
     [m_appVersion release];
     [m_deviceId release];
-
+    [m_username release];
+    
     [super dealloc];
     
 }
@@ -92,8 +95,14 @@
 - (void)logMessage:(NSString*)message
 {
     
+    // Update the username if it has changed
+    if ( m_cloudController.m_username )
+    {
+        self.m_username = m_cloudController.m_username;
+    }
+    
     NSDate * date = [[NSDate alloc] init];
-    NSString * logMessage = [[NSString alloc] initWithFormat:@"%@,%@\n", date, message];
+    NSString * logMessage = [[NSString alloc] initWithFormat:@"%f,%@,%@\n", [date timeIntervalSince1970], m_username, message];
     
     [self addMessageToQueue:logMessage];
     
@@ -182,6 +191,11 @@
         return;
     }
     
+    if ( m_cloudController.m_username )
+    {
+        self.m_username = m_cloudController.m_username;
+    }
+    
     NSMutableString * logsToUpload = [[NSMutableString alloc] init];
     
     @synchronized(m_messageQueue)
@@ -189,7 +203,7 @@
         if ( m_droppedMessages > 0 )
         {
             NSDate * date = [[NSDate alloc] init];
-            NSString * droppedMessage = [[NSString alloc] initWithFormat:@"%@,%@,%u,%@\n", date, DroppedTelemetryMessages, m_droppedMessages, @"Dropped telemetry messages"];
+            NSString * droppedMessage = [[NSString alloc] initWithFormat:@"%f,%@,%@,%u,%@\n", [date timeIntervalSince1970], m_username, DroppedTelemetryMessages, m_droppedMessages, @"Dropped telemetry messages"];
             
             [m_messageQueue addObject:droppedMessage];
             

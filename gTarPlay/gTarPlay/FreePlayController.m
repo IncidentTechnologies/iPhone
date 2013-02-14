@@ -1232,11 +1232,11 @@ extern TelemetryController * g_telemetryController;
     
     // Telemetetry log
     NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
-    NSString* state = [sender isSelected] ? @"ON" : @"OFF";
+    NSString* state = [sender isSelected] ? @"On" : @"Off";
     
     [g_telemetryController logEvent:GtarFreePlayToggleFeature
                           withValue:[sender isSelected]
-                         andMessage:[NSString stringWithFormat:@"Effect: %@ State: %@", name, state]];
+                         andMessage:[NSString stringWithFormat:@"Effect:%@, State:%@", name, state]];
     
 }
 
@@ -1291,7 +1291,7 @@ extern TelemetryController * g_telemetryController;
     {
         [g_telemetryController logEvent:GtarFreePlayToggleFeature
                               withValue:0
-                             andMessage:[NSString stringWithFormat:@"Instrument: %@", [m_instrumentsScroll getNameAtIndex:[m_instrumentsScroll m_selectedIndex]]]];
+                             andMessage:[NSString stringWithFormat:@"Instrument:%@", [m_instrumentsScroll getNameAtIndex:[m_instrumentsScroll m_selectedIndex]]]];
         
         [g_audioController reset];
         [g_audioController startAUGraph];
@@ -1430,11 +1430,11 @@ extern TelemetryController * g_telemetryController;
     }
     
     // Telemetetry log
-    NSString* state = [m_scaleSwitch isSelected] ? @"ON" : @"OFF";
+    NSString* state = [m_scaleSwitch isSelected] ? @"On" : @"Off";
     
     [g_telemetryController logEvent:GtarFreePlayToggleFeature
                           withValue:[m_scaleSwitch isSelected] 
-                         andMessage:[NSString stringWithFormat:@"ScaleLights: %@", state]];
+                         andMessage:[NSString stringWithFormat:@"ScaleLights:%@", state]];
 
 }
 
@@ -1491,7 +1491,7 @@ extern TelemetryController * g_telemetryController;
     
     [g_telemetryController logEvent:GtarFreePlayToggleFeature
                           withValue:m_bSpeakerRoute
-                         andMessage:[NSString stringWithFormat:@"AudioRoute: %@", route]];
+                         andMessage:[NSString stringWithFormat:@"AudioRoute:%@", route]];
     
     if (m_bSpeakerRoute)
     {

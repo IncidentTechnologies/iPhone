@@ -641,7 +641,7 @@ BOOL m_skipNotes = NO;
     
     [g_telemetryController logEvent:GtarPlaySongDisconnected
                           withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId: #%u, Title:'%@', Difficulty: %u, Percent: %0.2f",
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
                                      m_userSong.m_songId,
                                      m_userSong.m_title,
                                      m_difficulty,
@@ -1121,7 +1121,7 @@ BOOL m_skipNotes = NO;
     
     [g_telemetryController logEvent:GtarPlaySongCompleted
                           withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId: #%u, Title:'%@', Difficulty: %u, Percent: %0.2f",
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
                                      m_userSong.m_songId,
                                      m_userSong.m_title,
                                      m_difficulty,
@@ -1209,7 +1209,7 @@ BOOL m_skipNotes = NO;
     
     [g_telemetryController logEvent:GtarPlaySongAborted
                           withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId: #%u, Title:'%@', Difficulty: %u, Percent: %0.2f",
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
                                      m_userSong.m_songId,
                                      m_userSong.m_title,
                                      m_difficulty,
@@ -1230,7 +1230,7 @@ BOOL m_skipNotes = NO;
     
     [g_telemetryController logEvent:GtarPlaySongRestarted
                           withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId: #%u, Title:'%@', Difficulty: %u, Percent: %0.2f",
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
                                      m_userSong.m_songId,
                                      m_userSong.m_title,
                                      m_difficulty,
@@ -1267,7 +1267,7 @@ BOOL m_skipNotes = NO;
     
     [g_telemetryController logEvent:GtarPlaySongShared
                           withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId: #%u, Title:'%@', Difficulty: %u, Percent: %0.2f",
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
                                      m_userSong.m_songId,
                                      m_userSong.m_title,
                                      m_difficulty,
@@ -1325,7 +1325,7 @@ BOOL m_skipNotes = NO;
     
     [g_telemetryController logEvent:GtarPlayToggleFeature
                           withValue:(NSInteger)m_bSpeakerRoute
-                         andMessage:[NSString stringWithFormat:@"AudioRoute: %@", route]];
+                         andMessage:[NSString stringWithFormat:@"AudioRoute:%@", route]];
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
@@ -1343,14 +1343,14 @@ BOOL m_skipNotes = NO;
         m_playMetronome = YES;
         [g_telemetryController logEvent:GtarPlayToggleFeature
                               withValue:(NSInteger)m_playMetronome
-                             andMessage:@"Metronome: On"];
+                             andMessage:@"Metronome:On"];
     }
     else
     {
         m_playMetronome = NO;
         [g_telemetryController logEvent:GtarPlayToggleFeature
                               withValue:(NSInteger)m_playMetronome
-                             andMessage:@"Metronome: Off"];
+                             andMessage:@"Metronome:Off"];
     }
     
 }

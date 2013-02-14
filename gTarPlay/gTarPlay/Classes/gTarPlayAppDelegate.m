@@ -70,6 +70,7 @@ TelemetryController * g_telemetryController;
         g_telemetryController.m_appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         g_telemetryController.m_appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
         g_telemetryController.m_deviceId = uuidString;
+        g_telemetryController.m_username = g_userController.m_loggedInUsername;
         
         // Connect to the gtar device
         g_gtarController = [[GtarController alloc] init];
@@ -121,23 +122,8 @@ TelemetryController * g_telemetryController;
     // Delay load some things
     [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
     
-    // Run it in the background. This has pretty bad perf hit though, sticking with the sync version above
-//    [self performSelectorInBackground:@selector(delayedLoad) withObject:nil];
-//    
-//    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
-//
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:1.0f];
-//    [UIView setAnimationDelegate:delayLoadView];
-//    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
-//
-//    delayLoadView.alpha = 0.0f;
-//
-//    [UIView commitAnimations];
-
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
