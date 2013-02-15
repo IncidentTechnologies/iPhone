@@ -48,6 +48,7 @@
 #define GET_SERVER_STATUS @"Main/ServerStatus"
 #define GET_ITUNES_STATUS @"Main/ItunesStatus"
 
+#define CloudRequestTypeGetServerStatusUrl @"Main/ServerStatus"
 #define CloudRequestTypeGetFileUrl @"UserFiles/GetFile"
 #define CloudRequestTypeRegisterUrl @"Users/Register"
 #define CloudRequestTypeLoginFacebookUrl @"Users/LoginWithFacebookAccessToken"
@@ -81,6 +82,15 @@
 // maybe append a clock() or tick() to this thing
 #define POST_BOUNDARY @"------gTarPlayFormBoundary0123456789"
 
+#define URL_REQUEST_TIMEOUT 5
+//#define URL_REQUEST_TIMEOUT 0.0000001
+
+// X number of time outs every Y seconds sends us offline
+#define ERRORS_BEFORE_OFFLINE 4
+#define ERROR_WINDOW 120
+
+#define TEST_ONLINE_STATUS_PERIOD 60 // check every 1 minute
+
 @implementation CloudController
 
 @synthesize m_loggedIn;
@@ -95,6 +105,8 @@
 	if ( self )
 	{
 		
+        // Assume we are online initially
+        m_online = YES;
         m_loggedIn = NO;
         
 		m_requestResponseDictionary = [[NSMutableDictionary alloc] init];
@@ -184,9 +196,57 @@
 //    
 //}
 
+// This should always run on the main thread for the timer
+- (void)handleError
+{
+    
+    m_errorsRecently++;
+    
+    if ( m_errorsRecently == 1 )
+    {
+        [NSTimer scheduledTimerWithTimeInterval:ERROR_WINDOW target:self selector:@selector(errorWindowFinished) userInfo:nil repeats:NO];
+    }
+    else if ( m_errorsRecently >= ERRORS_BEFORE_OFFLINE )
+    {
+        // we are offline
+        m_online = NO;
+        
+        [NSTimer scheduledTimerWithTimeInterval:TEST_ONLINE_STATUS_PERIOD target:self selector:@selector(queryOnlineStatus) userInfo:nil repeats:NO];
+    }
+    
+}
+
+- (void)errorWindowFinished
+{
+    // reset the error count
+    m_errorsRecently = 0;
+}
+
+- (void)queryOnlineStatus
+{
+    [self requestServerStatusCallbackObj:self andCallbackSel:@selector(receiveOnlineStatus:)];
+}
+
+- (void)receiveOnlineStatus:(CloudResponse*)cloudResponse
+{
+    
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+    {
+        // We are back online
+        m_online = YES;
+        m_errorsRecently = 0;
+    }
+    else
+    {
+        // Try again later
+        [NSTimer scheduledTimerWithTimeInterval:TEST_ONLINE_STATUS_PERIOD target:self selector:@selector(queryOnlineStatus) userInfo:nil repeats:NO];
+    }
+}
+
 #pragma mark -
 #pragma mark Syncronous convenience
 
+// These functions haven't been used in a long time and are probably dead
 - (BOOL)requestServerStatus
 {
     
@@ -263,6 +323,18 @@
 
 
 #pragma mark - Server requests
+
+- (CloudRequest*)requestServerStatusCallbackObj:(id)obj andCallbackSel:(SEL)sel
+{
+    
+    // Create async request
+    CloudRequest * cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypeGetServerStatus andCallbackObject:obj andCallbackSelector:sel];
+    
+    [self cloudSendRequest:cloudRequest];
+    
+    return [cloudRequest autorelease];
+    
+}
 
 #pragma mark File
 
@@ -812,6 +884,29 @@
     // Create a response object
     CloudResponse * cloudResponse = [[[CloudResponse alloc] initWithCloudRequest:cloudRequest] autorelease];
     
+    if ( m_online == NO )
+    {
+        if ( cloudRequest.m_isSynchronous == YES )
+        {
+            cloudRequest.m_status = CloudRequestStatusOffline;
+            cloudResponse.m_status = CloudResponseStatusOffline;
+            cloudResponse.m_statusText = @"Offline, try again later";
+            
+            return cloudResponse;
+        }
+        else
+        {
+            cloudRequest.m_status = CloudRequestStatusOffline;
+            cloudResponse.m_status = CloudResponseStatusOffline;
+            cloudResponse.m_statusText = @"Offline, try again later";
+            
+            // Return the request to sender
+            [self cloudReturnResponse:cloudResponse];
+            
+            return nil;
+        }
+    }
+    
     // Parse out the request parameters
     NSURLRequest * urlRequest = [self createPostForRequest:cloudRequest];
     
@@ -938,7 +1033,7 @@
     {
         // Send this back to the original caller
 //        [callbackObject performSelector:callbackSelector withObject:cloudResponse];
-        [callbackObject performSelectorOnMainThread:callbackSelector withObject:cloudResponse waitUntilDone:YES];
+        [callbackObject performSelectorOnMainThread:callbackSelector withObject:cloudResponse waitUntilDone:NO];
     }
     
     // Now that this request is done, we can issue another one
@@ -984,6 +1079,8 @@
     
 	[request setHTTPMethod:@"POST"];
 	
+    [request setTimeoutInterval:URL_REQUEST_TIMEOUT];
+    
     // Set the ContentType to multipart/form-data. This is what CakePHP expects
     NSString * boundary = POST_BOUNDARY;
     
@@ -1097,6 +1194,12 @@
     
     switch ( cloudRequest.m_type )
     {
+            
+        case CloudRequestTypeGetServerStatus:
+        {
+            url = CloudRequestTypeGetServerStatusUrl;
+            
+        } break;
             
         case CloudRequestTypeGetFile:
         {
@@ -1567,6 +1670,13 @@
     
     switch ( cloudResponse.m_cloudRequest.m_type )
     {
+            
+        case CloudRequestTypeGetServerStatus:
+        {
+            
+            // If we got this far, the server is up
+            
+        } break;
             
         case CloudRequestTypeGetFile:
         {
@@ -2064,6 +2174,8 @@
     cloudResponse.m_cloudRequest.m_status = CloudRequestStatusConnectionError;
     
     [self cloudReceiveResponse:cloudResponse];
+    
+    [self performSelectorOnMainThread:@selector(handleError) withObject:nil waitUntilDone:YES];
     
 #if TARGET_IPHONE_SIMULATOR
     NSLog(@"URL error: %@", error);
