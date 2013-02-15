@@ -183,6 +183,8 @@ TelemetryController * g_telemetryController;
     // Clear the cache if this changes in the background
     [self checkAndClearCache];
     
+    [g_fileController checkCacheSize];
+    
     [g_facebook extendAccessTokenIfNeeded];
 
 }

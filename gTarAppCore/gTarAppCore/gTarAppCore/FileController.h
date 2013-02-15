@@ -29,6 +29,7 @@
 
 - (id)initWithCloudController:(CloudController*)cloudController;
 - (void)clearCache;
+- (BOOL)enumerateFileCache;
 
 // general file
 - (BOOL)fileExists:(NSInteger)fileId;
@@ -47,8 +48,12 @@
 - (id)receivedFileResponse:(CloudResponse*)cloudResponse;
 - (id)createFile:(NSData*)data fromMimeType:(NSString*)mimeType;
 
+- (void)checkCacheSize;
+- (void)pruneCache:(NSInteger)bytesToPrune;
 
 - (BOOL)addSkipBackupAttributeToFileId:(NSInteger)fileId;
 - (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
+
+
 
 @end
