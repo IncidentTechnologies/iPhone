@@ -256,4 +256,38 @@ extern UserController * g_userController;
     
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    NSCharacterSet * usernameSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
+    NSCharacterSet * passwordSet =[[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789!@#$%^&*+-/=?^_`|~.[]{}()"] invertedSet];
+    
+    // Backspace character
+    if ( [string length] == 0 )
+    {
+        return YES;
+    }
+    
+    // The username needs alpha num only
+    if ( textField == m_usernameTextField &&
+        [string rangeOfCharacterFromSet:usernameSet].location != NSNotFound )
+    {
+        [m_statusLabel setText:@"Invalid character"];
+        [m_statusLabel setHidden:NO];
+        return NO;
+    }
+    
+    if ( textField == m_passwordTextField &&
+        [string rangeOfCharacterFromSet:passwordSet].location != NSNotFound )
+    {
+        [m_statusLabel setText:@"Invalid character"];
+        [m_statusLabel setHidden:NO];
+        return NO;
+    }
+    
+    [m_statusLabel setHidden:YES];
+    
+    return YES;
+}
+
 @end
