@@ -17,13 +17,15 @@ typedef enum
     CloudRequestStatusSent,
     CloudRequestStatusReceivingData,
     CloudRequestStatusCompleted,
-    CloudRequestStatusConnectionError
+    CloudRequestStatusConnectionError,
+    CloudRequestStatusOffline
 } CloudRequestStatus;
 
 typedef enum
 {
     CloudRequestTypeUnknown = 0,
     
+    CloudRequestTypeGetServerStatus,
     CloudRequestTypeGetFile,
     
     CloudRequestTypeRegister,

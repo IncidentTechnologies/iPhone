@@ -2602,9 +2602,9 @@
 		EC24A67E1342A7F600EA2FED /* fill-gauge2-lcd-off-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fill-gauge2-lcd-off-2.png"; sourceTree = "<group>"; };
 		EC24A67F1342A7F600EA2FED /* fill-gauge2-lcd-off-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fill-gauge2-lcd-off-3.png"; sourceTree = "<group>"; };
 		EC24DC06161A821200016B78 /* gTarPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC24DC24161A847A00016B78 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioController.a; path = "../../GtarSdk/AudioController/build/Release-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
-		EC24DC25161A847A00016B78 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarAppCore.a; path = "../../gTarAppCore/gTarAppCore/build/Release-iphoneos/libgTarAppCore.a"; sourceTree = "<group>"; };
-		EC24DC26161A847A00016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
+		EC24DC24161A847A00016B78 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioController.a; path = "../Debug-iphoneos/libAudioController.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC24DC25161A847A00016B78 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgTarAppCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC24DC26161A847A00016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGtarController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC26080F1582C11800DA6FCA /* ShareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShareButton.png; sourceTree = "<group>"; };
 		EC2608101582C11800DA6FCA /* SharedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SharedButton.png; sourceTree = "<group>"; };
 		EC2E4B2D14F1EED0008663B1 /* CustomComboBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomComboBox.h; sourceTree = "<group>"; };
