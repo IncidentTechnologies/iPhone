@@ -161,8 +161,8 @@
 		EC5DA84D161A5D160015832E /* libgTarAppCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libgTarAppCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC5DA850161A5D160015832E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EC5DA854161A5D160015832E /* gTarAppCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gTarAppCore-Prefix.pch"; sourceTree = "<group>"; };
-		EC5DA871161A5D7A0015832E /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioController.a; path = "../../GtarSdk/AudioController/build/Release-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
-		EC5DA872161A5D7A0015832E /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
+		EC5DA871161A5D7A0015832E /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAudioController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC5DA872161A5D7A0015832E /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGtarController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC5DA876161A5EF40015832E /* TelemetryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelemetryController.h; sourceTree = "<group>"; };
 		EC5DA877161A5EF40015832E /* TelemetryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelemetryController.m; sourceTree = "<group>"; };
 		EC5DA87B161A5F500015832E /* ContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentController.h; sourceTree = "<group>"; };

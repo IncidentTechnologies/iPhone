@@ -24,7 +24,8 @@ typedef enum
 	CloudResponseStatusFailure,
 	CloudResponseStatusAuthenticationError,
 	CloudResponseStatusConnectionError,
-	CloudResponseStatusServerError
+	CloudResponseStatusServerError,
+    CloudResponseStatusOffline
 } CloudResponseStatus;
 
 @interface CloudResponse : NSObject
