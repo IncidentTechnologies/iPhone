@@ -161,9 +161,6 @@ extern TelemetryController * g_telemetryController;
     [m_rightButton setSelected:NO];
     [m_rightButton setEnabled:NO];
     
-//    [self checkCurrentFirmwareVersion];
-//    [self checkAvailableFirmwareVersion];
-    
 }
 
 - (void)detachFromSuperview
@@ -302,6 +299,8 @@ extern TelemetryController * g_telemetryController;
         m_firmwareCurrentMinorVersion = 0;
         
         [m_currentActivity stopAnimating];
+        
+        [m_leftButton setEnabled:YES];
     }
     
 }
@@ -348,15 +347,14 @@ extern TelemetryController * g_telemetryController;
         m_firmwareAvailableMajorVersion = 0;
         m_firmwareAvailableMinorVersion = 0;
         
+        [m_leftButton setEnabled:YES];
+        
     }
     
 }
 
 - (void)compareVersions
 {
-    
-    [m_leftButton setEnabled:NO];
-    [m_rightButton setEnabled:NO];
     
     if ( (m_firmwareCurrentMajorVersion == 0) && (m_firmwareCurrentMinorVersion == 0) )
     {
@@ -373,6 +371,7 @@ extern TelemetryController * g_telemetryController;
     // See if the new version is newer
     if ( m_firmwareAvailableMajorVersion > m_firmwareCurrentMajorVersion )
     {
+        [m_leftButton setEnabled:NO];
         [m_rightButton setEnabled:YES];
     }
     
@@ -380,6 +379,7 @@ extern TelemetryController * g_telemetryController;
     if ( (m_firmwareAvailableMajorVersion == m_firmwareCurrentMajorVersion) &&
          (m_firmwareAvailableMinorVersion > m_firmwareCurrentMinorVersion) )
     {
+        [m_leftButton setEnabled:NO];
         [m_rightButton setEnabled:YES];
     }
     
@@ -387,6 +387,7 @@ extern TelemetryController * g_telemetryController;
     if ( (m_firmwareAvailableMajorVersion == m_firmwareCurrentMajorVersion) &&
          (m_firmwareAvailableMinorVersion == m_firmwareCurrentMinorVersion) )
     {
+        [m_rightButton setEnabled:NO];
         [m_leftButton setEnabled:YES];
     }
 }
