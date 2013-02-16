@@ -669,6 +669,12 @@ extern TelemetryController * g_telemetryController;
     // Set the new current
     m_currentFullScreenDialog = dialog;
     
+    // If the loading screen is still present, make sure that remains on top
+    if ( [m_delayLoadView superview] != nil )
+    {
+        [self.view bringSubviewToFront:m_delayLoadView];
+    }
+    
 }
 
 - (void)returnToPreviousFullScreenDialog
