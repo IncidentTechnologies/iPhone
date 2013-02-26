@@ -12,10 +12,11 @@
 
 @implementation TitleLoginViewController
 
-@synthesize m_userController;
 @synthesize m_usernameTextField;
 @synthesize m_passwordTextField;
 @synthesize m_statusLabel;
+
+extern UserController * g_userController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,7 +37,6 @@
     
     [m_fullScreenSpinnerView removeFromSuperview];
     
-    [m_userController release];
     [m_usernameTextField release];
     [m_passwordTextField release];
     [m_statusLabel release];
@@ -153,10 +153,10 @@
     
     [m_statusLabel setHidden:YES];
     
-    [m_usernameTextField setText:m_userController.m_loggedInUsername];
+    [m_usernameTextField setText:g_userController.m_loggedInUsername];
     [m_passwordTextField setText:@"dummy password"];
     
-    [m_userController requestLoginUserCachedCallbackObj:self andCallbackSel:@selector(loginCallback:)];
+    [g_userController requestLoginUserCachedCallbackObj:self andCallbackSel:@selector(loginCallback:)];
 
 }
 
@@ -202,7 +202,7 @@
     
     [self startSpinner];
     
-    [m_userController requestLoginUser:m_usernameTextField.text
+    [g_userController requestLoginUser:m_usernameTextField.text
                            andPassword:m_passwordTextField.text
                         andCallbackObj:self
                         andCallbackSel:@selector(loginCallback:)];
@@ -254,6 +254,40 @@
     
 	return NO;
     
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    NSCharacterSet * usernameSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
+    NSCharacterSet * passwordSet =[[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789!@#$%^&*+-/=?^_`|~.[]{}()"] invertedSet];
+    
+    // Backspace character
+    if ( [string length] == 0 )
+    {
+        return YES;
+    }
+    
+    // The username needs alpha num only
+    if ( textField == m_usernameTextField &&
+        [string rangeOfCharacterFromSet:usernameSet].location != NSNotFound )
+    {
+        [m_statusLabel setText:@"Invalid character"];
+        [m_statusLabel setHidden:NO];
+        return NO;
+    }
+    
+    if ( textField == m_passwordTextField &&
+        [string rangeOfCharacterFromSet:passwordSet].location != NSNotFound )
+    {
+        [m_statusLabel setText:@"Invalid character"];
+        [m_statusLabel setHidden:NO];
+        return NO;
+    }
+    
+    [m_statusLabel setHidden:YES];
+    
+    return YES;
 }
 
 @end

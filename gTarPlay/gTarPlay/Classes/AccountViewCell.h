@@ -21,6 +21,7 @@
     IBOutlet UILabel * m_playLabel;
     IBOutlet UILabel * m_jamLabel;
     IBOutlet UILabel * m_timeLabel;
+    IBOutlet UIActivityIndicatorView * m_activityView;
     
 }
 
@@ -32,6 +33,7 @@
 @property (nonatomic, retain) IBOutlet UILabel * m_playLabel;
 @property (nonatomic, retain) IBOutlet UILabel * m_jamLabel;
 @property (nonatomic, retain) IBOutlet UILabel * m_timeLabel;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView * m_activityView;
 
 - (void)updateCell;
 

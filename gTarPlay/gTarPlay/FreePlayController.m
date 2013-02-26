@@ -85,12 +85,19 @@ extern TelemetryController * g_telemetryController;
     
     if ( self )
     {
+        
         // Custom initialization
-        [g_telemetryController logMessage:[NSString stringWithFormat:@"Entering Free Play Mode"]
-                                 withType:TelemetryControllerMessageTypeInfo];
         
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
+        
+        // Properly account for play time
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
+        [m_playTimeStart release];
+        m_playTimeStart = [[NSDate date] retain];
+        m_playTimeAdjustment = 0;
         
         // Create audio controller
         g_audioController.m_delegate = self;
@@ -140,6 +147,9 @@ extern TelemetryController * g_telemetryController;
     
     // disable idle sleeping
     [UIApplication sharedApplication].idleTimerDisabled = NO;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     
     [g_gtarController removeObserver:self];
     
@@ -384,6 +394,7 @@ extern TelemetryController * g_telemetryController;
 //    }
     
     [g_gtarController addObserver:self];
+    
 }
 
 - (void)viewDidUnload
@@ -426,6 +437,17 @@ extern TelemetryController * g_telemetryController;
     [self setM_audioRouteSwitch:nil];
     [self setM_scaleSwitch:nil];
     [super viewDidUnload];
+}
+
+- (void)handleResignActive
+{
+    m_playTimeAdjustment += [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970];
+}
+
+- (void)handleBecomeActive
+{
+    [m_playTimeStart release];
+    m_playTimeStart = [[NSDate date] retain];
 }
 
 #pragma mark - Main event loop
@@ -495,6 +517,12 @@ extern TelemetryController * g_telemetryController;
         m_LEDTimer = nil;
     }
     
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+    
+    [g_telemetryController logEvent:GtarFreePlayDisconnected
+                          withValue:delta
+                         andMessage:@"FreePlay disconnected"];
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -1204,9 +1232,12 @@ extern TelemetryController * g_telemetryController;
     
     // Telemetetry log
     NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
-    NSString* state = [sender isSelected] ? @"ON" : @"OFF";
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"Turned Effect %@ %@", name, state]
-                             withType:TelemetryControllerMessageTypeInfo];
+    NSString* state = [sender isSelected] ? @"On" : @"Off";
+    
+    [g_telemetryController logEvent:GtarFreePlayToggleFeature
+                          withValue:[sender isSelected]
+                         andMessage:[NSString stringWithFormat:@"Effect:%@, State:%@", name, state]];
+    
 }
 
 - (IBAction)selectEffect:(id)sender
@@ -1258,8 +1289,9 @@ extern TelemetryController * g_telemetryController;
 {
     if ([result boolValue])
     {
-        [g_telemetryController logMessage:[NSString stringWithFormat:@"Loaded instrument: %@",[m_instrumentsScroll getNameAtIndex:[m_instrumentsScroll m_selectedIndex]]]
-                                 withType:TelemetryControllerMessageTypeInfo];
+        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+                              withValue:0
+                             andMessage:[NSString stringWithFormat:@"Instrument:%@", [m_instrumentsScroll getNameAtIndex:[m_instrumentsScroll m_selectedIndex]]]];
         
         [g_audioController reset];
         [g_audioController startAUGraph];
@@ -1275,9 +1307,12 @@ extern TelemetryController * g_telemetryController;
         m_LEDTimer = nil;
     }
     
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"FreePlayMode ending"]
-                             withType:TelemetryControllerMessageTypeInfo];
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
+    [g_telemetryController logEvent:GtarFreePlayCompleted
+                          withValue:delta
+                         andMessage:@"FreePlay completed"];
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -1395,9 +1430,12 @@ extern TelemetryController * g_telemetryController;
     }
     
     // Telemetetry log
-    NSString* state = [m_scaleSwitch isSelected] ? @"ON" : @"OFF";
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"Turned Scale Lights %@", state]
-                             withType:TelemetryControllerMessageTypeInfo];
+    NSString* state = [m_scaleSwitch isSelected] ? @"On" : @"Off";
+    
+    [g_telemetryController logEvent:GtarFreePlayToggleFeature
+                          withValue:[m_scaleSwitch isSelected] 
+                         andMessage:[NSString stringWithFormat:@"ScaleLights:%@", state]];
+
 }
 
 - (IBAction)toggleMenuTab:(id)sender
@@ -1450,8 +1488,10 @@ extern TelemetryController * g_telemetryController;
     
     // Telemetetry log
     NSString* route = m_bSpeakerRoute ? @"Speaker" : @"Aux";
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"Audio Route in FreePlay set to %@", route]
-                             withType:TelemetryControllerMessageTypeInfo];
+    
+    [g_telemetryController logEvent:GtarFreePlayToggleFeature
+                          withValue:m_bSpeakerRoute
+                         andMessage:[NSString stringWithFormat:@"AudioRoute:%@", route]];
     
     if (m_bSpeakerRoute)
     {

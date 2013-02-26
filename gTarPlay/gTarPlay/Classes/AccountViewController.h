@@ -23,6 +23,7 @@
 @class UserSongSession;
 @class RootViewController;
 @class CustomSegmentedControl;
+@class AccountViewCell;
 
 extern FileController * g_fileController;
 
@@ -44,6 +45,7 @@ extern FileController * g_fileController;
     
     BOOL m_refreshingFriendFeed;
     BOOL m_refreshingGlobalFeed;
+    BOOL m_displayingCell;
     
     NSInteger m_outStandingImageDownloads;
     
@@ -69,6 +71,9 @@ extern FileController * g_fileController;
 
 - (void)fileDownloadFinished:(id)file;
 - (void)playUserSongSession:(UserSongSession*)session;
+- (void)playCell:(AccountViewCell*)cell;
+- (void)stopCell:(AccountViewCell*)cell;
+
 - (void)globalUpdateSucceeded:(CloudResponse*)cloudResponse;
 - (void)userUpdateSucceeded:(UserResponse*)userResponse;
 //- (void)loginWithFacebookToken:(NSString*)accessToken;

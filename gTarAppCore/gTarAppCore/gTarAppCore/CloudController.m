@@ -82,7 +82,7 @@
 // maybe append a clock() or tick() to this thing
 #define POST_BOUNDARY @"------gTarPlayFormBoundary0123456789"
 
-#define URL_REQUEST_TIMEOUT 5
+#define URL_REQUEST_TIMEOUT 30
 //#define URL_REQUEST_TIMEOUT 0.0000001
 
 // X number of time outs every Y seconds sends us offline

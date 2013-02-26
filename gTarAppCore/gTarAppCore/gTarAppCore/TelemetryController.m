@@ -11,7 +11,7 @@
 #import "CloudController.h"
 #import "CloudResponse.h"
 
-#define MAX_QUEUE_SIZE 1000
+#define MAX_QUEUE_SIZE 999
 #define UPLOAD_BATCH_SIZE MAX_QUEUE_SIZE
 
 @implementation TelemetryController
@@ -20,6 +20,7 @@
 @synthesize m_appName;
 @synthesize m_appVersion;
 @synthesize m_deviceId;
+@synthesize m_username;
 
 - (id)initWithCloudController:(CloudController*)cloudController
 {
@@ -36,6 +37,7 @@
         m_appName = @"default";
         m_appVersion = @"default";
         m_deviceId = @"default";
+        m_username = @"(none)";
         
         // Create a little place to store our content stuff
         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -82,47 +84,73 @@
     [m_appName release];
     [m_appVersion release];
     [m_deviceId release];
-
+    [m_username release];
+    
     [super dealloc];
     
 }
 
 #pragma mark - Methods
 
-- (void)logMessage:(NSString*)message withType:(TelemetryControllerMessageType)type
+- (void)logMessage:(NSString*)message
 {
     
-    NSString * logMessage;
-    
-    switch ( type )
+    // Update the username if it has changed
+    if ( m_cloudController.m_username )
     {
-        case TelemetryControllerMessageTypeError:
-        {
-            logMessage = [NSString stringWithFormat:@"Error: %@", message];
-        } break;
-            
-        case TelemetryControllerMessageTypeWarning:
-        {
-            logMessage = [NSString stringWithFormat:@"Warning: %@", message];
-        } break;
-            
-        case TelemetryControllerMessageTypeInfo:
-        {
-            logMessage = [NSString stringWithFormat:@"Info: %@", message];
-        } break;
-            
-        case TelemetryControllerMessageTypeUnknown:
-        default:
-        {
-            // Its not really a fatal error to not have a message type
-            logMessage = [NSString stringWithFormat:@"Unknown: %@", message];            
-        } break;
+        self.m_username = m_cloudController.m_username;
     }
     
-    
-    logMessage = [NSString stringWithFormat:@"%@| %@\n", [NSDate date], logMessage];
+    NSDate * date = [[NSDate alloc] init];
+    NSString * logMessage = [[NSString alloc] initWithFormat:@"%f,%@,%@\n", [date timeIntervalSince1970], m_username, message];
     
     [self addMessageToQueue:logMessage];
+    
+    [logMessage release];
+    [date release];
+    
+}
+
+//- (void)logMessage:(NSString*)message withType:(TelemetryControllerMessageType)type
+//{
+//    
+//    NSString * logMessage;
+//    
+//    switch ( type )
+//    {
+//        case TelemetryControllerMessageTypeError:
+//        {
+//            logMessage = [NSString stringWithFormat:@"Error: %@", message];
+//        } break;
+//            
+//        case TelemetryControllerMessageTypeWarning:
+//        {
+//            logMessage = [NSString stringWithFormat:@"Warning: %@", message];
+//        } break;
+//            
+//        case TelemetryControllerMessageTypeInfo:
+//        {
+//            logMessage = [NSString stringWithFormat:@"Info: %@", message];
+//        } break;
+//            
+//        case TelemetryControllerMessageTypeUnknown:
+//        default:
+//        {
+//            // Its not really a fatal error to not have a message type
+//            logMessage = [NSString stringWithFormat:@"Unknown: %@", message];            
+//        } break;
+//    }
+//    
+//    [self logMessage:logMessage];
+//    
+//}
+
+- (void)logEvent:(TelemetryControllerEvent)event withValue:(NSInteger)value andMessage:(NSString*)message
+{
+    
+    NSString * logMessage = [NSString stringWithFormat:@"%@,%u,%@", event, value, message];
+    
+    [self logMessage:logMessage];
     
 }
 
@@ -163,15 +191,21 @@
         return;
     }
     
+    if ( m_cloudController.m_username )
+    {
+        self.m_username = m_cloudController.m_username;
+    }
+    
     NSMutableString * logsToUpload = [[NSMutableString alloc] init];
     
     @synchronized(m_messageQueue)
     {
         if ( m_droppedMessages > 0 )
         {
-            NSString * dropped = [NSString stringWithFormat:@"@ | %u messages dropped\n", [NSDate date], m_droppedMessages];
+            NSDate * date = [[NSDate alloc] init];
+            NSString * droppedMessage = [[NSString alloc] initWithFormat:@"%f,%@,%@,%u,%@\n", [date timeIntervalSince1970], m_username, DroppedTelemetryMessages, m_droppedMessages, @"Dropped telemetry messages"];
             
-            [logsToUpload appendString:dropped];
+            [m_messageQueue addObject:droppedMessage];
             
             m_droppedMessages = 0;
         }

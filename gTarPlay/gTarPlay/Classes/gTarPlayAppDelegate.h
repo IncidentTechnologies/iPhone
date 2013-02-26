@@ -28,6 +28,8 @@
 
 - (void)checkAndClearCache;
 //- (void)installPreloadedContent;
+- (NSString*)generateUUID;
+- (void)delayedLoad;
 
 @end
 

@@ -40,7 +40,6 @@
         // Create audio controller
         m_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
         
-//        [m_audioController SetAttentuation:AUDIO_CONTROLLER_ATTENUATION];
         [m_audioController initializeAUGraph];
         
     }
@@ -56,10 +55,8 @@
     
     if ( self )
     {
-        
         // Create audio controller
         m_audioController = [audioController retain];
-        
     }
     
     return self;

@@ -10,9 +10,10 @@
 
 #import "RootViewController.h"
 
+extern UserController * g_userController;
+
 @implementation TitleSignupViewController
 
-@synthesize m_userController;
 @synthesize m_usernameTextField;
 @synthesize m_passwordTextField;
 @synthesize m_emailTextField;
@@ -35,7 +36,6 @@
 - (void)dealloc
 {
     
-    [m_userController release];
     [m_usernameTextField release];
     [m_passwordTextField release];
     [m_emailTextField release];
@@ -189,9 +189,22 @@
         return;
     }
     
+    NSCharacterSet * alphaNumChars = [NSCharacterSet alphanumericCharacterSet];
+    NSCharacterSet * alphaChars = [NSCharacterSet letterCharacterSet];
+    
+    NSString * firstChar = [m_usernameTextField.text substringToIndex:1];
+
+    // The first char of the username must be a letter
+    if ( [firstChar rangeOfCharacterFromSet:alphaChars].location == NSNotFound )
+    {
+        [m_statusLabel setText:@"Must begin with a letter"];
+        [m_statusLabel setHidden:NO];
+        return;
+    }
+    
     [self startSpinner];
     
-    [m_userController requestSignupUser:m_usernameTextField.text
+    [g_userController requestSignupUser:m_usernameTextField.text
                             andPassword:m_passwordTextField.text
                                andEmail:m_emailTextField.text
                          andCallbackObj:self
@@ -248,6 +261,49 @@
     
 	return NO;
     
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    NSCharacterSet * usernameSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
+    NSCharacterSet * passwordSet =[[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789!@#$%^&*+-/=?^_`|~.[]{}()"] invertedSet];
+    NSCharacterSet * emailSet =[[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789@+_."] invertedSet];
+    
+    // Backspace character
+    if ( [string length] == 0 )
+    {
+        return YES;
+    }
+
+    // The username needs alpha num only
+    if ( textField == m_usernameTextField &&
+        [string rangeOfCharacterFromSet:usernameSet].location != NSNotFound )
+    {
+        [m_statusLabel setText:@"Invalid character"];
+        [m_statusLabel setHidden:NO];
+        return NO;
+    }
+    
+    if ( textField == m_passwordTextField &&
+        [string rangeOfCharacterFromSet:passwordSet].location != NSNotFound )
+    {
+        [m_statusLabel setText:@"Invalid character"];
+        [m_statusLabel setHidden:NO];
+        return NO;
+    }
+    
+    if ( textField == m_emailTextField &&
+        [string rangeOfCharacterFromSet:emailSet].location != NSNotFound )
+    {
+        [m_statusLabel setText:@"Invalid character"];
+        [m_statusLabel setHidden:NO];
+        return NO;
+    }
+    
+    [m_statusLabel setHidden:YES];
+    
+    return YES;
 }
 
 @end

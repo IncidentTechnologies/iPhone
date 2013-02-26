@@ -10,9 +10,11 @@
 
 #import "RootViewController.h"
 
+extern UserController * g_userController;
+extern Facebook * g_facebook;
+
 @implementation TitleFacebookViewController
 
-@synthesize m_userController;
 @synthesize m_statusLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,7 +36,6 @@
     
     [m_fullScreenSpinnerView removeFromSuperview];
     
-    [m_userController release];
     [m_statusLabel release];
     
     [super dealloc];
@@ -141,7 +142,7 @@
     [self startSpinner];
 
     // Log in with facebook
-    [m_userController requestLoginUserFacebookToken:g_facebook.accessToken
+    [g_userController requestLoginUserFacebookToken:g_facebook.accessToken
                                      andCallbackObj:self
                                      andCallbackSel:@selector(loginCallback:)];
     

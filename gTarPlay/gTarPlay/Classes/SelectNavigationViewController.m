@@ -185,9 +185,10 @@ extern AudioController * g_audioController;
     {
         // Reload the table
         [m_selectListViewController.m_tableView stopAnimating];
-        [m_selectListViewController refreshDisplay];
     }
-    
+
+    [m_selectListViewController refreshDisplay];
+
 }
 
 #pragma mark - ViewController stuff
@@ -237,7 +238,15 @@ extern AudioController * g_audioController;
 
 - (void)refreshSongList
 {
-    [m_selectListViewController.m_tableView startAnimating];
+    // If there are already songs, use the offscreen animation instead
+    if ( [m_userSongArray count] > 0 )
+    {
+        [m_selectListViewController.m_tableView startAnimatingOffscreen];
+    }
+    else
+    {
+        [m_selectListViewController.m_tableView startAnimating];
+    }
     
 	[g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
 }

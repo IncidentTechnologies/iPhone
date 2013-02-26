@@ -105,6 +105,8 @@ extern UserController * g_userController;
         
         [m_footerView.layer insertSublayer:gradient atIndex:0];
         
+        m_displayingCell = NO;
+        
     }
     
     return self;
@@ -272,21 +274,36 @@ extern UserController * g_userController;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {	
     
-    NSInteger row = [indexPath row];
-    
-    UserSongSession * session = nil;
-    
-    if ( m_feedSelector.m_selectedSegmentIndex == 0 )
+    // We only want one cell to be clicked on at a time
+    if ( m_displayingCell == YES )
     {
-        session = [m_friendFeed objectAtIndex:row];
+        
     }
     
-    if ( m_feedSelector.m_selectedSegmentIndex == 1 )
-    {
-        session = [m_globalFeed objectAtIndex:row];
-    }
+//    NSInteger row = [indexPath row];
+//    
+//    UserSongSession * session = nil;
+//    
+//    if ( m_feedSelector.m_selectedSegmentIndex == 0 )
+//    {
+//        session = [m_friendFeed objectAtIndex:row];
+//    }
+//    
+//    if ( m_feedSelector.m_selectedSegmentIndex == 1 )
+//    {
+//        session = [m_globalFeed objectAtIndex:row];
+//    }
     
-    [self playUserSongSession:session];
+    // We only want one cell to be clicked on at a time
+    m_displayingCell = YES;
+    
+    // Cause the row to spin until the session has started
+    AccountViewCell * cell = (AccountViewCell*)[m_tableView cellForRowAtIndexPath:indexPath];
+    
+    [cell.m_timeLabel setHidden:YES];
+    [cell.m_activityView startAnimating];
+    
+    [self performSelector:@selector(playCell:) withObject:cell afterDelay:0.05];
     
 }
 
@@ -467,6 +484,26 @@ extern UserController * g_userController;
 {
     
     [m_rootViewController accountViewDisplayUserSongSession:session];
+    
+}
+
+- (void)playCell:(AccountViewCell*)cell
+{
+    
+    [self playUserSongSession:cell.m_userSongSession];
+    
+    [self performSelector:@selector(stopCell:) withObject:cell afterDelay:0.25];
+    
+}
+
+- (void)stopCell:(AccountViewCell*)cell
+{
+    
+    [cell.m_timeLabel setHidden:NO];
+    [cell.m_activityView stopAnimating];
+    
+    // Restore control to the user
+    m_displayingCell = NO;
     
 }
 

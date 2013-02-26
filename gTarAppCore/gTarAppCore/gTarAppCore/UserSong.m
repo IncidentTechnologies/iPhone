@@ -15,7 +15,8 @@
 @implementation UserSong
 
 @synthesize m_xmlDom;
-@synthesize m_songId, m_authorId, m_tempo, m_title, m_author, m_genre, m_description, m_xmpFileId, m_imgFileId, m_timeCreated, m_timeModified;
+@synthesize m_songId, m_authorId, m_tempo, m_title, m_author, m_genre, m_description, m_xmpFileId, m_timeCreated, m_timeModified;
+@synthesize m_imgFileId;
 @synthesize m_playScore, m_playStars;
 @synthesize m_cost;
 @synthesize m_productId;
@@ -83,6 +84,17 @@
     
     return self;
     
+}
+
+// TODO
+// I'm hardcoding the img file id to 1 because we currently don't display album art in the app.
+// I don't want to rip out all the code as it is working now, because we will add art in eventually.
+// This let's us avoid downloading useless album art in the short term by just short circuiting
+// to an image that is (effectively) guaranteed to be in the cache all the time.
+// Remove this getter to restore normal operation of album art downloading.
+- (NSInteger)m_imgFileId
+{
+    return 1;
 }
 
 // just a container class, doesn't have anything else

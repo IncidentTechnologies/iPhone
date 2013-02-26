@@ -13,7 +13,9 @@
 
 #import <gTarAppCore/UserSong.h>
 #import <gTarAppCore/UserController.h>
+#import <gTarAppCore/FileController.h>
 
+extern FileController * g_fileController;
 extern UserController * g_userController;
 
 @implementation SelectListViewController
@@ -111,8 +113,20 @@ extern UserController * g_userController;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
+    NSInteger readyRows = 0;
+    
+    // Figure out how many rows are ready to go.
+    for ( UserSong * userSong in m_userSongArray )
+    {
+        if ( [g_fileController fileExists:userSong.m_xmpFileId] == YES )
+        {
+            readyRows++;
+        }
+    }
+    
 	// Return the number of rows in the section.
-	return [m_userSongArray count];
+    return readyRows;
     
 }
 
@@ -140,7 +154,24 @@ extern UserController * g_userController;
 	
 	NSInteger row = [indexPath row];
     
-	UserSong * userSong = [m_userSongArray objectAtIndex:row];
+//	UserSong * userSong = [m_userSongArray objectAtIndex:row];
+    UserSong * userSong;
+    
+    NSInteger readySongs = 0;
+    
+    // Find the row'th song that is ready to go
+    for ( UserSong * candidateUserSong in m_userSongArray )
+    {
+        if ( [g_fileController fileExists:candidateUserSong.m_xmpFileId] == YES )
+        {
+            readySongs++;
+            
+            if ( readySongs == (row+1) )
+            {
+                userSong = candidateUserSong;
+            }
+        }
+    }
     
     userSong.m_playStars = [g_userController getMaxStarsForSong:userSong.m_songId];
     userSong.m_playScore = [g_userController getMaxScoreForSong:userSong.m_songId];

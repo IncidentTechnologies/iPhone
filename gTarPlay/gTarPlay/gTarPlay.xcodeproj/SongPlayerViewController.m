@@ -17,7 +17,6 @@
 
 //#import "RootViewController.h"
 
-extern SongPlayerViewController * g_songPlayerViewController;
 extern GtarController * g_gtarController;
 extern AudioController * g_audioController;
 
@@ -30,6 +29,7 @@ extern AudioController * g_audioController;
 @synthesize m_userNameButton;
 @synthesize m_trackTimeLabel;
 @synthesize m_previewView;
+@synthesize m_activityView;
 
 #define UPDATE_FREQUENCY (1/30)
 
@@ -46,7 +46,8 @@ extern AudioController * g_audioController;
         
         self.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
         
-        g_songPlayerViewController = self;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+
         
     }
     
@@ -56,8 +57,8 @@ extern AudioController * g_audioController;
 
 - (void)dealloc
 {
-    
-    g_songPlayerViewController = nil;
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
     
     [m_playbackController release];
     [m_songPreviewScrubberView removeFromSuperview];
@@ -72,6 +73,7 @@ extern AudioController * g_audioController;
     [m_userNameButton release];
     [m_trackTimeLabel release];
     [m_previewView release];
+    [m_activityView release];
     
     [m_background release];
 
@@ -113,7 +115,18 @@ extern AudioController * g_audioController;
     self.m_songNameButton = nil;
     self.m_trackTimeLabel = nil;
     self.m_previewView = nil;
+    self.m_activityView = nil;
     
+}
+
+- (void)handleResignActive
+{
+    [self pauseSongPlayback];
+}
+
+- (IBAction)fullScreenButtonClicked:(id)sender
+{
+    // no-op 
 }
 
 - (void)attachToSuperView:(UIView*)superview andPlaySongSession:(UserSongSession*)userSongSessions
@@ -124,6 +137,8 @@ extern AudioController * g_audioController;
         return;
     }
     
+    [m_activityView startAnimating];
+    
     [m_userSongSession release];
     
     m_userSongSession = [userSongSessions retain];
@@ -132,10 +147,11 @@ extern AudioController * g_audioController;
     
     m_xmpBlob = [userSongSessions.m_xmpBlob retain];
     
-    // This is done in IB now
-//    self.m_popupTitle = [NSString stringWithFormat:@"\"%@\" performed by %@",userSongSessions.m_userSong.m_title,userSongSessions.m_userProfile.m_firstName];
-    
+    // The view hasn't been loaded before here
     [self attachToSuperViewWithBlackBackground:superview];
+    // All UI works needs to be done after this
+    
+    [m_activityView startAnimating];
     
     [m_userNameButton setTitle:[NSString stringWithFormat:@"interpreted by %@", userSongSessions.m_userProfile.m_firstName] forState:UIControlStateNormal];
     [m_songNameButton setTitle:userSongSessions.m_userSong.m_title forState:UIControlStateNormal];
@@ -177,6 +193,8 @@ extern AudioController * g_audioController;
     
     [m_background addSubview:m_songPreviewScrubberView];
     [m_background bringSubviewToFront:m_songPreviewScrubberView];
+    
+    [m_activityView stopAnimating];
     
     [super attachFinalize];
     
@@ -226,13 +244,6 @@ extern AudioController * g_audioController;
     double currentBeat = m_playbackController.m_songModel.m_currentBeat;
     double currentTime = currentBeat / m_playbackController.m_songModel.m_beatsPerSecond;
     
-//    NSString * trackTime = [NSString stringWithFormat:@"%u:%02u  %u.%u.%u", 
-//                            (NSInteger)(currentTime/60),
-//                            ((NSInteger)currentTime%60),
-//                            ((NSInteger)(currentBeat/4)+1),
-//                            (((NSInteger)currentBeat%4)+1),
-//                            (((NSInteger)(currentBeat*4)%4)+1)];
-
     NSString * trackTime = [NSString stringWithFormat:@"%02u:%02u",
                             (NSInteger)(currentTime/60),
                             ((NSInteger)currentTime%60)];

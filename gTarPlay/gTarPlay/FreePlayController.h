@@ -71,6 +71,10 @@ typedef enum
     Effect *m_selectedEffect;
     
     int m_ScaleArray[41];
+    
+    NSDate * m_playTimeStart;
+    NSTimeInterval m_playTimeAdjustment;
+    
 }
 
 @property (retain, nonatomic) IBOutlet JamPad *m_jamPad;

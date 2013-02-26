@@ -16,8 +16,6 @@
 @interface TitleSignupViewController : FullScreenDialogViewController
 {
     
-    UserController * m_userController;
-    
     IBOutlet UITextField * m_usernameTextField;
     IBOutlet UITextField * m_passwordTextField;
     IBOutlet UITextField * m_emailTextField;
@@ -28,7 +26,6 @@
 
 }
 
-@property (nonatomic, retain) UserController * m_userController;
 @property (nonatomic, retain) IBOutlet UITextField * m_usernameTextField;
 @property (nonatomic, retain) IBOutlet UITextField * m_passwordTextField;
 @property (nonatomic, retain) IBOutlet UITextField * m_emailTextField;

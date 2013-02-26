@@ -61,6 +61,7 @@ extern TelemetryController * g_telemetryController;
     
     NSString * compileDate = [NSString stringWithUTF8String:__DATE__];
     NSString * compileTime = [NSString stringWithUTF8String:__TIME__];
+    NSString * compileVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
     NSString * dateTimeString = [NSString stringWithFormat:@"%@ %@", compileDate, compileTime];
     
@@ -72,7 +73,7 @@ extern TelemetryController * g_telemetryController;
     
     [formatter setDateFormat:@"YYYMMddHHmmss"];
     
-    [m_buildVersionLabel setText:[NSString stringWithFormat:@"App Build: %@", [formatter stringFromDate:date]]];
+    [m_buildVersionLabel setText:[NSString stringWithFormat:@"App Build: %@-%@", compileVersion, [formatter stringFromDate:date]]];
 
 }
 
@@ -160,9 +161,6 @@ extern TelemetryController * g_telemetryController;
     [m_rightButton setSelected:NO];
     [m_rightButton setEnabled:NO];
     
-//    [self checkCurrentFirmwareVersion];
-//    [self checkAvailableFirmwareVersion];
-    
 }
 
 - (void)detachFromSuperview
@@ -217,6 +215,17 @@ extern TelemetryController * g_telemetryController;
 - (void)updateFirmware
 {
     
+    // output some messages
+    NSString * msg = [[NSString alloc] initWithFormat:@"Firmware updating"];
+    
+    NSLog(@"%@", msg);
+    
+    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                          withValue:m_firmwareFileId
+                         andMessage:msg];
+    
+    [msg release];
+    
     g_gtarController.m_delegate = self;
     
     NSData * firmware = [g_fileController getFileOrDownloadSync:m_firmwareFileId];
@@ -228,8 +237,10 @@ extern TelemetryController * g_telemetryController;
         
         NSLog(@"%@", msg);
         
-        [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeError];
-        
+        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                              withValue:m_firmwareFileId
+                             andMessage:msg];
+
         [m_statusLabel setText:msg];
         [m_statusLabel setHidden:NO];
         
@@ -237,15 +248,6 @@ extern TelemetryController * g_telemetryController;
         
         return;
     }
-    
-    // output some messages
-    NSLog(@"Updating with firmware file id: %u length: %u", m_firmwareFileId, [firmware length]);
-    
-    NSString * msg = [[NSString alloc] initWithFormat:@"Updating with firmware file id: %u length: %u", m_firmwareFileId, [firmware length]];
-    
-    [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeInfo];
-    
-    [msg release];
     
     if ( [g_gtarController sendFirmwareUpdate:firmware] == YES )
     {
@@ -266,7 +268,9 @@ extern TelemetryController * g_telemetryController;
         
         NSLog(@"%@", msg);
         
-        [g_telemetryController logMessage:msg withType:TelemetryControllerMessageTypeError];
+        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                              withValue:m_firmwareFileId
+                             andMessage:msg];
         
         [m_statusLabel setText:msg];
         [m_statusLabel setHidden:NO];
@@ -295,6 +299,8 @@ extern TelemetryController * g_telemetryController;
         m_firmwareCurrentMinorVersion = 0;
         
         [m_currentActivity stopAnimating];
+        
+        [m_leftButton setEnabled:YES];
     }
     
 }
@@ -341,15 +347,14 @@ extern TelemetryController * g_telemetryController;
         m_firmwareAvailableMajorVersion = 0;
         m_firmwareAvailableMinorVersion = 0;
         
+        [m_leftButton setEnabled:YES];
+        
     }
     
 }
 
 - (void)compareVersions
 {
-    
-    [m_leftButton setEnabled:NO];
-    [m_rightButton setEnabled:NO];
     
     if ( (m_firmwareCurrentMajorVersion == 0) && (m_firmwareCurrentMinorVersion == 0) )
     {
@@ -366,6 +371,7 @@ extern TelemetryController * g_telemetryController;
     // See if the new version is newer
     if ( m_firmwareAvailableMajorVersion > m_firmwareCurrentMajorVersion )
     {
+        [m_leftButton setEnabled:NO];
         [m_rightButton setEnabled:YES];
     }
     
@@ -373,6 +379,7 @@ extern TelemetryController * g_telemetryController;
     if ( (m_firmwareAvailableMajorVersion == m_firmwareCurrentMajorVersion) &&
          (m_firmwareAvailableMinorVersion > m_firmwareCurrentMinorVersion) )
     {
+        [m_leftButton setEnabled:NO];
         [m_rightButton setEnabled:YES];
     }
     
@@ -380,6 +387,7 @@ extern TelemetryController * g_telemetryController;
     if ( (m_firmwareAvailableMajorVersion == m_firmwareCurrentMajorVersion) &&
          (m_firmwareAvailableMinorVersion == m_firmwareCurrentMinorVersion) )
     {
+        [m_rightButton setEnabled:NO];
         [m_leftButton setEnabled:YES];
     }
 }
@@ -414,10 +422,14 @@ extern TelemetryController * g_telemetryController;
 
 - (void)receivedFirmwareUpdateStatusSucceeded
 {
-    NSLog(@"Firmware update succeeded");
+    NSString * msg = @"Firmware update succeeded";
+
+    NSLog(@"%@", msg);
     
-    [g_telemetryController logMessage:@"Firmware update succeeded" withType:TelemetryControllerMessageTypeInfo];
-    
+    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                          withValue:m_firmwareFileId
+                         andMessage:msg];
+
     m_updating = NO;
     
     [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusSucceededMain) withObject:nil waitUntilDone:YES];
@@ -436,10 +448,14 @@ extern TelemetryController * g_telemetryController;
 - (void)receivedFirmwareUpdateStatusFailed
 {
     
-    NSLog(@"Firmware update failed");
+    NSString * msg = @"Firmware update failed";
     
-    [g_telemetryController logMessage:@"Firmware update failed" withType:TelemetryControllerMessageTypeError];
+    NSLog(@"%@", msg);
     
+    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                          withValue:m_firmwareFileId
+                         andMessage:msg];
+
     m_updating = NO;
     
     [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusFailedMain) withObject:nil waitUntilDone:YES];

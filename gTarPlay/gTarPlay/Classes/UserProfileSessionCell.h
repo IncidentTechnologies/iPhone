@@ -22,6 +22,7 @@
     IBOutlet UILabel * m_jamLabel;
     IBOutlet UILabel * m_timeLabel;
     IBOutlet UIButton * m_playPauseButton;
+    IBOutlet UIActivityIndicatorView * m_activityView;
     
     UserSongSession * m_userSongSession;
     
@@ -34,6 +35,7 @@
 @property (nonatomic, retain) IBOutlet UILabel * m_jamLabel;
 @property (nonatomic, retain) IBOutlet UILabel * m_timeLabel;
 @property (nonatomic, retain) IBOutlet UIButton * m_playPauseButton;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView * m_activityView;
 
 @property (nonatomic, retain) UserSongSession * m_userSongSession;
 

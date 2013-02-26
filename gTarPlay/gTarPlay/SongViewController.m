@@ -42,7 +42,6 @@
 
 #define TEMP_BASE_SCORE 10
 
-extern SongViewController * g_songViewController;
 extern CloudController * g_cloudController;
 extern GtarController * g_gtarController;
 extern UserController * g_userController;
@@ -68,30 +67,11 @@ extern TelemetryController * g_telemetryController;
     
     if ( self )
     {
-        // Custom initialization
-        g_songViewController = self;
-        
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
         
-//        NSString * soundFilePath = [[NSBundle mainBundle] pathForResource:@"tick" ofType:@"wav"];
-//        NSURL * newURL = [[NSURL alloc] initFileURLWithPath:soundFilePath];
-//        
-//        NSError * error;
-        
-//        m_audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:newURL error:&error];
-//        m_audioPlayer.numberOfLoops = 1;
-//        
-//        // Registers this class as the delegate of the audio session.
-//        [[AVAudioSession sharedInstance] setDelegate: self];
-//        
-//        // Initialize the AVAudioSession here.
-//        if ( ![[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error] )
-//        {
-//            // Handle the error here.
-//            NSLog(@"Audio Session error %@, %@", error, [error userInfo] );
-//        }
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     
     return self;
@@ -104,10 +84,11 @@ extern TelemetryController * g_telemetryController;
     // enable idle sleeping
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+
     [g_gtarController turnOffAllLeds];
     [g_gtarController removeObserver:self];
-    
-    g_songViewController = nil;
     
     [m_displayController cancelPreloading];
     [m_displayController release];
@@ -159,10 +140,6 @@ extern TelemetryController * g_telemetryController;
     if ( m_song == nil )
     {
         m_song = [[NSSong alloc] initWithXmlDom:m_userSong.m_xmlDom];
-        
-        [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode beginning song #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                                                             withType:TelemetryControllerMessageTypeInfo];
-        
     }
     
     // Also create the AC using the instrument from the song
@@ -242,6 +219,19 @@ extern TelemetryController * g_telemetryController;
 
 #pragma mark - Misc stuff
 
+- (void)handleResignActive
+{
+    [self pauseSong];
+    
+    m_playTimeAdjustment += [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970];
+}
+
+- (void)handleBecomeActive
+{
+    [m_playTimeStart release];
+    m_playTimeStart = [[NSDate date] retain];
+}
+
 - (void)startWithSongXmlDom
 {
     
@@ -254,6 +244,11 @@ extern TelemetryController * g_telemetryController;
     [m_songRecorder release];
     
     m_currentFrame = nil;
+    
+    m_playTimeAdjustment = 0;
+    
+    [m_playTimeStart release];
+    m_playTimeStart = [[NSDate date] retain];
     
     //
     // start off the song stuff
@@ -308,12 +303,6 @@ extern TelemetryController * g_telemetryController;
    
     m_displayController = [[SongDisplayController alloc] initWithSong:m_songModel andView:m_glView];
 
-    // The enterFrame delegate method will be called if we are already in a frame
-//    if ( m_currentFrame == nil )
-//    {
-//        [m_songModel skipToNextFrame];
-//    }
-    
     //
     // setup the amp view
     //
@@ -648,9 +637,16 @@ BOOL m_skipNotes = NO;
     [m_metronomeTimer invalidate];
     m_metronomeTimer = nil;
     
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode exiting from disconnect #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                             withType:TelemetryControllerMessageTypeInfo];
-
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+    
+    [g_telemetryController logEvent:GtarPlaySongDisconnected
+                          withValue:delta
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
+                                     m_userSong.m_songId,
+                                     m_userSong.m_title,
+                                     m_difficulty,
+                                     m_songModel.m_percentageComplete]];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
     
 }
@@ -1121,8 +1117,15 @@ BOOL m_skipNotes = NO;
     [m_metronomeTimer invalidate];
     m_metronomeTimer = nil;
     
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode ending song #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                             withType:TelemetryControllerMessageTypeInfo];
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+    
+    [g_telemetryController logEvent:GtarPlaySongCompleted
+                          withValue:delta
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
+                                     m_userSong.m_songId,
+                                     m_userSong.m_title,
+                                     m_difficulty,
+                                     m_songModel.m_percentageComplete]];
     
     UserSongSession * session = [[UserSongSession alloc] init];
     
@@ -1192,8 +1195,25 @@ BOOL m_skipNotes = NO;
     [m_metronomeTimer invalidate];
     m_metronomeTimer = nil;
     
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode exiting #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                             withType:TelemetryControllerMessageTypeInfo];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+- (void)abortButtonClicked
+{
+    
+    [m_metronomeTimer invalidate];
+    m_metronomeTimer = nil;
+    
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+    
+    [g_telemetryController logEvent:GtarPlaySongAborted
+                          withValue:delta
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
+                                     m_userSong.m_songId,
+                                     m_userSong.m_title,
+                                     m_difficulty,
+                                     m_songModel.m_percentageComplete]];
     
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -1206,8 +1226,16 @@ BOOL m_skipNotes = NO;
     [g_gtarController turnOffAllLeds];
     [m_displayController shiftView:0];
     
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode restarting song #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                             withType:TelemetryControllerMessageTypeInfo];
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+    
+    [g_telemetryController logEvent:GtarPlaySongRestarted
+                          withValue:delta
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
+                                     m_userSong.m_songId,
+                                     m_userSong.m_title,
+                                     m_difficulty,
+                                     m_songModel.m_percentageComplete]];
+    
     
     [self startWithSongXmlDom];
     
@@ -1235,8 +1263,15 @@ BOOL m_skipNotes = NO;
     // Upload song to server. This also persists the upload in case of failure
     [g_userController requestUserSongSessionUpload:m_userSongSession andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
     
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode sharing song #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                             withType:TelemetryControllerMessageTypeInfo];
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+    
+    [g_telemetryController logEvent:GtarPlaySongShared
+                          withValue:delta
+                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
+                                     m_userSong.m_songId,
+                                     m_userSong.m_title,
+                                     m_difficulty,
+                                     m_songModel.m_percentageComplete]];
 
 }
 
@@ -1288,8 +1323,9 @@ BOOL m_skipNotes = NO;
     
     NSString * route = m_bSpeakerRoute ? @"Speaker" : @"Aux";
     
-    [g_telemetryController logMessage:[NSString stringWithFormat:@"Audio Route in Play set to %@", route]
-                             withType:TelemetryControllerMessageTypeInfo];
+    [g_telemetryController logEvent:GtarPlayToggleFeature
+                          withValue:(NSInteger)m_bSpeakerRoute
+                         andMessage:[NSString stringWithFormat:@"AudioRoute:%@", route]];
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
@@ -1305,14 +1341,16 @@ BOOL m_skipNotes = NO;
     if ( m_playMetronome == NO )
     {
         m_playMetronome = YES;
-        [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode metronome on #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                                 withType:TelemetryControllerMessageTypeInfo];
+        [g_telemetryController logEvent:GtarPlayToggleFeature
+                              withValue:(NSInteger)m_playMetronome
+                             andMessage:@"Metronome:On"];
     }
     else
     {
         m_playMetronome = NO;
-        [g_telemetryController logMessage:[NSString stringWithFormat:@"PlayMode metronome off #%u '%@' difficulty: %u percent: %f", m_userSong.m_songId, m_userSong.m_title, m_difficulty, m_songModel.m_percentageComplete]
-                                 withType:TelemetryControllerMessageTypeInfo];
+        [g_telemetryController logEvent:GtarPlayToggleFeature
+                              withValue:(NSInteger)m_playMetronome
+                             andMessage:@"Metronome:Off"];
     }
     
 }
