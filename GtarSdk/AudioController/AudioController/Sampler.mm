@@ -511,15 +511,16 @@
         {
             int noteNum = [[m_tuning objectAtIndex:string] intValue] + fret;
             m_soundMappingArray[string][fret] = &m_soundStructArray[noteNum];
+            m_fretsPressedDown[string][fret] = false;
         }
         
         // turn off all channels (strings on a guitar) initially
-        m_channelOn[string] = false;
-        // turn on the 0 position (open string) for each channel
-        m_channelPositions[string][0] = true;
+        m_fretToPlay[string] = -1;
+        
         // Set the sample index to zero, so that playback starts at the 
         // beginning of the sound.
         m_sampleNumber[string] = 0;
+        
         // initialize the volume and attenuation
         m_volume[string] = 1.0f;
         m_attenuation[string] = 0.0f;
@@ -528,15 +529,10 @@
 
 - (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amplitude
 {
-    // turn on this channel (string) and reset the sample number
-    m_channelOn[string] = true;
+    // Set the fret to be played for this string, and reset the sampleNumber
+    m_fretToPlay[string] = fret;
     m_sampleNumber[string] = 0;
-    m_channelPositions[string][fret] = true;
-    // clear out any fret down bools for positions higher than 'fret'
-    for (int i = fret + 1; i <= 16; i++)
-    {
-        m_channelPositions[string][i] = false;
-    }
+    
     m_attenuation[string] = 0.0f;
     m_volume[string] = amplitude;
 }
@@ -564,25 +560,9 @@
     float retSample = 0.0;
     for (int string = 0; string < 6; string++)
     {
-        if (m_channelOn[string])
+        if (-1 != m_fretToPlay[string])
         {
-            int fret = -1;
-            // find the highest 'active' position (fret) on the current channel,
-            // this will be the one to play
-            for (int i = 16; i >= 0; i--)
-            {
-                if (m_channelPositions[string][i])
-                {
-                    fret = i;
-                    break;
-                }
-            }
-            
-            if (fret == -1)
-            {
-                NSLog(@"Did not find active fret for channel:%d", string);
-                return 0;
-            }
+            int fret = m_fretToPlay[string];
             
             // Get the sample number, as an index into the sound stored in memory,
             //    to start reading data from.
@@ -604,20 +584,19 @@
             
             m_volume[string] -= m_attenuation[string];
             
-            // After reaching the end of the sound stored in memory--that is, after
-            //    (frameTotalForSound / inNumberFrames) invocations of this callback--loop back to the 
-            //    start of the sound so playback resumes from there.
+            // After reaching the end of the sound, stop playback and reset everything so sound will
+            // play from begining the next time around.
             if (sampleNumber >= m_soundMappingArray[string][fret]->frameCount)
             {
                 m_sampleNumber[string] = 0;
-                m_channelPositions[string][fret] = false;
-                m_channelOn[string] = false;
+                m_fretsPressedDown[string][fret] = false;
+                m_fretToPlay[string] = -1;
             }
             else if (0.01 >= m_volume[string])
             {
                 m_sampleNumber[string] = 0;
-                m_channelPositions[string][fret] = false;
-                m_channelOn[string] = false;
+                m_fretsPressedDown[string][fret] = false;
+                m_fretToPlay[string] = -1;
                 m_volume[string] = 1.0f;
                 m_attenuation[string] = 0.0f;
             }
@@ -631,33 +610,53 @@
 {
     // reset the sample position for all samples to 0 and turn off all channels
     memset(m_sampleNumber, 0, sizeof(m_sampleNumber[0]) * 6);
-    memset(m_channelOn, false, sizeof(m_channelOn));
+    memset(m_fretToPlay, -1, sizeof(m_fretToPlay));
 }
 
 - (void) FretDown:(int)fret onString:(int)string
 {
-    m_channelPositions[string][fret] = true;
+    m_fretsPressedDown[string][fret] = true;
+    
+    // If there is currently a note playing on this string, and this fretDown fret value
+    // is greater than the currently playing fret, then set it as the new fretToPlay.
+    // This is a hammer on case
+    if ( (-1 != m_fretToPlay[string]) && (fret > m_fretToPlay[string]) )
+    {
+        m_fretToPlay[string] = fret;
+    }
 }
 
 - (void) FretUp:(int)fret onString:(int)string
 {
-    // check how many frets are being held down on this string
-    int fretCount = 0;
-    for (int i = 1; i <= 16; i++)
+    m_fretsPressedDown[string][fret] = false;
+    
+    // If the fret being lifted is the one currently being played, then a change in played note will
+    // happen (hammer off).
+    if (fret == m_fretToPlay[string])
     {
-        if (m_channelPositions[string][i])
+        // Find the fret to hammer off to, i.e. the highest remaining fret being pressed down.
+        int highestRemainingFretDown = -1;
+        for (int fret = 16; fret >= 0; fret--)
         {
-            // if there are more than 1 fret still being pressed, just turn this one off
-            if (++fretCount > 1)
+            if (m_fretsPressedDown[string][fret])
             {
-                m_channelPositions[string][fret] = false;
-                return;
+                highestRemainingFretDown = fret;
+                break;
             }
         }
+        
+        if (highestRemainingFretDown > 0)
+        {
+            // The new note to play (hammer off)
+            m_fretToPlay[string] = highestRemainingFretDown;
+        }
+        else
+        {
+            // There are no other frets being pressed down, kill the note via attenuation
+            m_attenuation[string] = 0.0003;
+        }
+        
     }
-    
-    // there are no other frets being pressed down, turn off the note via attenuation
-    m_attenuation[string] = 0.0003;
 }
 
 // Stop playing the note indicated by the string and fret position
@@ -666,26 +665,11 @@
     // Only kill the string if the noteOff corresponds to the specific note being played now.
     
     // First check that this string/channel is active and that this specific fret is being pressed down.
-    if (m_channelOn[string] && m_channelPositions[string][fret])
+    if ( fret == m_fretToPlay[string] )
     {
-        // If this channel is on, and no higher frets are being press, then this is the note being played.
-        for (int i = fret+1; i <= 16; i++)
-        {
-            if (m_channelPositions[string][i])
-            {
-                // A higher fret is being played than the one this NoteOff message came in for, do nothing
-                return;
-            }
-        }
+        // The noteOff msg corresponds to the note currently playing, kill the note via attenuation.
+        m_attenuation[string] = 0.0003;
     }
-    else
-    {
-        // This string & fret is not currently being played, do nothing.
-        return;
-    }
-    
-    // The noteOff msg corresponds to the note currently playing, kill the note via attenuation.
-    m_attenuation[string] = 0.0003;
 }
 
 - (int) getCurrentSamplePackIndex

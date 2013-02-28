@@ -35,13 +35,13 @@ typedef struct
     // note/sample on different strings
     int m_sampleNumber[6];
     
-    // array indicating which channels (string on a guitar) should be outputing audio
-    bool m_channelOn[6];
+    // 2d array indicating which fret positions are pushed down. Index 0 for the 2nd dimention of the
+    // array corresponds to open string, it should never be down since it's not an actual fret.
+    bool m_fretsPressedDown[6][17];
     
-    // array indicating which channel positions (frets) are currently 'active' i.e. which
-    // fret positions are being pushed down. The highest position (fret) from each
-    // channel should be the one that is played.
-    bool m_channelPositions[6][17];
+    // Array indicating which fret position should currently be played on each string. A value of -1
+    // indicates nothing should be played on that string.
+    int m_fretToPlay[6];
     
     // The volume and attenuation of each string [0 1], different volume/attenuation per string.
     // Volume is how loud the sample plays, attenuation is how fast the volume decreases. With a
