@@ -38,7 +38,7 @@
 #define AUDIO_CONTROLLER_ATTENUATION_MUFFLED 0.70f
 #define AUDIO_CONTROLLER_AMPLITUDE_MUFFLED 0.15f
 
-#define INTER_FRAME_QUIET_PERIOD (6.0/(float)m_song.m_tempo)
+#define INTER_FRAME_QUIET_PERIOD (0.60/(float)m_song.m_tempo)
 
 #define TEMP_BASE_SCORE 10
 
@@ -57,6 +57,10 @@ extern TelemetryController * g_telemetryController;
 
 @synthesize m_glView;
 @synthesize m_connectingView;
+@synthesize m_backgroundView;
+@synthesize m_licenseInfoView;
+@synthesize m_artistTitle;
+@synthesize m_songTitle;
 
 @synthesize m_bSpeakerRoute;
 
@@ -108,6 +112,10 @@ extern TelemetryController * g_telemetryController;
     
     [m_glView release];
     [m_connectingView release];
+    [m_backgroundView release];
+    [m_licenseInfoView release];
+    [m_artistTitle release];
+    [m_songTitle release];
     
     [m_interFrameDelayTimer invalidate];
     m_interFrameDelayTimer = nil;
@@ -164,7 +172,18 @@ extern TelemetryController * g_telemetryController;
     [m_ampView resetView];
     [m_ampView updateView];
     
+    // Init the loading view
+    [m_artistTitle setText:m_userSong.m_author];
+    [m_songTitle setText:m_userSong.m_title];
+    [m_licenseInfoView setText:m_userSong.m_licenseInfo];
+    
+    m_connectingView.center = self.view.center;
+    
     [self.view addSubview:m_connectingView];
+    
+    m_backgroundView.layer.cornerRadius = 8.0;
+    m_backgroundView.layer.borderColor = [[UIColor grayColor] CGColor];
+    m_backgroundView.layer.borderWidth = 2.0;
     
     // Observe the global guitar controller. This will call guitarConnected when it is connected.
     [g_gtarController addObserver:self];
@@ -204,6 +223,9 @@ extern TelemetryController * g_telemetryController;
     
     self.m_glView = nil;
     self.m_connectingView = nil;
+    self.m_licenseInfoView = nil;
+    self.m_songTitle = nil;
+    self.m_artistTitle = nil;
     
 }
 
@@ -367,6 +389,35 @@ extern TelemetryController * g_telemetryController;
 - (void)enableInput
 {
     m_ignoreInput = NO;
+}
+
+- (void)startLicenseScroll
+{
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2.0f];
+    
+    [m_licenseInfoView setContentOffset:CGPointMake(0, MAX(m_licenseInfoView.contentSize.height-m_licenseInfoView.frame.size.height, 0) )];
+    
+    [UIView commitAnimations];
+    
+}
+
+- (void)removeConnectingView
+{
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.6f];
+    [UIView setAnimationDelegate:m_connectingView];
+    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+    
+    m_connectingView.alpha = 0.0;
+    
+    [UIView commitAnimations];
+    
+//    [self startWithSongXmlDom];
+    [self startMainEventLoop];
+    
 }
 
 #pragma mark - Main event loop
@@ -620,11 +671,15 @@ BOOL m_skipNotes = NO;
     
     NSLog(@"SongViewController: gTar has been connected");
     
-    [m_connectingView removeFromSuperview];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(removeConnectingView) userInfo:nil repeats:NO];
     
     [g_gtarController setMinimumInterarrivalTime:0.10f];
     
     [self startWithSongXmlDom];
+    
+    // Stop ourselves before we start so the connecting screen can display
+    [self stopMainEventLoop];
     
 }
 

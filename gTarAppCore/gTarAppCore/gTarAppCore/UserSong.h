@@ -42,6 +42,8 @@
 	NSString * m_author;
 	NSString * m_genre;
 	NSString * m_description;
+    NSString * m_licenseInfo;
+    
 	NSInteger m_xmpFileId;
 	NSInteger m_imgFileId;
 	
@@ -75,6 +77,8 @@
 @property (nonatomic, retain) NSString * m_author;
 @property (nonatomic, retain) NSString * m_genre;
 @property (nonatomic, retain) NSString * m_description;
+@property (nonatomic, retain) NSString * m_licenseInfo;
+
 @property (nonatomic, assign) NSInteger m_xmpFileId;
 @property (nonatomic, assign) NSInteger m_imgFileId;
 
