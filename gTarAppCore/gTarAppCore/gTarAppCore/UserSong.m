@@ -15,7 +15,7 @@
 @implementation UserSong
 
 @synthesize m_xmlDom;
-@synthesize m_songId, m_authorId, m_tempo, m_title, m_author, m_genre, m_description, m_xmpFileId, m_timeCreated, m_timeModified;
+@synthesize m_songId, m_authorId, m_tempo, m_title, m_author, m_genre, m_description, m_licenseInfo, m_xmpFileId, m_timeCreated, m_timeModified;
 @synthesize m_imgFileId;
 @synthesize m_playScore, m_playStars;
 @synthesize m_cost;
@@ -60,7 +60,7 @@
         [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
         [dateFormat release];
-
+        
         self.m_songId = [xmlDom getIntegerFromChildWithName:@"id"];
         self.m_authorId = [xmlDom getIntegerFromChildWithName:@"user_id"];
         self.m_viewCount = [xmlDom getIntegerFromChildWithName:@"viewcount"];
@@ -72,6 +72,7 @@
         self.m_tempo = [xmlDom getIntegerFromChildWithName:@"tempo"];
         self.m_description = [xmlDom getTextFromChildWithName:@"description"];
         self.m_genre = [xmlDom getTextFromChildWithName:@"genre"];
+        self.m_licenseInfo = [xmlDom getTextFromChildWithName:@"license_info"];
         self.m_xmpFileId = [xmlDom getIntegerFromChildWithName:@"xmp_file_id"];
         self.m_imgFileId = [xmlDom getIntegerFromChildWithName:@"image_file_id"];
         self.m_timeCreated = [xmlDom getDateFromChildWithName:@"created"];
@@ -112,6 +113,8 @@
 	[coder encodeObject:m_author forKey:@"Author"];
 	[coder encodeObject:m_genre forKey:@"Genre"];
 	[coder encodeObject:m_description forKey:@"Description"];
+    [coder encodeObject:m_licenseInfo forKey:@"LicenseInfo"];
+    
 	[coder encodeInteger:m_xmpFileId forKey:@"XmpFileId"];
 	[coder encodeInteger:m_imgFileId forKey:@"ImgFileId"];
 
@@ -154,7 +157,9 @@
 	self.m_author = [coder decodeObjectForKey:@"Author"];
 	self.m_genre = [coder decodeObjectForKey:@"Genre"];
     self.m_description = [coder decodeObjectForKey:@"Description"];
-	self.m_xmpFileId = [coder decodeIntegerForKey:@"XmpFileId"]; 
+    self.m_licenseInfo = [coder decodeObjectForKey:@"LicenseInfo"];
+    
+	self.m_xmpFileId = [coder decodeIntegerForKey:@"XmpFileId"];
 	self.m_imgFileId = [coder decodeIntegerForKey:@"ImgFileId"]; 
 	
 	self.m_playScore = [coder decodeIntegerForKey:@"PlayScore"];
