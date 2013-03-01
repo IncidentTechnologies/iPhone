@@ -83,6 +83,10 @@ enum SongViewControllerDifficulty
     IBOutlet EAGLView * m_glView;
     
     IBOutlet UIView * m_connectingView;
+    IBOutlet UIView * m_backgroundView;
+    IBOutlet UITextView * m_licenseInfoView;
+    IBOutlet UILabel * m_songTitle;
+    IBOutlet UILabel * m_artistTitle;
 
     BOOL m_refreshDisplay;
     BOOL m_ignoreInput;
@@ -114,6 +118,10 @@ enum SongViewControllerDifficulty
 
 @property (nonatomic, retain) IBOutlet EAGLView * m_glView;
 @property (nonatomic, retain) IBOutlet UIView * m_connectingView;
+@property (nonatomic, retain) IBOutlet UIView * m_backgroundView;
+@property (nonatomic, retain) IBOutlet UITextView * m_licenseInfoView;
+@property (nonatomic, retain) IBOutlet UILabel * m_songTitle;
+@property (nonatomic, retain) IBOutlet UILabel * m_artistTitle;
 
 @property (nonatomic, assign) BOOL m_bSpeakerRoute;
 
@@ -127,6 +135,8 @@ enum SongViewControllerDifficulty
 - (void)interFrameDelayExpired;
 - (void)disableInput;
 - (void)enableInput;
+- (void)startLicenseScroll;
+- (void)removeConnectingView;
 
 - (void)correctHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity;
 - (void)incorrectHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity;
