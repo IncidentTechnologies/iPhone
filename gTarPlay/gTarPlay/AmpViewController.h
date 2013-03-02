@@ -53,6 +53,7 @@
 
     IBOutlet UIView * m_volumeView;
     IBOutlet UIButton * m_audioButton;
+    IBOutlet UIButton * m_shareSwitchButton;
     IBOutlet UIButton * m_shareButton;
     IBOutlet UIButton * m_menuButton;
     
@@ -90,6 +91,7 @@
 @property (nonatomic, retain) IBOutlet UIView * m_volumeView;
 @property (nonatomic, retain) IBOutlet UIButton * m_audioButton;
 @property (nonatomic, retain) IBOutlet UIButton * m_metronomeButton;
+@property (nonatomic, retain) IBOutlet UIButton * m_shareSwitchButton;
 @property (nonatomic, retain) IBOutlet UIButton * m_shareButton;
 @property (nonatomic, retain) IBOutlet UIButton * m_menuButton;
 
@@ -123,6 +125,7 @@
 - (IBAction)abortButtonClicked:(id)sender;
 - (IBAction)restartButtonClicked:(id)sender;
 - (IBAction)continueButtonClicked:(id)sender;
+- (IBAction)shareSwitchButtonClicked:(id)sender;
 - (IBAction)shareButtonClicked:(id)sender;
 - (IBAction)audioButtonClicked:(id)sender;
 - (IBAction)metronomeButtonClicked:(id)sender;

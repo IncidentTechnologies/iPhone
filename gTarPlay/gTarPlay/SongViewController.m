@@ -100,7 +100,7 @@ extern TelemetryController * g_telemetryController;
     [m_userSong release];
     [m_songModel release];
     [m_songRecorder release];
-    [m_userSongSession release];
+//    [m_userSongSession release];
     
     [m_currentFrame release];
     [m_nextFrame release];
@@ -1182,31 +1182,12 @@ BOOL m_skipNotes = NO;
                                      m_difficulty,
                                      m_songModel.m_percentageComplete]];
     
-    UserSongSession * session = [[UserSongSession alloc] init];
-    
-    session.m_userSong = m_userSong;
-    session.m_score = m_scoreTracker.m_score;
-    session.m_stars = m_scoreTracker.m_stars;
-    session.m_combo = m_scoreTracker.m_streak;
-    session.m_notes = @"Recorded in gTar Play";
-    
     //
     // Save the scores/stars to persistent storage
     //
     [g_userController addStars:m_scoreTracker.m_stars forSong:m_userSong.m_songId];
     [g_userController addScore:m_scoreTracker.m_score forSong:m_userSong.m_songId];
-    
-    m_songRecorder.m_song.m_instrument = m_song.m_instrument;
-    
-    // Create the xmp
-    session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:m_songRecorder.m_song];
-    
-    [m_userSongSession release];
-    
-    m_userSongSession = [session retain];
-
-    m_userSongSession.m_created = time(NULL);
-    
+        
     [m_ampView displayScore];
     [m_progressView hideProgressView];
     
@@ -1315,8 +1296,27 @@ BOOL m_skipNotes = NO;
 - (void)shareButtonClicked
 {
     
+    UserSongSession * session = [[UserSongSession alloc] init];
+    
+    session.m_userSong = m_userSong;
+    session.m_score = m_scoreTracker.m_score;
+    session.m_stars = m_scoreTracker.m_stars;
+    session.m_combo = m_scoreTracker.m_streak;
+    session.m_notes = @"Recorded in gTar Play";
+    
+    m_songRecorder.m_song.m_instrument = m_song.m_instrument;
+    
+    // Create the xmp
+    session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:m_songRecorder.m_song];
+    
+//    [m_userSongSession release];
+    
+//    m_userSongSession = [session retain];
+    
+    session.m_created = time(NULL);
+
     // Upload song to server. This also persists the upload in case of failure
-    [g_userController requestUserSongSessionUpload:m_userSongSession andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
+    [g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
