@@ -516,6 +516,7 @@
         
         // turn off all channels (strings on a guitar) initially
         m_fretToPlay[string] = -1;
+        m_pendingFretToPlay[string] = -1;
         
         // Set the sample index to zero, so that playback starts at the 
         // beginning of the sound.
@@ -584,6 +585,25 @@
             
             m_volume[string] -= m_attenuation[string];
             
+            //protection...
+            // Check for pending note changes.
+            if (-1 != m_pendingFretToPlay[string])
+            {
+                int currentSample = audioData[sampleNumber];
+                int nextSample = audioData[sampleNumber + 1];
+                // check for positve sloped 0 crossing
+                if (currentSample < 0 && nextSample >= 0)
+                {
+                    // this is a positive sloped 0 crossing, make the note transition
+                    m_fretToPlay[string] = m_pendingFretToPlay[string];
+                    m_sampleNumber[string] = m_pendingFretToPlayStartIndex[string];
+                    
+                    // reset pending variables
+                    m_pendingFretToPlay[string] = -1;
+                    m_pendingFretToPlayStartIndex[string] = 0;
+                }
+            }
+
             // After reaching the end of the sound, stop playback and reset everything so sound will
             // play from begining the next time around.
             if (sampleNumber >= m_soundMappingArray[string][fret]->frameCount)
@@ -617,12 +637,20 @@
 {
     m_fretsPressedDown[string][fret] = true;
     
-    // If there is currently a note playing on this string, and this fretDown fret value
-    // is greater than the currently playing fret, then set it as the new fretToPlay.
-    // This is a hammer on case
-    if ( (-1 != m_fretToPlay[string]) && (fret > m_fretToPlay[string]) )
+    // The following chunk of code is to create a smooth transition from one note to the next during
+    // hammerOn/Off slides.
+    // If this fret down will cause a change in note played (i.e. there is currently a note playing
+    // on this string, AND this fretDown fret value is greater than the currently playing fret,
+    // AND this fret is higher than any pending note changes (m_pendingFretToPlay) ), then set it as
+    // a pending fret change and find the positive 0 crossing point of the new fret that will be played.
+    if ( (-1 != m_fretToPlay[string]) &&        // a note is currently playing
+         (fret > m_fretToPlay[string]) &&       // fret is > than the playing note
+         (fret > m_pendingFretToPlay[string]) ) // fret down is > than any pending note change
     {
-        m_fretToPlay[string] = fret;
+        // Find the index for the next 0 crossing with a positive slope (i.e. a negative to positive transition and not vice versa) for the note that will be transitioned to.
+        m_pendingFretToPlayStartIndex[string] = [self getNextPositiveZeroCrossingSampleForString:string atFret:fret afterSampleIndex:m_sampleNumber[string]];
+        
+        m_pendingFretToPlay[string] = fret;
     }
 }
 
@@ -636,19 +664,22 @@
     {
         // Find the fret to hammer off to, i.e. the highest remaining fret being pressed down.
         int highestRemainingFretDown = -1;
-        for (int fret = 16; fret >= 0; fret--)
+        for (int currentfret = 16; currentfret >= 0; currentfret--)
         {
-            if (m_fretsPressedDown[string][fret])
+            if (m_fretsPressedDown[string][currentfret])
             {
-                highestRemainingFretDown = fret;
+                highestRemainingFretDown = currentfret;
                 break;
             }
         }
         
         if (highestRemainingFretDown > 0)
         {
-            // The new note to play (hammer off)
-            m_fretToPlay[string] = highestRemainingFretDown;
+            // Find the index for the next 0 crossing with a positive slope (i.e. a negative to positive transition and not vice versa) for the note that will be transitioned to.
+            m_pendingFretToPlayStartIndex[string] = [self getNextPositiveZeroCrossingSampleForString:string atFret:highestRemainingFretDown afterSampleIndex:m_sampleNumber[string]];
+            
+            m_pendingFretToPlay[string] = highestRemainingFretDown;
+
         }
         else
         {
@@ -662,10 +693,9 @@
 // Stop playing the note indicated by the string and fret position
 - (void) noteOffAtString:(int)string andFret:(int)fret
 {
-    // Only kill the string if the noteOff corresponds to the specific note being played now.
-    
-    // First check that this string/channel is active and that this specific fret is being pressed down.
-    if ( fret == m_fretToPlay[string] )
+    // If this is the specific note being played now, and there is no note change pending
+    // (m_pendingFretToPlay), then kill the note.
+    if ( fret == m_fretToPlay[string] && -1 == m_pendingFretToPlay[string])
     {
         // The noteOff msg corresponds to the note currently playing, kill the note via attenuation.
         m_attenuation[string] = 0.0003;
@@ -694,6 +724,28 @@
     }
     
     return [instrumentNames autorelease];
+}
+
+// Takes the audio sample for the given string and fret and returns the index of the next sample at
+// which a zero crossing with a positive slope (negative to positive transition) will occur.
+- (int) getNextPositiveZeroCrossingSampleForString:(int)string atFret:(int)fret afterSampleIndex:(int)sampleIndex
+{
+    int currentIndex = sampleIndex;
+    AudioSampleType *audioData = (AudioSampleType *)m_soundMappingArray[string][fret]->audioDataLeft;
+    int currentSample;
+    int nextSample;
+    while (1)
+    {
+        currentSample = audioData[currentIndex];
+        nextSample = audioData[currentIndex + 1];
+        if (currentSample < 0 && nextSample >= 0)
+        {
+            // this is a positive sloped 0 crossing
+            return currentIndex;
+        }
+        
+        currentIndex++;
+    }
 }
 
 - (void) printErrorMessage: (NSString *) errorString withStatus: (OSStatus) result
