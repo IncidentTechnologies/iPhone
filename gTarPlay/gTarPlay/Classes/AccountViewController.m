@@ -246,12 +246,18 @@ extern UserController * g_userController;
     
     if ( m_feedSelector.m_selectedSegmentIndex == 0 )
     {
-        session = [m_friendFeed objectAtIndex:row];
+        if ( row < [m_friendFeed count] )
+        {
+            session = [m_friendFeed objectAtIndex:row];
+        }
     }
     
     if ( m_feedSelector.m_selectedSegmentIndex == 1 )
     {
-        session = [m_globalFeed objectAtIndex:row];
+        if ( row < [m_globalFeed count] )
+        {
+            session = [m_globalFeed objectAtIndex:row];
+        }
     }
     
     cell.m_userSongSession = session;
