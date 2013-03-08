@@ -708,7 +708,8 @@ extern UserController * g_userController;
     userSongSession.m_xmpBlob = xmpBlob;
     
     [m_songPlaybackViewController attachToSuperView:self.view andPlaySongSession:userSongSession];
-    
+    [m_songPlaybackViewController.m_userNameButton setEnabled:NO];
+
 }
 
 #pragma mark - Button click handlers

@@ -246,12 +246,18 @@ extern UserController * g_userController;
     
     if ( m_feedSelector.m_selectedSegmentIndex == 0 )
     {
-        session = [m_friendFeed objectAtIndex:row];
+        if ( row < [m_friendFeed count] )
+        {
+            session = [m_friendFeed objectAtIndex:row];
+        }
     }
     
     if ( m_feedSelector.m_selectedSegmentIndex == 1 )
     {
-        session = [m_globalFeed objectAtIndex:row];
+        if ( row < [m_globalFeed count] )
+        {
+            session = [m_globalFeed objectAtIndex:row];
+        }
     }
     
     cell.m_userSongSession = session;
@@ -455,6 +461,19 @@ extern UserController * g_userController;
         [m_friendFeed release];
         
         m_friendFeed = [entry.m_followsSessionsList retain];
+        
+        // If the newest session is greater that 1 week ago, show the global feed
+        UserSongSession * recentSession = [m_friendFeed objectAtIndex:0];
+        
+        NSTimeInterval recentSessionTime = recentSession.m_created;
+        
+        NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+        
+        // 1 week of seconds = 7days 24h 60min 60sec
+        if ( (now - recentSessionTime) > (7*24*60*60) )
+        {
+            [m_feedSelector setSelectedIndex:1];
+        }
         
     }
     else

@@ -36,6 +36,7 @@
 @synthesize m_audioButton;
 @synthesize m_metronomeButton;
 @synthesize m_shareButton;
+@synthesize m_shareSwitchButton;
 @synthesize m_menuButton;
 @synthesize m_shareFailedLabel;
 @synthesize m_songTitleScoreLabel;
@@ -81,6 +82,7 @@
     [m_volumeView release];
     [m_audioButton release];
     [m_metronomeButton release];
+    [m_shareSwitchButton release];
     [m_shareButton release];
     [m_menuButton release];
     [m_customActivityView release];
@@ -153,7 +155,23 @@
     [m_volumeSlider setMinimumTrackImage:sliderTrackMinImage forState:UIControlStateNormal];
     [m_volumeSlider setMaximumTrackImage:sliderTrackMaxImage forState:UIControlStateNormal];
     [m_volumeSlider setThumbImage:sliderKnob forState:UIControlStateNormal];
-        
+    
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    [settings synchronize];
+    
+    // We store the opposite because we only want to change the default if they ask us to.
+    BOOL dontPostToFeed = [settings boolForKey:@"DontPostToFeed"];
+    
+    if ( dontPostToFeed == YES )
+    {
+        [m_shareSwitchButton setSelected:NO];
+    }
+    else
+    {
+        [m_shareSwitchButton setSelected:YES];
+    }
+
 }
 
 - (void)viewDidUnload
@@ -173,6 +191,7 @@
     self.m_volumeView = nil;
     self.m_audioButton = nil;
     self.m_metronomeButton = nil;
+    self.m_shareSwitchButton = nil;
     self.m_shareButton = nil;
     self.m_menuButton = nil;
     self.m_shareFailedLabel = nil;
@@ -301,7 +320,6 @@
     [m_contentView addSubview:m_scoreView];
     
     // star
-//    UIColor * fill = [UIColor colorWithRed:7.0/256.0 green:124.0/256.0 blue:216.0/256.0 alpha:1.0];
     UIColor * fill = [UIColor yellowColor];
     
     [m_starRatingView setStrokeColor:[[UIColor blackColor] CGColor] andFillColor:[fill CGColor]];
@@ -363,11 +381,8 @@
     if ( m_isUp == YES )
     {
         [self continueButtonClicked:sender];
-//        [m_menuButton setSelected:NO];
         return;
     }
-    
-//    [m_menuButton setSelected:YES];
     
     [m_delegate menuButtonClicked];
     
@@ -384,6 +399,11 @@
 
 - (IBAction)backButtonClicked:(id)sender
 {
+    
+    if ( m_isScoreDisplayed == YES && m_shareSwitchButton.selected == YES )
+    {
+        [m_delegate shareButtonClicked];
+    }
     
     [m_delegate backButtonClicked];
     
@@ -404,6 +424,11 @@
 
 - (IBAction)restartButtonClicked:(id)sender
 {
+    
+    if ( m_isScoreDisplayed == YES && m_shareSwitchButton.selected == YES )
+    {
+        [m_delegate shareButtonClicked];
+    }
     
     [m_delegate restartButtonClicked];
     
@@ -433,6 +458,28 @@
     [self slideViewDown];
     
     m_isUp = NO;
+    
+}
+
+- (IBAction)shareSwitchButtonClicked:(id)sender
+{
+    
+    // Toggle the switch
+    [m_shareSwitchButton setSelected:!m_shareSwitchButton.selected];
+
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    // Update settings based on
+    if ( m_shareSwitchButton.selected == YES )
+    {
+        [settings setBool:NO forKey:@"DontPostToFeed"];
+    }
+    else
+    {
+        [settings setBool:YES forKey:@"DontPostToFeed"];
+    }
+    
+    [settings synchronize];
     
 }
 

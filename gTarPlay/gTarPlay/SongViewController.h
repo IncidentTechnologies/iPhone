@@ -67,7 +67,7 @@ enum SongViewControllerDifficulty
     
     SongRecorder * m_songRecorder;
     
-    UserSongSession * m_userSongSession;
+//    UserSongSession * m_userSongSession;
     
     NSNoteFrame * m_currentFrame;
     NSNoteFrame * m_nextFrame;
