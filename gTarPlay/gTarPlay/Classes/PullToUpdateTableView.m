@@ -82,7 +82,8 @@
     // Last update label
     //
     m_lastUpdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, -HEADER_OFFSET+PULL_TO_UPDATE_HEIGHT, self.frame.size.width - LEFT_MARGIN, LAST_UPDATE_HEIGHT)];
-    m_lastUpdateLabel.text = @"Last update: Never";
+//    m_lastUpdateLabel.text = @"Last update: Never";
+    m_lastUpdateLabel.text = @"";
     m_lastUpdateLabel.textColor = [UIColor lightGrayColor];
 //        m_lastUpdateLabel.shadowColor = [UIColor grayColor];
 //        m_lastUpdateLabel.shadowOffset = CGSizeMake(1, 1);

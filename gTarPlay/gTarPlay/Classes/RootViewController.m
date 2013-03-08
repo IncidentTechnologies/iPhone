@@ -971,6 +971,18 @@ extern TelemetryController * g_telemetryController;
 
 #pragma mark - AccountViewControllerDelegate
 
+- (void)songPlayerDisplayUserProfile:(UserProfile*)userProfile
+{
+    [self accountViewDisplayUserProfile:userProfile];
+}
+
+- (void)songPlayerDisplayUserSong:(UserSong*)userSong
+{
+    [self accountViewDisplayUserSong:userSong];
+}
+
+#pragma mark - AccountViewControllerDelegate
+
 - (void)accountViewDisplayUserProfile:(UserProfile*)userProfile
 {
     
@@ -1041,6 +1053,7 @@ extern TelemetryController * g_telemetryController;
         m_songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
         m_songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
         m_songPlaybackViewController.m_popupDelegate = self;
+        m_songPlaybackViewController.m_delegate = self;
     }
     
     [m_songPlaybackViewController attachToSuperView:self.view andPlaySongSession:session];
