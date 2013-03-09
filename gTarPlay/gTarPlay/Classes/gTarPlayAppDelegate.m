@@ -113,8 +113,9 @@ TelemetryController * g_telemetryController;
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
     [g_telemetryController logEvent:GtarPlayAppOpened
-                          withValue:0
-                         andMessage:@"Application launched"];
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"Application launched", @"Detail",
+                                     nil]];
     
     self.m_playApplication = (gTarPlayApplication*)application;
     
@@ -151,9 +152,10 @@ TelemetryController * g_telemetryController;
     // This gets called when the home button is pushed
     
     [g_telemetryController logEvent:GtarPlayAppClosed
-                          withValue:0
-                         andMessage:@"Application did enter background"];
-
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"Application did enter background", @"Detail",
+                                     nil]];
+    
     [g_telemetryController synchronize];
 }
 
@@ -165,11 +167,11 @@ TelemetryController * g_telemetryController;
      */
     
     // This gets called when the app is re-started
-    
     [g_telemetryController logEvent:GtarPlayAppOpened
-                          withValue:0
-                         andMessage:@"Application will enter foreground"];
-
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"Application will enter foreground", @"Detail",
+                                     nil]];
+    
 }
 
 
@@ -197,11 +199,11 @@ TelemetryController * g_telemetryController;
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
-    
     [g_telemetryController logEvent:GtarPlayAppClosed
-                          withValue:0
-                         andMessage:@"Application will terminate"];
-
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"Application will terminate", @"Detail",
+                                     nil]];
+    
     [g_telemetryController synchronize];
 }
 
@@ -345,9 +347,10 @@ TelemetryController * g_telemetryController;
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
     [g_telemetryController logEvent:GtarPlayAppMemWarning
-                          withValue:0
-                         andMessage:@"Application did receive memory warning"];
-
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"Application did receive memory warning", @"Detail",
+                                     nil]];
+    
 }
 
 

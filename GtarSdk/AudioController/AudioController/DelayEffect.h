@@ -92,9 +92,14 @@ public:
     void Reset()
     {
         Effect::Reset();
-        memset(m_pDelayLine, 0, sizeof(double) * m_pDelayLine_n);
+        ClearOutEffect();
         setPrimaryParam(25); //delay
         SetFeedback(0.5);
+    }
+    
+    void ClearOutEffect()
+    {
+        memset(m_pDelayLine, 0, sizeof(double) * m_pDelayLine_n);
     }
     
     ~DelayEffect()

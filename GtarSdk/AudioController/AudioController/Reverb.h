@@ -231,24 +231,29 @@ public:
     {
         Effect::Reset();
         
-        m_pInputDiffusionA->Reset();
-        m_pInputDiffusionB->Reset();
-        m_pInputDiffusionC->Reset();
-        m_pInputDiffusionD->Reset();
-        m_pDecayDiffusionL1->Reset();
-        m_pDecayDiffusionL2->Reset();
-        m_pDecayDiffusionR1->Reset();
-        m_pDecayDiffusionR2->Reset();
+        m_pInputDiffusionA->ClearOutEffect();
+        m_pInputDiffusionB->ClearOutEffect();
+        m_pInputDiffusionC->ClearOutEffect();
+        m_pInputDiffusionD->ClearOutEffect();
+        m_pDecayDiffusionL1->ClearOutEffect();
+        m_pDecayDiffusionL2->ClearOutEffect();
+        m_pDecayDiffusionR1->ClearOutEffect();
+        m_pDecayDiffusionR2->ClearOutEffect();
 
+        ClearOutEffect();
+        
+        // reset to default values
+        SetDecay(0.15);
+        SetBandwidth(0.75);
+    }
+    
+    void ClearOutEffect()
+    {
         memset(m_pPreDelayLine, 0, sizeof(double) * m_DelayLine_n);
         memset(m_pDelayLineL1, 0, sizeof(double) * m_DelayLine_n);
         memset(m_pDelayLineL2, 0, sizeof(double) * m_DelayLine_n);
         memset(m_pDelayLineR1, 0, sizeof(double) * m_DelayLine_n);
         memset(m_pDelayLineR2, 0, sizeof(double) * m_DelayLine_n);
-        
-        // reset to default values
-        SetDecay(0.15);
-        SetBandwidth(0.75);
     }
     
     bool SetBandwidth(double bandwidth)

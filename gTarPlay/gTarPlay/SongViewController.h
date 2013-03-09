@@ -107,6 +107,8 @@ enum SongViewControllerDifficulty
     NSMutableArray * m_deferredNotesQueue;
     
     NSDate * m_playTimeStart;
+    NSDate * m_audioRouteTimeStart;
+    NSDate * m_metronomeTimeStart;
     NSTimeInterval m_playTimeAdjustment;
     
 }
@@ -129,6 +131,7 @@ enum SongViewControllerDifficulty
 
 - (void)handleResignActive;
 - (void)handleBecomeActive;
+- (void)finalLogging;
 
 - (void)startWithSongXmlDom;
 - (void)pauseSong;

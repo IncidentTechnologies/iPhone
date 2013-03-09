@@ -146,6 +146,11 @@ public:
     
     void Reset()
     {
+        ClearOutEffect();
+    }
+    
+    void ClearOutEffect()
+    {
         memset(m_pSampleDelay, 0, sizeof(double) * m_pSampleDelay_n);
         memset(m_pDelayLine, 0, sizeof(double) * (m_pDelayLine_n));
     }
