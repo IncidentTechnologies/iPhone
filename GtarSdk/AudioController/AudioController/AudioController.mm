@@ -977,6 +977,14 @@ static OSStatus renderInput(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     [m_sampler Reset];
 }
 
+- (void) ClearOutEffects
+{
+    m_pChorusEffect->ClearOutEffect();
+    m_pDelayEffect->ClearOutEffect();
+    m_pReverbEffect->ClearOutEffect();
+    m_pDistortion->ClearOutEffect();
+}
+
 - (void) setSamplePackWithName:(NSString*)name
 {
     [self stopAUGraph];

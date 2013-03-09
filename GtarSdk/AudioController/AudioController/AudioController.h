@@ -98,6 +98,7 @@ enum AudioSource
 - (void) startAUGraph;
 - (void) stopAUGraph;
 - (void) reset;
+- (void) ClearOutEffects;
 
 - (void) setSamplePackWithName:(NSString*)name;
 - (void) setSamplePackWithName:(NSString*)name withSelector:(SEL)aSelector andOwner:(NSObject*)parent;

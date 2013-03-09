@@ -101,10 +101,16 @@ public:
     void Reset()
     {
         Effect::Reset();
-        memset(m_pDelayLine, 0, sizeof(double) * m_pDelayLine_n);
+        ClearOutEffect();
         SetDepth(0.75);
         SetLFOFreq(3.0);
     }
+    
+    void ClearOutEffect()
+    {
+        memset(m_pDelayLine, 0, sizeof(double) * m_pDelayLine_n);
+    }
+
     
     Parameter& getPrimaryParam()
     {

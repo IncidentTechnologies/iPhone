@@ -1293,7 +1293,7 @@ extern TelemetryController * g_telemetryController;
                               withValue:0
                              andMessage:[NSString stringWithFormat:@"Instrument:%@", [m_instrumentsScroll getNameAtIndex:[m_instrumentsScroll m_selectedIndex]]]];
         
-        [g_audioController reset];
+        [g_audioController ClearOutEffects];
         [g_audioController startAUGraph];
         [m_instrumentsScroll stopFlicker];
     }

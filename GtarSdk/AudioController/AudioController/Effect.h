@@ -26,8 +26,6 @@ public:
     
     bool SetPassThru(bool state)
     {
-        if (state)
-            Reset();
         return (m_fPassThrough = state);
     }
     
@@ -44,6 +42,11 @@ public:
     virtual void Reset()
     {
         m_fPassThrough = true;
+    }
+    
+    virtual void ClearOutEffect()
+    {
+        
     }
     
     virtual ~Effect()
