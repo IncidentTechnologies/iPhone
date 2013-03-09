@@ -765,9 +765,10 @@ extern TelemetryController * g_telemetryController;
         [g_userController sendPendingUploads];
         
         [g_telemetryController logEvent:GtarPlayAppLogin
-                              withValue:0
-                             andMessage:[NSString stringWithFormat:@"%@",  g_cloudController.m_username]];
-
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+                                         nil]];
+        
         [g_telemetryController uploadLogMessages];
         
     }
@@ -810,8 +811,9 @@ extern TelemetryController * g_telemetryController;
         [g_userController sendPendingUploads];
         
         [g_telemetryController logEvent:GtarPlayAppLogin
-                              withValue:0
-                             andMessage:[NSString stringWithFormat:@"%@", g_cloudController.m_username]];
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+                                         nil]];
 
         [g_telemetryController uploadLogMessages];
     }
