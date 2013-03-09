@@ -221,8 +221,10 @@ extern TelemetryController * g_telemetryController;
     NSLog(@"%@", msg);
     
     [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                          withValue:m_firmwareFileId
-                         andMessage:msg];
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     msg, @"Status",
+                                     [NSNumber numberWithInteger:m_firmwareFileId], @"FileId",
+                                     nil]];
     
     [msg release];
     
@@ -238,9 +240,11 @@ extern TelemetryController * g_telemetryController;
         NSLog(@"%@", msg);
         
         [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                              withValue:m_firmwareFileId
-                             andMessage:msg];
-
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         msg, @"Status",
+                                         [NSNumber numberWithInteger:m_firmwareFileId], @"FileId",
+                                         nil]];
+        
         [m_statusLabel setText:msg];
         [m_statusLabel setHidden:NO];
         
@@ -269,8 +273,10 @@ extern TelemetryController * g_telemetryController;
         NSLog(@"%@", msg);
         
         [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                              withValue:m_firmwareFileId
-                             andMessage:msg];
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         msg, @"Status",
+                                         [NSNumber numberWithInteger:m_firmwareFileId], @"FileId",
+                                         nil]];
         
         [m_statusLabel setText:msg];
         [m_statusLabel setHidden:NO];
@@ -427,9 +433,11 @@ extern TelemetryController * g_telemetryController;
     NSLog(@"%@", msg);
     
     [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                          withValue:m_firmwareFileId
-                         andMessage:msg];
-
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     msg, @"Status",
+                                     [NSNumber numberWithInteger:m_firmwareFileId], @"FileId",
+                                     nil]];
+    
     m_updating = NO;
     
     [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusSucceededMain) withObject:nil waitUntilDone:YES];
@@ -453,8 +461,10 @@ extern TelemetryController * g_telemetryController;
     NSLog(@"%@", msg);
     
     [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                          withValue:m_firmwareFileId
-                         andMessage:msg];
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     msg, @"Status",
+                                     [NSNumber numberWithInteger:m_firmwareFileId], @"FileId",
+                                     nil]];
 
     m_updating = NO;
     

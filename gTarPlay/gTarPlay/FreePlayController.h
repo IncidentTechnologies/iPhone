@@ -13,6 +13,8 @@
 
 #import "JamPad.h"
 
+#define FREE_PLAY_EFFECT_COUNT 4
+
 @class TransparentAreaView;
 @class CustomComboBox;
 @class RGBColor;
@@ -73,6 +75,10 @@ typedef enum
     int m_ScaleArray[41];
     
     NSDate * m_playTimeStart;
+    NSDate * m_audioRouteTimeStart;
+    NSDate * m_instrumentTimeStart;
+    NSDate * m_effectTimeStart[FREE_PLAY_EFFECT_COUNT];
+    NSDate * m_scaleTimeStart;
     NSTimeInterval m_playTimeAdjustment;
     
 }
@@ -136,6 +142,10 @@ typedef enum
 @property (retain, nonatomic) Harmonizer *m_harmonizer;
 @property (assign, nonatomic) NSInteger m_harmonizerValue;
 @property (retain, nonatomic) IBOutlet UIButton *m_scaleSwitch;
+
+- (void)handleResignActive;
+- (void)handleBecomeActive;
+- (void)finalLogging;
 
 - (IBAction)setWet:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;

@@ -71,6 +71,12 @@ extern TelemetryController * g_telemetryController;
     
     if ( self )
     {
+        m_playTimeAdjustment = 0;
+        
+        m_playTimeStart = [[NSDate date] retain];
+        m_audioRouteTimeStart = [[NSDate date] retain];
+        m_metronomeTimeStart = [[NSDate date] retain];
+        
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
         
@@ -128,6 +134,12 @@ extern TelemetryController * g_telemetryController;
     
     [m_deferredNotesQueue release];
     
+    [m_playTimeStart release];
+    
+    [m_audioRouteTimeStart release];
+    
+    [m_metronomeTimeStart release];
+
     g_audioController.m_delegate = nil;
     
     [g_audioController stopAUGraph];
@@ -251,7 +263,42 @@ extern TelemetryController * g_telemetryController;
 - (void)handleBecomeActive
 {
     [m_playTimeStart release];
+    [m_audioRouteTimeStart release];
+    [m_metronomeTimeStart release];
+
     m_playTimeStart = [[NSDate date] retain];
+    m_audioRouteTimeStart = [[NSDate date] retain];
+    m_metronomeTimeStart = [[NSDate date] retain];
+}
+
+- (void)finalLogging
+{
+    
+    NSString* route = m_bSpeakerRoute ? @"Speaker" : @"Aux";
+    
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+    
+    [g_telemetryController logEvent:GtarPlayToggleFeature
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     route, @"AudioRoute",
+                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+                                     nil]];
+    
+    if ( m_playMetronome == YES )
+    {
+        NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_metronomeTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+        
+        [g_telemetryController logEvent:GtarPlayToggleFeature
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSNumber numberWithInteger:m_userSong.m_songId], @"SongId",
+                                         m_userSong.m_title, @"Title",
+                                         [NSNumber numberWithInteger:m_difficulty], @"Difficulty",
+                                         [NSNumber numberWithInteger:(m_songModel.m_percentageComplete*100)], @"Percent",
+                                         @"Off", @"Metronome",
+                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+                                         nil]];
+    }
+    
 }
 
 - (void)startWithSongXmlDom
@@ -266,11 +313,6 @@ extern TelemetryController * g_telemetryController;
     [m_songRecorder release];
     
     m_currentFrame = nil;
-    
-    m_playTimeAdjustment = 0;
-    
-    [m_playTimeStart release];
-    m_playTimeStart = [[NSDate date] retain];
     
     //
     // start off the song stuff
@@ -695,12 +737,13 @@ BOOL m_skipNotes = NO;
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
     [g_telemetryController logEvent:GtarPlaySongDisconnected
-                          withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
-                                     m_userSong.m_songId,
-                                     m_userSong.m_title,
-                                     m_difficulty,
-                                     m_songModel.m_percentageComplete]];
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+                                     [NSNumber numberWithInteger:m_userSong.m_songId], @"SongId",
+                                     m_userSong.m_title, @"Title",
+                                     [NSNumber numberWithInteger:m_difficulty], @"Difficulty",
+                                     [NSNumber numberWithInteger:(m_songModel.m_percentageComplete*100)], @"Percent",
+                                     nil]];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
     
@@ -1175,12 +1218,13 @@ BOOL m_skipNotes = NO;
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
     [g_telemetryController logEvent:GtarPlaySongCompleted
-                          withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
-                                     m_userSong.m_songId,
-                                     m_userSong.m_title,
-                                     m_difficulty,
-                                     m_songModel.m_percentageComplete]];
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+                                     [NSNumber numberWithInteger:m_userSong.m_songId], @"SongId",
+                                     m_userSong.m_title, @"Title",
+                                     [NSNumber numberWithInteger:m_difficulty], @"Difficulty",
+                                     [NSNumber numberWithInteger:(m_songModel.m_percentageComplete*100)], @"Percent",
+                                     nil]];
     
     //
     // Save the scores/stars to persistent storage
@@ -1231,6 +1275,8 @@ BOOL m_skipNotes = NO;
     [m_metronomeTimer invalidate];
     m_metronomeTimer = nil;
     
+    [self finalLogging];
+    
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -1244,12 +1290,15 @@ BOOL m_skipNotes = NO;
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
     [g_telemetryController logEvent:GtarPlaySongAborted
-                          withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
-                                     m_userSong.m_songId,
-                                     m_userSong.m_title,
-                                     m_difficulty,
-                                     m_songModel.m_percentageComplete]];
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+                                     [NSNumber numberWithInteger:m_userSong.m_songId], @"SongId",
+                                     m_userSong.m_title, @"Title",
+                                     [NSNumber numberWithInteger:m_difficulty], @"Difficulty",
+                                     [NSNumber numberWithInteger:(m_songModel.m_percentageComplete*100)], @"Percent",
+                                     nil]];
+    
+    [self finalLogging];
     
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -1265,13 +1314,13 @@ BOOL m_skipNotes = NO;
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
     [g_telemetryController logEvent:GtarPlaySongRestarted
-                          withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
-                                     m_userSong.m_songId,
-                                     m_userSong.m_title,
-                                     m_difficulty,
-                                     m_songModel.m_percentageComplete]];
-    
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+                                     [NSNumber numberWithInteger:m_userSong.m_songId], @"SongId",
+                                     m_userSong.m_title, @"Title",
+                                     [NSNumber numberWithInteger:m_difficulty], @"Difficulty",
+                                     [NSNumber numberWithInteger:(m_songModel.m_percentageComplete*100)], @"Percent",
+                                     nil]];
     
     [self startWithSongXmlDom];
     
@@ -1321,12 +1370,13 @@ BOOL m_skipNotes = NO;
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
     [g_telemetryController logEvent:GtarPlaySongShared
-                          withValue:delta
-                         andMessage:[NSString stringWithFormat:@"SongId:%u, Title:%@, Difficulty:%u, Percent:%0.2f",
-                                     m_userSong.m_songId,
-                                     m_userSong.m_title,
-                                     m_difficulty,
-                                     m_songModel.m_percentageComplete]];
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+                                     [NSNumber numberWithInteger:m_userSong.m_songId], @"SongId",
+                                     m_userSong.m_title, @"Title",
+                                     [NSNumber numberWithInteger:m_difficulty], @"Difficulty",
+                                     [NSNumber numberWithInteger:(m_songModel.m_percentageComplete*100)], @"Percent",
+                                     nil]];
 
 }
 
@@ -1376,11 +1426,26 @@ BOOL m_skipNotes = NO;
         }
     }
     
-    NSString * route = m_bSpeakerRoute ? @"Speaker" : @"Aux";
+    // Invert it so we log the route we came from
+    NSString * route = !m_bSpeakerRoute ? @"Speaker" : @"Aux";
     
-    [g_telemetryController logEvent:GtarPlayToggleFeature
-                          withValue:(NSInteger)m_bSpeakerRoute
-                         andMessage:[NSString stringWithFormat:@"AudioRoute:%@", route]];
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+    
+    if ( delta > 0 )
+    {
+        [g_telemetryController logEvent:GtarPlayToggleFeature
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+                                         [NSNumber numberWithInteger:m_userSong.m_songId], @"SongId",
+                                         m_userSong.m_title, @"Title",
+                                         [NSNumber numberWithInteger:m_difficulty], @"Difficulty",
+                                         [NSNumber numberWithInteger:(m_songModel.m_percentageComplete*100)], @"Percent",
+                                         route, @"AudioRoute",
+                                         nil]];
+        
+        [m_audioRouteTimeStart release];
+        m_audioRouteTimeStart = [[NSDate date] retain];
+    }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
@@ -1395,17 +1460,41 @@ BOOL m_skipNotes = NO;
     
     if ( m_playMetronome == NO )
     {
+        
         m_playMetronome = YES;
+        
         [g_telemetryController logEvent:GtarPlayToggleFeature
-                              withValue:(NSInteger)m_playMetronome
-                             andMessage:@"Metronome:On"];
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSNumber numberWithInteger:m_userSong.m_songId], @"SongId",
+                                         m_userSong.m_title, @"Title",
+                                         [NSNumber numberWithInteger:m_difficulty], @"Difficulty",
+                                         [NSNumber numberWithInteger:(m_songModel.m_percentageComplete*100)], @"Percent",
+                                         @"On", @"Metronome",
+                                         nil]];
+        
+        [m_metronomeTimeStart release];
+        m_metronomeTimeStart = [[NSDate date] retain];
+        
     }
     else
     {
         m_playMetronome = NO;
+
+        NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_metronomeTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+        
         [g_telemetryController logEvent:GtarPlayToggleFeature
-                              withValue:(NSInteger)m_playMetronome
-                             andMessage:@"Metronome:Off"];
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSNumber numberWithInteger:m_userSong.m_songId], @"SongId",
+                                         m_userSong.m_title, @"Title",
+                                         [NSNumber numberWithInteger:m_difficulty], @"Difficulty",
+                                         [NSNumber numberWithInteger:(m_songModel.m_percentageComplete*100)], @"Percent",
+                                         @"Off", @"Metronome",
+                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+                                         nil]];
+        
+        [m_metronomeTimeStart release];
+        m_metronomeTimeStart = [[NSDate date] retain];
+
     }
     
 }
