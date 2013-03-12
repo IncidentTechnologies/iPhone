@@ -29,15 +29,17 @@
 #import "SongDisplayController.h"
 #import "AmpViewController.h"
 
-#define CHORD_DELAY_TIMER (0.020f)
+//#define FRAME_TIMER_DURATION_MED (0.40f) // seconds
+//#define FRAME_TIMER_DURATION_EASY (0.06f) // seconds
 
-#define FRAME_TIMER_DURATION_MED (0.40f) // seconds
-#define FRAME_TIMER_DURATION_EASY (0.06f) // seconds
+#define CHORD_DELAY_TIMER 0.010f
+#define CHORD_GRACE_PERIOD 0.100f
 
 #define AUDIO_CONTROLLER_ATTENUATION 0.99f
 #define AUDIO_CONTROLLER_ATTENUATION_MUFFLED 0.70f
 #define AUDIO_CONTROLLER_AMPLITUDE_MUFFLED 0.15f
 
+#define NOTE_DEFERMENT_TIME 0.040f
 #define INTER_FRAME_QUIET_PERIOD (0.60/(float)m_song.m_tempo)
 
 #define TEMP_BASE_SCORE 10
@@ -619,7 +621,7 @@ BOOL m_skipNotes = NO;
     NSNumber * strNumber = [[NSNumber alloc] initWithChar:str];
     NSNumber * velNumber = [[NSNumber alloc] initWithChar:velocity];
 
-    NSDate * when = [[NSDate alloc] initWithTimeIntervalSinceNow:0.060];
+    NSDate * when = [[NSDate alloc] initWithTimeIntervalSinceNow:NOTE_DEFERMENT_TIME];
     
     NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                         fretNumber, @"Fret",
@@ -662,7 +664,7 @@ BOOL m_skipNotes = NO;
 {
     
     // Always mute notes on note-off for hard
-    if ( m_difficulty == SongViewControllerDifficultyHard )
+//    if ( m_difficulty == SongViewControllerDifficultyHard )
     {
         [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
     }
@@ -685,10 +687,10 @@ BOOL m_skipNotes = NO;
             // the array object mutating under it.
             if ( fret == position.fret && str == position.string )
             {
-                if ( m_difficulty != SongViewControllerDifficultyHard )
-                {
-                    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
-                }
+//                if ( m_difficulty != SongViewControllerDifficultyHard )
+//                {
+//                    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
+//                }
                 
                 canceledPluck = pluck;
                 
@@ -862,16 +864,19 @@ BOOL m_skipNotes = NO;
                 }
             }
             
-            // Schedule an event to play the chords over time
-            m_delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
-            
-            // Schedule an event to push us to the next frame after a moment
-            m_interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:0.100 target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
-            
-//            m_previousChordPluckTime = CACurrentMediaTime();
             m_previousChordPluckString = str;
             m_previousChordPluckVelocity = velocity;
             m_previousChordPluckDirection = 0;
+            
+            // Schedule an event to play the chords over time
+            // m_delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
+            
+            // Play a chord right now
+            [self handleDelayedChord];
+
+            // Schedule an event to push us to the next frame after a moment
+            // if another chord doesn't come in.
+            m_interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
             
         }
         else
@@ -952,7 +957,7 @@ BOOL m_skipNotes = NO;
 //            NSLog(@"Going down, reup the timer");
             m_previousChordPluckDirection = +1;
             [m_interFrameDelayTimer invalidate];
-            m_interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:0.100 target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
+            m_interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
         }
     }
     
@@ -971,7 +976,7 @@ BOOL m_skipNotes = NO;
 //            NSLog(@"Going up, reup the timer");
             m_previousChordPluckDirection = -1;
             [m_interFrameDelayTimer invalidate];
-            m_interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:0.100 target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
+            m_interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
         }
     }
     
