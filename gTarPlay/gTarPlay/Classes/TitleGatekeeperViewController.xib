@@ -99,7 +99,7 @@
 					<object class="IBUILabel" id="673632551">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{27, 47}, {410, 27}}</string>
+						<string key="NSFrame">{{35, 47}, {410, 27}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="959791714"/>
@@ -108,12 +108,13 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Plug your iPhone into the gTar.</string>
+						<string key="IBUIText">Plug your iPhone into the gTar to create an account.</string>
 						<reference key="IBUITextColor" ref="417167826"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">4</int>
+						<int key="IBUITextAlignment">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
 							<double key="pointSize">16</double>
@@ -128,10 +129,10 @@
 					<object class="IBUIButton" id="578092107">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{262, 43}, {198, 37}}</string>
+						<string key="NSFrame">{{141, 266}, {198, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="87291041"/>
+						<reference key="NSNextKeyView" ref="945731047"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -177,10 +178,11 @@
 					</object>
 					<object class="IBUIButton" id="945731047">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{220, 266}, {69, 37}}</string>
+						<int key="NSvFlags">-2147483356</int>
+						<string key="NSFrame">{{206, 267}, {69, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -212,7 +214,7 @@
 						<string key="NSFrame">{{102, 78}, {276, 192}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="578092107"/>
+						<reference key="NSNextKeyView" ref="87291041"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -248,7 +250,7 @@
 						<string key="NSFrame">{{220, 155}, {40, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="945731047"/>
+						<reference key="NSNextKeyView" ref="578092107"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -336,8 +338,8 @@
 							<reference ref="87291041"/>
 							<reference ref="77331167"/>
 							<reference ref="959791714"/>
-							<reference ref="578092107"/>
 							<reference ref="945731047"/>
+							<reference ref="578092107"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
