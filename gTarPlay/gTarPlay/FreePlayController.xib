@@ -10218,7 +10218,7 @@ AAEAAQABA</bytes>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="274854468">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -10530,7 +10530,6 @@ AAEAAQABA</bytes>
 					</object>
 				</object>
 				<string key="NSFrameSize">{127, 296}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="51030098"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -11100,7 +11099,7 @@ AAEAAQABA</bytes>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="444838405">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -11261,6 +11260,7 @@ AAEAAQABA</bytes>
 					</object>
 				</object>
 				<string key="NSFrameSize">{350, 296}</string>
+				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="236678451"/>
 				<reference key="IBUIBackgroundColor" ref="1045111317"/>
 				<bool key="IBUIOpaque">NO</bool>

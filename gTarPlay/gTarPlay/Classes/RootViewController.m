@@ -146,6 +146,7 @@ extern TelemetryController * g_telemetryController;
     
     // Add a loading screen. This gets removed by the AppDelegate when it is done with its delayed loading
     [self.view addSubview:m_delayLoadView];
+    m_delayLoadView.center = self.view.center;
     
 	// 
 	// Setup UI

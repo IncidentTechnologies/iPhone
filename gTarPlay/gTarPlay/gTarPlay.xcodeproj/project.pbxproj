@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
+		EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */; };
+		EC0BAD3016EE8E3C00E567A6 /* TitleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */; };
+		EC0BAD3116EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */; };
+		EC0BAD3216EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */; };
+		EC0BAD3416EE93AC00E567A6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BAD3316EE93AC00E567A6 /* Default-568h@2x.png */; };
 		EC24DC08161A821200016B78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		EC24DC09161A821200016B78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		EC24DC0A161A821200016B78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -2535,6 +2540,10 @@
 		EC0B884C14B3D20B00D40BC8 /* ContinueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ContinueButton.png; sourceTree = "<group>"; };
 		EC0B884D14B3D20B00D40BC8 /* EndGameButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EndGameButton.png; sourceTree = "<group>"; };
 		EC0B884E14B3D20B00D40BC8 /* PlayAgainButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayAgainButton.png; sourceTree = "<group>"; };
+		EC0BAD2C16EE8E3C00E567A6 /* TitleNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleNavigationController.h; sourceTree = "<group>"; };
+		EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleNavigationController.m; sourceTree = "<group>"; };
+		EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleNavigationController.xib; sourceTree = "<group>"; };
+		EC0BAD3316EE93AC00E567A6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		EC1553D414CCB67400757565 /* TutorialAboutButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialAboutButtonOFF.png; sourceTree = "<group>"; };
 		EC1553D514CCB67400757565 /* TutorialAboutButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialAboutButtonON.png; sourceTree = "<group>"; };
 		EC1553D614CCB67400757565 /* TutorialFreePlayButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialFreePlayButtonOFF.png; sourceTree = "<group>"; };
@@ -3163,6 +3172,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				EC0BAD3316EE93AC00E567A6 /* Default-568h@2x.png */,
 				EC6BD1FF13F44E130068E25C /* gTarColors.h */,
 				EC9D6EBB14A11DC600AE374D /* Facebook */,
 				080E96DDFE201D6D7F000001 /* App Source */,
@@ -3833,6 +3843,8 @@
 		EC020DD9141FD2D700627303 /* TitleScreen */ = {
 			isa = PBXGroup;
 			children = (
+				EC0BAD3516EEA06600E567A6 /* Images */,
+				EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */,
 				EC5DD6FC1501872000D33BA7 /* Full Screen Dialogs */,
 				ECCED1F31462134F0006AB51 /* Images */,
 				ECCED1D71460C5E60006AB51 /* Account Feed */,
@@ -3876,6 +3888,24 @@
 				EC0B884D14B3D20B00D40BC8 /* EndGameButton.png */,
 				EC0B884E14B3D20B00D40BC8 /* PlayAgainButton.png */,
 				EC3AAE3315C9DA4B008E51BE /* PlayResultsScreenMenu.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BAD2C16EE8E3C00E567A6 /* TitleNavigationController.h */,
+				EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */,
+				EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */,
+			);
+			name = TitleNavigationController;
+			sourceTree = "<group>";
+		};
+		EC0BAD3516EEA06600E567A6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -4684,7 +4714,6 @@
 				EC22A293160258B1009B4913 /* ProfileButtonOFF.png */,
 				EC71F9E7141FFABE00F06996 /* gTar_Logo.png */,
 				ECBF4FB116373E7F003F0C8C /* gTarLogo_Red.png */,
-				EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */,
 				EC94136214858793000A6E64 /* Border_Strings_Shadow.png */,
 			);
 			name = Images;
@@ -5708,6 +5737,8 @@
 				EC26A3A516CB198F006E97E2 /* DefaultRot.png in Resources */,
 				EC26A3A716CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
 				ECE0137E16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */,
+				EC0BAD3116EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
+				EC0BAD3416EE93AC00E567A6 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6606,6 +6637,7 @@
 				EC26A3A616CB198F006E97E2 /* DefaultRot.png in Resources */,
 				EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
 				ECE0137F16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */,
+				EC0BAD3216EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6706,6 +6738,7 @@
 				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
 				ECBF4FDD1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
 				EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
+				EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6803,6 +6836,7 @@
 				ECC11E45162D07AD001A231A /* gTarPlayApplication.m in Sources */,
 				ECBF4FDE1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
 				EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
+				EC0BAD3016EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

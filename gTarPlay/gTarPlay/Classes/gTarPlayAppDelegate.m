@@ -122,7 +122,7 @@ TelemetryController * g_telemetryController;
     [self.m_playApplication resetIdleTimer];
     
     // Delay load some things
-    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
     
     return YES;
 }
