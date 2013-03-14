@@ -14,6 +14,12 @@
 		EC0BAD3116EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */; };
 		EC0BAD3216EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */; };
 		EC0BAD3416EE93AC00E567A6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BAD3316EE93AC00E567A6 /* Default-568h@2x.png */; };
+		EC0BAD8416F18AA000E567A6 /* ActivityFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD8316F18AA000E567A6 /* ActivityFeedCell.m */; };
+		EC0BAD8516F18AA000E567A6 /* ActivityFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD8316F18AA000E567A6 /* ActivityFeedCell.m */; };
+		EC0BAD8716F18B3400E567A6 /* ActivityFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC0BAD8616F18B3400E567A6 /* ActivityFeedCell.xib */; };
+		EC0BAD8816F18B3400E567A6 /* ActivityFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC0BAD8616F18B3400E567A6 /* ActivityFeedCell.xib */; };
+		EC0BAD9416F2472900E567A6 /* SelectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9316F2472900E567A6 /* SelectorControl.m */; };
+		EC0BAD9516F2472900E567A6 /* SelectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9316F2472900E567A6 /* SelectorControl.m */; };
 		EC24DC08161A821200016B78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		EC24DC09161A821200016B78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		EC24DC0A161A821200016B78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -2544,6 +2550,11 @@
 		EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleNavigationController.m; sourceTree = "<group>"; };
 		EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleNavigationController.xib; sourceTree = "<group>"; };
 		EC0BAD3316EE93AC00E567A6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		EC0BAD8216F18AA000E567A6 /* ActivityFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFeedCell.h; sourceTree = "<group>"; };
+		EC0BAD8316F18AA000E567A6 /* ActivityFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFeedCell.m; sourceTree = "<group>"; };
+		EC0BAD8616F18B3400E567A6 /* ActivityFeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityFeedCell.xib; sourceTree = "<group>"; };
+		EC0BAD9216F2472900E567A6 /* SelectorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectorControl.h; sourceTree = "<group>"; };
+		EC0BAD9316F2472900E567A6 /* SelectorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectorControl.m; sourceTree = "<group>"; };
 		EC1553D414CCB67400757565 /* TutorialAboutButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialAboutButtonOFF.png; sourceTree = "<group>"; };
 		EC1553D514CCB67400757565 /* TutorialAboutButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialAboutButtonON.png; sourceTree = "<group>"; };
 		EC1553D614CCB67400757565 /* TutorialFreePlayButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialFreePlayButtonOFF.png; sourceTree = "<group>"; };
@@ -3147,13 +3158,15 @@
 		080E96DDFE201D6D7F000001 /* App Source */ = {
 			isa = PBXGroup;
 			children = (
+				EC0BAD8116F1791300E567A6 /* General UI */,
+				EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */,
+				EC0BAD8016F14A7800E567A6 /* SongSelectionNavigationController */,
 				29B97315FDCFA39411CA2CEA /* AppDelegate */,
 				EC020DD9141FD2D700627303 /* TitleScreen */,
 				ECE302641330322F002812B6 /* FreePlay Experience */,
 				EC87EE8813270EE2007DAEC9 /* Play Experience */,
 				EC9F404514FEEAEC006DBAEC /* Menu */,
 				ECF50CF01434863E001F65B7 /* SongPlayerViewController */,
-				EC1E4DEB1548A44A0033F904 /* PullToUpdateTableViewController */,
 				EC7D5B5413D8EF3E00FC2177 /* CustomNavigationViewController */,
 			);
 			name = "App Source";
@@ -3843,8 +3856,6 @@
 		EC020DD9141FD2D700627303 /* TitleScreen */ = {
 			isa = PBXGroup;
 			children = (
-				EC0BAD3516EEA06600E567A6 /* Images */,
-				EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */,
 				EC5DD6FC1501872000D33BA7 /* Full Screen Dialogs */,
 				ECCED1F31462134F0006AB51 /* Images */,
 				ECCED1D71460C5E60006AB51 /* Account Feed */,
@@ -3895,9 +3906,13 @@
 		EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */ = {
 			isa = PBXGroup;
 			children = (
+				EC0BAD3516EEA06600E567A6 /* Images */,
 				EC0BAD2C16EE8E3C00E567A6 /* TitleNavigationController.h */,
 				EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */,
 				EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */,
+				EC0BAD8216F18AA000E567A6 /* ActivityFeedCell.h */,
+				EC0BAD8316F18AA000E567A6 /* ActivityFeedCell.m */,
+				EC0BAD8616F18B3400E567A6 /* ActivityFeedCell.xib */,
 			);
 			name = TitleNavigationController;
 			sourceTree = "<group>";
@@ -3908,6 +3923,31 @@
 				EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		EC0BAD8016F14A7800E567A6 /* SongSelectionNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SongSelectionNavigationController;
+			sourceTree = "<group>";
+		};
+		EC0BAD8116F1791300E567A6 /* General UI */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BAD9116F2458200E567A6 /* SelectorControl */,
+				EC1E4DEB1548A44A0033F904 /* PullToUpdateTableViewController */,
+			);
+			name = "General UI";
+			sourceTree = "<group>";
+		};
+		EC0BAD9116F2458200E567A6 /* SelectorControl */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BAD9216F2472900E567A6 /* SelectorControl.h */,
+				EC0BAD9316F2472900E567A6 /* SelectorControl.m */,
+			);
+			name = SelectorControl;
 			sourceTree = "<group>";
 		};
 		EC18A6ED13D901D3004A2667 /* Play Song Select */ = {
@@ -5739,6 +5779,7 @@
 				ECE0137E16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */,
 				EC0BAD3116EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
 				EC0BAD3416EE93AC00E567A6 /* Default-568h@2x.png in Resources */,
+				EC0BAD8716F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6638,6 +6679,7 @@
 				EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
 				ECE0137F16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */,
 				EC0BAD3216EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
+				EC0BAD8816F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6739,6 +6781,8 @@
 				ECBF4FDD1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
 				EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
 				EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
+				EC0BAD8416F18AA000E567A6 /* ActivityFeedCell.m in Sources */,
+				EC0BAD9416F2472900E567A6 /* SelectorControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6837,6 +6881,8 @@
 				ECBF4FDE1638C591003F0C8C /* TitleFirmwareViewController.m in Sources */,
 				EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
 				EC0BAD3016EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
+				EC0BAD8516F18AA000E567A6 /* ActivityFeedCell.m in Sources */,
+				EC0BAD9516F2472900E567A6 /* SelectorControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
