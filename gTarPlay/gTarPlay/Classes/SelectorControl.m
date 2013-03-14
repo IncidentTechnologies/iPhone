@@ -12,6 +12,7 @@
 
 @interface SelectorControl ()
 {
+    NSArray *_titleArray;
     NSArray *_buttonViews;
 }
 
@@ -27,25 +28,36 @@
     if ( self )
     {
         // Initialization code
+//        self.layer.borderColor = [[UIColor grayColor] CGColor];
+//        self.layer.borderWidth = 1;
+        
+        _selectedIndex = 0;
     }
     
     return self;
 }
 
-- (void)setTitles:(NSArray*)titleArray
+- (void)dealloc
 {
-    
-    if ( [titleArray count] == 0 )
+    for ( UIButton *button in _buttonViews )
     {
-        return;
+        [button removeFromSuperview];
     }
     
+    [_buttonViews release];
+    [_titleArray release];
     
-    self.backgroundColor = [UIColor grayColor];
-//    self.layer.borderColor = [[UIColor grayColor] CGColor];
-//    self.layer.borderWidth = 1;
+    [super dealloc];
+}
+
+- (void)layoutSubviews
+{
+    // Can't do this in the init, let's do it here
+    self.backgroundColor = [UIColor darkGrayColor];
     
-    // clean house
+    //
+    // Clean out the old buttons
+    //
     for ( UIButton *button in _buttonViews )
     {
         [button removeFromSuperview];
@@ -53,33 +65,43 @@
     
     [_buttonViews release];
     
-    _buttonViews = nil;
+    //
+    // Create the new buttons.
+    //
     
-    // create the new ones
-    CGFloat width = self.frame.size.width / [titleArray count];
+    NSUInteger titleCount = [_titleArray count];
+    
+    // Leave 1 pixel between each button as a border
+    CGFloat width = (self.frame.size.width - titleCount + 1) / titleCount;
     CGFloat height = self.frame.size.height;
     
     NSMutableArray *newButtons = [[NSMutableArray alloc] init];
     
-    for ( NSInteger i = 0; i < [titleArray count]; i++ )
+    for ( NSInteger i = 0; i < [_titleArray count]; i++ )
     {
-        NSString *title = [titleArray objectAtIndex:i];
+        NSString *title = [_titleArray objectAtIndex:i];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
+        // +1 for the border between buttons
         [button setFrame:CGRectMake(i*(width+1), 0, width, height)];
         
-        // set the title
+        [button setBackgroundColor:[UIColor lightGrayColor]];
+        
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        button.titleLabel.numberOfLines = 2;
+        
         [button setTitle:title forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-        [button setTitleShadowColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-        
-        button.titleLabel.shadowOffset = CGSizeMake(1,1);
+//        [button setTitleShadowColor:[UIColor grayColor] forState:UIControlStateNormal];
+//        [button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+//        
+//        button.titleLabel.shadowOffset = CGSizeMake(1,1);
 //        button.titleLabel.minimumScaleFactor = 10;
-        
-        button.layer.shadowRadius = 4;
-        button.layer.shadowOffset = CGSizeMake(2, 2);
+
+//        button.layer.shadowRadius = 4;
+//        button.layer.shadowOffset = CGSizeMake(2, 2);
         
         // Set up the actions and add the subview
         [button addTarget:self action:@selector(segmentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -92,8 +114,19 @@
     
     _buttonViews = newButtons;
     
-    [self setSelectedIndex:0];
+    [self setSelectedIndex:_selectedIndex];
+}
+
+- (void)setTitles:(NSArray*)titleArray
+{
+    if ( [titleArray count] == 0 )
+    {
+        return;
+    }
     
+    _titleArray = [titleArray retain];
+    
+    [self layoutSubviews];
 }
 
 - (void)setTitle:(NSString*)title forIndex:(NSUInteger)index
@@ -110,9 +143,11 @@
 
 - (void)setSelectedIndex:(NSUInteger)index
 {
+    if ( index >= [_buttonViews count] )
+    {
+        return;
+    }
     
-    _selectedIndex = index;
-
     // revert the previous segment
     UIButton * oldButton = [_buttonViews objectAtIndex:_selectedIndex];
     UIButton * newButton = [_buttonViews objectAtIndex:index];
@@ -120,8 +155,10 @@
     [oldButton setEnabled:YES];
     [newButton setEnabled:NO];
     
-    _selectedIndex = [_buttonViews indexOfObject:newButton];
+    [oldButton setBackgroundColor:[UIColor lightGrayColor]];
+    [newButton setBackgroundColor:[UIColor grayColor]];
     
+    _selectedIndex = index;
 }
 
 - (void)setFontSize:(CGFloat)size

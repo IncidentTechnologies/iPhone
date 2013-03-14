@@ -61,7 +61,7 @@
         view.layer.shadowOpacity = 0.9;
     }
     
-    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"Test1", @"Test2",nil]];
+    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", @"NEWS",nil]];
     
 //    [self swapLeftPanel:_loggedoutLeftPanel];
 //    [self swapLeftPanel:_gatekeeperLeftPanel];
