@@ -11,8 +11,9 @@
 #import "PullToUpdateTableView.h"
 
 @class SelectorControl;
+@class SlidingModalViewController;
 
-@interface TitleNavigationController : UIViewController <UITableViewDataSource, PullToUpdateTableViewDelegate>
+@interface TitleNavigationController : UIViewController <UITableViewDataSource, PullToUpdateTableViewDelegate, UITextFieldDelegate>
 
 // Main
 @property (retain, nonatomic) IBOutlet UIView *topBarView;
@@ -20,6 +21,9 @@
 @property (retain, nonatomic) IBOutlet UIView *rightPanel;
 @property (retain, nonatomic) IBOutlet UIView *leftPanel;
 @property (retain, nonatomic) IBOutlet UIView *learnMoreRightPanel;
+
+// Modal
+@property (retain, nonatomic) IBOutlet SlidingModalViewController *activityFeedModal;
 
 // Panels
 @property (retain, nonatomic) IBOutlet UIView *loggedoutLeftPanel;

@@ -20,6 +20,16 @@
 		EC0BAD8816F18B3400E567A6 /* ActivityFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC0BAD8616F18B3400E567A6 /* ActivityFeedCell.xib */; };
 		EC0BAD9416F2472900E567A6 /* SelectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9316F2472900E567A6 /* SelectorControl.m */; };
 		EC0BAD9516F2472900E567A6 /* SelectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9316F2472900E567A6 /* SelectorControl.m */; };
+		EC0BAD9916F2784800E567A6 /* CyclingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9816F2784800E567A6 /* CyclingTextField.m */; };
+		EC0BAD9A16F2784800E567A6 /* CyclingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9816F2784800E567A6 /* CyclingTextField.m */; };
+		EC0BAD9E16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9D16F2A4CF00E567A6 /* SlidingModalViewController.m */; };
+		EC0BAD9F16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9D16F2A4CF00E567A6 /* SlidingModalViewController.m */; };
+		EC0BADA116F3C49B00E567A6 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA016F3C49B00E567A6 /* TextBox.png */; };
+		EC0BADA216F3C49B00E567A6 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA016F3C49B00E567A6 /* TextBox.png */; };
+		EC0BADA416F3C76100E567A6 /* FaceBookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA316F3C76000E567A6 /* FaceBookButton.png */; };
+		EC0BADA516F3C76100E567A6 /* FaceBookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA316F3C76000E567A6 /* FaceBookButton.png */; };
+		EC0BADA716F3C7CE00E567A6 /* SignUp_CircleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA616F3C7CD00E567A6 /* SignUp_CircleButton.png */; };
+		EC0BADA816F3C7CE00E567A6 /* SignUp_CircleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA616F3C7CD00E567A6 /* SignUp_CircleButton.png */; };
 		EC24DC08161A821200016B78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		EC24DC09161A821200016B78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		EC24DC0A161A821200016B78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -2555,6 +2565,13 @@
 		EC0BAD8616F18B3400E567A6 /* ActivityFeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityFeedCell.xib; sourceTree = "<group>"; };
 		EC0BAD9216F2472900E567A6 /* SelectorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectorControl.h; sourceTree = "<group>"; };
 		EC0BAD9316F2472900E567A6 /* SelectorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectorControl.m; sourceTree = "<group>"; };
+		EC0BAD9716F2784800E567A6 /* CyclingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CyclingTextField.h; sourceTree = "<group>"; };
+		EC0BAD9816F2784800E567A6 /* CyclingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CyclingTextField.m; sourceTree = "<group>"; };
+		EC0BAD9C16F2A4CF00E567A6 /* SlidingModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingModalViewController.h; sourceTree = "<group>"; };
+		EC0BAD9D16F2A4CF00E567A6 /* SlidingModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingModalViewController.m; sourceTree = "<group>"; };
+		EC0BADA016F3C49B00E567A6 /* TextBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextBox.png; sourceTree = "<group>"; };
+		EC0BADA316F3C76000E567A6 /* FaceBookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FaceBookButton.png; sourceTree = "<group>"; };
+		EC0BADA616F3C7CD00E567A6 /* SignUp_CircleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignUp_CircleButton.png; sourceTree = "<group>"; };
 		EC1553D414CCB67400757565 /* TutorialAboutButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialAboutButtonOFF.png; sourceTree = "<group>"; };
 		EC1553D514CCB67400757565 /* TutorialAboutButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialAboutButtonON.png; sourceTree = "<group>"; };
 		EC1553D614CCB67400757565 /* TutorialFreePlayButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialFreePlayButtonOFF.png; sourceTree = "<group>"; };
@@ -3920,6 +3937,9 @@
 		EC0BAD3516EEA06600E567A6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EC0BADA616F3C7CD00E567A6 /* SignUp_CircleButton.png */,
+				EC0BADA316F3C76000E567A6 /* FaceBookButton.png */,
+				EC0BADA016F3C49B00E567A6 /* TextBox.png */,
 				EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */,
 			);
 			name = Images;
@@ -3935,6 +3955,8 @@
 		EC0BAD8116F1791300E567A6 /* General UI */ = {
 			isa = PBXGroup;
 			children = (
+				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
+				EC0BAD9616F2771A00E567A6 /* CyclingTextField */,
 				EC0BAD9116F2458200E567A6 /* SelectorControl */,
 				EC1E4DEB1548A44A0033F904 /* PullToUpdateTableViewController */,
 			);
@@ -3948,6 +3970,24 @@
 				EC0BAD9316F2472900E567A6 /* SelectorControl.m */,
 			);
 			name = SelectorControl;
+			sourceTree = "<group>";
+		};
+		EC0BAD9616F2771A00E567A6 /* CyclingTextField */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BAD9716F2784800E567A6 /* CyclingTextField.h */,
+				EC0BAD9816F2784800E567A6 /* CyclingTextField.m */,
+			);
+			name = CyclingTextField;
+			sourceTree = "<group>";
+		};
+		EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BAD9C16F2A4CF00E567A6 /* SlidingModalViewController.h */,
+				EC0BAD9D16F2A4CF00E567A6 /* SlidingModalViewController.m */,
+			);
+			name = SlidingModalViewController;
 			sourceTree = "<group>";
 		};
 		EC18A6ED13D901D3004A2667 /* Play Song Select */ = {
@@ -5780,6 +5820,9 @@
 				EC0BAD3116EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
 				EC0BAD3416EE93AC00E567A6 /* Default-568h@2x.png in Resources */,
 				EC0BAD8716F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
+				EC0BADA116F3C49B00E567A6 /* TextBox.png in Resources */,
+				EC0BADA416F3C76100E567A6 /* FaceBookButton.png in Resources */,
+				EC0BADA716F3C7CE00E567A6 /* SignUp_CircleButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6680,6 +6723,9 @@
 				ECE0137F16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */,
 				EC0BAD3216EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
 				EC0BAD8816F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
+				EC0BADA216F3C49B00E567A6 /* TextBox.png in Resources */,
+				EC0BADA516F3C76100E567A6 /* FaceBookButton.png in Resources */,
+				EC0BADA816F3C7CE00E567A6 /* SignUp_CircleButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6783,6 +6829,8 @@
 				EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
 				EC0BAD8416F18AA000E567A6 /* ActivityFeedCell.m in Sources */,
 				EC0BAD9416F2472900E567A6 /* SelectorControl.m in Sources */,
+				EC0BAD9916F2784800E567A6 /* CyclingTextField.m in Sources */,
+				EC0BAD9E16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6883,6 +6931,8 @@
 				EC0BAD3016EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
 				EC0BAD8516F18AA000E567A6 /* ActivityFeedCell.m in Sources */,
 				EC0BAD9516F2472900E567A6 /* SelectorControl.m in Sources */,
+				EC0BAD9A16F2784800E567A6 /* CyclingTextField.m in Sources */,
+				EC0BAD9F16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

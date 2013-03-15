@@ -106,6 +106,9 @@ TelemetryController * g_telemetryController;
     // Add the navigation controller's view to the window and display.
     m_window.rootViewController = m_navigationController;
     
+    // We need this in other parts of the app to properly display modals with transparent backgrounds
+    m_window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    
     [self.m_window addSubview:m_navigationController.view];
     [self.m_window makeKeyAndVisible];
 

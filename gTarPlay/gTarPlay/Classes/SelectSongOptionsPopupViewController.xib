@@ -43,7 +43,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{440, 280}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1017689070"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -57,7 +56,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 49}, {440, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="580177764"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -91,7 +89,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 13}, {440, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="501072556"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -127,7 +124,6 @@
 								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{15, 0}, {114, 50}}</string>
 								<reference key="NSSuperview" ref="580177764"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="510086545"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -157,7 +153,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{55, 11}, {290, 37}}</string>
 								<reference key="NSSuperview" ref="580177764"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="568157747"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="253098131">
 									<int key="NSColorSpace">1</int>
@@ -169,7 +164,6 @@
 						</array>
 						<string key="NSFrame">{{20, 93}, {400, 60}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="7604024"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="707132275">
 							<int key="NSColorSpace">3</int>
@@ -182,7 +176,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{220, 236}, {220, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -212,7 +205,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 144}, {400, 81}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="570535955"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -239,7 +231,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 236}, {220, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="252621372"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -262,7 +253,6 @@
 				</array>
 				<string key="NSFrameSize">{440, 280}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="46778810"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -676,142 +666,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">35</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">CustomSegmentedControl</string>
-					<string key="superclassName">UIControl</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">segmentButtonClicked:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">segmentButtonClicked:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">segmentButtonClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CustomSegmentedControl.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PopupViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="closeButtonClicked:">id</string>
-						<string key="fullScreenButtonClicked:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="closeButtonClicked:">
-							<string key="name">closeButtonClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="fullScreenButtonClicked:">
-							<string key="name">fullScreenButtonClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PopupViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SelectSongOptionsPopupViewController</string>
-					<string key="superclassName">PopupViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="difficultyValueChanged:">id</string>
-						<string key="muffleValueChanged:">id</string>
-						<string key="playButtonClicked:">id</string>
-						<string key="previewButtonClicked:">id</string>
-						<string key="tempoValueChanged:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="difficultyValueChanged:">
-							<string key="name">difficultyValueChanged:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="muffleValueChanged:">
-							<string key="name">muffleValueChanged:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="playButtonClicked:">
-							<string key="name">playButtonClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="previewButtonClicked:">
-							<string key="name">previewButtonClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="tempoValueChanged:">
-							<string key="name">tempoValueChanged:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="m_artistLabel">UILabel</string>
-						<string key="m_difficultyControl">CustomSegmentedControl</string>
-						<string key="m_difficultyDescriptionLabel">UILabel</string>
-						<string key="m_muffleControl">CustomSegmentedControl</string>
-						<string key="m_muffleView">UIView</string>
-						<string key="m_previewButton">UIButton</string>
-						<string key="m_tempoSlider">UISlider</string>
-						<string key="m_tempoSliderValue">UILabel</string>
-						<string key="m_tempoView">UIView</string>
-						<string key="m_titleLabel">UILabel</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="m_artistLabel">
-							<string key="name">m_artistLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_difficultyControl">
-							<string key="name">m_difficultyControl</string>
-							<string key="candidateClassName">CustomSegmentedControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_difficultyDescriptionLabel">
-							<string key="name">m_difficultyDescriptionLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_muffleControl">
-							<string key="name">m_muffleControl</string>
-							<string key="candidateClassName">CustomSegmentedControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_muffleView">
-							<string key="name">m_muffleView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_previewButton">
-							<string key="name">m_previewButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_tempoSlider">
-							<string key="name">m_tempoSlider</string>
-							<string key="candidateClassName">UISlider</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_tempoSliderValue">
-							<string key="name">m_tempoSliderValue</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_tempoView">
-							<string key="name">m_tempoView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_titleLabel">
-							<string key="name">m_titleLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SelectSongOptionsPopupViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">

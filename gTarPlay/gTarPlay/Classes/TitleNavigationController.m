@@ -11,11 +11,15 @@
 #import "TitleNavigationController.h"
 #import "ActivityFeedCell.h"
 #import "SelectorControl.h"
+#import "CyclingTextField.h"
+#import "SlidingModalViewController.h"
 
 @interface TitleNavigationController ()
 {
     UIView *_currentLeftPanel;
     UIView *_currentRightPanel;
+    
+    UIButton *_fullScreenButton;
 }
 @end
 
@@ -51,7 +55,7 @@
         _menuStoreButton
     };
     
-    for ( NSInteger i = 0; i < (sizeof(viewsNeedingShadows)/sizeof(UIView*)); i++)
+    for ( NSInteger i = 0; i < (sizeof(viewsNeedingShadows)/sizeof(UIView *)); i++)
     {
         UIView *view = viewsNeedingShadows[i];
         
@@ -77,6 +81,10 @@
 
 - (void)dealloc
 {
+    [_currentLeftPanel removeFromSuperview];
+    [_currentRightPanel removeFromSuperview];
+    [_fullScreenButton removeFromSuperview];
+    
     [_rightPanel release];
     [_leftPanel release];
     [_loggedoutLeftPanel release];
@@ -101,12 +109,13 @@
     [_feedRightPanel release];
     [_feedTable release];
     [_feedSelectorControl release];
+    [_activityFeedModal release];
     [super dealloc];
 }
 
 #pragma mark - Panel management
 
-- (void)swapRightPanel:(UIView*)rightPanel
+- (void)swapRightPanel:(UIView *)rightPanel
 {
     
     [_currentRightPanel removeFromSuperview];
@@ -120,7 +129,7 @@
     
 }
 
-- (void)swapLeftPanel:(UIView*)leftPanel
+- (void)swapLeftPanel:(UIView *)leftPanel
 {
     
     [_currentLeftPanel removeFromSuperview];
@@ -172,13 +181,14 @@
 - (IBAction)menuFreePlayButtonClicked:(id)sender
 {
     // Start free play mode
-    [_feedTable reloadData];
+    [self presentViewController:_activityFeedModal animated:NO completion:NULL];
     
 }
 
 - (IBAction)menuStoreButtonClicked:(id)sender
 {
     // Start store mode
+    [self swapRightPanel:_signupRightPanel];
 }
 
 - (IBAction)feedSelectorChanged:(id)sender
@@ -225,12 +235,12 @@
     return 3;
 }
 
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
-	static NSString * CellIdentifier = @"ActivityFeedCell";
+	static NSString *CellIdentifier = @"ActivityFeedCell";
 
-	ActivityFeedCell * cell = (ActivityFeedCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	ActivityFeedCell *cell = (ActivityFeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
 	if (cell == nil)
 	{
@@ -279,6 +289,11 @@
 //    return 41;
 //}
 
+- (void)update
+{
+    
+}
+
 #pragma mark - Table view delegate
 
 // This function catches any selections
@@ -297,4 +312,114 @@
 //    [self performSelector:@selector(playCell:) withObject:cell afterDelay:0.05];
     
 }
+
+#pragma mark - UITextFieldDelegate
+
+- (IBAction)textFieldSelected:(id)sender
+{
+    CyclingTextField *cyclingTextField = (CyclingTextField *)sender;
+    
+    UIView *parent = cyclingTextField.superview;
+    
+    // Shift the superview up enough so that the textfield is
+    // centered in the remaining visble space once the keyboard displays.
+    // I kinda just tweaked this value till it looked right.
+    CGFloat delta = cyclingTextField.frame.origin.y - 35;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.2f];
+    
+    parent.transform = CGAffineTransformMakeTranslation( 0, -delta );
+    
+    [UIView commitAnimations];
+    
+    if ( _fullScreenButton == nil )
+    {
+        // Not retained
+        _fullScreenButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _fullScreenButton.frame = self.view.frame;
+        
+        [self.view addSubview:_fullScreenButton];
+    }
+    else
+    {
+        // Remove all actions for the button
+        [_fullScreenButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    }
+    
+    // Resign first responder on the text field when this button is pressed
+    [_fullScreenButton addTarget:cyclingTextField action:@selector(resignFirstResponder) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    CyclingTextField *cyclingTextField = (CyclingTextField *)textField;
+    
+    UIView *parent = cyclingTextField.superview;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.2f];
+    
+    parent.transform = CGAffineTransformIdentity;
+    
+    [UIView commitAnimations];
+    
+    // FYI We never retained this
+    [_fullScreenButton removeFromSuperview];
+    
+    _fullScreenButton = nil;
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    CyclingTextField *cyclingTextField = (CyclingTextField *)textField;
+    
+    if ( cyclingTextField.nextTextField != nil )
+    {
+        [cyclingTextField.nextTextField becomeFirstResponder];
+    }
+    else if ( cyclingTextField.submitButton != nil )
+    {
+        [cyclingTextField.submitButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+    
+	return NO;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+//    NSCharacterSet * usernameSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
+//    NSCharacterSet * passwordSet =[[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789!@#$%^&*+-/=?^_`|~.[]{}()"] invertedSet];
+//    
+//    // Backspace character
+//    if ( [string length] == 0 )
+//    {
+//        return YES;
+//    }
+//    
+//    // The username needs alpha num only
+//    if ( textField == m_usernameTextField &&
+//        [string rangeOfCharacterFromSet:usernameSet].location != NSNotFound )
+//    {
+//        [m_statusLabel setText:@"Invalid character"];
+//        [m_statusLabel setHidden:NO];
+//        return NO;
+//    }
+//    
+//    if ( textField == m_passwordTextField &&
+//        [string rangeOfCharacterFromSet:passwordSet].location != NSNotFound )
+//    {
+//        [m_statusLabel setText:@"Invalid character"];
+//        [m_statusLabel setHidden:NO];
+//        return NO;
+//    }
+//    
+//    [m_statusLabel setHidden:YES];
+    
+    return YES;
+}
+
 @end
