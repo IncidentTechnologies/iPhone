@@ -637,6 +637,12 @@
 {
     m_fretsPressedDown[string][fret] = true;
     
+    if (0 == m_fretToPlay[string])
+    {
+        m_attenuation[string] = 0.00009;
+        return;
+    } 
+    
     // The following chunk of code is to create a smooth transition from one note to the next during
     // hammerOn/Off slides.
     // If this fret down will cause a change in note played (i.e. there is currently a note playing
@@ -660,7 +666,7 @@
     
     // If the fret being lifted is the one currently being played, then a change in played note will
     // happen (hammer off).
-    if (fret == m_fretToPlay[string])
+    if (fret == m_fretToPlay[string] || fret == m_pendingFretToPlay[string])
     {
         // Find the fret to hammer off to, i.e. the highest remaining fret being pressed down.
         int highestRemainingFretDown = -1;
@@ -684,7 +690,8 @@
         else
         {
             // There are no other frets being pressed down, kill the note via attenuation
-            m_attenuation[string] = 0.0003;
+            m_pendingFretToPlay[string] = -1;
+            m_attenuation[string] = 0.00009;
         }
         
     }
@@ -698,7 +705,7 @@
     if ( fret == m_fretToPlay[string] && -1 == m_pendingFretToPlay[string])
     {
         // The noteOff msg corresponds to the note currently playing, kill the note via attenuation.
-        m_attenuation[string] = 0.0003;
+        m_attenuation[string] = 0.00009;
     }
 }
 
