@@ -30,6 +30,12 @@
 		EC0BADA516F3C76100E567A6 /* FaceBookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA316F3C76000E567A6 /* FaceBookButton.png */; };
 		EC0BADA716F3C7CE00E567A6 /* SignUp_CircleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA616F3C7CD00E567A6 /* SignUp_CircleButton.png */; };
 		EC0BADA816F3C7CE00E567A6 /* SignUp_CircleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA616F3C7CD00E567A6 /* SignUp_CircleButton.png */; };
+		EC0BADAA16F3F10300E567A6 /* title_sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA916F3F10300E567A6 /* title_sample.jpg */; };
+		EC0BADAB16F3F10300E567A6 /* title_sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA916F3F10300E567A6 /* title_sample.jpg */; };
+		EC0BADB016F3F3CE00E567A6 /* title_sampe1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADAF16F3F3CD00E567A6 /* title_sampe1.jpg */; };
+		EC0BADB116F3F3CE00E567A6 /* title_sampe1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADAF16F3F3CD00E567A6 /* title_sampe1.jpg */; };
+		EC0BADB616F3F89A00E567A6 /* title_sample2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADB516F3F89900E567A6 /* title_sample2.jpg */; };
+		EC0BADB716F3F89A00E567A6 /* title_sample2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADB516F3F89900E567A6 /* title_sample2.jpg */; };
 		EC24DC08161A821200016B78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		EC24DC09161A821200016B78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		EC24DC0A161A821200016B78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -2572,6 +2578,9 @@
 		EC0BADA016F3C49B00E567A6 /* TextBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextBox.png; sourceTree = "<group>"; };
 		EC0BADA316F3C76000E567A6 /* FaceBookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FaceBookButton.png; sourceTree = "<group>"; };
 		EC0BADA616F3C7CD00E567A6 /* SignUp_CircleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignUp_CircleButton.png; sourceTree = "<group>"; };
+		EC0BADA916F3F10300E567A6 /* title_sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = title_sample.jpg; sourceTree = "<group>"; };
+		EC0BADAF16F3F3CD00E567A6 /* title_sampe1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = title_sampe1.jpg; sourceTree = "<group>"; };
+		EC0BADB516F3F89900E567A6 /* title_sample2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = title_sample2.jpg; sourceTree = "<group>"; };
 		EC1553D414CCB67400757565 /* TutorialAboutButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialAboutButtonOFF.png; sourceTree = "<group>"; };
 		EC1553D514CCB67400757565 /* TutorialAboutButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialAboutButtonON.png; sourceTree = "<group>"; };
 		EC1553D614CCB67400757565 /* TutorialFreePlayButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialFreePlayButtonOFF.png; sourceTree = "<group>"; };
@@ -3924,6 +3933,9 @@
 			isa = PBXGroup;
 			children = (
 				EC0BAD3516EEA06600E567A6 /* Images */,
+				EC0BADA916F3F10300E567A6 /* title_sample.jpg */,
+				EC0BADAF16F3F3CD00E567A6 /* title_sampe1.jpg */,
+				EC0BADB516F3F89900E567A6 /* title_sample2.jpg */,
 				EC0BAD2C16EE8E3C00E567A6 /* TitleNavigationController.h */,
 				EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */,
 				EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */,
@@ -5823,6 +5835,9 @@
 				EC0BADA116F3C49B00E567A6 /* TextBox.png in Resources */,
 				EC0BADA416F3C76100E567A6 /* FaceBookButton.png in Resources */,
 				EC0BADA716F3C7CE00E567A6 /* SignUp_CircleButton.png in Resources */,
+				EC0BADAA16F3F10300E567A6 /* title_sample.jpg in Resources */,
+				EC0BADB016F3F3CE00E567A6 /* title_sampe1.jpg in Resources */,
+				EC0BADB616F3F89A00E567A6 /* title_sample2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6726,6 +6741,9 @@
 				EC0BADA216F3C49B00E567A6 /* TextBox.png in Resources */,
 				EC0BADA516F3C76100E567A6 /* FaceBookButton.png in Resources */,
 				EC0BADA816F3C7CE00E567A6 /* SignUp_CircleButton.png in Resources */,
+				EC0BADAB16F3F10300E567A6 /* title_sample.jpg in Resources */,
+				EC0BADB116F3F3CE00E567A6 /* title_sampe1.jpg in Resources */,
+				EC0BADB716F3F89A00E567A6 /* title_sample2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

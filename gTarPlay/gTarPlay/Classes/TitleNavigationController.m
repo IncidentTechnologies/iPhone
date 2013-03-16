@@ -69,7 +69,8 @@
     
 //    [self swapLeftPanel:_loggedoutLeftPanel];
 //    [self swapLeftPanel:_gatekeeperLeftPanel];
-    [self swapLeftPanel:_menuLeftPanel];
+//    [self swapLeftPanel:_menuLeftPanel];
+    [self performSelectorOnMainThread:@selector(swapLeftPanel:) withObject:_menuLeftPanel waitUntilDone:NO];
     
 }
 
@@ -134,6 +135,9 @@
     
     [_currentLeftPanel removeFromSuperview];
     
+    // Resize the subview as appropriate
+    [leftPanel setFrame:CGRectMake(0, 0, _leftPanel.frame.size.width, _leftPanel.frame.size.height )];;
+    
     [_leftPanel addSubview:leftPanel];
     
     _currentLeftPanel = leftPanel;
@@ -154,6 +158,7 @@
     [_loggedoutSignupButton setEnabled:NO];
     
     [self swapRightPanel:_signupRightPanel];
+    [self swapLeftPanel:_gatekeeperLeftPanel];
 }
 
 - (IBAction)gatekeeperLearnMoreButtonClicked:(id)sender
@@ -189,6 +194,8 @@
 {
     // Start store mode
     [self swapRightPanel:_signupRightPanel];
+    [self swapLeftPanel:_loggedoutLeftPanel];
+    [_menuLeftPanel layoutSubviews];
 }
 
 - (IBAction)feedSelectorChanged:(id)sender
