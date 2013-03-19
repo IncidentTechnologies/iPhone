@@ -21,6 +21,7 @@
 @property (retain, nonatomic) IBOutlet UIView *rightPanel;
 @property (retain, nonatomic) IBOutlet UIView *leftPanel;
 @property (retain, nonatomic) IBOutlet UIView *videoRightPanel;
+@property (retain, nonatomic) IBOutlet UILabel *notificationLabel;
 
 // Modal
 @property (retain, nonatomic) IBOutlet SlidingModalViewController *activityFeedModal;

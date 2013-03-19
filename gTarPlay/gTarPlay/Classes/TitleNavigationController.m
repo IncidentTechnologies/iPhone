@@ -15,6 +15,8 @@
 #import "CyclingTextField.h"
 #import "SlidingModalViewController.h"
 
+#define NOTIFICATION_GATEKEEPER_SIGNIN @"Please connect your gTar to sign up for an account."
+
 @interface TitleNavigationController ()
 {
     UIView *_currentLeftPanel;
@@ -70,6 +72,8 @@
     }
     
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", @"NEWS",nil]];
+    
+    [self hideNotification];
     
     // Apparently the view doesn't get resized to iPhone 5 dimensions until after viewDidLoad
     [self performSelectorOnMainThread:@selector(swapLeftPanel:) withObject:_gatekeeperLeftPanel waitUntilDone:NO];
@@ -141,7 +145,29 @@
     [_activityFeedModal release];
     
     [_gatekeeperWebsiteButton release];
+    [_notificationLabel release];
     [super dealloc];
+}
+
+#pragma mark - Notification management
+
+// This changes the top bar notification
+- (void)displayNotification:(NSString *)notification turnRed:(BOOL)red
+{
+    [_notificationLabel setText:notification];
+    [_notificationLabel.superview setHidden:NO];
+    
+    if ( red )
+    {
+        _topBarView.backgroundColor = [UIColor redColor];
+    }
+}
+
+- (void)hideNotification
+{
+    [_notificationLabel.superview setHidden:YES];
+    
+    _topBarView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
 }
 
 #pragma mark - Panel management
@@ -193,6 +219,8 @@
     [_gatekeeperSigninButton setEnabled:YES];
     [_gatekeeperVideoButton setEnabled:NO];
     
+    [self hideNotification];
+    
     [self swapRightPanel:_videoRightPanel];
 }
 
@@ -202,6 +230,8 @@
     [_gatekeeperSigninButton setEnabled:NO];
     
     [_moviePlayer stop];
+    
+    [self displayNotification:NOTIFICATION_GATEKEEPER_SIGNIN turnRed:NO];
     
     [self swapRightPanel:_signinRightPanel];
 }
