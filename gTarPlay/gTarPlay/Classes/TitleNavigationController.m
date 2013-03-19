@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 #import "TitleNavigationController.h"
 #import "ActivityFeedCell.h"
@@ -20,6 +21,8 @@
     UIView *_currentRightPanel;
     
     UIButton *_fullScreenButton;
+    
+    MPMoviePlayerController *_moviePlayer;
 }
 @end
 
@@ -48,13 +51,14 @@
         _gtarLogoImage,
         _loggedoutSigninButton,
         _loggedoutSignupButton,
-        _gatekeeperLearnMoreButton,
+        _gatekeeperVideoButton,
         _gatekeeperSigninButton,
         _menuPlayButton,
         _menuFreePlayButton,
         _menuStoreButton
     };
     
+    // Add shadows to everything in bulk
     for ( NSInteger i = 0; i < (sizeof(viewsNeedingShadows)/sizeof(UIView *)); i++)
     {
         UIView *view = viewsNeedingShadows[i];
@@ -67,11 +71,35 @@
     
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", @"NEWS",nil]];
     
-//    [self swapLeftPanel:_loggedoutLeftPanel];
-//    [self swapLeftPanel:_gatekeeperLeftPanel];
-//    [self swapLeftPanel:_menuLeftPanel];
-    [self performSelectorOnMainThread:@selector(swapLeftPanel:) withObject:_menuLeftPanel waitUntilDone:NO];
+    // Apparently the view doesn't get resized to iPhone 5 dimensions until after viewDidLoad
+    [self performSelectorOnMainThread:@selector(swapLeftPanel:) withObject:_gatekeeperLeftPanel waitUntilDone:NO];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
+    
+    if ( guitarConnectedBefore == NO )
+    {
+        //
+        // Display a gatekeeping view
+        //
+        [self swapLeftPanel:_gatekeeperLeftPanel];
+        [self swapRightPanel:_videoRightPanel];
+        
+        [_gatekeeperVideoButton setEnabled:NO];
+    }
+    else
+    {
+        // See if the user is logged in
+//        [self checkUserLoggedIn];
+    }
+    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,11 +125,11 @@
     [_gtarLogoImage release];
     
     [_topBarView release];
-    [_gatekeeperLearnMoreButton release];
+    [_gatekeeperVideoButton release];
     [_gatekeeperSigninButton release];
 
     [_gatekeeperLeftPanel release];
-    [_learnMoreRightPanel release];
+    [_videoRightPanel release];
     
     [_menuPlayButton release];
     [_menuFreePlayButton release];
@@ -111,6 +139,8 @@
     [_feedTable release];
     [_feedSelectorControl release];
     [_activityFeedModal release];
+    
+    [_gatekeeperWebsiteButton release];
     [super dealloc];
 }
 
@@ -149,7 +179,6 @@
     [_loggedoutSignupButton setEnabled:YES];
     [_loggedoutSigninButton setEnabled:NO];
     
-    [self swapRightPanel:_signinRightPanel];
 }
 
 - (IBAction)loggedoutSignupButtonClicked:(id)sender
@@ -157,24 +186,30 @@
     [_loggedoutSigninButton setEnabled:YES];
     [_loggedoutSignupButton setEnabled:NO];
     
-    [self swapRightPanel:_signupRightPanel];
-    [self swapLeftPanel:_gatekeeperLeftPanel];
 }
 
-- (IBAction)gatekeeperLearnMoreButtonClicked:(id)sender
+- (IBAction)gatekeeperVideoButtonClicked:(id)sender
 {
     [_gatekeeperSigninButton setEnabled:YES];
-    [_gatekeeperLearnMoreButton setEnabled:NO];
+    [_gatekeeperVideoButton setEnabled:NO];
     
-    [self swapRightPanel:_learnMoreRightPanel];
+    [self swapRightPanel:_videoRightPanel];
 }
 
 - (IBAction)gatekeeperSigninButtonClicked:(id)sender
 {
-    [_gatekeeperLearnMoreButton setEnabled:YES];
+    [_gatekeeperVideoButton setEnabled:YES];
     [_gatekeeperSigninButton setEnabled:NO];
     
+    [_moviePlayer stop];
+    
     [self swapRightPanel:_signinRightPanel];
+}
+
+- (IBAction)gatekeeperWebsiteButtonClicked:(id)sender
+{
+    // Show them where they can buy a gtar!
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.incidentgtar.com/"]];
 }
 
 - (IBAction)menuPlayButtonClicked:(id)sender
@@ -193,9 +228,7 @@
 - (IBAction)menuStoreButtonClicked:(id)sender
 {
     // Start store mode
-    [self swapRightPanel:_signupRightPanel];
-    [self swapLeftPanel:_loggedoutLeftPanel];
-    [_menuLeftPanel layoutSubviews];
+    
 }
 
 - (IBAction)feedSelectorChanged:(id)sender
@@ -213,6 +246,94 @@
 }
 
 - (IBAction)signinFacebookButtonClicked:(id)sender {
+}
+
+- (IBAction)videoButtonClicked:(id)sender
+{
+    if ( _moviePlayer )
+    {
+        // Only one at a time
+        return;
+    }
+    
+    // Get the Movie
+    NSString *moviePath = [[NSBundle mainBundle] pathForResource:@"gTar Teaser Final Test 480" ofType:@"m4v"];
+    NSURL *movieURL = [NSURL fileURLWithPath:moviePath];
+    
+    _moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:movieURL];
+    
+    _moviePlayer.controlStyle = MPMovieControlStyleDefault;
+    _moviePlayer.scalingMode = MPMovieScalingModeAspectFit;
+    _moviePlayer.shouldAutoplay = NO;
+    
+    // Register to receive a notification when the movie has finished playing.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayBackDidFinish:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:_moviePlayer];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayerPlaybackStateChanged:)
+                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification
+                                               object:_moviePlayer];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayerWillExitFullcreen:)
+                                                 name:MPMoviePlayerWillExitFullscreenNotification
+                                               object:_moviePlayer];
+    
+    [_moviePlayer.view setFrame:_videoRightPanel.frame ];
+    
+    [_videoRightPanel addSubview:_moviePlayer.view];
+    
+    [_moviePlayer setFullscreen:YES animated:YES];
+    
+    [_moviePlayer play];
+}
+
+#pragma mark - Movie Playback
+- (void)moviePlayBackDidFinish:(NSNotification *)notification
+{
+    
+    [_moviePlayer setFullscreen:NO animated:YES];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:_moviePlayer];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackStateDidChangeNotification
+                                                  object:_moviePlayer];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerWillExitFullscreenNotification
+                                                  object:_moviePlayer];
+    
+    [_moviePlayer.view removeFromSuperview];
+    [_moviePlayer release];
+    
+    _moviePlayer = nil;
+    
+}
+
+- (void)moviePlayerPlaybackStateChanged:(NSNotification *)notification
+{
+    MPMoviePlaybackState playbackState = _moviePlayer.playbackState;
+
+    if ( playbackState == MPMoviePlaybackStatePaused )
+    {
+        [_moviePlayer setFullscreen:NO];
+    }
+}
+
+- (void)moviePlayerWillExitFullcreen:(NSNotification *)notification
+{
+    
+    if ( _moviePlayer.playbackState == MPMoviePlaybackStatePlaying )
+    {
+//        [_moviePlayer pause];
+    }
+    
 }
 
 #pragma mark - Table view data source

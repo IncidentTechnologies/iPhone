@@ -20,7 +20,7 @@
 @property (retain, nonatomic) IBOutlet UIImageView *gtarLogoImage;
 @property (retain, nonatomic) IBOutlet UIView *rightPanel;
 @property (retain, nonatomic) IBOutlet UIView *leftPanel;
-@property (retain, nonatomic) IBOutlet UIView *learnMoreRightPanel;
+@property (retain, nonatomic) IBOutlet UIView *videoRightPanel;
 
 // Modal
 @property (retain, nonatomic) IBOutlet SlidingModalViewController *activityFeedModal;
@@ -35,8 +35,9 @@
 
 // Left Panel buttons / clicks
 
-@property (retain, nonatomic) IBOutlet UIButton *gatekeeperLearnMoreButton;
+@property (retain, nonatomic) IBOutlet UIButton *gatekeeperVideoButton;
 @property (retain, nonatomic) IBOutlet UIButton *gatekeeperSigninButton;
+@property (retain, nonatomic) IBOutlet UIButton *gatekeeperWebsiteButton;
 
 @property (retain, nonatomic) IBOutlet UIButton *loggedoutSignupButton;
 @property (retain, nonatomic) IBOutlet UIButton *loggedoutSigninButton;
@@ -48,8 +49,9 @@
 - (IBAction)loggedoutSigninButtonClicked:(id)sender;
 - (IBAction)loggedoutSignupButtonClicked:(id)sender;
 
-- (IBAction)gatekeeperLearnMoreButtonClicked:(id)sender;
+- (IBAction)gatekeeperVideoButtonClicked:(id)sender;
 - (IBAction)gatekeeperSigninButtonClicked:(id)sender;
+- (IBAction)gatekeeperWebsiteButtonClicked:(id)sender;
 
 - (IBAction)menuPlayButtonClicked:(id)sender;
 - (IBAction)menuFreePlayButtonClicked:(id)sender;
@@ -61,6 +63,7 @@
 - (IBAction)signupFacebookButtonClicked:(id)sender;
 - (IBAction)signinButtonClicked:(id)sender;
 - (IBAction)signinFacebookButtonClicked:(id)sender;
+- (IBAction)videoButtonClicked:(id)sender;
 
 // Feed
 @property (retain, nonatomic) IBOutlet UITableView *feedTable;
