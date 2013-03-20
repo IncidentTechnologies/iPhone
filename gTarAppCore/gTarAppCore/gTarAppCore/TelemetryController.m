@@ -145,12 +145,28 @@
 //    
 //}
 
-- (void)logEvent:(TelemetryControllerEvent)event withValue:(NSInteger)value andMessage:(NSString*)message
+//- (void)logEvent:(TelemetryControllerEvent)event withValue:(NSInteger)value andMessage:(NSString*)message
+//{
+//    
+//    NSString * logMessage = [NSString stringWithFormat:@"%@,%u,%@", event, value, message];
+//    
+//    [self logMessage:logMessage];
+//    
+//}
+
+- (void)logEvent:(TelemetryControllerEvent)event withDictionary:(NSDictionary*)dictionary
 {
     
-    NSString * logMessage = [NSString stringWithFormat:@"%@,%u,%@", event, value, message];
+    NSMutableString * serializedString = [[NSMutableString alloc] initWithFormat:@"%@", event];
     
-    [self logMessage:logMessage];
+    for ( NSString * key in dictionary )
+    {
+        id value = [dictionary objectForKey:key];
+        
+        [serializedString appendFormat:@",%@:%@", key, value];
+    }
+    
+    [self logMessage:serializedString];
     
 }
 

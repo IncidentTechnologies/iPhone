@@ -1991,6 +1991,8 @@
 		ECC121C5162D07AD001A231A /* MenuTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF69161CF1F400BC5BE2 /* MenuTab.png */; };
 		ECC121C6162D07AD001A231A /* EffectsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6A161CF1F400BC5BE2 /* EffectsTab.png */; };
 		ECC121C7162D07AD001A231A /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */; };
+		ECE0137E16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
+		ECE0137F16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -3048,6 +3050,7 @@
 		ECCED1EF1461C8A60006AB51 /* AccountViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewCell.xib; sourceTree = "<group>"; };
 		ECD553541492C323001C932F /* gTar_UI_TitleScreen_EDITStrings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_UI_TitleScreen_EDITStrings.png; sourceTree = "<group>"; };
 		ECDF5E5C14687F7200AB1CD0 /* gTarApp_Icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarApp_Icon114x114.png; sourceTree = "<group>"; };
+		ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayResultsScreenMenuUpdate.png; sourceTree = "<group>"; };
 		ECE30033132D9290002812B6 /* string.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = string.png; sourceTree = "<group>"; };
 		ECE3FC9F132CA6E5002812B6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ECE3FE28132CB5F9002812B6 /* gstar_fade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gstar_fade.png; sourceTree = "<group>"; };
@@ -3845,6 +3848,7 @@
 			isa = PBXGroup;
 			children = (
 				ECFFB42C15ED779C00951BD5 /* tick.wav */,
+				ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */,
 				ECFFB41415ED712000951BD5 /* ShareButtonPRESSEDRev.png */,
 				ECFFB41515ED712000951BD5 /* ShareButtonRev.png */,
 				ECFFB41615ED712000951BD5 /* VolumeSliderRev.png */,
@@ -5703,6 +5707,7 @@
 				EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */,
 				EC26A3A516CB198F006E97E2 /* DefaultRot.png in Resources */,
 				EC26A3A716CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
+				ECE0137E16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6600,6 +6605,7 @@
 				EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */,
 				EC26A3A616CB198F006E97E2 /* DefaultRot.png in Resources */,
 				EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
+				ECE0137F16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6808,7 +6814,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREPROCESSOR_DEFINITIONS = "${CONFIGURATION}_BUILD";
@@ -6819,7 +6824,6 @@
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 				);
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -6829,7 +6833,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREPROCESSOR_DEFINITIONS = "${CONFIGURATION}_BUILD";
@@ -6841,7 +6844,6 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
