@@ -9,13 +9,40 @@
 #import <QuartzCore/QuartzCore.h>
 #import <MediaPlayer/MediaPlayer.h>
 
+#import <gTarAppCore/CloudController.h>
+#import <gTarAppCore/FileController.h>
+#import <gTarAppCore/UserController.h>
+#import <gTarAppCore/UserResponse.h>
+#import <gTarAppCore/UserEntry.h>
+#import <gTarAppCore/TelemetryController.h>
+#import <gTarAppCore/UserSongSession.h>
+#import <gTarAppCore/UserSong.h>
+#import <gTarAppCore/UserSongSessions.h>
+#import <gTarAppCore/UserProfile.h>
+#import <gTarAppCore/CloudResponse.h>
+
+
 #import "TitleNavigationController.h"
 #import "ActivityFeedCell.h"
 #import "SelectorControl.h"
 #import "CyclingTextField.h"
 #import "SlidingModalViewController.h"
 
+extern CloudController * g_cloudController;
+extern FileController * g_fileController;
+extern GtarController * g_gtarController;
+extern UserController * g_userController;
+extern Facebook * g_facebook;
+extern TelemetryController * g_telemetryController;
+
 #define NOTIFICATION_GATEKEEPER_SIGNIN @"Please connect your gTar to sign up for an account."
+#define SIGNUP_USERNAME_INVALID @"Invalid Username"
+#define SIGNUP_USERNAME_INVALID_FIRSTLETTER @"Username must begin with a letter"
+#define SIGNUP_PASSWORD_INVALID @"Invalid Password"
+#define SIGNUP_EMAIL_INVALID @"Invalid Email"
+#define SIGNIN_USERNAME_INVALID @"Invalid Username"
+#define SIGNIN_PASSWORD_INVALID @"Invalid Password"
+
 
 @interface TitleNavigationController ()
 {
@@ -25,6 +52,11 @@
     UIButton *_fullScreenButton;
     
     MPMoviePlayerController *_moviePlayer;
+    
+    NSArray *_globalFeed;
+    NSArray *_friendFeed;
+    
+    NSInteger _outstandingImageDownloads;
 }
 @end
 
@@ -71,7 +103,8 @@
         view.layer.shadowOpacity = 0.9;
     }
     
-    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", @"NEWS",nil]];
+//    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", @"NEWS", nil]];
+    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", nil]];
     
     [self hideNotification];
     
@@ -87,20 +120,30 @@
     
     BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
     
-    if ( guitarConnectedBefore == NO )
+    if ( g_cloudController.m_loggedIn == NO &&
+        (g_userController.m_loggedInFacebookToken != nil ||
+         g_userController.m_loggedInUsername != nil) )
     {
-        //
-        // Display a gatekeeping view
-        //
-        [self swapLeftPanel:_gatekeeperLeftPanel];
-        [self swapRightPanel:_videoRightPanel];
+        // If we are not logged in, but we have cached creds, login.
+        [g_userController requestLoginUserCachedCallbackObj:self andCallbackSel:@selector(signinCallback:)];
         
-        [_gatekeeperVideoButton setEnabled:NO];
+        // Assume for now that we are actually logged in for now. The callback can revert this if needed
+        [self loggedinScreen];
+    }
+    else if ( guitarConnectedBefore == NO )
+    {
+        // We aren't logged in, and never plugged in a guitar. Display the gatekeeping view.
+        [self gatekeeperScreen];
+    }
+    else if ( g_cloudController.m_loggedIn == NO )
+    {
+        // We aren't logged out
+        [self loggedoutScreen];
     }
     else
     {
-        // See if the user is logged in
-//        [self checkUserLoggedIn];
+        // We are logged in
+        [g_userController sendPendingUploads];
     }
     
 
@@ -117,6 +160,9 @@
     [_currentLeftPanel removeFromSuperview];
     [_currentRightPanel removeFromSuperview];
     [_fullScreenButton removeFromSuperview];
+    
+    [_globalFeed release];
+    [_friendFeed release];
     
     [_rightPanel release];
     [_leftPanel release];
@@ -146,6 +192,13 @@
     
     [_gatekeeperWebsiteButton release];
     [_notificationLabel release];
+    
+    [_loadingRightPanel release];
+    [_signinUsernameText release];
+    [_signinPasswordText release];
+    [_signupUsernameText release];
+    [_signupPasswordText release];
+    [_signupEmailText release];
     [super dealloc];
 }
 
@@ -161,6 +214,10 @@
     {
         _topBarView.backgroundColor = [UIColor redColor];
     }
+    else
+    {
+        _topBarView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+    }
 }
 
 - (void)hideNotification
@@ -168,6 +225,53 @@
     [_notificationLabel.superview setHidden:YES];
     
     _topBarView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+}
+
+#pragma mark - Button management
+
+- (void)enableButton:(UIButton *)button
+{
+    button.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+    
+    [button setEnabled:YES];
+}
+
+- (void)disableButton:(UIButton *)button
+{
+    button.backgroundColor = [UIColor colorWithRed:2.0/256.0/2.0 green:160.0/256.0/2.0 blue:220.0/256.0/2.0 alpha:1.0];
+    
+    [button setEnabled:NO];
+}
+
+#pragma mark - Panel collections
+
+- (void)gatekeeperScreen
+{
+    [self swapLeftPanel:_gatekeeperLeftPanel];
+    [self swapRightPanel:_videoRightPanel];
+    
+    [self disableButton:_gatekeeperVideoButton];
+    [self enableButton:_gatekeeperSigninButton];
+    [self enableButton:_gatekeeperWebsiteButton];
+}
+
+- (void)loggedoutScreen
+{
+    [self swapLeftPanel:_loggedoutLeftPanel];
+    [self swapRightPanel:_signinRightPanel];
+    
+    [self disableButton:_loggedoutSigninButton];
+    [self enableButton:_loggedoutSignupButton];
+}
+
+- (void)loggedinScreen
+{
+    [self swapLeftPanel:_menuLeftPanel];
+    [self swapRightPanel:_feedRightPanel];
+    
+    [self enableButton:_menuPlayButton];
+    [self enableButton:_menuFreePlayButton];
+    [self enableButton:_menuStoreButton];
 }
 
 #pragma mark - Panel management
@@ -178,7 +282,7 @@
     [_currentRightPanel removeFromSuperview];
     
     // Resize the subview as appropriate
-    [rightPanel setFrame:CGRectMake(0, 0, _rightPanel.frame.size.width, _rightPanel.frame.size.height )];;
+    [rightPanel setFrame:CGRectMake(0, 0, _rightPanel.frame.size.width, _rightPanel.frame.size.height )];
     
     [_rightPanel addSubview:rightPanel];
     
@@ -192,7 +296,7 @@
     [_currentLeftPanel removeFromSuperview];
     
     // Resize the subview as appropriate
-    [leftPanel setFrame:CGRectMake(0, 0, _leftPanel.frame.size.width, _leftPanel.frame.size.height )];;
+    [leftPanel setFrame:CGRectMake(0, 0, _leftPanel.frame.size.width, _leftPanel.frame.size.height )];
     
     [_leftPanel addSubview:leftPanel];
     
@@ -200,24 +304,29 @@
     
 }
 
+#pragma mark - Button handling
+
 - (IBAction)loggedoutSigninButtonClicked:(id)sender
 {
-    [_loggedoutSignupButton setEnabled:YES];
-    [_loggedoutSigninButton setEnabled:NO];
+    [self enableButton:_loggedoutSignupButton];
+    [self disableButton:_loggedoutSigninButton];
     
+    [self hideNotification];
 }
 
 - (IBAction)loggedoutSignupButtonClicked:(id)sender
 {
-    [_loggedoutSigninButton setEnabled:YES];
-    [_loggedoutSignupButton setEnabled:NO];
+    [self enableButton:_loggedoutSigninButton];
+    [self disableButton:_loggedoutSignupButton];
     
+    [self hideNotification];
 }
 
 - (IBAction)gatekeeperVideoButtonClicked:(id)sender
 {
-    [_gatekeeperSigninButton setEnabled:YES];
-    [_gatekeeperVideoButton setEnabled:NO];
+    [self disableButton:_gatekeeperVideoButton];
+    [self enableButton:_gatekeeperSigninButton];
+    [self enableButton:_gatekeeperWebsiteButton];
     
     [self hideNotification];
     
@@ -226,8 +335,9 @@
 
 - (IBAction)gatekeeperSigninButtonClicked:(id)sender
 {
-    [_gatekeeperVideoButton setEnabled:YES];
-    [_gatekeeperSigninButton setEnabled:NO];
+    [self enableButton:_gatekeeperVideoButton];
+    [self disableButton:_gatekeeperSigninButton];
+    [self enableButton:_gatekeeperWebsiteButton];
     
     [_moviePlayer stop];
     
@@ -245,13 +355,13 @@
 - (IBAction)menuPlayButtonClicked:(id)sender
 {
     // Start play mode
-    [self swapRightPanel:_feedRightPanel];
+    
 }
 
 - (IBAction)menuFreePlayButtonClicked:(id)sender
 {
     // Start free play mode
-    [self presentViewController:_activityFeedModal animated:NO completion:NULL];
+//    [self presentViewController:_activityFeedModal animated:NO completion:NULL];
     
 }
 
@@ -266,16 +376,89 @@
     
 }
 
-- (IBAction)signupButtonClicked:(id)sender {
+- (IBAction)signupButtonClicked:(id)sender
+{
+    if ( _signupUsernameText.text == nil || [_signupUsernameText.text isEqualToString:@""] == YES )
+    {
+        [self displayNotification:SIGNUP_USERNAME_INVALID turnRed:YES];
+        
+        return;
+    }
+    
+    if ( _signupPasswordText.text == nil || [_signupPasswordText.text isEqualToString:@""] == YES )
+    {
+        [self displayNotification:SIGNUP_PASSWORD_INVALID turnRed:YES];
+        
+        return;
+    }
+    
+//    NSCharacterSet * alphaNumChars = [NSCharacterSet alphanumericCharacterSet];
+//    NSCharacterSet * alphaChars = [NSCharacterSet letterCharacterSet];
+//    
+//    NSString * firstChar = [_signupUsernameText.text substringToIndex:1];
+//    
+//    // The first char of the username must be a letter
+//    if ( [firstChar rangeOfCharacterFromSet:alphaChars].location == NSNotFound )
+//    {
+//        [self displayNotification:SIGNUP_USERNAME_INVALID_FIRSTLETTER turnRed:YES];
+//        
+//        return;
+//    }
+    
+    [self swapRightPanel:_loadingRightPanel];
+    
+    [self disableButton:_loggedoutSigninButton];
+    [self disableButton:_loggedoutSignupButton];
+    
+    [g_userController requestSignupUser:_signupUsernameText.text
+                            andPassword:_signupPasswordText.text
+                               andEmail:_signupEmailText.text
+                         andCallbackObj:self
+                         andCallbackSel:@selector(signupCallback:)];
+
 }
 
-- (IBAction)signupFacebookButtonClicked:(id)sender {
+- (IBAction)signupFacebookButtonClicked:(id)sender
+{
+    
 }
 
-- (IBAction)signinButtonClicked:(id)sender {
+- (IBAction)signinButtonClicked:(id)sender
+{
+    if ( _signinUsernameText.text == nil || [_signinUsernameText.text isEqualToString:@""] == YES )
+    {
+        [self displayNotification:SIGNIN_USERNAME_INVALID turnRed:YES];
+        
+        return;
+    }
+    
+    if ( _signinPasswordText.text == nil || [_signinPasswordText.text isEqualToString:@""] == YES )
+    {
+        [self displayNotification:SIGNIN_PASSWORD_INVALID turnRed:YES];
+        
+        return;
+    }
+    
+    [self hideNotification];
+    
+    [self swapRightPanel:_loadingRightPanel];
+    
+    [self disableButton:_loggedoutSigninButton];
+    [self disableButton:_loggedoutSignupButton];
+    [self disableButton:_gatekeeperVideoButton];
+    [self disableButton:_gatekeeperSigninButton];
+    [self disableButton:_gatekeeperWebsiteButton];
+    
+    [g_userController requestLoginUser:_signinUsernameText.text
+                           andPassword:_signinPasswordText.text
+                        andCallbackObj:self
+                        andCallbackSel:@selector(signinCallback:)];
+    
 }
 
-- (IBAction)signinFacebookButtonClicked:(id)sender {
+- (IBAction)signinFacebookButtonClicked:(id)sender
+{
+    
 }
 
 - (IBAction)videoButtonClicked:(id)sender
@@ -376,21 +559,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	// Return the number of rows in the section.
-//    if ( m_feedSelector.m_selectedSegmentIndex == 0 )
-//    {
-//        // Friends
-//        return [m_friendFeed count];
-//    }
-//    
-//    if ( m_feedSelector.m_selectedSegmentIndex == 1 )
-//    {
-//        // Global
-//        return [m_globalFeed count];
-//    }
+    // Friends
+    if ( _feedSelectorControl.selectedIndex == 0 )
+    {
+        return [_friendFeed count];
+    }
+    
+    // Global
+    if ( _feedSelectorControl.selectedIndex == 1 )
+    {
+        return [_globalFeed count];
+    }
+    
+    // News
+    if ( _feedSelectorControl.selectedIndex == 1 )
+    {
+//        return [_globalFeed count];
+    }
     
     // Should never happen
-    return 3;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -411,34 +599,34 @@
         [cell.accessoryView setFrame:CGRectMake(0, 0, _feedTable.frame.size.width*2, _feedTable.rowHeight)];
 	}
 
-//	// Clear these in case this cell was previously selected
-//	cell.highlighted = NO;
-//	cell.selected = NO;
-//	
-//    NSInteger row = [indexPath row];
-//    
-//    UserSongSession * session = nil;
-//    
-//    if ( m_feedSelector.m_selectedSegmentIndex == 0 )
-//    {
-//        if ( row < [m_friendFeed count] )
-//        {
-//            session = [m_friendFeed objectAtIndex:row];
-//        }
-//    }
-//    
-//    if ( m_feedSelector.m_selectedSegmentIndex == 1 )
-//    {
-//        if ( row < [m_globalFeed count] )
-//        {
-//            session = [m_globalFeed objectAtIndex:row];
-//        }
-//    }
-//    
-//    cell.m_userSongSession = session;
-//    
-//    [cell updateCell];
-//    
+	// Clear these in case this cell was previously selected
+	cell.highlighted = NO;
+	cell.selected = NO;
+	
+    NSInteger row = [indexPath row];
+    
+    UserSongSession * session = nil;
+    
+    if ( _feedSelectorControl.selectedIndex == 0 )
+    {
+        if ( row < [_friendFeed count] )
+        {
+            session = [_friendFeed objectAtIndex:row];
+        }
+    }
+    
+    if ( _feedSelectorControl.selectedIndex == 1 )
+    {
+        if ( row < [_globalFeed count] )
+        {
+            session = [_globalFeed objectAtIndex:row];
+        }
+    }
+    
+    cell.m_userSongSession = session;
+    
+    [cell updateCell];
+    
 	return cell;
 }
 
@@ -578,6 +766,195 @@
 //    [m_statusLabel setHidden:YES];
     
     return YES;
+}
+
+#pragma mark - GtarControllerObserver
+
+- (void)gtarConnected
+{
+    
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    
+    BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
+    
+    //
+    // First log in, show the welcome screens
+    //
+	if ( guitarConnectedBefore == NO )
+	{
+        [settings setBool:YES forKey:@"GuitarConnectedBefore"];
+        [settings synchronize];
+    }
+    
+    [g_gtarController turnOffAllEffects];
+    [g_gtarController turnOffAllLeds];
+    [g_gtarController sendDisableDebug];
+    
+//    [self playStartupLightSequence];
+//    
+//    [self checkCurrentFirmwareVersion];
+    
+}
+
+- (void)gtarDisconnected
+{
+//    [m_infoPopup detachFromSuperView];
+    
+//    [m_gtarLogoRed setHidden:NO];
+}
+
+#pragma mark - GtarControllerDelegate
+
+- (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
+{
+    
+    NSLog(@"Receiving firmware version: %d.%d", majorVersion, minorVersion);
+    
+//    m_titleFirmwareViewController.m_firmwareCurrentMajorVersion = majorVersion;
+//    m_titleFirmwareViewController.m_firmwareCurrentMinorVersion = minorVersion;
+//    
+//    [self checkAvailableFirmwareVersion];
+    
+}
+
+#pragma mark - UserController callbacks
+
+- (void)signinCallback:(UserResponse *)userResponse
+{
+    
+    if ( userResponse.m_status == UserResponseStatusSuccess )
+    {
+        // we are logged in
+        [g_telemetryController logEvent:GtarPlayAppLogin
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+                                         nil]];
+        
+        [g_userController sendPendingUploads];
+        
+        [g_telemetryController uploadLogMessages];
+        
+        [self loggedinScreen];
+        
+    }
+    else
+    {
+        // There was an error
+        [self displayNotification:userResponse.m_statusText turnRed:YES];
+        
+        // If the menu is showing, we need to back out
+        if ( _leftPanel == _menuLeftPanel )
+        {
+            [self loggedoutScreen];
+        }
+        else
+        {
+            [self swapRightPanel:_signinRightPanel];
+        
+            // Renable buttons
+            [self enableButton:_gatekeeperVideoButton];
+            [self enableButton:_gatekeeperWebsiteButton];
+            [self enableButton:_loggedoutSignupButton];
+        }
+    }
+}
+
+- (void)signupCallback:(UserResponse *)userResponse
+{
+    
+    if ( userResponse.m_status == UserResponseStatusSuccess )
+    {
+        [g_telemetryController logEvent:GtarPlayAppLogin
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+                                         nil]];
+        
+        [g_userController sendPendingUploads];
+        
+        [g_telemetryController uploadLogMessages];
+    }
+    else
+    {
+        // There was an error
+        [self displayNotification:userResponse.m_statusText turnRed:YES];
+        
+        [self swapLeftPanel:_loggedoutLeftPanel];
+        [self swapRightPanel:_signupRightPanel];
+        
+        // Renable buttons
+        [self enableButton:_loggedoutSignupButton];
+    }
+}
+
+// Technically this is CloudController callback
+- (void)globalUpdateSucceeded:(CloudResponse *)cloudResponse
+{
+    
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+    {
+        [_globalFeed release];
+        
+        _globalFeed = [cloudResponse.m_responseUserSongSessions.m_sessionsArray retain];
+    }
+    
+    // Precache any files we need
+    for ( UserSongSession *session in _globalFeed )
+    {
+        //[g_fileController precacheFile:session.m_userSong.m_imgFileId];
+        _outstandingImageDownloads++;
+        [g_fileController getFileOrDownloadAsync:session.m_userSong.m_imgFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
+    }
+}
+
+- (void)userUpdateSucceeded:(UserResponse *)userResponse
+{
+    UserEntry *entry = [g_userController getUserEntry:0];
+    
+    [_friendFeed release];
+    
+    _friendFeed = [entry.m_followsSessionsList retain];
+    
+    // Precache any files we need
+    for ( UserSongSession *session in _friendFeed )
+    {
+        //[g_fileController precacheFile:session.m_userSong.m_imgFileId];
+        _outstandingImageDownloads++;
+        [g_fileController getFileOrDownloadAsync:session.m_userSong.m_imgFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
+    }
+}
+
+- (void)userUpdateFailed:(NSString *)reason
+{
+        
+}
+
+#pragma mark - FileController Callbacks
+
+- (void)fileDownloadFinished:(id)file
+{
+    _outstandingImageDownloads--;
+    
+    if ( _outstandingImageDownloads == 0 )
+    {
+        // Reload the table
+        [_feedTable reloadData];
+    }
+}
+
+#pragma mark - User Stuff
+
+- (IBAction)logoutButtonClicked:(id)sender
+{
+    // Log out of everything
+    [g_userController requestLogoutUserCallbackObj:nil andCallbackSel:nil];
+    
+    [g_facebook logout];
+    
+    [self swapLeftPanel:_loggedoutLeftPanel];
+    [self swapRightPanel:_loggedoutSigninButton];
+    
+    [_loggedoutSigninButton setEnabled:NO];
+    
 }
 
 @end

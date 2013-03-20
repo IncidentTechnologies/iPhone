@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import <GtarController/GtarController.h>
+#import <GtarController/GtarControllerInternal.h>
+
+#import "Facebook.h"
+
 #import "PullToUpdateTableView.h"
 
 @class SelectorControl;
 @class SlidingModalViewController;
+@class CyclingTextField;
 
-@interface TitleNavigationController : UIViewController <UITableViewDataSource, PullToUpdateTableViewDelegate, UITextFieldDelegate>
+@interface TitleNavigationController : UIViewController <UITableViewDataSource, PullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver>
 
 // Main
 @property (retain, nonatomic) IBOutlet UIView *topBarView;
@@ -33,9 +39,9 @@
 @property (retain, nonatomic) IBOutlet UIView *gatekeeperLeftPanel;
 @property (retain, nonatomic) IBOutlet UIView *menuLeftPanel;
 @property (retain, nonatomic) IBOutlet UIView *feedRightPanel;
+@property (retain, nonatomic) IBOutlet UIView *loadingRightPanel;
 
-// Left Panel buttons / clicks
-
+// Left Panel buttons + clicks
 @property (retain, nonatomic) IBOutlet UIButton *gatekeeperVideoButton;
 @property (retain, nonatomic) IBOutlet UIButton *gatekeeperSigninButton;
 @property (retain, nonatomic) IBOutlet UIButton *gatekeeperWebsiteButton;
@@ -46,6 +52,13 @@
 @property (retain, nonatomic) IBOutlet UIButton *menuPlayButton;
 @property (retain, nonatomic) IBOutlet UIButton *menuFreePlayButton;
 @property (retain, nonatomic) IBOutlet UIButton *menuStoreButton;
+
+@property (retain, nonatomic) IBOutlet CyclingTextField *signinUsernameText;
+@property (retain, nonatomic) IBOutlet CyclingTextField *signinPasswordText;
+
+@property (retain, nonatomic) IBOutlet CyclingTextField *signupUsernameText;
+@property (retain, nonatomic) IBOutlet CyclingTextField *signupPasswordText;
+@property (retain, nonatomic) IBOutlet CyclingTextField *signupEmailText;
 
 - (IBAction)loggedoutSigninButtonClicked:(id)sender;
 - (IBAction)loggedoutSignupButtonClicked:(id)sender;
@@ -58,8 +71,7 @@
 - (IBAction)menuFreePlayButtonClicked:(id)sender;
 - (IBAction)menuStoreButtonClicked:(id)sender;
 
-// Right Panel buttons / clicks
-
+// Right Panel buttons + clicks
 - (IBAction)signupButtonClicked:(id)sender;
 - (IBAction)signupFacebookButtonClicked:(id)sender;
 - (IBAction)signinButtonClicked:(id)sender;
