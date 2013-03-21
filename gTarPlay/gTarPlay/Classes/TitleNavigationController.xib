@@ -940,7 +940,7 @@
 						<reference key="IBUISeparatorColor" ref="532883084"/>
 						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 						<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
-						<float key="IBUIRowHeight">50</float>
+						<float key="IBUIRowHeight">51</float>
 						<float key="IBUISectionHeaderHeight">22</float>
 						<float key="IBUISectionFooterHeight">22</float>
 					</object>
@@ -981,6 +981,7 @@
 						<string key="NSFrame">{{131, 116}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="409592451"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -991,7 +992,7 @@
 				<string key="NSFrameSize">{298, 270}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
+				<reference key="NSNextKeyView" ref="865692021"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
@@ -5861,7 +5862,6 @@
 						<string key="gatekeeperWebsiteButtonClicked:">id</string>
 						<string key="loggedoutSigninButtonClicked:">id</string>
 						<string key="loggedoutSignupButtonClicked:">id</string>
-						<string key="logoutButtonClicked:">id</string>
 						<string key="menuFreePlayButtonClicked:">id</string>
 						<string key="menuPlayButtonClicked:">id</string>
 						<string key="menuStoreButtonClicked:">id</string>
@@ -5869,7 +5869,6 @@
 						<string key="signinFacebookButtonClicked:">id</string>
 						<string key="signupButtonClicked:">id</string>
 						<string key="signupFacebookButtonClicked:">id</string>
-						<string key="textFieldSelected:">id</string>
 						<string key="videoButtonClicked:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -5895,10 +5894,6 @@
 						</object>
 						<object class="IBActionInfo" key="loggedoutSignupButtonClicked:">
 							<string key="name">loggedoutSignupButtonClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="logoutButtonClicked:">
-							<string key="name">logoutButtonClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="menuFreePlayButtonClicked:">
@@ -5929,10 +5924,6 @@
 							<string key="name">signupFacebookButtonClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="textFieldSelected:">
-							<string key="name">textFieldSelected:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="videoButtonClicked:">
 							<string key="name">videoButtonClicked:</string>
 							<string key="candidateClassName">id</string>
@@ -5942,7 +5933,7 @@
 						<string key="activityFeedModal">SlidingModalViewController</string>
 						<string key="feedRightPanel">UIView</string>
 						<string key="feedSelectorControl">SelectorControl</string>
-						<string key="feedTable">UITableView</string>
+						<string key="feedTable">PullToUpdateTableView</string>
 						<string key="gatekeeperLeftPanel">UIView</string>
 						<string key="gatekeeperSigninButton">UIButton</string>
 						<string key="gatekeeperVideoButton">UIButton</string>
@@ -5984,7 +5975,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="feedTable">
 							<string key="name">feedTable</string>
-							<string key="candidateClassName">UITableView</string>
+							<string key="candidateClassName">PullToUpdateTableView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="gatekeeperLeftPanel">
 							<string key="name">gatekeeperLeftPanel</string>

@@ -79,7 +79,7 @@
 - (IBAction)videoButtonClicked:(id)sender;
 
 // Feed
-@property (retain, nonatomic) IBOutlet UITableView *feedTable;
+@property (retain, nonatomic) IBOutlet PullToUpdateTableView *feedTable;
 @property (retain, nonatomic) IBOutlet SelectorControl *feedSelectorControl;
 
 - (IBAction)feedSelectorChanged:(id)sender;

@@ -27,6 +27,7 @@
 #import "SelectorControl.h"
 #import "CyclingTextField.h"
 #import "SlidingModalViewController.h"
+#import "SongPlayerViewController.h"
 
 extern CloudController * g_cloudController;
 extern FileController * g_fileController;
@@ -57,6 +58,9 @@ extern TelemetryController * g_telemetryController;
     NSArray *_friendFeed;
     
     NSInteger _outstandingImageDownloads;
+    
+    BOOL _refreshingGlobalFeed;
+    BOOL _refreshingFriendFeed;
 }
 @end
 
@@ -106,11 +110,42 @@ extern TelemetryController * g_telemetryController;
 //    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", @"NEWS", nil]];
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", nil]];
     
-    [self hideNotification];
-    
     // Apparently the view doesn't get resized to iPhone 5 dimensions until after viewDidLoad
-    [self performSelectorOnMainThread:@selector(swapLeftPanel:) withObject:_gatekeeperLeftPanel waitUntilDone:NO];
+//    [self performSelectorOnMainThread:@selector(swapLeftPanel:) withObject:_gatekeeperLeftPanel waitUntilDone:NO];
     
+    // Setup the feed's initial state
+    UserEntry * entry = [g_userController getUserEntry:0];
+    
+    if ( [entry.m_followsSessionsList count] > 0 )
+    {
+        [_friendFeed release];
+        
+        _friendFeed = [entry.m_followsSessionsList retain];
+        
+        // If the newest session is greater that 1 week ago, show the global feed
+        UserSongSession * recentSession = [_friendFeed objectAtIndex:0];
+        
+        NSTimeInterval recentSessionTime = recentSession.m_created;
+        
+        NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+        
+        // 1 week of seconds = 7days 24h 60min 60sec
+        if ( (now - recentSessionTime) > (7*24*60*60) )
+        {
+            [_feedSelectorControl setSelectedIndex:1];
+        }
+    }
+    else
+    {
+        // Default to the global feed when there is no personal content
+        [_feedSelectorControl setSelectedIndex:1];
+    }
+    
+    [self hideNotification];
+
+    // Assume we are logged in at first, since this will be the common case
+    [self swapLeftPanel:_menuLeftPanel];
+    [self swapRightPanel:_feedRightPanel];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -144,9 +179,12 @@ extern TelemetryController * g_telemetryController;
     {
         // We are logged in
         [g_userController sendPendingUploads];
+        
+        [self updateGlobalFeed];
+        [self updateFriendFeed];
+        
+        [_feedTable startAnimating];
     }
-    
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -373,7 +411,22 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)feedSelectorChanged:(id)sender
 {
+    if ( _feedSelectorControl.selectedIndex == 0 && _refreshingFriendFeed == YES )
+    {
+        [_feedTable startAnimating];
+    }
+    else if ( _feedSelectorControl.selectedIndex == 1 && _refreshingGlobalFeed == YES )
+    {
+        [_feedTable startAnimating];
+    }
+    else
+    {
+        [_feedTable stopAnimating];
+    }
     
+    // Return the table to the top and reload its data
+    [_feedTable setContentOffset:CGPointMake(0, 0)];
+    [_feedTable reloadData];
 }
 
 - (IBAction)signupButtonClicked:(id)sender
@@ -623,7 +676,7 @@ extern TelemetryController * g_telemetryController;
         }
     }
     
-    cell.m_userSongSession = session;
+    cell.userSongSession = session;
     
     [cell updateCell];
     
@@ -637,7 +690,10 @@ extern TelemetryController * g_telemetryController;
 
 - (void)update
 {
+    [_feedTable startAnimating];
     
+    [self updateFriendFeed];
+    [self updateGlobalFeed];
 }
 
 #pragma mark - Table view delegate
@@ -649,13 +705,18 @@ extern TelemetryController * g_telemetryController;
 //    // We only want one cell to be clicked on at a time
 //    m_displayingCell = YES;
 //    
-//    // Cause the row to spin until the session has started
-//    AccountViewCell * cell = (AccountViewCell*)[m_tableView cellForRowAtIndexPath:indexPath];
-//    
+    // Cause the row to spin until the session has started
+    ActivityFeedCell *cell = (ActivityFeedCell*)[_feedTable cellForRowAtIndexPath:indexPath];
+    
+    [self legacyDisplayUserSongSession:cell.userSongSession];
+    
 //    [cell.m_timeLabel setHidden:YES];
-//    [cell.m_activityView startAnimating];
-//    
-//    [self performSelector:@selector(playCell:) withObject:cell afterDelay:0.05];
+    
+    [cell.activityView startAnimating];
+    
+    [self performSelector:@selector(legacyDisplayUserSongSession:) withObject:cell.userSongSession afterDelay:0.05];
+    
+    [cell.activityView performSelector:@selector(stopAnimating) withObject:nil afterDelay:3.0];
     
 }
 
@@ -836,6 +897,10 @@ extern TelemetryController * g_telemetryController;
         
         [self loggedinScreen];
         
+        [self updateGlobalFeed];
+        [self updateFriendFeed];
+        
+        [_feedTable startAnimating];
     }
     else
     {
@@ -904,6 +969,14 @@ extern TelemetryController * g_telemetryController;
         _outstandingImageDownloads++;
         [g_fileController getFileOrDownloadAsync:session.m_userSong.m_imgFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
     }
+    
+    _refreshingGlobalFeed = NO;
+    
+    if ( _feedSelectorControl.selectedIndex == 1 )
+    {
+        [_feedTable stopAnimating];
+    }
+
 }
 
 - (void)userUpdateSucceeded:(UserResponse *)userResponse
@@ -921,11 +994,22 @@ extern TelemetryController * g_telemetryController;
         _outstandingImageDownloads++;
         [g_fileController getFileOrDownloadAsync:session.m_userSong.m_imgFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
     }
+    
+    _refreshingFriendFeed = NO;
+    
+    if ( _feedSelectorControl.selectedIndex == 0 )
+    {
+        [_feedTable stopAnimating];
+    }
+
 }
 
 - (void)userUpdateFailed:(NSString *)reason
 {
-        
+    if ( _feedSelectorControl.selectedIndex == 0 )
+    {
+        [_feedTable stopAnimating];
+    }
 }
 
 #pragma mark - FileController Callbacks
@@ -954,6 +1038,53 @@ extern TelemetryController * g_telemetryController;
     [self swapRightPanel:_loggedoutSigninButton];
     
     [_loggedoutSigninButton setEnabled:NO];
+    
+}
+
+#pragma mark - Feed management
+
+- (void)updateGlobalFeed
+{
+    _refreshingGlobalFeed = YES;
+    
+    [g_cloudController requestGlobalSessionsCallbackObj:self andCallbackSel:@selector(globalUpdateSucceeded:)];
+}
+
+- (void)updateFriendFeed
+{
+    _refreshingFriendFeed = YES;
+    
+    [g_userController requestUserFollowsSessions:0 andCallbackObj:self andCallbackSel:@selector(userUpdateSucceeded:)];
+}
+
+#pragma mark - Misc
+
+- (void)legacyDisplayUserSongSession:(UserSongSession*)session
+{
+    
+    static SongPlayerViewController *songPlaybackViewController;
+    
+    // We could precache these, but adding a bit of sync latency here isn't really noticeable,
+    // and we won't use most of the xmp blobs anyways.
+    NSString * xmpBlob = [g_fileController getFileOrDownloadSync:session.m_xmpFileId];
+    
+    if ( xmpBlob == nil )
+    {
+        return;
+    }
+    
+    session.m_xmpBlob = xmpBlob;
+    
+    // Song playback view controller, loaded lazily so as not to slow down app load
+    if ( songPlaybackViewController == nil )
+    {
+        songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
+        songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
+//        songPlaybackViewController.m_popupDelegate = self;
+//        songPlaybackViewController.m_delegate = self;
+    }
+    
+    [songPlaybackViewController attachToSuperView:self.view andPlaySongSession:session];
     
 }
 
