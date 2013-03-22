@@ -2022,6 +2022,16 @@
 		ECC121C7162D07AD001A231A /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */; };
 		ECE0137E16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
 		ECE0137F16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
+		ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
+		ECE9D23416FBAF2600BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
+		ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */; };
+		ECE9D23616FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */; };
+		ECE9D23A16FBB7C900BB6C53 /* SongListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23916FBB7C900BB6C53 /* SongListCell.m */; };
+		ECE9D23B16FBB7C900BB6C53 /* SongListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23916FBB7C900BB6C53 /* SongListCell.m */; };
+		ECE9D23D16FBB7DA00BB6C53 /* SongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D23C16FBB7DA00BB6C53 /* SongListCell.xib */; };
+		ECE9D23E16FBB7DA00BB6C53 /* SongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D23C16FBB7DA00BB6C53 /* SongListCell.xib */; };
+		ECE9D24216FBDA9200BB6C53 /* ExpandableSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D24116FBDA9100BB6C53 /* ExpandableSearchBar.m */; };
+		ECE9D24316FBDA9200BB6C53 /* ExpandableSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D24116FBDA9100BB6C53 /* ExpandableSearchBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -3110,6 +3120,14 @@
 		ECE5643913BD85DE00FEF024 /* StoreListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreListCell.xib; sourceTree = "<group>"; };
 		ECE5644213BE933F00FEF024 /* StorePurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorePurchaseViewController.h; sourceTree = "<group>"; };
 		ECE5644313BE934900FEF024 /* StorePurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorePurchaseViewController.m; sourceTree = "<group>"; };
+		ECE9D23016FBAF2500BB6C53 /* SongSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSelectionViewController.h; sourceTree = "<group>"; };
+		ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSelectionViewController.m; sourceTree = "<group>"; };
+		ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongSelectionViewController.xib; sourceTree = "<group>"; };
+		ECE9D23816FBB7C900BB6C53 /* SongListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongListCell.h; sourceTree = "<group>"; };
+		ECE9D23916FBB7C900BB6C53 /* SongListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongListCell.m; sourceTree = "<group>"; };
+		ECE9D23C16FBB7DA00BB6C53 /* SongListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongListCell.xib; sourceTree = "<group>"; };
+		ECE9D24016FBDA9100BB6C53 /* ExpandableSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableSearchBar.h; sourceTree = "<group>"; };
+		ECE9D24116FBDA9100BB6C53 /* ExpandableSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableSearchBar.m; sourceTree = "<group>"; };
 		ECF50C7E14316B05001F65B7 /* UserProfileSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileSearchViewController.h; sourceTree = "<group>"; };
 		ECF50C7F14316B05001F65B7 /* UserProfileSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileSearchViewController.m; sourceTree = "<group>"; };
 		ECF50C8014316B05001F65B7 /* UserProfileSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileSearchViewController.xib; sourceTree = "<group>"; };
@@ -3964,6 +3982,12 @@
 		EC0BAD8016F14A7800E567A6 /* SongSelectionNavigationController */ = {
 			isa = PBXGroup;
 			children = (
+				ECE9D23016FBAF2500BB6C53 /* SongSelectionViewController.h */,
+				ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */,
+				ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */,
+				ECE9D23816FBB7C900BB6C53 /* SongListCell.h */,
+				ECE9D23916FBB7C900BB6C53 /* SongListCell.m */,
+				ECE9D23C16FBB7DA00BB6C53 /* SongListCell.xib */,
 			);
 			name = SongSelectionNavigationController;
 			sourceTree = "<group>";
@@ -3971,6 +3995,7 @@
 		EC0BAD8116F1791300E567A6 /* General UI */ = {
 			isa = PBXGroup;
 			children = (
+				ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */,
 				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
 				EC0BAD9616F2771A00E567A6 /* CyclingTextField */,
 				EC0BAD9116F2458200E567A6 /* SelectorControl */,
@@ -4857,6 +4882,15 @@
 			);
 			name = "FreePlay Experience";
 			path = ..;
+			sourceTree = "<group>";
+		};
+		ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				ECE9D24016FBDA9100BB6C53 /* ExpandableSearchBar.h */,
+				ECE9D24116FBDA9100BB6C53 /* ExpandableSearchBar.m */,
+			);
+			name = ExpandableSearchBar;
 			sourceTree = "<group>";
 		};
 		ECF50CF01434863E001F65B7 /* SongPlayerViewController */ = {
@@ -5843,6 +5877,8 @@
 				EC0BADB916F7A3E100E567A6 /* PlayButtonVideo.png in Resources */,
 				EC0BADBD16F910F300E567A6 /* FaceBookButton.png in Resources */,
 				EC0BADBF16F910F300E567A6 /* SignUp_CircleButton.png in Resources */,
+				ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */,
+				ECE9D23D16FBB7DA00BB6C53 /* SongListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6750,6 +6786,8 @@
 				EC0BADBA16F7A3E100E567A6 /* PlayButtonVideo.png in Resources */,
 				EC0BADBE16F910F300E567A6 /* FaceBookButton.png in Resources */,
 				EC0BADC016F910F300E567A6 /* SignUp_CircleButton.png in Resources */,
+				ECE9D23616FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */,
+				ECE9D23E16FBB7DA00BB6C53 /* SongListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6855,6 +6893,9 @@
 				EC0BAD9416F2472900E567A6 /* SelectorControl.m in Sources */,
 				EC0BAD9916F2784800E567A6 /* CyclingTextField.m in Sources */,
 				EC0BAD9E16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */,
+				ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */,
+				ECE9D23A16FBB7C900BB6C53 /* SongListCell.m in Sources */,
+				ECE9D24216FBDA9200BB6C53 /* ExpandableSearchBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6957,6 +6998,9 @@
 				EC0BAD9516F2472900E567A6 /* SelectorControl.m in Sources */,
 				EC0BAD9A16F2784800E567A6 /* CyclingTextField.m in Sources */,
 				EC0BAD9F16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */,
+				ECE9D23416FBAF2600BB6C53 /* SongSelectionViewController.m in Sources */,
+				ECE9D23B16FBB7C900BB6C53 /* SongListCell.m in Sources */,
+				ECE9D24316FBDA9200BB6C53 /* ExpandableSearchBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

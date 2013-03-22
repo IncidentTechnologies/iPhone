@@ -23,6 +23,8 @@
 
 
 #import "TitleNavigationController.h"
+#import "SongSelectionViewController.h"
+
 #import "ActivityFeedCell.h"
 #import "SelectorControl.h"
 #import "CyclingTextField.h"
@@ -183,7 +185,7 @@ extern TelemetryController * g_telemetryController;
         [self updateGlobalFeed];
         [self updateFriendFeed];
         
-        [_feedTable startAnimating];
+        [_feedTable startAnimatingOffscreen];
     }
 }
 
@@ -393,7 +395,11 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)menuPlayButtonClicked:(id)sender
 {
     // Start play mode
+    SongSelectionViewController *vc = [[SongSelectionViewController alloc] initWithNibName:nil bundle:nil];
     
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    [vc release];
 }
 
 - (IBAction)menuFreePlayButtonClicked:(id)sender
@@ -413,11 +419,11 @@ extern TelemetryController * g_telemetryController;
 {
     if ( _feedSelectorControl.selectedIndex == 0 && _refreshingFriendFeed == YES )
     {
-        [_feedTable startAnimating];
+        [_feedTable startAnimatingOffscreen];
     }
     else if ( _feedSelectorControl.selectedIndex == 1 && _refreshingGlobalFeed == YES )
     {
-        [_feedTable startAnimating];
+        [_feedTable startAnimatingOffscreen];
     }
     else
     {

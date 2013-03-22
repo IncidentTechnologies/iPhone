@@ -12,13 +12,13 @@
 
 @interface ActivityFeedCell : UITableViewCell
 
-- (void)updateCell;
-
 @property (retain, nonatomic) IBOutlet UIImageView *picture;
 @property (retain, nonatomic) IBOutlet UILabel *name;
 @property (retain, nonatomic) IBOutlet UILabel *activity;
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
 
 @property (retain, nonatomic) UserSongSession *userSongSession;
+
+- (void)updateCell;
 
 @end
