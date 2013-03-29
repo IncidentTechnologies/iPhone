@@ -74,7 +74,8 @@ extern UserController * g_userController;
 //    [m_timeLabel setText:time];
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     [_activityView release];
     [super dealloc];
 }

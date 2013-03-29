@@ -167,11 +167,11 @@ extern TelemetryController * g_telemetryController;
         // Assume for now that we are actually logged in for now. The callback can revert this if needed
         [self loggedinScreen];
     }
-    else if ( guitarConnectedBefore == NO )
-    {
-        // We aren't logged in, and never plugged in a guitar. Display the gatekeeping view.
-        [self gatekeeperScreen];
-    }
+//    else if ( guitarConnectedBefore == NO )
+//    {
+//        // We aren't logged in, and never plugged in a guitar. Display the gatekeeping view.
+//        [self gatekeeperScreen];
+//    }
     else if ( g_cloudController.m_loggedIn == NO )
     {
         // We aren't logged out
@@ -352,6 +352,8 @@ extern TelemetryController * g_telemetryController;
     [self disableButton:_loggedoutSigninButton];
     
     [self hideNotification];
+    
+    [self swapRightPanel:_signinRightPanel];
 }
 
 - (IBAction)loggedoutSignupButtonClicked:(id)sender
@@ -360,6 +362,8 @@ extern TelemetryController * g_telemetryController;
     [self disableButton:_loggedoutSignupButton];
     
     [self hideNotification];
+    
+    [self swapRightPanel:_signupRightPanel];
 }
 
 - (IBAction)gatekeeperVideoButtonClicked:(id)sender
@@ -649,13 +653,12 @@ extern TelemetryController * g_telemetryController;
 
 	if (cell == nil)
 	{
-		
 		cell = [[[ActivityFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         
 		[[NSBundle mainBundle] loadNibNamed:@"ActivityFeedCell" owner:cell options:nil];
         
-        [cell setFrame:CGRectMake(0, 0, _feedTable.frame.size.width*2, _feedTable.rowHeight)];
-        [cell.accessoryView setFrame:CGRectMake(0, 0, _feedTable.frame.size.width*2, _feedTable.rowHeight)];
+        [cell setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
+        [cell.accessoryView setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
 	}
 
 	// Clear these in case this cell was previously selected

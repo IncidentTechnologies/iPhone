@@ -125,7 +125,7 @@ TelemetryController * g_telemetryController;
     [self.m_playApplication resetIdleTimer];
     
     // Delay load some things
-//    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(delayedLoad) userInfo:nil repeats:NO];
     
     return YES;
 }
@@ -328,16 +328,16 @@ TelemetryController * g_telemetryController;
     
     NSLog(@"Finished delayed loading");
     
-    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:1.0f];
-    [UIView setAnimationDelegate:delayLoadView];
-    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
-
-    delayLoadView.alpha = 0.0f;
-    
-    [UIView commitAnimations];
+//    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
+//    
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDuration:1.0f];
+//    [UIView setAnimationDelegate:delayLoadView];
+//    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+//
+//    delayLoadView.alpha = 0.0f;
+//    
+//    [UIView commitAnimations];
     
 }
 

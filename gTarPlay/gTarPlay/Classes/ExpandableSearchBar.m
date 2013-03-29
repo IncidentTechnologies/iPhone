@@ -26,7 +26,6 @@
     if ( self )
     {
         // Custom initialization
-        
         // Hide the view
         for ( UIView * subview in self.subviews )
         {
@@ -101,12 +100,30 @@
     
 }
 
+- (void)expandSearchBar
+{
+    // display cancel button
+    [self setShowsCancelButton:YES animated:YES];
+
+    // add the search string back into the bar
+//    [self setText:m_currentSearchString];
+
+    // expand out the search box with a nice animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3f];
+
+    self.frame = _expandedView.frame;
+
+    [UIView commitAnimations];
+    
+}
+
 - (void)beginSearch
 {
-    // switch over to the search view
-    //    m_searchViewController.m_previousViewController = m_currentViewController;
-    //
-    //    [self switchInViewController:m_searchViewController];
+// switch over to the search view
+//    m_searchViewController.m_previousViewController = m_currentViewController;
+//
+//    [self switchInViewController:m_searchViewController];
     
 }
 

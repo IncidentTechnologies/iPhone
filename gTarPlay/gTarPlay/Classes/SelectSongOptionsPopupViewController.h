@@ -16,7 +16,7 @@
 @interface SelectSongOptionsPopupViewController : PopupViewController
 {
  
-    SelectNavigationViewController * m_navigationController;
+    id m_navigationController;
     UserSong * m_userSong;
     
     IBOutlet UIView * m_muffleView;
@@ -33,7 +33,7 @@
     IBOutlet UIButton * m_previewButton;
 }
 
-@property (nonatomic, retain) SelectNavigationViewController * m_navigationController;
+@property (nonatomic, retain) id m_navigationController;
 @property (nonatomic, retain) UserSong * m_userSong;
 @property (nonatomic, retain) IBOutlet UIView * m_muffleView;
 @property (nonatomic, retain) IBOutlet UIView * m_tempoView;

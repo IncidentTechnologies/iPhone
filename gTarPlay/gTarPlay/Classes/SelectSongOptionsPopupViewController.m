@@ -220,41 +220,10 @@
 
 - (IBAction)playButtonClicked:(id)sender
 {
-    
     // Stop preview if necessary
     [m_navigationController stopPreview];
     
-    // We still all the params into the controller
-    SongViewController * songController = [[SongViewController alloc] initWithNibName:nil bundle:nil];
-        
-    songController.m_userSong = m_userSong;
-    
-    if ( m_difficultyControl.m_selectedSegmentIndex == 0 )
-    {
-        // Easy
-        songController.m_difficulty = SongViewControllerDifficultyEasy;
-    }
-    else if ( m_difficultyControl.m_selectedSegmentIndex == 1 )
-    {
-        // Medium
-        songController.m_difficulty = SongViewControllerDifficultyMedium;
-        songController.m_muffleWrongNotes = YES;
-//        songController.m_muffleWrongNotes = (m_muffleControl.m_selectedSegmentIndex == 0);
-    }
-    else if ( m_difficultyControl.m_selectedSegmentIndex == 2 )
-    {
-        // Hard
-//        songController.m_difficulty = SongViewControllerDifficultyHard;
-//        songController.m_muffleWrongNotes = (m_muffleControl.m_selectedSegmentIndex == 0);
-//        songController.m_tempoModifier = m_tempoSlider.value;
-        songController.m_difficulty = SongViewControllerDifficultyHard;
-        songController.m_muffleWrongNotes = NO;
-    }
-    
-    // Then we pass it to the navcontroller to finish
-    [m_navigationController startSongInstance:songController];
-    
-    [songController release];
+    [m_navigationController startSong:(UserSong *)m_userSong withDifficulty:m_difficultyControl.m_selectedSegmentIndex];
     
     [self detachFromSuperView];
     

@@ -21,6 +21,18 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    if ( self )
+    {
+        // Initialization code
+        
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     [_nextTextField release];
