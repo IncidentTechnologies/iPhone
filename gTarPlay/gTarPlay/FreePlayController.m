@@ -6,7 +6,13 @@
 //  Copyright 2011 Msft. All rights reserved.
 //
 
+
 #import "FreePlayController.h"
+
+#import "Instruments&EffectsViewController.h"
+#import "LightsViewController.h"
+#import "FPMenuViewController.h"
+
 #import "TransparentAreaView.h"
 #import "CustomComboBox.h"
 #import "RGBColor.h"
@@ -25,6 +31,22 @@
 extern GtarController * g_gtarController;
 extern AudioController * g_audioController;
 extern TelemetryController * g_telemetryController;
+
+@interface FreePlayController ()
+
+@property (retain, nonatomic) Instruments_EffectsViewController *instrumentsAndEffectsVC;
+@property (retain, nonatomic) LightsViewController *lightsVC;
+@property (retain, nonatomic) FPMenuViewController *fpMenuVC;
+
+@property (retain, nonatomic) IBOutlet UIView *mainContentView;
+
+
+@property (retain, nonatomic) UIViewController *currentMainContentVC;
+
+
+-(void) switchMainContentControllerToVC:(UIViewController*)newVC;
+
+@end
 
 @implementation FreePlayController
 
@@ -99,6 +121,10 @@ extern TelemetryController * g_telemetryController;
         m_audioRouteTimeStart = [[NSDate date] retain];
         m_instrumentTimeStart = [[NSDate date] retain];
         m_scaleTimeStart = [[NSDate date] retain];
+        
+        _instrumentsAndEffectsVC = [[Instruments_EffectsViewController alloc] initWithNibName:@"Instruments&EffectsViewController" bundle:nil];
+        _lightsVC = [[LightsViewController alloc] initWithNibName:@"LightsViewController" bundle:nil];
+        _fpMenuVC = [[FPMenuViewController alloc] initWithNibName:@"FPMenuViewController" bundle:nil];
         
         for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
         {
@@ -222,6 +248,8 @@ extern TelemetryController * g_telemetryController;
     // Turn off all LEDs
     [g_gtarController turnOffAllLeds];
 
+    [_m_effectsScroll release];
+    [_mainContentView release];
 	[super dealloc];	
 }
 
@@ -229,6 +257,13 @@ extern TelemetryController * g_telemetryController;
 {
 
     [super viewDidLoad];
+    
+    // Set up initial content VC to be instruments & effects.
+    [self addChildViewController:self.instrumentsAndEffectsVC];
+    //self.instrumentsAndEffectsVC.view.frame = self.mainContentView.frame;
+    [self.mainContentView addSubview:self.instrumentsAndEffectsVC.view];
+    [self.instrumentsAndEffectsVC didMoveToParentViewController:self];
+    self.currentMainContentVC = self.instrumentsAndEffectsVC;
 
     // images for slider
     UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
@@ -302,22 +337,23 @@ extern TelemetryController * g_telemetryController;
     [instrumentScrollText insertObject:[NSString stringWithString:@"Keys"] atIndex:4];
     [instrumentScrollText insertObject:[NSString stringWithString:@"Synths"] atIndex:7];
     [m_instrumentsScroll populateWithText:instrumentScrollText];
-    [m_instrumentsScroll makeHeaderEntryAtIndex:0];
-    [m_instrumentsScroll makeHeaderEntryAtIndex:4];
-    [m_instrumentsScroll makeHeaderEntryAtIndex:7];
+    //[m_instrumentsScroll makeHeaderEntryAtIndex:0];
+    //[m_instrumentsScroll makeHeaderEntryAtIndex:4];
+    //[m_instrumentsScroll makeHeaderEntryAtIndex:7];
     // TODO: snap to the currently selected sample, not just the first. Currently we
     // can get the current sample index from the audioController, but this number will
     // not match directly the index in the instruments scroll, due to the extra header
     // entries
-    [m_instrumentsScroll snapToIndex:0];
+    //[m_instrumentsScroll snapToIndex:0];
     
     [instrumentScrollText release];
     
-    m_volumeView.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    m_effectsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    m_instrumentsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    m_menuTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    m_LEDTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    // nln - no longer needed
+    //m_volumeView.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    //m_effectsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    //m_instrumentsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    //m_menuTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    //m_LEDTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     
     // Set up effects tab. Set image to display when button is "selected"
@@ -335,12 +371,13 @@ extern TelemetryController * g_telemetryController;
 
     // set effects name
     m_effects = [g_audioController GetEffects];
-    [m_effect1Name setText:[[NSString stringWithCString:m_effects[0]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
+/*    [m_effect1Name setText:[[NSString stringWithCString:m_effects[0]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     [m_effect2Name setText:[[NSString stringWithCString:m_effects[1]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     [m_effect3Name setText:[[NSString stringWithCString:m_effects[2]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     [m_effect4Name setText:[[NSString stringWithCString:m_effects[3]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     
     [m_effect1Select setSelected:YES];
+ */
     
     // set custom images for sliders
     UIImage *sliderKnobImage = [UIImage imageNamed: @"Knob_BlueLine.png"];
@@ -385,7 +422,7 @@ extern TelemetryController * g_telemetryController;
     m_jamPad.transform = CGAffineTransformMakeScale(1, -1);
     m_jamPad.m_delegate = self;
     // Initialize jam pad with first effect in list
-    [self setupJamPadWithEffectAtIndex:0];
+//    [self setupJamPadWithEffectAtIndex:0];
     
     // Setup LED light tab
     [m_LEDGeneralSurface setBackgroundColor:[UIColor clearColor]];
@@ -1434,6 +1471,9 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)toggleEffectsTab:(id)sender
 {
+    [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
+    
+    /*
     // First toggle selected state
     [m_effectsTabButton setSelected:![m_effectsTabButton isSelected]];
     
@@ -1453,10 +1493,13 @@ extern TelemetryController * g_telemetryController;
     }
     
     [UIView commitAnimations];
+     */
 }
 
 - (IBAction)toggleInstrumentsTab:(id)sender
 {
+    [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
+    /*
     // First toggle selected state
     [m_instrumentsTabButton setSelected:![m_instrumentsTabButton isSelected]];
     
@@ -1475,10 +1518,14 @@ extern TelemetryController * g_telemetryController;
     }
     
     [UIView commitAnimations];
+     */
 }
 
 - (IBAction)toggleLEDTab:(id)sender
 {
+    [self switchMainContentControllerToVC:self.lightsVC];
+    /*
+     OLD UI code
     // First toggle selected state
     [m_LEDTabButton setSelected:![m_LEDTabButton isSelected]];
     
@@ -1498,6 +1545,7 @@ extern TelemetryController * g_telemetryController;
     }
     
     [UIView commitAnimations];
+     */
 }
 
 // Toggle between turning LEDs on/off to display a scale
@@ -1579,6 +1627,9 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)toggleMenuTab:(id)sender
 {
+    [self switchMainContentControllerToVC:self.fpMenuVC];
+    
+    /*
     // First toggle selected state
     [m_menuTabButton setSelected:![m_menuTabButton isSelected]];
     
@@ -1598,6 +1649,32 @@ extern TelemetryController * g_telemetryController;
     }
         
     [UIView commitAnimations];
+     */
+}
+
+
+-(void) switchMainContentControllerToVC:(UIViewController *)newVC
+{
+    if (self.currentMainContentVC ==  newVC)
+    {
+        // already on this view, do nothing
+        return;
+    }
+    
+    UIViewController *oldVC = self.currentMainContentVC;
+    
+    [oldVC willMoveToParentViewController:nil];
+    
+    [self addChildViewController:newVC];
+    
+    [self transitionFromViewController:oldVC  toViewController:newVC duration:0.25
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:nil
+        completion:^(BOOL finished) {
+            [oldVC removeFromParentViewController];
+            [newVC didMoveToParentViewController:self];
+            self.currentMainContentVC = newVC;
+        }];
 }
 
 

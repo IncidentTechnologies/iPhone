@@ -30,6 +30,7 @@
 #import "CyclingTextField.h"
 #import "SlidingModalViewController.h"
 #import "SongPlayerViewController.h"
+#import "FreePlayController.h"
 
 extern CloudController * g_cloudController;
 extern FileController * g_fileController;
@@ -410,6 +411,11 @@ extern TelemetryController * g_telemetryController;
 {
     // Start free play mode
 //    [self presentViewController:_activityFeedModal animated:NO completion:NULL];
+    FreePlayController * fpc = [[FreePlayController alloc] initWithNibName:nil bundle:nil];
+	
+	[self.navigationController pushViewController:fpc animated:YES];
+	
+	[fpc release];
     
 }
 

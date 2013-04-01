@@ -15,6 +15,10 @@
 
 #define FREE_PLAY_EFFECT_COUNT 4
 
+@class Instruments_EffectsViewController;
+@class LightsViewController;
+@class FPMenuViewController;
+
 @class TransparentAreaView;
 @class CustomComboBox;
 @class RGBColor;
@@ -83,6 +87,7 @@ typedef enum
     
 }
 
+
 @property (retain, nonatomic) IBOutlet JamPad *m_jamPad;
 @property (retain, nonatomic) IBOutlet UISlider *m_wetSlider;
 @property (retain, nonatomic) IBOutlet UILabel *m_currentEffectName;
@@ -92,6 +97,9 @@ typedef enum
 @property (nonatomic, retain) IBOutlet UIView * m_connectingView;
 @property (retain, nonatomic) IBOutlet UILabel *m_xParamLabel;
 @property (retain, nonatomic) IBOutlet UILabel *m_yParamLabel;
+
+@property (retain, nonatomic) IBOutlet UIView *m_effectsView;
+@property (retain, nonatomic) IBOutlet UITableView *m_effectsScroll;
 
 @property (retain, nonatomic) IBOutlet TransparentAreaView *m_effectsTab;
 @property (retain, nonatomic) IBOutlet UIButton *m_effectsTabButton;
