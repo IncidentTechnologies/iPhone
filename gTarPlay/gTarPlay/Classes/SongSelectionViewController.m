@@ -273,6 +273,31 @@ extern UserController * g_userController;
 #if 1
     PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil];
     
+    // Get the XMP, stick it in the user song, and push to the game mode.
+    // This generally should already have been downloaded.
+    NSString *songString = (NSString *)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
+    
+    playViewController.userSong = userSong;
+    playViewController.userSong.m_xmlDom = [[[XmlDom alloc] initWithXmlString:songString] autorelease];
+    
+    if ( difficulty == 0 )
+    {
+        // Easy
+        playViewController.difficulty = PlayViewControllerDifficultyEasy;
+    }
+    else if ( difficulty == 1 )
+    {
+        // Medium
+        playViewController.difficulty = PlayViewControllerDifficultyMedium;
+        playViewController.muffleWrongNotes = YES;
+    }
+    else if ( difficulty == 2 )
+    {
+        // Hard
+        playViewController.difficulty = PlayViewControllerDifficultyHard;
+        playViewController.muffleWrongNotes = NO;
+    }
+
     [self.navigationController pushViewController:playViewController animated:YES];
     
     [playViewController release];

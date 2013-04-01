@@ -35,15 +35,13 @@
 #define GL_SCREEN_WIDTH (m_glView.frame.size.width)
 
 // empirically determined ratios defining screen layout for what looks good.
-#define GL_SCREEN_TOP_BUFFER ( GL_SCREEN_HEIGHT / 6.30 )
-#define GL_SCREEN_BOTTOM_BUFFER ( GL_SCREEN_HEIGHT / 3.35 )
+#define GL_SCREEN_TOP_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
+#define GL_SCREEN_BOTTOM_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH / 8.0 )
 
-#define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 8.0 )
-//#define GL_STRING_HEIGHT ( GL_SCREEN_HEIGHT / 50.0 )
-#define GL_STRING_HEIGHT ( GL_SCREEN_HEIGHT / 30.0 )
-#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 ) 
-//#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 480.0 ) 
+#define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 7.0 )
+#define GL_STRING_HEIGHT ( GL_SCREEN_HEIGHT / 60.0 )
+#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 )
 
 #define SONG_BEATS_PER_SCREEN 4
 #define SONG_BEAT_OFFSET (SONG_BEATS_PER_SCREEN * GL_SCREEN_SEEK_LINE_OFFSET / GL_SCREEN_WIDTH )
@@ -430,7 +428,7 @@
     //
     
 	CGSize size;
-	size.width = GL_STRING_HEIGHT;
+	size.width = GL_NOTE_HEIGHT / 4.0;
 	size.height = GL_SCREEN_HEIGHT;
     
     // The center will automatically be offset in the rendering
@@ -438,7 +436,7 @@
 	center.y = GL_SCREEN_HEIGHT / 2.0;
 	center.x = 0;
 	
-	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColor] autorelease];
+	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_grayColor] autorelease];
     
     //
     // Create the strings
@@ -455,8 +453,7 @@
         size.height = GL_STRING_HEIGHT + (GTAR_GUITAR_STRING_COUNT - 1 - i) * GL_STRING_HEIGHT_INCREMENT;
         center.y = [self convertStringToCoordSpace:(i+1)];
         
-//        StringModel * stringModel = [[StringModel alloc] initWithCenter:center andSize:size andColor:( g_stringColors[i] )];
-        StringModel * stringModel = [[StringModel alloc] initWithCenter:center andSize:size andColor:( g_whiteColor ) andImage:[UIImage imageNamed:@"DoubleString.png"]];
+        StringModel * stringModel = [[StringModel alloc] initWithCenter:center andSize:size andColor:( g_stringColors[i] )];
         
         [m_renderer addString:stringModel];
         
@@ -564,7 +561,7 @@
 	newSize.height = m_renderer.m_backingHeight;
 	newSize.width = m_renderer.m_backingWidth;
     
-    filePath = [[NSBundle mainBundle] pathForResource:@"WoodBGRev" ofType:@"png"];
+    filePath = [[NSBundle mainBundle] pathForResource:@"SongOptionsBG" ofType:@"png"];
     normalImage = [[UIImage alloc] initWithContentsOfFile:filePath];
     
     UIGraphicsBeginImageContext(newSize);

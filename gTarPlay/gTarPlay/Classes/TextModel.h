@@ -6,7 +6,7 @@
 //  Copyright 2011 Msft. All rights reserved.
 //
 
-#import "Model.h"
+#import <gTarAppCore/Model.h>
 
 @interface TextModel : Model
 {

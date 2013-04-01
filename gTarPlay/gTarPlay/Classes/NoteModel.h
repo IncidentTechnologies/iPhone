@@ -6,8 +6,8 @@
 //  Copyright 2010 IncidentTech. All rights reserved.
 //
 
-#import "Texture2D.h"
-#import "Model.h"
+//#import "Texture2D.h"
+#import <gTarAppCore/Model.h>
 
 @interface NoteModel : Model
 {

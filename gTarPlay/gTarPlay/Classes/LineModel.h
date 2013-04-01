@@ -1,14 +1,14 @@
 //
-//  StringModel.h
+//  LineModel.h
 //  gTarAppCore
 //
 //  Created by Marty Greenia on 3/10/11.
 //  Copyright 2011 Msft. All rights reserved.
 //
 
-#import "Model.h"
+#import <gTarAppCore/Model.h>
 
-@interface StringModel : Model
+@interface LineModel : Model
 {
 
 }

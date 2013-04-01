@@ -23,18 +23,19 @@
 		
 		[self changeColor:color];
 		
-		NSString * filePath = [[NSBundle mainBundle] pathForResource:@"string" ofType:@"png"];
-		UIImage * stringImage = [[UIImage alloc] initWithContentsOfFile:filePath];
-		
 		UIGraphicsBeginImageContext(size);
-		[stringImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
-		UIImage * scaledImage = UIGraphicsGetImageFromCurrentImageContext();    
+		
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        CGContextSetRGBFillColor(context, color[0] / 255.0, color[1] / 255.0, color[2] / 255.0, color[3] / 255.0 );
+        
+        CGContextFillRect(context, CGRectMake(0.0, 0.0, size.width, size.height));
+        
+		UIImage * scaledImage = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();
 		
 		m_texture = [[Texture2D alloc] initWithImage:scaledImage];
-		
-		[stringImage release];
-
+        
 	}
 	
 	return self;

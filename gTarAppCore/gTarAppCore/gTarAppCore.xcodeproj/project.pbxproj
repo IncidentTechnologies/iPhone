@@ -77,16 +77,6 @@
 		EC5DA901161A60A60015832E /* Texture2D.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8DF161A60A60015832E /* Texture2D.m */; };
 		EC5DA902161A60A60015832E /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8E0161A60A60015832E /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA903161A60A60015832E /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8E1161A60A60015832E /* Model.m */; };
-		EC5DA904161A60A60015832E /* NoteModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8E2161A60A60015832E /* NoteModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA905161A60A60015832E /* NoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8E3161A60A60015832E /* NoteModel.m */; };
-		EC5DA906161A60A60015832E /* StringModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8E4161A60A60015832E /* StringModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA907161A60A60015832E /* StringModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8E5161A60A60015832E /* StringModel.m */; };
-		EC5DA908161A60A60015832E /* LineModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8E6161A60A60015832E /* LineModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA909161A60A60015832E /* LineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8E7161A60A60015832E /* LineModel.m */; };
-		EC5DA90A161A60A60015832E /* NumberModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8E8161A60A60015832E /* NumberModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA90B161A60A60015832E /* NumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8E9161A60A60015832E /* NumberModel.m */; };
-		EC5DA90C161A60A60015832E /* TextModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8EA161A60A60015832E /* TextModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA90D161A60A60015832E /* TextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8EB161A60A60015832E /* TextModel.m */; };
 		EC5DA90E161A60A60015832E /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8EC161A60A60015832E /* Animation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA90F161A60A60015832E /* Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8ED161A60A60015832E /* Animation.m */; };
 		EC5DA910161A60A60015832E /* NoteAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8EE161A60A60015832E /* NoteAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -217,16 +207,6 @@
 		EC5DA8DF161A60A60015832E /* Texture2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Texture2D.m; sourceTree = "<group>"; };
 		EC5DA8E0161A60A60015832E /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		EC5DA8E1161A60A60015832E /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
-		EC5DA8E2161A60A60015832E /* NoteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteModel.h; sourceTree = "<group>"; };
-		EC5DA8E3161A60A60015832E /* NoteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteModel.m; sourceTree = "<group>"; };
-		EC5DA8E4161A60A60015832E /* StringModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringModel.h; sourceTree = "<group>"; };
-		EC5DA8E5161A60A60015832E /* StringModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringModel.m; sourceTree = "<group>"; };
-		EC5DA8E6161A60A60015832E /* LineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineModel.h; sourceTree = "<group>"; };
-		EC5DA8E7161A60A60015832E /* LineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineModel.m; sourceTree = "<group>"; };
-		EC5DA8E8161A60A60015832E /* NumberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberModel.h; sourceTree = "<group>"; };
-		EC5DA8E9161A60A60015832E /* NumberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberModel.m; sourceTree = "<group>"; };
-		EC5DA8EA161A60A60015832E /* TextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextModel.h; sourceTree = "<group>"; };
-		EC5DA8EB161A60A60015832E /* TextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextModel.m; sourceTree = "<group>"; };
 		EC5DA8EC161A60A60015832E /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		EC5DA8ED161A60A60015832E /* Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation.m; sourceTree = "<group>"; };
 		EC5DA8EE161A60A60015832E /* NoteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteAnimation.h; sourceTree = "<group>"; };
@@ -564,16 +544,6 @@
 			children = (
 				EC5DA8E0161A60A60015832E /* Model.h */,
 				EC5DA8E1161A60A60015832E /* Model.m */,
-				EC5DA8E2161A60A60015832E /* NoteModel.h */,
-				EC5DA8E3161A60A60015832E /* NoteModel.m */,
-				EC5DA8E4161A60A60015832E /* StringModel.h */,
-				EC5DA8E5161A60A60015832E /* StringModel.m */,
-				EC5DA8E6161A60A60015832E /* LineModel.h */,
-				EC5DA8E7161A60A60015832E /* LineModel.m */,
-				EC5DA8E8161A60A60015832E /* NumberModel.h */,
-				EC5DA8E9161A60A60015832E /* NumberModel.m */,
-				EC5DA8EA161A60A60015832E /* TextModel.h */,
-				EC5DA8EB161A60A60015832E /* TextModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -697,11 +667,6 @@
 				EC5DA8FE161A60A60015832E /* ViewRenderer.h in Headers */,
 				EC5DA900161A60A60015832E /* Texture2D.h in Headers */,
 				EC5DA902161A60A60015832E /* Model.h in Headers */,
-				EC5DA904161A60A60015832E /* NoteModel.h in Headers */,
-				EC5DA906161A60A60015832E /* StringModel.h in Headers */,
-				EC5DA908161A60A60015832E /* LineModel.h in Headers */,
-				EC5DA90A161A60A60015832E /* NumberModel.h in Headers */,
-				EC5DA90C161A60A60015832E /* TextModel.h in Headers */,
 				EC5DA90E161A60A60015832E /* Animation.h in Headers */,
 				EC5DA910161A60A60015832E /* NoteAnimation.h in Headers */,
 				EC5DA912161A60A60015832E /* MovingAnimation.h in Headers */,
@@ -826,11 +791,6 @@
 				EC5DA8FF161A60A60015832E /* ViewRenderer.mm in Sources */,
 				EC5DA901161A60A60015832E /* Texture2D.m in Sources */,
 				EC5DA903161A60A60015832E /* Model.m in Sources */,
-				EC5DA905161A60A60015832E /* NoteModel.m in Sources */,
-				EC5DA907161A60A60015832E /* StringModel.m in Sources */,
-				EC5DA909161A60A60015832E /* LineModel.m in Sources */,
-				EC5DA90B161A60A60015832E /* NumberModel.m in Sources */,
-				EC5DA90D161A60A60015832E /* TextModel.m in Sources */,
 				EC5DA90F161A60A60015832E /* Animation.m in Sources */,
 				EC5DA911161A60A60015832E /* NoteAnimation.m in Sources */,
 				EC5DA913161A60A60015832E /* MovingAnimation.m in Sources */,
