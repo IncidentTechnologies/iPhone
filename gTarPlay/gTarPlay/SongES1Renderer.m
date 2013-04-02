@@ -190,7 +190,7 @@
 	glEnable(GL_BLEND);
 	
 	// Blend function for textures
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	
     // 
     // Draw the background that doesn't move
@@ -237,8 +237,8 @@
 //    //
 //    // Translate the view to draw the seek line
 //    //
-//    glTranslatef( -m_viewShift, 0.0f, 0.0f);
-//    
+    glTranslatef( -m_viewShift, 0.0f, 0.0f);
+//
 //	// draw the seek line
 //	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
     

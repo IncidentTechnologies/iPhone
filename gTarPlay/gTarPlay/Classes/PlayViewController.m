@@ -132,19 +132,66 @@ extern TelemetryController * g_telemetryController;
     _topBar.layer.shadowOffset = CGSizeMake(0, 0);
     _topBar.layer.shadowOpacity = 0.9;
     
+    [_finishButton setHidden:YES];
+    [_progressFillView setHidden:YES];
+    
+    // Fiddle with the switch images
+    _outputSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
+    _outputSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
+    _outputSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
+    
+    _feedSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
+    _feedSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
+    _feedSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
+    
+    // testing
+#ifdef Debug_BUILD
+    if ( g_gtarController.connected == NO )
+    {
+        NSLog(@"debugging this thing");
+        
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+    }
+#endif
+    
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    // Fiddle with the button images
+    [_menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+
+    _menuButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
+    _volumeButton.imageView.transform = CGAffineTransformMakeScale( 0.60, 0.60 );
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
     [_menuView setFrame:self.view.frame];
+    [_menuView setBounds:self.view.bounds];
     
     [self.view bringSubviewToFront:_topBar];
     [self.view insertSubview:_menuView belowSubview:_topBar];
     
     _menuIsOpen = NO;
     
-    _menuView.transform = CGAffineTransformMakeTranslation( 0, _menuView.frame.size.height );
+    _menuView.transform = CGAffineTransformMakeTranslation( 0, -_menuView.frame.size.height );
     
-    // Fiddle with the button images
-    [_menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    
+//    [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(delayedLoaded) userInfo:nil repeats:NO];
+    [self performSelectorOnMainThread:@selector(delayedLoaded) withObject:nil waitUntilDone:NO];
+}
+
+- (void)delayedLoaded
+{
+    // We want the main thread to finish running the above and updating the views
+    // before this stuff runs. It will take awhile, and we want the user
+    // to see all the views while they wait.
     // The first time we load this up, parse the song
     _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom];
     
@@ -152,9 +199,6 @@ extern TelemetryController * g_telemetryController;
     g_audioController.m_delegate = self;
     
     [g_audioController setSamplePackWithName:_song.m_instrument];
-    
-    // Observe the global guitar controller. This will call guitarConnected when it is connected.
-    [g_gtarController addObserver:self];
     
     //
     // Set the audio routing destination
@@ -171,16 +215,10 @@ extern TelemetryController * g_telemetryController;
     [self toggleAudioRoute];
     [self updateAudioState];
     
-    // testing
-#ifdef Debug_BUILD
-    if ( g_gtarController.connected == NO )
-    {
-        NSLog(@"debugging this thing");
-        
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
-    }
-#endif
-    
+    // Observe the global guitar controller. This will call guitarConnected when it is connected.
+    // This in turn starts the game mode.
+    [g_gtarController addObserver:self];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -212,8 +250,6 @@ extern TelemetryController * g_telemetryController;
     
     [_scoreTracker release];
     
-    [_glView release];
-    
     [_interFrameDelayTimer invalidate];
     _interFrameDelayTimer = nil;
     
@@ -235,7 +271,7 @@ extern TelemetryController * g_telemetryController;
     
     [g_audioController stopAUGraph];
     [g_audioController reset];
-
+    
     [_glView release];
     [_menuView release];
     [_topBar release];
@@ -249,8 +285,15 @@ extern TelemetryController * g_telemetryController;
     [_songArtistLabel release];
     [_completionLabel release];
     [_finishButton release];
-    [_metronomeView release];
+    [_outputView release];
     [_postToFeedView release];
+    
+//    [_feedSwitch.thumbTintColor release];
+    [_feedSwitch release];
+    
+//    [_outputSwitch.thumbTintColor release];
+    [_outputSwitch release];
+    
     [super dealloc];
 }
 
@@ -335,7 +378,7 @@ extern TelemetryController * g_telemetryController;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
         
-        _menuView.transform = CGAffineTransformMakeTranslation( 0, _menuView.frame.size.height );
+        _menuView.transform = CGAffineTransformMakeTranslation( 0, -_menuView.frame.size.height );
         
         [UIView commitAnimations];
     }
@@ -362,6 +405,16 @@ extern TelemetryController * g_telemetryController;
     [self startWithSongXmlDom];
     
     [self menuButtonClicked:nil];
+    
+}
+
+- (IBAction)outputSwitchChanged:(id)sender
+{
+    [self toggleAudioRoute];
+}
+
+- (IBAction)feedSwitchChanged:(id)sender
+{
     
 }
 
@@ -433,6 +486,7 @@ extern TelemetryController * g_telemetryController;
     [_songArtistLabel setText:_userSong.m_author];
     [_completionLabel setHidden:YES];
     [_finishButton setHidden:YES];
+    [_outputView setHidden:NO];
     [_postToFeedView setHidden:YES];
     
     //
@@ -1329,6 +1383,7 @@ extern TelemetryController * g_telemetryController;
     
     [self menuButtonClicked:nil];
     
+    [_outputView setHidden:YES];
     [_postToFeedView setHidden:NO];
     
 }
@@ -1367,7 +1422,10 @@ extern TelemetryController * g_telemetryController;
 - (void)updateProgressDisplay
 {
     CGFloat delta = _songModel.m_percentageComplete * _progressFillView.frame.size.width;
-    _progressFillView.transform = CGAffineTransformMakeTranslation( -_progressFillView.frame.size.width + delta, 0 );
+    
+    [_progressFillView setHidden:NO];
+    
+    _progressFillView.layer.transform = CATransform3DMakeTranslation( -_progressFillView.frame.size.width + delta, 0, 0 );
 }
 
 #pragma mark - Amp Delegate
@@ -1450,29 +1508,27 @@ extern TelemetryController * g_telemetryController;
     
     if ( _speakerRoute == YES )
     {
-//        [m_ampView enableSpeaker];
-//        [[m_ampView m_volumeSlider] setHidden:YES];
-//        [[m_ampView m_volumeView] setHidden:NO];
+        [_outputSwitch setOn:YES];
     }
     else
     {
-//        [m_ampView disableSpeaker];
+        [_outputSwitch setOn:NO];
         
         // The global volume slider is not available when audio is routed to LineOut.
         // If the audio is not being output to LineOut, hide the global volume slider,
         // and display our own slider that controls volume in this mode.
-        NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-        
-        if ([routeName isEqualToString:@"LineOut"])
-        {
-//            [[m_ampView m_volumeSlider] setHidden:NO];
-//            [[m_ampView m_volumeView] setHidden:YES];
-        }
-        else
-        {
-//            [[m_ampView m_volumeSlider] setHidden:YES];
-//            [[m_ampView m_volumeView] setHidden:NO];
-        }
+//        NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
+//        
+//        if ([routeName isEqualToString:@"LineOut"])
+//        {
+////            [[m_ampView m_volumeSlider] setHidden:NO];
+////            [[m_ampView m_volumeView] setHidden:YES];
+//        }
+//        else
+//        {
+////            [[m_ampView m_volumeSlider] setHidden:YES];
+////            [[m_ampView m_volumeView] setHidden:NO];
+//        }
     }
     
     // Invert it so we log the route we came from

@@ -58,8 +58,11 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UILabel *songArtistLabel;
 @property (retain, nonatomic) IBOutlet UILabel *completionLabel;
 
-@property (retain, nonatomic) IBOutlet UIView *metronomeView;
+@property (retain, nonatomic) IBOutlet UIView *outputView;
 @property (retain, nonatomic) IBOutlet UIView *postToFeedView;
+
+@property (retain, nonatomic) IBOutlet UISwitch *outputSwitch;
+@property (retain, nonatomic) IBOutlet UISwitch *feedSwitch;
 
 
 @property (nonatomic, assign) PlayViewControllerDifficulty difficulty;
@@ -79,5 +82,7 @@ enum PlayViewControllerDifficulty
 - (IBAction)volumeButtonClicked:(id)sender;
 - (IBAction)finishButtonClicked:(id)sender;
 - (IBAction)restartButtonClicked:(id)sender;
+- (IBAction)outputSwitchChanged:(id)sender;
+- (IBAction)feedSwitchChanged:(id)sender;
 
 @end

@@ -61,104 +61,102 @@ static unsigned int m_notesRemaining = 0;
     
     if ( self )
     {
-        
-        m_overlayModel = [overlay retain];
-        
+        m_overlayModel = [overlay retain];        
     }
     
     return self;
 }
 
 // basically a duration that includes the end caps within the given width
-- (NoteModel*)initWidthWithCoords:(GLfloat*)coords andColor:(GLubyte*)color andHeight:(GLfloat)height
-{
-	
-	coords[0] += height/2.0;
-	coords[2] -= height/2.0;
-	
-	return [self initDurationWithCoords:coords andColor:color andHeight:height];
-	
-}
+//- (NoteModel*)initWidthWithCoords:(GLfloat*)coords andColor:(GLubyte*)color andHeight:(GLfloat)height
+//{
+//	
+//	coords[0] += height/2.0;
+//	coords[2] -= height/2.0;
+//	
+//	return [self initDurationWithCoords:coords andColor:color andHeight:height];
+//	
+//}
 
-- (NoteModel*)initDurationWithCoords:(GLfloat*)coords andColor:(GLubyte*)color andHeight:(GLfloat)height
-{
-    
-    self = [super init];
-    
-	if ( self )
-	{
-		m_notesRemaining++;
-	}
-	else 
-	{
-		return nil;
-	}
-	
-	m_startX = coords[0];
-	m_startY = coords[1];
-	m_endX = coords[2];
-	m_endY = coords[3];
-	m_middleX = m_startX + (m_endX - m_startX) / 2;
-	m_middleY = m_startY; // same
-	
-	[self changeColor:color];
-	
-	// should be cached and not creating anything most of the time
-	[self createImagesWithHeight:height];	
-	
-	m_start = [m_noteLeftTexture retain];
-	m_end = [m_noteRightTexture retain];
-	
-	// specialize the middle for this note
-	UIImage * scaledImage;
-	CGSize newSize;
-	newSize.height = height;
-	newSize.width = m_endX - m_startX;
-	
-	UIGraphicsBeginImageContext(newSize);
-	[m_noteMiddleImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-	scaledImage = UIGraphicsGetImageFromCurrentImageContext();    
-	UIGraphicsEndImageContext();
-	
-	m_middle = [[Texture2D alloc] initWithImage:scaledImage];
-	
-	return self;	
-}
+//- (NoteModel*)initDurationWithCoords:(GLfloat*)coords andColor:(GLubyte*)color andHeight:(GLfloat)height
+//{
+//    
+//    self = [super init];
+//    
+//	if ( self )
+//	{
+//		m_notesRemaining++;
+//	}
+//	else 
+//	{
+//		return nil;
+//	}
+//	
+//	m_startX = coords[0];
+//	m_startY = coords[1];
+//	m_endX = coords[2];
+//	m_endY = coords[3];
+//	m_middleX = m_startX + (m_endX - m_startX) / 2;
+//	m_middleY = m_startY; // same
+//	
+//	[self changeColor:color];
+//	
+//	// should be cached and not creating anything most of the time
+//	[self createImagesWithHeight:height];	
+//	
+//	m_start = [m_noteLeftTexture retain];
+//	m_end = [m_noteRightTexture retain];
+//	
+//	// specialize the middle for this note
+//	UIImage * scaledImage;
+//	CGSize newSize;
+//	newSize.height = height;
+//	newSize.width = m_endX - m_startX;
+//	
+//	UIGraphicsBeginImageContext(newSize);
+//	[m_noteMiddleImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+//	scaledImage = UIGraphicsGetImageFromCurrentImageContext();    
+//	UIGraphicsEndImageContext();
+//	
+//	m_middle = [[Texture2D alloc] initWithImage:scaledImage];
+//	
+//	return self;	
+//}
 
-- (NoteModel*)initSpotWithCoords:(GLfloat*)coords andColor:(GLubyte*)color andHeight:(GLfloat)height
-{
-    
-    self = [super init];
-    
-	if ( self )
-	{
-		m_notesRemaining++;
-	}
-	else 
-	{
-		return nil;
-	}
-	
-	m_startX = coords[0];
-	m_startY = coords[1];
-	
-	[self changeColor:color];
-	
-	[self createImagesWithHeight:height];
-	
-	m_start = [m_noteTexture retain];
-	
-	return self;
-	
-}
+//- (NoteModel*)initSpotWithCoords:(GLfloat*)coords andColor:(GLubyte*)color andHeight:(GLfloat)height
+//{
+//    
+//    self = [super init];
+//    
+//	if ( self )
+//	{
+//		m_notesRemaining++;
+//	}
+//	else 
+//	{
+//		return nil;
+//	}
+//	
+//	m_startX = coords[0];
+//	m_startY = coords[1];
+//	
+//	[self changeColor:color];
+//	
+//	[self createImagesWithHeight:height];
+//	
+//	m_start = [m_noteTexture retain];
+//	
+//	return self;
+//	
+//}
 
 - (void)dealloc
 {
 	
 	// this releases all the specific textures that we retained
-	[m_start release];
-	[m_middle release];
-	[m_end release];
+//	[m_start release];
+//	[m_middle release];
+//	[m_end release];
 	
 	[m_overlayModel release];
 	
@@ -287,21 +285,21 @@ static unsigned int m_notesRemaining = 0;
 	else 
 	{
 		
-		[m_start drawAtPoint:CGPointMake(m_startX, m_startY)];
-		
-		if ( m_end != nil )
-		{
-			//glColorPointer(4, GL_UNSIGNED_BYTE, 0, m_color);
-			// Fix up the 'x' coord to make the texture seamless
-			[m_end drawAtPoint:CGPointMake(m_endX - 0, m_endY)];
-		}
-		
-		if ( m_middle != nil )
-		{
-			//glColorPointer(4, GL_UNSIGNED_BYTE, 0, m_color);
-			// Fix up the 'x' coord to make the texture seamless
-			[m_middle drawAtPoint:CGPointMake(m_middleX - 0, m_middleY)];
-		}
+//		[m_start drawAtPoint:CGPointMake(m_startX, m_startY)];
+//		
+//		if ( m_end != nil )
+//		{
+//			//glColorPointer(4, GL_UNSIGNED_BYTE, 0, m_color);
+//			// Fix up the 'x' coord to make the texture seamless
+//			[m_end drawAtPoint:CGPointMake(m_endX - 0, m_endY)];
+//		}
+//		
+//		if ( m_middle != nil )
+//		{
+//			//glColorPointer(4, GL_UNSIGNED_BYTE, 0, m_color);
+//			// Fix up the 'x' coord to make the texture seamless
+//			[m_middle drawAtPoint:CGPointMake(m_middleX - 0, m_middleY)];
+//		}
 	}
 	
 	glDisable(GL_COLOR_MATERIAL);

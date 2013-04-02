@@ -2052,6 +2052,26 @@
 		ECCC0321170A3C7B0021DB00 /* RestartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031C170A3C7B0021DB00 /* RestartButton.png */; };
 		ECCC0322170A3C7B0021DB00 /* ScoreBox.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031D170A3C7B0021DB00 /* ScoreBox.png */; };
 		ECCC0323170A3C7B0021DB00 /* ScoreBox.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031D170A3C7B0021DB00 /* ScoreBox.png */; };
+		ECCC0329170A45E90021DB00 /* DiffEasyButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0324170A45E80021DB00 /* DiffEasyButton.png */; };
+		ECCC032A170A45E90021DB00 /* DiffEasyButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0324170A45E80021DB00 /* DiffEasyButton.png */; };
+		ECCC032B170A45E90021DB00 /* DiffHardButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0325170A45E80021DB00 /* DiffHardButton.png */; };
+		ECCC032C170A45E90021DB00 /* DiffHardButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0325170A45E80021DB00 /* DiffHardButton.png */; };
+		ECCC032D170A45E90021DB00 /* DiffMedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0326170A45E80021DB00 /* DiffMedButton.png */; };
+		ECCC032E170A45E90021DB00 /* DiffMedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0326170A45E80021DB00 /* DiffMedButton.png */; };
+		ECCC032F170A45E90021DB00 /* MenuPauseBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0327170A45E80021DB00 /* MenuPauseBG.jpg */; };
+		ECCC0330170A45E90021DB00 /* MenuPauseBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0327170A45E80021DB00 /* MenuPauseBG.jpg */; };
+		ECCC0331170A45E90021DB00 /* PlayBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0328170A45E80021DB00 /* PlayBG.png */; };
+		ECCC0332170A45E90021DB00 /* PlayBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0328170A45E80021DB00 /* PlayBG.png */; };
+		ECCC0337170A493E0021DB00 /* DiffEasyButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0333170A493D0021DB00 /* DiffEasyButtonON.png */; };
+		ECCC0338170A493E0021DB00 /* DiffEasyButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0333170A493D0021DB00 /* DiffEasyButtonON.png */; };
+		ECCC0339170A493E0021DB00 /* DiffHardButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0334170A493D0021DB00 /* DiffHardButtonON.png */; };
+		ECCC033A170A493E0021DB00 /* DiffHardButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0334170A493D0021DB00 /* DiffHardButtonON.png */; };
+		ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0335170A493D0021DB00 /* DiffMedButtonON.png */; };
+		ECCC033C170A493E0021DB00 /* DiffMedButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0335170A493D0021DB00 /* DiffMedButtonON.png */; };
+		ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0336170A493E0021DB00 /* SwitchBG.png */; };
+		ECCC033E170A493E0021DB00 /* SwitchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0336170A493E0021DB00 /* SwitchBG.png */; };
+		ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0343170B80240021DB00 /* NoteGreyscale.png */; };
+		ECCC0345170B80250021DB00 /* NoteGreyscale.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0343170B80240021DB00 /* NoteGreyscale.png */; };
 		ECE0137E16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
 		ECE0137F16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
 		ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
@@ -3162,6 +3182,16 @@
 		ECCC031B170A3C7B0021DB00 /* CancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CancelButton.png; path = Resources/Images/Play/CancelButton.png; sourceTree = SOURCE_ROOT; };
 		ECCC031C170A3C7B0021DB00 /* RestartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RestartButton.png; path = Resources/Images/Play/RestartButton.png; sourceTree = SOURCE_ROOT; };
 		ECCC031D170A3C7B0021DB00 /* ScoreBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScoreBox.png; path = Resources/Images/Play/ScoreBox.png; sourceTree = SOURCE_ROOT; };
+		ECCC0324170A45E80021DB00 /* DiffEasyButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DiffEasyButton.png; path = Resources/Images/Play/DiffEasyButton.png; sourceTree = SOURCE_ROOT; };
+		ECCC0325170A45E80021DB00 /* DiffHardButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DiffHardButton.png; path = Resources/Images/Play/DiffHardButton.png; sourceTree = SOURCE_ROOT; };
+		ECCC0326170A45E80021DB00 /* DiffMedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DiffMedButton.png; path = Resources/Images/Play/DiffMedButton.png; sourceTree = SOURCE_ROOT; };
+		ECCC0327170A45E80021DB00 /* MenuPauseBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = MenuPauseBG.jpg; path = Resources/Images/Play/MenuPauseBG.jpg; sourceTree = SOURCE_ROOT; };
+		ECCC0328170A45E80021DB00 /* PlayBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayBG.png; path = Resources/Images/Play/PlayBG.png; sourceTree = SOURCE_ROOT; };
+		ECCC0333170A493D0021DB00 /* DiffEasyButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DiffEasyButtonON.png; path = Resources/Images/Play/DiffEasyButtonON.png; sourceTree = SOURCE_ROOT; };
+		ECCC0334170A493D0021DB00 /* DiffHardButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DiffHardButtonON.png; path = Resources/Images/Play/DiffHardButtonON.png; sourceTree = SOURCE_ROOT; };
+		ECCC0335170A493D0021DB00 /* DiffMedButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DiffMedButtonON.png; path = Resources/Images/Play/DiffMedButtonON.png; sourceTree = SOURCE_ROOT; };
+		ECCC0336170A493E0021DB00 /* SwitchBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SwitchBG.png; path = Resources/Images/Play/SwitchBG.png; sourceTree = SOURCE_ROOT; };
+		ECCC0343170B80240021DB00 /* NoteGreyscale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoteGreyscale.png; path = Resources/Images/Play/NoteGreyscale.png; sourceTree = SOURCE_ROOT; };
 		ECCD388513FF42AD00979566 /* StoreRedemptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreRedemptionViewController.h; sourceTree = "<group>"; };
 		ECCD388613FF42AD00979566 /* StoreRedemptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreRedemptionViewController.m; sourceTree = "<group>"; };
 		ECCD388713FF42AD00979566 /* StoreRedemptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreRedemptionViewController.xib; sourceTree = "<group>"; };
@@ -5010,11 +5040,21 @@
 		ECE9D24C1705252100BB6C53 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ECCC0333170A493D0021DB00 /* DiffEasyButtonON.png */,
+				ECCC0334170A493D0021DB00 /* DiffHardButtonON.png */,
+				ECCC0335170A493D0021DB00 /* DiffMedButtonON.png */,
+				ECCC0336170A493E0021DB00 /* SwitchBG.png */,
+				ECCC0324170A45E80021DB00 /* DiffEasyButton.png */,
+				ECCC0325170A45E80021DB00 /* DiffHardButton.png */,
+				ECCC0326170A45E80021DB00 /* DiffMedButton.png */,
+				ECCC0327170A45E80021DB00 /* MenuPauseBG.jpg */,
+				ECCC0328170A45E80021DB00 /* PlayBG.png */,
 				ECCC031B170A3C7B0021DB00 /* CancelButton.png */,
 				ECCC031C170A3C7B0021DB00 /* RestartButton.png */,
 				ECCC031D170A3C7B0021DB00 /* ScoreBox.png */,
 				ECE9D24D170525ED00BB6C53 /* MenuIcon.png */,
 				ECE9D24E170525ED00BB6C53 /* VolumeIcon.png */,
+				ECCC0343170B80240021DB00 /* NoteGreyscale.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -6015,6 +6055,16 @@
 				ECCC031E170A3C7B0021DB00 /* CancelButton.png in Resources */,
 				ECCC0320170A3C7B0021DB00 /* RestartButton.png in Resources */,
 				ECCC0322170A3C7B0021DB00 /* ScoreBox.png in Resources */,
+				ECCC0329170A45E90021DB00 /* DiffEasyButton.png in Resources */,
+				ECCC032B170A45E90021DB00 /* DiffHardButton.png in Resources */,
+				ECCC032D170A45E90021DB00 /* DiffMedButton.png in Resources */,
+				ECCC032F170A45E90021DB00 /* MenuPauseBG.jpg in Resources */,
+				ECCC0331170A45E90021DB00 /* PlayBG.png in Resources */,
+				ECCC0337170A493E0021DB00 /* DiffEasyButtonON.png in Resources */,
+				ECCC0339170A493E0021DB00 /* DiffHardButtonON.png in Resources */,
+				ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
+				ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */,
+				ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6934,6 +6984,16 @@
 				ECCC031F170A3C7B0021DB00 /* CancelButton.png in Resources */,
 				ECCC0321170A3C7B0021DB00 /* RestartButton.png in Resources */,
 				ECCC0323170A3C7B0021DB00 /* ScoreBox.png in Resources */,
+				ECCC032A170A45E90021DB00 /* DiffEasyButton.png in Resources */,
+				ECCC032C170A45E90021DB00 /* DiffHardButton.png in Resources */,
+				ECCC032E170A45E90021DB00 /* DiffMedButton.png in Resources */,
+				ECCC0330170A45E90021DB00 /* MenuPauseBG.jpg in Resources */,
+				ECCC0332170A45E90021DB00 /* PlayBG.png in Resources */,
+				ECCC0338170A493E0021DB00 /* DiffEasyButtonON.png in Resources */,
+				ECCC033A170A493E0021DB00 /* DiffHardButtonON.png in Resources */,
+				ECCC033C170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
+				ECCC033E170A493E0021DB00 /* SwitchBG.png in Resources */,
+				ECCC0345170B80250021DB00 /* NoteGreyscale.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

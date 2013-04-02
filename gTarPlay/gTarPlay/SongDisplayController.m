@@ -428,7 +428,7 @@
     //
     
 	CGSize size;
-	size.width = GL_NOTE_HEIGHT / 4.0;
+	size.width = GL_NOTE_HEIGHT / 3.0;
 	size.height = GL_SCREEN_HEIGHT;
     
     // The center will automatically be offset in the rendering
@@ -436,7 +436,7 @@
 	center.y = GL_SCREEN_HEIGHT / 2.0;
 	center.x = 0;
 	
-	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_grayColor] autorelease];
+	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_lightGrayColor] autorelease];
     
     //
     // Create the strings
@@ -535,7 +535,7 @@
     [m_noteTexture release];
     
     UIImage * scaledImage;
-    UIImage * image = [UIImage imageNamed:@"note-blank4.png"];
+    UIImage * image = [UIImage imageNamed:@"NoteGreyscale.png"];
     
     CGSize size;
     size.height = GL_NOTE_HEIGHT;
@@ -561,7 +561,7 @@
 	newSize.height = m_renderer.m_backingHeight;
 	newSize.width = m_renderer.m_backingWidth;
     
-    filePath = [[NSBundle mainBundle] pathForResource:@"SongOptionsBG" ofType:@"png"];
+    filePath = [[NSBundle mainBundle] pathForResource:@"PlayBG" ofType:@"png"];
     normalImage = [[UIImage alloc] initWithContentsOfFile:filePath];
     
     UIGraphicsBeginImageContext(newSize);
