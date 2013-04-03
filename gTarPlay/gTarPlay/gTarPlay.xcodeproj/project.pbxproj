@@ -44,12 +44,6 @@
 		EC0BAD9F16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9D16F2A4CF00E567A6 /* SlidingModalViewController.m */; };
 		EC0BADA116F3C49B00E567A6 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA016F3C49B00E567A6 /* TextBox.png */; };
 		EC0BADA216F3C49B00E567A6 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA016F3C49B00E567A6 /* TextBox.png */; };
-		EC0BADAA16F3F10300E567A6 /* title_sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA916F3F10300E567A6 /* title_sample.jpg */; };
-		EC0BADAB16F3F10300E567A6 /* title_sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA916F3F10300E567A6 /* title_sample.jpg */; };
-		EC0BADB016F3F3CE00E567A6 /* title_sampe1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADAF16F3F3CD00E567A6 /* title_sampe1.jpg */; };
-		EC0BADB116F3F3CE00E567A6 /* title_sampe1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADAF16F3F3CD00E567A6 /* title_sampe1.jpg */; };
-		EC0BADB616F3F89A00E567A6 /* title_sample2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADB516F3F89900E567A6 /* title_sample2.jpg */; };
-		EC0BADB716F3F89A00E567A6 /* title_sample2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADB516F3F89900E567A6 /* title_sample2.jpg */; };
 		EC0BADB916F7A3E100E567A6 /* PlayButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADB816F7A3E000E567A6 /* PlayButtonVideo.png */; };
 		EC0BADBA16F7A3E100E567A6 /* PlayButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADB816F7A3E000E567A6 /* PlayButtonVideo.png */; };
 		EC0BADBD16F910F300E567A6 /* FaceBookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADBB16F910F200E567A6 /* FaceBookButton.png */; };
@@ -2660,9 +2654,6 @@
 		EC0BAD9C16F2A4CF00E567A6 /* SlidingModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingModalViewController.h; sourceTree = "<group>"; };
 		EC0BAD9D16F2A4CF00E567A6 /* SlidingModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingModalViewController.m; sourceTree = "<group>"; };
 		EC0BADA016F3C49B00E567A6 /* TextBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextBox.png; sourceTree = "<group>"; };
-		EC0BADA916F3F10300E567A6 /* title_sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = title_sample.jpg; sourceTree = "<group>"; };
-		EC0BADAF16F3F3CD00E567A6 /* title_sampe1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = title_sampe1.jpg; sourceTree = "<group>"; };
-		EC0BADB516F3F89900E567A6 /* title_sample2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = title_sample2.jpg; sourceTree = "<group>"; };
 		EC0BADB816F7A3E000E567A6 /* PlayButtonVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButtonVideo.png; sourceTree = "<group>"; };
 		EC0BADBB16F910F200E567A6 /* FaceBookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FaceBookButton.png; sourceTree = "<group>"; };
 		EC0BADBC16F910F200E567A6 /* SignUp_CircleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignUp_CircleButton.png; sourceTree = "<group>"; };
@@ -4055,9 +4046,6 @@
 			isa = PBXGroup;
 			children = (
 				EC0BAD3516EEA06600E567A6 /* Images */,
-				EC0BADA916F3F10300E567A6 /* title_sample.jpg */,
-				EC0BADAF16F3F3CD00E567A6 /* title_sampe1.jpg */,
-				EC0BADB516F3F89900E567A6 /* title_sample2.jpg */,
 				EC0BAD2C16EE8E3C00E567A6 /* TitleNavigationController.h */,
 				EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */,
 				EC0BAD2E16EE8E3C00E567A6 /* TitleNavigationController.xib */,
@@ -6036,9 +6024,6 @@
 				EC0BAD3416EE93AC00E567A6 /* Default-568h@2x.png in Resources */,
 				EC0BAD8716F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
 				EC0BADA116F3C49B00E567A6 /* TextBox.png in Resources */,
-				EC0BADAA16F3F10300E567A6 /* title_sample.jpg in Resources */,
-				EC0BADB016F3F3CE00E567A6 /* title_sampe1.jpg in Resources */,
-				EC0BADB616F3F89A00E567A6 /* title_sample2.jpg in Resources */,
 				EC0BADB916F7A3E100E567A6 /* PlayButtonVideo.png in Resources */,
 				EC0BADBD16F910F300E567A6 /* FaceBookButton.png in Resources */,
 				EC0BADBF16F910F300E567A6 /* SignUp_CircleButton.png in Resources */,
@@ -6965,9 +6950,6 @@
 				EC0BAD3216EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
 				EC0BAD8816F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
 				EC0BADA216F3C49B00E567A6 /* TextBox.png in Resources */,
-				EC0BADAB16F3F10300E567A6 /* title_sample.jpg in Resources */,
-				EC0BADB116F3F3CE00E567A6 /* title_sampe1.jpg in Resources */,
-				EC0BADB716F3F89A00E567A6 /* title_sample2.jpg in Resources */,
 				EC0BADBA16F7A3E100E567A6 /* PlayButtonVideo.png in Resources */,
 				EC0BADBE16F910F300E567A6 /* FaceBookButton.png in Resources */,
 				EC0BADC016F910F300E567A6 /* SignUp_CircleButton.png in Resources */,

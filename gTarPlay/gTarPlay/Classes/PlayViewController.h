@@ -46,17 +46,27 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UIView *menuView;
 @property (retain, nonatomic) IBOutlet UIView *topBar;
 @property (retain, nonatomic) IBOutlet UIView *progressFillView;
+@property (retain, nonatomic) IBOutlet UIView *loadingView;
 
 @property (retain, nonatomic) IBOutlet UIButton *menuButton;
 @property (retain, nonatomic) IBOutlet UIButton *volumeButton;
 @property (retain, nonatomic) IBOutlet UIButton *backButton;
 @property (retain, nonatomic) IBOutlet UIButton *finishButton;
 
+@property (retain, nonatomic) IBOutlet UITextView *loadingLicenseInfo;
+@property (retain, nonatomic) IBOutlet UILabel *loadingSongInfo;
+
 @property (retain, nonatomic) IBOutlet UILabel *scoreLabel;
 
 @property (retain, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (retain, nonatomic) IBOutlet UILabel *songArtistLabel;
 @property (retain, nonatomic) IBOutlet UILabel *completionLabel;
+
+@property (retain, nonatomic) IBOutlet UIButton *difficultyButton;
+@property (retain, nonatomic) IBOutlet UILabel *difficultyLabel;
+
+@property (retain, nonatomic) IBOutlet UIButton *instrumentButton;
+@property (retain, nonatomic) IBOutlet UILabel *instrumentLabel;
 
 @property (retain, nonatomic) IBOutlet UIView *outputView;
 @property (retain, nonatomic) IBOutlet UIView *postToFeedView;
