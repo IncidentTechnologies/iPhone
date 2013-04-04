@@ -11,10 +11,10 @@
 		9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
 		9D2C8705170A63660049CD46 /* InstrumentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */; };
 		9D2C8706170A63660049CD46 /* InstrumentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */; };
-		9DA3137C1704DD8400CFF104 /* Instruments&EffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* Instruments&EffectsViewController.m */; };
-		9DA3137D1704DD8400CFF104 /* Instruments&EffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* Instruments&EffectsViewController.m */; };
-		9DA3137E1704DD8400CFF104 /* Instruments&EffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* Instruments&EffectsViewController.xib */; };
-		9DA3137F1704DD8400CFF104 /* Instruments&EffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* Instruments&EffectsViewController.xib */; };
+		9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
+		9DA3137D1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
+		9DA3137E1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib */; };
+		9DA3137F1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib */; };
 		9DA313831704DDD900CFF104 /* LightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA313811704DDD900CFF104 /* LightsViewController.m */; };
 		9DA313841704DDD900CFF104 /* LightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA313811704DDD900CFF104 /* LightsViewController.m */; };
 		9DA313851704DDD900CFF104 /* LightsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA313821704DDD900CFF104 /* LightsViewController.xib */; };
@@ -2442,9 +2442,9 @@
 		9D9798D61549C3360095282C /* Strings 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strings 80.mp3"; path = "strings/Strings 80.mp3"; sourceTree = "<group>"; };
 		9D9BAE9C15266CD900AA62C9 /* RGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGBColor.h; sourceTree = "<group>"; };
 		9D9BAE9D15266CD900AA62C9 /* RGBColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGBColor.m; sourceTree = "<group>"; };
-		9DA313791704DD8400CFF104 /* Instruments&EffectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Instruments&EffectsViewController.h"; sourceTree = "<group>"; };
-		9DA3137A1704DD8400CFF104 /* Instruments&EffectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Instruments&EffectsViewController.m"; sourceTree = "<group>"; };
-		9DA3137B1704DD8400CFF104 /* Instruments&EffectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Instruments&EffectsViewController.xib"; sourceTree = "<group>"; };
+		9DA313791704DD8400CFF104 /* InstrumentsAndEffectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentsAndEffectsViewController.h; sourceTree = "<group>"; };
+		9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentsAndEffectsViewController.m; sourceTree = "<group>"; };
+		9DA3137B1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentsAndEffectsViewController.xib; sourceTree = "<group>"; };
 		9DA313801704DDD900CFF104 /* LightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightsViewController.h; sourceTree = "<group>"; };
 		9DA313811704DDD900CFF104 /* LightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightsViewController.m; sourceTree = "<group>"; };
 		9DA313821704DDD900CFF104 /* LightsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightsViewController.xib; sourceTree = "<group>"; };
@@ -4987,9 +4987,9 @@
 				9D9BAE9D15266CD900AA62C9 /* RGBColor.m */,
 				9DF47986159155080047953A /* Harmonizer.h */,
 				9DF47987159155080047953A /* Harmonizer.m */,
-				9DA313791704DD8400CFF104 /* Instruments&EffectsViewController.h */,
-				9DA3137A1704DD8400CFF104 /* Instruments&EffectsViewController.m */,
-				9DA3137B1704DD8400CFF104 /* Instruments&EffectsViewController.xib */,
+				9DA313791704DD8400CFF104 /* InstrumentsAndEffectsViewController.h */,
+				9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */,
+				9DA3137B1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib */,
 				9DA313801704DDD900CFF104 /* LightsViewController.h */,
 				9DA313811704DDD900CFF104 /* LightsViewController.m */,
 				9DA313821704DDD900CFF104 /* LightsViewController.xib */,
@@ -6030,7 +6030,7 @@
 				ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */,
 				ECE9D23D16FBB7DA00BB6C53 /* SongListCell.xib in Resources */,
 				9DE5C64616F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */,
-				9DA3137E1704DD8400CFF104 /* Instruments&EffectsViewController.xib in Resources */,
+				9DA3137E1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */,
 				9DA313851704DDD900CFF104 /* LightsViewController.xib in Resources */,
 				9DA313931704FA3100CFF104 /* FPMenuViewController.xib in Resources */,
 				ECE9D24A1705133900BB6C53 /* PlayViewController.xib in Resources */,
@@ -6956,7 +6956,7 @@
 				ECE9D23616FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */,
 				ECE9D23E16FBB7DA00BB6C53 /* SongListCell.xib in Resources */,
 				9DE5C64716F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */,
-				9DA3137F1704DD8400CFF104 /* Instruments&EffectsViewController.xib in Resources */,
+				9DA3137F1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */,
 				9DA313861704DDD900CFF104 /* LightsViewController.xib in Resources */,
 				9DA313941704FA3100CFF104 /* FPMenuViewController.xib in Resources */,
 				ECE9D24B1705133900BB6C53 /* PlayViewController.xib in Resources */,
@@ -7084,7 +7084,7 @@
 				ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */,
 				ECE9D23A16FBB7C900BB6C53 /* SongListCell.m in Sources */,
 				ECE9D24216FBDA9200BB6C53 /* ExpandableSearchBar.m in Sources */,
-				9DA3137C1704DD8400CFF104 /* Instruments&EffectsViewController.m in Sources */,
+				9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */,
 				9DA313831704DDD900CFF104 /* LightsViewController.m in Sources */,
 				9DA313911704FA3100CFF104 /* FPMenuViewController.m in Sources */,
 				ECE9D2481705133900BB6C53 /* PlayViewController.m in Sources */,
@@ -7199,7 +7199,7 @@
 				ECE9D23416FBAF2600BB6C53 /* SongSelectionViewController.m in Sources */,
 				ECE9D23B16FBB7C900BB6C53 /* SongListCell.m in Sources */,
 				ECE9D24316FBDA9200BB6C53 /* ExpandableSearchBar.m in Sources */,
-				9DA3137D1704DD8400CFF104 /* Instruments&EffectsViewController.m in Sources */,
+				9DA3137D1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */,
 				9DA313841704DDD900CFF104 /* LightsViewController.m in Sources */,
 				9DA313921704FA3100CFF104 /* FPMenuViewController.m in Sources */,
 				ECE9D2491705133900BB6C53 /* PlayViewController.m in Sources */,

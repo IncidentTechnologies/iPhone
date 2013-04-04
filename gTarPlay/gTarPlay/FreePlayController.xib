@@ -13528,22 +13528,6 @@ AAEAAQABA</bytes>
 								<float key="scoringTypeFloat">9</float>
 								<int key="contentType">3</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="935812717">
-								<reference key="firstItem" ref="558283072"/>
-								<int key="firstAttribute">11</int>
-								<int key="relation">0</int>
-								<reference key="secondItem" ref="768756803"/>
-								<int key="secondAttribute">11</int>
-								<float key="multiplier">1</float>
-								<object class="IBLayoutConstant" key="constant">
-									<double key="value">0.0</double>
-								</object>
-								<float key="priority">1000</float>
-								<reference key="containingView" ref="16676251"/>
-								<int key="scoringType">6</int>
-								<float key="scoringTypeFloat">24</float>
-								<int key="contentType">2</int>
-							</object>
 							<object class="IBNSLayoutConstraint" id="567355452">
 								<reference key="firstItem" ref="558283072"/>
 								<int key="firstAttribute">3</int>
@@ -16940,11 +16924,6 @@ AAEAAQABA</bytes>
 						<reference key="parent" ref="16676251"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">1363</int>
-						<reference key="object" ref="935812717"/>
-						<reference key="parent" ref="16676251"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">1358</int>
 						<reference key="object" ref="401816008"/>
 						<reference key="parent" ref="16676251"/>
@@ -16981,7 +16960,6 @@ AAEAAQABA</bytes>
 					<string>1358.IBPluginDependency</string>
 					<string>1361.IBPluginDependency</string>
 					<string>1362.IBPluginDependency</string>
-					<string>1363.IBPluginDependency</string>
 					<string>1364.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>2.IBViewMetadataConstraints</string>
@@ -17388,7 +17366,6 @@ AAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<reference ref="25169541"/>
@@ -17408,7 +17385,6 @@ AAEAAQABA</bytes>
 						<reference ref="76773510"/>
 						<reference ref="428270950"/>
 						<reference ref="567355452"/>
-						<reference ref="935812717"/>
 						<reference ref="749015019"/>
 						<reference ref="332297054"/>
 						<reference ref="164175961"/>

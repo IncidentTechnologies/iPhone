@@ -9,7 +9,7 @@
 
 #import "FreePlayController.h"
 
-#import "Instruments&EffectsViewController.h"
+#import "InstrumentsAndEffectsViewController.h"
 #import "LightsViewController.h"
 #import "FPMenuViewController.h"
 
@@ -34,7 +34,7 @@ extern TelemetryController * g_telemetryController;
 
 @interface FreePlayController ()
 
-@property (retain, nonatomic) Instruments_EffectsViewController *instrumentsAndEffectsVC;
+@property (retain, nonatomic) InstrumentsAndEffectsViewController *instrumentsAndEffectsVC;
 @property (retain, nonatomic) LightsViewController *lightsVC;
 @property (retain, nonatomic) FPMenuViewController *fpMenuVC;
 
@@ -122,7 +122,7 @@ extern TelemetryController * g_telemetryController;
         m_instrumentTimeStart = [[NSDate date] retain];
         m_scaleTimeStart = [[NSDate date] retain];
         
-        _instrumentsAndEffectsVC = [[Instruments_EffectsViewController alloc] initWithAudioController:g_audioController instrumentList:[NSArray arrayWithObjects:@"one", @"two", @"2.5", @"three", @"four", nil]];
+        _instrumentsAndEffectsVC = [[InstrumentsAndEffectsViewController alloc] initWithAudioController:g_audioController instrumentList:[NSArray arrayWithObjects:@"one", @"two", @"2.5", @"three", @"four", nil]];
         _lightsVC = [[LightsViewController alloc] init];
         _fpMenuVC = [[FPMenuViewController alloc] init];
         
