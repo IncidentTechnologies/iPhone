@@ -15,9 +15,6 @@
 
 #define FREE_PLAY_EFFECT_COUNT 4
 
-@class Instruments_EffectsViewController;
-@class LightsViewController;
-@class FPMenuViewController;
 
 @class TransparentAreaView;
 @class CustomComboBox;

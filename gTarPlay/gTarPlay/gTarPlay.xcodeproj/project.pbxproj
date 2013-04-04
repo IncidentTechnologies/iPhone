@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D2C86E2170A14A70049CD46 /* InstrumentsScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C86E0170A14A70049CD46 /* InstrumentsScrollViewController.m */; };
-		9D2C86E3170A14A70049CD46 /* InstrumentsScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C86E0170A14A70049CD46 /* InstrumentsScrollViewController.m */; };
-		9D2C86E4170A14A70049CD46 /* InstrumentsScrollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C86E1170A14A70049CD46 /* InstrumentsScrollViewController.xib */; };
-		9D2C86E5170A14A70049CD46 /* InstrumentsScrollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C86E1170A14A70049CD46 /* InstrumentsScrollViewController.xib */; };
+		9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
+		9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
+		9D2C8705170A63660049CD46 /* InstrumentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */; };
+		9D2C8706170A63660049CD46 /* InstrumentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */; };
 		9DA3137C1704DD8400CFF104 /* Instruments&EffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* Instruments&EffectsViewController.m */; };
 		9DA3137D1704DD8400CFF104 /* Instruments&EffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* Instruments&EffectsViewController.m */; };
 		9DA3137E1704DD8400CFF104 /* Instruments&EffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* Instruments&EffectsViewController.xib */; };
@@ -2149,9 +2149,9 @@
 		9D2A05A91534F6A500218ABB /* Acoustic Guitar 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 78.mp3"; path = "Acoustic Guitar/Acoustic Guitar 78.mp3"; sourceTree = "<group>"; };
 		9D2A05AA1534F6A500218ABB /* Acoustic Guitar 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 79.mp3"; path = "Acoustic Guitar/Acoustic Guitar 79.mp3"; sourceTree = "<group>"; };
 		9D2A05AB1534F6A500218ABB /* Acoustic Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 80.mp3"; path = "Acoustic Guitar/Acoustic Guitar 80.mp3"; sourceTree = "<group>"; };
-		9D2C86DF170A14A70049CD46 /* InstrumentsScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentsScrollViewController.h; sourceTree = "<group>"; };
-		9D2C86E0170A14A70049CD46 /* InstrumentsScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentsScrollViewController.m; sourceTree = "<group>"; };
-		9D2C86E1170A14A70049CD46 /* InstrumentsScrollViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentsScrollViewController.xib; sourceTree = "<group>"; };
+		9D2C8700170A63660049CD46 /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
+		9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
+		9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentTableViewController.xib; sourceTree = "<group>"; };
 		9D2DFF7B1564DD1B006B38C0 /* Square 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 40.mp3"; path = "Square/Square 40.mp3"; sourceTree = "<group>"; };
 		9D2DFF7C1564DD1B006B38C0 /* Square 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 41.mp3"; path = "Square/Square 41.mp3"; sourceTree = "<group>"; };
 		9D2DFF7D1564DD1B006B38C0 /* Square 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 42.mp3"; path = "Square/Square 42.mp3"; sourceTree = "<group>"; };
@@ -4996,9 +4996,9 @@
 				9DA3138E1704FA3000CFF104 /* FPMenuViewController.h */,
 				9DA3138F1704FA3000CFF104 /* FPMenuViewController.m */,
 				9DA313901704FA3000CFF104 /* FPMenuViewController.xib */,
-				9D2C86DF170A14A70049CD46 /* InstrumentsScrollViewController.h */,
-				9D2C86E0170A14A70049CD46 /* InstrumentsScrollViewController.m */,
-				9D2C86E1170A14A70049CD46 /* InstrumentsScrollViewController.xib */,
+				9D2C8700170A63660049CD46 /* InstrumentTableViewController.h */,
+				9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */,
+				9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */,
 			);
 			name = "FreePlay Experience";
 			path = ..;
@@ -6033,7 +6033,6 @@
 				9DA3137E1704DD8400CFF104 /* Instruments&EffectsViewController.xib in Resources */,
 				9DA313851704DDD900CFF104 /* LightsViewController.xib in Resources */,
 				9DA313931704FA3100CFF104 /* FPMenuViewController.xib in Resources */,
-				9D2C86E4170A14A70049CD46 /* InstrumentsScrollViewController.xib in Resources */,
 				ECE9D24A1705133900BB6C53 /* PlayViewController.xib in Resources */,
 				ECE9D24F170525ED00BB6C53 /* MenuIcon.png in Resources */,
 				ECE9D251170525ED00BB6C53 /* VolumeIcon.png in Resources */,
@@ -6050,6 +6049,7 @@
 				ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */,
+				9D2C8705170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6959,7 +6959,6 @@
 				9DA3137F1704DD8400CFF104 /* Instruments&EffectsViewController.xib in Resources */,
 				9DA313861704DDD900CFF104 /* LightsViewController.xib in Resources */,
 				9DA313941704FA3100CFF104 /* FPMenuViewController.xib in Resources */,
-				9D2C86E5170A14A70049CD46 /* InstrumentsScrollViewController.xib in Resources */,
 				ECE9D24B1705133900BB6C53 /* PlayViewController.xib in Resources */,
 				ECE9D250170525ED00BB6C53 /* MenuIcon.png in Resources */,
 				ECE9D252170525ED00BB6C53 /* VolumeIcon.png in Resources */,
@@ -6976,6 +6975,7 @@
 				ECCC033C170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033E170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0345170B80250021DB00 /* NoteGreyscale.png in Resources */,
+				9D2C8706170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7087,13 +7087,13 @@
 				9DA3137C1704DD8400CFF104 /* Instruments&EffectsViewController.m in Sources */,
 				9DA313831704DDD900CFF104 /* LightsViewController.m in Sources */,
 				9DA313911704FA3100CFF104 /* FPMenuViewController.m in Sources */,
-				9D2C86E2170A14A70049CD46 /* InstrumentsScrollViewController.m in Sources */,
 				ECE9D2481705133900BB6C53 /* PlayViewController.m in Sources */,
 				ECCC030E170A2B900021DB00 /* NoteModel.m in Sources */,
 				ECCC0310170A2B900021DB00 /* StringModel.m in Sources */,
 				ECCC0312170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0314170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0316170A2B900021DB00 /* TextModel.m in Sources */,
+				9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7202,13 +7202,13 @@
 				9DA3137D1704DD8400CFF104 /* Instruments&EffectsViewController.m in Sources */,
 				9DA313841704DDD900CFF104 /* LightsViewController.m in Sources */,
 				9DA313921704FA3100CFF104 /* FPMenuViewController.m in Sources */,
-				9D2C86E3170A14A70049CD46 /* InstrumentsScrollViewController.m in Sources */,
 				ECE9D2491705133900BB6C53 /* PlayViewController.m in Sources */,
 				ECCC030F170A2B900021DB00 /* NoteModel.m in Sources */,
 				ECCC0311170A2B900021DB00 /* StringModel.m in Sources */,
 				ECCC0313170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0315170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0317170A2B900021DB00 /* TextModel.m in Sources */,
+				9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -122,9 +122,9 @@ extern TelemetryController * g_telemetryController;
         m_instrumentTimeStart = [[NSDate date] retain];
         m_scaleTimeStart = [[NSDate date] retain];
         
-        _instrumentsAndEffectsVC = [[Instruments_EffectsViewController alloc] initWithNibName:@"Instruments&EffectsViewController" bundle:nil];
-        _lightsVC = [[LightsViewController alloc] initWithNibName:@"LightsViewController" bundle:nil];
-        _fpMenuVC = [[FPMenuViewController alloc] initWithNibName:@"FPMenuViewController" bundle:nil];
+        _instrumentsAndEffectsVC = [[Instruments_EffectsViewController alloc] initWithAudioController:g_audioController instrumentList:[NSArray arrayWithObjects:@"one", @"two", @"2.5", @"three", @"four", nil]];
+        _lightsVC = [[LightsViewController alloc] init];
+        _fpMenuVC = [[FPMenuViewController alloc] init];
         
         for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
         {
