@@ -6,12 +6,12 @@
 //
 //
 
-#import "Instruments&EffectsViewController.h"
+#import "InstrumentsAndEffectsViewController.h"
 
 #import "InstrumentTableViewController.h"
 #import <AudioController/AudioController.h>
 
-@interface Instruments_EffectsViewController ()
+@interface InstrumentsAndEffectsViewController ()
 
 @property (retain, nonatomic) InstrumentTableViewController *instrumentTableVC;
 
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation Instruments_EffectsViewController
+@implementation InstrumentsAndEffectsViewController
 
 - (id)initWithAudioController:(AudioController*)AC instrumentList:(NSArray*)instruments
 {

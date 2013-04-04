@@ -10,7 +10,7 @@
 
 @class AudioController;
 
-@interface Instruments_EffectsViewController : UIViewController
+@interface InstrumentsAndEffectsViewController : UIViewController
 
 - (id)initWithAudioController:(AudioController*)AC instrumentList:(NSArray*)instruments;
 
