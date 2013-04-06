@@ -2066,6 +2066,28 @@
 		ECCC033E170A493E0021DB00 /* SwitchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0336170A493E0021DB00 /* SwitchBG.png */; };
 		ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0343170B80240021DB00 /* NoteGreyscale.png */; };
 		ECCC0345170B80250021DB00 /* NoteGreyscale.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0343170B80240021DB00 /* NoteGreyscale.png */; };
+		ECCC0359170CBA570021DB00 /* VolumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0357170CBA570021DB00 /* VolumeViewController.m */; };
+		ECCC035A170CBA570021DB00 /* VolumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0357170CBA570021DB00 /* VolumeViewController.m */; };
+		ECCC035B170CBA570021DB00 /* VolumeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0358170CBA570021DB00 /* VolumeViewController.xib */; };
+		ECCC035C170CBA570021DB00 /* VolumeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0358170CBA570021DB00 /* VolumeViewController.xib */; };
+		ECCC0362170CD53E0021DB00 /* EndCap_L.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC035D170CD53C0021DB00 /* EndCap_L.png */; };
+		ECCC0363170CD53E0021DB00 /* EndCap_L.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC035D170CD53C0021DB00 /* EndCap_L.png */; };
+		ECCC0364170CD53E0021DB00 /* EndCap_R.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC035E170CD53C0021DB00 /* EndCap_R.png */; };
+		ECCC0365170CD53E0021DB00 /* EndCap_R.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC035E170CD53C0021DB00 /* EndCap_R.png */; };
+		ECCC0366170CD53E0021DB00 /* Minus.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC035F170CD53D0021DB00 /* Minus.png */; };
+		ECCC0367170CD53E0021DB00 /* Minus.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC035F170CD53D0021DB00 /* Minus.png */; };
+		ECCC0368170CD53E0021DB00 /* Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0360170CD53E0021DB00 /* Plus.png */; };
+		ECCC0369170CD53E0021DB00 /* Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0360170CD53E0021DB00 /* Plus.png */; };
+		ECCC036A170CD53E0021DB00 /* VolumeKnob.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0361170CD53E0021DB00 /* VolumeKnob.png */; };
+		ECCC036B170CD53E0021DB00 /* VolumeKnob.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0361170CD53E0021DB00 /* VolumeKnob.png */; };
+		ECCC0393170E33600021DB00 /* MinusRotated.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0392170E335F0021DB00 /* MinusRotated.png */; };
+		ECCC0394170E33600021DB00 /* MinusRotated.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC0392170E335F0021DB00 /* MinusRotated.png */; };
+		ECCC039B170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECCC039A170F716F0021DB00 /* MenuPauseBGSubsection.jpg */; };
+		ECCC039C170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECCC039A170F716F0021DB00 /* MenuPauseBGSubsection.jpg */; };
+		ECCC039E170F862C0021DB00 /* EndCap.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC039D170F862B0021DB00 /* EndCap.png */; };
+		ECCC039F170F862C0021DB00 /* EndCap.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC039D170F862B0021DB00 /* EndCap.png */; };
+		ECCC03A1170FBA140021DB00 /* InvisibleTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC03A0170FBA130021DB00 /* InvisibleTrack.png */; };
+		ECCC03A2170FBA140021DB00 /* InvisibleTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC03A0170FBA130021DB00 /* InvisibleTrack.png */; };
 		ECE0137E16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
 		ECE0137F16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
 		ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
@@ -3183,6 +3205,18 @@
 		ECCC0335170A493D0021DB00 /* DiffMedButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DiffMedButtonON.png; path = Resources/Images/Play/DiffMedButtonON.png; sourceTree = SOURCE_ROOT; };
 		ECCC0336170A493E0021DB00 /* SwitchBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SwitchBG.png; path = Resources/Images/Play/SwitchBG.png; sourceTree = SOURCE_ROOT; };
 		ECCC0343170B80240021DB00 /* NoteGreyscale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoteGreyscale.png; path = Resources/Images/Play/NoteGreyscale.png; sourceTree = SOURCE_ROOT; };
+		ECCC0356170CBA570021DB00 /* VolumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeViewController.h; sourceTree = "<group>"; };
+		ECCC0357170CBA570021DB00 /* VolumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeViewController.m; sourceTree = "<group>"; };
+		ECCC0358170CBA570021DB00 /* VolumeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VolumeViewController.xib; sourceTree = "<group>"; };
+		ECCC035D170CD53C0021DB00 /* EndCap_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EndCap_L.png; path = Resources/Images/General/VolumeView/EndCap_L.png; sourceTree = SOURCE_ROOT; };
+		ECCC035E170CD53C0021DB00 /* EndCap_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EndCap_R.png; path = Resources/Images/General/VolumeView/EndCap_R.png; sourceTree = SOURCE_ROOT; };
+		ECCC035F170CD53D0021DB00 /* Minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Minus.png; path = Resources/Images/General/VolumeView/Minus.png; sourceTree = SOURCE_ROOT; };
+		ECCC0360170CD53E0021DB00 /* Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Plus.png; path = Resources/Images/General/VolumeView/Plus.png; sourceTree = SOURCE_ROOT; };
+		ECCC0361170CD53E0021DB00 /* VolumeKnob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = VolumeKnob.png; path = Resources/Images/General/VolumeView/VolumeKnob.png; sourceTree = SOURCE_ROOT; };
+		ECCC0392170E335F0021DB00 /* MinusRotated.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MinusRotated.png; path = Resources/Images/General/VolumeView/MinusRotated.png; sourceTree = SOURCE_ROOT; };
+		ECCC039A170F716F0021DB00 /* MenuPauseBGSubsection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = MenuPauseBGSubsection.jpg; path = Resources/Images/Play/MenuPauseBGSubsection.jpg; sourceTree = SOURCE_ROOT; };
+		ECCC039D170F862B0021DB00 /* EndCap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EndCap.png; path = Resources/Images/General/VolumeView/EndCap.png; sourceTree = SOURCE_ROOT; };
+		ECCC03A0170FBA130021DB00 /* InvisibleTrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InvisibleTrack.png; path = Resources/Images/General/VolumeView/InvisibleTrack.png; sourceTree = SOURCE_ROOT; };
 		ECCD388513FF42AD00979566 /* StoreRedemptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreRedemptionViewController.h; sourceTree = "<group>"; };
 		ECCD388613FF42AD00979566 /* StoreRedemptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreRedemptionViewController.m; sourceTree = "<group>"; };
 		ECCD388713FF42AD00979566 /* StoreRedemptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreRedemptionViewController.xib; sourceTree = "<group>"; };
@@ -4084,6 +4118,7 @@
 		EC0BAD8116F1791300E567A6 /* General UI */ = {
 			isa = PBXGroup;
 			children = (
+				ECCC0355170CB9FD0021DB00 /* VolumeView */,
 				ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */,
 				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
 				EC0BAD9616F2771A00E567A6 /* CyclingTextField */,
@@ -4908,6 +4943,32 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		ECCC0355170CB9FD0021DB00 /* VolumeView */ = {
+			isa = PBXGroup;
+			children = (
+				ECCC036C170CD5480021DB00 /* Images */,
+				ECCC0356170CBA570021DB00 /* VolumeViewController.h */,
+				ECCC0357170CBA570021DB00 /* VolumeViewController.m */,
+				ECCC0358170CBA570021DB00 /* VolumeViewController.xib */,
+			);
+			name = VolumeView;
+			sourceTree = "<group>";
+		};
+		ECCC036C170CD5480021DB00 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				ECCC035D170CD53C0021DB00 /* EndCap_L.png */,
+				ECCC035E170CD53C0021DB00 /* EndCap_R.png */,
+				ECCC039D170F862B0021DB00 /* EndCap.png */,
+				ECCC035F170CD53D0021DB00 /* Minus.png */,
+				ECCC0392170E335F0021DB00 /* MinusRotated.png */,
+				ECCC0360170CD53E0021DB00 /* Plus.png */,
+				ECCC03A0170FBA130021DB00 /* InvisibleTrack.png */,
+				ECCC0361170CD53E0021DB00 /* VolumeKnob.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		ECCED1D71460C5E60006AB51 /* Account Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -5028,6 +5089,7 @@
 		ECE9D24C1705252100BB6C53 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ECCC039A170F716F0021DB00 /* MenuPauseBGSubsection.jpg */,
 				ECCC0333170A493D0021DB00 /* DiffEasyButtonON.png */,
 				ECCC0334170A493D0021DB00 /* DiffHardButtonON.png */,
 				ECCC0335170A493D0021DB00 /* DiffMedButtonON.png */,
@@ -6049,7 +6111,20 @@
 				ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */,
+<<<<<<< HEAD
 				9D2C8705170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
+=======
+				ECCC035B170CBA570021DB00 /* VolumeViewController.xib in Resources */,
+				ECCC0362170CD53E0021DB00 /* EndCap_L.png in Resources */,
+				ECCC0364170CD53E0021DB00 /* EndCap_R.png in Resources */,
+				ECCC0366170CD53E0021DB00 /* Minus.png in Resources */,
+				ECCC0368170CD53E0021DB00 /* Plus.png in Resources */,
+				ECCC036A170CD53E0021DB00 /* VolumeKnob.png in Resources */,
+				ECCC0393170E33600021DB00 /* MinusRotated.png in Resources */,
+				ECCC039B170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */,
+				ECCC039E170F862C0021DB00 /* EndCap.png in Resources */,
+				ECCC03A1170FBA140021DB00 /* InvisibleTrack.png in Resources */,
+>>>>>>> VolumeView is in good shape. Play mode is pretty much done.
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6975,7 +7050,20 @@
 				ECCC033C170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033E170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0345170B80250021DB00 /* NoteGreyscale.png in Resources */,
+<<<<<<< HEAD
 				9D2C8706170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
+=======
+				ECCC035C170CBA570021DB00 /* VolumeViewController.xib in Resources */,
+				ECCC0363170CD53E0021DB00 /* EndCap_L.png in Resources */,
+				ECCC0365170CD53E0021DB00 /* EndCap_R.png in Resources */,
+				ECCC0367170CD53E0021DB00 /* Minus.png in Resources */,
+				ECCC0369170CD53E0021DB00 /* Plus.png in Resources */,
+				ECCC036B170CD53E0021DB00 /* VolumeKnob.png in Resources */,
+				ECCC0394170E33600021DB00 /* MinusRotated.png in Resources */,
+				ECCC039C170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */,
+				ECCC039F170F862C0021DB00 /* EndCap.png in Resources */,
+				ECCC03A2170FBA140021DB00 /* InvisibleTrack.png in Resources */,
+>>>>>>> VolumeView is in good shape. Play mode is pretty much done.
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7093,7 +7181,11 @@
 				ECCC0312170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0314170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0316170A2B900021DB00 /* TextModel.m in Sources */,
+<<<<<<< HEAD
 				9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
+=======
+				ECCC0359170CBA570021DB00 /* VolumeViewController.m in Sources */,
+>>>>>>> VolumeView is in good shape. Play mode is pretty much done.
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7208,7 +7300,11 @@
 				ECCC0313170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0315170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0317170A2B900021DB00 /* TextModel.m in Sources */,
+<<<<<<< HEAD
 				9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
+=======
+				ECCC035A170CBA570021DB00 /* VolumeViewController.m in Sources */,
+>>>>>>> VolumeView is in good shape. Play mode is pretty much done.
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

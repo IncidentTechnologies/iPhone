@@ -52,6 +52,7 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UIButton *volumeButton;
 @property (retain, nonatomic) IBOutlet UIButton *backButton;
 @property (retain, nonatomic) IBOutlet UIButton *finishButton;
+@property (retain, nonatomic) IBOutlet UIView *volumeSliderView;
 
 @property (retain, nonatomic) IBOutlet UITextView *loadingLicenseInfo;
 @property (retain, nonatomic) IBOutlet UILabel *loadingSongInfo;

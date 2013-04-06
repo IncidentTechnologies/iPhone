@@ -284,8 +284,8 @@
 		6DBE64C2157E7A4C00729E25 /* Measure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Measure.h; sourceTree = "<group>"; };
 		6DD8EAB315B73960004B5AAF /* MeasureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureView.h; sourceTree = "<group>"; };
 		6DD8EAB415B73960004B5AAF /* MeasureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureView.m; sourceTree = "<group>"; };
-		EC24E02F161BD71800016B78 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libAudioController.a; path = "../GtarSdk/AudioController/build/Release-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
-		EC24E030161BD71800016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libGtarController.a; path = "../GtarSdk/GtarController/build/Release-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
+		EC24E02F161BD71800016B78 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAudioController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC24E030161BD71800016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGtarController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC37BE45160C42F000E6277D /* RadialDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialDisplay.h; sourceTree = "<group>"; };
 		EC37BE46160C42F100E6277D /* RadialDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialDisplay.m; sourceTree = "<group>"; };
 		EC37BE49160C430A00E6277D /* ScrollingSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingSelector.h; sourceTree = "<group>"; };
@@ -1035,6 +1035,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1047,6 +1048,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";

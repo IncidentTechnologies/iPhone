@@ -7,6 +7,7 @@
 //
 
 #import "PlayViewController.h"
+#import "VolumeViewController.h"
 
 #import <AudioController/AudioController.h>
 #import <GtarController/GtarController.h>
@@ -53,6 +54,8 @@ extern TelemetryController * g_telemetryController;
 @interface PlayViewController ()
 {
     SongDisplayController *_displayController;
+    
+    VolumeViewController *_volumeViewController;
     
     BOOL _animateSongScrolling;
     
@@ -126,12 +129,13 @@ extern TelemetryController * g_telemetryController;
 {
     [super viewDidLoad];
     
-    // Add the menu view just under the title bar
-    _topBar.layer.shadowRadius = 7.0;
-    _topBar.layer.shadowColor = [[UIColor blackColor] CGColor];
-    _topBar.layer.shadowOffset = CGSizeMake(0, 0);
-    _topBar.layer.shadowOpacity = 0.9;
+    // Spec out the top bar
+//    _topBar.layer.shadowRadius = 7.0;
+//    _topBar.layer.shadowColor = [[UIColor blackColor] CGColor];
+//    _topBar.layer.shadowOffset = CGSizeMake(0, 0);
+//    _topBar.layer.shadowOpacity = 0.9;
     
+    // Hide the widgets we don't need initially
     [_finishButton setHidden:YES];
     [_progressFillView setHidden:YES];
     
@@ -152,6 +156,7 @@ extern TelemetryController * g_telemetryController;
     _loadingLicenseInfo.text = _userSong.m_licenseInfo;
     _loadingSongInfo.text = [[NSString stringWithFormat:@"%@ - %@", _userSong.m_author, _userSong.m_title] retain];
     
+    // Hide the glview till it is done loading
     _glView.hidden = YES;
     
     [self updateDifficultyDisplay];
@@ -172,6 +177,7 @@ extern TelemetryController * g_telemetryController;
 {
     [super viewDidLayoutSubviews];
     
+    // Note that this function is called everytime the view resizes (e.g. many times)
     // Fiddle with the button images
     [_menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
@@ -179,21 +185,35 @@ extern TelemetryController * g_telemetryController;
     _menuButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
     _volumeButton.imageView.transform = CGAffineTransformMakeScale( 0.60, 0.60 );
     
+    // Pass the new target frame to the volume slider, now that we resized
+    CGRect targetFrame = [_topBar convertRect:_volumeSliderView.frame toView:self.view];
+    
+    [_volumeViewController setFrame:targetFrame];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
+    // Setup the menu
+    [self.view addSubview:_menuView];
+    
     [_menuView setFrame:self.view.frame];
     [_menuView setBounds:self.view.bounds];
     
-    [self.view bringSubviewToFront:_topBar];
-    [self.view insertSubview:_menuView belowSubview:_topBar];
-    
     _menuIsOpen = NO;
     
-    _menuView.transform = CGAffineTransformMakeTranslation( 0, -_menuView.frame.size.height );
+    _menuView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
+    
+    // Attach the volume view controller
+    CGRect targetFrame = [_topBar convertRect:_volumeSliderView.frame toView:self.view];
+    
+    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [_volumeViewController attachToSuperview:self.view withFrame:targetFrame];
+    
+    // Make sure the top bar stays on top
+    [self.view bringSubviewToFront:_topBar];
     
 //    [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(delayedLoaded) userInfo:nil repeats:NO];
     [self performSelectorOnMainThread:@selector(delayedLoaded) withObject:nil waitUntilDone:NO];
@@ -204,6 +224,7 @@ extern TelemetryController * g_telemetryController;
     // We want the main thread to finish running the above and updating the views
     // before this stuff runs. It will take awhile, and we want the user
     // to see all the views while they wait.
+    
     // The first time we load this up, parse the song
     _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom];
     
@@ -252,6 +273,8 @@ extern TelemetryController * g_telemetryController;
     
     [_displayController cancelPreloading];
     [_displayController release];
+    [_volumeViewController release];
+    
     [_song release];
     [_userSong release];
     [_songModel release];
@@ -313,6 +336,7 @@ extern TelemetryController * g_telemetryController;
     [_difficultyLabel release];
     [_instrumentButton release];
     [_instrumentLabel release];
+    [_volumeSliderView release];
     [super dealloc];
 }
 
@@ -351,7 +375,7 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
-    
+    [_volumeViewController toggleVolumeView];
 }
 
 - (IBAction)finishButtonClicked:(id)sender
@@ -362,6 +386,38 @@ extern TelemetryController * g_telemetryController;
     
     // Log our final state before exiting
     [self finalLogging];
+    
+    if ( _feedSwitch.isOn == YES )
+    {
+        UserSongSession * session = [[UserSongSession alloc] init];
+        
+        session.m_userSong = _userSong;
+        session.m_score = _scoreTracker.m_score;
+        session.m_stars = _scoreTracker.m_stars;
+        session.m_combo = _scoreTracker.m_streak;
+        session.m_notes = @"Recorded in gTar Play";
+        
+        _songRecorder.m_song.m_instrument = _song.m_instrument;
+        
+        // Create the xmp
+        session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
+        session.m_created = time(NULL);
+        
+        // Upload song to server. This also persists the upload in case of failure
+        [g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
+        
+        NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
+        
+        [g_telemetryController logEvent:GtarPlaySongShared
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                         _userSong.m_title, @"Title",
+                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                         nil]];
+        
+    }
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -516,6 +572,7 @@ extern TelemetryController * g_telemetryController;
     if ( _speakerRoute == YES )
     {
         [_outputSwitch setOn:YES];
+        [_volumeViewController enableAppleSlider];
     }
     else
     {
@@ -524,18 +581,16 @@ extern TelemetryController * g_telemetryController;
         // The global volume slider is not available when audio is routed to LineOut.
         // If the audio is not being output to LineOut, hide the global volume slider,
         // and display our own slider that controls volume in this mode.
-        //        NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-        //
-        //        if ([routeName isEqualToString:@"LineOut"])
-        //        {
-        ////            [[m_ampView m_volumeSlider] setHidden:NO];
-        ////            [[m_ampView m_volumeView] setHidden:YES];
-        //        }
-        //        else
-        //        {
-        ////            [[m_ampView m_volumeSlider] setHidden:YES];
-        ////            [[m_ampView m_volumeView] setHidden:NO];
-        //        }
+        NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
+
+        if ([routeName isEqualToString:@"LineOut"])
+        {
+            [_volumeViewController enableManualSlider];
+        }
+        else
+        {
+            [_volumeViewController enableAppleSlider];
+        }
     }
     
     // Invert it so we log the route we came from
@@ -619,40 +674,6 @@ extern TelemetryController * g_telemetryController;
 - (void)setVolumeGain:(float)gain
 {
     [g_audioController setM_volumeGain:gain];
-}
-
-- (void)shareButtonClicked
-{
-    
-    UserSongSession * session = [[UserSongSession alloc] init];
-    
-    session.m_userSong = _userSong;
-    session.m_score = _scoreTracker.m_score;
-    session.m_stars = _scoreTracker.m_stars;
-    session.m_combo = _scoreTracker.m_streak;
-    session.m_notes = @"Recorded in gTar Play";
-    
-    _songRecorder.m_song.m_instrument = _song.m_instrument;
-    
-    // Create the xmp
-    session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
-    
-    session.m_created = time(NULL);
-    
-    // Upload song to server. This also persists the upload in case of failure
-    [g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
-    
-    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
-    
-    [g_telemetryController logEvent:GtarPlaySongShared
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                     _userSong.m_title, @"Title",
-                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                     nil]];
-    
 }
 
 - (void)updateDifficultyDisplay
