@@ -12,6 +12,6 @@
 
 @interface InstrumentsAndEffectsViewController : UIViewController
 
-- (id)initWithAudioController:(AudioController*)AC instrumentList:(NSArray*)instruments;
+- (id)initWithAudioController:(AudioController*)AC;
 
 @end

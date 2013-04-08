@@ -12,6 +12,6 @@
 
 @interface InstrumentTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (id)initWithAudioController:(AudioController*)AC instrumentList:(NSArray*)instruments;
+- (id)initWithAudioController:(AudioController*)AC;
 
 @end

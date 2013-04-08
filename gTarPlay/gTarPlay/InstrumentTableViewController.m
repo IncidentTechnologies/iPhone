@@ -12,19 +12,26 @@
 
 @interface InstrumentTableViewController ()
 
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
+
 @property (retain, nonatomic) AudioController *audioController;
 @property (retain, nonatomic) NSArray *instruments;
+
+- (void) samplerFinishedLoadingCB:(NSNumber*)result;
 
 @end
 
 @implementation InstrumentTableViewController
 
-- (id)initWithAudioController:(AudioController*)AC instrumentList:(NSArray*)instruments
+- (id)initWithAudioController:(AudioController*)AC
 {
     self = [super initWithNibName:@"InstrumentTableViewController" bundle:nil];
-    if (self) {
-        _instruments = [instruments retain];
+    if (self)
+    {
+        _audioController = AC;
+        _instruments = [[AC getInstrumentNames] retain];
     }
+    
     return self;
 }
 
@@ -32,6 +39,7 @@
 {
     [_instruments release];
     
+    [_tableView release];
     [super dealloc];
 }
 
@@ -40,12 +48,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] style:UITableViewStylePlain];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [tableView reloadData];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.tableView reloadData];
     
-    self.view = tableView;
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +61,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - UITableView Delegate and DataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -70,7 +80,31 @@
     }
     
     cell.textLabel.text = [self.instruments objectAtIndex:indexPath.row];
+    UIView *selectionColor = [[UIView alloc] init];
+    selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
+    cell.selectedBackgroundView = selectionColor;
+    
     return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *instrumentName = [self.instruments objectAtIndex:indexPath.row];
+    //[m_instrumentsScroll flickerSelectedItem];
+    [self.audioController setSamplePackWithName:instrumentName withSelector:@selector(samplerFinishedLoadingCB:) andOwner:self];
+}
+
+# pragma mark - AudioController callbacks
+
+- (void)samplerFinishedLoadingCB:(NSNumber*)result
+{
+    if ([result boolValue])
+    {
+        [self.audioController ClearOutEffects];
+        [self.audioController startAUGraph];
+        //[m_instrumentsScroll stopFlicker];
+    }
 }
 
 @end

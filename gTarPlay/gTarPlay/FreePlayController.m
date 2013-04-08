@@ -122,7 +122,7 @@ extern TelemetryController * g_telemetryController;
         m_instrumentTimeStart = [[NSDate date] retain];
         m_scaleTimeStart = [[NSDate date] retain];
         
-        _instrumentsAndEffectsVC = [[InstrumentsAndEffectsViewController alloc] initWithAudioController:g_audioController instrumentList:[NSArray arrayWithObjects:@"one", @"two", @"2.5", @"three", @"four", nil]];
+        _instrumentsAndEffectsVC = [[InstrumentsAndEffectsViewController alloc] initWithAudioController:g_audioController];
         _lightsVC = [[LightsViewController alloc] init];
         _fpMenuVC = [[FPMenuViewController alloc] init];
         
@@ -260,7 +260,6 @@ extern TelemetryController * g_telemetryController;
     
     // Set up initial content VC to be instruments & effects.
     [self addChildViewController:self.instrumentsAndEffectsVC];
-    //self.instrumentsAndEffectsVC.view.frame = self.mainContentView.frame;
     [self.mainContentView addSubview:self.instrumentsAndEffectsVC.view];
     [self.instrumentsAndEffectsVC didMoveToParentViewController:self];
     self.currentMainContentVC = self.instrumentsAndEffectsVC;
