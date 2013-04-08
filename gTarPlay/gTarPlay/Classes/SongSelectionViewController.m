@@ -11,6 +11,8 @@
 #import "SelectSongOptionsPopupViewController.h"
 #import "SongViewController.h"
 #import "PlayViewController.h"
+#import "SlidingModalViewController.h"
+#import "VolumeViewController.h"
 
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/CloudResponse.h>
@@ -29,9 +31,14 @@ extern UserController * g_userController;
 
 @interface SongSelectionViewController ()
 {
+    VolumeViewController *_volumeViewController;
+    
     NSArray *_userSongArray;
     SelectSongOptionsPopupViewController *_popupOptionsViewController;
     SongPlaybackController *_playbackController;
+    
+    UserSong *_currentUserSong;
+    NSInteger _currentDifficulty;
 }
 @end
 
@@ -71,6 +78,10 @@ extern UserController * g_userController;
     
     _playbackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
     
+    _currentDifficulty = 0;
+    
+    [_easyButton setEnabled:NO];
+    
     // Download any files we are missing
     if ( [_userSongArray count] > 0 )
     {
@@ -82,6 +93,29 @@ extern UserController * g_userController;
         
     }
     
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    [_closeModalButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_instrumentButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
+    _closeModalButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
+    _volumeButton.imageView.transform = CGAffineTransformMakeScale( 0.6, 0.6 );
+    _instrumentButton.imageView.transform = CGAffineTransformMakeScale( 0.7, 0.7 );
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [_volumeViewController attachToSuperview:_volumeView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,6 +134,14 @@ extern UserController * g_userController;
     [_titleArtistButton release];
     [_skillButton release];
     [_scoreButton release];
+    [_songOptionsModal release];
+    [_volumeButton release];
+    [_closeModalButton release];
+    [_instrumentButton release];
+    [_easyButton release];
+    [_mediumButton release];
+    [_hardButton release];
+    [_volumeView release];
     [super dealloc];
 }
 
@@ -108,6 +150,56 @@ extern UserController * g_userController;
 - (IBAction)backButtonClicked:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)startButtonClicked:(id)sender
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty];
+}
+
+- (IBAction)closeModalButtonClicked:(id)sender
+{
+    [_songOptionsModal closeButtonClicked:sender];
+}
+
+- (IBAction)volumeButtonClicked:(id)sender
+{
+    [_volumeViewController toggleVolumeView];
+}
+
+- (IBAction)instrumentButtonClicked:(id)sender
+{
+    
+}
+
+- (IBAction)difficulyButtonClicked:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    
+    if ( button == _easyButton )
+    {
+        _currentDifficulty = 0;
+        [_easyButton setEnabled:NO];
+        [_mediumButton setEnabled:YES];
+        [_hardButton setEnabled:YES];
+    }
+    else if ( button == _mediumButton )
+    {
+        _currentDifficulty = 1;
+        [_easyButton setEnabled:YES];
+        [_mediumButton setEnabled:NO];
+        [_hardButton setEnabled:YES];
+    }
+    else if ( button == _hardButton )
+    {
+        _currentDifficulty = 2;
+        [_easyButton setEnabled:YES];
+        [_mediumButton setEnabled:YES];
+        [_hardButton setEnabled:NO];
+    }
+    
 }
 
 #pragma mark - UserSong management
@@ -253,11 +345,16 @@ extern UserController * g_userController;
     
 	NSInteger row = [indexPath row];
     UserSong *userSong = [_userSongArray objectAtIndex:row];
+
+//    _popupOptionsViewController.m_userSong = userSong;
+//    _popupOptionsViewController.m_navigationController = self;
     
-    _popupOptionsViewController.m_userSong = userSong;
-    _popupOptionsViewController.m_navigationController = self;
+//    [_popupOptionsViewController attachToSuperViewWithBlackBackground:self.view];
     
-    [_popupOptionsViewController attachToSuperViewWithBlackBackground:self.view];
+    _currentUserSong = userSong;
+    
+    [self presentViewController:_songOptionsModal animated:YES completion:nil];
+    
 }
 
 - (void)update

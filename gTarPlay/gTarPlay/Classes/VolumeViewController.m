@@ -125,7 +125,7 @@ extern AudioController * g_audioController;
 
 - (void)attachToSuperview:(UIView *)view
 {
-    [self attachToSuperview:view withFrame:view.frame];
+    [self attachToSuperview:view withFrame:view.bounds];
 }
 
 - (void)attachToSuperview:(UIView *)view withFrame:(CGRect)rect
