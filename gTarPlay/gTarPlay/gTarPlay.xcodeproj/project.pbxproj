@@ -6111,9 +6111,7 @@
 				ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */,
-<<<<<<< HEAD
 				9D2C8705170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
-=======
 				ECCC035B170CBA570021DB00 /* VolumeViewController.xib in Resources */,
 				ECCC0362170CD53E0021DB00 /* EndCap_L.png in Resources */,
 				ECCC0364170CD53E0021DB00 /* EndCap_R.png in Resources */,
@@ -6124,7 +6122,6 @@
 				ECCC039B170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */,
 				ECCC039E170F862C0021DB00 /* EndCap.png in Resources */,
 				ECCC03A1170FBA140021DB00 /* InvisibleTrack.png in Resources */,
->>>>>>> VolumeView is in good shape. Play mode is pretty much done.
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7050,9 +7047,7 @@
 				ECCC033C170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033E170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0345170B80250021DB00 /* NoteGreyscale.png in Resources */,
-<<<<<<< HEAD
 				9D2C8706170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
-=======
 				ECCC035C170CBA570021DB00 /* VolumeViewController.xib in Resources */,
 				ECCC0363170CD53E0021DB00 /* EndCap_L.png in Resources */,
 				ECCC0365170CD53E0021DB00 /* EndCap_R.png in Resources */,
@@ -7063,7 +7058,6 @@
 				ECCC039C170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */,
 				ECCC039F170F862C0021DB00 /* EndCap.png in Resources */,
 				ECCC03A2170FBA140021DB00 /* InvisibleTrack.png in Resources */,
->>>>>>> VolumeView is in good shape. Play mode is pretty much done.
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7181,11 +7175,8 @@
 				ECCC0312170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0314170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0316170A2B900021DB00 /* TextModel.m in Sources */,
-<<<<<<< HEAD
 				9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
-=======
 				ECCC0359170CBA570021DB00 /* VolumeViewController.m in Sources */,
->>>>>>> VolumeView is in good shape. Play mode is pretty much done.
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7300,11 +7291,8 @@
 				ECCC0313170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0315170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0317170A2B900021DB00 /* TextModel.m in Sources */,
-<<<<<<< HEAD
 				9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
-=======
 				ECCC035A170CBA570021DB00 /* VolumeViewController.m in Sources */,
->>>>>>> VolumeView is in good shape. Play mode is pretty much done.
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
