@@ -21,12 +21,12 @@
 
 @implementation InstrumentsAndEffectsViewController
 
-- (id)initWithAudioController:(AudioController*)AC instrumentList:(NSArray*)instruments
+- (id)initWithAudioController:(AudioController*)AC
 {
-    self = [super initWithNibName:@"Instruments&EffectsViewController" bundle:nil];
+    self = [super initWithNibName:@"InstrumentsAndEffectsViewController" bundle:nil];
     if (self) {
         // Custom initialization
-        _instrumentTableVC = [[InstrumentTableViewController alloc] initWithAudioController:AC instrumentList:instruments];
+        _instrumentTableVC = [[InstrumentTableViewController alloc] initWithAudioController:AC];
     }
     return self;
 }
@@ -42,6 +42,11 @@
     [self.contentTable addSubview:self.instrumentTableVC.view];
     [self.instrumentTableVC didMoveToParentViewController:self];
     //self.currentMainContentVC = self.instrumentsAndEffectsVC;
+}
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    
 }
 
 - (void)didReceiveMemoryWarning
