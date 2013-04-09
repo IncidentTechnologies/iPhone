@@ -12,8 +12,6 @@
 
 @interface InstrumentTableViewController ()
 
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
-
 @property (retain, nonatomic) AudioController *audioController;
 @property (retain, nonatomic) NSArray *instruments;
 
@@ -25,11 +23,14 @@
 
 - (id)initWithAudioController:(AudioController*)AC
 {
-    self = [super initWithNibName:@"InstrumentTableViewController" bundle:nil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self)
     {
         _audioController = AC;
         _instruments = [[AC getInstrumentNames] retain];
+        
+        CGRect frame = CGRectMake(0, 0, 0, 0);
+        _tableView = [[[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain] autorelease];
     }
     
     return self;
@@ -51,6 +52,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView reloadData];
+    
+    [self.view addSubview:self.tableView];
     
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
@@ -87,12 +90,16 @@
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *instrumentName = [self.instruments objectAtIndex:indexPath.row];
     //[m_instrumentsScroll flickerSelectedItem];
     [self.audioController setSamplePackWithName:instrumentName withSelector:@selector(samplerFinishedLoadingCB:) andOwner:self];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
 
 # pragma mark - AudioController callbacks

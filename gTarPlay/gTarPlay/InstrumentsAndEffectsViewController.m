@@ -39,6 +39,7 @@
     
     // Set up initial content VC to be instruments & effects.
     [self addChildViewController:self.instrumentTableVC];
+    self.instrumentTableVC.tableView.frame = self.contentTable.bounds;
     [self.contentTable addSubview:self.instrumentTableVC.view];
     [self.instrumentTableVC didMoveToParentViewController:self];
     //self.currentMainContentVC = self.instrumentsAndEffectsVC;

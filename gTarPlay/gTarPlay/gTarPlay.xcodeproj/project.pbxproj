@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
 		9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
-		9D2C8705170A63660049CD46 /* InstrumentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */; };
-		9D2C8706170A63660049CD46 /* InstrumentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */; };
 		9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137D1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137E1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib */; };
@@ -2173,7 +2171,6 @@
 		9D2A05AB1534F6A500218ABB /* Acoustic Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 80.mp3"; path = "Acoustic Guitar/Acoustic Guitar 80.mp3"; sourceTree = "<group>"; };
 		9D2C8700170A63660049CD46 /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
 		9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
-		9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentTableViewController.xib; sourceTree = "<group>"; };
 		9D2DFF7B1564DD1B006B38C0 /* Square 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 40.mp3"; path = "Square/Square 40.mp3"; sourceTree = "<group>"; };
 		9D2DFF7C1564DD1B006B38C0 /* Square 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 41.mp3"; path = "Square/Square 41.mp3"; sourceTree = "<group>"; };
 		9D2DFF7D1564DD1B006B38C0 /* Square 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 42.mp3"; path = "Square/Square 42.mp3"; sourceTree = "<group>"; };
@@ -5059,7 +5056,6 @@
 				9DA313901704FA3000CFF104 /* FPMenuViewController.xib */,
 				9D2C8700170A63660049CD46 /* InstrumentTableViewController.h */,
 				9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */,
-				9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */,
 			);
 			name = "FreePlay Experience";
 			path = ..;
@@ -6111,7 +6107,6 @@
 				ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */,
-				9D2C8705170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
 				ECCC035B170CBA570021DB00 /* VolumeViewController.xib in Resources */,
 				ECCC0362170CD53E0021DB00 /* EndCap_L.png in Resources */,
 				ECCC0364170CD53E0021DB00 /* EndCap_R.png in Resources */,
@@ -7047,7 +7042,6 @@
 				ECCC033C170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033E170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0345170B80250021DB00 /* NoteGreyscale.png in Resources */,
-				9D2C8706170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
 				ECCC035C170CBA570021DB00 /* VolumeViewController.xib in Resources */,
 				ECCC0363170CD53E0021DB00 /* EndCap_L.png in Resources */,
 				ECCC0365170CD53E0021DB00 /* EndCap_R.png in Resources */,
