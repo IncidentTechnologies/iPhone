@@ -13,10 +13,10 @@
 #import "SongES1Renderer.h"
 
 #import <gTarAppCore/NoteAnimation.h>
-#import <gTarAppCore/NoteModel.h>
-#import <gTarAppCore/LineModel.h>
-#import <gTarAppCore/StringModel.h>
-#import <gTarAppCore/NumberModel.h>
+#import "NoteModel.h"
+#import "LineModel.h"
+#import "StringModel.h"
+#import "NumberModel.h"
 
 #import <gTarAppCore/NSNote.h>
 #import <gTarAppCore/NSSong.h>

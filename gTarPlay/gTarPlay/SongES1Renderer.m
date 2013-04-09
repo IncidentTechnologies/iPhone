@@ -8,10 +8,10 @@
 
 #import "SongES1Renderer.h"
 
-#import <gTarAppCore/LineModel.h>
-#import <gTarAppCore/StringModel.h>
+#import "LineModel.h"
+#import "StringModel.h"
 #import <gTarAppCore/NoteAnimation.h>
-#import <gTarAppCore/NoteModel.h>
+#import "NoteModel.h"
 #import <gTarAppCore/Model.h>
 
 #define GL_ORTHO_LEFT (0.0f)
