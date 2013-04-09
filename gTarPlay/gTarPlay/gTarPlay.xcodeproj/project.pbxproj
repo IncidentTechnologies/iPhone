@@ -23,6 +23,8 @@
 		9DA313941704FA3100CFF104 /* FPMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA313901704FA3000CFF104 /* FPMenuViewController.xib */; };
 		9DE5C64616F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
 		9DE5C64716F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
+		9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */; };
+		9DE6B34C1713A69B0083B980 /* EffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */; };
 		EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */; };
@@ -2606,6 +2608,8 @@
 		9DDE46A7152D1EBD002CD6AA /* SmSquareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SmSquareButton.png; path = images/FreePlay/SmSquareButton.png; sourceTree = "<group>"; };
 		9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "12b-Ver2_FreePlay_INSTR2.jpg"; path = "Resources/Images/Freeplay/12b-Ver2_FreePlay_INSTR2.jpg"; sourceTree = "<group>"; };
 		9DE6576714C902770034F437 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
+		9DE6B3491713A69B0083B980 /* EffectsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsTableViewController.h; sourceTree = "<group>"; };
+		9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectsTableViewController.m; sourceTree = "<group>"; };
 		9DE9FFBD155CD9C500F92DBE /* Droplet 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 52.mp3"; sourceTree = "<group>"; };
 		9DE9FFBE155CD9C500F92DBE /* Droplet 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 53.mp3"; sourceTree = "<group>"; };
 		9DE9FFBF155CD9C500F92DBE /* Droplet 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 54.mp3"; sourceTree = "<group>"; };
@@ -5067,6 +5071,8 @@
 				9DA313901704FA3000CFF104 /* FPMenuViewController.xib */,
 				9D2C8700170A63660049CD46 /* InstrumentTableViewController.h */,
 				9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */,
+				9DE6B3491713A69B0083B980 /* EffectsTableViewController.h */,
+				9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */,
 			);
 			name = "FreePlay Experience";
 			path = ..;
@@ -7185,6 +7191,7 @@
 				ECCC0316170A2B900021DB00 /* TextModel.m in Sources */,
 				9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
 				ECCC0359170CBA570021DB00 /* VolumeViewController.m in Sources */,
+				9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7301,6 +7308,7 @@
 				ECCC0317170A2B900021DB00 /* TextModel.m in Sources */,
 				9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
 				ECCC035A170CBA570021DB00 /* VolumeViewController.m in Sources */,
+				9DE6B34C1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
