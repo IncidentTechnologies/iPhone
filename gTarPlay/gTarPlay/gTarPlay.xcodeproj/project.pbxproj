@@ -1028,6 +1028,8 @@
 		EC26A3A616CB198F006E97E2 /* DefaultRot.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A316CB198E006E97E2 /* DefaultRot.png */; };
 		EC26A3A716CB198F006E97E2 /* DefaultRot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */; };
 		EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */; };
+		EC69BA1717137072004E982F /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1617137071004E982F /* InstrumentIcon.png */; };
+		EC69BA1817137072004E982F /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1617137071004E982F /* InstrumentIcon.png */; };
 		EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
 		EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
 		ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */; };
@@ -2925,6 +2927,7 @@
 		EC603E8613A1D15A00699EB7 /* TransitionRectangleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransitionRectangleViewController.xib; sourceTree = "<group>"; };
 		EC67780B136B7B08005FE8D9 /* string-light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string-light.png"; sourceTree = "<group>"; };
 		EC677875136B7ECD005FE8D9 /* string-light-vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string-light-vertical.png"; sourceTree = "<group>"; };
+		EC69BA1617137071004E982F /* InstrumentIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InstrumentIcon.png; path = Resources/Images/Play/InstrumentIcon.png; sourceTree = SOURCE_ROOT; };
 		EC6BD1D713F070660068E25C /* SongDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongDisplayController.h; sourceTree = "<group>"; };
 		EC6BD1D813F070660068E25C /* SongDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDisplayController.m; sourceTree = "<group>"; };
 		EC6BD1DC13F073FD0068E25C /* SongES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongES1Renderer.h; sourceTree = "<group>"; };
@@ -4115,6 +4118,7 @@
 		EC0BAD8116F1791300E567A6 /* General UI */ = {
 			isa = PBXGroup;
 			children = (
+				EC69BA1A17138620004E982F /* SongPlayerViewController */,
 				ECCC0355170CB9FD0021DB00 /* VolumeView */,
 				ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */,
 				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
@@ -4565,6 +4569,13 @@
 				EC603E8613A1D15A00699EB7 /* TransitionRectangleViewController.xib */,
 			);
 			name = "Tutorial Popup";
+			sourceTree = "<group>";
+		};
+		EC69BA1A17138620004E982F /* SongPlayerViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SongPlayerViewController;
 			sourceTree = "<group>";
 		};
 		EC6BD1F013F356C40068E25C /* SongViewController */ = {
@@ -5099,6 +5110,7 @@
 				ECCC031C170A3C7B0021DB00 /* RestartButton.png */,
 				ECCC031D170A3C7B0021DB00 /* ScoreBox.png */,
 				ECE9D24D170525ED00BB6C53 /* MenuIcon.png */,
+				EC69BA1617137071004E982F /* InstrumentIcon.png */,
 				ECE9D24E170525ED00BB6C53 /* VolumeIcon.png */,
 				ECCC0343170B80240021DB00 /* NoteGreyscale.png */,
 			);
@@ -6117,6 +6129,7 @@
 				ECCC039B170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */,
 				ECCC039E170F862C0021DB00 /* EndCap.png in Resources */,
 				ECCC03A1170FBA140021DB00 /* InvisibleTrack.png in Resources */,
+				EC69BA1717137072004E982F /* InstrumentIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7052,6 +7065,7 @@
 				ECCC039C170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */,
 				ECCC039F170F862C0021DB00 /* EndCap.png in Resources */,
 				ECCC03A2170FBA140021DB00 /* InvisibleTrack.png in Resources */,
+				EC69BA1817137072004E982F /* InstrumentIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
