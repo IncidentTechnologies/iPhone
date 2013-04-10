@@ -14,6 +14,8 @@
 
 @property (retain, nonatomic) AudioController *audioController;
 
+- (void) toggleEffect:(UIControl *)button;
+
 @end
 
 @implementation EffectsTableViewController
@@ -82,6 +84,21 @@
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(162/255.0) blue:(54/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [button  setImage:[UIImage imageNamed:@"EffectsOffButton.png"] forState:UIControlStateNormal];
+    [button  setImage:[UIImage imageNamed:@"EffectsOffButton.png"] forState:UIControlStateNormal | UIControlStateHighlighted];
+    [button  setImage:[UIImage imageNamed:@"EffectsOnButton.png"] forState:UIControlStateSelected];
+    [button  setImage:[UIImage imageNamed:@"EffectsOnButton.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    
+    [button addTarget:self action:@selector(toggleEffect:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    button.frame = CGRectMake(0, 0, 40, 40);
+    
+    cell.accessoryView = button;
+    //[cell addSubview:button];
+    
     return cell;
 }
 
@@ -97,6 +114,13 @@
     return 60;
 }
 
+- (void) toggleEffect:(UIControl *)button
+{
+    button.selected = !button.selected;
+    
+    UITableViewCell *cell = (UITableViewCell*)button.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+}
 
 
 @end
