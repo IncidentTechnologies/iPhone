@@ -16,6 +16,8 @@
 @property (retain, nonatomic) IBOutlet UIView *volumeView;
 @property (retain, nonatomic) IBOutlet UIImageView *volumeTrackView;
 
+@property (readonly, nonatomic) BOOL displayed;
+
 - (IBAction)volumeValueChanged:(id)sender;
 
 - (void)attachToSuperview:(UIView *)view;

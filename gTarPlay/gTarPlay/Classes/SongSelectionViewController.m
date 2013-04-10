@@ -13,6 +13,7 @@
 #import "PlayViewController.h"
 #import "SlidingModalViewController.h"
 #import "VolumeViewController.h"
+#import "PlayerViewController.h"
 
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/CloudResponse.h>
@@ -36,6 +37,7 @@ extern UserController * g_userController;
     NSArray *_userSongArray;
     SelectSongOptionsPopupViewController *_popupOptionsViewController;
     SongPlaybackController *_playbackController;
+    PlayerViewController *_playerViewController;
     
     UserSong *_currentUserSong;
     NSInteger _currentDifficulty;
@@ -76,7 +78,10 @@ extern UserController * g_userController;
     
     _popupOptionsViewController = [[SelectSongOptionsPopupViewController alloc] initWithNibName:nil bundle:nil];
     
-    _playbackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
+//    _playbackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
+    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [_playerViewController attachToSuperview:_songPlayerView];
     
     _currentDifficulty = 0;
     
@@ -116,6 +121,8 @@ extern UserController * g_userController;
     _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
     
     [_volumeViewController attachToSuperview:_volumeView];
+    
+    _volumeView.userInteractionEnabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,6 +149,7 @@ extern UserController * g_userController;
     [_mediumButton release];
     [_hardButton release];
     [_volumeView release];
+    [_songPlayerView release];
     [super dealloc];
 }
 
@@ -166,6 +174,7 @@ extern UserController * g_userController;
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
+    // The volume view is obstructing stuff below it. Hide it until we need it.
     [_volumeViewController toggleVolumeView];
 }
 
@@ -343,6 +352,12 @@ extern UserController * g_userController;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    if ( _songOptionsModal.presentingViewController != nil )
+    {
+        // We only want to present it once, otherwise it will crash
+        return;
+    }
+    
 	NSInteger row = [indexPath row];
     UserSong *userSong = [_userSongArray objectAtIndex:row];
 
@@ -352,6 +367,11 @@ extern UserController * g_userController;
 //    [_popupOptionsViewController attachToSuperViewWithBlackBackground:self.view];
     
     _currentUserSong = userSong;
+    
+    NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
+
+    _playerViewController.userSong = userSong;
+    _playerViewController.xmpBlob = songString;
     
     [self presentViewController:_songOptionsModal animated:YES completion:nil];
     

@@ -190,6 +190,7 @@ extern AudioController * g_audioController;
 
 - (void)slidingComplete
 {
+    _displayed = _isDown;
     _isSliding = NO;
 }
 
