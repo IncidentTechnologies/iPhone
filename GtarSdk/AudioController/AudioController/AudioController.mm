@@ -528,6 +528,17 @@ const float g_GraphSampleRate = 44100.0f;
     return m_effects;
 }
 
+- (NSArray*) getEffectNames
+{
+    NSMutableArray *names = [NSMutableArray arrayWithCapacity:m_effects.size()];
+    for (int i = 0; i < m_effects.size(); i++)
+    {
+        [names addObject:[NSString stringWithCString:m_effects[i]->getName().c_str() encoding:[NSString defaultCStringEncoding]]];
+    }
+
+    return names;
+}
+
 - (Parameter&) getReverbLFO
 {
     return m_pReverbEffect->getLFO();

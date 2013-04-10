@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
 		9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
-		9D2C8705170A63660049CD46 /* InstrumentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */; };
-		9D2C8706170A63660049CD46 /* InstrumentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */; };
 		9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137D1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137E1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib */; };
@@ -25,6 +23,12 @@
 		9DA313941704FA3100CFF104 /* FPMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA313901704FA3000CFF104 /* FPMenuViewController.xib */; };
 		9DE5C64616F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
 		9DE5C64716F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
+		9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */; };
+		9DE6B34C1713A69B0083B980 /* EffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */; };
+		9DEB90501714D66100A7C0CF /* EffectsOffButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB904F1714D66100A7C0CF /* EffectsOffButton.png */; };
+		9DEB90511714D66100A7C0CF /* EffectsOffButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB904F1714D66100A7C0CF /* EffectsOffButton.png */; };
+		9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB90561714D6B000A7C0CF /* EffectsOnButton.png */; };
+		9DEB90581714D6B000A7C0CF /* EffectsOnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB90561714D6B000A7C0CF /* EffectsOnButton.png */; };
 		EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */; };
@@ -2185,7 +2189,6 @@
 		9D2A05AB1534F6A500218ABB /* Acoustic Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 80.mp3"; path = "Acoustic Guitar/Acoustic Guitar 80.mp3"; sourceTree = "<group>"; };
 		9D2C8700170A63660049CD46 /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
 		9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
-		9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentTableViewController.xib; sourceTree = "<group>"; };
 		9D2DFF7B1564DD1B006B38C0 /* Square 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 40.mp3"; path = "Square/Square 40.mp3"; sourceTree = "<group>"; };
 		9D2DFF7C1564DD1B006B38C0 /* Square 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 41.mp3"; path = "Square/Square 41.mp3"; sourceTree = "<group>"; };
 		9D2DFF7D1564DD1B006B38C0 /* Square 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 42.mp3"; path = "Square/Square 42.mp3"; sourceTree = "<group>"; };
@@ -2619,6 +2622,8 @@
 		9DDE46A7152D1EBD002CD6AA /* SmSquareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SmSquareButton.png; path = images/FreePlay/SmSquareButton.png; sourceTree = "<group>"; };
 		9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "12b-Ver2_FreePlay_INSTR2.jpg"; path = "Resources/Images/Freeplay/12b-Ver2_FreePlay_INSTR2.jpg"; sourceTree = "<group>"; };
 		9DE6576714C902770034F437 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
+		9DE6B3491713A69B0083B980 /* EffectsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsTableViewController.h; sourceTree = "<group>"; };
+		9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectsTableViewController.m; sourceTree = "<group>"; };
 		9DE9FFBD155CD9C500F92DBE /* Droplet 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 52.mp3"; sourceTree = "<group>"; };
 		9DE9FFBE155CD9C500F92DBE /* Droplet 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 53.mp3"; sourceTree = "<group>"; };
 		9DE9FFBF155CD9C500F92DBE /* Droplet 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 54.mp3"; sourceTree = "<group>"; };
@@ -2660,6 +2665,8 @@
 		9DE9FFE3155CD9C500F92DBE /* Droplet 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 90.mp3"; sourceTree = "<group>"; };
 		9DE9FFE4155CD9C500F92DBE /* Droplet 91.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 91.mp3"; sourceTree = "<group>"; };
 		9DE9FFE5155CD9C500F92DBE /* Droplet 92.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 92.mp3"; sourceTree = "<group>"; };
+		9DEB904F1714D66100A7C0CF /* EffectsOffButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsOffButton.png; path = Resources/Images/Freeplay/EffectsOffButton.png; sourceTree = "<group>"; };
+		9DEB90561714D6B000A7C0CF /* EffectsOnButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsOnButton.png; path = Resources/Images/Freeplay/EffectsOnButton.png; sourceTree = "<group>"; };
 		9DF47986159155080047953A /* Harmonizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Harmonizer.h; sourceTree = "<group>"; };
 		9DF47987159155080047953A /* Harmonizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Harmonizer.m; sourceTree = "<group>"; };
 		EC020DD0141EA28600627303 /* SongPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongPlayerViewController.h; path = ../gTarPlay.xcodeproj/SongPlayerViewController.h; sourceTree = "<group>"; };
@@ -3957,6 +3964,8 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9DEB90561714D6B000A7C0CF /* EffectsOnButton.png */,
+				9DEB904F1714D66100A7C0CF /* EffectsOffButton.png */,
 				9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */,
 				ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */,
 				ECBBBF68161CF1F400BC5BE2 /* InstrumentTab.png */,
@@ -5110,7 +5119,8 @@
 				9DA313901704FA3000CFF104 /* FPMenuViewController.xib */,
 				9D2C8700170A63660049CD46 /* InstrumentTableViewController.h */,
 				9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */,
-				9D2C8702170A63660049CD46 /* InstrumentTableViewController.xib */,
+				9DE6B3491713A69B0083B980 /* EffectsTableViewController.h */,
+				9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */,
 			);
 			name = "FreePlay Experience";
 			path = ..;
@@ -6163,7 +6173,6 @@
 				ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */,
-				9D2C8705170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
 				ECCC035B170CBA570021DB00 /* VolumeViewController.xib in Resources */,
 				ECCC0362170CD53E0021DB00 /* EndCap_L.png in Resources */,
 				ECCC0364170CD53E0021DB00 /* EndCap_R.png in Resources */,
@@ -6178,6 +6187,8 @@
 				EC69BA2017138D68004E982F /* PlayerViewController.xib in Resources */,
 				EC69BA3F17160662004E982F /* PreviewProgressBar.png in Resources */,
 				EC69BA4317162163004E982F /* PauseButtonVideo.png in Resources */,
+				9DEB90501714D66100A7C0CF /* EffectsOffButton.png in Resources */,
+				9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7103,7 +7114,6 @@
 				ECCC033C170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033E170A493E0021DB00 /* SwitchBG.png in Resources */,
 				ECCC0345170B80250021DB00 /* NoteGreyscale.png in Resources */,
-				9D2C8706170A63660049CD46 /* InstrumentTableViewController.xib in Resources */,
 				ECCC035C170CBA570021DB00 /* VolumeViewController.xib in Resources */,
 				ECCC0363170CD53E0021DB00 /* EndCap_L.png in Resources */,
 				ECCC0365170CD53E0021DB00 /* EndCap_R.png in Resources */,
@@ -7118,6 +7128,8 @@
 				EC69BA2117138D68004E982F /* PlayerViewController.xib in Resources */,
 				EC69BA4017160662004E982F /* PreviewProgressBar.png in Resources */,
 				EC69BA4417162163004E982F /* PauseButtonVideo.png in Resources */,
+				9DEB90511714D66100A7C0CF /* EffectsOffButton.png in Resources */,
+				9DEB90581714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7239,6 +7251,7 @@
 				ECCC0359170CBA570021DB00 /* VolumeViewController.m in Sources */,
 				EC69BA1D17138B2C004E982F /* PlayerViewController.m in Sources */,
 				EC69BA3C1715F3F8004E982F /* UIView+Gtar.m in Sources */,
+				9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7357,6 +7370,7 @@
 				ECCC035A170CBA570021DB00 /* VolumeViewController.m in Sources */,
 				EC69BA1E17138B2C004E982F /* PlayerViewController.m in Sources */,
 				EC69BA3D1715F3F8004E982F /* UIView+Gtar.m in Sources */,
+				9DE6B34C1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

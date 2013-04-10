@@ -169,6 +169,7 @@ enum AudioSource
 - (bool) SetKSSqWaveMultiplier:(float)multiplier;
 
 - (std::vector<Effect*>) GetEffects;
+- (NSArray*) getEffectNames;
 
 - (Parameter&) getReverbLFO;
 - (Parameter&) getReverbExcursion;

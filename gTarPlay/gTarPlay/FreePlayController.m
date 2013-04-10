@@ -39,8 +39,6 @@ extern TelemetryController * g_telemetryController;
 @property (retain, nonatomic) FPMenuViewController *fpMenuVC;
 
 @property (retain, nonatomic) IBOutlet UIView *mainContentView;
-
-
 @property (retain, nonatomic) UIViewController *currentMainContentVC;
 
 
@@ -187,6 +185,7 @@ extern TelemetryController * g_telemetryController;
     
     [g_gtarController removeObserver:self];
     
+    [_currentMainContentVC release];
     [m_harmonizer release];
     [m_volumeView release];
     [m_activityIndicatorView release];
@@ -1470,6 +1469,7 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)toggleEffectsTab:(id)sender
 {
+    [self.instrumentsAndEffectsVC displayEffects];
     [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
     
     /*
@@ -1497,7 +1497,9 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)toggleInstrumentsTab:(id)sender
 {
+    [self.instrumentsAndEffectsVC displayInstruments];
     [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
+    
     /*
     // First toggle selected state
     [m_instrumentsTabButton setSelected:![m_instrumentsTabButton isSelected]];

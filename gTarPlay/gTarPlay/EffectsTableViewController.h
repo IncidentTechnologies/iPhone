@@ -1,8 +1,8 @@
 //
-//  InstrumentTableViewController.h
+//  EffectsTableViewController.h
 //  gTarPlay
 //
-//  Created by Franco on 4/1/13.
+//  Created by Franco on 4/8/13.
 //
 //
 
@@ -10,7 +10,7 @@
 
 @class AudioController;
 
-@interface InstrumentTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface EffectsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (retain, nonatomic) UITableView *tableView;
 

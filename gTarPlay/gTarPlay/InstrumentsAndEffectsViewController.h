@@ -14,4 +14,7 @@
 
 - (id)initWithAudioController:(AudioController*)AC;
 
+- (void)displayInstruments;
+- (void)displayEffects;
+
 @end
