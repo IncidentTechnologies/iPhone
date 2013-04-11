@@ -31,5 +31,6 @@
 
 - (void)attachToSuperview:(UIView *)view;
 
+- (void)endPlayback;
 
 @end

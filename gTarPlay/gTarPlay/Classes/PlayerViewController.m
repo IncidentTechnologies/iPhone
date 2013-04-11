@@ -96,7 +96,22 @@ extern GtarController *g_gtarController;
     [_userSong release];
     _userSong = [userSong retain];
     
-    _init = NO;
+    [_songTitle setText:_userSong.m_author];
+    [_songArtist setText:_userSong.m_title];
+    
+//    _init = NO;
+    
+}
+
+- (void)setXmpBlob:(NSString *)xmpBlob
+{
+    [_xmpBlob release];
+    _xmpBlob = [xmpBlob retain];
+    
+    [_songPlaybackController startWithXmpBlob:_xmpBlob];
+    [_songPlaybackController stopMainEventLoop];
+    
+    [self updateProgress];
 }
 
 - (void)setScrollable:(BOOL)scrollable
@@ -122,6 +137,17 @@ extern GtarController *g_gtarController;
     }
     
     [self updateProgress];
+}
+
+- (void)endPlayback
+{
+    [_playButton setSelected:NO];
+    
+    [_songPlaybackController pauseSong];
+    
+    [self pauseUpdating];
+    
+    
 }
 
 - (void)startUpdating
@@ -151,6 +177,13 @@ extern GtarController *g_gtarController;
     CGFloat delta = width * _songPlaybackController.m_songModel.m_percentageComplete;
     
     _fillView.layer.transform = CATransform3DMakeTranslation( delta, 0, 0 );
+    
+    // We are done with the song
+    if ( _songPlaybackController.m_songModel.m_percentageComplete >= 1.0 )
+    {
+        [_playButton setSelected:NO];
+        [self pauseUpdating];
+    }
 }
 
 #pragma mark - Button click handlers
@@ -169,12 +202,13 @@ extern GtarController *g_gtarController;
     {
         [_playButton setSelected:YES];
         
-        if ( _init == NO )
-        {
-            [_songPlaybackController startWithXmpBlob:_xmpBlob];
-            _init = YES;
-        }
-        else
+//        if ( _init == NO )
+//        {
+//            [_songPlaybackController startWithXmpBlob:_xmpBlob];
+//            [self updateProgress];
+//            _init = YES;
+//        }
+//        else
         {
             [_songPlaybackController playSong];
         }
@@ -207,10 +241,10 @@ extern GtarController *g_gtarController;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-    if ( _init == NO )
-    {
-        return;
-    }
+//    if ( _init == NO )
+//    {
+//        return;
+//    }
     
     UITouch *touch = [[touches allObjects] objectAtIndex:0];
     CGPoint currentPoint = [touch locationInView:self.view];
@@ -227,10 +261,10 @@ extern GtarController *g_gtarController;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-    if ( _init == NO )
-    {
-        return;
-    }
+//    if ( _init == NO )
+//    {
+//        return;
+//    }
     
     if ( _scrollable == NO )
     {

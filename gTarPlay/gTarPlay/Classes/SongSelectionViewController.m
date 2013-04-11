@@ -169,6 +169,7 @@ extern UserController * g_userController;
 
 - (IBAction)closeModalButtonClicked:(id)sender
 {
+    [_playerViewController endPlayback];
     [_songOptionsModal closeButtonClicked:sender];
 }
 
