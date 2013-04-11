@@ -523,9 +523,18 @@ const float g_GraphSampleRate = 44100.0f;
     return true;
 }
 
-- (std::vector<Effect*>) GetEffects
+- (NSArray*) GetEffects
 {
-    return m_effects;
+    NSMutableArray *effects = [NSMutableArray array];
+    
+    for (int i = 0; i < m_effects.size(); i++)
+    {
+        Effect *e  = m_effects[i];
+        NSValue *val = [NSValue valueWithPointer:e];
+        [effects addObject:val];
+    }
+    
+    return effects;
 }
 
 - (NSArray*) getEffectNames

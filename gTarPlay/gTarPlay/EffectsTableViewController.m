@@ -9,6 +9,7 @@
 #import "EffectsTableViewController.h"
 
 #import <AudioController/AudioController.h>
+#import <AudioController/Effect.h>
 
 @interface EffectsTableViewController ()
 
@@ -116,10 +117,52 @@
 
 - (void) toggleEffect:(UIControl *)button
 {
+    UITableViewCell *cell = (UITableViewCell*)button.superview;
+    NSInteger effectNum = [self.tableView indexPathForCell:cell].row;
+    
+    Effect *effect = (Effect*)[[[self.audioController GetEffects] objectAtIndex:effectNum] pointerValue];
+    
+    // toggle senders selected state
     button.selected = !button.selected;
     
-    UITableViewCell *cell = (UITableViewCell*)button.superview;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    // set pass through of effect based on new state
+    if ([button isSelected])
+    {
+        effect->SetPassThru(false);
+        
+        // Telemetetry log
+        /*NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
+        
+        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         @"On", name,
+                                         nil]];
+        
+        [m_effectTimeStart[effectNum] release];
+        m_effectTimeStart[effectNum] = [[NSDate date] retain];
+         */
+        
+    }
+    else
+    {
+        effect->SetPassThru(true);
+        
+        // Telemetetry log
+        /*
+        NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
+        
+        NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_effectTimeStart[effectNum] timeIntervalSince1970] + m_playTimeAdjustment;
+        
+        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         @"Off", name,
+                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+                                         nil]];
+        
+        [m_effectTimeStart[effectNum] release];
+        m_effectTimeStart[effectNum] = [[NSDate date] retain];
+         */  
+    }
 }
 
 
