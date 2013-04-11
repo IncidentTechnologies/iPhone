@@ -17,6 +17,8 @@
 @property (retain, nonatomic) InstrumentTableViewController *instrumentTableVC;
 @property (retain, nonatomic) EffectsTableViewController *effectsTableVC;
 
+@property (retain, nonatomic) IBOutlet JamPad *jamPad;
+
 @property (retain, nonatomic) IBOutlet UIView *contentTable;
 @property (retain, nonatomic) UIViewController *currentMainContentVC;
 
@@ -43,6 +45,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    // Set up JamPad
+    // Flip y axis of JamPad so that +y points upwards instead of down
+    self.jamPad.transform = CGAffineTransformMakeScale(1, -1);
+    self.jamPad.m_delegate = self;
+    
     // Set up initial content VC to be instruments & effects.
     [self addChildViewController:self.instrumentTableVC];
     self.instrumentTableVC.tableView.frame = self.contentTable.bounds;
@@ -68,6 +75,7 @@
     [_contentTable release];
     [_currentMainContentVC release];
     
+    [_jamPad release];
     [super dealloc];
 }
 
@@ -104,5 +112,26 @@
                                 self.currentMainContentVC = newVC;
                             }];
 }
+
+#pragma mark - XYInputViewDelegate (JamPad delegate)
+
+-(void) positionChanged:(CGPoint)position forView:(XYInputView *)view
+{
+    // translate the normalized value the JamPad position to a range
+    // in [min, max] for the respective parameter
+    /*Parameter *p = &(m_selectedEffect->getPrimaryParam());
+    float min = p->getMin();
+    float max = p->getMax();
+    float newVal = position.x*(max - min) + min;
+    m_selectedEffect->setPrimaryParam(newVal);
+    
+    p = &(m_selectedEffect->getSecondaryParam());
+    min = p->getMin();
+    max = p->getMax();
+    newVal = position.y*(max - min) + min;
+    m_selectedEffect->setSecondaryParam(newVal);
+     */
+}
+
 
 @end

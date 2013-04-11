@@ -6,11 +6,13 @@
 //
 //
 
+#import "JamPad.h"
+
 #import <UIKit/UIKit.h>
 
 @class AudioController;
 
-@interface InstrumentsAndEffectsViewController : UIViewController
+@interface InstrumentsAndEffectsViewController : UIViewController <XYInputViewDelegate>
 
 - (id)initWithAudioController:(AudioController*)AC;
 

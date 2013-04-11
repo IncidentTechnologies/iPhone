@@ -115,6 +115,8 @@
     return 60;
 }
 
+#pragma mark - button click handlers
+
 - (void) toggleEffect:(UIControl *)button
 {
     UITableViewCell *cell = (UITableViewCell*)button.superview;
@@ -130,6 +132,7 @@
     {
         effect->SetPassThru(false);
         
+        // TODO telemetry
         // Telemetetry log
         /*NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
         

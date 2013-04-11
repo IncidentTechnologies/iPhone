@@ -15,8 +15,8 @@
 @interface JamPad : XYInputView
 {	
 	CGPoint m_currentDiscretizedPosition;
-	UIImageView * m_ledOnGrid[JAM_PAD_HEIGHT][JAM_PAD_WIDTH];
-	UIImageView * m_ledOffGrid[JAM_PAD_HEIGHT][JAM_PAD_WIDTH];
+	UIView * m_ledOnGrid[JAM_PAD_HEIGHT][JAM_PAD_WIDTH];
+	UIView * m_ledOffGrid[JAM_PAD_HEIGHT][JAM_PAD_WIDTH];
 	
 	UIImage * m_ledOn;
 	UIImage * m_ledOff;

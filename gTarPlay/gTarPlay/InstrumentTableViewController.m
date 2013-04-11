@@ -107,6 +107,7 @@
 
 - (void)samplerFinishedLoadingCB:(NSNumber*)result
 {
+    // TODO telemetry
     if ([result boolValue])
     {
         [self.audioController ClearOutEffects];
