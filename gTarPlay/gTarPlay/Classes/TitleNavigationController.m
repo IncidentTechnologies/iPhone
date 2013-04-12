@@ -24,12 +24,17 @@
 
 #import "TitleNavigationController.h"
 #import "SongSelectionViewController.h"
+#import "SongPlayerViewController.h"
+#import "VolumeViewController.h"
+
+#import "UIView+Gtar.h"
 
 #import "ActivityFeedCell.h"
+#import "UserCommentCell.h"
 #import "SelectorControl.h"
 #import "CyclingTextField.h"
 #import "SlidingModalViewController.h"
-#import "SongPlayerViewController.h"
+#import "PlayerViewController.h"
 #import "FreePlayController.h"
 
 extern CloudController * g_cloudController;
@@ -50,6 +55,9 @@ extern TelemetryController * g_telemetryController;
 
 @interface TitleNavigationController ()
 {
+    PlayerViewController *_playerViewController;
+    VolumeViewController *_volumeViewController;
+
     UIView *_currentLeftPanel;
     UIView *_currentRightPanel;
     
@@ -64,6 +72,8 @@ extern TelemetryController * g_telemetryController;
     
     BOOL _refreshingGlobalFeed;
     BOOL _refreshingFriendFeed;
+    
+    BOOL _displayingCell;
 }
 @end
 
@@ -84,33 +94,27 @@ extern TelemetryController * g_telemetryController;
 {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view from its nib.
+    // Add shadows
+    [_topBarView addShadow];
+    [_gtarLogoImage addShadow];
+    [_loggedoutSigninButton addShadow];
+    [_loggedoutSignupButton addShadow];
+    [_gatekeeperVideoButton addShadow];
+    [_gatekeeperSigninButton addShadow];
+    [_menuPlayButton addShadow];
+    [_menuFreePlayButton addShadow];
+    [_menuStoreButton addShadow];
     
-    UIView *viewsNeedingShadows[] =
-    {
-        _topBarView,
-        _gtarLogoImage,
-        _loggedoutSigninButton,
-        _loggedoutSignupButton,
-        _gatekeeperVideoButton,
-        _gatekeeperSigninButton,
-        _menuPlayButton,
-        _menuFreePlayButton,
-        _menuStoreButton
-    };
+    // Adjust the images in the buttons
+    [_modalMenuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_modalVolumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_modalShortcutButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+
+    // Set up the player modal
+    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
     
-    // Add shadows to everything in bulk
-    for ( NSInteger i = 0; i < (sizeof(viewsNeedingShadows)/sizeof(UIView *)); i++)
-    {
-        UIView *view = viewsNeedingShadows[i];
-        
-        view.layer.shadowRadius = 7.0;
-        view.layer.shadowColor = [[UIColor blackColor] CGColor];
-        view.layer.shadowOffset = CGSizeMake(0, 0);
-        view.layer.shadowOpacity = 0.9;
-    }
+    [_playerViewController attachToSuperview:_songPlayerView];
     
-//    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", @"NEWS", nil]];
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", nil]];
     
     // Apparently the view doesn't get resized to iPhone 5 dimensions until after viewDidLoad
@@ -154,6 +158,17 @@ extern TelemetryController * g_telemetryController;
 - (void)viewDidAppear:(BOOL)animated
 {
     
+    _displayingCell = NO;
+
+    if ( _volumeViewController == nil )
+    {
+        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+        
+        [_volumeViewController attachToSuperview:_modalVolumeView];
+        
+        _modalVolumeView.userInteractionEnabled = NO;
+    }
+    
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
     BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
@@ -190,6 +205,15 @@ extern TelemetryController * g_telemetryController;
     }
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+//    _modalMenuButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
+//    _modalVolumeButton.imageView.transform = CGAffineTransformMakeScale( 0.6, 0.6 );
+//    _modalShortcutButton.imageView.transform = CGAffineTransformMakeScale( 0.7, 0.7 );
+
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -201,6 +225,8 @@ extern TelemetryController * g_telemetryController;
     [_currentLeftPanel removeFromSuperview];
     [_currentRightPanel removeFromSuperview];
     [_fullScreenButton removeFromSuperview];
+    
+    [_playerViewController release];
     
     [_globalFeed release];
     [_friendFeed release];
@@ -240,6 +266,12 @@ extern TelemetryController * g_telemetryController;
     [_signupUsernameText release];
     [_signupPasswordText release];
     [_signupEmailText release];
+    [_songPlayerView release];
+    [_modalMenuButton release];
+    [_modalVolumeButton release];
+    [_modalShortcutButton release];
+    [_modalVolumeView release];
+    [_commentTable release];
     [super dealloc];
 }
 
@@ -410,7 +442,6 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)menuFreePlayButtonClicked:(id)sender
 {
     // Start free play mode
-//    [self presentViewController:_activityFeedModal animated:NO completion:NULL];
     FreePlayController * fpc = [[FreePlayController alloc] initWithNibName:nil bundle:nil];
 	
 	[self.navigationController pushViewController:fpc animated:YES];
@@ -573,6 +604,23 @@ extern TelemetryController * g_telemetryController;
     [_moviePlayer play];
 }
 
+- (IBAction)closeModalButtonClicked:(id)sender
+{
+    [_playerViewController endPlayback];
+    [_activityFeedModal closeButtonClicked:sender];
+}
+
+- (IBAction)volumeButtonClicked:(id)sender
+{
+    [_volumeViewController toggleVolumeView];
+}
+
+- (IBAction)shortcutButtonClicked:(id)sender
+{
+    [_playerViewController endPlayback];
+
+}
+
 #pragma mark - Movie Playback
 - (void)moviePlayBackDidFinish:(NSNotification *)notification
 {
@@ -628,22 +676,32 @@ extern TelemetryController * g_telemetryController;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Friends
-    if ( _feedSelectorControl.selectedIndex == 0 )
+    
+    if ( tableView == _feedTable )
     {
-        return [_friendFeed count];
+        // Friends
+        if ( _feedSelectorControl.selectedIndex == 0 )
+        {
+            return [_friendFeed count];
+        }
+        
+        // Global
+        if ( _feedSelectorControl.selectedIndex == 1 )
+        {
+            return [_globalFeed count];
+        }
+        
+        // News
+        if ( _feedSelectorControl.selectedIndex == 1 )
+        {
+            // derp
+        }
     }
     
-    // Global
-    if ( _feedSelectorControl.selectedIndex == 1 )
+    if ( tableView == _commentTable )
     {
-        return [_globalFeed count];
-    }
-    
-    // News
-    if ( _feedSelectorControl.selectedIndex == 1 )
-    {
-//        return [_globalFeed count];
+        // derp
+        return 4;
     }
     
     // Should never happen
@@ -653,49 +711,82 @@ extern TelemetryController * g_telemetryController;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
-	static NSString *CellIdentifier = @"ActivityFeedCell";
-
-	ActivityFeedCell *cell = (ActivityFeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-	if (cell == nil)
-	{
-		cell = [[[ActivityFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        
-		[[NSBundle mainBundle] loadNibNamed:@"ActivityFeedCell" owner:cell options:nil];
-        
-        [cell setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
-        [cell.accessoryView setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
-	}
-
-	// Clear these in case this cell was previously selected
-	cell.highlighted = NO;
-	cell.selected = NO;
-	
-    NSInteger row = [indexPath row];
-    
-    UserSongSession * session = nil;
-    
-    if ( _feedSelectorControl.selectedIndex == 0 )
+    if ( tableView == _feedTable )
     {
-        if ( row < [_friendFeed count] )
+
+        static NSString *ActivityCellIdentifier = @"ActivityFeedCell";
+        
+        ActivityFeedCell *cell = (ActivityFeedCell *)[tableView dequeueReusableCellWithIdentifier:ActivityCellIdentifier];
+        
+        if (cell == nil)
         {
-            session = [_friendFeed objectAtIndex:row];
+            cell = [[[ActivityFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ActivityCellIdentifier] autorelease];
+            
+            [[NSBundle mainBundle] loadNibNamed:@"ActivityFeedCell" owner:cell options:nil];
+            
+            [cell setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
+            [cell.accessoryView setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
         }
+        
+        // Clear these in case this cell was previously selected
+        cell.highlighted = NO;
+        cell.selected = NO;
+        
+        NSInteger row = [indexPath row];
+        
+        UserSongSession * session = nil;
+        
+        if ( _feedSelectorControl.selectedIndex == 0 )
+        {
+            if ( row < [_friendFeed count] )
+            {
+                session = [_friendFeed objectAtIndex:row];
+            }
+        }
+        
+        if ( _feedSelectorControl.selectedIndex == 1 )
+        {
+            if ( row < [_globalFeed count] )
+            {
+                session = [_globalFeed objectAtIndex:row];
+            }
+        }
+        
+        cell.userSongSession = session;
+        
+        [cell updateCell];
+        
+        return cell;
     }
     
-    if ( _feedSelectorControl.selectedIndex == 1 )
+    if ( tableView == _commentTable )
     {
-        if ( row < [_globalFeed count] )
+        static NSString *CommentCellIdentifier = @"UserCommentCell";
+        
+        UserCommentCell *cell = (UserCommentCell *)[tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier];
+        
+        if (cell == nil)
         {
-            session = [_globalFeed objectAtIndex:row];
+            cell = [[[UserCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier] autorelease];
+            
+            [[NSBundle mainBundle] loadNibNamed:@"UserCommentCell" owner:cell options:nil];
+            
+            [cell setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _feedTable.rowHeight-1)];
+            [cell.accessoryView setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _commentTable.rowHeight-1)];
         }
+        
+        // Clear these in case this cell was previously selected
+        cell.highlighted = NO;
+        cell.selected = NO;
+        
+        NSInteger row = [indexPath row];
+        
+        // get stuff
+        
+        [cell updateCell];
+        
+        return cell;
     }
-    
-    cell.userSongSession = session;
-    
-    [cell updateCell];
-    
-	return cell;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -717,22 +808,44 @@ extern TelemetryController * g_telemetryController;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-//    // We only want one cell to be clicked on at a time
-//    m_displayingCell = YES;
-//    
-    // Cause the row to spin until the session has started
-    ActivityFeedCell *cell = (ActivityFeedCell*)[_feedTable cellForRowAtIndexPath:indexPath];
+    if ( tableView == _feedTable )
+    {
+        
+        if ( _displayingCell == YES )
+        {
+            return;
+        }
+        
+        _displayingCell = YES;
+        
+        // Cause the row to spin until the session has started
+        ActivityFeedCell *cell = (ActivityFeedCell*)[_feedTable cellForRowAtIndexPath:indexPath];
+        
+        [cell.activityView startAnimating];
+        
+        UserSongSession *session = cell.userSongSession;
+        
+        NSString * xmpBlob = [g_fileController getFileOrDownloadSync:session.m_xmpFileId];
+        
+        if ( xmpBlob == nil )
+        {
+            [cell.activityView stopAnimating];
+            return;
+        }
+        
+        session.m_xmpBlob = xmpBlob;
+        
+        _playerViewController.xmpBlob = xmpBlob;
+        _playerViewController.userSong = session.m_userSong;
+        
+        [self presentViewController:_activityFeedModal animated:YES completion:^{ [cell.activityView stopAnimating]; }];
+        
+    }
     
-    [self legacyDisplayUserSongSession:cell.userSongSession];
-    
-//    [cell.m_timeLabel setHidden:YES];
-    
-    [cell.activityView startAnimating];
-    
-    [self performSelector:@selector(legacyDisplayUserSongSession:) withObject:cell.userSongSession afterDelay:0.05];
-    
-    [cell.activityView performSelector:@selector(stopAnimating) withObject:nil afterDelay:3.0];
-    
+    if ( tableView == _commentTable )
+    {
+        // derp
+    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -1074,33 +1187,33 @@ extern TelemetryController * g_telemetryController;
 
 #pragma mark - Misc
 
-- (void)legacyDisplayUserSongSession:(UserSongSession*)session
-{
-    
-    static SongPlayerViewController *songPlaybackViewController;
-    
-    // We could precache these, but adding a bit of sync latency here isn't really noticeable,
-    // and we won't use most of the xmp blobs anyways.
-    NSString * xmpBlob = [g_fileController getFileOrDownloadSync:session.m_xmpFileId];
-    
-    if ( xmpBlob == nil )
-    {
-        return;
-    }
-    
-    session.m_xmpBlob = xmpBlob;
-    
-    // Song playback view controller, loaded lazily so as not to slow down app load
-    if ( songPlaybackViewController == nil )
-    {
-        songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
-        songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
-//        songPlaybackViewController.m_popupDelegate = self;
-//        songPlaybackViewController.m_delegate = self;
-    }
-    
-    [songPlaybackViewController attachToSuperView:self.view andPlaySongSession:session];
-    
-}
+//- (void)legacyDisplayUserSongSession:(UserSongSession*)session
+//{
+//    
+//    static SongPlayerViewController *songPlaybackViewController;
+//    
+//    // We could precache these, but adding a bit of sync latency here isn't really noticeable,
+//    // and we won't use most of the xmp blobs anyways.
+//    NSString * xmpBlob = [g_fileController getFileOrDownloadSync:session.m_xmpFileId];
+//    
+//    if ( xmpBlob == nil )
+//    {
+//        return;
+//    }
+//    
+//    session.m_xmpBlob = xmpBlob;
+//    
+//    // Song playback view controller, loaded lazily so as not to slow down app load
+//    if ( songPlaybackViewController == nil )
+//    {
+//        songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
+//        songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
+////        songPlaybackViewController.m_popupDelegate = self;
+////        songPlaybackViewController.m_delegate = self;
+//    }
+//    
+//    [songPlaybackViewController attachToSuperView:self.view andPlaySongSession:session];
+//    
+//}
 
 @end

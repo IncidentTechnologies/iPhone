@@ -8,6 +8,8 @@
 
 #import "SlidingModalViewController.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @interface SlidingModalViewController ()
 
 @end
@@ -69,21 +71,24 @@
 - (void)startSlideUp
 {
     // Start off screen
-    _contentView.transform = CGAffineTransformMakeTranslation(0, _contentView.frame.size.height);
+//    _contentView.transform = CGAffineTransformMakeTranslation(0, _contentView.frame.size.height);
+    _contentView.layer.transform = CATransform3DMakeTranslation( 0, _contentView.frame.size.height, 0 );
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3f];
     
     // Slide up from the bottom of the screen
-    _contentView.transform = CGAffineTransformIdentity;
-    
+//    _contentView.transform = CGAffineTransformIdentity;
+    _contentView.layer.transform = CATransform3DIdentity;
+
     [UIView commitAnimations];
 }
 
 - (void)startSlideDown
 {
     // Start on the screen
-    _contentView.transform = CGAffineTransformIdentity;
+//    _contentView.transform = CGAffineTransformIdentity;
+    _contentView.layer.transform = CATransform3DIdentity;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3f];
@@ -93,9 +98,10 @@
     // Slide off the bottom of the screen
     // For some reason, transform isn't working properly. Might be Apple bug?
 //    _contentView.transform = CGAffineTransformMakeTranslation(0, _contentView.frame.size.height);
-    
+    _contentView.layer.transform = CATransform3DMakeTranslation( 0, _contentView.frame.size.height, 0 );
+
     // Animating the center is fine.
-    _contentView.center = CGPointMake(_contentView.center.x, _contentView.center.y+_contentView.frame.size.height);
+//    _contentView.center = CGPointMake(_contentView.center.x, _contentView.center.y+_contentView.frame.size.height);
     
     [UIView commitAnimations];
 }

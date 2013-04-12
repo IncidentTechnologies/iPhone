@@ -31,6 +31,7 @@
 
 // Modal
 @property (retain, nonatomic) IBOutlet SlidingModalViewController *activityFeedModal;
+@property (retain, nonatomic) IBOutlet UIView *songPlayerView;
 
 // Panels
 @property (retain, nonatomic) IBOutlet UIView *loggedoutLeftPanel;
@@ -83,5 +84,16 @@
 @property (retain, nonatomic) IBOutlet SelectorControl *feedSelectorControl;
 
 - (IBAction)feedSelectorChanged:(id)sender;
+
+// Modal
+@property (retain, nonatomic) IBOutlet UIButton *modalMenuButton;
+@property (retain, nonatomic) IBOutlet UIButton *modalVolumeButton;
+@property (retain, nonatomic) IBOutlet UIButton *modalShortcutButton;
+@property (retain, nonatomic) IBOutlet UIView *modalVolumeView;
+@property (retain, nonatomic) IBOutlet UITableView *commentTable;
+
+- (IBAction)closeModalButtonClicked:(id)sender;
+- (IBAction)volumeButtonClicked:(id)sender;
+- (IBAction)shortcutButtonClicked:(id)sender;
 
 @end

@@ -2106,6 +2106,12 @@
 		ECCC03A2170FBA140021DB00 /* InvisibleTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC03A0170FBA130021DB00 /* InvisibleTrack.png */; };
 		ECE0137E16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
 		ECE0137F16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE0137D16E13AB0002E6D4B /* PlayResultsScreenMenuUpdate.png */; };
+		ECE831FB171764C0006E2391 /* UserCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE831FA171764C0006E2391 /* UserCommentCell.m */; };
+		ECE831FC171764C0006E2391 /* UserCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE831FA171764C0006E2391 /* UserCommentCell.m */; };
+		ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE831FE1717653E006E2391 /* UserCommentCell.xib */; };
+		ECE832001717653E006E2391 /* UserCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE831FE1717653E006E2391 /* UserCommentCell.xib */; };
+		ECE8320217177026006E2391 /* CloseXButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8320117177026006E2391 /* CloseXButton.png */; };
+		ECE8320317177026006E2391 /* CloseXButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8320117177026006E2391 /* CloseXButton.png */; };
 		ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
 		ECE9D23416FBAF2600BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
 		ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */; };
@@ -3267,6 +3273,10 @@
 		ECE5643913BD85DE00FEF024 /* StoreListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreListCell.xib; sourceTree = "<group>"; };
 		ECE5644213BE933F00FEF024 /* StorePurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorePurchaseViewController.h; sourceTree = "<group>"; };
 		ECE5644313BE934900FEF024 /* StorePurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorePurchaseViewController.m; sourceTree = "<group>"; };
+		ECE831F9171764C0006E2391 /* UserCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCommentCell.h; sourceTree = "<group>"; };
+		ECE831FA171764C0006E2391 /* UserCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCommentCell.m; sourceTree = "<group>"; };
+		ECE831FE1717653E006E2391 /* UserCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCommentCell.xib; sourceTree = "<group>"; };
+		ECE8320117177026006E2391 /* CloseXButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseXButton.png; path = Resources/Images/General/CloseXButton.png; sourceTree = SOURCE_ROOT; };
 		ECE9D23016FBAF2500BB6C53 /* SongSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSelectionViewController.h; sourceTree = "<group>"; };
 		ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSelectionViewController.m; sourceTree = "<group>"; };
 		ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongSelectionViewController.xib; sourceTree = "<group>"; };
@@ -4115,6 +4125,9 @@
 				EC0BAD8216F18AA000E567A6 /* ActivityFeedCell.h */,
 				EC0BAD8316F18AA000E567A6 /* ActivityFeedCell.m */,
 				EC0BAD8616F18B3400E567A6 /* ActivityFeedCell.xib */,
+				ECE831F9171764C0006E2391 /* UserCommentCell.h */,
+				ECE831FA171764C0006E2391 /* UserCommentCell.m */,
+				ECE831FE1717653E006E2391 /* UserCommentCell.xib */,
 			);
 			name = TitleNavigationController;
 			sourceTree = "<group>";
@@ -4122,6 +4135,7 @@
 		EC0BAD3516EEA06600E567A6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ECE8320117177026006E2391 /* CloseXButton.png */,
 				EC0BADB816F7A3E000E567A6 /* PlayButtonVideo.png */,
 				EC0BADBB16F910F200E567A6 /* FaceBookButton.png */,
 				EC0BADBC16F910F200E567A6 /* SignUp_CircleButton.png */,
@@ -6189,6 +6203,8 @@
 				EC69BA4317162163004E982F /* PauseButtonVideo.png in Resources */,
 				9DEB90501714D66100A7C0CF /* EffectsOffButton.png in Resources */,
 				9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
+				ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */,
+				ECE8320217177026006E2391 /* CloseXButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7130,6 +7146,8 @@
 				EC69BA4417162163004E982F /* PauseButtonVideo.png in Resources */,
 				9DEB90511714D66100A7C0CF /* EffectsOffButton.png in Resources */,
 				9DEB90581714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
+				ECE832001717653E006E2391 /* UserCommentCell.xib in Resources */,
+				ECE8320317177026006E2391 /* CloseXButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7252,6 +7270,7 @@
 				EC69BA1D17138B2C004E982F /* PlayerViewController.m in Sources */,
 				EC69BA3C1715F3F8004E982F /* UIView+Gtar.m in Sources */,
 				9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
+				ECE831FB171764C0006E2391 /* UserCommentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7371,6 +7390,7 @@
 				EC69BA1E17138B2C004E982F /* PlayerViewController.m in Sources */,
 				EC69BA3D1715F3F8004E982F /* UIView+Gtar.m in Sources */,
 				9DE6B34C1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
+				ECE831FC171764C0006E2391 /* UserCommentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

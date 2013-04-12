@@ -87,6 +87,11 @@ extern UserController * g_userController;
     
     [_easyButton setEnabled:NO];
     
+    // Adjust the images in the buttons
+    [_closeModalButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_instrumentButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
     // Download any files we are missing
     if ( [_userSongArray count] > 0 )
     {
@@ -104,25 +109,24 @@ extern UserController * g_userController;
 {
     [super viewDidLayoutSubviews];
     
-    [_closeModalButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_instrumentButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    
-    _closeModalButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
-    _volumeButton.imageView.transform = CGAffineTransformMakeScale( 0.6, 0.6 );
-    _instrumentButton.imageView.transform = CGAffineTransformMakeScale( 0.7, 0.7 );
-    
+//    _closeModalButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
+//    _volumeButton.imageView.transform = CGAffineTransformMakeScale( 0.6, 0.6 );
+//    _instrumentButton.imageView.transform = CGAffineTransformMakeScale( 0.7, 0.7 );
+//    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
-    
-    [_volumeViewController attachToSuperview:_volumeView];
-    
-    _volumeView.userInteractionEnabled = NO;
+    if ( _volumeViewController == nil )
+    {
+        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+        
+        [_volumeViewController attachToSuperview:_volumeView];
+        
+        _volumeView.userInteractionEnabled = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -162,6 +166,8 @@ extern UserController * g_userController;
 
 - (IBAction)startButtonClicked:(id)sender
 {
+    [_playerViewController endPlayback];
+
     [self dismissViewControllerAnimated:NO completion:nil];
     
     [self startSong:_currentUserSong withDifficulty:_currentDifficulty];
