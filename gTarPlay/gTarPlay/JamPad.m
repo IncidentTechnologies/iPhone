@@ -54,32 +54,32 @@
 	double ledWidth = self.frame.size.width / JAM_PAD_WIDTH;
 	double ledHeight = self.frame.size.height / JAM_PAD_HEIGHT;
 	
-	m_ledOff = [[UIImage imageNamed:@"jam_pad_offlight.png"] retain];
-              
-    m_ledOn = [[UIImage imageNamed:@"JamPadOn.png"] retain];
-	
 	for ( unsigned int h = 0; h < JAM_PAD_HEIGHT; h++ )
 	{
 		for ( unsigned int w = 0; w < JAM_PAD_WIDTH; w++ )
 		{
 			CGRect fr = CGRectMake( w * ledWidth, h * ledHeight, ledWidth, ledHeight);
 			
-			UIImageView * image;
-
-			image = [[UIImageView alloc] initWithFrame:fr];
-			image.image = m_ledOff;
-			m_ledOffGrid[h][w] = image;
+            NSInteger offset = 2;
+            
+            UIView *view = [[UIView alloc] initWithFrame:fr];
+            view.backgroundColor = [UIColor colorWithRed:(50/255.0) green:(59/255.0) blue:(66/255.0) alpha:1.0];
+            UIView *innerView = [[UIView alloc] initWithFrame:CGRectMake(offset, offset, ledWidth - 2*offset, ledHeight - 2*offset)];
+            innerView.backgroundColor = [UIColor colorWithRed:(77/255.0) green:(91/255.0) blue:(100/255.0) alpha:1.0];
+            [view addSubview:innerView];
+			m_ledOffGrid[h][w] = view;
 			
-			[self addSubview:image];
+			[self addSubview:view];
 			
-			image = [[UIImageView alloc] initWithFrame:fr];
-			image.image = m_ledOn;
-			image.alpha = 0.0;
-
-			m_ledOnGrid[h][w] = image;
+			view = [[UIView alloc] initWithFrame:fr];
+            view.backgroundColor = [UIColor colorWithRed:(50/255.0) green:(59/255.0) blue:(66/255.0) alpha:1.0];
+            innerView = [[UIView alloc] initWithFrame:CGRectMake(offset, offset, ledWidth - 2*offset, ledHeight - 2*offset)];
+            innerView.backgroundColor = [UIColor colorWithRed:(1/255.0) green:(161/255.0) blue:(223/255.0) alpha:1.0];
+            [view addSubview:innerView];
+			view.alpha = 0.0;
+			m_ledOnGrid[h][w] = view;
 			
-			[self insertSubview:image aboveSubview:m_ledOffGrid[h][w] ];
-			
+			[self insertSubview:view aboveSubview:m_ledOffGrid[h][w]];
 		}
 		
 	}
@@ -95,7 +95,7 @@
 		for ( unsigned int w = 0; w < JAM_PAD_WIDTH; w++ )
 		{
 
-			UIImageView * image;
+			UIView * image;
 			image = m_ledOffGrid[h][w];
 			[image removeFromSuperview];
 			[image release];
@@ -165,8 +165,8 @@
 	// if last decrement ...
 	if ( m_ledRefCount[height][width] == 0 )
 	{
-		UIImageView * imageOn = m_ledOnGrid[height][width];
-		UIImageView * imageOff = m_ledOffGrid[height][width];
+		UIView * imageOn = m_ledOnGrid[height][width];
+		UIView * imageOff = m_ledOffGrid[height][width];
 	
 		[UIImageView beginAnimations:nil context:NULL];
 		[UIImageView setAnimationDuration:0.5f];
@@ -186,8 +186,8 @@
 	// if this is the first increment..
 	if ( m_ledRefCount[height][width] == 1 )
 	{
-		UIImageView * imageOn = m_ledOnGrid[height][width];
-		UIImageView * imageOff = m_ledOffGrid[height][width];
+		UIView * imageOn = m_ledOnGrid[height][width];
+		UIView * imageOff = m_ledOffGrid[height][width];
         
 //		[UIImageView beginAnimations:nil context:NULL];
 //		[UIImageView setAnimationDuration:0.5f];

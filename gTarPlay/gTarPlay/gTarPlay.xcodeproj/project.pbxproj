@@ -791,12 +791,6 @@
 		EC24DF00161A8A1B00016B78 /* EffectSelectOnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91976149159DF00BE8751 /* EffectSelectOnButton.png */; };
 		EC24DF01161A8A1B00016B78 /* FreePlayBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91978149159DF00BE8751 /* FreePlayBG.png */; };
 		EC24DF02161A8A1B00016B78 /* WETDRY_Border.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD9197C149159DF00BE8751 /* WETDRY_Border.png */; };
-		EC24DF03161A8A1E00016B78 /* JamPadOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DBF4927150ADE6400F0AFD7 /* JamPadOn.png */; };
-		EC24DF04161A8A1E00016B78 /* JamSquare3.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D98143E5889001729A3 /* JamSquare3.png */; };
-		EC24DF05161A8A1E00016B78 /* JamSquare2.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D94143E51E4001729A3 /* JamSquare2.png */; };
-		EC24DF06161A8A1E00016B78 /* JamSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D90143E4D90001729A3 /* JamSquare.png */; };
-		EC24DF07161A8A1E00016B78 /* jam_pad_offlight.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D7D143E438E001729A3 /* jam_pad_offlight.png */; };
-		EC24DF08161A8A1E00016B78 /* jam_pad_onlight.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D7E143E438E001729A3 /* jam_pad_onlight.png */; };
 		EC24DF09161A8A2300016B78 /* ShareButtonPRESSEDRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFFB41415ED712000951BD5 /* ShareButtonPRESSEDRev.png */; };
 		EC24DF0A161A8A2300016B78 /* ShareButtonRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFFB41515ED712000951BD5 /* ShareButtonRev.png */; };
 		EC24DF0B161A8A2300016B78 /* VolumeSliderRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFFB41615ED712000951BD5 /* VolumeSliderRev.png */; };
@@ -1802,12 +1796,6 @@
 		ECC120D0162D07AD001A231A /* EffectSelectOnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91976149159DF00BE8751 /* EffectSelectOnButton.png */; };
 		ECC120D1162D07AD001A231A /* FreePlayBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD91978149159DF00BE8751 /* FreePlayBG.png */; };
 		ECC120D2162D07AD001A231A /* WETDRY_Border.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD9197C149159DF00BE8751 /* WETDRY_Border.png */; };
-		ECC120D3162D07AD001A231A /* JamPadOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DBF4927150ADE6400F0AFD7 /* JamPadOn.png */; };
-		ECC120D4162D07AD001A231A /* JamSquare3.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D98143E5889001729A3 /* JamSquare3.png */; };
-		ECC120D5162D07AD001A231A /* JamSquare2.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D94143E51E4001729A3 /* JamSquare2.png */; };
-		ECC120D6162D07AD001A231A /* JamSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D90143E4D90001729A3 /* JamSquare.png */; };
-		ECC120D7162D07AD001A231A /* jam_pad_offlight.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D7D143E438E001729A3 /* jam_pad_offlight.png */; };
-		ECC120D8162D07AD001A231A /* jam_pad_onlight.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAB6D7E143E438E001729A3 /* jam_pad_onlight.png */; };
 		ECC120D9162D07AD001A231A /* ShareButtonPRESSEDRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFFB41415ED712000951BD5 /* ShareButtonPRESSEDRev.png */; };
 		ECC120DA162D07AD001A231A /* ShareButtonRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFFB41515ED712000951BD5 /* ShareButtonRev.png */; };
 		ECC120DB162D07AD001A231A /* VolumeSliderRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFFB41615ED712000951BD5 /* VolumeSliderRev.png */; };
@@ -2597,7 +2585,6 @@
 		9DA86ED81582D3230015ED49 /* Strat 102.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strat 102.mp3"; path = "Strat/Strat 102.mp3"; sourceTree = "<group>"; };
 		9DA86ED91582D3230015ED49 /* Strat 103.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strat 103.mp3"; path = "Strat/Strat 103.mp3"; sourceTree = "<group>"; };
 		9DB82FA215ACE535002A8B34 /* Knob_BlueLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Knob_BlueLine.png; path = images/FreePlay/Knob_BlueLine.png; sourceTree = "<group>"; };
-		9DBF4927150ADE6400F0AFD7 /* JamPadOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = JamPadOn.png; path = images/FreePlay/JamPadOn.png; sourceTree = "<group>"; };
 		9DC994DB15C9A852008C8948 /* ExitButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ExitButton.png; path = images/FreePlay/ExitButton.png; sourceTree = "<group>"; };
 		9DC994DF15C9E4C3008C8948 /* SwitchDownFree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SwitchDownFree.png; path = images/FreePlay/SwitchDownFree.png; sourceTree = "<group>"; };
 		9DC994E015C9E4C3008C8948 /* SwitchUpFree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SwitchUpFree.png; path = images/FreePlay/SwitchUpFree.png; sourceTree = "<group>"; };
@@ -3169,15 +3156,10 @@
 		ECA25ABA142C36600008DAC6 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
 		ECA25ABB142C36600008DAC6 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		ECA692C81540F9030096D42C /* VideoFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VideoFrame.png; sourceTree = "<group>"; };
-		ECAB6D7D143E438E001729A3 /* jam_pad_offlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jam_pad_offlight.png; sourceTree = "<group>"; };
-		ECAB6D7E143E438E001729A3 /* jam_pad_onlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jam_pad_onlight.png; sourceTree = "<group>"; };
 		ECAB6D86143E48F9001729A3 /* XYInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYInputView.h; sourceTree = "<group>"; };
 		ECAB6D87143E48F9001729A3 /* XYInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYInputView.m; sourceTree = "<group>"; };
 		ECAB6D88143E48F9001729A3 /* JamPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JamPad.h; sourceTree = "<group>"; };
 		ECAB6D89143E48F9001729A3 /* JamPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JamPad.m; sourceTree = "<group>"; };
-		ECAB6D90143E4D90001729A3 /* JamSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JamSquare.png; sourceTree = "<group>"; };
-		ECAB6D94143E51E4001729A3 /* JamSquare2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JamSquare2.png; sourceTree = "<group>"; };
-		ECAB6D98143E5889001729A3 /* JamSquare3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JamSquare3.png; sourceTree = "<group>"; };
 		ECAB6DCD145B287A001729A3 /* SongPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongPreviewView.h; sourceTree = "<group>"; };
 		ECAB6DCE145B287A001729A3 /* SongPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPreviewView.m; sourceTree = "<group>"; };
 		ECAB6DD2145B77A4001729A3 /* SongPreviewScrubberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongPreviewScrubberView.h; sourceTree = "<group>"; };
@@ -4961,16 +4943,10 @@
 		ECAB6D85143E48DF001729A3 /* JamPad */ = {
 			isa = PBXGroup;
 			children = (
-				9DBF4927150ADE6400F0AFD7 /* JamPadOn.png */,
 				ECAB6D88143E48F9001729A3 /* JamPad.h */,
 				ECAB6D89143E48F9001729A3 /* JamPad.m */,
 				ECAB6D86143E48F9001729A3 /* XYInputView.h */,
 				ECAB6D87143E48F9001729A3 /* XYInputView.m */,
-				ECAB6D98143E5889001729A3 /* JamSquare3.png */,
-				ECAB6D94143E51E4001729A3 /* JamSquare2.png */,
-				ECAB6D90143E4D90001729A3 /* JamSquare.png */,
-				ECAB6D7D143E438E001729A3 /* jam_pad_offlight.png */,
-				ECAB6D7E143E438E001729A3 /* jam_pad_onlight.png */,
 			);
 			name = JamPad;
 			sourceTree = "<group>";
@@ -5906,12 +5882,6 @@
 				EC24DF00161A8A1B00016B78 /* EffectSelectOnButton.png in Resources */,
 				EC24DF01161A8A1B00016B78 /* FreePlayBG.png in Resources */,
 				EC24DF02161A8A1B00016B78 /* WETDRY_Border.png in Resources */,
-				EC24DF03161A8A1E00016B78 /* JamPadOn.png in Resources */,
-				EC24DF04161A8A1E00016B78 /* JamSquare3.png in Resources */,
-				EC24DF05161A8A1E00016B78 /* JamSquare2.png in Resources */,
-				EC24DF06161A8A1E00016B78 /* JamSquare.png in Resources */,
-				EC24DF07161A8A1E00016B78 /* jam_pad_offlight.png in Resources */,
-				EC24DF08161A8A1E00016B78 /* jam_pad_onlight.png in Resources */,
 				EC24DF09161A8A2300016B78 /* ShareButtonPRESSEDRev.png in Resources */,
 				EC24DF0A161A8A2300016B78 /* ShareButtonRev.png in Resources */,
 				EC24DF0B161A8A2300016B78 /* VolumeSliderRev.png in Resources */,
@@ -6850,12 +6820,6 @@
 				ECC120D0162D07AD001A231A /* EffectSelectOnButton.png in Resources */,
 				ECC120D1162D07AD001A231A /* FreePlayBG.png in Resources */,
 				ECC120D2162D07AD001A231A /* WETDRY_Border.png in Resources */,
-				ECC120D3162D07AD001A231A /* JamPadOn.png in Resources */,
-				ECC120D4162D07AD001A231A /* JamSquare3.png in Resources */,
-				ECC120D5162D07AD001A231A /* JamSquare2.png in Resources */,
-				ECC120D6162D07AD001A231A /* JamSquare.png in Resources */,
-				ECC120D7162D07AD001A231A /* jam_pad_offlight.png in Resources */,
-				ECC120D8162D07AD001A231A /* jam_pad_onlight.png in Resources */,
 				ECC120D9162D07AD001A231A /* ShareButtonPRESSEDRev.png in Resources */,
 				ECC120DA162D07AD001A231A /* ShareButtonRev.png in Resources */,
 				ECC120DB162D07AD001A231A /* VolumeSliderRev.png in Resources */,

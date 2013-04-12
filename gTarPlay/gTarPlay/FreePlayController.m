@@ -323,10 +323,10 @@ extern TelemetryController * g_telemetryController;
     [m_LEDTab addTransparentAreaWithXmin:m_LEDTab.frame.size.width - 30 xMax:m_LEDTab.frame.size.width yMin:225 yMax:m_LEDTab.frame.size.height];
     [m_menuTab addTransparentAreaWithXmin:(m_menuTab.frame.size.width - 30) xMax:m_menuTab.frame.size.width yMin:0 yMax:225];
 
-    [self.view addSubview:m_effectsTab];
+    /*[self.view addSubview:m_effectsTab];
     [self.view addSubview:m_instrumentsTab];
     [self.view addSubview:m_LEDTab];
-    [self.view addSubview:m_menuTab];
+    [self.view addSubview:m_menuTab];*/
     
     [m_instrumentsScroll setBackgroundColor:[UIColor clearColor]];
     NSArray *ar = [g_audioController getInstrumentNames];
