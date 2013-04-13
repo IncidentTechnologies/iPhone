@@ -18,6 +18,7 @@
 
 @property (retain, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
 
+@property (retain, nonatomic) IBOutlet UIView *topBar;
 @property (retain, nonatomic) IBOutlet UIButton *titleArtistButton;
 @property (retain, nonatomic) IBOutlet UIButton *skillButton;
 @property (retain, nonatomic) IBOutlet UIButton *scoreButton;

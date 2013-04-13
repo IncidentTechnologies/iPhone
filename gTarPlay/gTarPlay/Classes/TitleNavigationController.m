@@ -24,6 +24,7 @@
 
 #import "TitleNavigationController.h"
 #import "SongSelectionViewController.h"
+#import "SocialViewController.h"
 #import "SongPlayerViewController.h"
 #import "VolumeViewController.h"
 
@@ -116,7 +117,7 @@ extern TelemetryController * g_telemetryController;
     
     [_playerViewController attachToSuperview:_songPlayerView];
     
-    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"HISTORY", @"GLOBAL", nil]];
+    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"FRIENDS", @"GLOBAL", nil]];
     
     // Apparently the view doesn't get resized to iPhone 5 dimensions until after viewDidLoad
 //    [self performSelectorOnMainThread:@selector(swapLeftPanel:) withObject:_gatekeeperLeftPanel waitUntilDone:NO];
@@ -458,7 +459,11 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)menuStoreButtonClicked:(id)sender
 {
     // Start store mode
+    SocialViewController *svc = [[SocialViewController alloc] initWithNibName:nil bundle:nil];
     
+    [self.navigationController pushViewController:svc animated:YES];
+    
+    [svc release];
 }
 
 - (IBAction)feedSelectorChanged:(id)sender

@@ -14,6 +14,7 @@
 #import "SlidingModalViewController.h"
 #import "VolumeViewController.h"
 #import "PlayerViewController.h"
+#import "UIView+Gtar.h"
 
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/CloudResponse.h>
@@ -75,6 +76,8 @@ extern UserController * g_userController;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [_topBar addShadow];
     
     _popupOptionsViewController = [[SelectSongOptionsPopupViewController alloc] initWithNibName:nil bundle:nil];
     
@@ -154,6 +157,7 @@ extern UserController * g_userController;
     [_hardButton release];
     [_volumeView release];
     [_songPlayerView release];
+    [_topBar release];
     [super dealloc];
 }
 

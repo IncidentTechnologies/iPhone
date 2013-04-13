@@ -76,7 +76,8 @@
     
     for ( NSInteger i = 0; i < [_titleArray count]; i++ )
     {
-        NSString *title = [_titleArray objectAtIndex:i];
+        id title = [_titleArray objectAtIndex:i];
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
         // +1 for the border between buttons
@@ -88,9 +89,23 @@
         button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         button.titleLabel.numberOfLines = 2;
         
-        [button setTitle:title forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+        if ( [title isKindOfClass:[NSAttributedString class]] == YES )
+        {
+            NSMutableAttributedString *whiteString = [[[NSMutableAttributedString alloc] initWithAttributedString:title] autorelease];
+            NSMutableAttributedString *grayString = [[[NSMutableAttributedString alloc] initWithAttributedString:title] autorelease];
+            
+            [whiteString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0,[whiteString length])];
+            [grayString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0,[grayString length])];
+            
+            [button setAttributedTitle:whiteString forState:UIControlStateNormal];
+            [button setAttributedTitle:grayString forState:UIControlStateHighlighted];
+        }
+        else
+        {
+            [button setTitle:title forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+        }
 //        [button setTitleShadowColor:[UIColor grayColor] forState:UIControlStateNormal];
 //        [button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
 //        

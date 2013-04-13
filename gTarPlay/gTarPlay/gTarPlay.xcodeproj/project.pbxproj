@@ -2118,6 +2118,10 @@
 		ECE832331718D6C0006E2391 /* Skill_YELLOW.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8322D1718D6C0006E2391 /* Skill_YELLOW.png */; };
 		ECE832361718D82C006E2391 /* Skill_GREY.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE832351718D82C006E2391 /* Skill_GREY.png */; };
 		ECE832371718D82C006E2391 /* Skill_GREY.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE832351718D82C006E2391 /* Skill_GREY.png */; };
+		ECE8323C1718EA34006E2391 /* SocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE8323A1718EA34006E2391 /* SocialViewController.m */; };
+		ECE8323D1718EA34006E2391 /* SocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE8323A1718EA34006E2391 /* SocialViewController.m */; };
+		ECE8323E1718EA34006E2391 /* SocialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE8323B1718EA34006E2391 /* SocialViewController.xib */; };
+		ECE8323F1718EA34006E2391 /* SocialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE8323B1718EA34006E2391 /* SocialViewController.xib */; };
 		ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
 		ECE9D23416FBAF2600BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
 		ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */; };
@@ -3286,6 +3290,9 @@
 		ECE8322C1718D6C0006E2391 /* Skill_RED.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Skill_RED.png; path = Resources/Images/SongSelection/Skill_RED.png; sourceTree = SOURCE_ROOT; };
 		ECE8322D1718D6C0006E2391 /* Skill_YELLOW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Skill_YELLOW.png; path = Resources/Images/SongSelection/Skill_YELLOW.png; sourceTree = SOURCE_ROOT; };
 		ECE832351718D82C006E2391 /* Skill_GREY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Skill_GREY.png; path = Resources/Images/SongSelection/Skill_GREY.png; sourceTree = SOURCE_ROOT; };
+		ECE832391718EA34006E2391 /* SocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialViewController.h; sourceTree = "<group>"; };
+		ECE8323A1718EA34006E2391 /* SocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialViewController.m; sourceTree = "<group>"; };
+		ECE8323B1718EA34006E2391 /* SocialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialViewController.xib; sourceTree = "<group>"; };
 		ECE9D23016FBAF2500BB6C53 /* SongSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSelectionViewController.h; sourceTree = "<group>"; };
 		ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSelectionViewController.m; sourceTree = "<group>"; };
 		ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongSelectionViewController.xib; sourceTree = "<group>"; };
@@ -3376,6 +3383,7 @@
 		080E96DDFE201D6D7F000001 /* App Source */ = {
 			isa = PBXGroup;
 			children = (
+				ECE832381718EA0A006E2391 /* SocialViewController */,
 				EC0BAD8116F1791300E567A6 /* General UI */,
 				EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */,
 				EC0BAD8016F14A7800E567A6 /* SongSelectionViewController */,
@@ -5159,6 +5167,16 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		ECE832381718EA0A006E2391 /* SocialViewController */ = {
+			isa = PBXGroup;
+			children = (
+				ECE832391718EA34006E2391 /* SocialViewController.h */,
+				ECE8323A1718EA34006E2391 /* SocialViewController.m */,
+				ECE8323B1718EA34006E2391 /* SocialViewController.xib */,
+			);
+			name = SocialViewController;
+			sourceTree = "<group>";
+		};
 		ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -6228,6 +6246,7 @@
 				ECE832301718D6C0006E2391 /* Skill_RED.png in Resources */,
 				ECE832321718D6C0006E2391 /* Skill_YELLOW.png in Resources */,
 				ECE832361718D82C006E2391 /* Skill_GREY.png in Resources */,
+				ECE8323E1718EA34006E2391 /* SocialViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7174,6 +7193,7 @@
 				ECE832311718D6C0006E2391 /* Skill_RED.png in Resources */,
 				ECE832331718D6C0006E2391 /* Skill_YELLOW.png in Resources */,
 				ECE832371718D82C006E2391 /* Skill_GREY.png in Resources */,
+				ECE8323F1718EA34006E2391 /* SocialViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7297,6 +7317,7 @@
 				EC69BA3C1715F3F8004E982F /* UIView+Gtar.m in Sources */,
 				9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 				ECE831FB171764C0006E2391 /* UserCommentCell.m in Sources */,
+				ECE8323C1718EA34006E2391 /* SocialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7417,6 +7438,7 @@
 				EC69BA3D1715F3F8004E982F /* UIView+Gtar.m in Sources */,
 				9DE6B34C1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 				ECE831FC171764C0006E2391 /* UserCommentCell.m in Sources */,
+				ECE8323D1718EA34006E2391 /* SocialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
