@@ -67,7 +67,7 @@
 
 - (IBAction)accountButtonClicked:(id)sender
 {
-    self.navigationController.
+
 }
 
 - (IBAction)changePicButtonClicked:(id)sender
