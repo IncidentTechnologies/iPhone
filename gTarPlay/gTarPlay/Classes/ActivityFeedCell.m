@@ -40,6 +40,12 @@ extern UserController * g_userController;
     // Configure the view for the selected state
 }
 
+- (IBAction)likeButtonClicked:(id)sender
+{
+    UIButton *button = (UIButton*)sender;
+    [button setSelected:!button.isSelected];
+}
+
 - (void)updateCell
 {
     UIImage * image = [g_fileController getFileOrDownloadSync:_userSongSession.m_userSong.m_imgFileId];
@@ -77,6 +83,7 @@ extern UserController * g_userController;
 - (void)dealloc
 {
     [_activityView release];
+    [_likeButton release];
     [super dealloc];
 }
 @end

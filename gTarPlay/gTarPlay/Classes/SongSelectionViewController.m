@@ -177,12 +177,15 @@ extern UserController * g_userController;
 {
     [_playerViewController endPlayback];
     [_songOptionsModal closeButtonClicked:sender];
+    [_volumeViewController closeVolumeView];
+    [_volumeView setUserInteractionEnabled:NO];
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
     // The volume view is obstructing stuff below it. Hide it until we need it.
     [_volumeViewController toggleVolumeView];
+    [_volumeView setUserInteractionEnabled:!_volumeView.userInteractionEnabled];
 }
 
 - (IBAction)instrumentButtonClicked:(id)sender

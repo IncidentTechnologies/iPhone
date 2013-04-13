@@ -10,6 +10,7 @@
 
 #import <AudioController/AudioController.h>
 
+#import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -39,9 +40,6 @@ extern AudioController * g_audioController;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Do any additional setup after loading the view from its nib.
-//    self.view.clipsToBounds = YES;
     
     //
     // Stylize the normal slider
@@ -103,7 +101,7 @@ extern AudioController * g_audioController;
     // (After rotating, width->height)
     CGRect newFrame = _sliderView.bounds;
     
-    newFrame.size.width = self.view.frame.size.height - 75;
+    newFrame.size.width = self.view.frame.size.height - 55;
     
     _sliderView.center = CGPointMake( self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 );
     
@@ -113,6 +111,18 @@ extern AudioController * g_audioController;
     
     _mpVolumeView.center = CGPointMake( _volumeView.frame.size.width / 2.0, _volumeView.frame.size.height / 2.0 );
     
+}
+
+- (void)dealloc
+{
+    [_mpVolumeView release];
+    [_sliderView release];
+    [_volumeSlider release];
+    [_volumeView release];
+    [_volumeTrackView release];
+    [_triangleIndicator release];
+    [_contentView release];
+    [super dealloc];
 }
 
 #pragma mark - Slider methods
@@ -132,7 +142,7 @@ extern AudioController * g_audioController;
 {
     [self.view setFrame:rect];
     
-    self.view.layer.transform = CATransform3DMakeTranslation(0 , -self.view.frame.size.height, 0);
+    _contentView.layer.transform = CATransform3DMakeTranslation(0 , -self.view.frame.size.height, 0);
     
     [view addSubview:self.view];
     
@@ -140,6 +150,7 @@ extern AudioController * g_audioController;
     
     _isDown = NO;
     _isSliding = NO;
+    [_triangleIndicator setHidden:YES];
 }
 
 - (void)toggleVolumeView
@@ -161,30 +172,52 @@ extern AudioController * g_audioController;
     
     if ( _isDown == YES )
     {
-        self.view.layer.transform = CATransform3DIdentity;
+        _contentView.layer.transform = CATransform3DIdentity;
+        [_triangleIndicator setHidden:NO];
     }
     else
     {
-        self.view.layer.transform = CATransform3DMakeTranslation(0 , -self.view.frame.size.height, 0);
+        _contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
     }
     
     [UIView commitAnimations];
     
 }
 
+- (void)closeVolumeView
+{
+    if ( _isSliding )
+    {
+        // We don't want to slide multiple times at once
+        return;
+    }
+    
+    if ( _isDown == NO )
+    {
+        // Nothing to do
+        return;
+    }
+    
+    _isDown = NO;
+    
+    [_triangleIndicator setHidden:YES];
+    
+    _contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
+}
+
 - (void)setFrame:(CGRect)frame
 {
-    self.view.layer.transform = CATransform3DIdentity;
+    _contentView.layer.transform = CATransform3DIdentity;
     
     self.view.frame = frame;
     
     if ( _isDown == YES )
     {
-        self.view.layer.transform = CATransform3DIdentity;
+        _contentView.layer.transform = CATransform3DIdentity;
     }
     else
     {
-        self.view.layer.transform = CATransform3DMakeTranslation(0 , -self.view.frame.size.height, 0);
+        _contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
     }
 }
 
@@ -192,6 +225,10 @@ extern AudioController * g_audioController;
 {
     _displayed = _isDown;
     _isSliding = NO;
+    if ( _isDown == NO )
+    {
+        [_triangleIndicator setHidden:YES];
+    }
 }
 
 - (void)enableAppleSlider
@@ -210,13 +247,28 @@ extern AudioController * g_audioController;
     [_volumeSlider setHidden:NO];
 }
 
-- (void)dealloc
-{
-    [_mpVolumeView release];
-    [_sliderView release];
-    [_volumeSlider release];
-    [_volumeView release];
-    [_volumeTrackView release];
-    [super dealloc];
-}
+//- (UIImage *)drawTriangleInRect:(CGSize)size
+//{
+//    UIGraphicsBeginImageContext(size);
+//    
+//    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+//	
+//    // Draw the square itself and close the path
+//    CGContextBeginPath( contextRef );
+//    CGContextMoveToPoint(contextRef, 0, 0);
+//    CGContextAddLineToPoint( contextRef, size.width, 0 );
+//    CGContextAddLineToPoint( contextRef, size.width / 2.0, size.height );
+//    CGContextAddLineToPoint( contextRef, 0, 0 );
+//    
+//    CGContextClosePath( contextRef );
+//    CGContextSetFillColorWithColor( contextRef, [UIColor redColor].CGColor);
+//    CGContextFillPath( contextRef );
+//
+//    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+//    
+//    UIGraphicsEndImageContext();
+//    
+//    return image;
+//}
+
 @end

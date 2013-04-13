@@ -136,6 +136,7 @@ extern TelemetryController * g_telemetryController;
 //    _topBar.layer.shadowOpacity = 0.9;
     
     // Hide the widgets we don't need initially
+    [_menuDownArrow setHidden:YES];
     [_finishButton setHidden:YES];
     [_progressFillView setHidden:YES];
     
@@ -337,6 +338,7 @@ extern TelemetryController * g_telemetryController;
     [_instrumentButton release];
     [_instrumentLabel release];
     [_volumeSliderView release];
+    [_menuDownArrow release];
     [super dealloc];
 }
 
@@ -376,6 +378,7 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)volumeButtonClicked:(id)sender
 {
     [_volumeViewController toggleVolumeView];
+    [_volumeSliderView setUserInteractionEnabled:!_volumeSliderView.userInteractionEnabled];
 }
 
 - (IBAction)finishButtonClicked:(id)sender
@@ -427,10 +430,16 @@ extern TelemetryController * g_telemetryController;
     
     _menuIsOpen = !_menuIsOpen;
     
+    // Close the volume everytime we push the menu button
+    [_volumeViewController closeVolumeView];
+    [_volumeSliderView setUserInteractionEnabled:NO];
+
     if ( _menuIsOpen == YES )
     {
         [_metronomeTimer invalidate];
         _metronomeTimer = nil;
+        
+        [_menuDownArrow setHidden:NO];
         
         [self stopMainEventLoop];
         
@@ -452,6 +461,8 @@ extern TelemetryController * g_telemetryController;
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(menuSlideComplete)];
         
         _menuView.transform = CGAffineTransformMakeTranslation( 0, -_menuView.frame.size.height );
         
@@ -538,6 +549,11 @@ extern TelemetryController * g_telemetryController;
     _glView.alpha = 1.0f;
     
     [UIView commitAnimations];
+}
+
+- (void)menuSlideComplete
+{
+    [_menuDownArrow setHidden:YES];
 }
 
 - (void)startLicenseScroll

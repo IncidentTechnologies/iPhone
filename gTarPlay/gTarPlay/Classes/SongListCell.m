@@ -74,6 +74,19 @@
         [_songArtist setText:@"Unknown"];
     }
     
+    if ( _userSong.m_difficulty == 0)
+    {
+        _songSkill.image = [UIImage imageNamed:@"Skill_GREEN.png"];
+    }
+    else if ( _userSong.m_difficulty == 1)
+    {
+        _songSkill.image = [UIImage imageNamed:@"Skill_YELLOW.png"];
+    }
+    else
+    {
+        _songSkill.image = [UIImage imageNamed:@"Skill_RED.png"];
+    }
+
     [_songScore setText:[NSString stringWithFormat:@"%d", _playScore]];
     
 }
@@ -90,10 +103,13 @@
     
     _songTitle.alpha = gray;
     _songArtist.alpha = gray;
-    _songSkill.alpha = gray;
+//    _songSkill.alpha = gray;
     _songScore.alpha = gray;
     
     [_songScore setHidden:YES];
+    
+    _songSkill.image = [UIImage imageNamed:@"Skill_GREY.png"];
+
 }
 
 @end

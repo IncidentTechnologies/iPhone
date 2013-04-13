@@ -28,6 +28,9 @@
 @property (retain, nonatomic) IBOutlet UIView *leftPanel;
 @property (retain, nonatomic) IBOutlet UIView *videoRightPanel;
 @property (retain, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (retain, nonatomic) IBOutlet UIView *delayLoadingView;
+
+- (void)delayLoadingComplete;
 
 // Modal
 @property (retain, nonatomic) IBOutlet SlidingModalViewController *activityFeedModal;
@@ -91,9 +94,12 @@
 @property (retain, nonatomic) IBOutlet UIButton *modalShortcutButton;
 @property (retain, nonatomic) IBOutlet UIView *modalVolumeView;
 @property (retain, nonatomic) IBOutlet UITableView *commentTable;
+@property (retain, nonatomic) IBOutlet UIButton *modalLikeButton;
 
 - (IBAction)closeModalButtonClicked:(id)sender;
 - (IBAction)volumeButtonClicked:(id)sender;
 - (IBAction)shortcutButtonClicked:(id)sender;
+- (IBAction)modalLikeButtonClicked:(id)sender;
+- (IBAction)modalCommentButtonClicked:(id)sender;
 
 @end

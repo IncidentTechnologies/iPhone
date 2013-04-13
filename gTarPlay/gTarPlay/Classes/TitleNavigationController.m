@@ -109,7 +109,8 @@ extern TelemetryController * g_telemetryController;
     [_modalMenuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [_modalVolumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [_modalShortcutButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-
+    [_modalLikeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
     // Set up the player modal
     _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
     
@@ -209,6 +210,8 @@ extern TelemetryController * g_telemetryController;
 {
     [super viewDidLayoutSubviews];
     
+    [_currentLeftPanel setFrame:_leftPanel.bounds];
+    [_currentRightPanel setFrame:_rightPanel.bounds];
 //    _modalMenuButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
 //    _modalVolumeButton.imageView.transform = CGAffineTransformMakeScale( 0.6, 0.6 );
 //    _modalShortcutButton.imageView.transform = CGAffineTransformMakeScale( 0.7, 0.7 );
@@ -272,6 +275,8 @@ extern TelemetryController * g_telemetryController;
     [_modalShortcutButton release];
     [_modalVolumeView release];
     [_commentTable release];
+    [_modalLikeButton release];
+    [_delayLoadingView release];
     [super dealloc];
 }
 
@@ -608,17 +613,29 @@ extern TelemetryController * g_telemetryController;
 {
     [_playerViewController endPlayback];
     [_activityFeedModal closeButtonClicked:sender];
+    [_volumeViewController closeVolumeView];
+    [_modalVolumeView setUserInteractionEnabled:NO];
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
     [_volumeViewController toggleVolumeView];
+    [_modalVolumeView setUserInteractionEnabled:!_modalVolumeView.userInteractionEnabled];
 }
 
 - (IBAction)shortcutButtonClicked:(id)sender
 {
     [_playerViewController endPlayback];
 
+}
+
+- (IBAction)modalLikeButtonClicked:(id)sender
+{
+    [_modalLikeButton setSelected:!_modalLikeButton.isSelected];
+}
+
+- (IBAction)modalCommentButtonClicked:(id)sender
+{
 }
 
 #pragma mark - Movie Playback
@@ -1187,6 +1204,17 @@ extern TelemetryController * g_telemetryController;
 
 #pragma mark - Misc
 
+- (void)delayLoadingComplete
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:1.0f];
+    [UIView setAnimationDelegate:_delayLoadingView];
+    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+    
+    _delayLoadingView.alpha = 0.0f;
+    
+    [UIView commitAnimations];
+}
 //- (void)legacyDisplayUserSongSession:(UserSongSession*)session
 //{
 //    

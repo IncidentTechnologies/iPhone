@@ -2100,6 +2100,24 @@
 		ECE832001717653E006E2391 /* UserCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE831FE1717653E006E2391 /* UserCommentCell.xib */; };
 		ECE8320217177026006E2391 /* CloseXButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8320117177026006E2391 /* CloseXButton.png */; };
 		ECE8320317177026006E2391 /* CloseXButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8320117177026006E2391 /* CloseXButton.png */; };
+		ECE8321C1718905B006E2391 /* GreenVolume.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8321B1718905B006E2391 /* GreenVolume.png */; };
+		ECE8321D1718905B006E2391 /* GreenVolume.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8321B1718905B006E2391 /* GreenVolume.png */; };
+		ECE8322117189C1B006E2391 /* LikeOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8321F17189C1B006E2391 /* LikeOFF.png */; };
+		ECE8322217189C1B006E2391 /* LikeOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8321F17189C1B006E2391 /* LikeOFF.png */; };
+		ECE8322317189C1B006E2391 /* LikeON.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8322017189C1B006E2391 /* LikeON.png */; };
+		ECE8322417189C1B006E2391 /* LikeON.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8322017189C1B006E2391 /* LikeON.png */; };
+		ECE832261718A767006E2391 /* BlueMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE832251718A767006E2391 /* BlueMenu.png */; };
+		ECE832271718A767006E2391 /* BlueMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE832251718A767006E2391 /* BlueMenu.png */; };
+		ECE832291718BE81006E2391 /* Default-568hRot.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE832281718BE81006E2391 /* Default-568hRot.png */; };
+		ECE8322A1718BE81006E2391 /* Default-568hRot.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE832281718BE81006E2391 /* Default-568hRot.png */; };
+		ECE8322E1718D6C0006E2391 /* Skill_GREEN.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8322B1718D6C0006E2391 /* Skill_GREEN.png */; };
+		ECE8322F1718D6C0006E2391 /* Skill_GREEN.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8322B1718D6C0006E2391 /* Skill_GREEN.png */; };
+		ECE832301718D6C0006E2391 /* Skill_RED.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8322C1718D6C0006E2391 /* Skill_RED.png */; };
+		ECE832311718D6C0006E2391 /* Skill_RED.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8322C1718D6C0006E2391 /* Skill_RED.png */; };
+		ECE832321718D6C0006E2391 /* Skill_YELLOW.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8322D1718D6C0006E2391 /* Skill_YELLOW.png */; };
+		ECE832331718D6C0006E2391 /* Skill_YELLOW.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8322D1718D6C0006E2391 /* Skill_YELLOW.png */; };
+		ECE832361718D82C006E2391 /* Skill_GREY.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE832351718D82C006E2391 /* Skill_GREY.png */; };
+		ECE832371718D82C006E2391 /* Skill_GREY.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE832351718D82C006E2391 /* Skill_GREY.png */; };
 		ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
 		ECE9D23416FBAF2600BB6C53 /* SongSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */; };
 		ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */; };
@@ -3259,6 +3277,15 @@
 		ECE831FA171764C0006E2391 /* UserCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCommentCell.m; sourceTree = "<group>"; };
 		ECE831FE1717653E006E2391 /* UserCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCommentCell.xib; sourceTree = "<group>"; };
 		ECE8320117177026006E2391 /* CloseXButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseXButton.png; path = Resources/Images/General/CloseXButton.png; sourceTree = SOURCE_ROOT; };
+		ECE8321B1718905B006E2391 /* GreenVolume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenVolume.png; path = Resources/Images/General/VolumeView/GreenVolume.png; sourceTree = SOURCE_ROOT; };
+		ECE8321F17189C1B006E2391 /* LikeOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LikeOFF.png; path = Resources/Images/Title/LikeOFF.png; sourceTree = SOURCE_ROOT; };
+		ECE8322017189C1B006E2391 /* LikeON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LikeON.png; path = Resources/Images/Title/LikeON.png; sourceTree = SOURCE_ROOT; };
+		ECE832251718A767006E2391 /* BlueMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueMenu.png; path = Resources/Images/General/BlueMenu.png; sourceTree = SOURCE_ROOT; };
+		ECE832281718BE81006E2391 /* Default-568hRot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568hRot.png"; sourceTree = "<group>"; };
+		ECE8322B1718D6C0006E2391 /* Skill_GREEN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Skill_GREEN.png; path = Resources/Images/SongSelection/Skill_GREEN.png; sourceTree = SOURCE_ROOT; };
+		ECE8322C1718D6C0006E2391 /* Skill_RED.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Skill_RED.png; path = Resources/Images/SongSelection/Skill_RED.png; sourceTree = SOURCE_ROOT; };
+		ECE8322D1718D6C0006E2391 /* Skill_YELLOW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Skill_YELLOW.png; path = Resources/Images/SongSelection/Skill_YELLOW.png; sourceTree = SOURCE_ROOT; };
+		ECE832351718D82C006E2391 /* Skill_GREY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Skill_GREY.png; path = Resources/Images/SongSelection/Skill_GREY.png; sourceTree = SOURCE_ROOT; };
 		ECE9D23016FBAF2500BB6C53 /* SongSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSelectionViewController.h; sourceTree = "<group>"; };
 		ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSelectionViewController.m; sourceTree = "<group>"; };
 		ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongSelectionViewController.xib; sourceTree = "<group>"; };
@@ -3378,6 +3405,7 @@
 			isa = PBXGroup;
 			children = (
 				EC0BAD3316EE93AC00E567A6 /* Default-568h@2x.png */,
+				ECE832281718BE81006E2391 /* Default-568hRot.png */,
 				EC6BD1FF13F44E130068E25C /* gTarColors.h */,
 				EC9D6EBB14A11DC600AE374D /* Facebook */,
 				080E96DDFE201D6D7F000001 /* App Source */,
@@ -4117,6 +4145,8 @@
 		EC0BAD3516EEA06600E567A6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ECE8321F17189C1B006E2391 /* LikeOFF.png */,
+				ECE8322017189C1B006E2391 /* LikeON.png */,
 				ECE8320117177026006E2391 /* CloseXButton.png */,
 				EC0BADB816F7A3E000E567A6 /* PlayButtonVideo.png */,
 				EC0BADBB16F910F200E567A6 /* FaceBookButton.png */,
@@ -4130,6 +4160,7 @@
 		EC0BAD8016F14A7800E567A6 /* SongSelectionViewController */ = {
 			isa = PBXGroup;
 			children = (
+				ECE832341718D6CE006E2391 /* Images */,
 				ECE9D23016FBAF2500BB6C53 /* SongSelectionViewController.h */,
 				ECE9D23116FBAF2500BB6C53 /* SongSelectionViewController.m */,
 				ECE9D23216FBAF2500BB6C53 /* SongSelectionViewController.xib */,
@@ -5007,6 +5038,7 @@
 		ECCC036C170CD5480021DB00 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ECE8321B1718905B006E2391 /* GreenVolume.png */,
 				ECCC035D170CD53C0021DB00 /* EndCap_L.png */,
 				ECCC035E170CD53C0021DB00 /* EndCap_R.png */,
 				ECCC039D170F862B0021DB00 /* EndCap.png */,
@@ -5116,6 +5148,17 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		ECE832341718D6CE006E2391 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				ECE8322B1718D6C0006E2391 /* Skill_GREEN.png */,
+				ECE8322C1718D6C0006E2391 /* Skill_RED.png */,
+				ECE8322D1718D6C0006E2391 /* Skill_YELLOW.png */,
+				ECE832351718D82C006E2391 /* Skill_GREY.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -5140,6 +5183,7 @@
 		ECE9D24C1705252100BB6C53 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ECE832251718A767006E2391 /* BlueMenu.png */,
 				ECCC039A170F716F0021DB00 /* MenuPauseBGSubsection.jpg */,
 				ECCC0333170A493D0021DB00 /* DiffEasyButtonON.png */,
 				ECCC0334170A493D0021DB00 /* DiffHardButtonON.png */,
@@ -6175,6 +6219,15 @@
 				9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 				ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */,
 				ECE8320217177026006E2391 /* CloseXButton.png in Resources */,
+				ECE8321C1718905B006E2391 /* GreenVolume.png in Resources */,
+				ECE8322117189C1B006E2391 /* LikeOFF.png in Resources */,
+				ECE8322317189C1B006E2391 /* LikeON.png in Resources */,
+				ECE832261718A767006E2391 /* BlueMenu.png in Resources */,
+				ECE832291718BE81006E2391 /* Default-568hRot.png in Resources */,
+				ECE8322E1718D6C0006E2391 /* Skill_GREEN.png in Resources */,
+				ECE832301718D6C0006E2391 /* Skill_RED.png in Resources */,
+				ECE832321718D6C0006E2391 /* Skill_YELLOW.png in Resources */,
+				ECE832361718D82C006E2391 /* Skill_GREY.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7112,6 +7165,15 @@
 				9DEB90581714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 				ECE832001717653E006E2391 /* UserCommentCell.xib in Resources */,
 				ECE8320317177026006E2391 /* CloseXButton.png in Resources */,
+				ECE8321D1718905B006E2391 /* GreenVolume.png in Resources */,
+				ECE8322217189C1B006E2391 /* LikeOFF.png in Resources */,
+				ECE8322417189C1B006E2391 /* LikeON.png in Resources */,
+				ECE832271718A767006E2391 /* BlueMenu.png in Resources */,
+				ECE8322A1718BE81006E2391 /* Default-568hRot.png in Resources */,
+				ECE8322F1718D6C0006E2391 /* Skill_GREEN.png in Resources */,
+				ECE832311718D6C0006E2391 /* Skill_RED.png in Resources */,
+				ECE832331718D6C0006E2391 /* Skill_YELLOW.png in Resources */,
+				ECE832371718D82C006E2391 /* Skill_GREY.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

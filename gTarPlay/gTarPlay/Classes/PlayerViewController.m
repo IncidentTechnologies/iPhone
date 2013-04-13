@@ -39,7 +39,6 @@ extern GtarController *g_gtarController;
     if ( self )
     {
         // Custom initialization
-        _songPlaybackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
         _init = NO;
         _scrollable = YES;
     }
@@ -107,6 +106,12 @@ extern GtarController *g_gtarController;
 {
     [_xmpBlob release];
     _xmpBlob = [xmpBlob retain];
+    
+    // Do this now because the AC might not be ready sooner 
+    if ( _songPlaybackController == nil )
+    {
+        _songPlaybackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
+    }
     
     [_songPlaybackController startWithXmpBlob:_xmpBlob];
     [_songPlaybackController stopMainEventLoop];

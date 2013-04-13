@@ -16,6 +16,7 @@
 #import "SongViewController.h"
 #import "SongPlayerViewController.h"
 #import "RootViewController.h"
+#import "TitleNavigationController.h"
 
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/FileController.h>
@@ -327,6 +328,9 @@ TelemetryController * g_telemetryController;
     [g_audioController initializeAUGraph];
     
     NSLog(@"Finished delayed loading");
+    
+    TitleNavigationController *titleController = (TitleNavigationController*)m_navigationController.visibleViewController;
+    [titleController delayLoadingComplete];
     
 //    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
 //    

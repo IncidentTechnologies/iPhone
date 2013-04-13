@@ -16,8 +16,11 @@
 @property (retain, nonatomic) IBOutlet UILabel *name;
 @property (retain, nonatomic) IBOutlet UILabel *activity;
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
+@property (retain, nonatomic) IBOutlet UIButton *likeButton;
 
 @property (retain, nonatomic) UserSongSession *userSongSession;
+
+- (IBAction)likeButtonClicked:(id)sender;
 
 - (void)updateCell;
 

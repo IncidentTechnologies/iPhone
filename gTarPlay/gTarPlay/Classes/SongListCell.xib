@@ -43,7 +43,7 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUILabel" id="755410579">
 								<reference key="NSNextResponder" ref="536905438"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{14, 9}, {292, 24}}</string>
 								<reference key="NSSuperview" ref="536905438"/>
 								<reference key="NSWindow"/>
@@ -75,7 +75,7 @@
 							</object>
 							<object class="IBUILabel" id="664457683">
 								<reference key="NSNextResponder" ref="536905438"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{14, 33}, {292, 21}}</string>
 								<reference key="NSSuperview" ref="536905438"/>
 								<reference key="NSWindow"/>
@@ -123,7 +123,7 @@
 							<object class="IBUIImageView" id="660888172">
 								<reference key="NSNextResponder" ref="9224496"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{80, 60}</string>
+								<string key="NSFrame">{{20, 10}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="9224496"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="798969300"/>
@@ -133,7 +133,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">Bear_Brown.png</string>
+									<string key="NSResourceName">Skill_GREY.png</string>
 								</object>
 							</object>
 						</array>
@@ -205,7 +205,10 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="536905438"/>
-				<reference key="IBUIBackgroundColor" ref="806697474"/>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MC44NwA</bytes>
+				</object>
 				<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics" id="932834147">
 					<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>
 					<string key="IBUIDisplayName">Freeform</string>
@@ -215,13 +218,14 @@
 			<object class="IBUIView" id="908071897">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
-				<string key="NSFrameSize">{480, 60}</string>
+				<string key="NSFrameSize">{480, 37}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MC44MjA2NTIxNzM5IDAuODIwNjUyMTczOSAwLjgyMDY1MjE3MzkAA</bytes>
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MC44NwA</bytes>
 				</object>
 				<reference key="IBUISimulatedDestinationMetrics" ref="932834147"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -401,6 +405,7 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">222</int>
 						<reference key="object" ref="908071897"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">SelectedBackgroundView</string>
 					</object>
@@ -426,7 +431,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">223</int>
+			<int key="maxID">224</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -489,8 +494,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">Bear_Brown.png</string>
-			<string key="NS.object.0">{432, 432}</string>
+			<string key="NS.key.0">Skill_GREY.png</string>
+			<string key="NS.object.0">{69, 70}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
