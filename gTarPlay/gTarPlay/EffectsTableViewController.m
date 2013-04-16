@@ -85,6 +85,8 @@
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(162/255.0) blue:(54/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
     
+    
+    // Add on/off button to accessory view (right)
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [button  setImage:[UIImage imageNamed:@"EffectsOffButton.png"] forState:UIControlStateNormal];
@@ -92,13 +94,20 @@
     [button  setImage:[UIImage imageNamed:@"EffectsOnButton.png"] forState:UIControlStateSelected];
     [button  setImage:[UIImage imageNamed:@"EffectsOnButton.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
     
+    // Add click handler to button
     [button addTarget:self action:@selector(toggleEffect:) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    // Set button size. When adding view to accessoryView it is automatically
+    // centered in within the accessory view space, so no need to set buttons
+    // frame x, y coordinates
     button.frame = CGRectMake(0, 0, 40, 40);
     
+    // Set selected state of button based on effect on/off state.
+    Effect *effect = (Effect*)[[[self.audioController GetEffects] objectAtIndex:indexPath.row] pointerValue];
+    button.selected = effect->isOn() ? YES : NO;
+    
+    
     cell.accessoryView = button;
-    //[cell addSubview:button];
     
     return cell;
 }
@@ -124,10 +133,10 @@
     
     Effect *effect = (Effect*)[[[self.audioController GetEffects] objectAtIndex:effectNum] pointerValue];
     
-    // toggle senders selected state
+    // Toggle buttons selected state
     button.selected = !button.selected;
     
-    // set pass through of effect based on new state
+    // Set pass through of effect based on new state
     if ([button isSelected])
     {
         effect->SetPassThru(false);

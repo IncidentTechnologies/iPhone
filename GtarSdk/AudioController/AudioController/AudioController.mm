@@ -98,7 +98,6 @@ const float g_GraphSampleRate = 44100.0f;
 
         m_pTanhDistortion = new TanhDistortion(1.0, 1.0, g_GraphSampleRate);
         m_pTanhDistortion->SetPassThru(true);
-        //m_effects.push_back(m_pTanhDistortion);
        
         m_pOverdrive = new Overdrive(5.0, 1.0, g_GraphSampleRate);
         m_pOverdrive->SetPassThru(true);
@@ -113,7 +112,6 @@ const float g_GraphSampleRate = 44100.0f;
         m_pFuzzExpDistortion->SetPassThru(true);
         
         m_pEndBwFilter = new ButterWorthFilter(2, 8000, g_GraphSampleRate);
-        m_effects.push_back(m_pEndBwFilter);
         
         m_tempOut = new Float32[4096];
         

@@ -49,6 +49,11 @@ public:
         
     }
     
+    bool isOn()
+    {
+        return !m_fPassThrough;
+    }
+    
     virtual ~Effect()
     {
         
