@@ -7,12 +7,13 @@
 //
 
 #import "JamPad.h"
+#import "EffectsTableViewController.h"
 
 #import <UIKit/UIKit.h>
 
 @class AudioController;
 
-@interface InstrumentsAndEffectsViewController : UIViewController <XYInputViewDelegate>
+@interface InstrumentsAndEffectsViewController : UIViewController <XYInputViewDelegate, EffectSelectionDelegate>
 
 - (id)initWithAudioController:(AudioController*)AC;
 

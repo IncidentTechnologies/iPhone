@@ -10,9 +10,14 @@
 
 @class AudioController;
 
+@protocol EffectSelectionDelegate
+-(void) didSelectEffectAtIndex:(NSInteger)index;
+@end
+
 @interface EffectsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (retain, nonatomic) UITableView *tableView;
+@property (assign, nonatomic) id <EffectSelectionDelegate> delegate;
 
 - (id)initWithAudioController:(AudioController*)AC;
 

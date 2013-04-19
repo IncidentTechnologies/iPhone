@@ -114,9 +114,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSString *instrumentName = [self.instruments objectAtIndex:indexPath.row];
-    //[m_instrumentsScroll flickerSelectedItem];
-    //[self.audioController setSamplePackWithName:instrumentName withSelector:@selector(samplerFinishedLoadingCB:) andOwner:self];
+    [self.delegate didSelectEffectAtIndex:indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
