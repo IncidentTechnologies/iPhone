@@ -26,7 +26,12 @@ public:
     
     bool SetPassThru(bool state)
     {
-        return (m_fPassThrough = state);
+        m_fPassThrough = state;
+        if (state)
+        {
+            ClearOutEffect();
+        }
+        return true;
     }
     
     bool SetWet(double wet)
