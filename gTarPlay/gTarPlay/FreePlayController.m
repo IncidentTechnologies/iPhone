@@ -41,6 +41,11 @@ extern TelemetryController * g_telemetryController;
 @property (retain, nonatomic) IBOutlet UIView *mainContentView;
 @property (retain, nonatomic) UIViewController *currentMainContentVC;
 
+@property (retain, nonatomic) IBOutlet UIButton *menuButton;
+@property (retain, nonatomic) IBOutlet UIButton *volumeButton;
+@property (retain, nonatomic) IBOutlet UIButton *lightsButton;
+@property (retain, nonatomic) IBOutlet UIButton *effectsButton;
+@property (retain, nonatomic) IBOutlet UIButton *instrumentsButton;
 
 -(void) switchMainContentControllerToVC:(UIViewController*)newVC;
 
@@ -59,7 +64,6 @@ extern TelemetryController * g_telemetryController;
 @synthesize m_connectingView;
 @synthesize m_xParamLabel;
 @synthesize m_yParamLabel;
-@synthesize m_effectsTabButton;
 @synthesize m_effect1OnOff;
 @synthesize m_effect1Select;
 @synthesize m_effect1Name;
@@ -73,14 +77,11 @@ extern TelemetryController * g_telemetryController;
 @synthesize m_effect4Select;
 @synthesize m_effect4Name;
 @synthesize m_instrumentsTab;
-@synthesize m_instrumentsTabButton;
 @synthesize m_instrumentsScroll;
 @synthesize m_menuTab;
-@synthesize m_menuTabButton;
 @synthesize m_toneSlider;
 @synthesize m_bSpeakerRoute;
 @synthesize m_LEDTab;
-@synthesize m_LEDTabButton;
 @synthesize m_LEDGeneralSurface;
 @synthesize m_LEDFretSurface;
 @synthesize m_LEDStringSurface;
@@ -193,7 +194,6 @@ extern TelemetryController * g_telemetryController;
     [m_jamPad release];
     [m_wetSlider release];
     [m_effectsTab release];
-    [m_effectsTabButton release];
     [m_effect1OnOff release];
     [m_effect2OnOff release];
     [m_effect3OnOff release];
@@ -208,8 +208,6 @@ extern TelemetryController * g_telemetryController;
     [m_effect4Name release];
     [m_currentEffectName release];
     [m_instrumentsTab release];
-    [m_instrumentsTabButton release];
-    [m_menuTabButton release];
     [m_menuTab release];
     [m_toneSlider release];
     
@@ -224,8 +222,6 @@ extern TelemetryController * g_telemetryController;
     [m_LEDFretSurface release];
     [m_LEDStringSurface release];
     [m_LEDAllSurface release];
-    
-    [m_LEDTabButton release];
     
     if (m_LEDTimer != nil)
     {
@@ -249,6 +245,11 @@ extern TelemetryController * g_telemetryController;
 
     [_m_effectsScroll release];
     [_mainContentView release];
+    [_menuButton release];
+    [_volumeButton release];
+    [_lightsButton release];
+    [_effectsButton release];
+    [_instrumentsButton release];
 	[super dealloc];	
 }
 
@@ -262,6 +263,14 @@ extern TelemetryController * g_telemetryController;
     [self.mainContentView addSubview:self.instrumentsAndEffectsVC.view];
     [self.instrumentsAndEffectsVC didMoveToParentViewController:self];
     self.currentMainContentVC = self.instrumentsAndEffectsVC;
+    
+    // Set content mode so that UIButton images resize their width to be proportional
+    // to the height set in interface builder via the UIButtons content inset
+    [self.menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.lightsButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.effectsButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.instrumentsButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
 
     // images for slider
     UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
@@ -311,10 +320,6 @@ extern TelemetryController * g_telemetryController;
     [m_instrumentsTab setFrame:smallTabFrame];
     [m_menuTab setFrame:menuTabFrame];
     [m_LEDTab setFrame:largeTabFrame];
-    [m_effectsTabButton setSelected:NO];
-    [m_instrumentsTabButton setSelected:NO];
-    [m_menuTabButton setSelected:NO];
-    [m_LEDTabButton setSelected:NO];
     
     [m_effectsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_effectsTab.frame.size.width yMin:80 yMax:m_effectsTab.frame.size.height]; 
     [m_instrumentsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_instrumentsTab.frame.size.width yMin:0 yMax:80];
@@ -455,7 +460,6 @@ extern TelemetryController * g_telemetryController;
     self.m_connectingView = nil;
 
     [self setM_effectsTab:nil];
-    [self setM_effectsTabButton:nil];
     [self setM_effect1OnOff:nil];
     [self setM_effect2OnOff:nil];
     [self setM_effect3OnOff:nil];
@@ -469,7 +473,6 @@ extern TelemetryController * g_telemetryController;
     [self setM_effect3Name:nil];
     [self setM_effect4Name:nil];
     [self setM_currentEffectName:nil];
-    [self setM_menuTabButton:nil];
     [self setM_menuTab:nil];
     [self setM_toneSlider:nil];
     [self setM_instrumentsScroll:nil];
@@ -479,8 +482,6 @@ extern TelemetryController * g_telemetryController;
     [self setM_LEDFretSurface:nil];
     [self setM_LEDStringSurface:nil];
     [self setM_LEDAllSurface:nil];
-    
-    [self setM_LEDTabButton:nil];
     
     [self setM_audioRouteSwitch:nil];
     [self setM_scaleSwitch:nil];
@@ -1524,7 +1525,8 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)toggleLEDTab:(id)sender
 {
-    [self switchMainContentControllerToVC:self.lightsVC];
+    //[self switchMainContentControllerToVC:self.lightsVC];
+    
     /*
      OLD UI code
     // First toggle selected state

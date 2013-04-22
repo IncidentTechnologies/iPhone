@@ -62,6 +62,7 @@
 			
             NSInteger offset = 2;
             
+            // Off square
             UIView *view = [[UIView alloc] initWithFrame:fr];
             view.backgroundColor = [UIColor colorWithRed:(50/255.0) green:(59/255.0) blue:(66/255.0) alpha:1.0];
             UIView *innerView = [[UIView alloc] initWithFrame:CGRectMake(offset, offset, ledWidth - 2*offset, ledHeight - 2*offset)];
@@ -71,10 +72,11 @@
 			
 			[self addSubview:view];
 			
+            // On square
 			view = [[UIView alloc] initWithFrame:fr];
             view.backgroundColor = [UIColor colorWithRed:(50/255.0) green:(59/255.0) blue:(66/255.0) alpha:1.0];
             innerView = [[UIView alloc] initWithFrame:CGRectMake(offset, offset, ledWidth - 2*offset, ledHeight - 2*offset)];
-            innerView.backgroundColor = [UIColor colorWithRed:(1/255.0) green:(161/255.0) blue:(223/255.0) alpha:1.0];
+            innerView.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(162/255.0) blue:(54/255.0) alpha:1.0];
             [view addSubview:innerView];
 			view.alpha = 0.0;
 			m_ledOnGrid[h][w] = view;
