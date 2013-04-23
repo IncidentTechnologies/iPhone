@@ -29,6 +29,12 @@
 		9DEB90511714D66100A7C0CF /* EffectsOffButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB904F1714D66100A7C0CF /* EffectsOffButton.png */; };
 		9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB90561714D6B000A7C0CF /* EffectsOnButton.png */; };
 		9DEB90581714D6B000A7C0CF /* EffectsOnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB90561714D6B000A7C0CF /* EffectsOnButton.png */; };
+		9DF148271725EFDB0056A6D1 /* EffectsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148261725EFDB0056A6D1 /* EffectsIcon.png */; };
+		9DF148281725EFDB0056A6D1 /* EffectsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148261725EFDB0056A6D1 /* EffectsIcon.png */; };
+		9DF1482A1725EFE40056A6D1 /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148291725EFE40056A6D1 /* InstrumentIcon.png */; };
+		9DF1482B1725EFE40056A6D1 /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148291725EFE40056A6D1 /* InstrumentIcon.png */; };
+		9DF1482D1725EFEE0056A6D1 /* LightIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1482C1725EFEE0056A6D1 /* LightIcon.png */; };
+		9DF1482E1725EFEE0056A6D1 /* LightIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1482C1725EFEE0056A6D1 /* LightIcon.png */; };
 		EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */; };
@@ -2682,6 +2688,9 @@
 		9DE9FFE5155CD9C500F92DBE /* Droplet 92.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 92.mp3"; sourceTree = "<group>"; };
 		9DEB904F1714D66100A7C0CF /* EffectsOffButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsOffButton.png; path = Resources/Images/Freeplay/EffectsOffButton.png; sourceTree = "<group>"; };
 		9DEB90561714D6B000A7C0CF /* EffectsOnButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsOnButton.png; path = Resources/Images/Freeplay/EffectsOnButton.png; sourceTree = "<group>"; };
+		9DF148261725EFDB0056A6D1 /* EffectsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsIcon.png; path = Resources/Images/Freeplay/EffectsIcon.png; sourceTree = "<group>"; };
+		9DF148291725EFE40056A6D1 /* InstrumentIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InstrumentIcon.png; path = Resources/Images/Freeplay/InstrumentIcon.png; sourceTree = "<group>"; };
+		9DF1482C1725EFEE0056A6D1 /* LightIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightIcon.png; path = Resources/Images/Freeplay/LightIcon.png; sourceTree = "<group>"; };
 		9DF47986159155080047953A /* Harmonizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Harmonizer.h; sourceTree = "<group>"; };
 		9DF47987159155080047953A /* Harmonizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Harmonizer.m; sourceTree = "<group>"; };
 		EC020DD0141EA28600627303 /* SongPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongPlayerViewController.h; path = ../gTarPlay.xcodeproj/SongPlayerViewController.h; sourceTree = "<group>"; };
@@ -3992,6 +4001,9 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9DF1482C1725EFEE0056A6D1 /* LightIcon.png */,
+				9DF148291725EFE40056A6D1 /* InstrumentIcon.png */,
+				9DF148261725EFDB0056A6D1 /* EffectsIcon.png */,
 				9DEB90561714D6B000A7C0CF /* EffectsOnButton.png */,
 				9DEB904F1714D66100A7C0CF /* EffectsOffButton.png */,
 				9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */,
@@ -6247,6 +6259,9 @@
 				ECE832321718D6C0006E2391 /* Skill_YELLOW.png in Resources */,
 				ECE832361718D82C006E2391 /* Skill_GREY.png in Resources */,
 				ECE8323E1718EA34006E2391 /* SocialViewController.xib in Resources */,
+				9DF148271725EFDB0056A6D1 /* EffectsIcon.png in Resources */,
+				9DF1482A1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
+				9DF1482D1725EFEE0056A6D1 /* LightIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7194,6 +7209,9 @@
 				ECE832331718D6C0006E2391 /* Skill_YELLOW.png in Resources */,
 				ECE832371718D82C006E2391 /* Skill_GREY.png in Resources */,
 				ECE8323F1718EA34006E2391 /* SocialViewController.xib in Resources */,
+				9DF148281725EFDB0056A6D1 /* EffectsIcon.png in Resources */,
+				9DF1482B1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
+				9DF1482E1725EFEE0056A6D1 /* LightIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

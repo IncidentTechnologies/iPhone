@@ -99,7 +99,6 @@ typedef enum
 @property (retain, nonatomic) IBOutlet UITableView *m_effectsScroll;
 
 @property (retain, nonatomic) IBOutlet TransparentAreaView *m_effectsTab;
-@property (retain, nonatomic) IBOutlet UIButton *m_effectsTabButton;
 @property (retain, nonatomic) IBOutlet UIButton *m_effect1OnOff;
 @property (retain, nonatomic) IBOutlet UIButton *m_effect1Select;
 @property (retain, nonatomic) IBOutlet UILabel *m_effect1Name;
@@ -114,12 +113,10 @@ typedef enum
 @property (retain, nonatomic) IBOutlet UILabel *m_effect4Name;
 
 @property (retain, nonatomic) IBOutlet TransparentAreaView *m_instrumentsTab;
-@property (retain, nonatomic) IBOutlet UIButton *m_instrumentsTabButton;
 @property (retain, nonatomic) IBOutlet CustomComboBox *m_instrumentsScroll;
 
 
 @property (retain, nonatomic) IBOutlet TransparentAreaView *m_menuTab;
-@property (retain, nonatomic) IBOutlet UIButton *m_menuTabButton;
 @property (retain, nonatomic) IBOutlet UISlider *m_toneSlider;
 @property (nonatomic, retain) IBOutlet UIView * m_volumeView;
 @property (retain, nonatomic) IBOutlet UISlider *m_lineOutVolumeSlider;
@@ -128,7 +125,6 @@ typedef enum
 
 // LED light tab
 @property (retain, nonatomic) IBOutlet TransparentAreaView *m_LEDTab;
-@property (retain, nonatomic) IBOutlet UIButton *m_LEDTabButton;
 @property (retain, nonatomic) IBOutlet UIView *m_LEDGeneralSurface;
 @property (retain, nonatomic) IBOutlet UIView *m_LEDFretSurface;
 @property (retain, nonatomic) IBOutlet UIView *m_LEDStringSurface;
