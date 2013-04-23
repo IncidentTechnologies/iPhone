@@ -35,6 +35,10 @@
 		9DF1482B1725EFE40056A6D1 /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148291725EFE40056A6D1 /* InstrumentIcon.png */; };
 		9DF1482D1725EFEE0056A6D1 /* LightIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1482C1725EFEE0056A6D1 /* LightIcon.png */; };
 		9DF1482E1725EFEE0056A6D1 /* LightIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1482C1725EFEE0056A6D1 /* LightIcon.png */; };
+		9DF1483017261E840056A6D1 /* MenuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1482F17261E840056A6D1 /* MenuIcon.png */; };
+		9DF1483117261E840056A6D1 /* MenuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1482F17261E840056A6D1 /* MenuIcon.png */; };
+		9DF14833172622FC0056A6D1 /* MenuSoloSegment.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */; };
+		9DF14834172622FC0056A6D1 /* MenuSoloSegment.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */; };
 		EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */; };
@@ -2693,6 +2697,8 @@
 		9DF148261725EFDB0056A6D1 /* EffectsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsIcon.png; path = Resources/Images/Freeplay/EffectsIcon.png; sourceTree = "<group>"; };
 		9DF148291725EFE40056A6D1 /* InstrumentIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InstrumentIcon.png; path = Resources/Images/Freeplay/InstrumentIcon.png; sourceTree = "<group>"; };
 		9DF1482C1725EFEE0056A6D1 /* LightIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightIcon.png; path = Resources/Images/Freeplay/LightIcon.png; sourceTree = "<group>"; };
+		9DF1482F17261E840056A6D1 /* MenuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuIcon.png; path = Resources/Images/Play/MenuIcon.png; sourceTree = "<group>"; };
+		9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuSoloSegment.png; path = Resources/Images/Freeplay/MenuSoloSegment.png; sourceTree = "<group>"; };
 		9DF47986159155080047953A /* Harmonizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Harmonizer.h; sourceTree = "<group>"; };
 		9DF47987159155080047953A /* Harmonizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Harmonizer.m; sourceTree = "<group>"; };
 		EC020DD0141EA28600627303 /* SongPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongPlayerViewController.h; path = ../gTarPlay.xcodeproj/SongPlayerViewController.h; sourceTree = "<group>"; };
@@ -4005,6 +4011,8 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */,
+				9DF1482F17261E840056A6D1 /* MenuIcon.png */,
 				9DF1482C1725EFEE0056A6D1 /* LightIcon.png */,
 				9DF148291725EFE40056A6D1 /* InstrumentIcon.png */,
 				9DF148261725EFDB0056A6D1 /* EffectsIcon.png */,
@@ -6267,6 +6275,8 @@
 				9DF1482A1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
 				9DF1482D1725EFEE0056A6D1 /* LightIcon.png in Resources */,
 				EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */,
+				9DF1483017261E840056A6D1 /* MenuIcon.png in Resources */,
+				9DF14833172622FC0056A6D1 /* MenuSoloSegment.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7218,6 +7228,8 @@
 				9DF1482B1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
 				9DF1482E1725EFEE0056A6D1 /* LightIcon.png in Resources */,
 				EC48663B17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */,
+				9DF1483117261E840056A6D1 /* MenuIcon.png in Resources */,
+				9DF14834172622FC0056A6D1 /* MenuSoloSegment.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
