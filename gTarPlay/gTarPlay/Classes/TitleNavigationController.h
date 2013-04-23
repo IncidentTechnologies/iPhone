@@ -29,6 +29,7 @@
 @property (retain, nonatomic) IBOutlet UIView *videoRightPanel;
 @property (retain, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (retain, nonatomic) IBOutlet UIView *delayLoadingView;
+@property (retain, nonatomic) IBOutlet UIImageView *videoPreviewImage;
 
 - (void)delayLoadingComplete;
 

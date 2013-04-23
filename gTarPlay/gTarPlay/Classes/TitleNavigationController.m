@@ -290,6 +290,7 @@ extern TelemetryController * g_telemetryController;
     [_modalLikeButton release];
     [_delayLoadingView release];
     [_disconnectedGtarLeftPanel release];
+    [_videoPreviewImage release];
     [super dealloc];
 }
 
@@ -344,6 +345,19 @@ extern TelemetryController * g_telemetryController;
     [self disableButton:_gatekeeperVideoButton];
     [self enableButton:_gatekeeperSigninButton];
     [self enableButton:_gatekeeperWebsiteButton];
+    
+    NSString *moviePath = [[NSBundle mainBundle] pathForResource:@"MeetChrisVideo" ofType:@"mp4"];
+    NSURL *movieURL = [NSURL fileURLWithPath:moviePath];
+    
+    if ( _videoPreviewImage.image == nil )
+    {
+        MPMoviePlayerController *mpc = [[[MPMoviePlayerController alloc] initWithContentURL:movieURL] autorelease];
+        
+        UIImage *thumbNail = [mpc thumbnailImageAtTime:21 timeOption:MPMovieTimeOptionExact];
+        
+        _videoPreviewImage.contentMode = UIViewContentModeScaleAspectFit;
+        _videoPreviewImage.image = thumbNail;
+    }
 }
 
 - (void)loggedoutScreen
@@ -592,7 +606,7 @@ extern TelemetryController * g_telemetryController;
     }
     
     // Get the Movie
-    NSString *moviePath = [[NSBundle mainBundle] pathForResource:@"gTar Teaser Final Test 480" ofType:@"m4v"];
+    NSString *moviePath = [[NSBundle mainBundle] pathForResource:@"MeetChrisVideo" ofType:@"mp4"];
     NSURL *movieURL = [NSURL fileURLWithPath:moviePath];
     
     _moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:movieURL];
@@ -620,6 +634,7 @@ extern TelemetryController * g_telemetryController;
     [_moviePlayer.view setFrame:_videoRightPanel.frame ];
     
     [_videoRightPanel addSubview:_moviePlayer.view];
+    [_videoRightPanel bringSubviewToFront:_moviePlayer.view];
     
     [_moviePlayer setFullscreen:YES animated:YES];
     
@@ -1016,9 +1031,7 @@ extern TelemetryController * g_telemetryController;
     
     BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
     
-    //
     // First log in, show the welcome screens
-    //
 	if ( guitarConnectedBefore == NO )
 	{
         [settings setBool:YES forKey:@"GuitarConnectedBefore"];
@@ -1031,8 +1044,13 @@ extern TelemetryController * g_telemetryController;
     
     if ( g_cloudController.m_loggedIn == YES )
     {
-        [self swapLeftPanel:_menuLeftPanel];
+        [self loggedinScreen];
     }
+    else
+    {
+        [self loggedoutScreen];
+    }
+    
 //    [self playStartupLightSequence];
 //    
 //    [self checkCurrentFirmwareVersion];
@@ -1125,6 +1143,13 @@ extern TelemetryController * g_telemetryController;
         [g_userController sendPendingUploads];
         
         [g_telemetryController uploadLogMessages];
+        
+        [self loggedinScreen];
+        
+        [self updateGlobalFeed];
+        [self updateFriendFeed];
+        
+        [_feedTable startAnimating];
     }
     else
     {

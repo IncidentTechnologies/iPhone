@@ -1034,6 +1034,8 @@
 		EC26A3A616CB198F006E97E2 /* DefaultRot.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A316CB198E006E97E2 /* DefaultRot.png */; };
 		EC26A3A716CB198F006E97E2 /* DefaultRot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */; };
 		EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */; };
+		EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
+		EC48663B17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
 		EC69BA1717137072004E982F /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1617137071004E982F /* InstrumentIcon.png */; };
 		EC69BA1817137072004E982F /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1617137071004E982F /* InstrumentIcon.png */; };
 		EC69BA1D17138B2C004E982F /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC69BA1C17138B2C004E982F /* PlayerViewController.m */; };
@@ -2924,6 +2926,7 @@
 		EC3CB4F613BA91D8006E29BB /* StoreTopTenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreTopTenViewController.m; sourceTree = "<group>"; };
 		EC3CB4FE13BAB035006E29BB /* StoreSongDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSongDetailViewController.h; sourceTree = "<group>"; };
 		EC3CB4FF13BAB059006E29BB /* StoreSongDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSongDetailViewController.m; sourceTree = "<group>"; };
+		EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = MeetChrisVideo.mp4; path = Resources/Video/MeetChrisVideo.mp4; sourceTree = "<group>"; };
 		EC4FFDCF132C4ABD0045DB63 /* outline_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outline_button.png; sourceTree = "<group>"; };
 		EC4FFDD8132C4AE20045DB63 /* knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob.png; sourceTree = "<group>"; };
 		EC4FFE46132C5D740045DB63 /* led-green-bulb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "led-green-bulb.png"; sourceTree = "<group>"; };
@@ -3452,6 +3455,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */,
 				ECFFB43C15EEE1BE00951BD5 /* gray82.png */,
 				9D4C507B15BF35250066EF75 /* gTar Teaser Final Test 480.m4v */,
 				EC87EEDD13277B08007DAEC9 /* Images */,
@@ -6262,6 +6266,7 @@
 				9DF148271725EFDB0056A6D1 /* EffectsIcon.png in Resources */,
 				9DF1482A1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
 				9DF1482D1725EFEE0056A6D1 /* LightIcon.png in Resources */,
+				EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7212,6 +7217,7 @@
 				9DF148281725EFDB0056A6D1 /* EffectsIcon.png in Resources */,
 				9DF1482B1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
 				9DF1482E1725EFEE0056A6D1 /* LightIcon.png in Resources */,
+				EC48663B17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7467,7 +7473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Marty Greenia (878J45SS28)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREPROCESSOR_DEFINITIONS = "${CONFIGURATION}_BUILD";
@@ -7477,7 +7483,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 				);
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "653C7089-8977-497D-9B13-2E8D8DD95220";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -7486,7 +7492,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Marty Greenia (878J45SS28)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREPROCESSOR_DEFINITIONS = "${CONFIGURATION}_BUILD";
@@ -7497,7 +7503,7 @@
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "653C7089-8977-497D-9B13-2E8D8DD95220";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
