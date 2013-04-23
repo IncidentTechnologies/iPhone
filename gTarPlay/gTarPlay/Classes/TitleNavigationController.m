@@ -64,6 +64,8 @@ extern TelemetryController * g_telemetryController;
     
     UIButton *_fullScreenButton;
     
+    NSTimer *_textFieldSliderTimer;
+    
     MPMoviePlayerController *_moviePlayer;
     
     NSArray *_globalFeed;
@@ -119,9 +121,6 @@ extern TelemetryController * g_telemetryController;
     
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"FRIENDS", @"GLOBAL", nil]];
     
-    // Apparently the view doesn't get resized to iPhone 5 dimensions until after viewDidLoad
-//    [self performSelectorOnMainThread:@selector(swapLeftPanel:) withObject:_gatekeeperLeftPanel waitUntilDone:NO];
-    
     // Setup the feed's initial state
     UserEntry * entry = [g_userController getUserEntry:0];
     
@@ -155,6 +154,9 @@ extern TelemetryController * g_telemetryController;
     // Assume we are logged in at first, since this will be the common case
     [self swapLeftPanel:_menuLeftPanel];
     [self swapRightPanel:_feedRightPanel];
+    
+    // Now connect to the device
+    [g_gtarController addObserver:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -184,12 +186,18 @@ extern TelemetryController * g_telemetryController;
         
         // Assume for now that we are actually logged in for now. The callback can revert this if needed
         [self loggedinScreen];
+        
+        if ( g_gtarController.connected == NO )
+        {
+            [self swapLeftPanel:_disconnectedGtarLeftPanel];
+        }
+
     }
-//    else if ( guitarConnectedBefore == NO )
-//    {
-//        // We aren't logged in, and never plugged in a guitar. Display the gatekeeping view.
-//        [self gatekeeperScreen];
-//    }
+    else if ( guitarConnectedBefore == NO )
+    {
+        // We aren't logged in, and never plugged in a guitar. Display the gatekeeping view.
+        [self gatekeeperScreen];
+    }
     else if ( g_cloudController.m_loggedIn == NO )
     {
         // We aren't logged out
@@ -197,6 +205,11 @@ extern TelemetryController * g_telemetryController;
     }
     else
     {
+        if ( g_gtarController.connected == NO )
+        {
+            [self swapLeftPanel:_disconnectedGtarLeftPanel];
+        }
+        
         // We are logged in
         [g_userController sendPendingUploads];
         
@@ -205,6 +218,7 @@ extern TelemetryController * g_telemetryController;
         
         [_feedTable startAnimatingOffscreen];
     }
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -213,9 +227,6 @@ extern TelemetryController * g_telemetryController;
     
     [_currentLeftPanel setFrame:_leftPanel.bounds];
     [_currentRightPanel setFrame:_rightPanel.bounds];
-//    _modalMenuButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
-//    _modalVolumeButton.imageView.transform = CGAffineTransformMakeScale( 0.6, 0.6 );
-//    _modalShortcutButton.imageView.transform = CGAffineTransformMakeScale( 0.7, 0.7 );
 
 }
 - (void)didReceiveMemoryWarning
@@ -278,6 +289,7 @@ extern TelemetryController * g_telemetryController;
     [_commentTable release];
     [_modalLikeButton release];
     [_delayLoadingView release];
+    [_disconnectedGtarLeftPanel release];
     [super dealloc];
 }
 
@@ -874,6 +886,11 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)textFieldSelected:(id)sender
 {
+    // Invalidate this, if its already running
+    [_textFieldSliderTimer invalidate];
+    
+    _textFieldSliderTimer = nil;
+    
     CyclingTextField *cyclingTextField = (CyclingTextField *)sender;
     
     UIView *parent = cyclingTextField.superview;
@@ -886,8 +903,8 @@ extern TelemetryController * g_telemetryController;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.2f];
     
-    parent.transform = CGAffineTransformMakeTranslation( 0, -delta );
-    
+    //    parent.transform = CGAffineTransformMakeTranslation( 0, -delta );
+    parent.layer.transform = CATransform3DMakeTranslation( 0, -delta, 0 );
     [UIView commitAnimations];
     
     if ( _fullScreenButton == nil )
@@ -906,27 +923,37 @@ extern TelemetryController * g_telemetryController;
     
     // Resign first responder on the text field when this button is pressed
     [_fullScreenButton addTarget:cyclingTextField action:@selector(resignFirstResponder) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    CyclingTextField *cyclingTextField = (CyclingTextField *)textField;
+    _textFieldSliderTimer = [NSTimer scheduledTimerWithTimeInterval:0.0f target:self selector:@selector(delayedTextFieldSlider:) userInfo:textField repeats:NO];
+
+    return YES;
+}
+
+- (void)delayedTextFieldSlider:(NSTimer *)timer
+{
+    CyclingTextField *cyclingTextField = (CyclingTextField *)[timer userInfo];
+    
+    [_textFieldSliderTimer invalidate];
+    
+    _textFieldSliderTimer = nil;
     
     UIView *parent = cyclingTextField.superview;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.2f];
     
-    parent.transform = CGAffineTransformIdentity;
-    
+    //    parent.transform = CGAffineTransformIdentity;
+    parent.layer.transform = CATransform3DIdentity;
     [UIView commitAnimations];
     
     // FYI We never retained this
     [_fullScreenButton removeFromSuperview];
     
     _fullScreenButton = nil;
-    
-    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -940,6 +967,7 @@ extern TelemetryController * g_telemetryController;
     else if ( cyclingTextField.submitButton != nil )
     {
         [cyclingTextField.submitButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+        [cyclingTextField resignFirstResponder];
     }
     
 	return NO;
@@ -1001,6 +1029,10 @@ extern TelemetryController * g_telemetryController;
     [g_gtarController turnOffAllLeds];
     [g_gtarController sendDisableDebug];
     
+    if ( g_cloudController.m_loggedIn == YES )
+    {
+        [self swapLeftPanel:_menuLeftPanel];
+    }
 //    [self playStartupLightSequence];
 //    
 //    [self checkCurrentFirmwareVersion];
@@ -1009,9 +1041,10 @@ extern TelemetryController * g_telemetryController;
 
 - (void)gtarDisconnected
 {
-//    [m_infoPopup detachFromSuperView];
-    
-//    [m_gtarLogoRed setHidden:NO];
+    if ( g_cloudController.m_loggedIn == YES )
+    {
+        [self swapLeftPanel:_disconnectedGtarLeftPanel];
+    }
 }
 
 #pragma mark - GtarControllerDelegate
@@ -1047,6 +1080,11 @@ extern TelemetryController * g_telemetryController;
         
         [self loggedinScreen];
         
+        if ( g_gtarController.connected == NO )
+        {
+            [self swapLeftPanel:_disconnectedGtarLeftPanel];
+        }
+
         [self updateGlobalFeed];
         [self updateFriendFeed];
         
@@ -1058,7 +1096,7 @@ extern TelemetryController * g_telemetryController;
         [self displayNotification:userResponse.m_statusText turnRed:YES];
         
         // If the menu is showing, we need to back out
-        if ( _leftPanel == _menuLeftPanel )
+        if ( _currentLeftPanel == _menuLeftPanel )
         {
             [self loggedoutScreen];
         }

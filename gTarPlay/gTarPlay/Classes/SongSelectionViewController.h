@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import <GtarController/GtarController.h>
+
 #import "PullToUpdateTableView.h"
 #import "ExpandableSearchBar.h"
 
 @class PlayerViewController;
 @class SlidingModalViewController;
 
-@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate> // <UISearchBarDelegate>
+@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver> // <UISearchBarDelegate>
 
 @property (retain, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
 

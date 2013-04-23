@@ -26,10 +26,11 @@
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/SongPlaybackController.h>
 
-extern FileController * g_fileController;
-extern CloudController * g_cloudController;
-extern AudioController * g_audioController;
-extern UserController * g_userController;
+extern FileController *g_fileController;
+extern CloudController *g_cloudController;
+extern AudioController *g_audioController;
+extern UserController *g_userController;
+extern GtarController *g_gtarController;
 
 @interface SongSelectionViewController ()
 {
@@ -106,6 +107,7 @@ extern UserController * g_userController;
         
     }
     
+    [g_gtarController addObserver:self];
 }
 
 - (void)viewDidLayoutSubviews
@@ -140,6 +142,9 @@ extern UserController * g_userController;
 
 - (void)dealloc
 {
+    
+    [g_gtarController removeObserver:self];
+    
     [_searchBar release];
     
     [_userSongArray release];
@@ -478,6 +483,13 @@ extern UserController * g_userController;
 - (void)stopPreview
 {
     [_playbackController pauseSong];
+}
+
+#pragma mark - GtarControllerObserver
+
+- (void)gtarDisconnected
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

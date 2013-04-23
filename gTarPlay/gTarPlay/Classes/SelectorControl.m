@@ -95,7 +95,7 @@
             NSMutableAttributedString *grayString = [[[NSMutableAttributedString alloc] initWithAttributedString:title] autorelease];
             
             [whiteString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0,[whiteString length])];
-            [grayString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0,[grayString length])];
+            [grayString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(0,[grayString length])];
             
             [button setAttributedTitle:whiteString forState:UIControlStateNormal];
             [button setAttributedTitle:grayString forState:UIControlStateHighlighted];
@@ -104,7 +104,7 @@
         {
             [button setTitle:title forState:UIControlStateNormal];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
         }
 //        [button setTitleShadowColor:[UIColor grayColor] forState:UIControlStateNormal];
 //        [button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];

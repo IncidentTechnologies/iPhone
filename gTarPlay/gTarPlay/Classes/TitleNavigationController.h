@@ -44,6 +44,7 @@
 @property (retain, nonatomic) IBOutlet UIView *menuLeftPanel;
 @property (retain, nonatomic) IBOutlet UIView *feedRightPanel;
 @property (retain, nonatomic) IBOutlet UIView *loadingRightPanel;
+@property (retain, nonatomic) IBOutlet UIView *disconnectedGtarLeftPanel;
 
 // Left Panel buttons + clicks
 @property (retain, nonatomic) IBOutlet UIButton *gatekeeperVideoButton;

@@ -129,16 +129,14 @@ extern TelemetryController * g_telemetryController;
 {
     [super viewDidLoad];
     
-    // Spec out the top bar
-//    _topBar.layer.shadowRadius = 7.0;
-//    _topBar.layer.shadowColor = [[UIColor blackColor] CGColor];
-//    _topBar.layer.shadowOffset = CGSizeMake(0, 0);
-//    _topBar.layer.shadowOpacity = 0.9;
-    
     // Hide the widgets we don't need initially
     [_menuDownArrow setHidden:YES];
     [_finishButton setHidden:YES];
     [_progressFillView setHidden:YES];
+    
+    // Fiddle with the button images
+    [_menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     // Fiddle with the switch images
     _outputSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
@@ -163,28 +161,20 @@ extern TelemetryController * g_telemetryController;
     [self updateDifficultyDisplay];
     
     // testing
-#ifdef Debug_BUILD
-    if ( g_gtarController.connected == NO )
-    {
-        NSLog(@"debugging this thing");
-        
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
-    }
-#endif
+//#ifdef Debug_BUILD
+//    if ( g_gtarController.connected == NO )
+//    {
+//        NSLog(@"debugging this thing");
+//        
+//        [NSTimer scheduledTimerWithTimeInterval:1.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+//    }
+//#endif
     
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    
-    // Note that this function is called everytime the view resizes (e.g. many times)
-    // Fiddle with the button images
-    [_menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-
-    _menuButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
-    _volumeButton.imageView.transform = CGAffineTransformMakeScale( 0.60, 0.60 );
     
     // Pass the new target frame to the volume slider, now that we resized
     CGRect targetFrame = [_topBar convertRect:_volumeSliderView.frame toView:self.view];
@@ -814,15 +804,6 @@ extern TelemetryController * g_telemetryController;
     // Advance song model and recorder
     //
     
-//    if ( m_difficulty == SongViewControllerDifficultyHard )
-//    {
-//        // discounted by the tempo modifier
-//        double effectiveTime = SECONDS_PER_EVENT_LOOP * m_tempoModifier;
-//
-//        [m_songModel incrementTimeSerialAccess:effectiveTime];
-//
-//    }
-    
     if ( _animateSongScrolling == YES )
     {
         [_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
@@ -958,10 +939,7 @@ extern TelemetryController * g_telemetryController;
 {
     
     // Always mute notes on note-off for hard
-    //    if ( m_difficulty == SongViewControllerDifficultyHard )
-    {
-        [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
-    }
+    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
     
     @synchronized ( _deferredNotesQueue )
     {
@@ -969,7 +947,6 @@ extern TelemetryController * g_telemetryController;
         
         for ( NSDictionary * pluck in _deferredNotesQueue )
         {
-            
             NSNumber * fretNumber = [pluck objectForKey:@"Fret"];
             NSNumber * strNumber = [pluck objectForKey:@"String"];
             
@@ -981,20 +958,13 @@ extern TelemetryController * g_telemetryController;
             // the array object mutating under it.
             if ( fret == position.fret && str == position.string )
             {
-//                if ( m_difficulty != SongViewControllerDifficultyHard )
-//                {
-//                    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
-//                }
-                
                 canceledPluck = pluck;
-                
                 break;
             }
         }
         
         if ( canceledPluck != nil )
         {
-            
             NSTimer * timer = [canceledPluck objectForKey:@"Timer"];
             
             [timer invalidate];
@@ -1338,7 +1308,7 @@ extern TelemetryController * g_telemetryController;
     if ( _difficulty == PlayViewControllerDifficultyHard )
     {
         // Play the note at normal intensity
-        //        [self pluckString:str andFret:fret andVelocity:velocity];
+        [self pluckString:str andFret:fret andVelocity:velocity];
         
         // Record the note
         [_songRecorder playString:str andFret:fret];
@@ -1539,15 +1509,6 @@ extern TelemetryController * g_telemetryController;
     
     _currentFrame = [frame retain];
     
-//    if ( m_difficulty == SongViewControllerDifficultyHard )
-//    {
-//        [self turnOnFrameWhite:frame];
-//    }
-//    else
-//    {
-//        [self turnOnFrame:frame];
-//    }
-    
     // Align us more pefectly with the frame
     [_songModel incrementBeatSerialAccess:(frame.m_absoluteBeatStart - _songModel.m_currentBeat)];
     
@@ -1576,11 +1537,6 @@ extern TelemetryController * g_telemetryController;
     [self turnOnFrame:_nextFrame];
     
     [self disableInput];
-    
-//    if ( m_difficulty == SongViewControllerDifficultyHard )
-//    {
-//        [self turnOnFrame:m_nextFrame];
-//    }
     
     _refreshDisplay = YES;
     
