@@ -165,6 +165,8 @@ extern AudioController * g_audioController;
     
     _isDown = !_isDown;
     
+    self.view.userInteractionEnabled = _isDown;
+    
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3f];
     [UIView setAnimationDelegate:self];
@@ -199,6 +201,8 @@ extern AudioController * g_audioController;
     }
     
     _isDown = NO;
+    
+    self.view.userInteractionEnabled = _isDown;
     
     [_triangleIndicator setHidden:YES];
     

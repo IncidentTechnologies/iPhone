@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1552</int>
+		<int key="IBDocument.SystemTarget">1536</int>
 		<string key="IBDocument.SystemVersion">11G63b</string>
-		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">2083</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBNSLayoutConstraint</string>
@@ -207,7 +207,7 @@
 									</object>
 									<object class="IBUIView" id="399703885">
 										<reference key="NSNextResponder" ref="309263272"/>
-										<int key="NSvFlags">292</int>
+										<int key="NSvFlags">-2147483356</int>
 										<string key="NSFrame">{{100, 46}, {100, 274}}</string>
 										<reference key="NSSuperview" ref="309263272"/>
 										<reference key="NSWindow"/>
@@ -485,6 +485,7 @@
 								<string key="NSFrame">{{0, 2}, {480, 44}}</string>
 								<reference key="NSSuperview" ref="441799219"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -840,6 +841,7 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 										<string key="NSFrame">{{348, 16}, {41, 27}}</string>
 										<reference key="NSSuperview" ref="849348489"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -1312,14 +1314,6 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">difficultyButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="720103078"/>
-					</object>
-					<int key="connectionID">1183</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">instrumentButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="128904928"/>
@@ -1357,6 +1351,14 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 						<reference key="destination" ref="1067892669"/>
 					</object>
 					<int key="connectionID">1313</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">difficultyButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="720103078"/>
+					</object>
+					<int key="connectionID">1324</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1423,12 +1425,12 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">backButtonClicked:</string>
+						<string key="label">difficultyButtonClicked:</string>
 						<reference key="source" ref="720103078"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">710</int>
+					<int key="connectionID">1321</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1438,6 +1440,15 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">743</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">instrumentButtonClicked:</string>
+						<reference key="source" ref="128904928"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">1323</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -6476,7 +6487,7 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1320</int>
+			<int key="maxID">1324</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6509,8 +6520,10 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 					<string key="superclassName">MainEventController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="backButtonClicked:">id</string>
+						<string key="difficultyButtonClicked:">id</string>
 						<string key="feedSwitchChanged:">id</string>
 						<string key="finishButtonClicked:">id</string>
+						<string key="instrumentButtonClicked:">id</string>
 						<string key="menuButtonClicked:">id</string>
 						<string key="outputSwitchChanged:">id</string>
 						<string key="restartButtonClicked:">id</string>
@@ -6521,12 +6534,20 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 							<string key="name">backButtonClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="difficultyButtonClicked:">
+							<string key="name">difficultyButtonClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="feedSwitchChanged:">
 							<string key="name">feedSwitchChanged:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="finishButtonClicked:">
 							<string key="name">finishButtonClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="instrumentButtonClicked:">
+							<string key="name">instrumentButtonClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="menuButtonClicked:">
@@ -6698,6 +6719,6 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 			<string key="VolumeIcon.png">{57, 49}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
-		<string key="IBCocoaTouchPluginVersion">2083</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

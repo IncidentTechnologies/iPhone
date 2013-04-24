@@ -84,9 +84,9 @@ TelemetryController * g_telemetryController;
         
         [g_gtarController addObserver:self];
         
-#if TARGET_IPHONE_SIMULATOR
+//#if TARGET_IPHONE_SIMULATOR
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
-#endif
+//#endif
         
     }
     

@@ -206,7 +206,6 @@ extern TelemetryController * g_telemetryController;
     // Make sure the top bar stays on top
     [self.view bringSubviewToFront:_topBar];
     
-//    [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(delayedLoaded) userInfo:nil repeats:NO];
     [self performSelectorOnMainThread:@selector(delayedLoaded) withObject:nil waitUntilDone:NO];
 }
 
@@ -368,7 +367,6 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)volumeButtonClicked:(id)sender
 {
     [_volumeViewController toggleVolumeView];
-    [_volumeSliderView setUserInteractionEnabled:!_volumeSliderView.userInteractionEnabled];
 }
 
 - (IBAction)finishButtonClicked:(id)sender
@@ -422,8 +420,7 @@ extern TelemetryController * g_telemetryController;
     
     // Close the volume everytime we push the menu button
     [_volumeViewController closeVolumeView];
-    [_volumeSliderView setUserInteractionEnabled:NO];
-
+    
     if ( _menuIsOpen == YES )
     {
         [_metronomeTimer invalidate];
@@ -492,6 +489,37 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)feedSwitchChanged:(id)sender
 {
     
+}
+
+- (IBAction)difficultyButtonClicked:(id)sender
+{
+    
+    switch ( _difficulty )
+    {
+        default:
+        case PlayViewControllerDifficultyEasy:
+        {
+            _difficulty = PlayViewControllerDifficultyMedium;
+            _scoreTracker.m_baseScore = 20;
+        } break;
+            
+        case PlayViewControllerDifficultyMedium:
+        {
+            _difficulty = PlayViewControllerDifficultyHard;
+            _scoreTracker.m_baseScore = 40;
+        } break;
+            
+        case PlayViewControllerDifficultyHard:
+        {
+            _difficulty = PlayViewControllerDifficultyEasy;
+            _scoreTracker.m_baseScore = 10;
+        } break;
+    }
+
+    [self updateDifficultyDisplay];
+}
+
+- (IBAction)instrumentButtonClicked:(id)sender {
 }
 
 #pragma mark - UI & Misc related helpers
@@ -689,24 +717,21 @@ extern TelemetryController * g_telemetryController;
         default:
         case PlayViewControllerDifficultyEasy:
         {
-            _difficultyButton.imageView.image = [UIImage imageNamed:@"DiffEasyButtonON"];
+            [_difficultyButton setImage:[UIImage imageNamed:@"DiffEasyButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = @"Easy";
-        }
-            break;
+        } break;
             
         case PlayViewControllerDifficultyMedium:
         {
-            _difficultyButton.imageView.image = [UIImage imageNamed:@"DiffMedButtonON"];
+            [_difficultyButton setImage:[UIImage imageNamed:@"DiffMedButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = @"Medium";
-        }
-            break;
+        } break;
             
         case PlayViewControllerDifficultyHard:
         {
-            _difficultyButton.imageView.image = [UIImage imageNamed:@"DiffHardButtonON"];
+            [_difficultyButton setImage:[UIImage imageNamed:@"DiffHardButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = @"Hard";
-        }
-            break;
+        } break;
     }
 }
 
@@ -1063,26 +1088,18 @@ extern TelemetryController * g_telemetryController;
             
         case PlayViewControllerDifficultyEasy:
         {
-            
             _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:10];
-            
         } break;
             
         default:
         case PlayViewControllerDifficultyMedium:
         {
-            
             _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:20];
-            
         } break;
             
         case PlayViewControllerDifficultyHard:
         {
-            
-            NSInteger baseScore = 40 + 40 * _tempoModifier;
-            
-            _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:baseScore];
-            
+            _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:40];
         } break;
             
     }

@@ -8,7 +8,6 @@
 
 #import "SongSelectionViewController.h"
 #import "SongListCell.h"
-#import "SelectSongOptionsPopupViewController.h"
 #import "SongViewController.h"
 #import "PlayViewController.h"
 #import "SlidingModalViewController.h"
@@ -37,7 +36,6 @@ extern GtarController *g_gtarController;
     VolumeViewController *_volumeViewController;
     
     NSArray *_userSongArray;
-    SelectSongOptionsPopupViewController *_popupOptionsViewController;
     SongPlaybackController *_playbackController;
     PlayerViewController *_playerViewController;
     
@@ -80,9 +78,8 @@ extern GtarController *g_gtarController;
     
     [_topBar addShadow];
     
-    _popupOptionsViewController = [[SelectSongOptionsPopupViewController alloc] initWithNibName:nil bundle:nil];
+    [self refreshSongList];
     
-//    _playbackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
     _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
     
     [_playerViewController attachToSuperview:_songPlayerView];
@@ -380,11 +377,6 @@ extern GtarController *g_gtarController;
 	NSInteger row = [indexPath row];
     UserSong *userSong = [_userSongArray objectAtIndex:row];
 
-//    _popupOptionsViewController.m_userSong = userSong;
-//    _popupOptionsViewController.m_navigationController = self;
-    
-//    [_popupOptionsViewController attachToSuperViewWithBlackBackground:self.view];
-    
     _currentUserSong = userSong;
     
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];

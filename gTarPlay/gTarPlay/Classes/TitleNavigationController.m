@@ -202,11 +202,6 @@ extern TelemetryController * g_telemetryController;
         // Assume for now that we are actually logged in for now. The callback can revert this if needed
         [self loggedinScreen];
         
-        if ( g_gtarController.connected == NO )
-        {
-            [self swapLeftPanel:_disconnectedGtarLeftPanel];
-        }
-
     }
     else if ( guitarConnectedBefore == NO )
     {
@@ -391,7 +386,14 @@ extern TelemetryController * g_telemetryController;
 
 - (void)loggedinScreen
 {
-    [self swapLeftPanel:_menuLeftPanel];
+    if ( g_gtarController.connected == NO )
+    {
+        [self swapLeftPanel:_disconnectedGtarLeftPanel];
+    }
+    else
+    {
+        [self swapLeftPanel:_menuLeftPanel];
+    }
     [self swapRightPanel:_feedRightPanel];
     
     [self enableButton:_menuPlayButton];
@@ -576,7 +578,8 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)signupFacebookButtonClicked:(id)sender
 {
-    
+    // Passthrough for now
+    [self signinButtonClicked:sender];
 }
 
 - (IBAction)signinButtonClicked:(id)sender
@@ -1129,11 +1132,6 @@ extern TelemetryController * g_telemetryController;
         
         [self loggedinScreen];
         
-        if ( g_gtarController.connected == NO )
-        {
-            [self swapLeftPanel:_disconnectedGtarLeftPanel];
-        }
-        
         [self updateGlobalFeed];
         [self updateFriendFeed];
         
@@ -1182,11 +1180,6 @@ extern TelemetryController * g_telemetryController;
         
         [self loggedinScreen];
         
-        if ( g_gtarController.connected == NO )
-        {
-            [self swapLeftPanel:_disconnectedGtarLeftPanel];
-        }
-
         [self updateGlobalFeed];
         [self updateFriendFeed];
         
