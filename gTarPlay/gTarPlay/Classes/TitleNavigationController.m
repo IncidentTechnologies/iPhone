@@ -52,7 +52,10 @@ extern TelemetryController * g_telemetryController;
 #define SIGNUP_EMAIL_INVALID @"Invalid Email"
 #define SIGNIN_USERNAME_INVALID @"Invalid Username"
 #define SIGNIN_PASSWORD_INVALID @"Invalid Password"
+#define FACEBOOK_INVALID @"Facebook failed to login"
 
+#define FACEBOOK_CLIENT_ID @"285410511522607"
+#define FACEBOOK_PERMISSIONS [NSArray arrayWithObjects:@"email", nil]
 
 @interface TitleNavigationController ()
 {
@@ -77,6 +80,7 @@ extern TelemetryController * g_telemetryController;
     BOOL _refreshingFriendFeed;
     
     BOOL _displayingCell;
+    BOOL _waitingForFacebook;
 }
 @end
 
@@ -96,6 +100,17 @@ extern TelemetryController * g_telemetryController;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    g_facebook = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
+    
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    // See if there are any cached credentials
+    if ( [settings objectForKey:@"FBAccessTokenKey"] && [settings objectForKey:@"FBExpirationDateKey"] )
+    {
+        g_facebook.accessToken = [settings objectForKey:@"FBAccessTokenKey"];
+        g_facebook.expirationDate = [settings objectForKey:@"FBExpirationDateKey"];
+    }
     
     // Add shadows
     [_topBarView addShadow];
@@ -291,6 +306,11 @@ extern TelemetryController * g_telemetryController;
     [_delayLoadingView release];
     [_disconnectedGtarLeftPanel release];
     [_videoPreviewImage release];
+    
+    [g_facebook release];
+    
+    g_facebook = nil;
+
     [super dealloc];
 }
 
@@ -594,7 +614,16 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)signinFacebookButtonClicked:(id)sender
 {
+    if ( _waitingForFacebook == YES )
+    {
+        return;
+    }
     
+    _waitingForFacebook = YES;
+    
+    [g_facebook authorize:FACEBOOK_PERMISSIONS];
+    
+    [self swapRightPanel:_loadingRightPanel];
 }
 
 - (IBAction)videoButtonClicked:(id)sender
@@ -1081,6 +1110,59 @@ extern TelemetryController * g_telemetryController;
 
 #pragma mark - UserController callbacks
 
+- (void)facebookSigninCallback:(UserResponse*)userResponse
+{
+    
+    if ( userResponse.m_status == UserResponseStatusSuccess )
+    {
+        // we are logged in
+        [g_telemetryController logEvent:GtarPlayAppLogin
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+                                         nil]];
+        
+        [g_userController sendPendingUploads];
+        
+        [g_telemetryController uploadLogMessages];
+        
+        [self hideNotification];
+        
+        [self loggedinScreen];
+        
+        if ( g_gtarController.connected == NO )
+        {
+            [self swapLeftPanel:_disconnectedGtarLeftPanel];
+        }
+        
+        [self updateGlobalFeed];
+        [self updateFriendFeed];
+        
+        [_feedTable startAnimating];
+    }
+    else
+    {
+        // There was an error
+        [self displayNotification:userResponse.m_statusText turnRed:YES];
+        
+        // If the menu is showing, we need to back out
+        if ( _currentLeftPanel == _menuLeftPanel )
+        {
+            [self loggedoutScreen];
+        }
+        else
+        {
+            [self swapRightPanel:_signinRightPanel];
+            
+            // Renable buttons
+            [self enableButton:_gatekeeperVideoButton];
+            [self enableButton:_gatekeeperWebsiteButton];
+            [self enableButton:_loggedoutSignupButton];
+        }
+    }
+    
+
+}
+
 - (void)signinCallback:(UserResponse *)userResponse
 {
     
@@ -1095,6 +1177,8 @@ extern TelemetryController * g_telemetryController;
         [g_userController sendPendingUploads];
         
         [g_telemetryController uploadLogMessages];
+        
+        [self hideNotification];
         
         [self loggedinScreen];
         
@@ -1223,6 +1307,61 @@ extern TelemetryController * g_telemetryController;
     {
         [_feedTable stopAnimating];
     }
+}
+
+#pragma mark - FacebookDelegate
+
+- (void)fbDidLogin
+{
+    _waitingForFacebook = NO;
+    
+    // We save the access token to the user settings
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    [settings setObject:[g_facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [settings setObject:[g_facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    
+    [settings synchronize];
+    
+    [self hideNotification];
+    
+    // Log into our server
+    [g_userController requestLoginUserFacebookToken:g_facebook.accessToken
+                                     andCallbackObj:self
+                                     andCallbackSel:@selector(facebookSigninCallback:)];
+    
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled
+{
+    _waitingForFacebook = NO;
+    
+    [self swapRightPanel:_signinRightPanel];
+    
+    [self displayNotification:FACEBOOK_INVALID turnRed:YES];
+}
+
+- (void)fbDidLogout
+{
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    // Clear cached data
+    [settings removeObjectForKey:@"FBAccessTokenKey"];
+    [settings removeObjectForKey:@"FBExpirationDateKey"];
+    
+    [settings synchronize];
+    
+    [self loggedoutScreen];
+}
+
+- (void)fbSessionInvalidated
+{
+    [self loggedoutScreen];
+}
+
+- (void)fbDidExtendToken:(NSString*)accessToken expiresAt:(NSDate*)expiresAt
+{
+    
 }
 
 #pragma mark - FileController Callbacks

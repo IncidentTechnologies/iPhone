@@ -9,7 +9,7 @@
 #import "SocialViewController.h"
 
 #import "SelectorControl.h"
-
+#import "Facebook.h"
 #import "UIView+Gtar.h"
 
 #import <gTarAppCore/UserController.h>
@@ -22,7 +22,8 @@
 #import <gTarAppCore/FileController.h>
 #import <gTarAppCore/UserResponse.h>
 
-extern UserController * g_userController;
+extern UserController *g_userController;
+extern Facebook *g_facebook;
 
 @interface SocialViewController ()
 
@@ -81,6 +82,8 @@ extern UserController * g_userController;
 {
     [g_userController requestLogoutUserCallbackObj:nil andCallbackSel:nil];
     
+    [g_facebook logout];
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 

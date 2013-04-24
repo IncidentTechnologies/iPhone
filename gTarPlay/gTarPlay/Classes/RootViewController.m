@@ -23,12 +23,12 @@
 #define FACEBOOK_CLIENT_ID @"285410511522607"
 #define FACEBOOK_PERMISSIONS [NSArray arrayWithObjects:@"email", nil]
 
-extern CloudController * g_cloudController;
-extern FileController * g_fileController;
-extern GtarController * g_gtarController;
-extern UserController * g_userController;
-extern Facebook * g_facebook;
-extern TelemetryController * g_telemetryController;
+extern CloudController *g_cloudController;
+extern FileController *g_fileController;
+extern GtarController *g_gtarController;
+extern UserController *g_userController;
+extern Facebook *g_facebook;
+extern TelemetryController *g_telemetryController;
 
 @implementation RootViewController
 

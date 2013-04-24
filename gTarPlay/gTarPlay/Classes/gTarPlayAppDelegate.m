@@ -25,7 +25,7 @@
 
 #import <AudioController/AudioController.h>
 
-Facebook * g_facebook;
+Facebook *g_facebook;
 
 CloudController * g_cloudController;
 AudioController * g_audioController;
