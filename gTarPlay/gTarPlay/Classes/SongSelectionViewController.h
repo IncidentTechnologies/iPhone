@@ -37,6 +37,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *hardButton;
 
 @property (retain, nonatomic) IBOutlet UIView *volumeView;
+@property (retain, nonatomic) IBOutlet UIView *instrumentView;
 @property (retain, nonatomic) IBOutlet UIView *songPlayerView;
 
 - (IBAction)backButtonClicked:(id)sender;

@@ -366,7 +366,7 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
-    [_volumeViewController toggleVolumeView];
+    [_volumeViewController toggleView];
 }
 
 - (IBAction)finishButtonClicked:(id)sender
@@ -419,7 +419,7 @@ extern TelemetryController * g_telemetryController;
     _menuIsOpen = !_menuIsOpen;
     
     // Close the volume everytime we push the menu button
-    [_volumeViewController closeVolumeView];
+    [_volumeViewController closeView];
     
     if ( _menuIsOpen == YES )
     {

@@ -27,7 +27,7 @@
 #import "SocialViewController.h"
 #import "SongPlayerViewController.h"
 #import "VolumeViewController.h"
-
+#import "SlidingInstrumentViewController.h"
 #import "UIView+Gtar.h"
 
 #import "ActivityFeedCell.h"
@@ -61,6 +61,7 @@ extern TelemetryController * g_telemetryController;
 {
     PlayerViewController *_playerViewController;
     VolumeViewController *_volumeViewController;
+    SlidingInstrumentViewController *_instrumentViewController;
 
     UIView *_currentLeftPanel;
     UIView *_currentRightPanel;
@@ -183,9 +184,14 @@ extern TelemetryController * g_telemetryController;
     {
         _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
         
-        [_volumeViewController attachToSuperview:_modalVolumeView];
+        [_volumeViewController attachToSuperview:_activityFeedModal.contentView withFrame:_modalVolumeView.frame];
+    }
+    
+    if ( _instrumentViewController == nil )
+    {
+        _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
         
-        _modalVolumeView.userInteractionEnabled = NO;
+        [_instrumentViewController attachToSuperview:_activityFeedModal.contentView withFrame:_modalInstrumentView.frame];
     }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
@@ -306,6 +312,7 @@ extern TelemetryController * g_telemetryController;
     
     g_facebook = nil;
 
+    [_modalInstrumentView release];
     [super dealloc];
 }
 
@@ -677,20 +684,20 @@ extern TelemetryController * g_telemetryController;
 {
     [_playerViewController endPlayback];
     [_activityFeedModal closeButtonClicked:sender];
-    [_volumeViewController closeVolumeView];
-    [_modalVolumeView setUserInteractionEnabled:NO];
+    
+    [_volumeViewController closeView];
+    [_instrumentViewController closeView];
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
-    [_volumeViewController toggleVolumeView];
-    [_modalVolumeView setUserInteractionEnabled:!_modalVolumeView.userInteractionEnabled];
+    [_volumeViewController toggleView];
 }
 
 - (IBAction)shortcutButtonClicked:(id)sender
 {
     [_playerViewController endPlayback];
-
+    [_instrumentViewController toggleView];
 }
 
 - (IBAction)modalLikeButtonClicked:(id)sender

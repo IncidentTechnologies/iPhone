@@ -1040,6 +1040,14 @@
 		EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */; };
 		EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
 		EC48663B17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
+		EC48665417287E8D0066194D /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC48665317287E8D0066194D /* SlidingViewController.m */; };
+		EC48665517287E8D0066194D /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC48665317287E8D0066194D /* SlidingViewController.m */; };
+		EC48665A172889CA0066194D /* SlidingInstrumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC486658172889CA0066194D /* SlidingInstrumentViewController.m */; };
+		EC48665B172889CA0066194D /* SlidingInstrumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC486658172889CA0066194D /* SlidingInstrumentViewController.m */; };
+		EC48665C172889CA0066194D /* SlidingInstrumentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC486659172889CA0066194D /* SlidingInstrumentViewController.xib */; };
+		EC48665D172889CA0066194D /* SlidingInstrumentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC486659172889CA0066194D /* SlidingInstrumentViewController.xib */; };
+		EC4866621728B34C0066194D /* OrangeEffects.png in Resources */ = {isa = PBXBuildFile; fileRef = EC4866611728B34C0066194D /* OrangeEffects.png */; };
+		EC4866631728B34C0066194D /* OrangeEffects.png in Resources */ = {isa = PBXBuildFile; fileRef = EC4866611728B34C0066194D /* OrangeEffects.png */; };
 		EC69BA1717137072004E982F /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1617137071004E982F /* InstrumentIcon.png */; };
 		EC69BA1817137072004E982F /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1617137071004E982F /* InstrumentIcon.png */; };
 		EC69BA1D17138B2C004E982F /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC69BA1C17138B2C004E982F /* PlayerViewController.m */; };
@@ -2933,6 +2941,12 @@
 		EC3CB4FE13BAB035006E29BB /* StoreSongDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSongDetailViewController.h; sourceTree = "<group>"; };
 		EC3CB4FF13BAB059006E29BB /* StoreSongDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSongDetailViewController.m; sourceTree = "<group>"; };
 		EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = MeetChrisVideo.mp4; path = Resources/Video/MeetChrisVideo.mp4; sourceTree = "<group>"; };
+		EC48665217287E8D0066194D /* SlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingViewController.h; sourceTree = "<group>"; };
+		EC48665317287E8D0066194D /* SlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingViewController.m; sourceTree = "<group>"; };
+		EC486657172889CA0066194D /* SlidingInstrumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingInstrumentViewController.h; sourceTree = "<group>"; };
+		EC486658172889CA0066194D /* SlidingInstrumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingInstrumentViewController.m; sourceTree = "<group>"; };
+		EC486659172889CA0066194D /* SlidingInstrumentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlidingInstrumentViewController.xib; sourceTree = "<group>"; };
+		EC4866611728B34C0066194D /* OrangeEffects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeEffects.png; path = Resources/Images/General/InstrumentView/OrangeEffects.png; sourceTree = SOURCE_ROOT; };
 		EC4FFDCF132C4ABD0045DB63 /* outline_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outline_button.png; sourceTree = "<group>"; };
 		EC4FFDD8132C4AE20045DB63 /* knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob.png; sourceTree = "<group>"; };
 		EC4FFE46132C5D740045DB63 /* led-green-bulb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "led-green-bulb.png"; sourceTree = "<group>"; };
@@ -4206,9 +4220,11 @@
 		EC0BAD8116F1791300E567A6 /* General UI */ = {
 			isa = PBXGroup;
 			children = (
+				EC48665117287E4A0066194D /* SlidingViewController */,
 				EC69BA381715F373004E982F /* Categories */,
 				EC69BA1A17138620004E982F /* SongPlayerView */,
-				ECCC0355170CB9FD0021DB00 /* VolumeView */,
+				EC48664F17287E130066194D /* SlidingInstrumentViewController */,
+				ECCC0355170CB9FD0021DB00 /* VolumeViewController */,
 				ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */,
 				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
 				EC0BAD9616F2771A00E567A6 /* CyclingTextField */,
@@ -4460,6 +4476,34 @@
 				ECBC9E3113C66B2300E9D5C5 /* StoreSubcategoryCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		EC48664F17287E130066194D /* SlidingInstrumentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EC4866641728B3500066194D /* Images */,
+				EC486657172889CA0066194D /* SlidingInstrumentViewController.h */,
+				EC486658172889CA0066194D /* SlidingInstrumentViewController.m */,
+				EC486659172889CA0066194D /* SlidingInstrumentViewController.xib */,
+			);
+			name = SlidingInstrumentViewController;
+			sourceTree = "<group>";
+		};
+		EC48665117287E4A0066194D /* SlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EC48665217287E8D0066194D /* SlidingViewController.h */,
+				EC48665317287E8D0066194D /* SlidingViewController.m */,
+			);
+			name = SlidingViewController;
+			sourceTree = "<group>";
+		};
+		EC4866641728B3500066194D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EC4866611728B34C0066194D /* OrangeEffects.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		EC4FFDBF132C49AB0045DB63 /* Experience */ = {
@@ -5056,7 +5100,7 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECCC0355170CB9FD0021DB00 /* VolumeView */ = {
+		ECCC0355170CB9FD0021DB00 /* VolumeViewController */ = {
 			isa = PBXGroup;
 			children = (
 				ECCC036C170CD5480021DB00 /* Images */,
@@ -5064,7 +5108,7 @@
 				ECCC0357170CBA570021DB00 /* VolumeViewController.m */,
 				ECCC0358170CBA570021DB00 /* VolumeViewController.xib */,
 			);
-			name = VolumeView;
+			name = VolumeViewController;
 			sourceTree = "<group>";
 		};
 		ECCC036C170CD5480021DB00 /* Images */ = {
@@ -6277,6 +6321,8 @@
 				EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */,
 				9DF1483017261E840056A6D1 /* MenuIcon.png in Resources */,
 				9DF14833172622FC0056A6D1 /* MenuSoloSegment.png in Resources */,
+				EC48665C172889CA0066194D /* SlidingInstrumentViewController.xib in Resources */,
+				EC4866621728B34C0066194D /* OrangeEffects.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7230,6 +7276,8 @@
 				EC48663B17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */,
 				9DF1483117261E840056A6D1 /* MenuIcon.png in Resources */,
 				9DF14834172622FC0056A6D1 /* MenuSoloSegment.png in Resources */,
+				EC48665D172889CA0066194D /* SlidingInstrumentViewController.xib in Resources */,
+				EC4866631728B34C0066194D /* OrangeEffects.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7354,6 +7402,8 @@
 				9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 				ECE831FB171764C0006E2391 /* UserCommentCell.m in Sources */,
 				ECE8323C1718EA34006E2391 /* SocialViewController.m in Sources */,
+				EC48665417287E8D0066194D /* SlidingViewController.m in Sources */,
+				EC48665A172889CA0066194D /* SlidingInstrumentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7475,6 +7525,8 @@
 				9DE6B34C1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 				ECE831FC171764C0006E2391 /* UserCommentCell.m in Sources */,
 				ECE8323D1718EA34006E2391 /* SocialViewController.m in Sources */,
+				EC48665517287E8D0066194D /* SlidingViewController.m in Sources */,
+				EC48665B172889CA0066194D /* SlidingInstrumentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
