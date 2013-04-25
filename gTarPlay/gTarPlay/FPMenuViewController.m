@@ -54,7 +54,8 @@ extern AudioController * g_audioController;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     [_toneSlider release];
     [_audioRouteSwitch release];
     
