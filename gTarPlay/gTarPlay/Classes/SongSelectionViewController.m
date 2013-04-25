@@ -189,18 +189,18 @@ extern GtarController *g_gtarController;
     [_playerViewController endPlayback];
     [_songOptionsModal closeButtonClicked:sender];
     
-    [_volumeViewController closeView];
-    [_instrumentViewController closeView];
+    [_volumeViewController closeView:NO];
+    [_instrumentViewController closeView:NO];
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
-    [_volumeViewController toggleView];
+    [_volumeViewController toggleView:YES];
 }
 
 - (IBAction)instrumentButtonClicked:(id)sender
 {
-    [_instrumentViewController toggleView];
+    [_instrumentViewController toggleView:YES];
 }
 
 - (IBAction)difficulyButtonClicked:(id)sender

@@ -15,12 +15,11 @@
 @property (retain, nonatomic) IBOutlet UIView *contentView;
 @property (retain, nonatomic) IBOutlet UIView *triangleIndicatorImage;
 
-- (void)attachToSuperview:(UIView *)view;
 - (void)attachToSuperview:(UIView *)view withFrame:(CGRect)rect;
-- (void)toggleView;
+- (void)toggleView:(BOOL)animated;
 - (void)slidingComplete;
-- (void)closeView;
-- (void)openView;
+- (void)closeView:(BOOL)animated;
+- (void)openView:(BOOL)animated;
 - (void)setFrame:(CGRect)frame;
 
 @end

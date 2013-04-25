@@ -12,7 +12,6 @@
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
-			<string>IBUIActivityIndicatorView</string>
 			<string>IBUIImageView</string>
 			<string>IBUIView</string>
 		</array>
@@ -43,41 +42,10 @@
 							<object class="IBUIView" id="724553251">
 								<reference key="NSNextResponder" ref="927624176"/>
 								<int key="NSvFlags">274</int>
-								<array class="NSMutableArray" key="NSSubviews">
-									<object class="IBUIView" id="772020467">
-										<reference key="NSNextResponder" ref="724553251"/>
-										<int key="NSvFlags">274</int>
-										<array class="NSMutableArray" key="NSSubviews">
-											<object class="IBUIActivityIndicatorView" id="40743079">
-												<reference key="NSNextResponder" ref="772020467"/>
-												<int key="NSvFlags">292</int>
-												<string key="NSFrame">{{124, 127}, {37, 37}}</string>
-												<reference key="NSSuperview" ref="772020467"/>
-												<reference key="NSWindow"/>
-												<string key="NSReuseIdentifierKey">_NS:9</string>
-												<bool key="IBUIOpaque">NO</bool>
-												<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-												<bool key="IBUIHidesWhenStopped">NO</bool>
-												<int key="IBUIStyle">0</int>
-											</object>
-										</array>
-										<string key="NSFrameSize">{284, 292}</string>
-										<reference key="NSSuperview" ref="724553251"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="399935890"/>
-										<string key="NSReuseIdentifierKey">_NS:9</string>
-										<object class="NSColor" key="IBUIBackgroundColor">
-											<int key="NSColorSpace">3</int>
-											<bytes key="NSWhite">MAA</bytes>
-										</object>
-										<float key="IBUIAlpha">0.5</float>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-									</object>
-								</array>
 								<string key="NSFrame">{{8, 0}, {284, 292}}</string>
 								<reference key="NSSuperview" ref="927624176"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="772020467"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">2</int>
@@ -107,7 +75,6 @@
 						<string key="NSFrame">{{135, 0}, {30, 15}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -211,24 +178,9 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
 						<reference key="object" ref="724553251"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="772020467"/>
-						</array>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="927624176"/>
 						<string key="objectName">InnerView</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">74</int>
-						<reference key="object" ref="772020467"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="40743079"/>
-						</array>
-						<reference key="parent" ref="724553251"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">75</int>
-						<reference key="object" ref="40743079"/>
-						<reference key="parent" ref="772020467"/>
 					</object>
 				</array>
 			</object>
@@ -241,8 +193,6 @@
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="75.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>

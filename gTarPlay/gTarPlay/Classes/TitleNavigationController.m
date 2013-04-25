@@ -685,19 +685,19 @@ extern TelemetryController * g_telemetryController;
     [_playerViewController endPlayback];
     [_activityFeedModal closeButtonClicked:sender];
     
-    [_volumeViewController closeView];
-    [_instrumentViewController closeView];
+    [_volumeViewController closeView:NO];
+    [_instrumentViewController closeView:NO];
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
-    [_volumeViewController toggleView];
+    [_volumeViewController toggleView:YES];
 }
 
 - (IBAction)shortcutButtonClicked:(id)sender
 {
     [_playerViewController endPlayback];
-    [_instrumentViewController toggleView];
+    [_instrumentViewController toggleView:YES];
 }
 
 - (IBAction)modalLikeButtonClicked:(id)sender

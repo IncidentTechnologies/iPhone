@@ -68,40 +68,45 @@
 }
 
 
-- (void)toggleView
+- (void)toggleView:(BOOL)animated
 {
-    if ( _isSliding )
+    if ( _isDown )
     {
-        // We don't want to slide multiple times at once
-        return;
-    }
-    
-    _isSliding = YES;
-    
-    _isDown = !_isDown;
-    
-    self.view.userInteractionEnabled = _isDown;
-    
-    if ( _isDown == YES )
-    {
-        [_triangleIndicatorImage setHidden:NO];
-    }
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3f];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(slidingComplete)];
-    
-    if ( _isDown == YES )
-    {
-        _contentView.layer.transform = CATransform3DIdentity;
+        [self closeView:animated];
     }
     else
     {
-        _contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
+        [self openView:animated];
     }
     
-    [UIView commitAnimations];
+//    self.view.userInteractionEnabled = _isDown;
+//    
+//    if ( _isDown == YES )
+//    {
+//        [_triangleIndicatorImage setHidden:NO];
+//    }
+//    
+//    if ( animated == YES )
+//    {
+//        [UIView beginAnimations:nil context:NULL];
+//        [UIView setAnimationDuration:0.3f];
+//        [UIView setAnimationDelegate:self];
+//        [UIView setAnimationDidStopSelector:@selector(slidingComplete)];
+//    }
+//    
+//    if ( _isDown == YES )
+//    {
+//        _contentView.layer.transform = CATransform3DIdentity;
+//    }
+//    else
+//    {
+//        _contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
+//    }
+//    
+//    if ( animated == YES )
+//    {
+//        [UIView commitAnimations];
+//    }
 }
 
 - (void)slidingComplete
@@ -115,7 +120,7 @@
     }
 }
 
-- (void)closeView
+- (void)closeView:(BOOL)animated
 {
     if ( _isSliding )
     {
@@ -133,12 +138,30 @@
     
     self.view.userInteractionEnabled = NO;
     
-    [_triangleIndicatorImage setHidden:YES];
-
+    // Animate as requested
+    if ( animated == YES )
+    {
+        _isSliding = YES ;
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.3f];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(slidingComplete)];
+    }
+    
     _contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
+    
+    if ( animated == YES )
+    {
+        [UIView commitAnimations];
+    }
+    else
+    {
+        [_triangleIndicatorImage setHidden:YES];
+    }
 }
 
-- (void)openView
+- (void)openView:(BOOL)animated
 {
     if ( _isSliding )
     {
@@ -158,7 +181,24 @@
     
     [_triangleIndicatorImage setHidden:NO];
     
+    // Animate as requested
+    if ( animated == YES )
+    {
+        _isSliding = YES ;
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.3f];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(slidingComplete)];
+    }
+    
     _contentView.layer.transform = CATransform3DIdentity;
+    
+    if ( animated == YES )
+    {
+        [UIView commitAnimations];
+    }
+
 }
 
 - (void)setFrame:(CGRect)frame

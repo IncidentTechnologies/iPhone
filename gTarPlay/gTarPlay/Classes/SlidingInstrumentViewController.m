@@ -39,12 +39,14 @@ extern AudioController *g_audioController;
     
     _instrumentViewController = [[InstrumentTableViewController alloc] initWithAudioController:g_audioController];
     
+    // Forces viewDidLoad
     [self addChildViewController:_instrumentViewController];
+    [_instrumentViewController didMoveToParentViewController:self];
     
-    [_instrumentViewController.tableView setFrame:_innerContentView.bounds];
     [_innerContentView addSubview:_instrumentViewController.view];
     
-    [_instrumentViewController didMoveToParentViewController:self];
+    [_instrumentViewController.view setFrame:_innerContentView.bounds];
+    [_instrumentViewController.tableView setFrame:_innerContentView.bounds];
 
 }
 
@@ -64,7 +66,15 @@ extern AudioController *g_audioController;
 {
     [super viewDidLayoutSubviews];
     
+    [_instrumentViewController.view setFrame:_innerContentView.bounds];
     [_instrumentViewController.tableView setFrame:_innerContentView.bounds];
 }
 
+- (void)attachToSuperview:(UIView *)view withFrame:(CGRect)rect
+{
+    [super attachToSuperview:view withFrame:rect];
+    
+    // Otherwise, the frame doesn't center properly.
+//    [_instrumentViewController.tableView setFrame:_innerContentView.bounds];
+}
 @end

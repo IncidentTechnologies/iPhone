@@ -366,7 +366,7 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
-    [_volumeViewController toggleView];
+    [_volumeViewController toggleView:YES];
 }
 
 - (IBAction)finishButtonClicked:(id)sender
