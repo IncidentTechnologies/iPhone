@@ -10,9 +10,17 @@
 
 @class AudioController;
 
+@protocol InstrumentSelectionDelegate <NSObject>
+
+@optional
+-(void) didSelectInstrument;
+
+@end
+
 @interface InstrumentTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (retain, nonatomic) UITableView *tableView;
+@property (assign, nonatomic) id <InstrumentSelectionDelegate> delegate;
 
 - (id)initWithAudioController:(AudioController*)AC;
 

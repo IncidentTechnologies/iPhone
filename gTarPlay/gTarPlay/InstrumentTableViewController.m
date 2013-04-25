@@ -96,6 +96,9 @@
     NSString *instrumentName = [self.instruments objectAtIndex:indexPath.row];
     //[m_instrumentsScroll flickerSelectedItem];
     [self.audioController setSamplePackWithName:instrumentName withSelector:@selector(samplerFinishedLoadingCB:) andOwner:self];
+    
+    if ([_delegate respondsToSelector:@selector(didSelectInstrument)])
+        [_delegate didSelectInstrument];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
