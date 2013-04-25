@@ -11070,7 +11070,7 @@ AAEAAQABA</bytes>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="444838405">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -11204,6 +11204,7 @@ AAEAAQABA</bytes>
 					</object>
 				</object>
 				<string key="NSFrameSize">{350, 296}</string>
+				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="236678451"/>
 				<reference key="IBUIBackgroundColor" ref="1045111317"/>
 				<bool key="IBUIOpaque">NO</bool>
@@ -11213,6 +11214,10 @@ AAEAAQABA</bytes>
 				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{273, 262}</string>
+<<<<<<< Updated upstream
+=======
+				<reference key="NSSuperview"/>
+>>>>>>> Stashed changes
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwLjYyMjcxODk3ODEgMC44OTQxMTc2NDcxAA</bytes>
@@ -11233,6 +11238,10 @@ AAEAAQABA</bytes>
 				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{480, 320}</string>
+<<<<<<< Updated upstream
+=======
+				<reference key="NSSuperview"/>
+>>>>>>> Stashed changes
 				<bool key="IBUIUserInteractionEnabled">NO</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<object class="NSCustomResource" key="IBUIImage">

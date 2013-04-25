@@ -1,4 +1,4 @@
-//
+    //
 //  FreePlayController.m
 //  gTarPlay
 //
@@ -398,7 +398,7 @@ extern TelemetryController * g_telemetryController;
     [m_lineOutVolumeSlider setThumbImage: sliderKnobImage forState:UIControlStateNormal];
     
     m_wetSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    m_toneSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    m_toneSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);                    
     m_lineOutVolumeSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
     
     // Set up menu tab
