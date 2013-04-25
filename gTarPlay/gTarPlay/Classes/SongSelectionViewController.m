@@ -12,6 +12,7 @@
 #import "PlayViewController.h"
 #import "SlidingModalViewController.h"
 #import "VolumeViewController.h"
+#import "SlidingInstrumentViewController.h"
 #import "PlayerViewController.h"
 #import "UIView+Gtar.h"
 
@@ -34,6 +35,7 @@ extern GtarController *g_gtarController;
 @interface SongSelectionViewController ()
 {
     VolumeViewController *_volumeViewController;
+    SlidingInstrumentViewController *_instrumentViewController;
     
     NSArray *_userSongArray;
     SongPlaybackController *_playbackController;
@@ -111,10 +113,6 @@ extern GtarController *g_gtarController;
 {
     [super viewDidLayoutSubviews];
     
-//    _closeModalButton.imageView.transform = CGAffineTransformMakeScale( 0.5, 0.5 );
-//    _volumeButton.imageView.transform = CGAffineTransformMakeScale( 0.6, 0.6 );
-//    _instrumentButton.imageView.transform = CGAffineTransformMakeScale( 0.7, 0.7 );
-//    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -125,10 +123,16 @@ extern GtarController *g_gtarController;
     {
         _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
         
-        [_volumeViewController attachToSuperview:_volumeView];
-        
-        _volumeView.userInteractionEnabled = NO;
+        [_volumeViewController attachToSuperview:_songOptionsModal.contentView withFrame:_volumeView.frame];
     }
+    
+    if ( _instrumentViewController == nil )
+    {
+        _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
+        
+        [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,6 +164,7 @@ extern GtarController *g_gtarController;
     [_volumeView release];
     [_songPlayerView release];
     [_topBar release];
+    [_instrumentView release];
     [super dealloc];
 }
 
@@ -183,20 +188,19 @@ extern GtarController *g_gtarController;
 {
     [_playerViewController endPlayback];
     [_songOptionsModal closeButtonClicked:sender];
-    [_volumeViewController closeVolumeView];
-    [_volumeView setUserInteractionEnabled:NO];
+    
+    [_volumeViewController closeView:NO];
+    [_instrumentViewController closeView:NO];
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
-    // The volume view is obstructing stuff below it. Hide it until we need it.
-    [_volumeViewController toggleVolumeView];
-    [_volumeView setUserInteractionEnabled:!_volumeView.userInteractionEnabled];
+    [_volumeViewController toggleView:YES];
 }
 
 - (IBAction)instrumentButtonClicked:(id)sender
 {
-    
+    [_instrumentViewController toggleView:YES];
 }
 
 - (IBAction)difficulyButtonClicked:(id)sender

@@ -95,6 +95,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *modalVolumeButton;
 @property (retain, nonatomic) IBOutlet UIButton *modalShortcutButton;
 @property (retain, nonatomic) IBOutlet UIView *modalVolumeView;
+@property (retain, nonatomic) IBOutlet UIView *modalInstrumentView;
 @property (retain, nonatomic) IBOutlet UITableView *commentTable;
 @property (retain, nonatomic) IBOutlet UIButton *modalLikeButton;
 
