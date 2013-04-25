@@ -54,7 +54,8 @@
     self.tableView.dataSource = self;
     [self.tableView reloadData];
     
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+    NSInteger instrumentIndex = [_audioController getCurrentSamplePackIndex];
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:instrumentIndex inSection:0];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
     
     [self.view addSubview:self.tableView];
