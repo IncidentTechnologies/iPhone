@@ -1537,7 +1537,7 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)toggleLEDTab:(id)sender
 {
-    //[self switchMainContentControllerToVC:self.lightsVC];
+    [self switchMainContentControllerToVC:self.lightsVC];
     [self showArrow:_arrowLights];
     
     /*

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
 		9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
+		9D6DA778172A276300EB96C7 /* LightsImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DA777172A276300EB96C7 /* LightsImage.png */; };
+		9D6DA779172A276300EB96C7 /* LightsImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DA777172A276300EB96C7 /* LightsImage.png */; };
 		9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137D1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137E1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib */; };
@@ -2478,6 +2480,7 @@
 		9D63D7F81550861600FABD5B /* Rock Guitar 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Rock Guitar 78.mp3"; path = "Rock Guitar/Rock Guitar 78.mp3"; sourceTree = "<group>"; };
 		9D63D7F91550861600FABD5B /* Rock Guitar 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Rock Guitar 79.mp3"; path = "Rock Guitar/Rock Guitar 79.mp3"; sourceTree = "<group>"; };
 		9D63D7FA1550861600FABD5B /* Rock Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Rock Guitar 80.mp3"; path = "Rock Guitar/Rock Guitar 80.mp3"; sourceTree = "<group>"; };
+		9D6DA777172A276300EB96C7 /* LightsImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightsImage.png; path = Resources/Images/Freeplay/LightsImage.png; sourceTree = "<group>"; };
 		9D9798AE1549C3360095282C /* Strings 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strings 40.mp3"; path = "strings/Strings 40.mp3"; sourceTree = "<group>"; };
 		9D9798AF1549C3360095282C /* Strings 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strings 41.mp3"; path = "strings/Strings 41.mp3"; sourceTree = "<group>"; };
 		9D9798B01549C3360095282C /* Strings 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strings 42.mp3"; path = "strings/Strings 42.mp3"; sourceTree = "<group>"; };
@@ -4034,6 +4037,7 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9D6DA777172A276300EB96C7 /* LightsImage.png */,
 				9DF148411729C6230056A6D1 /* DownArrowOrange.png */,
 				9DF148421729C6230056A6D1 /* DownArrowRedOrange.png */,
 				9DF148431729C6230056A6D1 /* DownArrowYellow.png */,
@@ -6338,6 +6342,7 @@
 				9DF148441729C6230056A6D1 /* DownArrowOrange.png in Resources */,
 				9DF148461729C6230056A6D1 /* DownArrowRedOrange.png in Resources */,
 				9DF148481729C6230056A6D1 /* DownArrowYellow.png in Resources */,
+				9D6DA778172A276300EB96C7 /* LightsImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7296,6 +7301,7 @@
 				9DF148451729C6230056A6D1 /* DownArrowOrange.png in Resources */,
 				9DF148471729C6230056A6D1 /* DownArrowRedOrange.png in Resources */,
 				9DF148491729C6230056A6D1 /* DownArrowYellow.png in Resources */,
+				9D6DA779172A276300EB96C7 /* LightsImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
