@@ -122,11 +122,11 @@
 
 - (void)closeView:(BOOL)animated
 {
-    if ( _isSliding )
-    {
-        // We don't want to slide multiple times at once
-        return;
-    }
+//    if ( _isSliding )
+//    {
+//        // We don't want to slide multiple times at once
+//        return;
+//    }
     
     if ( _isDown == NO )
     {
@@ -163,11 +163,11 @@
 
 - (void)openView:(BOOL)animated
 {
-    if ( _isSliding )
-    {
-        // We don't want to slide multiple times at once
-        return;
-    }
+//    if ( _isSliding )
+//    {
+//        // We don't want to slide multiple times at once
+//        return;
+//    }
     
     if ( _isDown == YES )
     {

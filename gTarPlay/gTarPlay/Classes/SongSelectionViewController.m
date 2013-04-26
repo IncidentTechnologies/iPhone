@@ -196,11 +196,13 @@ extern GtarController *g_gtarController;
 - (IBAction)volumeButtonClicked:(id)sender
 {
     [_volumeViewController toggleView:YES];
+    [_instrumentViewController closeView:YES];
 }
 
 - (IBAction)instrumentButtonClicked:(id)sender
 {
     [_instrumentViewController toggleView:YES];
+    [_volumeViewController closeView:YES];
 }
 
 - (IBAction)difficulyButtonClicked:(id)sender
