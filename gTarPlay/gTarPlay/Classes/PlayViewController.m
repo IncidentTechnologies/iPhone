@@ -338,12 +338,13 @@ extern TelemetryController * g_telemetryController;
     
     // If the finish button is visible (i.e. we are done) we want
     // to shortcut there instead.
-    if ( _finishButton.isHidden == NO )
-    {
-        [self finishButtonClicked:nil];
-        
-        return;
-    }
+    // I'm disabling the cancel button now, don't need this.
+//    if ( _finishButton.isHidden == NO )
+//    {
+//        [self finishButtonClicked:nil];
+//        
+//        return;
+//    }
     
     [_metronomeTimer invalidate];
     _metronomeTimer = nil;
@@ -419,7 +420,7 @@ extern TelemetryController * g_telemetryController;
     _menuIsOpen = !_menuIsOpen;
     
     // Close the volume everytime we push the menu button
-    [_volumeViewController closeView];
+    [_volumeViewController closeView:YES];
     
     if ( _menuIsOpen == YES )
     {
@@ -1064,6 +1065,7 @@ extern TelemetryController * g_telemetryController;
     [_finishButton setHidden:YES];
     [_outputView setHidden:NO];
     [_postToFeedView setHidden:YES];
+    [_backButton setEnabled:YES];
     
     //
     // Start off the song stuff
@@ -1630,6 +1632,7 @@ extern TelemetryController * g_telemetryController;
     
     [_completionLabel setHidden:NO];
     [_finishButton setHidden:NO];
+    [_backButton setEnabled:NO];
     
     [self menuButtonClicked:nil];
     
