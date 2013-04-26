@@ -43,6 +43,12 @@
 		9DF1483A172763250056A6D1 /* 13-Ver2_FreePlay_Menu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DF14838172763240056A6D1 /* 13-Ver2_FreePlay_Menu.jpg */; };
 		9DF1483C172782B80056A6D1 /* SliderKnobBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1483B172782B70056A6D1 /* SliderKnobBlue.png */; };
 		9DF1483D172782B80056A6D1 /* SliderKnobBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1483B172782B70056A6D1 /* SliderKnobBlue.png */; };
+		9DF148441729C6230056A6D1 /* DownArrowOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148411729C6230056A6D1 /* DownArrowOrange.png */; };
+		9DF148451729C6230056A6D1 /* DownArrowOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148411729C6230056A6D1 /* DownArrowOrange.png */; };
+		9DF148461729C6230056A6D1 /* DownArrowRedOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148421729C6230056A6D1 /* DownArrowRedOrange.png */; };
+		9DF148471729C6230056A6D1 /* DownArrowRedOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148421729C6230056A6D1 /* DownArrowRedOrange.png */; };
+		9DF148481729C6230056A6D1 /* DownArrowYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148431729C6230056A6D1 /* DownArrowYellow.png */; };
+		9DF148491729C6230056A6D1 /* DownArrowYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148431729C6230056A6D1 /* DownArrowYellow.png */; };
 		EC0B6E7516A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0B6E7616A5112800DB2917 /* SliderEndMax.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0B6E7416A5112800DB2917 /* SliderEndMax.png */; };
 		EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD2D16EE8E3C00E567A6 /* TitleNavigationController.m */; };
@@ -2709,6 +2715,9 @@
 		9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuSoloSegment.png; path = Resources/Images/Freeplay/MenuSoloSegment.png; sourceTree = "<group>"; };
 		9DF14838172763240056A6D1 /* 13-Ver2_FreePlay_Menu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "13-Ver2_FreePlay_Menu.jpg"; path = "../../../../Dropbox/IncidentPublic/Application Development/iPhoneApps/Version2_iPhone4/13-Ver2_FreePlay_Menu.jpg"; sourceTree = "<group>"; };
 		9DF1483B172782B70056A6D1 /* SliderKnobBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderKnobBlue.png; path = Resources/Images/Freeplay/SliderKnobBlue.png; sourceTree = "<group>"; };
+		9DF148411729C6230056A6D1 /* DownArrowOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DownArrowOrange.png; path = Resources/Images/General/DownArrowOrange.png; sourceTree = "<group>"; };
+		9DF148421729C6230056A6D1 /* DownArrowRedOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DownArrowRedOrange.png; path = Resources/Images/General/DownArrowRedOrange.png; sourceTree = "<group>"; };
+		9DF148431729C6230056A6D1 /* DownArrowYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DownArrowYellow.png; path = Resources/Images/General/DownArrowYellow.png; sourceTree = "<group>"; };
 		9DF47986159155080047953A /* Harmonizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Harmonizer.h; sourceTree = "<group>"; };
 		9DF47987159155080047953A /* Harmonizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Harmonizer.m; sourceTree = "<group>"; };
 		EC020DD0141EA28600627303 /* SongPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongPlayerViewController.h; path = ../gTarPlay.xcodeproj/SongPlayerViewController.h; sourceTree = "<group>"; };
@@ -4025,6 +4034,9 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9DF148411729C6230056A6D1 /* DownArrowOrange.png */,
+				9DF148421729C6230056A6D1 /* DownArrowRedOrange.png */,
+				9DF148431729C6230056A6D1 /* DownArrowYellow.png */,
 				9DF1483B172782B70056A6D1 /* SliderKnobBlue.png */,
 				9DF14838172763240056A6D1 /* 13-Ver2_FreePlay_Menu.jpg */,
 				9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */,
@@ -6323,6 +6335,9 @@
 				EC4866621728B34C0066194D /* OrangeEffects.png in Resources */,
 				9DF14839172763250056A6D1 /* 13-Ver2_FreePlay_Menu.jpg in Resources */,
 				9DF1483C172782B80056A6D1 /* SliderKnobBlue.png in Resources */,
+				9DF148441729C6230056A6D1 /* DownArrowOrange.png in Resources */,
+				9DF148461729C6230056A6D1 /* DownArrowRedOrange.png in Resources */,
+				9DF148481729C6230056A6D1 /* DownArrowYellow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7278,6 +7293,9 @@
 				EC4866631728B34C0066194D /* OrangeEffects.png in Resources */,
 				9DF1483A172763250056A6D1 /* 13-Ver2_FreePlay_Menu.jpg in Resources */,
 				9DF1483D172782B80056A6D1 /* SliderKnobBlue.png in Resources */,
+				9DF148451729C6230056A6D1 /* DownArrowOrange.png in Resources */,
+				9DF148471729C6230056A6D1 /* DownArrowRedOrange.png in Resources */,
+				9DF148491729C6230056A6D1 /* DownArrowYellow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7547,7 +7565,6 @@
 					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 				);
-				PROVISIONING_PROFILE = "653C7089-8977-497D-9B13-2E8D8DD95220";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -7567,7 +7584,6 @@
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "653C7089-8977-497D-9B13-2E8D8DD95220";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

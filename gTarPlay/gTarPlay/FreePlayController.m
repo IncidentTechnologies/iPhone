@@ -47,6 +47,12 @@ extern TelemetryController * g_telemetryController;
 @property (retain, nonatomic) IBOutlet UIButton *effectsButton;
 @property (retain, nonatomic) IBOutlet UIButton *instrumentsButton;
 
+@property (retain, nonatomic) IBOutlet UIImageView *arrowMenu;
+@property (retain, nonatomic) IBOutlet UIImageView *arrowLights;
+@property (retain, nonatomic) IBOutlet UIImageView *arrowEffects;
+@property (retain, nonatomic) IBOutlet UIImageView *arrowInstruments;
+
+
 -(void) switchMainContentControllerToVC:(UIViewController*)newVC;
 
 @end
@@ -250,6 +256,10 @@ extern TelemetryController * g_telemetryController;
     [_lightsButton release];
     [_effectsButton release];
     [_instrumentsButton release];
+    [_arrowMenu release];
+    [_arrowLights release];
+    [_arrowEffects release];
+    [_arrowInstruments release];
 	[super dealloc];	
 }
 
@@ -1472,6 +1482,7 @@ extern TelemetryController * g_telemetryController;
 {
     [self.instrumentsAndEffectsVC displayEffects];
     [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
+    [self showArrow:_arrowEffects];
     
     /*
     // First toggle selected state
@@ -1500,6 +1511,7 @@ extern TelemetryController * g_telemetryController;
 {
     [self.instrumentsAndEffectsVC displayInstruments];
     [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
+    [self showArrow:_arrowInstruments];
     
     /*
     // First toggle selected state
@@ -1526,6 +1538,7 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)toggleLEDTab:(id)sender
 {
     //[self switchMainContentControllerToVC:self.lightsVC];
+    [self showArrow:_arrowLights];
     
     /*
      OLD UI code
@@ -1549,6 +1562,16 @@ extern TelemetryController * g_telemetryController;
     
     [UIView commitAnimations];
      */
+}
+
+- (void)showArrow:(UIView*)arrow
+{
+    _arrowMenu.hidden = YES;
+    _arrowLights.hidden = YES;
+    _arrowEffects.hidden = YES;
+    _arrowInstruments.hidden = YES;
+    
+    arrow.hidden = NO;
 }
 
 // Toggle between turning LEDs on/off to display a scale
@@ -1631,6 +1654,7 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)toggleMenuTab:(id)sender
 {
     [self switchMainContentControllerToVC:self.fpMenuVC];
+    [self showArrow:_arrowMenu];
     
     /*
     // First toggle selected state
