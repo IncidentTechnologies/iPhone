@@ -28,6 +28,8 @@
 #import <gTarAppCore/AppCore.h>
 #import <gTarAppCore/TelemetryController.h>
 
+#import "UIView+Gtar.h"
+
 extern GtarController * g_gtarController;
 extern AudioController * g_audioController;
 extern TelemetryController * g_telemetryController;
@@ -139,7 +141,6 @@ extern TelemetryController * g_telemetryController;
         m_playTimeAdjustment = 0;
         
         // Create audio controller
-        g_audioController.m_delegate = self;
         //[g_audioController initializeAUGraph];
         [g_audioController startAUGraph];
         
