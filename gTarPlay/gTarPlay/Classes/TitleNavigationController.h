@@ -104,5 +104,6 @@
 - (IBAction)shortcutButtonClicked:(id)sender;
 - (IBAction)modalLikeButtonClicked:(id)sender;
 - (IBAction)modalCommentButtonClicked:(id)sender;
+- (IBAction)modalBlackButtonClicked:(id)sender;
 
 @end

@@ -10,8 +10,7 @@
 
 @interface SlidingViewController : UIViewController
 
-//@property (assign, nonatomic) BOOL isDown;
-//@property (assign, nonatomic) BOOL isSliding;
+@property (assign, nonatomic) BOOL isDown;
 @property (retain, nonatomic) IBOutlet UIView *contentView;
 @property (retain, nonatomic) IBOutlet UIView *triangleIndicatorImage;
 

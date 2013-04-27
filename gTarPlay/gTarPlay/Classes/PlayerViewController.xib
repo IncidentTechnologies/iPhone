@@ -128,7 +128,7 @@
 								<float key="IBUIAlpha">0.80000001192092896</float>
 								<int key="IBUIContentMode">7</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Song Title</string>
+								<string key="IBUIText">Song Artist</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -162,7 +162,7 @@
 								<float key="IBUIAlpha">0.80000001192092896</float>
 								<int key="IBUIContentMode">7</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Song Artist</string>
+								<string key="IBUIText">Song Title</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -212,6 +212,7 @@
 								<string key="NSFrame">{{5, 8}, {44, 44}}</string>
 								<reference key="NSSuperview" ref="927674619"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -305,22 +306,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">songTitle</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="218437387"/>
-					</object>
-					<int key="connectionID">250</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">songArtist</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="242530954"/>
-					</object>
-					<int key="connectionID">251</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">touchSurfaceView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="1006381079"/>
@@ -342,6 +327,22 @@
 						<reference key="destination" ref="714725673"/>
 					</object>
 					<int key="connectionID">19</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">songArtist</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="218437387"/>
+					</object>
+					<int key="connectionID">297</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">songTitle</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="242530954"/>
+					</object>
+					<int key="connectionID">298</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -486,7 +487,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">296</int>
+			<int key="maxID">298</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

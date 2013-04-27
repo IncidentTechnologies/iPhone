@@ -12,7 +12,7 @@
 
 @interface SlidingViewController ()
 {
-    BOOL _isDown;
+//    BOOL _isDown;
     BOOL _isSliding;
 }
 @end

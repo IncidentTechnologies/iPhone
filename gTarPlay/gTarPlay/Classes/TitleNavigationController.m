@@ -685,18 +685,35 @@ extern TelemetryController * g_telemetryController;
     [_playerViewController endPlayback];
     [_activityFeedModal closeButtonClicked:sender];
     
+    [_activityFeedModal.blackButton setHidden:YES];
     [_volumeViewController closeView:NO];
     [_instrumentViewController closeView:NO];
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
+    if ( _volumeViewController.isDown == YES )
+    {
+        [_activityFeedModal.blackButton setHidden:YES];
+    }
+    else
+    {
+        [_activityFeedModal.blackButton setHidden:NO];
+    }
     [_volumeViewController toggleView:YES];
     [_instrumentViewController closeView:YES];
 }
 
 - (IBAction)shortcutButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.isDown == YES )
+    {
+        [_activityFeedModal.blackButton setHidden:YES];
+    }
+    else
+    {
+        [_activityFeedModal.blackButton setHidden:NO];
+    }
     [_playerViewController endPlayback];
     [_instrumentViewController toggleView:YES];
     [_volumeViewController closeView:YES];
@@ -709,6 +726,13 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)modalCommentButtonClicked:(id)sender
 {
+}
+
+- (IBAction)modalBlackButtonClicked:(id)sender
+{
+    [_activityFeedModal.blackButton setHidden:YES];
+    [_volumeViewController closeView:YES];
+    [_instrumentViewController closeView:YES];
 }
 
 #pragma mark - Movie Playback

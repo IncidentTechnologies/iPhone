@@ -191,16 +191,34 @@ extern GtarController *g_gtarController;
     
     [_volumeViewController closeView:NO];
     [_instrumentViewController closeView:NO];
+    [_songOptionsModal.blackButton setHidden:YES];
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
+    if ( _volumeViewController.isDown == YES )
+    {
+        [_songOptionsModal.blackButton setHidden:YES];
+    }
+    else
+    {
+        [_songOptionsModal.blackButton setHidden:NO];
+    }
     [_volumeViewController toggleView:YES];
     [_instrumentViewController closeView:YES];
 }
 
 - (IBAction)instrumentButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.isDown == YES )
+    {
+        [_songOptionsModal.blackButton setHidden:YES];
+    }
+    else
+    {
+        [_songOptionsModal.blackButton setHidden:NO];
+    }
+    [_playerViewController endPlayback];
     [_instrumentViewController toggleView:YES];
     [_volumeViewController closeView:YES];
 }
@@ -231,6 +249,13 @@ extern GtarController *g_gtarController;
         [_hardButton setEnabled:NO];
     }
     
+}
+
+- (IBAction)blackButtonClicked:(id)sender
+{
+    [_songOptionsModal.blackButton setHidden:YES];
+    [_instrumentViewController closeView:YES];
+    [_volumeViewController closeView:YES];
 }
 
 #pragma mark - UserSong management

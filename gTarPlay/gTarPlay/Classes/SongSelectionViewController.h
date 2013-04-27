@@ -46,6 +46,6 @@
 - (IBAction)volumeButtonClicked:(id)sender;
 - (IBAction)instrumentButtonClicked:(id)sender;
 - (IBAction)difficulyButtonClicked:(id)sender;
-
+- (IBAction)blackButtonClicked:(id)sender;
 
 @end

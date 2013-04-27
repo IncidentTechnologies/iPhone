@@ -221,7 +221,9 @@ extern TelemetryController * g_telemetryController;
     // Also create the AC using the instrument from the song
     g_audioController.m_delegate = self;
     
-    [g_audioController setSamplePackWithName:_song.m_instrument];
+    // We let the previous screen set the sample pack of this song.
+//    [g_audioController setSamplePackWithName:_song.m_instrument];
+    [g_audioController startAUGraph];
     
     //
     // Set the audio routing destination
@@ -389,7 +391,8 @@ extern TelemetryController * g_telemetryController;
         session.m_combo = _scoreTracker.m_streak;
         session.m_notes = @"Recorded in gTar Play";
         
-        _songRecorder.m_song.m_instrument = _song.m_instrument;
+//        _songRecorder.m_song.m_instrument = _song.m_instrument;
+        _songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
         
         // Create the xmp
         session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
@@ -1015,7 +1018,7 @@ extern TelemetryController * g_telemetryController;
     [self stopMainEventLoop];
     
     [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
-    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
 
 }
 
