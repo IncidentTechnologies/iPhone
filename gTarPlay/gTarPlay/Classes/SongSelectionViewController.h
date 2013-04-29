@@ -16,7 +16,7 @@
 @class PlayerViewController;
 @class SlidingModalViewController;
 
-@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver> // <UISearchBarDelegate>
+@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver>
 
 @property (retain, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
 

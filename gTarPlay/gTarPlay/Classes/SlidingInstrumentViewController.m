@@ -8,8 +8,6 @@
 
 #import "SlidingInstrumentViewController.h"
 
-#import "InstrumentTableViewController.h"
-
 #import <AudioController/AudioController.h>
 
 extern AudioController *g_audioController;
@@ -38,6 +36,8 @@ extern AudioController *g_audioController;
     // Do any additional setup after loading the view from its nib.
     
     _instrumentViewController = [[InstrumentTableViewController alloc] initWithAudioController:g_audioController];
+    
+    _instrumentViewController.delegate = self;
     
     // Forces viewDidLoad
     [self addChildViewController:_instrumentViewController];
@@ -77,4 +77,19 @@ extern AudioController *g_audioController;
     // Otherwise, the frame doesn't center properly.
 //    [_instrumentViewController.tableView setFrame:_innerContentView.bounds];
 }
+
+#pragma mark - InstrumentSelectionDelegate
+
+- (void)didSelectInstrument
+{
+    _loading = YES;
+    
+    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didLoadInstrument) userInfo:nil repeats:NO];
+}
+
+- (void)didLoadInstrument
+{
+    _loading = NO;
+}
+
 @end

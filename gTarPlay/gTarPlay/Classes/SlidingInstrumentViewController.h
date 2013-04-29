@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import "SlidingViewController.h"
+#import "InstrumentTableViewController.h"
 
-@interface SlidingInstrumentViewController : SlidingViewController
+@interface SlidingInstrumentViewController : SlidingViewController <InstrumentSelectionDelegate>
 
 @property (retain, nonatomic) IBOutlet UIView *innerContentView;
+
+@property (readonly, nonatomic) BOOL loading;
 
 @end

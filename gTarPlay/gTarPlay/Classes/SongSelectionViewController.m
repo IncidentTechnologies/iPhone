@@ -210,6 +210,11 @@ extern GtarController *g_gtarController;
 
 - (IBAction)instrumentButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     if ( _instrumentViewController.isDown == YES )
     {
         [_songOptionsModal.blackButton setHidden:YES];
@@ -253,6 +258,10 @@ extern GtarController *g_gtarController;
 
 - (IBAction)blackButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
     [_songOptionsModal.blackButton setHidden:YES];
     [_instrumentViewController closeView:YES];
     [_volumeViewController closeView:YES];
