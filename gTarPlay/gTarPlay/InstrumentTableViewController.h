@@ -13,7 +13,8 @@
 @protocol InstrumentSelectionDelegate <NSObject>
 
 @optional
--(void) didSelectInstrument;
+- (void)didSelectInstrument;
+- (void)didLoadInstrument;
 
 @end
 

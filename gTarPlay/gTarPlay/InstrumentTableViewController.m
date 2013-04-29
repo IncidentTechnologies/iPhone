@@ -121,6 +121,9 @@
         [self.audioController startAUGraph];
         //[m_instrumentsScroll stopFlicker];
     }
+    
+    if ([_delegate respondsToSelector:@selector(didLoadInstrument)])
+        [_delegate didLoadInstrument];
 }
 
 @end
