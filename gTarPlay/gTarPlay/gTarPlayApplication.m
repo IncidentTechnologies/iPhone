@@ -9,12 +9,15 @@
 #import "gTarPlayApplication.h"
 
 #define IDLE_TIMEOUT 120
+#define ENABLE_TIMEOUT false
 
 @implementation gTarPlayApplication
 
 #pragma mark -
 #pragma mark UIApplication
 
+// This function resets the idle timer everytime there is a touch event.
+#if ENABLE_TIMEOUT
 - (void)sendEvent:(UIEvent*)event
 {
     [super sendEvent:event];
@@ -32,22 +35,26 @@
         }
     }
 }
+#endif
 
 #pragma mark -
 #pragma mark Idle user detection
 
 - (void)resetIdleTimer
 {
-    
+#if ENABLE_TIMEOUT
     [m_idleTimer invalidate];
     [m_idleTimer release];
     
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     
     m_idleTimer = [[NSTimer scheduledTimerWithTimeInterval:IDLE_TIMEOUT target:self selector:@selector(idleTimerExpired) userInfo:nil repeats:NO] retain];
-    
+#else
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+#endif
 }
 
+#if ENABLE_TIMEOUT
 - (void)idleTimerExpired
 {
     
@@ -60,5 +67,5 @@
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     
 }
-
+#endif
 @end
