@@ -12,6 +12,7 @@
 #import "InstrumentsAndEffectsViewController.h"
 #import "LightsViewController.h"
 #import "FPMenuViewController.h"
+#import "VolumeViewController.h"
 
 #import "TransparentAreaView.h"
 #import "CustomComboBox.h"
@@ -39,6 +40,7 @@ extern TelemetryController * g_telemetryController;
 @property (retain, nonatomic) InstrumentsAndEffectsViewController *instrumentsAndEffectsVC;
 @property (retain, nonatomic) LightsViewController *lightsVC;
 @property (retain, nonatomic) FPMenuViewController *fpMenuVC;
+@property (retain, nonatomic) VolumeViewController *volumeVC;
 
 @property (retain, nonatomic) IBOutlet UIView *mainContentView;
 @property (retain, nonatomic) UIViewController *currentMainContentVC;
@@ -113,10 +115,7 @@ extern TelemetryController * g_telemetryController;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if ( self )
-    {
-        
-        // Custom initialization
-        
+    {        
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
         
@@ -132,6 +131,7 @@ extern TelemetryController * g_telemetryController;
         _instrumentsAndEffectsVC = [[InstrumentsAndEffectsViewController alloc] initWithAudioController:g_audioController];
         _lightsVC = [[LightsViewController alloc] init];
         _fpMenuVC = [[FPMenuViewController alloc] init];
+        _volumeVC = [[VolumeViewController alloc] init];
         
         for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
         {
@@ -459,6 +459,18 @@ extern TelemetryController * g_telemetryController;
     
     [g_gtarController addObserver:self];
     
+}
+
+- (void)viewDidLayoutSubviews
+{
+    CGRect frame = CGRectMake(_volumeButton.frame.origin.x, 0, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
+    _volumeVC.view.frame = frame;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    CGRect frame = CGRectMake(_volumeButton.frame.origin.x, 0, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
+    [_volumeVC attachToSuperview:_mainContentView withFrame:frame];
 }
 
 - (void)viewDidUnload
@@ -1534,6 +1546,12 @@ extern TelemetryController * g_telemetryController;
     
     [UIView commitAnimations];
      */
+}
+
+- (IBAction)toggleVolumeView:(id)sender
+{
+    [self.mainContentView bringSubviewToFront:_volumeVC.view];
+    [_volumeVC toggleView:YES];
 }
 
 - (IBAction)toggleLEDTab:(id)sender
