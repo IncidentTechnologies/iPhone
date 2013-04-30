@@ -83,8 +83,6 @@ extern AudioController *g_audioController;
 - (void)didSelectInstrument
 {
     _loading = YES;
-    
-    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didLoadInstrument) userInfo:nil repeats:NO];
 }
 
 - (void)didLoadInstrument

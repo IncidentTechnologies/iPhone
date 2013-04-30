@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class SelectorControl;
-@class PullToUpdateTableView;
+#import "PullToUpdateTableView.h"
 
-@interface SocialViewController : UIViewController
+@class SelectorControl;
+
+@interface SocialViewController : UIViewController <PullToUpdateTableViewDelegate, UITableViewDataSource>
 
 @property (retain, nonatomic) IBOutlet UIView *topBar;
 @property (retain, nonatomic) IBOutlet SelectorControl *feedSelector;

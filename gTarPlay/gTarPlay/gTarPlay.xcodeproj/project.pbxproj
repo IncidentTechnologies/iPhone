@@ -1050,6 +1050,10 @@
 		EC26A3A616CB198F006E97E2 /* DefaultRot.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A316CB198E006E97E2 /* DefaultRot.png */; };
 		EC26A3A716CB198F006E97E2 /* DefaultRot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */; };
 		EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A416CB198E006E97E2 /* DefaultRot@2x.png */; };
+		EC3415D4172F3E4900501AF4 /* SocialUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3415D3172F3E4900501AF4 /* SocialUserCell.m */; };
+		EC3415D5172F3E4900501AF4 /* SocialUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3415D3172F3E4900501AF4 /* SocialUserCell.m */; };
+		EC3415D8172F3E7E00501AF4 /* SocialUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC3415D7172F3E7E00501AF4 /* SocialUserCell.xib */; };
+		EC3415D9172F3E7E00501AF4 /* SocialUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC3415D7172F3E7E00501AF4 /* SocialUserCell.xib */; };
 		EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
 		EC48663B17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
 		EC48665417287E8D0066194D /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC48665317287E8D0066194D /* SlidingViewController.m */; };
@@ -2927,6 +2931,9 @@
 		EC31BB9114E34EE500DC7083 /* StoreBuyCreditsBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoreBuyCreditsBG.png; sourceTree = "<group>"; };
 		EC31BB9514E4DD9C00DC7083 /* StoreCreditsButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoreCreditsButtonON.png; sourceTree = "<group>"; };
 		EC31BB9614E4DD9D00DC7083 /* StoreCreditsButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoreCreditsButtonOFF.png; sourceTree = "<group>"; };
+		EC3415D2172F3E4900501AF4 /* SocialUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialUserCell.h; sourceTree = "<group>"; };
+		EC3415D3172F3E4900501AF4 /* SocialUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialUserCell.m; sourceTree = "<group>"; };
+		EC3415D7172F3E7E00501AF4 /* SocialUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialUserCell.xib; sourceTree = "<group>"; };
 		EC341B1D141702480011F6C2 /* tutorial.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tutorial.plist; sourceTree = "<group>"; };
 		EC341B2114171A940011F6C2 /* Arrows-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrows-01.png"; path = "../Arrows-01.png"; sourceTree = "<group>"; };
 		EC341B2214171A940011F6C2 /* Arrows-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrows-02.png"; path = "../Arrows-02.png"; sourceTree = "<group>"; };
@@ -3427,8 +3434,8 @@
 		080E96DDFE201D6D7F000001 /* App Source */ = {
 			isa = PBXGroup;
 			children = (
-				ECE832381718EA0A006E2391 /* SocialViewController */,
 				EC0BAD8116F1791300E567A6 /* General UI */,
+				ECE832381718EA0A006E2391 /* SocialViewController */,
 				EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */,
 				EC0BAD8016F14A7800E567A6 /* SongSelectionViewController */,
 				ECE9D2441705119100BB6C53 /* PlayViewController */,
@@ -5257,6 +5264,9 @@
 				ECE832391718EA34006E2391 /* SocialViewController.h */,
 				ECE8323A1718EA34006E2391 /* SocialViewController.m */,
 				ECE8323B1718EA34006E2391 /* SocialViewController.xib */,
+				EC3415D2172F3E4900501AF4 /* SocialUserCell.h */,
+				EC3415D3172F3E4900501AF4 /* SocialUserCell.m */,
+				EC3415D7172F3E7E00501AF4 /* SocialUserCell.xib */,
 			);
 			name = SocialViewController;
 			sourceTree = "<group>";
@@ -6343,6 +6353,7 @@
 				9DF148461729C6230056A6D1 /* DownArrowRedOrange.png in Resources */,
 				9DF148481729C6230056A6D1 /* DownArrowYellow.png in Resources */,
 				9D6DA778172A276300EB96C7 /* LightsImage.png in Resources */,
+				EC3415D8172F3E7E00501AF4 /* SocialUserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7302,6 +7313,7 @@
 				9DF148471729C6230056A6D1 /* DownArrowRedOrange.png in Resources */,
 				9DF148491729C6230056A6D1 /* DownArrowYellow.png in Resources */,
 				9D6DA779172A276300EB96C7 /* LightsImage.png in Resources */,
+				EC3415D9172F3E7E00501AF4 /* SocialUserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7428,6 +7440,7 @@
 				ECE8323C1718EA34006E2391 /* SocialViewController.m in Sources */,
 				EC48665417287E8D0066194D /* SlidingViewController.m in Sources */,
 				EC48665A172889CA0066194D /* SlidingInstrumentViewController.m in Sources */,
+				EC3415D4172F3E4900501AF4 /* SocialUserCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7551,6 +7564,7 @@
 				ECE8323D1718EA34006E2391 /* SocialViewController.m in Sources */,
 				EC48665517287E8D0066194D /* SlidingViewController.m in Sources */,
 				EC48665B172889CA0066194D /* SlidingInstrumentViewController.m in Sources */,
+				EC3415D5172F3E4900501AF4 /* SocialUserCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
