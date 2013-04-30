@@ -1701,6 +1701,8 @@ extern TelemetryController * g_telemetryController;
 
 -(void) switchMainContentControllerToVC:(UIViewController *)newVC
 {
+    [_volumeVC closeView:YES];
+    
     if (self.currentMainContentVC ==  newVC)
     {
         // already on this view, do nothing
