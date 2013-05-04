@@ -43,10 +43,10 @@
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     
     // Set up JamPad
@@ -65,9 +65,12 @@
     self.effectsTableVC.tableView.frame = self.contentTable.bounds;
 }
 
-- (void)viewDidLayoutSubviews{
+- (void)viewDidLayoutSubviews
+{
     [super viewDidLayoutSubviews];
     
+    self.instrumentTableVC.tableView.frame = self.contentTable.bounds;
+    self.effectsTableVC.tableView.frame = self.contentTable.bounds;
 }
 
 - (void)didReceiveMemoryWarning

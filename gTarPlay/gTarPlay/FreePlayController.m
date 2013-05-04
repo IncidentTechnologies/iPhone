@@ -264,6 +264,7 @@ extern TelemetryController * g_telemetryController;
 	[super dealloc];	
 }
 
+
 - (void)viewDidLoad
 {
 
@@ -274,6 +275,10 @@ extern TelemetryController * g_telemetryController;
     [self.mainContentView addSubview:self.instrumentsAndEffectsVC.view];
     [self.instrumentsAndEffectsVC didMoveToParentViewController:self];
     self.currentMainContentVC = self.instrumentsAndEffectsVC;
+    
+    [_instrumentsAndEffectsVC.view setFrame:_mainContentView.bounds];
+    [_lightsVC.view setFrame:_mainContentView.bounds];
+    [_fpMenuVC.view setFrame:_mainContentView.bounds];
     
     // Set content mode so that UIButton images resize their width to be proportional
     // to the height set in interface builder via the UIButtons content inset
@@ -463,12 +468,16 @@ extern TelemetryController * g_telemetryController;
 
 - (void)viewDidLayoutSubviews
 {
+    [super viewDidLayoutSubviews];
+    
     CGRect frame = CGRectMake(_volumeButton.frame.origin.x, 0, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
     _volumeVC.view.frame = frame;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     CGRect frame = CGRectMake(_volumeButton.frame.origin.x, 0, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
     [_volumeVC attachToSuperview:_mainContentView withFrame:frame];
 }
