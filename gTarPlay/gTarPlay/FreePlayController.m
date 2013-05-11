@@ -20,6 +20,7 @@
 #import "Harmonizer.h"
 
 #import <MediaPlayer/MediaPlayer.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import <AudioController/Effect.h>
 #import <AudioController/Parameter.h>
@@ -56,6 +57,7 @@ extern TelemetryController * g_telemetryController;
 @property (retain, nonatomic) IBOutlet UIImageView *arrowEffects;
 @property (retain, nonatomic) IBOutlet UIImageView *arrowInstruments;
 
+@property (retain, nonatomic) IBOutlet UIView *menuBarDropShadowView;
 
 -(void) switchMainContentControllerToVC:(UIViewController*)newVC;
 
@@ -261,8 +263,10 @@ extern TelemetryController * g_telemetryController;
     [_arrowLights release];
     [_arrowEffects release];
     [_arrowInstruments release];
+    [_menuBarDropShadowView release];
 	[super dealloc];	
 }
+
 
 - (void)viewDidLoad
 {
@@ -274,6 +278,13 @@ extern TelemetryController * g_telemetryController;
     [self.mainContentView addSubview:self.instrumentsAndEffectsVC.view];
     [self.instrumentsAndEffectsVC didMoveToParentViewController:self];
     self.currentMainContentVC = self.instrumentsAndEffectsVC;
+    
+    [_arrowMenu addShadow];
+    [_arrowLights addShadow];
+    [_arrowEffects addShadow];
+    [_arrowInstruments addShadow];
+    
+    [_menuBarDropShadowView addShadow];
     
     // Set content mode so that UIButton images resize their width to be proportional
     // to the height set in interface builder via the UIButtons content inset
@@ -463,14 +474,44 @@ extern TelemetryController * g_telemetryController;
 
 - (void)viewDidLayoutSubviews
 {
-    CGRect frame = CGRectMake(_volumeButton.frame.origin.x, 0, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
+    [super viewDidLayoutSubviews];
+    
+    CGRect frame = CGRectMake(_volumeButton.frame.origin.x, _mainContentView.frame.origin.y, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
     _volumeVC.view.frame = frame;
+    
+    // if adjusting zPosition transform is not necessary remove this block and
+    // remove import of QuartzCore
+    /*
+    _volumeVC.view.layer.zPosition = 101;
+    _menuBarDropShadowView.layer.zPosition = 100;
+    
+    _arrowMenu.layer.zPosition = 101;
+    _volumeVC.triangleIndicatorImage.layer.zPosition = 101;
+    _arrowLights.layer.zPosition = 101;
+    _arrowEffects.layer.zPosition = 101;
+    _arrowInstruments.layer.zPosition = 101;
+    
+    _menuButton.layer.zPosition = 102;
+    _volumeButton.layer.zPosition = 102;
+    _lightsButton.layer.zPosition = 102;
+    _effectsButton.layer.zPosition = 102;
+    _instrumentsButton.layer.zPosition = 102;
+    */
+    
+    //_volumeVC.triangleIndicatorImage.layer.zPosition = 1000;
+    
+    [_instrumentsAndEffectsVC.view setFrame:_mainContentView.bounds];
+    [_lightsVC.view setFrame:_mainContentView.bounds];
+    [_fpMenuVC.view setFrame:_mainContentView.bounds];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    CGRect frame = CGRectMake(_volumeButton.frame.origin.x, 0, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
-    [_volumeVC attachToSuperview:_mainContentView withFrame:frame];
+    [super viewWillAppear:animated];
+    
+    CGRect frame = CGRectMake(_volumeButton.frame.origin.x, _mainContentView.frame.origin.y, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
+    [_volumeVC attachToSuperview:self.view withFrame:frame];
+    
 }
 
 - (void)viewDidUnload
@@ -1701,6 +1742,8 @@ extern TelemetryController * g_telemetryController;
 
 -(void) switchMainContentControllerToVC:(UIViewController *)newVC
 {
+    [_volumeVC closeView:YES];
+    
     if (self.currentMainContentVC ==  newVC)
     {
         // already on this view, do nothing
