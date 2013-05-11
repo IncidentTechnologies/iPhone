@@ -8,9 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ExpandableSearchBar : UISearchBar
+@class ExpandableSearchBar;
 
-@property (retain, nonatomic) IBOutlet UIView *contractedView;
-@property (retain, nonatomic) IBOutlet UIView *expandedView;
+@protocol ExpandableSearchBarDelegate <NSObject>
+
+- (void)searchBarDidBeginEditing:(ExpandableSearchBar *)searchBar;
+- (void)searchBarSearch:(ExpandableSearchBar *)searchBar;
+- (void)searchBarCancel:(ExpandableSearchBar *)searchBar;
+
+@end
+
+@interface ExpandableSearchBar : UIView <UITextFieldDelegate>
+
+@property (assign, nonatomic) IBOutlet id<ExpandableSearchBarDelegate> delegate;
+@property (readonly, nonatomic) NSString *searchString;
+
+- (void)endSearch;
+- (void)beginSearch;
+- (void)minimizeKeyboard;
 
 @end

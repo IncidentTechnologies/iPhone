@@ -82,6 +82,7 @@ extern UserController * g_userController;
 
 - (void)dealloc
 {
+    [_userSongSession release];
     [_activityView release];
     [_likeButton release];
     [super dealloc];

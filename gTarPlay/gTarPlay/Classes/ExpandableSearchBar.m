@@ -8,16 +8,46 @@
 
 #import "ExpandableSearchBar.h"
 
+#import "UIImage+Gtar.h"
+
+#define CANCEL_BUTTON_HEIGHT _expandedFrame.size.height
+#define CANCEL_BUTTON_BUFFER (_expandedFrame.size.height + 6)
+#define CONTRACTED_LENGTH 125.0
+//#define TEXT_BOX_HEIGHT 30.0
+#define TEXT_BOX_HEIGHT self.bounds.size.height
+
+@interface ExpandableSearchBar ()
+{
+    CGRect _contractedFrame;
+    CGRect _expandedFrame;
+    
+    UITextField *_textField;
+    
+    UIButton *_cancelButton;
+    
+    UIImageView *_contractedPadding;
+    UIView *_expandedPadding;
+    
+    BOOL _animating;
+}
+
+@end
+
 @implementation ExpandableSearchBar
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self)
+    if ( self )
     {
-        // Initialization code
+        [self sharedInit];
     }
     return self;
+}
+
+- (id)init
+{
+    return nil;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -25,193 +55,232 @@
     self = [super initWithCoder:aDecoder];
     if ( self )
     {
-        // Custom initialization
-        // Hide the view
-        for ( UIView * subview in self.subviews )
-        {
-            if ( [subview isKindOfClass:NSClassFromString(@"UISearchBarBackground") ] )
-            {
-                subview.alpha = 0.0f;
-            }
-            
-            if ( [subview isKindOfClass:NSClassFromString(@"UISegmentedControl") ] )
-            {
-                subview.alpha = 0.0f;
-            }
-        }
-        
-
+        [self sharedInit];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)sharedInit
 {
-    // Drawing code
+    [self updateFrames];
+    
+//    self.translatesAutoresizingMaskIntoConstraints = NO;
+    _animating = NO;
+    
+    // set up padding views
+    _expandedPadding = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 17)];
+    
+    _contractedPadding = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 17)];
+    _contractedPadding.image = [UIImage imageNamed:@"MagGlass.png"];
+    _contractedPadding.contentMode = UIViewContentModeScaleAspectFit;
+    
+    // init the text field
+    UIImage *textFieldBackground = [UIImage imageNamed:@"SearchBar.png"];
+    
+    textFieldBackground = [textFieldBackground aspectFitImage:_contractedFrame.size];
+    
+    _textField = [[UITextField alloc] initWithFrame:_contractedFrame];
+    _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _textField.background = [textFieldBackground resizableImageWithCapInsets:UIEdgeInsetsMake(0, 50, 0, 50) resizingMode:UIImageResizingModeStretch];
+    _textField.borderStyle = UITextBorderStyleNone;
+    _textField.placeholder = @"Search...";
+    _textField.leftView = _contractedPadding;
+    _textField.leftViewMode = UITextFieldViewModeAlways;
+    _textField.rightView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 17)] autorelease];
+    _textField.rightViewMode = UITextFieldViewModeAlways;
+    _textField.returnKeyType = UIReturnKeySearch;
+    _textField.delegate = self;
+    
+    // make the cancel button
+    _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width - CANCEL_BUTTON_HEIGHT, 0, CANCEL_BUTTON_HEIGHT, CANCEL_BUTTON_HEIGHT)];
+    _cancelButton.alpha = 0.0;
+    [_cancelButton setImage:[UIImage imageNamed:@"SearchCancelButton.png"] forState:UIControlStateNormal];
+    [_cancelButton addTarget:self action:@selector(cancelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:_textField];
+    [self addSubview:_cancelButton];
 }
-*/
 
-#pragma mark - Search stuff
-
-
-- (void)resignSearchBarFirstResponder
+- (void)layoutSubviews
 {
+    [super layoutSubviews];
     
-    // resign first responder the normal way
-    [self resignFirstResponder];
-    
-    // re-enable the cancel button. this is silly, but works
-    for ( UIView * possibleButton in self.subviews )
+    if ( _animating == NO )
     {
-        // This is a button .. the cancel button is the only button we have
-        if ( [possibleButton isKindOfClass:[UIButton class]] )
-        {
-            // enable it, break out -- we are done
-            UIButton * cancelButton = (UIButton*)possibleButton;
-            
-            cancelButton.enabled = YES;
-            
-            return;
-        }
+        [self updateFrames];
+        
+        [_textField setFrame:_contractedFrame];
+        [_cancelButton setFrame:CGRectMake(self.bounds.size.width - CANCEL_BUTTON_HEIGHT, 0, CANCEL_BUTTON_HEIGHT, CANCEL_BUTTON_HEIGHT)];
     }
-    
 }
 
-- (void)contractSearchBar
+- (void)dealloc
 {
+    [_textField release];
+    [_cancelButton release];
+    [_contractedPadding release];
+    [_expandedPadding release];
     
-    // All done searching, clear everything out
-    [self setText:@""];
-    [self resignFirstResponder];
-    
-    // remove the cancel button
-    [self setShowsCancelButton:NO animated:YES];
-    
-    // contract the search box
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3f];
-    
-    self.frame = _contractedView.frame;
-    
-    [UIView commitAnimations];
-    
+    [super dealloc];
 }
 
-- (void)expandSearchBar
+#pragma mark - External access
+
+- (void)endSearch
 {
-    // display cancel button
-    [self setShowsCancelButton:YES animated:YES];
-
-    // add the search string back into the bar
-//    [self setText:m_currentSearchString];
-
-    // expand out the search box with a nice animation
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3f];
-
-    self.frame = _expandedView.frame;
-
-    [UIView commitAnimations];
-    
+    [self cancelButtonClicked:nil];
 }
 
 - (void)beginSearch
 {
-// switch over to the search view
-//    m_searchViewController.m_previousViewController = m_currentViewController;
-//
-//    [self switchInViewController:m_searchViewController];
-    
+    [_textField becomeFirstResponder];
 }
 
-- (void)cancelSearch
+- (void)minimizeKeyboard
 {
-    
-    // return back to the previous controller
-    //    [self returnToPreviousViewController:m_searchViewController];
-    
+    [_textField resignFirstResponder];
 }
 
-- (void)searchForString:(NSString*)searchString
+#pragma mark - Misc
+
+- (void)cancelButtonClicked:(id)sender
 {
+    [_textField resignFirstResponder];
     
-    //    // inform the search controller that we have something worth searching for
-    //    [m_searchViewController startIndicator];
-    //
-    //    // send the search to the cloud
-    //    [m_storeController requestSongListSearch:searchBar.text];
+    [self contractSearchBar];
     
+    if ( [_delegate respondsToSelector:@selector(searchBarCancel:)] == YES )
+    {
+        [_delegate performSelector:@selector(searchBarCancel:) withObject:self];
+    }
 }
 
-#pragma mark - Search delegates
+- (void)updateFrames
+{
+    // Subtract out a bit from the end for the cancel button
+    _expandedFrame = self.bounds;
+    _expandedFrame.size.width -= CANCEL_BUTTON_BUFFER;
+    _expandedFrame.size.height = TEXT_BOX_HEIGHT;
+    _expandedFrame.origin.y = (self.bounds.size.height - TEXT_BOX_HEIGHT)/2.0;
+    
+    _contractedFrame = self.bounds;
+    _contractedFrame.size.width = CONTRACTED_LENGTH;
+    _contractedFrame.size.height = TEXT_BOX_HEIGHT;
+    _contractedFrame.origin.x = self.bounds.size.width - CONTRACTED_LENGTH ;
+    _contractedFrame.origin.y = (self.bounds.size.height - TEXT_BOX_HEIGHT)/2.0;
+}
 
-//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+#pragma mark - Animation
+
+- (void)expandSearchBar
+{
+    _animating = YES;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3f];
+    [UIView setAnimationDidStopSelector:@selector(expandSearchBarFinished)];
+    [UIView setAnimationDelegate:self];
+    
+    [_textField setFrame:_expandedFrame];
+    
+    _textField.leftView = _expandedPadding;
+    _cancelButton.alpha = 1.0;
+
+    [UIView commitAnimations];
+
+}
+
+- (void)expandSearchBarFinished
+{
+    _animating = NO;
+}
+
+- (void)contractSearchBar
+{
+    _animating = YES;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3f];
+    [UIView setAnimationDidStopSelector:@selector(contractSearchBarFinished)];
+    [UIView setAnimationDelegate:self];
+    
+    [_textField setFrame:_contractedFrame];
+    
+    _textField.leftView = _contractedPadding;
+    _cancelButton.alpha = 0.0;
+    
+    [UIView commitAnimations];
+}
+
+- (void)contractSearchBarFinished
+{
+    _animating = NO;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self expandSearchBar];
+    
+    if ( [_delegate respondsToSelector:@selector(searchBarDidBeginEditing:)] == YES )
+    {
+        [_delegate performSelector:@selector(searchBarDidBeginEditing:) withObject:self];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField*)textField
+{
+//    [self contractSearchBar];
+    [_textField resignFirstResponder];
+    
+    _searchString = _textField.text;
+    
+    if ( [_delegate respondsToSelector:@selector(searchBarSearch:)] == YES )
+    {
+        [_delegate performSelector:@selector(searchBarSearch:) withObject:self];
+    }
+    
+	return NO;
+}
+
+//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 //{
-//    
-//    // display cancel button
-//    [searchBar setShowsCancelButton:YES animated:YES];
-//    
-//    // add the search string back into the bar
-//    [searchBar setText:m_currentSearchString];
-//    
-//    // expand out the search box with a nice animation
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:0.3f];
-//    
-//    searchBar.frame = m_searchExpanded.frame;
-//    
-//    [UIView commitAnimations];
-//    
-//    [self beginSearch];
-//    
+//    return YES;
 //}
-//
-//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 //{
 //    
-//    // nothing for now
+//    NSCharacterSet * usernameSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
+//    NSCharacterSet * passwordSet =[[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789!@#$%^&*+-/=?^_`|~.[]{}()"] invertedSet];
 //    
-//}
-//
-//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-//{
-//    
-//    // if the search is empty, we do nothing
-//    if ( searchBar.text == nil || [searchBar.text isEqualToString:@""] )
+//    // Backspace character
+//    if ( [string length] == 0 )
 //    {
-//        // do nothing
-//        return;
+//        return YES;
 //    }
 //    
-//    [m_currentSearchString release];
+//    // The username needs alpha num only
+//    if ( textField == m_usernameTextField &&
+//        [string rangeOfCharacterFromSet:usernameSet].location != NSNotFound )
+//    {
+//        [m_statusLabel setText:@"Invalid character"];
+//        [m_statusLabel setHidden:NO];
+//        return NO;
+//    }
 //    
-//    // hold onto the search string for later
-//    m_currentSearchString = [searchBar.text retain];
+//    if ( textField == m_passwordTextField &&
+//        [string rangeOfCharacterFromSet:passwordSet].location != NSNotFound )
+//    {
+//        [m_statusLabel setText:@"Invalid character"];
+//        [m_statusLabel setHidden:NO];
+//        return NO;
+//    }
 //    
-//    [self resignSearchBarFirstResponder];
-//    
-//    [self searchForString:m_currentSearchString];
-//    
-//}
-//
-//- (void)searchBarCancelButtonClicked:(UISearchBar*)searchBar
-//{
-//    
-//    [self contractSearchBar];
-//    
-//    [self cancelSearch];
-//    
-//}
-//
-//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
-//{
+//    [m_statusLabel setHidden:YES];
 //    
 //    return YES;
-//    
 //}
-
 
 @end

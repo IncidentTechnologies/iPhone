@@ -13,6 +13,13 @@
 
 extern FileController *g_fileController;
 
+@interface SocialUserCell()
+{
+    NSInteger _pictureRequestsInFlight;
+    BOOL _cancelPictureRequest;
+}
+@end
+
 @implementation SocialUserCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -21,6 +28,8 @@ extern FileController *g_fileController;
     if ( self )
     {
         // Initialization code
+        _pictureRequestsInFlight = 0;
+        _cancelPictureRequest = NO;
     }
     return self;
 }
@@ -34,27 +43,64 @@ extern FileController *g_fileController;
 
 - (void)dealloc
 {
+    [_userProfile release];
     [_profilePic release];
     [_userName release];
     [_followButton release];
     [super dealloc];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+}
+
 - (void)updateCell
 {
-    UIImage * image = [g_fileController getFileOrDownloadSync:_userProfile.m_imgFileId];
+    UIImage *pic = [g_fileController getFileOrReturnNil:_userProfile.m_imgFileId];
     
-    if ( image != nil )
+    if ( pic )
     {
-        [_profilePic setImage:image];
+        // We cancel a picture request if there is already one pending.
+        // The most request 'updateCell' has the most updated info.
+        _cancelPictureRequest = YES;
+        [_profilePic setImage:pic];
+    }
+    else
+    {
+        // Count how many image requests are in flight.
+        // We only want the last one to be applied when they all come back.
+        _cancelPictureRequest = NO;
+        _pictureRequestsInFlight++;
+        
+        // Nil it out for now.
+        [_profilePic setImage:nil];
+        
+        [g_fileController getFileOrDownloadAsync:_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloadComplete:)];
     }
 
     [_userName setText:_userProfile.m_name];
+}
+
+- (void)profilePicDownloadComplete:(UIImage *)pic
+{
+    _pictureRequestsInFlight--;
+    
+    // Display picture only if:
+    // -Its not null
+    // -It hasn't been canceled
+    // -It is the last of a series of requests.
+    if ( pic != nil && _cancelPictureRequest == NO && _pictureRequestsInFlight == 0 )
+    {
+        [_profilePic performSelectorOnMainThread:@selector(setImage:) withObject:pic waitUntilDone:NO];
+    }
 }
 
 - (IBAction)followButtonClicked:(id)sender
 {
     
 }
+
 
 @end

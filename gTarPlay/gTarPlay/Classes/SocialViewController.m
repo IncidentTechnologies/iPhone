@@ -10,11 +10,13 @@
 
 #import "SelectorControl.h"
 #import "Facebook.h"
-#import "ActivityFeedCell.h"
+#import "SocialSongCell.h"
 #import "SocialUserCell.h"
+#import "SessionModalViewController.h"
+#import "PullToUpdateTableView.h"
 
 #import "UIView+Gtar.h"
-#import "PullToUpdateTableView.h"
+#import "UIButton+Gtar.h"
 
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserProfile.h>
@@ -27,15 +29,22 @@
 #import <gTarAppCore/UserResponse.h>
 
 extern UserController *g_userController;
+extern FileController *g_fileController;
 extern Facebook *g_facebook;
 
 @interface SocialViewController ()
 {
-    UserEntry *_loggedInUserEntry;
+    NSInteger _displayedUserId;
+//    UserEntry *_loggedInUserEntry;
     UserEntry *_displayedUserEntry;
     
     UserProfile *_loggedInUserProfile;
-    UserProfile *_displayedUserProfile;
+    
+    NSArray *_userProfileSearchResults;
+    
+    SessionModalViewController *_sessionViewController;
+    
+//    BOOL displaySearch;
 }
 @end
 
@@ -58,17 +67,15 @@ extern Facebook *g_facebook;
     
     [_topBar addShadow];
     
-//    NSAttributedString *attributedString1 = [self createAttributedStringWithInteger:200 andText:@"SESSIONS"];
-//    NSAttributedString *attributedString2 = [self createAttributedStringWithInteger:100 andText:@"FOLLOWERS"];
-//    NSAttributedString *attributedString3 = [self createAttributedStringWithInteger:999 andText:@"FOLLOWING"];
-//    
-//    [_feedSelector setTitles:[NSArray arrayWithObjects:attributedString1,attributedString2,attributedString3,nil]];
+    [_searchTable setHidden:YES];
+    [_fullscreenButton setHidden:YES];
     
-    UserEntry *entry = [g_userController getUserEntry:0];
+    [self.view bringSubviewToFront:_searchTable];
+    [self.view bringSubviewToFront:_fullscreenButton];
     
-    [self displayUserEntry:entry];
+    [self displayAndUpdateUserId:0];
     
-    // Update everything
+    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,6 +91,13 @@ extern Facebook *g_facebook;
     [_feedTable release];
     [_picImageView release];
     [_userNameLabel release];
+    [_sessionViewController release];
+    [_searchTable release];
+    [_fullscreenButton release];
+    [_searchBar release];
+    [_cameraButton release];
+    [_followButton release];
+    [_followingButton release];
     [super dealloc];
 }
 
@@ -103,11 +117,30 @@ extern Facebook *g_facebook;
 
 - (IBAction)changePicButtonClicked:(id)sender
 {
+    [self displayImagePicker];
+}
+
+- (IBAction)followButtonClicked:(id)sender
+{
+    [_followButton startActivityIndicator];
+    [self addUserFollows:_displayedUserEntry.m_userProfile];
+}
+
+- (IBAction)followingButtonClicked:(id)sender
+{
+    [_followingButton startActivityIndicator];
+    [self removeUserFollows:_displayedUserEntry.m_userProfile];
 }
 
 - (IBAction)feedSelectorChanged:(id)sender
 {
     [_feedTable reloadData];
+}
+
+- (IBAction)fullscreenButtonClicked:(id)sender
+{
+    [_searchBar minimizeKeyboard];
+    [_fullscreenButton setHidden:YES];
 }
 
 #pragma mark - Helpers
@@ -128,18 +161,64 @@ extern Facebook *g_facebook;
     return [attributedString autorelease];
 }
 
-- (void)displayUserEntry:(UserEntry *)userEntry
+- (void)displayAndUpdateUserId:(NSInteger)userId
 {
-    _displayedUserEntry = userEntry;
+    [self displayUserId:userId];
+    [self requestUserId:userId];
+}
+
+- (void)displayUserId:(NSInteger)userId
+{
+    _displayedUserId = userId;
+    
+    [self refreshDisplayedUser];
+}
+
+- (void)requestUserId:(NSInteger)userId
+{
+    [g_userController requestUserProfile:userId andCallbackObj:self andCallbackSel:@selector(userProfileCallback:)];
+    [g_userController requestUserSessions:userId andCallbackObj:self andCallbackSel:@selector(userSessionsCallback:)];
+    [g_userController requestUserFollows:userId andCallbackObj:self andCallbackSel:@selector(userFollowingCallback:)];
+    [g_userController requestUserFollowedBy:userId andCallbackObj:self andCallbackSel:@selector(userFollowersCallback:)];
+}
+
+-(void)refreshDisplayedUser
+{
+    // Refresh the current user entry, now that we have new stuff
+    UserEntry *loggedInEntry = [g_userController getUserEntry:0];
+    
+    _displayedUserEntry = [g_userController getUserEntry:_displayedUserId];
     
     [_userNameLabel setText:_displayedUserEntry.m_userProfile.m_name];
     
+    UIImage *image = [g_fileController getFileOrReturnNil:_displayedUserEntry.m_userProfile.m_imgFileId];
+    
+    // Nil is ok
+    [_picImageView setImage:image];
+    
     [self updateHeaders];
+    
+    // Is this the user
+    if ( _displayedUserId == 0 || _displayedUserEntry == nil || _displayedUserId == loggedInEntry.m_userProfile.m_userId )
+    {
+        [_followingButton setHidden:YES];
+        [_followButton setHidden:YES];
+    }
+    else if ( [loggedInEntry.m_followsList containsObject:_displayedUserEntry.m_userProfile] == YES )
+    {
+        [_followingButton setHidden:NO];
+        [_followButton setHidden:YES];
+    }
+    else
+    {
+        [_followingButton setHidden:YES];
+        [_followButton setHidden:NO];
+    }
     
     [_feedTable reloadData];
 }
 
-- (void)updateHeaders
+-(void)updateHeaders
 {
     NSAttributedString *attributedString1 = [self createAttributedStringWithInteger:[_displayedUserEntry.m_sessionsList count] andText:@"SESSIONS"];
     NSAttributedString *attributedString2 = [self createAttributedStringWithInteger:[_displayedUserEntry.m_followedByList count] andText:@"FOLLOWERS"];
@@ -158,39 +237,54 @@ extern Facebook *g_facebook;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if ( _feedSelector.selectedIndex == 0 )
+    if ( tableView == _searchTable )
+    {
+        return [_userProfileSearchResults count];
+    }
+	else if ( _feedSelector.selectedIndex == 0 )
     {
         return [_displayedUserEntry.m_sessionsList count];
     }
 	else if ( _feedSelector.selectedIndex == 1 )
     {
-        return [_displayedUserEntry.m_followsList count];
+        return [_displayedUserEntry.m_followedByList count];
     }
     else
     {
-        return [_displayedUserEntry.m_followedByList count];
+        return [_displayedUserEntry.m_followsList count];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	
-//    static NSString * CellIdentifierActivity = @"ActivityFeedCell";
-//    static NSString * CellIdentifierUser = @"SocialUserCell";
-	
     NSInteger row = [indexPath row];
     
+    if ( tableView == _feedTable )
+    {
+        return [self cellForFeedTable:row];
+    }
+    
+    if ( tableView == _searchTable )
+    {
+        return [self cellForSearchTable:row];
+    }
+    
+    return nil;
+}
+
+- (UITableViewCell *)cellForFeedTable:(NSInteger)row
+{
     if ( _feedSelector.selectedIndex == 0 )
     {
-        static NSString *CellIdentifier = @"ActivityFeedCell";
+        NSString *CellIdentifier = @"SocialSongCell";
         
-        ActivityFeedCell *cell = (ActivityFeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        SocialSongCell *cell = (SocialSongCell *)[_feedTable dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (cell == nil)
         {
-            cell = [[[ActivityFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[SocialSongCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             
-            [[NSBundle mainBundle] loadNibNamed:@"ActivityFeedCell" owner:cell options:nil];
+            [[NSBundle mainBundle] loadNibNamed:@"SocialSongCell" owner:cell options:nil];
             
             CGFloat cellHeight = _feedTable.rowHeight;
             CGFloat cellRow = _feedTable.frame.size.width;
@@ -200,7 +294,7 @@ extern Facebook *g_facebook;
             [cell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
         }
         
-        if ( row <= [_displayedUserEntry.m_sessionsList count] )
+        if ( row < [_displayedUserEntry.m_sessionsList count] )
         {
             cell.userSongSession = [_displayedUserEntry.m_sessionsList objectAtIndex:row];
         }
@@ -215,15 +309,15 @@ extern Facebook *g_facebook;
     }
 	else
     {
-        static NSString *CellIdentifier = @"SocialUserCell";
+        NSString *CellIdentifier = @"SocialUserCell";
         
-        SocialUserCell *cell = (SocialUserCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        SocialUserCell *cell = (SocialUserCell *)[_feedTable dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (cell == nil)
         {
             cell = [[[SocialUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             
-            [[NSBundle mainBundle] loadNibNamed:@"SongListCell" owner:cell options:nil];
+            [[NSBundle mainBundle] loadNibNamed:@"SocialUserCell" owner:cell options:nil];
             
             CGFloat cellHeight = _feedTable.rowHeight;
             CGFloat cellRow = _feedTable.frame.size.width;
@@ -235,9 +329,9 @@ extern Facebook *g_facebook;
         
         if ( _feedSelector.selectedIndex == 1 )
         {
-            if ( row <= [_displayedUserEntry.m_followsList count] )
+            if ( row < [_displayedUserEntry.m_followedByList count] )
             {
-                cell.userProfile = [_displayedUserEntry.m_followsList objectAtIndex:row];
+                cell.userProfile = [_displayedUserEntry.m_followedByList objectAtIndex:row];
             }
             else
             {
@@ -246,9 +340,9 @@ extern Facebook *g_facebook;
         }
         else if ( _feedSelector.selectedIndex == 2 )
         {
-            if ( row <= [_displayedUserEntry.m_followedByList count] )
+            if ( row < [_displayedUserEntry.m_followsList count] )
             {
-                cell.userProfile = [_displayedUserEntry.m_followedByList objectAtIndex:row];
+                cell.userProfile = [_displayedUserEntry.m_followsList objectAtIndex:row];
             }
             else
             {
@@ -264,7 +358,40 @@ extern Facebook *g_facebook;
         
         return cell;
     }
+}
+
+- (UITableViewCell *)cellForSearchTable:(NSInteger)row
+{
+    NSString *CellIdentifier = @"SocialUserCell";
     
+    SocialUserCell *cell = (SocialUserCell *)[_searchTable dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[[SocialUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        
+        [[NSBundle mainBundle] loadNibNamed:@"SocialUserCell" owner:cell options:nil];
+        
+        CGFloat cellHeight = _searchTable.rowHeight;
+        CGFloat cellRow = _searchTable.frame.size.width;
+        
+        // Readjust the width and height
+        [cell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+        [cell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+    }
+    
+    if ( row < [_userProfileSearchResults count] )
+    {
+        cell.userProfile = [_userProfileSearchResults objectAtIndex:row];
+    }
+    else
+    {
+        cell.userProfile = nil;
+    }
+    
+    [cell updateCell];
+    
+    return cell;
 }
 
 #pragma mark - Table view delegate
@@ -272,41 +399,327 @@ extern Facebook *g_facebook;
 // This function catches any selections
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSInteger row = [indexPath row];
+//	NSInteger row = [indexPath row];
     
-    if ( _feedSelector.selectedIndex == 0 )
+    if ( tableView == _searchTable )
+    {
+        SocialUserCell *cell = (SocialUserCell *)[tableView cellForRowAtIndexPath:indexPath];
+        
+        [self displayAndUpdateUserId:cell.userProfile.m_userId];
+        [_searchBar endSearch];
+    }
+    else if ( _feedSelector.selectedIndex == 0 )
     {
         // Pop up modal and play the song
+        SocialSongCell *cell = (SocialSongCell *)[tableView cellForRowAtIndexPath:indexPath];
+        UserSongSession *session = cell.userSongSession;
+        
+        _sessionViewController.userSongSession = session;
+        
+        [self presentViewController:_sessionViewController animated:YES completion:^{
+//            [cell.activityView stopAnimating];
+        }];
     }
     else if ( _feedSelector.selectedIndex == 1 )
     {
-        if ( row <= [_displayedUserEntry.m_followsList count] )
-        {
-            UserProfile *userProfile = [_displayedUserEntry.m_followsList objectAtIndex:row];
-            UserEntry *userEntry = [g_userController getUserEntry:userProfile.m_userId];
-            
-            [self displayUserEntry:userEntry];
-        }
-        else
-        {
-            // Do nothing
-        }
+        SocialUserCell *cell = (SocialUserCell *)[tableView cellForRowAtIndexPath:indexPath];
+        
+        [self displayAndUpdateUserId:cell.userProfile.m_userId];
     }
     else if ( _feedSelector.selectedIndex == 2 )
     {
-        if ( row <= [_displayedUserEntry.m_followedByList count] )
-        {
-            UserProfile *userProfile = [_displayedUserEntry.m_followedByList objectAtIndex:row];
-            UserEntry *userEntry = [g_userController getUserEntry:userProfile.m_userId];
-            
-            [self displayUserEntry:userEntry];
-        }
-        else
-        {
-            // Do nothing
-        }
+        SocialUserCell *cell = (SocialUserCell *)[tableView cellForRowAtIndexPath:indexPath];
+        
+        [self displayAndUpdateUserId:cell.userProfile.m_userId];
     }
 }
 
+#pragma mark - UserController callbacks
+
+- (void)userProfileCallback:(UserResponse*)userResponse
+{
+    if ( userResponse.m_status == UserResponseStatusSuccess )
+    {
+        [self refreshDisplayedUser];
+        
+        UserEntry *entry = [g_userController getUserEntry:_displayedUserId];
+        
+        [g_fileController getFileOrDownloadAsync:entry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
+    }
+    else
+    {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:userResponse.m_statusText
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil] autorelease];
+        [alert show];
+    }
+}
+
+- (void)userSessionsCallback:(UserResponse*)userResponse
+{
+    if ( userResponse.m_status == UserResponseStatusSuccess )
+    {
+        [self refreshDisplayedUser];
+    }
+    else
+    {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:userResponse.m_statusText
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil] autorelease];
+        [alert show];
+    }
+}
+
+- (void)userFollowersCallback:(UserResponse*)userResponse
+{
+    if ( userResponse.m_status == UserResponseStatusSuccess )
+    {
+        [self refreshDisplayedUser];
+    }
+    else
+    {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:userResponse.m_statusText
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil] autorelease];
+        [alert show];
+    }
+}
+
+- (void)userFollowingCallback:(UserResponse*)userResponse
+{
+    if ( userResponse.m_status == UserResponseStatusSuccess )
+    {
+        [self refreshDisplayedUser];
+    }
+    else
+    {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:userResponse.m_statusText
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil] autorelease];
+        [alert show];
+    }
+}
+
+- (void)changeFollowingCallback:(UserResponse *)userResponse
+{
+    [_followButton stopActivityIndicator];
+    [_followingButton stopActivityIndicator];
+    
+    if ( userResponse.m_status == UserResponseStatusSuccess )
+    {
+        [self refreshDisplayedUser];
+    }
+    else
+    {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:userResponse.m_statusText
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil] autorelease];
+        [alert show];
+    }
+}
+
+- (void)userProfileSearchCallback:(UserResponse*)userResponse
+{
+    if ( userResponse.m_status == UserResponseStatusSuccess )
+    {
+        [_userProfileSearchResults release];
+        
+        _userProfileSearchResults = [userResponse.m_searchResults retain];
+        
+        // pull down all the images -- this takes too long
+//        for ( UserProfile *userProfile in _userProfileSearchResults )
+//        {
+//            [g_fileController precacheFile:userProfile.m_imgFileId];
+//        }
+        
+        [_searchTable reloadData];
+    }
+    else
+    {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:userResponse.m_statusText
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil] autorelease];
+        [alert show];
+    }
+}
+
+#pragma mark - Image Picker
+
+- (void)displayImagePicker
+{
+    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+    
+    picker.delegate = self;
+    
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+//    picker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+//    picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+//    picker.showsCameraControls = YES;
+//
+//    // 480x320 : 2592x1936
+//    // 1936/320 = 6.05
+//    // 2592/6.05 = 428
+//    // 480-428 = 52
+//    // 52/(428/2) = 0.24299
+//    // => 1.24299
+//    picker.cameraViewTransform = CGAffineTransformMakeScale( 2.0/3.0, 2.0/3.0 );
+//
+//    UIImageView * imageView = [[UIImageView alloc] initWithImage:[self captureView:m_navigationController.view]];
+//    imageView.transform = CGAffineTransformMakeScale( 2.0/3.0, 2.0/3.0 );
+//    imageView.transform = CGAffineTransformRotate( imageView.transform, -M_PI_2 );
+//
+//    picker.cameraOverlayView = imageView;
+
+//    picker.cameraOverlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 500, 100)];
+//    picker.cameraOverlayView.backgroundColor = [UIColor blueColor];
+    
+    [self presentViewController:picker animated:YES completion:nil];
+    
+    [picker release];
+}
+
+//- (UIImage*)captureView:(UIView*)view
+//{
+//
+////    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//
+//    CGRect screenRect = view.bounds;
+//
+//    UIGraphicsBeginImageContext(screenRect.size);
+//
+//    CGContextRef ctx = UIGraphicsGetCurrentContext();
+//    [[UIColor blackColor] set];
+//    CGContextFillRect(ctx, screenRect);
+//
+//    [view.layer renderInContext:ctx];
+//
+//    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+//
+//    UIGraphicsEndImageContext();
+//
+//    return newImage;
+//}
+
+#pragma mark -
+#pragma mark UIImagePickerDelegate
+
+- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info
+{
+    
+    UIImage * pickedImage = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
+    
+//    UIImageOrientation orientation = pickedImage.imageOrientation;
+    
+    CGSize newSize = pickedImage.size;
+    
+    // Cap the size at something reasonable -- 500x500 is a good size.
+    if ( newSize.height >  500.0f )
+    {
+        newSize.width = (500.0f / newSize.height) * newSize.width;
+        newSize.height = 500.0f;
+    }
+    if ( newSize.width >  500.0f )
+    {
+        newSize.height = (500.0f / newSize.width) * newSize.height;
+        newSize.width = 500.0f;
+    }
+    
+    UIGraphicsBeginImageContext( newSize );
+    
+    // Resizing the image implicitly re-orients
+    
+    [pickedImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    
+    UIImage * editedImage =  UIGraphicsGetImageFromCurrentImageContext();
+    
+    [self uploadProfilePic:editedImage];
+    
+    [pickedImage release];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+//#pragma mark - UINavigationControllerDelegate
+//
+//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//{
+//    
+//    
+//}
+//
+//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//{
+//    
+//    
+//}
+
+#pragma mark - ExpandedSearchBarDelegate
+
+- (void)searchBarDidBeginEditing:(ExpandableSearchBar *)searchBar
+{
+    // Show the table view
+    [_searchTable setHidden:NO];
+    [_fullscreenButton setHidden:NO];
+}
+
+- (void)searchBarSearch:(ExpandableSearchBar *)searchBar
+{
+    // Execute a search
+    [self searchForString:searchBar.searchString];
+}
+
+- (void)searchBarCancel:(ExpandableSearchBar *)searchBar
+{
+    // Remove the table view
+    [_searchTable setHidden:YES];
+    [_fullscreenButton setHidden:YES];
+}
+
+#pragma mark - Misc
+
+- (void)uploadProfilePic:(UIImage*)image
+{
+    [g_userController requestUserProfileChangePicture:image andCallbackObj:self andCallbackSel:@selector(userProfileCallback:)];
+    
+}
+
+- (void)profilePicDownloaded:(id)file
+{
+    // Now that the download is done, refresh the display and thereby show the new pic.
+    [self refreshDisplayedUser];
+}
+
+- (void)searchForString:(NSString*)searchString
+{
+    [g_userController requestUserProfileSearch:searchString andCallbackObj:self andCallbackSel:@selector(userProfileSearchCallback:)];
+}
+
+- (void)addUserFollows:(UserProfile*)userProfile
+{
+    [g_userController requestAddUserFollow:userProfile.m_userId andCallbackObj:self andCallbackSel:@selector(changeFollowingCallback:)];
+}
+
+- (void)removeUserFollows:(UserProfile*)userProfile
+{
+    [g_userController requestRemoveUserFollow:userProfile.m_userId andCallbackObj:self andCallbackSel:@selector(changeFollowingCallback:)];
+}
 
 @end

@@ -34,7 +34,7 @@
 #import "UserCommentCell.h"
 #import "SelectorControl.h"
 #import "CyclingTextField.h"
-#import "SlidingModalViewController.h"
+#import "SessionModalViewController.h"
 #import "PlayerViewController.h"
 #import "FreePlayController.h"
 
@@ -59,9 +59,7 @@ extern TelemetryController * g_telemetryController;
 
 @interface TitleNavigationController ()
 {
-    PlayerViewController *_playerViewController;
-    VolumeViewController *_volumeViewController;
-    SlidingInstrumentViewController *_instrumentViewController;
+    SessionModalViewController *_sessionViewController;
 
     UIView *_currentLeftPanel;
     UIView *_currentRightPanel;
@@ -124,16 +122,8 @@ extern TelemetryController * g_telemetryController;
     [_menuFreePlayButton addShadow];
     [_menuStoreButton addShadow];
     
-    // Adjust the images in the buttons
-    [_modalMenuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_modalVolumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_modalShortcutButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_modalLikeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    
     // Set up the player modal
-    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
-    
-    [_playerViewController attachToSuperview:_songPlayerView];
+    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
     
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"FRIENDS", @"GLOBAL", nil]];
     
@@ -179,20 +169,6 @@ extern TelemetryController * g_telemetryController;
 {
     
     _displayingCell = NO;
-
-    if ( _volumeViewController == nil )
-    {
-        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
-        
-        [_volumeViewController attachToSuperview:_activityFeedModal.contentView withFrame:_modalVolumeView.frame];
-    }
-    
-    if ( _instrumentViewController == nil )
-    {
-        _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
-        
-        [_instrumentViewController attachToSuperview:_activityFeedModal.contentView withFrame:_modalInstrumentView.frame];
-    }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
@@ -257,8 +233,6 @@ extern TelemetryController * g_telemetryController;
     [_currentRightPanel removeFromSuperview];
     [_fullScreenButton removeFromSuperview];
     
-    [_playerViewController release];
-    
     [_globalFeed release];
     [_friendFeed release];
     
@@ -286,7 +260,6 @@ extern TelemetryController * g_telemetryController;
     [_feedRightPanel release];
     [_feedTable release];
     [_feedSelectorControl release];
-    [_activityFeedModal release];
     
     [_gatekeeperWebsiteButton release];
     [_notificationLabel release];
@@ -297,22 +270,15 @@ extern TelemetryController * g_telemetryController;
     [_signupUsernameText release];
     [_signupPasswordText release];
     [_signupEmailText release];
-    [_songPlayerView release];
-    [_modalMenuButton release];
-    [_modalVolumeButton release];
-    [_modalShortcutButton release];
-    [_modalVolumeView release];
-    [_commentTable release];
-    [_modalLikeButton release];
     [_delayLoadingView release];
     [_disconnectedGtarLeftPanel release];
     [_videoPreviewImage release];
+    [_sessionViewController release];
     
     [g_facebook release];
     
     g_facebook = nil;
 
-    [_modalInstrumentView release];
     [super dealloc];
 }
 
@@ -680,62 +646,8 @@ extern TelemetryController * g_telemetryController;
     [_moviePlayer play];
 }
 
-- (IBAction)closeModalButtonClicked:(id)sender
-{
-    [_playerViewController endPlayback];
-    [_activityFeedModal closeButtonClicked:sender];
-    
-    [_activityFeedModal.blackButton setHidden:YES];
-    [_volumeViewController closeView:NO];
-    [_instrumentViewController closeView:NO];
-}
-
-- (IBAction)volumeButtonClicked:(id)sender
-{
-    if ( _volumeViewController.isDown == YES )
-    {
-        [_activityFeedModal.blackButton setHidden:YES];
-    }
-    else
-    {
-        [_activityFeedModal.blackButton setHidden:NO];
-    }
-    [_volumeViewController toggleView:YES];
-    [_instrumentViewController closeView:YES];
-}
-
-- (IBAction)shortcutButtonClicked:(id)sender
-{
-    if ( _instrumentViewController.isDown == YES )
-    {
-        [_activityFeedModal.blackButton setHidden:YES];
-    }
-    else
-    {
-        [_activityFeedModal.blackButton setHidden:NO];
-    }
-    [_playerViewController endPlayback];
-    [_instrumentViewController toggleView:YES];
-    [_volumeViewController closeView:YES];
-}
-
-- (IBAction)modalLikeButtonClicked:(id)sender
-{
-    [_modalLikeButton setSelected:!_modalLikeButton.isSelected];
-}
-
-- (IBAction)modalCommentButtonClicked:(id)sender
-{
-}
-
-- (IBAction)modalBlackButtonClicked:(id)sender
-{
-    [_activityFeedModal.blackButton setHidden:YES];
-    [_volumeViewController closeView:YES];
-    [_instrumentViewController closeView:YES];
-}
-
 #pragma mark - Movie Playback
+
 - (void)moviePlayBackDidFinish:(NSNotification *)notification
 {
     
@@ -791,31 +703,22 @@ extern TelemetryController * g_telemetryController;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    if ( tableView == _feedTable )
+    // Friends
+    if ( _feedSelectorControl.selectedIndex == 0 )
     {
-        // Friends
-        if ( _feedSelectorControl.selectedIndex == 0 )
-        {
-            return [_friendFeed count];
-        }
-        
-        // Global
-        if ( _feedSelectorControl.selectedIndex == 1 )
-        {
-            return [_globalFeed count];
-        }
-        
-        // News
-        if ( _feedSelectorControl.selectedIndex == 1 )
-        {
-            // derp
-        }
+        return [_friendFeed count];
     }
     
-    if ( tableView == _commentTable )
+    // Global
+    if ( _feedSelectorControl.selectedIndex == 1 )
+    {
+        return [_globalFeed count];
+    }
+    
+    // News
+    if ( _feedSelectorControl.selectedIndex == 2 )
     {
         // derp
-        return 4;
     }
     
     // Should never happen
@@ -825,82 +728,78 @@ extern TelemetryController * g_telemetryController;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
-    if ( tableView == _feedTable )
+    static NSString *ActivityCellIdentifier = @"ActivityFeedCell";
+    
+    ActivityFeedCell *cell = (ActivityFeedCell *)[tableView dequeueReusableCellWithIdentifier:ActivityCellIdentifier];
+    
+    if (cell == nil)
     {
-
-        static NSString *ActivityCellIdentifier = @"ActivityFeedCell";
+        cell = [[[ActivityFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ActivityCellIdentifier] autorelease];
         
-        ActivityFeedCell *cell = (ActivityFeedCell *)[tableView dequeueReusableCellWithIdentifier:ActivityCellIdentifier];
+        [[NSBundle mainBundle] loadNibNamed:@"ActivityFeedCell" owner:cell options:nil];
         
-        if (cell == nil)
-        {
-            cell = [[[ActivityFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ActivityCellIdentifier] autorelease];
-            
-            [[NSBundle mainBundle] loadNibNamed:@"ActivityFeedCell" owner:cell options:nil];
-            
-            [cell setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
-            [cell.accessoryView setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
-        }
-        
-        // Clear these in case this cell was previously selected
-        cell.highlighted = NO;
-        cell.selected = NO;
-        
-        NSInteger row = [indexPath row];
-        
-        UserSongSession * session = nil;
-        
-        if ( _feedSelectorControl.selectedIndex == 0 )
-        {
-            if ( row < [_friendFeed count] )
-            {
-                session = [_friendFeed objectAtIndex:row];
-            }
-        }
-        
-        if ( _feedSelectorControl.selectedIndex == 1 )
-        {
-            if ( row < [_globalFeed count] )
-            {
-                session = [_globalFeed objectAtIndex:row];
-            }
-        }
-        
-        cell.userSongSession = session;
-        
-        [cell updateCell];
-        
-        return cell;
+        [cell setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
+        [cell.accessoryView setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
     }
     
-    if ( tableView == _commentTable )
+    // Clear these in case this cell was previously selected
+    cell.highlighted = NO;
+    cell.selected = NO;
+    
+    NSInteger row = [indexPath row];
+    
+    UserSongSession * session = nil;
+    
+    if ( _feedSelectorControl.selectedIndex == 0 )
     {
-        static NSString *CommentCellIdentifier = @"UserCommentCell";
-        
-        UserCommentCell *cell = (UserCommentCell *)[tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier];
-        
-        if (cell == nil)
+        if ( row < [_friendFeed count] )
         {
-            cell = [[[UserCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier] autorelease];
-            
-            [[NSBundle mainBundle] loadNibNamed:@"UserCommentCell" owner:cell options:nil];
-            
-            [cell setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _feedTable.rowHeight-1)];
-            [cell.accessoryView setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _commentTable.rowHeight-1)];
+            session = [_friendFeed objectAtIndex:row];
         }
-        
-        // Clear these in case this cell was previously selected
-        cell.highlighted = NO;
-        cell.selected = NO;
-        
-        NSInteger row = [indexPath row];
-        
-        // get stuff
-        
-        [cell updateCell];
-        
-        return cell;
     }
+    
+    if ( _feedSelectorControl.selectedIndex == 1 )
+    {
+        if ( row < [_globalFeed count] )
+        {
+            session = [_globalFeed objectAtIndex:row];
+        }
+    }
+    
+    cell.userSongSession = session;
+    
+    [cell updateCell];
+    
+    return cell;
+
+//    if ( tableView == _commentTable )
+//    {
+//        static NSString *CommentCellIdentifier = @"UserCommentCell";
+//        
+//        UserCommentCell *cell = (UserCommentCell *)[tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier];
+//        
+//        if (cell == nil)
+//        {
+//            cell = [[[UserCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier] autorelease];
+//            
+//            [[NSBundle mainBundle] loadNibNamed:@"UserCommentCell" owner:cell options:nil];
+//            
+//            [cell setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _feedTable.rowHeight-1)];
+//            [cell.accessoryView setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _commentTable.rowHeight-1)];
+//        }
+//        
+//        // Clear these in case this cell was previously selected
+//        cell.highlighted = NO;
+//        cell.selected = NO;
+//        
+//        NSInteger row = [indexPath row];
+//        
+//        // get stuff
+//        
+//        [cell updateCell];
+//        
+//        return cell;
+//    }
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -922,44 +821,34 @@ extern TelemetryController * g_telemetryController;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if ( tableView == _feedTable )
+    if ( _displayingCell == YES )
     {
-        
-        if ( _displayingCell == YES )
-        {
-            return;
-        }
-        
-        _displayingCell = YES;
-        
-        // Cause the row to spin until the session has started
-        ActivityFeedCell *cell = (ActivityFeedCell*)[_feedTable cellForRowAtIndexPath:indexPath];
-        
-        [cell.activityView startAnimating];
-        
-        UserSongSession *session = cell.userSongSession;
-        
-        NSString * xmpBlob = [g_fileController getFileOrDownloadSync:session.m_xmpFileId];
-        
-        if ( xmpBlob == nil )
-        {
-            [cell.activityView stopAnimating];
-            return;
-        }
-        
-        session.m_xmpBlob = xmpBlob;
-        
-        _playerViewController.xmpBlob = xmpBlob;
-        _playerViewController.userSong = session.m_userSong;
-        
-        [self presentViewController:_activityFeedModal animated:YES completion:^{ [cell.activityView stopAnimating]; }];
-        
+        return;
     }
     
-    if ( tableView == _commentTable )
+    _displayingCell = YES;
+    
+    // Cause the row to spin until the session has started
+    ActivityFeedCell *cell = (ActivityFeedCell*)[_feedTable cellForRowAtIndexPath:indexPath];
+    
+    [cell.activityView startAnimating];
+    
+    UserSongSession *session = cell.userSongSession;
+    
+    NSString * xmpBlob = [g_fileController getFileOrDownloadSync:session.m_xmpFileId];
+    
+    if ( xmpBlob == nil )
     {
-        // derp
+        [cell.activityView stopAnimating];
+        return;
     }
+    
+    session.m_xmpBlob = xmpBlob;
+    
+    _sessionViewController.userSongSession = session;
+    
+    [self presentViewController:_sessionViewController animated:YES completion:^{ [cell.activityView stopAnimating]; }];
+    
 }
 
 #pragma mark - UITextFieldDelegate

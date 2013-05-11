@@ -25,7 +25,6 @@
 @property (retain, nonatomic) IBOutlet UIButton *skillButton;
 @property (retain, nonatomic) IBOutlet UIButton *scoreButton;
 
-@property (retain, nonatomic) IBOutlet ExpandableSearchBar *searchBar;
 @property (retain, nonatomic) IBOutlet PullToUpdateTableView *songListTable;
 
 @property (retain, nonatomic) IBOutlet UIButton *closeModalButton;

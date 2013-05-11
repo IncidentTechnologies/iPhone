@@ -146,8 +146,6 @@ extern GtarController *g_gtarController;
     
     [g_gtarController removeObserver:self];
     
-    [_searchBar release];
-    
     [_userSongArray release];
     
     [_songListTable release];
@@ -191,18 +189,18 @@ extern GtarController *g_gtarController;
     
     [_volumeViewController closeView:NO];
     [_instrumentViewController closeView:NO];
-    [_songOptionsModal.blackButton setHidden:YES];
+    [_songOptionsModal.blackButtonOrig setHidden:YES];
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
     if ( _volumeViewController.isDown == YES )
     {
-        [_songOptionsModal.blackButton setHidden:YES];
+        [_songOptionsModal.blackButtonOrig setHidden:YES];
     }
     else
     {
-        [_songOptionsModal.blackButton setHidden:NO];
+        [_songOptionsModal.blackButtonOrig setHidden:NO];
     }
     [_volumeViewController toggleView:YES];
     [_instrumentViewController closeView:YES];
@@ -217,11 +215,11 @@ extern GtarController *g_gtarController;
     
     if ( _instrumentViewController.isDown == YES )
     {
-        [_songOptionsModal.blackButton setHidden:YES];
+        [_songOptionsModal.blackButtonOrig setHidden:YES];
     }
     else
     {
-        [_songOptionsModal.blackButton setHidden:NO];
+        [_songOptionsModal.blackButtonOrig setHidden:NO];
     }
     [_playerViewController endPlayback];
     [_instrumentViewController toggleView:YES];
@@ -262,7 +260,7 @@ extern GtarController *g_gtarController;
     {
         return;
     }
-    [_songOptionsModal.blackButton setHidden:YES];
+    [_songOptionsModal.blackButtonOrig setHidden:YES];
     [_instrumentViewController closeView:YES];
     [_volumeViewController closeView:YES];
 }

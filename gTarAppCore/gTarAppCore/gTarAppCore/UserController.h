@@ -47,6 +47,7 @@
 - (void)clearCache;
 - (void)loadCache;
 - (void)saveCache;
+- (void)saveCacheAsync;
 //- (void)saveCookie:(NSHTTPCookie*)cookie;
 //- (NSHTTPCookie*)loadCookie;
 - (void)requestLoginUserCachedCallbackObj:(id)obj andCallbackSel:(SEL)sel;

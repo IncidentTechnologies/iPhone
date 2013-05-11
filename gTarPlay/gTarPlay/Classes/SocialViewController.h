@@ -9,21 +9,31 @@
 #import <UIKit/UIKit.h>
 
 #import "PullToUpdateTableView.h"
+#import "ExpandableSearchBar.h"
 
 @class SelectorControl;
 
-@interface SocialViewController : UIViewController <PullToUpdateTableViewDelegate, UITableViewDataSource>
+@interface SocialViewController : UIViewController <PullToUpdateTableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ExpandableSearchBarDelegate>
 
 @property (retain, nonatomic) IBOutlet UIView *topBar;
 @property (retain, nonatomic) IBOutlet SelectorControl *feedSelector;
 @property (retain, nonatomic) IBOutlet PullToUpdateTableView *feedTable;
+@property (retain, nonatomic) IBOutlet UITableView *searchTable;
+@property (retain, nonatomic) IBOutlet UIButton *fullscreenButton;
+@property (retain, nonatomic) IBOutlet ExpandableSearchBar *searchBar;
 
 @property (retain, nonatomic) IBOutlet UIImageView *picImageView;
 @property (retain, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (retain, nonatomic) IBOutlet UIButton *cameraButton;
+@property (retain, nonatomic) IBOutlet UIButton *followButton;
+@property (retain, nonatomic) IBOutlet UIButton *followingButton;
 
 - (IBAction)backButtonClicked:(id)sender;
 - (IBAction)accountButtonClicked:(id)sender;
 - (IBAction)changePicButtonClicked:(id)sender;
+- (IBAction)followButtonClicked:(id)sender;
+- (IBAction)followingButtonClicked:(id)sender;
 - (IBAction)feedSelectorChanged:(id)sender;
+- (IBAction)fullscreenButtonClicked:(id)sender;
 
 @end
