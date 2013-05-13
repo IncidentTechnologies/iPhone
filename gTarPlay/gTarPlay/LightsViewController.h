@@ -6,8 +6,10 @@
 //
 //
 
+#import <GtarController/GtarController.h>
+
 #import <UIKit/UIKit.h>
 
-@interface LightsViewController : UIViewController
+@interface LightsViewController : UIViewController <GtarControllerObserver>
 
 @end

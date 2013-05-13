@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D21E3D0173DBD2B00AD6C1F /* LightsGrid.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D21E3CF173DBD2B00AD6C1F /* LightsGrid.png */; };
+		9D21E3D1173DBD2B00AD6C1F /* LightsGrid.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D21E3CF173DBD2B00AD6C1F /* LightsGrid.png */; };
 		9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
 		9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
 		9D6DA778172A276300EB96C7 /* LightsImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DA777172A276300EB96C7 /* LightsImage.png */; };
@@ -2220,6 +2222,7 @@
 		9D11573A149599500058734F /* SliderEndMin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderEndMin.png; path = images/FreePlay/SliderEndMin.png; sourceTree = "<group>"; };
 		9D1157411495A0D80058734F /* HomeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HomeButton.png; path = images/FreePlay/HomeButton.png; sourceTree = "<group>"; };
 		9D1157491496D91E0058734F /* SliderKnob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderKnob.png; path = images/FreePlay/SliderKnob.png; sourceTree = "<group>"; };
+		9D21E3CF173DBD2B00AD6C1F /* LightsGrid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightsGrid.png; path = Resources/Images/Freeplay/LightsGrid.png; sourceTree = "<group>"; };
 		9D26A217149BEB4C008CA090 /* AuxSpeakerSlider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AuxSpeakerSlider.png; path = images/FreePlay/AuxSpeakerSlider.png; sourceTree = "<group>"; };
 		9D26A218149BEB4C008CA090 /* AuxSpeakerSwitch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AuxSpeakerSwitch.png; path = images/FreePlay/AuxSpeakerSwitch.png; sourceTree = "<group>"; };
 		9D2A05831534F6A500218ABB /* Acoustic Guitar 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 40.mp3"; path = "Acoustic Guitar/Acoustic Guitar 40.mp3"; sourceTree = "<group>"; };
@@ -4091,6 +4094,7 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9D21E3CF173DBD2B00AD6C1F /* LightsGrid.png */,
 				9D6DA777172A276300EB96C7 /* LightsImage.png */,
 				9DF148411729C6230056A6D1 /* DownArrowOrange.png */,
 				9DF148421729C6230056A6D1 /* DownArrowRedOrange.png */,
@@ -6461,6 +6465,7 @@
 				ECDF7F64173D590F003E51EC /* SocialFacebookButton.png in Resources */,
 				ECDF7F66173D590F003E51EC /* SocialFollowButton.png in Resources */,
 				ECDF7F68173D590F003E51EC /* SocialFollowingButton.png in Resources */,
+				9D21E3D0173DBD2B00AD6C1F /* LightsGrid.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7430,6 +7435,7 @@
 				ECDF7F65173D590F003E51EC /* SocialFacebookButton.png in Resources */,
 				ECDF7F67173D590F003E51EC /* SocialFollowButton.png in Resources */,
 				ECDF7F69173D590F003E51EC /* SocialFollowingButton.png in Resources */,
+				9D21E3D1173DBD2B00AD6C1F /* LightsGrid.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

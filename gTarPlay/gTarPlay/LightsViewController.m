@@ -11,7 +11,6 @@
 #import "RGBColor.h"
 
 #import <gTarAppCore/AppCore.h>
-#import <GtarController/GtarController.h>
 
 extern GtarController * g_gtarController;
 
@@ -95,6 +94,10 @@ typedef enum
 {
     self = [super initWithNibName:@"LightsViewController" bundle:nil];
     if (self) {
+        
+        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(exitingFreePlay:) name:@"ExitFreePlay" object:nil];
+
         RGBColor *white = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:3] autorelease];
         RGBColor *red = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:0] autorelease];
         RGBColor *green = [[[RGBColor alloc] initWithRed:0 Green:3 Blue:0] autorelease];
@@ -114,15 +117,29 @@ typedef enum
     [super viewDidLoad];
     
     [self.view insertSubview:_shapeView belowSubview:_shapeButton];
+    [self.view insertSubview:_colorView belowSubview:_shapeView];
+    
+    _generalSurface.transform = CGAffineTransformMakeScale(1, -1);
+    _stringSurface.transform = CGAffineTransformMakeScale(1, -1);
+    
+    _lastLEDTouch = CGPointMake(-1, -1);
+    _LEDMode = LEDModeTrail;
+    _LEDShape = LEDShapeDot;
+    _LEDLoop = NUM_LEDLoop_ENTRIES;
+    
+    [g_gtarController addObserver:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     CGRect frame = _shapeView.frame;
     frame.origin.y = frame.origin.y + _shapeButton.frame.origin.y;
-    [_shapeView setFrame:frame];
-    //[_shapeView setHidden:YES];
+    frame.size.width = self.view.frame.size.width;
     
-    [self.view insertSubview:_colorView belowSubview:_shapeView];
+    [_shapeView setFrame:frame];
     [_colorView setFrame:frame];
-    //[_colorView setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -138,11 +155,7 @@ typedef enum
     [_allSurface release];
     [_colors release];
     
-    if (_LEDTimer != nil)
-    {
-        [_LEDTimer invalidate];
-        _LEDTimer = nil;
-    }
+    [self stopLoop];
     
     [_shapeView release];
     [_colorView release];
@@ -153,7 +166,12 @@ typedef enum
 }
 
 
-- (IBAction)showShapeView:(id)sender
+- (void) exitingFreePlay:(NSNotification *) notification
+{
+    [self stopLoop];
+}
+
+- (IBAction)toggleShapeView:(id)sender
 {
     [_shapeButton setSelected:![_shapeButton isSelected]];
     
@@ -164,12 +182,10 @@ typedef enum
     if ([_shapeButton isSelected])
     {
         _shapeView.transform = CGAffineTransformMakeTranslation(0, -1 * _shapeView.frame.size.height);
-        //[_shapeView setHidden:NO];
     }
     else
     {
         _shapeView.transform = CGAffineTransformIdentity;
-        //[_shapeView setHidden:YES];
     }
     
     // if color view is up bring it down
@@ -182,7 +198,7 @@ typedef enum
     [UIView commitAnimations];
 }
 
-- (IBAction)showColorView:(id)sender
+- (IBAction)toggleColorView:(id)sender
 {
     [_colorButton setSelected:![_colorButton isSelected]];
     
@@ -210,7 +226,6 @@ typedef enum
     
     [UIView commitAnimations];
 }
-
 
 #pragma mark - Touches
 
@@ -281,12 +296,7 @@ typedef enum
 
 - (void) touchedLEDs:(NSSet *)touches
 {
-    // stop the LED auto loop playback if its on
-    if (_LEDTimer != nil)
-    {
-        [_LEDTimer invalidate];
-        self.LEDTimer = nil;
-    }
+    [self stopLoop];
     
     RGBColor *color = [_colors objectAtIndex:_currentColorIndex];
     
@@ -576,12 +586,13 @@ typedef enum
 
 - (IBAction)setLEDMode:(id)sender
 {
-    // stop the LED auto loop playback if its on
-    if (_LEDTimer != nil)
-    {
-        [_LEDTimer invalidate];
-        _LEDTimer = nil;
-    }
+    [self stopLoop];
+    
+    // Bring down shape view
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.8];
+    _shapeView.transform = CGAffineTransformIdentity;
+    [UIView commitAnimations];
     
     switch ([sender tag])
     {
@@ -607,6 +618,12 @@ typedef enum
 
 - (IBAction)setLEDColor:(id)sender
 {
+    // Bring down color view
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.8];
+    _colorView.transform = CGAffineTransformIdentity;
+    [UIView commitAnimations];
+    
     if (9 == [sender tag])
     {
         _LEDColorMode = LEDColorRoatating;
@@ -624,6 +641,8 @@ typedef enum
 
 - (IBAction)clearAllLEDs:(id)sender
 {
+    [self stopLoop];
+    
     [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0)
                                 withColor:GtarLedColorMake(0, 0, 0)];
 }
@@ -668,16 +687,21 @@ typedef enum
             break;
     }
     
-    if (_LEDTimer != nil)
-    {
-        [_LEDTimer invalidate];
-        _LEDTimer = nil;
-    }
+    [self stopLoop];
     
     self.LEDTimer = [NSTimer scheduledTimerWithTimeInterval:timeInterval target:self selector:@selector(animateLEDs:) userInfo:nil repeats:YES];
     [self animateLEDs:_LEDTimer];
 }
 
+- (void)stopLoop
+{
+    // stop the LED auto loop playback if its on
+    if (_LEDTimer != nil)
+    {
+        [_LEDTimer invalidate];
+        self.LEDTimer = nil;
+    }
+}
 
 // turns on the entire fretboard with a different color for each
 // fret position, the colors are rotating fromt the colors array
@@ -860,5 +884,11 @@ typedef enum
     }
 }
 
+#pragma mark - GtarControllerObserver
+
+- (void)gtarDisconnected
+{
+    [self stopLoop];
+}
 
 @end

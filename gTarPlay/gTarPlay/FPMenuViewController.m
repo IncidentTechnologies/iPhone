@@ -85,6 +85,10 @@ extern AudioController * g_audioController;
 
 - (IBAction)exitFreePlay:(id)sender
 {
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"ExitFreePlay"
+     object:self];
+    
     [self.parentViewController.navigationController popViewControllerAnimated:YES];
 }
 
