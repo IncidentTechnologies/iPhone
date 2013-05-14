@@ -26,5 +26,7 @@
 - (void)endSearch;
 - (void)beginSearch;
 - (void)minimizeKeyboard;
+- (void)startActivityAnimation;
+- (void)stopActivityAnimation;
 
 @end

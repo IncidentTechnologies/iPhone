@@ -1590,4 +1590,20 @@
     
 }
 
+#pragma mark - Misc
+
+- (BOOL)checkLoggedInUserFollows:(UserProfile *)userProfile
+{
+    UserEntry *loggedInEntry = [self getUserEntry:0];
+    
+    return [loggedInEntry.m_followsList containsObject:userProfile];
+}
+
+- (BOOL)checkLoggedInUserFollowedBy:(UserProfile *)userProfile
+{
+    UserEntry *loggedInEntry = [self getUserEntry:0];
+    
+    return [loggedInEntry.m_followedByList containsObject:userProfile];
+}
+
 @end

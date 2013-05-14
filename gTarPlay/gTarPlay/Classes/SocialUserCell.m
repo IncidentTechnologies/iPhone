@@ -11,6 +11,8 @@
 #import <gTarAppCore/UserProfile.h>
 #import <gTarAppCore/FileController.h>
 
+#import "UIButton+Gtar.h"
+
 extern FileController *g_fileController;
 
 @interface SocialUserCell()
@@ -44,6 +46,7 @@ extern FileController *g_fileController;
 - (void)dealloc
 {
     [_userProfile release];
+    [_followInvocation release];
     [_profilePic release];
     [_userName release];
     [_followButton release];
@@ -81,6 +84,22 @@ extern FileController *g_fileController;
     }
 
     [_userName setText:_userProfile.m_name];
+    
+    UIImage *image;
+    
+    if ( self.following == YES)
+    {
+        image = [UIImage imageNamed:@"SocialFollowingButton.png"];
+    }
+    else
+    {
+        image = [UIImage imageNamed:@"SocialFollowButton.png"];
+    }
+    
+    [_followButton setImage:image forState:UIControlStateNormal];
+    
+    [_followButton stopActivityIndicator];
+    
 }
 
 - (void)profilePicDownloadComplete:(UIImage *)pic
@@ -99,7 +118,8 @@ extern FileController *g_fileController;
 
 - (IBAction)followButtonClicked:(id)sender
 {
-    
+    [_followButton startActivityIndicator];
+    [_followInvocation invoke];
 }
 
 

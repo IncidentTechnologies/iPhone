@@ -16,6 +16,7 @@
 @interface SocialViewController : UIViewController <PullToUpdateTableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ExpandableSearchBarDelegate>
 
 @property (retain, nonatomic) IBOutlet UIView *topBar;
+@property (retain, nonatomic) IBOutlet UIButton *profileButton;
 @property (retain, nonatomic) IBOutlet SelectorControl *feedSelector;
 @property (retain, nonatomic) IBOutlet PullToUpdateTableView *feedTable;
 @property (retain, nonatomic) IBOutlet UITableView *searchTable;
@@ -29,6 +30,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *followingButton;
 
 - (IBAction)backButtonClicked:(id)sender;
+- (IBAction)profileButtonClicked:(id)sender;
 - (IBAction)accountButtonClicked:(id)sender;
 - (IBAction)changePicButtonClicked:(id)sender;
 - (IBAction)followButtonClicked:(id)sender;

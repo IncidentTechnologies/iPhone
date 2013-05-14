@@ -12,8 +12,7 @@
 
 #define CANCEL_BUTTON_HEIGHT _expandedFrame.size.height
 #define CANCEL_BUTTON_BUFFER (_expandedFrame.size.height + 6)
-#define CONTRACTED_LENGTH 125.0
-//#define TEXT_BOX_HEIGHT 30.0
+#define CONTRACTED_LENGTH 135.0
 #define TEXT_BOX_HEIGHT self.bounds.size.height
 
 @interface ExpandableSearchBar ()
@@ -28,7 +27,10 @@
     UIImageView *_contractedPadding;
     UIView *_expandedPadding;
     
+    UIActivityIndicatorView *_activityView;
+    
     BOOL _animating;
+    BOOL _expanded;
 }
 
 @end
@@ -64,8 +66,8 @@
 {
     [self updateFrames];
     
-//    self.translatesAutoresizingMaskIntoConstraints = NO;
     _animating = NO;
+    _expanded = NO;
     
     // set up padding views
     _expandedPadding = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 17)];
@@ -73,6 +75,11 @@
     _contractedPadding = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 17)];
     _contractedPadding.image = [UIImage imageNamed:@"MagGlass.png"];
     _contractedPadding.contentMode = UIViewContentModeScaleAspectFit;
+    
+    // set up the activity view
+    _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _activityView.hidesWhenStopped = YES;
+    [_activityView setFrame:CGRectMake(0, 0, 30, 17)];
     
     // init the text field
     UIImage *textFieldBackground = [UIImage imageNamed:@"SearchBar.png"];
@@ -86,7 +93,8 @@
     _textField.placeholder = @"Search...";
     _textField.leftView = _contractedPadding;
     _textField.leftViewMode = UITextFieldViewModeAlways;
-    _textField.rightView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 17)] autorelease];
+//    _textField.rightView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 17)] autorelease];
+    _textField.rightView = _activityView;
     _textField.rightViewMode = UITextFieldViewModeAlways;
     _textField.returnKeyType = UIReturnKeySearch;
     _textField.delegate = self;
@@ -120,8 +128,28 @@
     [_cancelButton release];
     [_contractedPadding release];
     [_expandedPadding release];
+    [_activityView release];
     
     [super dealloc];
+}
+
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+//{
+//    BOOL hit = [_textField hitTest:point withEvent:event];
+//    
+//    return hit;
+//}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    if ( _expanded == NO )
+    {
+        return CGRectContainsPoint( _contractedFrame, point );
+    }
+    else
+    {
+        return [super pointInside:point withEvent:event];
+    }
 }
 
 #pragma mark - External access
@@ -139,6 +167,16 @@
 - (void)minimizeKeyboard
 {
     [_textField resignFirstResponder];
+}
+
+- (void)startActivityAnimation
+{
+    [_activityView startAnimating];
+}
+
+- (void)stopActivityAnimation;
+{
+    [_activityView stopAnimating];
 }
 
 #pragma mark - Misc
@@ -175,6 +213,7 @@
 - (void)expandSearchBar
 {
     _animating = YES;
+    _expanded = YES;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3f];
@@ -187,7 +226,6 @@
     _cancelButton.alpha = 1.0;
 
     [UIView commitAnimations];
-
 }
 
 - (void)expandSearchBarFinished
@@ -198,6 +236,7 @@
 - (void)contractSearchBar
 {
     _animating = YES;
+    _expanded = NO;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3f];

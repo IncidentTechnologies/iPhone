@@ -126,4 +126,8 @@
 - (void)addScore:(NSInteger)score forSong:(NSInteger)songId;
 - (NSInteger)getMaxScoreForSong:(NSInteger)songId;
 
+// Misc
+- (BOOL)checkLoggedInUserFollows:(UserProfile *)userProfile;
+- (BOOL)checkLoggedInUserFollowedBy:(UserProfile *)userProfile;
+
 @end

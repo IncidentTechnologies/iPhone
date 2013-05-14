@@ -13,6 +13,8 @@
 @interface SocialUserCell : UITableViewCell
 
 @property (retain, nonatomic) UserProfile *userProfile;
+@property (retain, nonatomic) NSInvocation *followInvocation;
+@property (assign, nonatomic) BOOL following;
 
 @property (retain, nonatomic) IBOutlet UILabel *userName;
 @property (retain, nonatomic) IBOutlet UIImageView *profilePic;

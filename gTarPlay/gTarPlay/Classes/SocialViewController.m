@@ -38,13 +38,14 @@ extern Facebook *g_facebook;
 //    UserEntry *_loggedInUserEntry;
     UserEntry *_displayedUserEntry;
     
-    UserProfile *_loggedInUserProfile;
+//    UserProfile *_loggedInUserProfile;
     
     NSArray *_userProfileSearchResults;
     
     SessionModalViewController *_sessionViewController;
     
 //    BOOL displaySearch;
+    NSInteger _requestsInFlight;
 }
 @end
 
@@ -70,12 +71,16 @@ extern Facebook *g_facebook;
     [_searchTable setHidden:YES];
     [_fullscreenButton setHidden:YES];
     
+    [_profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
     [self.view bringSubviewToFront:_searchTable];
     [self.view bringSubviewToFront:_fullscreenButton];
     
     [self displayAndUpdateUserId:0];
     
     _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +91,8 @@ extern Facebook *g_facebook;
 
 - (void)dealloc
 {
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+    
     [_topBar release];
     [_feedSelector release];
     [_feedTable release];
@@ -98,12 +105,25 @@ extern Facebook *g_facebook;
     [_cameraButton release];
     [_followButton release];
     [_followingButton release];
+    [_profileButton release];
     [super dealloc];
 }
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscapeLeft;
+}
+
+#pragma mark - Button click handlers
 
 - (IBAction)backButtonClicked:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)profileButtonClicked:(id)sender
+{
+    [self displayAndUpdateUserId:0];
 }
 
 - (IBAction)accountButtonClicked:(id)sender
@@ -176,6 +196,9 @@ extern Facebook *g_facebook;
 
 - (void)requestUserId:(NSInteger)userId
 {
+    _requestsInFlight += 4;
+    [_feedTable startAnimating];
+
     [g_userController requestUserProfile:userId andCallbackObj:self andCallbackSel:@selector(userProfileCallback:)];
     [g_userController requestUserSessions:userId andCallbackObj:self andCallbackSel:@selector(userSessionsCallback:)];
     [g_userController requestUserFollows:userId andCallbackObj:self andCallbackSel:@selector(userFollowingCallback:)];
@@ -199,12 +222,18 @@ extern Facebook *g_facebook;
     [self updateHeaders];
     
     // Is this the user
-    if ( _displayedUserId == 0 || _displayedUserEntry == nil || _displayedUserId == loggedInEntry.m_userProfile.m_userId )
+    if ( _displayedUserId == 0 || _displayedUserId == loggedInEntry.m_userProfile.m_userId )
+    {
+        [_followingButton setHidden:YES];
+        [_followButton setHidden:YES];
+        [_profileButton setImage:image forState:UIControlStateNormal];
+    }
+    else if ( _displayedUserEntry == nil )
     {
         [_followingButton setHidden:YES];
         [_followButton setHidden:YES];
     }
-    else if ( [loggedInEntry.m_followsList containsObject:_displayedUserEntry.m_userProfile] == YES )
+    else if ( [g_userController checkLoggedInUserFollows:_displayedUserEntry.m_userProfile] == YES )
     {
         [_followingButton setHidden:NO];
         [_followButton setHidden:YES];
@@ -309,23 +338,7 @@ extern Facebook *g_facebook;
     }
 	else
     {
-        NSString *CellIdentifier = @"SocialUserCell";
-        
-        SocialUserCell *cell = (SocialUserCell *)[_feedTable dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (cell == nil)
-        {
-            cell = [[[SocialUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            
-            [[NSBundle mainBundle] loadNibNamed:@"SocialUserCell" owner:cell options:nil];
-            
-            CGFloat cellHeight = _feedTable.rowHeight;
-            CGFloat cellRow = _feedTable.frame.size.width;
-            
-            // Readjust the width and height
-            [cell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
-            [cell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
-        }
+        SocialUserCell *cell = [self getSocialUserCell:_feedTable];
         
         if ( _feedSelector.selectedIndex == 1 )
         {
@@ -354,6 +367,8 @@ extern Facebook *g_facebook;
             cell.userProfile = nil;
         }
         
+        cell.following = [g_userController checkLoggedInUserFollows:cell.userProfile];
+        
         [cell updateCell];
         
         return cell;
@@ -362,23 +377,8 @@ extern Facebook *g_facebook;
 
 - (UITableViewCell *)cellForSearchTable:(NSInteger)row
 {
-    NSString *CellIdentifier = @"SocialUserCell";
     
-    SocialUserCell *cell = (SocialUserCell *)[_searchTable dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil)
-    {
-        cell = [[[SocialUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        
-        [[NSBundle mainBundle] loadNibNamed:@"SocialUserCell" owner:cell options:nil];
-        
-        CGFloat cellHeight = _searchTable.rowHeight;
-        CGFloat cellRow = _searchTable.frame.size.width;
-        
-        // Readjust the width and height
-        [cell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
-        [cell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
-    }
+    SocialUserCell *cell = [self getSocialUserCell:_searchTable];
     
     if ( row < [_userProfileSearchResults count] )
     {
@@ -389,7 +389,40 @@ extern Facebook *g_facebook;
         cell.userProfile = nil;
     }
     
+    cell.following = [g_userController checkLoggedInUserFollows:cell.userProfile];
+    
     [cell updateCell];
+    
+    return cell;
+}
+
+- (SocialUserCell *)getSocialUserCell:(UITableView *)table
+{
+    NSString *CellIdentifier = @"SocialUserCell";
+    
+    SocialUserCell *cell = (SocialUserCell *)[table dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[[SocialUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        
+        [[NSBundle mainBundle] loadNibNamed:@"SocialUserCell" owner:cell options:nil];
+        
+        CGFloat cellHeight = table.rowHeight;
+        CGFloat cellRow = table.frame.size.width;
+        
+        // Readjust the width and height
+        [cell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+        [cell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+        
+        NSMethodSignature *signature = [SocialViewController instanceMethodSignatureForSelector:@selector(socialUserFollowInvocation:)];
+        
+        cell.followInvocation = [NSInvocation invocationWithMethodSignature:signature];
+        
+        [cell.followInvocation setTarget:self];
+        [cell.followInvocation setSelector:@selector(socialUserFollowInvocation:)];
+        [cell.followInvocation setArgument:&cell atIndex:2];
+    }
     
     return cell;
 }
@@ -438,6 +471,13 @@ extern Facebook *g_facebook;
 
 - (void)userProfileCallback:(UserResponse*)userResponse
 {
+    _requestsInFlight--;
+    
+    if ( _requestsInFlight == 0 )
+    {
+        [_feedTable stopAnimating];
+    }
+    
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         [self refreshDisplayedUser];
@@ -459,6 +499,13 @@ extern Facebook *g_facebook;
 
 - (void)userSessionsCallback:(UserResponse*)userResponse
 {
+    _requestsInFlight--;
+    
+    if ( _requestsInFlight == 0 )
+    {
+        [_feedTable stopAnimating];
+    }
+    
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         [self refreshDisplayedUser];
@@ -476,6 +523,13 @@ extern Facebook *g_facebook;
 
 - (void)userFollowersCallback:(UserResponse*)userResponse
 {
+    _requestsInFlight--;
+    
+    if ( _requestsInFlight == 0 )
+    {
+        [_feedTable stopAnimating];
+    }
+    
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         [self refreshDisplayedUser];
@@ -493,6 +547,13 @@ extern Facebook *g_facebook;
 
 - (void)userFollowingCallback:(UserResponse*)userResponse
 {
+    _requestsInFlight--;
+    
+    if ( _requestsInFlight == 0 )
+    {
+        [_feedTable stopAnimating];
+    }
+    
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         [self refreshDisplayedUser];
@@ -530,6 +591,8 @@ extern Facebook *g_facebook;
 
 - (void)userProfileSearchCallback:(UserResponse*)userResponse
 {
+    [_searchBar stopActivityAnimation];
+    
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         [_userProfileSearchResults release];
@@ -678,12 +741,17 @@ extern Facebook *g_facebook;
     // Show the table view
     [_searchTable setHidden:NO];
     [_fullscreenButton setHidden:NO];
+    // I appologize for this ugly hack, i.e. passing a bool as a pointer (numberWithBool != NO)
+    // but it isn't worth the time doing it the proper way.
+//    [_profileButton setHidden:YES];
+    [_profileButton performSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES] afterDelay:0.2];
 }
 
 - (void)searchBarSearch:(ExpandableSearchBar *)searchBar
 {
     // Execute a search
     [self searchForString:searchBar.searchString];
+    [searchBar startActivityAnimation];
 }
 
 - (void)searchBarCancel:(ExpandableSearchBar *)searchBar
@@ -691,6 +759,14 @@ extern Facebook *g_facebook;
     // Remove the table view
     [_searchTable setHidden:YES];
     [_fullscreenButton setHidden:YES];
+    [_profileButton performSelector:@selector(setHidden:) withObject:nil afterDelay:0.1];
+}
+
+#pragma mark - PullToUpdate
+
+- (void)update
+{
+    [self requestUserId:_displayedUserId];
 }
 
 #pragma mark - Misc
@@ -698,7 +774,6 @@ extern Facebook *g_facebook;
 - (void)uploadProfilePic:(UIImage*)image
 {
     [g_userController requestUserProfileChangePicture:image andCallbackObj:self andCallbackSel:@selector(userProfileCallback:)];
-    
 }
 
 - (void)profilePicDownloaded:(id)file
@@ -720,6 +795,18 @@ extern Facebook *g_facebook;
 - (void)removeUserFollows:(UserProfile*)userProfile
 {
     [g_userController requestRemoveUserFollow:userProfile.m_userId andCallbackObj:self andCallbackSel:@selector(changeFollowingCallback:)];
+}
+
+- (void)socialUserFollowInvocation:(SocialUserCell *)cell
+{
+    if ( cell.following == YES )
+    {
+        [self removeUserFollows:cell.userProfile];
+    }
+    else
+    {
+        [self addUserFollows:cell.userProfile];
+    }
 }
 
 @end
