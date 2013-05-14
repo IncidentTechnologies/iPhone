@@ -25,7 +25,7 @@
 #import "TitleNavigationController.h"
 #import "SongSelectionViewController.h"
 #import "SocialViewController.h"
-#import "SongPlayerViewController.h"
+//#import "SongPlayerViewController.h"
 #import "VolumeViewController.h"
 #import "SlidingInstrumentViewController.h"
 #import "UIView+Gtar.h"

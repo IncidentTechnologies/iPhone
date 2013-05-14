@@ -3484,18 +3484,13 @@
 		080E96DDFE201D6D7F000001 /* App Source */ = {
 			isa = PBXGroup;
 			children = (
-				EC0BAD8116F1791300E567A6 /* General UI */,
-				ECE832381718EA0A006E2391 /* SocialViewController */,
+				EC0BAD8116F1791300E567A6 /* UI Widgets */,
+				29B97315FDCFA39411CA2CEA /* AppDelegate */,
 				EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */,
 				EC0BAD8016F14A7800E567A6 /* SongSelectionViewController */,
 				ECE9D2441705119100BB6C53 /* PlayViewController */,
-				29B97315FDCFA39411CA2CEA /* AppDelegate */,
-				EC020DD9141FD2D700627303 /* TitleScreen */,
+				ECE832381718EA0A006E2391 /* SocialViewController */,
 				ECE302641330322F002812B6 /* FreePlay Experience */,
-				EC87EE8813270EE2007DAEC9 /* Play Experience */,
-				EC9F404514FEEAEC006DBAEC /* Menu */,
-				ECF50CF01434863E001F65B7 /* SongPlayerViewController */,
-				EC7D5B5413D8EF3E00FC2177 /* CustomNavigationViewController */,
 			);
 			name = "App Source";
 			path = Classes;
@@ -3516,6 +3511,7 @@
 				EC0BAD3316EE93AC00E567A6 /* Default-568h@2x.png */,
 				ECE832281718BE81006E2391 /* Default-568hRot.png */,
 				EC6BD1FF13F44E130068E25C /* gTarColors.h */,
+				ECFF77181742BC45002D7D40 /* Trash */,
 				EC9D6EBB14A11DC600AE374D /* Facebook */,
 				080E96DDFE201D6D7F000001 /* App Source */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -4210,6 +4206,7 @@
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 			);
 			name = TitleScreen;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		EC0B884314B3D1F500D40BC8 /* Images */ = {
@@ -4293,7 +4290,7 @@
 			name = SongSelectionViewController;
 			sourceTree = "<group>";
 		};
-		EC0BAD8116F1791300E567A6 /* General UI */ = {
+		EC0BAD8116F1791300E567A6 /* UI Widgets */ = {
 			isa = PBXGroup;
 			children = (
 				EC341610173894D100501AF4 /* Categories */,
@@ -4309,7 +4306,7 @@
 				EC34161F173ACA9E00501AF4 /* SessionModalViewController */,
 				ECDF7F70173D5A77003E51EC /* IconButton */,
 			);
-			name = "General UI";
+			name = "UI Widgets";
 			sourceTree = "<group>";
 		};
 		EC0BAD9116F2458200E567A6 /* SelectorControl */ = {
@@ -4956,6 +4953,7 @@
 				ECB4592E1488208C00B04D06 /* CustomBeveledView.m */,
 			);
 			name = CustomNavigationViewController;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		EC87EE8813270EE2007DAEC9 /* Play Experience */ = {
@@ -4966,7 +4964,6 @@
 				EC6BD1F013F356C40068E25C /* SongViewController */,
 			);
 			name = "Play Experience";
-			path = ..;
 			sourceTree = "<group>";
 		};
 		EC87EEDD13277B08007DAEC9 /* Images */ = {
@@ -5131,6 +5128,7 @@
 				EC9F404814FEEB15006DBAEC /* MenuViewController.xib */,
 			);
 			name = Menu;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		ECA25ABF142C37FC0008DAC6 /* Cells */ = {
@@ -5429,6 +5427,19 @@
 				EC020DD2141EA28A00627303 /* SongPlayerViewController.xib */,
 			);
 			name = SongPlayerViewController;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		ECFF77181742BC45002D7D40 /* Trash */ = {
+			isa = PBXGroup;
+			children = (
+				EC020DD9141FD2D700627303 /* TitleScreen */,
+				EC7D5B5413D8EF3E00FC2177 /* CustomNavigationViewController */,
+				ECF50CF01434863E001F65B7 /* SongPlayerViewController */,
+				EC87EE8813270EE2007DAEC9 /* Play Experience */,
+				EC9F404514FEEAEC006DBAEC /* Menu */,
+			);
+			name = Trash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
