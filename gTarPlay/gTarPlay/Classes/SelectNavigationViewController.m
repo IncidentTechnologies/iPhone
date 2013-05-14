@@ -230,7 +230,7 @@ extern AudioController * g_audioController;
 - (void)stopPreview
 {
     
-    [m_playbackController pauseSong];
+    [m_playbackController endSong];
     
 }
 
