@@ -117,7 +117,6 @@
 		EC24DC53161A897A00016B78 /* SongDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6BD1D813F070660068E25C /* SongDisplayController.m */; };
 		EC24DC54161A897A00016B78 /* SongES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6BD1DD13F073FD0068E25C /* SongES1Renderer.m */; };
 		EC24DC5D161A898700016B78 /* PullToUpdateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1E4DF21549E2AD0033F904 /* PullToUpdateTableView.m */; };
-		EC24DC84161A89B700016B78 /* gTar Teaser Final Test 480.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C507B15BF35250066EF75 /* gTar Teaser Final Test 480.m4v */; };
 		EC24DC85161A89BC00016B78 /* Strat 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E741582D3230015ED49 /* Strat 2.mp3 */; };
 		EC24DC86161A89BC00016B78 /* Strat 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E751582D3230015ED49 /* Strat 3.mp3 */; };
 		EC24DC87161A89BC00016B78 /* Strat 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E761582D3230015ED49 /* Strat 4.mp3 */; };
@@ -844,7 +843,6 @@
 		ECC11E55162D07AD001A231A /* gTar_App_Icon114a.png in Resources */ = {isa = PBXBuildFile; fileRef = EC39629814CE6A9800D309DF /* gTar_App_Icon114a.png */; };
 		ECC11E56162D07AD001A231A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EC2F25C51468B3C100D0FC7F /* Default.png */; };
 		ECC11E57162D07AD001A231A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC9A92021468BB33009CAC83 /* Default@2x.png */; };
-		ECC11E58162D07AD001A231A /* gTar Teaser Final Test 480.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C507B15BF35250066EF75 /* gTar Teaser Final Test 480.m4v */; };
 		ECC11E59162D07AD001A231A /* Strat 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E741582D3230015ED49 /* Strat 2.mp3 */; };
 		ECC11E5A162D07AD001A231A /* Strat 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E751582D3230015ED49 /* Strat 3.mp3 */; };
 		ECC11E5B162D07AD001A231A /* Strat 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E761582D3230015ED49 /* Strat 4.mp3 */; };
@@ -1702,7 +1700,6 @@
 		9D2DFFA11564DD1B006B38C0 /* Square 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 78.mp3"; path = "Square/Square 78.mp3"; sourceTree = "<group>"; };
 		9D2DFFA21564DD1B006B38C0 /* Square 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 79.mp3"; path = "Square/Square 79.mp3"; sourceTree = "<group>"; };
 		9D2DFFA31564DD1B006B38C0 /* Square 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 80.mp3"; path = "Square/Square 80.mp3"; sourceTree = "<group>"; };
-		9D4C507B15BF35250066EF75 /* gTar Teaser Final Test 480.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gTar Teaser Final Test 480.m4v"; sourceTree = "<group>"; };
 		9D5ABFAA15421D840045F920 /* Electric Piano 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Piano 40.mp3"; sourceTree = "<group>"; };
 		9D5ABFAB15421D840045F920 /* Electric Piano 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Piano 41.mp3"; sourceTree = "<group>"; };
 		9D5ABFAC15421D840045F920 /* Electric Piano 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Piano 42.mp3"; sourceTree = "<group>"; };
@@ -2562,9 +2559,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */,
-				ECFFB43C15EEE1BE00951BD5 /* gray82.png */,
-				9D4C507B15BF35250066EF75 /* gTar Teaser Final Test 480.m4v */,
+				ECFF77201742F042002D7D40 /* Videos */,
 				EC87EEDD13277B08007DAEC9 /* Images */,
 				EC995EA014DA229C00C86824 /* PreloadedContent */,
 				9D0BF7B814B57F8F00CF6372 /* Audio */,
@@ -3814,6 +3809,7 @@
 		ECFF771F1742EDAF002D7D40 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				ECFFB43C15EEE1BE00951BD5 /* gray82.png */,
 				ECFF771C1742EA9E002D7D40 /* BackButtonRev.png */,
 				ECFF77191742EA1C002D7D40 /* Bear_Brown.png */,
 				EC9A920B1468BC80009CAC83 /* BlackBackArrow_DOWN.png */,
@@ -3827,6 +3823,14 @@
 				EC8EFE94146DC0CA00F92F70 /* XButton.png */,
 			);
 			name = Global;
+			sourceTree = "<group>";
+		};
+		ECFF77201742F042002D7D40 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */,
+			);
+			name = Videos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3904,7 +3908,6 @@
 				EC24DC1D161A82CE00016B78 /* gTar_App_Icon114a.png in Resources */,
 				EC24DC2A161A84F300016B78 /* Default.png in Resources */,
 				EC24DC2B161A84F500016B78 /* Default@2x.png in Resources */,
-				EC24DC84161A89B700016B78 /* gTar Teaser Final Test 480.m4v in Resources */,
 				EC24DC85161A89BC00016B78 /* Strat 2.mp3 in Resources */,
 				EC24DC86161A89BC00016B78 /* Strat 3.mp3 in Resources */,
 				EC24DC87161A89BC00016B78 /* Strat 4.mp3 in Resources */,
@@ -4638,7 +4641,6 @@
 				ECC11E55162D07AD001A231A /* gTar_App_Icon114a.png in Resources */,
 				ECC11E56162D07AD001A231A /* Default.png in Resources */,
 				ECC11E57162D07AD001A231A /* Default@2x.png in Resources */,
-				ECC11E58162D07AD001A231A /* gTar Teaser Final Test 480.m4v in Resources */,
 				ECC11E59162D07AD001A231A /* Strat 2.mp3 in Resources */,
 				ECC11E5A162D07AD001A231A /* Strat 3.mp3 in Resources */,
 				ECC11E5B162D07AD001A231A /* Strat 4.mp3 in Resources */,
