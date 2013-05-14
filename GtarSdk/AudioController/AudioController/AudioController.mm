@@ -556,7 +556,7 @@ void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID
     
     CFStringRef newRoute = [ac GetAudioRoute];
     
-    // If the audio source is set to the Receiver, force it to the speaker.
+    // If the audio source is set to the receiver (ear speaker), force it to the speaker (speaker phone speaker).
     if ([(NSString*)newRoute isEqualToString:(NSString*)kAudioSessionOutputRoute_BuiltInReceiver] == YES)
     {
         [ac RouteAudioToSpeaker];
@@ -763,11 +763,7 @@ static OSStatus renderInput(void *inRefCon, AudioUnitRenderActionFlags *ioAction
         UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;
         status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
         
-        if ( status == 0 )
-        {
-            NSLog(@"Mute override enabled!");
-        }
-        else
+        if ( status != 0 )
         {
             NSError * error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                                   code:status

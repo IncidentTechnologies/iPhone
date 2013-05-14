@@ -196,10 +196,12 @@ extern UserController * g_userController;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {	
     
-	NSInteger row = [indexPath row];
-
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    SelectUserSongCell * userCell = (SelectUserSongCell*)cell;
+    
 	// display the song detail screen
-    UserSong * userSong = [m_userSongArray objectAtIndex:row];
+    UserSong * userSong = userCell.m_userSong;
     
     [(SelectNavigationViewController*)m_navigationController showSongOptions:userSong];
     
