@@ -32,10 +32,17 @@
 
 - (void)sharedInit
 {
-    CGFloat inset = self.frame.size.height - 20.0;
-    
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.imageEdgeInsets = UIEdgeInsetsMake( inset/2.0, 0, inset/2.0, 0 );
+    
+    // Only if IB doesn't override
+    if ( self.contentEdgeInsets.top == 0 &&
+         self.contentEdgeInsets.left == 0 &&
+         self.contentEdgeInsets.bottom == 0 &&
+         self.contentEdgeInsets.right == 0 )
+    {
+        CGFloat inset = 6.0;
+        self.contentEdgeInsets = UIEdgeInsetsMake( inset, 0, inset, 0 );
+    }
 }
 
 /*
