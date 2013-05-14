@@ -13,9 +13,6 @@
 
 #import <TargetConditionals.h>
 
-#import "SongViewController.h"
-#import "SongPlayerViewController.h"
-#import "RootViewController.h"
 #import "TitleNavigationController.h"
 
 #import <gTarAppCore/CloudController.h>

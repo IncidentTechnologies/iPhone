@@ -8,7 +8,6 @@
 
 #import "SongSelectionViewController.h"
 #import "SongListCell.h"
-#import "SongViewController.h"
 #import "PlayViewController.h"
 #import "SlidingModalViewController.h"
 #import "VolumeViewController.h"
@@ -436,7 +435,6 @@ extern GtarController *g_gtarController;
 - (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty
 {
     
-#if 1
     PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
@@ -467,39 +465,6 @@ extern GtarController *g_gtarController;
     [self.navigationController pushViewController:playViewController animated:YES];
     
     [playViewController release];
-#else
-    
-    SongViewController *songController = [[SongViewController alloc] initWithNibName:nil bundle:nil];
-    
-    // Get the XMP, stick it in the user song, and push to the game mode.
-    // This generally should already have been downloaded.
-    NSString *songString = (NSString *)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
-    
-    songController.m_userSong = userSong;
-    songController.m_userSong.m_xmlDom = [[[XmlDom alloc] initWithXmlString:songString] autorelease];
-    
-    if ( difficulty == 0 )
-    {
-        // Easy
-        songController.m_difficulty = SongViewControllerDifficultyEasy;
-    }
-    else if ( difficulty == 1 )
-    {
-        // Medium
-        songController.m_difficulty = SongViewControllerDifficultyMedium;
-        songController.m_muffleWrongNotes = YES;
-    }
-    else if ( difficulty == 2 )
-    {
-        // Hard
-        songController.m_difficulty = SongViewControllerDifficultyHard;
-        songController.m_muffleWrongNotes = NO;
-    }
-    
-    [self.navigationController pushViewController:songController animated:YES];
-    
-    [songController release];
-#endif
 }
 
 - (void)previewUserSong:(UserSong*)userSong

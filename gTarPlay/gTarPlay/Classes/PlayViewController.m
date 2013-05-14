@@ -28,7 +28,6 @@
 #import <gTarAppCore/NSScoreTracker.h>
 
 #import "SongDisplayController.h"
-#import "AmpViewController.h"
 #import "UIButton+Gtar.h"
 
 //#define FRAME_TIMER_DURATION_MED (0.40f) // seconds
