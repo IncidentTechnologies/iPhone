@@ -26,7 +26,7 @@
 
 @property (nonatomic, readonly) CGPoint m_currentDiscretizedPosition;
 
-- (void)initJamPad;
+- (void)setupJamPadWithRows:(NSInteger)rows andColumns:(NSInteger)columns;
 
 - (void)turnOffLedWidth:(NSInteger)width andHeight:(NSInteger)height;
 - (void)turnOnLedWidth:(NSInteger)width andHeight:(NSInteger)height;

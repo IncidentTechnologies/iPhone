@@ -9,6 +9,7 @@
 #import "LightsViewController.h"
 
 #import "RGBColor.h"
+#import "JamPad.h"
 
 #import <gTarAppCore/AppCore.h>
 
@@ -64,7 +65,7 @@ typedef enum
     LEDMode _LEDMode;
 }
 
-@property (retain, nonatomic) IBOutlet UIView *generalSurface;
+@property (retain, nonatomic) IBOutlet JamPad *generalSurface;
 @property (retain, nonatomic) IBOutlet UIView *fretSurface;
 @property (retain, nonatomic) IBOutlet UIView *stringSurface;
 @property (retain, nonatomic) IBOutlet UIView *allSurface;
@@ -75,6 +76,10 @@ typedef enum
 @property (retain, nonatomic) IBOutlet UIButton *shapeButton;
 @property (retain, nonatomic) IBOutlet UIButton *colorButton;
 @property (retain, nonatomic) IBOutlet UIButton *loopButton;
+
+@property (retain, nonatomic) IBOutlet UIImageView *arrowFretsRight;
+@property (retain, nonatomic) IBOutlet UIImageView *arrowStringsTop;
+@property (retain, nonatomic) IBOutlet UIImageView *arrowStringsBottom;
 
 @property (assign, nonatomic) LEDTouchArea LEDTouchArea;
 @property (assign, nonatomic) CGPoint lastLEDTouch;
@@ -116,9 +121,6 @@ typedef enum
 {
     [super viewDidLoad];
     
-    [self.view insertSubview:_shapeView belowSubview:_shapeButton];
-    [self.view insertSubview:_colorView belowSubview:_shapeView];
-    
     _generalSurface.transform = CGAffineTransformMakeScale(1, -1);
     _stringSurface.transform = CGAffineTransformMakeScale(1, -1);
     
@@ -127,19 +129,39 @@ typedef enum
     _LEDShape = LEDShapeDot;
     _LEDLoop = NUM_LEDLoop_ENTRIES;
     
+    _arrowFretsRight.transform = CGAffineTransformMakeRotation(-M_PI);
+    _arrowStringsBottom.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    _arrowStringsTop.transform = CGAffineTransformMakeRotation(M_PI_2);
+    
     [g_gtarController addObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [_generalSurface setupJamPadWithRows:6 andColumns:16];
+    
+    [self.view insertSubview:_shapeView belowSubview:_shapeButton];
+    [self.view insertSubview:_colorView belowSubview:_shapeView];
+    
+    _shapeView.transform = CGAffineTransformIdentity;
+    _colorView.transform = CGAffineTransformIdentity;
     
     CGRect frame = _shapeView.frame;
-    frame.origin.y = frame.origin.y + _shapeButton.frame.origin.y;
+    frame.origin.y = _shapeButton.frame.origin.y;
     frame.size.width = self.view.frame.size.width;
     
     [_shapeView setFrame:frame];
     [_colorView setFrame:frame];
+    
+    [_shapeButton setSelected:NO];
+    [_colorButton setSelected:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -162,6 +184,9 @@ typedef enum
     [_shapeButton release];
     [_colorButton release];
     [_loopButton release];
+    [_arrowFretsRight release];
+    [_arrowStringsTop release];
+    [_arrowStringsBottom release];
     [super dealloc];
 }
 

@@ -47,6 +47,8 @@
 {
     [super viewDidLoad];
     
+    [_jamPad setupJamPadWithRows:9 andColumns:10];
+    
     // Do any additional setup after loading the view from its nib.
     
     // Set up JamPad

@@ -11,6 +11,8 @@
 		9D21E3D1173DBD2B00AD6C1F /* LightsGrid.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D21E3CF173DBD2B00AD6C1F /* LightsGrid.png */; };
 		9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
 		9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
+		9D64729E1741DEEE00C63B1B /* LightsArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D64729D1741DEEE00C63B1B /* LightsArrow.png */; };
+		9D64729F1741DEEE00C63B1B /* LightsArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D64729D1741DEEE00C63B1B /* LightsArrow.png */; };
 		9D6DA778172A276300EB96C7 /* LightsImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DA777172A276300EB96C7 /* LightsImage.png */; };
 		9D6DA779172A276300EB96C7 /* LightsImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DA777172A276300EB96C7 /* LightsImage.png */; };
 		9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
@@ -2515,6 +2517,7 @@
 		9D63D7F81550861600FABD5B /* Rock Guitar 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Rock Guitar 78.mp3"; path = "Rock Guitar/Rock Guitar 78.mp3"; sourceTree = "<group>"; };
 		9D63D7F91550861600FABD5B /* Rock Guitar 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Rock Guitar 79.mp3"; path = "Rock Guitar/Rock Guitar 79.mp3"; sourceTree = "<group>"; };
 		9D63D7FA1550861600FABD5B /* Rock Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Rock Guitar 80.mp3"; path = "Rock Guitar/Rock Guitar 80.mp3"; sourceTree = "<group>"; };
+		9D64729D1741DEEE00C63B1B /* LightsArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightsArrow.png; path = Resources/Images/Freeplay/LightsArrow.png; sourceTree = "<group>"; };
 		9D6DA777172A276300EB96C7 /* LightsImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightsImage.png; path = Resources/Images/Freeplay/LightsImage.png; sourceTree = "<group>"; };
 		9D9798AE1549C3360095282C /* Strings 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strings 40.mp3"; path = "strings/Strings 40.mp3"; sourceTree = "<group>"; };
 		9D9798AF1549C3360095282C /* Strings 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strings 41.mp3"; path = "strings/Strings 41.mp3"; sourceTree = "<group>"; };
@@ -4094,6 +4097,7 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9D64729D1741DEEE00C63B1B /* LightsArrow.png */,
 				9D21E3CF173DBD2B00AD6C1F /* LightsGrid.png */,
 				9D6DA777172A276300EB96C7 /* LightsImage.png */,
 				9DF148411729C6230056A6D1 /* DownArrowOrange.png */,
@@ -6466,6 +6470,7 @@
 				ECDF7F66173D590F003E51EC /* SocialFollowButton.png in Resources */,
 				ECDF7F68173D590F003E51EC /* SocialFollowingButton.png in Resources */,
 				9D21E3D0173DBD2B00AD6C1F /* LightsGrid.png in Resources */,
+				9D64729E1741DEEE00C63B1B /* LightsArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7436,6 +7441,7 @@
 				ECDF7F67173D590F003E51EC /* SocialFollowButton.png in Resources */,
 				ECDF7F69173D590F003E51EC /* SocialFollowingButton.png in Resources */,
 				9D21E3D1173DBD2B00AD6C1F /* LightsGrid.png in Resources */,
+				9D64729F1741DEEE00C63B1B /* LightsArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
