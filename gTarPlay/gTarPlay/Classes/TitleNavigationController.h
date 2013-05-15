@@ -27,11 +27,16 @@
 @property (retain, nonatomic) IBOutlet UIView *rightPanel;
 @property (retain, nonatomic) IBOutlet UIView *leftPanel;
 @property (retain, nonatomic) IBOutlet UIView *videoRightPanel;
-@property (retain, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (retain, nonatomic) IBOutlet UIView *delayLoadingView;
 @property (retain, nonatomic) IBOutlet UIImageView *videoPreviewImage;
 
 - (void)delayLoadingComplete;
+
+// Top bar
+@property (retain, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (retain, nonatomic) IBOutlet UIButton *profileButton;
+
+- (IBAction)profileButtonClicked:(id)sender;
 
 // Panels
 @property (retain, nonatomic) IBOutlet UIView *loggedoutLeftPanel;

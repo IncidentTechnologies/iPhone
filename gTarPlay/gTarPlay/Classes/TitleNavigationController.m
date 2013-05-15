@@ -21,11 +21,9 @@
 #import <gTarAppCore/UserProfile.h>
 #import <gTarAppCore/CloudResponse.h>
 
-
 #import "TitleNavigationController.h"
 #import "SongSelectionViewController.h"
 #import "SocialViewController.h"
-//#import "SongPlayerViewController.h"
 #import "VolumeViewController.h"
 #import "SlidingInstrumentViewController.h"
 #import "UIView+Gtar.h"
@@ -121,6 +119,10 @@ extern TelemetryController * g_telemetryController;
     [_menuPlayButton addShadow];
     [_menuFreePlayButton addShadow];
     [_menuStoreButton addShadow];
+    
+    // Hide anything that needs hiding
+    [[_profileButton superview] setHidden:YES];
+    [_profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     // Set up the player modal
     _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
@@ -274,6 +276,7 @@ extern TelemetryController * g_telemetryController;
     [_disconnectedGtarLeftPanel release];
     [_videoPreviewImage release];
     [_sessionViewController release];
+    [_profileButton release];
     
     [g_facebook release];
     
@@ -355,6 +358,7 @@ extern TelemetryController * g_telemetryController;
     
     [self disableButton:_loggedoutSigninButton];
     [self enableButton:_loggedoutSignupButton];
+    [[_profileButton superview] setHidden:YES];
 }
 
 - (void)loggedinScreen
@@ -372,6 +376,26 @@ extern TelemetryController * g_telemetryController;
     [self enableButton:_menuPlayButton];
     [self enableButton:_menuFreePlayButton];
     [self enableButton:_menuStoreButton];
+    
+    [[_profileButton superview] setHidden:NO];
+    
+    UserEntry *loggedInEntry = [g_userController getUserEntry:0];
+    
+    UIImage *image = [g_fileController getFileOrReturnNil:loggedInEntry.m_userProfile.m_imgFileId];
+    
+    if ( image != nil )
+    {
+        [_profileButton setImage:image forState:UIControlStateNormal];
+    }
+    else
+    {
+        [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
+    }
+}
+
+- (void)profilePicDownloaded:(UIImage *)image
+{
+    [_profileButton setImage:image forState:UIControlStateNormal];
 }
 
 #pragma mark - Panel management
@@ -480,11 +504,6 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)menuStoreButtonClicked:(id)sender
 {
     // Start store mode
-    SocialViewController *svc = [[SocialViewController alloc] initWithNibName:nil bundle:nil];
-    
-    [self.navigationController pushViewController:svc animated:YES];
-    
-    [svc release];
 }
 
 - (IBAction)feedSelectorChanged:(id)sender
@@ -644,6 +663,15 @@ extern TelemetryController * g_telemetryController;
     [_moviePlayer setFullscreen:YES animated:YES];
     
     [_moviePlayer play];
+}
+
+- (IBAction)profileButtonClicked:(id)sender
+{
+    SocialViewController *svc = [[SocialViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [self.navigationController pushViewController:svc animated:YES];
+    
+    [svc release];
 }
 
 #pragma mark - Movie Playback
@@ -1305,7 +1333,6 @@ extern TelemetryController * g_telemetryController;
     [self swapRightPanel:_loggedoutSigninButton];
     
     [_loggedoutSigninButton setEnabled:NO];
-    
 }
 
 #pragma mark - Feed management
@@ -1337,33 +1364,5 @@ extern TelemetryController * g_telemetryController;
     
     [UIView commitAnimations];
 }
-//- (void)legacyDisplayUserSongSession:(UserSongSession*)session
-//{
-//    
-//    static SongPlayerViewController *songPlaybackViewController;
-//    
-//    // We could precache these, but adding a bit of sync latency here isn't really noticeable,
-//    // and we won't use most of the xmp blobs anyways.
-//    NSString * xmpBlob = [g_fileController getFileOrDownloadSync:session.m_xmpFileId];
-//    
-//    if ( xmpBlob == nil )
-//    {
-//        return;
-//    }
-//    
-//    session.m_xmpBlob = xmpBlob;
-//    
-//    // Song playback view controller, loaded lazily so as not to slow down app load
-//    if ( songPlaybackViewController == nil )
-//    {
-//        songPlaybackViewController = [[SongPlayerViewController alloc] initWithNibName:nil bundle:nil];
-//        songPlaybackViewController.m_closeButtonImage = [UIImage imageNamed:@"XButtonRev.png"];
-////        songPlaybackViewController.m_popupDelegate = self;
-////        songPlaybackViewController.m_delegate = self;
-//    }
-//    
-//    [songPlaybackViewController attachToSuperView:self.view andPlaySongSession:session];
-//    
-//}
 
 @end

@@ -37,11 +37,15 @@ extern GtarController *g_gtarController;
     SlidingInstrumentViewController *_instrumentViewController;
     
     NSArray *_userSongArray;
+    NSArray *_searchedUserSongArray;
+    NSArray *_displayedUserSongArray;
     SongPlaybackController *_playbackController;
     PlayerViewController *_playerViewController;
     
     UserSong *_currentUserSong;
     NSInteger _currentDifficulty;
+    
+    BOOL _searching;
 }
 @end
 
@@ -59,16 +63,20 @@ extern GtarController *g_gtarController;
         
         NSData * songArrayData = [settings objectForKey:@"UserSongArray"];
         
+        NSArray *userSongArray;
+        
         // If we have cached data, use that.
         if ( songArrayData == nil )
         {
-            _userSongArray = [[NSArray alloc] init];
+            userSongArray = [[NSArray alloc] init];
         }
         else
         {
-            _userSongArray = [[NSKeyedUnarchiver unarchiveObjectWithData:songArrayData] retain];
+            userSongArray = [[NSKeyedUnarchiver unarchiveObjectWithData:songArrayData] retain];
+            
         }
-
+        
+        [self setUserSongArray:userSongArray];
     }
     return self;
 }
@@ -78,6 +86,8 @@ extern GtarController *g_gtarController;
     [super viewDidLoad];
     
     [_topBar addShadow];
+    
+    [_fullscreenButton setHidden:YES];
     
     [self refreshSongList];
     
@@ -162,6 +172,8 @@ extern GtarController *g_gtarController;
     [_songPlayerView release];
     [_topBar release];
     [_instrumentView release];
+    [_searchBar release];
+    [_fullscreenButton release];
     [super dealloc];
 }
 
@@ -264,6 +276,12 @@ extern GtarController *g_gtarController;
     [_volumeViewController closeView:YES];
 }
 
+- (IBAction)fullscreenButtonClicked:(id)sender
+{
+    [_searchBar endSearch];
+    [_fullscreenButton setHidden:YES];
+}
+
 #pragma mark - UserSong management
 
 - (void)refreshSongList
@@ -281,6 +299,36 @@ extern GtarController *g_gtarController;
 	[g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
 }
 
+- (void)setUserSongArray:(NSArray *)userSongArray
+{
+    [_userSongArray release];
+    
+    _userSongArray = [userSongArray retain];
+    
+    [self sortByTitle];
+    
+    // refresh the search list with the new songs
+    if ( _searching == YES )
+    {
+        [self searchForString:_searchBar.searchString];
+    }
+    
+    [self refreshDisplayedUserSongList];
+}
+
+- (void)refreshDisplayedUserSongList
+{
+    if ( _searching == YES )
+    {
+        _displayedUserSongArray = _searchedUserSongArray;
+    }
+    else
+    {
+        _displayedUserSongArray = _userSongArray;
+    }
+    [_songListTable reloadData];
+}
+
 #pragma mark - Callbacks
 
 - (void)requestSongListCallback:(CloudResponse*)cloudResponse
@@ -293,9 +341,7 @@ extern GtarController *g_gtarController;
         // refresh table data
         UserSongs * userSongs = cloudResponse.m_responseUserSongs;
         
-        [_userSongArray release];
-        
-        _userSongArray = [userSongs.m_songsArray retain];
+        [self setUserSongArray:userSongs.m_songsArray];
         
         // Download everything
         for ( UserSong * userSong in _userSongArray )
@@ -312,7 +358,7 @@ extern GtarController *g_gtarController;
         [settings synchronize];
         
         // Show the new table
-        [_songListTable reloadData];
+//        [_songListTable reloadData];
     }
     else
     {
@@ -340,7 +386,7 @@ extern GtarController *g_gtarController;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_userSongArray count];
+    return [_displayedUserSongArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -379,7 +425,7 @@ extern GtarController *g_gtarController;
 	
 	NSInteger row = [indexPath row];
     
-    UserSong *userSong = [_userSongArray objectAtIndex:row];
+    UserSong *userSong = [_displayedUserSongArray objectAtIndex:row];
     
     userSong.m_playStars = [g_userController getMaxStarsForSong:userSong.m_songId];
     userSong.m_playScore = [g_userController getMaxScoreForSong:userSong.m_songId];
@@ -412,7 +458,7 @@ extern GtarController *g_gtarController;
     }
     
 	NSInteger row = [indexPath row];
-    UserSong *userSong = [_userSongArray objectAtIndex:row];
+    UserSong *userSong = [_displayedUserSongArray objectAtIndex:row];
 
     _currentUserSong = userSong;
     
@@ -485,6 +531,84 @@ extern GtarController *g_gtarController;
 - (void)gtarDisconnected
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark - ExpandableSearchBarDelegate
+
+- (void)searchBarDidBeginEditing:(ExpandableSearchBar *)searchBar
+{
+    // nothing
+    [_fullscreenButton setHidden:NO];
+}
+
+- (void)searchBarSearch:(ExpandableSearchBar *)searchBar
+{
+    _searching = YES;
+    
+    [self searchForString:searchBar.searchString];
+    [self refreshDisplayedUserSongList];
+}
+
+- (void)searchBarCancel:(ExpandableSearchBar *)searchBar
+{
+    // revert the displayed contents
+    _searching = NO;
+    [_fullscreenButton setHidden:YES];
+    [self refreshDisplayedUserSongList];
+}
+
+#pragma mark - Sort, Search
+
+- (void)sortByArtist
+{
+    NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:YES] autorelease];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [_userSongArray sortedArrayUsingDescriptors:sortDescriptors];
+    
+    [_userSongArray release];
+    _userSongArray = [sortedArray retain];
+}
+
+- (void)sortByTitle
+{
+    NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:YES] autorelease];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [_userSongArray sortedArrayUsingDescriptors:sortDescriptors];
+    
+    [_userSongArray release];
+    _userSongArray = [sortedArray retain];
+}
+
+- (void)sortByScore
+{
+    NSArray *sortedArray = [_userSongArray sortedArrayUsingSelector:@selector(comparePlayScore:)];
+    
+    [_userSongArray release];
+    _userSongArray = [sortedArray retain];
+}
+
+- (void)searchForString:(NSString *)searchString
+{
+    NSMutableArray *searchResults = [[NSMutableArray alloc] init];
+    
+    for ( UserSong *userSong in _userSongArray )
+    {
+        NSArray *candidateStrings = [NSArray arrayWithObjects:userSong.m_title, userSong.m_author, nil];
+
+        for ( NSString *candidateString in candidateStrings )
+        {
+            // If we find a hit, save it for later
+            if ( [candidateString rangeOfString:searchString options:NSCaseInsensitiveSearch].location != NSNotFound )
+            {
+                [searchResults addObject:userSong];
+                break;
+            }
+        }
+    }
+    
+    [_searchedUserSongArray release];
+    
+    _searchedUserSongArray = searchResults;
 }
 
 @end
