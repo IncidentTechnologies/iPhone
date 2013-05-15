@@ -27,6 +27,18 @@
 		9DA313921704FA3100CFF104 /* FPMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3138F1704FA3000CFF104 /* FPMenuViewController.m */; };
 		9DA313931704FA3100CFF104 /* FPMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA313901704FA3000CFF104 /* FPMenuViewController.xib */; };
 		9DA313941704FA3100CFF104 /* FPMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA313901704FA3000CFF104 /* FPMenuViewController.xib */; };
+		9DB5C4C017430FA700EAF9A6 /* Shape_2x2ButtonOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BA17430FA700EAF9A6 /* Shape_2x2ButtonOFF.png */; };
+		9DB5C4C117430FA700EAF9A6 /* Shape_2x2ButtonOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BA17430FA700EAF9A6 /* Shape_2x2ButtonOFF.png */; };
+		9DB5C4C217430FA700EAF9A6 /* Shape_2x2ButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BB17430FA700EAF9A6 /* Shape_2x2ButtonON.png */; };
+		9DB5C4C317430FA700EAF9A6 /* Shape_2x2ButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BB17430FA700EAF9A6 /* Shape_2x2ButtonON.png */; };
+		9DB5C4C417430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BC17430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png */; };
+		9DB5C4C517430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BC17430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png */; };
+		9DB5C4C617430FA700EAF9A6 /* Shape_ContinuousButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BD17430FA700EAF9A6 /* Shape_ContinuousButtonON.png */; };
+		9DB5C4C717430FA700EAF9A6 /* Shape_ContinuousButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BD17430FA700EAF9A6 /* Shape_ContinuousButtonON.png */; };
+		9DB5C4C817430FA700EAF9A6 /* Shape_SingleButtonOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BE17430FA700EAF9A6 /* Shape_SingleButtonOFF.png */; };
+		9DB5C4C917430FA700EAF9A6 /* Shape_SingleButtonOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BE17430FA700EAF9A6 /* Shape_SingleButtonOFF.png */; };
+		9DB5C4CA17430FA700EAF9A6 /* Shape_SingleButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BF17430FA700EAF9A6 /* Shape_SingleButtonON.png */; };
+		9DB5C4CB17430FA700EAF9A6 /* Shape_SingleButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4BF17430FA700EAF9A6 /* Shape_SingleButtonON.png */; };
 		9DE5C64616F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
 		9DE5C64716F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
 		9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */; };
@@ -2673,6 +2685,12 @@
 		9DA86ED71582D3230015ED49 /* Strat 101.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strat 101.mp3"; path = "Strat/Strat 101.mp3"; sourceTree = "<group>"; };
 		9DA86ED81582D3230015ED49 /* Strat 102.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strat 102.mp3"; path = "Strat/Strat 102.mp3"; sourceTree = "<group>"; };
 		9DA86ED91582D3230015ED49 /* Strat 103.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Strat 103.mp3"; path = "Strat/Strat 103.mp3"; sourceTree = "<group>"; };
+		9DB5C4BA17430FA700EAF9A6 /* Shape_2x2ButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shape_2x2ButtonOFF.png; path = Resources/Images/Freeplay/Shape_2x2ButtonOFF.png; sourceTree = "<group>"; };
+		9DB5C4BB17430FA700EAF9A6 /* Shape_2x2ButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shape_2x2ButtonON.png; path = Resources/Images/Freeplay/Shape_2x2ButtonON.png; sourceTree = "<group>"; };
+		9DB5C4BC17430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shape_ContinuousButtonOFF.png; path = Resources/Images/Freeplay/Shape_ContinuousButtonOFF.png; sourceTree = "<group>"; };
+		9DB5C4BD17430FA700EAF9A6 /* Shape_ContinuousButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shape_ContinuousButtonON.png; path = Resources/Images/Freeplay/Shape_ContinuousButtonON.png; sourceTree = "<group>"; };
+		9DB5C4BE17430FA700EAF9A6 /* Shape_SingleButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shape_SingleButtonOFF.png; path = Resources/Images/Freeplay/Shape_SingleButtonOFF.png; sourceTree = "<group>"; };
+		9DB5C4BF17430FA700EAF9A6 /* Shape_SingleButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shape_SingleButtonON.png; path = Resources/Images/Freeplay/Shape_SingleButtonON.png; sourceTree = "<group>"; };
 		9DB82FA215ACE535002A8B34 /* Knob_BlueLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Knob_BlueLine.png; path = images/FreePlay/Knob_BlueLine.png; sourceTree = "<group>"; };
 		9DC994DB15C9A852008C8948 /* ExitButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ExitButton.png; path = images/FreePlay/ExitButton.png; sourceTree = "<group>"; };
 		9DC994DF15C9E4C3008C8948 /* SwitchDownFree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SwitchDownFree.png; path = images/FreePlay/SwitchDownFree.png; sourceTree = "<group>"; };
@@ -4097,6 +4115,12 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9DB5C4BA17430FA700EAF9A6 /* Shape_2x2ButtonOFF.png */,
+				9DB5C4BB17430FA700EAF9A6 /* Shape_2x2ButtonON.png */,
+				9DB5C4BC17430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png */,
+				9DB5C4BD17430FA700EAF9A6 /* Shape_ContinuousButtonON.png */,
+				9DB5C4BE17430FA700EAF9A6 /* Shape_SingleButtonOFF.png */,
+				9DB5C4BF17430FA700EAF9A6 /* Shape_SingleButtonON.png */,
 				9D64729D1741DEEE00C63B1B /* LightsArrow.png */,
 				9D21E3CF173DBD2B00AD6C1F /* LightsGrid.png */,
 				9D6DA777172A276300EB96C7 /* LightsImage.png */,
@@ -6471,6 +6495,12 @@
 				ECDF7F68173D590F003E51EC /* SocialFollowingButton.png in Resources */,
 				9D21E3D0173DBD2B00AD6C1F /* LightsGrid.png in Resources */,
 				9D64729E1741DEEE00C63B1B /* LightsArrow.png in Resources */,
+				9DB5C4C017430FA700EAF9A6 /* Shape_2x2ButtonOFF.png in Resources */,
+				9DB5C4C217430FA700EAF9A6 /* Shape_2x2ButtonON.png in Resources */,
+				9DB5C4C417430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png in Resources */,
+				9DB5C4C617430FA700EAF9A6 /* Shape_ContinuousButtonON.png in Resources */,
+				9DB5C4C817430FA700EAF9A6 /* Shape_SingleButtonOFF.png in Resources */,
+				9DB5C4CA17430FA700EAF9A6 /* Shape_SingleButtonON.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7442,6 +7472,12 @@
 				ECDF7F69173D590F003E51EC /* SocialFollowingButton.png in Resources */,
 				9D21E3D1173DBD2B00AD6C1F /* LightsGrid.png in Resources */,
 				9D64729F1741DEEE00C63B1B /* LightsArrow.png in Resources */,
+				9DB5C4C117430FA700EAF9A6 /* Shape_2x2ButtonOFF.png in Resources */,
+				9DB5C4C317430FA700EAF9A6 /* Shape_2x2ButtonON.png in Resources */,
+				9DB5C4C517430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png in Resources */,
+				9DB5C4C717430FA700EAF9A6 /* Shape_ContinuousButtonON.png in Resources */,
+				9DB5C4C917430FA700EAF9A6 /* Shape_SingleButtonOFF.png in Resources */,
+				9DB5C4CB17430FA700EAF9A6 /* Shape_SingleButtonON.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
