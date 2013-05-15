@@ -550,9 +550,9 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="AllButton.png">{136, 70}</string>
-			<string key="SocialFollowButton.png">{164, 78}</string>
-			<string key="SocialFollowingButton.png">{164, 78}</string>
+			<string key="AllButton.png">{16, 16}</string>
+			<string key="SocialFollowButton.png">{16, 16}</string>
+			<string key="SocialFollowingButton.png">{16, 16}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
