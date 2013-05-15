@@ -3265,15 +3265,15 @@
 			isa = PBXGroup;
 			children = (
 				EC341610173894D100501AF4 /* Categories */,
-				EC48665117287E4A0066194D /* SlidingViewController */,
 				EC69BA1A17138620004E982F /* PlayerViewController */,
-				EC48664F17287E130066194D /* SlidingInstrumentViewController */,
-				ECCC0355170CB9FD0021DB00 /* VolumeViewController */,
 				ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */,
-				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
 				EC0BAD9616F2771A00E567A6 /* CyclingTextField */,
 				EC0BAD9116F2458200E567A6 /* SelectorControl */,
 				EC1E4DEB1548A44A0033F904 /* PullToUpdateTableView */,
+				EC48665117287E4A0066194D /* SlidingViewController */,
+				EC48664F17287E130066194D /* SlidingInstrumentViewController */,
+				ECCC0355170CB9FD0021DB00 /* VolumeViewController */,
+				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
 				EC34161F173ACA9E00501AF4 /* SessionModalViewController */,
 				ECDF7F70173D5A77003E51EC /* IconButton */,
 			);
