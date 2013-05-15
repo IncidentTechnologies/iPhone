@@ -95,9 +95,10 @@
     _textField.leftViewMode = UITextFieldViewModeAlways;
 //    _textField.rightView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 17)] autorelease];
     _textField.rightView = _activityView;
-    _textField.rightViewMode = UITextFieldViewModeAlways;
+    _textField.rightViewMode = UITextFieldViewModeUnlessEditing;
     _textField.returnKeyType = UIReturnKeySearch;
     _textField.delegate = self;
+    _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     // make the cancel button
     _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width - CANCEL_BUTTON_HEIGHT, 0, CANCEL_BUTTON_HEIGHT, CANCEL_BUTTON_HEIGHT)];

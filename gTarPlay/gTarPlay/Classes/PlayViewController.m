@@ -28,7 +28,6 @@
 #import <gTarAppCore/NSScoreTracker.h>
 
 #import "SongDisplayController.h"
-#import "AmpViewController.h"
 #import "UIButton+Gtar.h"
 
 //#define FRAME_TIMER_DURATION_MED (0.40f) // seconds
@@ -136,8 +135,8 @@ extern TelemetryController * g_telemetryController;
     [_progressFillView setHidden:YES];
     
     // Fiddle with the button images
-    [_menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+//    [_menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+//    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     // Fiddle with the switch images
     _outputSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];

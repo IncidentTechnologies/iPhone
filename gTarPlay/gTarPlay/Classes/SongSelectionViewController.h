@@ -16,11 +16,13 @@
 @class PlayerViewController;
 @class SlidingModalViewController;
 
-@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver>
+@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver, ExpandableSearchBarDelegate>
 
 @property (retain, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
 
 @property (retain, nonatomic) IBOutlet UIView *topBar;
+@property (retain, nonatomic) IBOutlet ExpandableSearchBar *searchBar;
+@property (retain, nonatomic) IBOutlet UIButton *fullscreenButton;
 @property (retain, nonatomic) IBOutlet UIButton *titleArtistButton;
 @property (retain, nonatomic) IBOutlet UIButton *skillButton;
 @property (retain, nonatomic) IBOutlet UIButton *scoreButton;
@@ -46,5 +48,6 @@
 - (IBAction)instrumentButtonClicked:(id)sender;
 - (IBAction)difficulyButtonClicked:(id)sender;
 - (IBAction)blackButtonClicked:(id)sender;
+- (IBAction)fullscreenButtonClicked:(id)sender;
 
 @end
