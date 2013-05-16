@@ -19,7 +19,7 @@
 @class SlidingModalViewController;
 @class CyclingTextField;
 
-@interface TitleNavigationController : UIViewController <UITableViewDataSource, PullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, FBSessionDelegate>
+@interface TitleNavigationController : UIViewController <UITableViewDataSource, PullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate>
 
 // Main
 @property (retain, nonatomic) IBOutlet UIView *topBarView;

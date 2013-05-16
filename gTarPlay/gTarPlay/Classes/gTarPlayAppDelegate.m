@@ -77,7 +77,7 @@ TelemetryController * g_telemetryController;
         g_gtarController.responseThread = GtarControllerThreadMain;
         
         // By default it just outputs 'LevelError'
-//        g_gtarController.logLevel = GtarControllerLogLevelInfo;
+        g_gtarController.logLevel = GtarControllerLogLevelAll;
         
         [g_gtarController addObserver:self];
         

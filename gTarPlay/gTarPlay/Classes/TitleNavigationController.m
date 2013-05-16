@@ -33,6 +33,7 @@
 #import "SelectorControl.h"
 #import "CyclingTextField.h"
 #import "SessionModalViewController.h"
+#import "FirmwareModalViewController.h"
 #import "PlayerViewController.h"
 #import "FreePlayController.h"
 
@@ -58,7 +59,8 @@ extern TelemetryController * g_telemetryController;
 @interface TitleNavigationController ()
 {
     SessionModalViewController *_sessionViewController;
-
+    FirmwareModalViewController *_firmwareViewController;
+    
     UIView *_currentLeftPanel;
     UIView *_currentRightPanel;
     
@@ -78,6 +80,8 @@ extern TelemetryController * g_telemetryController;
     
     BOOL _displayingCell;
     BOOL _waitingForFacebook;
+    
+    NSInteger _firmwareFileId;
 }
 @end
 
@@ -124,8 +128,9 @@ extern TelemetryController * g_telemetryController;
     [[_profileButton superview] setHidden:YES];
     [_profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
-    // Set up the player modal
+    // Set up the modals
     _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
+    _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
     
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"FRIENDS", @"GLOBAL", nil]];
     
@@ -504,6 +509,9 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)menuStoreButtonClicked:(id)sender
 {
     // Start store mode
+    [self presentViewController:_firmwareViewController animated:YES completion:nil];
+    
+//    [self performSelector:@selector(receivedFirmwareUpdateStatusFailed) withObject:nil afterDelay:5.0];
 }
 
 - (IBAction)feedSelectorChanged:(id)sender
@@ -1033,6 +1041,10 @@ extern TelemetryController * g_telemetryController;
         [self loggedoutScreen];
     }
     
+    g_gtarController.m_delegate = self;
+    
+    [g_gtarController sendRequestFirmwareVersion];
+    
 //    [self playStartupLightSequence];
 //    
 //    [self checkCurrentFirmwareVersion];
@@ -1045,20 +1057,80 @@ extern TelemetryController * g_telemetryController;
     {
         [self swapLeftPanel:_disconnectedGtarLeftPanel];
     }
+    
+    // Pull down the firmare view controller after disconnection
+    if ( self.presentedViewController == _firmwareViewController )
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - GtarControllerDelegate
 
 - (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
 {
+    NSLog(@"Fetching firmware version: %d.%d", majorVersion, minorVersion);
     
-    NSLog(@"Receiving firmware version: %d.%d", majorVersion, minorVersion);
+    [g_cloudController requestCurrentFirmwareVersionCallbackObj:self andCallbackSel:@selector(receivedAvailableFirmwareVersion:)];
+}
+
+- (void)receivedFirmwareUpdateStatusSucceeded
+{
+    NSString * msg = @"Firmware update succeeded";
     
-//    m_titleFirmwareViewController.m_firmwareCurrentMajorVersion = majorVersion;
-//    m_titleFirmwareViewController.m_firmwareCurrentMinorVersion = minorVersion;
-//    
-//    [self checkAvailableFirmwareVersion];
+    NSLog(@"%@", msg);
     
+    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     msg, @"Status",
+                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                     nil]];
+    
+    [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusSucceededMain) withObject:nil waitUntilDone:YES];
+}
+
+- (void)receivedFirmwareUpdateStatusSucceededMain
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Success"
+                                                     message:@"Update Succeeded"
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+    [alert show];
+}
+
+- (void)receivedFirmwareUpdateStatusFailed
+{
+    NSString * msg = @"Firmware update failed";
+    
+    NSLog(@"%@", msg);
+    
+    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     msg, @"Status",
+                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                     nil]];
+    
+    [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusFailedMain) withObject:nil waitUntilDone:YES];
+}
+
+- (void)receivedFirmwareUpdateStatusFailedMain
+{
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"Update Failed -- Restart the gTar"
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+    [alert show];
+}
+
+- (void)receivedFirmwareUpdateProgress:(unsigned char)percentage
+{
+    _firmwareViewController.updateProgress = percentage;
 }
 
 #pragma mark - UserController callbacks
@@ -1107,8 +1179,6 @@ extern TelemetryController * g_telemetryController;
             [self enableButton:_loggedoutSignupButton];
         }
     }
-    
-
 }
 
 - (void)signinCallback:(UserResponse *)userResponse
@@ -1307,6 +1377,35 @@ extern TelemetryController * g_telemetryController;
     
 }
 
+#pragma mark - CloudController Callbacks
+
+- (void)receivedAvailableFirmwareVersion:(CloudResponse*)cloudResponse
+{
+    
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+    {
+        // Check if available version > installed version.
+        if ( (cloudResponse.m_responseFirmwareMajorVersion == g_gtarController.m_firmwareMajorVersion) ||
+            ((cloudResponse.m_responseFirmwareMajorVersion == g_gtarController.m_firmwareMajorVersion) &&
+             (cloudResponse.m_responseFirmwareMinorVersion > g_gtarController.m_firmwareMinorVersion)) )
+        {
+            _firmwareFileId = cloudResponse.m_responseFileId;
+            
+            [self presentViewController:_firmwareViewController animated:YES completion:nil];
+            
+            _firmwareViewController.currentFirmwareVersion = [NSString stringWithFormat:@"%u.%u", g_gtarController.m_firmwareMajorVersion, g_gtarController.m_firmwareMinorVersion];
+            _firmwareViewController.availableFirmwareVersion = [NSString stringWithFormat:@"%u.%u", cloudResponse.m_responseFirmwareMajorVersion, cloudResponse.m_responseFirmwareMinorVersion];
+            
+            [g_fileController getFileOrDownloadAsync:_firmwareFileId callbackObject:self callbackSelector:@selector(firmwareDownloadFinished:)];
+        }
+    }
+    else
+    {
+        // Failed to get firmware, nothing more to worry about for now
+        NSLog(@"Failed to get available firmware version");
+    }
+}
+
 #pragma mark - FileController Callbacks
 
 - (void)fileDownloadFinished:(id)file
@@ -1318,6 +1417,19 @@ extern TelemetryController * g_telemetryController;
         // Reload the table
         [_feedTable reloadData];
     }
+}
+
+- (void)firmwareDownloadFinished:(id)file
+{
+    NSLog(@"Downloaded firmware file");
+    
+    NSMethodSignature *signature = [TitleNavigationController instanceMethodSignatureForSelector:@selector(beginUpdatingFirmware)];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    
+    [invocation setTarget:self];
+    [invocation setSelector:@selector(beginUpdatingFirmware)];
+    
+    _firmwareViewController.updateInvocation = invocation;
 }
 
 #pragma mark - User Stuff
@@ -1363,6 +1475,75 @@ extern TelemetryController * g_telemetryController;
     _delayLoadingView.alpha = 0.0f;
     
     [UIView commitAnimations];
+}
+
+- (void)beginUpdatingFirmware
+{
+    // output some messages
+    NSString * msg = [[[NSString alloc] initWithFormat:@"Firmware updating"] autorelease];
+    
+    NSLog(@"%@", msg);
+    
+    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     msg, @"Status",
+                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                     nil]];
+    
+    NSData *firmware = [g_fileController getFileOrDownloadSync:_firmwareFileId];
+    
+    if ( firmware == nil )
+    {
+        
+        NSString * msg = [[[NSString alloc] initWithFormat:@"Firmware is nil"] autorelease];
+        
+        NSLog(@"%@", msg);
+        
+        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         msg, @"Status",
+                                         [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                         nil]];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Failed"
+                                                         message:@"Failed to download firmware"
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil] autorelease];
+        [alert show];
+        
+        return;
+    }
+    
+    if ( [g_gtarController sendFirmwareUpdate:firmware] == YES )
+    {
+        NSLog(@"Update begun");
+    }
+    else
+    {
+        
+        NSString * msg = [[[NSString alloc] initWithFormat:@"Update failed to start"] autorelease];
+        
+        NSLog(@"%@", msg);
+        
+        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         msg, @"Status",
+                                         [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                         nil]];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Failed"
+                                                         message:@"Failed to update firmware"
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil] autorelease];
+        [alert show];
+    }
+
 }
 
 @end

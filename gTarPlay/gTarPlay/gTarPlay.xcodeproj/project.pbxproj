@@ -1630,6 +1630,10 @@
 		ECFF771B1742EA1C002D7D40 /* Bear_Brown.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF77191742EA1C002D7D40 /* Bear_Brown.png */; };
 		ECFF771D1742EA9E002D7D40 /* BackButtonRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF771C1742EA9E002D7D40 /* BackButtonRev.png */; };
 		ECFF771E1742EA9E002D7D40 /* BackButtonRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF771C1742EA9E002D7D40 /* BackButtonRev.png */; };
+		ECFF773417440BA9002D7D40 /* FirmwareModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECFF773217440BA9002D7D40 /* FirmwareModalViewController.m */; };
+		ECFF773517440BA9002D7D40 /* FirmwareModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECFF773217440BA9002D7D40 /* FirmwareModalViewController.m */; };
+		ECFF773617440BA9002D7D40 /* FirmwareModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECFF773317440BA9002D7D40 /* FirmwareModalViewController.xib */; };
+		ECFF773717440BA9002D7D40 /* FirmwareModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECFF773317440BA9002D7D40 /* FirmwareModalViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2508,6 +2512,9 @@
 		ECE9D24E170525ED00BB6C53 /* VolumeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = VolumeIcon.png; path = Resources/Images/Play/VolumeIcon.png; sourceTree = SOURCE_ROOT; };
 		ECFF77191742EA1C002D7D40 /* Bear_Brown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bear_Brown.png; path = Resources/Images/General/Bear_Brown.png; sourceTree = "<group>"; };
 		ECFF771C1742EA9E002D7D40 /* BackButtonRev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackButtonRev.png; path = Resources/Images/General/BackButtonRev.png; sourceTree = "<group>"; };
+		ECFF773117440BA9002D7D40 /* FirmwareModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirmwareModalViewController.h; sourceTree = "<group>"; };
+		ECFF773217440BA9002D7D40 /* FirmwareModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirmwareModalViewController.m; sourceTree = "<group>"; };
+		ECFF773317440BA9002D7D40 /* FirmwareModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirmwareModalViewController.xib; sourceTree = "<group>"; };
 		ECFFB43015ED82D600951BD5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ECFFB43C15EEE1BE00951BD5 /* gray82.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray82.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3338,6 +3345,7 @@
 				EC48664F17287E130066194D /* SlidingInstrumentViewController */,
 				ECCC0355170CB9FD0021DB00 /* VolumeViewController */,
 				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
+				ECFF773017440B5A002D7D40 /* FirmwareModalViewController */,
 				EC34161F173ACA9E00501AF4 /* SessionModalViewController */,
 				ECDF7F70173D5A77003E51EC /* IconButton */,
 			);
@@ -3899,6 +3907,16 @@
 				EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */,
 			);
 			name = Videos;
+			sourceTree = "<group>";
+		};
+		ECFF773017440B5A002D7D40 /* FirmwareModalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				ECFF773117440BA9002D7D40 /* FirmwareModalViewController.h */,
+				ECFF773217440BA9002D7D40 /* FirmwareModalViewController.m */,
+				ECFF773317440BA9002D7D40 /* FirmwareModalViewController.xib */,
+			);
+			name = FirmwareModalViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4699,6 +4717,7 @@
 				ECFF771A1742EA1C002D7D40 /* Bear_Brown.png in Resources */,
 				ECFF771D1742EA9E002D7D40 /* BackButtonRev.png in Resources */,
 				9D64729E1741DEEE00C63B1B /* LightsArrow.png in Resources */,
+				ECFF773617440BA9002D7D40 /* FirmwareModalViewController.xib in Resources */,
 				9DB5C4C017430FA700EAF9A6 /* Shape_2x2ButtonOFF.png in Resources */,
 				9DB5C4C217430FA700EAF9A6 /* Shape_2x2ButtonON.png in Resources */,
 				9DB5C4C417430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png in Resources */,
@@ -5448,6 +5467,7 @@
 				ECFF771B1742EA1C002D7D40 /* Bear_Brown.png in Resources */,
 				ECFF771E1742EA9E002D7D40 /* BackButtonRev.png in Resources */,
 				9D64729F1741DEEE00C63B1B /* LightsArrow.png in Resources */,
+				ECFF773717440BA9002D7D40 /* FirmwareModalViewController.xib in Resources */,
 				9DB5C4C117430FA700EAF9A6 /* Shape_2x2ButtonOFF.png in Resources */,
 				9DB5C4C317430FA700EAF9A6 /* Shape_2x2ButtonON.png in Resources */,
 				9DB5C4C517430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png in Resources */,
@@ -5531,6 +5551,7 @@
 				EC34161B1739ADA600501AF4 /* SessionModalViewController.m in Sources */,
 				ECDF7F6E173D5A72003E51EC /* IconButton.m in Sources */,
 				ECDF7F73173DFB38003E51EC /* UIButton+Gtar.m in Sources */,
+				ECFF773417440BA9002D7D40 /* FirmwareModalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5595,6 +5616,7 @@
 				EC34161C1739ADA600501AF4 /* SessionModalViewController.m in Sources */,
 				ECDF7F6F173D5A72003E51EC /* IconButton.m in Sources */,
 				ECDF7F74173DFB38003E51EC /* UIButton+Gtar.m in Sources */,
+				ECFF773517440BA9002D7D40 /* FirmwareModalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
