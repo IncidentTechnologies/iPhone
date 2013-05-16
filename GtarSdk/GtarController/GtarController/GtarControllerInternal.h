@@ -103,6 +103,11 @@ typedef enum GTAR_RX_MSG_TYPE
 - (BOOL)sendNoteMessage:(unsigned char)midiVal channel:(unsigned char)channel withVelocity:(unsigned char)midiVel andType:(const char*)type;
 
 @property (nonatomic, assign) id<GtarControllerDelegate> m_delegate;
+
+// We should consider pushing these to the public API, they would probably be useful.
+@property (nonatomic, readonly) unsigned char m_firmwareMajorVersion;
+@property (nonatomic, readonly) unsigned char m_firmwareMinorVersion;
+
 //@property (nonatomic, readonly) GtarControllerEffect m_currentGuitarEffect;
 
 @end
