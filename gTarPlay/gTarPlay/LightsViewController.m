@@ -90,7 +90,6 @@ typedef enum
 @property (assign, nonatomic) LEDLoop LEDLoop;
 @property (retain, nonatomic) NSTimer *LEDTimer;
 
-
 @end
 
 @implementation LightsViewController
