@@ -9,7 +9,6 @@
 #import "LightsViewController.h"
 
 #import "RGBColor.h"
-#import "JamPad.h"
 
 #import <gTarAppCore/AppCore.h>
 
@@ -65,7 +64,7 @@ typedef enum
     LEDMode _LEDMode;
 }
 
-@property (retain, nonatomic) IBOutlet JamPad *generalSurface;
+@property (retain, nonatomic) IBOutlet UIView *generalSurface;
 @property (retain, nonatomic) IBOutlet UIView *fretSurface;
 @property (retain, nonatomic) IBOutlet UIView *stringSurface;
 @property (retain, nonatomic) IBOutlet UIView *allSurface;
@@ -80,6 +79,12 @@ typedef enum
 @property (retain, nonatomic) IBOutlet UIImageView *arrowFretsRight;
 @property (retain, nonatomic) IBOutlet UIImageView *arrowStringsTop;
 @property (retain, nonatomic) IBOutlet UIImageView *arrowStringsBottom;
+
+@property (retain, nonatomic) IBOutlet UIButton *modeSingleButton;
+@property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *modeButtons;
+
+@property (retain, nonatomic) IBOutlet UIButton *colorWhite;
+@property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *colorButtons;
 
 @property (assign, nonatomic) LEDTouchArea LEDTouchArea;
 @property (assign, nonatomic) CGPoint lastLEDTouch;
@@ -133,6 +138,9 @@ typedef enum
     _arrowStringsTop.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     [g_gtarController addObserver:self];
+    
+    _modeSingleButton.selected = YES;
+    _colorWhite.selected = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -143,8 +151,6 @@ typedef enum
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [_generalSurface setupJamPadWithRows:6 andColumns:16];
     
     [self.view insertSubview:_shapeView belowSubview:_shapeButton];
     [self.view insertSubview:_colorView belowSubview:_shapeView];
@@ -186,6 +192,9 @@ typedef enum
     [_arrowFretsRight release];
     [_arrowStringsTop release];
     [_arrowStringsBottom release];
+    [_colorWhite release];
+    [_modeButtons release];
+    [_colorButtons release];
     [super dealloc];
 }
 
@@ -608,9 +617,16 @@ typedef enum
     }
 }
 
-- (IBAction)setLEDMode:(id)sender
+- (IBAction)setLEDMode:(UIButton*)sender
 {
     [self stopLoop];
+    
+    for (UIButton* button in _modeButtons)
+    {
+        button.selected = NO;
+    }
+
+    sender.selected = YES;
     
     // Bring down shape view
     [UIView beginAnimations:nil context:NULL];
@@ -640,8 +656,15 @@ typedef enum
 }
 
 
-- (IBAction)setLEDColor:(id)sender
+- (IBAction)setLEDColor:(UIButton*)sender
 {
+    for (UIButton* button in _colorButtons)
+    {
+        button.selected = NO;
+    }
+    
+    sender.selected = YES;
+    
     // Bring down color view
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.8];
