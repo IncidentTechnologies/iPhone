@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [_updateButton addShadow];
+    [_updateButton addShadowWithRadius:2.0 andOpacity:0.9];
     
     [_currentFirmwareLabel setText:_currentFirmwareVersion];
     [_availableFirmwareLabel setText:_availableFirmwareVersion];

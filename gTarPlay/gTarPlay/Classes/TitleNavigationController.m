@@ -218,6 +218,13 @@ extern TelemetryController * g_telemetryController;
         [_feedTable startAnimatingOffscreen];
     }
     
+    UserEntry *loggedInEntry = [g_userController getUserEntry:0];
+    UIImage *image = [g_fileController getFileOrReturnNil:loggedInEntry.m_userProfile.m_imgFileId];
+    
+    if ( image != nil )
+    {
+        [_profileButton setImage:image forState:UIControlStateNormal];
+    }
 }
 
 - (void)viewDidLayoutSubviews
@@ -389,7 +396,7 @@ extern TelemetryController * g_telemetryController;
     
     [self enableButton:_menuPlayButton];
     [self enableButton:_menuFreePlayButton];
-    [self enableButton:_menuStoreButton];
+//    [self enableButton:_menuStoreButton];
     
     [[_profileButton superview] setHidden:NO];
     
@@ -405,6 +412,19 @@ extern TelemetryController * g_telemetryController;
     {
         [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
     }
+    
+    // If we've logged in, regardles of whether the gtar was ever connected, we can act as if it was.
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    
+    BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
+    
+    // First log in, show the welcome screens
+	if ( guitarConnectedBefore == NO )
+	{
+        [settings setBool:YES forKey:@"GuitarConnectedBefore"];
+        [settings synchronize];
+    }
+
 }
 
 - (void)profilePicDownloaded:(UIImage *)image
@@ -518,9 +538,7 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)menuStoreButtonClicked:(id)sender
 {
     // Start store mode
-    [self presentViewController:_firmwareViewController animated:YES completion:nil];
     
-//    [self performSelector:@selector(receivedFirmwareUpdateStatusFailed) withObject:nil afterDelay:5.0];
 }
 
 - (IBAction)feedSelectorChanged:(id)sender
@@ -588,7 +606,7 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)signupFacebookButtonClicked:(id)sender
 {
     // Passthrough for now
-    [self signinButtonClicked:sender];
+    [self signinFacebookButtonClicked:sender];
 }
 
 - (IBAction)signinButtonClicked:(id)sender

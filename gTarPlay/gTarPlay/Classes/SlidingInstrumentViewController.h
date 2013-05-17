@@ -14,6 +14,7 @@
 @interface SlidingInstrumentViewController : SlidingViewController <InstrumentSelectionDelegate>
 
 @property (retain, nonatomic) IBOutlet UIView *innerContentView;
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 
 @property (readonly, nonatomic) BOOL loading;
 

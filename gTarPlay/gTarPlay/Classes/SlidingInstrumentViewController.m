@@ -9,6 +9,7 @@
 #import "SlidingInstrumentViewController.h"
 
 #import <AudioController/AudioController.h>
+#import "UIView+Gtar.h"
 
 extern AudioController *g_audioController;
 
@@ -47,6 +48,9 @@ extern AudioController *g_audioController;
     
     [_instrumentViewController.view setFrame:_innerContentView.bounds];
     [_instrumentViewController.tableView setFrame:_innerContentView.bounds];
+    
+    [_innerContentView bringSubviewToFront:_indicatorView];
+    [_indicatorView addShadow];
 
 }
 
@@ -59,6 +63,7 @@ extern AudioController *g_audioController;
 - (void)dealloc
 {
     [_innerContentView release];
+    [_indicatorView release];
     [super dealloc];
 }
 
@@ -83,11 +88,13 @@ extern AudioController *g_audioController;
 - (void)didSelectInstrument
 {
     _loading = YES;
+    [_indicatorView startAnimating];
 }
 
 - (void)didLoadInstrument
 {
     _loading = NO;
+    [_indicatorView stopAnimating];
 }
 
 @end

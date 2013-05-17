@@ -431,7 +431,8 @@ extern GtarController *g_gtarController;
     userSong.m_playScore = [g_userController getMaxScoreForSong:userSong.m_songId];
     
     cell.userSong = userSong;
-    
+    cell.playScore = [g_userController getMaxScoreForSong:userSong.m_songId];
+
     if ( [g_fileController fileExists:userSong.m_xmpFileId] == YES )
     {
         [cell updateCell];
