@@ -6865,13 +6865,13 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="Default-568hRot.png">{1136, 640}</string>
-			<string key="FaceBookButton.png">{209, 76}</string>
-			<string key="IncidentGtar_ComButton.png">{233, 74}</string>
-			<string key="PlayButtonVideo.png">{173, 173}</string>
-			<string key="SignUp_CircleButton.png">{76, 76}</string>
-			<string key="TextBox.png">{394, 81}</string>
-			<string key="gTarLogoTitle.png">{317, 203}</string>
+			<string key="Default-568hRot.png">{16, 16}</string>
+			<string key="FaceBookButton.png">{16, 16}</string>
+			<string key="IncidentGtar_ComButton.png">{16, 16}</string>
+			<string key="PlayButtonVideo.png">{16, 16}</string>
+			<string key="SignUp_CircleButton.png">{16, 16}</string>
+			<string key="TextBox.png">{16, 16}</string>
+			<string key="gTarLogoTitle.png">{16, 16}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
