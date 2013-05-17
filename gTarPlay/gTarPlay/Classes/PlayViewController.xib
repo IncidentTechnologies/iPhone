@@ -938,7 +938,7 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 								<reference key="IBUINormalTitleShadowColor" ref="15572627"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">CancelButton.png</string>
+									<string key="NSResourceName">PlayCancelButton.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="1006870721"/>
 								<reference key="IBUIFont" ref="65427326"/>
@@ -6577,11 +6577,11 @@ WFlaIAAAAAAAACYxAAAQLwAAvpw</bytes>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="BlueMenu.png">{50, 24}</string>
-			<string key="CancelButton.png">{86, 86}</string>
 			<string key="DiffEasyButton.png">{87, 87}</string>
 			<string key="MenuIcon.png">{46, 40}</string>
 			<string key="MenuPauseBGSubsection.jpg">{856, 111}</string>
 			<string key="PlayBG.png">{1136, 640}</string>
+			<string key="PlayCancelButton.png">{86, 86}</string>
 			<string key="RestartButton.png">{86, 86}</string>
 			<string key="ScoreBox.png">{280, 60}</string>
 			<string key="VolumeIcon.png">{57, 49}</string>

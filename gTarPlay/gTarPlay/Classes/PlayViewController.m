@@ -93,11 +93,8 @@ extern TelemetryController * g_telemetryController;
     NSTimeInterval _playTimeAdjustment;
     
     BOOL _speakerRoute;
-
     BOOL _skipNotes;
-    
     BOOL _menuIsOpen;
-
 }
 
 @end
@@ -383,35 +380,7 @@ extern TelemetryController * g_telemetryController;
     
     if ( _feedSwitch.isOn == YES )
     {
-        UserSongSession * session = [[UserSongSession alloc] init];
-        
-        session.m_userSong = _userSong;
-        session.m_score = _scoreTracker.m_score;
-        session.m_stars = _scoreTracker.m_stars;
-        session.m_combo = _scoreTracker.m_streak;
-        session.m_notes = @"Recorded in gTar Play";
-        
-//        _songRecorder.m_song.m_instrument = _song.m_instrument;
-        _songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
-        
-        // Create the xmp
-        session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
-        session.m_created = time(NULL);
-        
-        // Upload song to server. This also persists the upload in case of failure
-        [g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
-        
-        NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
-        
-        [g_telemetryController logEvent:GtarPlaySongShared
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                         _userSong.m_title, @"Title",
-                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                         nil]];
-        
+        [self uploadUserSongSession];
     }
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -463,6 +432,11 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)restartButtonClicked:(id)sender
 {
+    
+    if ( _feedSwitch.isOn == YES )
+    {
+        [self uploadUserSongSession];
+    }
     
     [g_audioController reset];
     [g_gtarController turnOffAllLeds];
@@ -787,6 +761,37 @@ extern TelemetryController * g_telemetryController;
                                          nil]];
     }
     
+}
+
+- (void)uploadUserSongSession
+{
+    UserSongSession * session = [[[UserSongSession alloc] init] autorelease];
+    
+    session.m_userSong = _userSong;
+    session.m_score = _scoreTracker.m_score;
+    session.m_stars = _scoreTracker.m_stars;
+    session.m_combo = _scoreTracker.m_streak;
+    session.m_notes = @"Recorded in gTar Play";
+    
+    _songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
+    
+    // Create the xmp
+    session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
+    session.m_created = time(NULL);
+    
+    // Upload song to server. This also persists the upload in case of network failure
+    [g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
+    
+    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
+    
+    [g_telemetryController logEvent:GtarPlaySongShared
+                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                     _userSong.m_title, @"Title",
+                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                     nil]];
 }
 
 #pragma mark - Main event loop

@@ -282,6 +282,7 @@
                     m_firmwareCancelation = NO;
                 }
                 
+                
                 if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusSucceeded)] == YES )
                 {
                     [m_delegate receivedFirmwareUpdateStatusSucceeded];

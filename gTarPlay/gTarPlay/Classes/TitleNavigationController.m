@@ -228,6 +228,12 @@ extern TelemetryController * g_telemetryController;
     [_currentRightPanel setFrame:_rightPanel.bounds];
 
 }
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscapeLeft;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -342,12 +348,15 @@ extern TelemetryController * g_telemetryController;
     [self enableButton:_gatekeeperSigninButton];
     [self enableButton:_gatekeeperWebsiteButton];
     
-    NSString *moviePath = [[NSBundle mainBundle] pathForResource:@"MeetChrisVideo" ofType:@"mp4"];
-    NSURL *movieURL = [NSURL fileURLWithPath:moviePath];
-    
+    // Open the video so we can grab a still image.
     if ( _videoPreviewImage.image == nil )
     {
+        NSString *moviePath = [[NSBundle mainBundle] pathForResource:@"MeetChrisVideo" ofType:@"mp4"];
+        NSURL *movieURL = [NSURL fileURLWithPath:moviePath];
         MPMoviePlayerController *mpc = [[[MPMoviePlayerController alloc] initWithContentURL:movieURL] autorelease];
+        
+        mpc.scalingMode = MPMovieScalingModeAspectFit;
+        mpc.shouldAutoplay = NO;
         
         UIImage *thumbNail = [mpc thumbnailImageAtTime:21 timeOption:MPMovieTimeOptionExact];
         
@@ -659,9 +668,9 @@ extern TelemetryController * g_telemetryController;
                                                object:_moviePlayer];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlayerWillExitFullcreen:)
-                                                 name:MPMoviePlayerWillExitFullscreenNotification
-                                               object:_moviePlayer];
+                                             selector:@selector(moviePlayerWillEnterBackground)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
     
     [_moviePlayer.view setFrame:_videoRightPanel.frame ];
     
@@ -698,8 +707,8 @@ extern TelemetryController * g_telemetryController;
                                                   object:_moviePlayer];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:MPMoviePlayerWillExitFullscreenNotification
-                                                  object:_moviePlayer];
+                                                    name:UIApplicationWillResignActiveNotification
+                                                  object:nil];
     
     [_moviePlayer.view removeFromSuperview];
     [_moviePlayer release];
@@ -712,20 +721,17 @@ extern TelemetryController * g_telemetryController;
 {
     MPMoviePlaybackState playbackState = _moviePlayer.playbackState;
 
-    if ( playbackState == MPMoviePlaybackStatePaused )
+    if ( playbackState == MPMoviePlaybackStateInterrupted )
     {
         [_moviePlayer setFullscreen:NO];
     }
 }
 
-- (void)moviePlayerWillExitFullcreen:(NSNotification *)notification
+- (void)moviePlayerWillEnterBackground
 {
-    
-    if ( _moviePlayer.playbackState == MPMoviePlaybackStatePlaying )
-    {
-//        [_moviePlayer pause];
-    }
-    
+    // If we don't do this, our screen is messed up when we return.
+    [_moviePlayer setFullscreen:NO];
+    [_moviePlayer pause];
 }
 
 #pragma mark - Table view data source
@@ -1385,7 +1391,7 @@ extern TelemetryController * g_telemetryController;
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
         // Check if available version > installed version.
-        if ( (cloudResponse.m_responseFirmwareMajorVersion == g_gtarController.m_firmwareMajorVersion) ||
+        if ( (cloudResponse.m_responseFirmwareMajorVersion > g_gtarController.m_firmwareMajorVersion) ||
             ((cloudResponse.m_responseFirmwareMajorVersion == g_gtarController.m_firmwareMajorVersion) &&
              (cloudResponse.m_responseFirmwareMinorVersion > g_gtarController.m_firmwareMinorVersion)) )
         {

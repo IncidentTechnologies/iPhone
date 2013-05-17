@@ -85,18 +85,22 @@ extern FileController *g_fileController;
 
     [_userName setText:_userProfile.m_name];
     
-    UIImage *image;
-    
-    if ( self.following == YES)
+    if ( _isUser == YES )
     {
-        image = [UIImage imageNamed:@"SocialFollowingButton.png"];
+        [_followButton setHidden:YES];
+    }
+    else if ( self.following == YES)
+    {
+        [_followButton setHidden:NO];
+        UIImage *image = [UIImage imageNamed:@"SocialFollowingButton.png"];
+        [_followButton setImage:image forState:UIControlStateNormal];
     }
     else
     {
-        image = [UIImage imageNamed:@"SocialFollowButton.png"];
+        [_followButton setHidden:NO];
+        UIImage *image = [UIImage imageNamed:@"SocialFollowButton.png"];
+        [_followButton setImage:image forState:UIControlStateNormal];
     }
-    
-    [_followButton setImage:image forState:UIControlStateNormal];
     
     [_followButton stopActivityIndicator];
     
@@ -110,7 +114,7 @@ extern FileController *g_fileController;
     // -Its not null
     // -It hasn't been canceled
     // -It is the last of a series of requests.
-    if ( pic != nil && _cancelPictureRequest == NO && _pictureRequestsInFlight == 0 )
+    if ( pic != nil && [pic isKindOfClass:[UIImage class]] &&  _cancelPictureRequest == NO && _pictureRequestsInFlight == 0 )
     {
         [_profilePic performSelectorOnMainThread:@selector(setImage:) withObject:pic waitUntilDone:NO];
     }

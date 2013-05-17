@@ -368,6 +368,7 @@ extern Facebook *g_facebook;
         }
         
         cell.following = [g_userController checkLoggedInUserFollows:cell.userProfile];
+        cell.isUser = cell.userProfile.m_userId == g_userController.m_loggedInUserProfile.m_userId;
         
         [cell updateCell];
         
@@ -390,6 +391,7 @@ extern Facebook *g_facebook;
     }
     
     cell.following = [g_userController checkLoggedInUserFollows:cell.userProfile];
+    cell.isUser = cell.userProfile.m_userId == g_userController.m_loggedInUserProfile.m_userId;
     
     [cell updateCell];
     
@@ -577,6 +579,12 @@ extern Facebook *g_facebook;
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         [self refreshDisplayedUser];
+        
+        // We need to reload the search table too if it is visible
+        if ( _searchTable.hidden == NO )
+        {
+            [_searchTable reloadData];
+        }
     }
     else
     {

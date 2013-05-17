@@ -84,14 +84,6 @@
 		EC0BAD9A16F2784800E567A6 /* CyclingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9816F2784800E567A6 /* CyclingTextField.m */; };
 		EC0BAD9E16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9D16F2A4CF00E567A6 /* SlidingModalViewController.m */; };
 		EC0BAD9F16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BAD9D16F2A4CF00E567A6 /* SlidingModalViewController.m */; };
-		EC0BADA116F3C49B00E567A6 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA016F3C49B00E567A6 /* TextBox.png */; };
-		EC0BADA216F3C49B00E567A6 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADA016F3C49B00E567A6 /* TextBox.png */; };
-		EC0BADB916F7A3E100E567A6 /* PlayButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADB816F7A3E000E567A6 /* PlayButtonVideo.png */; };
-		EC0BADBA16F7A3E100E567A6 /* PlayButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADB816F7A3E000E567A6 /* PlayButtonVideo.png */; };
-		EC0BADBD16F910F300E567A6 /* FaceBookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADBB16F910F200E567A6 /* FaceBookButton.png */; };
-		EC0BADBE16F910F300E567A6 /* FaceBookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADBB16F910F200E567A6 /* FaceBookButton.png */; };
-		EC0BADBF16F910F300E567A6 /* SignUp_CircleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADBC16F910F200E567A6 /* SignUp_CircleButton.png */; };
-		EC0BADC016F910F300E567A6 /* SignUp_CircleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC0BADBC16F910F200E567A6 /* SignUp_CircleButton.png */; };
 		EC24DC08161A821200016B78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		EC24DC09161A821200016B78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		EC24DC0A161A821200016B78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -685,7 +677,6 @@
 		EC24DEAC161A89F000016B78 /* Square 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFFA21564DD1B006B38C0 /* Square 79.mp3 */; };
 		EC24DEAD161A89F000016B78 /* Square 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFFA31564DD1B006B38C0 /* Square 80.mp3 */; };
 		EC24DEAE161A8A0000016B78 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC9D6EC314A11DC700AE374D /* FBDialog.bundle */; };
-		EC24DED3161A8A1200016B78 /* gTarLogoTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */; };
 		EC24DEDE161A8A1B00016B78 /* SwitchDownFree.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC994DF15C9E4C3008C8948 /* SwitchDownFree.png */; };
 		EC24DEDF161A8A1B00016B78 /* SwitchUpFree.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC994E015C9E4C3008C8948 /* SwitchUpFree.png */; };
 		EC24DEE0161A8A1B00016B78 /* ExitButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC994DB15C9A852008C8948 /* ExitButton.png */; };
@@ -783,12 +774,6 @@
 		EC34161C1739ADA600501AF4 /* SessionModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3416191739ADA400501AF4 /* SessionModalViewController.m */; };
 		EC34161D1739ADA600501AF4 /* SessionModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC34161A1739ADA500501AF4 /* SessionModalViewController.xib */; };
 		EC34161E1739ADA600501AF4 /* SessionModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC34161A1739ADA500501AF4 /* SessionModalViewController.xib */; };
-		EC341624173C5C4400501AF4 /* SearchCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC341621173C5C4400501AF4 /* SearchCancelButton.png */; };
-		EC341625173C5C4400501AF4 /* SearchCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC341621173C5C4400501AF4 /* SearchCancelButton.png */; };
-		EC341626173C5C4400501AF4 /* MagGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = EC341622173C5C4400501AF4 /* MagGlass.png */; };
-		EC341627173C5C4400501AF4 /* MagGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = EC341622173C5C4400501AF4 /* MagGlass.png */; };
-		EC341628173C5C4400501AF4 /* SearchBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EC341623173C5C4400501AF4 /* SearchBar.png */; };
-		EC341629173C5C4400501AF4 /* SearchBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EC341623173C5C4400501AF4 /* SearchBar.png */; };
 		EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
 		EC48663B17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
 		EC48665417287E8D0066194D /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC48665317287E8D0066194D /* SlidingViewController.m */; };
@@ -1411,7 +1396,6 @@
 		ECC12080162D07AD001A231A /* Square 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFFA21564DD1B006B38C0 /* Square 79.mp3 */; };
 		ECC12081162D07AD001A231A /* Square 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFFA31564DD1B006B38C0 /* Square 80.mp3 */; };
 		ECC12082162D07AD001A231A /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC9D6EC314A11DC700AE374D /* FBDialog.bundle */; };
-		ECC120A7162D07AD001A231A /* gTarLogoTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */; };
 		ECC120B2162D07AD001A231A /* SwitchDownFree.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC994DF15C9E4C3008C8948 /* SwitchDownFree.png */; };
 		ECC120B3162D07AD001A231A /* SwitchUpFree.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC994E015C9E4C3008C8948 /* SwitchUpFree.png */; };
 		ECC120B4162D07AD001A231A /* ExitButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC994DB15C9A852008C8948 /* ExitButton.png */; };
@@ -1504,8 +1488,8 @@
 		ECCC0315170A2B900021DB00 /* NumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC030B170A2B8F0021DB00 /* NumberModel.m */; };
 		ECCC0316170A2B900021DB00 /* TextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC030D170A2B900021DB00 /* TextModel.m */; };
 		ECCC0317170A2B900021DB00 /* TextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC030D170A2B900021DB00 /* TextModel.m */; };
-		ECCC031E170A3C7B0021DB00 /* CancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031B170A3C7B0021DB00 /* CancelButton.png */; };
-		ECCC031F170A3C7B0021DB00 /* CancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031B170A3C7B0021DB00 /* CancelButton.png */; };
+		ECCC031E170A3C7B0021DB00 /* PlayCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031B170A3C7B0021DB00 /* PlayCancelButton.png */; };
+		ECCC031F170A3C7B0021DB00 /* PlayCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031B170A3C7B0021DB00 /* PlayCancelButton.png */; };
 		ECCC0320170A3C7B0021DB00 /* RestartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031C170A3C7B0021DB00 /* RestartButton.png */; };
 		ECCC0321170A3C7B0021DB00 /* RestartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031C170A3C7B0021DB00 /* RestartButton.png */; };
 		ECCC0322170A3C7B0021DB00 /* ScoreBox.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCC031D170A3C7B0021DB00 /* ScoreBox.png */; };
@@ -1564,8 +1548,6 @@
 		ECE831FC171764C0006E2391 /* UserCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE831FA171764C0006E2391 /* UserCommentCell.m */; };
 		ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE831FE1717653E006E2391 /* UserCommentCell.xib */; };
 		ECE832001717653E006E2391 /* UserCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE831FE1717653E006E2391 /* UserCommentCell.xib */; };
-		ECE8320217177026006E2391 /* CloseXButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8320117177026006E2391 /* CloseXButton.png */; };
-		ECE8320317177026006E2391 /* CloseXButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8320117177026006E2391 /* CloseXButton.png */; };
 		ECE8321C1718905B006E2391 /* GreenVolume.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8321B1718905B006E2391 /* GreenVolume.png */; };
 		ECE8321D1718905B006E2391 /* GreenVolume.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8321B1718905B006E2391 /* GreenVolume.png */; };
 		ECE8322117189C1B006E2391 /* LikeOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE8321F17189C1B006E2391 /* LikeOFF.png */; };
@@ -1614,6 +1596,26 @@
 		ECFF773517440BA9002D7D40 /* FirmwareModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECFF773217440BA9002D7D40 /* FirmwareModalViewController.m */; };
 		ECFF773617440BA9002D7D40 /* FirmwareModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECFF773317440BA9002D7D40 /* FirmwareModalViewController.xib */; };
 		ECFF773717440BA9002D7D40 /* FirmwareModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECFF773317440BA9002D7D40 /* FirmwareModalViewController.xib */; };
+		ECFF776617457E3D002D7D40 /* CloseXButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF775F17457E39002D7D40 /* CloseXButton.png */; };
+		ECFF776717457E3D002D7D40 /* CloseXButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF775F17457E39002D7D40 /* CloseXButton.png */; };
+		ECFF776817457E3D002D7D40 /* SignUp_CircleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776017457E3A002D7D40 /* SignUp_CircleButton.png */; };
+		ECFF776917457E3D002D7D40 /* SignUp_CircleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776017457E3A002D7D40 /* SignUp_CircleButton.png */; };
+		ECFF776A17457E3D002D7D40 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776117457E3A002D7D40 /* TextBox.png */; };
+		ECFF776B17457E3D002D7D40 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776117457E3A002D7D40 /* TextBox.png */; };
+		ECFF776C17457E3D002D7D40 /* FaceBookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776217457E3B002D7D40 /* FaceBookButton.png */; };
+		ECFF776D17457E3D002D7D40 /* FaceBookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776217457E3B002D7D40 /* FaceBookButton.png */; };
+		ECFF776E17457E3D002D7D40 /* PlayButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776317457E3B002D7D40 /* PlayButtonVideo.png */; };
+		ECFF776F17457E3D002D7D40 /* PlayButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776317457E3B002D7D40 /* PlayButtonVideo.png */; };
+		ECFF777017457E3D002D7D40 /* IncidentGtar_ComButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776417457E3B002D7D40 /* IncidentGtar_ComButton.png */; };
+		ECFF777117457E3D002D7D40 /* IncidentGtar_ComButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776417457E3B002D7D40 /* IncidentGtar_ComButton.png */; };
+		ECFF777217457E3D002D7D40 /* gTarLogoTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776517457E3C002D7D40 /* gTarLogoTitle.png */; };
+		ECFF777317457E3D002D7D40 /* gTarLogoTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF776517457E3C002D7D40 /* gTarLogoTitle.png */; };
+		ECFF777717457ECA002D7D40 /* CancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF777417457ECA002D7D40 /* CancelButton.png */; };
+		ECFF777817457ECA002D7D40 /* CancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF777417457ECA002D7D40 /* CancelButton.png */; };
+		ECFF777917457ECA002D7D40 /* MagGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF777517457ECA002D7D40 /* MagGlass.png */; };
+		ECFF777A17457ECA002D7D40 /* MagGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF777517457ECA002D7D40 /* MagGlass.png */; };
+		ECFF777B17457ECA002D7D40 /* SearchBar.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF777617457ECA002D7D40 /* SearchBar.png */; };
+		ECFF777C17457ECA002D7D40 /* SearchBar.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF777617457ECA002D7D40 /* SearchBar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2187,10 +2189,6 @@
 		EC0BAD9816F2784800E567A6 /* CyclingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CyclingTextField.m; sourceTree = "<group>"; };
 		EC0BAD9C16F2A4CF00E567A6 /* SlidingModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingModalViewController.h; sourceTree = "<group>"; };
 		EC0BAD9D16F2A4CF00E567A6 /* SlidingModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingModalViewController.m; sourceTree = "<group>"; };
-		EC0BADA016F3C49B00E567A6 /* TextBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextBox.png; sourceTree = "<group>"; };
-		EC0BADB816F7A3E000E567A6 /* PlayButtonVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButtonVideo.png; sourceTree = "<group>"; };
-		EC0BADBB16F910F200E567A6 /* FaceBookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FaceBookButton.png; sourceTree = "<group>"; };
-		EC0BADBC16F910F200E567A6 /* SignUp_CircleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignUp_CircleButton.png; sourceTree = "<group>"; };
 		EC1E4DF11549E2AD0033F904 /* PullToUpdateTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToUpdateTableView.h; sourceTree = "<group>"; };
 		EC1E4DF21549E2AD0033F904 /* PullToUpdateTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToUpdateTableView.m; sourceTree = "<group>"; };
 		EC24A384133A994A00EA2FED /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -2298,9 +2296,6 @@
 		EC3416181739ADA300501AF4 /* SessionModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionModalViewController.h; sourceTree = "<group>"; };
 		EC3416191739ADA400501AF4 /* SessionModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionModalViewController.m; sourceTree = "<group>"; };
 		EC34161A1739ADA500501AF4 /* SessionModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionModalViewController.xib; sourceTree = "<group>"; };
-		EC341621173C5C4400501AF4 /* SearchCancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchCancelButton.png; sourceTree = "<group>"; };
-		EC341622173C5C4400501AF4 /* MagGlass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MagGlass.png; sourceTree = "<group>"; };
-		EC341623173C5C4400501AF4 /* SearchBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchBar.png; sourceTree = "<group>"; };
 		EC341B1D141702480011F6C2 /* tutorial.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tutorial.plist; sourceTree = "<group>"; };
 		EC37BE311603F5B500E6277D /* note-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "note-x.png"; sourceTree = "<group>"; };
 		EC39629614CE6A9800D309DF /* gTar_App_Icon57a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_App_Icon57a.png; sourceTree = "<group>"; };
@@ -2357,7 +2352,6 @@
 		EC87F39E132AE0E8007DAEC9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		EC87F3BA132AE2E2007DAEC9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		EC8EFE94146DC0CA00F92F70 /* XButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XButton.png; sourceTree = "<group>"; };
-		EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarLogoTitle.png; sourceTree = "<group>"; };
 		EC95230A155B5DC100D32EA4 /* FBFrictionlessRequestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFrictionlessRequestSettings.h; sourceTree = "<group>"; };
 		EC95230B155B5DC100D32EA4 /* FBFrictionlessRequestSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFrictionlessRequestSettings.m; sourceTree = "<group>"; };
 		EC995EA514DA253E00C86824 /* UserSongsList.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = UserSongsList.xml; path = Resources/PreloadedContent/UserSongsList.xml; sourceTree = "<group>"; };
@@ -2418,7 +2412,7 @@
 		ECCC030B170A2B8F0021DB00 /* NumberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberModel.m; sourceTree = "<group>"; };
 		ECCC030C170A2B900021DB00 /* TextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextModel.h; sourceTree = "<group>"; };
 		ECCC030D170A2B900021DB00 /* TextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextModel.m; sourceTree = "<group>"; };
-		ECCC031B170A3C7B0021DB00 /* CancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CancelButton.png; path = Resources/Images/Play/CancelButton.png; sourceTree = SOURCE_ROOT; };
+		ECCC031B170A3C7B0021DB00 /* PlayCancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayCancelButton.png; path = Resources/Images/Play/PlayCancelButton.png; sourceTree = SOURCE_ROOT; };
 		ECCC031C170A3C7B0021DB00 /* RestartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RestartButton.png; path = Resources/Images/Play/RestartButton.png; sourceTree = SOURCE_ROOT; };
 		ECCC031D170A3C7B0021DB00 /* ScoreBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScoreBox.png; path = Resources/Images/Play/ScoreBox.png; sourceTree = SOURCE_ROOT; };
 		ECCC0324170A45E80021DB00 /* DiffEasyButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DiffEasyButton.png; path = Resources/Images/Play/DiffEasyButton.png; sourceTree = SOURCE_ROOT; };
@@ -2454,7 +2448,6 @@
 		ECE831F9171764C0006E2391 /* UserCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCommentCell.h; sourceTree = "<group>"; };
 		ECE831FA171764C0006E2391 /* UserCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCommentCell.m; sourceTree = "<group>"; };
 		ECE831FE1717653E006E2391 /* UserCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCommentCell.xib; sourceTree = "<group>"; };
-		ECE8320117177026006E2391 /* CloseXButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseXButton.png; path = Resources/Images/General/CloseXButton.png; sourceTree = SOURCE_ROOT; };
 		ECE8321B1718905B006E2391 /* GreenVolume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenVolume.png; path = Resources/Images/General/VolumeView/GreenVolume.png; sourceTree = SOURCE_ROOT; };
 		ECE8321F17189C1B006E2391 /* LikeOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LikeOFF.png; path = Resources/Images/Title/LikeOFF.png; sourceTree = SOURCE_ROOT; };
 		ECE8322017189C1B006E2391 /* LikeON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LikeON.png; path = Resources/Images/Title/LikeON.png; sourceTree = SOURCE_ROOT; };
@@ -2485,6 +2478,16 @@
 		ECFF773117440BA9002D7D40 /* FirmwareModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirmwareModalViewController.h; sourceTree = "<group>"; };
 		ECFF773217440BA9002D7D40 /* FirmwareModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirmwareModalViewController.m; sourceTree = "<group>"; };
 		ECFF773317440BA9002D7D40 /* FirmwareModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirmwareModalViewController.xib; sourceTree = "<group>"; };
+		ECFF775F17457E39002D7D40 /* CloseXButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseXButton.png; path = Resources/Images/Title/CloseXButton.png; sourceTree = SOURCE_ROOT; };
+		ECFF776017457E3A002D7D40 /* SignUp_CircleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SignUp_CircleButton.png; path = Resources/Images/Title/SignUp_CircleButton.png; sourceTree = SOURCE_ROOT; };
+		ECFF776117457E3A002D7D40 /* TextBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TextBox.png; path = Resources/Images/Title/TextBox.png; sourceTree = SOURCE_ROOT; };
+		ECFF776217457E3B002D7D40 /* FaceBookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FaceBookButton.png; path = Resources/Images/Title/FaceBookButton.png; sourceTree = SOURCE_ROOT; };
+		ECFF776317457E3B002D7D40 /* PlayButtonVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayButtonVideo.png; path = Resources/Images/Title/PlayButtonVideo.png; sourceTree = SOURCE_ROOT; };
+		ECFF776417457E3B002D7D40 /* IncidentGtar_ComButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IncidentGtar_ComButton.png; path = Resources/Images/Title/IncidentGtar_ComButton.png; sourceTree = SOURCE_ROOT; };
+		ECFF776517457E3C002D7D40 /* gTarLogoTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gTarLogoTitle.png; path = Resources/Images/Title/gTarLogoTitle.png; sourceTree = SOURCE_ROOT; };
+		ECFF777417457ECA002D7D40 /* CancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CancelButton.png; path = Resources/Images/General/SearchBar/CancelButton.png; sourceTree = SOURCE_ROOT; };
+		ECFF777517457ECA002D7D40 /* MagGlass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MagGlass.png; path = Resources/Images/General/SearchBar/MagGlass.png; sourceTree = SOURCE_ROOT; };
+		ECFF777617457ECA002D7D40 /* SearchBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SearchBar.png; path = Resources/Images/General/SearchBar/SearchBar.png; sourceTree = SOURCE_ROOT; };
 		ECFFB43015ED82D600951BD5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ECFFB43C15EEE1BE00951BD5 /* gray82.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray82.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3266,14 +3269,15 @@
 		EC0BAD3516EEA06600E567A6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ECFF775F17457E39002D7D40 /* CloseXButton.png */,
+				ECFF776017457E3A002D7D40 /* SignUp_CircleButton.png */,
+				ECFF776117457E3A002D7D40 /* TextBox.png */,
+				ECFF776217457E3B002D7D40 /* FaceBookButton.png */,
+				ECFF776317457E3B002D7D40 /* PlayButtonVideo.png */,
+				ECFF776417457E3B002D7D40 /* IncidentGtar_ComButton.png */,
+				ECFF776517457E3C002D7D40 /* gTarLogoTitle.png */,
 				ECE8321F17189C1B006E2391 /* LikeOFF.png */,
 				ECE8322017189C1B006E2391 /* LikeON.png */,
-				ECE8320117177026006E2391 /* CloseXButton.png */,
-				EC0BADB816F7A3E000E567A6 /* PlayButtonVideo.png */,
-				EC0BADBB16F910F200E567A6 /* FaceBookButton.png */,
-				EC0BADBC16F910F200E567A6 /* SignUp_CircleButton.png */,
-				EC0BADA016F3C49B00E567A6 /* TextBox.png */,
-				EC94135E14846EFB000A6E64 /* gTarLogoTitle.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -3479,9 +3483,9 @@
 		EC341620173C5BE000501AF4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				EC341621173C5C4400501AF4 /* SearchCancelButton.png */,
-				EC341622173C5C4400501AF4 /* MagGlass.png */,
-				EC341623173C5C4400501AF4 /* SearchBar.png */,
+				ECFF777417457ECA002D7D40 /* CancelButton.png */,
+				ECFF777517457ECA002D7D40 /* MagGlass.png */,
+				ECFF777617457ECA002D7D40 /* SearchBar.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -3831,7 +3835,7 @@
 				ECCC0326170A45E80021DB00 /* DiffMedButton.png */,
 				ECCC0327170A45E80021DB00 /* MenuPauseBG.jpg */,
 				ECCC0328170A45E80021DB00 /* PlayBG.png */,
-				ECCC031B170A3C7B0021DB00 /* CancelButton.png */,
+				ECCC031B170A3C7B0021DB00 /* PlayCancelButton.png */,
 				ECCC031C170A3C7B0021DB00 /* RestartButton.png */,
 				ECCC031D170A3C7B0021DB00 /* ScoreBox.png */,
 				ECE9D24D170525ED00BB6C53 /* MenuIcon.png */,
@@ -4508,7 +4512,6 @@
 				EC24DEAC161A89F000016B78 /* Square 79.mp3 in Resources */,
 				EC24DEAD161A89F000016B78 /* Square 80.mp3 in Resources */,
 				EC24DEAE161A8A0000016B78 /* FBDialog.bundle in Resources */,
-				EC24DED3161A8A1200016B78 /* gTarLogoTitle.png in Resources */,
 				EC24DEDE161A8A1B00016B78 /* SwitchDownFree.png in Resources */,
 				EC24DEDF161A8A1B00016B78 /* SwitchUpFree.png in Resources */,
 				EC24DEE0161A8A1B00016B78 /* ExitButton.png in Resources */,
@@ -4597,10 +4600,6 @@
 				EC0BAD3116EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
 				EC0BAD3416EE93AC00E567A6 /* Default-568h@2x.png in Resources */,
 				EC0BAD8716F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
-				EC0BADA116F3C49B00E567A6 /* TextBox.png in Resources */,
-				EC0BADB916F7A3E100E567A6 /* PlayButtonVideo.png in Resources */,
-				EC0BADBD16F910F300E567A6 /* FaceBookButton.png in Resources */,
-				EC0BADBF16F910F300E567A6 /* SignUp_CircleButton.png in Resources */,
 				ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */,
 				ECE9D23D16FBB7DA00BB6C53 /* SongListCell.xib in Resources */,
 				9DE5C64616F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */,
@@ -4610,7 +4609,7 @@
 				ECE9D24A1705133900BB6C53 /* PlayViewController.xib in Resources */,
 				ECE9D24F170525ED00BB6C53 /* MenuIcon.png in Resources */,
 				ECE9D251170525ED00BB6C53 /* VolumeIcon.png in Resources */,
-				ECCC031E170A3C7B0021DB00 /* CancelButton.png in Resources */,
+				ECCC031E170A3C7B0021DB00 /* PlayCancelButton.png in Resources */,
 				ECCC0320170A3C7B0021DB00 /* RestartButton.png in Resources */,
 				ECCC0322170A3C7B0021DB00 /* ScoreBox.png in Resources */,
 				ECCC0329170A45E90021DB00 /* DiffEasyButton.png in Resources */,
@@ -4638,7 +4637,6 @@
 				9DEB90501714D66100A7C0CF /* EffectsOffButton.png in Resources */,
 				9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 				ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */,
-				ECE8320217177026006E2391 /* CloseXButton.png in Resources */,
 				ECE8321C1718905B006E2391 /* GreenVolume.png in Resources */,
 				ECE8322117189C1B006E2391 /* LikeOFF.png in Resources */,
 				ECE8322317189C1B006E2391 /* LikeON.png in Resources */,
@@ -4666,9 +4664,6 @@
 				EC3415F8173863AD00501AF4 /* SocialUserCell.xib in Resources */,
 				EC3416161739983800501AF4 /* SocialSongCell.xib in Resources */,
 				EC34161D1739ADA600501AF4 /* SessionModalViewController.xib in Resources */,
-				EC341624173C5C4400501AF4 /* SearchCancelButton.png in Resources */,
-				EC341626173C5C4400501AF4 /* MagGlass.png in Resources */,
-				EC341628173C5C4400501AF4 /* SearchBar.png in Resources */,
 				ECDF7F62173D590F003E51EC /* SocialCameraIcon.png in Resources */,
 				ECDF7F64173D590F003E51EC /* SocialFacebookButton.png in Resources */,
 				ECDF7F66173D590F003E51EC /* SocialFollowButton.png in Resources */,
@@ -4684,6 +4679,16 @@
 				9DB5C4C617430FA700EAF9A6 /* Shape_ContinuousButtonON.png in Resources */,
 				9DB5C4C817430FA700EAF9A6 /* Shape_SingleButtonOFF.png in Resources */,
 				9DB5C4CA17430FA700EAF9A6 /* Shape_SingleButtonON.png in Resources */,
+				ECFF776617457E3D002D7D40 /* CloseXButton.png in Resources */,
+				ECFF776817457E3D002D7D40 /* SignUp_CircleButton.png in Resources */,
+				ECFF776A17457E3D002D7D40 /* TextBox.png in Resources */,
+				ECFF776C17457E3D002D7D40 /* FaceBookButton.png in Resources */,
+				ECFF776E17457E3D002D7D40 /* PlayButtonVideo.png in Resources */,
+				ECFF777017457E3D002D7D40 /* IncidentGtar_ComButton.png in Resources */,
+				ECFF777217457E3D002D7D40 /* gTarLogoTitle.png in Resources */,
+				ECFF777717457ECA002D7D40 /* CancelButton.png in Resources */,
+				ECFF777917457ECA002D7D40 /* MagGlass.png in Resources */,
+				ECFF777B17457ECA002D7D40 /* SearchBar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5249,7 +5254,6 @@
 				ECC12080162D07AD001A231A /* Square 79.mp3 in Resources */,
 				ECC12081162D07AD001A231A /* Square 80.mp3 in Resources */,
 				ECC12082162D07AD001A231A /* FBDialog.bundle in Resources */,
-				ECC120A7162D07AD001A231A /* gTarLogoTitle.png in Resources */,
 				ECC120B2162D07AD001A231A /* SwitchDownFree.png in Resources */,
 				ECC120B3162D07AD001A231A /* SwitchUpFree.png in Resources */,
 				ECC120B4162D07AD001A231A /* ExitButton.png in Resources */,
@@ -5337,10 +5341,6 @@
 				EC26A3A816CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
 				EC0BAD3216EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
 				EC0BAD8816F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
-				EC0BADA216F3C49B00E567A6 /* TextBox.png in Resources */,
-				EC0BADBA16F7A3E100E567A6 /* PlayButtonVideo.png in Resources */,
-				EC0BADBE16F910F300E567A6 /* FaceBookButton.png in Resources */,
-				EC0BADC016F910F300E567A6 /* SignUp_CircleButton.png in Resources */,
 				ECE9D23616FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */,
 				ECE9D23E16FBB7DA00BB6C53 /* SongListCell.xib in Resources */,
 				9DE5C64716F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */,
@@ -5350,7 +5350,7 @@
 				ECE9D24B1705133900BB6C53 /* PlayViewController.xib in Resources */,
 				ECE9D250170525ED00BB6C53 /* MenuIcon.png in Resources */,
 				ECE9D252170525ED00BB6C53 /* VolumeIcon.png in Resources */,
-				ECCC031F170A3C7B0021DB00 /* CancelButton.png in Resources */,
+				ECCC031F170A3C7B0021DB00 /* PlayCancelButton.png in Resources */,
 				ECCC0321170A3C7B0021DB00 /* RestartButton.png in Resources */,
 				ECCC0323170A3C7B0021DB00 /* ScoreBox.png in Resources */,
 				ECCC032A170A45E90021DB00 /* DiffEasyButton.png in Resources */,
@@ -5378,7 +5378,6 @@
 				9DEB90511714D66100A7C0CF /* EffectsOffButton.png in Resources */,
 				9DEB90581714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 				ECE832001717653E006E2391 /* UserCommentCell.xib in Resources */,
-				ECE8320317177026006E2391 /* CloseXButton.png in Resources */,
 				ECE8321D1718905B006E2391 /* GreenVolume.png in Resources */,
 				ECE8322217189C1B006E2391 /* LikeOFF.png in Resources */,
 				ECE8322417189C1B006E2391 /* LikeON.png in Resources */,
@@ -5406,9 +5405,6 @@
 				EC3415F9173863AD00501AF4 /* SocialUserCell.xib in Resources */,
 				EC3416171739983800501AF4 /* SocialSongCell.xib in Resources */,
 				EC34161E1739ADA600501AF4 /* SessionModalViewController.xib in Resources */,
-				EC341625173C5C4400501AF4 /* SearchCancelButton.png in Resources */,
-				EC341627173C5C4400501AF4 /* MagGlass.png in Resources */,
-				EC341629173C5C4400501AF4 /* SearchBar.png in Resources */,
 				ECDF7F63173D590F003E51EC /* SocialCameraIcon.png in Resources */,
 				ECDF7F65173D590F003E51EC /* SocialFacebookButton.png in Resources */,
 				ECDF7F67173D590F003E51EC /* SocialFollowButton.png in Resources */,
@@ -5424,6 +5420,16 @@
 				9DB5C4C717430FA700EAF9A6 /* Shape_ContinuousButtonON.png in Resources */,
 				9DB5C4C917430FA700EAF9A6 /* Shape_SingleButtonOFF.png in Resources */,
 				9DB5C4CB17430FA700EAF9A6 /* Shape_SingleButtonON.png in Resources */,
+				ECFF776717457E3D002D7D40 /* CloseXButton.png in Resources */,
+				ECFF776917457E3D002D7D40 /* SignUp_CircleButton.png in Resources */,
+				ECFF776B17457E3D002D7D40 /* TextBox.png in Resources */,
+				ECFF776D17457E3D002D7D40 /* FaceBookButton.png in Resources */,
+				ECFF776F17457E3D002D7D40 /* PlayButtonVideo.png in Resources */,
+				ECFF777117457E3D002D7D40 /* IncidentGtar_ComButton.png in Resources */,
+				ECFF777317457E3D002D7D40 /* gTarLogoTitle.png in Resources */,
+				ECFF777817457ECA002D7D40 /* CancelButton.png in Resources */,
+				ECFF777A17457ECA002D7D40 /* MagGlass.png in Resources */,
+				ECFF777C17457ECA002D7D40 /* SearchBar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

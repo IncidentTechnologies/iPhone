@@ -547,6 +547,7 @@ extern GtarController *g_gtarController;
     
     [self searchForString:searchBar.searchString];
     [self refreshDisplayedUserSongList];
+    [_fullscreenButton setHidden:YES];
 }
 
 - (void)searchBarCancel:(ExpandableSearchBar *)searchBar

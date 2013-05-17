@@ -15,6 +15,7 @@
 @property (retain, nonatomic) UserProfile *userProfile;
 @property (retain, nonatomic) NSInvocation *followInvocation;
 @property (assign, nonatomic) BOOL following;
+@property (assign, nonatomic) BOOL isUser;
 
 @property (retain, nonatomic) IBOutlet UILabel *userName;
 @property (retain, nonatomic) IBOutlet UIImageView *profilePic;
