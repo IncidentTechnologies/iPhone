@@ -59,6 +59,26 @@
 		9DB5C4E9174448E100EAF9A6 /* Color_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4D5174448E100EAF9A6 /* Color_yellow.png */; };
 		9DB5C4EB1744495300EAF9A6 /* Color_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4EA1744495300EAF9A6 /* Color_white.png */; };
 		9DB5C4EC1744495300EAF9A6 /* Color_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4EA1744495300EAF9A6 /* Color_white.png */; };
+		9DB5C4FD1745ACE700EAF9A6 /* Color_blue_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F31745ACE700EAF9A6 /* Color_blue_Select.png */; };
+		9DB5C4FE1745ACE700EAF9A6 /* Color_blue_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F31745ACE700EAF9A6 /* Color_blue_Select.png */; };
+		9DB5C4FF1745ACE700EAF9A6 /* Color_cyan_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F41745ACE700EAF9A6 /* Color_cyan_Select.png */; };
+		9DB5C5001745ACE700EAF9A6 /* Color_cyan_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F41745ACE700EAF9A6 /* Color_cyan_Select.png */; };
+		9DB5C5011745ACE700EAF9A6 /* Color_green_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F51745ACE700EAF9A6 /* Color_green_Select.png */; };
+		9DB5C5021745ACE700EAF9A6 /* Color_green_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F51745ACE700EAF9A6 /* Color_green_Select.png */; };
+		9DB5C5071745ACE700EAF9A6 /* Color_multi_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F81745ACE700EAF9A6 /* Color_multi_Select.png */; };
+		9DB5C5081745ACE700EAF9A6 /* Color_multi_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F81745ACE700EAF9A6 /* Color_multi_Select.png */; };
+		9DB5C5091745ACE700EAF9A6 /* Color_orange_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F91745ACE700EAF9A6 /* Color_orange_Select.png */; };
+		9DB5C50A1745ACE700EAF9A6 /* Color_orange_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4F91745ACE700EAF9A6 /* Color_orange_Select.png */; };
+		9DB5C50B1745ACE700EAF9A6 /* Color_red_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4FA1745ACE700EAF9A6 /* Color_red_Select.png */; };
+		9DB5C50C1745ACE700EAF9A6 /* Color_red_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4FA1745ACE700EAF9A6 /* Color_red_Select.png */; };
+		9DB5C50D1745ACE700EAF9A6 /* Color_white_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4FB1745ACE700EAF9A6 /* Color_white_Select.png */; };
+		9DB5C50E1745ACE700EAF9A6 /* Color_white_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4FB1745ACE700EAF9A6 /* Color_white_Select.png */; };
+		9DB5C50F1745ACE700EAF9A6 /* Color_yellow_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4FC1745ACE700EAF9A6 /* Color_yellow_Select.png */; };
+		9DB5C5101745ACE700EAF9A6 /* Color_yellow_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C4FC1745ACE700EAF9A6 /* Color_yellow_Select.png */; };
+		9DB5C5151745BE9100EAF9A6 /* Color_purple_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C5141745BE9100EAF9A6 /* Color_purple_Select.png */; };
+		9DB5C5161745BE9100EAF9A6 /* Color_purple_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C5141745BE9100EAF9A6 /* Color_purple_Select.png */; };
+		9DB5C51B1745C0C000EAF9A6 /* Color_alternating_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C51A1745C0C000EAF9A6 /* Color_alternating_Select.png */; };
+		9DB5C51C1745C0C000EAF9A6 /* Color_alternating_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C51A1745C0C000EAF9A6 /* Color_alternating_Select.png */; };
 		9DE5C64616F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
 		9DE5C64716F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
 		9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */; };
@@ -2117,6 +2137,16 @@
 		9DB5C4D3174448E100EAF9A6 /* Color_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_red.png; path = Resources/Images/Freeplay/Color_red.png; sourceTree = "<group>"; };
 		9DB5C4D5174448E100EAF9A6 /* Color_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_yellow.png; path = Resources/Images/Freeplay/Color_yellow.png; sourceTree = "<group>"; };
 		9DB5C4EA1744495300EAF9A6 /* Color_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_white.png; path = Resources/Images/Freeplay/Color_white.png; sourceTree = "<group>"; };
+		9DB5C4F31745ACE700EAF9A6 /* Color_blue_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_blue_Select.png; path = Resources/Images/Freeplay/Color_blue_Select.png; sourceTree = "<group>"; };
+		9DB5C4F41745ACE700EAF9A6 /* Color_cyan_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_cyan_Select.png; path = Resources/Images/Freeplay/Color_cyan_Select.png; sourceTree = "<group>"; };
+		9DB5C4F51745ACE700EAF9A6 /* Color_green_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_green_Select.png; path = Resources/Images/Freeplay/Color_green_Select.png; sourceTree = "<group>"; };
+		9DB5C4F81745ACE700EAF9A6 /* Color_multi_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_multi_Select.png; path = Resources/Images/Freeplay/Color_multi_Select.png; sourceTree = "<group>"; };
+		9DB5C4F91745ACE700EAF9A6 /* Color_orange_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_orange_Select.png; path = Resources/Images/Freeplay/Color_orange_Select.png; sourceTree = "<group>"; };
+		9DB5C4FA1745ACE700EAF9A6 /* Color_red_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_red_Select.png; path = Resources/Images/Freeplay/Color_red_Select.png; sourceTree = "<group>"; };
+		9DB5C4FB1745ACE700EAF9A6 /* Color_white_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_white_Select.png; path = Resources/Images/Freeplay/Color_white_Select.png; sourceTree = "<group>"; };
+		9DB5C4FC1745ACE700EAF9A6 /* Color_yellow_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_yellow_Select.png; path = Resources/Images/Freeplay/Color_yellow_Select.png; sourceTree = "<group>"; };
+		9DB5C5141745BE9100EAF9A6 /* Color_purple_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_purple_Select.png; path = Resources/Images/Freeplay/Color_purple_Select.png; sourceTree = "<group>"; };
+		9DB5C51A1745C0C000EAF9A6 /* Color_alternating_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Color_alternating_Select.png; path = Resources/Images/Freeplay/Color_alternating_Select.png; sourceTree = "<group>"; };
 		9DB82FA215ACE535002A8B34 /* Knob_BlueLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Knob_BlueLine.png; path = images/FreePlay/Knob_BlueLine.png; sourceTree = "<group>"; };
 		9DC994DB15C9A852008C8948 /* ExitButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ExitButton.png; path = images/FreePlay/ExitButton.png; sourceTree = "<group>"; };
 		9DC994DF15C9E4C3008C8948 /* SwitchDownFree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SwitchDownFree.png; path = images/FreePlay/SwitchDownFree.png; sourceTree = "<group>"; };
@@ -3168,6 +3198,16 @@
 		9DD919711491593D00BE8751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9DB5C51A1745C0C000EAF9A6 /* Color_alternating_Select.png */,
+				9DB5C5141745BE9100EAF9A6 /* Color_purple_Select.png */,
+				9DB5C4F31745ACE700EAF9A6 /* Color_blue_Select.png */,
+				9DB5C4F41745ACE700EAF9A6 /* Color_cyan_Select.png */,
+				9DB5C4F51745ACE700EAF9A6 /* Color_green_Select.png */,
+				9DB5C4F81745ACE700EAF9A6 /* Color_multi_Select.png */,
+				9DB5C4F91745ACE700EAF9A6 /* Color_orange_Select.png */,
+				9DB5C4FA1745ACE700EAF9A6 /* Color_red_Select.png */,
+				9DB5C4FB1745ACE700EAF9A6 /* Color_white_Select.png */,
+				9DB5C4FC1745ACE700EAF9A6 /* Color_yellow_Select.png */,
 				9DB5C4EA1744495300EAF9A6 /* Color_white.png */,
 				9DB5C4CC174448E100EAF9A6 /* Color_alternating.png */,
 				9DB5C4CD174448E100EAF9A6 /* Color_blue.png */,
@@ -4739,6 +4779,16 @@
 				9DB5C4E4174448E100EAF9A6 /* Color_red.png in Resources */,
 				9DB5C4E8174448E100EAF9A6 /* Color_yellow.png in Resources */,
 				9DB5C4EB1744495300EAF9A6 /* Color_white.png in Resources */,
+				9DB5C4FD1745ACE700EAF9A6 /* Color_blue_Select.png in Resources */,
+				9DB5C4FF1745ACE700EAF9A6 /* Color_cyan_Select.png in Resources */,
+				9DB5C5011745ACE700EAF9A6 /* Color_green_Select.png in Resources */,
+				9DB5C5071745ACE700EAF9A6 /* Color_multi_Select.png in Resources */,
+				9DB5C5091745ACE700EAF9A6 /* Color_orange_Select.png in Resources */,
+				9DB5C50B1745ACE700EAF9A6 /* Color_red_Select.png in Resources */,
+				9DB5C50D1745ACE700EAF9A6 /* Color_white_Select.png in Resources */,
+				9DB5C50F1745ACE700EAF9A6 /* Color_yellow_Select.png in Resources */,
+				9DB5C5151745BE9100EAF9A6 /* Color_purple_Select.png in Resources */,
+				9DB5C51B1745C0C000EAF9A6 /* Color_alternating_Select.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5490,6 +5540,16 @@
 				9DB5C4E5174448E100EAF9A6 /* Color_red.png in Resources */,
 				9DB5C4E9174448E100EAF9A6 /* Color_yellow.png in Resources */,
 				9DB5C4EC1744495300EAF9A6 /* Color_white.png in Resources */,
+				9DB5C4FE1745ACE700EAF9A6 /* Color_blue_Select.png in Resources */,
+				9DB5C5001745ACE700EAF9A6 /* Color_cyan_Select.png in Resources */,
+				9DB5C5021745ACE700EAF9A6 /* Color_green_Select.png in Resources */,
+				9DB5C5081745ACE700EAF9A6 /* Color_multi_Select.png in Resources */,
+				9DB5C50A1745ACE700EAF9A6 /* Color_orange_Select.png in Resources */,
+				9DB5C50C1745ACE700EAF9A6 /* Color_red_Select.png in Resources */,
+				9DB5C50E1745ACE700EAF9A6 /* Color_white_Select.png in Resources */,
+				9DB5C5101745ACE700EAF9A6 /* Color_yellow_Select.png in Resources */,
+				9DB5C5161745BE9100EAF9A6 /* Color_purple_Select.png in Resources */,
+				9DB5C51C1745C0C000EAF9A6 /* Color_alternating_Select.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
