@@ -608,7 +608,7 @@ extern TelemetryController * g_telemetryController;
     
     for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
     {
-        NSString* name = [NSString stringWithCString:m_effects[effect]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
+        NSString* name = [g_audioController getEffectNames][effect];
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_effectTimeStart[effect] timeIntervalSince1970] + m_playTimeAdjustment;
         
