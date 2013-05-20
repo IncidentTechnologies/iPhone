@@ -621,14 +621,15 @@ typedef enum
 {
     [self stopLoop];
     
+    // Set only this mode button as selected
     for (UIButton* button in _modeButtons)
     {
         button.selected = NO;
     }
-
     sender.selected = YES;
     
     // Bring down shape view
+    _shapeButton.selected = NO;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.8];
     _shapeView.transform = CGAffineTransformIdentity;
@@ -658,14 +659,15 @@ typedef enum
 
 - (IBAction)setLEDColor:(UIButton*)sender
 {
+    // Set only this color button as selected
     for (UIButton* button in _colorButtons)
     {
         button.selected = NO;
     }
-    
     sender.selected = YES;
     
     // Bring down color view
+    _colorButton.selected = NO;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.8];
     _colorView.transform = CGAffineTransformIdentity;
