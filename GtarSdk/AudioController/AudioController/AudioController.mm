@@ -218,7 +218,7 @@ const float g_GraphSampleRate = 44100.0f;
 {
     Boolean running = false;
 	AUGraphIsRunning(augraph, &running);
-    if (running)
+    if (!running)
     {
         return false;
     }
