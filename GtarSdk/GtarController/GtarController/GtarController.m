@@ -23,6 +23,7 @@
 @synthesize m_delegate;
 @synthesize m_firmwareMajorVersion;
 @synthesize m_firmwareMinorVersion;
+@synthesize m_scaleVelocity;
 
 //@synthesize m_currentGuitarEffect;
 
@@ -591,9 +592,19 @@
     
     GtarPluck gtarPluck;
     
+    if ( m_scaleVelocity == YES )
+    {
+        float buggedMax = GtarMaxPluckVelocity * 0.6;
+        float adjusted = [velocityNumber floatValue] / buggedMax * GtarMaxPluckVelocity;
+        gtarPluck.velocity = MIN(GtarMaxPluckVelocity, adjusted);
+    }
+    else
+    {
+        gtarPluck.velocity = [velocityNumber integerValue];
+    }
+    
     gtarPluck.position.fret = [fretNumber integerValue];
     gtarPluck.position.string = [stringNumber integerValue];
-    gtarPluck.velocity = [velocityNumber integerValue];
     
     [fretNumber release];
     [stringNumber release];

@@ -1056,7 +1056,8 @@ extern TelemetryController * g_telemetryController;
     [g_gtarController turnOffAllLeds];
     [g_gtarController sendDisableDebug];
     
-    if ( g_cloudController.m_loggedIn == YES )
+//    if ( g_cloudController.m_loggedIn == YES )
+    if ( YES )
     {
         [self loggedinScreen];
     }

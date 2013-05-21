@@ -19,6 +19,8 @@
 #import "UserRequest.h"
 #import "UserResponse.h"
 
+#define PENDING_UPLOAD_LIMIT 12
+
 @implementation UserController
 
 @synthesize m_loggedInUsername;
@@ -229,7 +231,10 @@
     [NSKeyedArchiver archiveRootObject:m_loggedInUserProfile toFile:userProfilePath];
     
     [NSKeyedArchiver archiveRootObject:m_loggedInFacebookToken toFile:facebookTokenPath];
-    [NSKeyedArchiver archiveRootObject:m_pendingUserSongSessionUploads toFile:pendingUploadPath];
+    @synchronized ( m_pendingUserSongSessionUploads )
+    {
+        [NSKeyedArchiver archiveRootObject:m_pendingUserSongSessionUploads toFile:pendingUploadPath];
+    }
     [NSKeyedArchiver archiveRootObject:m_userCache toFile:userCachePath];
     [NSKeyedArchiver archiveRootObject:m_starCache toFile:starCachePath];
     [NSKeyedArchiver archiveRootObject:m_scoreCache toFile:scoreCachePath];
@@ -1263,7 +1268,11 @@
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
     
-    [self queueUserSongSession:songSession];
+    if ( [m_pendingUserSongSessionUploads containsObject:songSession] == NO )
+    {
+        // Only queue it once
+        [self queueUserSongSession:songSession];
+    }
     
     CloudRequest * cloudRequest = [m_cloudController requestUploadUserSongSession:songSession
                                                                    andCallbackObj:self
@@ -1475,6 +1484,16 @@
 
 #pragma mark - Uploading
 
+- (BOOL)isUserSongSessionQueueFull
+{
+    BOOL result;
+    @synchronized ( m_pendingUserSongSessionUploads )
+    {
+        result = !([m_pendingUserSongSessionUploads count] < PENDING_UPLOAD_LIMIT);
+    }
+    return result;
+}
+
 - (void)queueUserSongSession:(UserSongSession*)songSession
 {
     
@@ -1495,7 +1514,12 @@
     @synchronized( m_pendingUserSongSessionUploads )
     {
         [m_pendingUserSongSessionUploads removeObject:songSession];
-        [self saveCache];
+        
+        if ( [m_pendingUserSongSessionUploads count] == 0 )
+        {
+            // When all are uploaded, we can save the cache
+            [self saveCache];
+        }
     }
     
     [self sendPendingUploads];
@@ -1541,8 +1565,6 @@
         [m_starCache setObject:[NSNumber numberWithInteger:stars] forKey:key];
     }
     
-    [self saveCache];
-    
 }
 
 - (NSInteger)getMaxStarsForSong:(NSInteger)songId
@@ -1573,8 +1595,6 @@
     {
         [m_scoreCache setObject:[NSNumber numberWithInteger:score] forKey:key];
     }
-    
-    [self saveCache];
     
 }
 
