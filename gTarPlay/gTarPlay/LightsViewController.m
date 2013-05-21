@@ -104,8 +104,7 @@ typedef enum
     self = [super initWithNibName:@"LightsViewController" bundle:nil];
     if (self) {
         
-        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self selector:@selector(exitingFreePlay:) name:@"ExitFreePlay" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willExitFreePlay:) name:@"ExitFreePlay" object:nil];
 
         RGBColor *white = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:3] autorelease];
         RGBColor *red = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:0] autorelease];
@@ -175,7 +174,12 @@ typedef enum
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
+    [g_gtarController removeObserver:self];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ExitFreePlay" object:nil];
+    
     [_generalSurface release];
     [_fretSurface release];
     [_stringSurface release];
@@ -199,7 +203,7 @@ typedef enum
 }
 
 
-- (void) exitingFreePlay:(NSNotification *) notification
+- (void) willExitFreePlay:(NSNotification *) notification
 {
     [self stopLoop];
 }

@@ -23,8 +23,7 @@ extern AudioController * g_audioController;
 {
     self = [super initWithNibName:@"FPMenuViewController" bundle:nil];
     if (self) {
-        // Custom initialization
-        g_audioController.m_delegate = self;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
     }
     return self;
 }
@@ -43,7 +42,7 @@ extern AudioController * g_audioController;
     [self.toneSlider setThumbImage:sliderKnob forState:UIControlStateNormal];
     
     // Customize audio route switch
-    self.audioRouteSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
+    self.audioRouteSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
     self.audioRouteSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.audioRouteSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
 }
@@ -56,10 +55,10 @@ extern AudioController * g_audioController;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
+    
     [_toneSlider release];
     [_audioRouteSwitch release];
-    
-    g_audioController.m_delegate = nil;
     
     [super dealloc];
 }
@@ -92,29 +91,29 @@ extern AudioController * g_audioController;
     [self.parentViewController.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - AudioController Delegate
-
--(void) audioRouteChanged:(bool)routeIsSpeaker
+- (void) didChangeAudioRoute:(NSNotification *) notification
 {
+    NSDictionary *data = [notification userInfo];
+    BOOL routeIsSpeaker = [[data objectForKey:@"isRouteSpeaker"] boolValue];
     /*
      TODO telemetry
-    // Telemetetry log -- invert the speaker route so we log the previous state
-    NSString* route = !m_bSpeakerRoute ? @"Speaker" : @"Aux";
-    
-    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
-    
-    // Avoid the first setting
-    if ( delta > 0 )
-    {
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         route, @"AudioRoute",
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
-        
-        [m_audioRouteTimeStart release];
-        m_audioRouteTimeStart = [[NSDate date] retain];
-    }
+     // Telemetetry log -- invert the speaker route so we log the previous state
+     NSString* route = !m_bSpeakerRoute ? @"Speaker" : @"Aux";
+     
+     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
+     
+     // Avoid the first setting
+     if ( delta > 0 )
+     {
+     [g_telemetryController logEvent:GtarFreePlayToggleFeature
+     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+     route, @"AudioRoute",
+     [NSNumber numberWithInteger:delta], @"PlayTime",
+     nil]];
+     
+     [m_audioRouteTimeStart release];
+     m_audioRouteTimeStart = [[NSDate date] retain];
+     }
      */
     
     if (routeIsSpeaker)
@@ -124,19 +123,6 @@ extern AudioController * g_audioController;
     else
     {
         [self.audioRouteSwitch setOn:YES];
-    }
-    
-    // The global volume slider is not available when audio is routed to lineout.
-    // If the audio is not being outputed to lineout hide the global volume slider,
-    // and display our own slider that controlls volume in this mode.
-    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-    if ([routeName isEqualToString:@"LineOut"])
-    {
-        // TODO tell volume slider widget what to display
-    }
-    else
-    {
-        // TODO tell volume slider widget what to display
     }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];

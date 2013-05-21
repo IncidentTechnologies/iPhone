@@ -40,7 +40,7 @@ enum PlayViewControllerDifficulty
     PlayViewControllerDifficultyHard
 };
 
-@interface PlayViewController : MainEventController <GtarControllerObserver, NSSongModelDelegate, AudioControllerDelegate>
+@interface PlayViewController : MainEventController <GtarControllerObserver, NSSongModelDelegate>
 
 @property (retain, nonatomic) IBOutlet EAGLView *glView;
 @property (retain, nonatomic) IBOutlet UIView *menuView;

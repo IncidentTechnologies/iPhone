@@ -101,6 +101,7 @@
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
+    [selectionColor release];
     
     return cell;
 }

@@ -118,6 +118,8 @@ extern TelemetryController * g_telemetryController;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResignActive) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
     }
     return self;
 }
@@ -215,9 +217,6 @@ extern TelemetryController * g_telemetryController;
     // The first time we load this up, parse the song
     _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom];
     
-    // Also create the AC using the instrument from the song
-    g_audioController.m_delegate = self;
-    
     // We let the previous screen set the sample pack of this song.
 //    [g_audioController setSamplePackWithName:_song.m_instrument];
     [g_audioController startAUGraph];
@@ -257,6 +256,8 @@ extern TelemetryController * g_telemetryController;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
+    
     [g_gtarController turnOffAllLeds];
     [g_gtarController removeObserver:self];
     
@@ -290,8 +291,6 @@ extern TelemetryController * g_telemetryController;
     [_audioRouteTimeStart release];
     
     [_metronomeTimeStart release];
-    
-    g_audioController.m_delegate = nil;
     
     [g_audioController stopAUGraph];
     [g_audioController reset];
@@ -584,25 +583,10 @@ extern TelemetryController * g_telemetryController;
     if ( _speakerRoute == YES )
     {
         [_outputSwitch setOn:YES];
-        [_volumeViewController enableAppleSlider];
     }
     else
     {
         [_outputSwitch setOn:NO];
-        
-        // The global volume slider is not available when audio is routed to LineOut.
-        // If the audio is not being output to LineOut, hide the global volume slider,
-        // and display our own slider that controls volume in this mode.
-        NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-
-        if ([routeName isEqualToString:@"LineOut"])
-        {
-            [_volumeViewController enableManualSlider];
-        }
-        else
-        {
-            [_volumeViewController enableAppleSlider];
-        }
     }
     
     // Invert it so we log the route we came from
@@ -1667,11 +1651,9 @@ extern TelemetryController * g_telemetryController;
     
 }
 
-#pragma mark - AudioControllerDelegate
-
--(void)audioRouteChanged:(bool)routeIsSpeaker
+- (void)didChangeAudioRoute:(NSNotification *) notification
 {
-    _speakerRoute = routeIsSpeaker;
+    _speakerRoute = [[[notification userInfo] objectForKey:@"isRouteSpeaker"] boolValue];
     
     [self updateAudioState];
 }

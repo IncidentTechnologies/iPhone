@@ -38,10 +38,6 @@ enum AudioSource
     SquareWave
 };
 
-@protocol AudioControllerDelegate <NSObject>
--(void) audioRouteChanged:(bool)routeIsSpeaker;
-@end
-
 @interface AudioController : NSObject 
 {
 	// Audio Graph Members
@@ -82,8 +78,6 @@ enum AudioSource
     std::vector<Effect*> m_effects;
     
 }
-
-@property (nonatomic, assign) id<AudioControllerDelegate> m_delegate;
 
 @property (assign) float frequency;
 @property (assign) double sinPhase;

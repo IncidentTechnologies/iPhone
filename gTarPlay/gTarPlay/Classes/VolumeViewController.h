@@ -20,7 +20,4 @@
 
 - (IBAction)volumeValueChanged:(id)sender;
 
-- (void)enableAppleSlider;
-- (void)enableManualSlider;
-
 @end

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <AudioController/AudioController.h>
 
-@interface FPMenuViewController : UIViewController <AudioControllerDelegate>
+@interface FPMenuViewController : UIViewController
 
 @end

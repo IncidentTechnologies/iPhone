@@ -65,7 +65,7 @@ typedef enum
     NUM_LEDLoop_ENTRIES // keep track of the number of entries in this enum
 } LEDLoop;
 
-@interface FreePlayController: MainEventController <GtarControllerObserver, AudioControllerDelegate, XYInputViewDelegate>
+@interface FreePlayController: MainEventController <GtarControllerObserver, XYInputViewDelegate>
 {
     IBOutlet UIActivityIndicatorView * m_activityIndicatorView;
     IBOutlet UIView * m_connectingView;

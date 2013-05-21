@@ -44,7 +44,7 @@ extern TelemetryController * g_telemetryController;
 @property (retain, nonatomic) VolumeViewController *volumeVC;
 
 @property (retain, nonatomic) IBOutlet UIView *mainContentView;
-@property (retain, nonatomic) UIViewController *currentMainContentVC;
+@property (assign, nonatomic) UIViewController *currentMainContentVC;
 
 @property (retain, nonatomic) IBOutlet UIButton *menuButton;
 @property (retain, nonatomic) IBOutlet UIButton *volumeButton;
@@ -195,7 +195,11 @@ extern TelemetryController * g_telemetryController;
     
     [g_gtarController removeObserver:self];
     
-    [_currentMainContentVC release];
+    [_instrumentsAndEffectsVC release];
+    [_lightsVC release];
+    [_fpMenuVC release];
+    [_volumeVC release];
+    
     [m_harmonizer release];
     [m_volumeView release];
     [m_activityIndicatorView release];
@@ -246,9 +250,6 @@ extern TelemetryController * g_telemetryController;
     [m_instrumentTimeStart release];
     [m_scaleTimeStart release];
     
-    // Unregister the AudioController Delegate
-    g_audioController.m_delegate = nil;
-    
     // Turn off all LEDs
     [g_gtarController turnOffAllLeds];
 
@@ -277,7 +278,7 @@ extern TelemetryController * g_telemetryController;
     [self addChildViewController:self.instrumentsAndEffectsVC];
     [self.mainContentView addSubview:self.instrumentsAndEffectsVC.view];
     [self.instrumentsAndEffectsVC didMoveToParentViewController:self];
-    self.currentMainContentVC = self.instrumentsAndEffectsVC;
+    _currentMainContentVC = self.instrumentsAndEffectsVC;
     
     [_arrowMenu addShadow];
     [_arrowLights addShadow];
@@ -1744,13 +1745,13 @@ extern TelemetryController * g_telemetryController;
 {
     [_volumeVC closeView:YES];
     
-    if (self.currentMainContentVC ==  newVC)
+    if (_currentMainContentVC ==  newVC)
     {
         // already on this view, do nothing
         return;
     }
     
-    UIViewController *oldVC = self.currentMainContentVC;
+    UIViewController *oldVC = _currentMainContentVC;
     
     [oldVC willMoveToParentViewController:nil];
     
@@ -1762,7 +1763,7 @@ extern TelemetryController * g_telemetryController;
         completion:^(BOOL finished) {
             [oldVC removeFromParentViewController];
             [newVC didMoveToParentViewController:self];
-            self.currentMainContentVC = newVC;
+            _currentMainContentVC = newVC;
         }];
 }
 

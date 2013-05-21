@@ -29,7 +29,6 @@ const float g_GraphSampleRate = 44100.0f;
 
 @implementation AudioController
 
-@synthesize m_delegate;
 @synthesize frequency;
 @synthesize sinPhase;
 @synthesize m_fNoteOn;
@@ -118,8 +117,6 @@ const float g_GraphSampleRate = 44100.0f;
         // setup compressor
         m_LimiterOn = true;
         m_pCompressor = new Compressor(.97, 3, 1, 5000, g_GraphSampleRate);
-        
-        m_delegate = nil;
         
         if (SamplerSource == m_audioSource)
         {
@@ -583,7 +580,10 @@ void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID
     
     bool routeIsSpeaker = [(NSString*)newRoute isEqualToString:(NSString*)kAudioSessionOutputRoute_BuiltInSpeaker];
     
-    [ac.m_delegate audioRouteChanged:routeIsSpeaker];
+    NSDictionary *routeData = [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithBool:routeIsSpeaker], @"isRouteSpeaker",
+            (NSString*)newRoute, @"routeName", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AudioRouteChange" object:ac userInfo:routeData];
     
     [ac AnnounceAudioRouteChange];
 }

@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 extern AudioController * g_audioController;
 
@@ -30,7 +31,7 @@ extern AudioController * g_audioController;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
     {
-        // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
     }
     return self;
 }
@@ -84,6 +85,9 @@ extern AudioController * g_audioController;
     [_mpVolumeView setShowsRouteButton:NO];
     
     [_volumeView addSubview:_mpVolumeView];
+    
+    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
+    [self showVolumeSliderForRoute:routeName];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,6 +116,8 @@ extern AudioController * g_audioController;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
+    
     [_mpVolumeView release];
     [_sliderView release];
     [_volumeSlider release];
@@ -140,20 +146,33 @@ extern AudioController * g_audioController;
     _sliderView.transform = CGAffineTransformMakeRotation(-M_PI_2);
 }
 
-- (void)enableAppleSlider
+- (void)didChangeAudioRoute:(NSNotification *) notification
 {
-    [_volumeView setHidden:NO];
-    [_volumeTrackView setHidden:NO];
-    
-    [_volumeSlider setHidden:YES];
+    NSString * routeName = [[notification userInfo] objectForKey:@"routeName"];
+    [self showVolumeSliderForRoute:routeName];
 }
 
-- (void)enableManualSlider
+// The global volume slider is not available when audio is routed to lineout.
+// If the audio is not being outputed to lineout hide the global volume slider,
+// and display our own slider that controlls volume in this mode.
+- (void)showVolumeSliderForRoute:(NSString*)routeName
 {
-    [_volumeView setHidden:YES];
-    [_volumeTrackView setHidden:YES];
-    
-    [_volumeSlider setHidden:NO];
+    if ([routeName isEqualToString:(NSString*)kAudioSessionOutputRoute_LineOut])
+    {
+        // show custom volume view
+        [_volumeView setHidden:YES];
+        [_volumeTrackView setHidden:YES];
+        
+        [_volumeSlider setHidden:NO];
+    }
+    else
+    {
+        // show standard MPVolumeView
+        [_volumeView setHidden:NO];
+        [_volumeTrackView setHidden:NO];
+        
+        [_volumeSlider setHidden:YES];
+    }
 }
 
 @end
