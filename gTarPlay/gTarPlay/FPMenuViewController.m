@@ -132,11 +132,11 @@ extern AudioController * g_audioController;
     NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
     if ([routeName isEqualToString:@"LineOut"])
     {
-        // TODO tell volume slider widget what to display
+        
     }
     else
     {
-        // TODO tell volume slider widget what to display
+        
     }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];

@@ -95,6 +95,7 @@ extern TelemetryController * g_telemetryController;
     BOOL _speakerRoute;
     BOOL _skipNotes;
     BOOL _menuIsOpen;
+    BOOL _songUploadQueueFull;
 }
 
 @end
@@ -240,7 +241,7 @@ extern TelemetryController * g_telemetryController;
     // Observe the global guitar controller. This will call guitarConnected when it is connected.
     // This in turn starts the game mode.
     [g_gtarController addObserver:self];
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -380,7 +381,13 @@ extern TelemetryController * g_telemetryController;
     
     if ( _feedSwitch.isOn == YES )
     {
+        // This implicitly saves the user cache
         [self uploadUserSongSession];
+    }
+    else
+    {
+        // Otherwise, we should do it manually
+        [g_userController saveCache];
     }
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -466,7 +473,17 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)feedSwitchChanged:(id)sender
 {
-    
+    if ( [g_userController isUserSongSessionQueueFull] == YES && _feedSwitch.isOn == YES )
+    {
+        [_feedSwitch setOn:NO];
+
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Cannot Post"
+                                                         message:@"The upload queue is full, cannot post songs until network connectivity restored."
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil] autorelease];
+        [alert show];
+    }
 }
 
 - (IBAction)difficultyButtonClicked:(id)sender
@@ -1641,6 +1658,12 @@ extern TelemetryController * g_telemetryController;
     [_completionLabel setHidden:NO];
     [_finishButton setHidden:NO];
     [_backButton setEnabled:NO];
+    
+    // If our queue is full, don't let them upload more songs
+    if ( [g_userController isUserSongSessionQueueFull] == YES )
+    {
+        [_feedSwitch setOn:NO];
+    }
     
     [self menuButtonClicked:nil];
     

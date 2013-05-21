@@ -54,10 +54,32 @@ extern GtarController *g_gtarController;
     [_knobView addShadowWithRadius:6.0];
     [_playButton addShadowWithRadius:2.0 andOpacity:0.5];
     
-    // Connect to the gtar
-    [_songPlaybackController observeGtarController:g_gtarController];
-    
     [self updateScrollable];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ( _songPlaybackController == nil )
+    {
+        _songPlaybackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
+    }
+    
+    _init = NO;
+    
+    [self performSelectorInBackground:@selector(backgroundLoading) withObject:nil];
+    
+    // Start the progress bar at zero when we open up.
+    _fillView.layer.transform = CATransform3DMakeTranslation( 0, 0, 0 );
+    
+    [_songPlaybackController observeGtarController:g_gtarController];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_songPlaybackController ignoreGtarController:g_gtarController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,6 +103,18 @@ extern GtarController *g_gtarController;
     [_indicatorView release];
     
     [super dealloc];
+}
+
+// This loads the preview song in the background
+- (void)backgroundLoading
+{
+    @synchronized( self )
+    {
+        [_songPlaybackController observeGtarController:g_gtarController];
+        [_songPlaybackController startWithXmpBlob:_xmpBlob];
+        [_songPlaybackController stopMainEventLoop];
+        _init = YES;
+    }
 }
 
 - (void)attachToSuperview:(UIView *)view
@@ -107,16 +141,7 @@ extern GtarController *g_gtarController;
     [_xmpBlob release];
     _xmpBlob = [xmpBlob retain];
     
-    // Do this now because the AC might not be ready sooner 
-    if ( _songPlaybackController == nil )
-    {
-        _songPlaybackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
-    }
-    
-    [_songPlaybackController startWithXmpBlob:_xmpBlob];
-    [_songPlaybackController stopMainEventLoop];
-    
-    [self updateProgress];
+//    [self updateProgress];
 }
 
 - (void)setScrollable:(BOOL)scrollable
@@ -151,8 +176,6 @@ extern GtarController *g_gtarController;
     [_songPlaybackController pauseSong];
     
     [self pauseUpdating];
-    
-    
 }
 
 - (void)startUpdating
@@ -207,15 +230,20 @@ extern GtarController *g_gtarController;
     {
         [_playButton setSelected:YES];
         
-//        if ( _init == NO )
-//        {
-//            [_songPlaybackController startWithXmpBlob:_xmpBlob];
-//            [self updateProgress];
-//            _init = YES;
-//        }
-//        else
+        // Do this now because the AC might not be ready sooner
+        @synchronized( self )
         {
-            [_songPlaybackController playSong];
+//            if ( _init == NO )
+//            {
+//                _init = YES;
+//                
+//                [_songPlaybackController observeGtarController:g_gtarController];
+//                [_songPlaybackController startWithXmpBlob:_xmpBlob];
+//            }
+//            else
+            {
+                [_songPlaybackController playSong];
+            }
         }
         
         [self startUpdating];
@@ -246,10 +274,10 @@ extern GtarController *g_gtarController;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-//    if ( _init == NO )
-//    {
-//        return;
-//    }
+    if ( _init == NO )
+    {
+        return;
+    }
     
     UITouch *touch = [[touches allObjects] objectAtIndex:0];
     CGPoint currentPoint = [touch locationInView:self.view];
@@ -266,10 +294,10 @@ extern GtarController *g_gtarController;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-//    if ( _init == NO )
-//    {
-//        return;
-//    }
+    if ( _init == NO )
+    {
+        return;
+    }
     
     if ( _scrollable == NO )
     {

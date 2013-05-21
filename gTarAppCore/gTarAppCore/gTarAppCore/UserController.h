@@ -115,6 +115,7 @@
 - (void)setFollowsSessionsForUserId:(NSInteger)userId toList:(NSArray*)list;
 
 // Uploading
+- (BOOL)isUserSongSessionQueueFull;
 - (void)queueUserSongSession:(UserSongSession*)songSession;
 //- (void)queueAndSendUserSongSession:(UserSongSession*)songSession;
 - (void)finishedUploadingSession:(UserSongSession*)songSession;
