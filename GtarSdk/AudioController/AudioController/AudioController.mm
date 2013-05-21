@@ -216,6 +216,13 @@ const float g_GraphSampleRate = 44100.0f;
 
 - (bool) FretDown:(int)fret onString:(int)string
 {
+    Boolean running = false;
+	AUGraphIsRunning(augraph, &running);
+    if (running)
+    {
+        return false;
+    }
+    
     if (SamplerSource == m_audioSource)
     {
         [m_sampler FretDown:fret onString:string];
