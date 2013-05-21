@@ -19,7 +19,7 @@
 @class GtarController;
 
 extern AudioController *g_audioController;
-extern GtarController *g_gtarController;
+//extern GtarController *g_gtarController;
 
 @interface PlayerViewController ()
 {
@@ -73,13 +73,13 @@ extern GtarController *g_gtarController;
     // Start the progress bar at zero when we open up.
     _fillView.layer.transform = CATransform3DMakeTranslation( 0, 0, 0 );
     
-    [_songPlaybackController observeGtarController:g_gtarController];
+//    [_songPlaybackController observeGtarController:g_gtarController];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [_songPlaybackController ignoreGtarController:g_gtarController];
+//    [_songPlaybackController ignoreGtarController:g_gtarController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,7 +90,7 @@ extern GtarController *g_gtarController;
 
 - (void)dealloc
 {
-    [_songPlaybackController ignoreGtarController:g_gtarController];
+//    [_songPlaybackController ignoreGtarController:g_gtarController];
     [_songPlaybackController release];
     [_userSong release];
     
@@ -110,7 +110,6 @@ extern GtarController *g_gtarController;
 {
     @synchronized( self )
     {
-        [_songPlaybackController observeGtarController:g_gtarController];
         [_songPlaybackController startWithXmpBlob:_xmpBlob];
         [_songPlaybackController stopMainEventLoop];
         _init = YES;
@@ -131,9 +130,6 @@ extern GtarController *g_gtarController;
     
     [_songTitle setText:_userSong.m_author];
     [_songArtist setText:_userSong.m_title];
-    
-//    _init = NO;
-    
 }
 
 - (void)setXmpBlob:(NSString *)xmpBlob
@@ -233,17 +229,14 @@ extern GtarController *g_gtarController;
         // Do this now because the AC might not be ready sooner
         @synchronized( self )
         {
-//            if ( _init == NO )
-//            {
-//                _init = YES;
-//                
-//                [_songPlaybackController observeGtarController:g_gtarController];
-//                [_songPlaybackController startWithXmpBlob:_xmpBlob];
-//            }
-//            else
+            if ( _init == NO )
             {
-                [_songPlaybackController playSong];
+                _init = YES;
+
+//                [_songPlaybackController observeGtarController:g_gtarController];
             }
+            
+            [_songPlaybackController playSong];
         }
         
         [self startUpdating];

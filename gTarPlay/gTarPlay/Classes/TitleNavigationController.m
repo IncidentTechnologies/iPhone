@@ -48,6 +48,7 @@ extern TelemetryController * g_telemetryController;
 #define SIGNUP_USERNAME_INVALID @"Invalid Username"
 #define SIGNUP_USERNAME_INVALID_FIRSTLETTER @"Username must begin with a letter"
 #define SIGNUP_PASSWORD_INVALID @"Invalid Password"
+#define SIGNUP_PASSWORD_INVALID_LENGTH @"Password must be at least 8 letters"
 #define SIGNUP_EMAIL_INVALID @"Invalid Email"
 #define SIGNIN_USERNAME_INVALID @"Invalid Username"
 #define SIGNIN_PASSWORD_INVALID @"Invalid Password"
@@ -354,6 +355,7 @@ extern TelemetryController * g_telemetryController;
     [self disableButton:_gatekeeperVideoButton];
     [self enableButton:_gatekeeperSigninButton];
     [self enableButton:_gatekeeperWebsiteButton];
+    [self hideNotification];
     
     // Open the video so we can grab a still image.
     if ( _videoPreviewImage.image == nil )
@@ -379,6 +381,8 @@ extern TelemetryController * g_telemetryController;
     
     [self disableButton:_loggedoutSigninButton];
     [self enableButton:_loggedoutSignupButton];
+    [self hideNotification];
+    
     [[_profileButton superview] setHidden:YES];
 }
 
@@ -397,6 +401,8 @@ extern TelemetryController * g_telemetryController;
     [self enableButton:_menuPlayButton];
     [self enableButton:_menuFreePlayButton];
 //    [self enableButton:_menuStoreButton];
+    
+    [self hideNotification];
     
     [[_profileButton superview] setHidden:NO];
     
@@ -578,17 +584,26 @@ extern TelemetryController * g_telemetryController;
     }
     
 //    NSCharacterSet * alphaNumChars = [NSCharacterSet alphanumericCharacterSet];
-//    NSCharacterSet * alphaChars = [NSCharacterSet letterCharacterSet];
-//    
-//    NSString * firstChar = [_signupUsernameText.text substringToIndex:1];
-//    
-//    // The first char of the username must be a letter
-//    if ( [firstChar rangeOfCharacterFromSet:alphaChars].location == NSNotFound )
-//    {
-//        [self displayNotification:SIGNUP_USERNAME_INVALID_FIRSTLETTER turnRed:YES];
-//        
-//        return;
-//    }
+    NSCharacterSet * alphaChars = [NSCharacterSet letterCharacterSet];
+    
+    NSString * firstChar = [_signupUsernameText.text substringToIndex:1];
+    
+    // The first char of the username must be a letter
+    if ( [firstChar rangeOfCharacterFromSet:alphaChars].location == NSNotFound )
+    {
+        [self displayNotification:SIGNUP_USERNAME_INVALID_FIRSTLETTER turnRed:YES];
+        
+        return;
+    }
+    
+    if ( [_signupPasswordText.text length] < 8 )
+    {
+        [self displayNotification:SIGNUP_PASSWORD_INVALID_LENGTH turnRed:YES];
+        
+        return;
+    }
+    
+    [self hideNotification];
     
     [self swapRightPanel:_loadingRightPanel];
     

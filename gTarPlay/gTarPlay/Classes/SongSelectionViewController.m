@@ -531,6 +531,11 @@ extern GtarController *g_gtarController;
 
 - (void)gtarDisconnected
 {
+    if ( self.presentedViewController != nil )
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
