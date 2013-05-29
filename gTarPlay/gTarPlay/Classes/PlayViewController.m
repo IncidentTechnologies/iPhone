@@ -452,7 +452,8 @@ extern AudioController * g_audioController;
 - (IBAction)restartButtonClicked:(id)sender
 {
     
-    if ( _feedSwitch.isOn == YES )
+    // Only upload at the end of a song
+    if ( _finishButton.isHidden == NO && _feedSwitch.isOn == YES )
     {
         [self uploadUserSongSession];
     }
@@ -534,7 +535,16 @@ extern AudioController * g_audioController;
             _scoreTracker.m_baseScore = 10;
         } break;
     }
-
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Play toggle difficulty" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                          _userSong.m_title, @"Title",
+                                                          [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                          [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                          nil]];
+    
     [self updateDifficultyDisplay];
 }
 
@@ -649,14 +659,14 @@ extern AudioController * g_audioController;
 //                                         nil]];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
-        [mixpanel track:@"Play toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [NSNumber numberWithInteger:delta], @"PlayTime",
-                                                           [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                                           _userSong.m_title, @"Title",
-                                                           [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                                           [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                                           route, @"AudioRoute",
-                                                           nil]];
+        [mixpanel track:@"Play toggle audio route" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                               _userSong.m_title, @"Title",
+                                                               [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                               [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                               route, @"AudioRoute",
+                                                               nil]];
         
         [_audioRouteTimeStart release];
         _audioRouteTimeStart = [[NSDate date] retain];
@@ -689,13 +699,13 @@ extern AudioController * g_audioController;
         
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
-        [mixpanel track:@"Play toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                                           _userSong.m_title, @"Title",
-                                                           [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                                           [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                                           @"On", @"Metronome",
-                                                           nil]];
+        [mixpanel track:@"Play toggle metronome" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                             _userSong.m_title, @"Title",
+                                                             [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                             [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                             @"On", @"Metronome",
+                                                             nil]];
 
         [_metronomeTimeStart release];
         _metronomeTimeStart = [[NSDate date] retain];
@@ -719,14 +729,14 @@ extern AudioController * g_audioController;
         
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
-        [mixpanel track:@"Play toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                                           _userSong.m_title, @"Title",
-                                                           [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                                           [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                                           @"Off", @"Metronome",
-                                                           [NSNumber numberWithInteger:delta], @"PlayTime",
-                                                           nil]];
+        [mixpanel track:@"Play toggle metronome" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                             _userSong.m_title, @"Title",
+                                                             [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                             [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                             @"Off", @"Metronome",
+                                                             [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                             nil]];
         
         [_metronomeTimeStart release];
         _metronomeTimeStart = [[NSDate date] retain];
@@ -805,10 +815,14 @@ extern AudioController * g_audioController;
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-    [mixpanel track:@"Play toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                       route, @"AudioRoute",
-                                                       [NSNumber numberWithInteger:delta], @"PlayTime",
-                                                       nil]];
+    [mixpanel track:@"Play toggle audio route" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                           [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                           _userSong.m_title, @"Title",
+                                                           [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                           [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                           route, @"AudioRoute",
+                                                           nil]];
     
     if ( _playMetronome == YES )
     {
@@ -825,14 +839,14 @@ extern AudioController * g_audioController;
 //                                         nil]];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
-        [mixpanel track:@"Play toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                                           _userSong.m_title, @"Title",
-                                                           [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                                           [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                                           @"Off", @"Metronome",
-                                                           [NSNumber numberWithInteger:delta], @"PlayTime",
-                                                           nil]];
+        [mixpanel track:@"Play toggle metronome" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                             _userSong.m_title, @"Title",
+                                                             [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                             [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                             @"Off", @"Metronome",
+                                                             [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                             nil]];
 
     }
     

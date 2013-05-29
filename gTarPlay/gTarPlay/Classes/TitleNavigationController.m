@@ -1200,15 +1200,8 @@ extern Facebook * g_facebook;
 //                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
 //                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
 //                                         nil]];
-        
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        
-        [mixpanel track:@"App login" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                 [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
-                                                 nil]];
-        
-        mixpanel.nameTag = g_cloudController.m_username;
-        
+        [self logLoginEvent];
+
         [g_userController sendPendingUploads];
         
 //        [g_telemetryController uploadLogMessages];
@@ -1254,14 +1247,7 @@ extern Facebook * g_facebook;
 //                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
 //                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
 //                                         nil]];
-        
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        
-        [mixpanel track:@"App login" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                 [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
-                                                 nil]];
-        
-        mixpanel.nameTag = g_cloudController.m_username;
+        [self logLoginEvent];
         
         [g_userController sendPendingUploads];
         
@@ -1307,15 +1293,8 @@ extern Facebook * g_facebook;
 //                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
 //                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
 //                                         nil]];
+        [self logLoginEvent];
         
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        
-        [mixpanel track:@"App login" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                 [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
-                                                 nil]];
-        
-        mixpanel.nameTag = g_cloudController.m_username;
-
         [g_userController sendPendingUploads];
         
 //        [g_telemetryController uploadLogMessages];
@@ -1399,6 +1378,38 @@ extern Facebook * g_facebook;
     {
         [_feedTable stopAnimating];
     }
+}
+
+- (void)logLoginEvent
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"App login" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                             [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+                                             nil]];
+    
+    mixpanel.nameTag = g_cloudController.m_username;
+    
+    NSMutableDictionary *dict = [[NSDictionary dictionaryWithObjectsAndKeys:
+                                  g_cloudController.m_username, @"$username",
+                                  nil] mutableCopy];
+    
+    if ( g_userController.m_loggedInUserProfile.m_firstName )
+    {
+        [dict setObject:g_userController.m_loggedInUserProfile.m_firstName forKey:@"$first_name"];
+    }
+    if ( g_userController.m_loggedInUserProfile.m_lastName )
+    {
+        [dict setObject:g_userController.m_loggedInUserProfile.m_firstName forKey:@"$last_name"];
+    }
+    if ( g_userController.m_loggedInUserProfile.m_email )
+    {
+        [dict setObject:g_userController.m_loggedInUserProfile.m_email forKey:@"$email"];
+    }
+    
+    [mixpanel.people set:dict];
+    
+    [mixpanel identify:mixpanel.distinctId];
 }
 
 #pragma mark - FacebookDelegate

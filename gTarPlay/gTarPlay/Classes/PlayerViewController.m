@@ -112,7 +112,10 @@ extern AudioController *g_audioController;
     {
         [_songPlaybackController startWithXmpBlob:_xmpBlob];
         [_songPlaybackController stopMainEventLoop];
+        
         _init = YES;
+        
+        [_loadedInvocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
     }
 }
 
