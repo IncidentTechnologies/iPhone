@@ -4063,22 +4063,6 @@
 								<float key="scoringTypeFloat">40</float>
 								<int key="contentType">2</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="396712390">
-								<reference key="firstItem" ref="182052828"/>
-								<int key="firstAttribute">9</int>
-								<int key="relation">0</int>
-								<reference key="secondItem" ref="582952093"/>
-								<int key="secondAttribute">9</int>
-								<float key="multiplier">1</float>
-								<object class="IBLayoutConstant" key="constant">
-									<double key="value">0.0</double>
-								</object>
-								<float key="priority">1000</float>
-								<reference key="containingView" ref="292007374"/>
-								<int key="scoringType">9</int>
-								<float key="scoringTypeFloat">40</float>
-								<int key="contentType">2</int>
-							</object>
 							<object class="IBNSLayoutConstraint" id="1067979493">
 								<reference key="firstItem" ref="182052828"/>
 								<int key="firstAttribute">3</int>
@@ -4418,11 +4402,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">2077</int>
 						<reference key="object" ref="1067979493"/>
-						<reference key="parent" ref="292007374"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">2125</int>
-						<reference key="object" ref="396712390"/>
 						<reference key="parent" ref="292007374"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -5966,7 +5945,6 @@
 					<reference ref="540939705"/>
 					<reference ref="55383260"/>
 					<reference ref="1067979493"/>
-					<reference ref="396712390"/>
 					<reference ref="226809460"/>
 					<reference ref="10626447"/>
 					<reference ref="376549397"/>
@@ -6080,7 +6058,6 @@
 				</array>
 				<boolean value="NO" key="2101.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="2107.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="2125.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2127.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2128.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2132.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

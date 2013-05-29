@@ -834,6 +834,21 @@
 		EC69BA4017160662004E982F /* PreviewProgressBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA3E17160662004E982F /* PreviewProgressBar.png */; };
 		EC69BA4317162163004E982F /* PauseButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA4217162163004E982F /* PauseButtonVideo.png */; };
 		EC69BA4417162163004E982F /* PauseButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA4217162163004E982F /* PauseButtonVideo.png */; };
+		EC7CAE80174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE73174DA940004E26DE /* MPCJSONDataSerializer.m */; };
+		EC7CAE81174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE73174DA940004E26DE /* MPCJSONDataSerializer.m */; };
+		EC7CAE82174DA940004E26DE /* MPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE75174DA940004E26DE /* MPCJSONSerializer.m */; };
+		EC7CAE83174DA940004E26DE /* MPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE75174DA940004E26DE /* MPCJSONSerializer.m */; };
+		EC7CAE84174DA940004E26DE /* MPCSerializedJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE77174DA940004E26DE /* MPCSerializedJSONData.m */; };
+		EC7CAE85174DA940004E26DE /* MPCSerializedJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE77174DA940004E26DE /* MPCSerializedJSONData.m */; };
+		EC7CAE86174DA940004E26DE /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7A174DA940004E26DE /* NSData+MPBase64.m */; };
+		EC7CAE87174DA940004E26DE /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7A174DA940004E26DE /* NSData+MPBase64.m */; };
+		EC7CAE88174DA940004E26DE /* ODIN.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7D174DA940004E26DE /* ODIN.m */; };
+		EC7CAE89174DA940004E26DE /* ODIN.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7D174DA940004E26DE /* ODIN.m */; };
+		EC7CAE8A174DA940004E26DE /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7F174DA940004E26DE /* Mixpanel.m */; };
+		EC7CAE8B174DA940004E26DE /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7F174DA940004E26DE /* Mixpanel.m */; };
+		EC7CAE8D174DAE97004E26DE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE8C174DAE97004E26DE /* AdSupport.framework */; };
+		EC7CAE8F174DAEA1004E26DE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE8E174DAEA1004E26DE /* SystemConfiguration.framework */; };
+		EC7CAE91174DAEAC004E26DE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE90174DAEAC004E26DE /* CoreTelephony.framework */; };
 		EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
 		EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
 		ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */; };
@@ -2381,6 +2396,21 @@
 		EC6BD1DD13F073FD0068E25C /* SongES1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongES1Renderer.m; sourceTree = "<group>"; };
 		EC6BD1FF13F44E130068E25C /* gTarColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarColors.h; sourceTree = "<group>"; };
 		EC71FA5A1429D17B00F06996 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		EC7CAE72174DA940004E26DE /* MPCJSONDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCJSONDataSerializer.h; sourceTree = "<group>"; };
+		EC7CAE73174DA940004E26DE /* MPCJSONDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCJSONDataSerializer.m; sourceTree = "<group>"; };
+		EC7CAE74174DA940004E26DE /* MPCJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCJSONSerializer.h; sourceTree = "<group>"; };
+		EC7CAE75174DA940004E26DE /* MPCJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCJSONSerializer.m; sourceTree = "<group>"; };
+		EC7CAE76174DA940004E26DE /* MPCSerializedJSONData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCSerializedJSONData.h; sourceTree = "<group>"; };
+		EC7CAE77174DA940004E26DE /* MPCSerializedJSONData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCSerializedJSONData.m; sourceTree = "<group>"; };
+		EC7CAE79174DA940004E26DE /* NSData+MPBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MPBase64.h"; sourceTree = "<group>"; };
+		EC7CAE7A174DA940004E26DE /* NSData+MPBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MPBase64.m"; sourceTree = "<group>"; };
+		EC7CAE7C174DA940004E26DE /* ODIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODIN.h; sourceTree = "<group>"; };
+		EC7CAE7D174DA940004E26DE /* ODIN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODIN.m; sourceTree = "<group>"; };
+		EC7CAE7E174DA940004E26DE /* Mixpanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixpanel.h; sourceTree = "<group>"; };
+		EC7CAE7F174DA940004E26DE /* Mixpanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mixpanel.m; sourceTree = "<group>"; };
+		EC7CAE8C174DAE97004E26DE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		EC7CAE8E174DAEA1004E26DE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EC7CAE90174DAEAC004E26DE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		EC7D887A1651CE86002E2F77 /* gTarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarNavigationController.h; sourceTree = "<group>"; };
 		EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarNavigationController.m; sourceTree = "<group>"; };
 		EC856EA214D74AAE00BB7783 /* Settings.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = Settings.bundle; sourceTree = "<group>"; };
@@ -2569,6 +2599,9 @@
 				EC24DC21161A841A00016B78 /* AudioToolbox.framework in Frameworks */,
 				EC24DC22161A841A00016B78 /* MediaPlayer.framework in Frameworks */,
 				EC24DC23161A841A00016B78 /* QuartzCore.framework in Frameworks */,
+				EC7CAE91174DAEAC004E26DE /* CoreTelephony.framework in Frameworks */,
+				EC7CAE8F174DAEA1004E26DE /* SystemConfiguration.framework in Frameworks */,
+				EC7CAE8D174DAE97004E26DE /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2622,6 +2655,7 @@
 			isa = PBXGroup;
 			children = (
 				EC6BD1FF13F44E130068E25C /* gTarColors.h */,
+				EC7CAE6F174DA940004E26DE /* Mixpanel */,
 				EC9D6EBB14A11DC600AE374D /* Facebook */,
 				080E96DDFE201D6D7F000001 /* App Source */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -2677,6 +2711,9 @@
 				EC87F3BA132AE2E2007DAEC9 /* AudioToolbox.framework */,
 				EC24A384133A994A00EA2FED /* MediaPlayer.framework */,
 				ECE3FC9F132CA6E5002812B6 /* QuartzCore.framework */,
+				EC7CAE90174DAEAC004E26DE /* CoreTelephony.framework */,
+				EC7CAE8E174DAEA1004E26DE /* SystemConfiguration.framework */,
+				EC7CAE8C174DAE97004E26DE /* AdSupport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3653,6 +3690,57 @@
 				EC69BA3E17160662004E982F /* PreviewProgressBar.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		EC7CAE6F174DA940004E26DE /* Mixpanel */ = {
+			isa = PBXGroup;
+			children = (
+				EC7CAE70174DA940004E26DE /* Library */,
+				EC7CAE7E174DA940004E26DE /* Mixpanel.h */,
+				EC7CAE7F174DA940004E26DE /* Mixpanel.m */,
+			);
+			path = Mixpanel;
+			sourceTree = "<group>";
+		};
+		EC7CAE70174DA940004E26DE /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				EC7CAE71174DA940004E26DE /* JSON */,
+				EC7CAE78174DA940004E26DE /* NSData_Base64 */,
+				EC7CAE7B174DA940004E26DE /* ODIN */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		EC7CAE71174DA940004E26DE /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				EC7CAE72174DA940004E26DE /* MPCJSONDataSerializer.h */,
+				EC7CAE73174DA940004E26DE /* MPCJSONDataSerializer.m */,
+				EC7CAE74174DA940004E26DE /* MPCJSONSerializer.h */,
+				EC7CAE75174DA940004E26DE /* MPCJSONSerializer.m */,
+				EC7CAE76174DA940004E26DE /* MPCSerializedJSONData.h */,
+				EC7CAE77174DA940004E26DE /* MPCSerializedJSONData.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		EC7CAE78174DA940004E26DE /* NSData_Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				EC7CAE79174DA940004E26DE /* NSData+MPBase64.h */,
+				EC7CAE7A174DA940004E26DE /* NSData+MPBase64.m */,
+			);
+			path = NSData_Base64;
+			sourceTree = "<group>";
+		};
+		EC7CAE7B174DA940004E26DE /* ODIN */ = {
+			isa = PBXGroup;
+			children = (
+				EC7CAE7C174DA940004E26DE /* ODIN.h */,
+				EC7CAE7D174DA940004E26DE /* ODIN.m */,
+			);
+			path = ODIN;
 			sourceTree = "<group>";
 		};
 		EC87EEDD13277B08007DAEC9 /* Images */ = {
@@ -5618,6 +5706,12 @@
 				ECDF7F6E173D5A72003E51EC /* IconButton.m in Sources */,
 				ECDF7F73173DFB38003E51EC /* UIButton+Gtar.m in Sources */,
 				ECFF773417440BA9002D7D40 /* FirmwareModalViewController.m in Sources */,
+				EC7CAE80174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */,
+				EC7CAE82174DA940004E26DE /* MPCJSONSerializer.m in Sources */,
+				EC7CAE84174DA940004E26DE /* MPCSerializedJSONData.m in Sources */,
+				EC7CAE86174DA940004E26DE /* NSData+MPBase64.m in Sources */,
+				EC7CAE88174DA940004E26DE /* ODIN.m in Sources */,
+				EC7CAE8A174DA940004E26DE /* Mixpanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5683,6 +5777,12 @@
 				ECDF7F6F173D5A72003E51EC /* IconButton.m in Sources */,
 				ECDF7F74173DFB38003E51EC /* UIButton+Gtar.m in Sources */,
 				ECFF773517440BA9002D7D40 /* FirmwareModalViewController.m in Sources */,
+				EC7CAE81174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */,
+				EC7CAE83174DA940004E26DE /* MPCJSONSerializer.m in Sources */,
+				EC7CAE85174DA940004E26DE /* MPCSerializedJSONData.m in Sources */,
+				EC7CAE87174DA940004E26DE /* NSData+MPBase64.m in Sources */,
+				EC7CAE89174DA940004E26DE /* ODIN.m in Sources */,
+				EC7CAE8B174DA940004E26DE /* Mixpanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,7 @@
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserResponse.h>
 #import <gTarAppCore/UserEntry.h>
-#import <gTarAppCore/TelemetryController.h>
+//#import <gTarAppCore/TelemetryController.h>
 #import <gTarAppCore/UserSongSession.h>
 #import <gTarAppCore/UserSong.h>
 #import <gTarAppCore/UserSongSessions.h>
@@ -27,6 +27,7 @@
 #import "VolumeViewController.h"
 #import "SlidingInstrumentViewController.h"
 #import "UIView+Gtar.h"
+#import "Mixpanel.h"
 
 #import "ActivityFeedCell.h"
 #import "UserCommentCell.h"
@@ -42,7 +43,7 @@ extern FileController * g_fileController;
 extern GtarController * g_gtarController;
 extern UserController * g_userController;
 extern Facebook * g_facebook;
-extern TelemetryController * g_telemetryController;
+//extern TelemetryController * g_telemetryController;
 
 #define NOTIFICATION_GATEKEEPER_SIGNIN @"Please connect your gTar to sign up for an account."
 #define SIGNUP_USERNAME_INVALID @"Invalid Username"
@@ -1120,11 +1121,18 @@ extern TelemetryController * g_telemetryController;
     
     NSLog(@"%@", msg);
     
-    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     msg, @"Status",
-                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     msg, @"Status",
+//                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Firmware update status" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          msg, @"Status",
+                                                          [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                                          nil]];
     
     [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusSucceededMain) withObject:nil waitUntilDone:YES];
 }
@@ -1147,12 +1155,19 @@ extern TelemetryController * g_telemetryController;
     
     NSLog(@"%@", msg);
     
-    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     msg, @"Status",
-                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     msg, @"Status",
+//                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+//                                     nil]];
     
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Firmware update status" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          msg, @"Status",
+                                                          [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                                          nil]];
+
     [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusFailedMain) withObject:nil waitUntilDone:YES];
 }
 
@@ -1181,14 +1196,22 @@ extern TelemetryController * g_telemetryController;
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         // we are logged in
-        [g_telemetryController logEvent:GtarPlayAppLogin
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarPlayAppLogin
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+//                                         nil]];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"App login" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                 [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+                                                 nil]];
+        
+        mixpanel.nameTag = g_cloudController.m_username;
         
         [g_userController sendPendingUploads];
         
-        [g_telemetryController uploadLogMessages];
+//        [g_telemetryController uploadLogMessages];
         
         [self hideNotification];
         
@@ -1227,14 +1250,22 @@ extern TelemetryController * g_telemetryController;
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         // we are logged in
-        [g_telemetryController logEvent:GtarPlayAppLogin
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarPlayAppLogin
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+//                                         nil]];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"App login" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                 [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+                                                 nil]];
+        
+        mixpanel.nameTag = g_cloudController.m_username;
         
         [g_userController sendPendingUploads];
         
-        [g_telemetryController uploadLogMessages];
+//        [g_telemetryController uploadLogMessages];
         
         [self hideNotification];
         
@@ -1272,14 +1303,22 @@ extern TelemetryController * g_telemetryController;
     
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
-        [g_telemetryController logEvent:GtarPlayAppLogin
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarPlayAppLogin
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"App login" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                 [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
+                                                 nil]];
+        
+        mixpanel.nameTag = g_cloudController.m_username;
+
         [g_userController sendPendingUploads];
         
-        [g_telemetryController uploadLogMessages];
+//        [g_telemetryController uploadLogMessages];
         
         [self loggedinScreen];
         
@@ -1524,11 +1563,18 @@ extern TelemetryController * g_telemetryController;
     
     NSLog(@"%@", msg);
     
-    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     msg, @"Status",
-                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     msg, @"Status",
+//                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Firmware update status" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          msg, @"Status",
+                                                          [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                                          nil]];
     
     NSData *firmware = [g_fileController getFileOrDownloadSync:_firmwareFileId];
     
@@ -1539,12 +1585,19 @@ extern TelemetryController * g_telemetryController;
         
         NSLog(@"%@", msg);
         
-        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         msg, @"Status",
-                                         [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         msg, @"Status",
+//                                         [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+//                                         nil]];
+
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
+        [mixpanel track:@"Firmware update status" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                              msg, @"Status",
+                                                              [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                                              nil]];
+
         [self dismissViewControllerAnimated:YES completion:nil];
         
         UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Failed"
@@ -1568,11 +1621,18 @@ extern TelemetryController * g_telemetryController;
         
         NSLog(@"%@", msg);
         
-        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         msg, @"Status",
-                                         [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         msg, @"Status",
+//                                         [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+//                                         nil]];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"Firmware update status" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                              msg, @"Status",
+                                                              [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
+                                                              nil]];
         
         [self dismissViewControllerAnimated:YES completion:nil];
         
