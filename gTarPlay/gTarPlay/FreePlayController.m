@@ -6,13 +6,21 @@
 //  Copyright 2011 Msft. All rights reserved.
 //
 
+
 #import "FreePlayController.h"
+
+#import "InstrumentsAndEffectsViewController.h"
+#import "LightsViewController.h"
+#import "FPMenuViewController.h"
+#import "VolumeViewController.h"
+
 #import "TransparentAreaView.h"
 #import "CustomComboBox.h"
 #import "RGBColor.h"
 #import "Harmonizer.h"
 
 #import <MediaPlayer/MediaPlayer.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import <AudioController/Effect.h>
 #import <AudioController/Parameter.h>
@@ -20,11 +28,41 @@
 #import <GtarController/GtarController.h>
 
 #import <gTarAppCore/AppCore.h>
-#import <gTarAppCore/TelemetryController.h>
+//#import <gTarAppCore/TelemetryController.h>
+
+#import "UIView+Gtar.h"
+#import "Mixpanel.h"
 
 extern GtarController * g_gtarController;
 extern AudioController * g_audioController;
-extern TelemetryController * g_telemetryController;
+//extern TelemetryController * g_telemetryConstroller;
+
+@interface FreePlayController ()
+
+@property (retain, nonatomic) InstrumentsAndEffectsViewController *instrumentsAndEffectsVC;
+@property (retain, nonatomic) LightsViewController *lightsVC;
+@property (retain, nonatomic) FPMenuViewController *fpMenuVC;
+@property (retain, nonatomic) VolumeViewController *volumeVC;
+
+@property (retain, nonatomic) IBOutlet UIView *mainContentView;
+@property (assign, nonatomic) UIViewController *currentMainContentVC;
+
+@property (retain, nonatomic) IBOutlet UIButton *menuButton;
+@property (retain, nonatomic) IBOutlet UIButton *volumeButton;
+@property (retain, nonatomic) IBOutlet UIButton *lightsButton;
+@property (retain, nonatomic) IBOutlet UIButton *effectsButton;
+@property (retain, nonatomic) IBOutlet UIButton *instrumentsButton;
+
+@property (retain, nonatomic) IBOutlet UIImageView *arrowMenu;
+@property (retain, nonatomic) IBOutlet UIImageView *arrowLights;
+@property (retain, nonatomic) IBOutlet UIImageView *arrowEffects;
+@property (retain, nonatomic) IBOutlet UIImageView *arrowInstruments;
+
+@property (retain, nonatomic) IBOutlet UIView *menuBarDropShadowView;
+
+-(void) switchMainContentControllerToVC:(UIViewController*)newVC;
+
+@end
 
 @implementation FreePlayController
 
@@ -39,7 +77,6 @@ extern TelemetryController * g_telemetryController;
 @synthesize m_connectingView;
 @synthesize m_xParamLabel;
 @synthesize m_yParamLabel;
-@synthesize m_effectsTabButton;
 @synthesize m_effect1OnOff;
 @synthesize m_effect1Select;
 @synthesize m_effect1Name;
@@ -53,14 +90,11 @@ extern TelemetryController * g_telemetryController;
 @synthesize m_effect4Select;
 @synthesize m_effect4Name;
 @synthesize m_instrumentsTab;
-@synthesize m_instrumentsTabButton;
 @synthesize m_instrumentsScroll;
 @synthesize m_menuTab;
-@synthesize m_menuTabButton;
 @synthesize m_toneSlider;
 @synthesize m_bSpeakerRoute;
 @synthesize m_LEDTab;
-@synthesize m_LEDTabButton;
 @synthesize m_LEDGeneralSurface;
 @synthesize m_LEDFretSurface;
 @synthesize m_LEDStringSurface;
@@ -84,10 +118,7 @@ extern TelemetryController * g_telemetryController;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if ( self )
-    {
-        
-        // Custom initialization
-        
+    {        
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
         
@@ -100,6 +131,11 @@ extern TelemetryController * g_telemetryController;
         m_instrumentTimeStart = [[NSDate date] retain];
         m_scaleTimeStart = [[NSDate date] retain];
         
+        _instrumentsAndEffectsVC = [[InstrumentsAndEffectsViewController alloc] initWithAudioController:g_audioController];
+        _lightsVC = [[LightsViewController alloc] init];
+        _fpMenuVC = [[FPMenuViewController alloc] init];
+        _volumeVC = [[VolumeViewController alloc] init];
+        
         for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
         {
             m_effectTimeStart[effect] = [[NSDate date] retain];
@@ -108,7 +144,6 @@ extern TelemetryController * g_telemetryController;
         m_playTimeAdjustment = 0;
         
         // Create audio controller
-        g_audioController.m_delegate = self;
         //[g_audioController initializeAUGraph];
         [g_audioController startAUGraph];
         
@@ -161,6 +196,11 @@ extern TelemetryController * g_telemetryController;
     
     [g_gtarController removeObserver:self];
     
+    [_instrumentsAndEffectsVC release];
+    [_lightsVC release];
+    [_fpMenuVC release];
+    [_volumeVC release];
+    
     [m_harmonizer release];
     [m_volumeView release];
     [m_activityIndicatorView release];
@@ -168,7 +208,6 @@ extern TelemetryController * g_telemetryController;
     [m_jamPad release];
     [m_wetSlider release];
     [m_effectsTab release];
-    [m_effectsTabButton release];
     [m_effect1OnOff release];
     [m_effect2OnOff release];
     [m_effect3OnOff release];
@@ -183,8 +222,6 @@ extern TelemetryController * g_telemetryController;
     [m_effect4Name release];
     [m_currentEffectName release];
     [m_instrumentsTab release];
-    [m_instrumentsTabButton release];
-    [m_menuTabButton release];
     [m_menuTab release];
     [m_toneSlider release];
     
@@ -200,8 +237,6 @@ extern TelemetryController * g_telemetryController;
     [m_LEDStringSurface release];
     [m_LEDAllSurface release];
     
-    [m_LEDTabButton release];
-    
     if (m_LEDTimer != nil)
     {
         [m_LEDTimer invalidate];
@@ -216,19 +251,50 @@ extern TelemetryController * g_telemetryController;
     [m_instrumentTimeStart release];
     [m_scaleTimeStart release];
     
-    // Unregister the AudioController Delegate
-    g_audioController.m_delegate = nil;
-    
     // Turn off all LEDs
     [g_gtarController turnOffAllLeds];
 
+    [_m_effectsScroll release];
+    [_mainContentView release];
+    [_menuButton release];
+    [_volumeButton release];
+    [_lightsButton release];
+    [_effectsButton release];
+    [_instrumentsButton release];
+    [_arrowMenu release];
+    [_arrowLights release];
+    [_arrowEffects release];
+    [_arrowInstruments release];
+    [_menuBarDropShadowView release];
 	[super dealloc];	
 }
+
 
 - (void)viewDidLoad
 {
 
     [super viewDidLoad];
+    
+    // Set up initial content VC to be instruments & effects.
+    [self addChildViewController:self.instrumentsAndEffectsVC];
+    [self.mainContentView addSubview:self.instrumentsAndEffectsVC.view];
+    [self.instrumentsAndEffectsVC didMoveToParentViewController:self];
+    _currentMainContentVC = self.instrumentsAndEffectsVC;
+    
+    [_arrowMenu addShadow];
+    [_arrowLights addShadow];
+    [_arrowEffects addShadow];
+    [_arrowInstruments addShadow];
+    
+    [_menuBarDropShadowView addShadow];
+    
+    // Set content mode so that UIButton images resize their width to be proportional
+    // to the height set in interface builder via the UIButtons content inset
+    [self.menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.lightsButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.effectsButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.instrumentsButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
 
     // images for slider
     UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
@@ -278,10 +344,6 @@ extern TelemetryController * g_telemetryController;
     [m_instrumentsTab setFrame:smallTabFrame];
     [m_menuTab setFrame:menuTabFrame];
     [m_LEDTab setFrame:largeTabFrame];
-    [m_effectsTabButton setSelected:NO];
-    [m_instrumentsTabButton setSelected:NO];
-    [m_menuTabButton setSelected:NO];
-    [m_LEDTabButton setSelected:NO];
     
     [m_effectsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_effectsTab.frame.size.width yMin:80 yMax:m_effectsTab.frame.size.height]; 
     [m_instrumentsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_instrumentsTab.frame.size.width yMin:0 yMax:80];
@@ -290,10 +352,10 @@ extern TelemetryController * g_telemetryController;
     [m_LEDTab addTransparentAreaWithXmin:m_LEDTab.frame.size.width - 30 xMax:m_LEDTab.frame.size.width yMin:225 yMax:m_LEDTab.frame.size.height];
     [m_menuTab addTransparentAreaWithXmin:(m_menuTab.frame.size.width - 30) xMax:m_menuTab.frame.size.width yMin:0 yMax:225];
 
-    [self.view addSubview:m_effectsTab];
+    /*[self.view addSubview:m_effectsTab];
     [self.view addSubview:m_instrumentsTab];
     [self.view addSubview:m_LEDTab];
-    [self.view addSubview:m_menuTab];
+    [self.view addSubview:m_menuTab];*/
     
     [m_instrumentsScroll setBackgroundColor:[UIColor clearColor]];
     NSArray *ar = [g_audioController getInstrumentNames];
@@ -302,22 +364,23 @@ extern TelemetryController * g_telemetryController;
     [instrumentScrollText insertObject:@"Keys" atIndex:4];
     [instrumentScrollText insertObject:@"Synths" atIndex:7];
     [m_instrumentsScroll populateWithText:instrumentScrollText];
-    [m_instrumentsScroll makeHeaderEntryAtIndex:0];
-    [m_instrumentsScroll makeHeaderEntryAtIndex:4];
-    [m_instrumentsScroll makeHeaderEntryAtIndex:7];
+    //[m_instrumentsScroll makeHeaderEntryAtIndex:0];
+    //[m_instrumentsScroll makeHeaderEntryAtIndex:4];
+    //[m_instrumentsScroll makeHeaderEntryAtIndex:7];
     // TODO: snap to the currently selected sample, not just the first. Currently we
     // can get the current sample index from the audioController, but this number will
     // not match directly the index in the instruments scroll, due to the extra header
     // entries
-    [m_instrumentsScroll snapToIndex:0];
+    //[m_instrumentsScroll snapToIndex:0];
     
     [instrumentScrollText release];
     
-    m_volumeView.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    m_effectsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    m_instrumentsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    m_menuTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    m_LEDTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    // nln - no longer needed
+    //m_volumeView.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    //m_effectsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    //m_instrumentsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    //m_menuTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    //m_LEDTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     
     // Set up effects tab. Set image to display when button is "selected"
@@ -334,13 +397,14 @@ extern TelemetryController * g_telemetryController;
     [m_effect4Select setImage:[UIImage imageNamed:@"EffectSelectOnButton.png"] forState:UIControlStateSelected];
 
     // set effects name
-    m_effects = [g_audioController GetEffects];
-    [m_effect1Name setText:[[NSString stringWithCString:m_effects[0]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
+    //m_effects = [g_audioController GetEffects];
+/*    [m_effect1Name setText:[[NSString stringWithCString:m_effects[0]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     [m_effect2Name setText:[[NSString stringWithCString:m_effects[1]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     [m_effect3Name setText:[[NSString stringWithCString:m_effects[2]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     [m_effect4Name setText:[[NSString stringWithCString:m_effects[3]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     
     [m_effect1Select setSelected:YES];
+ */
     
     // set custom images for sliders
     UIImage *sliderKnobImage = [UIImage imageNamed: @"Knob_BlueLine.png"];
@@ -385,7 +449,7 @@ extern TelemetryController * g_telemetryController;
     m_jamPad.transform = CGAffineTransformMakeScale(1, -1);
     m_jamPad.m_delegate = self;
     // Initialize jam pad with first effect in list
-    [self setupJamPadWithEffectAtIndex:0];
+//    [self setupJamPadWithEffectAtIndex:0];
     
     // Setup LED light tab
     [m_LEDGeneralSurface setBackgroundColor:[UIColor clearColor]];
@@ -410,6 +474,48 @@ extern TelemetryController * g_telemetryController;
     
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    CGRect frame = CGRectMake(_volumeButton.frame.origin.x, _mainContentView.frame.origin.y, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
+    _volumeVC.view.frame = frame;
+    
+    // if adjusting zPosition transform is not necessary remove this block and
+    // remove import of QuartzCore
+    /*
+    _volumeVC.view.layer.zPosition = 101;
+    _menuBarDropShadowView.layer.zPosition = 100;
+    
+    _arrowMenu.layer.zPosition = 101;
+    _volumeVC.triangleIndicatorImage.layer.zPosition = 101;
+    _arrowLights.layer.zPosition = 101;
+    _arrowEffects.layer.zPosition = 101;
+    _arrowInstruments.layer.zPosition = 101;
+    
+    _menuButton.layer.zPosition = 102;
+    _volumeButton.layer.zPosition = 102;
+    _lightsButton.layer.zPosition = 102;
+    _effectsButton.layer.zPosition = 102;
+    _instrumentsButton.layer.zPosition = 102;
+    */
+    
+    //_volumeVC.triangleIndicatorImage.layer.zPosition = 1000;
+    
+    [_instrumentsAndEffectsVC.view setFrame:_mainContentView.bounds];
+    [_lightsVC.view setFrame:_mainContentView.bounds];
+    [_fpMenuVC.view setFrame:_mainContentView.bounds];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    CGRect frame = CGRectMake(_volumeButton.frame.origin.x, _mainContentView.frame.origin.y, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
+    [_volumeVC attachToSuperview:self.view withFrame:frame];
+    
+}
+
 - (void)viewDidUnload
 {
     [self setM_jamPad:nil];
@@ -420,7 +526,6 @@ extern TelemetryController * g_telemetryController;
     self.m_connectingView = nil;
 
     [self setM_effectsTab:nil];
-    [self setM_effectsTabButton:nil];
     [self setM_effect1OnOff:nil];
     [self setM_effect2OnOff:nil];
     [self setM_effect3OnOff:nil];
@@ -434,7 +539,6 @@ extern TelemetryController * g_telemetryController;
     [self setM_effect3Name:nil];
     [self setM_effect4Name:nil];
     [self setM_currentEffectName:nil];
-    [self setM_menuTabButton:nil];
     [self setM_menuTab:nil];
     [self setM_toneSlider:nil];
     [self setM_instrumentsScroll:nil];
@@ -444,8 +548,6 @@ extern TelemetryController * g_telemetryController;
     [self setM_LEDFretSurface:nil];
     [self setM_LEDStringSurface:nil];
     [self setM_LEDAllSurface:nil];
-    
-    [self setM_LEDTabButton:nil];
     
     [self setM_audioRouteSwitch:nil];
     [self setM_scaleSwitch:nil];
@@ -488,37 +590,53 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     route, @"AudioRoute",
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     route, @"AudioRoute",
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     nil]];
     
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                           route, @"AudioRoute",
+                                                           [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                           nil]];
+
     NSString *instrumentName = [m_instrumentsScroll getNameAtIndex:[g_audioController getCurrentSamplePackIndex]];
     
     delta = [[NSDate date] timeIntervalSince1970] - [m_instrumentTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     instrumentName, @"Instrument",
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     instrumentName, @"Instrument",
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     nil]];
+    
+    [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                           instrumentName, @"Instrument",
+                                                           [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                           nil]];
     
     UIButton *effectButtons[FREE_PLAY_EFFECT_COUNT] = { m_effect1OnOff, m_effect2OnOff, m_effect3OnOff, m_effect4OnOff };
     
     for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
     {
-        NSString* name = [NSString stringWithCString:m_effects[effect]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
+        NSString* name = [g_audioController getEffectNames][effect];
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_effectTimeStart[effect] timeIntervalSince1970] + m_playTimeAdjustment;
         
         if ( [effectButtons[effect] isSelected] == YES )
         {
-            [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                             withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                             @"Off", name,
-                                             [NSNumber numberWithInteger:delta], @"PlayTime",
-                                             nil]];
+//            [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                             withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                             @"Off", name,
+//                                             [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                             nil]];
+            [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                   @"Off", name,
+                                                                   [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                                   nil]];
         }
         
         [m_effectTimeStart[effect] release];
@@ -596,10 +714,16 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarFreePlayDisconnected
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFreePlayDisconnected
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"FreePlay disconnected" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                         nil]];
     
     [self finalLogging];
 
@@ -1308,11 +1432,17 @@ extern TelemetryController * g_telemetryController;
         // Telemetetry log
         NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
         
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"On", name,
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         @"On", name,
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               @"On", name,
+                                                               nil]];
+
         [m_effectTimeStart[effectNum] release];
         m_effectTimeStart[effectNum] = [[NSDate date] retain];
         
@@ -1327,11 +1457,18 @@ extern TelemetryController * g_telemetryController;
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_effectTimeStart[effectNum] timeIntervalSince1970] + m_playTimeAdjustment;
         
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"Off", name,
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         @"Off", name,
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               @"Off", name,
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               nil]];
         
         [m_effectTimeStart[effectNum] release];
         m_effectTimeStart[effectNum] = [[NSDate date] retain];
@@ -1388,12 +1525,19 @@ extern TelemetryController * g_telemetryController;
     // Avoid the first setting
     if ( delta > 0 )
     {
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         instrumentName, @"Instrument",
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         instrumentName, @"Instrument",
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               instrumentName, @"Instrument",
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               nil]];
+
         [m_instrumentTimeStart release];
         m_instrumentTimeStart = [[NSDate date] retain];
     }
@@ -1423,17 +1567,29 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarFreePlayCompleted
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFreePlayCompleted
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"FreePlay completed" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                      [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                      nil]];
+
     [self finalLogging];
-     
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)toggleEffectsTab:(id)sender
 {
+    [self.instrumentsAndEffectsVC displayEffects];
+    [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
+    [self showArrow:_arrowEffects];
+    
+    /*
     // First toggle selected state
     [m_effectsTabButton setSelected:![m_effectsTabButton isSelected]];
     
@@ -1453,10 +1609,16 @@ extern TelemetryController * g_telemetryController;
     }
     
     [UIView commitAnimations];
+     */
 }
 
 - (IBAction)toggleInstrumentsTab:(id)sender
 {
+    [self.instrumentsAndEffectsVC displayInstruments];
+    [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
+    [self showArrow:_arrowInstruments];
+    
+    /*
     // First toggle selected state
     [m_instrumentsTabButton setSelected:![m_instrumentsTabButton isSelected]];
     
@@ -1475,10 +1637,22 @@ extern TelemetryController * g_telemetryController;
     }
     
     [UIView commitAnimations];
+     */
+}
+
+- (IBAction)toggleVolumeView:(id)sender
+{
+    [self.mainContentView bringSubviewToFront:_volumeVC.view];
+    [_volumeVC toggleView:YES];
 }
 
 - (IBAction)toggleLEDTab:(id)sender
 {
+    [self switchMainContentControllerToVC:self.lightsVC];
+    [self showArrow:_arrowLights];
+    
+    /*
+     OLD UI code
     // First toggle selected state
     [m_LEDTabButton setSelected:![m_LEDTabButton isSelected]];
     
@@ -1498,6 +1672,17 @@ extern TelemetryController * g_telemetryController;
     }
     
     [UIView commitAnimations];
+     */
+}
+
+- (void)showArrow:(UIView*)arrow
+{
+    _arrowMenu.hidden = YES;
+    _arrowLights.hidden = YES;
+    _arrowEffects.hidden = YES;
+    _arrowInstruments.hidden = YES;
+    
+    arrow.hidden = NO;
 }
 
 // Toggle between turning LEDs on/off to display a scale
@@ -1549,11 +1734,17 @@ extern TelemetryController * g_telemetryController;
     if ( [m_scaleSwitch isSelected] )
     {
         
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"On", @"ScaleLights",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         @"On", @"ScaleLights",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               @"On", @"ScaleLights",
+                                                               nil]];
+
         [m_scaleTimeStart release];
         m_scaleTimeStart = [[NSDate date] retain];
         
@@ -1563,12 +1754,19 @@ extern TelemetryController * g_telemetryController;
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_scaleTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"Off", @"ScaleLights",
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         @"Off", @"ScaleLights",
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               @"Off", @"ScaleLights",
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               nil]];
+
         [m_scaleTimeStart release];
         m_scaleTimeStart = [[NSDate date] retain];
         
@@ -1579,6 +1777,10 @@ extern TelemetryController * g_telemetryController;
 
 - (IBAction)toggleMenuTab:(id)sender
 {
+    [self switchMainContentControllerToVC:self.fpMenuVC];
+    [self showArrow:_arrowMenu];
+    
+    /*
     // First toggle selected state
     [m_menuTabButton setSelected:![m_menuTabButton isSelected]];
     
@@ -1598,6 +1800,34 @@ extern TelemetryController * g_telemetryController;
     }
         
     [UIView commitAnimations];
+     */
+}
+
+
+-(void) switchMainContentControllerToVC:(UIViewController *)newVC
+{
+    [_volumeVC closeView:YES];
+    
+    if (_currentMainContentVC ==  newVC)
+    {
+        // already on this view, do nothing
+        return;
+    }
+    
+    UIViewController *oldVC = _currentMainContentVC;
+    
+    [oldVC willMoveToParentViewController:nil];
+    
+    [self addChildViewController:newVC];
+    
+    [self transitionFromViewController:oldVC  toViewController:newVC duration:0.25
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:nil
+        completion:^(BOOL finished) {
+            [oldVC removeFromParentViewController];
+            [newVC didMoveToParentViewController:self];
+            _currentMainContentVC = newVC;
+        }];
 }
 
 
@@ -1633,12 +1863,18 @@ extern TelemetryController * g_telemetryController;
     // Avoid the first setting
     if ( delta > 0 )
     {
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         route, @"AudioRoute",
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         route, @"AudioRoute",
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               route, @"AudioRoute",
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               nil]];
         [m_audioRouteTimeStart release];
         m_audioRouteTimeStart = [[NSDate date] retain];
     }

@@ -59,7 +59,7 @@ typedef enum GTAR_RX_MSG_TYPE
     int m_firmwareCurrentPage;
     BOOL m_firmwareCancelation;
     BOOL m_firmwareUpdating;
-    
+    BOOL m_scaleVelocity;
 }
 
 - (BOOL)checkNoteInterarrivalTime:(double)time forFret:(GtarFret)fret andString:(GtarString)str;
@@ -103,6 +103,12 @@ typedef enum GTAR_RX_MSG_TYPE
 - (BOOL)sendNoteMessage:(unsigned char)midiVal channel:(unsigned char)channel withVelocity:(unsigned char)midiVel andType:(const char*)type;
 
 @property (nonatomic, assign) id<GtarControllerDelegate> m_delegate;
+@property (nonatomic, assign) BOOL m_scaleVelocity;
+
+// We should consider pushing these to the public API, they would probably be useful.
+@property (nonatomic, readonly) unsigned char m_firmwareMajorVersion;
+@property (nonatomic, readonly) unsigned char m_firmwareMinorVersion;
+
 //@property (nonatomic, readonly) GtarControllerEffect m_currentGuitarEffect;
 
 @end

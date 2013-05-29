@@ -24,7 +24,7 @@
 @synthesize m_profileText;
 @synthesize m_imgFileId;
 
-@synthesize m_profilePic;
+//@synthesize m_profilePic;
 
 - (id)init
 {
@@ -154,8 +154,8 @@
 	[coder encodeObject:m_profileText forKey:@"ProfileText"];
 	[coder encodeInteger:m_imgFileId forKey:@"ImageFileId"];
 	
-	NSData * imageData = UIImagePNGRepresentation( m_profilePic );
-	[coder encodeObject:imageData forKey:@"ProfilePic"];
+//	NSData * imageData = UIImagePNGRepresentation( m_profilePic );
+//	[coder encodeObject:imageData forKey:@"ProfilePic"];
 	
 }
 
@@ -172,16 +172,17 @@
 		self.m_firstName = [coder decodeObjectForKey:@"FirstName"];
 		self.m_middleName = [coder decodeObjectForKey:@"MiddleName"];
 		self.m_lastName = [coder decodeObjectForKey:@"LastName"];
-		self. m_email = [coder decodeObjectForKey:@"Email"];
+        self.m_name = [coder decodeObjectForKey:@"Name"];
+		self.m_email = [coder decodeObjectForKey:@"Email"];
 		self.m_profileText = [coder decodeObjectForKey:@"ProfileText"];
 		self.m_imgFileId = [coder decodeIntegerForKey:@"ImageFileId"];
 		
-		NSData * imageData = [coder decodeObjectForKey:@"ProfilePic"];
+//		NSData * imageData = [coder decodeObjectForKey:@"ProfilePic"];
 		
-		if( imageData != nil )
-		{
-			self.m_profilePic = [UIImage imageWithData:imageData];
-		}
+//		if( imageData != nil )
+//		{
+//			self.m_profilePic = [UIImage imageWithData:imageData];
+//		}
 		
 	}
 	
@@ -200,7 +201,7 @@
     [m_email release];
     [m_profileText release];
     
-    [m_profilePic release];
+//    [m_profilePic release];
     
     [super dealloc];
     

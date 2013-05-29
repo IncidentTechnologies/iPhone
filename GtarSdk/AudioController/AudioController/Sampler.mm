@@ -136,6 +136,7 @@
 // Initialize the sampler with data from the sample pack at the given index
 - (bool) loadSamplerWithIndex:(int)index
 {
+    m_pendingLoad = YES;
     m_currentSamplePackIndex = index;
     
     [self releaseAudioData];
@@ -182,7 +183,12 @@
 {
     NSLog(@"Asynchronously loading sample pack at index: %d", index);
     
-    if (m_currentSamplePackIndex == index)
+    if (m_currentSamplePackIndex == index && m_pendingLoad)
+    {
+        NSLog(@"this sample currently loading");
+        return;
+    }
+    else if (m_currentSamplePackIndex == index)
     {
         // This sample pack is already loaded
         [self finishedLoadingSamplePack:true withSelector:aSelector andOwner:parent];
@@ -192,11 +198,12 @@
     dispatch_queue_t queue = dispatch_queue_create("com.incident.app",NULL);
     dispatch_queue_t main = dispatch_get_main_queue();
     dispatch_async(queue, ^{
-        m_pendingLoads++;
+        m_pendingLoadRequests++;
         @synchronized(self)
         {
-            m_pendingLoads--;
+            m_pendingLoadRequests--;
             BOOL result = [self loadSamplerWithIndex:index] ? YES : NO;
+            m_pendingLoad = NO;
             
             dispatch_async(main, ^{
                 [self finishedLoadingSamplePack:result withSelector:aSelector andOwner:parent];
@@ -324,7 +331,7 @@
 {
     for (int noteNum=0; noteNum < m_numberOfSamples; noteNum++)
     {
-        if (m_pendingLoads > 0)
+        if (m_pendingLoadRequests > 0)
         {
             // A new more recent sample pack load has been requested. 
             // Bail out of the current load, no need to clean up allocated

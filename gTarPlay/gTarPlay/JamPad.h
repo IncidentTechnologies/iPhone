@@ -15,8 +15,8 @@
 @interface JamPad : XYInputView
 {	
 	CGPoint m_currentDiscretizedPosition;
-	UIImageView * m_ledOnGrid[JAM_PAD_HEIGHT][JAM_PAD_WIDTH];
-	UIImageView * m_ledOffGrid[JAM_PAD_HEIGHT][JAM_PAD_WIDTH];
+	UIView * m_ledOnGrid[JAM_PAD_HEIGHT][JAM_PAD_WIDTH];
+	UIView * m_ledOffGrid[JAM_PAD_HEIGHT][JAM_PAD_WIDTH];
 	
 	UIImage * m_ledOn;
 	UIImage * m_ledOff;
@@ -26,7 +26,7 @@
 
 @property (nonatomic, readonly) CGPoint m_currentDiscretizedPosition;
 
-- (void)initJamPad;
+- (void)setupJamPadWithRows:(NSInteger)rows andColumns:(NSInteger)columns;
 
 - (void)turnOffLedWidth:(NSInteger)width andHeight:(NSInteger)height;
 - (void)turnOnLedWidth:(NSInteger)width andHeight:(NSInteger)height;

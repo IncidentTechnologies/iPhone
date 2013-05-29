@@ -47,6 +47,7 @@
 - (void)clearCache;
 - (void)loadCache;
 - (void)saveCache;
+- (void)saveCacheAsync;
 //- (void)saveCookie:(NSHTTPCookie*)cookie;
 //- (NSHTTPCookie*)loadCookie;
 - (void)requestLoginUserCachedCallbackObj:(id)obj andCallbackSel:(SEL)sel;
@@ -114,6 +115,7 @@
 - (void)setFollowsSessionsForUserId:(NSInteger)userId toList:(NSArray*)list;
 
 // Uploading
+- (BOOL)isUserSongSessionQueueFull;
 - (void)queueUserSongSession:(UserSongSession*)songSession;
 //- (void)queueAndSendUserSongSession:(UserSongSession*)songSession;
 - (void)finishedUploadingSession:(UserSongSession*)songSession;
@@ -124,5 +126,9 @@
 - (NSInteger)getMaxStarsForSong:(NSInteger)songId;
 - (void)addScore:(NSInteger)score forSong:(NSInteger)songId;
 - (NSInteger)getMaxScoreForSong:(NSInteger)songId;
+
+// Misc
+- (BOOL)checkLoggedInUserFollows:(UserProfile *)userProfile;
+- (BOOL)checkLoggedInUserFollowedBy:(UserProfile *)userProfile;
 
 @end

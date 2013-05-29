@@ -86,7 +86,7 @@
 //#define URL_REQUEST_TIMEOUT 0.0000001
 
 // X number of time outs every Y seconds sends us offline
-#define ERRORS_BEFORE_OFFLINE 4
+#define ERRORS_BEFORE_OFFLINE 6
 #define ERROR_WINDOW 120
 
 #define TEST_ONLINE_STATUS_PERIOD 60 // check every 1 minute
@@ -884,13 +884,15 @@
     // Create a response object
     CloudResponse * cloudResponse = [[[CloudResponse alloc] initWithCloudRequest:cloudRequest] autorelease];
     
-    if ( m_online == NO )
+    // If we are offline, abort now... unless we are testing server status,
+    // in which case we should proceed, naturally.
+    if ( m_online == NO && cloudRequest.m_type != CloudRequestTypeGetServerStatus )
     {
         if ( cloudRequest.m_isSynchronous == YES )
         {
             cloudRequest.m_status = CloudRequestStatusOffline;
             cloudResponse.m_status = CloudResponseStatusOffline;
-            cloudResponse.m_statusText = @"Offline, try again later";
+            cloudResponse.m_statusText = @"Offline, try again in a few minutes";
             
             return cloudResponse;
         }
@@ -898,7 +900,7 @@
         {
             cloudRequest.m_status = CloudRequestStatusOffline;
             cloudResponse.m_status = CloudResponseStatusOffline;
-            cloudResponse.m_statusText = @"Offline, try again later";
+            cloudResponse.m_statusText = @"Offline, try again  in a few minutes";
             
             // Return the request to sender
             [self cloudReturnResponse:cloudResponse];
