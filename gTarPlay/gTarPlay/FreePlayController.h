@@ -15,6 +15,7 @@
 
 #define FREE_PLAY_EFFECT_COUNT 4
 
+
 @class TransparentAreaView;
 @class CustomComboBox;
 @class RGBColor;
@@ -64,7 +65,7 @@ typedef enum
     NUM_LEDLoop_ENTRIES // keep track of the number of entries in this enum
 } LEDLoop;
 
-@interface FreePlayController: MainEventController <GtarControllerObserver, AudioControllerDelegate, XYInputViewDelegate>
+@interface FreePlayController: MainEventController <GtarControllerObserver, XYInputViewDelegate>
 {
     IBOutlet UIActivityIndicatorView * m_activityIndicatorView;
     IBOutlet UIView * m_connectingView;
@@ -83,6 +84,7 @@ typedef enum
     
 }
 
+
 @property (retain, nonatomic) IBOutlet JamPad *m_jamPad;
 @property (retain, nonatomic) IBOutlet UISlider *m_wetSlider;
 @property (retain, nonatomic) IBOutlet UILabel *m_currentEffectName;
@@ -93,8 +95,10 @@ typedef enum
 @property (retain, nonatomic) IBOutlet UILabel *m_xParamLabel;
 @property (retain, nonatomic) IBOutlet UILabel *m_yParamLabel;
 
+@property (retain, nonatomic) IBOutlet UIView *m_effectsView;
+@property (retain, nonatomic) IBOutlet UITableView *m_effectsScroll;
+
 @property (retain, nonatomic) IBOutlet TransparentAreaView *m_effectsTab;
-@property (retain, nonatomic) IBOutlet UIButton *m_effectsTabButton;
 @property (retain, nonatomic) IBOutlet UIButton *m_effect1OnOff;
 @property (retain, nonatomic) IBOutlet UIButton *m_effect1Select;
 @property (retain, nonatomic) IBOutlet UILabel *m_effect1Name;
@@ -109,12 +113,10 @@ typedef enum
 @property (retain, nonatomic) IBOutlet UILabel *m_effect4Name;
 
 @property (retain, nonatomic) IBOutlet TransparentAreaView *m_instrumentsTab;
-@property (retain, nonatomic) IBOutlet UIButton *m_instrumentsTabButton;
 @property (retain, nonatomic) IBOutlet CustomComboBox *m_instrumentsScroll;
 
 
 @property (retain, nonatomic) IBOutlet TransparentAreaView *m_menuTab;
-@property (retain, nonatomic) IBOutlet UIButton *m_menuTabButton;
 @property (retain, nonatomic) IBOutlet UISlider *m_toneSlider;
 @property (nonatomic, retain) IBOutlet UIView * m_volumeView;
 @property (retain, nonatomic) IBOutlet UISlider *m_lineOutVolumeSlider;
@@ -123,7 +125,6 @@ typedef enum
 
 // LED light tab
 @property (retain, nonatomic) IBOutlet TransparentAreaView *m_LEDTab;
-@property (retain, nonatomic) IBOutlet UIButton *m_LEDTabButton;
 @property (retain, nonatomic) IBOutlet UIView *m_LEDGeneralSurface;
 @property (retain, nonatomic) IBOutlet UIView *m_LEDFretSurface;
 @property (retain, nonatomic) IBOutlet UIView *m_LEDStringSurface;

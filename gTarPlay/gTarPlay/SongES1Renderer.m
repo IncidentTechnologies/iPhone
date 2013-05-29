@@ -8,10 +8,10 @@
 
 #import "SongES1Renderer.h"
 
-#import <gTarAppCore/LineModel.h>
-#import <gTarAppCore/StringModel.h>
+#import "LineModel.h"
+#import "StringModel.h"
+#import "NoteModel.h"
 #import <gTarAppCore/NoteAnimation.h>
-#import <gTarAppCore/NoteModel.h>
 #import <gTarAppCore/Model.h>
 
 #define GL_ORTHO_LEFT (0.0f)
@@ -21,18 +21,6 @@
 #define GL_ORTHO_NEAR (-1.0f)
 #define GL_ORTHO_FAR (+1.0f)
 
-//#define GL_SCREEN_HEIGHT (GL_ORTHO_TOP - GL_ORTHO_BOTTOM)
-//#define GL_SCREEN_WIDTH (GL_ORTHO_RIGHT - GL_ORTHO_LEFT)
-//
-//// empirically determined ratios defining screen layout for what looks good.
-//#define GL_SCREEN_TOP_BUFFER ( GL_SCREEN_HEIGHT / 6.0 )
-//#define GL_SCREEN_BOTTOM_BUFFER ( GL_SCREEN_HEIGHT / 3.5 )
-//#define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH / 8.0 * 2.0)
-//
-//#define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 8.0 )
-//#define GL_STRING_HEIGHT ( GL_SCREEN_HEIGHT / 50.0 )
-//#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 ) 
-//
 @implementation SongES1Renderer
 
 @synthesize m_seekLineModel;
@@ -202,7 +190,7 @@
 	glEnable(GL_BLEND);
 	
 	// Blend function for textures
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	
     // 
     // Draw the background that doesn't move
@@ -230,10 +218,12 @@
 		[lineModel draw];		
 	}
     
-    //
+    glTranslatef( -(m_offset - m_currentPosition), 0.0f, 0.0f);
+    
+    // draw the seek line
+	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
+    
     // The strings are fixed, so undo any translattion
-    //
-	glTranslatef( -(m_offset - m_currentPosition), 0.0f, 0.0f);
     glTranslatef( +m_viewShift, 0.0f, 0.0f);
     
     //
@@ -244,13 +234,13 @@
 		[stringModel draw];		
 	}	
     
-    //
-    // Translate the view to draw the seek line
-    //
+//    //
+//    // Translate the view to draw the seek line
+//    //
     glTranslatef( -m_viewShift, 0.0f, 0.0f);
-    
-	// draw the seek line
-	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
+//
+//	// draw the seek line
+//	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
     
     //
     // Now we translate forward for the notes

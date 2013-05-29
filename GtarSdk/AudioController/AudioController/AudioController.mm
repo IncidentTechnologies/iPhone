@@ -29,7 +29,6 @@ const float g_GraphSampleRate = 44100.0f;
 
 @implementation AudioController
 
-@synthesize m_delegate;
 @synthesize frequency;
 @synthesize sinPhase;
 @synthesize m_fNoteOn;
@@ -98,7 +97,6 @@ const float g_GraphSampleRate = 44100.0f;
 
         m_pTanhDistortion = new TanhDistortion(1.0, 1.0, g_GraphSampleRate);
         m_pTanhDistortion->SetPassThru(true);
-        //m_effects.push_back(m_pTanhDistortion);
        
         m_pOverdrive = new Overdrive(5.0, 1.0, g_GraphSampleRate);
         m_pOverdrive->SetPassThru(true);
@@ -113,15 +111,12 @@ const float g_GraphSampleRate = 44100.0f;
         m_pFuzzExpDistortion->SetPassThru(true);
         
         m_pEndBwFilter = new ButterWorthFilter(2, 8000, g_GraphSampleRate);
-        m_effects.push_back(m_pEndBwFilter);
         
         m_tempOut = new Float32[4096];
         
         // setup compressor
         m_LimiterOn = true;
         m_pCompressor = new Compressor(.97, 3, 1, 5000, g_GraphSampleRate);
-        
-        m_delegate = nil;
         
         if (SamplerSource == m_audioSource)
         {
@@ -221,6 +216,13 @@ const float g_GraphSampleRate = 44100.0f;
 
 - (bool) FretDown:(int)fret onString:(int)string
 {
+    Boolean running = false;
+	AUGraphIsRunning(augraph, &running);
+    if (!running)
+    {
+        return false;
+    }
+    
     if (SamplerSource == m_audioSource)
     {
         [m_sampler FretDown:fret onString:string];
@@ -523,9 +525,29 @@ const float g_GraphSampleRate = 44100.0f;
     return true;
 }
 
-- (std::vector<Effect*>) GetEffects
+- (NSArray*) GetEffects
 {
-    return m_effects;
+    NSMutableArray *effects = [NSMutableArray array];
+    
+    for (int i = 0; i < m_effects.size(); i++)
+    {
+        Effect *e  = m_effects[i];
+        NSValue *val = [NSValue valueWithPointer:e];
+        [effects addObject:val];
+    }
+    
+    return effects;
+}
+
+- (NSArray*) getEffectNames
+{
+    NSMutableArray *names = [NSMutableArray arrayWithCapacity:m_effects.size()];
+    for (int i = 0; i < m_effects.size(); i++)
+    {
+        [names addObject:[NSString stringWithCString:m_effects[i]->getName().c_str() encoding:[NSString defaultCStringEncoding]]];
+    }
+
+    return names;
 }
 
 - (Parameter&) getReverbLFO
@@ -565,7 +587,10 @@ void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID
     
     bool routeIsSpeaker = [(NSString*)newRoute isEqualToString:(NSString*)kAudioSessionOutputRoute_BuiltInSpeaker];
     
-    [ac.m_delegate audioRouteChanged:routeIsSpeaker];
+    NSDictionary *routeData = [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithBool:routeIsSpeaker], @"isRouteSpeaker",
+            (NSString*)newRoute, @"routeName", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AudioRouteChange" object:ac userInfo:routeData];
     
     [ac AnnounceAudioRouteChange];
 }

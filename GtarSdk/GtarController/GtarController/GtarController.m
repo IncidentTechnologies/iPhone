@@ -21,6 +21,10 @@
 @synthesize colorMap = m_colorMap;
 
 @synthesize m_delegate;
+@synthesize m_firmwareMajorVersion;
+@synthesize m_firmwareMinorVersion;
+@synthesize m_scaleVelocity;
+
 //@synthesize m_currentGuitarEffect;
 
 - (id)init
@@ -262,6 +266,43 @@
         m_connected = NO;
         m_spoofed = NO;
         
+        if ( m_firmwareUpdating == YES )
+        {
+            // HACK there is a firmware bug. it doesn't ack the last page.
+            // It just resets itself.
+            if ( m_firmwareCurrentPage == (GTAR_CONTROLLER_MAX_FIRMWARE_PAGES-1) )
+            {
+                @synchronized ( self )
+                {
+                    // we are done
+                    [m_firmware release];
+                    
+                    m_firmware = nil;
+                    
+                    m_firmwareUpdating = NO;
+                    m_firmwareCancelation = NO;
+                }
+                
+                
+                if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusSucceeded)] == YES )
+                {
+                    [m_delegate receivedFirmwareUpdateStatusSucceeded];
+                }
+                else
+                {
+                    [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateStatusSucceeded %@", m_delegate]
+                          atLogLevel:GtarControllerLogLevelWarn];
+                    
+                }
+            }
+            else
+            {
+                // Otherwise, straight up cancel this.
+                [self sendFirmwareUpdateCancelation];
+                m_firmwareCancelation = NO;
+            }
+        }
+        
         [responseDictionary setValue:@"notifyObserversGtarDisconnected:" forKey:@"Selector"];
     }
     
@@ -369,6 +410,9 @@
                     // Current Version Number
                     unsigned char majorVersion = (data[2] & 0xF0) >> 4;
                     unsigned char minorVersion = (data[2] & 0x0F);
+                    
+                    m_firmwareMajorVersion = majorVersion;
+                    m_firmwareMinorVersion = minorVersion;
                     
                     if ( [m_delegate respondsToSelector:@selector(receivedFirmwareMajorVersion:andMinorVersion:)] == YES )
                     {
@@ -548,9 +592,19 @@
     
     GtarPluck gtarPluck;
     
+    if ( m_scaleVelocity == YES )
+    {
+        float buggedMax = GtarMaxPluckVelocity * 0.6;
+        float adjusted = [velocityNumber floatValue] / buggedMax * GtarMaxPluckVelocity;
+        gtarPluck.velocity = MIN(GtarMaxPluckVelocity, adjusted);
+    }
+    else
+    {
+        gtarPluck.velocity = [velocityNumber integerValue];
+    }
+    
     gtarPluck.position.fret = [fretNumber integerValue];
     gtarPluck.position.string = [stringNumber integerValue];
-    gtarPluck.velocity = [velocityNumber integerValue];
     
     [fretNumber release];
     [stringNumber release];
@@ -644,7 +698,7 @@
             
         }
         
-        if ( m_firmwareCancelation == YES )
+        if ( m_firmwareCancelation == YES || m_firmwareUpdating == NO)
         {
             
             @synchronized ( self )
@@ -657,16 +711,16 @@
             [self logMessage:[NSString stringWithFormat:@"Firmware update canceled, aborting transfer"]
                   atLogLevel:GtarControllerLogLevelInfo];
             
-            if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusFailed)] == YES )
-            {
-                [m_delegate receivedFirmwareUpdateStatusFailed];
-            }
-            else
-            {
-                [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateStatusFailed %@", m_delegate]
-                      atLogLevel:GtarControllerLogLevelWarn];
-                
-            }
+//            if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusFailed)] == YES )
+//            {
+//                [m_delegate receivedFirmwareUpdateStatusFailed];
+//            }
+//            else
+//            {
+//                [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateStatusFailed %@", m_delegate]
+//                      atLogLevel:GtarControllerLogLevelWarn];
+//                
+//            }
             
         }
         else if ( m_firmwareCurrentPage < GTAR_CONTROLLER_MAX_FIRMWARE_PAGES )
@@ -1570,6 +1624,8 @@
         
         m_firmwareCurrentPage = 0;
         
+        m_firmwareUpdating = YES;
+        
         BOOL result = [self sendFirmwarePage:m_firmwareCurrentPage];
         
         if ( result == NO )
@@ -1592,14 +1648,30 @@
         {
             
             [self logMessage:@"Canceling firmware update"
-                  atLogLevel:GtarControllerLogLevelWarn];
+                  atLogLevel:GtarControllerLogLevelInfo];
             
             m_firmwareCancelation = YES;
+            m_firmwareUpdating = NO;
             
             [m_firmware release];
             
             m_firmware = nil;
             
+            if ( [m_delegate respondsToSelector:@selector(receivedFirmwareUpdateStatusFailed)] == YES )
+            {
+                [m_delegate receivedFirmwareUpdateStatusFailed];
+            }
+            else
+            {
+                [self logMessage:[NSString stringWithFormat:@"Delegate doesn't respond to receivedFirmwareUpdateStatusFailed %@", m_delegate]
+                      atLogLevel:GtarControllerLogLevelWarn];
+                
+            }
+        }
+        else
+        {
+            [self logMessage:@"Cannot cancel, no firmware update in progress"
+                  atLogLevel:GtarControllerLogLevelWarn];
         }
     }
     

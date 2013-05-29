@@ -28,7 +28,7 @@
     
 }
 
-@property (nonatomic, assign) id<PullToUpdateTableViewDelegate> delegate;
+@property (nonatomic, assign) IBOutlet id<PullToUpdateTableViewDelegate> delegate;
 
 - (void)sharedInit;
 
@@ -41,7 +41,5 @@
 - (void)aboveThreshold;
 - (void)belowThreshold;
 - (void)changeUpdateDate;
-//- (void)update;
-
 
 @end

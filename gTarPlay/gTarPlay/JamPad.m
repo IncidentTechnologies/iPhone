@@ -10,6 +10,14 @@
 
 #import <UIKit/UIKit.h>
 
+@interface JamPad ()
+{
+    NSInteger _numRows;
+    NSInteger _numColumns;
+}
+
+@end
+
 @implementation JamPad
 
 @synthesize m_currentDiscretizedPosition;
@@ -22,7 +30,7 @@
     
 	if ( self )
 	{
-		[self initJamPad];
+
 	}
 	
 	return self;
@@ -36,66 +44,69 @@
     
     if ( self )
 	{
-		[self initJamPad];
+		[self setupJamPadWithRows:(JAM_PAD_HEIGHT) andColumns:JAM_PAD_WIDTH];
 	}
     
 	return self;
     
 }
 
-- (void)initJamPad
+
+- (void)setupJamPadWithRows:(NSInteger)rows andColumns:(NSInteger)columns
 {
-	
-	m_currentDiscretizedPosition.x = -1;
-	m_currentDiscretizedPosition.y = -1;
-	
-	[m_slider setHidden:YES];
-	
-	double ledWidth = self.frame.size.width / JAM_PAD_WIDTH;
-	double ledHeight = self.frame.size.height / JAM_PAD_HEIGHT;
-	
-	m_ledOff = [[UIImage imageNamed:@"jam_pad_offlight.png"] retain];
-              
-    m_ledOn = [[UIImage imageNamed:@"JamPadOn.png"] retain];
-	
-	for ( unsigned int h = 0; h < JAM_PAD_HEIGHT; h++ )
-	{
-		for ( unsigned int w = 0; w < JAM_PAD_WIDTH; w++ )
-		{
-			CGRect fr = CGRectMake( w * ledWidth, h * ledHeight, ledWidth, ledHeight);
-			
-			UIImageView * image;
-
-			image = [[UIImageView alloc] initWithFrame:fr];
-			image.image = m_ledOff;
-			m_ledOffGrid[h][w] = image;
-			
-			[self addSubview:image];
-			
-			image = [[UIImageView alloc] initWithFrame:fr];
-			image.image = m_ledOn;
-			image.alpha = 0.0;
-
-			m_ledOnGrid[h][w] = image;
-			
-			[self insertSubview:image aboveSubview:m_ledOffGrid[h][w] ];
-			
-		}
-		
-	}
-	
+    _numRows = rows;
+    _numColumns = columns;
+    
+    m_currentDiscretizedPosition.x = -1;
+    m_currentDiscretizedPosition.y = -1;
+    
+    [m_slider setHidden:YES];
+    
+    double ledWidth = self.frame.size.width / _numColumns;
+    double ledHeight = self.frame.size.height / _numRows;
+    
+    for ( unsigned int h = 0; h < _numRows; h++ )
+    {
+        for ( unsigned int w = 0; w < _numColumns; w++ )
+        {
+            CGRect fr = CGRectMake( w * ledWidth, h * ledHeight, ledWidth, ledHeight);
+            
+            NSInteger offset = 2;
+            
+            // Off square
+            UIView *view = [[UIView alloc] initWithFrame:fr];
+            view.backgroundColor = [UIColor colorWithRed:(50/255.0) green:(59/255.0) blue:(66/255.0) alpha:1.0];
+            UIView *innerView = [[UIView alloc] initWithFrame:CGRectMake(offset, offset, ledWidth - 2*offset, ledHeight - 2*offset)];
+            innerView.backgroundColor = [UIColor colorWithRed:(77/255.0) green:(91/255.0) blue:(100/255.0) alpha:1.0];
+            [view addSubview:innerView];
+            m_ledOffGrid[h][w] = view;
+            
+            [self addSubview:view];
+            
+            // On square
+            view = [[UIView alloc] initWithFrame:fr];
+            view.backgroundColor = [UIColor colorWithRed:(50/255.0) green:(59/255.0) blue:(66/255.0) alpha:1.0];
+            innerView = [[UIView alloc] initWithFrame:CGRectMake(offset, offset, ledWidth - 2*offset, ledHeight - 2*offset)];
+            innerView.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(162/255.0) blue:(54/255.0) alpha:1.0];
+            [view addSubview:innerView];
+            view.alpha = 0.0;
+            m_ledOnGrid[h][w] = view;
+            
+            [self insertSubview:view aboveSubview:m_ledOffGrid[h][w]];
+        }
+        
+    }
 }
 
-	
 - (void)dealloc
 {
 
-	for ( unsigned int h = 0; h < JAM_PAD_HEIGHT; h++ )
+	for ( unsigned int h = 0; h < _numRows; h++ )
 	{
-		for ( unsigned int w = 0; w < JAM_PAD_WIDTH; w++ )
+		for ( unsigned int w = 0; w < _numColumns; w++ )
 		{
 
-			UIImageView * image;
+			UIView * image;
 			image = m_ledOffGrid[h][w];
 			[image removeFromSuperview];
 			[image release];
@@ -120,24 +131,24 @@
 	double width = self.frame.size.width;
 	double height = self.frame.size.height;
 
-	NSInteger widthIncrements = (point.x / width) * JAM_PAD_WIDTH;
-	NSInteger heightIncrements = (point.y / height) * JAM_PAD_HEIGHT;
+	NSInteger widthIncrements = (point.x / width) * _numColumns;
+	NSInteger heightIncrements = (point.y / height) * _numRows;
 	
 	if ( widthIncrements < 0 )
 	{
 		widthIncrements = 0;
 	}
-	if ( widthIncrements > (JAM_PAD_WIDTH - 1) )
+	if ( widthIncrements > (_numColumns - 1) )
 	{
-		widthIncrements = (JAM_PAD_WIDTH - 1);
+		widthIncrements = (_numColumns - 1);
 	}
 	if ( heightIncrements < 0 )
 	{
 		heightIncrements = 0;
 	}
-	if ( heightIncrements > (JAM_PAD_HEIGHT - 1) )
+	if ( heightIncrements > (_numRows - 1) )
 	{
-		heightIncrements = (JAM_PAD_HEIGHT - 1);
+		heightIncrements = (_numRows - 1);
 	}
 	
 	// only change the discreet pos / animationm if it changes
@@ -165,8 +176,8 @@
 	// if last decrement ...
 	if ( m_ledRefCount[height][width] == 0 )
 	{
-		UIImageView * imageOn = m_ledOnGrid[height][width];
-		UIImageView * imageOff = m_ledOffGrid[height][width];
+		UIView * imageOn = m_ledOnGrid[height][width];
+		UIView * imageOff = m_ledOffGrid[height][width];
 	
 		[UIImageView beginAnimations:nil context:NULL];
 		[UIImageView setAnimationDuration:0.5f];
@@ -186,8 +197,8 @@
 	// if this is the first increment..
 	if ( m_ledRefCount[height][width] == 1 )
 	{
-		UIImageView * imageOn = m_ledOnGrid[height][width];
-		UIImageView * imageOff = m_ledOffGrid[height][width];
+		UIView * imageOn = m_ledOnGrid[height][width];
+		UIView * imageOff = m_ledOffGrid[height][width];
         
 //		[UIImageView beginAnimations:nil context:NULL];
 //		[UIImageView setAnimationDuration:0.5f];
@@ -209,8 +220,8 @@
 	wIndex = position.x - 1;
 	hIndex = position.y;
 	
-	if ( wIndex >= 0 && wIndex < JAM_PAD_WIDTH &&
-		hIndex >= 0 && hIndex < JAM_PAD_HEIGHT )
+	if ( wIndex >= 0 && wIndex < _numColumns &&
+		hIndex >= 0 && hIndex < _numRows )
 	{
 		if ( on == YES )
 		{
@@ -225,8 +236,8 @@
 	wIndex = position.x + 1;
 	hIndex = position.y;
 	
-	if ( wIndex >= 0 && wIndex < JAM_PAD_WIDTH &&
-		hIndex >= 0 && hIndex < JAM_PAD_HEIGHT )
+	if ( wIndex >= 0 && wIndex < _numColumns &&
+		hIndex >= 0 && hIndex < _numRows )
 	{
 		if ( on == YES )
 		{
@@ -241,8 +252,8 @@
 	wIndex = position.x;
 	hIndex = position.y + 1;
 	
-	if ( wIndex >= 0 && wIndex < JAM_PAD_WIDTH &&
-		hIndex >= 0 && hIndex < JAM_PAD_HEIGHT )
+	if ( wIndex >= 0 && wIndex < _numColumns &&
+		hIndex >= 0 && hIndex < _numRows )
 	{
 		if ( on == YES )
 		{
@@ -257,8 +268,8 @@
 	wIndex = position.x;
 	hIndex = position.y - 1;
 	
-	if ( wIndex >= 0 && wIndex < JAM_PAD_WIDTH &&
-		hIndex >= 0 && hIndex < JAM_PAD_HEIGHT )
+	if ( wIndex >= 0 && wIndex < _numColumns &&
+		hIndex >= 0 && hIndex < _numRows )
 	{
 		if ( on == YES )
 		{

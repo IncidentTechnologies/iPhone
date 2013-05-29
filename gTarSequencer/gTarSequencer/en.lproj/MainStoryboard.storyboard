@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="W8q-LF-zvA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="W8q-LF-zvA">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
         <!--Loading Animation View Controller-->
         <scene sceneID="Kqo-yN-bur">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hNM-6N-scp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="qSE-AG-njZ" customClass="LoadingAnimationViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rPW-0u-fau">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
@@ -30,13 +28,13 @@
                         <segue destination="PfE-5P-oNf" kind="push" identifier="LoadSequencer" id="OfP-UP-ftf"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hNM-6N-scp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-627" y="363"/>
         </scene>
         <!--G Tar Sequencer View Controller-->
         <scene sceneID="r4B-rc-cti">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="138-YJ-0RR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="gTarSequencerVC" id="PfE-5P-oNf" customClass="gTarSequencerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pGV-z3-AZ7">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
@@ -357,13 +355,13 @@
                         <outlet property="view" destination="pGV-z3-AZ7" id="5Ut-1W-J5y"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="138-YJ-0RR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-48" y="363"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9rj-gT-oUX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MQL-Da-FhS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController navigationBarHidden="YES" id="W8q-LF-zvA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -380,6 +378,7 @@
                         <segue destination="qSE-AG-njZ" kind="relationship" relationship="rootViewController" id="z5Z-3Z-IaH"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MQL-Da-FhS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1159" y="363"/>
         </scene>
@@ -415,7 +414,6 @@
                 <relationship kind="action" name="userDidSelectNewMeasure:"/>
                 <relationship kind="action" name="userDidSelectNewPattern:"/>
                 <relationship kind="action" name="userDidTapInstrumentIcon:"/>
-                <relationship kind="action" name="userDidTouchDownOnPattern:"/>
                 <relationship kind="outlet" name="addMeasureButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="instrumentIconView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="instrumentIconViewBorder" candidateClass="UIButton"/>
