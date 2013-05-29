@@ -10,6 +10,7 @@
 
 #define HEADER_OFFSET 35
 #define LEFT_MARGIN HEADER_OFFSET
+#define PULL_TO_UPDATE_OFFSET 7
 #define PULL_TO_UPDATE_HEIGHT 20
 #define LAST_UPDATE_HEIGHT 12
 #define IMAGE_INSET 10
@@ -17,8 +18,6 @@
 #define UPDATE_THRESHOLD HEADER_OFFSET
 
 @implementation PullToUpdateTableView
-
-//@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -69,7 +68,7 @@
     //
     // Instructions, "pull to update"
     //
-    m_instructionsLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, -HEADER_OFFSET, self.frame.size.width - LEFT_MARGIN, PULL_TO_UPDATE_HEIGHT)];
+    m_instructionsLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, -HEADER_OFFSET+PULL_TO_UPDATE_OFFSET, self.frame.size.width - LEFT_MARGIN, PULL_TO_UPDATE_HEIGHT)];
     m_instructionsLabel.text = @"Pull to update";
     m_instructionsLabel.textColor = [UIColor grayColor];
 //        m_instructionsLabel.shadowColor = [UIColor darkGrayColor];
@@ -81,15 +80,15 @@
     //
     // Last update label
     //
-    m_lastUpdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, -HEADER_OFFSET+PULL_TO_UPDATE_HEIGHT, self.frame.size.width - LEFT_MARGIN, LAST_UPDATE_HEIGHT)];
-//    m_lastUpdateLabel.text = @"Last update: Never";
-    m_lastUpdateLabel.text = @"";
+    m_lastUpdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, -HEADER_OFFSET+PULL_TO_UPDATE_HEIGHT+PULL_TO_UPDATE_OFFSET, self.frame.size.width - LEFT_MARGIN, LAST_UPDATE_HEIGHT)];
+    m_lastUpdateLabel.text = @"Last update: Never";
     m_lastUpdateLabel.textColor = [UIColor lightGrayColor];
 //        m_lastUpdateLabel.shadowColor = [UIColor grayColor];
 //        m_lastUpdateLabel.shadowOffset = CGSizeMake(1, 1);
     m_lastUpdateLabel.font = [m_lastUpdateLabel.font fontWithSize:12];
     
-    [self addSubview:m_lastUpdateLabel];
+    // TODO don't add this untill we can do proper update tracking
+//    [self addSubview:m_lastUpdateLabel];
     
     // 
     // Arrow
@@ -287,8 +286,11 @@
         
         [self belowThreshold];
         
-        // Its up to the delegate to start animation
-        [self.delegate update];
+        if ( [self.delegate respondsToSelector:@selector(update)] )
+        {
+            // Its up to the delegate to start animation
+            [self.delegate update];
+        }
         
         // Don't actually set the content offset here
         return;

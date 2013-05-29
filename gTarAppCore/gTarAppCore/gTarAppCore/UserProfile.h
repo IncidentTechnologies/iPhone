@@ -26,7 +26,8 @@
     NSInteger m_imgFileId;
 	
 	// cache the profile image so we don't need to keep hitting the server
-	UIImage * m_profilePic;
+    // This is done by the FileController now
+//	UIImage * m_profilePic;
 	
 }
 
@@ -40,7 +41,7 @@
 @property (nonatomic, retain) NSString * m_profileText;
 @property (nonatomic, assign) NSInteger m_imgFileId;
 
-@property (nonatomic, retain) UIImage * m_profilePic;
+//@property (nonatomic, retain) UIImage * m_profilePic;
 
 - (id)initWithXmlDictionary:(XmlDictionary*)xmlDictionary;
 - (id)initWithXmlDom:(XmlDom*)xmlDom;

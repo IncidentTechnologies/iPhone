@@ -19,6 +19,8 @@
 #import "UserRequest.h"
 #import "UserResponse.h"
 
+#define PENDING_UPLOAD_LIMIT 12
+
 @implementation UserController
 
 @synthesize m_loggedInUsername;
@@ -206,6 +208,11 @@
     
 }
 
+- (void)saveCacheAsync
+{
+    [self performSelectorInBackground:@selector(saveCache) withObject:nil];
+}
+
 - (void)saveCache
 {
     
@@ -224,7 +231,10 @@
     [NSKeyedArchiver archiveRootObject:m_loggedInUserProfile toFile:userProfilePath];
     
     [NSKeyedArchiver archiveRootObject:m_loggedInFacebookToken toFile:facebookTokenPath];
-    [NSKeyedArchiver archiveRootObject:m_pendingUserSongSessionUploads toFile:pendingUploadPath];
+    @synchronized ( m_pendingUserSongSessionUploads )
+    {
+        [NSKeyedArchiver archiveRootObject:m_pendingUserSongSessionUploads toFile:pendingUploadPath];
+    }
     [NSKeyedArchiver archiveRootObject:m_userCache toFile:userCachePath];
     [NSKeyedArchiver archiveRootObject:m_starCache toFile:starCachePath];
     [NSKeyedArchiver archiveRootObject:m_scoreCache toFile:scoreCachePath];
@@ -355,7 +365,7 @@
         
         if ( m_loggedInUsername && m_loggedInPassword )
         {
-            [self saveCache];
+            [self saveCacheAsync];
         }
 
     }
@@ -429,7 +439,7 @@
         
         if ( m_loggedInUsername && m_loggedInPassword )
         {
-            [self saveCache];
+            [self saveCacheAsync];
         }
         
         // Save the cookie before we return
@@ -511,7 +521,7 @@
         
         if ( m_loggedInUsername )
         {
-            [self saveCache];
+            [self saveCacheAsync];
         }
         
         [self sendPendingUploads];
@@ -667,6 +677,8 @@
         [self setUserProfileForUserId:cloudResponse.m_responseUserId
                             toProfile:cloudResponse.m_responseUserProfile];
         
+        [self saveCacheAsync];
+        
         userResponse.m_status = UserResponseStatusSuccess;
         
     }
@@ -726,6 +738,8 @@
         
         [self setUserProfileForUserId:cloudResponse.m_responseUserId
                             toProfile:cloudResponse.m_responseUserProfile];
+        
+        [self saveCacheAsync];
         
         userResponse.m_status = UserResponseStatusSuccess;
         
@@ -823,6 +837,8 @@
         [self setSessionsForUserId:cloudResponse.m_responseUserId
                             toList:cloudResponse.m_responseUserSongSessions.m_sessionsArray];
         
+        [self saveCacheAsync];
+        
         userResponse.m_status = UserResponseStatusSuccess;
         
     }
@@ -890,6 +906,8 @@
         // and for the previously followed user
         [self setFollowedByForUserId:cloudResponse.m_responseUserId
                               toList:cloudResponse.m_responseUserProfilesFollowedBy.m_profilesArray];
+        
+        [self saveCacheAsync];
         
         userResponse.m_status = UserResponseStatusSuccess;
         
@@ -959,6 +977,8 @@
         [self setFollowedByForUserId:cloudResponse.m_responseUserId
                               toList:cloudResponse.m_responseUserProfilesFollowedBy.m_profilesArray];
         
+        [self saveCacheAsync];
+        
         userResponse.m_status = UserResponseStatusSuccess;
         
     }
@@ -1018,6 +1038,8 @@
         
         [self setFollowsSessionsForUserId:cloudResponse.m_responseUserId
                                    toList:cloudResponse.m_responseUserSongSessions.m_sessionsArray];
+        
+        [self saveCacheAsync];
         
         userResponse.m_status = UserResponseStatusSuccess;
         
@@ -1111,6 +1133,8 @@
         [self setFollowsForUserId:cloudResponse.m_responseUserId
                            toList:cloudResponse.m_responseUserProfiles.m_profilesArray];
         
+        [self saveCacheAsync];
+        
         userResponse.m_status = UserResponseStatusSuccess;
         
     }
@@ -1158,7 +1182,9 @@
         
         [self setFollowedByForUserId:cloudResponse.m_responseUserId
                               toList:cloudResponse.m_responseUserProfiles.m_profilesArray];
-                
+        
+        [self saveCacheAsync];
+        
         userResponse.m_status = UserResponseStatusSuccess;
         
     }
@@ -1219,7 +1245,9 @@
         
         [self setFacebookFriendsForUserId:cloudResponse.m_responseUserProfile.m_userId
                                    toList:cloudResponse.m_responseUserProfiles.m_profilesArray];
-                
+        
+        [self saveCacheAsync];
+        
         userResponse.m_status = UserResponseStatusSuccess;
         
     }
@@ -1240,7 +1268,11 @@
                                                 andCallbackObject:obj
                                               andCallbackSelector:sel];
     
-    [self queueUserSongSession:songSession];
+    if ( [m_pendingUserSongSessionUploads containsObject:songSession] == NO )
+    {
+        // Only queue it once
+        [self queueUserSongSession:songSession];
+    }
     
     CloudRequest * cloudRequest = [m_cloudController requestUploadUserSongSession:songSession
                                                                    andCallbackObj:self
@@ -1320,8 +1352,6 @@
         m_loggedInUserProfile = [profile retain];        
     }
     
-    [self saveCache];
-    
 }
 
 - (void)setSessionsForUserId:(NSInteger)userId toList:(NSArray*)list
@@ -1345,8 +1375,6 @@
     {
         [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:m_loggedInUserProfile.m_userId]];
     }
-    
-    [self saveCache];
 
 }
 
@@ -1374,8 +1402,6 @@
         [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:m_loggedInUserProfile.m_userId]];
     }
     
-    [self saveCache];
-    
 }
 
 - (void)setFollowedByForUserId:(NSInteger)userId toList:(NSArray*)list
@@ -1401,8 +1427,6 @@
     {
         [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:m_loggedInUserProfile.m_userId]];
     }
-    
-    [self saveCache];
     
 }
 
@@ -1430,8 +1454,6 @@
         [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:m_loggedInUserProfile.m_userId]];
     }
     
-    [self saveCache];
-    
 }
 
 - (void)setFollowsSessionsForUserId:(NSInteger)userId toList:(NSArray*)list
@@ -1458,11 +1480,19 @@
         [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:m_loggedInUserProfile.m_userId]];
     }
     
-    [self saveCache];
-    
 }
 
 #pragma mark - Uploading
+
+- (BOOL)isUserSongSessionQueueFull
+{
+    BOOL result;
+    @synchronized ( m_pendingUserSongSessionUploads )
+    {
+        result = !([m_pendingUserSongSessionUploads count] < PENDING_UPLOAD_LIMIT);
+    }
+    return result;
+}
 
 - (void)queueUserSongSession:(UserSongSession*)songSession
 {
@@ -1484,7 +1514,12 @@
     @synchronized( m_pendingUserSongSessionUploads )
     {
         [m_pendingUserSongSessionUploads removeObject:songSession];
-        [self saveCache];
+        
+        if ( [m_pendingUserSongSessionUploads count] == 0 )
+        {
+            // When all are uploaded, we can save the cache
+            [self saveCache];
+        }
     }
     
     [self sendPendingUploads];
@@ -1530,8 +1565,6 @@
         [m_starCache setObject:[NSNumber numberWithInteger:stars] forKey:key];
     }
     
-    [self saveCache];
-    
 }
 
 - (NSInteger)getMaxStarsForSong:(NSInteger)songId
@@ -1563,8 +1596,6 @@
         [m_scoreCache setObject:[NSNumber numberWithInteger:score] forKey:key];
     }
     
-    [self saveCache];
-    
 }
 
 - (NSInteger)getMaxScoreForSong:(NSInteger)songId;
@@ -1577,6 +1608,22 @@
     
     return [[m_scoreCache objectForKey:[NSNumber numberWithInteger:songId]] integerValue];
     
+}
+
+#pragma mark - Misc
+
+- (BOOL)checkLoggedInUserFollows:(UserProfile *)userProfile
+{
+    UserEntry *loggedInEntry = [self getUserEntry:0];
+    
+    return [loggedInEntry.m_followsList containsObject:userProfile];
+}
+
+- (BOOL)checkLoggedInUserFollowedBy:(UserProfile *)userProfile
+{
+    UserEntry *loggedInEntry = [self getUserEntry:0];
+    
+    return [loggedInEntry.m_followedByList containsObject:userProfile];
 }
 
 @end

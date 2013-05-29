@@ -15,6 +15,7 @@
 
 #define MAX_FILE_CACHE_SIZE 300*1024*1024 // 300 MB
 #define MAX_FILE_CACHE_SIZE_BUFFER 10*1024*1024 // 10 MB
+#define MAX_IMAGE_SIZE 500.0
 
 @implementation FileController
 
@@ -531,6 +532,34 @@
               ([mimeType isEqualToString:@"image/jpg"] == YES) )
     {
         UIImage * image = [[[UIImage alloc] initWithData:data] autorelease];
+        
+        // Normalize as needed
+        if ( image.size.width > MAX_IMAGE_SIZE || image.size.height > MAX_IMAGE_SIZE )
+        {
+            NSLog(@"Aspect-fitting image to %d x %d", (NSInteger)MAX_IMAGE_SIZE, (NSInteger)MAX_IMAGE_SIZE);
+            
+            CGSize newSize = image.size;
+            
+            if ( newSize.width > MAX_IMAGE_SIZE )
+            {
+                newSize.height = newSize.height / newSize.width * MAX_IMAGE_SIZE;
+                newSize.width = MAX_IMAGE_SIZE;
+            }
+            
+            if ( newSize.height > MAX_IMAGE_SIZE )
+            {
+                newSize.width = newSize.width / newSize.height * MAX_IMAGE_SIZE;
+                newSize.height = MAX_IMAGE_SIZE;
+            }
+            
+            UIGraphicsBeginImageContextWithOptions(newSize, NO, 1);
+            CGContextSetInterpolationQuality(UIGraphicsGetCurrentContext(), kCGInterpolationHigh);
+            [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            image = newImage;
+        }
         
         return image;
     }

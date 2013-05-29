@@ -57,7 +57,9 @@ typedef struct
     // a thread is in the middle of loading and there is 1 or more pending request, it
     // should stop loading and exit the syncronization block to allow,
     // the new more recent load to be fulfilled. 
-    int m_pendingLoads;
+    int m_pendingLoadRequests;
+    
+    BOOL m_pendingLoad;
 }
 
 @property (readwrite) AudioStreamBasicDescription monoStreamFormat;

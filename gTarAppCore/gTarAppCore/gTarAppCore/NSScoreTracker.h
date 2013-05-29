@@ -43,7 +43,7 @@
 
 }
 
-@property (nonatomic, readonly) UInt32 m_baseScore;
+@property (nonatomic, assign) UInt32 m_baseScore;
 @property (nonatomic, readonly) UInt32 m_score;
 @property (nonatomic, readonly) UInt32 m_hitsAttempted;
 @property (nonatomic, readonly) UInt32 m_hitsCorrect;

@@ -1,0 +1,38 @@
+<UserSongsList>
+    <UserSongs>
+        <id>126</id>
+        <user_id>1</user_id>
+        <viewcount>0</viewcount>
+        <rating>0</rating>
+        <permissions>2</permissions>
+        <score>0</score>
+        <title>Spanish Romance SAMPLE</title>
+        <author>Anonymous</author>
+        <tempo>120</tempo>
+        <description>Write about your song here</description>
+        <genre/>
+        <xmp_file_id>377</xmp_file_id>
+        <image_file_id>378</image_file_id>
+        <created>2012-01-23 00:09:14</created>
+        <modified>2012-01-23 00:09:14</modified>
+        <cost>0.99</cost>
+    </UserSongs>
+    <UserSongs>
+        <id>127</id>
+        <user_id>1</user_id>
+        <viewcount>0</viewcount>
+        <rating>0</rating>
+        <permissions>2</permissions>
+        <score>0</score>
+        <title>Babe I'm Gonna Leave You SAMPLE</title>
+        <author>Led Zeppelin</author>
+        <tempo>200</tempo>
+        <description>Write about your song here</description>
+        <genre/>
+        <xmp_file_id>379</xmp_file_id>
+        <image_file_id>380</image_file_id>
+        <created>2012-01-23 00:09:14</created>
+        <modified>2012-01-23 00:09:14</modified>
+        <cost>0.99</cost>
+    </UserSongs>
+</UserSongsList>

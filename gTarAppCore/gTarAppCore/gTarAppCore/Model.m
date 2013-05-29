@@ -19,13 +19,11 @@
     
 	if ( self )
 	{
-		
 		m_center = center;
 		
 		[self changeColor:color];
 		
 		m_texture = [texture retain];
-		
 	}
 	
 	return self;
