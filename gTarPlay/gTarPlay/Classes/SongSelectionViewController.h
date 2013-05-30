@@ -36,6 +36,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *easyButton;
 @property (retain, nonatomic) IBOutlet UIButton *mediumButton;
 @property (retain, nonatomic) IBOutlet UIButton *hardButton;
+@property (retain, nonatomic) IBOutlet UIButton *startButton;
 
 @property (retain, nonatomic) IBOutlet UIView *volumeView;
 @property (retain, nonatomic) IBOutlet UIView *instrumentView;

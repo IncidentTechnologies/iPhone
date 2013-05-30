@@ -14,6 +14,7 @@
 #import "SlidingInstrumentViewController.h"
 #import "PlayerViewController.h"
 #import "UIView+Gtar.h"
+#import "UIButton+Gtar.h"
 
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/CloudResponse.h>
@@ -174,6 +175,7 @@ extern GtarController *g_gtarController;
     [_instrumentView release];
     [_searchBar release];
     [_fullscreenButton release];
+    [_startButton release];
     [super dealloc];
 }
 
@@ -463,13 +465,28 @@ extern GtarController *g_gtarController;
 
     _currentUserSong = userSong;
     
+    [_startButton startActivityIndicator];
+    
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
-
+    
     _playerViewController.userSong = userSong;
     _playerViewController.xmpBlob = songString;
     
+    NSMethodSignature *signature = [SongSelectionViewController instanceMethodSignatureForSelector:@selector(playerLoaded)];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    
+    [invocation setTarget:self];
+    [invocation setSelector:@selector(playerLoaded)];
+    
+    _playerViewController.loadedInvocation = invocation;
+    
     [self presentViewController:_songOptionsModal animated:YES completion:nil];
     
+}
+
+- (void)playerLoaded
+{
+    [_startButton stopActivityIndicator];
 }
 
 - (void)update
@@ -531,6 +548,11 @@ extern GtarController *g_gtarController;
 
 - (void)gtarDisconnected
 {
+    if ( self.presentedViewController != nil )
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

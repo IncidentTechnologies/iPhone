@@ -27,6 +27,8 @@
 @property (retain, nonatomic) NSString *xmpBlob;
 @property (assign, nonatomic) BOOL scrollable;
 
+@property (retain, nonatomic) NSInvocation *loadedInvocation;
+
 - (IBAction)playButtonClicked:(id)sender;
 
 - (void)attachToSuperview:(UIView *)view;

@@ -20,12 +20,16 @@
     
     indicator.center = CGPointMake( self.bounds.size.width/2.0, self.bounds.size.height/2.0 );
     
+    [self.titleLabel removeFromSuperview];
+    
     [self addSubview:indicator];
 }
 
 - (void)stopActivityIndicator
 {
     [self setEnabled:YES];
+    
+    [self addSubview:self.titleLabel];
     
     for ( UIView *subview in [self subviews] )
     {

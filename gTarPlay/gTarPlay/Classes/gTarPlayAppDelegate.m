@@ -14,13 +14,16 @@
 #import <TargetConditionals.h>
 
 #import "TitleNavigationController.h"
+#import "Mixpanel.h"
 
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/FileController.h>
 #import <gTarAppCore/UserController.h>
-#import <gTarAppCore/TelemetryController.h>
+//#import <gTarAppCore/TelemetryController.h>
 
 #import <AudioController/AudioController.h>
+
+#define MIXPANEL_TOKEN @"da24d59140097cb9672b348ef05c6fab"
 
 Facebook *g_facebook;
 
@@ -29,7 +32,7 @@ AudioController * g_audioController;
 FileController * g_fileController;
 GtarController * g_gtarController;
 UserController * g_userController;
-TelemetryController * g_telemetryController;
+//TelemetryController * g_telemetryController;
 
 @implementation gTarPlayAppDelegate
 
@@ -60,7 +63,7 @@ TelemetryController * g_telemetryController;
         
         // Create the user controller to manage users
         g_userController = [[UserController alloc] initWithCloudController:g_cloudController];
-        
+#if 0
         // Create the telemetry controller to upload log data
         NSString * uuidString = [self generateUUID];
         
@@ -70,7 +73,20 @@ TelemetryController * g_telemetryController;
         g_telemetryController.m_appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
         g_telemetryController.m_deviceId = uuidString;
         g_telemetryController.m_username = g_userController.m_loggedInUsername;
+#else
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+//        mixpanel.nameTag = @"marty";
+        
+        [mixpanel registerSuperProperties:[NSDictionary dictionaryWithObjectsAndKeys:@"Premium", @"Plan", nil]];
+        
+        [mixpanel track:@"Player Create" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                     @"girl", @"gender",
+                                                     @"knife", @"weapon",
+                                                     nil]];
+        
+        
+#endif
         // Connect to the gtar device
         g_gtarController = [[GtarController alloc] init];
         
@@ -81,7 +97,7 @@ TelemetryController * g_telemetryController;
         
         [g_gtarController addObserver:self];
         
-#if TARGET_IPHONE_SIMULATOR | Debug_BUILD | true
+#if TARGET_IPHONE_SIMULATOR | Debug_BUILD
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 #endif
         
@@ -113,10 +129,16 @@ TelemetryController * g_telemetryController;
     // We never want to rotate
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
-    [g_telemetryController logEvent:GtarPlayAppOpened
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"Application launched", @"Detail",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlayAppOpened
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     @"Application launched", @"Detail",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Application launched"];
+    
+    [mixpanel.people increment:@"Application opens" by:[NSNumber numberWithInteger:1]];
     
     self.m_playApplication = (gTarPlayApplication*)application;
     
@@ -152,12 +174,17 @@ TelemetryController * g_telemetryController;
     
     // This gets called when the home button is pushed
     
-    [g_telemetryController logEvent:GtarPlayAppClosed
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"Application did enter background", @"Detail",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlayAppClosed
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     @"Application did enter background", @"Detail",
+//                                     nil]];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-    [g_telemetryController synchronize];
+    [mixpanel track:@"Application background"];
+    
+    [mixpanel.people increment:@"Application closes" by:[NSNumber numberWithInteger:1]];
+
+//    [g_telemetryController synchronize];
 }
 
 
@@ -168,11 +195,17 @@ TelemetryController * g_telemetryController;
      */
     
     // This gets called when the app is re-started
-    [g_telemetryController logEvent:GtarPlayAppOpened
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"Application will enter foreground", @"Detail",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlayAppOpened
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     @"Application will enter foreground", @"Detail",
+//                                     nil]];
     
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Application foreground"];
+    
+    [mixpanel.people increment:@"Application opens" by:[NSNumber numberWithInteger:1]];
+
 }
 
 
@@ -200,12 +233,19 @@ TelemetryController * g_telemetryController;
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
-    [g_telemetryController logEvent:GtarPlayAppClosed
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"Application will terminate", @"Detail",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlayAppClosed
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     @"Application will terminate", @"Detail",
+//                                     nil]];
+//    
+//    [g_telemetryController synchronize];
     
-    [g_telemetryController synchronize];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Application terminated"];
+    
+    [mixpanel.people increment:@"Application closes" by:[NSNumber numberWithInteger:1]];
+
 }
 
 // For handling facebook URLs
@@ -350,10 +390,13 @@ TelemetryController * g_telemetryController;
     /*
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
-    [g_telemetryController logEvent:GtarPlayAppMemWarning
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"Application did receive memory warning", @"Detail",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlayAppMemWarning
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     @"Application did receive memory warning", @"Detail",
+//                                     nil]];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Application memory warning"];
     
 }
 
@@ -367,7 +410,7 @@ TelemetryController * g_telemetryController;
     
     [g_fileController release];
     
-    [g_telemetryController release];
+//    [g_telemetryController release];
     
     [g_cloudController release];
     

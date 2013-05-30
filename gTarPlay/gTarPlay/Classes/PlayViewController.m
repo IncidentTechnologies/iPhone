@@ -12,7 +12,7 @@
 #import <AudioController/AudioController.h>
 #import <GtarController/GtarController.h>
 
-#import <gTarAppCore/TelemetryController.h>
+//#import <gTarAppCore/TelemetryController.h>
 
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/UserController.h>
@@ -27,6 +27,7 @@
 #import <gTarAppCore/NSNoteFrame.h>
 #import <gTarAppCore/NSScoreTracker.h>
 
+#import "Mixpanel.h"
 #import "SongDisplayController.h"
 #import "UIButton+Gtar.h"
 
@@ -49,7 +50,7 @@ extern CloudController * g_cloudController;
 extern GtarController * g_gtarController;
 extern UserController * g_userController;
 extern AudioController * g_audioController;
-extern TelemetryController * g_telemetryController;
+//extern TelemetryController * g_telemetryController;
 
 @interface PlayViewController ()
 {
@@ -350,15 +351,27 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarPlaySongAborted
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                     _userSong.m_title, @"Title",
-                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlaySongAborted
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+//                                     _userSong.m_title, @"Title",
+//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+//                                     nil]];
     
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Play aborted" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                _userSong.m_title, @"Title",
+                                                [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                nil]];
+    
+    [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
+
     [self finalLogging];
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -439,7 +452,8 @@ extern TelemetryController * g_telemetryController;
 - (IBAction)restartButtonClicked:(id)sender
 {
     
-    if ( _feedSwitch.isOn == YES )
+    // Only upload at the end of a song
+    if ( _finishButton.isHidden == NO && _feedSwitch.isOn == YES )
     {
         [self uploadUserSongSession];
     }
@@ -450,15 +464,27 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarPlaySongRestarted
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                     _userSong.m_title, @"Title",
-                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlaySongRestarted
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+//                                     _userSong.m_title, @"Title",
+//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+//                                     nil]];
     
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Play restarted" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                  [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                  [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                  _userSong.m_title, @"Title",
+                                                  [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                  [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                  nil]];
+    
+    [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
+
     [self startWithSongXmlDom];
     
     [self menuButtonClicked:nil];
@@ -509,7 +535,16 @@ extern TelemetryController * g_telemetryController;
             _scoreTracker.m_baseScore = 10;
         } break;
     }
-
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Play toggle difficulty" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                          _userSong.m_title, @"Title",
+                                                          [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                          [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                          nil]];
+    
     [self updateDifficultyDisplay];
 }
 
@@ -613,15 +648,25 @@ extern TelemetryController * g_telemetryController;
     
     if ( delta > 0 )
     {
-        [g_telemetryController logEvent:GtarPlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                         _userSong.m_title, @"Title",
-                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                         route, @"AudioRoute",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarPlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+//                                         _userSong.m_title, @"Title",
+//                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+//                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+//                                         route, @"AudioRoute",
+//                                         nil]];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"Play toggle audio route" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                               _userSong.m_title, @"Title",
+                                                               [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                               [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                               route, @"AudioRoute",
+                                                               nil]];
         
         [_audioRouteTimeStart release];
         _audioRouteTimeStart = [[NSDate date] retain];
@@ -643,15 +688,25 @@ extern TelemetryController * g_telemetryController;
         
         _playMetronome = YES;
         
-        [g_telemetryController logEvent:GtarPlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                         _userSong.m_title, @"Title",
-                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                         @"On", @"Metronome",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarPlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+//                                         _userSong.m_title, @"Title",
+//                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+//                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+//                                         @"On", @"Metronome",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"Play toggle metronome" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                             _userSong.m_title, @"Title",
+                                                             [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                             [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                             @"On", @"Metronome",
+                                                             nil]];
+
         [_metronomeTimeStart release];
         _metronomeTimeStart = [[NSDate date] retain];
         
@@ -662,15 +717,26 @@ extern TelemetryController * g_telemetryController;
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_metronomeTimeStart timeIntervalSince1970] + _playTimeAdjustment;
         
-        [g_telemetryController logEvent:GtarPlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                         _userSong.m_title, @"Title",
-                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                         @"Off", @"Metronome",
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarPlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+//                                         _userSong.m_title, @"Title",
+//                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+//                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+//                                         @"Off", @"Metronome",
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"Play toggle metronome" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                             _userSong.m_title, @"Title",
+                                                             [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                             [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                             @"Off", @"Metronome",
+                                                             [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                             nil]];
         
         [_metronomeTimeStart release];
         _metronomeTimeStart = [[NSDate date] retain];
@@ -741,25 +807,47 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_audioRouteTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarPlayToggleFeature
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     route, @"AudioRoute",
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlayToggleFeature
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     route, @"AudioRoute",
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Play toggle audio route" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                           [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                           _userSong.m_title, @"Title",
+                                                           [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                           [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                           route, @"AudioRoute",
+                                                           nil]];
     
     if ( _playMetronome == YES )
     {
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_metronomeTimeStart timeIntervalSince1970] + _playTimeAdjustment;
         
-        [g_telemetryController logEvent:GtarPlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                         _userSong.m_title, @"Title",
-                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                         @"Off", @"Metronome",
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarPlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+//                                         _userSong.m_title, @"Title",
+//                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+//                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+//                                         @"Off", @"Metronome",
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"Play toggle metronome" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                             _userSong.m_title, @"Title",
+                                                             [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                             [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                             @"Off", @"Metronome",
+                                                             [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                             nil]];
+
     }
     
 }
@@ -785,14 +873,25 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarPlaySongShared
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                     _userSong.m_title, @"Title",
-                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlaySongShared
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+//                                     _userSong.m_title, @"Title",
+//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Play song shared" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                    [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                    _userSong.m_title, @"Title",
+                                                    [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                    [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                    nil]];
+
 }
 
 #pragma mark - Main event loop
@@ -1039,14 +1138,26 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarPlaySongDisconnected
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                     _userSong.m_title, @"Title",
-                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlaySongDisconnected
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+//                                     _userSong.m_title, @"Title",
+//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Play disconnected" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                     _userSong.m_title, @"Title",
+                                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                     nil]];
+    
+    [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
     
@@ -1626,14 +1737,26 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarPlaySongCompleted
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-                                     _userSong.m_title, @"Title",
-                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarPlaySongCompleted
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+//                                     _userSong.m_title, @"Title",
+//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Play completed" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                  [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                  [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+                                                  _userSong.m_title, @"Title",
+                                                  [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+                                                  [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+                                                  nil]];
+    
+    [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
     
     // Save the scores/stars to persistent storage
     [g_userController addStars:_scoreTracker.m_stars forSong:_userSong.m_songId];

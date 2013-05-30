@@ -28,13 +28,14 @@
 #import <GtarController/GtarController.h>
 
 #import <gTarAppCore/AppCore.h>
-#import <gTarAppCore/TelemetryController.h>
+//#import <gTarAppCore/TelemetryController.h>
 
 #import "UIView+Gtar.h"
+#import "Mixpanel.h"
 
 extern GtarController * g_gtarController;
 extern AudioController * g_audioController;
-extern TelemetryController * g_telemetryController;
+//extern TelemetryController * g_telemetryConstroller;
 
 @interface FreePlayController ()
 
@@ -589,21 +590,33 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     route, @"AudioRoute",
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     route, @"AudioRoute",
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     nil]];
     
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                           route, @"AudioRoute",
+                                                           [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                           nil]];
+
     NSString *instrumentName = [m_instrumentsScroll getNameAtIndex:[g_audioController getCurrentSamplePackIndex]];
     
     delta = [[NSDate date] timeIntervalSince1970] - [m_instrumentTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     instrumentName, @"Instrument",
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     instrumentName, @"Instrument",
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     nil]];
+    
+    [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                           instrumentName, @"Instrument",
+                                                           [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                           nil]];
     
     UIButton *effectButtons[FREE_PLAY_EFFECT_COUNT] = { m_effect1OnOff, m_effect2OnOff, m_effect3OnOff, m_effect4OnOff };
     
@@ -615,11 +628,15 @@ extern TelemetryController * g_telemetryController;
         
         if ( [effectButtons[effect] isSelected] == YES )
         {
-            [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                             withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                             @"Off", name,
-                                             [NSNumber numberWithInteger:delta], @"PlayTime",
-                                             nil]];
+//            [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                             withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                             @"Off", name,
+//                                             [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                             nil]];
+            [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                   @"Off", name,
+                                                                   [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                                   nil]];
         }
         
         [m_effectTimeStart[effect] release];
@@ -697,10 +714,16 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarFreePlayDisconnected
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFreePlayDisconnected
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"FreePlay disconnected" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                         nil]];
     
     [self finalLogging];
 
@@ -1409,11 +1432,17 @@ extern TelemetryController * g_telemetryController;
         // Telemetetry log
         NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
         
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"On", name,
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         @"On", name,
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               @"On", name,
+                                                               nil]];
+
         [m_effectTimeStart[effectNum] release];
         m_effectTimeStart[effectNum] = [[NSDate date] retain];
         
@@ -1428,11 +1457,18 @@ extern TelemetryController * g_telemetryController;
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_effectTimeStart[effectNum] timeIntervalSince1970] + m_playTimeAdjustment;
         
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"Off", name,
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         @"Off", name,
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               @"Off", name,
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               nil]];
         
         [m_effectTimeStart[effectNum] release];
         m_effectTimeStart[effectNum] = [[NSDate date] retain];
@@ -1489,12 +1525,19 @@ extern TelemetryController * g_telemetryController;
     // Avoid the first setting
     if ( delta > 0 )
     {
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         instrumentName, @"Instrument",
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         instrumentName, @"Instrument",
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               instrumentName, @"Instrument",
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               nil]];
+
         [m_instrumentTimeStart release];
         m_instrumentTimeStart = [[NSDate date] retain];
     }
@@ -1524,12 +1567,19 @@ extern TelemetryController * g_telemetryController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-    [g_telemetryController logEvent:GtarFreePlayCompleted
-                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-                                     nil]];
+//    [g_telemetryController logEvent:GtarFreePlayCompleted
+//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                     nil]];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"FreePlay completed" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                      [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                      nil]];
+
     [self finalLogging];
-     
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -1684,11 +1734,17 @@ extern TelemetryController * g_telemetryController;
     if ( [m_scaleSwitch isSelected] )
     {
         
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"On", @"ScaleLights",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         @"On", @"ScaleLights",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               @"On", @"ScaleLights",
+                                                               nil]];
+
         [m_scaleTimeStart release];
         m_scaleTimeStart = [[NSDate date] retain];
         
@@ -1698,12 +1754,19 @@ extern TelemetryController * g_telemetryController;
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_scaleTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"Off", @"ScaleLights",
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         @"Off", @"ScaleLights",
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               @"Off", @"ScaleLights",
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               nil]];
+
         [m_scaleTimeStart release];
         m_scaleTimeStart = [[NSDate date] retain];
         
@@ -1800,12 +1863,18 @@ extern TelemetryController * g_telemetryController;
     // Avoid the first setting
     if ( delta > 0 )
     {
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         route, @"AudioRoute",
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
+//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
+//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                         route, @"AudioRoute",
+//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+//                                         nil]];
         
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                               route, @"AudioRoute",
+                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
+                                                               nil]];
         [m_audioRouteTimeStart release];
         m_audioRouteTimeStart = [[NSDate date] retain];
     }
