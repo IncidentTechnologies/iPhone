@@ -377,7 +377,7 @@
     
     if ( file == nil )
     {
-        
+        // A nil obj/sel indicates sync
         CloudRequest * cloudRequest = [m_cloudController requestFile:fileId andCallbackObj:nil andCallbackSel:nil];
         
         CloudResponse * cloudResponse = cloudRequest.m_cloudResponse;
