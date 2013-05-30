@@ -113,6 +113,46 @@
 			<key>NumNotes</key>
 			<integer>41</integer>
 		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Bowed Strings</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Carl&apos;s Synth</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Muted Clav</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Upright Bass</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Marimba</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
 	</array>
 </dict>
 </plist>
