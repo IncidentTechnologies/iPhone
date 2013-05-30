@@ -900,7 +900,7 @@
         {
             cloudRequest.m_status = CloudRequestStatusOffline;
             cloudResponse.m_status = CloudResponseStatusOffline;
-            cloudResponse.m_statusText = @"Offline, try again  in a few minutes";
+            cloudResponse.m_statusText = @"Offline, try again in a few minutes";
             
             // Return the request to sender
             [self cloudReturnResponse:cloudResponse];
