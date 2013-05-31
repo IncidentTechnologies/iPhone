@@ -13,7 +13,7 @@
 
 @class SelectorControl;
 
-@interface SocialViewController : UIViewController <PullToUpdateTableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ExpandableSearchBarDelegate>
+@interface SocialViewController : UIViewController <PullToUpdateTableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ExpandableSearchBarDelegate, UIAlertViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIView *topBar;
 @property (retain, nonatomic) IBOutlet UIButton *profileButton;

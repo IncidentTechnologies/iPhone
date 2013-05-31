@@ -916,6 +916,14 @@ extern Facebook * g_facebook;
     if ( xmpBlob == nil )
     {
         [cell.activityView stopAnimating];
+        _displayingCell = NO;
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:@"Cannot connect to server"
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil] autorelease];
+        [alert show];
+
         return;
     }
     
@@ -1264,16 +1272,23 @@ extern Facebook * g_facebook;
     }
     else
     {
-        // There was an error
-        [self displayNotification:userResponse.m_statusText turnRed:YES];
         
-        // If the menu is showing, we need to back out
-        if ( _currentLeftPanel == _menuLeftPanel )
+        // There was an error
+        
+        if ( (g_userController.m_loggedInFacebookToken != nil ||
+              g_userController.m_loggedInUsername != nil) )
         {
+            // We didn't log in, but we have before, so we won't lock them out yet..
+        }
+        else if ( _currentLeftPanel == _menuLeftPanel )
+        {
+            // If the menu is showing, we need to back out
+            [self displayNotification:userResponse.m_statusText turnRed:YES];
             [self loggedoutScreen];
         }
         else
         {
+            [self displayNotification:userResponse.m_statusText turnRed:YES];
             [self swapRightPanel:_signinRightPanel];
         
             // Renable buttons
