@@ -197,6 +197,10 @@ extern GtarController *g_gtarController;
 
 - (IBAction)closeModalButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
     [_playerViewController endPlayback];
     [_songOptionsModal closeButtonClicked:sender];
     
@@ -531,18 +535,18 @@ extern GtarController *g_gtarController;
     [playViewController release];
 }
 
-- (void)previewUserSong:(UserSong*)userSong
-{
-    // Get the XMP, stick it in the user song, and push to the game mode
-    NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
-    
-    [_playbackController startWithXmpBlob:songString];
-}
+//- (void)previewUserSong:(UserSong*)userSong
+//{
+//    // Get the XMP, stick it in the user song, and push to the game mode
+//    NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
+//    
+//    [_playbackController startWithXmpBlob:songString];
+//}
 
-- (void)stopPreview
-{
-    [_playbackController pauseSong];
-}
+//- (void)stopPreview
+//{
+//    [_playbackController pauseSong];
+//}
 
 #pragma mark - GtarControllerObserver
 
