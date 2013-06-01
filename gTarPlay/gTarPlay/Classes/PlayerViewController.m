@@ -243,22 +243,23 @@ extern AudioController *g_audioController;
     }
     else
     {
-        [_playButton setSelected:YES];
-        
         // Do this now because the AC might not be ready sooner
         @synchronized( self )
         {
-            if ( _init == NO )
+            if ( _init == YES )
             {
-                _init = YES;
-
+                [_playButton setSelected:YES];
+                
+//                _init = YES;
+                
+                [_songPlaybackController playSong];
 //                [_songPlaybackController observeGtarController:g_gtarController];
+                
+                [self startUpdating];
             }
             
-            [_songPlaybackController playSong];
         }
         
-        [self startUpdating];
     }
     
 
