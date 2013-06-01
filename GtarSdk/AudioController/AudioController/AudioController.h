@@ -94,7 +94,7 @@ enum AudioSource
 - (void) reset;
 - (void) ClearOutEffects;
 
-- (void) setSamplePackWithName:(NSString*)name;
+- (bool) setSamplePackWithName:(NSString*)name;
 - (void) setSamplePackWithName:(NSString*)name withSelector:(SEL)aSelector andOwner:(NSObject*)parent;
 - (void) setSamplePackWithIndex:(int)index withSelector:(SEL)aSelector andOwner:(NSObject*)parent;
 - (void) samplerFinishedLoadingCB:(NSNumber*)result;
