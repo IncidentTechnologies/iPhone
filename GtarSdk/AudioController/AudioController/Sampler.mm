@@ -171,13 +171,9 @@
     int samplePackNum = [self getSamplePackNumFromName:name];
     if (-1 == samplePackNum)
     {
-        // No match found
-        NSLog(@"No sample pack found with name %@.", name);
-        // Although the load was technically not successful, return true so that the
-        // caller can stop waiting for a new load to happen and can restart use of the
-        // AudioController
-        [self finishedLoadingSamplePack:true withSelector:aSelector andOwner:parent];
-        return;
+        // No match found, use default (whatever is at index 0)
+        NSLog(@"No sample pack found with name %@. Using default sample pack", name);
+        samplePackNum = 0;
     }
     
     [self asynchLoadSamplerWithIndex:samplePackNum withSelector:aSelector andOwner:parent];
@@ -189,7 +185,7 @@
     
     if (m_currentSamplePackIndex == index && m_pendingLoad)
     {
-        NSLog(@"this sample currently loading");
+        NSLog(@"This sample pack currently loading");
         return;
     }
     else if (m_currentSamplePackIndex == index)
