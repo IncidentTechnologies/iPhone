@@ -1006,12 +1006,17 @@ static OSStatus renderInput(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     m_pDistortion->ClearOutEffect();
 }
 
-- (void) setSamplePackWithName:(NSString*)name
+- (bool) setSamplePackWithName:(NSString*)name
 {
     [self stopAUGraph];
-    [m_sampler loadSamplerWithName:name];
-    [m_sampler Reset];
-    [self startAUGraph];
+    bool result = [m_sampler loadSamplerWithName:name];
+    if(result)
+    {
+        [m_sampler Reset];
+        [self startAUGraph];
+    }
+    
+    return result;
 }
 
 - (void) setSamplePackWithName:(NSString*)name withSelector:(SEL)aSelector andOwner:(NSObject*)parent

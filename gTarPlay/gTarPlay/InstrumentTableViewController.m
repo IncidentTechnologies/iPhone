@@ -185,6 +185,11 @@
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:instrumentIndex inSection:0];
     
     [self.tableView selectRowAtIndexPath:indexPath animated:NO  scrollPosition:UITableViewScrollPositionNone];
+    
+    [self stopFlicker];
+    
+    if ([_delegate respondsToSelector:@selector(didLoadInstrument)])
+        [_delegate didLoadInstrument];
 }
 
 @end

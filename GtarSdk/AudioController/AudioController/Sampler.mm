@@ -124,11 +124,18 @@
         return true;
     }
     
-    if (![self loadSamplerWithIndex:samplePackNum])
+    m_pendingLoadRequests++;
+    @synchronized(self)
     {
-        NSLog(@"loadSamplerWithIndex failed for instrumentNum:%d", samplePackNum);
-        return false;   
-    };
+        m_pendingLoadRequests--;
+        bool result = [self loadSamplerWithIndex:samplePackNum];
+        m_pendingLoad = NO;
+        if (!result)
+        {
+            NSLog(@"loadSamplerWithIndex failed for instrumentNum:%d", samplePackNum);
+            return false;
+        };
+    }
     
     return true;
 }
