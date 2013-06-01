@@ -38,6 +38,8 @@
         _tableView = [[[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain] retain];
         
         _flickerState = NO;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeInstrument:) name:@"InstrumentChanged" object:nil];
     }
     
     return self;
@@ -45,6 +47,8 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"InstrumentChanged" object:nil];
+    
     [_audioController release];
     [_instruments release];
     [_loadingTimer release];
@@ -175,5 +179,12 @@
     }
 }
 
+- (void) didChangeInstrument:(NSNotification *)notification
+{
+    NSInteger instrumentIndex = [[[notification userInfo] objectForKey:@"instrumentIndex"] intValue];
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:instrumentIndex inSection:0];
+    
+    [self.tableView selectRowAtIndexPath:indexPath animated:NO  scrollPosition:UITableViewScrollPositionNone];
+}
 
 @end

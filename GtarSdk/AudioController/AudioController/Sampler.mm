@@ -157,6 +157,10 @@
     
     [self setupMappingArray];
     
+    // broadcast Audio Controller instrument changed
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:m_currentSamplePackIndex ], @"instrumentIndex", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"InstrumentChanged" object:self userInfo:userInfo];
+    
     return true;
 }
 
