@@ -73,41 +73,7 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Analogue</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Electric Piano</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>Square</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Strings</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>StabSynth</string>
-			<key>FriendlyName</key>
-			<string>Stab Synth</string>
 			<key>FirstNoteMidiNum</key>
 			<integer>40</integer>
 			<key>NumNotes</key>
