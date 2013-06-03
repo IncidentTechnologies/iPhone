@@ -88,6 +88,7 @@ extern AudioController *g_audioController;
 
 - (void)didLoadInstrument
 {
+    [g_audioController reset];
     _loading = NO;
 }
 

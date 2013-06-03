@@ -106,9 +106,6 @@
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
-    // Change the current sample pack to the new one
-    [m_audioController setSamplePackWithName:song.m_instrument];
-    
     [m_songModel startWithDelegate:self];
     
     [self startMainEventLoop];

@@ -211,6 +211,11 @@ extern GtarController *g_gtarController;
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     if ( _volumeViewController.isDown == YES )
     {
         [_songOptionsModal.blackButtonOrig setHidden:YES];

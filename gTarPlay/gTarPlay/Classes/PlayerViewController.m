@@ -14,6 +14,8 @@
 
 #import <gTarAppCore/SongPlaybackController.h>
 #import <gTarAppCore/UserSong.h>
+#import <gTarAppCore/NSSong.h>
+#import <AudioController/AudioController.h>
 
 @class AudioController;
 @class GtarController;
@@ -68,12 +70,19 @@ extern AudioController *g_audioController;
     
     _init = NO;
     
-    [self performSelectorInBackground:@selector(backgroundLoading) withObject:nil];
+//    [self performSelectorInBackground:@selector(backgroundLoading) withObject:nil];
     
     // Start the progress bar at zero when we open up.
     _fillView.layer.transform = CATransform3DMakeTranslation( 0, 0, 0 );
     
 //    [_songPlaybackController observeGtarController:g_gtarController];
+    
+    [_songPlaybackController startWithXmpBlob:_xmpBlob];
+    [_songPlaybackController stopMainEventLoop];
+
+    // Change the current sample pack to the new one
+//    [g_audioController setSamplePackWithName:song.m_instrument];
+    [g_audioController setSamplePackWithName:_songPlaybackController.m_songModel.m_song.m_instrument withSelector:@selector(finishedLoadingSamplePack:) andOwner:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -117,6 +126,13 @@ extern AudioController *g_audioController;
         
         [_loadedInvocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
     }
+}
+
+- (void)finishedLoadingSamplePack:(NSNumber *)result
+{
+    _init = YES;
+    
+    [_loadedInvocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
 }
 
 - (void)attachToSuperview:(UIView *)view
@@ -227,22 +243,23 @@ extern AudioController *g_audioController;
     }
     else
     {
-        [_playButton setSelected:YES];
-        
         // Do this now because the AC might not be ready sooner
         @synchronized( self )
         {
-            if ( _init == NO )
+            if ( _init == YES )
             {
-                _init = YES;
-
+                [_playButton setSelected:YES];
+                
+//                _init = YES;
+                
+                [_songPlaybackController playSong];
 //                [_songPlaybackController observeGtarController:g_gtarController];
+                
+                [self startUpdating];
             }
             
-            [_songPlaybackController playSong];
         }
         
-        [self startUpdating];
     }
     
 

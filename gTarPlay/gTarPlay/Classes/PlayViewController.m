@@ -1447,7 +1447,7 @@ extern AudioController * g_audioController;
     if ( _difficulty == PlayViewControllerDifficultyHard )
     {
         // Play the note at normal intensity
-        [self pluckString:str andFret:fret andVelocity:velocity];
+//        [self pluckString:str andFret:fret andVelocity:velocity];
         
         // Record the note
         [_songRecorder playString:str andFret:fret];
