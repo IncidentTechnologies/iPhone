@@ -2053,6 +2053,9 @@
 		ECE9D250170525ED00BB6C53 /* MenuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D24D170525ED00BB6C53 /* MenuIcon.png */; };
 		ECE9D251170525ED00BB6C53 /* VolumeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D24E170525ED00BB6C53 /* VolumeIcon.png */; };
 		ECE9D252170525ED00BB6C53 /* VolumeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE9D24E170525ED00BB6C53 /* VolumeIcon.png */; };
+		ECEB3316175BD8F5009913F4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE8E174DAEA1004E26DE /* SystemConfiguration.framework */; };
+		ECEB3317175BD8FC009913F4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE8C174DAE97004E26DE /* AdSupport.framework */; };
+		ECEB3318175BD904009913F4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE90174DAEAC004E26DE /* CoreTelephony.framework */; };
 		ECFF771A1742EA1C002D7D40 /* Bear_Brown.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF77191742EA1C002D7D40 /* Bear_Brown.png */; };
 		ECFF771B1742EA1C002D7D40 /* Bear_Brown.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF77191742EA1C002D7D40 /* Bear_Brown.png */; };
 		ECFF771D1742EA9E002D7D40 /* BackButtonRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF771C1742EA9E002D7D40 /* BackButtonRev.png */; };
@@ -3236,6 +3239,9 @@
 				ECC11E50162D07AD001A231A /* AudioToolbox.framework in Frameworks */,
 				ECC11E51162D07AD001A231A /* MediaPlayer.framework in Frameworks */,
 				ECC11E52162D07AD001A231A /* QuartzCore.framework in Frameworks */,
+				ECEB3318175BD904009913F4 /* CoreTelephony.framework in Frameworks */,
+				ECEB3317175BD8FC009913F4 /* AdSupport.framework in Frameworks */,
+				ECEB3316175BD8F5009913F4 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
