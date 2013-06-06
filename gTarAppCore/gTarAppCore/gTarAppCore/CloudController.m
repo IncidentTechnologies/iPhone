@@ -658,6 +658,7 @@
 #pragma mark UserFollows
 
 - (CloudRequest*)requestUserSessions:(NSInteger)userId
+                             andPage:(NSInteger)page
                       andCallbackObj:(id)obj
                       andCallbackSel:(SEL)sel
 {
@@ -666,7 +667,7 @@
     CloudRequest * cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypeGetUserSongSessions andCallbackObject:obj andCallbackSelector:sel];
     
     cloudRequest.m_userId = userId;
-    
+    cloudRequest.m_page = page;
     [self cloudSendRequest:cloudRequest];
     
     return [cloudRequest autorelease];
@@ -738,6 +739,7 @@
 }
 
 - (CloudRequest*)requestFollowsSessions:(NSInteger)userId
+                                andPage:(NSInteger)page
                          andCallbackObj:(id)obj
                          andCallbackSel:(SEL)sel
 {
@@ -747,18 +749,23 @@
     
     cloudRequest.m_userId = userId;
     
+    cloudRequest.m_page = page;
+    
     [self cloudSendRequest:cloudRequest];
     
     return [cloudRequest autorelease];
     
 }
 
-- (CloudRequest*)requestGlobalSessionsCallbackObj:(id)obj
-                                   andCallbackSel:(SEL)sel
+- (CloudRequest*)requestGlobalSessionsPage:(NSInteger)page
+                            andCallbackObj:(id)obj
+                            andCallbackSel:(SEL)sel
 {
     
     // Create async request
     CloudRequest * cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypeGetUserGlobalSongSessions andCallbackObject:obj andCallbackSelector:sel];
+    
+    cloudRequest.m_page = page;
     
     [self cloudSendRequest:cloudRequest];
     
@@ -855,6 +862,13 @@
     {
         // Sync requests just go 
         return [self cloudProcessRequest:cloudRequest];
+    }
+    else if ( cloudRequest.m_type == CloudRequestTypeGetFile )
+    {
+        // bypass the request queue for file requests.
+        [self cloudProcessRequest:cloudRequest];
+        
+        return nil;
     }
     else
     {
@@ -1038,23 +1052,32 @@
         [callbackObject performSelectorOnMainThread:callbackSelector withObject:cloudResponse waitUntilDone:NO];
     }
     
-    // Now that this request is done, we can issue another one
-    @synchronized(m_requestQueue)
+    if ( cloudRequest.m_type != CloudRequestTypeGetFile )
     {
-        // Remove the object we just finished.
-        [m_requestQueue removeObjectAtIndex:0];
+        // GetFile bypasses the request queue
         
-        // If there is anything else, send one off.
-        if ( [m_requestQueue count] > 0 )
+        // Now that this request is done, we can issue another one
+        @synchronized(m_requestQueue)
         {
-            // Pull off the first object from the queue
-            CloudRequest * cloudRequest = [m_requestQueue objectAtIndex:0];
+            // Remove the object we just finished.
+            [m_requestQueue removeObject:cloudRequest];
             
-            [self cloudProcessRequest:cloudRequest];
-            
+            // If there is anything else, send one off.
+            if ( [m_requestQueue count] > 0 )
+            {
+                for ( CloudRequest * cloudRequest in m_requestQueue )
+                {
+                    // Pull off the first unsent object from the queue
+                    if ( cloudRequest.m_status == CloudRequestStatusPending )
+                    {
+                        [self cloudProcessRequest:cloudRequest];
+                        break;
+                    }
+                }
+            }
         }
     }
-        
+    
 }
 
 #pragma mark -
@@ -1456,11 +1479,15 @@
             
             url = CloudRequestTypeGetUserSongSessionsUrl;
             
-            NSDictionary * param = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    @"data[UserSongSession][user_id]", @"Name",
-                                    [NSNumber numberWithInteger:cloudRequest.m_userId], @"Value", nil];
+            NSDictionary * param1 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"data[UserSongSession][user_id]", @"Name",
+                                     [NSNumber numberWithInteger:cloudRequest.m_userId], @"Value", nil];
             
-            params = [NSArray arrayWithObject:param];
+            NSDictionary * param2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"data[UserSongSession][page]", @"Name",
+                                     [NSNumber numberWithInteger:cloudRequest.m_page], @"Value", nil];
+            
+            params = [NSArray arrayWithObjects:param1, param2, nil];
             
             
         } break;
@@ -1522,19 +1549,28 @@
             
             url = CloudRequestTypeGetUserFollowsSongSessionsUrl;
             
-            NSDictionary * param = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    @"data[UserFollow][user_id]", @"Name",
-                                    [NSNumber numberWithInteger:cloudRequest.m_userId], @"Value", nil];
+            NSDictionary * param1 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"data[UserFollow][user_id]", @"Name",
+                                     [NSNumber numberWithInteger:cloudRequest.m_userId], @"Value", nil];
             
-            params = [NSArray arrayWithObject:param];
+            NSDictionary * param2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"data[UserFollow][page]", @"Name",
+                                     [NSNumber numberWithInteger:cloudRequest.m_page], @"Value", nil];
+            
+            params = [NSArray arrayWithObjects:param1, param2, nil];
             
         } break;
             
         case CloudRequestTypeGetUserGlobalSongSessions:
         {
+            NSDictionary * param = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"data[UserSongSessions][page]", @"Name",
+                                    [NSNumber numberWithInteger:cloudRequest.m_page], @"Value", nil];
+            
+            params = [NSArray arrayWithObject:param];
             
             url = CloudRequestTypeGetUserGlobalSongSessionsUrl;
-                        
+            
         } break;
             
         case CloudRequestTypeRedeemCreditCode:

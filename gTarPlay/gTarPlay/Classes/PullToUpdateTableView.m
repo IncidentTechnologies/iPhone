@@ -286,10 +286,10 @@
         
         [self belowThreshold];
         
-        if ( [self.delegate respondsToSelector:@selector(update)] )
+        if ( [self.delegate respondsToSelector:@selector(updateTables)] )
         {
             // Its up to the delegate to start animation
-            [self.delegate update];
+            [self.delegate updateTable];
         }
         
         // Don't actually set the content offset here

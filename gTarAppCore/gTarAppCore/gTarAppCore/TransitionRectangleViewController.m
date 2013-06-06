@@ -310,7 +310,7 @@
         textView.frame = fr;
         
         textView.backgroundColor = [UIColor clearColor];            
-        textView.textAlignment = UITextAlignmentCenter;
+        textView.textAlignment = NSTextAlignmentCenter;
         textView.text = m_title;
         
         // make it bold
@@ -359,7 +359,7 @@
                 
                 UITextView * textView = [[UITextView alloc] initWithFrame:rect];
                 textView.backgroundColor = [UIColor clearColor];
-                textView.textAlignment = UITextAlignmentCenter;
+                textView.textAlignment = NSTextAlignmentCenter;
                 textView.text = textString;
                 
                 [imageView addSubview:textView];
@@ -383,7 +383,7 @@
             textView.frame = fr;
             
             textView.backgroundColor = [UIColor clearColor];            
-            textView.textAlignment = UITextAlignmentCenter;
+            textView.textAlignment = NSTextAlignmentCenter;
             textView.text = textString;
             
             textView.numberOfLines = 10;

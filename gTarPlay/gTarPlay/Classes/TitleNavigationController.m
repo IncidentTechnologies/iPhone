@@ -75,6 +75,9 @@ extern Facebook * g_facebook;
     NSArray *_globalFeed;
     NSArray *_friendFeed;
     
+    CGFloat _globalFeedOffset;
+    CGFloat _friendFeedOffset;
+
     NSInteger _outstandingImageDownloads;
     
     BOOL _refreshingGlobalFeed;
@@ -550,21 +553,38 @@ extern Facebook * g_facebook;
 
 - (IBAction)feedSelectorChanged:(id)sender
 {
-    if ( _feedSelectorControl.selectedIndex == 0 && _refreshingFriendFeed == YES )
+    if ( _feedSelectorControl.selectedIndex == 0 )
     {
-        [_feedTable startAnimatingOffscreen];
+        _globalFeedOffset = _feedTable.contentOffset.y;
+        
+        [_feedTable setContentOffset:CGPointMake(0, _friendFeedOffset)];
+        
+        if ( _refreshingFriendFeed == YES )
+        {
+            [_feedTable startAnimatingOffscreen];
+        }
+        else
+        {
+            [_feedTable stopAnimating];
+        }
     }
-    else if ( _feedSelectorControl.selectedIndex == 1 && _refreshingGlobalFeed == YES )
+    else if ( _feedSelectorControl.selectedIndex == 1 )
     {
-        [_feedTable startAnimatingOffscreen];
-    }
-    else
-    {
-        [_feedTable stopAnimating];
+        _friendFeedOffset = _feedTable.contentOffset.y;
+        
+        [_feedTable setContentOffset:CGPointMake(0, _globalFeedOffset)];
+        
+        if ( _refreshingGlobalFeed == YES )
+        {
+            [_feedTable startAnimatingOffscreen];
+        }
+        else
+        {
+            [_feedTable stopAnimating];
+        }
     }
     
-    // Return the table to the top and reload its data
-    [_feedTable setContentOffset:CGPointMake(0, 0)];
+    // Reload its data
     [_feedTable reloadData];
 }
 
@@ -883,12 +903,29 @@ extern Facebook * g_facebook;
 //    return 41;
 //}
 
-- (void)update
+- (void)updateTable
 {
     [_feedTable startAnimating];
     
-    [self updateFriendFeed];
-    [self updateGlobalFeed];
+    if ( _feedSelectorControl.selectedIndex == 0 )
+    {
+        [self updateFriendFeed];
+    }
+    else if ( _feedSelectorControl.selectedIndex == 1 )
+    {
+        [self updateGlobalFeed];
+    }
+}
+
+- (void)nextPage
+{
+    if ( _feedSelectorControl.selectedIndex == 0 )
+    {
+    }
+    else if ( _feedSelectorControl.selectedIndex == 1 )
+    {
+        
+    }
 }
 
 #pragma mark - Table view delegate
@@ -1080,8 +1117,7 @@ extern Facebook * g_facebook;
     [g_gtarController turnOffAllLeds];
     [g_gtarController sendDisableDebug];
     
-//    if ( g_cloudController.m_loggedIn == YES )
-    if ( YES )
+    if ( g_cloudController.m_loggedIn == YES )
     {
         [self loggedinScreen];
     }
@@ -1345,12 +1381,18 @@ extern Facebook * g_facebook;
         _globalFeed = [cloudResponse.m_responseUserSongSessions.m_sessionsArray retain];
     }
     
-    // Precache any files we need
+    // Precache any files we need -- only the first 10 or so
+    NSInteger counter = 0;
+    
     for ( UserSongSession *session in _globalFeed )
     {
         //[g_fileController precacheFile:session.m_userSong.m_imgFileId];
         _outstandingImageDownloads++;
         [g_fileController getFileOrDownloadAsync:session.m_userSong.m_imgFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
+        if ( ++counter > 10 )
+        {
+            break;
+        }
     }
     
     _refreshingGlobalFeed = NO;
@@ -1370,12 +1412,18 @@ extern Facebook * g_facebook;
     
     _friendFeed = [entry.m_followsSessionsList retain];
     
-    // Precache any files we need
+    // Precache any files we need -- only first 10 or so
+    NSInteger counter = 0;
+    
     for ( UserSongSession *session in _friendFeed )
     {
         //[g_fileController precacheFile:session.m_userSong.m_imgFileId];
         _outstandingImageDownloads++;
         [g_fileController getFileOrDownloadAsync:session.m_userSong.m_imgFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
+        if ( ++counter > 10 )
+        {
+            break;
+        }
     }
     
     _refreshingFriendFeed = NO;
@@ -1558,14 +1606,14 @@ extern Facebook * g_facebook;
 {
     _refreshingGlobalFeed = YES;
     
-    [g_cloudController requestGlobalSessionsCallbackObj:self andCallbackSel:@selector(globalUpdateSucceeded:)];
+    [g_cloudController requestGlobalSessionsPage:2 andCallbackObj:self andCallbackSel:@selector(globalUpdateSucceeded:)];
 }
 
 - (void)updateFriendFeed
 {
     _refreshingFriendFeed = YES;
     
-    [g_userController requestUserFollowsSessions:0 andCallbackObj:self andCallbackSel:@selector(userUpdateSucceeded:)];
+    [g_userController requestUserFollowsSessions:0 andPage:0 andCallbackObj:self andCallbackSel:@selector(userUpdateSucceeded:)];
 }
 
 #pragma mark - Misc

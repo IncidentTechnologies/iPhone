@@ -1728,6 +1728,8 @@
 		ECEB3316175BD8F5009913F4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE8E174DAEA1004E26DE /* SystemConfiguration.framework */; };
 		ECEB3317175BD8FC009913F4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE8C174DAE97004E26DE /* AdSupport.framework */; };
 		ECEB3318175BD904009913F4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE90174DAEAC004E26DE /* CoreTelephony.framework */; };
+		ECEB331C175D6E28009913F4 /* PaginatedPullToUpdateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEB331B175D6E28009913F4 /* PaginatedPullToUpdateTableView.m */; };
+		ECEB331D175D6E28009913F4 /* PaginatedPullToUpdateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEB331B175D6E28009913F4 /* PaginatedPullToUpdateTableView.m */; };
 		ECFF771A1742EA1C002D7D40 /* Bear_Brown.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF77191742EA1C002D7D40 /* Bear_Brown.png */; };
 		ECFF771B1742EA1C002D7D40 /* Bear_Brown.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF77191742EA1C002D7D40 /* Bear_Brown.png */; };
 		ECFF771D1742EA9E002D7D40 /* BackButtonRev.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF771C1742EA9E002D7D40 /* BackButtonRev.png */; };
@@ -2689,6 +2691,8 @@
 		ECE9D2471705133900BB6C53 /* PlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayViewController.xib; sourceTree = "<group>"; };
 		ECE9D24D170525ED00BB6C53 /* MenuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuIcon.png; path = Resources/Images/Play/MenuIcon.png; sourceTree = SOURCE_ROOT; };
 		ECE9D24E170525ED00BB6C53 /* VolumeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = VolumeIcon.png; path = Resources/Images/Play/VolumeIcon.png; sourceTree = SOURCE_ROOT; };
+		ECEB331A175D6E28009913F4 /* PaginatedPullToUpdateTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaginatedPullToUpdateTableView.h; sourceTree = "<group>"; };
+		ECEB331B175D6E28009913F4 /* PaginatedPullToUpdateTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaginatedPullToUpdateTableView.m; sourceTree = "<group>"; };
 		ECFF77191742EA1C002D7D40 /* Bear_Brown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bear_Brown.png; path = Resources/Images/General/Bear_Brown.png; sourceTree = "<group>"; };
 		ECFF771C1742EA9E002D7D40 /* BackButtonRev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackButtonRev.png; path = Resources/Images/General/BackButtonRev.png; sourceTree = "<group>"; };
 		ECFF773117440BA9002D7D40 /* FirmwareModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirmwareModalViewController.h; sourceTree = "<group>"; };
@@ -3648,6 +3652,7 @@
 				EC0BAD9616F2771A00E567A6 /* CyclingTextField */,
 				EC0BAD9116F2458200E567A6 /* SelectorControl */,
 				EC1E4DEB1548A44A0033F904 /* PullToUpdateTableView */,
+				ECEB3319175D6DEE009913F4 /* PaginatedPullToUpdateTableView */,
 				EC48665117287E4A0066194D /* SlidingViewController */,
 				EC48664F17287E130066194D /* SlidingInstrumentViewController */,
 				ECCC0355170CB9FD0021DB00 /* VolumeViewController */,
@@ -4190,6 +4195,15 @@
 				ECCC0343170B80240021DB00 /* NoteGreyscale.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		ECEB3319175D6DEE009913F4 /* PaginatedPullToUpdateTableView */ = {
+			isa = PBXGroup;
+			children = (
+				ECEB331A175D6E28009913F4 /* PaginatedPullToUpdateTableView.h */,
+				ECEB331B175D6E28009913F4 /* PaginatedPullToUpdateTableView.m */,
+			);
+			name = PaginatedPullToUpdateTableView;
 			sourceTree = "<group>";
 		};
 		ECFF771F1742EDAF002D7D40 /* Global */ = {
@@ -5972,6 +5986,7 @@
 				EC7CAE86174DA940004E26DE /* NSData+MPBase64.m in Sources */,
 				EC7CAE88174DA940004E26DE /* ODIN.m in Sources */,
 				EC7CAE8A174DA940004E26DE /* Mixpanel.m in Sources */,
+				ECEB331C175D6E28009913F4 /* PaginatedPullToUpdateTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6043,6 +6058,7 @@
 				EC7CAE87174DA940004E26DE /* NSData+MPBase64.m in Sources */,
 				EC7CAE89174DA940004E26DE /* ODIN.m in Sources */,
 				EC7CAE8B174DA940004E26DE /* Mixpanel.m in Sources */,
+				ECEB331D175D6E28009913F4 /* PaginatedPullToUpdateTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

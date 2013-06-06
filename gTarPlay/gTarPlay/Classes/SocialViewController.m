@@ -47,7 +47,7 @@ extern Facebook *g_facebook;
 //    BOOL displaySearch;
     NSInteger _requestsInFlight;
     
-    BOOL _alertShowing;
+    UIAlertView *_alertView;
 }
 @end
 
@@ -108,6 +108,9 @@ extern Facebook *g_facebook;
     [_followButton release];
     [_followingButton release];
     [_profileButton release];
+    
+    _alertView.delegate = nil;
+    
     [super dealloc];
 }
 
@@ -202,7 +205,7 @@ extern Facebook *g_facebook;
     [_feedTable startAnimating];
 
     [g_userController requestUserProfile:userId andCallbackObj:self andCallbackSel:@selector(userProfileCallback:)];
-    [g_userController requestUserSessions:userId andCallbackObj:self andCallbackSel:@selector(userSessionsCallback:)];
+    [g_userController requestUserSessions:userId andPage:0 andCallbackObj:self andCallbackSel:@selector(userSessionsCallback:)];
     [g_userController requestUserFollows:userId andCallbackObj:self andCallbackSel:@selector(userFollowingCallback:)];
     [g_userController requestUserFollowedBy:userId andCallbackObj:self andCallbackSel:@selector(userFollowersCallback:)];
 }
@@ -492,14 +495,14 @@ extern Facebook *g_facebook;
     }
     else
     {
-        if ( _alertShowing == NO )
+        if ( _alertView == nil )
         {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
-                                                             message:userResponse.m_statusText
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil] autorelease];
-            [alert show];
+            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:userResponse.m_statusText
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+            [_alertView show];
         }
     }
 }
@@ -519,14 +522,14 @@ extern Facebook *g_facebook;
     }
     else
     {
-        if ( _alertShowing == NO )
+        if ( _alertView == nil )
         {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
-                                                             message:userResponse.m_statusText
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil] autorelease];
-            [alert show];
+            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:userResponse.m_statusText
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+            [_alertView show];
         }
     }
 }
@@ -546,14 +549,14 @@ extern Facebook *g_facebook;
     }
     else
     {
-        if ( _alertShowing == NO )
+        if ( _alertView == nil )
         {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
-                                                             message:userResponse.m_statusText
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil] autorelease];
-            [alert show];
+            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:userResponse.m_statusText
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+            [_alertView show];
         }
     }
 }
@@ -573,14 +576,14 @@ extern Facebook *g_facebook;
     }
     else
     {
-        if ( _alertShowing == NO )
+        if ( _alertView == nil )
         {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
-                                                             message:userResponse.m_statusText
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil] autorelease];
-            [alert show];
+            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:userResponse.m_statusText
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+            [_alertView show];
         }
     }
 }
@@ -602,14 +605,14 @@ extern Facebook *g_facebook;
     }
     else
     {
-        if ( _alertShowing == NO )
+        if ( _alertView == nil )
         {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
-                                                             message:userResponse.m_statusText
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil] autorelease];
-            [alert show];
+            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:userResponse.m_statusText
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+            [_alertView show];
         }
     }
 }
@@ -634,14 +637,14 @@ extern Facebook *g_facebook;
     }
     else
     {
-        if ( _alertShowing == NO )
+        if ( _alertView == nil )
         {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
-                                                             message:userResponse.m_statusText
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil] autorelease];
-            [alert show];
+            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:userResponse.m_statusText
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+            [_alertView show];
         }
     }
 }
@@ -792,7 +795,7 @@ extern Facebook *g_facebook;
 
 #pragma mark - PullToUpdate
 
-- (void)update
+- (void)updateTable
 {
     [self requestUserId:_displayedUserId];
 }
@@ -801,12 +804,12 @@ extern Facebook *g_facebook;
 
 - (void)willPresentAlertView:(UIAlertView *)alertView
 {
-    _alertShowing = YES;
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    _alertShowing = NO;
+    _alertView = nil;
 }
 
 #pragma mark - Misc

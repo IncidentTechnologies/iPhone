@@ -244,7 +244,7 @@
         
         [label setTextColor:[UIColor whiteColor]];
         [label setBackgroundColor:[UIColor clearColor]];
-        [label setTextAlignment:UITextAlignmentCenter];
+        [label setTextAlignment:NSTextAlignmentCenter];
         label.shadowColor = [UIColor darkGrayColor];
         label.shadowOffset = CGSizeMake( 1, 1 );
         

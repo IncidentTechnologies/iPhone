@@ -803,6 +803,7 @@
 }
 
 - (void)requestUserSessions:(NSInteger)userId
+                    andPage:(NSInteger)page
              andCallbackObj:(id)obj
              andCallbackSel:(SEL)sel
 {
@@ -812,6 +813,7 @@
                                               andCallbackSelector:sel];
     
     CloudRequest * cloudRequest = [m_cloudController requestUserSessions:userId
+                                                                 andPage:page
                                                           andCallbackObj:self
                                                           andCallbackSel:@selector(requestUserSessionsCallback:)];
     
@@ -834,8 +836,17 @@
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
         
-        [self setSessionsForUserId:cloudResponse.m_responseUserId
-                            toList:cloudResponse.m_responseUserSongSessions.m_sessionsArray];
+        // Subsequent pages are appended to the list instead of replacing it
+        if ( cloudResponse.m_cloudRequest.m_page == 0 )
+        {
+            [self setSessionsForUserId:cloudResponse.m_responseUserId
+                                toList:cloudResponse.m_responseUserSongSessions.m_sessionsArray];
+        }
+        else
+        {
+            [self appendSessionsForUserId:cloudResponse.m_responseUserId
+                                 fromList:cloudResponse.m_responseUserSongSessions.m_sessionsArray];
+        }
         
         [self saveCacheAsync];
         
@@ -993,6 +1004,7 @@
 }
 
 - (void)requestUserFollowsSessions:(NSInteger)userId
+                           andPage:(NSInteger)page
                     andCallbackObj:(id)obj
                     andCallbackSel:(SEL)sel
 {
@@ -1014,6 +1026,7 @@
     }
     
     CloudRequest * cloudRequest = [m_cloudController requestFollowsSessions:userId
+                                                                    andPage:page
                                                              andCallbackObj:self
                                                              andCallbackSel:@selector(requestUserFollowsSessionsCallback:)];
     
@@ -1376,6 +1389,28 @@
         [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:m_loggedInUserProfile.m_userId]];
     }
 
+}
+
+- (void)appendSessionsForUserId:(NSInteger)userId fromList:(NSArray*)list
+{
+    NSNumber * key = [NSNumber numberWithInteger:userId];
+    
+    UserEntry * entry = [m_userCache objectForKey:key];
+    
+    if ( entry == nil )
+    {
+        entry = [[[UserEntry alloc] init] autorelease];
+    }
+    
+    entry.m_sessionsList = [entry.m_sessionsList arrayByAddingObjectsFromArray:list];
+    
+    [m_userCache setObject:entry forKey:key];
+    
+    // create an alias for the 0 id (ie the current user)
+    if ( userId == 0 )
+    {
+        [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:m_loggedInUserProfile.m_userId]];
+    }
 }
 
 - (void)setFollowsForUserId:(NSInteger)userId toList:(NSArray*)list
