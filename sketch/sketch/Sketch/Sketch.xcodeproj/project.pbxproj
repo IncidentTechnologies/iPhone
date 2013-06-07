@@ -24,6 +24,9 @@
 		9D42D82617613B8800614738 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D7FE17613B8700614738 /* Foundation.framework */; };
 		9D42D82E17613B8800614738 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9D42D82C17613B8800614738 /* InfoPlist.strings */; };
 		9D42D83117613B8800614738 /* SketchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D42D83017613B8800614738 /* SketchTests.m */; };
+		9D42D844176159C700614738 /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D843176159C700614738 /* libAudioController.a */; };
+		9D42D846176159CD00614738 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D845176159CD00614738 /* libGtarController.a */; };
+		9D42D848176159D300614738 /* libgTarAppCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D847176159D300614738 /* libgTarAppCore.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		9D42D82D17613B8800614738 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9D42D82F17613B8800614738 /* SketchTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchTests.h; sourceTree = "<group>"; };
 		9D42D83017613B8800614738 /* SketchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SketchTests.m; sourceTree = "<group>"; };
+		9D42D843176159C700614738 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioController.a; path = "../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
+		9D42D845176159CD00614738 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
+		9D42D847176159D300614738 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarAppCore.a; path = "../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos/libgTarAppCore.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D42D846176159CD00614738 /* libGtarController.a in Frameworks */,
+				9D42D844176159C700614738 /* libAudioController.a in Frameworks */,
+				9D42D848176159D300614738 /* libgTarAppCore.a in Frameworks */,
 				9D42D7FD17613B8700614738 /* UIKit.framework in Frameworks */,
 				9D42D7FF17613B8700614738 /* Foundation.framework in Frameworks */,
 				9D42D80117613B8700614738 /* CoreGraphics.framework in Frameworks */,
@@ -108,6 +117,9 @@
 		9D42D7FB17613B8700614738 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D42D847176159D300614738 /* libgTarAppCore.a */,
+				9D42D845176159CD00614738 /* libGtarController.a */,
+				9D42D843176159C700614738 /* libAudioController.a */,
 				9D42D7FC17613B8700614738 /* UIKit.framework */,
 				9D42D7FE17613B8700614738 /* Foundation.framework */,
 				9D42D80017613B8700614738 /* CoreGraphics.framework */,
@@ -396,7 +408,12 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sketch/Sketch-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "Sketch/Sketch-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -407,7 +424,12 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sketch/Sketch-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "Sketch/Sketch-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -466,6 +488,7 @@
 				9D42D83617613B8800614738 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9D42D83717613B8800614738 /* Build configuration list for PBXNativeTarget "SketchTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +497,7 @@
 				9D42D83917613B8800614738 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

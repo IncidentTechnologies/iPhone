@@ -24,6 +24,7 @@
 -(id) init
 {
     return [self initWithSampleRate:44100 AndSamplePack:nil];
+    
 }
 
 - (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString *)name
