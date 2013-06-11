@@ -158,10 +158,14 @@
 
 - (void) stopFlicker
 {
-    [_loadingTimer invalidate];
-    UITableViewCell* cell = [_tableView cellForRowAtIndexPath:[_tableView indexPathForSelectedRow]];
-    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
-    cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        
+        [_loadingTimer invalidate];
+        UITableViewCell* cell = [_tableView cellForRowAtIndexPath:[_tableView indexPathForSelectedRow]];
+        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
+    }];
+    
 }
 
 - (void) animateFlicker:(NSTimer*)theTimer
