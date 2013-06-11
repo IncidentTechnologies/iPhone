@@ -56,8 +56,8 @@ UserController * g_userController;
         
         // Init the cloud controller
 //        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
-        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/m1"];
 //        g_cloudController = [[CloudController alloc] initWithServer:@"http://50.18.250.24/m1"];
+        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.5"];
         
         // Restore the file controller so we can get all the cached content
         g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
