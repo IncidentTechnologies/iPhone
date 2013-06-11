@@ -108,8 +108,7 @@
 // Accesors
 - (UserEntry*)getUserEntry:(NSInteger)userId;
 - (void)setUserProfileForUserId:(NSInteger)userId toProfile:(UserProfile*)profile;
-- (void)setSessionsForUserId:(NSInteger)userId toList:(NSArray*)list;
-- (void)appendSessionsForUserId:(NSInteger)userId fromList:(NSArray*)list;
+- (void)setSessionsForUserId:(NSInteger)userId toList:(NSArray*)list forPage:(NSInteger)page;
 - (void)setFollowsForUserId:(NSInteger)userId toList:(NSArray*)list;
 - (void)setFollowedByForUserId:(NSInteger)userId toList:(NSArray*)list;
 - (void)setFacebookFriendsForUserId:(NSInteger)userId toList:(NSArray*)list;

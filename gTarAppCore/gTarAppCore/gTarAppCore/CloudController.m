@@ -668,6 +668,7 @@
     
     cloudRequest.m_userId = userId;
     cloudRequest.m_page = page;
+    
     [self cloudSendRequest:cloudRequest];
     
     return [cloudRequest autorelease];
@@ -1480,11 +1481,11 @@
             url = CloudRequestTypeGetUserSongSessionsUrl;
             
             NSDictionary * param1 = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"data[UserSongSession][user_id]", @"Name",
+                                     @"data[UserSongSessions][user_id]", @"Name",
                                      [NSNumber numberWithInteger:cloudRequest.m_userId], @"Value", nil];
             
             NSDictionary * param2 = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"data[UserSongSession][page]", @"Name",
+                                     @"data[UserSongSessions][page]", @"Name",
                                      [NSNumber numberWithInteger:cloudRequest.m_page], @"Value", nil];
             
             params = [NSArray arrayWithObjects:param1, param2, nil];

@@ -17,6 +17,7 @@
 @synthesize m_sessionsList;
 @synthesize m_followsSessionsList;
 @synthesize m_facebookFriendsList;
+@synthesize m_sessionsListCurrentPage;
 
 // Encode an object to an archive
 - (void)encodeWithCoder:(NSCoder *)coder
@@ -28,6 +29,7 @@
     [coder encodeObject:m_sessionsList forKey:@"SessionList"];
     [coder encodeObject:m_followsSessionsList forKey:@"FollowsSessionsList"];
     [coder encodeObject:m_facebookFriendsList forKey:@"FacebookFriendsList"];
+    [coder encodeInteger:m_sessionsListCurrentPage forKey:@"SessionListCurrentPage"];
     
 }
 
@@ -45,6 +47,7 @@
         self.m_sessionsList = [coder decodeObjectForKey:@"SessionList"];
         self.m_followsSessionsList = [coder decodeObjectForKey:@"FollowsSessionsList"];
         self.m_facebookFriendsList = [coder decodeObjectForKey:@"FacebookFriendsList"];
+        self.m_sessionsListCurrentPage = [coder decodeIntegerForKey:@"SessionListCurrentPage"];
     }
     
     return self;

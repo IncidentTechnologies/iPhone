@@ -33,6 +33,7 @@
     
     self.tableFooterView = footer;
     
+    [self disablePagination];
 }
 
 - (void)dealloc
@@ -54,12 +55,7 @@
 {
     [super setContentOffset:contentOffset];
     
-    if ( m_triggerReady == NO )
-    {
-        return;
-    }
-    
-    if ( (contentOffset.y + self.frame.size.height + FOOTER_HEIGHT) > self.contentSize.height )
+    if ( m_enabled && m_triggerReady && (contentOffset.y + self.frame.size.height + FOOTER_HEIGHT) > self.contentSize.height )
     {
         if ( [self.delegate respondsToSelector:@selector(nextPage)] == YES )
         {
@@ -84,13 +80,13 @@
 - (void)disablePagination
 {
     m_enabled = NO;
-    [m_footerLabel setHidden:YES];
+    [self.tableFooterView setHidden:YES];
 }
 
 - (void)enablePagination
 {
     m_enabled = YES;
-    [m_footerLabel setHidden:NO];
+    [self.tableFooterView setHidden:NO];
 }
 
 @end

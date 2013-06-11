@@ -286,7 +286,7 @@
         
         [self belowThreshold];
         
-        if ( [self.delegate respondsToSelector:@selector(updateTables)] )
+        if ( [self.delegate respondsToSelector:@selector(updateTable)] )
         {
             // Its up to the delegate to start animation
             [self.delegate updateTable];
