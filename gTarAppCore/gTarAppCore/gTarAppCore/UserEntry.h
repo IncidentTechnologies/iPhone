@@ -18,6 +18,7 @@
     NSArray * m_sessionsList;
     NSArray * m_followsSessionsList;
     NSArray * m_facebookFriendsList;
+    NSInteger m_sessionsListCurrentPage;
 }
 
 @property (nonatomic, retain) UserProfile * m_userProfile;
@@ -26,5 +27,5 @@
 @property (nonatomic, retain) NSArray * m_sessionsList;
 @property (nonatomic, retain) NSArray * m_followsSessionsList;
 @property (nonatomic, retain) NSArray * m_facebookFriendsList;
-
+@property (nonatomic, assign) NSInteger m_sessionsListCurrentPage;
 @end

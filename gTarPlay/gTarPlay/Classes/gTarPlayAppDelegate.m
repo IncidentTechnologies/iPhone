@@ -55,8 +55,9 @@ UserController * g_userController;
         //
         
         // Init the cloud controller
-        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
-//        g_cloudController = [[CloudController alloc] initWithServer:@"http://50.18.250.24/v1.0.6"];
+//        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
+//        g_cloudController = [[CloudController alloc] initWithServer:@"http://50.18.250.24/m1"];
+        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.5"];
         
         // Restore the file controller so we can get all the cached content
         g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
@@ -98,7 +99,7 @@ UserController * g_userController;
         [g_gtarController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR | Debug_BUILD
-        [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:10.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 #endif
         
     }

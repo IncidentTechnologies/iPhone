@@ -78,7 +78,7 @@
 - (void)requestUserProfileSearch:(NSString*)search andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (void)requestUserProfileSearchCallback:(CloudResponse*)cloudResponse;
 
-- (void)requestUserSessions:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestUserSessions:(NSInteger)userId andPage:(NSInteger)page andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (void)requestUserSessionsCallback:(CloudResponse*)cloudResponse;
 
 - (void)requestAddUserFollow:(NSInteger)friendUserId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
@@ -87,7 +87,7 @@
 - (void)requestRemoveUserFollow:(NSInteger)friendUserId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (void)requestRemoveUserFollowCallback:(CloudResponse*)cloudResponse;
 
-- (void)requestUserFollowsSessions:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (void)requestUserFollowsSessions:(NSInteger)userId andPage:(NSInteger)page andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (void)requestUserFollowsSessionsCallback:(CloudResponse*)cloudResponse;
 
 //- (void)requestUserGlobalSessionsCallbackObj:(id)obj andCallbackSel:(SEL)sel;
@@ -108,7 +108,7 @@
 // Accesors
 - (UserEntry*)getUserEntry:(NSInteger)userId;
 - (void)setUserProfileForUserId:(NSInteger)userId toProfile:(UserProfile*)profile;
-- (void)setSessionsForUserId:(NSInteger)userId toList:(NSArray*)list;
+- (void)setSessionsForUserId:(NSInteger)userId toList:(NSArray*)list forPage:(NSInteger)page;
 - (void)setFollowsForUserId:(NSInteger)userId toList:(NSArray*)list;
 - (void)setFollowedByForUserId:(NSInteger)userId toList:(NSArray*)list;
 - (void)setFacebookFriendsForUserId:(NSInteger)userId toList:(NSArray*)list;

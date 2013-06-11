@@ -220,6 +220,16 @@
     return ( userProfile.m_userId == self.m_userId );
     
 }
-            
+
+- (void)setM_imgFileId:(NSInteger)imgFileId
+{
+    // 0 is an invalid file, but 1 is the server's "default image" picture
+    if ( imgFileId == 0 )
+    {
+        imgFileId = 1;
+    }
+    
+    m_imgFileId = imgFileId;
+}
 
 @end

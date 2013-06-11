@@ -14,6 +14,7 @@
 typedef enum
 {
 	CloudRequestStatusUnknown = 0,
+    CloudRequestStatusPending,
     CloudRequestStatusSent,
     CloudRequestStatusReceivingData,
     CloudRequestStatusCompleted,
@@ -100,6 +101,7 @@ typedef enum
     // CloudRequestTypeAddUserFollows, CloudRequestTypeRemoveUserFollows,
     // CloudRequestTypeGetUserFollowedList, CloudRequestTypeGetUserFollowsSongSessions,
     NSInteger m_userId;
+    NSInteger m_page;
     
     // CloudRequestTypeSearchUserProfile
     NSString * m_searchString;
@@ -143,6 +145,7 @@ typedef enum
 @property (nonatomic, retain) NSHTTPCookie * m_cookie;
 @property (nonatomic, assign) NSInteger m_fileId;
 @property (nonatomic, assign) NSInteger m_userId;
+@property (nonatomic, assign) NSInteger m_page;
 @property (nonatomic, retain) NSString * m_searchString;
 @property (nonatomic, retain) NSString * m_creditCode;
 @property (nonatomic, retain) UserSong * m_userSong;

@@ -51,7 +51,7 @@
 - (void)logMessage:(NSString*)message;
 //- (void)logMessage:(NSString*)message withType:(TelemetryControllerMessageType)type;
 
-- (void)logEvent:(TelemetryControllerEvent)event withValue:(NSInteger)value andMessage:(NSString*)message;
+//- (void)logEvent:(TelemetryControllerEvent)event withValue:(NSInteger)value andMessage:(NSString*)message;
 - (void)logEvent:(TelemetryControllerEvent)event withDictionary:(NSDictionary*)dictionary;
 
 - (void)addMessageToQueue:(NSString*)message;

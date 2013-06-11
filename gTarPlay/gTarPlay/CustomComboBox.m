@@ -141,7 +141,7 @@
         UIFont *font = [label font];
         font = [font fontWithSize:13];
         [label setFont:font];
-        [label setTextAlignment:UITextAlignmentCenter];
+        [label setTextAlignment:NSTextAlignmentCenter];
         
         [m_scrollView addSubview:label];
         [m_contentSubviews addObject:label];

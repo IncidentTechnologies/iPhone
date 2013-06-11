@@ -9,14 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @protocol PullToUpdateTableViewDelegate <UITableViewDelegate>
-
-- (void)update;
-
+@optional
+- (void)updateTable;
 @end
 
 @interface PullToUpdateTableView : UITableView
 {
-    
     UILabel * m_instructionsLabel;
     UILabel * m_lastUpdateLabel;
     UIActivityIndicatorView * m_updatingIndicatorView;
@@ -25,7 +23,6 @@
     
     BOOL m_aboveThreshold;
     BOOL m_animating;
-    
 }
 
 @property (nonatomic, assign) IBOutlet id<PullToUpdateTableViewDelegate> delegate;

@@ -8,17 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-#import "PullToUpdateTableView.h"
+#import "PaginatedPullToUpdateTableView.h"
 #import "ExpandableSearchBar.h"
 
 @class SelectorControl;
 
-@interface SocialViewController : UIViewController <PullToUpdateTableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ExpandableSearchBarDelegate, UIAlertViewDelegate>
+@interface SocialViewController : UIViewController <PaginatedPullToUpdateTableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ExpandableSearchBarDelegate, UIAlertViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIView *topBar;
 @property (retain, nonatomic) IBOutlet UIButton *profileButton;
 @property (retain, nonatomic) IBOutlet SelectorControl *feedSelector;
-@property (retain, nonatomic) IBOutlet PullToUpdateTableView *feedTable;
+@property (retain, nonatomic) IBOutlet PaginatedPullToUpdateTableView *feedTable;
 @property (retain, nonatomic) IBOutlet UITableView *searchTable;
 @property (retain, nonatomic) IBOutlet UIButton *fullscreenButton;
 @property (retain, nonatomic) IBOutlet ExpandableSearchBar *searchBar;

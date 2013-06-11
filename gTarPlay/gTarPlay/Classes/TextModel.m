@@ -23,7 +23,7 @@
 		
 		[self changeColor:color];
 				
-		m_texture = [[Texture2D alloc] initWithString:text dimensions:size alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:height];
+		m_texture = [[Texture2D alloc] initWithString:text dimensions:size alignment:NSTextAlignmentCenter fontName:@"Arial" fontSize:height];
 		
 	}
 	

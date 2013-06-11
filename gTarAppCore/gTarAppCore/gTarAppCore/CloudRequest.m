@@ -24,6 +24,7 @@
 @synthesize m_cookie;
 @synthesize m_fileId;
 @synthesize m_userId;
+@synthesize m_page;
 @synthesize m_searchString;
 @synthesize m_creditCode;
 @synthesize m_userSong;
@@ -43,6 +44,7 @@
 	if ( self )
 	{
 
+        m_status = CloudRequestStatusPending;
         m_type = type;
         m_isSynchronous = YES;
         
@@ -59,7 +61,7 @@
     
 	if ( self )
 	{
-        
+        m_status = CloudRequestStatusPending;
         m_type = type;
         
         // Nil obj/sel are assumed to mean sync

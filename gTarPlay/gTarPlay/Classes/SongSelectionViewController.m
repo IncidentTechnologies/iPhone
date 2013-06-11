@@ -18,6 +18,7 @@
 
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/CloudResponse.h>
+#import <gTarAppCore/CloudRequest.h>
 #import <gTarAppCore/FileController.h>
 #import <gTarAppCore/UserSong.h>
 #import <gTarAppCore/UserSongs.h>
@@ -25,6 +26,8 @@
 #import <gTarAppCore/SongPlaybackController.h>
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/SongPlaybackController.h>
+
+#define MAX_SIMULTANEOUS_SONG_DOWNLOADS 10
 
 extern FileController *g_fileController;
 extern CloudController *g_cloudController;
@@ -47,6 +50,8 @@ extern GtarController *g_gtarController;
     NSInteger _currentDifficulty;
     
     BOOL _searching;
+    
+    NSInteger _nextUserSong;
 }
 @end
 
@@ -86,11 +91,14 @@ extern GtarController *g_gtarController;
 {
     [super viewDidLoad];
     
+    if ( [_userSongArray count] == 0 )
+    {
+        [_songListTable startAnimating];
+    }
+    
     [_topBar addShadow];
     
     [_fullscreenButton setHidden:YES];
-    
-    [self refreshSongList];
     
     _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
     
@@ -108,12 +116,7 @@ extern GtarController *g_gtarController;
     // Download any files we are missing
     if ( [_userSongArray count] > 0 )
     {
-        for ( UserSong * userSong in _userSongArray )
-        {
-//            [g_fileController getFileOrDownloadAsync:userSong.m_imgFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
-            [g_fileController getFileOrDownloadAsync:userSong.m_xmpFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
-        }
-        
+        [self downloadUserSongs];
     }
     
     [g_gtarController addObserver:self];
@@ -142,7 +145,16 @@ extern GtarController *g_gtarController;
         
         [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
-
+    
+    if ( [_userSongArray count] == 0 )
+    {
+        CloudRequest *cloudRequest = [g_cloudController requestSongListCallbackObj:nil andCallbackSel:nil];
+        [self requestSongListCallback:cloudRequest.m_cloudResponse];
+    }
+    else
+    {
+        [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -297,17 +309,42 @@ extern GtarController *g_gtarController;
 
 - (void)refreshSongList
 {
+    [_songListTable startAnimating];
+    [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
+    
     // Start animating offscreen if there are already songs displayed.
-    if ( [_userSongArray count] > 0 )
+//    if ( [_userSongArray count] > 0 )
     {
-        [_songListTable startAnimatingOffscreen];
+//        [_songListTable startAnimatingOffscreen];
+//        [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
     }
-    else
+//    else
     {
-        [_songListTable startAnimating];
+        // First time, do a sync request so we can show the song list quickly
+//        [_songListTable startAnimating];
+//        CloudRequest *cloudRequest = [g_cloudController requestSongListCallbackObj:nil andCallbackSel:nil];
+//        [self requestSongListCallback:cloudRequest.m_cloudResponse];
     }
     
-	[g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
+}
+
+- (void)downloadUserSongs
+{
+    @synchronized(_userSongArray)
+    {
+        NSInteger songs = 0;
+        
+        while ( _nextUserSong < [_userSongArray count] && songs < MAX_SIMULTANEOUS_SONG_DOWNLOADS )
+        {
+            UserSong *userSong = [_userSongArray objectAtIndex:_nextUserSong++];
+            
+            if ( [g_fileController fileExists:userSong.m_xmpFileId] == NO )
+            {
+                [g_fileController getFileOrDownloadAsync:userSong.m_xmpFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
+                songs++;
+            }
+        }
+    }
 }
 
 - (void)setUserSongArray:(NSArray *)userSongArray
@@ -350,19 +387,15 @@ extern GtarController *g_gtarController;
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
         // refresh table data
-        UserSongs * userSongs = cloudResponse.m_responseUserSongs;
+        UserSongs *userSongs = cloudResponse.m_responseUserSongs;
         
         [self setUserSongArray:userSongs.m_songsArray];
         
         // Download everything
-        for ( UserSong * userSong in _userSongArray )
-        {
-//            [g_fileController getFileOrDownloadAsync:userSong.m_imgFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
-            [g_fileController getFileOrDownloadAsync:userSong.m_xmpFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
-        }
+        [self downloadUserSongs];
         
         // Save this new array
-        NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
         
         [settings setObject:[NSKeyedArchiver archivedDataWithRootObject:_userSongArray] forKey:@"UserSongArray"];
         
@@ -384,6 +417,21 @@ extern GtarController *g_gtarController;
 
 - (void)fileDownloadFinished:(id)file
 {
+    // What do we download next
+    @synchronized(_userSongArray)
+    {
+        while ( _nextUserSong < [_userSongArray count] )
+        {
+            UserSong *userSong = [_userSongArray objectAtIndex:_nextUserSong++];
+            
+            if ( [g_fileController fileExists:userSong.m_xmpFileId] == NO )
+            {
+                [g_fileController getFileOrDownloadAsync:userSong.m_xmpFileId callbackObject:self callbackSelector:@selector(fileDownloadFinished:)];
+                break;
+            }
+        }
+    }
+    
     [_songListTable reloadData];
 }
 
@@ -498,7 +546,7 @@ extern GtarController *g_gtarController;
     [_startButton stopActivityIndicator];
 }
 
-- (void)update
+- (void)updateTable
 {
     [self refreshSongList];
 }
