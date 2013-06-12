@@ -14,6 +14,7 @@ extern AudioController * g_audioController;
 
 @property (retain, nonatomic) IBOutlet UISlider *toneSlider;
 @property (retain, nonatomic) IBOutlet UISwitch *audioRouteSwitch;
+@property (retain, nonatomic) IBOutlet UISwitch *slideSwitch;
 
 @end
 
@@ -45,6 +46,10 @@ extern AudioController * g_audioController;
     self.audioRouteSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
     self.audioRouteSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.audioRouteSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
+    
+    self.slideSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
+    self.slideSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
+    self.slideSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +65,7 @@ extern AudioController * g_audioController;
     [_toneSlider release];
     [_audioRouteSwitch release];
     
+    [_slideSwitch release];
     [super dealloc];
 }
 
@@ -80,6 +86,16 @@ extern AudioController * g_audioController;
     {
         [g_audioController RouteAudioToSpeaker];
     }
+}
+
+- (IBAction)setSlideHammer:(id)sender
+{
+    NSDictionary *routeData = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [NSNumber numberWithBool:_slideSwitch.isOn], @"isSlideEnabled", nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"SlideHammerStateChange"
+     object:self userInfo:routeData];
 }
 
 - (IBAction)exitFreePlay:(id)sender

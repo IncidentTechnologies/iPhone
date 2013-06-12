@@ -62,7 +62,6 @@ enum PlayViewControllerDifficulty
 
 @property (retain, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (retain, nonatomic) IBOutlet UILabel *songArtistLabel;
-@property (retain, nonatomic) IBOutlet UILabel *completionLabel;
 
 @property (retain, nonatomic) IBOutlet UIButton *difficultyButton;
 @property (retain, nonatomic) IBOutlet UILabel *difficultyLabel;

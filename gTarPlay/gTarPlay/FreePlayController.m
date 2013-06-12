@@ -60,6 +60,8 @@ extern AudioController * g_audioController;
 
 @property (retain, nonatomic) IBOutlet UIView *menuBarDropShadowView;
 
+@property BOOL isSlideEnabled;
+
 -(void) switchMainContentControllerToVC:(UIViewController*)newVC;
 
 @end
@@ -125,6 +127,11 @@ extern AudioController * g_audioController;
         // Properly account for play time
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResignActive) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
+        // Register for slide/hammer state change notification
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeSlideHammer:) name:@"SlideHammerStateChange" object:nil];
+        
+        _isSlideEnabled = YES;
         
         m_playTimeStart = [[NSDate date] retain];
         m_audioRouteTimeStart = [[NSDate date] retain];
@@ -193,6 +200,8 @@ extern AudioController * g_audioController;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SlideHammerStateChange" object:nil];
     
     [g_gtarController removeObserver:self];
     
@@ -655,12 +664,20 @@ extern AudioController * g_audioController;
 
 - (void)gtarFretDown:(GtarPosition)position
 {
-    [g_audioController FretDown:position.fret onString:position.string - 1];
+    // Only act upon this message if sliding/hammering is enabled
+    if (_isSlideEnabled)
+    {
+        [g_audioController FretDown:position.fret onString:position.string - 1];
+    }
 }
 
 - (void)gtarFretUp:(GtarPosition)position
 {
-    [g_audioController FretUp:position.fret onString:position.string - 1];
+    // Only act upon this message if sliding/hammering is enabled
+    if (_isSlideEnabled)
+    {
+        [g_audioController FretUp:position.fret onString:position.string - 1];
+    }
 }
 
 - (void)gtarNoteOn:(GtarPluck)pluck
@@ -731,6 +748,12 @@ extern AudioController * g_audioController;
 
 }
 
+// selector to update the slide/hammer state when NSNotification is received
+- (void) didChangeSlideHammer:(NSNotification *) notification
+{
+    NSDictionary *data = [notification userInfo];
+    _isSlideEnabled = [[data objectForKey:@"isSlideEnabled"] boolValue];
+}
 
 - (void) setupJamPadWithEffectAtIndex:(int)index
 {
