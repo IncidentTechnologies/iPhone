@@ -85,7 +85,6 @@ extern Facebook *g_facebook;
     
     _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
     
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,8 +95,6 @@ extern Facebook *g_facebook;
 
 - (void)dealloc
 {
-    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    
     [_topBar release];
     [_feedSelector release];
     [_feedTable release];
