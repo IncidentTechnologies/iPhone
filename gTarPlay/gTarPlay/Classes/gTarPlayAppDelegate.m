@@ -77,15 +77,6 @@ UserController * g_userController;
 #else
         
         Mixpanel *mixpanel = [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
-//        mixpanel.nameTag = @"marty";
-        
-        [mixpanel registerSuperProperties:[NSDictionary dictionaryWithObjectsAndKeys:@"Premium", @"Plan", nil]];
-        
-        [mixpanel track:@"Player Create" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                     @"girl", @"gender",
-                                                     @"knife", @"weapon",
-                                                     nil]];
-        
         
 #endif
         // Connect to the gtar device
@@ -99,7 +90,7 @@ UserController * g_userController;
         [g_gtarController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR | Debug_BUILD
-        [NSTimer scheduledTimerWithTimeInterval:10.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 #endif
         
     }
