@@ -39,12 +39,8 @@
 		EC5DA88F161A5F850015832E /* UserResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA887161A5F850015832E /* UserResponse.m */; };
 		EC5DA899161A5F980015832E /* FileController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA891161A5F980015832E /* FileController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA89A161A5F980015832E /* FileController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA892161A5F980015832E /* FileController.m */; };
-		EC5DA89B161A5F980015832E /* FileEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA893161A5F980015832E /* FileEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA89C161A5F980015832E /* FileEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA894161A5F980015832E /* FileEntry.m */; };
 		EC5DA89D161A5F980015832E /* FileRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA895161A5F980015832E /* FileRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA89E161A5F980015832E /* FileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA896161A5F980015832E /* FileRequest.m */; };
-		EC5DA89F161A5F980015832E /* FileMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA897161A5F980015832E /* FileMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8A0161A5F980015832E /* FileMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA898161A5F980015832E /* FileMetadata.m */; };
 		EC5DA8A4161A5FB20015832E /* TimeFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8A2161A5FB20015832E /* TimeFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA8A5161A5FB20015832E /* TimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8A3161A5FB20015832E /* TimeFormatter.m */; };
 		EC5DA8AF161A601F0015832E /* TransitionRectangleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8AD161A601F0015832E /* TransitionRectangleViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -169,12 +165,8 @@
 		EC5DA887161A5F850015832E /* UserResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserResponse.m; sourceTree = "<group>"; };
 		EC5DA891161A5F980015832E /* FileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileController.h; sourceTree = "<group>"; };
 		EC5DA892161A5F980015832E /* FileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileController.m; sourceTree = "<group>"; };
-		EC5DA893161A5F980015832E /* FileEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileEntry.h; sourceTree = "<group>"; };
-		EC5DA894161A5F980015832E /* FileEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileEntry.m; sourceTree = "<group>"; };
 		EC5DA895161A5F980015832E /* FileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileRequest.h; sourceTree = "<group>"; };
 		EC5DA896161A5F980015832E /* FileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileRequest.m; sourceTree = "<group>"; };
-		EC5DA897161A5F980015832E /* FileMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileMetadata.h; sourceTree = "<group>"; };
-		EC5DA898161A5F980015832E /* FileMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileMetadata.m; sourceTree = "<group>"; };
 		EC5DA8A2161A5FB20015832E /* TimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFormatter.h; sourceTree = "<group>"; };
 		EC5DA8A3161A5FB20015832E /* TimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFormatter.m; sourceTree = "<group>"; };
 		EC5DA8AD161A601F0015832E /* TransitionRectangleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionRectangleViewController.h; sourceTree = "<group>"; };
@@ -405,12 +397,8 @@
 			children = (
 				EC5DA891161A5F980015832E /* FileController.h */,
 				EC5DA892161A5F980015832E /* FileController.m */,
-				EC5DA893161A5F980015832E /* FileEntry.h */,
-				EC5DA894161A5F980015832E /* FileEntry.m */,
 				EC5DA895161A5F980015832E /* FileRequest.h */,
 				EC5DA896161A5F980015832E /* FileRequest.m */,
-				EC5DA897161A5F980015832E /* FileMetadata.h */,
-				EC5DA898161A5F980015832E /* FileMetadata.m */,
 			);
 			name = FileController;
 			sourceTree = "<group>";
@@ -656,10 +644,8 @@
 				EC5DA88C161A5F850015832E /* UserRequest.h in Headers */,
 				EC5DA88E161A5F850015832E /* UserResponse.h in Headers */,
 				EC5DA899161A5F980015832E /* FileController.h in Headers */,
-				EC5DA89B161A5F980015832E /* FileEntry.h in Headers */,
 				EC5DA89D161A5F980015832E /* FileRequest.h in Headers */,
 				EC5DA8B3161A60270015832E /* PopupViewController.h in Headers */,
-				EC5DA89F161A5F980015832E /* FileMetadata.h in Headers */,
 				EC5DA8CB161A60390015832E /* FullScreenActivityView.h in Headers */,
 				EC5DA8D2161A60600015832E /* XmlDictionary.h in Headers */,
 				EC5DA8D4161A60600015832E /* XmlDom.h in Headers */,
@@ -772,9 +758,7 @@
 				EC5DA88D161A5F850015832E /* UserRequest.m in Sources */,
 				EC5DA88F161A5F850015832E /* UserResponse.m in Sources */,
 				EC5DA89A161A5F980015832E /* FileController.m in Sources */,
-				EC5DA89C161A5F980015832E /* FileEntry.m in Sources */,
 				EC5DA89E161A5F980015832E /* FileRequest.m in Sources */,
-				EC5DA8A0161A5F980015832E /* FileMetadata.m in Sources */,
 				EC5DA8A5161A5FB20015832E /* TimeFormatter.m in Sources */,
 				EC5DA8B0161A601F0015832E /* TransitionRectangleViewController.m in Sources */,
 				EC5DA8B4161A60270015832E /* PopupViewController.m in Sources */,

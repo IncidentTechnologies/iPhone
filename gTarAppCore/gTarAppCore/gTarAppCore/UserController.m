@@ -1538,7 +1538,7 @@
     {
         [m_pendingUserSongSessionUploads removeObject:songSession];
         
-        if ( [m_pendingUserSongSessionUploads count] == 0 )
+//        if ( [m_pendingUserSongSessionUploads count] == 0 )
         {
             // When all are uploaded, we can save the cache
             [self saveCache];

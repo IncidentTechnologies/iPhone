@@ -507,6 +507,7 @@
         [self saveFile:file withFileId:cloudResponse.m_responseFileId];
     }
     
+    // Remove this below? Already done in downloadFileCallback
     FileRequest * fileRequest = [m_pendingFileRequests objectForKey:key];
     
     if ( fileRequest != nil )
