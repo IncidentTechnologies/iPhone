@@ -70,7 +70,6 @@ typedef enum
     IBOutlet UIActivityIndicatorView * m_activityIndicatorView;
     IBOutlet UIView * m_connectingView;
     
-    std::vector<Effect*> m_effects;
     Effect *m_selectedEffect;
     
     int m_ScaleArray[41];

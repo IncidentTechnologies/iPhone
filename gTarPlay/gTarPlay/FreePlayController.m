@@ -757,7 +757,7 @@ extern AudioController * g_audioController;
 
 - (void) setupJamPadWithEffectAtIndex:(int)index
 {
-    m_selectedEffect = m_effects[index];
+    //m_selectedEffect = m_effects[index];
     [m_currentEffectName setText:[[NSString stringWithCString:m_selectedEffect->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     Parameter &primary = m_selectedEffect->getPrimaryParam();
     Parameter &secondary = m_selectedEffect->getSecondaryParam();
@@ -1450,21 +1450,22 @@ extern AudioController * g_audioController;
     // set pass through of effect based on new state
     if ([sender isSelected])
     {
-        m_effects[effectNum]->SetPassThru(false);
+        //m_effects[effectNum]->SetPassThru(false);
         
         // Telemetetry log
-        NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
+        //NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
         
 //        [g_telemetryController logEvent:GtarFreePlayToggleFeature
 //                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
 //                                         @"On", name,
 //                                         nil]];
         
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        //Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
-        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+        /*[mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                @"On", name,
                                                                nil]];
+         */
 
         [m_effectTimeStart[effectNum] release];
         m_effectTimeStart[effectNum] = [[NSDate date] retain];
@@ -1473,10 +1474,10 @@ extern AudioController * g_audioController;
     else
     {
 
-        m_effects[effectNum]->SetPassThru(true);
+        //m_effects[effectNum]->SetPassThru(true);
         
         // Telemetetry log
-        NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
+        //NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_effectTimeStart[effectNum] timeIntervalSince1970] + m_playTimeAdjustment;
         
@@ -1486,12 +1487,13 @@ extern AudioController * g_audioController;
 //                                         [NSNumber numberWithInteger:delta], @"PlayTime",
 //                                         nil]];
         
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        //Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
-        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+        /*[mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                @"Off", name,
                                                                [NSNumber numberWithInteger:delta], @"PlayTime",
                                                                nil]];
+         */
         
         [m_effectTimeStart[effectNum] release];
         m_effectTimeStart[effectNum] = [[NSDate date] retain];
