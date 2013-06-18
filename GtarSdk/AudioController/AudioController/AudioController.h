@@ -11,30 +11,14 @@
 
 @class Sampler;
 
-class Effect;
-class Parameter;
-
-class Distortion;
-class TanhDistortion;
-class Overdrive;
-class HardCutoffDistortion;
-class SoftClippingOverdrive;
-class FuzzExpDistortion;
-class DelayEffect;
-class ChorusEffect;
-class Reverb;
-class ButterWorthFilter;
-class KSObject;
-class Compressor;
-
-enum AudioSource
+typedef enum
 {
     KarplusStrong,
     SamplerSource,
     SinWave,
     SawWave,
     SquareWave
-};
+} AudioSource;
 
 @interface AudioController : NSObject 
 {
@@ -48,29 +32,7 @@ enum AudioSource
 	double sinPhase;
 	float frequency;
 	
-	AudioSource m_audioSource;
-	
-	KSObject *m_pksobjects;
-	int m_pksobjects_n;
-    
-    ButterWorthFilter *m_pBwFilter;
-    
-    bool m_fNoteOn;
-    
-    ChorusEffect *m_pChorusEffect;
-    DelayEffect *m_pDelayEffect;
-    Distortion *m_pDistortion;
-    Overdrive *m_pOverdrive;
-    Reverb *m_pReverbEffect;
-    TanhDistortion *m_pTanhDistortion;
-    HardCutoffDistortion *m_pHardCutoffDistortion;
-    SoftClippingOverdrive *m_pSoftClipOverdriveEffect;
-    FuzzExpDistortion *m_pFuzzExpDistortion;
-    
-    ButterWorthFilter *m_pEndBwFilter;
     Float32 *m_tempOut;
-    
-    Compressor *m_pCompressor;
 }
 
 @property (assign) float frequency;
@@ -158,9 +120,6 @@ enum AudioSource
 
 - (NSArray*) GetEffects;
 - (NSArray*) getEffectNames;
-
-- (Parameter&) getReverbLFO;
-- (Parameter&) getReverbExcursion;
 
 - (NSArray*) getInstrumentNames;
 - (int) getCurrentSamplePackIndex;

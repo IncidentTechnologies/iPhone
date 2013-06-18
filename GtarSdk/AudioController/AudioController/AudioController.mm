@@ -27,7 +27,47 @@
 // Native iPhone sampling rate of 44.1KHz 
 const float g_GraphSampleRate = 44100.0f;
 
+class Effect;
+class Parameter;
+
+class Distortion;
+class TanhDistortion;
+class Overdrive;
+class HardCutoffDistortion;
+class SoftClippingOverdrive;
+class FuzzExpDistortion;
+class DelayEffect;
+class ChorusEffect;
+class Reverb;
+class ButterWorthFilter;
+class KSObject;
+class Compressor;
+
 @interface AudioController ()
+{
+    AudioSource m_audioSource;
+	
+	KSObject *m_pksobjects;
+	int m_pksobjects_n;
+    
+    ButterWorthFilter *m_pBwFilter;
+    
+    bool m_fNoteOn;
+    
+    ChorusEffect *m_pChorusEffect;
+    DelayEffect *m_pDelayEffect;
+    Distortion *m_pDistortion;
+    Overdrive *m_pOverdrive;
+    Reverb *m_pReverbEffect;
+    TanhDistortion *m_pTanhDistortion;
+    HardCutoffDistortion *m_pHardCutoffDistortion;
+    SoftClippingOverdrive *m_pSoftClipOverdriveEffect;
+    FuzzExpDistortion *m_pFuzzExpDistortion;
+    
+    ButterWorthFilter *m_pEndBwFilter;
+    
+    Compressor *m_pCompressor;
+}
 
 @property (retain, nonatomic) NSMutableArray* effects;
 
@@ -548,16 +588,6 @@ const float g_GraphSampleRate = 44100.0f;
     }
 
     return names;
-}
-
-- (Parameter&) getReverbLFO
-{
-    return m_pReverbEffect->getLFO();
-}
-
-- (Parameter&) getReverbExcursion
-{
-    return m_pReverbEffect->getExcursion();
 }
 
 - (NSArray*) getInstrumentNames
