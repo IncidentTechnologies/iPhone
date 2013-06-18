@@ -803,6 +803,7 @@
 }
 
 - (void)requestUserSessions:(NSInteger)userId
+                    andPage:(NSInteger)page
              andCallbackObj:(id)obj
              andCallbackSel:(SEL)sel
 {
@@ -812,6 +813,7 @@
                                               andCallbackSelector:sel];
     
     CloudRequest * cloudRequest = [m_cloudController requestUserSessions:userId
+                                                                 andPage:page
                                                           andCallbackObj:self
                                                           andCallbackSel:@selector(requestUserSessionsCallback:)];
     
@@ -835,7 +837,8 @@
     {
         
         [self setSessionsForUserId:cloudResponse.m_responseUserId
-                            toList:cloudResponse.m_responseUserSongSessions.m_sessionsArray];
+                            toList:cloudResponse.m_responseUserSongSessions.m_sessionsArray
+                           forPage:cloudResponse.m_cloudRequest.m_page];
         
         [self saveCacheAsync];
         
@@ -993,6 +996,7 @@
 }
 
 - (void)requestUserFollowsSessions:(NSInteger)userId
+                           andPage:(NSInteger)page
                     andCallbackObj:(id)obj
                     andCallbackSel:(SEL)sel
 {
@@ -1014,6 +1018,7 @@
     }
     
     CloudRequest * cloudRequest = [m_cloudController requestFollowsSessions:userId
+                                                                    andPage:page
                                                              andCallbackObj:self
                                                              andCallbackSel:@selector(requestUserFollowsSessionsCallback:)];
     
@@ -1354,7 +1359,7 @@
     
 }
 
-- (void)setSessionsForUserId:(NSInteger)userId toList:(NSArray*)list
+- (void)setSessionsForUserId:(NSInteger)userId toList:(NSArray*)list forPage:(NSInteger)page
 {
     
     NSNumber * key = [NSNumber numberWithInteger:userId];
@@ -1366,7 +1371,25 @@
         entry = [[[UserEntry alloc] init] autorelease];
     }
     
-    entry.m_sessionsList = list;
+    if ( page > 1 )
+    {
+        // append
+        entry.m_sessionsList = [entry.m_sessionsList arrayByAddingObjectsFromArray:list];
+    }
+    else
+    {
+        // replace
+        entry.m_sessionsList = list;
+    }
+    
+    if ( [list count] > 0 )
+    {
+        entry.m_sessionsListCurrentPage = page;
+    }
+    else
+    {
+        entry.m_sessionsListCurrentPage = 0;
+    }
     
     [m_userCache setObject:entry forKey:key];
     
@@ -1515,7 +1538,7 @@
     {
         [m_pendingUserSongSessionUploads removeObject:songSession];
         
-        if ( [m_pendingUserSongSessionUploads count] == 0 )
+//        if ( [m_pendingUserSongSessionUploads count] == 0 )
         {
             // When all are uploaded, we can save the cache
             [self saveCache];

@@ -27,6 +27,12 @@
 // Native iPhone sampling rate of 44.1KHz 
 const float g_GraphSampleRate = 44100.0f;
 
+@interface AudioController ()
+
+@property (retain, nonatomic) NSMutableArray* effects;
+
+@end
+
 @implementation AudioController
 
 @synthesize frequency;
@@ -62,6 +68,8 @@ const float g_GraphSampleRate = 44100.0f;
             m_pksobjects[i].m_attenuationKS = stringAttenuation[i];
         }
         
+        _effects = [[NSMutableArray alloc] init];
+        
         // set up the BW filter
         m_pBwFilter = new ButterWorthFilter(2, 8000, g_GraphSampleRate);
         
@@ -77,23 +85,22 @@ const float g_GraphSampleRate = 44100.0f;
                                            g_GraphSampleRate        // sampling rate
                                            );
         m_pChorusEffect->SetPassThru(true);
-        m_effects.push_back(m_pChorusEffect);
+        [_effects addObject:[NSValue valueWithPointer:m_pChorusEffect]];
         
         // Set up the Delay Effect
         m_pDelayEffect = new DelayEffect(20, 0.5, 1.0, g_GraphSampleRate);
         m_pDelayEffect->SetPassThru(true);
-        m_effects.push_back(m_pDelayEffect);
+        [_effects addObject:[NSValue valueWithPointer:m_pDelayEffect]];
         
         // Set up the Reverb effect
         m_pReverbEffect = new Reverb(0.75, g_GraphSampleRate);
         m_pReverbEffect->SetPassThru(true);
-        m_effects.push_back(m_pReverbEffect);
+        [_effects addObject:[NSValue valueWithPointer:m_pReverbEffect]];
         
         // Set up the distortion effects
         m_pDistortion = new Distortion(3.78f, 0.25f, g_GraphSampleRate);
         m_pDistortion->SetPassThru(true);
-        m_effects.push_back(m_pDistortion);
-        m_pDistortion->getPrimaryParam().getValue();
+        [_effects addObject:[NSValue valueWithPointer:m_pDistortion]];
 
         m_pTanhDistortion = new TanhDistortion(1.0, 1.0, g_GraphSampleRate);
         m_pTanhDistortion->SetPassThru(true);
@@ -526,25 +533,18 @@ const float g_GraphSampleRate = 44100.0f;
 }
 
 - (NSArray*) GetEffects
-{
-    NSMutableArray *effects = [NSMutableArray array];
-    
-    for (int i = 0; i < m_effects.size(); i++)
-    {
-        Effect *e  = m_effects[i];
-        NSValue *val = [NSValue valueWithPointer:e];
-        [effects addObject:val];
-    }
-    
-    return effects;
+{    
+    return _effects;
 }
 
 - (NSArray*) getEffectNames
 {
-    NSMutableArray *names = [NSMutableArray arrayWithCapacity:m_effects.size()];
-    for (int i = 0; i < m_effects.size(); i++)
+    NSMutableArray *names = [NSMutableArray arrayWithCapacity:[_effects count]];
+    
+    for (int i = 0; i < [_effects count]; i++)
     {
-        [names addObject:[NSString stringWithCString:m_effects[i]->getName().c_str() encoding:[NSString defaultCStringEncoding]]];
+        Effect *effect = (Effect*)[_effects[i] pointerValue];
+        [names addObject:[NSString stringWithCString:effect->getName().c_str() encoding:[NSString defaultCStringEncoding]]];
     }
 
     return names;
@@ -1196,6 +1196,7 @@ static OSStatus renderInput(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     delete m_pDistortion;
     m_pDistortion = NULL;
     
+    [_effects release];
     [m_sampler release];
     
 	[super dealloc];

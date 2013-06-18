@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#define ENABLE_TIMEOUT false
+
 @interface gTarPlayApplication : UIApplication
 {
     NSTimer * m_idleTimer;
 }
 
 - (void)resetIdleTimer;
+#if ENABLE_TIMEOUT
 - (void)idleTimerExpired;
+#endif
 
 @end

@@ -88,13 +88,13 @@
 
 - (CloudRequest*)requestUploadUserSongSession:(UserSongSession*)songSession andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 
-- (CloudRequest*)requestUserSessions:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (CloudRequest*)requestUserSessions:(NSInteger)userId andPage:(NSInteger)page andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestAddFollowUser:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestRemoveFollowUser:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestFollowsList:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestFollowedByList:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
-- (CloudRequest*)requestFollowsSessions:(NSInteger)userId andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
-- (CloudRequest*)requestGlobalSessionsCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (CloudRequest*)requestFollowsSessions:(NSInteger)userId andPage:(NSInteger)page andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+- (CloudRequest*)requestGlobalSessionsPage:(NSInteger)page andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestLogUpload:(NSString*)log andVersion:(NSString*)version andDevice:(NSString*)device andApp:(NSString*)app andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (CloudRequest*)requestCurrentFirmwareVersionCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 // new

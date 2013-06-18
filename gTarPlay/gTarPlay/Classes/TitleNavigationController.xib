@@ -46,7 +46,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 47}, {182, 273}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="702164671"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -61,7 +60,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{182, 47}, {298, 273}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -83,7 +81,6 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrameSize">{109, 46}</string>
 										<reference key="NSSuperview" ref="291011119"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="128200731"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
@@ -121,7 +118,6 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{46, 0}, {62, 46}}</string>
 										<reference key="NSSuperview" ref="291011119"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="917292705"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
@@ -148,7 +144,6 @@
 								</array>
 								<string key="NSFrame">{{186, 0}, {109, 46}}</string>
 								<reference key="NSSuperview" ref="1069837679"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="219089781"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="902386531">
@@ -166,7 +161,6 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{35, 0}, {265, 47}}</string>
 										<reference key="NSSuperview" ref="429441533"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="291011119"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
@@ -196,7 +190,6 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrameSize">{35, 47}</string>
 										<reference key="NSSuperview" ref="429441533"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="613429455"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
@@ -223,7 +216,6 @@
 								</array>
 								<string key="NSFrame">{{163, 0}, {298, 47}}</string>
 								<reference key="NSSuperview" ref="1069837679"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="826564506"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="902386531"/>
@@ -232,7 +224,6 @@
 						</array>
 						<string key="NSFrameSize">{480, 46}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="429441533"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -246,7 +237,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{30, 16}, {121, 78}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="82038769"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -264,7 +254,6 @@
 								<int key="NSvFlags">301</int>
 								<string key="NSFrameSize">{568, 320}</string>
 								<reference key="NSSuperview" ref="67183610"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="717152816"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -279,7 +268,6 @@
 								<int key="NSvFlags">301</int>
 								<string key="NSFrame">{{274, 280}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="67183610"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1069837679"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -290,7 +278,6 @@
 						</array>
 						<string key="NSFrame">{{-44, 0}, {568, 320}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="402611357"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -326,7 +313,6 @@
 				</array>
 				<string key="NSFrameSize">{480, 320}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="67183610"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -1109,7 +1095,6 @@
 						<string key="NSFrame">{{13, 158}, {156, 58}}</string>
 						<reference key="NSSuperview" ref="1051442443"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="462623241"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="1018256184"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -6445,7 +6430,7 @@
 				<boolean value="NO" key="828.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="842.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="842.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
-				<string key="949.CustomClassName">PullToUpdateTableView</string>
+				<string key="949.CustomClassName">PaginatedPullToUpdateTableView</string>
 				<string key="949.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<array class="NSMutableArray" key="949.IBViewMetadataConstraints">
 					<reference ref="889289146"/>
@@ -6514,6 +6499,25 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PaginatedPullToUpdateTableView</string>
+					<string key="superclassName">PullToUpdateTableView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">delegate</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">delegate</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">delegate</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PaginatedPullToUpdateTableView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -6630,7 +6634,7 @@
 						<string key="disconnectedGtarLeftPanel">UIView</string>
 						<string key="feedRightPanel">UIView</string>
 						<string key="feedSelectorControl">SelectorControl</string>
-						<string key="feedTable">PullToUpdateTableView</string>
+						<string key="feedTable">PaginatedPullToUpdateTableView</string>
 						<string key="gatekeeperLeftPanel">UIView</string>
 						<string key="gatekeeperSigninButton">UIButton</string>
 						<string key="gatekeeperVideoButton">UIButton</string>
@@ -6678,7 +6682,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="feedTable">
 							<string key="name">feedTable</string>
-							<string key="candidateClassName">PullToUpdateTableView</string>
+							<string key="candidateClassName">PaginatedPullToUpdateTableView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="gatekeeperLeftPanel">
 							<string key="name">gatekeeperLeftPanel</string>

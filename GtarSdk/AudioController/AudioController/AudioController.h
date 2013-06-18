@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-#import <vector>
-
 @class Sampler;
 
 class Effect;
@@ -73,10 +71,6 @@ enum AudioSource
     Float32 *m_tempOut;
     
     Compressor *m_pCompressor;
-    
-    // User visible and controllable effects
-    std::vector<Effect*> m_effects;
-    
 }
 
 @property (assign) float frequency;

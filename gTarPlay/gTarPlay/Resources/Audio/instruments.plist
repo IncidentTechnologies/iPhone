@@ -41,6 +41,14 @@
 		</dict>
 		<dict>
 			<key>Name</key>
+			<string>Upright Bass</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>Piano</string>
 			<key>FirstNoteMidiNum</key>
 			<integer>40</integer>
@@ -57,23 +65,7 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Droplet</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>52</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Warm Analogue</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Square</string>
+			<string>Muted Clav</string>
 			<key>FirstNoteMidiNum</key>
 			<integer>40</integer>
 			<key>NumNotes</key>
@@ -89,6 +81,14 @@
 		</dict>
 		<dict>
 			<key>Name</key>
+			<string>Marimba</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>Carl&apos;s Synth</string>
 			<key>FirstNoteMidiNum</key>
 			<integer>40</integer>
@@ -97,23 +97,15 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Muted Clav</string>
+			<string>Droplet</string>
 			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
+			<integer>52</integer>
 			<key>NumNotes</key>
 			<integer>41</integer>
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Upright Bass</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Marimba</string>
+			<string>Square</string>
 			<key>FirstNoteMidiNum</key>
 			<integer>40</integer>
 			<key>NumNotes</key>

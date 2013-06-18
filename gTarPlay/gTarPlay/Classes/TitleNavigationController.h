@@ -13,13 +13,13 @@
 
 #import "Facebook.h"
 
-#import "PullToUpdateTableView.h"
+#import "PaginatedPullToUpdateTableView.h"
 
 @class SelectorControl;
 @class SlidingModalViewController;
 @class CyclingTextField;
 
-@interface TitleNavigationController : UIViewController <UITableViewDataSource, PullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate>
+@interface TitleNavigationController : UIViewController <UITableViewDataSource, PaginatedPullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate>
 
 // Main
 @property (retain, nonatomic) IBOutlet UIView *topBarView;
@@ -86,7 +86,7 @@
 - (IBAction)videoButtonClicked:(id)sender;
 
 // Feed
-@property (retain, nonatomic) IBOutlet PullToUpdateTableView *feedTable;
+@property (retain, nonatomic) IBOutlet PaginatedPullToUpdateTableView *feedTable;
 @property (retain, nonatomic) IBOutlet SelectorControl *feedSelectorControl;
 
 - (IBAction)feedSelectorChanged:(id)sender;

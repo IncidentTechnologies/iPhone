@@ -308,7 +308,6 @@ extern AudioController * g_audioController;
     [_progressFillView release];
     [_songTitleLabel release];
     [_songArtistLabel release];
-    [_completionLabel release];
     [_finishButton release];
     [_outputView release];
     [_postToFeedView release];
@@ -348,6 +347,23 @@ extern AudioController * g_audioController;
     
     [_metronomeTimer invalidate];
     _metronomeTimer = nil;
+    
+    // Save the scores/stars to persistent storage
+    [g_userController addStars:_scoreTracker.m_stars forSong:_userSong.m_songId];
+    [g_userController addScore:_scoreTracker.m_score forSong:_userSong.m_songId];
+    
+    // If user finished more that 15% of a song and they chose to share the song, upload the userSong session
+    if (_songModel.m_percentageComplete >= 0.15 && _feedSwitch.isOn == YES)
+    {
+        [_songRecorder finishSong];
+        // This implicitly saves the user cache
+        [self uploadUserSongSession];
+    }
+    else
+    {
+        // Otherwise, we should do it manually
+        [g_userController saveCache];
+    }
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
@@ -1181,10 +1197,8 @@ extern AudioController * g_audioController;
     // Update the menu labels
     [_songTitleLabel setText:_userSong.m_title];
     [_songArtistLabel setText:_userSong.m_author];
-    [_completionLabel setHidden:YES];
     [_finishButton setHidden:YES];
     [_outputView setHidden:NO];
-    [_postToFeedView setHidden:YES];
     [_backButton setEnabled:YES];
     
     //
@@ -1762,7 +1776,6 @@ extern AudioController * g_audioController;
     [g_userController addStars:_scoreTracker.m_stars forSong:_userSong.m_songId];
     [g_userController addScore:_scoreTracker.m_score forSong:_userSong.m_songId];
     
-    [_completionLabel setHidden:NO];
     [_finishButton setHidden:NO];
     [_backButton setEnabled:NO];
     

@@ -55,8 +55,9 @@ UserController * g_userController;
         //
         
         // Init the cloud controller
-        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
-//        g_cloudController = [[CloudController alloc] initWithServer:@"http://50.18.250.24/v1.0.6"];
+//        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
+//        g_cloudController = [[CloudController alloc] initWithServer:@"http://50.18.250.24/m1"];
+        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.5"];
         
         // Restore the file controller so we can get all the cached content
         g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
@@ -76,15 +77,6 @@ UserController * g_userController;
 #else
         
         Mixpanel *mixpanel = [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
-//        mixpanel.nameTag = @"marty";
-        
-        [mixpanel registerSuperProperties:[NSDictionary dictionaryWithObjectsAndKeys:@"Premium", @"Plan", nil]];
-        
-        [mixpanel track:@"Player Create" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                     @"girl", @"gender",
-                                                     @"knife", @"weapon",
-                                                     nil]];
-        
         
 #endif
         // Connect to the gtar device

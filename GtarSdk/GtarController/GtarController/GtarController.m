@@ -100,6 +100,8 @@
         
         m_firmwareUpdating = NO;
         m_firmwareCancelation = NO;
+        
+        m_scaleVelocity = YES;
     }
     
     return self;
