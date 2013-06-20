@@ -70,7 +70,7 @@ typedef enum
     IBOutlet UIActivityIndicatorView * m_activityIndicatorView;
     IBOutlet UIView * m_connectingView;
     
-    Effect *m_selectedEffect;
+    //Effect *m_selectedEffect;
     
     int m_ScaleArray[41];
     
