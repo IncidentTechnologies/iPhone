@@ -18,7 +18,7 @@
 		9D42D81317613B8700614738 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D42D81217613B8700614738 /* Default-568h@2x.png */; };
 		9D42D81617613B8700614738 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D42D81417613B8700614738 /* MainStoryboard_iPhone.storyboard */; };
 		9D42D81917613B8700614738 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D42D81717613B8700614738 /* MainStoryboard_iPad.storyboard */; };
-		9D42D81C17613B8700614738 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D42D81B17613B8700614738 /* ViewController.m */; };
+		9D42D81C17613B8700614738 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9D42D81B17613B8700614738 /* ViewController.mm */; };
 		9D42D82417613B8800614738 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D82317613B8800614738 /* SenTestingKit.framework */; };
 		9D42D82517613B8800614738 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D7FC17613B8700614738 /* UIKit.framework */; };
 		9D42D82617613B8800614738 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D7FE17613B8700614738 /* Foundation.framework */; };
@@ -28,6 +28,8 @@
 		9D42D846176159CD00614738 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D845176159CD00614738 /* libGtarController.a */; };
 		9D42D848176159D300614738 /* libgTarAppCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D847176159D300614738 /* libgTarAppCore.a */; };
 		9D8E3D391778F5DD0052AE20 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D8E3D381778F5DD0052AE20 /* instruments.plist */; };
+		9D8E3D3B1778FB050052AE20 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */; };
+		9D8E3D3D1778FB130052AE20 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +59,7 @@
 		9D42D81517613B8700614738 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		9D42D81817613B8700614738 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		9D42D81A17613B8700614738 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9D42D81B17613B8700614738 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9D42D81B17613B8700614738 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		9D42D82217613B8800614738 /* SketchTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SketchTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D42D82317613B8800614738 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		9D42D82B17613B8800614738 /* SketchTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SketchTests-Info.plist"; sourceTree = "<group>"; };
@@ -68,6 +70,8 @@
 		9D42D845176159CD00614738 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
 		9D42D847176159D300614738 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarAppCore.a; path = "../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos/libgTarAppCore.a"; sourceTree = "<group>"; };
 		9D8E3D381778F5DD0052AE20 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
+		9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 				9D42D7FD17613B8700614738 /* UIKit.framework in Frameworks */,
 				9D42D7FF17613B8700614738 /* Foundation.framework in Frameworks */,
 				9D42D80117613B8700614738 /* CoreGraphics.framework in Frameworks */,
+				9D8E3D3B1778FB050052AE20 /* AudioToolbox.framework in Frameworks */,
+				9D8E3D3D1778FB130052AE20 /* CoreMIDI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +128,8 @@
 				9D42D847176159D300614738 /* libgTarAppCore.a */,
 				9D42D845176159CD00614738 /* libGtarController.a */,
 				9D42D843176159C700614738 /* libAudioController.a */,
+				9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */,
+				9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */,
 				9D42D7FC17613B8700614738 /* UIKit.framework */,
 				9D42D7FE17613B8700614738 /* Foundation.framework */,
 				9D42D80017613B8700614738 /* CoreGraphics.framework */,
@@ -138,7 +146,7 @@
 				9D42D81417613B8700614738 /* MainStoryboard_iPhone.storyboard */,
 				9D42D81717613B8700614738 /* MainStoryboard_iPad.storyboard */,
 				9D42D81A17613B8700614738 /* ViewController.h */,
-				9D42D81B17613B8700614738 /* ViewController.m */,
+				9D42D81B17613B8700614738 /* ViewController.mm */,
 				9D42D80317613B8700614738 /* Supporting Files */,
 			);
 			path = Sketch;
@@ -291,7 +299,7 @@
 			files = (
 				9D42D80917613B8700614738 /* main.m in Sources */,
 				9D42D80D17613B8700614738 /* AppDelegate.m in Sources */,
-				9D42D81C17613B8700614738 /* ViewController.m in Sources */,
+				9D42D81C17613B8700614738 /* ViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +418,8 @@
 		9D42D83517613B8800614738 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sketch/Sketch-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
@@ -426,6 +436,8 @@
 		9D42D83617613B8800614738 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sketch/Sketch-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";

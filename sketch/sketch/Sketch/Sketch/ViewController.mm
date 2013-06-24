@@ -87,7 +87,7 @@
     [_srTimer invalidate];
     _srTimer = nil;
     
-    UserSongSession * session = [[[UserSongSession alloc] init] autorelease];
+    UserSongSession * session = [[UserSongSession alloc] init];
     
     //session.m_userSong = _userSong;
     session.m_notes = @"Created in sketch";
