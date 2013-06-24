@@ -27,6 +27,7 @@
 		9D42D844176159C700614738 /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D843176159C700614738 /* libAudioController.a */; };
 		9D42D846176159CD00614738 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D845176159CD00614738 /* libGtarController.a */; };
 		9D42D848176159D300614738 /* libgTarAppCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D847176159D300614738 /* libgTarAppCore.a */; };
+		9D8E3D391778F5DD0052AE20 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D8E3D381778F5DD0052AE20 /* instruments.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		9D42D843176159C700614738 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioController.a; path = "../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
 		9D42D845176159CD00614738 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
 		9D42D847176159D300614738 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarAppCore.a; path = "../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos/libgTarAppCore.a"; sourceTree = "<group>"; };
+		9D8E3D381778F5DD0052AE20 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 		9D42D80317613B8700614738 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9D8E3D381778F5DD0052AE20 /* instruments.plist */,
 				9D42D80417613B8700614738 /* Sketch-Info.plist */,
 				9D42D80517613B8700614738 /* InfoPlist.strings */,
 				9D42D80817613B8700614738 /* main.m */,
@@ -251,6 +254,7 @@
 				9D42D81317613B8700614738 /* Default-568h@2x.png in Resources */,
 				9D42D81617613B8700614738 /* MainStoryboard_iPhone.storyboard in Resources */,
 				9D42D81917613B8700614738 /* MainStoryboard_iPad.storyboard in Resources */,
+				9D8E3D391778F5DD0052AE20 /* instruments.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

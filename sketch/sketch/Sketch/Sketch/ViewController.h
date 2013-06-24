@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+#import <GtarController/GtarController.h>
+
+@interface ViewController : UIViewController <GtarControllerObserver>
 
 @end

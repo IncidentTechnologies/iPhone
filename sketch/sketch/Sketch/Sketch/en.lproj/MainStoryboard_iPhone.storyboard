@@ -24,12 +24,42 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="startRecording:" destination="2" eventType="touchUpInside" id="WVB-hm-g31"/>
+                                </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0A-b5-m7Z">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="73" id="H7A-4C-B0p"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="STOP">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopRecording:" destination="2" eventType="touchUpInside" id="RqF-BI-ds1"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kvL-b0-56K">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="178" id="IgZ-el-bka"/>
+                                </constraints>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.58132422844975729" green="0.87111367984693877" blue="0.83318355728976456" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="kvL-b0-56K" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="Cu2-NK-kkV"/>
                             <constraint firstAttribute="bottom" secondItem="TJX-K7-yF4" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="VAC-yK-RGe"/>
+                            <constraint firstAttribute="bottom" secondItem="V0A-b5-m7Z" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="bdh-l0-Cdw"/>
+                            <constraint firstItem="kvL-b0-56K" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="lxI-Fg-MX2"/>
+                            <constraint firstItem="V0A-b5-m7Z" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="111" id="omw-f4-1P7"/>
                             <constraint firstItem="TJX-K7-yF4" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="t5R-rM-ELt"/>
+                            <constraint firstAttribute="trailing" secondItem="kvL-b0-56K" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="tSi-ix-7Go"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
