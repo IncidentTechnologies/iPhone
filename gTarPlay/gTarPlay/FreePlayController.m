@@ -758,6 +758,7 @@ extern AudioController * g_audioController;
 - (void) setupJamPadWithEffectAtIndex:(int)index
 {
     //m_selectedEffect = m_effects[index];
+    /*
     [m_currentEffectName setText:[[NSString stringWithCString:m_selectedEffect->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
     Parameter &primary = m_selectedEffect->getPrimaryParam();
     Parameter &secondary = m_selectedEffect->getSecondaryParam();
@@ -769,6 +770,7 @@ extern AudioController * g_audioController;
     [m_jamPad setNormalizedPosition:CGPointMake(x, y)];
     // set wet slider
     [m_wetSlider setValue:m_selectedEffect->GetWet()];
+     */
 }
 
 #pragma mark - Touches
@@ -1433,7 +1435,7 @@ extern AudioController * g_audioController;
 
 - (IBAction)setWet:(id)sender
 {
-    m_selectedEffect->SetWet([m_wetSlider value]);
+    //m_selectedEffect->SetWet([m_wetSlider value]);
 }
 
 
@@ -1863,6 +1865,7 @@ extern AudioController * g_audioController;
 {
     // translate the normalized value the JamPad position to a range
     // in [min, max] for the respective parameter
+    /*
     Parameter *p = &(m_selectedEffect->getPrimaryParam());
     float min = p->getMin();
     float max = p->getMax();
@@ -1874,6 +1877,7 @@ extern AudioController * g_audioController;
     max = p->getMax();
     newVal = position.y*(max - min) + min;
     m_selectedEffect->setSecondaryParam(newVal);
+     */
 }
 
 -(void) audioRouteChanged:(bool)routeIsSpeaker
