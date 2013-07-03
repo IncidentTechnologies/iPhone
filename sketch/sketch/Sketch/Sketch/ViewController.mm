@@ -14,6 +14,7 @@
 #import <gTarAppCore/NSSong.h>
 #import <gTarAppCore/NSSongCreator.h>
 #import <gTarAppCore/FileController.h>
+#import <gTarAppCore/SongPlaybackController.h>
 
 @interface ViewController ()
 {
@@ -26,6 +27,8 @@
     NSInteger _tempo;
     // songRecorderTimer
     NSTimer* _srTimer;
+    
+    SongPlaybackController* _songPlayer;
 }
 
 @end
@@ -48,9 +51,12 @@
     _songRecorder = [[SongRecorder alloc] initWithTempo:_tempo];
     
     _audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
+    [_audioController startAUGraph];
     
     //_songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
     
+    
+    _songPlayer = [[SongPlaybackController alloc] initWithAudioController:_audioController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,24 +106,28 @@
     
     // Upload song to server. This also persists the upload in case of network failure
     //[g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
+    
+    [_songPlayer startWithXmpBlob:session.m_xmpBlob];
 }
 
 #pragma mark Other
 
-#ifdef Debug_BUILD
+#ifdef DEBUG
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    UITouch * touch = [[touches allObjects] objectAtIndex:0];
+    
     CGPoint point = [touch locationInView:self.view];
     
-    int str = point.x / (480/GTAR_GUITAR_STRING_COUNT);
-    if ( str >= GTAR_GUITAR_STRING_COUNT ) str = (GTAR_GUITAR_STRING_COUNT-1);
+    int str = point.x / (self.view.frame.size.height/GtarStringCount);
+    if ( str >= GtarFretCount ) str = (GtarFretCount-1);
     
-    int fret = point.y / (320/GTAR_GUITAR_FRET_COUNT);
-    if ( fret >= GTAR_GUITAR_FRET_COUNT ) fret = (GTAR_GUITAR_FRET_COUNT-1);
+    int fret = point.y / (self.view.frame.size.width/GtarFretCount);
+    if ( fret >= GtarFretCount ) fret = (GtarFretCount-1);
     
     GtarPluck pluck;
     pluck.velocity = GtarMaxPluckVelocity;
-    pluck.position.fret = (GTAR_GUITAR_FRET_COUNT-fret-1);
+    pluck.position.fret = (GtarFretCount-fret-1);
     pluck.position.string = (str+1);
     
     [self gtarNoteOn:pluck];
@@ -138,6 +148,7 @@
 
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
+    [_audioController PluckString:pluck.position.string atFret:pluck.position.fret];
     [_songRecorder playString:pluck.position.string andFret:pluck.position.fret];
 }
 

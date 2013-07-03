@@ -174,6 +174,8 @@ class Compressor;
         
         // seed rand for use by all audio generators and effects
         srand( time(NULL) );
+        
+        [self initializeAUGraph];
 	}
 	
 	return self;

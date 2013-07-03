@@ -354,7 +354,6 @@ UserController * g_userController;
     
     // Create the audio controller -- this can take awhile
     g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
-    [g_audioController initializeAUGraph];
     
     NSLog(@"Finished delayed loading");
     
