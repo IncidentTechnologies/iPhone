@@ -305,7 +305,7 @@
     
     [self stopMainEventLoop];
     
-    m_audioTrailOffTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(audioTrailOffEvent) userInfo:nil repeats:NO];
+    m_audioTrailOffTimer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(audioTrailOffEvent) userInfo:nil repeats:NO];
     
 }
 

@@ -82,7 +82,8 @@ extern GtarController *g_gtarController;
             
         }
         
-        [self setUserSongArray:userSongArray];
+        _userSongArray = userSongArray;
+        [_userSongArray retain];
     }
     return self;
 }

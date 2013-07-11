@@ -22,14 +22,19 @@
     AudioController* _audioController;
     
     SongRecorder* _songRecorder;
+    NSMutableArray* _songList;
     FileController* _fileController;
     
     NSInteger _tempo;
     // songRecorderTimer
     NSTimer* _srTimer;
+    float _srTimeInterval;
     
     SongPlaybackController* _songPlayer;
 }
+
+@property (weak, nonatomic) IBOutlet UITableView *songTableView;
+@property (weak, nonatomic) IBOutlet UIButton *recordAndStopButton;
 
 @end
 
@@ -47,8 +52,30 @@
     _gtarController.logLevel = GtarControllerLogLevelAll;
     [_gtarController addObserver:self];
     
+    //////////// TODO: load list from archive
+    /*_songList = [[NSMutableArray alloc] init];
+    
+    //// set up fake initial item for testing TODO: remove this code /////
+    UserSongSession * session = [[UserSongSession alloc] init];
+    
+    //session.m_userSong = _userSong;
+    session.m_notes = @"Song number 1";
+    
+    _songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
+    
+    // Create the xmp
+    session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
+    session.m_created = time(NULL);
+    
+    [_songList addObject:session];
+     */
+    ////////////////// end remove this code chunk //////////
+    
+    
     _tempo = 120;
-    _songRecorder = [[SongRecorder alloc] initWithTempo:_tempo];
+    _srTimeInterval = 60.0/_tempo/8.0;
+    
+    [_recordAndStopButton setTitle:@"Stop" forState:UIControlStateSelected];
     
     _audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     [_audioController startAUGraph];
@@ -57,6 +84,17 @@
     
     
     _songPlayer = [[SongPlaybackController alloc] initWithAudioController:_audioController];
+    
+    NSString* songListPath = [self getSongListPath];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath: songListPath])
+    {        
+        _songList = [NSKeyedUnarchiver unarchiveObjectWithFile: songListPath];
+    }
+    else
+    {
+        _songList = [[NSMutableArray alloc] init];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,45 +107,95 @@
 
 - (void)serviceSongRecorderTimer:(NSTimer*)theTimer
 {
-    [_songRecorder advanceRecordingByTimeDelta:(60/_tempo)];
+    [_songRecorder advanceRecordingByTimeDelta:(_srTimeInterval)];
 }
 
 
 #pragma mark IBActions
 
-// TODO for UI, have jsut one button for starting/stoping recording (it will toggle between record icon
+// TODO: for UI, have jsut one button for starting/stoping recording (it will toggle between record icon
 // a stop icon.) as a result might only need 1 IBaction for the 1 button, and keep stop/start state)
-- (IBAction)startRecording:(id)sender
+- (IBAction)startRecording:(UIButton*)sender
 {
-    [_songRecorder beginSong];
-    // run timer at say every 1/8th notes, check how much time is left on timer to get how much time has passed, add this time to the advance timer. can choose a quantization setting and quantize your song if you want (just run timer every quantization interval and when note goes in record it without adjusting time passed, to make it quantize to nearest interval instead of just to one that has passed: check how much time has passed to figure out which quantizatoin interval is closer, the last one to have passed or the next one coming up.
-    [_srTimer invalidate];
-    _srTimer = [NSTimer scheduledTimerWithTimeInterval:(60/_tempo) target:self selector:@selector(serviceSongRecorderTimer:) userInfo:nil repeats:YES];
+    // Toggle the buttons state (between record and stop)
+    _recordAndStopButton.selected = !_recordAndStopButton.selected;
+    
+    if (_recordAndStopButton.selected)
+    {
+        _songRecorder = [[SongRecorder alloc] initWithTempo:_tempo];
+        [_songRecorder beginSong];
+        // run timer at say every 1/8th notes, check how much time is left on timer to get how much time has passed, add this time to the advance timer. can choose a quantization setting and quantize your song if you want (just run timer every quantization interval and when note goes in record it without adjusting time passed, to make it quantize to nearest interval instead of just to one that has passed: check how much time has passed to figure out which quantizatoin interval is closer, the last one to have passed or the next one coming up.
+        [_srTimer invalidate];
+        _srTimer = [NSTimer scheduledTimerWithTimeInterval:(_srTimeInterval) target:self selector:@selector(serviceSongRecorderTimer:) userInfo:nil repeats:YES];
+    }
+    else
+    {
+        [_songRecorder finishSong];
+        
+        [_srTimer invalidate];
+        _srTimer = nil;
+        
+        UserSongSession * session = [[UserSongSession alloc] init];
+        
+        //session.m_userSong = _userSong;
+        session.m_notes = @"Created in sketch";
+        
+        _songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
+        
+        // Create the xmp
+        session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
+        session.m_created = time(NULL);
+        
+        [_songList addObject:session];
+        [_songTableView reloadData];
+        
+        /************ SAVE SONG TO DISK CODE, TODO: move code else where ************/
+        //////////////////////////////////////////////////////////////////
+        
+        NSString* songListPath = [self getSongListPath];
+        
+        [NSKeyedArchiver archiveRootObject:_songList toFile:songListPath];
+        
+        
+        /************ END SAVE SONG TO DISK CODE            ************/
+        //////////////////////////////////////////////////////////////////
+        
+        
+        // Upload song to server. This also persists the upload in case of network failure
+        //[g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
+    }
     
 }
 
 - (IBAction)stopRecording:(id)sender
 {
-    [_songRecorder finishSong];
+    
+}
 
-    [_srTimer invalidate];
-    _srTimer = nil;
+- (NSString*)getSongListPath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents directory
     
-    UserSongSession * session = [[UserSongSession alloc] init];
+    /*NSString *songsPath = [documentsDirectory stringByAppendingPathComponent:@"Data"];
+    NSLog(@"song list path %@", songsPath);
     
-    //session.m_userSong = _userSong;
-    session.m_notes = @"Created in sketch";
+    if ( ! [[NSFileManager defaultManager] fileExistsAtPath:songsPath] )
+    {
+        NSError * error = nil;
+        [[NSFileManager defaultManager] createDirectoryAtPath:songsPath withIntermediateDirectories:YES attributes:nil error:&error]; //Create folder
+        
+        if ( error != nil )
+        {
+            NSLog(@"Error: '%@' creating File cache path: '%@'", [error localizedDescription], songsPath);
+            return nil;
+        }
+    }
+     */
     
-    _songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
+    NSString *songListPath = [documentsDirectory stringByAppendingPathComponent:@"songlist.archive"];
     
-    // Create the xmp
-    session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
-    session.m_created = time(NULL);
-    
-    // Upload song to server. This also persists the upload in case of network failure
-    //[g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
-    
-    [_songPlayer startWithXmpBlob:session.m_xmpBlob];
+    return songListPath;
 }
 
 #pragma mark Other
@@ -148,7 +236,12 @@
 
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
-    [_audioController PluckString:pluck.position.string atFret:pluck.position.fret];
+    // Currently after playing back a song the audioController AUGraph is stopped, so the
+    // audioController is stopped and there is no audio. For now just make a call to start the graph
+    // on every noteOn, this is cheap as nothing happens if it's already started.
+    // TODO: fix the having to call startAUGraph on every note problem.
+    [_audioController startAUGraph];
+    [_audioController PluckString:pluck.position.string - 1 atFret:pluck.position.fret];
     [_songRecorder playString:pluck.position.string andFret:pluck.position.fret];
 }
 
@@ -165,6 +258,43 @@
 - (void)gtarDisconnected
 {
     
+}
+
+#pragma mark - UITableView Delegate and DataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [_songList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *identifier = @"SongTableItem";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    
+    UserSongSession * session = [_songList objectAtIndex:indexPath.row];
+    cell.textLabel.text = session.m_notes;
+    UIView *selectionColor = [[UIView alloc] init];
+    selectionColor.backgroundColor = [UIColor colorWithRed:(55/255.0) green:(132/255.0) blue:(153/255.0) alpha:1];
+    cell.selectedBackgroundView = selectionColor;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UserSongSession * session = [_songList objectAtIndex:indexPath.row];
+    [_songPlayer startWithXmpBlob:session.m_xmpBlob];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
 
 @end
