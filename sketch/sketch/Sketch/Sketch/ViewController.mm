@@ -44,8 +44,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    //_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     
     _gtarController = [[GtarController alloc] init];
     // By default it just outputs 'LevelError'
@@ -73,7 +71,7 @@
     
     
     _tempo = 120;
-    _srTimeInterval = 60.0/_tempo/8.0;
+    _srTimeInterval = 60.0/_tempo/16.0;
     
     [_recordAndStopButton setTitle:@"Stop" forState:UIControlStateSelected];
     
@@ -146,7 +144,7 @@
         session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
         session.m_created = time(NULL);
         
-        [_songList addObject:session];
+        [_songList insertObject:session atIndex:0];
         [_songTableView reloadData];
         
         /************ SAVE SONG TO DISK CODE, TODO: move code else where ************/

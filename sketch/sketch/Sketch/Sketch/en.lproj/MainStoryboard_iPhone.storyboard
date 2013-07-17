@@ -71,6 +71,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="recordAndStopButton" destination="TJX-K7-yF4" id="lgx-94-siq"/>
                         <outlet property="songTableView" destination="kvL-b0-56K" id="DTQ-Vw-2Lb"/>
