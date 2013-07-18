@@ -425,6 +425,8 @@
 		9D64729F1741DEEE00C63B1B /* LightsArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D64729D1741DEEE00C63B1B /* LightsArrow.png */; };
 		9D6DA778172A276300EB96C7 /* LightsImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DA777172A276300EB96C7 /* LightsImage.png */; };
 		9D6DA779172A276300EB96C7 /* LightsImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DA777172A276300EB96C7 /* LightsImage.png */; };
+		9D846E791797711600A28FF6 /* gTarIcon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC3B6E1790DACD00DDD603 /* gTarIcon_114x114.png */; };
+		9D846E7A1797711600A28FF6 /* gTarIcon_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC3B6A1790D8B700DDD603 /* gTarIcon_57x57.png */; };
 		9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137D1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137E1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib */; };
@@ -4897,6 +4899,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D846E791797711600A28FF6 /* gTarIcon_114x114.png in Resources */,
+				9D846E7A1797711600A28FF6 /* gTarIcon_57x57.png in Resources */,
 				ECC11E56162D07AD001A231A /* Default.png in Resources */,
 				ECC11E57162D07AD001A231A /* Default@2x.png in Resources */,
 				ECC11E59162D07AD001A231A /* Strat 2.mp3 in Resources */,
