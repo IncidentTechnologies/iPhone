@@ -509,8 +509,6 @@
 		9DF1483117261E840056A6D1 /* MenuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1482F17261E840056A6D1 /* MenuIcon.png */; };
 		9DF14833172622FC0056A6D1 /* MenuSoloSegment.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */; };
 		9DF14834172622FC0056A6D1 /* MenuSoloSegment.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */; };
-		9DF14839172763250056A6D1 /* 13-Ver2_FreePlay_Menu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DF14838172763240056A6D1 /* 13-Ver2_FreePlay_Menu.jpg */; };
-		9DF1483A172763250056A6D1 /* 13-Ver2_FreePlay_Menu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DF14838172763240056A6D1 /* 13-Ver2_FreePlay_Menu.jpg */; };
 		9DF1483C172782B80056A6D1 /* SliderKnobBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1483B172782B70056A6D1 /* SliderKnobBlue.png */; };
 		9DF1483D172782B80056A6D1 /* SliderKnobBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF1483B172782B70056A6D1 /* SliderKnobBlue.png */; };
 		9DF148441729C6230056A6D1 /* DownArrowOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF148411729C6230056A6D1 /* DownArrowOrange.png */; };
@@ -2289,7 +2287,6 @@
 		9DF1482C1725EFEE0056A6D1 /* LightIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightIcon.png; path = Resources/Images/Freeplay/LightIcon.png; sourceTree = "<group>"; };
 		9DF1482F17261E840056A6D1 /* MenuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuIcon.png; path = Resources/Images/Play/MenuIcon.png; sourceTree = "<group>"; };
 		9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuSoloSegment.png; path = Resources/Images/Freeplay/MenuSoloSegment.png; sourceTree = "<group>"; };
-		9DF14838172763240056A6D1 /* 13-Ver2_FreePlay_Menu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "13-Ver2_FreePlay_Menu.jpg"; path = "../../../../Dropbox/IncidentPublic/Application Development/iPhoneApps/Version2_iPhone4/13-Ver2_FreePlay_Menu.jpg"; sourceTree = "<group>"; };
 		9DF1483B172782B70056A6D1 /* SliderKnobBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderKnobBlue.png; path = Resources/Images/Freeplay/SliderKnobBlue.png; sourceTree = "<group>"; };
 		9DF148411729C6230056A6D1 /* DownArrowOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DownArrowOrange.png; path = Resources/Images/General/DownArrowOrange.png; sourceTree = "<group>"; };
 		9DF148421729C6230056A6D1 /* DownArrowRedOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DownArrowRedOrange.png; path = Resources/Images/General/DownArrowRedOrange.png; sourceTree = "<group>"; };
@@ -3326,7 +3323,6 @@
 				9DF148421729C6230056A6D1 /* DownArrowRedOrange.png */,
 				9DF148431729C6230056A6D1 /* DownArrowYellow.png */,
 				9DF1483B172782B70056A6D1 /* SliderKnobBlue.png */,
-				9DF14838172763240056A6D1 /* 13-Ver2_FreePlay_Menu.jpg */,
 				9DF14832172622FC0056A6D1 /* MenuSoloSegment.png */,
 				9DF1482F17261E840056A6D1 /* MenuIcon.png */,
 				9DF1482C1725EFEE0056A6D1 /* LightIcon.png */,
@@ -4634,7 +4630,6 @@
 				9DF14833172622FC0056A6D1 /* MenuSoloSegment.png in Resources */,
 				EC48665C172889CA0066194D /* SlidingInstrumentViewController.xib in Resources */,
 				EC4866621728B34C0066194D /* OrangeEffects.png in Resources */,
-				9DF14839172763250056A6D1 /* 13-Ver2_FreePlay_Menu.jpg in Resources */,
 				9DF1483C172782B80056A6D1 /* SliderKnobBlue.png in Resources */,
 				9DF148441729C6230056A6D1 /* DownArrowOrange.png in Resources */,
 				9DF148461729C6230056A6D1 /* DownArrowRedOrange.png in Resources */,
@@ -5395,7 +5390,6 @@
 				9DF14834172622FC0056A6D1 /* MenuSoloSegment.png in Resources */,
 				EC48665D172889CA0066194D /* SlidingInstrumentViewController.xib in Resources */,
 				EC4866631728B34C0066194D /* OrangeEffects.png in Resources */,
-				9DF1483A172763250056A6D1 /* 13-Ver2_FreePlay_Menu.jpg in Resources */,
 				9DF1483D172782B80056A6D1 /* SliderKnobBlue.png in Resources */,
 				9DF148451729C6230056A6D1 /* DownArrowOrange.png in Resources */,
 				9DF148471729C6230056A6D1 /* DownArrowRedOrange.png in Resources */,
