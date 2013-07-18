@@ -26,6 +26,8 @@
     FileController* _fileController;
     
     NSInteger _tempo;
+    NSTimer* _songLengthTimer;
+    NSDate* _songStartTime;
     // songRecorderTimer
     NSTimer* _srTimer;
     float _srTimeInterval;
@@ -35,6 +37,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *songTableView;
 @property (weak, nonatomic) IBOutlet UIButton *recordAndStopButton;
+@property (weak, nonatomic) IBOutlet UILabel *songLengthLabel;
 
 @end
 
@@ -73,8 +76,6 @@
     _tempo = 120;
     _srTimeInterval = 60.0/_tempo/16.0;
     
-    [_recordAndStopButton setTitle:@"Stop" forState:UIControlStateSelected];
-    
     _audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     [_audioController startAUGraph];
     
@@ -108,12 +109,23 @@
     [_songRecorder advanceRecordingByTimeDelta:(_srTimeInterval)];
 }
 
+- (void)serviceSongLengthTimer:(NSTimer *)timer {
+    
+    NSTimeInterval currentSongLength = [[NSDate date] timeIntervalSinceDate: _songStartTime];
+    
+    int minutes = currentSongLength/60;
+    int seconds = currentSongLength - minutes * 60;
+    
+    NSString* time = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+    _songLengthLabel.text = time;
+}
+
 
 #pragma mark IBActions
 
 // TODO: for UI, have jsut one button for starting/stoping recording (it will toggle between record icon
 // a stop icon.) as a result might only need 1 IBaction for the 1 button, and keep stop/start state)
-- (IBAction)startRecording:(UIButton*)sender
+- (IBAction)toggleRecording:(UIButton*)sender
 {
     // Toggle the buttons state (between record and stop)
     _recordAndStopButton.selected = !_recordAndStopButton.selected;
@@ -122,9 +134,13 @@
     {
         _songRecorder = [[SongRecorder alloc] initWithTempo:_tempo];
         [_songRecorder beginSong];
+        
         // run timer at say every 1/8th notes, check how much time is left on timer to get how much time has passed, add this time to the advance timer. can choose a quantization setting and quantize your song if you want (just run timer every quantization interval and when note goes in record it without adjusting time passed, to make it quantize to nearest interval instead of just to one that has passed: check how much time has passed to figure out which quantizatoin interval is closer, the last one to have passed or the next one coming up.
         [_srTimer invalidate];
         _srTimer = [NSTimer scheduledTimerWithTimeInterval:(_srTimeInterval) target:self selector:@selector(serviceSongRecorderTimer:) userInfo:nil repeats:YES];
+        
+        _songStartTime = [NSDate date];
+        _songLengthTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(serviceSongLengthTimer:) userInfo:nil repeats:YES];
     }
     else
     {
@@ -132,6 +148,9 @@
         
         [_srTimer invalidate];
         _srTimer = nil;
+        
+        [_songLengthTimer invalidate];
+        _songLengthTimer = nil;
         
         UserSongSession * session = [[UserSongSession alloc] init];
         
@@ -162,11 +181,6 @@
         // Upload song to server. This also persists the upload in case of network failure
         //[g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
     }
-    
-}
-
-- (IBAction)stopRecording:(id)sender
-{
     
 }
 

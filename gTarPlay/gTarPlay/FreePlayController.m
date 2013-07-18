@@ -296,14 +296,6 @@ extern AudioController * g_audioController;
     [_arrowInstruments addShadow];
     
     [_menuBarDropShadowView addShadow];
-    
-    // Set content mode so that UIButton images resize their width to be proportional
-    // to the height set in interface builder via the UIButtons content inset
-    [self.menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.lightsButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.effectsButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.instrumentsButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
 
     // images for slider
     UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
