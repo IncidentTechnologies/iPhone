@@ -155,7 +155,7 @@
         UserSongSession * session = [[UserSongSession alloc] init];
         
         //session.m_userSong = _userSong;
-        session.m_notes = @"Created in sketch";
+        session.m_notes = @"New Session 005";
         
         _songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
         
@@ -286,13 +286,27 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
     
     UserSongSession * session = [_songList objectAtIndex:indexPath.row];
     cell.textLabel.text = session.m_notes;
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:22.0];
+    cell.detailTextLabel.text = @"07/08/2013 3:47";
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0];
+    
+    cell.imageView.image = [UIImage imageNamed:@"Play_ButtonGREY.png"];
+    cell.imageView.highlightedImage = [UIImage imageNamed:@"Play_ButtonWHITE"];
+    
+    UIButton* editButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage* editImage = [UIImage imageNamed:@"Edit_Button.png"];
+    editButton.frame = CGRectMake(0, 0, editImage.size.width/2, editImage.size.height/2);
+    [editButton setBackgroundImage:editImage forState:UIControlStateNormal];
+    [editButton addTarget:self action:@selector(editButtonClicked:event:) forControlEvents:UIControlEventTouchUpInside];
+    cell.accessoryView = editButton;
+    
     UIView *selectionColor = [[UIView alloc] init];
-    selectionColor.backgroundColor = [UIColor colorWithRed:(55/255.0) green:(132/255.0) blue:(153/255.0) alpha:1];
+    selectionColor.backgroundColor = [UIColor colorWithRed:(51/255.0) green:(56/255.0) blue:(60/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
     
     return cell;
@@ -300,8 +314,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView cellForRowAtIndexPath:indexPath].imageView.hidden = NO;
     UserSongSession * session = [_songList objectAtIndex:indexPath.row];
     [_songPlayer startWithXmpBlob:session.m_xmpBlob];
+}
+
+- (void)editButtonClicked:(id)sender event:(id)event
+{
+    UITouch* touch = [[event touchesForView:sender] anyObject];
+    CGPoint touchPoint = [touch locationInView:_songTableView];
+    NSIndexPath* indexPath = [_songTableView indexPathForRowAtPoint:touchPoint];
+    
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
