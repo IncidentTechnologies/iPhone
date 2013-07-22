@@ -10,6 +10,6 @@
 
 #import <GtarController/GtarController.h>
 
-@interface ViewController : UIViewController <GtarControllerObserver, UITableViewDataSource, UITabBarControllerDelegate>
+@interface ViewController : UIViewController <GtarControllerObserver, UITableViewDataSource, UITabBarControllerDelegate, UITextFieldDelegate>
 
 @end
