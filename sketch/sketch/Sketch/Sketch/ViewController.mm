@@ -156,7 +156,7 @@
         UserSongSession * session = [[UserSongSession alloc] init];
         
         //session.m_userSong = _userSong;
-        session.m_notes = @"New Session 005";
+        session.m_notes = @"New Song";
         
         _songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
         
@@ -284,17 +284,15 @@
 {
     static NSString *identifier = @"SongCellIdentifier";
     
-    SongViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    SongViewCell *cell = (SongViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) {
         cell = [[SongViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
     
     UserSongSession * session = [_songList objectAtIndex:indexPath.row];
-    
     cell.songTitle.text = session.m_notes;
     cell.songDetails.text = @"07/08/2013 3:47";
-    
     
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(100/255.0) green:(120/255.0) blue:(130/255.0) alpha:1];
@@ -303,9 +301,18 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView cellForRowAtIndexPath:indexPath].imageView.hidden = NO;
+    // re-calling the cells selectedness ensures that the appropriate textColor
+    // is used when a selected cell is coming into view.
+    if (cell.isSelected)
+    {
+        [cell setSelected:YES];;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{    
     UserSongSession * session = [_songList objectAtIndex:indexPath.row];
     [_songPlayer startWithXmpBlob:session.m_xmpBlob];
 }
@@ -317,9 +324,9 @@
     CGPoint touchPoint = [touch locationInView:_songTableView];
     NSIndexPath* indexPath = [_songTableView indexPathForRowAtPoint:touchPoint];
     
-    UITableViewCell* cell = [_songTableView cellForRowAtIndexPath:indexPath];
+    //TODO figure out edit button behavior, remove completely?
+    SongViewCell* cell = (SongViewCell*)[_songTableView cellForRowAtIndexPath:indexPath];
 }
-
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -327,9 +334,14 @@
     return NO;
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    // Upon finishing editing the song name, save it to the corresponding songSession
+    SongViewCell* cell = (SongViewCell*)[[textField superview] superview];
+    NSIndexPath* indexPath = [_songTableView indexPathForCell:cell];
     
+    UserSongSession * session = [_songList objectAtIndex:indexPath.row];
+    session.m_notes = cell.songTitle.text;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

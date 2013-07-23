@@ -23,7 +23,15 @@
 {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    _songTitle.textColor = selected ? [UIColor whiteColor] : [UIColor blackColor];
+    _songTitle.userInteractionEnabled = selected ? YES : NO;
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    [super setHighlighted:highlighted animated:animated];
+    
+    _songTitle.textColor = highlighted ? [UIColor whiteColor] : [UIColor blackColor];
 }
 
 @end
