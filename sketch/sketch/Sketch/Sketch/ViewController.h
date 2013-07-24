@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "SongTableViewController.h"
 #import <GtarController/GtarController.h>
 
-@interface ViewController : UIViewController <GtarControllerObserver, UITableViewDataSource, UITabBarControllerDelegate, UITextFieldDelegate>
+
+@interface ViewController : UIViewController <GtarControllerObserver, SongTableViewControllerDelegate>
 
 @end

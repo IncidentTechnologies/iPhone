@@ -83,6 +83,7 @@
 		9D846E92179775C500A28FF6 /* Volume_Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E87179775C500A28FF6 /* Volume_Plus.png */; };
 		9D846E93179775C500A28FF6 /* Volume_Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E88179775C500A28FF6 /* Volume_Slider.png */; };
 		9D846E9A179DB51300A28FF6 /* SongViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D846E99179DB51200A28FF6 /* SongViewCell.m */; };
+		9D846E9D179E21F500A28FF6 /* SongTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D846E9C179E21F400A28FF6 /* SongTableViewController.m */; };
 		9D8E3D391778F5DD0052AE20 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D8E3D381778F5DD0052AE20 /* instruments.plist */; };
 		9D8E3D3B1778FB050052AE20 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */; };
 		9D8E3D3D1778FB130052AE20 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */; };
@@ -182,6 +183,8 @@
 		9D846E88179775C500A28FF6 /* Volume_Slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Volume_Slider.png; path = Resources/Images/Volume_Slider.png; sourceTree = "<group>"; };
 		9D846E98179DB51200A28FF6 /* SongViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongViewCell.h; sourceTree = "<group>"; };
 		9D846E99179DB51200A28FF6 /* SongViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongViewCell.m; sourceTree = "<group>"; };
+		9D846E9B179E21F400A28FF6 /* SongTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTableViewController.h; sourceTree = "<group>"; };
+		9D846E9C179E21F400A28FF6 /* SongTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTableViewController.m; sourceTree = "<group>"; };
 		9D8E3D381778F5DD0052AE20 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
 		9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
@@ -264,6 +267,8 @@
 				9D846E98179DB51200A28FF6 /* SongViewCell.h */,
 				9D846E99179DB51200A28FF6 /* SongViewCell.m */,
 				9D42D80317613B8700614738 /* Supporting Files */,
+				9D846E9B179E21F400A28FF6 /* SongTableViewController.h */,
+				9D846E9C179E21F400A28FF6 /* SongTableViewController.m */,
 			);
 			path = Sketch;
 			sourceTree = "<group>";
@@ -559,6 +564,7 @@
 				9D42D80D17613B8700614738 /* AppDelegate.m in Sources */,
 				9D42D81C17613B8700614738 /* ViewController.mm in Sources */,
 				9D846E9A179DB51300A28FF6 /* SongViewCell.m in Sources */,
+				9D846E9D179E21F500A28FF6 /* SongTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

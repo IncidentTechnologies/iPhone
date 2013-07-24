@@ -22,6 +22,9 @@
     GtarController* _gtarController;
     AudioController* _audioController;
     
+    UIViewController* _currentMainVC;
+    SongTableViewController* _songTableVC;
+    
     SongRecorder* _songRecorder;
     NSMutableArray* _songList;
     FileController* _fileController;
@@ -36,6 +39,7 @@
     SongPlaybackController* _songPlayer;
 }
 
+@property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UITableView *songTableView;
 @property (weak, nonatomic) IBOutlet UIButton *recordAndStopButton;
 @property (weak, nonatomic) IBOutlet UILabel *songLengthLabel;
@@ -49,10 +53,22 @@
 {
     [super viewDidLoad];
     
+    _songTableVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SongViewControlerID"];
+    _songTableVC.delegate = self;
+    _currentMainVC = _songTableVC;
+    [_mainContentView addSubview:_currentMainVC.view];
+    
+    _audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
+    [_audioController startAUGraph];
+    
+    _songPlayer = [[SongPlaybackController alloc] initWithAudioController:_audioController];
+    
+    
     _gtarController = [[GtarController alloc] init];
     // By default it just outputs 'LevelError'
     _gtarController.logLevel = GtarControllerLogLevelAll;
     [_gtarController addObserver:self];
+    
     
     //////////// TODO: load list from archive
     /*_songList = [[NSMutableArray alloc] init];
@@ -77,24 +93,9 @@
     _tempo = 120;
     _srTimeInterval = 60.0/_tempo/16.0;
     
-    _audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
-    [_audioController startAUGraph];
+    
     
     //_songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
-    
-    
-    _songPlayer = [[SongPlaybackController alloc] initWithAudioController:_audioController];
-    
-    NSString* songListPath = [self getSongListPath];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath: songListPath])
-    {        
-        _songList = [NSKeyedUnarchiver unarchiveObjectWithFile: songListPath];
-    }
-    else
-    {
-        _songList = [[NSMutableArray alloc] init];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,19 +165,7 @@
         session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
         session.m_created = time(NULL);
         
-        [_songList insertObject:session atIndex:0];
-        [_songTableView reloadData];
-        
-        /************ SAVE SONG TO DISK CODE, TODO: move code else where ************/
-        //////////////////////////////////////////////////////////////////
-        
-        NSString* songListPath = [self getSongListPath];
-        
-        [NSKeyedArchiver archiveRootObject:_songList toFile:songListPath];
-        
-        
-        /************ END SAVE SONG TO DISK CODE            ************/
-        //////////////////////////////////////////////////////////////////
+        [_songTableVC addSongSession:session];
         
         
         // Upload song to server. This also persists the upload in case of network failure
@@ -185,30 +174,17 @@
     
 }
 
-- (NSString*)getSongListPath
+
+#pragma mark SongTableVCDelegate
+
+- (void)playSong:(UserSongSession*)songSession
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents directory
+    [_songPlayer startWithXmpBlob:songSession.m_xmpBlob];
+}
+
+- (void)pauseCurrentSong
+{
     
-    /*NSString *songsPath = [documentsDirectory stringByAppendingPathComponent:@"Data"];
-    NSLog(@"song list path %@", songsPath);
-    
-    if ( ! [[NSFileManager defaultManager] fileExistsAtPath:songsPath] )
-    {
-        NSError * error = nil;
-        [[NSFileManager defaultManager] createDirectoryAtPath:songsPath withIntermediateDirectories:YES attributes:nil error:&error]; //Create folder
-        
-        if ( error != nil )
-        {
-            NSLog(@"Error: '%@' creating File cache path: '%@'", [error localizedDescription], songsPath);
-            return nil;
-        }
-    }
-     */
-    
-    NSString *songListPath = [documentsDirectory stringByAppendingPathComponent:@"songlist.archive"];
-    
-    return songListPath;
 }
 
 #pragma mark Other
@@ -271,82 +247,6 @@
 - (void)gtarDisconnected
 {
     
-}
-
-#pragma mark - UITableView Delegate and DataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [_songList count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *identifier = @"SongCellIdentifier";
-    
-    SongViewCell *cell = (SongViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    if (cell == nil) {
-        cell = [[SongViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
-    }
-    
-    UserSongSession * session = [_songList objectAtIndex:indexPath.row];
-    cell.songTitle.text = session.m_notes;
-    cell.songDetails.text = @"07/08/2013 3:47";
-    
-    UIView *selectionColor = [[UIView alloc] init];
-    selectionColor.backgroundColor = [UIColor colorWithRed:(100/255.0) green:(120/255.0) blue:(130/255.0) alpha:1];
-    cell.selectedBackgroundView = selectionColor;
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // re-calling the cells selectedness ensures that the appropriate textColor
-    // is used when a selected cell is coming into view.
-    if (cell.isSelected)
-    {
-        [cell setSelected:YES];;
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    
-    UserSongSession * session = [_songList objectAtIndex:indexPath.row];
-    [_songPlayer startWithXmpBlob:session.m_xmpBlob];
-}
-
-
-- (IBAction)editButtonClicked:(id)sender forEvent:(UIEvent *)event
-{
-    UITouch* touch = [[event touchesForView:sender] anyObject];
-    CGPoint touchPoint = [touch locationInView:_songTableView];
-    NSIndexPath* indexPath = [_songTableView indexPathForRowAtPoint:touchPoint];
-    
-    //TODO figure out edit button behavior, remove completely?
-    SongViewCell* cell = (SongViewCell*)[_songTableView cellForRowAtIndexPath:indexPath];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return NO;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    // Upon finishing editing the song name, save it to the corresponding songSession
-    SongViewCell* cell = (SongViewCell*)[[textField superview] superview];
-    NSIndexPath* indexPath = [_songTableView indexPathForCell:cell];
-    
-    UserSongSession * session = [_songList objectAtIndex:indexPath.row];
-    session.m_notes = cell.songTitle.text;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60;
 }
 
 @end

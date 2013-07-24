@@ -14,9 +14,16 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        // DO NOT put init code here as this cell gets created from
+        // IB/storyboard, so awakeFromNib is called
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    // Initiation Code here
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
