@@ -20,6 +20,7 @@
 @interface SongTableViewController : UITableViewController <UITableViewDataSource, UITabBarControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) id<SongTableViewControllerDelegate> delegate;
+@property (strong, nonatomic, readonly) NSMutableArray* songList;
 
 - (void)addSongSession:(UserSongSession*)songSession;
 

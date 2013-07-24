@@ -26,7 +26,6 @@
     SongTableViewController* _songTableVC;
     
     SongRecorder* _songRecorder;
-    NSMutableArray* _songList;
     FileController* _fileController;
     
     NSInteger _tempo;
@@ -69,27 +68,6 @@
     _gtarController.logLevel = GtarControllerLogLevelAll;
     [_gtarController addObserver:self];
     
-    
-    //////////// TODO: load list from archive
-    /*_songList = [[NSMutableArray alloc] init];
-    
-    //// set up fake initial item for testing TODO: remove this code /////
-    UserSongSession * session = [[UserSongSession alloc] init];
-    
-    //session.m_userSong = _userSong;
-    session.m_notes = @"Song number 1";
-    
-    _songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
-    
-    // Create the xmp
-    session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
-    session.m_created = time(NULL);
-    
-    [_songList addObject:session];
-     */
-    ////////////////// end remove this code chunk //////////
-    
-    
     _tempo = 120;
     _srTimeInterval = 60.0/_tempo/16.0;
     
@@ -120,6 +98,92 @@
     
     NSString* time = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
     _songLengthLabel.text = time;
+}
+
+// Finds the next default song name to use based on existing song names.
+// The song name format is "New Song #". So if songs "New Song",  "New Song 2",
+// "New Song 3" exist then this function should return "New Song 4". If only "New Song"
+// and "New Song 3" exist then "New Song 2" should be returned.
+- (NSString*)getNewSongName
+{
+    // Find next unused "New Song #" slot available
+    NSString* baseName = @"New Song";
+    NSMutableArray* songNames = [[NSMutableArray alloc] init];
+    for (UserSongSession* s in _songTableVC.songList)
+    {
+        [songNames addObject:s.m_notes];
+    }
+    
+    // First find all songNames that contain "New Song"
+    NSPredicate *exactlyBaseNamePredicate = [NSPredicate predicateWithFormat:@"SELF matches %@",baseName];
+    NSPredicate *containsBaseNamePredicate = [NSPredicate predicateWithFormat:@"SELF contains %@",baseName];
+    NSArray *exactlyBaseNameSong = [songNames filteredArrayUsingPredicate:exactlyBaseNamePredicate];
+    NSArray *songsWithBaseName = [songNames filteredArrayUsingPredicate:containsBaseNamePredicate];
+    
+    // Get regex to find # in strings matching "New Song #". Add # to array to find new availabel #
+    NSString* searchRegEx = [NSString stringWithFormat:@"^%@\\s+(\\d+)\\s*$", baseName];
+    NSError* error;
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:searchRegEx options:0 error:&error];
+    // usedNumber array representing which #s in the format "New Song #" are already taken 
+    NSMutableArray* usedNumbers = [[NSMutableArray alloc] init];
+    if ([exactlyBaseNameSong count] > 0)
+    {
+        // the progression of names is "New Song" "New Song 2", i.e. no "New Song 1",
+        // so "New Song" represents both the 0 and 1 values, add them to the usedNumber array.
+        [usedNumbers addObject:[NSNumber numberWithInt:0]];
+        [usedNumbers addObject:[NSNumber numberWithInt:1]];
+    }
+    for (NSString* s in songsWithBaseName)
+    {
+        NSTextCheckingResult* match = [regex firstMatchInString:s options:0 range:NSMakeRange(0, [s length])];
+        NSRange r = [match rangeAtIndex:1];
+        if (r.length > 0)
+        {
+            // An actual match for a number after "New Song", add it to number array
+            NSString* stringMatch = [s substringWithRange:[match rangeAtIndex:1]];
+            [usedNumbers addObject:[NSNumber numberWithInt:[stringMatch intValue]]];
+        }
+    }
+    
+    // If no songs currently exist cointaing the base name return baseName
+    if ([usedNumbers count] == 0)
+    {
+        return baseName;
+    }
+    
+    // Sort through song names containing baseName and find the next available numer to use
+    NSSortDescriptor* lowestToHighest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+    [usedNumbers sortUsingDescriptors:[NSArray arrayWithObject:lowestToHighest]];
+    
+    int nextFreeNum = 0;
+    if ([[usedNumbers objectAtIndex:0] intValue] == 0)
+    {
+        // find an open slot, i.e. for 0,1,2,4,5 find 3
+        for (int index=0; index < [usedNumbers count] - 1; index++)
+        {
+            int currentNum = [[usedNumbers objectAtIndex:index] intValue];
+            int nextNum = [[usedNumbers objectAtIndex:index+1] intValue];
+            // if the nextNum is not currentNumm + 1 then we have found our open slot
+            if (currentNum + 1 != nextNum)
+            {
+                nextFreeNum = currentNum + 1;
+                break;
+            }
+            nextFreeNum = nextNum + 1;
+        }
+    }
+    
+    NSString* newSongName;
+    if (nextFreeNum == 0)
+    {
+        newSongName = baseName;
+    }
+    else
+    {
+        newSongName = [NSString stringWithFormat:@"%@ %d", baseName, nextFreeNum];
+    }
+    
+    return newSongName;
 }
 
 
@@ -156,8 +220,9 @@
         
         UserSongSession * session = [[UserSongSession alloc] init];
         
-        //session.m_userSong = _userSong;
-        session.m_notes = @"New Song";
+        session.m_notes = [self getNewSongName];
+        session.m_length = [[NSDate date] timeIntervalSinceDate: _songStartTime];;
+        session.m_created = [[NSDate date] timeIntervalSince1970];
         
         _songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
         
@@ -167,11 +232,9 @@
         
         [_songTableVC addSongSession:session];
         
-        
         // Upload song to server. This also persists the upload in case of network failure
         //[g_userController requestUserSongSessionUpload:session andCallbackObj:self andCallbackSel:@selector(requestUploadUserSongSessionCallback:)];
     }
-    
 }
 
 

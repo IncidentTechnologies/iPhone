@@ -10,6 +10,7 @@
 
 @interface SongViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UITextField *songTitle;
-@property (weak, nonatomic) IBOutlet UILabel *songDetails;
+@property (weak, nonatomic) IBOutlet UILabel *songLength;
+@property (weak, nonatomic) IBOutlet UILabel *songDate;
 
 @end

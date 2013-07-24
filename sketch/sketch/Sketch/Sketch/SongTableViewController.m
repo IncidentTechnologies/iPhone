@@ -13,10 +13,12 @@
 
 @interface SongTableViewController ()
 {
-    NSMutableArray* _songList;
+
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *songTableView;
+
+@property (strong, nonatomic, readwrite) NSMutableArray* songList;
 
 @end
 
@@ -50,11 +52,11 @@
     
     if ([[NSFileManager defaultManager] fileExistsAtPath: songListPath])
     {
-        _songList = [NSKeyedUnarchiver unarchiveObjectWithFile: songListPath];
+        self.songList = [NSKeyedUnarchiver unarchiveObjectWithFile: songListPath];
     }
-    if (_songList == nil)
+    if (self.songList == nil)
     {
-        _songList = [[NSMutableArray alloc] init];
+        self.songList = [[NSMutableArray alloc] init];
     }
 
     // Uncomment the following line to preserve selection between presentations.
@@ -62,6 +64,17 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([_songList count] > 0)
+    {
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [_songTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,14 +121,23 @@
     
     SongViewCell *cell = (SongViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[SongViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
     
     UserSongSession * session = [_songList objectAtIndex:indexPath.row];
-    cell.songTitle.text = session.m_notes;
-    cell.songDetails.text = @"07/08/2013 3:47";
     
+    cell.songTitle.text = session.m_notes;
+    
+    NSInteger songLength = session.m_length;
+    int minutes = songLength/60;
+    int seconds = songLength - minutes * 60;
+    cell.songLength.text = [NSMutableString stringWithFormat:@"%d:%02d                                ", minutes, seconds];
+    
+    NSDate* created = [NSDate dateWithTimeIntervalSince1970:session.m_created];
+    cell.songDate.text = [NSDateFormatter localizedStringFromDate:created dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(100/255.0) green:(120/255.0) blue:(130/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
