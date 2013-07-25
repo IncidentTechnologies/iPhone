@@ -255,6 +255,7 @@
 #ifdef DEBUG
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [super touchesBegan:touches withEvent:event];
     UITouch * touch = [[touches allObjects] objectAtIndex:0];
     
     CGPoint point = [touch locationInView:self.view];

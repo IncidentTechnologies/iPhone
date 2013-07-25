@@ -13,7 +13,7 @@
 
 @interface SongTableViewController ()
 {
-
+    __weak SongViewCell* _cellShowingDeleteButton;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *songTableView;
@@ -58,7 +58,17 @@
     {
         self.songList = [[NSMutableArray alloc] init];
     }
-
+    
+    UISwipeGestureRecognizer* swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
+    swipeGestureRecognizer.direction = (UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight);
+    swipeGestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:swipeGestureRecognizer];
+    
+    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    tapGestureRecognizer.delegate = self;
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -108,7 +118,7 @@
     return songListPath;
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableView & UITableViewDataSource Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -126,6 +136,8 @@
         cell = [[SongViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
     
+    [cell hideDeleteButton];
+    
     UserSongSession * session = [_songList objectAtIndex:indexPath.row];
     
     cell.songTitle.text = session.m_notes;
@@ -133,7 +145,7 @@
     NSInteger songLength = session.m_length;
     int minutes = songLength/60;
     int seconds = songLength - minutes * 60;
-    cell.songLength.text = [NSMutableString stringWithFormat:@"%d:%02d                                ", minutes, seconds];
+    cell.songLength.text = [NSMutableString stringWithFormat:@"%d:%02d", minutes, seconds];
     
     NSDate* created = [NSDate dateWithTimeIntervalSince1970:session.m_created];
     cell.songDate.text = [NSDateFormatter localizedStringFromDate:created dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
@@ -144,6 +156,7 @@
     
     return cell;
 }
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -158,15 +171,18 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [_songList removeObjectAtIndex:indexPath.row];
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
+ */
+ 
 
 /*
 // Override to support rearranging the table view.
@@ -185,9 +201,6 @@
 */
 
 
-#pragma mark - UITableView Delegate
-
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // re-calling the cells selectedness ensures that the appropriate textColor
@@ -200,8 +213,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserSongSession * session = [_songList objectAtIndex:indexPath.row];
-    [_delegate playSong:session];
+    if (_cellShowingDeleteButton != nil)
+    {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+    else
+    {
+        UserSongSession * session = [_songList objectAtIndex:indexPath.row];
+        [_delegate playSong:session];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -210,6 +230,12 @@
 }
 
 #pragma mark - UITextField Delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [_cellShowingDeleteButton hideDeleteButton];
+    _cellShowingDeleteButton = nil;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -225,6 +251,45 @@
     
     UserSongSession * session = [_songList objectAtIndex:indexPath.row];
     session.m_notes = cell.songTitle.text;
+}
+
+#pragma mark - UIGestureRecognizer handlers & delegate
+
+- (void)didSwipe:(UIGestureRecognizer *)gestureRecognizer
+{
+    [_songTableView deselectRowAtIndexPath:[_songTableView indexPathForSelectedRow] animated:NO];
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded)
+    {
+        CGPoint swipeLocation = [gestureRecognizer locationInView:self.tableView];
+        NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
+        [_cellShowingDeleteButton hideDeleteButton];
+        _cellShowingDeleteButton = (SongViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+        _cellShowingDeleteButton.highlighted = NO;
+        [_cellShowingDeleteButton showDeleteButton];
+    }
+}
+
+- (void)didTap:(UIGestureRecognizer *)gestureRecognizer
+{
+    // Nothing to do here, gestureRecognizer: shouldReceiveTouch: receives the touchDown
+    // event that we are interested in.
+}
+
+// This UIGestureRecognizer Delegate method gets called on the touchDown, where as didTap: only gets
+// called on the touchUp. We want to take action on the touchDown rather than the touch up.
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    [_cellShowingDeleteButton hideDeleteButton];
+    _cellShowingDeleteButton = nil;
+    return YES;
+}
+
+- (IBAction)deleteCell:(UIButton *)sender
+{
+    SongViewCell* cell = (SongViewCell*)[[sender superview] superview];
+    NSIndexPath* indexPath = [_songTableView indexPathForCell:cell];
+    [_songList removeObjectAtIndex:indexPath.row];
+    [_songTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

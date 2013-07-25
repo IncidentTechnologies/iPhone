@@ -17,7 +17,7 @@
 
 @end
 
-@interface SongTableViewController : UITableViewController <UITableViewDataSource, UITabBarControllerDelegate, UITextFieldDelegate>
+@interface SongTableViewController : UITableViewController <UITableViewDataSource, UITabBarControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) id<SongTableViewControllerDelegate> delegate;
 @property (strong, nonatomic, readonly) NSMutableArray* songList;

@@ -84,6 +84,7 @@
 		9D846E93179775C500A28FF6 /* Volume_Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E88179775C500A28FF6 /* Volume_Slider.png */; };
 		9D846E9A179DB51300A28FF6 /* SongViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D846E99179DB51200A28FF6 /* SongViewCell.m */; };
 		9D846E9D179E21F500A28FF6 /* SongTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D846E9C179E21F400A28FF6 /* SongTableViewController.m */; };
+		9D846E9F17A10D2900A28FF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D846E9E17A10D2900A28FF6 /* QuartzCore.framework */; };
 		9D8E3D391778F5DD0052AE20 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D8E3D381778F5DD0052AE20 /* instruments.plist */; };
 		9D8E3D3B1778FB050052AE20 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */; };
 		9D8E3D3D1778FB130052AE20 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */; };
@@ -185,6 +186,7 @@
 		9D846E99179DB51200A28FF6 /* SongViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongViewCell.m; sourceTree = "<group>"; };
 		9D846E9B179E21F400A28FF6 /* SongTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTableViewController.h; sourceTree = "<group>"; };
 		9D846E9C179E21F400A28FF6 /* SongTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTableViewController.m; sourceTree = "<group>"; };
+		9D846E9E17A10D2900A28FF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9D8E3D381778F5DD0052AE20 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
 		9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
@@ -195,6 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D846E9F17A10D2900A28FF6 /* QuartzCore.framework in Frameworks */,
 				9D42D846176159CD00614738 /* libGtarController.a in Frameworks */,
 				9D42D844176159C700614738 /* libAudioController.a in Frameworks */,
 				9D42D848176159D300614738 /* libgTarAppCore.a in Frameworks */,
@@ -250,6 +253,7 @@
 				9D42D7FC17613B8700614738 /* UIKit.framework */,
 				9D42D7FE17613B8700614738 /* Foundation.framework */,
 				9D42D80017613B8700614738 /* CoreGraphics.framework */,
+				9D846E9E17A10D2900A28FF6 /* QuartzCore.framework */,
 				9D42D82317613B8800614738 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
@@ -689,11 +693,13 @@
 				GCC_PREFIX_HEADER = "Sketch/Sketch-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "Sketch/Sketch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -707,11 +713,13 @@
 				GCC_PREFIX_HEADER = "Sketch/Sketch-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "Sketch/Sketch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

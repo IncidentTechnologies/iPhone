@@ -8,6 +8,17 @@
 
 #import "SongViewCell.h"
 
+#import <QuartzCore/QuartzCore.h>
+
+@interface SongViewCell ()
+{
+    
+}
+
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+@end
+
 @implementation SongViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -24,6 +35,23 @@
 {
     [super awakeFromNib];
     // Initiation Code here
+    _deleteButton.hidden = YES;
+}
+
+- (void)showDeleteButton
+{
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionFade;
+    animation.duration = 0.6;
+    [_deleteButton.layer addAnimation:animation forKey:nil];
+    _deleteButton.hidden = NO;
+    _songDate.hidden = YES;
+}
+
+- (void)hideDeleteButton
+{
+    _deleteButton.hidden = YES;
+    _songDate.hidden = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -38,7 +66,17 @@
 {
     [super setHighlighted:highlighted animated:animated];
     
-    _songTitle.textColor = highlighted ? [UIColor whiteColor] : [UIColor blackColor];
+    _songTitle.textColor = (highlighted | self.selected) ? [UIColor whiteColor] : [UIColor blackColor];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([_songTitle isFirstResponder] && [touch view] != _songTitle) {
+        [_songTitle resignFirstResponder];
+    }
 }
 
 @end

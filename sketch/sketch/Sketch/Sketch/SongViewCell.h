@@ -13,4 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *songLength;
 @property (weak, nonatomic) IBOutlet UILabel *songDate;
 
+- (void)showDeleteButton;
+- (void)hideDeleteButton;
+
 @end
