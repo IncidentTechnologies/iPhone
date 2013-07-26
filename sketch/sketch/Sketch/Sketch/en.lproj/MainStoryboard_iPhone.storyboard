@@ -148,6 +148,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="mainContentView" destination="Rd5-4j-qf1" id="jxQ-F1-KcH"/>
+                        <outlet property="playBackView" destination="fQ3-wl-je5" id="4ky-dN-ajx"/>
                         <outlet property="recordAndStopButton" destination="TJX-K7-yF4" id="lgx-94-siq"/>
                         <outlet property="songLengthLabel" destination="cV7-6D-EZj" id="DPD-TM-dBI"/>
                     </connections>

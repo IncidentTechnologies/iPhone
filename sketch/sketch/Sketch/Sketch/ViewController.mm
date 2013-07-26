@@ -8,14 +8,13 @@
 
 #import "ViewController.h"
 #import "SongViewCell.h"
+#import "PlayerViewController.h"
 
 #import <AudioController/AudioController.h>
 #import <gTarAppCore/SongRecorder.h>
 #import <gTarAppCore/UserSongSession.h>
 #import <gTarAppCore/NSSong.h>
 #import <gTarAppCore/NSSongCreator.h>
-#import <gTarAppCore/FileController.h>
-#import <gTarAppCore/SongPlaybackController.h>
 
 @interface ViewController ()
 {
@@ -26,19 +25,18 @@
     SongTableViewController* _songTableVC;
     
     SongRecorder* _songRecorder;
-    FileController* _fileController;
     
     NSInteger _tempo;
-    NSTimer* _songLengthTimer;
     NSDate* _songStartTime;
     // songRecorderTimer
     NSTimer* _srTimer;
     float _srTimeInterval;
     
-    SongPlaybackController* _songPlayer;
+    PlayerViewController* _playBackVC;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
+@property (weak, nonatomic) IBOutlet UIView *playBackView;
 @property (weak, nonatomic) IBOutlet UITableView *songTableView;
 @property (weak, nonatomic) IBOutlet UIButton *recordAndStopButton;
 @property (weak, nonatomic) IBOutlet UILabel *songLengthLabel;
@@ -60,7 +58,9 @@
     _audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     [_audioController startAUGraph];
     
-    _songPlayer = [[SongPlaybackController alloc] initWithAudioController:_audioController];
+    _playBackVC = [[PlayerViewController alloc] initWithAudioController:_audioController];
+    _playBackVC.view.frame = _playBackView.frame;
+    [_playBackView addSubview:_playBackVC.view];
     
     
     _gtarController = [[GtarController alloc] init];
@@ -206,7 +206,6 @@
         _srTimer = [NSTimer scheduledTimerWithTimeInterval:(_srTimeInterval) target:self selector:@selector(serviceSongRecorderTimer:) userInfo:nil repeats:YES];
         
         _songStartTime = [NSDate date];
-        _songLengthTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(serviceSongLengthTimer:) userInfo:nil repeats:YES];
     }
     else
     {
@@ -214,9 +213,6 @@
         
         [_srTimer invalidate];
         _srTimer = nil;
-        
-        [_songLengthTimer invalidate];
-        _songLengthTimer = nil;
         
         UserSongSession * session = [[UserSongSession alloc] init];
         
@@ -242,7 +238,8 @@
 
 - (void)playSong:(UserSongSession*)songSession
 {
-    [_songPlayer startWithXmpBlob:songSession.m_xmpBlob];
+    [_playBackVC setUserSongSession:songSession];
+    [_playBackVC playSong];
 }
 
 - (void)pauseCurrentSong

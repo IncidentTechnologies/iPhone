@@ -70,6 +70,8 @@
 		9D5EDF23177A41E30020D4EA /* Acoustic Guitar 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EDEF8177A41E30020D4EA /* Acoustic Guitar 80.mp3 */; };
 		9D5EDF24177A41E30020D4EA /* Acoustic Guitar 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EDEF9177A41E30020D4EA /* Acoustic Guitar 81.mp3 */; };
 		9D5EDF25177A41E30020D4EA /* Acoustic Guitar 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EDEFA177A41E30020D4EA /* Acoustic Guitar 82.mp3 */; };
+		9D68DDEC17A2FD0B000B2056 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D68DDEA17A2FD0B000B2056 /* PlayerViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9D68DDED17A2FD0B000B2056 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D68DDEB17A2FD0B000B2056 /* PlayerViewController.xib */; };
 		9D846E7D179775B400A28FF6 /* Delete_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E7C179775B400A28FF6 /* Delete_Button.png */; };
 		9D846E89179775C500A28FF6 /* Edit_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E7E179775C500A28FF6 /* Edit_Button.png */; };
 		9D846E8A179775C500A28FF6 /* Instrument_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E7F179775C500A28FF6 /* Instrument_Icon.png */; };
@@ -170,6 +172,9 @@
 		9D5EDEF8177A41E30020D4EA /* Acoustic Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 80.mp3"; path = "Resources/Audio/Acoustic Guitar/Acoustic Guitar 80.mp3"; sourceTree = "<group>"; };
 		9D5EDEF9177A41E30020D4EA /* Acoustic Guitar 81.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 81.mp3"; path = "Resources/Audio/Acoustic Guitar/Acoustic Guitar 81.mp3"; sourceTree = "<group>"; };
 		9D5EDEFA177A41E30020D4EA /* Acoustic Guitar 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 82.mp3"; path = "Resources/Audio/Acoustic Guitar/Acoustic Guitar 82.mp3"; sourceTree = "<group>"; };
+		9D68DDE917A2FD0B000B2056 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
+		9D68DDEA17A2FD0B000B2056 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
+		9D68DDEB17A2FD0B000B2056 /* PlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		9D846E7C179775B400A28FF6 /* Delete_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Delete_Button.png; path = Resources/Images/Delete_Button.png; sourceTree = "<group>"; };
 		9D846E7E179775C500A28FF6 /* Edit_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Edit_Button.png; path = Resources/Images/Edit_Button.png; sourceTree = "<group>"; };
 		9D846E7F179775C500A28FF6 /* Instrument_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Instrument_Icon.png; path = Resources/Images/Instrument_Icon.png; sourceTree = "<group>"; };
@@ -270,9 +275,12 @@
 				9D42D81B17613B8700614738 /* ViewController.mm */,
 				9D846E98179DB51200A28FF6 /* SongViewCell.h */,
 				9D846E99179DB51200A28FF6 /* SongViewCell.m */,
-				9D42D80317613B8700614738 /* Supporting Files */,
 				9D846E9B179E21F400A28FF6 /* SongTableViewController.h */,
 				9D846E9C179E21F400A28FF6 /* SongTableViewController.m */,
+				9D68DDE917A2FD0B000B2056 /* PlayerViewController.h */,
+				9D68DDEA17A2FD0B000B2056 /* PlayerViewController.m */,
+				9D68DDEB17A2FD0B000B2056 /* PlayerViewController.xib */,
+				9D42D80317613B8700614738 /* Supporting Files */,
 			);
 			path = Sketch;
 			sourceTree = "<group>";
@@ -530,6 +538,7 @@
 				9D846E91179775C500A28FF6 /* Volume_Minus.png in Resources */,
 				9D846E92179775C500A28FF6 /* Volume_Plus.png in Resources */,
 				9D846E93179775C500A28FF6 /* Volume_Slider.png in Resources */,
+				9D68DDED17A2FD0B000B2056 /* PlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,6 +578,7 @@
 				9D42D81C17613B8700614738 /* ViewController.mm in Sources */,
 				9D846E9A179DB51300A28FF6 /* SongViewCell.m in Sources */,
 				9D846E9D179E21F500A28FF6 /* SongTableViewController.m in Sources */,
+				9D68DDEC17A2FD0B000B2056 /* PlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
