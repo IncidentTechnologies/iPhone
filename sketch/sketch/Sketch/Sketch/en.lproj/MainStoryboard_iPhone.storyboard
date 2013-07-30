@@ -201,12 +201,6 @@
                                                 <outlet property="delegate" destination="c6P-6n-QeF" id="cWT-LQ-c6e"/>
                                             </connections>
                                         </textField>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Play_ButtonGREY.png" highlightedImage="Play_ButtonWHITE.png" translatesAutoresizingMaskIntoConstraints="NO" id="GDS-gF-mLW">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="47" type="user" id="Biw-qC-5iD"/>
-                                                <constraint firstAttribute="width" constant="47" id="a9i-d0-6zb"/>
-                                            </constraints>
-                                        </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FV9-9e-N2v">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="86" id="Y7c-WE-YOA"/>
@@ -223,24 +217,38 @@
                                                 <action selector="deleteCell:" destination="c6P-6n-QeF" eventType="touchUpInside" id="tnB-Vr-PEN"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pon-cY-Tvx">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="47" id="Hlc-6G-Ji1"/>
+                                                <constraint firstAttribute="width" constant="47" id="Skf-cx-eY0"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" backgroundImage="Play_ButtonGREY.png">
+                                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" backgroundImage="Pau"/>
+                                            <state key="highlighted" backgroundImage="Play_ButtonWHITE.png">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstItem="Pon-cY-Tvx" firstAttribute="leading" secondItem="A5w-mh-y2F" secondAttribute="leading" constant="12" id="4GF-zM-MQR"/>
+                                    <constraint firstItem="Pon-cY-Tvx" firstAttribute="top" secondItem="A5w-mh-y2F" secondAttribute="top" constant="6" id="7YO-O0-4TA"/>
                                     <constraint firstItem="XUl-ZC-XSa" firstAttribute="leading" secondItem="A5w-mh-y2F" secondAttribute="leading" constant="81" id="8D4-YZ-wms"/>
                                     <constraint firstItem="UWI-US-7Th" firstAttribute="top" secondItem="gBG-8g-tie" secondAttribute="top" type="default" id="8GP-AP-qNA"/>
                                     <constraint firstItem="gBG-8g-tie" firstAttribute="leading" secondItem="XUl-ZC-XSa" secondAttribute="leading" type="default" id="8be-0U-rEH"/>
                                     <constraint firstItem="XUl-ZC-XSa" firstAttribute="top" secondItem="A5w-mh-y2F" secondAttribute="top" constant="9" id="9q7-0p-hZS"/>
-                                    <constraint firstItem="GDS-gF-mLW" firstAttribute="leading" secondItem="A5w-mh-y2F" secondAttribute="leading" constant="12" id="H2h-o3-GAO"/>
-                                    <constraint firstItem="FV9-9e-N2v" firstAttribute="top" secondItem="GDS-gF-mLW" secondAttribute="top" type="default" id="I64-Ef-e1E"/>
-                                    <constraint firstAttribute="trailing" secondItem="FV9-9e-N2v" secondAttribute="trailing" constant="10" id="Jt2-bO-ThV"/>
+                                    <constraint firstItem="Pon-cY-Tvx" firstAttribute="top" secondItem="FV9-9e-N2v" secondAttribute="top" type="default" id="H4H-nF-FAh"/>
                                     <constraint firstItem="FV9-9e-N2v" firstAttribute="bottom" secondItem="UWI-US-7Th" secondAttribute="bottom" type="default" id="NIJ-TL-D0p"/>
-                                    <constraint firstItem="GDS-gF-mLW" firstAttribute="top" secondItem="A5w-mh-y2F" secondAttribute="top" constant="6" type="user" id="jmb-Ab-Dfg"/>
+                                    <constraint firstAttribute="trailing" secondItem="FV9-9e-N2v" secondAttribute="trailing" constant="22" id="Q1R-Yp-S4q"/>
                                     <constraint firstItem="UWI-US-7Th" firstAttribute="baseline" secondItem="gBG-8g-tie" secondAttribute="baseline" type="default" id="lwA-7W-lny"/>
-                                    <constraint firstItem="gBG-8g-tie" firstAttribute="bottom" secondItem="GDS-gF-mLW" secondAttribute="bottom" type="default" id="s6A-E5-M9X"/>
+                                    <constraint firstItem="Pon-cY-Tvx" firstAttribute="bottom" secondItem="gBG-8g-tie" secondAttribute="bottom" type="default" id="p2f-RW-60q"/>
                                     <constraint firstAttribute="trailing" secondItem="UWI-US-7Th" secondAttribute="trailing" constant="30" id="vcN-4E-sh0"/>
-                                    <constraint firstItem="GDS-gF-mLW" firstAttribute="centerY" secondItem="A5w-mh-y2F" secondAttribute="centerY" type="user" id="zfZ-6h-hYN"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="deleteButton" destination="FV9-9e-N2v" id="5U6-gN-2M3"/>
@@ -272,12 +280,36 @@
     <resources>
         <image name="Delete_Button.png" width="171" height="94"/>
         <image name="Instrument_Icon.png" width="67" height="60"/>
+        <image name="Pau" width="16" height="16"/>
         <image name="Play_ButtonGREY.png" width="93" height="94"/>
         <image name="Play_ButtonWHITE.png" width="93" height="94"/>
         <image name="Rec_Icon.png" width="56" height="56"/>
         <image name="Stop_Icon.png" width="50" height="50"/>
         <image name="Volume_Icon.png" width="57" height="49"/>
     </resources>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SongTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SongTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="songTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="SongViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SongViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="songDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="songLength" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="songTitle" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

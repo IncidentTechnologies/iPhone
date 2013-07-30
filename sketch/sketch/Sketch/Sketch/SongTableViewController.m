@@ -151,7 +151,7 @@
     cell.songDate.text = [NSDateFormatter localizedStringFromDate:created dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
         
     UIView *selectionColor = [[UIView alloc] init];
-    selectionColor.backgroundColor = [UIColor colorWithRed:(100/255.0) green:(120/255.0) blue:(130/255.0) alpha:1];
+    selectionColor.backgroundColor = [UIColor colorWithRed:(159/255.0) green:(195/255.0) blue:(204/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
     
     return cell;
@@ -271,7 +271,7 @@
 
 - (void)didTap:(UIGestureRecognizer *)gestureRecognizer
 {
-    // Nothing to do here, gestureRecognizer: shouldReceiveTouch: receives the touchDown
+    // Nothing to do here, "gestureRecognizer: shouldReceiveTouch:" receives the touchDown
     // event that we are interested in.
 }
 

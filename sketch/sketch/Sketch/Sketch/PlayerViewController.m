@@ -27,11 +27,10 @@
     SongPlaybackController *_songPlaybackController;
     
     NSTimer *_updateTimer;
-    
-    NSTimer* _songLengthTimer;
-    NSDate* _songStartTime;
-    
+
     BOOL _init;
+    
+    BOOL _isScrolling;
 }
 
 @property (assign, nonatomic) IBOutlet UILabel *songTimeLabel;
@@ -68,6 +67,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
 	
     //[_songTitle addShadowWithRadius:2.0 andOpacity:0.7];
     //[_songArtist addShadowWithRadius:2.0 andOpacity:0.7];
@@ -127,7 +130,6 @@
     [_songArtist release];
     [_touchSurfaceView release];
     [_indicatorView release];
-    [_songStartTime release];
     
     [super dealloc];
 }
@@ -223,67 +225,66 @@
     
     _fillView.layer.transform = CATransform3DMakeTranslation( delta, 0, 0 );
     
+    // Time elapsed so far
+    int songTime = _userSongSession.m_length * _songPlaybackController.m_songModel.m_percentageComplete;
+    
     // We are done with the song
     if ( _songPlaybackController.m_songModel.m_percentageComplete >= 1.0 )
     {
+        songTime = _userSongSession.m_length;
+        
         [_playButton setSelected:NO];
         [self pauseUpdating];
     }
+
+    [self updateTimeLabelWithTime:songTime];
 }
 
-#pragma mark - Button click handlers
+- (void)updateTimeLabelWithTime:(NSTimeInterval)time
+{
+    int minutes = time/60;
+    int seconds = time - minutes * 60;
+    
+    NSString* timeString = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+    _songTimeLabel.text = timeString;
+}
 
-- (void)playSong
+- (void)startSong
+{
+    // Do this now because the AC might not be ready sooner
+    @synchronized( self )
+    {
+        if ( _init == YES )
+        {
+            [_playButton setSelected:YES];
+            
+            [self pauseUpdating];
+            
+            NSTimeInterval songLength = _userSongSession.m_length;
+            int minutes = songLength/60;
+            int seconds = songLength - minutes * 60;
+            NSString* time = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+            _songLengthLabel.text = time;
+            
+            
+            [_songPlaybackController startWithXmpBlob:_userSongSession.m_xmpBlob];
+            [self startUpdating];
+        }
+    }
+}
+
+- (void)playPauseSong
 {
     if ( _songPlaybackController.isPlaying == YES )
     {
-        [_playButton setSelected:NO];
-        
         [_songPlaybackController pauseSong];
-        
         [self pauseUpdating];
     }
     else
     {
-        // Do this now because the AC might not be ready sooner
-        @synchronized( self )
-        {
-            if ( _init == YES )
-            {
-                [_playButton setSelected:YES];
-                
-                [_songStartTime release];
-                _songStartTime = [[NSDate date] retain];;
-                _songLengthTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(serviceSongLengthTimer:) userInfo:nil repeats:YES];
-                
-
-                [_songPlaybackController startWithXmpBlob:_userSongSession.m_xmpBlob];
-//                [_songPlaybackController observeGtarController:g_gtarController];
-                
-                [self startUpdating];
-            }
-            
-        }
-        
+        [_songPlaybackController playSong];
+        [self startUpdating];
     }
-    
-
-}
-
-- (void)stopSong
-{
-    
-}
-
-- (void)serviceSongLengthTimer:(NSTimer *)timer
-{
-    NSTimeInterval currentSongLength = [[NSDate date] timeIntervalSinceDate: _songStartTime];
-    
-    int minutes = currentSongLength/60;
-    int seconds = currentSongLength - minutes * 60;
-    
-    NSString* time = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
-    _songTimeLabel.text = time;
 }
 
 #pragma mark - Touch handling
@@ -301,27 +302,21 @@
     
     [_songPlaybackController.m_songModel changePercentageComplete:percentage];
     
+    int timeElapsed = _userSongSession.m_length * percentage;
+    [self updateTimeLabelWithTime:timeElapsed];
+    
     [self updateProgress];
 
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)didTap:(UIGestureRecognizer *)gestureRecognizer
 {
-    
-    if ( _init == NO )
+    // If a touchMove/scroll just happened don't handle the tap.
+    // This works based on the behavior that gesturRecognizer handler
+    // gets called before UITouch handlers.
+    if (!_isScrolling)
     {
-        return;
-    }
-    
-    UITouch *touch = [[touches allObjects] objectAtIndex:0];
-    CGPoint currentPoint = [touch locationInView:self.view];
-    
-    if ( CGRectContainsPoint( _touchSurfaceView.frame, currentPoint) == YES )
-    {
-        [self pauseUpdating];
-        [_songPlaybackController pauseSong];
-        
-        [self updateProgressFromTouch:currentPoint];
+        [self playPauseSong];
     }
 }
 
@@ -343,12 +338,24 @@
     
     if ( CGRectContainsPoint( _touchSurfaceView.frame, currentPoint) == YES )
     {
+        _isScrolling = YES;
+        [_songPlaybackController pauseSong];
+        [self pauseUpdating];
+        
         [self updateProgressFromTouch:currentPoint];
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (_isScrolling)
+    {
+        _isScrolling = NO;
+        // uncomment to continue playback after scroll ends
+        //[self playPauseSong];
+    }
+    
+    
     // If the play button is still selected, we should keep playing
     if ( _playButton.isSelected == YES )
     {

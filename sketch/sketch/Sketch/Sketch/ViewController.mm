@@ -28,6 +28,7 @@
     
     NSInteger _tempo;
     NSDate* _songStartTime;
+    NSDate* _lastNotePlayedTime;
     // songRecorderTimer
     NSTimer* _srTimer;
     float _srTimeInterval;
@@ -217,7 +218,7 @@
         UserSongSession * session = [[UserSongSession alloc] init];
         
         session.m_notes = [self getNewSongName];
-        session.m_length = [[NSDate date] timeIntervalSinceDate: _songStartTime];;
+        session.m_length = [_lastNotePlayedTime timeIntervalSinceDate: _songStartTime];;
         session.m_created = [[NSDate date] timeIntervalSince1970];
         
         _songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
@@ -239,7 +240,7 @@
 - (void)playSong:(UserSongSession*)songSession
 {
     [_playBackVC setUserSongSession:songSession];
-    [_playBackVC playSong];
+    [_playBackVC startSong];
 }
 
 - (void)pauseCurrentSong
@@ -293,6 +294,8 @@
     [_audioController startAUGraph];
     [_audioController PluckString:pluck.position.string - 1 atFret:pluck.position.fret];
     [_songRecorder playString:pluck.position.string andFret:pluck.position.fret];
+    
+    _lastNotePlayedTime = [NSDate date];
 }
 
 - (void)gtarNoteOff:(GtarPosition)position
