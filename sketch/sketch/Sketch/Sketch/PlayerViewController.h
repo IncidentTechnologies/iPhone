@@ -30,7 +30,11 @@
 @property (retain, nonatomic) NSInvocation *loadedInvocation;
 
 - (void)startSong;
+- (void)pauseSong;
+- (void)continueSong;
 - (void)playPauseSong;
+
+- (void)recordMode;
 
 - (void)attachToSuperview:(UIView *)view;
 

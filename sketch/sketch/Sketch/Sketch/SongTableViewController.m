@@ -64,8 +64,9 @@
     swipeGestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:swipeGestureRecognizer];
     
-    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
+    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didDoubleTap:)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
+    tapGestureRecognizer.numberOfTapsRequired = 2;
     tapGestureRecognizer.delegate = self;
     [self.tableView addGestureRecognizer:tapGestureRecognizer];
     
@@ -220,7 +221,7 @@
     else
     {
         UserSongSession * session = [_songList objectAtIndex:indexPath.row];
-        [_delegate playSong:session];
+        [_delegate selectedSong:session];
     }
 }
 
@@ -269,10 +270,10 @@
     }
 }
 
-- (void)didTap:(UIGestureRecognizer *)gestureRecognizer
+- (void)didDoubleTap:(UIGestureRecognizer *)gestureRecognizer
 {
-    // Nothing to do here, "gestureRecognizer: shouldReceiveTouch:" receives the touchDown
-    // event that we are interested in.
+    UserSongSession* song = [_songList objectAtIndex:[_songTableView indexPathForSelectedRow].row];
+    [_delegate playSong:song];
 }
 
 // This UIGestureRecognizer Delegate method gets called on the touchDown, where as didTap: only gets

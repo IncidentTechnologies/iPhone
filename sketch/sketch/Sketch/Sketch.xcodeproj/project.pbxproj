@@ -27,6 +27,8 @@
 		9D42D844176159C700614738 /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D843176159C700614738 /* libAudioController.a */; };
 		9D42D846176159CD00614738 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D845176159CD00614738 /* libGtarController.a */; };
 		9D42D848176159D300614738 /* libgTarAppCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D847176159D300614738 /* libgTarAppCore.a */; };
+		9D4C70C417A758A400DC7B4D /* Pause_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C70C217A758A300DC7B4D /* Pause_Icon.png */; };
+		9D4C70C517A758A400DC7B4D /* Play_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C70C317A758A300DC7B4D /* Play_Icon.png */; };
 		9D5EDEFB177A41E30020D4EA /* Acoustic Guitar 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EDED0177A41E30020D4EA /* Acoustic Guitar 40.mp3 */; };
 		9D5EDEFC177A41E30020D4EA /* Acoustic Guitar 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EDED1177A41E30020D4EA /* Acoustic Guitar 41.mp3 */; };
 		9D5EDEFD177A41E30020D4EA /* Acoustic Guitar 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EDED2177A41E30020D4EA /* Acoustic Guitar 42.mp3 */; };
@@ -75,8 +77,6 @@
 		9D846E7D179775B400A28FF6 /* Delete_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E7C179775B400A28FF6 /* Delete_Button.png */; };
 		9D846E89179775C500A28FF6 /* Edit_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E7E179775C500A28FF6 /* Edit_Button.png */; };
 		9D846E8A179775C500A28FF6 /* Instrument_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E7F179775C500A28FF6 /* Instrument_Icon.png */; };
-		9D846E8B179775C500A28FF6 /* Play_ButtonGREY.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E80179775C500A28FF6 /* Play_ButtonGREY.png */; };
-		9D846E8C179775C500A28FF6 /* Play_ButtonWHITE.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E81179775C500A28FF6 /* Play_ButtonWHITE.png */; };
 		9D846E8D179775C500A28FF6 /* Stop_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E82179775C500A28FF6 /* Stop_Icon.png */; };
 		9D846E8E179775C500A28FF6 /* Rec_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E83179775C500A28FF6 /* Rec_Icon.png */; };
 		9D846E8F179775C500A28FF6 /* Volume_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E84179775C500A28FF6 /* Volume_Icon.png */; };
@@ -129,6 +129,8 @@
 		9D42D843176159C700614738 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAudioController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D42D845176159CD00614738 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGtarController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D42D847176159D300614738 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgTarAppCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D4C70C217A758A300DC7B4D /* Pause_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pause_Icon.png; path = Resources/Images/Pause_Icon.png; sourceTree = "<group>"; };
+		9D4C70C317A758A300DC7B4D /* Play_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Play_Icon.png; path = Resources/Images/Play_Icon.png; sourceTree = "<group>"; };
 		9D5EDED0177A41E30020D4EA /* Acoustic Guitar 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 40.mp3"; path = "Resources/Audio/Acoustic Guitar/Acoustic Guitar 40.mp3"; sourceTree = "<group>"; };
 		9D5EDED1177A41E30020D4EA /* Acoustic Guitar 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 41.mp3"; path = "Resources/Audio/Acoustic Guitar/Acoustic Guitar 41.mp3"; sourceTree = "<group>"; };
 		9D5EDED2177A41E30020D4EA /* Acoustic Guitar 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 42.mp3"; path = "Resources/Audio/Acoustic Guitar/Acoustic Guitar 42.mp3"; sourceTree = "<group>"; };
@@ -178,8 +180,6 @@
 		9D846E7C179775B400A28FF6 /* Delete_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Delete_Button.png; path = Resources/Images/Delete_Button.png; sourceTree = "<group>"; };
 		9D846E7E179775C500A28FF6 /* Edit_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Edit_Button.png; path = Resources/Images/Edit_Button.png; sourceTree = "<group>"; };
 		9D846E7F179775C500A28FF6 /* Instrument_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Instrument_Icon.png; path = Resources/Images/Instrument_Icon.png; sourceTree = "<group>"; };
-		9D846E80179775C500A28FF6 /* Play_ButtonGREY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Play_ButtonGREY.png; path = Resources/Images/Play_ButtonGREY.png; sourceTree = "<group>"; };
-		9D846E81179775C500A28FF6 /* Play_ButtonWHITE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Play_ButtonWHITE.png; path = Resources/Images/Play_ButtonWHITE.png; sourceTree = "<group>"; };
 		9D846E82179775C500A28FF6 /* Stop_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Stop_Icon.png; path = Resources/Images/Stop_Icon.png; sourceTree = "<group>"; };
 		9D846E83179775C500A28FF6 /* Rec_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Rec_Icon.png; path = Resources/Images/Rec_Icon.png; sourceTree = "<group>"; };
 		9D846E84179775C500A28FF6 /* Volume_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Volume_Icon.png; path = Resources/Images/Volume_Icon.png; sourceTree = "<group>"; };
@@ -390,10 +390,10 @@
 		9D846E7B1797759600A28FF6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9D4C70C217A758A300DC7B4D /* Pause_Icon.png */,
+				9D4C70C317A758A300DC7B4D /* Play_Icon.png */,
 				9D846E7E179775C500A28FF6 /* Edit_Button.png */,
 				9D846E7F179775C500A28FF6 /* Instrument_Icon.png */,
-				9D846E80179775C500A28FF6 /* Play_ButtonGREY.png */,
-				9D846E81179775C500A28FF6 /* Play_ButtonWHITE.png */,
 				9D846E82179775C500A28FF6 /* Stop_Icon.png */,
 				9D846E83179775C500A28FF6 /* Rec_Icon.png */,
 				9D846E84179775C500A28FF6 /* Volume_Icon.png */,
@@ -529,8 +529,6 @@
 				9D846E7D179775B400A28FF6 /* Delete_Button.png in Resources */,
 				9D846E89179775C500A28FF6 /* Edit_Button.png in Resources */,
 				9D846E8A179775C500A28FF6 /* Instrument_Icon.png in Resources */,
-				9D846E8B179775C500A28FF6 /* Play_ButtonGREY.png in Resources */,
-				9D846E8C179775C500A28FF6 /* Play_ButtonWHITE.png in Resources */,
 				9D846E8D179775C500A28FF6 /* Stop_Icon.png in Resources */,
 				9D846E8E179775C500A28FF6 /* Rec_Icon.png in Resources */,
 				9D846E8F179775C500A28FF6 /* Volume_Icon.png in Resources */,
@@ -539,6 +537,8 @@
 				9D846E92179775C500A28FF6 /* Volume_Plus.png in Resources */,
 				9D846E93179775C500A28FF6 /* Volume_Slider.png in Resources */,
 				9D68DDED17A2FD0B000B2056 /* PlayerViewController.xib in Resources */,
+				9D4C70C417A758A400DC7B4D /* Pause_Icon.png in Resources */,
+				9D4C70C517A758A400DC7B4D /* Play_Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

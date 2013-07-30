@@ -12,8 +12,8 @@
 
 @protocol SongTableViewControllerDelegate <NSObject>
 
+- (void)selectedSong:(UserSongSession*)songSession;
 - (void)playSong:(UserSongSession*)songSession;
-- (void)pauseCurrentSong;
 
 @end
 

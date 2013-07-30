@@ -27,8 +27,13 @@
     SongRecorder* _songRecorder;
     
     NSInteger _tempo;
-    NSDate* _songStartTime;
+    
+    // Keep track of song  recording time
+    NSTimer* _songTimeCounterTimer;
+    float _timeCounterInterval;
+    NSTimeInterval _runningSongTime;
     NSDate* _lastNotePlayedTime;
+    
     // songRecorderTimer
     NSTimer* _srTimer;
     float _srTimeInterval;
@@ -38,8 +43,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UIView *playBackView;
-@property (weak, nonatomic) IBOutlet UITableView *songTableView;
 @property (weak, nonatomic) IBOutlet UIButton *recordAndStopButton;
+@property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
 @property (weak, nonatomic) IBOutlet UILabel *songLengthLabel;
 
 @end
@@ -61,8 +66,8 @@
     
     _playBackVC = [[PlayerViewController alloc] initWithAudioController:_audioController];
     _playBackVC.view.frame = _playBackView.frame;
+    [_playBackVC recordMode];
     [_playBackView addSubview:_playBackVC.view];
-    
     
     _gtarController = [[GtarController alloc] init];
     // By default it just outputs 'LevelError'
@@ -71,8 +76,7 @@
     
     _tempo = 120;
     _srTimeInterval = 60.0/_tempo/16.0;
-    
-    
+    _timeCounterInterval = 0.2;
     
     //_songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
 }
@@ -92,10 +96,10 @@
 
 - (void)serviceSongLengthTimer:(NSTimer *)timer {
     
-    NSTimeInterval currentSongLength = [[NSDate date] timeIntervalSinceDate: _songStartTime];
+    _runningSongTime = _runningSongTime + _timeCounterInterval;
     
-    int minutes = currentSongLength/60;
-    int seconds = currentSongLength - minutes * 60;
+    int minutes = _runningSongTime/60;
+    int seconds = _runningSongTime - minutes * 60;
     
     NSString* time = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
     _songLengthLabel.text = time;
@@ -199,26 +203,55 @@
     
     if (_recordAndStopButton.selected)
     {
-        _songRecorder = [[SongRecorder alloc] initWithTempo:_tempo];
-        [_songRecorder beginSong];
+        // Adjust UI
+        _recordAndStopButton.backgroundColor = [UIColor colorWithRed:(199/255.0) green:(46/255.0) blue:(0/255.0) alpha:1];
+        _playPauseButton.selected = YES;
+        _songLengthLabel.hidden = NO;
+        [_playBackVC recordMode];
+        NSString* time = [NSString stringWithFormat:@"%d:%02d", 0, 0];
+        _songLengthLabel.text = time;
+        
+        // Setup timers
+        _lastNotePlayedTime = [NSDate date];
+        _runningSongTime = 0;
+        _songTimeCounterTimer = [NSTimer scheduledTimerWithTimeInterval:_timeCounterInterval target:self selector:@selector(serviceSongLengthTimer:) userInfo:nil repeats:YES];
         
         // run timer at say every 1/8th notes, check how much time is left on timer to get how much time has passed, add this time to the advance timer. can choose a quantization setting and quantize your song if you want (just run timer every quantization interval and when note goes in record it without adjusting time passed, to make it quantize to nearest interval instead of just to one that has passed: check how much time has passed to figure out which quantizatoin interval is closer, the last one to have passed or the next one coming up.
         [_srTimer invalidate];
         _srTimer = [NSTimer scheduledTimerWithTimeInterval:(_srTimeInterval) target:self selector:@selector(serviceSongRecorderTimer:) userInfo:nil repeats:YES];
         
-        _songStartTime = [NSDate date];
+        // Start Song recording
+        _songRecorder = [[SongRecorder alloc] initWithTempo:_tempo];
+        [_songRecorder beginSong];
     }
     else
     {
         [_songRecorder finishSong];
         
+        // Adjust UI
+        _recordAndStopButton.backgroundColor = [UIColor colorWithRed:(39/255.0) green:(47/255.0) blue:(50/255.0) alpha:1];
+        _playPauseButton.selected = NO;
+        
+        // Stop timmers
         [_srTimer invalidate];
         _srTimer = nil;
+        [_songTimeCounterTimer invalidate];
+        _songTimeCounterTimer = nil;
         
+        // Create and save song session if appropriate
+        
+        // Calculate actual play time (beginning of recording to last note played)
+        NSTimeInterval deadTimeAtEnd = [[NSDate date] timeIntervalSinceDate:_lastNotePlayedTime];
+        NSTimeInterval songPlayTime = _runningSongTime - deadTimeAtEnd;
+        if (songPlayTime < 1)
+        {
+            // If the song is less than a second do not save it.
+            return;
+        }
         UserSongSession * session = [[UserSongSession alloc] init];
         
+        session.m_length = songPlayTime;
         session.m_notes = [self getNewSongName];
-        session.m_length = [_lastNotePlayedTime timeIntervalSinceDate: _songStartTime];;
         session.m_created = [[NSDate date] timeIntervalSince1970];
         
         _songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
@@ -234,18 +267,69 @@
     }
 }
 
+- (IBAction)togglePlayPause:(UIButton *)sender
+{
+    _playPauseButton.selected = !_playPauseButton.selected;
+    
+    // Different pause play behavior depending on wether we are currently
+    // recording.
+    if (_recordAndStopButton.selected)
+    {
+        // If currently recording, pause/play the recording
+        if (_playPauseButton.selected)
+        {
+            _songTimeCounterTimer = [NSTimer scheduledTimerWithTimeInterval:_timeCounterInterval target:self selector:@selector(serviceSongLengthTimer:) userInfo:nil repeats:YES];
+            [_songRecorder continueRecording];
+        }
+        else
+        {
+            [_songTimeCounterTimer invalidate];
+            _songTimeCounterTimer = nil;
+            [_songRecorder pauseRecording];
+        }
+    }
+    else
+    {
+        // Control song playback
+        if (_playPauseButton.selected)
+        {
+            _songLengthLabel.hidden = YES;
+            
+            [_playBackVC continueSong];
+
+        }
+        else
+        {
+            [_playBackVC pauseSong];
+        }
+        
+    }
+    
+}
 
 #pragma mark SongTableVCDelegate
+
+- (void)selectedSong:(UserSongSession*)songSession
+{
+    // If we were in the middle of a recording, send a message to stop the recording
+    // which will save it if appropriate.
+    if (_recordAndStopButton.selected)
+    {
+        [self toggleRecording:_recordAndStopButton];
+    }
+    
+    _songLengthLabel.hidden = YES;
+    _playPauseButton.selected = NO;
+    
+    [_playBackVC setUserSongSession:songSession];
+    [_playBackVC startSong];
+    [_playBackVC pauseSong];
+}
 
 - (void)playSong:(UserSongSession*)songSession
 {
     [_playBackVC setUserSongSession:songSession];
     [_playBackVC startSong];
-}
-
-- (void)pauseCurrentSong
-{
-    
 }
 
 #pragma mark Other

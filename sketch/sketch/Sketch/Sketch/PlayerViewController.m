@@ -249,6 +249,27 @@
     _songTimeLabel.text = timeString;
 }
 
+- (void)setUserSongSession:(UserSongSession *)userSongSession
+{
+    _userSongSession = userSongSession;
+    
+    // If view is hidden from record mode, unhide it.
+    if (self.view.hidden)
+    {
+        self.view.hidden = NO;
+    }
+    
+    [self updateTimeLabelWithTime:0];
+    _fillView.layer.transform = CATransform3DMakeTranslation( 0, 0, 0 );
+    
+    NSTimeInterval songLength = _userSongSession.m_length;
+    int minutes = songLength/60;
+    int seconds = songLength - minutes * 60;
+    NSString* time = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+    _songLengthLabel.text = time;
+    
+}
+
 - (void)startSong
 {
     // Do this now because the AC might not be ready sooner
@@ -259,14 +280,6 @@
             [_playButton setSelected:YES];
             
             [self pauseUpdating];
-            
-            NSTimeInterval songLength = _userSongSession.m_length;
-            int minutes = songLength/60;
-            int seconds = songLength - minutes * 60;
-            NSString* time = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
-            _songLengthLabel.text = time;
-            
-            
             [_songPlaybackController startWithXmpBlob:_userSongSession.m_xmpBlob];
             [self startUpdating];
         }
@@ -277,14 +290,31 @@
 {
     if ( _songPlaybackController.isPlaying == YES )
     {
-        [_songPlaybackController pauseSong];
-        [self pauseUpdating];
+        [self pauseSong];
     }
     else
     {
-        [_songPlaybackController playSong];
-        [self startUpdating];
+        [self continueSong];
     }
+}
+
+- (void)pauseSong
+{
+    [_songPlaybackController pauseSong];
+    [self pauseUpdating];
+}
+
+- (void)continueSong
+{     [_songPlaybackController playSong];
+    [self startUpdating];
+}
+
+- (void)recordMode
+{
+    [_songPlaybackController pauseSong];
+    [self pauseUpdating];
+    
+    self.view.hidden = YES;
 }
 
 #pragma mark - Touch handling
