@@ -55,6 +55,8 @@ static const char NoteNumberToNoteNameMap[12][3] =
 - (SongRecorder*)initWithTempo:(double)tempo;
 
 - (void)beginSong;
+- (void)pauseRecording;
+- (void)continueRecording;
 - (void)finishSong;
 - (void)advanceRecordingByTimeDelta:(double)delta;
 - (void)advanceRecordingToTime:(double)time;

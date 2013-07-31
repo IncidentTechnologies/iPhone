@@ -80,6 +80,16 @@
 	m_isRecording = YES;
 }
 
+- (void)pauseRecording
+{
+    m_isRecording = NO;
+}
+
+- (void)continueRecording
+{
+    m_isRecording = YES;
+}
+
 - (void)finishSong
 {
 	
@@ -173,6 +183,10 @@
 
 - (void)playString:(char)str andFret:(char)fret
 {
+    if ( m_isRecording == NO )
+    {
+        return;
+    }
 
 	char value[8];
     
