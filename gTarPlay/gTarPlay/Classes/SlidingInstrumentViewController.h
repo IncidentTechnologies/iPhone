@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "SlidingViewController.h"
-#import "InstrumentTableViewController.h"
+#import <gTarAppCore/InstrumentTableViewController.h>
 
 @interface SlidingInstrumentViewController : SlidingViewController <InstrumentSelectionDelegate>
 

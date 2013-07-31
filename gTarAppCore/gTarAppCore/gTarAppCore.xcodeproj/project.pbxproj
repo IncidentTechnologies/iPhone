@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D4C70D017A8B02D00DC7B4D /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */; };
 		EC24E010161BBBA800016B78 /* StoreController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC24E004161BBBA800016B78 /* StoreController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC24E011161BBBA900016B78 /* StoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC24E005161BBBA800016B78 /* StoreController.m */; };
 		EC24E012161BBBA900016B78 /* StoreSettingsController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC24E006161BBBA800016B78 /* StoreSettingsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -131,6 +133,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
+		9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
 		EC24E004161BBBA800016B78 /* StoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreController.h; sourceTree = "<group>"; };
 		EC24E005161BBBA800016B78 /* StoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreController.m; sourceTree = "<group>"; };
 		EC24E006161BBBA800016B78 /* StoreSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSettingsController.h; sourceTree = "<group>"; };
@@ -270,6 +274,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D4C70CC17A8AFBE00DC7B4D /* Instrument Selector */ = {
+			isa = PBXGroup;
+			children = (
+				9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */,
+				9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */,
+			);
+			name = "Instrument Selector";
+			sourceTree = "<group>";
+		};
 		EC24DFF8161BBB7B00016B78 /* StoreController */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +428,7 @@
 		EC5DA8A6161A5FCA0015832E /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
+				9D4C70CC17A8AFBE00DC7B4D /* Instrument Selector */,
 				EC5DA8AC161A5FFB0015832E /* ActivityView */,
 				EC5DA8AB161A5FF90015832E /* StarRatingView */,
 				EC5DA8A9161A5FE00015832E /* Rounded Rectangle */,
@@ -697,6 +711,7 @@
 				EC24E01A161BBBA900016B78 /* FeaturedSong.h in Headers */,
 				EC24E01F161BBC0C00016B78 /* SettingsController.h in Headers */,
 				EC5DA87D161A5F500015832E /* ContentController.h in Headers */,
+				9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */,
 				EC354E0516C9B084009D472A /* TelemetryEvents.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -809,6 +824,7 @@
 				EC24E019161BBBA900016B78 /* StoreGenreCollection.m in Sources */,
 				EC24E01B161BBBA900016B78 /* FeaturedSong.m in Sources */,
 				EC24E020161BBC0C00016B78 /* SettingsController.m in Sources */,
+				9D4C70D017A8B02D00DC7B4D /* InstrumentTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

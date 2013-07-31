@@ -419,8 +419,8 @@
 		9D054EEF174D425B00FA3239 /* Marimba 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054E9D174D425B00FA3239 /* Marimba 80.mp3 */; };
 		9D21E3D0173DBD2B00AD6C1F /* LightsGrid.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D21E3CF173DBD2B00AD6C1F /* LightsGrid.png */; };
 		9D21E3D1173DBD2B00AD6C1F /* LightsGrid.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D21E3CF173DBD2B00AD6C1F /* LightsGrid.png */; };
-		9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
-		9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */; };
+		9D4C70CA17A8AD9D00DC7B4D /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C70C917A8AD9D00DC7B4D /* PlayerViewController.m */; };
+		9D4C70CB17A8AD9D00DC7B4D /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C70C917A8AD9D00DC7B4D /* PlayerViewController.m */; };
 		9D64729E1741DEEE00C63B1B /* LightsArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D64729D1741DEEE00C63B1B /* LightsArrow.png */; };
 		9D64729F1741DEEE00C63B1B /* LightsArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D64729D1741DEEE00C63B1B /* LightsArrow.png */; };
 		9D6DA778172A276300EB96C7 /* LightsImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DA777172A276300EB96C7 /* LightsImage.png */; };
@@ -493,6 +493,12 @@
 		9DB5C51C1745C0C000EAF9A6 /* Color_alternating_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB5C51A1745C0C000EAF9A6 /* Color_alternating_Select.png */; };
 		9DCC3B6B1790D8B700DDD603 /* gTarIcon_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC3B6A1790D8B700DDD603 /* gTarIcon_57x57.png */; };
 		9DCC3B6F1790DACD00DDD603 /* gTarIcon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC3B6E1790DACD00DDD603 /* gTarIcon_114x114.png */; };
+		9DDB4E7817A2005400499808 /* PauseButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDB4E6E17A2005400499808 /* PauseButtonVideo.png */; };
+		9DDB4E7917A2005400499808 /* PauseButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDB4E6E17A2005400499808 /* PauseButtonVideo.png */; };
+		9DDB4E7A17A2005400499808 /* PreviewProgressBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDB4E6F17A2005400499808 /* PreviewProgressBar.png */; };
+		9DDB4E7B17A2005400499808 /* PreviewProgressBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDB4E6F17A2005400499808 /* PreviewProgressBar.png */; };
+		9DDB4E7D17A2009A00499808 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDB4E7C17A2009A00499808 /* PlayerViewController.xib */; };
+		9DDB4E7E17A2009A00499808 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDB4E7C17A2009A00499808 /* PlayerViewController.xib */; };
 		9DE5C64616F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
 		9DE5C64716F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */; };
 		9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */; };
@@ -1031,14 +1037,6 @@
 		EC4866631728B34C0066194D /* OrangeEffects.png in Resources */ = {isa = PBXBuildFile; fileRef = EC4866611728B34C0066194D /* OrangeEffects.png */; };
 		EC69BA1717137072004E982F /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1617137071004E982F /* InstrumentIcon.png */; };
 		EC69BA1817137072004E982F /* InstrumentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1617137071004E982F /* InstrumentIcon.png */; };
-		EC69BA1D17138B2C004E982F /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC69BA1C17138B2C004E982F /* PlayerViewController.m */; };
-		EC69BA1E17138B2C004E982F /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC69BA1C17138B2C004E982F /* PlayerViewController.m */; };
-		EC69BA2017138D68004E982F /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1F17138D68004E982F /* PlayerViewController.xib */; };
-		EC69BA2117138D68004E982F /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA1F17138D68004E982F /* PlayerViewController.xib */; };
-		EC69BA3F17160662004E982F /* PreviewProgressBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA3E17160662004E982F /* PreviewProgressBar.png */; };
-		EC69BA4017160662004E982F /* PreviewProgressBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA3E17160662004E982F /* PreviewProgressBar.png */; };
-		EC69BA4317162163004E982F /* PauseButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA4217162163004E982F /* PauseButtonVideo.png */; };
-		EC69BA4417162163004E982F /* PauseButtonVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC69BA4217162163004E982F /* PauseButtonVideo.png */; };
 		EC7CAE80174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE73174DA940004E26DE /* MPCJSONDataSerializer.m */; };
 		EC7CAE81174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE73174DA940004E26DE /* MPCJSONDataSerializer.m */; };
 		EC7CAE82174DA940004E26DE /* MPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE75174DA940004E26DE /* MPCJSONSerializer.m */; };
@@ -1940,8 +1938,6 @@
 		9D2A05A91534F6A500218ABB /* Acoustic Guitar 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 78.mp3"; path = "Acoustic Guitar/Acoustic Guitar 78.mp3"; sourceTree = "<group>"; };
 		9D2A05AA1534F6A500218ABB /* Acoustic Guitar 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 79.mp3"; path = "Acoustic Guitar/Acoustic Guitar 79.mp3"; sourceTree = "<group>"; };
 		9D2A05AB1534F6A500218ABB /* Acoustic Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 80.mp3"; path = "Acoustic Guitar/Acoustic Guitar 80.mp3"; sourceTree = "<group>"; };
-		9D2C8700170A63660049CD46 /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
-		9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
 		9D2DFF7B1564DD1B006B38C0 /* Square 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 40.mp3"; path = "Square/Square 40.mp3"; sourceTree = "<group>"; };
 		9D2DFF7C1564DD1B006B38C0 /* Square 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 41.mp3"; path = "Square/Square 41.mp3"; sourceTree = "<group>"; };
 		9D2DFF7D1564DD1B006B38C0 /* Square 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 42.mp3"; path = "Square/Square 42.mp3"; sourceTree = "<group>"; };
@@ -1983,6 +1979,8 @@
 		9D2DFFA11564DD1B006B38C0 /* Square 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 78.mp3"; path = "Square/Square 78.mp3"; sourceTree = "<group>"; };
 		9D2DFFA21564DD1B006B38C0 /* Square 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 79.mp3"; path = "Square/Square 79.mp3"; sourceTree = "<group>"; };
 		9D2DFFA31564DD1B006B38C0 /* Square 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Square 80.mp3"; path = "Square/Square 80.mp3"; sourceTree = "<group>"; };
+		9D4C70C817A8AD9D00DC7B4D /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
+		9D4C70C917A8AD9D00DC7B4D /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 		9D63D34D154F221100FABD5B /* Piano 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 40.mp3"; sourceTree = "<group>"; };
 		9D63D34E154F221100FABD5B /* Piano 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 41.mp3"; sourceTree = "<group>"; };
 		9D63D34F154F221100FABD5B /* Piano 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 42.mp3"; sourceTree = "<group>"; };
@@ -2220,6 +2218,9 @@
 		9DD91976149159DF00BE8751 /* EffectSelectOnButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectSelectOnButton.png; path = images/FreePlay/EffectSelectOnButton.png; sourceTree = "<group>"; };
 		9DD91978149159DF00BE8751 /* FreePlayBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FreePlayBG.png; path = images/FreePlay/FreePlayBG.png; sourceTree = "<group>"; };
 		9DD9197C149159DF00BE8751 /* WETDRY_Border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WETDRY_Border.png; path = images/FreePlay/WETDRY_Border.png; sourceTree = "<group>"; };
+		9DDB4E6E17A2005400499808 /* PauseButtonVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PauseButtonVideo.png; path = ../Resources/Images/General/Player/PauseButtonVideo.png; sourceTree = "<group>"; };
+		9DDB4E6F17A2005400499808 /* PreviewProgressBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviewProgressBar.png; path = ../Resources/Images/General/Player/PreviewProgressBar.png; sourceTree = "<group>"; };
+		9DDB4E7C17A2009A00499808 /* PlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		9DDE4649152A6285002CD6AA /* AllButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AllButton.png; path = images/FreePlay/AllButton.png; sourceTree = "<group>"; };
 		9DDE464A152A6285002CD6AA /* BlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueButton.png; path = images/FreePlay/BlueButton.png; sourceTree = "<group>"; };
 		9DDE464B152A6285002CD6AA /* ClearButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ClearButton.png; path = images/FreePlay/ClearButton.png; sourceTree = "<group>"; };
@@ -2387,11 +2388,6 @@
 		EC67780B136B7B08005FE8D9 /* string-light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string-light.png"; sourceTree = "<group>"; };
 		EC677875136B7ECD005FE8D9 /* string-light-vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string-light-vertical.png"; sourceTree = "<group>"; };
 		EC69BA1617137071004E982F /* InstrumentIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InstrumentIcon.png; path = Resources/Images/Play/InstrumentIcon.png; sourceTree = SOURCE_ROOT; };
-		EC69BA1B17138B2C004E982F /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
-		EC69BA1C17138B2C004E982F /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
-		EC69BA1F17138D68004E982F /* PlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
-		EC69BA3E17160662004E982F /* PreviewProgressBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviewProgressBar.png; path = Resources/Images/General/Player/PreviewProgressBar.png; sourceTree = SOURCE_ROOT; };
-		EC69BA4217162163004E982F /* PauseButtonVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PauseButtonVideo.png; path = Resources/Images/General/Player/PauseButtonVideo.png; sourceTree = SOURCE_ROOT; };
 		EC6BD1D713F070660068E25C /* SongDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongDisplayController.h; sourceTree = "<group>"; };
 		EC6BD1D813F070660068E25C /* SongDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDisplayController.m; sourceTree = "<group>"; };
 		EC6BD1DC13F073FD0068E25C /* SongES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongES1Renderer.h; sourceTree = "<group>"; };
@@ -3374,6 +3370,26 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		9DDB4E7017A2005400499808 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9DDB4E6E17A2005400499808 /* PauseButtonVideo.png */,
+				9DDB4E6F17A2005400499808 /* PreviewProgressBar.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		9DDB4E7117A2005400499808 /* PlayerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9D4C70C817A8AD9D00DC7B4D /* PlayerViewController.h */,
+				9D4C70C917A8AD9D00DC7B4D /* PlayerViewController.m */,
+				9DDB4E7C17A2009A00499808 /* PlayerViewController.xib */,
+				9DDB4E7017A2005400499808 /* Images */,
+			);
+			name = PlayerViewController;
+			sourceTree = "<group>";
+		};
 		9DE9FFBC155CD9C400F92DBE /* Droplet */ = {
 			isa = PBXGroup;
 			children = (
@@ -3472,8 +3488,8 @@
 		EC0BAD8116F1791300E567A6 /* UI Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				9DDB4E7117A2005400499808 /* PlayerViewController */,
 				EC341610173894D100501AF4 /* Categories */,
-				EC69BA1A17138620004E982F /* PlayerViewController */,
 				ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */,
 				EC0BAD9616F2771A00E567A6 /* CyclingTextField */,
 				EC0BAD9116F2458200E567A6 /* SelectorControl */,
@@ -3679,26 +3695,6 @@
 			);
 			name = "OpenGL Textures";
 			path = ..;
-			sourceTree = "<group>";
-		};
-		EC69BA1A17138620004E982F /* PlayerViewController */ = {
-			isa = PBXGroup;
-			children = (
-				EC69BA4117160668004E982F /* Images */,
-				EC69BA1B17138B2C004E982F /* PlayerViewController.h */,
-				EC69BA1C17138B2C004E982F /* PlayerViewController.m */,
-				EC69BA1F17138D68004E982F /* PlayerViewController.xib */,
-			);
-			name = PlayerViewController;
-			sourceTree = "<group>";
-		};
-		EC69BA4117160668004E982F /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				EC69BA4217162163004E982F /* PauseButtonVideo.png */,
-				EC69BA3E17160662004E982F /* PreviewProgressBar.png */,
-			);
-			name = Images;
 			sourceTree = "<group>";
 		};
 		EC7CAE6F174DA940004E26DE /* Mixpanel */ = {
@@ -3936,8 +3932,6 @@
 				9DA3138E1704FA3000CFF104 /* FPMenuViewController.h */,
 				9DA3138F1704FA3000CFF104 /* FPMenuViewController.m */,
 				9DA313901704FA3000CFF104 /* FPMenuViewController.xib */,
-				9D2C8700170A63660049CD46 /* InstrumentTableViewController.h */,
-				9D2C8701170A63660049CD46 /* InstrumentTableViewController.m */,
 				9DE6B3491713A69B0083B980 /* EffectsTableViewController.h */,
 				9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */,
 			);
@@ -4608,9 +4602,6 @@
 				ECCC039E170F862C0021DB00 /* EndCap.png in Resources */,
 				ECCC03A1170FBA140021DB00 /* InvisibleTrack.png in Resources */,
 				EC69BA1717137072004E982F /* InstrumentIcon.png in Resources */,
-				EC69BA2017138D68004E982F /* PlayerViewController.xib in Resources */,
-				EC69BA3F17160662004E982F /* PreviewProgressBar.png in Resources */,
-				EC69BA4317162163004E982F /* PauseButtonVideo.png in Resources */,
 				9DEB90501714D66100A7C0CF /* EffectsOffButton.png in Resources */,
 				9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 				ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */,
@@ -4892,6 +4883,9 @@
 				9D054EEE174D425B00FA3239 /* Marimba 80.mp3 in Resources */,
 				9DCC3B6B1790D8B700DDD603 /* gTarIcon_57x57.png in Resources */,
 				9DCC3B6F1790DACD00DDD603 /* gTarIcon_114x114.png in Resources */,
+				9DDB4E7817A2005400499808 /* PauseButtonVideo.png in Resources */,
+				9DDB4E7A17A2005400499808 /* PreviewProgressBar.png in Resources */,
+				9DDB4E7D17A2009A00499808 /* PlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5370,9 +5364,6 @@
 				ECCC039F170F862C0021DB00 /* EndCap.png in Resources */,
 				ECCC03A2170FBA140021DB00 /* InvisibleTrack.png in Resources */,
 				EC69BA1817137072004E982F /* InstrumentIcon.png in Resources */,
-				EC69BA2117138D68004E982F /* PlayerViewController.xib in Resources */,
-				EC69BA4017160662004E982F /* PreviewProgressBar.png in Resources */,
-				EC69BA4417162163004E982F /* PauseButtonVideo.png in Resources */,
 				9DEB90511714D66100A7C0CF /* EffectsOffButton.png in Resources */,
 				9DEB90581714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 				ECE832001717653E006E2391 /* UserCommentCell.xib in Resources */,
@@ -5652,6 +5643,9 @@
 				9D054EEB174D425B00FA3239 /* Marimba 78.mp3 in Resources */,
 				9D054EED174D425B00FA3239 /* Marimba 79.mp3 in Resources */,
 				9D054EEF174D425B00FA3239 /* Marimba 80.mp3 in Resources */,
+				9DDB4E7917A2005400499808 /* PauseButtonVideo.png in Resources */,
+				9DDB4E7B17A2005400499808 /* PreviewProgressBar.png in Resources */,
+				9DDB4E7E17A2009A00499808 /* PlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5704,9 +5698,7 @@
 				ECCC0312170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0314170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0316170A2B900021DB00 /* TextModel.m in Sources */,
-				9D2C8703170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
 				ECCC0359170CBA570021DB00 /* VolumeViewController.m in Sources */,
-				EC69BA1D17138B2C004E982F /* PlayerViewController.m in Sources */,
 				9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 				ECE831FB171764C0006E2391 /* UserCommentCell.m in Sources */,
 				ECE8323C1718EA34006E2391 /* SocialViewController.m in Sources */,
@@ -5727,6 +5719,7 @@
 				EC7CAE88174DA940004E26DE /* ODIN.m in Sources */,
 				EC7CAE8A174DA940004E26DE /* Mixpanel.m in Sources */,
 				ECEB331C175D6E28009913F4 /* PaginatedPullToUpdateTableView.m in Sources */,
+				9D4C70CA17A8AD9D00DC7B4D /* PlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5776,9 +5769,7 @@
 				ECCC0313170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0315170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0317170A2B900021DB00 /* TextModel.m in Sources */,
-				9D2C8704170A63660049CD46 /* InstrumentTableViewController.m in Sources */,
 				ECCC035A170CBA570021DB00 /* VolumeViewController.m in Sources */,
-				EC69BA1E17138B2C004E982F /* PlayerViewController.m in Sources */,
 				9DE6B34C1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 				ECE831FC171764C0006E2391 /* UserCommentCell.m in Sources */,
 				ECE8323D1718EA34006E2391 /* SocialViewController.m in Sources */,
@@ -5799,6 +5790,7 @@
 				EC7CAE89174DA940004E26DE /* ODIN.m in Sources */,
 				EC7CAE8B174DA940004E26DE /* Mixpanel.m in Sources */,
 				ECEB331D175D6E28009913F4 /* PaginatedPullToUpdateTableView.m in Sources */,
+				9D4C70CB17A8AD9D00DC7B4D /* PlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 #import <gTarAppCore/UserSongSession.h>
 #import <gTarAppCore/NSSong.h>
 #import <gTarAppCore/NSSongCreator.h>
+#import <gTarAppCore/InstrumentTableViewController.h>
 
 @interface ViewController ()
 {
@@ -39,6 +40,7 @@
     float _srTimeInterval;
     
     PlayerViewController* _playBackVC;
+    InstrumentTableViewController* _instrumentsVC;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
@@ -56,18 +58,24 @@
 {
     [super viewDidLoad];
     
-    _songTableVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SongViewControlerID"];
-    _songTableVC.delegate = self;
-    _currentMainVC = _songTableVC;
-    [_mainContentView addSubview:_currentMainVC.view];
-    
     _audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     [_audioController startAUGraph];
+    
+    _songTableVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SongViewControlerID"];
+    _songTableVC.delegate = self;
     
     _playBackVC = [[PlayerViewController alloc] initWithAudioController:_audioController];
     _playBackVC.view.frame = _playBackView.frame;
     [_playBackVC recordMode];
     [_playBackView addSubview:_playBackVC.view];
+    
+    // Set up initial main content VC to be songTableVC
+    [self addChildViewController:_songTableVC];
+    [_mainContentView addSubview:_songTableVC.view];
+    [_songTableVC didMoveToParentViewController:self];
+    _currentMainVC = _songTableVC;
+    
+    _instrumentsVC = [[InstrumentTableViewController alloc] initWithAudioController:_audioController];
     
     _gtarController = [[GtarController alloc] init];
     // By default it just outputs 'LevelError'
@@ -79,6 +87,24 @@
     _timeCounterInterval = 0.2;
     
     //_songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songPlayBackEnded:) name:@"SongPlayBackEnded" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioEngineStopped:) name:@"AudioEngineStopped" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SongPlayBackEnded" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioEngineStopped" object:nil];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    _instrumentsVC.tableView.frame = self.mainContentView.bounds;
 }
 
 - (void)didReceiveMemoryWarning
@@ -307,6 +333,16 @@
     
 }
 
+- (IBAction)displaySongList:(id)sender
+{
+    [self switchMainContentControllerToVC:_songTableVC];
+}
+
+- (IBAction)displayInstrumentList:(id)sender
+{
+    [self switchMainContentControllerToVC:_instrumentsVC];
+}
+
 #pragma mark SongTableVCDelegate
 
 - (void)selectedSong:(UserSongSession*)songSession
@@ -328,6 +364,7 @@
 
 - (void)playSong:(UserSongSession*)songSession
 {
+    _playPauseButton.selected = YES;
     [_playBackVC setUserSongSession:songSession];
     [_playBackVC startSong];
 }
@@ -371,11 +408,6 @@
 
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
-    // Currently after playing back a song the audioController AUGraph is stopped, so the
-    // audioController is stopped and there is no audio. For now just make a call to start the graph
-    // on every noteOn, this is cheap as nothing happens if it's already started.
-    // TODO: fix the having to call startAUGraph on every note problem.
-    [_audioController startAUGraph];
     [_audioController PluckString:pluck.position.string - 1 atFret:pluck.position.fret];
     [_songRecorder playString:pluck.position.string andFret:pluck.position.fret];
     
@@ -395,6 +427,43 @@
 - (void)gtarDisconnected
 {
     
+}
+
+- (void) songPlayBackEnded:(NSNotification *) notification
+{
+    _playPauseButton.selected = NO;
+    //[_playBackVC pauseSong];
+}
+
+- (void) audioEngineStopped:(NSNotification *) notification
+{
+    [_audioController startAUGraph];
+}
+
+#pragma mark helpers
+
+-(void) switchMainContentControllerToVC:(UIViewController *)newVC
+{
+    if (_currentMainVC ==  newVC)
+    {
+        // already on this view, do nothing
+        return;
+    }
+    
+    UIViewController *oldVC = _currentMainVC;
+    
+    [oldVC willMoveToParentViewController:nil];
+    
+    [self addChildViewController:newVC];
+    
+    [self transitionFromViewController:oldVC  toViewController:newVC duration:0.25
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:nil
+                            completion:^(BOOL finished) {
+                                [oldVC removeFromParentViewController];
+                                [newVC didMoveToParentViewController:self];
+                                _currentMainVC = newVC;
+                            }];
 }
 
 @end

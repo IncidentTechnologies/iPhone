@@ -70,8 +70,18 @@
     tapGestureRecognizer.delegate = self;
     [self.tableView addGestureRecognizer:tapGestureRecognizer];
     
+    if ([_songList count] > 0)
+    {
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [_songTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+        UserSongSession* song = [_songList objectAtIndex:0];
+        [_delegate selectedSong:song];
+    }
+    
+    self.tableView.showsVerticalScrollIndicator = NO;
+    
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -81,10 +91,13 @@
 {
     [super viewWillAppear:animated];
     
+    // Default to select first item in list
     if ([_songList count] > 0)
     {
         NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [_songTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+        //[_songTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+        //UserSongSession* song = [_songList objectAtIndex:0];
+        //[_delegate selectedSong:song];
     }
 }
 

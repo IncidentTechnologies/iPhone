@@ -31,6 +31,7 @@
     BOOL _init;
     
     BOOL _isScrolling;
+    BOOL _shouldPlayAfterScroll;
 }
 
 @property (assign, nonatomic) IBOutlet UILabel *songTimeLabel;
@@ -69,7 +70,7 @@
     [super viewDidLoad];
     
     UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
-    tapGestureRecognizer.cancelsTouchesInView = NO;
+    //tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
 	
     //[_songTitle addShadowWithRadius:2.0 andOpacity:0.7];
@@ -234,6 +235,7 @@
         songTime = _userSongSession.m_length;
         
         [_playButton setSelected:NO];
+        _shouldPlayAfterScroll = NO;
         [self pauseUpdating];
     }
 
@@ -277,6 +279,7 @@
     {
         if ( _init == YES )
         {
+            _shouldPlayAfterScroll = YES;
             [_playButton setSelected:YES];
             
             [self pauseUpdating];
@@ -300,13 +303,25 @@
 
 - (void)pauseSong
 {
+    _shouldPlayAfterScroll = NO;
     [_songPlaybackController pauseSong];
     [self pauseUpdating];
 }
 
 - (void)continueSong
-{     [_songPlaybackController playSong];
-    [self startUpdating];
+{
+    _shouldPlayAfterScroll = YES;
+    if ([_songPlaybackController percentageComplete] >= 1.0)
+    {
+        // Finished playing song already, restart it
+        [self startSong];
+    }
+    else
+    {
+        
+        [_songPlaybackController playSong];
+        [self startUpdating];
+    }
 }
 
 - (void)recordMode
@@ -344,11 +359,41 @@
     // If a touchMove/scroll just happened don't handle the tap.
     // This works based on the behavior that gesturRecognizer handler
     // gets called before UITouch handlers.
-    if (!_isScrolling)
+    /*if (!_isScrolling)
     {
         [self playPauseSong];
     }
+     */
+    
 }
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // Do nothing, just here to intercept touches so
+    // they are not passed to parent view.
+    
+    if ( _init == NO )
+    {
+        return;
+    }
+    
+    UITouch *touch = [[touches allObjects] objectAtIndex:0];
+    CGPoint currentPoint = [touch locationInView:self.view];
+    
+    if ( CGRectContainsPoint( _touchSurfaceView.frame, currentPoint) == YES )
+    {
+        // Don't call [self pauseSong] here, don't want to change _shouldPlayAfterScroll state
+        [_songPlaybackController pauseSong];
+        [self pauseUpdating];
+        [self updateProgressFromTouch:currentPoint];
+        if (_shouldPlayAfterScroll)
+        {
+            [self continueSong];
+        }
+    }
+}
+
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -369,6 +414,7 @@
     if ( CGRectContainsPoint( _touchSurfaceView.frame, currentPoint) == YES )
     {
         _isScrolling = YES;
+        // Don't call pauseSong here, don't want to change _shouldPlayAfterScroll state
         [_songPlaybackController pauseSong];
         [self pauseUpdating];
         
@@ -382,9 +428,11 @@
     {
         _isScrolling = NO;
         // uncomment to continue playback after scroll ends
-        //[self playPauseSong];
+        if (_shouldPlayAfterScroll)
+        {
+            [self continueSong];
+        }
     }
-    
     
     // If the play button is still selected, we should keep playing
     if ( _playButton.isSelected == YES )

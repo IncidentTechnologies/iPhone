@@ -8,7 +8,7 @@
 
 #import "InstrumentsAndEffectsViewController.h"
 
-#import "InstrumentTableViewController.h"
+#import <gTarAppCore/InstrumentTableViewController.h>
 #import <AudioController/AudioController.h>
 #import <AudioController/Effect.h>
 
@@ -57,7 +57,7 @@
     self.jamPad.m_delegate = self;
     [self setupJamPadWithEffectAtIndex:0];
     
-    // Set up initial content VC to be instruments & effects.
+    // Set up initial content VC to be instrumentsVC
     [self addChildViewController:self.instrumentTableVC];
     self.instrumentTableVC.tableView.frame = self.contentTable.bounds;
     [self.contentTable addSubview:self.instrumentTableVC.view];

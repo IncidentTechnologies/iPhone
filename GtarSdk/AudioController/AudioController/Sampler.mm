@@ -573,6 +573,11 @@
 
 - (float) getNextSample
 {
+    if (m_pendingLoad)
+    {
+        return 0;
+    }
+    
     float retSample = 0.0;
     for (int string = 0; string < 6; string++)
     {

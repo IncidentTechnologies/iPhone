@@ -307,6 +307,9 @@
     
     m_audioTrailOffTimer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(audioTrailOffEvent) userInfo:nil repeats:NO];
     
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"SongPlayBackEnded"
+     object:self userInfo:nil];
 }
 
 #pragma mark - Misc
@@ -355,6 +358,11 @@
         return false;
     }
     
+}
+
+- (double)percentageComplete
+{
+    return m_songModel.m_percentageComplete;
 }
 
 @end

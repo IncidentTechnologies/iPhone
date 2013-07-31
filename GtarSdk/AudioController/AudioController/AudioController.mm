@@ -167,7 +167,7 @@ class Compressor;
         
         if (SamplerSource == m_audioSource)
         {
-            m_sampler = [[Sampler alloc] initWithSampleRate:g_GraphSampleRate AndSamplePack:instrument];
+            m_sampler = [[[Sampler alloc] initWithSampleRate:g_GraphSampleRate AndSamplePack:instrument] retain];
         }
         
         m_volumeGain = 1.0;
@@ -1016,6 +1016,10 @@ static OSStatus renderInput(void *inRefCon, AudioUnitRenderActionFlags *ioAction
         AUGraphStop(augraph);
         AUGraphIsRunning(augraph, &fRunning);
     }
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"AudioEngineStopped"
+     object:self userInfo:nil];
 	
 	return;
 }

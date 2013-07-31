@@ -59,5 +59,6 @@
 
 - (void)seekToLocation:(double)percentComplete;
 - (BOOL)isPlaying;
+- (double)percentageComplete;
 
 @end
