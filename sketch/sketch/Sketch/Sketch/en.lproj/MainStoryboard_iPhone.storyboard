@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kvm-3G-XjU">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
+        <!--Sign In View Controller-->
+        <scene sceneID="WEt-Bn-g5d">
+            <objects>
+                <viewController storyboardIdentifier="SignInViewControllerID" id="BLw-gl-myJ" customClass="SignInViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="BRc-0h-nIb"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qQe-V0-eYj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-200" y="164"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainScreenViewControllerID" id="2" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -191,6 +206,7 @@
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" id="nOK-aw-vQ0"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -206,6 +222,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="619" y="146"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="DM8-F1-Yjj">
+            <objects>
+                <viewController id="KNJ-0V-U46" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7TA-eW-6yh">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="224"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4vf-xg-SH9">
+                                <color key="backgroundColor" red="0.10090725250670529" green="1" blue="0.68943000560381895" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7so-7X-gFO">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="314" id="J2R-c8-7gQ"/>
+                                </constraints>
+                            </slider>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mtn-lc-NKb"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="4vf-xg-SH9" secondAttribute="bottom" constant="154" id="951-zK-TBE"/>
+                            <constraint firstItem="4vf-xg-SH9" firstAttribute="leading" secondItem="7so-7X-gFO" secondAttribute="leading" type="default" id="Qk5-xV-eOb"/>
+                            <constraint firstItem="4vf-xg-SH9" firstAttribute="centerX" secondItem="7TA-eW-6yh" secondAttribute="centerX" type="default" id="R7S-4w-rXI"/>
+                            <constraint firstAttribute="bottom" secondItem="mtn-lc-NKb" secondAttribute="bottom" constant="37" id="S9w-Hz-PRa"/>
+                            <constraint firstItem="4vf-xg-SH9" firstAttribute="trailing" secondItem="7so-7X-gFO" secondAttribute="trailing" type="default" id="XdS-3r-OsR"/>
+                            <constraint firstItem="7so-7X-gFO" firstAttribute="top" secondItem="7TA-eW-6yh" secondAttribute="top" constant="85" id="YhL-io-3vv"/>
+                            <constraint firstItem="mtn-lc-NKb" firstAttribute="centerX" secondItem="7so-7X-gFO" secondAttribute="centerX" type="default" id="jbQ-zH-fbC"/>
+                            <constraint firstItem="4vf-xg-SH9" firstAttribute="top" secondItem="7TA-eW-6yh" secondAttribute="top" constant="40" id="v4p-nt-auh"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IWg-rd-Fcs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="706" y="582"/>
         </scene>
         <!--Song Table View Controller-->
         <scene sceneID="iVN-j3-37B">
@@ -308,7 +366,27 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UmL-ul-SIX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="705" y="145"/>
+            <point key="canvasLocation" x="1231" y="145"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HVm-9z-GRO">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="kvm-3G-XjU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZKG-Ir-5QC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BLw-gl-myJ" kind="relationship" relationship="rootViewController" id="xFl-xg-OH3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AwD-ZX-ENq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-726" y="164"/>
         </scene>
     </scenes>
     <resources>
@@ -321,29 +399,6 @@
         <image name="Stop_Icon.png" width="56" height="56"/>
         <image name="Volume_Icon.png" width="57" height="49"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SongTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SongTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="songTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SongViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SongViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="songDate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="songLength" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="songTitle" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -8,10 +8,13 @@
 
 #import "AppDelegate.h"
 
+#import "IQKeyBoardManager.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [IQKeyBoardManager installKeyboardManager];
     // Override point for customization after application launch.
     return YES;
 }

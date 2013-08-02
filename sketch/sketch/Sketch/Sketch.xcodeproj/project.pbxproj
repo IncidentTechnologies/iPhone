@@ -689,6 +689,10 @@
 		9D846E9A179DB51300A28FF6 /* SongViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D846E99179DB51200A28FF6 /* SongViewCell.m */; };
 		9D846E9D179E21F500A28FF6 /* SongTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D846E9C179E21F400A28FF6 /* SongTableViewController.m */; };
 		9D846E9F17A10D2900A28FF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D846E9E17A10D2900A28FF6 /* QuartzCore.framework */; };
+		9D8B401717A9AD0B009D3FB4 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B401617A9AD0B009D3FB4 /* SignInViewController.m */; };
+		9D8B401917A9D2FC009D3FB4 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B401817A9D2FC009D3FB4 /* SignInViewController.xib */; };
+		9D8B405917AAD294009D3FB4 /* IQKeyBoardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B405617AAD294009D3FB4 /* IQKeyBoardManager.m */; };
+		9D8B405A17AAD294009D3FB4 /* IQSegmentedNextPrevious.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B405817AAD294009D3FB4 /* IQSegmentedNextPrevious.m */; };
 		9D8E3D391778F5DD0052AE20 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D8E3D381778F5DD0052AE20 /* instruments.plist */; };
 		9D8E3D3B1778FB050052AE20 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */; };
 		9D8E3D3D1778FB130052AE20 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */; };
@@ -1396,6 +1400,13 @@
 		9D846E9B179E21F400A28FF6 /* SongTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTableViewController.h; sourceTree = "<group>"; };
 		9D846E9C179E21F400A28FF6 /* SongTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTableViewController.m; sourceTree = "<group>"; };
 		9D846E9E17A10D2900A28FF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9D8B401517A9AD0B009D3FB4 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		9D8B401617A9AD0B009D3FB4 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		9D8B401817A9D2FC009D3FB4 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
+		9D8B405517AAD294009D3FB4 /* IQKeyBoardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQKeyBoardManager.h; sourceTree = "<group>"; };
+		9D8B405617AAD294009D3FB4 /* IQKeyBoardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyBoardManager.m; sourceTree = "<group>"; };
+		9D8B405717AAD294009D3FB4 /* IQSegmentedNextPrevious.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQSegmentedNextPrevious.h; sourceTree = "<group>"; };
+		9D8B405817AAD294009D3FB4 /* IQSegmentedNextPrevious.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQSegmentedNextPrevious.m; sourceTree = "<group>"; };
 		9D8E3D381778F5DD0052AE20 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
 		9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
@@ -1471,6 +1482,10 @@
 		9D42D80217613B8700614738 /* Sketch */ = {
 			isa = PBXGroup;
 			children = (
+				9D8B405517AAD294009D3FB4 /* IQKeyBoardManager.h */,
+				9D8B405617AAD294009D3FB4 /* IQKeyBoardManager.m */,
+				9D8B405717AAD294009D3FB4 /* IQSegmentedNextPrevious.h */,
+				9D8B405817AAD294009D3FB4 /* IQSegmentedNextPrevious.m */,
 				9D42D80B17613B8700614738 /* AppDelegate.h */,
 				9D42D80C17613B8700614738 /* AppDelegate.m */,
 				9D42D81417613B8700614738 /* MainStoryboard_iPhone.storyboard */,
@@ -1484,6 +1499,9 @@
 				9D68DDE917A2FD0B000B2056 /* PlayerViewController.h */,
 				9D68DDEA17A2FD0B000B2056 /* PlayerViewController.m */,
 				9D68DDEB17A2FD0B000B2056 /* PlayerViewController.xib */,
+				9D8B401517A9AD0B009D3FB4 /* SignInViewController.h */,
+				9D8B401617A9AD0B009D3FB4 /* SignInViewController.m */,
+				9D8B401817A9D2FC009D3FB4 /* SignInViewController.xib */,
 				9D42D80317613B8700614738 /* Supporting Files */,
 			);
 			path = Sketch;
@@ -3073,6 +3091,7 @@
 				9D4C75EF17A8C3D200DC7B4D /* Warm Analogue 78.mp3 in Resources */,
 				9D4C75F017A8C3D200DC7B4D /* Warm Analogue 79.mp3 in Resources */,
 				9D4C75F117A8C3D200DC7B4D /* Warm Analogue 80.mp3 in Resources */,
+				9D8B401917A9D2FC009D3FB4 /* SignInViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3113,6 +3132,9 @@
 				9D846E9A179DB51300A28FF6 /* SongViewCell.m in Sources */,
 				9D846E9D179E21F500A28FF6 /* SongTableViewController.m in Sources */,
 				9D68DDEC17A2FD0B000B2056 /* PlayerViewController.m in Sources */,
+				9D8B401717A9AD0B009D3FB4 /* SignInViewController.m in Sources */,
+				9D8B405917AAD294009D3FB4 /* IQKeyBoardManager.m in Sources */,
+				9D8B405A17AAD294009D3FB4 /* IQSegmentedNextPrevious.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 #import <GtarController/GtarController.h>
 
 #import "gTarNavigationController.h"
-#import "FBConnect.h"
+#import <gTarAppCore/FBConnect.h>
 
 @class gTarPlayApplication;
 

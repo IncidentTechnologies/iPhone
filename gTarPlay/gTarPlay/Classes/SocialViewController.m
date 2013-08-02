@@ -9,7 +9,7 @@
 #import "SocialViewController.h"
 
 #import "SelectorControl.h"
-#import "Facebook.h"
+#import <gTarAppCore/Facebook.h>
 #import "SocialSongCell.h"
 #import "SocialUserCell.h"
 #import "SessionModalViewController.h"
