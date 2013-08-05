@@ -43,6 +43,7 @@
 @property (nonatomic, readonly) NSString * m_loggedInFacebookToken;
 
 - (id)initWithCloudController:(CloudController*)cloudController;
++ (UserController *)sharedSingleton;
 
 - (void)clearCache;
 - (void)loadCache;

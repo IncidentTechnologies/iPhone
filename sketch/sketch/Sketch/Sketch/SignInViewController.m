@@ -19,7 +19,7 @@
 #define SIGNUP_PASSWORD_INVALID_LENGTH @"Password must be at least 8 letters"
 #define SIGNUP_EMAIL_INVALID @"Invalid Email"
 #define FACEBOOK_INVALID @"Facebook failed to login"
-#define FACEBOOK_CLIENT_ID @"285410511522607"
+#define FACEBOOK_CLIENT_ID @"461827050581550"
 #define FACEBOOK_PERMISSIONS [NSArray arrayWithObjects:@"email", nil]
 
 @interface SignInViewController ()
@@ -42,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *signUpUsername;
 @property (weak, nonatomic) IBOutlet UITextField *signUpPassword;
 @property (weak, nonatomic) IBOutlet UITextField *signUpEmail;
+@property (weak, nonatomic) IBOutlet UIButton *createAccountButton;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
@@ -61,13 +62,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Init the cloud controller
-    //        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
-    //        g_cloudController = [[CloudController alloc] initWithServer:@"http://50.18.250.24/m1"];
-    _cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.5"];
     
-    _userController = [[UserController alloc] initWithCloudController:_cloudController];
-    
+    _userController = [UserController sharedSingleton];
+                       
     _facebookController = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
     
     // See if there are any cached credentials
@@ -78,8 +75,26 @@
         _facebookController.expirationDate = [settings objectForKey:@"FBExpirationDateKey"];
     }
     
-    _notificationView.hidden = YES;
+    [_createAccountButton setTitle:@"Already have an account?" forState:UIControlStateNormal];
+    [_createAccountButton setTitle:@"Create an account" forState:UIControlStateSelected];
+    _signUpView.hidden = YES;
+    [self hideNotification];
     _spinner.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{    
+    if ( _cloudController.m_loggedIn == NO &&
+        (_userController.m_loggedInFacebookToken != nil ||
+         _userController.m_loggedInUsername != nil) )
+    {
+        // If we are not logged in, but we have cached creds, login.
+        [_userController requestLoginUserCachedCallbackObj:self andCallbackSel:@selector(signinCallback:)];
+        
+        // Assume for now that we are actually logged in for now. The callback can revert this if needed
+        [self displayMainView];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -253,6 +268,23 @@
     }
 }
 
+
+- (IBAction)toggleSignUpView:(UIButton*)button
+{
+    button.selected = !button.selected;
+    if (button.selected)
+    {
+        _signUpView.hidden = NO;
+        _signInView.hidden = YES;
+    }
+    else
+    {
+        _signUpView.hidden = YES;
+        _signInView.hidden = NO;
+    }
+    
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -350,7 +382,7 @@
     }
     else
     {
-        _notificationView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+        _notificationView.backgroundColor = [UIColor colorWithRed:50.0/256.0 green:59.0/256.0 blue:66.0/256.0 alpha:1.0];
     }
 }
 
@@ -358,7 +390,7 @@
 {
     [_notificationLabel.superview setHidden:YES];
     
-    _notificationView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+    _notificationView.backgroundColor = [UIColor colorWithRed:50.0/256.0 green:59.0/256.0 blue:66.0/256.0 alpha:1.0];
 }
 
 - (void)displayMainView

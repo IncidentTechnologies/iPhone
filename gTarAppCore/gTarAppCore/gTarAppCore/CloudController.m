@@ -142,6 +142,26 @@
     
 }
 
++ (CloudController *)sharedSingleton
+{
+    static CloudController *sharedSingleton;
+    
+    @synchronized(self)
+    {
+        if (!sharedSingleton)
+        {
+            // Production server
+            NSString* server = @"http://184.169.154.56/v1.5";
+            // Debug server
+            //NSString* server = @"http://50.18.250.24/m1";
+            
+            sharedSingleton = [[CloudController alloc] initWithServer:server];
+        }
+        
+        return sharedSingleton;
+    }
+}
+
 - (void)dealloc
 {
     

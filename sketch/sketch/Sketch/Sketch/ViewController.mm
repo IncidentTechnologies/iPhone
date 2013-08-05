@@ -7,15 +7,17 @@
 //
 
 #import "ViewController.h"
-#import "SongViewCell.h"
+#import "MenuViewController.h"
+#import "AudioViewController.h"
 #import "PlayerViewController.h"
+#import <gTarAppCore/InstrumentTableViewController.h>
 
 #import <AudioController/AudioController.h>
 #import <gTarAppCore/SongRecorder.h>
 #import <gTarAppCore/UserSongSession.h>
 #import <gTarAppCore/NSSong.h>
 #import <gTarAppCore/NSSongCreator.h>
-#import <gTarAppCore/InstrumentTableViewController.h>
+
 
 @interface ViewController ()
 {
@@ -39,8 +41,11 @@
     NSTimer* _srTimer;
     float _srTimeInterval;
     
-    PlayerViewController* _playBackVC;
+    
+    MenuViewController* _menuVC;
     InstrumentTableViewController* _instrumentsVC;
+    AudioViewController* _audioVC;
+    PlayerViewController* _playBackVC;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
@@ -63,6 +68,11 @@
     
     _songTableVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SongViewControlerID"];
     _songTableVC.delegate = self;
+    
+    _menuVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewControllerID"];
+    
+    _audioVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AudioViewControllerID"];
+    _audioVC.audioController = _audioController;
     
     _playBackVC = [[PlayerViewController alloc] initWithAudioController:_audioController];
     _playBackVC.view.frame = _playBackView.frame;
@@ -104,7 +114,9 @@
 
 - (void)viewDidLayoutSubviews
 {
-    _instrumentsVC.tableView.frame = self.mainContentView.bounds;
+    _instrumentsVC.tableView.frame = _mainContentView.bounds;
+    _audioVC.view.frame = _mainContentView.bounds;
+    _menuVC.view.frame = _mainContentView.bounds;
 }
 
 - (void)didReceiveMemoryWarning
@@ -341,6 +353,17 @@
 - (IBAction)displayInstrumentList:(id)sender
 {
     [self switchMainContentControllerToVC:_instrumentsVC];
+}
+
+- (IBAction)displayMenuView:(id)sender
+{
+    [self switchMainContentControllerToVC:_menuVC];
+}
+
+
+- (IBAction)displayAudioView:(id)sender
+{
+     [self switchMainContentControllerToVC:_audioVC];
 }
 
 #pragma mark SongTableVCDelegate

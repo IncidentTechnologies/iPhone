@@ -43,6 +43,7 @@
 @property (nonatomic, readonly) NSString * m_facebookAccessToken;
 
 - (id)initWithServer:(NSString*)serverName;
++ (CloudController*)sharedSingleton;
 
 // Misc
 

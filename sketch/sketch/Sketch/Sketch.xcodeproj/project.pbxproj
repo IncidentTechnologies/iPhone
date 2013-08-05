@@ -682,7 +682,6 @@
 		9D846E8D179775C500A28FF6 /* Stop_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E82179775C500A28FF6 /* Stop_Icon.png */; };
 		9D846E8E179775C500A28FF6 /* Rec_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E83179775C500A28FF6 /* Rec_Icon.png */; };
 		9D846E8F179775C500A28FF6 /* Volume_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E84179775C500A28FF6 /* Volume_Icon.png */; };
-		9D846E90179775C500A28FF6 /* Volume_Knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E85179775C500A28FF6 /* Volume_Knob.png */; };
 		9D846E91179775C500A28FF6 /* Volume_Minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E86179775C500A28FF6 /* Volume_Minus.png */; };
 		9D846E92179775C500A28FF6 /* Volume_Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E87179775C500A28FF6 /* Volume_Plus.png */; };
 		9D846E93179775C500A28FF6 /* Volume_Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D846E88179775C500A28FF6 /* Volume_Slider.png */; };
@@ -693,6 +692,16 @@
 		9D8B401917A9D2FC009D3FB4 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B401817A9D2FC009D3FB4 /* SignInViewController.xib */; };
 		9D8B405917AAD294009D3FB4 /* IQKeyBoardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B405617AAD294009D3FB4 /* IQKeyBoardManager.m */; };
 		9D8B405A17AAD294009D3FB4 /* IQSegmentedNextPrevious.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B405817AAD294009D3FB4 /* IQSegmentedNextPrevious.m */; };
+		9D8B405D17AC3391009D3FB4 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B405C17AC3391009D3FB4 /* AudioViewController.m */; };
+		9D8B405F17AC688B009D3FB4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8B405E17AC688B009D3FB4 /* MediaPlayer.framework */; };
+		9D8B406217AC6A63009D3FB4 /* Switch_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B406017AC6A63009D3FB4 /* Switch_Left.png */; };
+		9D8B406317AC6A63009D3FB4 /* Switch_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B406117AC6A63009D3FB4 /* Switch_Right.png */; };
+		9D8B407317AC91DF009D3FB4 /* InvisibleTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B407217AC91DF009D3FB4 /* InvisibleTrack.png */; };
+		9D8B407617ADD29D009D3FB4 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B407517ADD29D009D3FB4 /* MenuViewController.m */; };
+		9D8B407817AF8683009D3FB4 /* FaceBookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B407717AF8683009D3FB4 /* FaceBookButton.png */; };
+		9D8B407A17B025E2009D3FB4 /* MenuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B407917B025E2009D3FB4 /* MenuIcon.png */; };
+		9D8B407C17B03704009D3FB4 /* VolumeKnob.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B407B17B03704009D3FB4 /* VolumeKnob.png */; };
+		9D8B407E17B03760009D3FB4 /* SliderEndCap.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8B407D17B03760009D3FB4 /* SliderEndCap.png */; };
 		9D8E3D391778F5DD0052AE20 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D8E3D381778F5DD0052AE20 /* instruments.plist */; };
 		9D8E3D3B1778FB050052AE20 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */; };
 		9D8E3D3D1778FB130052AE20 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */; };
@@ -1391,7 +1400,6 @@
 		9D846E82179775C500A28FF6 /* Stop_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Stop_Icon.png; path = Resources/Images/Stop_Icon.png; sourceTree = "<group>"; };
 		9D846E83179775C500A28FF6 /* Rec_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Rec_Icon.png; path = Resources/Images/Rec_Icon.png; sourceTree = "<group>"; };
 		9D846E84179775C500A28FF6 /* Volume_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Volume_Icon.png; path = Resources/Images/Volume_Icon.png; sourceTree = "<group>"; };
-		9D846E85179775C500A28FF6 /* Volume_Knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Volume_Knob.png; path = Resources/Images/Volume_Knob.png; sourceTree = "<group>"; };
 		9D846E86179775C500A28FF6 /* Volume_Minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Volume_Minus.png; path = Resources/Images/Volume_Minus.png; sourceTree = "<group>"; };
 		9D846E87179775C500A28FF6 /* Volume_Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Volume_Plus.png; path = Resources/Images/Volume_Plus.png; sourceTree = "<group>"; };
 		9D846E88179775C500A28FF6 /* Volume_Slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Volume_Slider.png; path = Resources/Images/Volume_Slider.png; sourceTree = "<group>"; };
@@ -1407,6 +1415,18 @@
 		9D8B405617AAD294009D3FB4 /* IQKeyBoardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyBoardManager.m; sourceTree = "<group>"; };
 		9D8B405717AAD294009D3FB4 /* IQSegmentedNextPrevious.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQSegmentedNextPrevious.h; sourceTree = "<group>"; };
 		9D8B405817AAD294009D3FB4 /* IQSegmentedNextPrevious.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQSegmentedNextPrevious.m; sourceTree = "<group>"; };
+		9D8B405B17AC3390009D3FB4 /* AudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
+		9D8B405C17AC3391009D3FB4 /* AudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
+		9D8B405E17AC688B009D3FB4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		9D8B406017AC6A63009D3FB4 /* Switch_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Switch_Left.png; path = Resources/Images/Switch_Left.png; sourceTree = "<group>"; };
+		9D8B406117AC6A63009D3FB4 /* Switch_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Switch_Right.png; path = Resources/Images/Switch_Right.png; sourceTree = "<group>"; };
+		9D8B407217AC91DF009D3FB4 /* InvisibleTrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InvisibleTrack.png; path = Resources/Images/InvisibleTrack.png; sourceTree = "<group>"; };
+		9D8B407417ADD29D009D3FB4 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		9D8B407517ADD29D009D3FB4 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		9D8B407717AF8683009D3FB4 /* FaceBookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FaceBookButton.png; path = Resources/Images/FaceBookButton.png; sourceTree = "<group>"; };
+		9D8B407917B025E2009D3FB4 /* MenuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuIcon.png; path = Resources/Images/MenuIcon.png; sourceTree = "<group>"; };
+		9D8B407B17B03704009D3FB4 /* VolumeKnob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = VolumeKnob.png; path = Resources/Images/VolumeKnob.png; sourceTree = "<group>"; };
+		9D8B407D17B03760009D3FB4 /* SliderEndCap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SliderEndCap.png; path = Resources/Images/SliderEndCap.png; sourceTree = "<group>"; };
 		9D8E3D381778F5DD0052AE20 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
 		9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
@@ -1417,6 +1437,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D8B405F17AC688B009D3FB4 /* MediaPlayer.framework in Frameworks */,
 				9D846E9F17A10D2900A28FF6 /* QuartzCore.framework in Frameworks */,
 				9D42D846176159CD00614738 /* libGtarController.a in Frameworks */,
 				9D42D844176159C700614738 /* libAudioController.a in Frameworks */,
@@ -1474,6 +1495,7 @@
 				9D42D7FE17613B8700614738 /* Foundation.framework */,
 				9D42D80017613B8700614738 /* CoreGraphics.framework */,
 				9D846E9E17A10D2900A28FF6 /* QuartzCore.framework */,
+				9D8B405E17AC688B009D3FB4 /* MediaPlayer.framework */,
 				9D42D82317613B8800614738 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
@@ -1482,26 +1504,30 @@
 		9D42D80217613B8700614738 /* Sketch */ = {
 			isa = PBXGroup;
 			children = (
-				9D8B405517AAD294009D3FB4 /* IQKeyBoardManager.h */,
-				9D8B405617AAD294009D3FB4 /* IQKeyBoardManager.m */,
-				9D8B405717AAD294009D3FB4 /* IQSegmentedNextPrevious.h */,
-				9D8B405817AAD294009D3FB4 /* IQSegmentedNextPrevious.m */,
 				9D42D80B17613B8700614738 /* AppDelegate.h */,
 				9D42D80C17613B8700614738 /* AppDelegate.m */,
 				9D42D81417613B8700614738 /* MainStoryboard_iPhone.storyboard */,
 				9D42D81717613B8700614738 /* MainStoryboard_iPad.storyboard */,
 				9D42D81A17613B8700614738 /* ViewController.h */,
 				9D42D81B17613B8700614738 /* ViewController.mm */,
-				9D846E98179DB51200A28FF6 /* SongViewCell.h */,
-				9D846E99179DB51200A28FF6 /* SongViewCell.m */,
 				9D846E9B179E21F400A28FF6 /* SongTableViewController.h */,
 				9D846E9C179E21F400A28FF6 /* SongTableViewController.m */,
+				9D846E98179DB51200A28FF6 /* SongViewCell.h */,
+				9D846E99179DB51200A28FF6 /* SongViewCell.m */,
 				9D68DDE917A2FD0B000B2056 /* PlayerViewController.h */,
 				9D68DDEA17A2FD0B000B2056 /* PlayerViewController.m */,
 				9D68DDEB17A2FD0B000B2056 /* PlayerViewController.xib */,
 				9D8B401517A9AD0B009D3FB4 /* SignInViewController.h */,
 				9D8B401617A9AD0B009D3FB4 /* SignInViewController.m */,
 				9D8B401817A9D2FC009D3FB4 /* SignInViewController.xib */,
+				9D8B407417ADD29D009D3FB4 /* MenuViewController.h */,
+				9D8B407517ADD29D009D3FB4 /* MenuViewController.m */,
+				9D8B405B17AC3390009D3FB4 /* AudioViewController.h */,
+				9D8B405C17AC3391009D3FB4 /* AudioViewController.m */,
+				9D8B405517AAD294009D3FB4 /* IQKeyBoardManager.h */,
+				9D8B405617AAD294009D3FB4 /* IQKeyBoardManager.m */,
+				9D8B405717AAD294009D3FB4 /* IQSegmentedNextPrevious.h */,
+				9D8B405817AAD294009D3FB4 /* IQSegmentedNextPrevious.m */,
 				9D42D80317613B8700614738 /* Supporting Files */,
 			);
 			path = Sketch;
@@ -2339,6 +2365,12 @@
 		9D846E7B1797759600A28FF6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9D8B407B17B03704009D3FB4 /* VolumeKnob.png */,
+				9D8B407D17B03760009D3FB4 /* SliderEndCap.png */,
+				9D8B407217AC91DF009D3FB4 /* InvisibleTrack.png */,
+				9D8B407917B025E2009D3FB4 /* MenuIcon.png */,
+				9D8B406017AC6A63009D3FB4 /* Switch_Left.png */,
+				9D8B406117AC6A63009D3FB4 /* Switch_Right.png */,
 				9D4C70C617A871A100DC7B4D /* List_Icon.png */,
 				9D4C70C217A758A300DC7B4D /* Pause_Icon.png */,
 				9D4C70C317A758A300DC7B4D /* Play_Icon.png */,
@@ -2347,11 +2379,11 @@
 				9D846E82179775C500A28FF6 /* Stop_Icon.png */,
 				9D846E83179775C500A28FF6 /* Rec_Icon.png */,
 				9D846E84179775C500A28FF6 /* Volume_Icon.png */,
-				9D846E85179775C500A28FF6 /* Volume_Knob.png */,
 				9D846E86179775C500A28FF6 /* Volume_Minus.png */,
 				9D846E87179775C500A28FF6 /* Volume_Plus.png */,
 				9D846E88179775C500A28FF6 /* Volume_Slider.png */,
 				9D846E7C179775B400A28FF6 /* Delete_Button.png */,
+				9D8B407717AF8683009D3FB4 /* FaceBookButton.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -2482,7 +2514,6 @@
 				9D846E8D179775C500A28FF6 /* Stop_Icon.png in Resources */,
 				9D846E8E179775C500A28FF6 /* Rec_Icon.png in Resources */,
 				9D846E8F179775C500A28FF6 /* Volume_Icon.png in Resources */,
-				9D846E90179775C500A28FF6 /* Volume_Knob.png in Resources */,
 				9D846E91179775C500A28FF6 /* Volume_Minus.png in Resources */,
 				9D846E92179775C500A28FF6 /* Volume_Plus.png in Resources */,
 				9D846E93179775C500A28FF6 /* Volume_Slider.png in Resources */,
@@ -3092,6 +3123,13 @@
 				9D4C75F017A8C3D200DC7B4D /* Warm Analogue 79.mp3 in Resources */,
 				9D4C75F117A8C3D200DC7B4D /* Warm Analogue 80.mp3 in Resources */,
 				9D8B401917A9D2FC009D3FB4 /* SignInViewController.xib in Resources */,
+				9D8B406217AC6A63009D3FB4 /* Switch_Left.png in Resources */,
+				9D8B406317AC6A63009D3FB4 /* Switch_Right.png in Resources */,
+				9D8B407317AC91DF009D3FB4 /* InvisibleTrack.png in Resources */,
+				9D8B407817AF8683009D3FB4 /* FaceBookButton.png in Resources */,
+				9D8B407A17B025E2009D3FB4 /* MenuIcon.png in Resources */,
+				9D8B407C17B03704009D3FB4 /* VolumeKnob.png in Resources */,
+				9D8B407E17B03760009D3FB4 /* SliderEndCap.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3135,6 +3173,8 @@
 				9D8B401717A9AD0B009D3FB4 /* SignInViewController.m in Sources */,
 				9D8B405917AAD294009D3FB4 /* IQKeyBoardManager.m in Sources */,
 				9D8B405A17AAD294009D3FB4 /* IQSegmentedNextPrevious.m in Sources */,
+				9D8B405D17AC3391009D3FB4 /* AudioViewController.m in Sources */,
+				9D8B407617ADD29D009D3FB4 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

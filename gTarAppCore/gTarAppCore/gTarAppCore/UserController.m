@@ -84,6 +84,21 @@
     
 }
 
++ (UserController *)sharedSingleton
+{
+    static UserController *sharedSingleton;
+    
+    @synchronized(self)
+    {
+        if (!sharedSingleton)
+        {
+            sharedSingleton = [[UserController alloc] initWithCloudController:[CloudController sharedSingleton]];
+        }
+        
+        return sharedSingleton;
+    }
+}
+
 - (void)dealloc
 {
     
