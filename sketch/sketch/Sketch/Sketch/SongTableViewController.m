@@ -10,6 +10,8 @@
 #import "SongViewCell.h"
 
 #import <gTarAppCore/UserSongSession.h>
+#import <gTarAppCore/UserController.h>
+#import <gTarAppCore/UserProfile.h>
 
 @interface SongTableViewController ()
 {
@@ -18,7 +20,9 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *songTableView;
 
+@property (strong, nonatomic) NSMutableDictionary* userSongDictionary;
 @property (strong, nonatomic, readwrite) NSMutableArray* songList;
+@property (strong, nonatomic) NSString* currentUserId;
 
 @end
 
@@ -48,15 +52,25 @@
 {
     [super viewDidLoad];
     
-    NSString* songListPath = [self getSongListPath];
+    UserProfile *loggedInProfile = [[UserController sharedSingleton] m_loggedInUserProfile];
+    _currentUserId = [NSString stringWithFormat:@"%d", loggedInProfile.m_userId];
+
+    NSString* songDictionaryPath = [self getSongDictionaryPath];
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath: songListPath])
+    if ([[NSFileManager defaultManager] fileExistsAtPath: songDictionaryPath])
     {
-        self.songList = [NSKeyedUnarchiver unarchiveObjectWithFile: songListPath];
+        self.userSongDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile: songDictionaryPath];
+        self.songList = [_userSongDictionary objectForKey:_currentUserId];
+    }
+    
+    if (self.userSongDictionary == nil)
+    {
+        self.userSongDictionary = [[NSMutableDictionary alloc] init];
     }
     if (self.songList == nil)
     {
         self.songList = [[NSMutableArray alloc] init];
+        [_userSongDictionary setObject:_songList forKey:_currentUserId];
     }
     
     UISwipeGestureRecognizer* swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
@@ -114,20 +128,19 @@
     
     /****** SAVE SONG TO DISK CODE, TODO: move code else where, save on exit *********/
     //////////////////////////////////////////////////////////////////
-    
-    NSString* songListPath = [self getSongListPath];
-    [NSKeyedArchiver archiveRootObject:_songList toFile:songListPath];
+    NSString* songDictionaryPath = [self getSongDictionaryPath];
+    [NSKeyedArchiver archiveRootObject:_userSongDictionary toFile:songDictionaryPath];
     
     /************     END SAVE SONG TO DISK CODE                ************/
     ////////////////////////////////////////////////////////////////////////
 }
 
-- (NSString*)getSongListPath
+- (NSString*)getSongDictionaryPath
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents directory
     
-    NSString *songListPath = [documentsDirectory stringByAppendingPathComponent:@"songlist.archive"];
+    NSString *songListPath = [documentsDirectory stringByAppendingPathComponent:@"songDictionary.archive"];
     
     return songListPath;
 }

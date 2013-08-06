@@ -51,9 +51,9 @@
                               regularFont, NSFontAttributeName, nil];
     
     // Calculate atrributed text range
-    NSString* introText = @"Signed in as";
+    NSString* introText = @"Signed in as ";
     NSString* username = loggedInEntry.m_userProfile.m_name;
-    NSString* wholeText = [NSString stringWithFormat:@"%@ %@", introText, username];
+    NSString* wholeText = [NSString stringWithFormat:@"%@%@", introText, username];
     const NSRange range = NSMakeRange([introText length], [username length]);
     
     // Create the attributed string (text + attributes)

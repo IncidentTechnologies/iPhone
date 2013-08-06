@@ -14,6 +14,7 @@
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserResponse.h>
 
+#define DEFAULT_NOTIFICATION @"SKETCHPAD"
 #define USERNAME_INVALID @"Invalid Username"
 #define PASSWORD_INVALID @"Invalid Password"
 #define SIGNIN_FAILED @"Invalid Username or Password"
@@ -39,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (weak, nonatomic) IBOutlet UIView *signInView;
 @property (weak, nonatomic) IBOutlet UITextField *signInUsername;
-@property (weak, nonatomic) IBOutlet UITextField *singInPassword;
+@property (weak, nonatomic) IBOutlet UITextField *signInPassword;
 @property (weak, nonatomic) IBOutlet UIView *signUpView;
 @property (weak, nonatomic) IBOutlet UITextField *signUpUsername;
 @property (weak, nonatomic) IBOutlet UITextField *signUpPassword;
@@ -79,15 +80,19 @@
         _facebookController.expirationDate = [settings objectForKey:@"FBExpirationDateKey"];
     }
     
-    [_createAccountButton setTitle:@"Already have an account? Sign In" forState:UIControlStateNormal];
-    [_createAccountButton setTitle:@"Don't have an account? Sign Up" forState:UIControlStateSelected];
+    [_createAccountButton setTitle:@"Don't have an account? Sign Up" forState:UIControlStateNormal];
+    [_createAccountButton setTitle:@"Already have an account? Sign In" forState:UIControlStateSelected];
+    
     _signUpView.hidden = YES;
-    [self hideNotification];
     _spinner.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
-{    
+{
+    [self hideNotification];
+    _signInUsername.text = @"";
+    _signInPassword.text = @"";
+    
     if ( _cloudController.m_loggedIn == NO &&
         (_userController.m_loggedInFacebookToken != nil ||
          _userController.m_loggedInUsername != nil) )
@@ -118,7 +123,7 @@
         return;
     }
     
-    if ( _singInPassword.text == nil || [_singInPassword.text isEqualToString:@""] == YES )
+    if ( _signInPassword.text == nil || [_signInPassword.text isEqualToString:@""] == YES )
     {
         [self displayNotification:PASSWORD_INVALID turnRed:YES];
         
@@ -126,7 +131,7 @@
     }
 
     [_userController requestLoginUser:_signInUsername.text
-                           andPassword:_singInPassword.text
+                           andPassword:_signInPassword.text
                         andCallbackObj:self
                         andCallbackSel:@selector(signinCallback:)];
     
@@ -280,13 +285,21 @@
     {
         _signUpView.hidden = NO;
         _signInView.hidden = YES;
+        
+        _signUpUsername.text = @"";
+        _signUpPassword.text = @"";
+        _signUpEmail.text = @"";
     }
     else
     {
         _signUpView.hidden = YES;
         _signInView.hidden = NO;
+        
+        _signInUsername.text = @"";
+        _signInPassword.text = @"";
     }
     
+    [self displayNotification:DEFAULT_NOTIFICATION turnRed:NO];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -377,24 +390,25 @@
 
 - (void)displayNotification:(NSString *)notification turnRed:(BOOL)red
 {
+    [_notificationLabel setHidden:NO];
     [_notificationLabel setText:notification];
-    [_notificationView setHidden:NO];
     
     if ( red )
     {
-        _notificationView.backgroundColor = [UIColor redColor];
+        _notificationLabel.font = [UIFont boldSystemFontOfSize:18];
+        _notificationView.backgroundColor = [UIColor colorWithRed:199.0/255.0 green:46.0/255.0 blue:0.0/255.0 alpha:1.0];
     }
     else
     {
-        _notificationView.backgroundColor = [UIColor colorWithRed:50.0/256.0 green:59.0/256.0 blue:66.0/256.0 alpha:1.0];
+        _notificationLabel.font = [UIFont systemFontOfSize:21];
+        _notificationView.backgroundColor = [UIColor colorWithRed:50.0/255.0 green:59.0/255.0 blue:66.0/255.0 alpha:1.0];
     }
 }
 
 - (void)hideNotification
 {
-    [_notificationLabel.superview setHidden:YES];
-    
-    _notificationView.backgroundColor = [UIColor colorWithRed:50.0/256.0 green:59.0/256.0 blue:66.0/256.0 alpha:1.0];
+    // "hide notification" should mean display the default notification
+    [self displayNotification:DEFAULT_NOTIFICATION turnRed:NO];
 }
 
 - (void)displayMainView

@@ -373,7 +373,7 @@ static IQKeyBoardManager *kbManager;
 
 - (void)keyboardDidShow:(NSNotification*)aNotification
 {
-    NSLog(@"keyboard shown");
+
 }
 
 #pragma mark - UITextField Delegate methods

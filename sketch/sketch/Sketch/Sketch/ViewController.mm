@@ -404,10 +404,10 @@
     
     CGPoint point = [touch locationInView:self.view];
     
-    int str = point.x / (self.view.frame.size.height/GtarStringCount);
+    int str = point.x / (self.view.frame.size.width/GtarStringCount);
     if ( str >= GtarFretCount ) str = (GtarFretCount-1);
     
-    int fret = point.y / (self.view.frame.size.width/GtarFretCount);
+    int fret = point.y / (self.view.frame.size.height/GtarFretCount);
     if ( fret >= GtarFretCount ) fret = (GtarFretCount-1);
     
     GtarPluck pluck;
