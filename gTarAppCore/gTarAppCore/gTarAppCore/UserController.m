@@ -534,7 +534,7 @@
         [self setUserProfileForUserId:0
                             toProfile:m_loggedInUserProfile];
         
-        if ( m_loggedInUsername )
+        if ( m_loggedInFacebookToken )
         {
             [self saveCacheAsync];
         }

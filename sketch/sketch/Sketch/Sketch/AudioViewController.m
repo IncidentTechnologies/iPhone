@@ -1,4 +1,4 @@
-//
+ //
 //  AudioViewController.m
 //  Sketch
 //
@@ -73,13 +73,14 @@
             [slider setMaximumTrackImage:invisibleImage forState:UIControlStateNormal];
             [slider setThumbImage:sliderKnob forState:UIControlStateNormal];
             
-            // This is placed behind the MP volume slider
-            _volumeTrackImage.image = sliderTrackMaxImage;
-            
             break;
         }
     }
-     
+    
+    UIImage * sliderTrackFullImage = [UIImage imageNamed: @"Volume_Slider.png"];
+    // This is placed behind the volume slider
+    _volumeTrackImage.image = sliderTrackFullImage;
+    
     
     [_mpVolumeView setShowsRouteButton:NO];
     [_mpVolumeContainer addSubview:_mpVolumeView];

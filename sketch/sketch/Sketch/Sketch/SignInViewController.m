@@ -7,6 +7,8 @@
 //
 
 #import "SignInViewController.h"
+
+#import "AppDelegate.h"
 #import "ViewController.h"
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/UserController.h>
@@ -66,6 +68,8 @@
     _userController = [UserController sharedSingleton];
                        
     _facebookController = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
+    AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    appDelegate.facebook = _facebookController;
     
     // See if there are any cached credentials
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
@@ -75,8 +79,8 @@
         _facebookController.expirationDate = [settings objectForKey:@"FBExpirationDateKey"];
     }
     
-    [_createAccountButton setTitle:@"Already have an account?" forState:UIControlStateNormal];
-    [_createAccountButton setTitle:@"Create an account" forState:UIControlStateSelected];
+    [_createAccountButton setTitle:@"Already have an account? Sign In" forState:UIControlStateNormal];
+    [_createAccountButton setTitle:@"Don't have an account? Sign Up" forState:UIControlStateSelected];
     _signUpView.hidden = YES;
     [self hideNotification];
     _spinner.hidden = YES;

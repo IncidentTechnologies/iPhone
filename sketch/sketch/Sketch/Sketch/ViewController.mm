@@ -77,7 +77,9 @@
     _playBackVC = [[PlayerViewController alloc] initWithAudioController:_audioController];
     _playBackVC.view.frame = _playBackView.frame;
     [_playBackVC recordMode];
+    [self addChildViewController:_playBackVC];
     [_playBackView addSubview:_playBackVC.view];
+    [_playBackVC didMoveToParentViewController:self];
     
     // Set up initial main content VC to be songTableVC
     [self addChildViewController:_songTableVC];
