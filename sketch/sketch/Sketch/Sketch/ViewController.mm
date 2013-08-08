@@ -55,6 +55,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *recordAndStopButton;
 @property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
 @property (weak, nonatomic) IBOutlet UILabel *songLengthLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *playPauseImage;
+@property (weak, nonatomic) IBOutlet UIImageView *recordAndStopImage;
 
 @end
 
@@ -105,19 +107,32 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songPlayBackEnded:) name:@"SongPlayBackEnded" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioEngineStopped:) name:@"AudioEngineStopped" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+                            addObserver:self
+                            selector:@selector(applicationDidReceiveMemoryWarning:)
+                            name:UIApplicationDidReceiveMemoryWarningNotification
+                            object:[UIApplication sharedApplication]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SongPlayBackEnded" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioEngineStopped" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 }
 
 - (void)viewDidLayoutSubviews
 {
+    [super viewDidLayoutSubviews];
+    
     _instrumentsVC.tableView.frame = _mainContentView.bounds;
     _audioVC.view.frame = _mainContentView.bounds;
     _menuVC.view.frame = _mainContentView.bounds;
@@ -248,6 +263,8 @@
         // Adjust UI
         _recordAndStopButton.backgroundColor = [UIColor colorWithRed:(199/255.0) green:(46/255.0) blue:(0/255.0) alpha:1];
         _playPauseButton.selected = YES;
+        _playPauseImage.highlighted = YES;
+        _recordAndStopImage.highlighted = YES;
         _songLengthLabel.hidden = NO;
         [_playBackVC recordMode];
         NSString* time = [NSString stringWithFormat:@"%d:%02d", 0, 0];
@@ -273,6 +290,8 @@
         // Adjust UI
         _recordAndStopButton.backgroundColor = [UIColor colorWithRed:(39/255.0) green:(47/255.0) blue:(50/255.0) alpha:1];
         _playPauseButton.selected = NO;
+        _playPauseImage.highlighted = NO;
+        _recordAndStopImage.highlighted = NO;
         
         // Stop timmers
         [_srTimer invalidate];
@@ -314,6 +333,7 @@
 - (IBAction)togglePlayPause:(UIButton *)sender
 {
     _playPauseButton.selected = !_playPauseButton.selected;
+    _playPauseImage.highlighted = _playPauseButton.selected;
     
     // Different pause play behavior depending on wether we are currently
     // recording.
@@ -376,22 +396,31 @@
 
 - (void)selectedSong:(UserSongSession*)songSession
 {
-    // If we were in the middle of a recording, send a message to stop the recording
-    // which will save it if appropriate.
+    // If we were in the middle of a recording, ignore the selection. Force
+    // the user to explicitly stop a recording.
     if (_recordAndStopButton.selected)
     {
-        [self toggleRecording:_recordAndStopButton];
+        return;
     }
     
     _songLengthLabel.hidden = YES;
     _playPauseButton.selected = NO;
+    _playPauseImage.highlighted = NO;
     
     [_playBackVC setUserSongSession:songSession];
 }
 
 - (void)playSong:(UserSongSession*)songSession
 {
+    // If we were in the middle of a recording, ignore the selection. Force
+    // the user to explicitly stop a recording.
+    if (_recordAndStopButton.selected)
+    {
+        return;
+    }
+
     _playPauseButton.selected = YES;
+    _playPauseImage.highlighted = YES;
     [_playBackVC setUserSongSession:songSession];
     [_playBackVC startSong];
 }
@@ -459,7 +488,7 @@
 - (void) songPlayBackEnded:(NSNotification *) notification
 {
     _playPauseButton.selected = NO;
-    //[_playBackVC pauseSong];
+    _playPauseImage.highlighted = NO;
 }
 
 - (void) audioEngineStopped:(NSNotification *) notification
@@ -491,6 +520,12 @@
                                 [newVC didMoveToParentViewController:self];
                                 _currentMainVC = newVC;
                             }];
+}
+
+- (void) applicationDidReceiveMemoryWarning:(NSNotification *) notification
+{
+    [self toggleRecording:_recordAndStopButton];
+    [_songTableVC saveData];
 }
 
 #pragma Mixpanel logging

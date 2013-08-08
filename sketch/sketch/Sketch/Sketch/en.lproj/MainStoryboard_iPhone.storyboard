@@ -45,7 +45,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="55" minY="13" maxX="54" maxY="13"/>
-                                        <state key="normal" image="List_Icon.png">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -64,7 +64,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="54" minY="13" maxX="53" maxY="13"/>
-                                        <state key="normal" image="MenuIcon.png">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -82,7 +82,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="55" minY="9" maxX="55" maxY="10"/>
-                                        <state key="normal" image="Instrument_Icon.png">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -100,7 +100,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="56" minY="11" maxX="57" maxY="11"/>
-                                        <state key="normal" image="Volume_Icon.png">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -111,25 +111,57 @@
                                             <action selector="displayAudioView:" destination="2" eventType="touchUpInside" id="1W4-Ij-hYB"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="MenuIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ca4-Zn-Ov3">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" type="user" id="Y7q-sa-FhG"/>
+                                            <constraint firstAttribute="width" constant="23" id="Z7C-rQ-nmn"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Volume_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ChL-h5-gMm">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Mub-8T-QHu"/>
+                                            <constraint firstAttribute="width" constant="29" id="rt4-Na-8ro"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Instrument_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="10v-8s-kVt">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="RcP-RS-eW2"/>
+                                            <constraint firstAttribute="height" constant="29" id="hO9-Ko-U5c"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="List_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="24b-kR-lAk">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="KrL-TW-37x"/>
+                                            <constraint firstAttribute="height" constant="21" type="user" id="fJM-Cf-Gso"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="pVc-ow-hn2" firstAttribute="leading" secondItem="Wfl-mK-ZkP" secondAttribute="trailing" constant="1" type="user" id="35b-KK-gKD"/>
+                                    <constraint firstItem="24b-kR-lAk" firstAttribute="centerY" secondItem="8Qp-hT-5on" secondAttribute="centerY" type="user" id="3ry-ol-3HP"/>
+                                    <constraint firstItem="ChL-h5-gMm" firstAttribute="centerX" secondItem="tir-wR-tLq" secondAttribute="centerX" type="default" id="8aX-5o-Yc3"/>
                                     <constraint firstItem="g0P-bv-U6r" firstAttribute="width" secondItem="tir-wR-tLq" secondAttribute="width" type="user" id="CJe-Ih-afp"/>
                                     <constraint firstItem="g0P-bv-U6r" firstAttribute="leading" secondItem="avc-xk-myo" secondAttribute="leading" type="user" id="G4e-Bh-9pi"/>
                                     <constraint firstItem="Wfl-mK-ZkP" firstAttribute="leading" secondItem="tir-wR-tLq" secondAttribute="trailing" constant="1" type="user" id="HzI-Qa-Gd6"/>
                                     <constraint firstItem="pVc-ow-hn2" firstAttribute="top" secondItem="avc-xk-myo" secondAttribute="top" type="user" id="JYV-J7-zJh"/>
                                     <constraint firstItem="pVc-ow-hn2" firstAttribute="baseline" secondItem="g0P-bv-U6r" secondAttribute="baseline" type="user" id="Mjv-no-DQT"/>
                                     <constraint firstAttribute="trailing" secondItem="pVc-ow-hn2" secondAttribute="trailing" constant="1" type="user" id="OlR-Pu-Agn"/>
-                                    <constraint firstItem="8Qp-hT-5on" firstAttribute="top" secondItem="avc-xk-myo" secondAttribute="top" type="default" id="QRc-rS-wnc"/>
+                                    <constraint firstItem="ChL-h5-gMm" firstAttribute="centerY" secondItem="tir-wR-tLq" secondAttribute="centerY" type="default" id="QIn-CK-Wos"/>
+                                    <constraint firstItem="8Qp-hT-5on" firstAttribute="top" secondItem="avc-xk-myo" secondAttribute="top" type="user" id="QRc-rS-wnc"/>
                                     <constraint firstItem="tir-wR-tLq" firstAttribute="top" secondItem="avc-xk-myo" secondAttribute="top" type="user" id="SPo-fa-3pZ"/>
+                                    <constraint firstItem="24b-kR-lAk" firstAttribute="centerX" secondItem="pVc-ow-hn2" secondAttribute="centerX" type="default" id="VRA-Xm-JZd"/>
                                     <constraint firstItem="Wfl-mK-ZkP" firstAttribute="width" secondItem="pVc-ow-hn2" secondAttribute="width" type="user" id="WkM-MF-pts"/>
+                                    <constraint firstItem="Ca4-Zn-Ov3" firstAttribute="centerX" secondItem="g0P-bv-U6r" secondAttribute="centerX" type="default" id="aHc-gY-ew4"/>
                                     <constraint firstItem="Wfl-mK-ZkP" firstAttribute="top" secondItem="avc-xk-myo" secondAttribute="top" type="user" id="bwn-4u-LGe"/>
+                                    <constraint firstItem="10v-8s-kVt" firstAttribute="centerX" secondItem="Wfl-mK-ZkP" secondAttribute="centerX" type="default" id="cGf-cF-X3e"/>
                                     <constraint firstItem="g0P-bv-U6r" firstAttribute="top" secondItem="avc-xk-myo" secondAttribute="top" type="user" id="dK6-fK-pUn"/>
-                                    <constraint firstItem="pVc-ow-hn2" firstAttribute="bottom" secondItem="8Qp-hT-5on" secondAttribute="bottom" type="default" id="iMO-O1-AAX"/>
                                     <constraint firstItem="8Qp-hT-5on" firstAttribute="trailing" secondItem="avc-xk-myo" secondAttribute="trailing" type="user" id="kaK-ma-FUZ"/>
+                                    <constraint firstItem="10v-8s-kVt" firstAttribute="centerY" secondItem="Wfl-mK-ZkP" secondAttribute="centerY" type="default" id="kdA-oC-LHm"/>
                                     <constraint firstItem="tir-wR-tLq" firstAttribute="width" secondItem="Wfl-mK-ZkP" secondAttribute="width" type="user" id="pOa-VY-tZE"/>
                                     <constraint firstItem="tir-wR-tLq" firstAttribute="leading" secondItem="g0P-bv-U6r" secondAttribute="trailing" constant="1" type="user" id="rhw-VP-0TM"/>
+                                    <constraint firstItem="8Qp-hT-5on" firstAttribute="bottom" secondItem="pVc-ow-hn2" secondAttribute="bottom" type="user" id="x0k-dl-ZT2"/>
+                                    <constraint firstItem="g0P-bv-U6r" firstAttribute="centerY" secondItem="Ca4-Zn-Ov3" secondAttribute="centerY" type="user" id="xiH-fB-oCH"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJX-K7-yF4">
@@ -140,11 +172,10 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="46" minY="10" maxX="46" maxY="10"/>
-                                <state key="normal" image="Rec_Icon.png">
+                                <state key="normal">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="Stop_Icon.png"/>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -179,11 +210,10 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="49" minY="11" maxX="49" maxY="11"/>
-                                <state key="normal" title="BUTTON" image="Play_Icon.png">
+                                <state key="normal">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="Pause_Icon.png"/>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -194,16 +224,31 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rd5-4j-qf1">
                                 <color key="backgroundColor" white="0.23503079379562045" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Play_Icon.png" highlightedImage="Pause_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xaq-it-Qsn">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="0xv-6e-FCH"/>
+                                    <constraint firstAttribute="height" constant="24" id="OPB-JL-aG2"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Rec_Icon.png" highlightedImage="Stop_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Rb-co-b0Z">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="K74-72-h6R"/>
+                                    <constraint firstAttribute="width" constant="28" id="Xsm-0F-g56"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="MAp-3s-x08" firstAttribute="top" secondItem="fQ3-wl-je5" secondAttribute="top" type="default" id="6br-ev-Vhn"/>
                             <constraint firstItem="TJX-K7-yF4" firstAttribute="leading" secondItem="fQ3-wl-je5" secondAttribute="trailing" constant="1" type="user" id="ByA-rj-mJd"/>
                             <constraint firstItem="Rd5-4j-qf1" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" type="default" id="Crt-X7-vCN"/>
-                            <constraint firstAttribute="bottom" secondItem="avc-xk-myo" secondAttribute="bottom" constant="272" id="Gkj-6V-cRz"/>
+                            <constraint firstAttribute="bottom" secondItem="avc-xk-myo" secondAttribute="bottom" constant="272" id="FRA-qN-A66"/>
                             <constraint firstItem="uoQ-rK-O6f" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="IDs-dI-6ES"/>
+                            <constraint firstItem="MAp-3s-x08" firstAttribute="centerX" secondItem="Xaq-it-Qsn" secondAttribute="centerX" type="user" id="KSq-La-LQj"/>
                             <constraint firstItem="avc-xk-myo" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="LMZ-e4-89M"/>
                             <constraint firstItem="fQ3-wl-je5" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="Ska-1f-b08"/>
+                            <constraint firstItem="3Rb-co-b0Z" firstAttribute="centerY" secondItem="TJX-K7-yF4" secondAttribute="centerY" type="user" id="Tpq-MH-Z2j"/>
+                            <constraint firstItem="MAp-3s-x08" firstAttribute="centerY" secondItem="Xaq-it-Qsn" secondAttribute="centerY" type="user" id="YxT-mY-xMo"/>
                             <constraint firstItem="Rd5-4j-qf1" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="Z2I-Yn-Ekr"/>
                             <constraint firstItem="fQ3-wl-je5" firstAttribute="centerX" secondItem="uoQ-rK-O6f" secondAttribute="centerX" type="user" id="aSj-Fs-9Ee"/>
                             <constraint firstItem="TJX-K7-yF4" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="cBB-Nz-bW1"/>
@@ -214,8 +259,9 @@
                             <constraint firstItem="fQ3-wl-je5" firstAttribute="leading" secondItem="MAp-3s-x08" secondAttribute="trailing" constant="1" type="user" id="fQ2-Ha-AHW"/>
                             <constraint firstItem="avc-xk-myo" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="g6s-Kl-efy"/>
                             <constraint firstItem="Rd5-4j-qf1" firstAttribute="top" secondItem="3" secondAttribute="top" constant="48" id="gdr-5m-CJD"/>
+                            <constraint firstItem="uoQ-rK-O6f" firstAttribute="top" secondItem="TJX-K7-yF4" secondAttribute="top" type="default" id="hO4-OI-ZtO"/>
+                            <constraint firstItem="3Rb-co-b0Z" firstAttribute="centerX" secondItem="TJX-K7-yF4" secondAttribute="centerX" type="user" id="hay-p0-a23"/>
                             <constraint firstItem="Rd5-4j-qf1" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="ioc-nW-gTm"/>
-                            <constraint firstItem="fQ3-wl-je5" firstAttribute="top" secondItem="uoQ-rK-O6f" secondAttribute="top" type="default" id="iri-xl-7hU"/>
                             <constraint firstItem="uoQ-rK-O6f" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="tzo-c8-9Aa"/>
                             <constraint firstItem="MAp-3s-x08" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="xVw-TK-00T"/>
                             <constraint firstItem="avc-xk-myo" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="xxz-1O-PWC"/>
@@ -232,7 +278,9 @@
                         <outlet property="mainContentView" destination="Rd5-4j-qf1" id="jxQ-F1-KcH"/>
                         <outlet property="playBackView" destination="fQ3-wl-je5" id="4ky-dN-ajx"/>
                         <outlet property="playPauseButton" destination="MAp-3s-x08" id="89S-RK-8MF"/>
+                        <outlet property="playPauseImage" destination="Xaq-it-Qsn" id="f0f-5b-4WE"/>
                         <outlet property="recordAndStopButton" destination="TJX-K7-yF4" id="lgx-94-siq"/>
+                        <outlet property="recordAndStopImage" destination="3Rb-co-b0Z" id="1aU-tn-aba"/>
                         <outlet property="songLengthLabel" destination="cV7-6D-EZj" id="DPD-TM-dBI"/>
                     </connections>
                 </viewController>
@@ -640,7 +688,7 @@
     <resources>
         <image name="Delete_Button.png" width="171" height="94"/>
         <image name="Instrument_Icon.png" width="67" height="60"/>
-        <image name="List_Icon.png" width="58" height="40"/>
+        <image name="List_Icon.png" width="65" height="42"/>
         <image name="MenuIcon.png" width="46" height="40"/>
         <image name="Minus_Icon.png" width="33" height="33"/>
         <image name="Pause_Icon.png" width="40" height="48"/>

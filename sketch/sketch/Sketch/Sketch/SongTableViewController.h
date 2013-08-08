@@ -23,5 +23,6 @@
 @property (strong, nonatomic, readonly) NSMutableArray* songList;
 
 - (void)addSongSession:(UserSongSession*)songSession;
+- (void)saveData;
 
 @end

@@ -107,6 +107,24 @@
 {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter]
+                            addObserver:self
+                            selector:@selector(applicationWillExit:)
+                            name:UIApplicationWillTerminateNotification
+                            object:[UIApplication sharedApplication]];
+    
+    [[NSNotificationCenter defaultCenter]
+                            addObserver:self
+                            selector:@selector(applicationWillExit:)
+                            name:UIApplicationDidEnterBackgroundNotification
+                            object:[UIApplication sharedApplication]];
+    
+    [[NSNotificationCenter defaultCenter]
+                            addObserver:self
+                            selector:@selector(applicationWillExit:)
+                            name:UIApplicationDidReceiveMemoryWarningNotification
+                            object:[UIApplication sharedApplication]];
+    
     // Default to select first item in list
     if ([_songList count] > 0)
     {
@@ -115,6 +133,15 @@
         //UserSongSession* song = [_songList objectAtIndex:0];
         //[_delegate selectedSong:song];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -128,13 +155,10 @@
     [_songList insertObject:songSession atIndex:0];
     [_songTableView reloadData];
     
-    /****** SAVE SONG TO DISK CODE, TODO: move code else where, save on exit *********/
-    //////////////////////////////////////////////////////////////////
-    NSString* songDictionaryPath = [self getSongDictionaryPath];
-    [NSKeyedArchiver archiveRootObject:_userSongDictionary toFile:songDictionaryPath];
-    
-    /************     END SAVE SONG TO DISK CODE                ************/
-    ////////////////////////////////////////////////////////////////////////
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [_songTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+    UserSongSession* song = [_songList objectAtIndex:0];
+    [_delegate selectedSong:song];
 }
 
 - (NSString*)getSongDictionaryPath
@@ -324,6 +348,8 @@
     [_songTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
+#pragma mark - helpers
+
 - (void)logSongDeleted:(UserSongSession*)songSession
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
@@ -332,6 +358,18 @@
                                                 songSession.m_notes, @"Song Name",
                                                 [NSNumber numberWithInteger:songSession.m_length], @"Song Length",
                                                 nil]];
+}
+
+- (void)saveData
+{
+    NSString* songDictionaryPath = [self getSongDictionaryPath];
+    [NSKeyedArchiver archiveRootObject:_userSongDictionary toFile:songDictionaryPath];
+}
+
+// Catch all for applications will enter background, terminate, memory warning
+- (void) applicationWillExit:(NSNotification *) notification
+{
+    [self saveData];
 }
 
 @end
