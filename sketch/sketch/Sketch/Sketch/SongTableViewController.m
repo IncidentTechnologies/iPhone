@@ -9,9 +9,11 @@
 #import "SongTableViewController.h"
 #import "SongViewCell.h"
 
+#import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/UserSongSession.h>
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserProfile.h>
+#import "Mixpanel.h"
 
 @interface SongTableViewController ()
 {
@@ -315,8 +317,21 @@
 {
     SongViewCell* cell = (SongViewCell*)[[sender superview] superview];
     NSIndexPath* indexPath = [_songTableView indexPathForCell:cell];
+    
+    [self logSongDeleted:[_songList objectAtIndex:indexPath.row]];
+    
     [_songList removeObjectAtIndex:indexPath.row];
     [_songTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)logSongDeleted:(UserSongSession*)songSession
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Song Deleted" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                songSession.m_notes, @"Song Name",
+                                                [NSNumber numberWithInteger:songSession.m_length], @"Song Length",
+                                                nil]];
 }
 
 @end

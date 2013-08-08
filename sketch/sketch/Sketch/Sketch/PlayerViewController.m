@@ -17,6 +17,7 @@
 #import <gTarAppCore/UserSongSession.h>
 #import <gTarAppCore/NSSong.h>
 #import <AudioController/AudioController.h>
+#import "Mixpanel.h"
 
 @class AudioController;
 @class GtarController;
@@ -70,7 +71,7 @@
     [super viewDidLoad];
     
     UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
-    //tapGestureRecognizer.cancelsTouchesInView = NO;
+    tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
 	
     //[_songTitle addShadowWithRadius:2.0 andOpacity:0.7];
@@ -261,6 +262,9 @@
         self.view.hidden = NO;
     }
     
+    [_playButton setSelected:YES];
+    [self pauseSong];
+    
     [self updateTimeLabelWithTime:0];
     _fillView.layer.transform = CATransform3DMakeTranslation( 0, 0, 0 );
     
@@ -269,6 +273,9 @@
     int seconds = songLength - minutes * 60;
     NSString* time = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
     _songLengthLabel.text = time;
+    
+    [_songPlaybackController startWithXmpBlob:_userSongSession.m_xmpBlob];
+    [_songPlaybackController pauseSong];
     
 }
 
@@ -285,6 +292,8 @@
             [self pauseUpdating];
             [_songPlaybackController startWithXmpBlob:_userSongSession.m_xmpBlob];
             [self startUpdating];
+            
+            [self logSongPlayBack];
         }
     }
 }
@@ -311,7 +320,7 @@
 - (void)continueSong
 {
     _shouldPlayAfterScroll = YES;
-    if ([_songPlaybackController percentageComplete] >= 1.0)
+    if ([_songPlaybackController percentageComplete] >= 1.0 || [_songPlaybackController percentageComplete] <= 0.0)
     {
         // Finished playing song already, restart it
         [self startSong];
@@ -440,6 +449,17 @@
         [self startUpdating];
         [_songPlaybackController playSong];
     }
+}
+
+- (void)logSongPlayBack
+{
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"Song Playback" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                _userSongSession.m_notes, @"Song Name",
+                                                [NSNumber numberWithInteger:_userSongSession.m_length], @"Song Length",
+                                                nil]];
 }
 
 @end

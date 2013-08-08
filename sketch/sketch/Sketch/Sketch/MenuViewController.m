@@ -13,6 +13,8 @@
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserEntry.h>
 #import <gTarAppCore/UserProfile.h>
+#import <gTarAppCore/CloudController.h>
+#import "Mixpanel.h"
 
 @interface MenuViewController ()
 
@@ -79,6 +81,17 @@
     [appDelegate.facebook logout];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)logAppLogout:(UserSongSession*)songSession
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    CloudController* cloudController = [CloudController sharedSingleton];
+    
+    [mixpanel track:@"App Logout" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                cloudController.m_username, @"$username",
+                                                nil]];
 }
 
 @end

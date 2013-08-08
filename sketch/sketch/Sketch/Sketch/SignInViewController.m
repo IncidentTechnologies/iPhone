@@ -13,6 +13,8 @@
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserResponse.h>
+#import <gTarAppCore/UserProfile.h>
+#import "Mixpanel.h"
 
 #define DEFAULT_NOTIFICATION @"SKETCHPAD"
 #define USERNAME_INVALID @"Invalid Username"
@@ -29,7 +31,6 @@
 {
     ViewController* _mainViewController;
     
-    CloudController* _cloudController;
     UserController* _userController;
     
     Facebook* _facebookController;
@@ -93,7 +94,9 @@
     _signInUsername.text = @"";
     _signInPassword.text = @"";
     
-    if ( _cloudController.m_loggedIn == NO &&
+    CloudController* cloudController  = [CloudController  sharedSingleton];
+    
+    if ( cloudController.m_loggedIn == NO &&
         (_userController.m_loggedInFacebookToken != nil ||
          _userController.m_loggedInUsername != nil) )
     {
@@ -102,7 +105,6 @@
         
         // Assume for now that we are actually logged in for now. The callback can revert this if needed
         [self displayMainView];
-        
     }
 }
 
@@ -111,6 +113,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Sign In/Up
 
 - (IBAction)attemptSignIn:(id)sender
 {
@@ -146,6 +150,8 @@
     
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
+        [self logLoginEvent];
+        
         [self displayMainView];
     }
     else
@@ -238,6 +244,8 @@
     
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
+        [self logLoginEvent];
+        
         [self displayMainView];
     }
     else
@@ -267,6 +275,8 @@
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         [self hideNotification];
+        
+        [self logLoginEvent];
         
         [self displayMainView];
     }
@@ -430,6 +440,43 @@
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [[self view] endEditing:YES];
+}
+
+- (void)logLoginEvent
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    CloudController* cloudController  = [CloudController sharedSingleton];
+    UserController* userController = [UserController sharedSingleton];
+    UserProfile *loggedInProfile = [userController m_loggedInUserProfile];
+    
+    [mixpanel track:@"App login" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                             [NSString stringWithFormat:@"%@",  cloudController.m_username], @"Username",
+                                             nil]];
+    
+    mixpanel.nameTag = cloudController.m_username;
+    
+    NSMutableDictionary *dict = [[NSDictionary dictionaryWithObjectsAndKeys:
+                                  cloudController.m_username, @"$username",
+                                  nil] mutableCopy];
+    
+    if ( loggedInProfile.m_firstName )
+    {
+        [dict setObject:loggedInProfile.m_firstName forKey:@"$first_name"];
+    }
+    if ( loggedInProfile.m_lastName )
+    {
+        [dict setObject:loggedInProfile.m_lastName forKey:@"$last_name"];
+    }
+    if ( loggedInProfile.m_email )
+    {
+        [dict setObject:loggedInProfile.m_email forKey:@"$email"];
+    }
+    
+    [mixpanel.people set:dict];
+    
+    NSString* _currentUserId = [NSString stringWithFormat:@"%d", loggedInProfile.m_userId];
+    [mixpanel identify:_currentUserId];
 }
 
 

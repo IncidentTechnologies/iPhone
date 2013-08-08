@@ -17,6 +17,8 @@
 #import <gTarAppCore/UserSongSession.h>
 #import <gTarAppCore/NSSong.h>
 #import <gTarAppCore/NSSongCreator.h>
+#import <gTarAppCore/XmlDom.h>
+#import "Mixpanel.h"
 
 
 @interface ViewController ()
@@ -300,6 +302,8 @@
         session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
         session.m_created = time(NULL);
         
+        [self logSongCreated:session];
+        
         [_songTableVC addSongSession:session];
         
         // Upload song to server. This also persists the upload in case of network failure
@@ -383,8 +387,6 @@
     _playPauseButton.selected = NO;
     
     [_playBackVC setUserSongSession:songSession];
-    [_playBackVC startSong];
-    [_playBackVC pauseSong];
 }
 
 - (void)playSong:(UserSongSession*)songSession
@@ -489,6 +491,23 @@
                                 [newVC didMoveToParentViewController:self];
                                 _currentMainVC = newVC;
                             }];
+}
+
+#pragma Mixpanel logging
+
+- (void)logSongCreated:(UserSongSession*)songSession
+{
+    
+    XmlDom * songDom = [[XmlDom alloc] initWithXmlString:songSession.m_xmpBlob];
+    NSSong * song = [[NSSong alloc] initWithXmlDom:songDom];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    // Don't bother adding song name since it will just be a generic "New Song #" at this point
+    [mixpanel track:@"Song Created" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                [NSNumber numberWithInteger:songSession.m_length], @"Song Length",
+                                                song.m_instrument, @"Instrument",
+                                                nil]];
 }
 
 @end

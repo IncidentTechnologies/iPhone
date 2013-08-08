@@ -1524,7 +1524,7 @@ extern Facebook * g_facebook;
     }
     if ( g_userController.m_loggedInUserProfile.m_lastName )
     {
-        [dict setObject:g_userController.m_loggedInUserProfile.m_firstName forKey:@"$last_name"];
+        [dict setObject:g_userController.m_loggedInUserProfile.m_lastName forKey:@"$last_name"];
     }
     if ( g_userController.m_loggedInUserProfile.m_email )
     {
@@ -1533,7 +1533,8 @@ extern Facebook * g_facebook;
     
     [mixpanel.people set:dict];
     
-    [mixpanel identify:mixpanel.distinctId];
+    NSString* _currentUserId = [NSString stringWithFormat:@"%d", g_userController.m_loggedInUserProfile.m_userId];
+    [mixpanel identify:_currentUserId];
 }
 
 #pragma mark - FacebookDelegate
