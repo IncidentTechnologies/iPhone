@@ -1,12 +1,12 @@
 //
-//  ViewController.m
+//  SketchPadViewController.m
 //  Sketch
 //
 //  Created by Franco on 6/6/13.
 //
 //
 
-#import "ViewController.h"
+#import "SketchPadViewController.h"
 #import "MenuViewController.h"
 #import "AudioViewController.h"
 #import "PlayerViewController.h"
@@ -21,7 +21,7 @@
 #import "Mixpanel.h"
 
 
-@interface ViewController ()
+@interface SketchPadViewController ()
 {
     GtarController* _gtarController;
     AudioController* _audioController;
@@ -60,7 +60,7 @@
 
 @end
 
-@implementation ViewController
+@implementation SketchPadViewController
 
 
 - (void)viewDidLoad

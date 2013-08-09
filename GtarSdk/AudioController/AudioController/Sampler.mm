@@ -55,12 +55,7 @@
         [self setupMonoStreamFormat];
         [self setupStereoStreamFormat];
         
-        if (![self loadSamplerWithName:name])
-        {
-            NSLog(@"Sampler initialization failed");
-            [self release];
-            return nil;
-        }
+        [self asynchLoadSamplerWithName:(NSString*)name withSelector:nil andOwner:nil];
     }
     
     return self;

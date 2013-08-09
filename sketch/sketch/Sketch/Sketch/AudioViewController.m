@@ -49,9 +49,10 @@
     sliderTrackMinImage = [sliderTrackMinImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 19) resizingMode:UIImageResizingModeStretch];
     sliderTrackMaxImage = [sliderTrackMinImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 19, 0, 18) resizingMode:UIImageResizingModeStretch];
     
+    UIImage *invisibleImage = [[UIImage imageNamed:@"InvisibleTrack.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1) resizingMode:UIImageResizingModeStretch];
     
-    [_volumeSlider setMinimumTrackImage:sliderTrackMinImage forState:UIControlStateNormal];
-    [_volumeSlider setMaximumTrackImage:sliderTrackMaxImage forState:UIControlStateNormal];
+    [_volumeSlider setMinimumTrackImage:invisibleImage forState:UIControlStateNormal];
+    [_volumeSlider setMaximumTrackImage:invisibleImage forState:UIControlStateNormal];
     [_volumeSlider setThumbImage:sliderKnob forState:UIControlStateNormal];
     
     // Set the MP volume view slider too
@@ -59,7 +60,7 @@
     
     NSArray * subViews = _mpVolumeView.subviews;
     
-    UIImage *invisibleImage = [[UIImage imageNamed:@"InvisibleTrack.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1) resizingMode:UIImageResizingModeStretch];
+    
     
     
     for (id current in subViews)
@@ -89,21 +90,42 @@
     
     [_audioRouteSwitch setImage:[UIImage imageNamed:@"Switch_Left.png"] forState:UIControlStateHighlighted | UIControlStateSelected];
     [_audioRouteSwitch setImage:[UIImage imageNamed:@"Switch_Right.png"] forState:UIControlStateHighlighted];
+    
+    
+    // Set Auto Layout constraints to _mpVolumeView fill up its superview (_mpVolumeContainer)
+    [_mpVolumeView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(_mpVolumeView);
+    
+    [_mpVolumeContainer addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mpVolumeView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    
+    [_mpVolumeContainer addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mpVolumeView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
 }
 
 - (void)viewDidLayoutSubviews
 {
-    _mpVolumeView.frame = _mpVolumeContainer.bounds;
+    [super viewDidLayoutSubviews];
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,7 +143,6 @@
 
 - (IBAction)changeAudioRoute:(UIButton*)button
 {
-    
     if (button.selected)
     {
         [_audioController RouteAudioToSpeaker];
@@ -167,7 +188,6 @@
     {
         // show custom volume view
         [_mpVolumeContainer setHidden:YES];
-        [_volumeTrackImage setHidden:YES];
         
         [_volumeSlider setHidden:NO];
     }
@@ -175,7 +195,6 @@
     {
         // show standard MPVolumeView
         [_mpVolumeContainer setHidden:NO];
-        [_volumeTrackImage setHidden:NO];
         
         [_volumeSlider setHidden:YES];
     }

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SketchPadViewController.h
 //  Sketch
 //
 //  Created by Franco on 6/6/13.
@@ -12,6 +12,6 @@
 #import <GtarController/GtarController.h>
 
 
-@interface ViewController : UIViewController <GtarControllerObserver, SongTableViewControllerDelegate>
+@interface SketchPadViewController : UIViewController <GtarControllerObserver, SongTableViewControllerDelegate>
 
 @end

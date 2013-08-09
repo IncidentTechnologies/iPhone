@@ -9,7 +9,7 @@
 #import "SignInViewController.h"
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "SketchPadViewController.h"
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserResponse.h>
@@ -29,13 +29,14 @@
 
 @interface SignInViewController ()
 {
-    ViewController* _mainViewController;
+    SketchPadViewController* _mainViewController;
     
     UserController* _userController;
     
     Facebook* _facebookController;
     
     BOOL _waitingForFacebook;
+    BOOL _signedIn;
 }
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
@@ -90,6 +91,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    _signedIn = NO;
     [self hideNotification];
     _signInUsername.text = @"";
     _signInPassword.text = @"";
@@ -100,6 +102,7 @@
         (_userController.m_loggedInFacebookToken != nil ||
          _userController.m_loggedInUsername != nil) )
     {
+        _signedIn = YES;
         // If we are not logged in, but we have cached creds, login.
         [_userController requestLoginUserCachedCallbackObj:self andCallbackSel:@selector(signinCallback:)];
         
@@ -152,7 +155,12 @@
     {
         [self logLoginEvent];
         
-        [self displayMainView];
+        if (!_signedIn)
+        {
+            // If this is YES, then alraedy displayed main view
+            _signedIn = YES;
+            [self displayMainView];
+        }
     }
     else
     {

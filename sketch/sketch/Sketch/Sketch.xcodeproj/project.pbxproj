@@ -18,7 +18,7 @@
 		9D42D81317613B8700614738 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D42D81217613B8700614738 /* Default-568h@2x.png */; };
 		9D42D81617613B8700614738 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D42D81417613B8700614738 /* MainStoryboard_iPhone.storyboard */; };
 		9D42D81917613B8700614738 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D42D81717613B8700614738 /* MainStoryboard_iPad.storyboard */; };
-		9D42D81C17613B8700614738 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9D42D81B17613B8700614738 /* ViewController.mm */; };
+		9D42D81C17613B8700614738 /* SketchPadViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9D42D81B17613B8700614738 /* SketchPadViewController.mm */; };
 		9D42D82417613B8800614738 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D82317613B8800614738 /* SenTestingKit.framework */; };
 		9D42D82517613B8800614738 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D7FC17613B8700614738 /* UIKit.framework */; };
 		9D42D82617613B8800614738 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D7FE17613B8700614738 /* Foundation.framework */; };
@@ -742,8 +742,8 @@
 		9D42D81217613B8700614738 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9D42D81517613B8700614738 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		9D42D81817613B8700614738 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		9D42D81A17613B8700614738 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9D42D81B17613B8700614738 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		9D42D81A17613B8700614738 /* SketchPadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchPadViewController.h; sourceTree = "<group>"; };
+		9D42D81B17613B8700614738 /* SketchPadViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SketchPadViewController.mm; sourceTree = "<group>"; };
 		9D42D82217613B8800614738 /* SketchTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SketchTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D42D82317613B8800614738 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		9D42D82B17613B8800614738 /* SketchTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SketchTests-Info.plist"; sourceTree = "<group>"; };
@@ -1538,8 +1538,8 @@
 				9D42D80C17613B8700614738 /* AppDelegate.m */,
 				9D42D81417613B8700614738 /* MainStoryboard_iPhone.storyboard */,
 				9D42D81717613B8700614738 /* MainStoryboard_iPad.storyboard */,
-				9D42D81A17613B8700614738 /* ViewController.h */,
-				9D42D81B17613B8700614738 /* ViewController.mm */,
+				9D42D81A17613B8700614738 /* SketchPadViewController.h */,
+				9D42D81B17613B8700614738 /* SketchPadViewController.mm */,
 				9D846E9B179E21F400A28FF6 /* SongTableViewController.h */,
 				9D846E9C179E21F400A28FF6 /* SongTableViewController.m */,
 				9D846E98179DB51200A28FF6 /* SongViewCell.h */,
@@ -3248,7 +3248,7 @@
 			files = (
 				9D42D80917613B8700614738 /* main.m in Sources */,
 				9D42D80D17613B8700614738 /* AppDelegate.m in Sources */,
-				9D42D81C17613B8700614738 /* ViewController.mm in Sources */,
+				9D42D81C17613B8700614738 /* SketchPadViewController.mm in Sources */,
 				9D846E9A179DB51300A28FF6 /* SongViewCell.m in Sources */,
 				9D846E9D179E21F500A28FF6 /* SongTableViewController.m in Sources */,
 				9D68DDEC17A2FD0B000B2056 /* PlayerViewController.m in Sources */,
