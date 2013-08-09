@@ -161,6 +161,13 @@ typedef enum GtarControllerEffect GtarControllerEffect;
 @interface GtarController : NSObject
 
 /*!
+ @abstract Returns a shared instance of the GtarController.
+ @discussion A shared singleton instance of the GtarController that can be
+    accessed globally via this class method.
+ */
++ (GtarController*)sharedInstance;
+
+/*!
  @abstract Information about the GtarController.
  @discussion Query this string for some basic properties about the version of the GtarController you are using.
  */

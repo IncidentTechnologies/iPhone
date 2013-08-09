@@ -253,7 +253,7 @@
     
     GtarPluckVelocity velocity = pluck.velocity;
     
-    [m_audioController PluckString:str-1 atFret:fret withAmplitude:(float)velocity/127.0f];
+    //[m_audioController PluckString:str-1 atFret:fret withAmplitude:(float)velocity/127.0f];
     
 }
 
@@ -261,37 +261,47 @@
 
 - (void)songModelEnterFrame:(NSNoteFrame*)frame
 {
-    
     for ( NSNote * note in frame.m_notes )
     {
-        
         if ( note.m_fret == GTAR_GUITAR_FRET_MUTED )
         {
             [m_audioController PluckMutedString:note.m_string-1];
-            
-            [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(0, note.m_string)];
         }
         else
         {
             [m_audioController PluckString:note.m_string-1 atFret:note.m_fret];
             
-            [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(note.m_fret, note.m_string)];
-        }        
+            //[m_gtarController turnOnLedAtPosition:GtarPositionMake(note.m_fret, note.m_string) withColor:GtarLedColorMake(GtarMaxLedIntensity, GtarMaxLedIntensity, GtarMaxLedIntensity)];
+            
+            //[self performSelector:@selector(delayedTurnLedOff:) withObject:note afterDelay:0.1];
+        }
     }
-    
 }
 
 - (void)songModelExitFrame:(NSNoteFrame*)frame
 {
 
-    [m_gtarController turnOffAllLeds];
-    
+}
+
+- (void)delayedTurnLedOff:(NSNote *)note
+{
+    [m_gtarController turnOffLedAtPosition:GtarPositionMake(note.m_fret, note.m_string)];
 }
 
 - (void)songModelNextFrame:(NSNoteFrame*)frame
 {
-
-    
+    [m_gtarController turnOffAllLeds];
+    for ( NSNote * note in frame.m_notes )
+    {
+        if ( note.m_fret == GTAR_GUITAR_FRET_MUTED )
+        {
+            [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(0, note.m_string)];
+        }
+        else
+        {
+            [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(note.m_fret, note.m_string)];
+        }
+    }
 }
 
 - (void)songModelFrameExpired:(NSNoteFrame*)frame
@@ -302,6 +312,7 @@
 
 - (void)songModelEndOfSong
 {
+    [m_gtarController turnOffAllLeds];
     
     [self stopMainEventLoop];
     

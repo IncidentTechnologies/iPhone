@@ -98,19 +98,22 @@
     // Start the progress bar at zero when we open up.
     _fillView.layer.transform = CATransform3DMakeTranslation( 0, 0, 0 );
     
-//    [_songPlaybackController observeGtarController:g_gtarController];
+    [_songPlaybackController observeGtarController:[GtarController sharedInstance]];
     
     [_songPlaybackController startWithXmpBlob:_userSongSession.m_xmpBlob];
     [_songPlaybackController stopMainEventLoop];
 
     // Change the current sample pack to the new one
-//    [g_audioController setSamplePackWithName:song.m_instrument];
     [_audioController setSamplePackWithName:_songPlaybackController.m_songModel.m_song.m_instrument withSelector:@selector(finishedLoadingSamplePack:) andOwner:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeInstrument:) name:@"InstrumentChanged" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"InstrumentChanged" object:nil];
 //    [_songPlaybackController ignoreGtarController:g_gtarController];
 }
 
@@ -460,6 +463,11 @@
                                                 _userSongSession.m_notes, @"Song Name",
                                                 [NSNumber numberWithInteger:_userSongSession.m_length], @"Song Length",
                                                 nil]];
+}
+
+- (void) didChangeInstrument:(NSNotification *)notification
+{
+    [self finishedLoadingSamplePack:[NSNumber numberWithBool:YES]];
 }
 
 @end

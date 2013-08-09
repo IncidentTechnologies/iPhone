@@ -93,12 +93,12 @@
     
     _instrumentsVC = [[InstrumentTableViewController alloc] initWithAudioController:_audioController];
     
-    _gtarController = [[GtarController alloc] init];
+    _gtarController = [GtarController sharedInstance];
     // By default it just outputs 'LevelError'
     _gtarController.logLevel = GtarControllerLogLevelAll;
     [_gtarController addObserver:self];
     
-    _tempo = 120;
+    _tempo = 120.0;
     _srTimeInterval = 60.0/_tempo/16.0;
     _timeCounterInterval = 0.2;
     
@@ -278,6 +278,9 @@
         // run timer at say every 1/8th notes, check how much time is left on timer to get how much time has passed, add this time to the advance timer. can choose a quantization setting and quantize your song if you want (just run timer every quantization interval and when note goes in record it without adjusting time passed, to make it quantize to nearest interval instead of just to one that has passed: check how much time has passed to figure out which quantizatoin interval is closer, the last one to have passed or the next one coming up.
         [_srTimer invalidate];
         _srTimer = [NSTimer scheduledTimerWithTimeInterval:(_srTimeInterval) target:self selector:@selector(serviceSongRecorderTimer:) userInfo:nil repeats:YES];
+        
+        // Turn off any LEDs that may be on.
+        [[GtarController sharedInstance] turnOffAllLeds];
         
         // Start Song recording
         _songRecorder = [[SongRecorder alloc] initWithTempo:_tempo];

@@ -108,6 +108,21 @@
     
 }
 
++ (GtarController *)sharedInstance
+{
+    static GtarController *sharedSingleton;
+    
+    @synchronized(self)
+    {
+        if (!sharedSingleton)
+        {
+            sharedSingleton = [[GtarController alloc] init];
+        }
+        
+        return sharedSingleton;
+    }
+}
+
 - (void)dealloc
 {
     

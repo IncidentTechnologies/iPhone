@@ -139,6 +139,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="24b-kR-lAk" firstAttribute="centerY" secondItem="8Qp-hT-5on" secondAttribute="centerY" type="user" id="3ry-ol-3HP"/>
+                                    <constraint firstAttribute="trailing" secondItem="24b-kR-lAk" secondAttribute="trailing" constant="54" id="7Rh-Mx-4Vn"/>
                                     <constraint firstItem="Wfl-mK-ZkP" firstAttribute="centerX" secondItem="10v-8s-kVt" secondAttribute="centerX" type="user" id="8gk-hv-eEY"/>
                                     <constraint firstItem="8Qp-hT-5on" firstAttribute="trailing" secondItem="avc-xk-myo" secondAttribute="trailing" type="default" id="BWD-5D-VmB"/>
                                     <constraint firstItem="g0P-bv-U6r" firstAttribute="width" secondItem="tir-wR-tLq" secondAttribute="width" type="user" id="CJe-Ih-afp"/>
@@ -147,7 +148,6 @@
                                     <constraint firstItem="pVc-ow-hn2" firstAttribute="top" secondItem="avc-xk-myo" secondAttribute="top" type="user" id="JYV-J7-zJh"/>
                                     <constraint firstItem="pVc-ow-hn2" firstAttribute="baseline" secondItem="g0P-bv-U6r" secondAttribute="baseline" type="user" id="Mjv-no-DQT"/>
                                     <constraint firstItem="Wfl-mK-ZkP" firstAttribute="leading" secondItem="tir-wR-tLq" secondAttribute="trailing" constant="1" type="user" id="NXG-St-pwr"/>
-                                    <constraint firstItem="pVc-ow-hn2" firstAttribute="centerX" secondItem="24b-kR-lAk" secondAttribute="centerX" type="user" id="PpP-QU-2X7"/>
                                     <constraint firstItem="ChL-h5-gMm" firstAttribute="centerY" secondItem="tir-wR-tLq" secondAttribute="centerY" type="default" id="QIn-CK-Wos"/>
                                     <constraint firstItem="8Qp-hT-5on" firstAttribute="top" secondItem="avc-xk-myo" secondAttribute="top" type="user" id="QRc-rS-wnc"/>
                                     <constraint firstItem="tir-wR-tLq" firstAttribute="top" secondItem="avc-xk-myo" secondAttribute="top" type="user" id="SPo-fa-3pZ"/>
@@ -245,14 +245,14 @@
                             <constraint firstItem="MAp-3s-x08" firstAttribute="centerX" secondItem="Xaq-it-Qsn" secondAttribute="centerX" type="user" id="8Y0-yK-1IV"/>
                             <constraint firstItem="TJX-K7-yF4" firstAttribute="leading" secondItem="fQ3-wl-je5" secondAttribute="trailing" constant="1" type="user" id="9xZ-K3-wHY"/>
                             <constraint firstItem="TJX-K7-yF4" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="B1J-3a-mLW"/>
-                            <constraint firstItem="3Rb-co-b0Z" firstAttribute="centerY" secondItem="TJX-K7-yF4" secondAttribute="centerY" type="user" id="CjZ-bn-Wjn"/>
+                            <constraint firstItem="TJX-K7-yF4" firstAttribute="centerX" secondItem="3Rb-co-b0Z" secondAttribute="centerX" type="user" id="CcB-S1-kOV"/>
                             <constraint firstItem="Rd5-4j-qf1" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="DBb-0L-qS8"/>
                             <constraint firstItem="MAp-3s-x08" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="ENZ-Hy-Fbs"/>
-                            <constraint firstItem="3Rb-co-b0Z" firstAttribute="centerX" secondItem="TJX-K7-yF4" secondAttribute="centerX" type="user" id="Gcs-dA-7oH"/>
                             <constraint firstItem="avc-xk-myo" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="LMZ-e4-89M"/>
                             <constraint firstItem="Rd5-4j-qf1" firstAttribute="leading" secondItem="uoQ-rK-O6f" secondAttribute="leading" type="user" id="NBj-eo-QSg"/>
                             <constraint firstItem="MAp-3s-x08" firstAttribute="centerY" secondItem="Xaq-it-Qsn" secondAttribute="centerY" type="user" id="NnL-b5-S1G"/>
                             <constraint firstItem="fQ3-wl-je5" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="Ska-1f-b08"/>
+                            <constraint firstItem="3Rb-co-b0Z" firstAttribute="centerY" secondItem="TJX-K7-yF4" secondAttribute="centerY" type="user" id="Tpq-MH-Z2j"/>
                             <constraint firstItem="uoQ-rK-O6f" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="WgE-6g-Cbt"/>
                             <constraint firstItem="TJX-K7-yF4" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="clJ-dE-K7f"/>
                             <constraint firstItem="uoQ-rK-O6f" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="daD-dc-ToC"/>
@@ -743,7 +743,6 @@
             <relationships>
                 <relationship kind="action" name="displayAudioView:"/>
                 <relationship kind="action" name="displayInstrumentList:"/>
-                <relationship kind="action" name="displayMenuView:"/>
                 <relationship kind="action" name="displaySongList:"/>
                 <relationship kind="action" name="togglePlayPause:" candidateClass="UIButton"/>
                 <relationship kind="action" name="toggleRecording:" candidateClass="UIButton"/>
