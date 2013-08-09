@@ -339,11 +339,13 @@
 
 - (IBAction)deleteCell:(UIButton *)sender
 {
+    // Get index of cell/song to be deleted
     SongViewCell* cell = (SongViewCell*)[[sender superview] superview];
     NSIndexPath* indexPath = [_songTableView indexPathForCell:cell];
     
     [self logSongDeleted:[_songList objectAtIndex:indexPath.row]];
     
+    // Delete object from list and tableview
     [_songList removeObjectAtIndex:indexPath.row];
     [_songTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }

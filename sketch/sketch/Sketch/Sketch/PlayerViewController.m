@@ -257,7 +257,8 @@
 
 - (void)setUserSongSession:(UserSongSession *)userSongSession
 {
-    _userSongSession = userSongSession;
+    [_userSongSession release];
+    _userSongSession = [userSongSession retain];
     
     // If view is hidden from record mode, unhide it.
     if (self.view.hidden)
