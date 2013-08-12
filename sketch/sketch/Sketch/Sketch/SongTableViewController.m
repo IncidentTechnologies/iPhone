@@ -194,6 +194,7 @@
     UserSongSession * session = [_songList objectAtIndex:indexPath.row];
     
     cell.songTitle.text = session.m_notes;
+    cell.songTitle.font = [UIFont boldSystemFontOfSize:22.0];
     
     NSInteger songLength = session.m_length;
     int minutes = songLength/60;
@@ -201,7 +202,8 @@
     cell.songLength.text = [NSMutableString stringWithFormat:@"%d:%02d", minutes, seconds];
     
     NSDate* created = [NSDate dateWithTimeIntervalSince1970:session.m_created];
-    cell.songDate.text = [NSDateFormatter localizedStringFromDate:created dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    NSString* date = [NSDateFormatter localizedStringFromDate:created dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    cell.songDate.text = [date stringByReplacingOccurrencesOfString:@"," withString:@" "];
         
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(159/255.0) green:(195/255.0) blue:(204/255.0) alpha:1];
@@ -279,7 +281,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 64;
 }
 
 #pragma mark - UITextField Delegate

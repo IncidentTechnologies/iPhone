@@ -108,6 +108,10 @@
                                              options:0
                                              metrics:nil
                                                views:views]];
+    
+    // Set the audio output to route through the speaker by default so we aren't stuck
+    // in a situation where it is outputing to lineout but the user doesn't hear/realize it.
+    [_audioController RouteAudioToSpeaker];
 }
 
 - (void)viewWillAppear:(BOOL)animated
