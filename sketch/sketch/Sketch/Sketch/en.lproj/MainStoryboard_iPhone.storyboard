@@ -553,7 +553,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FV9-9e-N2v">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="86" id="Y7c-WE-YOA"/>
-                                                <constraint firstAttribute="height" constant="47" id="hj8-kH-eVw"/>
+                                                <constraint firstAttribute="height" constant="47" type="user" id="hj8-kH-eVw"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <state key="normal" title="DELETE" backgroundImage="Delete_Button.png">
@@ -572,15 +572,15 @@
                                 </view>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="UWI-US-7Th" firstAttribute="top" secondItem="gBG-8g-tie" secondAttribute="top" type="default" id="8GP-AP-qNA"/>
-                                    <constraint firstItem="XUl-ZC-XSa" firstAttribute="top" secondItem="A5w-mh-y2F" secondAttribute="top" constant="9" id="9q7-0p-hZS"/>
+                                    <constraint firstAttribute="bottom" secondItem="gBG-8g-tie" secondAttribute="bottom" constant="9" id="AM1-36-UOe"/>
+                                    <constraint firstAttribute="trailing" secondItem="FV9-9e-N2v" secondAttribute="trailing" constant="19" id="C1D-la-6bZ"/>
                                     <constraint firstItem="UWI-US-7Th" firstAttribute="trailing" secondItem="FV9-9e-N2v" secondAttribute="trailing" type="default" id="CUd-lv-UlW"/>
                                     <constraint firstItem="gBG-8g-tie" firstAttribute="leading" secondItem="A5w-mh-y2F" secondAttribute="leading" constant="20" type="default" id="EVW-Lo-d3N"/>
-                                    <constraint firstItem="FV9-9e-N2v" firstAttribute="bottom" secondItem="UWI-US-7Th" secondAttribute="bottom" type="default" id="NIJ-TL-D0p"/>
+                                    <constraint firstItem="FV9-9e-N2v" firstAttribute="top" secondItem="XUl-ZC-XSa" secondAttribute="top" type="default" id="QVy-cy-xmn"/>
                                     <constraint firstItem="XUl-ZC-XSa" firstAttribute="leading" secondItem="A5w-mh-y2F" secondAttribute="leading" constant="20" type="default" id="Qh8-yu-poh"/>
-                                    <constraint firstAttribute="trailing" secondItem="UWI-US-7Th" secondAttribute="trailing" constant="19" id="RgA-kd-Wiv"/>
-                                    <constraint firstItem="UWI-US-7Th" firstAttribute="baseline" secondItem="gBG-8g-tie" secondAttribute="baseline" type="default" id="lwA-7W-lny"/>
-                                    <constraint firstItem="FV9-9e-N2v" firstAttribute="top" secondItem="A5w-mh-y2F" secondAttribute="top" constant="6" id="xVj-HE-P6x"/>
+                                    <constraint firstItem="UWI-US-7Th" firstAttribute="top" secondItem="gBG-8g-tie" secondAttribute="top" type="default" id="Rad-g6-TJV"/>
+                                    <constraint firstItem="XUl-ZC-XSa" firstAttribute="top" secondItem="A5w-mh-y2F" secondAttribute="top" constant="6" type="user" id="guz-U5-hku"/>
+                                    <constraint firstItem="UWI-US-7Th" firstAttribute="baseline" secondItem="gBG-8g-tie" secondAttribute="baseline" type="default" id="hgd-iP-4ZH"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="deleteButton" destination="FV9-9e-N2v" id="5U6-gN-2M3"/>
