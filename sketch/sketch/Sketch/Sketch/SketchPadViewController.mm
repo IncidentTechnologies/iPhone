@@ -57,6 +57,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *songLengthLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *playPauseImage;
 @property (weak, nonatomic) IBOutlet UIImageView *recordAndStopImage;
+@property (weak, nonatomic) IBOutlet UILabel *gTarNotConnectedLabel;
 
 @end
 
@@ -480,12 +481,12 @@
 
 - (void)gtarConnected
 {
-    
+    _gTarNotConnectedLabel.hidden = YES;
 }
 
 - (void)gtarDisconnected
 {
-    
+    _gTarNotConnectedLabel.hidden = NO;
 }
 
 - (void) songPlayBackEnded:(NSNotification *) notification

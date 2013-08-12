@@ -109,9 +109,9 @@
                                              metrics:nil
                                                views:views]];
     
-    // Set the audio output to route through the speaker by default so we aren't stuck
-    // in a situation where it is outputing to lineout but the user doesn't hear/realize it.
-    [_audioController RouteAudioToSpeaker];
+    // Set the audio output to route to default to avoid getting stuck in wrong
+    // audio state.
+    [_audioController RouteAudioToDefault];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -119,6 +119,8 @@
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
+    
+    [_audioController requestAudioRouteDetails];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

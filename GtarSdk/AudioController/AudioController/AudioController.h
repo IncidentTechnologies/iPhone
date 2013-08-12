@@ -58,6 +58,7 @@ typedef enum
 - (void) RouteAudioToSpeaker;
 - (void) RouteAudioToDefault;
 - (CFStringRef) GetAudioRoute;
+- (void) requestAudioRouteDetails;
 - (void) AnnounceAudioRouteChange;
 
 - (void) SetAudioSource:(AudioSource)audioSource;

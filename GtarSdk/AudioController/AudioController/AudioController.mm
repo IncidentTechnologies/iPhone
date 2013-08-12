@@ -617,14 +617,24 @@ void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID
         return;
     }
     
+    [ac requestAudioRouteDetails];
+    
+    [ac AnnounceAudioRouteChange];
+}
+
+// Request that a AudioRouteChange notification get sent out, even though
+// no actual change has happened. This is useful for getting the audio
+// route state info for initial UI setup.
+- (void) requestAudioRouteDetails
+{
+    CFStringRef newRoute = [self GetAudioRoute];
+    
     bool routeIsSpeaker = [(NSString*)newRoute isEqualToString:(NSString*)kAudioSessionOutputRoute_BuiltInSpeaker];
     
     NSDictionary *routeData = [NSDictionary dictionaryWithObjectsAndKeys:
-            [NSNumber numberWithBool:routeIsSpeaker], @"isRouteSpeaker",
-            (NSString*)newRoute, @"routeName", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"AudioRouteChange" object:ac userInfo:routeData];
-    
-    [ac AnnounceAudioRouteChange];
+                               [NSNumber numberWithBool:routeIsSpeaker], @"isRouteSpeaker",
+                               (NSString*)newRoute, @"routeName", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AudioRouteChange" object:self userInfo:routeData];
 }
 
 // Callback for audio interruption, e.g. a phone call coming in".
