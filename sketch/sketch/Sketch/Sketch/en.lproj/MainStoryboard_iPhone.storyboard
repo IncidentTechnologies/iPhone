@@ -528,7 +528,7 @@
                                                 <constraint firstAttribute="height" constant="21" id="cSw-dz-00F"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" white="0.54821510036496346" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3/23/12 1:30PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWI-US-7Th">
@@ -536,7 +536,7 @@
                                                 <constraint firstAttribute="width" constant="140" id="ujT-KD-Aft"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" white="0.55286268248175185" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Song Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XUl-ZC-XSa">
@@ -573,12 +573,12 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="gBG-8g-tie" secondAttribute="bottom" constant="9" id="AM1-36-UOe"/>
-                                    <constraint firstAttribute="trailing" secondItem="FV9-9e-N2v" secondAttribute="trailing" constant="19" id="C1D-la-6bZ"/>
-                                    <constraint firstItem="UWI-US-7Th" firstAttribute="trailing" secondItem="FV9-9e-N2v" secondAttribute="trailing" type="default" id="CUd-lv-UlW"/>
+                                    <constraint firstAttribute="trailing" secondItem="FV9-9e-N2v" secondAttribute="trailing" constant="19" type="user" id="C1D-la-6bZ"/>
                                     <constraint firstItem="gBG-8g-tie" firstAttribute="leading" secondItem="A5w-mh-y2F" secondAttribute="leading" constant="20" type="default" id="EVW-Lo-d3N"/>
-                                    <constraint firstItem="FV9-9e-N2v" firstAttribute="top" secondItem="XUl-ZC-XSa" secondAttribute="top" type="default" id="QVy-cy-xmn"/>
                                     <constraint firstItem="XUl-ZC-XSa" firstAttribute="leading" secondItem="A5w-mh-y2F" secondAttribute="leading" constant="20" type="default" id="Qh8-yu-poh"/>
                                     <constraint firstItem="UWI-US-7Th" firstAttribute="top" secondItem="gBG-8g-tie" secondAttribute="top" type="default" id="Rad-g6-TJV"/>
+                                    <constraint firstAttribute="trailing" secondItem="UWI-US-7Th" secondAttribute="trailing" constant="19" type="user" id="U8j-CK-cRe"/>
+                                    <constraint firstAttribute="centerY" secondItem="FV9-9e-N2v" secondAttribute="centerY" type="user" id="UAg-KL-ef0"/>
                                     <constraint firstItem="XUl-ZC-XSa" firstAttribute="top" secondItem="A5w-mh-y2F" secondAttribute="top" constant="6" type="user" id="guz-U5-hku"/>
                                     <constraint firstItem="UWI-US-7Th" firstAttribute="baseline" secondItem="gBG-8g-tie" secondAttribute="baseline" type="default" id="hgd-iP-4ZH"/>
                                 </constraints>
