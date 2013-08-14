@@ -714,6 +714,7 @@
 		9D8E3D391778F5DD0052AE20 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D8E3D381778F5DD0052AE20 /* instruments.plist */; };
 		9D8E3D3B1778FB050052AE20 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */; };
 		9D8E3D3D1778FB130052AE20 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */; };
+		9DFF0B1F17B9BB57005E5117 /* Sketchpad_ICON.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF0B1E17B9BB57005E5117 /* Sketchpad_ICON.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1454,6 +1455,7 @@
 		9D8E3D381778F5DD0052AE20 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
 		9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		9DFF0B1E17B9BB57005E5117 /* Sketchpad_ICON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sketchpad_ICON.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2415,6 +2417,7 @@
 				9D8B407F17B07459009D3FB4 /* Minus_Icon.png */,
 				9D8B408017B07459009D3FB4 /* Plus_Icon.png */,
 				9D846E7C179775B400A28FF6 /* Delete_Button.png */,
+				9DFF0B1E17B9BB57005E5117 /* Sketchpad_ICON.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -3212,6 +3215,7 @@
 				9D8B408117B07459009D3FB4 /* Minus_Icon.png in Resources */,
 				9D8B408217B07459009D3FB4 /* Plus_Icon.png in Resources */,
 				9D8B408817B17566009D3FB4 /* Facebook_Button.png in Resources */,
+				9DFF0B1F17B9BB57005E5117 /* Sketchpad_ICON.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

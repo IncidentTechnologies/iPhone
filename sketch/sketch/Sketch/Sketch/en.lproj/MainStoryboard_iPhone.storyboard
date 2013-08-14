@@ -27,6 +27,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rd5-4j-qf1">
+                                <color key="backgroundColor" white="0.23503079379562045" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoQ-rK-O6f" userLabel="DropShadowView">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -237,9 +240,6 @@ Connected</string>
                                     <action selector="togglePlayPause:" destination="2" eventType="touchUpInside" id="8fJ-Fb-Kbf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rd5-4j-qf1">
-                                <color key="backgroundColor" white="0.23503079379562045" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Play_Icon.png" highlightedImage="Pause_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xaq-it-Qsn">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="0xv-6e-FCH"/>
@@ -286,6 +286,8 @@ Connected</string>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="dropShadowBottom" destination="uoQ-rK-O6f" id="u5N-zP-P8q"/>
+                        <outlet property="dropShadowTop" destination="avc-xk-myo" id="vxN-xs-PHZ"/>
                         <outlet property="gTarNotConnectedLabel" destination="9wp-2z-xOz" id="UFf-Z2-BVi"/>
                         <outlet property="mainContentView" destination="Rd5-4j-qf1" id="jxQ-F1-KcH"/>
                         <outlet property="playBackView" destination="fQ3-wl-je5" id="4ky-dN-ajx"/>
@@ -660,10 +662,10 @@ Connected</string>
                             <constraint firstItem="2eo-Pa-8Rg" firstAttribute="leading" secondItem="Ck9-Nk-DdN" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="1Yu-7j-7GT"/>
                             <constraint firstAttribute="centerX" secondItem="2eo-Pa-8Rg" secondAttribute="centerX" type="user" id="9Bp-wd-syA"/>
                             <constraint firstAttribute="centerX" secondItem="2eo-Pa-8Rg" secondAttribute="centerX" type="user" id="GFn-3m-dSo"/>
+                            <constraint firstItem="2eo-Pa-8Rg" firstAttribute="top" secondItem="Ck9-Nk-DdN" secondAttribute="top" constant="71" id="GV6-MN-EVR"/>
                             <constraint firstAttribute="centerX" secondItem="x55-4g-ZOi" secondAttribute="centerX" type="user" id="P0o-GN-fvP"/>
-                            <constraint firstItem="x55-4g-ZOi" firstAttribute="top" secondItem="2eo-Pa-8Rg" secondAttribute="bottom" constant="40" type="user" id="aIP-Fx-u4Z"/>
-                            <constraint firstAttribute="bottom" secondItem="x55-4g-ZOi" secondAttribute="bottom" constant="61" type="user" id="elA-Yd-57d"/>
                             <constraint firstAttribute="trailing" secondItem="2eo-Pa-8Rg" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="rS9-Cn-PTt"/>
+                            <constraint firstAttribute="bottom" secondItem="x55-4g-ZOi" secondAttribute="bottom" constant="45" id="toO-9R-4i4"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
@@ -727,6 +729,7 @@ Connected</string>
         <class className="MenuViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuViewController.h"/>
             <relationships>
+                <relationship kind="action" name="logout:"/>
                 <relationship kind="outlet" name="signedInLabel" candidateClass="UILabel"/>
             </relationships>
         </class>

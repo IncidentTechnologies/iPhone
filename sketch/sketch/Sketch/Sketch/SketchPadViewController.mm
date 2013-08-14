@@ -20,6 +20,7 @@
 #import <gTarAppCore/XmlDom.h>
 #import "Mixpanel.h"
 
+#import <QuartzCore/QuartzCore.h>
 
 @interface SketchPadViewController ()
 {
@@ -58,6 +59,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *playPauseImage;
 @property (weak, nonatomic) IBOutlet UIImageView *recordAndStopImage;
 @property (weak, nonatomic) IBOutlet UILabel *gTarNotConnectedLabel;
+@property (weak, nonatomic) IBOutlet UIView *dropShadowTop;
+@property (weak, nonatomic) IBOutlet UIView *dropShadowBottom;
 
 @end
 
@@ -102,6 +105,21 @@
     _tempo = 120.0;
     _srTimeInterval = 60.0/_tempo/16.0;
     _timeCounterInterval = 0.2;
+    
+    // Prevent app from timing out
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+
+    // Add drop shadows to top and bottom bars
+    _dropShadowTop.layer.shadowRadius = 4.0;
+    _dropShadowTop.layer.shadowColor = [[UIColor blackColor] CGColor];
+    _dropShadowTop.layer.shadowOffset = CGSizeMake(0, 0);
+    _dropShadowTop.layer.shadowOpacity = 0.5;
+    
+    _dropShadowBottom.layer.shadowRadius = 4.0;
+    _dropShadowBottom.layer.shadowColor = [[UIColor blackColor] CGColor];
+    _dropShadowBottom.layer.shadowOffset = CGSizeMake(0, 0);
+    _dropShadowBottom.layer.shadowOpacity = 0.5;
+    
     
     //_songRecorder.m_song.m_instrument = [[_audioController getInstrumentNames] objectAtIndex:[_audioController getCurrentSamplePackIndex]];
 }
