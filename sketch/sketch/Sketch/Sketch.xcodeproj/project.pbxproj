@@ -728,7 +728,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9D42D7F917613B8700614738 /* Sketch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sketch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D42D7F917613B8700614738 /* SketchPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D42D7FC17613B8700614738 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9D42D7FE17613B8700614738 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9D42D80017613B8700614738 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1509,7 +1509,7 @@
 		9D42D7FA17613B8700614738 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9D42D7F917613B8700614738 /* Sketch.app */,
+				9D42D7F917613B8700614738 /* SketchPad.app */,
 				9D42D82217613B8800614738 /* SketchTests.octest */,
 			);
 			name = Products;
@@ -2476,9 +2476,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9D42D7F817613B8700614738 /* Sketch */ = {
+		9D42D7F817613B8700614738 /* SketchPad */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9D42D83417613B8800614738 /* Build configuration list for PBXNativeTarget "Sketch" */;
+			buildConfigurationList = 9D42D83417613B8800614738 /* Build configuration list for PBXNativeTarget "SketchPad" */;
 			buildPhases = (
 				9D42D7F517613B8700614738 /* Sources */,
 				9D42D7F617613B8700614738 /* Frameworks */,
@@ -2488,9 +2488,9 @@
 			);
 			dependencies = (
 			);
-			name = Sketch;
+			name = SketchPad;
 			productName = Sketch;
-			productReference = 9D42D7F917613B8700614738 /* Sketch.app */;
+			productReference = 9D42D7F917613B8700614738 /* SketchPad.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9D42D82117613B8800614738 /* SketchTests */ = {
@@ -2532,7 +2532,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9D42D7F817613B8700614738 /* Sketch */,
+				9D42D7F817613B8700614738 /* SketchPad */,
 				9D42D82117613B8800614738 /* SketchTests */,
 			);
 		};
@@ -3283,7 +3283,7 @@
 /* Begin PBXTargetDependency section */
 		9D42D82817613B8800614738 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9D42D7F817613B8700614738 /* Sketch */;
+			target = 9D42D7F817613B8700614738 /* SketchPad */;
 			targetProxy = 9D42D82717613B8800614738 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -3468,7 +3468,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9D42D83417613B8800614738 /* Build configuration list for PBXNativeTarget "Sketch" */ = {
+		9D42D83417613B8800614738 /* Build configuration list for PBXNativeTarget "SketchPad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D42D83517613B8800614738 /* Debug */,
