@@ -27,6 +27,7 @@
 @synthesize m_combo;
 @synthesize m_xmpFileId;
 @synthesize m_created;
+@synthesize m_length;
 
 @synthesize m_notes;
 @synthesize m_xmpBlob;
@@ -112,6 +113,7 @@
     [coder encodeInteger:m_combo forKey:@"Combo"];
     [coder encodeInteger:m_xmpFileId forKey:@"XmpFileId"];
     [coder encodeInteger:m_created forKey:@"Created"];
+    [coder encodeInteger:m_length forKey:@"Length"];
 
     [coder encodeObject:m_notes	forKey:@"Notes"];
     [coder encodeObject:m_xmpBlob forKey:@"XmpBlob"];
@@ -140,6 +142,7 @@
 		m_combo = [coder decodeIntegerForKey:@"Combo"];
 		m_xmpFileId = [coder decodeIntegerForKey:@"XmpFileId"];
         m_created = [coder decodeIntegerForKey:@"Created"];
+        m_length = [coder decodeIntForKey:@"Length"];
 		
 		self.m_notes = [coder decodeObjectForKey:@"Notes"];
 		self.m_xmpBlob = [coder decodeObjectForKey:@"XmpBlob"];

@@ -48,6 +48,7 @@
 @property (nonatomic, assign) NSInteger m_combo;
 @property (nonatomic, assign) NSInteger m_xmpFileId;
 @property (nonatomic, assign) NSInteger m_created;
+@property (nonatomic, assign) NSInteger m_length;
 
 @property (nonatomic, retain) NSString * m_notes;
 @property (nonatomic, retain) NSString * m_xmpBlob;
