@@ -105,9 +105,6 @@
     _tempo = 120.0;
     _srTimeInterval = 60.0/_tempo/16.0;
     _timeCounterInterval = 0.2;
-    
-    // Prevent app from timing out
-    [UIApplication sharedApplication].idleTimerDisabled = YES;
 
     // Add drop shadows to top and bottom bars
     _dropShadowTop.layer.shadowRadius = 4.0;
@@ -500,11 +497,17 @@
 - (void)gtarConnected
 {
     _gTarNotConnectedLabel.hidden = YES;
+    
+    // Prevent app from timing out due to touch inactivity (could be jamming)
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 
 - (void)gtarDisconnected
 {
     _gTarNotConnectedLabel.hidden = NO;
+    
+    // re-enable the gTar
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
 - (void) songPlayBackEnded:(NSNotification *) notification

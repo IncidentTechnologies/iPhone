@@ -102,11 +102,11 @@
     
     [_songPlaybackController startWithXmpBlob:_userSongSession.m_xmpBlob];
     [_songPlaybackController stopMainEventLoop];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeInstrument:) name:@"InstrumentChanged" object:nil];
 
     // Change the current sample pack to the new one
     [_audioController setSamplePackWithName:_songPlaybackController.m_songModel.m_song.m_instrument withSelector:@selector(finishedLoadingSamplePack:) andOwner:self];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeInstrument:) name:@"InstrumentChanged" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -281,6 +281,7 @@
     [_songPlaybackController startWithXmpBlob:_userSongSession.m_xmpBlob];
     [_songPlaybackController pauseSong];
     
+    [_audioController setSamplePackWithName:_songPlaybackController.m_songModel.m_song.m_instrument withSelector:@selector(finishedLoadingSamplePack:) andOwner:self];
 }
 
 - (void)startSong
