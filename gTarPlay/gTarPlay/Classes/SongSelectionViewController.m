@@ -35,6 +35,14 @@ extern AudioController *g_audioController;
 extern UserController *g_userController;
 extern GtarController *g_gtarController;
 
+typedef enum
+{
+    SortByTitleAscending,
+    SortByTitleDescending,
+    SortByArtistAscending,
+    SortByArtistDescending
+} SortOrder;
+
 @interface SongSelectionViewController ()
 {
     VolumeViewController *_volumeViewController;
@@ -52,7 +60,15 @@ extern GtarController *g_gtarController;
     BOOL _searching;
     
     NSInteger _nextUserSong;
+    
+    SortOrder _sortOrder;
 }
+
+@property (retain, nonatomic) IBOutlet UIButton *sortByTitleButtton;
+@property (retain, nonatomic) IBOutlet UIButton *sortByArtistButton;
+@property (retain, nonatomic) IBOutlet UIImageView *sortByTitleArrow;
+@property (retain, nonatomic) IBOutlet UIImageView *sortByArtistArrow;
+
 @end
 
 @implementation SongSelectionViewController
@@ -121,6 +137,12 @@ extern GtarController *g_gtarController;
     }
     
     [g_gtarController addObserver:self];
+    
+    // Initialize sorting order
+    _sortOrder = SortByTitleAscending;
+    _sortByArtistArrow.hidden = YES;
+    _sortByTitleButtton.selected = YES;
+    _sortByTitleArrow.highlighted = YES;
 }
 
 - (void)viewDidLayoutSubviews
@@ -189,6 +211,10 @@ extern GtarController *g_gtarController;
     [_searchBar release];
     [_fullscreenButton release];
     [_startButton release];
+    [_sortByTitleArrow release];
+    [_sortByArtistArrow release];
+    [_sortByArtistButton release];
+    [_sortByTitleButtton release];
     [super dealloc];
 }
 
@@ -306,6 +332,36 @@ extern GtarController *g_gtarController;
     [_fullscreenButton setHidden:YES];
 }
 
+- (IBAction)sortByArtistButtonClicked:(UIButton*)sender
+{
+    sender.selected = !sender.selected;
+    _sortByTitleButtton.selected = NO;
+    
+    _sortOrder = sender.selected ? SortByArtistAscending : SortByArtistDescending;
+    
+    // Sort Arrows
+    _sortByTitleArrow.hidden = YES;
+    _sortByArtistArrow.hidden = NO;
+    _sortByArtistArrow.highlighted = sender.selected;
+    
+    [self refreshDisplayedUserSongList];
+}
+
+- (IBAction)sortByTitleButtonClicked:(UIButton*)sender
+{
+    sender.selected = !sender.selected;
+    _sortByArtistButton.selected = NO;
+    
+    _sortOrder = sender.selected ? SortByTitleAscending : SortByTitleDescending;
+    
+    // Sort Arrows
+    _sortByArtistArrow.hidden = YES;
+    _sortByTitleArrow.hidden = NO;
+    _sortByTitleArrow.highlighted = sender.selected;
+    
+    [self refreshDisplayedUserSongList];
+}
+
 #pragma mark - UserSong management
 
 - (void)refreshSongList
@@ -350,11 +406,9 @@ extern GtarController *g_gtarController;
 
 - (void)setUserSongArray:(NSArray *)userSongArray
 {
-    [_userSongArray release];
+    [_userSongArray autorelease];
     
     _userSongArray = [userSongArray retain];
-    
-    [self sortByTitle];
     
     // refresh the search list with the new songs
     if ( _searching == YES )
@@ -369,12 +423,17 @@ extern GtarController *g_gtarController;
 {
     if ( _searching == YES )
     {
-        _displayedUserSongArray = _searchedUserSongArray;
+        [_displayedUserSongArray autorelease];
+        _displayedUserSongArray = [_searchedUserSongArray retain];
     }
     else
     {
-        _displayedUserSongArray = _userSongArray;
+        [_displayedUserSongArray autorelease];
+        _displayedUserSongArray = [_userSongArray retain];
     }
+    
+    [self sortSongList];
+    
     [_songListTable reloadData];
 }
 
@@ -641,24 +700,32 @@ extern GtarController *g_gtarController;
 
 #pragma mark - Sort, Search
 
-- (void)sortByArtist
+- (void)sortSongList
 {
-    NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:YES] autorelease];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *sortedArray = [_userSongArray sortedArrayUsingDescriptors:sortDescriptors];
+    NSSortDescriptor *sortDescriptor;
+    switch (_sortOrder) {
+        case SortByTitleAscending:
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:YES] autorelease];
+            break;
+        case SortByTitleDescending:
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:NO] autorelease];
+            break;
+        case SortByArtistAscending:
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:YES] autorelease];
+            break;
+        case SortByArtistDescending:
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:NO] autorelease];
+            break;
+            
+        default:
+            break;
+    }
     
-    [_userSongArray release];
-    _userSongArray = [sortedArray retain];
-}
-
-- (void)sortByTitle
-{
-    NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:YES] autorelease];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *sortedArray = [_userSongArray sortedArrayUsingDescriptors:sortDescriptors];
+    NSArray *sortedArray = [_displayedUserSongArray sortedArrayUsingDescriptors:sortDescriptors];
     
-    [_userSongArray release];
-    _userSongArray = [sortedArray retain];
+    [_displayedUserSongArray autorelease];
+    _displayedUserSongArray = [sortedArray retain];
 }
 
 - (void)sortByScore
