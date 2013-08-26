@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D1A907917C6EA490094EF7F /* Sketchpad_ICON57.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D1A907817C6EA490094EF7F /* Sketchpad_ICON57.png */; };
+		9D1A907B17C6EA4D0094EF7F /* Sketchpad_ICON114.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D1A907A17C6EA4D0094EF7F /* Sketchpad_ICON114.png */; };
 		9D42D7FD17613B8700614738 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D7FC17613B8700614738 /* UIKit.framework */; };
 		9D42D7FF17613B8700614738 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D7FE17613B8700614738 /* Foundation.framework */; };
 		9D42D80117613B8700614738 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42D80017613B8700614738 /* CoreGraphics.framework */; };
@@ -713,7 +715,6 @@
 		9D8E3D391778F5DD0052AE20 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D8E3D381778F5DD0052AE20 /* instruments.plist */; };
 		9D8E3D3B1778FB050052AE20 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */; };
 		9D8E3D3D1778FB130052AE20 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */; };
-		9DFF0B1F17B9BB57005E5117 /* Sketchpad_ICON.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF0B1E17B9BB57005E5117 /* Sketchpad_ICON.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -727,7 +728,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9D42D7F917613B8700614738 /* SketchPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D1A907817C6EA490094EF7F /* Sketchpad_ICON57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sketchpad_ICON57.png; sourceTree = SOURCE_ROOT; };
+		9D1A907A17C6EA4D0094EF7F /* Sketchpad_ICON114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sketchpad_ICON114.png; sourceTree = SOURCE_ROOT; };
+		9D42D7F917613B8700614738 /* gTar Sketch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gTar Sketch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D42D7FC17613B8700614738 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9D42D7FE17613B8700614738 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9D42D80017613B8700614738 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1453,7 +1456,6 @@
 		9D8E3D381778F5DD0052AE20 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
 		9D8E3D3A1778FB050052AE20 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9D8E3D3C1778FB130052AE20 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
-		9DFF0B1E17B9BB57005E5117 /* Sketchpad_ICON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sketchpad_ICON.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1507,7 +1509,7 @@
 		9D42D7FA17613B8700614738 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9D42D7F917613B8700614738 /* SketchPad.app */,
+				9D42D7F917613B8700614738 /* gTar Sketch.app */,
 				9D42D82217613B8800614738 /* SketchTests.octest */,
 			);
 			name = Products;
@@ -2395,6 +2397,8 @@
 		9D846E7B1797759600A28FF6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9D1A907A17C6EA4D0094EF7F /* Sketchpad_ICON114.png */,
+				9D1A907817C6EA490094EF7F /* Sketchpad_ICON57.png */,
 				9D8B408717B17566009D3FB4 /* Facebook_Button.png */,
 				9D8B407B17B03704009D3FB4 /* VolumeKnob.png */,
 				9D8B407D17B03760009D3FB4 /* SliderEndCap.png */,
@@ -2414,7 +2418,6 @@
 				9D8B407F17B07459009D3FB4 /* Minus_Icon.png */,
 				9D8B408017B07459009D3FB4 /* Plus_Icon.png */,
 				9D846E7C179775B400A28FF6 /* Delete_Button.png */,
-				9DFF0B1E17B9BB57005E5117 /* Sketchpad_ICON.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -2473,9 +2476,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9D42D7F817613B8700614738 /* SketchPad */ = {
+		9D42D7F817613B8700614738 /* gTar Sketch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9D42D83417613B8800614738 /* Build configuration list for PBXNativeTarget "SketchPad" */;
+			buildConfigurationList = 9D42D83417613B8800614738 /* Build configuration list for PBXNativeTarget "gTar Sketch" */;
 			buildPhases = (
 				9D42D7F517613B8700614738 /* Sources */,
 				9D42D7F617613B8700614738 /* Frameworks */,
@@ -2485,9 +2488,9 @@
 			);
 			dependencies = (
 			);
-			name = SketchPad;
+			name = "gTar Sketch";
 			productName = Sketch;
-			productReference = 9D42D7F917613B8700614738 /* SketchPad.app */;
+			productReference = 9D42D7F917613B8700614738 /* gTar Sketch.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9D42D82117613B8800614738 /* SketchTests */ = {
@@ -2529,7 +2532,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9D42D7F817613B8700614738 /* SketchPad */,
+				9D42D7F817613B8700614738 /* gTar Sketch */,
 				9D42D82117613B8800614738 /* SketchTests */,
 			);
 		};
@@ -3209,9 +3212,10 @@
 				9D8B408117B07459009D3FB4 /* Minus_Icon.png in Resources */,
 				9D8B408217B07459009D3FB4 /* Plus_Icon.png in Resources */,
 				9D8B408817B17566009D3FB4 /* Facebook_Button.png in Resources */,
-				9DFF0B1F17B9BB57005E5117 /* Sketchpad_ICON.png in Resources */,
 				9D85F71C17BC478000174AA7 /* Default@2x.png in Resources */,
 				9D85F71E17BC482100174AA7 /* Default-568h@2x.png in Resources */,
+				9D1A907917C6EA490094EF7F /* Sketchpad_ICON57.png in Resources */,
+				9D1A907B17C6EA4D0094EF7F /* Sketchpad_ICON114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3279,7 +3283,7 @@
 /* Begin PBXTargetDependency section */
 		9D42D82817613B8800614738 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9D42D7F817613B8700614738 /* SketchPad */;
+			target = 9D42D7F817613B8700614738 /* gTar Sketch */;
 			targetProxy = 9D42D82717613B8800614738 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -3320,6 +3324,74 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9D1A907517C6CB2F0094EF7F /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		9D1A907617C6CB2F0094EF7F /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Sketch/Sketch-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
+				INFOPLIST_FILE = "Sketch/Sketch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
+		9D1A907717C6CB2F0094EF7F /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Sketch.app/Sketch";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Sketch/Sketch-Prefix.pch";
+				INFOPLIST_FILE = "SketchTests/SketchTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Distribution;
+		};
 		9D42D83217613B8800614738 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3393,7 +3465,7 @@
 					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3413,7 +3485,7 @@
 					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/sketch-ammfzjovkvrsymelklqlmgngwiip/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -3460,27 +3532,30 @@
 			buildConfigurations = (
 				9D42D83217613B8800614738 /* Debug */,
 				9D42D83317613B8800614738 /* Release */,
+				9D1A907517C6CB2F0094EF7F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
-		9D42D83417613B8800614738 /* Build configuration list for PBXNativeTarget "SketchPad" */ = {
+		9D42D83417613B8800614738 /* Build configuration list for PBXNativeTarget "gTar Sketch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D42D83517613B8800614738 /* Debug */,
 				9D42D83617613B8800614738 /* Release */,
+				9D1A907617C6CB2F0094EF7F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 		9D42D83717613B8800614738 /* Build configuration list for PBXNativeTarget "SketchTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D42D83817613B8800614738 /* Debug */,
 				9D42D83917613B8800614738 /* Release */,
+				9D1A907717C6CB2F0094EF7F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 /* End XCConfigurationList section */
 	};
