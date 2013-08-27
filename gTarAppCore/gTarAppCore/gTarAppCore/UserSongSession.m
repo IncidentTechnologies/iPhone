@@ -28,6 +28,7 @@
 @synthesize m_xmpFileId;
 @synthesize m_created;
 @synthesize m_length;
+@synthesize m_appId;
 
 @synthesize m_notes;
 @synthesize m_xmpBlob;

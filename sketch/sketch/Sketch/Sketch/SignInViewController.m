@@ -38,6 +38,10 @@
     BOOL _waitingForFacebook;
     BOOL _signedIn;
 }
+
+
+@property (strong, nonatomic) IBOutlet UIView *gTarLoadingView;
+@property (strong, nonatomic) IBOutlet UIView *sketchLoadingView;
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (weak, nonatomic) IBOutlet UIView *signInView;
@@ -87,15 +91,50 @@
     
     _signUpView.hidden = YES;
     _spinner.hidden = YES;
+    
+    [self.view addSubview:_sketchLoadingView];
+    [self.view addSubview:_gTarLoadingView];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    _sketchLoadingView.frame = self.view.frame;
+    _gTarLoadingView.frame = self.view.frame;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     _signedIn = NO;
     [self hideNotification];
     _signInUsername.text = @"";
     _signInPassword.text = @"";
     
+    [self performSelector:@selector(transistionLoadingScreen) withObject:nil afterDelay:1.0];
+}
+
+- (void)transistionLoadingScreen
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(sketchLoadingScreen)];
+    
+    _gTarLoadingView.alpha = 0.0f;
+    
+    [UIView commitAnimations];
+}
+
+- (void)sketchLoadingScreen
+{
+    [self performSelector:@selector(loadingScreenDone) withObject:nil afterDelay:0.5];
+}
+
+- (void)loadingScreenDone
+{
     CloudController* cloudController  = [CloudController  sharedSingleton];
     
     if ( cloudController.m_loggedIn == NO &&
@@ -108,6 +147,11 @@
         
         // Assume for now that we are actually logged in for now. The callback can revert this if needed
         [self displayMainView];
+    }
+    else
+    {
+        // Not logged in, hide the loading screen to display the main views underneath
+        _sketchLoadingView.hidden = YES;
     }
 }
 
@@ -432,7 +476,7 @@
 - (void)displayMainView
 {
     _mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainScreenViewControllerID"];
-    [self.navigationController pushViewController:_mainViewController animated:YES];
+    [self.navigationController pushViewController:_mainViewController animated:NO];
 }
 
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString

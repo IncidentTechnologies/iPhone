@@ -22,6 +22,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#define USER_SONG_SESSION_APP_ID 2
+
 @interface SketchPadViewController ()
 {
     GtarController* _gtarController;
@@ -330,6 +332,7 @@
         }
         UserSongSession * session = [[UserSongSession alloc] init];
         
+        session.m_appId = USER_SONG_SESSION_APP_ID;
         session.m_length = songPlayTime;
         session.m_notes = [self getNewSongName];
         session.m_created = [[NSDate date] timeIntervalSince1970];
