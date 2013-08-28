@@ -37,6 +37,7 @@
 #import "FirmwareModalViewController.h"
 #import "PlayerViewController.h"
 #import "FreePlayController.h"
+#import "StoreViewController.h"
 
 extern CloudController * g_cloudController;
 extern FileController * g_fileController;
@@ -556,7 +557,11 @@ extern Facebook * g_facebook;
 
 - (IBAction)menuStoreButtonClicked:(id)sender
 {
-    // Start store mode
+    StoreViewController *svc = [[StoreViewController alloc] init];
+    
+    [self.navigationController pushViewController:svc animated:YES];
+	
+	[svc release];
     
 }
 

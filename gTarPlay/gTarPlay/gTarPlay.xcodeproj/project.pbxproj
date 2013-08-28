@@ -427,6 +427,13 @@
 		9D6DA779172A276300EB96C7 /* LightsImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DA777172A276300EB96C7 /* LightsImage.png */; };
 		9D846E791797711600A28FF6 /* gTarIcon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC3B6E1790DACD00DDD603 /* gTarIcon_114x114.png */; };
 		9D846E7A1797711600A28FF6 /* gTarIcon_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DCC3B6A1790D8B700DDD603 /* gTarIcon_57x57.png */; };
+		9D85CD2C17CE8CF60064CE79 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D85CD2B17CE8CF60064CE79 /* InAppPurchaseManager.m */; };
+		9D85CD2D17CE8CF60064CE79 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D85CD2B17CE8CF60064CE79 /* InAppPurchaseManager.m */; };
+		9D85CD2F17CE8D8E0064CE79 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D85CD2E17CE8D8E0064CE79 /* StoreKit.framework */; };
+		9D85CD3317CE8F890064CE79 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D85CD3117CE8F890064CE79 /* StoreViewController.m */; };
+		9D85CD3417CE8F890064CE79 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D85CD3117CE8F890064CE79 /* StoreViewController.m */; };
+		9D85CD3517CE8F890064CE79 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D85CD3217CE8F890064CE79 /* StoreViewController.xib */; };
+		9D85CD3617CE8F890064CE79 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D85CD3217CE8F890064CE79 /* StoreViewController.xib */; };
 		9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137D1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3137A1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m */; };
 		9DA3137E1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3137B1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib */; };
@@ -2041,6 +2048,12 @@
 		9D63D7FA1550861600FABD5B /* Rock Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Rock Guitar 80.mp3"; path = "Rock Guitar/Rock Guitar 80.mp3"; sourceTree = "<group>"; };
 		9D64729D1741DEEE00C63B1B /* LightsArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightsArrow.png; path = Resources/Images/Freeplay/LightsArrow.png; sourceTree = "<group>"; };
 		9D6DA777172A276300EB96C7 /* LightsImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightsImage.png; path = Resources/Images/Freeplay/LightsImage.png; sourceTree = "<group>"; };
+		9D85CD2A17CE8CF60064CE79 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
+		9D85CD2B17CE8CF60064CE79 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
+		9D85CD2E17CE8D8E0064CE79 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		9D85CD3017CE8F890064CE79 /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreViewController.h; sourceTree = "<group>"; };
+		9D85CD3117CE8F890064CE79 /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreViewController.m; sourceTree = "<group>"; };
+		9D85CD3217CE8F890064CE79 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
 		9D9BAE9C15266CD900AA62C9 /* RGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGBColor.h; sourceTree = "<group>"; };
 		9D9BAE9D15266CD900AA62C9 /* RGBColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGBColor.m; sourceTree = "<group>"; };
 		9DA313791704DD8400CFF104 /* InstrumentsAndEffectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentsAndEffectsViewController.h; sourceTree = "<group>"; };
@@ -2537,6 +2550,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D85CD2F17CE8D8E0064CE79 /* StoreKit.framework in Frameworks */,
 				EC24DC27161A847A00016B78 /* libAudioController.a in Frameworks */,
 				EC24DC28161A847A00016B78 /* libgTarAppCore.a in Frameworks */,
 				EC24DC29161A847A00016B78 /* libGtarController.a in Frameworks */,
@@ -2583,6 +2597,7 @@
 		080E96DDFE201D6D7F000001 /* App Source */ = {
 			isa = PBXGroup;
 			children = (
+				9D85CD2917CE8BB50064CE79 /* Store */,
 				EC0BAD8116F1791300E567A6 /* UI Widgets */,
 				29B97315FDCFA39411CA2CEA /* AppDelegate */,
 				EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */,
@@ -2657,6 +2672,7 @@
 				EC24DC25161A847A00016B78 /* libgTarAppCore.a */,
 				EC24DC26161A847A00016B78 /* libGtarController.a */,
 				ECFFB43015ED82D600951BD5 /* AVFoundation.framework */,
+				9D85CD2E17CE8D8E0064CE79 /* StoreKit.framework */,
 				EC71FA5A1429D17B00F06996 /* CoreMIDI.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -3123,6 +3139,18 @@
 				9D63D7FA1550861600FABD5B /* Rock Guitar 80.mp3 */,
 			);
 			name = "Rock Guitar";
+			sourceTree = "<group>";
+		};
+		9D85CD2917CE8BB50064CE79 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				9D85CD2A17CE8CF60064CE79 /* InAppPurchaseManager.h */,
+				9D85CD2B17CE8CF60064CE79 /* InAppPurchaseManager.m */,
+				9D85CD3017CE8F890064CE79 /* StoreViewController.h */,
+				9D85CD3117CE8F890064CE79 /* StoreViewController.m */,
+				9D85CD3217CE8F890064CE79 /* StoreViewController.xib */,
+			);
+			name = Store;
 			sourceTree = "<group>";
 		};
 		9DA86E721582D3070015ED49 /* Strat */ = {
@@ -4793,6 +4821,7 @@
 				9DDB4E7817A2005400499808 /* PauseButtonVideo.png in Resources */,
 				9DDB4E7A17A2005400499808 /* PreviewProgressBar.png in Resources */,
 				9DDB4E7D17A2009A00499808 /* PlayerViewController.xib in Resources */,
+				9D85CD3517CE8F890064CE79 /* StoreViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5552,6 +5581,7 @@
 				9DDB4E7917A2005400499808 /* PauseButtonVideo.png in Resources */,
 				9DDB4E7B17A2005400499808 /* PreviewProgressBar.png in Resources */,
 				9DDB4E7E17A2009A00499808 /* PlayerViewController.xib in Resources */,
+				9D85CD3617CE8F890064CE79 /* StoreViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5615,6 +5645,8 @@
 				EC7CAE8A174DA940004E26DE /* Mixpanel.m in Sources */,
 				ECEB331C175D6E28009913F4 /* PaginatedPullToUpdateTableView.m in Sources */,
 				9D4C70CA17A8AD9D00DC7B4D /* PlayerViewController.m in Sources */,
+				9D85CD2C17CE8CF60064CE79 /* InAppPurchaseManager.m in Sources */,
+				9D85CD3317CE8F890064CE79 /* StoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5675,6 +5707,8 @@
 				EC7CAE8B174DA940004E26DE /* Mixpanel.m in Sources */,
 				ECEB331D175D6E28009913F4 /* PaginatedPullToUpdateTableView.m in Sources */,
 				9D4C70CB17A8AD9D00DC7B4D /* PlayerViewController.m in Sources */,
+				9D85CD2D17CE8CF60064CE79 /* InAppPurchaseManager.m in Sources */,
+				9D85CD3417CE8F890064CE79 /* StoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
