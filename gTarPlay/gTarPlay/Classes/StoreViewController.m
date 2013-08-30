@@ -29,11 +29,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    // InAppPurchaseManager is a Singleton
     InAppPurchaseManager* purchaseManager = [InAppPurchaseManager sharedInstance];
     if ([purchaseManager canMakePurchases])
     {
         NSLog(@"Can make in app purchase");
-        [purchaseManager loadStore];
+        //[purchaseManager loadStore];
     }
     else
     {
@@ -52,5 +53,25 @@
     [[InAppPurchaseManager sharedInstance] purchaseSong];
 }
 
+- (IBAction)getProductList:(id)sender
+{
+    InAppPurchaseManager *purchaseManager = [InAppPurchaseManager sharedInstance];
+    [purchaseManager getProductList];
+}
 
+- (IBAction)onGetServerSongListTouchUpInside:(id)sender
+{
+    // Get the server song list here
+}
+
+- (IBAction)onGetServerSongListTouchUpInside:(id)sender {
+}
+
+
+- (void)dealloc {
+    [_buttonGetProductList release];
+    [_pullToUpdateSongList release];
+    [_buttonGetServerSongList release];
+    [super dealloc];
+}
 @end

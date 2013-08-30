@@ -3,8 +3,6 @@
 //  gTarPlay
 //
 //  Created by Marty Greenia on 11/12/12.
-//
-//
 
 #import "gTarNavigationController.h"
 

@@ -8,16 +8,20 @@
 
 #import "InAppPurchaseManager.h"
 
-#define kInAppPurchaseSongProductId @"com.incidenttech.gtarplay.IncidentSong"
+#define kInAppPurchaseSongProductId @"IncidentSong"
+#define kInAppPurchaseGtarSong @"gtarsong"
 
-@interface InAppPurchaseManager ()
-{
+@interface InAppPurchaseManager () {
     NSArray* _productList;
 }
-
 @end
 
-@implementation InAppPurchaseManager
+@implementation InAppPurchaseManager {
+    SKProductsRequest *_productsRequest;
+    RequestProductsCompletionHandler _completionHandler;
+    NSSet *_productIdentifiers;
+    NSMutableSet * _purchasedProductIdentifiers;
+}
 
 + (InAppPurchaseManager *)sharedInstance
 {
@@ -35,17 +39,51 @@
 }
 
 #pragma -
+#pragma Test Functions
+- (void)getProductList
+{
+    NSLog(@"Testing!");
+    
+    _productIdentifiers = [NSSet setWithObjects:kInAppPurchaseSongProductId, kInAppPurchaseGtarSong, nil];
+
+    // Check previously purchased product ids (from NSUserDefaults)
+    _purchasedProductIdentifiers = [NSSet set];
+    for(NSString *productIdentifier in _productIdentifiers)
+    {
+        BOOL fProductPurchased = [[NSUserDefaults standardUserDefaults] boolForKey:productIdentifier];
+        if(fProductPurchased)
+        {
+            [_purchasedProductIdentifiers addObject:productIdentifier];
+            NSLog(@"Previously purchased %@", productIdentifier);
+        }
+        else
+        {
+            NSLog(@"Not purchased %@", productIdentifier);
+        }
+    }
+    
+    // Request list of products from iTunes
+    _completionHandler = ^(BOOL success, NSArray *products) {
+        // Will handle the completion of the fetch from itunes
+        
+        return;
+    };
+    
+    _productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:_productIdentifiers];
+    _productsRequest.delegate = self;
+    [_productsRequest start];
+}
+
+#pragma -
 #pragma Public methods
 
-//
 // call this method once on startup
-//
 - (void)loadStore
 {
-    // restarts any purchases if they were interrupted last time the app was open
+    // Restarts any purchases if they were interrupted last time the app was open
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     
-    // get the product description (defined in early sections)
+    // Get the product description (defined in early sections)
     [self requestProductData];
 }
 
@@ -74,13 +112,32 @@
     request.delegate = self;
     [request start];
 }
+
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-    NSArray *myProducts = response.products;
+    NSLog(@"Got product list from itunes");
+    _productsRequest = NULL;                    // clear outstanding request
     
-    _productList = [myProducts retain];
-    // Populate your UI from the products list.
-    // Save a reference to the products list.
+    NSArray *skProducts = response.products;
+    for(SKProduct *skProduct in skProducts)
+    {
+        NSLog(@"Found product: %@ %@ %0.2f",
+              skProduct.productIdentifier,
+              skProduct.localizedTitle,
+              skProduct.price.floatValue);
+    }
+    
+    _completionHandler(YES, skProducts);
+    _completionHandler = NULL;
+}
+
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
+    
+    NSLog(@"Failed to load list of products from itunes");
+    _productsRequest = nil;
+    
+    _completionHandler(NO, nil);
+    _completionHandler = nil;
 }
 
 #pragma -
@@ -196,5 +253,3 @@
 }
 
 @end
-
-

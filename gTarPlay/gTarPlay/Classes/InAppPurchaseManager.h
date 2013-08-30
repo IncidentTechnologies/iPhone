@@ -12,8 +12,9 @@
 #define kInAppPurchaseManagerTransactionFailedNotification @"kInAppPurchaseManagerTransactionFailedNotification"
 #define kInAppPurchaseManagerTransactionSucceededNotification @"kInAppPurchaseManagerTransactionSucceededNotification"
 
-@interface InAppPurchaseManager : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>
-{
+typedef void (^RequestProductsCompletionHandler)(BOOL success, NSArray *products);
+
+@interface InAppPurchaseManager : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver> {
 }
 
 + (InAppPurchaseManager *)sharedInstance;
@@ -22,5 +23,8 @@
 - (void)loadStore;
 - (BOOL)canMakePurchases;
 - (void)purchaseSong;
+
+// test
+- (void)getProductList;
 
 @end

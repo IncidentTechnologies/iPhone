@@ -49,14 +49,10 @@ UserController * g_userController;
     
     if ( self )
     {
-        
-        //
-        // Controller init stuff
-        //
-        
         // Init the cloud controller
-//        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.0.6"];
-//        g_cloudController = [[CloudController alloc] initWithServer:@"http://50.18.250.24/m1"];
+        
+        // http://184.169.154.56/v1.0.6"];
+        // http://50.18.250.24/m1
         g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.5"];
         
         // Restore the file controller so we can get all the cached content
@@ -75,18 +71,15 @@ UserController * g_userController;
         g_telemetryController.m_deviceId = uuidString;
         g_telemetryController.m_username = g_userController.m_loggedInUsername;
 #else
-        
         Mixpanel *mixpanel = [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
-        
 #endif
+        
         // Connect to the gtar device
         g_gtarController = [[GtarController alloc] init];
-        
         g_gtarController.responseThread = GtarControllerThreadMain;
         
         // By default it just outputs 'LevelError'
-        g_gtarController.logLevel = GtarControllerLogLevelAll;
-        
+        g_gtarController.logLevel = GtarControllerLogLevelAll;        
         [g_gtarController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR | Debug_BUILD
@@ -101,10 +94,7 @@ UserController * g_userController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    //
-    // Typical UI setup stuff
-    //
+    // Typical UI Setup
     
     // Override point for customization after application launch.
 	m_navigationController.navigationBarHidden = YES;
@@ -127,13 +117,10 @@ UserController * g_userController;
 //                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    
     [mixpanel track:@"Application launched"];
-    
     [mixpanel.people increment:@"Application opens" by:[NSNumber numberWithInteger:1]];
     
     self.m_playApplication = (gTarPlayApplication*)application;
-    
     [self.m_playApplication resetIdleTimer];
     
     // Delay load some things
@@ -171,9 +158,7 @@ UserController * g_userController;
 //                                     @"Application did enter background", @"Detail",
 //                                     nil]];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    
     [mixpanel track:@"Application background"];
-    
     [mixpanel.people increment:@"Application closes" by:[NSNumber numberWithInteger:1]];
 
 //    [g_telemetryController synchronize];
@@ -193,11 +178,8 @@ UserController * g_userController;
 //                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    
     [mixpanel track:@"Application foreground"];
-    
     [mixpanel.people increment:@"Application opens" by:[NSNumber numberWithInteger:1]];
-
 }
 
 
@@ -233,11 +215,8 @@ UserController * g_userController;
 //    [g_telemetryController synchronize];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    
     [mixpanel track:@"Application terminated"];
-    
     [mixpanel.people increment:@"Application closes" by:[NSNumber numberWithInteger:1]];
-
 }
 
 // For handling facebook URLs
@@ -316,15 +295,12 @@ UserController * g_userController;
 
 - (NSString*)generateUUID
 {
-    
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
     NSString * uuidString = [settings stringForKey:@"UUIDString"];
     
     if ( uuidString != nil )
-    {
         return uuidString;
-    }
     
     CFUUIDRef uuid = CFUUIDCreate(nil);
     
@@ -344,7 +320,6 @@ UserController * g_userController;
     CFRelease(uuidCFString);
     
     return [uuidString autorelease];
-    
 }
 
 - (void)delayedLoad
