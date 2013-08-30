@@ -64,8 +64,6 @@
     // Get the server song list here
 }
 
-- (IBAction)onGetServerSongListTouchUpInside:(id)sender {
-}
 
 
 - (void)dealloc {

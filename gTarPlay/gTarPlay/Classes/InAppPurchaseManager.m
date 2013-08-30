@@ -1,3 +1,4 @@
+
 //
 //  InAppPurchaseManager.m
 //  gTarPlay
@@ -8,8 +9,12 @@
 
 #import "InAppPurchaseManager.h"
 
-#define kInAppPurchaseSongProductId @"IncidentSong"
-#define kInAppPurchaseGtarSong @"gtarsong"
+
+#import <gTarAppCore/CloudController.h>
+#import <gTarAppCore/CloudResponse.h>
+#import <gTarAppCore/UserSong.h>
+
+#define kInAppPurchaseSongProductId @"gtarsong"
 
 @interface InAppPurchaseManager () {
     NSArray* _productList;
@@ -44,7 +49,7 @@
 {
     NSLog(@"Testing!");
     
-    _productIdentifiers = [NSSet setWithObjects:kInAppPurchaseSongProductId, kInAppPurchaseGtarSong, nil];
+    _productIdentifiers = [NSSet setWithObjects:kInAppPurchaseSongProductId, nil];
 
     // Check previously purchased product ids (from NSUserDefaults)
     _purchasedProductIdentifiers = [NSSet set];
@@ -101,7 +106,14 @@
 //
 - (void)purchaseSong
 {
+    if ([_productList count] == 0)
+    {
+        NSLog(@"Cannot make InApp purchase, no products available");
+        return;
+    }
     SKPayment *payment = [SKPayment paymentWithProduct:_productList[0]];
+    //SKPayment *payment = [SKPayment paymentWithProductIdentifier:kInAppPurchaseSongProductId];
+
     [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
 
@@ -156,16 +168,7 @@
     }
 }
 
-//
-// successful purchase
-//
-- (void)provideContent:(NSString *)productId
-{
-    if ([productId isEqualToString:kInAppPurchaseSongProductId])
-    {
-        // 
-    }
-}
+
 
 //
 // removes the transaction from the queue and posts a notification with the transaction result
@@ -250,6 +253,41 @@
                 break;
         }
     }
+}
+
+
+//
+// successful purchase
+//
+- (void)provideContent:(NSString *)productId
+{
+    if ([productId isEqualToString:kInAppPurchaseSongProductId])
+    {
+        // TODO: move this out of the InAppPurchase manager
+        
+        // Hardcode a temporary UserSong to purchase
+        UserSong* userSong = [[UserSong alloc] init];
+        userSong.m_songId = 140;
+        
+        [[CloudController sharedSingleton] requestPurchaseSong:userSong andCallbackObj:self andCallbackSel:@selector(requestPurchaseSongCallback:)];
+    }
+}
+
+// TODO: move this out of the InAppPurchase manager
+- (void)requestPurchaseSongCallback:(CloudResponse*)cloudResponse
+{
+    // Purchasing a song by itself isn't that big of a deal.
+    // If it doesn't work, we don't have to be as aggressive about recovering
+    // because they can just repurchase without loosing anything.
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+    {
+        NSLog(@"Purchase succeeded");
+    }
+    else
+    {
+        NSLog(@"Purchase failed: %@", cloudResponse.m_statusText);
+    }
+    
 }
 
 @end
