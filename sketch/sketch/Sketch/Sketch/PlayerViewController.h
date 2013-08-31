@@ -33,6 +33,7 @@
 - (void)pauseSong;
 - (void)continueSong;
 - (void)playPauseSong;
+- (BOOL)isSongLoaded;
 
 - (void)recordMode;
 

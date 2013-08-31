@@ -354,6 +354,12 @@
 
 - (IBAction)togglePlayPause:(UIButton *)sender
 {
+    if (![_playBackVC isSongLoaded])
+    {
+        // No song is loaded (empty song list), don't do anything.
+        return;
+    }
+    
     _playPauseButton.selected = !_playPauseButton.selected;
     _playPauseImage.highlighted = _playPauseButton.selected;
     

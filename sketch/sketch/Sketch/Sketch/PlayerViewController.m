@@ -284,6 +284,11 @@
     [_audioController setSamplePackWithName:_songPlaybackController.m_songModel.m_song.m_instrument withSelector:@selector(finishedLoadingSamplePack:) andOwner:self];
 }
 
+- (BOOL)isSongLoaded
+{
+    return (_userSongSession != nil);
+}
+
 - (void)startSong
 {
     // Do this now because the AC might not be ready sooner

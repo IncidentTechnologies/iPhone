@@ -326,6 +326,11 @@
 
 - (void)didDoubleTap:(UIGestureRecognizer *)gestureRecognizer
 {
+    if (_songList == nil || [_songList count] == 0)
+    {
+        // No song's in list
+        return;
+    }
     UserSongSession* song = [_songList objectAtIndex:[_songTableView indexPathForSelectedRow].row];
     [_delegate playSong:song];
 }
