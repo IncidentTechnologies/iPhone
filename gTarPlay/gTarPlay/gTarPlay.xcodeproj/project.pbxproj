@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26868D8617D2A46500DC990F /* StoreSongListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8517D2A46500DC990F /* StoreSongListCell.m */; };
+		26868D8817D2A8DF00DC990F /* StoreSongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */; };
+		26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8A17D2F3C500DC990F /* StoreListBuyButtonView.m */; };
 		9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CAF174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CB0174C68E000FA3239 /* Bowed Strings 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */; };
@@ -1662,6 +1665,11 @@
 		1D3623240D0F684500981E51 /* gTarPlayAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gTarPlayAppDelegate.h; path = Classes/gTarPlayAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = gTarPlayAppDelegate.m; path = Classes/gTarPlayAppDelegate.m; sourceTree = "<group>"; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		26868D8417D2A46500DC990F /* StoreSongListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSongListCell.h; sourceTree = "<group>"; };
+		26868D8517D2A46500DC990F /* StoreSongListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSongListCell.m; sourceTree = "<group>"; };
+		26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreSongListCell.xib; sourceTree = "<group>"; };
+		26868D8917D2F3C500DC990F /* StoreListBuyButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreListBuyButtonView.h; sourceTree = "<group>"; };
+		26868D8A17D2F3C500DC990F /* StoreListBuyButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListBuyButtonView.m; sourceTree = "<group>"; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlay_Prefix.pch; sourceTree = "<group>"; };
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -3149,6 +3157,11 @@
 				9D85CD3017CE8F890064CE79 /* StoreViewController.h */,
 				9D85CD3117CE8F890064CE79 /* StoreViewController.m */,
 				9D85CD3217CE8F890064CE79 /* StoreViewController.xib */,
+				26868D8417D2A46500DC990F /* StoreSongListCell.h */,
+				26868D8517D2A46500DC990F /* StoreSongListCell.m */,
+				26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */,
+				26868D8917D2F3C500DC990F /* StoreListBuyButtonView.h */,
+				26868D8A17D2F3C500DC990F /* StoreListBuyButtonView.m */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -4822,6 +4835,7 @@
 				9DDB4E7A17A2005400499808 /* PreviewProgressBar.png in Resources */,
 				9DDB4E7D17A2009A00499808 /* PlayerViewController.xib in Resources */,
 				9D85CD3517CE8F890064CE79 /* StoreViewController.xib in Resources */,
+				26868D8817D2A8DF00DC990F /* StoreSongListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5647,6 +5661,8 @@
 				9D4C70CA17A8AD9D00DC7B4D /* PlayerViewController.m in Sources */,
 				9D85CD2C17CE8CF60064CE79 /* InAppPurchaseManager.m in Sources */,
 				9D85CD3317CE8F890064CE79 /* StoreViewController.m in Sources */,
+				26868D8617D2A46500DC990F /* StoreSongListCell.m in Sources */,
+				26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

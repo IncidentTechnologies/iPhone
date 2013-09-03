@@ -60,31 +60,31 @@
     
 }
 
+-(void)setIndicatorTextColor:(UIColor*)color
+{
+    m_instructionsLabel.textColor = [color copy];
+    m_lastUpdateLabel.textColor = [color copy];
+}
+
 - (void)sharedInit
 {
     
     m_aboveThreshold = NO;
     
-    //
     // Instructions, "pull to update"
-    //
     m_instructionsLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, -HEADER_OFFSET+PULL_TO_UPDATE_OFFSET, self.frame.size.width - LEFT_MARGIN, PULL_TO_UPDATE_HEIGHT)];
     m_instructionsLabel.text = @"Pull to update";
     m_instructionsLabel.textColor = [UIColor grayColor];
-//        m_instructionsLabel.shadowColor = [UIColor darkGrayColor];
-//        m_instructionsLabel.shadowOffset = CGSizeMake(1, 1);
+    m_instructionsLabel.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.0f]; // transparent background
     m_instructionsLabel.font = [m_instructionsLabel.font fontWithSize:14];
     
     [self addSubview:m_instructionsLabel];
     
-    //
     // Last update label
-    //
     m_lastUpdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, -HEADER_OFFSET+PULL_TO_UPDATE_HEIGHT+PULL_TO_UPDATE_OFFSET, self.frame.size.width - LEFT_MARGIN, LAST_UPDATE_HEIGHT)];
     m_lastUpdateLabel.text = @"Last update: Never";
     m_lastUpdateLabel.textColor = [UIColor lightGrayColor];
-//        m_lastUpdateLabel.shadowColor = [UIColor grayColor];
-//        m_lastUpdateLabel.shadowOffset = CGSizeMake(1, 1);
+    m_lastUpdateLabel.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.0f]; // transparent background
     m_lastUpdateLabel.font = [m_lastUpdateLabel.font fontWithSize:12];
     
     // TODO don't add this untill we can do proper update tracking

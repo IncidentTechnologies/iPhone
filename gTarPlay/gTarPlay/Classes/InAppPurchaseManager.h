@@ -8,6 +8,8 @@
 
 #import <StoreKit/StoreKit.h>
 
+@class UserSong;
+
 // add a couple notifications sent out when the transaction completes
 #define kInAppPurchaseManagerTransactionFailedNotification @"kInAppPurchaseManagerTransactionFailedNotification"
 #define kInAppPurchaseManagerTransactionSucceededNotification @"kInAppPurchaseManagerTransactionSucceededNotification"
@@ -23,6 +25,8 @@ typedef void (^RequestProductsCompletionHandler)(BOOL success, NSArray *products
 - (void)loadStore;
 - (BOOL)canMakePurchases;
 - (void)purchaseSong;
+
+-(void)purchaseSongWithSong:(UserSong*)song target:(id)obj cbSel:(SEL)sel;
 
 // test
 - (void)getProductList;

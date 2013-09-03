@@ -39,4 +39,6 @@
 - (void)belowThreshold;
 - (void)changeUpdateDate;
 
+-(void)setIndicatorTextColor:(UIColor*)color;
+
 @end

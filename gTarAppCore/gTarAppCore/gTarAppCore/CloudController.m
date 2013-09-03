@@ -60,12 +60,16 @@
 #define CloudRequestTypeEditUserProfileUrl @"Users/EditUserProfile"
 #define CloudRequestTypeSearchUserProfileFacebookUrl @"Users/FindFacebookFriendsUserProfile"
 #define CloudRequestTypeGetUserCreditsUrl @"Users/GetUserCredits"
-#define CloudRequestTypePurchaseSongUrl @"UserSongs/PurchaseSong"
+
 #define CloudRequestTypeVerifyItunesReceiptUrl @"Users/VerifyItunesPurchase"
 #define CloudRequestTypeGetAllSongsListUrl @"UserSongs/GetAllSongsList"
 #define CloudRequestTypeGetAllSongPidsUrl @"UserSongs/GetAllSongPids"
 #define CloudRequestTypeGetUserSongListUrl @"UserSongs/GetUserSongsList"
-#define CloudRequestTypeGetStoreSongListUrl @"UserSongs/GetAllSongsList"
+
+#define CloudRequestTypeGetStoreSongListUrl @"UserSongs/GetStoreSongsList"
+#define CloudRequestTypePurchaseSongUrl @"UserSongs/PurchaseSong"
+
+//#define CloudRequestTypeGetStoreSongListUrl @"UserSongs/GetAllSongsList"
 #define CloudRequestTypeGetStoreFeaturesSongListUrl @"UserSongs/GetFeaturedNewAndPopularSongsList"
 #define CloudRequestTypePutUserSongSessionUrl @"UserSongSessions/UploadSession"
 #define CloudRequestTypeGetUserSongSessionsUrl @"UserSongSessions/GetUserSongSessions"
@@ -127,19 +131,16 @@
 
 - (id)initWithServer:(NSString*)serverName
 {
-    
     // Note this is 'self' not 'super'
     self = [self init];
     
     if ( self ) 
     {
         m_serverName = [serverName retain];
-        m_serverRoot = [[NSString alloc] initWithFormat:@"%@/app_iphone", serverName];
-                
+        m_serverRoot = [[NSString alloc] initWithFormat:@"%@/app_iphone", serverName];                
     }
     
     return self;
-    
 }
 
 + (CloudController *)sharedSingleton
@@ -151,9 +152,13 @@
         if (!sharedSingleton)
         {
             // Production server
-            NSString* server = @"http://184.169.154.56/v1.5";
+            //NSString* server = @"http://184.169.154.56/v1.5";
+            
             // Debug server
             //NSString* server = @"http://50.18.250.24/m1";
+            
+            // MAMP server
+            NSString* server = @"http://localhost:8888/gtaronline";
             
             sharedSingleton = [[CloudController alloc] initWithServer:server];
         }
@@ -590,12 +595,9 @@
 {
     
     // Create async request
-    CloudRequest * cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypePurchaseSong andCallbackObject:obj andCallbackSelector:sel];
-    
+    CloudRequest *cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypeVerifyItunesReceipt andCallbackObject:obj andCallbackSelector:sel];
     cloudRequest.m_itunesReceipt = receipt;
-    
     [self cloudSendRequest:cloudRequest];
-    
     return [cloudRequest autorelease];
     
 }
@@ -1134,20 +1136,13 @@
 	
 	[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
 	
-	//
 	// Create the post body
-	//
-//	NSMutableString * postBody = [NSMutableString string];
     NSMutableData * postBodyData = [NSMutableData data];
     
     [postBodyData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//    [postBody appendString:[NSString stringWithFormat:@"\r\n--%@\r\n", boundary]];
     
 	// Add all the fields
-	
 	// Method = post
-//    [postBody appendString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"_method\"\r\n\r\nPOST"]];
-//    [postBody appendString:[NSString stringWithFormat:@"\r\n--%@\r\n", boundary]];
     [postBodyData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"_method\"\r\n\r\nPOST"] dataUsingEncoding:NSUTF8StringEncoding]];
     [postBodyData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -1161,9 +1156,6 @@
         // Some params might be optional
         if ( name != nil && value != nil )
         {
-//            [postBody appendString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", name]];
-//            [postBody appendString:[NSString stringWithFormat:@"%@", value]];
-//            [postBody appendString:[NSString stringWithFormat:@"\r\n--%@\r\n", boundary]];
             [postBodyData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", name] dataUsingEncoding:NSUTF8StringEncoding]];
             [postBodyData appendData:[[NSString stringWithFormat:@"%@", value] dataUsingEncoding:NSUTF8StringEncoding]];
             [postBodyData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -1172,9 +1164,7 @@
     }
     
     // Add all the files to the post body
-    for ( NSDictionary * fileDict in filesArray )
-    {
-        
+    for ( NSDictionary * fileDict in filesArray ) {
         NSString * name = [fileDict objectForKey:@"Name"];
         NSString * filename = [fileDict objectForKey:@"Filename"];
         NSString * contentType = nil;
@@ -1188,8 +1178,8 @@
             data = UIImageJPEGRepresentation((UIImage*)fileData, 0.1 );
             contentType = @"image/jpg";
             
-//            data = UIImagePNGRepresentation( (UIImage*)fileData );
-//            contentType = @"image/png";
+//          data = UIImagePNGRepresentation( (UIImage*)fileData );
+//          contentType = @"image/png";
         }
         
         if ( [fileData isKindOfClass:[NSString class]] == YES )
@@ -1201,10 +1191,6 @@
         // Some params might be optional
         if ( name != nil && filename != nil && data != nil )
         {
-//            [postBody appendString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", name, filename]];
-//            [postBody appendString:[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"]];
-//            [postBody appendString:data];
-//            [postBody appendString:[NSString stringWithFormat:@"\r\n--%@\r\n", boundary]];
             [postBodyData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", name, filename] dataUsingEncoding:NSUTF8StringEncoding]];
             [postBodyData appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", contentType] dataUsingEncoding:NSUTF8StringEncoding]];
             [postBodyData appendData:data];
@@ -1413,51 +1399,50 @@
             
         case CloudRequestTypeVerifyItunesReceipt:
         {
-            
             url = CloudRequestTypeVerifyItunesReceiptUrl;
             
+            // Need to convert the NSData to base 64 string here
+            // TODO: move to helper func area?
+            static char table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+            NSMutableData *data = [NSMutableData dataWithLength:((cloudRequest.m_itunesReceipt.length + 2) / 3) * 4];
+            uint8_t *output = (uint8_t *)data.mutableBytes;
+            for (NSInteger i = 0; i < cloudRequest.m_itunesReceipt.length; i += 3) {
+                NSInteger value = 0;
+
+                for (NSInteger j = i; j < (i + 3); j++) {
+                    value <<= 8;
+                    if (j < cloudRequest.m_itunesReceipt.length)
+                        value |= (0xFF & ((uint8_t *)(cloudRequest.m_itunesReceipt.bytes))[j]);
+                }
+                
+                NSInteger index = (i / 3) * 4;
+                output[index + 0] =                    table[(value >> 18) & 0x3F];
+                output[index + 1] =                    table[(value >> 12) & 0x3F];
+                output[index + 2] = (i + 1) < cloudRequest.m_itunesReceipt.length ? table[(value >> 6)  & 0x3F] : '=';
+                output[index + 3] = (i + 2) < cloudRequest.m_itunesReceipt.length ? table[(value >> 0)  & 0x3F] : '=';
+            }
+            
+            NSString *strBase64EncodedData = [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
+            
+            /*
             NSDictionary * param = [NSDictionary dictionaryWithObjectsAndKeys:
                                     @"data[Users][receipt]", @"Name",
                                     cloudRequest.m_itunesReceipt, @"Value", nil];
+            */
+            
+            NSDictionary * param = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"data[Users][receipt]", @"Name",
+                                    strBase64EncodedData, @"Value", nil];
             
             params = [NSArray arrayWithObject:param];
             
         } break;
             
-        case CloudRequestTypeGetAllSongPids:
-        {
-            
-            url = CloudRequestTypeGetAllSongPidsUrl;
-            
-        } break;
-            
-        case CloudRequestTypeGetAllSongsList:
-        {
-            
-            url = CloudRequestTypeGetAllSongsListUrl;
-            
-        } break;
-            
-        case CloudRequestTypeGetUserSongList:
-        {
-            
-            url = CloudRequestTypeGetUserSongListUrl;
-            
-        } break;
-            
-        case CloudRequestTypeGetStoreSongList:
-        {
-            
-            url = CloudRequestTypeGetStoreSongListUrl;
-            
-        } break;
-            
-        case CloudRequestTypeGetStoreFeaturesSongList:
-        {
-            
-            url = CloudRequestTypeGetStoreFeaturesSongListUrl;
-            
-        } break;
+        case CloudRequestTypeGetAllSongPids: url = CloudRequestTypeGetAllSongPidsUrl; break;
+        case CloudRequestTypeGetAllSongsList: url = CloudRequestTypeGetAllSongsListUrl; break;
+        case CloudRequestTypeGetUserSongList: url = CloudRequestTypeGetUserSongListUrl; break;
+        case CloudRequestTypeGetStoreSongList:  url = CloudRequestTypeGetStoreSongListUrl; break;
+        case CloudRequestTypeGetStoreFeaturesSongList:  url = CloudRequestTypeGetStoreFeaturesSongListUrl; break;
             
         case CloudRequestTypePutUserSongSession:
         {
@@ -1591,12 +1576,10 @@
             params = [NSArray arrayWithObject:param];
             
             url = CloudRequestTypeGetUserGlobalSongSessionsUrl;
-            
         } break;
             
         case CloudRequestTypeRedeemCreditCode:
         {
-            
             url = CloudRequestTypeRedeemCreditCodeUrl;
             
             NSDictionary * param = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -1604,7 +1587,6 @@
                                     cloudRequest.m_creditCode, @"Value", nil];
             
             params = [NSArray arrayWithObject:param];
-            
         } break;
             
         case CloudRequestTypePutLog:
@@ -1632,22 +1614,13 @@
                                        cloudRequest.m_logEntries, @"Data", nil];
             
             files = [NSArray arrayWithObject:fileDict];
-            
         } break;
             
-        case CloudRequestTypeGetCurrentFirmwareVersion:
-        {
-            
+        case CloudRequestTypeGetCurrentFirmwareVersion: {
             url = CloudRequestTypeGetCurrentFirmwareVersionUrl;
-            
         } break;
             
-        default:
-        {
-            
-            // nothing
-            
-        } break;
+        default: break;
     }
     
     (*urlString) = url;
@@ -1668,25 +1641,20 @@
         cloudResponse.m_receivedData = nil;
         
         return;
-        
     }
     
     // Do any pre-processing. Anything that needs special 
     // attention can be done here, and optionally return.
     switch ( cloudResponse.m_cloudRequest.m_type )
-    {
-            
+    {   
         case CloudRequestTypeGetFile:
         {
-            
             if ( cloudResponse.m_statusCode == 200 )
             {
-                
                 // The file is already located in m_receivedData.
                 cloudResponse.m_status = CloudResponseStatusSuccess;
                 cloudResponse.m_statusText = @"Success";
                 cloudResponse.m_responseFileId = cloudResponse.m_cloudRequest.m_fileId;
-                
             }
             else
             {
@@ -1694,7 +1662,6 @@
                 cloudResponse.m_status = CloudResponseStatusFailure;
                 cloudResponse.m_statusText = [NSString stringWithFormat:@"HTTP Status: %u", cloudResponse.m_statusCode];
                 cloudResponse.m_receivedData = nil;
-                
             }
             
             // Done with this response.
@@ -1708,8 +1675,7 @@
             if ( cloudResponse.m_statusCode == 200 )
             {
                 // Do more detailed pre-processing
-                [self preprocessResultsForResponse:cloudResponse];
-                
+                [self preprocessResultsForResponse:cloudResponse];  
             }
             else
             {
@@ -1720,9 +1686,7 @@
                 
                 // Done with this response
                 return;
-                
             }
-            
         } break;
             
     }
@@ -1732,9 +1696,7 @@
             
         case CloudRequestTypeGetServerStatus:
         {
-            
             // If we got this far, the server is up
-            
         } break;
             
         case CloudRequestTypeGetFile:
@@ -1896,7 +1858,6 @@
             
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
             cloudResponse.m_responseUserProfile = userProfile;
-//            cloudResponse.m_image
             
         } break;
             
@@ -1935,15 +1896,11 @@
             
         } break;
             
-        case CloudRequestTypePurchaseSong:
-        {
-            
+        case CloudRequestTypePurchaseSong: {
             // Nothing else to do for this
-            
         } break;
             
-        case CloudRequestTypeVerifyItunesReceipt:
-        {
+        case CloudRequestTypeVerifyItunesReceipt: {
             
             // Nothing else to do for this
             
@@ -2006,7 +1963,7 @@
             
             XmlDom * dom = cloudResponse.m_responseXmlDom;
             
-            XmlDom * songsDom = [dom getChildWithName:@"AllSongsList"];
+            XmlDom * songsDom = [dom getChildWithName:@"StoreSongsList"];
             
             UserSongs * userSongs = [[[UserSongs alloc] initWithXmlDom:songsDom] autorelease];
             
@@ -2219,9 +2176,7 @@
     [dom release];
     
 }
-
-
-             
+    
 #pragma mark -
 #pragma mark NSURLConnection delegates
 

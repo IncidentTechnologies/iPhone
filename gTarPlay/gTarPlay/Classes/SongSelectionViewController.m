@@ -35,14 +35,6 @@ extern AudioController *g_audioController;
 extern UserController *g_userController;
 extern GtarController *g_gtarController;
 
-typedef enum
-{
-    SortByTitleAscending,
-    SortByTitleDescending,
-    SortByArtistAscending,
-    SortByArtistDescending
-} SortOrder;
-
 @interface SongSelectionViewController ()
 {
     VolumeViewController *_volumeViewController;
@@ -61,7 +53,7 @@ typedef enum
     
     NSInteger _nextUserSong;
     
-    SortOrder _sortOrder;
+    SongSortOrder _sortOrder;
 }
 
 @property (retain, nonatomic) IBOutlet UIButton *sortByTitleButtton;

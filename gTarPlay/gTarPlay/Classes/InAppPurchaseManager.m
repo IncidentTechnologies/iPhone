@@ -9,7 +9,6 @@
 
 #import "InAppPurchaseManager.h"
 
-
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/CloudResponse.h>
 #import <gTarAppCore/UserSong.h>
@@ -17,15 +16,20 @@
 #define kInAppPurchaseSongProductId @"gtarsong"
 
 @interface InAppPurchaseManager () {
-    NSArray* _productList;
+
 }
 @end
 
-@implementation InAppPurchaseManager {
+@implementation InAppPurchaseManager
+{
     SKProductsRequest *_productsRequest;
     RequestProductsCompletionHandler _completionHandler;
     NSSet *_productIdentifiers;
     NSMutableSet * _purchasedProductIdentifiers;
+    NSArray* m_productList;
+    
+    NSMutableArray *m_pendingSongPurchases;     // For itunes purchases
+    NSMutableArray *m_purchasedSongs;           // itunes purchase processed, hasn't reflected server side yet
 }
 
 + (InAppPurchaseManager *)sharedInstance
@@ -45,10 +49,9 @@
 
 #pragma -
 #pragma Test Functions
+
 - (void)getProductList
 {
-    NSLog(@"Testing!");
-    
     _productIdentifiers = [NSSet setWithObjects:kInAppPurchaseSongProductId, nil];
 
     // Check previously purchased product ids (from NSUserDefaults)
@@ -88,35 +91,58 @@
     // Restarts any purchases if they were interrupted last time the app was open
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     
+    // TODO: Load from disk in case there are any pending purchases
+    // that were not completed
+    m_pendingSongPurchases = [[NSMutableArray alloc] init];
+    
     // Get the product description (defined in early sections)
-    [self requestProductData];
+    [self getProductList];
 }
 
-//
 // call this before making a purchase
-//
 - (BOOL)canMakePurchases
 {
     return [SKPaymentQueue canMakePayments];
-    
 }
 
-//
 // kick off the upgrade transaction
-//
 - (void)purchaseSong
 {
-    if ([_productList count] == 0)
+    if ([m_productList count] == 0)
     {
         NSLog(@"Cannot make InApp purchase, no products available");
         return;
     }
-    SKPayment *payment = [SKPayment paymentWithProduct:_productList[0]];
-    //SKPayment *payment = [SKPayment paymentWithProductIdentifier:kInAppPurchaseSongProductId];
+    SKPayment *payment = [SKPayment paymentWithProduct:m_productList[0]];
 
     [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
 
+-(void)purchaseSongWithSong:(UserSong*)song target:(id)obj cbSel:(SEL)sel
+{
+    if ([m_productList count] == 0) {
+        NSLog(@"Cannot make InApp purchase, no products available");
+        return;
+    }
+    
+    for(SKProduct *skProduct in m_productList)
+    {
+        if([skProduct.productIdentifier isEqualToString:kInAppPurchaseSongProductId])
+        {
+            [m_pendingSongPurchases addObject:song];
+            SKPayment *skPayment = [SKPayment paymentWithProduct:skProduct];
+            [[SKPaymentQueue defaultQueue] addPayment:skPayment];
+           
+            [obj performSelector:sel];
+        }
+    }
+    
+    // Didn't find gtarsong in product list
+    NSLog(@"Couldn't find %@ in products list", kInAppPurchaseSongProductId);
+    return;
+}
+
+/*
 - (void) requestProductData
 {
     SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:
@@ -124,22 +150,18 @@
     request.delegate = self;
     [request start];
 }
+ */
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
     NSLog(@"Got product list from itunes");
     _productsRequest = NULL;                    // clear outstanding request
     
-    NSArray *skProducts = response.products;
-    for(SKProduct *skProduct in skProducts)
-    {
-        NSLog(@"Found product: %@ %@ %0.2f",
-              skProduct.productIdentifier,
-              skProduct.localizedTitle,
-              skProduct.price.floatValue);
-    }
+    m_productList = [response.products copy];
+    for(SKProduct *skProduct in m_productList)
+        NSLog(@"Found product: %@ %@ %0.2f", skProduct.productIdentifier, skProduct.localizedTitle, skProduct.price.floatValue);
     
-    _completionHandler(YES, skProducts);
+    _completionHandler(YES, m_productList);
     _completionHandler = NULL;
 }
 
@@ -155,9 +177,7 @@
 #pragma -
 #pragma Purchase helpers
 
-//
-// saves a record of the transaction by storing the receipt to disk
-//
+// Saves a record of the transaction by storing the receipt to disk
 - (void)recordTransaction:(SKPaymentTransaction *)transaction
 {
     if ([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseSongProductId])
@@ -168,11 +188,24 @@
     }
 }
 
+// Verify transaction
+// Will send receipt up the server, server will credit the user account
+// Otherwise purchase song will fail with insufficient credits
+-(void) verifyTransaction:(SKPaymentTransaction *)transaction
+{
+    NSData *pReceipt = transaction.transactionReceipt;
+    
+    CloudController *pCloudController = [CloudController sharedSingleton];
+    [pCloudController requestVerifyReceipt:pReceipt andCallbackObj:self andCallbackSel:@selector(requestVerifyReceiptCallback:)];
+}
 
+- (void)requestVerifyReceiptCallback:(CloudResponse*)cloudResponse
+{
+    NSLog(@"Got CC response");
+    
+}
 
-//
 // removes the transaction from the queue and posts a notification with the transaction result
-//
 - (void)finishTransaction:(SKPaymentTransaction *)transaction wasSuccessful:(BOOL)wasSuccessful
 {
     // remove the transaction from the payment queue.
@@ -191,19 +224,23 @@
     }
 }
 
-//
 // called when the transaction was successful
-//
 - (void)completeTransaction:(SKPaymentTransaction *)transaction
 {
+    // Save transaction to disk
     [self recordTransaction:transaction];
-    [self provideContent:transaction.payment.productIdentifier];
+    
+    // Shoot transaction up to server, this secures the credits
+    [self verifyTransaction:transaction];
+    
+    if([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseSongProductId]) {
+        [self purchasePendingSongOnServer];
+    }
+
     [self finishTransaction:transaction wasSuccessful:YES];
 }
 
-//
 // called when a transaction has been restored and and successfully completed
-//
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction
 {
     [self recordTransaction:transaction.originalTransaction];
@@ -211,9 +248,7 @@
     [self finishTransaction:transaction wasSuccessful:YES];
 }
 
-//
 // called when a transaction has failed
-//
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
 {
     if (transaction.error.code != SKErrorPaymentCancelled)
@@ -231,34 +266,43 @@
 #pragma mark -
 #pragma mark SKPaymentTransactionObserver methods
 
-//
 // called when the transaction status is updated
-//
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
     for (SKPaymentTransaction *transaction in transactions)
     {
         switch (transaction.transactionState)
         {
-            case SKPaymentTransactionStatePurchased:
+            case SKPaymentTransactionStatePurchased: {
                 [self completeTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateFailed:
+            } break;
+                
+            case SKPaymentTransactionStateFailed: {
                 [self failedTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateRestored:
+            } break;
+                
+            case SKPaymentTransactionStateRestored: {
                 [self restoreTransaction:transaction];
-                break;
-            default:
-                break;
+            } break;
+                
+            default: break;
         }
     }
 }
 
+// Will attempt to purchase a pending song on the server
+// if it fails, it will save the song in the purchasedSongs queue
+-(void)purchasePendingSongOnServer
+{
+    UserSong *pendingSong = [[m_pendingSongPurchases objectAtIndex:([m_pendingSongPurchases count] - 1)] retain];
+    [m_purchasedSongs addObject:pendingSong];
+    [m_pendingSongPurchases removeLastObject];
+    
+    [[CloudController sharedSingleton] requestPurchaseSong:pendingSong andCallbackObj:self andCallbackSel:@selector(requestPurchaseSongCallback:)];
+    
+}
 
-//
 // successful purchase
-//
 - (void)provideContent:(NSString *)productId
 {
     if ([productId isEqualToString:kInAppPurchaseSongProductId])
@@ -279,12 +323,10 @@
     // Purchasing a song by itself isn't that big of a deal.
     // If it doesn't work, we don't have to be as aggressive about recovering
     // because they can just repurchase without loosing anything.
-    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
-    {
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess ) {
         NSLog(@"Purchase succeeded");
     }
-    else
-    {
+    else {
         NSLog(@"Purchase failed: %@", cloudResponse.m_statusText);
     }
     

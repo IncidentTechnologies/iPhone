@@ -40,6 +40,11 @@ UserController * g_userController;
 @synthesize m_navigationController;
 @synthesize m_playApplication;
 
+// http://184.169.154.56/v1.0.6"];
+// http://50.18.250.24/m1
+//#define kServerAddress @"http://184.169.154.56/v1.5"
+#define kServerAddress @"http://localhost:8888/gtaronline"
+
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -50,10 +55,7 @@ UserController * g_userController;
     if ( self )
     {
         // Init the cloud controller
-        
-        // http://184.169.154.56/v1.0.6"];
-        // http://50.18.250.24/m1
-        g_cloudController = [[CloudController alloc] initWithServer:@"http://184.169.154.56/v1.5"];
+        g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
         
         // Restore the file controller so we can get all the cached content
         g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
