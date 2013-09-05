@@ -8,6 +8,8 @@
 
 #import <StoreKit/StoreKit.h>
 
+#import "SongPurchaseRequest.h"
+
 @class UserSong;
 
 // add a couple notifications sent out when the transaction completes

@@ -538,9 +538,7 @@ extern Facebook * g_facebook;
 {
     // Start play mode
     SongSelectionViewController *vc = [[SongSelectionViewController alloc] initWithNibName:nil bundle:nil];
-    
     [self.navigationController pushViewController:vc animated:YES];
-    
     [vc release];
 }
 

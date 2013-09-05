@@ -81,6 +81,18 @@
         self.m_productId = [xmlDom getTextFromChildWithName:@"product_id"];
         self.m_difficulty = [xmlDom getIntegerFromChildWithName:@"difficulty"];
         
+        // Optional song fields
+        XmlDom *pTempNode = [xmlDom getChildWithName:@"user_leased"];
+        if(pTempNode != NULL)
+            self.m_userLeased = [[pTempNode getText] integerValue];
+        else
+            self.m_userLeased = FALSE;
+    
+        pTempNode = [xmlDom getChildWithName:@"user_owned"];
+        if(pTempNode != NULL)
+            self.m_userOwned = [[pTempNode getText] integerValue];
+        else
+            self.m_userOwned = FALSE;
     }
     
     return self;
@@ -102,7 +114,6 @@
 // Encode an object for an archive
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-
     [coder encodeObject:m_xmlDom forKey:@"XmlDom"];
     
 	[coder encodeInteger:m_songId forKey:@"SongId"];

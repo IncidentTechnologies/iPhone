@@ -17,6 +17,8 @@
 #import <gTarAppCore/XmlDom.h>
 #import <gTarAppCore/UserController.h>
 
+#import "SongSelectionViewController.h"
+
 #import "StoreSongListCell.h"
 
 #define kStoreSongCacheKey @"StoreSongArray"
@@ -50,15 +52,12 @@ extern CloudController *g_cloudController;
         
         // If we have cached data, use that.
         if ( songArrayData == nil )
-        {
             storeSongArray = [[NSArray alloc] init];
-        }
         else
-        {
             storeSongArray = [[NSKeyedUnarchiver unarchiveObjectWithData:songArrayData] retain];
-        }
         
         m_storeSongArray = [storeSongArray retain];
+        m_displayedStoreSongArray = [storeSongArray retain];
     }
     return self;
 }
@@ -66,6 +65,34 @@ extern CloudController *g_cloudController;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Add shadow and placement to header bar
+    CGRect shadowRect = CGRectMake(0.0f, 0.0f, [[UIScreen mainScreen ] bounds].size.height, _viewTopBar.frame.size.height);
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:shadowRect];
+    _viewTopBar.layer.masksToBounds = NO;
+    _viewTopBar.layer.shadowColor = [[UIColor blackColor] CGColor];
+    _viewTopBar.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    _viewTopBar.layer.shadowOpacity = 0.9f;
+    _viewTopBar.layer.shadowRadius = 7.0f;
+    _viewTopBar.layer.shadowPath = shadowPath.CGPath;
+    [self.view bringSubviewToFront:_viewTopBar];
+    
+    // Add bottom border
+    CALayer *bottomBorder = [CALayer layer];
+    bottomBorder.frame = CGRectMake(0.0f, _viewTopBar.frame.size.height, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    bottomBorder.backgroundColor = [UIColor colorWithRed:(102.0f/255.0f) green:(104.0f/255.0f) blue:(105.0f/255.0f) alpha:1.0f].CGColor;
+    [_viewTopBar.layer addSublayer:bottomBorder];
+    
+    // Add divider borders in column headers
+    CALayer *borderTitleArtist = [CALayer layer];
+    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 120.0f, 0.0f, 1.0f, _colBar.frame.size.height);
+    borderTitleArtist.backgroundColor = [UIColor colorWithRed:(102.0f/255.0f) green:(104.0f/255.0f) blue:(105.0f/255.0f) alpha:1.0f].CGColor;
+    [_colBar.layer addSublayer:borderTitleArtist];
+    
+    CALayer *borderSkill = [CALayer layer];
+    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 60.0f, 0.0f, 1.0f, _colBar.frame.size.height);
+    borderSkill.backgroundColor = [UIColor colorWithRed:(102.0f/255.0f) green:(104.0f/255.0f) blue:(105.0f/255.0f) alpha:1.0f].CGColor;
+    [_colBar.layer addSublayer:borderSkill];
     
     // Do any additional setup after loading the view from its nib.
     [_pullToUpdateSongList setIndicatorTextColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
@@ -81,6 +108,29 @@ extern CloudController *g_cloudController;
     {
         NSLog(@"Can NOT make in app purchase");
     }
+    
+    if ( [m_storeSongArray count] == 0 ) {
+        [_pullToUpdateSongList startAnimating];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if ( [m_storeSongArray count] == 0 )
+    {
+        CloudRequest *cloudRequest = [g_cloudController requestSongStoreListCallbackObj:nil andCallbackSel:nil];
+        [self requestStoreSongListCallback:cloudRequest.m_cloudResponse];
+    }
+    else
+    {
+        [g_cloudController requestSongStoreListCallbackObj:self andCallbackSel:@selector(requestStoreSongListCallback:)];
+    }
+}
+
+- (IBAction)onBackButtonTouchUpInside:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dealloc
@@ -131,12 +181,19 @@ extern CloudController *g_cloudController;
 
 - (void)refreshDisplayedStoreSongList
 {
-    
     [m_displayedStoreSongArray autorelease];
     m_displayedStoreSongArray = [m_storeSongArray retain];
     [self sortSongList];
     
     [_pullToUpdateSongList reloadData];
+}
+
+-(void)openSongListToSong:(UserSong*)userSong
+{
+    SongSelectionViewController *vc = [[SongSelectionViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc openSongOptionsForSong:userSong];
+    [vc release];
 }
 
 #pragma mark - Sort, Search
@@ -238,22 +295,21 @@ extern CloudController *g_cloudController;
 {
 	StoreSongListCell *tempCell = NULL;
 	static NSString *CellIdentifier = @"StoreSongListCell";
-    //tempCell = (StoreSongListCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
 	if (tempCell == nil)
 	{
 		tempCell = [[[StoreSongListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		[[NSBundle mainBundle] loadNibNamed:@"StoreSongListCell" owner:tempCell options:nil];
+        tempCell.parentStoreViewController = self;
         
-        CGFloat cellHeight = _pullToUpdateSongList.rowHeight-1;
-        CGFloat cellRow = _pullToUpdateSongList.frame.size.width;
+        CGFloat cellHeight = _pullToUpdateSongList.rowHeight - 1;
+        //CGFloat cellRow = _pullToUpdateSongList.frame.size.width;
+        CGFloat cellRow = [[UIScreen mainScreen] bounds].size.height;
         
         // Readjust the column headers to match the width
-        /*
-        [tempCell.titleArtistView setFrame:CGRectMake(0, 0, _titleArtistButton.frame.size.width, cellHeight)];
-        [tempCell.skillView setFrame:CGRectMake(_skillButton.frame.origin.x, 0, _skillButton.frame.size.width, cellHeight)];
-        [tempCell.scoreView setFrame:CGRectMake(_scoreButton.frame.origin.x, 0, _scoreButton.frame.size.width, cellHeight)];
-         */
+        [tempCell.titleArtistView setFrame:CGRectMake(0.0f, 0.0f, _buttonTitleArtist.frame.size.width, cellHeight)];
+        [tempCell.skillView setFrame:CGRectMake(_buttonSkill.frame.origin.x, 0.0f, _buttonSkill.frame.size.width, cellHeight)];
+        [tempCell.purchaseSongView setFrame:CGRectMake(_buttonBuy.frame.origin.x, 0.0f, _buttonBuy.frame.size.width, cellHeight)];
         
         // Readjust the width and height
         [tempCell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
@@ -288,11 +344,9 @@ extern CloudController *g_cloudController;
         [self setStoreSongArray:userSongs.m_songsArray];
     
         // Save this new array
-        /*
         NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
         [settings setObject:[NSKeyedArchiver archivedDataWithRootObject:m_storeSongArray] forKey:kStoreSongCacheKey];
         [settings synchronize];
-         */
         
         // Reload table data
         [_pullToUpdateSongList reloadData];
@@ -304,6 +358,8 @@ extern CloudController *g_cloudController;
         {
             [self backButtonClicked:nil];
         }*/
+        
+        NSLog(@"Something bad happened, no data to show");
     }
 }
 

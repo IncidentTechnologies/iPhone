@@ -74,9 +74,7 @@ extern GtarController *g_gtarController;
         
         // See if we have any cached songs from previous runs
         NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-        
         NSData * songArrayData = [settings objectForKey:@"UserSongArray"];
-        
         NSArray *userSongArray;
         
         // If we have cached data, use that.
@@ -87,7 +85,6 @@ extern GtarController *g_gtarController;
         else
         {
             userSongArray = [[NSKeyedUnarchiver unarchiveObjectWithData:songArrayData] retain];
-            
         }
         
         _userSongArray = userSongArray;
@@ -100,8 +97,7 @@ extern GtarController *g_gtarController;
 {
     [super viewDidLoad];
     
-    if ( [_userSongArray count] == 0 )
-    {
+    if ( [_userSongArray count] == 0 ) {
         [_songListTable startAnimating];
     }
     
@@ -150,14 +146,12 @@ extern GtarController *g_gtarController;
     if ( _volumeViewController == nil )
     {
         _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
-        
         [_volumeViewController attachToSuperview:_songOptionsModal.contentView withFrame:_volumeView.frame];
     }
     
     if ( _instrumentViewController == nil )
     {
         _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
-        
         [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
     
@@ -180,11 +174,8 @@ extern GtarController *g_gtarController;
 
 - (void)dealloc
 {
-    
     [g_gtarController removeObserver:self];
-    
     [_userSongArray release];
-    
     [_songListTable release];
     [_titleArtistButton release];
     [_skillButton release];
@@ -448,9 +439,7 @@ extern GtarController *g_gtarController;
         
         // Save this new array
         NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-        
         [settings setObject:[NSKeyedArchiver archivedDataWithRootObject:_userSongArray] forKey:@"UserSongArray"];
-        
         [settings synchronize];
         
         // Show the new table
@@ -559,23 +548,27 @@ extern GtarController *g_gtarController;
 
 #pragma mark - Table view delegate
 
-// This function catches any selections
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)openSongOptionsForSongId:(NSInteger)songId
 {
-    
-    if ( _songOptionsModal.presentingViewController != nil )
-    {
-        // We only want to present it once, otherwise it will crash
-        return;
+    UserSong *userSong = NULL;
+    for(UserSong *song in _displayedUserSongArray) {
+        if(song.m_songId == songId) {
+            userSong = song;
+            break;
+        }
     }
     
-	NSInteger row = [indexPath row];
-    UserSong *userSong = [_displayedUserSongArray objectAtIndex:row];
+    [self openSongOptionsForSong:userSong];
+}
 
+- (void)openSongOptionsForSong:(UserSong*)userSong
+{
+    // We only want to present it once, otherwise it will crash
+    if ( _songOptionsModal.presentingViewController != nil )
+        return;
+    
     _currentUserSong = userSong;
-    
     [_startButton startActivityIndicator];
-    
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     _playerViewController.userSong = userSong;
@@ -590,7 +583,13 @@ extern GtarController *g_gtarController;
     _playerViewController.loadedInvocation = invocation;
     
     [self presentViewController:_songOptionsModal animated:YES completion:nil];
-    
+}
+
+// This function catches any selections
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger songId = ((UserSong*)[_displayedUserSongArray objectAtIndex:[indexPath row]]).m_songId;
+    [self openSongOptionsForSongId:songId];
 }
 
 - (void)playerLoaded
@@ -748,7 +747,6 @@ extern GtarController *g_gtarController;
     }
     
     [_searchedUserSongArray release];
-    
     _searchedUserSongArray = searchResults;
 }
 

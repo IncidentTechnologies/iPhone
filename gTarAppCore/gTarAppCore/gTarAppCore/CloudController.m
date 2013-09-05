@@ -917,7 +917,6 @@
 
 - (CloudResponse*)cloudProcessRequest:(CloudRequest*)cloudRequest
 {
-    
     // Create a response object
     CloudResponse * cloudResponse = [[[CloudResponse alloc] initWithCloudRequest:cloudRequest] autorelease];
     

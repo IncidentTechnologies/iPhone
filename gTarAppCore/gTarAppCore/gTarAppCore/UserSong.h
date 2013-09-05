@@ -64,6 +64,9 @@
     NSInteger m_score;
 
     UIImage * m_albumArtImage;
+    
+    BOOL m_userLeased;
+    BOOL m_userOwned;
 
 }
 
@@ -99,6 +102,9 @@
 @property (nonatomic, assign) NSInteger m_score;
 
 @property (nonatomic, retain) UIImage * m_albumArtImage;
+
+@property (nonatomic, assign) BOOL m_userLeased;
+@property (nonatomic, assign) BOOL m_userOwned;
 
 - (id)initWithXmlDom:(XmlDom*)xmlDom;
 

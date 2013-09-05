@@ -29,7 +29,7 @@ static inline double radians (double degrees) {
     {
         // init code
         m_Complete = 0.0f;
-        m_strText = [[NSString alloc] initWithString:@"99c"];
+        m_strText = [[NSString alloc] initWithString:@"99¢"];
     }
     return self;
 }
@@ -59,7 +59,7 @@ static inline double radians (double degrees) {
             textRect.origin.y += 9;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            NSString *text = @"99c";
+            NSString *text = @"99¢";
             [text drawInRect:textRect withFont:[UIFont systemFontOfSize:19.0f]];
             
         } break;
@@ -140,8 +140,22 @@ static inline double radians (double degrees) {
         } break;
             
         case BUY_BUTTON_PURCHASED: {
-            // draw triangle
+            // draw circle
+            CGRect insetRect = CGRectInset(rect, 16, 15);
+            insetRect.origin.x += 2;
+            insetRect.origin.y += 0;
+            CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(100.0f/255.0f) green:(108.0f/255.0f) blue:(113.0f/255.0f) alpha:1.0f].CGColor);
+            CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
+    
+            // Draw triangle
+            CGContextBeginPath(context);
+            CGContextMoveToPoint   (context, CGRectGetMinX(insetRect), CGRectGetMinY(insetRect));  // top left
+            CGContextAddLineToPoint(context, CGRectGetMaxX(insetRect), CGRectGetMidY(insetRect));  // mid right
+            CGContextAddLineToPoint(context, CGRectGetMinX(insetRect), CGRectGetMaxY(insetRect));  // bottom left
+            CGContextClosePath(context);
             
+            CGContextSetRGBFillColor(context, 1.0f, 1.0f, 1.0f, 1.0f);
+            CGContextFillPath(context);
         } break;
     }
 }

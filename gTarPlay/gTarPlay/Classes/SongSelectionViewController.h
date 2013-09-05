@@ -15,6 +15,7 @@
 
 @class PlayerViewController;
 @class SlidingModalViewController;
+@class UserSong;
 
 @interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver, ExpandableSearchBarDelegate>
 
@@ -50,5 +51,8 @@
 - (IBAction)difficulyButtonClicked:(id)sender;
 - (IBAction)blackButtonClicked:(id)sender;
 - (IBAction)fullscreenButtonClicked:(id)sender;
+
+- (void)openSongOptionsForSongId:(NSInteger)songId;
+- (void)openSongOptionsForSong:(UserSong*)userSong;
 
 @end

@@ -114,43 +114,32 @@
 - (XmlDom*)getChildWithName:(NSString*)childName
 {
     
-    if ( childName == nil )
-    {
+    if ( childName == nil ) {
         return nil;
     }
     
     NSDictionary * child = [m_backingDictionary objectForKey:childName];
     
-    if ( child == nil )
-    {
+    if ( child == nil ) {
         return nil;
     }
     
     if ( [child isKindOfClass:[NSString class]] )
     {
-        
 //        NSLog(@"Child is an attribute string, creating dummy text node");
         
         NSMutableDictionary * tempChild = [[[NSMutableDictionary alloc] init] autorelease];
-        
         [tempChild setObject:child forKey:XML_DICTIONARY_TEXT_NODE];
-        
         child = tempChild;
-        
     }
     else if ( ![child isKindOfClass:[NSDictionary class]] )
     {
-        
 //        NSLog(@"Child is not a dictionary");
-        
         return nil;
-        
     }
     
     XmlDom * returnDom = [[[XmlDom alloc] initWithXmlDictionary:child] autorelease];
-    
     return returnDom;
-    
 }
 
 - (NSArray*)getChildArrayWithName:(NSString*)childName
