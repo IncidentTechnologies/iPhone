@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UITriangleView.h"
 
 @protocol PullToUpdateTableViewDelegate <UITableViewDelegate>
 @optional
@@ -19,7 +20,7 @@
     UILabel * m_lastUpdateLabel;
     UIActivityIndicatorView * m_updatingIndicatorView;
     
-    UIImageView * m_arrowImageView;
+    UITriangleView *m_arrowTriangleView;
     
     BOOL m_aboveThreshold;
     BOOL m_animating;
@@ -40,5 +41,7 @@
 - (void)changeUpdateDate;
 
 -(void)setIndicatorTextColor:(UIColor*)color;
+-(void)setArrowColor:(UIColor*)color;
+-(void)setActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style;
 
 @end

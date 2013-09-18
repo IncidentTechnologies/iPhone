@@ -109,6 +109,27 @@
     m_purchasedSongs = [[NSMutableArray alloc] init];
 }
 
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
+{
+    NSLog(@"Got product list from itunes");
+    _productsRequest = NULL;                    // clear outstanding request
+    
+    m_productList = [response.products copy];
+    for(SKProduct *skProduct in m_productList)
+        NSLog(@"Found product: %@ %@ %0.2f", skProduct.productIdentifier, skProduct.localizedTitle, skProduct.price.floatValue);
+    
+    _completionHandler(YES, m_productList);
+    _completionHandler = NULL;
+}
+
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
+    
+    NSLog(@"Failed to load list of products from itunes");
+    _productsRequest = nil;
+    _completionHandler(NO, nil);
+    _completionHandler = nil;
+}
+
 // call this before making a purchase
 - (BOOL)canMakePurchases
 {
@@ -130,18 +151,25 @@
 -(void)purchaseSongWithSong:(UserSong*)song target:(id)obj cbSel:(SEL)sel
 {
     if ([m_productList count] == 0) {
-        NSLog(@"Cannot make InApp purchase, no products available");
-        [obj performSelector:sel withObject:NULL];
+        NSLog(@"Cannot make In-App purchase, no products available");
+        CloudResponse *cloudResponse = [[CloudResponse alloc] init];
+        cloudResponse.m_status = CloudResponseStatusItunesServerError;
+        [obj performSelector:sel withObject:cloudResponse];
         return;
+    }
+    
+    SongPurchaseRequest *pSongRequest = [[SongPurchaseRequest alloc] initWithSong:song andTarget:obj andSelector:sel];
+    NSLog(@"Created song request with song id: %d", [[pSongRequest m_pSong] m_songId]);
+    
+    // If song is free
+    if([song.m_cost floatValue] == 0) {
+        return [self purchaseFreeSongOnServer:pSongRequest];
     }
     
     for(SKProduct *skProduct in m_productList)
     {
         if([skProduct.productIdentifier isEqualToString:kInAppPurchaseSongProductId])
         {
-            SongPurchaseRequest *pSongRequest = [[SongPurchaseRequest alloc] initWithSong:song andTarget:obj andSelector:sel];
-            NSLog(@"Created song request with song id%d", [[pSongRequest m_pSong] m_songId]);
-            
             [m_pendingSongPurchases addObject:pSongRequest];
             SKPayment *skPayment = [SKPayment paymentWithProduct:skProduct];
             
@@ -160,37 +188,6 @@
     NSLog(@"Couldn't find %@ in products list", kInAppPurchaseSongProductId);
     [obj performSelector:sel withObject:NULL];
     return;
-}
-
-/*
-- (void) requestProductData
-{
-    SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:
-                                 [NSSet setWithObject: kInAppPurchaseSongProductId]];
-    request.delegate = self;
-    [request start];
-}
- */
-
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
-{
-    NSLog(@"Got product list from itunes");
-    _productsRequest = NULL;                    // clear outstanding request
-    
-    m_productList = [response.products copy];
-    for(SKProduct *skProduct in m_productList)
-        NSLog(@"Found product: %@ %@ %0.2f", skProduct.productIdentifier, skProduct.localizedTitle, skProduct.price.floatValue);
-    
-    _completionHandler(YES, m_productList);
-    _completionHandler = NULL;
-}
-
-- (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
-    
-    NSLog(@"Failed to load list of products from itunes");
-    _productsRequest = nil;
-    _completionHandler(NO, nil);
-    _completionHandler = nil;
 }
 
 #pragma -
@@ -282,6 +279,11 @@
 // called when a transaction has failed
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
 {
+    // TODO: If a user hits multiple songs to purchase at once, this might not do it in the right order
+    SongPurchaseRequest *pSongPurchaseRequest = [[m_pendingSongPurchases objectAtIndex:([m_pendingSongPurchases count] - 1)] retain];
+    [pSongPurchaseRequest.m_obj performSelector:pSongPurchaseRequest.m_sel withObject:NULL];
+    [m_pendingSongPurchases  removeObject:pSongPurchaseRequest];
+    
     if (transaction.error.code != SKErrorPaymentCancelled) {
         // error!
         NSLog(@"Error: Transaction failed with error code desc: %@ reason: %@", [transaction.error localizedDescription], [transaction.error localizedFailureReason]);
@@ -342,6 +344,13 @@
     
     [m_purchasedSongs addObject:pSongPurchaseRequest];
     [m_pendingSongPurchases removeLastObject];
+    [[CloudController sharedSingleton] requestPurchaseSong:pSong andCallbackObj:self andCallbackSel:@selector(requestPurchaseSongCallback:)];
+}
+
+- (void)purchaseFreeSongOnServer:(SongPurchaseRequest*)songRequest
+{
+    [m_purchasedSongs addObject:songRequest];
+    UserSong *pSong = [songRequest m_pSong];
     [[CloudController sharedSingleton] requestPurchaseSong:pSong andCallbackObj:self andCallbackSel:@selector(requestPurchaseSongCallback:)];
 }
 

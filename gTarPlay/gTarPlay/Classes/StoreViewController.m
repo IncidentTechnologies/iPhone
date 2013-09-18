@@ -26,13 +26,16 @@
 extern CloudController *g_cloudController;
 
 @interface StoreViewController () {
-    NSArray *m_UserSongArray;
-    
     NSArray *m_storeSongArray;
     NSArray *m_displayedStoreSongArray;
     
+    NSArray *m_searchedStoreSongArray;
+    
     BOOL m_fSearching;
-    SongSortOrder m_sortOrder;
+    
+    StoreSortOrder m_storeSortOrder;
+    
+    UITapGestureRecognizer *m_tapRecognizer;
 }
 @end
 
@@ -58,6 +61,11 @@ extern CloudController *g_cloudController;
         
         m_storeSongArray = [storeSongArray retain];
         m_displayedStoreSongArray = [storeSongArray retain];
+        
+        m_storeSortOrder.type = SORT_TITLE;
+        m_storeSortOrder.fAscending = FALSE;
+        
+        m_fSearching = FALSE;
     }
     return self;
 }
@@ -65,6 +73,10 @@ extern CloudController *g_cloudController;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Init tap gesture recog.
+    m_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSearchBar)];
+    [self.view addGestureRecognizer:m_tapRecognizer];
     
     // Add shadow and placement to header bar
     CGRect shadowRect = CGRectMake(0.0f, 0.0f, [[UIScreen mainScreen ] bounds].size.height, _viewTopBar.frame.size.height);
@@ -84,18 +96,25 @@ extern CloudController *g_cloudController;
     [_viewTopBar.layer addSublayer:bottomBorder];
     
     // Add divider borders in column headers
+    CALayer *bottomBorderHeader = [CALayer layer];
+    bottomBorderHeader.frame = CGRectMake(0.0f, _colBar.frame.size.height, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    bottomBorderHeader.backgroundColor = [UIColor colorWithWhite:(192.0f/255.0f) alpha:1.0f].CGColor;
+    [_colBar.layer addSublayer:bottomBorderHeader];
+    
     CALayer *borderTitleArtist = [CALayer layer];
     borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 120.0f, 0.0f, 1.0f, _colBar.frame.size.height);
-    borderTitleArtist.backgroundColor = [UIColor colorWithRed:(102.0f/255.0f) green:(104.0f/255.0f) blue:(105.0f/255.0f) alpha:1.0f].CGColor;
+    borderTitleArtist.backgroundColor = [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f].CGColor;
     [_colBar.layer addSublayer:borderTitleArtist];
     
     CALayer *borderSkill = [CALayer layer];
     borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 60.0f, 0.0f, 1.0f, _colBar.frame.size.height);
-    borderSkill.backgroundColor = [UIColor colorWithRed:(102.0f/255.0f) green:(104.0f/255.0f) blue:(105.0f/255.0f) alpha:1.0f].CGColor;
+    borderSkill.backgroundColor = [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f].CGColor;
     [_colBar.layer addSublayer:borderSkill];
     
     // Do any additional setup after loading the view from its nib.
     [_pullToUpdateSongList setIndicatorTextColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
+    [_pullToUpdateSongList setActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [_pullToUpdateSongList setArrowColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
     
     // InAppPurchaseManager is a Singleton
     InAppPurchaseManager* purchaseManager = [InAppPurchaseManager sharedInstance];
@@ -131,6 +150,121 @@ extern CloudController *g_cloudController;
 
 - (IBAction)onBackButtonTouchUpInside:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)updateTopHeaderTextFormatting
+{
+    NSUInteger startRangeTitleArtist = 0, rangeLengthTitleArtist = 0;
+    
+    if(m_storeSortOrder.type == SORT_ARTIST) {
+        startRangeTitleArtist = 7;
+        rangeLengthTitleArtist = 7;
+    }
+    else if(m_storeSortOrder.type == SORT_TITLE) {
+        startRangeTitleArtist = 0;
+        rangeLengthTitleArtist = 6;
+    }
+    
+    // Set the new text
+    if([_buttonTitleArtist respondsToSelector:@selector(setAttributedTitle:forState:)])
+    {
+        const CGFloat fontSize = 15;
+        UIFont *boldFont = [UIFont boldSystemFontOfSize:fontSize];
+        UIFont *regularFont = [UIFont systemFontOfSize:fontSize];
+        UIColor *foregroundColor = [UIColor whiteColor];
+        
+        // Create the attributes
+        NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                               regularFont, NSFontAttributeName,
+                               foregroundColor, NSForegroundColorAttributeName, nil];
+        
+        NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  boldFont, NSFontAttributeName, nil];
+        
+        const NSRange rangeTitleArtist = NSMakeRange(startRangeTitleArtist, rangeLengthTitleArtist);
+        const NSRange rangeSkill = NSMakeRange(0, (m_storeSortOrder.type == SORT_SKILL) ? 5 : 0);
+        const NSRange rangeBuy = NSMakeRange(0, (m_storeSortOrder.type == SORT_COST) ? 3 : 0);
+        
+        // Create the attributed string (text + attributes)
+        NSMutableAttributedString *attributedTextTitleArtist = [[NSMutableAttributedString alloc] initWithString:@"TITLE & ARTIST" attributes:attrs];
+        [attributedTextTitleArtist setAttributes:subAttrs range:rangeTitleArtist];
+        
+        NSMutableAttributedString *attributedTextSkill = [[NSMutableAttributedString alloc] initWithString:@"SKILL" attributes:attrs];
+        [attributedTextSkill setAttributes:subAttrs range:rangeSkill];
+        
+        NSMutableAttributedString *attributedTextBuy = [[NSMutableAttributedString alloc] initWithString:@"BUY" attributes:attrs];
+        [attributedTextBuy setAttributes:subAttrs range:rangeBuy];
+        
+        [_buttonTitleArtist setAttributedTitle:attributedTextTitleArtist forState:UIControlStateNormal];
+        [_buttonSkill setAttributedTitle:attributedTextSkill forState:UIControlStateNormal];
+        [_buttonBuy setAttributedTitle:attributedTextBuy forState:UIControlStateNormal];
+    }
+    else
+    {
+        [_buttonTitleArtist setTitle:@"TITLE & ARTIST" forState:UIControlStateNormal];
+        [_buttonSkill setTitle:@"SKILL" forState:UIControlStateNormal];
+        [_buttonBuy setTitle:@"BUY" forState:UIControlStateNormal];
+    }
+}
+
+-(IBAction)onTitleArtistClick:(id)sender
+{    
+    switch(m_storeSortOrder.type) {
+        case SORT_TITLE: {
+            if(m_storeSortOrder.fAscending) {
+                m_storeSortOrder.fAscending = FALSE;
+            }
+            else {
+                m_storeSortOrder.type = SORT_ARTIST;
+                m_storeSortOrder.fAscending = TRUE;
+            }
+        } break;
+        
+        case SORT_ARTIST: {
+            if(m_storeSortOrder.fAscending) {
+                m_storeSortOrder.fAscending = FALSE;
+            }
+            else {
+                m_storeSortOrder.type = SORT_TITLE;
+                m_storeSortOrder.fAscending = TRUE;
+            }
+        } break;
+            
+        default: {
+            m_storeSortOrder.type = SORT_TITLE;
+            m_storeSortOrder.fAscending = TRUE;
+        } break;
+    }
+        
+    [self updateTopHeaderTextFormatting];
+    [self refreshDisplayedStoreSongList];
+}
+
+-(IBAction)onSkillClick:(id)sender {
+    if(m_storeSortOrder.type != SORT_SKILL) {
+        m_storeSortOrder.type = SORT_SKILL;
+        m_storeSortOrder.fAscending = TRUE;
+    }
+    else {
+        m_storeSortOrder.fAscending = !m_storeSortOrder.fAscending;
+    }
+    
+    [self updateTopHeaderTextFormatting];
+    [self refreshDisplayedStoreSongList];
+}
+
+-(IBAction)onBuyClick:(id)sender
+{
+    if(m_storeSortOrder.type != SORT_COST) {
+        m_storeSortOrder.type = SORT_COST;
+        m_storeSortOrder.fAscending = TRUE;
+    }
+    else {
+        m_storeSortOrder.fAscending = !m_storeSortOrder.fAscending;
+    }
+    
+    [self updateTopHeaderTextFormatting];
+    [self refreshDisplayedStoreSongList];
 }
 
 - (void)dealloc
@@ -182,9 +316,14 @@ extern CloudController *g_cloudController;
 - (void)refreshDisplayedStoreSongList
 {
     [m_displayedStoreSongArray autorelease];
-    m_displayedStoreSongArray = [m_storeSongArray retain];
-    [self sortSongList];
     
+    if ( m_fSearching == TRUE )
+        m_displayedStoreSongArray = [m_searchedStoreSongArray retain];
+    else
+        m_displayedStoreSongArray = [m_storeSongArray retain];
+
+    
+    [self sortSongList];
     [_pullToUpdateSongList reloadData];
 }
 
@@ -200,21 +339,25 @@ extern CloudController *g_cloudController;
 
 - (void)sortSongList
 {
-    NSSortDescriptor *sortDescriptor;
+    NSSortDescriptor *sortDescriptor = NULL;
     
-    switch (m_sortOrder)
+    switch (m_storeSortOrder.type)
     {
-        case SortByTitleAscending:  sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:YES] autorelease];
-                                    break;
+        case SORT_TITLE: {
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:m_storeSortOrder.fAscending] autorelease];
+        } break;
             
-        case SortByTitleDescending: sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:NO] autorelease];
-                                    break;
+        case SORT_ARTIST: {
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:m_storeSortOrder.fAscending] autorelease];
+        } break;
             
-        case SortByArtistAscending: sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:YES] autorelease];
-                                    break;
+        case SORT_SKILL: {
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_difficulty" ascending:m_storeSortOrder.fAscending] autorelease];
+        } break;
             
-        case SortByArtistDescending:    sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:NO] autorelease];
-                                        break;
+        case SORT_COST: {
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_cost" ascending:m_storeSortOrder.fAscending] autorelease];
+        } break;
             
         default: break;
     }
@@ -276,8 +419,6 @@ extern CloudController *g_cloudController;
     [self refreshSongList];
 }
 
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -328,6 +469,63 @@ extern CloudController *g_cloudController;
     [tempCell updateCell];
     
 	return tempCell;
+}
+
+#pragma mark - ExpandableSearchBarDelegate
+
+- (void)searchBarDidBeginEditing:(ExpandableSearchBar *)searchBar
+{
+    // Do nothing
+}
+
+- (void)searchBarSearch:(ExpandableSearchBar *)searchBar
+{
+    if([searchBar.searchString length] > 0)
+    {
+        m_fSearching = YES;
+        [self searchForString:searchBar.searchString];
+        [self refreshDisplayedStoreSongList];
+    }
+    else
+    {
+        m_fSearching = FALSE;
+        [self dismissSearchBar];
+    }
+}
+
+- (void)searchBarCancel:(ExpandableSearchBar *)searchBar
+{
+    // revert the displayed contents
+    m_fSearching = FALSE;
+    [self refreshDisplayedStoreSongList];
+}
+
+- (void)searchForString:(NSString *)searchString
+{
+    NSMutableArray *searchResults = [[NSMutableArray alloc] init];
+    
+    for ( UserSong *userSong in m_storeSongArray )
+    {
+        NSArray *candidateStrings = [NSArray arrayWithObjects:userSong.m_title, userSong.m_author, nil];
+        
+        for ( NSString *candidateString in candidateStrings )
+        {
+            // If we find a hit, save it for later
+            if ( [candidateString rangeOfString:searchString options:NSCaseInsensitiveSearch].location != NSNotFound )
+            {
+                [searchResults addObject:userSong];
+                break;
+            }
+        }
+    }
+    
+    [m_searchedStoreSongArray release];
+    m_searchedStoreSongArray = [searchResults retain];
+}
+
+-(void) dismissSearchBar
+{
+    [_searchBar endSearch];
 }
 
 #pragma mark - Callbacks

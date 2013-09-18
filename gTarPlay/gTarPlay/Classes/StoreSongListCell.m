@@ -44,6 +44,7 @@
             [_buyButtonView updateBuyButtonState:m_buyButtonState];
         } break;
             
+        case BUY_BUTTON_FREE:
         case BUY_BUTTON_CONFIRM: {
             m_buyButtonState = BUY_BUTTON_PROCESSING;
             [_buyButtonView updateBuyButtonState:m_buyButtonState];
@@ -78,21 +79,28 @@
         NSLog(@"Song purchase failed");
         m_buyButtonState = BUY_BUTTON_PRICE;
         [_buyButtonView updateBuyButtonState:m_buyButtonState];
-        
-        // Show failure message
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Song Purchase Failed"
-                                                        message:@"Song Purchase Failed, no payments have been processed"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
         return;
     }
     
     CloudResponse *cloudResponse = (CloudResponse*)(pContext);
     switch(cloudResponse.m_status)
     {
+        case CloudResponseStatusItunesServerError: {
+            NSLog(@"Song purchase failed");
+            m_buyButtonState = BUY_BUTTON_PRICE;
+            [_buyButtonView updateBuyButtonState:m_buyButtonState];
+            
+            // Show failure message
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Song Purchase Failed"
+                                                            message:@"No products available, no payments have been processed"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+            return;
+        } break;
+        
         case CloudResponseStatusFailure: {
             NSLog(@"Song purchase failed");
             m_buyButtonState = BUY_BUTTON_PRICE;
@@ -147,11 +155,36 @@
 {
     [self setUserInteractionEnabled:YES];
     
+    // Add Borders
+    CALayer *topBorder = [CALayer layer];
+    topBorder.frame = CGRectMake(0.0f, -1.0f, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    topBorder.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
+    [self.layer addSublayer:topBorder];
+    
+    CALayer *bottomBorder = [CALayer layer];
+    bottomBorder.frame = CGRectMake(0.0f, self.frame.size.height, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    bottomBorder.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
+    [self.layer addSublayer:bottomBorder];
+    
+    CALayer *borderTitleArtist = [CALayer layer];
+    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 120.0f, 0.0f, 1.0f, self.frame.size.height);
+    borderTitleArtist.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
+    [self.layer addSublayer:borderTitleArtist];
+    
+    CALayer *borderSkill = [CALayer layer];
+    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 60.0f, 0.0f, 1.0f, self.frame.size.height);
+    borderSkill.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
+    [self.layer addSublayer:borderSkill];
+    
+    
     // Don't let user buy the song if it's already owned or leased by them
     if(_userSong.m_userLeased || _userSong.m_userOwned)
         m_buyButtonState = BUY_BUTTON_PURCHASED;
+    else if([_userSong.m_cost floatValue] == 0)
+        m_buyButtonState = BUY_BUTTON_FREE;
     else
         m_buyButtonState = BUY_BUTTON_PRICE;
+    
     [_buyButtonView updateBuyButtonState:m_buyButtonState];
     
     _labelSongArtist.alpha = 1.0f;

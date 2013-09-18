@@ -64,18 +64,33 @@ static inline double radians (double degrees) {
             
         } break;
             
+        case BUY_BUTTON_FREE: {
+            // draw circle
+            CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(4.0f/255.0f) green:(161.0f/255.0f) blue:(222.0f/255.0f) alpha:1.0f].CGColor);
+            CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
+            
+            CGRect textRect = CGRectInset(rect, 4, 4);
+            textRect.origin.x += 4.0f;
+            textRect.origin.y += 13.0f;
+            
+            CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+            NSString *text = @"FREE";
+            [text drawInRect:textRect withFont:[UIFont systemFontOfSize:13.0f]];
+            
+        } break;
+            
         case BUY_BUTTON_CONFIRM: {
             // draw a more different circle
             CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(124.0f/255.0f) green:(178.0f/255.0f) blue:(102.0f/255.0f) alpha:1.0f].CGColor);
             CGContextFillEllipseInRect(context, CGRectInset(rect, 3, 3));
             
             CGRect textRect = CGRectInset(rect, 4, 4);
-            textRect.origin.x += 4;
-            textRect.origin.y += 10;
+            textRect.origin.x += 6;
+            textRect.origin.y += 12;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
             NSString *text = @"BUY";
-            [text drawInRect:textRect withFont:[UIFont systemFontOfSize:17.0f]];
+            [text drawInRect:textRect withFont:[UIFont systemFontOfSize:15.0f]];
         } break;
             
         case BUY_BUTTON_PROCESSING: {
@@ -95,26 +110,8 @@ static inline double radians (double degrees) {
                 // Piece-wise envelope
                 float multValue = 0.0f;
                 float effX = (xVal / rect.size.width);
-                float freq = 10.5f;
-                multValue = sin(effX * M_PI);
-                
-                /*
-                if(effX < .10) {
-                    multValue = effX;
-                    divFactor = 25.0f;
-                }
-                else if(effX >= .10 && effX < 0.25f) {
-                    multValue = 0.10f + (effX - 0.10f) * 6;
-                    divFactor = 50.f;
-                }
-                else if(effX >= 0.25f && effX < 0.75f) {
-                    multValue = 1.0f - (effX - 0.25f) * 1.6;
-                    divFactor = 35.f;
-                }
-                else if(effX >= 0.75f) {
-                    multValue = 0.2f;
-                    divFactor = 35.0f;
-                }*/
+                float freq = 20.0f;
+                multValue =  pow(sin(effX * M_PI), 6.0f);
                 
                 float eqVal = multValue * sin((xVal / rect.size.width) * M_PI * freq);
                 

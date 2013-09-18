@@ -152,13 +152,13 @@
         if (!sharedSingleton)
         {
             // Production server
-            //NSString* server = @"http://184.169.154.56/v1.5";
+            NSString* server = @"http://184.169.154.56/ios_main";
             
             // Debug server
-            //NSString* server = @"http://50.18.250.24/m1";
+            //NSString* server = @"http://50.18.250.24/ios_main";
             
             // MAMP server
-            NSString* server = @"http://localhost:8888/gtaronline";
+            //NSString* server = @"http://localhost:8888/gtaronline";
             
             sharedSingleton = [[CloudController alloc] initWithServer:server];
         }

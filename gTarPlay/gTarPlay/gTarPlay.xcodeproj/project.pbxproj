@@ -11,6 +11,7 @@
 		26868D8817D2A8DF00DC990F /* StoreSongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */; };
 		26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8A17D2F3C500DC990F /* StoreListBuyButtonView.m */; };
 		26868D8E17D6C5AB00DC990F /* SongPurchaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8D17D6C5AB00DC990F /* SongPurchaseRequest.m */; };
+		26868D9117E29AD700DC990F /* UITriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D9017E29AD700DC990F /* UITriangleView.m */; };
 		9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CAF174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CB0174C68E000FA3239 /* Bowed Strings 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */; };
@@ -1673,6 +1674,8 @@
 		26868D8A17D2F3C500DC990F /* StoreListBuyButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListBuyButtonView.m; sourceTree = "<group>"; };
 		26868D8C17D6C5AA00DC990F /* SongPurchaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongPurchaseRequest.h; sourceTree = "<group>"; };
 		26868D8D17D6C5AB00DC990F /* SongPurchaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPurchaseRequest.m; sourceTree = "<group>"; };
+		26868D8F17E29AD700DC990F /* UITriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITriangleView.h; sourceTree = "<group>"; };
+		26868D9017E29AD700DC990F /* UITriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITriangleView.m; sourceTree = "<group>"; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlay_Prefix.pch; sourceTree = "<group>"; };
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -3533,6 +3536,8 @@
 			children = (
 				EC1E4DF11549E2AD0033F904 /* PullToUpdateTableView.h */,
 				EC1E4DF21549E2AD0033F904 /* PullToUpdateTableView.m */,
+				26868D8F17E29AD700DC990F /* UITriangleView.h */,
+				26868D9017E29AD700DC990F /* UITriangleView.m */,
 			);
 			name = PullToUpdateTableView;
 			sourceTree = "<group>";
@@ -5669,6 +5674,7 @@
 				26868D8617D2A46500DC990F /* StoreSongListCell.m in Sources */,
 				26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */,
 				26868D8E17D6C5AB00DC990F /* SongPurchaseRequest.m in Sources */,
+				26868D9117E29AD700DC990F /* UITriangleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

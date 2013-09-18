@@ -50,14 +50,12 @@
 
 - (void)dealloc
 {
-    
     [m_instructionsLabel release];
     [m_lastUpdateLabel release];
-    [m_arrowImageView release];
+    [m_arrowTriangleView release];
     [m_updatingIndicatorView release];
     
     [super dealloc];
-    
 }
 
 -(void)setIndicatorTextColor:(UIColor*)color
@@ -66,9 +64,18 @@
     m_lastUpdateLabel.textColor = [color copy];
 }
 
+-(void)setArrowColor:(UIColor*)color
+{
+    [m_arrowTriangleView setColor:color];
+}
+
+-(void)setActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style
+{
+    [m_updatingIndicatorView setActivityIndicatorViewStyle:style];
+}
+
 - (void)sharedInit
 {
-    
     m_aboveThreshold = NO;
     
     // Instructions, "pull to update"
@@ -90,17 +97,11 @@
     // TODO don't add this untill we can do proper update tracking
 //    [self addSubview:m_lastUpdateLabel];
     
-    // 
     // Arrow
-    //
-    m_arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BlackBackArrow_DOWN.png"]];
-    [m_arrowImageView setFrame:CGRectMake(IMAGE_INSET, -HEADER_OFFSET+IMAGE_INSET, LEFT_MARGIN-IMAGE_INSET-IMAGE_INSET, HEADER_OFFSET-IMAGE_INSET-IMAGE_INSET)];
+    m_arrowTriangleView = [[UITriangleView alloc] initWithFrame:CGRectMake(IMAGE_INSET, -HEADER_OFFSET+IMAGE_INSET, LEFT_MARGIN-IMAGE_INSET-IMAGE_INSET, HEADER_OFFSET-IMAGE_INSET-IMAGE_INSET)];
+    [self addSubview:m_arrowTriangleView];
     
-    [self addSubview:m_arrowImageView];
-    
-    //
     // Spinner
-    //
     m_updatingIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [m_updatingIndicatorView setFrame:CGRectMake(0, -HEADER_OFFSET, LEFT_MARGIN, HEADER_OFFSET)];
     m_updatingIndicatorView.hidesWhenStopped = YES;
@@ -114,7 +115,6 @@
 
 - (void)startAnimating
 {
-    
     if ( m_animating == YES )
     {
         return;
@@ -123,7 +123,7 @@
     m_animating = YES;
     
     [m_updatingIndicatorView startAnimating];
-    [m_arrowImageView setHidden:YES];
+    [m_arrowTriangleView setHidden:YES];
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -133,7 +133,6 @@
     m_instructionsLabel.text = @"Updating...";
     
     [UIView commitAnimations];
-    
 }
 
 - (void)stopAnimating
@@ -149,7 +148,7 @@
     m_animating = NO;
     
     [m_updatingIndicatorView stopAnimating];
-    [m_arrowImageView setHidden:NO];
+    [m_arrowTriangleView setHidden:NO];
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -180,7 +179,7 @@
     m_animating = YES;
     
     [m_updatingIndicatorView startAnimating];
-    [m_arrowImageView setHidden:YES];
+    [m_arrowTriangleView setHidden:YES];
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -223,7 +222,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     
-    m_arrowImageView.transform = CGAffineTransformMakeRotation(M_PI);
+    m_arrowTriangleView.transform = CGAffineTransformMakeRotation(M_PI);
     
     if ( m_animating == NO )
     {
@@ -240,7 +239,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     
-    m_arrowImageView.transform = CGAffineTransformIdentity;
+    m_arrowTriangleView.transform = CGAffineTransformIdentity;
     
     if ( m_animating == NO )
     {
