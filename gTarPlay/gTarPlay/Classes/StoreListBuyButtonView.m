@@ -82,6 +82,7 @@ static inline double radians (double degrees) {
         case BUY_BUTTON_CONFIRM: {
             // draw a more different circle
             CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(124.0f/255.0f) green:(178.0f/255.0f) blue:(102.0f/255.0f) alpha:1.0f].CGColor);
+
             CGContextFillEllipseInRect(context, CGRectInset(rect, 3, 3));
             
             CGRect textRect = CGRectInset(rect, 4, 4);
@@ -93,47 +94,26 @@ static inline double radians (double degrees) {
             [text drawInRect:textRect withFont:[UIFont systemFontOfSize:15.0f]];
         } break;
             
-        case BUY_BUTTON_PROCESSING: {
-            float xVal = 0.0f;
-            float yVal = 0.0f;
-            float xDelta = 0.025f;
-            float xLastVal, yLastVal;
-            
-            // draw cool animation
-            [[UIColor whiteColor] setStroke];
-            UIBezierPath *aPath = [UIBezierPath bezierPath];
-            aPath.lineWidth = 1.5f;
-            
-            [aPath moveToPoint:CGPointMake(0.0f, rect.size.height/2.0f)];
-            for(xVal = 0.0f; (xVal / rect.size.width) < m_Complete; xVal += xDelta)
-            {
-                // Piece-wise envelope
-                float multValue = 0.0f;
-                float effX = (xVal / rect.size.width);
-                float freq = 20.0f;
-                multValue =  pow(sin(effX * M_PI), 6.0f);
-                
-                float eqVal = multValue * sin((xVal / rect.size.width) * M_PI * freq);
-                
-                yVal = rect.size.height/2.0f + (rect.size.height/2.0f) * eqVal;
-                CGPoint newPoint = CGPointMake(xVal, yVal);
-                CGPoint ctrlPoint = CGPointMake(xLastVal + (xVal - xLastVal) / 2.0f, yLastVal + (yVal - yLastVal) / 2.0f);
-                
-                [aPath addQuadCurveToPoint:newPoint controlPoint:ctrlPoint];
-                
-                xLastVal = xVal;
-                yLastVal = yVal;
-            }
+        case BUY_BUTTON_PROCESSING: {            
+            float outerAlpha = (m_Complete > 0.25f && m_Complete < 0.5f) ? (m_Complete - 0.25f) / 0.25f : (m_Complete > 0.5f && m_Complete < 0.75f) ? (0.75f - m_Complete) / 0.25f : 0.0f;
+            float innerAlpha = (m_Complete < 0.25f) ? m_Complete / 0.25f : (m_Complete > 0.75f) ? (1.0f - m_Complete) / 0.25f : 1.0f;
 
-            [aPath stroke];
+            CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(84.0f/255.0f) green:(159.0f/255.0f) blue:(215.0f/255.0f) alpha:outerAlpha].CGColor);
+            CGContextAddEllipseInRect(context, CGRectInset(rect, 3, 3));
+            CGContextAddEllipseInRect(context, CGRectInset(rect, 8, 8));
+            CGContextEOFillPath(context);
+            
+            CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(84.0f/255.0f) green:(159.0f/255.0f) blue:(215.0f/255.0f) alpha:innerAlpha].CGColor);
+            CGContextAddEllipseInRect(context, CGRectInset(rect, 14, 14));
+            CGContextAddEllipseInRect(context, CGRectInset(rect, 16.5, 16.5));
+            CGContextEOFillPath(context);
+            
+            [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(cbDrawRect:) userInfo:nil repeats:NO];
             
             if(m_Complete < 1.0f)
                 m_Complete += 0.01f;
             else
                 m_Complete = 0.0f;
-            
-            [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(cbDrawRect:) userInfo:nil repeats:NO];
-            
         } break;
             
         case BUY_BUTTON_PURCHASED: {
