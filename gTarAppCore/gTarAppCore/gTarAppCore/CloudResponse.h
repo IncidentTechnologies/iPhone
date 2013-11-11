@@ -25,6 +25,7 @@ typedef enum
 	CloudResponseStatusAuthenticationError,
 	CloudResponseStatusConnectionError,
 	CloudResponseStatusServerError,
+    CloudResponseStatusItunesServerError,
     CloudResponseStatusOffline
 } CloudResponseStatus;
 

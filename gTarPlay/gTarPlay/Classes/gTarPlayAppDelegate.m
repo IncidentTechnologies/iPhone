@@ -40,15 +40,6 @@ UserController * g_userController;
 @synthesize m_navigationController;
 @synthesize m_playApplication;
 
-// MAMP
-//#define kServerAddress @"http://localhost:8888/gtaronline"
-
-// Dev server
-// #define kServerAddress @"http://50.18.250.24/ios_main"
-
-// Production Server
-#define kServerAddress @"http://184.169.154.56/ios_main"
-
 #pragma mark -
 #pragma mark Application lifecycle
 

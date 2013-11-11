@@ -14,6 +14,22 @@
 @class CloudRequest;
 @class CloudResponse;
 
+//#define MAMP_SERVER
+//#define DEV_SERVER
+#define PROD_SERVER
+
+#ifdef PROD_SERVER
+    #define kServerAddress @"http://184.169.154.56/ios_main"
+#endif
+
+#ifdef DEV_SERVER
+    #define kServerAddress @"http://50.18.250.24/ios_main"
+#endif
+
+#ifdef MAMP_SERVER
+    #define kServerAddress @"http://localhost:8888/gtaronline"
+#endif
+
 @interface CloudController : NSObject
 {
     

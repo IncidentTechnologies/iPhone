@@ -45,6 +45,8 @@ class Compressor;
 
 @interface AudioController ()
 {
+    AVAudioSession *m_session;
+    
     AudioSource m_audioSource;
 	
 	KSObject *m_pksobjects;
@@ -87,9 +89,19 @@ class Compressor;
 {
 	if(self = [super init])
 	{
-        // Default audio route to speaker
-        [self RouteAudioToSpeaker];
+        // Grab the audio session here
+        m_session = [AVAudioSession sharedInstance];
         
+        // Activate audio session for good measure
+        NSError *activationError = nil;
+        BOOL success = [m_session setActive: YES error: &activationError];
+        if (!success) {
+            NSLog(@"Error: Failed to activate the audio session!");
+            m_session = NULL;
+        }
+        
+        // Look at avail routes
+        NSLog(@"Lineout Name: %@, Headphones Name: %@, Speaker Name: %@", AVAudioSessionPortLineOut, AVAudioSessionPortHeadphones, AVAudioSessionPortBuiltInSpeaker);
         m_audioSource = audioSource;
         
 		m_pksobjects_n = 6;
@@ -176,6 +188,7 @@ class Compressor;
         srand( time(NULL) );
         
         [self initializeAUGraph];
+        [self RouteAudioToSpeaker];
 	}
 	
 	return self;
@@ -602,24 +615,45 @@ class Compressor;
     return [m_sampler getCurrentSamplePackIndex];
 }
 
+- (void) HandleAVAudioSessionRouteChange:(NSNotification*)note
+{
+#if TARGET_IPHONE_SIMULATOR
+    /* do nothing */
+    NSLog(@"HandleAVAudioSessionRouteChange doesn't do anything in simulator");
+#else
+    // Respond to the route change
+    NSLog(@"AVAudioSessionRouteChanged: %@, %@",
+          [note.userInfo objectForKey:AVAudioSessionRouteChangeReasonKey],
+          [note.userInfo objectForKey:AVAudioSessionRouteChangePreviousRouteKey]);
+    
+    // Don't let routing go to built in receiver 
+    NSString *audioRoute = [self GetNSAudioRoute];
+    if ([audioRoute isEqualToString:(NSString*)(AVAudioSessionPortBuiltInReceiver)])
+        [self RouteAudioToSpeaker];
+    
+    [self requestAudioRouteDetails];
+    [self AnnounceAudioRouteChange];
+#endif
+}
+
 void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID inID, UInt32 inDataSize, const void *inData)
 {
-    if (inID != kAudioSessionProperty_AudioRouteChange) return;
+#if TARGET_IPHONE_SIMULATOR
+    /* do nothing */
+    NSLog(@"AudioControllerProperty Listner doesn't do anything in simulator");
+#else
+    if (inID != kAudioSessionProperty_AudioRouteChange)
+        return;
     
     AudioController *ac = (AudioController*)inClientData;
     
-    CFStringRef newRoute = [ac GetAudioRoute];
-    
-    // If the audio source is set to the receiver (ear speaker), force it to the speaker (speaker phone speaker).
-    if ([(NSString*)newRoute isEqualToString:(NSString*)kAudioSessionOutputRoute_BuiltInReceiver] == YES)
-    {
+    NSString *audioRoute = [ac GetNSAudioRoute];
+    if (![audioRoute isEqualToString:(NSString*)(AVAudioSessionPortOverrideSpeaker)])
         [ac RouteAudioToSpeaker];
-        return;
-    }
     
     [ac requestAudioRouteDetails];
-    
     [ac AnnounceAudioRouteChange];
+#endif
 }
 
 // Request that a AudioRouteChange notification get sent out, even though
@@ -627,13 +661,22 @@ void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID
 // route state info for initial UI setup.
 - (void) requestAudioRouteDetails
 {
-    CFStringRef newRoute = [self GetAudioRoute];
+    bool fRouteIsSpeaker = TRUE;
+    NSString *audioRoute = [self GetNSAudioRoute];
     
-    bool routeIsSpeaker = [(NSString*)newRoute isEqualToString:(NSString*)kAudioSessionOutputRoute_BuiltInSpeaker];
+    //CFStringRef newRoute = [self GetAudioRoute];
+    //bool routeIsSpeaker = [(NSString*)newRoute isEqualToString:(NSString*)kAudioSessionOutputRoute_BuiltInSpeaker];
+    
+#if TARGET_IPHONE_SIMULATOR
+    fRouteIsSpeaker = TRUE;     // spoof the speaker if it's in simulator
+#else
+    fRouteIsSpeaker = [audioRoute isEqualToString:(NSString*)(AVAudioSessionPortBuiltInSpeaker)];
+#endif
     
     NSDictionary *routeData = [NSDictionary dictionaryWithObjectsAndKeys:
-                               [NSNumber numberWithBool:routeIsSpeaker], @"isRouteSpeaker",
-                               (NSString*)newRoute, @"routeName", nil];
+                               [NSNumber numberWithBool:fRouteIsSpeaker], @"isRouteSpeaker",
+                               audioRoute, @"routeName", nil];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AudioRouteChange" object:self userInfo:routeData];
 }
 
@@ -642,17 +685,24 @@ void AudioInterruptionListener (void *inClientData, UInt32 inInterruptionState)
 {
     AudioController *ac = (AudioController *)inClientData;
     
-    // stop audio graph when an interruption comes in, and restart it when the interruption
-    // is done.
+    // Stop audio graph when an interruption comes in, and restart it when the interruption is done.
     if (inInterruptionState == kAudioSessionBeginInterruption)
     {
-        AudioSessionSetActive(false);
-        [ac stopAUGraph];
+        NSError *errorSetActiveFalse = NULL;
+        [[AVAudioSession sharedInstance] setActive:FALSE error:&errorSetActiveFalse];
+        if(errorSetActiveFalse != NULL)
+            NSLog(@"Failed to set AVAudioSession to not active: %@", [errorSetActiveFalse description]);
+        else
+            [ac stopAUGraph];
     }
     else if (inInterruptionState == kAudioSessionEndInterruption)
     {
-        AudioSessionSetActive(true);
-        [ac startAUGraph];
+        NSError *errorSetActiveTrue = NULL;
+        [[AVAudioSession sharedInstance] setActive:TRUE error:&errorSetActiveTrue];
+        if(errorSetActiveTrue != NULL)
+            NSLog(@"Failed to set AVAudioSession to not active: %@", [errorSetActiveTrue description]);
+        else
+            [ac startAUGraph];
     }
 }
 
@@ -818,44 +868,25 @@ static OSStatus renderInput(void *inRefCon, AudioUnitRenderActionFlags *ioAction
 	OSStatus result = noErr;
     frequency= 440;
     
-    OSStatus status = AudioSessionInitialize ( NULL,
-                                              NULL,
-                                              AudioInterruptionListener,
-                                              self );
-    
-    if ( status == 0 )
+    if (m_session != NULL)
     {
-        
-        // do it
-        UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;
-        status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
-        
-        if ( status != 0 )
-        {
-            NSError * error = [NSError errorWithDomain:NSOSStatusErrorDomain
-                                                  code:status
-                                              userInfo:nil];
-            
-            NSLog(@"SetProp OSStatus: %@", [error description]);
+        // Set Category
+        NSError *setCategoryError = nil;
+        BOOL fStatus = [m_session setCategory:AVAudioSessionCategoryPlayAndRecord error:&setCategoryError];
+        if(fStatus == FALSE) {
+            NSLog(@"AVAudioSession SetCategory failed: %@", [setCategoryError description]);
         }
-        
     }
     else
     {
-        NSError * error = [NSError errorWithDomain:NSOSStatusErrorDomain
-                                              code:status
-                                          userInfo:nil];
-        
-        NSLog(@"Init OSStatus: %@", [error description]);
+        NSLog(@"InitializeAUGraph failed, session not initialized");
+        return;
     }
     
-    // Register a property change handler
-    status = AudioSessionAddPropertyListener( kAudioSessionProperty_AudioRouteChange, &AudioControllerPropertyListener, self );
-    
-    if ( status != 0 )
-    {
-        NSLog(@"Failed to add property listener!");
-    }
+    // subscribe for notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(HandleAVAudioSessionRouteChange:)
+                                          name:@"AVAudioSessionRouteChangeNotification" object:NULL];
 
 	
 	// Create the AUGraph
@@ -1088,77 +1119,80 @@ static OSStatus renderInput(void *inRefCon, AudioUnitRenderActionFlags *ioAction
 
 - (void) RouteAudioToSpeaker
 {
+    //UInt32 audioRoute = kAudioSessionOverrideAudioRoute_Speaker;
+    //AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRoute), &audioRoute);
     
-    UInt32 audioRoute = kAudioSessionOverrideAudioRoute_Speaker;
+#if TARGET_IPHONE_SIMULATOR
+    NSLog(@"Routing not available in simulator");
+#else
+    NSError *overrideError = NULL;
+    [m_session overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&overrideError];
     
-    AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRoute), &audioRoute);
-    
-    [self AnnounceAudioRouteChange];
-    
+    if(overrideError != NULL)
+    {
+        NSLog(@"Failed to route audio to speaker: %@", [overrideError description]);
+        [self GetAudioRoute];
+    }
+    else
+    {
+        [self AnnounceAudioRouteChange];
+    }
+#endif
 }
 
 - (void) RouteAudioToDefault
 {
+    //UInt32 audioRoute = kAudioSessionOverrideAudioRoute_None;
+    //AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRoute), &audioRoute);
     
-    UInt32 audioRoute = kAudioSessionOverrideAudioRoute_None;
+#if TARGET_IPHONE_SIMULATOR
+    NSLog(@"Routing not available in simulator");
+#else
+    NSError *overrideError = NULL;
+    [m_session overrideOutputAudioPort:AVAudioSessionPortOverrideNone error:&overrideError];
     
-    AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRoute), &audioRoute);
-    
-    [self AnnounceAudioRouteChange];
-    
+    if(overrideError != NULL) {
+        NSLog(@"Failed to route audio to speaker: %@", [overrideError description]);
+        [self GetAudioRoute];
+    }
+    else
+        [self AnnounceAudioRouteChange];
+#endif
 }
 
-- (CFStringRef) GetAudioRoute
-{
-    
-    CFDictionaryRef routes;
-    
-    UInt32 propertySize = sizeof(CFStringRef);
-    
-    OSStatus result = AudioSessionGetProperty(kAudioSessionProperty_AudioRouteDescription, &propertySize, &routes);
-    
-    if ( result == 0 )
+- (NSString *) GetNSAudioRoute {
+#if TARGET_IPHONE_SIMULATOR
+    return @"simulator";
+#else
+    AVAudioSessionRouteDescription *routeDesc = [m_session currentRoute];
+    AVAudioSessionPortDescription *outputPortDesc = [[routeDesc outputs] firstObject];
+    if(outputPortDesc != NULL)
     {
-        CFArrayRef outputs = (CFArrayRef) CFDictionaryGetValue(routes, kAudioSession_AudioRouteKey_Outputs);
-        if (NULL == outputs)
-        {
-            return NULL;
-        }
-        CFDictionaryRef mainOut = (CFDictionaryRef) CFArrayGetValueAtIndex(outputs, 0);
-        if (NULL == mainOut)
-        {
-            return NULL;
-        }
-        CFStringRef routeName = (CFStringRef) CFDictionaryGetValue(mainOut, kAudioSession_AudioRouteKey_Type);
-        
-        return routeName;
+        NSLog(@"Current Route: %@", [outputPortDesc portName]);
+        return [outputPortDesc portName];
     }
-    
-    return NULL;
+    else {
+        return NULL;
+    }
+#endif
+}
+
+- (CFStringRef) GetAudioRoute {
+    return (CFStringRef)[self GetNSAudioRoute];
 }
 
 - (void) AnnounceAudioRouteChange
 {
-    
-    NSString * routeName = (NSString *)[self GetAudioRoute];
-    
     // Print out the current route
+    NSString * routeName = (NSString *)[self GetAudioRoute];
     NSLog(@"Routing audio through %@", routeName);
-        
 }
 
 - (void) dealloc
 {
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self stopAUGraph];
-    
-    OSStatus status = AudioSessionRemovePropertyListenerWithUserData( kAudioSessionProperty_AudioRouteChange, &AudioControllerPropertyListener, self );
-    
-    if ( status != 0 )
-    {
-        NSLog(@"Failed to remove property listener!");
-    }
-
 	DisposeAUGraph(augraph);
     
     if (m_pksobjects != NULL)

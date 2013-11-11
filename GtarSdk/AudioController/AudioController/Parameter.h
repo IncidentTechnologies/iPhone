@@ -16,39 +16,15 @@
 class Parameter
 {
 public:
-    Parameter(float initial, float min, float max, const std::string& desc)
-    {
-        m_max = max;
-        m_min = min;
-        if (initial > max)
-        {
-            m_value = max;
-        }
-        else if (initial < min)
-        {
-            m_value = min;
-        }
-        else
-        {
-            m_value = initial;
-        }
-        m_name = desc;
-    }
+    Parameter(float initial, float min, float max, const std::string& desc);
     
-    float getValue() {return m_value;};
-    bool setValue(float newVal)
-    {
-        if (newVal > m_max || newVal < m_min)
-        {
-            return false;
-        }
-        m_value = newVal;
-        return true;
-    }
+    float getValue();
+    bool setValue(float newVal);
     
-    float getMax() {return m_max;};
-    float getMin() {return m_min;};
-    std::string getName() {return m_name;};
+    float getMax();
+    float getMin();
+    std::string getName();
+    
 private:
     float m_value;
     float m_max;

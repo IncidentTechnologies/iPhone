@@ -24,7 +24,6 @@
 -(id) init
 {
     return [self initWithSampleRate:44100 AndSamplePack:nil];
-    
 }
 
 - (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString *)name
@@ -332,7 +331,7 @@
 
 - (bool) readAudioFilesIntoMemory
 {
-    for (int noteNum=0; noteNum < m_numberOfSamples; noteNum++)
+    for (int noteNum = 0; noteNum < m_numberOfSamples; noteNum++)
     {
         if (m_pendingLoadRequests > 0)
         {

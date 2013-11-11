@@ -13,78 +13,28 @@
 #define gTarAudioController_TanhDistortion_h
 
 #include "Effect.h"
+#include "Parameter.h"
 
-class TanhDistortion :
-public Effect
+class TanhDistortion : public Effect
 {
 public:
-    TanhDistortion (double gain, double wet, double SamplingFrequency) :
-    Effect("Distortion", wet, SamplingFrequency)
-    {
-        m_pPosFactor = new Parameter(1.0, 1.0, 100, "Positive Dist");
-        m_pNegFactor = new Parameter(1.0, 1.0, 100, "Negative Dist");
-    }
+    TanhDistortion (double gain, double wet, double SamplingFrequency);
     
-    inline double InputSample(double sample)
-    {
-        double retVal = 0;
-        
-        if(m_fPassThrough)
-            return sample;
-        
-        float factor;
-        if (sample > 0)
-        {
-            factor = m_pPosFactor->getValue();
-            retVal = tanh(factor*sample)/factor;
-        }
-        else
-        {
-            factor = m_pNegFactor->getValue();
-            retVal = tanh(factor*sample)/factor;
-        }
-        
-        return retVal * 2;
-    }
+    inline double InputSample(double sample);
     
-    bool setPosFactor(double factor)
-    {
-        return m_pPosFactor->setValue(factor);
-    }
+    bool setPosFactor(double factor);
     
-    bool setNegFactor(double factor)
-    {
-        return m_pNegFactor->setValue(factor);
-    }
+    bool setNegFactor(double factor);
     
-    Parameter& getPrimaryParam()
-    {
-        return *m_pPosFactor;
-    }
+    Parameter& getPrimaryParam();
     
-    bool setPrimaryParam(float value)
-    {
-        return m_pPosFactor->setValue(value);
-    }
+    bool setPrimaryParam(float value);
     
-    Parameter& getSecondaryParam()
-    {
-        return *m_pNegFactor;
-    }
+    Parameter& getSecondaryParam();
     
-    bool setSecondaryParam(float value)
-    {
-        return m_pNegFactor->setValue(value);        
-    }
+    bool setSecondaryParam(float value);
     
-    ~TanhDistortion()
-    {
-        delete m_pPosFactor;
-        m_pPosFactor = NULL;
-        
-        delete m_pNegFactor;
-        m_pNegFactor = NULL;
-    }
+    ~TanhDistortion();
     
 private:
     Parameter *m_pPosFactor;

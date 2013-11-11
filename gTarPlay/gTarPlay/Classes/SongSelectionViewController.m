@@ -131,18 +131,8 @@ extern GtarController *g_gtarController;
     _sortByArtistArrow.hidden = YES;
     _sortByTitleButtton.selected = YES;
     _sortByTitleArrow.highlighted = YES;
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
     
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
+    // Init volume / instrument views
     if ( _volumeViewController == nil )
     {
         _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
@@ -154,6 +144,17 @@ extern GtarController *g_gtarController;
         _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
         [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
     if ( [_userSongArray count] == 0 )
     {

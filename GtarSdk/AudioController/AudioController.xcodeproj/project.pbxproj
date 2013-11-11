@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26744EAF180667C200C26068 /* FuzzExpDistortion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26744EAE180667C200C26068 /* FuzzExpDistortion.mm */; };
+		26C3F8FD1810DA6B00744A9D /* SoftClippingOverdrive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F8FC1810DA6B00744A9D /* SoftClippingOverdrive.mm */; };
+		26C3F8FF1810DB7C00744A9D /* HardCutOffDistortion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F8FE1810DB7C00744A9D /* HardCutOffDistortion.mm */; };
+		26C3F9011810DBF600744A9D /* ButterWorthFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9001810DBF600744A9D /* ButterWorthFilter.mm */; };
+		26C3F9031810DD2000744A9D /* Overdrive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9021810DD2000744A9D /* Overdrive.mm */; };
+		26C3F9051810DDC000744A9D /* ButterWorthFilterElement.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9041810DDC000744A9D /* ButterWorthFilterElement.mm */; };
+		26C3F9071810DFED00744A9D /* Parameter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9061810DFED00744A9D /* Parameter.mm */; };
+		26C3F9091810E0C900744A9D /* Reverb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9081810E0C900744A9D /* Reverb.mm */; };
+		26C3F90B1810E2F800744A9D /* ChorusEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F90A1810E2F800744A9D /* ChorusEffect.mm */; };
+		26C3F90D1810E39300744A9D /* DelayEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F90C1810E39300744A9D /* DelayEffect.mm */; };
+		26C3F90F1810E8CC00744A9D /* DiffusionTank.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F90E1810E8CC00744A9D /* DiffusionTank.mm */; };
+		26C3F9111810E92E00744A9D /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9101810E92E00744A9D /* Effect.mm */; };
+		26C3F9131810E9FD00744A9D /* TanhDistortion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9121810E9FD00744A9D /* TanhDistortion.mm */; };
+		26C3F9151810EC1500744A9D /* EnvelopeFollower.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9141810EC1500744A9D /* EnvelopeFollower.mm */; };
+		26C3F9171810ED7B00744A9D /* FirstOrderFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9161810ED7B00744A9D /* FirstOrderFilter.mm */; };
+		26C3F9191810EE1400744A9D /* KSObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F9181810EE1400744A9D /* KSObject.mm */; };
+		26C3F91B1810F0FE00744A9D /* LocalMax.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F91A1810F0FE00744A9D /* LocalMax.mm */; };
+		26C3F91D1810F14300744A9D /* Compressor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F91C1810F14300744A9D /* Compressor.mm */; };
+		26C3F91F1810F19700744A9D /* Distortion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F91E1810F19700744A9D /* Distortion.mm */; };
+		26F85ED218146C8C00326CE7 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C3F9221810F81800744A9D /* libstdc++.dylib */; };
 		EC7A0DC3161A4AD3005BF0E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7A0DC2161A4AD3005BF0E5 /* Foundation.framework */; };
 		EC7A0DD6161A4B37005BF0E5 /* AudioController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DD2161A4B37005BF0E5 /* AudioController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC7A0DD7161A4B37005BF0E5 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC7A0DD3161A4B37005BF0E5 /* AudioController.mm */; };
@@ -90,6 +110,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		26744EAE180667C200C26068 /* FuzzExpDistortion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FuzzExpDistortion.mm; sourceTree = "<group>"; };
+		268E70C31810ADCA007404B0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		26C3F8FC1810DA6B00744A9D /* SoftClippingOverdrive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoftClippingOverdrive.mm; sourceTree = "<group>"; };
+		26C3F8FE1810DB7C00744A9D /* HardCutOffDistortion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HardCutOffDistortion.mm; sourceTree = "<group>"; };
+		26C3F9001810DBF600744A9D /* ButterWorthFilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ButterWorthFilter.mm; sourceTree = "<group>"; };
+		26C3F9021810DD2000744A9D /* Overdrive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Overdrive.mm; sourceTree = "<group>"; };
+		26C3F9041810DDC000744A9D /* ButterWorthFilterElement.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ButterWorthFilterElement.mm; sourceTree = "<group>"; };
+		26C3F9061810DFED00744A9D /* Parameter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Parameter.mm; sourceTree = "<group>"; };
+		26C3F9081810E0C900744A9D /* Reverb.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Reverb.mm; sourceTree = "<group>"; };
+		26C3F90A1810E2F800744A9D /* ChorusEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChorusEffect.mm; sourceTree = "<group>"; };
+		26C3F90C1810E39300744A9D /* DelayEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DelayEffect.mm; sourceTree = "<group>"; };
+		26C3F90E1810E8CC00744A9D /* DiffusionTank.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DiffusionTank.mm; sourceTree = "<group>"; };
+		26C3F9101810E92E00744A9D /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Effect.mm; sourceTree = "<group>"; };
+		26C3F9121810E9FD00744A9D /* TanhDistortion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TanhDistortion.mm; sourceTree = "<group>"; };
+		26C3F9141810EC1500744A9D /* EnvelopeFollower.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EnvelopeFollower.mm; sourceTree = "<group>"; };
+		26C3F9161810ED7B00744A9D /* FirstOrderFilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FirstOrderFilter.mm; sourceTree = "<group>"; };
+		26C3F9181810EE1400744A9D /* KSObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KSObject.mm; sourceTree = "<group>"; };
+		26C3F91A1810F0FE00744A9D /* LocalMax.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalMax.mm; sourceTree = "<group>"; };
+		26C3F91C1810F14300744A9D /* Compressor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Compressor.mm; sourceTree = "<group>"; };
+		26C3F91E1810F19700744A9D /* Distortion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Distortion.mm; sourceTree = "<group>"; };
+		26C3F9221810F81800744A9D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		EC7A0DBF161A4AD3005BF0E5 /* libAudioController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAudioController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7A0DC2161A4AD3005BF0E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EC7A0DC6161A4AD3005BF0E5 /* AudioController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AudioController-Prefix.pch"; sourceTree = "<group>"; };
@@ -130,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F85ED218146C8C00326CE7 /* libstdc++.dylib in Frameworks */,
 				EC7A0E0D161A4C0A005BF0E5 /* AudioToolbox.framework in Frameworks */,
 				EC7A0DC3161A4AD3005BF0E5 /* Foundation.framework in Frameworks */,
 			);
@@ -147,6 +189,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26744EB0180667CC00C26068 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				EC7A0DE6161A4BCC005BF0E5 /* ButterWorthFilter.h */,
+				EC7A0DE7161A4BCC005BF0E5 /* ButterWorthFilterElement.h */,
+				EC7A0DE8161A4BCC005BF0E5 /* ChorusEffect.h */,
+				EC7A0DE9161A4BCC005BF0E5 /* DelayEffect.h */,
+				EC7A0DEA161A4BCC005BF0E5 /* DiffusionTank.h */,
+				EC7A0DEB161A4BCC005BF0E5 /* Effect.h */,
+				EC7A0DEC161A4BCC005BF0E5 /* FirstOrderFilter.h */,
+				EC7A0DED161A4BCC005BF0E5 /* FuzzExpDistortion.h */,
+				EC7A0DEE161A4BCC005BF0E5 /* HardCutoffDistortion.h */,
+				EC7A0DEF161A4BCC005BF0E5 /* KSObject.h */,
+				EC7A0DF0161A4BCC005BF0E5 /* LocalMax.h */,
+				EC7A0DF1161A4BCC005BF0E5 /* Overdrive.h */,
+				EC7A0DF2161A4BCC005BF0E5 /* Parameter.h */,
+				EC7A0DF3161A4BCC005BF0E5 /* Reverb.h */,
+				EC7A0DF4161A4BCC005BF0E5 /* SoftClippingOverdrive.h */,
+				EC7A0DF5161A4BCC005BF0E5 /* TanhDistortion.h */,
+				EC7A0DF6161A4BCC005BF0E5 /* EnvelopeFollower.h */,
+				EC7A0DF7161A4BCC005BF0E5 /* Compressor.h */,
+				EC7A0DF8161A4BCC005BF0E5 /* Distortion.h */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+		26744EB1180667D200C26068 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				26744EAE180667C200C26068 /* FuzzExpDistortion.mm */,
+				26C3F8FC1810DA6B00744A9D /* SoftClippingOverdrive.mm */,
+				26C3F8FE1810DB7C00744A9D /* HardCutOffDistortion.mm */,
+				26C3F9001810DBF600744A9D /* ButterWorthFilter.mm */,
+				26C3F9021810DD2000744A9D /* Overdrive.mm */,
+				26C3F9041810DDC000744A9D /* ButterWorthFilterElement.mm */,
+				26C3F9061810DFED00744A9D /* Parameter.mm */,
+				26C3F9081810E0C900744A9D /* Reverb.mm */,
+				26C3F90A1810E2F800744A9D /* ChorusEffect.mm */,
+				26C3F90C1810E39300744A9D /* DelayEffect.mm */,
+				26C3F90E1810E8CC00744A9D /* DiffusionTank.mm */,
+				26C3F9101810E92E00744A9D /* Effect.mm */,
+				26C3F9121810E9FD00744A9D /* TanhDistortion.mm */,
+				26C3F9141810EC1500744A9D /* EnvelopeFollower.mm */,
+				26C3F9161810ED7B00744A9D /* FirstOrderFilter.mm */,
+				26C3F9181810EE1400744A9D /* KSObject.mm */,
+				26C3F91A1810F0FE00744A9D /* LocalMax.mm */,
+				26C3F91C1810F14300744A9D /* Compressor.mm */,
+				26C3F91E1810F19700744A9D /* Distortion.mm */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
 		EC7A0DB4161A4AD3005BF0E5 = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +262,8 @@
 		EC7A0DC1161A4AD3005BF0E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26C3F9221810F81800744A9D /* libstdc++.dylib */,
+				268E70C31810ADCA007404B0 /* libc++.dylib */,
 				EC7A0E0C161A4C0A005BF0E5 /* AudioToolbox.framework */,
 				EC7A0DC2161A4AD3005BF0E5 /* Foundation.framework */,
 			);
@@ -211,25 +307,8 @@
 		EC7A0DE5161A4BBF005BF0E5 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
-				EC7A0DE6161A4BCC005BF0E5 /* ButterWorthFilter.h */,
-				EC7A0DE7161A4BCC005BF0E5 /* ButterWorthFilterElement.h */,
-				EC7A0DE8161A4BCC005BF0E5 /* ChorusEffect.h */,
-				EC7A0DE9161A4BCC005BF0E5 /* DelayEffect.h */,
-				EC7A0DEA161A4BCC005BF0E5 /* DiffusionTank.h */,
-				EC7A0DEB161A4BCC005BF0E5 /* Effect.h */,
-				EC7A0DEC161A4BCC005BF0E5 /* FirstOrderFilter.h */,
-				EC7A0DED161A4BCC005BF0E5 /* FuzzExpDistortion.h */,
-				EC7A0DEE161A4BCC005BF0E5 /* HardCutoffDistortion.h */,
-				EC7A0DEF161A4BCC005BF0E5 /* KSObject.h */,
-				EC7A0DF0161A4BCC005BF0E5 /* LocalMax.h */,
-				EC7A0DF1161A4BCC005BF0E5 /* Overdrive.h */,
-				EC7A0DF2161A4BCC005BF0E5 /* Parameter.h */,
-				EC7A0DF3161A4BCC005BF0E5 /* Reverb.h */,
-				EC7A0DF4161A4BCC005BF0E5 /* SoftClippingOverdrive.h */,
-				EC7A0DF5161A4BCC005BF0E5 /* TanhDistortion.h */,
-				EC7A0DF6161A4BCC005BF0E5 /* EnvelopeFollower.h */,
-				EC7A0DF7161A4BCC005BF0E5 /* Compressor.h */,
-				EC7A0DF8161A4BCC005BF0E5 /* Distortion.h */,
+				26744EB1180667D200C26068 /* Source */,
+				26744EB0180667CC00C26068 /* Header */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -370,9 +449,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26C3F9051810DDC000744A9D /* ButterWorthFilterElement.mm in Sources */,
+				26C3F90F1810E8CC00744A9D /* DiffusionTank.mm in Sources */,
 				EC7A0DD7161A4B37005BF0E5 /* AudioController.mm in Sources */,
+				26C3F9131810E9FD00744A9D /* TanhDistortion.mm in Sources */,
+				26C3F9111810E92E00744A9D /* Effect.mm in Sources */,
+				26C3F9171810ED7B00744A9D /* FirstOrderFilter.mm in Sources */,
 				EC7A0DD9161A4B37005BF0E5 /* Sampler.mm in Sources */,
+				26C3F9191810EE1400744A9D /* KSObject.mm in Sources */,
+				26C3F91B1810F0FE00744A9D /* LocalMax.mm in Sources */,
+				26C3F9031810DD2000744A9D /* Overdrive.mm in Sources */,
+				26C3F91F1810F19700744A9D /* Distortion.mm in Sources */,
+				26C3F8FF1810DB7C00744A9D /* HardCutOffDistortion.mm in Sources */,
+				26C3F9071810DFED00744A9D /* Parameter.mm in Sources */,
+				26C3F8FD1810DA6B00744A9D /* SoftClippingOverdrive.mm in Sources */,
+				26C3F9011810DBF600744A9D /* ButterWorthFilter.mm in Sources */,
+				26C3F90D1810E39300744A9D /* DelayEffect.mm in Sources */,
+				26C3F91D1810F14300744A9D /* Compressor.mm in Sources */,
+				26C3F90B1810E2F800744A9D /* ChorusEffect.mm in Sources */,
 				EC7A0DE0161A4BAF005BF0E5 /* CAStreamBasicDescription.cpp in Sources */,
+				26744EAF180667C200C26068 /* FuzzExpDistortion.mm in Sources */,
+				26C3F9151810EC1500744A9D /* EnvelopeFollower.mm in Sources */,
+				26C3F9091810E0C900744A9D /* Reverb.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,11 +532,18 @@
 		EC7A0DCD161A4AD3005BF0E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
 				DSTROOT = /tmp/AudioController.dst;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AudioController/AudioController-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7B8BBE19-A6A3-4A92-AB56-6DF23326D380";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -446,11 +551,18 @@
 		EC7A0DCE161A4AD3005BF0E5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
 				DSTROOT = /tmp/AudioController.dst;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AudioController/AudioController-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7B8BBE19-A6A3-4A92-AB56-6DF23326D380";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

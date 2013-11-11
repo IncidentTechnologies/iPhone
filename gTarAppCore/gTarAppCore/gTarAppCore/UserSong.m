@@ -23,6 +23,7 @@
 @synthesize m_difficulty;
 @synthesize m_viewCount, m_rating, m_permissions, m_score;
 @synthesize m_albumArtImage;
+@synthesize m_userLeased, m_userOwned;
 
 - (id)initWithXmlDom:(XmlDom*)xmlDom;
 {
@@ -145,6 +146,9 @@
     [coder encodeInteger:m_permissions forKey:@"Permissions"];
     [coder encodeInteger:m_score forKey:@"Score"];
     
+    [coder encodeBool:m_userOwned forKey:@"UserOwned"];
+    [coder encodeBool:m_userLeased forKey:@"UserLeased"];
+    
     // convert to data
     NSData * imageData = UIImagePNGRepresentation( m_albumArtImage );
     
@@ -188,6 +192,9 @@
     self.m_rating = [coder decodeObjectForKey:@"Rating"];
     self.m_permissions = [coder decodeIntegerForKey:@"Permissions"];
     self.m_score = [coder decodeIntegerForKey:@"Score"];
+    
+    self.m_userLeased = [coder decodeBoolForKey:@"UserLeased"];
+    self.m_userOwned = [coder decodeBoolForKey:@"UserOwned"];
     
     NSData * imageData = [coder decodeObjectForKey:@"AlbumArtImage"];
     
@@ -339,6 +346,8 @@
         userSong.m_cost = self.m_cost;
         userSong.m_productId = self.m_productId;
         userSong.m_difficulty = self.m_difficulty;
+        userSong.m_userOwned = self.m_userOwned;
+        userSong.m_userLeased = self.m_userLeased;
 
     }
     

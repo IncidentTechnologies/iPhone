@@ -74,6 +74,9 @@ extern CloudController *g_cloudController;
 {
     [super viewDidLoad];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    
     // Init tap gesture recog.
     m_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSearchBar)];
     [self.view addGestureRecognizer:m_tapRecognizer];
@@ -115,6 +118,9 @@ extern CloudController *g_cloudController;
     [_pullToUpdateSongList setIndicatorTextColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
     [_pullToUpdateSongList setActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [_pullToUpdateSongList setArrowColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
+    
+    [_pullToUpdateSongList setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    _pullToUpdateSongList.separatorInset = UIEdgeInsetsZero;
     
     // InAppPurchaseManager is a Singleton
     InAppPurchaseManager* purchaseManager = [InAppPurchaseManager sharedInstance];
@@ -434,18 +440,17 @@ extern CloudController *g_cloudController;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	StoreSongListCell *tempCell = NULL;
-	static NSString *CellIdentifier = @"StoreSongListCell";
+    static NSString *CellIdentifier = @"StoreSongListCell";
+    StoreSongListCell *tempCell = [_pullToUpdateSongList dequeueReusableCellWithIdentifier:CellIdentifier];
     
-	if (tempCell == nil)
-	{
-		tempCell = [[[StoreSongListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+	if (tempCell == NULL)
+    {
+		tempCell = [[StoreSongListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		[[NSBundle mainBundle] loadNibNamed:@"StoreSongListCell" owner:tempCell options:nil];
         tempCell.parentStoreViewController = self;
         
         CGFloat cellHeight = _pullToUpdateSongList.rowHeight - 1;
-        //CGFloat cellRow = _pullToUpdateSongList.frame.size.width;
-        CGFloat cellRow = [[UIScreen mainScreen] bounds].size.height;
+        CGFloat cellRow = _pullToUpdateSongList.frame.size.width;
         
         // Readjust the column headers to match the width
         [tempCell.titleArtistView setFrame:CGRectMake(0.0f, 0.0f, _buttonTitleArtist.frame.size.width, cellHeight)];
@@ -453,17 +458,17 @@ extern CloudController *g_cloudController;
         [tempCell.purchaseSongView setFrame:CGRectMake(_buttonBuy.frame.origin.x, 0.0f, _buttonBuy.frame.size.width, cellHeight)];
         
         // Readjust the width and height
-        [tempCell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
-        [tempCell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+        [tempCell setFrame:CGRectMake(0.0f, 0.0f, cellRow, cellHeight)];
+        [tempCell.accessoryView setFrame:CGRectMake(0.0f, 0.0f, cellRow, cellHeight)];
 	}
 	
 	// Clear these in case this cell was previously selected
 	tempCell.highlighted = NO;
 	tempCell.selected = NO;
-	
-	NSInteger row = [indexPath row];
+    [tempCell setSeparatorInset:UIEdgeInsetsZero];
     
     // assign data to cell
+    NSInteger row = [indexPath row];
     UserSong *userSong = [m_displayedStoreSongArray objectAtIndex:row];
     tempCell.userSong = userSong;
     [tempCell updateCell];

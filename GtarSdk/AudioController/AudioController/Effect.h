@@ -10,65 +10,34 @@
 #define gTarAudioController_Effect_h
 
 #include "Parameter.h"
+#include <string.h>
 
 class Effect
 {  
 public:   
-    Effect(std::string name, double wet, double SamplingFrequency) :
-    m_name(name),
-    m_fPassThrough(false),
-    m_SamplingFrequency(SamplingFrequency)
-    {
-        m_pWet = new Parameter(wet, 0.0, 1.0, "Wet");
-    }
+    Effect(std::string name, double wet, double SamplingFrequency);
     
     virtual double InputSample(double sample) = 0;
     
-    bool SetPassThru(bool state)
-    {
-        m_fPassThrough = state;
-        if (state)
-        {
-            ClearOutEffect();
-        }
-        return true;
-    }
+    bool SetPassThru(bool state);
     
-    bool SetWet(double wet)
-    {
-        return m_pWet->setValue(wet);
-    }
+    bool SetWet(double wet);
     
-    float GetWet()
-    {
-        return m_pWet->getValue();
-    }
+    float GetWet();
     
-    virtual void Reset()
-    {
-        m_fPassThrough = true;
-    }
+    virtual void Reset();
     
-    virtual void ClearOutEffect()
-    {
-        
-    }
+    virtual void ClearOutEffect();
     
-    bool isOn()
-    {
-        return !m_fPassThrough;
-    }
+    bool isOn();
     
-    virtual ~Effect()
-    {
-        
-    }
+    virtual ~Effect();
     
-    std::string getName() {return m_name;};
-    virtual Parameter& getPrimaryParam() {/*empty default*/ Parameter *p = new Parameter(0, 0, 0, NULL); return *p; };
-    virtual bool setPrimaryParam(float value) {/*empty default*/ return false; };
-    virtual Parameter& getSecondaryParam() {/*empty default*/ Parameter *p = new Parameter(0, 0, 0, NULL); return *p; };
-    virtual bool setSecondaryParam(float value) {/*empty default*/ return false; };
+    std::string getName();
+    virtual Parameter& getPrimaryParam();
+    virtual bool setPrimaryParam(float value);
+    virtual Parameter& getSecondaryParam();
+    virtual bool setSecondaryParam(float value);
 protected:
     std::string m_name;
     Parameter *m_pWet;

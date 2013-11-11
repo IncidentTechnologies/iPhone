@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1DFD4229-7ACA-4B7E-92D9-EC82E2CEB07B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>gtarLearn</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D4C069D3-6CF1-49E5-84C4-9C61937A5BD6</key>
+		<string>https://github.com/IncidentTechnologies/iPhone</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>gtarLearn/gtarLearn.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D4C069D3-6CF1-49E5-84C4-9C61937A5BD6</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/IncidentTechnologies/iPhone</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D4C069D3-6CF1-49E5-84C4-9C61937A5BD6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D4C069D3-6CF1-49E5-84C4-9C61937A5BD6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iPhone</string>
+		</dict>
+	</array>
+</dict>
+</plist>

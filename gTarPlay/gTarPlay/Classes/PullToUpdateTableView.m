@@ -76,6 +76,7 @@
 
 - (void)sharedInit
 {
+    
     m_aboveThreshold = NO;
     
     // Instructions, "pull to update"
@@ -269,9 +270,9 @@
 
 #pragma Scroll view overrides
 
+
 - (void)setContentOffset:(CGPoint)contentOffset
 {
-    
     CGFloat offset = -contentOffset.y;
         
     if ( m_animating == YES )

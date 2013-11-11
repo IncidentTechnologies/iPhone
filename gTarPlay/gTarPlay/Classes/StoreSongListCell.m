@@ -70,6 +70,16 @@
     }
 }
 
+-(void)resetButtonState
+{
+    if([_userSong.m_cost floatValue] == 0)
+        m_buyButtonState = BUY_BUTTON_FREE;
+    else
+        m_buyButtonState = BUY_BUTTON_PRICE;
+    
+    [_buyButtonView updateBuyButtonState:m_buyButtonState];
+}
+
 -(void)IAPSongPurchaseCallbackWithContext:(id)pContext
 {
     NSLog(@"IAPSongPurchaseCallbackWithContext");
@@ -77,8 +87,7 @@
     if(pContext == NULL)
     {
         NSLog(@"Song purchase failed");
-        m_buyButtonState = BUY_BUTTON_PRICE;
-        [_buyButtonView updateBuyButtonState:m_buyButtonState];
+        [self resetButtonState];
         return;
     }
     
@@ -87,8 +96,7 @@
     {
         case CloudResponseStatusItunesServerError: {
             NSLog(@"Song purchase failed");
-            m_buyButtonState = BUY_BUTTON_PRICE;
-            [_buyButtonView updateBuyButtonState:m_buyButtonState];
+            [self resetButtonState];
             
             // Show failure message
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Song Purchase Failed"
@@ -103,8 +111,8 @@
         
         case CloudResponseStatusFailure: {
             NSLog(@"Song purchase failed");
-            m_buyButtonState = BUY_BUTTON_PRICE;
-            [_buyButtonView updateBuyButtonState:m_buyButtonState];
+            
+            [self resetButtonState];
             
             // Show failure message
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Song Purchase Failed"
@@ -135,8 +143,7 @@
             
         default: {
             NSLog(@"Song purchase fail state: %d", cloudResponse.m_status);
-            m_buyButtonState = BUY_BUTTON_PRICE;
-            [_buyButtonView updateBuyButtonState:m_buyButtonState];
+            [self resetButtonState];
             
             // Show failure message
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Song Purchase Failed"
@@ -162,17 +169,17 @@
     [self.layer addSublayer:topBorder];
     
     CALayer *bottomBorder = [CALayer layer];
-    bottomBorder.frame = CGRectMake(0.0f, self.frame.size.height, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    bottomBorder.frame = CGRectMake(0.0f, 60.0f, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
     bottomBorder.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
     [self.layer addSublayer:bottomBorder];
     
     CALayer *borderTitleArtist = [CALayer layer];
-    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 120.0f, 0.0f, 1.0f, self.frame.size.height);
+    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 120.0f, 0.0f, 1.0f, 60.0f);
     borderTitleArtist.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
     [self.layer addSublayer:borderTitleArtist];
     
     CALayer *borderSkill = [CALayer layer];
-    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 60.0f, 0.0f, 1.0f, self.frame.size.height);
+    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 60.0f, 0.0f, 1.0f, 60.0f);
     borderSkill.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
     [self.layer addSublayer:borderSkill];
     

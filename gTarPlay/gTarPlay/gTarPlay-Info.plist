@@ -63,6 +63,12 @@
 	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>UIViewControllerBasedStatusBarApp</key>
+	<false/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

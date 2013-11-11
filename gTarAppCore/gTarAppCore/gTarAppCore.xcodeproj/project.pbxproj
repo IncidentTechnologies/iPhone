@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		268E70C61810B2D9007404B0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E70C51810B2D9007404B0 /* libc++.dylib */; };
+		26C3F9251810F93A00744A9D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C3F9241810F93A00744A9D /* libstdc++.dylib */; };
 		9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D4C70D017A8B02D00DC7B4D /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */; };
 		9D8B403617A9ED52009D3FB4 /* Facebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D8B401B17A9ED52009D3FB4 /* Facebook.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -158,6 +160,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		268E70C51810B2D9007404B0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		26C3F9241810F93A00744A9D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
 		9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
 		9D8B401B17A9ED52009D3FB4 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -316,6 +320,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26C3F9251810F93A00744A9D /* libstdc++.dylib in Frameworks */,
+				268E70C61810B2D9007404B0 /* libc++.dylib in Frameworks */,
 				EC5DA873161A5D7A0015832E /* libAudioController.a in Frameworks */,
 				EC5DA874161A5D7A0015832E /* libGtarController.a in Frameworks */,
 				EC5DA851161A5D160015832E /* Foundation.framework in Frameworks */,
@@ -423,6 +429,8 @@
 		EC5DA84F161A5D160015832E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26C3F9241810F93A00744A9D /* libstdc++.dylib */,
+				268E70C51810B2D9007404B0 /* libc++.dylib */,
 				EC5DA871161A5D7A0015832E /* libAudioController.a */,
 				EC5DA872161A5D7A0015832E /* libGtarController.a */,
 				EC5DA850161A5D160015832E /* Foundation.framework */,
