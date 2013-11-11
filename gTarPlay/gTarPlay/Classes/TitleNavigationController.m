@@ -20,6 +20,7 @@
 #import <gTarAppCore/UserSongSessions.h>
 #import <gTarAppCore/UserProfile.h>
 #import <gTarAppCore/CloudResponse.h>
+#import <gTarAppCore/Facebook.h>
 
 #import "TitleNavigationController.h"
 #import "SongSelectionViewController.h"
@@ -846,24 +847,23 @@ extern Facebook * g_facebook;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString * CellIdentifier = @"ActivityFeedCell";
+	ActivityFeedCell *tempCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
-    static NSString *ActivityCellIdentifier = @"ActivityFeedCell";
-    
-    ActivityFeedCell *cell = (ActivityFeedCell *)[tableView dequeueReusableCellWithIdentifier:ActivityCellIdentifier];
-    
-    if (cell == nil)
-    {
-        cell = [[[ActivityFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ActivityCellIdentifier] autorelease];
+	if (tempCell == NULL)
+	{
+        NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityFeedCell" owner:nil options:nil];
+        for (UIView *view in views)
+            if([view isKindOfClass:[UITableViewCell class]])
+                tempCell = (ActivityFeedCell*)view;
         
-        [[NSBundle mainBundle] loadNibNamed:@"ActivityFeedCell" owner:cell options:nil];
-        
-        [cell setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
-        [cell.accessoryView setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
+        [tempCell setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
+        [tempCell.accessoryView setFrame:CGRectMake(0, 0, _feedTable.frame.size.width, _feedTable.rowHeight-1)];
     }
     
     // Clear these in case this cell was previously selected
-    cell.highlighted = NO;
-    cell.selected = NO;
+    tempCell.highlighted = NO;
+    tempCell.selected = NO;
     
     NSInteger row = [indexPath row];
     
@@ -885,11 +885,9 @@ extern Facebook * g_facebook;
         }
     }
     
-    cell.userSongSession = session;
-    
-    [cell updateCell];
-    
-    return cell;
+    tempCell.userSongSession = session;
+    [tempCell updateCell];
+    return tempCell;
 
 //    if ( tableView == _commentTable )
 //    {

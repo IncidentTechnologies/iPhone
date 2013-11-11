@@ -15,6 +15,7 @@ extern AudioController * g_audioController;
 @property (retain, nonatomic) IBOutlet UISlider *toneSlider;
 @property (retain, nonatomic) IBOutlet UISwitch *audioRouteSwitch;
 @property (retain, nonatomic) IBOutlet UISwitch *slideSwitch;
+@property (retain, nonatomic) IBOutlet UITextField *testText;
 
 @end
 
@@ -111,6 +112,8 @@ extern AudioController * g_audioController;
 {
     NSDictionary *data = [notification userInfo];
     BOOL routeIsSpeaker = [[data objectForKey:@"isRouteSpeaker"] boolValue];
+    
+    NSString *routeName = [[NSString alloc] initWithString:[data objectForKey:@"routeName"]];
     /*
      TODO telemetry
      // Telemetetry log -- invert the speaker route so we log the previous state
@@ -131,6 +134,8 @@ extern AudioController * g_audioController;
      m_audioRouteTimeStart = [[NSDate date] retain];
      }
      */
+    
+    [_testText setText:routeName];
     
     if (routeIsSpeaker)
     {

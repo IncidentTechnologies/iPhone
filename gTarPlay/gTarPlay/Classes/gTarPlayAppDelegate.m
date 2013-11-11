@@ -83,6 +83,10 @@ UserController * g_userController;
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 #endif
         
+#if Debug_BUILD
+        NSLog(@"This is a debug build");
+#endif
+        
     }
     
     return self;

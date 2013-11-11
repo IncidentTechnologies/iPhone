@@ -53,7 +53,7 @@ extern GtarController *g_gtarController;
     
     NSInteger _nextUserSong;
     
-    SongSortOrder _sortOrder;
+    struct SongSortOrder _sortOrder;
 }
 
 @property (retain, nonatomic) IBOutlet UIButton *sortByTitleButtton;
@@ -88,6 +88,7 @@ extern GtarController *g_gtarController;
         }
         
         _userSongArray = userSongArray;
+        NSLog(@"Found %d cached songs",[_userSongArray count]);
         [_userSongArray retain];
     }
     return self;
@@ -100,13 +101,18 @@ extern GtarController *g_gtarController;
     if ( [_userSongArray count] == 0 ) {
         [_songListTable startAnimating];
     }
+    else
+    {
+        // Display cached items to avoid blank screen
+        [self refreshDisplayedUserSongList];
+        [_songListTable startAnimating];
+    }
     
     [_topBar addShadow];
     
     [_fullscreenButton setHidden:YES];
     
     _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
-    
     [_playerViewController attachToSuperview:_songPlayerView];
     
     _currentDifficulty = 0;
@@ -127,10 +133,15 @@ extern GtarController *g_gtarController;
     [g_gtarController addObserver:self];
     
     // Initialize sorting order
-    _sortOrder = SortByTitleAscending;
+    
+    _sortOrder.type = SORT_SONG_TITLE;
+    _sortOrder.fAscending = TRUE;
+    
     _sortByArtistArrow.hidden = YES;
     _sortByTitleButtton.selected = YES;
     _sortByTitleArrow.highlighted = YES;
+    
+    [self sortSongList];    // push sorting
     
     // Init volume / instrument views
     if ( _volumeViewController == nil )
@@ -321,8 +332,15 @@ extern GtarController *g_gtarController;
     sender.selected = !sender.selected;
     _sortByTitleButtton.selected = NO;
     
-    _sortOrder = sender.selected ? SortByArtistAscending : SortByArtistDescending;
-    
+    if(sender.selected) {
+        _sortOrder.type = SORT_SONG_ARTIST;
+        _sortOrder.fAscending = TRUE;
+    }
+    else {
+        _sortOrder.type = SORT_SONG_ARTIST;
+        _sortOrder.fAscending = FALSE;
+    }
+
     // Sort Arrows
     _sortByTitleArrow.hidden = YES;
     _sortByArtistArrow.hidden = NO;
@@ -336,7 +354,14 @@ extern GtarController *g_gtarController;
     sender.selected = !sender.selected;
     _sortByArtistButton.selected = NO;
     
-    _sortOrder = sender.selected ? SortByTitleAscending : SortByTitleDescending;
+    if(sender.selected) {
+        _sortOrder.type = SORT_SONG_TITLE;
+        _sortOrder.fAscending = TRUE;
+    }
+    else {
+        _sortOrder.type = SORT_SONG_TITLE;
+        _sortOrder.fAscending = FALSE;
+    }
     
     // Sort Arrows
     _sortByArtistArrow.hidden = YES;
@@ -492,37 +517,36 @@ extern GtarController *g_gtarController;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString * CellIdentifier = @"SongListCell";
+	SongListCell *tempCell = [_songListTable dequeueReusableCellWithIdentifier:CellIdentifier];
 	
-	static NSString * CellIdentifier = @"SongListCell";
-	
-	SongListCell * cell = (SongListCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	
-	if (cell == nil)
+	if (tempCell == NULL)
 	{
-		cell = [[[SongListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        
-		[[NSBundle mainBundle] loadNibNamed:@"SongListCell" owner:cell options:nil];
+        NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"SongListCell" owner:nil options:nil];
+        for (UIView *view in views)
+            if([view isKindOfClass:[UITableViewCell class]])
+                tempCell = (SongListCell*)view;
         
         CGFloat cellHeight = _songListTable.rowHeight-1;
         CGFloat cellRow = _songListTable.frame.size.width;
         
-//        cell.titleArtistView.translatesAutoresizingMaskIntoConstraints = YES;
-//        cell.skillView.translatesAutoresizingMaskIntoConstraints = YES;
-//        cell.scoreView.translatesAutoresizingMaskIntoConstraints = YES;
+//        tempCell.titleArtistView.translatesAutoresizingMaskIntoConstraints = YES;
+//        tempCell.skillView.translatesAutoresizingMaskIntoConstraints = YES;
+//        tempCell.scoreView.translatesAutoresizingMaskIntoConstraints = YES;
         
         // Readjust the column headers to match the width
-        [cell.titleArtistView setFrame:CGRectMake(0, 0, _titleArtistButton.frame.size.width, cellHeight)];
-        [cell.skillView setFrame:CGRectMake(_skillButton.frame.origin.x, 0, _skillButton.frame.size.width, cellHeight)];
-        [cell.scoreView setFrame:CGRectMake(_scoreButton.frame.origin.x, 0, _scoreButton.frame.size.width, cellHeight)];
+        [tempCell.titleArtistView setFrame:CGRectMake(0, 0, _titleArtistButton.frame.size.width, cellHeight)];
+        [tempCell.skillView setFrame:CGRectMake(_skillButton.frame.origin.x, 0, _skillButton.frame.size.width, cellHeight)];
+        [tempCell.scoreView setFrame:CGRectMake(_scoreButton.frame.origin.x, 0, _scoreButton.frame.size.width, cellHeight)];
         
         // Readjust the width and height
-        [cell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
-        [cell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+        [tempCell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+        [tempCell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
 	}
 	
 	// Clear these in case this cell was previously selected
-	cell.highlighted = NO;
-	cell.selected = NO;
+	tempCell.highlighted = NO;
+	tempCell.selected = NO;
 	
 	NSInteger row = [indexPath row];
     
@@ -531,19 +555,19 @@ extern GtarController *g_gtarController;
     userSong.m_playStars = [g_userController getMaxStarsForSong:userSong.m_songId];
     userSong.m_playScore = [g_userController getMaxScoreForSong:userSong.m_songId];
     
-    cell.userSong = userSong;
-    cell.playScore = [g_userController getMaxScoreForSong:userSong.m_songId];
+    tempCell.userSong = userSong;
+    tempCell.playScore = [g_userController getMaxScoreForSong:userSong.m_songId];
 
     if ( [g_fileController fileExists:userSong.m_xmpFileId] == YES )
     {
-        [cell updateCell];
+        [tempCell updateCell];
     }
     else
     {
-        [cell updateCellInactive];
+        [tempCell updateCellInactive];
     }
     
-	return cell;
+	return tempCell;
 	
 }
 
@@ -695,22 +719,18 @@ extern GtarController *g_gtarController;
 - (void)sortSongList
 {
     NSSortDescriptor *sortDescriptor;
-    switch (_sortOrder) {
-        case SortByTitleAscending:
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:YES] autorelease];
-            break;
-        case SortByTitleDescending:
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:NO] autorelease];
-            break;
-        case SortByArtistAscending:
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:YES] autorelease];
-            break;
-        case SortByArtistDescending:
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:NO] autorelease];
-            break;
+    switch (_sortOrder.type) {
+        case SORT_SONG_TITLE: {
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:_sortOrder.fAscending] autorelease];
+        } break;
             
-        default:
-            break;
+        case SORT_SONG_ARTIST: {
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:_sortOrder.fAscending] autorelease];
+        } break;
+            
+        default: {
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:TRUE] autorelease];
+        } break;
     }
     
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];

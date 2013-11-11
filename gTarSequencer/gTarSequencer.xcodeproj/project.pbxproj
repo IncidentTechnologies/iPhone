@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26B2D6021830BF6F00DF7CE7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B2D6011830BF6F00DF7CE7 /* libc++.dylib */; };
+		26B2D6041830C21100DF7CE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B2D6031830C21100DF7CE7 /* AVFoundation.framework */; };
 		6D331B14157D40A100AA27A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B13157D40A100AA27A1 /* UIKit.framework */; };
 		6D331B16157D40A100AA27A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B15157D40A100AA27A1 /* Foundation.framework */; };
 		6D331B18157D40A100AA27A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B17157D40A100AA27A1 /* CoreGraphics.framework */; };
@@ -212,6 +214,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26B2D6011830BF6F00DF7CE7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		26B2D6031830C21100DF7CE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6D331B0F157D40A100AA27A1 /* gTarSequencer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarSequencer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D331B13157D40A100AA27A1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D331B15157D40A100AA27A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -367,6 +371,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26B2D6041830C21100DF7CE7 /* AVFoundation.framework in Frameworks */,
+				26B2D6021830BF6F00DF7CE7 /* libc++.dylib in Frameworks */,
 				EC24E031161BD71900016B78 /* libAudioController.a in Frameworks */,
 				EC24E032161BD71900016B78 /* libGtarController.a in Frameworks */,
 				6D331B55157D585F00AA27A1 /* CoreMIDI.framework in Frameworks */,
@@ -412,6 +418,8 @@
 		6D331B12157D40A100AA27A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26B2D6031830C21100DF7CE7 /* AVFoundation.framework */,
+				26B2D6011830BF6F00DF7CE7 /* libc++.dylib */,
 				EC24E02F161BD71800016B78 /* libAudioController.a */,
 				EC24E030161BD71800016B78 /* libGtarController.a */,
 				6D331B54157D585F00AA27A1 /* CoreMIDI.framework */,
@@ -1033,11 +1041,14 @@
 		6D331B43157D40A100AA27A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1046,11 +1057,14 @@
 		6D331B44157D40A100AA27A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

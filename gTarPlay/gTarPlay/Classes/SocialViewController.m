@@ -330,36 +330,31 @@ extern Facebook *g_facebook;
 {
     if ( _feedSelector.selectedIndex == 0 )
     {
-        NSString *CellIdentifier = @"SocialSongCell";
+        static NSString * CellIdentifier = @"SocialSongCell";
+        SocialSongCell *tempCell = [_feedTable dequeueReusableCellWithIdentifier:CellIdentifier];
         
-        SocialSongCell *cell = (SocialSongCell *)[_feedTable dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (cell == nil)
+        if (tempCell == NULL)
         {
-            cell = [[[SocialSongCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            
-            [[NSBundle mainBundle] loadNibNamed:@"SocialSongCell" owner:cell options:nil];
+            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"SocialSongCell" owner:nil options:nil];
+            for (UIView *view in views)
+                if([view isKindOfClass:[UITableViewCell class]])
+                    tempCell = (SocialSongCell*)view;
             
             CGFloat cellHeight = _feedTable.rowHeight;
             CGFloat cellRow = _feedTable.frame.size.width;
             
             // Readjust the width and height
-            [cell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
-            [cell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+            [tempCell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+            [tempCell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
         }
         
         if ( row < [_displayedUserEntry.m_sessionsList count] )
-        {
-            cell.userSongSession = [_displayedUserEntry.m_sessionsList objectAtIndex:row];
-        }
+            tempCell.userSongSession = [_displayedUserEntry.m_sessionsList objectAtIndex:row];
         else
-        {
-            cell.userSongSession = nil;
-        }
+            tempCell.userSongSession = nil;
         
-        [cell updateCell];
-        
-        return cell;
+        [tempCell updateCell];
+        return tempCell;
     }
 	else
     {
@@ -425,33 +420,34 @@ extern Facebook *g_facebook;
 
 - (SocialUserCell *)getSocialUserCell:(UITableView *)table
 {
-    NSString *CellIdentifier = @"SocialUserCell";
-    
-    SocialUserCell *cell = (SocialUserCell *)[table dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil)
-    {
-        cell = [[[SocialUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        
-        [[NSBundle mainBundle] loadNibNamed:@"SocialUserCell" owner:cell options:nil];
+    static NSString * CellIdentifier = @"SocialUserCell";
+	SocialUserCell *tempCell = [table dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+	if (tempCell == NULL)
+	{
+        NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"SocialUserCell" owner:nil options:nil];
+        for (UIView *view in views)
+            if([view isKindOfClass:[UITableViewCell class]])
+                tempCell = (SocialUserCell*)view;
         
         CGFloat cellHeight = table.rowHeight;
         CGFloat cellRow = table.frame.size.width;
         
         // Readjust the width and height
-        [cell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
-        [cell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+        [tempCell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
+        [tempCell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
         
         NSMethodSignature *signature = [SocialViewController instanceMethodSignatureForSelector:@selector(socialUserFollowInvocation:)];
         
-        cell.followInvocation = [NSInvocation invocationWithMethodSignature:signature];
+        tempCell.followInvocation = [NSInvocation invocationWithMethodSignature:signature];
         
-        [cell.followInvocation setTarget:self];
-        [cell.followInvocation setSelector:@selector(socialUserFollowInvocation:)];
-        [cell.followInvocation setArgument:&cell atIndex:2];
+        [tempCell.followInvocation setTarget:self];
+        [tempCell.followInvocation setSelector:@selector(socialUserFollowInvocation:)];
+        [tempCell.followInvocation setArgument:&tempCell atIndex:2];
     }
     
-    return cell;
+    //[tempCell updateCell];
+    return tempCell;
 }
 
 #pragma mark - Table view delegate

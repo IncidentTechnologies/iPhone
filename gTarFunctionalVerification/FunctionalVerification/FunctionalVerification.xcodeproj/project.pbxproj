@@ -235,6 +235,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
+				TargetAttributes = {
+					EC27605016166D290037A387 = {
+						DevelopmentTeam = AE9ZEG65F3;
+					};
+				};
 			};
 			buildConfigurationList = EC27604B16166D290037A387 /* Build configuration list for PBXProject "FunctionalVerification" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -362,9 +367,11 @@
 		EC27606A16166D290037A387 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FunctionalVerification/FunctionalVerification-Prefix.pch";
 				INFOPLIST_FILE = "FunctionalVerification/FunctionalVerification-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -373,9 +380,11 @@
 		EC27606B16166D290037A387 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FunctionalVerification/FunctionalVerification-Prefix.pch";
 				INFOPLIST_FILE = "FunctionalVerification/FunctionalVerification-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

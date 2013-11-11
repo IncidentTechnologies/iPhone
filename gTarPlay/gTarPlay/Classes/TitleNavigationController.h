@@ -10,7 +10,6 @@
 
 #import <GtarController/GtarController.h>
 #import <GtarController/GtarControllerInternal.h>
-
 #import <gTarAppCore/Facebook.h>
 
 #import "PaginatedPullToUpdateTableView.h"

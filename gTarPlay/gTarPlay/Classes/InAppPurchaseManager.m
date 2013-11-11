@@ -7,6 +7,8 @@
 //
 //
 
+//#import <StoreKit/StoreKit.h>
+
 #import "InAppPurchaseManager.h"
 
 #import <gTarAppCore/CloudController.h>
@@ -56,7 +58,8 @@
     _productIdentifiers = [NSSet setWithObjects:kInAppPurchaseSongProductId, nil];
 
     // Check previously purchased product ids (from NSUserDefaults)
-    _purchasedProductIdentifiers = [NSSet set];
+    _purchasedProductIdentifiers = [NSMutableSet set];
+    
     for(NSString *productIdentifier in _productIdentifiers)
     {
         BOOL fProductPurchased = [[NSUserDefaults standardUserDefaults] boolForKey:productIdentifier];
@@ -124,7 +127,7 @@
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
     
-    NSLog(@"Failed to load list of products from itunes");
+    NSLog(@"Failed to load list of products from itunes: %@", [error description]);
     _productsRequest = nil;
     _completionHandler(NO, nil);
     _completionHandler = nil;

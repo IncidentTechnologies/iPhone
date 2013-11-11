@@ -76,7 +76,7 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UISwitch *feedSwitch;
 
 
-@property (nonatomic, assign) PlayViewControllerDifficulty difficulty;
+@property (nonatomic, assign) enum PlayViewControllerDifficulty difficulty;
 @property (nonatomic, assign) double tempoModifier;
 @property (nonatomic, assign) BOOL muffleWrongNotes;
 @property (nonatomic, retain) UserSong *userSong;

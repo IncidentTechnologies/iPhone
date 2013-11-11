@@ -97,10 +97,10 @@ TouchCatcher * touchCatcher = nil;
                                        selectorWidth, 
                                        selectorHeight);
     
-    offLeftSelectorFrame = CGRectMake(-1 * onScreenSelectorFrame.size.width, 
-                                      onScreenSelectorFrame.origin.y, 
-                                      onScreenSelectorFrame.size.width, 
-                                      onScreenSelectorFrame.size.height);
+    offLeftSelectorFrame = CGRectMake(  -1.0f * onScreenSelectorFrame.size.width,
+                                        onScreenSelectorFrame.origin.y,
+                                        onScreenSelectorFrame.size.width,
+                                        onScreenSelectorFrame.size.height);
     
     instrumentSelector = [[ScrollingSelector alloc] initWithFrame:offLeftSelectorFrame];
     [instrumentSelector setDelegate:self];
@@ -118,22 +118,22 @@ TouchCatcher * touchCatcher = nil;
     }
     
     // Pre-dequeue extra cells to make adding isntruments faster
-    for (int i=0;i<4;i++)
-    {
+    for (int i = 0;i < 4; i++) {
         [instrumentTable dequeueReusableCellWithIdentifier:@"TrackCell"];
     }
     
     [guitarView update];
-    
     [instrumentTable reloadData];
 }
 
 - (void)viewDidUnload
 {
+    [super viewDidUnload];
+    
     [self setTempoSlider:nil];
     [self setStartStopButton:nil];
     [self setPlayNotesButton:nil];
-    [super viewDidUnload];
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     self.instrumentTable = nil;

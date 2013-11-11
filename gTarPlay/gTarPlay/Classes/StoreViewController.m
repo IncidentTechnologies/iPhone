@@ -16,16 +16,32 @@
 #import <gTarAppCore/UserSongs.h>
 #import <gTarAppCore/XmlDom.h>
 #import <gTarAppCore/UserController.h>
+#import <gTarAppCore/FileController.h>
 
 #import "SongSelectionViewController.h"
-
 #import "StoreSongListCell.h"
+
+#import "PlayViewController.h"
+#import "PlayerViewController.h"
+#import "SlidingModalViewController.h"
+#import "VolumeViewController.h"
+#import "SlidingInstrumentViewController.h"
+
+#import "UIButton+Gtar.h"
 
 #define kStoreSongCacheKey @"StoreSongArray"
 
 extern CloudController *g_cloudController;
+extern FileController *g_fileController;
 
-@interface StoreViewController () {
+@interface StoreViewController ()
+{
+    VolumeViewController *_volumeViewController;
+    SlidingInstrumentViewController *_instrumentViewController;
+    PlayerViewController *_playerViewController;
+    UserSong *_currentUserSong;
+    NSInteger _currentDifficulty;
+    
     NSArray *m_storeSongArray;
     NSArray *m_displayedStoreSongArray;
     
@@ -74,8 +90,11 @@ extern CloudController *g_cloudController;
 {
     [super viewDidLoad];
     
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.extendedLayoutIncludesOpaqueBars = NO;
+    // iOS 7 Check
+    if([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+    }
     
     // Init tap gesture recog.
     m_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSearchBar)];
@@ -120,7 +139,10 @@ extern CloudController *g_cloudController;
     [_pullToUpdateSongList setArrowColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
     
     [_pullToUpdateSongList setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    _pullToUpdateSongList.separatorInset = UIEdgeInsetsZero;
+    
+    // iOS 7 issue
+    if([_pullToUpdateSongList respondsToSelector:@selector(setSeparatorInset:)])
+        _pullToUpdateSongList.separatorInset = UIEdgeInsetsZero;
     
     // InAppPurchaseManager is a Singleton
     InAppPurchaseManager* purchaseManager = [InAppPurchaseManager sharedInstance];
@@ -136,6 +158,35 @@ extern CloudController *g_cloudController;
     
     if ( [m_storeSongArray count] == 0 ) {
         [_pullToUpdateSongList startAnimating];
+    }
+    else {
+        // Update sorting
+        [_pullToUpdateSongList startAnimating];
+        [self sortSongList];
+    }
+    
+    // Set up song options
+    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
+    [_playerViewController attachToSuperview:_songPlayerView];
+    
+    _currentDifficulty = 0;
+    [_easyButton setEnabled:NO];
+    
+    // Adjust the images in the buttons
+    [_closeModalButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_instrumentButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
+    if ( _volumeViewController == nil )
+    {
+        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+        [_volumeViewController attachToSuperview:_songOptionsModal.contentView withFrame:_volumeView.frame];
+    }
+    
+    if ( _instrumentViewController == nil )
+    {
+        _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
+        [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
 }
 
@@ -154,10 +205,158 @@ extern CloudController *g_cloudController;
     }
 }
 
-- (IBAction)onBackButtonTouchUpInside:(id)sender {
+#pragma mark - Button Event Handlers
+
+- (IBAction)onBackButtonTouchUpInside:(id)sender
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)startButtonClicked:(id)sender
+{
+    [_playerViewController endPlayback];
+    
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty];
+}
+
+- (IBAction)closeModalButtonClicked:(id)sender
+{
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    [_playerViewController endPlayback];
+    [_songOptionsModal closeButtonClicked:sender];
+    
+    [_volumeViewController closeView:NO];
+    [_instrumentViewController closeView:NO];
+    [_songOptionsModal.blackButtonOrig setHidden:YES];
+}
+
+- (IBAction)volumeButtonClicked:(id)sender
+{
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
+    if ( _volumeViewController.isDown == YES )
+    {
+        [_songOptionsModal.blackButtonOrig setHidden:YES];
+    }
+    else
+    {
+        [_songOptionsModal.blackButtonOrig setHidden:NO];
+    }
+    [_volumeViewController toggleView:YES];
+    [_instrumentViewController closeView:YES];
+}
+
+- (IBAction)instrumentButtonClicked:(id)sender
+{
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
+    if ( _instrumentViewController.isDown == YES )
+    {
+        [_songOptionsModal.blackButtonOrig setHidden:YES];
+    }
+    else
+    {
+        [_songOptionsModal.blackButtonOrig setHidden:NO];
+    }
+    [_playerViewController endPlayback];
+    [_instrumentViewController toggleView:YES];
+    [_volumeViewController closeView:YES];
+}
+
+- (IBAction)difficulyButtonClicked:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    
+    if ( button == _easyButton )
+    {
+        _currentDifficulty = 0;
+        [_easyButton setEnabled:NO];
+        [_mediumButton setEnabled:YES];
+        [_hardButton setEnabled:YES];
+    }
+    else if ( button == _mediumButton )
+    {
+        _currentDifficulty = 1;
+        [_easyButton setEnabled:YES];
+        [_mediumButton setEnabled:NO];
+        [_hardButton setEnabled:YES];
+    }
+    else if ( button == _hardButton )
+    {
+        _currentDifficulty = 2;
+        [_easyButton setEnabled:YES];
+        [_mediumButton setEnabled:YES];
+        [_hardButton setEnabled:NO];
+    }
+    
+}
+
+- (IBAction)blackButtonClicked:(id)sender
+{
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    [_songOptionsModal.blackButtonOrig setHidden:YES];
+    [_instrumentViewController closeView:YES];
+    [_volumeViewController closeView:YES];
+}
+
+/*
+- (IBAction)fullscreenButtonClicked:(id)sender
+{
+    [_searchBar endSearch];
+    [_fullscreenButton setHidden:YES];
+}
+ */
+
+#pragma mark - ViewController stuff
+
+- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty
+{
+    
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Get the XMP, stick it in the user song, and push to the game mode.
+    // This generally should already have been downloaded.
+    NSString *songString = (NSString *)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
+    
+    playViewController.userSong = userSong;
+    playViewController.userSong.m_xmlDom = [[[XmlDom alloc] initWithXmlString:songString] autorelease];
+    
+    if ( difficulty == 0 )
+    {
+        // Easy
+        playViewController.difficulty = PlayViewControllerDifficultyEasy;
+    }
+    else if ( difficulty == 1 )
+    {
+        // Medium
+        playViewController.difficulty = PlayViewControllerDifficultyMedium;
+        playViewController.muffleWrongNotes = YES;
+    }
+    else if ( difficulty == 2 )
+    {
+        // Hard
+        playViewController.difficulty = PlayViewControllerDifficultyHard;
+        playViewController.muffleWrongNotes = NO;
+    }
+    
+    [self.navigationController pushViewController:playViewController animated:YES];
+    [playViewController release];
+}
+
+#pragma mark - Store List Sorting
 -(void)updateTopHeaderTextFormatting
 {
     NSUInteger startRangeTitleArtist = 0, rangeLengthTitleArtist = 0;
@@ -335,10 +534,31 @@ extern CloudController *g_cloudController;
 
 -(void)openSongListToSong:(UserSong*)userSong
 {
-    SongSelectionViewController *vc = [[SongSelectionViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
-    [vc openSongOptionsForSong:userSong];
-    [vc release];
+    // We only want to present it once, otherwise it will crash
+    if ( _songOptionsModal.presentingViewController != nil )
+        return;
+    
+    _currentUserSong = userSong;
+    [_startButton startActivityIndicator];
+    NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
+    
+    _playerViewController.userSong = userSong;
+    _playerViewController.xmpBlob = songString;
+    
+    NSMethodSignature *signature = [SongSelectionViewController instanceMethodSignatureForSelector:@selector(playerLoaded)];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    
+    [invocation setTarget:self];
+    [invocation setSelector:@selector(playerLoaded)];
+    
+    _playerViewController.loadedInvocation = invocation;
+    
+    [self presentViewController:_songOptionsModal animated:YES completion:nil];
+}
+
+- (void)playerLoaded
+{
+    [_startButton stopActivityIndicator];
 }
 
 #pragma mark - Sort, Search
@@ -415,11 +635,6 @@ extern CloudController *g_cloudController;
     NSLog(@"Table view row selected!");
 }
 
-- (void)playerLoaded
-{
-    //[_startButton stopActivityIndicator];
-}
-
 - (void)updateTable
 {
     [self refreshSongList];
@@ -445,27 +660,36 @@ extern CloudController *g_cloudController;
     
 	if (tempCell == NULL)
     {
-		tempCell = [[StoreSongListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-		[[NSBundle mainBundle] loadNibNamed:@"StoreSongListCell" owner:tempCell options:nil];
+		//tempCell = [[StoreSongListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		// [NSBundle mainBundle] loadNibNamed:@"StoreSongListCell" owner:tempCell options:nil];
+        
+        NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"StoreSongListCell" owner:nil options:nil];
+        for (UIView *view in views)
+            if([view isKindOfClass:[UITableViewCell class]])
+                tempCell = (StoreSongListCell*)view;
+        
         tempCell.parentStoreViewController = self;
         
         CGFloat cellHeight = _pullToUpdateSongList.rowHeight - 1;
         CGFloat cellRow = _pullToUpdateSongList.frame.size.width;
         
-        // Readjust the column headers to match the width
-        [tempCell.titleArtistView setFrame:CGRectMake(0.0f, 0.0f, _buttonTitleArtist.frame.size.width, cellHeight)];
-        [tempCell.skillView setFrame:CGRectMake(_buttonSkill.frame.origin.x, 0.0f, _buttonSkill.frame.size.width, cellHeight)];
-        [tempCell.purchaseSongView setFrame:CGRectMake(_buttonBuy.frame.origin.x, 0.0f, _buttonBuy.frame.size.width, cellHeight)];
-        
         // Readjust the width and height
         [tempCell setFrame:CGRectMake(0.0f, 0.0f, cellRow, cellHeight)];
         [tempCell.accessoryView setFrame:CGRectMake(0.0f, 0.0f, cellRow, cellHeight)];
+        
+        // Readjust the column headers to match the width
+        //[tempCell.titleArtistView setFrame:CGRectMake(0.0f, 0.0f, _buttonTitleArtist.frame.size.width, cellHeight)];
+        //[tempCell.skillView setFrame:CGRectMake(_buttonSkill.frame.origin.x, 0.0f, _buttonSkill.frame.size.width, cellHeight)];
+        //[tempCell.purchaseSongView setFrame:CGRectMake(_buttonBuy.frame.origin.x, 0.0f, _buttonBuy.frame.size.width, cellHeight)];
 	}
 	
 	// Clear these in case this cell was previously selected
 	tempCell.highlighted = NO;
 	tempCell.selected = NO;
-    [tempCell setSeparatorInset:UIEdgeInsetsZero];
+    
+    // iOS 7 check
+    if([tempCell respondsToSelector:@selector(setSeparatorInset:)])
+        [tempCell setSeparatorInset:UIEdgeInsetsZero];
     
     // assign data to cell
     NSInteger row = [indexPath row];
@@ -546,10 +770,18 @@ extern CloudController *g_cloudController;
         UserSongs *userSongs = cloudResponse.m_responseUserSongs;
         [self setStoreSongArray:userSongs.m_songsArray];
     
-        // Save this new array
         NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+        
+        /*
+        // If we have cached data, clobber it (doesn't seem to look at the data itself sometimes)
+        if ( [settings objectForKey:kStoreSongCacheKey] != nil )
+            [settings removeObjectForKey:kStoreSongCacheKey];
+        */
+        
+        // Archive the new array to standardUserDefaults
         [settings setObject:[NSKeyedArchiver archivedDataWithRootObject:m_storeSongArray] forKey:kStoreSongCacheKey];
-        [settings synchronize];
+        if(![settings synchronize])
+            NSLog(@"Failed to syncronize standardUserDefaults");
         
         // Reload table data
         [_pullToUpdateSongList reloadData];

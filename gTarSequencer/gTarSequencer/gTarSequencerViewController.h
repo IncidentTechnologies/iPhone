@@ -38,9 +38,9 @@
     int currentAbsoluteMeasure;
     
     
-    NSMutableArray * patternQueue;
+    NSMutableArray *patternQueue;
     
-    GuitarView * guitarView;
+    GuitarView *guitarView;
     
     NSMutableArray * instruments;
     int selectedInstrumentIndex;

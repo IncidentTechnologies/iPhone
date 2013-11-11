@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
-            <connections>
-                <outlet property="accessoryView" destination="rlW-Fm-rPe" id="IWJ-A1-ZIl"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="rlW-Fm-rPe" customClass="StoreSongListCell">
             <rect key="frame" x="0.0" y="0.0" width="480" height="60"/>
@@ -17,8 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-ck-mWW" userLabel="SkillView">
-                        <rect key="frame" x="130" y="-8" width="60" height="60"/>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-ck-mWW" userLabel="SkillView">
+                        <rect key="frame" x="360" y="0.0" width="60" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Skill_GREY.png" translatesAutoresizingMaskIntoConstraints="NO" id="fqG-ZZ-6cP">
@@ -26,9 +23,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="bhk-XV-lSs"/>
+                        </constraints>
                     </view>
-                    <view contentMode="scaleToFill" horizontalHuggingPriority="921" verticalHuggingPriority="921" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mXT-6h-0Yh" userLabel="PurchaseSongView">
-                        <rect key="frame" x="130" y="-8" width="60" height="60"/>
+                    <view contentMode="scaleToFill" horizontalHuggingPriority="921" verticalHuggingPriority="921" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mXT-6h-0Yh" userLabel="PurchaseSongView">
+                        <rect key="frame" x="420" y="0.0" width="60" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7xG-iJ-9B2" customClass="StoreListBuyButtonView">
@@ -49,14 +49,16 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onBuyButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="qjm-EC-cYt"/>
                                     <action selector="onBuyButtonTouchUpInside:" destination="rlW-Fm-rPe" eventType="touchUpInside" id="uFo-A6-bvG"/>
                                 </connections>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="P0Z-pN-kDT"/>
+                        </constraints>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVS-Ue-qcP" userLabel="TitleArtistView">
-                        <rect key="frame" x="-20" y="-8" width="359" height="60"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVS-Ue-qcP" userLabel="TitleArtistView">
+                        <rect key="frame" x="0.0" y="0.0" width="359" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUX-pJ-C1m" userLabel="TitleLabel">
@@ -74,10 +76,34 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="359" id="NeP-Re-3VU"/>
+                        </constraints>
                     </view>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="mXT-6h-0Yh" firstAttribute="top" secondItem="g7m-k6-6Zx" secondAttribute="top" id="2Ke-Bc-FGB"/>
+                    <constraint firstItem="fVS-Ue-qcP" firstAttribute="leading" secondItem="g7m-k6-6Zx" secondAttribute="leading" id="EDd-8X-10S"/>
+                    <constraint firstAttribute="trailing" secondItem="mXT-6h-0Yh" secondAttribute="trailing" id="Hr4-A7-rCg"/>
+                    <constraint firstAttribute="bottom" secondItem="TKh-ck-mWW" secondAttribute="bottom" constant="-1" id="Opc-7S-VRu"/>
+                    <constraint firstItem="TKh-ck-mWW" firstAttribute="top" secondItem="g7m-k6-6Zx" secondAttribute="top" id="TMN-e1-hNe"/>
+                    <constraint firstAttribute="bottom" secondItem="mXT-6h-0Yh" secondAttribute="bottom" constant="-1" id="TN2-Ci-Tbt"/>
+                    <constraint firstAttribute="trailing" secondItem="TKh-ck-mWW" secondAttribute="trailing" constant="60" id="sdz-9p-3Zb"/>
+                    <constraint firstAttribute="bottom" secondItem="fVS-Ue-qcP" secondAttribute="bottom" constant="-1" id="vNu-wa-zzJ"/>
+                    <constraint firstItem="fVS-Ue-qcP" firstAttribute="top" secondItem="g7m-k6-6Zx" secondAttribute="top" id="x5n-dF-PbK"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.19215686269999999" green="0.23137254900000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="buttonBuySong" destination="amw-BD-ZfO" id="UWz-Jx-ZXR"/>
+                <outlet property="buyButtonView" destination="7xG-iJ-9B2" id="rk6-x7-rba"/>
+                <outlet property="labelSongArtist" destination="TWT-QB-Fnl" id="zM0-qd-v8E"/>
+                <outlet property="labelSongTitle" destination="VUX-pJ-C1m" id="pgY-Sq-O84"/>
+                <outlet property="purchaseSongView" destination="mXT-6h-0Yh" id="EDT-1Z-IJe"/>
+                <outlet property="skillView" destination="TKh-ck-mWW" id="904-l8-M1x"/>
+                <outlet property="songSkill" destination="fqG-ZZ-6cP" id="y8L-at-tuy"/>
+                <outlet property="titleArtistView" destination="fVS-Ue-qcP" id="TPm-oC-x34"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

@@ -27,9 +27,26 @@ struct StoreSortOrder {
     BOOL fAscending;
 };
 
+@class SlidingModalViewController;
+
 @interface StoreViewController : UIViewController <PullToUpdateTableViewDelegate, ExpandableSearchBarDelegate> {
 
 }
+
+// Options Modal
+@property (retain, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
+@property (retain, nonatomic) IBOutlet UIButton *closeModalButton;
+@property (retain, nonatomic) IBOutlet UIButton *volumeButton;
+@property (retain, nonatomic) IBOutlet UIButton *instrumentButton;
+
+@property (retain, nonatomic) IBOutlet UIButton *easyButton;
+@property (retain, nonatomic) IBOutlet UIButton *mediumButton;
+@property (retain, nonatomic) IBOutlet UIButton *hardButton;
+@property (retain, nonatomic) IBOutlet UIButton *startButton;
+
+@property (retain, nonatomic) IBOutlet UIView *volumeView;
+@property (retain, nonatomic) IBOutlet UIView *instrumentView;
+@property (retain, nonatomic) IBOutlet UIView *songPlayerView;
 
 @property (retain, nonatomic) IBOutlet ExpandableSearchBar *searchBar;
 
@@ -57,5 +74,14 @@ struct StoreSortOrder {
 -(IBAction)onTitleArtistClick:(id)sender;
 -(IBAction)onSkillClick:(id)sender;
 -(IBAction)onBuyClick:(id)sender;
+
+// Song Selection
+- (IBAction)startButtonClicked:(id)sender;
+- (IBAction)closeModalButtonClicked:(id)sender;
+- (IBAction)volumeButtonClicked:(id)sender;
+- (IBAction)instrumentButtonClicked:(id)sender;
+- (IBAction)difficulyButtonClicked:(id)sender;
+- (IBAction)blackButtonClicked:(id)sender;
+//- (IBAction)fullscreenButtonClicked:(id)sender;
 
 @end
