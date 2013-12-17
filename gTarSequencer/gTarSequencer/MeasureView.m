@@ -31,8 +31,7 @@
     return self;
 }
 
-- (void)sharedInit
-{
+- (void)sharedInit {
     measure = nil;
  
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
@@ -41,6 +40,7 @@
     noteFrameWidth = self.frame.size.width / FRETS_ON_GTAR;
     
     CGRect playbandFrame = CGRectMake(10, 0, noteFrameWidth, self.frame.size.height);
+    
     playbandView = [[UIView alloc] initWithFrame:playbandFrame];
     [playbandView setBackgroundColor:[UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1]];
     [playbandView setHidden:YES];
@@ -72,7 +72,7 @@
     // Check if notes need to be redrawn:
     if ( [measure shouldUpdateNotesOnMinimap] )
     {
-        [self createImage];
+        //[self createImage];
         [measure setUpdateNotesOnMinimap:NO];
     }
     
@@ -86,13 +86,11 @@
 
 #pragma mark Laying Out Subviews
 
-- (void)setNeedsLayout
-{
+- (void)setNeedsLayout {
     [self movePlayband];
 }
 
-- (void)movePlayband
-{
+- (void)movePlayband {
     if ( measure.playband >= 0 )
     {  
         CGRect newFrame = playbandView.frame;
@@ -110,6 +108,14 @@
 }
 
 #pragma mark Quartz Drawing
+
+- (void)selectMeasure {
+    self.backgroundColor = [UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1];
+}
+
+- (void)deselectMeasure {
+    self.backgroundColor = [UIColor clearColor];
+}
 
 - (void)drawBorder
 {
@@ -129,7 +135,7 @@
     CGContextFillPath(context);
     
     // stroke the border:
-    int borderWidth = 1;
+    int borderWidth = 2;
     CGContextSetLineWidth(context, borderWidth);
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextStrokePath(context);
@@ -140,10 +146,8 @@
     UIGraphicsEndImageContext();
 }
 
-- (void)createImage
-{
+- (void)createImage {
     CGSize size = CGSizeMake(self.frame.size.width, self.frame.size.height);
-    
     UIGraphicsBeginImageContext(size);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -151,7 +155,6 @@
     double lineWidth = 0.5;
     
     CGFloat noteFrameHeight = self.frame.size.height / STRINGS_ON_GTAR;
-    
     CGRect noteFrame = CGRectMake(0, 0, noteFrameWidth, noteFrameHeight);
     
     // Set line width:
@@ -159,10 +162,8 @@
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     
     // Update all the notes:
-    for (int f=0;f<FRETS_ON_GTAR;f++)
-    {
-        for (int s=0;s<STRINGS_ON_GTAR;s++)
-        {
+    for (int f = 0; f < FRETS_ON_GTAR; f++) {
+        for (int s = 0; s < STRINGS_ON_GTAR; s++) {
             // Adjust frame:
             noteFrame.origin.x = f*noteFrameWidth;
             noteFrame.origin.y = s*noteFrameHeight;
@@ -172,15 +173,9 @@
             CGContextStrokePath(context);
             
             if ( [measure isNoteOnAtString:[self invertString:s] andFret:f] )
-            {
-                // Get color for that string and fill:
-                CGContextSetFillColor(context, colors[s]);
-            }
-            else 
-            {
-                // Fill with normal background color:
-                CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0 green:175.0/255.0 blue:236.0/255.0 alpha:1].CGColor);
-            }
+                CGContextSetFillColor(context, colors[s]);  // Get color for that string and fill:
+            else
+                CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0 green:175.0/255.0 blue:236.0/255.0 alpha:1].CGColor); // Fill with normal background color:
             
             CGContextFillRect(context, noteFrame);
         }

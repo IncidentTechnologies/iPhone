@@ -177,8 +177,7 @@ class Compressor;
         m_LimiterOn = true;
         m_pCompressor = new Compressor(.97, 3, 1, 5000, g_GraphSampleRate);
         
-        if (SamplerSource == m_audioSource)
-        {
+        if (SamplerSource == m_audioSource) {
             m_sampler = [[[Sampler alloc] initWithSampleRate:g_GraphSampleRate AndSamplePack:instrument] retain];
         }
         

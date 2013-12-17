@@ -35,13 +35,11 @@ TouchCatcher * touchCatcher = nil;
 - (void)commonInit
 {
     // Load stuff from disk:
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES); 
-    instrumentDataFilePath = [[paths objectAtIndex:0]
-                stringByAppendingPathComponent:@"sequencerCurrentState"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    instrumentDataFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"sequencerCurrentState"];
     
     [self retrieveInstrumentOptions];
-    
     [self loadStateFromDisk];
     
     // Init everything else:
@@ -578,12 +576,10 @@ TouchCatcher * touchCatcher = nil;
     NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
     masterInstrumentOptions = [plistDictionary objectForKey:@"Instruments"];
-    
     remainingInstrumentOptions = [[NSMutableArray alloc] init];
     
-    // copy master options into remaining options:
-    for (NSDictionary * dict in masterInstrumentOptions)
-    {
+    // Copy master options into remaining options:
+    for (NSDictionary * dict in masterInstrumentOptions) {
         [remainingInstrumentOptions addObject:dict];
     }
 }
@@ -741,9 +737,7 @@ TouchCatcher * touchCatcher = nil;
         cell.instrument = tempInst;
         
         if ( !isPlaying )
-        {
             [cell update];
-        }
         
         return cell;
     }

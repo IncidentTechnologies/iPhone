@@ -7,6 +7,109 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		264F142A18315CFD00366268 /* sequencerInstruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 264F142918315CFD00366268 /* sequencerInstruments.plist */; };
+		2695EA5C1831BF860065C9CF /* Percussion 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9F61831BF860065C9CF /* Percussion 0.mp3 */; };
+		2695EA5D1831BF860065C9CF /* Percussion 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9F71831BF860065C9CF /* Percussion 1.mp3 */; };
+		2695EA5E1831BF860065C9CF /* Percussion 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9F81831BF860065C9CF /* Percussion 2.mp3 */; };
+		2695EA5F1831BF860065C9CF /* Percussion 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9F91831BF860065C9CF /* Percussion 3.mp3 */; };
+		2695EA601831BF860065C9CF /* Percussion 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FA1831BF860065C9CF /* Percussion 4.mp3 */; };
+		2695EA611831BF860065C9CF /* Percussion 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FB1831BF860065C9CF /* Percussion 5.mp3 */; };
+		2695EA621831BF860065C9CF /* Percussion 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FC1831BF860065C9CF /* Percussion 6.mp3 */; };
+		2695EA631831BF860065C9CF /* Percussion 7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FD1831BF860065C9CF /* Percussion 7.mp3 */; };
+		2695EA641831BF860065C9CF /* Percussion 8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FE1831BF860065C9CF /* Percussion 8.mp3 */; };
+		2695EA651831BF860065C9CF /* Percussion 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FF1831BF860065C9CF /* Percussion 9.mp3 */; };
+		2695EA661831BF860065C9CF /* Percussion 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA001831BF860065C9CF /* Percussion 10.mp3 */; };
+		2695EA671831BF860065C9CF /* Percussion 11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA011831BF860065C9CF /* Percussion 11.mp3 */; };
+		2695EA681831BF860065C9CF /* Percussion 12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA021831BF860065C9CF /* Percussion 12.mp3 */; };
+		2695EA691831BF860065C9CF /* Percussion 13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA031831BF860065C9CF /* Percussion 13.mp3 */; };
+		2695EA6A1831BF860065C9CF /* Percussion 14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA041831BF860065C9CF /* Percussion 14.mp3 */; };
+		2695EA6B1831BF860065C9CF /* Percussion 15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA051831BF860065C9CF /* Percussion 15.mp3 */; };
+		2695EA6C1831BF860065C9CF /* Percussion 16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA061831BF860065C9CF /* Percussion 16.mp3 */; };
+		2695EA6D1831BF860065C9CF /* Percussion 17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA071831BF860065C9CF /* Percussion 17.mp3 */; };
+		2695EA6E1831BF860065C9CF /* Percussion 18.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA081831BF860065C9CF /* Percussion 18.mp3 */; };
+		2695EA6F1831BF860065C9CF /* Percussion 19.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA091831BF860065C9CF /* Percussion 19.mp3 */; };
+		2695EA701831BF860065C9CF /* Percussion 20.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0A1831BF860065C9CF /* Percussion 20.mp3 */; };
+		2695EA711831BF860065C9CF /* Percussion 21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0B1831BF860065C9CF /* Percussion 21.mp3 */; };
+		2695EA721831BF860065C9CF /* Percussion 22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0C1831BF860065C9CF /* Percussion 22.mp3 */; };
+		2695EA731831BF860065C9CF /* Percussion 23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0D1831BF860065C9CF /* Percussion 23.mp3 */; };
+		2695EA741831BF860065C9CF /* Percussion 24.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0E1831BF860065C9CF /* Percussion 24.mp3 */; };
+		2695EA751831BF860065C9CF /* Percussion 25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0F1831BF860065C9CF /* Percussion 25.mp3 */; };
+		2695EA761831BF860065C9CF /* Percussion 26.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA101831BF860065C9CF /* Percussion 26.mp3 */; };
+		2695EA771831BF860065C9CF /* Percussion 27.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA111831BF860065C9CF /* Percussion 27.mp3 */; };
+		2695EA781831BF860065C9CF /* Percussion 28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA121831BF860065C9CF /* Percussion 28.mp3 */; };
+		2695EA791831BF860065C9CF /* Percussion 29.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA131831BF860065C9CF /* Percussion 29.mp3 */; };
+		2695EA7A1831BF860065C9CF /* Percussion 30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA141831BF860065C9CF /* Percussion 30.mp3 */; };
+		2695EA7B1831BF860065C9CF /* Percussion 31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA151831BF860065C9CF /* Percussion 31.mp3 */; };
+		2695EA7C1831BF860065C9CF /* Percussion 32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA161831BF860065C9CF /* Percussion 32.mp3 */; };
+		2695EA7D1831BF860065C9CF /* Percussion 33.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA171831BF860065C9CF /* Percussion 33.mp3 */; };
+		2695EA7E1831BF860065C9CF /* Percussion 34.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA181831BF860065C9CF /* Percussion 34.mp3 */; };
+		2695EA7F1831BF860065C9CF /* Percussion 35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA191831BF860065C9CF /* Percussion 35.mp3 */; };
+		2695EA801831BF860065C9CF /* Percussion 36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1A1831BF860065C9CF /* Percussion 36.mp3 */; };
+		2695EA811831BF860065C9CF /* Percussion 37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1B1831BF860065C9CF /* Percussion 37.mp3 */; };
+		2695EA821831BF860065C9CF /* Percussion 38.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1C1831BF860065C9CF /* Percussion 38.mp3 */; };
+		2695EA831831BF860065C9CF /* Percussion 39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1D1831BF860065C9CF /* Percussion 39.mp3 */; };
+		2695EA841831BF860065C9CF /* Percussion 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1E1831BF860065C9CF /* Percussion 40.mp3 */; };
+		2695EA851831BF860065C9CF /* Percussion 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1F1831BF860065C9CF /* Percussion 41.mp3 */; };
+		2695EA861831BF860065C9CF /* Percussion 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA201831BF860065C9CF /* Percussion 42.mp3 */; };
+		2695EA871831BF860065C9CF /* Percussion 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA211831BF860065C9CF /* Percussion 43.mp3 */; };
+		2695EA881831BF860065C9CF /* Percussion 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA221831BF860065C9CF /* Percussion 44.mp3 */; };
+		2695EA891831BF860065C9CF /* Percussion 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA231831BF860065C9CF /* Percussion 45.mp3 */; };
+		2695EA8A1831BF860065C9CF /* Percussion 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA241831BF860065C9CF /* Percussion 46.mp3 */; };
+		2695EA8B1831BF860065C9CF /* Percussion 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA251831BF860065C9CF /* Percussion 47.mp3 */; };
+		2695EA8C1831BF860065C9CF /* Percussion 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA261831BF860065C9CF /* Percussion 48.mp3 */; };
+		2695EA8D1831BF860065C9CF /* Percussion 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA271831BF860065C9CF /* Percussion 49.mp3 */; };
+		2695EA8E1831BF860065C9CF /* Percussion 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA281831BF860065C9CF /* Percussion 50.mp3 */; };
+		2695EA8F1831BF860065C9CF /* Percussion 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA291831BF860065C9CF /* Percussion 51.mp3 */; };
+		2695EA901831BF860065C9CF /* Percussion 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2A1831BF860065C9CF /* Percussion 52.mp3 */; };
+		2695EA911831BF860065C9CF /* Percussion 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2B1831BF860065C9CF /* Percussion 53.mp3 */; };
+		2695EA921831BF860065C9CF /* Percussion 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2C1831BF860065C9CF /* Percussion 54.mp3 */; };
+		2695EA931831BF860065C9CF /* Percussion 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2D1831BF860065C9CF /* Percussion 55.mp3 */; };
+		2695EA941831BF860065C9CF /* Percussion 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2E1831BF860065C9CF /* Percussion 56.mp3 */; };
+		2695EA951831BF860065C9CF /* Percussion 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2F1831BF860065C9CF /* Percussion 57.mp3 */; };
+		2695EA961831BF860065C9CF /* Percussion 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA301831BF860065C9CF /* Percussion 58.mp3 */; };
+		2695EA971831BF860065C9CF /* Percussion 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA311831BF860065C9CF /* Percussion 59.mp3 */; };
+		2695EA981831BF860065C9CF /* Percussion 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA321831BF860065C9CF /* Percussion 60.mp3 */; };
+		2695EA991831BF860065C9CF /* Percussion 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA331831BF860065C9CF /* Percussion 61.mp3 */; };
+		2695EA9A1831BF860065C9CF /* Percussion 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA341831BF860065C9CF /* Percussion 62.mp3 */; };
+		2695EA9B1831BF860065C9CF /* Percussion 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA351831BF860065C9CF /* Percussion 63.mp3 */; };
+		2695EA9C1831BF860065C9CF /* Percussion 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA361831BF860065C9CF /* Percussion 64.mp3 */; };
+		2695EA9D1831BF860065C9CF /* Percussion 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA371831BF860065C9CF /* Percussion 65.mp3 */; };
+		2695EA9E1831BF860065C9CF /* Percussion 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA381831BF860065C9CF /* Percussion 66.mp3 */; };
+		2695EA9F1831BF860065C9CF /* Percussion 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA391831BF860065C9CF /* Percussion 67.mp3 */; };
+		2695EAA01831BF860065C9CF /* Percussion 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3A1831BF860065C9CF /* Percussion 68.mp3 */; };
+		2695EAA11831BF860065C9CF /* Percussion 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3B1831BF860065C9CF /* Percussion 69.mp3 */; };
+		2695EAA21831BF860065C9CF /* Percussion 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3C1831BF860065C9CF /* Percussion 70.mp3 */; };
+		2695EAA31831BF860065C9CF /* Percussion 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3D1831BF860065C9CF /* Percussion 71.mp3 */; };
+		2695EAA41831BF860065C9CF /* Percussion 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3E1831BF860065C9CF /* Percussion 72.mp3 */; };
+		2695EAA51831BF860065C9CF /* Percussion 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3F1831BF860065C9CF /* Percussion 73.mp3 */; };
+		2695EAA61831BF860065C9CF /* Percussion 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA401831BF860065C9CF /* Percussion 74.mp3 */; };
+		2695EAA71831BF860065C9CF /* Percussion 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA411831BF860065C9CF /* Percussion 75.mp3 */; };
+		2695EAA81831BF860065C9CF /* Percussion 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA421831BF860065C9CF /* Percussion 76.mp3 */; };
+		2695EAA91831BF860065C9CF /* Percussion 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA431831BF860065C9CF /* Percussion 77.mp3 */; };
+		2695EAAA1831BF860065C9CF /* Percussion 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA441831BF860065C9CF /* Percussion 78.mp3 */; };
+		2695EAAB1831BF860065C9CF /* Percussion 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA451831BF860065C9CF /* Percussion 79.mp3 */; };
+		2695EAAC1831BF860065C9CF /* Percussion 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA461831BF860065C9CF /* Percussion 80.mp3 */; };
+		2695EAAD1831BF860065C9CF /* Percussion 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA471831BF860065C9CF /* Percussion 81.mp3 */; };
+		2695EAAE1831BF860065C9CF /* Percussion 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA481831BF860065C9CF /* Percussion 82.mp3 */; };
+		2695EAAF1831BF860065C9CF /* Percussion 83.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA491831BF860065C9CF /* Percussion 83.mp3 */; };
+		2695EAB01831BF860065C9CF /* Percussion 84.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4A1831BF860065C9CF /* Percussion 84.mp3 */; };
+		2695EAB11831BF860065C9CF /* Percussion 85.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4B1831BF860065C9CF /* Percussion 85.mp3 */; };
+		2695EAB21831BF860065C9CF /* Percussion 86.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4C1831BF860065C9CF /* Percussion 86.mp3 */; };
+		2695EAB31831BF860065C9CF /* Percussion 87.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4D1831BF860065C9CF /* Percussion 87.mp3 */; };
+		2695EAB41831BF860065C9CF /* Percussion 88.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4E1831BF860065C9CF /* Percussion 88.mp3 */; };
+		2695EAB51831BF860065C9CF /* Percussion 89.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4F1831BF860065C9CF /* Percussion 89.mp3 */; };
+		2695EAB61831BF860065C9CF /* Percussion 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA501831BF860065C9CF /* Percussion 90.mp3 */; };
+		2695EAB71831BF860065C9CF /* Percussion 91.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA511831BF860065C9CF /* Percussion 91.mp3 */; };
+		2695EAB81831BF860065C9CF /* Percussion 92.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA521831BF860065C9CF /* Percussion 92.mp3 */; };
+		2695EAB91831BF860065C9CF /* Percussion 93.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA531831BF860065C9CF /* Percussion 93.mp3 */; };
+		2695EABA1831BF860065C9CF /* Percussion 94.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA541831BF860065C9CF /* Percussion 94.mp3 */; };
+		2695EABB1831BF860065C9CF /* Percussion 95.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA551831BF860065C9CF /* Percussion 95.mp3 */; };
+		2695EABC1831BF860065C9CF /* Percussion 96.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA561831BF860065C9CF /* Percussion 96.mp3 */; };
+		2695EABD1831BF860065C9CF /* Percussion 97.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA571831BF860065C9CF /* Percussion 97.mp3 */; };
+		2695EABE1831BF860065C9CF /* Percussion 98.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA581831BF860065C9CF /* Percussion 98.mp3 */; };
+		2695EABF1831BF860065C9CF /* Percussion 99.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA591831BF860065C9CF /* Percussion 99.mp3 */; };
+		2695EAC01831BF860065C9CF /* Percussion 100.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA5A1831BF860065C9CF /* Percussion 100.mp3 */; };
+		2695EAC11831BF860065C9CF /* Percussion 101.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA5B1831BF860065C9CF /* Percussion 101.mp3 */; };
 		26B2D6021830BF6F00DF7CE7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B2D6011830BF6F00DF7CE7 /* libc++.dylib */; };
 		26B2D6041830C21100DF7CE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B2D6031830C21100DF7CE7 /* AVFoundation.framework */; };
 		6D331B14157D40A100AA27A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B13157D40A100AA27A1 /* UIKit.framework */; };
@@ -214,6 +317,111 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		264F142918315CFD00366268 /* sequencerInstruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sequencerInstruments.plist; sourceTree = "<group>"; };
+		2695E9F61831BF860065C9CF /* Percussion 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 0.mp3"; sourceTree = "<group>"; };
+		2695E9F71831BF860065C9CF /* Percussion 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 1.mp3"; sourceTree = "<group>"; };
+		2695E9F81831BF860065C9CF /* Percussion 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 2.mp3"; sourceTree = "<group>"; };
+		2695E9F91831BF860065C9CF /* Percussion 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 3.mp3"; sourceTree = "<group>"; };
+		2695E9FA1831BF860065C9CF /* Percussion 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 4.mp3"; sourceTree = "<group>"; };
+		2695E9FB1831BF860065C9CF /* Percussion 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 5.mp3"; sourceTree = "<group>"; };
+		2695E9FC1831BF860065C9CF /* Percussion 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 6.mp3"; sourceTree = "<group>"; };
+		2695E9FD1831BF860065C9CF /* Percussion 7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 7.mp3"; sourceTree = "<group>"; };
+		2695E9FE1831BF860065C9CF /* Percussion 8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 8.mp3"; sourceTree = "<group>"; };
+		2695E9FF1831BF860065C9CF /* Percussion 9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 9.mp3"; sourceTree = "<group>"; };
+		2695EA001831BF860065C9CF /* Percussion 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 10.mp3"; sourceTree = "<group>"; };
+		2695EA011831BF860065C9CF /* Percussion 11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 11.mp3"; sourceTree = "<group>"; };
+		2695EA021831BF860065C9CF /* Percussion 12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 12.mp3"; sourceTree = "<group>"; };
+		2695EA031831BF860065C9CF /* Percussion 13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 13.mp3"; sourceTree = "<group>"; };
+		2695EA041831BF860065C9CF /* Percussion 14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 14.mp3"; sourceTree = "<group>"; };
+		2695EA051831BF860065C9CF /* Percussion 15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 15.mp3"; sourceTree = "<group>"; };
+		2695EA061831BF860065C9CF /* Percussion 16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 16.mp3"; sourceTree = "<group>"; };
+		2695EA071831BF860065C9CF /* Percussion 17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 17.mp3"; sourceTree = "<group>"; };
+		2695EA081831BF860065C9CF /* Percussion 18.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 18.mp3"; sourceTree = "<group>"; };
+		2695EA091831BF860065C9CF /* Percussion 19.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 19.mp3"; sourceTree = "<group>"; };
+		2695EA0A1831BF860065C9CF /* Percussion 20.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 20.mp3"; sourceTree = "<group>"; };
+		2695EA0B1831BF860065C9CF /* Percussion 21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 21.mp3"; sourceTree = "<group>"; };
+		2695EA0C1831BF860065C9CF /* Percussion 22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 22.mp3"; sourceTree = "<group>"; };
+		2695EA0D1831BF860065C9CF /* Percussion 23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 23.mp3"; sourceTree = "<group>"; };
+		2695EA0E1831BF860065C9CF /* Percussion 24.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 24.mp3"; sourceTree = "<group>"; };
+		2695EA0F1831BF860065C9CF /* Percussion 25.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 25.mp3"; sourceTree = "<group>"; };
+		2695EA101831BF860065C9CF /* Percussion 26.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 26.mp3"; sourceTree = "<group>"; };
+		2695EA111831BF860065C9CF /* Percussion 27.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 27.mp3"; sourceTree = "<group>"; };
+		2695EA121831BF860065C9CF /* Percussion 28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 28.mp3"; sourceTree = "<group>"; };
+		2695EA131831BF860065C9CF /* Percussion 29.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 29.mp3"; sourceTree = "<group>"; };
+		2695EA141831BF860065C9CF /* Percussion 30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 30.mp3"; sourceTree = "<group>"; };
+		2695EA151831BF860065C9CF /* Percussion 31.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 31.mp3"; sourceTree = "<group>"; };
+		2695EA161831BF860065C9CF /* Percussion 32.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 32.mp3"; sourceTree = "<group>"; };
+		2695EA171831BF860065C9CF /* Percussion 33.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 33.mp3"; sourceTree = "<group>"; };
+		2695EA181831BF860065C9CF /* Percussion 34.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 34.mp3"; sourceTree = "<group>"; };
+		2695EA191831BF860065C9CF /* Percussion 35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 35.mp3"; sourceTree = "<group>"; };
+		2695EA1A1831BF860065C9CF /* Percussion 36.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 36.mp3"; sourceTree = "<group>"; };
+		2695EA1B1831BF860065C9CF /* Percussion 37.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 37.mp3"; sourceTree = "<group>"; };
+		2695EA1C1831BF860065C9CF /* Percussion 38.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 38.mp3"; sourceTree = "<group>"; };
+		2695EA1D1831BF860065C9CF /* Percussion 39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 39.mp3"; sourceTree = "<group>"; };
+		2695EA1E1831BF860065C9CF /* Percussion 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 40.mp3"; sourceTree = "<group>"; };
+		2695EA1F1831BF860065C9CF /* Percussion 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 41.mp3"; sourceTree = "<group>"; };
+		2695EA201831BF860065C9CF /* Percussion 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 42.mp3"; sourceTree = "<group>"; };
+		2695EA211831BF860065C9CF /* Percussion 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 43.mp3"; sourceTree = "<group>"; };
+		2695EA221831BF860065C9CF /* Percussion 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 44.mp3"; sourceTree = "<group>"; };
+		2695EA231831BF860065C9CF /* Percussion 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 45.mp3"; sourceTree = "<group>"; };
+		2695EA241831BF860065C9CF /* Percussion 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 46.mp3"; sourceTree = "<group>"; };
+		2695EA251831BF860065C9CF /* Percussion 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 47.mp3"; sourceTree = "<group>"; };
+		2695EA261831BF860065C9CF /* Percussion 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 48.mp3"; sourceTree = "<group>"; };
+		2695EA271831BF860065C9CF /* Percussion 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 49.mp3"; sourceTree = "<group>"; };
+		2695EA281831BF860065C9CF /* Percussion 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 50.mp3"; sourceTree = "<group>"; };
+		2695EA291831BF860065C9CF /* Percussion 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 51.mp3"; sourceTree = "<group>"; };
+		2695EA2A1831BF860065C9CF /* Percussion 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 52.mp3"; sourceTree = "<group>"; };
+		2695EA2B1831BF860065C9CF /* Percussion 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 53.mp3"; sourceTree = "<group>"; };
+		2695EA2C1831BF860065C9CF /* Percussion 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 54.mp3"; sourceTree = "<group>"; };
+		2695EA2D1831BF860065C9CF /* Percussion 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 55.mp3"; sourceTree = "<group>"; };
+		2695EA2E1831BF860065C9CF /* Percussion 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 56.mp3"; sourceTree = "<group>"; };
+		2695EA2F1831BF860065C9CF /* Percussion 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 57.mp3"; sourceTree = "<group>"; };
+		2695EA301831BF860065C9CF /* Percussion 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 58.mp3"; sourceTree = "<group>"; };
+		2695EA311831BF860065C9CF /* Percussion 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 59.mp3"; sourceTree = "<group>"; };
+		2695EA321831BF860065C9CF /* Percussion 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 60.mp3"; sourceTree = "<group>"; };
+		2695EA331831BF860065C9CF /* Percussion 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 61.mp3"; sourceTree = "<group>"; };
+		2695EA341831BF860065C9CF /* Percussion 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 62.mp3"; sourceTree = "<group>"; };
+		2695EA351831BF860065C9CF /* Percussion 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 63.mp3"; sourceTree = "<group>"; };
+		2695EA361831BF860065C9CF /* Percussion 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 64.mp3"; sourceTree = "<group>"; };
+		2695EA371831BF860065C9CF /* Percussion 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 65.mp3"; sourceTree = "<group>"; };
+		2695EA381831BF860065C9CF /* Percussion 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 66.mp3"; sourceTree = "<group>"; };
+		2695EA391831BF860065C9CF /* Percussion 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 67.mp3"; sourceTree = "<group>"; };
+		2695EA3A1831BF860065C9CF /* Percussion 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 68.mp3"; sourceTree = "<group>"; };
+		2695EA3B1831BF860065C9CF /* Percussion 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 69.mp3"; sourceTree = "<group>"; };
+		2695EA3C1831BF860065C9CF /* Percussion 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 70.mp3"; sourceTree = "<group>"; };
+		2695EA3D1831BF860065C9CF /* Percussion 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 71.mp3"; sourceTree = "<group>"; };
+		2695EA3E1831BF860065C9CF /* Percussion 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 72.mp3"; sourceTree = "<group>"; };
+		2695EA3F1831BF860065C9CF /* Percussion 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 73.mp3"; sourceTree = "<group>"; };
+		2695EA401831BF860065C9CF /* Percussion 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 74.mp3"; sourceTree = "<group>"; };
+		2695EA411831BF860065C9CF /* Percussion 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 75.mp3"; sourceTree = "<group>"; };
+		2695EA421831BF860065C9CF /* Percussion 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 76.mp3"; sourceTree = "<group>"; };
+		2695EA431831BF860065C9CF /* Percussion 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 77.mp3"; sourceTree = "<group>"; };
+		2695EA441831BF860065C9CF /* Percussion 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 78.mp3"; sourceTree = "<group>"; };
+		2695EA451831BF860065C9CF /* Percussion 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 79.mp3"; sourceTree = "<group>"; };
+		2695EA461831BF860065C9CF /* Percussion 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 80.mp3"; sourceTree = "<group>"; };
+		2695EA471831BF860065C9CF /* Percussion 81.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 81.mp3"; sourceTree = "<group>"; };
+		2695EA481831BF860065C9CF /* Percussion 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 82.mp3"; sourceTree = "<group>"; };
+		2695EA491831BF860065C9CF /* Percussion 83.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 83.mp3"; sourceTree = "<group>"; };
+		2695EA4A1831BF860065C9CF /* Percussion 84.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 84.mp3"; sourceTree = "<group>"; };
+		2695EA4B1831BF860065C9CF /* Percussion 85.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 85.mp3"; sourceTree = "<group>"; };
+		2695EA4C1831BF860065C9CF /* Percussion 86.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 86.mp3"; sourceTree = "<group>"; };
+		2695EA4D1831BF860065C9CF /* Percussion 87.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 87.mp3"; sourceTree = "<group>"; };
+		2695EA4E1831BF860065C9CF /* Percussion 88.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 88.mp3"; sourceTree = "<group>"; };
+		2695EA4F1831BF860065C9CF /* Percussion 89.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 89.mp3"; sourceTree = "<group>"; };
+		2695EA501831BF860065C9CF /* Percussion 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 90.mp3"; sourceTree = "<group>"; };
+		2695EA511831BF860065C9CF /* Percussion 91.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 91.mp3"; sourceTree = "<group>"; };
+		2695EA521831BF860065C9CF /* Percussion 92.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 92.mp3"; sourceTree = "<group>"; };
+		2695EA531831BF860065C9CF /* Percussion 93.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 93.mp3"; sourceTree = "<group>"; };
+		2695EA541831BF860065C9CF /* Percussion 94.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 94.mp3"; sourceTree = "<group>"; };
+		2695EA551831BF860065C9CF /* Percussion 95.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 95.mp3"; sourceTree = "<group>"; };
+		2695EA561831BF860065C9CF /* Percussion 96.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 96.mp3"; sourceTree = "<group>"; };
+		2695EA571831BF860065C9CF /* Percussion 97.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 97.mp3"; sourceTree = "<group>"; };
+		2695EA581831BF860065C9CF /* Percussion 98.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 98.mp3"; sourceTree = "<group>"; };
+		2695EA591831BF860065C9CF /* Percussion 99.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 99.mp3"; sourceTree = "<group>"; };
+		2695EA5A1831BF860065C9CF /* Percussion 100.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 100.mp3"; sourceTree = "<group>"; };
+		2695EA5B1831BF860065C9CF /* Percussion 101.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 101.mp3"; sourceTree = "<group>"; };
+		2695EAC21831DB9E0065C9CF /* Default4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default4@2x.png"; sourceTree = "<group>"; };
+		2695EAC31831DC740065C9CF /* 00-Ver2_LoadScreen-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "00-Ver2_LoadScreen-1.png"; path = "gTarSequencer/Resources/00-Ver2_LoadScreen-1.png"; sourceTree = "<group>"; };
 		26B2D6011830BF6F00DF7CE7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		26B2D6031830C21100DF7CE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6D331B0F157D40A100AA27A1 /* gTarSequencer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarSequencer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,6 +607,7 @@
 		6D331B04157D40A100AA27A1 = {
 			isa = PBXGroup;
 			children = (
+				2695EAC31831DC740065C9CF /* 00-Ver2_LoadScreen-1.png */,
 				6D331B19157D40A100AA27A1 /* gTarSequencer */,
 				6D331B37157D40A100AA27A1 /* gTarSequencerTests */,
 				6D331B12157D40A100AA27A1 /* Frameworks */,
@@ -435,6 +644,7 @@
 		6D331B19157D40A100AA27A1 /* gTarSequencer */ = {
 			isa = PBXGroup;
 			children = (
+				264F142918315CFD00366268 /* sequencerInstruments.plist */,
 				6D331B22157D40A100AA27A1 /* AppDelegate.h */,
 				6D331B23157D40A100AA27A1 /* AppDelegate.m */,
 				EC37BE69160C44F100E6277D /* LoadingAnimationViewController.h */,
@@ -483,6 +693,108 @@
 		6D9912B115B0D4E000B32116 /* Percussion */ = {
 			isa = PBXGroup;
 			children = (
+				2695E9F61831BF860065C9CF /* Percussion 0.mp3 */,
+				2695E9F71831BF860065C9CF /* Percussion 1.mp3 */,
+				2695E9F81831BF860065C9CF /* Percussion 2.mp3 */,
+				2695E9F91831BF860065C9CF /* Percussion 3.mp3 */,
+				2695E9FA1831BF860065C9CF /* Percussion 4.mp3 */,
+				2695E9FB1831BF860065C9CF /* Percussion 5.mp3 */,
+				2695E9FC1831BF860065C9CF /* Percussion 6.mp3 */,
+				2695E9FD1831BF860065C9CF /* Percussion 7.mp3 */,
+				2695E9FE1831BF860065C9CF /* Percussion 8.mp3 */,
+				2695E9FF1831BF860065C9CF /* Percussion 9.mp3 */,
+				2695EA001831BF860065C9CF /* Percussion 10.mp3 */,
+				2695EA011831BF860065C9CF /* Percussion 11.mp3 */,
+				2695EA021831BF860065C9CF /* Percussion 12.mp3 */,
+				2695EA031831BF860065C9CF /* Percussion 13.mp3 */,
+				2695EA041831BF860065C9CF /* Percussion 14.mp3 */,
+				2695EA051831BF860065C9CF /* Percussion 15.mp3 */,
+				2695EA061831BF860065C9CF /* Percussion 16.mp3 */,
+				2695EA071831BF860065C9CF /* Percussion 17.mp3 */,
+				2695EA081831BF860065C9CF /* Percussion 18.mp3 */,
+				2695EA091831BF860065C9CF /* Percussion 19.mp3 */,
+				2695EA0A1831BF860065C9CF /* Percussion 20.mp3 */,
+				2695EA0B1831BF860065C9CF /* Percussion 21.mp3 */,
+				2695EA0C1831BF860065C9CF /* Percussion 22.mp3 */,
+				2695EA0D1831BF860065C9CF /* Percussion 23.mp3 */,
+				2695EA0E1831BF860065C9CF /* Percussion 24.mp3 */,
+				2695EA0F1831BF860065C9CF /* Percussion 25.mp3 */,
+				2695EA101831BF860065C9CF /* Percussion 26.mp3 */,
+				2695EA111831BF860065C9CF /* Percussion 27.mp3 */,
+				2695EA121831BF860065C9CF /* Percussion 28.mp3 */,
+				2695EA131831BF860065C9CF /* Percussion 29.mp3 */,
+				2695EA141831BF860065C9CF /* Percussion 30.mp3 */,
+				2695EA151831BF860065C9CF /* Percussion 31.mp3 */,
+				2695EA161831BF860065C9CF /* Percussion 32.mp3 */,
+				2695EA171831BF860065C9CF /* Percussion 33.mp3 */,
+				2695EA181831BF860065C9CF /* Percussion 34.mp3 */,
+				2695EA191831BF860065C9CF /* Percussion 35.mp3 */,
+				2695EA1A1831BF860065C9CF /* Percussion 36.mp3 */,
+				2695EA1B1831BF860065C9CF /* Percussion 37.mp3 */,
+				2695EA1C1831BF860065C9CF /* Percussion 38.mp3 */,
+				2695EA1D1831BF860065C9CF /* Percussion 39.mp3 */,
+				2695EA1E1831BF860065C9CF /* Percussion 40.mp3 */,
+				2695EA1F1831BF860065C9CF /* Percussion 41.mp3 */,
+				2695EA201831BF860065C9CF /* Percussion 42.mp3 */,
+				2695EA211831BF860065C9CF /* Percussion 43.mp3 */,
+				2695EA221831BF860065C9CF /* Percussion 44.mp3 */,
+				2695EA231831BF860065C9CF /* Percussion 45.mp3 */,
+				2695EA241831BF860065C9CF /* Percussion 46.mp3 */,
+				2695EA251831BF860065C9CF /* Percussion 47.mp3 */,
+				2695EA261831BF860065C9CF /* Percussion 48.mp3 */,
+				2695EA271831BF860065C9CF /* Percussion 49.mp3 */,
+				2695EA281831BF860065C9CF /* Percussion 50.mp3 */,
+				2695EA291831BF860065C9CF /* Percussion 51.mp3 */,
+				2695EA2A1831BF860065C9CF /* Percussion 52.mp3 */,
+				2695EA2B1831BF860065C9CF /* Percussion 53.mp3 */,
+				2695EA2C1831BF860065C9CF /* Percussion 54.mp3 */,
+				2695EA2D1831BF860065C9CF /* Percussion 55.mp3 */,
+				2695EA2E1831BF860065C9CF /* Percussion 56.mp3 */,
+				2695EA2F1831BF860065C9CF /* Percussion 57.mp3 */,
+				2695EA301831BF860065C9CF /* Percussion 58.mp3 */,
+				2695EA311831BF860065C9CF /* Percussion 59.mp3 */,
+				2695EA321831BF860065C9CF /* Percussion 60.mp3 */,
+				2695EA331831BF860065C9CF /* Percussion 61.mp3 */,
+				2695EA341831BF860065C9CF /* Percussion 62.mp3 */,
+				2695EA351831BF860065C9CF /* Percussion 63.mp3 */,
+				2695EA361831BF860065C9CF /* Percussion 64.mp3 */,
+				2695EA371831BF860065C9CF /* Percussion 65.mp3 */,
+				2695EA381831BF860065C9CF /* Percussion 66.mp3 */,
+				2695EA391831BF860065C9CF /* Percussion 67.mp3 */,
+				2695EA3A1831BF860065C9CF /* Percussion 68.mp3 */,
+				2695EA3B1831BF860065C9CF /* Percussion 69.mp3 */,
+				2695EA3C1831BF860065C9CF /* Percussion 70.mp3 */,
+				2695EA3D1831BF860065C9CF /* Percussion 71.mp3 */,
+				2695EA3E1831BF860065C9CF /* Percussion 72.mp3 */,
+				2695EA3F1831BF860065C9CF /* Percussion 73.mp3 */,
+				2695EA401831BF860065C9CF /* Percussion 74.mp3 */,
+				2695EA411831BF860065C9CF /* Percussion 75.mp3 */,
+				2695EA421831BF860065C9CF /* Percussion 76.mp3 */,
+				2695EA431831BF860065C9CF /* Percussion 77.mp3 */,
+				2695EA441831BF860065C9CF /* Percussion 78.mp3 */,
+				2695EA451831BF860065C9CF /* Percussion 79.mp3 */,
+				2695EA461831BF860065C9CF /* Percussion 80.mp3 */,
+				2695EA471831BF860065C9CF /* Percussion 81.mp3 */,
+				2695EA481831BF860065C9CF /* Percussion 82.mp3 */,
+				2695EA491831BF860065C9CF /* Percussion 83.mp3 */,
+				2695EA4A1831BF860065C9CF /* Percussion 84.mp3 */,
+				2695EA4B1831BF860065C9CF /* Percussion 85.mp3 */,
+				2695EA4C1831BF860065C9CF /* Percussion 86.mp3 */,
+				2695EA4D1831BF860065C9CF /* Percussion 87.mp3 */,
+				2695EA4E1831BF860065C9CF /* Percussion 88.mp3 */,
+				2695EA4F1831BF860065C9CF /* Percussion 89.mp3 */,
+				2695EA501831BF860065C9CF /* Percussion 90.mp3 */,
+				2695EA511831BF860065C9CF /* Percussion 91.mp3 */,
+				2695EA521831BF860065C9CF /* Percussion 92.mp3 */,
+				2695EA531831BF860065C9CF /* Percussion 93.mp3 */,
+				2695EA541831BF860065C9CF /* Percussion 94.mp3 */,
+				2695EA551831BF860065C9CF /* Percussion 95.mp3 */,
+				2695EA561831BF860065C9CF /* Percussion 96.mp3 */,
+				2695EA571831BF860065C9CF /* Percussion 97.mp3 */,
+				2695EA581831BF860065C9CF /* Percussion 98.mp3 */,
+				2695EA591831BF860065C9CF /* Percussion 99.mp3 */,
+				2695EA5A1831BF860065C9CF /* Percussion 100.mp3 */,
+				2695EA5B1831BF860065C9CF /* Percussion 101.mp3 */,
 				6D9912B215B0D4E000B32116 /* Percussion 0.mp3 */,
 				6D9912B315B0D4E000B32116 /* Percussion 1.mp3 */,
 				6D9912B415B0D4E000B32116 /* Percussion 10.mp3 */,
@@ -591,6 +903,7 @@
 				EC37BE6D160C459600E6277D /* Add_Instrument.png */,
 				EC37BE6E160C459600E6277D /* Arrow_Left.png */,
 				EC37BE6F160C459600E6277D /* Arrow_Right.png */,
+				2695EAC21831DB9E0065C9CF /* Default4@2x.png */,
 				EC37BE70160C459600E6277D /* BackButton_InstrumentSelect.png */,
 				EC37BE71160C459600E6277D /* Button_A_OFF.png */,
 				EC37BE72160C459600E6277D /* Button_A_ON.png */,
@@ -730,14 +1043,37 @@
 				6D331B1E157D40A100AA27A1 /* InfoPlist.strings in Resources */,
 				6D331B27157D40A100AA27A1 /* MainStoryboard.storyboard in Resources */,
 				6DBE633C157D612B00729E25 /* instruments.plist in Resources */,
+				2695EA621831BF860065C9CF /* Percussion 6.mp3 in Resources */,
+				2695EA781831BF860065C9CF /* Percussion 28.mp3 in Resources */,
 				6D9912DB15B0D4E100B32116 /* Percussion 0.mp3 in Resources */,
+				2695EA641831BF860065C9CF /* Percussion 8.mp3 in Resources */,
+				2695EAA81831BF860065C9CF /* Percussion 76.mp3 in Resources */,
 				6D9912DC15B0D4E100B32116 /* Percussion 1.mp3 in Resources */,
+				2695EABA1831BF860065C9CF /* Percussion 94.mp3 in Resources */,
+				2695EA601831BF860065C9CF /* Percussion 4.mp3 in Resources */,
+				2695EAB31831BF860065C9CF /* Percussion 87.mp3 in Resources */,
+				2695EAC01831BF860065C9CF /* Percussion 100.mp3 in Resources */,
 				6D9912DD15B0D4E100B32116 /* Percussion 10.mp3 in Resources */,
+				2695EABE1831BF860065C9CF /* Percussion 98.mp3 in Resources */,
 				6D9912DE15B0D4E100B32116 /* Percussion 11.mp3 in Resources */,
 				6D9912DF15B0D4E100B32116 /* Percussion 12.mp3 in Resources */,
+				2695EAA51831BF860065C9CF /* Percussion 73.mp3 in Resources */,
+				2695EAB01831BF860065C9CF /* Percussion 84.mp3 in Resources */,
+				2695EAA61831BF860065C9CF /* Percussion 74.mp3 in Resources */,
+				2695EA7D1831BF860065C9CF /* Percussion 33.mp3 in Resources */,
+				2695EABD1831BF860065C9CF /* Percussion 97.mp3 in Resources */,
+				2695EABF1831BF860065C9CF /* Percussion 99.mp3 in Resources */,
+				2695EA941831BF860065C9CF /* Percussion 56.mp3 in Resources */,
+				2695EA7F1831BF860065C9CF /* Percussion 35.mp3 in Resources */,
+				2695EA6E1831BF860065C9CF /* Percussion 18.mp3 in Resources */,
 				6D9912E015B0D4E100B32116 /* Percussion 13.mp3 in Resources */,
 				6D9912E115B0D4E100B32116 /* Percussion 14.mp3 in Resources */,
+				2695EAB61831BF860065C9CF /* Percussion 90.mp3 in Resources */,
+				2695EAB21831BF860065C9CF /* Percussion 86.mp3 in Resources */,
+				2695EA611831BF860065C9CF /* Percussion 5.mp3 in Resources */,
 				6D9912E215B0D4E100B32116 /* Percussion 15.mp3 in Resources */,
+				2695EABB1831BF860065C9CF /* Percussion 95.mp3 in Resources */,
+				2695EA5E1831BF860065C9CF /* Percussion 2.mp3 in Resources */,
 				6D9912E315B0D4E100B32116 /* Percussion 16.mp3 in Resources */,
 				6D9912E415B0D4E100B32116 /* Percussion 17.mp3 in Resources */,
 				6D9912E515B0D4E100B32116 /* Percussion 18.mp3 in Resources */,
@@ -749,12 +1085,24 @@
 				6D9912EB15B0D4E100B32116 /* Percussion 23.mp3 in Resources */,
 				6D9912EC15B0D4E100B32116 /* Percussion 24.mp3 in Resources */,
 				6D9912ED15B0D4E100B32116 /* Percussion 25.mp3 in Resources */,
+				2695EA741831BF860065C9CF /* Percussion 24.mp3 in Resources */,
+				2695EA8F1831BF860065C9CF /* Percussion 51.mp3 in Resources */,
+				2695EA701831BF860065C9CF /* Percussion 20.mp3 in Resources */,
 				6D9912EE15B0D4E100B32116 /* Percussion 26.mp3 in Resources */,
+				2695EA881831BF860065C9CF /* Percussion 44.mp3 in Resources */,
 				6D9912EF15B0D4E100B32116 /* Percussion 27.mp3 in Resources */,
+				2695EA991831BF860065C9CF /* Percussion 61.mp3 in Resources */,
+				2695EA691831BF860065C9CF /* Percussion 13.mp3 in Resources */,
+				2695EA751831BF860065C9CF /* Percussion 25.mp3 in Resources */,
 				6D9912F015B0D4E100B32116 /* Percussion 28.mp3 in Resources */,
 				6D9912F115B0D4E100B32116 /* Percussion 29.mp3 in Resources */,
+				2695EAA21831BF860065C9CF /* Percussion 70.mp3 in Resources */,
+				2695EA901831BF860065C9CF /* Percussion 52.mp3 in Resources */,
+				2695EA9C1831BF860065C9CF /* Percussion 64.mp3 in Resources */,
 				6D9912F215B0D4E100B32116 /* Percussion 3.mp3 in Resources */,
 				6D9912F315B0D4E100B32116 /* Percussion 30.mp3 in Resources */,
+				2695EA661831BF860065C9CF /* Percussion 10.mp3 in Resources */,
+				2695EA891831BF860065C9CF /* Percussion 45.mp3 in Resources */,
 				6D9912F415B0D4E100B32116 /* Percussion 31.mp3 in Resources */,
 				6D9912F515B0D4E100B32116 /* Percussion 32.mp3 in Resources */,
 				6D9912F615B0D4E100B32116 /* Percussion 33.mp3 in Resources */,
@@ -762,69 +1110,137 @@
 				6D9912F815B0D4E100B32116 /* Percussion 35.mp3 in Resources */,
 				6D9912F915B0D4E100B32116 /* Percussion 36.mp3 in Resources */,
 				6D9912FA15B0D4E100B32116 /* Percussion 37.mp3 in Resources */,
+				2695EAAE1831BF860065C9CF /* Percussion 82.mp3 in Resources */,
 				6D9912FB15B0D4E100B32116 /* Percussion 38.mp3 in Resources */,
+				2695EAB11831BF860065C9CF /* Percussion 85.mp3 in Resources */,
 				6D9912FC15B0D4E100B32116 /* Percussion 39.mp3 in Resources */,
 				6D9912FD15B0D4E100B32116 /* Percussion 4.mp3 in Resources */,
+				2695EAB71831BF860065C9CF /* Percussion 91.mp3 in Resources */,
 				6D9912FE15B0D4E100B32116 /* Percussion 40.mp3 in Resources */,
 				6D9912FF15B0D4E100B32116 /* Percussion 5.mp3 in Resources */,
+				2695EA951831BF860065C9CF /* Percussion 57.mp3 in Resources */,
 				6D99130015B0D4E100B32116 /* Percussion 6.mp3 in Resources */,
 				6D99130115B0D4E100B32116 /* Percussion 7.mp3 in Resources */,
 				6D99130215B0D4E100B32116 /* Percussion 8.mp3 in Resources */,
+				2695EA8D1831BF860065C9CF /* Percussion 49.mp3 in Resources */,
 				6D99130315B0D4E100B32116 /* Percussion 9.mp3 in Resources */,
+				2695EA9B1831BF860065C9CF /* Percussion 63.mp3 in Resources */,
+				2695EA841831BF860065C9CF /* Percussion 40.mp3 in Resources */,
+				2695EAA31831BF860065C9CF /* Percussion 71.mp3 in Resources */,
 				EC37BEA3160C459800E6277D /* Add_Instrument.png in Resources */,
 				EC37BEA5160C459800E6277D /* Arrow_Left.png in Resources */,
+				2695EABC1831BF860065C9CF /* Percussion 96.mp3 in Resources */,
 				EC37BEA7160C459800E6277D /* Arrow_Right.png in Resources */,
 				EC37BEA9160C459800E6277D /* BackButton_InstrumentSelect.png in Resources */,
 				EC37BEAB160C459800E6277D /* Button_A_OFF.png in Resources */,
 				EC37BEAD160C459800E6277D /* Button_A_ON.png in Resources */,
 				EC37BEAF160C459800E6277D /* Button_Add_OFF.png in Resources */,
+				2695EA721831BF860065C9CF /* Percussion 22.mp3 in Resources */,
+				2695EA7B1831BF860065C9CF /* Percussion 31.mp3 in Resources */,
+				2695EA9A1831BF860065C9CF /* Percussion 62.mp3 in Resources */,
 				EC37BEB1160C459800E6277D /* Button_Add_ON.png in Resources */,
+				2695EA9E1831BF860065C9CF /* Percussion 66.mp3 in Resources */,
+				2695EA761831BF860065C9CF /* Percussion 26.mp3 in Resources */,
 				EC37BEB3160C459800E6277D /* Button_B_OFF.png in Resources */,
+				2695EA831831BF860065C9CF /* Percussion 39.mp3 in Resources */,
 				EC37BEB5160C459800E6277D /* Button_B_ON.png in Resources */,
 				EC37BEB7160C459800E6277D /* Button_C_OFF.png in Resources */,
 				EC37BEB9160C459800E6277D /* Button_C_ON.png in Resources */,
 				EC37BEBB160C459800E6277D /* Button_D_OFF.png in Resources */,
 				EC37BEBD160C459800E6277D /* Button_D_ON.png in Resources */,
+				2695EAA41831BF860065C9CF /* Percussion 72.mp3 in Resources */,
 				EC37BEBF160C459800E6277D /* Button_Minus_OFF.png in Resources */,
 				EC37BEC1160C459800E6277D /* Button_Minus_ON.png in Resources */,
+				2695EAA91831BF860065C9CF /* Percussion 77.mp3 in Resources */,
 				EC37BEC3160C459800E6277D /* Button_OFF_OFF.png in Resources */,
+				2695EA5C1831BF860065C9CF /* Percussion 0.mp3 in Resources */,
+				2695EAC11831BF860065C9CF /* Percussion 101.mp3 in Resources */,
 				EC37BEC5160C459800E6277D /* Button_OFF_ON.png in Resources */,
 				EC37BEC7160C459800E6277D /* Default@2x.png in Resources */,
 				EC37BEC9160C459800E6277D /* DrumButton_OFF.png in Resources */,
+				2695EA8C1831BF860065C9CF /* Percussion 48.mp3 in Resources */,
 				EC37BECB160C459800E6277D /* DrumButton_ON.png in Resources */,
+				2695EA6C1831BF860065C9CF /* Percussion 16.mp3 in Resources */,
 				EC37BECD160C459800E6277D /* gTarbyIncidentLoading.png in Resources */,
 				EC37BECF160C459800E6277D /* gTarConnectedLogo.png in Resources */,
 				EC37BED1160C459800E6277D /* gTarNotConnectedLogo.png in Resources */,
+				2695EA651831BF860065C9CF /* Percussion 9.mp3 in Resources */,
 				EC37BED3160C459800E6277D /* GuitarButton_OFF.png in Resources */,
+				2695EA9D1831BF860065C9CF /* Percussion 65.mp3 in Resources */,
+				2695EA851831BF860065C9CF /* Percussion 41.mp3 in Resources */,
+				264F142A18315CFD00366268 /* sequencerInstruments.plist in Resources */,
 				EC37BED5160C459800E6277D /* GuitarButton_ON.png in Resources */,
 				EC37BED7160C459800E6277D /* Icon_Guitar.png in Resources */,
+				2695EA771831BF860065C9CF /* Percussion 27.mp3 in Resources */,
 				EC37BED9160C459800E6277D /* Icon_Percussion.png in Resources */,
+				2695EAAC1831BF860065C9CF /* Percussion 80.mp3 in Resources */,
+				2695EA871831BF860065C9CF /* Percussion 43.mp3 in Resources */,
+				2695EA971831BF860065C9CF /* Percussion 59.mp3 in Resources */,
 				EC37BEDB160C459800E6277D /* Icon_Piano.png in Resources */,
 				EC37BEDD160C459800E6277D /* Icon_Trash.png in Resources */,
+				2695EA811831BF860065C9CF /* Percussion 37.mp3 in Resources */,
+				2695EA821831BF860065C9CF /* Percussion 38.mp3 in Resources */,
 				EC37BEDF160C459800E6277D /* Icon_WubWub.png in Resources */,
+				2695EAB81831BF860065C9CF /* Percussion 92.mp3 in Resources */,
+				2695EA911831BF860065C9CF /* Percussion 53.mp3 in Resources */,
 				EC37BEE1160C459800E6277D /* InstrumentsCopy.png in Resources */,
+				2695EA921831BF860065C9CF /* Percussion 54.mp3 in Resources */,
+				2695EA6F1831BF860065C9CF /* Percussion 19.mp3 in Resources */,
 				EC37BEE3160C459800E6277D /* InstrumentSelectScreen.png in Resources */,
+				2695EA5D1831BF860065C9CF /* Percussion 1.mp3 in Resources */,
+				2695EAA11831BF860065C9CF /* Percussion 69.mp3 in Resources */,
 				EC37BEE5160C459800E6277D /* PauseButton.png in Resources */,
+				2695EAAD1831BF860065C9CF /* Percussion 81.mp3 in Resources */,
 				EC37BEE7160C459800E6277D /* PianoButton_OFF.png in Resources */,
 				EC37BEE9160C459800E6277D /* PianoButton_ON.png in Resources */,
+				2695EAA71831BF860065C9CF /* Percussion 75.mp3 in Resources */,
+				2695EA931831BF860065C9CF /* Percussion 55.mp3 in Resources */,
 				EC37BEEB160C459800E6277D /* PlayButton.png in Resources */,
 				EC37BEED160C459800E6277D /* Sequence1.png in Resources */,
+				2695EA7A1831BF860065C9CF /* Percussion 30.mp3 in Resources */,
+				2695EA801831BF860065C9CF /* Percussion 36.mp3 in Resources */,
 				EC37BEEF160C459800E6277D /* Sequence2.png in Resources */,
+				2695EAAB1831BF860065C9CF /* Percussion 79.mp3 in Resources */,
 				EC37BEF1160C459800E6277D /* Sequence3.png in Resources */,
+				2695EA981831BF860065C9CF /* Percussion 60.mp3 in Resources */,
+				2695EA671831BF860065C9CF /* Percussion 11.mp3 in Resources */,
+				2695EAA01831BF860065C9CF /* Percussion 68.mp3 in Resources */,
 				EC37BEF3160C459800E6277D /* Sequence4.png in Resources */,
+				2695EA6A1831BF860065C9CF /* Percussion 14.mp3 in Resources */,
+				2695EA6B1831BF860065C9CF /* Percussion 15.mp3 in Resources */,
 				EC37BEF5160C459800E6277D /* Sequence5.png in Resources */,
 				EC37BEF7160C459800E6277D /* Sequence6.png in Resources */,
 				EC37BEF9160C459800E6277D /* Sequence7.png in Resources */,
+				2695EA7E1831BF860065C9CF /* Percussion 34.mp3 in Resources */,
 				EC37BEFB160C459800E6277D /* Sequence8.png in Resources */,
+				2695EA861831BF860065C9CF /* Percussion 42.mp3 in Resources */,
+				2695EAAA1831BF860065C9CF /* Percussion 78.mp3 in Resources */,
 				EC37BEFD160C459800E6277D /* Sequence9.png in Resources */,
 				EC37BEFF160C459800E6277D /* Sequence10.png in Resources */,
+				2695EAB91831BF860065C9CF /* Percussion 93.mp3 in Resources */,
 				EC37BF01160C459800E6277D /* Sequence11.png in Resources */,
+				2695EA8E1831BF860065C9CF /* Percussion 50.mp3 in Resources */,
 				EC37BF03160C459800E6277D /* Sequencer_Icon.png in Resources */,
+				2695EA9F1831BF860065C9CF /* Percussion 67.mp3 in Resources */,
+				2695EAB41831BF860065C9CF /* Percussion 88.mp3 in Resources */,
 				EC37BF05160C459800E6277D /* TempoButton.png in Resources */,
+				2695EAB51831BF860065C9CF /* Percussion 89.mp3 in Resources */,
+				2695EA631831BF860065C9CF /* Percussion 7.mp3 in Resources */,
+				2695EA8A1831BF860065C9CF /* Percussion 46.mp3 in Resources */,
+				2695EAAF1831BF860065C9CF /* Percussion 83.mp3 in Resources */,
+				2695EA711831BF860065C9CF /* Percussion 21.mp3 in Resources */,
+				2695EA731831BF860065C9CF /* Percussion 23.mp3 in Resources */,
 				EC37BF07160C459800E6277D /* Text_Connected.png in Resources */,
 				EC37BF09160C459800E6277D /* Text_NotConnected.png in Resources */,
 				EC37BF0B160C459800E6277D /* WubButton_OFF.png in Resources */,
+				2695EA791831BF860065C9CF /* Percussion 29.mp3 in Resources */,
+				2695EA7C1831BF860065C9CF /* Percussion 32.mp3 in Resources */,
+				2695EA8B1831BF860065C9CF /* Percussion 47.mp3 in Resources */,
+				2695EA681831BF860065C9CF /* Percussion 12.mp3 in Resources */,
 				EC37BF0D160C459800E6277D /* WubButton_ON.png in Resources */,
+				2695EA6D1831BF860065C9CF /* Percussion 17.mp3 in Resources */,
+				2695EA5F1831BF860065C9CF /* Percussion 3.mp3 in Resources */,
+				2695EA961831BF860065C9CF /* Percussion 58.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1047,7 +1463,7 @@
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1063,7 +1479,7 @@
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

@@ -65,17 +65,16 @@
 - (void)unmuteInstrument:(InstrumentCell *)sender;
 
 - (IBAction)startStop:(id)sender;
-
 - (IBAction)playSomeNotes:(id)sender;
 
 - (void)deleteCell:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *playNotesButton;
-@property (weak, nonatomic) IBOutlet UITableView * instrumentTable;
-@property (weak, nonatomic) IBOutlet ScrollButton *tempoSlider;
-@property (weak, nonatomic) IBOutlet UIButton *startStopButton;
-@property (weak, nonatomic) IBOutlet UIImageView * gTarLogoImageView;
-@property (weak, nonatomic) IBOutlet UIImageView * gTarConnectedText;
+@property (weak, nonatomic) IBOutlet UIButton       *playNotesButton;
+@property (weak, nonatomic) IBOutlet UITableView    *instrumentTable;
+@property (weak, nonatomic) IBOutlet ScrollButton   *tempoSlider;
+@property (weak, nonatomic) IBOutlet UIButton       *startStopButton;
+@property (weak, nonatomic) IBOutlet UIImageView    *gTarLogoImageView;
+@property (weak, nonatomic) IBOutlet UIImageView    *gTarConnectedText;
 
 
 @end

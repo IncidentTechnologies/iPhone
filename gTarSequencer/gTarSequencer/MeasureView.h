@@ -28,5 +28,7 @@
 
 - (void)update;
 - (void)drawBorder;
+- (void)selectMeasure;
+- (void)deselectMeasure;
 
 @end

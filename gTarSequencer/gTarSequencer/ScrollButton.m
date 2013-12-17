@@ -49,12 +49,17 @@
     zeroPosition.y = self.frame.size.height / 2;
     
     // Set up radial display:
-    CGPoint currentOrigin = self.frame.origin;
+    CGPoint currentOrigin = [self.superview.superview convertPoint:self.frame.origin toView:nil]; 
+    
     CGRect wholeScreen = CGRectMake(-1 * currentOrigin.x, -1 * currentOrigin.y, 480, 320);
+    //CGRect wholeScreen = CGRectMake(-100.0f, -100.0f, 480.0f, 320.0f);
+    
     radialDisplay = [[RadialDisplay alloc] initWithFrame:wholeScreen];
     radialDisplay.userInteractionEnabled = NO;
+    
     [self addSubview:radialDisplay];
-    radialDisplay.alpha = NOT_VISIBLE;
+    
+    //radialDisplay.alpha = NOT_VISIBLE;
     
     // compute sensitivities:
     [self computeSensitivities];

@@ -247,8 +247,7 @@
     }
     
     // call update on each MeasureView
-    for (int i=0;i<patternToDisplay.measureCount;i++)
-    {
+    for (int i = 0; i < patternToDisplay.measureCount; i++) {
         MeasureView * mv = [measureViews objectAtIndex:i];
         [mv update];
     }
@@ -256,10 +255,8 @@
 
 - (void)fillWithMeasures:(int)newCount
 {
-    for (int i=newCount;i<MAX_MEASURES_IN_UI;i++)
-    {
+    for (int i = newCount; i < MAX_MEASURES_IN_UI; i++)
         [[measureViews objectAtIndex:i] drawBorder];
-    }
 }
 
 
@@ -283,14 +280,13 @@
     [self deselect];
 
     MeasureView * mv = [measureViews objectAtIndex:indexToSelect];
-    mv.backgroundColor = [UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1];
+    [mv selectMeasure];
 }
 
 - (void)deselect
 {
-    for (MeasureView * mv in measureViews)
-    {
-        mv.backgroundColor = [UIColor clearColor];
+    for (MeasureView * mv in measureViews) {
+        [mv deselectMeasure];
     }
 }
 
@@ -339,24 +335,19 @@
 {
     int tappedIndex = [measureViews indexOfObject:sender];
     
-    if ( tappedIndex >= patternToDisplay.measureCount ) 
-    {
+    if (tappedIndex >= patternToDisplay.measureCount) 
         return;
-    }
-    else {
+    else
         [parent userDidSelectMeasure:self atIndex:tappedIndex];
-    }
 }
 
 #pragma mark Adding and Removing Measures
 
-- (IBAction)addMeasures:(id)sender
-{
+- (IBAction)addMeasures:(id)sender {
     [parent userDidAddMeasures:self];
 }
 
-- (IBAction)removeMeasures:(id)sender
-{
+- (IBAction)removeMeasures:(id)sender {
     [parent userDidRemoveMeasures:self];
 }
 

@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  ViewController.h
 //  gtarLearn
 //
 //  Created by Idan Beck on 11/10/13.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface LearnTitleViewController : UIViewController{
+    IBOutlet UIButton *m_buttonTestXMP;
+}
 
-@property (strong, nonatomic) UIWindow *window;
+-(IBAction) onTestXmpClicked:(id)sender;
 
 @end

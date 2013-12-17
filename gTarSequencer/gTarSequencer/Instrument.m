@@ -83,24 +83,18 @@
 
 #pragma Playing Notes
 
+// Play audio:
 - (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound
 {
-    // Play audio:
-    if ( sound )
-    {
+    if (sound)
         [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument];
-    }
-    else {
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:-1];
-    }
+    else
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument: -1];
 }
 
-- (void)displayAllNotes
-{
+- (void)displayAllNotes {
     for (Measure * m in selectedPattern.measures)
-    {
         [m setUpdateNotesOnMinimap:YES];
-    }
 }
 
 - (int)selectedPatternIndex
@@ -121,8 +115,7 @@
     [selectedPattern doubleMeasures];
 }
 
-- (void)removeMeasure
-{
+- (void)removeMeasure {
     if ( selectedPattern.measureCount == 1 )
     {
         return;
@@ -135,17 +128,14 @@
     }
 }
 
-- (void)clearSelectedMeasure
-{
+- (void)clearSelectedMeasure {
     [selectedPattern clearSelectedMeasure];
 }
 
 #pragma mark Selecting Measures
 
-- (Measure *)selectMeasure:(int)newSelection
-{
+- (Measure *)selectMeasure:(int)newSelection {
     Measure * newlySelectedMeasure = [selectedPattern selectMeasure:newSelection];
-    
     return newlySelectedMeasure;
 }
 

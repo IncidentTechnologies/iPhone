@@ -44,8 +44,7 @@
                              [NSNumber numberWithInt:24],
                              nil];
         
-        if (![self loadInstrumentArray])
-        {
+        if (![self loadInstrumentArray]) {
             NSLog(@"loadInstrumentArray failed to load instrument array from instrument.plist");
             [self release];
             return nil;
@@ -67,23 +66,22 @@
     NSError *error = nil;
     NSPropertyListFormat format;
     NSString *plistPath;
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                              NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
     plistPath = [rootPath stringByAppendingPathComponent:@"instruments.plist"];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-    {
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         plistPath = [[NSBundle mainBundle] pathForResource:@"instruments" ofType:@"plist"];
     }
-    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-    {
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         plistPath = [[NSBundle mainBundle] pathForResource:@"instruments" ofType:@"plist"];
     }
+    
     NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-
     NSDictionary *plistDict = (NSDictionary *) [NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListMutableContainersAndLeaves format:&format error:&error];
     
-    if (!plistDict)
-    {
+    if (!plistDict) {
         NSLog(@"Error reading plist: %@, format: %d", [error localizedDescription], format);
         [error release];
         return false;
@@ -171,7 +169,8 @@
 - (void) asynchLoadSamplerWithName:(NSString*)name withSelector:(SEL)aSelector andOwner:(NSObject*)parent
 {
     int samplePackNum = [self getSamplePackNumFromName:name];
-    if (-1 == samplePackNum)
+    
+    if (samplePackNum == -1)
     {
         // No match found, use default (whatever is at index 0)
         NSLog(@"No sample pack found with name %@. Using default sample pack", name);
@@ -333,8 +332,7 @@
 {
     for (int noteNum = 0; noteNum < m_numberOfSamples; noteNum++)
     {
-        if (m_pendingLoadRequests > 0)
-        {
+        if (m_pendingLoadRequests > 0) {
             // A new more recent sample pack load has been requested. 
             // Bail out of the current load, no need to clean up allocated
             // sample data here, each thread cleans up odl data
@@ -346,12 +344,15 @@
         // Instantiate an extended audio file object.
         ExtAudioFileRef audioFileObject = 0;
         
-//        NSLog(@"Opening URL: %@", m_sampleNameArray[noteNum]);
+        NSLog(@"Opening URL: %@", m_sampleNameArray[noteNum]);
         
         // Open an audio file and associate it with the extended audio file objects;
         OSStatus result = ExtAudioFileOpenURL(m_sampleNameArray[noteNum], &audioFileObject);
         
-        if (noErr != result || NULL == audioFileObject) {[self printErrorMessage: @"ExtAudioFileOpenURL" withStatus: result]; return false;}
+        if (noErr != result || NULL == audioFileObject) {
+            [self printErrorMessage: @"ExtAudioFileOpenURL" withStatus: result];
+            return false;
+        }
         
         // Get the audio file's length in frames.
         UInt64 totalFramesInFile = 0;
@@ -364,7 +365,10 @@
                                              &totalFramesInFile
                                              );
         
-        if (noErr != result) {[self printErrorMessage: @"ExtAudioFileGetProperty (audio file length in frames)" withStatus: result]; return false;}
+        if (noErr != result) {
+            [self printErrorMessage: @"ExtAudioFileGetProperty (audio file length in frames)" withStatus: result];
+            return false;
+        }
         
         // Assign the frame count to the soundStructArray instance variable
         m_soundStructArray[noteNum].frameCount = totalFramesInFile;
@@ -380,31 +384,31 @@
                                              &fileAudioFormat
                                              );
         
-        if (noErr != result) {[self printErrorMessage: @"ExtAudioFileGetProperty (file audio format)" withStatus: result]; return false;}
+        if (noErr != result) {
+            [self printErrorMessage: @"ExtAudioFileGetProperty (file audio format)" withStatus: result];
+            return false;
+        }
         
         // Force mono for now, TODO test ability to read stereo
         UInt32 channelCount = 1;//fileAudioFormat.mChannelsPerFrame;
         
-        // Allocate memory in the soundStructArray instance variable to hold the left channel, 
-        //    or mono, audio data
+        // Allocate memory in the soundStructArray instance variable to hold the left channel, or mono, audio data
         m_soundStructArray[noteNum].audioDataLeft =
         (AudioSampleType *) calloc (totalFramesInFile, sizeof (AudioSampleType));
         
         AudioStreamBasicDescription importFormat = {0};
         
         m_soundStructArray[noteNum].audioDataRight = NULL;
-        if (2 == channelCount)
-        {
-            
+        if (channelCount == 2) {
             m_soundStructArray[noteNum].isStereo = YES;
-            // Sound is stereo, so allocate memory in the soundStructArray instance variable to  
-            //    hold the right channel audio data
+            
+            // Sound is stereo, so allocate memory in the soundStructArray instance variable to hold the right channel audio data
             m_soundStructArray[noteNum].audioDataRight =
             (AudioSampleType *) calloc (totalFramesInFile, sizeof (AudioSampleType));
             importFormat = stereoStreamFormat;
             
         }
-        else if (1 == channelCount)
+        else if (channelCount == 1)
         {
             importFormat = monoStreamFormat;
             m_soundStructArray[noteNum].audioDataRight = NULL;
@@ -428,7 +432,10 @@
                                              &importFormat
                                              );
         
-        if (noErr != result) {[self printErrorMessage: @"ExtAudioFileSetProperty (client data format)" withStatus: result]; return false;}
+        if (noErr != result) {
+            [self printErrorMessage: @"ExtAudioFileSetProperty (client data format)" withStatus: result];
+            return false;
+        }
         
         // Set up an AudioBufferList struct, which has two roles:
         //
@@ -443,11 +450,12 @@
         //    channels it represents.
         AudioBufferList *bufferList;
         
-        bufferList = (AudioBufferList *) malloc (
-                                                 sizeof (AudioBufferList) + sizeof (AudioBuffer) * (channelCount - 1)
-                                                 );
+        bufferList = (AudioBufferList *)malloc(sizeof (AudioBufferList) + sizeof (AudioBuffer) * (channelCount - 1));
         
-        if (NULL == bufferList) {NSLog (@"*** malloc failure for allocating bufferList memory"); return false;}
+        if (bufferList == NULL) {
+            NSLog (@"*** malloc failure for allocating bufferList memory");
+            return false;
+        }
         
         // initialize the mNumberBuffers member
         bufferList->mNumberBuffers = channelCount;
@@ -455,8 +463,7 @@
         // initialize the mBuffers member to 0
         AudioBuffer emptyBuffer = {0};
         size_t arrayIndex;
-        for (arrayIndex = 0; arrayIndex < channelCount; arrayIndex++)
-        {
+        for (arrayIndex = 0; arrayIndex < channelCount; arrayIndex++) {
             bufferList->mBuffers[arrayIndex] = emptyBuffer;
         }
         
@@ -465,27 +472,23 @@
         bufferList->mBuffers[0].mDataByteSize    = totalFramesInFile * sizeof (AudioSampleType);
         bufferList->mBuffers[0].mData            = m_soundStructArray[noteNum].audioDataLeft;
         
-        if (2 == channelCount)
-        {
+        if (2 == channelCount) {
             bufferList->mBuffers[1].mNumberChannels  = 1;
             bufferList->mBuffers[1].mDataByteSize    = totalFramesInFile * sizeof (AudioSampleType);
             bufferList->mBuffers[1].mData            = m_soundStructArray[noteNum].audioDataRight;
         }
         
         // Perform a synchronous, sequential read of the audio data out of the file and
-        //    into the soundStructArray[audioFile].audioDataLeft and (if stereo) .audioDataRight members.
+        // into the soundStructArray[audioFile].audioDataLeft and (if stereo) .audioDataRight members.
         UInt32 numberOfPacketsToRead = (UInt32) totalFramesInFile;
         
-        result = ExtAudioFileRead (
-                                   audioFileObject,
+        result = ExtAudioFileRead (audioFileObject,
                                    &numberOfPacketsToRead,
-                                   bufferList
-                                   );
+                                   bufferList);
         
         free (bufferList);
         
-        if (noErr != result)
-        {
+        if (noErr != result) {
             [self printErrorMessage: @"ExtAudioFileRead failure - " withStatus: result];
             
             // If reading from the file failed, then free the memory for the sound buffer.
@@ -583,9 +586,13 @@
             //    to start reading data from.
             UInt32 sampleNumber = m_sampleNumber[string]++;
             
-            AudioSampleType *audioData = (AudioSampleType *)m_soundMappingArray[string][fret]->audioDataLeft;
-            if (NULL == audioData)
-            {
+            AudioSampleType *audioData = NULL;
+            
+            //if(m_soundMappingArray[string][fret] != NULL) {
+                audioData = (AudioSampleType *)m_soundMappingArray[string][fret]->audioDataLeft;
+            //}
+            
+            if (audioData == NULL) {
                 NSLog(@"Null audioData in sample for string:%d, fret:%d", string, fret);
                 return retSample;
             }
