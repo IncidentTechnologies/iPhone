@@ -1,16 +1,6 @@
 #include "XMPParser.h"
 #include <string>
 
-const char* pszXMPElementType[] = { "Start Tag", 
-                                    "End Tag",
-                                    "Declaration",
-                                    "Empty Tag",
-                                    "Comment Tag",
-                                    "Content",
-                                    "Tag Attribute",
-                                    "Invalid Tag"
-};
-
 RESULT XMPParser::ExtractAttributes( char* pszToken, list<XMPElement*> *plistElements)
 {
     RESULT r = R_SUCCESS;
