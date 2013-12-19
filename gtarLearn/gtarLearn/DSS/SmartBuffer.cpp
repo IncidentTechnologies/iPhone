@@ -193,7 +193,7 @@ SmartBuffer & SmartBuffer::operator+=( const SmartBuffer &rhs ) {
     return *this;
 }
 
-SmartBuffer & SmartBuffer::operator+=(const char *psz) {
+SmartBuffer& SmartBuffer::operator+=(const char *psz) {
     for(int i = 0; psz[i] != 0; i++)
         this->Append(psz[i]);
     return *this;

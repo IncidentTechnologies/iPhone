@@ -7,7 +7,7 @@
 //
 
 #import "LearnTitleViewController.h"
-#import "XMPTree.h"
+#import "XMPLesson.h"
 
 @interface LearnTitleViewController () {
 
@@ -30,12 +30,8 @@
 
 -(IBAction)onTestXmpClicked:(id)sender {
     // Button clicked
-    NSError *pError = NULL;
-    NSString *pTempFilePath = [[NSBundle mainBundle] pathForResource:@"test_lesson" ofType:@"xmp"];
-    //NSString *pTempFileContent = [NSString stringWithContentsOfFile:pTempFileContent encoding:NSUTF8StringEncoding error:&pError];
-    XMPTree *pTempTree = new XMPTree((char *)[pTempFilePath UTF8String]);
-    pTempTree->PrintXMPTree();
     
+    XMPLesson *tempLesson = [[XMPLesson alloc] initWithLessonName:@"test_lesson"];
     
 }
 

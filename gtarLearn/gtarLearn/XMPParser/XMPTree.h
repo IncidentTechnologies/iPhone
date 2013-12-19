@@ -35,6 +35,12 @@ public:
     RESULT AddAttributeByNameValue(char *pszName, char *pszValue);
     RESULT AddAttribute(XMPAttribute *attrib);
     RESULT AppendContent(char *pszContent);
+    
+    // Navigation Functions
+    XMPNode *NavNode();
+    
+    list<XMPNode*>*GetChildrenAtNav();
+    list<XMPAttribute*>*GetAttributesAtNav();
 
     // AppendData is a more complex hybrid action which will append a new node and fill it
     // with the data buffer passed

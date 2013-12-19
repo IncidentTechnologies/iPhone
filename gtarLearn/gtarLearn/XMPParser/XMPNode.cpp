@@ -43,13 +43,54 @@ Error:
     return r;
 }
 
+bool XMPNode::HasAttribute(char *pszName) {
+    if(GetAttribute(pszName) != NULL)
+        return true;
+    else
+        return false;
+}
+
+XMPAttribute* XMPNode::GetAttribute(char *pszName) {
+    for(list<XMPAttribute*>::iterator it = m_Attributes.First(); it != NULL; it++)
+        if(strcmp((*it)->GetName(), pszName) == 0)
+            return (*it);
+    return NULL;
+}
+
+bool XMPNode::HasChild(char *pszName) {
+    if(FindChildByName(pszName) != NULL)
+        return true;
+    else
+        return false;
+}
+
 // Find Child currently works based on sequential search
 // this might need to be optimized in the future
+// TODO: This only returns first found, in case of expecting more than one use GetChildren(char*)
 XMPNode* XMPNode::FindChildByName(char *pszName) {
     for(list<XMPNode*>::iterator it = m_Children.First(); it != NULL; it++)        
         if(strcmp((*it)->GetName(), pszName) == 0)            
             return (*it);                    
     return NULL;
+}
+
+// Return a list (collection) of children with a given name
+list<XMPNode*>* XMPNode::GetChildren(char *pszName){
+    list<XMPNode*>* retList = new list<XMPNode*>();
+    
+    for(list<XMPNode*>::iterator it = m_Children.First(); it != NULL; it++) {
+        if(strcmp((*it)->GetName(), pszName) == 0) {
+            retList->Append(*it);
+        }
+    }
+    
+    // Delete the list and return NULL if no children found
+    if(retList->length() == 0) {
+        delete retList;
+        retList = NULL;
+    }
+    
+    return retList;
 }
 
 RESULT XMPNode::AddAttribute(XMPAttribute *attribute) {
@@ -75,11 +116,43 @@ char* XMPNode::GetContentCopy() {
     return m_sbContent->CreateBufferCopy();
 }
 
+SmartBuffer* XMPNode::GetContent() {
+    return m_sbContent;
+}
+
 bool XMPNode::Empty() {
     if(m_Children.Size() == 0 && !m_fContent)
         return true;
     else
         return false;
+}
+
+// Returns the text content of the node
+// If node has multiple content nodes they will be combined with a space between them
+char* XMPNode::text() {
+    SmartBuffer *sb_temp = new SmartBuffer();
+    char *pszRet = NULL;
+    bool fFirst = true;
+    
+    for(list<XMPNode*>::iterator it = m_Children.First(); it != NULL; it++) {
+        if((*it)->IsContentNode()) {
+            sb_temp->Append((*it)->GetContent());
+            
+            if(!fFirst)
+                sb_temp->Append(" ");
+            else
+                fFirst = false;
+        }
+    }
+    
+    pszRet = sb_temp->CreateBufferCopy();
+    
+    if(sb_temp != NULL) {
+        delete sb_temp;
+        sb_temp = NULL;
+    }
+    
+    return pszRet;
 }
 
 RESULT XMPNode::AppendContent(char *pszContent) {

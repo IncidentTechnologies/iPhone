@@ -6,6 +6,7 @@
   </header>
   <content>
     <chapter title="Getting High-E">
+      <var name="var1">5</var>
       <text>Welcome to the gTar tutorial, we're going to take a look at the high E string</text>
       <ledout>
         <guitarposition string="hiE" fret="0"/>

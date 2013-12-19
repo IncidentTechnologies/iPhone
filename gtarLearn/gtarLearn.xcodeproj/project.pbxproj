@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26113FBC186270FD00DB9E3D /* XMPObjectFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FBB186270FD00DB9E3D /* XMPObjectFactory.mm */; };
+		26113FBF18627AAC00DB9E3D /* XMPText.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FBE18627AAC00DB9E3D /* XMPText.mm */; };
+		26113FC218627ED200DB9E3D /* XMPGtarNote.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC118627ED200DB9E3D /* XMPGtarNote.mm */; };
+		26113FCA1862909A00DB9E3D /* XMPInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC71862909A00DB9E3D /* XMPInput.mm */; };
+		26113FCB1862909A00DB9E3D /* XMPLEDEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */; };
+		26113FCC1862909A00DB9E3D /* XMPLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC91862909A00DB9E3D /* XMPLoop.mm */; };
+		26282C4F18624546005BBE82 /* XMPObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26282C4E18624546005BBE82 /* XMPObject.mm */; };
 		265051B318610C9000285F64 /* test_lesson.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 265051B218610C9000285F64 /* test_lesson.xmp */; };
 		265051B618611E2600285F64 /* XMPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051B418611E2600285F64 /* XMPNode.cpp */; };
 		265051BB1861297E00285F64 /* XMPAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051B81861297E00285F64 /* XMPAttribute.cpp */; };
 		265051BC1861297E00285F64 /* XMPValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051B91861297E00285F64 /* XMPValue.cpp */; };
+		265051BF18612C0300285F64 /* XMPElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051BD18612C0300285F64 /* XMPElement.cpp */; };
+		265051C31861389600285F64 /* XMPLesson.mm in Sources */ = {isa = PBXBuildFile; fileRef = 265051C21861389600285F64 /* XMPLesson.mm */; };
+		265051C61861390400285F64 /* XMPLessonChapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 265051C51861390400285F64 /* XMPLessonChapter.mm */; };
 		2665DE491857E36D00D8ABA6 /* LearnNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2665DE481857E36D00D8ABA6 /* LearnNavigationController.m */; };
 		2665DE4B1857E45600D8ABA6 /* LearnTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2665DE4A1857E45600D8ABA6 /* LearnTitleView.xib */; };
 		2665DE8E1857F6DD00D8ABA6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2665DE8D1857F6DD00D8ABA6 /* MainWindow.xib */; };
@@ -50,6 +60,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26113FBA186270FD00DB9E3D /* XMPObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPObjectFactory.h; sourceTree = "<group>"; };
+		26113FBB186270FD00DB9E3D /* XMPObjectFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPObjectFactory.mm; sourceTree = "<group>"; };
+		26113FBD18627AAC00DB9E3D /* XMPText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPText.h; sourceTree = "<group>"; };
+		26113FBE18627AAC00DB9E3D /* XMPText.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPText.mm; sourceTree = "<group>"; };
+		26113FC018627ED200DB9E3D /* XMPGtarNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPGtarNote.h; sourceTree = "<group>"; };
+		26113FC118627ED200DB9E3D /* XMPGtarNote.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPGtarNote.mm; sourceTree = "<group>"; };
+		26113FC41862909A00DB9E3D /* XMPInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPInput.h; sourceTree = "<group>"; };
+		26113FC51862909A00DB9E3D /* XMPLEDEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPLEDEvent.h; sourceTree = "<group>"; };
+		26113FC61862909A00DB9E3D /* XMPLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPLoop.h; sourceTree = "<group>"; };
+		26113FC71862909A00DB9E3D /* XMPInput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPInput.mm; sourceTree = "<group>"; };
+		26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLEDEvent.mm; sourceTree = "<group>"; };
+		26113FC91862909A00DB9E3D /* XMPLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLoop.mm; sourceTree = "<group>"; };
+		26282C4D18624546005BBE82 /* XMPObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPObject.h; sourceTree = "<group>"; };
+		26282C4E18624546005BBE82 /* XMPObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPObject.mm; sourceTree = "<group>"; };
 		265051B218610C9000285F64 /* test_lesson.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_lesson.xmp; path = gtarLearn/test_data/test_lesson.xmp; sourceTree = SOURCE_ROOT; };
 		265051B418611E2600285F64 /* XMPNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPNode.cpp; sourceTree = "<group>"; };
 		265051B518611E2600285F64 /* XMPNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPNode.h; sourceTree = "<group>"; };
@@ -57,6 +81,12 @@
 		265051B81861297E00285F64 /* XMPAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPAttribute.cpp; sourceTree = "<group>"; };
 		265051B91861297E00285F64 /* XMPValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPValue.cpp; sourceTree = "<group>"; };
 		265051BA1861297E00285F64 /* XMPValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPValue.h; sourceTree = "<group>"; };
+		265051BD18612C0300285F64 /* XMPElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPElement.cpp; sourceTree = "<group>"; };
+		265051BE18612C0300285F64 /* XMPElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPElement.h; sourceTree = "<group>"; };
+		265051C11861389600285F64 /* XMPLesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPLesson.h; sourceTree = "<group>"; };
+		265051C21861389600285F64 /* XMPLesson.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLesson.mm; sourceTree = "<group>"; };
+		265051C41861390400285F64 /* XMPLessonChapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPLessonChapter.h; sourceTree = "<group>"; };
+		265051C51861390400285F64 /* XMPLessonChapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLessonChapter.mm; sourceTree = "<group>"; };
 		2665DE471857E36D00D8ABA6 /* LearnNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnNavigationController.h; sourceTree = "<group>"; };
 		2665DE481857E36D00D8ABA6 /* LearnNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnNavigationController.m; sourceTree = "<group>"; };
 		2665DE4A1857E45600D8ABA6 /* LearnTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LearnTitleView.xib; sourceTree = "<group>"; };
@@ -129,6 +159,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26113FC318628B2B00DB9E3D /* XMPObject */ = {
+			isa = PBXGroup;
+			children = (
+				26113FC41862909A00DB9E3D /* XMPInput.h */,
+				26113FC71862909A00DB9E3D /* XMPInput.mm */,
+				26113FC51862909A00DB9E3D /* XMPLEDEvent.h */,
+				26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */,
+				26113FC61862909A00DB9E3D /* XMPLoop.h */,
+				26113FC91862909A00DB9E3D /* XMPLoop.mm */,
+				26113FBA186270FD00DB9E3D /* XMPObjectFactory.h */,
+				26113FBB186270FD00DB9E3D /* XMPObjectFactory.mm */,
+				26113FC018627ED200DB9E3D /* XMPGtarNote.h */,
+				26113FC118627ED200DB9E3D /* XMPGtarNote.mm */,
+				26113FBD18627AAC00DB9E3D /* XMPText.h */,
+				26113FBE18627AAC00DB9E3D /* XMPText.mm */,
+				26282C4D18624546005BBE82 /* XMPObject.h */,
+				26282C4E18624546005BBE82 /* XMPObject.mm */,
+			);
+			name = XMPObject;
+			sourceTree = "<group>";
+		};
+		265051C01861387900285F64 /* XMPLesson */ = {
+			isa = PBXGroup;
+			children = (
+				26113FC318628B2B00DB9E3D /* XMPObject */,
+				265051C11861389600285F64 /* XMPLesson.h */,
+				265051C21861389600285F64 /* XMPLesson.mm */,
+				265051C41861390400285F64 /* XMPLessonChapter.h */,
+				265051C51861390400285F64 /* XMPLessonChapter.mm */,
+			);
+			name = XMPLesson;
+			sourceTree = "<group>";
+		};
 		2665DE9218592FB900D8ABA6 /* DSS */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +209,8 @@
 		2665DE9718592FB900D8ABA6 /* XMPParser */ = {
 			isa = PBXGroup;
 			children = (
+				265051BD18612C0300285F64 /* XMPElement.cpp */,
+				265051BE18612C0300285F64 /* XMPElement.h */,
 				265051B71861297E00285F64 /* XMPAttribute.h */,
 				265051B81861297E00285F64 /* XMPAttribute.cpp */,
 				265051B91861297E00285F64 /* XMPValue.cpp */,
@@ -215,7 +280,7 @@
 				2665DEC3185950E300D8ABA6 /* Console */,
 				2665DE9218592FB900D8ABA6 /* DSS */,
 				2665DE9718592FB900D8ABA6 /* XMPParser */,
-				26EA136C1830BDAA0082CA2D /* main.m */,
+				265051C01861387900285F64 /* XMPLesson */,
 				26EA136F1830BDAA0082CA2D /* LearnAppDelegate.h */,
 				26EA13701830BDAA0082CA2D /* LearnAppDelegate.m */,
 				26EA13781830BDAA0082CA2D /* LearnTitleViewController.h */,
@@ -233,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				26EA13681830BDAA0082CA2D /* gtarLearn-Info.plist */,
+				26EA136C1830BDAA0082CA2D /* main.m */,
 				26EA13691830BDAA0082CA2D /* InfoPlist.strings */,
 				26EA136E1830BDAA0082CA2D /* gtarLearn-Prefix.pch */,
 				2665DE8D1857F6DD00D8ABA6 /* MainWindow.xib */,
@@ -358,20 +424,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				2665DEA418592FB900D8ABA6 /* XMPMain.cpp in Sources */,
+				26113FBC186270FD00DB9E3D /* XMPObjectFactory.mm in Sources */,
 				2665DEA618592FB900D8ABA6 /* XMPTest.cpp in Sources */,
 				265051BB1861297E00285F64 /* XMPAttribute.cpp in Sources */,
+				26113FBF18627AAC00DB9E3D /* XMPText.mm in Sources */,
 				2665DEA518592FB900D8ABA6 /* XMPParser.cpp in Sources */,
+				26113FCC1862909A00DB9E3D /* XMPLoop.mm in Sources */,
 				2665DEC6185950E300D8ABA6 /* Console.cpp in Sources */,
 				2665DE491857E36D00D8ABA6 /* LearnNavigationController.m in Sources */,
 				26EA137A1830BDAA0082CA2D /* LearnTitleViewController.mm in Sources */,
+				265051C61861390400285F64 /* XMPLessonChapter.mm in Sources */,
+				26113FCB1862909A00DB9E3D /* XMPLEDEvent.mm in Sources */,
 				265051B618611E2600285F64 /* XMPNode.cpp in Sources */,
 				2665DEA718592FB900D8ABA6 /* XMPTokenizer.cpp in Sources */,
+				26113FCA1862909A00DB9E3D /* XMPInput.mm in Sources */,
 				26EA13711830BDAA0082CA2D /* LearnAppDelegate.m in Sources */,
 				2665DEBE1859310700D8ABA6 /* SmartBuffer.cpp in Sources */,
 				2665DEA318592FB900D8ABA6 /* valid.cpp in Sources */,
 				26EA136D1830BDAA0082CA2D /* main.m in Sources */,
 				265051BC1861297E00285F64 /* XMPValue.cpp in Sources */,
+				265051BF18612C0300285F64 /* XMPElement.cpp in Sources */,
 				2665DEA818592FB900D8ABA6 /* XMPTree.cpp in Sources */,
+				26113FC218627ED200DB9E3D /* XMPGtarNote.mm in Sources */,
+				265051C31861389600285F64 /* XMPLesson.mm in Sources */,
+				26282C4F18624546005BBE82 /* XMPObject.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

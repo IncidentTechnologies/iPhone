@@ -386,11 +386,21 @@ Error:
     return r;
 }
 
+XMPNode* XMPTree::NavNode() {
+    return m_pNodeNav;
+}
+
 XMPNode* XMPTree::GetRootNode(){
   return m_pRoot; 
 }
 
+list<XMPNode*>* XMPTree::GetChildrenAtNav() {
+    return m_pNodeNav->GetChildren();
+}
 
+list<XMPAttribute*>* XMPTree::GetAttributesAtNav() {
+    return m_pNodeNav->GetAttributes();
+}
 
 
 

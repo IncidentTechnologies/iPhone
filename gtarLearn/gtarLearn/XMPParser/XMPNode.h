@@ -6,7 +6,6 @@
 #include "SmartBuffer.h"
 #include "XMPAttribute.h"
 
-
 using namespace dss;
 
 class XMPNode {
@@ -20,12 +19,17 @@ public:
     // Find Child currently works based on sequential search
     // this might need to be optimized in the future
     XMPNode *FindChildByName(char *pszName);
+    bool HasChild(char *pszName);
 
     RESULT AddAttribute(XMPAttribute *attribute);
+    XMPAttribute *GetAttribute(char *pszName);
+    bool HasAttribute(char *pszName);
 
     XMPNode *GetParent();    
     char *GetName();
     char *GetContentCopy();
+    SmartBuffer *GetContent();
+    
     bool Empty(); 
 
     RESULT AppendContent(char *pszContent);
@@ -33,8 +37,11 @@ public:
     bool IsContentNode();
     bool IsDataNode();
     
-    list<XMPNode*>*GetChildren();
-    list<XMPAttribute*>*GetAttributes();
+    list<XMPNode*>* GetChildren();
+    list<XMPNode*>* GetChildren(char *pszName);
+    list<XMPAttribute*>* GetAttributes();
+    
+    char *text();
 
 private:
     char *m_pszName;        // Tag name

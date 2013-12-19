@@ -11,7 +11,6 @@ const char* pszXMPElementType[] = { "Start Tag",
     "Invalid Tag"
 };
 
-
 XMPElement::XMPElement(XMP_ELEMENT_TYPE type, char *pszName, char *pszValue) :
     m_Type(type),
     m_pszName(pszName),

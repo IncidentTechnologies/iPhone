@@ -44,7 +44,7 @@
 #ifdef _WINDOWS_DEBUG_CONSOLE
     #define CRM(res, msg, ...) do{r = res; if(r < 0){ DEBUG_MSG(CurrentFileLine); DEBUG_MSG(msg, __VA_ARGS__); DEBUG_MSG("Error: 0x%x\n", r); goto Error;}}while(0)
 #elif defined _IOS_DEBUG_CONSOLE
-    #define CRM(res, msg, ...) do{r = res; if(r < 0){ DEBUG_MSG(CurrentFileLine); DEBUG_MSG(msg, ##__VA_ARGS__); DEBUG_MSG("Error: 0x%x\n", r); goto Error;}}while(0)
+    #define CRM(res, msg, ...) do{r = res; if(r & 0x80000000){ DEBUG_MSG(CurrentFileLine); DEBUG_MSG(msg, ##__VA_ARGS__); DEBUG_MSG("Error: 0x%x\n", r); goto Error;}}while(0)
 #endif
 
 // Check Boolean Result

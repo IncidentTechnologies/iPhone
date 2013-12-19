@@ -20,14 +20,34 @@ typedef enum XMPValueTypes
 // XMPValue takes a string as an input and will convert it internally as a value
 class XMPValue {
 public:
+    XMPValue();
     XMPValue(char *pszValue); 
-    XMPValue(long int value); 
+    XMPValue(long int value);
+    XMPValue(double value);
 
     RESULT SetValueInt(long int value);
+    RESULT SetValueDouble(double value);
     RESULT SetValueType(XMP_VALUE_TYPE xvt);
     RESULT SetValue(char *pszValue);
     
     char *GetPszValue();
+    RESULT GetValueInt(long int *);
+    RESULT GetValueDouble(double *);
+    RESULT SetValueChar(char value);
+    
+    RESULT SetBuffer(void *newBuffer, int newBuffer_n, XMP_VALUE_TYPE newType);
+    
+    // Operators
+    XMPValue &operator=(const XMPValue &rhs);
+    XMPValue &operator+=(const XMPValue &rhs);
+    XMPValue &operator--(int /*unused*/);
+    XMPValue &operator++(int /*unused*/);
+    XMPValue &operator-=(const XMPValue &rhs);
+    
+    const XMPValue operator+(const XMPValue &rhs);
+    const XMPValue operator-(const XMPValue &rhs);
+    
+    static SmartBuffer CreateSmartBuffer(XMPValue *xmpValue);
     
 public:
     XMP_VALUE_TYPE m_ValueType;
