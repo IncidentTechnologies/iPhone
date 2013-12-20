@@ -96,24 +96,31 @@ Error:
 }
 
 RESULT XMPValue::GetValueInt(long int *value) {
-    RESULT r = R_SUCCESS;
-
-    CBRM((this->m_ValueType == XMP_VALUE_INTEGER), "GetValueDouble: XMPValue type isn't integer");
-    
-    *value = *((long int*)m_Buffer);
-    
-Error:
-    return r;
+    if(this->m_ValueType == XMP_VALUE_DOUBLE) {
+        *value = (long int)(*((double*)m_Buffer));
+        return R_SUCCESS;
+    }
+    else if(this->m_ValueType == XMP_VALUE_INTEGER) {
+        *value = *((long int*)m_Buffer);
+        return R_SUCCESS;
+    }
+    else {
+        return R_FAIL;
+    }
 }
 
 RESULT XMPValue::GetValueDouble(double *value) {
-    RESULT r = R_SUCCESS;
-    
-    CBRM((this->m_ValueType == XMP_VALUE_DOUBLE), "GetValueDouble: XMPValue type isn't double");
-    
-    *value = *((double*)m_Buffer);
-Error:
-    return r;
+    if(this->m_ValueType == XMP_VALUE_DOUBLE) {
+        *value = *((double*)m_Buffer);
+        return R_SUCCESS;
+    }
+    else if(this->m_ValueType == XMP_VALUE_INTEGER) {
+        *value = (double)(*((long int*)m_Buffer));
+        return R_SUCCESS;
+    }
+    else {
+        return R_FAIL;
+    }
 }
 
 char* XMPValue::GetPszValue() {

@@ -60,6 +60,8 @@ typedef enum XMPObjectTypes
 -(BOOL)HasAttributeWithName:(NSString *)name;
 -(XMPValue)GetAttributeValueWithName:(NSString *)name;
 
+-(XMPValue)GetXMPValueOfChild:(NSString *)childName withAttribute:(NSString*)attributeName;
+
 -(NSString*)Text;
 
 @end

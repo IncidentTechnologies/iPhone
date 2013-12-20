@@ -34,6 +34,16 @@ Error:
     return NULL;
 }
 
+-(XMPValue)GetXMPValueOfChild:(NSString *)childName withAttribute:(NSString*)attributeName {
+    XMPObject *childObject = [self GetChildWithName:childName];
+    XMPValue retVal;
+    
+    if( childObject != NULL)
+        return [childObject GetAttributeValueWithName:attributeName];
+    else
+        return retVal;
+}
+
 -(XMPAttribute*)GetAttributeWithName:(NSString *)name {
     return m_xmpNode->GetAttribute((char*)[name cStringUsingEncoding:NSUTF8StringEncoding]);
 }

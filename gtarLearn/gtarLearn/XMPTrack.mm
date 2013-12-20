@@ -1,18 +1,15 @@
 #import "XMPTrack.h"
-#import "dss_list.h"
 
 @implementation XMPTrack
-
-using namespace dss;
 
 -(id) initWithXMPNode:(XMPNode*)xmpNode {
     RESULT r = R_SUCCESS;
     
     m_xmpNode = xmpNode;
-    CPRM((self = [super init]), "initWithLessonName: Failed to init super");
+    CPRM((self = [super init]), "initWithXMPNode: Failed to init super");
     m_type = XMP_OBJECT_TRACK;
     
-    CRM([self ConstructTrack], "initWithLessonName: Failed to construct from XMP");
+    CRM([self ConstructTrack], "initWithXMPNode: Failed to construct from XMP");
     
     return self;
 Error:
