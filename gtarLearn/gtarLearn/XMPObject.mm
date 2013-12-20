@@ -34,6 +34,22 @@ Error:
     return NULL;
 }
 
+-(XMPAttribute*)GetAttributeWithName:(NSString *)name {
+    return m_xmpNode->GetAttribute((char*)[name cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
+-(BOOL)HasAttributeWithName:(NSString *)name {
+    return m_xmpNode->HasAttribute((char*)[name cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
+-(XMPValue)GetAttributeValueWithName:(NSString *)name {
+    XMPAttribute *tempAttr = NULL;
+    if((tempAttr = m_xmpNode->GetAttribute((char*)[name cStringUsingEncoding:NSUTF8StringEncoding])) != NULL)
+        return tempAttr->GetXMPValue();
+    
+    return XMPValue();
+}
+
 // Combines HasChildWithName and GetChildWithName for getting text content
 -(NSString*)GetChildTextWithName:(NSString *)name {
     for (id xmpObj in m_contents) {

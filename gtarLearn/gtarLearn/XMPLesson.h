@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "XMPObject.h"
-#import "XMPTree.h"
 
 @interface XMPLesson : XMPObject {
     NSString *m_Description;

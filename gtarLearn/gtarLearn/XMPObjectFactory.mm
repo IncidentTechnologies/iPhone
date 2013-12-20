@@ -6,7 +6,12 @@
 //  Copyright (c) 2013 Incident Technologies, Inc. All rights reserved.
 //
 
+#include "EHM.h"
+
 #import "XMPObjectFactory.h"
+
+#import "XMPTree.h"
+
 #import "XMPText.h"
 #import "XMPGtarNote.h"
 #import "XMPLEDEvent.h"
@@ -14,7 +19,11 @@
 #import "XMPInput.h"
 #import "XMPLesson.h"
 #import "XMPLessonChapter.h"
-#include "EHM.h"
+
+#import "XMPTrack.h"
+#import "XMPSong.h"
+#import "XMPNote.h"
+#import "XMPMeasure.h"
 
 @implementation XMPObjectFactory
 
@@ -74,6 +83,18 @@ Error:
     }
     else if(strcmp(pszName, (char*)"xmp") == 0) {
         retObj = [[XMPObject alloc] initWithXMPNode:xmpNode];
+    }
+    else if(strcmp(pszName, (char*)"track") == 0) {
+        retObj = [[XMPTrack alloc] initWithXMPNode:xmpNode];
+    }
+    else if(strcmp(pszName, (char*)"measure") == 0) {
+        retObj = [[XMPMeasure alloc] initWithXMPNode:xmpNode];
+    }
+    else if(strcmp(pszName, (char*)"note") == 0) {
+        retObj = [[XMPNote alloc] initWithXMPNode:xmpNode];
+    }
+    else if(strcmp(pszName, (char*)"song") == 0) {
+        retObj = [[XMPSong alloc] initWithXMPNode:xmpNode];
     }
     else {
         retObj = [[XMPObject alloc] initWithXMPNode:xmpNode];

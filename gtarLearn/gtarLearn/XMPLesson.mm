@@ -8,7 +8,6 @@
 
 #import "XMPLesson.h"
 #import "dss_list.h"
-#import "XMPLessonChapter.h"
 
 @implementation XMPLesson
 

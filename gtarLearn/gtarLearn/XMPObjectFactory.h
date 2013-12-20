@@ -17,6 +17,7 @@
 // Will take an XMP node as input and produce an object out of it
 +(XMPObject*)MakeXMPObjectFromFilename:(NSString *)XMPFileName;
 +(XMPObject*)MakeXMPObject:(XMPNode*)xmpNode;
-+(const unsigned int)str2int:(const char *)str withH:(int)h;
+
+//+(const unsigned int)str2int:(const char *)str withH:(int)h;
 
 @end

@@ -14,6 +14,10 @@
 		26113FCB1862909A00DB9E3D /* XMPLEDEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */; };
 		26113FCC1862909A00DB9E3D /* XMPLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC91862909A00DB9E3D /* XMPLoop.mm */; };
 		26113FCE1863BD2200DB9E3D /* spaceoddity.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 26113FCD1863BD2200DB9E3D /* spaceoddity.xmp */; };
+		26113FD71863C33800DB9E3D /* XMPSong.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FD01863C33800DB9E3D /* XMPSong.mm */; };
+		26113FD81863C33800DB9E3D /* XMPNote.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FD21863C33800DB9E3D /* XMPNote.mm */; };
+		26113FD91863C33800DB9E3D /* XMPMeasure.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FD41863C33800DB9E3D /* XMPMeasure.mm */; };
+		26113FDA1863C33800DB9E3D /* XMPTrack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FD61863C33800DB9E3D /* XMPTrack.mm */; };
 		26282C4F18624546005BBE82 /* XMPObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26282C4E18624546005BBE82 /* XMPObject.mm */; };
 		265051B318610C9000285F64 /* test_lesson.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 265051B218610C9000285F64 /* test_lesson.xmp */; };
 		265051B618611E2600285F64 /* XMPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051B418611E2600285F64 /* XMPNode.cpp */; };
@@ -74,6 +78,14 @@
 		26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLEDEvent.mm; sourceTree = "<group>"; };
 		26113FC91862909A00DB9E3D /* XMPLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLoop.mm; sourceTree = "<group>"; };
 		26113FCD1863BD2200DB9E3D /* spaceoddity.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = spaceoddity.xmp; path = gtarLearn/test_data/spaceoddity.xmp; sourceTree = SOURCE_ROOT; };
+		26113FCF1863C33800DB9E3D /* XMPTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPTrack.h; sourceTree = "<group>"; };
+		26113FD01863C33800DB9E3D /* XMPSong.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPSong.mm; sourceTree = "<group>"; };
+		26113FD11863C33800DB9E3D /* XMPSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPSong.h; sourceTree = "<group>"; };
+		26113FD21863C33800DB9E3D /* XMPNote.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPNote.mm; sourceTree = "<group>"; };
+		26113FD31863C33800DB9E3D /* XMPNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPNote.h; sourceTree = "<group>"; };
+		26113FD41863C33800DB9E3D /* XMPMeasure.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPMeasure.mm; sourceTree = "<group>"; };
+		26113FD51863C33800DB9E3D /* XMPMeasure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPMeasure.h; sourceTree = "<group>"; };
+		26113FD61863C33800DB9E3D /* XMPTrack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPTrack.mm; sourceTree = "<group>"; };
 		26282C4D18624546005BBE82 /* XMPObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPObject.h; sourceTree = "<group>"; };
 		26282C4E18624546005BBE82 /* XMPObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPObject.mm; sourceTree = "<group>"; };
 		265051B218610C9000285F64 /* test_lesson.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_lesson.xmp; path = gtarLearn/test_data/test_lesson.xmp; sourceTree = SOURCE_ROOT; };
@@ -164,6 +176,14 @@
 		26113FC318628B2B00DB9E3D /* XMPObject */ = {
 			isa = PBXGroup;
 			children = (
+				26113FCF1863C33800DB9E3D /* XMPTrack.h */,
+				26113FD61863C33800DB9E3D /* XMPTrack.mm */,
+				26113FD11863C33800DB9E3D /* XMPSong.h */,
+				26113FD01863C33800DB9E3D /* XMPSong.mm */,
+				26113FD31863C33800DB9E3D /* XMPNote.h */,
+				26113FD21863C33800DB9E3D /* XMPNote.mm */,
+				26113FD51863C33800DB9E3D /* XMPMeasure.h */,
+				26113FD41863C33800DB9E3D /* XMPMeasure.mm */,
 				26113FC41862909A00DB9E3D /* XMPInput.h */,
 				26113FC71862909A00DB9E3D /* XMPInput.mm */,
 				26113FC51862909A00DB9E3D /* XMPLEDEvent.h */,
@@ -429,15 +449,18 @@
 			files = (
 				2665DEA418592FB900D8ABA6 /* XMPMain.cpp in Sources */,
 				26113FBC186270FD00DB9E3D /* XMPObjectFactory.mm in Sources */,
+				26113FD71863C33800DB9E3D /* XMPSong.mm in Sources */,
 				2665DEA618592FB900D8ABA6 /* XMPTest.cpp in Sources */,
 				265051BB1861297E00285F64 /* XMPAttribute.cpp in Sources */,
 				26113FBF18627AAC00DB9E3D /* XMPText.mm in Sources */,
 				2665DEA518592FB900D8ABA6 /* XMPParser.cpp in Sources */,
 				26113FCC1862909A00DB9E3D /* XMPLoop.mm in Sources */,
+				26113FD91863C33800DB9E3D /* XMPMeasure.mm in Sources */,
 				2665DEC6185950E300D8ABA6 /* Console.cpp in Sources */,
 				2665DE491857E36D00D8ABA6 /* LearnNavigationController.m in Sources */,
 				26EA137A1830BDAA0082CA2D /* LearnTitleViewController.mm in Sources */,
 				265051C61861390400285F64 /* XMPLessonChapter.mm in Sources */,
+				26113FD81863C33800DB9E3D /* XMPNote.mm in Sources */,
 				26113FCB1862909A00DB9E3D /* XMPLEDEvent.mm in Sources */,
 				265051B618611E2600285F64 /* XMPNode.cpp in Sources */,
 				2665DEA718592FB900D8ABA6 /* XMPTokenizer.cpp in Sources */,
@@ -447,6 +470,7 @@
 				2665DEA318592FB900D8ABA6 /* valid.cpp in Sources */,
 				26EA136D1830BDAA0082CA2D /* main.m in Sources */,
 				265051BC1861297E00285F64 /* XMPValue.cpp in Sources */,
+				26113FDA1863C33800DB9E3D /* XMPTrack.mm in Sources */,
 				265051BF18612C0300285F64 /* XMPElement.cpp in Sources */,
 				2665DEA818592FB900D8ABA6 /* XMPTree.cpp in Sources */,
 				26113FC218627ED200DB9E3D /* XMPGtarNote.mm in Sources */,
