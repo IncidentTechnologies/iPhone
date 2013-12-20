@@ -13,6 +13,7 @@
 		26113FCA1862909A00DB9E3D /* XMPInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC71862909A00DB9E3D /* XMPInput.mm */; };
 		26113FCB1862909A00DB9E3D /* XMPLEDEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */; };
 		26113FCC1862909A00DB9E3D /* XMPLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC91862909A00DB9E3D /* XMPLoop.mm */; };
+		26113FCE1863BD2200DB9E3D /* spaceoddity.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 26113FCD1863BD2200DB9E3D /* spaceoddity.xmp */; };
 		26282C4F18624546005BBE82 /* XMPObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26282C4E18624546005BBE82 /* XMPObject.mm */; };
 		265051B318610C9000285F64 /* test_lesson.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 265051B218610C9000285F64 /* test_lesson.xmp */; };
 		265051B618611E2600285F64 /* XMPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051B418611E2600285F64 /* XMPNode.cpp */; };
@@ -72,6 +73,7 @@
 		26113FC71862909A00DB9E3D /* XMPInput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPInput.mm; sourceTree = "<group>"; };
 		26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLEDEvent.mm; sourceTree = "<group>"; };
 		26113FC91862909A00DB9E3D /* XMPLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLoop.mm; sourceTree = "<group>"; };
+		26113FCD1863BD2200DB9E3D /* spaceoddity.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = spaceoddity.xmp; path = gtarLearn/test_data/spaceoddity.xmp; sourceTree = SOURCE_ROOT; };
 		26282C4D18624546005BBE82 /* XMPObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPObject.h; sourceTree = "<group>"; };
 		26282C4E18624546005BBE82 /* XMPObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPObject.mm; sourceTree = "<group>"; };
 		265051B218610C9000285F64 /* test_lesson.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_lesson.xmp; path = gtarLearn/test_data/test_lesson.xmp; sourceTree = SOURCE_ROOT; };
@@ -209,6 +211,7 @@
 		2665DE9718592FB900D8ABA6 /* XMPParser */ = {
 			isa = PBXGroup;
 			children = (
+				26113FCD1863BD2200DB9E3D /* spaceoddity.xmp */,
 				265051BD18612C0300285F64 /* XMPElement.cpp */,
 				265051BE18612C0300285F64 /* XMPElement.h */,
 				265051B71861297E00285F64 /* XMPAttribute.h */,
@@ -401,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				265051B318610C9000285F64 /* test_lesson.xmp in Resources */,
+				26113FCE1863BD2200DB9E3D /* spaceoddity.xmp in Resources */,
 				2665DE8E1857F6DD00D8ABA6 /* MainWindow.xib in Resources */,
 				26EA137C1830BDAA0082CA2D /* Images.xcassets in Resources */,
 				26EA136B1830BDAA0082CA2D /* InfoPlist.strings in Resources */,

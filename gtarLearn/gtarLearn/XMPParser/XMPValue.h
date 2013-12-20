@@ -5,7 +5,10 @@
 #include "dss_list.h"
 #include "SmartBuffer.h"
 
+
 using namespace dss;
+
+class XMPNode;
 
 // XMP Values are types of values that can be put into the XML file format
 typedef enum XMPValueTypes
@@ -21,6 +24,7 @@ typedef enum XMPValueTypes
 class XMPValue {
 public:
     XMPValue();
+    XMPValue(XMPNode *xmpNode);
     XMPValue(char *pszValue); 
     XMPValue(long int value);
     XMPValue(double value);
@@ -49,8 +53,13 @@ public:
     
     static SmartBuffer CreateSmartBuffer(XMPValue *xmpValue);
     
+    char *GetName();
+    
 public:
     XMP_VALUE_TYPE m_ValueType;
     void *m_Buffer;
     int m_BufferSize;
+    
+// Optional - XMPValue can be used as a variable
+    char *m_pszName;
 };

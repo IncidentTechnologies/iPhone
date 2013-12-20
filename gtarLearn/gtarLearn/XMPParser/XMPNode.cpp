@@ -155,6 +155,15 @@ char* XMPNode::text() {
     return pszRet;
 }
 
+bool XMPNode::HasContent() {
+    for(list<XMPNode*>::iterator it = m_Children.First(); it != NULL; it++) {
+        if((*it)->IsContentNode())
+            return true;
+    }
+    
+    return false;
+}
+
 RESULT XMPNode::AppendContent(char *pszContent) {
     RESULT r = R_SUCCESS;
 

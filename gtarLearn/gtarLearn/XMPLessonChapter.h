@@ -14,11 +14,11 @@
 
 @interface XMPLessonChapter : XMPObject {
     NSString *m_Title;
-    XMPLesson *m_ParentLesson;
 }
 
--(id)initWithParentLesson:(XMPLesson*)parentLesson andXMPNode:(XMPNode*)xmpNode;
+//-(id)initWithParentLesson:(XMPLesson*)parentLesson andXMPNode:(XMPNode*)xmpNode;
+-(id) initWithXMPNode:(XMPNode*)xmpNode;
 
--(RESULT)ConsructLessonChapterFromChapterNode:(XMPNode*)chapterNode;
+-(RESULT)ConsructLessonChapterFromChapterNode;
 
 @end

@@ -25,6 +25,7 @@ typedef enum XMPObjectTypes
     XMP_OBJECT_LESSON,
     XMP_OBJECT_CHAPTER,
     XMP_OBJECT_SONG,
+    XMP_OBJECT_OBJECT,
     XMP_OBJECT_INVALID
 } XMP_OBJECT_TYPE;
 
@@ -33,10 +34,9 @@ typedef enum XMPObjectTypes
     
     NSMutableArray *m_contents;
     list<XMPValue*>* m_variables;
-    
     XMP_OBJECT_TYPE m_type;
-    
     XMPNode *m_xmpNode;
+    NSString *m_Name;
 }
 
 -(id) initWithXMPNode:(XMPNode*)xmpNode;
@@ -46,5 +46,13 @@ typedef enum XMPObjectTypes
 -(RESULT)BuildChildren;
 
 -(bool)ContentHasXMPNode:(XMPNode*)xmpNode;
+-(XMPValue*)AddVariableFromXMPNode:(XMPNode*)xmpNode;
+
+
+-(XMPObject*)GetChildWithName:(NSString *)name;
+-(BOOL)HasChildWithName:(NSString *)name;
+-(NSString*)GetChildTextWithName:(NSString *)name;
+
+-(NSString*)Text;
 
 @end

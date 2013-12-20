@@ -7,7 +7,7 @@
 //
 
 #import "LearnTitleViewController.h"
-#import "XMPLesson.h"
+#import "XMPObjectFactory.h"
 
 @interface LearnTitleViewController () {
 
@@ -31,8 +31,14 @@
 -(IBAction)onTestXmpClicked:(id)sender {
     // Button clicked
     
-    XMPLesson *tempLesson = [[XMPLesson alloc] initWithLessonName:@"test_lesson"];
-    
+    NSDate *start = [NSDate date];
+    {
+        XMPObject *tempObj = [XMPObjectFactory MakeXMPObjectFromFilename:@"test_lesson"];
+    }
+    NSDate *methodFinish = [NSDate date];
+    NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:start];
+    NSLog(@"Execution Time: %f", executionTime);
+
 }
 
 @end

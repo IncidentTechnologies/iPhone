@@ -42,6 +42,7 @@ public:
     list<XMPAttribute*>* GetAttributes();
     
     char *text();
+    bool HasContent();
 
 private:
     char *m_pszName;        // Tag name

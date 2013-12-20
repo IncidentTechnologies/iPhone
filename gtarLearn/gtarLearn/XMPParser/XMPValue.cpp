@@ -2,19 +2,35 @@
 #include <string>
 #include <stdlib.h>
 #include "SmartBuffer.h"
+#include "XMPNode.h"
 
 XMPValue::XMPValue() :
     m_ValueType(XMP_VALUE_INVALID),
     m_Buffer(NULL),
-    m_BufferSize(0)
+    m_BufferSize(0),
+    m_pszName(NULL)
 {
     // empty
+}
+
+XMPValue::XMPValue(XMPNode *xmpNode) :
+    m_ValueType(XMP_VALUE_INVALID),
+    m_Buffer(NULL),
+    m_BufferSize(0),
+    m_pszName(NULL)
+{
+    if(xmpNode->HasContent()) {
+        m_pszName = (char*)malloc(strlen(xmpNode->GetName() + 1));
+        strcpy(m_pszName, xmpNode->GetName());
+        SetValue(xmpNode->text());
+    }
 }
 
 XMPValue::XMPValue(char *pszValue) :
     m_ValueType(XMP_VALUE_INVALID),
     m_Buffer(NULL),
-    m_BufferSize(0)
+    m_BufferSize(0),
+    m_pszName(NULL)
 {
     SetValue(pszValue);
 }
@@ -22,7 +38,8 @@ XMPValue::XMPValue(char *pszValue) :
 XMPValue::XMPValue(long int value) :
     m_ValueType(XMP_VALUE_INVALID),
     m_Buffer(NULL),
-    m_BufferSize(0)
+    m_BufferSize(0),
+    m_pszName(NULL)
 {
     SetValueInt(value);
 }
@@ -30,7 +47,8 @@ XMPValue::XMPValue(long int value) :
 XMPValue::XMPValue(double value) :
     m_ValueType(XMP_VALUE_INVALID),
     m_Buffer(NULL),
-    m_BufferSize(0)
+    m_BufferSize(0),
+    m_pszName(NULL)
 {
     SetValueDouble(value);
 }
@@ -80,7 +98,7 @@ Error:
 RESULT XMPValue::GetValueInt(long int *value) {
     RESULT r = R_SUCCESS;
 
-    CBRM((this->m_ValueType == XMP_VALUE_DOUBLE), "GetValueDouble: XMPValue type isn't integer");
+    CBRM((this->m_ValueType == XMP_VALUE_INTEGER), "GetValueDouble: XMPValue type isn't integer");
     
     *value = *((long int*)m_Buffer);
     
@@ -493,6 +511,9 @@ const XMPValue XMPValue::operator-(const XMPValue &rhs){
     return XMPValue();
 }
 
+char* XMPValue::GetName() {
+    return m_pszName;
+}
 
 
 

@@ -14,17 +14,12 @@
     NSString *m_Description;
     NSString *m_Title;
     NSString *m_Author;
-    
-    NSArray *m_Chapters;
-    
-    // Lesson graphic?
-    
-    // Convenience
-    XMPTree *m_pxmp;
 }
 
-- (id) initWithLessonName:(NSString *)LessonName;
+//- (id) initWithLessonName:(NSString *)LessonName;
 
--(RESULT)ConstructLessonFromXMPTree:(XMPTree*)pTree;
+
+-(id) initWithXMPNode:(XMPNode*)xmpNode;
+-(RESULT)ConstructLesson;
 
 @end

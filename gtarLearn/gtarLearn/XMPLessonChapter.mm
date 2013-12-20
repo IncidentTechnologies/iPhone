@@ -14,18 +14,16 @@
 
 @implementation XMPLessonChapter
 
--(id)initWithParentLesson:(XMPLesson*)parentLesson andXMPNode:(XMPNode*)xmpNode {
+-(id) initWithXMPNode:(XMPNode*)xmpNode {
     RESULT r = R_SUCCESS;
     
     m_xmpNode = xmpNode;
     CPRM((self = [super init]), "initWithParentLesson: Failed to init super");
     
     m_type = XMP_OBJECT_CHAPTER;
-    m_ParentLesson = parentLesson;
-
     
-    // Construct Lesson
-    CRM([self ConsructLessonChapterFromChapterNode:m_xmpNode], "initWithParentLesson: Failed to construct chapter");
+    // Construct Lesson particulars
+    CRM([self ConsructLessonChapterFromChapterNode], "initWithParentLesson: Failed to construct chapter");
     
     return self;
 Error:
@@ -33,21 +31,13 @@ Error:
 
 }
 
--(RESULT)ConsructLessonChapterFromChapterNode:(XMPNode*)chapterNode {
+-(RESULT)ConsructLessonChapterFromChapterNode {
     RESULT r = R_SUCCESS;
     
     // Get the title
-    XMPValue chapterTitle = chapterNode->GetAttribute((char*)"title")->GetXMPValue();
+    XMPValue chapterTitle = m_xmpNode->GetAttribute((char*)"title")->GetXMPValue();
     m_Title = [[NSString alloc] initWithCString:chapterTitle.GetPszValue() encoding:NSUTF8StringEncoding];
     
-    list<XMPNode*>* chapterContents = chapterNode->GetChildren();
-    
-    for(list<XMPNode*>::iterator it = chapterContents->First(); it != NULL; it++) {
-        XMPObject *newObj = [XMPObjectFactory MakeXMPObject:(*it)];
-
-        if(newObj != NULL)
-            [m_contents addObject:newObj];
-    }
 Error:
     return r;
 }
