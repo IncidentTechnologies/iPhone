@@ -2,19 +2,33 @@
 //  AppDelegate.m
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/4/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/19/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import "AppDelegate.h"
 
 @implementation AppDelegate
 
-@synthesize window = _window;
+@synthesize window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    // init the viewing window
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // init nav controller and first view controller
+    LoadingViewController *loadingViewController = [[LoadingViewController alloc] initWithNibName:nil bundle:nil];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loadingViewController];
+
+    navigationController.navigationBarHidden = YES;
+    
+    [self.window setRootViewController: navigationController];
+        
+    // display
+    [self.window makeKeyAndVisible];
     
     return YES;
 }

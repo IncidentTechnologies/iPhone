@@ -2,14 +2,19 @@
 //  AppDelegate.h
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/4/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/19/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "LoadingViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    UIWindow *window;
+}
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow * window;
+//@property (strong, nonatomic) UINavigationController * navigationController;
 
 @end

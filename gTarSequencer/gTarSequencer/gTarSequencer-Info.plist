@@ -14,13 +14,15 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>Sequencer_Icon.png</string>
-				<string>Default@2x.png</string>
+				<string>Sequencer_Icon58px</string>
+				<string>Sequencer_Icon80px</string>
+				<string>Sequencer_Icon120px</string>
+				<string>Sequencer_Icon</string>
 			</array>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>Ilan-Gray.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>Incident-Technologies.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -35,63 +37,15 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UILaunchImageFile</key>
+	<string>gTarbyIncidentLoadingWide</string>
 	<key>UILaunchImages</key>
 	<array>
 		<dict>
 			<key>UILaunchImageMinimumOSVersion</key>
 			<string>7.0</string>
 			<key>UILaunchImageName</key>
-			<string>00-Ver2_LoadScreen-1</string>
-			<key>UILaunchImageOrientation</key>
-			<string>Portrait</string>
-			<key>UILaunchImageSize</key>
-			<string>{320, 568}</string>
-		</dict>
-		<dict>
-			<key>UILaunchImageMinimumOSVersion</key>
-			<string>7.0</string>
-			<key>UILaunchImageName</key>
-			<string>00-Ver2_LoadScreen-1</string>
-			<key>UILaunchImageOrientation</key>
-			<string>Portrait</string>
-			<key>UILaunchImageSize</key>
-			<string>{320, 568}</string>
-		</dict>
-		<dict>
-			<key>UILaunchImageMinimumOSVersion</key>
-			<string>7.0</string>
-			<key>UILaunchImageName</key>
-			<string>Default4</string>
-			<key>UILaunchImageOrientation</key>
-			<string>Portrait</string>
-			<key>UILaunchImageSize</key>
-			<string>{320, 568}</string>
-		</dict>
-		<dict>
-			<key>UILaunchImageMinimumOSVersion</key>
-			<string>7.0</string>
-			<key>UILaunchImageName</key>
-			<string>Default</string>
-			<key>UILaunchImageOrientation</key>
-			<string>Portrait</string>
-			<key>UILaunchImageSize</key>
-			<string>{320, 480}</string>
-		</dict>
-		<dict>
-			<key>UILaunchImageMinimumOSVersion</key>
-			<string>7.0</string>
-			<key>UILaunchImageName</key>
-			<string>Default4</string>
-			<key>UILaunchImageOrientation</key>
-			<string>Portrait</string>
-			<key>UILaunchImageSize</key>
-			<string>{320, 480}</string>
-		</dict>
-		<dict>
-			<key>UILaunchImageMinimumOSVersion</key>
-			<string>7.0</string>
-			<key>UILaunchImageName</key>
-			<string>Default4</string>
+			<string>gTarbyIncidentLoadingWide</string>
 			<key>UILaunchImageOrientation</key>
 			<string>Portrait</string>
 			<key>UILaunchImageSize</key>
@@ -111,15 +65,23 @@
 			<key>UILaunchImageMinimumOSVersion</key>
 			<string>7.0</string>
 			<key>UILaunchImageName</key>
-			<string>Default4</string>
+			<string>gTarbyIncidentLoadingWide</string>
 			<key>UILaunchImageOrientation</key>
-			<string>Portrait</string>
+			<string>Landscape</string>
 			<key>UILaunchImageSize</key>
 			<string>{320, 568}</string>
 		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>gTarbyIncidentLoading</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 480}</string>
+		</dict>
 	</array>
-	<key>UIMainStoryboardFile</key>
-	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

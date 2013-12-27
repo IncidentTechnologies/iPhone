@@ -1,18 +1,15 @@
 //
-//  DialButton.m
-//  DialButton
+//  RadialDisplay.m
+//  gTarSequencer
 //
-//  Created by Ilan Gray on 7/20/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/26/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import "RadialDisplay.h"
 
 @implementation RadialDisplay
 
-@synthesize bottomLabel;
-@synthesize middleLabel;
-@synthesize topLabel;
 @synthesize center;
 
 - (id)initWithFrame:(CGRect)frame
@@ -49,7 +46,7 @@
     center = CGPointMake(self.frame.size.width/2, self.frame.size.height - verticalOffset);
     
     fillColor = [UIColor colorWithRed:240/255.0 green:146/255.0 blue:0 alpha:1];
-
+    
     // define the angular bounds:
     double angleWidth = 17;
     
@@ -116,7 +113,7 @@
     }
     
     // Draw new color:
-    NSArray * anglesToFill = [self anglesFromLowerBound:lowerBound toUpperBound:upperBound];  
+    NSArray * anglesToFill = [self anglesFromLowerBound:lowerBound toUpperBound:upperBound];
     
     [self fillAngles:anglesToFill withErasing:!clockwise];
     
@@ -162,7 +159,7 @@
     {
         return;
     }
-
+    
     CGContextRef fillingContext = UIGraphicsGetCurrentContext();
     
     CGContextSetShouldAntialias(fillingContext, NO);
@@ -205,7 +202,7 @@
 
 #pragma mark Gap Functions
 
-/* Determines whether or not the given angle 
+/* Determines whether or not the given angle
  falls in between the gaps of the outline wedges */
 - (BOOL)isAngleInBetweenWedges:(double)angle
 {
@@ -271,15 +268,15 @@
     bottomLabel.text = @"60";
     bottomLabel.textColor = [UIColor whiteColor];
     bottomLabel.backgroundColor = [UIColor clearColor];
-    bottomLabel.textAlignment = UITextAlignmentCenter;
-    [outline addSubview:self.bottomLabel];
+    bottomLabel.textAlignment = NSTextAlignmentCenter;
+    [outline addSubview:bottomLabel];
     
     frame = CGRectMake(outline.frame.size.width/2 - labelWidth/2, 2, labelWidth, labelHeight);
     middleLabel = [[UILabel alloc] initWithFrame:frame];
     middleLabel.text = @"120";
     middleLabel.textColor = [UIColor whiteColor];
     middleLabel.backgroundColor = [UIColor clearColor];
-    middleLabel.textAlignment = UITextAlignmentCenter;
+    middleLabel.textAlignment = NSTextAlignmentCenter;
     [outline addSubview:middleLabel];
     
     frame = CGRectMake(outline.frame.size.width - labelXOffset - labelWidth, labelYOffset, labelWidth, labelHeight);
@@ -287,13 +284,13 @@
     topLabel.text = @"180";
     topLabel.textColor = [UIColor whiteColor];
     topLabel.backgroundColor = [UIColor clearColor];
-    topLabel.textAlignment = UITextAlignmentCenter;
+    topLabel.textAlignment = NSTextAlignmentCenter;
     [outline addSubview:topLabel];
 }
 
 #pragma mark Drawing Wedges
 
-/* Given a starting and end angle, this function uses the 
+/* Given a starting and end angle, this function uses the
  inner and outer radii to return the corresponding wedge. */
 - (CGPathRef)drawWedgewithStartingAngle:(double)startAngle andEndingAngle:(double)endAngle
 {
@@ -342,14 +339,5 @@
 {
     return CGPointMake(center.x - offset.x, center.y - offset.y);
 }
-
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
 
 @end

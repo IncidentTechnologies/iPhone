@@ -1,9 +1,9 @@
 //
-//  DialButton.h
-//  DialButton
+//  RadialDisplay.h
+//  gTarSequencer
 //
-//  Created by Ilan Gray on 7/20/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/26/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -14,13 +14,19 @@
 #define UPPER 1
 #define LOWER 0
 
-// RadialDisplay serves as the visual for the tempo slider. The wedge formation is defined in terms of a center point,
-//      and inner and outer radii. RadialDisplay's one public function allows the controller to give it a % to fill to,
-//      and the RD will handle everything after that. The three labels are exposed to allow the controller to set fonts.
+// RadialDisplay serves as the visual for the tempo slider.
+// The wedge formation is defined in terms of a center point,
+// and inner and outer radii. RadialDisplay's one public function
+// allows the controller to give it a % to fill to, and the RD will
+// handle everything after that.
 @interface RadialDisplay : UIView
 {
     UIImageView * outline;
     UIImageView * filling;
+    
+    UILabel * bottomLabel;
+    UILabel * middleLabel;
+    UILabel * topLabel;
     
     double innerRadius;
     double outerRadius;
@@ -35,8 +41,5 @@
 - (void)fillToPercent:(double)percent;
 
 @property (nonatomic) CGPoint center;
-@property (retain, nonatomic) UILabel * bottomLabel;
-@property (retain, nonatomic) UILabel * middleLabel;
-@property (retain, nonatomic) UILabel * topLabel;
 
 @end

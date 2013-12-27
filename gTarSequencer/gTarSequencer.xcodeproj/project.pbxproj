@@ -7,978 +7,440 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		264F142A18315CFD00366268 /* sequencerInstruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 264F142918315CFD00366268 /* sequencerInstruments.plist */; };
-		2695EA5C1831BF860065C9CF /* Percussion 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9F61831BF860065C9CF /* Percussion 0.mp3 */; };
-		2695EA5D1831BF860065C9CF /* Percussion 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9F71831BF860065C9CF /* Percussion 1.mp3 */; };
-		2695EA5E1831BF860065C9CF /* Percussion 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9F81831BF860065C9CF /* Percussion 2.mp3 */; };
-		2695EA5F1831BF860065C9CF /* Percussion 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9F91831BF860065C9CF /* Percussion 3.mp3 */; };
-		2695EA601831BF860065C9CF /* Percussion 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FA1831BF860065C9CF /* Percussion 4.mp3 */; };
-		2695EA611831BF860065C9CF /* Percussion 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FB1831BF860065C9CF /* Percussion 5.mp3 */; };
-		2695EA621831BF860065C9CF /* Percussion 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FC1831BF860065C9CF /* Percussion 6.mp3 */; };
-		2695EA631831BF860065C9CF /* Percussion 7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FD1831BF860065C9CF /* Percussion 7.mp3 */; };
-		2695EA641831BF860065C9CF /* Percussion 8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FE1831BF860065C9CF /* Percussion 8.mp3 */; };
-		2695EA651831BF860065C9CF /* Percussion 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695E9FF1831BF860065C9CF /* Percussion 9.mp3 */; };
-		2695EA661831BF860065C9CF /* Percussion 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA001831BF860065C9CF /* Percussion 10.mp3 */; };
-		2695EA671831BF860065C9CF /* Percussion 11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA011831BF860065C9CF /* Percussion 11.mp3 */; };
-		2695EA681831BF860065C9CF /* Percussion 12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA021831BF860065C9CF /* Percussion 12.mp3 */; };
-		2695EA691831BF860065C9CF /* Percussion 13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA031831BF860065C9CF /* Percussion 13.mp3 */; };
-		2695EA6A1831BF860065C9CF /* Percussion 14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA041831BF860065C9CF /* Percussion 14.mp3 */; };
-		2695EA6B1831BF860065C9CF /* Percussion 15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA051831BF860065C9CF /* Percussion 15.mp3 */; };
-		2695EA6C1831BF860065C9CF /* Percussion 16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA061831BF860065C9CF /* Percussion 16.mp3 */; };
-		2695EA6D1831BF860065C9CF /* Percussion 17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA071831BF860065C9CF /* Percussion 17.mp3 */; };
-		2695EA6E1831BF860065C9CF /* Percussion 18.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA081831BF860065C9CF /* Percussion 18.mp3 */; };
-		2695EA6F1831BF860065C9CF /* Percussion 19.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA091831BF860065C9CF /* Percussion 19.mp3 */; };
-		2695EA701831BF860065C9CF /* Percussion 20.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0A1831BF860065C9CF /* Percussion 20.mp3 */; };
-		2695EA711831BF860065C9CF /* Percussion 21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0B1831BF860065C9CF /* Percussion 21.mp3 */; };
-		2695EA721831BF860065C9CF /* Percussion 22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0C1831BF860065C9CF /* Percussion 22.mp3 */; };
-		2695EA731831BF860065C9CF /* Percussion 23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0D1831BF860065C9CF /* Percussion 23.mp3 */; };
-		2695EA741831BF860065C9CF /* Percussion 24.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0E1831BF860065C9CF /* Percussion 24.mp3 */; };
-		2695EA751831BF860065C9CF /* Percussion 25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA0F1831BF860065C9CF /* Percussion 25.mp3 */; };
-		2695EA761831BF860065C9CF /* Percussion 26.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA101831BF860065C9CF /* Percussion 26.mp3 */; };
-		2695EA771831BF860065C9CF /* Percussion 27.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA111831BF860065C9CF /* Percussion 27.mp3 */; };
-		2695EA781831BF860065C9CF /* Percussion 28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA121831BF860065C9CF /* Percussion 28.mp3 */; };
-		2695EA791831BF860065C9CF /* Percussion 29.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA131831BF860065C9CF /* Percussion 29.mp3 */; };
-		2695EA7A1831BF860065C9CF /* Percussion 30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA141831BF860065C9CF /* Percussion 30.mp3 */; };
-		2695EA7B1831BF860065C9CF /* Percussion 31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA151831BF860065C9CF /* Percussion 31.mp3 */; };
-		2695EA7C1831BF860065C9CF /* Percussion 32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA161831BF860065C9CF /* Percussion 32.mp3 */; };
-		2695EA7D1831BF860065C9CF /* Percussion 33.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA171831BF860065C9CF /* Percussion 33.mp3 */; };
-		2695EA7E1831BF860065C9CF /* Percussion 34.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA181831BF860065C9CF /* Percussion 34.mp3 */; };
-		2695EA7F1831BF860065C9CF /* Percussion 35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA191831BF860065C9CF /* Percussion 35.mp3 */; };
-		2695EA801831BF860065C9CF /* Percussion 36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1A1831BF860065C9CF /* Percussion 36.mp3 */; };
-		2695EA811831BF860065C9CF /* Percussion 37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1B1831BF860065C9CF /* Percussion 37.mp3 */; };
-		2695EA821831BF860065C9CF /* Percussion 38.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1C1831BF860065C9CF /* Percussion 38.mp3 */; };
-		2695EA831831BF860065C9CF /* Percussion 39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1D1831BF860065C9CF /* Percussion 39.mp3 */; };
-		2695EA841831BF860065C9CF /* Percussion 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1E1831BF860065C9CF /* Percussion 40.mp3 */; };
-		2695EA851831BF860065C9CF /* Percussion 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA1F1831BF860065C9CF /* Percussion 41.mp3 */; };
-		2695EA861831BF860065C9CF /* Percussion 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA201831BF860065C9CF /* Percussion 42.mp3 */; };
-		2695EA871831BF860065C9CF /* Percussion 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA211831BF860065C9CF /* Percussion 43.mp3 */; };
-		2695EA881831BF860065C9CF /* Percussion 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA221831BF860065C9CF /* Percussion 44.mp3 */; };
-		2695EA891831BF860065C9CF /* Percussion 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA231831BF860065C9CF /* Percussion 45.mp3 */; };
-		2695EA8A1831BF860065C9CF /* Percussion 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA241831BF860065C9CF /* Percussion 46.mp3 */; };
-		2695EA8B1831BF860065C9CF /* Percussion 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA251831BF860065C9CF /* Percussion 47.mp3 */; };
-		2695EA8C1831BF860065C9CF /* Percussion 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA261831BF860065C9CF /* Percussion 48.mp3 */; };
-		2695EA8D1831BF860065C9CF /* Percussion 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA271831BF860065C9CF /* Percussion 49.mp3 */; };
-		2695EA8E1831BF860065C9CF /* Percussion 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA281831BF860065C9CF /* Percussion 50.mp3 */; };
-		2695EA8F1831BF860065C9CF /* Percussion 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA291831BF860065C9CF /* Percussion 51.mp3 */; };
-		2695EA901831BF860065C9CF /* Percussion 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2A1831BF860065C9CF /* Percussion 52.mp3 */; };
-		2695EA911831BF860065C9CF /* Percussion 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2B1831BF860065C9CF /* Percussion 53.mp3 */; };
-		2695EA921831BF860065C9CF /* Percussion 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2C1831BF860065C9CF /* Percussion 54.mp3 */; };
-		2695EA931831BF860065C9CF /* Percussion 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2D1831BF860065C9CF /* Percussion 55.mp3 */; };
-		2695EA941831BF860065C9CF /* Percussion 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2E1831BF860065C9CF /* Percussion 56.mp3 */; };
-		2695EA951831BF860065C9CF /* Percussion 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA2F1831BF860065C9CF /* Percussion 57.mp3 */; };
-		2695EA961831BF860065C9CF /* Percussion 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA301831BF860065C9CF /* Percussion 58.mp3 */; };
-		2695EA971831BF860065C9CF /* Percussion 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA311831BF860065C9CF /* Percussion 59.mp3 */; };
-		2695EA981831BF860065C9CF /* Percussion 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA321831BF860065C9CF /* Percussion 60.mp3 */; };
-		2695EA991831BF860065C9CF /* Percussion 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA331831BF860065C9CF /* Percussion 61.mp3 */; };
-		2695EA9A1831BF860065C9CF /* Percussion 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA341831BF860065C9CF /* Percussion 62.mp3 */; };
-		2695EA9B1831BF860065C9CF /* Percussion 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA351831BF860065C9CF /* Percussion 63.mp3 */; };
-		2695EA9C1831BF860065C9CF /* Percussion 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA361831BF860065C9CF /* Percussion 64.mp3 */; };
-		2695EA9D1831BF860065C9CF /* Percussion 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA371831BF860065C9CF /* Percussion 65.mp3 */; };
-		2695EA9E1831BF860065C9CF /* Percussion 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA381831BF860065C9CF /* Percussion 66.mp3 */; };
-		2695EA9F1831BF860065C9CF /* Percussion 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA391831BF860065C9CF /* Percussion 67.mp3 */; };
-		2695EAA01831BF860065C9CF /* Percussion 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3A1831BF860065C9CF /* Percussion 68.mp3 */; };
-		2695EAA11831BF860065C9CF /* Percussion 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3B1831BF860065C9CF /* Percussion 69.mp3 */; };
-		2695EAA21831BF860065C9CF /* Percussion 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3C1831BF860065C9CF /* Percussion 70.mp3 */; };
-		2695EAA31831BF860065C9CF /* Percussion 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3D1831BF860065C9CF /* Percussion 71.mp3 */; };
-		2695EAA41831BF860065C9CF /* Percussion 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3E1831BF860065C9CF /* Percussion 72.mp3 */; };
-		2695EAA51831BF860065C9CF /* Percussion 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA3F1831BF860065C9CF /* Percussion 73.mp3 */; };
-		2695EAA61831BF860065C9CF /* Percussion 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA401831BF860065C9CF /* Percussion 74.mp3 */; };
-		2695EAA71831BF860065C9CF /* Percussion 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA411831BF860065C9CF /* Percussion 75.mp3 */; };
-		2695EAA81831BF860065C9CF /* Percussion 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA421831BF860065C9CF /* Percussion 76.mp3 */; };
-		2695EAA91831BF860065C9CF /* Percussion 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA431831BF860065C9CF /* Percussion 77.mp3 */; };
-		2695EAAA1831BF860065C9CF /* Percussion 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA441831BF860065C9CF /* Percussion 78.mp3 */; };
-		2695EAAB1831BF860065C9CF /* Percussion 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA451831BF860065C9CF /* Percussion 79.mp3 */; };
-		2695EAAC1831BF860065C9CF /* Percussion 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA461831BF860065C9CF /* Percussion 80.mp3 */; };
-		2695EAAD1831BF860065C9CF /* Percussion 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA471831BF860065C9CF /* Percussion 81.mp3 */; };
-		2695EAAE1831BF860065C9CF /* Percussion 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA481831BF860065C9CF /* Percussion 82.mp3 */; };
-		2695EAAF1831BF860065C9CF /* Percussion 83.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA491831BF860065C9CF /* Percussion 83.mp3 */; };
-		2695EAB01831BF860065C9CF /* Percussion 84.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4A1831BF860065C9CF /* Percussion 84.mp3 */; };
-		2695EAB11831BF860065C9CF /* Percussion 85.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4B1831BF860065C9CF /* Percussion 85.mp3 */; };
-		2695EAB21831BF860065C9CF /* Percussion 86.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4C1831BF860065C9CF /* Percussion 86.mp3 */; };
-		2695EAB31831BF860065C9CF /* Percussion 87.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4D1831BF860065C9CF /* Percussion 87.mp3 */; };
-		2695EAB41831BF860065C9CF /* Percussion 88.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4E1831BF860065C9CF /* Percussion 88.mp3 */; };
-		2695EAB51831BF860065C9CF /* Percussion 89.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA4F1831BF860065C9CF /* Percussion 89.mp3 */; };
-		2695EAB61831BF860065C9CF /* Percussion 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA501831BF860065C9CF /* Percussion 90.mp3 */; };
-		2695EAB71831BF860065C9CF /* Percussion 91.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA511831BF860065C9CF /* Percussion 91.mp3 */; };
-		2695EAB81831BF860065C9CF /* Percussion 92.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA521831BF860065C9CF /* Percussion 92.mp3 */; };
-		2695EAB91831BF860065C9CF /* Percussion 93.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA531831BF860065C9CF /* Percussion 93.mp3 */; };
-		2695EABA1831BF860065C9CF /* Percussion 94.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA541831BF860065C9CF /* Percussion 94.mp3 */; };
-		2695EABB1831BF860065C9CF /* Percussion 95.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA551831BF860065C9CF /* Percussion 95.mp3 */; };
-		2695EABC1831BF860065C9CF /* Percussion 96.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA561831BF860065C9CF /* Percussion 96.mp3 */; };
-		2695EABD1831BF860065C9CF /* Percussion 97.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA571831BF860065C9CF /* Percussion 97.mp3 */; };
-		2695EABE1831BF860065C9CF /* Percussion 98.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA581831BF860065C9CF /* Percussion 98.mp3 */; };
-		2695EABF1831BF860065C9CF /* Percussion 99.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA591831BF860065C9CF /* Percussion 99.mp3 */; };
-		2695EAC01831BF860065C9CF /* Percussion 100.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA5A1831BF860065C9CF /* Percussion 100.mp3 */; };
-		2695EAC11831BF860065C9CF /* Percussion 101.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2695EA5B1831BF860065C9CF /* Percussion 101.mp3 */; };
-		26B2D6021830BF6F00DF7CE7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B2D6011830BF6F00DF7CE7 /* libc++.dylib */; };
-		26B2D6041830C21100DF7CE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B2D6031830C21100DF7CE7 /* AVFoundation.framework */; };
-		6D331B14157D40A100AA27A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B13157D40A100AA27A1 /* UIKit.framework */; };
-		6D331B16157D40A100AA27A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B15157D40A100AA27A1 /* Foundation.framework */; };
-		6D331B18157D40A100AA27A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B17157D40A100AA27A1 /* CoreGraphics.framework */; };
-		6D331B1E157D40A100AA27A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D331B1C157D40A100AA27A1 /* InfoPlist.strings */; };
-		6D331B20157D40A100AA27A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D331B1F157D40A100AA27A1 /* main.m */; };
-		6D331B24157D40A100AA27A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D331B23157D40A100AA27A1 /* AppDelegate.m */; };
-		6D331B27157D40A100AA27A1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D331B25157D40A100AA27A1 /* MainStoryboard.storyboard */; };
-		6D331B32157D40A100AA27A1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B31157D40A100AA27A1 /* SenTestingKit.framework */; };
-		6D331B33157D40A100AA27A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B13157D40A100AA27A1 /* UIKit.framework */; };
-		6D331B34157D40A100AA27A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B15157D40A100AA27A1 /* Foundation.framework */; };
-		6D331B3C157D40A100AA27A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D331B3A157D40A100AA27A1 /* InfoPlist.strings */; };
-		6D331B3F157D40A100AA27A1 /* gTarSequencerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D331B3E157D40A100AA27A1 /* gTarSequencerTests.m */; };
-		6D331B53157D585600AA27A1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B52157D585600AA27A1 /* AudioToolbox.framework */; };
-		6D331B55157D585F00AA27A1 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D331B54157D585F00AA27A1 /* CoreMIDI.framework */; };
-		6D77F0901592582A00059C8F /* ScrollButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D77F08F1592582900059C8F /* ScrollButton.m */; };
-		6D77F0921592583600059C8F /* ScrollButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D77F08F1592582900059C8F /* ScrollButton.m */; };
-		6D9912DB15B0D4E100B32116 /* Percussion 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912B215B0D4E000B32116 /* Percussion 0.mp3 */; };
-		6D9912DC15B0D4E100B32116 /* Percussion 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912B315B0D4E000B32116 /* Percussion 1.mp3 */; };
-		6D9912DD15B0D4E100B32116 /* Percussion 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912B415B0D4E000B32116 /* Percussion 10.mp3 */; };
-		6D9912DE15B0D4E100B32116 /* Percussion 11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912B515B0D4E000B32116 /* Percussion 11.mp3 */; };
-		6D9912DF15B0D4E100B32116 /* Percussion 12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912B615B0D4E000B32116 /* Percussion 12.mp3 */; };
-		6D9912E015B0D4E100B32116 /* Percussion 13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912B715B0D4E000B32116 /* Percussion 13.mp3 */; };
-		6D9912E115B0D4E100B32116 /* Percussion 14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912B815B0D4E000B32116 /* Percussion 14.mp3 */; };
-		6D9912E215B0D4E100B32116 /* Percussion 15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912B915B0D4E000B32116 /* Percussion 15.mp3 */; };
-		6D9912E315B0D4E100B32116 /* Percussion 16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912BA15B0D4E000B32116 /* Percussion 16.mp3 */; };
-		6D9912E415B0D4E100B32116 /* Percussion 17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912BB15B0D4E000B32116 /* Percussion 17.mp3 */; };
-		6D9912E515B0D4E100B32116 /* Percussion 18.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912BC15B0D4E000B32116 /* Percussion 18.mp3 */; };
-		6D9912E615B0D4E100B32116 /* Percussion 19.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912BD15B0D4E000B32116 /* Percussion 19.mp3 */; };
-		6D9912E715B0D4E100B32116 /* Percussion 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912BE15B0D4E000B32116 /* Percussion 2.mp3 */; };
-		6D9912E815B0D4E100B32116 /* Percussion 20.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912BF15B0D4E000B32116 /* Percussion 20.mp3 */; };
-		6D9912E915B0D4E100B32116 /* Percussion 21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C015B0D4E000B32116 /* Percussion 21.mp3 */; };
-		6D9912EA15B0D4E100B32116 /* Percussion 22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C115B0D4E000B32116 /* Percussion 22.mp3 */; };
-		6D9912EB15B0D4E100B32116 /* Percussion 23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C215B0D4E000B32116 /* Percussion 23.mp3 */; };
-		6D9912EC15B0D4E100B32116 /* Percussion 24.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C315B0D4E000B32116 /* Percussion 24.mp3 */; };
-		6D9912ED15B0D4E100B32116 /* Percussion 25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C415B0D4E000B32116 /* Percussion 25.mp3 */; };
-		6D9912EE15B0D4E100B32116 /* Percussion 26.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C515B0D4E000B32116 /* Percussion 26.mp3 */; };
-		6D9912EF15B0D4E100B32116 /* Percussion 27.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C615B0D4E000B32116 /* Percussion 27.mp3 */; };
-		6D9912F015B0D4E100B32116 /* Percussion 28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C715B0D4E000B32116 /* Percussion 28.mp3 */; };
-		6D9912F115B0D4E100B32116 /* Percussion 29.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C815B0D4E000B32116 /* Percussion 29.mp3 */; };
-		6D9912F215B0D4E100B32116 /* Percussion 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912C915B0D4E000B32116 /* Percussion 3.mp3 */; };
-		6D9912F315B0D4E100B32116 /* Percussion 30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912CA15B0D4E000B32116 /* Percussion 30.mp3 */; };
-		6D9912F415B0D4E100B32116 /* Percussion 31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912CB15B0D4E000B32116 /* Percussion 31.mp3 */; };
-		6D9912F515B0D4E100B32116 /* Percussion 32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912CC15B0D4E000B32116 /* Percussion 32.mp3 */; };
-		6D9912F615B0D4E100B32116 /* Percussion 33.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912CD15B0D4E000B32116 /* Percussion 33.mp3 */; };
-		6D9912F715B0D4E100B32116 /* Percussion 34.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912CE15B0D4E000B32116 /* Percussion 34.mp3 */; };
-		6D9912F815B0D4E100B32116 /* Percussion 35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912CF15B0D4E000B32116 /* Percussion 35.mp3 */; };
-		6D9912F915B0D4E100B32116 /* Percussion 36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D015B0D4E000B32116 /* Percussion 36.mp3 */; };
-		6D9912FA15B0D4E100B32116 /* Percussion 37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D115B0D4E000B32116 /* Percussion 37.mp3 */; };
-		6D9912FB15B0D4E100B32116 /* Percussion 38.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D215B0D4E000B32116 /* Percussion 38.mp3 */; };
-		6D9912FC15B0D4E100B32116 /* Percussion 39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D315B0D4E000B32116 /* Percussion 39.mp3 */; };
-		6D9912FD15B0D4E100B32116 /* Percussion 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D415B0D4E000B32116 /* Percussion 4.mp3 */; };
-		6D9912FE15B0D4E100B32116 /* Percussion 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D515B0D4E100B32116 /* Percussion 40.mp3 */; };
-		6D9912FF15B0D4E100B32116 /* Percussion 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D615B0D4E100B32116 /* Percussion 5.mp3 */; };
-		6D99130015B0D4E100B32116 /* Percussion 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D715B0D4E100B32116 /* Percussion 6.mp3 */; };
-		6D99130115B0D4E100B32116 /* Percussion 7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D815B0D4E100B32116 /* Percussion 7.mp3 */; };
-		6D99130215B0D4E100B32116 /* Percussion 8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912D915B0D4E100B32116 /* Percussion 8.mp3 */; };
-		6D99130315B0D4E100B32116 /* Percussion 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D9912DA15B0D4E100B32116 /* Percussion 9.mp3 */; };
-		6D99E68A159396B8005F1119 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D99E689159396B7005F1119 /* CheckBox.m */; };
-		6D9CF03E159A36CC00DCDFD2 /* GuitarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9CF03D159A36CC00DCDFD2 /* GuitarView.m */; };
-		6DBE633C157D612B00729E25 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE610C157D612B00729E25 /* instruments.plist */; };
-		6DBE64BE157D645B00729E25 /* SEQNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE64BD157D645B00729E25 /* SEQNote.m */; };
-		6DD8EAB515B73960004B5AAF /* MeasureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD8EAB415B73960004B5AAF /* MeasureView.m */; };
-		EC24E031161BD71900016B78 /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24E02F161BD71800016B78 /* libAudioController.a */; };
-		EC24E032161BD71900016B78 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24E030161BD71800016B78 /* libGtarController.a */; };
-		EC37BE47160C42F100E6277D /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE46160C42F100E6277D /* RadialDisplay.m */; };
-		EC37BE48160C42F100E6277D /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE46160C42F100E6277D /* RadialDisplay.m */; };
-		EC37BE4B160C430B00E6277D /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE4A160C430B00E6277D /* ScrollingSelector.m */; };
-		EC37BE4C160C430B00E6277D /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE4A160C430B00E6277D /* ScrollingSelector.m */; };
-		EC37BE4F160C432100E6277D /* TouchCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE4E160C432000E6277D /* TouchCatcher.m */; };
-		EC37BE50160C432100E6277D /* TouchCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE4E160C432000E6277D /* TouchCatcher.m */; };
-		EC37BE5B160C435E00E6277D /* Instrument.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE52160C435A00E6277D /* Instrument.m */; };
-		EC37BE5C160C435E00E6277D /* Instrument.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE52160C435A00E6277D /* Instrument.m */; };
-		EC37BE5D160C435E00E6277D /* Measure.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE54160C435C00E6277D /* Measure.m */; };
-		EC37BE5E160C435E00E6277D /* Measure.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE54160C435C00E6277D /* Measure.m */; };
-		EC37BE5F160C435E00E6277D /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE56160C435D00E6277D /* Pattern.m */; };
-		EC37BE60160C435E00E6277D /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE56160C435D00E6277D /* Pattern.m */; };
-		EC37BE63160C435E00E6277D /* SoundMaker.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE5A160C435E00E6277D /* SoundMaker.mm */; };
-		EC37BE64160C435E00E6277D /* SoundMaker.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE5A160C435E00E6277D /* SoundMaker.mm */; };
-		EC37BE67160C44E000E6277D /* gTarSequencerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE66160C44DF00E6277D /* gTarSequencerViewController.m */; };
-		EC37BE68160C44E000E6277D /* gTarSequencerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE66160C44DF00E6277D /* gTarSequencerViewController.m */; };
-		EC37BE6B160C44F200E6277D /* LoadingAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE6A160C44F100E6277D /* LoadingAnimationViewController.m */; };
-		EC37BE6C160C44F200E6277D /* LoadingAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BE6A160C44F100E6277D /* LoadingAnimationViewController.m */; };
-		EC37BEA3160C459800E6277D /* Add_Instrument.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE6D160C459600E6277D /* Add_Instrument.png */; };
-		EC37BEA4160C459800E6277D /* Add_Instrument.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE6D160C459600E6277D /* Add_Instrument.png */; };
-		EC37BEA5160C459800E6277D /* Arrow_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE6E160C459600E6277D /* Arrow_Left.png */; };
-		EC37BEA6160C459800E6277D /* Arrow_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE6E160C459600E6277D /* Arrow_Left.png */; };
-		EC37BEA7160C459800E6277D /* Arrow_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE6F160C459600E6277D /* Arrow_Right.png */; };
-		EC37BEA8160C459800E6277D /* Arrow_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE6F160C459600E6277D /* Arrow_Right.png */; };
-		EC37BEA9160C459800E6277D /* BackButton_InstrumentSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE70160C459600E6277D /* BackButton_InstrumentSelect.png */; };
-		EC37BEAA160C459800E6277D /* BackButton_InstrumentSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE70160C459600E6277D /* BackButton_InstrumentSelect.png */; };
-		EC37BEAB160C459800E6277D /* Button_A_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE71160C459600E6277D /* Button_A_OFF.png */; };
-		EC37BEAC160C459800E6277D /* Button_A_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE71160C459600E6277D /* Button_A_OFF.png */; };
-		EC37BEAD160C459800E6277D /* Button_A_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE72160C459600E6277D /* Button_A_ON.png */; };
-		EC37BEAE160C459800E6277D /* Button_A_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE72160C459600E6277D /* Button_A_ON.png */; };
-		EC37BEAF160C459800E6277D /* Button_Add_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE73160C459600E6277D /* Button_Add_OFF.png */; };
-		EC37BEB0160C459800E6277D /* Button_Add_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE73160C459600E6277D /* Button_Add_OFF.png */; };
-		EC37BEB1160C459800E6277D /* Button_Add_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE74160C459600E6277D /* Button_Add_ON.png */; };
-		EC37BEB2160C459800E6277D /* Button_Add_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE74160C459600E6277D /* Button_Add_ON.png */; };
-		EC37BEB3160C459800E6277D /* Button_B_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE75160C459700E6277D /* Button_B_OFF.png */; };
-		EC37BEB4160C459800E6277D /* Button_B_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE75160C459700E6277D /* Button_B_OFF.png */; };
-		EC37BEB5160C459800E6277D /* Button_B_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE76160C459700E6277D /* Button_B_ON.png */; };
-		EC37BEB6160C459800E6277D /* Button_B_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE76160C459700E6277D /* Button_B_ON.png */; };
-		EC37BEB7160C459800E6277D /* Button_C_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE77160C459700E6277D /* Button_C_OFF.png */; };
-		EC37BEB8160C459800E6277D /* Button_C_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE77160C459700E6277D /* Button_C_OFF.png */; };
-		EC37BEB9160C459800E6277D /* Button_C_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE78160C459700E6277D /* Button_C_ON.png */; };
-		EC37BEBA160C459800E6277D /* Button_C_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE78160C459700E6277D /* Button_C_ON.png */; };
-		EC37BEBB160C459800E6277D /* Button_D_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE79160C459700E6277D /* Button_D_OFF.png */; };
-		EC37BEBC160C459800E6277D /* Button_D_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE79160C459700E6277D /* Button_D_OFF.png */; };
-		EC37BEBD160C459800E6277D /* Button_D_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7A160C459700E6277D /* Button_D_ON.png */; };
-		EC37BEBE160C459800E6277D /* Button_D_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7A160C459700E6277D /* Button_D_ON.png */; };
-		EC37BEBF160C459800E6277D /* Button_Minus_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7B160C459700E6277D /* Button_Minus_OFF.png */; };
-		EC37BEC0160C459800E6277D /* Button_Minus_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7B160C459700E6277D /* Button_Minus_OFF.png */; };
-		EC37BEC1160C459800E6277D /* Button_Minus_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7C160C459700E6277D /* Button_Minus_ON.png */; };
-		EC37BEC2160C459800E6277D /* Button_Minus_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7C160C459700E6277D /* Button_Minus_ON.png */; };
-		EC37BEC3160C459800E6277D /* Button_OFF_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7D160C459700E6277D /* Button_OFF_OFF.png */; };
-		EC37BEC4160C459800E6277D /* Button_OFF_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7D160C459700E6277D /* Button_OFF_OFF.png */; };
-		EC37BEC5160C459800E6277D /* Button_OFF_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7E160C459700E6277D /* Button_OFF_ON.png */; };
-		EC37BEC6160C459800E6277D /* Button_OFF_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7E160C459700E6277D /* Button_OFF_ON.png */; };
-		EC37BEC7160C459800E6277D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7F160C459700E6277D /* Default@2x.png */; };
-		EC37BEC8160C459800E6277D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE7F160C459700E6277D /* Default@2x.png */; };
-		EC37BEC9160C459800E6277D /* DrumButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE80160C459700E6277D /* DrumButton_OFF.png */; };
-		EC37BECA160C459800E6277D /* DrumButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE80160C459700E6277D /* DrumButton_OFF.png */; };
-		EC37BECB160C459800E6277D /* DrumButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE81160C459700E6277D /* DrumButton_ON.png */; };
-		EC37BECC160C459800E6277D /* DrumButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE81160C459700E6277D /* DrumButton_ON.png */; };
-		EC37BECD160C459800E6277D /* gTarbyIncidentLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE82160C459700E6277D /* gTarbyIncidentLoading.png */; };
-		EC37BECE160C459800E6277D /* gTarbyIncidentLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE82160C459700E6277D /* gTarbyIncidentLoading.png */; };
-		EC37BECF160C459800E6277D /* gTarConnectedLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE83160C459700E6277D /* gTarConnectedLogo.png */; };
-		EC37BED0160C459800E6277D /* gTarConnectedLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE83160C459700E6277D /* gTarConnectedLogo.png */; };
-		EC37BED1160C459800E6277D /* gTarNotConnectedLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE84160C459700E6277D /* gTarNotConnectedLogo.png */; };
-		EC37BED2160C459800E6277D /* gTarNotConnectedLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE84160C459700E6277D /* gTarNotConnectedLogo.png */; };
-		EC37BED3160C459800E6277D /* GuitarButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE85160C459700E6277D /* GuitarButton_OFF.png */; };
-		EC37BED4160C459800E6277D /* GuitarButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE85160C459700E6277D /* GuitarButton_OFF.png */; };
-		EC37BED5160C459800E6277D /* GuitarButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE86160C459700E6277D /* GuitarButton_ON.png */; };
-		EC37BED6160C459800E6277D /* GuitarButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE86160C459700E6277D /* GuitarButton_ON.png */; };
-		EC37BED7160C459800E6277D /* Icon_Guitar.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE87160C459700E6277D /* Icon_Guitar.png */; };
-		EC37BED8160C459800E6277D /* Icon_Guitar.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE87160C459700E6277D /* Icon_Guitar.png */; };
-		EC37BED9160C459800E6277D /* Icon_Percussion.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE88160C459700E6277D /* Icon_Percussion.png */; };
-		EC37BEDA160C459800E6277D /* Icon_Percussion.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE88160C459700E6277D /* Icon_Percussion.png */; };
-		EC37BEDB160C459800E6277D /* Icon_Piano.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE89160C459700E6277D /* Icon_Piano.png */; };
-		EC37BEDC160C459800E6277D /* Icon_Piano.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE89160C459700E6277D /* Icon_Piano.png */; };
-		EC37BEDD160C459800E6277D /* Icon_Trash.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8A160C459700E6277D /* Icon_Trash.png */; };
-		EC37BEDE160C459800E6277D /* Icon_Trash.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8A160C459700E6277D /* Icon_Trash.png */; };
-		EC37BEDF160C459800E6277D /* Icon_WubWub.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8B160C459700E6277D /* Icon_WubWub.png */; };
-		EC37BEE0160C459800E6277D /* Icon_WubWub.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8B160C459700E6277D /* Icon_WubWub.png */; };
-		EC37BEE1160C459800E6277D /* InstrumentsCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8C160C459700E6277D /* InstrumentsCopy.png */; };
-		EC37BEE2160C459800E6277D /* InstrumentsCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8C160C459700E6277D /* InstrumentsCopy.png */; };
-		EC37BEE3160C459800E6277D /* InstrumentSelectScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8D160C459700E6277D /* InstrumentSelectScreen.png */; };
-		EC37BEE4160C459800E6277D /* InstrumentSelectScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8D160C459700E6277D /* InstrumentSelectScreen.png */; };
-		EC37BEE5160C459800E6277D /* PauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8E160C459800E6277D /* PauseButton.png */; };
-		EC37BEE6160C459800E6277D /* PauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8E160C459800E6277D /* PauseButton.png */; };
-		EC37BEE7160C459800E6277D /* PianoButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8F160C459800E6277D /* PianoButton_OFF.png */; };
-		EC37BEE8160C459800E6277D /* PianoButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE8F160C459800E6277D /* PianoButton_OFF.png */; };
-		EC37BEE9160C459800E6277D /* PianoButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE90160C459800E6277D /* PianoButton_ON.png */; };
-		EC37BEEA160C459800E6277D /* PianoButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE90160C459800E6277D /* PianoButton_ON.png */; };
-		EC37BEEB160C459800E6277D /* PlayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE91160C459800E6277D /* PlayButton.png */; };
-		EC37BEEC160C459800E6277D /* PlayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE91160C459800E6277D /* PlayButton.png */; };
-		EC37BEED160C459800E6277D /* Sequence1.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE92160C459800E6277D /* Sequence1.png */; };
-		EC37BEEE160C459800E6277D /* Sequence1.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE92160C459800E6277D /* Sequence1.png */; };
-		EC37BEEF160C459800E6277D /* Sequence2.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE93160C459800E6277D /* Sequence2.png */; };
-		EC37BEF0160C459800E6277D /* Sequence2.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE93160C459800E6277D /* Sequence2.png */; };
-		EC37BEF1160C459800E6277D /* Sequence3.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE94160C459800E6277D /* Sequence3.png */; };
-		EC37BEF2160C459800E6277D /* Sequence3.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE94160C459800E6277D /* Sequence3.png */; };
-		EC37BEF3160C459800E6277D /* Sequence4.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE95160C459800E6277D /* Sequence4.png */; };
-		EC37BEF4160C459800E6277D /* Sequence4.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE95160C459800E6277D /* Sequence4.png */; };
-		EC37BEF5160C459800E6277D /* Sequence5.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE96160C459800E6277D /* Sequence5.png */; };
-		EC37BEF6160C459800E6277D /* Sequence5.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE96160C459800E6277D /* Sequence5.png */; };
-		EC37BEF7160C459800E6277D /* Sequence6.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE97160C459800E6277D /* Sequence6.png */; };
-		EC37BEF8160C459800E6277D /* Sequence6.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE97160C459800E6277D /* Sequence6.png */; };
-		EC37BEF9160C459800E6277D /* Sequence7.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE98160C459800E6277D /* Sequence7.png */; };
-		EC37BEFA160C459800E6277D /* Sequence7.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE98160C459800E6277D /* Sequence7.png */; };
-		EC37BEFB160C459800E6277D /* Sequence8.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE99160C459800E6277D /* Sequence8.png */; };
-		EC37BEFC160C459800E6277D /* Sequence8.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE99160C459800E6277D /* Sequence8.png */; };
-		EC37BEFD160C459800E6277D /* Sequence9.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9A160C459800E6277D /* Sequence9.png */; };
-		EC37BEFE160C459800E6277D /* Sequence9.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9A160C459800E6277D /* Sequence9.png */; };
-		EC37BEFF160C459800E6277D /* Sequence10.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9B160C459800E6277D /* Sequence10.png */; };
-		EC37BF00160C459800E6277D /* Sequence10.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9B160C459800E6277D /* Sequence10.png */; };
-		EC37BF01160C459800E6277D /* Sequence11.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9C160C459800E6277D /* Sequence11.png */; };
-		EC37BF02160C459800E6277D /* Sequence11.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9C160C459800E6277D /* Sequence11.png */; };
-		EC37BF03160C459800E6277D /* Sequencer_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9D160C459800E6277D /* Sequencer_Icon.png */; };
-		EC37BF04160C459800E6277D /* Sequencer_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9D160C459800E6277D /* Sequencer_Icon.png */; };
-		EC37BF05160C459800E6277D /* TempoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9E160C459800E6277D /* TempoButton.png */; };
-		EC37BF06160C459800E6277D /* TempoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9E160C459800E6277D /* TempoButton.png */; };
-		EC37BF07160C459800E6277D /* Text_Connected.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9F160C459800E6277D /* Text_Connected.png */; };
-		EC37BF08160C459800E6277D /* Text_Connected.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BE9F160C459800E6277D /* Text_Connected.png */; };
-		EC37BF09160C459800E6277D /* Text_NotConnected.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BEA0160C459800E6277D /* Text_NotConnected.png */; };
-		EC37BF0A160C459800E6277D /* Text_NotConnected.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BEA0160C459800E6277D /* Text_NotConnected.png */; };
-		EC37BF0B160C459800E6277D /* WubButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BEA1160C459800E6277D /* WubButton_OFF.png */; };
-		EC37BF0C160C459800E6277D /* WubButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BEA1160C459800E6277D /* WubButton_OFF.png */; };
-		EC37BF0D160C459800E6277D /* WubButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BEA2160C459800E6277D /* WubButton_ON.png */; };
-		EC37BF0E160C459800E6277D /* WubButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = EC37BEA2160C459800E6277D /* WubButton_ON.png */; };
-		EC37BF11160C45FE00E6277D /* InstrumentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BF10160C45FD00E6277D /* InstrumentCell.m */; };
-		EC37BF12160C45FE00E6277D /* InstrumentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37BF10160C45FD00E6277D /* InstrumentCell.m */; };
+		580A51FF1864DFF50077240B /* DrumButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51EF1864DFF50077240B /* DrumButton_OFF.png */; };
+		580A52001864DFF50077240B /* DrumButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F01864DFF50077240B /* DrumButton_ON.png */; };
+		580A52011864DFF50077240B /* gTarConnectedLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F11864DFF50077240B /* gTarConnectedLogo.png */; };
+		580A52021864DFF50077240B /* gTarNotConnectedLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F21864DFF50077240B /* gTarNotConnectedLogo.png */; };
+		580A52031864DFF50077240B /* GuitarButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F31864DFF50077240B /* GuitarButton_OFF.png */; };
+		580A52041864DFF50077240B /* GuitarButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F41864DFF50077240B /* GuitarButton_ON.png */; };
+		580A52051864DFF50077240B /* Icon_Guitar.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F51864DFF50077240B /* Icon_Guitar.png */; };
+		580A52061864DFF50077240B /* Icon_Percussion.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F61864DFF50077240B /* Icon_Percussion.png */; };
+		580A52071864DFF50077240B /* Icon_Piano.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F71864DFF50077240B /* Icon_Piano.png */; };
+		580A52081864DFF50077240B /* Icon_Trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F81864DFF50077240B /* Icon_Trash.png */; };
+		580A52091864DFF50077240B /* Icon_WubWub.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F91864DFF50077240B /* Icon_WubWub.png */; };
+		580A520A1864DFF50077240B /* PianoButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51FA1864DFF50077240B /* PianoButton_OFF.png */; };
+		580A520B1864DFF50077240B /* PianoButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51FB1864DFF50077240B /* PianoButton_ON.png */; };
+		580A520D1864DFF50077240B /* WubButton_OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51FD1864DFF50077240B /* WubButton_OFF.png */; };
+		580A520E1864DFF50077240B /* WubButton_ON.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51FE1864DFF50077240B /* WubButton_ON.png */; };
+		580A52151864E0E00077240B /* Sequencer_Icon58px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52121864E0DF0077240B /* Sequencer_Icon58px.png */; };
+		580A52161864E0E00077240B /* Sequencer_Icon80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52131864E0DF0077240B /* Sequencer_Icon80px.png */; };
+		580A52171864E0E00077240B /* Sequencer_Icon120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52141864E0DF0077240B /* Sequencer_Icon120px.png */; };
+		5840858618652D9000BFF3C5 /* InstrumentTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5840858518652D9000BFF3C5 /* InstrumentTableView.xib */; };
+		584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 584085871865355300BFF3C5 /* sequencerInstruments.plist */; };
+		5840858D18653B5C00BFF3C5 /* InstrumentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840858C18653B5C00BFF3C5 /* InstrumentTableViewCell.m */; };
+		5840858F18653B6F00BFF3C5 /* InstrumentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5840858E18653B6F00BFF3C5 /* InstrumentTableViewCell.xib */; };
+		584085951868C33700BFF3C5 /* GuitarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 584085941868C33700BFF3C5 /* GuitarView.m */; };
+		58547AE4186CD55C003638EF /* RadialButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AE3186CD55C003638EF /* RadialButton.m */; };
+		58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AE7186CD5EF003638EF /* RadialDisplay.m */; };
+		58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AEA186CD6AF003638EF /* ScrollingSelector.m */; };
+		5894D61A186505BD00849C71 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894D619186505BD00849C71 /* InstrumentTableViewController.m */; };
+		58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */; };
+		58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */; };
+		58D6170E1863B8D6001EB327 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D6170D1863B8D6001EB327 /* Foundation.framework */; };
+		58D617101863B8D6001EB327 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D6170F1863B8D6001EB327 /* CoreGraphics.framework */; };
+		58D617121863B8D6001EB327 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D617111863B8D6001EB327 /* UIKit.framework */; };
+		58D617181863B8D7001EB327 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 58D617161863B8D7001EB327 /* InfoPlist.strings */; };
+		58D6171A1863B8D7001EB327 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D617191863B8D7001EB327 /* main.m */; };
+		58D6171E1863B8D7001EB327 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D6171D1863B8D7001EB327 /* AppDelegate.m */; };
+		58D617241863B8D7001EB327 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D617231863B8D7001EB327 /* LoadingViewController.m */; };
+		58D617261863B8D7001EB327 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D617251863B8D7001EB327 /* Images.xcassets */; };
+		58D6172D1863B8D7001EB327 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D6172C1863B8D7001EB327 /* XCTest.framework */; };
+		58D6172E1863B8D7001EB327 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D6170D1863B8D6001EB327 /* Foundation.framework */; };
+		58D6172F1863B8D7001EB327 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D617111863B8D6001EB327 /* UIKit.framework */; };
+		58D617371863B8D7001EB327 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 58D617351863B8D7001EB327 /* InfoPlist.strings */; };
+		58D617391863B8D7001EB327 /* gTarSequencerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D617381863B8D7001EB327 /* gTarSequencerTests.m */; };
+		58D617641863BF5E001EB327 /* Sequence1.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D617591863BF5E001EB327 /* Sequence1.png */; };
+		58D617651863BF5E001EB327 /* Sequence10.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D6175A1863BF5E001EB327 /* Sequence10.png */; };
+		58D617661863BF5E001EB327 /* Sequence11.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D6175B1863BF5E001EB327 /* Sequence11.png */; };
+		58D617671863BF5E001EB327 /* Sequence2.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D6175C1863BF5E001EB327 /* Sequence2.png */; };
+		58D617681863BF5E001EB327 /* Sequence3.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D6175D1863BF5E001EB327 /* Sequence3.png */; };
+		58D617691863BF5E001EB327 /* Sequence4.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D6175E1863BF5E001EB327 /* Sequence4.png */; };
+		58D6176A1863BF5E001EB327 /* Sequence5.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D6175F1863BF5E001EB327 /* Sequence5.png */; };
+		58D6176B1863BF5E001EB327 /* Sequence6.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D617601863BF5E001EB327 /* Sequence6.png */; };
+		58D6176C1863BF5E001EB327 /* Sequence7.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D617611863BF5E001EB327 /* Sequence7.png */; };
+		58D6176D1863BF5E001EB327 /* Sequence8.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D617621863BF5E001EB327 /* Sequence8.png */; };
+		58D6176E1863BF5E001EB327 /* Sequence9.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D617631863BF5E001EB327 /* Sequence9.png */; };
+		58D6960D1864D20A00113AF2 /* SequencerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D6960B1864D20A00113AF2 /* SequencerViewController.m */; };
+		58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D6960C1864D20A00113AF2 /* SequencerViewController.xib */; };
+		58EEB7A61868EE5E0089BFD9 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A51868EE5E0089BFD9 /* libGtarController.a */; };
+		58EEB7A81868EE630089BFD9 /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A71868EE630089BFD9 /* libAudioController.a */; };
+		58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */; };
+		58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */; };
+		58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6D331B35157D40A100AA27A1 /* PBXContainerItemProxy */ = {
+		58D617301863B8D7001EB327 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6D331B06157D40A100AA27A1 /* Project object */;
+			containerPortal = 58D617021863B8D6001EB327 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6D331B0E157D40A100AA27A1;
+			remoteGlobalIDString = 58D617091863B8D6001EB327;
 			remoteInfo = gTarSequencer;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		264F142918315CFD00366268 /* sequencerInstruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sequencerInstruments.plist; sourceTree = "<group>"; };
-		2695E9F61831BF860065C9CF /* Percussion 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 0.mp3"; sourceTree = "<group>"; };
-		2695E9F71831BF860065C9CF /* Percussion 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 1.mp3"; sourceTree = "<group>"; };
-		2695E9F81831BF860065C9CF /* Percussion 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 2.mp3"; sourceTree = "<group>"; };
-		2695E9F91831BF860065C9CF /* Percussion 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 3.mp3"; sourceTree = "<group>"; };
-		2695E9FA1831BF860065C9CF /* Percussion 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 4.mp3"; sourceTree = "<group>"; };
-		2695E9FB1831BF860065C9CF /* Percussion 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 5.mp3"; sourceTree = "<group>"; };
-		2695E9FC1831BF860065C9CF /* Percussion 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 6.mp3"; sourceTree = "<group>"; };
-		2695E9FD1831BF860065C9CF /* Percussion 7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 7.mp3"; sourceTree = "<group>"; };
-		2695E9FE1831BF860065C9CF /* Percussion 8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 8.mp3"; sourceTree = "<group>"; };
-		2695E9FF1831BF860065C9CF /* Percussion 9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 9.mp3"; sourceTree = "<group>"; };
-		2695EA001831BF860065C9CF /* Percussion 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 10.mp3"; sourceTree = "<group>"; };
-		2695EA011831BF860065C9CF /* Percussion 11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 11.mp3"; sourceTree = "<group>"; };
-		2695EA021831BF860065C9CF /* Percussion 12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 12.mp3"; sourceTree = "<group>"; };
-		2695EA031831BF860065C9CF /* Percussion 13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 13.mp3"; sourceTree = "<group>"; };
-		2695EA041831BF860065C9CF /* Percussion 14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 14.mp3"; sourceTree = "<group>"; };
-		2695EA051831BF860065C9CF /* Percussion 15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 15.mp3"; sourceTree = "<group>"; };
-		2695EA061831BF860065C9CF /* Percussion 16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 16.mp3"; sourceTree = "<group>"; };
-		2695EA071831BF860065C9CF /* Percussion 17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 17.mp3"; sourceTree = "<group>"; };
-		2695EA081831BF860065C9CF /* Percussion 18.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 18.mp3"; sourceTree = "<group>"; };
-		2695EA091831BF860065C9CF /* Percussion 19.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 19.mp3"; sourceTree = "<group>"; };
-		2695EA0A1831BF860065C9CF /* Percussion 20.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 20.mp3"; sourceTree = "<group>"; };
-		2695EA0B1831BF860065C9CF /* Percussion 21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 21.mp3"; sourceTree = "<group>"; };
-		2695EA0C1831BF860065C9CF /* Percussion 22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 22.mp3"; sourceTree = "<group>"; };
-		2695EA0D1831BF860065C9CF /* Percussion 23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 23.mp3"; sourceTree = "<group>"; };
-		2695EA0E1831BF860065C9CF /* Percussion 24.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 24.mp3"; sourceTree = "<group>"; };
-		2695EA0F1831BF860065C9CF /* Percussion 25.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 25.mp3"; sourceTree = "<group>"; };
-		2695EA101831BF860065C9CF /* Percussion 26.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 26.mp3"; sourceTree = "<group>"; };
-		2695EA111831BF860065C9CF /* Percussion 27.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 27.mp3"; sourceTree = "<group>"; };
-		2695EA121831BF860065C9CF /* Percussion 28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 28.mp3"; sourceTree = "<group>"; };
-		2695EA131831BF860065C9CF /* Percussion 29.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 29.mp3"; sourceTree = "<group>"; };
-		2695EA141831BF860065C9CF /* Percussion 30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 30.mp3"; sourceTree = "<group>"; };
-		2695EA151831BF860065C9CF /* Percussion 31.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 31.mp3"; sourceTree = "<group>"; };
-		2695EA161831BF860065C9CF /* Percussion 32.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 32.mp3"; sourceTree = "<group>"; };
-		2695EA171831BF860065C9CF /* Percussion 33.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 33.mp3"; sourceTree = "<group>"; };
-		2695EA181831BF860065C9CF /* Percussion 34.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 34.mp3"; sourceTree = "<group>"; };
-		2695EA191831BF860065C9CF /* Percussion 35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 35.mp3"; sourceTree = "<group>"; };
-		2695EA1A1831BF860065C9CF /* Percussion 36.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 36.mp3"; sourceTree = "<group>"; };
-		2695EA1B1831BF860065C9CF /* Percussion 37.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 37.mp3"; sourceTree = "<group>"; };
-		2695EA1C1831BF860065C9CF /* Percussion 38.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 38.mp3"; sourceTree = "<group>"; };
-		2695EA1D1831BF860065C9CF /* Percussion 39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 39.mp3"; sourceTree = "<group>"; };
-		2695EA1E1831BF860065C9CF /* Percussion 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 40.mp3"; sourceTree = "<group>"; };
-		2695EA1F1831BF860065C9CF /* Percussion 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 41.mp3"; sourceTree = "<group>"; };
-		2695EA201831BF860065C9CF /* Percussion 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 42.mp3"; sourceTree = "<group>"; };
-		2695EA211831BF860065C9CF /* Percussion 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 43.mp3"; sourceTree = "<group>"; };
-		2695EA221831BF860065C9CF /* Percussion 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 44.mp3"; sourceTree = "<group>"; };
-		2695EA231831BF860065C9CF /* Percussion 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 45.mp3"; sourceTree = "<group>"; };
-		2695EA241831BF860065C9CF /* Percussion 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 46.mp3"; sourceTree = "<group>"; };
-		2695EA251831BF860065C9CF /* Percussion 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 47.mp3"; sourceTree = "<group>"; };
-		2695EA261831BF860065C9CF /* Percussion 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 48.mp3"; sourceTree = "<group>"; };
-		2695EA271831BF860065C9CF /* Percussion 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 49.mp3"; sourceTree = "<group>"; };
-		2695EA281831BF860065C9CF /* Percussion 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 50.mp3"; sourceTree = "<group>"; };
-		2695EA291831BF860065C9CF /* Percussion 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 51.mp3"; sourceTree = "<group>"; };
-		2695EA2A1831BF860065C9CF /* Percussion 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 52.mp3"; sourceTree = "<group>"; };
-		2695EA2B1831BF860065C9CF /* Percussion 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 53.mp3"; sourceTree = "<group>"; };
-		2695EA2C1831BF860065C9CF /* Percussion 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 54.mp3"; sourceTree = "<group>"; };
-		2695EA2D1831BF860065C9CF /* Percussion 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 55.mp3"; sourceTree = "<group>"; };
-		2695EA2E1831BF860065C9CF /* Percussion 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 56.mp3"; sourceTree = "<group>"; };
-		2695EA2F1831BF860065C9CF /* Percussion 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 57.mp3"; sourceTree = "<group>"; };
-		2695EA301831BF860065C9CF /* Percussion 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 58.mp3"; sourceTree = "<group>"; };
-		2695EA311831BF860065C9CF /* Percussion 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 59.mp3"; sourceTree = "<group>"; };
-		2695EA321831BF860065C9CF /* Percussion 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 60.mp3"; sourceTree = "<group>"; };
-		2695EA331831BF860065C9CF /* Percussion 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 61.mp3"; sourceTree = "<group>"; };
-		2695EA341831BF860065C9CF /* Percussion 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 62.mp3"; sourceTree = "<group>"; };
-		2695EA351831BF860065C9CF /* Percussion 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 63.mp3"; sourceTree = "<group>"; };
-		2695EA361831BF860065C9CF /* Percussion 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 64.mp3"; sourceTree = "<group>"; };
-		2695EA371831BF860065C9CF /* Percussion 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 65.mp3"; sourceTree = "<group>"; };
-		2695EA381831BF860065C9CF /* Percussion 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 66.mp3"; sourceTree = "<group>"; };
-		2695EA391831BF860065C9CF /* Percussion 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 67.mp3"; sourceTree = "<group>"; };
-		2695EA3A1831BF860065C9CF /* Percussion 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 68.mp3"; sourceTree = "<group>"; };
-		2695EA3B1831BF860065C9CF /* Percussion 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 69.mp3"; sourceTree = "<group>"; };
-		2695EA3C1831BF860065C9CF /* Percussion 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 70.mp3"; sourceTree = "<group>"; };
-		2695EA3D1831BF860065C9CF /* Percussion 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 71.mp3"; sourceTree = "<group>"; };
-		2695EA3E1831BF860065C9CF /* Percussion 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 72.mp3"; sourceTree = "<group>"; };
-		2695EA3F1831BF860065C9CF /* Percussion 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 73.mp3"; sourceTree = "<group>"; };
-		2695EA401831BF860065C9CF /* Percussion 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 74.mp3"; sourceTree = "<group>"; };
-		2695EA411831BF860065C9CF /* Percussion 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 75.mp3"; sourceTree = "<group>"; };
-		2695EA421831BF860065C9CF /* Percussion 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 76.mp3"; sourceTree = "<group>"; };
-		2695EA431831BF860065C9CF /* Percussion 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 77.mp3"; sourceTree = "<group>"; };
-		2695EA441831BF860065C9CF /* Percussion 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 78.mp3"; sourceTree = "<group>"; };
-		2695EA451831BF860065C9CF /* Percussion 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 79.mp3"; sourceTree = "<group>"; };
-		2695EA461831BF860065C9CF /* Percussion 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 80.mp3"; sourceTree = "<group>"; };
-		2695EA471831BF860065C9CF /* Percussion 81.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 81.mp3"; sourceTree = "<group>"; };
-		2695EA481831BF860065C9CF /* Percussion 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 82.mp3"; sourceTree = "<group>"; };
-		2695EA491831BF860065C9CF /* Percussion 83.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 83.mp3"; sourceTree = "<group>"; };
-		2695EA4A1831BF860065C9CF /* Percussion 84.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 84.mp3"; sourceTree = "<group>"; };
-		2695EA4B1831BF860065C9CF /* Percussion 85.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 85.mp3"; sourceTree = "<group>"; };
-		2695EA4C1831BF860065C9CF /* Percussion 86.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 86.mp3"; sourceTree = "<group>"; };
-		2695EA4D1831BF860065C9CF /* Percussion 87.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 87.mp3"; sourceTree = "<group>"; };
-		2695EA4E1831BF860065C9CF /* Percussion 88.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 88.mp3"; sourceTree = "<group>"; };
-		2695EA4F1831BF860065C9CF /* Percussion 89.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 89.mp3"; sourceTree = "<group>"; };
-		2695EA501831BF860065C9CF /* Percussion 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 90.mp3"; sourceTree = "<group>"; };
-		2695EA511831BF860065C9CF /* Percussion 91.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 91.mp3"; sourceTree = "<group>"; };
-		2695EA521831BF860065C9CF /* Percussion 92.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 92.mp3"; sourceTree = "<group>"; };
-		2695EA531831BF860065C9CF /* Percussion 93.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 93.mp3"; sourceTree = "<group>"; };
-		2695EA541831BF860065C9CF /* Percussion 94.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 94.mp3"; sourceTree = "<group>"; };
-		2695EA551831BF860065C9CF /* Percussion 95.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 95.mp3"; sourceTree = "<group>"; };
-		2695EA561831BF860065C9CF /* Percussion 96.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 96.mp3"; sourceTree = "<group>"; };
-		2695EA571831BF860065C9CF /* Percussion 97.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 97.mp3"; sourceTree = "<group>"; };
-		2695EA581831BF860065C9CF /* Percussion 98.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 98.mp3"; sourceTree = "<group>"; };
-		2695EA591831BF860065C9CF /* Percussion 99.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 99.mp3"; sourceTree = "<group>"; };
-		2695EA5A1831BF860065C9CF /* Percussion 100.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 100.mp3"; sourceTree = "<group>"; };
-		2695EA5B1831BF860065C9CF /* Percussion 101.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 101.mp3"; sourceTree = "<group>"; };
-		2695EAC21831DB9E0065C9CF /* Default4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default4@2x.png"; sourceTree = "<group>"; };
-		2695EAC31831DC740065C9CF /* 00-Ver2_LoadScreen-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "00-Ver2_LoadScreen-1.png"; path = "gTarSequencer/Resources/00-Ver2_LoadScreen-1.png"; sourceTree = "<group>"; };
-		26B2D6011830BF6F00DF7CE7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		26B2D6031830C21100DF7CE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		6D331B0F157D40A100AA27A1 /* gTarSequencer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarSequencer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D331B13157D40A100AA27A1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		6D331B15157D40A100AA27A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		6D331B17157D40A100AA27A1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		6D331B1B157D40A100AA27A1 /* gTarSequencer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gTarSequencer-Info.plist"; sourceTree = "<group>"; };
-		6D331B1D157D40A100AA27A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6D331B1F157D40A100AA27A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6D331B21157D40A100AA27A1 /* gTarSequencer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gTarSequencer-Prefix.pch"; sourceTree = "<group>"; };
-		6D331B22157D40A100AA27A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6D331B23157D40A100AA27A1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6D331B26157D40A100AA27A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		6D331B30157D40A100AA27A1 /* gTarSequencerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gTarSequencerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D331B31157D40A100AA27A1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		6D331B39157D40A100AA27A1 /* gTarSequencerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gTarSequencerTests-Info.plist"; sourceTree = "<group>"; };
-		6D331B3B157D40A100AA27A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6D331B3D157D40A100AA27A1 /* gTarSequencerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gTarSequencerTests.h; sourceTree = "<group>"; };
-		6D331B3E157D40A100AA27A1 /* gTarSequencerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gTarSequencerTests.m; sourceTree = "<group>"; };
-		6D331B52157D585600AA27A1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		6D331B54157D585F00AA27A1 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
-		6D77F08E1592582900059C8F /* ScrollButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollButton.h; sourceTree = "<group>"; };
-		6D77F08F1592582900059C8F /* ScrollButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollButton.m; sourceTree = "<group>"; };
-		6D9912B215B0D4E000B32116 /* Percussion 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 0.mp3"; sourceTree = "<group>"; };
-		6D9912B315B0D4E000B32116 /* Percussion 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 1.mp3"; sourceTree = "<group>"; };
-		6D9912B415B0D4E000B32116 /* Percussion 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 10.mp3"; sourceTree = "<group>"; };
-		6D9912B515B0D4E000B32116 /* Percussion 11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 11.mp3"; sourceTree = "<group>"; };
-		6D9912B615B0D4E000B32116 /* Percussion 12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 12.mp3"; sourceTree = "<group>"; };
-		6D9912B715B0D4E000B32116 /* Percussion 13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 13.mp3"; sourceTree = "<group>"; };
-		6D9912B815B0D4E000B32116 /* Percussion 14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 14.mp3"; sourceTree = "<group>"; };
-		6D9912B915B0D4E000B32116 /* Percussion 15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 15.mp3"; sourceTree = "<group>"; };
-		6D9912BA15B0D4E000B32116 /* Percussion 16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 16.mp3"; sourceTree = "<group>"; };
-		6D9912BB15B0D4E000B32116 /* Percussion 17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 17.mp3"; sourceTree = "<group>"; };
-		6D9912BC15B0D4E000B32116 /* Percussion 18.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 18.mp3"; sourceTree = "<group>"; };
-		6D9912BD15B0D4E000B32116 /* Percussion 19.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 19.mp3"; sourceTree = "<group>"; };
-		6D9912BE15B0D4E000B32116 /* Percussion 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 2.mp3"; sourceTree = "<group>"; };
-		6D9912BF15B0D4E000B32116 /* Percussion 20.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 20.mp3"; sourceTree = "<group>"; };
-		6D9912C015B0D4E000B32116 /* Percussion 21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 21.mp3"; sourceTree = "<group>"; };
-		6D9912C115B0D4E000B32116 /* Percussion 22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 22.mp3"; sourceTree = "<group>"; };
-		6D9912C215B0D4E000B32116 /* Percussion 23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 23.mp3"; sourceTree = "<group>"; };
-		6D9912C315B0D4E000B32116 /* Percussion 24.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 24.mp3"; sourceTree = "<group>"; };
-		6D9912C415B0D4E000B32116 /* Percussion 25.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 25.mp3"; sourceTree = "<group>"; };
-		6D9912C515B0D4E000B32116 /* Percussion 26.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 26.mp3"; sourceTree = "<group>"; };
-		6D9912C615B0D4E000B32116 /* Percussion 27.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 27.mp3"; sourceTree = "<group>"; };
-		6D9912C715B0D4E000B32116 /* Percussion 28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 28.mp3"; sourceTree = "<group>"; };
-		6D9912C815B0D4E000B32116 /* Percussion 29.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 29.mp3"; sourceTree = "<group>"; };
-		6D9912C915B0D4E000B32116 /* Percussion 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 3.mp3"; sourceTree = "<group>"; };
-		6D9912CA15B0D4E000B32116 /* Percussion 30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 30.mp3"; sourceTree = "<group>"; };
-		6D9912CB15B0D4E000B32116 /* Percussion 31.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 31.mp3"; sourceTree = "<group>"; };
-		6D9912CC15B0D4E000B32116 /* Percussion 32.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 32.mp3"; sourceTree = "<group>"; };
-		6D9912CD15B0D4E000B32116 /* Percussion 33.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 33.mp3"; sourceTree = "<group>"; };
-		6D9912CE15B0D4E000B32116 /* Percussion 34.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 34.mp3"; sourceTree = "<group>"; };
-		6D9912CF15B0D4E000B32116 /* Percussion 35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 35.mp3"; sourceTree = "<group>"; };
-		6D9912D015B0D4E000B32116 /* Percussion 36.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 36.mp3"; sourceTree = "<group>"; };
-		6D9912D115B0D4E000B32116 /* Percussion 37.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 37.mp3"; sourceTree = "<group>"; };
-		6D9912D215B0D4E000B32116 /* Percussion 38.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 38.mp3"; sourceTree = "<group>"; };
-		6D9912D315B0D4E000B32116 /* Percussion 39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 39.mp3"; sourceTree = "<group>"; };
-		6D9912D415B0D4E000B32116 /* Percussion 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 4.mp3"; sourceTree = "<group>"; };
-		6D9912D515B0D4E100B32116 /* Percussion 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 40.mp3"; sourceTree = "<group>"; };
-		6D9912D615B0D4E100B32116 /* Percussion 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 5.mp3"; sourceTree = "<group>"; };
-		6D9912D715B0D4E100B32116 /* Percussion 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 6.mp3"; sourceTree = "<group>"; };
-		6D9912D815B0D4E100B32116 /* Percussion 7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 7.mp3"; sourceTree = "<group>"; };
-		6D9912D915B0D4E100B32116 /* Percussion 8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 8.mp3"; sourceTree = "<group>"; };
-		6D9912DA15B0D4E100B32116 /* Percussion 9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 9.mp3"; sourceTree = "<group>"; };
-		6D99E688159396B7005F1119 /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
-		6D99E689159396B7005F1119 /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
-		6D9CF03C159A36CC00DCDFD2 /* GuitarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarView.h; sourceTree = "<group>"; };
-		6D9CF03D159A36CC00DCDFD2 /* GuitarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarView.m; sourceTree = "<group>"; };
-		6DBE610C157D612B00729E25 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
-		6DBE64BC157D645B00729E25 /* SEQNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEQNote.h; sourceTree = "<group>"; };
-		6DBE64BD157D645B00729E25 /* SEQNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEQNote.m; sourceTree = "<group>"; };
-		6DBE64C2157E7A4C00729E25 /* Measure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Measure.h; sourceTree = "<group>"; };
-		6DD8EAB315B73960004B5AAF /* MeasureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureView.h; sourceTree = "<group>"; };
-		6DD8EAB415B73960004B5AAF /* MeasureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureView.m; sourceTree = "<group>"; };
-		EC24E02F161BD71800016B78 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAudioController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC24E030161BD71800016B78 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGtarController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC37BE45160C42F000E6277D /* RadialDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialDisplay.h; sourceTree = "<group>"; };
-		EC37BE46160C42F100E6277D /* RadialDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialDisplay.m; sourceTree = "<group>"; };
-		EC37BE49160C430A00E6277D /* ScrollingSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingSelector.h; sourceTree = "<group>"; };
-		EC37BE4A160C430B00E6277D /* ScrollingSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingSelector.m; sourceTree = "<group>"; };
-		EC37BE4D160C432000E6277D /* TouchCatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchCatcher.h; sourceTree = "<group>"; };
-		EC37BE4E160C432000E6277D /* TouchCatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchCatcher.m; sourceTree = "<group>"; };
-		EC37BE51160C435A00E6277D /* Instrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instrument.h; sourceTree = "<group>"; };
-		EC37BE52160C435A00E6277D /* Instrument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instrument.m; sourceTree = "<group>"; };
-		EC37BE53160C435B00E6277D /* Measure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Measure.h; sourceTree = "<group>"; };
-		EC37BE54160C435C00E6277D /* Measure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Measure.m; sourceTree = "<group>"; };
-		EC37BE55160C435C00E6277D /* Pattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pattern.h; sourceTree = "<group>"; };
-		EC37BE56160C435D00E6277D /* Pattern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pattern.m; sourceTree = "<group>"; };
-		EC37BE59160C435E00E6277D /* SoundMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundMaker.h; sourceTree = "<group>"; };
-		EC37BE5A160C435E00E6277D /* SoundMaker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundMaker.mm; sourceTree = "<group>"; };
-		EC37BE65160C44DE00E6277D /* gTarSequencerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarSequencerViewController.h; sourceTree = "<group>"; };
-		EC37BE66160C44DF00E6277D /* gTarSequencerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarSequencerViewController.m; sourceTree = "<group>"; };
-		EC37BE69160C44F100E6277D /* LoadingAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingAnimationViewController.h; sourceTree = "<group>"; };
-		EC37BE6A160C44F100E6277D /* LoadingAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimationViewController.m; sourceTree = "<group>"; };
-		EC37BE6D160C459600E6277D /* Add_Instrument.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Add_Instrument.png; sourceTree = "<group>"; };
-		EC37BE6E160C459600E6277D /* Arrow_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow_Left.png; sourceTree = "<group>"; };
-		EC37BE6F160C459600E6277D /* Arrow_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow_Right.png; sourceTree = "<group>"; };
-		EC37BE70160C459600E6277D /* BackButton_InstrumentSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButton_InstrumentSelect.png; sourceTree = "<group>"; };
-		EC37BE71160C459600E6277D /* Button_A_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_A_OFF.png; sourceTree = "<group>"; };
-		EC37BE72160C459600E6277D /* Button_A_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_A_ON.png; sourceTree = "<group>"; };
-		EC37BE73160C459600E6277D /* Button_Add_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_Add_OFF.png; sourceTree = "<group>"; };
-		EC37BE74160C459600E6277D /* Button_Add_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_Add_ON.png; sourceTree = "<group>"; };
-		EC37BE75160C459700E6277D /* Button_B_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_B_OFF.png; sourceTree = "<group>"; };
-		EC37BE76160C459700E6277D /* Button_B_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_B_ON.png; sourceTree = "<group>"; };
-		EC37BE77160C459700E6277D /* Button_C_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_C_OFF.png; sourceTree = "<group>"; };
-		EC37BE78160C459700E6277D /* Button_C_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_C_ON.png; sourceTree = "<group>"; };
-		EC37BE79160C459700E6277D /* Button_D_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_D_OFF.png; sourceTree = "<group>"; };
-		EC37BE7A160C459700E6277D /* Button_D_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_D_ON.png; sourceTree = "<group>"; };
-		EC37BE7B160C459700E6277D /* Button_Minus_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_Minus_OFF.png; sourceTree = "<group>"; };
-		EC37BE7C160C459700E6277D /* Button_Minus_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_Minus_ON.png; sourceTree = "<group>"; };
-		EC37BE7D160C459700E6277D /* Button_OFF_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_OFF_OFF.png; sourceTree = "<group>"; };
-		EC37BE7E160C459700E6277D /* Button_OFF_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_OFF_ON.png; sourceTree = "<group>"; };
-		EC37BE7F160C459700E6277D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		EC37BE80160C459700E6277D /* DrumButton_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DrumButton_OFF.png; sourceTree = "<group>"; };
-		EC37BE81160C459700E6277D /* DrumButton_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DrumButton_ON.png; sourceTree = "<group>"; };
-		EC37BE82160C459700E6277D /* gTarbyIncidentLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoading.png; sourceTree = "<group>"; };
-		EC37BE83160C459700E6277D /* gTarConnectedLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarConnectedLogo.png; sourceTree = "<group>"; };
-		EC37BE84160C459700E6277D /* gTarNotConnectedLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarNotConnectedLogo.png; sourceTree = "<group>"; };
-		EC37BE85160C459700E6277D /* GuitarButton_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GuitarButton_OFF.png; sourceTree = "<group>"; };
-		EC37BE86160C459700E6277D /* GuitarButton_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GuitarButton_ON.png; sourceTree = "<group>"; };
-		EC37BE87160C459700E6277D /* Icon_Guitar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Guitar.png; sourceTree = "<group>"; };
-		EC37BE88160C459700E6277D /* Icon_Percussion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Percussion.png; sourceTree = "<group>"; };
-		EC37BE89160C459700E6277D /* Icon_Piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Piano.png; sourceTree = "<group>"; };
-		EC37BE8A160C459700E6277D /* Icon_Trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trash.png; sourceTree = "<group>"; };
-		EC37BE8B160C459700E6277D /* Icon_WubWub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_WubWub.png; sourceTree = "<group>"; };
-		EC37BE8C160C459700E6277D /* InstrumentsCopy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InstrumentsCopy.png; sourceTree = "<group>"; };
-		EC37BE8D160C459700E6277D /* InstrumentSelectScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InstrumentSelectScreen.png; sourceTree = "<group>"; };
-		EC37BE8E160C459800E6277D /* PauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PauseButton.png; sourceTree = "<group>"; };
-		EC37BE8F160C459800E6277D /* PianoButton_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PianoButton_OFF.png; sourceTree = "<group>"; };
-		EC37BE90160C459800E6277D /* PianoButton_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PianoButton_ON.png; sourceTree = "<group>"; };
-		EC37BE91160C459800E6277D /* PlayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButton.png; sourceTree = "<group>"; };
-		EC37BE92160C459800E6277D /* Sequence1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence1.png; sourceTree = "<group>"; };
-		EC37BE93160C459800E6277D /* Sequence2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence2.png; sourceTree = "<group>"; };
-		EC37BE94160C459800E6277D /* Sequence3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence3.png; sourceTree = "<group>"; };
-		EC37BE95160C459800E6277D /* Sequence4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence4.png; sourceTree = "<group>"; };
-		EC37BE96160C459800E6277D /* Sequence5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence5.png; sourceTree = "<group>"; };
-		EC37BE97160C459800E6277D /* Sequence6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence6.png; sourceTree = "<group>"; };
-		EC37BE98160C459800E6277D /* Sequence7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence7.png; sourceTree = "<group>"; };
-		EC37BE99160C459800E6277D /* Sequence8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence8.png; sourceTree = "<group>"; };
-		EC37BE9A160C459800E6277D /* Sequence9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence9.png; sourceTree = "<group>"; };
-		EC37BE9B160C459800E6277D /* Sequence10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence10.png; sourceTree = "<group>"; };
-		EC37BE9C160C459800E6277D /* Sequence11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence11.png; sourceTree = "<group>"; };
-		EC37BE9D160C459800E6277D /* Sequencer_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon.png; sourceTree = "<group>"; };
-		EC37BE9E160C459800E6277D /* TempoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TempoButton.png; sourceTree = "<group>"; };
-		EC37BE9F160C459800E6277D /* Text_Connected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Text_Connected.png; sourceTree = "<group>"; };
-		EC37BEA0160C459800E6277D /* Text_NotConnected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Text_NotConnected.png; sourceTree = "<group>"; };
-		EC37BEA1160C459800E6277D /* WubButton_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WubButton_OFF.png; sourceTree = "<group>"; };
-		EC37BEA2160C459800E6277D /* WubButton_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WubButton_ON.png; sourceTree = "<group>"; };
-		EC37BF0F160C45FC00E6277D /* InstrumentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentCell.h; sourceTree = "<group>"; };
-		EC37BF10160C45FD00E6277D /* InstrumentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentCell.m; sourceTree = "<group>"; };
+		580A51EF1864DFF50077240B /* DrumButton_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DrumButton_OFF.png; sourceTree = "<group>"; };
+		580A51F01864DFF50077240B /* DrumButton_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DrumButton_ON.png; sourceTree = "<group>"; };
+		580A51F11864DFF50077240B /* gTarConnectedLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarConnectedLogo.png; sourceTree = "<group>"; };
+		580A51F21864DFF50077240B /* gTarNotConnectedLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarNotConnectedLogo.png; sourceTree = "<group>"; };
+		580A51F31864DFF50077240B /* GuitarButton_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GuitarButton_OFF.png; sourceTree = "<group>"; };
+		580A51F41864DFF50077240B /* GuitarButton_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GuitarButton_ON.png; sourceTree = "<group>"; };
+		580A51F51864DFF50077240B /* Icon_Guitar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Guitar.png; sourceTree = "<group>"; };
+		580A51F61864DFF50077240B /* Icon_Percussion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Percussion.png; sourceTree = "<group>"; };
+		580A51F71864DFF50077240B /* Icon_Piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Piano.png; sourceTree = "<group>"; };
+		580A51F81864DFF50077240B /* Icon_Trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trash.png; sourceTree = "<group>"; };
+		580A51F91864DFF50077240B /* Icon_WubWub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_WubWub.png; sourceTree = "<group>"; };
+		580A51FA1864DFF50077240B /* PianoButton_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PianoButton_OFF.png; sourceTree = "<group>"; };
+		580A51FB1864DFF50077240B /* PianoButton_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PianoButton_ON.png; sourceTree = "<group>"; };
+		580A51FD1864DFF50077240B /* WubButton_OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WubButton_OFF.png; sourceTree = "<group>"; };
+		580A51FE1864DFF50077240B /* WubButton_ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WubButton_ON.png; sourceTree = "<group>"; };
+		580A52121864E0DF0077240B /* Sequencer_Icon58px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon58px.png; sourceTree = "<group>"; };
+		580A52131864E0DF0077240B /* Sequencer_Icon80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon80px.png; sourceTree = "<group>"; };
+		580A52141864E0DF0077240B /* Sequencer_Icon120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon120px.png; sourceTree = "<group>"; };
+		5840858518652D9000BFF3C5 /* InstrumentTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentTableView.xib; sourceTree = "<group>"; };
+		584085871865355300BFF3C5 /* sequencerInstruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sequencerInstruments.plist; sourceTree = "<group>"; };
+		5840858B18653B5B00BFF3C5 /* InstrumentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewCell.h; sourceTree = "<group>"; };
+		5840858C18653B5C00BFF3C5 /* InstrumentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewCell.m; sourceTree = "<group>"; };
+		5840858E18653B6F00BFF3C5 /* InstrumentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentTableViewCell.xib; sourceTree = "<group>"; };
+		584085931868C33700BFF3C5 /* GuitarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarView.h; sourceTree = "<group>"; };
+		584085941868C33700BFF3C5 /* GuitarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarView.m; sourceTree = "<group>"; };
+		58547AE2186CD55B003638EF /* RadialButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialButton.h; sourceTree = "<group>"; };
+		58547AE3186CD55C003638EF /* RadialButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialButton.m; sourceTree = "<group>"; };
+		58547AE6186CD5EF003638EF /* RadialDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialDisplay.h; sourceTree = "<group>"; };
+		58547AE7186CD5EF003638EF /* RadialDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialDisplay.m; sourceTree = "<group>"; };
+		58547AE9186CD6AF003638EF /* ScrollingSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingSelector.h; sourceTree = "<group>"; };
+		58547AEA186CD6AF003638EF /* ScrollingSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingSelector.m; sourceTree = "<group>"; };
+		5894D618186505BD00849C71 /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
+		5894D619186505BD00849C71 /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
+		58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoading.png; sourceTree = "<group>"; };
+		58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoadingWide.png; sourceTree = "<group>"; };
+		58D6170A1863B8D6001EB327 /* gTarSequencer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarSequencer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D6170D1863B8D6001EB327 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		58D6170F1863B8D6001EB327 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		58D617111863B8D6001EB327 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		58D617151863B8D7001EB327 /* gTarSequencer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gTarSequencer-Info.plist"; sourceTree = "<group>"; };
+		58D617171863B8D7001EB327 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		58D617191863B8D7001EB327 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		58D6171B1863B8D7001EB327 /* gTarSequencer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gTarSequencer-Prefix.pch"; sourceTree = "<group>"; };
+		58D6171C1863B8D7001EB327 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		58D6171D1863B8D7001EB327 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		58D617221863B8D7001EB327 /* LoadingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
+		58D617231863B8D7001EB327 /* LoadingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
+		58D617251863B8D7001EB327 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		58D6172B1863B8D7001EB327 /* gTarSequencerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gTarSequencerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D6172C1863B8D7001EB327 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		58D617341863B8D7001EB327 /* gTarSequencerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gTarSequencerTests-Info.plist"; sourceTree = "<group>"; };
+		58D617361863B8D7001EB327 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		58D617381863B8D7001EB327 /* gTarSequencerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gTarSequencerTests.m; sourceTree = "<group>"; };
+		58D617591863BF5E001EB327 /* Sequence1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence1.png; sourceTree = "<group>"; };
+		58D6175A1863BF5E001EB327 /* Sequence10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence10.png; sourceTree = "<group>"; };
+		58D6175B1863BF5E001EB327 /* Sequence11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence11.png; sourceTree = "<group>"; };
+		58D6175C1863BF5E001EB327 /* Sequence2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence2.png; sourceTree = "<group>"; };
+		58D6175D1863BF5E001EB327 /* Sequence3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence3.png; sourceTree = "<group>"; };
+		58D6175E1863BF5E001EB327 /* Sequence4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence4.png; sourceTree = "<group>"; };
+		58D6175F1863BF5E001EB327 /* Sequence5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence5.png; sourceTree = "<group>"; };
+		58D617601863BF5E001EB327 /* Sequence6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence6.png; sourceTree = "<group>"; };
+		58D617611863BF5E001EB327 /* Sequence7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence7.png; sourceTree = "<group>"; };
+		58D617621863BF5E001EB327 /* Sequence8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence8.png; sourceTree = "<group>"; };
+		58D617631863BF5E001EB327 /* Sequence9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence9.png; sourceTree = "<group>"; };
+		58D6960A1864D20A00113AF2 /* SequencerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerViewController.h; sourceTree = "<group>"; };
+		58D6960B1864D20A00113AF2 /* SequencerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequencerViewController.m; sourceTree = "<group>"; };
+		58D6960C1864D20A00113AF2 /* SequencerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SequencerViewController.xib; sourceTree = "<group>"; };
+		58EEB7A51868EE5E0089BFD9 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../GtarSdk/GtarController/build/Debug-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
+		58EEB7A71868EE630089BFD9 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioController.a; path = "../GtarSdk/AudioController/build/Debug-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
+		58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6D331B0C157D40A100AA27A1 /* Frameworks */ = {
+		58D617071863B8D6001EB327 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26B2D6041830C21100DF7CE7 /* AVFoundation.framework in Frameworks */,
-				26B2D6021830BF6F00DF7CE7 /* libc++.dylib in Frameworks */,
-				EC24E031161BD71900016B78 /* libAudioController.a in Frameworks */,
-				EC24E032161BD71900016B78 /* libGtarController.a in Frameworks */,
-				6D331B55157D585F00AA27A1 /* CoreMIDI.framework in Frameworks */,
-				6D331B53157D585600AA27A1 /* AudioToolbox.framework in Frameworks */,
-				6D331B14157D40A100AA27A1 /* UIKit.framework in Frameworks */,
-				6D331B16157D40A100AA27A1 /* Foundation.framework in Frameworks */,
-				6D331B18157D40A100AA27A1 /* CoreGraphics.framework in Frameworks */,
+				58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */,
+				58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */,
+				58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */,
+				58EEB7A81868EE630089BFD9 /* libAudioController.a in Frameworks */,
+				58EEB7A61868EE5E0089BFD9 /* libGtarController.a in Frameworks */,
+				58D617101863B8D6001EB327 /* CoreGraphics.framework in Frameworks */,
+				58D617121863B8D6001EB327 /* UIKit.framework in Frameworks */,
+				58D6170E1863B8D6001EB327 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6D331B2C157D40A100AA27A1 /* Frameworks */ = {
+		58D617281863B8D7001EB327 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D331B32157D40A100AA27A1 /* SenTestingKit.framework in Frameworks */,
-				6D331B33157D40A100AA27A1 /* UIKit.framework in Frameworks */,
-				6D331B34157D40A100AA27A1 /* Foundation.framework in Frameworks */,
+				58D6172D1863B8D7001EB327 /* XCTest.framework in Frameworks */,
+				58D6172F1863B8D7001EB327 /* UIKit.framework in Frameworks */,
+				58D6172E1863B8D7001EB327 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6D331B04157D40A100AA27A1 = {
+		580A520F1864E0170077240B /* Sequence */ = {
 			isa = PBXGroup;
 			children = (
-				2695EAC31831DC740065C9CF /* 00-Ver2_LoadScreen-1.png */,
-				6D331B19157D40A100AA27A1 /* gTarSequencer */,
-				6D331B37157D40A100AA27A1 /* gTarSequencerTests */,
-				6D331B12157D40A100AA27A1 /* Frameworks */,
-				6D331B10157D40A100AA27A1 /* Products */,
+				58D617591863BF5E001EB327 /* Sequence1.png */,
+				58D6175A1863BF5E001EB327 /* Sequence10.png */,
+				58D6175B1863BF5E001EB327 /* Sequence11.png */,
+				58D6175C1863BF5E001EB327 /* Sequence2.png */,
+				58D6175D1863BF5E001EB327 /* Sequence3.png */,
+				58D6175E1863BF5E001EB327 /* Sequence4.png */,
+				58D6175F1863BF5E001EB327 /* Sequence5.png */,
+				58D617601863BF5E001EB327 /* Sequence6.png */,
+				58D617611863BF5E001EB327 /* Sequence7.png */,
+				58D617621863BF5E001EB327 /* Sequence8.png */,
+				58D617631863BF5E001EB327 /* Sequence9.png */,
+			);
+			name = Sequence;
+			sourceTree = "<group>";
+		};
+		580A52101864E0230077240B /* Instrument Icons */ = {
+			isa = PBXGroup;
+			children = (
+				580A51F51864DFF50077240B /* Icon_Guitar.png */,
+				580A51F61864DFF50077240B /* Icon_Percussion.png */,
+				580A51F71864DFF50077240B /* Icon_Piano.png */,
+				580A51F81864DFF50077240B /* Icon_Trash.png */,
+				580A51F91864DFF50077240B /* Icon_WubWub.png */,
+				580A51EF1864DFF50077240B /* DrumButton_OFF.png */,
+				580A51F01864DFF50077240B /* DrumButton_ON.png */,
+				580A51F31864DFF50077240B /* GuitarButton_OFF.png */,
+				580A51F41864DFF50077240B /* GuitarButton_ON.png */,
+				580A51FA1864DFF50077240B /* PianoButton_OFF.png */,
+				580A51FB1864DFF50077240B /* PianoButton_ON.png */,
+				580A51FD1864DFF50077240B /* WubButton_OFF.png */,
+				580A51FE1864DFF50077240B /* WubButton_ON.png */,
+			);
+			name = "Instrument Icons";
+			sourceTree = "<group>";
+		};
+		580A52111864E0430077240B /* Logos | Icons */ = {
+			isa = PBXGroup;
+			children = (
+				580A52121864E0DF0077240B /* Sequencer_Icon58px.png */,
+				580A52131864E0DF0077240B /* Sequencer_Icon80px.png */,
+				580A52141864E0DF0077240B /* Sequencer_Icon120px.png */,
+				580A51F11864DFF50077240B /* gTarConnectedLogo.png */,
+				580A51F21864DFF50077240B /* gTarNotConnectedLogo.png */,
+				58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */,
+				58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */,
+			);
+			name = "Logos | Icons";
+			sourceTree = "<group>";
+		};
+		580A52181864F7FC0077240B /* InstrumentTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5894D618186505BD00849C71 /* InstrumentTableViewController.h */,
+				5894D619186505BD00849C71 /* InstrumentTableViewController.m */,
+				5840858518652D9000BFF3C5 /* InstrumentTableView.xib */,
+				5840858A18653AF900BFF3C5 /* InstrumentTableViewCell */,
+			);
+			name = InstrumentTableViewController;
+			sourceTree = "<group>";
+		};
+		5840858918653A8F00BFF3C5 /* BottomBar */ = {
+			isa = PBXGroup;
+			children = (
+				584085921868C2F900BFF3C5 /* GuitarView */,
+				58547AE1186CD52F003638EF /* RadialButton */,
+			);
+			name = BottomBar;
+			sourceTree = "<group>";
+		};
+		5840858A18653AF900BFF3C5 /* InstrumentTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5840858B18653B5B00BFF3C5 /* InstrumentTableViewCell.h */,
+				5840858C18653B5C00BFF3C5 /* InstrumentTableViewCell.m */,
+				5840858E18653B6F00BFF3C5 /* InstrumentTableViewCell.xib */,
+			);
+			name = InstrumentTableViewCell;
+			sourceTree = "<group>";
+		};
+		5840859018653C3800BFF3C5 /* ScrollingSelectorController */ = {
+			isa = PBXGroup;
+			children = (
+				58547AEC186CD6B4003638EF /* ScrollingSelector */,
+			);
+			name = ScrollingSelectorController;
+			sourceTree = "<group>";
+		};
+		5840859118653C7200BFF3C5 /* TouchCatcher */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TouchCatcher;
+			sourceTree = "<group>";
+		};
+		584085921868C2F900BFF3C5 /* GuitarView */ = {
+			isa = PBXGroup;
+			children = (
+				584085931868C33700BFF3C5 /* GuitarView.h */,
+				584085941868C33700BFF3C5 /* GuitarView.m */,
+			);
+			name = GuitarView;
+			sourceTree = "<group>";
+		};
+		58547AE1186CD52F003638EF /* RadialButton */ = {
+			isa = PBXGroup;
+			children = (
+				58547AE5186CD5C2003638EF /* RadialDisplay */,
+				58547AE2186CD55B003638EF /* RadialButton.h */,
+				58547AE3186CD55C003638EF /* RadialButton.m */,
+			);
+			name = RadialButton;
+			sourceTree = "<group>";
+		};
+		58547AE5186CD5C2003638EF /* RadialDisplay */ = {
+			isa = PBXGroup;
+			children = (
+				58547AE6186CD5EF003638EF /* RadialDisplay.h */,
+				58547AE7186CD5EF003638EF /* RadialDisplay.m */,
+			);
+			name = RadialDisplay;
+			sourceTree = "<group>";
+		};
+		58547AEC186CD6B4003638EF /* ScrollingSelector */ = {
+			isa = PBXGroup;
+			children = (
+				58547AE9186CD6AF003638EF /* ScrollingSelector.h */,
+				58547AEA186CD6AF003638EF /* ScrollingSelector.m */,
+			);
+			name = ScrollingSelector;
+			sourceTree = "<group>";
+		};
+		58D617011863B8D6001EB327 = {
+			isa = PBXGroup;
+			children = (
+				58D617131863B8D6001EB327 /* gTarSequencer */,
+				58D617581863BF5E001EB327 /* Resources */,
+				58D617321863B8D7001EB327 /* gTarSequencerTests */,
+				58D6170C1863B8D6001EB327 /* Frameworks */,
+				58D6170B1863B8D6001EB327 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		6D331B10157D40A100AA27A1 /* Products */ = {
+		58D6170B1863B8D6001EB327 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6D331B0F157D40A100AA27A1 /* gTarSequencer.app */,
-				6D331B30157D40A100AA27A1 /* gTarSequencerTests.octest */,
+				58D6170A1863B8D6001EB327 /* gTarSequencer.app */,
+				58D6172B1863B8D7001EB327 /* gTarSequencerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6D331B12157D40A100AA27A1 /* Frameworks */ = {
+		58D6170C1863B8D6001EB327 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				26B2D6031830C21100DF7CE7 /* AVFoundation.framework */,
-				26B2D6011830BF6F00DF7CE7 /* libc++.dylib */,
-				EC24E02F161BD71800016B78 /* libAudioController.a */,
-				EC24E030161BD71800016B78 /* libGtarController.a */,
-				6D331B54157D585F00AA27A1 /* CoreMIDI.framework */,
-				6D331B52157D585600AA27A1 /* AudioToolbox.framework */,
-				6D331B13157D40A100AA27A1 /* UIKit.framework */,
-				6D331B15157D40A100AA27A1 /* Foundation.framework */,
-				6D331B17157D40A100AA27A1 /* CoreGraphics.framework */,
-				6D331B31157D40A100AA27A1 /* SenTestingKit.framework */,
+				58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */,
+				58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */,
+				58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */,
+				58EEB7A71868EE630089BFD9 /* libAudioController.a */,
+				58EEB7A51868EE5E0089BFD9 /* libGtarController.a */,
+				58D6170D1863B8D6001EB327 /* Foundation.framework */,
+				58D6170F1863B8D6001EB327 /* CoreGraphics.framework */,
+				58D617111863B8D6001EB327 /* UIKit.framework */,
+				58D6172C1863B8D7001EB327 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6D331B19157D40A100AA27A1 /* gTarSequencer */ = {
+		58D617131863B8D6001EB327 /* gTarSequencer */ = {
 			isa = PBXGroup;
 			children = (
-				264F142918315CFD00366268 /* sequencerInstruments.plist */,
-				6D331B22157D40A100AA27A1 /* AppDelegate.h */,
-				6D331B23157D40A100AA27A1 /* AppDelegate.m */,
-				EC37BE69160C44F100E6277D /* LoadingAnimationViewController.h */,
-				EC37BE6A160C44F100E6277D /* LoadingAnimationViewController.m */,
-				EC37BE65160C44DE00E6277D /* gTarSequencerViewController.h */,
-				EC37BE66160C44DF00E6277D /* gTarSequencerViewController.m */,
-				6D331B25157D40A100AA27A1 /* MainStoryboard.storyboard */,
-				6D9CF02C159532B400DCDFD2 /* View */,
-				6D9CF02E159532E400DCDFD2 /* Model */,
-				6DBE605F157D612A00729E25 /* Resources */,
-				6D331B1A157D40A100AA27A1 /* Supporting Files */,
+				58D6171C1863B8D7001EB327 /* AppDelegate.h */,
+				58D6171D1863B8D7001EB327 /* AppDelegate.m */,
+				58D617561863BD81001EB327 /* LoadingViewController */,
+				58D6960F1864D23100113AF2 /* SequencerViewController */,
+				5840859118653C7200BFF3C5 /* TouchCatcher */,
+				58D617251863B8D7001EB327 /* Images.xcassets */,
+				58D617141863B8D7001EB327 /* Supporting Files */,
 			);
 			path = gTarSequencer;
 			sourceTree = "<group>";
 		};
-		6D331B1A157D40A100AA27A1 /* Supporting Files */ = {
+		58D617141863B8D7001EB327 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6D331B1B157D40A100AA27A1 /* gTarSequencer-Info.plist */,
-				6D331B1C157D40A100AA27A1 /* InfoPlist.strings */,
-				6D331B1F157D40A100AA27A1 /* main.m */,
-				6D331B21157D40A100AA27A1 /* gTarSequencer-Prefix.pch */,
+				58D617151863B8D7001EB327 /* gTarSequencer-Info.plist */,
+				58D617161863B8D7001EB327 /* InfoPlist.strings */,
+				58D617191863B8D7001EB327 /* main.m */,
+				58D6171B1863B8D7001EB327 /* gTarSequencer-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6D331B37157D40A100AA27A1 /* gTarSequencerTests */ = {
+		58D617321863B8D7001EB327 /* gTarSequencerTests */ = {
 			isa = PBXGroup;
 			children = (
-				6D331B3D157D40A100AA27A1 /* gTarSequencerTests.h */,
-				6D331B3E157D40A100AA27A1 /* gTarSequencerTests.m */,
-				6D331B38157D40A100AA27A1 /* Supporting Files */,
+				58D617381863B8D7001EB327 /* gTarSequencerTests.m */,
 			);
 			path = gTarSequencerTests;
 			sourceTree = "<group>";
 		};
-		6D331B38157D40A100AA27A1 /* Supporting Files */ = {
+		58D617331863B8D7001EB327 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6D331B39157D40A100AA27A1 /* gTarSequencerTests-Info.plist */,
-				6D331B3A157D40A100AA27A1 /* InfoPlist.strings */,
+				58D617341863B8D7001EB327 /* gTarSequencerTests-Info.plist */,
+				58D617351863B8D7001EB327 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
+			path = gTarSequencerTests;
+			sourceTree = SOURCE_ROOT;
 		};
-		6D9912B115B0D4E000B32116 /* Percussion */ = {
+		58D617561863BD81001EB327 /* LoadingViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2695E9F61831BF860065C9CF /* Percussion 0.mp3 */,
-				2695E9F71831BF860065C9CF /* Percussion 1.mp3 */,
-				2695E9F81831BF860065C9CF /* Percussion 2.mp3 */,
-				2695E9F91831BF860065C9CF /* Percussion 3.mp3 */,
-				2695E9FA1831BF860065C9CF /* Percussion 4.mp3 */,
-				2695E9FB1831BF860065C9CF /* Percussion 5.mp3 */,
-				2695E9FC1831BF860065C9CF /* Percussion 6.mp3 */,
-				2695E9FD1831BF860065C9CF /* Percussion 7.mp3 */,
-				2695E9FE1831BF860065C9CF /* Percussion 8.mp3 */,
-				2695E9FF1831BF860065C9CF /* Percussion 9.mp3 */,
-				2695EA001831BF860065C9CF /* Percussion 10.mp3 */,
-				2695EA011831BF860065C9CF /* Percussion 11.mp3 */,
-				2695EA021831BF860065C9CF /* Percussion 12.mp3 */,
-				2695EA031831BF860065C9CF /* Percussion 13.mp3 */,
-				2695EA041831BF860065C9CF /* Percussion 14.mp3 */,
-				2695EA051831BF860065C9CF /* Percussion 15.mp3 */,
-				2695EA061831BF860065C9CF /* Percussion 16.mp3 */,
-				2695EA071831BF860065C9CF /* Percussion 17.mp3 */,
-				2695EA081831BF860065C9CF /* Percussion 18.mp3 */,
-				2695EA091831BF860065C9CF /* Percussion 19.mp3 */,
-				2695EA0A1831BF860065C9CF /* Percussion 20.mp3 */,
-				2695EA0B1831BF860065C9CF /* Percussion 21.mp3 */,
-				2695EA0C1831BF860065C9CF /* Percussion 22.mp3 */,
-				2695EA0D1831BF860065C9CF /* Percussion 23.mp3 */,
-				2695EA0E1831BF860065C9CF /* Percussion 24.mp3 */,
-				2695EA0F1831BF860065C9CF /* Percussion 25.mp3 */,
-				2695EA101831BF860065C9CF /* Percussion 26.mp3 */,
-				2695EA111831BF860065C9CF /* Percussion 27.mp3 */,
-				2695EA121831BF860065C9CF /* Percussion 28.mp3 */,
-				2695EA131831BF860065C9CF /* Percussion 29.mp3 */,
-				2695EA141831BF860065C9CF /* Percussion 30.mp3 */,
-				2695EA151831BF860065C9CF /* Percussion 31.mp3 */,
-				2695EA161831BF860065C9CF /* Percussion 32.mp3 */,
-				2695EA171831BF860065C9CF /* Percussion 33.mp3 */,
-				2695EA181831BF860065C9CF /* Percussion 34.mp3 */,
-				2695EA191831BF860065C9CF /* Percussion 35.mp3 */,
-				2695EA1A1831BF860065C9CF /* Percussion 36.mp3 */,
-				2695EA1B1831BF860065C9CF /* Percussion 37.mp3 */,
-				2695EA1C1831BF860065C9CF /* Percussion 38.mp3 */,
-				2695EA1D1831BF860065C9CF /* Percussion 39.mp3 */,
-				2695EA1E1831BF860065C9CF /* Percussion 40.mp3 */,
-				2695EA1F1831BF860065C9CF /* Percussion 41.mp3 */,
-				2695EA201831BF860065C9CF /* Percussion 42.mp3 */,
-				2695EA211831BF860065C9CF /* Percussion 43.mp3 */,
-				2695EA221831BF860065C9CF /* Percussion 44.mp3 */,
-				2695EA231831BF860065C9CF /* Percussion 45.mp3 */,
-				2695EA241831BF860065C9CF /* Percussion 46.mp3 */,
-				2695EA251831BF860065C9CF /* Percussion 47.mp3 */,
-				2695EA261831BF860065C9CF /* Percussion 48.mp3 */,
-				2695EA271831BF860065C9CF /* Percussion 49.mp3 */,
-				2695EA281831BF860065C9CF /* Percussion 50.mp3 */,
-				2695EA291831BF860065C9CF /* Percussion 51.mp3 */,
-				2695EA2A1831BF860065C9CF /* Percussion 52.mp3 */,
-				2695EA2B1831BF860065C9CF /* Percussion 53.mp3 */,
-				2695EA2C1831BF860065C9CF /* Percussion 54.mp3 */,
-				2695EA2D1831BF860065C9CF /* Percussion 55.mp3 */,
-				2695EA2E1831BF860065C9CF /* Percussion 56.mp3 */,
-				2695EA2F1831BF860065C9CF /* Percussion 57.mp3 */,
-				2695EA301831BF860065C9CF /* Percussion 58.mp3 */,
-				2695EA311831BF860065C9CF /* Percussion 59.mp3 */,
-				2695EA321831BF860065C9CF /* Percussion 60.mp3 */,
-				2695EA331831BF860065C9CF /* Percussion 61.mp3 */,
-				2695EA341831BF860065C9CF /* Percussion 62.mp3 */,
-				2695EA351831BF860065C9CF /* Percussion 63.mp3 */,
-				2695EA361831BF860065C9CF /* Percussion 64.mp3 */,
-				2695EA371831BF860065C9CF /* Percussion 65.mp3 */,
-				2695EA381831BF860065C9CF /* Percussion 66.mp3 */,
-				2695EA391831BF860065C9CF /* Percussion 67.mp3 */,
-				2695EA3A1831BF860065C9CF /* Percussion 68.mp3 */,
-				2695EA3B1831BF860065C9CF /* Percussion 69.mp3 */,
-				2695EA3C1831BF860065C9CF /* Percussion 70.mp3 */,
-				2695EA3D1831BF860065C9CF /* Percussion 71.mp3 */,
-				2695EA3E1831BF860065C9CF /* Percussion 72.mp3 */,
-				2695EA3F1831BF860065C9CF /* Percussion 73.mp3 */,
-				2695EA401831BF860065C9CF /* Percussion 74.mp3 */,
-				2695EA411831BF860065C9CF /* Percussion 75.mp3 */,
-				2695EA421831BF860065C9CF /* Percussion 76.mp3 */,
-				2695EA431831BF860065C9CF /* Percussion 77.mp3 */,
-				2695EA441831BF860065C9CF /* Percussion 78.mp3 */,
-				2695EA451831BF860065C9CF /* Percussion 79.mp3 */,
-				2695EA461831BF860065C9CF /* Percussion 80.mp3 */,
-				2695EA471831BF860065C9CF /* Percussion 81.mp3 */,
-				2695EA481831BF860065C9CF /* Percussion 82.mp3 */,
-				2695EA491831BF860065C9CF /* Percussion 83.mp3 */,
-				2695EA4A1831BF860065C9CF /* Percussion 84.mp3 */,
-				2695EA4B1831BF860065C9CF /* Percussion 85.mp3 */,
-				2695EA4C1831BF860065C9CF /* Percussion 86.mp3 */,
-				2695EA4D1831BF860065C9CF /* Percussion 87.mp3 */,
-				2695EA4E1831BF860065C9CF /* Percussion 88.mp3 */,
-				2695EA4F1831BF860065C9CF /* Percussion 89.mp3 */,
-				2695EA501831BF860065C9CF /* Percussion 90.mp3 */,
-				2695EA511831BF860065C9CF /* Percussion 91.mp3 */,
-				2695EA521831BF860065C9CF /* Percussion 92.mp3 */,
-				2695EA531831BF860065C9CF /* Percussion 93.mp3 */,
-				2695EA541831BF860065C9CF /* Percussion 94.mp3 */,
-				2695EA551831BF860065C9CF /* Percussion 95.mp3 */,
-				2695EA561831BF860065C9CF /* Percussion 96.mp3 */,
-				2695EA571831BF860065C9CF /* Percussion 97.mp3 */,
-				2695EA581831BF860065C9CF /* Percussion 98.mp3 */,
-				2695EA591831BF860065C9CF /* Percussion 99.mp3 */,
-				2695EA5A1831BF860065C9CF /* Percussion 100.mp3 */,
-				2695EA5B1831BF860065C9CF /* Percussion 101.mp3 */,
-				6D9912B215B0D4E000B32116 /* Percussion 0.mp3 */,
-				6D9912B315B0D4E000B32116 /* Percussion 1.mp3 */,
-				6D9912B415B0D4E000B32116 /* Percussion 10.mp3 */,
-				6D9912B515B0D4E000B32116 /* Percussion 11.mp3 */,
-				6D9912B615B0D4E000B32116 /* Percussion 12.mp3 */,
-				6D9912B715B0D4E000B32116 /* Percussion 13.mp3 */,
-				6D9912B815B0D4E000B32116 /* Percussion 14.mp3 */,
-				6D9912B915B0D4E000B32116 /* Percussion 15.mp3 */,
-				6D9912BA15B0D4E000B32116 /* Percussion 16.mp3 */,
-				6D9912BB15B0D4E000B32116 /* Percussion 17.mp3 */,
-				6D9912BC15B0D4E000B32116 /* Percussion 18.mp3 */,
-				6D9912BD15B0D4E000B32116 /* Percussion 19.mp3 */,
-				6D9912BE15B0D4E000B32116 /* Percussion 2.mp3 */,
-				6D9912BF15B0D4E000B32116 /* Percussion 20.mp3 */,
-				6D9912C015B0D4E000B32116 /* Percussion 21.mp3 */,
-				6D9912C115B0D4E000B32116 /* Percussion 22.mp3 */,
-				6D9912C215B0D4E000B32116 /* Percussion 23.mp3 */,
-				6D9912C315B0D4E000B32116 /* Percussion 24.mp3 */,
-				6D9912C415B0D4E000B32116 /* Percussion 25.mp3 */,
-				6D9912C515B0D4E000B32116 /* Percussion 26.mp3 */,
-				6D9912C615B0D4E000B32116 /* Percussion 27.mp3 */,
-				6D9912C715B0D4E000B32116 /* Percussion 28.mp3 */,
-				6D9912C815B0D4E000B32116 /* Percussion 29.mp3 */,
-				6D9912C915B0D4E000B32116 /* Percussion 3.mp3 */,
-				6D9912CA15B0D4E000B32116 /* Percussion 30.mp3 */,
-				6D9912CB15B0D4E000B32116 /* Percussion 31.mp3 */,
-				6D9912CC15B0D4E000B32116 /* Percussion 32.mp3 */,
-				6D9912CD15B0D4E000B32116 /* Percussion 33.mp3 */,
-				6D9912CE15B0D4E000B32116 /* Percussion 34.mp3 */,
-				6D9912CF15B0D4E000B32116 /* Percussion 35.mp3 */,
-				6D9912D015B0D4E000B32116 /* Percussion 36.mp3 */,
-				6D9912D115B0D4E000B32116 /* Percussion 37.mp3 */,
-				6D9912D215B0D4E000B32116 /* Percussion 38.mp3 */,
-				6D9912D315B0D4E000B32116 /* Percussion 39.mp3 */,
-				6D9912D415B0D4E000B32116 /* Percussion 4.mp3 */,
-				6D9912D515B0D4E100B32116 /* Percussion 40.mp3 */,
-				6D9912D615B0D4E100B32116 /* Percussion 5.mp3 */,
-				6D9912D715B0D4E100B32116 /* Percussion 6.mp3 */,
-				6D9912D815B0D4E100B32116 /* Percussion 7.mp3 */,
-				6D9912D915B0D4E100B32116 /* Percussion 8.mp3 */,
-				6D9912DA15B0D4E100B32116 /* Percussion 9.mp3 */,
+				58D617221863B8D7001EB327 /* LoadingViewController.h */,
+				58D617231863B8D7001EB327 /* LoadingViewController.m */,
 			);
-			path = Percussion;
+			name = LoadingViewController;
 			sourceTree = "<group>";
 		};
-		6D99E68B159396C1005F1119 /* UI Buttons */ = {
+		58D617581863BF5E001EB327 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6D99E688159396B7005F1119 /* CheckBox.h */,
-				6D99E689159396B7005F1119 /* CheckBox.m */,
-				6D77F08E1592582900059C8F /* ScrollButton.h */,
-				6D77F08F1592582900059C8F /* ScrollButton.m */,
+				584085871865355300BFF3C5 /* sequencerInstruments.plist */,
+				580A52101864E0230077240B /* Instrument Icons */,
+				580A52111864E0430077240B /* Logos | Icons */,
+				580A520F1864E0170077240B /* Sequence */,
+				58D617331863B8D7001EB327 /* Supporting Files */,
 			);
-			name = "UI Buttons";
+			name = Resources;
+			path = gTarSequencer/Resources;
 			sourceTree = "<group>";
 		};
-		6D9CF02C159532B400DCDFD2 /* View */ = {
+		58D6960F1864D23100113AF2 /* SequencerViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EC37BF0F160C45FC00E6277D /* InstrumentCell.h */,
-				EC37BF10160C45FD00E6277D /* InstrumentCell.m */,
-				EC37BE51160C435A00E6277D /* Instrument.h */,
-				EC37BE52160C435A00E6277D /* Instrument.m */,
-				EC37BE53160C435B00E6277D /* Measure.h */,
-				EC37BE54160C435C00E6277D /* Measure.m */,
-				EC37BE55160C435C00E6277D /* Pattern.h */,
-				EC37BE56160C435D00E6277D /* Pattern.m */,
-				EC37BE59160C435E00E6277D /* SoundMaker.h */,
-				EC37BE5A160C435E00E6277D /* SoundMaker.mm */,
-				EC37BE4D160C432000E6277D /* TouchCatcher.h */,
-				EC37BE4E160C432000E6277D /* TouchCatcher.m */,
-				EC37BE49160C430A00E6277D /* ScrollingSelector.h */,
-				EC37BE4A160C430B00E6277D /* ScrollingSelector.m */,
-				EC37BE45160C42F000E6277D /* RadialDisplay.h */,
-				EC37BE46160C42F100E6277D /* RadialDisplay.m */,
-				6DD8EAB315B73960004B5AAF /* MeasureView.h */,
-				6DD8EAB415B73960004B5AAF /* MeasureView.m */,
-				6D9CF040159A3E8400DCDFD2 /* Current Measure Display */,
-				6D99E68B159396C1005F1119 /* UI Buttons */,
+				58D6960A1864D20A00113AF2 /* SequencerViewController.h */,
+				58D6960B1864D20A00113AF2 /* SequencerViewController.m */,
+				58D6960C1864D20A00113AF2 /* SequencerViewController.xib */,
+				580A52181864F7FC0077240B /* InstrumentTableViewController */,
+				5840859018653C3800BFF3C5 /* ScrollingSelectorController */,
+				5840858918653A8F00BFF3C5 /* BottomBar */,
 			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		6D9CF02E159532E400DCDFD2 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				6DBE64C2157E7A4C00729E25 /* Measure.h */,
-				6DBE64BC157D645B00729E25 /* SEQNote.h */,
-				6DBE64BD157D645B00729E25 /* SEQNote.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		6D9CF040159A3E8400DCDFD2 /* Current Measure Display */ = {
-			isa = PBXGroup;
-			children = (
-				6D9CF03C159A36CC00DCDFD2 /* GuitarView.h */,
-				6D9CF03D159A36CC00DCDFD2 /* GuitarView.m */,
-			);
-			name = "Current Measure Display";
-			sourceTree = "<group>";
-		};
-		6DBE605F157D612A00729E25 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				EC37BE6D160C459600E6277D /* Add_Instrument.png */,
-				EC37BE6E160C459600E6277D /* Arrow_Left.png */,
-				EC37BE6F160C459600E6277D /* Arrow_Right.png */,
-				2695EAC21831DB9E0065C9CF /* Default4@2x.png */,
-				EC37BE70160C459600E6277D /* BackButton_InstrumentSelect.png */,
-				EC37BE71160C459600E6277D /* Button_A_OFF.png */,
-				EC37BE72160C459600E6277D /* Button_A_ON.png */,
-				EC37BE73160C459600E6277D /* Button_Add_OFF.png */,
-				EC37BE74160C459600E6277D /* Button_Add_ON.png */,
-				EC37BE75160C459700E6277D /* Button_B_OFF.png */,
-				EC37BE76160C459700E6277D /* Button_B_ON.png */,
-				EC37BE77160C459700E6277D /* Button_C_OFF.png */,
-				EC37BE78160C459700E6277D /* Button_C_ON.png */,
-				EC37BE79160C459700E6277D /* Button_D_OFF.png */,
-				EC37BE7A160C459700E6277D /* Button_D_ON.png */,
-				EC37BE7B160C459700E6277D /* Button_Minus_OFF.png */,
-				EC37BE7C160C459700E6277D /* Button_Minus_ON.png */,
-				EC37BE7D160C459700E6277D /* Button_OFF_OFF.png */,
-				EC37BE7E160C459700E6277D /* Button_OFF_ON.png */,
-				EC37BE7F160C459700E6277D /* Default@2x.png */,
-				EC37BE80160C459700E6277D /* DrumButton_OFF.png */,
-				EC37BE81160C459700E6277D /* DrumButton_ON.png */,
-				EC37BE82160C459700E6277D /* gTarbyIncidentLoading.png */,
-				EC37BE83160C459700E6277D /* gTarConnectedLogo.png */,
-				EC37BE84160C459700E6277D /* gTarNotConnectedLogo.png */,
-				EC37BE85160C459700E6277D /* GuitarButton_OFF.png */,
-				EC37BE86160C459700E6277D /* GuitarButton_ON.png */,
-				EC37BE87160C459700E6277D /* Icon_Guitar.png */,
-				EC37BE88160C459700E6277D /* Icon_Percussion.png */,
-				EC37BE89160C459700E6277D /* Icon_Piano.png */,
-				EC37BE8A160C459700E6277D /* Icon_Trash.png */,
-				EC37BE8B160C459700E6277D /* Icon_WubWub.png */,
-				EC37BE8C160C459700E6277D /* InstrumentsCopy.png */,
-				EC37BE8D160C459700E6277D /* InstrumentSelectScreen.png */,
-				EC37BE8E160C459800E6277D /* PauseButton.png */,
-				EC37BE8F160C459800E6277D /* PianoButton_OFF.png */,
-				EC37BE90160C459800E6277D /* PianoButton_ON.png */,
-				EC37BE91160C459800E6277D /* PlayButton.png */,
-				EC37BE92160C459800E6277D /* Sequence1.png */,
-				EC37BE93160C459800E6277D /* Sequence2.png */,
-				EC37BE94160C459800E6277D /* Sequence3.png */,
-				EC37BE95160C459800E6277D /* Sequence4.png */,
-				EC37BE96160C459800E6277D /* Sequence5.png */,
-				EC37BE97160C459800E6277D /* Sequence6.png */,
-				EC37BE98160C459800E6277D /* Sequence7.png */,
-				EC37BE99160C459800E6277D /* Sequence8.png */,
-				EC37BE9A160C459800E6277D /* Sequence9.png */,
-				EC37BE9B160C459800E6277D /* Sequence10.png */,
-				EC37BE9C160C459800E6277D /* Sequence11.png */,
-				EC37BE9D160C459800E6277D /* Sequencer_Icon.png */,
-				EC37BE9E160C459800E6277D /* TempoButton.png */,
-				EC37BE9F160C459800E6277D /* Text_Connected.png */,
-				EC37BEA0160C459800E6277D /* Text_NotConnected.png */,
-				EC37BEA1160C459800E6277D /* WubButton_OFF.png */,
-				EC37BEA2160C459800E6277D /* WubButton_ON.png */,
-				6DBE6060157D612A00729E25 /* Audio */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		6DBE6060157D612A00729E25 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				6DBE610C157D612B00729E25 /* instruments.plist */,
-				6D9912B115B0D4E000B32116 /* Percussion */,
-			);
-			path = Audio;
+			name = SequencerViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6D331B0E157D40A100AA27A1 /* gTarSequencer */ = {
+		58D617091863B8D6001EB327 /* gTarSequencer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6D331B42157D40A100AA27A1 /* Build configuration list for PBXNativeTarget "gTarSequencer" */;
+			buildConfigurationList = 58D6173C1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "gTarSequencer" */;
 			buildPhases = (
-				6D331B0B157D40A100AA27A1 /* Sources */,
-				6D331B0C157D40A100AA27A1 /* Frameworks */,
-				6D331B0D157D40A100AA27A1 /* Resources */,
+				58D617061863B8D6001EB327 /* Sources */,
+				58D617071863B8D6001EB327 /* Frameworks */,
+				58D617081863B8D6001EB327 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -986,420 +448,164 @@
 			);
 			name = gTarSequencer;
 			productName = gTarSequencer;
-			productReference = 6D331B0F157D40A100AA27A1 /* gTarSequencer.app */;
+			productReference = 58D6170A1863B8D6001EB327 /* gTarSequencer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6D331B2F157D40A100AA27A1 /* gTarSequencerTests */ = {
+		58D6172A1863B8D7001EB327 /* gTarSequencerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6D331B45157D40A100AA27A1 /* Build configuration list for PBXNativeTarget "gTarSequencerTests" */;
+			buildConfigurationList = 58D6173F1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "gTarSequencerTests" */;
 			buildPhases = (
-				6D331B2B157D40A100AA27A1 /* Sources */,
-				6D331B2C157D40A100AA27A1 /* Frameworks */,
-				6D331B2D157D40A100AA27A1 /* Resources */,
-				6D331B2E157D40A100AA27A1 /* ShellScript */,
+				58D617271863B8D7001EB327 /* Sources */,
+				58D617281863B8D7001EB327 /* Frameworks */,
+				58D617291863B8D7001EB327 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6D331B36157D40A100AA27A1 /* PBXTargetDependency */,
+				58D617311863B8D7001EB327 /* PBXTargetDependency */,
 			);
 			name = gTarSequencerTests;
 			productName = gTarSequencerTests;
-			productReference = 6D331B30157D40A100AA27A1 /* gTarSequencerTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 58D6172B1863B8D7001EB327 /* gTarSequencerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		6D331B06157D40A100AA27A1 /* Project object */ = {
+		58D617021863B8D6001EB327 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = "Congruity ";
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Incident Technologies";
+				TargetAttributes = {
+					58D6172A1863B8D7001EB327 = {
+						TestTargetID = 58D617091863B8D6001EB327;
+					};
+				};
 			};
-			buildConfigurationList = 6D331B09157D40A100AA27A1 /* Build configuration list for PBXProject "gTarSequencer" */;
+			buildConfigurationList = 58D617051863B8D6001EB327 /* Build configuration list for PBXProject "gTarSequencer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
-			mainGroup = 6D331B04157D40A100AA27A1;
-			productRefGroup = 6D331B10157D40A100AA27A1 /* Products */;
+			mainGroup = 58D617011863B8D6001EB327;
+			productRefGroup = 58D6170B1863B8D6001EB327 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6D331B0E157D40A100AA27A1 /* gTarSequencer */,
-				6D331B2F157D40A100AA27A1 /* gTarSequencerTests */,
+				58D617091863B8D6001EB327 /* gTarSequencer */,
+				58D6172A1863B8D7001EB327 /* gTarSequencerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		6D331B0D157D40A100AA27A1 /* Resources */ = {
+		58D617081863B8D6001EB327 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D331B1E157D40A100AA27A1 /* InfoPlist.strings in Resources */,
-				6D331B27157D40A100AA27A1 /* MainStoryboard.storyboard in Resources */,
-				6DBE633C157D612B00729E25 /* instruments.plist in Resources */,
-				2695EA621831BF860065C9CF /* Percussion 6.mp3 in Resources */,
-				2695EA781831BF860065C9CF /* Percussion 28.mp3 in Resources */,
-				6D9912DB15B0D4E100B32116 /* Percussion 0.mp3 in Resources */,
-				2695EA641831BF860065C9CF /* Percussion 8.mp3 in Resources */,
-				2695EAA81831BF860065C9CF /* Percussion 76.mp3 in Resources */,
-				6D9912DC15B0D4E100B32116 /* Percussion 1.mp3 in Resources */,
-				2695EABA1831BF860065C9CF /* Percussion 94.mp3 in Resources */,
-				2695EA601831BF860065C9CF /* Percussion 4.mp3 in Resources */,
-				2695EAB31831BF860065C9CF /* Percussion 87.mp3 in Resources */,
-				2695EAC01831BF860065C9CF /* Percussion 100.mp3 in Resources */,
-				6D9912DD15B0D4E100B32116 /* Percussion 10.mp3 in Resources */,
-				2695EABE1831BF860065C9CF /* Percussion 98.mp3 in Resources */,
-				6D9912DE15B0D4E100B32116 /* Percussion 11.mp3 in Resources */,
-				6D9912DF15B0D4E100B32116 /* Percussion 12.mp3 in Resources */,
-				2695EAA51831BF860065C9CF /* Percussion 73.mp3 in Resources */,
-				2695EAB01831BF860065C9CF /* Percussion 84.mp3 in Resources */,
-				2695EAA61831BF860065C9CF /* Percussion 74.mp3 in Resources */,
-				2695EA7D1831BF860065C9CF /* Percussion 33.mp3 in Resources */,
-				2695EABD1831BF860065C9CF /* Percussion 97.mp3 in Resources */,
-				2695EABF1831BF860065C9CF /* Percussion 99.mp3 in Resources */,
-				2695EA941831BF860065C9CF /* Percussion 56.mp3 in Resources */,
-				2695EA7F1831BF860065C9CF /* Percussion 35.mp3 in Resources */,
-				2695EA6E1831BF860065C9CF /* Percussion 18.mp3 in Resources */,
-				6D9912E015B0D4E100B32116 /* Percussion 13.mp3 in Resources */,
-				6D9912E115B0D4E100B32116 /* Percussion 14.mp3 in Resources */,
-				2695EAB61831BF860065C9CF /* Percussion 90.mp3 in Resources */,
-				2695EAB21831BF860065C9CF /* Percussion 86.mp3 in Resources */,
-				2695EA611831BF860065C9CF /* Percussion 5.mp3 in Resources */,
-				6D9912E215B0D4E100B32116 /* Percussion 15.mp3 in Resources */,
-				2695EABB1831BF860065C9CF /* Percussion 95.mp3 in Resources */,
-				2695EA5E1831BF860065C9CF /* Percussion 2.mp3 in Resources */,
-				6D9912E315B0D4E100B32116 /* Percussion 16.mp3 in Resources */,
-				6D9912E415B0D4E100B32116 /* Percussion 17.mp3 in Resources */,
-				6D9912E515B0D4E100B32116 /* Percussion 18.mp3 in Resources */,
-				6D9912E615B0D4E100B32116 /* Percussion 19.mp3 in Resources */,
-				6D9912E715B0D4E100B32116 /* Percussion 2.mp3 in Resources */,
-				6D9912E815B0D4E100B32116 /* Percussion 20.mp3 in Resources */,
-				6D9912E915B0D4E100B32116 /* Percussion 21.mp3 in Resources */,
-				6D9912EA15B0D4E100B32116 /* Percussion 22.mp3 in Resources */,
-				6D9912EB15B0D4E100B32116 /* Percussion 23.mp3 in Resources */,
-				6D9912EC15B0D4E100B32116 /* Percussion 24.mp3 in Resources */,
-				6D9912ED15B0D4E100B32116 /* Percussion 25.mp3 in Resources */,
-				2695EA741831BF860065C9CF /* Percussion 24.mp3 in Resources */,
-				2695EA8F1831BF860065C9CF /* Percussion 51.mp3 in Resources */,
-				2695EA701831BF860065C9CF /* Percussion 20.mp3 in Resources */,
-				6D9912EE15B0D4E100B32116 /* Percussion 26.mp3 in Resources */,
-				2695EA881831BF860065C9CF /* Percussion 44.mp3 in Resources */,
-				6D9912EF15B0D4E100B32116 /* Percussion 27.mp3 in Resources */,
-				2695EA991831BF860065C9CF /* Percussion 61.mp3 in Resources */,
-				2695EA691831BF860065C9CF /* Percussion 13.mp3 in Resources */,
-				2695EA751831BF860065C9CF /* Percussion 25.mp3 in Resources */,
-				6D9912F015B0D4E100B32116 /* Percussion 28.mp3 in Resources */,
-				6D9912F115B0D4E100B32116 /* Percussion 29.mp3 in Resources */,
-				2695EAA21831BF860065C9CF /* Percussion 70.mp3 in Resources */,
-				2695EA901831BF860065C9CF /* Percussion 52.mp3 in Resources */,
-				2695EA9C1831BF860065C9CF /* Percussion 64.mp3 in Resources */,
-				6D9912F215B0D4E100B32116 /* Percussion 3.mp3 in Resources */,
-				6D9912F315B0D4E100B32116 /* Percussion 30.mp3 in Resources */,
-				2695EA661831BF860065C9CF /* Percussion 10.mp3 in Resources */,
-				2695EA891831BF860065C9CF /* Percussion 45.mp3 in Resources */,
-				6D9912F415B0D4E100B32116 /* Percussion 31.mp3 in Resources */,
-				6D9912F515B0D4E100B32116 /* Percussion 32.mp3 in Resources */,
-				6D9912F615B0D4E100B32116 /* Percussion 33.mp3 in Resources */,
-				6D9912F715B0D4E100B32116 /* Percussion 34.mp3 in Resources */,
-				6D9912F815B0D4E100B32116 /* Percussion 35.mp3 in Resources */,
-				6D9912F915B0D4E100B32116 /* Percussion 36.mp3 in Resources */,
-				6D9912FA15B0D4E100B32116 /* Percussion 37.mp3 in Resources */,
-				2695EAAE1831BF860065C9CF /* Percussion 82.mp3 in Resources */,
-				6D9912FB15B0D4E100B32116 /* Percussion 38.mp3 in Resources */,
-				2695EAB11831BF860065C9CF /* Percussion 85.mp3 in Resources */,
-				6D9912FC15B0D4E100B32116 /* Percussion 39.mp3 in Resources */,
-				6D9912FD15B0D4E100B32116 /* Percussion 4.mp3 in Resources */,
-				2695EAB71831BF860065C9CF /* Percussion 91.mp3 in Resources */,
-				6D9912FE15B0D4E100B32116 /* Percussion 40.mp3 in Resources */,
-				6D9912FF15B0D4E100B32116 /* Percussion 5.mp3 in Resources */,
-				2695EA951831BF860065C9CF /* Percussion 57.mp3 in Resources */,
-				6D99130015B0D4E100B32116 /* Percussion 6.mp3 in Resources */,
-				6D99130115B0D4E100B32116 /* Percussion 7.mp3 in Resources */,
-				6D99130215B0D4E100B32116 /* Percussion 8.mp3 in Resources */,
-				2695EA8D1831BF860065C9CF /* Percussion 49.mp3 in Resources */,
-				6D99130315B0D4E100B32116 /* Percussion 9.mp3 in Resources */,
-				2695EA9B1831BF860065C9CF /* Percussion 63.mp3 in Resources */,
-				2695EA841831BF860065C9CF /* Percussion 40.mp3 in Resources */,
-				2695EAA31831BF860065C9CF /* Percussion 71.mp3 in Resources */,
-				EC37BEA3160C459800E6277D /* Add_Instrument.png in Resources */,
-				EC37BEA5160C459800E6277D /* Arrow_Left.png in Resources */,
-				2695EABC1831BF860065C9CF /* Percussion 96.mp3 in Resources */,
-				EC37BEA7160C459800E6277D /* Arrow_Right.png in Resources */,
-				EC37BEA9160C459800E6277D /* BackButton_InstrumentSelect.png in Resources */,
-				EC37BEAB160C459800E6277D /* Button_A_OFF.png in Resources */,
-				EC37BEAD160C459800E6277D /* Button_A_ON.png in Resources */,
-				EC37BEAF160C459800E6277D /* Button_Add_OFF.png in Resources */,
-				2695EA721831BF860065C9CF /* Percussion 22.mp3 in Resources */,
-				2695EA7B1831BF860065C9CF /* Percussion 31.mp3 in Resources */,
-				2695EA9A1831BF860065C9CF /* Percussion 62.mp3 in Resources */,
-				EC37BEB1160C459800E6277D /* Button_Add_ON.png in Resources */,
-				2695EA9E1831BF860065C9CF /* Percussion 66.mp3 in Resources */,
-				2695EA761831BF860065C9CF /* Percussion 26.mp3 in Resources */,
-				EC37BEB3160C459800E6277D /* Button_B_OFF.png in Resources */,
-				2695EA831831BF860065C9CF /* Percussion 39.mp3 in Resources */,
-				EC37BEB5160C459800E6277D /* Button_B_ON.png in Resources */,
-				EC37BEB7160C459800E6277D /* Button_C_OFF.png in Resources */,
-				EC37BEB9160C459800E6277D /* Button_C_ON.png in Resources */,
-				EC37BEBB160C459800E6277D /* Button_D_OFF.png in Resources */,
-				EC37BEBD160C459800E6277D /* Button_D_ON.png in Resources */,
-				2695EAA41831BF860065C9CF /* Percussion 72.mp3 in Resources */,
-				EC37BEBF160C459800E6277D /* Button_Minus_OFF.png in Resources */,
-				EC37BEC1160C459800E6277D /* Button_Minus_ON.png in Resources */,
-				2695EAA91831BF860065C9CF /* Percussion 77.mp3 in Resources */,
-				EC37BEC3160C459800E6277D /* Button_OFF_OFF.png in Resources */,
-				2695EA5C1831BF860065C9CF /* Percussion 0.mp3 in Resources */,
-				2695EAC11831BF860065C9CF /* Percussion 101.mp3 in Resources */,
-				EC37BEC5160C459800E6277D /* Button_OFF_ON.png in Resources */,
-				EC37BEC7160C459800E6277D /* Default@2x.png in Resources */,
-				EC37BEC9160C459800E6277D /* DrumButton_OFF.png in Resources */,
-				2695EA8C1831BF860065C9CF /* Percussion 48.mp3 in Resources */,
-				EC37BECB160C459800E6277D /* DrumButton_ON.png in Resources */,
-				2695EA6C1831BF860065C9CF /* Percussion 16.mp3 in Resources */,
-				EC37BECD160C459800E6277D /* gTarbyIncidentLoading.png in Resources */,
-				EC37BECF160C459800E6277D /* gTarConnectedLogo.png in Resources */,
-				EC37BED1160C459800E6277D /* gTarNotConnectedLogo.png in Resources */,
-				2695EA651831BF860065C9CF /* Percussion 9.mp3 in Resources */,
-				EC37BED3160C459800E6277D /* GuitarButton_OFF.png in Resources */,
-				2695EA9D1831BF860065C9CF /* Percussion 65.mp3 in Resources */,
-				2695EA851831BF860065C9CF /* Percussion 41.mp3 in Resources */,
-				264F142A18315CFD00366268 /* sequencerInstruments.plist in Resources */,
-				EC37BED5160C459800E6277D /* GuitarButton_ON.png in Resources */,
-				EC37BED7160C459800E6277D /* Icon_Guitar.png in Resources */,
-				2695EA771831BF860065C9CF /* Percussion 27.mp3 in Resources */,
-				EC37BED9160C459800E6277D /* Icon_Percussion.png in Resources */,
-				2695EAAC1831BF860065C9CF /* Percussion 80.mp3 in Resources */,
-				2695EA871831BF860065C9CF /* Percussion 43.mp3 in Resources */,
-				2695EA971831BF860065C9CF /* Percussion 59.mp3 in Resources */,
-				EC37BEDB160C459800E6277D /* Icon_Piano.png in Resources */,
-				EC37BEDD160C459800E6277D /* Icon_Trash.png in Resources */,
-				2695EA811831BF860065C9CF /* Percussion 37.mp3 in Resources */,
-				2695EA821831BF860065C9CF /* Percussion 38.mp3 in Resources */,
-				EC37BEDF160C459800E6277D /* Icon_WubWub.png in Resources */,
-				2695EAB81831BF860065C9CF /* Percussion 92.mp3 in Resources */,
-				2695EA911831BF860065C9CF /* Percussion 53.mp3 in Resources */,
-				EC37BEE1160C459800E6277D /* InstrumentsCopy.png in Resources */,
-				2695EA921831BF860065C9CF /* Percussion 54.mp3 in Resources */,
-				2695EA6F1831BF860065C9CF /* Percussion 19.mp3 in Resources */,
-				EC37BEE3160C459800E6277D /* InstrumentSelectScreen.png in Resources */,
-				2695EA5D1831BF860065C9CF /* Percussion 1.mp3 in Resources */,
-				2695EAA11831BF860065C9CF /* Percussion 69.mp3 in Resources */,
-				EC37BEE5160C459800E6277D /* PauseButton.png in Resources */,
-				2695EAAD1831BF860065C9CF /* Percussion 81.mp3 in Resources */,
-				EC37BEE7160C459800E6277D /* PianoButton_OFF.png in Resources */,
-				EC37BEE9160C459800E6277D /* PianoButton_ON.png in Resources */,
-				2695EAA71831BF860065C9CF /* Percussion 75.mp3 in Resources */,
-				2695EA931831BF860065C9CF /* Percussion 55.mp3 in Resources */,
-				EC37BEEB160C459800E6277D /* PlayButton.png in Resources */,
-				EC37BEED160C459800E6277D /* Sequence1.png in Resources */,
-				2695EA7A1831BF860065C9CF /* Percussion 30.mp3 in Resources */,
-				2695EA801831BF860065C9CF /* Percussion 36.mp3 in Resources */,
-				EC37BEEF160C459800E6277D /* Sequence2.png in Resources */,
-				2695EAAB1831BF860065C9CF /* Percussion 79.mp3 in Resources */,
-				EC37BEF1160C459800E6277D /* Sequence3.png in Resources */,
-				2695EA981831BF860065C9CF /* Percussion 60.mp3 in Resources */,
-				2695EA671831BF860065C9CF /* Percussion 11.mp3 in Resources */,
-				2695EAA01831BF860065C9CF /* Percussion 68.mp3 in Resources */,
-				EC37BEF3160C459800E6277D /* Sequence4.png in Resources */,
-				2695EA6A1831BF860065C9CF /* Percussion 14.mp3 in Resources */,
-				2695EA6B1831BF860065C9CF /* Percussion 15.mp3 in Resources */,
-				EC37BEF5160C459800E6277D /* Sequence5.png in Resources */,
-				EC37BEF7160C459800E6277D /* Sequence6.png in Resources */,
-				EC37BEF9160C459800E6277D /* Sequence7.png in Resources */,
-				2695EA7E1831BF860065C9CF /* Percussion 34.mp3 in Resources */,
-				EC37BEFB160C459800E6277D /* Sequence8.png in Resources */,
-				2695EA861831BF860065C9CF /* Percussion 42.mp3 in Resources */,
-				2695EAAA1831BF860065C9CF /* Percussion 78.mp3 in Resources */,
-				EC37BEFD160C459800E6277D /* Sequence9.png in Resources */,
-				EC37BEFF160C459800E6277D /* Sequence10.png in Resources */,
-				2695EAB91831BF860065C9CF /* Percussion 93.mp3 in Resources */,
-				EC37BF01160C459800E6277D /* Sequence11.png in Resources */,
-				2695EA8E1831BF860065C9CF /* Percussion 50.mp3 in Resources */,
-				EC37BF03160C459800E6277D /* Sequencer_Icon.png in Resources */,
-				2695EA9F1831BF860065C9CF /* Percussion 67.mp3 in Resources */,
-				2695EAB41831BF860065C9CF /* Percussion 88.mp3 in Resources */,
-				EC37BF05160C459800E6277D /* TempoButton.png in Resources */,
-				2695EAB51831BF860065C9CF /* Percussion 89.mp3 in Resources */,
-				2695EA631831BF860065C9CF /* Percussion 7.mp3 in Resources */,
-				2695EA8A1831BF860065C9CF /* Percussion 46.mp3 in Resources */,
-				2695EAAF1831BF860065C9CF /* Percussion 83.mp3 in Resources */,
-				2695EA711831BF860065C9CF /* Percussion 21.mp3 in Resources */,
-				2695EA731831BF860065C9CF /* Percussion 23.mp3 in Resources */,
-				EC37BF07160C459800E6277D /* Text_Connected.png in Resources */,
-				EC37BF09160C459800E6277D /* Text_NotConnected.png in Resources */,
-				EC37BF0B160C459800E6277D /* WubButton_OFF.png in Resources */,
-				2695EA791831BF860065C9CF /* Percussion 29.mp3 in Resources */,
-				2695EA7C1831BF860065C9CF /* Percussion 32.mp3 in Resources */,
-				2695EA8B1831BF860065C9CF /* Percussion 47.mp3 in Resources */,
-				2695EA681831BF860065C9CF /* Percussion 12.mp3 in Resources */,
-				EC37BF0D160C459800E6277D /* WubButton_ON.png in Resources */,
-				2695EA6D1831BF860065C9CF /* Percussion 17.mp3 in Resources */,
-				2695EA5F1831BF860065C9CF /* Percussion 3.mp3 in Resources */,
-				2695EA961831BF860065C9CF /* Percussion 58.mp3 in Resources */,
+				58D617661863BF5E001EB327 /* Sequence11.png in Resources */,
+				580A51FF1864DFF50077240B /* DrumButton_OFF.png in Resources */,
+				580A52151864E0E00077240B /* Sequencer_Icon58px.png in Resources */,
+				580A52091864DFF50077240B /* Icon_WubWub.png in Resources */,
+				580A52171864E0E00077240B /* Sequencer_Icon120px.png in Resources */,
+				580A52081864DFF50077240B /* Icon_Trash.png in Resources */,
+				580A52011864DFF50077240B /* gTarConnectedLogo.png in Resources */,
+				5840858618652D9000BFF3C5 /* InstrumentTableView.xib in Resources */,
+				58D617261863B8D7001EB327 /* Images.xcassets in Resources */,
+				580A52041864DFF50077240B /* GuitarButton_ON.png in Resources */,
+				58D6176D1863BF5E001EB327 /* Sequence8.png in Resources */,
+				580A520D1864DFF50077240B /* WubButton_OFF.png in Resources */,
+				580A52051864DFF50077240B /* Icon_Guitar.png in Resources */,
+				58D6176E1863BF5E001EB327 /* Sequence9.png in Resources */,
+				58D617641863BF5E001EB327 /* Sequence1.png in Resources */,
+				5840858F18653B6F00BFF3C5 /* InstrumentTableViewCell.xib in Resources */,
+				584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */,
+				58D617681863BF5E001EB327 /* Sequence3.png in Resources */,
+				58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */,
+				580A520B1864DFF50077240B /* PianoButton_ON.png in Resources */,
+				580A52001864DFF50077240B /* DrumButton_ON.png in Resources */,
+				580A52031864DFF50077240B /* GuitarButton_OFF.png in Resources */,
+				580A52071864DFF50077240B /* Icon_Piano.png in Resources */,
+				58D617671863BF5E001EB327 /* Sequence2.png in Resources */,
+				58D6176A1863BF5E001EB327 /* Sequence5.png in Resources */,
+				58D6176B1863BF5E001EB327 /* Sequence6.png in Resources */,
+				580A520A1864DFF50077240B /* PianoButton_OFF.png in Resources */,
+				580A52021864DFF50077240B /* gTarNotConnectedLogo.png in Resources */,
+				58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */,
+				580A52161864E0E00077240B /* Sequencer_Icon80px.png in Resources */,
+				58D6176C1863BF5E001EB327 /* Sequence7.png in Resources */,
+				58D617651863BF5E001EB327 /* Sequence10.png in Resources */,
+				580A520E1864DFF50077240B /* WubButton_ON.png in Resources */,
+				58D617181863B8D7001EB327 /* InfoPlist.strings in Resources */,
+				58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */,
+				580A52061864DFF50077240B /* Icon_Percussion.png in Resources */,
+				58D617691863BF5E001EB327 /* Sequence4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6D331B2D157D40A100AA27A1 /* Resources */ = {
+		58D617291863B8D7001EB327 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D331B3C157D40A100AA27A1 /* InfoPlist.strings in Resources */,
-				EC37BEA4160C459800E6277D /* Add_Instrument.png in Resources */,
-				EC37BEA6160C459800E6277D /* Arrow_Left.png in Resources */,
-				EC37BEA8160C459800E6277D /* Arrow_Right.png in Resources */,
-				EC37BEAA160C459800E6277D /* BackButton_InstrumentSelect.png in Resources */,
-				EC37BEAC160C459800E6277D /* Button_A_OFF.png in Resources */,
-				EC37BEAE160C459800E6277D /* Button_A_ON.png in Resources */,
-				EC37BEB0160C459800E6277D /* Button_Add_OFF.png in Resources */,
-				EC37BEB2160C459800E6277D /* Button_Add_ON.png in Resources */,
-				EC37BEB4160C459800E6277D /* Button_B_OFF.png in Resources */,
-				EC37BEB6160C459800E6277D /* Button_B_ON.png in Resources */,
-				EC37BEB8160C459800E6277D /* Button_C_OFF.png in Resources */,
-				EC37BEBA160C459800E6277D /* Button_C_ON.png in Resources */,
-				EC37BEBC160C459800E6277D /* Button_D_OFF.png in Resources */,
-				EC37BEBE160C459800E6277D /* Button_D_ON.png in Resources */,
-				EC37BEC0160C459800E6277D /* Button_Minus_OFF.png in Resources */,
-				EC37BEC2160C459800E6277D /* Button_Minus_ON.png in Resources */,
-				EC37BEC4160C459800E6277D /* Button_OFF_OFF.png in Resources */,
-				EC37BEC6160C459800E6277D /* Button_OFF_ON.png in Resources */,
-				EC37BEC8160C459800E6277D /* Default@2x.png in Resources */,
-				EC37BECA160C459800E6277D /* DrumButton_OFF.png in Resources */,
-				EC37BECC160C459800E6277D /* DrumButton_ON.png in Resources */,
-				EC37BECE160C459800E6277D /* gTarbyIncidentLoading.png in Resources */,
-				EC37BED0160C459800E6277D /* gTarConnectedLogo.png in Resources */,
-				EC37BED2160C459800E6277D /* gTarNotConnectedLogo.png in Resources */,
-				EC37BED4160C459800E6277D /* GuitarButton_OFF.png in Resources */,
-				EC37BED6160C459800E6277D /* GuitarButton_ON.png in Resources */,
-				EC37BED8160C459800E6277D /* Icon_Guitar.png in Resources */,
-				EC37BEDA160C459800E6277D /* Icon_Percussion.png in Resources */,
-				EC37BEDC160C459800E6277D /* Icon_Piano.png in Resources */,
-				EC37BEDE160C459800E6277D /* Icon_Trash.png in Resources */,
-				EC37BEE0160C459800E6277D /* Icon_WubWub.png in Resources */,
-				EC37BEE2160C459800E6277D /* InstrumentsCopy.png in Resources */,
-				EC37BEE4160C459800E6277D /* InstrumentSelectScreen.png in Resources */,
-				EC37BEE6160C459800E6277D /* PauseButton.png in Resources */,
-				EC37BEE8160C459800E6277D /* PianoButton_OFF.png in Resources */,
-				EC37BEEA160C459800E6277D /* PianoButton_ON.png in Resources */,
-				EC37BEEC160C459800E6277D /* PlayButton.png in Resources */,
-				EC37BEEE160C459800E6277D /* Sequence1.png in Resources */,
-				EC37BEF0160C459800E6277D /* Sequence2.png in Resources */,
-				EC37BEF2160C459800E6277D /* Sequence3.png in Resources */,
-				EC37BEF4160C459800E6277D /* Sequence4.png in Resources */,
-				EC37BEF6160C459800E6277D /* Sequence5.png in Resources */,
-				EC37BEF8160C459800E6277D /* Sequence6.png in Resources */,
-				EC37BEFA160C459800E6277D /* Sequence7.png in Resources */,
-				EC37BEFC160C459800E6277D /* Sequence8.png in Resources */,
-				EC37BEFE160C459800E6277D /* Sequence9.png in Resources */,
-				EC37BF00160C459800E6277D /* Sequence10.png in Resources */,
-				EC37BF02160C459800E6277D /* Sequence11.png in Resources */,
-				EC37BF04160C459800E6277D /* Sequencer_Icon.png in Resources */,
-				EC37BF06160C459800E6277D /* TempoButton.png in Resources */,
-				EC37BF08160C459800E6277D /* Text_Connected.png in Resources */,
-				EC37BF0A160C459800E6277D /* Text_NotConnected.png in Resources */,
-				EC37BF0C160C459800E6277D /* WubButton_OFF.png in Resources */,
-				EC37BF0E160C459800E6277D /* WubButton_ON.png in Resources */,
+				58D617371863B8D7001EB327 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		6D331B2E157D40A100AA27A1 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		6D331B0B157D40A100AA27A1 /* Sources */ = {
+		58D617061863B8D6001EB327 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D331B20157D40A100AA27A1 /* main.m in Sources */,
-				6D331B24157D40A100AA27A1 /* AppDelegate.m in Sources */,
-				6DBE64BE157D645B00729E25 /* SEQNote.m in Sources */,
-				6D77F0921592583600059C8F /* ScrollButton.m in Sources */,
-				6D99E68A159396B8005F1119 /* CheckBox.m in Sources */,
-				6D9CF03E159A36CC00DCDFD2 /* GuitarView.m in Sources */,
-				6DD8EAB515B73960004B5AAF /* MeasureView.m in Sources */,
-				EC37BE47160C42F100E6277D /* RadialDisplay.m in Sources */,
-				EC37BE4B160C430B00E6277D /* ScrollingSelector.m in Sources */,
-				EC37BE4F160C432100E6277D /* TouchCatcher.m in Sources */,
-				EC37BE5B160C435E00E6277D /* Instrument.m in Sources */,
-				EC37BE5D160C435E00E6277D /* Measure.m in Sources */,
-				EC37BE5F160C435E00E6277D /* Pattern.m in Sources */,
-				EC37BE63160C435E00E6277D /* SoundMaker.mm in Sources */,
-				EC37BE67160C44E000E6277D /* gTarSequencerViewController.m in Sources */,
-				EC37BE6B160C44F200E6277D /* LoadingAnimationViewController.m in Sources */,
-				EC37BF11160C45FE00E6277D /* InstrumentCell.m in Sources */,
+				58D617241863B8D7001EB327 /* LoadingViewController.m in Sources */,
+				5840858D18653B5C00BFF3C5 /* InstrumentTableViewCell.m in Sources */,
+				584085951868C33700BFF3C5 /* GuitarView.m in Sources */,
+				58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */,
+				5894D61A186505BD00849C71 /* InstrumentTableViewController.m in Sources */,
+				58547AE4186CD55C003638EF /* RadialButton.m in Sources */,
+				58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */,
+				58D6171E1863B8D7001EB327 /* AppDelegate.m in Sources */,
+				58D6960D1864D20A00113AF2 /* SequencerViewController.m in Sources */,
+				58D6171A1863B8D7001EB327 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6D331B2B157D40A100AA27A1 /* Sources */ = {
+		58D617271863B8D7001EB327 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D331B3F157D40A100AA27A1 /* gTarSequencerTests.m in Sources */,
-				6D77F0901592582A00059C8F /* ScrollButton.m in Sources */,
-				EC37BE48160C42F100E6277D /* RadialDisplay.m in Sources */,
-				EC37BE4C160C430B00E6277D /* ScrollingSelector.m in Sources */,
-				EC37BE50160C432100E6277D /* TouchCatcher.m in Sources */,
-				EC37BE5C160C435E00E6277D /* Instrument.m in Sources */,
-				EC37BE5E160C435E00E6277D /* Measure.m in Sources */,
-				EC37BE60160C435E00E6277D /* Pattern.m in Sources */,
-				EC37BE64160C435E00E6277D /* SoundMaker.mm in Sources */,
-				EC37BE68160C44E000E6277D /* gTarSequencerViewController.m in Sources */,
-				EC37BE6C160C44F200E6277D /* LoadingAnimationViewController.m in Sources */,
-				EC37BF12160C45FE00E6277D /* InstrumentCell.m in Sources */,
+				58D617391863B8D7001EB327 /* gTarSequencerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6D331B36157D40A100AA27A1 /* PBXTargetDependency */ = {
+		58D617311863B8D7001EB327 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6D331B0E157D40A100AA27A1 /* gTarSequencer */;
-			targetProxy = 6D331B35157D40A100AA27A1 /* PBXContainerItemProxy */;
+			target = 58D617091863B8D6001EB327 /* gTarSequencer */;
+			targetProxy = 58D617301863B8D7001EB327 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6D331B1C157D40A100AA27A1 /* InfoPlist.strings */ = {
+		58D617161863B8D7001EB327 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6D331B1D157D40A100AA27A1 /* en */,
+				58D617171863B8D7001EB327 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		6D331B25157D40A100AA27A1 /* MainStoryboard.storyboard */ = {
+		58D617351863B8D7001EB327 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6D331B26157D40A100AA27A1 /* en */,
-			);
-			name = MainStoryboard.storyboard;
-			path = gTarSequencer;
-			sourceTree = SOURCE_ROOT;
-		};
-		6D331B3A157D40A100AA27A1 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6D331B3B157D40A100AA27A1 /* en */,
+				58D617361863B8D7001EB327 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1407,12 +613,23 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		6D331B40157D40A100AA27A1 /* Debug */ = {
+		58D6173A1863B8D7001EB327 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1423,134 +640,152 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/usr/local/include";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		6D331B41157D40A100AA27A1 /* Release */ = {
+		58D6173B1863B8D7001EB327 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/usr/local/include";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		6D331B43157D40A100AA27A1 /* Debug */ = {
+		58D6173D1863B8D7001EB327 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_CXX_LIBRARY = "libstdc++";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
-		6D331B44157D40A100AA27A1 /* Release */ = {
+		58D6173E1863B8D7001EB327 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_CXX_LIBRARY = "libstdc++";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
-		6D331B46157D40A100AA27A1 /* Debug */ = {
+		58D617401863B8D7001EB327 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/gTarSequencer.app/gTarSequencer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "gTarSequencerTests/gTarSequencerTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
-		6D331B47157D40A100AA27A1 /* Release */ = {
+		58D617411863B8D7001EB327 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/gTarSequencer.app/gTarSequencer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
 				INFOPLIST_FILE = "gTarSequencerTests/gTarSequencerTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6D331B09157D40A100AA27A1 /* Build configuration list for PBXProject "gTarSequencer" */ = {
+		58D617051863B8D6001EB327 /* Build configuration list for PBXProject "gTarSequencer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6D331B40157D40A100AA27A1 /* Debug */,
-				6D331B41157D40A100AA27A1 /* Release */,
+				58D6173A1863B8D7001EB327 /* Debug */,
+				58D6173B1863B8D7001EB327 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6D331B42157D40A100AA27A1 /* Build configuration list for PBXNativeTarget "gTarSequencer" */ = {
+		58D6173C1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "gTarSequencer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6D331B43157D40A100AA27A1 /* Debug */,
-				6D331B44157D40A100AA27A1 /* Release */,
+				58D6173D1863B8D7001EB327 /* Debug */,
+				58D6173E1863B8D7001EB327 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6D331B45157D40A100AA27A1 /* Build configuration list for PBXNativeTarget "gTarSequencerTests" */ = {
+		58D6173F1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "gTarSequencerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6D331B46157D40A100AA27A1 /* Debug */,
-				6D331B47157D40A100AA27A1 /* Release */,
+				58D617401863B8D7001EB327 /* Debug */,
+				58D617411863B8D7001EB327 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 6D331B06157D40A100AA27A1 /* Project object */;
+	rootObject = 58D617021863B8D6001EB327 /* Project object */;
 }

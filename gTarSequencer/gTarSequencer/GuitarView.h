@@ -2,13 +2,12 @@
 //  GuitarView.h
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/26/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/23/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <GtarController/GtarController.h>
-#import "Measure.h"
 
 @protocol GuitarViewDelegate <NSObject>
 
@@ -17,6 +16,10 @@
 - (void)guitarDisconnected;
 
 @end
+
+// move these to Measure.h equivalent
+#define FRETS_ON_GTAR 16
+#define STRINGS_ON_GTAR 6
 
 // GuitarView governs all interaction with the gTar. It receives direct input from the gTar and passes it up to the controller
 //      as well as receiving input from the controller about what to change on the gTar. Another function of the GuitarView is
@@ -31,11 +34,10 @@
 }
 
 @property (retain, nonatomic) GtarController * guitar;
-@property (weak, nonatomic) Measure * measure;
+//@property (weak, nonatomic) Measure * measure;
 @property (weak, nonatomic) id <GuitarViewDelegate> delegate;
 
 - (void)update;
 - (void)clearData;
 - (void)observeGtar;
-
 @end

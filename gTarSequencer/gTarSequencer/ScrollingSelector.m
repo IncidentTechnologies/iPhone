@@ -2,8 +2,8 @@
 //  ScrollingSelector.m
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 7/24/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/26/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import "ScrollingSelector.h"
@@ -19,7 +19,7 @@
 {
     CGRect wholeScreen = CGRectMake(0, 0, 480, 320);
     self = [super initWithFrame:wholeScreen];
-    if (self) {        
+    if (self) {
         // Black out the rest of the screen:
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
         
@@ -113,7 +113,7 @@
         UIImage * highlightedImage = [UIImage imageNamed:[iconPrefix stringByAppendingString:highlightedSuffix]];
         [highlightedImages addObject:highlightedImage];
     }
-
+    
     [self updateDisplay];
 }
 
@@ -150,7 +150,7 @@
     double totalHeight = scrollView.frame.size.height;
     
     contentSize = CGSizeMake(totalWidth, totalHeight);
-
+    
     [leftArrow setHidden:YES];
     
     int size = contentSize.width;
@@ -184,10 +184,10 @@
     currentOrigin.x = [self xOriginForImageWithIndex:index];
     
     if ( index%2 == 0)
-    {            
+    {
         currentOrigin.y = topRowIcon;
     }
-    else 
+    else
     {
         currentOrigin.y = bottomRowIcon;
     }
@@ -226,7 +226,7 @@
     UILabel * label = [[UILabel alloc] initWithFrame:labelFrame];
     [label setBackgroundColor:[UIColor clearColor]];
     [label setTextColor:[UIColor whiteColor]];
-    [label setTextAlignment:UITextAlignmentCenter];
+    [label setTextAlignment:NSTextAlignmentCenter];
     [label setText:[names objectAtIndex:index]];
     
     [scrollView addSubview:label];
@@ -286,17 +286,17 @@
     {
         newOffset.x -= scrollDistance;
     }
-
+    
     [scrollView setContentOffset:newOffset animated:YES];
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 @end

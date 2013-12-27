@@ -2,8 +2,8 @@
 //  ScrollingSelector.h
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 7/24/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/26/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -20,7 +20,7 @@
 //      1) regular images
 //      2) highlighted images
 //      3) names
-//      the ScrollingSelector will populate a scrollview with the items laid out in a pattern with two rows 
+//      the ScrollingSelector will populate a scrollview with the items laid out in a pattern with two rows
 //      determined by the following variables:
 //      -- topRowIcon & bottomRowIcon
 //      -- topRowLabel & bottomRowLabel

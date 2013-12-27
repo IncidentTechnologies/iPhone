@@ -2,15 +2,15 @@
 //  GuitarView.m
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/26/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/23/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import "GuitarView.h"
 
 @implementation GuitarView
 
-@synthesize measure;
+//@synthesize measure;
 @synthesize delegate;
 @synthesize guitar;
 
@@ -19,7 +19,7 @@
     self = [super init];
     if ( self )
     {
-        measure = nil;
+       // measure = nil;
         
         guitar = [[GtarController alloc] init];
         
@@ -34,9 +34,10 @@
     [NSTimer scheduledTimerWithTimeInterval:5.0 target:guitar selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 }
 
+
 - (void)update
 {
-    if ( measure == nil )
+  /*  if ( measure == nil )
     {
         [guitar turnOffAllLeds];
         return;
@@ -54,9 +55,11 @@
     {
         [self displayPlayBandAtFret:measure.playband];
         [measure setUpdatePlaybandOnGuitar:NO];
-    }
+    }*/
+    
+    NSLog(@"update");
 }
-
+/*
 - (void)setMeasure:(Measure *)newMeasure
 {
     measure = newMeasure;
@@ -65,14 +68,14 @@
     //      because it doesnt follow MVC
     [measure setUpdateNotesOnGuitar:YES];
 }
-
+*/
 - (void)displayMeasure
 {
-    for (int s = 0; s < STRINGS_ON_GTAR; s++)
+   /* for (int s = 0; s < STRINGS_ON_GTAR; s++)
     {
         for (int f = 0; f < FRETS_ON_GTAR; f++)
         {
-            if ( [measure isNoteOnAtString:s andFret:f] && !notesOn[s][f] ) 
+            if ( [measure isNoteOnAtString:s andFret:f] && !notesOn[s][f] )
             {
                 notesOn[s][f] = YES;
                 [guitar turnOnLedAtPositionWithColorMap:GtarPositionMake(f+1, s+1)];
@@ -85,11 +88,11 @@
             
             if ( playband == f )
             {
-                [guitar turnOnLedAtPosition:GtarPositionMake(f+1, s+1) 
+                [guitar turnOnLedAtPosition:GtarPositionMake(f+1, s+1)
                                   withColor:GtarLedColorMake(3, 3, 3)];
             }
         }
-    }
+    }*/
 }
 
 - (void)displayPlayBandAtFret:(int)whichFret
@@ -116,7 +119,7 @@
 
 - (void)resetLightsAtFret:(int)whichFret
 {
-    for (int i=0;i<STRINGS_ON_GTAR;i++)
+    /*for (int i=0;i<STRINGS_ON_GTAR;i++)
     {
         if ( [measure isNoteOnAtString:i andFret:whichFret] )
         {
@@ -126,7 +129,7 @@
         {
             [guitar turnOffLedAtPosition:GtarPositionMake(whichFret+1, i+1)];
         }
-    }
+    }*/
 }
 
 - (void)clearData
@@ -165,12 +168,12 @@
     [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(turnOffEffects) userInfo:nil repeats:NO];
     
     // Set color mapping
-//    [guitar setStringColorMapping:0 toRed:3 andGreen:0 andBlue:0];
-//    [guitar setStringColorMapping:1 toRed:0 andGreen:3 andBlue:0];
-//    [guitar setStringColorMapping:2 toRed:0 andGreen:0 andBlue:3];
-//    [guitar setStringColorMapping:3 toRed:3 andGreen:3 andBlue:0];
-//    [guitar setStringColorMapping:4 toRed:0 andGreen:3 andBlue:3];
-//    [guitar setStringColorMapping:5 toRed:3 andGreen:0 andBlue:3];
+    //    [guitar setStringColorMapping:0 toRed:3 andGreen:0 andBlue:0];
+    //    [guitar setStringColorMapping:1 toRed:0 andGreen:3 andBlue:0];
+    //    [guitar setStringColorMapping:2 toRed:0 andGreen:0 andBlue:3];
+    //    [guitar setStringColorMapping:3 toRed:3 andGreen:3 andBlue:0];
+    //    [guitar setStringColorMapping:4 toRed:0 andGreen:3 andBlue:3];
+    //    [guitar setStringColorMapping:5 toRed:3 andGreen:0 andBlue:3];
     
     GtarLedColorMap map;
     
@@ -206,5 +209,6 @@
     
     [delegate guitarDisconnected];
 }
+
 
 @end
