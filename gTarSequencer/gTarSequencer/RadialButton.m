@@ -15,6 +15,9 @@
 #define ZOOM_FONT 40
 #define NORMAL_FONT 21
 
+#define XBASE 480
+#define YBASE 320
+
 @implementation RadialButton
 
 @synthesize currentValue;
@@ -65,14 +68,15 @@
 {
     
     // Set up radial display:
-    CGPoint currentOrigin = [self convertPoint:self.frame.origin toView:self.superview];
-    CGRect wholeScreen = CGRectMake(-1 * currentOrigin.x, -1 * currentOrigin.y, 480, 320);
+    CGRect wholeScreen = CGRectMake(0, 0, XBASE, YBASE-1);
     
     radialDisplay = [[RadialDisplay alloc] initWithFrame:wholeScreen];
     radialDisplay.userInteractionEnabled = NO;
     radialDisplay.alpha = NOT_VISIBLE;
     
-    [self addSubview:radialDisplay];
+    // overlay by adding to the main view
+    UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    [window addSubview:radialDisplay];
     
     // tempo label
     CGRect titleframe = CGRectMake(0,0,80,30);

@@ -8,19 +8,18 @@
 
 #import "SequencerViewController.h"
 
-#define DEFAULT_TEMPO 120
 #define MAX_SEQUENCES 15
 #define LAST_FRET 15
 #define LAST_MEASURE 3
-#define SECONDS_PER_MIN 60.0
+#define XBASE 480
+#define YBASE 320
 
 @implementation SequencerViewController
 
 @synthesize instrumentTableViewController;
-@synthesize startStopButton;
+@synthesize bottomBarViewController;
 @synthesize gTarLogoImageView;
 @synthesize gTarConnectedText;
-@synthesize tempoSlider;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,208 +44,45 @@
 {
     [super viewDidUnload];
     
-    [self setTempoSlider:nil];
-    [self setStartStopButton:nil];
     //[self setPlayNotesButton:nil];
     
     // Release any retained subviews of the main view
     self.instrumentTableViewController = nil;
+    self.bottomBarViewController = nil;
     
 }
-
 
 - (void)initSubviews
 {
     
-    // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
-    
     // Gtar delegate and connection spoof
     NSLog(@"Setup and connect gTar");
     isConnected = NO;
-    isPlaying = NO;
-    tempo = DEFAULT_TEMPO;
+    //isPlaying = NO;
     
     guitarView = [[GuitarView alloc] init];
     guitarView.delegate = self;
-   /* if ( selectedInstrumentIndex >= 0 )
-    {
-        Instrument * tempInst = [instruments objectAtIndex:selectedInstrumentIndex];
-        guitarView.measure = tempInst.selectedPattern.selectedMeasure;
-    } */
     [guitarView observeGtar];
     
     string = 0;
     fret = 0;
     
-    // Tempo slider stuff
-    [tempoSlider setToValue:tempo];
-    [tempoSlider setDelegate:self];
-    
     // Instrument table
     NSLog(@"Start to build instrument table");
     
     instrumentTableViewController = [[InstrumentTableViewController alloc] initWithNibName:@"InstrumentTableView" bundle:nil];
-    
-    [instrumentTableViewController.view setFrame:CGRectMake(0, 0, x, 3*y/4)];
+    [instrumentTableViewController.view setFrame:CGRectMake(0, 0, XBASE, 255)];
     
     [self.view addSubview:instrumentTableViewController.view];
     
+    // Tempo slider and play/pause
+    NSLog(@"Start to build the bottom bar");
+    bottomBarViewController = [[BottomBarViewController alloc] initWithNibName:@"BottomBar" bundle:nil];
+    [bottomBarViewController.view setFrame:CGRectMake(0,251,XBASE,YBASE-252)];
+    
+    [self.view addSubview:bottomBarViewController.view];
+    
 }
-
-
-#pragma mark - Playing/Pausing
-
-- (IBAction)startStop:(id)sender
-{
-    
-    NSLog(@"Start stop!");
-    
-    if ( isPlaying )
-    {
-        [self stopAll];
-    }
-    else {
-       // if ( currentFret == -1 )
-        //{
-        //    [self increasePlayLocation];
-        //}
-        
-        [self playAll];
-    }
-}
-
-- (void)stopAll
-{
-    
-    NSLog(@"stop all");
-    [startStopButton setTitle:@"PLAY" forState:UIControlStateNormal];
-    startStopButton.selected = NO;
-    
-    [UIApplication sharedApplication].idleTimerDisabled = NO;
-    
-    [playTimer invalidate];
-    playTimer = nil;
-    isPlaying = NO;
-}
-
-- (void)playAll
-{
-    
-    NSLog(@"play all");
-    [startStopButton setTitle:@"PAUSE" forState:UIControlStateSelected];
-    startStopButton.selected = YES;
-    
-    [UIApplication sharedApplication].idleTimerDisabled = YES;
-    
-    // Compute seconds per beat from tempo:
-    double beatsPerSecond = tempo/SECONDS_PER_MIN;
-    beatsPerSecond*=4;
-    secondsPerBeat = 1/beatsPerSecond;
-    
-    NSLog(@"Seconds per beat: %f", secondsPerBeat);
-    
-    isPlaying = YES;
-    
-    [self performSelectorInBackground:@selector(startBackgroundLoop) withObject:nil];
-}
-
-- (void)startBackgroundLoop
-{
-    NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
-    
-    playTimer = [NSTimer scheduledTimerWithTimeInterval:secondsPerBeat target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
-    
-    [runLoop run];
-}
-
-- (void)mainEventLoop
-{
-    // Tell all of the sequencers to play their next fret
-   /* for (int i=0;i<[instruments count];i++)
-    {
-        Instrument * instToPlay = [instruments objectAtIndex:i];
-        
-        @synchronized(instToPlay.selectedPattern)
-        {
-            int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
-            
-            // If we are back at the beginning of the pattern, then check the queue:
-            if ( realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0)
-            {
-                [self checkQueueForPatternsFromInstrument:instToPlay];
-            }
-            
-            [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted];
-        }
-    }
-    
-    [self updateAllVisibleCells];
-    
-    [guitarView update];
-    
-    [self increasePlayLocation];*/
-    
-    NSLog(@"Main event loop");
-}
-
-
-#pragma mark - Tempo Slider Delegate
-
-- (void)radialButtonValueDidChange:(int)newValue
-{
-    if ( tempo != newValue )
-    {
-        tempo = newValue;
-        if ( isPlaying )
-        {
-            [self stopAll];
-            [self playAll];
-        }
-    }
-    
-    // [self save];
-}
-
-
-// checkQueueForPatternsFromInstrument
-// updateAllVisibleCells
-// increasePlayLocation
-// resetPlaySpot
-// muteInstrument
-// unmuteInstrument
-
-// userDidSelectPattern
-// commitSelectingPatternAtIndex
-// userDidSelectMeasure
-// userDidAddMeasures
-// userDidRemoveMeasures
-// updatePlaybandForInstrument
-
-// addNewInstrumentWithIndex
-// turnOffGuitarEffects
-// retrieveInstrumentOptions
-// loadInstrumentSelector
-// closeInstrumentSelector
-// hideInstrumentSelector
-
-// scrollingSelectorUserDidSelectIndex
-
-// selectInstrument
-// playSomeNotes
-
-// deleteCell
-// removeSequencerWithIndex
-
-// addInstrumentBackIntoOptions
-// ...
-
-// notePlayedAtString
-// notePlayed
-// guitarConnected
-// guitarDisconnected
-// updateConnectedImages
 
 #pragma mark - Guitar Observer
 
@@ -305,7 +141,7 @@
 
 - (void)updateConnectedImages
 {
-    if ( isConnected )
+    if (isConnected)
     {
         NSLog(@"update images connected");
         

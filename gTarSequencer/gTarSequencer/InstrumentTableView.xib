@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstrumentTableViewController">
             <connections>
+                <outlet property="instrumentTable" destination="Tll-gH-wPB" id="NCi-Sh-02C"/>
                 <outlet property="view" destination="Tll-gH-wPB" id="3RT-4x-NE4"/>
             </connections>
         </placeholder>

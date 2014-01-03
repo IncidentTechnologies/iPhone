@@ -16,6 +16,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         // Initialization code
         [self sharedInit];
     }
@@ -34,16 +35,20 @@
 
 - (void)sharedInit
 {
+    
+    // Get dimensions
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
     self.userInteractionEnabled = NO;
     
     // set radii:
     innerRadius = 100;
     outerRadius = 220;
     
-    // define center:
-    // - 70 before
+    // define center
     double verticalOffset = 75;         // the bigger this number the higher up the center is located
-    center = CGPointMake(self.frame.size.width/2, self.frame.size.height - verticalOffset);
+    center = CGPointMake(x/2, self.frame.size.height - verticalOffset);
     
     fillColor = [UIColor colorWithRed:240/255.0 green:146/255.0 blue:0 alpha:1];
     
@@ -66,6 +71,7 @@
     CGRect frame = self.frame;
     frame.origin.x = 0;
     frame.origin.y = 0;
+    frame.size.width = x;
     
     outline = [[UIImageView alloc] initWithFrame:frame];
     [self addSubview:outline];
@@ -78,7 +84,9 @@
     
     currentAngle = angles[0];
     
-    CGSize fullScreen = CGSizeMake(480, 320);
+    
+    // Get dimensions for filling
+    CGSize fullScreen = CGSizeMake(x, 320);
     UIGraphicsBeginImageContext(fullScreen);
 }
 
@@ -260,7 +268,7 @@
     CGFloat labelWidth = 30;
     CGFloat labelHeight = 20;
     CGFloat labelYOffset = 230;
-    CGFloat labelXOffset = 5;
+    CGFloat labelXOffset = outline.frame.size.width/2-230;
     CGRect frame;
     
     frame = CGRectMake(labelXOffset, labelYOffset, labelWidth, labelHeight);

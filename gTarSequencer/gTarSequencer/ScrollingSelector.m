@@ -17,18 +17,23 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    CGRect wholeScreen = CGRectMake(0, 0, 480, 320);
+    // Get dimensions
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    CGRect wholeScreen = CGRectMake(0, 0, x, y);
+    
     self = [super initWithFrame:wholeScreen];
     if (self) {
         // Black out the rest of the screen:
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
         
         // Left and Right arrows:
-        CGFloat arrowHeight = 66;
+        /*CGFloat arrowHeight = 66;
         CGFloat arrowWidth = 22;
         CGFloat inset = 15;
-        CGRect arrowFrame = CGRectMake(480 - inset - arrowWidth,
-                                       (320 - arrowHeight)/2,
+        CGRect arrowFrame = CGRectMake(x - inset - arrowWidth,
+                                       (y - arrowHeight)/2,
                                        arrowWidth,
                                        arrowHeight);
         rightArrow = [[UIButton alloc] initWithFrame:arrowFrame];
@@ -41,7 +46,7 @@
         leftArrow = [[UIButton alloc] initWithFrame:arrowFrame];
         [leftArrow setImage:[UIImage imageNamed:@"Arrow_Left"] forState:UIControlStateNormal];
         [leftArrow addTarget:self action:@selector(userDidTapArrow:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:leftArrow];
+        [self addSubview:leftArrow];*/
         
         // Background image:
         backgroundView = [[UIImageView alloc] initWithFrame:frame];
