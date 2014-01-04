@@ -55,6 +55,11 @@
 - (void)initSubviews
 {
     
+    
+    // Get dimensions
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
     // Gtar delegate and connection spoof
     NSLog(@"Setup and connect gTar");
     isConnected = NO;

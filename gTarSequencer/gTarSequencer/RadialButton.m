@@ -100,10 +100,14 @@
 
 - (void)layoutSubviews
 {
-    // define frames
-    normalFrame = CGRectMake(valueDisplay.frame.origin.x, valueDisplay.frame.origin.y, 50, 30);
     
-    zoomedFrame = CGRectMake(valueDisplay.frame.origin.x, valueDisplay.frame.origin.y, ZOOMFACTOR*50, ZOOMFACTOR*30);
+    // Get dimensions
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    // define frames
+    normalFrame = CGRectMake(80,0,50,30);
+    zoomedFrame = CGRectMake(-1*(x/2-192), -100, ZOOMFACTOR*50, ZOOMFACTOR*30);
 }
 
 // Sensitivities adjusted so user reaches min/max a few px before edge of screen
@@ -117,9 +121,9 @@
     int rangeOfValuesUp = MAX_TEMPO - startingValue;
     int rangeOfValuesDown = startingValue - MIN_TEMPO;
     
-    sensitivityRight = 0.9 * ( rangeOfValuesUp / distanceRight );
+    sensitivityRight = 1.3 * ( rangeOfValuesUp / distanceRight );
     
-    sensitivityLeft = 0.9 * ( rangeOfValuesDown / distanceLeft );
+    sensitivityLeft = 1.1 * ( rangeOfValuesDown / distanceLeft );
 
 }
 
@@ -219,6 +223,7 @@
                      animations:^{
                          radialDisplay.alpha = VISIBLE;
                          valueDisplay.frame = zoomedFrame;
+                         valueDisplay.textAlignment = NSTextAlignmentCenter;
                          valueDisplay.font = [[self.valueDisplay font] fontWithSize:ZOOM_FONT];
                          
                      }
@@ -233,6 +238,7 @@
                      animations:^{
                          radialDisplay.alpha = NOT_VISIBLE;
                          valueDisplay.frame = normalFrame;
+                         valueDisplay.textAlignment = NSTextAlignmentLeft;
                          valueDisplay.font = [[self.valueDisplay font] fontWithSize:NORMAL_FONT];
                      }
                      completion:nil];

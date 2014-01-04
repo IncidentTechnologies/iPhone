@@ -161,12 +161,10 @@
             cell = [[InstrumentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
-        //[cell initMeasureViews];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.parent = self;
         
         Instrument * tempInst = [instruments objectAtIndex:indexPath.row];
-        
         [tempInst turnOnAllFlags];
         
         cell.instrumentName = tempInst.instrumentName;
@@ -176,8 +174,11 @@
         // Display icon
         cell.instrumentIconView.image = cell.instrumentIcon;
         
+        // Initialize pattern etc data
+        [cell initMeasureViews];
+        
         //if ( !isPlaying )
-         //   [cell update];
+        [cell update];
         
         return cell;
         
@@ -485,5 +486,125 @@
 }
 
 
+#pragma mark UI Input
+
+- (void)userDidSelectPattern:(InstrumentTableViewCell *)sender atIndex:(int)index
+{
+    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    
+    Instrument * tempInst = [instruments objectAtIndex:senderIndex];
+    
+    /*if ( isPlaying )
+    {
+        // Add it to the queue:
+        NSMutableDictionary * pattern = [NSMutableDictionary dictionary];
+        
+        [pattern setObject:[NSNumber numberWithInt:index] forKey:@"Index"];
+        [pattern setObject:tempInst forKey:@"Instrument"];
+        
+        @synchronized(patternQueue)
+        {
+            [patternQueue addObject:pattern];
+        }
+    }
+    else {
+        [self commitSelectingPatternAtIndex:index forInstrument:tempInst];
+    }*/
+}
+
+- (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst
+{
+    if ( inst.selectedPatternIndex == indexToSelect )
+    {
+        return;
+    }
+    
+    Pattern * newSelection = [inst selectPattern:indexToSelect];
+    
+    //[self updatePlaybandForInstrument:inst];
+    
+    [self selectInstrument:[instruments indexOfObject:inst]];
+    
+    //guitarView.measure = newSelection.selectedMeasure;
+    
+    /*if ( !isPlaying )
+    {
+        [guitarView update];
+        [self updateAllVisibleCells];
+    }*/
+    
+    //[self save];
+}
+
+- (void)userDidSelectMeasure:(InstrumentTableViewCell *)sender atIndex:(int)index
+{
+    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    
+    Instrument * sequencerAtIndex = [instruments objectAtIndex:senderIndex];
+    
+    // -- update DS
+    [sequencerAtIndex selectMeasure:index];
+    
+    // -- select the (potentially new) instrument
+    [self selectInstrument:senderIndex];
+    
+    // -- update minimap
+    /*if ( !isPlaying )
+    {
+        [self updateAllVisibleCells];
+    }
+    
+    [self save];*/
+}
+
+- (void)userDidAddMeasures:(InstrumentTableViewCell *)sender
+{
+    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    
+    Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
+    [instrumentAtIndex addMeasure];
+    
+    //[self updatePlaybandForInstrument:instrumentAtIndex];
+    
+    [self selectInstrument:senderIndex];
+    
+    /*if ( !isPlaying )
+    {
+        [self updateAllVisibleCells];
+    }*/
+    
+    // [self save];
+}
+
+- (void)userDidRemoveMeasures:(InstrumentTableViewCell *)sender
+{
+    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    
+    Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
+    [instrumentAtIndex removeMeasure];
+    
+    // [self updatePlaybandForInstrument:instrumentAtIndex];
+    
+    [sender update];
+    
+    // guitarView.measure = instrumentAtIndex.selectedPattern.selectedMeasure;
+    // [guitarView update];
+    
+    // [self save];
+}
+
+/* Ensures that the current playband is accurately reflected in
+ the data, provided that there is a playband to display (ie >= 0).
+ Only needs to be called when the number of measures changes. */
+- (void)updatePlaybandForInstrument:(Instrument *)inst
+{
+    /*if ( currentFret >= 0 )
+    {
+        int realMeasure = [inst.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
+        [inst playFret:currentFret inRealMeasure:realMeasure withSound:NO];
+    }*/
+    
+    NSLog(@"update playband...");
+}
 
 @end

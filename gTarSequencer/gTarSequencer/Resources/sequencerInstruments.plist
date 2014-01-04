@@ -44,6 +44,46 @@
 			<key>SelectorIconPrefix</key>
 			<string>Wub</string>
 		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Bass</string>
+			<key>Index</key>
+			<integer>0</integer>
+			<key>IconName</key>
+			<string>Icon_Percussion</string>
+			<key>SelectorIconPrefix</key>
+			<string>Drum</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Flute</string>
+			<key>Index</key>
+			<integer>1</integer>
+			<key>IconName</key>
+			<string>Icon_Piano</string>
+			<key>SelectorIconPrefix</key>
+			<string>Piano</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Violin</string>
+			<key>Index</key>
+			<integer>2</integer>
+			<key>IconName</key>
+			<string>Icon_Guitar</string>
+			<key>SelectorIconPrefix</key>
+			<string>Guitar</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Triangle</string>
+			<key>Index</key>
+			<integer>3</integer>
+			<key>IconName</key>
+			<string>Icon_WubWub</string>
+			<key>SelectorIconPrefix</key>
+			<string>Wub</string>
+		</dict>
 	</array>
 </dict>
 </plist>

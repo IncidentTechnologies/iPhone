@@ -35,12 +35,12 @@
     
     NSMutableArray * imageButtons;      // array of UIButtons
     
-    UIScrollView * scrollView;
+    //UIScrollView * scrollView;
     CGSize contentSize;
     
-    UIImageView * backgroundView;
+    UIView * backgroundView;
     
-    UIButton * cancelButton;
+    //UIButton * cancelButton;
     
     CGPoint currentOrigin;
     
@@ -57,10 +57,14 @@
 }
 
 - (void)moveFrame:(CGRect)newFrame;
+- (IBAction)userDidCancel:(id)sender;
 
 @property (weak, nonatomic) id<ScrollingSelectorDelegate> delegate;
 @property (retain, nonatomic) NSMutableArray * options;
 @property (retain, nonatomic) UIButton * leftArrow;
 @property (retain, nonatomic) UIButton * rightArrow;
+
+@property (weak, nonatomic) IBOutlet UIButton * cancelButton;
+@property (weak, nonatomic) IBOutlet UIScrollView * scrollView;
 
 @end

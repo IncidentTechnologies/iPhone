@@ -14,6 +14,8 @@
 @synthesize options;
 @synthesize leftArrow;
 @synthesize rightArrow;
+@synthesize cancelButton;
+@synthesize scrollView;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,8 +30,9 @@
         // Black out the rest of the screen:
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
         
-        // Left and Right arrows:
-        /*CGFloat arrowHeight = 66;
+        // Left and Right arrows
+        // TODO: draw without images and put in nib
+        CGFloat arrowHeight = 66;
         CGFloat arrowWidth = 22;
         CGFloat inset = 15;
         CGRect arrowFrame = CGRectMake(x - inset - arrowWidth,
@@ -46,44 +49,26 @@
         leftArrow = [[UIButton alloc] initWithFrame:arrowFrame];
         [leftArrow setImage:[UIImage imageNamed:@"Arrow_Left"] forState:UIControlStateNormal];
         [leftArrow addTarget:self action:@selector(userDidTapArrow:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:leftArrow];*/
+        [self addSubview:leftArrow];
         
-        // Background image:
-        backgroundView = [[UIImageView alloc] initWithFrame:frame];
-        backgroundView.image = [UIImage imageNamed:@"InstrumentSelectScreen"];
-        backgroundView.userInteractionEnabled = YES;
+        NSArray * nibViews = [[NSBundle mainBundle] loadNibNamed:@"ScrollingSelector" owner:self options:nil];
+        backgroundView = nibViews[0];
+        backgroundView.frame = frame;
+        backgroundView.layer.cornerRadius = 5.0;
         [self addSubview:backgroundView];
         
-        // Instruments label:
-        CGRect instrumentsImageFrame = CGRectMake(220, 242, 133, 15);
-        UIImageView * instrumentsImage = [[UIImageView alloc] initWithFrame:instrumentsImageFrame];
-        instrumentsImage.image = [UIImage imageNamed:@"InstrumentsCopy"];
-        [backgroundView addSubview:instrumentsImage];
-        
-        // Cancel button:
-        CGRect cancelButtonFrame = CGRectMake(10, 233, 32, 32);
-        cancelButton = [[UIButton alloc] initWithFrame:cancelButtonFrame];
-        [cancelButton setImage:[UIImage imageNamed:@"BackButton_InstrumentSelect"] forState:UIControlStateNormal];
-        [cancelButton addTarget:self action:@selector(userDidCancel) forControlEvents:UIControlEventTouchUpInside];
-        [backgroundView addSubview:cancelButton];
-        
-        // Scroll view:
-        CGRect scrollViewFrame = CGRectMake(0, 0, frame.size.width, 215);
-        scrollView = [[UIScrollView alloc] initWithFrame:scrollViewFrame];
         scrollView.bounces = NO;
         scrollView.delegate = self;
-        scrollView.backgroundColor = [UIColor clearColor];
         scrollView.userInteractionEnabled = YES;
-        [backgroundView addSubview:scrollView];
         
         // Sizings:
         currentOrigin = CGPointMake(gap, 0);
         
-        gap = 47.5;
+        gap = 48;
         
         int iconSideLength = 58;
         iconSize = CGSizeMake(iconSideLength, iconSideLength);
-        labelSize = CGSizeMake(104, 13);
+        labelSize = CGSizeMake(104, 20);
         
         topRowIcon = 24;
         bottomRowIcon = 120;
@@ -244,7 +229,7 @@
 
 #pragma mark Actions
 
-- (void)userDidCancel
+- (IBAction)userDidCancel:(id)sender
 {
     [delegate scrollingSelectorUserDidSelectIndex:-1];
 }

@@ -29,6 +29,12 @@
 
 - (void)deleteCell:(id)sender;
 
+- (void)userDidSelectMeasure:(id)sender atIndex:(int)index;
+- (void)userDidSelectPattern:(id)sender atIndex:(int)index;
+- (void)userDidAddMeasures:(id)sender;
+- (void)userDidRemoveMeasures:(id)sender;
+
+
 @property (nonatomic, retain) IBOutlet UITableView *instrumentTable;
 
 @end

@@ -38,15 +38,6 @@
     
     startStopButton.translatesAutoresizingMaskIntoConstraints = NO;
     
-    /*[self.view addConstraint:[NSLayoutConstraint
-                              constraintWithItem:startStopButton
-                              attribute:NSLayoutAttributeTrailing
-                              relatedBy:NSLayoutRelationEqual
-                              toItem:self.view
-                              attribute:NSLayoutAttributeTrailing
-                              multiplier:0.97
-                              constant:0]];*/
-
 }
 
 - (void)viewDidUnload

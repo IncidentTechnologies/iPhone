@@ -25,6 +25,7 @@
 		580A52151864E0E00077240B /* Sequencer_Icon58px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52121864E0DF0077240B /* Sequencer_Icon58px.png */; };
 		580A52161864E0E00077240B /* Sequencer_Icon80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52131864E0DF0077240B /* Sequencer_Icon80px.png */; };
 		580A52171864E0E00077240B /* Sequencer_Icon120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52141864E0DF0077240B /* Sequencer_Icon120px.png */; };
+		583917951877995D006E3DC3 /* ScrollingSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 583917941877995D006E3DC3 /* ScrollingSelector.xib */; };
 		5840858618652D9000BFF3C5 /* InstrumentTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5840858518652D9000BFF3C5 /* InstrumentTableView.xib */; };
 		584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 584085871865355300BFF3C5 /* sequencerInstruments.plist */; };
 		5840858D18653B5C00BFF3C5 /* InstrumentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840858C18653B5C00BFF3C5 /* InstrumentTableViewCell.m */; };
@@ -32,6 +33,7 @@
 		58547AE4186CD55C003638EF /* RadialButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AE3186CD55C003638EF /* RadialButton.m */; };
 		58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AE7186CD5EF003638EF /* RadialDisplay.m */; };
 		58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AEA186CD6AF003638EF /* ScrollingSelector.m */; };
+		585916FE18774791002C21B9 /* MeasureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 585916FD18774791002C21B9 /* MeasureView.m */; };
 		58868EDA187619ED00B469C2 /* BottomBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58868ED8187619ED00B469C2 /* BottomBarViewController.m */; };
 		58868EDB187619ED00B469C2 /* BottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58868ED9187619ED00B469C2 /* BottomBar.xib */; };
 		5894D61A186505BD00849C71 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894D619186505BD00849C71 /* InstrumentTableViewController.m */; };
@@ -104,6 +106,7 @@
 		580A52121864E0DF0077240B /* Sequencer_Icon58px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon58px.png; sourceTree = "<group>"; };
 		580A52131864E0DF0077240B /* Sequencer_Icon80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon80px.png; sourceTree = "<group>"; };
 		580A52141864E0DF0077240B /* Sequencer_Icon120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon120px.png; sourceTree = "<group>"; };
+		583917941877995D006E3DC3 /* ScrollingSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollingSelector.xib; sourceTree = "<group>"; };
 		5840858518652D9000BFF3C5 /* InstrumentTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentTableView.xib; sourceTree = "<group>"; };
 		584085871865355300BFF3C5 /* sequencerInstruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sequencerInstruments.plist; sourceTree = "<group>"; };
 		5840858B18653B5B00BFF3C5 /* InstrumentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewCell.h; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 		58547AE7186CD5EF003638EF /* RadialDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialDisplay.m; sourceTree = "<group>"; };
 		58547AE9186CD6AF003638EF /* ScrollingSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingSelector.h; sourceTree = "<group>"; };
 		58547AEA186CD6AF003638EF /* ScrollingSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingSelector.m; sourceTree = "<group>"; };
+		585916FC18774790002C21B9 /* MeasureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureView.h; sourceTree = "<group>"; };
+		585916FD18774791002C21B9 /* MeasureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureView.m; sourceTree = "<group>"; };
 		58868ED7187619ED00B469C2 /* BottomBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomBarViewController.h; sourceTree = "<group>"; };
 		58868ED8187619ED00B469C2 /* BottomBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomBarViewController.m; sourceTree = "<group>"; };
 		58868ED9187619ED00B469C2 /* BottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomBar.xib; sourceTree = "<group>"; };
@@ -307,6 +312,7 @@
 			children = (
 				58547AE9186CD6AF003638EF /* ScrollingSelector.h */,
 				58547AEA186CD6AF003638EF /* ScrollingSelector.m */,
+				583917941877995D006E3DC3 /* ScrollingSelector.xib */,
 			);
 			name = ScrollingSelector;
 			sourceTree = "<group>";
@@ -334,6 +340,8 @@
 				58B4D3D2186E1F7F0035D9E5 /* Measure.m */,
 				58B4D3CB186E1F210035D9E5 /* SoundMaker.h */,
 				58B4D3CC186E1F210035D9E5 /* SoundMaker.m */,
+				585916FC18774790002C21B9 /* MeasureView.h */,
+				585916FD18774791002C21B9 /* MeasureView.m */,
 			);
 			name = Instrument;
 			sourceTree = "<group>";
@@ -558,6 +566,7 @@
 				580A52021864DFF50077240B /* gTarNotConnectedLogo.png in Resources */,
 				58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */,
 				580A52161864E0E00077240B /* Sequencer_Icon80px.png in Resources */,
+				583917951877995D006E3DC3 /* ScrollingSelector.xib in Resources */,
 				58D6176C1863BF5E001EB327 /* Sequence7.png in Resources */,
 				58D617651863BF5E001EB327 /* Sequence10.png in Resources */,
 				580A520E1864DFF50077240B /* WubButton_ON.png in Resources */,
@@ -588,6 +597,7 @@
 				584085951868C33700BFF3C5 /* GuitarView.m in Sources */,
 				58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */,
 				58B4D3D0186E1F570035D9E5 /* Pattern.m in Sources */,
+				585916FE18774791002C21B9 /* MeasureView.m in Sources */,
 				58B4D3C9186E1EC80035D9E5 /* Instrument.m in Sources */,
 				58B4D3D3186E1F7F0035D9E5 /* Measure.m in Sources */,
 				5894D61A186505BD00849C71 /* InstrumentTableViewController.m in Sources */,
