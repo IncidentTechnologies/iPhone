@@ -19,6 +19,7 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
+        
     // Get dimensions
     float y = [[UIScreen mainScreen] bounds].size.width;
     float x = [[UIScreen mainScreen] bounds].size.height;
@@ -27,11 +28,12 @@
     
     self = [super initWithFrame:wholeScreen];
     if (self) {
+        
         // Black out the rest of the screen:
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
         
         // Left and Right arrows
-        // TODO: draw without images and put in nib
+        // TODO: draw without images
         CGFloat arrowHeight = 66;
         CGFloat arrowWidth = 22;
         CGFloat inset = 15;
@@ -64,17 +66,17 @@
         // Sizings:
         currentOrigin = CGPointMake(gap, 0);
         
-        gap = 48;
+        int iconSideLength = 60;
+        gap = (frame.size.width - (iconSideLength*3))/4;
         
-        int iconSideLength = 58;
         iconSize = CGSizeMake(iconSideLength, iconSideLength);
         labelSize = CGSizeMake(104, 20);
         
-        topRowIcon = 24;
+        topRowIcon = 20;
         bottomRowIcon = 120;
         
-        topRowLabel = 93;
-        bottomRowLabel = 188;
+        topRowLabel = 85;
+        bottomRowLabel = 185;
     }
     return self;
 }
@@ -141,21 +143,25 @@
     
     contentSize = CGSizeMake(totalWidth, totalHeight);
     
-    [leftArrow setHidden:YES];
-    
     int size = contentSize.width;
     int scrollViewWidth = scrollView.frame.size.width;
     
     if ( size <= scrollViewWidth )
     {
-        [rightArrow setHidden:YES];
+        [self hideLeftArrow:YES rightArrow:YES];
     }
     else {
-        [rightArrow setHidden:NO];
+        [self hideLeftArrow:YES rightArrow:NO];
     }
     
     [scrollView setContentSize:contentSize];
     scrollView.contentOffset = CGPointMake(0, 0);
+}
+
+- (void)hideLeftArrow:(BOOL)left rightArrow:(BOOL)right{
+    
+    [leftArrow setHidden:left];
+    [rightArrow setHidden:right];
 }
 
 - (void)layoutContent
@@ -218,6 +224,7 @@
     [label setTextColor:[UIColor whiteColor]];
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setText:[names objectAtIndex:index]];
+    [label setFont:[UIFont systemFontOfSize:14.0]];
     
     [scrollView addSubview:label];
 }
@@ -245,19 +252,16 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scroller
 {
-    if ( scroller.contentOffset.x == 0 )
+    if (scroller.contentOffset.x <= 0)
     {
-        [rightArrow setHidden:NO];
-        [leftArrow setHidden:YES];
+        [self hideLeftArrow:YES rightArrow:NO];
     }
-    else if ( scroller.contentOffset.x == contentSize.width - scroller.frame.size.width)
+    else if (scroller.contentOffset.x >= contentSize.width - scroller.frame.size.width)
     {
-        [rightArrow setHidden:YES];
-        [leftArrow setHidden:NO];
+        [self hideLeftArrow:NO rightArrow:YES];
     }
     else {
-        [rightArrow setHidden:NO];
-        [leftArrow setHidden:NO];
+        [self hideLeftArrow:NO rightArrow:NO];
     }
 }
 
@@ -266,19 +270,35 @@
 - (void)userDidTapArrow:(id)sender
 {
     double scrollDistance = gap + iconSize.width;
+    double maxScroll = contentSize.width - scrollView.frame.size.width;
+    
     CGPoint newOffset = scrollView.contentOffset;
+
     // identify direction:
-    if ( sender == rightArrow )
-    {
-        newOffset.x += scrollDistance;
-    }
-    else
-    {
-        newOffset.x -= scrollDistance;
+    if(sender == rightArrow){
+        
+        double expectedScroll = floor((scrollView.contentOffset.x+scrollDistance) / scrollDistance) * scrollDistance;
+        newOffset.x = MIN(expectedScroll,maxScroll);
+        
+    }else{
+        
+        double expectedScroll = ceil((scrollView.contentOffset.x-scrollDistance) / scrollDistance) * scrollDistance;
+        newOffset.x = MAX(expectedScroll,0);
     }
     
     [scrollView setContentOffset:newOffset animated:YES];
+    
+    if (scrollView.contentOffset.x <= 0){
+        [self hideLeftArrow:YES rightArrow:NO];
+    }else if (scrollView.contentOffset.x >= maxScroll){
+        [self hideLeftArrow:NO rightArrow:YES];
+    }else{
+        [self hideLeftArrow:NO rightArrow:NO];
+    }
+    
 }
+
+
 
 /*
  // Only override drawRect: if you perform custom drawing.

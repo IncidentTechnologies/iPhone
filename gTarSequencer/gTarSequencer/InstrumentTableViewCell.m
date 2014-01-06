@@ -82,7 +82,6 @@
     minimapBorder.layer.cornerRadius = 5.0;
     minimapBorder.layer.borderColor = [UIColor colorWithRed:110/255.0 green:110/255.0 blue:114/255.0 alpha:1].CGColor;
 
-    
     // Table Cells require programmatic constraints
     NSLayoutConstraint * bodyleading = [NSLayoutConstraint
                                         constraintWithItem:patternContainer
