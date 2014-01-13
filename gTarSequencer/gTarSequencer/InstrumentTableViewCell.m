@@ -330,12 +330,10 @@
     
     NSLog(@"Select new pattern at %i", tappedIndex);
     
-    if ( tappedIndex == MUTE_SEGMENT_INDEX )
-    {
-        //[parent muteInstrument:self];
-    }
-    else {
-        //[parent unmuteInstrument:self];
+    if (tappedIndex == MUTE_SEGMENT_INDEX){
+        [parent muteInstrument:self isMute:YES];
+    }else{
+        [parent muteInstrument:self isMute:NO];
         [parent userDidSelectPattern:self atIndex:tappedIndex];
     }
 }

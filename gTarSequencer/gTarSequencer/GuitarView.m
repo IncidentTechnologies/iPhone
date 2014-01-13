@@ -10,7 +10,7 @@
 
 @implementation GuitarView
 
-//@synthesize measure;
+@synthesize measure;
 @synthesize delegate;
 @synthesize guitar;
 
@@ -19,8 +19,7 @@
     self = [super init];
     if ( self )
     {
-       // measure = nil;
-        
+        measure = nil;
         guitar = [[GtarController alloc] init];
         
         [self clearData];
@@ -37,70 +36,62 @@
 
 - (void)update
 {
-  /*  if ( measure == nil )
+    if (measure == nil)
     {
         [guitar turnOffAllLeds];
         return;
     }
     
     // update notes
-    if ( [measure shouldUpdateNotesOnGuitar] )
-    {
+    if ([measure shouldUpdateNotesOnGuitar]){
         [self displayMeasure];
         [measure setUpdateNotesOnGuitar:NO];
     }
     
     // update playband:
-    if ( [measure shouldUpdatePlaybandOnGuitar] )
-    {
+    if ([measure shouldUpdatePlaybandOnGuitar]){
         [self displayPlayBandAtFret:measure.playband];
         [measure setUpdatePlaybandOnGuitar:NO];
-    }*/
+    }
     
-    NSLog(@"update");
+    NSLog(@"gv update");
 }
-/*
+
 - (void)setMeasure:(Measure *)newMeasure
 {
     measure = newMeasure;
     
-    // i would like to get rid of this line
-    //      because it doesnt follow MVC
+    // TODO: this doesn't follow MVC
     [measure setUpdateNotesOnGuitar:YES];
 }
-*/
+
 - (void)displayMeasure
 {
-   /* for (int s = 0; s < STRINGS_ON_GTAR; s++)
-    {
-        for (int f = 0; f < FRETS_ON_GTAR; f++)
-        {
-            if ( [measure isNoteOnAtString:s andFret:f] && !notesOn[s][f] )
-            {
+    for (int s = 0; s < STRINGS_ON_GTAR; s++){
+        for (int f = 0; f < FRETS_ON_GTAR; f++){
+            
+            if ([measure isNoteOnAtString:s andFret:f] && !notesOn[s][f]){
                 notesOn[s][f] = YES;
                 [guitar turnOnLedAtPositionWithColorMap:GtarPositionMake(f+1, s+1)];
-            }
-            else if ( ![measure isNoteOnAtString:s andFret:f] && notesOn[s][f] )
-            {
+                
+            }else if (![measure isNoteOnAtString:s andFret:f] && notesOn[s][f]){
                 notesOn[s][f] = NO;
                 [guitar turnOffLedAtPosition:GtarPositionMake(f+1, s+1)];
             }
             
-            if ( playband == f )
-            {
+            if (playband == f){
                 [guitar turnOnLedAtPosition:GtarPositionMake(f+1, s+1)
                                   withColor:GtarLedColorMake(3, 3, 3)];
             }
         }
-    }*/
+    }
 }
 
 - (void)displayPlayBandAtFret:(int)whichFret
 {
     [self removePlayBand];
     
-    if ( whichFret >= 0 )
-    {
+    if (whichFret >= 0){
         playband = whichFret;
         
         [guitar turnOnLedAtPosition:GtarPositionMake(whichFret+1, 0)
@@ -110,8 +101,7 @@
 
 - (void)removePlayBand
 {
-    if ( playband >= 0 )
-    {
+    if (playband >= 0){
         [self resetLightsAtFret:playband];
         playband = -1;
     }
@@ -119,25 +109,21 @@
 
 - (void)resetLightsAtFret:(int)whichFret
 {
-    /*for (int i=0;i<STRINGS_ON_GTAR;i++)
-    {
-        if ( [measure isNoteOnAtString:i andFret:whichFret] )
-        {
+    for (int i=0;i<STRINGS_ON_GTAR;i++){
+        
+        if ([measure isNoteOnAtString:i andFret:whichFret]){
             [guitar turnOnLedAtPositionWithColorMap:GtarPositionMake(whichFret+1, i+1)];
-        }
-        else
-        {
+            
+        }else{
             [guitar turnOffLedAtPosition:GtarPositionMake(whichFret+1, i+1)];
         }
-    }*/
+    }
 }
 
 - (void)clearData
 {
-    for (int s=0;s<STRINGS_ON_GTAR;s++)
-    {
-        for (int f=0;f<FRETS_ON_GTAR;f++)
-        {
+    for (int s=0;s<STRINGS_ON_GTAR;s++){
+        for (int f=0;f<FRETS_ON_GTAR;f++){
             notesOn[s][f] = NO;
         }
     }

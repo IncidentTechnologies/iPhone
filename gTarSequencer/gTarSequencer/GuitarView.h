@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <GtarController/GtarController.h>
+#import "Measure.h"
 
 @protocol GuitarViewDelegate <NSObject>
 
@@ -34,9 +35,10 @@
 }
 
 @property (retain, nonatomic) GtarController * guitar;
-//@property (weak, nonatomic) Measure * measure;
+@property (weak, nonatomic) Measure * measure;
 @property (weak, nonatomic) id <GuitarViewDelegate> delegate;
 
+- (void)turnOffEffects;
 - (void)update;
 - (void)clearData;
 - (void)observeGtar;

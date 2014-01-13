@@ -4,8 +4,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BottomBarViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayControlViewController">
             <connections>
+                <outlet property="playNotesButton" destination="Rdq-Qf-cu0" id="xpD-D9-TdP"/>
                 <outlet property="startStopButton" destination="owG-hq-uwM" id="zn8-Bn-5pm"/>
                 <outlet property="tempoSlider" destination="eiz-Ma-1pi" id="D7C-1J-qw9"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -44,12 +45,29 @@
                         <action selector="startStop:" destination="-1" eventType="touchUpInside" id="pz4-Vn-gvs"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rdq-Qf-cu0">
+                    <rect key="frame" x="444" y="275" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="N2A-fp-WXg"/>
+                        <constraint firstAttribute="width" constant="30" id="OaV-Lf-KKR"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleColor" red="0.91590947690000002" green="0.73268175430000004" blue="0.2440864482" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="playSomeNotes:" destination="-1" eventType="touchUpInside" id="wuf-ad-VrS"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="6" id="0rO-Cc-UvG"/>
                 <constraint firstAttribute="trailing" secondItem="eiz-Ma-1pi" secondAttribute="trailing" constant="129" id="8fg-C8-Whq"/>
                 <constraint firstAttribute="trailing" secondItem="owG-hq-uwM" secondAttribute="trailing" constant="12" id="Oxv-Za-bzz"/>
+                <constraint firstAttribute="bottom" secondItem="Rdq-Qf-cu0" secondAttribute="bottom" constant="15" id="ek9-ZT-eDp"/>
                 <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-3" id="pj8-Bg-0qH"/>
+                <constraint firstAttribute="trailing" secondItem="Rdq-Qf-cu0" secondAttribute="trailing" constant="6" id="sKj-fh-R2t"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

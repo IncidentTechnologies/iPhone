@@ -1,12 +1,12 @@
 //
-//  SoundMaker.m
+//  SoundMaker.mm
 //  gTarSequencer
 //
 //  Created by Kate Schnippering on 12/27/13.
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-/*
+
 #import "SoundMaker.h"
 #import <AudioController/AudioController.h>
 
@@ -35,4 +35,3 @@
 }
 
 @end
-*/

@@ -22,6 +22,8 @@
             notes[i] = false;
         }
         
+        [self initFakeNotes];
+        
         [self sharedInit];
     }
     return self;
@@ -40,6 +42,16 @@
         [self sharedInit];
     }
     return self;
+}
+
+- (void)initFakeNotes
+{
+    for (int i=0;i<MAX_NOTES;i++)
+    {
+        if(i%8==0){
+            notes[i] = true;
+        }
+    }
 }
 
 - (void)sharedInit
@@ -131,6 +143,8 @@
 
 - (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex
 {
+    
+    NSLog(@"Play Notes At Fret");
     if ( instrumentIndex >= 0 )
     {
         int startingLocation = fret * STRINGS_ON_GTAR;
@@ -138,7 +152,8 @@
         {
             if (notes[startingLocation+i])
             {
-                //[audio PluckStringFret:i atFret:instrumentIndex];
+                NSLog(@"Make some noise");
+                [audio PluckStringFret:i atFret:instrumentIndex];
             }
         }
     }

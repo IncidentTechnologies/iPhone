@@ -1,21 +1,22 @@
 //
-//  RadialViewController.m
+//  PlayControlViewController.m
 //  gTarSequencer
 //
 //  Created by Kate Schnippering on 1/2/14.
 //  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
-#import "BottomBarViewController.h"
+#import "PlayControlViewController.h"
 
 #define DEFAULT_TEMPO 120
 #define SECONDS_PER_MIN 60.0
 
-@implementation BottomBarViewController
+@implementation PlayControlViewController
 
 @synthesize tempoSlider;
 @synthesize startStopButton;
-
+@synthesize delegate;
+@synthesize playNotesButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +31,9 @@
 {
     [super viewDidLoad];
     
+    // Play notes button
+    // [playNotesButton setTitle:@"N" forState:UIControlStateNormal];
+    
     // Tempo slider stuff
     NSLog(@"Setup tempo slider");
     tempo = DEFAULT_TEMPO;
@@ -38,12 +42,15 @@
     
     startStopButton.translatesAutoresizingMaskIntoConstraints = NO;
     
+    isPlaying = FALSE;
+    
 }
 
 - (void)viewDidUnload
 {
     [self setStartStopButton:nil];
     [self setTempoSlider:nil];
+    [self setPlayNotesButton:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,36 +63,27 @@
 
 - (void)radialButtonValueDidChange:(int)newValue
 {
-    if ( tempo != newValue )
+    if (tempo != newValue)
     {
         tempo = newValue;
-        if ( isPlaying )
+        if (isPlaying)
         {
             [self stopAll];
             [self playAll];
         }
     }
     
-    // [self save];
+    [delegate saveContext];
 }
 
 #pragma mark - Playing/Pausing
 
 - (IBAction)startStop:(id)sender
 {
-    
-    NSLog(@"Start stop!");
-    
-    if ( isPlaying )
-    {
+    if (isPlaying){
         [self stopAll];
-    }
-    else {
-        // if ( currentFret == -1 )
-        //{
-        //    [self increasePlayLocation];
-        //}
-        
+    }else{
+        [delegate initPlayLocation];
         [self playAll];
     }
 }
@@ -99,8 +97,8 @@
     
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     
-    [playTimer invalidate];
-    playTimer = nil;
+    [delegate stopAllPlaying];
+    
     isPlaying = NO;
 }
 
@@ -118,52 +116,21 @@
     beatsPerSecond*=4;
     secondsPerBeat = 1/beatsPerSecond;
     
-    NSLog(@"Seconds per beat: %f", secondsPerBeat);
+    [delegate startAllPlaying:secondsPerBeat];
     
     isPlaying = YES;
     
-    [self performSelectorInBackground:@selector(startBackgroundLoop) withObject:nil];
 }
 
-- (void)startBackgroundLoop
+// TEST
+- (IBAction)playSomeNotes:(id)sender
 {
-    NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
+    NSLog(@"Play some notes!");
     
-    playTimer = [NSTimer scheduledTimerWithTimeInterval:secondsPerBeat target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
+    //[guitarView turnOffEffects];
     
-    [runLoop run];
-}
-
-- (void)mainEventLoop
-{
-    // Tell all of the sequencers to play their next fret
+    //[delegate notePlayedAtString:5 andFret:3];
     
-    // call this code somewhere compartmentalized:
-    /* for (int i=0;i<[instruments count];i++)
-     {
-     Instrument * instToPlay = [instruments objectAtIndex:i];
-     
-     @synchronized(instToPlay.selectedPattern)
-     {
-     int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
-     
-     // If we are back at the beginning of the pattern, then check the queue:
-     if ( realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0)
-     {
-     [self checkQueueForPatternsFromInstrument:instToPlay];
-     }
-     
-     [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted];
-     }
-     }
-     
-     [self updateAllVisibleCells];
-     
-     [guitarView update];
-     
-     [self increasePlayLocation];*/
-    
-    NSLog(@"Main event loop");
 }
 
 

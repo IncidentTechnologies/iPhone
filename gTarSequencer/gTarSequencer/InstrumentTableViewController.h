@@ -11,6 +11,24 @@
 #import "InstrumentTableViewCell.h"
 #import "ScrollingSelector.h"
 
+
+@protocol InstrumentDelegate <NSObject>
+
+- (void) saveContext;
+- (BOOL) checkIsPlaying;
+- (void) resetPlayLocation;
+- (void) forceStopAll;
+
+- (void) turnOffGuitarEffects;
+- (void) setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying;
+
+- (void) updateInstruments:(NSMutableArray *)instrumentlist setSelected:(int)index;
+- (void) enqueuePattern:(NSMutableDictionary *)pattern;
+
+- (void) updateGuitarView;
+@end
+
+
 @interface InstrumentTableViewController : UITableViewController <ScrollingSelectorDelegate> {
     
     UITableView * instrumentTable;
@@ -26,15 +44,18 @@
     CGRect offLeftSelectorFrame;
     
 }
-
+- (void)muteInstrument:(InstrumentTableViewCell *)sender isMute:(BOOL)isMute;
+- (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst;
 - (void)deleteCell:(id)sender;
 
+- (void)updateAllVisibleCells;
 - (void)userDidSelectMeasure:(id)sender atIndex:(int)index;
 - (void)userDidSelectPattern:(id)sender atIndex:(int)index;
 - (void)userDidAddMeasures:(id)sender;
 - (void)userDidRemoveMeasures:(id)sender;
 
 
+@property (weak, nonatomic) id<InstrumentDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UITableView *instrumentTable;
 
 @end

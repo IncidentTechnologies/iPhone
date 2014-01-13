@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "GuitarView.h"
-
+#import "SoundMaker.h"
 #import "RadialButton.h"
 #import "ScrollingSelector.h"
-
+#import "SEQNote.h"
 #import "InstrumentTableViewController.h"
-#import "BottomBarViewController.h"
+#import "PlayControlViewController.h"
 
-@interface SequencerViewController : UIViewController <GuitarViewDelegate> {
+@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,InstrumentDelegate> {
 
     // gtar connection
     BOOL isConnected;
@@ -23,15 +23,28 @@
     int string;
     int fret;
     
-    InstrumentTableViewController * instrumentTableViewController;
-    BottomBarViewController * bottomBarViewController;
-    
     IBOutlet UIImageView * gTarLogoImageView;
     
+    // play loop
+    NSTimer * playTimer;
+    int currentFret;
+    int currentAbsoluteMeasure;
+    BOOL isPlaying;
+    
+    // instruments
+    float secondsPerBeat;
+    NSMutableArray * instruments;
+    
+    int selectedInstrumentIndex;
+    NSMutableArray * patternQueue;
+    
+    // Subviews
+    InstrumentTableViewController * instrumentTableViewController;
+    PlayControlViewController * playControlViewController;
 }
 
 @property (retain, nonatomic) InstrumentTableViewController * instrumentTableViewController;
-@property (retain, nonatomic) BottomBarViewController * bottomBarViewController;
+@property (retain, nonatomic) PlayControlViewController * playControlViewController;
 
 @property (retain, nonatomic) IBOutlet UIImageView * gTarLogoImageView;
 @property (retain, nonatomic) IBOutlet UILabel * gTarConnectedText;

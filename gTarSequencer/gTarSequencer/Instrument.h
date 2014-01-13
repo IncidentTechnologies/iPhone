@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <GtarController/GtarController.h>
 #import "Pattern.h"
-//#import "SoundMaker.h"
+#import "SoundMaker.h"
 
 #define MAX_BEAT_SEQUENCES 4
 #define FIRST_FRET 0
 #define LAST_FRET 15
 
-//extern SoundMaker * audio;
+extern SoundMaker * audio;
 extern GtarController * guitar;
 
 @interface Instrument : NSObject <NSCoding>

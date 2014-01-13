@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <GtarController/GtarController.h>
 
-//#import "SoundMaker.h"
+#import "SoundMaker.h"
 
 #define MAX_NOTES 96
 #define FIRST_FRET 0
@@ -17,7 +17,7 @@
 #define FRETS_ON_GTAR 16
 #define STRINGS_ON_GTAR 6
 
-//extern SoundMaker * audio;
+extern SoundMaker * audio;
 
 // A Measure containts 6*16 = 96 notes. It also contains the flags
 //      that indicate whether things should be updated.

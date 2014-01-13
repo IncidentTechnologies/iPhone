@@ -110,7 +110,8 @@
 #pragma mark Quartz Drawing
 
 - (void)selectMeasure {
-    self.backgroundColor = [UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1];
+    //self.backgroundColor = [UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1];
+    self.backgroundColor = [UIColor colorWithRed:100/255.0 green:20/255.0 blue:80/255.0 alpha:0.3];
 }
 
 - (void)deselectMeasure {
@@ -131,7 +132,9 @@
     CGRect wholeFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     CGContextAddRect(context, wholeFrame);
     
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:110/255.0 green:110/255.0 blue:114/255.0 alpha:1].CGColor);
+    //CGContextSetFillColorWithColor(context, [UIColor colorWithRed:110/255.0 green:110/255.0 blue:114/255.0 alpha:1].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:110/255.0 green:110/255.0 blue:114/255.0 alpha:0.5].CGColor);
+
     CGContextFillPath(context);
     
     // stroke the border:

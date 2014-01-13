@@ -11,6 +11,7 @@
 @implementation InstrumentTableViewController
 
 @synthesize instrumentTable;
+@synthesize delegate;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -25,11 +26,6 @@
         
         // load instrument selector
         [self initInstrumentSelector];
-        
-        //if ( selectedInstrumentIndex >= 0 ){
-            //Instrument * tempInst = [instruments objectAtIndex:selectedInstrumentIndex];
-            // guitarView.measure = tempInst.selectedPattern.selectedMeasure;
-        //}
         
         instruments = [[NSMutableArray alloc] init];
 
@@ -52,11 +48,10 @@
 - (void)retrieveInstrumentOptions
 {
     
-    NSLog(@"retrieve instrument options...");
-    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"sequencerInstruments" ofType:@"plist"];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    
     if ([fileManager fileExistsAtPath:path]) {
         NSLog(@"The sequencer instrument plist exists");
     } else {
@@ -72,8 +67,6 @@
     for (NSDictionary * dict in masterInstrumentOptions) {
         [remainingInstrumentOptions addObject:dict];
     }
-    
-    // at some point added instruments get removed
  
 }
 
@@ -88,32 +81,32 @@
     
     [instruments addObject:newInstrument];
  
-    //[self selectInstrument:[instruments count] - 1];
+    [self selectInstrument:[instruments count] - 1];
     
     // insert cell:
-    if ( [instruments count] == 1 )
-    {
-        //[self turnOffGuitarEffects];
-        [instrumentTable reloadData];       // Reloading data forcibly resizes the add inst button
-    }
-    else {
+    if ([instruments count] == 1){
+        
+        [delegate turnOffGuitarEffects];
+        
+        // Reloading data forcibly resizes the add inst button
+        // TODO: is this necessary?
+        [instrumentTable reloadData];
+        
+    }else{
+        
         // If there are no more options in the options array, then reload the table to get rid of the +inst cell.
-        if ( [remainingInstrumentOptions count] == 0 )
-        {
+        if ([remainingInstrumentOptions count] == 0){
             [instrumentTable reloadData];
-        }
-        else
-        {
+        }else{
             [instrumentTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[instruments count] -1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
             
-            //if ( !isPlaying )
-            //{
-             //   [self updateAllVisibleCells];
-            //}
+            if(![delegate checkIsPlaying]){
+                [self updateAllVisibleCells];
+            }
         }
     }
     
-    //[self save];
+    [delegate saveContext];
 }
 
 #pragma mark Table View Protocol
@@ -126,13 +119,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if ([remainingInstrumentOptions count] == 0)
-    {
         return [instruments count];
-    }
     else
-    {
         return [instruments count] + 1;
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,15 +138,13 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    if ( indexPath.row < [instruments count] )
+    if (indexPath.row < [instruments count])
     {
-        NSLog(@"Instrument Cell");
-        
+    
         static NSString *CellIdentifier = @"TrackCell";
         
         InstrumentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil)
-        {
+        if (cell == nil){
             cell = [[InstrumentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
@@ -177,16 +164,15 @@
         // Initialize pattern etc data
         [cell initMeasureViews];
         
-        //if ( !isPlaying )
-        [cell update];
+        if(![delegate checkIsPlaying]){
+            [cell update];
+        }
         
         return cell;
         
     }
     else
     {
-        NSLog(@"Add Instrument Cell");
-        
         UIColor *customGrey = [UIColor colorWithRed:118/255.0 green:136/255.0 blue:137/255.0 alpha:1];
         
         static NSString *CellIdentifier = @"AddInstrument";
@@ -255,8 +241,6 @@
 - (IBAction)loadInstrumentSelector:(id)sender
 {
     
-    NSLog(@"load instrument selector");
-    
     // Turn off selected status of the add instrument button (which was just clicked):
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[instruments count] inSection:0];
     UITableViewCell * addInstCell = [instrumentTable cellForRowAtIndexPath:indexPath];
@@ -276,8 +260,6 @@
 
 - (void)closeInstrumentSelector
 {
-    NSLog(@"close instrument selector");
-    
     // Animate movement offscreen to the left:
     [UIView animateWithDuration:0.5f
                      animations:^{[instrumentSelector moveFrame:offLeftSelectorFrame]; instrumentSelector.alpha = 0.3;}
@@ -322,16 +304,20 @@
     
     selectedInstrumentIndex = index;
     
+    [delegate updateInstruments:instruments setSelected:index];
+    
+    NSLog(@"Selected Instrument Index is %i",index);
+    
     // Select new:
     Instrument * newSelection = [instruments objectAtIndex:selectedInstrumentIndex];
     [newSelection setSelected:YES];
     
-    // Update guitarView's measureToDisplay:
-    /*guitarView.measure = newSelection.selectedPattern.selectedMeasure;
-    if ( !isPlaying )
-    {
-        [guitarView update];
-    }*/
+    // Update guitarView's measureToDisplay
+    [delegate setMeasureAndUpdate:newSelection.selectedPattern.selectedMeasure checkNotPlaying:TRUE];
+    
+    if(![delegate checkIsPlaying]){
+        [delegate updateGuitarView];
+    }
 }
 
 - (void)deleteCell:(id)sender
@@ -341,36 +327,29 @@
     // Remove from data structure:
     [self removeSequencerWithIndex:pathToDelete.row];
     
-    
     // If the remaining options was previously empty (aka current count == 1),
     //      then reload the table to get the +inst cell back.
-    if ([remainingInstrumentOptions count] == 1 )
-    {
+    if([remainingInstrumentOptions count] == 1){
         [instrumentTable reloadData];
-    }
-    else {
+    }else{
         // Else, delete the cell that the user requested:
         [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationFade];
     }
     
-    if ( [instruments count] == 0 )
-    {
+    if ([instruments count] == 0){
         [instrumentTable reloadData];
     }
     
     // Update cells:
-    if ( [instruments count] > 0 )
-    {
-        //if ( !isPlaying )
-        //{
-        //    [self updateAllVisibleCells];
-        //}
-    }
-    else {
-        //[self stopAll];
+    if([instruments count] > 0){
+        if(![delegate checkIsPlaying]){
+            [self updateAllVisibleCells];
+        }
+    }else{
+        [delegate forceStopAll];
     }
     
-    //[self save];
+    [delegate saveContext];
 }
 
 - (void)removeSequencerWithIndex:(int)indexToRemove
@@ -386,33 +365,26 @@
      The selected index must also be updated if an instrument above the selected is deleted.
      If the instrument being deleted is the last instrument, then the guitarView must be cleared
      and the playband reset */
-    if ( selectedInstrumentIndex == indexToRemove )
-    {
+    if(selectedInstrumentIndex == indexToRemove){
         // If there are no more instruments:
-        if ( [instruments count] == 0 )
-        {
+        if ([instruments count] == 0){
             // Clear guitarView and playspot
             selectedInstrumentIndex = -1;
-            /*guitarView.measure = nil;
-            [guitarView update];
-            [self resetPlaySpot];*/
-        }
-        else
-        {
+            [delegate setMeasureAndUpdate:nil checkNotPlaying:FALSE];
+
+            [delegate resetPlayLocation];
+        }else{
             // If there are instruments before this one...
-            if ( indexToRemove > 0 )
-            {
+            if(indexToRemove > 0){
                 // Then select an instrument before.
                 [self selectInstrument:indexToRemove - 1];
-            }
-            else {
+            }else{
                 // Else, select one after (at the same index because everything shifts)
                 [self selectInstrument:indexToRemove];
             }
         }
     }
-    else if ( selectedInstrumentIndex > indexToRemove )
-    {
+    else if(selectedInstrumentIndex > indexToRemove){
         /* If the selected one is not being deleted, but something
          above it is, than the index in the array needs to be shifted */
         [self selectInstrument:selectedInstrumentIndex - 1];
@@ -427,10 +399,9 @@
     NSDictionary * instrumentDictionary;
     
     int i = 0;
-    for (NSDictionary * instDict in masterInstrumentOptions)
-    {
-        if ( [[instDict objectForKey:@"Name"] isEqualToString:inst.instrumentName] )
-        {
+    for(NSDictionary * instDict in masterInstrumentOptions){
+        
+        if([[instDict objectForKey:@"Name"] isEqualToString:inst.instrumentName]){
             instrumentDictionary = instDict;
         }
         
@@ -449,15 +420,13 @@
 - (void)bubbleUp:(int)index
 {
     // Base case:
-    if ( index == 0 )
-    {
+    if (index == 0){
         return;
     }
     
-    if ( [self does:[remainingInstrumentOptions objectAtIndex:index]
-         comeBefore:[remainingInstrumentOptions objectAtIndex:index-1]
-            inArray:masterInstrumentOptions] )
-    {
+    if([self does:[remainingInstrumentOptions objectAtIndex:index] comeBefore:[remainingInstrumentOptions objectAtIndex:index-1]
+            inArray:masterInstrumentOptions]){
+        
         [self swap:index with:index-1 inArray:remainingInstrumentOptions];
     }
     
@@ -475,16 +444,25 @@
 
 - (BOOL)does:(NSDictionary *)first comeBefore:(NSDictionary *)second inArray:(NSArray *)array
 {
-    if ( [array indexOfObject:first] < [array indexOfObject:second] )
-    {
+    if([array indexOfObject:first] < [array indexOfObject:second]){
         return YES;
-    }
-    else
-    {
+    }else{
         return NO;
     }
 }
 
+#pragma mark Mute Unmute Instrument Update View
+- (void)muteInstrument:(InstrumentTableViewCell *)sender isMute:(BOOL)isMute
+{
+
+    if(isMute == YES) NSLog(@"Mute instrument");
+    
+    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    
+    Instrument * tempInst = [instruments objectAtIndex:senderIndex];
+    
+    tempInst.isMuted = isMute;
+}
 
 #pragma mark UI Input
 
@@ -494,46 +472,40 @@
     
     Instrument * tempInst = [instruments objectAtIndex:senderIndex];
     
-    /*if ( isPlaying )
-    {
+    if ([delegate checkIsPlaying]){
+        
         // Add it to the queue:
         NSMutableDictionary * pattern = [NSMutableDictionary dictionary];
         
         [pattern setObject:[NSNumber numberWithInt:index] forKey:@"Index"];
         [pattern setObject:tempInst forKey:@"Instrument"];
         
-        @synchronized(patternQueue)
-        {
-            [patternQueue addObject:pattern];
-        }
-    }
-    else {
+        [delegate enqueuePattern:pattern];
+        
+    } else {
         [self commitSelectingPatternAtIndex:index forInstrument:tempInst];
-    }*/
+    }
 }
 
 - (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst
 {
-    if ( inst.selectedPatternIndex == indexToSelect )
-    {
+    if (inst.selectedPatternIndex == indexToSelect){
         return;
     }
     
     Pattern * newSelection = [inst selectPattern:indexToSelect];
     
-    //[self updatePlaybandForInstrument:inst];
+    [self updatePlaybandForInstrument:inst];
     
     [self selectInstrument:[instruments indexOfObject:inst]];
     
-    //guitarView.measure = newSelection.selectedMeasure;
-    
-    /*if ( !isPlaying )
-    {
-        [guitarView update];
+    [delegate setMeasureAndUpdate:newSelection.selectedMeasure checkNotPlaying:TRUE];
+
+    if (![delegate checkIsPlaying]){
         [self updateAllVisibleCells];
-    }*/
+    }
     
-    //[self save];
+    [delegate saveContext];
 }
 
 - (void)userDidSelectMeasure:(InstrumentTableViewCell *)sender atIndex:(int)index
@@ -549,12 +521,12 @@
     [self selectInstrument:senderIndex];
     
     // -- update minimap
-    /*if ( !isPlaying )
-    {
+    if (![delegate checkIsPlaying]){
         [self updateAllVisibleCells];
     }
     
-    [self save];*/
+    [delegate saveContext];
+    
 }
 
 - (void)userDidAddMeasures:(InstrumentTableViewCell *)sender
@@ -564,16 +536,16 @@
     Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
     [instrumentAtIndex addMeasure];
     
-    //[self updatePlaybandForInstrument:instrumentAtIndex];
+    [self updatePlaybandForInstrument:instrumentAtIndex];
     
     [self selectInstrument:senderIndex];
     
-    /*if ( !isPlaying )
-    {
+    if (![delegate checkIsPlaying]){
         [self updateAllVisibleCells];
-    }*/
+    }
     
-    // [self save];
+    [delegate saveContext];
+    
 }
 
 - (void)userDidRemoveMeasures:(InstrumentTableViewCell *)sender
@@ -583,14 +555,13 @@
     Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
     [instrumentAtIndex removeMeasure];
     
-    // [self updatePlaybandForInstrument:instrumentAtIndex];
+    [self updatePlaybandForInstrument:instrumentAtIndex];
     
     [sender update];
     
-    // guitarView.measure = instrumentAtIndex.selectedPattern.selectedMeasure;
-    // [guitarView update];
+    [delegate setMeasureAndUpdate:instrumentAtIndex.selectedPattern.selectedMeasure checkNotPlaying:FALSE];
     
-    // [self save];
+    [delegate saveContext];
 }
 
 /* Ensures that the current playband is accurately reflected in
@@ -605,6 +576,23 @@
     }*/
     
     NSLog(@"update playband...");
+}
+
+
+- (void)updateAllVisibleCells
+{
+    NSArray * visibleCells = [[instrumentTable visibleCells] copy];
+    
+    int limit = [visibleCells count];
+    
+    for (int i=0;i<limit;i++){
+        
+        InstrumentTableViewCell * track = (InstrumentTableViewCell *) [visibleCells objectAtIndex:i];
+        
+        if ([track respondsToSelector:@selector(update)]){
+            [track update];
+        }
+    }
 }
 
 @end
