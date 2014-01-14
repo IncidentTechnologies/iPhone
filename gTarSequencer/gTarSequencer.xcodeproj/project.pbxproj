@@ -671,12 +671,12 @@
 				58B4D3CF186E1F570035D9E5 /* Pattern.m */,
 				58B4D3D1186E1F7F0035D9E5 /* Measure.h */,
 				58B4D3D2186E1F7F0035D9E5 /* Measure.m */,
-				58B4D3CB186E1F210035D9E5 /* SoundMaker.h */,
-				58B4D3CC186E1F210035D9E5 /* SoundMaker.mm */,
 				585916FC18774790002C21B9 /* MeasureView.h */,
 				585916FD18774791002C21B9 /* MeasureView.m */,
 				5811AB47187B95BA00FC0BD2 /* SEQNote.h */,
 				5811AB48187B95BA00FC0BD2 /* SEQNote.m */,
+				58B4D3CB186E1F210035D9E5 /* SoundMaker.h */,
+				58B4D3CC186E1F210035D9E5 /* SoundMaker.mm */,
 			);
 			name = Instrument;
 			sourceTree = "<group>";

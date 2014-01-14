@@ -80,7 +80,7 @@
 {
     minimapBorder.layer.borderWidth = 1.0;
     minimapBorder.layer.cornerRadius = 5.0;
-    minimapBorder.layer.borderColor = [UIColor colorWithRed:110/255.0 green:110/255.0 blue:114/255.0 alpha:1].CGColor;
+    minimapBorder.layer.borderColor = [UIColor colorWithRed:110/255.0 green:110/255.0 blue:114/255.0 alpha:1.0].CGColor;
 
     // Table Cells require programmatic constraints
     NSLayoutConstraint * bodyleading = [NSLayoutConstraint
@@ -222,11 +222,9 @@
         self.patternToDisplay = instrument.selectedPattern;
         
         // If the instrument is muted, then the OFF button needs to be selected
-        if ( instrument.isMuted )
-        {
+        if (instrument.isMuted){
             [self selectPatternButton:MUTE_SEGMENT_INDEX];
-        }
-        else {
+        } else {
             [self selectPatternButton:instrument.selectedPatternIndex];
         }
         
@@ -234,7 +232,7 @@
     }
     
     // update the number of measures:
-    if ( patternToDisplay.countChanged )
+    if (patternToDisplay.countChanged)
     {
         [self fillWithMeasures:patternToDisplay.measureCount];
         patternToDisplay.countChanged = NO;
@@ -264,8 +262,15 @@
 
 - (void)fillWithMeasures:(int)newCount
 {
-    for (int i = newCount; i < MAX_MEASURES_IN_UI; i++)
-        [[measureViews objectAtIndex:i] drawBorder];
+    
+    for(int i = 0; i < MAX_MEASURES_IN_UI; i++){
+        if(i < newCount){
+            [[measureViews objectAtIndex:i] drawMeasure:FALSE];
+        }else{
+            [[measureViews objectAtIndex:i] drawMeasure:TRUE];
+        }
+    }
+    
 }
 
 

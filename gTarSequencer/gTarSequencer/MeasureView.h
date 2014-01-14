@@ -27,7 +27,7 @@
 @property (retain, nonatomic) Measure * measure;
 
 - (void)update;
-- (void)drawBorder;
+- (void)drawMeasure:(BOOL)withColor;
 - (void)selectMeasure;
 - (void)deselectMeasure;
 

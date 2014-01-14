@@ -16,7 +16,6 @@
 @synthesize tempoSlider;
 @synthesize startStopButton;
 @synthesize delegate;
-@synthesize playNotesButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,8 +30,8 @@
 {
     [super viewDidLoad];
     
-    // Play notes button
-    // [playNotesButton setTitle:@"N" forState:UIControlStateNormal];
+    // Play button
+    [self drawPlayButton];
     
     // Tempo slider stuff
     NSLog(@"Setup tempo slider");
@@ -40,7 +39,8 @@
     [tempoSlider setToValue:tempo];
     [tempoSlider setDelegate:self];
     
-    startStopButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [startStopButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1]];
+    startStopButton.layer.cornerRadius = 5.0;
     
     isPlaying = FALSE;
     
@@ -50,7 +50,6 @@
 {
     [self setStartStopButton:nil];
     [self setTempoSlider:nil];
-    [self setPlayNotesButton:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,9 +90,8 @@
 - (void)stopAll
 {
     
-    NSLog(@"stop all");
-    [startStopButton setTitle:@"PLAY" forState:UIControlStateNormal];
-    startStopButton.selected = NO;
+    [self clearButton:startStopButton];
+    [self drawPlayButton];
     
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     
@@ -104,10 +102,8 @@
 
 - (void)playAll
 {
-    
-    NSLog(@"play all");
-    [startStopButton setTitle:@"PAUSE" forState:UIControlStateSelected];
-    startStopButton.selected = YES;
+    [self clearButton:startStopButton];
+    [self drawPauseButton];
     
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     
@@ -122,15 +118,74 @@
     
 }
 
-// TEST
-- (IBAction)playSomeNotes:(id)sender
+- (void)clearButton:(UIButton *)button
 {
-    NSLog(@"Play some notes!");
     
-    //[guitarView turnOffEffects];
+    NSArray *viewsToRemove = [button subviews];
+    for (UIView *v in viewsToRemove) {
+        [v removeFromSuperview];
+    }
+}
+
+- (void)drawPlayButton
+{
     
-    //[delegate notePlayedAtString:5 andFret:3];
     
+    CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 15;
+    int playX = startStopButton.frame.size.width/2 - playWidth/2;
+    int playY = 10;
+    CGFloat playHeight = startStopButton.frame.size.height - 20;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
+    CGContextClosePath(context);
+    
+    CGContextFillPath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [startStopButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
+}
+
+- (void)drawPauseButton
+{
+    CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int pauseWidth = 5;
+    
+    CGFloat pauseHeight = startStopButton.frame.size.height - 20;
+    CGRect pauseFrameLeft = CGRectMake(startStopButton.frame.size.width/2 - pauseWidth - 2, 10, pauseWidth, pauseHeight);
+    CGRect pauseFrameRight = CGRectMake(pauseFrameLeft.origin.x+pauseWidth+3, 10, pauseWidth, pauseHeight);
+    
+    CGContextAddRect(context,pauseFrameLeft);
+    CGContextAddRect(context,pauseFrameRight);
+    CGContextSetFillColorWithColor(context,[UIColor whiteColor].CGColor);
+    CGContextFillRect(context,pauseFrameLeft);
+    CGContextFillRect(context,pauseFrameRight);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [startStopButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
 }
 
 

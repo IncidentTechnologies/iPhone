@@ -46,11 +46,13 @@
 
 - (void)initFakeNotes
 {
-    for (int i=0;i<MAX_NOTES;i++)
-    {
-        if(i%8==0){
-            notes[i] = true;
-        }
+    int numnotes = random()%8;
+    NSLog(@"initting for %i notes",numnotes);
+    
+    for(int i=0;i<numnotes;i++){
+        int r = random()%MAX_NOTES;
+        NSLog(@"at index %i",r);
+        notes[r] = true;
     }
 }
 
@@ -144,7 +146,6 @@
 - (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex
 {
     
-    NSLog(@"Play Notes At Fret");
     if ( instrumentIndex >= 0 )
     {
         int startingLocation = fret * STRINGS_ON_GTAR;
@@ -152,7 +153,6 @@
         {
             if (notes[startingLocation+i])
             {
-                NSLog(@"Make some noise");
                 [audio PluckStringFret:i atFret:instrumentIndex];
             }
         }

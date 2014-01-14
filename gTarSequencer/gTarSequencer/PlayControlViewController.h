@@ -31,14 +31,12 @@
    
 }
 
-- (IBAction)playSomeNotes:(id)sender;
 - (IBAction)startStop:(id)sender;
 - (void)stopAll;
 
 @property (weak, nonatomic) id<PlayControlDelegate> delegate;
 @property (weak, nonatomic) IBOutlet RadialButton * tempoSlider;
 @property (retain, nonatomic) IBOutlet UIButton * startStopButton;
-@property (retain, nonatomic) IBOutlet UIButton * playNotesButton;
 
 
 @end

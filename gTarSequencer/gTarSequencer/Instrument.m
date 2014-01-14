@@ -116,13 +116,12 @@
 }
 
 - (void)removeMeasure {
-    if ( selectedPattern.measureCount == 1 )
-    {
+    
+    if (selectedPattern.measureCount == 1){
         return;
     }
     
-    @synchronized(selectedPattern)
-    {
+    @synchronized(selectedPattern){
         // Remove half the measures:
         [selectedPattern halveMeasures];
     }

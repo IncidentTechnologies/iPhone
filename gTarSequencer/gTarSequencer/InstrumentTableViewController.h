@@ -26,6 +26,7 @@
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
 
 - (void) updateGuitarView;
+- (void) updatePlaybandForInstrument:(Instrument *)inst;
 @end
 
 

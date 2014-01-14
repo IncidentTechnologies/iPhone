@@ -495,7 +495,7 @@
     
     Pattern * newSelection = [inst selectPattern:indexToSelect];
     
-    [self updatePlaybandForInstrument:inst];
+    [delegate updatePlaybandForInstrument:inst];
     
     [self selectInstrument:[instruments indexOfObject:inst]];
     
@@ -536,7 +536,7 @@
     Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
     [instrumentAtIndex addMeasure];
     
-    [self updatePlaybandForInstrument:instrumentAtIndex];
+    [delegate updatePlaybandForInstrument:instrumentAtIndex];
     
     [self selectInstrument:senderIndex];
     
@@ -555,7 +555,7 @@
     Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
     [instrumentAtIndex removeMeasure];
     
-    [self updatePlaybandForInstrument:instrumentAtIndex];
+    [delegate updatePlaybandForInstrument:instrumentAtIndex];
     
     [sender update];
     
@@ -563,21 +563,6 @@
     
     [delegate saveContext];
 }
-
-/* Ensures that the current playband is accurately reflected in
- the data, provided that there is a playband to display (ie >= 0).
- Only needs to be called when the number of measures changes. */
-- (void)updatePlaybandForInstrument:(Instrument *)inst
-{
-    /*if ( currentFret >= 0 )
-    {
-        int realMeasure = [inst.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
-        [inst playFret:currentFret inRealMeasure:realMeasure withSound:NO];
-    }*/
-    
-    NSLog(@"update playband...");
-}
-
 
 - (void)updateAllVisibleCells
 {

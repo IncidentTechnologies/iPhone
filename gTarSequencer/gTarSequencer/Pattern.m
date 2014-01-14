@@ -159,13 +159,11 @@
     
     int difference = previousCount - measureCount;
     
-    for (int i=0;i<difference;i++)
-    {
+    for (int i=0;i<difference;i++){
         [measures removeLastObject];
     }
     
-    if ( selectedMeasureIndex >= [measures count] )
-    {
+    if (selectedMeasureIndex >= [measures count]){
         [self selectMeasure:[measures count] - 1];
     }
 }

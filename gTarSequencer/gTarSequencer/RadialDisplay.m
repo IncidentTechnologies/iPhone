@@ -53,7 +53,7 @@
     fillColor = [UIColor colorWithRed:240/255.0 green:146/255.0 blue:0 alpha:1];
     
     // define the angular bounds:
-    double angleWidth = 17;
+    double angleWidth = 18;
     
     double angleGap = (180 - NUMBER_OF_WEDGES*angleWidth)/(NUMBER_OF_WEDGES + 1);
     
@@ -87,7 +87,7 @@
     
     // Get dimensions for filling
     CGSize fullScreen = CGSizeMake(x, 320);
-    UIGraphicsBeginImageContext(fullScreen);
+    UIGraphicsBeginImageContextWithOptions(fullScreen, NO, 0);
 }
 
 - (double)radians:(double)degrees
@@ -163,8 +163,7 @@
 
 - (void)fillAngles:(NSArray *)anglesToFill withErasing:(BOOL)shouldErase
 {
-    if ( anglesToFill == nil || [anglesToFill count] == 0 )
-    {
+    if (anglesToFill == nil || [anglesToFill count] == 0){
         return;
     }
     
@@ -173,7 +172,7 @@
     CGContextSetShouldAntialias(fillingContext, NO);
     
     // Set blend mode to either erase or fill:
-    if ( shouldErase )
+    if (shouldErase)
     {
         CGContextSetBlendMode(fillingContext, kCGBlendModeClear);
     }
@@ -236,7 +235,7 @@
     // Draw the outline:
     CGSize size = outline.frame.size;
     
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -255,6 +254,7 @@
     {
         CGPathRef wedgePath = [self drawWedgewithStartingAngle:angles[i] andEndingAngle:angles[i+1]];
         CGContextAddPath(context, wedgePath);
+        CGContextClosePath(context);
         CGContextStrokePath(context);
     }
     
