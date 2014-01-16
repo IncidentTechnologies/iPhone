@@ -139,9 +139,14 @@
 		58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AE7186CD5EF003638EF /* RadialDisplay.m */; };
 		58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AEA186CD6AF003638EF /* ScrollingSelector.m */; };
 		585916FE18774791002C21B9 /* MeasureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 585916FD18774791002C21B9 /* MeasureView.m */; };
+		587B6EC41885E9290071BE15 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 587B6EBE1885E9280071BE15 /* libTestFlight.a */; };
+		587B6EC51885E9290071BE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 587B6EBF1885E9280071BE15 /* README.md */; };
+		587B6EC61885E9290071BE15 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 587B6EC01885E9290071BE15 /* release_notes.md */; };
+		587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 587B6EC71885E9720071BE15 /* libz.dylib */; };
 		58868EDA187619ED00B469C2 /* PlayControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58868ED8187619ED00B469C2 /* PlayControlViewController.m */; };
 		58868EDB187619ED00B469C2 /* BottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58868ED9187619ED00B469C2 /* BottomBar.xib */; };
 		5894D61A186505BD00849C71 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894D619186505BD00849C71 /* InstrumentTableViewController.m */; };
+		58A59522188619C100696614 /* libGtarControllerDeploy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A59521188619C100696614 /* libGtarControllerDeploy.a */; };
 		58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */; };
 		58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */; };
 		58B4D3C9186E1EC80035D9E5 /* Instrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B4D3C8186E1EC80035D9E5 /* Instrument.m */; };
@@ -176,7 +181,6 @@
 		58D6176E1863BF5E001EB327 /* Sequence9.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D617631863BF5E001EB327 /* Sequence9.png */; };
 		58D6960D1864D20A00113AF2 /* SequencerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D6960B1864D20A00113AF2 /* SequencerViewController.m */; };
 		58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D6960C1864D20A00113AF2 /* SequencerViewController.xib */; };
-		58EEB7A61868EE5E0089BFD9 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A51868EE5E0089BFD9 /* libGtarController.a */; };
 		58EEB7A81868EE630089BFD9 /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A71868EE630089BFD9 /* libAudioController.a */; };
 		58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */; };
 		58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */; };
@@ -333,11 +337,20 @@
 		58547AEA186CD6AF003638EF /* ScrollingSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingSelector.m; sourceTree = "<group>"; };
 		585916FC18774790002C21B9 /* MeasureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureView.h; sourceTree = "<group>"; };
 		585916FD18774791002C21B9 /* MeasureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureView.m; sourceTree = "<group>"; };
+		587B6EBA1885E6D80071BE15 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
+		587B6EBE1885E9280071BE15 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		587B6EBF1885E9280071BE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		587B6EC01885E9290071BE15 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		587B6EC11885E9290071BE15 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		587B6EC21885E9290071BE15 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		587B6EC31885E9290071BE15 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		587B6EC71885E9720071BE15 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		58868ED7187619ED00B469C2 /* PlayControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayControlViewController.h; sourceTree = "<group>"; };
 		58868ED8187619ED00B469C2 /* PlayControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayControlViewController.m; sourceTree = "<group>"; };
 		58868ED9187619ED00B469C2 /* BottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomBar.xib; sourceTree = "<group>"; };
 		5894D618186505BD00849C71 /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
 		5894D619186505BD00849C71 /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
+		58A59521188619C100696614 /* libGtarControllerDeploy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarControllerDeploy.a; path = "../../../../Library/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos/libGtarControllerDeploy.a"; sourceTree = "<group>"; };
 		58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoading.png; sourceTree = "<group>"; };
 		58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoadingWide.png; sourceTree = "<group>"; };
 		58B4D3C7186E1EC80035D9E5 /* Instrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instrument.h; sourceTree = "<group>"; };
@@ -394,12 +407,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58A59522188619C100696614 /* libGtarControllerDeploy.a in Frameworks */,
+				587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */,
 				58B9AD0E187B61C5001EDD33 /* libc++.dylib in Frameworks */,
 				58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */,
 				58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */,
 				58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */,
 				58EEB7A81868EE630089BFD9 /* libAudioController.a in Frameworks */,
-				58EEB7A61868EE5E0089BFD9 /* libGtarController.a in Frameworks */,
+				587B6EC41885E9290071BE15 /* libTestFlight.a in Frameworks */,
 				58D617101863B8D6001EB327 /* CoreGraphics.framework in Frameworks */,
 				58D617121863B8D6001EB327 /* UIKit.framework in Frameworks */,
 				58D6170E1863B8D6001EB327 /* Foundation.framework in Frameworks */,
@@ -650,6 +665,20 @@
 			name = ScrollingSelector;
 			sourceTree = "<group>";
 		};
+		587B6EBD1885E9280071BE15 /* TestFlightSDK2.1.3 */ = {
+			isa = PBXGroup;
+			children = (
+				587B6EBE1885E9280071BE15 /* libTestFlight.a */,
+				587B6EBF1885E9280071BE15 /* README.md */,
+				587B6EC01885E9290071BE15 /* release_notes.md */,
+				587B6EC11885E9290071BE15 /* TestFlight+AsyncLogging.h */,
+				587B6EC21885E9290071BE15 /* TestFlight+ManualSessions.h */,
+				587B6EC31885E9290071BE15 /* TestFlight.h */,
+			);
+			name = TestFlightSDK2.1.3;
+			path = gTarSequencer/TestFlightSDK2.1.3;
+			sourceTree = "<group>";
+		};
 		58868ED4187602B500B469C2 /* PlayControlViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,6 +713,7 @@
 		58D617011863B8D6001EB327 = {
 			isa = PBXGroup;
 			children = (
+				587B6EBD1885E9280071BE15 /* TestFlightSDK2.1.3 */,
 				58D617131863B8D6001EB327 /* gTarSequencer */,
 				58D617581863BF5E001EB327 /* Resources */,
 				58D617321863B8D7001EB327 /* gTarSequencerTests */,
@@ -704,6 +734,8 @@
 		58D6170C1863B8D6001EB327 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				58A59521188619C100696614 /* libGtarControllerDeploy.a */,
+				587B6EC71885E9720071BE15 /* libz.dylib */,
 				58B9AD0D187B61C5001EDD33 /* libc++.dylib */,
 				58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */,
 				58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */,
@@ -721,6 +753,7 @@
 		58D617131863B8D6001EB327 /* gTarSequencer */ = {
 			isa = PBXGroup;
 			children = (
+				587B6EBA1885E6D80071BE15 /* AppData.h */,
 				58D6171C1863B8D7001EB327 /* AppDelegate.h */,
 				58D6171D1863B8D7001EB327 /* AppDelegate.m */,
 				58D617561863BD81001EB327 /* LoadingViewController */,
@@ -843,6 +876,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Incident Technologies";
 				TargetAttributes = {
+					58D617091863B8D6001EB327 = {
+						DevelopmentTeam = AE9ZEG65F3;
+					};
 					58D6172A1863B8D7001EB327 = {
 						TestTargetID = 58D617091863B8D6001EB327;
 					};
@@ -878,8 +914,10 @@
 				5811AB2E187B88C800FC0BD2 /* Percussion 78.mp3 in Resources */,
 				5811AB3C187B88C800FC0BD2 /* Percussion 90.mp3 in Resources */,
 				5811AB27187B88C800FC0BD2 /* Percussion 71.mp3 in Resources */,
+				587B6EC51885E9290071BE15 /* README.md in Resources */,
 				5811AB16187B88C800FC0BD2 /* Percussion 56.mp3 in Resources */,
 				5811AB08187B88C800FC0BD2 /* Percussion 43.mp3 in Resources */,
+				587B6EC61885E9290071BE15 /* release_notes.md in Resources */,
 				5811AB23187B88C800FC0BD2 /* Percussion 68.mp3 in Resources */,
 				5811AB37187B88C800FC0BD2 /* Percussion 86.mp3 in Resources */,
 				580A51FF1864DFF50077240B /* DrumButton_OFF.png in Resources */,
@@ -1166,14 +1204,23 @@
 		58D6173D1863B8D7001EB327 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LIBRARY = "libstdc++";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/kschnippering/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.1.3",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = debugging;
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1181,14 +1228,25 @@
 		58D6173E1863B8D7001EB327 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LIBRARY = "libstdc++";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kate Schnippering (RTA23J392S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kate Schnippering (RTA23J392S)";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/kschnippering/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.1.3",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9D115CEA-675F-43E6-86F9-6707393F780C";
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = debugging;
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

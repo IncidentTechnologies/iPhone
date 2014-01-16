@@ -17,11 +17,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-Ma-1pi" customClass="RadialButton">
-                    <rect key="frame" x="240" y="274" width="111" height="49"/>
+                    <rect key="frame" x="166" y="265" width="149" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="49" id="JNH-Vt-pLq"/>
-                        <constraint firstAttribute="width" constant="111" id="qda-TP-XQz"/>
+                        <constraint firstAttribute="width" constant="149" id="Z3a-XN-9Qx"/>
+                        <constraint firstAttribute="height" constant="55" id="dQZ-l3-yxP"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal">
@@ -29,11 +29,12 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owG-hq-uwM">
-                    <rect key="frame" x="374" y="270" width="94" height="39"/>
+                    <rect key="frame" x="350" y="266" width="130" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.15686274509803921" green="0.76078431372549016" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="39" id="LGY-oh-loD"/>
-                        <constraint firstAttribute="width" constant="94" id="hcI-Sy-bZD"/>
+                        <constraint firstAttribute="width" constant="130" id="ely-wA-6Nm"/>
+                        <constraint firstAttribute="height" constant="55" id="z8M-pg-ewx"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal">
@@ -46,10 +47,10 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="11" id="8KV-88-1z6"/>
-                <constraint firstAttribute="trailing" secondItem="eiz-Ma-1pi" secondAttribute="trailing" constant="129" id="8fg-C8-Whq"/>
-                <constraint firstAttribute="trailing" secondItem="owG-hq-uwM" secondAttribute="trailing" constant="12" id="DUN-ZC-Z1R"/>
-                <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-3" id="pj8-Bg-0qH"/>
+                <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="UCL-Q4-JAW"/>
+                <constraint firstAttribute="centerX" secondItem="eiz-Ma-1pi" secondAttribute="centerX" id="eok-kc-j3I"/>
+                <constraint firstAttribute="trailing" secondItem="owG-hq-uwM" secondAttribute="trailing" id="jSm-O0-KF9"/>
+                <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" id="tRs-1Y-jaz"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

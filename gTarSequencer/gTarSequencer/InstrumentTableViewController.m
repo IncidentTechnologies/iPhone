@@ -70,6 +70,69 @@
  
 }
 
+- (void)setInstrumentsFromData:(NSData *)instData
+{
+    
+    instruments = [NSKeyedUnarchiver unarchiveObjectWithData:instData];
+    
+    // Remove all the previously used instruments from the remaining list:
+    NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
+    for (Instrument * inst in instruments)
+    {
+        for (NSDictionary * dict in remainingInstrumentOptions)
+        {
+            if ( [[dict objectForKey:@"Name"] isEqualToString:inst.instrumentName] )
+            {
+                [dictionariesToRemove addObject:dict];
+            }
+        }
+    }
+    
+    [remainingInstrumentOptions removeObjectsInArray:dictionariesToRemove];
+}
+
+- (Instrument *)getCurrentInstrument
+{
+    if([instruments count] > 0)
+        return [instruments objectAtIndex:selectedInstrumentIndex];
+    else
+        return nil;
+}
+
+- (int)countInstruments
+{
+    return [instruments count];
+}
+
+- (NSMutableArray *)getInstruments
+{
+    return instruments;
+}
+
+- (Instrument *)getInstrumentAtIndex:(int)i
+{
+    if(i < [instruments count] && i >= 0)
+        return [instruments objectAtIndex:i];
+    else
+        return nil;
+}
+
+#pragma mark - Selected Instrument Data
+- (void)resetSelectedInstrumentIndex
+{
+    selectedInstrumentIndex = -1;
+}
+
+- (int)getSelectedInstrumentIndex
+{
+    return selectedInstrumentIndex;
+}
+
+- (void)setSelectedInstrumentIndex:(int)index
+{
+    selectedInstrumentIndex = index;
+}
+
 #pragma mark - Adding instruments
 
 - (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName
@@ -138,8 +201,7 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    if (indexPath.row < [instruments count])
-    {
+    if (indexPath.row < [instruments count]){
     
         static NSString *CellIdentifier = @"TrackCell";
         
@@ -168,13 +230,11 @@
             [cell update];
         }
         
+        [cell setMultipleTouchEnabled:YES];
+        
         return cell;
         
-    }
-    else
-    {
-        UIColor *customGrey = [UIColor colorWithRed:118/255.0 green:136/255.0 blue:137/255.0 alpha:1];
-        
+    }else{
         static NSString *CellIdentifier = @"AddInstrument";
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -186,15 +246,39 @@
         
         [cell.textLabel setText:@"ADD INSTRUMENT"];
         
-        [cell.textLabel setTextColor:customGrey];
+        [cell.textLabel setTextColor:[UIColor colorWithRed:36/255.0 green:109/255.0 blue:127/255.0 alpha:1]];
         [cell setBackgroundColor:[UIColor clearColor]];
         [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
         
         [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica Bold" size:25.0]];
         
+        [cell setMultipleTouchEnabled:NO];
+        
         return cell;
     }
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == [instruments count]){
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"About to edit");
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete){
+        [self deleteCell:[tableView cellForRowAtIndexPath:indexPath]];
+    }
+}
+
 
 #pragma mark Instrument Selector
 
@@ -303,8 +387,6 @@
     }
     
     selectedInstrumentIndex = index;
-    
-    [delegate updateInstruments:instruments setSelected:index];
     
     NSLog(@"Selected Instrument Index is %i",index);
     
@@ -466,7 +548,7 @@
 
 #pragma mark UI Input
 
-- (void)userDidSelectPattern:(InstrumentTableViewCell *)sender atIndex:(int)index
+- (BOOL)userDidSelectPattern:(InstrumentTableViewCell *)sender atIndex:(int)index
 {
     int senderIndex = [instrumentTable indexPathForCell:sender].row;
     
@@ -482,8 +564,13 @@
         
         [delegate enqueuePattern:pattern];
         
+        return YES;
+        
     } else {
+        
         [self commitSelectingPatternAtIndex:index forInstrument:tempInst];
+        
+        return NO;
     }
 }
 

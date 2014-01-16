@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
 #import "Measure.h"
 #import <QuartzCore/QuartzCore.h>
 

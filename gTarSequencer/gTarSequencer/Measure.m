@@ -22,7 +22,7 @@
             notes[i] = false;
         }
         
-        [self initFakeNotes];
+        if(TESTMODE) [self initFakeNotes];
         
         [self sharedInit];
     }

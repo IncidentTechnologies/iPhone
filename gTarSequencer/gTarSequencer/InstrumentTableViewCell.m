@@ -79,11 +79,30 @@
 - (void)layoutSubviews
 {
     minimapBorder.layer.borderWidth = 1.0;
-    minimapBorder.layer.cornerRadius = 5.0;
-    minimapBorder.layer.borderColor = [UIColor colorWithRed:110/255.0 green:110/255.0 blue:114/255.0 alpha:1.0].CGColor;
+    minimapBorder.layer.cornerRadius = 3.0;
+    minimapBorder.layer.borderColor = [UIColor colorWithRed:10/255.0 green:155/255.0 blue:191/255.0 alpha:1.0].CGColor;
 
+    addMeasureButton.layer.borderWidth = 1.5;
+    addMeasureButton.layer.cornerRadius = 3.0;
+    addMeasureButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    addMeasureButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    addMeasureButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    [addMeasureButton setTitleEdgeInsets:UIEdgeInsetsMake(-13.0f,3.5f,0.0f,0.0f)];
+    
+    removeMeasureButton.layer.borderWidth = 1.5;
+    removeMeasureButton.layer.cornerRadius = 3.0;
+    removeMeasureButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    removeMeasureButton.contentVerticalAlignment = UIControlContentHorizontalAlignmentLeft;
+    removeMeasureButton.contentHorizontalAlignment = UIControlContentVerticalAlignmentTop;
+    [removeMeasureButton setTitleEdgeInsets:UIEdgeInsetsMake(-13.0f,6.0f,0.0f,0.0f)];
+    
+    [self initPatternButtonUI];
+    
+    
+    // TODO: make different variants for the 4in
+    
     // Table Cells require programmatic constraints
-    NSLayoutConstraint * bodyleading = [NSLayoutConstraint
+    /*NSLayoutConstraint * bodyleading = [NSLayoutConstraint
                                         constraintWithItem:patternContainer
                                         attribute:NSLayoutAttributeLeading
                                         relatedBy:NSLayoutRelationEqual
@@ -99,18 +118,12 @@
                                          toItem: self
                                          attribute:NSLayoutAttributeTrailing
                                          multiplier:1.0f
-                                         constant:0];
+                                         constant:0];*/
     
-    NSLayoutConstraint * borderwidth = [NSLayoutConstraint
-                                        constraintWithItem:borderContainer
-                                        attribute:NSLayoutAttributeWidth
-                                        relatedBy:NSLayoutRelationEqual
-                                        toItem: self
-                                        attribute:NSLayoutAttributeWidth
-                                        multiplier:1.0f
-                                        constant:20];
+    //[self addConstraints:@[bodyleading,bodytrailing]];
     
-    [self addConstraints:@[bodyleading,bodytrailing,borderwidth]];
+    [self setUserInteractionEnabled:YES];
+    
 }
 
 /*
@@ -142,13 +155,6 @@
     }
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
 - (void)setBeatSequenceToDisplay:(Pattern *)newBS
 {
     patternToDisplay = newBS;
@@ -163,54 +169,109 @@
     instrumentIconView.image = newImage;
 }
 
-#pragma mark Deleting
-- (IBAction)userDidTapInstrumentIcon:(id)sender
+- (void)initPatternButtonUI
 {
-    if (deleteMode)
+    
+    for (int i=0;i<[patternButtons count];i++)
     {
-        [self disableDeleteMode];
+        UIButton * patternN = [patternButtons objectAtIndex:i];
+        patternN.layer.cornerRadius = 3.0;
+        [patternN setTitleEdgeInsets:UIEdgeInsetsMake(2.0f,0.0f,0.0f,0.0f)];
+    }
+    
+    // special case
+    [patternA setTitleEdgeInsets:UIEdgeInsetsMake(2.0f,2.0f,0.0f,0.0f)];
+}
+
+- (void)updatePatternButton:(UIButton *)newButton playState:(BOOL)isPlaying
+{
+    if(!isPlaying || selectedPatternButton == newButton){
         
-        [parent deleteCell:self];
-    }
-    else {
-        [self enableDeleteMode];
+        //dequeue anything queued
+        [self setStateForButton:queuedPatternButton state:0];
+        queuedPatternButton = nil;
+        
+        //former button
+        [self setStateForButton:selectedPatternButton state:0];
+        selectedPatternButton = newButton;
+        
+        //new button
+        [self setStateForButton:selectedPatternButton state:2];
+        
+    }else if(newButton == offButton){
+        
+        previousPatternButton = selectedPatternButton;
+        
+        //dequeue anything queued
+        [self setStateForButton:queuedPatternButton state:0];
+        
+        //former button
+        [self setStateForButton:selectedPatternButton state:0];
+        selectedPatternButton = newButton;
+        
+        //new button
+        [self setStateForButton:selectedPatternButton state:2];
+        
+    }else if(selectedPatternButton == offButton){
+        
+        //former button
+        [self setStateForButton:selectedPatternButton state:0];
+        
+        //new button
+        selectedPatternButton = previousPatternButton;
+        [self setStateForButton:selectedPatternButton state:2];
+        
+        //queue actual button
+        queuedPatternButton = newButton;
+        [self setStateForButton:queuedPatternButton state:1];
+        
+    }else if(queuedPatternButton == nil){
+        
+        queuedPatternButton = newButton;
+        [self setStateForButton:queuedPatternButton state:1];
+        
+    }else if(queuedPatternButton != nil){
+        
+        //former button
+        [self setStateForButton:queuedPatternButton state:0];
+        queuedPatternButton = newButton;
+        
+        // new button
+        [self setStateForButton:queuedPatternButton state:1];
     }
 }
 
-- (void)enableDeleteMode
+- (void)setStateForButton:(UIButton *)button state:(int)stateindex
+{
+    UIColor * backgroundColor = nil;
+    UIColor * titleColor = nil;
+    
+    switch(stateindex){
+        case 0:
+            backgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+            titleColor = [UIColor whiteColor];
+            break;
+        case 1:
+            backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.6];
+            titleColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+            break;
+        case 2:
+            backgroundColor = [UIColor whiteColor];
+            titleColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+            break;
+    }
+    
+    [button setBackgroundColor:backgroundColor];
+    [button setTitleColor:titleColor forState:UIControlStateNormal];
+}
+
+#pragma mark Change Instrument
+- (void)userDidTapInstrumentIcon:(id)sender
 {
     
-    //UIColor * customRed = [UIColor redColor];
-    UIColor * customRed = [UIColor colorWithRed:131/255.0 green:12/255.0 blue:54/255.0 alpha:1];
-    deleteMode = YES;
+    // TODO: implement instrument change
     
-    instrumentIconView.backgroundColor = customRed;
-    instrumentIconBorder.backgroundColor = customRed;
-    
-    self.instrumentIconView.image = [UIImage imageNamed:@"Icon_Trash"];
-    
-    // touch catcher:
-    //[self updateTouchCatcher];
-    //[touchCatcher setHidden:NO];
 }
-
-- (void)disableDeleteMode
-{
-    
-    UIColor * customBlue = [UIColor colorWithRed:22/255.0 green:41/255.0 blue:68/255.0 alpha:1];
-    
-    deleteMode = NO;
-    
-    instrumentIconView.backgroundColor = customBlue;
-    instrumentIconBorder.backgroundColor = customBlue;
-    
-    self.instrumentIconView.image = self.instrumentIcon;
-    
-    // touch catcher:
-    // [touchCatcher setHidden:YES];
-}
-
-
 
 #pragma mark Minimap
 
@@ -273,18 +334,14 @@
     
 }
 
-
 - (void)selectPatternButton:(int)index
 {
     UIButton * newSelection = [patternButtons objectAtIndex:index];
     
     if (selectedPatternButton == newSelection){
         return;
-        
     }else {
-        [selectedPatternButton setSelected:NO];
-        selectedPatternButton = newSelection;
-        [selectedPatternButton setSelected:YES];
+        [self updatePatternButton:newSelection playState:NO];
     }
 }
 
@@ -320,27 +377,30 @@
 
 - (IBAction)userDidSelectNewPattern:(id)sender
 {
-    [selectedPatternButton setSelected:NO];
-    [sender setSelected:YES];
-    
+
     [self performSelector:@selector(selectNewPattern:) withObject:sender afterDelay:0.0];
 }
 
 // Split up into two functions to allow the UI to update immediately
 - (void)selectNewPattern:(id)sender
 {
-    selectedPatternButton = sender;
     
     int tappedIndex = [patternButtons indexOfObject:sender];
+    
+    BOOL isPlaying = NO;
     
     NSLog(@"Select new pattern at %i", tappedIndex);
     
     if (tappedIndex == MUTE_SEGMENT_INDEX){
         [parent muteInstrument:self isMute:YES];
+        isPlaying = [parent.delegate checkIsPlaying];
     }else{
         [parent muteInstrument:self isMute:NO];
-        [parent userDidSelectPattern:self atIndex:tappedIndex];
+        isPlaying = [parent userDidSelectPattern:self atIndex:tappedIndex];
     }
+    
+    [self updatePatternButton:sender playState:isPlaying];
+    
 }
 
 #pragma mark Selecting Measures

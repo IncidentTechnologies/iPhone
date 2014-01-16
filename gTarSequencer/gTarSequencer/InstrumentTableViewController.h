@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
 #import "Instrument.h"
 #import "InstrumentTableViewCell.h"
 #import "ScrollingSelector.h"
@@ -22,7 +22,6 @@
 - (void) turnOffGuitarEffects;
 - (void) setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying;
 
-- (void) updateInstruments:(NSMutableArray *)instrumentlist setSelected:(int)index;
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
 
 - (void) updateGuitarView;
@@ -51,10 +50,19 @@
 
 - (void)updateAllVisibleCells;
 - (void)userDidSelectMeasure:(id)sender atIndex:(int)index;
-- (void)userDidSelectPattern:(id)sender atIndex:(int)index;
+- (BOOL)userDidSelectPattern:(id)sender atIndex:(int)index;
 - (void)userDidAddMeasures:(id)sender;
 - (void)userDidRemoveMeasures:(id)sender;
 
+- (void)setSelectedInstrumentIndex:(int)index;
+- (int)getSelectedInstrumentIndex;
+- (void)resetSelectedInstrumentIndex;
+
+- (void)setInstrumentsFromData:(NSData *)instData;
+- (NSMutableArray *)getInstruments;
+- (int)countInstruments;
+- (Instrument *)getCurrentInstrument;
+- (Instrument *)getInstrumentAtIndex:(int)i;
 
 @property (weak, nonatomic) id<InstrumentDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UITableView *instrumentTable;

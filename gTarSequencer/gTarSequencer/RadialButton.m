@@ -14,6 +14,7 @@
 #define ZOOMFACTOR 2
 #define ZOOM_FONT 40
 #define NORMAL_FONT 21
+#define LARGE_FONT 30
 
 #define XBASE 480
 #define YBASE 320
@@ -79,35 +80,25 @@
     [window addSubview:radialDisplay];
     
     // tempo label
-    CGRect titleframe = CGRectMake(0,0,80,30);
+    CGRect titleframe = CGRectMake(10,15,80,30);
     scrollTitle = [[UILabel alloc] initWithFrame:titleframe];
     [scrollTitle setText:@"TEMPO"];
-    scrollTitle.font = [[self.scrollTitle font] fontWithSize:NORMAL_FONT];
+    scrollTitle.font = [UIFont systemFontOfSize:NORMAL_FONT];
     scrollTitle.textColor = [UIColor whiteColor];
     
     [self addSubview:scrollTitle];
     
     // tempo value
-    CGRect frame = CGRectMake(80,0,50,30);
-    valueDisplay = [[UILabel alloc] initWithFrame:frame];
+    normalFrame = CGRectMake(90,13,50,30);
+    zoomedFrame = CGRectMake(25, -90, ZOOMFACTOR*50, ZOOMFACTOR*30);
+    
+    valueDisplay = [[UILabel alloc] initWithFrame:normalFrame];
     valueDisplay.contentMode = UIViewContentModeScaleAspectFit;
-    valueDisplay.font = [[self.valueDisplay font] fontWithSize:NORMAL_FONT];
+    valueDisplay.font = [UIFont boldSystemFontOfSize:LARGE_FONT];
     valueDisplay.textColor = [UIColor whiteColor];
     
     [self addSubview:valueDisplay];
     
-}
-
-- (void)layoutSubviews
-{
-    
-    // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
-    
-    // define frames
-    normalFrame = CGRectMake(80,0,50,30);
-    zoomedFrame = CGRectMake(-1*(x/2-192), -100, ZOOMFACTOR*50, ZOOMFACTOR*30);
 }
 
 // Sensitivities adjusted so user reaches min/max a few px before edge of screen
@@ -115,7 +106,7 @@
 {
     double origin = self.frame.origin.x;
     
-    double distanceRight = 480 - ( origin + zeroPosition.x);
+    double distanceRight = XBASE - ( origin + zeroPosition.x);
     double distanceLeft = zeroPosition.x + self.frame.origin.x;
     
     int rangeOfValuesUp = MAX_TEMPO - startingValue;
@@ -135,6 +126,7 @@
     currentDisplayedValue = currentValue;
     [valueDisplay setText:[NSString stringWithFormat:@"%i", currentValue]];
     
+    [radialDisplay setTempo:[NSString stringWithFormat:@"%i", currentValue]];
     [radialDisplay fillToPercent:[self percentFull:newValue]];
 }
 
@@ -178,6 +170,7 @@
     // Display new value in text field:
     currentDisplayedValue = newCurrentValue;
     [valueDisplay setText:[NSString stringWithFormat:@"%i", currentDisplayedValue]];
+    [radialDisplay setTempo:[NSString stringWithFormat:@"%i", currentDisplayedValue]];
 
     // Fill radial display to corresponding %:
     [radialDisplay fillToPercent:[self percentFull:newCurrentValue]];
@@ -217,6 +210,8 @@
 
 - (void)expand
 {
+    
+    // Animate...
     [UIView animateWithDuration:ANIMATION_DURATION
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -232,6 +227,7 @@
 
 - (void)contract
 {
+    
     [UIView animateWithDuration:ANIMATION_DURATION
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -239,9 +235,10 @@
                          radialDisplay.alpha = NOT_VISIBLE;
                          valueDisplay.frame = normalFrame;
                          valueDisplay.textAlignment = NSTextAlignmentLeft;
-                         valueDisplay.font = [[self.valueDisplay font] fontWithSize:NORMAL_FONT];
+                         valueDisplay.font = [[self.valueDisplay font] fontWithSize:LARGE_FONT];
                      }
                      completion:nil];
+    
 }
 
 

@@ -11,8 +11,15 @@
 			<integer>0</integer>
 			<key>IconName</key>
 			<string>Icon_Percussion</string>
-			<key>SelectorIconPrefix</key>
-			<string>Drum</string>
+			<key>Strings</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -21,8 +28,15 @@
 			<integer>1</integer>
 			<key>IconName</key>
 			<string>Icon_Piano</string>
-			<key>SelectorIconPrefix</key>
-			<string>Piano</string>
+			<key>Strings</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -31,8 +45,15 @@
 			<integer>2</integer>
 			<key>IconName</key>
 			<string>Icon_Guitar</string>
-			<key>SelectorIconPrefix</key>
-			<string>Guitar</string>
+			<key>Strings</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -41,8 +62,15 @@
 			<integer>3</integer>
 			<key>IconName</key>
 			<string>Icon_WubWub</string>
-			<key>SelectorIconPrefix</key>
-			<string>Wub</string>
+			<key>Strings</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -53,36 +81,72 @@
 			<string>Icon_Percussion</string>
 			<key>SelectorIconPrefix</key>
 			<string>Drum</string>
+			<key>Strings</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Flute</string>
+			<string>Violin</string>
 			<key>Index</key>
 			<integer>1</integer>
 			<key>IconName</key>
 			<string>Icon_Piano</string>
 			<key>SelectorIconPrefix</key>
 			<string>Piano</string>
+			<key>Strings</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Violin</string>
+			<string>Tuba</string>
 			<key>Index</key>
 			<integer>2</integer>
 			<key>IconName</key>
 			<string>Icon_Guitar</string>
 			<key>SelectorIconPrefix</key>
 			<string>Guitar</string>
+			<key>Strings</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Triangle</string>
+			<string>Cello</string>
 			<key>Index</key>
 			<integer>3</integer>
 			<key>IconName</key>
 			<string>Icon_WubWub</string>
 			<key>SelectorIconPrefix</key>
 			<string>Wub</string>
+			<key>Strings</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
 		</dict>
 	</array>
 </dict>

@@ -10,7 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import <GtarController/Gtar.h>
+//#import <GtarController/Gtar.h>
+#import "Gtar.h"
 
 /*!
  @abstract The result status code used by the GtarController.

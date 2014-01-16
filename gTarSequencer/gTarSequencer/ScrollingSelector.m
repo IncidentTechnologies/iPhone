@@ -64,12 +64,13 @@
         scrollView.userInteractionEnabled = YES;
         
         // Sizings:
-        currentOrigin = CGPointMake(gap, 0);
+        currentOrigin = CGPointMake(0, 0);
         
         int iconSideLength = 60;
         gap = (frame.size.width - (iconSideLength*3))/4;
         
-        iconSize = CGSizeMake(iconSideLength, iconSideLength);
+        iconBorderSize = CGSizeMake(iconSideLength, iconSideLength);
+        iconSize = CGSizeMake(iconSideLength-20, iconSideLength-20);
         labelSize = CGSizeMake(104, 20);
         
         topRowIcon = 20;
@@ -77,6 +78,8 @@
         
         topRowLabel = 85;
         bottomRowLabel = 185;
+        
+        lastContentOffset = CGPointMake(0,0);
     }
     return self;
 }
@@ -84,9 +87,6 @@
 - (void)setOptions:(NSMutableArray *)newOps
 {
     options = newOps;
-    
-    NSString * suffix = @"Button_OFF";
-    NSString * highlightedSuffix = @"Button_ON";
     
     names = [[NSMutableArray alloc] init];
     images = [[NSMutableArray alloc] init];
@@ -97,12 +97,12 @@
         NSString * name = [dict objectForKey:@"Name"];
         [names addObject:name];
         
-        NSString * iconPrefix = [dict objectForKey:@"SelectorIconPrefix"];
+        NSString * iconName = [dict objectForKey:@"IconName"];
         
-        UIImage * normalImage = [UIImage imageNamed:[iconPrefix stringByAppendingString:suffix]];
+        UIImage * normalImage = [UIImage imageNamed:iconName];
         [images addObject:normalImage];
         
-        UIImage * highlightedImage = [UIImage imageNamed:[iconPrefix stringByAppendingString:highlightedSuffix]];
+        UIImage * highlightedImage = [UIImage imageNamed:iconName];
         [highlightedImages addObject:highlightedImage];
     }
     
@@ -137,7 +137,7 @@
         columnsCount++;
     }
     
-    double totalWidth = gap + ( columnsCount * (iconSize.width + gap) );
+    double totalWidth = gap + ( columnsCount * (iconBorderSize.width + gap) );
     
     double totalHeight = scrollView.frame.size.height;
     
@@ -179,26 +179,32 @@
     // -- update position:
     currentOrigin.x = [self xOriginForImageWithIndex:index];
     
-    if ( index%2 == 0)
-    {
+    if (index%2 == 0){
         currentOrigin.y = topRowIcon;
-    }
-    else
-    {
+    }else{
         currentOrigin.y = bottomRowIcon;
     }
     
     // -- make new image:
-    CGRect imageFrame = CGRectMake(currentOrigin.x, currentOrigin.y, iconSize.width, iconSize.height);
+    CGRect imageBorderFrame = CGRectMake(currentOrigin.x, currentOrigin.y, iconBorderSize.width, iconBorderSize.height);
+    CGRect imageFrame = CGRectMake(10, 10, iconSize.width, iconSize.height);
+    
+    UIView * buttonborder = [[UIView alloc] initWithFrame:imageBorderFrame];
+    [buttonborder setBackgroundColor:[UIColor clearColor]];
+    buttonborder.layer.borderColor = [UIColor whiteColor].CGColor;
+    buttonborder.layer.borderWidth = 1.0;
+    
     UIButton * button = [[UIButton alloc] initWithFrame:imageFrame];
     [button setBackgroundColor:[UIColor clearColor]];
     
     [button setImage:[images objectAtIndex:index] forState:UIControlStateNormal];
+    
     [button setImage:[highlightedImages objectAtIndex:index] forState:UIControlStateHighlighted];
-    //[button setImage:[highlightedImages objectAtIndex:index] forState:UIControlStateSelected];
     [button addTarget:self action:@selector(userDidSelectInstrument:) forControlEvents:UIControlEventTouchUpInside];
     
-    [scrollView addSubview:button];
+    [scrollView addSubview:buttonborder];
+    [buttonborder addSubview:button];
+    
     [imageButtons addObject:button];
 }
 
@@ -231,7 +237,7 @@
 
 - (int)xOriginForImageWithIndex:(int)index
 {
-    return (gap + (index/2) * (gap + iconSize.width));
+    return (gap + (index/2) * (gap + iconBorderSize.width));
 }
 
 #pragma mark Actions
@@ -263,13 +269,35 @@
     else {
         [self hideLeftArrow:NO rightArrow:NO];
     }
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scroller willDecelerate:(BOOL)decelerate
+{
+    double scrollDistance = gap + iconBorderSize.width;
+    double maxScroll = contentSize.width - scrollView.frame.size.width;
+    
+    double scrollUp = floor((scrollView.contentOffset.x+scrollDistance) / scrollDistance) * scrollDistance;
+    double scrollDown = ceil((scrollView.contentOffset.x-scrollDistance) / scrollDistance) * scrollDistance;
+    
+    CGPoint newOffset = scrollView.contentOffset;
+    
+    if(lastContentOffset.x < newOffset.x){
+        newOffset.x = MIN(scrollUp,maxScroll);
+    }else{
+        newOffset.x = MAX(scrollDown,0);
+    }
+    
+    lastContentOffset = scrollView.contentOffset;
+    
+    [scrollView setContentOffset:newOffset animated:YES];
 }
 
 #pragma mark Scrolling
 
 - (void)userDidTapArrow:(id)sender
 {
-    double scrollDistance = gap + iconSize.width;
+    double scrollDistance = gap + iconBorderSize.width;
     double maxScroll = contentSize.width - scrollView.frame.size.width;
     
     CGPoint newOffset = scrollView.contentOffset;

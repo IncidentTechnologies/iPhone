@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "AppData.h"
 #import "Measure.h"
 
 @interface Pattern : NSObject <NSCoding>

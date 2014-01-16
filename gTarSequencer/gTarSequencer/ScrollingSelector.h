@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
 
 #define HEIGHT_OF_WHITE_BAR 3
 
@@ -35,12 +35,9 @@
     
     NSMutableArray * imageButtons;      // array of UIButtons
     
-    //UIScrollView * scrollView;
     CGSize contentSize;
     
     UIView * backgroundView;
-    
-    //UIButton * cancelButton;
     
     CGPoint currentOrigin;
     
@@ -50,9 +47,11 @@
     CGFloat topRowLabel;    // Height of the top row of labels
     CGFloat bottomRowLabel; // Height of the bottom row of labels
     
+    CGSize iconBorderSize;  // Padding around icons
     CGSize iconSize;        // Height and width of the icons
     CGSize labelSize;       // Height and width of the labels
     
+    CGPoint lastContentOffset;
     double gap;
 }
 

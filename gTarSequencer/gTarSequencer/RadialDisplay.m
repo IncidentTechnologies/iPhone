@@ -8,6 +8,9 @@
 
 #import "RadialDisplay.h"
 
+#define ZOOMFACTOR 2
+#define ZOOM_FONT 40
+
 @implementation RadialDisplay
 
 @synthesize center;
@@ -47,10 +50,10 @@
     outerRadius = 220;
     
     // define center
-    double verticalOffset = 75;         // the bigger this number the higher up the center is located
+    double verticalOffset = 70;         // the bigger this number the higher up the center is located
     center = CGPointMake(x/2, self.frame.size.height - verticalOffset);
     
-    fillColor = [UIColor colorWithRed:240/255.0 green:146/255.0 blue:0 alpha:1];
+    fillColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1];
     
     // define the angular bounds:
     double angleWidth = 18;
@@ -240,14 +243,14 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // -- draw black background:
-    int bottomBarHeight = 67;
+    int bottomBarHeight = 55;
     
     CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7].CGColor);
     CGContextAddRect(context, CGRectMake(0, 0, size.width, size.height - bottomBarHeight));
     CGContextFillPath(context);
     
     // -- draw wedges:
-    CGContextSetLineWidth(context, 2.0);
+    CGContextSetLineWidth(context, 3.0);
     CGContextSetStrokeColorWithColor(context, fillColor.CGColor);
     
     for (int i=0;i<NUMBER_OF_WEDGES*2;i+=2)
@@ -264,10 +267,19 @@
     
     UIGraphicsEndImageContext();
     
+    // Tempo number to show in white
+    CGRect frame = CGRectMake(outline.frame.size.width/2-50, 174, ZOOMFACTOR*50, ZOOMFACTOR*30);
+    tempoLabel = [[UILabel alloc] initWithFrame:frame];
+    tempoLabel.font = [UIFont boldSystemFontOfSize:ZOOM_FONT];
+    tempoLabel.textColor = [UIColor whiteColor];
+    tempoLabel.backgroundColor = [UIColor clearColor];
+    tempoLabel.textAlignment = NSTextAlignmentCenter;
+    [outline addSubview:tempoLabel];
+    
     // Add UILabels labeling min, max, and medium values:
-    CGFloat labelWidth = 30;
+    /*CGFloat labelWidth = 30;
     CGFloat labelHeight = 20;
-    CGFloat labelYOffset = 230;
+    CGFloat labelYOffset = 240;
     CGFloat labelXOffset = outline.frame.size.width/2-230;
     CGRect frame;
     
@@ -279,7 +291,7 @@
     bottomLabel.textAlignment = NSTextAlignmentCenter;
     [outline addSubview:bottomLabel];
     
-    frame = CGRectMake(outline.frame.size.width/2 - labelWidth/2, 2, labelWidth, labelHeight);
+    frame = CGRectMake(outline.frame.size.width/2 - labelWidth/2, 4, labelWidth, labelHeight);
     middleLabel = [[UILabel alloc] initWithFrame:frame];
     middleLabel.text = @"120";
     middleLabel.textColor = [UIColor whiteColor];
@@ -293,7 +305,12 @@
     topLabel.textColor = [UIColor whiteColor];
     topLabel.backgroundColor = [UIColor clearColor];
     topLabel.textAlignment = NSTextAlignmentCenter;
-    [outline addSubview:topLabel];
+    [outline addSubview:topLabel];*/
+}
+
+- (void)setTempo:(NSString *)value
+{
+    [tempoLabel setText:value];
 }
 
 #pragma mark Drawing Wedges

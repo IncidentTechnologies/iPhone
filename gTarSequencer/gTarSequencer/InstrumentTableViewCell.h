@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
 #import "Instrument.h"
 #import "MeasureView.h"
 #import <QuartzCore/QuartzCore.h>
@@ -24,7 +24,8 @@
     
     NSMutableArray * patternButtons;
     UIButton * selectedPatternButton;
-    UIButton * previouslySelectedPatternButton;
+    UIButton * previousPatternButton;
+    UIButton * queuedPatternButton;
 
 }
 

@@ -6,8 +6,7 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
+#import "AppData.h"
 #import <QuartzCore/CALayer.h>
 #import "RadialDisplay.h"
 

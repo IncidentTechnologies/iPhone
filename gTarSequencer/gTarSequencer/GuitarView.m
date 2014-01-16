@@ -21,6 +21,7 @@
     {
         measure = nil;
         guitar = [[GtarController alloc] init];
+        [guitar addObserver:self];
         
         [self clearData];
     }
@@ -67,6 +68,7 @@
 
 - (void)displayMeasure
 {
+    
     for (int s = 0; s < STRINGS_ON_GTAR; s++){
         for (int f = 0; f < FRETS_ON_GTAR; f++){
             
@@ -135,12 +137,14 @@
 {
     NSLog(@"Note played");
     
+    
     [delegate notePlayedAtString:pluck.position.string andFret:pluck.position.fret];
 }
 
 - (void)gtarConnected
 {
     NSLog(@"Guitar connected");
+    
     
     // Turn off effects & LEDs
     [guitar turnOffAllLeds];
@@ -172,7 +176,7 @@
     
     [guitar setColorMap:map];
     
-    [delegate guitarConnected];
+    [delegate gtarConnected:YES];
     
     // Refresh guitarview (delaying a bit so that hopefully the gtar effects will be turned off)
     [self performSelector:@selector(refreshGuitarView) withObject:nil afterDelay:0.6];
@@ -191,9 +195,7 @@
 
 - (void)gtarDisconnected
 {
-    NSLog(@"Guitar disconnected");
-    
-    [delegate guitarDisconnected];
+    [delegate gtarConnected:NO];
 }
 
 

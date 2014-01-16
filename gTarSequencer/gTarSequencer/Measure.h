@@ -6,9 +6,8 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <GtarController/GtarController.h>
-
+#import "AppData.h"
 #import "SoundMaker.h"
 
 #define MAX_NOTES 96

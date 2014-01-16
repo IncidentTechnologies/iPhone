@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
 #import "LoadingViewController.h"
+#import "TestFlight.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
@@ -15,6 +16,5 @@
 }
 
 @property (strong, nonatomic) UIWindow * window;
-//@property (strong, nonatomic) UINavigationController * navigationController;
 
 @end

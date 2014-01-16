@@ -30,17 +30,14 @@
 {
     [super viewDidLoad];
     
-    // Play button
-    [self drawPlayButton];
-    
     // Tempo slider stuff
-    NSLog(@"Setup tempo slider");
-    tempo = DEFAULT_TEMPO;
-    [tempoSlider setToValue:tempo];
+    if(TESTMODE) NSLog(@"Setup tempo slider");
     [tempoSlider setDelegate:self];
     
-    [startStopButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1]];
-    startStopButton.layer.cornerRadius = 5.0;
+    // Play/Pause button
+    if(TESTMODE) NSLog(@"Draw Play Pause button");
+    
+    [self drawPlayButton];
     
     isPlaying = FALSE;
     
@@ -73,6 +70,25 @@
     }
     
     [delegate saveContext];
+}
+
+#pragma mark - Tempo Interface
+
+- (int)getTempo
+{
+    return tempo;
+}
+
+- (void)resetTempo
+{
+    tempo = DEFAULT_TEMPO;
+    [tempoSlider setToValue:tempo];
+}
+
+- (void)setTempo:(int)newTempo
+{
+    tempo = newTempo;
+    [tempoSlider setToValue:tempo];
 }
 
 #pragma mark - Playing/Pausing
@@ -127,19 +143,22 @@
     }
 }
 
+#pragma mark - Drawing
+
 - (void)drawPlayButton
 {
     
+    [startStopButton setBackgroundColor:[UIColor colorWithRed:40/255.0 green:194/255.0 blue:94/255.0 alpha:1]];
     
     CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    int playWidth = 15;
+    int playWidth = 20;
     int playX = startStopButton.frame.size.width/2 - playWidth/2;
-    int playY = 10;
-    CGFloat playHeight = startStopButton.frame.size.height - 20;
+    int playY = 15;
+    CGFloat playHeight = startStopButton.frame.size.height - 2*playY;
     
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
@@ -163,16 +182,19 @@
 
 - (void)drawPauseButton
 {
+    
+    [startStopButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1]];
+    
     CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    int pauseWidth = 5;
+    int pauseWidth = 8;
     
-    CGFloat pauseHeight = startStopButton.frame.size.height - 20;
-    CGRect pauseFrameLeft = CGRectMake(startStopButton.frame.size.width/2 - pauseWidth - 2, 10, pauseWidth, pauseHeight);
-    CGRect pauseFrameRight = CGRectMake(pauseFrameLeft.origin.x+pauseWidth+3, 10, pauseWidth, pauseHeight);
+    CGFloat pauseHeight = startStopButton.frame.size.height - 30;
+    CGRect pauseFrameLeft = CGRectMake(startStopButton.frame.size.width/2 - pauseWidth - 2, 15, pauseWidth, pauseHeight);
+    CGRect pauseFrameRight = CGRectMake(pauseFrameLeft.origin.x+pauseWidth+3, 15, pauseWidth, pauseHeight);
     
     CGContextAddRect(context,pauseFrameLeft);
     CGContextAddRect(context,pauseFrameRight);

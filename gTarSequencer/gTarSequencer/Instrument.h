@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
 #import <GtarController/GtarController.h>
 #import "Pattern.h"
 #import "SoundMaker.h"

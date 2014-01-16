@@ -11,8 +11,10 @@
 #define MAX_SEQUENCES 15
 #define LAST_FRET 15
 #define LAST_MEASURE 3
+
 #define XBASE 480
 #define YBASE 320
+#define TABLEHEIGHT 264
 
 SoundMaker * audio;
 
@@ -37,6 +39,7 @@ SoundMaker * audio;
     [super viewDidLoad];
     
     [self initSubviews];
+    [self loadStateFromDisk];
 }
 
 
@@ -52,42 +55,55 @@ SoundMaker * audio;
 
 - (void)initGlobalData
 {
+    
+    // Audio controller
     audio = [[SoundMaker alloc] init];
+    
+    // Paths to load/save on disk
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    instrumentDataFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"sequencerCurrentState"];
+    
+    // Gtar delegate and connection spoof
+    if(TESTMODE) NSLog(@"Setup and connect gTar");
+    //isConnected = NO;
+    
+    guitarView = [[GuitarView alloc] init];
+    guitarView.delegate = self;
+    
+    if(TESTMODE) [guitarView observeGtar];
+    
+    string = 0;
+    fret = 0;
+    
+    patternQueue = [NSMutableArray array];
 }
 
 - (void)initSubviews
 {
     
-    // Gtar delegate and connection spoof
-    NSLog(@"Setup and connect gTar");
-    isConnected = NO;
-    
-    guitarView = [[GuitarView alloc] init];
-    guitarView.delegate = self;
-    [guitarView observeGtar];
-    
-    string = 0;
-    fret = 0;
-    
     // Instrument table
-    NSLog(@"Start to build instrument table");
+    if(TESTMODE) NSLog(@"Build the instrument table");
     
     instrumentTableViewController = [[InstrumentTableViewController alloc] initWithNibName:@"InstrumentTableView" bundle:nil];
-    [instrumentTableViewController.view setFrame:CGRectMake(0, 0, XBASE, 255)];
+    [instrumentTableViewController.view setFrame:CGRectMake(0, 0, XBASE, TABLEHEIGHT)];
     [instrumentTableViewController setDelegate:self];
     
-    if (selectedInstrumentIndex >= 0){
-        Instrument * tempInst = [instruments objectAtIndex:selectedInstrumentIndex];
-        guitarView.measure = tempInst.selectedPattern.selectedMeasure;
+    Instrument * currentInstrument = [instrumentTableViewController getCurrentInstrument];
+    
+    if (currentInstrument){
+        guitarView.measure = currentInstrument.selectedPattern.selectedMeasure;
     }
     
     [self.view addSubview:instrumentTableViewController.view];
     
     // Tempo slider and play/pause
-    NSLog(@"Start to build the bottom bar");
+    if(TESTMODE) NSLog(@"Start to build the bottom bar");
+    
     playControlViewController = [[PlayControlViewController alloc] initWithNibName:@"BottomBar" bundle:nil];
-    [playControlViewController.view setFrame:CGRectMake(0,251,XBASE,YBASE-252)];
+    [playControlViewController.view setFrame:CGRectMake(0,TABLEHEIGHT-4,XBASE,YBASE-TABLEHEIGHT+3)];
     [playControlViewController setDelegate:self];
+    
     isPlaying = NO;
     
     [self.view addSubview:playControlViewController.view];
@@ -96,37 +112,72 @@ SoundMaker * audio;
 
 - (void)saveContext
 {
-    NSLog(@"Perform context save");
+    if(TESTMODE) NSLog(@"Perform context save");
+    
+    NSData * instData = [NSKeyedArchiver archivedDataWithRootObject:[instrumentTableViewController getInstruments]];
+    
+    NSNumber * tempoNumber = [NSNumber numberWithInt:[playControlViewController getTempo]];
+    
+    NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[instrumentTableViewController getSelectedInstrumentIndex]];
+    
+    [currentState setObject:instData forKey:@"Instruments Data"];
+    [currentState setObject:tempoNumber forKey:@"Tempo"];
+    [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
+    
+    BOOL success = [currentState writeToFile:instrumentDataFilePath atomically:YES];
+    
+    NSLog(@"Save success: %i", success);
 }
 
-- (void)updateGuitarView
+- (void)loadStateFromDisk
 {
-    [guitarView update];
+    NSLog(@"Load state from disk");
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:instrumentDataFilePath]) {
+        NSLog(@"The sequencer save plist exists");
+    } else {
+        NSLog(@"The sequencer save plist does not exist");
+    }
+    
+    currentState = [[NSDictionary dictionaryWithContentsOfFile:instrumentDataFilePath] mutableCopy];
+    
+    if (currentState == nil )
+        currentState = [[NSMutableDictionary alloc] init];
+    
+    if ( [[currentState allKeys] count] > 0 )
+    {
+        // Decode tempo:
+        int tempo = [[currentState objectForKey:@"Tempo"] intValue];
+        [playControlViewController setTempo:tempo];
+        
+        // Decode selectedInstrumentIndex
+        [instrumentTableViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
+        
+        // Decode array of instruments:
+        NSData * instrumentData = [currentState objectForKey:@"Instruments Data"];
+        [instrumentTableViewController setInstrumentsFromData:instrumentData];
+        
+    }else{
+        
+        [playControlViewController resetTempo];
+        [instrumentTableViewController resetSelectedInstrumentIndex];
+        
+    }
+    
 }
 
-#pragma mark - Play Control Delegate
-- (void)stopAllPlaying
-{
-    isPlaying = FALSE;
-    [playTimer invalidate];
-    playTimer = nil;
-}
 
-- (void)startAllPlaying:(float)secondsperbeat
-{
-    isPlaying = TRUE;
-    secondsPerBeat = secondsperbeat;
-    [self performSelectorInBackground:@selector(startBackgroundLoop) withObject:nil];
-}
+#pragma mark - Play Events
 
-- (void)startBackgroundLoop
+- (void)startBackgroundLoop:(NSNumber *)spb
 {
     NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
     
-    NSLog(@"Trying to init background loop with secondsPerBeat %f",secondsPerBeat);
+    if(TESTMODE) NSLog(@"Starting Background Loop with %f seconds per beat",[spb floatValue]);
     
-    playTimer = [NSTimer scheduledTimerWithTimeInterval:secondsPerBeat target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
-        
+    playTimer = [NSTimer scheduledTimerWithTimeInterval:[spb floatValue] target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
+    
     [runLoop run];
 }
 
@@ -134,36 +185,43 @@ SoundMaker * audio;
 {
     
     // Tell all of the sequencers to play their next fret
-    
-    // TODO: Compartmentalize?
-    for (int i=0;i<[instruments count];i++){
-         Instrument * instToPlay = [instruments objectAtIndex:i];
-     
-         @synchronized(instToPlay.selectedPattern){
-             int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
-     
-             // If we are back at the beginning of the pattern, then check the queue:
-             if (realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0){
-                 [self checkQueueForPatternsFromInstrument:instToPlay];
-             }
-     
-             [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted];
-         }
-     }
+    int instrumentCount = [instrumentTableViewController countInstruments];
+    for (int i=0; i<instrumentCount; i++){
+        
+        Instrument * instToPlay = [instrumentTableViewController getInstrumentAtIndex:i];
+        
+        @synchronized(instToPlay.selectedPattern){
+            int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
+            
+            // If we are back at the beginning of the pattern, then check the queue:
+            NSLog(@"Real Measure: %i, Current Fret: %i, Pattern Queue Count: %i",realMeasure,currentFret,[patternQueue count]);
+            if (realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0){
+                [self checkQueueForPatternsFromInstrument:instToPlay];
+            }
+            
+            [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted];
+        }
+    }
     
     [instrumentTableViewController updateAllVisibleCells];
-     
+    
     [guitarView update];
-     
+    
     [self increasePlayLocation];
     
-    NSLog(@"Main event loop");
+    if(TESTMODE) NSLog(@"Main event loop");
 }
+
+
+#pragma mark - Pattern Queue
 
 - (void)checkQueueForPatternsFromInstrument:(Instrument *)inst
 {
+    
+    NSLog(@"CHECK QUEUE FOR PATTERNS FROM INSTRUMENT");
+    
     NSMutableArray * objectsToRemove = [NSMutableArray array];
-   
+    
     @synchronized(patternQueue)
     {
         // Pull out every pattern in the queue and select it
@@ -173,6 +231,7 @@ SoundMaker * audio;
             Instrument * nextPatternInstrument = [patternToSelect objectForKey:@"Instrument"];
             
             if (inst == nextPatternInstrument){
+                NSLog(@"DEQUEUEING THE NEXT PATTERN");
                 [objectsToRemove addObject:patternToSelect];
                 [instrumentTableViewController commitSelectingPatternAtIndex:nextPatternIndex forInstrument:nextPatternInstrument];
             }
@@ -187,6 +246,23 @@ SoundMaker * audio;
     @synchronized(patternQueue){
         [patternQueue addObject:pattern];
     }
+}
+
+
+#pragma mark - Play Control Delegate
+
+- (void)stopAllPlaying
+{
+    isPlaying = FALSE;
+    [playTimer invalidate];
+    playTimer = nil;
+}
+
+- (void)startAllPlaying:(float)spb
+{
+    isPlaying = TRUE;
+    
+    [self performSelectorInBackground:@selector(startBackgroundLoop:) withObject:[NSNumber numberWithFloat:spb]];
 }
 
 - (void)initPlayLocation
@@ -220,9 +296,15 @@ SoundMaker * audio;
 
 
 #pragma mark - Instrument Delegate
+
 - (BOOL)checkIsPlaying
 {
     return isPlaying;
+}
+
+- (void)forceStopAll
+{
+    [playControlViewController stopAll];
 }
 
 - (void)setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying
@@ -242,15 +324,21 @@ SoundMaker * audio;
     [NSTimer scheduledTimerWithTimeInterval:1.5 target:guitarView selector:@selector(turnOffEffects) userInfo:nil repeats:NO];
 }
 
-- (void)updateInstruments:(NSMutableArray *)instrumentlist setSelected:(int)index
+- (void)updateGuitarView
 {
-    instruments = instrumentlist;
-    selectedInstrumentIndex = index;
+    [guitarView update];
 }
 
-- (void)forceStopAll
+// Ensure current playband is reflected in the data if displayed (>=0)
+// Only need to call when # measures changes
+- (void)updatePlaybandForInstrument:(Instrument *)inst
 {
-    [playControlViewController stopAll];
+    if (currentFret >= 0){
+        int realMeasure = [inst.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
+        [inst playFret:currentFret inRealMeasure:realMeasure withSound:NO];
+    }
+    
+    NSLog(@"update playband...");
 }
 
 #pragma mark - Guitar Observer
@@ -261,19 +349,17 @@ SoundMaker * audio;
         return;
     }
     
-    NSLog(@"trying selectedInstrumentIndex %i with Instrument Count %i",selectedInstrumentIndex,[instruments count]);
-    
-    if (selectedInstrumentIndex < 0 || [instruments count] == 0){
-        NSLog(@"No instruments opened, or selected instrument index < 0");
+    if ([instrumentTableViewController getSelectedInstrumentIndex] < 0 || [instrumentTableViewController countInstruments] == 0){
+        NSLog(@"No Instruments opened, or selected instrument index < 0");
         return;
     }
     
     NSLog(@"Valid selection & valid data, so playing");
     
     SEQNote * note = [[SEQNote alloc] initWithString:str-1 andFret:fr-1];
+    
     [self performSelectorOnMainThread:@selector(notePlayed:) withObject:note waitUntilDone:YES];
     
-    NSLog(@"notePlayedAtString");
 }
 
 - (void)notePlayed:(SEQNote *)note
@@ -281,8 +367,7 @@ SoundMaker * audio;
     NSLog(@"gTarSeq received note played message string %i and fret %i",note.string,note.fret);
     
     // Pass note-played message onto the selected instrument
-    Instrument * selectedInst = [instruments objectAtIndex:selectedInstrumentIndex];
-    [selectedInst notePlayedAtString:note.string andFret:note.fret];
+    [[instrumentTableViewController getCurrentInstrument] notePlayedAtString:note.string andFret:note.fret];
     
     [instrumentTableViewController updateAllVisibleCells];
     
@@ -291,27 +376,20 @@ SoundMaker * audio;
     [self saveContext];
 }
 
-- (void)guitarConnected
+- (void)gtarConnected:(BOOL)toConnect
 {
-    NSLog(@"Guitar connected");
     
-    isConnected = YES;
+    if(toConnect) NSLog(@"gTar connected");
+    else NSLog(@"gTar disconnected");
     
-    [self updateConnectedImages];
-}
-
-- (void)guitarDisconnected
-{
-    NSLog(@"Guitar disconnected");
-    
-    isConnected = NO;
+    isConnected = toConnect;
     
     [self updateConnectedImages];
 }
 
 - (void)updateConnectedImages
 {
-    NSLog(@"Update connected image");
+    if(TESTMODE) NSLog(@"Update connected image");
     
     if (isConnected){
         [self.gTarLogoImageView setImage:[UIImage imageNamed: @"gTarConnectedLogo"]];
@@ -322,19 +400,6 @@ SoundMaker * audio;
     }
 }
 
-
-/* Ensures that the current playband is accurately reflected in
- the data, provided that there is a playband to display (ie >= 0).
- Only needs to be called when the number of measures changes. */
-- (void)updatePlaybandForInstrument:(Instrument *)inst
-{
-    /*if (currentFret >= 0){
-         int realMeasure = [inst.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
-         [inst playFret:currentFret inRealMeasure:realMeasure withSound:NO];
-    }*/
-    
-    NSLog(@"update playband...");
-}
 
 
 @end

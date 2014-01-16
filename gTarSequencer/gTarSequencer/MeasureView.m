@@ -42,7 +42,7 @@
     CGRect playbandFrame = CGRectMake(10, 0, noteFrameWidth, self.frame.size.height);
     
     playbandView = [[UIView alloc] initWithFrame:playbandFrame];
-    [playbandView setBackgroundColor:[UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1]];
+    [playbandView setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
     [playbandView setHidden:YES];
     
     [self addSubview:playbandView];
@@ -50,10 +50,10 @@
     CGFloat initColors[STRINGS_ON_GTAR][4] = {
         {150/255.0, 12/255.0, 238/255.0, 1},
         {9/255.0, 109/255.0, 245/255.0, 1},
-        {103/255.0, 208/255.0, 18/255.0, 1},
+        {19/255.0, 133/255.0, 4/255.0, 1},
         {245/255.0, 214/255.0, 9/255.0, 1},
         {238/255.0, 129/255.0, 13/255.0, 1},
-        {208/255.0, 18/255.0, 90/255.0, 1}
+        {216/255.0, 64/255.0, 64/255.0, 1}
     };
     
     memcpy(colors, initColors, sizeof(initColors));
@@ -107,8 +107,7 @@
 
 - (void)selectMeasure {
     
-    //self.backgroundColor = [UIColor colorWithRed:228/255.0 green:127/255.0 blue:5/255.0 alpha:0.8];
-    self.backgroundColor = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:236/255.0 alpha:0.5];
+    self.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.4];
 
 }
 
@@ -132,7 +131,7 @@
     CGContextAddRect(context, wholeFrame);
     
     if (withColor)
-        CGContextSetFillColorWithColor(context, [UIColor colorWithRed:103/255.0 green:118/255.0 blue:118/255.0 alpha:1].CGColor);
+        CGContextSetFillColorWithColor(context, [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1].CGColor);
     else
         CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
 

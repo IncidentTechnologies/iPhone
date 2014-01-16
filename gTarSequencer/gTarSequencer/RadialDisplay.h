@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define NUMBER_OF_WEDGES 8
@@ -24,9 +24,10 @@
     UIImageView * outline;
     UIImageView * filling;
     
-    UILabel * bottomLabel;
+    /*UILabel * bottomLabel;
     UILabel * middleLabel;
-    UILabel * topLabel;
+    UILabel * topLabel;*/
+    UILabel * tempoLabel;
     
     double innerRadius;
     double outerRadius;
@@ -39,6 +40,7 @@
 }
 
 - (void)fillToPercent:(double)percent;
+- (void)setTempo:(NSString *)value;
 
 @property (nonatomic) CGPoint center;
 
