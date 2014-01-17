@@ -143,7 +143,7 @@
 
 #pragma mark Playing Notes/Lights
 
-- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex
+- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource
 {
     
     if ( instrumentIndex >= 0 )
@@ -153,7 +153,7 @@
         {
             if (notes[startingLocation+i])
             {
-                [audio PluckStringFret:i atFret:instrumentIndex];
+                [audioSource PluckStringFret:0 atFret:i];
             }
         }
     }

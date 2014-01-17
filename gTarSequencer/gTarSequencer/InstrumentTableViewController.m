@@ -83,6 +83,7 @@
         {
             if ( [[dict objectForKey:@"Name"] isEqualToString:inst.instrumentName] )
             {
+                [inst initAudioWithInstrumentName:inst.instrumentName];
                 [dictionariesToRemove addObject:dict];
             }
         }
@@ -135,12 +136,14 @@
 
 #pragma mark - Adding instruments
 
-- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName
+- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet
 {
     Instrument * newInstrument = [[Instrument alloc] init];
     newInstrument.instrument = index;
     newInstrument.instrumentName = instName;
     newInstrument.iconName = iconName;
+    newInstrument.stringSet = stringSet;
+    [newInstrument initAudioWithInstrumentName:instName];
     
     [instruments addObject:newInstrument];
  
@@ -371,8 +374,9 @@
         NSNumber * instIndex = [dict objectForKey:@"Index"];
         NSString * instName = [dict objectForKey:@"Name"];
         NSString * iconName = [dict objectForKey:@"IconName"];
+        NSArray * stringSet = [dict objectForKey:@"Strings"];
         
-        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName];
+        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet];
     }
 }
 

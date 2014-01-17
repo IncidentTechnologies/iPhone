@@ -13,6 +13,7 @@
 @synthesize instrumentName;
 @synthesize iconName;
 @synthesize instrument;
+@synthesize stringSet;
 @synthesize selectedPattern;
 @synthesize selectedPatternDidChange;
 @synthesize isMuted;
@@ -34,6 +35,7 @@
         isSelected = NO;
         selectedPatternDidChange = YES;
         isMuted = NO;
+        
     }
     return self;
 }
@@ -55,9 +57,18 @@
         
         isSelected = [aDecoder decodeBoolForKey:@"Is Selected"];
         
+        stringSet = [aDecoder decodeObjectForKey:@"Strings"];
+        
         selectedPatternDidChange = YES;
+        
     }
     return self;
+}
+
+- (void)initAudioWithInstrumentName:(NSString *)instName
+{
+    audio = [[SoundMaker alloc] initWithInstrumentName:instName];
+    
 }
 
 - (void)setSelected:(BOOL)yesno
@@ -87,9 +98,9 @@
 - (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound
 {
     if (sound)
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument];
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument andAudio:audio];
     else
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument: -1];
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument: -1 andAudio:audio];
 }
 
 - (void)displayAllNotes {
@@ -175,6 +186,7 @@
     [aCoder encodeObject:instrumentName forKey:@"Instrument Name"];
     [aCoder encodeObject:iconName forKey:@"Icon Name"];
     [aCoder encodeBool:isSelected forKey:@"Is Selected"];
+    [aCoder encodeObject:stringSet forKey:@"Strings"];
 }
 
 @end

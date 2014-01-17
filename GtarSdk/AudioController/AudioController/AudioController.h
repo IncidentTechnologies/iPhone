@@ -45,6 +45,7 @@ typedef enum
 @property (assign) float m_volumeGain;
 
 - (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument;
+
 - (void) initializeAUGraph;
 - (void) startAUGraph;
 - (void) stopAUGraph;

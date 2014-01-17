@@ -19,6 +19,8 @@
     AudioController * audioController;
 }
 
+
+- (id)initWithInstrumentName:(NSString *)instrument;
 - (void)PluckStringFret:(int)str atFret:(int)fret;
 
 @end

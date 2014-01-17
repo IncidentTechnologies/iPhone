@@ -16,8 +16,6 @@
 #define YBASE 320
 #define TABLEHEIGHT 264
 
-SoundMaker * audio;
-
 @implementation SequencerViewController
 
 @synthesize instrumentTableViewController;
@@ -55,9 +53,6 @@ SoundMaker * audio;
 
 - (void)initGlobalData
 {
-    
-    // Audio controller
-    audio = [[SoundMaker alloc] init];
     
     // Paths to load/save on disk
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -194,7 +189,6 @@ SoundMaker * audio;
             int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
             
             // If we are back at the beginning of the pattern, then check the queue:
-            NSLog(@"Real Measure: %i, Current Fret: %i, Pattern Queue Count: %i",realMeasure,currentFret,[patternQueue count]);
             if (realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0){
                 [self checkQueueForPatternsFromInstrument:instToPlay];
             }

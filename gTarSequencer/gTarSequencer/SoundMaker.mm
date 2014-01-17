@@ -17,10 +17,25 @@
     self = [super init];
     if ( self )
     {
-        audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:@"Percussion"];
+        audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:@"Sequence"];
         [audioController initializeAUGraph];
         [audioController startAUGraph];
     }
+    return self;
+}
+
+- (id)initWithInstrumentName:(NSString *)instrument
+{
+    self = [super init];
+    if(self){
+    
+        
+        NSLog(@"Trying instrument %@",instrument);
+        audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:instrument];
+        [audioController initializeAUGraph];
+        [audioController startAUGraph];
+    }
+    
     return self;
 }
 

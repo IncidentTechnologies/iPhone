@@ -16,7 +16,7 @@
 #define FRETS_ON_GTAR 16
 #define STRINGS_ON_GTAR 6
 
-extern SoundMaker * audio;
+//extern SoundMaker * audio;
 
 // A Measure containts 6*16 = 96 notes. It also contains the flags
 //      that indicate whether things should be updated.
@@ -35,7 +35,7 @@ extern SoundMaker * audio;
 - (id)init;
 - (id)initWithMeasure:(Measure *)measure;
 
-- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex;
+- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource;
 
 - (void)changeNoteAtString:(int)str andFret:(int)fret;
 - (BOOL)isNoteOnAtString:(int)str andFret:(int)fret;

@@ -6,89 +6,19 @@
 	<array>
 		<dict>
 			<key>Name</key>
-			<string>Percussion</string>
-			<key>Index</key>
-			<integer>0</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
-			<key>Strings</key>
-			<array>
-				<integer>0</integer>
-				<integer>1</integer>
-				<integer>2</integer>
-				<integer>3</integer>
-				<integer>4</integer>
-				<integer>5</integer>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>Piano</string>
 			<key>Index</key>
-			<integer>1</integer>
+			<integer>0</integer>
 			<key>IconName</key>
 			<string>Icon_Piano</string>
 			<key>Strings</key>
 			<array>
-				<integer>0</integer>
-				<integer>1</integer>
-				<integer>2</integer>
-				<integer>3</integer>
-				<integer>4</integer>
-				<integer>5</integer>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Guitar</string>
-			<key>Index</key>
-			<integer>2</integer>
-			<key>IconName</key>
-			<string>Icon_Guitar</string>
-			<key>Strings</key>
-			<array>
-				<integer>0</integer>
-				<integer>1</integer>
-				<integer>2</integer>
-				<integer>3</integer>
-				<integer>4</integer>
-				<integer>5</integer>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Wub Wub</string>
-			<key>Index</key>
-			<integer>3</integer>
-			<key>IconName</key>
-			<string>Icon_WubWub</string>
-			<key>Strings</key>
-			<array>
-				<integer>0</integer>
-				<integer>1</integer>
-				<integer>2</integer>
-				<integer>3</integer>
-				<integer>4</integer>
-				<integer>5</integer>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Bass</string>
-			<key>Index</key>
-			<integer>0</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
-			<key>SelectorIconPrefix</key>
-			<string>Drum</string>
-			<key>Strings</key>
-			<array>
-				<integer>0</integer>
-				<integer>1</integer>
-				<integer>2</integer>
-				<integer>3</integer>
-				<integer>4</integer>
-				<integer>5</integer>
+				<string>Piano 1</string>
+				<string>Piano 2</string>
+				<string>Piano 3</string>
+				<string>Piano 4</string>
+				<string>Piano 5</string>
+				<string>Piano 6</string>
 			</array>
 		</dict>
 		<dict>
@@ -97,55 +27,66 @@
 			<key>Index</key>
 			<integer>1</integer>
 			<key>IconName</key>
-			<string>Icon_Piano</string>
-			<key>SelectorIconPrefix</key>
-			<string>Piano</string>
+			<string>Icon_Guitar</string>
 			<key>Strings</key>
 			<array>
-				<integer>0</integer>
-				<integer>1</integer>
-				<integer>2</integer>
-				<integer>3</integer>
-				<integer>4</integer>
-				<integer>5</integer>
+				<string>Violin 1</string>
+				<string>Violin 2</string>
+				<string>Violin 3</string>
+				<string>Violin 4</string>
+				<string>Violin 5</string>
+				<string>Violin 6</string>
 			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Tuba</string>
+			<string>Dubstep</string>
 			<key>Index</key>
 			<integer>2</integer>
 			<key>IconName</key>
-			<string>Icon_Guitar</string>
-			<key>SelectorIconPrefix</key>
-			<string>Guitar</string>
+			<string>Icon_WubWub</string>
 			<key>Strings</key>
 			<array>
-				<integer>0</integer>
-				<integer>1</integer>
-				<integer>2</integer>
-				<integer>3</integer>
-				<integer>4</integer>
-				<integer>5</integer>
+				<string>Dubstep 1</string>
+				<string>Dubstep 2</string>
+				<string>Dubstep 3</string>
+				<string>Dubstep 4</string>
+				<string>Dubstep 5</string>
+				<string>Dubstep 6</string>
 			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Cello</string>
+			<string>Rock</string>
 			<key>Index</key>
 			<integer>3</integer>
 			<key>IconName</key>
-			<string>Icon_WubWub</string>
-			<key>SelectorIconPrefix</key>
-			<string>Wub</string>
+			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<integer>0</integer>
-				<integer>1</integer>
-				<integer>2</integer>
-				<integer>3</integer>
-				<integer>4</integer>
-				<integer>5</integer>
+				<string>Rock 1</string>
+				<string>Rock 2</string>
+				<string>Rock 3</string>
+				<string>Rock 4</string>
+				<string>Rock 5</string>
+				<string>Rock 6</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>House</string>
+			<key>Index</key>
+			<integer>4</integer>
+			<key>IconName</key>
+			<string>Icon_Percussion</string>
+			<key>Strings</key>
+			<array>
+				<string>House 1</string>
+				<string>House 2</string>
+				<string>House 3</string>
+				<string>House 4</string>
+				<string>House 5</string>
+				<string>House 6</string>
 			</array>
 		</dict>
 	</array>

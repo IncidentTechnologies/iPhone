@@ -15,8 +15,7 @@
 #define FIRST_FRET 0
 #define LAST_FRET 15
 
-extern SoundMaker * audio;
-extern GtarController * guitar;
+//extern GtarController * guitar;
 
 @interface Instrument : NSObject <NSCoding>
 {
@@ -25,6 +24,9 @@ extern GtarController * guitar;
     int selectedPatternIndex;
     
     NSMutableArray * patterns;
+    
+    SoundMaker * audio;
+    
 }
 
 - (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound;
@@ -32,6 +34,7 @@ extern GtarController * guitar;
 - (Pattern *)selectPattern:(int)newSelection;
 - (Measure *)selectMeasure:(int)newSelection;
 
+- (void)initAudioWithInstrumentName:(NSString *)instName;
 - (void)notePlayedAtString:(int)str andFret:(int)fret;
 
 - (void)addMeasure;
@@ -50,6 +53,7 @@ extern GtarController * guitar;
 @property (nonatomic) int instrument;
 @property (retain, nonatomic) NSString * instrumentName;
 @property (retain, nonatomic) NSString * iconName;
+@property (retain, nonatomic) NSArray * stringSet;
 
 @property (retain, nonatomic) Pattern * selectedPattern;
 @property (nonatomic) BOOL selectedPatternDidChange;

@@ -164,7 +164,7 @@
     return true;
 }
 
-// Asynchronously loads the sampler with the given name. The name can be the sampler name or it's
+// Asynchronously loads the sampler with the given name. The name can be the sampler name or its
 // 'friendly name', and the name match will happen in that order.
 - (void) asynchLoadSamplerWithName:(NSString*)name withSelector:(SEL)aSelector andOwner:(NSObject*)parent
 {
@@ -291,6 +291,24 @@
         
         m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
     }
+}
+
+- (void) obtainSoundFileURLsFromSampleSet:(NSArray *)sampleSet
+{
+    for (int noteNum = m_firstNoteMidiNum; noteNum < m_firstNoteMidiNum + m_numberOfSamples; noteNum++)
+    {
+        
+        NSString *filename = [NSString stringWithFormat:[sampleSet objectAtIndex:noteNum], m_samplePackName, noteNum];
+        
+        NSURL *url = [[NSBundle mainBundle] URLForResource: filename
+                                             withExtension: @"mp3"];
+        
+        
+        m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
+    
+    }
+    
+
 }
 
 - (void) setupMonoStreamFormat
