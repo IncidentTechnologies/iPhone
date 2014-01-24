@@ -191,6 +191,15 @@
             // If we are back at the beginning of the pattern, then check the queue:
             if (realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0){
                 [self checkQueueForPatternsFromInstrument:instToPlay];
+            }else if([patternQueue count] > 0){
+                
+                BOOL resetCount = NO;
+                if(currentFret == 0){
+                    resetCount = YES;
+                }
+                
+                // Cause queued pattern to blink
+                [instrumentTableViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
             }
             
             [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted];

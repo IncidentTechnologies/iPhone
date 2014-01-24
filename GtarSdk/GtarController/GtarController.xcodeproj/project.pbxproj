@@ -14,7 +14,7 @@
 		ECC11D9B162CEB75001A231A /* CoreMidiInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = EC275FFD16139D870037A387 /* CoreMidiInterface.m */; };
 		ECC11D9D162CEB75001A231A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2609D71595475800DA6FCA /* Foundation.framework */; };
 		ECC11D9F162CEB75001A231A /* GtarController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC260A061597EDCE00DA6FCA /* GtarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ECC11DA1162CEB75001A231A /* GtarControllerInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = EC260A081597EDCF00DA6FCA /* GtarControllerInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		ECC11DA1162CEB75001A231A /* GtarControllerInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = EC260A081597EDCF00DA6FCA /* GtarControllerInternal.h */; };
 		ECC11DA2162CEB75001A231A /* CoreMidiInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = EC275FFC16139D870037A387 /* CoreMidiInterface.h */; settings = {ATTRIBUTES = (); }; };
 		ECC11DA5162CEB75001A231A /* GtarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC260A061597EDCE00DA6FCA /* GtarController.h */; };
 /* End PBXBuildFile section */
@@ -24,7 +24,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(SRCROOT)/../PublicProducts/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/GtarController";
-			dstSubfolderSpec = 0;
+			dstSubfolderSpec = 16;
 			files = (
 				ECC11DA5162CEB75001A231A /* GtarController.h in CopyFiles */,
 				58A5951D1886186400696614 /* Gtar.h in CopyFiles */,
@@ -280,11 +280,14 @@
 		ECC11DAA162CEB75001A231A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
 				DSTROOT = /tmp/GtarController.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GtarController/GtarController-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = GtarControllerDeploy;
+				PROVISIONING_PROFILE = "CBC3EBC0-9CEF-4A4D-BF9D-989C73884DDE";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -292,11 +295,14 @@
 		ECC11DAB162CEB75001A231A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
 				DSTROOT = /tmp/GtarController.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GtarController/GtarController-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = GtarControllerDeploy;
+				PROVISIONING_PROFILE = "CBC3EBC0-9CEF-4A4D-BF9D-989C73884DDE";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

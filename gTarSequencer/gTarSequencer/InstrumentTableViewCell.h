@@ -26,6 +26,8 @@
     UIButton * selectedPatternButton;
     UIButton * previousPatternButton;
     UIButton * queuedPatternButton;
+    
+    int loopModCount;
 
 }
 
@@ -36,6 +38,7 @@
 - (IBAction)addMeasures:(id)sender;
 
 - (void)initMeasureViews;
+- (void)notifyQueuedPatterns:(BOOL)reset;
 - (void)update;
 - (void)deselect;
 

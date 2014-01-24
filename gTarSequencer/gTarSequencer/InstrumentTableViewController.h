@@ -10,6 +10,7 @@
 #import "Instrument.h"
 #import "InstrumentTableViewCell.h"
 #import "ScrollingSelector.h"
+#import "CustomInstrumentSelector.h"
 
 
 @protocol InstrumentDelegate <NSObject>
@@ -29,12 +30,12 @@
 @end
 
 
-@interface InstrumentTableViewController : UITableViewController <ScrollingSelectorDelegate> {
+@interface InstrumentTableViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate> {
     
     UITableView * instrumentTable;
     
     NSMutableArray * instruments;
-    int selectedInstrumentIndex;
+    long selectedInstrumentIndex;
     
     NSMutableArray * masterInstrumentOptions;
     NSMutableArray * remainingInstrumentOptions;
@@ -42,6 +43,10 @@
     ScrollingSelector * instrumentSelector;
     CGRect onScreenSelectorFrame;
     CGRect offLeftSelectorFrame;
+    
+    CustomInstrumentSelector * customSelector;
+    CGRect onScreenCustomSelectorFrame;
+    CGRect offLeftCustomSelectorFrame;
     
 }
 - (void)muteInstrument:(InstrumentTableViewCell *)sender isMute:(BOOL)isMute;
@@ -55,12 +60,14 @@
 - (void)userDidRemoveMeasures:(id)sender;
 
 - (void)setSelectedInstrumentIndex:(int)index;
-- (int)getSelectedInstrumentIndex;
+- (long)getSelectedInstrumentIndex;
 - (void)resetSelectedInstrumentIndex;
+
+- (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset;
 
 - (void)setInstrumentsFromData:(NSData *)instData;
 - (NSMutableArray *)getInstruments;
-- (int)countInstruments;
+- (long)countInstruments;
 - (Instrument *)getCurrentInstrument;
 - (Instrument *)getInstrumentAtIndex:(int)i;
 

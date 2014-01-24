@@ -7,12 +7,14 @@
 //
 
 #import "AppData.h"
+#import "CustomInstrumentSelector.h"
 
 #define HEIGHT_OF_WHITE_BAR 3
 
 @protocol ScrollingSelectorDelegate <NSObject>
 
 - (void)scrollingSelectorUserDidSelectIndex:(int)indexSelected;
+- (void)launchCustomInstrumentSelector;
 
 @end
 
@@ -32,6 +34,7 @@
     NSMutableArray * images;
     NSMutableArray * highlightedImages;
     NSMutableArray * names;
+    NSMutableArray * customized;
     
     NSMutableArray * imageButtons;      // array of UIButtons
     
@@ -53,17 +56,22 @@
     
     CGPoint lastContentOffset;
     double gap;
+    int cols;
+    int pageCount;
+    int currentPage;
+
 }
 
 - (void)moveFrame:(CGRect)newFrame;
-- (IBAction)userDidCancel:(id)sender;
+- (void)scrollToMax;
 
 @property (weak, nonatomic) id<ScrollingSelectorDelegate> delegate;
 @property (retain, nonatomic) NSMutableArray * options;
 @property (retain, nonatomic) UIButton * leftArrow;
 @property (retain, nonatomic) UIButton * rightArrow;
+@property (retain, nonatomic) UIButton * cancelButton;
 
-@property (weak, nonatomic) IBOutlet UIButton * cancelButton;
 @property (weak, nonatomic) IBOutlet UIScrollView * scrollView;
+@property (weak, nonatomic) IBOutlet UIView * paginationView;
 
 @end

@@ -60,6 +60,9 @@ typedef struct
     int m_pendingLoadRequests;
     
     BOOL m_pendingLoad;
+    
+    // Default placeholder sound if not all stringsXfrets are used
+    NSString * m_placeholderNote;
 }
 
 @property (readwrite) AudioStreamBasicDescription monoStreamFormat;
@@ -69,11 +72,16 @@ typedef struct
 @property (copy) NSString *m_samplePackName;
 @property int m_currentSamplePackIndex;
 @property int m_firstNoteMidiNum;
+@property int m_noteModNum; // determine spacing of samples
+
+@property (retain) NSArray * m_stringSet;
+
 @property int m_numberOfSamples;
 @property (retain) NSArray *m_tuning;
 @property (retain) NSArray *m_standardTunning;
 
 - (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString*)name;
+- (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString*)name AndStringSet:(NSArray*)stringSet;
 
 - (bool) loadSamplerWithName:(NSString*)name;
 - (bool) loadSamplerWithIndex:(int)index;

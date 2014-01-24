@@ -27,6 +27,9 @@
         // load instrument selector
         [self initInstrumentSelector];
         
+        // load custom instrument selector
+        [self initCustomInstrumentSelector];
+        
         instruments = [[NSMutableArray alloc] init];
 
     }
@@ -41,6 +44,7 @@
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"TrackCell"];
     
     [self.tableView setBackgroundColor:[UIColor clearColor]];
+    
 }
 
 #pragma mark Instruments Data
@@ -77,18 +81,27 @@
     
     // Remove all the previously used instruments from the remaining list:
     NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
+    NSMutableArray * instrumentsToRemove = [[NSMutableArray alloc] init];
     for (Instrument * inst in instruments)
     {
+        BOOL found = false;
         for (NSDictionary * dict in remainingInstrumentOptions)
         {
             if ( [[dict objectForKey:@"Name"] isEqualToString:inst.instrumentName] )
             {
+                found = true;
                 [inst initAudioWithInstrumentName:inst.instrumentName];
                 [dictionariesToRemove addObject:dict];
             }
         }
+        
+        // extra cleanup
+        if(!found){
+            [instrumentsToRemove addObject:inst];
+        }
     }
     
+    [instruments removeObjectsInArray:instrumentsToRemove];
     [remainingInstrumentOptions removeObjectsInArray:dictionariesToRemove];
 }
 
@@ -100,7 +113,7 @@
         return nil;
 }
 
-- (int)countInstruments
+- (long)countInstruments
 {
     return [instruments count];
 }
@@ -124,7 +137,7 @@
     selectedInstrumentIndex = -1;
 }
 
-- (int)getSelectedInstrumentIndex
+- (long)getSelectedInstrumentIndex
 {
     return selectedInstrumentIndex;
 }
@@ -133,6 +146,8 @@
 {
     selectedInstrumentIndex = index;
 }
+
+
 
 #pragma mark - Adding instruments
 
@@ -155,7 +170,6 @@
         [delegate turnOffGuitarEffects];
         
         // Reloading data forcibly resizes the add inst button
-        // TODO: is this necessary?
         [instrumentTable reloadData];
         
     }else{
@@ -272,7 +286,7 @@
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"About to edit");
+
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -282,6 +296,14 @@
     }
 }
 
+- (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset
+{
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    InstrumentTableViewCell * cell = (InstrumentTableViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
+    
+    [cell notifyQueuedPatterns:reset];
+    
+}
 
 #pragma mark Instrument Selector
 
@@ -321,11 +343,11 @@
 {
     if ( indexPath.row == [instruments count] )
     {
-        [self loadInstrumentSelector:self];
+        [self loadInstrumentSelector:self andScroll:NO];
     }
 }
 
-- (IBAction)loadInstrumentSelector:(id)sender
+- (IBAction)loadInstrumentSelector:(id)sender andScroll:(BOOL)scroll
 {
     
     // Turn off selected status of the add instrument button (which was just clicked):
@@ -343,6 +365,11 @@
     
     // Animate movement onscreen from the left:
     [UIView animateWithDuration:0.5f animations:^{[instrumentSelector moveFrame:onScreenSelectorFrame];}];
+    
+    if(scroll){
+        [NSTimer scheduledTimerWithTimeInterval:0.2 target:instrumentSelector selector:@selector(scrollToMax) userInfo:nil repeats:NO];
+    }
+    
 }
 
 - (void)closeInstrumentSelector
@@ -380,9 +407,93 @@
     }
 }
 
+- (void)initCustomInstrumentSelector
+{
+    
+    // TODO: figure out positioning for 4"
+    NSLog(@"Init custom instrument selector");
+    
+    // Get dimensions
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    // construct selector:
+    CGFloat selectorWidth = 364;
+    CGFloat selectorHeight = 276;
+    
+    onScreenCustomSelectorFrame = CGRectMake((x-selectorWidth)/2,
+                                       (y-selectorHeight)/2,
+                                       selectorWidth,
+                                       selectorHeight);
+    
+    offLeftCustomSelectorFrame = CGRectMake(onScreenCustomSelectorFrame.origin.x,
+                                            y,
+                                            onScreenCustomSelectorFrame.size.width,
+                                            onScreenCustomSelectorFrame.size.height);
+    
+    customSelector = [[CustomInstrumentSelector alloc] initWithFrame:offLeftCustomSelectorFrame];
+    [customSelector setDelegate:self];
+    
+    UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    [window addSubview:customSelector];
+    
+    [customSelector setHidden:YES];
+}
+
+// open
+- (void)launchCustomInstrumentSelector
+{
+    [customSelector setHidden:NO];
+    [customSelector moveFrame:offLeftCustomSelectorFrame];
+    [customSelector launchSelectorView];
+    
+    customSelector.alpha = 1.0;
+    
+    [UIView animateWithDuration:0.5f animations:^{[customSelector moveFrame:onScreenCustomSelectorFrame];}];
+    [self closeInstrumentSelector];
+    
+    customSelector.userInteractionEnabled = YES;
+}
+
+// close
+- (void)closeCustomInstrumentSelectorAndScroll:(BOOL)scroll
+{
+    
+    [UIView animateWithDuration:0.5f
+                     animations:^{[customSelector moveFrame:offLeftCustomSelectorFrame]; customSelector.alpha = 0.3;}
+                     completion:^(BOOL finished){[self hideCustomInstrumentSelector]; }];
+
+    [self loadInstrumentSelector:self andScroll:scroll];
+}
+
+// hide (call close instead)
+-(void)hideCustomInstrumentSelector
+{
+    [customSelector setHidden:YES];
+}
+
+// save a new instrument
+- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName
+{
+    
+    NSNumber * newIndex = [NSNumber numberWithInt:[masterInstrumentOptions count]];
+
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:[NSNumber numberWithInt:1] forKey:@"Custom"];
+    [dict setValue:@"Icon_Custom" forKey:@"IconName"];
+    [dict setValue:newIndex forKey:@"Index"];
+    [dict setValue:instName forKey:@"Name"];
+    [dict setValue:stringSet forKey:@"Strings"];
+    
+    [masterInstrumentOptions addObject:dict];
+    [remainingInstrumentOptions addObject:dict];
+    
+    [self closeCustomInstrumentSelectorAndScroll:YES];
+}
+
 #pragma mark Selecting Instrument
 
-- (void)selectInstrument:(int)index
+- (void)selectInstrument:(long)index
 {
     // Deselect old:
     for (Instrument * seq in instruments)
@@ -392,7 +503,7 @@
     
     selectedInstrumentIndex = index;
     
-    NSLog(@"Selected Instrument Index is %i",index);
+    NSLog(@"Selected Instrument Index is %li",index);
     
     // Select new:
     Instrument * newSelection = [instruments objectAtIndex:selectedInstrumentIndex];
@@ -438,7 +549,7 @@
     [delegate saveContext];
 }
 
-- (void)removeSequencerWithIndex:(int)indexToRemove
+- (void)removeSequencerWithIndex:(long)indexToRemove
 {
     // Remove object from array:
     Instrument * removedInst = [instruments objectAtIndex:indexToRemove];
@@ -498,12 +609,12 @@
     [remainingInstrumentOptions addObject:instrumentDictionary];
     
     // Bubble up:
-    int lastIndex = [remainingInstrumentOptions count] - 1;
+    long lastIndex = [remainingInstrumentOptions count] - 1;
     
     [self bubbleUp:lastIndex];
 }
 
-- (void)bubbleUp:(int)index
+- (void)bubbleUp:(long)index
 {
     // Base case:
     if (index == 0){
@@ -519,7 +630,7 @@
     [self bubbleUp:index-1];
 }
 
-- (void)swap:(int)indexOne with:(int)indexTwo inArray:(NSMutableArray *)array
+- (void)swap:(long)indexOne with:(long)indexTwo inArray:(NSMutableArray *)array
 {
     id tempObj = [array objectAtIndex:indexOne];
     
@@ -543,7 +654,7 @@
 
     if(isMute == YES) NSLog(@"Mute instrument");
     
-    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
     Instrument * tempInst = [instruments objectAtIndex:senderIndex];
     
@@ -554,7 +665,7 @@
 
 - (BOOL)userDidSelectPattern:(InstrumentTableViewCell *)sender atIndex:(int)index
 {
-    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
     Instrument * tempInst = [instruments objectAtIndex:senderIndex];
     
@@ -601,7 +712,7 @@
 
 - (void)userDidSelectMeasure:(InstrumentTableViewCell *)sender atIndex:(int)index
 {
-    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
     Instrument * sequencerAtIndex = [instruments objectAtIndex:senderIndex];
     
@@ -622,7 +733,7 @@
 
 - (void)userDidAddMeasures:(InstrumentTableViewCell *)sender
 {
-    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
     Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
     [instrumentAtIndex addMeasure];
@@ -641,7 +752,7 @@
 
 - (void)userDidRemoveMeasures:(InstrumentTableViewCell *)sender
 {
-    int senderIndex = [instrumentTable indexPathForCell:sender].row;
+    long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
     Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
     [instrumentAtIndex removeMeasure];
@@ -659,7 +770,7 @@
 {
     NSArray * visibleCells = [[instrumentTable visibleCells] copy];
     
-    int limit = [visibleCells count];
+    long limit = [visibleCells count];
     
     for (int i=0;i<limit;i++){
         

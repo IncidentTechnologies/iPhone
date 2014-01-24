@@ -145,15 +145,16 @@
 
 - (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource
 {
-    
-    if ( instrumentIndex >= 0 )
+ 
+    // TODO: change how string and fret are being loaded into audio controller
+    if (instrumentIndex >= 0)
     {
         int startingLocation = fret * STRINGS_ON_GTAR;
-        for (int i=0;i<STRINGS_ON_GTAR;i++)
+        for (int i=0; i < STRINGS_ON_GTAR; i++)
         {
             if (notes[startingLocation+i])
             {
-                [audioSource PluckStringFret:0 atFret:i];
+                [audioSource PluckStringFret:i atFret:0];
             }
         }
     }

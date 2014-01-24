@@ -16,7 +16,7 @@
 {
     
     // TestFlight integration
-    [TestFlight takeOff:@"e4c0eb02-879f-4043-a276-81e477348bd7"];
+    [TestFlight takeOff:@"1496ea64-f3cd-422c-802b-ace07a811cf0"];
     
     // init the viewing window
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

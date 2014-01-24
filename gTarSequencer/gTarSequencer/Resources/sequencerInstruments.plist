@@ -6,9 +6,30 @@
 	<array>
 		<dict>
 			<key>Name</key>
-			<string>Piano</string>
+			<string>CUSTOM</string>
+			<key>Custom</key>
+			<false/>
 			<key>Index</key>
 			<integer>0</integer>
+			<key>IconName</key>
+			<string>Icon_Custom</string>
+			<key>Strings</key>
+			<array>
+				<string>Silence</string>
+				<string>Silence</string>
+				<string>Silence</string>
+				<string>Silence</string>
+				<string>Silence</string>
+				<string>Silence</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>PIANO</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>1</integer>
 			<key>IconName</key>
 			<string>Icon_Piano</string>
 			<key>Strings</key>
@@ -23,11 +44,13 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Violin</string>
+			<string>VIOLIN</string>
+			<key>Custom</key>
+			<false/>
 			<key>Index</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>IconName</key>
-			<string>Icon_Guitar</string>
+			<string>Icon_Violin</string>
 			<key>Strings</key>
 			<array>
 				<string>Violin 1</string>
@@ -40,53 +63,116 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Dubstep</string>
-			<key>Index</key>
-			<integer>2</integer>
-			<key>IconName</key>
-			<string>Icon_WubWub</string>
-			<key>Strings</key>
-			<array>
-				<string>Dubstep 1</string>
-				<string>Dubstep 2</string>
-				<string>Dubstep 3</string>
-				<string>Dubstep 4</string>
-				<string>Dubstep 5</string>
-				<string>Dubstep 6</string>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Rock</string>
+			<string>PERCUSSION</string>
+			<key>Custom</key>
+			<false/>
 			<key>Index</key>
 			<integer>3</integer>
 			<key>IconName</key>
 			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>Rock 1</string>
-				<string>Rock 2</string>
-				<string>Rock 3</string>
-				<string>Rock 4</string>
-				<string>Rock 5</string>
-				<string>Rock 6</string>
+				<string>Percussion 1</string>
+				<string>Percussion 2</string>
+				<string>Percussion 3</string>
+				<string>Percussion 4</string>
+				<string>Percussion 5</string>
+				<string>Percussion 6</string>
 			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>House</string>
+			<string>TROMBONE</string>
+			<key>Custom</key>
+			<false/>
 			<key>Index</key>
 			<integer>4</integer>
 			<key>IconName</key>
-			<string>Icon_Percussion</string>
+			<string>Icon_Trombone</string>
 			<key>Strings</key>
 			<array>
-				<string>House 1</string>
-				<string>House 2</string>
-				<string>House 3</string>
-				<string>House 4</string>
-				<string>House 5</string>
-				<string>House 6</string>
+				<string>Trombone 1</string>
+				<string>Trombone 2</string>
+				<string>Trombone 3</string>
+				<string>Trombone 4</string>
+				<string>Trombone 5</string>
+				<string>Trombone 6</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>VIBRAPHONE</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>5</integer>
+			<key>IconName</key>
+			<string>Icon_Vibraphone</string>
+			<key>Strings</key>
+			<array>
+				<string>Vibraphone 1</string>
+				<string>Vibraphone 2</string>
+				<string>Vibraphone 3</string>
+				<string>Vibraphone 4</string>
+				<string>Vibraphone 5</string>
+				<string>Vibraphone 6</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>CHIPTUNE</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>6</integer>
+			<key>IconName</key>
+			<string>Icon_Music</string>
+			<key>Strings</key>
+			<array>
+				<string>Chiptune 1</string>
+				<string>Chiptune 2</string>
+				<string>Chiptune 3</string>
+				<string>Chiptune 4</string>
+				<string>Chiptune 5</string>
+				<string>Chiptune 6</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>WUB WUB</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>7</integer>
+			<key>IconName</key>
+			<string>Icon_WubWub</string>
+			<key>Strings</key>
+			<array>
+				<string>WubWub 1</string>
+				<string>WubWub 2</string>
+				<string>WubWub 3</string>
+				<string>WubWub 4</string>
+				<string>WubWub 5</string>
+				<string>WubWub 6</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>BACON</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>8</integer>
+			<key>IconName</key>
+			<string>Icon_Bacon</string>
+			<key>Strings</key>
+			<array>
+				<string>Bacon 1</string>
+				<string>Bacon 2</string>
+				<string>Bacon 3</string>
+				<string>Bacon 4</string>
+				<string>Bacon 5</string>
+				<string>Bacon 6</string>
 			</array>
 		</dict>
 	</array>

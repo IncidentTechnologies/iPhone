@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-#define TESTMODE 1
+#define TESTMODE 0
+#define CUSTOMINSTRUMENT 1

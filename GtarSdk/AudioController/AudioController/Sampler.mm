@@ -1,3 +1,5 @@
+
+
 //
 //  Sampler.m
 //  gTarAudioController
@@ -15,7 +17,9 @@
 @synthesize stereoStreamFormat;
 @synthesize m_samplePackName;
 @synthesize m_firstNoteMidiNum;
+@synthesize m_noteModNum;
 @synthesize m_numberOfSamples;
+@synthesize m_stringSet;
 @synthesize m_tuning;
 @synthesize m_standardTunning;
 @synthesize m_instruments;
@@ -58,6 +62,15 @@
     
     return self;
 }
+
+- (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString *)name AndStringSet:(NSArray *)stringSet
+{
+    m_stringSet = stringSet;
+    self = [self initWithSampleRate:sampleRate AndSamplePack:name];
+    
+    return self;
+}
+
 
 // Extract the array of instrument data in instrument.plist
 - (bool) loadInstrumentArray
@@ -259,6 +272,17 @@
     }
     m_firstNoteMidiNum = [[selectedInstrument objectForKey:@"FirstNoteMidiNum"] intValue];
     m_numberOfSamples = [[selectedInstrument objectForKey:@"NumNotes"] intValue];
+    
+    // get mod to determine spacing of samples, default to total # samples
+    m_noteModNum = [[selectedInstrument objectForKey:@"NoteModNum"] intValue];
+    
+    if(!m_noteModNum){
+        m_noteModNum = 1;
+    }
+    
+    // get a placeholder note if using mod math!
+    m_placeholderNote = [selectedInstrument objectForKey:@"PlaceholderNote"];
+    
     m_tuning = [selectedInstrument objectForKey:@"Tuning"];
     if (nil == m_tuning)
     {
@@ -279,36 +303,40 @@
 
 - (void) obtainSoundFileURLs
 {
+    NSLog(@"attempting to load string set %@",m_stringSet);
+    
     // Create the URLs for the source audio files.
-    for (int noteNum = m_firstNoteMidiNum; noteNum < m_firstNoteMidiNum + m_numberOfSamples; noteNum++)
+    for (int noteNum = m_firstNoteMidiNum, modNum = m_firstNoteMidiNum - 1; noteNum < m_firstNoteMidiNum + m_numberOfSamples; noteNum++)
     {
         
-        NSString *filename = [NSString stringWithFormat:@"%@ %d", m_samplePackName, noteNum];
+        NSString * filename;
+        
+        if((noteNum - m_firstNoteMidiNum) % m_noteModNum == 0){
+            
+            if(m_stringSet != nil){
+                filename = m_stringSet[++modNum];
+            }else{
+                filename = [NSString stringWithFormat:@"%@ %d", m_samplePackName, ++modNum];
+            }
+            
+        }else if(m_placeholderNote != NULL){
+            filename = m_placeholderNote;
+        }else{
+            
+            if(m_stringSet != nil){
+                filename = m_stringSet[modNum];
+            }else{
+                filename = [NSString stringWithFormat:@"%@ %d", m_samplePackName, modNum];
+            }
+        }
         
         NSURL *url = [[NSBundle mainBundle] URLForResource: filename
                                              withExtension: @"mp3"];
 
         
         m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
+        
     }
-}
-
-- (void) obtainSoundFileURLsFromSampleSet:(NSArray *)sampleSet
-{
-    for (int noteNum = m_firstNoteMidiNum; noteNum < m_firstNoteMidiNum + m_numberOfSamples; noteNum++)
-    {
-        
-        NSString *filename = [NSString stringWithFormat:[sampleSet objectAtIndex:noteNum], m_samplePackName, noteNum];
-        
-        NSURL *url = [[NSBundle mainBundle] URLForResource: filename
-                                             withExtension: @"mp3"];
-        
-        
-        m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
-    
-    }
-    
-
 }
 
 - (void) setupMonoStreamFormat

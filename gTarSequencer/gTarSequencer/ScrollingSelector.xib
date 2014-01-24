@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScrollingSelector">
             <connections>
-                <outlet property="cancelButton" destination="7Cu-Qo-tc3" id="BDd-6c-11j"/>
+                <outlet property="paginationView" destination="ncg-Hf-mOe" id="rGm-SJ-ZY6"/>
                 <outlet property="scrollView" destination="bh2-F9-jet" id="Ke5-gg-3At"/>
             </connections>
         </placeholder>
@@ -15,24 +15,6 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="INSTRUMENTS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5h-Rf-5ys">
-                    <rect key="frame" x="317" y="284" width="151" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cu-Qo-tc3">
-                    <rect key="frame" x="24" y="280" width="42" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="BACK">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="userDidCancel:" destination="-1" eventType="touchUpInside" id="jii-Ar-AAi"/>
-                    </connections>
-                </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bh2-F9-jet">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="265"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -42,21 +24,23 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ncg-Hf-mOe">
+                    <rect key="frame" x="112" y="290" width="256" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.090196078431372548" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="bh2-F9-jet" secondAttribute="trailing" id="5FJ-MW-Pbc"/>
                 <constraint firstItem="bh2-F9-jet" firstAttribute="top" secondItem="1" secondAttribute="top" id="ASJ-Dh-ip1"/>
                 <constraint firstItem="qTw-8F-jZr" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="FuB-LZ-zub"/>
-                <constraint firstAttribute="trailing" secondItem="M5h-Rf-5ys" secondAttribute="trailing" constant="12" id="N0f-1L-k9a"/>
                 <constraint firstItem="bh2-F9-jet" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="TyK-qP-7s6"/>
                 <constraint firstAttribute="trailing" secondItem="qTw-8F-jZr" secondAttribute="trailing" id="XA6-Tp-MJd"/>
+                <constraint firstAttribute="centerX" secondItem="ncg-Hf-mOe" secondAttribute="centerX" id="bWg-jo-ZnL"/>
                 <constraint firstAttribute="centerX" secondItem="bh2-F9-jet" secondAttribute="centerX" id="cWo-d6-A04"/>
                 <constraint firstAttribute="bottom" secondItem="bh2-F9-jet" secondAttribute="bottom" constant="55" id="dfv-wV-Elw"/>
-                <constraint firstAttribute="bottom" secondItem="M5h-Rf-5ys" secondAttribute="bottom" constant="15" id="f8m-2V-KMh"/>
-                <constraint firstAttribute="bottom" secondItem="7Cu-Qo-tc3" secondAttribute="bottom" constant="10" id="gb6-Qn-lfa"/>
-                <constraint firstItem="7Cu-Qo-tc3" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="24" id="hLI-Bt-Cw1"/>
                 <constraint firstAttribute="bottom" secondItem="qTw-8F-jZr" secondAttribute="bottom" constant="55" id="qdV-08-VnP"/>
+                <constraint firstAttribute="bottom" secondItem="ncg-Hf-mOe" secondAttribute="bottom" id="zBJ-l3-aMO"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

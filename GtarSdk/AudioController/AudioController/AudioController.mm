@@ -43,6 +43,7 @@ class ButterWorthFilter;
 class KSObject;
 class Compressor;
 
+
 @interface AudioController ()
 {
     AVAudioSession *m_session;
@@ -84,6 +85,7 @@ class Compressor;
 @synthesize m_LimiterOn;
 
 @synthesize m_volumeGain;
+@synthesize m_stringSet;
 
 - (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument
 {
@@ -178,7 +180,7 @@ class Compressor;
         m_pCompressor = new Compressor(.97, 3, 1, 5000, g_GraphSampleRate);
         
         if (SamplerSource == m_audioSource) {
-            m_sampler = [[[Sampler alloc] initWithSampleRate:g_GraphSampleRate AndSamplePack:instrument] retain];
+            m_sampler = [[[Sampler alloc] initWithSampleRate:g_GraphSampleRate AndSamplePack:instrument AndStringSet:m_stringSet] retain];
         }
         
         m_volumeGain = 1.0;
@@ -187,10 +189,22 @@ class Compressor;
         srand( time(NULL) );
         
         [self initializeAUGraph];
-        [self RouteAudioToSpeaker];
+        
+        // added 1.21: when running multiple audio controllers, need to not refresh route
+        if([self GetNSAudioRoute]==NULL){
+            [self RouteAudioToSpeaker];
+        }
 	}
 	
 	return self;
+}
+
+- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument AndStringSet:(NSArray *)stringSet
+{
+    m_stringSet = stringSet;
+    self = [self initWithAudioSource:audioSource AndInstrument:instrument];
+    
+    return self;
 }
 
 // Starts the audio render

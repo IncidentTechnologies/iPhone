@@ -74,6 +74,8 @@
     deleteMode = NO;
     
     selectedPatternButton = nil;
+    
+    loopModCount = 0;
 }
 
 - (void)layoutSubviews
@@ -241,6 +243,25 @@
     }
 }
 
+- (void)notifyQueuedPatterns:(BOOL)reset
+{
+    if(queuedPatternButton != nil){
+        
+        if(reset){
+            loopModCount = 0;
+        }
+        
+        if(loopModCount%8==3 || loopModCount%8==4){
+            [self setStateForButton:queuedPatternButton state:3];
+        }else{
+            [self setStateForButton:queuedPatternButton state:1];
+        }
+            
+        loopModCount++;
+    }
+    
+}
+
 - (void)setStateForButton:(UIButton *)button state:(int)stateindex
 {
     UIColor * backgroundColor = nil;
@@ -258,6 +279,10 @@
         case 2:
             backgroundColor = [UIColor whiteColor];
             titleColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+            break;
+        case 3:
+            backgroundColor = [UIColor clearColor];
+            titleColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
             break;
     }
     

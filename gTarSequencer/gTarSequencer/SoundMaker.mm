@@ -18,21 +18,19 @@
     if ( self )
     {
         audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:@"Sequence"];
-        [audioController initializeAUGraph];
+        //[audioController initializeAUGraph];
         [audioController startAUGraph];
     }
     return self;
 }
 
-- (id)initWithInstrumentName:(NSString *)instrument
+- (id)initWithStringSet:(NSArray *)stringSet
 {
     self = [super init];
     if(self){
-    
         
-        NSLog(@"Trying instrument %@",instrument);
-        audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:instrument];
-        [audioController initializeAUGraph];
+        audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:@"Silence" AndStringSet:stringSet];
+        //[audioController initializeAUGraph];
         [audioController startAUGraph];
     }
     

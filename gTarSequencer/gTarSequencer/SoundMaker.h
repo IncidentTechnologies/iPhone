@@ -20,7 +20,7 @@
 }
 
 
-- (id)initWithInstrumentName:(NSString *)instrument;
+- (id)initWithStringSet:(NSArray *)stringSet;
 - (void)PluckStringFret:(int)str atFret:(int)fret;
 
 @end
