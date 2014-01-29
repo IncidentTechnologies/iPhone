@@ -15,7 +15,7 @@
 
 @protocol InstrumentDelegate <NSObject>
 
-- (void) saveContext;
+- (void) saveContext:(NSString *)filepath;
 - (BOOL) checkIsPlaying;
 - (void) resetPlayLocation;
 - (void) forceStopAll;
@@ -47,6 +47,8 @@
     CustomInstrumentSelector * customSelector;
     CGRect onScreenCustomSelectorFrame;
     CGRect offLeftCustomSelectorFrame;
+    
+    NSString * sequencerInstrumentsPath;
     
 }
 - (void)muteInstrument:(InstrumentTableViewCell *)sender isMute:(BOOL)isMute;

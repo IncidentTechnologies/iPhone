@@ -53,7 +53,7 @@
     double verticalOffset = 70;         // the bigger this number the higher up the center is located
     center = CGPointMake(x/2, self.frame.size.height - verticalOffset);
     
-    fillColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1];
+    fillColor = [UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1];
     
     // define the angular bounds:
     double angleWidth = 18;

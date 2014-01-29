@@ -190,6 +190,7 @@
     [nameField addTarget:self action:@selector(nameFieldStartEdit:) forControlEvents:UIControlEventEditingDidBegin];
     [nameField addTarget:self action:@selector(nameFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [nameField addTarget:self action:@selector(nameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    nameField.delegate = self;
     
     if(instName != nil){
         nameField.text = instName;
@@ -292,6 +293,19 @@
     
     // hide keyboard
     [nameField resignFirstResponder];
+}
+
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSMutableCharacterSet * allowedCharacters = [NSMutableCharacterSet alphanumericCharacterSet];
+    [allowedCharacters formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    [allowedCharacters formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"_-|"]];
+    
+    if([string rangeOfCharacterFromSet:allowedCharacters.invertedSet].location == NSNotFound){
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark Table View Protocol

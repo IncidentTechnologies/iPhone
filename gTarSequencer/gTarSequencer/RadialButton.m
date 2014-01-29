@@ -13,7 +13,7 @@
 
 #define ZOOMFACTOR 2
 #define ZOOM_FONT 40
-#define NORMAL_FONT 21
+#define NORMAL_FONT 17
 #define LARGE_FONT 30
 
 #define XBASE 480
@@ -80,7 +80,9 @@
     [window addSubview:radialDisplay];
     
     // tempo label
-    CGRect titleframe = CGRectMake(10,15,80,30);
+    double titleWidth = 80;
+    double tempoWidth = 50;
+    CGRect titleframe = CGRectMake(self.frame.size.width/2-titleWidth/2-tempoWidth/2,13,80,30);
     scrollTitle = [[UILabel alloc] initWithFrame:titleframe];
     [scrollTitle setText:@"TEMPO"];
     scrollTitle.font = [UIFont systemFontOfSize:NORMAL_FONT];
@@ -89,8 +91,8 @@
     [self addSubview:scrollTitle];
     
     // tempo value
-    normalFrame = CGRectMake(90,13,50,30);
-    zoomedFrame = CGRectMake(25, -90, ZOOMFACTOR*50, ZOOMFACTOR*30);
+    normalFrame = CGRectMake(self.frame.size.width/2+10,13,tempoWidth,30);
+    zoomedFrame = CGRectMake(62, -90, ZOOMFACTOR*tempoWidth, ZOOMFACTOR*30);
     
     valueDisplay = [[UILabel alloc] initWithFrame:normalFrame];
     valueDisplay.contentMode = UIViewContentModeScaleAspectFit;

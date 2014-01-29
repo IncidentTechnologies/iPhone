@@ -14,8 +14,9 @@
 #import "SEQNote.h"
 #import "InstrumentTableViewController.h"
 #import "PlayControlViewController.h"
+#import "SaveLoadSelector.h"
 
-@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,InstrumentDelegate> {
+@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,InstrumentDelegate,SaveLoadSelectorDelegate> {
     
     // gTar connection
     BOOL isConnected;
@@ -35,18 +36,22 @@
     InstrumentTableViewController * instrumentTableViewController;
     PlayControlViewController * playControlViewController;
     
-    IBOutlet UIImageView * gTarLogoImageView;
-    
     // State
     NSMutableDictionary * currentState;
     NSString * instrumentDataFilePath;
+    
+    // Save/Load
+    NSString * activeSequencer;
+    SaveLoadSelector * saveLoadSelector;
+    CGRect onScreenSaveLoadFrame;
+    CGRect offLeftSaveLoadFrame;
+    
 }
 
 @property (retain, nonatomic) InstrumentTableViewController * instrumentTableViewController;
 @property (retain, nonatomic) PlayControlViewController * playControlViewController;
 
-@property (retain, nonatomic) IBOutlet UIImageView * gTarLogoImageView;
-@property (retain, nonatomic) IBOutlet UILabel * gTarConnectedText;
+@property (retain, nonatomic) UIButton * gTarConnectedBar;
 
 
 @end

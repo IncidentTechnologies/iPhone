@@ -16,7 +16,8 @@
 
 - (void) initPlayLocation;
 
-- (void) saveContext;
+- (void) saveContext:(NSString *)filepath;
+- (void) userDidLoadSequenceOptions;
 
 @end
 
@@ -32,6 +33,7 @@
    
 }
 
+- (IBAction)userDidLoadOptions:(id)sender;
 - (IBAction)startStop:(id)sender;
 - (void)stopAll;
 - (int)getTempo;
@@ -41,6 +43,7 @@
 @property (weak, nonatomic) id<PlayControlDelegate> delegate;
 @property (weak, nonatomic) IBOutlet RadialButton * tempoSlider;
 @property (retain, nonatomic) IBOutlet UIButton * startStopButton;
+@property (retain, nonatomic) IBOutlet UIButton * optionsButton;
 
 
 @end

@@ -52,31 +52,52 @@
 - (void)retrieveInstrumentOptions
 {
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"sequencerInstruments" ofType:@"plist"];
+    sequencerInstrumentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    sequencerInstrumentsPath = [sequencerInstrumentsPath stringByAppendingPathComponent:@"sequencerInstruments.plist"];
     
+    NSLog(@"Retrieve instrument options from path %@",sequencerInstrumentsPath);
+    
+    // If the file doesn't exist in the Documents Folder, copy it.
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    if ([fileManager fileExistsAtPath:path]) {
-        NSLog(@"The sequencer instrument plist exists");
-    } else {
-        NSLog(@"The sequencer instrument plist does not exist");
+    if (![fileManager fileExistsAtPath:sequencerInstrumentsPath]) {
+        NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"sequencerInstruments" ofType:@"plist"];
+        [fileManager copyItemAtPath:sourcePath toPath:sequencerInstrumentsPath error:nil];
+        
+        NSLog(@"The sequencer instrument plist does not exist in document path");
+    }else{
+        NSLog(@"The sequencer instrument plist already exists in document path");
     }
     
-    NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:sequencerInstrumentsPath];
     
     masterInstrumentOptions = [plistDictionary objectForKey:@"Instruments"];
+
+    [self setRemainingInstrumentOptionsFromMasterOptions];
+ 
+}
+
+- (void)setRemainingInstrumentOptionsFromMasterOptions
+{
     remainingInstrumentOptions = [[NSMutableArray alloc] init];
     
     // Copy master options into remaining options:
     for (NSDictionary * dict in masterInstrumentOptions) {
         [remainingInstrumentOptions addObject:dict];
     }
- 
 }
 
 - (void)setInstrumentsFromData:(NSData *)instData
 {
     
+    // clear table if it's not empty
+    if([instruments count] > 0){
+        for(int i = 0; i < [instruments count]; i++){
+            [self deleteCell:[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]];
+        }
+    }
+    
+    [self setRemainingInstrumentOptionsFromMasterOptions];    
     instruments = [NSKeyedUnarchiver unarchiveObjectWithData:instData];
     
     // Remove all the previously used instruments from the remaining list:
@@ -103,6 +124,9 @@
     
     [instruments removeObjectsInArray:instrumentsToRemove];
     [remainingInstrumentOptions removeObjectsInArray:dictionariesToRemove];
+    
+    [instrumentTable reloadData];
+    
 }
 
 - (Instrument *)getCurrentInstrument
@@ -147,8 +171,6 @@
     selectedInstrumentIndex = index;
 }
 
-
-
 #pragma mark - Adding instruments
 
 - (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet
@@ -186,7 +208,7 @@
         }
     }
     
-    [delegate saveContext];
+    [delegate saveContext:nil];
 }
 
 #pragma mark Table View Protocol
@@ -479,7 +501,7 @@
     NSNumber * newIndex = [NSNumber numberWithInt:[masterInstrumentOptions count]];
 
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
-    [dict setValue:[NSNumber numberWithInt:1] forKey:@"Custom"];
+    [dict setValue:[NSNumber numberWithBool:TRUE] forKey:@"Custom"];
     [dict setValue:@"Icon_Custom" forKey:@"IconName"];
     [dict setValue:newIndex forKey:@"Index"];
     [dict setValue:instName forKey:@"Name"];
@@ -488,8 +510,19 @@
     [masterInstrumentOptions addObject:dict];
     [remainingInstrumentOptions addObject:dict];
     
+    [self saveCustomInstrumentToPlist:masterInstrumentOptions];
     [self closeCustomInstrumentSelectorAndScroll:YES];
 }
+
+- (void)saveCustomInstrumentToPlist:(NSArray *)options
+{
+    
+    NSMutableDictionary * wrapperDict = [[NSMutableDictionary alloc] init];
+    [wrapperDict setValue:options forKey:@"Instruments"];
+    
+    [wrapperDict writeToFile:sequencerInstrumentsPath atomically:YES];
+}
+
 
 #pragma mark Selecting Instrument
 
@@ -506,11 +539,13 @@
     NSLog(@"Selected Instrument Index is %li",index);
     
     // Select new:
-    Instrument * newSelection = [instruments objectAtIndex:selectedInstrumentIndex];
-    [newSelection setSelected:YES];
-    
-    // Update guitarView's measureToDisplay
-    [delegate setMeasureAndUpdate:newSelection.selectedPattern.selectedMeasure checkNotPlaying:TRUE];
+    if(selectedInstrumentIndex >= 0 && selectedInstrumentIndex < [instruments count]){
+        Instrument * newSelection = [instruments objectAtIndex:selectedInstrumentIndex];
+        [newSelection setSelected:YES];
+        
+        // Update guitarView's measureToDisplay
+        [delegate setMeasureAndUpdate:newSelection.selectedPattern.selectedMeasure checkNotPlaying:TRUE];
+    }
     
     if(![delegate checkIsPlaying]){
         [delegate updateGuitarView];
@@ -546,7 +581,7 @@
         [delegate forceStopAll];
     }
     
-    [delegate saveContext];
+    [delegate saveContext:nil];
 }
 
 - (void)removeSequencerWithIndex:(long)indexToRemove
@@ -707,7 +742,7 @@
         [self updateAllVisibleCells];
     }
     
-    [delegate saveContext];
+    [delegate saveContext:nil];
 }
 
 - (void)userDidSelectMeasure:(InstrumentTableViewCell *)sender atIndex:(int)index
@@ -727,7 +762,7 @@
         [self updateAllVisibleCells];
     }
     
-    [delegate saveContext];
+    [delegate saveContext:nil];
     
 }
 
@@ -746,7 +781,7 @@
         [self updateAllVisibleCells];
     }
     
-    [delegate saveContext];
+    [delegate saveContext:nil];
     
 }
 
@@ -763,7 +798,7 @@
     
     [delegate setMeasureAndUpdate:instrumentAtIndex.selectedPattern.selectedMeasure checkNotPlaying:FALSE];
     
-    [delegate saveContext];
+    [delegate saveContext:nil];
 }
 
 - (void)updateAllVisibleCells

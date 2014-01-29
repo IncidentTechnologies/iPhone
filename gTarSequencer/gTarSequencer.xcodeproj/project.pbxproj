@@ -275,6 +275,9 @@
 		58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */; };
 		58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */; };
 		58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */; };
+		58F4B94A18983BB70071609B /* SaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F4B94918983BB70071609B /* SaveView.xib */; };
+		58F4B94E18983ED90071609B /* LoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F4B94D18983ED90071609B /* LoadView.xib */; };
+		58F4B951189849BA0071609B /* SaveLoadSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F4B950189849BA0071609B /* SaveLoadSelector.m */; };
 		58F6167C188F5E2700020A74 /* Icon_Music.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F61678188F5E2700020A74 /* Icon_Music.png */; };
 		58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F61679188F5E2700020A74 /* Icon_Trombone.png */; };
 		58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */; };
@@ -586,6 +589,10 @@
 		58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		58F4B94918983BB70071609B /* SaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveView.xib; sourceTree = "<group>"; };
+		58F4B94D18983ED90071609B /* LoadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadView.xib; sourceTree = "<group>"; };
+		58F4B94F189849B90071609B /* SaveLoadSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveLoadSelector.h; sourceTree = "<group>"; };
+		58F4B950189849BA0071609B /* SaveLoadSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveLoadSelector.m; sourceTree = "<group>"; };
 		58F61678188F5E2700020A74 /* Icon_Music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Music.png; sourceTree = "<group>"; };
 		58F61679188F5E2700020A74 /* Icon_Trombone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trombone.png; sourceTree = "<group>"; };
 		58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Vibraphone.png; sourceTree = "<group>"; };
@@ -995,6 +1002,7 @@
 				58868ED7187619ED00B469C2 /* PlayControlViewController.h */,
 				58868ED8187619ED00B469C2 /* PlayControlViewController.m */,
 				58868ED9187619ED00B469C2 /* BottomBar.xib */,
+				58F4B94618983B6E0071609B /* SaveLoadSelector */,
 				58547AE1186CD52F003638EF /* RadialButton */,
 				58547AE5186CD5C2003638EF /* RadialDisplay */,
 			);
@@ -1139,6 +1147,17 @@
 			name = SequencerViewController;
 			sourceTree = "<group>";
 		};
+		58F4B94618983B6E0071609B /* SaveLoadSelector */ = {
+			isa = PBXGroup;
+			children = (
+				58F4B94918983BB70071609B /* SaveView.xib */,
+				58F4B94D18983ED90071609B /* LoadView.xib */,
+				58F4B94F189849B90071609B /* SaveLoadSelector.h */,
+				58F4B950189849BA0071609B /* SaveLoadSelector.m */,
+			);
+			name = SaveLoadSelector;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1272,6 +1291,7 @@
 				5811AAE5187B88C800FC0BD2 /* Percussion 11.mp3 in Resources */,
 				5811AAFD187B88C800FC0BD2 /* Percussion 33.mp3 in Resources */,
 				587C9F9E1888C0E7001F57C7 /* Piano 2.mp3 in Resources */,
+				58F4B94E18983ED90071609B /* LoadView.xib in Resources */,
 				5811AB11187B88C800FC0BD2 /* Percussion 51.mp3 in Resources */,
 				5840858618652D9000BFF3C5 /* InstrumentTableView.xib in Resources */,
 				5811AAED187B88C800FC0BD2 /* Percussion 19.mp3 in Resources */,
@@ -1367,6 +1387,7 @@
 				587C9FC01888C0E7001F57C7 /* Vibraphone 6.mp3 in Resources */,
 				58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */,
 				5805D049188DAF4C000832A9 /* CustomInstrumentSelector.xib in Resources */,
+				58F4B94A18983BB70071609B /* SaveView.xib in Resources */,
 				587C9FC31888C0E7001F57C7 /* Violin 3.mp3 in Resources */,
 				5811AB30187B88C800FC0BD2 /* Percussion 8.mp3 in Resources */,
 				5811AB3A187B88C800FC0BD2 /* Percussion 89.mp3 in Resources */,
@@ -1486,6 +1507,7 @@
 				58B4D3D3186E1F7F0035D9E5 /* Measure.m in Sources */,
 				5894D61A186505BD00849C71 /* InstrumentTableViewController.m in Sources */,
 				58547AE4186CD55C003638EF /* RadialButton.m in Sources */,
+				58F4B951189849BA0071609B /* SaveLoadSelector.m in Sources */,
 				58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */,
 				58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */,
 				58D6171E1863B8D7001EB327 /* AppDelegate.m in Sources */,

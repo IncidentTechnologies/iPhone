@@ -19,7 +19,7 @@
 
 @end
 
-@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource>
+@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     
     UIView * backgroundView;

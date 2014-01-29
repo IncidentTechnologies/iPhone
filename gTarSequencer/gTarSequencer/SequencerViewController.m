@@ -20,8 +20,7 @@
 
 @synthesize instrumentTableViewController;
 @synthesize playControlViewController;
-@synthesize gTarLogoImageView;
-@synthesize gTarConnectedText;
+@synthesize gTarConnectedBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +36,7 @@
     [super viewDidLoad];
     
     [self initSubviews];
-    [self loadStateFromDisk];
+    [self loadStateFromDisk:nil];
 }
 
 
@@ -66,7 +65,9 @@
     guitarView = [[GuitarView alloc] init];
     guitarView.delegate = self;
     
-    if(TESTMODE) [guitarView observeGtar];
+    if(TESTMODE){
+        [NSTimer scheduledTimerWithTimeInterval:3.0 target:guitarView selector:@selector(observeGtar) userInfo:nil repeats:NO];
+    }
     
     string = 0;
     fret = 0;
@@ -103,11 +104,123 @@
     
     [self.view addSubview:playControlViewController.view];
     
+    // gTar connected bar
+    CGRect barFrame = CGRectMake(0,0,XBASE,43);
+    
+    gTarConnectedBar = [[UIButton alloc] initWithFrame:barFrame];
+    [gTarConnectedBar setTitle:@"gTar NOT CONNECTED" forState:UIControlStateNormal];
+    [gTarConnectedBar setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [gTarConnectedBar.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    [gTarConnectedBar setBackgroundColor:[UIColor colorWithRed:194/255.0 green:46/255.0 blue:26/255.0 alpha:0.9]];
+    [self.view addSubview:gTarConnectedBar];
+    
+    [gTarConnectedBar addTarget:self action:@selector(gTarConnectedToggleBarOff) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Save load selector
+    [self initSaveLoadSelector];
+    
 }
 
-- (void)saveContext
+#pragma mark - Save Load Delegate
+
+- (void)initSaveLoadSelector
 {
-    if(TESTMODE) NSLog(@"Perform context save");
+    // TODO: figure out positioning for 4"
+    NSLog(@"Init save load selector");
+    
+    // Get dimensions
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    // construct selector:
+    CGFloat selectorWidth = 364;
+    CGFloat selectorHeight = 276;
+    
+    onScreenSaveLoadFrame = CGRectMake((x-selectorWidth)/2,
+                                       (y-selectorHeight)/2,
+                                       selectorWidth,
+                                       selectorHeight);
+    
+    offLeftSaveLoadFrame = CGRectMake(onScreenSaveLoadFrame.origin.x,
+                                        y,
+                                        onScreenSaveLoadFrame.size.width,
+                                        onScreenSaveLoadFrame.size.height);
+    
+    saveLoadSelector = [[SaveLoadSelector alloc] initWithFrame:offLeftSaveLoadFrame];
+    [saveLoadSelector setDelegate:self];
+    
+    UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    [window addSubview:saveLoadSelector];
+    
+    [saveLoadSelector setHidden:YES];
+}
+
+- (void)userDidLoadSequenceOptions
+{
+    
+    [saveLoadSelector setHidden:NO];
+    [saveLoadSelector moveFrame:offLeftSaveLoadFrame];
+    [saveLoadSelector userDidSaveSequence];
+    
+    saveLoadSelector.alpha = 1.0;
+    
+    [UIView animateWithDuration:0.5f animations:^{[saveLoadSelector moveFrame:onScreenSaveLoadFrame];}];
+    
+    saveLoadSelector.userInteractionEnabled = YES;
+    
+}
+
+- (void)closeSaveLoadSelector
+{
+    [UIView animateWithDuration:0.5f
+                     animations:^{[saveLoadSelector moveFrame:offLeftSaveLoadFrame]; saveLoadSelector.alpha = 0.3;}
+                     completion:^(BOOL finished){[self hideSaveLoadSelector]; }];
+}
+
+- (void)hideSaveLoadSelector
+{
+    [saveLoadSelector setHidden:YES];
+}
+
+- (void)saveWithName:(NSString *)filename
+{
+    activeSequencer = filename;
+    filename = [@"usr_" stringByAppendingString:filename];
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
+    
+    [self closeSaveLoadSelector];
+    
+    [self saveContext:filepath];
+    [self saveContext:nil];
+}
+
+- (void)loadFromName:(NSString *)filename
+{
+    activeSequencer = filename;
+    filename = [@"usr_" stringByAppendingString:filename];
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
+    
+    [self closeSaveLoadSelector];
+    
+    [self loadStateFromDisk:filepath];
+    [self saveContext:nil];
+}
+
+
+#pragma mark - Auto Save Load
+- (void)saveContext:(NSString *)filepath
+{
+    if(filepath == nil){
+        filepath = instrumentDataFilePath;
+        NSLog(@"Load sequencer from disk");
+    }else{
+        NSLog(@"Save state to disk at %@",filepath);
+    }
     
     NSData * instData = [NSKeyedArchiver archivedDataWithRootObject:[instrumentTableViewController getInstruments]];
     
@@ -119,23 +232,35 @@
     [currentState setObject:tempoNumber forKey:@"Tempo"];
     [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
     
-    BOOL success = [currentState writeToFile:instrumentDataFilePath atomically:YES];
+    if(activeSequencer){
+        [currentState setObject:activeSequencer forKey:@"Active Sequencer"];
+    }else{
+        [currentState setObject:@"" forKey:@"Active Sequencer"];
+    }
+    
+    BOOL success = [currentState writeToFile:filepath atomically:YES];
     
     NSLog(@"Save success: %i", success);
 }
 
-- (void)loadStateFromDisk
+- (void)loadStateFromDisk:(NSString *)filepath
 {
-    NSLog(@"Load state from disk");
+    
+    if(filepath == nil){
+        filepath = instrumentDataFilePath;
+        NSLog(@"Load state from disk");
+    }else{
+        NSLog(@"Load sequencer from disk at %@", filepath);
+    }
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:instrumentDataFilePath]) {
+    if ([fileManager fileExistsAtPath:filepath]) {
         NSLog(@"The sequencer save plist exists");
     } else {
         NSLog(@"The sequencer save plist does not exist");
     }
     
-    currentState = [[NSDictionary dictionaryWithContentsOfFile:instrumentDataFilePath] mutableCopy];
+    currentState = [[NSDictionary dictionaryWithContentsOfFile:filepath] mutableCopy];
     
     if (currentState == nil )
         currentState = [[NSMutableDictionary alloc] init];
@@ -146,22 +271,24 @@
         int tempo = [[currentState objectForKey:@"Tempo"] intValue];
         [playControlViewController setTempo:tempo];
         
-        // Decode selectedInstrumentIndex
-        [instrumentTableViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
-        
         // Decode array of instruments:
         NSData * instrumentData = [currentState objectForKey:@"Instruments Data"];
         [instrumentTableViewController setInstrumentsFromData:instrumentData];
         
-    }else{
+        // Decode selectedInstrumentIndex
+        [instrumentTableViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
         
+        // Decode active sequencer filename
+        NSString * sequencerName = [currentState objectForKey:@"Active Sequencer"];
+        if(![sequencerName isEqualToString:@""]){
+            activeSequencer = sequencerName;
+            saveLoadSelector.activeSequencer = sequencerName;
+        }
+    }else{
         [playControlViewController resetTempo];
         [instrumentTableViewController resetSelectedInstrumentIndex];
-        
     }
-    
 }
-
 
 #pragma mark - Play Events
 
@@ -376,8 +503,10 @@
     
     [guitarView update];
     
-    [self saveContext];
+    [self saveContext:nil];
 }
+
+#pragma mark - gTar Connected
 
 - (void)gtarConnected:(BOOL)toConnect
 {
@@ -387,22 +516,41 @@
     
     isConnected = toConnect;
     
-    [self updateConnectedImages];
+    [self updategTarConnectedBar];
 }
 
-- (void)updateConnectedImages
+- (void)updategTarConnectedBar
 {
     if(TESTMODE) NSLog(@"Update connected image");
     
     if (isConnected){
-        [self.gTarLogoImageView setImage:[UIImage imageNamed: @"gTarConnectedLogo"]];
-        [self.gTarConnectedText setText:@"Connected"];
+        [gTarConnectedBar setTitle:@"gTar CONNECTED" forState:UIControlStateNormal];
+        [gTarConnectedBar setBackgroundColor:[UIColor colorWithRed:40/255.0 green:194/255.0 blue:94/255.0 alpha:0.9]];
+    
     }else{
-        [self.gTarLogoImageView setImage:[UIImage imageNamed: @"gTarNotConnectedLogo"]];
-        [self.gTarConnectedText setText:@"Not Connected"];
+        [gTarConnectedBar setTitle:@"gTar NOT CONNECTED" forState:UIControlStateNormal];
+        [gTarConnectedBar setBackgroundColor:[UIColor colorWithRed:194/255.0 green:46/255.0 blue:26/255.0 alpha:0.9]];
     }
+
+    [self gTarConnectedToggleBarOn];
+
 }
 
+- (void)gTarConnectedToggleBarOff
+{
+    CGRect hiddenFrame = CGRectMake(0,-1*gTarConnectedBar.frame.size.height,gTarConnectedBar.frame.size.width,gTarConnectedBar.frame.size.height);
+    [UIView animateWithDuration:0.5f animations:^(){
+        [gTarConnectedBar setFrame:hiddenFrame];
+    }];
+}
 
+- (void)gTarConnectedToggleBarOn
+{
+    
+    CGRect normalFrame = CGRectMake(0,0,gTarConnectedBar.frame.size.width,gTarConnectedBar.frame.size.height);
+    [UIView animateWithDuration:0.5f animations:^(){
+        [gTarConnectedBar setFrame:normalFrame];
+    }];
+}
 
 @end

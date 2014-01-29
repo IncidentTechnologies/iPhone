@@ -16,6 +16,7 @@
 @synthesize tempoSlider;
 @synthesize startStopButton;
 @synthesize delegate;
+@synthesize optionsButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,7 +70,7 @@
         }
     }
     
-    [delegate saveContext];
+    [delegate saveContext:nil];
 }
 
 #pragma mark - Tempo Interface
@@ -141,6 +142,13 @@
     for (UIView *v in viewsToRemove) {
         [v removeFromSuperview];
     }
+}
+
+#pragma mark - Save / Load
+
+- (IBAction)userDidLoadOptions:(id)sender
+{
+    [delegate userDidLoadSequenceOptions];
 }
 
 #pragma mark - Drawing

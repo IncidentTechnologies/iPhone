@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayControlViewController">
             <connections>
+                <outlet property="optionsButton" destination="mEV-SP-95e" id="IMo-nb-DdX"/>
                 <outlet property="startStopButton" destination="owG-hq-uwM" id="zn8-Bn-5pm"/>
                 <outlet property="tempoSlider" destination="eiz-Ma-1pi" id="D7C-1J-qw9"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -16,25 +17,39 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-Ma-1pi" customClass="RadialButton">
-                    <rect key="frame" x="166" y="265" width="149" height="55"/>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-Ma-1pi" customClass="RadialButton">
+                    <rect key="frame" x="128" y="266" width="224" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="149" id="Z3a-XN-9Qx"/>
-                        <constraint firstAttribute="height" constant="55" id="dQZ-l3-yxP"/>
+                        <constraint firstAttribute="height" constant="55" id="KlV-81-VJV"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owG-hq-uwM">
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEV-SP-95e">
                     <rect key="frame" x="350" y="266" width="130" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.41584443160000001" green="0.62296686030000004" blue="0.67307079079999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="hv7-qW-0GQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="OPTIONS">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidLoadOptions:" destination="-1" eventType="touchUpInside" id="U0L-3N-c1V"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owG-hq-uwM">
+                    <rect key="frame" x="0.0" y="266" width="130" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.15686274509803921" green="0.76078431372549016" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="130" id="ely-wA-6Nm"/>
-                        <constraint firstAttribute="height" constant="55" id="z8M-pg-ewx"/>
+                        <constraint firstAttribute="height" constant="55" id="IqJ-GK-kBI"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal">
@@ -47,10 +62,13 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="UCL-Q4-JAW"/>
-                <constraint firstAttribute="centerX" secondItem="eiz-Ma-1pi" secondAttribute="centerX" id="eok-kc-j3I"/>
-                <constraint firstAttribute="trailing" secondItem="owG-hq-uwM" secondAttribute="trailing" id="jSm-O0-KF9"/>
-                <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" id="tRs-1Y-jaz"/>
+                <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="7bA-gz-xkI"/>
+                <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-1" id="Adp-iX-doM"/>
+                <constraint firstAttribute="trailing" secondItem="mEV-SP-95e" secondAttribute="trailing" id="BV7-Y9-B63"/>
+                <constraint firstAttribute="bottom" secondItem="mEV-SP-95e" secondAttribute="bottom" constant="-1" id="Q3N-HK-B7e"/>
+                <constraint firstItem="mEV-SP-95e" firstAttribute="leading" secondItem="eiz-Ma-1pi" secondAttribute="trailing" constant="-2" id="Za7-uN-wf2"/>
+                <constraint firstItem="owG-hq-uwM" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="bPq-ty-RQW"/>
+                <constraint firstItem="eiz-Ma-1pi" firstAttribute="leading" secondItem="owG-hq-uwM" secondAttribute="trailing" constant="-2" id="zCW-kp-VmW"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
