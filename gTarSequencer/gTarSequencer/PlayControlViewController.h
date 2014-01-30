@@ -42,8 +42,8 @@
 
 @property (weak, nonatomic) id<PlayControlDelegate> delegate;
 @property (weak, nonatomic) IBOutlet RadialButton * tempoSlider;
-@property (retain, nonatomic) IBOutlet UIButton * startStopButton;
-@property (retain, nonatomic) IBOutlet UIButton * optionsButton;
+@property (weak, nonatomic) IBOutlet UIButton * startStopButton;
+@property (weak, nonatomic) IBOutlet UIButton * optionsButton;
 
 
 @end

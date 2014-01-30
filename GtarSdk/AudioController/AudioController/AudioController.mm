@@ -141,6 +141,7 @@ class Compressor;
         m_pChorusEffect->SetPassThru(true);
         [_effects addObject:[NSValue valueWithPointer:m_pChorusEffect]];
         
+        
         // Set up the Delay Effect
         m_pDelayEffect = new DelayEffect(20, 0.5, 1.0, g_GraphSampleRate);
         m_pDelayEffect->SetPassThru(true);

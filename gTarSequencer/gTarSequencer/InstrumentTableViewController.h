@@ -32,7 +32,7 @@
 
 @interface InstrumentTableViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate> {
     
-    UITableView * instrumentTable;
+    //UITableView * instrumentTable;
     
     NSMutableArray * instruments;
     long selectedInstrumentIndex;
@@ -74,6 +74,6 @@
 - (Instrument *)getInstrumentAtIndex:(int)i;
 
 @property (weak, nonatomic) id<InstrumentDelegate> delegate;
-@property (nonatomic, retain) IBOutlet UITableView *instrumentTable;
+@property (nonatomic, weak) IBOutlet UITableView *instrumentTable;
 
 @end

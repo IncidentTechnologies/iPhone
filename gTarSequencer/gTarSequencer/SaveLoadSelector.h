@@ -48,12 +48,12 @@
 @property (weak, nonatomic) IBOutlet UIButton * loadLoadButton;
 
 // Save
-@property (retain, nonatomic) IBOutlet UITextField * saveField;
-@property (retain, nonatomic) IBOutlet UILabel * saveWarning;
+@property (weak, nonatomic) IBOutlet UITextField * saveField;
+@property (weak, nonatomic) IBOutlet UILabel * saveWarning;
 
 // Load
-@property (retain, nonatomic) IBOutlet UIPickerView * filePicker;
-@property (retain, nonatomic) IBOutlet UILabel * noFilesLabel;
+@property (weak, nonatomic) IBOutlet UIPickerView * filePicker;
+@property (weak, nonatomic) IBOutlet UILabel * noFilesLabel;
 
 @end
 

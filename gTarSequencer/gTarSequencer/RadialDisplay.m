@@ -191,9 +191,10 @@
         double startAngle = [[anglesToFill objectAtIndex:i] doubleValue];
         double endAngle = [[anglesToFill objectAtIndex:i+1] doubleValue];
         
-        CGPathRef wedgePath = [self drawWedgewithStartingAngle:startAngle andEndingAngle:endAngle];
+        CGPathRef wedgePath = [self newWedgeWithStartingAngle:startAngle andEndingAngle:endAngle];
         CGContextAddPath(fillingContext, wedgePath);
         CGContextFillPath(fillingContext);
+        CGPathRelease(wedgePath);
     }
     
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
@@ -255,10 +256,11 @@
     
     for (int i=0;i<NUMBER_OF_WEDGES*2;i+=2)
     {
-        CGPathRef wedgePath = [self drawWedgewithStartingAngle:angles[i] andEndingAngle:angles[i+1]];
+        CGPathRef wedgePath = [self newWedgeWithStartingAngle:angles[i] andEndingAngle:angles[i+1]];
         CGContextAddPath(context, wedgePath);
         CGContextClosePath(context);
         CGContextStrokePath(context);
+        CGPathRelease(wedgePath);
     }
     
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
@@ -317,7 +319,7 @@
 
 /* Given a starting and end angle, this function uses the
  inner and outer radii to return the corresponding wedge. */
-- (CGPathRef)drawWedgewithStartingAngle:(double)startAngle andEndingAngle:(double)endAngle
+- (CGPathRef)newWedgeWithStartingAngle:(double)startAngle andEndingAngle:(double)endAngle
 {
     CGPoint offset;
     CGMutablePathRef wedgePath = CGPathCreateMutable();

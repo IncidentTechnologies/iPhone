@@ -545,22 +545,22 @@
 		58B7FDC5188A15A700A2C1B1 /* Icon_Bacon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Bacon.png; sourceTree = "<group>"; };
 		58B9AD0D187B61C5001EDD33 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		58BBFD1C1891BEA400E41CD2 /* CustomInstrumentNamer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInstrumentNamer.xib; sourceTree = "<group>"; };
-		58D6170A1863B8D6001EB327 /* gTarSequencer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTarSequencer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D6170A1863B8D6001EB327 /* Sequence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sequence.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D6170D1863B8D6001EB327 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		58D6170F1863B8D6001EB327 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		58D617111863B8D6001EB327 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		58D617151863B8D7001EB327 /* gTarSequencer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gTarSequencer-Info.plist"; sourceTree = "<group>"; };
+		58D617151863B8D7001EB327 /* Sequence-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Sequence-Info.plist"; sourceTree = "<group>"; };
 		58D617171863B8D7001EB327 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		58D617191863B8D7001EB327 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		58D6171B1863B8D7001EB327 /* gTarSequencer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gTarSequencer-Prefix.pch"; sourceTree = "<group>"; };
+		58D6171B1863B8D7001EB327 /* Sequence-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sequence-Prefix.pch"; sourceTree = "<group>"; };
 		58D6171C1863B8D7001EB327 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		58D6171D1863B8D7001EB327 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		58D617221863B8D7001EB327 /* LoadingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
 		58D617231863B8D7001EB327 /* LoadingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
 		58D617251863B8D7001EB327 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		58D6172B1863B8D7001EB327 /* gTarSequencerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gTarSequencerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D6172B1863B8D7001EB327 /* SequenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SequenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D6172C1863B8D7001EB327 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		58D617341863B8D7001EB327 /* gTarSequencerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gTarSequencerTests-Info.plist"; sourceTree = "<group>"; };
+		58D617341863B8D7001EB327 /* SequenceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SequenceTests-Info.plist"; sourceTree = "<group>"; };
 		58D617361863B8D7001EB327 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		58D617381863B8D7001EB327 /* gTarSequencerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gTarSequencerTests.m; sourceTree = "<group>"; };
 		58D617591863BF5E001EB327 /* Sequence1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequence1.png; sourceTree = "<group>"; };
@@ -1032,9 +1032,9 @@
 			isa = PBXGroup;
 			children = (
 				587B6EBD1885E9280071BE15 /* TestFlightSDK2.1.3 */,
-				58D617131863B8D6001EB327 /* gTarSequencer */,
+				58D617131863B8D6001EB327 /* Sequence */,
 				58D617581863BF5E001EB327 /* Resources */,
-				58D617321863B8D7001EB327 /* gTarSequencerTests */,
+				58D617321863B8D7001EB327 /* SequenceTests */,
 				58D6170C1863B8D6001EB327 /* Frameworks */,
 				58D6170B1863B8D6001EB327 /* Products */,
 			);
@@ -1043,8 +1043,8 @@
 		58D6170B1863B8D6001EB327 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				58D6170A1863B8D6001EB327 /* gTarSequencer.app */,
-				58D6172B1863B8D7001EB327 /* gTarSequencerTests.xctest */,
+				58D6170A1863B8D6001EB327 /* Sequence.app */,
+				58D6172B1863B8D7001EB327 /* SequenceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1068,7 +1068,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		58D617131863B8D6001EB327 /* gTarSequencer */ = {
+		58D617131863B8D6001EB327 /* Sequence */ = {
 			isa = PBXGroup;
 			children = (
 				587B6EBA1885E6D80071BE15 /* AppData.h */,
@@ -1079,32 +1079,34 @@
 				58D617251863B8D7001EB327 /* Images.xcassets */,
 				58D617141863B8D7001EB327 /* Supporting Files */,
 			);
+			name = Sequence;
 			path = gTarSequencer;
 			sourceTree = "<group>";
 		};
 		58D617141863B8D7001EB327 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				58D617151863B8D7001EB327 /* gTarSequencer-Info.plist */,
+				58D617151863B8D7001EB327 /* Sequence-Info.plist */,
 				58D617161863B8D7001EB327 /* InfoPlist.strings */,
 				58D617191863B8D7001EB327 /* main.m */,
-				58D6171B1863B8D7001EB327 /* gTarSequencer-Prefix.pch */,
+				58D6171B1863B8D7001EB327 /* Sequence-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		58D617321863B8D7001EB327 /* gTarSequencerTests */ = {
+		58D617321863B8D7001EB327 /* SequenceTests */ = {
 			isa = PBXGroup;
 			children = (
 				58D617381863B8D7001EB327 /* gTarSequencerTests.m */,
 			);
+			name = SequenceTests;
 			path = gTarSequencerTests;
 			sourceTree = "<group>";
 		};
 		58D617331863B8D7001EB327 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				58D617341863B8D7001EB327 /* gTarSequencerTests-Info.plist */,
+				58D617341863B8D7001EB327 /* SequenceTests-Info.plist */,
 				58D617351863B8D7001EB327 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -1161,9 +1163,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58D617091863B8D6001EB327 /* gTarSequencer */ = {
+		58D617091863B8D6001EB327 /* Sequence */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58D6173C1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "gTarSequencer" */;
+			buildConfigurationList = 58D6173C1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "Sequence" */;
 			buildPhases = (
 				58D617061863B8D6001EB327 /* Sources */,
 				58D617071863B8D6001EB327 /* Frameworks */,
@@ -1173,14 +1175,14 @@
 			);
 			dependencies = (
 			);
-			name = gTarSequencer;
+			name = Sequence;
 			productName = gTarSequencer;
-			productReference = 58D6170A1863B8D6001EB327 /* gTarSequencer.app */;
+			productReference = 58D6170A1863B8D6001EB327 /* Sequence.app */;
 			productType = "com.apple.product-type.application";
 		};
-		58D6172A1863B8D7001EB327 /* gTarSequencerTests */ = {
+		58D6172A1863B8D7001EB327 /* SequenceTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58D6173F1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "gTarSequencerTests" */;
+			buildConfigurationList = 58D6173F1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "SequenceTests" */;
 			buildPhases = (
 				58D617271863B8D7001EB327 /* Sources */,
 				58D617281863B8D7001EB327 /* Frameworks */,
@@ -1191,9 +1193,9 @@
 			dependencies = (
 				58D617311863B8D7001EB327 /* PBXTargetDependency */,
 			);
-			name = gTarSequencerTests;
+			name = SequenceTests;
 			productName = gTarSequencerTests;
-			productReference = 58D6172B1863B8D7001EB327 /* gTarSequencerTests.xctest */;
+			productReference = 58D6172B1863B8D7001EB327 /* SequenceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1213,7 +1215,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58D617051863B8D6001EB327 /* Build configuration list for PBXProject "gTarSequencer" */;
+			buildConfigurationList = 58D617051863B8D6001EB327 /* Build configuration list for PBXProject "Sequence" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1226,8 +1228,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58D617091863B8D6001EB327 /* gTarSequencer */,
-				58D6172A1863B8D7001EB327 /* gTarSequencerTests */,
+				58D617091863B8D6001EB327 /* Sequence */,
+				58D6172A1863B8D7001EB327 /* SequenceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1530,7 +1532,7 @@
 /* Begin PBXTargetDependency section */
 		58D617311863B8D7001EB327 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 58D617091863B8D6001EB327 /* gTarSequencer */;
+			target = 58D617091863B8D6001EB327 /* Sequence */;
 			targetProxy = 58D617301863B8D7001EB327 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1636,15 +1638,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
+				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
-				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
+				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/kschnippering/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.1.3",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos",
 				);
+				OTHER_CFLAGS = "-mthumb";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Sequence;
 				PROVISIONING_PROFILE = "4EDE639D-7A50-4824-82FE-1B3C18A0398E";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
@@ -1662,15 +1665,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
+				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
-				INFOPLIST_FILE = "gTarSequencer/gTarSequencer-Info.plist";
+				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/kschnippering/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.1.3",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos",
 				);
+				OTHER_CFLAGS = "-mthumb";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Sequence;
 				PROVISIONING_PROFILE = "CBC3EBC0-9CEF-4A4D-BF9D-989C73884DDE";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
@@ -1695,8 +1699,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "gTarSequencerTests/gTarSequencerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "gTarSequencerTests/SequenceTests-Info.plist";
+				PRODUCT_NAME = SequenceTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1714,8 +1718,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/gTarSequencer-Prefix.pch";
-				INFOPLIST_FILE = "gTarSequencerTests/gTarSequencerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "gTarSequencerTests/SequenceTests-Info.plist";
+				PRODUCT_NAME = SequenceTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1724,7 +1728,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58D617051863B8D6001EB327 /* Build configuration list for PBXProject "gTarSequencer" */ = {
+		58D617051863B8D6001EB327 /* Build configuration list for PBXProject "Sequence" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58D6173A1863B8D7001EB327 /* Debug */,
@@ -1733,7 +1737,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58D6173C1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "gTarSequencer" */ = {
+		58D6173C1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "Sequence" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58D6173D1863B8D7001EB327 /* Debug */,
@@ -1742,7 +1746,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58D6173F1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "gTarSequencerTests" */ = {
+		58D6173F1863B8D7001EB327 /* Build configuration list for PBXNativeTarget "SequenceTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58D617401863B8D7001EB327 /* Debug */,

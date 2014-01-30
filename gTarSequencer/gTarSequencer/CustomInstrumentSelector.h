@@ -42,13 +42,13 @@
 
 @property (retain) AVAudioPlayer * audio;
 @property (weak, nonatomic) id<CustomInstrumentSelectorDelegate> delegate;
-@property (nonatomic,retain) IBOutlet UITableView * sampleTable;
-@property (nonatomic,retain) IBOutlet UITableView * stringTable;
-@property (nonatomic, retain) IBOutlet UIButton * nextButton;
-@property (nonatomic, retain) IBOutlet UIButton * saveButton;
-@property (nonatomic, retain) IBOutlet UIButton * backButton;
-@property (nonatomic, retain) IBOutlet UITextField * nameField;
-@property (nonatomic, retain) IBOutlet UIView * customIcon;
+@property (nonatomic ,weak) IBOutlet UITableView * sampleTable;
+@property (nonatomic, weak) IBOutlet UITableView * stringTable;
+@property (nonatomic, weak) IBOutlet UIButton * nextButton;
+@property (nonatomic, weak) IBOutlet UIButton * saveButton;
+@property (nonatomic, weak) IBOutlet UIButton * backButton;
+@property (nonatomic, weak) IBOutlet UITextField * nameField;
+@property (nonatomic, weak) IBOutlet UIView * customIcon;
 
 @property (retain, nonatomic) UIButton * cancelButton;
 

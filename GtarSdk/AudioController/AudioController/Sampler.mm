@@ -303,7 +303,13 @@
 
 - (void) obtainSoundFileURLs
 {
-    NSLog(@"attempting to load string set %@",m_stringSet);
+    // Get full URL for placeholder to avoid repeat loading
+    if(m_placeholderNote != NULL){
+        CFURLRef placeholderRef = (CFURLRef)[[NSBundle mainBundle] URLForResource: m_placeholderNote withExtension:@"mp3"];
+        
+        m_placeholderUrl = (NSString *)CFURLGetString(placeholderRef);
+        
+    }
     
     // Create the URLs for the source audio files.
     for (int noteNum = m_firstNoteMidiNum, modNum = m_firstNoteMidiNum - 1; noteNum < m_firstNoteMidiNum + m_numberOfSamples; noteNum++)
@@ -311,8 +317,10 @@
         
         NSString * filename;
         
+        // Use mod math to determine frequency to change sounds
         if((noteNum - m_firstNoteMidiNum) % m_noteModNum == 0){
             
+            // Use next sound in string set, or number from sample pack
             if(m_stringSet != nil){
                 filename = m_stringSet[++modNum];
             }else{
@@ -320,9 +328,11 @@
             }
             
         }else if(m_placeholderNote != NULL){
+            // Use a placeholder note
             filename = m_placeholderNote;
         }else{
             
+            // Repeat previous note if no placeholder, or step up in sample pack
             if(m_stringSet != nil){
                 filename = m_stringSet[modNum];
             }else{
@@ -334,7 +344,8 @@
                                              withExtension: @"mp3"];
 
         
-        m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
+        //m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
+        m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) url;
         
     }
 }
@@ -389,6 +400,18 @@
         
         // Instantiate an extended audio file object.
         ExtAudioFileRef audioFileObject = 0;
+        
+        if(m_placeholderNote != nil){
+            NSString * sampleFilename = (NSString *)CFURLGetString(m_sampleNameArray[noteNum]);
+            
+            if([sampleFilename isEqualToString:m_placeholderUrl]){
+                NSLog(@"PLACEHOLDER");
+                m_soundStructArray[noteNum].frameCount = 0;
+                m_soundStructArray[noteNum].audioDataLeft = NULL;
+                m_soundStructArray[noteNum].audioDataRight = NULL;
+                continue;
+            }
+        }
         
         NSLog(@"Opening URL: %@", m_sampleNameArray[noteNum]);
         

@@ -63,6 +63,7 @@ typedef struct
     
     // Default placeholder sound if not all stringsXfrets are used
     NSString * m_placeholderNote;
+    NSString * m_placeholderUrl;
 }
 
 @property (readwrite) AudioStreamBasicDescription monoStreamFormat;

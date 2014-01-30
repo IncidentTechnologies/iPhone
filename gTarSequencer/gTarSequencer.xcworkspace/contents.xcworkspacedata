@@ -8,6 +8,6 @@
       location = "group:gTarSequencer/../../GtarSdk/AudioController/AudioController.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:gTarSequencer.xcodeproj">
+      location = "container:Sequence.xcodeproj">
    </FileRef>
 </Workspace>

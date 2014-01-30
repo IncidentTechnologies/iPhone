@@ -23,8 +23,8 @@
 @property (nonatomic) NSString * sampleFilename;
 @property (nonatomic) UIColor * defaultFontColor;
 @property (nonatomic) int index;
-@property (retain, nonatomic) IBOutlet UIButton * stringBox;
-@property (retain, nonatomic) IBOutlet UILabel * stringLabel;
+@property (weak, nonatomic) IBOutlet UIButton * stringBox;
+@property (weak, nonatomic) IBOutlet UILabel * stringLabel;
 
 
 @end

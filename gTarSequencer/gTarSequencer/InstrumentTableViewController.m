@@ -180,7 +180,8 @@
     newInstrument.instrumentName = instName;
     newInstrument.iconName = iconName;
     newInstrument.stringSet = stringSet;
-    [newInstrument initAudioWithInstrumentName:instName];
+    [newInstrument performSelectorInBackground:@selector(initAudioWithInstrumentName:) withObject:instName];
+    
     
     [instruments addObject:newInstrument];
  
