@@ -9,14 +9,15 @@
 #import "PlayControlViewController.h"
 
 #define DEFAULT_TEMPO 120
+#define DEFAULT_VOLUME 100
 #define SECONDS_PER_MIN 60.0
 
 @implementation PlayControlViewController
 
 @synthesize tempoSlider;
+@synthesize volumeSlider;
 @synthesize startStopButton;
 @synthesize delegate;
-@synthesize optionsButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,13 +32,16 @@
 {
     [super viewDidLoad];
     
-    // Tempo slider stuff
+    // Tempo slider
     if(TESTMODE) NSLog(@"Setup tempo slider");
     [tempoSlider setDelegate:self];
     
+    // Volume slider
+    if(TESTMODE) NSLog(@"Setup volume slider");
+    [volumeSlider setDelegate:self];
+    
     // Play/Pause button
     if(TESTMODE) NSLog(@"Draw Play Pause button");
-    
     [self drawPlayButton];
     
     isPlaying = FALSE;
@@ -92,6 +96,41 @@
     [tempoSlider setToValue:tempo];
 }
 
+#pragma mark - Volume Slider Delegate
+
+- (void)volumeButtonValueDidChange:(double)newValue
+{
+    if(volume != newValue)
+    {
+        volume = newValue;
+        if(isPlaying)
+        {
+            [self stopAll];
+            [self playAll];
+        }
+    }
+    
+    [delegate saveContext:nil];
+}
+
+#pragma mark - Volume Slider Delegate
+- (double)getVolume
+{
+    return volume;
+}
+
+- (void)resetVolume
+{
+    volume = DEFAULT_VOLUME;
+    [volumeSlider setToValue:volume];
+}
+
+- (void)setVolume:(double)newVolume
+{
+    volume = newVolume;
+    [volumeSlider setToValue:volume];
+}
+
 #pragma mark - Playing/Pausing
 
 - (IBAction)startStop:(id)sender
@@ -129,7 +168,7 @@
     beatsPerSecond*=4;
     secondsPerBeat = 1/beatsPerSecond;
     
-    [delegate startAllPlaying:secondsPerBeat];
+    [delegate startAllPlaying:secondsPerBeat withAmplitude:volume];
     
     isPlaying = YES;
     

@@ -12,11 +12,12 @@
 #import "RadialButton.h"
 #import "ScrollingSelector.h"
 #import "SEQNote.h"
-#import "InstrumentTableViewController.h"
+#import "SeqSetViewController.h"
 #import "PlayControlViewController.h"
-#import "SaveLoadSelector.h"
+#import "LeftNavigatorViewController.h"
+#import "OptionsViewController.h"
 
-@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,InstrumentDelegate,SaveLoadSelectorDelegate> {
+@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,InstrumentDelegate,LeftNavigatorDelegate,OptionsDelegate> {
     
     // gTar connection
     BOOL isConnected;
@@ -29,12 +30,13 @@
     int currentFret;
     int currentAbsoluteMeasure;
     BOOL isPlaying;
-
+    double playVolume;
+    
     NSMutableArray * patternQueue;
     
     // Subviews
-    InstrumentTableViewController * instrumentTableViewController;
-    PlayControlViewController * playControlViewController;
+    UIViewController * instrumentViewController;
+    UIViewController * shareViewController;
     
     // State
     NSMutableDictionary * currentState;
@@ -42,14 +44,24 @@
     
     // Save/Load
     NSString * activeSequencer;
-    SaveLoadSelector * saveLoadSelector;
     CGRect onScreenSaveLoadFrame;
     CGRect offLeftSaveLoadFrame;
     
+    // Left nav
+    BOOL leftNavOpen;
+    CGRect onScreenNavigatorFrame;
+    CGRect offLeftNavigatorFrame;
+    CGRect onScreenMainFrame;
+    CGRect overScreenMainFrame;
+    UIView * activeMainView;
+    
 }
 
-@property (retain, nonatomic) InstrumentTableViewController * instrumentTableViewController;
+@property (retain, nonatomic) SeqSetViewController * seqSetViewController;
+@property (retain, nonatomic) OptionsViewController * optionsViewController;
+
 @property (retain, nonatomic) PlayControlViewController * playControlViewController;
+@property (retain, nonatomic) LeftNavigatorViewController * leftNavigator;
 
 @property (retain, nonatomic) UIButton * gTarConnectedBar;
 

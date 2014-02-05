@@ -75,7 +75,7 @@
 
 #pragma mark Play/pause
 
-- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource
+- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitude:(double)amplitude
 {
     // Remove old playband:
     for (Measure * m in measures)
@@ -84,7 +84,7 @@
     }
     
     // Add new one:
-    [[measures objectAtIndex:realMeasure] playNotesAtFret:whichFret withInstrument:instrumentIndex andAudio:audioSource];
+    [[measures objectAtIndex:realMeasure] playNotesAtFret:whichFret withInstrument:instrumentIndex andAudio:audioSource withAmplitudeWeight:amplitude];
 }
 
 - (int)computeRealMeasureFromAbsolute:(int)absoluteMeasure

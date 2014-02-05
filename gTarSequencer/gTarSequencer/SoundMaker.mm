@@ -37,9 +37,10 @@
     return self;
 }
 
-- (void)PluckStringFret:(int)str atFret:(int)fret
+- (void)PluckStringFret:(int)str atFret:(int)fret withAmplitude:(double)amplitude
 {
-    [audioController PluckString:str atFret:fret];
+    NSLog(@"Playing note with amplitude %f",amplitude);
+    [audioController PluckString:str atFret:fret withAmplitude:amplitude];
 }
 
 - (void)setSamplePackWithName:(NSString *)pack

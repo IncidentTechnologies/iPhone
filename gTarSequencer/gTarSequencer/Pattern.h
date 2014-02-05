@@ -19,7 +19,7 @@
     NSMutableArray * measures;
 }
 
-- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource;
+- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitude:(double)amplitude;
 - (int)computeRealMeasureFromAbsolute:(int)absoluteMeasure;
 
 - (void)changeNoteAtString:(int)str andFret:(int)fret;

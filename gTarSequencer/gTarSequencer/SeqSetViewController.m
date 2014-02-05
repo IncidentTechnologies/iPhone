@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import "InstrumentTableViewController.h"
+#import "SeqSetViewController.h"
 
-@implementation InstrumentTableViewController
+@implementation SeqSetViewController
 
 @synthesize instrumentTable;
 @synthesize delegate;
@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
     
-    UINib *nib = [UINib nibWithNibName:@"InstrumentTableViewCell" bundle:nil];
+    UINib *nib = [UINib nibWithNibName:@"SeqSetViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"TrackCell"];
     
     [self.tableView setBackgroundColor:[UIColor clearColor]];
@@ -245,9 +245,9 @@
     
         static NSString *CellIdentifier = @"TrackCell";
         
-        InstrumentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        SeqSetViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil){
-            cell = [[InstrumentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[SeqSetViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -322,7 +322,7 @@
 - (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset
 {
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    InstrumentTableViewCell * cell = (InstrumentTableViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
+    SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
     
     [cell notifyQueuedPatterns:reset];
     
@@ -685,7 +685,7 @@
 }
 
 #pragma mark Mute Unmute Instrument Update View
-- (void)muteInstrument:(InstrumentTableViewCell *)sender isMute:(BOOL)isMute
+- (void)muteInstrument:(SeqSetViewCell *)sender isMute:(BOOL)isMute
 {
 
     if(isMute == YES) NSLog(@"Mute instrument");
@@ -699,7 +699,7 @@
 
 #pragma mark UI Input
 
-- (BOOL)userDidSelectPattern:(InstrumentTableViewCell *)sender atIndex:(int)index
+- (BOOL)userDidSelectPattern:(SeqSetViewCell *)sender atIndex:(int)index
 {
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
@@ -746,7 +746,7 @@
     [delegate saveContext:nil];
 }
 
-- (void)userDidSelectMeasure:(InstrumentTableViewCell *)sender atIndex:(int)index
+- (void)userDidSelectMeasure:(SeqSetViewCell *)sender atIndex:(int)index
 {
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
@@ -767,7 +767,7 @@
     
 }
 
-- (void)userDidAddMeasures:(InstrumentTableViewCell *)sender
+- (void)userDidAddMeasures:(SeqSetViewCell *)sender
 {
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
@@ -786,7 +786,7 @@
     
 }
 
-- (void)userDidRemoveMeasures:(InstrumentTableViewCell *)sender
+- (void)userDidRemoveMeasures:(SeqSetViewCell *)sender
 {
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
@@ -810,7 +810,7 @@
     
     for (int i=0;i<limit;i++){
         
-        InstrumentTableViewCell * track = (InstrumentTableViewCell *) [visibleCells objectAtIndex:i];
+        SeqSetViewCell * track = (SeqSetViewCell *) [visibleCells objectAtIndex:i];
         
         if ([track respondsToSelector:@selector(update)]){
             [track update];

@@ -35,7 +35,7 @@
 - (id)init;
 - (id)initWithMeasure:(Measure *)measure;
 
-- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource;
+- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitudeWeight:(double)amplitudeweight;
 
 - (void)changeNoteAtString:(int)str andFret:(int)fret;
 - (BOOL)isNoteOnAtString:(int)str andFret:(int)fret;

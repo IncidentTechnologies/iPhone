@@ -8,39 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol SaveLoadSelectorDelegate <NSObject>
+@protocol OptionsDelegate <NSObject>
 
-- (void) closeSaveLoadSelector;
 - (void) saveWithName:(NSString *)filename;
 - (void) loadFromName:(NSString *)filename;
 
 @end
 
-@interface SaveLoadSelector : UIView <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
+@interface OptionsViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 {
-    UIView * backgroundView;
-    
     NSMutableArray * fileLoadSet;
 
 }
 
 - (void)userDidSaveSequence;
 - (void)userDidLoadSequence;
-- (void)moveFrame:(CGRect)newFrame;
-
-// Save
-- (IBAction)userDidLoadFromSave:(id)sender;
-- (void)userDidSaveFromSave:(id)sender;
-
-// Load
-- (IBAction)userDidSaveFromLoad:(id)sender;
-- (IBAction)userDidLoadFromLoad:(id)sender;
 
 @property (retain, nonatomic) NSString * activeSequencer;
 
-@property (weak, nonatomic) id<SaveLoadSelectorDelegate> delegate;
-@property (nonatomic) CGRect viewFrame;
-@property (retain, nonatomic) UIButton * cancelButton;
+@property (weak, nonatomic) id<OptionsDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIButton * saveSaveButton;
 @property (weak, nonatomic) IBOutlet UIButton * saveLoadButton;

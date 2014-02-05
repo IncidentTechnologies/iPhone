@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import "InstrumentTableViewCell.h"
-#import "InstrumentTableViewController.h"
+#import "SeqSetViewCell.h"
+#import "SeqSetViewController.h"
 
-@implementation InstrumentTableViewCell
+@implementation SeqSetViewCell
 
 @synthesize parent;
 @synthesize instrumentIconView;

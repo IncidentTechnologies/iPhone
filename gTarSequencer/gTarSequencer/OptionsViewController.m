@@ -6,15 +6,13 @@
 //  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
-#import "SaveLoadSelector.h"
+#import "OptionsViewController.h"
 
-@implementation SaveLoadSelector
+@implementation OptionsViewController
 
 @synthesize delegate;
-@synthesize viewFrame;
 @synthesize saveField;
 @synthesize saveWarning;
-@synthesize cancelButton;
 @synthesize filePicker;
 @synthesize noFilesLabel;
 @synthesize saveLoadButton;
@@ -23,24 +21,12 @@
 @synthesize loadSaveButton;
 @synthesize activeSequencer;
 
-- (id)initWithFrame:(CGRect)frame
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
-    
-    CGRect wholeScreen = CGRectMake(0, 0, x, y);
-    
-    self = [super initWithFrame:wholeScreen];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        // Black out the rest of the screen:
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-        
-        [self drawCancelButtonWithX:x];
-        
-        viewFrame = frame;
-        
+        [self userDidSaveSequence];
     }
     return self;
 }
@@ -124,30 +110,12 @@
 
 - (void)userDidSaveSequence
 {
-    [self setBackgroundViewFromNib:@"SaveView" withFrame:viewFrame andRemove:nil];
     [self initSave];
 }
 
 - (void)userDidLoadSequence
 {
-    [self setBackgroundViewFromNib:@"LoadView" withFrame:viewFrame andRemove:nil];
     [self initLoad];
-}
-
-- (IBAction)userDidLoadFromSave:(id)sender
-{
-    CGRect newFrame = backgroundView.frame;
-    
-    [self setBackgroundViewFromNib:@"LoadView" withFrame:newFrame andRemove:backgroundView];
-    [self initLoad];
-}
-
-- (IBAction)userDidSaveFromLoad:(id)sender
-{
-    CGRect newFrame = backgroundView.frame;
-    
-    [self setBackgroundViewFromNib:@"SaveView" withFrame:newFrame andRemove:backgroundView];
-    [self initSave];
 }
 
 - (void)userDidSaveFromSave:(id)sender
@@ -164,42 +132,6 @@
     
     activeSequencer = filename;
     [delegate loadFromName:filename];
-}
-
-- (void)moveFrame:(CGRect)newFrame
-{
-    backgroundView.frame = newFrame;
-}
-
-// fit any nib to window
--(void)setBackgroundViewFromNib:(NSString *)nibName withFrame:(CGRect)frame andRemove:(UIView *)removeView
-{
-    NSArray * nibViews = [[NSBundle mainBundle] loadNibNamed:nibName owner:self options:nil];
-    backgroundView = nibViews[0];
-    backgroundView.frame = frame;
-    backgroundView.layer.cornerRadius = 5.0;
-    
-    if(removeView){
-        
-        // used to switch between selector and namer
-        [UIView animateWithDuration:0.5 animations:^(){
-            removeView.alpha = 0.0f;
-        } completion:^(BOOL finished){
-            [removeView removeFromSuperview];
-        }];
-        
-        backgroundView.alpha = 0.0f;
-        [self addSubview:backgroundView];
-        
-        [UIView animateWithDuration:0.5 animations:^(){
-            backgroundView.alpha = 1.0f;
-        } completion:^(BOOL finished){
-            
-        }];
-        
-    }else{
-        [self addSubview:backgroundView];
-    }
 }
 
 #pragma mark - Save Field
@@ -228,15 +160,6 @@
 {
     // hide keyboard
     [saveField resignFirstResponder];
-}
-
-
-- (void)userDidCancel:(id)sender
-{
-    // make sure keyboard is hidden
-    [saveField resignFirstResponder];
-    
-    [delegate closeSaveLoadSelector];
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -310,25 +233,6 @@
     
     
     return styledString;
-}
-
-#pragma mark - Drawing
-
-- (void)drawCancelButtonWithX:(float)x
-{
-    CGFloat cancelWidth = 50;
-    CGFloat cancelHeight = 50;
-    CGFloat inset = 5;
-    CGRect cancelFrame = CGRectMake(x - inset - cancelWidth, 0, cancelWidth, cancelHeight);
-    cancelButton = [[UIButton alloc] initWithFrame:cancelFrame];
-    [cancelButton setTitle:@"X" forState:UIControlStateNormal];
-    [cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8] forState:UIControlStateNormal];
-    [cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateHighlighted];
-    cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:30.0];
-    
-    [cancelButton addTarget:self action:@selector(userDidCancel:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview: cancelButton];
-    
 }
 
 

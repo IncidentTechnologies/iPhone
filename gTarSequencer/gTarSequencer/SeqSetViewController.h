@@ -8,7 +8,7 @@
 
 #import "AppData.h"
 #import "Instrument.h"
-#import "InstrumentTableViewCell.h"
+#import "SeqSetViewCell.h"
 #import "ScrollingSelector.h"
 #import "CustomInstrumentSelector.h"
 
@@ -30,7 +30,7 @@
 @end
 
 
-@interface InstrumentTableViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate> {
+@interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate> {
     
     //UITableView * instrumentTable;
     
@@ -51,7 +51,7 @@
     NSString * sequencerInstrumentsPath;
     
 }
-- (void)muteInstrument:(InstrumentTableViewCell *)sender isMute:(BOOL)isMute;
+- (void)muteInstrument:(SeqSetViewCell *)sender isMute:(BOOL)isMute;
 - (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst;
 - (void)deleteCell:(id)sender;
 

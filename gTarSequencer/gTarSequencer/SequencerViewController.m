@@ -14,12 +14,19 @@
 
 #define XBASE 480
 #define YBASE 320
+
 #define TABLEHEIGHT 264
+#define NAVWIDTH 150
+#define NAVTAB 5
+#define SELECTORWIDTH 364
+#define SELECTORHEIGHT 276
 
 @implementation SequencerViewController
 
-@synthesize instrumentTableViewController;
+@synthesize seqSetViewController;
+@synthesize optionsViewController;
 @synthesize playControlViewController;
+@synthesize leftNavigator;
 @synthesize gTarConnectedBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,7 +52,7 @@
     [super viewDidUnload];
     
     // Release any retained subviews of the main view
-    self.instrumentTableViewController = nil;
+    self.seqSetViewController = nil;
     self.playControlViewController = nil;
     
 }
@@ -78,23 +85,51 @@
 - (void)initSubviews
 {
     
-    // Instrument table
-    if(TESTMODE) NSLog(@"Build the instrument table");
+    onScreenMainFrame = CGRectMake(0,0,XBASE,TABLEHEIGHT);
+    overScreenMainFrame = CGRectMake(NAVWIDTH,0,XBASE,TABLEHEIGHT);
     
-    instrumentTableViewController = [[InstrumentTableViewController alloc] initWithNibName:@"InstrumentTableView" bundle:nil];
-    [instrumentTableViewController.view setFrame:CGRectMake(0, 0, XBASE, TABLEHEIGHT)];
-    [instrumentTableViewController setDelegate:self];
+    //
+    // SUBVIEW: OPTIONS
+    //
     
-    Instrument * currentInstrument = [instrumentTableViewController getCurrentInstrument];
+    optionsViewController = [[OptionsViewController alloc] initWithNibName:@"SaveView" bundle:nil];
+    [optionsViewController.view setFrame:onScreenMainFrame];
+    [optionsViewController setDelegate:self];
+    
+    [optionsViewController.view setHidden:YES];
+    [self.view addSubview:optionsViewController.view];
+    
+    //
+    // SUBVIEW: SET
+    //
+    
+    seqSetViewController = [[SeqSetViewController alloc] initWithNibName:@"SeqSetView" bundle:nil];
+    [seqSetViewController.view setFrame:onScreenMainFrame];
+    [seqSetViewController setDelegate:self];
+    
+    Instrument * currentInstrument = [seqSetViewController getCurrentInstrument];
     
     if (currentInstrument){
         guitarView.measure = currentInstrument.selectedPattern.selectedMeasure;
     }
     
-    [self.view addSubview:instrumentTableViewController.view];
+    [seqSetViewController.view setHidden:NO];
+    [self.view addSubview:seqSetViewController.view];
+    activeMainView = seqSetViewController.view;
     
-    // Tempo slider and play/pause
-    if(TESTMODE) NSLog(@"Start to build the bottom bar");
+    //
+    // SUBVIEW: INSTRUMENT
+    //
+    
+    
+    //
+    // SUBVIEW: SHARE
+    //
+    
+    
+    //
+    //  BOTTOM BAR
+    //
     
     playControlViewController = [[PlayControlViewController alloc] initWithNibName:@"BottomBar" bundle:nil];
     [playControlViewController.view setFrame:CGRectMake(0,TABLEHEIGHT-4,XBASE,YBASE-TABLEHEIGHT+3)];
@@ -104,7 +139,10 @@
     
     [self.view addSubview:playControlViewController.view];
     
-    // gTar connected bar
+    //
+    // GTAR CONNECTED
+    //
+    
     CGRect barFrame = CGRectMake(0,0,XBASE,43);
     
     gTarConnectedBar = [[UIButton alloc] initWithFrame:barFrame];
@@ -117,70 +155,112 @@
     
     [gTarConnectedBar addTarget:self action:@selector(gTarConnectedToggleBarOff) forControlEvents:UIControlEventTouchUpInside];
     
-    // Save load selector
-    [self initSaveLoadSelector];
+    //
+    // LEFT NAVIGATOR
+    //
+    
+    onScreenNavigatorFrame = CGRectMake(0,0,NAVWIDTH,TABLEHEIGHT);
+    offLeftNavigatorFrame = CGRectMake(-1*NAVWIDTH+NAVTAB,0,NAVWIDTH,TABLEHEIGHT);
+    
+    leftNavigator = [[LeftNavigatorViewController alloc] initWithNibName:@"LeftNavigatorViewController" bundle:nil];
+    [leftNavigator.view setFrame:offLeftNavigatorFrame];
+    [leftNavigator setDelegate:self];
+    leftNavOpen = false;
+    
+    [self.view addSubview:leftNavigator.view];
+    
+    //
+    // GESTURES
+    //
+    
+    UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeLeftNavigator)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(openLeftNavigator)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeRight];
     
 }
+
+#pragma mark - Left Navigator Delegate
+
+- (void)closeLeftNavigator
+{
+    [UIView animateWithDuration:0.5 animations:^(){
+        [leftNavigator.view setFrame:offLeftNavigatorFrame];
+        [activeMainView setFrame:onScreenMainFrame];
+    } completion:^(BOOL finished){
+        leftNavOpen = false;
+    }];
+}
+
+- (void)openLeftNavigator
+{
+    [UIView animateWithDuration:0.5 animations:^(){
+        [leftNavigator.view setFrame:onScreenNavigatorFrame];
+        [activeMainView setFrame:overScreenMainFrame];
+    } completion:^(BOOL finished){
+        leftNavOpen = true;
+    }];
+}
+
+- (void)toggleLeftNavigator
+{
+    if(leftNavOpen){
+        [self closeLeftNavigator];
+    }else{
+        [self openLeftNavigator];
+    }
+}
+
+- (void)selectNavChoice:(NSString *)nav
+{
+    
+    [optionsViewController.view setHidden:YES];
+    [seqSetViewController.view setHidden:YES];
+    [instrumentViewController.view setHidden:YES];
+    [shareViewController.view setHidden:YES];
+    
+    // Switch to new main subview
+    if([nav isEqualToString:@"Options"]){
+        
+        NSLog(@"Switch to OPTIONS view");
+        activeMainView = optionsViewController.view;
+        
+    }else if([nav isEqualToString:@"Set"]){
+    
+        NSLog(@"Switch to SET view");
+        activeMainView = seqSetViewController.view;
+        
+    }else if([nav isEqualToString:@"Instrument"]){
+        
+        NSLog(@"Switch to INSTRUMENT view");
+        activeMainView = instrumentViewController.view;
+        
+    }else if([nav isEqualToString:@"Share"]){
+        
+        NSLog(@"Switch to SHARE view");
+        activeMainView = shareViewController.view;
+    }
+    
+    [activeMainView setFrame:overScreenMainFrame];
+    [activeMainView setHidden:NO];
+    
+}
+
 
 #pragma mark - Save Load Delegate
 
-- (void)initSaveLoadSelector
-{
-    // TODO: figure out positioning for 4"
-    NSLog(@"Init save load selector");
-    
-    // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
-    
-    // construct selector:
-    CGFloat selectorWidth = 364;
-    CGFloat selectorHeight = 276;
-    
-    onScreenSaveLoadFrame = CGRectMake((x-selectorWidth)/2,
-                                       (y-selectorHeight)/2,
-                                       selectorWidth,
-                                       selectorHeight);
-    
-    offLeftSaveLoadFrame = CGRectMake(onScreenSaveLoadFrame.origin.x,
-                                        y,
-                                        onScreenSaveLoadFrame.size.width,
-                                        onScreenSaveLoadFrame.size.height);
-    
-    saveLoadSelector = [[SaveLoadSelector alloc] initWithFrame:offLeftSaveLoadFrame];
-    [saveLoadSelector setDelegate:self];
-    
-    UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
-    [window addSubview:saveLoadSelector];
-    
-    [saveLoadSelector setHidden:YES];
-}
-
 - (void)userDidLoadSequenceOptions
 {
-    
-    [saveLoadSelector setHidden:NO];
-    [saveLoadSelector moveFrame:offLeftSaveLoadFrame];
-    [saveLoadSelector userDidSaveSequence];
-    
-    saveLoadSelector.alpha = 1.0;
-    
-    [UIView animateWithDuration:0.5f animations:^{[saveLoadSelector moveFrame:onScreenSaveLoadFrame];}];
-    
-    saveLoadSelector.userInteractionEnabled = YES;
-    
+    [optionsViewController userDidSaveSequence];
 }
 
 - (void)closeSaveLoadSelector
 {
-    [UIView animateWithDuration:0.5f
-                     animations:^{[saveLoadSelector moveFrame:offLeftSaveLoadFrame]; saveLoadSelector.alpha = 0.3;}
-                     completion:^(BOOL finished){[self hideSaveLoadSelector]; }];
-}
-
-- (void)hideSaveLoadSelector
-{
-    [saveLoadSelector setHidden:YES];
+    
 }
 
 - (void)saveWithName:(NSString *)filename
@@ -222,14 +302,17 @@
         NSLog(@"Save state to disk at %@",filepath);
     }
     
-    NSData * instData = [NSKeyedArchiver archivedDataWithRootObject:[instrumentTableViewController getInstruments]];
+    NSData * instData = [NSKeyedArchiver archivedDataWithRootObject:[seqSetViewController getInstruments]];
     
     NSNumber * tempoNumber = [NSNumber numberWithInt:[playControlViewController getTempo]];
     
-    NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[instrumentTableViewController getSelectedInstrumentIndex]];
+    NSNumber * volumeNumber = [NSNumber numberWithDouble:[playControlViewController getVolume]];
+    
+    NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[seqSetViewController getSelectedInstrumentIndex]];
     
     [currentState setObject:instData forKey:@"Instruments Data"];
     [currentState setObject:tempoNumber forKey:@"Tempo"];
+    [currentState setObject:volumeNumber forKey:@"Volume"];
     [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
     
     if(activeSequencer){
@@ -271,22 +354,26 @@
         int tempo = [[currentState objectForKey:@"Tempo"] intValue];
         [playControlViewController setTempo:tempo];
         
+        double volume = [[currentState objectForKey:@"Volume"] doubleValue];
+        [playControlViewController setVolume:volume];
+        
         // Decode array of instruments:
         NSData * instrumentData = [currentState objectForKey:@"Instruments Data"];
-        [instrumentTableViewController setInstrumentsFromData:instrumentData];
+        [seqSetViewController setInstrumentsFromData:instrumentData];
         
         // Decode selectedInstrumentIndex
-        [instrumentTableViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
+        [seqSetViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
         
         // Decode active sequencer filename
         NSString * sequencerName = [currentState objectForKey:@"Active Sequencer"];
         if(![sequencerName isEqualToString:@""]){
             activeSequencer = sequencerName;
-            saveLoadSelector.activeSequencer = sequencerName;
+            optionsViewController.activeSequencer = sequencerName;
         }
     }else{
         [playControlViewController resetTempo];
-        [instrumentTableViewController resetSelectedInstrumentIndex];
+        [playControlViewController resetVolume];
+        [seqSetViewController resetSelectedInstrumentIndex];
     }
 }
 
@@ -307,10 +394,10 @@
 {
     
     // Tell all of the sequencers to play their next fret
-    int instrumentCount = [instrumentTableViewController countInstruments];
+    int instrumentCount = [seqSetViewController countInstruments];
     for (int i=0; i<instrumentCount; i++){
         
-        Instrument * instToPlay = [instrumentTableViewController getInstrumentAtIndex:i];
+        Instrument * instToPlay = [seqSetViewController getInstrumentAtIndex:i];
         
         @synchronized(instToPlay.selectedPattern){
             int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
@@ -326,14 +413,14 @@
                 }
                 
                 // Cause queued pattern to blink
-                [instrumentTableViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
+                [seqSetViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
             }
             
-            [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted];
+            [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted withAmplitude:playVolume];
         }
     }
     
-    [instrumentTableViewController updateAllVisibleCells];
+    [seqSetViewController updateAllVisibleCells];
     
     [guitarView update];
     
@@ -363,7 +450,7 @@
             if (inst == nextPatternInstrument){
                 NSLog(@"DEQUEUEING THE NEXT PATTERN");
                 [objectsToRemove addObject:patternToSelect];
-                [instrumentTableViewController commitSelectingPatternAtIndex:nextPatternIndex forInstrument:nextPatternInstrument];
+                [seqSetViewController commitSelectingPatternAtIndex:nextPatternIndex forInstrument:nextPatternInstrument];
             }
         }
         
@@ -388,9 +475,10 @@
     playTimer = nil;
 }
 
-- (void)startAllPlaying:(float)spb
+- (void)startAllPlaying:(float)spb withAmplitude:(double)volume
 {
     isPlaying = TRUE;
+    playVolume = volume;
     
     [self performSelectorInBackground:@selector(startBackgroundLoop:) withObject:[NSNumber numberWithFloat:spb]];
 }
@@ -465,7 +553,7 @@
 {
     if (currentFret >= 0){
         int realMeasure = [inst.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
-        [inst playFret:currentFret inRealMeasure:realMeasure withSound:NO];
+        [inst playFret:currentFret inRealMeasure:realMeasure withSound:NO withAmplitude:playVolume];
     }
     
     NSLog(@"update playband...");
@@ -479,7 +567,7 @@
         return;
     }
     
-    if ([instrumentTableViewController getSelectedInstrumentIndex] < 0 || [instrumentTableViewController countInstruments] == 0){
+    if ([seqSetViewController getSelectedInstrumentIndex] < 0 || [seqSetViewController countInstruments] == 0){
         NSLog(@"No Instruments opened, or selected instrument index < 0");
         return;
     }
@@ -497,9 +585,9 @@
     NSLog(@"gTarSeq received note played message string %i and fret %i",note.string,note.fret);
     
     // Pass note-played message onto the selected instrument
-    [[instrumentTableViewController getCurrentInstrument] notePlayedAtString:note.string andFret:note.fret];
+    [[seqSetViewController getCurrentInstrument] notePlayedAtString:note.string andFret:note.fret];
     
-    [instrumentTableViewController updateAllVisibleCells];
+    [seqSetViewController updateAllVisibleCells];
     
     [guitarView update];
     

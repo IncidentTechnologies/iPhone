@@ -94,12 +94,12 @@
 #pragma Playing Notes
 
 // Play audio:
-- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound
+- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)amplitude
 {
     if (sound)
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument andAudio:audio];
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument andAudio:audio withAmplitude:amplitude];
     else
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument: -1 andAudio:audio];
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument: -1 andAudio:audio withAmplitude:0.0];
 }
 
 - (void)displayAllNotes {

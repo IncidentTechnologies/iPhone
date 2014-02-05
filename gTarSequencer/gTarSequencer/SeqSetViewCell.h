@@ -15,9 +15,9 @@
 #define MUTE_SEGMENT_INDEX 4
 #define MAX_MEASURES_IN_UI 4
 
-@class InstrumentTableViewController;
+@class SeqSetViewController;
 
-@interface InstrumentTableViewCell : UITableViewCell
+@interface SeqSetViewCell : UITableViewCell
 {
     
     BOOL deleteMode;
@@ -42,7 +42,7 @@
 - (void)update;
 - (void)deselect;
 
-@property (weak, nonatomic) InstrumentTableViewController * parent;
+@property (weak, nonatomic) SeqSetViewController * parent;
 
 @property (weak, nonatomic) Instrument * instrument;
 @property (retain, nonatomic) NSString * instrumentName;

@@ -21,6 +21,6 @@
 
 
 - (id)initWithStringSet:(NSArray *)stringSet;
-- (void)PluckStringFret:(int)str atFret:(int)fret;
+- (void)PluckStringFret:(int)str atFret:(int)fret withAmplitude:(double)amplitude;
 
 @end

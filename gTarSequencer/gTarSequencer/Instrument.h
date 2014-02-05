@@ -29,7 +29,7 @@
     
 }
 
-- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound;
+- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)amplitude;
 
 - (Pattern *)selectPattern:(int)newSelection;
 - (Measure *)selectMeasure:(int)newSelection;
