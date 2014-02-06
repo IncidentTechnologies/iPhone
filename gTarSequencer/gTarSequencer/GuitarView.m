@@ -55,7 +55,7 @@
         [measure setUpdatePlaybandOnGuitar:NO];
     }
     
-    NSLog(@"gv update");
+    if(TESTMODE) NSLog(@"gv update");
 }
 
 - (void)setMeasure:(Measure *)newMeasure

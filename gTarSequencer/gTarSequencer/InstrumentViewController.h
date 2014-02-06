@@ -18,6 +18,8 @@
 
 @protocol InstrumentDelegate <NSObject>
 
+- (void) saveContext:(NSString *)filepath;
+
 @end
 
 @interface InstrumentViewController : UIViewController
@@ -26,13 +28,18 @@
     int activePattern;
     int activeMeasure;
     
+    int changingPattern;
+    NSTimer * patternTimer;
+    
     UIView * measureSet[NUM_PATTERNS][NUM_MEASURES];
-    NSMutableArray * noteButtons[NUM_PATTERNS][NUM_MEASURES];
+    UIButton * noteButtons[NUM_PATTERNS][NUM_MEASURES][MAX_NOTES];
     NSString * patternTitles[NUM_PATTERNS];
+    
+    UIColor * colors[STRINGS_ON_GTAR];
     
     // Local instrument data
     Instrument * currentInst;
-    //char * notes[NUM_PATTERNS][NUM_MEASURES];
+
     int measureCounts[NUM_PATTERNS];
     int declaredActiveMeasures[NUM_PATTERNS];
     
@@ -46,6 +53,7 @@
 -(void)setActiveInstrument:(Instrument *)inst;
 
 -(IBAction)changePattern:(id)sender;
+-(IBAction)stopChangePattern:(id)sender;
 
 @property (weak, nonatomic) id<InstrumentDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView * scrollView;

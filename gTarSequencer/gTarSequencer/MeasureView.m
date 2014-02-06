@@ -47,6 +47,11 @@
     
     [self addSubview:playbandView];
     
+    [self initColors];
+}
+
+- (void)initColors
+{
     CGFloat initColors[STRINGS_ON_GTAR][4] = {
         {150/255.0, 12/255.0, 238/255.0, 1},
         {9/255.0, 109/255.0, 245/255.0, 1},

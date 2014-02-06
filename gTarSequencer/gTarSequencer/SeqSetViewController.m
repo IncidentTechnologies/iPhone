@@ -100,6 +100,7 @@
     [self setRemainingInstrumentOptionsFromMasterOptions];    
     instruments = [NSKeyedUnarchiver unarchiveObjectWithData:instData];
     
+    
     // Remove all the previously used instruments from the remaining list:
     NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
     NSMutableArray * instrumentsToRemove = [[NSMutableArray alloc] init];
@@ -153,6 +154,12 @@
         return [instruments objectAtIndex:i];
     else
         return nil;
+}
+
+#pragma mark - Instrument View Delegate
+- (void)reloadTableData
+{
+    [instrumentTable reloadData];
 }
 
 #pragma mark - Selected Instrument Data
@@ -327,6 +334,15 @@
     [cell notifyQueuedPatterns:reset];
     
 }
+
+- (void)clearQueuedPatternButtonAtIndex:(int)index
+{
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
+    
+    [cell clearQueuedPatternButton];
+}
+
 
 #pragma mark Instrument Selector
 
@@ -695,6 +711,8 @@
     Instrument * tempInst = [instruments objectAtIndex:senderIndex];
     
     tempInst.isMuted = isMute;
+    
+    [delegate saveContext:nil];
 }
 
 #pragma mark UI Input

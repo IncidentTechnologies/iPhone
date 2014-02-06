@@ -55,6 +55,7 @@
 - (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst;
 - (void)deleteCell:(id)sender;
 
+- (void)reloadTableData;
 - (void)updateAllVisibleCells;
 - (void)userDidSelectMeasure:(id)sender atIndex:(int)index;
 - (BOOL)userDidSelectPattern:(id)sender atIndex:(int)index;
@@ -66,6 +67,7 @@
 - (void)resetSelectedInstrumentIndex;
 
 - (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset;
+- (void)clearQueuedPatternButtonAtIndex:(int)index;
 
 - (void)setInstrumentsFromData:(NSData *)instData;
 - (NSMutableArray *)getInstruments;

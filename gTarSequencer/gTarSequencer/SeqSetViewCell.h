@@ -39,6 +39,7 @@
 
 - (void)initMeasureViews;
 - (void)notifyQueuedPatterns:(BOOL)reset;
+- (void)clearQueuedPatternButton;
 - (void)update;
 - (void)deselect;
 

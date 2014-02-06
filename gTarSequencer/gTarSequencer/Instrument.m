@@ -59,6 +59,8 @@
         
         isSelected = [aDecoder decodeBoolForKey:@"Is Selected"];
         
+        isMuted = [aDecoder decodeBoolForKey:@"Is Muted"];
+        
         stringSet = [aDecoder decodeObjectForKey:@"Strings"];
         
         selectedPatternDidChange = YES;
@@ -188,6 +190,7 @@
     [aCoder encodeObject:iconName forKey:@"Icon Name"];
     [aCoder encodeBool:isSelected forKey:@"Is Selected"];
     [aCoder encodeObject:stringSet forKey:@"Strings"];
+    [aCoder encodeBool:isMuted forKey:@"Is Muted"];
 }
 
 @end

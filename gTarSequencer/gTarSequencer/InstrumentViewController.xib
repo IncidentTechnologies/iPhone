@@ -27,7 +27,8 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="changePattern:" destination="-1" eventType="touchUpInside" id="rDA-1P-sCL"/>
+                        <action selector="changePattern:" destination="-1" eventType="touchDown" id="uvA-FF-yrQ"/>
+                        <action selector="stopChangePattern:" destination="-1" eventType="touchUpInside" id="wsC-8S-lqf"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7j-Qe-Xdr" customClass="UIButton">

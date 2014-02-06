@@ -240,6 +240,7 @@
         
     }else if([nav isEqualToString:@"Set"]){
     
+        [seqSetViewController reloadTableData];
         activeMainView = seqSetViewController.view;
         
     }else if([nav isEqualToString:@"Instrument"]){
@@ -305,7 +306,7 @@
 {
     if(filepath == nil){
         filepath = instrumentDataFilePath;
-        NSLog(@"Load sequencer from disk");
+        NSLog(@"Save state to disk");
     }else{
         NSLog(@"Save state to disk at %@",filepath);
     }
@@ -446,6 +447,7 @@
     NSLog(@"CHECK QUEUE FOR PATTERNS FROM INSTRUMENT");
     
     NSMutableArray * objectsToRemove = [NSMutableArray array];
+  
     
     @synchronized(patternQueue)
     {
@@ -459,6 +461,8 @@
                 NSLog(@"DEQUEUEING THE NEXT PATTERN");
                 [objectsToRemove addObject:patternToSelect];
                 [seqSetViewController commitSelectingPatternAtIndex:nextPatternIndex forInstrument:nextPatternInstrument];
+                
+                [self dequeuePatternAtIndex:inst.instrument];
             }
         }
         
@@ -473,6 +477,11 @@
     }
 }
 
+- (void)dequeuePatternAtIndex:(int)instIndex
+{
+    NSLog(@"dequeuing pattern for instrument at index %i",instIndex);
+    [seqSetViewController clearQueuedPatternButtonAtIndex:instIndex];
+}
 
 #pragma mark - Play Control Delegate
 
@@ -500,7 +509,7 @@
 
 - (void)increasePlayLocation
 {
-    NSLog(@"Increase play location");
+    if(TESTMODE) NSLog(@"Increase play location");
     
     currentFret++;
     

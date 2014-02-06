@@ -36,19 +36,34 @@
         patternTitles[2] = @"C";
         patternTitles[3] = @"D";
         
+        [self initColors];
+        
         for(int i = 0; i < NUM_PATTERNS; i++){
             declaredActiveMeasures[i] = -1;
         }
         
         for(int i = 0; i < NUM_PATTERNS; i++){
             for(int j = 0; j < NUM_MEASURES; j++){
-                noteButtons[i][j] = nil;
                 measureSet[i][j] = nil;
+                for(int k = 0; k < MAX_NOTES; k++){
+                    noteButtons[i][j][k] = nil;
+                }
             }
         }
         
     }
     return self;
+}
+
+- (void)initColors
+{
+    colors[5] = [UIColor colorWithRed:150/255.0 green:12/255.0 blue:238/255.0 alpha:1.0];
+    colors[4] = [UIColor colorWithRed:9/255.0 green:109/255.0 blue:245/255.0 alpha:1.0];
+    colors[3] = [UIColor colorWithRed:19/255.0 green:133/255.0 blue:4/255.0 alpha:1.0];
+    colors[2] = [UIColor colorWithRed:245/255.0 green:214/255.0 blue:9/255.0 alpha:1.0];
+    colors[1] = [UIColor colorWithRed:238/255.0 green:129/255.0 blue:13/255.0 alpha:1.0];
+    colors[0] = [UIColor colorWithRed:216/255.0 green:64/255.0 blue:64/255.0 alpha:1.0];
+    
 }
 
 - (void)viewDidLoad
@@ -176,6 +191,9 @@
     if(freezeMeasureChange == nil){
         freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
     }
+    
+    // SAVE CONTEXT
+    [delegate saveContext:nil];
 }
 
 - (void)drawMeasuresForPattern:(int)patternIndex
@@ -265,6 +283,10 @@
                     
                     break;
             }
+            
+            
+            // SAVE CONTEXT
+            [delegate saveContext:nil];
         }
         
         
@@ -316,16 +338,27 @@
             
             [self scrollToAndSetActiveMeasure:activeMeasure];
             
+            // SAVE CONTEXT
+            [delegate saveContext:nil];
         }
-        
     }
 }
 
 - (void)clearMeasure:(int)measureIndex forPattern:(int)patternIndex
 {
+    
+    NSLog(@"Clear measure %i at pattern %i",measureIndex,patternIndex);
+    
     // remove all gesture recognizers
     while(measureSet[patternIndex][measureIndex].gestureRecognizers.count){
         [measureSet[patternIndex][measureIndex] removeGestureRecognizer:[measureSet[patternIndex][measureIndex].gestureRecognizers objectAtIndex:0]];
+    }
+    
+    // remove button clicks
+    for(int k = 0; k < MAX_NOTES; k++){
+        [noteButtons[patternIndex][measureIndex][k] removeTarget:self action:@selector(toggleNote:) forControlEvents:UIControlEventTouchUpInside];
+        [noteButtons[patternIndex][measureIndex][k] removeFromSuperview];
+        noteButtons[patternIndex][measureIndex][k] = nil;
     }
     
     [measureSet[patternIndex][measureIndex] removeFromSuperview];
@@ -379,22 +412,20 @@
     CGRect measureFrame = CGRectMake(3*MEASURE_MARGIN+measureIndex*(MEASURE_WIDTH+MEASURE_MARGIN), 0, MEASURE_WIDTH, scrollView.frame.size.height);
     UIView * newMeasure = [[UIView alloc] initWithFrame:measureFrame];
     
-    NSMutableArray * measureNotes = [[NSMutableArray alloc] init];
-    
     [newMeasure setBackgroundColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0]];
     
-    for (int f = 0; f < FRETS_ON_GTAR; f++)
+    for (int s = 0; s < STRINGS_ON_GTAR; s++)
     {
-        for (int s = 0; s < STRINGS_ON_GTAR; s++)
+        for (int f = 0; f < FRETS_ON_GTAR; f++)
         {
-            CGRect noteFrame = CGRectMake(f*NOTE_WIDTH,s*NOTE_HEIGHT,NOTE_WIDTH,NOTE_HEIGHT);
+            CGRect noteFrame = CGRectMake(f*NOTE_WIDTH,(STRINGS_ON_GTAR-s-1)*NOTE_HEIGHT,NOTE_WIDTH,NOTE_HEIGHT);
             UIButton * newButton = [[UIButton alloc] initWithFrame:noteFrame];
             
             Pattern * p = currentInst.patterns[patternIndex];
             Measure * m = p.measures[measureIndex];
             
             if([m isNoteOnAtString:s andFret:f]){
-                [newButton setBackgroundColor:[UIColor blueColor]];
+                [newButton setBackgroundColor:colors[s]];
             }else{
                 [newButton setBackgroundColor:[UIColor grayColor]];
             }
@@ -402,15 +433,16 @@
             newButton.layer.borderWidth = 1.0;
             newButton.layer.borderColor = [UIColor whiteColor].CGColor;
             
-            [measureNotes addObject:newButton];
+            [newButton addTarget:self action:@selector(toggleNote:) forControlEvents:UIControlEventTouchUpInside];
+            
+            noteButtons[patternIndex][measureIndex][FRETS_ON_GTAR*s+f] = newButton;
+            
             [newMeasure addSubview:newButton];
             
             // default invisible
             [newMeasure setAlpha:0.0];
         }
     }
-    
-    noteButtons[patternIndex][measureIndex] = [[NSMutableArray alloc] initWithArray:measureNotes];
     
     [scrollView addSubview:newMeasure];
     
@@ -476,10 +508,30 @@
 
 -(IBAction)changePattern:(id)sender
 {
-    [self changePatternToPattern:(activePattern+1)%NUM_PATTERNS];
+    changingPattern = activePattern;
+    
+    patternButton.titleLabel.font = [UIFont systemFontOfSize:80.0];
+    
+    patternTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(incrementChangingPattern) userInfo:nil repeats:YES];
+    
+}
+
+-(IBAction)stopChangePattern:(id)sender
+{
+    [patternTimer invalidate];
+    patternTimer = nil;
+    
+    [self changePatternToPattern:changingPattern];
     
     // Update active measure
     [self changeActiveMeasureToMeasure:0];
+}
+
+-(void)incrementChangingPattern
+{
+    changingPattern = (changingPattern+1)%NUM_PATTERNS;
+    [patternButton setTitle:patternTitles[changingPattern] forState:UIControlStateNormal];
+    
 }
 
 -(void)changePatternToPattern:(int)patternIndex
@@ -490,9 +542,13 @@
     activePattern = patternIndex;
     [self drawMeasuresForPattern:activePattern];
     
+    patternButton.titleLabel.font = [UIFont systemFontOfSize:40.0];
     [patternButton setTitle:patternTitles[activePattern] forState:UIControlStateNormal];
     
     [self setActivePatternIndex:activePattern];
+    
+    // SAVE CONTEXT
+    [delegate saveContext:nil];
 }
 
 - (void)fadeOutPattern:(int)patternIndex
@@ -508,6 +564,38 @@
         }
     }];
 }
+
+#pragma mark - Notes
+- (void)toggleNote:(id)sender
+{
+    int string;
+    int fret;
+    
+    for(int s = 0; s < STRINGS_ON_GTAR; s++){
+        for(int f = 0; f < FRETS_ON_GTAR; f++){
+            if(noteButtons[activePattern][activeMeasure][FRETS_ON_GTAR*s+f] == sender){
+                fret = f;
+                string = s;
+                break;
+            }
+        }
+    }
+    
+    Pattern * p = currentInst.patterns[activePattern];
+    Measure * m = p.measures[activeMeasure];
+    
+    if([m isNoteOnAtString:string andFret:fret]){
+        [sender setBackgroundColor:[UIColor grayColor]];
+    }else{
+        [sender setBackgroundColor:colors[string]];
+    }
+    
+    [m changeNoteAtString:string andFret:fret];
+    
+    // SAVE CONTEXT
+    [delegate saveContext:nil];
+}
+
 
 #pragma mark - System
 

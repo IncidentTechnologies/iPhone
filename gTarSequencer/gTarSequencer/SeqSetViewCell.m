@@ -185,6 +185,12 @@
     [patternA setTitleEdgeInsets:UIEdgeInsetsMake(2.0f,2.0f,0.0f,0.0f)];
 }
 
+- (void)clearQueuedPatternButton
+{
+    [self setStateForButton:queuedPatternButton state:0];
+    queuedPatternButton = nil;
+}
+
 - (void)updatePatternButton:(UIButton *)newButton playState:(BOOL)isPlaying
 {
     if(!isPlaying || selectedPatternButton == newButton){
@@ -224,8 +230,10 @@
         [self setStateForButton:selectedPatternButton state:2];
         
         //queue actual button
-        queuedPatternButton = newButton;
-        [self setStateForButton:queuedPatternButton state:1];
+        if(newButton != selectedPatternButton){
+            queuedPatternButton = newButton;
+            [self setStateForButton:queuedPatternButton state:1];
+        }
         
     }else if(queuedPatternButton == nil){
         
@@ -294,7 +302,7 @@
 - (void)userDidTapInstrumentIcon:(id)sender
 {
     
-    // TODO: implement instrument change
+    // TODO: implement instrument change?
     
 }
 
@@ -364,8 +372,10 @@
     UIButton * newSelection = [patternButtons objectAtIndex:index];
     
     if (selectedPatternButton == newSelection){
+        NSLog(@"Already set - returning");
         return;
     }else {
+        NSLog(@"Now updating");
         [self updatePatternButton:newSelection playState:NO];
     }
 }
@@ -419,6 +429,7 @@
     if (tappedIndex == MUTE_SEGMENT_INDEX){
         [parent muteInstrument:self isMute:YES];
         isPlaying = [parent.delegate checkIsPlaying];
+        [self clearQueuedPatternButton];
     }else{
         [parent muteInstrument:self isMute:NO];
         isPlaying = [parent userDidSelectPattern:self atIndex:tappedIndex];
