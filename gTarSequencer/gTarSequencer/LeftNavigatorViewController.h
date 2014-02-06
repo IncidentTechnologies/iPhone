@@ -21,7 +21,6 @@
     
 }
 
--(IBAction)tapLeftSlider:(id)sender;
 -(IBAction)selectNav:(id)sender;
 
 @property (weak, nonatomic) id<LeftNavigatorDelegate> delegate;

@@ -189,6 +189,12 @@
     return notes[location];
 }
 
+- (char *)getNotes
+{
+    return notes;
+}
+
+
 #pragma mark Empty(ing)
 
 - (void)clearNotes

@@ -13,7 +13,7 @@
 #import "CustomInstrumentSelector.h"
 
 
-@protocol InstrumentDelegate <NSObject>
+@protocol SeqSetDelegate <NSObject>
 
 - (void) saveContext:(NSString *)filepath;
 - (BOOL) checkIsPlaying;
@@ -73,7 +73,7 @@
 - (Instrument *)getCurrentInstrument;
 - (Instrument *)getInstrumentAtIndex:(int)i;
 
-@property (weak, nonatomic) id<InstrumentDelegate> delegate;
+@property (weak, nonatomic) id<SeqSetDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UITableView *instrumentTable;
 
 @end

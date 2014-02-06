@@ -74,9 +74,6 @@
                     <rect key="frame" x="145" y="0.0" width="5" height="264"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.91590947690000002" green="0.73268175430000004" blue="0.2440864482" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <action selector="tapLeftSlider:" destination="-1" eventType="touchUpInside" id="V7e-R4-RnJ"/>
-                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.1960784314" green="0.21960784310000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>

@@ -21,10 +21,6 @@
 {
     BOOL isSelected;
     
-    int selectedPatternIndex;
-    
-    NSMutableArray * patterns;
-    
     SoundMaker * audio;
     
 }
@@ -54,7 +50,9 @@
 @property (retain, nonatomic) NSString * instrumentName;
 @property (retain, nonatomic) NSString * iconName;
 @property (retain, nonatomic) NSArray * stringSet;
+@property (retain, nonatomic) NSMutableArray * patterns;
 
+@property (nonatomic) int selectedPatternIndex;
 @property (retain, nonatomic) Pattern * selectedPattern;
 @property (nonatomic) BOOL selectedPatternDidChange;
 @property (nonatomic) BOOL isMuted;

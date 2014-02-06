@@ -43,6 +43,8 @@
 - (void)clearNotes;
 - (BOOL)isEmpty;
 
+- (char *)getNotes;
+
 - (BOOL)shouldUpdatePlaybandOnGuitar;
 - (BOOL)shouldUpdatePlaybandOnMinimap;
 - (BOOL)shouldUpdateNotesOnGuitar;

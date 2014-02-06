@@ -37,12 +37,6 @@
     
 }
 
-
-- (IBAction)tapLeftSlider:(id)sender
-{
-    [delegate toggleLeftNavigator];
-}
-
 - (IBAction)selectNav:(id)sender
 {
     if(sender == optionsButton){

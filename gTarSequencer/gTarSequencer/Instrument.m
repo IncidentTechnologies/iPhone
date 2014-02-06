@@ -15,8 +15,10 @@
 @synthesize instrument;
 @synthesize stringSet;
 @synthesize selectedPattern;
+@synthesize selectedPatternIndex;
 @synthesize selectedPatternDidChange;
 @synthesize isMuted;
+@synthesize patterns;
 
 - (id)init
 {

@@ -132,6 +132,8 @@
 		584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 584085871865355300BFF3C5 /* sequencerInstruments.plist */; };
 		5840858D18653B5C00BFF3C5 /* SeqSetViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840858C18653B5C00BFF3C5 /* SeqSetViewCell.m */; };
 		584085951868C33700BFF3C5 /* GuitarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 584085941868C33700BFF3C5 /* GuitarView.m */; };
+		58429A1818A1BD6A00BDD09B /* InstrumentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58429A1718A1BD6A00BDD09B /* InstrumentViewController.xib */; };
+		58429A1B18A1C09300BDD09B /* InstrumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58429A1A18A1C09300BDD09B /* InstrumentViewController.m */; };
 		58547AE4186CD55C003638EF /* RadialButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AE3186CD55C003638EF /* RadialButton.m */; };
 		58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AE7186CD5EF003638EF /* RadialDisplay.m */; };
 		58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AEA186CD6AF003638EF /* ScrollingSelector.m */; };
@@ -429,6 +431,9 @@
 		5840858C18653B5C00BFF3C5 /* SeqSetViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeqSetViewCell.m; sourceTree = "<group>"; };
 		584085931868C33700BFF3C5 /* GuitarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarView.h; sourceTree = "<group>"; };
 		584085941868C33700BFF3C5 /* GuitarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarView.m; sourceTree = "<group>"; };
+		58429A1718A1BD6A00BDD09B /* InstrumentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentViewController.xib; sourceTree = "<group>"; };
+		58429A1918A1C09300BDD09B /* InstrumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentViewController.h; sourceTree = "<group>"; };
+		58429A1A18A1C09300BDD09B /* InstrumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentViewController.m; sourceTree = "<group>"; };
 		58547AE2186CD55B003638EF /* RadialButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialButton.h; sourceTree = "<group>"; };
 		58547AE3186CD55C003638EF /* RadialButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialButton.m; sourceTree = "<group>"; };
 		58547AE6186CD5EF003638EF /* RadialDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialDisplay.h; sourceTree = "<group>"; };
@@ -870,6 +875,9 @@
 		58429A1618A1AD4D00BDD09B /* InstrumentViewController */ = {
 			isa = PBXGroup;
 			children = (
+				58429A1918A1C09300BDD09B /* InstrumentViewController.h */,
+				58429A1A18A1C09300BDD09B /* InstrumentViewController.m */,
+				58429A1718A1BD6A00BDD09B /* InstrumentViewController.xib */,
 			);
 			name = InstrumentViewController;
 			sourceTree = "<group>";
@@ -1468,6 +1476,7 @@
 				587C9F881888C0E7001F57C7 /* Dubstep 4.mp3 in Resources */,
 				5811AB0F187B88C800FC0BD2 /* Percussion 5.mp3 in Resources */,
 				5811AAF4187B88C800FC0BD2 /* Percussion 25.mp3 in Resources */,
+				58429A1818A1BD6A00BDD09B /* InstrumentViewController.xib in Resources */,
 				5811AB17187B88C800FC0BD2 /* Percussion 57.mp3 in Resources */,
 				5811AB46187B88C800FC0BD2 /* Sample Pack INFO in Resources */,
 				587C9FB41888C0E7001F57C7 /* Rock 6.mp3 in Resources */,
@@ -1584,6 +1593,7 @@
 				58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */,
 				58D6171E1863B8D7001EB327 /* AppDelegate.m in Sources */,
 				58868EDA187619ED00B469C2 /* PlayControlViewController.m in Sources */,
+				58429A1B18A1C09300BDD09B /* InstrumentViewController.m in Sources */,
 				58D6960D1864D20A00113AF2 /* SequencerViewController.m in Sources */,
 				58D6171A1863B8D7001EB327 /* main.m in Sources */,
 			);

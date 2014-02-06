@@ -23,8 +23,9 @@
 
 @implementation SequencerViewController
 
-@synthesize seqSetViewController;
 @synthesize optionsViewController;
+@synthesize seqSetViewController;
+@synthesize instrumentViewController;
 @synthesize playControlViewController;
 @synthesize leftNavigator;
 @synthesize gTarConnectedBar;
@@ -120,6 +121,13 @@
     //
     // SUBVIEW: INSTRUMENT
     //
+    
+    instrumentViewController = [[InstrumentViewController alloc] initWithNibName:@"InstrumentViewController" bundle:nil];
+    [instrumentViewController.view setFrame:onScreenMainFrame];
+    [instrumentViewController setDelegate:self];
+    
+    [instrumentViewController.view setHidden:YES];
+    [self.view addSubview:instrumentViewController.view];
     
     
     //
@@ -218,6 +226,8 @@
 - (void)selectNavChoice:(NSString *)nav
 {
     
+    NSLog(@"Switch to %@ view",nav);
+    
     [optionsViewController.view setHidden:YES];
     [seqSetViewController.view setHidden:YES];
     [instrumentViewController.view setHidden:YES];
@@ -226,22 +236,20 @@
     // Switch to new main subview
     if([nav isEqualToString:@"Options"]){
         
-        NSLog(@"Switch to OPTIONS view");
         activeMainView = optionsViewController.view;
         
     }else if([nav isEqualToString:@"Set"]){
     
-        NSLog(@"Switch to SET view");
         activeMainView = seqSetViewController.view;
         
     }else if([nav isEqualToString:@"Instrument"]){
         
-        NSLog(@"Switch to INSTRUMENT view");
+        [instrumentViewController reopenView];
         activeMainView = instrumentViewController.view;
+        [instrumentViewController setActiveInstrument:[seqSetViewController getCurrentInstrument]];
         
     }else if([nav isEqualToString:@"Share"]){
         
-        NSLog(@"Switch to SHARE view");
         activeMainView = shareViewController.view;
     }
     
