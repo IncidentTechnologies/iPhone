@@ -231,7 +231,7 @@
     }
     
     // Fade in
-    [UIView animateWithDuration:1.0 animations:^(){
+    [UIView animateWithDuration:0.5 animations:^(){
         for(int i = 0; i < NUM_MEASURES; i++){
             if(i == activeMeasure){
                 [measureSet[patternIndex][i] setAlpha:1.0];
@@ -557,7 +557,7 @@
 - (void)fadeOutPattern:(int)patternIndex andLoadPattern:(int)newPattern andLoadMeasure:(int)newMeasure
 {
     
-    [UIView animateWithDuration:1.0 animations:^(){
+    [UIView animateWithDuration:0.5 animations:^(){
         for(int i = 0; i < NUM_MEASURES; i++){
             [playbandView[i] setHidden:YES];
             [measureSet[patternIndex][i] setAlpha:0.3];
@@ -729,13 +729,13 @@
 {
     UIButton * newSelection = [patternButtons objectAtIndex:index];
     
-    if (selectedPatternButton == newSelection){
-        NSLog(@"Already set - returning");
-        return;
-    }else {
-        NSLog(@"Now updating");
+    //if (selectedPatternButton == newSelection){
+    //    NSLog(@"Already set - returning");
+    //    return;
+    //}else {
+    //    NSLog(@"Now updating");
         [self updatePatternButton:newSelection playState:NO];
-    }
+    //}
 }
 
 - (void)clearQueuedPatternButton

@@ -128,6 +128,8 @@
     
     [instrumentTable reloadData];
     
+    [delegate numInstrumentsDidChange:[instruments count]];
+    
 }
 
 - (Instrument *)getCurrentInstrument
@@ -216,6 +218,7 @@
         }
     }
     
+    [delegate numInstrumentsDidChange:[instruments count]];
     [delegate saveContext:nil];
 }
 
@@ -337,10 +340,17 @@
 
 - (void)clearQueuedPatternButtonAtIndex:(int)index
 {
-    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
+    // Switch from instrument index to table index
     
-    [cell clearQueuedPatternButton];
+    for(int i = 0; i < [instrumentTable numberOfRowsInSection:0] - 1; i++){
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
+        
+        if(cell.instrument.instrument == index){
+            [cell resetQueuedPatternButton];
+        }
+    }
+    
 }
 
 
@@ -589,6 +599,9 @@
         [instrumentTable reloadData];
     }
     
+    // Remove any enqueued patterns
+    [delegate removeQueuedPatternForInstrumentAtIndex:pathToDelete.row];
+    
     // Update cells:
     if([instruments count] > 0){
         if(![delegate checkIsPlaying]){
@@ -598,6 +611,7 @@
         [delegate forceStopAll];
     }
     
+    [delegate numInstrumentsDidChange:[instruments count]];
     [delegate saveContext:nil];
 }
 

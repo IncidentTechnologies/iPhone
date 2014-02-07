@@ -28,8 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)viewDidUnload
@@ -43,11 +41,23 @@
         [delegate selectNavChoice:@"Options"];
     }else if(sender == seqSetButton){
         [delegate selectNavChoice:@"Set"];
-    }else if(sender == instrumentButton){
+    }else if(sender == instrumentButton && instrumentViewEnabled){
         [delegate selectNavChoice:@"Instrument"];
     }else if(sender == shareButton){
         [delegate selectNavChoice:@"Share"];
     }
+}
+
+-(void)enableInstrumentView
+{
+    [instrumentButton setAlpha:1.0];
+    instrumentViewEnabled = true;
+}
+
+-(void)disableInstrumentView
+{
+    [instrumentButton setAlpha:0.5];
+    instrumentViewEnabled = false;
 }
 
 /*

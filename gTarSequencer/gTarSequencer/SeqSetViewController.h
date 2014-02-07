@@ -27,6 +27,11 @@
 
 - (void) updateGuitarView;
 - (void) updatePlaybandForInstrument:(Instrument *)inst;
+
+- (void) removeQueuedPatternForInstrumentAtIndex:(int)instIndex;
+
+- (void) numInstrumentsDidChange:(int)numInstruments;
+
 @end
 
 

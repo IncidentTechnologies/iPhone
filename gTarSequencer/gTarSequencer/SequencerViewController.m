@@ -480,16 +480,25 @@
 
 - (void)enqueuePattern:(NSMutableDictionary *)pattern
 {
-    // For now, clear all the queued patterns
-    for(NSMutableDictionary * p in patternQueue){
-        [patternQueue removeObject:p];
-    }
+    // For now, clear all the queued patterns for the active instrument
+    [self removeQueuedPatternForInstrumentAtIndex:[seqSetViewController getCurrentInstrument].instrument];
     
     @synchronized(patternQueue){
         [patternQueue addObject:pattern];
     }
     
     NSLog(@"Pattern Queue is: %@",patternQueue);
+}
+
+-(void)removeQueuedPatternForInstrumentAtIndex:(int)instIndex
+{
+    for(NSMutableDictionary * p in patternQueue){
+        Instrument * i = [p objectForKey:@"Instrument"];
+        if(i.instrument == instIndex)
+        {
+            [patternQueue removeObject:p];
+        }
+    }
 }
 
 - (void)dequeuePatternAtIndex:(int)instIndex
@@ -565,7 +574,7 @@
 }
 
 
-#pragma mark - Instrument Delegate
+#pragma mark - Seq Set Delegate
 
 - (BOOL)checkIsPlaying
 {
@@ -614,6 +623,15 @@
     }
     
     NSLog(@"updatePlaybandForInstrument");
+}
+
+- (void) numInstrumentsDidChange:(int)numInstruments
+{
+    if(numInstruments > 0){
+        [leftNavigator enableInstrumentView];
+    }else{
+        [leftNavigator disableInstrumentView];
+    }
 }
 
 #pragma mark - Guitar Observer

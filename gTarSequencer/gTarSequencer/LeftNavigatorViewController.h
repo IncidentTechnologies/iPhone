@@ -18,10 +18,13 @@
 
 @interface LeftNavigatorViewController : UIViewController
 {
-    
+    BOOL instrumentViewEnabled;
 }
 
 -(IBAction)selectNav:(id)sender;
+-(void)enableInstrumentView;
+-(void)disableInstrumentView;
+
 
 @property (weak, nonatomic) id<LeftNavigatorDelegate> delegate;
 @property (nonatomic) CGRect viewFrame;

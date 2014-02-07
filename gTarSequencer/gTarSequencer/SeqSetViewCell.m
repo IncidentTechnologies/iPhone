@@ -185,12 +185,13 @@
     [patternA setTitleEdgeInsets:UIEdgeInsetsMake(2.0f,2.0f,0.0f,0.0f)];
 }
 
-- (void)clearQueuedPatternButton
+- (void)resetQueuedPatternButton
 {
+    
     [self setStateForButton:queuedPatternButton state:0];
     queuedPatternButton = nil;
+    
 }
-
 - (void)updatePatternButton:(UIButton *)newButton playState:(BOOL)isPlaying
 {
     if(!isPlaying || selectedPatternButton == newButton){
@@ -428,7 +429,7 @@
     if (tappedIndex == MUTE_SEGMENT_INDEX){
         [parent muteInstrument:self isMute:YES];
         isPlaying = [parent.delegate checkIsPlaying];
-        [self clearQueuedPatternButton];
+        [self resetQueuedPatternButton];
     }else{
         [parent muteInstrument:self isMute:NO];
         isPlaying = [parent userDidSelectPattern:self atIndex:tappedIndex];
