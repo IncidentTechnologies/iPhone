@@ -412,7 +412,6 @@
 
 - (IBAction)userDidSelectNewPattern:(id)sender
 {
-
     [self performSelector:@selector(selectNewPattern:) withObject:sender afterDelay:0.0];
 }
 

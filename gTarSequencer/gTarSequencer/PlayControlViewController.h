@@ -20,6 +20,9 @@
 - (void) saveContext:(NSString *)filepath;
 - (void) userDidLoadSequenceOptions;
 
+- (void) stopGestures;
+- (void) startGestures;
+
 @end
 
 
@@ -27,9 +30,11 @@
 {
     // Tempo slider
     int tempo;
+    BOOL isTempoSliderOpen;
     
     // Volume slider
     double volume;
+    BOOL isVolumeSliderOpen;
     
     // Play loop
     BOOL isPlaying;

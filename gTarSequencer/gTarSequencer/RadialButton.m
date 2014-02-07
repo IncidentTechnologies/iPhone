@@ -185,26 +185,45 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self expand];
-    
-    // update center:
-    CGPoint touchDown = [[[touches allObjects] objectAtIndex:0] locationInView:self];
-    
-    zeroPosition = touchDown;
-    
-    previousValue = currentValue;
-    currentDisplayedValue = currentValue;
+    if([delegate allowTempoDisplayToOpen]){
+        
+        [delegate tempoDisplayDidOpen];
+        
+        [self expand];
+        
+        // update center:
+        CGPoint touchDown = [[[touches allObjects] objectAtIndex:0] locationInView:self];
+        
+        zeroPosition = touchDown;
+        
+        previousValue = currentValue;
+        currentDisplayedValue = currentValue;
+        
+        displayOpen = true;
+        
+    }else{
+        
+        displayOpen = false;
+        
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self contract];
-    
-    if ( previousValue != currentDisplayedValue )
-    {
-        currentValue = currentDisplayedValue;
-        [self setToValue:currentValue];
-        [delegate radialButtonValueDidChange:currentValue];
+    if(displayOpen){
+        
+        [delegate tempoDisplayDidClose];
+            
+        [self contract];
+        
+        if ( previousValue != currentDisplayedValue )
+        {
+            currentValue = currentDisplayedValue;
+            [self setToValue:currentValue];
+            [delegate radialButtonValueDidChange:currentValue];
+        }
+        
+        displayOpen = false;
     }
 }
 

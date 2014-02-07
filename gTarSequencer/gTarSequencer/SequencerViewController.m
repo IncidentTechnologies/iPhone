@@ -181,14 +181,7 @@
     // GESTURES
     //
     
-    UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeLeftNavigator)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    
-    UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(openLeftNavigator)];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    
-    [self.view addGestureRecognizer:swipeLeft];
-    [self.view addGestureRecognizer:swipeRight];
+    [self startGestures];
     
 }
 
@@ -423,9 +416,20 @@
                 
                 // Cause queued pattern to blink
                 [seqSetViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
+                
+                // update Instrument view if it's open
+                if(activeMainView == instrumentViewController.view && instToPlay == [seqSetViewController getCurrentInstrument]){
+                    [instrumentViewController notifyQueuedPatternAndResetCount:resetCount];
+                }
             }
             
+            // play sound and update Set view
             [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted withAmplitude:playVolume];
+            
+            // update Instrument view if it's open
+            if(activeMainView == instrumentViewController.view && instToPlay == [seqSetViewController getCurrentInstrument]){
+                [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
+            }
         }
     }
     
@@ -462,6 +466,10 @@
                 [objectsToRemove addObject:patternToSelect];
                 [seqSetViewController commitSelectingPatternAtIndex:nextPatternIndex forInstrument:nextPatternInstrument];
                 
+                if(activeMainView == instrumentViewController.view && inst==[seqSetViewController getCurrentInstrument]){
+                    [instrumentViewController commitPatternChange:nextPatternIndex];
+                }
+                
                 [self dequeuePatternAtIndex:inst.instrument];
             }
         }
@@ -472,9 +480,16 @@
 
 - (void)enqueuePattern:(NSMutableDictionary *)pattern
 {
+    // For now, clear all the queued patterns
+    for(NSMutableDictionary * p in patternQueue){
+        [patternQueue removeObject:p];
+    }
+    
     @synchronized(patternQueue){
         [patternQueue addObject:pattern];
     }
+    
+    NSLog(@"Pattern Queue is: %@",patternQueue);
 }
 
 - (void)dequeuePatternAtIndex:(int)instIndex
@@ -484,6 +499,26 @@
 }
 
 #pragma mark - Play Control Delegate
+
+- (void)startGestures
+{
+    
+    swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeLeftNavigator)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(openLeftNavigator)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeRight];
+
+}
+
+- (void)stopGestures
+{
+    [self.view removeGestureRecognizer:swipeLeft];
+    [self.view removeGestureRecognizer:swipeRight];
+}
 
 - (void)stopAllPlaying
 {
@@ -571,9 +606,14 @@
     if (currentFret >= 0){
         int realMeasure = [inst.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
         [inst playFret:currentFret inRealMeasure:realMeasure withSound:NO withAmplitude:playVolume];
+        
+        // update Instrument view if it's open
+        if(activeMainView == instrumentViewController.view && inst == [seqSetViewController getCurrentInstrument]){
+            [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
+        }
     }
     
-    NSLog(@"update playband...");
+    NSLog(@"updatePlaybandForInstrument");
 }
 
 #pragma mark - Guitar Observer

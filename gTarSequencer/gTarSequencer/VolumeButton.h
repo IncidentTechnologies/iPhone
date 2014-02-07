@@ -13,6 +13,9 @@
 @protocol VolumeButtonDelegate <NSObject>
 
 - (void) volumeButtonValueDidChange:(double)newValue;
+- (BOOL) allowVolumeDisplayToOpen;
+- (void) volumeDisplayDidOpen;
+- (void) volumeDisplayDidClose;
 
 @end
 
@@ -33,6 +36,8 @@
     
     double sensitivityTop; // px/unit (int)conversion
     double sensitivityBottom;
+    
+    BOOL displayOpen;
     
 }
 

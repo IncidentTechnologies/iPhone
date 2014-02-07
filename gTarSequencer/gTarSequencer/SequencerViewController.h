@@ -55,6 +55,8 @@
     CGRect overScreenMainFrame;
     UIView * activeMainView;
     
+    UISwipeGestureRecognizer * swipeLeft;
+    UISwipeGestureRecognizer * swipeRight;
 }
 
 @property (retain, nonatomic) OptionsViewController * optionsViewController;

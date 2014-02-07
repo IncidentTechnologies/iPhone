@@ -77,6 +77,23 @@
     [delegate saveContext:nil];
 }
 
+- (BOOL) allowTempoDisplayToOpen
+{
+    return !isVolumeSliderOpen;
+}
+
+- (void) tempoDisplayDidOpen
+{
+    isTempoSliderOpen = true;
+    [delegate stopGestures];
+}
+
+- (void) tempoDisplayDidClose
+{
+    isTempoSliderOpen = false;
+    [delegate startGestures];
+}
+
 #pragma mark - Tempo Interface
 
 - (int)getTempo
@@ -113,7 +130,24 @@
     [delegate saveContext:nil];
 }
 
-#pragma mark - Volume Slider Delegate
+- (BOOL) allowVolumeDisplayToOpen
+{
+    return !isTempoSliderOpen;
+}
+
+- (void) volumeDisplayDidOpen
+{
+    isVolumeSliderOpen = true;
+    [delegate stopGestures];
+}
+
+- (void) volumeDisplayDidClose
+{
+    isVolumeSliderOpen = false;
+    [delegate startGestures];
+}
+
+#pragma mark - Volume Slider Interface
 - (double)getVolume
 {
     return volume;

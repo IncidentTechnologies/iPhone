@@ -155,26 +155,45 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self expand];
+    if([delegate allowVolumeDisplayToOpen]){
+        
+        [delegate volumeDisplayDidOpen];
+        
+        [self expand];
+        
+        // update center:
+        //CGPoint touchDown = [[[touches allObjects] objectAtIndex:0] locationInView:self];
+        
+        //zeroPosition = touchDown;
+        
+        previousValue = currentValue;
+        currentDisplayedValue = currentValue;
+        
+        displayOpen = true;
+        
+    }else{
+        
+        displayOpen = false;
     
-    // update center:
-    //CGPoint touchDown = [[[touches allObjects] objectAtIndex:0] locationInView:self];
-    
-    //zeroPosition = touchDown;
-    
-    previousValue = currentValue;
-    currentDisplayedValue = currentValue;
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self contract];
-    
-    if ( previousValue != currentDisplayedValue )
-    {
-        currentValue = currentDisplayedValue;
-        [self setToValue:currentValue];
-        [delegate volumeButtonValueDidChange:currentValue];
+    if(displayOpen){
+        
+        [delegate volumeDisplayDidClose];
+        
+        [self contract];
+        
+        if ( previousValue != currentDisplayedValue )
+        {
+            currentValue = currentDisplayedValue;
+            [self setToValue:currentValue];
+            [delegate volumeButtonValueDidChange:currentValue];
+        }
+        
+        displayOpen = false;
     }
 }
 

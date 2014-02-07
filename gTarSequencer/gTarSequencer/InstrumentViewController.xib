@@ -9,7 +9,11 @@
                 <outlet property="instrumentIcon" destination="RJo-SI-EdU" id="SyM-Xz-iiP"/>
                 <outlet property="instrumentIconButton" destination="h7j-Qe-Xdr" id="JZy-d3-pR0"/>
                 <outlet property="instrumentTitle" destination="OFs-E6-hS6" id="M4G-2e-nua"/>
-                <outlet property="patternButton" destination="OcZ-Se-QwZ" id="lAX-jL-dro"/>
+                <outlet property="offButton" destination="mwx-tL-nxF" id="R64-nK-Odk"/>
+                <outlet property="patternA" destination="vB6-bg-6ZM" id="e9z-if-hN3"/>
+                <outlet property="patternB" destination="7Dz-MM-5kA" id="3U3-l4-xL7"/>
+                <outlet property="patternC" destination="YYR-Nc-Clf" id="6cA-Kh-paH"/>
+                <outlet property="patternD" destination="ohI-Bd-uCN" id="Nch-vh-L7s"/>
                 <outlet property="scrollView" destination="dAi-rv-0RH" id="Wfj-e2-T1G"/>
                 <outlet property="view" destination="1" id="HJo-Oc-MpD"/>
             </connections>
@@ -19,18 +23,6 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="264"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OcZ-Se-QwZ">
-                    <rect key="frame" x="402" y="11" width="73" height="59"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="37"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="changePattern:" destination="-1" eventType="touchDown" id="uvA-FF-yrQ"/>
-                        <action selector="stopChangePattern:" destination="-1" eventType="touchUpInside" id="wsC-8S-lqf"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7j-Qe-Xdr" customClass="UIButton">
                     <rect key="frame" x="25" y="11" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -53,6 +45,66 @@
                     <rect key="frame" x="0.0" y="82" width="480" height="162"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwx-tL-nxF">
+                    <rect key="frame" x="403" y="17" width="70" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <state key="normal" title="OFF">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="U6w-Vx-d1e"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohI-Bd-uCN">
+                    <rect key="frame" x="360" y="17" width="41" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <state key="normal" title="D">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="l1y-kM-VCZ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYR-Nc-Clf">
+                    <rect key="frame" x="322" y="17" width="41" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <state key="normal" title="C">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="MFY-1P-hGT"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Dz-MM-5kA">
+                    <rect key="frame" x="283" y="17" width="41" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <state key="normal" title="B">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="Q35-8b-BlD"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB6-bg-6ZM">
+                    <rect key="frame" x="241" y="17" width="41" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <state key="normal" title="A">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="4h7-Zk-8F7"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

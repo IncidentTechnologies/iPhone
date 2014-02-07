@@ -13,6 +13,9 @@
 @protocol RadialButtonDelegate <NSObject>
 
 - (void) radialButtonValueDidChange:(int)newValue;
+- (BOOL) allowTempoDisplayToOpen;
+- (void) tempoDisplayDidOpen;
+- (void) tempoDisplayDidClose;
 
 @end
 
@@ -42,6 +45,8 @@
     
     CGRect normalFrame;
     CGRect zoomedFrame;
+    
+    BOOL displayOpen;
 }
 
 - (void)setToValue:(int)newValue;
