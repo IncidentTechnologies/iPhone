@@ -7,22 +7,35 @@
 //
 
 #import "CustomInstrumentSelector.h"
+
 #define GTAR_NUM_STRINGS 6
+#define MAX_RECORD_SECONDS 5
+#define RECORD_DRAW_INTERVAL 0.01
 
 @implementation CustomInstrumentSelector
 
+@synthesize viewFrame;
+@synthesize instName;
 @synthesize sampleTable;
 @synthesize stringTable;
 @synthesize cancelButton;
 @synthesize delegate;
 @synthesize audio;
 @synthesize nextButton;
+@synthesize recordButton;
 @synthesize saveButton;
 @synthesize backButton;
 @synthesize nameField;
 @synthesize customIcon;
-@synthesize viewFrame;
-@synthesize instName;
+@synthesize recordBackButton;
+@synthesize recordClearButton;
+@synthesize recordRecordButton;
+@synthesize recordSaveButton;
+@synthesize progressBarContainer;
+@synthesize progressBar;
+@synthesize playBar;
+@synthesize recordingNameField;
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -71,12 +84,16 @@
 
 - (void)userDidBack:(id)sender
 {
-    // remember instrument name
-    instName = nameField.text;
-    
+    // Back from Save screen
+    if(sender == backButton){
+        // remember instrument name
+        instName = nameField.text;
+    }
+    // Otherwise Back from Record screen
+        
     CGRect newFrame = backgroundView.frame;
-    
     [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:newFrame andRemove:backgroundView];
+    
     [self initSubtables];
     
     [self loadCellsFromStrings];
@@ -115,12 +132,28 @@
 }
 
 // single sample audio player
-- (void)playAudioForFile:(NSString *)filename
+- (void)playAudioForFile:(NSString *)filename withCustomPath:(BOOL)useCustomPath
 {
-    NSString * path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp3"];
+    
+    NSString * path;
+    
+    if(useCustomPath){
+        
+        // different filetype and location
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Samples/" stringByAppendingString:[filename stringByAppendingString:@".m4a"]]];
+        
+    }else{
+        
+        path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp3"];
+    }
+    
     NSError * error = nil;
     NSURL * url = [NSURL fileURLWithPath:path];
 
+    
+    NSLog(@"Playing URL %@",url);
+    
     self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
     
     [self.audio play];
@@ -227,6 +260,10 @@
 
     // Fade next button
     [self checkIfAllStringsReady];
+    
+    // Record button
+    [self showHideButton:recordButton isHidden:NO withSelector:@selector(userDidLaunchRecord:)];
+    
 }
 
 - (void)moveFrame:(CGRect)newFrame
@@ -234,10 +271,9 @@
     backgroundView.frame = newFrame;
 }
 
-#pragma mark - Name Field
+#pragma mark - Name Field / Recording Name Field
 - (void)nameFieldStartEdit:(id)sender
 {
-    
     float frameOffset = 35.0;
     CGRect prevIconFrame = customIcon.frame;
     CGRect prevTextFrame = nameField.frame;
@@ -272,8 +308,8 @@
     nameField.text = [nameField.text uppercaseString];
     
     [self checkIfNameReady];
-}
 
+}
 -(void)nameFieldDoneEditing:(id)sender
 {
     // return icon and name to position
@@ -295,6 +331,38 @@
     [nameField resignFirstResponder];
 }
 
+- (void)recordingNameFieldStartEdit:(id)sender
+{
+    // hide default
+    NSString * defaultText = @"New Recording";
+    
+    if([recordingNameField.text isEqualToString:defaultText]){
+        recordingNameField.text = @"";
+    }
+}
+
+- (void)recordingNameFieldDidChange:(id)sender
+{
+    int maxLength = 15;
+    
+    if([recordingNameField.text length] > maxLength){
+        recordingNameField.text = [recordingNameField.text substringToIndex:maxLength];
+    }
+    
+    // enforce capitalizing
+    recordingNameField.text = [recordingNameField.text capitalizedString];
+    
+    [self checkIfRecordingNameReady];
+}
+
+
+-(void)recordingNameFieldDoneEditing:(id)sender
+{
+    // hide keyboard
+    [nameField resignFirstResponder];
+    
+    [self checkIfRecordingNameReady];
+}
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -308,7 +376,235 @@
     return NO;
 }
 
-#pragma mark Table View Protocol
+#pragma mark - Record
+
+-(void)userDidLaunchRecord:(id)sender
+{
+    
+    // Init recorder
+    if(!customSoundRecorder){
+        customSoundRecorder = [[CustomSoundRecorder alloc] init];
+        [customSoundRecorder setDelegate:self];
+    }
+    
+    // Reset progress bar
+    [self resetProgressBar];
+    
+    // Save strings
+    [self saveStringsFromCells];
+    
+    // Load record frame
+    CGRect newFrame = backgroundView.frame;
+    [self setBackgroundViewFromNib:@"CustomInstrumentRecorder" withFrame:newFrame andRemove:backgroundView];
+
+    // Load active buttons
+    [self showHideButton:recordBackButton isHidden:NO withSelector:@selector(userDidBack:)];
+    [self showHideButton:recordClearButton isHidden:NO withSelector:@selector(userDidClearRecord)];
+    [self showHideButton:recordRecordButton isHidden:NO withSelector:@selector(userDidTapRecord:)];
+    
+    // Setup text field listeners
+    recordingNameField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    [recordingNameField addTarget:self action:@selector(recordingNameFieldStartEdit:) forControlEvents:UIControlEventEditingDidBegin];
+    [recordingNameField addTarget:self action:@selector(recordingNameFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [recordingNameField addTarget:self action:@selector(recordingNameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    recordingNameField.delegate = self;
+    isRecordingNameReady = FALSE;
+    
+    // Clear any previous recording
+    [self userDidClearRecord];
+    
+    [self checkIfRecordSaveReady];
+}
+
+-(void)userDidClearRecord
+{
+    NSLog(@"Clear recording");
+    
+    recordState = 0;
+    [recordRecordButton setTitle:@"RECORD" forState:UIControlStateNormal];
+    
+    [self resetProgressBar];
+    [self resetPlayBar];
+    
+    // Disable save
+    isRecordingReady = FALSE;
+    [self showHideButton:recordSaveButton isHidden:YES withSelector:@selector(userDidSaveRecord:)];
+}
+
+-(void)userDidEndRecord
+{
+    // End progress bar drawing
+    [progressBarTimer invalidate];
+    progressBarTimer = nil;
+    
+    // End recording
+    [recordTimer invalidate];
+    recordTimer = nil;
+    
+    // End record
+    [customSoundRecorder stopRecord];
+    
+    // Reset button
+    [recordRecordButton setTitle:@"PLAY" forState:UIControlStateNormal];
+    recordState = 2;
+    
+    // Enable save
+    isRecordingReady = TRUE;
+    [self checkIfRecordSaveReady];
+}
+
+-(void)checkIfRecordSaveReady
+{
+    // Ensure both recording name and recording are ready
+    if(isRecordingNameReady && isRecordingReady){
+        NSLog(@"Showing save");
+        [self showHideButton:recordSaveButton isHidden:NO withSelector:@selector(userDidSaveRecord:)];
+    }else{
+        NSLog(@"Hiding save");
+        [self showHideButton:recordSaveButton isHidden:YES withSelector:@selector(userDidSaveRecord:)];
+    }
+}
+
+- (void)checkIfRecordingNameReady
+{
+    NSString * nameString = recordingNameField.text;
+    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if([nameString isEqualToString:@"New Recording"] || [emptyName isEqualToString:@""]){
+        isRecordingNameReady = FALSE;
+    }else{
+        isRecordingNameReady = TRUE;
+    }
+    
+    [self checkIfRecordSaveReady];
+}
+
+
+-(void)userDidStartRecord
+{
+    
+    // Start record
+    [customSoundRecorder startRecord];
+    [recordRecordButton setTitle:@"STOP" forState:UIControlStateNormal];
+    recordState = 1;
+    
+    // Schedule end of session
+    recordTimer = [NSTimer scheduledTimerWithTimeInterval:MAX_RECORD_SECONDS target:self selector:@selector(userDidEndRecord) userInfo:nil repeats:NO];
+    
+    // Reset the progress
+    [self resetProgressBar];
+    
+    // Draw progress bar
+    progressBarTimer = [NSTimer scheduledTimerWithTimeInterval:RECORD_DRAW_INTERVAL target:self selector:@selector(advanceProgressBar) userInfo:nil repeats:YES];
+    
+}
+
+-(void)userDidTapRecord:(id)sender
+{
+    switch(recordState)
+    {
+        case 0: // off -> record
+            [self userDidStartRecord];
+            break;
+            
+        case 1: // recording -> recorded
+            [self userDidEndRecord];
+            break;
+            
+        case 2: // recorded -> playback
+            [self userDidStartPlayback];
+            break;
+    }
+}
+
+-(void)userDidSaveRecord:(id)sender
+{
+    NSLog(@"User did save record");
+    NSString * filename = recordingNameField.text;
+    
+    // Rename the file and save in Documents/Samples/ subdirectory
+    [customSoundRecorder renameRecordingToFilename:filename];
+    
+    // Add to customSampleList.pList
+    [self updateCustomSampleListWithSample:filename];
+    
+    // Go back
+    [self userDidBack:sender];
+}
+
+#pragma mark - Playback
+
+-(void)playbackDidEnd
+{
+    [playBarTimer invalidate];
+    playBarTimer = nil;
+}
+
+-(void)userDidStartPlayback
+{
+    [self resetPlayBar];
+    
+    // Call sound playback
+    [customSoundRecorder startPlayback];
+    
+    // Reset timer
+    [playBarTimer invalidate];
+    playBarTimer = nil;
+    
+    // Draw play bar
+    playBarTimer = [NSTimer scheduledTimerWithTimeInterval:RECORD_DRAW_INTERVAL target:self selector:@selector(advancePlayBar) userInfo:nil repeats:YES];
+}
+
+-(void)resetPlayBar
+{
+    CGRect newFrame = CGRectMake(0,0,0,playBar.frame.size.height);
+    
+    playBar.frame = newFrame;
+    
+    playBarPercent = 0;
+}
+
+-(void)advancePlayBar
+{
+    playBarPercent += RECORD_DRAW_INTERVAL/MAX_RECORD_SECONDS;
+    
+    [self movePlayBarToPercent:playBarPercent];
+}
+
+-(void)movePlayBarToPercent:(double)percent
+{
+    CGRect newFrame = CGRectMake(progressBarContainer.frame.size.width*percent,0,10,progressBar.frame.size.height);
+    
+    playBar.frame = newFrame;
+}
+
+#pragma mark - Progress Bar
+
+-(void)resetProgressBar
+{
+    CGRect newFrame = CGRectMake(0,0,0,progressBar.frame.size.height);
+    
+    progressBar.frame = newFrame;
+    
+    progressBarPercent = 0;
+    
+}
+
+-(void)advanceProgressBar
+{
+    progressBarPercent += RECORD_DRAW_INTERVAL/MAX_RECORD_SECONDS;
+    
+    [self fillProgressBarToPercent:progressBarPercent];
+}
+
+-(void)fillProgressBarToPercent:(double)percent
+{
+    CGRect newFrame = CGRectMake(0, 0, progressBarContainer.frame.size.width*percent, progressBar.frame.size.height);
+    
+    progressBar.frame = newFrame;
+}
+
+#pragma mark - Table View Protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -452,8 +748,10 @@
     // join sample and string
     if(selectedSampleCell && selectedStringCell){
         
+        BOOL useCustomPath = (indexPath.section == 0 && customSampleList != nil) ? TRUE : FALSE;
+        
         // pass filename
-        [selectedStringCell updateFilename:selectedSampleCell.textLabel.text];
+        [selectedStringCell updateFilename:selectedSampleCell.textLabel.text isCustom:useCustomPath];
         
         // turn off sample to avoid reselecting
         [self styleSampleCell:nil turnOff:selectedSampleCell];
@@ -471,22 +769,27 @@
         
         CustomStringCell * cell = (CustomStringCell *)[stringTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         
-        [stringSet addObject:cell.sampleFilename];
+        if(cell.sampleFilename != nil){
+            [stringSet addObject:cell.sampleFilename];
+        }else{
+            [stringSet addObject:@""];
+        }
     }
 }
 
 - (void)loadCellsFromStrings
 {
-    
     [stringTable reloadData];
     
     for(int i=0; i < GTAR_NUM_STRINGS; i++){
         
         CustomStringCell * cell = (CustomStringCell *)[stringTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         
-        NSLog(@"Trying to update string %@ for cell %@",stringSet[GTAR_NUM_STRINGS-i-1],cell);
-       [cell updateFilename:stringSet[GTAR_NUM_STRINGS-i-1]];
+        //NSLog(@"Trying to update string %@ for cell %@",stringSet[GTAR_NUM_STRINGS-i-1],cell);
         
+        if(![stringSet[GTAR_NUM_STRINGS-i-1] isEqualToString:@""]){
+           [cell updateFilename:stringSet[GTAR_NUM_STRINGS-i-1] isCustom:FALSE];
+        }
     }
     
     [self checkIfAllStringsReady];
@@ -549,7 +852,8 @@
         selectedSampleCell = cell;
         
         NSLog(@"PLAYING FILE ... %@.mp3",cell.textLabel.text);
-        [self playAudioForFile:cell.textLabel.text];
+        BOOL isCustom = (indexPath.section == 0 && customSampleList != nil) ? TRUE : FALSE;
+        [self playAudioForFile:cell.textLabel.text withCustomPath:isCustom];
         
         return YES;
     }
@@ -608,7 +912,15 @@
 - (void)retrieveSampleList
 {
     
+    // Init
+    sampleList = [[NSMutableArray alloc] init];
+    customSampleList = [[NSMutableArray alloc] init];
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"sampleList" ofType:@"plist"];
+    
+    // Check for local custom sample list
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    customSampleListPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"customSampleList.plist"];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -620,7 +932,71 @@
     
     NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
-    sampleList = [plistDictionary objectForKey:@"Samples"];
+    // Append a second local custom sounds pList
+    if ([fileManager fileExistsAtPath:customSampleListPath]) {
+        NSLog(@"The custom sample plist exists");
+        NSMutableDictionary * customDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:customSampleListPath];
+        [plistDictionary addEntriesFromDictionary:customDictionary];
+        
+        [customSampleList addObjectsFromArray:[customDictionary objectForKey:@"Samples"]];
+        
+        // First section of the sampleList is the customSampleList
+        sampleList = customSampleList;
+        [sampleList addObjectsFromArray:[plistDictionary objectForKey:@"Samples"]];
+        
+        
+    } else {
+        NSLog(@"The custom sample plist does not exist");
+        
+        sampleList = [plistDictionary objectForKey:@"Samples"];
+        
+        customSampleList = nil;
+        
+    }
+    
+}
+
+- (void)updateCustomSampleListWithSample:(NSString *)filename
+{
+    
+    NSLog(@"Adding %@ to custom sample list",filename);
+    
+    // Init the custom sample list pList
+    if(customSampleList == nil){
+        
+        NSArray * keys = [[NSArray alloc] initWithObjects:@"Sampleset",@"Section",nil];
+        NSArray * objects = [[NSArray alloc] initWithObjects:[[NSMutableArray alloc] initWithObjects:filename,nil],@"Custom",nil];
+        
+        NSMutableDictionary * sampleDictionary = [[NSMutableDictionary alloc] initWithObjects:objects forKeys:keys];
+        customSampleList = [[NSMutableArray alloc] initWithObjects:sampleDictionary, nil];
+    
+    }else{
+        [[customSampleList[0] objectForKey:@"Sampleset"] addObject:filename];
+    }
+    
+    // First section of the sampleList is the customSampleList
+    NSArray * tempSampleList = sampleList;
+    sampleList = customSampleList;
+    [sampleList addObjectsFromArray:tempSampleList];
+
+    [self saveCustomSampleList];
+}
+
+- (void)saveCustomSampleList
+{
+    NSMutableDictionary * wrapperDict = [[NSMutableDictionary alloc] init];
+    [wrapperDict setValue:customSampleList forKey:@"Samples"];
+    
+    NSLog(@"Writing custom sample list to path %@",customSampleListPath);
+    
+    BOOL success = [wrapperDict writeToFile:customSampleListPath atomically:YES];
+    
+    if(success){
+        NSLog(@"Succeeded");
+    }else{
+        NSLog(@"Failed");
+    }
+    
 }
 
 

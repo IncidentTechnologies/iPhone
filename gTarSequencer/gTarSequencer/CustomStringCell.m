@@ -48,9 +48,11 @@
     [self updateSelectedUI];
 }
 
-- (void)updateFilename:(NSString *)newFilename
+- (void)updateFilename:(NSString *)newFilename isCustom:(BOOL)isCustom
 {
     sampleFilename = newFilename;
+    
+    useCustomPath = isCustom;
     
     [stringLabel setText:newFilename];
     
@@ -111,7 +113,20 @@
 // TODO: share this with the audio on Custom Instrument Selector
 - (void)playAudioForSampleFile
 {
-    NSString * path = [[NSBundle mainBundle] pathForResource:sampleFilename ofType:@"mp3"];
+    
+    NSString * path;
+    
+    if(useCustomPath){
+        
+        // different filetype and location
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Samples/" stringByAppendingString:[sampleFilename stringByAppendingString:@".m4a"]]];
+        
+    }else{
+        
+        path = [[NSBundle mainBundle] pathForResource:sampleFilename ofType:@"mp3"];
+    }
+    
     NSError * error = nil;
     NSURL * url = [NSURL fileURLWithPath:path];
     

@@ -22,6 +22,15 @@
 				<string>Silence</string>
 				<string>Silence</string>
 			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -40,6 +49,15 @@
 				<string>Piano 4</string>
 				<string>Piano 5</string>
 				<string>Piano 6</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
 			</array>
 		</dict>
 		<dict>
@@ -60,6 +78,15 @@
 				<string>Violin 5</string>
 				<string>Violin 6</string>
 			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -78,6 +105,15 @@
 				<string>Percussion 4</string>
 				<string>Percussion 5</string>
 				<string>Percussion 6</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
 			</array>
 		</dict>
 		<dict>
@@ -98,6 +134,15 @@
 				<string>Trombone 5</string>
 				<string>Trombone 6</string>
 			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -116,6 +161,15 @@
 				<string>Vibraphone 4</string>
 				<string>Vibraphone 5</string>
 				<string>Vibraphone 6</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
 			</array>
 		</dict>
 		<dict>
@@ -136,6 +190,15 @@
 				<string>Chiptune 5</string>
 				<string>Chiptune 6</string>
 			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -155,6 +218,15 @@
 				<string>WubWub 5</string>
 				<string>WubWub 6</string>
 			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -173,6 +245,15 @@
 				<string>Bacon 4</string>
 				<string>Bacon 5</string>
 				<string>Bacon 6</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
 			</array>
 		</dict>
 	</array>

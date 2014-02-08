@@ -138,6 +138,7 @@
 		58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AE7186CD5EF003638EF /* RadialDisplay.m */; };
 		58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AEA186CD6AF003638EF /* ScrollingSelector.m */; };
 		585916FE18774791002C21B9 /* MeasureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 585916FD18774791002C21B9 /* MeasureView.m */; };
+		587A91A818A5837300CFB154 /* CustomSoundRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 587A91A718A5837300CFB154 /* CustomSoundRecorder.m */; };
 		587B6EC41885E9290071BE15 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 587B6EBE1885E9280071BE15 /* libTestFlight.a */; };
 		587B6EC51885E9290071BE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 587B6EBF1885E9280071BE15 /* README.md */; };
 		587B6EC61885E9290071BE15 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 587B6EC01885E9290071BE15 /* release_notes.md */; };
@@ -281,6 +282,7 @@
 		58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */; };
 		58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */; };
 		58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */; };
+		58F2900718A5626C00552A24 /* CustomInstrumentRecorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F2900618A5626B00552A24 /* CustomInstrumentRecorder.xib */; };
 		58F4B94A18983BB70071609B /* SaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F4B94918983BB70071609B /* SaveView.xib */; };
 		58F4B94E18983ED90071609B /* LoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F4B94D18983ED90071609B /* LoadView.xib */; };
 		58F4B951189849BA0071609B /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F4B950189849BA0071609B /* OptionsViewController.m */; };
@@ -442,6 +444,8 @@
 		58547AEA186CD6AF003638EF /* ScrollingSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingSelector.m; sourceTree = "<group>"; };
 		585916FC18774790002C21B9 /* MeasureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureView.h; sourceTree = "<group>"; };
 		585916FD18774791002C21B9 /* MeasureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureView.m; sourceTree = "<group>"; };
+		587A91A618A5837300CFB154 /* CustomSoundRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSoundRecorder.h; sourceTree = "<group>"; };
+		587A91A718A5837300CFB154 /* CustomSoundRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSoundRecorder.m; sourceTree = "<group>"; };
 		587B6EBA1885E6D80071BE15 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		587B6EBE1885E9280071BE15 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		587B6EBF1885E9280071BE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -605,6 +609,7 @@
 		58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		58F2900618A5626B00552A24 /* CustomInstrumentRecorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInstrumentRecorder.xib; sourceTree = "<group>"; };
 		58F4B94918983BB70071609B /* SaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveView.xib; sourceTree = "<group>"; };
 		58F4B94D18983ED90071609B /* LoadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadView.xib; sourceTree = "<group>"; };
 		58F4B94F189849B90071609B /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
@@ -652,8 +657,10 @@
 			children = (
 				5805D048188DAF4C000832A9 /* CustomInstrumentSelector.xib */,
 				58BBFD1C1891BEA400E41CD2 /* CustomInstrumentNamer.xib */,
+				58F2900618A5626B00552A24 /* CustomInstrumentRecorder.xib */,
 				58241D79188DC46C00498DB5 /* CustomInstrumentSelector.h */,
 				58241D7A188DC46C00498DB5 /* CustomInstrumentSelector.m */,
+				587A91A918A5837900CFB154 /* CustomSoundRecorder */,
 				581C31ED188F254E00D7AD79 /* CustomStringCell */,
 			);
 			name = CustomInstrumentSelector;
@@ -908,6 +915,15 @@
 				583917941877995D006E3DC3 /* ScrollingSelector.xib */,
 			);
 			name = ScrollingSelector;
+			sourceTree = "<group>";
+		};
+		587A91A918A5837900CFB154 /* CustomSoundRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				587A91A618A5837300CFB154 /* CustomSoundRecorder.h */,
+				587A91A718A5837300CFB154 /* CustomSoundRecorder.m */,
+			);
+			name = CustomSoundRecorder;
 			sourceTree = "<group>";
 		};
 		587B6EBD1885E9280071BE15 /* TestFlightSDK2.1.3 */ = {
@@ -1344,6 +1360,7 @@
 				580A52091864DFF50077240B /* Icon_WubWub.png in Resources */,
 				587C9F9C1888C0E7001F57C7 /* Percussion 6.mp3 in Resources */,
 				5811AB2F187B88C800FC0BD2 /* Percussion 79.mp3 in Resources */,
+				58F2900718A5626C00552A24 /* CustomInstrumentRecorder.xib in Resources */,
 				5811AB38187B88C800FC0BD2 /* Percussion 87.mp3 in Resources */,
 				587C9F811888C0E7001F57C7 /* Chiptune 3.mp3 in Resources */,
 				5811AAF7187B88C800FC0BD2 /* Percussion 28.mp3 in Resources */,
@@ -1586,6 +1603,7 @@
 				58B4D3C9186E1EC80035D9E5 /* Instrument.m in Sources */,
 				58B4D3D3186E1F7F0035D9E5 /* Measure.m in Sources */,
 				58CA4E6818A174310026D83C /* VolumeButton.m in Sources */,
+				587A91A818A5837300CFB154 /* CustomSoundRecorder.m in Sources */,
 				5894D61A186505BD00849C71 /* SeqSetViewController.m in Sources */,
 				58547AE4186CD55C003638EF /* RadialButton.m in Sources */,
 				58F4B951189849BA0071609B /* OptionsViewController.m in Sources */,

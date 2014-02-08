@@ -13,10 +13,11 @@
 @interface CustomStringCell : UITableViewCell
 {
     BOOL cellSelected;
+    BOOL useCustomPath;
 }
 
 - (void)notifySelected:(BOOL)isSelected;
-- (void)updateFilename:(NSString *)newFilename;
+- (void)updateFilename:(NSString *)newFilename isCustom:(BOOL)isCustom;
 - (BOOL)isSet;
 
 @property (retain) AVAudioPlayer * audio;

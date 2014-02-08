@@ -183,6 +183,13 @@
     // Reset playband
     [self resetPlayband];
     
+    // Clear everything
+    for(int i = 0; i < NUM_PATTERNS; i++){
+        for(int j = 0; j < NUM_MEASURES; j++){
+            [self clearMeasure:j forPattern:i];
+        }
+    }
+    
     // Measure counts
     for(int i = 0; i < NUM_PATTERNS; i++){
         Pattern * p = [inst.patterns objectAtIndex:i];
@@ -190,8 +197,8 @@
     }
     
     // Update active pattern and active measure
-    if(activePattern < 0) activePattern = inst.selectedPatternIndex;
-    if(activeMeasure < 0) activeMeasure = inst.selectedPattern.selectedMeasureIndex;
+    activePattern = inst.selectedPatternIndex;
+    activeMeasure = inst.selectedPattern.selectedMeasureIndex;
     [self changePatternToPattern:inst.selectedPatternIndex thenChangeActiveMeasure:inst.selectedPattern.selectedMeasureIndex];
     
     // Set pattern button
