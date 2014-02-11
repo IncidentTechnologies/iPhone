@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4E-xp-VFt">
-                                <rect key="frame" x="8" y="13" width="62" height="62"/>
+                                <rect key="frame" x="24" y="13" width="62" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
@@ -28,7 +28,7 @@
                                 <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ep3-lN-cJv">
-                                <rect key="frame" x="9" y="14" width="60" height="60"/>
+                                <rect key="frame" x="25" y="14" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.054901960780000002" green="0.76078431369999999" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -44,7 +44,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9D-Cz-rnz">
-                                <rect key="frame" x="19" y="24" width="40" height="40"/>
+                                <rect key="frame" x="35" y="24" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -52,21 +52,11 @@
                                     <constraint firstAttribute="width" constant="40" id="uoR-gA-dME"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PATTERNS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSt-rs-ly6">
-                                <rect key="frame" x="78" y="14" width="115" height="23"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLc-ba-MQi">
+                                <rect key="frame" x="179" y="0.0" width="80" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLc-ba-MQi">
-                                <rect key="frame" x="297" y="13" width="24" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="1q2-pw-Rju"/>
-                                    <constraint firstAttribute="height" constant="24" id="aB9-gd-xvk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <state key="normal" title="B">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,14 +65,11 @@
                                     <action selector="userDidSelectNewPattern:" destination="XoE-pc-IxT" eventType="touchUpInside" id="nuv-IM-ENq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niX-nk-D2L">
-                                <rect key="frame" x="266" y="13" width="24" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niX-nk-D2L">
+                                <rect key="frame" x="97" y="0.0" width="80" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="4gs-FD-VbT"/>
-                                    <constraint firstAttribute="height" constant="24" id="7oT-Z3-0ej"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <state key="normal" title="A">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -91,14 +78,11 @@
                                     <action selector="userDidSelectNewPattern:" destination="XoE-pc-IxT" eventType="touchUpInside" id="Coo-W8-Awi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otr-8W-6Qk">
-                                <rect key="frame" x="328" y="13" width="24" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otr-8W-6Qk">
+                                <rect key="frame" x="261" y="0.0" width="80" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="ZQw-C4-pW8"/>
-                                    <constraint firstAttribute="width" constant="24" id="lN8-gD-szK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <state key="normal" title="C">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -107,14 +91,11 @@
                                     <action selector="userDidSelectNewPattern:" destination="XoE-pc-IxT" eventType="touchUpInside" id="4SP-yN-5EJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGs-SV-Vaz">
-                                <rect key="frame" x="359" y="13" width="24" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGs-SV-Vaz">
+                                <rect key="frame" x="343" y="0.0" width="80" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="8uJ-oL-M4Z"/>
-                                    <constraint firstAttribute="width" constant="24" id="wYH-tx-F5i"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="backgroundColor" red="0.090196078431372548" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <state key="normal" title="D">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -123,156 +104,73 @@
                                     <action selector="userDidSelectNewPattern:" destination="XoE-pc-IxT" eventType="touchUpInside" id="TYR-72-9MS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTx-aJ-Y2K">
-                                <rect key="frame" x="390" y="13" width="50" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTx-aJ-Y2K">
+                                <rect key="frame" x="427" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="6SY-Yk-WwO"/>
-                                    <constraint firstAttribute="width" constant="50" id="WMY-CY-Sfh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <state key="normal" title="OFF">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                <state key="normal" title="O">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="userDidSelectNewPattern:" destination="XoE-pc-IxT" eventType="touchUpInside" id="6um-tn-HCT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNY-wS-oS3">
-                                <rect key="frame" x="448" y="44" width="23" height="23"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GmP-5y-0kS">
+                                <rect key="frame" x="116" y="57" width="84" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAV-r5-1Xe">
+                                <rect key="frame" x="198" y="57" width="84" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ja-1j-DEM">
+                                <rect key="frame" x="280" y="57" width="84" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="otz-FL-KqO">
+                                <rect key="frame" x="362" y="57" width="84" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9s-iO-PrP" customClass="MeasureView">
+                                <rect key="frame" x="118" y="59" width="80" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="rgX-mP-V8R"/>
-                                    <constraint firstAttribute="width" constant="23" id="xdt-N4-Xmz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
-                                <state key="normal" title="+">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="addMeasures:" destination="XoE-pc-IxT" eventType="touchUpInside" id="06j-t0-Km0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IdJ-E1-0K8">
-                                <rect key="frame" x="80" y="44" width="23" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="23" id="A7v-iY-iXJ"/>
-                                    <constraint firstAttribute="height" constant="23" id="Fm2-9x-JGq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
-                                <state key="normal" title="-">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="removeMeasures:" destination="XoE-pc-IxT" eventType="touchUpInside" id="s8P-b1-QaL"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z0w-hP-cLu">
-                                <rect key="frame" x="110" y="41" width="330" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLf-MS-Nta">
-                                        <rect key="frame" x="164" y="1" width="2" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.031372549019607843" green="0.52941176470588236" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="f3E-UH-o1h"/>
-                                            <constraint firstAttribute="width" constant="2" id="saC-SG-ZVi"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j6N-al-CBc">
-                                        <rect key="frame" x="82" y="1" width="1" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.039215686274509803" green="0.60784313725490191" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="1" id="BsH-y6-API"/>
-                                            <constraint firstAttribute="height" constant="27" id="aIl-Z9-Nxg"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZTb-EQ-9Zf">
-                                        <rect key="frame" x="247" y="1" width="1" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.039215686274509803" green="0.60784313725490191" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="9l3-W5-mPk"/>
-                                            <constraint firstAttribute="width" constant="1" id="sMn-tj-X5L"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9s-iO-PrP" customClass="MeasureView">
-                                        <rect key="frame" x="1" y="1" width="81" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="3JC-fN-dkY"/>
-                                            <constraint firstAttribute="width" constant="81" id="HE4-0Z-a78"/>
-                                        </constraints>
-                                        <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                                        <connections>
-                                            <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="6Sq-bC-1Pa"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60L-0Z-LYp" customClass="MeasureView">
-                                        <rect key="frame" x="83" y="1" width="81" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="81" id="Ql0-b0-hPg"/>
-                                            <constraint firstAttribute="height" constant="27" id="Qsu-5C-LXi"/>
-                                        </constraints>
-                                        <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                                        <connections>
-                                            <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="aoU-zs-q3h"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccX-7c-S4S" customClass="MeasureView">
-                                        <rect key="frame" x="166" y="1" width="81" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="81" id="TfG-Oe-UcY"/>
-                                            <constraint firstAttribute="height" constant="27" id="XuC-z6-iie"/>
-                                        </constraints>
-                                        <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                                        <connections>
-                                            <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="F7V-rc-vfX"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3j-xA-OFc" customClass="MeasureView">
-                                        <rect key="frame" x="248" y="1" width="81" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="IiZ-m3-Gl5"/>
-                                            <constraint firstAttribute="width" constant="81" id="zmn-RU-uL0"/>
-                                        </constraints>
-                                        <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                                        <connections>
-                                            <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="JYb-f4-oai"/>
-                                        </connections>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.050980392156862744" green="0.72156862745098038" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ZTb-EQ-9Zf" secondAttribute="trailing" constant="82" id="4fb-hn-6cm"/>
-                                    <constraint firstAttribute="trailing" secondItem="k3j-xA-OFc" secondAttribute="trailing" constant="1" id="7ns-3v-WO5"/>
-                                    <constraint firstItem="60L-0Z-LYp" firstAttribute="top" secondItem="z0w-hP-cLu" secondAttribute="top" constant="1" id="8Co-oN-nEg"/>
-                                    <constraint firstItem="ccX-7c-S4S" firstAttribute="top" secondItem="z0w-hP-cLu" secondAttribute="top" constant="1" id="9pF-mG-eq4"/>
-                                    <constraint firstAttribute="trailing" secondItem="ccX-7c-S4S" secondAttribute="trailing" constant="83" id="Kw7-Z0-qtn"/>
-                                    <constraint firstAttribute="trailing" secondItem="t9s-iO-PrP" secondAttribute="trailing" constant="248" id="Luw-JL-RQm"/>
-                                    <constraint firstAttribute="trailing" secondItem="iLf-MS-Nta" secondAttribute="trailing" constant="164" id="N5R-6d-8G2"/>
-                                    <constraint firstItem="j6N-al-CBc" firstAttribute="top" secondItem="z0w-hP-cLu" secondAttribute="top" constant="1" id="R2K-N5-osn"/>
-                                    <constraint firstItem="ZTb-EQ-9Zf" firstAttribute="top" secondItem="z0w-hP-cLu" secondAttribute="top" constant="1" id="VwH-n9-gbR"/>
-                                    <constraint firstAttribute="trailing" secondItem="j6N-al-CBc" secondAttribute="trailing" constant="247" id="bqE-XV-Prx"/>
-                                    <constraint firstItem="iLf-MS-Nta" firstAttribute="top" secondItem="z0w-hP-cLu" secondAttribute="top" constant="1" id="faf-Hj-VQJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="60L-0Z-LYp" secondAttribute="trailing" constant="166" id="fhu-z0-4wJ"/>
-                                    <constraint firstItem="k3j-xA-OFc" firstAttribute="top" secondItem="z0w-hP-cLu" secondAttribute="top" constant="1" id="nUJ-3v-lvJ"/>
-                                    <constraint firstItem="t9s-iO-PrP" firstAttribute="top" secondItem="z0w-hP-cLu" secondAttribute="top" constant="1" id="yCw-h4-z62"/>
-                                </constraints>
+                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                                 <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                                <connections>
+                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="6Sq-bC-1Pa"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60L-0Z-LYp" customClass="MeasureView">
+                                <rect key="frame" x="200" y="59" width="80" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                                <connections>
+                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="aoU-zs-q3h"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccX-7c-S4S" customClass="MeasureView">
+                                <rect key="frame" x="282" y="59" width="80" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                                <connections>
+                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="F7V-rc-vfX"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3j-xA-OFc" customClass="MeasureView">
+                                <rect key="frame" x="364" y="59" width="80" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                                <connections>
+                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="JYb-f4-oai"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4M-Sy-HyH">
                                 <rect key="frame" x="0.0" y="88" width="600" height="1"/>
@@ -283,6 +181,32 @@
                                 </constraints>
                                 <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l98-2d-At3">
+                                <rect key="frame" x="446" y="57" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.72156862749999995" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addMeasures:" destination="XoE-pc-IxT" eventType="touchUpInside" id="Yfq-im-1jh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4l-J7-CiJ">
+                                <rect key="frame" x="94" y="57" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="-">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.72156862749999995" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeMeasures:" destination="XoE-pc-IxT" eventType="touchUpInside" id="gdi-S0-62z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -291,22 +215,25 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
-                <outlet property="addMeasureButton" destination="TNY-wS-oS3" id="ujl-Ji-dqu"/>
+                <outlet property="addMeasuresButton" destination="l98-2d-At3" id="IdE-3f-wfG"/>
                 <outlet property="borderContainer" destination="g4M-Sy-HyH" id="9AB-k1-pkj"/>
                 <outlet property="instrumentIconBorder" destination="Ep3-lN-cJv" id="Rc7-Qc-hrJ"/>
                 <outlet property="instrumentIconView" destination="h9D-Cz-rnz" id="RgR-w3-1go"/>
                 <outlet property="measureFour" destination="k3j-xA-OFc" id="esg-sD-zQN"/>
+                <outlet property="measureFourBorder" destination="otz-FL-KqO" id="iSJ-ZA-e0U"/>
                 <outlet property="measureOne" destination="t9s-iO-PrP" id="xPo-w0-c0Z"/>
+                <outlet property="measureOneBorder" destination="GmP-5y-0kS" id="neW-fh-5Mf"/>
                 <outlet property="measureThree" destination="ccX-7c-S4S" id="TUq-BF-naf"/>
+                <outlet property="measureThreeBorder" destination="9Ja-1j-DEM" id="EdS-Wz-0Og"/>
                 <outlet property="measureTwo" destination="60L-0Z-LYp" id="cKf-Cc-0vQ"/>
-                <outlet property="minimapBorder" destination="z0w-hP-cLu" id="EDC-Jw-8oe"/>
+                <outlet property="measureTwoBorder" destination="XAV-r5-1Xe" id="2lT-nP-SDY"/>
                 <outlet property="offButton" destination="KTx-aJ-Y2K" id="vsu-W2-n5g"/>
                 <outlet property="patternA" destination="niX-nk-D2L" id="vo9-lU-uZT"/>
                 <outlet property="patternB" destination="lLc-ba-MQi" id="diA-f6-cJ7"/>
                 <outlet property="patternC" destination="Otr-8W-6Qk" id="cBm-my-ffq"/>
                 <outlet property="patternContainer" destination="Lgs-sN-tUi" id="PaX-rh-0Iu"/>
                 <outlet property="patternD" destination="IGs-SV-Vaz" id="bJi-2I-fuz"/>
-                <outlet property="removeMeasureButton" destination="IdJ-E1-0K8" id="Cnt-OU-Ko5"/>
+                <outlet property="removeMeasuresButton" destination="u4l-J7-CiJ" id="GC4-MR-bpE"/>
             </connections>
         </tableViewCell>
     </objects>

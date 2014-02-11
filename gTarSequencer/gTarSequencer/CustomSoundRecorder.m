@@ -20,7 +20,6 @@
         
         defaultFilename = @"CustomSoundPlaceholder.m4a";
         
-        // TODO: try other path setups
         NSArray * pathComponents = [NSArray arrayWithObjects:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject], defaultFilename, nil];
         
         NSURL * outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];

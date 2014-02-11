@@ -34,6 +34,9 @@
 - (void)sharedInit {
     measure = nil;
     
+    defaultBackgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+    highlightBackgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.6];
+    
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [self addSubview:imageView];
     
@@ -42,7 +45,7 @@
     CGRect playbandFrame = CGRectMake(10, 0, noteFrameWidth, self.frame.size.height);
     
     playbandView = [[UIView alloc] initWithFrame:playbandFrame];
-    [playbandView setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
+    [playbandView setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8]];
     [playbandView setHidden:YES];
     
     [self addSubview:playbandView];
@@ -112,17 +115,17 @@
 
 - (void)selectMeasure {
     
-    self.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.4];
+    self.backgroundColor = highlightBackgroundColor;
 
 }
 
 - (void)deselectMeasure {
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = defaultBackgroundColor;
 }
 
-- (void)drawMeasure:(BOOL)withColor
+- (void)drawMeasure:(BOOL)isBlank
 {
-    if (withColor) [playbandView setHidden:YES];
+    if (isBlank) [playbandView setHidden:YES];
     
     CGSize size = CGSizeMake(self.frame.size.width, self.frame.size.height);
     
@@ -130,16 +133,20 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    // fill whole thing with background color:
-    int borderWidth = 2;
+    
+    int borderWidth = 0;
     CGRect wholeFrame = CGRectMake(borderWidth, borderWidth, self.frame.size.width-(2*borderWidth), self.frame.size.height-(2*borderWidth));
     CGContextAddRect(context, wholeFrame);
     
-    if (withColor)
+    // fill whole thing with background color:
+    if (isBlank){
+    
         CGContextSetFillColorWithColor(context, [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1].CGColor);
-    else
+        
+    }else{
+        
         CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
-
+    }
     
     CGContextFillPath(context);
     
@@ -150,12 +157,13 @@
 }
 
 - (void)createImage {
+    
     CGSize size = CGSizeMake(self.frame.size.width, self.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size,NO,0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    double lineWidth = 0.1;
+    double lineWidth = 0.2;
     
     CGFloat noteFrameHeight = self.frame.size.height / STRINGS_ON_GTAR;
     CGRect noteFrame = CGRectMake(0, 0, noteFrameWidth, noteFrameHeight);
@@ -178,7 +186,7 @@
             CGContextStrokePath(context);
             
             if ([measure isNoteOnAtString:[self invertString:s] andFret:f]){
-                CGContextSetFillColorWithColor(context, [UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]].CGColor);  // Get color for that string and fill:
+                CGContextSetFillColorWithColor(context, [UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]].CGColor);  // Get color for that string and fill
             }else{
                 CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
             }

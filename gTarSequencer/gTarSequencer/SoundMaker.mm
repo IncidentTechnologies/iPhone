@@ -24,12 +24,12 @@
     return self;
 }
 
-- (id)initWithStringSet:(NSArray *)stringSet
+- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths
 {
     self = [super init];
     if(self){
         
-        audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:@"Silence" AndStringSet:stringSet];
+        audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:@"Silence" AndStringSet:stringSet AndStringPaths:stringPaths];
         //[audioController initializeAUGraph];
         [audioController startAUGraph];
     }

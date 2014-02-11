@@ -15,7 +15,7 @@
 @protocol CustomInstrumentSelectorDelegate <NSObject>
 
 - (void)closeCustomInstrumentSelectorAndScroll:(BOOL)scroll;
-- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName;
+- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths;
 
 @end
 
@@ -26,6 +26,7 @@
     NSMutableArray * sampleList;
     NSMutableArray * customSampleList;
     NSMutableArray * stringSet;
+    NSMutableArray * stringPaths;
     NSArray * colorList;
     NSString * customSampleListPath;
     

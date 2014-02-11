@@ -676,6 +676,7 @@
         patternN.layer.cornerRadius = 3.0;
         [patternN setTitleEdgeInsets:UIEdgeInsetsMake(2.0f,0.0f,0.0f,0.0f)];
     }
+
 }
 
 - (IBAction)userDidSelectNewPattern:(id)sender

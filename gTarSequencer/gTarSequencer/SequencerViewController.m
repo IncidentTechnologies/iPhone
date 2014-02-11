@@ -16,8 +16,8 @@
 #define YBASE 320
 
 #define TABLEHEIGHT 264
-#define NAVWIDTH 150
-#define NAVTAB 5
+#define NAVWIDTH 145
+#define NAVTAB 14
 #define SELECTORWIDTH 364
 #define SELECTORHEIGHT 276
 
@@ -28,7 +28,6 @@
 @synthesize instrumentViewController;
 @synthesize playControlViewController;
 @synthesize leftNavigator;
-@synthesize gTarConnectedBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -148,22 +147,6 @@
     [self.view addSubview:playControlViewController.view];
     
     //
-    // GTAR CONNECTED
-    //
-    
-    CGRect barFrame = CGRectMake(0,0,XBASE,43);
-    
-    gTarConnectedBar = [[UIButton alloc] initWithFrame:barFrame];
-    [gTarConnectedBar setTitle:@"gTar NOT CONNECTED" forState:UIControlStateNormal];
-    [gTarConnectedBar setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [gTarConnectedBar.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    
-    [gTarConnectedBar setBackgroundColor:[UIColor colorWithRed:194/255.0 green:46/255.0 blue:26/255.0 alpha:0.9]];
-    [self.view addSubview:gTarConnectedBar];
-    
-    [gTarConnectedBar addTarget:self action:@selector(gTarConnectedToggleBarOff) forControlEvents:UIControlEventTouchUpInside];
-    
-    //
     // LEFT NAVIGATOR
     //
     
@@ -176,6 +159,11 @@
     leftNavOpen = false;
     
     [self.view addSubview:leftNavigator.view];
+    
+    //
+    // GTAR CONNECTED
+    //
+    [leftNavigator changeConnectedButton:false];
     
     //
     // GESTURES
@@ -673,47 +661,13 @@
 
 - (void)gtarConnected:(BOOL)toConnect
 {
-    
     if(toConnect) NSLog(@"gTar connected");
     else NSLog(@"gTar disconnected");
     
     isConnected = toConnect;
     
-    [self updategTarConnectedBar];
+    [leftNavigator changeConnectedButton:isConnected];
 }
 
-- (void)updategTarConnectedBar
-{
-    if(TESTMODE) NSLog(@"Update connected image");
-    
-    if (isConnected){
-        [gTarConnectedBar setTitle:@"gTar CONNECTED" forState:UIControlStateNormal];
-        [gTarConnectedBar setBackgroundColor:[UIColor colorWithRed:40/255.0 green:194/255.0 blue:94/255.0 alpha:0.9]];
-    
-    }else{
-        [gTarConnectedBar setTitle:@"gTar NOT CONNECTED" forState:UIControlStateNormal];
-        [gTarConnectedBar setBackgroundColor:[UIColor colorWithRed:194/255.0 green:46/255.0 blue:26/255.0 alpha:0.9]];
-    }
-
-    [self gTarConnectedToggleBarOn];
-
-}
-
-- (void)gTarConnectedToggleBarOff
-{
-    CGRect hiddenFrame = CGRectMake(0,-1*gTarConnectedBar.frame.size.height,gTarConnectedBar.frame.size.width,gTarConnectedBar.frame.size.height);
-    [UIView animateWithDuration:0.5f animations:^(){
-        [gTarConnectedBar setFrame:hiddenFrame];
-    }];
-}
-
-- (void)gTarConnectedToggleBarOn
-{
-    
-    CGRect normalFrame = CGRectMake(0,0,gTarConnectedBar.frame.size.width,gTarConnectedBar.frame.size.height);
-    [UIView animateWithDuration:0.5f animations:^(){
-        [gTarConnectedBar setFrame:normalFrame];
-    }];
-}
 
 @end

@@ -14,6 +14,7 @@
 @synthesize stringBox;
 @synthesize defaultFontColor;
 @synthesize sampleFilename;
+@synthesize useCustomPath;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

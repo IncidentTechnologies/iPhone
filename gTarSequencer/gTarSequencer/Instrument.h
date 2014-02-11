@@ -50,6 +50,7 @@
 @property (retain, nonatomic) NSString * instrumentName;
 @property (retain, nonatomic) NSString * iconName;
 @property (retain, nonatomic) NSArray * stringSet;
+@property (retain, nonatomic) NSArray * stringPaths;
 @property (retain, nonatomic) NSMutableArray * patterns;
 
 @property (nonatomic) int selectedPatternIndex;

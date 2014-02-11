@@ -20,15 +20,18 @@
 @synthesize borderContainer;
 @synthesize patternToDisplay;
 @synthesize measureViews;
+@synthesize measureBorders;
 @synthesize isSelected;
-@synthesize addMeasureButton;
-@synthesize removeMeasureButton;
 @synthesize instrumentIcon;
 @synthesize instrumentName;
 @synthesize measureOne;
 @synthesize measureTwo;
 @synthesize measureThree;
 @synthesize measureFour;
+@synthesize measureOneBorder;
+@synthesize measureTwoBorder;
+@synthesize measureThreeBorder;
+@synthesize measureFourBorder;
 @synthesize patternA;
 @synthesize patternB;
 @synthesize patternC;
@@ -69,6 +72,7 @@
     isSelected = NO;
     
     measureViews = nil;
+    measureBorders = nil;
     patternButtons = nil;
     
     deleteMode = NO;
@@ -80,24 +84,10 @@
 
 - (void)layoutSubviews
 {
-    minimapBorder.layer.borderWidth = 1.0;
-    minimapBorder.layer.cornerRadius = 3.0;
-    minimapBorder.layer.borderColor = [UIColor colorWithRed:10/255.0 green:155/255.0 blue:191/255.0 alpha:1.0].CGColor;
+    //minimapBorder.layer.borderWidth = 1.0;
+    //minimapBorder.layer.cornerRadius = 3.0;
+    //minimapBorder.layer.borderColor = [UIColor colorWithRed:10/255.0 green:155/255.0 blue:191/255.0 alpha:1.0].CGColor;
 
-    addMeasureButton.layer.borderWidth = 1.5;
-    addMeasureButton.layer.cornerRadius = 3.0;
-    addMeasureButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    addMeasureButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    addMeasureButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
-    [addMeasureButton setTitleEdgeInsets:UIEdgeInsetsMake(-13.0f,3.5f,0.0f,0.0f)];
-    
-    removeMeasureButton.layer.borderWidth = 1.5;
-    removeMeasureButton.layer.cornerRadius = 3.0;
-    removeMeasureButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    removeMeasureButton.contentVerticalAlignment = UIControlContentHorizontalAlignmentLeft;
-    removeMeasureButton.contentHorizontalAlignment = UIControlContentVerticalAlignmentTop;
-    [removeMeasureButton setTitleEdgeInsets:UIEdgeInsetsMake(-13.0f,6.0f,0.0f,0.0f)];
-    
     [self initPatternButtonUI];
     
     
@@ -139,11 +129,15 @@
     {
         measureViews = [[NSMutableArray alloc] initWithObjects:measureOne, measureTwo, measureThree, measureFour, nil];
         
+        measureBorders = [[NSMutableArray alloc] initWithObjects:measureOneBorder, measureTwoBorder, measureThreeBorder, measureFourBorder, nil];
+        
         for (int i=0;i<[measureViews count];i++)
         {
             MeasureView * mv = [measureViews objectAtIndex:i];
             //mv.bounds = CGRectMake(-2, -2, mv.frame.size.width + 2, mv.frame.size.height + 4);
-            mv.backgroundColor = [UIColor clearColor];
+            //mv.backgroundColor = [UIColor clearColor];
+            
+            [[measureBorders objectAtIndex:i] setHidden:YES];
             
             [mv addTarget:self action:@selector(userDidSelectNewMeasure:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -173,16 +167,21 @@
 
 - (void)initPatternButtonUI
 {
+    // Pattern edge shapes
+    CAShapeLayer * layerA = [[CAShapeLayer alloc] init];
+    CAShapeLayer * layerD = [[CAShapeLayer alloc] init];
     
-    for (int i=0;i<[patternButtons count];i++)
-    {
-        UIButton * patternN = [patternButtons objectAtIndex:i];
-        patternN.layer.cornerRadius = 3.0;
-        [patternN setTitleEdgeInsets:UIEdgeInsetsMake(2.0f,0.0f,0.0f,0.0f)];
-    }
+    UIBezierPath * pathA = [UIBezierPath bezierPathWithRoundedRect:patternA.bounds byRoundingCorners:(UIRectCornerBottomLeft) cornerRadii:CGSizeMake(10.0,10.0)];
+    UIBezierPath * pathD = [UIBezierPath bezierPathWithRoundedRect:patternD.bounds byRoundingCorners:(UIRectCornerBottomRight) cornerRadii:CGSizeMake(10.0,10.0)];
     
-    // special case
-    [patternA setTitleEdgeInsets:UIEdgeInsetsMake(2.0f,2.0f,0.0f,0.0f)];
+    layerA.frame = patternA.bounds;
+    layerD.frame = patternD.bounds;
+    layerA.path = pathA.CGPath;
+    layerD.path = pathD.CGPath;
+    patternA.layer.mask = layerA;
+    patternD.layer.mask = layerD;
+    
+    
 }
 
 - (void)resetQueuedPatternButton
@@ -277,26 +276,37 @@
     UIColor * titleColor = nil;
     
     switch(stateindex){
-        case 0:
-            backgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+        case 0: // off
+            if(button == offButton){
+                backgroundColor = [UIColor clearColor];
+            }else{
+                backgroundColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1.0];
+            }
             titleColor = [UIColor whiteColor];
             break;
-        case 1:
+        case 1: // queued
             backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.6];
             titleColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
             break;
-        case 2:
-            backgroundColor = [UIColor whiteColor];
-            titleColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
-            break;
-        case 3:
+        case 2: // on
+            if(button == offButton){
+                titleColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1.0];
+            }else{
+                titleColor = [UIColor whiteColor];
+            }
             backgroundColor = [UIColor clearColor];
-            titleColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+            
+            break;
+        case 3: // queued blinking
+            backgroundColor = [UIColor clearColor];
+            titleColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8];
             break;
     }
     
     [button setBackgroundColor:backgroundColor];
     [button setTitleColor:titleColor forState:UIControlStateNormal];
+    
+    
 }
 
 #pragma mark Change Instrument
@@ -360,12 +370,13 @@
     
     for(int i = 0; i < MAX_MEASURES_IN_UI; i++){
         if(i < newCount){
+            [[measureBorders objectAtIndex:i] setHidden:NO];
             [[measureViews objectAtIndex:i] drawMeasure:FALSE];
         }else{
+            [[measureBorders objectAtIndex:i] setHidden:YES];
             [[measureViews objectAtIndex:i] drawMeasure:TRUE];
         }
     }
-    
 }
 
 - (void)selectPatternButton:(int)index
@@ -460,6 +471,7 @@
 
 - (IBAction)removeMeasures:(id)sender {
     NSLog(@"remove a measure");
+    
     [parent userDidRemoveMeasures:self];
 }
 

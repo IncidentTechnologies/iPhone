@@ -237,7 +237,7 @@
 {
     NSString * filename = nameField.text;
 
-    [delegate saveCustomInstrumentWithStrings:stringSet andName:filename];
+    [delegate saveCustomInstrumentWithStrings:stringSet andName:filename andStringPaths:stringPaths];
 }
 
 - (void)userDidCancel:(id)sender
@@ -764,6 +764,7 @@
 - (void)saveStringsFromCells
 {
     stringSet = [NSMutableArray array];
+    stringPaths = [NSMutableArray array];
     
     for(int i = GTAR_NUM_STRINGS-1; i >= 0; i--){
         
@@ -771,8 +772,17 @@
         
         if(cell.sampleFilename != nil){
             [stringSet addObject:cell.sampleFilename];
+            
+            // Determine which directory (and filetype) to use
+            if(cell.useCustomPath){
+                [stringPaths addObject:@"Custom"];
+            }else{
+                [stringPaths addObject:@"Default"];
+            }
+
         }else{
             [stringSet addObject:@""];
+            [stringPaths addObject:@""];
         }
     }
 }
@@ -788,7 +798,13 @@
         //NSLog(@"Trying to update string %@ for cell %@",stringSet[GTAR_NUM_STRINGS-i-1],cell);
         
         if(![stringSet[GTAR_NUM_STRINGS-i-1] isEqualToString:@""]){
-           [cell updateFilename:stringSet[GTAR_NUM_STRINGS-i-1] isCustom:FALSE];
+            
+            BOOL useCustomPath = FALSE;
+            if([stringPaths[GTAR_NUM_STRINGS-i-1] isEqualToString:@"Custom"]){
+                useCustomPath = TRUE;
+            }
+            
+           [cell updateFilename:stringSet[GTAR_NUM_STRINGS-i-1] isCustom:useCustomPath];
         }
     }
     

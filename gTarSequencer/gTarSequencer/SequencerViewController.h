@@ -66,7 +66,4 @@
 @property (retain, nonatomic) PlayControlViewController * playControlViewController;
 @property (retain, nonatomic) LeftNavigatorViewController * leftNavigator;
 
-@property (retain, nonatomic) UIButton * gTarConnectedBar;
-
-
 @end

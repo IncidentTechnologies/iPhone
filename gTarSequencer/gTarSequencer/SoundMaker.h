@@ -20,7 +20,7 @@
 }
 
 
-- (id)initWithStringSet:(NSArray *)stringSet;
+- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths;
 - (void)PluckStringFret:(int)str atFret:(int)fret withAmplitude:(double)amplitude;
 
 @end

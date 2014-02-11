@@ -13,7 +13,6 @@
 @interface CustomStringCell : UITableViewCell
 {
     BOOL cellSelected;
-    BOOL useCustomPath;
 }
 
 - (void)notifySelected:(BOOL)isSelected;
@@ -26,6 +25,6 @@
 @property (nonatomic) int index;
 @property (weak, nonatomic) IBOutlet UIButton * stringBox;
 @property (weak, nonatomic) IBOutlet UILabel * stringLabel;
-
+@property (nonatomic) BOOL useCustomPath;
 
 @end

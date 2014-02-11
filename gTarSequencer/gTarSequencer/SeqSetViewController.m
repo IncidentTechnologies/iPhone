@@ -182,13 +182,14 @@
 
 #pragma mark - Adding instruments
 
-- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet
+- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths
 {
     Instrument * newInstrument = [[Instrument alloc] init];
     newInstrument.instrument = index;
     newInstrument.instrumentName = instName;
     newInstrument.iconName = iconName;
     newInstrument.stringSet = stringSet;
+    newInstrument.stringPaths = stringPaths;
     [newInstrument performSelectorInBackground:@selector(initAudioWithInstrumentName:) withObject:instName];
     
     
@@ -300,7 +301,7 @@
         [cell setBackgroundColor:[UIColor clearColor]];
         [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
         
-        [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica Bold" size:25.0]];
+        [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:25.0]];
         
         [cell setMultipleTouchEnabled:NO];
         
@@ -451,8 +452,9 @@
         NSString * instName = [dict objectForKey:@"Name"];
         NSString * iconName = [dict objectForKey:@"IconName"];
         NSArray * stringSet = [dict objectForKey:@"Strings"];
+        NSArray * stringPaths = [dict objectForKey:@"String Paths"];
         
-        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet];
+        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet andStringPaths:stringPaths];
     }
 }
 
@@ -522,7 +524,7 @@
 }
 
 // save a new instrument
-- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName
+- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths
 {
     
     NSNumber * newIndex = [NSNumber numberWithInt:[masterInstrumentOptions count]];
@@ -533,6 +535,7 @@
     [dict setValue:newIndex forKey:@"Index"];
     [dict setValue:instName forKey:@"Name"];
     [dict setValue:stringSet forKey:@"Strings"];
+    [dict setValue:stringPaths forKey:@"String Paths"];
     
     [masterInstrumentOptions addObject:dict];
     [remainingInstrumentOptions addObject:dict];

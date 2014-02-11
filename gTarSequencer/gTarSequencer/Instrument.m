@@ -14,6 +14,7 @@
 @synthesize iconName;
 @synthesize instrument;
 @synthesize stringSet;
+@synthesize stringPaths;
 @synthesize selectedPattern;
 @synthesize selectedPatternIndex;
 @synthesize selectedPatternDidChange;
@@ -63,6 +64,8 @@
         
         stringSet = [aDecoder decodeObjectForKey:@"Strings"];
         
+        stringPaths = [aDecoder decodeObjectForKey:@"String Paths"];
+        
         selectedPatternDidChange = YES;
         
     }
@@ -71,7 +74,7 @@
 
 - (void)initAudioWithInstrumentName:(NSString *)instName
 {
-    audio = [[SoundMaker alloc] initWithStringSet:stringSet];
+    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths];
 }
 
 - (void)setSelected:(BOOL)yesno
@@ -190,6 +193,7 @@
     [aCoder encodeObject:iconName forKey:@"Icon Name"];
     [aCoder encodeBool:isSelected forKey:@"Is Selected"];
     [aCoder encodeObject:stringSet forKey:@"Strings"];
+    [aCoder encodeObject:stringPaths forKey:@"String Paths"];
     [aCoder encodeBool:isMuted forKey:@"Is Muted"];
 }
 

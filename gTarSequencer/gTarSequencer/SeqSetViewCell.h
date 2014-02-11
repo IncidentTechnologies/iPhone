@@ -52,6 +52,7 @@
 @property (nonatomic) BOOL isSelected;
 @property (weak, nonatomic) Pattern * patternToDisplay;
 @property (retain, nonatomic) NSMutableArray * measureViews;
+@property (retain, nonatomic) NSMutableArray * measureBorders;
 
 @property (weak, nonatomic) IBOutlet UIView * patternContainer;
 @property (weak, nonatomic) IBOutlet UIView * borderContainer;
@@ -67,13 +68,18 @@
 @property (weak, nonatomic) IBOutlet UIButton * patternD;
 @property (weak, nonatomic) IBOutlet UIButton * offButton;
 
-@property (weak, nonatomic) IBOutlet UIButton * addMeasureButton;
-@property (weak, nonatomic) IBOutlet UIButton * removeMeasureButton;
+@property (weak, nonatomic) IBOutlet UIButton * addMeasuresButton;
+@property (weak, nonatomic) IBOutlet UIButton * removeMeasuresButton;
 
 @property (weak, nonatomic) IBOutlet MeasureView * measureOne;
 @property (weak, nonatomic) IBOutlet MeasureView * measureTwo;
 @property (weak, nonatomic) IBOutlet MeasureView * measureThree;
 @property (weak, nonatomic) IBOutlet MeasureView * measureFour;
+
+@property (weak, nonatomic) IBOutlet UIView * measureOneBorder;
+@property (weak, nonatomic) IBOutlet UIView * measureTwoBorder;
+@property (weak, nonatomic) IBOutlet UIView * measureThreeBorder;
+@property (weak, nonatomic) IBOutlet UIView * measureFourBorder;
 
 
 @end
