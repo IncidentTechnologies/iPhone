@@ -12,7 +12,7 @@
 @protocol LeftNavigatorDelegate <NSObject>
 
 - (void) toggleLeftNavigator;
-- (void) selectNavChoice:(NSString *)nav;
+- (void) selectNavChoice:(NSString *)nav withShift:(BOOL)shift;
 
 @end
 
@@ -26,6 +26,7 @@
 }
 
 -(IBAction)selectNav:(id)sender;
+-(void)setNavButtonOn:(NSString *)navChoice;
 -(void)enableInstrumentView;
 -(void)disableInstrumentView;
 -(void)changeConnectedButton:(BOOL)isConnected;
@@ -39,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIButton * shareButton;
 @property (weak, nonatomic) IBOutlet UIButton * connectedButton;
 @property (weak, nonatomic) IBOutlet UIButton * leftSlider;
-@property (weak, nonatomic) IBOutlet UIView * leftSliderPin;
+@property (weak, nonatomic) IBOutlet UIView * leftSliderPinTop;
+@property (weak, nonatomic) IBOutlet UIView * leftSliderPinBottom;
 
 @end

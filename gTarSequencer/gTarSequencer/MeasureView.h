@@ -25,6 +25,8 @@
     
     UIColor * defaultBackgroundColor;
     UIColor * highlightBackgroundColor;
+    
+    BOOL isBlankMeasure;
 }
 
 @property (retain, nonatomic) Measure * measure;

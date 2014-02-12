@@ -229,7 +229,8 @@
 - (void)drawPlayButton
 {
     
-    [startStopButton setBackgroundColor:[UIColor colorWithRed:40/255.0 green:194/255.0 blue:94/255.0 alpha:1]];
+
+    [startStopButton setBackgroundColor:[UIColor colorWithRed:1/255.0 green:224/255.0 blue:13/255.0 alpha:1]];
     
     CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
@@ -240,9 +241,10 @@
     int playX = startStopButton.frame.size.width/2 - playWidth/2;
     int playY = 15;
     CGFloat playHeight = startStopButton.frame.size.height - 2*playY;
+    UIColor * transparentWhite = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7];
     
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, transparentWhite.CGColor);
+    CGContextSetFillColorWithColor(context, transparentWhite.CGColor);
     
     CGContextSetLineWidth(context, 2.0);
     

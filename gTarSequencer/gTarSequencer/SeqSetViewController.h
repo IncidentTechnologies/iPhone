@@ -32,6 +32,8 @@
 
 - (void) numInstrumentsDidChange:(int)numInstruments;
 
+- (void) viewSelectedInstrument;
+
 @end
 
 
@@ -55,7 +57,12 @@
     
     NSString * sequencerInstrumentsPath;
     
+    BOOL canEdit;
+    
 }
+- (void)turnEditingOn;
+- (void)turnEditingOff;
+
 - (void)muteInstrument:(SeqSetViewCell *)sender isMute:(BOOL)isMute;
 - (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst;
 - (void)deleteCell:(id)sender;
@@ -70,6 +77,7 @@
 - (void)setSelectedInstrumentIndex:(int)index;
 - (long)getSelectedInstrumentIndex;
 - (void)resetSelectedInstrumentIndex;
+- (void)viewSelectedInstrument:(SeqSetViewCell *)sender;
 
 - (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset;
 - (void)clearQueuedPatternButtonAtIndex:(int)index;

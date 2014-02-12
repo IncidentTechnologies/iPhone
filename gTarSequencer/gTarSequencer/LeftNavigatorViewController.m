@@ -17,7 +17,8 @@
 @synthesize shareButton;
 @synthesize connectedButton;
 @synthesize leftSlider;
-@synthesize leftSliderPin;
+@synthesize leftSliderPinTop;
+@synthesize leftSliderPinBottom;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,7 +45,8 @@
     connectedButton.layer.borderWidth = 0.5;
     connectedButton.layer.cornerRadius = 5.0;
     
-    leftSliderPin.layer.cornerRadius = 3.0;
+    leftSliderPinTop.layer.cornerRadius = 3.0;
+    leftSliderPinBottom.layer.cornerRadius = 3.0;
 }
 
 - (void)viewDidUnload
@@ -65,27 +67,37 @@
 
 - (IBAction)selectNav:(id)sender
 {
-    
+    if(sender == optionsButton){
+        [delegate selectNavChoice:@"Options" withShift:YES];
+    }else if(sender == seqSetButton){
+        [delegate selectNavChoice:@"Set" withShift:YES];
+    }else if(sender == instrumentButton && instrumentViewEnabled){
+        [delegate selectNavChoice:@"Instrument" withShift:YES];
+    }else if(sender == shareButton){
+        [delegate selectNavChoice:@"Share" withShift:YES];
+    }else if(sender == connectedButton){
+        [delegate selectNavChoice:@"gTar Info" withShift:YES];
+    }
+}
+
+-(void)setNavButtonOn:(NSString *)navChoice
+{
     [self resetButtonColors];
     
-    if(sender == optionsButton){
-        [delegate selectNavChoice:@"Options"];
+    if([navChoice isEqualToString:@"Options"]){
         optionsButton.backgroundColor = blueColor;
         optionsButton.layer.borderColor = blueColor.CGColor;
-    }else if(sender == seqSetButton){
-        [delegate selectNavChoice:@"Set"];
+    }else if([navChoice isEqualToString:@"Set"]){
         seqSetButton.backgroundColor = blueColor;
         seqSetButton.layer.borderColor = blueColor.CGColor;
-    }else if(sender == instrumentButton && instrumentViewEnabled){
-        [delegate selectNavChoice:@"Instrument"];
+    }else if([navChoice isEqualToString:@"Instrument"]){
         instrumentButton.backgroundColor = blueColor;
         instrumentButton.layer.borderColor = blueColor.CGColor;
-    }else if(sender == shareButton){
-        [delegate selectNavChoice:@"Share"];
+    }else if([navChoice isEqualToString:@"Share"]){
         shareButton.backgroundColor = blueColor;
         shareButton.layer.borderColor = blueColor.CGColor;
-    }else if(sender == connectedButton){
-        [delegate selectNavChoice:@"gTar Info"];
+    }else if([navChoice isEqualToString:@"gTar Info"]){
+        // todo
     }
 }
 

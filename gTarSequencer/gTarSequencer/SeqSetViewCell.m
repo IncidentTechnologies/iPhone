@@ -15,13 +15,13 @@
 @synthesize instrumentIconView;
 @synthesize instrumentIconBorder;
 @synthesize instrument;
-@synthesize minimapBorder;
 @synthesize patternContainer;
 @synthesize borderContainer;
 @synthesize patternToDisplay;
 @synthesize measureViews;
 @synthesize measureBorders;
 @synthesize isSelected;
+@synthesize isMute;
 @synthesize instrumentIcon;
 @synthesize instrumentName;
 @synthesize measureOne;
@@ -37,6 +37,10 @@
 @synthesize patternC;
 @synthesize patternD;
 @synthesize offButton;
+@synthesize addMeasuresButton;
+@synthesize removeMeasuresButton;
+@synthesize rightSliderPin;
+@synthesize offMask;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -80,15 +84,40 @@
     selectedPatternButton = nil;
     
     loopModCount = 0;
+    
+    for(UIView * subview in self.subviews){
+        if([subview isKindOfClass:[UIScrollView class]]){
+            UIScrollView * scrollView = (UIScrollView *)subview;
+            scrollView.delegate = self;
+        }
+    }
 }
 
 - (void)layoutSubviews
 {
-    //minimapBorder.layer.borderWidth = 1.0;
-    //minimapBorder.layer.cornerRadius = 3.0;
-    //minimapBorder.layer.borderColor = [UIColor colorWithRed:10/255.0 green:155/255.0 blue:191/255.0 alpha:1.0].CGColor;
-
+    [offMask setHidden:YES];
+    
+    instrumentIconBorder.layer.cornerRadius = 5.0;
+    instrumentIconBorder.layer.borderWidth = 1.0;
+    instrumentIconBorder.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    addMeasuresButton.layer.cornerRadius = 14.0;
+    addMeasuresButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    addMeasuresButton.layer.borderWidth = 1.0;
+    
+    removeMeasuresButton.layer.cornerRadius = 14.0;
+    removeMeasuresButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    removeMeasuresButton.layer.borderWidth = 1.0;
+    
+    rightSliderPin.layer.cornerRadius = 2.0;
+    
     [self initPatternButtonUI];
+    
+    if(isMute){
+        [self turnOffInstrumentView];
+    }else{
+        [self turnOnInstrumentView];
+    }
     
     
     // TODO: make different variants for the 4in
@@ -133,13 +162,11 @@
         
         for (int i=0;i<[measureViews count];i++)
         {
-            MeasureView * mv = [measureViews objectAtIndex:i];
+            //MeasureView * mv = [measureViews objectAtIndex:i];
             //mv.bounds = CGRectMake(-2, -2, mv.frame.size.width + 2, mv.frame.size.height + 4);
             //mv.backgroundColor = [UIColor clearColor];
             
             [[measureBorders objectAtIndex:i] setHidden:YES];
-            
-            [mv addTarget:self action:@selector(userDidSelectNewMeasure:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     
@@ -181,7 +208,6 @@
     patternA.layer.mask = layerA;
     patternD.layer.mask = layerD;
     
-    
 }
 
 - (void)resetQueuedPatternButton
@@ -191,20 +217,42 @@
     queuedPatternButton = nil;
     
 }
+
+-(void)turnOnInstrumentView
+{
+    NSLog(@"Turn on instrument view");
+    [offMask setHidden:YES];
+    isMute = NO;
+}
+
+-(void)turnOffInstrumentView
+{
+    NSLog(@"Turn off instrument view");
+    [offMask setHidden:NO];
+    isMute = YES;
+}
+
 - (void)updatePatternButton:(UIButton *)newButton playState:(BOOL)isPlaying
 {
-    if(!isPlaying || selectedPatternButton == newButton){
-        
-        //dequeue anything queued
-        [self setStateForButton:queuedPatternButton state:0];
-        queuedPatternButton = nil;
+    
+    // First check if switching off
+    if(newButton == offButton && selectedPatternButton != offButton){
+        [self turnOffInstrumentView];
+    }else{
+        [self turnOnInstrumentView];
+    }
+    
+    // Adjust pattern buttons
+    if(newButton == offButton && selectedPatternButton == offButton){
         
         //former button
         [self setStateForButton:selectedPatternButton state:0];
-        selectedPatternButton = newButton;
         
         //new button
+        selectedPatternButton = previousPatternButton;
         [self setStateForButton:selectedPatternButton state:2];
+        
+        // queue nothing
         
     }else if(newButton == offButton){
         
@@ -212,6 +260,19 @@
         
         //dequeue anything queued
         [self setStateForButton:queuedPatternButton state:0];
+        
+        //former button
+        //[self setStateForButton:selectedPatternButton state:0];
+        selectedPatternButton = newButton;
+        
+        //new button
+        [self setStateForButton:selectedPatternButton state:2];
+        
+    }else if(!isPlaying || selectedPatternButton == newButton){
+        
+        //dequeue anything queued
+        [self setStateForButton:queuedPatternButton state:0];
+        queuedPatternButton = nil;
         
         //former button
         [self setStateForButton:selectedPatternButton state:0];
@@ -289,13 +350,8 @@
             titleColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
             break;
         case 2: // on
-            if(button == offButton){
-                titleColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1.0];
-            }else{
-                titleColor = [UIColor whiteColor];
-            }
+            titleColor = [UIColor whiteColor];
             backgroundColor = [UIColor clearColor];
-            
             break;
         case 3: // queued blinking
             backgroundColor = [UIColor clearColor];
@@ -310,10 +366,11 @@
 }
 
 #pragma mark Change Instrument
-- (void)userDidTapInstrumentIcon:(id)sender
+- (IBAction)userDidTapInstrumentIcon:(id)sender
 {
+    NSLog(@"User did tap instrument icon for instrument %@ id %i",instrument,instrument.instrument);
     
-    // TODO: implement instrument change?
+    [parent viewSelectedInstrument:self];
     
 }
 
@@ -329,8 +386,10 @@
         // If the instrument is muted, then the OFF button needs to be selected
         if (instrument.isMuted){
             [self selectPatternButton:MUTE_SEGMENT_INDEX];
+            [self turnOffInstrumentView];
         } else {
             [self selectPatternButton:instrument.selectedPatternIndex];
+            [self turnOnInstrumentView];
         }
         
         instrument.selectedPatternDidChange = NO;
@@ -367,11 +426,13 @@
 
 - (void)fillWithMeasures:(int)newCount
 {
-    
+    NSLog(@"Fill with measures");
     for(int i = 0; i < MAX_MEASURES_IN_UI; i++){
         if(i < newCount){
             [[measureBorders objectAtIndex:i] setHidden:NO];
             [[measureViews objectAtIndex:i] drawMeasure:FALSE];
+            
+            [[measureViews objectAtIndex:i] addTarget:self action:@selector(userDidSelectNewMeasure:) forControlEvents:UIControlEventTouchUpInside];
         }else{
             [[measureBorders objectAtIndex:i] setHidden:YES];
             [[measureViews objectAtIndex:i] drawMeasure:TRUE];
@@ -381,6 +442,9 @@
 
 - (void)selectPatternButton:(int)index
 {
+    
+    NSLog(@"Select pattern button");
+    
     UIButton * newSelection = [patternButtons objectAtIndex:index];
     
     if (selectedPatternButton == newSelection){
@@ -430,7 +494,7 @@
 // Split up into two functions to allow the UI to update immediately
 - (void)selectNewPattern:(id)sender
 {
-    
+    NSLog(@"Select new pattern");
     int tappedIndex = [patternButtons indexOfObject:sender];
     
     BOOL isPlaying = NO;
@@ -438,10 +502,12 @@
     NSLog(@"Select new pattern at %i", tappedIndex);
     
     if (tappedIndex == MUTE_SEGMENT_INDEX){
+        isMute = YES;
         [parent muteInstrument:self isMute:YES];
         isPlaying = [parent.delegate checkIsPlaying];
         [self resetQueuedPatternButton];
     }else{
+        isMute = NO;
         [parent muteInstrument:self isMute:NO];
         isPlaying = [parent userDidSelectPattern:self atIndex:tappedIndex];
     }
@@ -450,19 +516,20 @@
     
 }
 
-#pragma mark Selecting Measures
+#pragma mark - Selecting Measures
 
 - (IBAction)userDidSelectNewMeasure:(id)sender
 {
     int tappedIndex = [measureViews indexOfObject:sender];
     
-    if (tappedIndex >= patternToDisplay.measureCount)
+    if (tappedIndex >= patternToDisplay.measureCount){
         return;
-    else
+    }else{
         [parent userDidSelectMeasure:self atIndex:tappedIndex];
+    }
 }
 
-#pragma mark Adding and Removing Measures
+#pragma mark - Adding and Removing Measures
 
 - (IBAction)addMeasures:(id)sender {
     NSLog(@"add a measure");
@@ -471,9 +538,16 @@
 
 - (IBAction)removeMeasures:(id)sender {
     NSLog(@"remove a measure");
-    
     [parent userDidRemoveMeasures:self];
 }
 
+#pragma mark - Scrolling
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    static CGFloat targetOffset = 82;
+    if(scrollView.contentOffset.x >= targetOffset){
+        scrollView.contentOffset = CGPointMake(targetOffset, 0.0);
+    }
+}
 
 @end

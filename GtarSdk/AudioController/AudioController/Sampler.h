@@ -76,13 +76,14 @@ typedef struct
 @property int m_noteModNum; // determine spacing of samples
 
 @property (retain) NSArray * m_stringSet;
+@property (retain) NSArray * m_stringPaths;
 
 @property int m_numberOfSamples;
 @property (retain) NSArray *m_tuning;
 @property (retain) NSArray *m_standardTunning;
 
 - (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString*)name;
-- (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString*)name AndStringSet:(NSArray*)stringSet;
+- (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString*)name AndStringSet:(NSArray*)stringSet AndStringPaths:(NSArray*)stringPaths;
 
 - (bool) loadSamplerWithName:(NSString*)name;
 - (bool) loadSamplerWithIndex:(int)index;

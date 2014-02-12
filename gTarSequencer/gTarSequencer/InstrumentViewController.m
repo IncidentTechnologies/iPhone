@@ -8,23 +8,28 @@
 
 #import "InstrumentViewController.h"
 
-#define MEASURE_WIDTH 432
-#define MEASURE_MARGIN 8
-#define NOTE_WIDTH 27
-#define NOTE_HEIGHT 27
+#define MEASURE_WIDTH 414
+#define MEASURE_MARGIN 12
+#define NOTE_WIDTH 26
+#define NOTE_HEIGHT 26
+#define NOTE_GAP 2
 #define MUTE_SEGMENT_INDEX 4
+#define SCROLL_SPEED 0.8
 
 @implementation InstrumentViewController
 
 @synthesize delegate;
 @synthesize scrollView;
-@synthesize instrumentTitle;
 @synthesize instrumentIcon;
 @synthesize patternA;
 @synthesize patternB;
 @synthesize patternC;
 @synthesize patternD;
 @synthesize offButton;
+@synthesize pageOne;
+@synthesize pageTwo;
+@synthesize pageThree;
+@synthesize pageFour;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,12 +69,12 @@
 
 - (void)initColors
 {
-    colors[5] = [UIColor colorWithRed:150/255.0 green:12/255.0 blue:238/255.0 alpha:1.0];
-    colors[4] = [UIColor colorWithRed:9/255.0 green:109/255.0 blue:245/255.0 alpha:1.0];
-    colors[3] = [UIColor colorWithRed:19/255.0 green:133/255.0 blue:4/255.0 alpha:1.0];
-    colors[2] = [UIColor colorWithRed:245/255.0 green:214/255.0 blue:9/255.0 alpha:1.0];
-    colors[1] = [UIColor colorWithRed:238/255.0 green:129/255.0 blue:13/255.0 alpha:1.0];
-    colors[0] = [UIColor colorWithRed:216/255.0 green:64/255.0 blue:64/255.0 alpha:1.0];
+    colors[5] = [UIColor colorWithRed:170/255.0 green:114/255.0 blue:233/255.0 alpha:1.0]; // purple
+    colors[4] = [UIColor colorWithRed:30/255.0 green:108/255.0 blue:213/255.0 alpha:1.0]; // blue
+    colors[3] = [UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0]; // green
+    colors[2] = [UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]; // yellow
+    colors[1] = [UIColor colorWithRed:234/255.0 green:154/255.0 blue:0/255.0 alpha:1.0]; // orange
+    colors[0] = [UIColor colorWithRed:238/255.0 green:28/255.0 blue:36/255.0 alpha:1.0]; // red
     
 }
 
@@ -81,24 +86,18 @@
     // GESTURES
     //
     
-    CGRect leftButtonFrame = CGRectMake(0,scrollView.frame.origin.y,MEASURE_MARGIN*3,scrollView.frame.size.height);
-    CGRect rightButtonFrame = CGRectMake(scrollView.frame.size.width-MEASURE_MARGIN*3,scrollView.frame.origin.y,MEASURE_MARGIN*3,scrollView.frame.size.height);
-    UIButton * leftInvisibleButton = [[UIButton alloc] initWithFrame:leftButtonFrame];
-    UIButton * rightInvisibleButton = [[UIButton alloc] initWithFrame:rightButtonFrame];
+    scrollView.userInteractionEnabled = YES;
     
     // Move left
-    UILongPressGestureRecognizer * pressLeft = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(decrementMeasure:)];
-    pressLeft.minimumPressDuration = 0.5;
+    UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(incrementMeasure)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     
     // Move right
-    UILongPressGestureRecognizer * pressRight = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(incrementMeasure:)];
-    pressRight.minimumPressDuration = 0.5;
+    UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(decrementMeasure)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     
-    [self.view addSubview:leftInvisibleButton];
-    [self.view addSubview:rightInvisibleButton];
-    
-    [leftInvisibleButton addGestureRecognizer:pressLeft];
-    [rightInvisibleButton addGestureRecognizer:pressRight];
+    [scrollView addGestureRecognizer:swipeLeft];
+    [scrollView addGestureRecognizer:swipeRight];
     
     // Pattern buttons
     if(patternButtons == nil)
@@ -106,7 +105,22 @@
         patternButtons = [[NSMutableArray alloc] initWithObjects:patternA, patternB, patternC, patternD, offButton, nil];
     }
     
-    [self initPatternButtonUI];
+    // Pages
+    [self initPages];
+    
+}
+
+- (void)initPages
+{
+    pages[0] = pageOne;
+    pages[1] = pageTwo;
+    pages[2] = pageThree;
+    pages[3] = pageFour;
+    
+    for(int i = 0; i < NUM_MEASURES; i++){
+        pages[i].layer.cornerRadius = 7.5;
+        pages[i].alpha = 0.4;
+    }
 }
 
 - (void)reopenView
@@ -115,9 +129,11 @@
     if(activePattern > 0){
         NSLog(@"Clear previous pattern data");
         
-        for(int i = 0; i < NUM_PATTERNS; i++){
-            for(int j = 0; j < NUM_MEASURES; j++){
-                [self clearMeasure:j forPattern:i];
+        @synchronized(self){
+            for(int i = 0; i < NUM_PATTERNS; i++){
+                for(int j = 0; j < NUM_MEASURES; j++){
+                    [self clearMeasure:j forPattern:i];
+                }
             }
         }
     }
@@ -174,9 +190,6 @@
  
     currentInst = inst;
     
-    // Title
-    [instrumentTitle setText:inst.instrumentName];
-    
     // Icon
     [instrumentIcon setImage:[UIImage imageNamed:inst.iconName]];
     
@@ -213,7 +226,7 @@
     [self scrollToAndSetActiveMeasure:measureIndex];
     
     if(freezeMeasureChange == nil){
-        freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
+        freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
     }
     
     // SAVE CONTEXT
@@ -223,18 +236,19 @@
 - (void)drawMeasuresForPattern:(int)patternIndex
 {
     
-    for(int i = 0; i < NUM_MEASURES; i++){
-        
-        UIView * newMeasure = [[UIView alloc] init];
-        
-        if(i < measureCounts[activePattern]){
-            newMeasure = [self drawMeasureOnActive:i forPattern:activePattern];
-        }else{
-            newMeasure = [self drawMeasureOff:i forPattern:activePattern];
-        }
+    @synchronized(self){
+        for(int i = 0; i < NUM_MEASURES; i++){
             
-        measureSet[activePattern][i] = newMeasure;
-        
+            UIView * newMeasure = [[UIView alloc] init];
+            
+            if(i < measureCounts[activePattern]){
+                newMeasure = [self drawMeasureOnActive:i forPattern:activePattern];
+            }else{
+                newMeasure = [self drawMeasureOff:i forPattern:activePattern];
+            }
+                
+            measureSet[activePattern][i] = newMeasure;
+        }
     }
     
     // Fade in
@@ -377,10 +391,12 @@
     }
     
     // remove button clicks
-    for(int k = 0; k < MAX_NOTES; k++){
-        [noteButtons[patternIndex][measureIndex][k] removeTarget:self action:@selector(toggleNote:) forControlEvents:UIControlEventTouchUpInside];
-        [noteButtons[patternIndex][measureIndex][k] removeFromSuperview];
-        noteButtons[patternIndex][measureIndex][k] = nil;
+    @synchronized(self){
+        for(int k = 0; k < MAX_NOTES; k++){
+            [noteButtons[patternIndex][measureIndex][k] removeTarget:self action:@selector(toggleNote:) forControlEvents:UIControlEventTouchUpInside];
+            [noteButtons[patternIndex][measureIndex][k] removeFromSuperview];
+            noteButtons[patternIndex][measureIndex][k] = nil;
+        }
     }
     
     // remove playbands
@@ -400,7 +416,7 @@
     
     CGPoint newOffset = CGPointMake(measureIndex*(MEASURE_WIDTH+MEASURE_MARGIN),0);
     
-    [UIView animateWithDuration:1.5 animations:^(){
+    [UIView animateWithDuration:SCROLL_SPEED animations:^(){
         [scrollView setContentOffset:newOffset];
         for(int i = 0; i < NUM_MEASURES; i++){
             if(i == measureIndex){
@@ -410,7 +426,13 @@
             }
         }
     } completion:^(BOOL finished){
-        
+        for(int i=0; i<NUM_MEASURES;i++){
+            if(i == measureIndex){
+                pages[i].alpha = 1.0;
+            }else{
+                pages[i].alpha = 0.4;
+            }
+        }
     }];
     
     
@@ -426,11 +448,13 @@
         [self setActiveMeasureIndex:declaredActiveMeasures[activePattern] forPattern:activePattern];
         
         // remove old border
-        measureSet[activePattern][prevIndex].layer.borderWidth = 0.0f;
-        
+        if(prevIndex >= 0){
+            measureSet[activePattern][prevIndex].layer.borderWidth = 0.0f;
+        }
+            
         // draw new border
-        measureSet[activePattern][measureIndex].layer.borderColor = [UIColor blackColor].CGColor;
-        measureSet[activePattern][measureIndex].layer.borderWidth = 3.0f;
+        measureSet[activePattern][measureIndex].layer.borderColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3].CGColor;
+        measureSet[activePattern][measureIndex].layer.borderWidth = 8.0f;
     }
 }
 
@@ -439,35 +463,38 @@
     CGRect measureFrame = CGRectMake(3*MEASURE_MARGIN+measureIndex*(MEASURE_WIDTH+MEASURE_MARGIN), 0, MEASURE_WIDTH, scrollView.frame.size.height);
     UIView * newMeasure = [[UIView alloc] initWithFrame:measureFrame];
     
-    [newMeasure setBackgroundColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0]];
+    [newMeasure setBackgroundColor:[UIColor colorWithRed:29/255.0 green:88/255.0 blue:103/255.0 alpha:1.0]];
     
-    for (int s = 0; s < STRINGS_ON_GTAR; s++)
+    @synchronized(self)
     {
-        for (int f = 0; f < FRETS_ON_GTAR; f++)
+        for (int s = 0; s < STRINGS_ON_GTAR; s++)
         {
-            CGRect noteFrame = CGRectMake(f*NOTE_WIDTH,(STRINGS_ON_GTAR-s-1)*NOTE_HEIGHT,NOTE_WIDTH,NOTE_HEIGHT);
-            UIButton * newButton = [[UIButton alloc] initWithFrame:noteFrame];
-            
-            Pattern * p = currentInst.patterns[patternIndex];
-            Measure * m = p.measures[measureIndex];
-            
-            if([m isNoteOnAtString:s andFret:f]){
-                [newButton setBackgroundColor:colors[s]];
-            }else{
-                [newButton setBackgroundColor:[UIColor grayColor]];
+            for (int f = 0; f < FRETS_ON_GTAR; f++)
+            {
+                CGRect noteFrame = CGRectMake(f*NOTE_WIDTH,(STRINGS_ON_GTAR-s-1)*NOTE_HEIGHT,NOTE_WIDTH-NOTE_GAP,NOTE_HEIGHT-NOTE_GAP);
+                UIButton * newButton = [[UIButton alloc] initWithFrame:noteFrame];
+                
+                Pattern * p = currentInst.patterns[patternIndex];
+                Measure * m = p.measures[measureIndex];
+                
+                if([m isNoteOnAtString:s andFret:f]){
+                    [newButton setBackgroundColor:colors[s]];
+                }else{
+                    [newButton setBackgroundColor:[UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
+                }
+                
+                newButton.layer.borderWidth = 0.5;
+                newButton.layer.borderColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.6].CGColor;
+                
+                [newButton addTarget:self action:@selector(toggleNote:) forControlEvents:UIControlEventTouchUpInside];
+                
+                noteButtons[patternIndex][measureIndex][FRETS_ON_GTAR*s+f] = newButton;
+                
+                [newMeasure addSubview:newButton];
+                
+                // default invisible
+                [newMeasure setAlpha:0.3];
             }
-            
-            newButton.layer.borderWidth = 1.0;
-            newButton.layer.borderColor = [UIColor whiteColor].CGColor;
-            
-            [newButton addTarget:self action:@selector(toggleNote:) forControlEvents:UIControlEventTouchUpInside];
-            
-            noteButtons[patternIndex][measureIndex][FRETS_ON_GTAR*s+f] = newButton;
-            
-            [newMeasure addSubview:newButton];
-            
-            // default invisible
-            [newMeasure setAlpha:0.3];
         }
     }
     
@@ -505,7 +532,7 @@
     CGRect measureFrame = CGRectMake(3*MEASURE_MARGIN+measureIndex*(MEASURE_WIDTH+MEASURE_MARGIN),0,MEASURE_WIDTH,scrollView.frame.size.height);
     UIView * newOffMeasure = [[UIView alloc] initWithFrame:measureFrame];
     
-    [newOffMeasure setBackgroundColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0]];
+    [newOffMeasure setBackgroundColor:[UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
     
     [scrollView addSubview:newOffMeasure];
     
@@ -522,22 +549,25 @@
     return newOffMeasure;
 }
 
-- (void)decrementMeasure:(id)sender
+- (void)decrementMeasure
 {
+    NSLog(@"Decrement measure");
     if(activeMeasure > 0 && freezeMeasureChange == nil){
         [self scrollToAndSetActiveMeasure:activeMeasure-1];
         
-        freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
+        freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
     }
 }
 
-- (void)incrementMeasure:(id)sender
+- (void)incrementMeasure
 {
+    NSLog(@"Increment measure");
     if(activeMeasure < NUM_MEASURES-1 && freezeMeasureChange == nil){
         [self scrollToAndSetActiveMeasure:activeMeasure+1];
         
-        freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
+        freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
     }
+    
 }
 
 - (void)resetFreezeMeasure
@@ -583,9 +613,6 @@
     activePattern = patternIndex;
     [self drawMeasuresForPattern:activePattern];
     
-    //patternButton.titleLabel.font = [UIFont systemFontOfSize:40.0];
-    //[patternButton setTitle:patternTitles[activePattern] forState:UIControlStateNormal];
-    
     [self setActivePatternIndex:activePattern];
     
     // Update active measure (context save happens within)
@@ -614,7 +641,7 @@
     Measure * m = p.measures[activeMeasure];
     
     if([m isNoteOnAtString:string andFret:fret]){
-        [sender setBackgroundColor:[UIColor grayColor]];
+        [sender setBackgroundColor:[UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
     }else{
         [sender setBackgroundColor:colors[string]];
     }
@@ -666,18 +693,6 @@
 }
 
 #pragma mark - Pattern Buttons
-
-- (void)initPatternButtonUI
-{
-    
-    for (int i=0;i<[patternButtons count];i++)
-    {
-        UIButton * patternN = [patternButtons objectAtIndex:i];
-        patternN.layer.cornerRadius = 3.0;
-        [patternN setTitleEdgeInsets:UIEdgeInsetsMake(2.0f,0.0f,0.0f,0.0f)];
-    }
-
-}
 
 - (IBAction)userDidSelectNewPattern:(id)sender
 {
@@ -840,19 +855,19 @@
     switch(stateindex){
         case 0: // off
             backgroundColor = [UIColor clearColor];
-            titleColor = [UIColor blackColor];
+            titleColor = [UIColor whiteColor];
             break;
         case 1: // queued
-            backgroundColor = [UIColor clearColor];
-            titleColor = [UIColor orangeColor];
+            backgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.5];
+            titleColor = [UIColor whiteColor];
             break;
         case 2: // on
-            backgroundColor = [UIColor clearColor];
-            titleColor = [UIColor redColor];
+            backgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+            titleColor = [UIColor whiteColor];
             break;
         case 3: // queued blinking
             backgroundColor = [UIColor clearColor];
-            titleColor = [UIColor purpleColor];
+            titleColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8];
             break;
     }
     

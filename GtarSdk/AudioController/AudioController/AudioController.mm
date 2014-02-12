@@ -86,6 +86,7 @@ class Compressor;
 
 @synthesize m_volumeGain;
 @synthesize m_stringSet;
+@synthesize m_stringPaths;
 
 - (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument
 {
@@ -181,7 +182,7 @@ class Compressor;
         m_pCompressor = new Compressor(.97, 3, 1, 5000, g_GraphSampleRate);
         
         if (SamplerSource == m_audioSource) {
-            m_sampler = [[[Sampler alloc] initWithSampleRate:g_GraphSampleRate AndSamplePack:instrument AndStringSet:m_stringSet] retain];
+            m_sampler = [[[Sampler alloc] initWithSampleRate:g_GraphSampleRate AndSamplePack:instrument AndStringSet:m_stringSet AndStringPaths:m_stringPaths] retain];
         }
         
         m_volumeGain = 1.0;
@@ -200,9 +201,10 @@ class Compressor;
 	return self;
 }
 
-- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument AndStringSet:(NSArray *)stringSet
+- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument AndStringSet:(NSArray *)stringSet AndStringPaths:(NSArray *)stringPaths
 {
     m_stringSet = stringSet;
+    m_stringPaths = stringPaths;
     self = [self initWithAudioSource:audioSource AndInstrument:instrument];
     
     return self;

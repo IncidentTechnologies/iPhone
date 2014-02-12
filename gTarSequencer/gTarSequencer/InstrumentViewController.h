@@ -36,6 +36,7 @@
     UIView * measureSet[NUM_PATTERNS][NUM_MEASURES];
     UIButton * noteButtons[NUM_PATTERNS][NUM_MEASURES][MAX_NOTES];
     //NSString * patternTitles[NUM_PATTERNS];
+    UIView * pages[NUM_MEASURES];
     
     UIColor * colors[STRINGS_ON_GTAR];
     
@@ -80,8 +81,12 @@
 @property (weak, nonatomic) IBOutlet UIButton * patternC;
 @property (weak, nonatomic) IBOutlet UIButton * patternD;
 @property (weak, nonatomic) IBOutlet UIButton * offButton;
-@property (weak, nonatomic) IBOutlet UILabel * instrumentTitle;
 @property (weak, nonatomic) IBOutlet UIButton * instrumentIconButton;
 @property (weak, nonatomic) IBOutlet UIImageView * instrumentIcon;
+
+@property (weak, nonatomic) IBOutlet UIView * pageOne;
+@property (weak, nonatomic) IBOutlet UIView * pageTwo;
+@property (weak, nonatomic) IBOutlet UIView * pageThree;
+@property (weak, nonatomic) IBOutlet UIView * pageFour;
 
 @end

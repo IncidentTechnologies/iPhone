@@ -20,6 +20,7 @@
 @synthesize m_noteModNum;
 @synthesize m_numberOfSamples;
 @synthesize m_stringSet;
+@synthesize m_stringPaths;
 @synthesize m_tuning;
 @synthesize m_standardTunning;
 @synthesize m_instruments;
@@ -63,9 +64,10 @@
     return self;
 }
 
-- (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString *)name AndStringSet:(NSArray *)stringSet
+- (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString *)name AndStringSet:(NSArray *)stringSet AndStringPaths:(NSArray *)stringPaths
 {
     m_stringSet = stringSet;
+    m_stringPaths = stringPaths;
     self = [self initWithSampleRate:sampleRate AndSamplePack:name];
     
     return self;
@@ -340,8 +342,22 @@
             }
         }
         
-        NSURL *url = [[NSBundle mainBundle] URLForResource: filename
-                                             withExtension: @"mp3"];
+        NSURL * url;
+        
+        if(m_stringPaths == nil || [m_stringPaths[modNum] isEqualToString:@"Default"]){
+            
+            url = [[NSBundle mainBundle] URLForResource: filename
+                                                 withExtension: @"mp3"];
+        }else{
+         
+            // Use custom URL and secondary (m4a) filetype
+            filename = [filename stringByAppendingString:@".m4a"];
+            
+            NSArray * pathComponents = [NSArray arrayWithObjects:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject], filename, nil];
+            
+            url = [NSURL fileURLWithPathComponents:pathComponents];
+            
+        }
 
         
         //m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
@@ -414,6 +430,7 @@
         }
         
         NSLog(@"Opening URL: %@", m_sampleNameArray[noteNum]);
+        
         
         // Open an audio file and associate it with the extended audio file objects;
         OSStatus result = ExtAudioFileOpenURL(m_sampleNameArray[noteNum], &audioFileObject);

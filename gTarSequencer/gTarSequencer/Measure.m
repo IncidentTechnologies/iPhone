@@ -181,7 +181,11 @@
 - (BOOL)isNoteOnAtString:(int)str andFret:(int)fret
 {
     int location = [self getLocationFromString:str andFret:fret];
-    return notes[location];
+    if(location < MAX_NOTES){
+        return notes[location];
+    }else{
+        return FALSE;
+    }
 }
 
 - (BOOL)isNoteOnAtLocation:(int)location

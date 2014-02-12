@@ -86,7 +86,7 @@
 {
     
     onScreenMainFrame = CGRectMake(0,0,XBASE,TABLEHEIGHT);
-    overScreenMainFrame = CGRectMake(NAVWIDTH,0,XBASE,TABLEHEIGHT);
+    overScreenMainFrame = CGRectMake(NAVWIDTH-NAVTAB,0,XBASE,TABLEHEIGHT);
     
     //
     // SUBVIEW: OPTIONS
@@ -177,6 +177,7 @@
 
 - (void)closeLeftNavigator
 {
+    [seqSetViewController turnEditingOn];
     [UIView animateWithDuration:0.5 animations:^(){
         [leftNavigator.view setFrame:offLeftNavigatorFrame];
         [activeMainView setFrame:onScreenMainFrame];
@@ -187,6 +188,7 @@
 
 - (void)openLeftNavigator
 {
+    [seqSetViewController turnEditingOff];
     [UIView animateWithDuration:0.5 animations:^(){
         [leftNavigator.view setFrame:onScreenNavigatorFrame];
         [activeMainView setFrame:overScreenMainFrame];
@@ -204,7 +206,7 @@
     }
 }
 
-- (void)selectNavChoice:(NSString *)nav
+- (void)selectNavChoice:(NSString *)nav withShift:(BOOL)shift
 {
     
     NSLog(@"Switch to %@ view",nav);
@@ -228,16 +230,35 @@
         
         [instrumentViewController reopenView];
         activeMainView = instrumentViewController.view;
-        [instrumentViewController setActiveInstrument:[seqSetViewController getCurrentInstrument]];
+        Instrument * newInstrument = [seqSetViewController getCurrentInstrument];
+        [instrumentViewController setActiveInstrument:newInstrument];
         
     }else if([nav isEqualToString:@"Share"]){
         
         activeMainView = shareViewController.view;
     }
     
-    [activeMainView setFrame:overScreenMainFrame];
+    // set nav button
+    [leftNavigator setNavButtonOn:nav];
+    
+    // handle positioning
+    if(leftNavOpen){
+        [self closeLeftNavigator];
+        [activeMainView setFrame:onScreenMainFrame];
+    }else{
+        if(shift){
+            [activeMainView setFrame:overScreenMainFrame];
+        }else{
+            [activeMainView setFrame:onScreenMainFrame];
+        }
+    }
     [activeMainView setHidden:NO];
     
+}
+
+- (void)viewSelectedInstrument
+{
+    [self selectNavChoice:@"Instrument" withShift:NO];
 }
 
 
@@ -502,9 +523,11 @@
     
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeLeftNavigator)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [swipeLeft setNumberOfTouchesRequired:2];
     
     swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(openLeftNavigator)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [swipeRight setNumberOfTouchesRequired:2];
     
     [self.view addGestureRecognizer:swipeLeft];
     [self.view addGestureRecognizer:swipeRight];

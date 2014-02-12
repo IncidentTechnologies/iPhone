@@ -17,18 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="88"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4E-xp-VFt">
-                                <rect key="frame" x="24" y="13" width="62" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="62" id="45H-0E-FSC"/>
-                                    <constraint firstAttribute="height" constant="62" id="6Fi-Oc-bCg"/>
-                                </constraints>
-                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ep3-lN-cJv">
-                                <rect key="frame" x="25" y="14" width="60" height="60"/>
+                                <rect key="frame" x="23" y="14" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.054901960780000002" green="0.76078431369999999" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -44,7 +34,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9D-Cz-rnz">
-                                <rect key="frame" x="35" y="24" width="40" height="40"/>
+                                <rect key="frame" x="33" y="24" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -53,7 +43,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLc-ba-MQi">
-                                <rect key="frame" x="179" y="0.0" width="80" height="50"/>
+                                <rect key="frame" x="176" y="0.0" width="80" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
@@ -66,7 +56,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niX-nk-D2L">
-                                <rect key="frame" x="97" y="0.0" width="80" height="50"/>
+                                <rect key="frame" x="94" y="0.0" width="80" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
@@ -79,7 +69,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otr-8W-6Qk">
-                                <rect key="frame" x="261" y="0.0" width="80" height="50"/>
+                                <rect key="frame" x="258" y="0.0" width="80" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
@@ -92,7 +82,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGs-SV-Vaz">
-                                <rect key="frame" x="343" y="0.0" width="80" height="50"/>
+                                <rect key="frame" x="340" y="0.0" width="80" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.090196078431372548" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
@@ -104,8 +94,100 @@
                                     <action selector="userDidSelectNewPattern:" destination="XoE-pc-IxT" eventType="touchUpInside" id="TYR-72-9MS"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GmP-5y-0kS">
+                                <rect key="frame" x="124" y="57" width="68" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9s-iO-PrP" customClass="MeasureView">
+                                <rect key="frame" x="126" y="59" width="64" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                                <connections>
+                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="3mi-8o-mIA"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAV-r5-1Xe">
+                                <rect key="frame" x="190" y="57" width="68" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60L-0Z-LYp" customClass="MeasureView">
+                                <rect key="frame" x="192" y="59" width="64" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                                <connections>
+                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="A1n-ov-KRW"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ja-1j-DEM">
+                                <rect key="frame" x="256" y="57" width="68" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccX-7c-S4S" customClass="MeasureView">
+                                <rect key="frame" x="258" y="59" width="64" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                                <connections>
+                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="4hb-Xe-NSg"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="otz-FL-KqO">
+                                <rect key="frame" x="322" y="57" width="68" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3j-xA-OFc" customClass="MeasureView">
+                                <rect key="frame" x="324" y="59" width="64" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                                <connections>
+                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="NLB-we-9zs"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l98-2d-At3">
+                                <rect key="frame" x="394" y="54" width="28" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <inset key="contentEdgeInsets" minX="1" minY="-4" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addMeasures:" destination="XoE-pc-IxT" eventType="touchUpInside" id="Yfq-im-1jh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4l-J7-CiJ">
+                                <rect key="frame" x="92" y="54" width="28" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <inset key="contentEdgeInsets" minX="1" minY="-3" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="-">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeMeasures:" destination="XoE-pc-IxT" eventType="touchUpInside" id="gdi-S0-62z"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCK-8c-cBj">
+                                <rect key="frame" x="473" y="31" width="4" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="paB-5D-5gW">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="89"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTx-aJ-Y2K">
-                                <rect key="frame" x="427" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="424" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <state key="normal" title="O">
@@ -116,62 +198,6 @@
                                     <action selector="userDidSelectNewPattern:" destination="XoE-pc-IxT" eventType="touchUpInside" id="6um-tn-HCT"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GmP-5y-0kS">
-                                <rect key="frame" x="116" y="57" width="84" height="22"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAV-r5-1Xe">
-                                <rect key="frame" x="198" y="57" width="84" height="22"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ja-1j-DEM">
-                                <rect key="frame" x="280" y="57" width="84" height="22"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="otz-FL-KqO">
-                                <rect key="frame" x="362" y="57" width="84" height="22"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9s-iO-PrP" customClass="MeasureView">
-                                <rect key="frame" x="118" y="59" width="80" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
-                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                                <connections>
-                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="6Sq-bC-1Pa"/>
-                                </connections>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60L-0Z-LYp" customClass="MeasureView">
-                                <rect key="frame" x="200" y="59" width="80" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
-                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                                <connections>
-                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="aoU-zs-q3h"/>
-                                </connections>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccX-7c-S4S" customClass="MeasureView">
-                                <rect key="frame" x="282" y="59" width="80" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
-                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                                <connections>
-                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="F7V-rc-vfX"/>
-                                </connections>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3j-xA-OFc" customClass="MeasureView">
-                                <rect key="frame" x="364" y="59" width="80" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
-                                <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                                <connections>
-                                    <action selector="userDidSelectNewMeasure:" destination="XoE-pc-IxT" eventType="valueChanged" id="JYb-f4-oai"/>
-                                </connections>
-                            </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4M-Sy-HyH">
                                 <rect key="frame" x="0.0" y="88" width="600" height="1"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -181,32 +207,6 @@
                                 </constraints>
                                 <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l98-2d-At3">
-                                <rect key="frame" x="446" y="57" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="+">
-                                    <color key="titleColor" red="0.050980392159999999" green="0.72156862749999995" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="addMeasures:" destination="XoE-pc-IxT" eventType="touchUpInside" id="Yfq-im-1jh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4l-J7-CiJ">
-                                <rect key="frame" x="94" y="57" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="-">
-                                    <color key="titleColor" red="0.050980392159999999" green="0.72156862749999995" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="removeMeasures:" destination="XoE-pc-IxT" eventType="touchUpInside" id="gdi-S0-62z"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -228,12 +228,14 @@
                 <outlet property="measureTwo" destination="60L-0Z-LYp" id="cKf-Cc-0vQ"/>
                 <outlet property="measureTwoBorder" destination="XAV-r5-1Xe" id="2lT-nP-SDY"/>
                 <outlet property="offButton" destination="KTx-aJ-Y2K" id="vsu-W2-n5g"/>
+                <outlet property="offMask" destination="paB-5D-5gW" id="iaq-Ro-wtP"/>
                 <outlet property="patternA" destination="niX-nk-D2L" id="vo9-lU-uZT"/>
                 <outlet property="patternB" destination="lLc-ba-MQi" id="diA-f6-cJ7"/>
                 <outlet property="patternC" destination="Otr-8W-6Qk" id="cBm-my-ffq"/>
                 <outlet property="patternContainer" destination="Lgs-sN-tUi" id="PaX-rh-0Iu"/>
                 <outlet property="patternD" destination="IGs-SV-Vaz" id="bJi-2I-fuz"/>
                 <outlet property="removeMeasuresButton" destination="u4l-J7-CiJ" id="GC4-MR-bpE"/>
+                <outlet property="rightSliderPin" destination="sCK-8c-cBj" id="Zml-yz-kB0"/>
             </connections>
         </tableViewCell>
     </objects>

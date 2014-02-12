@@ -37,6 +37,7 @@ typedef enum
 }
 
 @property (retain) NSArray * m_stringSet;
+@property (retain) NSArray * m_stringPaths;
 @property (assign) float frequency;
 @property (assign) double sinPhase;
 @property (assign) bool m_fNoteOn;
@@ -46,7 +47,7 @@ typedef enum
 @property (assign) float m_volumeGain;
 
 - (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument;
-- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument AndStringSet:(NSArray*)stringSet;
+- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument AndStringSet:(NSArray*)stringSet AndStringPaths:(NSArray*)stringPaths;
 
 - (void) initializeAUGraph;
 - (void) startAUGraph;

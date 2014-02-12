@@ -56,12 +56,12 @@
 - (void)initColors
 {
     CGFloat initColors[STRINGS_ON_GTAR][4] = {
-        {150/255.0, 12/255.0, 238/255.0, 1},
-        {9/255.0, 109/255.0, 245/255.0, 1},
-        {19/255.0, 133/255.0, 4/255.0, 1},
-        {245/255.0, 214/255.0, 9/255.0, 1},
-        {238/255.0, 129/255.0, 13/255.0, 1},
-        {216/255.0, 64/255.0, 64/255.0, 1}
+        {170/255.0, 114/255.0, 233/255.0, 1},
+        {30/255.0, 108/255.0, 213/255.0, 1},
+        {5/255.0, 195/255.0, 77/255.0, 1},
+        {204/255.0, 234/255.0, 0/255.0, 1},
+        {234/255.0, 154/255.0, 0/255.0, 1},
+        {238/255.0, 28/255.0, 36/255.0, 1}
     };
     
     memcpy(colors, initColors, sizeof(initColors));
@@ -74,6 +74,8 @@
 
 - (void)update
 {
+    NSLog(@"Measure View update");
+    
     if (measure == nil)
         return;
     
@@ -98,7 +100,8 @@
 }
 
 - (void)movePlayband {
-    if (measure.playband >= 0) {
+    NSLog(@"Move playband");
+    if (measure.playband >= 0 && !isBlankMeasure) {
         CGRect newFrame = playbandView.frame;
         newFrame.origin.x = measure.playband * noteFrameWidth;
         
@@ -114,9 +117,7 @@
 #pragma mark Quartz Drawing
 
 - (void)selectMeasure {
-    
     self.backgroundColor = highlightBackgroundColor;
-
 }
 
 - (void)deselectMeasure {
@@ -125,7 +126,11 @@
 
 - (void)drawMeasure:(BOOL)isBlank
 {
-    if (isBlank) [playbandView setHidden:YES];
+    isBlankMeasure = isBlank;
+    
+    if (isBlank){
+        [playbandView setHidden:YES];
+    }
     
     CGSize size = CGSizeMake(self.frame.size.width, self.frame.size.height);
     
@@ -140,11 +145,8 @@
     
     // fill whole thing with background color:
     if (isBlank){
-    
         CGContextSetFillColorWithColor(context, [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1].CGColor);
-        
     }else{
-        
         CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
     }
     

@@ -31,6 +31,8 @@
         [self initCustomInstrumentSelector];
         
         instruments = [[NSMutableArray alloc] init];
+        
+        self.tableView.bounces = NO;
 
     }
     return self;
@@ -44,6 +46,8 @@
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"TrackCell"];
     
     [self.tableView setBackgroundColor:[UIColor clearColor]];
+    
+    [self turnEditingOn];
     
 }
 
@@ -134,6 +138,9 @@
 
 - (Instrument *)getCurrentInstrument
 {
+    
+    NSLog(@"Returning instrument at index %li",selectedInstrumentIndex);
+    
     if([instruments count] > 0)
         return [instruments objectAtIndex:selectedInstrumentIndex];
     else
@@ -167,7 +174,7 @@
 #pragma mark - Selected Instrument Data
 - (void)resetSelectedInstrumentIndex
 {
-    selectedInstrumentIndex = -1;
+    [self selectInstrument:-1];
 }
 
 - (long)getSelectedInstrumentIndex
@@ -177,7 +184,19 @@
 
 - (void)setSelectedInstrumentIndex:(int)index
 {
-    selectedInstrumentIndex = index;
+    [self selectInstrument:index];
+}
+
+// Update the selected instrument and have delegate load view
+- (void)viewSelectedInstrument:(SeqSetViewCell *)sender
+{
+    long senderIndex = [instrumentTable indexPathForCell:sender].row;
+    
+    NSLog(@"Selecting instrument at index %li",senderIndex);
+    
+    [self selectInstrument:senderIndex];
+    
+    [delegate viewSelectedInstrument];
 }
 
 #pragma mark - Adding instruments
@@ -243,9 +262,16 @@
     int tableHeight = instrumentTable.frame.size.height;
     
     if([instruments count] == 0)
-        return tableHeight+3;
-    else
+        return tableHeight;
+    else if(indexPath.row < [instruments count])
         return tableHeight/3+1;
+    else if([instruments count] == 1)
+        return 2*tableHeight/3-1;
+    else if([instruments count] == 2)
+        return tableHeight/3-2;
+    
+    // else
+    return tableHeight/3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -270,6 +296,7 @@
         cell.instrumentName = tempInst.instrumentName;
         cell.instrumentIcon = [UIImage imageNamed:tempInst.iconName];
         cell.instrument = tempInst;
+        cell.isMute = tempInst.isMuted;
         
         // Display icon
         cell.instrumentIconView.image = cell.instrumentIcon;
@@ -314,7 +341,7 @@
     if(indexPath.row == [instruments count]){
         return NO;
     }else{
-        return YES;
+        return canEdit;
     }
 }
 
@@ -354,6 +381,15 @@
     
 }
 
+- (void)turnEditingOff
+{
+    canEdit = NO;
+}
+
+- (void)turnEditingOn
+{
+    canEdit = YES;
+}
 
 #pragma mark Instrument Selector
 
@@ -566,10 +602,9 @@
     
     selectedInstrumentIndex = index;
     
-    NSLog(@"Selected Instrument Index is %li",index);
-    
     // Select new:
     if(selectedInstrumentIndex >= 0 && selectedInstrumentIndex < [instruments count]){
+        
         Instrument * newSelection = [instruments objectAtIndex:selectedInstrumentIndex];
         [newSelection setSelected:YES];
         

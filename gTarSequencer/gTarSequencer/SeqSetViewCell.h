@@ -17,7 +17,7 @@
 
 @class SeqSetViewController;
 
-@interface SeqSetViewCell : UITableViewCell
+@interface SeqSetViewCell : UITableViewCell <UIScrollViewDelegate>
 {
     
     BOOL deleteMode;
@@ -50,6 +50,7 @@
 @property (retain, nonatomic) UIImage * instrumentIcon;
 
 @property (nonatomic) BOOL isSelected;
+@property (nonatomic) BOOL isMute;
 @property (weak, nonatomic) Pattern * patternToDisplay;
 @property (retain, nonatomic) NSMutableArray * measureViews;
 @property (retain, nonatomic) NSMutableArray * measureBorders;
@@ -60,7 +61,6 @@
 // cell elements
 @property (weak, nonatomic) IBOutlet UIImageView * instrumentIconView;
 @property (weak, nonatomic) IBOutlet UIButton * instrumentIconBorder;
-@property (weak, nonatomic) IBOutlet UIView * minimapBorder;
 
 @property (weak, nonatomic) IBOutlet UIButton * patternA;
 @property (weak, nonatomic) IBOutlet UIButton * patternB;
@@ -80,6 +80,9 @@
 @property (weak, nonatomic) IBOutlet UIView * measureTwoBorder;
 @property (weak, nonatomic) IBOutlet UIView * measureThreeBorder;
 @property (weak, nonatomic) IBOutlet UIView * measureFourBorder;
+
+@property (weak, nonatomic) IBOutlet UIView * rightSliderPin;
+@property (weak, nonatomic) IBOutlet UIView * offMask;
 
 
 @end
