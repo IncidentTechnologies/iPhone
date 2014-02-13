@@ -23,11 +23,13 @@
     UIColor * redColor;
     UIColor * greenColor;
     UIColor * blueColor;
+    
+    NSString * defaultInstrumentIcon;
 }
 
 -(IBAction)selectNav:(id)sender;
 -(void)setNavButtonOn:(NSString *)navChoice;
--(void)enableInstrumentView;
+-(void)enableInstrumentViewWithIcon:(NSString *)instIcon;
 -(void)disableInstrumentView;
 -(void)changeConnectedButton:(BOOL)isConnected;
 

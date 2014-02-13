@@ -246,7 +246,7 @@
     // -- draw black background:
     int bottomBarHeight = 55;
     
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8].CGColor);
     CGContextAddRect(context, CGRectMake(0, 0, size.width, size.height - bottomBarHeight));
     CGContextFillPath(context);
     

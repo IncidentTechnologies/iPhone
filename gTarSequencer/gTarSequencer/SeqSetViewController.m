@@ -199,6 +199,34 @@
     [delegate viewSelectedInstrument];
 }
 
+- (void)setSelectedCellToSelectedInstrument
+{
+    /*@synchronized(instruments){
+        for(int i = 0; i < [instruments count]; i++){
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
+            
+            if([cell respondsToSelector:@selector(instrument)] && cell.instrument != nil){
+                
+                if(i == selectedInstrumentIndex){
+                    [self fadeCell:cell animateIn:YES];
+                }else{
+                    [self fadeCell:cell animateIn:NO];
+                }
+            }else{
+                return;
+            }
+        }
+    }*/
+}
+
+- (void)fadeCell:(SeqSetViewCell *)cell animateIn:(BOOL)isIn
+{
+    float newAlpha = (isIn) ? 1.0 : 0.7;
+    [UIView animateWithDuration:0.2 animations:^(void){cell.alpha=newAlpha;}];
+    
+}
+
 #pragma mark - Adding instruments
 
 - (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths
@@ -309,6 +337,14 @@
         }
         
         [cell setMultipleTouchEnabled:YES];
+        
+        // Check if selected
+        /*if(cell.isSelected || selectedInstrumentIndex == indexPath.row){
+            selectedInstrumentIndex = indexPath.row;
+            [self fadeCell:cell animateIn:YES];
+        }else{
+            [self fadeCell:cell animateIn:NO];
+        }*/
         
         return cell;
         
@@ -427,8 +463,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( indexPath.row == [instruments count] )
-    {
+    if(indexPath.row == [instruments count]){
         [self loadInstrumentSelector:self andScroll:NO];
     }
 }
@@ -880,12 +915,14 @@
     
     for (int i=0;i<limit;i++){
         
-        SeqSetViewCell * track = (SeqSetViewCell *) [visibleCells objectAtIndex:i];
+        SeqSetViewCell * cell = (SeqSetViewCell *) [visibleCells objectAtIndex:i];
         
-        if ([track respondsToSelector:@selector(update)]){
-            [track update];
+        if ([cell respondsToSelector:@selector(update)]){
+            [cell update];
         }
     }
+    
+    //[self setSelectedCellToSelectedInstrument];
 }
 
 @end

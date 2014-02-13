@@ -50,7 +50,7 @@
     
     // calculate the zero position (middle of the button)
     zeroPosition.x = self.frame.size.width / 2;
-    zeroPosition.y = self.frame.size.height / 2;
+    zeroPosition.y = self.frame.size.height / 4;
     
     // draw subviews
     [self initSubviews];
@@ -62,6 +62,9 @@
 
 - (void)initSubviews
 {
+    // Modify the button
+    self.imageView.alpha = 0.5;
+    
     // Set up volume display:
     CGRect wholeScreen = CGRectMake(0, 0, XBASE, YBASE-1);
     
@@ -86,10 +89,8 @@
     int rangeOfValuesUp = MAX_VOLUME - startingValue;
     int rangeOfValuesDown = startingValue - MAX_VOLUME;
     
-    sensitivityTop = 1.1 * ( rangeOfValuesUp / distanceTop );
-    
-    sensitivityBottom = 1.5 * ( rangeOfValuesDown / distanceBottom );
-    
+    sensitivityTop = 1.3 * ( rangeOfValuesUp / distanceTop );
+    sensitivityBottom = 1.7 * ( rangeOfValuesDown / distanceBottom );
 }
 
 #pragma mark Setters
@@ -105,7 +106,7 @@
 
 
 #pragma mark - Touches
-- (double)percentFull:(int)value
+- (double)percentFull:(double)value
 {
     return (value-MIN_VOLUME)/(MAX_VOLUME-MIN_VOLUME);
 }
@@ -121,20 +122,15 @@
     double deltaY = currentPosition.y - zeroPosition.y;
     
     // use delta Y and the sensitivity to calculate the new value:
-    double valueDifference;
+    double valueDifferenceY;
     
     if(deltaY > 0){ // UP
-        valueDifference = (deltaY * sensitivityTop);
-    }
-    else{ // DOWN
-        valueDifference = (deltaY * sensitivityBottom);
-    }
-    
-    if ( valueDifference == 0 ){
-        return;
+        valueDifferenceY = (deltaY * sensitivityTop);
+    }else{ // DOWN
+        valueDifferenceY = (deltaY * sensitivityBottom);
     }
     
-    double newCurrentValue = currentValue + valueDifference;
+    double newCurrentValue = currentValue + valueDifferenceY;
     
     if (newCurrentValue < MIN_VOLUME){
         newCurrentValue = MIN_VOLUME;

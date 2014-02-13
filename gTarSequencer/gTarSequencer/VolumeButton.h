@@ -36,6 +36,8 @@
     
     double sensitivityTop; // px/unit (int)conversion
     double sensitivityBottom;
+    double sensitivityLeft;
+    double sensitivityRight;
     
     BOOL displayOpen;
     

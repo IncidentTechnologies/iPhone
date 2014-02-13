@@ -31,7 +31,7 @@
     if (self) {
         
         // Black out the rest of the screen:
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         
         // Left and Right arrows
         [self drawArrowsWithX:x andY:y];
@@ -76,8 +76,8 @@
 - (void)updatePaginationView:(double)focus
 {
     
-    float pagewidth = 10;
-    float pagegap = 10;
+    float pagewidth = 15;
+    float pagegap = 8;
     
     pageCount = ceil([images count]/6.0);
     
@@ -230,13 +230,13 @@
     CGRect imageFrame = CGRectMake(10, 10, iconSize.width, iconSize.height);
     
     UIView * buttonborder = [[UIView alloc] initWithFrame:imageBorderFrame];
-    [buttonborder setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5]];
+    buttonborder.layer.borderWidth = 1.0;
+    buttonborder.layer.borderColor = [UIColor whiteColor].CGColor;
     buttonborder.layer.cornerRadius = 5.0;
     
-    // Custom instrument, add white border
+    // Custom instrument, add white background
     if([customized[index] isEqualToNumber:[NSNumber numberWithInt:1]]){
-        buttonborder.layer.borderWidth = 0.7;
-        buttonborder.layer.borderColor = [UIColor whiteColor].CGColor;
+        [buttonborder setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5]];
     }
     
     UIButton * button = [[UIButton alloc] initWithFrame:imageFrame];
@@ -251,6 +251,39 @@
     [buttonborder addSubview:button];
     
     [imageButtons addObject:button];
+    
+    // if custom instrument creator, indicate with arrow
+    if(index == 0){
+        
+        float playWidth = 10;
+        float playHeight = 15;
+        float playX = imageBorderFrame.origin.x+imageBorderFrame.size.width+5;
+        float playY = imageBorderFrame.origin.y+imageBorderFrame.size.height/2-playHeight/2;
+        
+        CGSize size = CGSizeMake(scrollView.frame.size.width/2,scrollView.frame.size.height/2);
+        UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+        
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+        CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+        CGContextSetLineWidth(context, 2.0);
+        
+        CGContextMoveToPoint(context, playX, playY);
+        CGContextAddLineToPoint(context, playX, playY+playHeight);
+        CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
+        CGContextClosePath(context);
+        
+        CGContextFillPath(context);
+        
+        UIImage * playImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIImageView * image = [[UIImageView alloc] initWithImage:playImage];
+        
+        [scrollView addSubview:image];
+        
+        UIGraphicsEndImageContext();
+        
+    }
 }
 
 - (void)addLabelAtIndex:(int)index

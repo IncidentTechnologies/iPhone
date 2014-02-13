@@ -78,6 +78,7 @@
 - (long)getSelectedInstrumentIndex;
 - (void)resetSelectedInstrumentIndex;
 - (void)viewSelectedInstrument:(SeqSetViewCell *)sender;
+- (void)setSelectedCellToSelectedInstrument;
 
 - (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset;
 - (void)clearQueuedPatternButtonAtIndex:(int)index;

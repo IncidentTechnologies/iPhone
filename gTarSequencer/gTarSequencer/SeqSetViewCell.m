@@ -37,6 +37,8 @@
 @synthesize patternC;
 @synthesize patternD;
 @synthesize offButton;
+@synthesize patternABorder;
+@synthesize patternDBorder;
 @synthesize addMeasuresButton;
 @synthesize removeMeasuresButton;
 @synthesize rightSliderPin;
@@ -119,6 +121,13 @@
         [self turnOnInstrumentView];
     }
     
+    for(UIButton * p in patternButtons){
+        if(p == selectedPatternButton){
+            [self hideButtonBorders:p];
+        }else{
+            [self showButtonBorders:p];
+        }
+    }
     
     // TODO: make different variants for the 4in
     
@@ -194,20 +203,15 @@
 
 - (void)initPatternButtonUI
 {
-    // Pattern edge shapes
-    CAShapeLayer * layerA = [[CAShapeLayer alloc] init];
-    CAShapeLayer * layerD = [[CAShapeLayer alloc] init];
     
     UIBezierPath * pathA = [UIBezierPath bezierPathWithRoundedRect:patternA.bounds byRoundingCorners:(UIRectCornerBottomLeft) cornerRadii:CGSizeMake(10.0,10.0)];
     UIBezierPath * pathD = [UIBezierPath bezierPathWithRoundedRect:patternD.bounds byRoundingCorners:(UIRectCornerBottomRight) cornerRadii:CGSizeMake(10.0,10.0)];
     
-    layerA.frame = patternA.bounds;
-    layerD.frame = patternD.bounds;
-    layerA.path = pathA.CGPath;
-    layerD.path = pathD.CGPath;
-    patternA.layer.mask = layerA;
-    patternD.layer.mask = layerD;
+    [self drawShapedButton:patternA withBezierPath:pathA];
+    patternABorder = [self drawStrokedButton:patternA withBezierPath:pathA andBorderColor:[UIColor whiteColor]];
     
+    [self drawShapedButton:patternD withBezierPath:pathD];
+    patternDBorder = [self drawStrokedButton:patternD withBezierPath:pathD andBorderColor:[UIColor whiteColor]];
 }
 
 - (void)resetQueuedPatternButton
@@ -341,29 +345,90 @@
             if(button == offButton){
                 backgroundColor = [UIColor clearColor];
             }else{
+                //backgroundColor = [UIColor clearColor];
                 backgroundColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1.0];
+                [self showButtonBorders:button];
             }
             titleColor = [UIColor whiteColor];
             break;
         case 1: // queued
             backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.6];
             titleColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+            [self showButtonBorders:button];
             break;
         case 2: // on
             titleColor = [UIColor whiteColor];
             backgroundColor = [UIColor clearColor];
+            [self hideButtonBorders:button];
             break;
         case 3: // queued blinking
             backgroundColor = [UIColor clearColor];
             titleColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8];
+            [self showButtonBorders:button];
             break;
     }
     
     [button setBackgroundColor:backgroundColor];
     [button setTitleColor:titleColor forState:UIControlStateNormal];
-    
-    
 }
+
+-(void)showButtonBorders:(UIButton *)patternButton
+{
+    if(patternButton == patternA){
+        
+        [patternABorder setHidden:NO];
+        
+    }else if(patternButton == patternB || patternButton == patternC){
+        
+        patternButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        patternButton.layer.borderWidth = 1.0f;
+        
+    }else if(patternButton == patternD){
+        
+        [patternDBorder setHidden:NO];
+    
+    }
+}
+
+-(void)hideButtonBorders:(UIButton *)patternButton
+{
+    if(patternButton == patternA){
+        [patternABorder setHidden:YES];
+    }else if(patternButton == patternB || patternButton == patternC){
+        patternButton.layer.borderWidth = 0.0f;
+    }else if(patternButton == patternD){
+        [patternDBorder setHidden:YES];
+    }
+}
+
+-(void)drawShapedButton:(UIButton *)patternButton withBezierPath:(UIBezierPath *)bezierPath
+{
+    CAShapeLayer * bodyLayer = [CAShapeLayer layer];
+    
+    [bodyLayer setPath:bezierPath.CGPath];
+    patternButton.layer.mask = bodyLayer;
+    patternButton.clipsToBounds = YES;
+    patternButton.layer.masksToBounds = YES;
+
+}
+
+-(UIView *)drawStrokedButton:(UIButton *)patternButton withBezierPath:(UIBezierPath *)bezierPath andBorderColor:(UIColor *)borderColor
+{
+    CAShapeLayer * strokeLayer = [CAShapeLayer layer];
+    strokeLayer.path = bezierPath.CGPath;
+    strokeLayer.fillColor = [UIColor clearColor].CGColor;
+    strokeLayer.strokeColor = borderColor.CGColor;
+    strokeLayer.lineWidth = 2.0;
+    
+    UIView * strokeView = [[UIView alloc] initWithFrame:patternButton.bounds];
+    strokeView.userInteractionEnabled = NO;
+    [strokeView.layer addSublayer:strokeLayer];
+    
+    [patternButton addSubview:strokeView];
+    
+    return strokeView;
+}
+
 
 #pragma mark Change Instrument
 - (IBAction)userDidTapInstrumentIcon:(id)sender
@@ -371,7 +436,6 @@
     NSLog(@"User did tap instrument icon for instrument %@ id %i",instrument,instrument.instrument);
     
     [parent viewSelectedInstrument:self];
-    
 }
 
 #pragma mark Minimap
@@ -442,7 +506,6 @@
 
 - (void)selectPatternButton:(int)index
 {
-    
     NSLog(@"Select pattern button");
     
     UIButton * newSelection = [patternButtons objectAtIndex:index];

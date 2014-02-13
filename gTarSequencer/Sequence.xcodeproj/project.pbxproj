@@ -286,6 +286,13 @@
 		58F4B94A18983BB70071609B /* SaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F4B94918983BB70071609B /* SaveView.xib */; };
 		58F4B94E18983ED90071609B /* LoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F4B94D18983ED90071609B /* LoadView.xib */; };
 		58F4B951189849BA0071609B /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F4B950189849BA0071609B /* OptionsViewController.m */; };
+		58F5448E18AB161E009E6E43 /* Options_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5448A18AB161E009E6E43 /* Options_Icon.png */; };
+		58F5448F18AB161E009E6E43 /* Power_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5448B18AB161E009E6E43 /* Power_Icon.png */; };
+		58F5449018AB161E009E6E43 /* Set_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5448C18AB161E009E6E43 /* Set_Icon.png */; };
+		58F5449118AB161E009E6E43 /* Volume_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5448D18AB161E009E6E43 /* Volume_Icon.png */; };
+		58F5449418ABFDAA009E6E43 /* Icon_Saxophone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5449218ABFDAA009E6E43 /* Icon_Saxophone.png */; };
+		58F5449518ABFDAA009E6E43 /* Icon_Sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5449318ABFDAA009E6E43 /* Icon_Sound.png */; };
+		58F5449718AC0C2B009E6E43 /* Trash_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5449618AC0C2B009E6E43 /* Trash_Icon.png */; };
 		58F6167C188F5E2700020A74 /* Icon_Music.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F61678188F5E2700020A74 /* Icon_Music.png */; };
 		58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F61679188F5E2700020A74 /* Icon_Trombone.png */; };
 		58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */; };
@@ -614,6 +621,13 @@
 		58F4B94D18983ED90071609B /* LoadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadView.xib; sourceTree = "<group>"; };
 		58F4B94F189849B90071609B /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
 		58F4B950189849BA0071609B /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
+		58F5448A18AB161E009E6E43 /* Options_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Options_Icon.png; sourceTree = "<group>"; };
+		58F5448B18AB161E009E6E43 /* Power_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Power_Icon.png; sourceTree = "<group>"; };
+		58F5448C18AB161E009E6E43 /* Set_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Set_Icon.png; sourceTree = "<group>"; };
+		58F5448D18AB161E009E6E43 /* Volume_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Volume_Icon.png; sourceTree = "<group>"; };
+		58F5449218ABFDAA009E6E43 /* Icon_Saxophone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Saxophone.png; sourceTree = "<group>"; };
+		58F5449318ABFDAA009E6E43 /* Icon_Sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Sound.png; sourceTree = "<group>"; };
+		58F5449618AC0C2B009E6E43 /* Trash_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Trash_Icon.png; sourceTree = "<group>"; };
 		58F61678188F5E2700020A74 /* Icon_Music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Music.png; sourceTree = "<group>"; };
 		58F61679188F5E2700020A74 /* Icon_Trombone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trombone.png; sourceTree = "<group>"; };
 		58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Vibraphone.png; sourceTree = "<group>"; };
@@ -687,6 +701,8 @@
 		580A52101864E0230077240B /* Instrument Icons */ = {
 			isa = PBXGroup;
 			children = (
+				58F5449218ABFDAA009E6E43 /* Icon_Saxophone.png */,
+				58F5449318ABFDAA009E6E43 /* Icon_Sound.png */,
 				58F61678188F5E2700020A74 /* Icon_Music.png */,
 				58F61679188F5E2700020A74 /* Icon_Trombone.png */,
 				58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */,
@@ -704,6 +720,11 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
+				58F5449618AC0C2B009E6E43 /* Trash_Icon.png */,
+				58F5448A18AB161E009E6E43 /* Options_Icon.png */,
+				58F5448B18AB161E009E6E43 /* Power_Icon.png */,
+				58F5448C18AB161E009E6E43 /* Set_Icon.png */,
+				58F5448D18AB161E009E6E43 /* Volume_Icon.png */,
 				580A52121864E0DF0077240B /* Sequencer_Icon58px.png */,
 				580A52131864E0DF0077240B /* Sequencer_Icon80px.png */,
 				580A52141864E0DF0077240B /* Sequencer_Icon120px.png */,
@@ -1355,6 +1376,7 @@
 				580A52151864E0E00077240B /* Sequencer_Icon58px.png in Resources */,
 				5811AB42187B88C800FC0BD2 /* Percussion 96.mp3 in Resources */,
 				58F6167C188F5E2700020A74 /* Icon_Music.png in Resources */,
+				58F5449118AB161E009E6E43 /* Volume_Icon.png in Resources */,
 				587C9FC61888C0E7001F57C7 /* Violin 6.mp3 in Resources */,
 				587C9FA81888C0E7001F57C7 /* Piano II 6.mp3 in Resources */,
 				580A52091864DFF50077240B /* Icon_WubWub.png in Resources */,
@@ -1364,6 +1386,7 @@
 				5811AB38187B88C800FC0BD2 /* Percussion 87.mp3 in Resources */,
 				587C9F811888C0E7001F57C7 /* Chiptune 3.mp3 in Resources */,
 				5811AAF7187B88C800FC0BD2 /* Percussion 28.mp3 in Resources */,
+				58F5449418ABFDAA009E6E43 /* Icon_Saxophone.png in Resources */,
 				5811AAEF187B88C800FC0BD2 /* Percussion 20.mp3 in Resources */,
 				5811AB12187B88C800FC0BD2 /* Percussion 52.mp3 in Resources */,
 				587C9FAB1888C0E7001F57C7 /* Pluck 3.mp3 in Resources */,
@@ -1409,6 +1432,7 @@
 				58E635311889FD800036E4F1 /* Bacon 2.mp3 in Resources */,
 				58D6176E1863BF5E001EB327 /* Sequence9.png in Resources */,
 				587C9FBE1888C0E7001F57C7 /* Vibraphone 4.mp3 in Resources */,
+				58F5449518ABFDAA009E6E43 /* Icon_Sound.png in Resources */,
 				58D617641863BF5E001EB327 /* Sequence1.png in Resources */,
 				587C9F861888C0E7001F57C7 /* Dubstep 2.mp3 in Resources */,
 				587C9FB11888C0E7001F57C7 /* Rock 3.mp3 in Resources */,
@@ -1421,6 +1445,7 @@
 				587C9FC51888C0E7001F57C7 /* Violin 5.mp3 in Resources */,
 				5811AB3E187B88C800FC0BD2 /* Percussion 92.mp3 in Resources */,
 				5811AAF6187B88C800FC0BD2 /* Percussion 27.mp3 in Resources */,
+				58F5449718AC0C2B009E6E43 /* Trash_Icon.png in Resources */,
 				5811AB0A187B88C800FC0BD2 /* Percussion 45.mp3 in Resources */,
 				587C9FAF1888C0E7001F57C7 /* Rock 1.mp3 in Resources */,
 				5811AB1A187B88C800FC0BD2 /* Percussion 6.mp3 in Resources */,
@@ -1444,6 +1469,7 @@
 				5811AB33187B88C800FC0BD2 /* Percussion 82.mp3 in Resources */,
 				587C9FBC1888C0E7001F57C7 /* Vibraphone 2.mp3 in Resources */,
 				5811AAEE187B88C800FC0BD2 /* Percussion 2.mp3 in Resources */,
+				58F5449018AB161E009E6E43 /* Set_Icon.png in Resources */,
 				587C9F8B1888C0E7001F57C7 /* Guitar 1.mp3 in Resources */,
 				5811AADF187B88C800FC0BD2 /* instruments.plist in Resources */,
 				580A52071864DFF50077240B /* Icon_Piano.png in Resources */,
@@ -1546,6 +1572,8 @@
 				587C9FC21888C0E7001F57C7 /* Violin 2.mp3 in Resources */,
 				587C9FB01888C0E7001F57C7 /* Rock 2.mp3 in Resources */,
 				58241D7D188DE31000498DB5 /* sampleList.plist in Resources */,
+				58F5448E18AB161E009E6E43 /* Options_Icon.png in Resources */,
+				58F5448F18AB161E009E6E43 /* Power_Icon.png in Resources */,
 				5811AB10187B88C800FC0BD2 /* Percussion 50.mp3 in Resources */,
 				5811AB0B187B88C800FC0BD2 /* Percussion 46.mp3 in Resources */,
 				5811AAE8187B88C800FC0BD2 /* Percussion 14.mp3 in Resources */,

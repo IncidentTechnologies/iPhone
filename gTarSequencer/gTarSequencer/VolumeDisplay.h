@@ -18,10 +18,13 @@
     UILabel * volumeLabel;
     UIColor * fillColor;
     
+    float sliderCircleMaxY;
+    float sliderCircleMinY;
+    UIView * sliderCircle;
+    
 }
 
 - (void)fillToPercent:(double)percent;
 - (void)setVolume:(NSString *)value;
-
 
 @end

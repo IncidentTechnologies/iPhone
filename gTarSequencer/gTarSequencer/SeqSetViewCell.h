@@ -67,6 +67,8 @@
 @property (weak, nonatomic) IBOutlet UIButton * patternC;
 @property (weak, nonatomic) IBOutlet UIButton * patternD;
 @property (weak, nonatomic) IBOutlet UIButton * offButton;
+@property (weak, nonatomic) UIView * patternABorder;
+@property (weak, nonatomic) UIView * patternDBorder;
 
 @property (weak, nonatomic) IBOutlet UIButton * addMeasuresButton;
 @property (weak, nonatomic) IBOutlet UIButton * removeMeasuresButton;

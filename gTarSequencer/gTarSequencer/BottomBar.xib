@@ -17,36 +17,40 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-Ma-1pi" customClass="RadialButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-Ma-1pi" customClass="RadialButton">
                     <rect key="frame" x="128" y="266" width="224" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="55" id="KlV-81-VJV"/>
+                        <constraint firstAttribute="height" constant="55" id="ekb-Gw-iEv"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEV-SP-95e" customClass="VolumeButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEV-SP-95e" customClass="VolumeButton">
                     <rect key="frame" x="350" y="266" width="130" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.27450980392156865" green="0.36862745098039218" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="55" id="hv7-qW-0GQ"/>
+                        <constraint firstAttribute="width" constant="130" id="S9C-8U-m32"/>
+                        <constraint firstAttribute="height" constant="55" id="tln-1u-0iM"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="VOLUME">
+                    <color key="tintColor" red="0.65098039220000004" green="0.80000000000000004" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="imageEdgeInsets" minX="48" minY="13" maxX="48" maxY="13"/>
+                    <state key="normal" image="Volume_Icon.png">
                         <color key="titleColor" red="0.65098039215686276" green="0.80000000000000004" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owG-hq-uwM">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owG-hq-uwM">
                     <rect key="frame" x="0.0" y="266" width="130" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0039215686274509803" green="0.8784313725490196" blue="0.050980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="IqJ-GK-kBI"/>
+                        <constraint firstAttribute="width" constant="130" id="vnU-pa-oQg"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal">
@@ -59,17 +63,20 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="7bA-gz-xkI"/>
-                <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-1" id="Adp-iX-doM"/>
-                <constraint firstAttribute="trailing" secondItem="mEV-SP-95e" secondAttribute="trailing" id="BV7-Y9-B63"/>
-                <constraint firstAttribute="bottom" secondItem="mEV-SP-95e" secondAttribute="bottom" constant="-1" id="Q3N-HK-B7e"/>
-                <constraint firstItem="mEV-SP-95e" firstAttribute="leading" secondItem="eiz-Ma-1pi" secondAttribute="trailing" constant="-2" id="Za7-uN-wf2"/>
-                <constraint firstItem="owG-hq-uwM" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="bPq-ty-RQW"/>
-                <constraint firstItem="eiz-Ma-1pi" firstAttribute="leading" secondItem="owG-hq-uwM" secondAttribute="trailing" constant="-2" id="zCW-kp-VmW"/>
+                <constraint firstItem="mEV-SP-95e" firstAttribute="leading" secondItem="eiz-Ma-1pi" secondAttribute="trailing" constant="-2" id="65y-AJ-FEj"/>
+                <constraint firstItem="owG-hq-uwM" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Fes-AP-eDi"/>
+                <constraint firstAttribute="trailing" secondItem="mEV-SP-95e" secondAttribute="trailing" id="P09-kA-2L5"/>
+                <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-1" id="UfB-PB-FFn"/>
+                <constraint firstItem="eiz-Ma-1pi" firstAttribute="leading" secondItem="owG-hq-uwM" secondAttribute="trailing" constant="-2" id="ZRb-g8-Ded"/>
+                <constraint firstAttribute="bottom" secondItem="mEV-SP-95e" secondAttribute="bottom" constant="-1" id="dMh-4t-fiI"/>
+                <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="v6c-as-nh4"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="Volume_Icon.png" width="57" height="49"/>
+    </resources>
 </document>

@@ -157,6 +157,7 @@
     [leftNavigator.view setFrame:offLeftNavigatorFrame];
     [leftNavigator setDelegate:self];
     leftNavOpen = false;
+    [self selectNavChoice:@"Set" withShift:NO];
     
     [self.view addSubview:leftNavigator.view];
     
@@ -261,6 +262,10 @@
     [self selectNavChoice:@"Instrument" withShift:NO];
 }
 
+- (void)setSelectedInstrument:(NSString *)iconName
+{
+    [leftNavigator enableInstrumentViewWithIcon:iconName];
+}
 
 #pragma mark - Save Load Delegate
 
@@ -381,6 +386,13 @@
             activeSequencer = sequencerName;
             optionsViewController.activeSequencer = sequencerName;
         }
+
+        // Load icon into left navigator
+        Instrument * selectedInst = [seqSetViewController getCurrentInstrument];
+        if(selectedInst != nil){
+            [leftNavigator enableInstrumentViewWithIcon:selectedInst.iconName];
+        }
+        
     }else{
         [playControlViewController resetTempo];
         [playControlViewController resetVolume];
@@ -617,6 +629,13 @@
 - (void)updateGuitarView
 {
     [guitarView update];
+    
+    // Also update selected instrument
+    [self setSelectedInstrument:[seqSetViewController getCurrentInstrument].iconName];
+    
+    // Also update the selected table cell
+    //[seqSetViewController setSelectedCellToSelectedInstrument];
+    
 }
 
 // Ensure current playband is reflected in the data if displayed (>=0)
@@ -639,7 +658,7 @@
 - (void) numInstrumentsDidChange:(int)numInstruments
 {
     if(numInstruments > 0){
-        [leftNavigator enableInstrumentView];
+        [leftNavigator enableInstrumentViewWithIcon:[seqSetViewController getCurrentInstrument].iconName];
     }else{
         [leftNavigator disableInstrumentView];
     }

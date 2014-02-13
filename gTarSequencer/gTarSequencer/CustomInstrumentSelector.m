@@ -207,7 +207,7 @@
     
     [customIcon setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5]];
     customIcon.layer.cornerRadius = 5.0;
-    customIcon.layer.borderWidth = 0.7;
+    customIcon.layer.borderWidth = 1.0;
     customIcon.layer.borderColor = [UIColor whiteColor].CGColor;
     
     UIButton * button = [[UIButton alloc] initWithFrame:imageFrame];
