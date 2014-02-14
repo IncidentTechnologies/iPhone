@@ -6,6 +6,9 @@
 //  Copyright 2010 Incident Technologies. All rights reserved.
 //
 
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+
 #import "AudioController.h"
 
 #import "AUAudioNodeFactory.h"
@@ -217,25 +220,14 @@ void AudioInterruptionListener (void *inClientData, UInt32 inInterruptionState) 
 
 	// Create the AUGraph
 	NewAUGraph(&augraph);
-	
-    //AUAudioNode *outputNode = [AUAudioNodeFactory MakeAudioNode:AUDIO_NODE_OUTPUT];
-    //AUMixerNode *mixerNode = (AUMixerNode*)[AUAudioNodeFactory MakeAudioNode:AUDIO_NODE_MIXER];
-    //[mixerNode ConnectOutput:0 toInput:outputNode channel:0];
     
+    // Create the network node that will run our network
     m_networkNode = (AUNodeNetwork*)[AUAudioNodeFactory MakeAudioNode:AUDIO_NODE_NETWORK];
-//	AudioNode *root = [networkNode GetRootNode];
-//    WavetableNode *wavNode = new WavetableNode();
-//    EnvelopeNode *envNode = new EnvelopeNode();
-//    
-//    ConnectNodes(wavNode, envNode);
-//    ConnectNodes(envNode, root);
     
-	// Open the graph audio units.
-	// Now open but not initialized (no resource allocation occurs here)
+	// Open the graph audio units
 	result = AUGraphOpen(augraph);
     
-    //[mixerNode SetBusCount:1];
-	//[mixerNode InitializeMixerBusses];
+    // Initialize the units
     [m_networkNode Initialize];
 	
 	// Now call initialize to verify connections

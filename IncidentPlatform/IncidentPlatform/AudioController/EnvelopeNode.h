@@ -17,6 +17,7 @@ public:
     
     void NoteOn();
     void NoteOff();
+    bool IsNoteOn();
     
     float GetNextSample(unsigned long int timestamp);
     
@@ -36,6 +37,8 @@ public:
     
     float m_msRelease;
     float m_ReleaseLevel;
+    
+    float m_releaseScaleFactor;
 };
 
 #endif

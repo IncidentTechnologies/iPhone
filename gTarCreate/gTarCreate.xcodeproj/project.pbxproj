@@ -19,12 +19,14 @@
 		2610F09A18AAB28E003F5CEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F08218AAB28E003F5CEB /* UIKit.framework */; };
 		2610F0A218AAB28E003F5CEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2610F0A018AAB28E003F5CEB /* InfoPlist.strings */; };
 		2610F0A418AAB28E003F5CEB /* gTarCreateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2610F0A318AAB28E003F5CEB /* gTarCreateTests.m */; };
-		2610F0B318AAB7EC003F5CEB /* DefaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2610F0B118AAB7EC003F5CEB /* DefaultViewController.m */; };
+		2610F0B318AAB7EC003F5CEB /* DefaultViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F0B118AAB7EC003F5CEB /* DefaultViewController.mm */; };
 		2610F0B418AAB7EC003F5CEB /* DefaultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2610F0B218AAB7EC003F5CEB /* DefaultViewController.xib */; };
 		2610F0BE18AB0E36003F5CEB /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F0BB18AB0E36003F5CEB /* libGtarController.a */; };
 		2610F14E18AD6B59003F5CEB /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */; };
 		2610F15718AD9226003F5CEB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15618AD9226003F5CEB /* libc++.dylib */; };
 		2610F15918AD923C003F5CEB /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15818AD923C003F5CEB /* libstdc++.dylib */; };
+		26EBC39B18ADBF9C0068BEC6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */; };
+		26EBC39F18ADC0690068BEC6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +57,7 @@
 		2610F0A118AAB28E003F5CEB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2610F0A318AAB28E003F5CEB /* gTarCreateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gTarCreateTests.m; sourceTree = "<group>"; };
 		2610F0B018AAB7EC003F5CEB /* DefaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultViewController.h; sourceTree = "<group>"; };
-		2610F0B118AAB7EC003F5CEB /* DefaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultViewController.m; sourceTree = "<group>"; };
+		2610F0B118AAB7EC003F5CEB /* DefaultViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DefaultViewController.mm; sourceTree = "<group>"; };
 		2610F0B218AAB7EC003F5CEB /* DefaultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultViewController.xib; sourceTree = "<group>"; };
 		2610F0B518AB0C15003F5CEB /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioController.a; path = "../GtarSdk/AudioController/build/Debug-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
 		2610F0B718AB0DCC003F5CEB /* libAudioControllerDeploy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioControllerDeploy.a; path = "../GtarSdk/AudioController/build/Debug-iphoneos/libAudioControllerDeploy.a"; sourceTree = "<group>"; };
@@ -65,6 +67,9 @@
 		2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		2610F15618AD9226003F5CEB /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		2610F15818AD923C003F5CEB /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		26EBC39C18ADC0690068BEC6 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26EBC39F18ADC0690068BEC6 /* AVFoundation.framework in Frameworks */,
+				26EBC39B18ADBF9C0068BEC6 /* AudioToolbox.framework in Frameworks */,
 				2610F15918AD923C003F5CEB /* libstdc++.dylib in Frameworks */,
 				2610F15718AD9226003F5CEB /* libc++.dylib in Frameworks */,
 				2610F14E18AD6B59003F5CEB /* libIncidentPlatform.a in Frameworks */,
@@ -117,6 +124,9 @@
 		2610F07D18AAB28E003F5CEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26EBC39C18ADC0690068BEC6 /* AudioUnit.framework */,
+				26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */,
+				26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */,
 				2610F15818AD923C003F5CEB /* libstdc++.dylib */,
 				2610F15618AD9226003F5CEB /* libc++.dylib */,
 				2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */,
@@ -141,7 +151,7 @@
 				2610F09018AAB28E003F5CEB /* Images.xcassets */,
 				2610F08518AAB28E003F5CEB /* Supporting Files */,
 				2610F0B018AAB7EC003F5CEB /* DefaultViewController.h */,
-				2610F0B118AAB7EC003F5CEB /* DefaultViewController.m */,
+				2610F0B118AAB7EC003F5CEB /* DefaultViewController.mm */,
 				2610F0B218AAB7EC003F5CEB /* DefaultViewController.xib */,
 			);
 			path = gTarCreate;
@@ -273,7 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2610F08F18AAB28E003F5CEB /* AppDelegate.m in Sources */,
-				2610F0B318AAB7EC003F5CEB /* DefaultViewController.m in Sources */,
+				2610F0B318AAB7EC003F5CEB /* DefaultViewController.mm in Sources */,
 				2610F08B18AAB28E003F5CEB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

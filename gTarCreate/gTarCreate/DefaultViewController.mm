@@ -9,10 +9,13 @@
 #import "DefaultViewController.h"
 #import "AudioController.h"
 
-//#import "AudioNodeCommon.h"
-//#import "AUNodeNetwork.h"
+#import "AUNodeNetwork.h"
+#import "AudioNodeCommon.h"
 
-@interface DefaultViewController ()
+@interface DefaultViewController () {
+    WavetableNode *m_wavNode;
+    EnvelopeNode *m_envNode;
+}
 
 @end
 
@@ -30,18 +33,26 @@
 -(IBAction)onButtonTestClicked:(id)sender {
     AudioController *ac = [AudioController sharedAudioController];
     
-    /*AudioNode *root = [[ac GetNodeNetwork] GetRootNode];
-    WavetableNode *wavNode = new WavetableNode();
-    EnvelopeNode *envNode = new EnvelopeNode();
+    AudioNode *root = [[ac GetNodeNetwork] GetRootNode];
     
-    ConnectNodes(wavNode, envNode);
-    ConnectNodes(envNode, root);*/
+    m_wavNode = new WavetableNode();
+    m_envNode = new EnvelopeNode();
+    
+    ConnectNodes(m_wavNode, m_envNode);
+    ConnectNodes(m_envNode, root);
     
     [ac startAUGraph];
 }
 
 -(IBAction)onButtonTriggerClicked:(id)sender {
+    NSLog(@"trig");
     
+    if(!m_envNode->IsNoteOn()) {
+        m_wavNode->trigger();
+        m_envNode->NoteOn();
+    } else
+        m_envNode->NoteOff();
+       
 }
 
 - (void)viewDidLoad
