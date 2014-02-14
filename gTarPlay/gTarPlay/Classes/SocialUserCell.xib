@@ -42,7 +42,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="followButtonClicked:" destination="-1" eventType="touchUpInside" id="90"/>
+                        <action selector="followButtonClicked:" destination="arX-Jl-tCS" eventType="touchUpInside" id="V2y-8w-321"/>
                     </connections>
                 </button>
             </subviews>
@@ -102,7 +102,7 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <action selector="followButtonClicked:" destination="-1" eventType="touchUpInside" id="zwG-Lp-56B"/>
+                            <action selector="followButtonClicked:" destination="arX-Jl-tCS" eventType="touchUpInside" id="hAU-vy-xej"/>
                         </connections>
                     </button>
                 </subviews>

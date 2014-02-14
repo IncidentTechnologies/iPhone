@@ -16,10 +16,21 @@
 
 @implementation LearnTitleViewController
 
-- (void)viewDidLoad
-{
+
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization on passed parameter observation object
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	[OpenGLES2View class];
+    
+    // Initialize the glView
+    _glview = [_glview initWithFrame:_glview.frame];
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,9 +43,7 @@
     // Button clicked
     
     NSDate *start = [NSDate date];
-    {
-        XMPObject *tempObj = [XMPObjectFactory MakeXMPObjectFromFilename:@"test_lesson"];
-    }
+    XMPObject *tempObj = [XMPObjectFactory MakeXMPObjectFromFilename:@"spaceoddity"];
     NSDate *methodFinish = [NSDate date];
     NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:start];
     NSLog(@"Execution Time: %f", executionTime);

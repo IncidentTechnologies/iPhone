@@ -9,6 +9,8 @@
 #import "LearnAppDelegate.h"
 #import "LearnTitleViewController.h"
 
+#import "OpenGLES2View.h"
+
 @implementation LearnAppDelegate
 
 - (id)init
@@ -57,7 +59,10 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{    
+{
+    // We never want to rotate
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+    
     // Override point for customization after application launch.
 	m_navigationController.navigationBarHidden = YES;
     
@@ -66,13 +71,10 @@
     
     // We need this in other parts of the app to properly display modals with transparent backgrounds
     m_window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    
+
     [self.m_window addSubview:m_navigationController.view];
-    [self.m_window makeKeyAndVisible];
-    
-    // We never want to rotate
-    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    
+
+
 #ifdef _MIXPANEL
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Application launched"];
@@ -88,6 +90,13 @@
     // Load Title view
     LearnTitleViewController *titleViewController = [[LearnTitleViewController alloc] initWithNibName:@"LearnTitleView" bundle:nil];
     [m_navigationController pushViewController:titleViewController animated:false];
+    
+    /*
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    OpenGLES2View *tempView = [[OpenGLES2View alloc] initWithFrame:screenBounds];
+    [self.m_window addSubview:tempView];
+    [self.m_window makeKeyAndVisible];
+     */
     
     return YES;
 }

@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LearnTitleViewController">
             <connections>
+                <outlet property="_glview" destination="5Vo-2h-NXi" id="t1z-sl-YP9"/>
                 <outlet property="m_buttonTestXMP" destination="xmk-2N-Cny" id="Qbd-JV-pNA"/>
                 <outlet property="view" destination="1" id="7qf-ou-Xe0"/>
             </connections>
@@ -26,13 +27,18 @@
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2C5-Ea-dHh">
-                    <rect key="frame" x="247" y="20" width="279" height="280"/>
+                    <rect key="frame" x="20" y="58" width="242" height="242"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.10980392160000001" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="textColor" red="0.92737023080000003" green="0.91833560960000005" blue="0.928910236" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Vo-2h-NXi" customClass="OpenGLES2View">
+                    <rect key="frame" x="270" y="58" width="284" height="242"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.088520223989999994" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "OpenGLES2View.h"
+
 @interface LearnTitleViewController : UIViewController{
-    IBOutlet UIButton *m_buttonTestXMP;
+    OpenGLES2View *_glview;
 }
+
+@property (nonatomic, retain) IBOutlet UIButton *m_buttonTestXMP;
+@property (nonatomic, retain) IBOutlet OpenGLES2View *glview;
 
 -(IBAction) onTestXmpClicked:(id)sender;
 

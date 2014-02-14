@@ -21,19 +21,15 @@
 @synthesize m_instruments;
 @synthesize m_currentSamplePackIndex;
 
--(id) init
-{
+-(id) init {
     return [self initWithSampleRate:44100 AndSamplePack:nil];
 }
 
-- (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString *)name
-{
+- (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString *)name {
     self = [super init];
     
-    if(self)
-    {
+    if(self) {
         m_currentSamplePackIndex = -1;
-        
         m_sampleRate = sampleRate;
         
         m_standardTunning = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:0],
@@ -60,8 +56,7 @@
 }
 
 // Extract the array of instrument data in instrument.plist
-- (bool) loadInstrumentArray
-{
+- (bool) loadInstrumentArray {
     // load the plist file
     NSError *error = nil;
     NSPropertyListFormat format;
@@ -100,31 +95,28 @@
 // only on init, there are some issues with instantiating a Sampler object in
 // an asynchronous fasion, in general an asynchronous constructor presents a few problems,
 // we should revisit this in the future.
-- (bool) loadSamplerWithName:(NSString*)name
-{
+- (bool) loadSamplerWithName:(NSString*)name {
     int samplePackNum = [self getSamplePackNumFromName:name];
-    if (-1 == samplePackNum)
-    {
+    if (-1 == samplePackNum) {
         // No match found, use default (whatever is at index 0)
         NSLog(@"No sample pack found with name %@. Using default sample pack", name);
         samplePackNum = 0;
     }
     
-    if (m_currentSamplePackIndex == samplePackNum)
-    {
+    if (m_currentSamplePackIndex == samplePackNum) {
         // this sample pack is already loaded
         NSLog(@"The sample pack is already loaded");
         return true;
     }
     
     m_pendingLoadRequests++;
-    @synchronized(self)
-    {
+    
+    @synchronized(self) {
         m_pendingLoadRequests--;
         bool result = [self loadSamplerWithIndex:samplePackNum];
         m_pendingLoad = NO;
-        if (!result)
-        {
+
+        if (!result) {
             NSLog(@"loadSamplerWithIndex failed for instrumentNum:%d", samplePackNum);
             return false;
         };
@@ -134,23 +126,20 @@
 }
 
 // Initialize the sampler with data from the sample pack at the given index
-- (bool) loadSamplerWithIndex:(int)index
-{
+- (bool) loadSamplerWithIndex:(int)index {
     m_pendingLoad = YES;
     m_currentSamplePackIndex = index;
     
     [self releaseAudioData];
     
-    if (![self loadSamplePackMetaData:index])
-    {
+    if (![self loadSamplePackMetaData:index]) {
         NSLog(@"loadSamplePackMetaData failed for instrumentNum:%d", index);
         return false;
     }
     
     [self obtainSoundFileURLs];
     
-    if (![self readAudioFilesIntoMemory])
-    {
+    if (![self readAudioFilesIntoMemory]) {
         NSLog(@"readAudioFilesIntoMemory failed");
         return false;
     }
@@ -170,8 +159,7 @@
 {
     int samplePackNum = [self getSamplePackNumFromName:name];
     
-    if (samplePackNum == -1)
-    {
+    if (samplePackNum == -1) {
         // No match found, use default (whatever is at index 0)
         NSLog(@"No sample pack found with name %@. Using default sample pack", name);
         samplePackNum = 0;
@@ -184,13 +172,11 @@
 {
     NSLog(@"Asynchronously loading sample pack at index: %d", index);
     
-    if (m_currentSamplePackIndex == index && m_pendingLoad)
-    {
+    if (m_currentSamplePackIndex == index && m_pendingLoad) {
         NSLog(@"This sample pack currently loading");
         return;
     }
-    else if (m_currentSamplePackIndex == index)
-    {
+    else if (m_currentSamplePackIndex == index) {
         // This sample pack is already loaded
         [self finishedLoadingSamplePack:true withSelector:aSelector andOwner:parent];
         return;
@@ -200,8 +186,8 @@
     dispatch_queue_t main = dispatch_get_main_queue();
     dispatch_async(queue, ^{
         m_pendingLoadRequests++;
-        @synchronized(self)
-        {
+        
+        @synchronized(self) {
             m_pendingLoadRequests--;
             BOOL result = [self loadSamplerWithIndex:index] ? YES : NO;
             m_pendingLoad = NO;
@@ -213,8 +199,7 @@
     });
 }
 
-- (void) finishedLoadingSamplePack:(BOOL)result withSelector:(SEL)aSelector andOwner:(NSObject*)parent
-{
+- (void) finishedLoadingSamplePack:(BOOL)result withSelector:(SEL)aSelector andOwner:(NSObject*)parent {
     [parent performSelector:aSelector withObject:[NSNumber numberWithBool:result]];    
 }
 
@@ -222,23 +207,15 @@
 // given name. First we try to match the 'name' key of the instrument, if
 // that fails we try to match the 'friendly name' key if it exist.
 // return - The index in m_instruments array or -1 on error or no match.
-- (int) getSamplePackNumFromName:(NSString*)name
-{
+- (int) getSamplePackNumFromName:(NSString*)name {
     if (nil == name)
-    {
         return -1;
-    }
     
-    for (int i = 0; i < m_instruments.count; i++)
-    {
+    for (int i = 0; i < m_instruments.count; i++) {
         if ([name caseInsensitiveCompare:[[m_instruments objectAtIndex:i] objectForKey:@"Name"]] == NSOrderedSame)
-        {
             return i;
-        }
         else if ([name caseInsensitiveCompare:[[m_instruments objectAtIndex:i] objectForKey:@"FriendlyName"]] == NSOrderedSame)
-        {
             return i;
-        }
     }
     
     // Could not find a matching instrument name
@@ -248,28 +225,27 @@
 // Loads parameters from instruments.plist needed to load samples and init the sampler.
 // instrumentNum is the 0 based position of the instrument to be loaded as arranged in
 // the plist file.
-- (bool) loadSamplePackMetaData:(int)samplePackNum
-{
+- (bool) loadSamplePackMetaData:(int)samplePackNum {
     NSDictionary *selectedInstrument = [m_instruments objectAtIndex:samplePackNum];
     self.m_samplePackName = [selectedInstrument objectForKey:@"Name"];
-    if (nil == m_samplePackName)
-    {
+    
+    if (nil == m_samplePackName) {
         NSLog(@"Error: could not find objectForKey:'Name' for instrument #:%d", samplePackNum);
         return false;
     }
+    
     m_firstNoteMidiNum = [[selectedInstrument objectForKey:@"FirstNoteMidiNum"] intValue];
     m_numberOfSamples = [[selectedInstrument objectForKey:@"NumNotes"] intValue];
     m_tuning = [selectedInstrument objectForKey:@"Tuning"];
+
     if (nil == m_tuning)
-    {
         self.m_tuning = m_standardTunning;
-    }
+
     
     m_sampleNameArray = new CFURLRef[m_numberOfSamples];
     m_soundStructArray = new soundStruct[m_numberOfSamples];
     
-    for (int i= 0; i <  m_numberOfSamples; i++)
-    {
+    for (int i= 0; i <  m_numberOfSamples; i++) {
         m_soundStructArray[i].audioDataLeft = NULL;
         m_soundStructArray[i].audioDataRight = NULL;
     }
@@ -280,21 +256,17 @@
 - (void) obtainSoundFileURLs
 {
     // Create the URLs for the source audio files.
-    for (int noteNum = m_firstNoteMidiNum; noteNum < m_firstNoteMidiNum + m_numberOfSamples; noteNum++)
-    {
-        
+    for (int noteNum = m_firstNoteMidiNum; noteNum < m_firstNoteMidiNum + m_numberOfSamples; noteNum++) {
         NSString *filename = [NSString stringWithFormat:@"%@ %d", m_samplePackName, noteNum];
         
         NSURL *url = [[NSBundle mainBundle] URLForResource: filename
                                              withExtension: @"mp3"];
-
         
         m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
     }
 }
 
-- (void) setupMonoStreamFormat
-{
+- (void) setupMonoStreamFormat {
     // The AudioSampleType data type is the recommended type for sample data input.
     // This obtains the byte size of the type for use in filling in the ASBD.
     size_t bytesPerSample = sizeof (AudioSampleType);
@@ -311,8 +283,7 @@
     monoStreamFormat.mSampleRate        = m_sampleRate;
 }
 
-- (void) setupStereoStreamFormat
-{
+- (void) setupStereoStreamFormat {
     // The AudioSampleType data type is the recommended type for sample data input
     // This obtains the byte size of the type for use in filling in the ASBD.
     
@@ -328,10 +299,8 @@
     stereoStreamFormat.mSampleRate        = m_sampleRate;
 }
 
-- (bool) readAudioFilesIntoMemory
-{
-    for (int noteNum = 0; noteNum < m_numberOfSamples; noteNum++)
-    {
+- (bool) readAudioFilesIntoMemory {
+    for (int noteNum = 0; noteNum < m_numberOfSamples; noteNum++) {
         if (m_pendingLoadRequests > 0) {
             // A new more recent sample pack load has been requested. 
             // Bail out of the current load, no need to clean up allocated
@@ -408,13 +377,11 @@
             importFormat = stereoStreamFormat;
             
         }
-        else if (channelCount == 1)
-        {
+        else if (channelCount == 1) {
             importFormat = monoStreamFormat;
             m_soundStructArray[noteNum].audioDataRight = NULL;
         }
-        else
-        {
+        else {
             NSLog (@"*** WARNING: File format not supported - wrong number of channels");
             ExtAudioFileDispose (audioFileObject);
             return false;
@@ -515,12 +482,9 @@
 
 // Set up the mapping from the m_soundMappingArray representing each fret position on a 
 // guitar to the note/sample on a sample board (keyboard) it should play.
-- (void) setupMappingArray
-{
-    for (int string = 0; string < 6; string++)
-    {
-        for (int fret = 0; fret <= 16; fret++)
-        {
+- (void) setupMappingArray {
+    for (int string = 0; string < 6; string++) {
+        for (int fret = 0; fret <= 16; fret++) {
             int noteNum = [[m_tuning objectAtIndex:string] intValue] + fret;
             m_soundMappingArray[string][fret] = &m_soundStructArray[noteNum];
             m_fretsPressedDown[string][fret] = false;
@@ -540,8 +504,7 @@
     }
 }
 
-- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amplitude
-{
+- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amplitude {
     // Set the fret to be played for this string, and reset the sampleNumber
     m_fretToPlay[string] = fret;
     m_sampleNumber[string] = 0;
@@ -550,8 +513,7 @@
     m_volume[string] = amplitude;
 }
 
-- (void) PluckMutedString:(int)string
-{
+- (void) PluckMutedString:(int)string {
     // call PluckString first, then set values for m_sampleNumber and m_sampleNumber, since
     // PluckString resets them all
     [self PluckString:string atFret:0 withAmplitude:1.0f];
@@ -559,27 +521,18 @@
     m_sampleNumber[string] = 5512;
     
     if (string < 3)
-    {
         m_attenuation[string] = 0.0007;
-    }
     else
-    {
         m_attenuation[string] = 0.00082;
-    }
 }
 
-- (float) getNextSample
-{
+- (float) getNextSample {
     if (m_pendingLoad)
-    {
         return 0;
-    }
     
     float retSample = 0.0;
-    for (int string = 0; string < 6; string++)
-    {
-        if (-1 != m_fretToPlay[string])
-        {
+    for (int string = 0; string < 6; string++) {
+        if (-1 != m_fretToPlay[string]) {
             int fret = m_fretToPlay[string];
             
             // Get the sample number, as an index into the sound stored in memory,
@@ -608,13 +561,12 @@
             
             //protection...
             // Check for pending note changes.
-            if (-1 != m_pendingFretToPlay[string])
-            {
+            if (-1 != m_pendingFretToPlay[string]) {
                 int currentSample = audioData[sampleNumber];
                 int nextSample = audioData[sampleNumber + 1];
+                
                 // check for positve sloped 0 crossing
-                if (currentSample < 0 && nextSample >= 0)
-                {
+                if (currentSample < 0 && nextSample >= 0) {
                     // this is a positive sloped 0 crossing, make the note transition
                     m_fretToPlay[string] = m_pendingFretToPlay[string];
                     m_sampleNumber[string] = m_pendingFretToPlayStartIndex[string];
@@ -627,14 +579,12 @@
 
             // After reaching the end of the sound, stop playback and reset everything so sound will
             // play from begining the next time around.
-            if (sampleNumber >= m_soundMappingArray[string][fret]->frameCount)
-            {
+            if (sampleNumber >= m_soundMappingArray[string][fret]->frameCount) {
                 m_sampleNumber[string] = 0;
                 m_fretsPressedDown[string][fret] = false;
                 m_fretToPlay[string] = -1;
             }
-            else if (0.01 >= m_volume[string])
-            {
+            else if (0.01 >= m_volume[string]) {
                 m_sampleNumber[string] = 0;
                 m_fretsPressedDown[string][fret] = false;
                 m_fretToPlay[string] = -1;
@@ -647,19 +597,16 @@
     return retSample;
 }
 
-- (void) Reset
-{
+- (void) Reset {
     // reset the sample position for all samples to 0 and turn off all channels
     memset(m_sampleNumber, 0, sizeof(m_sampleNumber[0]) * 6);
     memset(m_fretToPlay, -1, sizeof(m_fretToPlay));
 }
 
-- (void) FretDown:(int)fret onString:(int)string
-{
+- (void) FretDown:(int)fret onString:(int)string {
     m_fretsPressedDown[string][fret] = true;
     
-    if (0 == m_fretToPlay[string])
-    {
+    if (0 == m_fretToPlay[string]) {
         m_attenuation[string] = 0.00009;
         return;
     } 
@@ -687,29 +634,24 @@
     
     // If the fret being lifted is the one currently being played, then a change in played note will
     // happen (hammer off).
-    if (fret == m_fretToPlay[string] || fret == m_pendingFretToPlay[string])
-    {
+    if (fret == m_fretToPlay[string] || fret == m_pendingFretToPlay[string]) {
         // Find the fret to hammer off to, i.e. the highest remaining fret being pressed down.
         int highestRemainingFretDown = -1;
-        for (int currentfret = 16; currentfret >= 0; currentfret--)
-        {
-            if (m_fretsPressedDown[string][currentfret])
-            {
+        for (int currentfret = 16; currentfret >= 0; currentfret--) {
+            if (m_fretsPressedDown[string][currentfret]) {
                 highestRemainingFretDown = currentfret;
                 break;
             }
         }
         
-        if (highestRemainingFretDown > 0)
-        {
+        if (highestRemainingFretDown > 0) {
             // Find the index for the next 0 crossing with a positive slope (i.e. a negative to positive transition and not vice versa) for the note that will be transitioned to.
             m_pendingFretToPlayStartIndex[string] = [self getNextPositiveZeroCrossingSampleForString:string atFret:highestRemainingFretDown afterSampleIndex:m_sampleNumber[string]];
             
             m_pendingFretToPlay[string] = highestRemainingFretDown;
 
         }
-        else
-        {
+        else {
             // There are no other frets being pressed down, kill the note via attenuation
             m_pendingFretToPlay[string] = -1;
             m_attenuation[string] = 0.00009;
@@ -719,35 +661,29 @@
 }
 
 // Stop playing the note indicated by the string and fret position
-- (void) noteOffAtString:(int)string andFret:(int)fret
-{
+- (void) noteOffAtString:(int)string andFret:(int)fret {
     // If this is the specific note being played now, and there is no note change pending
     // (m_pendingFretToPlay), then kill the note.
-    if ( fret == m_fretToPlay[string] && -1 == m_pendingFretToPlay[string])
-    {
+    if ( fret == m_fretToPlay[string] && -1 == m_pendingFretToPlay[string]) {
         // The noteOff msg corresponds to the note currently playing, kill the note via attenuation.
         m_attenuation[string] = 0.00009;
     }
 }
 
-- (int) getCurrentSamplePackIndex
-{
+- (int) getCurrentSamplePackIndex {
     return m_currentSamplePackIndex;
 }
 
 // Returns an array of NSStrings containing the name of each sample instrument.
 // If the instrumetn contains a Friendly Name it will return that, otherwise
 // the main name will be used.
-- (NSArray*) getInstrumentNames
-{
+- (NSArray*) getInstrumentNames {
     NSMutableArray *instrumentNames = [[NSMutableArray alloc] init];
-    for (NSDictionary *instrument in m_instruments) 
-    {
+    for (NSDictionary *instrument in m_instruments) {
         NSString *name = [instrument objectForKey:@"FriendlyName"];
         if (nil == name)
-        {
             name = [instrument objectForKey:@"Name"];
-        }
+
         [instrumentNames addObject:name];
     }
     
@@ -756,18 +692,15 @@
 
 // Takes the audio sample for the given string and fret and returns the index of the next sample at
 // which a zero crossing with a positive slope (negative to positive transition) will occur.
-- (int) getNextPositiveZeroCrossingSampleForString:(int)string atFret:(int)fret afterSampleIndex:(int)sampleIndex
-{
+- (int) getNextPositiveZeroCrossingSampleForString:(int)string atFret:(int)fret afterSampleIndex:(int)sampleIndex {
     int currentIndex = sampleIndex;
     AudioSampleType *audioData = (AudioSampleType *)m_soundMappingArray[string][fret]->audioDataLeft;
     int currentSample;
     int nextSample;
-    while (1)
-    {
+    while (1) {
         currentSample = audioData[currentIndex];
         nextSample = audioData[currentIndex + 1];
-        if (currentSample < 0 && nextSample >= 0)
-        {
+        if (currentSample < 0 && nextSample >= 0) {
             // this is a positive sloped 0 crossing
             return currentIndex;
         }
@@ -776,8 +709,7 @@
     }
 }
 
-- (void) printErrorMessage: (NSString *) errorString withStatus: (OSStatus) result
-{
+- (void) printErrorMessage: (NSString *) errorString withStatus: (OSStatus) result {
     char resultString[5];
     UInt32 swappedResult = CFSwapInt32HostToBig (result);
     bcopy (&swappedResult, resultString, 4);
@@ -795,24 +727,19 @@
 //           );
 }
 
-- (void) releaseAudioData
-{
-    for (int noteNum = 0; noteNum < m_numberOfSamples; noteNum++)
-    {  
-        if (m_sampleNameArray[noteNum] != NULL)
-        {
+- (void) releaseAudioData {
+    for (int noteNum = 0; noteNum < m_numberOfSamples; noteNum++) {
+        if (m_sampleNameArray[noteNum] != NULL) {
             //[(NSURL *)m_sampleNameArray[noteNum] release];
             CFRelease (m_sampleNameArray[noteNum]);
         }
         
-        if (m_soundStructArray[noteNum].audioDataLeft != NULL)
-        {
+        if (m_soundStructArray[noteNum].audioDataLeft != NULL) {
             free (m_soundStructArray[noteNum].audioDataLeft);
             m_soundStructArray[noteNum].audioDataLeft = NULL;
         }
         
-        if (m_soundStructArray[noteNum].audioDataRight != NULL)
-        {
+        if (m_soundStructArray[noteNum].audioDataRight != NULL) {
             free (m_soundStructArray[noteNum].audioDataRight);
             m_soundStructArray[noteNum].audioDataRight = NULL;
         }
@@ -822,8 +749,7 @@
     delete[] m_soundStructArray;
 }
 
--(void) dealloc
-{
+-(void) dealloc {
     [self releaseAudioData];
     [m_tuning release];
     [m_standardTunning release];

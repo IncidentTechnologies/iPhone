@@ -5820,6 +5820,11 @@
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 				);
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
+					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;

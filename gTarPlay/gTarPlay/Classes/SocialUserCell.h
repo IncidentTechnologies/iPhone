@@ -23,6 +23,6 @@
 
 - (void)updateCell;
 
-- (IBAction)followButtonClicked:(id)sender;
+- (IBAction) followButtonClicked:(id)sender;
 
 @end

@@ -10,51 +10,39 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
-@class Sampler;
+#define AUDIO_CONTROLLER_SAMPLE_RATE 44100.0f
 
-typedef enum
-{
-    KarplusStrong,
-    SamplerSource,
-    SinWave,
-    SawWave,
-    SquareWave
-} AudioSource;
-
-@interface AudioController : NSObject 
-{
+@interface AudioController : NSObject  {
 	// Audio Graph Members
 	AUGraph augraph;
 	AudioUnit mixer;
     
-    Sampler *m_sampler;
-    
-	// Sine Phase Indicator;
-	double sinPhase;
-	float frequency;
-	
     Float32 *m_tempOut;
+    AVAudioSession *m_session;
+    
+    AudioStreamBasicDescription m_StreamDefaultDescription;
 }
 
-@property (assign) float frequency;
-@property (assign) double sinPhase;
-@property (assign) bool m_fNoteOn;
+@property (retain, nonatomic) NSMutableArray* effects;
 
-@property (assign) bool m_LimiterOn;
++(id) sharedAudioController;
 
-@property (assign) float m_volumeGain;
+//- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument;
 
-- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument;
 - (void) initializeAUGraph;
 - (void) startAUGraph;
 - (void) stopAUGraph;
-- (void) reset;
-- (void) ClearOutEffects;
+- (AUGraph*) getAUGraph;
+- (float) getSampleRate;
+- (AudioStreamBasicDescription*) GetDefaultStreamDescription;
+- (AudioStreamBasicDescription*) InitDefaultStreamDescription;
 
+/*
 - (bool) setSamplePackWithName:(NSString*)name;
 - (void) setSamplePackWithName:(NSString*)name withSelector:(SEL)aSelector andOwner:(NSObject*)parent;
 - (void) setSamplePackWithIndex:(int)index withSelector:(SEL)aSelector andOwner:(NSObject*)parent;
 - (void) samplerFinishedLoadingCB:(NSNumber*)result;
+ */
 
 - (void) RouteAudioToSpeaker;
 - (void) RouteAudioToDefault;
@@ -62,28 +50,34 @@ typedef enum
 - (void) requestAudioRouteDetails;
 - (void) AnnounceAudioRouteChange;
 
-- (void) SetAudioSource:(AudioSource)audioSource;
-- (void) SetWaveFrequency:(float)freq;
+//- (void) SetAudioSource:(AudioSource)audioSource;
+//- (void) SetWaveFrequency:(float)freq;
 
-- (void) PluckString:(int)string atFret:(int)fret;
-- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amp;
-- (void) PluckMutedString:(int)string;
-- (void) SetAttentuation:(float)atten;
-- (void) SetKSAttenuation:(float)atten forString:(int)string;
-- (bool) SetAttenuationVariation:(float)variation;
+// TODO: Go into KS
+//- (void) PluckString:(int)string atFret:(int)fret;
+//- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amp;
+//- (void) PluckMutedString:(int)string;
+//- (void) SetAttentuation:(float)atten;
+//- (void) SetKSAttenuation:(float)atten forString:(int)string;
+//- (bool) SetAttenuationVariation:(float)variation;
 
-- (bool) SetBWCutoff:(double)cutoff;
-- (bool) SetBWOrder:(int)order;
+// TODO: go into BW filter
+// - (bool) SetBWCutoff:(double)cutoff;
+// - (bool) SetBWOrder:(int)order;
 
-- (bool) SetKSBWCutoff:(double)cutoff;
-- (bool) SetKSBWOrder:(int)order;
+// TODO: go into KS BW filter
+// - (bool) SetKSBWCutoff:(double)cutoff;
+// - (bool) SetKSBWOrder:(int)order;
 
-- (bool) FretDown:(int)fret onString:(int)string;
-- (bool) FretUp:(int)fret onString:(int)string;
+// TODO: go into guitar model
+// - (bool) FretDown:(int)fret onString:(int)string;
+// - (bool) FretUp:(int)fret onString:(int)string;
 
-- (bool) NoteOnAtString:(int)string andFret:(int)fret;
-- (bool) NoteOffAtString:(int)string andFret:(int)fret;
+// - (bool) NoteOnAtString:(int)string andFret:(int)fret;
+// - (bool) NoteOffAtString:(int)string andFret:(int)fret;
 
+// TODO: Go into reverb
+/*
 - (bool) SetReverbWet:(double)wet;
 - (bool) SetReverbPassThrough:(bool)passThrough;
 - (bool) SetReverbBandwidth:(double)bandwidth;
@@ -93,11 +87,18 @@ typedef enum
 - (bool) SetReverbInputDiffusion2:(double)inputDiffusion2;
 - (bool) SetReverbDecayDiffusion1:(double)decayDiffusion1;
 - (bool) SetReverbDecayDiffusion2:(double)decayDiffusion2;
+*/
+
+// TODO: go into delay line
+/*
 - (bool) SetPreDelayLineLength:(double)scale;
 - (bool) SetDelayLineL1Length:(double)length;
 - (bool) SetDelayLineL2Length:(double)length;
 - (bool) SetDelayLineR1Length:(double)length;
 - (bool) SetDelayLineR2Length:(double)length;
+ */
+
+/*
 - (bool) SetDistortion2PassThrough:(bool)passThrough;
 - (bool) SetTanhDistortionPosFactor:(double)factor;
 - (bool) SetTanhDistortionNegFactor:(double)factor;
@@ -110,7 +111,9 @@ typedef enum
 - (bool) SetSoftClipOverdriveMultiplier:(double)multiplier;
 - (bool) SetFuzzExpPassThru:(bool)passThru;
 - (bool) SetFuzzExpGain:(double)gain;
+ */
 
+/*
 - (void) SetKS3rdOrderHarmonicOn:(bool)on;
 - (void) SetKS5thOrderHarmonicOn:(bool)on;
 - (bool) SetKSNoiseScale:(float)scale;
@@ -119,17 +122,17 @@ typedef enum
 - (bool) SetKSSawToothMultiplier:(float)multiplier;
 - (void) SetKSSqWaveOn:(bool)on;
 - (bool) SetKSSqWaveMultiplier:(float)multiplier;
+ */
 
+/*
 - (NSArray*) GetEffects;
 - (NSArray*) getEffectNames;
 
 - (NSArray*) getInstrumentNames;
 - (int) getCurrentSamplePackIndex;
+ */
 
-void AudioInterruptionListener (
-                             void     *inClientData,
-                             UInt32   inInterruptionState
-                             );
+void AudioInterruptionListener (void *inClientData, UInt32 inInterruptionState);
 
 // AudioSession callbacks
 void AudioControllerPropertyListener (void *inClientData, AudioSessionPropertyID inID, UInt32 inDataSize, const void *inData);

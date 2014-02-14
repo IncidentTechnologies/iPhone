@@ -7,38 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26113FBC186270FD00DB9E3D /* XMPObjectFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FBB186270FD00DB9E3D /* XMPObjectFactory.mm */; };
-		26113FBF18627AAC00DB9E3D /* XMPText.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FBE18627AAC00DB9E3D /* XMPText.mm */; };
-		26113FC218627ED200DB9E3D /* XMPGtarNote.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC118627ED200DB9E3D /* XMPGtarNote.mm */; };
-		26113FCA1862909A00DB9E3D /* XMPInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC71862909A00DB9E3D /* XMPInput.mm */; };
-		26113FCB1862909A00DB9E3D /* XMPLEDEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */; };
-		26113FCC1862909A00DB9E3D /* XMPLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FC91862909A00DB9E3D /* XMPLoop.mm */; };
-		26113FCE1863BD2200DB9E3D /* spaceoddity.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 26113FCD1863BD2200DB9E3D /* spaceoddity.xmp */; };
-		26113FD71863C33800DB9E3D /* XMPSong.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FD01863C33800DB9E3D /* XMPSong.mm */; };
-		26113FD81863C33800DB9E3D /* XMPNote.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FD21863C33800DB9E3D /* XMPNote.mm */; };
-		26113FD91863C33800DB9E3D /* XMPMeasure.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FD41863C33800DB9E3D /* XMPMeasure.mm */; };
-		26113FDA1863C33800DB9E3D /* XMPTrack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26113FD61863C33800DB9E3D /* XMPTrack.mm */; };
-		26282C4F18624546005BBE82 /* XMPObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26282C4E18624546005BBE82 /* XMPObject.mm */; };
-		265051B318610C9000285F64 /* test_lesson.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 265051B218610C9000285F64 /* test_lesson.xmp */; };
-		265051B618611E2600285F64 /* XMPNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051B418611E2600285F64 /* XMPNode.cpp */; };
-		265051BB1861297E00285F64 /* XMPAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051B81861297E00285F64 /* XMPAttribute.cpp */; };
-		265051BC1861297E00285F64 /* XMPValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051B91861297E00285F64 /* XMPValue.cpp */; };
-		265051BF18612C0300285F64 /* XMPElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 265051BD18612C0300285F64 /* XMPElement.cpp */; };
-		265051C31861389600285F64 /* XMPLesson.mm in Sources */ = {isa = PBXBuildFile; fileRef = 265051C21861389600285F64 /* XMPLesson.mm */; };
-		265051C61861390400285F64 /* XMPLessonChapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 265051C51861390400285F64 /* XMPLessonChapter.mm */; };
+		26478FED1869274B0077987F /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26478FEC1869274B0077987F /* libIncidentPlatform.a */; };
 		2665DE491857E36D00D8ABA6 /* LearnNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2665DE481857E36D00D8ABA6 /* LearnNavigationController.m */; };
 		2665DE4B1857E45600D8ABA6 /* LearnTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2665DE4A1857E45600D8ABA6 /* LearnTitleView.xib */; };
 		2665DE8E1857F6DD00D8ABA6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2665DE8D1857F6DD00D8ABA6 /* MainWindow.xib */; };
-		2665DEA318592FB900D8ABA6 /* valid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2665DE9818592FB900D8ABA6 /* valid.cpp */; };
-		2665DEA418592FB900D8ABA6 /* XMPMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2665DE9A18592FB900D8ABA6 /* XMPMain.cpp */; };
-		2665DEA518592FB900D8ABA6 /* XMPParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2665DE9B18592FB900D8ABA6 /* XMPParser.cpp */; };
-		2665DEA618592FB900D8ABA6 /* XMPTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2665DE9D18592FB900D8ABA6 /* XMPTest.cpp */; };
-		2665DEA718592FB900D8ABA6 /* XMPTokenizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2665DE9F18592FB900D8ABA6 /* XMPTokenizer.cpp */; };
-		2665DEA818592FB900D8ABA6 /* XMPTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2665DEA118592FB900D8ABA6 /* XMPTree.cpp */; };
-		2665DEBE1859310700D8ABA6 /* SmartBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2665DEBC1859310700D8ABA6 /* SmartBuffer.cpp */; };
 		2665DEC01859397400D8ABA6 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2665DEBF1859397400D8ABA6 /* libc++.dylib */; };
 		2665DEC21859397C00D8ABA6 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2665DEC11859397C00D8ABA6 /* libstdc++.dylib */; };
-		2665DEC6185950E300D8ABA6 /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2665DEC4185950E300D8ABA6 /* Console.cpp */; };
+		26A5133218876DFF00478200 /* IncidentPlatformBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 26A5133118876DFF00478200 /* IncidentPlatformBundle.bundle */; };
 		26EA13611830BDAA0082CA2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EA13601830BDAA0082CA2D /* Foundation.framework */; };
 		26EA13631830BDAA0082CA2D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EA13621830BDAA0082CA2D /* CoreGraphics.framework */; };
 		26EA13651830BDAA0082CA2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EA13641830BDAA0082CA2D /* UIKit.framework */; };
@@ -65,68 +40,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		26113FBA186270FD00DB9E3D /* XMPObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPObjectFactory.h; sourceTree = "<group>"; };
-		26113FBB186270FD00DB9E3D /* XMPObjectFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPObjectFactory.mm; sourceTree = "<group>"; };
-		26113FBD18627AAC00DB9E3D /* XMPText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPText.h; sourceTree = "<group>"; };
-		26113FBE18627AAC00DB9E3D /* XMPText.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPText.mm; sourceTree = "<group>"; };
-		26113FC018627ED200DB9E3D /* XMPGtarNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPGtarNote.h; sourceTree = "<group>"; };
-		26113FC118627ED200DB9E3D /* XMPGtarNote.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPGtarNote.mm; sourceTree = "<group>"; };
-		26113FC41862909A00DB9E3D /* XMPInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPInput.h; sourceTree = "<group>"; };
-		26113FC51862909A00DB9E3D /* XMPLEDEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPLEDEvent.h; sourceTree = "<group>"; };
-		26113FC61862909A00DB9E3D /* XMPLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPLoop.h; sourceTree = "<group>"; };
-		26113FC71862909A00DB9E3D /* XMPInput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPInput.mm; sourceTree = "<group>"; };
-		26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLEDEvent.mm; sourceTree = "<group>"; };
-		26113FC91862909A00DB9E3D /* XMPLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLoop.mm; sourceTree = "<group>"; };
-		26113FCD1863BD2200DB9E3D /* spaceoddity.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = spaceoddity.xmp; path = gtarLearn/test_data/spaceoddity.xmp; sourceTree = SOURCE_ROOT; };
-		26113FCF1863C33800DB9E3D /* XMPTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPTrack.h; sourceTree = "<group>"; };
-		26113FD01863C33800DB9E3D /* XMPSong.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPSong.mm; sourceTree = "<group>"; };
-		26113FD11863C33800DB9E3D /* XMPSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPSong.h; sourceTree = "<group>"; };
-		26113FD21863C33800DB9E3D /* XMPNote.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPNote.mm; sourceTree = "<group>"; };
-		26113FD31863C33800DB9E3D /* XMPNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPNote.h; sourceTree = "<group>"; };
-		26113FD41863C33800DB9E3D /* XMPMeasure.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPMeasure.mm; sourceTree = "<group>"; };
-		26113FD51863C33800DB9E3D /* XMPMeasure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPMeasure.h; sourceTree = "<group>"; };
-		26113FD61863C33800DB9E3D /* XMPTrack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPTrack.mm; sourceTree = "<group>"; };
-		26282C4D18624546005BBE82 /* XMPObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPObject.h; sourceTree = "<group>"; };
-		26282C4E18624546005BBE82 /* XMPObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPObject.mm; sourceTree = "<group>"; };
-		265051B218610C9000285F64 /* test_lesson.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_lesson.xmp; path = gtarLearn/test_data/test_lesson.xmp; sourceTree = SOURCE_ROOT; };
-		265051B418611E2600285F64 /* XMPNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPNode.cpp; sourceTree = "<group>"; };
-		265051B518611E2600285F64 /* XMPNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPNode.h; sourceTree = "<group>"; };
-		265051B71861297E00285F64 /* XMPAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPAttribute.h; sourceTree = "<group>"; };
-		265051B81861297E00285F64 /* XMPAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPAttribute.cpp; sourceTree = "<group>"; };
-		265051B91861297E00285F64 /* XMPValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPValue.cpp; sourceTree = "<group>"; };
-		265051BA1861297E00285F64 /* XMPValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPValue.h; sourceTree = "<group>"; };
-		265051BD18612C0300285F64 /* XMPElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPElement.cpp; sourceTree = "<group>"; };
-		265051BE18612C0300285F64 /* XMPElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPElement.h; sourceTree = "<group>"; };
-		265051C11861389600285F64 /* XMPLesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPLesson.h; sourceTree = "<group>"; };
-		265051C21861389600285F64 /* XMPLesson.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLesson.mm; sourceTree = "<group>"; };
-		265051C41861390400285F64 /* XMPLessonChapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPLessonChapter.h; sourceTree = "<group>"; };
-		265051C51861390400285F64 /* XMPLessonChapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMPLessonChapter.mm; sourceTree = "<group>"; };
+		26057F6718691DB400F6668F /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
+		26478FEC1869274B0077987F /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../../../Library/Developer/Xcode/DerivedData/gtarLearn-cyxpkhpypyaxkjamdjgpjywbhzhx/Build/Products/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		2665DE471857E36D00D8ABA6 /* LearnNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnNavigationController.h; sourceTree = "<group>"; };
 		2665DE481857E36D00D8ABA6 /* LearnNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnNavigationController.m; sourceTree = "<group>"; };
 		2665DE4A1857E45600D8ABA6 /* LearnTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LearnTitleView.xib; sourceTree = "<group>"; };
 		2665DE8D1857F6DD00D8ABA6 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		2665DE9318592FB900D8ABA6 /* dss_list.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = dss_list.h; sourceTree = "<group>"; };
-		2665DE9418592FB900D8ABA6 /* dss_rbtree.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dss_rbtree.hxx; sourceTree = "<group>"; };
-		2665DE9518592FB900D8ABA6 /* EHM.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = EHM.h; sourceTree = "<group>"; };
-		2665DE9618592FB900D8ABA6 /* RESULT.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = RESULT.h; sourceTree = "<group>"; };
-		2665DE9818592FB900D8ABA6 /* valid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = valid.cpp; sourceTree = "<group>"; };
-		2665DE9918592FB900D8ABA6 /* valid.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = valid.h; sourceTree = "<group>"; };
-		2665DE9A18592FB900D8ABA6 /* XMPMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPMain.cpp; sourceTree = "<group>"; };
-		2665DE9B18592FB900D8ABA6 /* XMPParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPParser.cpp; sourceTree = "<group>"; };
-		2665DE9C18592FB900D8ABA6 /* XMPParser.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = XMPParser.h; sourceTree = "<group>"; };
-		2665DE9D18592FB900D8ABA6 /* XMPTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPTest.cpp; sourceTree = "<group>"; };
-		2665DE9E18592FB900D8ABA6 /* XMPTest.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = XMPTest.h; sourceTree = "<group>"; };
-		2665DE9F18592FB900D8ABA6 /* XMPTokenizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPTokenizer.cpp; sourceTree = "<group>"; };
-		2665DEA018592FB900D8ABA6 /* XMPTokenizer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = XMPTokenizer.h; sourceTree = "<group>"; };
-		2665DEA118592FB900D8ABA6 /* XMPTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMPTree.cpp; sourceTree = "<group>"; };
-		2665DEA218592FB900D8ABA6 /* XMPTree.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = XMPTree.h; sourceTree = "<group>"; };
-		2665DEBB1859308100D8ABA6 /* DebugConsole.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = DebugConsole.h; sourceTree = "<group>"; };
-		2665DEBC1859310700D8ABA6 /* SmartBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmartBuffer.cpp; sourceTree = "<group>"; };
-		2665DEBD1859310700D8ABA6 /* SmartBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = SmartBuffer.h; sourceTree = "<group>"; };
 		2665DEBF1859397400D8ABA6 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		2665DEC11859397C00D8ABA6 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
-		2665DEC4185950E300D8ABA6 /* Console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Console.cpp; sourceTree = "<group>"; };
-		2665DEC5185950E300D8ABA6 /* Console.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = Console.h; sourceTree = "<group>"; };
+		26A5133118876DFF00478200 /* IncidentPlatformBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = IncidentPlatformBundle.bundle; path = "../../../../../Library/Developer/Xcode/DerivedData/gtarLearn-cyxpkhpypyaxkjamdjgpjywbhzhx/Build/Products/Debug-iphonesimulator/IncidentPlatformBundle.bundle"; sourceTree = "<group>"; };
 		26EA135D1830BDAA0082CA2D /* gtarLearn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gtarLearn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26EA13601830BDAA0082CA2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		26EA13621830BDAA0082CA2D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -152,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26478FED1869274B0077987F /* libIncidentPlatform.a in Frameworks */,
 				2665DEC21859397C00D8ABA6 /* libstdc++.dylib in Frameworks */,
 				2665DEC01859397400D8ABA6 /* libc++.dylib in Frameworks */,
 				26EA13631830BDAA0082CA2D /* CoreGraphics.framework in Frameworks */,
@@ -173,98 +96,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		26113FC318628B2B00DB9E3D /* XMPObject */ = {
-			isa = PBXGroup;
-			children = (
-				26113FCF1863C33800DB9E3D /* XMPTrack.h */,
-				26113FD61863C33800DB9E3D /* XMPTrack.mm */,
-				26113FD31863C33800DB9E3D /* XMPNote.h */,
-				26113FD21863C33800DB9E3D /* XMPNote.mm */,
-				26113FD51863C33800DB9E3D /* XMPMeasure.h */,
-				26113FD41863C33800DB9E3D /* XMPMeasure.mm */,
-				26113FC41862909A00DB9E3D /* XMPInput.h */,
-				26113FC71862909A00DB9E3D /* XMPInput.mm */,
-				26113FC51862909A00DB9E3D /* XMPLEDEvent.h */,
-				26113FC81862909A00DB9E3D /* XMPLEDEvent.mm */,
-				26113FC61862909A00DB9E3D /* XMPLoop.h */,
-				26113FC91862909A00DB9E3D /* XMPLoop.mm */,
-				26113FBA186270FD00DB9E3D /* XMPObjectFactory.h */,
-				26113FBB186270FD00DB9E3D /* XMPObjectFactory.mm */,
-				26113FC018627ED200DB9E3D /* XMPGtarNote.h */,
-				26113FC118627ED200DB9E3D /* XMPGtarNote.mm */,
-				26113FBD18627AAC00DB9E3D /* XMPText.h */,
-				26113FBE18627AAC00DB9E3D /* XMPText.mm */,
-				26282C4D18624546005BBE82 /* XMPObject.h */,
-				26282C4E18624546005BBE82 /* XMPObject.mm */,
-			);
-			name = XMPObject;
-			sourceTree = "<group>";
-		};
-		265051C01861387900285F64 /* XMPLesson */ = {
-			isa = PBXGroup;
-			children = (
-				26113FC318628B2B00DB9E3D /* XMPObject */,
-				265051C11861389600285F64 /* XMPLesson.h */,
-				265051C21861389600285F64 /* XMPLesson.mm */,
-				26113FD11863C33800DB9E3D /* XMPSong.h */,
-				26113FD01863C33800DB9E3D /* XMPSong.mm */,
-				265051C41861390400285F64 /* XMPLessonChapter.h */,
-				265051C51861390400285F64 /* XMPLessonChapter.mm */,
-			);
-			name = XMPLesson;
-			sourceTree = "<group>";
-		};
-		2665DE9218592FB900D8ABA6 /* DSS */ = {
-			isa = PBXGroup;
-			children = (
-				2665DEBC1859310700D8ABA6 /* SmartBuffer.cpp */,
-				2665DEBD1859310700D8ABA6 /* SmartBuffer.h */,
-				2665DEBB1859308100D8ABA6 /* DebugConsole.h */,
-				2665DE9318592FB900D8ABA6 /* dss_list.h */,
-				2665DE9418592FB900D8ABA6 /* dss_rbtree.hxx */,
-				2665DE9518592FB900D8ABA6 /* EHM.h */,
-				2665DE9618592FB900D8ABA6 /* RESULT.h */,
-			);
-			path = DSS;
-			sourceTree = "<group>";
-		};
-		2665DE9718592FB900D8ABA6 /* XMPParser */ = {
-			isa = PBXGroup;
-			children = (
-				26113FCD1863BD2200DB9E3D /* spaceoddity.xmp */,
-				265051BD18612C0300285F64 /* XMPElement.cpp */,
-				265051BE18612C0300285F64 /* XMPElement.h */,
-				265051B71861297E00285F64 /* XMPAttribute.h */,
-				265051B81861297E00285F64 /* XMPAttribute.cpp */,
-				265051B91861297E00285F64 /* XMPValue.cpp */,
-				265051BA1861297E00285F64 /* XMPValue.h */,
-				265051B418611E2600285F64 /* XMPNode.cpp */,
-				265051B518611E2600285F64 /* XMPNode.h */,
-				265051B218610C9000285F64 /* test_lesson.xmp */,
-				2665DE9818592FB900D8ABA6 /* valid.cpp */,
-				2665DE9918592FB900D8ABA6 /* valid.h */,
-				2665DE9A18592FB900D8ABA6 /* XMPMain.cpp */,
-				2665DE9B18592FB900D8ABA6 /* XMPParser.cpp */,
-				2665DE9C18592FB900D8ABA6 /* XMPParser.h */,
-				2665DE9D18592FB900D8ABA6 /* XMPTest.cpp */,
-				2665DE9E18592FB900D8ABA6 /* XMPTest.h */,
-				2665DE9F18592FB900D8ABA6 /* XMPTokenizer.cpp */,
-				2665DEA018592FB900D8ABA6 /* XMPTokenizer.h */,
-				2665DEA118592FB900D8ABA6 /* XMPTree.cpp */,
-				2665DEA218592FB900D8ABA6 /* XMPTree.h */,
-			);
-			path = XMPParser;
-			sourceTree = "<group>";
-		};
-		2665DEC3185950E300D8ABA6 /* Console */ = {
-			isa = PBXGroup;
-			children = (
-				2665DEC4185950E300D8ABA6 /* Console.cpp */,
-				2665DEC5185950E300D8ABA6 /* Console.h */,
-			);
-			path = Console;
-			sourceTree = "<group>";
-		};
 		26EA13541830BDAA0082CA2D = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +118,8 @@
 		26EA135F1830BDAA0082CA2D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26478FEC1869274B0077987F /* libIncidentPlatform.a */,
+				26057F6718691DB400F6668F /* libIncidentPlatform.a */,
 				2665DEC11859397C00D8ABA6 /* libstdc++.dylib */,
 				2665DEBF1859397400D8ABA6 /* libc++.dylib */,
 				26EA13601830BDAA0082CA2D /* Foundation.framework */,
@@ -300,10 +133,6 @@
 		26EA13661830BDAA0082CA2D /* gtarLearn */ = {
 			isa = PBXGroup;
 			children = (
-				2665DEC3185950E300D8ABA6 /* Console */,
-				2665DE9218592FB900D8ABA6 /* DSS */,
-				2665DE9718592FB900D8ABA6 /* XMPParser */,
-				265051C01861387900285F64 /* XMPLesson */,
 				26EA136F1830BDAA0082CA2D /* LearnAppDelegate.h */,
 				26EA13701830BDAA0082CA2D /* LearnAppDelegate.m */,
 				26EA13781830BDAA0082CA2D /* LearnTitleViewController.h */,
@@ -322,6 +151,7 @@
 			children = (
 				26EA13681830BDAA0082CA2D /* gtarLearn-Info.plist */,
 				26EA136C1830BDAA0082CA2D /* main.m */,
+				26A5133118876DFF00478200 /* IncidentPlatformBundle.bundle */,
 				26EA13691830BDAA0082CA2D /* InfoPlist.strings */,
 				26EA136E1830BDAA0082CA2D /* gtarLearn-Prefix.pch */,
 				2665DE8D1857F6DD00D8ABA6 /* MainWindow.xib */,
@@ -423,12 +253,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				265051B318610C9000285F64 /* test_lesson.xmp in Resources */,
-				26113FCE1863BD2200DB9E3D /* spaceoddity.xmp in Resources */,
 				2665DE8E1857F6DD00D8ABA6 /* MainWindow.xib in Resources */,
 				26EA137C1830BDAA0082CA2D /* Images.xcassets in Resources */,
 				26EA136B1830BDAA0082CA2D /* InfoPlist.strings in Resources */,
 				2665DE4B1857E45600D8ABA6 /* LearnTitleView.xib in Resources */,
+				26A5133218876DFF00478200 /* IncidentPlatformBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,35 +276,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2665DEA418592FB900D8ABA6 /* XMPMain.cpp in Sources */,
-				26113FBC186270FD00DB9E3D /* XMPObjectFactory.mm in Sources */,
-				26113FD71863C33800DB9E3D /* XMPSong.mm in Sources */,
-				2665DEA618592FB900D8ABA6 /* XMPTest.cpp in Sources */,
-				265051BB1861297E00285F64 /* XMPAttribute.cpp in Sources */,
-				26113FBF18627AAC00DB9E3D /* XMPText.mm in Sources */,
-				2665DEA518592FB900D8ABA6 /* XMPParser.cpp in Sources */,
-				26113FCC1862909A00DB9E3D /* XMPLoop.mm in Sources */,
-				26113FD91863C33800DB9E3D /* XMPMeasure.mm in Sources */,
-				2665DEC6185950E300D8ABA6 /* Console.cpp in Sources */,
 				2665DE491857E36D00D8ABA6 /* LearnNavigationController.m in Sources */,
 				26EA137A1830BDAA0082CA2D /* LearnTitleViewController.mm in Sources */,
-				265051C61861390400285F64 /* XMPLessonChapter.mm in Sources */,
-				26113FD81863C33800DB9E3D /* XMPNote.mm in Sources */,
-				26113FCB1862909A00DB9E3D /* XMPLEDEvent.mm in Sources */,
-				265051B618611E2600285F64 /* XMPNode.cpp in Sources */,
-				2665DEA718592FB900D8ABA6 /* XMPTokenizer.cpp in Sources */,
-				26113FCA1862909A00DB9E3D /* XMPInput.mm in Sources */,
 				26EA13711830BDAA0082CA2D /* LearnAppDelegate.m in Sources */,
-				2665DEBE1859310700D8ABA6 /* SmartBuffer.cpp in Sources */,
-				2665DEA318592FB900D8ABA6 /* valid.cpp in Sources */,
 				26EA136D1830BDAA0082CA2D /* main.m in Sources */,
-				265051BC1861297E00285F64 /* XMPValue.cpp in Sources */,
-				26113FDA1863C33800DB9E3D /* XMPTrack.mm in Sources */,
-				265051BF18612C0300285F64 /* XMPElement.cpp in Sources */,
-				2665DEA818592FB900D8ABA6 /* XMPTree.cpp in Sources */,
-				26113FC218627ED200DB9E3D /* XMPGtarNote.mm in Sources */,
-				265051C31861389600285F64 /* XMPLesson.mm in Sources */,
-				26282C4F18624546005BBE82 /* XMPObject.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,11 +398,23 @@
 		26EA13931830BDAA0082CA2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gtarLearn/gtarLearn-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(BUILT_PRODUCTS_DIR)/usr/local/include",
+					"$(BUILT_PRODUCTS_DIR)/../../include",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform/",
+				);
 				INFOPLIST_FILE = "gtarLearn/gtarLearn-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gtarLearn-cyxpkhpypyaxkjamdjgpjywbhzhx/Build/Products/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -608,11 +424,23 @@
 		26EA13941830BDAA0082CA2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gtarLearn/gtarLearn-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(BUILT_PRODUCTS_DIR)/usr/local/include",
+					"$(BUILT_PRODUCTS_DIR)/../../include",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform/",
+				);
 				INFOPLIST_FILE = "gtarLearn/gtarLearn-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gtarLearn-cyxpkhpypyaxkjamdjgpjywbhzhx/Build/Products/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
