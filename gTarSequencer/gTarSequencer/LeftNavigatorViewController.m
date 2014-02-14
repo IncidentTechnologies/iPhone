@@ -147,6 +147,12 @@
 
 -(void)enableInstrumentViewWithIcon:(NSString *)instIcon
 {
+    
+    if(instIcon.length == 0){
+        [self disableInstrumentView];
+        return;
+    }
+    
     [instrumentButton setAlpha:1.0];
     instrumentViewEnabled = true;
     [self setInstrumentIcon:instIcon];
@@ -154,6 +160,8 @@
 
 -(void)setInstrumentIcon:(NSString *)instIcon
 {
+    NSLog(@"instIcon 2 is %@",instIcon);
+    
     [instrumentButton setImage:[UIImage imageNamed:instIcon] forState:UIControlStateNormal];
 }
 

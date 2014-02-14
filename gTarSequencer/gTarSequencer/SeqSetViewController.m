@@ -523,7 +523,7 @@
         NSString * instName = [dict objectForKey:@"Name"];
         NSString * iconName = [dict objectForKey:@"IconName"];
         NSArray * stringSet = [dict objectForKey:@"Strings"];
-        NSArray * stringPaths = [dict objectForKey:@"String Paths"];
+        NSArray * stringPaths = [dict objectForKey:@"StringPaths"];
         
         [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet andStringPaths:stringPaths];
     }
@@ -606,7 +606,7 @@
     [dict setValue:newIndex forKey:@"Index"];
     [dict setValue:instName forKey:@"Name"];
     [dict setValue:stringSet forKey:@"Strings"];
-    [dict setValue:stringPaths forKey:@"String Paths"];
+    [dict setValue:stringPaths forKey:@"StringPaths"];
     
     [masterInstrumentOptions addObject:dict];
     [remainingInstrumentOptions addObject:dict];

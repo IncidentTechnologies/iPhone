@@ -229,10 +229,13 @@
 		587C9FCC1888C0E7001F57C7 /* WubWub 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F781888C0E7001F57C7 /* WubWub 6.mp3 */; };
 		58868EDA187619ED00B469C2 /* PlayControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58868ED8187619ED00B469C2 /* PlayControlViewController.m */; };
 		58868EDB187619ED00B469C2 /* BottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58868ED9187619ED00B469C2 /* BottomBar.xib */; };
+		588BF9E018AC4F380086E816 /* OptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BF9DF18AC4F370086E816 /* OptionsView.xib */; };
 		5894D61A186505BD00849C71 /* SeqSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894D619186505BD00849C71 /* SeqSetViewController.m */; };
 		58A59522188619C100696614 /* libGtarControllerDeploy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A59521188619C100696614 /* libGtarControllerDeploy.a */; };
 		58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */; };
 		58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */; };
+		58B1BE2718AD524900A3C0CC /* OptionsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */; };
+		58B1BE2A18AD52AB00A3C0CC /* OptionsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B1BE2918AD52AB00A3C0CC /* OptionsViewCell.m */; };
 		58B4D3C9186E1EC80035D9E5 /* Instrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B4D3C8186E1EC80035D9E5 /* Instrument.m */; };
 		58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 58B4D3CC186E1F210035D9E5 /* SoundMaker.mm */; };
 		58B4D3D0186E1F570035D9E5 /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B4D3CF186E1F570035D9E5 /* Pattern.m */; };
@@ -283,8 +286,6 @@
 		58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */; };
 		58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */; };
 		58F2900718A5626C00552A24 /* CustomInstrumentRecorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F2900618A5626B00552A24 /* CustomInstrumentRecorder.xib */; };
-		58F4B94A18983BB70071609B /* SaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F4B94918983BB70071609B /* SaveView.xib */; };
-		58F4B94E18983ED90071609B /* LoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F4B94D18983ED90071609B /* LoadView.xib */; };
 		58F4B951189849BA0071609B /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F4B950189849BA0071609B /* OptionsViewController.m */; };
 		58F5448E18AB161E009E6E43 /* Options_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5448A18AB161E009E6E43 /* Options_Icon.png */; };
 		58F5448F18AB161E009E6E43 /* Power_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5448B18AB161E009E6E43 /* Power_Icon.png */; };
@@ -548,11 +549,15 @@
 		58868ED7187619ED00B469C2 /* PlayControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayControlViewController.h; sourceTree = "<group>"; };
 		58868ED8187619ED00B469C2 /* PlayControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayControlViewController.m; sourceTree = "<group>"; };
 		58868ED9187619ED00B469C2 /* BottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomBar.xib; sourceTree = "<group>"; };
+		588BF9DF18AC4F370086E816 /* OptionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsView.xib; sourceTree = "<group>"; };
 		5894D618186505BD00849C71 /* SeqSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeqSetViewController.h; sourceTree = "<group>"; };
 		5894D619186505BD00849C71 /* SeqSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeqSetViewController.m; sourceTree = "<group>"; };
 		58A59521188619C100696614 /* libGtarControllerDeploy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarControllerDeploy.a; path = "../../../../Library/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos/libGtarControllerDeploy.a"; sourceTree = "<group>"; };
 		58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoading.png; sourceTree = "<group>"; };
 		58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoadingWide.png; sourceTree = "<group>"; };
+		58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell.xib; sourceTree = "<group>"; };
+		58B1BE2818AD52AB00A3C0CC /* OptionsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewCell.h; sourceTree = "<group>"; };
+		58B1BE2918AD52AB00A3C0CC /* OptionsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewCell.m; sourceTree = "<group>"; };
 		58B4D3C7186E1EC80035D9E5 /* Instrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instrument.h; sourceTree = "<group>"; };
 		58B4D3C8186E1EC80035D9E5 /* Instrument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instrument.m; sourceTree = "<group>"; };
 		58B4D3CB186E1F210035D9E5 /* SoundMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundMaker.h; sourceTree = "<group>"; };
@@ -617,8 +622,6 @@
 		58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		58F2900618A5626B00552A24 /* CustomInstrumentRecorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInstrumentRecorder.xib; sourceTree = "<group>"; };
-		58F4B94918983BB70071609B /* SaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveView.xib; sourceTree = "<group>"; };
-		58F4B94D18983ED90071609B /* LoadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadView.xib; sourceTree = "<group>"; };
 		58F4B94F189849B90071609B /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
 		58F4B950189849BA0071609B /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
 		58F5448A18AB161E009E6E43 /* Options_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Options_Icon.png; sourceTree = "<group>"; };
@@ -1071,6 +1074,16 @@
 			name = BottomBarViewController;
 			sourceTree = "<group>";
 		};
+		58B1BE2518AD522200A3C0CC /* OptionsViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */,
+				58B1BE2818AD52AB00A3C0CC /* OptionsViewCell.h */,
+				58B1BE2918AD52AB00A3C0CC /* OptionsViewCell.m */,
+			);
+			name = OptionsViewCell;
+			sourceTree = "<group>";
+		};
 		58B4D3CA186E1ECC0035D9E5 /* Instrument */ = {
 			isa = PBXGroup;
 			children = (
@@ -1265,8 +1278,8 @@
 			children = (
 				58F4B94F189849B90071609B /* OptionsViewController.h */,
 				58F4B950189849BA0071609B /* OptionsViewController.m */,
-				58F4B94918983BB70071609B /* SaveView.xib */,
-				58F4B94D18983ED90071609B /* LoadView.xib */,
+				588BF9DF18AC4F370086E816 /* OptionsView.xib */,
+				58B1BE2518AD522200A3C0CC /* OptionsViewCell */,
 			);
 			name = OptionsViewController;
 			sourceTree = "<group>";
@@ -1403,11 +1416,11 @@
 				587C9F8E1888C0E7001F57C7 /* Guitar 4.mp3 in Resources */,
 				580A52011864DFF50077240B /* gTarConnectedLogo.png in Resources */,
 				587C9FB51888C0E7001F57C7 /* Trombone 1.mp3 in Resources */,
+				58B1BE2718AD524900A3C0CC /* OptionsViewCell.xib in Resources */,
 				5811AAF8187B88C800FC0BD2 /* Percussion 29.mp3 in Resources */,
 				5811AAE5187B88C800FC0BD2 /* Percussion 11.mp3 in Resources */,
 				5811AAFD187B88C800FC0BD2 /* Percussion 33.mp3 in Resources */,
 				587C9F9E1888C0E7001F57C7 /* Piano 2.mp3 in Resources */,
-				58F4B94E18983ED90071609B /* LoadView.xib in Resources */,
 				5811AB11187B88C800FC0BD2 /* Percussion 51.mp3 in Resources */,
 				5840858618652D9000BFF3C5 /* SeqSetView.xib in Resources */,
 				5811AAED187B88C800FC0BD2 /* Percussion 19.mp3 in Resources */,
@@ -1439,6 +1452,7 @@
 				584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */,
 				5811AB06187B88C800FC0BD2 /* Percussion 41.mp3 in Resources */,
 				5811AB2D187B88C800FC0BD2 /* Percussion 77.mp3 in Resources */,
+				588BF9E018AC4F380086E816 /* OptionsView.xib in Resources */,
 				5811AB34187B88C800FC0BD2 /* Percussion 83.mp3 in Resources */,
 				58D617681863BF5E001EB327 /* Sequence3.png in Resources */,
 				58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */,
@@ -1506,7 +1520,6 @@
 				587C9FC01888C0E7001F57C7 /* Vibraphone 6.mp3 in Resources */,
 				58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */,
 				5805D049188DAF4C000832A9 /* CustomInstrumentSelector.xib in Resources */,
-				58F4B94A18983BB70071609B /* SaveView.xib in Resources */,
 				587C9FC31888C0E7001F57C7 /* Violin 3.mp3 in Resources */,
 				5811AB30187B88C800FC0BD2 /* Percussion 8.mp3 in Resources */,
 				5811AB3A187B88C800FC0BD2 /* Percussion 89.mp3 in Resources */,
@@ -1626,6 +1639,7 @@
 				58B4D3D0186E1F570035D9E5 /* Pattern.m in Sources */,
 				58CA4E6F18A174EA0026D83C /* VolumeDisplay.m in Sources */,
 				585916FE18774791002C21B9 /* MeasureView.m in Sources */,
+				58B1BE2A18AD52AB00A3C0CC /* OptionsViewCell.m in Sources */,
 				5811AB49187B95BA00FC0BD2 /* SEQNote.m in Sources */,
 				581C31F0188F258F00D7AD79 /* CustomStringCell.m in Sources */,
 				58B4D3C9186E1EC80035D9E5 /* Instrument.m in Sources */,

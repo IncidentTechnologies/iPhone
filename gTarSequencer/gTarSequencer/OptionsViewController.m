@@ -8,233 +8,423 @@
 
 #import "OptionsViewController.h"
 
+#define ROW_HEIGHT 65
+
 @implementation OptionsViewController
 
 @synthesize delegate;
-@synthesize saveField;
-@synthesize saveWarning;
-@synthesize filePicker;
-@synthesize noFilesLabel;
-@synthesize saveLoadButton;
-@synthesize saveSaveButton;
-@synthesize loadLoadButton;
-@synthesize loadSaveButton;
 @synthesize activeSequencer;
-
+@synthesize createNewButton;
+@synthesize saveCurrentButton;
+@synthesize renameButton;
+@synthesize loadButton;
+@synthesize loadTable;
+@synthesize selectMode;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self userDidSaveSequence];
+        [self initOptions];
     }
     return self;
 }
 
-- (void)initSave
+- (void)viewDidLoad
 {
     
-    saveSaveButton.layer.cornerRadius = 5.0;
-    saveLoadButton.layer.cornerRadius = 5.0;
+    UINib *nib = [UINib nibWithNibName:@"OptionsViewCell" bundle:nil];
+    [loadTable registerNib:nib forCellReuseIdentifier:@"LoadCell"];
     
-    if(activeSequencer != nil){
-        saveField.text = activeSequencer;
-        [saveWarning setHidden:NO];
-    }else{
-        [saveWarning setHidden:YES];
-    }
+    loadTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    loadTable.bounces = NO;
     
-    saveField.delegate = self;
+    selectMode = nil;
     
-    // Setup text field listener
-    [saveField addTarget:self action:@selector(saveFieldStartEdit:) forControlEvents:UIControlEventEditingDidBegin];
-    [saveField addTarget:self action:@selector(saveFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
-    [saveField addTarget:self action:@selector(saveFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
-    [self showHideButton:saveSaveButton isHidden:NO withSelector:@selector(userDidSaveFromSave:)];
-
+    [self reloadFileTable];
 }
 
-- (void)initLoad
+- (void)unloadView
+{
+    // Hide any cells showing keyboard
+    for(NSIndexPath * indexPath in loadTable.indexPathsForSelectedRows){
+        OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
+        [cell endNameEditing];
+    }
+}
+
+- (void)initOptions
 {
     
-    [self fetchFilesFromDocumentDir];
-    
-    loadSaveButton.layer.cornerRadius = 5.0;
-    loadLoadButton.layer.cornerRadius = 5.0;
-    
+    if(activeSequencer != nil){
+        
+    }
+    /*
     if([fileLoadSet count] > 0){
         
-        [noFilesLabel setHidden:YES];
-        [filePicker setHidden:NO];
-        
-        filePicker.delegate = self;
-        filePicker.dataSource = self;
-        
-        [filePicker reloadAllComponents];
+        //[loadTable reloadData];
         
         // default select the active file
         if(activeSequencer != nil){
             for(int i = 0; i < [fileLoadSet count]; i++){
                 if([fileLoadSet[i] isEqualToString:activeSequencer]){
-                    [filePicker selectRow:i inComponent:0 animated:YES];
+                    //[loadTable selectRow:i inComponent:0 animated:YES];
                 }
             }
         }
         
     }else{
-        [noFilesLabel setHidden:NO];
-        [filePicker setHidden:YES];
-    }
-    
-    
+        //[noFilesLabel setHidden:NO];
+        //[filePicker setHidden:YES];
+    }*/
 }
 
-- (void)fetchFilesFromDocumentDir
+- (void)reloadFileTable
 {
-    
+    [self loadFileSet];
+    [self userDidSelectLoad:loadButton];
+}
+
+- (void)loadFileSet
+{
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSError * error;
-    fileLoadSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[paths objectAtIndex:0] error:&error];
+    NSString * directoryPath = [paths objectAtIndex:0];
     
-    // Exclude two default files: instrument set and sequencer state
+    //fileSet = [[NSMutableDictionary alloc] init];
+    
+    fileDateSet = [[NSMutableArray alloc] init];
+    fileLoadSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
+    
+    // Exclude four default files
     for(int i = 0; i < [fileLoadSet count]; i++){
-        if([fileLoadSet[i] isEqualToString:@"sequencerInstruments.plist"] || [fileLoadSet[i] isEqualToString:@"sequencerCurrentState"]){
+        if([fileLoadSet[i] isEqualToString:@"sequencerInstruments.plist"] || [fileLoadSet[i] isEqualToString:@"sequencerCurrentState"] || [fileLoadSet[i] isEqualToString:@"Samples"] || [fileLoadSet[i] isEqualToString:@"customSampleList.plist"]){
+            
             [fileLoadSet removeObjectAtIndex:i--];
+            
         }else{
+            
+            NSString * filePath = [directoryPath stringByAppendingString:@"/"];
+            filePath = [filePath stringByAppendingString:fileLoadSet[i]];
+            NSDictionary * attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
+            
             // remove usr_ prefix
             fileLoadSet[i] = [fileLoadSet[i] stringByReplacingCharactersInRange:[fileLoadSet[i] rangeOfString:@"usr_"] withString:@""];
+            
+            fileDateSet[i] = [attrs objectForKey:NSFileModificationDate];
+            
         }
+    }
+
+    // Sort by date order
+    [self sortFilesByDates];
+}
+
+// TODO: this can probably be done nicer with comparators
+- (void)sortFilesByDates
+{
+    
+    NSDate * newFileLoadSet[[fileDateSet count]];
+    NSDate * newFileDateSet[[fileDateSet count]];
+    
+    NSDate * maxDate;
+    int maxDateIndex;
+    
+    @synchronized(self){
+        for(int i = 0; i < [fileDateSet count]; i++){
+            
+            maxDateIndex = i;
+            maxDate = fileDateSet[i];
+            //fileDateSet[j] > maxDate
+            for(int j = 0; j < [fileDateSet count]; j++){
+                if([(NSDate *)fileDateSet[j] compare:maxDate] == NSOrderedDescending){
+                    maxDateIndex = j;
+                    maxDate = fileDateSet[j];
+                }
+            }
+            
+            NSLog(@"Max date index %i",maxDateIndex);
+            newFileDateSet[i] = fileDateSet[maxDateIndex];
+            newFileLoadSet[i] = fileLoadSet[maxDateIndex];
+
+            fileDateSet[maxDateIndex] = [NSDate distantPast];
+        }
+    }
+    
+    for(int i = 0; i < [fileDateSet count]; i++){
+        fileLoadSet[i] = newFileLoadSet[i];
+        fileDateSet[i] = newFileDateSet[i];
     }
 }
 
-- (void)userDidSaveSequence
+#pragma mark - Save Load Actions
+- (void)userDidLoadFile:(NSString *)filename
 {
-    [self initSave];
-}
-
-- (void)userDidLoadSequence
-{
-    [self initLoad];
-}
-
-- (void)userDidSaveFromSave:(id)sender
-{
-    NSString * filename = saveField.text;
-    
-    activeSequencer = filename;
-    [delegate saveWithName:filename];
-}
-
-- (IBAction)userDidLoadFromLoad:(id)sender
-{
-    NSString * filename = [fileLoadSet objectAtIndex:[filePicker selectedRowInComponent:0]];
+    NSLog(@"user did load %@",filename);
     
     activeSequencer = filename;
     [delegate loadFromName:filename];
+    
+    [delegate viewSeqSet];
 }
 
-#pragma mark - Save Field
-- (void)saveFieldStartEdit:(id)sender
+- (void)userDidSaveFile:(NSString *)filename
 {
-    // hide default
-    NSString * defaultText = @"my_sequencer";
+    NSLog(@"user did save as %@",filename);
     
-    if([saveField.text isEqualToString:defaultText]){
-        saveField.text = @"";
-    }
-}
-- (void)saveFieldDidChange:(id)sender
-{
-    int maxLength = 30;
+    activeSequencer = filename;
+    [delegate saveWithName:filename];
     
-    // check length
-    if([saveField.text length] > maxLength){
-        saveField.text = [saveField.text substringToIndex:maxLength];
-    }
-    
-    [self checkIfNameReady];
+    [delegate viewSeqSet];
 }
 
--(void)saveFieldDoneEditing:(id)sender
+- (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname
 {
-    // hide keyboard
-    [saveField resignFirstResponder];
+    // move file to newname
+    NSLog(@"user did move %@ to %@",filename,newname);
 }
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (void)userDidCreateNewFile:(NSString *)filename
 {
-    NSMutableCharacterSet * allowedCharacters = [NSMutableCharacterSet alphanumericCharacterSet];
-    [allowedCharacters formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    [allowedCharacters formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"_-|"]];
+    // reset the set
+    NSLog(@"user did create new as %@",filename);
     
-    if([string rangeOfCharacterFromSet:allowedCharacters.invertedSet].location == NSNotFound){
-        return YES;
-    }
-    return NO;
+    [delegate viewSeqSet];
 }
 
-- (void)checkIfNameReady
+#pragma mark - Button Actions
+
+- (IBAction)userDidSelectCreateNew:(id)sender
 {
-    BOOL isReady = YES;
-    NSString * nameString = saveField.text;
-    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if([emptyName isEqualToString:@""]){
-        isReady = NO;
+    NSLog(@"User did select create new");
+    
+    BOOL buttonChanged = [self setSelectedButtonTo:sender];
+    if(!buttonChanged) return;
+    
+    selectMode = @"CreateNew";
+    
+    [self showHideNewFileRow:NO];
+    [loadTable reloadData];
+    [self selectLoadTableTopRow];
+    
+}
+
+- (IBAction)userDidSelectRename:(id)sender
+{
+    
+    NSLog(@"User did select rename");
+    
+    BOOL buttonChanged = [self setSelectedButtonTo:sender];
+    if(!buttonChanged) return;
+
+    selectMode = @"Rename";
+    
+    [self showHideNewFileRow:YES];
+    [loadTable reloadData];
+    [self selectLoadTableTopRow];
+    
+}
+
+- (IBAction)userDidSelectSaveCurrent:(id)sender
+{
+    
+    NSLog(@"User did select save current");
+    
+    BOOL buttonChanged = [self setSelectedButtonTo:sender];
+    if(!buttonChanged) return;
+    
+    selectMode = @"SaveCurrent";
+    
+    [self showHideNewFileRow:NO];
+    [loadTable reloadData];
+    [self selectLoadTableTopRow];
+    
+    
+}
+
+-(IBAction)userDidSelectLoad:(id)sender
+{
+    NSLog(@"User did select load");
+    
+    BOOL buttonChanged = [self setSelectedButtonTo:sender];
+    if(!buttonChanged) return;
+    
+    selectMode = @"Load";
+    
+    [self showHideNewFileRow:YES];
+    [loadTable reloadData];
+    [self selectLoadTableTopRow];
+
+
+}
+
+- (BOOL)setSelectedButtonTo:(UIButton *)button
+{
+    
+    UIColor * selectedColor = [UIColor colorWithRed:50/255.0 green:56/255.0 blue:59/255.0 alpha:1.0];
+    UIColor * deselectedColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:1.0];
+    
+    if(selectedButton == button){
+        return FALSE;
     }else{
-        isReady = YES;
-    }
-    
-    if(isReady){
-        [self showHideButton:saveSaveButton isHidden:NO withSelector:@selector(userDidSaveFromSave:)];
-    }else{
-        [self showHideButton:saveSaveButton isHidden:YES withSelector:@selector(userDidSaveFromSave:)];
+        selectedButton.backgroundColor = deselectedColor;
+        selectedButton = button;
+        selectedButton.backgroundColor = selectedColor;
+        
+        return TRUE;
     }
 }
 
-- (void)showHideButton:(UIButton *)button isHidden:(BOOL)hidden withSelector:(SEL)selector
-{
-    if(!hidden){
-        [button setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateNormal];
-        [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
-    }else{
-        [button setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3] forState:UIControlStateNormal];
-        [button removeTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
-    }
-}
+#pragma mark - Table View
 
-#pragma mark - File Picker
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
-{
-    return 25;
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [fileLoadSet count];
+    return [fileLoadSet count]+1;
 }
 
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString * title = fileLoadSet[row];
-    NSAttributedString * styledString;
-    
-    if([title isEqualToString:activeSequencer]){
-        styledString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]}];
+    if(hideNewFileRow && indexPath.row == 0){
+        return 0;
     }else{
-       styledString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:29/255.0 green:88/255.0 blue:103/255.0 alpha:1.0]}];
+        return ROW_HEIGHT;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * CellIdentifier = @"LoadCell";
+    
+    OptionsViewCell * cell = (OptionsViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil){
+        cell = [[OptionsViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.parent = self;
+    
+    if(indexPath.row > 0){
+        
+        // Rows for previous files
+        
+        NSString * title = fileLoadSet[indexPath.row-1];
+        NSDate * priorDate = fileDateSet[indexPath.row-1];
+        NSString * dateString = [self displayTimeFromPriorDate:priorDate];
+        
+        cell.fileText.text = title;
+        cell.fileDate.text = dateString;
+        cell.isRenamable = NO;
+        
+    }else{
+        
+        // Row for new file
+        cell.fileText.text = @"New set";
+        cell.fileDate.text = @"0s";
+        cell.isRenamable = YES;
+        
     }
     
-    
-    return styledString;
+    return cell;
 }
 
+
+-(NSString *)displayTimeFromPriorDate:(NSDate *)priorDate
+{
+    
+    NSDate * now = [NSDate date];
+    NSCalendar * calendar = [NSCalendar currentCalendar];
+    NSDateComponents * priorCal = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:priorDate];
+    NSDateComponents * nowCal = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:now];
+    
+    NSTimeInterval gap = [now timeIntervalSinceDate:priorDate];
+    double secondsPerMinute = 60;
+    double secondsPerHour = 3600;
+    double secondsPerDay = 3600*24;
+    double secondsPerWeek = 3600*24*7;
+    
+    NSArray * monthSet = [[NSArray alloc] initWithObjects:@"Jan",@"Feb",@"Mar",@"Apr",@"May",@"Jun",@"Jul",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec", nil];
+                        
+    int gapMins = gap / secondsPerMinute;
+    int gapHours = gap / secondsPerHour;
+    int gapDays = gap / secondsPerDay;
+    int gapWeeks = gap / secondsPerWeek;
+    
+    NSString * dateString;
+    if(gapMins < 60){
+        dateString = [NSString stringWithFormat:@"%im",gapMins];
+    }else if(gapHours < 24){
+        dateString = [NSString stringWithFormat:@"%ih",gapHours];
+    }else if(gapDays < 7){
+        dateString = [NSString stringWithFormat:@"%id",gapDays];
+    }else if(gapWeeks < 5){
+        dateString = [NSString stringWithFormat:@"%iw",gapWeeks];
+    }else if([priorCal year] == [nowCal year]){
+        dateString = [NSString stringWithFormat:@"%@",monthSet[[priorCal month]-1]];
+    }else{
+        dateString = [NSString stringWithFormat:@"%i",[priorCal year]];
+    }
+    
+    return dateString;
+
+}
+
+#pragma mark - Select actions
+
+-(void)selectLoadTableTopRow
+{
+    [self deselectAllRows];
+    
+    // delay load so data clears, except for Load
+    if([selectMode isEqualToString:@"Load"]){
+        [self delayedSelectLoadTableTopRow];
+    }else{
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(delayedSelectLoadTableTopRow) userInfo:nil repeats:NO];
+    }
+}
+     
+-(void)delayedSelectLoadTableTopRow
+{
+    
+    int firstIndex = 0;
+    
+    if([selectMode isEqualToString:@"Rename"] || [selectMode isEqualToString:@"Load"]){
+        firstIndex = 1;
+    }
+    
+    [loadTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:firstIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+         
+}
+
+-(void)showHideNewFileRow:(BOOL)isHidden
+{
+    hideNewFileRow = isHidden;
+}
+
+-(void)deselectAllRows
+{
+    for(NSIndexPath * indexPath in loadTable.indexPathsForSelectedRows){
+        [loadTable deselectRowAtIndexPath:indexPath animated:NO];
+    }
+}
+
+#pragma mark - Name checking
+
+-(BOOL)isDuplicateFilename:(NSString *)filename
+{
+    for(int i = 0; i < [fileLoadSet count]; i++){
+        if([fileLoadSet[i] isEqualToString:filename]){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

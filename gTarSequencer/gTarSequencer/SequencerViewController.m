@@ -92,7 +92,7 @@
     // SUBVIEW: OPTIONS
     //
     
-    optionsViewController = [[OptionsViewController alloc] initWithNibName:@"SaveView" bundle:nil];
+    optionsViewController = [[OptionsViewController alloc] initWithNibName:@"OptionsView" bundle:nil];
     [optionsViewController.view setFrame:onScreenMainFrame];
     [optionsViewController setDelegate:self];
     
@@ -217,9 +217,13 @@
     [instrumentViewController.view setHidden:YES];
     [shareViewController.view setHidden:YES];
     
+    // Do any view unloading
+    [optionsViewController unloadView];
+    
     // Switch to new main subview
     if([nav isEqualToString:@"Options"]){
         
+        [optionsViewController reloadFileTable];
         activeMainView = optionsViewController.view;
         
     }else if([nav isEqualToString:@"Set"]){
@@ -257,6 +261,11 @@
     
 }
 
+- (void)viewSeqSet
+{
+    [self selectNavChoice:@"Set" withShift:NO];
+}
+
 - (void)viewSelectedInstrument
 {
     [self selectNavChoice:@"Instrument" withShift:NO];
@@ -271,7 +280,7 @@
 
 - (void)userDidLoadSequenceOptions
 {
-    [optionsViewController userDidSaveSequence];
+    //[optionsViewController userDidSaveSequence];
 }
 
 - (void)closeSaveLoadSelector

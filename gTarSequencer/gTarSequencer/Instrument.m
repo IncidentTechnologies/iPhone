@@ -64,7 +64,7 @@
         
         stringSet = [aDecoder decodeObjectForKey:@"Strings"];
         
-        stringPaths = [aDecoder decodeObjectForKey:@"String Paths"];
+        stringPaths = [aDecoder decodeObjectForKey:@"StringPaths"];
         
         selectedPatternDidChange = YES;
         
@@ -193,7 +193,7 @@
     [aCoder encodeObject:iconName forKey:@"Icon Name"];
     [aCoder encodeBool:isSelected forKey:@"Is Selected"];
     [aCoder encodeObject:stringSet forKey:@"Strings"];
-    [aCoder encodeObject:stringPaths forKey:@"String Paths"];
+    [aCoder encodeObject:stringPaths forKey:@"StringPaths"];
     [aCoder encodeBool:isMuted forKey:@"Is Muted"];
 }
 

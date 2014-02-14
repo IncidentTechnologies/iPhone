@@ -6,40 +6,56 @@
 //  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
+#import "OptionsViewCell.h"
 
 @protocol OptionsDelegate <NSObject>
 
 - (void) saveWithName:(NSString *)filename;
 - (void) loadFromName:(NSString *)filename;
 
+- (void) viewSeqSet;
+
 @end
 
-@interface OptionsViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
+@interface OptionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 {
+    //NSMutableDictionary * fileSet;
     NSMutableArray * fileLoadSet;
-
+    NSMutableArray * fileDateSet;
+    
+    BOOL hideNewFileRow;
+    
+    UIButton * selectedButton;
 }
 
-- (void)userDidSaveSequence;
-- (void)userDidLoadSequence;
+- (IBAction)userDidSelectCreateNew:(id)sender;
+- (IBAction)userDidSelectSaveCurrent:(id)sender;
+- (IBAction)userDidSelectRename:(id)sender;
+- (IBAction)userDidSelectLoad:(id)sender;
+
+- (void)userDidLoadFile:(NSString *)filename;
+- (void)userDidSaveFile:(NSString *)filename;
+- (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname;
+- (void)userDidCreateNewFile:(NSString *)filename;
+
+- (void)reloadFileTable;
+- (void)unloadView;
+
+- (void)deselectAllRows;
+- (BOOL)isDuplicateFilename:(NSString *)filename;
 
 @property (retain, nonatomic) NSString * activeSequencer;
 
 @property (weak, nonatomic) id<OptionsDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UIButton * saveSaveButton;
-@property (weak, nonatomic) IBOutlet UIButton * saveLoadButton;
-@property (weak, nonatomic) IBOutlet UIButton * loadSaveButton;
-@property (weak, nonatomic) IBOutlet UIButton * loadLoadButton;
+@property (weak, nonatomic) IBOutlet UIButton * createNewButton;
+@property (weak, nonatomic) IBOutlet UIButton * saveCurrentButton;
+@property (weak, nonatomic) IBOutlet UIButton * renameButton;
+@property (weak, nonatomic) IBOutlet UIButton * loadButton;
 
-// Save
-@property (weak, nonatomic) IBOutlet UITextField * saveField;
-@property (weak, nonatomic) IBOutlet UILabel * saveWarning;
-
-// Load
-@property (weak, nonatomic) IBOutlet UIPickerView * filePicker;
-@property (weak, nonatomic) IBOutlet UILabel * noFilesLabel;
+@property (weak, nonatomic) IBOutlet UITableView * loadTable;
+@property (nonatomic) NSString * selectMode;
 
 @end
 
