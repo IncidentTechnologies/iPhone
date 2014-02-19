@@ -139,9 +139,6 @@
 		58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AEA186CD6AF003638EF /* ScrollingSelector.m */; };
 		585916FE18774791002C21B9 /* MeasureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 585916FD18774791002C21B9 /* MeasureView.m */; };
 		587A91A818A5837300CFB154 /* CustomSoundRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 587A91A718A5837300CFB154 /* CustomSoundRecorder.m */; };
-		587B6EC41885E9290071BE15 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 587B6EBE1885E9280071BE15 /* libTestFlight.a */; };
-		587B6EC51885E9290071BE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 587B6EBF1885E9280071BE15 /* README.md */; };
-		587B6EC61885E9290071BE15 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 587B6EC01885E9290071BE15 /* release_notes.md */; };
 		587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 587B6EC71885E9720071BE15 /* libz.dylib */; };
 		587C9F791888C0E7001F57C7 /* 808 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F251888C0E7001F57C7 /* 808 1.mp3 */; };
 		587C9F7A1888C0E7001F57C7 /* 808 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F261888C0E7001F57C7 /* 808 2.mp3 */; };
@@ -298,6 +295,9 @@
 		58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F61679188F5E2700020A74 /* Icon_Trombone.png */; };
 		58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */; };
 		58F6167F188F5E2700020A74 /* Icon_Violin.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167B188F5E2700020A74 /* Icon_Violin.png */; };
+		6D48127E18B5363700598CC2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D48127818B5363700598CC2 /* README.md */; };
+		6D48127F18B5363700598CC2 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D48127918B5363700598CC2 /* release_notes.md */; };
+		6D48128118B5366D00598CC2 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D48127718B5363700598CC2 /* libTestFlight.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -455,12 +455,6 @@
 		587A91A618A5837300CFB154 /* CustomSoundRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSoundRecorder.h; sourceTree = "<group>"; };
 		587A91A718A5837300CFB154 /* CustomSoundRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSoundRecorder.m; sourceTree = "<group>"; };
 		587B6EBA1885E6D80071BE15 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
-		587B6EBE1885E9280071BE15 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		587B6EBF1885E9280071BE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		587B6EC01885E9290071BE15 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		587B6EC11885E9290071BE15 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		587B6EC21885E9290071BE15 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		587B6EC31885E9290071BE15 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		587B6EC71885E9720071BE15 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		587C9F251888C0E7001F57C7 /* 808 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808 1.mp3"; sourceTree = "<group>"; };
 		587C9F261888C0E7001F57C7 /* 808 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808 2.mp3"; sourceTree = "<group>"; };
@@ -635,6 +629,12 @@
 		58F61679188F5E2700020A74 /* Icon_Trombone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trombone.png; sourceTree = "<group>"; };
 		58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Vibraphone.png; sourceTree = "<group>"; };
 		58F6167B188F5E2700020A74 /* Icon_Violin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Violin.png; sourceTree = "<group>"; };
+		6D48127718B5363700598CC2 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		6D48127818B5363700598CC2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6D48127918B5363700598CC2 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		6D48127A18B5363700598CC2 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		6D48127B18B5363700598CC2 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		6D48127C18B5363700598CC2 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -644,12 +644,12 @@
 			files = (
 				58A59522188619C100696614 /* libGtarControllerDeploy.a in Frameworks */,
 				587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */,
+				6D48128118B5366D00598CC2 /* libTestFlight.a in Frameworks */,
 				58B9AD0E187B61C5001EDD33 /* libc++.dylib in Frameworks */,
 				58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */,
 				58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */,
 				58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */,
 				58EEB7A81868EE630089BFD9 /* libAudioController.a in Frameworks */,
-				587B6EC41885E9290071BE15 /* libTestFlight.a in Frameworks */,
 				58D617101863B8D6001EB327 /* CoreGraphics.framework in Frameworks */,
 				58D617121863B8D6001EB327 /* UIKit.framework in Frameworks */,
 				58D6170E1863B8D6001EB327 /* Foundation.framework in Frameworks */,
@@ -950,20 +950,6 @@
 			name = CustomSoundRecorder;
 			sourceTree = "<group>";
 		};
-		587B6EBD1885E9280071BE15 /* TestFlightSDK2.1.3 */ = {
-			isa = PBXGroup;
-			children = (
-				587B6EBE1885E9280071BE15 /* libTestFlight.a */,
-				587B6EBF1885E9280071BE15 /* README.md */,
-				587B6EC01885E9290071BE15 /* release_notes.md */,
-				587B6EC11885E9290071BE15 /* TestFlight+AsyncLogging.h */,
-				587B6EC21885E9290071BE15 /* TestFlight+ManualSessions.h */,
-				587B6EC31885E9290071BE15 /* TestFlight.h */,
-			);
-			name = TestFlightSDK2.1.3;
-			path = gTarSequencer/TestFlightSDK2.1.3;
-			sourceTree = "<group>";
-		};
 		587C9F241888C0E7001F57C7 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
@@ -1152,7 +1138,7 @@
 		58D617011863B8D6001EB327 = {
 			isa = PBXGroup;
 			children = (
-				587B6EBD1885E9280071BE15 /* TestFlightSDK2.1.3 */,
+				6D48127618B5363700598CC2 /* TestFlightSDK2.2.1 */,
 				58D617131863B8D6001EB327 /* Sequence */,
 				58D617581863BF5E001EB327 /* Resources */,
 				58D617321863B8D7001EB327 /* SequenceTests */,
@@ -1284,6 +1270,20 @@
 			name = OptionsViewController;
 			sourceTree = "<group>";
 		};
+		6D48127618B5363700598CC2 /* TestFlightSDK2.2.1 */ = {
+			isa = PBXGroup;
+			children = (
+				6D48127718B5363700598CC2 /* libTestFlight.a */,
+				6D48127818B5363700598CC2 /* README.md */,
+				6D48127918B5363700598CC2 /* release_notes.md */,
+				6D48127A18B5363700598CC2 /* TestFlight+AsyncLogging.h */,
+				6D48127B18B5363700598CC2 /* TestFlight+ManualSessions.h */,
+				6D48127C18B5363700598CC2 /* TestFlight.h */,
+			);
+			name = TestFlightSDK2.2.1;
+			path = gTarSequencer/TestFlightSDK2.2.1;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1373,13 +1373,11 @@
 				5811AB27187B88C800FC0BD2 /* Percussion 71.mp3 in Resources */,
 				58BBFD1D1891BEA400E41CD2 /* CustomInstrumentNamer.xib in Resources */,
 				587C9F7D1888C0E7001F57C7 /* 808 5.mp3 in Resources */,
-				587B6EC51885E9290071BE15 /* README.md in Resources */,
 				58E635351889FD800036E4F1 /* Bacon 6.mp3 in Resources */,
 				5811AB16187B88C800FC0BD2 /* Percussion 56.mp3 in Resources */,
 				5811AB08187B88C800FC0BD2 /* Percussion 43.mp3 in Resources */,
 				587C9FA41888C0E7001F57C7 /* Piano II 2.mp3 in Resources */,
 				587C9FAE1888C0E7001F57C7 /* Pluck 6.mp3 in Resources */,
-				587B6EC61885E9290071BE15 /* release_notes.md in Resources */,
 				587C9F911888C0E7001F57C7 /* House 1.mp3 in Resources */,
 				5811AB23187B88C800FC0BD2 /* Percussion 68.mp3 in Resources */,
 				58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */,
@@ -1430,6 +1428,7 @@
 				5811AB04187B88C800FC0BD2 /* Percussion 4.mp3 in Resources */,
 				587C9FAC1888C0E7001F57C7 /* Pluck 4.mp3 in Resources */,
 				587C9F941888C0E7001F57C7 /* House 4.mp3 in Resources */,
+				6D48127F18B5363700598CC2 /* release_notes.md in Resources */,
 				58D617261863B8D7001EB327 /* Images.xcassets in Resources */,
 				587C9FB81888C0E7001F57C7 /* Trombone 4.mp3 in Resources */,
 				587C9F7C1888C0E7001F57C7 /* 808 4.mp3 in Resources */,
@@ -1525,6 +1524,7 @@
 				5811AB3A187B88C800FC0BD2 /* Percussion 89.mp3 in Resources */,
 				587C9FA11888C0E7001F57C7 /* Piano 5.mp3 in Resources */,
 				5811AB01187B88C800FC0BD2 /* Percussion 37.mp3 in Resources */,
+				6D48127E18B5363700598CC2 /* README.md in Resources */,
 				58E635331889FD800036E4F1 /* Bacon 4.mp3 in Resources */,
 				580A52161864E0E00077240B /* Sequencer_Icon80px.png in Resources */,
 				583917951877995D006E3DC3 /* ScrollingSelector.xib in Resources */,
@@ -1781,14 +1781,11 @@
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/kschnippering/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.1.3",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "/Users/kateschnippering/Documents/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.2.1";
 				OTHER_CFLAGS = "-mthumb";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Sequence;
-				PROVISIONING_PROFILE = "4EDE639D-7A50-4824-82FE-1B3C18A0398E";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1801,21 +1798,18 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LIBRARY = "libstdc++";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/kschnippering/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.1.3",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "/Users/kateschnippering/Documents/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.2.1";
 				OTHER_CFLAGS = "-mthumb";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Sequence;
-				PROVISIONING_PROFILE = "CBC3EBC0-9CEF-4A4D-BF9D-989C73884DDE";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "";

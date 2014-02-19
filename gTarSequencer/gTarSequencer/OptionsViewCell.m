@@ -17,6 +17,7 @@
 @synthesize fileLoad;
 @synthesize fileDate;
 @synthesize isRenamable;
+@synthesize rowid;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -49,7 +50,11 @@
 
 - (void)sharedInit
 {
+    isActiveSequencer = NO;
     
+    activeColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:1.0];
+    darkGrayColor = [UIColor colorWithRed:50/255.0 green:56/255.0 blue:59/255.0 alpha:1.0];
+    blueColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:1.0];
 }
 
 - (void)layoutSubviews
@@ -75,28 +80,48 @@
     
 }
 
+- (void)setAsActiveSequencer
+{
+    if(!isRenamable){
+        isActiveSequencer = YES;
+        fileText.textColor = activeColor;
+    }
+}
+
+- (void)unsetAsActiveSequencer
+{
+    isActiveSequencer = NO;
+    if(self.selected){
+        fileText.textColor = [UIColor whiteColor];
+    }else{
+        fileText.textColor = [UIColor colorWithRed:50/255.0 green:56/255.0 blue:59/255.0 alpha:1.0];
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
     
-    UIColor * darkGrayColor = [UIColor colorWithRed:50/255.0 green:56/255.0 blue:59/255.0 alpha:1.0];
-    UIColor * blueColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:1.0];
+    [super setSelected:selected animated:animated];
     
     // Save load button
     [self showHideButton:fileLoad isHidden:NO withSelector:@selector(userDidSaveLoad)];
     
     if(selected){
         
+        NSLog(@"Selecting cell at row %i",rowid);
+        
         self.contentView.backgroundColor = darkGrayColor;
         self.backgroundColor = darkGrayColor;
         
-        fileText.textColor = [UIColor whiteColor];
+        fileText.textColor = (isActiveSequencer && !isRenamable) ? activeColor : [UIColor whiteColor];
         [fileLoad setHidden:NO];
         
         // Modal changes
         if([parent.selectMode isEqualToString:@"Rename"] || (![parent.selectMode isEqualToString:@"Load"] && isRenamable)){
             
-            self.fileName.text = self.fileText.text;
+            NSLog(@"Selected cell is Renamable");
+            
+            fileName.text = fileText.text;
             
             // create attributed string
             NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:fileName.text];
@@ -104,31 +129,33 @@
             
             [fileName setAttributedText:str];
             
-            [self.fileText setHidden:YES];
-            [self.fileName setHidden:NO];
+            [fileText setHidden:YES];
+            [fileName setHidden:NO];
             
             // open keyboard
             [self beginNameEditing];
-            
         }
         
     }else{
         
+        NSLog(@"Deselecting cell %i",rowid);
+        
         if(![parent.selectMode isEqualToString:@"Load"] && isRenamable){
             self.contentView.backgroundColor = [UIColor grayColor];
             self.backgroundColor = [UIColor grayColor];
+            
+            [self endNameEditing];
+            
         }else{
             self.contentView.backgroundColor = [UIColor whiteColor];
             self.backgroundColor = [UIColor whiteColor];
         }
         
-        fileText.textColor = darkGrayColor;
+        fileText.textColor = (isActiveSequencer && !isRenamable) ? activeColor : darkGrayColor;
         [fileLoad setHidden:YES];
         
-        [self.fileText setHidden:NO];
-        [self.fileName setHidden:YES];
-        
-        [self endNameEditing];
+        [fileText setHidden:NO];
+        [fileName setHidden:YES];
         
     }
 
@@ -140,13 +167,13 @@
     if([parent.selectMode isEqualToString:@"Load"]){
         
         // Load
-        [parent userDidLoadFile:self.fileText.text];
+        [parent userDidLoadFile:fileText.text];
         
     }else if([parent.selectMode isEqualToString:@"Rename"]){
         
         // Rename
-        [parent userDidRenameFile:self.fileText.text toName:self.fileName.text];
-        self.fileText.text = self.fileName.text;
+        [parent userDidRenameFile:fileText.text toName:fileName.text];
+        fileText.text = fileName.text;
         
         [self endNameEditing];
         
@@ -154,12 +181,18 @@
         
     }else if([parent.selectMode isEqualToString:@"CreateNew"]){
     
+        NSLog(@"FileName Text is %@ and FileText Text is %@",fileName.text,fileText.text);
+        
+        NSString * emptyName = [fileName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
         // Create New
-        if(![self.fileName.text isEqualToString:self.fileText.text]){
-            self.fileText.text = self.fileName.text;
+        if(![fileName.text isEqualToString:fileText.text] && ![emptyName isEqualToString:@""]){
+            fileText.text = fileName.text;
         }
         
-        [parent userDidCreateNewFile:self.fileText.text];
+        NSLog(@"Creating new with name %@",fileText.text);
+        
+        [parent userDidCreateNewFile:fileText.text];
         
         [self endNameEditing];
         
@@ -170,11 +203,16 @@
         
         // Save Current
         
-        if(![self.fileName.text isEqualToString:self.fileText.text]){
-            self.fileText.text = self.fileName.text;
+        NSLog(@"FileName Text is %@ and FileText Text is %@",fileName.text,fileText.text);
+        
+        
+        NSString * emptyName = [fileName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        if(![fileName.text isEqualToString:fileText.text] && ![emptyName isEqualToString:@""]){
+            fileText.text = fileName.text;
         }
         
-        [parent userDidSaveFile:self.fileText.text];
+        [parent userDidSaveFile:fileText.text];
         
         [self endNameEditing];
         
@@ -186,6 +224,14 @@
 #pragma mark - Save Field
 - (void)saveFieldStartEdit:(id)sender
 {
+    
+    // hide default
+    NSString * defaultText = @"New set";
+    
+    if([fileName.text isEqualToString:defaultText]){
+        fileName.text = @"";
+    }
+    
     [self checkIfNameReady];
 }
 
@@ -195,8 +241,11 @@
 
     // check length
     if([fileName.text length] > maxLength){
-     fileName.text = [fileName.text substringToIndex:maxLength];
+        fileName.text = [fileName.text substringToIndex:maxLength];
     }
+    
+    // enforce capitalizing
+    fileName.text = [fileName.text capitalizedString];
     
     [self checkIfNameReady];
 }
@@ -209,13 +258,29 @@
 
 - (void)beginNameEditing
 {
-    [fileName becomeFirstResponder];
+    NSLog(@"Begin name editing");
+    if(![fileName isFirstResponder]){
+        [fileName becomeFirstResponder];
+        [fileName selectAll:self];
+        
+        if([parent.selectMode isEqualToString:@"Rename"]){
+            [parent offsetTable:self];
+        }else{
+            [parent disableScroll];
+        }
+    }
 }
 
 -(void)endNameEditing
 {
+    NSLog(@"End name editing");
     // hide keyboard
-    [fileName resignFirstResponder];
+    if([fileName isFirstResponder]){
+        
+        [fileName resignFirstResponder];
+        [parent enableScroll];
+        [parent resetTableOffset:self];    
+    }
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

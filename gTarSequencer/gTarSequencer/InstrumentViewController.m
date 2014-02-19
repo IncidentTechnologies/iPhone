@@ -14,7 +14,8 @@
 #define NOTE_HEIGHT 26
 #define NOTE_GAP 2
 #define MUTE_SEGMENT_INDEX 4
-#define SCROLL_SPEED 0.8
+#define SCROLL_SPEED_MIN 0
+#define SCROLL_SPEED_MAX 0.5
 
 @implementation InstrumentViewController
 
@@ -30,6 +31,8 @@
 @synthesize pageTwo;
 @synthesize pageThree;
 @synthesize pageFour;
+@synthesize offMask;
+@synthesize isMute;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,12 +41,10 @@
         
         activePattern = -1;
         activeMeasure = -1;
-    
+        targetMeasure = -1;
+        
         patternButtons = nil;
         selectedPatternButton = nil;
-        
-        // prevent double scrolling of measures
-        freezeMeasureChange = nil;
         
         // string colors
         [self initColors];
@@ -82,22 +83,23 @@
 {
     [super viewDidLoad];
     
+    [offMask setHidden:YES];
+    
     //
-    // GESTURES
+    // SCROLLING
     //
     
+    scrollView.bounces = NO;
+    scrollView.delegate = self;
     scrollView.userInteractionEnabled = YES;
+    scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
+    [scrollView setShowsHorizontalScrollIndicator:NO];
     
-    // Move left
-    UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(incrementMeasure)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    double totalWidth = NUM_MEASURES*(MEASURE_WIDTH+MEASURE_MARGIN)+3*MEASURE_MARGIN;
+    double totalHeight = scrollView.frame.size.height;
     
-    // Move right
-    UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(decrementMeasure)];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    
-    [scrollView addGestureRecognizer:swipeLeft];
-    [scrollView addGestureRecognizer:swipeRight];
+    [scrollView setContentSize:CGSizeMake(totalWidth,totalHeight)];
+    scrollView.contentOffset = CGPointMake(0,0);
     
     // Pattern buttons
     if(patternButtons == nil)
@@ -179,6 +181,10 @@
 }
 
 #pragma mark - Instruments
+- (IBAction)viewSeqSet:(id)sender
+{
+    [delegate viewSeqSet];
+}
 
 - (void)setActiveInstrument:(Instrument *)inst
 {
@@ -197,16 +203,20 @@
     [self resetPlayband];
     
     // Clear everything
-    for(int i = 0; i < NUM_PATTERNS; i++){
-        for(int j = 0; j < NUM_MEASURES; j++){
-            [self clearMeasure:j forPattern:i];
+    @synchronized(self){
+        for(int i = 0; i < NUM_PATTERNS; i++){
+            for(int j = 0; j < NUM_MEASURES; j++){
+                [self clearMeasure:j forPattern:i];
+            }
         }
     }
     
     // Measure counts
-    for(int i = 0; i < NUM_PATTERNS; i++){
-        Pattern * p = [inst.patterns objectAtIndex:i];
-        measureCounts[i] = p.measureCount;
+    @synchronized(self){
+        for(int i = 0; i < NUM_PATTERNS; i++){
+            Pattern * p = [inst.patterns objectAtIndex:i];
+            measureCounts[i] = p.measureCount;
+        }
     }
     
     // Update active pattern and active measure
@@ -217,17 +227,21 @@
     // Set pattern button
     [self selectPatternButton:activePattern];
     
+    // Determine on or off
+    isMute = inst.isMuted;
+    if(isMute){
+        [self turnOffInstrumentView];
+    }else{
+        [self turnOnInstrumentView];
+    }
+    
     NSLog(@"Using pattern %i and measure %i",activePattern,activeMeasure);
 }
 
 #pragma mark - Measures
-- (void)changeActiveMeasureToMeasure:(int)measureIndex
+- (void)changeActiveMeasureToMeasure:(int)measureIndex scrollSlow:(BOOL)isSlow
 {
-    [self scrollToAndSetActiveMeasure:measureIndex];
-    
-    if(freezeMeasureChange == nil){
-        freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
-    }
+    [self scrollToAndSetActiveMeasure:measureIndex scrollSlow:isSlow];
     
     // SAVE CONTEXT
     [delegate saveContext:nil];
@@ -268,6 +282,8 @@
 - (void)pinchMeasure:(UIPinchGestureRecognizer *)recognizer
 {
     
+    scrollView.scrollEnabled = NO;
+    
     // pinch in
     if(recognizer.scale < 1){
         
@@ -300,7 +316,7 @@
                         
                     }
                     
-                    [self scrollToAndSetActiveMeasure:0];
+                    [self changeActiveMeasureToMeasure:0 scrollSlow:YES];
                     
                     break;
                 case 2:
@@ -315,7 +331,7 @@
                     measureSet[activePattern][2] = [self drawMeasureOff:2 forPattern:activePattern];
                     measureSet[activePattern][3] = [self drawMeasureOff:3 forPattern:activePattern];
                     
-                    [self scrollToAndSetActiveMeasure:1];
+                    [self changeActiveMeasureToMeasure:1 scrollSlow:YES];
                     
                     break;
             }
@@ -372,7 +388,7 @@
                     break;
             }
             
-            [self scrollToAndSetActiveMeasure:activeMeasure];
+            [self changeActiveMeasureToMeasure:activeMeasure scrollSlow:YES];
             
             // SAVE CONTEXT
             [delegate saveContext:nil];
@@ -382,60 +398,29 @@
 
 - (void)clearMeasure:(int)measureIndex forPattern:(int)patternIndex
 {
-    
     NSLog(@"Clear measure %i at pattern %i",measureIndex,patternIndex);
     
-    // remove all gesture recognizers
-    while(measureSet[patternIndex][measureIndex].gestureRecognizers.count){
-        [measureSet[patternIndex][measureIndex] removeGestureRecognizer:[measureSet[patternIndex][measureIndex].gestureRecognizers objectAtIndex:0]];
-    }
-    
-    // remove button clicks
     @synchronized(self){
+        // remove all gesture recognizers
+        while(measureSet[patternIndex][measureIndex].gestureRecognizers.count){
+            [measureSet[patternIndex][measureIndex] removeGestureRecognizer:[measureSet[patternIndex][measureIndex].gestureRecognizers objectAtIndex:0]];
+        }
+    
+        // remove button clicks
         for(int k = 0; k < MAX_NOTES; k++){
             [noteButtons[patternIndex][measureIndex][k] removeTarget:self action:@selector(toggleNote:) forControlEvents:UIControlEventTouchUpInside];
             [noteButtons[patternIndex][measureIndex][k] removeFromSuperview];
             noteButtons[patternIndex][measureIndex][k] = nil;
         }
+        
+        // remove playbands
+        [playbandView[measureIndex] removeFromSuperview];
+        playbandView[measureIndex] = nil;
+        playband[measureIndex] = -1;
+        
+        [measureSet[patternIndex][measureIndex] removeFromSuperview];
+        measureSet[patternIndex][measureIndex] = nil;
     }
-    
-    // remove playbands
-    [playbandView[measureIndex] removeFromSuperview];
-    playbandView[measureIndex] = nil;
-    playband[measureIndex] = -1;
-    
-    [measureSet[patternIndex][measureIndex] removeFromSuperview];
-    measureSet[patternIndex][measureIndex] = nil;
-    
-}
-
-- (void)scrollToAndSetActiveMeasure:(int)measureIndex
-{
-    activeMeasure = measureIndex;
-    [self setDeclaredActiveMeasure:measureIndex];
-    
-    CGPoint newOffset = CGPointMake(measureIndex*(MEASURE_WIDTH+MEASURE_MARGIN),0);
-    
-    [UIView animateWithDuration:SCROLL_SPEED animations:^(){
-        [scrollView setContentOffset:newOffset];
-        for(int i = 0; i < NUM_MEASURES; i++){
-            if(i == measureIndex){
-                [measureSet[activePattern][i] setAlpha:1.0];
-            }else{
-                [measureSet[activePattern][i] setAlpha:0.5];
-            }
-        }
-    } completion:^(BOOL finished){
-        for(int i=0; i<NUM_MEASURES;i++){
-            if(i == measureIndex){
-                pages[i].alpha = 1.0;
-            }else{
-                pages[i].alpha = 0.4;
-            }
-        }
-    }];
-    
-    
 }
 
 - (void)setDeclaredActiveMeasure:(int)measureIndex
@@ -549,32 +534,6 @@
     return newOffMeasure;
 }
 
-- (void)decrementMeasure
-{
-    NSLog(@"Decrement measure");
-    if(activeMeasure > 0 && freezeMeasureChange == nil){
-        [self scrollToAndSetActiveMeasure:activeMeasure-1];
-        
-        freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
-    }
-}
-
-- (void)incrementMeasure
-{
-    NSLog(@"Increment measure");
-    if(activeMeasure < NUM_MEASURES-1 && freezeMeasureChange == nil){
-        [self scrollToAndSetActiveMeasure:activeMeasure+1];
-        
-        freezeMeasureChange = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(resetFreezeMeasure) userInfo:nil repeats:NO];
-    }
-    
-}
-
-- (void)resetFreezeMeasure
-{
-    freezeMeasureChange = nil;
-}
-
 #pragma mark - Patterns
 
 -(void)changePatternToPattern:(int)patternIndex thenChangeActiveMeasure:(int)measureIndex
@@ -600,8 +559,10 @@
             [measureSet[patternIndex][i] setAlpha:0.3];
         }
     } completion:^(BOOL finished){
-        for(int i = 0; i < NUM_MEASURES; i++){
-            [self clearMeasure:i forPattern:patternIndex];
+        @synchronized(self){
+            for(int i = 0; i < NUM_MEASURES; i++){
+                [self clearMeasure:i forPattern:patternIndex];
+            }
         }
         
         [self instateNewPattern:newPattern andNewMeasure:newMeasure];
@@ -616,8 +577,23 @@
     [self setActivePatternIndex:activePattern];
     
     // Update active measure (context save happens within)
-    [self changeActiveMeasureToMeasure:measureIndex];
+    [self changeActiveMeasureToMeasure:measureIndex scrollSlow:YES];
     
+}
+
+#pragma mark - On Off
+- (void)turnOnInstrumentView
+{
+    NSLog(@"Turn on instrument view");
+    [offMask setHidden:YES];
+    isMute = NO;
+}
+
+- (void)turnOffInstrumentView
+{
+    NSLog(@"Turn off instrument view");
+    [offMask setHidden:NO];
+    isMute = YES;
 }
 
 
@@ -627,14 +603,21 @@
     int string;
     int fret;
     
-    for(int s = 0; s < STRINGS_ON_GTAR; s++){
-        for(int f = 0; f < FRETS_ON_GTAR; f++){
-            if(noteButtons[activePattern][activeMeasure][FRETS_ON_GTAR*s+f] == sender){
-                fret = f;
-                string = s;
-                break;
+    @synchronized(self){
+        for(int s = 0; s < STRINGS_ON_GTAR; s++){
+            for(int f = 0; f < FRETS_ON_GTAR; f++){
+                if(noteButtons[activePattern][activeMeasure][FRETS_ON_GTAR*s+f] == sender){
+                    fret = f;
+                    string = s;
+                    break;
+                }
             }
         }
+    }
+    
+    if(string > STRINGS_ON_GTAR || fret > FRETS_ON_GTAR){
+        NSLog(@"ERROR with string %i or fret %i",string,fret);
+        return;
     }
     
     Pattern * p = currentInst.patterns[activePattern];
@@ -656,10 +639,12 @@
 
 - (void)resetPlayband
 {
-    for(int i = 0; i < NUM_MEASURES; i++){
-        playband[i] = -1;
-        [playbandView[i] removeFromSuperview];
-        playbandView[i] = nil;
+    @synchronized(self){
+        for(int i = 0; i < NUM_MEASURES; i++){
+            playband[i] = -1;
+            [playbandView[i] removeFromSuperview];
+            playbandView[i] = nil;
+        }
     }
 }
 
@@ -703,38 +688,37 @@
 // Split up into two functions to allow the UI to update immediately
 - (void)selectNewPattern:(id)sender
 {
-    
     int tappedIndex = [patternButtons indexOfObject:sender];
     
-    BOOL isPlaying = [delegate checkIsPlaying];;
+    BOOL isPlaying = [delegate checkIsPlaying];
     
     NSLog(@"Select new pattern at %i", tappedIndex);
     
-    if (tappedIndex == MUTE_SEGMENT_INDEX){
-        NSLog(@"Mute the instrument");
-        currentInst.isMuted = YES;
-        
+    if (tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton != offButton){
+        isMute = YES;
+        isPlaying = [delegate checkIsPlaying];
         [self clearQueuedPatternButton];
+        [delegate dequeueAllPatternsForInstrument:currentInst];
+    }else if(tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton == offButton){
+        isMute = NO;
+        isPlaying = [delegate checkIsPlaying];
+        [self clearQueuedPatternButton];
+        [delegate dequeueAllPatternsForInstrument:currentInst];
     }else{
-        currentInst.isMuted = NO;
         
-        if([delegate checkIsPlaying]){
-            
-            // Add it to the queue:
+        isMute = NO;
+        if(isPlaying){
             NSMutableDictionary * pattern = [NSMutableDictionary dictionary];
-            
             [pattern setObject:[NSNumber numberWithInt:tappedIndex] forKey:@"Index"];
             [pattern setObject:currentInst forKey:@"Instrument"];
             
             [delegate enqueuePattern:pattern];
-            
         }else{
-            
             [self commitPatternChange:tappedIndex];
-           
         }
     }
     
+    currentInst.isMuted = isMute;
     [self updatePatternButton:sender playState:isPlaying];
     
 }
@@ -770,25 +754,44 @@
 
 - (void)updatePatternButton:(UIButton *)newButton playState:(BOOL)isPlaying
 {
-    if(!isPlaying || selectedPatternButton == newButton){
-        
-        //dequeue anything queued
-        [self setStateForButton:queuedPatternButton state:0];
-        queuedPatternButton = nil;
+    
+    // First check if switching off
+    if(newButton == offButton && selectedPatternButton != offButton){
+        [self turnOffInstrumentView];
+    }else{
+        [self turnOnInstrumentView];
+    }
+    
+    // Adjust pattern buttons
+    if(newButton == offButton && selectedPatternButton == offButton){
         
         //former button
         [self setStateForButton:selectedPatternButton state:0];
-        selectedPatternButton = newButton;
         
         //new button
+        selectedPatternButton = previousPatternButton;
         [self setStateForButton:selectedPatternButton state:2];
         
+        // queue nothing
     }else if(newButton == offButton){
         
         previousPatternButton = selectedPatternButton;
         
         //dequeue anything queued
         [self setStateForButton:queuedPatternButton state:0];
+        
+        //former button
+        //[self setStateForButton:selectedPatternButton state:0];
+        selectedPatternButton = newButton;
+        
+        //new button
+        [self setStateForButton:selectedPatternButton state:2];
+        
+    }else if(!isPlaying || selectedPatternButton == newButton){
+        
+        //dequeue anything queued
+        [self setStateForButton:queuedPatternButton state:0];
+        queuedPatternButton = nil;
         
         //former button
         [self setStateForButton:selectedPatternButton state:0];
@@ -862,7 +865,11 @@
             titleColor = [UIColor whiteColor];
             break;
         case 2: // on
-            backgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+            if(button == offButton){
+                backgroundColor = [UIColor clearColor];
+            }else{
+                backgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
+            }
             titleColor = [UIColor whiteColor];
             break;
         case 3: // queued blinking
@@ -874,6 +881,96 @@
     [button setBackgroundColor:backgroundColor];
     [button setTitleColor:titleColor forState:UIControlStateNormal];
 }
+
+#pragma mark - Scrolling
+- (void)scrollToAndSetActiveMeasure:(int)measureIndex scrollSlow:(BOOL)isSlow
+{
+    activeMeasure = measureIndex;
+    [self setDeclaredActiveMeasure:measureIndex];
+    
+    CGPoint newOffset = CGPointMake(measureIndex*(MEASURE_WIDTH+MEASURE_MARGIN),0);
+    double scrollSpeed = isSlow ? SCROLL_SPEED_MAX : SCROLL_SPEED_MIN;
+    
+    [UIView animateWithDuration:scrollSpeed animations:^(){
+        [scrollView setContentOffset:newOffset];
+        for(int i = 0; i < NUM_MEASURES; i++){
+            if(i == measureIndex){
+                [measureSet[activePattern][i] setAlpha:1.0];
+            }else{
+                [measureSet[activePattern][i] setAlpha:0.5];
+            }
+        }
+    } completion:^(BOOL finished){
+        for(int i=0; i<NUM_MEASURES;i++){
+            if(i == measureIndex){
+                pages[i].alpha = 1.0;
+            }else{
+                pages[i].alpha = 0.4;
+            }
+        }
+        scrollView.scrollEnabled = YES;
+    }];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scroller
+{
+    [self snapScrollerToPlace:scroller];
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scroller
+{
+    scrollView.scrollEnabled = NO;
+    scrollView.scrollEnabled = YES;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scroller willDecelerate:(BOOL)decelerate
+{
+    if(!decelerate){
+        [self snapScrollerToPlace:scroller];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scroller
+{
+    
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scroller withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    
+    NSLog(@"Scroll view will end dragging %f",lastContentOffset.x);
+    
+    // First check how swipes interfere with left nav
+    if(activeMeasure == 0 && velocity.x < 0 && lastContentOffset.x == 0){
+        
+        [delegate openLeftNavigator];
+        targetMeasure = activeMeasure;
+        
+    }else{
+        
+        // Determine a target measure to scroll to
+        double velocityOffset = floor(abs(velocity.x)/3.0)+1;
+        
+        if(scrollView.contentOffset.x > lastContentOffset.x){
+            targetMeasure = MIN(activeMeasure+velocityOffset,NUM_MEASURES-1);
+        }else if(scrollView.contentOffset.x < lastContentOffset.x){
+            targetMeasure = MAX(activeMeasure-velocityOffset,0);
+        }
+        
+        CGPoint newOffset = CGPointMake(targetMeasure*(MEASURE_WIDTH+MEASURE_MARGIN),0);
+        
+        targetContentOffset->x = newOffset.x;
+        lastContentOffset.x = newOffset.x;
+    }
+    
+}
+
+- (void)snapScrollerToPlace:(UIScrollView *)scroller
+{
+    [self changeActiveMeasureToMeasure:targetMeasure scrollSlow:NO];
+}
+
+
 
 #pragma mark - System
 

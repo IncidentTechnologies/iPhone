@@ -21,21 +21,23 @@
 - (void) saveContext:(NSString *)filepath;
 - (BOOL) checkIsPlaying;
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
+- (void) dequeueAllPatternsForInstrument:(Instrument *)inst;
+- (void) viewSeqSet;
+
+- (BOOL) isLeftNavOpen;
+- (void) openLeftNavigator;
+- (void) closeLeftNavigator;
 
 @end
 
-@interface InstrumentViewController : UIViewController
+@interface InstrumentViewController : UIViewController <UIScrollViewDelegate>
 {
     // View data
     int activePattern;
     int activeMeasure;
     
-    //int changingPattern;
-    //NSTimer * patternTimer;
-    
     UIView * measureSet[NUM_PATTERNS][NUM_MEASURES];
     UIButton * noteButtons[NUM_PATTERNS][NUM_MEASURES][MAX_NOTES];
-    //NSString * patternTitles[NUM_PATTERNS];
     UIView * pages[NUM_MEASURES];
     
     UIColor * colors[STRINGS_ON_GTAR];
@@ -56,8 +58,8 @@
     int measureCounts[NUM_PATTERNS];
     int declaredActiveMeasures[NUM_PATTERNS];
     
-    // Timer
-    NSTimer * freezeMeasureChange;
+    CGPoint lastContentOffset;
+    int targetMeasure;
     
 }
 
@@ -73,6 +75,9 @@
 //-(IBAction)changePattern:(id)sender;
 //-(IBAction)stopChangePattern:(id)sender;
 -(IBAction)userDidSelectNewPattern:(id)sender;
+-(IBAction)viewSeqSet:(id)sender;
+
+@property (nonatomic) BOOL isMute;
 
 @property (weak, nonatomic) id<InstrumentDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView * scrollView;
@@ -88,5 +93,7 @@
 @property (weak, nonatomic) IBOutlet UIView * pageTwo;
 @property (weak, nonatomic) IBOutlet UIView * pageThree;
 @property (weak, nonatomic) IBOutlet UIView * pageFour;
+
+@property (weak, nonatomic) IBOutlet UIView * offMask;
 
 @end

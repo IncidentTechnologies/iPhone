@@ -9,6 +9,9 @@
 #import "OptionsViewController.h"
 
 #define ROW_HEIGHT 65
+#define TABLE_Y 55
+#define TABLE_HEIGHT 209
+#define TABLE_MIN_HEIGHT 103
 
 @implementation OptionsViewController
 
@@ -37,9 +40,13 @@
     [loadTable registerNib:nib forCellReuseIdentifier:@"LoadCell"];
     
     loadTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    loadTable.separatorInset = UIEdgeInsetsZero;
     loadTable.bounces = NO;
     
     selectMode = nil;
+    
+    // call this in testing to clear the Documents directory
+    // [self clearFileSet];
     
     [self reloadFileTable];
 }
@@ -56,33 +63,35 @@
 - (void)initOptions
 {
     
-    if(activeSequencer != nil){
-        
-    }
-    /*
-    if([fileLoadSet count] > 0){
-        
-        //[loadTable reloadData];
-        
-        // default select the active file
-        if(activeSequencer != nil){
-            for(int i = 0; i < [fileLoadSet count]; i++){
-                if([fileLoadSet[i] isEqualToString:activeSequencer]){
-                    //[loadTable selectRow:i inComponent:0 animated:YES];
-                }
-            }
-        }
-        
-    }else{
-        //[noFilesLabel setHidden:NO];
-        //[filePicker setHidden:YES];
-    }*/
 }
 
 - (void)reloadFileTable
 {
     [self loadFileSet];
-    [self userDidSelectLoad:loadButton];
+    
+    if([fileLoadSet count] > 0){
+        [self userDidSelectLoad:loadButton];
+        [self highlightActiveSequencer];
+    }
+}
+
+// Use this to delete data in the iPhone Documents directory
+- (void)clearFileSet
+{
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSError * error;
+    NSString * directoryPath = [paths objectAtIndex:0];
+    
+    NSMutableArray * fileSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
+    
+    // Exclude four default files
+    for(NSString * path in fileSet){
+        
+        NSString * fullPath = [directoryPath stringByAppendingPathComponent:path];
+        [[NSFileManager defaultManager] removeItemAtPath:fullPath error:&error];
+        
+    }
 }
 
 - (void)loadFileSet
@@ -96,9 +105,9 @@
     fileDateSet = [[NSMutableArray alloc] init];
     fileLoadSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
     
-    // Exclude four default files
+    // Exclude unrelated files
     for(int i = 0; i < [fileLoadSet count]; i++){
-        if([fileLoadSet[i] isEqualToString:@"sequencerInstruments.plist"] || [fileLoadSet[i] isEqualToString:@"sequencerCurrentState"] || [fileLoadSet[i] isEqualToString:@"Samples"] || [fileLoadSet[i] isEqualToString:@"customSampleList.plist"]){
+        if([fileLoadSet[i] rangeOfString:@"usr_"].location == NSNotFound){
             
             [fileLoadSet removeObjectAtIndex:i--];
             
@@ -117,7 +126,9 @@
     }
 
     // Sort by date order
-    [self sortFilesByDates];
+    if([fileLoadSet count] > 0){
+        [self sortFilesByDates];
+    }
 }
 
 // TODO: this can probably be done nicer with comparators
@@ -172,22 +183,37 @@
 {
     NSLog(@"user did save as %@",filename);
     
-    activeSequencer = filename;
-    [delegate saveWithName:filename];
+    NSString * emptyName = [filename stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    [delegate viewSeqSet];
+    if([emptyName isEqualToString:@""]){
+        NSLog(@"Error: trying to save with blank set name");
+    }else{
+        activeSequencer = filename;
+        [delegate saveWithName:filename];
+        
+        [delegate viewSeqSet];
+    }
 }
 
 - (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname
 {
     // move file to newname
     NSLog(@"user did move %@ to %@",filename,newname);
+    
+    if([activeSequencer isEqualToString:filename]){
+        activeSequencer = newname;
+    }
+    
+    [delegate renameFromName:filename toName:newname];
+    [self reloadFileTable];
 }
 
 - (void)userDidCreateNewFile:(NSString *)filename
 {
     // reset the set
     NSLog(@"user did create new as %@",filename);
+    activeSequencer = filename;
+    [delegate createNewWithName:filename];
     
     [delegate viewSeqSet];
 }
@@ -206,7 +232,7 @@
     
     [self showHideNewFileRow:NO];
     [loadTable reloadData];
-    [self selectLoadTableTopRow];
+    [self resetTableOffset:nil];
     
 }
 
@@ -222,7 +248,7 @@
     
     [self showHideNewFileRow:YES];
     [loadTable reloadData];
-    [self selectLoadTableTopRow];
+    [self resetTableOffset:nil];
     
 }
 
@@ -238,8 +264,7 @@
     
     [self showHideNewFileRow:NO];
     [loadTable reloadData];
-    [self selectLoadTableTopRow];
-    
+    [self resetTableOffset:nil];
     
 }
 
@@ -254,8 +279,7 @@
     
     [self showHideNewFileRow:YES];
     [loadTable reloadData];
-    [self selectLoadTableTopRow];
-
+    [self resetTableOffset:nil];
 
 }
 
@@ -297,6 +321,27 @@
     }
 }
 
+// Need extra logic to force keyboard ot hide when cell goes out of view
+/*-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    OptionsViewCell * hiddencell = (OptionsViewCell *)cell;
+    
+    if(hiddencell.isRenamable){
+        NSLog(@"Did end displaying cell at row %i",indexPath.row);
+        [hiddencell endNameEditing];
+    }
+}*/
+
+- (void)disableScroll
+{
+    loadTable.scrollEnabled = NO;
+}
+
+- (void)enableScroll
+{
+    loadTable.scrollEnabled = YES;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * CellIdentifier = @"LoadCell";
@@ -321,6 +366,12 @@
         cell.fileDate.text = dateString;
         cell.isRenamable = NO;
         
+        if([cell.fileText.text isEqualToString:activeSequencer]){
+            [cell setAsActiveSequencer];
+        }else{
+            [cell unsetAsActiveSequencer];
+        }
+        
     }else{
         
         // Row for new file
@@ -329,6 +380,8 @@
         cell.isRenamable = YES;
         
     }
+    
+    cell.rowid = indexPath.row;
     
     return cell;
 }
@@ -374,6 +427,19 @@
 
 }
 
+-(void)highlightActiveSequencer
+{
+    for(NSIndexPath * indexPath in loadTable.indexPathsForVisibleRows){
+        OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
+        
+        if([cell.fileText.text isEqualToString:activeSequencer]){
+            [cell setAsActiveSequencer];
+        }else if(!cell.isSelected){
+            [cell unsetAsActiveSequencer];
+        }
+    }
+}
+
 #pragma mark - Select actions
 
 -(void)selectLoadTableTopRow
@@ -390,15 +456,15 @@
      
 -(void)delayedSelectLoadTableTopRow
 {
-    
     int firstIndex = 0;
     
     if([selectMode isEqualToString:@"Rename"] || [selectMode isEqualToString:@"Load"]){
         firstIndex = 1;
     }
     
-    [loadTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:firstIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
-         
+    if([fileLoadSet count] > firstIndex){
+        [loadTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:firstIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    }
 }
 
 -(void)showHideNewFileRow:(BOOL)isHidden
@@ -408,9 +474,45 @@
 
 -(void)deselectAllRows
 {
-    for(NSIndexPath * indexPath in loadTable.indexPathsForSelectedRows){
+    NSLog(@"Deselect all rows");
+    for(int i = 0; i < [fileLoadSet count]+1; i++){
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         [loadTable deselectRowAtIndexPath:indexPath animated:NO];
     }
+}
+
+// Shrink table so any row can be renamed
+-(void)offsetTable:(id)sender
+{
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [loadTable setFrame:CGRectMake(0, TABLE_Y, loadTable.frame.size.width, TABLE_MIN_HEIGHT)];
+    }];
+    
+    if(sender != nil){ // Renaming, scroll to anywhere in the table
+        [loadTable scrollToRowAtIndexPath:[loadTable indexPathForCell:sender] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }else{
+        [self deselectAllRows];
+        [self delayedSelectLoadTableTopRow];
+    }
+}
+
+// Unshrink table when the keyboard is down
+-(void)resetTableOffset:(id)sender
+{
+    // Not sure why this offset is needed for animation to be smooth
+    [loadTable setFrame:CGRectMake(0, TABLE_Y, loadTable.frame.size.width, 170)];
+    
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [loadTable setFrame:CGRectMake(0, TABLE_Y, loadTable.frame.size.width, TABLE_HEIGHT)];
+    } completion:^(BOOL finished){
+        
+        if(sender != nil){
+            [loadTable scrollToRowAtIndexPath:[loadTable indexPathForCell:sender] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+        }else{
+            [self deselectAllRows];
+            [self delayedSelectLoadTableTopRow];
+        }
+    }];
 }
 
 #pragma mark - Name checking

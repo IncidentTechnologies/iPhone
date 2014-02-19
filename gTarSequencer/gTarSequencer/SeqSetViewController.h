@@ -66,6 +66,7 @@
 - (void)muteInstrument:(SeqSetViewCell *)sender isMute:(BOOL)isMute;
 - (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst;
 - (void)deleteCell:(id)sender;
+- (void)deleteAllCells;
 
 - (void)reloadTableData;
 - (void)updateAllVisibleCells;
@@ -82,6 +83,7 @@
 
 - (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset;
 - (void)clearQueuedPatternButtonAtIndex:(int)index;
+- (void)dequeueAllPatternsForInstrument:(id)sender;
 
 - (void)setInstrumentsFromData:(NSData *)instData;
 - (NSMutableArray *)getInstruments;

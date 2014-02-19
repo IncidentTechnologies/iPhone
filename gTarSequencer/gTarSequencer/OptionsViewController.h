@@ -13,6 +13,8 @@
 
 - (void) saveWithName:(NSString *)filename;
 - (void) loadFromName:(NSString *)filename;
+- (void) renameFromName:(NSString *)filename toName:(NSString *)newname;
+- (void) createNewWithName:(NSString *)filename;
 
 - (void) viewSeqSet;
 
@@ -39,11 +41,16 @@
 - (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname;
 - (void)userDidCreateNewFile:(NSString *)filename;
 
+- (void)offsetTable:(id)sender;
+- (void)resetTableOffset:(id)sender;
+
 - (void)reloadFileTable;
 - (void)unloadView;
 
 - (void)deselectAllRows;
 - (BOOL)isDuplicateFilename:(NSString *)filename;
+- (void)disableScroll;
+- (void)enableScroll;
 
 @property (retain, nonatomic) NSString * activeSequencer;
 

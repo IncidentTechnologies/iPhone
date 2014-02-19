@@ -104,7 +104,6 @@
     [self setRemainingInstrumentOptionsFromMasterOptions];    
     instruments = [NSKeyedUnarchiver unarchiveObjectWithData:instData];
     
-    
     // Remove all the previously used instruments from the remaining list:
     NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
     NSMutableArray * instrumentsToRemove = [[NSMutableArray alloc] init];
@@ -402,6 +401,7 @@
     
 }
 
+// Top to bottom
 - (void)clearQueuedPatternButtonAtIndex:(int)index
 {
     // Switch from instrument index to table index
@@ -414,8 +414,19 @@
             [cell resetQueuedPatternButton];
         }
     }
+}
+
+// Bottom to top
+- (void)dequeueAllPatternsForInstrument:(id)sender
+{
+    SeqSetViewCell * cell = (SeqSetViewCell *)sender;
+    Instrument * inst = cell.instrument;
+    int instIndex = inst.instrument;
+    
+    [delegate removeQueuedPatternForInstrumentAtIndex:instIndex];
     
 }
+
 
 - (void)turnEditingOff
 {
@@ -686,6 +697,18 @@
     
     [delegate numInstrumentsDidChange:[instruments count]];
     [delegate saveContext:nil];
+}
+
+- (void)deleteAllCells
+{
+    for(int i = 0; i < [instrumentTable numberOfRowsInSection:0]-1; i++){
+        SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        
+        [self deleteCell:cell];
+        
+    }
+    
+    NSLog(@"Delete all instrument table cells");
 }
 
 - (void)removeSequencerWithIndex:(long)indexToRemove

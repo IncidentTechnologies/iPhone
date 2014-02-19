@@ -9,6 +9,7 @@
                 <outlet property="instrumentIcon" destination="RJo-SI-EdU" id="SyM-Xz-iiP"/>
                 <outlet property="instrumentIconButton" destination="h7j-Qe-Xdr" id="JZy-d3-pR0"/>
                 <outlet property="offButton" destination="mwx-tL-nxF" id="R64-nK-Odk"/>
+                <outlet property="offMask" destination="dop-q1-gTm" id="1ft-d3-oSE"/>
                 <outlet property="pageFour" destination="ZzM-Oh-COn" id="2oY-TH-b0B"/>
                 <outlet property="pageOne" destination="812-SO-khO" id="ITG-kd-EeT"/>
                 <outlet property="pageThree" destination="vfJ-5T-RMp" id="f76-uF-0rL"/>
@@ -32,7 +33,7 @@
                     <color key="backgroundColor" red="0.11372549019607843" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7j-Qe-Xdr" customClass="UIButton">
-                    <rect key="frame" x="35" y="5" width="40" height="40"/>
+                    <rect key="frame" x="20" y="5" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RJo-SI-EdU">
@@ -40,26 +41,16 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                     </subviews>
+                    <connections>
+                        <action selector="viewSeqSet:" destination="-1" eventType="touchUpInside" id="8gL-Ov-x1q"/>
+                    </connections>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dAi-rv-0RH">
                     <rect key="frame" x="0.0" y="67" width="480" height="154"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwx-tL-nxF">
-                    <rect key="frame" x="428" y="-2" width="43" height="52"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                    <inset key="contentEdgeInsets" minX="8" minY="10" maxX="8" maxY="10"/>
-                    <state key="normal" image="Power_Icon.png">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="U6w-Vx-d1e"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohI-Bd-uCN">
-                    <rect key="frame" x="340" y="-2" width="83" height="52"/>
+                    <rect key="frame" x="336" y="-2" width="83" height="52"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                     <state key="normal" title="D">
@@ -71,7 +62,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYR-Nc-Clf">
-                    <rect key="frame" x="258" y="-2" width="83" height="52"/>
+                    <rect key="frame" x="254" y="-2" width="83" height="52"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                     <state key="normal" title="C">
@@ -83,7 +74,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Dz-MM-5kA">
-                    <rect key="frame" x="176" y="-2" width="83" height="52"/>
+                    <rect key="frame" x="172" y="-2" width="83" height="52"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                     <state key="normal" title="B">
@@ -95,7 +86,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB6-bg-6ZM">
-                    <rect key="frame" x="94" y="-2" width="83" height="52"/>
+                    <rect key="frame" x="90" y="-2" width="83" height="52"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                     <state key="normal" title="A">
@@ -126,6 +117,24 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
+                <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dop-q1-gTm">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwx-tL-nxF">
+                    <rect key="frame" x="427" y="-2" width="43" height="52"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="10" maxX="8" maxY="10"/>
+                    <state key="normal" image="Power_Icon.png">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="U6w-Vx-d1e"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.11372549019607843" green="0.34509803921568627" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

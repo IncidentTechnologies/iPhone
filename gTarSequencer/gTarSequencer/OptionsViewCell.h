@@ -14,11 +14,18 @@
 
 @interface OptionsViewCell : UITableViewCell <UITextFieldDelegate>
 {
+    BOOL isActiveSequencer;
     
+    UIColor * activeColor;
+    UIColor * darkGrayColor;
+    UIColor * blueColor;
+
 }
 
 - (void)userDidSaveLoad;
 - (void)endNameEditing;
+- (void)setAsActiveSequencer;
+- (void)unsetAsActiveSequencer;
 
 @property (weak, nonatomic) OptionsViewController * parent;
 
@@ -28,5 +35,6 @@
 @property (weak, nonatomic) IBOutlet UILabel * fileDate;
 
 @property (nonatomic) BOOL isRenamable;
+@property (nonatomic) int rowid;
 
 @end

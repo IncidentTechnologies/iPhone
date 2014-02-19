@@ -10,6 +10,9 @@
 #import "SoundMaker.h"
 #import <AudioController/AudioController.h>
 
+#define MAX_AMPLITUDE 4.0
+#define MIN_AMPLITUDE 0.02
+
 @implementation SoundMaker
 
 - (id)init
@@ -39,7 +42,14 @@
 
 - (void)PluckStringFret:(int)str atFret:(int)fret withAmplitude:(double)amplitude
 {
+    if(amplitude > MAX_AMPLITUDE){
+        amplitude = MAX_AMPLITUDE;
+    }else if(amplitude < MIN_AMPLITUDE){
+        amplitude = MIN_AMPLITUDE;
+    }
+    
     NSLog(@"Playing note with amplitude %f",amplitude);
+    
     [audioController PluckString:str atFret:fret withAmplitude:amplitude];
 }
 

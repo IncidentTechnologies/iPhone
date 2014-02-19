@@ -16,8 +16,8 @@
 #define YBASE 320
 
 #define TABLEHEIGHT 264
-#define NAVWIDTH 145
-#define NAVTAB 14
+#define NAVWIDTH 76
+#define NAVTAB 0
 #define SELECTORWIDTH 364
 #define SELECTORHEIGHT 276
 
@@ -107,6 +107,7 @@
     [seqSetViewController.view setFrame:onScreenMainFrame];
     [seqSetViewController setDelegate:self];
     
+    NSLog(@"Get current instrument: Sequencer View Controller");
     Instrument * currentInstrument = [seqSetViewController getCurrentInstrument];
     
     if (currentInstrument){
@@ -176,10 +177,15 @@
 
 #pragma mark - Left Navigator Delegate
 
+- (BOOL)isLeftNavOpen
+{
+    return leftNavOpen;
+}
+
 - (void)closeLeftNavigator
 {
     [seqSetViewController turnEditingOn];
-    [UIView animateWithDuration:0.5 animations:^(){
+    [UIView animateWithDuration:0.1 animations:^(){
         [leftNavigator.view setFrame:offLeftNavigatorFrame];
         [activeMainView setFrame:onScreenMainFrame];
     } completion:^(BOOL finished){
@@ -190,7 +196,7 @@
 - (void)openLeftNavigator
 {
     [seqSetViewController turnEditingOff];
-    [UIView animateWithDuration:0.5 animations:^(){
+    [UIView animateWithDuration:0.1 animations:^(){
         [leftNavigator.view setFrame:onScreenNavigatorFrame];
         [activeMainView setFrame:overScreenMainFrame];
     } completion:^(BOOL finished){
@@ -235,6 +241,8 @@
         
         [instrumentViewController reopenView];
         activeMainView = instrumentViewController.view;
+        
+        NSLog(@"Get current instrument: Nav Controller");
         Instrument * newInstrument = [seqSetViewController getCurrentInstrument];
         [instrumentViewController setActiveInstrument:newInstrument];
         
@@ -283,11 +291,6 @@
     //[optionsViewController userDidSaveSequence];
 }
 
-- (void)closeSaveLoadSelector
-{
-    
-}
-
 - (void)saveWithName:(NSString *)filename
 {
     activeSequencer = filename;
@@ -295,8 +298,6 @@
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
-    
-    [self closeSaveLoadSelector];
     
     [self saveContext:filepath];
     [self saveContext:nil];
@@ -310,10 +311,38 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
     
-    [self closeSaveLoadSelector];
-    
     [self loadStateFromDisk:filepath];
     [self saveContext:nil];
+}
+
+- (void)renameFromName:(NSString *)filename toName:(NSString *)newname
+{
+    if([activeSequencer isEqualToString:filename]){
+        activeSequencer = newname;
+    }
+    
+    filename = [@"usr_" stringByAppendingString:filename];
+    newname = [@"usr_" stringByAppendingString:newname];
+    
+    // move
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * currentPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
+    NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newname];
+    NSError * error = NULL;
+    
+    BOOL result = [[NSFileManager defaultManager] moveItemAtPath:currentPath toPath:newPath error:&error];
+    
+    if(!result)
+        NSLog(@"Error moving");
+   
+    [self saveContext:nil];
+}
+
+- (void)createNewWithName:(NSString *)filename
+{
+    [seqSetViewController deleteAllCells];
+    
+    [self saveWithName:filename];
 }
 
 
@@ -382,12 +411,12 @@
         double volume = [[currentState objectForKey:@"Volume"] doubleValue];
         [playControlViewController setVolume:volume];
         
+        // Decode selectedInstrumentIndex
+        [seqSetViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
+        
         // Decode array of instruments:
         NSData * instrumentData = [currentState objectForKey:@"Instruments Data"];
         [seqSetViewController setInstrumentsFromData:instrumentData];
-        
-        // Decode selectedInstrumentIndex
-        [seqSetViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
         
         // Decode active sequencer filename
         NSString * sequencerName = [currentState objectForKey:@"Active Sequencer"];
@@ -397,6 +426,8 @@
         }
 
         // Load icon into left navigator
+        
+        NSLog(@"Get current instrument: Load Icon");
         Instrument * selectedInst = [seqSetViewController getCurrentInstrument];
         if(selectedInst != nil){
             [leftNavigator enableInstrumentViewWithIcon:selectedInst.iconName];
@@ -520,6 +551,17 @@
     NSLog(@"Pattern Queue is: %@",patternQueue);
 }
 
+-(void)dequeueAllPatternsForInstrument:(Instrument *)inst
+{
+    for(NSMutableDictionary * p in patternQueue){
+        Instrument * i = [p objectForKey:@"Instrument"];
+        if(i == inst)
+        {
+            [patternQueue removeObject:p];
+        }
+    }
+}
+
 -(void)removeQueuedPatternForInstrumentAtIndex:(int)instIndex
 {
     for(NSMutableDictionary * p in patternQueue){
@@ -544,11 +586,11 @@
     
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeLeftNavigator)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [swipeLeft setNumberOfTouchesRequired:2];
+    [swipeLeft setNumberOfTouchesRequired:1];
     
     swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(openLeftNavigator)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [swipeRight setNumberOfTouchesRequired:2];
+    [swipeRight setNumberOfTouchesRequired:1];
     
     [self.view addGestureRecognizer:swipeLeft];
     [self.view addGestureRecognizer:swipeRight];

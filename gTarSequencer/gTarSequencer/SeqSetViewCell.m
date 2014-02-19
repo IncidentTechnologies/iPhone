@@ -203,15 +203,17 @@
 
 - (void)initPatternButtonUI
 {
-    
-    UIBezierPath * pathA = [UIBezierPath bezierPathWithRoundedRect:patternA.bounds byRoundingCorners:(UIRectCornerBottomLeft) cornerRadii:CGSizeMake(10.0,10.0)];
-    UIBezierPath * pathD = [UIBezierPath bezierPathWithRoundedRect:patternD.bounds byRoundingCorners:(UIRectCornerBottomRight) cornerRadii:CGSizeMake(10.0,10.0)];
-    
-    [self drawShapedButton:patternA withBezierPath:pathA];
-    patternABorder = [self drawStrokedButton:patternA withBezierPath:pathA andBorderColor:[UIColor whiteColor]];
-    
-    [self drawShapedButton:patternD withBezierPath:pathD];
-    patternDBorder = [self drawStrokedButton:patternD withBezierPath:pathD andBorderColor:[UIColor whiteColor]];
+    if(patternABorder == nil && patternDBorder == nil){
+        
+        UIBezierPath * pathA = [UIBezierPath bezierPathWithRoundedRect:patternA.bounds byRoundingCorners:(UIRectCornerBottomLeft) cornerRadii:CGSizeMake(10.0,10.0)];
+        UIBezierPath * pathD = [UIBezierPath bezierPathWithRoundedRect:patternD.bounds byRoundingCorners:(UIRectCornerBottomRight) cornerRadii:CGSizeMake(10.0,10.0)];
+        
+        [self drawShapedButton:patternA withBezierPath:pathA];
+        patternABorder = [self drawStrokedButton:patternA withBezierPath:pathA andBorderColor:[UIColor whiteColor]];
+        
+        [self drawShapedButton:patternD withBezierPath:pathD];
+        patternDBorder = [self drawStrokedButton:patternD withBezierPath:pathD andBorderColor:[UIColor whiteColor]];
+    }
 }
 
 - (void)resetQueuedPatternButton
@@ -362,8 +364,8 @@
             [self hideButtonBorders:button];
             break;
         case 3: // queued blinking
-            backgroundColor = [UIColor clearColor];
-            titleColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8];
+            backgroundColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1.0];
+            titleColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
             [self showButtonBorders:button];
             break;
     }
@@ -510,13 +512,13 @@
     
     UIButton * newSelection = [patternButtons objectAtIndex:index];
     
-    if (selectedPatternButton == newSelection){
+    /*if (selectedPatternButton == newSelection){
         NSLog(@"Already set - returning");
         return;
     }else {
-        NSLog(@"Now updating");
+        NSLog(@"Now updating");*/
         [self updatePatternButton:newSelection playState:NO];
-    }
+    //}
 }
 
 - (void)selectMeasure:(int)indexToSelect
@@ -557,18 +559,24 @@
 // Split up into two functions to allow the UI to update immediately
 - (void)selectNewPattern:(id)sender
 {
-    NSLog(@"Select new pattern");
     int tappedIndex = [patternButtons indexOfObject:sender];
     
     BOOL isPlaying = NO;
     
     NSLog(@"Select new pattern at %i", tappedIndex);
     
-    if (tappedIndex == MUTE_SEGMENT_INDEX){
+    if (tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton != offButton){
         isMute = YES;
         [parent muteInstrument:self isMute:YES];
         isPlaying = [parent.delegate checkIsPlaying];
         [self resetQueuedPatternButton];
+        [parent dequeueAllPatternsForInstrument:self];
+    }else if(tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton == offButton){
+        isMute = NO;
+        [parent muteInstrument:self isMute:NO];
+        isPlaying = [parent.delegate checkIsPlaying];
+        [self resetQueuedPatternButton];
+        [parent dequeueAllPatternsForInstrument:self];
     }else{
         isMute = NO;
         [parent muteInstrument:self isMute:NO];

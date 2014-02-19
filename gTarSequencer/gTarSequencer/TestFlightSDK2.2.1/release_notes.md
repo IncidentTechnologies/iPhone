@@ -1,3 +1,16 @@
+## 2.2.1
+
+- Consolidate both SDK versions into one which removes all access to `ASIdentifierManager`
+
+## 2.2
+
+- Restore In App Updates
+- Automatic identification of beta testers
+
+## 2.1.3
+
+- Fix bug in 2.1.2-noadid which caused adid to be collected
+
 ## 2.1.2
 
 - Fix for bug that caused events to not get sent properly when using the `TFOptionSessionKeepAliveTimeout` option
