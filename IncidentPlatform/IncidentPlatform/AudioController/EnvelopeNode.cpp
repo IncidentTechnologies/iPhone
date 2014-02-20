@@ -10,14 +10,18 @@
 
 EnvelopeNode::EnvelopeNode() :
     AudioNode(),
-    m_msAttack(1.0f),
+    m_msAttack(100.0f),
     m_AttackLevel(1.0f),
-    m_msDecay(250.0f),
+    m_msDecay(200.0f),
     m_SustainLevel(0.25f),
     m_msRelease(1000.0f),
     m_CLK(0.0f),
     m_releaseCLK(0.0f)
 {
+    SetChannelCount(1, CONN_IN);
+    SetChannelCount(1, CONN_OUT);
+    
+    m_fNoteOn = false;
     m_msCLKIncrement = 1000.0f / m_SampleRate;
 }
 

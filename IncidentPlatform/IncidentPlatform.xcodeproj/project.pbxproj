@@ -55,8 +55,8 @@
 		2610F13118AD6A31003F5CEB /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2610F0FC18AD6A31003F5CEB /* CAStreamBasicDescription.cpp */; };
 		2610F13218AD6A31003F5CEB /* ChorusEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F10018AD6A31003F5CEB /* ChorusEffect.mm */; };
 		2610F13318AD6A31003F5CEB /* Compressor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F10218AD6A31003F5CEB /* Compressor.mm */; };
-		2610F13418AD6A31003F5CEB /* DelayEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F10418AD6A31003F5CEB /* DelayEffect.mm */; };
-		2610F13518AD6A31003F5CEB /* DiffusionTank.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F10618AD6A31003F5CEB /* DiffusionTank.mm */; };
+		2610F13418AD6A31003F5CEB /* DelayNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2610F10418AD6A31003F5CEB /* DelayNode.cpp */; };
+		2610F13518AD6A31003F5CEB /* DiffusionTankNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2610F10618AD6A31003F5CEB /* DiffusionTankNode.cpp */; };
 		2610F13618AD6A31003F5CEB /* Distortion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F10818AD6A31003F5CEB /* Distortion.mm */; };
 		2610F13718AD6A31003F5CEB /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F10A18AD6A31003F5CEB /* Effect.mm */; };
 		2610F13818AD6A31003F5CEB /* EnvelopeFollower.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F10C18AD6A31003F5CEB /* EnvelopeFollower.mm */; };
@@ -68,7 +68,7 @@
 		2610F13E18AD6A31003F5CEB /* KSObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F11818AD6A31003F5CEB /* KSObject.mm */; };
 		2610F13F18AD6A31003F5CEB /* LocalMax.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F11A18AD6A31003F5CEB /* LocalMax.mm */; };
 		2610F14018AD6A31003F5CEB /* Overdrive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F11C18AD6A31003F5CEB /* Overdrive.mm */; };
-		2610F14118AD6A31003F5CEB /* Parameter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F11E18AD6A31003F5CEB /* Parameter.mm */; };
+		2610F14118AD6A31003F5CEB /* Parameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2610F11E18AD6A31003F5CEB /* Parameter.cpp */; };
 		2610F14218AD6A31003F5CEB /* Reverb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F12018AD6A31003F5CEB /* Reverb.mm */; };
 		2610F14318AD6A31003F5CEB /* Sampler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F12218AD6A31003F5CEB /* Sampler.mm */; };
 		2610F14418AD6A31003F5CEB /* SoftClippingOverdrive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F12418AD6A31003F5CEB /* SoftClippingOverdrive.mm */; };
@@ -130,6 +130,17 @@
 		264790AD187B8BC60077987F /* OpenGLES2View.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 264790AA187B5F3F0077987F /* OpenGLES2View.h */; };
 		264B062D1869235F00724A7D /* XMPTree.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2605803318691DE800F6668F /* XMPTree.h */; };
 		264B062E1869236D00724A7D /* XMPObjectFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2605802418691DE800F6668F /* XMPObjectFactory.h */; };
+		264EC76718B30343001F7224 /* SampleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 264EC76518B30343001F7224 /* SampleNode.cpp */; };
+		264EC76C18B30741001F7224 /* AudioNodeFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 264EC76B18B30741001F7224 /* AudioNodeFactory.mm */; };
+		264EC76D18B308AE001F7224 /* SampleNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 264EC76618B30343001F7224 /* SampleNode.h */; };
+		264EC76E18B308AE001F7224 /* AudioNodeFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 264EC76A18B30741001F7224 /* AudioNodeFactory.h */; };
+		264EC77318B43CC9001F7224 /* EffectNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 264EC77118B43CC9001F7224 /* EffectNode.cpp */; };
+		264EC77418B44F95001F7224 /* EffectNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 264EC77218B43CC9001F7224 /* EffectNode.h */; };
+		264EC77518B44F95001F7224 /* DelayNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2610F10318AD6A31003F5CEB /* DelayNode.h */; };
+		264EC77618B44FD6001F7224 /* Parameter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2610F11D18AD6A31003F5CEB /* Parameter.h */; };
+		264EC77918B456E6001F7224 /* AudioNodeNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 264EC77718B456E6001F7224 /* AudioNodeNetwork.cpp */; };
+		264EC77A18B4581B001F7224 /* AudioNodeNetwork.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 264EC77818B456E6001F7224 /* AudioNodeNetwork.h */; };
+		264EC77D18B55208001F7224 /* SamplerNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 264EC77B18B55208001F7224 /* SamplerNode.cpp */; };
 		26A5131518873B1700478200 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A5131418873B1700478200 /* Cocoa.framework */; };
 		26A5131F18873B1700478200 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26A5131D18873B1700478200 /* InfoPlist.strings */; };
 		26A5132418873B5500478200 /* fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 26A512FA188734CF00478200 /* fragment.glsl */; };
@@ -161,6 +172,12 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				264EC77A18B4581B001F7224 /* AudioNodeNetwork.h in CopyFiles */,
+				264EC77618B44FD6001F7224 /* Parameter.h in CopyFiles */,
+				264EC77418B44F95001F7224 /* EffectNode.h in CopyFiles */,
+				264EC77518B44F95001F7224 /* DelayNode.h in CopyFiles */,
+				264EC76D18B308AE001F7224 /* SampleNode.h in CopyFiles */,
+				264EC76E18B308AE001F7224 /* AudioNodeFactory.h in CopyFiles */,
 				26EBC39818ADB7230068BEC6 /* EnvelopeNode.h in CopyFiles */,
 				26EBC39918ADB7230068BEC6 /* GeneratorNode.h in CopyFiles */,
 				26EBC39718ADB70D0068BEC6 /* WavetableNode.h in CopyFiles */,
@@ -290,10 +307,10 @@
 		2610F10018AD6A31003F5CEB /* ChorusEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChorusEffect.mm; sourceTree = "<group>"; };
 		2610F10118AD6A31003F5CEB /* Compressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compressor.h; sourceTree = "<group>"; };
 		2610F10218AD6A31003F5CEB /* Compressor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Compressor.mm; sourceTree = "<group>"; };
-		2610F10318AD6A31003F5CEB /* DelayEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayEffect.h; sourceTree = "<group>"; };
-		2610F10418AD6A31003F5CEB /* DelayEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DelayEffect.mm; sourceTree = "<group>"; };
-		2610F10518AD6A31003F5CEB /* DiffusionTank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiffusionTank.h; sourceTree = "<group>"; };
-		2610F10618AD6A31003F5CEB /* DiffusionTank.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DiffusionTank.mm; sourceTree = "<group>"; };
+		2610F10318AD6A31003F5CEB /* DelayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayNode.h; sourceTree = "<group>"; };
+		2610F10418AD6A31003F5CEB /* DelayNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayNode.cpp; sourceTree = "<group>"; };
+		2610F10518AD6A31003F5CEB /* DiffusionTankNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiffusionTankNode.h; sourceTree = "<group>"; };
+		2610F10618AD6A31003F5CEB /* DiffusionTankNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DiffusionTankNode.cpp; sourceTree = "<group>"; };
 		2610F10718AD6A31003F5CEB /* Distortion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Distortion.h; sourceTree = "<group>"; };
 		2610F10818AD6A31003F5CEB /* Distortion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Distortion.mm; sourceTree = "<group>"; };
 		2610F10918AD6A31003F5CEB /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
@@ -317,7 +334,7 @@
 		2610F11B18AD6A31003F5CEB /* Overdrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
 		2610F11C18AD6A31003F5CEB /* Overdrive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Overdrive.mm; sourceTree = "<group>"; };
 		2610F11D18AD6A31003F5CEB /* Parameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parameter.h; sourceTree = "<group>"; };
-		2610F11E18AD6A31003F5CEB /* Parameter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Parameter.mm; sourceTree = "<group>"; };
+		2610F11E18AD6A31003F5CEB /* Parameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parameter.cpp; sourceTree = "<group>"; };
 		2610F11F18AD6A31003F5CEB /* Reverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reverb.h; sourceTree = "<group>"; };
 		2610F12018AD6A31003F5CEB /* Reverb.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Reverb.mm; sourceTree = "<group>"; };
 		2610F12118AD6A31003F5CEB /* Sampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sampler.h; sourceTree = "<group>"; };
@@ -460,6 +477,17 @@
 		264790A8187681990077987F /* WindowFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WindowFactory.cpp; sourceTree = "<group>"; };
 		264790AA187B5F3F0077987F /* OpenGLES2View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLES2View.h; sourceTree = "<group>"; };
 		264790AB187B5F3F0077987F /* OpenGLES2View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenGLES2View.mm; sourceTree = "<group>"; };
+		264EC76518B30343001F7224 /* SampleNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SampleNode.cpp; sourceTree = "<group>"; };
+		264EC76618B30343001F7224 /* SampleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleNode.h; sourceTree = "<group>"; };
+		264EC76918B3055C001F7224 /* TestGuitarSample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestGuitarSample.mp3; sourceTree = "<group>"; };
+		264EC76A18B30741001F7224 /* AudioNodeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioNodeFactory.h; sourceTree = "<group>"; };
+		264EC76B18B30741001F7224 /* AudioNodeFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioNodeFactory.mm; sourceTree = "<group>"; };
+		264EC77118B43CC9001F7224 /* EffectNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectNode.cpp; sourceTree = "<group>"; };
+		264EC77218B43CC9001F7224 /* EffectNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectNode.h; sourceTree = "<group>"; };
+		264EC77718B456E6001F7224 /* AudioNodeNetwork.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioNodeNetwork.cpp; sourceTree = "<group>"; };
+		264EC77818B456E6001F7224 /* AudioNodeNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioNodeNetwork.h; sourceTree = "<group>"; };
+		264EC77B18B55208001F7224 /* SamplerNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SamplerNode.cpp; sourceTree = "<group>"; };
+		264EC77C18B55208001F7224 /* SamplerNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SamplerNode.h; sourceTree = "<group>"; };
 		26A512FA188734CF00478200 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
 		26A512FB188734CF00478200 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
 		26A5131318873B1600478200 /* IncidentPlatformBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IncidentPlatformBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -700,6 +728,7 @@
 		2610F0E818AD6A31003F5CEB /* AudioController */ = {
 			isa = PBXGroup;
 			children = (
+				264EC76818B3055C001F7224 /* TestData */,
 				2610F14B18AD6A9F003F5CEB /* iPublicUtility */,
 				2610F14918AD6A75003F5CEB /* AudioNode */,
 				2610F14818AD6A53003F5CEB /* AUAudioNode */,
@@ -739,6 +768,16 @@
 		2610F14918AD6A75003F5CEB /* AudioNode */ = {
 			isa = PBXGroup;
 			children = (
+				2610F10518AD6A31003F5CEB /* DiffusionTankNode.h */,
+				2610F10618AD6A31003F5CEB /* DiffusionTankNode.cpp */,
+				264EC77118B43CC9001F7224 /* EffectNode.cpp */,
+				264EC77218B43CC9001F7224 /* EffectNode.h */,
+				2610F10918AD6A31003F5CEB /* Effect.h */,
+				2610F10A18AD6A31003F5CEB /* Effect.mm */,
+				2610F10318AD6A31003F5CEB /* DelayNode.h */,
+				2610F10418AD6A31003F5CEB /* DelayNode.cpp */,
+				2610F11D18AD6A31003F5CEB /* Parameter.h */,
+				2610F11E18AD6A31003F5CEB /* Parameter.cpp */,
 				2610F14A18AD6A88003F5CEB /* Effects */,
 				2610F10D18AD6A31003F5CEB /* EnvelopeNode.cpp */,
 				2610F10E18AD6A31003F5CEB /* EnvelopeNode.h */,
@@ -748,6 +787,14 @@
 				2610F0F118AD6A31003F5CEB /* AudioNode.h */,
 				2610F12718AD6A31003F5CEB /* WavetableNode.cpp */,
 				2610F12818AD6A31003F5CEB /* WavetableNode.h */,
+				264EC76518B30343001F7224 /* SampleNode.cpp */,
+				264EC76618B30343001F7224 /* SampleNode.h */,
+				264EC76A18B30741001F7224 /* AudioNodeFactory.h */,
+				264EC76B18B30741001F7224 /* AudioNodeFactory.mm */,
+				264EC77718B456E6001F7224 /* AudioNodeNetwork.cpp */,
+				264EC77818B456E6001F7224 /* AudioNodeNetwork.h */,
+				264EC77B18B55208001F7224 /* SamplerNode.cpp */,
+				264EC77C18B55208001F7224 /* SamplerNode.h */,
 			);
 			name = AudioNode;
 			sourceTree = "<group>";
@@ -767,8 +814,6 @@
 				2610F11A18AD6A31003F5CEB /* LocalMax.mm */,
 				2610F11B18AD6A31003F5CEB /* Overdrive.h */,
 				2610F11C18AD6A31003F5CEB /* Overdrive.mm */,
-				2610F11D18AD6A31003F5CEB /* Parameter.h */,
-				2610F11E18AD6A31003F5CEB /* Parameter.mm */,
 				2610F11F18AD6A31003F5CEB /* Reverb.h */,
 				2610F12018AD6A31003F5CEB /* Reverb.mm */,
 				2610F10B18AD6A31003F5CEB /* EnvelopeFollower.h */,
@@ -781,14 +826,8 @@
 				2610F10018AD6A31003F5CEB /* ChorusEffect.mm */,
 				2610F10118AD6A31003F5CEB /* Compressor.h */,
 				2610F10218AD6A31003F5CEB /* Compressor.mm */,
-				2610F10318AD6A31003F5CEB /* DelayEffect.h */,
-				2610F10418AD6A31003F5CEB /* DelayEffect.mm */,
-				2610F10518AD6A31003F5CEB /* DiffusionTank.h */,
-				2610F10618AD6A31003F5CEB /* DiffusionTank.mm */,
 				2610F10718AD6A31003F5CEB /* Distortion.h */,
 				2610F10818AD6A31003F5CEB /* Distortion.mm */,
-				2610F10918AD6A31003F5CEB /* Effect.h */,
-				2610F10A18AD6A31003F5CEB /* Effect.mm */,
 				2610F0F618AD6A31003F5CEB /* ButterWorthFilter.h */,
 				2610F0F718AD6A31003F5CEB /* ButterWorthFilter.mm */,
 				2610F0F818AD6A31003F5CEB /* ButterWorthFilterElement.h */,
@@ -1012,6 +1051,14 @@
 			path = Window;
 			sourceTree = "<group>";
 		};
+		264EC76818B3055C001F7224 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				264EC76918B3055C001F7224 /* TestGuitarSample.mp3 */,
+			);
+			path = TestData;
+			sourceTree = "<group>";
+		};
 		26A5131618873B1700478200 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1167,18 +1214,22 @@
 				2647908418692BA50077987F /* vertex.vsh in Sources */,
 				2647908718692BA50077987F /* vertex.vsh in Sources */,
 				2605804518691DE800F6668F /* XMPInput.mm in Sources */,
-				2610F14118AD6A31003F5CEB /* Parameter.mm in Sources */,
+				2610F14118AD6A31003F5CEB /* Parameter.cpp in Sources */,
 				2647908618692BA50077987F /* vertex.vsh in Sources */,
 				2605804718691DE800F6668F /* XMPLesson.mm in Sources */,
 				2605805218691DE800F6668F /* XMPTest.cpp in Sources */,
 				2605805118691DE800F6668F /* XMPParser.cpp in Sources */,
 				2610F13E18AD6A31003F5CEB /* KSObject.mm in Sources */,
 				2647907C18692BA50077987F /* FlatObject.cpp in Sources */,
+				264EC77318B43CC9001F7224 /* EffectNode.cpp in Sources */,
 				2610F12E18AD6A31003F5CEB /* AUOutputNode.mm in Sources */,
 				2647908018692BA50077987F /* MeshMd3.cpp in Sources */,
+				264EC76C18B30741001F7224 /* AudioNodeFactory.mm in Sources */,
+				264EC77D18B55208001F7224 /* SamplerNode.cpp in Sources */,
 				2610F12D18AD6A31003F5CEB /* AUMixerNode.mm in Sources */,
 				2610F13018AD6A31003F5CEB /* ButterWorthFilterElement.mm in Sources */,
 				2610F14518AD6A31003F5CEB /* TanhDistortion.mm in Sources */,
+				264EC77918B456E6001F7224 /* AudioNodeNetwork.cpp in Sources */,
 				2605804218691DE800F6668F /* XMPMain.cpp in Sources */,
 				2610F13918AD6A31003F5CEB /* EnvelopeNode.cpp in Sources */,
 				2647908818692BA50077987F /* vertex.vsh in Sources */,
@@ -1206,7 +1257,7 @@
 				2610F13C18AD6A31003F5CEB /* GeneratorNode.cpp in Sources */,
 				2605805418691DE800F6668F /* XMPTree.cpp in Sources */,
 				2610F13818AD6A31003F5CEB /* EnvelopeFollower.mm in Sources */,
-				2610F13418AD6A31003F5CEB /* DelayEffect.mm in Sources */,
+				2610F13418AD6A31003F5CEB /* DelayNode.cpp in Sources */,
 				2605804918691DE800F6668F /* XMPLoop.mm in Sources */,
 				2605805018691DE800F6668F /* XMPTrack.mm in Sources */,
 				2605805618691DE800F6668F /* Console.cpp in Sources */,
@@ -1238,7 +1289,7 @@
 				2647907318692BA50077987F /* DX9Blit.cpp in Sources */,
 				2647908918692BA50077987F /* vertex.vsh in Sources */,
 				264790AC187B5F3F0077987F /* OpenGLES2View.mm in Sources */,
-				2610F13518AD6A31003F5CEB /* DiffusionTank.mm in Sources */,
+				2610F13518AD6A31003F5CEB /* DiffusionTankNode.cpp in Sources */,
 				2610F12C18AD6A31003F5CEB /* AudioNode.cpp in Sources */,
 				2605803D18691DE800F6668F /* hash.cpp in Sources */,
 				2610F12A18AD6A31003F5CEB /* AUAudioNodeFactory.mm in Sources */,
@@ -1257,6 +1308,7 @@
 				2610F13718AD6A31003F5CEB /* Effect.mm in Sources */,
 				264790A31869304C0077987F /* WindowWin32.cpp in Sources */,
 				2610F13A18AD6A31003F5CEB /* FirstOrderFilter.mm in Sources */,
+				264EC76718B30343001F7224 /* SampleNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

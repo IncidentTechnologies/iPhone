@@ -47,9 +47,10 @@ WavetableNode::WavetableNode() :
     m_frequency(440.0f),
     m_phase(0.0f),
     m_theta(0.0f),
-    m_type(WAVETABLE_TRIANGLE)
+    m_type(WAVETABLE_SAW)
 {
-    SetChannelCount(1);
+    SetChannelCount(1, CONN_OUT);
+    
     InitializeWavetable();
 }
 

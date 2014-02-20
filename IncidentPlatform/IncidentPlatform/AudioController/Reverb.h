@@ -10,7 +10,8 @@
 #define gTarAudioController_Reverb_h
 
 #include "Effect.h"
-#include "DiffusionTank.h"
+//#include "DiffusionTank.h"
+#include "DiffusionTankNode.h"
 #include "FirstOrderFilter.h"
 
 // Reverberator. Design taken from Jon Datorro's "Effective Design Part 1: 
@@ -50,10 +51,16 @@ public:
     
 private:
     // Input Diffusers
-    DiffusionTank* m_pInputDiffusionA;
+    /*DiffusionTank* m_pInputDiffusionA;
     DiffusionTank* m_pInputDiffusionB;
     DiffusionTank* m_pInputDiffusionC;
-    DiffusionTank* m_pInputDiffusionD;
+    DiffusionTank* m_pInputDiffusionD;*/
+    
+    DiffusionTankNode* m_pInputDiffusionA;
+    DiffusionTankNode* m_pInputDiffusionB;
+    DiffusionTankNode* m_pInputDiffusionC;
+    DiffusionTankNode* m_pInputDiffusionD;
+    
     double m_pInputDiffusionA_delay;
     double m_pInputDiffusionB_delay;
     double m_pInputDiffusionC_delay;
@@ -62,10 +69,16 @@ private:
     double m_inputDiffusion2;
     
     // Reverberation Tank
-    DiffusionTank* m_pDecayDiffusionL1;
+    /*DiffusionTank* m_pDecayDiffusionL1;
     DiffusionTank* m_pDecayDiffusionL2;
     DiffusionTank* m_pDecayDiffusionR1;
-    DiffusionTank* m_pDecayDiffusionR2;
+    DiffusionTank* m_pDecayDiffusionR2;*/
+    
+    DiffusionTankNode* m_pDecayDiffusionL1;
+    DiffusionTankNode* m_pDecayDiffusionL2;
+    DiffusionTankNode* m_pDecayDiffusionR1;
+    DiffusionTankNode* m_pDecayDiffusionR2;
+    
     double m_pDecayDiffusionL1_delay;
     double m_pDecayDiffusionL2_delay;
     double m_pDecayDiffusionR1_delay;

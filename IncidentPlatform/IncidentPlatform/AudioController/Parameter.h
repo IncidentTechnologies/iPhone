@@ -13,8 +13,7 @@
 
 #include <string>
 
-class Parameter
-{
+class Parameter {
 public:
     Parameter(float initial, float min, float max, const std::string& desc);
     

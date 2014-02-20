@@ -9,42 +9,33 @@
 #ifndef gTarAudioController_DelayEffect_h
 #define gTarAudioController_DelayEffect_h
 
-#include "Effect.h"
+#include "EffectNode.h"
 
 #define DELAY_EFFECT_MAX_MS_DELAY 1000
 
-class DelayEffect :
-public Effect
-{
+class DelayNode : public EffectNode {
 public:
-    DelayEffect(double msDelayTime, double feedback, double wet, double SamplingFrequency);
+    DelayNode(double msDelayTime, double feedback, double wet);
+    ~DelayNode();
     
-    inline double InputSample(double sample);
+    float InputSample(double sample);
+    float GetNextSample(unsigned long int timestamp);
     
-    bool SetFeedback(double feedback);
+    float GetFeedback();
+    bool SetFeedback(float feedbackValue);
     
-    Parameter& getPrimaryParam();
-    
-    bool setPrimaryParam(float value);
-    
-    Parameter& getSecondaryParam();
-    
-    bool setSecondaryParam(float value);
+    float GetDelayTime();
+    bool SetDelayTime(float delayTime);
     
     void Reset();
-    
     void ClearOutEffect();
     
-    ~DelayEffect();
-    
 protected:
-    
     Parameter *m_pDelayTime;
     Parameter *m_pFeedback;
     
     long m_pDelayLine_n;
     double *m_pDelayLine;
-    
     long m_pDelayLine_c;
     long m_pDelayLine_l;
 };

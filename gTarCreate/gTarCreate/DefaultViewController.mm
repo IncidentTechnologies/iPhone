@@ -15,6 +15,8 @@
 @interface DefaultViewController () {
     WavetableNode *m_wavNode;
     EnvelopeNode *m_envNode;
+    SampleNode *m_sampNode;
+    DelayNode *m_delayNode;
 }
 
 @end
@@ -34,12 +36,24 @@
     AudioController *ac = [AudioController sharedAudioController];
     
     AudioNode *root = [[ac GetNodeNetwork] GetRootNode];
-    
-    m_wavNode = new WavetableNode();
+    m_sampNode = new SampleNode((char *)[[[NSBundle mainBundle] pathForResource:@"TestGuitarSample" ofType:@"mp3"] UTF8String]);
     m_envNode = new EnvelopeNode();
     
-    ConnectNodes(m_wavNode, m_envNode);
-    ConnectNodes(m_envNode, root);
+    m_delayNode = new DelayNode(500.0f, 0.75f, 1.0f);
+    
+    // connect the network
+    m_envNode->ConnectInput(0, m_sampNode, 0);
+    m_delayNode->ConnectInput(0, m_envNode, 0);
+    root->ConnectInput(0, m_delayNode, 0);
+    
+    
+    
+    /*
+    m_wavNode = new WavetableNode();
+    root->ConnectInput(0, m_envNode, 0);
+    m_envNode->ConnectInput(0, m_wavNode, 0);
+     */
+    
     
     [ac startAUGraph];
 }
@@ -47,11 +61,16 @@
 -(IBAction)onButtonTriggerClicked:(id)sender {
     NSLog(@"trig");
     
+    /*
     if(!m_envNode->IsNoteOn()) {
         m_wavNode->trigger();
         m_envNode->NoteOn();
     } else
         m_envNode->NoteOff();
+    */
+    
+    m_sampNode->Trigger();
+    m_envNode->NoteOn();
        
 }
 

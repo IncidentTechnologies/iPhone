@@ -27,7 +27,7 @@ Reverb::Reverb(double wet, double SamplingFrequency):
     m_decayDiffusion2 = 0.15;
     
     m_damping = 0.05;
-    
+    /*
     m_pInputDiffusionA = new DiffusionTank(m_pInputDiffusionA_delay, m_inputDiffusion1, true, 1.0f, SamplingFrequency);
     m_pInputDiffusionB = new DiffusionTank(m_pInputDiffusionB_delay, m_inputDiffusion1, true, 1.0f, SamplingFrequency);
     m_pInputDiffusionC = new DiffusionTank(m_pInputDiffusionC_delay, m_inputDiffusion2, true, 1.0f, SamplingFrequency);
@@ -37,6 +37,17 @@ Reverb::Reverb(double wet, double SamplingFrequency):
     m_pDecayDiffusionL2 = new DiffusionTank(m_pDecayDiffusionL2_delay, m_decayDiffusion2, true, 1.0f, SamplingFrequency);
     m_pDecayDiffusionR1 = new DiffusionTank(m_pDecayDiffusionR1_delay, m_decayDiffusion1, false, 1.0f, SamplingFrequency);
     m_pDecayDiffusionR2 = new DiffusionTank(m_pDecayDiffusionR2_delay, m_decayDiffusion2, true, 1.0f, SamplingFrequency);
+     */
+    
+    m_pInputDiffusionA = new DiffusionTankNode(m_pInputDiffusionA_delay, m_inputDiffusion1, true, 1.0f);
+    m_pInputDiffusionB = new DiffusionTankNode(m_pInputDiffusionB_delay, m_inputDiffusion1, true, 1.0f);
+    m_pInputDiffusionC = new DiffusionTankNode(m_pInputDiffusionC_delay, m_inputDiffusion2, true, 1.0f);
+    m_pInputDiffusionD = new DiffusionTankNode(m_pInputDiffusionD_delay, m_inputDiffusion2, true, 1.0f);
+    
+    m_pDecayDiffusionL1 = new DiffusionTankNode(m_pDecayDiffusionL1_delay, m_decayDiffusion1, false, 1.0f);
+    m_pDecayDiffusionL2 = new DiffusionTankNode(m_pDecayDiffusionL2_delay, m_decayDiffusion2, true, 1.0f);
+    m_pDecayDiffusionR1 = new DiffusionTankNode(m_pDecayDiffusionR1_delay, m_decayDiffusion1, false, 1.0f);
+    m_pDecayDiffusionR2 = new DiffusionTankNode(m_pDecayDiffusionR2_delay, m_decayDiffusion2, true, 1.0f);
     
     m_pBandWidthFilter = new FirstOrderFilter(1.0 - m_currentBandwidth, 1.0f, SamplingFrequency);
     m_pDampingFilterL = new FirstOrderFilter(m_damping, 1.0f, SamplingFrequency);
@@ -66,8 +77,7 @@ Reverb::Reverb(double wet, double SamplingFrequency):
     memset(m_pDelayLineR2, 0, sizeof(double) * m_DelayLine_n);
 }
 
-inline double Reverb::InputSample(double sample)
-{
+inline double Reverb::InputSample(double sample) {
     double retVal = 0;
     
     if (sample > max)
@@ -85,7 +95,7 @@ inline double Reverb::InputSample(double sample)
     double tempSample = m_pPreDelayLine[preDelaySampleIndex];
     m_pPreDelayLine[m_DelayLine_c] = sample/2;
     
-    // bandwidth filter
+    // Bandwidth filter
     tempSample = m_pBandWidthFilter->InputSample(m_currentBandwidth * tempSample);
     
     // cascade of input diffusers
@@ -208,8 +218,7 @@ inline double Reverb::InputSample(double sample)
     return retVal;
 }
 
-void Reverb::Reset()
-{
+void Reverb::Reset() {
     Effect::Reset();
     
     m_pInputDiffusionA->ClearOutEffect();
@@ -228,8 +237,7 @@ void Reverb::Reset()
     SetBandwidth(0.75);
 }
 
-void Reverb::ClearOutEffect()
-{
+void Reverb::ClearOutEffect() {
     memset(m_pPreDelayLine, 0, sizeof(double) * m_DelayLine_n);
     memset(m_pDelayLineL1, 0, sizeof(double) * m_DelayLine_n);
     memset(m_pDelayLineL2, 0, sizeof(double) * m_DelayLine_n);
@@ -237,149 +245,123 @@ void Reverb::ClearOutEffect()
     memset(m_pDelayLineR2, 0, sizeof(double) * m_DelayLine_n);
 }
 
-bool Reverb::SetBandwidth(double bandwidth)
-{
+bool Reverb::SetBandwidth(double bandwidth) {
     if (!m_pBandwidth->setValue(bandwidth))
-    {
         return false;
-    }
+
     m_currentBandwidth = m_pBandwidth->getValue();
     m_pBandWidthFilter->SetFeedback(1.0f - m_currentBandwidth);
     return true;
 }
 
-bool Reverb::SetDamping(double damping)
-{
+bool Reverb::SetDamping(double damping) {
     if (damping > 1.0 || damping < 0.0)
-    {
         return false;
-    }
+
     m_damping = damping;
     m_pDampingFilterL->SetFeedback(m_damping);
     m_pDampingFilterR->SetFeedback(m_damping);
     return true;
 }
 
-bool Reverb::SetDecay(double decay)
-{
+bool Reverb::SetDecay(double decay) {
     if (!m_pDecay->setValue(decay))
-    {
         return false;
-    }
+
     m_currentDecay = m_pDecay->getValue();
     return true;
 }
 
-bool Reverb::SetInputDiffusion1(double diffusion)
-{
+bool Reverb::SetInputDiffusion1(double diffusion) {
     if (diffusion > 1.0 || diffusion < 0.0)
-    {
         return false;
-    }
+
     m_inputDiffusion1 = diffusion;
     m_pInputDiffusionA->SetFeedback(m_inputDiffusion1);
     m_pInputDiffusionB->SetFeedback(m_inputDiffusion1);
     return true;
 }
 
-bool Reverb::SetInputDiffusion2(double diffusion)
-{
+bool Reverb::SetInputDiffusion2(double diffusion) {
     if (diffusion > 1.0 || diffusion < 0.0)
-    {
         return false;
-    }
+
     m_inputDiffusion2 = diffusion;
     m_pInputDiffusionC->SetFeedback(m_inputDiffusion2);
     m_pInputDiffusionD->SetFeedback(m_inputDiffusion2);
     return true;
 }
 
-bool Reverb::SetDecayDiffusion1(double diffusion)
-{
+bool Reverb::SetDecayDiffusion1(double diffusion) {
     if (diffusion > 1.0 || diffusion < 0.0)
-    {
         return false;
-    }
+
     m_decayDiffusion1 = diffusion;
     m_pDecayDiffusionL1->SetFeedback(m_decayDiffusion1);
     m_pDecayDiffusionR1->SetFeedback(m_decayDiffusion1);
     return true;
 }
 
-bool Reverb::SetDecayDiffusion2(double diffusion)
-{
+bool Reverb::SetDecayDiffusion2(double diffusion) {
     if (diffusion > 1.0 || diffusion < 0.0)
-    {
         return false;
-    }
+
     m_decayDiffusion2 = diffusion;
     m_pDecayDiffusionL2->SetFeedback(m_decayDiffusion2);
     m_pDecayDiffusionR2->SetFeedback(m_decayDiffusion2);
     return true;
 }
 
-bool Reverb::SetPreDelayLength(double scale)
-{
+bool Reverb::SetPreDelayLength(double scale) {
     m_PreDelayLine_l = (int)scale;
     return true;
 }
 
-bool Reverb::SetDelayL1Length(double length)
-{
+bool Reverb::SetDelayL1Length(double length) {
     m_DelayLineL1_l = (int)length;
     return true;
 }
 
-bool Reverb::SetDelayL2Length(double length)
-{
+bool Reverb::SetDelayL2Length(double length) {
     m_DelayLineL2_l = (int)length;
     return true;
 }
 
-bool Reverb::SetDelayR1Length(double length)
-{
+bool Reverb::SetDelayR1Length(double length) {
     m_DelayLineR1_l = (int)length;
     return true;
 }
 
-bool Reverb::SetDelayR2Length(double length)
-{
+bool Reverb::SetDelayR2Length(double length) {
     m_DelayLineR2_l = (int)length;
     return true;
 }
 
-Parameter& Reverb::getPrimaryParam()
-{
+Parameter& Reverb::getPrimaryParam() {
     return *m_pDecay;
 }
 
-bool Reverb::setPrimaryParam(float value)
-{
+bool Reverb::setPrimaryParam(float value) {
     return SetDecay(value);
 }
 
-Parameter& Reverb::getSecondaryParam()
-{
+Parameter& Reverb::getSecondaryParam() {
     return *m_pBandwidth;
 }
 
-bool Reverb::setSecondaryParam(float value)
-{
+bool Reverb::setSecondaryParam(float value) {
     return SetBandwidth(value);
 }
 
-Parameter& Reverb::getLFO()
-{
+Parameter& Reverb::getLFO() {
     return *m_pLFOFreq;
 }
 
-Parameter& Reverb::getExcursion()
-{
+Parameter& Reverb::getExcursion() {
     return *m_pExcursion;
 }
 
-Reverb::~Reverb()
-{
+Reverb::~Reverb() {
     delete m_pInputDiffusionA;
     m_pInputDiffusionA = NULL;
     

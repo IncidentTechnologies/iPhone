@@ -25,6 +25,7 @@
 		2610F14E18AD6B59003F5CEB /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */; };
 		2610F15718AD9226003F5CEB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15618AD9226003F5CEB /* libc++.dylib */; };
 		2610F15918AD923C003F5CEB /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15818AD923C003F5CEB /* libstdc++.dylib */; };
+		264EC77018B30B3C001F7224 /* TestGuitarSample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 264EC76F18B30B3C001F7224 /* TestGuitarSample.mp3 */; };
 		26EBC39B18ADBF9C0068BEC6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */; };
 		26EBC39F18ADC0690068BEC6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		2610F15618AD9226003F5CEB /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		2610F15818AD923C003F5CEB /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		264EC76F18B30B3C001F7224 /* TestGuitarSample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestGuitarSample.mp3; sourceTree = "<group>"; };
 		26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		26EBC39C18ADC0690068BEC6 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -146,6 +148,7 @@
 		2610F08418AAB28E003F5CEB /* gTarCreate */ = {
 			isa = PBXGroup;
 			children = (
+				264EC76F18B30B3C001F7224 /* TestGuitarSample.mp3 */,
 				2610F08D18AAB28E003F5CEB /* AppDelegate.h */,
 				2610F08E18AAB28E003F5CEB /* AppDelegate.m */,
 				2610F09018AAB28E003F5CEB /* Images.xcassets */,
@@ -261,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				264EC77018B30B3C001F7224 /* TestGuitarSample.mp3 in Resources */,
 				2610F0B418AAB7EC003F5CEB /* DefaultViewController.xib in Resources */,
 				2610F08918AAB28E003F5CEB /* InfoPlist.strings in Resources */,
 				2610F09118AAB28E003F5CEB /* Images.xcassets in Resources */,

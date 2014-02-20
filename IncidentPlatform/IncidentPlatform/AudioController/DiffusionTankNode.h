@@ -9,7 +9,7 @@
 #ifndef gTarAudioController_DiffusionEffect_h
 #define gTarAudioController_DiffusionEffect_h
 
-#include "DelayEffect.h"
+#include "DelayNode.h"
 
 /*
  A single diffusion chamber for use in reverberator network. This is basically
@@ -17,14 +17,13 @@
  Jon Datorro's "Effective Design Part 1: Reverberator and Other Filters".
  https://ccrma.stanford.edu/~dattorro/EffectDesignPart1.pdf
  */
-class DiffusionTank :
-public DelayEffect
-{
+
+class DiffusionTankNode : public DelayNode {
 public:
-    DiffusionTank(double msDelayTime, double feedback, bool posOutputSum, double wet, double SamplingFrequency);
+    DiffusionTankNode(double msDelayTime, double feedback, bool posOutputSum, double wet);
     
-    /*inline */double InputSample(double sample);
-    /*inline */double GetSample(long offset);
+    double InputSample(double sample);
+    double GetSample(long offset);
     
 private:
     double m_OutputSumSign;

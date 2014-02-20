@@ -23,6 +23,7 @@
     if(self) {
         // Set up the root node
         m_rootNode = new AudioNode();
+        m_rootNode->SetChannelCount(1, CONN_IN);
         m_timestamp = 0;
         
         // Output Component

@@ -49,42 +49,34 @@ ButterWorthFilterElement::ButterWorthFilterElement(int k, int order, float cutof
     m_fReady = true;
 }
 
-ButterWorthFilterElement::~ButterWorthFilterElement()
-{
+ButterWorthFilterElement::~ButterWorthFilterElement() {
     m_fReady = false;
     
-    if(m_pDelayLine != NULL)
-    {
+    if(m_pDelayLine != NULL) {
         delete [] m_pDelayLine;
         m_pDelayLine = NULL;
     }
     
-    if(m_pSampleDelay != NULL)
-    {
+    if(m_pSampleDelay != NULL) {
         delete [] m_pSampleDelay;
         m_pSampleDelay = NULL;
     }
     
-    if(m_pAC != NULL)
-    {
+    if(m_pAC != NULL) {
         delete [] m_pAC;
         m_pAC = NULL;
     }
     
-    if(m_pBC != NULL)
-    {
+    if(m_pBC != NULL) {
         delete [] m_pBC;
         m_pBC = NULL;
     }
 }
 
 // This will calculate the coefficients for the given order, k, cutoff, and sampling frequency
-// provided
-bool ButterWorthFilterElement::CalculateCoefficients(int k, float cutoff, float SamplingFrequency)
-{
-    
-    if ([lock tryLock])
-    {
+bool ButterWorthFilterElement::CalculateCoefficients(int k, float cutoff, float SamplingFrequency) {
+
+    if ([lock tryLock]) {
         m_fReady = false;
         
         m_k = k;

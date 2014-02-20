@@ -1,7 +1,9 @@
-#include "DiffusionTank.h"
 
-DiffusionTank::DiffusionTank(double msDelayTime, double feedback, bool posOutputSum, double wet, double SamplingFrequency):
-    DelayEffect(msDelayTime, feedback, wet, SamplingFrequency)
+
+#include "DiffusionTankNode.h"
+
+DiffusionTankNode::DiffusionTankNode(double msDelayTime, double feedback, bool posOutputSum, double wet):
+    DelayNode(msDelayTime, feedback, wet)
 {
     if (posOutputSum)
         m_OutputSumSign = 1.0;
@@ -9,7 +11,7 @@ DiffusionTank::DiffusionTank(double msDelayTime, double feedback, bool posOutput
         m_OutputSumSign = -1.0;
 }
 
-double DiffusionTank::InputSample(double sample)
+double DiffusionTankNode::InputSample(double sample)
 {
     double retVal = 0;
     
@@ -35,7 +37,7 @@ double DiffusionTank::InputSample(double sample)
     return retVal;
 }
 
-double DiffusionTank::GetSample(long offset)
+double DiffusionTankNode::GetSample(long offset)
 {
     long index = m_delayedSampleIndex + offset;
     if (index >= m_pDelayLine_n)

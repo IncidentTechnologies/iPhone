@@ -41,7 +41,8 @@ namespace dss {
 typedef enum {
 	GET_BY_ID,
 	GET_BY_ITEM,
-	GET_BY_ITERATOR
+	GET_BY_ITERATOR,
+    GET_BY_POSITION
 } get_by_type;
 
 typedef enum {
@@ -148,8 +149,8 @@ public:
 		~iterator(){/*empty stub*/}
 
 		// Operators
-		// Unlike the STL we are defining a * as the actual node
-		// and the & operator as the data item.
+		// Unlike the STL we are defining a & as the actual node
+		// and the * operator as the data item.
 		
         //listNode<T>* operator*() const {return (m_itNode); }
         //T& operator &() const { return (*m_itNode).m_Item; }
@@ -308,39 +309,69 @@ Error:
 		else {
 			node = m_pFirstItem;
 			switch(gbt) {				
-			case GET_BY_ID: {					
-        while(node->m_iID != *((int*)(pLocation)))
-        {
-          node = node->m_pNextItem;
-          if(node == NULL)
-          {
-            return R_LIST_ID_NOT_FOUND;
-          }
-        }			
-      } break;
+                case GET_BY_ID: {
+                    while(node->m_iID != *((int*)(pLocation)))
+                    {
+                      node = node->m_pNextItem;
+                      if(node == NULL)
+                      {
+                        return R_LIST_ID_NOT_FOUND;
+                      }
+                    }			
+                } break;
 
-			case GET_BY_ITEM: {
-        while(node->m_Item != *((T*)(pLocation)))
-        {
-          node = node->m_pNextItem;
-          if(node == NULL)
-          {
-            return R_LIST_ITEM_NOT_FOUND;
-          }
-        }				
-      } break;
+                case GET_BY_ITEM: {
+                    while(node->m_Item != *((T*)(pLocation)))
+                    {
+                      node = node->m_pNextItem;
+                      if(node == NULL)
+                      {
+                        return R_LIST_ITEM_NOT_FOUND;
+                      }
+                    }				
+                } break;
+                    
+                case GET_BY_POSITION: {
+                    for(int i = 0; i < *((int*)(pLocation)); i++)
+                        node = node->m_pNextItem;
+                }
 
-			case GET_BY_ITERATOR: {
-        node = reinterpret_cast<listNode<T>*>(pLocation);				
-      } break;
+                case GET_BY_ITERATOR: {
+                    node = reinterpret_cast<listNode<T>*>(pLocation);
+                } break;
 
-			default: break;
+                default: break;
 			}
 		}
 
 Error:
 		return r;
 	}
+    
+public:
+    list<T> operator+(list<T> &rhs) {
+        list<T> res;
+        
+        for(list<T>::iterator it = First(); it != NULL; it++)
+            res.Push(*it);
+        
+        for(list<T>::iterator it = rhs.First(); it != NULL; it++)
+            res.Push(*it);
+        
+        return res;
+    }
+    
+    T& operator[](const int& i) {
+        listNode<T> *node = NULL;
+        this->GetNode(node, (void*)(i), GET_BY_POSITION);
+        return node->m_Item;
+    }
+    
+    const T& operator[](const int& i) const {
+        listNode<T> *node = NULL;
+        this->GetNode(node, (void*)(i), GET_BY_POSITION);
+        return node->m_Item;
+    }
 
 public:
 	// LIST
@@ -404,6 +435,23 @@ Error:
 			CR(DeleteNode(cur));			
 		}
 Error:		
+		return r;
+	}
+    
+    // This version of Remove will also save the item
+    RESULT Remove(T &obj, void *pLocation, get_by_type gbt) {
+		RESULT r = R_SUCCESS;
+		if(Empty() == 1) {
+			// Cannot remove anything out of an empty list
+			return R_LIST_EMPTY;
+		}
+		else {
+			listNode<T> *cur;
+			CR(GetNode(cur, pLocation, gbt));
+            obj = cur->m_Item;
+			CR(DeleteNode(cur));
+		}
+    Error:
 		return r;
 	}
 
