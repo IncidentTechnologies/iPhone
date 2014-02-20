@@ -55,6 +55,11 @@
     float optionsImageWidth = 19.0;
     [optionsButton setImageEdgeInsets:UIEdgeInsetsMake((optionsButton.frame.size.height-optionsImageHeight)/2, (optionsButton.frame.size.width-optionsImageWidth)/2, (optionsButton.frame.size.height-optionsImageHeight)/2, (optionsButton.frame.size.width-optionsImageWidth)/2)];
     
+    [connectedButton setImage:[UIImage imageNamed:@"G_Icon"] forState:UIControlStateNormal];
+    float gImageHeight = 26.0;
+    float gImageWidth = 20.0;
+    [connectedButton setImageEdgeInsets:UIEdgeInsetsMake((connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2, (connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2)];
+    
     // Style elements
     [self resetButtonColors];
     

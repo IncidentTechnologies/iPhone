@@ -793,6 +793,7 @@
     [[seqSetViewController getCurrentInstrument] notePlayedAtString:note.string andFret:note.fret];
     
     [seqSetViewController updateAllVisibleCells];
+    [instrumentViewController updateActiveMeasure];
     
     [guitarView update];
     

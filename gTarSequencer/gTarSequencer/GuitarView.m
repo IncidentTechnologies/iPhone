@@ -168,11 +168,11 @@
     GtarLedColorMap map;
     
     map.stringColor[0] = GtarLedColorMake(3, 0, 0);
-    map.stringColor[1] = GtarLedColorMake(0, 3, 0);
-    map.stringColor[2] = GtarLedColorMake(0, 0, 3);
-    map.stringColor[3] = GtarLedColorMake(3, 3, 0);
-    map.stringColor[4] = GtarLedColorMake(0, 3, 3);
-    map.stringColor[5] = GtarLedColorMake(3, 0, 3);
+    map.stringColor[1] = GtarLedColorMake(3, 1.5, 0);
+    map.stringColor[2] = GtarLedColorMake(3, 3, 0);
+    map.stringColor[3] = GtarLedColorMake(0, 3, 0);
+    map.stringColor[4] = GtarLedColorMake(0, 0, 3);
+    map.stringColor[5] = GtarLedColorMake(1.5, 0, 1.5);
     
     [guitar setColorMap:map];
     

@@ -28,6 +28,8 @@
 - (void) openLeftNavigator;
 - (void) closeLeftNavigator;
 
+- (void) setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying;
+
 @end
 
 @interface InstrumentViewController : UIViewController <UIScrollViewDelegate>
@@ -71,6 +73,8 @@
 -(void)notifyQueuedPatternAndResetCount:(BOOL)resetCount;
 
 -(void)setActiveInstrument:(Instrument *)inst;
+
+-(void)updateActiveMeasure;
 
 //-(IBAction)changePattern:(id)sender;
 //-(IBAction)stopChangePattern:(id)sender;

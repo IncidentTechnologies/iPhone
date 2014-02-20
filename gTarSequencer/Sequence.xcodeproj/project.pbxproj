@@ -299,6 +299,7 @@
 		6D44A45718B58C0000992D3D /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D44A45618B58C0000992D3D /* InfoViewController.m */; };
 		6D44A45A18B5937B00992D3D /* InfoLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45818B5937B00992D3D /* InfoLogo.png */; };
 		6D44A45B18B5937B00992D3D /* InfogTar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45918B5937B00992D3D /* InfogTar.png */; };
+		6D44A45D18B686C400992D3D /* G_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45C18B686C400992D3D /* G_Icon.png */; };
 		6D48127E18B5363700598CC2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D48127818B5363700598CC2 /* README.md */; };
 		6D48127F18B5363700598CC2 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D48127918B5363700598CC2 /* release_notes.md */; };
 		6D48128118B5366D00598CC2 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D48127718B5363700598CC2 /* libTestFlight.a */; };
@@ -638,6 +639,7 @@
 		6D44A45618B58C0000992D3D /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		6D44A45818B5937B00992D3D /* InfoLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoLogo.png; sourceTree = "<group>"; };
 		6D44A45918B5937B00992D3D /* InfogTar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfogTar.png; sourceTree = "<group>"; };
+		6D44A45C18B686C400992D3D /* G_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = G_Icon.png; sourceTree = "<group>"; };
 		6D48127718B5363700598CC2 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		6D48127818B5363700598CC2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6D48127918B5363700598CC2 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6D44A45C18B686C400992D3D /* G_Icon.png */,
 				6D44A45818B5937B00992D3D /* InfoLogo.png */,
 				6D44A45918B5937B00992D3D /* InfogTar.png */,
 				58F5449618AC0C2B009E6E43 /* Trash_Icon.png */,
@@ -1580,6 +1583,7 @@
 				587C9FAA1888C0E7001F57C7 /* Pluck 2.mp3 in Resources */,
 				5811AB1C187B88C800FC0BD2 /* Percussion 61.mp3 in Resources */,
 				587C9F801888C0E7001F57C7 /* Chiptune 2.mp3 in Resources */,
+				6D44A45D18B686C400992D3D /* G_Icon.png in Resources */,
 				5811AAFF187B88C800FC0BD2 /* Percussion 35.mp3 in Resources */,
 				5811AB07187B88C800FC0BD2 /* Percussion 42.mp3 in Resources */,
 				587C9FC81888C0E7001F57C7 /* WubWub 2.mp3 in Resources */,

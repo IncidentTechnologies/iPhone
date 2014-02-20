@@ -438,9 +438,10 @@
         }
             
         // draw new border
-        //measureSet[activePattern][measureIndex].layer.borderColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.8].CGColor;
         measureSet[activePattern][measureIndex].layer.borderColor = [UIColor whiteColor].CGColor;
         measureSet[activePattern][measureIndex].layer.borderWidth = 0.5f;
+        
+        [measureSet[activePattern][measureIndex] setAlpha:1.0];
     }
 }
 
@@ -477,12 +478,12 @@
                 noteButtons[patternIndex][measureIndex][FRETS_ON_GTAR*s+f] = newButton;
                 
                 [newMeasure addSubview:newButton];
-                
-                // default invisible
-                [newMeasure setAlpha:0.3];
             }
         }
     }
+    
+    // default invisible
+    [newMeasure setAlpha:0.3];
     
     [scrollView addSubview:newMeasure];
     
@@ -533,6 +534,24 @@
     }
     
     return newOffMeasure;
+}
+
+- (void)updateActiveMeasure
+{
+    // Redraw measure
+    [self clearMeasure:activeMeasure forPattern:activePattern];
+    UIView * newMeasure = [[UIView alloc] init];
+    newMeasure = [self drawMeasureOnActive:activeMeasure forPattern:activePattern];
+    measureSet[activePattern][activeMeasure] = newMeasure;
+    
+    // The measure the guitar is editing is always the active measure
+    [self setDeclaredActiveMeasure:activeMeasure];
+}
+
+- (void)updateGuitarView
+{
+    [currentInst.selectedPattern.selectedMeasure turnOnGuitarFlags];
+    [delegate setMeasureAndUpdate:currentInst.selectedPattern.selectedMeasure checkNotPlaying:NO];
 }
 
 #pragma mark - Patterns
@@ -631,6 +650,7 @@
     }
     
     [m changeNoteAtString:string andFret:fret];
+    [self updateGuitarView];
     
     // SAVE CONTEXT
     [delegate saveContext:nil];
@@ -910,6 +930,8 @@
             }
         }
         scrollView.scrollEnabled = YES;
+        
+        [self updateGuitarView];
     }];
 }
 
