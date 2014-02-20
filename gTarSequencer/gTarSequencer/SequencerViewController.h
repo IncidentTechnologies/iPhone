@@ -17,8 +17,9 @@
 #import "LeftNavigatorViewController.h"
 #import "OptionsViewController.h"
 #import "InstrumentViewController.h"
+#import "InfoViewController.h"
 
-@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate> {
+@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate> {
     
     // gTar connection
     BOOL isConnected;
@@ -62,7 +63,7 @@
 @property (retain, nonatomic) OptionsViewController * optionsViewController;
 @property (retain, nonatomic) SeqSetViewController * seqSetViewController;
 @property (retain, nonatomic) InstrumentViewController * instrumentViewController;
-
+@property (retain, nonatomic) InfoViewController * infoViewController;
 @property (retain, nonatomic) PlayControlViewController * playControlViewController;
 @property (retain, nonatomic) LeftNavigatorViewController * leftNavigator;
 

@@ -45,9 +45,6 @@
     
     selectMode = nil;
     
-    // call this in testing to clear the Documents directory
-    // [self clearFileSet];
-    
     [self reloadFileTable];
 }
 
@@ -72,25 +69,6 @@
     if([fileLoadSet count] > 0){
         [self userDidSelectLoad:loadButton];
         [self highlightActiveSequencer];
-    }
-}
-
-// Use this to delete data in the iPhone Documents directory
-- (void)clearFileSet
-{
-    
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSError * error;
-    NSString * directoryPath = [paths objectAtIndex:0];
-    
-    NSMutableArray * fileSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
-    
-    // Exclude four default files
-    for(NSString * path in fileSet){
-        
-        NSString * fullPath = [directoryPath stringByAppendingPathComponent:path];
-        [[NSFileManager defaultManager] removeItemAtPath:fullPath error:&error];
-        
     }
 }
 
@@ -218,6 +196,16 @@
     [delegate viewSeqSet];
 }
 
+- (void)userDidDeleteFile:(NSString *)filename
+{
+    NSLog(@"user did delete as %@",filename);
+    if([activeSequencer isEqualToString:filename]){
+        activeSequencer = @"";
+    }
+    [delegate deleteWithName:filename];
+
+}
+
 #pragma mark - Button Actions
 
 - (IBAction)userDidSelectCreateNew:(id)sender
@@ -321,17 +309,6 @@
     }
 }
 
-// Need extra logic to force keyboard ot hide when cell goes out of view
-/*-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    OptionsViewCell * hiddencell = (OptionsViewCell *)cell;
-    
-    if(hiddencell.isRenamable){
-        NSLog(@"Did end displaying cell at row %i",indexPath.row);
-        [hiddencell endNameEditing];
-    }
-}*/
-
 - (void)disableScroll
 {
     loadTable.scrollEnabled = NO;
@@ -387,6 +364,53 @@
 }
 
 
+
+#pragma mark - Cell editing
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([selectMode isEqualToString:@"Load"]){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete){
+        [self deleteCellAtIndexPath:indexPath];
+    }
+}
+
+- (void)deleteCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
+    NSString * filename = [cell getNameForFile];
+    
+    NSLog(@"File load set was %@",fileLoadSet);
+    
+    for(int i = 0; i < [fileLoadSet count]; i++){
+        if([[fileLoadSet objectAtIndex:i] isEqualToString:filename]){
+            [fileLoadSet removeObjectAtIndex:i];
+            [fileDateSet removeObjectAtIndex:i];
+        }
+    }
+    
+    NSLog(@"File load set is now %@",fileLoadSet);
+    
+    
+    // delete the data
+    [self userDidDeleteFile:filename];
+    
+    // remove from table
+    [loadTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [loadTable reloadData];
+}
+
+
+#pragma mark - Custom logic for cell display
+
 -(NSString *)displayTimeFromPriorDate:(NSDate *)priorDate
 {
     
@@ -439,6 +463,7 @@
         }
     }
 }
+
 
 #pragma mark - Select actions
 

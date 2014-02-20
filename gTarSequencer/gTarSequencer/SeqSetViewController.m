@@ -257,7 +257,7 @@
         if ([remainingInstrumentOptions count] == 0){
             [instrumentTable reloadData];
         }else{
-            [instrumentTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[instruments count] -1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+            [instrumentTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[instruments count] -1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
             
             if(![delegate checkIsPlaying]){
                 [self updateAllVisibleCells];
@@ -660,6 +660,8 @@
     
     if(![delegate checkIsPlaying]){
         [delegate updateGuitarView];
+    }else{
+        [delegate updateSelectedInstrument];
     }
 }
 
@@ -676,7 +678,7 @@
         [instrumentTable reloadData];
     }else{
         // Else, delete the cell that the user requested:
-        [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationFade];
+        [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationTop];
     }
     
     if ([instruments count] == 0){

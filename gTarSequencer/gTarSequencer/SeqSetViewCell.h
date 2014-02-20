@@ -72,6 +72,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton * addMeasuresButton;
 @property (weak, nonatomic) IBOutlet UIButton * removeMeasuresButton;
+@property (weak, nonatomic) IBOutlet UIButton * deleteButton;
 
 @property (weak, nonatomic) IBOutlet MeasureView * measureOne;
 @property (weak, nonatomic) IBOutlet MeasureView * measureTwo;

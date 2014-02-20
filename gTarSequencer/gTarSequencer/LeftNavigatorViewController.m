@@ -93,7 +93,7 @@
     }else if(sender == shareButton){
         [delegate selectNavChoice:@"Share" withShift:YES];
     }else if(sender == connectedButton){
-        [delegate selectNavChoice:@"gTar Info" withShift:YES];
+        [delegate selectNavChoice:@"Info" withShift:YES];
     }
 }
 
@@ -117,7 +117,7 @@
         shareButton.backgroundColor = blueColor;
         shareButton.layer.borderColor = blueColor.CGColor;
         shareButton.tintColor = [UIColor whiteColor];
-    }else if([navChoice isEqualToString:@"gTar Info"]){
+    }else if([navChoice isEqualToString:@"Info"]){
         // todo
     }
 }
@@ -160,8 +160,6 @@
 
 -(void)setInstrumentIcon:(NSString *)instIcon
 {
-    NSLog(@"instIcon 2 is %@",instIcon);
-    
     [instrumentButton setImage:[UIImage imageNamed:instIcon] forState:UIControlStateNormal];
 }
 

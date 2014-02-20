@@ -26,6 +26,7 @@
 - (void)endNameEditing;
 - (void)setAsActiveSequencer;
 - (void)unsetAsActiveSequencer;
+- (NSString *)getNameForFile;
 
 @property (weak, nonatomic) OptionsViewController * parent;
 
@@ -33,6 +34,8 @@
 @property (weak, nonatomic) IBOutlet UITextField * fileName;
 @property (weak, nonatomic) IBOutlet UIButton * fileLoad;
 @property (weak, nonatomic) IBOutlet UILabel * fileDate;
+
+@property (weak, nonatomic) IBOutlet UIButton * deleteButton;
 
 @property (nonatomic) BOOL isRenamable;
 @property (nonatomic) int rowid;

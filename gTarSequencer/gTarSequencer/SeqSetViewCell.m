@@ -41,6 +41,7 @@
 @synthesize patternDBorder;
 @synthesize addMeasuresButton;
 @synthesize removeMeasuresButton;
+@synthesize deleteButton;
 @synthesize rightSliderPin;
 @synthesize offMask;
 
@@ -612,7 +613,8 @@
     [parent userDidRemoveMeasures:self];
 }
 
-#pragma mark - Scrolling
+#pragma mark - Deleting
+// Prevent bouncing
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     static CGFloat targetOffset = 82;
@@ -620,5 +622,27 @@
         scrollView.contentOffset = CGPointMake(targetOffset, 0.0);
     }
 }
+
+// Use custom icon and color
+-(void)willTransitionToState:(UITableViewCellStateMask)state
+{
+
+    [super willTransitionToState:state];
+    
+    if((state & UITableViewCellStateShowingDeleteConfirmationMask) == UITableViewCellStateShowingDeleteConfirmationMask){
+        for (UIView *subview in self.subviews) {
+            for (UIView *subview2 in subview.subviews) {
+                if ([NSStringFromClass([subview2 class]) rangeOfString:@"Delete"].location != NSNotFound) {
+                    // hide original button
+                    [subview2 setHidden:YES];
+                    // show my custom button
+                    [deleteButton setHidden:NO];
+                }
+            }
+        }
+    }
+}
+
+
 
 @end

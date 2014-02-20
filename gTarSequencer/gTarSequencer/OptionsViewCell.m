@@ -18,6 +18,7 @@
 @synthesize fileDate;
 @synthesize isRenamable;
 @synthesize rowid;
+@synthesize deleteButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -261,7 +262,7 @@
     NSLog(@"Begin name editing");
     if(![fileName isFirstResponder]){
         [fileName becomeFirstResponder];
-        [fileName selectAll:self];
+        //[fileName selectAll:self];
         
         if([parent.selectMode isEqualToString:@"Rename"]){
             [parent offsetTable:self];
@@ -329,5 +330,38 @@
     }
 }
 
+#pragma mark - Deleting
+// Prevent bouncing
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    static CGFloat targetOffset = 62;
+    if(scrollView.contentOffset.x >= targetOffset){
+        scrollView.contentOffset = CGPointMake(targetOffset, 0.0);
+    }
+}
+
+// Use custom icon and color
+-(void)willTransitionToState:(UITableViewCellStateMask)state
+{
+    [super willTransitionToState:state];
+    
+    if((state & UITableViewCellStateShowingDeleteConfirmationMask) == UITableViewCellStateShowingDeleteConfirmationMask){
+        for (UIView *subview in self.subviews) {
+            for (UIView *subview2 in subview.subviews) {
+                if ([NSStringFromClass([subview2 class]) rangeOfString:@"Delete"].location != NSNotFound) {
+                    // hide original button
+                    [subview2 setHidden:YES];
+                    // show my custom button
+                    [deleteButton setHidden:NO];
+                }
+            }
+        }
+    }
+}
+
+-(NSString *)getNameForFile
+{
+    return fileText.text;
+}
 
 @end

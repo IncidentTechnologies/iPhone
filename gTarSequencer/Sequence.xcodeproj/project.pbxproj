@@ -295,6 +295,10 @@
 		58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F61679188F5E2700020A74 /* Icon_Trombone.png */; };
 		58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */; };
 		58F6167F188F5E2700020A74 /* Icon_Violin.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167B188F5E2700020A74 /* Icon_Violin.png */; };
+		6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45318B58A6C00992D3D /* InfoViewController.xib */; };
+		6D44A45718B58C0000992D3D /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D44A45618B58C0000992D3D /* InfoViewController.m */; };
+		6D44A45A18B5937B00992D3D /* InfoLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45818B5937B00992D3D /* InfoLogo.png */; };
+		6D44A45B18B5937B00992D3D /* InfogTar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45918B5937B00992D3D /* InfogTar.png */; };
 		6D48127E18B5363700598CC2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D48127818B5363700598CC2 /* README.md */; };
 		6D48127F18B5363700598CC2 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D48127918B5363700598CC2 /* release_notes.md */; };
 		6D48128118B5366D00598CC2 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D48127718B5363700598CC2 /* libTestFlight.a */; };
@@ -629,6 +633,11 @@
 		58F61679188F5E2700020A74 /* Icon_Trombone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trombone.png; sourceTree = "<group>"; };
 		58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Vibraphone.png; sourceTree = "<group>"; };
 		58F6167B188F5E2700020A74 /* Icon_Violin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Violin.png; sourceTree = "<group>"; };
+		6D44A45318B58A6C00992D3D /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
+		6D44A45518B58C0000992D3D /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		6D44A45618B58C0000992D3D /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		6D44A45818B5937B00992D3D /* InfoLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoLogo.png; sourceTree = "<group>"; };
+		6D44A45918B5937B00992D3D /* InfogTar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfogTar.png; sourceTree = "<group>"; };
 		6D48127718B5363700598CC2 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		6D48127818B5363700598CC2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6D48127918B5363700598CC2 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
@@ -723,6 +732,8 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6D44A45818B5937B00992D3D /* InfoLogo.png */,
+				6D44A45918B5937B00992D3D /* InfogTar.png */,
 				58F5449618AC0C2B009E6E43 /* Trash_Icon.png */,
 				58F5448A18AB161E009E6E43 /* Options_Icon.png */,
 				58F5448B18AB161E009E6E43 /* Power_Icon.png */,
@@ -1254,6 +1265,7 @@
 				58F4B94618983B6E0071609B /* OptionsViewController */,
 				58429A1618A1AD4D00BDD09B /* InstrumentViewController */,
 				580A52181864F7FC0077240B /* SeqSetViewController */,
+				6D44A44F18B58A3A00992D3D /* InfoViewController */,
 				584085921868C2F900BFF3C5 /* GuitarView */,
 			);
 			name = SequencerViewController;
@@ -1268,6 +1280,16 @@
 				58B1BE2518AD522200A3C0CC /* OptionsViewCell */,
 			);
 			name = OptionsViewController;
+			sourceTree = "<group>";
+		};
+		6D44A44F18B58A3A00992D3D /* InfoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D44A45518B58C0000992D3D /* InfoViewController.h */,
+				6D44A45618B58C0000992D3D /* InfoViewController.m */,
+				6D44A45318B58A6C00992D3D /* InfoViewController.xib */,
+			);
+			name = InfoViewController;
 			sourceTree = "<group>";
 		};
 		6D48127618B5363700598CC2 /* TestFlightSDK2.2.1 */ = {
@@ -1446,6 +1468,7 @@
 				587C9FBE1888C0E7001F57C7 /* Vibraphone 4.mp3 in Resources */,
 				58F5449518ABFDAA009E6E43 /* Icon_Sound.png in Resources */,
 				58D617641863BF5E001EB327 /* Sequence1.png in Resources */,
+				6D44A45B18B5937B00992D3D /* InfogTar.png in Resources */,
 				587C9F861888C0E7001F57C7 /* Dubstep 2.mp3 in Resources */,
 				587C9FB11888C0E7001F57C7 /* Rock 3.mp3 in Resources */,
 				584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */,
@@ -1527,6 +1550,7 @@
 				6D48127E18B5363700598CC2 /* README.md in Resources */,
 				58E635331889FD800036E4F1 /* Bacon 4.mp3 in Resources */,
 				580A52161864E0E00077240B /* Sequencer_Icon80px.png in Resources */,
+				6D44A45A18B5937B00992D3D /* InfoLogo.png in Resources */,
 				583917951877995D006E3DC3 /* ScrollingSelector.xib in Resources */,
 				5811AAF2187B88C800FC0BD2 /* Percussion 23.mp3 in Resources */,
 				587C9F881888C0E7001F57C7 /* Dubstep 4.mp3 in Resources */,
@@ -1535,6 +1559,7 @@
 				58429A1818A1BD6A00BDD09B /* InstrumentViewController.xib in Resources */,
 				5811AB17187B88C800FC0BD2 /* Percussion 57.mp3 in Resources */,
 				5811AB46187B88C800FC0BD2 /* Sample Pack INFO in Resources */,
+				6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */,
 				587C9FB41888C0E7001F57C7 /* Rock 6.mp3 in Resources */,
 				5811AB32187B88C800FC0BD2 /* Percussion 81.mp3 in Resources */,
 				587C9FBD1888C0E7001F57C7 /* Vibraphone 3.mp3 in Resources */,
@@ -1650,6 +1675,7 @@
 				58547AE4186CD55C003638EF /* RadialButton.m in Sources */,
 				58F4B951189849BA0071609B /* OptionsViewController.m in Sources */,
 				58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */,
+				6D44A45718B58C0000992D3D /* InfoViewController.m in Sources */,
 				58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */,
 				58D6171E1863B8D7001EB327 /* AppDelegate.m in Sources */,
 				58868EDA187619ED00B469C2 /* PlayControlViewController.m in Sources */,

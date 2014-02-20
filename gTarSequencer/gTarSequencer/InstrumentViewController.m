@@ -8,8 +8,8 @@
 
 #import "InstrumentViewController.h"
 
-#define MEASURE_WIDTH 414
-#define MEASURE_MARGIN 12
+#define MEASURE_WIDTH 418
+#define MEASURE_MARGIN 10.5
 #define NOTE_WIDTH 26
 #define NOTE_HEIGHT 26
 #define NOTE_GAP 2
@@ -438,8 +438,9 @@
         }
             
         // draw new border
-        measureSet[activePattern][measureIndex].layer.borderColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3].CGColor;
-        measureSet[activePattern][measureIndex].layer.borderWidth = 8.0f;
+        //measureSet[activePattern][measureIndex].layer.borderColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.8].CGColor;
+        measureSet[activePattern][measureIndex].layer.borderColor = [UIColor whiteColor].CGColor;
+        measureSet[activePattern][measureIndex].layer.borderWidth = 0.5f;
     }
 }
 
@@ -456,7 +457,7 @@
         {
             for (int f = 0; f < FRETS_ON_GTAR; f++)
             {
-                CGRect noteFrame = CGRectMake(f*NOTE_WIDTH,(STRINGS_ON_GTAR-s-1)*NOTE_HEIGHT,NOTE_WIDTH-NOTE_GAP,NOTE_HEIGHT-NOTE_GAP);
+                CGRect noteFrame = CGRectMake(NOTE_GAP+f*NOTE_WIDTH,NOTE_GAP+(STRINGS_ON_GTAR-s-1)*NOTE_HEIGHT,NOTE_WIDTH-NOTE_GAP,NOTE_HEIGHT-NOTE_GAP);
                 UIButton * newButton = [[UIButton alloc] initWithFrame:noteFrame];
                 
                 Pattern * p = currentInst.patterns[patternIndex];

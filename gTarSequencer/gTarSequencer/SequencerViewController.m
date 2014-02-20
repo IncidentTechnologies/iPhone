@@ -27,6 +27,7 @@
 @synthesize seqSetViewController;
 @synthesize instrumentViewController;
 @synthesize playControlViewController;
+@synthesize infoViewController;
 @synthesize leftNavigator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -131,8 +132,15 @@
     
     
     //
-    // SUBVIEW: SHARE
+    // SUBVIEW: INFO
     //
+    
+    infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoViewController" bundle:nil];
+    [infoViewController.view setFrame:onScreenMainFrame];
+    [infoViewController setDelegate:self];
+    
+    [infoViewController.view setHidden:YES];
+    [self.view addSubview:infoViewController.view];
     
     
     //
@@ -222,6 +230,7 @@
     [seqSetViewController.view setHidden:YES];
     [instrumentViewController.view setHidden:YES];
     [shareViewController.view setHidden:YES];
+    [infoViewController.view setHidden:YES];
     
     // Do any view unloading
     [optionsViewController unloadView];
@@ -249,6 +258,11 @@
     }else if([nav isEqualToString:@"Share"]){
         
         activeMainView = shareViewController.view;
+        
+    }else if([nav isEqualToString:@"Info"]){
+        
+        activeMainView = infoViewController.view;
+        
     }
     
     // set nav button
@@ -343,6 +357,36 @@
     [seqSetViewController deleteAllCells];
     
     [self saveWithName:filename];
+}
+
+- (void)deleteWithName:(NSString *)filename
+{
+    /*NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSError * error;
+    NSString * directoryPath = [paths objectAtIndex:0];
+    
+    NSMutableArray * fileSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
+    
+    // Exclude four default files
+    for(NSString * path in fileSet){
+        
+        NSString * fullPath = [directoryPath stringByAppendingPathComponent:path];
+        [[NSFileManager defaultManager] removeItemAtPath:fullPath error:&error];
+        
+    }*/
+    
+    filename = [@"usr_" stringByAppendingString:filename];
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * currentPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
+    NSError * error = NULL;
+    
+    BOOL result = [[NSFileManager defaultManager] removeItemAtPath:currentPath error:&error];
+    
+    if(!result)
+        NSLog(@"Error deleting");
+    
+    [self saveContext:nil];
 }
 
 
@@ -687,6 +731,11 @@
     // Also update the selected table cell
     //[seqSetViewController setSelectedCellToSelectedInstrument];
     
+}
+
+- (void)updateSelectedInstrument
+{
+    [self setSelectedInstrument:[seqSetViewController getCurrentInstrument].iconName];
 }
 
 // Ensure current playband is reflected in the data if displayed (>=0)

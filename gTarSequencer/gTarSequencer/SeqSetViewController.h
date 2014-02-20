@@ -33,7 +33,7 @@
 - (void) numInstrumentsDidChange:(int)numInstruments;
 
 - (void) viewSelectedInstrument;
-
+- (void) updateSelectedInstrument;
 @end
 
 

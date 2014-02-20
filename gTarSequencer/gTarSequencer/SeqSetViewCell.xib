@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -7,10 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="88" id="XoE-pc-IxT" customClass="SeqSetViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="88"/>
+            <rect key="frame" x="0.0" y="0.0" width="562" height="88"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XoE-pc-IxT" id="udm-hz-d3A">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="87"/>
+                <rect key="frame" x="0.0" y="0.0" width="562" height="87"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lgs-sN-tUi">
@@ -176,11 +176,6 @@
                                     <action selector="removeMeasures:" destination="XoE-pc-IxT" eventType="touchUpInside" id="gdi-S0-62z"/>
                                 </connections>
                             </button>
-                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCK-8c-cBj">
-                                <rect key="frame" x="473" y="31" width="4" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
                             <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="paB-5D-5gW">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="89"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -211,6 +206,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tQa-SC-8ux">
+                        <rect key="frame" x="480" y="0.0" width="82" height="88"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.84705882352941175" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="contentEdgeInsets" minX="25" minY="20" maxX="25" maxY="20"/>
+                        <state key="normal" image="Trash_Icon.png">
+                            <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
@@ -218,6 +223,7 @@
             <connections>
                 <outlet property="addMeasuresButton" destination="l98-2d-At3" id="IdE-3f-wfG"/>
                 <outlet property="borderContainer" destination="g4M-Sy-HyH" id="9AB-k1-pkj"/>
+                <outlet property="deleteButton" destination="tQa-SC-8ux" id="fpM-N1-ddO"/>
                 <outlet property="instrumentIconBorder" destination="Ep3-lN-cJv" id="Rc7-Qc-hrJ"/>
                 <outlet property="instrumentIconView" destination="h9D-Cz-rnz" id="RgR-w3-1go"/>
                 <outlet property="measureFour" destination="k3j-xA-OFc" id="esg-sD-zQN"/>
@@ -236,11 +242,11 @@
                 <outlet property="patternContainer" destination="Lgs-sN-tUi" id="PaX-rh-0Iu"/>
                 <outlet property="patternD" destination="IGs-SV-Vaz" id="bJi-2I-fuz"/>
                 <outlet property="removeMeasuresButton" destination="u4l-J7-CiJ" id="GC4-MR-bpE"/>
-                <outlet property="rightSliderPin" destination="sCK-8c-cBj" id="Zml-yz-kB0"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="Power_Icon.png" width="43" height="51"/>
+        <image name="Trash_Icon.png" width="60" height="84"/>
     </resources>
 </document>
