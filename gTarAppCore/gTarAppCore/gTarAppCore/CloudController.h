@@ -15,8 +15,9 @@
 @class CloudResponse;
 
 //#define MAMP_SERVER
-//#define DEV_SERVER
-#define PROD_SERVER
+#define DEV_SERVER
+//#define DEV_SERVER_2_0
+//#define PROD_SERVER
 
 #ifdef PROD_SERVER
     #define kServerAddress @"http://184.169.154.56/ios_main"
@@ -24,6 +25,10 @@
 
 #ifdef DEV_SERVER
     #define kServerAddress @"http://50.18.250.24/ios_main"
+#endif
+
+#ifdef DEV_SERVER_2_0
+    #define kServerAddress @"http://50.18.250.24/2.0"
 #endif
 
 #ifdef MAMP_SERVER
