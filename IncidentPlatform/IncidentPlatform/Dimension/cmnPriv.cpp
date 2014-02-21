@@ -1,4 +1,5 @@
 #include "cmnPriv.h"
+#include <string>
 
 using namespace dss;
 

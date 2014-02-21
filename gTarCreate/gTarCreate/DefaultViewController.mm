@@ -17,6 +17,7 @@
     EnvelopeNode *m_envNode;
     SampleNode *m_sampNode;
     DelayNode *m_delayNode;
+    SamplerNode *m_samplerNode;
 }
 
 @end
@@ -36,15 +37,37 @@
     AudioController *ac = [AudioController sharedAudioController];
     
     AudioNode *root = [[ac GetNodeNetwork] GetRootNode];
-    m_sampNode = new SampleNode((char *)[[[NSBundle mainBundle] pathForResource:@"TestGuitarSample" ofType:@"mp3"] UTF8String]);
-    m_envNode = new EnvelopeNode();
+    //m_sampNode = new SampleNode((char *)[[[NSBundle mainBundle] pathForResource:@"TestGuitarSample" ofType:@"mp3"] UTF8String]);
     
+    m_samplerNode = new SamplerNode();
+    SamplerBankNode *newBank = NULL;
+    
+    // Create a guitar sampler model
+    for(int i = 0; i < 6; i++) {
+        m_samplerNode->CreateNewBank(newBank);
+        
+        for(int j = 0; j < 16; j++) {
+            int openStringVal = 40 + i * 5;
+            if(i > 3) openStringVal -= 1;
+            int midiVal = openStringVal + j;
+            
+            NSString *resourceName = [[NSString alloc] initWithFormat:@"Acoustic Guitar %d", midiVal];
+            
+            NSLog(@"Loading sample:%@ str:%d", resourceName, i);
+            m_samplerNode->LoadSampleIntoBank(i, (char *)[[[NSBundle mainBundle] pathForResource:resourceName ofType:@"mp3"] UTF8String], m_sampNode);
+        }
+    }
+    
+    /*m_envNode = new EnvelopeNode();
     m_delayNode = new DelayNode(500.0f, 0.75f, 1.0f);
     
     // connect the network
     m_envNode->ConnectInput(0, m_sampNode, 0);
     m_delayNode->ConnectInput(0, m_envNode, 0);
-    root->ConnectInput(0, m_delayNode, 0);
+     */
+    
+    //root->ConnectInput(0, m_delayNode, 0);
+    root->ConnectInput(0, m_samplerNode, 0);
     
     
     
@@ -69,8 +92,25 @@
         m_envNode->NoteOff();
     */
     
-    m_sampNode->Trigger();
-    m_envNode->NoteOn();
+    //m_sampNode->Trigger();
+    //m_envNode->NoteOn();
+    
+    /*
+    SampleNode *bank = m_samplerNode[0][0][0][0];
+    bank->Trigger();
+     */
+    static int str = 0;
+    static int ind = 0;
+    
+    m_samplerNode->TriggerBankSample(str, ind);
+    
+    ind++;
+    if(ind >= 16) {
+        ind = 0;
+        str++;
+        if(str >= 6)
+            str = 0;
+    }
        
 }
 

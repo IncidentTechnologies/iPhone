@@ -9,14 +9,32 @@
 #include "AudioNodeNetwork.h"
 
 AudioNodeNetwork::AudioNodeNetwork() :
+    AudioNode(),
     m_inputNode(NULL),
     m_outputNode(NULL),
     m_cursorNode(NULL)
 {
-    // Create output node with one output channel and one input channel
+    SetChannelCount(1, CONN_IN);
+    SetChannelCount(1, CONN_OUT);
+    
+    // Create output node with one output channel
     m_outputNode = new AudioNode();
     m_outputNode->SetChannelCount(1, CONN_OUT);
-    //m_outputNode->SetChannelCount(1, CONN_IN);    // let children do this
+    this->ConnectInput(0, m_outputNode, 0);             // Connect our ouput node to the output of the network
+    
+    // Input?
+}
+
+AudioNodeNetwork::~AudioNodeNetwork() {
+    if(m_outputNode != NULL) {
+        delete m_outputNode;
+        m_outputNode = NULL;
+    }
+    
+    if(m_inputNode != NULL) {
+        delete m_inputNode;
+        m_inputNode = NULL;
+    }
 }
 
 // Ping output node to get the next sample

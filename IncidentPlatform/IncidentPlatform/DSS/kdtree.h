@@ -59,6 +59,7 @@ public:
         if(m_negative != NULL) m_negative = NULL;
     }
 
+#ifdef _MEM_TRACK
     // Memory Management
     // **************************************************************
     void* operator new(unsigned long size, const char *file, int line) {
@@ -73,6 +74,7 @@ public:
         return;
     }
     // *************************************************************
+#endif
 
     DimObject *m_Object;    // Pointer to object contained in node
 

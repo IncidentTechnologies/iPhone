@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../IncidentPlatform/IncidentPlatform.xcodeproj">
+      location = "group:../../IncidentPlatform/iOS/IncidentPlatform/IncidentPlatform.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../GtarSdk/GtarController/GtarController.xcodeproj">

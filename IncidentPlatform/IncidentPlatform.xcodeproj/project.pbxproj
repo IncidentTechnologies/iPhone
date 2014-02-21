@@ -78,6 +78,7 @@
 		2610F15118AD8A1D003F5CEB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F14F18AD8A1D003F5CEB /* AudioToolbox.framework */; };
 		2610F15518AD9125003F5CEB /* CADebugPrintf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2610F15318AD9125003F5CEB /* CADebugPrintf.cpp */; };
 		2610F15C18AD9B08003F5CEB /* AUNodeNetwork.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F15B18AD9B08003F5CEB /* AUNodeNetwork.mm */; };
+		2630B7F318B5B85100687D29 /* SamplerNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 264EC77C18B55208001F7224 /* SamplerNode.h */; };
 		26478FEE186929130077987F /* XMPNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2605801018691DE800F6668F /* XMPNode.h */; };
 		26478FEF1869291D0077987F /* dss_list.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26057FFD18691DE800F6668F /* dss_list.h */; };
 		26478FF0186929280077987F /* EHM.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26057FFF18691DE800F6668F /* EHM.h */; };
@@ -172,6 +173,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				2630B7F318B5B85100687D29 /* SamplerNode.h in CopyFiles */,
 				264EC77A18B4581B001F7224 /* AudioNodeNetwork.h in CopyFiles */,
 				264EC77618B44FD6001F7224 /* Parameter.h in CopyFiles */,
 				264EC77418B44F95001F7224 /* EffectNode.h in CopyFiles */,

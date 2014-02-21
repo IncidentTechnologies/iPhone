@@ -12,6 +12,8 @@
 	<dict>
 		<key>50996AE3-5E45-4DC7-A6FC-5C2242764FBC</key>
 		<string>https://github.com/IncidentTechnologies/iPhone</string>
+		<key>F9307A36-2621-4FE0-81EA-BCEFEF0D230E</key>
+		<string>https://github.com/IncidentTechnologies/IncidentPlatform.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>gTarCreate/gTarCreate.xcodeproj/project.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>50996AE3-5E45-4DC7-A6FC-5C2242764FBC</key>
 		<string>../../..</string>
+		<key>F9307A36-2621-4FE0-81EA-BCEFEF0D230E</key>
+		<string>../../../IncidentPlatform</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/IncidentTechnologies/iPhone</string>
@@ -28,6 +32,14 @@
 	<string>50996AE3-5E45-4DC7-A6FC-5C2242764FBC</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F9307A36-2621-4FE0-81EA-BCEFEF0D230E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IncidentPlatform</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

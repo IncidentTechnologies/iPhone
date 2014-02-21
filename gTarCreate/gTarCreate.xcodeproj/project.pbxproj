@@ -25,7 +25,49 @@
 		2610F14E18AD6B59003F5CEB /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */; };
 		2610F15718AD9226003F5CEB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15618AD9226003F5CEB /* libc++.dylib */; };
 		2610F15918AD923C003F5CEB /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15818AD923C003F5CEB /* libstdc++.dylib */; };
-		264EC77018B30B3C001F7224 /* TestGuitarSample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 264EC76F18B30B3C001F7224 /* TestGuitarSample.mp3 */; };
+		2630B82118B6D0F500687D29 /* Acoustic Guitar 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F618B6D0F500687D29 /* Acoustic Guitar 40.mp3 */; };
+		2630B82218B6D0F500687D29 /* Acoustic Guitar 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F718B6D0F500687D29 /* Acoustic Guitar 41.mp3 */; };
+		2630B82318B6D0F500687D29 /* Acoustic Guitar 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F818B6D0F500687D29 /* Acoustic Guitar 42.mp3 */; };
+		2630B82418B6D0F500687D29 /* Acoustic Guitar 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F918B6D0F500687D29 /* Acoustic Guitar 43.mp3 */; };
+		2630B82518B6D0F500687D29 /* Acoustic Guitar 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7FA18B6D0F500687D29 /* Acoustic Guitar 44.mp3 */; };
+		2630B82618B6D0F500687D29 /* Acoustic Guitar 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7FB18B6D0F500687D29 /* Acoustic Guitar 45.mp3 */; };
+		2630B82718B6D0F500687D29 /* Acoustic Guitar 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7FC18B6D0F500687D29 /* Acoustic Guitar 46.mp3 */; };
+		2630B82818B6D0F500687D29 /* Acoustic Guitar 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7FD18B6D0F500687D29 /* Acoustic Guitar 47.mp3 */; };
+		2630B82918B6D0F500687D29 /* Acoustic Guitar 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7FE18B6D0F500687D29 /* Acoustic Guitar 48.mp3 */; };
+		2630B82A18B6D0F500687D29 /* Acoustic Guitar 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7FF18B6D0F500687D29 /* Acoustic Guitar 49.mp3 */; };
+		2630B82B18B6D0F500687D29 /* Acoustic Guitar 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80018B6D0F500687D29 /* Acoustic Guitar 50.mp3 */; };
+		2630B82C18B6D0F500687D29 /* Acoustic Guitar 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80118B6D0F500687D29 /* Acoustic Guitar 51.mp3 */; };
+		2630B82D18B6D0F500687D29 /* Acoustic Guitar 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80218B6D0F500687D29 /* Acoustic Guitar 52.mp3 */; };
+		2630B82E18B6D0F500687D29 /* Acoustic Guitar 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80318B6D0F500687D29 /* Acoustic Guitar 53.mp3 */; };
+		2630B82F18B6D0F500687D29 /* Acoustic Guitar 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80418B6D0F500687D29 /* Acoustic Guitar 54.mp3 */; };
+		2630B83018B6D0F500687D29 /* Acoustic Guitar 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80518B6D0F500687D29 /* Acoustic Guitar 55.mp3 */; };
+		2630B83118B6D0F500687D29 /* Acoustic Guitar 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80618B6D0F500687D29 /* Acoustic Guitar 56.mp3 */; };
+		2630B83218B6D0F500687D29 /* Acoustic Guitar 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80718B6D0F500687D29 /* Acoustic Guitar 57.mp3 */; };
+		2630B83318B6D0F500687D29 /* Acoustic Guitar 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80818B6D0F500687D29 /* Acoustic Guitar 58.mp3 */; };
+		2630B83418B6D0F500687D29 /* Acoustic Guitar 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80918B6D0F500687D29 /* Acoustic Guitar 59.mp3 */; };
+		2630B83518B6D0F500687D29 /* Acoustic Guitar 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80A18B6D0F500687D29 /* Acoustic Guitar 60.mp3 */; };
+		2630B83618B6D0F500687D29 /* Acoustic Guitar 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80B18B6D0F500687D29 /* Acoustic Guitar 61.mp3 */; };
+		2630B83718B6D0F500687D29 /* Acoustic Guitar 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80C18B6D0F500687D29 /* Acoustic Guitar 62.mp3 */; };
+		2630B83818B6D0F500687D29 /* Acoustic Guitar 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80D18B6D0F500687D29 /* Acoustic Guitar 63.mp3 */; };
+		2630B83918B6D0F500687D29 /* Acoustic Guitar 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80E18B6D0F500687D29 /* Acoustic Guitar 64.mp3 */; };
+		2630B83A18B6D0F500687D29 /* Acoustic Guitar 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B80F18B6D0F500687D29 /* Acoustic Guitar 65.mp3 */; };
+		2630B83B18B6D0F500687D29 /* Acoustic Guitar 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81018B6D0F500687D29 /* Acoustic Guitar 66.mp3 */; };
+		2630B83C18B6D0F500687D29 /* Acoustic Guitar 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81118B6D0F500687D29 /* Acoustic Guitar 67.mp3 */; };
+		2630B83D18B6D0F500687D29 /* Acoustic Guitar 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81218B6D0F500687D29 /* Acoustic Guitar 68.mp3 */; };
+		2630B83E18B6D0F500687D29 /* Acoustic Guitar 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81318B6D0F500687D29 /* Acoustic Guitar 69.mp3 */; };
+		2630B83F18B6D0F500687D29 /* Acoustic Guitar 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81418B6D0F500687D29 /* Acoustic Guitar 70.mp3 */; };
+		2630B84018B6D0F500687D29 /* Acoustic Guitar 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81518B6D0F500687D29 /* Acoustic Guitar 71.mp3 */; };
+		2630B84118B6D0F500687D29 /* Acoustic Guitar 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81618B6D0F500687D29 /* Acoustic Guitar 72.mp3 */; };
+		2630B84218B6D0F500687D29 /* Acoustic Guitar 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81718B6D0F500687D29 /* Acoustic Guitar 73.mp3 */; };
+		2630B84318B6D0F500687D29 /* Acoustic Guitar 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81818B6D0F500687D29 /* Acoustic Guitar 74.mp3 */; };
+		2630B84418B6D0F500687D29 /* Acoustic Guitar 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81918B6D0F500687D29 /* Acoustic Guitar 75.mp3 */; };
+		2630B84518B6D0F500687D29 /* Acoustic Guitar 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81A18B6D0F500687D29 /* Acoustic Guitar 76.mp3 */; };
+		2630B84618B6D0F500687D29 /* Acoustic Guitar 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81B18B6D0F500687D29 /* Acoustic Guitar 77.mp3 */; };
+		2630B84718B6D0F500687D29 /* Acoustic Guitar 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81C18B6D0F500687D29 /* Acoustic Guitar 78.mp3 */; };
+		2630B84818B6D0F500687D29 /* Acoustic Guitar 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81D18B6D0F500687D29 /* Acoustic Guitar 79.mp3 */; };
+		2630B84918B6D0F500687D29 /* Acoustic Guitar 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81E18B6D0F500687D29 /* Acoustic Guitar 80.mp3 */; };
+		2630B84A18B6D0F500687D29 /* Acoustic Guitar 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81F18B6D0F500687D29 /* Acoustic Guitar 81.mp3 */; };
+		2630B84B18B6D0F500687D29 /* Acoustic Guitar 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B82018B6D0F500687D29 /* Acoustic Guitar 82.mp3 */; };
 		26EBC39B18ADBF9C0068BEC6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */; };
 		26EBC39F18ADC0690068BEC6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -68,7 +110,49 @@
 		2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		2610F15618AD9226003F5CEB /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		2610F15818AD923C003F5CEB /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
-		264EC76F18B30B3C001F7224 /* TestGuitarSample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestGuitarSample.mp3; sourceTree = "<group>"; };
+		2630B7F618B6D0F500687D29 /* Acoustic Guitar 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 40.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 40.mp3"; sourceTree = "<group>"; };
+		2630B7F718B6D0F500687D29 /* Acoustic Guitar 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 41.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 41.mp3"; sourceTree = "<group>"; };
+		2630B7F818B6D0F500687D29 /* Acoustic Guitar 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 42.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 42.mp3"; sourceTree = "<group>"; };
+		2630B7F918B6D0F500687D29 /* Acoustic Guitar 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 43.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 43.mp3"; sourceTree = "<group>"; };
+		2630B7FA18B6D0F500687D29 /* Acoustic Guitar 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 44.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 44.mp3"; sourceTree = "<group>"; };
+		2630B7FB18B6D0F500687D29 /* Acoustic Guitar 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 45.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 45.mp3"; sourceTree = "<group>"; };
+		2630B7FC18B6D0F500687D29 /* Acoustic Guitar 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 46.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 46.mp3"; sourceTree = "<group>"; };
+		2630B7FD18B6D0F500687D29 /* Acoustic Guitar 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 47.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 47.mp3"; sourceTree = "<group>"; };
+		2630B7FE18B6D0F500687D29 /* Acoustic Guitar 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 48.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 48.mp3"; sourceTree = "<group>"; };
+		2630B7FF18B6D0F500687D29 /* Acoustic Guitar 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 49.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 49.mp3"; sourceTree = "<group>"; };
+		2630B80018B6D0F500687D29 /* Acoustic Guitar 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 50.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 50.mp3"; sourceTree = "<group>"; };
+		2630B80118B6D0F500687D29 /* Acoustic Guitar 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 51.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 51.mp3"; sourceTree = "<group>"; };
+		2630B80218B6D0F500687D29 /* Acoustic Guitar 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 52.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 52.mp3"; sourceTree = "<group>"; };
+		2630B80318B6D0F500687D29 /* Acoustic Guitar 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 53.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 53.mp3"; sourceTree = "<group>"; };
+		2630B80418B6D0F500687D29 /* Acoustic Guitar 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 54.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 54.mp3"; sourceTree = "<group>"; };
+		2630B80518B6D0F500687D29 /* Acoustic Guitar 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 55.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 55.mp3"; sourceTree = "<group>"; };
+		2630B80618B6D0F500687D29 /* Acoustic Guitar 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 56.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 56.mp3"; sourceTree = "<group>"; };
+		2630B80718B6D0F500687D29 /* Acoustic Guitar 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 57.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 57.mp3"; sourceTree = "<group>"; };
+		2630B80818B6D0F500687D29 /* Acoustic Guitar 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 58.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 58.mp3"; sourceTree = "<group>"; };
+		2630B80918B6D0F500687D29 /* Acoustic Guitar 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 59.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 59.mp3"; sourceTree = "<group>"; };
+		2630B80A18B6D0F500687D29 /* Acoustic Guitar 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 60.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 60.mp3"; sourceTree = "<group>"; };
+		2630B80B18B6D0F500687D29 /* Acoustic Guitar 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 61.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 61.mp3"; sourceTree = "<group>"; };
+		2630B80C18B6D0F500687D29 /* Acoustic Guitar 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 62.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 62.mp3"; sourceTree = "<group>"; };
+		2630B80D18B6D0F500687D29 /* Acoustic Guitar 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 63.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 63.mp3"; sourceTree = "<group>"; };
+		2630B80E18B6D0F500687D29 /* Acoustic Guitar 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 64.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 64.mp3"; sourceTree = "<group>"; };
+		2630B80F18B6D0F500687D29 /* Acoustic Guitar 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 65.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 65.mp3"; sourceTree = "<group>"; };
+		2630B81018B6D0F500687D29 /* Acoustic Guitar 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 66.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 66.mp3"; sourceTree = "<group>"; };
+		2630B81118B6D0F500687D29 /* Acoustic Guitar 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 67.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 67.mp3"; sourceTree = "<group>"; };
+		2630B81218B6D0F500687D29 /* Acoustic Guitar 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 68.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 68.mp3"; sourceTree = "<group>"; };
+		2630B81318B6D0F500687D29 /* Acoustic Guitar 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 69.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 69.mp3"; sourceTree = "<group>"; };
+		2630B81418B6D0F500687D29 /* Acoustic Guitar 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 70.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 70.mp3"; sourceTree = "<group>"; };
+		2630B81518B6D0F500687D29 /* Acoustic Guitar 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 71.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 71.mp3"; sourceTree = "<group>"; };
+		2630B81618B6D0F500687D29 /* Acoustic Guitar 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 72.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 72.mp3"; sourceTree = "<group>"; };
+		2630B81718B6D0F500687D29 /* Acoustic Guitar 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 73.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 73.mp3"; sourceTree = "<group>"; };
+		2630B81818B6D0F500687D29 /* Acoustic Guitar 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 74.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 74.mp3"; sourceTree = "<group>"; };
+		2630B81918B6D0F500687D29 /* Acoustic Guitar 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 75.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 75.mp3"; sourceTree = "<group>"; };
+		2630B81A18B6D0F500687D29 /* Acoustic Guitar 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 76.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 76.mp3"; sourceTree = "<group>"; };
+		2630B81B18B6D0F500687D29 /* Acoustic Guitar 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 77.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 77.mp3"; sourceTree = "<group>"; };
+		2630B81C18B6D0F500687D29 /* Acoustic Guitar 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 78.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 78.mp3"; sourceTree = "<group>"; };
+		2630B81D18B6D0F500687D29 /* Acoustic Guitar 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 79.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 79.mp3"; sourceTree = "<group>"; };
+		2630B81E18B6D0F500687D29 /* Acoustic Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 80.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 80.mp3"; sourceTree = "<group>"; };
+		2630B81F18B6D0F500687D29 /* Acoustic Guitar 81.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 81.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 81.mp3"; sourceTree = "<group>"; };
+		2630B82018B6D0F500687D29 /* Acoustic Guitar 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 82.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 82.mp3"; sourceTree = "<group>"; };
 		26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		26EBC39C18ADC0690068BEC6 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -148,7 +232,7 @@
 		2610F08418AAB28E003F5CEB /* gTarCreate */ = {
 			isa = PBXGroup;
 			children = (
-				264EC76F18B30B3C001F7224 /* TestGuitarSample.mp3 */,
+				2630B84C18B6D0FB00687D29 /* Samples */,
 				2610F08D18AAB28E003F5CEB /* AppDelegate.h */,
 				2610F08E18AAB28E003F5CEB /* AppDelegate.m */,
 				2610F09018AAB28E003F5CEB /* Images.xcassets */,
@@ -187,6 +271,64 @@
 				2610F0A018AAB28E003F5CEB /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2630B84C18B6D0FB00687D29 /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				2630B84D18B6D10200687D29 /* Acoustic Guitar */,
+			);
+			name = Samples;
+			sourceTree = "<group>";
+		};
+		2630B84D18B6D10200687D29 /* Acoustic Guitar */ = {
+			isa = PBXGroup;
+			children = (
+				2630B7F618B6D0F500687D29 /* Acoustic Guitar 40.mp3 */,
+				2630B7F718B6D0F500687D29 /* Acoustic Guitar 41.mp3 */,
+				2630B7F818B6D0F500687D29 /* Acoustic Guitar 42.mp3 */,
+				2630B7F918B6D0F500687D29 /* Acoustic Guitar 43.mp3 */,
+				2630B7FA18B6D0F500687D29 /* Acoustic Guitar 44.mp3 */,
+				2630B7FB18B6D0F500687D29 /* Acoustic Guitar 45.mp3 */,
+				2630B7FC18B6D0F500687D29 /* Acoustic Guitar 46.mp3 */,
+				2630B7FD18B6D0F500687D29 /* Acoustic Guitar 47.mp3 */,
+				2630B7FE18B6D0F500687D29 /* Acoustic Guitar 48.mp3 */,
+				2630B7FF18B6D0F500687D29 /* Acoustic Guitar 49.mp3 */,
+				2630B80018B6D0F500687D29 /* Acoustic Guitar 50.mp3 */,
+				2630B80118B6D0F500687D29 /* Acoustic Guitar 51.mp3 */,
+				2630B80218B6D0F500687D29 /* Acoustic Guitar 52.mp3 */,
+				2630B80318B6D0F500687D29 /* Acoustic Guitar 53.mp3 */,
+				2630B80418B6D0F500687D29 /* Acoustic Guitar 54.mp3 */,
+				2630B80518B6D0F500687D29 /* Acoustic Guitar 55.mp3 */,
+				2630B80618B6D0F500687D29 /* Acoustic Guitar 56.mp3 */,
+				2630B80718B6D0F500687D29 /* Acoustic Guitar 57.mp3 */,
+				2630B80818B6D0F500687D29 /* Acoustic Guitar 58.mp3 */,
+				2630B80918B6D0F500687D29 /* Acoustic Guitar 59.mp3 */,
+				2630B80A18B6D0F500687D29 /* Acoustic Guitar 60.mp3 */,
+				2630B80B18B6D0F500687D29 /* Acoustic Guitar 61.mp3 */,
+				2630B80C18B6D0F500687D29 /* Acoustic Guitar 62.mp3 */,
+				2630B80D18B6D0F500687D29 /* Acoustic Guitar 63.mp3 */,
+				2630B80E18B6D0F500687D29 /* Acoustic Guitar 64.mp3 */,
+				2630B80F18B6D0F500687D29 /* Acoustic Guitar 65.mp3 */,
+				2630B81018B6D0F500687D29 /* Acoustic Guitar 66.mp3 */,
+				2630B81118B6D0F500687D29 /* Acoustic Guitar 67.mp3 */,
+				2630B81218B6D0F500687D29 /* Acoustic Guitar 68.mp3 */,
+				2630B81318B6D0F500687D29 /* Acoustic Guitar 69.mp3 */,
+				2630B81418B6D0F500687D29 /* Acoustic Guitar 70.mp3 */,
+				2630B81518B6D0F500687D29 /* Acoustic Guitar 71.mp3 */,
+				2630B81618B6D0F500687D29 /* Acoustic Guitar 72.mp3 */,
+				2630B81718B6D0F500687D29 /* Acoustic Guitar 73.mp3 */,
+				2630B81818B6D0F500687D29 /* Acoustic Guitar 74.mp3 */,
+				2630B81918B6D0F500687D29 /* Acoustic Guitar 75.mp3 */,
+				2630B81A18B6D0F500687D29 /* Acoustic Guitar 76.mp3 */,
+				2630B81B18B6D0F500687D29 /* Acoustic Guitar 77.mp3 */,
+				2630B81C18B6D0F500687D29 /* Acoustic Guitar 78.mp3 */,
+				2630B81D18B6D0F500687D29 /* Acoustic Guitar 79.mp3 */,
+				2630B81E18B6D0F500687D29 /* Acoustic Guitar 80.mp3 */,
+				2630B81F18B6D0F500687D29 /* Acoustic Guitar 81.mp3 */,
+				2630B82018B6D0F500687D29 /* Acoustic Guitar 82.mp3 */,
+			);
+			name = "Acoustic Guitar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,10 +406,52 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				264EC77018B30B3C001F7224 /* TestGuitarSample.mp3 in Resources */,
+				2630B82F18B6D0F500687D29 /* Acoustic Guitar 54.mp3 in Resources */,
 				2610F0B418AAB7EC003F5CEB /* DefaultViewController.xib in Resources */,
+				2630B83818B6D0F500687D29 /* Acoustic Guitar 63.mp3 in Resources */,
+				2630B84B18B6D0F500687D29 /* Acoustic Guitar 82.mp3 in Resources */,
+				2630B84918B6D0F500687D29 /* Acoustic Guitar 80.mp3 in Resources */,
+				2630B82E18B6D0F500687D29 /* Acoustic Guitar 53.mp3 in Resources */,
+				2630B84118B6D0F500687D29 /* Acoustic Guitar 72.mp3 in Resources */,
+				2630B83F18B6D0F500687D29 /* Acoustic Guitar 70.mp3 in Resources */,
+				2630B84318B6D0F500687D29 /* Acoustic Guitar 74.mp3 in Resources */,
 				2610F08918AAB28E003F5CEB /* InfoPlist.strings in Resources */,
+				2630B84518B6D0F500687D29 /* Acoustic Guitar 76.mp3 in Resources */,
+				2630B82D18B6D0F500687D29 /* Acoustic Guitar 52.mp3 in Resources */,
+				2630B82A18B6D0F500687D29 /* Acoustic Guitar 49.mp3 in Resources */,
+				2630B84018B6D0F500687D29 /* Acoustic Guitar 71.mp3 in Resources */,
+				2630B83018B6D0F500687D29 /* Acoustic Guitar 55.mp3 in Resources */,
+				2630B82C18B6D0F500687D29 /* Acoustic Guitar 51.mp3 in Resources */,
+				2630B83D18B6D0F500687D29 /* Acoustic Guitar 68.mp3 in Resources */,
+				2630B82418B6D0F500687D29 /* Acoustic Guitar 43.mp3 in Resources */,
+				2630B82518B6D0F500687D29 /* Acoustic Guitar 44.mp3 in Resources */,
+				2630B83C18B6D0F500687D29 /* Acoustic Guitar 67.mp3 in Resources */,
 				2610F09118AAB28E003F5CEB /* Images.xcassets in Resources */,
+				2630B82818B6D0F500687D29 /* Acoustic Guitar 47.mp3 in Resources */,
+				2630B83218B6D0F500687D29 /* Acoustic Guitar 57.mp3 in Resources */,
+				2630B82618B6D0F500687D29 /* Acoustic Guitar 45.mp3 in Resources */,
+				2630B84718B6D0F500687D29 /* Acoustic Guitar 78.mp3 in Resources */,
+				2630B82118B6D0F500687D29 /* Acoustic Guitar 40.mp3 in Resources */,
+				2630B82218B6D0F500687D29 /* Acoustic Guitar 41.mp3 in Resources */,
+				2630B83918B6D0F500687D29 /* Acoustic Guitar 64.mp3 in Resources */,
+				2630B82318B6D0F500687D29 /* Acoustic Guitar 42.mp3 in Resources */,
+				2630B84418B6D0F500687D29 /* Acoustic Guitar 75.mp3 in Resources */,
+				2630B83518B6D0F500687D29 /* Acoustic Guitar 60.mp3 in Resources */,
+				2630B84618B6D0F500687D29 /* Acoustic Guitar 77.mp3 in Resources */,
+				2630B83618B6D0F500687D29 /* Acoustic Guitar 61.mp3 in Resources */,
+				2630B84218B6D0F500687D29 /* Acoustic Guitar 73.mp3 in Resources */,
+				2630B84A18B6D0F500687D29 /* Acoustic Guitar 81.mp3 in Resources */,
+				2630B82718B6D0F500687D29 /* Acoustic Guitar 46.mp3 in Resources */,
+				2630B83A18B6D0F500687D29 /* Acoustic Guitar 65.mp3 in Resources */,
+				2630B83B18B6D0F500687D29 /* Acoustic Guitar 66.mp3 in Resources */,
+				2630B82B18B6D0F500687D29 /* Acoustic Guitar 50.mp3 in Resources */,
+				2630B83418B6D0F500687D29 /* Acoustic Guitar 59.mp3 in Resources */,
+				2630B84818B6D0F500687D29 /* Acoustic Guitar 79.mp3 in Resources */,
+				2630B83118B6D0F500687D29 /* Acoustic Guitar 56.mp3 in Resources */,
+				2630B83E18B6D0F500687D29 /* Acoustic Guitar 69.mp3 in Resources */,
+				2630B83318B6D0F500687D29 /* Acoustic Guitar 58.mp3 in Resources */,
+				2630B82918B6D0F500687D29 /* Acoustic Guitar 48.mp3 in Resources */,
+				2630B83718B6D0F500687D29 /* Acoustic Guitar 62.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,10 +5,12 @@
 #include "EHM.h"
 #include <stdlib.h>
 
-//#ifdef _DEBUG
-#include "MemTrack.h"
-#define MEM_TRACK_NEW new(__FILE__, __LINE__)
-//#endif
+#ifdef _MEM_TRACK
+    #include "MemTrack.h"
+    #define MEM_TRACK_NEW new(__FILE__, __LINE__)
+#else
+    #define MEM_TRACK_NEW new
+#endif
 
 namespace dss {
 
@@ -37,6 +39,7 @@ public:
         if(m_right != NULL) m_right = NULL;
     }
 
+#ifdef _MEM_TRACK
     // Memory Management
     // **************************************************************
     void* operator new(unsigned long int size, const char *file, int line) {
@@ -52,6 +55,7 @@ public:
         return;
     }
     // *************************************************************
+#endif
     
     // links
     btreenode<Type> *m_left;

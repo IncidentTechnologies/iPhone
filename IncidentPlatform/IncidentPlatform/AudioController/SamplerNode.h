@@ -10,7 +10,7 @@
 #define __IncidentPlatform__SamplerNode__
 
 #include "AudioNodeNetwork.h"
-#include "dss.h"
+#include "dss_list.h"
 class SampleNode;
 
 // A sampler is a collection of Sample nodes mixed into
@@ -23,8 +23,7 @@ public:
     ~SamplerBankNode();
     
     RESULT TriggerSample(int sample);
-    RESULT LoadSampleIntoBank(char *pszFilepath);
-    float GetNextSample(unsigned long int timestamp);
+    RESULT LoadSampleIntoBank(char *pszFilepath, SampleNode *outSample);
     
     SampleNode* operator[](const int& i);
     
@@ -39,8 +38,9 @@ public:
     
     RESULT TriggerBankSample(int bank, int sample);
     RESULT CreateNewBank(SamplerBankNode *outBank);
+    RESULT LoadSampleIntoBank(int bank, char *pszFilepath, SampleNode *outSampleNode);
     
-    float GetNextSample(unsigned long int timestamp);
+    SamplerBankNode* operator[](const int& i);
     
 public:
     list<SamplerBankNode*> m_banks;

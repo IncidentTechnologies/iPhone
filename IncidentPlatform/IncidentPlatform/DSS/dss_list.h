@@ -176,8 +176,14 @@ public:
 	};
 
 public:
-	iterator First(){ return (iterator)(m_pFirstItem); }
-	iterator Last(){ return (iterator)(m_pLastItem); }
+	iterator First(){
+        return (iterator)(m_pFirstItem);
+    }
+    
+	iterator Last(){
+        return (iterator)(m_pLastItem);
+    }
+    
 	int Size(){ return m_cCount; }
 
     // Output to Static Buffer function will return a pointer to
