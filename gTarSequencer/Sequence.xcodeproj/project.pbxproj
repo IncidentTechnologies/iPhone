@@ -18,7 +18,6 @@
 		580A52151864E0E00077240B /* Sequencer_Icon58px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52121864E0DF0077240B /* Sequencer_Icon58px.png */; };
 		580A52161864E0E00077240B /* Sequencer_Icon80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52131864E0DF0077240B /* Sequencer_Icon80px.png */; };
 		580A52171864E0E00077240B /* Sequencer_Icon120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52141864E0DF0077240B /* Sequencer_Icon120px.png */; };
-		5811AADF187B88C800FC0BD2 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA76187B88C700FC0BD2 /* instruments.plist */; };
 		5811AAE0187B88C800FC0BD2 /* Percussion 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA78187B88C700FC0BD2 /* Percussion 0.mp3 */; };
 		5811AAE1187B88C800FC0BD2 /* Percussion 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA79187B88C700FC0BD2 /* Percussion 1.mp3 */; };
 		5811AAE2187B88C800FC0BD2 /* Percussion 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA7A187B88C700FC0BD2 /* Percussion 10.mp3 */; };
@@ -278,7 +277,6 @@
 		58E635341889FD800036E4F1 /* Bacon 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58E6352E1889FD800036E4F1 /* Bacon 5.mp3 */; };
 		58E635351889FD800036E4F1 /* Bacon 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58E6352F1889FD800036E4F1 /* Bacon 6.mp3 */; };
 		58EB9D2C188F121300DCBA1C /* Silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58EB9D2B188F121300DCBA1C /* Silence.mp3 */; };
-		58EEB7A81868EE630089BFD9 /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A71868EE630089BFD9 /* libAudioController.a */; };
 		58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */; };
 		58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */; };
 		58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */; };
@@ -303,6 +301,8 @@
 		6D48127E18B5363700598CC2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D48127818B5363700598CC2 /* README.md */; };
 		6D48127F18B5363700598CC2 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D48127918B5363700598CC2 /* release_notes.md */; };
 		6D48128118B5366D00598CC2 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D48127718B5363700598CC2 /* libTestFlight.a */; };
+		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
+		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -327,7 +327,6 @@
 		580A52121864E0DF0077240B /* Sequencer_Icon58px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon58px.png; sourceTree = "<group>"; };
 		580A52131864E0DF0077240B /* Sequencer_Icon80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon80px.png; sourceTree = "<group>"; };
 		580A52141864E0DF0077240B /* Sequencer_Icon120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon120px.png; sourceTree = "<group>"; };
-		5811AA76187B88C700FC0BD2 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
 		5811AA78187B88C700FC0BD2 /* Percussion 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 0.mp3"; sourceTree = "<group>"; };
 		5811AA79187B88C700FC0BD2 /* Percussion 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 1.mp3"; sourceTree = "<group>"; };
 		5811AA7A187B88C700FC0BD2 /* Percussion 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 10.mp3"; sourceTree = "<group>"; };
@@ -646,6 +645,8 @@
 		6D48127A18B5363700598CC2 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		6D48127B18B5363700598CC2 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		6D48127C18B5363700598CC2 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
+		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -653,6 +654,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */,
+				6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */,
 				58A59522188619C100696614 /* libGtarControllerDeploy.a in Frameworks */,
 				587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */,
 				6D48128118B5366D00598CC2 /* libTestFlight.a in Frameworks */,
@@ -660,7 +663,6 @@
 				58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */,
 				58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */,
 				58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */,
-				58EEB7A81868EE630089BFD9 /* libAudioController.a in Frameworks */,
 				58D617101863B8D6001EB327 /* CoreGraphics.framework in Frameworks */,
 				58D617121863B8D6001EB327 /* UIKit.framework in Frameworks */,
 				58D6170E1863B8D6001EB327 /* Foundation.framework in Frameworks */,
@@ -771,7 +773,6 @@
 			isa = PBXGroup;
 			children = (
 				587C9F241888C0E7001F57C7 /* Samples */,
-				5811AA76187B88C700FC0BD2 /* instruments.plist */,
 				5811AA77187B88C700FC0BD2 /* Percussion */,
 				5811AADE187B88C800FC0BD2 /* Sample Pack INFO */,
 				58241D7C188DE31000498DB5 /* sampleList.plist */,
@@ -1173,6 +1174,8 @@
 		58D6170C1863B8D6001EB327 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */,
+				6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */,
 				58A59521188619C100696614 /* libGtarControllerDeploy.a */,
 				587B6EC71885E9720071BE15 /* libz.dylib */,
 				58B9AD0D187B61C5001EDD33 /* libc++.dylib */,
@@ -1510,7 +1513,6 @@
 				5811AAEE187B88C800FC0BD2 /* Percussion 2.mp3 in Resources */,
 				58F5449018AB161E009E6E43 /* Set_Icon.png in Resources */,
 				587C9F8B1888C0E7001F57C7 /* Guitar 1.mp3 in Resources */,
-				5811AADF187B88C800FC0BD2 /* instruments.plist in Resources */,
 				580A52071864DFF50077240B /* Icon_Piano.png in Resources */,
 				5805D04B188DB3E7000832A9 /* Icon_Custom.png in Resources */,
 				58D617671863BF5E001EB327 /* Sequence2.png in Resources */,
@@ -1809,7 +1811,10 @@
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform/",
+				);
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
 				LIBRARY_SEARCH_PATHS = "/Users/kateschnippering/Documents/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.2.1";
 				OTHER_CFLAGS = "-mthumb";
@@ -1833,7 +1838,10 @@
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../include\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform/",
+				);
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
 				LIBRARY_SEARCH_PATHS = "/Users/kateschnippering/Documents/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.2.1";
 				OTHER_CFLAGS = "-mthumb";

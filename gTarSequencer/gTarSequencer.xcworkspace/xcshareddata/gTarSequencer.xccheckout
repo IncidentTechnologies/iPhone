@@ -10,6 +10,8 @@
 	<string>gTarSequencer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>ADA20FCA-2FC9-4EDE-AA40-E728AE845EEC</key>
+		<string>https://github.com/IncidentTechnologies/IncidentPlatform.git</string>
 		<key>DDC78E2E-7CE9-404D-9948-EAA41A68F9C0</key>
 		<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>gTarSequencer/gTarSequencer.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>ADA20FCA-2FC9-4EDE-AA40-E728AE845EEC</key>
+		<string>../../../IncidentPlatform</string>
 		<key>DDC78E2E-7CE9-404D-9948-EAA41A68F9C0</key>
 		<string>../..</string>
 	</dict>
@@ -28,6 +32,14 @@
 	<string>DDC78E2E-7CE9-404D-9948-EAA41A68F9C0</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>ADA20FCA-2FC9-4EDE-AA40-E728AE845EEC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IncidentPlatform</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

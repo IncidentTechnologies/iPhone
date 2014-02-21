@@ -16,7 +16,7 @@
 //      I find to be a useful tool, so i made this dummy class.
 @interface SoundMaker : NSObject
 {
-    AudioController * audioController;
+    
 }
 
 

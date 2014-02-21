@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../GtarSdk/GtarController/GtarController.xcodeproj">
+      location = "group:../../IncidentPlatform/iOS/IncidentPlatform/IncidentPlatform.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:gTarSequencer/../../GtarSdk/AudioController/AudioController.xcodeproj">
+      location = "group:../GtarSdk/GtarController/GtarController.xcodeproj">
    </FileRef>
    <FileRef
       location = "container:Sequence.xcodeproj">
