@@ -12,8 +12,6 @@
 
 @synthesize delegate;
 @synthesize options;
-@synthesize leftArrow;
-@synthesize rightArrow;
 @synthesize cancelButton;
 @synthesize scrollView;
 @synthesize paginationView;
@@ -34,7 +32,7 @@
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         
         // Left and Right arrows
-        [self drawArrowsWithX:x andY:y];
+        // [self drawArrowsWithX:x andY:y];
        
         // Cancel button
         [self drawCancelButtonWithX:x];
@@ -49,6 +47,7 @@
         scrollView.bounces = NO;
         scrollView.delegate = self;
         scrollView.userInteractionEnabled = YES;
+        scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
                 
         // Set sizings
         currentOrigin = CGPointMake(0, 0);
@@ -120,6 +119,9 @@
     
     UIGraphicsEndImageContext();
     
+    // after pagination is drawn fade non-visible pages accordingly
+    [self fadePagesFrom:focus];
+    
 }
 
 - (void)setOptions:(NSMutableArray *)newOps
@@ -184,9 +186,9 @@
     
     contentSize = CGSizeMake(totalWidth, totalHeight);
     
-    int size = contentSize.width;
-    int scrollViewWidth = scrollView.frame.size.width;
-    
+    //int size = contentSize.width;
+    //int scrollViewWidth = scrollView.frame.size.width;
+    /*
     if ( size <= scrollViewWidth )
     {
         [self hideLeftArrow:YES rightArrow:YES];
@@ -194,27 +196,34 @@
     else {
         [self hideLeftArrow:YES rightArrow:NO];
     }
-    
+    */
     [scrollView setContentSize:contentSize];
     scrollView.contentOffset = CGPointMake(0, 0);
 }
 
 - (void)layoutContent
 {
+    
+    instrumentObjects = [[NSMutableDictionary alloc] init];
+    
     for (int i=0;i<[images count];i++)
     {
-        [self addImageAtIndex:i];
+        UIView * newbutton = [self addImageAtIndex:i];
+        UILabel * newlabel = [self addLabelAtIndex:i];
+
+        NSArray * iconObj = [[NSArray alloc] initWithObjects:newbutton,newlabel, nil];
         
-        [self addLabelAtIndex:i];
+        [instrumentObjects setObject:iconObj forKey:[NSNumber numberWithInt:i]];
     }
     
     // Pagination
     currentPage = 0;
+    targetPage = 0;
     
     [self updatePaginationView:currentPage];
 }
 
-- (void)addImageAtIndex:(int)index
+- (UIView *)addImageAtIndex:(int)index
 {
     // -- update position:
     currentOrigin.x = [self xOriginForImageWithIndex:index];
@@ -284,9 +293,11 @@
         UIGraphicsEndImageContext();
         
     }
+    
+    return buttonborder;
 }
 
-- (void)addLabelAtIndex:(int)index
+- (UILabel *)addLabelAtIndex:(int)index
 {
     // -- update position:
     int imageOffset = [self xOriginForImageWithIndex:index];
@@ -311,6 +322,8 @@
     [label setFont:[UIFont systemFontOfSize:14.0]];
     
     [scrollView addSubview:label];
+    
+    return label;
 }
 
 - (int)xOriginForImageWithIndex:(int)index
@@ -340,12 +353,18 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scroller
 {
-    [self autoHideArrows];
+    //[self autoHideArrows];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scroller
 {
     [self snapScrollerToPlace:scroller];
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scroller
+{
+    scrollView.scrollEnabled = NO;
+    scrollView.scrollEnabled = YES;
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scroller willDecelerate:(BOOL)decelerate
@@ -355,31 +374,32 @@
     }
 }
 
-- (void)snapScrollerToPlace:(UIScrollView *)scroller
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    
+    [self fadeAllPagesIn];
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scroller withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
     double scrollDistance = (gap + iconBorderSize.width) * cols;
-    double maxScroll = contentSize.width - scrollView.frame.size.width;
-    double sensitivityUp = 0.9;
-    double sensitivityDown = 1.1;
+    double velocityOffset = floor(abs(velocity.x)/3.0)+1;
     
-    double scrollUp = floor((scrollView.contentOffset.x*sensitivityUp+scrollDistance) / scrollDistance) * scrollDistance;
-    double scrollDown = ceil((scrollView.contentOffset.x*sensitivityDown-scrollDistance) / scrollDistance) * scrollDistance;
-    
-    CGPoint newOffset = scrollView.contentOffset;
-    
-    if(lastContentOffset.x <= newOffset.x){
-        newOffset.x = MIN(scrollUp,maxScroll);
-        currentPage = floor((pageCount-1)*(newOffset.x/maxScroll));
-    }else{
-        newOffset.x = MAX(scrollDown,0);
-        currentPage = floor((pageCount-1)*(newOffset.x/maxScroll));
+    if(scrollView.contentOffset.x > lastContentOffset.x){
+        targetPage = MIN(pageCount-1,currentPage+velocityOffset);
+    }else if(scrollView.contentOffset.x < lastContentOffset.x){
+        targetPage = MAX(0,currentPage-velocityOffset);
     }
     
-    lastContentOffset = scrollView.contentOffset;
+    CGPoint newOffset = CGPointMake(targetPage*scrollDistance,0);
     
-    [scrollView setContentOffset:newOffset animated:YES];
-    
+    targetContentOffset->x = newOffset.x;
+    lastContentOffset.x = newOffset.x;
+
+}
+
+- (void)snapScrollerToPlace:(UIScrollView *)scroller
+{
+    currentPage = targetPage;
     [self updatePaginationView:currentPage];
 }
 
@@ -392,15 +412,15 @@
     
     currentPage = pageCount-1;
     
-    [self emphasizeArrow:rightArrow setOn:YES];
-    [self emphasizeArrow:leftArrow setOn:NO];
+    //[self emphasizeArrow:rightArrow setOn:YES];
+    //[self emphasizeArrow:leftArrow setOn:NO];
     
     [scrollView setContentOffset:newOffset animated:YES];
     [self updatePaginationView:currentPage];
-    [self autoHideArrows];
+    //[self autoHideArrows];
 }
 
-
+/*
 - (void)userDidTapArrow:(id)sender
 {
     double scrollDistance = (gap + iconBorderSize.width) * cols;
@@ -541,6 +561,7 @@
     UIGraphicsEndImageContext();
     
 }
+*/
 
 - (void)drawCancelButtonWithX:(float)x
 {
@@ -558,6 +579,48 @@
     [self addSubview: cancelButton];
     
 }
+
+#pragma mark - Page Fading
+
+- (void)fadePagesFrom:(int)focus
+{
+    int numinst = [instrumentObjects count];
+    
+    for(int i = 0; i < numinst; i++){
+        
+        NSArray * iconObj = [instrumentObjects objectForKey:[NSNumber numberWithInt:i]];
+        
+        // fade in
+        if(i >= focus*2*cols && i < (focus+1)*2*cols){
+            // fade in
+            [iconObj[0] setAlpha:1.0];
+            [iconObj[1] setAlpha:1.0];
+        }else if(focus == pageCount-1 && i >= numinst-(2*cols-numinst%(2*cols))){
+            // fade in last page
+            [iconObj[0] setAlpha:1.0];
+            [iconObj[1] setAlpha:1.0];
+        }else{
+            [UIView animateWithDuration:0.2 animations:^(void){
+                // fade out
+                [iconObj[0] setAlpha:0.0];
+                [iconObj[1] setAlpha:0.0];
+            }];
+        }
+    }
+}
+
+- (void)fadeAllPagesIn
+{
+    int numinst = [instrumentObjects count];
+    
+    for(int i = 0; i < numinst; i++){
+        NSArray * iconObj = [instrumentObjects objectForKey:[NSNumber numberWithInt:i]];
+        [iconObj[0] setAlpha:1.0];
+        [iconObj[1] setAlpha:1.0];
+    }
+}
+
+
 
 #pragma mark - Custom Instrument Selector
 - (void)launchCustomInstrumentSelector

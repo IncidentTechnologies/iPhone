@@ -40,6 +40,8 @@
 - (void)initMeasureViews;
 - (void)notifyQueuedPatterns:(BOOL)reset;
 - (void)resetQueuedPatternButton;
+- (void)enqueuePatternButton:(int)index;
+- (BOOL)hasQueuedPatternButton;
 - (void)update;
 - (void)deselect;
 

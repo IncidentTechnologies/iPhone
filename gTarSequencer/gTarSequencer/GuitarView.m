@@ -198,5 +198,9 @@
     [delegate gtarConnected:NO];
 }
 
+- (BOOL)isGtarConnected
+{
+    return guitar.connected;
+}
 
 @end

@@ -38,6 +38,8 @@
     
     NSMutableArray * imageButtons;      // array of UIButtons
     
+    NSMutableDictionary * instrumentObjects;
+    
     CGSize contentSize;
     
     UIView * backgroundView;
@@ -59,7 +61,8 @@
     int cols;
     int pageCount;
     int currentPage;
-
+    int targetPage;
+    
 }
 
 - (void)moveFrame:(CGRect)newFrame;
@@ -67,8 +70,6 @@
 
 @property (weak, nonatomic) id<ScrollingSelectorDelegate> delegate;
 @property (retain, nonatomic) NSMutableArray * options;
-@property (retain, nonatomic) UIButton * leftArrow;
-@property (retain, nonatomic) UIButton * rightArrow;
 @property (retain, nonatomic) UIButton * cancelButton;
 
 @property (weak, nonatomic) IBOutlet UIScrollView * scrollView;

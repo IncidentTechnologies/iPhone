@@ -45,6 +45,7 @@
     
     [self initSubviews];
     [self loadStateFromDisk:nil];
+    [self checkGtarConnected];
 }
 
 
@@ -502,39 +503,41 @@
     
     // Tell all of the sequencers to play their next fret
     int instrumentCount = [seqSetViewController countInstruments];
-    for (int i=0; i<instrumentCount; i++){
-        
-        Instrument * instToPlay = [seqSetViewController getInstrumentAtIndex:i];
-        
-        @synchronized(instToPlay.selectedPattern){
-            int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
+    @synchronized(self){
+        for (int i=0; i<instrumentCount; i++){
             
-            // If we are back at the beginning of the pattern, then check the queue:
-            if (realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0){
-                [self checkQueueForPatternsFromInstrument:instToPlay];
-            }else if([patternQueue count] > 0){
+            Instrument * instToPlay = [seqSetViewController getInstrumentAtIndex:i];
+            
+            //@synchronized(instToPlay.selectedPattern){
+                int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
                 
-                BOOL resetCount = NO;
-                if(currentFret == 0){
-                    resetCount = YES;
+                // If we are back at the beginning of the pattern, then check the queue:
+                if (realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0){
+                    [self checkQueueForPatternsFromInstrument:instToPlay];
+                }else if([patternQueue count] > 0){
+                    
+                    BOOL resetCount = NO;
+                    if(currentFret == 0){
+                        resetCount = YES;
+                    }
+                    
+                    // Cause queued pattern to blink
+                    [seqSetViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
+                    
+                    // update Instrument view if it's open
+                    if(activeMainView == instrumentViewController.view && instToPlay == [seqSetViewController getCurrentInstrument]){
+                        [instrumentViewController notifyQueuedPatternAndResetCount:resetCount];
+                    }
                 }
                 
-                // Cause queued pattern to blink
-                [seqSetViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
+                // play sound and update Set view
+                [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted withAmplitude:playVolume];
                 
                 // update Instrument view if it's open
                 if(activeMainView == instrumentViewController.view && instToPlay == [seqSetViewController getCurrentInstrument]){
-                    [instrumentViewController notifyQueuedPatternAndResetCount:resetCount];
+                    [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
                 }
-            }
-            
-            // play sound and update Set view
-            [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted withAmplitude:playVolume];
-            
-            // update Instrument view if it's open
-            if(activeMainView == instrumentViewController.view && instToPlay == [seqSetViewController getCurrentInstrument]){
-                [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
-            }
+            //}
         }
     }
     
@@ -599,8 +602,7 @@
 {
     for(NSMutableDictionary * p in patternQueue){
         Instrument * i = [p objectForKey:@"Instrument"];
-        if(i == inst)
-        {
+        if(i == inst){
             [patternQueue removeObject:p];
         }
     }
@@ -621,6 +623,20 @@
 {
     NSLog(@"dequeuing pattern for instrument at index %i",instIndex);
     [seqSetViewController clearQueuedPatternButtonAtIndex:instIndex];
+}
+
+- (int)getQueuedPatternIndexForInstrument:(Instrument *)inst
+{
+    for(NSMutableDictionary * pq in patternQueue){
+        Instrument * i = [pq objectForKey:@"Instrument"];
+        if(i == inst){
+            NSNumber * p = [pq objectForKey:@"Index"];
+            int pIndex = (int)[p intValue];
+            return pIndex;
+        }
+    }
+    
+    return -1;
 }
 
 #pragma mark - Play Control Delegate
@@ -802,6 +818,13 @@
 
 #pragma mark - gTar Connected
 
+- (void)checkGtarConnected
+{
+    if([guitarView isGtarConnected]){
+        [self gtarConnected:YES];
+    }
+}
+
 - (void)gtarConnected:(BOOL)toConnect
 {
     if(toConnect) NSLog(@"gTar connected");
@@ -809,7 +832,14 @@
     
     isConnected = toConnect;
     
+    // display active measure on gTar
+    if(isConnected){
+        guitarView.measure = [seqSetViewController getCurrentInstrument].selectedPattern.selectedMeasure;
+    }
+    
+    // change connected button
     [leftNavigator changeConnectedButton:isConnected];
+    
 }
 
 

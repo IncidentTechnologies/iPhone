@@ -219,10 +219,26 @@
 
 - (void)resetQueuedPatternButton
 {
-    
     [self setStateForButton:queuedPatternButton state:0];
     queuedPatternButton = nil;
+}
+
+- (void)enqueuePatternButton:(int)index
+{
+    UIButton * newButton = [patternButtons objectAtIndex:index];
     
+    queuedPatternButton = newButton;
+    [self setStateForButton:queuedPatternButton state:1];
+    
+}
+
+- (BOOL)hasQueuedPatternButton
+{
+    if(queuedPatternButton != nil){
+        return TRUE;
+    }
+    
+    return FALSE;
 }
 
 -(void)turnOnInstrumentView

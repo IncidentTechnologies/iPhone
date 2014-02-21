@@ -227,6 +227,12 @@
     // Set pattern button
     [self selectPatternButton:activePattern];
     
+    // Determine if there is a queued pattern
+    int queuedIndex = [delegate getQueuedPatternIndexForInstrument:currentInst];
+    if(queuedIndex >= 0){
+        [self enqueuePatternButton:queuedIndex];
+    }
+    
     // Determine on or off
     isMute = inst.isMuted;
     if(isMute){
@@ -764,6 +770,15 @@
     //    NSLog(@"Now updating");
         [self updatePatternButton:newSelection playState:NO];
     //}
+}
+
+- (void)enqueuePatternButton:(int)index
+{
+    UIButton * newButton = [patternButtons objectAtIndex:index];
+    
+    queuedPatternButton = newButton;
+    [self setStateForButton:queuedPatternButton state:1];
+    
 }
 
 - (void)clearQueuedPatternButton

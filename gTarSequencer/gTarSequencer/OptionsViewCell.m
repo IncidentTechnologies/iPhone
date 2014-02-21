@@ -167,6 +167,8 @@
 {
     if([parent.selectMode isEqualToString:@"Load"]){
         
+        NSLog(@"Load file %@",fileText.text);
+        
         // Load
         [parent userDidLoadFile:fileText.text];
         
@@ -203,9 +205,6 @@
     }else if([parent.selectMode isEqualToString:@"SaveCurrent"]){
         
         // Save Current
-        
-        NSLog(@"FileName Text is %@ and FileText Text is %@",fileName.text,fileText.text);
-        
         
         NSString * emptyName = [fileName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         

@@ -22,6 +22,7 @@
 - (BOOL) checkIsPlaying;
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
 - (void) dequeueAllPatternsForInstrument:(Instrument *)inst;
+- (int) getQueuedPatternIndexForInstrument:(Instrument *)inst;
 - (void) viewSeqSet;
 
 - (BOOL) isLeftNavOpen;

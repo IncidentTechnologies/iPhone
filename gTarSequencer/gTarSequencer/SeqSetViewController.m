@@ -140,7 +140,7 @@
     
     NSLog(@"Returning instrument at index %li",selectedInstrumentIndex);
     
-    if([instruments count] > 0)
+    if([instruments count] > 0 && selectedInstrumentIndex >= 0)
         return [instruments objectAtIndex:selectedInstrumentIndex];
     else
         return nil;
@@ -396,6 +396,14 @@
 {
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
+    
+    // Double check the cell knows it has a queued pattern
+    if(![cell hasQueuedPatternButton]){
+        int queuedIndex = [delegate getQueuedPatternIndexForInstrument:cell.instrument];
+        if(queuedIndex >= 0){
+            [cell enqueuePatternButton:queuedIndex];
+        }
+    }
     
     [cell notifyQueuedPatterns:reset];
     

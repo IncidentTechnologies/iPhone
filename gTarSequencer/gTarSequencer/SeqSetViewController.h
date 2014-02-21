@@ -24,11 +24,12 @@
 - (void) setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying;
 
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
+- (int) getQueuedPatternIndexForInstrument:(Instrument *)inst;
+- (void) removeQueuedPatternForInstrumentAtIndex:(int)instIndex;
 
 - (void) updateGuitarView;
 - (void) updatePlaybandForInstrument:(Instrument *)inst;
 
-- (void) removeQueuedPatternForInstrumentAtIndex:(int)instIndex;
 
 - (void) numInstrumentsDidChange:(int)numInstruments;
 
