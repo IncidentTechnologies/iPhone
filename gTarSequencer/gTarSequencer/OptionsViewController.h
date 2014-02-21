@@ -17,7 +17,7 @@
 - (void) createNewWithName:(NSString *)filename;
 - (void) deleteWithName:(NSString *)filename;
 
-- (void) viewSeqSet;
+- (void) viewSeqSetWithAnimation:(BOOL)animate;
 
 @end
 

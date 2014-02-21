@@ -266,6 +266,8 @@
         
     }
     
+    [activeMainView setAlpha:1.0];
+    
     // set nav button
     [leftNavigator setNavButtonOn:nav];
     
@@ -284,9 +286,18 @@
     
 }
 
-- (void)viewSeqSet
+- (void)viewSeqSetWithAnimation:(BOOL)animate
 {
-    [self selectNavChoice:@"Set" withShift:NO];
+    if(animate){
+        [UIView animateWithDuration:0.3 animations:^(void){
+            [activeMainView setAlpha:0.0];
+        } completion:^(BOOL finished){
+            [self selectNavChoice:@"Set" withShift:NO];
+        }];
+    }else{
+        [self selectNavChoice:@"Set" withShift:NO];
+    }
+    
 }
 
 - (void)viewSelectedInstrument

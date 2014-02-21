@@ -154,7 +154,7 @@
     activeSequencer = filename;
     [delegate loadFromName:filename];
     
-    [delegate viewSeqSet];
+    [delegate viewSeqSetWithAnimation:YES];
 }
 
 - (void)userDidSaveFile:(NSString *)filename
@@ -169,7 +169,7 @@
         activeSequencer = filename;
         [delegate saveWithName:filename];
         
-        [delegate viewSeqSet];
+        [delegate viewSeqSetWithAnimation:YES];
     }
 }
 
@@ -193,7 +193,7 @@
     activeSequencer = filename;
     [delegate createNewWithName:filename];
     
-    [delegate viewSeqSet];
+    [delegate viewSeqSetWithAnimation:YES];
 }
 
 - (void)userDidDeleteFile:(NSString *)filename
@@ -466,19 +466,6 @@
 
 
 #pragma mark - Select actions
-
--(void)selectLoadTableTopRow
-{
-    [self deselectAllRows];
-    
-    // delay load so data clears, except for Load
-    if([selectMode isEqualToString:@"Load"]){
-        [self delayedSelectLoadTableTopRow];
-    }else{
-        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(delayedSelectLoadTableTopRow) userInfo:nil repeats:NO];
-    }
-}
-     
 -(void)delayedSelectLoadTableTopRow
 {
     int firstIndex = 0;
@@ -526,6 +513,10 @@
 {
     // Not sure why this offset is needed for animation to be smooth
     [loadTable setFrame:CGRectMake(0, TABLE_Y, loadTable.frame.size.width, 170)];
+    
+    if([selectMode isEqualToString:@"Load"]){
+        [self delayedSelectLoadTableTopRow];
+    }
     
     [UIView animateWithDuration:0.3 animations:^(void){
         [loadTable setFrame:CGRectMake(0, TABLE_Y, loadTable.frame.size.width, TABLE_HEIGHT)];

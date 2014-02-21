@@ -183,7 +183,7 @@
 #pragma mark - Instruments
 - (IBAction)viewSeqSet:(id)sender
 {
-    [delegate viewSeqSet];
+    [delegate viewSeqSetWithAnimation:NO];
 }
 
 - (void)setActiveInstrument:(Instrument *)inst

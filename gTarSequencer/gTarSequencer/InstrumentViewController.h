@@ -23,7 +23,7 @@
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
 - (void) dequeueAllPatternsForInstrument:(Instrument *)inst;
 - (int) getQueuedPatternIndexForInstrument:(Instrument *)inst;
-- (void) viewSeqSet;
+- (void) viewSeqSetWithAnimation:(BOOL)animate;
 
 - (BOOL) isLeftNavOpen;
 - (void) openLeftNavigator;
