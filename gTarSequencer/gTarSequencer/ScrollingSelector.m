@@ -595,7 +595,7 @@
             // fade in
             [iconObj[0] setAlpha:1.0];
             [iconObj[1] setAlpha:1.0];
-        }else if(focus == pageCount-1 && i >= numinst-(2*cols-numinst%(2*cols))){
+        }else if(focus == pageCount-1 && ((numinst%2==0 && i>=numinst-2*cols) || (numinst%2==1 && i>=numinst-2*cols+1))){
             // fade in last page
             [iconObj[0] setAlpha:1.0];
             [iconObj[1] setAlpha:1.0];

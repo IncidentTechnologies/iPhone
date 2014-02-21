@@ -25,6 +25,8 @@
     SampleNode *m_sampNode;
     DelayNode *m_delayNode;
     SamplerNode *m_samplerNode;
+    
+    char * filepath[6];
 }
 
 @end
@@ -53,60 +55,37 @@
         SamplerBankNode * newBank = NULL;
         
         for(int i = 0; i < 6; i++){
+            filepath[i] = (char *)malloc(sizeof(char) * 1024);
+        }
+        
+        for(int i = 0; i < 6; i++){
+            
             m_samplerNode->CreateNewBank(newBank);
             
             // Determine filetype
-            char * filepath;
             if([stringPaths[i] isEqualToString:@"Custom"]){
                 
                 // local sound
-                /*NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                 NSString * path = [paths objectAtIndex:0];
                 NSString * filename = [path stringByAppendingPathComponent:@"Samples"];
                 filename = [filename stringByAppendingPathComponent:stringSet[i]];
                 filename = [filename stringByAppendingString:@".m4a"];
                 
-                filepath = (char *) [filename UTF8String];*/
+                filepath[i] = (char *) [filename UTF8String];
                 
-                filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Violin 1" ofType:@"mp3"] UTF8String];
+                //filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:@"Violin 1" ofType:@"mp3"] UTF8String];
                 
             }else{
-                filepath = (char *)[[[NSBundle mainBundle] pathForResource:stringSet[i] ofType:@"mp3"] UTF8String];
+                
+                filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:stringSet[i] ofType:@"mp3"] UTF8String];
             }
             
+            NSLog(@"Loading sample %s",filepath[i]);
             
-            NSLog(@"Loading sample %s",filepath);
-            
-            m_samplerNode->LoadSampleIntoBank(i, filepath, m_sampNode);
+            m_samplerNode->LoadSampleIntoBank(i, filepath[i], m_sampNode);
             
         }
-        
-        
-        /*
-         
-         
-         NSURL * url;
-         
-         if(m_stringPaths == nil || [m_stringPaths[modNum] isEqualToString:@"Default"]){
-         
-         url = [[NSBundle mainBundle] URLForResource: filename
-         withExtension: @"mp3"];
-         }else{
-         
-         // Use custom URL and secondary (m4a) filetype
-         filename = [filename stringByAppendingString:@".m4a"];
-         
-         NSArray * pathComponents = [NSArray arrayWithObjects:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject], filename, nil];
-         
-         url = [NSURL fileURLWithPathComponents:pathComponents];
-         
-         }
-         
-         
-         //m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
-         m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) url;
-         
-         */
         
         root->ConnectInput(0, m_samplerNode, 0);
         
