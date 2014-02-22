@@ -20,13 +20,15 @@
     AudioController * audioController;
     AudioNode * root;
     
-    WavetableNode *m_wavNode;
-    EnvelopeNode *m_envNode;
+    //WavetableNode *m_wavNode;
+    //EnvelopeNode *m_envNode;
     SampleNode *m_sampNode;
-    DelayNode *m_delayNode;
+    //DelayNode *m_delayNode;
     SamplerNode *m_samplerNode;
     
     char * filepath[6];
+    NSArray * audioStringSet;
+    NSArray * audioStringPaths;
 }
 
 @end
@@ -51,49 +53,64 @@
         audioController = [AudioController sharedAudioController];
         root = [[audioController GetNodeNetwork] GetRootNode];
         
-        m_samplerNode = new SamplerNode();
-        SamplerBankNode * newBank = NULL;
+        audioStringSet = stringSet;
+        audioStringPaths = stringPaths;
         
-        for(int i = 0; i < 6; i++){
-            filepath[i] = (char *)malloc(sizeof(char) * 1024);
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
-        for(int i = 0; i < 6; i++){
+            NSLog(@"Loading files in background");
             
-            m_samplerNode->CreateNewBank(newBank);
+            [self loadStringSetAndStringPaths];
             
-            // Determine filetype
-            if([stringPaths[i] isEqualToString:@"Custom"]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                NSLog(@"Connect input to root");
+                root->ConnectInput(0, m_samplerNode, 0);
                 
-                // local sound
-                NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                NSString * path = [paths objectAtIndex:0];
-                NSString * filename = [path stringByAppendingPathComponent:@"Samples"];
-                filename = [filename stringByAppendingPathComponent:stringSet[i]];
-                filename = [filename stringByAppendingString:@".m4a"];
-                
-                filepath[i] = (char *) [filename UTF8String];
-                
-                //filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:@"Violin 1" ofType:@"mp3"] UTF8String];
-                
-            }else{
-                
-                filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:stringSet[i] ofType:@"mp3"] UTF8String];
-            }
-            
-            NSLog(@"Loading sample %s",filepath[i]);
-            
-            m_samplerNode->LoadSampleIntoBank(i, filepath[i], m_sampNode);
-            
-        }
-        
-        root->ConnectInput(0, m_samplerNode, 0);
-        
-        [audioController startAUGraph];
-        
+                [audioController startAUGraph];
+            });
+
+        });
     }
     
     return self;
+}
+
+- (void)loadStringSetAndStringPaths
+{
+    m_samplerNode = new SamplerNode();
+    SamplerBankNode * newBank = NULL;
+    
+    for(int i = 0; i < 6; i++){
+        filepath[i] = (char *)malloc(sizeof(char) * 1024);
+    }
+    
+    for(int i = 0; i < 6; i++){
+        
+        m_samplerNode->CreateNewBank(newBank);
+        
+        // Determine filetype
+        if([audioStringPaths[i] isEqualToString:@"Custom"]){
+            
+            // local sound
+            NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString * path = [paths objectAtIndex:0];
+            NSString * filename = [path stringByAppendingPathComponent:@"Samples"];
+            filename = [filename stringByAppendingPathComponent:audioStringSet[i]];
+            filename = [filename stringByAppendingString:@".m4a"];
+            
+            filepath[i] = (char *) [filename UTF8String];
+            
+        }else{
+            
+            filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:audioStringSet[i] ofType:@"mp3"] UTF8String];
+        }
+        
+        NSLog(@"Loading sample %s",filepath[i]);
+        
+        m_samplerNode->LoadSampleIntoBank(i, filepath[i], m_sampNode);
+        
+    }
 }
 
 - (void)PluckStringFret:(int)str atFret:(int)fret withAmplitude:(double)amplitude

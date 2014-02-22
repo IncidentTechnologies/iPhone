@@ -167,6 +167,8 @@
 
 - (void)setActiveMeasureIndex:(int)measureIndex forPattern:(int)patternIndex
 {
+    NSLog(@"Set Active Measure Index m:%i, p:%i, i:%@",measureIndex,patternIndex,currentInst);
+    
     Pattern * p = [currentInst.patterns objectAtIndex:patternIndex];
     Measure * m = [p.measures objectAtIndex:measureIndex];
     
@@ -964,6 +966,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scroller
 {
+    targetMeasure = MAX(targetMeasure,0);
     [self snapScrollerToPlace:scroller];
 }
 
@@ -976,6 +979,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scroller willDecelerate:(BOOL)decelerate
 {
     if(!decelerate){
+        targetMeasure = MAX(targetMeasure,0);
         [self snapScrollerToPlace:scroller];
     }
 }
