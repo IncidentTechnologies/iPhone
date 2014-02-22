@@ -230,6 +230,7 @@
     // Determine if there is a queued pattern
     int queuedIndex = [delegate getQueuedPatternIndexForInstrument:currentInst];
     if(queuedIndex >= 0){
+        NSLog(@"Enqueue pattern button for newly added instrument");
         [self enqueuePatternButton:queuedIndex];
     }
     
@@ -734,15 +735,26 @@
     }else{
         
         isMute = NO;
-        if(isPlaying){
+        
+        if(isPlaying && tappedIndex != activePattern){
+            
             NSMutableDictionary * pattern = [NSMutableDictionary dictionary];
             [pattern setObject:[NSNumber numberWithInt:tappedIndex] forKey:@"Index"];
             [pattern setObject:currentInst forKey:@"Instrument"];
             
             [delegate enqueuePattern:pattern];
+            
+        }else if(tappedIndex == activePattern){
+            
+            [delegate dequeueAllPatternsForInstrument:currentInst];
+            
+            [self commitPatternChange:tappedIndex];
         }else{
+            
             [self commitPatternChange:tappedIndex];
         }
+        
+        
     }
     
     currentInst.isMuted = isMute;

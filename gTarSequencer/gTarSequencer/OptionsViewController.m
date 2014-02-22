@@ -23,6 +23,7 @@
 @synthesize loadButton;
 @synthesize loadTable;
 @synthesize selectMode;
+@synthesize noSetsLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,7 +40,8 @@
     UINib *nib = [UINib nibWithNibName:@"OptionsViewCell" bundle:nil];
     [loadTable registerNib:nib forCellReuseIdentifier:@"LoadCell"];
     
-    loadTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    //loadTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    loadTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     loadTable.separatorInset = UIEdgeInsetsZero;
     loadTable.bounces = NO;
     
@@ -69,6 +71,9 @@
     if([fileLoadSet count] > 0){
         [self userDidSelectLoad:loadButton];
         [self highlightActiveSequencer];
+        [self hideNoSetsLabel];
+    }else{
+        [self showNoSetsLabel];
     }
 }
 
@@ -363,8 +368,6 @@
     return cell;
 }
 
-
-
 #pragma mark - Cell editing
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -387,17 +390,12 @@
     OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
     NSString * filename = [cell getNameForFile];
     
-    NSLog(@"File load set was %@",fileLoadSet);
-    
     for(int i = 0; i < [fileLoadSet count]; i++){
         if([[fileLoadSet objectAtIndex:i] isEqualToString:filename]){
             [fileLoadSet removeObjectAtIndex:i];
             [fileDateSet removeObjectAtIndex:i];
         }
     }
-    
-    NSLog(@"File load set is now %@",fileLoadSet);
-    
     
     // delete the data
     [self userDidDeleteFile:filename];
@@ -406,8 +404,13 @@
     [loadTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
     [loadTable reloadData];
-}
 
+    if([fileLoadSet count] == 0){
+        // schedule this because the table loading inevitably has a delay
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(showNoSetsLabel) userInfo:nil repeats:NO];
+    }
+    
+}
 
 #pragma mark - Custom logic for cell display
 
@@ -463,7 +466,6 @@
         }
     }
 }
-
 
 #pragma mark - Select actions
 -(void)delayedSelectLoadTableTopRow
@@ -543,6 +545,21 @@
     
     return NO;
 }
+
+#pragma mark - Empty set
+
+- (void)showNoSetsLabel
+{
+    [noSetsLabel setHidden:NO];
+    [noSetsLabel setAlpha:0.0];
+    [UIView animateWithDuration:0.5 animations:^(void){[noSetsLabel setAlpha:1.0];}];
+}
+
+- (void)hideNoSetsLabel
+{
+    [noSetsLabel setHidden:YES];
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -9,6 +9,7 @@
                 <outlet property="createNewButton" destination="TWl-FN-uMc" id="NRg-kz-hYV"/>
                 <outlet property="loadButton" destination="llB-ay-7dV" id="uXO-tA-aPO"/>
                 <outlet property="loadTable" destination="fnS-0x-ggp" id="9Sb-3t-0vH"/>
+                <outlet property="noSetsLabel" destination="oVT-z7-iuX" id="dNE-Es-KFG"/>
                 <outlet property="renameButton" destination="e8r-7T-odk" id="Ocq-e9-4te"/>
                 <outlet property="saveCurrentButton" destination="oRj-AQ-P9U" id="EWR-U6-CDL"/>
                 <outlet property="view" destination="1" id="D7F-KJ-coZ"/>
@@ -94,6 +95,13 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No saved sets." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVT-z7-iuX">
+                    <rect key="frame" x="183" y="149" width="114" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

@@ -599,6 +599,7 @@
 
 - (void)enqueuePattern:(NSMutableDictionary *)pattern
 {
+    NSLog(@"Enqueue a new pattern");
     // For now, clear all the queued patterns for the active instrument
     [self removeQueuedPatternForInstrumentAtIndex:[seqSetViewController getCurrentInstrument].instrument];
     

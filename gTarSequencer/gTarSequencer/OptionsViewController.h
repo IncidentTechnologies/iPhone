@@ -61,7 +61,7 @@
 @property (weak, nonatomic) IBOutlet UIButton * saveCurrentButton;
 @property (weak, nonatomic) IBOutlet UIButton * renameButton;
 @property (weak, nonatomic) IBOutlet UIButton * loadButton;
-
+@property (weak, nonatomic) IBOutlet UILabel * noSetsLabel;
 @property (weak, nonatomic) IBOutlet UITableView * loadTable;
 @property (nonatomic) NSString * selectMode;
 

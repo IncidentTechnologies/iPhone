@@ -401,6 +401,7 @@
     if(![cell hasQueuedPatternButton]){
         int queuedIndex = [delegate getQueuedPatternIndexForInstrument:cell.instrument];
         if(queuedIndex >= 0){
+            NSLog(@"Auto enqueuing a pattern button");
             [cell enqueuePatternButton:queuedIndex];
         }
     }
@@ -843,7 +844,8 @@
     
     Instrument * tempInst = [instruments objectAtIndex:senderIndex];
     
-    if ([delegate checkIsPlaying]){
+    // double check this isn't the current pattern
+    if ([delegate checkIsPlaying] && tempInst.selectedPatternIndex != index){
         
         // Add it to the queue:
         NSMutableDictionary * pattern = [NSMutableDictionary dictionary];
@@ -855,12 +857,15 @@
         
         return YES;
         
-    } else {
+    } else if (tempInst.selectedPatternIndex == index){
         
-        [self commitSelectingPatternAtIndex:index forInstrument:tempInst];
+        [self dequeueAllPatternsForInstrument:sender];
         
-        return NO;
     }
+    
+    [self commitSelectingPatternAtIndex:index forInstrument:tempInst];
+    
+    return NO;
 }
 
 - (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst
