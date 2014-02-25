@@ -1317,10 +1317,6 @@
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"sampleList" ofType:@"plist"];
     
-    // Check for local custom sample list
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    customSampleListPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"customSampleList.plist"];
-    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if ([fileManager fileExistsAtPath:path]) {
@@ -1331,16 +1327,19 @@
     
     NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
-    // Append a second local custom sounds pList
+    // Check for local custom sample list
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    customSampleListPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"customSampleList.plist"];
+    
+    // Append a second local custom sounds pList to the regular sample list
     if ([fileManager fileExistsAtPath:customSampleListPath]) {
         NSLog(@"The custom sample plist exists");
         NSMutableDictionary * customDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:customSampleListPath];
-        [plistDictionary addEntriesFromDictionary:customDictionary];
         
         [customSampleList addObjectsFromArray:[customDictionary objectForKey:@"Samples"]];
         
         // First section of the sampleList is the customSampleList
-        sampleList = customSampleList;
+        [sampleList addObjectsFromArray:customSampleList];
         [sampleList addObjectsFromArray:[plistDictionary objectForKey:@"Samples"]];
         
         
@@ -1348,7 +1347,6 @@
         NSLog(@"The custom sample plist does not exist");
         
         sampleList = [plistDictionary objectForKey:@"Samples"];
-        
         customSampleList = nil;
 
     }
@@ -1368,15 +1366,22 @@
         
         NSMutableDictionary * sampleDictionary = [[NSMutableDictionary alloc] initWithObjects:objects forKeys:keys];
         customSampleList = [[NSMutableArray alloc] initWithObjects:sampleDictionary, nil];
+        
+        NSArray * tempSampleList = [[NSArray alloc] initWithArray:sampleList];
+        [sampleList removeAllObjects];
+        [sampleList addObjectsFromArray:customSampleList];
+        [sampleList addObjectsFromArray:tempSampleList];
+        
+        NSLog(@"tempSampleList is %@",tempSampleList);
+        NSLog(@"Sample list is %@",sampleList);
+        NSLog(@"Custom sample list is %@",customSampleList);
     
     }else{
-        [[customSampleList[0] objectForKey:@"Sampleset"] addObject:filename];
+        // Beware, this also adds the filename to sampleList
+        [[[customSampleList objectAtIndex:0] objectForKey:@"Sampleset"] addObject:filename];
+        //[[[sampleList objectAtIndex:0] objectForKey:@"Sampleset"] addObject:filename];
+        
     }
-    
-    // First section of the sampleList is the customSampleList
-    NSArray * tempSampleList = sampleList;
-    sampleList = customSampleList;
-    [sampleList addObjectsFromArray:tempSampleList];
 
     [self saveCustomSampleList];
 }

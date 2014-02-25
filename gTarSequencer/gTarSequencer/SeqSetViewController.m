@@ -56,26 +56,35 @@
 - (void)retrieveInstrumentOptions
 {
     
-    sequencerInstrumentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    sequencerInstrumentsPath = [sequencerInstrumentsPath stringByAppendingPathComponent:@"sequencerInstruments.plist"];
-    
-    NSLog(@"Retrieve instrument options from path %@",sequencerInstrumentsPath);
-    
-    // If the file doesn't exist in the Documents Folder, copy it.
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if (![fileManager fileExistsAtPath:sequencerInstrumentsPath]) {
-        NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"sequencerInstruments" ofType:@"plist"];
-        [fileManager copyItemAtPath:sourcePath toPath:sequencerInstrumentsPath error:nil];
-        
-        NSLog(@"The sequencer instrument plist does not exist in document path");
-    }else{
-        NSLog(@"The sequencer instrument plist already exists in document path");
-    }
+    // Init
+    customInstrumentOptions = [[NSMutableArray alloc] init];
+    masterInstrumentOptions = [[NSMutableArray alloc] init];
+    sequencerInstrumentsPath = [[NSBundle mainBundle] pathForResource:@"sequencerInstruments" ofType:@"plist"];
     
     NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:sequencerInstrumentsPath];
     
-    masterInstrumentOptions = [plistDictionary objectForKey:@"Instruments"];
+    // Check for the local custom instrument list
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    customInstrumentsPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"customSequencerInstruments.plist"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    // If it exists append it to the regular list
+    if([fileManager fileExistsAtPath:customInstrumentsPath]){
+        NSLog(@"The custom instruments plist exists");
+        
+        NSMutableDictionary * customDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:customInstrumentsPath];
+        
+        [customInstrumentOptions addObjectsFromArray:[customDictionary objectForKey:@"Instruments"]];
+        
+        [masterInstrumentOptions addObjectsFromArray:[plistDictionary objectForKey:@"Instruments"]];
+        [masterInstrumentOptions addObjectsFromArray:customInstrumentOptions];
+        
+        
+    }else{
+        NSLog(@"The custom instruments plist does not exist");
+        masterInstrumentOptions = [plistDictionary objectForKey:@"Instruments"];
+    }
 
     [self setRemainingInstrumentOptionsFromMasterOptions];
  
@@ -554,13 +563,31 @@
     if(indexSelected >= 0){
         
         // Remove that instrument from the array:
+        NSDictionary * instOption = [remainingInstrumentOptions objectAtIndex:indexSelected];
+        NSNumber * instIndex = [instOption objectForKey:@"Index"];
+        
+        NSLog(@"Remove instrument at selected index %i",indexSelected);
+        
         [remainingInstrumentOptions removeObjectAtIndex:indexSelected];
-        [masterInstrumentOptions removeObjectAtIndex:indexSelected];
+
+        for(int i = 0; i < [masterInstrumentOptions count]; i++){
+            NSDictionary * dict = [masterInstrumentOptions objectAtIndex:i];
+            if([dict objectForKey:@"Index"] == instIndex){
+                [masterInstrumentOptions removeObjectAtIndex:i];
+            }
+        }
+        
+        for(int i = 0; i < [customInstrumentOptions count]; i++){
+            NSDictionary * dict = [customInstrumentOptions objectAtIndex:i];
+            if([dict objectForKey:@"Index"] == instIndex){
+                [customInstrumentOptions removeObjectAtIndex:i];
+            }
+        }
         
         instrumentSelector.options = remainingInstrumentOptions;
         
         // Resave pList
-        [self saveCustomInstrumentToPlist:masterInstrumentOptions];
+        [self saveCustomInstrumentToPlist:customInstrumentOptions];
     
     }
 }
@@ -633,8 +660,7 @@
 // save a new instrument
 - (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths
 {
-    
-    NSNumber * newIndex = [NSNumber numberWithInt:[masterInstrumentOptions count]];
+    NSNumber * newIndex = [NSNumber numberWithInt:[self getCustomInstrumentsNewIndex]];
 
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
     [dict setValue:[NSNumber numberWithBool:TRUE] forKey:@"Custom"];
@@ -646,9 +672,21 @@
     
     [masterInstrumentOptions addObject:dict];
     [remainingInstrumentOptions addObject:dict];
+    [customInstrumentOptions addObject:dict];
     
-    [self saveCustomInstrumentToPlist:masterInstrumentOptions];
+    [self saveCustomInstrumentToPlist:customInstrumentOptions];
     [self closeCustomInstrumentSelectorAndScroll:YES];
+}
+
+- (int)getCustomInstrumentsNewIndex
+{
+    
+    if([customInstrumentOptions count] > 0){
+        NSMutableDictionary * lastInst = [customInstrumentOptions lastObject];
+        return [[lastInst objectForKey:@"Index"] intValue]+1;
+    }else{
+        return [masterInstrumentOptions count];
+    }
 }
 
 - (void)saveCustomInstrumentToPlist:(NSArray *)options
@@ -657,7 +695,7 @@
     NSMutableDictionary * wrapperDict = [[NSMutableDictionary alloc] init];
     [wrapperDict setValue:options forKey:@"Instruments"];
     
-    [wrapperDict writeToFile:sequencerInstrumentsPath atomically:YES];
+    [wrapperDict writeToFile:customInstrumentsPath atomically:YES];
 }
 
 

@@ -47,6 +47,7 @@
     
     NSMutableArray * masterInstrumentOptions;
     NSMutableArray * remainingInstrumentOptions;
+    NSMutableArray * customInstrumentOptions;
     
     ScrollingSelector * instrumentSelector;
     CGRect onScreenSelectorFrame;
@@ -57,6 +58,7 @@
     CGRect offLeftCustomSelectorFrame;
     
     NSString * sequencerInstrumentsPath;
+    NSString * customInstrumentsPath;
     
     BOOL canEdit;
     
