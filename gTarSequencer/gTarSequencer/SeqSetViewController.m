@@ -32,7 +32,7 @@
         
         instruments = [[NSMutableArray alloc] init];
         
-        self.tableView.bounces = NO;
+        self.tableView.bounces = YES;
 
     }
     return self;

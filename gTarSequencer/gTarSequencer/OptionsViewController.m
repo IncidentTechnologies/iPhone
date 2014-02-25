@@ -357,7 +357,7 @@
     }else{
         
         // Row for new file
-        cell.fileText.text = @"New set";
+        cell.fileText.text = @"New Set";
         cell.fileDate.text = @"0s";
         cell.isRenamable = YES;
         

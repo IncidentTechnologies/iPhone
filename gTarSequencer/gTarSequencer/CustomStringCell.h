@@ -25,6 +25,8 @@
 @property (nonatomic) int index;
 @property (weak, nonatomic) IBOutlet UIButton * stringBox;
 @property (weak, nonatomic) IBOutlet UILabel * stringLabel;
+@property (weak, nonatomic) IBOutlet UIImageView * stringImage;
 @property (nonatomic) BOOL useCustomPath;
+@property (nonatomic) UIColor * stringColor;
 
 @end

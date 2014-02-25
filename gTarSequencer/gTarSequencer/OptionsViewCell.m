@@ -9,6 +9,8 @@
 #import "OptionsViewCell.h"
 #import "OptionsViewController.h"
 
+#define FILENAME_DEFAULT_TEXT @"New Set"
+
 @implementation OptionsViewCell
 
 @synthesize parent;
@@ -124,12 +126,6 @@
             
             fileName.text = fileText.text;
             
-            // create attributed string
-            NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:fileName.text];
-            [str addAttribute:NSBackgroundColorAttributeName value:blueColor range:NSMakeRange(0, fileName.text.length)];
-            
-            [fileName setAttributedText:str];
-            
             [fileText setHidden:YES];
             [fileName setHidden:NO];
             
@@ -224,15 +220,37 @@
 #pragma mark - Save Field
 - (void)saveFieldStartEdit:(id)sender
 {
-    
     // hide default
-    NSString * defaultText = @"New set";
+    NSString * defaultText = FILENAME_DEFAULT_TEXT;
+ 
+    previousNameText = fileName.text;
     
     if([fileName.text isEqualToString:defaultText]){
         fileName.text = @"";
+    }else{
+        [self initFileAttributedString];
     }
     
     [self checkIfNameReady];
+}
+
+- (void)initFileAttributedString
+{
+    // create attributed string
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:fileName.text];
+    [str addAttribute:NSBackgroundColorAttributeName value:blueColor range:NSMakeRange(0, fileName.text.length)];
+    
+    [fileName setAttributedText:str];
+}
+
+- (void)clearFileAttributedString
+{
+    
+    // create attributed string
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:fileName.text];
+    [str addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:NSMakeRange(0, fileName.text.length)];
+    
+    [fileName setAttributedText:str];
 }
 
 - (void)saveFieldDidChange:(id)sender
@@ -242,6 +260,8 @@
     // check length
     if([fileName.text length] > maxLength){
         fileName.text = [fileName.text substringToIndex:maxLength];
+    }else if([fileName.text length] == 1){
+        [self initFileAttributedString];
     }
     
     // enforce capitalizing
@@ -254,6 +274,7 @@
 {
     // hide keyboard
     [self endNameEditing];
+    [self clearFileAttributedString];
 }
 
 - (void)beginNameEditing
@@ -281,6 +302,21 @@
         [parent enableScroll];
         [parent resetTableOffset:self];    
     }
+    
+    [self resetFileNameIfBlank];
+}
+
+-(void)resetFileNameIfBlank
+{
+    
+    NSString * nameString = fileName.text;
+    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if([emptyName isEqualToString:@""] && previousNameText != nil && ![previousNameText isEqualToString:@""]){
+        fileName.text = previousNameText;
+    }else if([emptyName isEqualToString:@""]){
+        fileName.text = FILENAME_DEFAULT_TEXT;
+    }
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -301,7 +337,7 @@
      NSString * nameString = fileName.text;
      NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
      
-     if([emptyName isEqualToString:@""]){
+     if([emptyName isEqualToString:@""] || [nameString isEqualToString:FILENAME_DEFAULT_TEXT]){
          isReady = NO;
      }else{
          isReady = YES;

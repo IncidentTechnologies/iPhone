@@ -27,6 +27,8 @@
 - (void)startRecord;
 - (void)stopRecord;
 - (void)startPlayback;
+- (void)pausePlayback;
+- (void)unpausePlayback;
 - (void)renameRecordingToFilename:(NSString *)filename;
 
 @property (weak, nonatomic) id<CustomSoundDelegate> delegate;

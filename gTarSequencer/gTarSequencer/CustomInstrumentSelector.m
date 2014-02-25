@@ -12,6 +12,18 @@
 #define MAX_RECORD_SECONDS 5
 #define RECORD_DRAW_INTERVAL 0.01
 
+#define VIEW_CUSTOM_INST 0
+#define VIEW_CUSTOM_NAME 1
+#define VIEW_CUSTOM_RECORD 2
+
+#define RECORD_STATE_OFF 0
+#define RECORD_STATE_RECORDING 1
+#define RECORD_STATE_RECORDED 2
+#define RECORD_STATE_PLAYING 3
+
+#define RECORD_DEFAULT_TEXT @"New Recording"
+#define INST_NAME_DEFAULT_TEXT @"NAME"
+
 @implementation CustomInstrumentSelector
 
 @synthesize viewFrame;
@@ -22,15 +34,18 @@
 @synthesize delegate;
 @synthesize audio;
 @synthesize nextButton;
+@synthesize nextButtonArrow;
 @synthesize recordButton;
+@synthesize recordCircle;
 @synthesize saveButton;
 @synthesize backButton;
 @synthesize nameField;
 @synthesize customIcon;
-@synthesize recordBackButton;
+//@synthesize recordBackButton;
 @synthesize recordClearButton;
 @synthesize recordRecordButton;
 @synthesize recordSaveButton;
+@synthesize recordActionView;
 @synthesize progressBarContainer;
 @synthesize progressBar;
 @synthesize playBar;
@@ -50,19 +65,19 @@
     if (self) {
         
         // Black out the rest of the screen:
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         
         // Cancel button
         [self drawCancelButtonWithX:x];
         
         // Init string colours
         colorList = [NSArray arrayWithObjects:
-                     [UIColor colorWithRed:216/255.0 green:64/255.0 blue:64/255.0 alpha:1.0],
-                     [UIColor colorWithRed:238/255.0 green:129/255.0 blue:13/255.0 alpha:1.0],
-                     [UIColor colorWithRed:245/255.0 green:214/255.0 blue:9/255.0 alpha:1.0],
-                     [UIColor colorWithRed:19/255.0 green:133/255.0 blue:4/255.0 alpha:1.0],
-                     [UIColor colorWithRed:9/255.0 green:109/255.0 blue:245/255.0 alpha:1.0],
-                     [UIColor colorWithRed:150/255.0 green:12/255.0 blue:238/255.0 alpha:1.0],
+                     [UIColor colorWithRed:238/255.0 green:28/255.0 blue:36/255.0 alpha:1.0],
+                     [UIColor colorWithRed:234/255.0 green:154/255.0 blue:0/255.0 alpha:1.0],
+                     [UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0],
+                     [UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0],
+                     [UIColor colorWithRed:30/255.0 green:108/255.0 blue:213/255.0 alpha:1.0],
+                     [UIColor colorWithRed:170/255.0 green:114/255.0 blue:233/255.0 alpha:1.0],
                      nil];
     
         viewFrame = frame;
@@ -77,7 +92,7 @@
 {
     
     // draw main window
-    [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:viewFrame andRemove:nil];
+    [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:viewFrame andRemove:nil forViewState:VIEW_CUSTOM_INST];
     [self initSubtables];
     
 }
@@ -85,14 +100,15 @@
 - (void)userDidBack:(id)sender
 {
     // Back from Save screen
-    if(sender == backButton){
+    if(viewState == VIEW_CUSTOM_NAME){
         // remember instrument name
         instName = nameField.text;
     }
     // Otherwise Back from Record screen
         
     CGRect newFrame = backgroundView.frame;
-    [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:newFrame andRemove:backgroundView];
+    [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:newFrame andRemove:backgroundView forViewState:VIEW_CUSTOM_INST];
+    viewState = VIEW_CUSTOM_INST;
     
     [self initSubtables];
     
@@ -100,13 +116,13 @@
 }
 
 // fit any nib to window
--(void)setBackgroundViewFromNib:(NSString *)nibName withFrame:(CGRect)frame andRemove:(UIView *)removeView
+-(void)setBackgroundViewFromNib:(NSString *)nibName withFrame:(CGRect)frame andRemove:(UIView *)removeView forViewState:(int)newViewState
 {
-    
     NSArray * nibViews = [[NSBundle mainBundle] loadNibNamed:nibName owner:self options:nil];
     backgroundView = nibViews[0];
     backgroundView.frame = frame;
-    backgroundView.layer.cornerRadius = 5.0;
+    
+    viewState = newViewState;
     
     if(removeView){
         
@@ -161,18 +177,48 @@
 
 - (void)drawCancelButtonWithX:(float)x
 {
-    CGFloat cancelWidth = 50;
+    CGFloat cancelWidth = 35;
     CGFloat cancelHeight = 50;
     CGFloat inset = 5;
     CGRect cancelFrame = CGRectMake(x - inset - cancelWidth, 0, cancelWidth, cancelHeight);
     cancelButton = [[UIButton alloc] initWithFrame:cancelFrame];
-    [cancelButton setTitle:@"X" forState:UIControlStateNormal];
-    [cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8] forState:UIControlStateNormal];
-    [cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateHighlighted];
-    cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:30.0];
+    //[cancelButton setTitle:@"X" forState:UIControlStateNormal];
+    //[cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8] forState:UIControlStateNormal];
+    //[cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateHighlighted];
+    //cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:30.0];
     
     [cancelButton addTarget:self action:@selector(userDidCancel:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview: cancelButton];
+    
+    CGSize size = CGSizeMake(cancelButton.frame.size.width, cancelButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 20;
+    int playX = cancelButton.frame.size.width-playWidth/2-5;
+    int playY = 10;
+    CGFloat playHeight = cancelButton.frame.size.height - 2*playY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
+    CGContextClosePath(context);
+    
+    CGContextFillPath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [cancelButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
+    
     
 }
 
@@ -195,12 +241,10 @@
     
     // Load nib
     CGRect newFrame = backgroundView.frame;
-    [self setBackgroundViewFromNib:@"CustomInstrumentNamer" withFrame:newFrame andRemove:backgroundView];
-    
-    saveButton.layer.cornerRadius = 5.0;
-    backButton.layer.cornerRadius = 5.0;
+    [self setBackgroundViewFromNib:@"CustomInstrumentNamer" withFrame:newFrame andRemove:backgroundView forViewState:VIEW_CUSTOM_NAME];
     
     [backButton addTarget:self action:@selector(userDidBack:) forControlEvents:UIControlEventTouchUpInside];
+    [self drawBackButtonArrow];
     
     // Draw icon
     CGRect imageFrame = CGRectMake(10, 10, customIcon.frame.size.width - 20, customIcon.frame.size.height - 20);
@@ -214,7 +258,6 @@
     [button setBackgroundColor:[UIColor clearColor]];
     
     [button setImage:[UIImage imageNamed:@"Icon_Custom"] forState:UIControlStateNormal];
-    //[button setImage:[UIImage imageNamed:@"Icon_Custom"] forState:UIControlStateHighlighted];
     
     [customIcon addSubview:button];
     
@@ -242,26 +285,31 @@
 
 - (void)userDidCancel:(id)sender
 {
-    
     // make sure keyboard is hidden
     [nameField resignFirstResponder];
     
-    [delegate closeCustomInstrumentSelectorAndScroll:NO];
+    if(viewState == VIEW_CUSTOM_RECORD){
+        [self userDidBack:sender];
+    }else{
+        [delegate closeCustomInstrumentSelectorAndScroll:NO];
+    }
 }
 
 - (void)initSubtables
 {
     
-    [sampleTable setBackgroundColor:[UIColor colorWithRed:8/255.0 green:135/255.0 blue:166/255.0 alpha:1.0]];
-    sampleTable.layer.cornerRadius = 5.0;
+    // Left sample table
+    [sampleTable setBackgroundColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0]];
     
-    [stringTable setBackgroundColor:[UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1.0]];
-    nextButton.layer.cornerRadius = 5.0;
-
-    // Fade next button
+    // Right string table
+    [stringTable setBackgroundColor:[UIColor colorWithRed:81/255.0 green:81/255.0 blue:81/255.0 alpha:1.0]];
+    
+    // Next Button
+    [self drawNextButtonArrow];
     [self checkIfAllStringsReady];
     
     // Record button
+    [self drawRecordCircle];
     [self showHideButton:recordButton isHidden:NO withSelector:@selector(userDidLaunchRecord:)];
     
 }
@@ -271,7 +319,7 @@
     backgroundView.frame = newFrame;
 }
 
-#pragma mark - Name Field / Recording Name Field
+#pragma mark - Name Field
 - (void)nameFieldStartEdit:(id)sender
 {
     float frameOffset = 35.0;
@@ -289,7 +337,7 @@
     }];
     
     // hide default
-    NSString * defaultText = @"NAME";
+    NSString * defaultText = INST_NAME_DEFAULT_TEXT;
     
     if([nameField.text isEqualToString:defaultText]){
         nameField.text = @"";
@@ -329,16 +377,53 @@
     
     // hide keyboard
     [nameField resignFirstResponder];
+    
+    [self resetNameFieldIfBlank];
 }
 
+
+-(void)resetNameFieldIfBlank
+{
+    NSString * nameString = nameField.text;
+    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if([emptyName isEqualToString:@""]){
+        nameField.text = INST_NAME_DEFAULT_TEXT;
+    }
+}
+
+
+#pragma mark - Recording Name Field
 - (void)recordingNameFieldStartEdit:(id)sender
 {
     // hide default
-    NSString * defaultText = @"New Recording";
+    NSString * defaultText = RECORD_DEFAULT_TEXT;
     
     if([recordingNameField.text isEqualToString:defaultText]){
         recordingNameField.text = @"";
+    }else{
+        [self initRecordingNameAttributedString];
     }
+    
+}
+
+- (void)initRecordingNameAttributedString
+{
+    
+    // Create attributed
+    UIColor * blueColor = [UIColor colorWithRed:0/255.0 green:161/266.0 blue:222/255.0 alpha:1.0];
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:recordingNameField.text];
+    [str addAttribute:NSBackgroundColorAttributeName value:blueColor range:NSMakeRange(0, recordingNameField.text.length)];
+    
+    [recordingNameField setAttributedText:str];
+}
+
+- (void)clearRecordingNameAttributedString
+{
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:recordingNameField.text];
+    [str addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:NSMakeRange(0, recordingNameField.text.length)];
+    
+    [recordingNameField setAttributedText:str];
 }
 
 - (void)recordingNameFieldDidChange:(id)sender
@@ -347,6 +432,8 @@
     
     if([recordingNameField.text length] > maxLength){
         recordingNameField.text = [recordingNameField.text substringToIndex:maxLength];
+    }else if([recordingNameField.text length] == 1){
+        [self initRecordingNameAttributedString];
     }
     
     // enforce capitalizing
@@ -362,7 +449,28 @@
     [nameField resignFirstResponder];
     
     [self checkIfRecordingNameReady];
+    
+    if(!isRecordingNameReady){
+        [self resetRecordingNameIfBlank];
+    }
+    
+    // hide styles
+    [self clearRecordingNameAttributedString];
+    
 }
+
+-(void)resetRecordingNameIfBlank
+{
+    NSString * nameString = recordingNameField.text;
+    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if([emptyName isEqualToString:@""]){
+        recordingNameField.text = RECORD_DEFAULT_TEXT;
+    }
+}
+
+
+#pragma mark - Name Field Shared
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -395,10 +503,11 @@
     
     // Load record frame
     CGRect newFrame = backgroundView.frame;
-    [self setBackgroundViewFromNib:@"CustomInstrumentRecorder" withFrame:newFrame andRemove:backgroundView];
+    [self setBackgroundViewFromNib:@"CustomInstrumentRecorder" withFrame:newFrame andRemove:backgroundView forViewState:VIEW_CUSTOM_RECORD];
 
     // Load active buttons
-    [self showHideButton:recordBackButton isHidden:NO withSelector:@selector(userDidBack:)];
+    [self drawRecordActionButton];
+    [self changeRecordState:RECORD_STATE_OFF];
     [self showHideButton:recordClearButton isHidden:NO withSelector:@selector(userDidClearRecord)];
     [self showHideButton:recordRecordButton isHidden:NO withSelector:@selector(userDidTapRecord:)];
     
@@ -410,6 +519,7 @@
     recordingNameField.delegate = self;
     isRecordingNameReady = FALSE;
     
+    
     // Clear any previous recording
     [self userDidClearRecord];
     
@@ -420,15 +530,14 @@
 {
     NSLog(@"Clear recording");
     
-    recordState = 0;
-    [recordRecordButton setTitle:@"RECORD" forState:UIControlStateNormal];
+    [self changeRecordState:RECORD_STATE_OFF];
     
     [self resetProgressBar];
     [self resetPlayBar];
     
     // Disable save
     isRecordingReady = FALSE;
-    [self showHideButton:recordSaveButton isHidden:YES withSelector:@selector(userDidSaveRecord:)];
+    [self checkIfRecordSaveReady];
 }
 
 -(void)userDidEndRecord
@@ -445,8 +554,7 @@
     [customSoundRecorder stopRecord];
     
     // Reset button
-    [recordRecordButton setTitle:@"PLAY" forState:UIControlStateNormal];
-    recordState = 2;
+    [self changeRecordState:RECORD_STATE_RECORDED];
     
     // Enable save
     isRecordingReady = TRUE;
@@ -459,9 +567,11 @@
     if(isRecordingNameReady && isRecordingReady){
         NSLog(@"Showing save");
         [self showHideButton:recordSaveButton isHidden:NO withSelector:@selector(userDidSaveRecord:)];
+        recordSaveButton.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
     }else{
         NSLog(@"Hiding save");
         [self showHideButton:recordSaveButton isHidden:YES withSelector:@selector(userDidSaveRecord:)];
+        recordSaveButton.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3];
     }
 }
 
@@ -470,7 +580,7 @@
     NSString * nameString = recordingNameField.text;
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if([nameString isEqualToString:@"New Recording"] || [emptyName isEqualToString:@""]){
+    if([nameString isEqualToString:RECORD_DEFAULT_TEXT] || [emptyName isEqualToString:@""]){
         isRecordingNameReady = FALSE;
     }else{
         isRecordingNameReady = TRUE;
@@ -483,10 +593,12 @@
 -(void)userDidStartRecord
 {
     
+    // Double check
+    [self userDidEndRecord];
+    
     // Start record
     [customSoundRecorder startRecord];
-    [recordRecordButton setTitle:@"STOP" forState:UIControlStateNormal];
-    recordState = 1;
+    [self changeRecordState:RECORD_STATE_RECORDING];
     
     // Schedule end of session
     recordTimer = [NSTimer scheduledTimerWithTimeInterval:MAX_RECORD_SECONDS target:self selector:@selector(userDidEndRecord) userInfo:nil repeats:NO];
@@ -497,6 +609,109 @@
     // Draw progress bar
     progressBarTimer = [NSTimer scheduledTimerWithTimeInterval:RECORD_DRAW_INTERVAL target:self selector:@selector(advanceProgressBar) userInfo:nil repeats:YES];
     
+}
+
+- (void)changeRecordState:(int)newState
+{
+    recordState = newState;
+    
+    CGSize size;
+    CGContextRef context;
+    UIImage * newImage;
+    
+    switch(recordState){
+        case RECORD_STATE_OFF:
+            // RECORD BUTTON
+            [recordRecordButton setBackgroundColor:[UIColor colorWithRed:235/255.0 green:33/255.0 blue:46/255.0 alpha:1.0]];
+            [recordActionView setBackgroundColor:[UIColor whiteColor]];
+            recordActionView.layer.cornerRadius = 10.0;
+            [recordActionView setImage:nil];
+            break;
+        case RECORD_STATE_RECORDING:
+            // STOP BUTTON
+            [recordRecordButton setBackgroundColor:[UIColor colorWithRed:235/255.0 green:33/255.0 blue:46/255.0 alpha:1.0]];
+            [recordActionView setBackgroundColor:[UIColor whiteColor]];
+            recordActionView.layer.cornerRadius = 0.0;
+            [recordActionView setImage:nil];
+            break;
+        case RECORD_STATE_PLAYING:
+            // PAUSE BUTTON
+            [recordRecordButton setBackgroundColor:[UIColor colorWithRed:244/255.0 green:151/255.0 blue:39/255.0 alpha:1.0]];
+            [recordActionView setBackgroundColor:[UIColor clearColor]];
+            recordActionView.layer.cornerRadius = 0.0;
+            
+            // draw pause button
+            size = CGSizeMake(recordActionView.frame.size.width, recordActionView.frame.size.height);
+            UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+            
+            CGContextRef context = UIGraphicsGetCurrentContext();
+            
+            int pauseWidth = 7;
+            
+            CGFloat pauseHeight = 20;
+            CGRect pauseFrameLeft = CGRectMake(recordActionView.frame.size.width/2 - pauseWidth - 2, 0, pauseWidth, pauseHeight);
+            CGRect pauseFrameRight = CGRectMake(pauseFrameLeft.origin.x+pauseWidth+3, 0, pauseWidth, pauseHeight);
+            
+            CGContextAddRect(context,pauseFrameLeft);
+            CGContextAddRect(context,pauseFrameRight);
+            CGContextSetFillColorWithColor(context,[UIColor whiteColor].CGColor);
+            CGContextFillRect(context,pauseFrameLeft);
+            CGContextFillRect(context,pauseFrameRight);
+            
+            newImage = UIGraphicsGetImageFromCurrentImageContext();
+            
+            [recordActionView setImage:newImage];
+            
+            UIGraphicsEndImageContext();
+            
+            break;
+            
+        case RECORD_STATE_RECORDED:
+            // PLAY BUTTON;
+            [recordRecordButton setBackgroundColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1.0]];
+            [recordActionView setBackgroundColor:[UIColor clearColor]];
+            recordActionView.layer.cornerRadius = 0.0;
+
+            size = CGSizeMake(recordActionView.frame.size.width, recordActionView.frame.size.height);
+            UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+            
+            context = UIGraphicsGetCurrentContext();
+            
+            int playWidth = 15;
+            int playX = (recordActionView.frame.size.width-playWidth)/2;
+            int playY = 0;
+            CGFloat playHeight = 20;
+            
+            CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+            CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+            
+            CGContextSetLineWidth(context, 2.0);
+            
+            CGContextMoveToPoint(context, playX, playY);
+            CGContextAddLineToPoint(context, playX, playY+playHeight);
+            CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
+            CGContextClosePath(context);
+            
+            CGContextFillPath(context);
+            
+            newImage = UIGraphicsGetImageFromCurrentImageContext();
+            [recordActionView setImage:newImage];
+            
+            UIGraphicsEndImageContext();
+            
+            break;
+    }
+}
+
+-(void)drawRecordActionButton
+{
+    int recordActionWidth = 20;
+    int recordActionHeight = 20;
+    CGRect recordActionButtonFrame = CGRectMake(recordRecordButton.frame.size.width/2-recordActionWidth/2, recordRecordButton.frame.size.height/2-recordActionHeight/2, recordActionWidth, recordActionHeight);
+    
+    recordActionView = [[UIImageView alloc] initWithFrame:recordActionButtonFrame];
+    
+    [recordRecordButton addSubview:recordActionView];
 }
 
 -(void)userDidTapRecord:(id)sender
@@ -513,6 +728,10 @@
             
         case 2: // recorded -> playback
             [self userDidStartPlayback];
+            break;
+            
+        case 3: // playing -> pause
+            [self userDidPausePlayback];
             break;
     }
 }
@@ -536,27 +755,73 @@
 
 -(void)playbackDidEnd
 {
+    // Make sure playbar goes all the way
+    [self animatePlayBarToEnd];
+    
+    // Change the state
+    [self changeRecordState:RECORD_STATE_RECORDED];
+    [self playbackTimerReset];
+    [self playResetTimerReset];
+    isPaused = NO;
+}
+
+-(void)playbackTimerReset
+{
     [playBarTimer invalidate];
     playBarTimer = nil;
+}
+
+-(void)playResetTimerReset
+{
+    [playResetTimer invalidate];
+    playResetTimer = nil;
 }
 
 -(void)userDidStartPlayback
 {
-    [self resetPlayBar];
+    if(!isPaused){
+        [self resetPlayBar];
+        
+        // Call sound playback
+        [customSoundRecorder startPlayback];
+        
+        // Draw play bar
+        [self playbackTimerReset];
+        playBarTimer = [NSTimer scheduledTimerWithTimeInterval:RECORD_DRAW_INTERVAL target:self selector:@selector(advancePlayBar) userInfo:nil repeats:YES];
+        
+    }else{
+        
+        // Resume playback
+        [customSoundRecorder unpausePlayback];
+        isPaused = NO;
+        
+    }
     
-    // Call sound playback
-    [customSoundRecorder startPlayback];
+    // Change the state
+    [self changeRecordState:RECORD_STATE_PLAYING];
     
-    // Reset timer
-    [playBarTimer invalidate];
-    playBarTimer = nil;
+    // Add a timeout to ensure recording finished acknowledged
+    [self playResetTimerReset];
+    playResetTimer = [NSTimer scheduledTimerWithTimeInterval:MAX_RECORD_SECONDS target:self selector:@selector(playbackDidEnd) userInfo:nil repeats:YES];
     
-    // Draw play bar
-    playBarTimer = [NSTimer scheduledTimerWithTimeInterval:RECORD_DRAW_INTERVAL target:self selector:@selector(advancePlayBar) userInfo:nil repeats:YES];
+}
+
+-(void)userDidPausePlayback
+{
+    // Change the state
+    [self changeRecordState:RECORD_STATE_RECORDED];
+    
+    // Pause the recording
+    [customSoundRecorder pausePlayback];
+    [self playResetTimerReset];
+    isPaused = YES;
+    
 }
 
 -(void)resetPlayBar
 {
+    [playBar setHidden:YES];
+    
     CGRect newFrame = CGRectMake(0,0,0,playBar.frame.size.height);
     
     playBar.frame = newFrame;
@@ -566,16 +831,40 @@
 
 -(void)advancePlayBar
 {
-    playBarPercent += RECORD_DRAW_INTERVAL/MAX_RECORD_SECONDS;
-    
-    [self movePlayBarToPercent:playBarPercent];
+    if(recordState == RECORD_STATE_PLAYING){
+        playBarPercent += RECORD_DRAW_INTERVAL/MAX_RECORD_SECONDS;
+        [self movePlayBarToPercent:playBarPercent];
+    }
 }
 
 -(void)movePlayBarToPercent:(double)percent
 {
-    CGRect newFrame = CGRectMake(progressBarContainer.frame.size.width*percent,0,10,progressBar.frame.size.height);
+    if(recordState == RECORD_STATE_PLAYING){
+        
+        [playBar setHidden:NO];
+        
+        int playBarX = MAX(progressBarContainer.frame.size.width*percent-playBar.frame.size.width+10,0);
+        playBarX = MIN(playBarX,progressBar.frame.size.width-playBar.frame.size.width);
+        
+        CGRect newFrame = CGRectMake(playBarX,0,10,progressBar.frame.size.height);
+        
+        playBar.frame = newFrame;
+        
+    }else{
+
+        [self resetPlayBar];
+        
+    }
+}
+
+-(void)animatePlayBarToEnd
+{
     
-    playBar.frame = newFrame;
+    CGRect newFrame = CGRectMake(progressBar.frame.size.width-playBar.frame.size.width,0,10,progressBar.frame.size.height);
+    
+    [UIView animateWithDuration:0.3 animations:^(void){
+        playBar.frame = newFrame;
+    }];
 }
 
 #pragma mark - Progress Bar
@@ -592,16 +881,26 @@
 
 -(void)advanceProgressBar
 {
-    progressBarPercent += RECORD_DRAW_INTERVAL/MAX_RECORD_SECONDS;
-    
-    [self fillProgressBarToPercent:progressBarPercent];
+    if(recordState == RECORD_STATE_RECORDING){
+        
+        progressBarPercent += RECORD_DRAW_INTERVAL/MAX_RECORD_SECONDS;
+        
+        [self fillProgressBarToPercent:progressBarPercent];
+        
+    }
 }
 
 -(void)fillProgressBarToPercent:(double)percent
 {
-    CGRect newFrame = CGRectMake(0, 0, progressBarContainer.frame.size.width*percent, progressBar.frame.size.height);
-    
-    progressBar.frame = newFrame;
+    if(recordState == RECORD_STATE_RECORDING){
+        
+        int progressBarX = MIN(progressBarContainer.frame.size.width*percent,progressBarContainer.frame.size.width);
+        
+        CGRect newFrame = CGRectMake(0, 0, progressBarX, progressBar.frame.size.height);
+        
+        progressBar.frame = newFrame;
+        
+    }
 }
 
 #pragma mark - Table View Protocol
@@ -629,7 +928,7 @@
     
     if(tableView == sampleTable){
         float tableHeight = sampleTable.frame.size.height;
-        return tableHeight/9.0;
+        return tableHeight/5.0;
     }else{
         float tableHeight = stringTable.frame.size.height;
         return tableHeight/GTAR_NUM_STRINGS;
@@ -656,11 +955,12 @@
     
     // table init stuff
     if(tableView == stringTable && indexPath.row == 0){
-        [self.stringTable registerNib:[UINib nibWithNibName:@"CustomStringCell" bundle:nil] forCellReuseIdentifier:@"StringCell"];
+        [stringTable registerNib:[UINib nibWithNibName:@"CustomStringCell" bundle:nil] forCellReuseIdentifier:@"StringCell"];
     }
     
-    self.sampleTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.stringTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    sampleTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    stringTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    sampleTable.separatorInset = UIEdgeInsetsZero;
     
     // do custom work
     if(tableView == sampleTable){
@@ -673,7 +973,7 @@
         // do custom work
         [cell.textLabel setText:[self getSampleFromIndex:indexPath]];
         
-        [cell.textLabel setTextColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8]];
+        [cell.textLabel setTextColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
         [cell setBackgroundColor:[UIColor clearColor]];
         [cell.textLabel setTextAlignment:NSTextAlignmentLeft];
         
@@ -700,9 +1000,14 @@
         CustomStringCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) cell = [[CustomStringCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        // do custom work
-        [cell setBackgroundColor:[UIColor clearColor]];
+        // set background
+        if(indexPath.row % 2 == 1){
+            [cell setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
+        }else{
+            [cell setBackgroundColor:[UIColor colorWithRed:81/255.0 green:81/255.0 blue:81/255.0 alpha:1.0]];
+        }
         
+        // customize cells
         cell.index = GTAR_NUM_STRINGS - indexPath.row - 1;
         
         if(cell.sampleFilename!= nil){
@@ -714,6 +1019,7 @@
         [cell.stringLabel setTextColor:cell.defaultFontColor];
         
         [cell.stringBox setBackgroundColor:colorList[cell.index]];
+        [cell setStringColor:colorList[cell.index]];
         
         if(selectedStringCell == cell){
             [cell notifySelected:YES];
@@ -825,9 +1131,86 @@
     
     if(isReady){
         [self showHideButton:nextButton isHidden:NO withSelector:@selector(userDidNext:)];
+        [nextButtonArrow setAlpha:1.0];
     }else{
         [self showHideButton:nextButton isHidden:YES withSelector:@selector(userDidNext:)];
+        [nextButtonArrow setAlpha:0.3];
     }
+}
+
+- (void)drawNextButtonArrow
+{
+    
+    CGSize size = CGSizeMake(nextButton.frame.size.width, nextButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 8;
+    int playX = nextButton.frame.size.width/2 - playWidth/2 + 28;
+    int playY = 14;
+    CGFloat playHeight = nextButton.frame.size.height - 2*playY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
+    CGContextClosePath(context);
+    
+    CGContextFillPath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [image setAlpha:0.3];
+    
+    nextButtonArrow = image;
+    
+    [nextButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
+}
+
+- (void)drawBackButtonArrow
+{
+    
+    CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 8;
+    int playX = backButton.frame.size.width/2 - playWidth/2 - 20;
+    int playY = 14;
+    CGFloat playHeight = backButton.frame.size.height - 2*playY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
+    CGContextClosePath(context);
+    
+    CGContextFillPath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [backButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
+}
+
+-(void)drawRecordCircle
+{
+    recordCircle.layer.cornerRadius = 7.5;
 }
 
 - (void)checkIfNameReady
@@ -836,7 +1219,7 @@
     NSString * nameString = nameField.text;
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if([nameString isEqualToString:@"NAME"] || [emptyName isEqualToString:@""]){
+    if([nameString isEqualToString:INST_NAME_DEFAULT_TEXT] || [emptyName isEqualToString:@""]){
         isReady = NO;
     }else{
         isReady = YES;
@@ -898,7 +1281,7 @@
 {
     if(cell != nil){
         [cell.textLabel setTextColor:[UIColor whiteColor]];
-        [cell setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.2]];
+        [cell setBackgroundColor:[UIColor colorWithRed:180/255.0 green:180/255.0 blue:180/255.0 alpha:1.0]];
         [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     }
     if(cellOff != nil){
@@ -913,7 +1296,7 @@
     
     UITableViewCell * cellOff = (UITableViewCell *)[timer userInfo];
     
-    [cellOff.textLabel setTextColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8]];
+    [cellOff.textLabel setTextColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
     [cellOff setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.0]];
     
 }
@@ -967,7 +1350,7 @@
         sampleList = [plistDictionary objectForKey:@"Samples"];
         
         customSampleList = nil;
-        
+
     }
     
 }

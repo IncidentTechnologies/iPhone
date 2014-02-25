@@ -19,6 +19,8 @@
     UIColor * activeColor;
     UIColor * darkGrayColor;
     UIColor * blueColor;
+    
+    NSString * previousNameText;
 
 }
 

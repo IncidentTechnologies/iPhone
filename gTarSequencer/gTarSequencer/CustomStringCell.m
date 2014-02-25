@@ -15,12 +15,13 @@
 @synthesize defaultFontColor;
 @synthesize sampleFilename;
 @synthesize useCustomPath;
+@synthesize stringColor;
+@synthesize stringImage;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
     }
     return self;
 }
@@ -32,6 +33,11 @@
     }
     
     return FALSE;
+}
+
+-(void)layoutSubviews
+{
+    [self drawStringIndicator];
 }
 
 // Overriding this for custom behavior
@@ -59,23 +65,41 @@
     
     defaultFontColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8];
     
-    [self drawPlayButton];
     [self updateSelectedUI];
 }
 
 - (void)updateSelectedUI
 {
     if(cellSelected){
+        
+        // draw play button
+        
         [self.stringLabel setTextColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]];
-        [self setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3]];
+        [self setBackgroundColor:stringColor];
+        
+        if([self isSet]){
+            [self showPlayButton];
+        }
+
     }else{
         
+        
         [self.stringLabel setTextColor:defaultFontColor];
-        [self setBackgroundColor:[UIColor clearColor]];
+        
+        // reset background color
+        if(self.index % 2 == 0){
+            [self setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
+        }else{
+            [self setBackgroundColor:[UIColor colorWithRed:81/255.0 green:81/255.0 blue:81/255.0 alpha:1.0]];
+        }
+        
+        if([self isSet]){
+            [self hidePlayButton];
+        }
     }
 }
 
-- (void)drawPlayButton
+- (void)drawStringIndicator
 {
     
     CGSize size = CGSizeMake(stringBox.frame.size.width, stringBox.frame.size.height);
@@ -85,7 +109,7 @@
     
     int playWidth = 10;
     int playX = stringBox.frame.size.width/2 - playWidth/2;
-    int playY = 3;
+    int playY = 12;
     CGFloat playHeight = stringBox.frame.size.height - 2*playY;
     
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
@@ -103,12 +127,45 @@
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
     
+    [image setAlpha:0.3];
+    
+    stringImage = image;
+    
     [stringBox addSubview:image];
     
     UIGraphicsEndImageContext();
-    
-    [stringBox addTarget:self action:@selector(playAudioForSampleFile) forControlEvents:UIControlEventTouchUpInside];
+}
 
+- (void)showPlayButton
+{
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [stringImage setAlpha:1.0];
+        
+        [stringBox setBounds:CGRectMake(stringBox.bounds.origin.x,stringBox.bounds.origin.y,40,stringBox.bounds.size.height)];
+        [stringBox setFrame:CGRectMake(stringBox.frame.origin.x,stringBox.frame.origin.y,40,stringBox.frame.size.height)];
+        
+        [stringImage setFrame:CGRectMake(25,stringImage.frame.origin.y,stringImage.frame.size.width,stringImage.frame.size.height)];
+        
+        [stringLabel setFrame:CGRectMake(30,stringLabel.frame.origin.y,stringLabel.frame.size.width,stringLabel.frame.size.height)];
+    } completion:^(BOOL finished){
+        [stringBox addTarget:self action:@selector(playAudioForSampleFile) forControlEvents:UIControlEventTouchUpInside];
+    }];
+}
+
+- (void)hidePlayButton
+{
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [stringImage setAlpha:0.3];
+        
+        [stringBox setBounds:CGRectMake(stringBox.bounds.origin.x,stringBox.bounds.origin.y,10,stringBox.bounds.size.height)];
+        [stringBox setFrame:CGRectMake(stringBox.frame.origin.x,stringBox.frame.origin.y,10,stringBox.frame.size.height)];
+        
+        [stringImage setFrame:CGRectMake(0,stringImage.frame.origin.y,stringImage.frame.size.width,stringImage.frame.size.height)];
+        
+        [stringLabel setFrame:CGRectMake(18,stringLabel.frame.origin.y,stringLabel.frame.size.width,stringLabel.frame.size.height)];
+    } completion:^(BOOL finished){
+        [stringBox removeTarget:self action:@selector(playAudioForSampleFile) forControlEvents:UIControlEventTouchUpInside];
+    }];
 }
 
 // TODO: share this with the audio on Custom Instrument Selector

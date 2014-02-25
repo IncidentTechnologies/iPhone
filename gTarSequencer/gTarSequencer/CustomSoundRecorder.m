@@ -114,6 +114,18 @@
     }
 }
 
+-(void)pausePlayback
+{
+    NSLog(@"Pause playback");
+    [player pause];
+}
+
+-(void)unpausePlayback
+{
+    NSLog(@"Unpause playback");
+    [player play];
+}
+
 #pragma mark - Audio Player Delegate
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag

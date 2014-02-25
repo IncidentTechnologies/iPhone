@@ -21,6 +21,7 @@
 
 @interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate>
 {
+    int viewState;
     
     UIView * backgroundView;
     NSMutableArray * sampleList;
@@ -43,9 +44,11 @@
     NSTimer * recordTimer;
     NSTimer * progressBarTimer;
     NSTimer * playBarTimer;
+    NSTimer * playResetTimer;
     
     BOOL isRecordingReady;
     BOOL isRecordingNameReady;
+    BOOL isPaused;
     
 }
 
@@ -60,17 +63,20 @@
 @property (nonatomic ,weak) IBOutlet UITableView * sampleTable;
 @property (nonatomic, weak) IBOutlet UITableView * stringTable;
 @property (nonatomic, weak) IBOutlet UIButton * nextButton;
+@property (nonatomic, weak) UIImageView * nextButtonArrow;
 @property (nonatomic, weak) IBOutlet UIButton * recordButton;
+@property (nonatomic, weak) IBOutlet UIView * recordCircle;
 
 @property (nonatomic, weak) IBOutlet UIButton * saveButton;
 @property (nonatomic, weak) IBOutlet UIButton * backButton;
 @property (nonatomic, weak) IBOutlet UITextField * nameField;
 @property (nonatomic, weak) IBOutlet UIView * customIcon;
 
-@property (nonatomic, weak) IBOutlet UIButton * recordBackButton;
+//@property (nonatomic, weak) IBOutlet UIButton * recordBackButton;
 @property (nonatomic, weak) IBOutlet UIButton * recordRecordButton;
 @property (nonatomic, weak) IBOutlet UIButton * recordClearButton;
 @property (nonatomic, weak) IBOutlet UIButton * recordSaveButton;
+@property (nonatomic) UIImageView * recordActionView;
 @property (nonatomic, weak) IBOutlet UIView * progressBar;
 @property (nonatomic, weak) IBOutlet UIView * progressBarContainer;
 @property (nonatomic, weak) IBOutlet UIView * playBar;

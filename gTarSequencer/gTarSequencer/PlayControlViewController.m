@@ -230,7 +230,7 @@
 {
     
 
-    [startStopButton setBackgroundColor:[UIColor colorWithRed:1/255.0 green:224/255.0 blue:13/255.0 alpha:1]];
+    [startStopButton setBackgroundColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1]];
     
     CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
@@ -266,7 +266,7 @@
 - (void)drawPauseButton
 {
     
-    [startStopButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1]];
+    [startStopButton setBackgroundColor:[UIColor colorWithRed:244/255.0 green:151/255.0 blue:39/255.0 alpha:1]];
     
     CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
@@ -281,7 +281,7 @@
     
     CGContextAddRect(context,pauseFrameLeft);
     CGContextAddRect(context,pauseFrameRight);
-    CGContextSetFillColorWithColor(context,[UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context,[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5].CGColor);
     CGContextFillRect(context,pauseFrameLeft);
     CGContextFillRect(context,pauseFrameRight);
     
