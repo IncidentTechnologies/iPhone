@@ -549,6 +549,22 @@
     }
 }
 
+- (void)scrollingSelectorDidRemoveIndex:(int)indexSelected
+{
+    if(indexSelected >= 0){
+        
+        // Remove that instrument from the array:
+        [remainingInstrumentOptions removeObjectAtIndex:indexSelected];
+        [masterInstrumentOptions removeObjectAtIndex:indexSelected];
+        
+        instrumentSelector.options = remainingInstrumentOptions;
+        
+        // Resave pList
+        [self saveCustomInstrumentToPlist:masterInstrumentOptions];
+    
+    }
+}
+
 - (void)initCustomInstrumentSelector
 {
     

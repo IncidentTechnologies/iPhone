@@ -14,6 +14,7 @@
 @protocol ScrollingSelectorDelegate <NSObject>
 
 - (void)scrollingSelectorUserDidSelectIndex:(int)indexSelected;
+- (void)scrollingSelectorDidRemoveIndex:(int)indexSelected;
 - (void)launchCustomInstrumentSelector;
 
 @end
@@ -35,6 +36,8 @@
     NSMutableArray * highlightedImages;
     NSMutableArray * names;
     NSMutableArray * customized;
+    
+    int indexToDelete;
     
     NSMutableArray * imageButtons;      // array of UIButtons
     

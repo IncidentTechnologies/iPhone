@@ -48,7 +48,12 @@
         scrollView.delegate = self;
         scrollView.userInteractionEnabled = YES;
         scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
-                
+        
+        // Touches in scrollView
+        UITapGestureRecognizer * touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrollViewTouch)];
+        touch.numberOfTapsRequired = 1;
+        touch.cancelsTouchesInView = NO;
+        
         // Set sizings
         currentOrigin = CGPointMake(0, 0);
         
@@ -80,13 +85,15 @@
     
     pageCount = ceil([images count]/6.0);
     
-    // remove all subviews
+    // Remove all subviews
     NSArray * viewsToRemove = [paginationView subviews];
     for(UIView * v in viewsToRemove){
         [v removeFromSuperview];
     }
     
-    // draw circles
+    //
+    // Draw circles
+    //
     CGSize size = CGSizeMake(paginationView.frame.size.width, paginationView.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     
@@ -94,11 +101,12 @@
     
     double leftoffset = paginationView.frame.size.width/2 - (pageCount*pagewidth+(pageCount-1)*pagegap)/2;
     
-    // no need to draw for only one
+    // No need to draw for only one
     if(pageCount <= 1){
         return;
     }
     
+    // Add to page
     for(int i = 0; i < pageCount; i++){
         
         CGRect pageFrame = CGRectMake(i*(pagewidth+pagegap) + leftoffset, 0, pagewidth, pagewidth);
@@ -132,6 +140,7 @@
     images = [[NSMutableArray alloc] init];
     customized = [[NSMutableArray alloc] init];
     highlightedImages = [[NSMutableArray alloc] init];
+    indexToDelete = -1;
     
     for (NSDictionary * dict in options)
     {
@@ -206,6 +215,8 @@
     
     instrumentObjects = [[NSMutableDictionary alloc] init];
     
+    pageCount = ceil([images count]/6.0);
+    
     for (int i=0;i<[images count];i++)
     {
         UIView * newbutton = [self addImageAtIndex:i];
@@ -245,15 +256,15 @@
     
     // Custom instrument, add white background
     if([customized[index] isEqualToNumber:[NSNumber numberWithInt:1]]){
-        [buttonborder setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5]];
+        //[buttonborder setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5]];
     }
     
     UIButton * button = [[UIButton alloc] initWithFrame:imageFrame];
     [button setBackgroundColor:[UIColor clearColor]];
     
     [button setImage:[images objectAtIndex:index] forState:UIControlStateNormal];
-    
     [button setImage:[highlightedImages objectAtIndex:index] forState:UIControlStateHighlighted];
+    
     [button addTarget:self action:@selector(userDidSelectInstrument:) forControlEvents:UIControlEventTouchUpInside];
     
     [scrollView addSubview:buttonborder];
@@ -292,6 +303,14 @@
         
         UIGraphicsEndImageContext();
         
+    }else{
+        
+        // Add delete recognizer for Custom Instruments
+        if([[customized objectAtIndex:index] boolValue]){
+            UILongPressGestureRecognizer * pressDelete = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showDeleteForInstrument:)];
+            pressDelete.minimumPressDuration = 0.5;
+            [button addGestureRecognizer:pressDelete];
+        }
     }
     
     return buttonborder;
@@ -342,7 +361,11 @@
 {
     int selectedIndex = [imageButtons indexOfObject:sender];
     
-    if(CUSTOMINSTRUMENT && selectedIndex == 0){
+    if(indexToDelete == selectedIndex){
+        [self deleteInstrument];
+    }else if(indexToDelete > -1){
+        [self hideDeleteForInstrument];
+    }else if(CUSTOMINSTRUMENT && selectedIndex == 0){
         [self launchCustomInstrumentSelector];
     }else{
         [delegate scrollingSelectorUserDidSelectIndex:selectedIndex];
@@ -376,7 +399,15 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    [self handleScrollViewTouch];
     [self fadeAllPagesIn];
+}
+
+-(void)handleScrollViewTouch
+{
+    if(indexToDelete > -1){
+        [self hideDeleteForInstrument];
+    }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scroller withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
@@ -400,10 +431,11 @@
 - (void)snapScrollerToPlace:(UIScrollView *)scroller
 {
     currentPage = targetPage;
+    [self scrollToPage:currentPage withAnimation:YES];
     [self updatePaginationView:currentPage];
 }
 
-// call this when a new custom instrument is added
+// Call this when a new custom instrument is added
 - (void)scrollToMax
 {
     double maxScroll = contentSize.width - scrollView.frame.size.width;
@@ -418,6 +450,22 @@
     [scrollView setContentOffset:newOffset animated:YES];
     [self updatePaginationView:currentPage];
     //[self autoHideArrows];
+}
+
+// Call this when a custom instrument is removed
+- (void)scrollToPage:(int)newPage withAnimation:(BOOL)animate
+{
+    currentPage = MIN(newPage,pageCount-1);
+    targetPage = currentPage;
+    
+    double scrollDistance = (gap + iconBorderSize.width) * cols;
+    double maxX = contentSize.width - scrollView.frame.size.width;
+    
+    CGPoint newOffset = CGPointMake(currentPage*scrollDistance,0);
+    newOffset.x = MIN(newOffset.x,maxX);
+    
+    [scrollView setContentOffset:newOffset animated:animate];
+    [self updatePaginationView:currentPage];
 }
 
 /*
@@ -628,6 +676,68 @@
     [delegate launchCustomInstrumentSelector];
     
 }
+
+#pragma mark - Deleting Custom Instruments
+- (void)showDeleteForInstrument:(UILongPressGestureRecognizer *)sender
+{
+    UIButton * instButton = (UIButton *)sender.view;
+    int selectedIndex = [imageButtons indexOfObject:instButton];
+    
+    if(indexToDelete == -1 || indexToDelete == selectedIndex){
+        indexToDelete = selectedIndex;
+        
+        [instButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+        [instButton.superview setBackgroundColor:[UIColor colorWithRed:216/255.0 green:64/255.0 blue:64/255.0 alpha:1.0]];
+        [instButton setImage:[UIImage imageNamed:@"Trash_Icon"] forState:UIControlStateNormal];
+        [instButton setImage:[UIImage imageNamed:@"Trash_Icon"] forState:UIControlStateHighlighted];
+    }else{
+        [self hideDeleteForInstrument];
+    }
+
+}
+
+- (void)hideDeleteForInstrument
+{
+    UIButton * instButton = [imageButtons objectAtIndex:indexToDelete];
+    
+    [instButton.superview setBackgroundColor:[UIColor clearColor]];
+    [instButton setImage:images[indexToDelete] forState:UIControlStateNormal];
+    [instButton setImage:highlightedImages[indexToDelete] forState:UIControlStateHighlighted];
+    [instButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
+    indexToDelete = -1;
+    
+}
+
+-(void)deleteInstrument
+{
+    NSLog(@"Delete instrument at index %i",indexToDelete);
+    
+    // Animate the removal
+    NSArray * iconObj = [instrumentObjects objectForKey:[NSNumber numberWithInt:indexToDelete]];
+    
+    int prevPage = currentPage;
+    
+    [UIView animateWithDuration:0.5 animations:^(void){
+        [iconObj[0] setAlpha:0.0];
+        [iconObj[1] setAlpha:0.0];
+    } completion:^(BOOL finished){
+        [delegate scrollingSelectorDidRemoveIndex:indexToDelete];
+        [self updateDisplay];
+        [self scrollToPage:prevPage withAnimation:NO];
+    }];
+    
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for(UITouch * touch in touches){
+        if(indexToDelete > -1 && ![touch isMemberOfClass:[UIButton class]]){
+            [self hideDeleteForInstrument];
+        }
+    }
+}
+
 
 /*
  // Only override drawRect: if you perform custom drawing.
