@@ -500,14 +500,18 @@
 
 #pragma mark - Record
 
--(void)userDidLaunchRecord:(id)sender
+-(void)checkInitCustomSoundRecorder
 {
-    
-    // Init recorder
     if(!customSoundRecorder){
         customSoundRecorder = [[CustomSoundRecorder alloc] init];
         [customSoundRecorder setDelegate:self];
     }
+}
+
+-(void)userDidLaunchRecord:(id)sender
+{
+    // Init recorder
+    [self checkInitCustomSoundRecorder];
     
     // Reset progress bar
     [self resetProgressBar];
@@ -763,6 +767,50 @@
     
     // Go back
     [self userDidBack:sender];
+}
+
+-(BOOL)userDidDeleteRecord:(NSString *)filename
+{
+    // Remove from customSampleList
+    NSArray * customSampleSet = [customSampleList[0] objectForKey:@"Sampleset"];
+    for(int i = 0; i < [customSampleSet count]; i++){
+        if([[customSampleSet objectAtIndex:i] isEqualToString:filename]){
+            [[customSampleList[0] objectForKey:@"Sampleset"] removeObjectAtIndex:i];
+        }
+    }
+    
+    // Remove from sampleListSubset
+    NSArray * sampleSubset = [sampleListSubset[0] objectForKey:@"Leafsampleset"];
+    for(int i = 0; i < [sampleSubset count]; i++){
+        if([[sampleSubset objectAtIndex:i] isEqualToString:filename]){
+            [[sampleListSubset[0] objectForKey:@"Leafsampleset"] removeObjectAtIndex:i];
+        }
+    }
+    
+    // Remove from sampleList happens by reference
+    
+    // Remove the sound file
+    [self checkInitCustomSoundRecorder];
+    [customSoundRecorder deleteRecordingFilename:filename];
+    
+    // Check if custom sample set is empty
+    if([customSampleSet count] == 0){
+        
+        [self removeCustomSampleList];
+        
+        [sampleList removeObjectAtIndex:0];
+        
+        [self reverseSampleStack:nil];
+        
+        return NO;
+        
+    }else{
+        
+        [self saveCustomSampleList];
+        
+        return YES;
+    }
+    
 }
 
 #pragma mark - Playback
@@ -1047,6 +1095,8 @@
     // table init stuff
     if(tableView == stringTable && indexPath.row == 0){
         [stringTable registerNib:[UINib nibWithNibName:@"CustomStringCell" bundle:nil] forCellReuseIdentifier:@"StringCell"];
+    }else if(tableView == sampleTable && indexPath.row == 0){
+        [sampleTable registerNib:[UINib nibWithNibName:@"CustomSampleCell" bundle:nil] forCellReuseIdentifier:@"SampleCell"];
     }
     
     sampleTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -1058,21 +1108,18 @@
         
         // init cell
         static NSString * CellIdentifier = @"SampleCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        CustomSampleCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) cell = [[CustomSampleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        [cell.textLabel setText:[self getSampleFromIndex:indexPath]];
-        
-        [cell.textLabel setTextColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
+        [cell.sampleTitle setText:[self getSampleFromIndex:indexPath]];
         [cell setBackgroundColor:[UIColor clearColor]];
-        [cell.textLabel setTextAlignment:NSTextAlignmentLeft];
         
         [self clearImagesForCell:cell];
         if(indexPath.row == 0 && [self getNumSectionsInSampleTable] > 1){
             [self drawNextButtonArrowForCell:cell];
-            [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica Bold" size:16.0]];
+            [cell.sampleTitle setFont:[UIFont fontWithName:@"Helvetica Bold" size:16.0]];
         }else{
-            [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
+            [cell.sampleTitle setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
         }
         
         if(selectedSampleCell == cell){
@@ -1132,8 +1179,10 @@
 {
     if(tableView == sampleTable && indexPath.row == 0 && [self getNumSectionsInSampleTable] > 1){
         
-        UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-        NSString * newSection = cell.textLabel.text;
+        // Sample section
+        
+        CustomSampleCell * cell = (CustomSampleCell *)[tableView cellForRowAtIndexPath:indexPath];
+        NSString * newSection = cell.sampleTitle.text;
         
         [self pushToSampleStack:newSection];
         
@@ -1143,15 +1192,19 @@
         
     }else if(tableView == sampleTable && (indexPath.row > 0 || [self getNumSectionsInSampleTable] == 1)){
         
-        // TODO: check table type
+        // Sample
+        
         [self toggleSampleCellAtIndexPath:indexPath];
         
     }else if(tableView == stringTable && indexPath.row < GTAR_NUM_STRINGS){
         
+        // String
+        
         [self toggleStringCellAtIndexPath:indexPath];
 
     }else{
-        // save
+        
+        // Save
         return;
     }
     
@@ -1161,7 +1214,7 @@
         BOOL useCustomPath = ([self isCustomInstrumentList]) ? TRUE : FALSE;
         
         // pass filename
-        [selectedStringCell updateFilename:selectedSampleCell.textLabel.text isCustom:useCustomPath];
+        [selectedStringCell updateFilename:selectedSampleCell.sampleTitle.text isCustom:useCustomPath];
         
         // turn off sample to avoid reselecting
         [self styleSampleCell:nil turnOff:selectedSampleCell];
@@ -1197,12 +1250,17 @@
 - (void)deleteCell:(NSIndexPath *)pathToDelete
 {
     NSLog(@"Delete cell at section %i index %i",pathToDelete.section,pathToDelete.row);
-    // Remove from the data structure
+    
+    CustomSampleCell * cell = (CustomSampleCell *)[sampleTable cellForRowAtIndexPath:pathToDelete];
+    
+    NSString * filename = cell.sampleTitle.text;
     
     // Remove the data
+    BOOL deleteCell = [self userDidDeleteRecord:filename];
     
-    // Reload table
-    //[sampleTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationTop];
+    if(deleteCell){
+        [sampleTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationTop];
+    }
     
 }
 
@@ -1249,9 +1307,11 @@
 
 -(IBAction)reverseSampleStack:(id)sender
 {
-    NSLog(@"reverse sample stack");
+    NSLog(@"Reverse sample stack");
     
     [self popFromSampleStack];
+    
+    NSLog(@"Sample stack count is now %i",[sampleStack count]);
     
     [self buildNewSampleSubset];
     
@@ -1368,16 +1428,15 @@
     UIGraphicsEndImageContext();
 }
 
-- (void)clearImagesForCell:(UITableViewCell *)cell
+- (void)clearImagesForCell:(CustomSampleCell *)cell
 {
-    cell.imageView.image = nil;
+    //cell.imageView.image = nil;
+    [cell.sampleArrow setImage:nil];
 }
 
-- (void)drawNextButtonArrowForCell:(UITableViewCell *)cell
+- (void)drawNextButtonArrowForCell:(CustomSampleCell *)cell
 {
-    NSLog(@"Draw next button arrow for cell");
-    
-    CGSize size = CGSizeMake(10, cell.frame.size.height);
+    CGSize size = CGSizeMake(cell.sampleArrow.frame.size.width, cell.sampleArrow.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -1385,7 +1444,7 @@
     int playWidth = 8;
     int playX = 0;
     int playY = 14;
-    CGFloat playHeight = cell.frame.size.height - 2*playY;
+    CGFloat playHeight = cell.sampleArrow.frame.size.height - 2*playY;
     
     CGContextSetStrokeColorWithColor(context, [UIColor darkGrayColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor darkGrayColor].CGColor);
@@ -1400,11 +1459,7 @@
     CGContextFillPath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    //UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
-    
-    cell.imageView.image = newImage;
-    
-    //[cell addSubview:image];
+    [cell.sampleArrow setImage:newImage];
     
     UIGraphicsEndImageContext();
 }
@@ -1511,7 +1566,7 @@
 
 - (BOOL)toggleSampleCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [sampleTable cellForRowAtIndexPath:indexPath];
+    CustomSampleCell * cell = (CustomSampleCell *)[sampleTable cellForRowAtIndexPath:indexPath];
     
     if(selectedSampleCell == cell){
         [self styleSampleCell:nil turnOff:selectedSampleCell];
@@ -1521,9 +1576,9 @@
         [self styleSampleCell:cell turnOff:selectedSampleCell];
         selectedSampleCell = cell;
         
-        NSLog(@"PLAYING FILE ... %@.mp3",cell.textLabel.text);
+        NSLog(@"PLAYING FILE ... %@.mp3",cell.sampleTitle.text);
         BOOL isCustom = ([self isCustomInstrumentList]) ? TRUE : FALSE;
-        [self playAudioForFile:cell.textLabel.text withCustomPath:isCustom];
+        [self playAudioForFile:cell.sampleTitle.text withCustomPath:isCustom];
         
         return YES;
     }
@@ -1548,12 +1603,12 @@
     }
 }
 
-- (void)styleSampleCell:(UITableViewCell *)cell turnOff:(UITableViewCell *)cellOff
+- (void)styleSampleCell:(CustomSampleCell *)cell turnOff:(UITableViewCell *)cellOff
 {
     if(cell != nil){
-        [cell.textLabel setTextColor:[UIColor whiteColor]];
+        [cell.sampleTitle setTextColor:[UIColor whiteColor]];
         [cell setBackgroundColor:[UIColor colorWithRed:180/255.0 green:180/255.0 blue:180/255.0 alpha:1.0]];
-        [cell.textLabel setBackgroundColor:[UIColor clearColor]];
+        [cell.sampleTitle setBackgroundColor:[UIColor clearColor]];
     }
     if(cellOff != nil){
         
@@ -1565,9 +1620,9 @@
 - (void)turnOffCellTimer:(NSTimer *)timer
 {
     
-    UITableViewCell * cellOff = (UITableViewCell *)[timer userInfo];
+    CustomSampleCell * cellOff = (CustomSampleCell *)[timer userInfo];
     
-    [cellOff.textLabel setTextColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
+    [cellOff.sampleTitle setTextColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
     [cellOff setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.0]];
     
 }
@@ -1618,6 +1673,21 @@
     
 }
 
+- (void)removeCustomSampleList
+{
+    customSampleList = nil;
+    
+    NSLog(@"Deleting custom sample list");
+    
+    NSError * err = NULL;
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    
+    BOOL result = [fm removeItemAtPath:customSampleListPath error:&err];
+    
+    if(!result)
+        NSLog(@"Error deleting");
+}
+
 - (void)updateCustomSampleListWithSample:(NSString *)filename
 {
     
@@ -1642,6 +1712,11 @@
         [[[customSampleList objectAtIndex:0] objectForKey:@"Sampleset"] addObject:filename];
         //[[[sampleList objectAtIndex:0] objectForKey:@"Sampleset"] addObject:filename];
         
+    }
+    
+    // Also update the subset list for viewing if appropriate
+    if([self isCustomInstrumentList]){
+        [[[sampleListSubset objectAtIndex:0] objectForKey:@"Leafsampleset"] addObject:filename];
     }
 
     [self saveCustomSampleList];

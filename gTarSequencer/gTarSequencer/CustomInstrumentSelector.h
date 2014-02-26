@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "CustomStringCell.h"
+#import "CustomSampleCell.h"
 #import "CustomSoundRecorder.h"
 
 @protocol CustomInstrumentSelectorDelegate <NSObject>
@@ -36,7 +37,7 @@
     
     int activesection;
     
-    UITableViewCell * selectedSampleCell;
+    CustomSampleCell * selectedSampleCell;
     CustomStringCell * selectedStringCell;
     
     // Recorder

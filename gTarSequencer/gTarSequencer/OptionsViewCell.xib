@@ -59,6 +59,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="deleteButton" destination="zv2-S1-Nr9" id="tOc-m6-Arb"/>
                 <outlet property="fileDate" destination="Gl6-HP-gn1" id="eNC-yW-1M6"/>
                 <outlet property="fileLoad" destination="3TS-Jk-NcS" id="Lez-kZ-cXb"/>
                 <outlet property="fileName" destination="2Ck-Vb-gec" id="I3e-Tk-nAZ"/>

@@ -161,4 +161,28 @@
         NSLog(@"Error moving");
 }
 
+- (void)deleteRecordingFilename:(NSString *)filename
+{
+    
+    // Create a subfolder Samples/{Category} if it doesn't exist yet
+    NSLog(@"Deleting file %@.m4a",filename);
+    
+    NSString * newFilename = filename;
+    newFilename = [@"Samples/" stringByAppendingString:filename];
+    newFilename = [newFilename stringByAppendingString:@".m4a"];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSError * err = NULL;
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    
+    NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newFilename];
+    
+    BOOL result = [fm removeItemAtPath:newPath error:&err];
+    
+    if(!result)
+        NSLog(@"Error deleting");
+
+}
+
 @end
