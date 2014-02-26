@@ -26,6 +26,9 @@
     UIView * backgroundView;
     NSMutableArray * sampleList;
     NSMutableArray * customSampleList;
+    NSMutableArray * sampleStack;
+    NSMutableArray * sampleListSubset;
+    
     NSMutableArray * stringSet;
     NSMutableArray * stringPaths;
     NSArray * colorList;
@@ -54,6 +57,7 @@
 
 - (void)moveFrame:(CGRect)newFrame;
 - (void)launchSelectorView;
+- (IBAction)reverseSampleStack:(id)sender;
 
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic) NSString * instName;
@@ -62,6 +66,9 @@
 @property (weak, nonatomic) id<CustomInstrumentSelectorDelegate> delegate;
 @property (nonatomic ,weak) IBOutlet UITableView * sampleTable;
 @property (nonatomic, weak) IBOutlet UITableView * stringTable;
+
+@property (nonatomic, weak) IBOutlet UIButton * sampleLibraryTitle;
+@property (nonatomic, weak) UIImageView * sampleLibraryArrow;
 @property (nonatomic, weak) IBOutlet UIButton * nextButton;
 @property (nonatomic, weak) UIImageView * nextButtonArrow;
 @property (nonatomic, weak) IBOutlet UIButton * recordButton;

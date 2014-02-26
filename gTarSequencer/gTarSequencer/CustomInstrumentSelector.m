@@ -30,6 +30,8 @@
 @synthesize instName;
 @synthesize sampleTable;
 @synthesize stringTable;
+@synthesize sampleLibraryTitle;
+@synthesize sampleLibraryArrow;
 @synthesize cancelButton;
 @synthesize delegate;
 @synthesize audio;
@@ -152,6 +154,11 @@
 {
     
     NSString * path;
+    
+    if(filename == nil){
+        NSLog(@"Attempting to play nil file");
+        return;        
+    }
     
     if(useCustomPath){
         
@@ -300,6 +307,7 @@
     
     // Left sample table
     [sampleTable setBackgroundColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0]];
+    [self drawSampleLibraryArrow];
     
     // Right string table
     [stringTable setBackgroundColor:[UIColor colorWithRed:81/255.0 green:81/255.0 blue:81/255.0 alpha:1.0]];
@@ -311,6 +319,12 @@
     // Record button
     [self drawRecordCircle];
     [self showHideButton:recordButton isHidden:NO withSelector:@selector(userDidLaunchRecord:)];
+    
+    // Sample Library Title
+    if([sampleStack count] > 0){
+        [sampleLibraryTitle setTitle:[sampleStack lastObject] forState:UIControlStateNormal];
+        [sampleLibraryArrow setHidden:NO];
+    }
     
 }
 
@@ -644,7 +658,7 @@
             size = CGSizeMake(recordActionView.frame.size.width, recordActionView.frame.size.height);
             UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
             
-            CGContextRef context = UIGraphicsGetCurrentContext();
+            context = UIGraphicsGetCurrentContext();
             
             int pauseWidth = 7;
             
@@ -908,7 +922,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     if(tableView == sampleTable){
-        return [sampleList count];
+        return [self getNumSectionsInSampleTable];
     }else{
         return 1;
     }
@@ -917,7 +931,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(tableView == sampleTable){
-        return [[sampleList[section] objectForKey:@"Sampleset"] count]+1;
+        return [self getNumRowsForSection:section];
     }else{
         return GTAR_NUM_STRINGS;
     }
@@ -938,16 +952,93 @@
 - (NSString *)getSampleFromIndex:(NSIndexPath *)indexPath
 {
     
-    long sectionindex = indexPath.section;
-    long i = indexPath.row;
+    if([sampleStack count] == 0){
+        
+        // check sampleStack
+        long sectionindex = indexPath.section;
+        long i = indexPath.row;
+        
+        if(i == 0){
+            return [sampleList[sectionindex] objectForKey:@"Section"];
+        }
+        
+        NSArray * section = [sampleList[sectionindex] objectForKey:@"Sampleset"];
+        
+        return section[i-1];
+        
+    }else{
+        
+        NSDictionary * dict = [sampleListSubset objectAtIndex:indexPath.section];
+        if([dict objectForKey:@"Sampleset"] || [dict objectForKey:@"Sectionset"]){
+            return [dict objectForKey:@"Section"];
+        }else{
+            return [[dict objectForKey:@"Leafsampleset"] objectAtIndex:indexPath.row];
+        }
+        
+    }
+}
+
+- (int)getNumSectionsInSampleTable
+{
+    if([sampleStack count] == 0){
+        
+        return [sampleList count];
+        
+    }else{
+        
+        int sectionCount = 0;
+        
+        for(NSDictionary * dict in sampleListSubset){
+            if([dict objectForKey:@"Section"]){
+                sectionCount++;
+            }
+        }
+        
+        return MAX(sectionCount,1);
+    }
+}
+
+- (int)getNumRowsForSection:(int)sectionIndex
+{
+    NSDictionary * dict;
     
-    if(i == 0){
-        return [sampleList[sectionindex] objectForKey:@"Section"];
+    if([sampleStack count] == 0){
+        dict = [sampleList objectAtIndex:sectionIndex];
+    }else{
+        dict = [sampleListSubset objectAtIndex:sectionIndex];
     }
     
-    NSArray * section = [sampleList[sectionindex] objectForKey:@"Sampleset"];
+    if([dict objectForKey:@"Sampleset"] || [dict objectForKey:@"Sectionset"]){
+        return 1;
+    }else{
+        return [[dict objectForKey:@"Leafsampleset"] count];
+    }
+}
+
+- (void)buildNewSampleSubset
+{
+    sampleListSubset = [[NSMutableArray alloc] initWithArray:sampleList copyItems:YES];
     
-    return section[i-1];
+    for(int i = 0; i < [sampleStack count]; i++){
+        
+        for(int j = 0; j < [sampleListSubset count]; j++){
+            
+            if([[[sampleListSubset objectAtIndex:j] objectForKey:@"Section"] isEqualToString:[sampleStack objectAtIndex:i]]){
+                
+                NSMutableArray * newSectionset = [[NSMutableArray alloc] initWithArray:[[sampleListSubset objectAtIndex:j] objectForKey:@"Sectionset"] copyItems:YES];
+                
+                NSMutableArray * newSampleset = [[NSMutableArray alloc] initWithArray:[[sampleListSubset objectAtIndex:j] objectForKey:@"Sampleset"] copyItems:YES];
+                
+                [sampleListSubset removeAllObjects];
+                [sampleListSubset addObjectsFromArray:newSectionset];
+                
+                // Leaf of the tree
+                if([sampleListSubset count] == 0){
+                    [sampleListSubset addObject:[NSMutableDictionary dictionaryWithObject:newSampleset forKey:@"Leafsampleset"]];
+                }
+            }
+        }
+    }
     
 }
 
@@ -970,14 +1061,15 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        // do custom work
         [cell.textLabel setText:[self getSampleFromIndex:indexPath]];
         
         [cell.textLabel setTextColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
         [cell setBackgroundColor:[UIColor clearColor]];
         [cell.textLabel setTextAlignment:NSTextAlignmentLeft];
         
-        if(indexPath.row == 0){
+        [self clearImagesForCell:cell];
+        if(indexPath.row == 0 && [self getNumSectionsInSampleTable] > 1){
+            [self drawNextButtonArrowForCell:cell];
             [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica Bold" size:16.0]];
         }else{
             [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
@@ -1033,13 +1125,25 @@
     }
     
     return nil;
-    
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(tableView == sampleTable && indexPath.row > 0){
+    if(tableView == sampleTable && indexPath.row == 0 && [self getNumSectionsInSampleTable] > 1){
         
+        UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSString * newSection = cell.textLabel.text;
+        
+        [self pushToSampleStack:newSection];
+        
+        [self buildNewSampleSubset];
+        
+        [sampleTable reloadData];
+        
+    }else if(tableView == sampleTable && (indexPath.row > 0 || [self getNumSectionsInSampleTable] == 1)){
+        
+        // TODO: check table type
         [self toggleSampleCellAtIndexPath:indexPath];
         
     }else if(tableView == stringTable && indexPath.row < GTAR_NUM_STRINGS){
@@ -1054,7 +1158,7 @@
     // join sample and string
     if(selectedSampleCell && selectedStringCell){
         
-        BOOL useCustomPath = (indexPath.section == 0 && customSampleList != nil) ? TRUE : FALSE;
+        BOOL useCustomPath = ([self isCustomInstrumentList]) ? TRUE : FALSE;
         
         // pass filename
         [selectedStringCell updateFilename:selectedSampleCell.textLabel.text isCustom:useCustomPath];
@@ -1067,6 +1171,94 @@
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO: change logic to test if custom sample
+    if([self isCustomInstrumentList]){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete){
+        [self deleteCell:indexPath];
+    }
+}
+
+- (void)deleteCell:(NSIndexPath *)pathToDelete
+{
+    NSLog(@"Delete cell at section %i index %i",pathToDelete.section,pathToDelete.row);
+    // Remove from the data structure
+    
+    // Remove the data
+    
+    // Reload table
+    //[sampleTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationTop];
+    
+}
+
+#pragma mark - Sampe Stack
+- (void)pushToSampleStack:(NSString *)newSection
+{
+    [sampleLibraryTitle setTitle:newSection forState:UIControlStateNormal];
+    
+    [sampleLibraryArrow setHidden:NO];
+    
+    [sampleStack addObject:newSection];
+    
+}
+
+-(void)popFromSampleStack
+{
+    if([sampleStack count] > 0){
+        
+        NSString * oldSection = [sampleStack lastObject];
+        [sampleStack removeObject:[sampleStack lastObject]];
+        
+        NSLog(@"Removing current selection %@",oldSection);
+    }
+    
+    if([sampleStack count] > 0){
+        [sampleLibraryTitle setTitle:[sampleStack lastObject] forState:UIControlStateNormal];
+        [sampleLibraryArrow setHidden:NO];
+    }else{
+        [sampleLibraryTitle setTitle:@"Sample Library" forState:UIControlStateNormal];
+        [sampleLibraryArrow setHidden:YES];
+    }
+}
+
+-(BOOL)isCustomInstrumentList
+{
+    for(NSString * s in sampleStack){
+        if([s isEqualToString:@"Custom"]){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+-(IBAction)reverseSampleStack:(id)sender
+{
+    NSLog(@"reverse sample stack");
+    
+    [self popFromSampleStack];
+    
+    [self buildNewSampleSubset];
+    
+    [sampleTable reloadData];
+}
+
+#pragma mark - Strings
 - (void)saveStringsFromCells
 {
     stringSet = [NSMutableArray array];
@@ -1136,6 +1328,85 @@
         [self showHideButton:nextButton isHidden:YES withSelector:@selector(userDidNext:)];
         [nextButtonArrow setAlpha:0.3];
     }
+}
+
+#pragma mark - Drawing
+- (void)drawSampleLibraryArrow
+{
+    CGSize size = CGSizeMake(sampleLibraryTitle.frame.size.width, sampleLibraryTitle.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 8;
+    int playX = 23;
+    int playY = 14;
+    CGFloat playHeight = sampleLibraryTitle.frame.size.height - 2*playY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
+    CGContextClosePath(context);
+    
+    
+    CGContextFillPath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    sampleLibraryArrow = image;
+    
+    [sampleLibraryTitle addSubview:image];
+    [sampleLibraryArrow setAlpha:0.7];
+    [sampleLibraryArrow setHidden:YES];
+    
+    UIGraphicsEndImageContext();
+}
+
+- (void)clearImagesForCell:(UITableViewCell *)cell
+{
+    cell.imageView.image = nil;
+}
+
+- (void)drawNextButtonArrowForCell:(UITableViewCell *)cell
+{
+    NSLog(@"Draw next button arrow for cell");
+    
+    CGSize size = CGSizeMake(10, cell.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 8;
+    int playX = 0;
+    int playY = 14;
+    CGFloat playHeight = cell.frame.size.height - 2*playY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor darkGrayColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor darkGrayColor].CGColor);
+    
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
+    CGContextClosePath(context);
+    
+    CGContextFillPath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    //UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    cell.imageView.image = newImage;
+    
+    //[cell addSubview:image];
+    
+    UIGraphicsEndImageContext();
 }
 
 - (void)drawNextButtonArrow
@@ -1251,7 +1522,7 @@
         selectedSampleCell = cell;
         
         NSLog(@"PLAYING FILE ... %@.mp3",cell.textLabel.text);
-        BOOL isCustom = (indexPath.section == 0 && customSampleList != nil) ? TRUE : FALSE;
+        BOOL isCustom = ([self isCustomInstrumentList]) ? TRUE : FALSE;
         [self playAudioForFile:cell.textLabel.text withCustomPath:isCustom];
         
         return YES;
@@ -1301,19 +1572,13 @@
     
 }
 
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return NO;
-}
-
-
 - (void)retrieveSampleList
 {
     
     // Init
     sampleList = [[NSMutableArray alloc] init];
     customSampleList = [[NSMutableArray alloc] init];
+    sampleStack = [[NSMutableArray alloc] init];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"sampleList" ofType:@"plist"];
     
@@ -1371,10 +1636,6 @@
         [sampleList removeAllObjects];
         [sampleList addObjectsFromArray:customSampleList];
         [sampleList addObjectsFromArray:tempSampleList];
-        
-        NSLog(@"tempSampleList is %@",tempSampleList);
-        NSLog(@"Sample list is %@",sampleList);
-        NSLog(@"Custom sample list is %@",customSampleList);
     
     }else{
         // Beware, this also adds the filename to sampleList
