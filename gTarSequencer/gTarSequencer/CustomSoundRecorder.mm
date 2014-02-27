@@ -108,9 +108,6 @@
         
         AVAudioSession * session = [AVAudioSession sharedInstance];
         [session setActive:NO error:nil];
-        
-        // Init Sampler
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initAudioForSample) userInfo:nil repeats:NO];
     }
 }
 
@@ -250,11 +247,41 @@
 
 - (void)playAudioForSample
 {
-    //m_sampNode->SetStart(1000);
     
     NSLog(@"Play audio for sample at %i with length %f",bankCount,m_sampNode->GetLength());
     
     m_samplerNode->TriggerBankSample(bankCount, 0);
+}
+
+- (unsigned long int)fetchAudioBufferSize
+{
+    return m_sampNode->m_pSampleBuffer->GetSampleBufferLengthMS();
+}
+
+- (float *)fetchAudioBuffer
+{
+    NSLog(@"Draw audio for sample");
+    
+    unsigned long int samplelength = [self fetchAudioBufferSize];
+    
+    float multiplier = 32767.0f;
+    float * temp_buffer = (float *)malloc(sizeof(float) * samplelength);
+    
+    for(int i = 0; i < samplelength; i++){
+        temp_buffer[i] = m_sampNode->m_pSampleBuffer->GetNextSample(i)*multiplier;
+    }
+    
+    return temp_buffer;
+}
+
+- (void)setSampleStart:(float)ms
+{
+    m_sampNode->SetStart(ms);
+}
+
+- (void)setSampleEnd:(float)ms
+{
+    m_sampNode->SetEnd(ms);
 }
 
 @end

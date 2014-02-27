@@ -524,6 +524,7 @@
     
     // Reset progress bar
     [self resetProgressBar];
+    [self clearAudioDrawing];
     
     // Save strings
     [self saveStringsFromCells];
@@ -566,6 +567,7 @@
     
     [self resetProgressBar];
     [self resetPlayBar];
+    [self clearAudioDrawing];
     
     // Disable save
     isRecordingReady = FALSE;
@@ -597,9 +599,64 @@
     [self showRecordEditingButtons];
     [self setProgressBarDefaultWidth];
     
+    // Init Sampler
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(drawAudio) userInfo:nil repeats:NO];
+    
     // Enable save
     isRecordingReady = TRUE;
     [self checkIfRecordSaveReady];
+}
+
+-(void)drawAudio
+{
+    [customSoundRecorder initAudioForSample];
+    
+    unsigned long int samplelength = [customSoundRecorder fetchAudioBufferSize];
+    float * buffer = (float *)malloc(sizeof(float) * samplelength);
+    
+    buffer = [customSoundRecorder fetchAudioBuffer];
+   
+    // Draw sample
+    float sampleRate = 11;
+    float midpointY = recordLine.frame.size.height/2;
+    float intervalX = sampleRate*recordLine.frame.size.width/samplelength;
+    
+    // Check the max y
+    float maxY = 0;
+    for(int x = 0; x < samplelength; x+=sampleRate){
+        maxY = MAX(maxY,ABS(buffer[x]));
+    }
+    float scaleY = (maxY*4 > 40) ? 40.0/maxY : 4; // scale*buffer[x] can have max of 40px
+    
+    CGSize size = CGSizeMake(recordLine.frame.size.width, recordLine.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    CGPathMoveToPoint(path, NULL, 0, midpointY-buffer[0]*scaleY);
+    for(int x = 1; x < samplelength; x+=sampleRate){
+        CGPathAddLineToPoint(path, NULL, x*intervalX, midpointY-buffer[x]*scaleY);
+    }
+    
+    CGContextAddPath(context, path);
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextStrokePath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [recordLine addSubview:image];
+    
+    UIGraphicsEndImageContext();
+}
+
+-(void)clearAudioDrawing
+{
+    for(UIView * v in recordLine.subviews){
+        [v removeFromSuperview];
+    }
 }
 
 
@@ -648,6 +705,7 @@
     
     // Reset the progress
     [self resetProgressBar];
+    [self clearAudioDrawing];
     
     // Draw progress bar
     progressBarTimer = [NSTimer scheduledTimerWithTimeInterval:RECORD_DRAW_INTERVAL target:self selector:@selector(advanceProgressBar) userInfo:nil repeats:YES];

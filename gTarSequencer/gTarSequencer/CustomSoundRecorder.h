@@ -31,6 +31,11 @@
 - (void)unpausePlayback;
 - (void)renameRecordingToFilename:(NSString *)filename;
 - (void)deleteRecordingFilename:(NSString *)filename;
+- (void)initAudioForSample;
+- (unsigned long int)fetchAudioBufferSize;
+- (float *)fetchAudioBuffer;
+- (void)setSampleStart:(float)ms;
+- (void)setSampleEnd:(float)ms;
 
 @property (weak, nonatomic) id<CustomSoundDelegate> delegate;
 
