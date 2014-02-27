@@ -34,6 +34,7 @@
 - (void)initAudioForSample;
 - (unsigned long int)fetchAudioBufferSize;
 - (float *)fetchAudioBuffer;
+- (float)getSampleLength;
 - (void)setSampleStart:(float)ms;
 - (void)setSampleEnd:(float)ms;
 

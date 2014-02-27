@@ -560,8 +560,6 @@
 
 -(void)userDidClearRecord
 {
-    NSLog(@"Clear recording");
-    
     [self changeRecordState:RECORD_STATE_OFF];
     [self hideRecordEditingButtons];
     
@@ -600,7 +598,7 @@
     [self setProgressBarDefaultWidth];
     
     // Init Sampler
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(drawAudio) userInfo:nil repeats:NO];
+    audioLoadTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(drawAudio) userInfo:nil repeats:NO];
     
     // Enable save
     isRecordingReady = TRUE;
@@ -650,6 +648,9 @@
     [recordLine addSubview:image];
     
     UIGraphicsEndImageContext();
+    
+    [audioLoadTimer invalidate];
+    audioLoadTimer = nil;
 }
 
 -(void)clearAudioDrawing
@@ -657,8 +658,10 @@
     for(UIView * v in recordLine.subviews){
         [v removeFromSuperview];
     }
+    
+    [audioLoadTimer invalidate];
+    audioLoadTimer = nil;
 }
-
 
 -(void)checkIfRecordSaveReady
 {
@@ -976,6 +979,15 @@
     
     if([sender state] == UIGestureRecognizerStateEnded){
         [leftAdjustor setAlpha:0.3];
+        
+        // Adjust the audio
+        float totalLength = recordLine.frame.size.width;
+        float lengthRemoved = progressBar.frame.origin.x;
+        float sampleLength = [customSoundRecorder getSampleLength];
+        float newStart = sampleLength*lengthRemoved/totalLength;
+        newStart = MAX(1,newStart);
+        
+        [customSoundRecorder setSampleStart:newStart];
     }
 
 }
@@ -998,7 +1010,6 @@
         newX=maxX;
     }
     
-    
     if(newX >= minX && newX <= maxX){
         CGRect newRightFrame = CGRectMake(newX,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
     
@@ -1011,6 +1022,15 @@
     
     if([sender state] == UIGestureRecognizerStateEnded){
         [rightAdjustor setAlpha:0.3];
+        
+        // Adjust the audio
+        float totalLength = recordLine.frame.size.width;
+        float newLengthEnd = progressBar.frame.origin.x+progressBar.frame.size.width;
+        float sampleLength = [customSoundRecorder getSampleLength];
+        float newEnd = sampleLength*newLengthEnd/totalLength;
+        newEnd = MIN(newEnd,sampleLength-1);
+        
+        [customSoundRecorder setSampleEnd:newEnd];
     }
 }
 
@@ -1048,6 +1068,11 @@
 
 -(void)userDidStartPlayback
 {
+    // Wait for audio loading before allowing playback
+    if(audioLoadTimer != nil){
+        return;
+    }
+    
     if(!isPaused){
         [self resetPlayBar];
         
@@ -1072,7 +1097,8 @@
     
     // Add a timeout to ensure recording finished acknowledged
     [self playResetTimerReset];
-    playResetTimer = [NSTimer scheduledTimerWithTimeInterval:MAX_RECORD_SECONDS target:self selector:@selector(playbackDidEnd) userInfo:nil repeats:YES];
+    float playLength = 1.1*[customSoundRecorder getSampleLength]/1000.0;
+    playResetTimer = [NSTimer scheduledTimerWithTimeInterval:playLength target:self selector:@selector(playbackDidEnd) userInfo:nil repeats:YES];
     
 }
 

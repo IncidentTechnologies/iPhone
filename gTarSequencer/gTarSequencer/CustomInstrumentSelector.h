@@ -49,6 +49,7 @@
     NSTimer * progressBarTimer;
     NSTimer * playBarTimer;
     NSTimer * playResetTimer;
+    NSTimer * audioLoadTimer;
     
     BOOL isRecordingReady;
     BOOL isRecordingNameReady;

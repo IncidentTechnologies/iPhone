@@ -284,4 +284,9 @@
     m_sampNode->SetEnd(ms);
 }
 
+- (float)getSampleLength
+{
+    return m_sampNode->GetLength();
+}
+
 @end
