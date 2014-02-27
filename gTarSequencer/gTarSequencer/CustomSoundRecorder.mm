@@ -7,6 +7,22 @@
 //
 
 #import "CustomSoundRecorder.h"
+#import "AudioController.h"
+#import "AUNodeNetwork.h"
+#import "AudioNodeCommon.h"
+
+@interface CustomSoundRecorder(){
+
+    AudioController * audioController;
+    AudioNode * root;
+    
+    SampleNode * m_sampNode;
+    SamplerNode * m_samplerNode;
+
+    int bankCount;
+}
+
+@end
 
 @implementation CustomSoundRecorder
 
@@ -17,6 +33,11 @@
     self = [super init];
     if (self)
     {
+        
+        audioController = nil;
+        root = nil;
+        m_samplerNode = nil;
+        bankCount = -1;
         
         defaultFilename = @"CustomSoundPlaceholder.m4a";
         
@@ -82,11 +103,15 @@
 {
     
     NSLog(@"Recording stopped");
-    
-    [recorder stop];
-    
-    AVAudioSession * session = [AVAudioSession sharedInstance];
-    [session setActive:NO error:nil];
+    if(recorder.recording){
+        [recorder stop];
+        
+        AVAudioSession * session = [AVAudioSession sharedInstance];
+        [session setActive:NO error:nil];
+        
+        // Init Sampler
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initAudioForSample) userInfo:nil repeats:NO];
+    }
 }
 
 #pragma mark - Audio Recorder Delegate
@@ -108,9 +133,11 @@
         
         NSLog(@"Playback started");
         
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
-        [player setDelegate:self];
-        [player play];
+        //player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
+        //[player setDelegate:self];
+        //[player play];
+        
+        [self playAudioForSample];
     }
 }
 
@@ -183,6 +210,51 @@
     if(!result)
         NSLog(@"Error deleting");
 
+}
+
+#pragma mark - Audio Controller Sampler
+
+- (void)initAudioForSample
+{
+    BOOL init = NO;
+    
+    if(!audioController){
+        audioController = [AudioController sharedAudioController];
+        root = [[audioController GetNodeNetwork] GetRootNode];
+        m_samplerNode = new SamplerNode();
+        init=YES;
+    }
+    
+    SamplerBankNode * newBank = NULL;
+    
+    m_samplerNode->CreateNewBank(newBank);
+    
+    // Reload sound into bank after new record
+    char * filepath = (char *)malloc(sizeof(char) * 1024);
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * path = [paths objectAtIndex:0];
+    NSString * filename = [path stringByAppendingPathComponent:defaultFilename];
+    
+    filepath = (char *) [filename UTF8String];
+    
+    m_samplerNode->LoadSampleIntoBank(++bankCount, filepath, m_sampNode);
+    
+    NSLog(@"Init audio for sample at %i",bankCount);
+    
+    if(init){
+        root->ConnectInput(0, m_samplerNode, 0);
+        [audioController startAUGraph];
+    }
+}
+
+- (void)playAudioForSample
+{
+    //m_sampNode->SetStart(1000);
+    
+    NSLog(@"Play audio for sample at %i with length %f",bankCount,m_sampNode->GetLength());
+    
+    m_samplerNode->TriggerBankSample(bankCount, 0);
 }
 
 @end

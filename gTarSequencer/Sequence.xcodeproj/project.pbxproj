@@ -137,7 +137,7 @@
 		58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AE7186CD5EF003638EF /* RadialDisplay.m */; };
 		58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58547AEA186CD6AF003638EF /* ScrollingSelector.m */; };
 		585916FE18774791002C21B9 /* MeasureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 585916FD18774791002C21B9 /* MeasureView.m */; };
-		587A91A818A5837300CFB154 /* CustomSoundRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 587A91A718A5837300CFB154 /* CustomSoundRecorder.m */; };
+		587A91A818A5837300CFB154 /* CustomSoundRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 587A91A718A5837300CFB154 /* CustomSoundRecorder.mm */; };
 		587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 587B6EC71885E9720071BE15 /* libz.dylib */; };
 		587C9F791888C0E7001F57C7 /* 808 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F251888C0E7001F57C7 /* 808 1.mp3 */; };
 		587C9F7A1888C0E7001F57C7 /* 808 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F261888C0E7001F57C7 /* 808 2.mp3 */; };
@@ -460,7 +460,7 @@
 		585916FC18774790002C21B9 /* MeasureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureView.h; sourceTree = "<group>"; };
 		585916FD18774791002C21B9 /* MeasureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureView.m; sourceTree = "<group>"; };
 		587A91A618A5837300CFB154 /* CustomSoundRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSoundRecorder.h; sourceTree = "<group>"; };
-		587A91A718A5837300CFB154 /* CustomSoundRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSoundRecorder.m; sourceTree = "<group>"; };
+		587A91A718A5837300CFB154 /* CustomSoundRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomSoundRecorder.mm; sourceTree = "<group>"; };
 		587B6EBA1885E6D80071BE15 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		587B6EC71885E9720071BE15 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		587C9F251888C0E7001F57C7 /* 808 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808 1.mp3"; sourceTree = "<group>"; };
@@ -969,7 +969,7 @@
 			isa = PBXGroup;
 			children = (
 				587A91A618A5837300CFB154 /* CustomSoundRecorder.h */,
-				587A91A718A5837300CFB154 /* CustomSoundRecorder.m */,
+				587A91A718A5837300CFB154 /* CustomSoundRecorder.mm */,
 			);
 			name = CustomSoundRecorder;
 			sourceTree = "<group>";
@@ -1698,7 +1698,7 @@
 				58B4D3D3186E1F7F0035D9E5 /* Measure.m in Sources */,
 				6D72B28118BE7C7100969A8F /* CustomSampleCell.m in Sources */,
 				58CA4E6818A174310026D83C /* VolumeButton.m in Sources */,
-				587A91A818A5837300CFB154 /* CustomSoundRecorder.m in Sources */,
+				587A91A818A5837300CFB154 /* CustomSoundRecorder.mm in Sources */,
 				5894D61A186505BD00849C71 /* SeqSetViewController.m in Sources */,
 				58547AE4186CD55C003638EF /* RadialButton.m in Sources */,
 				58F4B951189849BA0071609B /* OptionsViewController.m in Sources */,

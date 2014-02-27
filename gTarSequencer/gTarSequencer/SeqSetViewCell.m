@@ -639,26 +639,4 @@
     }
 }
 
-// Use custom icon and color
--(void)willTransitionToState:(UITableViewCellStateMask)state
-{
-
-    [super willTransitionToState:state];
-    
-    if((state & UITableViewCellStateShowingDeleteConfirmationMask) == UITableViewCellStateShowingDeleteConfirmationMask){
-        for (UIView *subview in self.subviews) {
-            for (UIView *subview2 in subview.subviews) {
-                if ([NSStringFromClass([subview2 class]) rangeOfString:@"Delete"].location != NSNotFound) {
-                    // hide original button
-                    [subview2 setHidden:YES];
-                    // show my custom button
-                    [deleteButton setHidden:NO];
-                }
-            }
-        }
-    }
-}
-
-
-
 @end

@@ -9,8 +9,9 @@
 #import "CustomInstrumentSelector.h"
 
 #define GTAR_NUM_STRINGS 6
-#define MAX_RECORD_SECONDS 5
+#define MAX_RECORD_SECONDS 4
 #define RECORD_DRAW_INTERVAL 0.01
+#define ADJUSTOR_SIZE 30.0
 
 #define VIEW_CUSTOM_INST 0
 #define VIEW_CUSTOM_NAME 1
@@ -50,8 +51,11 @@
 @synthesize recordActionView;
 @synthesize progressBarContainer;
 @synthesize progressBar;
+@synthesize recordLine;
 @synthesize playBar;
 @synthesize recordingNameField;
+@synthesize leftAdjustor;
+@synthesize rightAdjustor;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -95,6 +99,7 @@
     
     // draw main window
     [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:viewFrame andRemove:nil forViewState:VIEW_CUSTOM_INST];
+    
     [self initSubtables];
     
 }
@@ -123,6 +128,10 @@
     NSArray * nibViews = [[NSBundle mainBundle] loadNibNamed:nibName owner:self options:nil];
     backgroundView = nibViews[0];
     backgroundView.frame = frame;
+    [self initRoundedCorners];
+    //backgroundView.layer.cornerRadius = 5.0;
+    
+    // TODO: draw corner radii
     
     viewState = newViewState;
     
@@ -525,6 +534,7 @@
 
     // Load active buttons
     [self drawRecordActionButton];
+    [self hideRecordEditingButtons];
     [self changeRecordState:RECORD_STATE_OFF];
     [self showHideButton:recordClearButton isHidden:NO withSelector:@selector(userDidClearRecord)];
     [self showHideButton:recordRecordButton isHidden:NO withSelector:@selector(userDidTapRecord:)];
@@ -536,7 +546,10 @@
     [recordingNameField addTarget:self action:@selector(recordingNameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     recordingNameField.delegate = self;
     isRecordingNameReady = FALSE;
+    [recordingNameField setFont:[UIFont systemFontOfSize:22.0]];
     
+    // Init record editing buttons
+    [self initRecordEditingButtons];
     
     // Clear any previous recording
     [self userDidClearRecord];
@@ -549,6 +562,7 @@
     NSLog(@"Clear recording");
     
     [self changeRecordState:RECORD_STATE_OFF];
+    [self hideRecordEditingButtons];
     
     [self resetProgressBar];
     [self resetPlayBar];
@@ -574,10 +588,20 @@
     // Reset button
     [self changeRecordState:RECORD_STATE_RECORDED];
     
+}
+
+-(void)userDidCompleteRecord
+{
+    [self userDidEndRecord];
+    
+    [self showRecordEditingButtons];
+    [self setProgressBarDefaultWidth];
+    
     // Enable save
     isRecordingReady = TRUE;
     [self checkIfRecordSaveReady];
 }
+
 
 -(void)checkIfRecordSaveReady
 {
@@ -613,13 +637,14 @@
     
     // Double check
     [self userDidEndRecord];
+    [self hideRecordEditingButtons];
     
     // Start record
     [customSoundRecorder startRecord];
     [self changeRecordState:RECORD_STATE_RECORDING];
     
     // Schedule end of session
-    recordTimer = [NSTimer scheduledTimerWithTimeInterval:MAX_RECORD_SECONDS target:self selector:@selector(userDidEndRecord) userInfo:nil repeats:NO];
+    recordTimer = [NSTimer scheduledTimerWithTimeInterval:MAX_RECORD_SECONDS target:self selector:@selector(userDidCompleteRecord) userInfo:nil repeats:NO];
     
     // Reset the progress
     [self resetProgressBar];
@@ -741,7 +766,7 @@
             break;
             
         case 1: // recording -> recorded
-            [self userDidEndRecord];
+            [self userDidCompleteRecord];
             break;
             
         case 2: // recorded -> playback
@@ -813,6 +838,129 @@
     
 }
 
+#pragma mark - Record Editing
+
+-(void)initRecordEditingButtons
+{
+    leftAdjustor = [[UIButton alloc] initWithFrame:CGRectMake(-1*ADJUSTOR_SIZE/2,progressBarContainer.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE)];
+    rightAdjustor = [[UIButton alloc] initWithFrame:CGRectMake(50,progressBarContainer.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE)];
+    
+    leftAdjustor.backgroundColor = [UIColor whiteColor];
+    rightAdjustor.backgroundColor = [UIColor whiteColor];
+    
+    leftAdjustor.layer.cornerRadius = ADJUSTOR_SIZE/2;
+    rightAdjustor.layer.cornerRadius = ADJUSTOR_SIZE/2;
+    
+    [leftAdjustor setAlpha:0.3];
+    [rightAdjustor setAlpha:0.3];
+    
+    [leftAdjustor setHidden:YES];
+    [rightAdjustor setHidden:YES];
+    
+    [progressBarContainer addSubview:leftAdjustor];
+    [progressBarContainer addSubview:rightAdjustor];
+    
+    // Add gesture recognizers
+    UIPanGestureRecognizer * leftPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecordLeft:)];
+    UIPanGestureRecognizer * rightPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecordRight:)];
+    
+    [leftAdjustor addGestureRecognizer:leftPan];
+    [rightAdjustor addGestureRecognizer:rightPan];
+    
+}
+
+-(void)showRecordEditingButtons
+{
+    CGRect newLeftFrame = CGRectMake(progressBar.frame.origin.x-ADJUSTOR_SIZE/2,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
+    
+    CGRect newRightFrame = CGRectMake(progressBar.frame.origin.x+progressBar.frame.size.width-ADJUSTOR_SIZE/2,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
+    
+    [leftAdjustor setFrame:newLeftFrame];
+    [rightAdjustor setFrame:newRightFrame];
+    
+    [leftAdjustor setHidden:NO];
+    [rightAdjustor setHidden:NO];
+}
+
+-(void)hideRecordEditingButtons
+{
+    [leftAdjustor setHidden:YES];
+    [rightAdjustor setHidden:YES];
+}
+
+-(void)panRecordLeft:(UIPanGestureRecognizer *)sender
+{
+    CGPoint newPoint = [sender translationInView:backgroundView];
+    
+    if([sender state] == UIGestureRecognizerStateBegan){
+        leftFirstX = leftAdjustor.frame.origin.x;
+        [leftAdjustor setAlpha:0.8];
+    }
+    
+    float minX = 0 - ADJUSTOR_SIZE/2;
+    float maxX = rightAdjustor.frame.origin.x - ADJUSTOR_SIZE/2;
+    float newX = newPoint.x + leftFirstX;
+    
+    // wrap to boundary
+    if(newX < minX || newX < minX+0.2*ADJUSTOR_SIZE/2){
+        newX=minX;
+    }
+    
+    if(newX >= minX && newX <= maxX){
+        CGRect newLeftFrame = CGRectMake(newX,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
+        
+        [leftAdjustor setFrame:newLeftFrame];
+        
+        CGRect newProgressBarFrame = CGRectMake(newX+ADJUSTOR_SIZE/2, 0, rightAdjustor.frame.origin.x-leftAdjustor.frame.origin.x, progressBar.frame.size.height);
+        
+        [progressBar setFrame:newProgressBarFrame];
+    }
+    
+    if([sender state] == UIGestureRecognizerStateEnded){
+        [leftAdjustor setAlpha:0.3];
+    }
+
+}
+
+-(void)panRecordRight:(UIPanGestureRecognizer *)sender
+{
+    CGPoint newPoint = [sender translationInView:backgroundView];
+    
+    if([sender state] == UIGestureRecognizerStateBegan){
+        rightFirstX = rightAdjustor.frame.origin.x;
+        [rightAdjustor setAlpha:0.8];
+    }
+    
+    float minX = leftAdjustor.frame.origin.x + ADJUSTOR_SIZE/2;
+    float maxX = progressBarDefaultWidth - ADJUSTOR_SIZE/2;
+    float newX = newPoint.x + rightFirstX;
+    
+    // wrap to boundary
+    if(newX > maxX || newX > maxX-0.2*ADJUSTOR_SIZE/2){
+        newX=maxX;
+    }
+    
+    
+    if(newX >= minX && newX <= maxX){
+        CGRect newRightFrame = CGRectMake(newX,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
+    
+        [rightAdjustor setFrame:newRightFrame];
+        
+        CGRect newProgressBarFrame = CGRectMake(progressBar.frame.origin.x, 0, rightAdjustor.frame.origin.x-leftAdjustor.frame.origin.x, progressBar.frame.size.height);
+        
+        [progressBar setFrame:newProgressBarFrame];
+    }
+    
+    if([sender state] == UIGestureRecognizerStateEnded){
+        [rightAdjustor setAlpha:0.3];
+    }
+}
+
+- (void)setProgressBarDefaultWidth
+{
+    progressBarDefaultWidth = progressBar.frame.size.width;
+}
+
 #pragma mark - Playback
 
 -(void)playbackDidEnd
@@ -822,6 +970,7 @@
     
     // Change the state
     [self changeRecordState:RECORD_STATE_RECORDED];
+    [self showRecordEditingButtons];
     [self playbackTimerReset];
     [self playResetTimerReset];
     isPaused = NO;
@@ -861,6 +1010,7 @@
     
     // Change the state
     [self changeRecordState:RECORD_STATE_PLAYING];
+    [self hideRecordEditingButtons];
     
     // Add a timeout to ensure recording finished acknowledged
     [self playResetTimerReset];
@@ -872,6 +1022,7 @@
 {
     // Change the state
     [self changeRecordState:RECORD_STATE_RECORDED];
+    [self showRecordEditingButtons];
     
     // Pause the recording
     [customSoundRecorder pausePlayback];
@@ -883,8 +1034,9 @@
 -(void)resetPlayBar
 {
     [playBar setHidden:YES];
+    [playBar setAlpha:1.0];
     
-    CGRect newFrame = CGRectMake(0,0,0,playBar.frame.size.height);
+    CGRect newFrame = CGRectMake(progressBar.frame.origin.x,0,0,playBar.frame.size.height);
     
     playBar.frame = newFrame;
     
@@ -905,10 +1057,10 @@
         
         [playBar setHidden:NO];
         
-        int playBarX = MAX(progressBarContainer.frame.size.width*percent-playBar.frame.size.width+10,0);
+        int playBarX = MAX(progressBarContainer.frame.size.width*percent-playBar.frame.size.width,0);
         playBarX = MIN(playBarX,progressBar.frame.size.width-playBar.frame.size.width);
         
-        CGRect newFrame = CGRectMake(playBarX,0,10,progressBar.frame.size.height);
+        CGRect newFrame = CGRectMake(progressBar.frame.origin.x+playBarX,0,5,progressBar.frame.size.height);
         
         playBar.frame = newFrame;
         
@@ -922,10 +1074,16 @@
 -(void)animatePlayBarToEnd
 {
     
-    CGRect newFrame = CGRectMake(progressBar.frame.size.width-playBar.frame.size.width,0,10,progressBar.frame.size.height);
+    CGRect newFrame = CGRectMake(progressBar.frame.origin.x+progressBar.frame.size.width-playBar.frame.size.width,0,5,progressBar.frame.size.height);
     
     [UIView animateWithDuration:0.3 animations:^(void){
         playBar.frame = newFrame;
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:0.3 animations:^(void){
+            [playBar setAlpha:0.0];
+        } completion:^(BOOL finished){
+            [self resetPlayBar];
+        }];
     }];
 }
 
@@ -933,9 +1091,11 @@
 
 -(void)resetProgressBar
 {
-    CGRect newFrame = CGRectMake(0,0,0,progressBar.frame.size.height);
+    CGRect newProgressBarFrame = CGRectMake(0,0,0,progressBar.frame.size.height);
+    CGRect newRecordLineFrame = CGRectMake(0,recordLine.frame.origin.y,0,recordLine.frame.size.height);
     
-    progressBar.frame = newFrame;
+    progressBar.frame = newProgressBarFrame;
+    recordLine.frame = newRecordLineFrame;
     
     progressBarPercent = 0;
     
@@ -958,9 +1118,11 @@
         
         int progressBarX = MIN(progressBarContainer.frame.size.width*percent,progressBarContainer.frame.size.width);
         
-        CGRect newFrame = CGRectMake(0, 0, progressBarX, progressBar.frame.size.height);
+        CGRect newProgressBarFrame = CGRectMake(0, 0, progressBarX, progressBar.frame.size.height);
+        CGRect newRecordLineFrame = CGRectMake(0,recordLine.frame.origin.y,progressBarX,recordLine.frame.size.height);
         
-        progressBar.frame = newFrame;
+        progressBar.frame = newProgressBarFrame;
+        recordLine.frame = newRecordLineFrame;
         
     }
 }
@@ -1391,6 +1553,25 @@
 }
 
 #pragma mark - Drawing
+- (void)initRoundedCorners
+{
+    UIBezierPath * pathRecord = [UIBezierPath bezierPathWithRoundedRect:backgroundView.bounds byRoundingCorners:(UIRectCornerAllCorners) cornerRadii:CGSizeMake(5.0,5.0)];
+    
+    [self drawShapedView:backgroundView withBezierPath:pathRecord];
+    
+}
+
+-(void)drawShapedView:(UIView *)view withBezierPath:(UIBezierPath *)bezierPath
+{
+    CAShapeLayer * bodyLayer = [CAShapeLayer layer];
+    
+    [bodyLayer setPath:bezierPath.CGPath];
+    view.layer.mask = bodyLayer;
+    view.clipsToBounds = YES;
+    view.layer.masksToBounds = YES;
+    
+}
+
 - (void)drawSampleLibraryArrow
 {
     CGSize size = CGSizeMake(sampleLibraryTitle.frame.size.width, sampleLibraryTitle.frame.size.height);

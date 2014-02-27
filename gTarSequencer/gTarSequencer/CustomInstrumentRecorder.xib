@@ -10,6 +10,7 @@
                 <outlet property="progressBar" destination="p08-tD-3Wh" id="WOO-AV-1ju"/>
                 <outlet property="progressBarContainer" destination="8Tz-1A-xDq" id="UoZ-4S-eWF"/>
                 <outlet property="recordClearButton" destination="RYr-Lt-RjT" id="rTU-Vk-WLA"/>
+                <outlet property="recordLine" destination="Ur3-zo-gKs" id="JU5-JF-mty"/>
                 <outlet property="recordRecordButton" destination="ghM-qU-e1I" id="lWg-ZV-rLa"/>
                 <outlet property="recordSaveButton" destination="0kb-XA-lfj" id="met-Aq-7gl"/>
                 <outlet property="recordingNameField" destination="DpB-VA-JKR" id="YOV-p7-mwF"/>
@@ -20,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="364" height="276"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DpB-VA-JKR">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="DpB-VA-JKR">
                     <rect key="frame" x="75" y="28" width="215" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <attributedString key="attributedText">
@@ -94,8 +95,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.63137254901960782" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="usI-8H-Aue">
+                        <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="usI-8H-Aue">
                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="86"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ur3-zo-gKs">
+                            <rect key="frame" x="0.0" y="41" width="0.0" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>

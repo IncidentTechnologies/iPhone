@@ -54,6 +54,10 @@
     BOOL isRecordingNameReady;
     BOOL isPaused;
     
+    float leftFirstX;
+    float rightFirstX;
+    float progressBarDefaultWidth;
+    
 }
 
 - (void)moveFrame:(CGRect)newFrame;
@@ -88,7 +92,10 @@
 @property (nonatomic, weak) IBOutlet UIView * progressBar;
 @property (nonatomic, weak) IBOutlet UIView * progressBarContainer;
 @property (nonatomic, weak) IBOutlet UIView * playBar;
+@property (nonatomic, weak) IBOutlet UIView * recordLine;
 @property (nonatomic, weak) IBOutlet UITextField * recordingNameField;
+@property (nonatomic) UIButton * leftAdjustor;
+@property (nonatomic) UIButton * rightAdjustor;
 
 @property (retain, nonatomic) UIButton * cancelButton;
 
