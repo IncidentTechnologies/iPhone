@@ -1011,15 +1011,26 @@
     
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scroller
+{
+    if([delegate isLeftNavOpen]){
+        scrollView.contentOffset = CGPointMake(0,0);
+    }
+}
+
 - (void)scrollViewWillEndDragging:(UIScrollView *)scroller withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     
-    NSLog(@"Scroll view will end dragging %f",lastContentOffset.x);
-    
     // First check how swipes interfere with left nav
-    if(activeMeasure == 0 && velocity.x < 0 && lastContentOffset.x == 0){
+    if(activeMeasure == 0 && velocity.x <= 0 && targetContentOffset->x <= 0 && lastContentOffset.x == 0 && ![delegate isLeftNavOpen]){
         
         [delegate openLeftNavigator];
+        targetMeasure = activeMeasure;
+        
+    }else if([delegate isLeftNavOpen]){
+        
+        [delegate closeLeftNavigator];
+        velocity = CGPointMake(0, 0);
         targetMeasure = activeMeasure;
         
     }else{

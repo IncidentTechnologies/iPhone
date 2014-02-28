@@ -907,6 +907,17 @@
         }
     }
     
+    // Remove from string list
+    for(int i = GTAR_NUM_STRINGS-1; i >= 0; i--){
+        
+        CustomStringCell * cell = (CustomStringCell *)[stringTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        
+        if([cell.sampleFilename isEqualToString:filename]){
+            [self deselectString:cell];
+            cell.stringLabel.text = @"select a sound";
+        }
+    }
+    
     // Remove from sampleList happens by reference
     
     // Remove the sound file
@@ -1502,6 +1513,19 @@
         
         [self checkIfAllStringsReady];
     }
+}
+
+- (void)deselectString:(CustomStringCell *)cell
+{
+    [cell notifySelected:NO];
+    [cell updateFilename:nil isCustom:FALSE];
+    [self toggleStringCellAtIndexPath:[stringTable indexPathForCell:cell]];
+    
+    // encapsulate this in cell
+    cell.defaultFontColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3];
+    [cell.stringLabel setTextColor:cell.defaultFontColor];
+    
+    [self checkIfAllStringsReady];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

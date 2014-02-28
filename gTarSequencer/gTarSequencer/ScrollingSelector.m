@@ -15,6 +15,7 @@
 @synthesize cancelButton;
 @synthesize scrollView;
 @synthesize paginationView;
+@synthesize customArrow;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -48,6 +49,8 @@
         scrollView.delegate = self;
         scrollView.userInteractionEnabled = YES;
         scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
+        
+        withAnimation = YES;
         
         // Touches in scrollView
         UITapGestureRecognizer * touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrollViewTouch)];
@@ -128,7 +131,7 @@
     UIGraphicsEndImageContext();
     
     // after pagination is drawn fade non-visible pages accordingly
-    [self fadePagesFrom:focus];
+    [self fadePagesFrom:focus withAnimation:withAnimation];
     
 }
 
@@ -154,6 +157,8 @@
         [images addObject:normalImage];
         
         [customized addObject:[dict objectForKey:@"Custom"]];
+        
+        [customIndicators addObject:@""];
         
         UIImage * highlightedImage = [UIImage imageNamed:iconName];
         [highlightedImages addObject:highlightedImage];
@@ -264,11 +269,9 @@
         [customIndicator setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
         customIndicator.layer.cornerRadius = customHeight/2;
         
-        [customIndicators addObject:customIndicator];
+        [customIndicators insertObject:customIndicator atIndex:index];
         [buttonborder addSubview:customIndicator];
         
-    }else{
-        [customIndicators addObject:@""];
     }
     
     UIButton * button = [[UIButton alloc] initWithFrame:imageFrame];
@@ -309,9 +312,9 @@
         CGContextFillPath(context);
         
         UIImage * playImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIImageView * image = [[UIImageView alloc] initWithImage:playImage];
+        customArrow = [[UIImageView alloc] initWithImage:playImage];
         
-        [scrollView addSubview:image];
+        [scrollView addSubview:customArrow];
         
         UIGraphicsEndImageContext();
         
@@ -388,7 +391,15 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scroller
 {
-    //[self autoHideArrows];
+    if(withAnimation){
+        //[self autoHideArrows];
+        [self fadeAllPagesIn];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    [self fadePagesFrom:currentPage withAnimation:withAnimation];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scroller
@@ -412,7 +423,6 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self handleScrollViewTouch];
-    [self fadeAllPagesIn];
 }
 
 -(void)handleScrollViewTouch
@@ -420,6 +430,7 @@
     if(indexToDelete > -1){
         [self hideDeleteForInstrument];
     }
+    withAnimation = YES;
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scroller withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
@@ -461,6 +472,7 @@
     
     [scrollView setContentOffset:newOffset animated:YES];
     [self updatePaginationView:currentPage];
+    
     //[self autoHideArrows];
 }
 
@@ -642,7 +654,7 @@
 
 #pragma mark - Page Fading
 
-- (void)fadePagesFrom:(int)focus
+- (void)fadePagesFrom:(int)focus withAnimation:(BOOL)animate
 {
     int numinst = [instrumentObjects count];
     
@@ -660,12 +672,21 @@
             [iconObj[0] setAlpha:1.0];
             [iconObj[1] setAlpha:1.0];
         }else{
-            [UIView animateWithDuration:0.2 animations:^(void){
-                // fade out
+            if(animate){
+                [UIView animateWithDuration:0.2 animations:^(void){
+                    // fade out
+                    [iconObj[0] setAlpha:0.0];
+                    [iconObj[1] setAlpha:0.0];
+                }];
+            }else{
                 [iconObj[0] setAlpha:0.0];
                 [iconObj[1] setAlpha:0.0];
-            }];
+            }
         }
+    }
+    
+    if(focus > 0){
+        [customArrow setHidden:YES];
     }
 }
 
@@ -678,6 +699,8 @@
         [iconObj[0] setAlpha:1.0];
         [iconObj[1] setAlpha:1.0];
     }
+    
+    [customArrow setHidden:NO];
 }
 
 
@@ -732,6 +755,7 @@
     
     // Animate the removal
     NSArray * iconObj = [instrumentObjects objectForKey:[NSNumber numberWithInt:indexToDelete]];
+    withAnimation = NO;
     
     int prevPage = currentPage;
     
@@ -740,7 +764,9 @@
         [iconObj[1] setAlpha:0.0];
     } completion:^(BOOL finished){
         [delegate scrollingSelectorDidRemoveIndex:indexToDelete];
+        
         [self updateDisplay];
+        
         [self scrollToPage:prevPage withAnimation:NO];
     }];
     

@@ -174,6 +174,11 @@
     
     NSString * path;
     
+    if(sampleFilename == nil){
+        NSLog(@"Trying to play nil file");
+        return;
+    }
+    
     if(useCustomPath){
         
         // different filetype and location
