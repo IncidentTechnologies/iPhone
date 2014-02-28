@@ -12,9 +12,6 @@
 #define LAST_FRET 15
 #define LAST_MEASURE 3
 
-#define XBASE 480
-#define YBASE 320
-
 #define TABLEHEIGHT 264
 #define NAVWIDTH 76
 #define NAVTAB 0
@@ -46,6 +43,7 @@
     [self initSubviews];
     [self loadStateFromDisk:nil];
     [self checkGtarConnected];
+    
 }
 
 
@@ -86,9 +84,12 @@
 
 - (void)initSubviews
 {
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    BOOL isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
+    int screensize = (isScreenLarge) ? XBASE_LG : XBASE_SM;
     
-    onScreenMainFrame = CGRectMake(0,0,XBASE,TABLEHEIGHT);
-    overScreenMainFrame = CGRectMake(NAVWIDTH-NAVTAB,0,XBASE,TABLEHEIGHT);
+    onScreenMainFrame = CGRectMake(0,0,screensize,TABLEHEIGHT);
+    overScreenMainFrame = CGRectMake(NAVWIDTH-NAVTAB,0,screensize,TABLEHEIGHT);
     
     //
     // SUBVIEW: OPTIONS
@@ -118,19 +119,18 @@
     
     [seqSetViewController.view setHidden:NO];
     [self.view addSubview:seqSetViewController.view];
-    activeMainView = seqSetViewController.view;
     
     //
     // SUBVIEW: INSTRUMENT
     //
     
-    instrumentViewController = [[InstrumentViewController alloc] initWithNibName:@"InstrumentViewController" bundle:nil];
+    NSString * instrumentNibName = (isScreenLarge) ? @"InstrumentViewController_4" : @"InstrumentViewController";
+    instrumentViewController = [[InstrumentViewController alloc] initWithNibName:instrumentNibName bundle:nil];
     [instrumentViewController.view setFrame:onScreenMainFrame];
     [instrumentViewController setDelegate:self];
     
     [instrumentViewController.view setHidden:YES];
     [self.view addSubview:instrumentViewController.view];
-    
     
     //
     // SUBVIEW: INFO
@@ -143,13 +143,13 @@
     [infoViewController.view setHidden:YES];
     [self.view addSubview:infoViewController.view];
     
-    
     //
     //  BOTTOM BAR
     //
     
-    playControlViewController = [[PlayControlViewController alloc] initWithNibName:@"BottomBar" bundle:nil];
-    [playControlViewController.view setFrame:CGRectMake(0,TABLEHEIGHT-4,XBASE,YBASE-TABLEHEIGHT+3)];
+    NSString * playControlNibName = (isScreenLarge) ? @"BottomBar_4" : @"BottomBar";
+    playControlViewController = [[PlayControlViewController alloc] initWithNibName:playControlNibName bundle:nil];
+    [playControlViewController.view setFrame:CGRectMake(0,TABLEHEIGHT-4,screenBounds.size.height,YBASE-TABLEHEIGHT+3)];
     [playControlViewController setDelegate:self];
     
     isPlaying = NO;
@@ -161,7 +161,7 @@
     //
     
     onScreenNavigatorFrame = CGRectMake(0,0,NAVWIDTH,TABLEHEIGHT);
-    offLeftNavigatorFrame = CGRectMake(-1*NAVWIDTH+NAVTAB,0,NAVWIDTH,TABLEHEIGHT);
+    offLeftNavigatorFrame = CGRectMake(-2*(NAVWIDTH+NAVTAB),0,0,TABLEHEIGHT);
     
     leftNavigator = [[LeftNavigatorViewController alloc] initWithNibName:@"LeftNavigatorViewController" bundle:nil];
     [leftNavigator.view setFrame:offLeftNavigatorFrame];
@@ -174,6 +174,7 @@
     //
     // GTAR CONNECTED
     //
+    
     [leftNavigator changeConnectedButton:false];
     
     //
@@ -193,6 +194,8 @@
 
 - (void)closeLeftNavigator
 {
+    NSLog(@"Close left nav");
+    
     [seqSetViewController turnEditingOn];
     [UIView animateWithDuration:0.1 animations:^(){
         [leftNavigator.view setFrame:offLeftNavigatorFrame];
@@ -204,6 +207,8 @@
 
 - (void)openLeftNavigator
 {
+    NSLog(@"Open left nav");
+    
     [seqSetViewController turnEditingOff];
     [UIView animateWithDuration:0.1 animations:^(){
         [leftNavigator.view setFrame:onScreenNavigatorFrame];

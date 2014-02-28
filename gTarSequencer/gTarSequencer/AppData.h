@@ -11,3 +11,8 @@
 
 #define TESTMODE 0
 #define CUSTOMINSTRUMENT 1
+
+#define XBASE_LG 568
+#define XBASE_SM 480
+#define XBASE 480
+#define YBASE 320

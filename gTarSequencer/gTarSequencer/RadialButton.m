@@ -16,9 +16,6 @@
 #define NORMAL_FONT 17
 #define LARGE_FONT 30
 
-#define XBASE 480
-#define YBASE 320
-
 @implementation RadialButton
 
 @synthesize currentValue;
@@ -67,9 +64,16 @@
 
 - (void)initSubviews
 {
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    BOOL isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
     
     // Set up radial display:
-    CGRect wholeScreen = CGRectMake(0, 0, XBASE, YBASE-1);
+    CGRect wholeScreen;
+    if(isScreenLarge){
+        wholeScreen = CGRectMake(0, 0, XBASE_LG, YBASE-1);
+    }else{
+        wholeScreen = CGRectMake(0, 0, XBASE_SM, YBASE-1);
+    }
     
     radialDisplay = [[RadialDisplay alloc] initWithFrame:wholeScreen];
     radialDisplay.userInteractionEnabled = NO;
@@ -92,7 +96,12 @@
     
     // tempo value
     normalFrame = CGRectMake(self.frame.size.width/2+10,13,tempoWidth,30);
-    zoomedFrame = CGRectMake(62, -90, ZOOMFACTOR*tempoWidth, ZOOMFACTOR*30);
+    
+    if(isScreenLarge){
+        zoomedFrame = CGRectMake(105, -90, ZOOMFACTOR*tempoWidth, ZOOMFACTOR*30);
+    }else{
+        zoomedFrame = CGRectMake(62, -90, ZOOMFACTOR*tempoWidth, ZOOMFACTOR*30);
+    }
     
     valueDisplay = [[UILabel alloc] initWithFrame:normalFrame];
     valueDisplay.contentMode = UIViewContentModeScaleAspectFit;
@@ -108,7 +117,10 @@
 {
     double origin = self.frame.origin.x;
     
-    double distanceRight = XBASE - ( origin + zeroPosition.x);
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    int screensize = screenBounds.size.height;
+    
+    double distanceRight = screensize - ( origin + zeroPosition.x);
     double distanceLeft = zeroPosition.x + self.frame.origin.x;
     
     int rangeOfValuesUp = MAX_TEMPO - startingValue;

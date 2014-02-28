@@ -9,7 +9,9 @@
 #import "InstrumentViewController.h"
 
 #define MEASURE_WIDTH 418
-#define MEASURE_MARGIN 10.5
+#define MEASURE_MARGIN_SM 10.5
+#define MEASURE_MARGIN_LG 25
+
 #define NOTE_WIDTH 26
 #define NOTE_HEIGHT 26
 #define NOTE_GAP 2
@@ -86,7 +88,6 @@
     
     [offMask setHidden:YES];
     
-    
     //
     // SCROLLING
     //
@@ -97,7 +98,8 @@
     scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
     [scrollView setShowsHorizontalScrollIndicator:NO];
     
-    double totalWidth = NUM_MEASURES*(MEASURE_WIDTH+MEASURE_MARGIN)+3*MEASURE_MARGIN;
+    float measureMargin = [self getMeasureMargin];
+    double totalWidth = NUM_MEASURES*(MEASURE_WIDTH+measureMargin)+3*measureMargin;
     double totalHeight = scrollView.frame.size.height;
     
     [scrollView setContentSize:CGSizeMake(totalWidth,totalHeight)];
@@ -471,7 +473,10 @@
 
 - (UIView *)drawMeasureOnActive:(int)measureIndex forPattern:(int)patternIndex
 {
-    CGRect measureFrame = CGRectMake(3*MEASURE_MARGIN+measureIndex*(MEASURE_WIDTH+MEASURE_MARGIN), 0, MEASURE_WIDTH, scrollView.frame.size.height);
+
+    float measureMargin = [self getMeasureMargin];
+    
+    CGRect measureFrame = CGRectMake(3*measureMargin+measureIndex*(MEASURE_WIDTH+measureMargin), 0, MEASURE_WIDTH, scrollView.frame.size.height);
     UIView * newMeasure = [[UIView alloc] initWithFrame:measureFrame];
     
     [newMeasure setBackgroundColor:[UIColor colorWithRed:29/255.0 green:88/255.0 blue:103/255.0 alpha:1.0]];
@@ -540,7 +545,9 @@
 
 - (UIView *)drawMeasureOff:(int)measureIndex forPattern:(int)patternIndex
 {
-    CGRect measureFrame = CGRectMake(3*MEASURE_MARGIN+measureIndex*(MEASURE_WIDTH+MEASURE_MARGIN),0,MEASURE_WIDTH,scrollView.frame.size.height);
+    float measureMargin = [self getMeasureMargin];
+    
+    CGRect measureFrame = CGRectMake(3*measureMargin+measureIndex*(MEASURE_WIDTH+measureMargin),0,MEASURE_WIDTH,scrollView.frame.size.height);
     UIView * newOffMeasure = [[UIView alloc] initWithFrame:measureFrame];
     
     [newOffMeasure setBackgroundColor:[UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
@@ -628,14 +635,12 @@
 #pragma mark - On Off
 - (void)turnOnInstrumentView
 {
-    NSLog(@"Turn on instrument view");
     [offMask setHidden:YES];
     isMute = NO;
 }
 
 - (void)turnOffInstrumentView
 {
-    NSLog(@"Turn off instrument view");
     [offMask setHidden:NO];
     isMute = YES;
 }
@@ -953,7 +958,9 @@
     activeMeasure = measureIndex;
     [self setDeclaredActiveMeasure:measureIndex];
     
-    CGPoint newOffset = CGPointMake(measureIndex*(MEASURE_WIDTH+MEASURE_MARGIN),0);
+    float measureMargin = [self getMeasureMargin];
+    
+    CGPoint newOffset = CGPointMake(measureIndex*(MEASURE_WIDTH+measureMargin),0);
     double scrollSpeed = isSlow ? SCROLL_SPEED_MAX : SCROLL_SPEED_MIN;
     
     [UIView animateWithDuration:scrollSpeed animations:^(){
@@ -1026,7 +1033,7 @@
             targetMeasure = MAX(activeMeasure-velocityOffset,0);
         }
         
-        CGPoint newOffset = CGPointMake(targetMeasure*(MEASURE_WIDTH+MEASURE_MARGIN),0);
+        CGPoint newOffset = CGPointMake(targetMeasure*(MEASURE_WIDTH+[self getMeasureMargin]),0);
         
         targetContentOffset->x = newOffset.x;
         lastContentOffset.x = newOffset.x;
@@ -1039,6 +1046,13 @@
     [self changeActiveMeasureToMeasure:targetMeasure scrollSlow:NO];
 }
 
+- (float)getMeasureMargin
+{
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    float measureMargin = (screenBounds.size.height == XBASE_LG) ? MEASURE_MARGIN_LG : MEASURE_MARGIN_SM;
+    
+    return measureMargin;
+}
 
 
 #pragma mark - System

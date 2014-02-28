@@ -37,7 +37,13 @@
 - (void)viewDidLoad
 {
     
-    UINib *nib = [UINib nibWithNibName:@"OptionsViewCell" bundle:nil];
+    // Check screen size for nib
+    NSString * nibname = @"OptionsViewCell";
+    if([[UIScreen mainScreen] bounds].size.height == XBASE_LG){
+        nibname = @"OptionsViewCell_4";
+    }
+    
+    UINib *nib = [UINib nibWithNibName:nibname bundle:nil];
     [loadTable registerNib:nib forCellReuseIdentifier:@"LoadCell"];
     
     //loadTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;

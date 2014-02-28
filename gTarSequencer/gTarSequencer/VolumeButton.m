@@ -14,9 +14,6 @@
 #define MIN_VOLUME 0.02
 #define MAX_VOLUME 4.0
 
-#define XBASE 480
-#define YBASE 320
-
 @implementation VolumeButton
 
 @synthesize delegate;

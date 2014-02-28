@@ -33,6 +33,7 @@
         instruments = [[NSMutableArray alloc] init];
         
         self.tableView.bounces = YES;
+        
 
     }
     return self;
@@ -42,7 +43,13 @@
 {
     [super viewDidLoad];
     
-    UINib *nib = [UINib nibWithNibName:@"SeqSetViewCell" bundle:nil];
+    // Check screen size for nib
+    NSString * nibname = @"SeqSetViewCell";
+    if([[UIScreen mainScreen] bounds].size.height == XBASE_LG){
+        nibname = @"SeqSetViewCell_4";
+    }
+    
+    UINib *nib = [UINib nibWithNibName:nibname bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"TrackCell"];
     
     [self.tableView setBackgroundColor:[UIColor clearColor]];
@@ -311,7 +318,18 @@
     return tableHeight/3;
 }
 
+- (void)enforceTableWidth
+{
+    int screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    int tableWidth = (screenHeight >= XBASE_LG) ? XBASE_LG : XBASE_SM;
+    
+    [self.view setFrame:CGRectMake(0, 0, tableWidth, self.view.frame.size.height)];
+    
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self enforceTableWidth];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -364,6 +382,7 @@
         return cell;
         
     }else{
+        
         static NSString *CellIdentifier = @"AddInstrument";
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

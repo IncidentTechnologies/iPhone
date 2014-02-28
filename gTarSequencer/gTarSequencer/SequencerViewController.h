@@ -45,8 +45,6 @@
     
     // Save/Load
     NSString * activeSequencer;
-    CGRect onScreenSaveLoadFrame;
-    CGRect offLeftSaveLoadFrame;
     
     // Left nav
     BOOL leftNavOpen;

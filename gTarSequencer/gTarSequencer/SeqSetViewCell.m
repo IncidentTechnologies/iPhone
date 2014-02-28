@@ -244,14 +244,12 @@
 
 -(void)turnOnInstrumentView
 {
-    NSLog(@"Turn on instrument view");
     [offMask setHidden:YES];
     isMute = NO;
 }
 
 -(void)turnOffInstrumentView
 {
-    NSLog(@"Turn off instrument view");
     [offMask setHidden:NO];
     isMute = YES;
 }

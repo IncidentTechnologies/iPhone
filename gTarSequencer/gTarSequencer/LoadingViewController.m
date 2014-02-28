@@ -45,6 +45,7 @@
     // Define imageView window
     imageView = [[UIImageView alloc] initWithImage:nil];
     imageView.frame = CGRectMake(0,0,screenX,screenY);
+    [imageView setBackgroundColor:[UIColor whiteColor]];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:imageView];
     

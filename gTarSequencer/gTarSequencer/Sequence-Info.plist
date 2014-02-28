@@ -14,6 +14,9 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>Sequencer_AppIcon-58</string>
+				<string>Sequencer_AppIcon-80</string>
+				<string>Sequencer_AppIcon-120</string>
 				<string>Sequencer_Icon58px</string>
 				<string>Sequencer_Icon80px</string>
 				<string>Sequencer_Icon120px</string>
