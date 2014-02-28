@@ -16,7 +16,7 @@
 @protocol CustomInstrumentSelectorDelegate <NSObject>
 
 - (void)closeCustomInstrumentSelectorAndScroll:(BOOL)scroll;
-- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths;
+- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName;
 
 @end
 
@@ -39,6 +39,10 @@
     
     CustomSampleCell * selectedSampleCell;
     CustomStringCell * selectedStringCell;
+
+    // Naming
+    NSArray * customIconSet;
+    int customIconCounter;
     
     // Recorder
     CustomSoundRecorder * customSoundRecorder;
@@ -81,9 +85,10 @@
 @property (nonatomic, weak) IBOutlet UIView * recordCircle;
 
 @property (nonatomic, weak) IBOutlet UIButton * saveButton;
-@property (nonatomic, weak) IBOutlet UIButton * backButton;
 @property (nonatomic, weak) IBOutlet UITextField * nameField;
 @property (nonatomic, weak) IBOutlet UIView * customIcon;
+@property (nonatomic) UIButton * customIconButton;
+@property (nonatomic, weak) IBOutlet UIButton * customIndicator;
 
 //@property (nonatomic, weak) IBOutlet UIButton * recordBackButton;
 @property (nonatomic, weak) IBOutlet UIButton * recordRecordButton;

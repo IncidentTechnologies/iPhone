@@ -237,7 +237,7 @@
 
 #pragma mark - Adding instruments
 
-- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths
+- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIsCustom:(NSNumber *)isCustom
 {
     Instrument * newInstrument = [[Instrument alloc] init];
     newInstrument.instrument = index;
@@ -245,6 +245,7 @@
     newInstrument.iconName = iconName;
     newInstrument.stringSet = stringSet;
     newInstrument.stringPaths = stringPaths;
+    newInstrument.isCustom = isCustom;
     [newInstrument performSelectorInBackground:@selector(initAudioWithInstrumentName:) withObject:instName];
     
     
@@ -302,9 +303,9 @@
     else if(indexPath.row < [instruments count])
         return tableHeight/3+1;
     else if([instruments count] == 1)
-        return 2*tableHeight/3-1;
+        return 2*tableHeight/3;
     else if([instruments count] == 2)
-        return tableHeight/3-2;
+        return tableHeight/3;
     
     // else
     return tableHeight/3;
@@ -333,6 +334,12 @@
         cell.instrumentIcon = [UIImage imageNamed:tempInst.iconName];
         cell.instrument = tempInst;
         cell.isMute = tempInst.isMuted;
+        
+        if([tempInst checkIsCustom]){
+            [cell showCustomIndicator];
+        }else{
+            [cell hideCustomIndicator];
+        }
         
         // Display icon
         cell.instrumentIconView.image = cell.instrumentIcon;
@@ -553,8 +560,9 @@
         NSString * iconName = [dict objectForKey:@"IconName"];
         NSArray * stringSet = [dict objectForKey:@"Strings"];
         NSArray * stringPaths = [dict objectForKey:@"StringPaths"];
+        NSNumber * isCustom = [dict objectForKey:@"Custom"];
         
-        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet andStringPaths:stringPaths];
+        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet andStringPaths:stringPaths andIsCustom:isCustom];
     }
 }
 
@@ -658,13 +666,13 @@
 }
 
 // save a new instrument
-- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths
+- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName
 {
     NSNumber * newIndex = [NSNumber numberWithInt:[self getCustomInstrumentsNewIndex]];
 
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
     [dict setValue:[NSNumber numberWithBool:TRUE] forKey:@"Custom"];
-    [dict setValue:@"Icon_Custom" forKey:@"IconName"];
+    [dict setValue:iconName forKey:@"IconName"];
     [dict setValue:newIndex forKey:@"Index"];
     [dict setValue:instName forKey:@"Name"];
     [dict setValue:stringSet forKey:@"Strings"];

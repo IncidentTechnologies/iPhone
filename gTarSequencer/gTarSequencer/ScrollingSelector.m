@@ -140,6 +140,7 @@
     images = [[NSMutableArray alloc] init];
     customized = [[NSMutableArray alloc] init];
     highlightedImages = [[NSMutableArray alloc] init];
+    customIndicators = [[NSMutableArray alloc] init];
     indexToDelete = -1;
     
     for (NSDictionary * dict in options)
@@ -254,9 +255,20 @@
     buttonborder.layer.borderColor = [UIColor whiteColor].CGColor;
     buttonborder.layer.cornerRadius = 5.0;
     
-    // Custom instrument, add white background
-    if([customized[index] isEqualToNumber:[NSNumber numberWithInt:1]]){
-        //[buttonborder setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5]];
+    // Custom instrument, add indicator
+    if([customized[index] boolValue]){
+        int customIndent = 9;
+        int customHeight = 6;
+        CGRect indicatorFrame = CGRectMake(3,buttonborder.frame.size.height-customIndent,customHeight,customHeight);
+        UIView * customIndicator = [[UIView alloc] initWithFrame:indicatorFrame];
+        [customIndicator setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        customIndicator.layer.cornerRadius = customHeight/2;
+        
+        [customIndicators addObject:customIndicator];
+        [buttonborder addSubview:customIndicator];
+        
+    }else{
+        [customIndicators addObject:@""];
     }
     
     UIButton * button = [[UIButton alloc] initWithFrame:imageFrame];
@@ -306,7 +318,7 @@
     }else{
         
         // Add delete recognizer for Custom Instruments
-        if([[customized objectAtIndex:index] boolValue]){
+        if([customized[index] boolValue]){
             UILongPressGestureRecognizer * pressDelete = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showDeleteForInstrument:)];
             pressDelete.minimumPressDuration = 0.5;
             [button addGestureRecognizer:pressDelete];
@@ -690,6 +702,9 @@
         [instButton.superview setBackgroundColor:[UIColor colorWithRed:216/255.0 green:64/255.0 blue:64/255.0 alpha:1.0]];
         [instButton setImage:[UIImage imageNamed:@"Trash_Icon"] forState:UIControlStateNormal];
         [instButton setImage:[UIImage imageNamed:@"Trash_Icon"] forState:UIControlStateHighlighted];
+        
+        [[customIndicators objectAtIndex:selectedIndex] setHidden:YES];
+        
     }else{
         [self hideDeleteForInstrument];
     }
@@ -704,6 +719,8 @@
     [instButton setImage:images[indexToDelete] forState:UIControlStateNormal];
     [instButton setImage:highlightedImages[indexToDelete] forState:UIControlStateHighlighted];
     [instButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
+    [[customIndicators objectAtIndex:indexToDelete] setHidden:NO];
     
     indexToDelete = -1;
     

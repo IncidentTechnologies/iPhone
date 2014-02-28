@@ -19,6 +19,7 @@
 @synthesize selectedPatternIndex;
 @synthesize selectedPatternDidChange;
 @synthesize isMuted;
+@synthesize isCustom;
 @synthesize patterns;
 
 - (id)init
@@ -38,6 +39,7 @@
         isSelected = NO;
         selectedPatternDidChange = YES;
         isMuted = NO;
+        isCustom = [NSNumber numberWithBool:FALSE];
         
     }
     return self;
@@ -65,6 +67,8 @@
         stringSet = [aDecoder decodeObjectForKey:@"Strings"];
         
         stringPaths = [aDecoder decodeObjectForKey:@"StringPaths"];
+        
+        isCustom = [aDecoder decodeObjectForKey:@"Custom"];
         
         selectedPatternDidChange = YES;
         
@@ -96,6 +100,16 @@
 {
     selectedPatternDidChange = YES;
     [selectedPattern turnOnAllFlags];
+}
+
+- (void)setCustom:(BOOL)yesno
+{
+    isCustom = [NSNumber numberWithBool:yesno];
+}
+
+- (BOOL)checkIsCustom
+{
+    return [isCustom boolValue];
 }
 
 #pragma Playing Notes
@@ -195,6 +209,8 @@
     [aCoder encodeObject:stringSet forKey:@"Strings"];
     [aCoder encodeObject:stringPaths forKey:@"StringPaths"];
     [aCoder encodeBool:isMuted forKey:@"Is Muted"];
+    [aCoder encodeObject:isCustom forKey:@"Custom"];
+    
 }
 
 @end

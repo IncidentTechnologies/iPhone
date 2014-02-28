@@ -42,6 +42,11 @@
                                     <constraint firstAttribute="width" constant="40" id="uoR-gA-dME"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="beT-Ug-mhj">
+                                <rect key="frame" x="18" y="65" width="6" height="6"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.91764705882352937" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niX-nk-D2L">
                                 <rect key="frame" x="90" y="-2" width="83" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -223,6 +228,7 @@
             <connections>
                 <outlet property="addMeasuresButton" destination="l98-2d-At3" id="IdE-3f-wfG"/>
                 <outlet property="borderContainer" destination="g4M-Sy-HyH" id="9AB-k1-pkj"/>
+                <outlet property="customIndicator" destination="beT-Ug-mhj" id="2Kq-M7-RkR"/>
                 <outlet property="deleteButton" destination="tQa-SC-8ux" id="fpM-N1-ddO"/>
                 <outlet property="instrumentIconBorder" destination="Ep3-lN-cJv" id="Rc7-Qc-hrJ"/>
                 <outlet property="instrumentIconView" destination="h9D-Cz-rnz" id="RgR-w3-1go"/>

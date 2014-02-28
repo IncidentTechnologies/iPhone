@@ -34,6 +34,7 @@
 {
     NSMutableArray * images;
     NSMutableArray * highlightedImages;
+    NSMutableArray * customIndicators;
     NSMutableArray * names;
     NSMutableArray * customized;
     

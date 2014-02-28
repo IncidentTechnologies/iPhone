@@ -23,6 +23,6 @@
 
 @property (weak, nonatomic) id<InfoDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton * infoButton;
-
+@property (weak, nonatomic) IBOutlet UIImageView * infoArrow;
 
 @end

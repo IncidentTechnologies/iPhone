@@ -93,6 +93,7 @@
 @property (weak, nonatomic) IBOutlet UIButton * offButton;
 @property (weak, nonatomic) IBOutlet UIButton * instrumentIconButton;
 @property (weak, nonatomic) IBOutlet UIImageView * instrumentIcon;
+@property (weak, nonatomic) IBOutlet UIView * customIndicator;
 
 @property (weak, nonatomic) IBOutlet UIView * pageOne;
 @property (weak, nonatomic) IBOutlet UIView * pageTwo;

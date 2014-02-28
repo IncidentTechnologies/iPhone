@@ -42,6 +42,9 @@
 - (void)setSelected:(BOOL)yesno;
 - (BOOL)isSelected;
 
+- (void)setCustom:(BOOL)yesno;
+- (BOOL)checkIsCustom;
+
 - (int)selectedPatternIndex;
 
 - (void)turnOnAllFlags;
@@ -57,5 +60,6 @@
 @property (retain, nonatomic) Pattern * selectedPattern;
 @property (nonatomic) BOOL selectedPatternDidChange;
 @property (nonatomic) BOOL isMuted;
+@property (nonatomic) NSNumber * isCustom;
 
 @end

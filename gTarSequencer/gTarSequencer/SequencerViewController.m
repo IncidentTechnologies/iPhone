@@ -305,9 +305,9 @@
     [self selectNavChoice:@"Instrument" withShift:NO];
 }
 
-- (void)setSelectedInstrument:(NSString *)iconName
+- (void)setSelectedInstrument:(Instrument *)inst
 {
-    [leftNavigator enableInstrumentViewWithIcon:iconName];
+    [leftNavigator enableInstrumentViewWithIcon:inst.iconName showCustom:[inst checkIsCustom]];
 }
 
 #pragma mark - Save Load Delegate
@@ -486,7 +486,7 @@
         NSLog(@"Get current instrument: Load Icon");
         Instrument * selectedInst = [seqSetViewController getCurrentInstrument];
         if(selectedInst != nil){
-            [leftNavigator enableInstrumentViewWithIcon:selectedInst.iconName];
+            [leftNavigator enableInstrumentViewWithIcon:selectedInst.iconName showCustom:[selectedInst checkIsCustom]];
         }
         
     }else{
@@ -754,7 +754,8 @@
     [guitarView update];
     
     // Also update selected instrument
-    [self setSelectedInstrument:[seqSetViewController getCurrentInstrument].iconName];
+    Instrument * inst = [seqSetViewController getCurrentInstrument];
+    [self setSelectedInstrument:inst];
     
     // Also update the selected table cell
     //[seqSetViewController setSelectedCellToSelectedInstrument];
@@ -763,7 +764,8 @@
 
 - (void)updateSelectedInstrument
 {
-    [self setSelectedInstrument:[seqSetViewController getCurrentInstrument].iconName];
+    Instrument * inst = [seqSetViewController getCurrentInstrument];
+    [self setSelectedInstrument:inst];
 }
 
 // Ensure current playband is reflected in the data if displayed (>=0)
@@ -786,7 +788,8 @@
 - (void) numInstrumentsDidChange:(int)numInstruments
 {
     if(numInstruments > 0){
-        [leftNavigator enableInstrumentViewWithIcon:[seqSetViewController getCurrentInstrument].iconName];
+        Instrument * inst = [seqSetViewController getCurrentInstrument];
+        [leftNavigator enableInstrumentViewWithIcon:inst.iconName showCustom:[inst checkIsCustom]];
     }else{
         [leftNavigator disableInstrumentView];
     }

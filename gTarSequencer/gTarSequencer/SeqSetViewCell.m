@@ -24,6 +24,7 @@
 @synthesize isMute;
 @synthesize instrumentIcon;
 @synthesize instrumentName;
+@synthesize customIndicator;
 @synthesize measureOne;
 @synthesize measureTwo;
 @synthesize measureThree;
@@ -448,6 +449,16 @@
     return strokeView;
 }
 
+-(void)showCustomIndicator
+{
+    customIndicator.layer.cornerRadius = customIndicator.frame.size.width/2;
+    [customIndicator setHidden:NO];
+}
+
+-(void)hideCustomIndicator
+{
+    [customIndicator setHidden:YES];
+}
 
 #pragma mark Change Instrument
 - (IBAction)userDidTapInstrumentIcon:(id)sender

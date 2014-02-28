@@ -41,9 +41,10 @@
 @synthesize recordButton;
 @synthesize recordCircle;
 @synthesize saveButton;
-@synthesize backButton;
 @synthesize nameField;
 @synthesize customIcon;
+@synthesize customIconButton;
+@synthesize customIndicator;
 //@synthesize recordBackButton;
 @synthesize recordClearButton;
 @synthesize recordRecordButton;
@@ -259,23 +260,8 @@
     CGRect newFrame = backgroundView.frame;
     [self setBackgroundViewFromNib:@"CustomInstrumentNamer" withFrame:newFrame andRemove:backgroundView forViewState:VIEW_CUSTOM_NAME];
     
-    [backButton addTarget:self action:@selector(userDidBack:) forControlEvents:UIControlEventTouchUpInside];
-    [self drawBackButtonArrow];
-    
     // Draw icon
-    CGRect imageFrame = CGRectMake(10, 10, customIcon.frame.size.width - 20, customIcon.frame.size.height - 20);
-    
-    [customIcon setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5]];
-    customIcon.layer.cornerRadius = 5.0;
-    customIcon.layer.borderWidth = 1.0;
-    customIcon.layer.borderColor = [UIColor whiteColor].CGColor;
-    
-    UIButton * button = [[UIButton alloc] initWithFrame:imageFrame];
-    [button setBackgroundColor:[UIColor clearColor]];
-    
-    [button setImage:[UIImage imageNamed:@"Icon_Custom"] forState:UIControlStateNormal];
-    
-    [customIcon addSubview:button];
+    [self initCustomIcon];
     
     // Setup text field listener
     nameField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
@@ -292,11 +278,47 @@
     [self checkIfNameReady];
 }
 
+- (void)initCustomIcon
+{
+    if(!customIconSet){
+        customIconSet = [[NSArray alloc] initWithObjects:@"Icon_Music",@"Icon_Piano",@"Icon_Violin",@"Icon_Vibraphone",@"Icon_Percussion",@"Icon_WubWub",@"Icon_Saxophone",@"Icon_Trombone", nil];
+        customIconCounter = 0;
+    }
+    
+    customIndicator.layer.cornerRadius = customIndicator.frame.size.width/2.0;
+        
+    CGRect imageFrame = CGRectMake(10, 10, customIcon.frame.size.width - 20, customIcon.frame.size.height - 20);
+    
+    [customIcon setBackgroundColor:[UIColor clearColor]];
+    customIcon.layer.cornerRadius = 5.0;
+    customIcon.layer.borderWidth = 1.0;
+    customIcon.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    UIButton * button = [[UIButton alloc] initWithFrame:imageFrame];
+    [button setBackgroundColor:[UIColor clearColor]];
+    
+    [button setImage:[UIImage imageNamed:[customIconSet objectAtIndex:customIconCounter]] forState:UIControlStateNormal];
+    
+    [button addTarget:self action:@selector(changeCustomIcon) forControlEvents:UIControlEventTouchUpInside];
+    
+    customIconButton = button;
+    
+    [customIcon addSubview:button];
+}
+
+- (void)changeCustomIcon
+{
+    customIconCounter++;
+    customIconCounter = customIconCounter % [customIconSet count];
+    
+    [customIconButton setImage:[UIImage imageNamed:[customIconSet objectAtIndex:customIconCounter]] forState:UIControlStateNormal];
+}
+
 - (void)userDidSave:(id)sender
 {
     NSString * filename = nameField.text;
 
-    [delegate saveCustomInstrumentWithStrings:stringSet andName:filename andStringPaths:stringPaths];
+    [delegate saveCustomInstrumentWithStrings:stringSet andName:filename andStringPaths:stringPaths andIcon:[customIconSet objectAtIndex:customIconCounter]];
 }
 
 - (void)userDidCancel:(id)sender
@@ -304,7 +326,7 @@
     // make sure keyboard is hidden
     [nameField resignFirstResponder];
     
-    if(viewState == VIEW_CUSTOM_RECORD){
+    if(viewState == VIEW_CUSTOM_RECORD || viewState == VIEW_CUSTOM_NAME){
         [self userDidBack:sender];
     }else{
         [delegate closeCustomInstrumentSelectorAndScroll:NO];
@@ -364,8 +386,11 @@
     
     if([nameField.text isEqualToString:defaultText]){
         nameField.text = @"";
+    }else{
+        [self initAttributedStringForText:nameField];
     }
 }
+
 - (void)nameFieldDidChange:(id)sender
 {
     int maxLength = 10;
@@ -373,6 +398,8 @@
     // check length
     if([nameField.text length] > maxLength){
         nameField.text = [nameField.text substringToIndex:maxLength];
+    }else if([nameField.text length] == 1){
+        [self initAttributedStringForText:nameField];
     }
     
     // enforce uppercase
@@ -381,6 +408,7 @@
     [self checkIfNameReady];
 
 }
+
 -(void)nameFieldDoneEditing:(id)sender
 {
     // return icon and name to position
@@ -402,6 +430,10 @@
     [nameField resignFirstResponder];
     
     [self resetNameFieldIfBlank];
+    
+    // hide styles
+    [self clearAttributedStringForText:nameField];
+    
 }
 
 
@@ -425,28 +457,28 @@
     if([recordingNameField.text isEqualToString:defaultText]){
         recordingNameField.text = @"";
     }else{
-        [self initRecordingNameAttributedString];
+        [self initAttributedStringForText:recordingNameField];
     }
     
 }
 
-- (void)initRecordingNameAttributedString
+- (void)initAttributedStringForText:(UITextField *)textField
 {
     
     // Create attributed
     UIColor * blueColor = [UIColor colorWithRed:0/255.0 green:161/266.0 blue:222/255.0 alpha:1.0];
-    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:recordingNameField.text];
-    [str addAttribute:NSBackgroundColorAttributeName value:blueColor range:NSMakeRange(0, recordingNameField.text.length)];
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:textField.text];
+    [str addAttribute:NSBackgroundColorAttributeName value:blueColor range:NSMakeRange(0, textField.text.length)];
     
-    [recordingNameField setAttributedText:str];
+    [textField setAttributedText:str];
 }
 
-- (void)clearRecordingNameAttributedString
+- (void)clearAttributedStringForText:(UITextField *)textField
 {
-    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:recordingNameField.text];
-    [str addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:NSMakeRange(0, recordingNameField.text.length)];
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:textField.text];
+    [str addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:NSMakeRange(0, textField.text.length)];
     
-    [recordingNameField setAttributedText:str];
+    [textField setAttributedText:str];
 }
 
 - (void)recordingNameFieldDidChange:(id)sender
@@ -456,7 +488,7 @@
     if([recordingNameField.text length] > maxLength){
         recordingNameField.text = [recordingNameField.text substringToIndex:maxLength];
     }else if([recordingNameField.text length] == 1){
-        [self initRecordingNameAttributedString];
+        [self initAttributedStringForText:recordingNameField];
     }
     
     // enforce capitalizing
@@ -478,7 +510,7 @@
     }
     
     // hide styles
-    [self clearRecordingNameAttributedString];
+    [self clearAttributedStringForText:recordingNameField];
     
 }
 
@@ -560,16 +592,18 @@
 
 -(void)userDidClearRecord
 {
-    [self changeRecordState:RECORD_STATE_OFF];
-    [self hideRecordEditingButtons];
-    
-    [self resetProgressBar];
-    [self resetPlayBar];
-    [self clearAudioDrawing];
-    
-    // Disable save
-    isRecordingReady = FALSE;
-    [self checkIfRecordSaveReady];
+    if(playResetTimer == nil){
+        [self changeRecordState:RECORD_STATE_OFF];
+        [self hideRecordEditingButtons];
+        
+        [self resetProgressBar];
+        [self resetPlayBar];
+        [self clearAudioDrawing];
+        
+        // Disable save
+        isRecordingReady = FALSE;
+        [self checkIfRecordSaveReady];
+    }
 }
 
 -(void)userDidEndRecord
@@ -1762,39 +1796,6 @@
     nextButtonArrow = image;
     
     [nextButton addSubview:image];
-    
-    UIGraphicsEndImageContext();
-}
-
-- (void)drawBackButtonArrow
-{
-    
-    CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    int playWidth = 8;
-    int playX = backButton.frame.size.width/2 - playWidth/2 - 20;
-    int playY = 14;
-    CGFloat playHeight = backButton.frame.size.height - 2*playY;
-    
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-    
-    CGContextSetLineWidth(context, 2.0);
-    
-    CGContextMoveToPoint(context, playX, playY);
-    CGContextAddLineToPoint(context, playX, playY+playHeight);
-    CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
-    CGContextClosePath(context);
-    
-    CGContextFillPath(context);
-    
-    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
-    
-    [backButton addSubview:image];
     
     UIGraphicsEndImageContext();
 }

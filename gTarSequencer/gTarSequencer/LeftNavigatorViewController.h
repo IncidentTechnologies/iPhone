@@ -29,7 +29,7 @@
 
 -(IBAction)selectNav:(id)sender;
 -(void)setNavButtonOn:(NSString *)navChoice;
--(void)enableInstrumentViewWithIcon:(NSString *)instIcon;
+-(void)enableInstrumentViewWithIcon:(NSString *)instIcon showCustom:(BOOL)isCustom;
 -(void)disableInstrumentView;
 -(void)changeConnectedButton:(BOOL)isConnected;
 
@@ -44,5 +44,6 @@
 @property (weak, nonatomic) IBOutlet UIButton * leftSlider;
 @property (weak, nonatomic) IBOutlet UIView * leftSliderPinTop;
 @property (weak, nonatomic) IBOutlet UIView * leftSliderPinBottom;
+@property (weak, nonatomic) IBOutlet UIView * customIndicator;
 
 @end

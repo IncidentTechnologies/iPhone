@@ -19,6 +19,7 @@
 @synthesize leftSlider;
 @synthesize leftSliderPinTop;
 @synthesize leftSliderPinBottom;
+@synthesize customIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +50,7 @@
     float instrumentImageHeight = instrumentButton.frame.size.height-5.0;
     float instrumentImageWidth = instrumentButton.frame.size.height-5.0;
     [instrumentButton setImageEdgeInsets:UIEdgeInsetsMake((instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2, (instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2)];
+    [self hideCustomIndicator];
     
     [optionsButton setImage:[UIImage imageNamed:@"Options_Icon"] forState:UIControlStateNormal];
     float optionsImageHeight = 22.0;
@@ -150,7 +152,7 @@
     // (share button)
 }
 
--(void)enableInstrumentViewWithIcon:(NSString *)instIcon
+-(void)enableInstrumentViewWithIcon:(NSString *)instIcon showCustom:(BOOL)isCustom
 {
     
     if(instIcon.length == 0){
@@ -160,12 +162,18 @@
     
     [instrumentButton setAlpha:1.0];
     instrumentViewEnabled = true;
-    [self setInstrumentIcon:instIcon];
+    [self setInstrumentIcon:instIcon showCustom:isCustom];
 }
 
--(void)setInstrumentIcon:(NSString *)instIcon
+-(void)setInstrumentIcon:(NSString *)instIcon showCustom:(BOOL)isCustom
 {
     [instrumentButton setImage:[UIImage imageNamed:instIcon] forState:UIControlStateNormal];
+    
+    if(isCustom){
+        [self showCustomIndicator];
+    }else{
+        [self hideCustomIndicator];
+    }
 }
 
 -(void)disableInstrumentView
@@ -173,6 +181,17 @@
     [instrumentButton setAlpha:0.2];
     instrumentViewEnabled = false;
     [instrumentButton setImage:[UIImage imageNamed:defaultInstrumentIcon] forState:UIControlStateNormal];
+}
+
+-(void)showCustomIndicator
+{
+    customIndicator.layer.cornerRadius = customIndicator.frame.size.width/2;
+    [customIndicator setHidden:NO];
+}
+
+-(void)hideCustomIndicator
+{
+    [customIndicator setHidden:YES];
 }
 
 /*

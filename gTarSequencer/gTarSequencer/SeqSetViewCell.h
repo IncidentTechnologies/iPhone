@@ -45,6 +45,9 @@
 - (void)update;
 - (void)deselect;
 
+- (void)showCustomIndicator;
+- (void)hideCustomIndicator;
+
 @property (weak, nonatomic) SeqSetViewController * parent;
 
 @property (weak, nonatomic) Instrument * instrument;
@@ -63,6 +66,7 @@
 // cell elements
 @property (weak, nonatomic) IBOutlet UIImageView * instrumentIconView;
 @property (weak, nonatomic) IBOutlet UIButton * instrumentIconBorder;
+@property (weak, nonatomic) IBOutlet UIView * customIndicator;
 
 @property (weak, nonatomic) IBOutlet UIButton * patternA;
 @property (weak, nonatomic) IBOutlet UIButton * patternB;

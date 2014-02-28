@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstrumentViewController">
             <connections>
+                <outlet property="customIndicator" destination="IoH-0q-Ut2" id="EUv-JC-Kh7"/>
                 <outlet property="instrumentIcon" destination="RJo-SI-EdU" id="SyM-Xz-iiP"/>
                 <outlet property="instrumentIconButton" destination="h7j-Qe-Xdr" id="JZy-d3-pR0"/>
                 <outlet property="offButton" destination="mwx-tL-nxF" id="R64-nK-Odk"/>
@@ -33,17 +34,22 @@
                     <color key="backgroundColor" red="0.11372549019607843" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7j-Qe-Xdr" customClass="UIButton">
-                    <rect key="frame" x="20" y="5" width="40" height="40"/>
+                    <rect key="frame" x="20" y="3" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RJo-SI-EdU">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                     </subviews>
                     <connections>
                         <action selector="viewSeqSet:" destination="-1" eventType="touchUpInside" id="8gL-Ov-x1q"/>
                     </connections>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IoH-0q-Ut2">
+                    <rect key="frame" x="18" y="39" width="5" height="5"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.91764705879999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dAi-rv-0RH">
                     <rect key="frame" x="0.0" y="65" width="480" height="158"/>

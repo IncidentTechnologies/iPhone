@@ -33,6 +33,7 @@
 @synthesize pageFour;
 @synthesize offMask;
 @synthesize isMute;
+@synthesize customIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -84,6 +85,7 @@
     [super viewDidLoad];
     
     [offMask setHidden:YES];
+    
     
     //
     // SCROLLING
@@ -221,6 +223,9 @@
         }
     }
     
+    // Custom Indicator
+    [self showHideCustomIndicator:[currentInst checkIsCustom]];
+
     // Update active pattern and active measure
     activePattern = inst.selectedPatternIndex;
     activeMeasure = inst.selectedPattern.selectedMeasureIndex;
@@ -245,6 +250,16 @@
     }
     
     NSLog(@"Using pattern %i and measure %i",activePattern,activeMeasure);
+}
+
+- (void)showHideCustomIndicator:(BOOL)isCustom
+{
+    customIndicator.layer.cornerRadius = customIndicator.frame.size.width/2;
+    if(isCustom){
+        [customIndicator setHidden:NO];
+    }else{
+        [customIndicator setHidden:YES];
+    }
 }
 
 #pragma mark - Measures
