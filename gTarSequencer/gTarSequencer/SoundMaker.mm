@@ -14,12 +14,10 @@
 
 #define MAX_AMPLITUDE 4.0
 #define MIN_AMPLITUDE 0.02
+#define GTAR_NUM_STRINGS 6
 
 @interface SoundMaker () {
 
-    AudioController * audioController;
-    AudioNode * root;
-    
     //WavetableNode *m_wavNode;
     //EnvelopeNode *m_envNode;
     SampleNode *m_sampNode;
@@ -45,16 +43,18 @@
     return self;
 }
 
-- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths
+- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index
 {
     self = [super init];
     if(self){
         
-        audioController = [AudioController sharedAudioController];
-        root = [[audioController GetNodeNetwork] GetRootNode];
+        AudioController * audioController = [AudioController sharedAudioController];
+        AudioNode * root = [[audioController GetNodeNetwork] GetRootNode];
         
         audioStringSet = stringSet;
         audioStringPaths = stringPaths;
+        
+        instIndex = index;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
@@ -81,13 +81,15 @@
     m_samplerNode = new SamplerNode();
     SamplerBankNode * newBank = NULL;
     
-    for(int i = 0; i < 6; i++){
+    for(int i = 0; i < GTAR_NUM_STRINGS; i++){
         filepath[i] = (char *)malloc(sizeof(char) * 1024);
     }
     
-    for(int i = 0; i < 6; i++){
+    m_samplerNode->CreateNewBank(newBank);
+    
+    for(int i = 0; i < GTAR_NUM_STRINGS; i++){
         
-        m_samplerNode->CreateNewBank(newBank);
+        //m_samplerNode->CreateNewBank(newBank);
         
         // Determine filetype
         if([audioStringPaths[i] isEqualToString:@"Custom"]){
@@ -108,7 +110,7 @@
         
         NSLog(@"Loading sample %s",filepath[i]);
         
-        m_samplerNode->LoadSampleIntoBank(i, filepath[i], m_sampNode);
+        m_samplerNode->LoadSampleIntoBank(0, filepath[i], m_sampNode);
         
     }
 }
@@ -123,7 +125,7 @@
     
     NSLog(@"Playing note on string %i fret %i with amplitude %f",str,fret,amplitude);
     
-    m_samplerNode->TriggerBankSample(str, 0);
+    m_samplerNode->TriggerBankSample(0, str);
     
     //[audioController PluckString:str atFret:fret withAmplitude:amplitude];
 }

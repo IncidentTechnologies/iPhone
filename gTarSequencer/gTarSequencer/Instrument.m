@@ -78,7 +78,7 @@
 
 - (void)initAudioWithInstrumentName:(NSString *)instName
 {
-    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths];
+    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths andIndex:instrument];
 }
 
 - (void)setSelected:(BOOL)yesno

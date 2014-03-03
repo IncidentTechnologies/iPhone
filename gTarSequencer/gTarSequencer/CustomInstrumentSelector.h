@@ -59,6 +59,7 @@
     BOOL isRecordingNameReady;
     BOOL isPaused;
     
+    float timePlayed;
     float leftFirstX;
     float rightFirstX;
     float progressBarDefaultWidth;

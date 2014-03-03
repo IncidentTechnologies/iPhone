@@ -15,9 +15,6 @@
 		580A52061864DFF50077240B /* Icon_Percussion.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F61864DFF50077240B /* Icon_Percussion.png */; };
 		580A52071864DFF50077240B /* Icon_Piano.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F71864DFF50077240B /* Icon_Piano.png */; };
 		580A52091864DFF50077240B /* Icon_WubWub.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F91864DFF50077240B /* Icon_WubWub.png */; };
-		580A52151864E0E00077240B /* Sequencer_Icon58px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52121864E0DF0077240B /* Sequencer_Icon58px.png */; };
-		580A52161864E0E00077240B /* Sequencer_Icon80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52131864E0DF0077240B /* Sequencer_Icon80px.png */; };
-		580A52171864E0E00077240B /* Sequencer_Icon120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A52141864E0DF0077240B /* Sequencer_Icon120px.png */; };
 		5811AAE0187B88C800FC0BD2 /* Percussion 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA78187B88C700FC0BD2 /* Percussion 0.mp3 */; };
 		5811AAE1187B88C800FC0BD2 /* Percussion 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA79187B88C700FC0BD2 /* Percussion 1.mp3 */; };
 		5811AAE2187B88C800FC0BD2 /* Percussion 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA7A187B88C700FC0BD2 /* Percussion 10.mp3 */; };
@@ -308,9 +305,9 @@
 		6DAA158918C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */; };
 		6DAA158A18C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */; };
 		6DAA158B18C12472003DAB30 /* Sequencer_AppIcon-114x114sq.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158718C12472003DAB30 /* Sequencer_AppIcon-114x114sq.png */; };
-		6DAA158F18C12525003DAB30 /* Sequencer_AppIcon-58.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158C18C12525003DAB30 /* Sequencer_AppIcon-58.png */; };
-		6DAA159018C12525003DAB30 /* Sequencer_AppIcon-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158D18C12525003DAB30 /* Sequencer_AppIcon-80.png */; };
-		6DAA159118C12525003DAB30 /* Sequencer_AppIcon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158E18C12525003DAB30 /* Sequencer_AppIcon-120.png */; };
+		6DAA158F18C12525003DAB30 /* Sequencer_Icon58px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158C18C12525003DAB30 /* Sequencer_Icon58px.png */; };
+		6DAA159018C12525003DAB30 /* Sequencer_Icon80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */; };
+		6DAA159118C12525003DAB30 /* Sequencer_Icon120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */; };
@@ -338,9 +335,6 @@
 		580A51F61864DFF50077240B /* Icon_Percussion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Percussion.png; sourceTree = "<group>"; };
 		580A51F71864DFF50077240B /* Icon_Piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Piano.png; sourceTree = "<group>"; };
 		580A51F91864DFF50077240B /* Icon_WubWub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_WubWub.png; sourceTree = "<group>"; };
-		580A52121864E0DF0077240B /* Sequencer_Icon58px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon58px.png; sourceTree = "<group>"; };
-		580A52131864E0DF0077240B /* Sequencer_Icon80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon80px.png; sourceTree = "<group>"; };
-		580A52141864E0DF0077240B /* Sequencer_Icon120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon120px.png; sourceTree = "<group>"; };
 		5811AA78187B88C700FC0BD2 /* Percussion 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 0.mp3"; sourceTree = "<group>"; };
 		5811AA79187B88C700FC0BD2 /* Percussion 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 1.mp3"; sourceTree = "<group>"; };
 		5811AA7A187B88C700FC0BD2 /* Percussion 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 10.mp3"; sourceTree = "<group>"; };
@@ -667,9 +661,9 @@
 		6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57sq.png"; sourceTree = "<group>"; };
 		6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-114x114rd.png"; sourceTree = "<group>"; };
 		6DAA158718C12472003DAB30 /* Sequencer_AppIcon-114x114sq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-114x114sq.png"; sourceTree = "<group>"; };
-		6DAA158C18C12525003DAB30 /* Sequencer_AppIcon-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-58.png"; sourceTree = "<group>"; };
-		6DAA158D18C12525003DAB30 /* Sequencer_AppIcon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-80.png"; sourceTree = "<group>"; };
-		6DAA158E18C12525003DAB30 /* Sequencer_AppIcon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-120.png"; sourceTree = "<group>"; };
+		6DAA158C18C12525003DAB30 /* Sequencer_Icon58px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon58px.png; sourceTree = "<group>"; };
+		6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon80px.png; sourceTree = "<group>"; };
+		6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon120px.png; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell_4.xib; sourceTree = "<group>"; };
@@ -766,9 +760,9 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
-				6DAA158C18C12525003DAB30 /* Sequencer_AppIcon-58.png */,
-				6DAA158D18C12525003DAB30 /* Sequencer_AppIcon-80.png */,
-				6DAA158E18C12525003DAB30 /* Sequencer_AppIcon-120.png */,
+				6DAA158C18C12525003DAB30 /* Sequencer_Icon58px.png */,
+				6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */,
+				6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */,
 				6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */,
 				6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */,
 				6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */,
@@ -782,9 +776,6 @@
 				58F5448B18AB161E009E6E43 /* Power_Icon.png */,
 				58F5448C18AB161E009E6E43 /* Set_Icon.png */,
 				58F5448D18AB161E009E6E43 /* Volume_Icon.png */,
-				580A52121864E0DF0077240B /* Sequencer_Icon58px.png */,
-				580A52131864E0DF0077240B /* Sequencer_Icon80px.png */,
-				580A52141864E0DF0077240B /* Sequencer_Icon120px.png */,
 				580A51F11864DFF50077240B /* gTarConnectedLogo.png */,
 				580A51F21864DFF50077240B /* gTarNotConnectedLogo.png */,
 				58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */,
@@ -1465,7 +1456,6 @@
 				587C9FB71888C0E7001F57C7 /* Trombone 3.mp3 in Resources */,
 				587C9F901888C0E7001F57C7 /* Guitar 6.mp3 in Resources */,
 				5811AB37187B88C800FC0BD2 /* Percussion 86.mp3 in Resources */,
-				580A52151864E0E00077240B /* Sequencer_Icon58px.png in Resources */,
 				5811AB42187B88C800FC0BD2 /* Percussion 96.mp3 in Resources */,
 				58F6167C188F5E2700020A74 /* Icon_Music.png in Resources */,
 				58F5449118AB161E009E6E43 /* Volume_Icon.png in Resources */,
@@ -1489,7 +1479,6 @@
 				587C9F871888C0E7001F57C7 /* Dubstep 3.mp3 in Resources */,
 				5811AB36187B88C800FC0BD2 /* Percussion 85.mp3 in Resources */,
 				5811AB02187B88C800FC0BD2 /* Percussion 38.mp3 in Resources */,
-				580A52171864E0E00077240B /* Sequencer_Icon120px.png in Resources */,
 				6DFDB02218C02BB2004D573B /* SeqSetViewCell_4.xib in Resources */,
 				587C9FCC1888C0E7001F57C7 /* WubWub 6.mp3 in Resources */,
 				5811AB09187B88C800FC0BD2 /* Percussion 44.mp3 in Resources */,
@@ -1518,7 +1507,7 @@
 				587C9FB81888C0E7001F57C7 /* Trombone 4.mp3 in Resources */,
 				587C9F7C1888C0E7001F57C7 /* 808 4.mp3 in Resources */,
 				5811AAF0187B88C800FC0BD2 /* Percussion 21.mp3 in Resources */,
-				6DAA158F18C12525003DAB30 /* Sequencer_AppIcon-58.png in Resources */,
+				6DAA158F18C12525003DAB30 /* Sequencer_Icon58px.png in Resources */,
 				58D6176D1863BF5E001EB327 /* Sequence8.png in Resources */,
 				587C9FB31888C0E7001F57C7 /* Rock 5.mp3 in Resources */,
 				5811AB0C187B88C800FC0BD2 /* Percussion 47.mp3 in Resources */,
@@ -1558,7 +1547,7 @@
 				587C9F7E1888C0E7001F57C7 /* 808 6.mp3 in Resources */,
 				587C9F931888C0E7001F57C7 /* House 3.mp3 in Resources */,
 				587C9F9A1888C0E7001F57C7 /* Percussion 4.mp3 in Resources */,
-				6DAA159118C12525003DAB30 /* Sequencer_AppIcon-120.png in Resources */,
+				6DAA159118C12525003DAB30 /* Sequencer_Icon120px.png in Resources */,
 				5811AB19187B88C800FC0BD2 /* Percussion 59.mp3 in Resources */,
 				587C9F821888C0E7001F57C7 /* Chiptune 4.mp3 in Resources */,
 				587C9F7B1888C0E7001F57C7 /* 808 3.mp3 in Resources */,
@@ -1614,7 +1603,6 @@
 				5811AB01187B88C800FC0BD2 /* Percussion 37.mp3 in Resources */,
 				6D48127E18B5363700598CC2 /* README.md in Resources */,
 				58E635331889FD800036E4F1 /* Bacon 4.mp3 in Resources */,
-				580A52161864E0E00077240B /* Sequencer_Icon80px.png in Resources */,
 				6D44A45A18B5937B00992D3D /* InfoLogo.png in Resources */,
 				583917951877995D006E3DC3 /* ScrollingSelector.xib in Resources */,
 				5811AAF2187B88C800FC0BD2 /* Percussion 23.mp3 in Resources */,
@@ -1656,7 +1644,7 @@
 				5811AB25187B88C800FC0BD2 /* Percussion 7.mp3 in Resources */,
 				587C9F841888C0E7001F57C7 /* Chiptune 6.mp3 in Resources */,
 				5811AAE2187B88C800FC0BD2 /* Percussion 10.mp3 in Resources */,
-				6DAA159018C12525003DAB30 /* Sequencer_AppIcon-80.png in Resources */,
+				6DAA159018C12525003DAB30 /* Sequencer_Icon80px.png in Resources */,
 				5811AAFA187B88C800FC0BD2 /* Percussion 30.mp3 in Resources */,
 				5811AB1F187B88C800FC0BD2 /* Percussion 64.mp3 in Resources */,
 				5811AB22187B88C800FC0BD2 /* Percussion 67.mp3 in Resources */,

@@ -16,11 +16,11 @@
 //      I find to be a useful tool, so i made this dummy class.
 @interface SoundMaker : NSObject
 {
-    
+    int instIndex;
 }
 
 
-- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths;
+- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index;
 - (void)PluckStringFret:(int)str atFret:(int)fret withAmplitude:(double)amplitude;
 
 @end

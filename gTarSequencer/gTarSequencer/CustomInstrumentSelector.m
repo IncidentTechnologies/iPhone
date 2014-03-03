@@ -10,7 +10,7 @@
 
 #define GTAR_NUM_STRINGS 6
 #define MAX_RECORD_SECONDS 4
-#define RECORD_DRAW_INTERVAL 0.01
+#define RECORD_DRAW_INTERVAL 0.001
 #define ADJUSTOR_SIZE 30.0
 
 #define VIEW_CUSTOM_INST 0
@@ -1092,6 +1092,7 @@
     [self animatePlayBarToEnd];
     
     // Change the state
+    timePlayed = 0;
     [self changeRecordState:RECORD_STATE_RECORDED];
     [self showRecordEditingButtons];
     [self playbackTimerReset];
@@ -1142,7 +1143,7 @@
     
     // Add a timeout to ensure recording finished acknowledged
     [self playResetTimerReset];
-    float playLength = 1.1*[customSoundRecorder getSampleLength]/1000.0;
+    float playLength = 1.1*([customSoundRecorder getSampleRelativeLength]/1000.0-timePlayed);
     playResetTimer = [NSTimer scheduledTimerWithTimeInterval:playLength target:self selector:@selector(playbackDidEnd) userInfo:nil repeats:YES];
     
 }
@@ -1154,7 +1155,7 @@
     [self showRecordEditingButtons];
     
     // Pause the recording
-    [customSoundRecorder pausePlayback];
+    [customSoundRecorder pausePlayback:timePlayed*1000.0];
     [self playResetTimerReset];
     isPaused = YES;
     
@@ -1177,6 +1178,8 @@
     if(recordState == RECORD_STATE_PLAYING){
         playBarPercent += RECORD_DRAW_INTERVAL/MAX_RECORD_SECONDS;
         [self movePlayBarToPercent:playBarPercent];
+        
+        timePlayed += RECORD_DRAW_INTERVAL;
     }
 }
 

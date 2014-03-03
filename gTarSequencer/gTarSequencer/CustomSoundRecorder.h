@@ -21,13 +21,17 @@
     AVAudioPlayer * player;
     
     NSString * defaultFilename;
+    
+    float timePaused;
+    float sampleStart;
+    float sampleEnd;
 }
 
 - (id)init;
 - (void)startRecord;
 - (void)stopRecord;
 - (void)startPlayback;
-- (void)pausePlayback;
+- (void)pausePlayback:(float)ms;
 - (void)unpausePlayback;
 - (void)renameRecordingToFilename:(NSString *)filename;
 - (void)deleteRecordingFilename:(NSString *)filename;
@@ -35,6 +39,7 @@
 - (unsigned long int)fetchAudioBufferSize;
 - (float *)fetchAudioBuffer;
 - (float)getSampleLength;
+- (float)getSampleRelativeLength;
 - (void)setSampleStart:(float)ms;
 - (void)setSampleEnd:(float)ms;
 

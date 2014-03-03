@@ -80,7 +80,6 @@
 
 -(void)startRecord
 {
-    
     if(!recorder.recording){
         
         NSLog(@"Recording began");
@@ -90,6 +89,7 @@
         
         // Start recording
         [recorder record];
+        
     }else{
         
         NSLog(@"Recording paused");
@@ -134,20 +134,22 @@
         //[player setDelegate:self];
         //[player play];
         
-        [self playAudioForSample];
+        NSLog(@"Play audio for sample at %i with length %f",bankCount,m_sampNode->GetLength());
+        m_samplerNode->TriggerBankSample(bankCount, 0);
     }
 }
 
--(void)pausePlayback
+-(void)pausePlayback:(float)ms
 {
-    NSLog(@"Pause playback");
-    [player pause];
+    NSLog(@"Pause playback at %f",ms);
+    timePaused = ms;
+    m_sampNode->Stop();
 }
 
 -(void)unpausePlayback
 {
-    NSLog(@"Unpause playback");
-    [player play];
+    NSLog(@"Unpause playback from %f",timePaused);
+    m_sampNode->Resume();
 }
 
 #pragma mark - Audio Player Delegate
@@ -245,17 +247,9 @@
     }
 }
 
-- (void)playAudioForSample
-{
-    
-    NSLog(@"Play audio for sample at %i with length %f",bankCount,m_sampNode->GetLength());
-    
-    m_samplerNode->TriggerBankSample(bankCount, 0);
-}
-
 - (unsigned long int)fetchAudioBufferSize
 {
-    return m_sampNode->m_pSampleBuffer->GetSampleBufferLengthMS();
+    return m_sampNode->GetSampleBuffer()->GetSampleBufferLengthMS();
 }
 
 - (float *)fetchAudioBuffer
@@ -268,7 +262,7 @@
     float * temp_buffer = (float *)malloc(sizeof(float) * samplelength);
     
     for(int i = 0; i < samplelength; i++){
-        temp_buffer[i] = m_sampNode->m_pSampleBuffer->GetNextSample(i)*multiplier;
+        temp_buffer[i] = m_sampNode->GetSampleBuffer()->GetNextSample(i)*multiplier;
     }
     
     return temp_buffer;
@@ -276,11 +270,13 @@
 
 - (void)setSampleStart:(float)ms
 {
+    sampleStart = ms;
     m_sampNode->SetStart(ms);
 }
 
 - (void)setSampleEnd:(float)ms
 {
+    sampleEnd = ms;
     m_sampNode->SetEnd(ms);
 }
 
@@ -288,5 +284,22 @@
 {
     return m_sampNode->GetLength();
 }
+
+- (float)getSampleRelativeLength
+{
+    
+    float sampleRelativeLength = sampleEnd - sampleStart;
+    
+    NSLog(@"sampleRelativeLength is now %f",sampleRelativeLength);
+    
+    if(sampleRelativeLength <= 0){
+        return [self getSampleLength]-sampleStart;
+    }else{
+        return sampleRelativeLength;
+    }
+    
+    
+}
+
 
 @end
