@@ -9,8 +9,6 @@
 #import "OptionsViewCell.h"
 #import "OptionsViewController.h"
 
-#define FILENAME_DEFAULT_TEXT @"New Set"
-
 @implementation OptionsViewCell
 
 @synthesize parent;
@@ -81,6 +79,12 @@
     [fileName addTarget:self action:@selector(saveFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [fileName addTarget:self action:@selector(saveFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
+    // Setup gesture recognizer
+    UITapGestureRecognizer * doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    doubletap.numberOfTapsRequired = 2;
+    
+    [self addGestureRecognizer:doubletap];
+    
 }
 
 - (void)setAsActiveSequencer
@@ -118,9 +122,10 @@
         
         fileText.textColor = (isActiveSequencer && !isRenamable) ? activeColor : [UIColor whiteColor];
         [fileLoad setHidden:NO];
+        [self setImageForFileLoad:parent.selectMode];
         
         // Modal changes
-        if([parent.selectMode isEqualToString:@"Rename"] || (![parent.selectMode isEqualToString:@"Load"] && isRenamable)){
+        if([parent.selectMode isEqualToString:@"SaveCurrent"] && isRenamable){
             
             NSLog(@"Selected cell is Renamable");
             
@@ -137,11 +142,11 @@
         
         NSLog(@"Deselecting cell %i",rowid);
         
-        if(![parent.selectMode isEqualToString:@"Load"] && isRenamable){
+        [self endNameEditing];
+        
+        if([parent.selectMode isEqualToString:@"SaveCurrent"] && isRenamable){
             self.contentView.backgroundColor = [UIColor grayColor];
             self.backgroundColor = [UIColor grayColor];
-            
-            [self endNameEditing];
             
         }else{
             self.contentView.backgroundColor = [UIColor whiteColor];
@@ -168,36 +173,6 @@
         // Load
         [parent userDidLoadFile:fileText.text];
         
-    }else if([parent.selectMode isEqualToString:@"Rename"]){
-        
-        // Rename
-        [parent userDidRenameFile:fileText.text toName:fileName.text];
-        fileText.text = fileName.text;
-        
-        [self endNameEditing];
-        
-        [parent deselectAllRows];
-        
-    }else if([parent.selectMode isEqualToString:@"CreateNew"]){
-    
-        NSLog(@"FileName Text is %@ and FileText Text is %@",fileName.text,fileText.text);
-        
-        NSString * emptyName = [fileName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        // Create New
-        if(![fileName.text isEqualToString:fileText.text] && ![emptyName isEqualToString:@""]){
-            fileText.text = fileName.text;
-        }
-        
-        NSLog(@"Creating new with name %@",fileText.text);
-        
-        [parent userDidCreateNewFile:fileText.text];
-        
-        [self endNameEditing];
-        
-        [parent deselectAllRows];
-        
-        
     }else if([parent.selectMode isEqualToString:@"SaveCurrent"]){
         
         // Save Current
@@ -217,15 +192,24 @@
     }
 }
 
+- (void)userDidRename
+{
+    // Rename
+    [parent userDidRenameFile:fileText.text toName:fileName.text];
+    fileText.text = fileName.text;
+    
+    // end name editing happens automatically
+    
+    [parent deselectAllRows];
+    
+}
+
 #pragma mark - Save Field
 - (void)saveFieldStartEdit:(id)sender
 {
-    // hide default
-    NSString * defaultText = FILENAME_DEFAULT_TEXT;
- 
     previousNameText = fileName.text;
     
-    if([fileName.text isEqualToString:defaultText]){
+    if([fileName.text isEqualToString:@"Save as"]){
         fileName.text = @"";
     }else{
         [self initFileAttributedString];
@@ -272,6 +256,12 @@
 
 -(void)saveFieldDoneEditing:(id)sender
 {
+    // save a rename
+    if([parent.selectMode isEqualToString:@"Load"]){
+        // rename
+        [self userDidRename];
+    }
+    
     // hide keyboard
     [self endNameEditing];
     [self clearFileAttributedString];
@@ -282,9 +272,8 @@
     NSLog(@"Begin name editing");
     if(![fileName isFirstResponder]){
         [fileName becomeFirstResponder];
-        //[fileName selectAll:self];
         
-        if([parent.selectMode isEqualToString:@"Rename"]){
+        if([parent.selectMode isEqualToString:@"Load"]){
             [parent offsetTable:self];
         }else{
             [parent disableScroll];
@@ -295,14 +284,15 @@
 -(void)endNameEditing
 {
     NSLog(@"End name editing");
+    
     // hide keyboard
     if([fileName isFirstResponder]){
         
         [fileName resignFirstResponder];
-        [parent enableScroll];
-        [parent resetTableOffset:self];    
+        [parent resetTableOffset:self];
     }
     
+    [parent enableScroll];
     [self resetFileNameIfBlank];
 }
 
@@ -315,7 +305,7 @@
     if([emptyName isEqualToString:@""] && previousNameText != nil && ![previousNameText isEqualToString:@""]){
         fileName.text = previousNameText;
     }else if([emptyName isEqualToString:@""]){
-        fileName.text = FILENAME_DEFAULT_TEXT;
+        fileName.text = @"Save as";
     }
 }
 
@@ -337,15 +327,15 @@
      NSString * nameString = fileName.text;
      NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
      
-     if([emptyName isEqualToString:@""] || [nameString isEqualToString:FILENAME_DEFAULT_TEXT]){
+     if([emptyName isEqualToString:@""] || [nameString isEqualToString:@"Save as"]){
          isReady = NO;
      }else{
          isReady = YES;
      }
     
-    if([parent isDuplicateFilename:nameString]){
-        isReady = NO;
-    }
+    //if([parent isDuplicateFilename:nameString]){
+    //    isReady = NO;
+    //}
     
     if(isReady){
         [self showHideButton:fileLoad isHidden:NO withSelector:@selector(userDidSaveLoad)];
@@ -362,6 +352,66 @@
     }else{
         [button setAlpha:0.2];
         [button removeTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+-(void)setImageForFileLoad:(NSString *)mode
+{
+    if([mode isEqualToString:@"Load"]){
+        
+        CGSize size = CGSizeMake(fileLoad.frame.size.width, fileLoad.frame.size.height);
+        UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+        
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        int loadArrowWidth = 20;
+        int loadArrowHeight = 17;
+        int loadArrowX = 10;
+        int loadArrowY = 16;
+        int topOfArrow = 8;
+        
+        CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+        CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+        
+        CGContextSetLineWidth(context, 2.0);
+        
+        CGContextMoveToPoint(context, loadArrowX, loadArrowY);
+        CGContextAddLineToPoint(context, loadArrowX+loadArrowWidth, loadArrowY);
+        CGContextAddLineToPoint(context, loadArrowX+loadArrowWidth/2, loadArrowY+loadArrowHeight);
+        CGContextClosePath(context);
+        CGContextFillPath(context);
+        
+        CGContextSetLineWidth(context, 10.0);
+        CGContextMoveToPoint(context, loadArrowX+loadArrowWidth/2, topOfArrow);
+        CGContextAddLineToPoint(context, loadArrowX+loadArrowWidth/2, loadArrowY);
+        CGContextStrokePath(context);
+    
+        UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        [fileLoad setImage:newImage forState:UIControlStateNormal];
+
+        UIGraphicsEndImageContext();
+        
+        [fileLoad setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+
+    }else{
+        [fileLoad setImage:[UIImage imageNamed:@"Save_Icon"] forState:UIControlStateNormal];
+        [fileLoad setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    }
+}
+
+#pragma mark - Double tap
+-(void)handleDoubleTap:(UITapGestureRecognizer *)sender
+{
+    if([parent.selectMode isEqualToString:@"Load"]){
+        
+        fileName.text = fileText.text;
+        
+        [fileText setHidden:YES];
+        [fileName setHidden:NO];
+        
+        // open keyboard
+        [self beginNameEditing];
     }
 }
 

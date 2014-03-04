@@ -22,7 +22,6 @@
 #define RECORD_STATE_RECORDED 2
 #define RECORD_STATE_PLAYING 3
 
-#define RECORD_DEFAULT_TEXT @"New Recording"
 #define INST_NAME_DEFAULT_TEXT @"NAME"
 
 @implementation CustomInstrumentSelector
@@ -50,6 +49,7 @@
 @synthesize recordRecordButton;
 @synthesize recordSaveButton;
 @synthesize recordActionView;
+@synthesize recordProcessingLabel;
 @synthesize progressBarContainer;
 @synthesize progressBar;
 @synthesize recordLine;
@@ -451,15 +451,7 @@
 #pragma mark - Recording Name Field
 - (void)recordingNameFieldStartEdit:(id)sender
 {
-    // hide default
-    NSString * defaultText = RECORD_DEFAULT_TEXT;
-    
-    if([recordingNameField.text isEqualToString:defaultText]){
-        recordingNameField.text = @"";
-    }else{
-        [self initAttributedStringForText:recordingNameField];
-    }
-    
+    [self initAttributedStringForText:recordingNameField];
 }
 
 - (void)initAttributedStringForText:(UITextField *)textField
@@ -520,8 +512,43 @@
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if([emptyName isEqualToString:@""]){
-        recordingNameField.text = RECORD_DEFAULT_TEXT;
+        [self setRecordDefaultText];
     }
+}
+
+- (void)setRecordDefaultText
+{
+    NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
+    
+    NSLog(@"CustomSampleList is %@",tempList);
+    
+    int customCount = 0;
+    
+    // Look through Samples, get the max CustomXXXX name and label +1
+    for(NSString * filename in tempList){
+        
+        if(!([filename rangeOfString:@"Custom"].location == NSNotFound)){
+            
+            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Custom"] withString:@""];
+            int numFromSuffix = [customSuffix intValue];
+            
+            customCount = MAX(customCount,numFromSuffix);
+        }
+    }
+    
+    customCount++;
+    
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPaddingCharacter:@"0"];
+    [numberFormatter setPaddingPosition:NSNumberFormatterPadBeforePrefix];
+    [numberFormatter setMinimumIntegerDigits:3];
+    
+    NSNumber * number = [NSNumber numberWithInt:customCount];
+    
+    NSString * numberString = [numberFormatter stringFromNumber:number];
+    
+    recordingNameField.text = [@"Custom" stringByAppendingString:numberString];
+    
 }
 
 
@@ -571,6 +598,7 @@
     [self changeRecordState:RECORD_STATE_OFF];
     [self showHideButton:recordClearButton isHidden:NO withSelector:@selector(userDidClearRecord)];
     [self showHideButton:recordRecordButton isHidden:NO withSelector:@selector(userDidTapRecord:)];
+    [self setRecordDefaultText];
     
     // Setup text field listeners
     recordingNameField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
@@ -578,7 +606,7 @@
     [recordingNameField addTarget:self action:@selector(recordingNameFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [recordingNameField addTarget:self action:@selector(recordingNameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     recordingNameField.delegate = self;
-    isRecordingNameReady = FALSE;
+    isRecordingNameReady = TRUE;
     [recordingNameField setFont:[UIFont systemFontOfSize:22.0]];
     
     // Init record editing buttons
@@ -632,11 +660,18 @@
     [self setProgressBarDefaultWidth];
     
     // Init Sampler
-    audioLoadTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(drawAudio) userInfo:nil repeats:NO];
+    recordProcessingLabel.text = @"PROCESSING";
+    audioLoadTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(initDrawAudio) userInfo:nil repeats:NO];
     
     // Enable save
     isRecordingReady = TRUE;
     [self checkIfRecordSaveReady];
+}
+
+-(void)initDrawAudio
+{
+    [self drawAudio];
+    recordProcessingLabel.text = @"RECORD NEW";
 }
 
 -(void)drawAudio
@@ -724,7 +759,7 @@
     NSString * nameString = recordingNameField.text;
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if([nameString isEqualToString:RECORD_DEFAULT_TEXT] || [emptyName isEqualToString:@""]){
+    if([emptyName isEqualToString:@""]){
         isRecordingNameReady = FALSE;
     }else{
         isRecordingNameReady = TRUE;

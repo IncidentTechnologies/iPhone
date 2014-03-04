@@ -45,5 +45,6 @@
 @property (weak, nonatomic) IBOutlet UIView * leftSliderPinTop;
 @property (weak, nonatomic) IBOutlet UIView * leftSliderPinBottom;
 @property (weak, nonatomic) IBOutlet UIView * customIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView * connectedLeftArrow;
 
 @end

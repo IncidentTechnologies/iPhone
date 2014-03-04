@@ -35,6 +35,7 @@
 - (IBAction)userDidSelectCreateNew:(id)sender;
 - (IBAction)userDidSelectSaveCurrent:(id)sender;
 - (IBAction)userDidSelectRename:(id)sender;
+- (IBAction)userDidSelectBack:(id)sender;
 - (IBAction)userDidSelectLoad:(id)sender;
 
 - (void)userDidLoadFile:(NSString *)filename;
@@ -49,7 +50,8 @@
 - (void)unloadView;
 
 - (void)deselectAllRows;
-- (BOOL)isDuplicateFilename:(NSString *)filename;
+//- (BOOL)isDuplicateFilename:(NSString *)filename;
+- (NSString *)generateNextSetName;
 - (void)disableScroll;
 - (void)enableScroll;
 
@@ -59,7 +61,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton * createNewButton;
 @property (weak, nonatomic) IBOutlet UIButton * saveCurrentButton;
-@property (weak, nonatomic) IBOutlet UIButton * renameButton;
+@property (weak, nonatomic) IBOutlet UIButton * backButton;
 @property (weak, nonatomic) IBOutlet UIButton * loadButton;
 @property (weak, nonatomic) IBOutlet UILabel * noSetsLabel;
 @property (weak, nonatomic) IBOutlet UITableView * loadTable;

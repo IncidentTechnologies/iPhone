@@ -189,7 +189,6 @@
 
 - (void)deleteRecordingFilename:(NSString *)filename
 {
-    
     // Create a subfolder Samples/{Category} if it doesn't exist yet
     NSLog(@"Deleting file %@.m4a",filename);
     

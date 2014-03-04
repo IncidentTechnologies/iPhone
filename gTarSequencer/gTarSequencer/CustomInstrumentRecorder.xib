@@ -11,6 +11,7 @@
                 <outlet property="progressBarContainer" destination="8Tz-1A-xDq" id="UoZ-4S-eWF"/>
                 <outlet property="recordClearButton" destination="RYr-Lt-RjT" id="rTU-Vk-WLA"/>
                 <outlet property="recordLine" destination="Ur3-zo-gKs" id="JU5-JF-mty"/>
+                <outlet property="recordProcessingLabel" destination="0hD-nv-qz1" id="eaW-PB-Z5J"/>
                 <outlet property="recordRecordButton" destination="ghM-qU-e1I" id="lWg-ZV-rLa"/>
                 <outlet property="recordSaveButton" destination="0kb-XA-lfj" id="met-Aq-7gl"/>
                 <outlet property="recordingNameField" destination="DpB-VA-JKR" id="YOV-p7-mwF"/>
@@ -25,7 +26,7 @@
                     <rect key="frame" x="75" y="28" width="215" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <attributedString key="attributedText">
-                        <fragment content="New Recording">
+                        <fragment content="Custom001">
                             <attributes>
                                 <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <font key="NSFont" size="17" name="HelveticaNeue"/>

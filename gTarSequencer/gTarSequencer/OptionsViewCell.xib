@@ -31,8 +31,7 @@
                         <rect key="frame" x="385" y="13" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                        <state key="normal" image="Save_Icon.png">
+                        <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -68,7 +67,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Save_Icon.png" width="61" height="61"/>
         <image name="Trash_Icon.png" width="60" height="84"/>
     </resources>
 </document>

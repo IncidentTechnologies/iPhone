@@ -20,6 +20,7 @@
 @synthesize leftSliderPinTop;
 @synthesize leftSliderPinBottom;
 @synthesize customIndicator;
+@synthesize connectedLeftArrow;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,9 +36,9 @@
     [super viewDidLoad];
     
     silverColor = [UIColor colorWithRed:201/255.0 green:205/255.0 blue:206/255.0 alpha:1.0];
-    redColor = [UIColor colorWithRed:216/255.0 green:64/255.0 blue:64/255.0 alpha:1.0];
-    blueColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
-    greenColor = [UIColor colorWithRed:40/255.0 green:194/255.0 blue:94/255.0 alpha:1.0];
+    redColor = [UIColor colorWithRed:203/255.0 green:81/255.0 blue:26/255.0 alpha:1.0];
+    blueColor = [UIColor colorWithRed:34/255.0 green:140/255.0 blue:167/255.0 alpha:1.0];
+    greenColor = [UIColor colorWithRed:31/255.0 green:187/255.0 blue:40/255.0 alpha:1.0];
     
     // Add icons
     [seqSetButton setImage:[UIImage imageNamed:@"Set_Icon"] forState:UIControlStateNormal];
@@ -62,12 +63,11 @@
     float gImageWidth = 20.0;
     [connectedButton setImageEdgeInsets:UIEdgeInsetsMake((connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2, (connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2)];
     
+    // Arrow
+    [self drawConnectedLeftArrow];
+    
     // Style elements
     [self resetButtonColors];
-    
-    connectedButton.layer.borderColor = redColor.CGColor;
-    connectedButton.layer.borderWidth = 0.5;
-    connectedButton.layer.cornerRadius = 5.0;
     
     leftSliderPinTop.layer.cornerRadius = 3.0;
     leftSliderPinBottom.layer.cornerRadius = 3.0;
@@ -82,10 +82,10 @@
 {
     if(isConnected){
         connectedButton.backgroundColor = greenColor;
-        connectedButton.layer.borderColor = greenColor.CGColor;
+        //connectedButton.layer.borderColor = greenColor.CGColor;
     }else{
         connectedButton.backgroundColor = redColor;
-        connectedButton.layer.borderColor = redColor.CGColor;
+        //connectedButton.layer.borderColor = redColor.CGColor;
     }
 }
 
@@ -110,19 +110,19 @@
     
     if([navChoice isEqualToString:@"Options"]){
         optionsButton.backgroundColor = blueColor;
-        optionsButton.layer.borderColor = blueColor.CGColor;
+        //optionsButton.layer.borderColor = blueColor.CGColor;
         optionsButton.tintColor = [UIColor whiteColor];
     }else if([navChoice isEqualToString:@"Set"]){
         seqSetButton.backgroundColor = blueColor;
-        seqSetButton.layer.borderColor = blueColor.CGColor;
+        //seqSetButton.layer.borderColor = blueColor.CGColor;
         seqSetButton.tintColor = [UIColor whiteColor];
     }else if([navChoice isEqualToString:@"Instrument"]){
         instrumentButton.backgroundColor = blueColor;
-        instrumentButton.layer.borderColor = blueColor.CGColor;
+        //instrumentButton.layer.borderColor = blueColor.CGColor;
         instrumentButton.tintColor = [UIColor whiteColor];
     }else if([navChoice isEqualToString:@"Share"]){
         shareButton.backgroundColor = blueColor;
-        shareButton.layer.borderColor = blueColor.CGColor;
+        //shareButton.layer.borderColor = blueColor.CGColor;
         shareButton.tintColor = [UIColor whiteColor];
     }else if([navChoice isEqualToString:@"Info"]){
         // todo
@@ -133,21 +133,25 @@
 {
     optionsButton.backgroundColor = [UIColor clearColor];
     optionsButton.layer.borderColor = silverColor.CGColor;
-    optionsButton.layer.borderWidth = 0.5;
+    optionsButton.layer.borderWidth = 1.0;
     optionsButton.layer.cornerRadius = 5.0;
     optionsButton.tintColor = silverColor;
     
     seqSetButton.backgroundColor = [UIColor clearColor];
     seqSetButton.layer.borderColor = silverColor.CGColor;
-    seqSetButton.layer.borderWidth = 0.5;
+    seqSetButton.layer.borderWidth = 1.0;
     seqSetButton.layer.cornerRadius = 5.0;
     seqSetButton.tintColor = silverColor;
     
     instrumentButton.backgroundColor = [UIColor clearColor];
     instrumentButton.layer.borderColor = silverColor.CGColor;
-    instrumentButton.layer.borderWidth = 0.5;
+    instrumentButton.layer.borderWidth = 1.0;
     instrumentButton.layer.cornerRadius = 5.0;
     instrumentButton.tintColor = silverColor;
+    
+    connectedButton.layer.borderColor = silverColor.CGColor;
+    connectedButton.layer.borderWidth = 1.0;
+    connectedButton.layer.cornerRadius = 5.0;
     
     // (share button)
 }
@@ -192,6 +196,37 @@
 -(void)hideCustomIndicator
 {
     [customIndicator setHidden:YES];
+}
+
+-(void)drawConnectedLeftArrow
+{
+    CGSize size = CGSizeMake(connectedLeftArrow.frame.size.width, connectedLeftArrow.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 5;
+    int playX = connectedLeftArrow.frame.size.width/2 - playWidth/2;
+    int playY = 18;
+    CGFloat playHeight = connectedLeftArrow.frame.size.height - 2*playY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
+    CGContextClosePath(context);
+    
+    CGContextFillPath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    [connectedLeftArrow setImage:newImage];
+    
+    UIGraphicsEndImageContext();
 }
 
 /*

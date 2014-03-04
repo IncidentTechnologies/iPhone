@@ -19,7 +19,7 @@
 @synthesize activeSequencer;
 @synthesize createNewButton;
 @synthesize saveCurrentButton;
-@synthesize renameButton;
+@synthesize backButton;
 @synthesize loadButton;
 @synthesize loadTable;
 @synthesize selectMode;
@@ -52,6 +52,9 @@
     loadTable.bounces = NO;
     
     selectMode = nil;
+    
+    [self drawBackButton];
+    [self drawNewPlusButton];
     
     [self reloadFileTable];
 }
@@ -197,16 +200,6 @@
     [self reloadFileTable];
 }
 
-- (void)userDidCreateNewFile:(NSString *)filename
-{
-    // reset the set
-    NSLog(@"user did create new as %@",filename);
-    activeSequencer = filename;
-    [delegate createNewWithName:filename];
-    
-    [delegate viewSeqSetWithAnimation:YES];
-}
-
 - (void)userDidDeleteFile:(NSString *)filename
 {
     NSLog(@"user did delete as %@",filename);
@@ -219,22 +212,28 @@
 
 #pragma mark - Button Actions
 
+- (IBAction)userDidSelectBack:(id)sender
+{
+    [delegate viewSeqSetWithAnimation:YES];
+}
+
 - (IBAction)userDidSelectCreateNew:(id)sender
 {
+    selectMode = @"Load";
     
-    NSLog(@"User did select create new");
+    NSString * newSet = [self generateNextSetName];
     
-    BOOL buttonChanged = [self setSelectedButtonTo:sender];
-    if(!buttonChanged) return;
+    activeSequencer = newSet;
+    [delegate createNewWithName:newSet];
     
-    selectMode = @"CreateNew";
-    
-    [self showHideNewFileRow:NO];
+    [self reloadFileTable];
+    [self showHideNewFileRow:YES];
     [loadTable reloadData];
     [self resetTableOffset:nil];
     
+    [delegate viewSeqSetWithAnimation:YES];
 }
-
+/*
 - (IBAction)userDidSelectRename:(id)sender
 {
     
@@ -244,13 +243,13 @@
     if(!buttonChanged) return;
 
     selectMode = @"Rename";
-    
+ 
     [self showHideNewFileRow:YES];
     [loadTable reloadData];
     [self resetTableOffset:nil];
     
 }
-
+*/
 - (IBAction)userDidSelectSaveCurrent:(id)sender
 {
     
@@ -315,6 +314,8 @@
 {
     if(hideNewFileRow && indexPath.row == 0){
         return 0;
+    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && ![fileLoadSet[indexPath.row-1] isEqualToString:activeSequencer]){
+        return 0;
     }else{
         return ROW_HEIGHT;
     }
@@ -363,7 +364,7 @@
     }else{
         
         // Row for new file
-        cell.fileText.text = @"New Set";
+        cell.fileText.text = @"Save as";
         cell.fileDate.text = @"0s";
         cell.isRenamable = YES;
         
@@ -478,7 +479,7 @@
 {
     int firstIndex = 0;
     
-    if([selectMode isEqualToString:@"Rename"] || [selectMode isEqualToString:@"Load"]){
+    if([selectMode isEqualToString:@"Load"]){
         firstIndex = 1;
     }
     
@@ -523,7 +524,9 @@
     [loadTable setFrame:CGRectMake(0, TABLE_Y, loadTable.frame.size.width, 170)];
     
     if([selectMode isEqualToString:@"Load"]){
-        [self delayedSelectLoadTableTopRow];
+        if(sender == nil){
+            [self delayedSelectLoadTableTopRow];
+        }
     }
     
     [UIView animateWithDuration:0.3 animations:^(void){
@@ -541,7 +544,7 @@
 
 #pragma mark - Name checking
 
--(BOOL)isDuplicateFilename:(NSString *)filename
+/*-(BOOL)isDuplicateFilename:(NSString *)filename
 {
     for(int i = 0; i < [fileLoadSet count]; i++){
         if([fileLoadSet[i] isEqualToString:filename]){
@@ -551,6 +554,7 @@
     
     return NO;
 }
+*/
 
 #pragma mark - Empty set
 
@@ -565,6 +569,106 @@
 {
     [noSetsLabel setHidden:YES];
 }
+
+- (NSString *)generateNextSetName
+{
+    
+    int customCount = 0;
+    
+    for(int i = 0; i < [fileLoadSet count]; i++){
+        NSString * filename = fileLoadSet[i];
+        if(!([filename rangeOfString:@"Set"].location == NSNotFound)){
+            
+            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Set"] withString:@""];
+            int numFromSuffix = [customSuffix intValue];
+            
+            customCount = MAX(customCount,numFromSuffix);
+        }
+    }
+    
+    customCount++;
+    
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPaddingCharacter:@"0"];
+    [numberFormatter setPaddingPosition:NSNumberFormatterPadBeforePrefix];
+    [numberFormatter setMinimumIntegerDigits:3];
+    
+    NSNumber * number = [NSNumber numberWithInt:customCount];
+    
+    NSString * numberString = [numberFormatter stringFromNumber:number];
+    
+    return [@"Set" stringByAppendingString:numberString];
+    
+}
+
+#pragma mark - Drawing
+
+-(void)drawBackButton
+{
+    
+    CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 13;
+    int playX = backButton.frame.size.width/2 - playWidth/2;
+    int playY = 17;
+    CGFloat playHeight = backButton.frame.size.height - 2*playY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 4.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    
+    CGContextStrokePath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [backButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
+}
+
+-(void)drawNewPlusButton
+{
+    
+    CGSize size = CGSizeMake(createNewButton.frame.size.width, createNewButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    float plusWidth = 22;
+    float plusX = backButton.frame.size.width/2 - plusWidth/2;
+    float plusY = 16;
+    CGFloat plusHeight = backButton.frame.size.height - 2*plusY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 5.0);
+    
+    CGContextMoveToPoint(context, plusX, plusY);
+    CGContextAddLineToPoint(context, plusX, plusY+plusHeight);
+    
+    CGContextMoveToPoint(context, plusX-plusWidth/2, plusY+plusHeight/2);
+    CGContextAddLineToPoint(context, plusX+plusWidth/2, plusY+plusHeight/2);
+    
+    CGContextStrokePath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [createNewButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
+}
+
 
 
 /*
