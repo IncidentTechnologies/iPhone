@@ -11,7 +11,7 @@
 			<array>
 				<dict>
 					<key>Section</key>
-					<string>Beats</string>
+					<string>Electronic</string>
 					<key>Sampleset</key>
 					<array>
 						<string>808 6</string>
@@ -32,37 +32,31 @@
 						<string>Dubstep 3</string>
 						<string>Dubstep 2</string>
 						<string>Dubstep 1</string>
-					</array>
-				</dict>
-				<dict>
-					<key>Section</key>
-					<string>Newbeats</string>
-					<key>Sampleset</key>
-					<array>
 						<string>House 6</string>
 						<string>House 5</string>
 						<string>House 4</string>
 						<string>House 3</string>
 						<string>House 2</string>
 						<string>House 1</string>
-						<string>Percussion 6</string>
-						<string>Percussion 5</string>
-						<string>Percussion 4</string>
-						<string>Percussion 3</string>
-						<string>Percussion 2</string>
-						<string>Percussion 1</string>
-						<string>Rock 6</string>
-						<string>Rock 5</string>
-						<string>Rock 4</string>
-						<string>Rock 3</string>
-						<string>Rock 2</string>
-						<string>Rock 1</string>
 						<string>WubWub 6</string>
 						<string>WubWub 5</string>
 						<string>WubWub 4</string>
 						<string>WubWub 3</string>
 						<string>WubWub 2</string>
 						<string>WubWub 1</string>
+					</array>
+				</dict>
+				<dict>
+					<key>Section</key>
+					<string>Acoustic</string>
+					<key>Sampleset</key>
+					<array>
+						<string>Rock 6</string>
+						<string>Rock 5</string>
+						<string>Rock 4</string>
+						<string>Rock 3</string>
+						<string>Rock 2</string>
+						<string>Rock 1</string>
 					</array>
 				</dict>
 			</array>
@@ -74,73 +68,66 @@
 			<array>
 				<dict>
 					<key>Section</key>
-					<string>Orchestra</string>
-					<key>Sectionset</key>
-					<array>
-						<dict>
-							<key>Section</key>
-							<string>Strings</string>
-							<key>Sampleset</key>
-							<array>
-								<string>Violin 6</string>
-								<string>Violin 5</string>
-								<string>Violin 4</string>
-								<string>Violin 3</string>
-								<string>Violin 2</string>
-								<string>Violin 1</string>
-							</array>
-						</dict>
-						<dict>
-							<key>Section</key>
-							<string>Winds</string>
-							<key>Sampleset</key>
-							<array>
-								<string>Trombone 6</string>
-								<string>Trombone 5</string>
-								<string>Trombone 4</string>
-								<string>Trombone 3</string>
-								<string>Trombone 2</string>
-								<string>Trombone 1</string>
-							</array>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>Section</key>
-					<string>Classic</string>
+					<string>Percussive</string>
 					<key>Sampleset</key>
 					<array>
-						<string>Guitar 6</string>
-						<string>Guitar 5</string>
-						<string>Guitar 4</string>
-						<string>Guitar 3</string>
-						<string>Guitar 2</string>
-						<string>Guitar 1</string>
 						<string>Piano 6</string>
 						<string>Piano 5</string>
 						<string>Piano 4</string>
 						<string>Piano 3</string>
 						<string>Piano 2</string>
 						<string>Piano 1</string>
-						<string>Pluck 6</string>
-						<string>Pluck 5</string>
-						<string>Pluck 4</string>
-						<string>Pluck 3</string>
-						<string>Pluck 2</string>
-						<string>Pluck 1</string>
 						<string>Vibraphone 6</string>
 						<string>Vibraphone 5</string>
 						<string>Vibraphone 4</string>
 						<string>Vibraphone 3</string>
 						<string>Vibraphone 2</string>
 						<string>Vibraphone 1</string>
+						<string>Pluck 6</string>
+						<string>Pluck 5</string>
+						<string>Pluck 4</string>
+						<string>Pluck 3</string>
+						<string>Pluck 2</string>
+						<string>Pluck 1</string>
+					</array>
+				</dict>
+				<dict>
+					<key>Section</key>
+					<string>Strings</string>
+					<key>Sampleset</key>
+					<array>
+						<string>Violin 6</string>
+						<string>Violin 5</string>
+						<string>Violin 4</string>
+						<string>Violin 3</string>
+						<string>Violin 2</string>
+						<string>Violin 1</string>
+						<string>Guitar 6</string>
+						<string>Guitar 5</string>
+						<string>Guitar 4</string>
+						<string>Guitar 3</string>
+						<string>Guitar 2</string>
+						<string>Guitar 1</string>
+					</array>
+				</dict>
+				<dict>
+					<key>Section</key>
+					<string>Winds</string>
+					<key>Sampleset</key>
+					<array>
+						<string>Trombone 6</string>
+						<string>Trombone 5</string>
+						<string>Trombone 4</string>
+						<string>Trombone 3</string>
+						<string>Trombone 2</string>
+						<string>Trombone 1</string>
 					</array>
 				</dict>
 			</array>
 		</dict>
 		<dict>
 			<key>Section</key>
-			<string>Other</string>
+			<string>Sounds</string>
 			<key>Sampleset</key>
 			<array>
 				<string>Bacon 6</string>

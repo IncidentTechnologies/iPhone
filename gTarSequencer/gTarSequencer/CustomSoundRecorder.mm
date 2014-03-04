@@ -249,23 +249,17 @@
 
 - (unsigned long int)fetchAudioBufferSize
 {
-    return m_sampNode->GetSampleBuffer()->GetSampleBufferLengthMS();
+    return m_sampNode->GetSampleBuffer()->GetByteSize();
+}
+
+- (float)fetchSampleRate
+{
+    return m_sampNode->GetSampleBuffer()->GetSampleRate();
 }
 
 - (float *)fetchAudioBuffer
 {
-    NSLog(@"Draw audio for sample");
-    
-    unsigned long int samplelength = [self fetchAudioBufferSize];
-    
-    float multiplier = 32767.0f;
-    float * temp_buffer = (float *)malloc(sizeof(float) * samplelength);
-    
-    for(int i = 0; i < samplelength; i++){
-        temp_buffer[i] = m_sampNode->GetSampleBuffer()->GetNextSample(i)*multiplier;
-    }
-    
-    return temp_buffer;
+    return (float *)m_sampNode->GetSampleBuffer()->GetBufferArray();
 }
 
 - (void)setSampleStart:(float)ms

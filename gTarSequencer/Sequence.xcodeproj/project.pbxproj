@@ -308,6 +308,7 @@
 		6DAA158F18C12525003DAB30 /* Sequencer_Icon58px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158C18C12525003DAB30 /* Sequencer_Icon58px.png */; };
 		6DAA159018C12525003DAB30 /* Sequencer_Icon80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */; };
 		6DAA159118C12525003DAB30 /* Sequencer_Icon120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */; };
+		6DAA159318C66363003DAB30 /* Save_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159218C66363003DAB30 /* Save_Icon.png */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */; };
@@ -664,6 +665,7 @@
 		6DAA158C18C12525003DAB30 /* Sequencer_Icon58px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon58px.png; sourceTree = "<group>"; };
 		6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon80px.png; sourceTree = "<group>"; };
 		6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon120px.png; sourceTree = "<group>"; };
+		6DAA159218C66363003DAB30 /* Save_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Save_Icon.png; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell_4.xib; sourceTree = "<group>"; };
@@ -760,6 +762,7 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6DAA159218C66363003DAB30 /* Save_Icon.png */,
 				6DAA158C18C12525003DAB30 /* Sequencer_Icon58px.png */,
 				6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */,
 				6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */,
@@ -1560,6 +1563,7 @@
 				587C9FBC1888C0E7001F57C7 /* Vibraphone 2.mp3 in Resources */,
 				5811AAEE187B88C800FC0BD2 /* Percussion 2.mp3 in Resources */,
 				58F5449018AB161E009E6E43 /* Set_Icon.png in Resources */,
+				6DAA159318C66363003DAB30 /* Save_Icon.png in Resources */,
 				587C9F8B1888C0E7001F57C7 /* Guitar 1.mp3 in Resources */,
 				580A52071864DFF50077240B /* Icon_Piano.png in Resources */,
 				5805D04B188DB3E7000832A9 /* Icon_Custom.png in Resources */,

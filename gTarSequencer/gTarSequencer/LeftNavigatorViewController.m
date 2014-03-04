@@ -52,9 +52,9 @@
     [instrumentButton setImageEdgeInsets:UIEdgeInsetsMake((instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2, (instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2)];
     [self hideCustomIndicator];
     
-    [optionsButton setImage:[UIImage imageNamed:@"Options_Icon"] forState:UIControlStateNormal];
-    float optionsImageHeight = 22.0;
-    float optionsImageWidth = 19.0;
+    [optionsButton setImage:[UIImage imageNamed:@"Save_Icon"] forState:UIControlStateNormal];
+    float optionsImageHeight = 26.0;
+    float optionsImageWidth = 26.0;
     [optionsButton setImageEdgeInsets:UIEdgeInsetsMake((optionsButton.frame.size.height-optionsImageHeight)/2, (optionsButton.frame.size.width-optionsImageWidth)/2, (optionsButton.frame.size.height-optionsImageHeight)/2, (optionsButton.frame.size.width-optionsImageWidth)/2)];
     
     [connectedButton setImage:[UIImage imageNamed:@"G_Icon"] forState:UIControlStateNormal];

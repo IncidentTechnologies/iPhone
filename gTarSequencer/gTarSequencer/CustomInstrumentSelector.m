@@ -641,34 +641,42 @@
 
 -(void)drawAudio
 {
+    NSLog(@"Draw audio for sample");
+    
     [customSoundRecorder initAudioForSample];
     
-    unsigned long int samplelength = [customSoundRecorder fetchAudioBufferSize];
-    float * buffer = (float *)malloc(sizeof(float) * samplelength);
+    unsigned long int samplesize = [customSoundRecorder fetchAudioBufferSize];
+    unsigned long int samplelength = samplesize / sizeof(float);
+    float sampleRate = samplelength/[customSoundRecorder fetchSampleRate];
     
+    float * buffer = (float *)malloc(samplesize);
     buffer = [customSoundRecorder fetchAudioBuffer];
    
     // Draw sample
-    float sampleRate = 11;
+    float sampleInterval = 3*sampleRate;
     float midpointY = recordLine.frame.size.height/2;
-    float intervalX = sampleRate*recordLine.frame.size.width/samplelength;
+    float intervalX = sampleInterval*recordLine.frame.size.width/samplelength;
+    float scaleY = 1;
     
     // Check the max y
-    float maxY = 0;
-    for(int x = 0; x < samplelength; x+=sampleRate){
-        maxY = MAX(maxY,ABS(buffer[x]));
+    //float maxY = 0;
+    float avgY = 0;
+    for(long int x = 0; x < samplelength; x+=sampleInterval){
+        //maxY = MAX(maxY,ABS(buffer[x]));
+        avgY += ABS(buffer[x]);
     }
-    float scaleY = (maxY*4 > 40) ? 40.0/maxY : 4; // scale*buffer[x] can have max of 40px
+    
+    avgY /= samplelength;
+    scaleY = 2000.0/(1.0-avgY);
     
     CGSize size = CGSizeMake(recordLine.frame.size.width, recordLine.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
     CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, midpointY);
     
-    CGPathMoveToPoint(path, NULL, 0, midpointY-buffer[0]*scaleY);
-    for(int x = 1; x < samplelength; x+=sampleRate){
+    for(long int x = 0; x < samplelength; x+=sampleInterval){
         CGPathAddLineToPoint(path, NULL, x*intervalX, midpointY-buffer[x]*scaleY);
     }
     
