@@ -8,7 +8,18 @@
 
 #import "VolumeDisplay.h"
 
+#define ANIMATION_DURATION 0.2f
+
+#define DEFAULT_VOLUME 1.0
+#define MIN_VOLUME 0.02
+#define MAX_VOLUME 4.0
+#define VISIBLE 1.0
+#define NOT_VISIBLE 0.0
+
 @implementation VolumeDisplay
+
+@synthesize delegate;
+@synthesize sliderCircle;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -38,7 +49,7 @@
     float y = [[UIScreen mainScreen] bounds].size.width;
     float x = [[UIScreen mainScreen] bounds].size.height;
     
-    self.userInteractionEnabled = NO;
+    self.userInteractionEnabled = YES;
     
     CGRect frame = self.frame;
     frame.origin.x = 0;
@@ -55,18 +66,29 @@
     [self addSubview:filling];
     
     [self createOutline];
+    [self addGestures];
     
     // Get dimensions for filling
     CGSize fullScreen = CGSizeMake(x, 320);
     UIGraphicsBeginImageContextWithOptions(fullScreen, NO, 0);
+    
+    // Prepare for touches
+    zeroPosition.x = self.frame.size.width / 2;
+    zeroPosition.y = self.frame.size.height / 4;
 }
 
-- (void)setVolume:(NSString *)value
+- (void)setVolume:(double)value
 {
-    //[volumeLabel setText:value];
+    currentValue = value;
+    [self fillToPercent:[self percentFull:value]];
 }
 
 #pragma mark Filling
+
+- (double)percentFull:(double)value
+{
+    return (value-MIN_VOLUME)/(MAX_VOLUME-MIN_VOLUME);
+}
 
 - (void)fillToPercent:(double)percent
 {
@@ -83,23 +105,13 @@
 
 - (void)createOutline
 {
-    // Draw the outline:
-    CGSize size = outline.frame.size;
-    
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Draw black background:
-    int bottomBarHeight = 55;
-    
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8].CGColor);
-    CGContextAddRect(context, CGRectMake(0, 0, size.width, size.height - bottomBarHeight));
-    CGContextFillPath(context);
+    [outline setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
     
     // Draw right sidebar
     float sidebarWidth = 130;
-    CGRect sidebarFrame = CGRectMake(outline.frame.size.width - sidebarWidth, -1, sidebarWidth+1, outline.frame.size.height - bottomBarHeight+2);
+    CGRect sidebarFrame = CGRectMake(outline.frame.size.width - sidebarWidth, -1, sidebarWidth+1, outline.frame.size.height+2);
     
     UIView * sidebar = [[UIView alloc] initWithFrame:sidebarFrame];
     sidebar.backgroundColor = [UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0];
@@ -121,36 +133,89 @@
     [sidebar addSubview:slider];
     
     // Draw sidebar slider circle
+    float baseX = slider.frame.origin.x+sidebar.frame.origin.x;
+    float baseY = slider.frame.origin.y;
     float indent = 5;
     float circleWidth = sliderWidth-2*indent;
-    sliderCircleMaxY = indent;
-    sliderCircleMinY = slider.frame.size.height - circleWidth - indent;
+    sliderCircleMaxY = indent+baseY-1;
+    sliderCircleMinY = slider.frame.size.height - circleWidth - indent - 1 + baseY;
 
-    CGRect sliderCircleFrame = CGRectMake(indent, sliderCircleMinY, circleWidth, circleWidth);
+    CGRect sliderCircleFrame = CGRectMake(indent+baseX, sliderCircleMinY, circleWidth, circleWidth);
     
-    sliderCircle = [[UIView alloc] initWithFrame:sliderCircleFrame];
+    sliderCircle = [[UIButton alloc] initWithFrame:sliderCircleFrame];
     sliderCircle.backgroundColor = [UIColor colorWithRed:166/255.0 green:204/255.0 blue:111/255.0 alpha:1.0];
     sliderCircle.layer.cornerRadius = sliderWidth/2-indent;
     
-    [slider addSubview:sliderCircle];
-    
-    // Volume number to show in white
-    /*CGRect newFrame = CGRectMake(outline.frame.size.width - 200, outline.frame.size.height - 100, 200, 50);
-    volumeLabel = [[UILabel alloc] initWithFrame:newFrame];
-    volumeLabel.font = [UIFont boldSystemFontOfSize:40];
-    volumeLabel.textColor = [UIColor whiteColor];
-    volumeLabel.backgroundColor = [UIColor clearColor];
-    volumeLabel.textAlignment = NSTextAlignmentCenter;
-    [outline addSubview:volumeLabel];*/
-    
-    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    outline.image = image;
-    
-    UIGraphicsEndImageContext();
+    [self addSubview:sliderCircle];
     
 }
 
+- (void)addGestures
+{
+    UIPanGestureRecognizer * sliderPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panVolume:)];
+    
+    [sliderCircle addGestureRecognizer:sliderPan];
+    
+}
+
+#pragma mark - Expand Contract
+- (void)expand
+{
+    // Animate...
+    [UIView animateWithDuration:ANIMATION_DURATION
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         self.alpha = VISIBLE;
+                     }
+                     completion:nil];
+}
+
+- (void)contract
+{
+    
+    [UIView animateWithDuration:ANIMATION_DURATION
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         self.alpha = NOT_VISIBLE;
+                     }
+                     completion:nil];
+    
+}
+
+#pragma mark - Drag slider
+- (void)panVolume:(UIPanGestureRecognizer *)sender
+{
+    CGPoint newPoint = [sender translationInView:self];
+    
+    if([sender state] == UIGestureRecognizerStateBegan){
+        volumeFirstY = sliderCircle.frame.origin.y;
+    }
+    
+    float newY = newPoint.y + volumeFirstY;
+    
+    // Wrap to boundary
+    if(newY <= sliderCircleMaxY*1.2){
+        newY = sliderCircleMaxY;
+    }else if(newY >= sliderCircleMinY*1.2){
+        newY = sliderCircleMinY;
+    }
+    
+    float height = 1-(newY - sliderCircleMaxY)/(sliderCircleMinY - sliderCircleMaxY);
+    float volume = MAX(height*MAX_VOLUME,MIN_VOLUME);
+    
+    
+    if(newY <= sliderCircleMinY && newY >= sliderCircleMaxY){
+        [self setVolume:volume];
+    }
+    
+    // Set the volume
+    if([sender state] == UIGestureRecognizerStateEnded){
+        [delegate volumeButtonValueDidChange:currentValue];
+    }
+    
+}
 
 
 @end

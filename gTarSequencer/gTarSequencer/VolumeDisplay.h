@@ -9,8 +9,26 @@
 #import "AppData.h"
 #import <QuartzCore/QuartzCore.h>
 
+@protocol VolumeDisplayDelegate <NSObject>
+
+- (void) volumeButtonValueDidChange:(double)newValue;
+- (BOOL) allowVolumeDisplayToOpen;
+- (void) volumeDisplayDidOpen;
+- (void) volumeDisplayDidClose;
+
+@end
+
 @interface VolumeDisplay : UIView
 {
+    double currentValue;
+    
+    CGPoint currentPosition;
+    CGPoint zeroPosition;
+    
+    double sensitivityTop; // px/unit (int)conversion
+    double sensitivityBottom;
+    double sensitivityLeft;
+    double sensitivityRight;
     
     UIImageView * outline;
     UIImageView * filling;
@@ -20,11 +38,16 @@
     
     float sliderCircleMaxY;
     float sliderCircleMinY;
-    UIView * sliderCircle;
     
+    float volumeFirstY;
 }
 
 - (void)fillToPercent:(double)percent;
-- (void)setVolume:(NSString *)value;
+- (void)setVolume:(double)value;
+- (void)expand;
+- (void)contract;
+
+@property (weak, nonatomic) id <VolumeDisplayDelegate> delegate;
+@property (retain, nonatomic) UIButton * sliderCircle;
 
 @end

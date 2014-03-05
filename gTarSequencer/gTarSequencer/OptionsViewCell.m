@@ -9,6 +9,8 @@
 #import "OptionsViewCell.h"
 #import "OptionsViewController.h"
 
+#define DEFAULT_FILE_TEXT @"Save as"
+
 @implementation OptionsViewCell
 
 @synthesize parent;
@@ -176,10 +178,9 @@
     }else if([parent.selectMode isEqualToString:@"SaveCurrent"]){
         
         // Save Current
-        
         NSString * emptyName = [fileName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
-        if(![fileName.text isEqualToString:fileText.text] && ![emptyName isEqualToString:@""]){
+        if(![fileName.text isEqualToString:fileText.text] && ![emptyName isEqualToString:@""] && ![fileName.text isEqualToString:DEFAULT_FILE_TEXT]){
             fileText.text = fileName.text;
         }
         
@@ -209,7 +210,7 @@
 {
     previousNameText = fileName.text;
     
-    if([fileName.text isEqualToString:@"Save as"]){
+    if([fileName.text isEqualToString:DEFAULT_FILE_TEXT]){
         fileName.text = @"";
     }else{
         [self initFileAttributedString];
@@ -305,7 +306,7 @@
     if([emptyName isEqualToString:@""] && previousNameText != nil && ![previousNameText isEqualToString:@""]){
         fileName.text = previousNameText;
     }else if([emptyName isEqualToString:@""]){
-        fileName.text = @"Save as";
+        fileName.text = DEFAULT_FILE_TEXT;
     }
 }
 
@@ -327,7 +328,7 @@
      NSString * nameString = fileName.text;
      NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
      
-     if([emptyName isEqualToString:@""] || [nameString isEqualToString:@"Save as"]){
+     if([emptyName isEqualToString:@""] || [nameString isEqualToString:DEFAULT_FILE_TEXT]){
          isReady = NO;
      }else{
          isReady = YES;

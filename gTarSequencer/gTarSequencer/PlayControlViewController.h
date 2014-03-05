@@ -8,7 +8,7 @@
 
 #import "AppData.h"
 #import "RadialButton.h"
-#import "VolumeButton.h"
+#import "VolumeDisplay.h"
 
 @protocol PlayControlDelegate <NSObject>
 
@@ -26,7 +26,7 @@
 @end
 
 
-@interface PlayControlViewController : UIViewController <RadialButtonDelegate,VolumeButtonDelegate>
+@interface PlayControlViewController : UIViewController <RadialButtonDelegate,VolumeDisplayDelegate>
 {
     // Tempo slider
     int tempo;
@@ -39,11 +39,14 @@
     // Play loop
     BOOL isPlaying;
     float secondsPerBeat;
+    
+    VolumeDisplay * volumeDisplay;
    
 }
 
 - (IBAction)userDidLoadOptions:(id)sender; // TODO: move to left nav
 - (IBAction)startStop:(id)sender;
+- (IBAction)toggleVolumeOpen:(id)sender;
 - (void)stopAll;
 
 - (int)getTempo;
@@ -56,7 +59,7 @@
 
 @property (weak, nonatomic) id<PlayControlDelegate> delegate;
 @property (weak, nonatomic) IBOutlet RadialButton * tempoSlider;
-@property (weak, nonatomic) IBOutlet VolumeButton * volumeSlider;
+@property (weak, nonatomic) IBOutlet UIButton * volumeButton;
 @property (weak, nonatomic) IBOutlet UIButton * startStopButton;
 
 @end

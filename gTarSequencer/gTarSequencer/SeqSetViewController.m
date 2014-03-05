@@ -295,17 +295,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if ([remainingInstrumentOptions count] == 0)
+    if ([remainingInstrumentOptions count] == 0){
         return [instruments count];
-    else
+    }else{
         return [instruments count] + 1;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int tableHeight = instrumentTable.frame.size.height;
+    int maxInstruments = 5;
     
-    if([instruments count] == 0)
+    if([instruments count] >= maxInstruments && indexPath.row == [instruments count]){
+        return 0;
+    }else if([instruments count] == 0)
         return tableHeight;
     else if(indexPath.row < [instruments count])
         return tableHeight/3+1;

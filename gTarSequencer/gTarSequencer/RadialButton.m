@@ -149,45 +149,47 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch * touch = [[touches allObjects] objectAtIndex:0];
-    CGPoint touchSpot = [touch locationInView:self];
-    
-    currentPosition = touchSpot;
-    
-    // calculate difference from zero position
-    double deltaX = currentPosition.x - zeroPosition.x;
-    
-    // use delta Y and the sensitivity to calculate the new value:
-    int valueDifference;
-    
-    if(deltaX > 0){ // R
-        valueDifference = (deltaX * sensitivityRight);
-    }
-    else{ // L
-        valueDifference = (deltaX * sensitivityLeft);
-    }
-    
-    if ( valueDifference == 0 ){
-        return;
-    }
-    
-    int newCurrentValue = currentValue + valueDifference;
-    
-    if (newCurrentValue < MIN_TEMPO){
-        newCurrentValue = MIN_TEMPO;
-    }else if(newCurrentValue > MAX_TEMPO){
-        newCurrentValue = MAX_TEMPO;
-    }
-    
-    // for some reason calling the other function doesn't do this granularly
-    
-    // Display new value in text field:
-    currentDisplayedValue = newCurrentValue;
-    [valueDisplay setText:[NSString stringWithFormat:@"%i", currentDisplayedValue]];
-    [radialDisplay setTempo:[NSString stringWithFormat:@"%i", currentDisplayedValue]];
+    if(displayOpen){
+        UITouch * touch = [[touches allObjects] objectAtIndex:0];
+        CGPoint touchSpot = [touch locationInView:self];
+        
+        currentPosition = touchSpot;
+        
+        // calculate difference from zero position
+        double deltaX = currentPosition.x - zeroPosition.x;
+        
+        // use delta Y and the sensitivity to calculate the new value:
+        int valueDifference;
+        
+        if(deltaX > 0){ // R
+            valueDifference = (deltaX * sensitivityRight);
+        }
+        else{ // L
+            valueDifference = (deltaX * sensitivityLeft);
+        }
+        
+        if ( valueDifference == 0 ){
+            return;
+        }
+        
+        int newCurrentValue = currentValue + valueDifference;
+        
+        if (newCurrentValue < MIN_TEMPO){
+            newCurrentValue = MIN_TEMPO;
+        }else if(newCurrentValue > MAX_TEMPO){
+            newCurrentValue = MAX_TEMPO;
+        }
+        
+        // for some reason calling the other function doesn't do this granularly
+        
+        // Display new value in text field:
+        currentDisplayedValue = newCurrentValue;
+        [valueDisplay setText:[NSString stringWithFormat:@"%i", currentDisplayedValue]];
+        [radialDisplay setTempo:[NSString stringWithFormat:@"%i", currentDisplayedValue]];
 
-    // Fill radial display to corresponding %:
-    [radialDisplay fillToPercent:[self percentFull:newCurrentValue]];
+        // Fill radial display to corresponding %:
+        [radialDisplay fillToPercent:[self percentFull:newCurrentValue]];
+    }
 }
 
 - (double)percentFull:(int)value

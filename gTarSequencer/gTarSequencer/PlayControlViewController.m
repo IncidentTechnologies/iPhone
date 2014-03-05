@@ -9,13 +9,13 @@
 #import "PlayControlViewController.h"
 
 #define DEFAULT_TEMPO 120
-#define DEFAULT_VOLUME 100
+#define DEFAULT_VOLUME 1.0
 #define SECONDS_PER_MIN 60.0
 
 @implementation PlayControlViewController
 
 @synthesize tempoSlider;
-@synthesize volumeSlider;
+@synthesize volumeButton;
 @synthesize startStopButton;
 @synthesize delegate;
 
@@ -36,9 +36,8 @@
     if(TESTMODE) NSLog(@"Setup tempo slider");
     [tempoSlider setDelegate:self];
     
-    // Volume slider
-    if(TESTMODE) NSLog(@"Setup volume slider");
-    [volumeSlider setDelegate:self];
+    // Set up volume display:
+    [self initVolumeDisplay];
     
     // Play/Pause button
     if(TESTMODE) NSLog(@"Draw Play Pause button");
@@ -79,7 +78,12 @@
 
 - (BOOL) allowTempoDisplayToOpen
 {
-    return !isVolumeSliderOpen;
+    if(isVolumeSliderOpen){
+        [volumeDisplay contract];
+        [self volumeDisplayDidClose];
+    }
+    return TRUE;
+    //return !isVolumeSliderOpen;
 }
 
 - (void) tempoDisplayDidOpen
@@ -114,6 +118,20 @@
 }
 
 #pragma mark - Volume Slider Delegate
+- (void)initVolumeDisplay
+{
+    int bottomBarHeight = 55;
+    CGRect wholeScreen = CGRectMake(0, 0, XBASE, YBASE-bottomBarHeight-1);
+    
+    volumeDisplay = [[VolumeDisplay alloc] initWithFrame:wholeScreen];
+    volumeDisplay.userInteractionEnabled = YES;
+    volumeDisplay.alpha = NOT_VISIBLE;
+    volumeDisplay.delegate = self;
+    
+    // overlay by adding to the main view
+    UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    [window addSubview:volumeDisplay];
+}
 
 - (void)volumeButtonValueDidChange:(double)newValue
 {
@@ -156,13 +174,26 @@
 - (void)resetVolume
 {
     volume = DEFAULT_VOLUME;
-    [volumeSlider setToValue:volume];
+    [volumeDisplay setVolume:volume];
 }
 
 - (void)setVolume:(double)newVolume
 {
     volume = newVolume;
-    [volumeSlider setToValue:volume];
+    [volumeDisplay setVolume:volume];
+}
+
+- (IBAction)toggleVolumeOpen:(id)sender
+{
+    NSLog(@"Toggle volume open");
+    
+    if(isVolumeSliderOpen){
+        [volumeDisplay contract];
+        [self volumeDisplayDidClose];
+    }else if([self allowVolumeDisplayToOpen]){
+        [volumeDisplay expand];
+        [self volumeDisplayDidOpen];
+    }
 }
 
 #pragma mark - Playing/Pausing

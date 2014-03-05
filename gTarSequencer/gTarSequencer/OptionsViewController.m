@@ -12,6 +12,7 @@
 #define TABLE_Y 55
 #define TABLE_HEIGHT 209
 #define TABLE_MIN_HEIGHT 103
+#define DEFAULT_FILE_TEXT @"Save as"
 
 @implementation OptionsViewController
 
@@ -82,6 +83,7 @@
         [self highlightActiveSequencer];
         [self hideNoSetsLabel];
     }else{
+        [self userDidSelectLoad:loadButton];
         [self showNoSetsLabel];
     }
 }
@@ -364,7 +366,7 @@
     }else{
         
         // Row for new file
-        cell.fileText.text = @"Save as";
+        cell.fileText.text = DEFAULT_FILE_TEXT;
         cell.fileDate.text = @"0s";
         cell.isRenamable = YES;
         
