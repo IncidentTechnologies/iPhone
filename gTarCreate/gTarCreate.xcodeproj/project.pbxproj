@@ -68,6 +68,8 @@
 		2630B84918B6D0F500687D29 /* Acoustic Guitar 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81E18B6D0F500687D29 /* Acoustic Guitar 80.mp3 */; };
 		2630B84A18B6D0F500687D29 /* Acoustic Guitar 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B81F18B6D0F500687D29 /* Acoustic Guitar 81.mp3 */; };
 		2630B84B18B6D0F500687D29 /* Acoustic Guitar 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B82018B6D0F500687D29 /* Acoustic Guitar 82.mp3 */; };
+		2630B85118B6F7B900687D29 /* Clapping.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2630B85018B6F7B900687D29 /* Clapping.m4a */; };
+		2652382D18C4D9B100E38BA5 /* clap.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 2652382C18C4D9B100E38BA5 /* clap.xmp */; };
 		26EBC39B18ADBF9C0068BEC6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */; };
 		26EBC39F18ADC0690068BEC6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -153,6 +155,8 @@
 		2630B81E18B6D0F500687D29 /* Acoustic Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 80.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 80.mp3"; sourceTree = "<group>"; };
 		2630B81F18B6D0F500687D29 /* Acoustic Guitar 81.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 81.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 81.mp3"; sourceTree = "<group>"; };
 		2630B82018B6D0F500687D29 /* Acoustic Guitar 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 82.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 82.mp3"; sourceTree = "<group>"; };
+		2630B85018B6F7B900687D29 /* Clapping.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Clapping.m4a; path = Samples/Clapping.m4a; sourceTree = "<group>"; };
+		2652382C18C4D9B100E38BA5 /* clap.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = clap.xmp; path = Samples/clap.xmp; sourceTree = "<group>"; };
 		26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		26EBC39C18ADC0690068BEC6 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -276,6 +280,8 @@
 		2630B84C18B6D0FB00687D29 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				2652382C18C4D9B100E38BA5 /* clap.xmp */,
+				2630B85018B6F7B900687D29 /* Clapping.m4a */,
 				2630B84D18B6D10200687D29 /* Acoustic Guitar */,
 			);
 			name = Samples;
@@ -417,10 +423,12 @@
 				2630B84318B6D0F500687D29 /* Acoustic Guitar 74.mp3 in Resources */,
 				2610F08918AAB28E003F5CEB /* InfoPlist.strings in Resources */,
 				2630B84518B6D0F500687D29 /* Acoustic Guitar 76.mp3 in Resources */,
+				2652382D18C4D9B100E38BA5 /* clap.xmp in Resources */,
 				2630B82D18B6D0F500687D29 /* Acoustic Guitar 52.mp3 in Resources */,
 				2630B82A18B6D0F500687D29 /* Acoustic Guitar 49.mp3 in Resources */,
 				2630B84018B6D0F500687D29 /* Acoustic Guitar 71.mp3 in Resources */,
 				2630B83018B6D0F500687D29 /* Acoustic Guitar 55.mp3 in Resources */,
+				2630B85118B6F7B900687D29 /* Clapping.m4a in Resources */,
 				2630B82C18B6D0F500687D29 /* Acoustic Guitar 51.mp3 in Resources */,
 				2630B83D18B6D0F500687D29 /* Acoustic Guitar 68.mp3 in Resources */,
 				2630B82418B6D0F500687D29 /* Acoustic Guitar 43.mp3 in Resources */,

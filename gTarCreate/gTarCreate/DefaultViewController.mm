@@ -11,6 +11,10 @@
 
 #import "AUNodeNetwork.h"
 #import "AudioNodeCommon.h"
+#import "XMPSample.h"
+#import "XMPTree.h"
+
+#import "XMPObjectFactory.h"
 
 @interface DefaultViewController () {
     WavetableNode *m_wavNode;
@@ -33,12 +37,7 @@
     return self;
 }
 
--(IBAction)onButtonTestClicked:(id)sender {
-    AudioController *ac = [AudioController sharedAudioController];
-    
-    AudioNode *root = [[ac GetNodeNetwork] GetRootNode];
-    //m_sampNode = new SampleNode((char *)[[[NSBundle mainBundle] pathForResource:@"TestGuitarSample" ofType:@"mp3"] UTF8String]);
-    
+-(void)setUpSamplerWithBaseName:(NSString *)strBaseName {
     m_samplerNode = new SamplerNode();
     SamplerBankNode *newBank = NULL;
     
@@ -51,12 +50,48 @@
             if(i > 3) openStringVal -= 1;
             int midiVal = openStringVal + j;
             
-            NSString *resourceName = [[NSString alloc] initWithFormat:@"Acoustic Guitar %d", midiVal];
+            NSString *resourceName = [[NSString alloc] initWithFormat:@"%@ %d", strBaseName, midiVal];
             
             NSLog(@"Loading sample:%@ str:%d", resourceName, i);
             m_samplerNode->LoadSampleIntoBank(i, (char *)[[[NSBundle mainBundle] pathForResource:resourceName ofType:@"mp3"] UTF8String], m_sampNode);
         }
     }
+    
+    [[[AudioController sharedAudioController] GetNodeNetwork] GetRootNode]->ConnectInput(0, m_samplerNode, 0);
+}
+
+-(void)testFxNode {
+    AudioNode *rootNode = [[[AudioController sharedAudioController] GetNodeNetwork] GetRootNode];
+    
+    m_sampNode = new SampleNode((char *)[[[NSBundle mainBundle] pathForResource:@"Clapping" ofType:@"m4a"] UTF8String]);
+    NSLog(@"Sample is %f ms long", m_sampNode->GetLength());
+    
+    m_sampNode->SetStart(700.0f);
+    m_sampNode->SetEnd(850.0f);
+    
+    //DiffusionTankNode *fxNode = new DiffusionTankNode(150.7f, 0.9, true, 1.0f);
+    //FirstOrderFilterNode *fxNode = new FirstOrderFilterNode(0.2f, 1.0f);
+    ReverbNode *fxNode = new ReverbNode(0.2f);
+    
+    rootNode->ConnectInput(0, fxNode, 0);
+    fxNode->ConnectInput(0, m_sampNode, 0);
+}
+
+-(IBAction)onButtonTestClicked:(id)sender {
+    AudioController *ac = [AudioController sharedAudioController];
+
+    //[self setUpSamplerWithBaseName:@"Acoustic Guitar"];
+    
+
+    //[self testFxNode];
+    //m_sampNode = new SampleNode((char *)[[[NSBundle mainBundle] pathForResource:@"Clapping" ofType:@"m4a"] UTF8String]);
+    //XMPSample *xmpSample = [[XMPSample alloc] initWithSampleBuffer:m_sampNode->GetSampleBuffer()];
+    //[xmpSample CreateXMPTreeAndSaveToFile:"test.xmp" andOverwrite:TRUE];
+    
+    //XMPTree *xmpTree = new XMPTree((char *)[[[NSBundle mainBundle] pathForResource:@"clap" ofType:@"xmp"] UTF8String]);
+    //xmpTree->PrintXMPTree();
+    
+    XMPObject *xmpObj = [XMPObjectFactory MakeXMPObjectFromFilename:@"clap"];
     
     /*m_envNode = new EnvelopeNode();
     m_delayNode = new DelayNode(500.0f, 0.75f, 1.0f);
@@ -67,7 +102,6 @@
      */
     
     //root->ConnectInput(0, m_delayNode, 0);
-    root->ConnectInput(0, m_samplerNode, 0);
     
     
     
@@ -92,13 +126,17 @@
         m_envNode->NoteOff();
     */
     
-    //m_sampNode->Trigger();
+    m_sampNode->Trigger();
     //m_envNode->NoteOn();
     
     /*
     SampleNode *bank = m_samplerNode[0][0][0][0];
     bank->Trigger();
      */
+    
+    
+    
+    /*
     static int str = 0;
     static int ind = 0;
     
@@ -111,6 +149,7 @@
         if(str >= 6)
             str = 0;
     }
+     */
        
 }
 

@@ -18,4 +18,8 @@
 -(IBAction)onButtonTestClicked:(id)sender;
 -(IBAction)onButtonTriggerClicked:(id)sender;
 
+-(void)setUpSamplerWithBaseName:(NSString *)strBaseName;
+
+-(void)testFxNode;
+
 @end
