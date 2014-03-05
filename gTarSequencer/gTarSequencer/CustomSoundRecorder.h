@@ -30,6 +30,8 @@
 - (id)init;
 - (void)startRecord;
 - (void)stopRecord;
+- (void)clearRecord;
+- (BOOL)isRecording;
 - (void)startPlayback;
 - (void)pausePlayback:(float)ms;
 - (void)unpausePlayback;

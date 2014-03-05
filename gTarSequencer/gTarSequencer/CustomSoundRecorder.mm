@@ -111,6 +111,19 @@
     }
 }
 
+-(BOOL)isRecording
+{
+    return recorder.recording;
+}
+
+-(void)clearRecord
+{
+    if(sampleStart > 0 || sampleEnd > 0){
+        [self setSampleStart:0];
+        [self setSampleEnd:0];
+    }
+}
+
 #pragma mark - Audio Recorder Delegate
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
@@ -156,8 +169,8 @@
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    NSLog(@"Playback finished");
-    [delegate playbackDidEnd];
+    //NSLog(@"Playback finished");
+    //[delegate playbackDidEnd];
 }
 
 #pragma mark - File System
@@ -283,7 +296,7 @@
     
     float sampleRelativeLength = sampleEnd - sampleStart;
     
-    NSLog(@"sampleRelativeLength is now %f",sampleRelativeLength);
+    NSLog(@"sampleRelativeLength is now %f with sampleEnd %f and sampleStart %f",sampleRelativeLength,sampleEnd,sampleStart);
     
     if(sampleRelativeLength <= 0){
         return [self getSampleLength]-sampleStart;

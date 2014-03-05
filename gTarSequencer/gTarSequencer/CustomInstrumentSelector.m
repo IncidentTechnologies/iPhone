@@ -9,7 +9,7 @@
 #import "CustomInstrumentSelector.h"
 
 #define GTAR_NUM_STRINGS 6
-#define MAX_RECORD_SECONDS 4
+#define MAX_RECORD_SECONDS 3.5
 #define RECORD_DRAW_INTERVAL 0.001
 #define ADJUSTOR_SIZE 30.0
 
@@ -111,16 +111,22 @@
     if(viewState == VIEW_CUSTOM_NAME){
         // remember instrument name
         instName = nameField.text;
-    }
-    // Otherwise Back from Record screen
+    }else{
+        // Back from record screen
         
-    CGRect newFrame = backgroundView.frame;
-    [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:newFrame andRemove:backgroundView forViewState:VIEW_CUSTOM_INST];
-    viewState = VIEW_CUSTOM_INST;
+        [self checkInitCustomSoundRecorder];
+        if(![customSoundRecorder isRecording]){
+            
+            CGRect newFrame = backgroundView.frame;
+            [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:newFrame andRemove:backgroundView forViewState:VIEW_CUSTOM_INST];
+            viewState = VIEW_CUSTOM_INST;
+            
+            [self initSubtables];
+            
+            [self loadCellsFromStrings];
+        }
+    }
     
-    [self initSubtables];
-    
-    [self loadCellsFromStrings];
 }
 
 // fit any nib to window
@@ -493,7 +499,7 @@
 -(void)recordingNameFieldDoneEditing:(id)sender
 {
     // hide keyboard
-    [nameField resignFirstResponder];
+    [recordingNameField resignFirstResponder];
     
     [self checkIfRecordingNameReady];
     
@@ -628,6 +634,8 @@
         [self resetPlayBar];
         [self clearAudioDrawing];
         
+        [customSoundRecorder clearRecord];
+        
         // Disable save
         isRecordingReady = FALSE;
         [self checkIfRecordSaveReady];
@@ -639,6 +647,9 @@
     // End progress bar drawing
     [progressBarTimer invalidate];
     progressBarTimer = nil;
+    
+    // Re-enable text field
+    recordingNameField.enabled = YES;
     
     // End recording
     [recordTimer invalidate];
@@ -688,7 +699,7 @@
     buffer = [customSoundRecorder fetchAudioBuffer];
    
     // Draw sample
-    float sampleInterval = 3*sampleRate;
+    float sampleInterval = 4*sampleRate;
     float midpointY = recordLine.frame.size.height/2;
     float intervalX = sampleInterval*recordLine.frame.size.width/samplelength;
     float scaleY = 1;
@@ -716,7 +727,7 @@
     }
     
     CGContextAddPath(context, path);
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:29/255.0 green:88/255.0 blue:103/255.0 alpha:1.0].CGColor);
     CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -779,6 +790,9 @@
     // Start record
     [customSoundRecorder startRecord];
     [self changeRecordState:RECORD_STATE_RECORDING];
+    
+    // Prevent name editing
+    recordingNameField.enabled = NO;
     
     // Schedule end of session
     recordTimer = [NSTimer scheduledTimerWithTimeInterval:MAX_RECORD_SECONDS target:self selector:@selector(userDidCompleteRecord) userInfo:nil repeats:NO];
@@ -1280,7 +1294,7 @@
 {
     if(recordState == RECORD_STATE_RECORDING){
         
-        progressBarPercent += RECORD_DRAW_INTERVAL/MAX_RECORD_SECONDS;
+        progressBarPercent += 1.1*(RECORD_DRAW_INTERVAL/MAX_RECORD_SECONDS);
         
         [self fillProgressBarToPercent:progressBarPercent];
         
