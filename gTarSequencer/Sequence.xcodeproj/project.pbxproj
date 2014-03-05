@@ -309,6 +309,12 @@
 		6DAA159018C12525003DAB30 /* Sequencer_Icon80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */; };
 		6DAA159118C12525003DAB30 /* Sequencer_Icon120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */; };
 		6DAA159318C66363003DAB30 /* Save_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159218C66363003DAB30 /* Save_Icon.png */; };
+		6DAA159A18C6A68D003DAB30 /* Upright Bass 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159418C6A68D003DAB30 /* Upright Bass 1.mp3 */; };
+		6DAA159B18C6A68D003DAB30 /* Upright Bass 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159518C6A68D003DAB30 /* Upright Bass 2.mp3 */; };
+		6DAA159C18C6A68D003DAB30 /* Upright Bass 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159618C6A68D003DAB30 /* Upright Bass 3.mp3 */; };
+		6DAA159D18C6A68D003DAB30 /* Upright Bass 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159718C6A68D003DAB30 /* Upright Bass 4.mp3 */; };
+		6DAA159E18C6A68D003DAB30 /* Upright Bass 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159818C6A68D003DAB30 /* Upright Bass 5.mp3 */; };
+		6DAA159F18C6A68D003DAB30 /* Upright Bass 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159918C6A68D003DAB30 /* Upright Bass 6.mp3 */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */; };
@@ -666,6 +672,12 @@
 		6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon80px.png; sourceTree = "<group>"; };
 		6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon120px.png; sourceTree = "<group>"; };
 		6DAA159218C66363003DAB30 /* Save_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Save_Icon.png; sourceTree = "<group>"; };
+		6DAA159418C6A68D003DAB30 /* Upright Bass 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Upright Bass 1.mp3"; sourceTree = "<group>"; };
+		6DAA159518C6A68D003DAB30 /* Upright Bass 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Upright Bass 2.mp3"; sourceTree = "<group>"; };
+		6DAA159618C6A68D003DAB30 /* Upright Bass 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Upright Bass 3.mp3"; sourceTree = "<group>"; };
+		6DAA159718C6A68D003DAB30 /* Upright Bass 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Upright Bass 4.mp3"; sourceTree = "<group>"; };
+		6DAA159818C6A68D003DAB30 /* Upright Bass 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Upright Bass 5.mp3"; sourceTree = "<group>"; };
+		6DAA159918C6A68D003DAB30 /* Upright Bass 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Upright Bass 6.mp3"; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell_4.xib; sourceTree = "<group>"; };
@@ -1002,6 +1014,12 @@
 		587C9F241888C0E7001F57C7 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				6DAA159418C6A68D003DAB30 /* Upright Bass 1.mp3 */,
+				6DAA159518C6A68D003DAB30 /* Upright Bass 2.mp3 */,
+				6DAA159618C6A68D003DAB30 /* Upright Bass 3.mp3 */,
+				6DAA159718C6A68D003DAB30 /* Upright Bass 4.mp3 */,
+				6DAA159818C6A68D003DAB30 /* Upright Bass 5.mp3 */,
+				6DAA159918C6A68D003DAB30 /* Upright Bass 6.mp3 */,
 				58EB9D2B188F121300DCBA1C /* Silence.mp3 */,
 				58E6352A1889FD800036E4F1 /* Bacon 1.mp3 */,
 				58E6352B1889FD800036E4F1 /* Bacon 2.mp3 */,
@@ -1513,6 +1531,7 @@
 				6DAA158F18C12525003DAB30 /* Sequencer_Icon58px.png in Resources */,
 				58D6176D1863BF5E001EB327 /* Sequence8.png in Resources */,
 				587C9FB31888C0E7001F57C7 /* Rock 5.mp3 in Resources */,
+				6DAA159B18C6A68D003DAB30 /* Upright Bass 2.mp3 in Resources */,
 				5811AB0C187B88C800FC0BD2 /* Percussion 47.mp3 in Resources */,
 				580A52051864DFF50077240B /* Icon_Guitar.png in Resources */,
 				587C9F7A1888C0E7001F57C7 /* 808 2.mp3 in Resources */,
@@ -1520,6 +1539,7 @@
 				587C9FB21888C0E7001F57C7 /* Rock 4.mp3 in Resources */,
 				5811AAE1187B88C800FC0BD2 /* Percussion 1.mp3 in Resources */,
 				58E635311889FD800036E4F1 /* Bacon 2.mp3 in Resources */,
+				6DAA159F18C6A68D003DAB30 /* Upright Bass 6.mp3 in Resources */,
 				58D6176E1863BF5E001EB327 /* Sequence9.png in Resources */,
 				587C9FBE1888C0E7001F57C7 /* Vibraphone 4.mp3 in Resources */,
 				58F5449518ABFDAA009E6E43 /* Icon_Sound.png in Resources */,
@@ -1530,6 +1550,7 @@
 				584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */,
 				5811AB06187B88C800FC0BD2 /* Percussion 41.mp3 in Resources */,
 				5811AB2D187B88C800FC0BD2 /* Percussion 77.mp3 in Resources */,
+				6DAA159A18C6A68D003DAB30 /* Upright Bass 1.mp3 in Resources */,
 				588BF9E018AC4F380086E816 /* OptionsView.xib in Resources */,
 				5811AB34187B88C800FC0BD2 /* Percussion 83.mp3 in Resources */,
 				58D617681863BF5E001EB327 /* Sequence3.png in Resources */,
@@ -1548,6 +1569,7 @@
 				587C9F991888C0E7001F57C7 /* Percussion 3.mp3 in Resources */,
 				587C9FAD1888C0E7001F57C7 /* Pluck 5.mp3 in Resources */,
 				587C9F7E1888C0E7001F57C7 /* 808 6.mp3 in Resources */,
+				6DAA159C18C6A68D003DAB30 /* Upright Bass 3.mp3 in Resources */,
 				587C9F931888C0E7001F57C7 /* House 3.mp3 in Resources */,
 				587C9F9A1888C0E7001F57C7 /* Percussion 4.mp3 in Resources */,
 				6DAA159118C12525003DAB30 /* Sequencer_Icon120px.png in Resources */,
@@ -1559,6 +1581,7 @@
 				5811AB05187B88C800FC0BD2 /* Percussion 40.mp3 in Resources */,
 				5811AAFC187B88C800FC0BD2 /* Percussion 32.mp3 in Resources */,
 				5811AB21187B88C800FC0BD2 /* Percussion 66.mp3 in Resources */,
+				6DAA159E18C6A68D003DAB30 /* Upright Bass 5.mp3 in Resources */,
 				5811AB33187B88C800FC0BD2 /* Percussion 82.mp3 in Resources */,
 				587C9FBC1888C0E7001F57C7 /* Vibraphone 2.mp3 in Resources */,
 				5811AAEE187B88C800FC0BD2 /* Percussion 2.mp3 in Resources */,
@@ -1614,6 +1637,7 @@
 				5811AB0F187B88C800FC0BD2 /* Percussion 5.mp3 in Resources */,
 				5811AAF4187B88C800FC0BD2 /* Percussion 25.mp3 in Resources */,
 				58429A1818A1BD6A00BDD09B /* InstrumentViewController.xib in Resources */,
+				6DAA159D18C6A68D003DAB30 /* Upright Bass 4.mp3 in Resources */,
 				5811AB17187B88C800FC0BD2 /* Percussion 57.mp3 in Resources */,
 				5811AB46187B88C800FC0BD2 /* Sample Pack INFO in Resources */,
 				6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */,

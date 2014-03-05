@@ -605,6 +605,8 @@
 
 -(void)drawBackButton
 {
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    float margin = (screenBounds.size.height == XBASE_LG) ? 12 : 0;
     
     CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
@@ -612,7 +614,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     int playWidth = 13;
-    int playX = backButton.frame.size.width/2 - playWidth/2;
+    int playX = margin+backButton.frame.size.width/2 - playWidth/2;
     int playY = 17;
     CGFloat playHeight = backButton.frame.size.height - 2*playY;
     
@@ -638,15 +640,18 @@
 -(void)drawNewPlusButton
 {
     
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    float margin = (screenBounds.size.height == XBASE_LG) ? 12 : 0;
+    
     CGSize size = CGSizeMake(createNewButton.frame.size.width, createNewButton.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     float plusWidth = 22;
-    float plusX = backButton.frame.size.width/2 - plusWidth/2;
+    float plusX = margin + createNewButton.frame.size.width/2 - plusWidth/2;
     float plusY = 16;
-    CGFloat plusHeight = backButton.frame.size.height - 2*plusY;
+    CGFloat plusHeight = createNewButton.frame.size.height - 2*plusY;
     
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);

@@ -312,6 +312,34 @@
 				<string>Default</string>
 			</array>
 		</dict>
+		<dict>
+			<key>Name</key>
+			<string>UPRIGHTBASS</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>11</integer>
+			<key>IconName</key>
+			<string>Icon_Violin</string>
+			<key>Strings</key>
+			<array>
+				<string>Upright Bass 1</string>
+				<string>Upright Bass 2</string>
+				<string>Upright Bass 3</string>
+				<string>Upright Bass 4</string>
+				<string>Upright Bass 5</string>
+				<string>Upright Bass 6</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
+		</dict>
 	</array>
 </dict>
 </plist>

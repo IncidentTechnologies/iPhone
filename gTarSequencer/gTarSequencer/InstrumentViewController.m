@@ -23,6 +23,7 @@
 
 @synthesize delegate;
 @synthesize scrollView;
+@synthesize instrumentIconButton;
 @synthesize instrumentIcon;
 @synthesize patternA;
 @synthesize patternB;
@@ -36,6 +37,7 @@
 @synthesize offMask;
 @synthesize isMute;
 @synthesize customIndicator;
+@synthesize backButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -110,6 +112,14 @@
     {
         patternButtons = [[NSMutableArray alloc] initWithObjects:patternA, patternB, patternC, patternD, offButton, nil];
     }
+    
+    // Back button
+    [self drawBackButton];
+    
+    // Instrument icon
+    instrumentIconButton.layer.borderWidth = 0.5;
+    instrumentIconButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    instrumentIconButton.layer.cornerRadius = 5.0;
     
     // Pages
     [self initPages];
@@ -1063,6 +1073,40 @@
     float measureMargin = (screenBounds.size.height == XBASE_LG) ? MEASURE_MARGIN_LG : MEASURE_MARGIN_SM;
     
     return measureMargin;
+}
+
+#pragma mark - Other Drawing
+-(void)drawBackButton
+{
+    CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 12;
+    int playX = backButton.frame.size.width;
+    int marginX = 6;
+    int playY = 5;
+    CGFloat playHeight = backButton.frame.size.height - 2*playY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 4.0);
+    
+    CGContextMoveToPoint(context, playX-marginX, playY);
+    CGContextAddLineToPoint(context, playX-marginX-playWidth, playY+(playHeight/2));
+    CGContextAddLineToPoint(context, playX-marginX, playY+playHeight);
+    //CGContextClosePath(context);
+    //CGContextFillPath(context);
+    CGContextStrokePath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [backButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
 }
 
 
