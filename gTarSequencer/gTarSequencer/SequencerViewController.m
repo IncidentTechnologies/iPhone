@@ -369,11 +369,16 @@
     [self saveContext:nil];
 }
 
-- (void)createNewWithName:(NSString *)filename
+- (void)createNewSaveName:(NSString *)filename
 {
+    // Save previous set if not blank
+    if([seqSetViewController countInstruments] > 0){
+        [self saveWithName:filename];
+    }
+    
+    // Delete all cells
     [seqSetViewController deleteAllCells];
     
-    [self saveWithName:filename];
 }
 
 - (void)deleteWithName:(NSString *)filename

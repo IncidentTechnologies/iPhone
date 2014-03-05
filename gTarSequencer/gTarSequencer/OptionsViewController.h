@@ -14,7 +14,7 @@
 - (void) saveWithName:(NSString *)filename;
 - (void) loadFromName:(NSString *)filename;
 - (void) renameFromName:(NSString *)filename toName:(NSString *)newname;
-- (void) createNewWithName:(NSString *)filename;
+- (void) createNewSaveName:(NSString *)filename;
 - (void) deleteWithName:(NSString *)filename;
 
 - (void) viewSeqSetWithAnimation:(BOOL)animate;

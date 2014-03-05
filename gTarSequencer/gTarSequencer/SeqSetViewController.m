@@ -153,10 +153,7 @@
 
 - (Instrument *)getCurrentInstrument
 {
-    
-    NSLog(@"Returning instrument at index %li",selectedInstrumentIndex);
-    
-    if([instruments count] > 0 && selectedInstrumentIndex >= 0)
+    if([instruments count] > 0 && selectedInstrumentIndex >= 0 && selectedInstrumentIndex < [instruments count])
         return [instruments objectAtIndex:selectedInstrumentIndex];
     else
         return nil;
@@ -797,14 +794,11 @@
 
 - (void)deleteAllCells
 {
-    for(int i = 0; i < [instrumentTable numberOfRowsInSection:0]-1; i++){
-        SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        
+    for(int i = [instruments count] - 1; i >= 0; i--){
+        SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         [self deleteCell:cell];
-        
     }
     
-    NSLog(@"Delete all instrument table cells");
 }
 
 - (void)removeSequencerWithIndex:(long)indexToRemove

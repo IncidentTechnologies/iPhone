@@ -223,10 +223,10 @@
 {
     selectMode = @"Load";
     
-    NSString * newSet = [self generateNextSetName];
+    NSString * newSet = ([activeSequencer isEqualToString:@""] || activeSequencer == nil) ? [self generateNextSetName] : activeSequencer;
     
-    activeSequencer = newSet;
-    [delegate createNewWithName:newSet];
+    [delegate createNewSaveName:newSet];
+    activeSequencer = nil;
     
     [self reloadFileTable];
     [self showHideNewFileRow:YES];

@@ -16,7 +16,16 @@
 {
     
     // TestFlight integration
-    [TestFlight takeOff:@"1496ea64-f3cd-422c-802b-ace07a811cf0"];
+    [TestFlight takeOff:@"e41b934c-d707-4ea6-97d4-f53a09b7617e"];
+    
+    // Launch app loading
+    [self initAndLaunchApp];
+    
+    return YES;
+}
+
+- (void)initAndLaunchApp
+{
     
     // init the viewing window
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -25,17 +34,15 @@
     LoadingViewController *loadingViewController = [[LoadingViewController alloc] initWithNibName:nil bundle:nil];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loadingViewController];
-
+    
     navigationController.navigationBarHidden = YES;
     
     [self.window setRootViewController: navigationController];
-        
+    
     // display
     [self.window makeKeyAndVisible];
-    
-    return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

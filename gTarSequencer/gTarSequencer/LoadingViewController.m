@@ -74,7 +74,7 @@
     [self performSelector:@selector(startAnimation) withObject:nil afterDelay: totalWait];
     totalWait += ANIMATION_DURATION + HOLD_ANIMATION;
     
-    [self performSelector:@selector(transitionToSequencerController) withObject:nil afterDelay: totalWait];
+    [self performSelector:@selector(initSequence) withObject:nil afterDelay: totalWait];
     
     NSLog(@"Animation time: %f", WAIT_TO_ANIMATE + ANIMATION_DURATION + HOLD_ANIMATION);
     
@@ -89,14 +89,30 @@
     [imageView startAnimating];
 }
 
-- (void)transitionToSequencerController
+- (void)initSequence
 {
     
+    // Check for first launch
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]){
+        NSLog(@"Nth time launch");
+        
+        [self transitionToSequencerController:FALSE];
+    }else{
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSLog(@"First time launch");
+        
+        [self transitionToSequencerController:TRUE];
+    }
+}
+
+- (void)transitionToSequencerController:(BOOL)firstLaunch
+{
     SequencerViewController *sequencerViewController = [[SequencerViewController alloc] initWithNibName:@"SequencerViewController" bundle:nil];
     
     [self.navigationController pushViewController:sequencerViewController animated:YES];
     
 }
-
 
 @end
