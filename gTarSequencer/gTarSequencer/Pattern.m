@@ -166,6 +166,12 @@
     if (selectedMeasureIndex >= [measures count]){
         [self selectMeasure:[measures count] - 1];
     }
+    
+    // Redraw the old measures
+    for(int i=0; i<measureCount;i++){
+        Measure * oldMeasure = [measures objectAtIndex:i];
+        [oldMeasure setUpdateNotesOnMinimap:YES];
+    }
 }
 
 #pragma mark Clearing Measures

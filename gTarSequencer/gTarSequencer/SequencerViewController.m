@@ -622,21 +622,25 @@
 
 -(void)dequeueAllPatternsForInstrument:(Instrument *)inst
 {
-    for(NSMutableDictionary * p in patternQueue){
-        Instrument * i = [p objectForKey:@"Instrument"];
-        if(i == inst){
-            [patternQueue removeObject:p];
+    @synchronized(patternQueue){
+        for(NSMutableDictionary * p in patternQueue){
+            Instrument * i = [p objectForKey:@"Instrument"];
+            if(i == inst){
+                [patternQueue removeObject:p];
+            }
         }
     }
 }
 
 -(void)removeQueuedPatternForInstrumentAtIndex:(int)instIndex
 {
-    for(NSMutableDictionary * p in patternQueue){
-        Instrument * i = [p objectForKey:@"Instrument"];
-        if(i.instrument == instIndex)
-        {
-            [patternQueue removeObject:p];
+    @synchronized(patternQueue){
+        for(NSMutableDictionary * p in patternQueue){
+            Instrument * i = [p objectForKey:@"Instrument"];
+            if(i.instrument == instIndex)
+            {
+                [patternQueue removeObject:p];
+            }
         }
     }
 }
@@ -649,12 +653,14 @@
 
 - (int)getQueuedPatternIndexForInstrument:(Instrument *)inst
 {
-    for(NSMutableDictionary * pq in patternQueue){
-        Instrument * i = [pq objectForKey:@"Instrument"];
-        if(i == inst){
-            NSNumber * p = [pq objectForKey:@"Index"];
-            int pIndex = (int)[p intValue];
-            return pIndex;
+    @synchronized(patternQueue){
+        for(NSMutableDictionary * pq in patternQueue){
+            Instrument * i = [pq objectForKey:@"Instrument"];
+            if(i == inst){
+                NSNumber * p = [pq objectForKey:@"Index"];
+                int pIndex = (int)[p intValue];
+                return pIndex;
+            }
         }
     }
     

@@ -46,7 +46,7 @@
 {
     
     // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
+    // float y = [[UIScreen mainScreen] bounds].size.width;
     float x = [[UIScreen mainScreen] bounds].size.height;
     
     self.userInteractionEnabled = YES;

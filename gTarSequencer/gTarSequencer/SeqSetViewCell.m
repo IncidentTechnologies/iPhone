@@ -579,7 +579,10 @@
 
 - (IBAction)userDidSelectNewPattern:(id)sender
 {
-    [self performSelector:@selector(selectNewPattern:) withObject:sender afterDelay:0.0];
+    [self selectNewPattern:sender];
+    
+//    [self performSelector:@selector(selectNewPattern:) withObject:sender afterDelay:0.0];
+    
 }
 
 // Split up into two functions to allow the UI to update immediately
@@ -589,7 +592,7 @@
     
     BOOL isPlaying = NO;
     
-    NSLog(@"Select new pattern at %i", tappedIndex);
+    NSLog(@"SeqSet Select new pattern at %i", tappedIndex);
     
     if (tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton != offButton){
         isMute = YES;

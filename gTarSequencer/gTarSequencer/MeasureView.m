@@ -80,11 +80,10 @@
         return;
     
     // Check if notes need to be redrawn:
-    // TODO: maybe add this back?
-    //if ([measure shouldUpdateNotesOnMinimap]){
-        [self createImage];
+    if ([measure shouldUpdateNotesOnMinimap]){
+        [self performSelectorInBackground:@selector(createImage) withObject:nil];
         [measure setUpdateNotesOnMinimap:NO];
-    //}
+    }
     
     // Update playband:
     if ([measure shouldUpdatePlaybandOnMinimap]){

@@ -8,11 +8,12 @@
 
 #import "SeqSetViewController.h"
 
+#define MAX_INSTRUMENTS 5
+
 @implementation SeqSetViewController
 
 @synthesize instrumentTable;
 @synthesize delegate;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -302,9 +303,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int tableHeight = instrumentTable.frame.size.height;
-    int maxInstruments = 5;
     
-    if([instruments count] >= maxInstruments && indexPath.row == [instruments count]){
+    if([instruments count] >= MAX_INSTRUMENTS && indexPath.row == [instruments count]){
         return 0;
     }else if([instruments count] == 0)
         return tableHeight;
@@ -758,6 +758,9 @@
 
 - (void)deleteCell:(id)sender
 {
+    
+    NSLog(@"Delete cell");
+    
     NSIndexPath * pathToDelete = [instrumentTable indexPathForCell:sender];
     
     // Remove from data structure:
@@ -769,6 +772,7 @@
         [instrumentTable reloadData];
     }else{
         // Else, delete the cell that the user requested:
+        NSLog(@"Delete row at index path");
         [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationTop];
     }
     
@@ -777,6 +781,7 @@
     }
     
     // Remove any enqueued patterns
+    NSLog(@"Remove enqueued patterns");
     [delegate removeQueuedPatternForInstrumentAtIndex:pathToDelete.row];
     
     // Update cells:
@@ -803,11 +808,13 @@
 
 - (void)removeSequencerWithIndex:(long)indexToRemove
 {
+    NSLog(@"Remove sequencer with index %li",indexToRemove);
+    
     // Remove object from array:
     Instrument * removedInst = [instruments objectAtIndex:indexToRemove];
     [instruments removeObjectAtIndex:indexToRemove];
     
-    // Add isntrument back into instrument options array:
+    // Add instrument back into instrument options array:
     [self addInstrumentBackIntoOptions:removedInst];
     
     /* If the selected instrument is about to be removed, then a new one must be selected.
@@ -844,6 +851,8 @@
 
 - (void)addInstrumentBackIntoOptions:(Instrument *)inst
 {
+    NSLog(@"Add instrument back into options");
+    
     // Get the dictionary associated with this inst:
     NSDictionary * instrumentDictionary;
     
@@ -858,7 +867,9 @@
     }
     
     // Add this dictionary to the end:
-    [remainingInstrumentOptions addObject:instrumentDictionary];
+    if(instrumentDictionary != nil){
+        [remainingInstrumentOptions addObject:instrumentDictionary];
+    }
     
     // Bubble up:
     long lastIndex = [remainingInstrumentOptions count] - 1;

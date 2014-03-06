@@ -741,7 +741,6 @@
 
 - (IBAction)userDidSelectNewPattern:(id)sender
 {
-    
     [self performSelector:@selector(selectNewPattern:) withObject:sender afterDelay:0.0];
 }
 
@@ -752,7 +751,7 @@
     
     BOOL isPlaying = [delegate checkIsPlaying];
     
-    NSLog(@"Select new pattern at %i", tappedIndex);
+    NSLog(@"Inst Select new pattern at %i", tappedIndex);
     
     if (tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton != offButton){
         isMute = YES;
@@ -1040,7 +1039,7 @@
     }else if([delegate isLeftNavOpen]){
         
         [delegate closeLeftNavigator];
-        velocity = CGPointMake(0, 0);
+        //velocity = CGPointMake(0, 0);
         targetMeasure = activeMeasure;
         
     }else{
