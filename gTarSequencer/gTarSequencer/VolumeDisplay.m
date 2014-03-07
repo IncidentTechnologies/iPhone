@@ -46,7 +46,7 @@
 {
     
     // Get dimensions
-    // float y = [[UIScreen mainScreen] bounds].size.width;
+    float y = [[UIScreen mainScreen] bounds].size.width;
     float x = [[UIScreen mainScreen] bounds].size.height;
     
     self.userInteractionEnabled = YES;
@@ -105,6 +105,7 @@
 
 - (void)createOutline
 {
+    NSLog(@"outline frame is %f %f %f %f",outline.frame.origin.x,outline.frame.origin.y,outline.frame.size.width,outline.frame.size.height);
     
     // Draw black background:
     [outline setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
@@ -122,7 +123,7 @@
     
     // Draw sidebar slider
     float sliderWidth = 45;
-    float sliderHeight = 180;
+    float sliderHeight = 190;
     CGRect sliderFrame = CGRectMake((sidebar.frame.size.width-sliderWidth)/2, (sidebar.frame.size.height-sliderHeight)/2, sliderWidth, sliderHeight);
     
     UIView * slider = [[UIView alloc] initWithFrame:sliderFrame];
@@ -140,7 +141,7 @@
     sliderCircleMaxY = indent+baseY-1;
     sliderCircleMinY = slider.frame.size.height - circleWidth - indent - 1 + baseY;
 
-    CGRect sliderCircleFrame = CGRectMake(indent+baseX, sliderCircleMinY, circleWidth, circleWidth);
+    CGRect sliderCircleFrame = CGRectMake(baseX+indent, sliderCircleMinY, circleWidth, circleWidth);
     
     sliderCircle = [[UIButton alloc] initWithFrame:sliderCircleFrame];
     sliderCircle.backgroundColor = [UIColor colorWithRed:166/255.0 green:204/255.0 blue:111/255.0 alpha:1.0];
@@ -152,6 +153,8 @@
 
 - (void)addGestures
 {
+    [sliderCircle setUserInteractionEnabled:YES];
+    
     UIPanGestureRecognizer * sliderPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panVolume:)];
     
     [sliderCircle addGestureRecognizer:sliderPan];

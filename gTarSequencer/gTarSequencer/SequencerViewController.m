@@ -13,7 +13,7 @@
 #define LAST_MEASURE 3
 
 #define TABLEHEIGHT 264
-#define NAVWIDTH 76
+#define NAVWIDTH 86
 #define NAVTAB 0
 #define SELECTORWIDTH 364
 #define SELECTORHEIGHT 276
@@ -682,6 +682,7 @@
     
     [self.view addGestureRecognizer:swipeLeft];
     [self.view addGestureRecognizer:swipeRight];
+    [seqSetViewController.view setUserInteractionEnabled:YES];
 
 }
 
@@ -689,6 +690,7 @@
 {
     [self.view removeGestureRecognizer:swipeLeft];
     [self.view removeGestureRecognizer:swipeRight];
+    [seqSetViewController.view setUserInteractionEnabled:NO];
 }
 
 - (void)stopAllPlaying

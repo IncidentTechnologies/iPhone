@@ -55,9 +55,9 @@
 {
     isActiveSequencer = NO;
     
-    activeColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:1.0];
     darkGrayColor = [UIColor colorWithRed:50/255.0 green:56/255.0 blue:59/255.0 alpha:1.0];
     blueColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:1.0];
+    activeColor = blueColor;
 }
 
 - (void)layoutSubviews
@@ -94,6 +94,7 @@
     if(!isRenamable){
         isActiveSequencer = YES;
         fileText.textColor = activeColor;
+        [self applyBoldFont:YES toLabel:fileText];
     }
 }
 
@@ -103,7 +104,17 @@
     if(self.selected){
         fileText.textColor = [UIColor whiteColor];
     }else{
-        fileText.textColor = [UIColor colorWithRed:50/255.0 green:56/255.0 blue:59/255.0 alpha:1.0];
+        fileText.textColor = darkGrayColor;
+    }
+    [self applyBoldFont:NO toLabel:fileText];
+}
+
+- (void)applyBoldFont:(BOOL)isBold toLabel:(UILabel *)text
+{
+    if(isBold){
+        [text setFont:[UIFont boldSystemFontOfSize:18.0]];
+    }else{
+        [text setFont:[UIFont systemFontOfSize:18.0]];
     }
 }
 
@@ -123,6 +134,7 @@
         self.backgroundColor = darkGrayColor;
         
         fileText.textColor = (isActiveSequencer && !isRenamable) ? activeColor : [UIColor whiteColor];
+        
         [fileLoad setHidden:NO];
         [self setImageForFileLoad:parent.selectMode];
         
@@ -142,27 +154,37 @@
         
     }else{
         
-        NSLog(@"Deselecting cell %i",rowid);
-        
-        [self endNameEditing];
-        
-        if([parent.selectMode isEqualToString:@"SaveCurrent"] && isRenamable){
-            self.contentView.backgroundColor = [UIColor grayColor];
-            self.backgroundColor = [UIColor grayColor];
+        if(!isEditingMode){
             
-        }else{
-            self.contentView.backgroundColor = [UIColor whiteColor];
-            self.backgroundColor = [UIColor whiteColor];
+            NSLog(@"Deselecting cell %i",rowid);
+            
+            [self endNameEditing];
+            
+            if([parent.selectMode isEqualToString:@"SaveCurrent"] && isRenamable){
+                self.contentView.backgroundColor = [UIColor grayColor];
+                self.backgroundColor = [UIColor grayColor];
+                
+            }else{
+                self.contentView.backgroundColor = [UIColor whiteColor];
+                self.backgroundColor = [UIColor whiteColor];
+            }
+            
+            fileText.textColor = (isActiveSequencer && !isRenamable) ? activeColor : darkGrayColor;
+            [fileLoad setHidden:YES];
+            
+            [fileText setHidden:NO];
+            [fileName setHidden:YES];
         }
         
-        fileText.textColor = (isActiveSequencer && !isRenamable) ? activeColor : darkGrayColor;
-        [fileLoad setHidden:YES];
-        
-        [fileText setHidden:NO];
-        [fileName setHidden:YES];
-        
     }
-
+    
+    // Check font for active sequencer
+    if(isActiveSequencer && !isRenamable){
+        [self applyBoldFont:YES toLabel:fileText];
+    }else{
+        [self applyBoldFont:NO toLabel:fileText];
+    }
+    
     // Configure the view for the selected state
 }
 
@@ -205,6 +227,20 @@
     
 }
 
+#pragma mark - Editing
+-(void)editingDidBegin
+{
+    NSLog(@"Editing cell mode began");
+    isEditingMode = YES;
+}
+
+-(void)editingDidEnd
+{
+    NSLog(@"Editing cell mode ended");
+    
+    isEditingMode = NO;
+}
+
 #pragma mark - Save Field
 - (void)saveFieldStartEdit:(id)sender
 {
@@ -216,7 +252,9 @@
         [self initFileAttributedString];
     }
     
-    [self checkIfNameReady];
+    if(![parent.selectMode isEqualToString:@"Load"]){
+        [self checkIfNameReady];
+    }
 }
 
 - (void)initFileAttributedString
@@ -252,15 +290,20 @@
     // enforce capitalizing
     fileName.text = [fileName.text capitalizedString];
     
-    [self checkIfNameReady];
+    if(![parent.selectMode isEqualToString:@"Load"]){
+        [self checkIfNameReady];
+    }
 }
 
 -(void)saveFieldDoneEditing:(id)sender
 {
     // save a rename
-    if([parent.selectMode isEqualToString:@"Load"]){
+    if([parent.selectMode isEqualToString:@"Load"] && ![fileName.text isEqualToString:@""]){
         // rename
         [self userDidRename];
+        
+    }else if([fileName.text isEqualToString:@""]){
+        [self setSelected:NO animated:NO];
     }
     
     // hide keyboard

@@ -41,9 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIButton * instrumentButton;
 @property (weak, nonatomic) IBOutlet UIButton * shareButton;
 @property (weak, nonatomic) IBOutlet UIButton * connectedButton;
-@property (weak, nonatomic) IBOutlet UIButton * leftSlider;
-@property (weak, nonatomic) IBOutlet UIView * leftSliderPinTop;
-@property (weak, nonatomic) IBOutlet UIView * leftSliderPinBottom;
+@property (weak, nonatomic) IBOutlet UIView * leftSlider;
 @property (weak, nonatomic) IBOutlet UIView * customIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView * connectedLeftArrow;
 

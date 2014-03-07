@@ -768,14 +768,16 @@
     
     // If the remaining options was previously empty (aka current count == 1),
     //      then reload the table to get the +inst cell back.
-    if([remainingInstrumentOptions count] == 1){
-        [instrumentTable reloadData];
-    }else{
+    //if([remainingInstrumentOptions count] == 1){
+    //    [instrumentTable reloadData];
+    //}else{
         // Else, delete the cell that the user requested:
-        NSLog(@"Delete row at index path");
+    
+    if(sender != NULL){
         [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationTop];
     }
     
+    NSLog(@"Reload data");
     if ([instruments count] == 0){
         [instrumentTable reloadData];
     }

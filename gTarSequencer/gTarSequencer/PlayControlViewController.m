@@ -121,7 +121,7 @@
 - (void)initVolumeDisplay
 {
     int bottomBarHeight = 55;
-    CGRect wholeScreen = CGRectMake(0, 0, XBASE, YBASE-bottomBarHeight-1);
+    CGRect wholeScreen = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, YBASE-bottomBarHeight-1);
     
     volumeDisplay = [[VolumeDisplay alloc] initWithFrame:wholeScreen];
     volumeDisplay.userInteractionEnabled = YES;

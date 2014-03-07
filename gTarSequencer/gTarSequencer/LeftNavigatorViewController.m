@@ -17,8 +17,6 @@
 @synthesize shareButton;
 @synthesize connectedButton;
 @synthesize leftSlider;
-@synthesize leftSliderPinTop;
-@synthesize leftSliderPinBottom;
 @synthesize customIndicator;
 @synthesize connectedLeftArrow;
 
@@ -69,8 +67,7 @@
     // Style elements
     [self resetButtonColors];
     
-    leftSliderPinTop.layer.cornerRadius = 3.0;
-    leftSliderPinBottom.layer.cornerRadius = 3.0;
+    leftSlider.layer.cornerRadius = 2.0;
 }
 
 - (void)viewDidUnload
@@ -205,22 +202,21 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    int playWidth = 5;
+    int playWidth = 6;
     int playX = connectedLeftArrow.frame.size.width/2 - playWidth/2;
     int playY = 18;
     CGFloat playHeight = connectedLeftArrow.frame.size.height - 2*playY;
     
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, silverColor.CGColor);
+    CGContextSetFillColorWithColor(context, silverColor.CGColor);
     
     CGContextSetLineWidth(context, 2.0);
     
     CGContextMoveToPoint(context, playX, playY);
-    CGContextAddLineToPoint(context, playX, playY+playHeight);
     CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
-    CGContextClosePath(context);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
     
-    CGContextFillPath(context);
+    CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     

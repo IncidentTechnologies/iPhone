@@ -10,6 +10,7 @@
                 <outlet property="connectedLeftArrow" destination="ma6-gb-774" id="7rs-jq-UaJ"/>
                 <outlet property="customIndicator" destination="PNW-tZ-pRM" id="FCO-AD-FSj"/>
                 <outlet property="instrumentButton" destination="wnJ-Sc-NM5" id="BsA-4M-Cck"/>
+                <outlet property="leftSlider" destination="hLY-41-9sc" id="fAy-79-74B"/>
                 <outlet property="optionsButton" destination="9e4-ri-NJR" id="KWQ-eL-eV5"/>
                 <outlet property="seqSetButton" destination="xfv-Rp-nMc" id="F2g-RO-aKO"/>
                 <outlet property="view" destination="1" id="w9K-mJ-MD9"/>
@@ -17,7 +18,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="76" height="264"/>
+            <rect key="frame" x="0.0" y="0.0" width="86" height="264"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9e4-ri-NJR">
@@ -77,8 +78,13 @@
                         <action selector="selectNav:" destination="-1" eventType="touchUpInside" id="eU1-7r-v1g"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mic-22-FLt">
-                    <rect key="frame" x="75" y="0.0" width="1" height="264"/>
+                <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mic-22-FLt">
+                    <rect key="frame" x="74" y="0.0" width="1" height="264"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ESD-CK-2GO">
+                    <rect key="frame" x="85" y="0.0" width="1" height="264"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
@@ -106,6 +112,11 @@
                     <rect key="frame" x="60" y="202" width="15" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <view alpha="0.29999999999999999" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hLY-41-9sc">
+                    <rect key="frame" x="78" y="117" width="4" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.11372549019607843" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

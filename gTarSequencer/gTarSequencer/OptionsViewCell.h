@@ -15,6 +15,7 @@
 @interface OptionsViewCell : UITableViewCell <UITextFieldDelegate>
 {
     BOOL isActiveSequencer;
+    BOOL isEditingMode;
     
     UIColor * activeColor;
     UIColor * darkGrayColor;
@@ -25,10 +26,13 @@
 }
 
 - (void)userDidSaveLoad;
+- (void)editingDidBegin;
+- (void)editingDidEnd;
 - (void)endNameEditing;
 - (void)setAsActiveSequencer;
 - (void)unsetAsActiveSequencer;
 - (NSString *)getNameForFile;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 
 @property (weak, nonatomic) OptionsViewController * parent;
 

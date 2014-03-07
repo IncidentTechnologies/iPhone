@@ -1877,8 +1877,8 @@
 				);
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/kateschnippering/Documents/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.2.1",
-					"/Users/kateschnippering/Documents/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0",
+					/Users/kateschnippering/Documents/Sites/incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.2.1,
+					/Users/kateschnippering/Documents/Sites/incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
 				);
 				OTHER_CFLAGS = "-mthumb";
 				OTHER_LDFLAGS = "-ObjC";
@@ -1907,8 +1907,8 @@
 				);
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/kateschnippering/Documents/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.2.1",
-					"/Users/kateschnippering/Documents/Sites/*incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0",
+					/Users/kateschnippering/Documents/Sites/incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK2.2.1,
+					/Users/kateschnippering/Documents/Sites/incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
 				);
 				OTHER_CFLAGS = "-mthumb";
 				OTHER_LDFLAGS = "-ObjC";

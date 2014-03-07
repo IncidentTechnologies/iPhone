@@ -74,8 +74,8 @@
         // Black out the rest of the screen:
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         
-        // Cancel button
-        [self drawCancelButtonWithX:x];
+        // Back button
+        [self drawBackButtonWithX:frame.origin.x];
         
         // Init string colours
         colorList = [NSArray arrayWithObjects:
@@ -107,24 +107,23 @@
 
 - (void)userDidBack:(id)sender
 {
-    // Back from Save screen
-    if(viewState == VIEW_CUSTOM_NAME){
-        // remember instrument name
-        instName = nameField.text;
-    }else{
-        // Back from record screen
+    [self checkInitCustomSoundRecorder];
+    if(![customSoundRecorder isRecording]){
         
-        [self checkInitCustomSoundRecorder];
-        if(![customSoundRecorder isRecording]){
-            
-            CGRect newFrame = backgroundView.frame;
-            [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:newFrame andRemove:backgroundView forViewState:VIEW_CUSTOM_INST];
-            viewState = VIEW_CUSTOM_INST;
-            
-            [self initSubtables];
-            
-            [self loadCellsFromStrings];
+        // back from save
+        if(viewState == VIEW_CUSTOM_NAME){
+            // remember instrument name
+            instName = nameField.text;
         }
+        // else back from record
+        
+        CGRect newFrame = backgroundView.frame;
+        [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:newFrame andRemove:backgroundView forViewState:VIEW_CUSTOM_INST];
+        viewState = VIEW_CUSTOM_INST;
+        
+        [self initSubtables];
+        
+        [self loadCellsFromStrings];
     }
     
 }
@@ -198,17 +197,14 @@
     [self.audio play];
 }
 
-- (void)drawCancelButtonWithX:(float)x
+- (void)drawBackButtonWithX:(float)x
 {
-    CGFloat cancelWidth = 35;
+    CGFloat cancelWidth = 40;
     CGFloat cancelHeight = 50;
-    CGFloat inset = 5;
-    CGRect cancelFrame = CGRectMake(x - inset - cancelWidth, 0, cancelWidth, cancelHeight);
+    CGFloat insetX = 35;
+    CGFloat insetY = 17;
+    CGRect cancelFrame = CGRectMake(x-insetX, insetY, cancelWidth, cancelHeight);
     cancelButton = [[UIButton alloc] initWithFrame:cancelFrame];
-    //[cancelButton setTitle:@"X" forState:UIControlStateNormal];
-    //[cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8] forState:UIControlStateNormal];
-    //[cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateHighlighted];
-    //cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:30.0];
     
     [cancelButton addTarget:self action:@selector(userDidCancel:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview: cancelButton];
@@ -218,22 +214,21 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    int playWidth = 20;
-    int playX = cancelButton.frame.size.width-playWidth/2-5;
-    int playY = 10;
-    CGFloat playHeight = cancelButton.frame.size.height - 2*playY;
+    int buttonWidth = 20;
+    int buttonX = cancelButton.frame.size.width-buttonWidth/2-5;
+    int buttonY = 9;
+    CGFloat buttonHeight = cancelButton.frame.size.height - 2*buttonY;
     
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
     
-    CGContextSetLineWidth(context, 2.0);
+    CGContextSetLineWidth(context, 6.0);
     
-    CGContextMoveToPoint(context, playX, playY);
-    CGContextAddLineToPoint(context, playX, playY+playHeight);
-    CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
-    CGContextClosePath(context);
+    CGContextMoveToPoint(context, buttonX, buttonY);
+    CGContextAddLineToPoint(context, buttonX-buttonWidth, buttonY+(buttonHeight/2));
+    CGContextAddLineToPoint(context, buttonX, buttonY+buttonHeight);
     
-    CGContextFillPath(context);
+    CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
@@ -1747,9 +1742,11 @@
     
     if(isReady){
         [self showHideButton:nextButton isHidden:NO withSelector:@selector(userDidNext:)];
+        [nextButton.imageView setAlpha:1.0];
         [nextButtonArrow setAlpha:1.0];
     }else{
         [self showHideButton:nextButton isHidden:YES withSelector:@selector(userDidNext:)];
+        [nextButton.imageView setAlpha:0.3];
         [nextButtonArrow setAlpha:0.3];
     }
 }
@@ -1792,12 +1789,10 @@
     CGContextSetLineWidth(context, 2.0);
     
     CGContextMoveToPoint(context, playX, playY);
-    CGContextAddLineToPoint(context, playX, playY+playHeight);
     CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
-    CGContextClosePath(context);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
     
-    
-    CGContextFillPath(context);
+    CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
@@ -1825,7 +1820,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     int playWidth = 8;
-    int playX = 0;
+    int playX = 3;
     int playY = 14;
     CGFloat playHeight = cell.sampleArrow.frame.size.height - 2*playY;
     
@@ -1835,11 +1830,10 @@
     CGContextSetLineWidth(context, 2.0);
     
     CGContextMoveToPoint(context, playX, playY);
-    CGContextAddLineToPoint(context, playX, playY+playHeight);
     CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
-    CGContextClosePath(context);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
     
-    CGContextFillPath(context);
+    CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     [cell.sampleArrow setImage:newImage];
@@ -1855,22 +1849,21 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    int playWidth = 8;
-    int playX = nextButton.frame.size.width/2 - playWidth/2 + 28;
+    int playWidth = 10;
+    int playX = nextButton.frame.size.width/2 - playWidth/2 + 22;
     int playY = 14;
     CGFloat playHeight = nextButton.frame.size.height - 2*playY;
     
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
     
-    CGContextSetLineWidth(context, 2.0);
+    CGContextSetLineWidth(context, 3.0);
     
     CGContextMoveToPoint(context, playX, playY);
-    CGContextAddLineToPoint(context, playX, playY+playHeight);
     CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
-    CGContextClosePath(context);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
     
-    CGContextFillPath(context);
+    CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
@@ -1903,8 +1896,10 @@
     
     if(isReady){
         [self showHideButton:saveButton isHidden:NO withSelector:@selector(userDidSave:)];
+        [saveButton.imageView setAlpha:1.0];
     }else{
         [self showHideButton:saveButton isHidden:YES withSelector:@selector(userDidSave:)];
+        [saveButton.imageView setAlpha:0.3];
     }
 }
 

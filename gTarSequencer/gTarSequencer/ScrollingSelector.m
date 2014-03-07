@@ -35,8 +35,8 @@
         // Left and Right arrows
         // [self drawArrowsWithX:x andY:y];
        
-        // Cancel button
-        [self drawCancelButtonWithX:x];
+        // Back button
+        [self drawBackButtonWithX:x/2-frame.size.width/2];
         
         // Draw main window
         NSArray * nibViews = [[NSBundle mainBundle] loadNibNamed:@"ScrollingSelector" owner:self options:nil];
@@ -290,33 +290,7 @@
     // if custom instrument creator, indicate with arrow
     if(index == 0){
         
-        float playWidth = 10;
-        float playHeight = 15;
-        float playX = imageBorderFrame.origin.x+imageBorderFrame.size.width+5;
-        float playY = imageBorderFrame.origin.y+imageBorderFrame.size.height/2-playHeight/2;
-        
-        CGSize size = CGSizeMake(scrollView.frame.size.width/2,scrollView.frame.size.height/2);
-        UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-        
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        
-        CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-        CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-        CGContextSetLineWidth(context, 2.0);
-        
-        CGContextMoveToPoint(context, playX, playY);
-        CGContextAddLineToPoint(context, playX, playY+playHeight);
-        CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
-        CGContextClosePath(context);
-        
-        CGContextFillPath(context);
-        
-        UIImage * playImage = UIGraphicsGetImageFromCurrentImageContext();
-        customArrow = [[UIImageView alloc] initWithImage:playImage];
-        
-        [scrollView addSubview:customArrow];
-        
-        UIGraphicsEndImageContext();
+        [self drawCustomArrow:imageBorderFrame];
         
     }else{
         
@@ -635,21 +609,76 @@
 }
 */
 
-- (void)drawCancelButtonWithX:(float)x
+- (void)drawBackButtonWithX:(float)x
 {
-    CGFloat cancelWidth = 50;
+    CGFloat cancelWidth = 40;
     CGFloat cancelHeight = 50;
-    CGFloat inset = 5;
-    CGRect cancelFrame = CGRectMake(x - inset - cancelWidth, 0, cancelWidth, cancelHeight);
+    CGFloat insetX = 35;
+    CGFloat insetY = 17;
+    CGRect cancelFrame = CGRectMake(x-insetX, insetY, cancelWidth, cancelHeight);
     cancelButton = [[UIButton alloc] initWithFrame:cancelFrame];
-    [cancelButton setTitle:@"X" forState:UIControlStateNormal];
-    [cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8] forState:UIControlStateNormal];
-    [cancelButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateHighlighted];
-    cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:30.0];
     
     [cancelButton addTarget:self action:@selector(userDidCancel:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview: cancelButton];
     
+    CGSize size = CGSizeMake(cancelButton.frame.size.width, cancelButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int buttonWidth = 20;
+    int buttonX = cancelButton.frame.size.width-buttonWidth/2-5;
+    int buttonY = 9;
+    CGFloat buttonHeight = cancelButton.frame.size.height - 2*buttonY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 6.0);
+    
+    CGContextMoveToPoint(context, buttonX, buttonY);
+    CGContextAddLineToPoint(context, buttonX-buttonWidth, buttonY+(buttonHeight/2));
+    CGContextAddLineToPoint(context, buttonX, buttonY+buttonHeight);
+    
+    CGContextStrokePath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [cancelButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
+    
+}
+
+- (void)drawCustomArrow:(CGRect)frame
+{
+    float playWidth = 10;
+    float playHeight = 15;
+    float playX = frame.origin.x+frame.size.width+5;
+    float playY = frame.origin.y+frame.size.height/2-playHeight/2;
+    
+    CGSize size = CGSizeMake(scrollView.frame.size.width/2,scrollView.frame.size.height/2);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetLineWidth(context, 3.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+   
+    CGContextStrokePath(context);
+    
+    UIImage * playImage = UIGraphicsGetImageFromCurrentImageContext();
+    customArrow = [[UIImageView alloc] initWithImage:playImage];
+    
+    [scrollView addSubview:customArrow];
+    
+    UIGraphicsEndImageContext();
 }
 
 #pragma mark - Page Fading

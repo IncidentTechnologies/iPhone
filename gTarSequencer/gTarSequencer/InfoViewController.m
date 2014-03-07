@@ -62,7 +62,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    int playWidth = 8;
+    int playWidth = 10;
     int playX = 0;
     int playY = 8;
     CGFloat playHeight = infoArrow.frame.size.height - 2*playY;
@@ -70,14 +70,13 @@
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
     
-    CGContextSetLineWidth(context, 2.0);
+    CGContextSetLineWidth(context, 3.0);
     
     CGContextMoveToPoint(context, playX, playY);
-    CGContextAddLineToPoint(context, playX, playY+playHeight);
     CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
-    CGContextClosePath(context);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
     
-    CGContextFillPath(context);
+    CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     [infoArrow setImage:newImage];

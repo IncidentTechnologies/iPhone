@@ -30,6 +30,8 @@
     BOOL hideNewFileRow;
     
     UIButton * selectedButton;
+    
+    OptionsViewCell * cellToDeselect;
 }
 
 - (IBAction)userDidSelectCreateNew:(id)sender;

@@ -387,10 +387,38 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
+    [cell editingDidBegin];
+    
+    // always select the cell being edited
+    [cell setSelected:YES animated:NO];
+    if(cellToDeselect != nil){
+        [cellToDeselect setSelected:NO animated:NO];
+    }
+    cellToDeselect = cell;
+}
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
+    [cell editingDidEnd];
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(editingStyle == UITableViewCellEditingStyleDelete){
         [self deleteCellAtIndexPath:indexPath];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // deselect a cell that's held on
+    if(cellToDeselect != nil){
+        [cellToDeselect setSelected:NO animated:NO];
+        cellToDeselect = nil;
     }
 }
 
