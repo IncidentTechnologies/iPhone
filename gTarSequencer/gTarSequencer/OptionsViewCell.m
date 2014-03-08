@@ -56,6 +56,7 @@
 - (void)sharedInit
 {
     isActiveSequencer = NO;
+    isEditingMode = NO;
     
     darkGrayColor = [UIColor colorWithRed:50/255.0 green:56/255.0 blue:59/255.0 alpha:1.0];
     blueColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:1.0];
@@ -103,7 +104,7 @@
 - (void)unsetAsActiveSequencer
 {
     isActiveSequencer = NO;
-    if(self.selected){
+    if(self.isSelected){
         fileText.textColor = [UIColor whiteColor];
     }else{
         fileText.textColor = darkGrayColor;
@@ -122,7 +123,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    
     [super setSelected:selected animated:animated];
     
     if(selected){
@@ -183,7 +183,7 @@
         
     }
     
-    if(scroller != nil){
+    if(scroller != nil && !isEditingMode){
         [self resetContentOffset];
     }
     
@@ -406,9 +406,9 @@
          isReady = YES;
      }
     
-    //if([parent isDuplicateFilename:nameString]){
-    //    isReady = NO;
-    //}
+    if([parent isDuplicateFilename:nameString]){
+        isReady = NO;
+    }
     
     if(isReady){
         [self showHideButton:fileLoad isHidden:NO withSelector:@selector(userDidSaveLoad) withAnimation:YES];

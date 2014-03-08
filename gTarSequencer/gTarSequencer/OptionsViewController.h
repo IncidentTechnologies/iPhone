@@ -54,7 +54,7 @@
 - (void)deselectAllRowsExcept:(OptionsViewCell *)cell;
 
 - (void)deselectAllRows;
-//- (BOOL)isDuplicateFilename:(NSString *)filename;
+- (BOOL)isDuplicateFilename:(NSString *)filename;
 - (NSString *)generateNextSetName;
 - (void)disableScroll;
 - (void)enableScroll;

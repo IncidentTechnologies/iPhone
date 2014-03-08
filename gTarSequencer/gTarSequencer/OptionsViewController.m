@@ -325,13 +325,13 @@
 
 - (void)disableScroll
 {
-    NSLog(@"***** disable scroll");
+    NSLog(@"disable scroll");
     loadTable.scrollEnabled = NO;
 }
 
 - (void)enableScroll
 {
-    NSLog(@"***** enable scroll");
+    NSLog(@"enable scroll");
     loadTable.scrollEnabled = YES;
 }
 
@@ -393,6 +393,8 @@
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"***** will begin editing row at index path");
+    
     OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
     [cell editingDidBegin];
     
@@ -412,6 +414,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
+    [cell editingDidEnd];
+    
     if(editingStyle == UITableViewCellEditingStyleDelete){
         [self deleteCellAtIndexPath:indexPath];
     }
@@ -530,12 +536,13 @@
 -(void)deselectAllRows
 {
     NSLog(@"Deselect all rows");
-    for(int i = 0; i < [fileLoadSet count]+1; i++){
-        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-        [loadTable deselectRowAtIndexPath:indexPath animated:NO];
+    @synchronized(self){
+        for(int i = 0; i < [fileLoadSet count]+1; i++){
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [loadTable deselectRowAtIndexPath:indexPath animated:NO];
+        }
     }
 }
-
 
 -(void)deselectAllRowsExcept:(OptionsViewCell *)cell
 {
@@ -596,7 +603,7 @@
 
 #pragma mark - Name checking
 
-/*-(BOOL)isDuplicateFilename:(NSString *)filename
+-(BOOL)isDuplicateFilename:(NSString *)filename
 {
     for(int i = 0; i < [fileLoadSet count]; i++){
         if([fileLoadSet[i] isEqualToString:filename]){
@@ -606,7 +613,6 @@
     
     return NO;
 }
-*/
 
 #pragma mark - Empty set
 
