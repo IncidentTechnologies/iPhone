@@ -564,6 +564,21 @@
     
     [scrollView addSubview:newOffMeasure];
     
+    // Title
+    float labelWidth = 300;
+    float labelHeight = 80;
+    CGRect labelFrame = CGRectMake(measureFrame.size.width/2-labelWidth/2,measureFrame.size.height/2-labelHeight/2,labelWidth,labelHeight);
+    UILabel * offMeasureLabel = [[UILabel alloc] initWithFrame:labelFrame];
+    
+    offMeasureLabel.textAlignment = NSTextAlignmentCenter;
+    offMeasureLabel.numberOfLines = 3;
+    
+    [offMeasureLabel setFont:[UIFont systemFontOfSize:16.0]];
+    [offMeasureLabel setTextColor:[UIColor colorWithRed:1 green:1 blue: 1 alpha:0.3]];
+    [offMeasureLabel setText:@"EXPAND TO ADD \n\n PINCH TO DELETE"];
+    
+    [newOffMeasure addSubview:offMeasureLabel];
+    
     
     //
     // GESTURES
@@ -1022,9 +1037,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scroller
 {
-    if([delegate isLeftNavOpen]){
-        scrollView.contentOffset = CGPointMake(0,0);
-    }
+    
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scroller withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset

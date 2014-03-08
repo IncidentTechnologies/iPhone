@@ -20,6 +20,7 @@
 
 @implementation SequencerViewController
 
+@synthesize isFirstLaunch;
 @synthesize optionsViewController;
 @synthesize seqSetViewController;
 @synthesize instrumentViewController;
@@ -41,7 +42,12 @@
     [super viewDidLoad];
     
     [self initSubviews];
-    [self loadStateFromDisk:nil];
+    
+    // Load default set for FTU
+    NSString * filePath = (isFirstLaunch) ? [self getDefaultSetFilepath] : nil;
+    [self loadStateFromDisk:filePath];
+    
+    // Check for gTar Connection
     [self checkGtarConnected];
     
 }
@@ -259,6 +265,7 @@
         
         NSLog(@"Get current instrument: Nav Controller");
         Instrument * newInstrument = [seqSetViewController getCurrentInstrument];
+        
         [instrumentViewController setActiveInstrument:newInstrument];
         
     }else if([nav isEqualToString:@"Share"]){
@@ -504,6 +511,11 @@
         [playControlViewController resetVolume];
         [seqSetViewController resetSelectedInstrumentIndex];
     }
+}
+
+- (NSString *)getDefaultSetFilepath
+{
+    return [[NSBundle mainBundle] pathForResource:@"defaultSet" ofType:@""];
 }
 
 #pragma mark - Play Events

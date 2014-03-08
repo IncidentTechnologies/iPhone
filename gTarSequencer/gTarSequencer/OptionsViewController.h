@@ -51,6 +51,8 @@
 - (void)reloadFileTable;
 - (void)unloadView;
 
+- (void)deselectAllRowsExcept:(OptionsViewCell *)cell;
+
 - (void)deselectAllRows;
 //- (BOOL)isDuplicateFilename:(NSString *)filename;
 - (NSString *)generateNextSetName;

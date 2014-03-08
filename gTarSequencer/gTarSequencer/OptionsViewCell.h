@@ -43,7 +43,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton * deleteButton;
 
+@property (nonatomic) UIScrollView * scroller;
 @property (nonatomic) BOOL isRenamable;
+@property (nonatomic) BOOL isNameEditing;
 @property (nonatomic) int rowid;
 
 @end

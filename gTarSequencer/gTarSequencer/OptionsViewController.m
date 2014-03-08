@@ -325,11 +325,13 @@
 
 - (void)disableScroll
 {
+    NSLog(@"***** disable scroll");
     loadTable.scrollEnabled = NO;
 }
 
 - (void)enableScroll
 {
+    NSLog(@"***** enable scroll");
     loadTable.scrollEnabled = YES;
 }
 
@@ -380,7 +382,9 @@
 #pragma mark - Cell editing
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([selectMode isEqualToString:@"Load"]){
+    OptionsViewCell * cell = (OptionsViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
+    if([selectMode isEqualToString:@"Load"] && !cell.isNameEditing){
         return YES;
     }else{
         return NO;
@@ -529,6 +533,24 @@
     for(int i = 0; i < [fileLoadSet count]+1; i++){
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         [loadTable deselectRowAtIndexPath:indexPath animated:NO];
+    }
+}
+
+
+-(void)deselectAllRowsExcept:(OptionsViewCell *)cell
+{
+    NSIndexPath * cellToIgnore = [loadTable indexPathForCell:cell];
+    
+    NSLog(@"Deselect all rows except %i",cellToIgnore.row);
+    
+    for(int i = 0; i < [fileLoadSet count]+1; i++){
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        OptionsViewCell * cellToCheck = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
+        
+        if(cellToCheck != cell && cellToCheck.isSelected){
+            [loadTable deselectRowAtIndexPath:indexPath animated:NO];
+            [cellToCheck setSelected:NO animated:NO];
+        }
     }
 }
 

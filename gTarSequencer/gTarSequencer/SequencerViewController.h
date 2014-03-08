@@ -58,6 +58,7 @@
     UISwipeGestureRecognizer * swipeRight;
 }
 
+@property (nonatomic) BOOL isFirstLaunch;
 @property (retain, nonatomic) OptionsViewController * optionsViewController;
 @property (retain, nonatomic) SeqSetViewController * seqSetViewController;
 @property (retain, nonatomic) InstrumentViewController * instrumentViewController;

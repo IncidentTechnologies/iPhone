@@ -112,6 +112,7 @@
     SequencerViewController *sequencerViewController = [[SequencerViewController alloc] initWithNibName:@"SequencerViewController" bundle:nil];
     
     [self.navigationController pushViewController:sequencerViewController animated:YES];
+    [sequencerViewController setIsFirstLaunch:firstLaunch];
     
 }
 

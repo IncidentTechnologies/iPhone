@@ -33,7 +33,7 @@
         
         instruments = [[NSMutableArray alloc] init];
         
-        self.tableView.bounces = YES;
+        self.tableView.bounces = NO;
         
 
     }
@@ -311,9 +311,9 @@
     else if(indexPath.row < [instruments count])
         return tableHeight/3+1;
     else if([instruments count] == 1)
-        return 2*tableHeight/3;
+        return 2*tableHeight/3-1;
     else if([instruments count] == 2)
-        return tableHeight/3;
+        return tableHeight/3-2;
     
     // else
     return tableHeight/3;
@@ -763,27 +763,19 @@
     
     NSIndexPath * pathToDelete = [instrumentTable indexPathForCell:sender];
     
-    // Remove from data structure:
-    [self removeSequencerWithIndex:pathToDelete.row];
-    
-    // If the remaining options was previously empty (aka current count == 1),
-    //      then reload the table to get the +inst cell back.
-    //if([remainingInstrumentOptions count] == 1){
-    //    [instrumentTable reloadData];
-    //}else{
-        // Else, delete the cell that the user requested:
-    
-    if(sender != NULL){
-        [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationTop];
+    // Beware race conditions deleting 5+ instruments at a time
+    @synchronized(instruments){
+        // Remove from data structure:
+        [self removeSequencerWithIndex:pathToDelete.row];
+        
+        [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationNone];
     }
     
-    NSLog(@"Reload data");
     if ([instruments count] == 0){
         [instrumentTable reloadData];
     }
     
     // Remove any enqueued patterns
-    NSLog(@"Remove enqueued patterns");
     [delegate removeQueuedPatternForInstrumentAtIndex:pathToDelete.row];
     
     // Update cells:
@@ -847,6 +839,7 @@
          above it is, than the index in the array needs to be shifted */
         [self selectInstrument:selectedInstrumentIndex - 1];
     }
+    
 }
 
 #pragma mark Re-adding Instruments
@@ -877,6 +870,7 @@
     long lastIndex = [remainingInstrumentOptions count] - 1;
     
     [self bubbleUp:lastIndex];
+    
 }
 
 - (void)bubbleUp:(long)index

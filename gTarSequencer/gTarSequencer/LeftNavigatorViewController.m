@@ -44,8 +44,8 @@
     float seqSetImageWidth = 30.4;
     [seqSetButton setImageEdgeInsets:UIEdgeInsetsMake((seqSetButton.frame.size.height-seqSetImageHeight)/2, (seqSetButton.frame.size.width-seqSetImageWidth)/2, (seqSetButton.frame.size.height-seqSetImageHeight)/2, (seqSetButton.frame.size.width-seqSetImageWidth)/2)];
     
-    defaultInstrumentIcon = @"Icon_Sound";
-    [instrumentButton setImage:[UIImage imageNamed:defaultInstrumentIcon] forState:UIControlStateNormal];
+    defaultInstrumentIcon = [self drawDefaultInstrumentIcon];
+    [instrumentButton setImage:defaultInstrumentIcon forState:UIControlStateNormal];
     float instrumentImageHeight = instrumentButton.frame.size.height-5.0;
     float instrumentImageWidth = instrumentButton.frame.size.height-5.0;
     [instrumentButton setImageEdgeInsets:UIEdgeInsetsMake((instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2, (instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2)];
@@ -181,7 +181,7 @@
 {
     [instrumentButton setAlpha:0.2];
     instrumentViewEnabled = false;
-    [instrumentButton setImage:[UIImage imageNamed:defaultInstrumentIcon] forState:UIControlStateNormal];
+    [instrumentButton setImage:defaultInstrumentIcon forState:UIControlStateNormal];
 }
 
 -(void)showCustomIndicator
@@ -223,6 +223,35 @@
     [connectedLeftArrow setImage:newImage];
     
     UIGraphicsEndImageContext();
+}
+
+-(UIImage *)drawDefaultInstrumentIcon
+{
+    CGSize size = CGSizeMake(instrumentButton.frame.size.width, instrumentButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 26;
+    int playHeight = 26;
+    int playX = instrumentButton.frame.size.width/2 - playWidth/2 + 1;
+    int playY = instrumentButton.frame.size.height/2 - playHeight/2;
+    CGContextSetStrokeColorWithColor(context, silverColor.CGColor);
+    CGContextSetFillColorWithColor(context, silverColor.CGColor);
+    
+    CGContextSetLineWidth(context, 8.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX+playWidth, playY+playHeight);
+    CGContextStrokePath(context);
+    
+    CGContextMoveToPoint(context, playX+playWidth, playY);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    CGContextStrokePath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    return newImage;
 }
 
 /*

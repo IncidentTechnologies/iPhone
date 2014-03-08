@@ -297,6 +297,7 @@
 		6D44A45D18B686C400992D3D /* G_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45C18B686C400992D3D /* G_Icon.png */; };
 		6D72B28118BE7C7100969A8F /* CustomSampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D72B28018BE7C7100969A8F /* CustomSampleCell.m */; };
 		6D72B28318BE7C8400969A8F /* CustomSampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D72B28218BE7C8400969A8F /* CustomSampleCell.xib */; };
+		6D85704518CA5F780068CC92 /* defaultSet in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704418CA5F780068CC92 /* defaultSet */; };
 		6DAA158818C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */; };
 		6DAA158918C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */; };
 		6DAA158A18C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */; };
@@ -655,6 +656,7 @@
 		6D72B27F18BE7C7100969A8F /* CustomSampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSampleCell.h; sourceTree = "<group>"; };
 		6D72B28018BE7C7100969A8F /* CustomSampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSampleCell.m; sourceTree = "<group>"; };
 		6D72B28218BE7C8400969A8F /* CustomSampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSampleCell.xib; sourceTree = "<group>"; };
+		6D85704418CA5F780068CC92 /* defaultSet */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = defaultSet; path = gTarSequencer/Resources/defaultSet; sourceTree = SOURCE_ROOT; };
 		6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57rd.png"; sourceTree = "<group>"; };
 		6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57sq.png"; sourceTree = "<group>"; };
 		6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-114x114rd.png"; sourceTree = "<group>"; };
@@ -813,6 +815,7 @@
 		5811AA75187B88C700FC0BD2 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				6D85704418CA5F780068CC92 /* defaultSet */,
 				587C9F241888C0E7001F57C7 /* Samples */,
 				5811AA77187B88C700FC0BD2 /* Percussion */,
 				5811AADE187B88C800FC0BD2 /* Sample Pack INFO */,
@@ -1667,6 +1670,7 @@
 				5811AAE4187B88C800FC0BD2 /* Percussion 101.mp3 in Resources */,
 				587C9F851888C0E7001F57C7 /* Dubstep 1.mp3 in Resources */,
 				5811AB2A187B88C800FC0BD2 /* Percussion 74.mp3 in Resources */,
+				6D85704518CA5F780068CC92 /* defaultSet in Resources */,
 				587C9FC11888C0E7001F57C7 /* Violin 1.mp3 in Resources */,
 				587C9FBB1888C0E7001F57C7 /* Vibraphone 1.mp3 in Resources */,
 				5811AB1B187B88C800FC0BD2 /* Percussion 60.mp3 in Resources */,
@@ -1866,8 +1870,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LIBRARY = "libstdc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kate Schnippering (RTA23J392S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kate Schnippering (RTA23J392S)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";
@@ -1896,8 +1900,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LIBRARY = "libstdc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kate Schnippering (RTA23J392S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kate Schnippering (RTA23J392S)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";

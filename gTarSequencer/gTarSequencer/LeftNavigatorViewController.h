@@ -24,7 +24,7 @@
     UIColor * greenColor;
     UIColor * blueColor;
     
-    NSString * defaultInstrumentIcon;
+    UIImage * defaultInstrumentIcon;
 }
 
 -(IBAction)selectNav:(id)sender;

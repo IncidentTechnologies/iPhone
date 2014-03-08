@@ -144,7 +144,7 @@
     CGRect sliderCircleFrame = CGRectMake(baseX+indent, sliderCircleMinY, circleWidth, circleWidth);
     
     sliderCircle = [[UIButton alloc] initWithFrame:sliderCircleFrame];
-    sliderCircle.backgroundColor = [UIColor colorWithRed:166/255.0 green:204/255.0 blue:111/255.0 alpha:1.0];
+    sliderCircle.backgroundColor = [UIColor colorWithRed:85/255.0 green:97/255.0 blue:100/255.0 alpha:1.0];
     sliderCircle.layer.cornerRadius = sliderWidth/2-indent;
     
     [self addSubview:sliderCircle];

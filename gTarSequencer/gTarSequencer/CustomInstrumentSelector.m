@@ -368,6 +368,8 @@
 #pragma mark - Name Field
 - (void)nameFieldStartEdit:(id)sender
 {
+    NSLog(@"Name field start edit");
+    
     float frameOffset = 35.0;
     CGRect prevIconFrame = customIcon.frame;
     CGRect prevTextFrame = nameField.frame;
@@ -677,7 +679,7 @@
 -(void)initDrawAudio
 {
     [self drawAudio];
-    recordProcessingLabel.text = @"RECORD NEW";
+    recordProcessingLabel.text = @"";
 }
 
 -(void)drawAudio
@@ -1648,7 +1650,7 @@
         [sampleLibraryTitle setTitle:[sampleStack lastObject] forState:UIControlStateNormal];
         [sampleLibraryArrow setHidden:NO];
     }else{
-        [sampleLibraryTitle setTitle:@"Sample Library" forState:UIControlStateNormal];
+        [sampleLibraryTitle setTitle:@"Sound Library" forState:UIControlStateNormal];
         [sampleLibraryArrow setHidden:YES];
     }
 }

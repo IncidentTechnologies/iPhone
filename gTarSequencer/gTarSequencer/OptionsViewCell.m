@@ -21,6 +21,8 @@
 @synthesize isRenamable;
 @synthesize rowid;
 @synthesize deleteButton;
+@synthesize isNameEditing;
+@synthesize scroller;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -123,9 +125,6 @@
     
     [super setSelected:selected animated:animated];
     
-    // Save load button
-    [self showHideButton:fileLoad isHidden:NO withSelector:@selector(userDidSaveLoad)];
-    
     if(selected){
         
         NSLog(@"Selecting cell at row %i",rowid);
@@ -143,14 +142,17 @@
             
             NSLog(@"Selected cell is Renamable");
             
-            fileName.text = fileText.text;
-            
             [fileText setHidden:YES];
             [fileName setHidden:NO];
             
             // open keyboard
             [self beginNameEditing];
+        }else{
+            // Save load button
+            [self showHideButton:fileLoad isHidden:NO withSelector:@selector(userDidSaveLoad) withAnimation:NO];
         }
+        
+        [parent deselectAllRowsExcept:self];
         
     }else{
         
@@ -174,8 +176,15 @@
             
             [fileText setHidden:NO];
             [fileName setHidden:YES];
+        }else{
+            
+            NSLog(@"*** Not deselecting cell %i",rowid);
         }
         
+    }
+    
+    if(scroller != nil){
+        [self resetContentOffset];
     }
     
     // Check font for active sequencer
@@ -244,9 +253,11 @@
 #pragma mark - Save Field
 - (void)saveFieldStartEdit:(id)sender
 {
+    isNameEditing = YES;
+    
     previousNameText = fileName.text;
     
-    if([fileName.text isEqualToString:DEFAULT_FILE_TEXT]){
+    if([fileName.text isEqualToString:DEFAULT_FILE_TEXT] || [fileName.text isEqualToString:@""]){
         fileName.text = @"";
     }else{
         [self initFileAttributedString];
@@ -255,15 +266,21 @@
     if(![parent.selectMode isEqualToString:@"Load"]){
         [self checkIfNameReady];
     }
+    
+    [parent disableScroll];
 }
 
 - (void)initFileAttributedString
 {
-    // create attributed string
-    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:fileName.text];
-    [str addAttribute:NSBackgroundColorAttributeName value:blueColor range:NSMakeRange(0, fileName.text.length)];
+    NSLog(@"Init file attributed string");
     
-    [fileName setAttributedText:str];
+    if(![fileName.text isEqualToString:DEFAULT_FILE_TEXT] && ![fileName.text isEqualToString:@""]){
+        // create attributed string
+        NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:fileName.text];
+        [str addAttribute:NSBackgroundColorAttributeName value:blueColor range:NSMakeRange(0, fileName.text.length)];
+        
+        [fileName setAttributedText:str];
+    }
 }
 
 - (void)clearFileAttributedString
@@ -297,6 +314,8 @@
 
 -(void)saveFieldDoneEditing:(id)sender
 {
+    isNameEditing = NO;
+    
     // save a rename
     if([parent.selectMode isEqualToString:@"Load"] && ![fileName.text isEqualToString:@""]){
         // rename
@@ -313,20 +332,27 @@
 
 - (void)beginNameEditing
 {
+    isNameEditing = YES;
+    
     NSLog(@"Begin name editing");
+    
+    // This function may be called while already open for editing
     if(![fileName isFirstResponder]){
         [fileName becomeFirstResponder];
         
         if([parent.selectMode isEqualToString:@"Load"]){
             [parent offsetTable:self];
-        }else{
-            [parent disableScroll];
         }
     }
+    
+    [self checkIfNameReady];
+    [parent disableScroll];
 }
 
 -(void)endNameEditing
 {
+    isNameEditing = NO;
+    
     NSLog(@"End name editing");
     
     // hide keyboard
@@ -334,14 +360,15 @@
         
         [fileName resignFirstResponder];
         [parent resetTableOffset:self];
+        [parent enableScroll];
     }
     
-    [parent enableScroll];
     [self resetFileNameIfBlank];
 }
 
 -(void)resetFileNameIfBlank
 {
+    NSLog(@"Reset filename if blank");
     
     NSString * nameString = fileName.text;
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -367,6 +394,8 @@
 
 - (void)checkIfNameReady
 {
+    NSLog(@"Check if name ready");
+    
      BOOL isReady = YES;
      NSString * nameString = fileName.text;
      NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -382,13 +411,13 @@
     //}
     
     if(isReady){
-        [self showHideButton:fileLoad isHidden:NO withSelector:@selector(userDidSaveLoad)];
+        [self showHideButton:fileLoad isHidden:NO withSelector:@selector(userDidSaveLoad) withAnimation:YES];
     }else{
-        [self showHideButton:fileLoad isHidden:YES withSelector:@selector(userDidSaveLoad)];
+        [self showHideButton:fileLoad isHidden:YES withSelector:@selector(userDidSaveLoad) withAnimation:NO];
     }
 }
 
-- (void)showHideButton:(UIButton *)button isHidden:(BOOL)hidden withSelector:(SEL)selector
+- (void)showHideButton:(UIButton *)button isHidden:(BOOL)hidden withSelector:(SEL)selector withAnimation:(BOOL)animate
 {
     if(!hidden){
         [button setAlpha:1.0];
@@ -447,6 +476,12 @@
 #pragma mark - Double tap
 -(void)handleDoubleTap:(UITapGestureRecognizer *)sender
 {
+    // ensure selected
+    if(!self.isSelected){
+        NSLog(@"****** force select");
+        [self setSelected:YES animated:NO];
+    }
+    
     if([parent.selectMode isEqualToString:@"Load"]){
         
         fileName.text = fileText.text;
@@ -463,10 +498,17 @@
 // Prevent bouncing
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    scroller = scrollView;
+    
     static CGFloat targetOffset = 62;
     if(scrollView.contentOffset.x >= targetOffset){
         scrollView.contentOffset = CGPointMake(targetOffset, 0.0);
     }
+}
+
+-(void)resetContentOffset
+{
+    scroller.contentOffset = CGPointMake(0,0);
 }
 
 -(NSString *)getNameForFile
