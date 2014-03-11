@@ -23,6 +23,11 @@
 
 @interface OptionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 {
+    // FTU tutorial
+    UIImageView * tutorialScreen;
+    UIButton * tutorialNext;
+    int tutorialStep;
+    
     //NSMutableDictionary * fileSet;
     NSMutableArray * fileLoadSet;
     NSMutableArray * fileDateSet;
@@ -58,6 +63,8 @@
 - (NSString *)generateNextSetName;
 - (void)disableScroll;
 - (void)enableScroll;
+
+@property (nonatomic) BOOL isFirstLaunch;
 
 @property (retain, nonatomic) NSString * activeSequencer;
 

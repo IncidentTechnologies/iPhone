@@ -703,7 +703,7 @@
     [customInstrumentOptions addObject:dict];
     
     [self saveCustomInstrumentToPlist:customInstrumentOptions];
-    [self closeCustomInstrumentSelectorAndScroll:YES];
+    [self closeCustomInstrumentSelectorAndScroll:NO];
 }
 
 - (int)getCustomInstrumentsNewIndex
@@ -762,33 +762,53 @@
     NSLog(@"Delete cell");
     
     NSIndexPath * pathToDelete = [instrumentTable indexPathForCell:sender];
+    int row = pathToDelete.row;
+    int section = pathToDelete.section;
     
     // Beware race conditions deleting 5+ instruments at a time
     @synchronized(instruments){
         // Remove from data structure:
         [self removeSequencerWithIndex:pathToDelete.row];
         
-        [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:pathToDelete] withRowAnimation:UITableViewRowAnimationNone];
+        NSLog(@"Removed from data structure");
+        
+        SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
+        
+        [UIView animateWithDuration:0.3 animations:^(void){
+            
+            [cell setAlpha:0.0];
+            
+        } completion:^(BOOL finished){
+            
+            [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:section]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            NSLog(@"Reload data");
+            
+            if ([instruments count] == 0){
+                [instrumentTable reloadData];
+            }
+            
+            // Remove any enqueued patterns
+            [delegate removeQueuedPatternForInstrumentAtIndex:pathToDelete.row];
+            
+            NSLog(@"Enqueued patterns removed");
+            
+            // Update cells:
+            if([instruments count] > 0){
+                if(![delegate checkIsPlaying]){
+                    [self updateAllVisibleCells];
+                }
+            }else{
+                [delegate forceStopAll];
+            }
+            
+            [delegate numInstrumentsDidChange:[instruments count]];
+            [delegate saveContext:nil];
+        }];
+        
+        
+        NSLog(@"Deleted row");
     }
-    
-    if ([instruments count] == 0){
-        [instrumentTable reloadData];
-    }
-    
-    // Remove any enqueued patterns
-    [delegate removeQueuedPatternForInstrumentAtIndex:pathToDelete.row];
-    
-    // Update cells:
-    if([instruments count] > 0){
-        if(![delegate checkIsPlaying]){
-            [self updateAllVisibleCells];
-        }
-    }else{
-        [delegate forceStopAll];
-    }
-    
-    [delegate numInstrumentsDidChange:[instruments count]];
-    [delegate saveContext:nil];
 }
 
 - (void)deleteAllCells
@@ -862,6 +882,7 @@
     }
     
     // Add this dictionary to the end:
+    NSLog(@"Add dictionary to the end");
     if(instrumentDictionary != nil){
         [remainingInstrumentOptions addObject:instrumentDictionary];
     }
@@ -870,6 +891,8 @@
     long lastIndex = [remainingInstrumentOptions count] - 1;
     
     [self bubbleUp:lastIndex];
+    
+    NSLog(@"Bubbled up");
     
 }
 

@@ -18,7 +18,6 @@
 @synthesize connectedButton;
 @synthesize leftSlider;
 @synthesize customIndicator;
-@synthesize connectedLeftArrow;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,7 +61,7 @@
     [connectedButton setImageEdgeInsets:UIEdgeInsetsMake((connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2, (connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2)];
     
     // Arrow
-    [self drawConnectedLeftArrow];
+    //[self drawConnectedLeftArrow];
     
     // Style elements
     [self resetButtonColors];
@@ -195,6 +194,7 @@
     [customIndicator setHidden:YES];
 }
 
+/*
 -(void)drawConnectedLeftArrow
 {
     CGSize size = CGSizeMake(connectedLeftArrow.frame.size.width, connectedLeftArrow.frame.size.height);
@@ -224,6 +224,7 @@
     
     UIGraphicsEndImageContext();
 }
+*/
 
 -(UIImage *)drawDefaultInstrumentIcon
 {
@@ -250,6 +251,9 @@
     CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    
+    UIGraphicsEndImageContext();
     
     return newImage;
 }

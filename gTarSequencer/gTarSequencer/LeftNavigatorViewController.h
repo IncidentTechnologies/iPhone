@@ -43,6 +43,5 @@
 @property (weak, nonatomic) IBOutlet UIButton * connectedButton;
 @property (weak, nonatomic) IBOutlet UIView * leftSlider;
 @property (weak, nonatomic) IBOutlet UIView * customIndicator;
-@property (weak, nonatomic) IBOutlet UIImageView * connectedLeftArrow;
 
 @end

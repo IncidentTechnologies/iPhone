@@ -237,7 +237,7 @@
 		58B7FDC6188A15A800A2C1B1 /* Icon_Bacon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B7FDC5188A15A700A2C1B1 /* Icon_Bacon.png */; };
 		58B9AD0E187B61C5001EDD33 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B9AD0D187B61C5001EDD33 /* libc++.dylib */; };
 		58BBFD1D1891BEA400E41CD2 /* CustomInstrumentNamer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58BBFD1C1891BEA400E41CD2 /* CustomInstrumentNamer.xib */; };
-		58CA4E6F18A174EA0026D83C /* VolumeDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA4E6E18A174EA0026D83C /* VolumeDisplay.m */; };
+		58CA4E6F18A174EA0026D83C /* VolumeDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 58CA4E6E18A174EA0026D83C /* VolumeDisplay.mm */; };
 		58CA4E7D18A19C8A0026D83C /* LeftNavigatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA4E7B18A19C8A0026D83C /* LeftNavigatorViewController.m */; };
 		58CA4E7E18A19C8A0026D83C /* LeftNavigatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CA4E7C18A19C8A0026D83C /* LeftNavigatorViewController.xib */; };
 		58D6170E1863B8D6001EB327 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D6170D1863B8D6001EB327 /* Foundation.framework */; };
@@ -297,7 +297,7 @@
 		6D44A45D18B686C400992D3D /* G_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45C18B686C400992D3D /* G_Icon.png */; };
 		6D72B28118BE7C7100969A8F /* CustomSampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D72B28018BE7C7100969A8F /* CustomSampleCell.m */; };
 		6D72B28318BE7C8400969A8F /* CustomSampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D72B28218BE7C8400969A8F /* CustomSampleCell.xib */; };
-		6D85704518CA5F780068CC92 /* defaultSet in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704418CA5F780068CC92 /* defaultSet */; };
+		6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704618CAAE560068CC92 /* Pinch_Icon.png */; };
 		6DAA158818C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */; };
 		6DAA158918C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */; };
 		6DAA158A18C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */; };
@@ -317,6 +317,7 @@
 		6DAB0CEB18C7B8F400FFBDE6 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DAB0CE518C7B8F400FFBDE6 /* release_notes.md */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
+		6DF6BC7518CE5E1800D20EC7 /* defaultSet in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6BC7418CE5E1800D20EC7 /* defaultSet */; };
 		6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */; };
 		6DFDB02018C0278D004D573B /* BottomBar_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01F18C0278D004D573B /* BottomBar_4.xib */; };
 		6DFDB02218C02BB2004D573B /* SeqSetViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB02118C02BB2004D573B /* SeqSetViewCell_4.xib */; };
@@ -584,7 +585,7 @@
 		58B9AD0D187B61C5001EDD33 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		58BBFD1C1891BEA400E41CD2 /* CustomInstrumentNamer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInstrumentNamer.xib; sourceTree = "<group>"; };
 		58CA4E6D18A174EA0026D83C /* VolumeDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeDisplay.h; sourceTree = "<group>"; };
-		58CA4E6E18A174EA0026D83C /* VolumeDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeDisplay.m; sourceTree = "<group>"; };
+		58CA4E6E18A174EA0026D83C /* VolumeDisplay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VolumeDisplay.mm; sourceTree = "<group>"; };
 		58CA4E7A18A19C8A0026D83C /* LeftNavigatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftNavigatorViewController.h; sourceTree = "<group>"; };
 		58CA4E7B18A19C8A0026D83C /* LeftNavigatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftNavigatorViewController.m; sourceTree = "<group>"; };
 		58CA4E7C18A19C8A0026D83C /* LeftNavigatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftNavigatorViewController.xib; sourceTree = "<group>"; };
@@ -656,7 +657,7 @@
 		6D72B27F18BE7C7100969A8F /* CustomSampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSampleCell.h; sourceTree = "<group>"; };
 		6D72B28018BE7C7100969A8F /* CustomSampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSampleCell.m; sourceTree = "<group>"; };
 		6D72B28218BE7C8400969A8F /* CustomSampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSampleCell.xib; sourceTree = "<group>"; };
-		6D85704418CA5F780068CC92 /* defaultSet */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = defaultSet; path = gTarSequencer/Resources/defaultSet; sourceTree = SOURCE_ROOT; };
+		6D85704618CAAE560068CC92 /* Pinch_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pinch_Icon.png; sourceTree = "<group>"; };
 		6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57rd.png"; sourceTree = "<group>"; };
 		6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57sq.png"; sourceTree = "<group>"; };
 		6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-114x114rd.png"; sourceTree = "<group>"; };
@@ -679,6 +680,7 @@
 		6DAB0CE818C7B8F400FFBDE6 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		6DF6BC7418CE5E1800D20EC7 /* defaultSet */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = defaultSet; path = ../defaultSet; sourceTree = "<group>"; };
 		6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell_4.xib; sourceTree = "<group>"; };
 		6DFDB01F18C0278D004D573B /* BottomBar_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomBar_4.xib; sourceTree = "<group>"; };
 		6DFDB02118C02BB2004D573B /* SeqSetViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeqSetViewCell_4.xib; sourceTree = "<group>"; };
@@ -773,6 +775,7 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6D85704618CAAE560068CC92 /* Pinch_Icon.png */,
 				6DAA159218C66363003DAB30 /* Save_Icon.png */,
 				6DAA158C18C12525003DAB30 /* Sequencer_Icon58px.png */,
 				6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */,
@@ -815,7 +818,7 @@
 		5811AA75187B88C700FC0BD2 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				6D85704418CA5F780068CC92 /* defaultSet */,
+				6DF6BC7418CE5E1800D20EC7 /* defaultSet */,
 				587C9F241888C0E7001F57C7 /* Samples */,
 				5811AA77187B88C700FC0BD2 /* Percussion */,
 				5811AADE187B88C800FC0BD2 /* Sample Pack INFO */,
@@ -1162,7 +1165,7 @@
 			isa = PBXGroup;
 			children = (
 				58CA4E6D18A174EA0026D83C /* VolumeDisplay.h */,
-				58CA4E6E18A174EA0026D83C /* VolumeDisplay.m */,
+				58CA4E6E18A174EA0026D83C /* VolumeDisplay.mm */,
 			);
 			name = Volume;
 			sourceTree = "<group>";
@@ -1479,6 +1482,7 @@
 				587C9FC41888C0E7001F57C7 /* Violin 4.mp3 in Resources */,
 				587C9FCA1888C0E7001F57C7 /* WubWub 4.mp3 in Resources */,
 				58B4D3D5186E32AD0035D9E5 /* SeqSetViewCell.xib in Resources */,
+				6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */,
 				6DAB0CEA18C7B8F400FFBDE6 /* README.md in Resources */,
 				587C9F871888C0E7001F57C7 /* Dubstep 3.mp3 in Resources */,
 				5811AB36187B88C800FC0BD2 /* Percussion 85.mp3 in Resources */,
@@ -1652,6 +1656,7 @@
 				5811AB29187B88C800FC0BD2 /* Percussion 73.mp3 in Resources */,
 				58E635301889FD800036E4F1 /* Bacon 1.mp3 in Resources */,
 				5811AB25187B88C800FC0BD2 /* Percussion 7.mp3 in Resources */,
+				6DF6BC7518CE5E1800D20EC7 /* defaultSet in Resources */,
 				587C9F841888C0E7001F57C7 /* Chiptune 6.mp3 in Resources */,
 				5811AAE2187B88C800FC0BD2 /* Percussion 10.mp3 in Resources */,
 				6DAA159018C12525003DAB30 /* Sequencer_Icon80px.png in Resources */,
@@ -1670,7 +1675,6 @@
 				5811AAE4187B88C800FC0BD2 /* Percussion 101.mp3 in Resources */,
 				587C9F851888C0E7001F57C7 /* Dubstep 1.mp3 in Resources */,
 				5811AB2A187B88C800FC0BD2 /* Percussion 74.mp3 in Resources */,
-				6D85704518CA5F780068CC92 /* defaultSet in Resources */,
 				587C9FC11888C0E7001F57C7 /* Violin 1.mp3 in Resources */,
 				587C9FBB1888C0E7001F57C7 /* Vibraphone 1.mp3 in Resources */,
 				5811AB1B187B88C800FC0BD2 /* Percussion 60.mp3 in Resources */,
@@ -1732,7 +1736,7 @@
 				58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */,
 				58241D7B188DC46C00498DB5 /* CustomInstrumentSelector.m in Sources */,
 				58B4D3D0186E1F570035D9E5 /* Pattern.m in Sources */,
-				58CA4E6F18A174EA0026D83C /* VolumeDisplay.m in Sources */,
+				58CA4E6F18A174EA0026D83C /* VolumeDisplay.mm in Sources */,
 				585916FE18774791002C21B9 /* MeasureView.m in Sources */,
 				58B1BE2A18AD52AB00A3C0CC /* OptionsViewCell.m in Sources */,
 				5811AB49187B95BA00FC0BD2 /* SEQNote.m in Sources */,

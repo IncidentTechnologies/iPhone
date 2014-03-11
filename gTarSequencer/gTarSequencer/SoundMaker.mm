@@ -12,8 +12,8 @@
 #import "AUNodeNetwork.h"
 #import "AudioNodeCommon.h"
 
-#define MAX_AMPLITUDE 4.0
-#define MIN_AMPLITUDE 0.02
+#define MAX_AMPLITUDE 0.55
+#define MIN_AMPLITUDE 0.01
 #define GTAR_NUM_STRINGS 6
 
 @interface SoundMaker () {
@@ -23,10 +23,13 @@
     SampleNode *m_sampNode;
     //DelayNode *m_delayNode;
     SamplerNode *m_samplerNode;
+    SamplerBankNode *m_samplerBank;
     
     char * filepath[6];
     NSArray * audioStringSet;
     NSArray * audioStringPaths;
+    
+    double gain;
 }
 
 @end
@@ -79,13 +82,13 @@
 - (void)loadStringSetAndStringPaths
 {
     m_samplerNode = new SamplerNode();
-    SamplerBankNode * newBank = NULL;
+    m_samplerBank = NULL;
     
     for(int i = 0; i < GTAR_NUM_STRINGS; i++){
         filepath[i] = (char *)malloc(sizeof(char) * 1024);
     }
     
-    m_samplerNode->CreateNewBank(newBank);
+    m_samplerNode->CreateNewBank(m_samplerBank);
     
     for(int i = 0; i < GTAR_NUM_STRINGS; i++){
         
@@ -125,9 +128,12 @@
     
     NSLog(@"Playing note on string %i fret %i with amplitude %f",str,fret,amplitude);
     
-    m_samplerNode->TriggerBankSample(0, str);
+    if(gain != amplitude){
+        m_samplerNode->SetBankGain(0, amplitude);
+        gain = amplitude;
+    }
     
-    //[audioController PluckString:str atFret:fret withAmplitude:amplitude];
+    m_samplerBank->TriggerSample(str);
 }
 
 - (void)setSamplePackWithName:(NSString *)pack

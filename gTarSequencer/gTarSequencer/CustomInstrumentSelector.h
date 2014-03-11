@@ -22,8 +22,14 @@
 
 @interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate>
 {
+    // FTU tutorial
+    UIImageView * tutorialScreen;
+    UIButton * tutorialNext;
+    int tutorialStep;
+    
     int viewState;
     
+    // Sample and string lists
     UIView * backgroundView;
     NSMutableArray * sampleList;
     NSMutableArray * customSampleList;
@@ -69,6 +75,8 @@
 - (void)moveFrame:(CGRect)newFrame;
 - (void)launchSelectorView;
 - (IBAction)reverseSampleStack:(id)sender;
+
+@property (nonatomic) BOOL isFirstLaunch;
 
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic) NSString * instName;

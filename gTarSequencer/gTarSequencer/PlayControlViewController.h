@@ -23,6 +23,8 @@
 - (void) stopGestures;
 - (void) startGestures;
 
+- (void) endTutorialIfOpen;
+
 @end
 
 

@@ -8,6 +8,9 @@
 
 #import "OptionsViewController.h"
 
+#define BOTTOMBAR_HEIGHT 55
+#define TUTORIAL_STEPS 2
+
 #define ROW_HEIGHT 65
 #define TABLE_Y 55
 #define TABLE_HEIGHT 209
@@ -16,6 +19,7 @@
 
 @implementation OptionsViewController
 
+@synthesize isFirstLaunch;
 @synthesize delegate;
 @synthesize activeSequencer;
 @synthesize createNewButton;
@@ -58,6 +62,10 @@
     [self drawNewPlusButton];
     
     [self reloadFileTable];
+    
+    if(isFirstLaunch){
+        [self launchFTUTutorial];
+    }
 }
 
 - (void)unloadView
@@ -71,6 +79,13 @@
 
 - (void)initOptions
 {
+    
+    // Check for first launch
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOptions"]){
+        isFirstLaunch = FALSE;
+    }else{
+        isFirstLaunch = TRUE;
+    }
     
 }
 
@@ -161,6 +176,64 @@
         fileDateSet[i] = newFileDateSet[i];
     }
 }
+
+#pragma mark - FTU Tutorial
+
+-(void)launchFTUTutorial
+{
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    CGRect tutorialFrame = CGRectMake(0,0,x,y-BOTTOMBAR_HEIGHT);
+    UIColor * fillColor = [UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1];
+    
+    tutorialScreen = [[UIImageView alloc] initWithFrame:tutorialFrame];
+    [tutorialScreen setBackgroundColor:fillColor];
+    [self.view addSubview:tutorialScreen];
+    tutorialScreen.userInteractionEnabled = YES;
+    
+    float buttonWidth = 300;
+    float buttonHeight = 30;
+    CGRect buttonFrame = CGRectMake(tutorialFrame.size.width/2-buttonWidth/2, tutorialFrame.size.height/2-buttonHeight/2, buttonWidth, buttonHeight);
+    tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
+    [tutorialNext setTitle:@"Options Tutorial 1" forState:UIControlStateNormal];
+    
+    [tutorialScreen addSubview:tutorialNext];
+    [tutorialNext addTarget:self action:@selector(incrementFTUTutorial) forControlEvents:UIControlEventTouchUpInside];
+    
+    tutorialStep = 1;
+}
+
+-(void)incrementFTUTutorial
+{
+    
+    if(tutorialStep == TUTORIAL_STEPS){
+        
+        [self endTutorial];
+        
+    }else{
+        
+        tutorialStep++;
+        
+        // step through slides
+        if(tutorialStep % 2 == 0){
+            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:159/255.0 green:172/255.0 blue:106/255.0 alpha:1]];
+        }else{
+            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1]];
+        }
+        
+        [tutorialNext setTitle:[@"Options Tutorial " stringByAppendingFormat:@"%i", tutorialStep] forState:UIControlStateNormal];
+    }
+}
+
+-(void)endTutorial
+{
+    [tutorialScreen removeFromSuperview];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOptions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 
 #pragma mark - Save Load Actions
 - (void)userDidLoadFile:(NSString *)filename

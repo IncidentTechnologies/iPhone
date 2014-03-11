@@ -16,3 +16,10 @@
 #define XBASE_SM 480
 #define XBASE 480
 #define YBASE 320
+
+#define DEFAULT_VOLUME 0.2
+#define MAX_VOLUME 0.55
+#define MIN_VOLUME 0.01
+
+#define VISIBLE 1.0
+#define NOT_VISIBLE 0.0

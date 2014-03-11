@@ -8,6 +8,8 @@
 
 #import "CustomInstrumentSelector.h"
 
+#define TUTORIAL_STEPS 3
+
 #define GTAR_NUM_STRINGS 6
 #define MAX_RECORD_SECONDS 3.5
 #define RECORD_DRAW_INTERVAL 0.001
@@ -26,6 +28,7 @@
 
 @implementation CustomInstrumentSelector
 
+@synthesize isFirstLaunch;
 @synthesize viewFrame;
 @synthesize instName;
 @synthesize sampleTable;
@@ -91,8 +94,20 @@
         
         [self retrieveSampleList];
         
+        [self checkFirstLaunch];
+        
     }
     return self;
+}
+
+- (void)checkFirstLaunch
+{
+    // Check for first launch
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedCustom"]){
+        isFirstLaunch = FALSE;
+    }else{
+        isFirstLaunch = TRUE;
+    }
 }
 
 - (void)launchSelectorView
@@ -103,6 +118,95 @@
     
     [self initSubtables];
     
+    if(isFirstLaunch){
+        [self launchFTUTutorial];
+    }
+}
+
+- (void)initSubtables
+{
+    
+    // Left sample table
+    [sampleTable setBackgroundColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0]];
+    [self drawSampleLibraryArrow];
+    
+    // Right string table
+    [stringTable setBackgroundColor:[UIColor colorWithRed:81/255.0 green:81/255.0 blue:81/255.0 alpha:1.0]];
+    
+    // Next Button
+    [self drawNextButtonArrow];
+    [self checkIfAllStringsReady];
+    
+    // Record button
+    [self drawRecordCircle];
+    [self showHideButton:recordButton isHidden:NO withSelector:@selector(userDidLaunchRecord:)];
+    
+    // Sample Library Title
+    if([sampleStack count] > 0){
+        [sampleLibraryTitle setTitle:[sampleStack lastObject] forState:UIControlStateNormal];
+        [sampleLibraryArrow setHidden:NO];
+    }
+    
+}
+
+#pragma mark - FTU Tutorial
+
+-(void)launchFTUTutorial
+{
+    CGRect tutorialFrame = CGRectMake(0,0,backgroundView.frame.size.width,backgroundView.frame.size.height);
+    UIColor * fillColor = [UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1];
+    
+    tutorialScreen = [[UIImageView alloc] initWithFrame:tutorialFrame];
+    [tutorialScreen setBackgroundColor:fillColor];
+    [backgroundView addSubview:tutorialScreen];
+    tutorialScreen.userInteractionEnabled = YES;
+    
+    float buttonWidth = 300;
+    float buttonHeight = 30;
+    CGRect buttonFrame = CGRectMake(tutorialFrame.size.width/2-buttonWidth/2, tutorialFrame.size.height/2-buttonHeight/2, buttonWidth, buttonHeight);
+    tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
+    [tutorialNext setTitle:@"Custom Tutorial 1" forState:UIControlStateNormal];
+    
+    [tutorialScreen addSubview:tutorialNext];
+    [tutorialNext addTarget:self action:@selector(incrementFTUTutorial) forControlEvents:UIControlEventTouchUpInside];
+    
+    tutorialStep = 1;
+}
+
+-(void)incrementFTUTutorial
+{
+    if(tutorialStep == TUTORIAL_STEPS){
+        
+        [self endTutorial];
+        
+    }else{
+        
+        tutorialStep++;
+        
+        // step through slides
+        if(tutorialStep % 2 == 0){
+            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:159/255.0 green:172/255.0 blue:106/255.0 alpha:1]];
+        }else{
+            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1]];
+        }
+        
+        [tutorialNext setTitle:[@"Custom Tutorial " stringByAppendingFormat:@"%i", tutorialStep] forState:UIControlStateNormal];
+    }
+}
+
+-(void)endTutorial
+{
+    [tutorialScreen removeFromSuperview];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedCustom"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - Custom Instruments Navigation
+
+- (void)moveFrame:(CGRect)newFrame
+{
+    backgroundView.frame = newFrame;
 }
 
 - (void)userDidBack:(id)sender
@@ -162,39 +266,6 @@
     }else{
         [self addSubview:backgroundView];
     }
-}
-
-// single sample audio player
-- (void)playAudioForFile:(NSString *)filename withCustomPath:(BOOL)useCustomPath
-{
-    
-    NSString * path;
-    
-    if(filename == nil){
-        NSLog(@"Attempting to play nil file");
-        return;        
-    }
-    
-    if(useCustomPath){
-        
-        // different filetype and location
-        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Samples/" stringByAppendingString:[filename stringByAppendingString:@".m4a"]]];
-        
-    }else{
-        
-        path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp3"];
-    }
-    
-    NSError * error = nil;
-    NSURL * url = [NSURL fileURLWithPath:path];
-
-    
-    NSLog(@"Playing URL %@",url);
-    
-    self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    
-    [self.audio play];
 }
 
 - (void)drawBackButtonWithX:(float)x
@@ -279,6 +350,8 @@
     [self checkIfNameReady];
 }
 
+#pragma mark - Custom Instruments Save Page
+
 - (void)initCustomIcon
 {
     if(!customIconSet){
@@ -332,37 +405,6 @@
     }else{
         [delegate closeCustomInstrumentSelectorAndScroll:NO];
     }
-}
-
-- (void)initSubtables
-{
-    
-    // Left sample table
-    [sampleTable setBackgroundColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0]];
-    [self drawSampleLibraryArrow];
-    
-    // Right string table
-    [stringTable setBackgroundColor:[UIColor colorWithRed:81/255.0 green:81/255.0 blue:81/255.0 alpha:1.0]];
-    
-    // Next Button
-    [self drawNextButtonArrow];
-    [self checkIfAllStringsReady];
-    
-    // Record button
-    [self drawRecordCircle];
-    [self showHideButton:recordButton isHidden:NO withSelector:@selector(userDidLaunchRecord:)];
-    
-    // Sample Library Title
-    if([sampleStack count] > 0){
-        [sampleLibraryTitle setTitle:[sampleStack lastObject] forState:UIControlStateNormal];
-        [sampleLibraryArrow setHidden:NO];
-    }
-    
-}
-
-- (void)moveFrame:(CGRect)newFrame
-{
-    backgroundView.frame = newFrame;
 }
 
 #pragma mark - Name Field
@@ -567,6 +609,41 @@
         return YES;
     }
     return NO;
+}
+
+
+
+// single sample audio player
+- (void)playAudioForFile:(NSString *)filename withCustomPath:(BOOL)useCustomPath
+{
+    
+    NSString * path;
+    
+    if(filename == nil){
+        NSLog(@"Attempting to play nil file");
+        return;
+    }
+    
+    if(useCustomPath){
+        
+        // different filetype and location
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Samples/" stringByAppendingString:[filename stringByAppendingString:@".m4a"]]];
+        
+    }else{
+        
+        path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp3"];
+    }
+    
+    NSError * error = nil;
+    NSURL * url = [NSURL fileURLWithPath:path];
+    
+    
+    NSLog(@"Playing URL %@",url);
+    
+    self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    
+    [self.audio play];
 }
 
 #pragma mark - Record

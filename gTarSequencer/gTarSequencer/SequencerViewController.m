@@ -13,10 +13,12 @@
 #define LAST_MEASURE 3
 
 #define TABLEHEIGHT 264
-#define NAVWIDTH 86
+#define NAVWIDTH 131
 #define NAVTAB 0
 #define SELECTORWIDTH 364
 #define SELECTORHEIGHT 276
+#define BOTTOMBAR_HEIGHT 55
+#define TUTORIAL_STEPS 3
 
 @implementation SequencerViewController
 
@@ -47,11 +49,14 @@
     NSString * filePath = (isFirstLaunch) ? [self getDefaultSetFilepath] : nil;
     [self loadStateFromDisk:filePath];
     
+    if(isFirstLaunch){
+        [self launchFTUTutorial];
+    }
+    
     // Check for gTar Connection
     [self checkGtarConnected];
     
 }
-
 
 - (void)viewDidUnload
 {
@@ -189,6 +194,76 @@
     
     [self startGestures];
     
+}
+
+#pragma mark - FTU Tutorial
+
+- (void)launchFTUTutorial
+{
+    NSLog(@" *** Launch FTU Tutorial *** ");
+    
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    CGRect tutorialFrame = CGRectMake(0,0,x,y);
+    UIColor * fillColor = [UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1];
+    
+    tutorialScreen = [[UIImageView alloc] initWithFrame:tutorialFrame];
+    [tutorialScreen setBackgroundColor:fillColor];
+    [self.view addSubview:tutorialScreen];
+    tutorialScreen.userInteractionEnabled = YES;
+    
+    float buttonWidth = 100;
+    float buttonHeight = 30;
+    CGRect buttonFrame = CGRectMake(tutorialFrame.size.width/2-buttonWidth/2, tutorialFrame.size.height/2-buttonHeight/2, buttonWidth, buttonHeight);
+    tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
+    [tutorialNext setTitle:@"Tutorial 1" forState:UIControlStateNormal];
+    
+    [tutorialScreen addSubview:tutorialNext];
+    [tutorialNext addTarget:self action:@selector(incrementFTUTutorial) forControlEvents:UIControlEventTouchUpInside];
+    
+    tutorialStep = 1;
+}
+
+- (void)incrementFTUTutorial
+{
+    
+    if(tutorialStep == TUTORIAL_STEPS){
+        
+        UIColor * fadedGray = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8];
+        
+        // pointer to play
+        CGRect newTutorialFrame = CGRectMake(0, 0, tutorialScreen.frame.size.width, tutorialScreen.frame.size.height - BOTTOMBAR_HEIGHT);
+        [tutorialScreen setFrame:newTutorialFrame];
+        [tutorialScreen setBackgroundColor:fadedGray];
+        
+        float playButtonWidth = 130;
+        CGRect bottomBarFrame = CGRectMake(playButtonWidth, newTutorialFrame.size.height, tutorialScreen.frame.size.width - playButtonWidth, BOTTOMBAR_HEIGHT);
+        tutorialBottomBar = [[UIView alloc] initWithFrame:bottomBarFrame];
+        [tutorialBottomBar setBackgroundColor:fadedGray];
+        [self.view addSubview:tutorialBottomBar];
+        
+        [tutorialNext removeFromSuperview];
+    
+    }else{
+    
+        tutorialStep++;
+        
+        // step through slides
+        if(tutorialStep % 2 == 0){
+            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:159/255.0 green:172/255.0 blue:106/255.0 alpha:1]];
+        }else{
+            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1]];
+        }
+        
+        [tutorialNext setTitle:[@"Tutorial " stringByAppendingFormat:@"%i", tutorialStep] forState:UIControlStateNormal];
+    }
+}
+
+- (void)endTutorialIfOpen
+{
+    [tutorialScreen removeFromSuperview];
+    [tutorialBottomBar removeFromSuperview];
 }
 
 #pragma mark - Left Navigator Delegate
@@ -482,6 +557,7 @@
         [playControlViewController setTempo:tempo];
         
         double volume = [[currentState objectForKey:@"Volume"] doubleValue];
+        volume = MIN(volume,MAX_VOLUME);
         [playControlViewController setVolume:volume];
         
         // Decode selectedInstrumentIndex

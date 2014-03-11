@@ -17,9 +17,6 @@
 
 @interface CustomSoundRecorder : NSObject <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {
-    AVAudioRecorder * recorder;
-    AVAudioPlayer * player;
-    
     NSString * defaultFilename;
     
     float timePaused;
@@ -47,7 +44,8 @@
 - (void)setSampleEnd:(float)ms;
 
 @property (weak, nonatomic) id<CustomSoundDelegate> delegate;
-
+@property (retain) AVAudioRecorder * recorder;
+@property (retain) AVAudioPlayer * player;
 
 
 @end

@@ -8,12 +8,12 @@
 
 #import "InstrumentViewController.h"
 
-#define MEASURE_WIDTH 418
-#define MEASURE_MARGIN_SM 10.5
-#define MEASURE_MARGIN_LG 25
+#define MEASURE_WIDTH 480
+#define MEASURE_MARGIN_SM 0
+#define MEASURE_MARGIN_LG 14.7
 
-#define NOTE_WIDTH 26
-#define NOTE_HEIGHT 26
+#define NOTE_WIDTH 30
+#define NOTE_HEIGHT 30
 #define NOTE_GAP 2
 #define MUTE_SEGMENT_INDEX 4
 #define SCROLL_SPEED_MIN 0
@@ -25,6 +25,7 @@
 @synthesize scrollView;
 @synthesize instrumentIconButton;
 @synthesize instrumentIcon;
+@synthesize iconOverlap;
 @synthesize patternA;
 @synthesize patternB;
 @synthesize patternC;
@@ -37,7 +38,6 @@
 @synthesize offMask;
 @synthesize isMute;
 @synthesize customIndicator;
-@synthesize backButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -114,12 +114,16 @@
     }
     
     // Back button
-    [self drawBackButton];
+    // [self drawBackButton];
     
     // Instrument icon
     instrumentIconButton.layer.borderWidth = 0.5;
     instrumentIconButton.layer.borderColor = [UIColor whiteColor].CGColor;
     instrumentIconButton.layer.cornerRadius = 5.0;
+    
+    iconOverlap.layer.borderWidth = 0.5;
+    iconOverlap.layer.borderColor = [UIColor whiteColor].CGColor;
+    iconOverlap.layer.cornerRadius = 5.0;
     
     // Pages
     [self initPages];
@@ -134,7 +138,7 @@
     pages[3] = pageFour;
     
     for(int i = 0; i < NUM_MEASURES; i++){
-        pages[i].layer.cornerRadius = 7.5;
+        //pages[i].layer.cornerRadius = 7.5;
         pages[i].alpha = 0.4;
     }
 }
@@ -475,7 +479,7 @@
             
         // draw new border
         measureSet[activePattern][measureIndex].layer.borderColor = [UIColor whiteColor].CGColor;
-        measureSet[activePattern][measureIndex].layer.borderWidth = 0.5f;
+        measureSet[activePattern][measureIndex].layer.borderWidth = 0.0f;
         
         [measureSet[activePattern][measureIndex] setAlpha:1.0];
     }
@@ -497,7 +501,7 @@
         {
             for (int f = 0; f < FRETS_ON_GTAR; f++)
             {
-                CGRect noteFrame = CGRectMake(NOTE_GAP+f*NOTE_WIDTH,NOTE_GAP+(STRINGS_ON_GTAR-s-1)*NOTE_HEIGHT,NOTE_WIDTH-NOTE_GAP,NOTE_HEIGHT-NOTE_GAP);
+                CGRect noteFrame = CGRectMake(NOTE_GAP+f*NOTE_WIDTH-1,NOTE_GAP+(STRINGS_ON_GTAR-s-1)*NOTE_HEIGHT,NOTE_WIDTH-NOTE_GAP,NOTE_HEIGHT-NOTE_GAP);
                 UIButton * newButton = [[UIButton alloc] initWithFrame:noteFrame];
                 
                 Pattern * p = currentInst.patterns[patternIndex];
@@ -565,17 +569,12 @@
     [scrollView addSubview:newOffMeasure];
     
     // Title
-    float labelWidth = 300;
-    float labelHeight = 80;
-    CGRect labelFrame = CGRectMake(measureFrame.size.width/2-labelWidth/2,measureFrame.size.height/2-labelHeight/2,labelWidth,labelHeight);
-    UILabel * offMeasureLabel = [[UILabel alloc] initWithFrame:labelFrame];
+    float pinchWidth = 100;
+    float pinchHeight = 100;
+    CGRect labelFrame = CGRectMake(measureFrame.size.width/2-pinchWidth/2,measureFrame.size.height/2-pinchHeight/2,pinchWidth,pinchHeight);
+    UIButton * offMeasureLabel = [[UIButton alloc] initWithFrame:labelFrame];
     
-    offMeasureLabel.textAlignment = NSTextAlignmentCenter;
-    offMeasureLabel.numberOfLines = 3;
-    
-    [offMeasureLabel setFont:[UIFont systemFontOfSize:16.0]];
-    [offMeasureLabel setTextColor:[UIColor colorWithRed:1 green:1 blue: 1 alpha:0.3]];
-    [offMeasureLabel setText:@"EXPAND TO ADD \n\n PINCH TO DELETE"];
+    [offMeasureLabel setImage:[UIImage imageNamed:@"Pinch_Icon"] forState:UIControlStateNormal];
     
     [newOffMeasure addSubview:offMeasureLabel];
     
@@ -1088,6 +1087,7 @@
 }
 
 #pragma mark - Other Drawing
+/*
 -(void)drawBackButton
 {
     CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
@@ -1120,7 +1120,7 @@
     
     UIGraphicsEndImageContext();
 }
-
+*/
 
 #pragma mark - System
 

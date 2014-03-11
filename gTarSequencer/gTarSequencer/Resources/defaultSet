@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Active Sequencer</key>
-	<string>Default</string>
+	<string>My First Set</string>
 	<key>Instruments Data</key>
 	<data>
 	YnBsaXN0MDDUAAEAAgADAAQABQAIAfcB+FQkdG9wWCRvYmplY3RzWCR2ZXJzaW9uWSRh
@@ -130,8 +130,8 @@
 	<key>Selected Instrument Index</key>
 	<integer>4</integer>
 	<key>Tempo</key>
-	<integer>120</integer>
+	<integer>121</integer>
 	<key>Volume</key>
-	<real>0.019999999552965164</real>
+	<real>0.19687327742576599</real>
 </dict>
 </plist>

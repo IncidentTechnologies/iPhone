@@ -7,14 +7,11 @@
 //
 
 #import "VolumeDisplay.h"
+#import "AudioController.h"
+#import "AUNodeNetwork.h"
+#import "AudioNodeCommon.h"
 
 #define ANIMATION_DURATION 0.2f
-
-#define DEFAULT_VOLUME 1.0
-#define MIN_VOLUME 0.02
-#define MAX_VOLUME 4.0
-#define VISIBLE 1.0
-#define NOT_VISIBLE 0.0
 
 @implementation VolumeDisplay
 
@@ -79,7 +76,11 @@
 
 - (void)setVolume:(double)value
 {
+    NSLog(@"Set volume to %f",value);
+    
     currentValue = value;
+    
+    //[self setVolumeGainTo:value];
     [self fillToPercent:[self percentFull:value]];
 }
 
@@ -87,12 +88,18 @@
 
 - (double)percentFull:(double)value
 {
-    return (value-MIN_VOLUME)/(MAX_VOLUME-MIN_VOLUME);
+    double percentFull = (value-MIN_VOLUME)/(MAX_VOLUME-MIN_VOLUME);
+    
+    //NSLog(@" *** fill to %f percent ", percentFull);
+    
+    return percentFull;
 }
 
 - (void)fillToPercent:(double)percent
 {
     double y = sliderCircleMinY - (sliderCircleMinY - sliderCircleMaxY)*percent;
+    
+    //NSLog(@"y is %f",y);
     
     CGRect newFrame = CGRectMake(sliderCircle.frame.origin.x, y, sliderCircle.frame.size.width, sliderCircle.frame.size.height);
     
@@ -105,7 +112,7 @@
 
 - (void)createOutline
 {
-    NSLog(@"outline frame is %f %f %f %f",outline.frame.origin.x,outline.frame.origin.y,outline.frame.size.width,outline.frame.size.height);
+    // NSLog(@"outline frame is %f %f %f %f",outline.frame.origin.x,outline.frame.origin.y,outline.frame.size.width,outline.frame.size.height);
     
     // Draw black background:
     [outline setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
@@ -219,6 +226,21 @@
     }
     
 }
+
+#pragma mark - Audio Controller
+/*
+-(void)setVolumeGainTo:(double)value
+{
+    
+    NSLog(@" **** Set channel gain to %f *** ",value);
+    
+    AudioController * audioController = [AudioController sharedAudioController];
+    AudioNode * root = [[audioController GetNodeNetwork] GetRootNode];
+    
+    root->SetChannelGain(value, CONN_OUT);
+    
+}
+*/
 
 
 @end

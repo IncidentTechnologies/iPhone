@@ -9,7 +9,6 @@
 #import "PlayControlViewController.h"
 
 #define DEFAULT_TEMPO 120
-#define DEFAULT_VOLUME 1.0
 #define SECONDS_PER_MIN 60.0
 
 @implementation PlayControlViewController
@@ -203,6 +202,7 @@
     if (isPlaying){
         [self stopAll];
     }else{
+        [delegate endTutorialIfOpen];
         [delegate initPlayLocation];
         [self playAll];
     }

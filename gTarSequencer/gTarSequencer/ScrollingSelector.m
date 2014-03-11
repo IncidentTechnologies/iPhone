@@ -288,8 +288,7 @@
     [imageButtons addObject:button];
     
     // if custom instrument creator, indicate with arrow
-    if(index == 0){
-        
+    if([[names objectAtIndex:index] isEqualToString:@"CUSTOM"]){
         [self drawCustomArrow:imageBorderFrame];
         
     }else{
@@ -336,7 +335,10 @@
 
 - (int)xOriginForImageWithIndex:(int)index
 {
-    return (gap + (index/2) * (gap + iconBorderSize.width));
+    int num = [images count];
+    int newIndex = num - index - 1;
+    
+    return (gap + (newIndex/2) * (gap + iconBorderSize.width));
 }
 
 #pragma mark Actions
@@ -658,7 +660,7 @@
     float playX = frame.origin.x+frame.size.width+5;
     float playY = frame.origin.y+frame.size.height/2-playHeight/2;
     
-    CGSize size = CGSizeMake(scrollView.frame.size.width/2,scrollView.frame.size.height/2);
+    CGSize size = CGSizeMake(pageCount*scrollView.frame.size.width,scrollView.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -687,16 +689,18 @@
 {
     int numinst = [instrumentObjects count];
     
-    for(int i = 0; i < numinst; i++){
+    for(int j = 0; j < numinst; j++){
+        
+        int i = numinst - j - 1;
         
         NSArray * iconObj = [instrumentObjects objectForKey:[NSNumber numberWithInt:i]];
         
         // fade in
-        if(i >= focus*2*cols && i < (focus+1)*2*cols){
+        if(j >= focus*2*cols && j < (focus+1)*2*cols){
             // fade in
             [iconObj[0] setAlpha:1.0];
             [iconObj[1] setAlpha:1.0];
-        }else if(focus == pageCount-1 && ((numinst%2==0 && i>=numinst-2*cols) || (numinst%2==1 && i>=numinst-2*cols+1))){
+        }else if(focus == pageCount-1 && ((numinst%2==0 && j>=numinst-2*cols) || (numinst%2==1 && j>=numinst-2*cols+1))){
             // fade in last page
             [iconObj[0] setAlpha:1.0];
             [iconObj[1] setAlpha:1.0];
@@ -714,7 +718,7 @@
         }
     }
     
-    if(focus > 0){
+    if(focus < pageCount-1){
         [customArrow setHidden:YES];
     }
 }

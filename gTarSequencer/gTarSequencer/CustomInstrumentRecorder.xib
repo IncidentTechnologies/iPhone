@@ -39,7 +39,7 @@
                 <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYr-Lt-RjT">
                     <rect key="frame" x="0.0" y="169" width="121" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.10980392156862745" green="0.5607843137254902" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.33333333333333331" green="0.38039215686274508" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="contentEdgeInsets" minX="48" minY="10" maxX="48" maxY="10"/>
@@ -57,7 +57,7 @@
                 <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kb-XA-lfj">
                     <rect key="frame" x="243" y="169" width="121" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.63137254901960782" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.55294117647058827" green="0.4392156862745098" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="contentEdgeInsets" minX="49" minY="11" maxX="49" maxY="11"/>

@@ -34,21 +34,21 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>VIBRAPHONE</string>
+			<string>DOUBLE BASS</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
 			<integer>1</integer>
 			<key>IconName</key>
-			<string>Icon_Vibraphone</string>
+			<string>Icon_Violin</string>
 			<key>Strings</key>
 			<array>
-				<string>Vibraphone 1</string>
-				<string>Vibraphone 2</string>
-				<string>Vibraphone 3</string>
-				<string>Vibraphone 4</string>
-				<string>Vibraphone 5</string>
-				<string>Vibraphone 6</string>
+				<string>Double Bass 1</string>
+				<string>Double Bass 2</string>
+				<string>Double Bass 3</string>
+				<string>Double Bass 4</string>
+				<string>Double Bass 5</string>
+				<string>Double Bass 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -62,21 +62,21 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>VIOLIN</string>
+			<string>808</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
 			<integer>2</integer>
 			<key>IconName</key>
-			<string>Icon_Violin</string>
+			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>Violin 1</string>
-				<string>Violin 2</string>
-				<string>Violin 3</string>
-				<string>Violin 4</string>
-				<string>Violin 5</string>
-				<string>Violin 6</string>
+				<string>808 1</string>
+				<string>808 2</string>
+				<string>808 3</string>
+				<string>808 4</string>
+				<string>808 5</string>
+				<string>808 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -90,7 +90,7 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>HOUSE</string>
+			<string>DUBSTEP</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
@@ -99,12 +99,12 @@
 			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>House 1</string>
-				<string>House 2</string>
-				<string>House 3</string>
-				<string>House 4</string>
-				<string>House 5</string>
-				<string>House 6</string>
+				<string>Dubstep 1</string>
+				<string>Dubstep 2</string>
+				<string>Dubstep 3</string>
+				<string>Dubstep 4</string>
+				<string>Dubstep 5</string>
+				<string>Dubstep 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -118,21 +118,21 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>ROCK</string>
+			<string>PLUCK</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
 			<integer>4</integer>
 			<key>IconName</key>
-			<string>Icon_Percussion</string>
+			<string>Icon_Vibraphone</string>
 			<key>Strings</key>
 			<array>
-				<string>Rock 1</string>
-				<string>Rock 2</string>
-				<string>Rock 3</string>
-				<string>Rock 4</string>
-				<string>Rock 5</string>
-				<string>Rock 6</string>
+				<string>Pluck 1</string>
+				<string>Pluck 2</string>
+				<string>Pluck 3</string>
+				<string>Pluck 4</string>
+				<string>Pluck 5</string>
+				<string>Pluck 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -146,21 +146,21 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>CHIPTUNE</string>
+			<string>GUITAR</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
 			<integer>5</integer>
 			<key>IconName</key>
-			<string>Icon_Percussion</string>
+			<string>Icon_Guitar</string>
 			<key>Strings</key>
 			<array>
-				<string>Chiptune 1</string>
-				<string>Chiptune 2</string>
-				<string>Chiptune 3</string>
-				<string>Chiptune 4</string>
-				<string>Chiptune 5</string>
-				<string>Chiptune 6</string>
+				<string>Guitar 1</string>
+				<string>Guitar 2</string>
+				<string>Guitar 3</string>
+				<string>Guitar 4</string>
+				<string>Guitar 5</string>
+				<string>Guitar 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -202,21 +202,21 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>GUITAR</string>
+			<string>CHIPTUNE</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
 			<integer>7</integer>
 			<key>IconName</key>
-			<string>Icon_Guitar</string>
+			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>Guitar 1</string>
-				<string>Guitar 2</string>
-				<string>Guitar 3</string>
-				<string>Guitar 4</string>
-				<string>Guitar 5</string>
-				<string>Guitar 6</string>
+				<string>Chiptune 1</string>
+				<string>Chiptune 2</string>
+				<string>Chiptune 3</string>
+				<string>Chiptune 4</string>
+				<string>Chiptune 5</string>
+				<string>Chiptune 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -230,21 +230,21 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>PLUCK</string>
+			<string>ROCK</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
 			<integer>8</integer>
 			<key>IconName</key>
-			<string>Icon_Vibraphone</string>
+			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>Pluck 1</string>
-				<string>Pluck 2</string>
-				<string>Pluck 3</string>
-				<string>Pluck 4</string>
-				<string>Pluck 5</string>
-				<string>Pluck 6</string>
+				<string>Rock 1</string>
+				<string>Rock 2</string>
+				<string>Rock 3</string>
+				<string>Rock 4</string>
+				<string>Rock 5</string>
+				<string>Rock 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -258,7 +258,7 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>DUBSTEP</string>
+			<string>HOUSE</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
@@ -267,12 +267,12 @@
 			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>Dubstep 1</string>
-				<string>Dubstep 2</string>
-				<string>Dubstep 3</string>
-				<string>Dubstep 4</string>
-				<string>Dubstep 5</string>
-				<string>Dubstep 6</string>
+				<string>House 1</string>
+				<string>House 2</string>
+				<string>House 3</string>
+				<string>House 4</string>
+				<string>House 5</string>
+				<string>House 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -286,21 +286,21 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>808</string>
+			<string>VIOLIN</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
 			<integer>10</integer>
 			<key>IconName</key>
-			<string>Icon_Percussion</string>
+			<string>Icon_Violin</string>
 			<key>Strings</key>
 			<array>
-				<string>808 1</string>
-				<string>808 2</string>
-				<string>808 3</string>
-				<string>808 4</string>
-				<string>808 5</string>
-				<string>808 6</string>
+				<string>Violin 1</string>
+				<string>Violin 2</string>
+				<string>Violin 3</string>
+				<string>Violin 4</string>
+				<string>Violin 5</string>
+				<string>Violin 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -314,21 +314,21 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>DOUBLE BASS</string>
+			<string>VIBRAPHONE</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
 			<integer>11</integer>
 			<key>IconName</key>
-			<string>Icon_Violin</string>
+			<string>Icon_Vibraphone</string>
 			<key>Strings</key>
 			<array>
-				<string>Double Bass 1</string>
-				<string>Double Bass 2</string>
-				<string>Double Bass 3</string>
-				<string>Double Bass 4</string>
-				<string>Double Bass 5</string>
-				<string>Double Bass 6</string>
+				<string>Vibraphone 1</string>
+				<string>Vibraphone 2</string>
+				<string>Vibraphone 3</string>
+				<string>Vibraphone 4</string>
+				<string>Vibraphone 5</string>
+				<string>Vibraphone 6</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
