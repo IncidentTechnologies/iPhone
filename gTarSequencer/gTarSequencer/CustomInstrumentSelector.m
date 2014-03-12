@@ -24,8 +24,6 @@
 #define RECORD_STATE_RECORDED 2
 #define RECORD_STATE_PLAYING 3
 
-#define INST_NAME_DEFAULT_TEXT @"NAME"
-
 @implementation CustomInstrumentSelector
 
 @synthesize isFirstLaunch;
@@ -272,7 +270,7 @@
 {
     CGFloat cancelWidth = 40;
     CGFloat cancelHeight = 50;
-    CGFloat insetX = 35;
+    CGFloat insetX = 44;
     CGFloat insetY = 17;
     CGRect cancelFrame = CGRectMake(x-insetX, insetY, cancelWidth, cancelHeight);
     cancelButton = [[UIButton alloc] initWithFrame:cancelFrame];
@@ -341,6 +339,7 @@
     [nameField addTarget:self action:@selector(nameFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [nameField addTarget:self action:@selector(nameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     nameField.delegate = self;
+    [self resetNameFieldIfBlank];
     
     if(instName != nil){
         nameField.text = instName;
@@ -427,11 +426,9 @@
     }];
     
     // hide default
-    NSString * defaultText = INST_NAME_DEFAULT_TEXT;
+    // NSString * defaultText = [self generateNextCustomInstrumentName];
     
-    if([nameField.text isEqualToString:defaultText]){
-        nameField.text = @"";
-    }else{
+    if(![nameField.text isEqualToString:@""]){
         [self initAttributedStringForText:nameField];
     }
 }
@@ -487,11 +484,82 @@
     NSString * nameString = nameField.text;
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if([emptyName isEqualToString:@""]){
-        nameField.text = INST_NAME_DEFAULT_TEXT;
+    if([emptyName isEqualToString:@""] || [self checkDuplicateCustomInstrumentName:nameString]){
+        nameField.text = [self generateNextCustomInstrumentName];
+        [self checkIfNameReady];
     }
 }
 
+#pragma mark - Custom Instrument Naming
+- (void)checkIfNameReady
+{
+    BOOL isReady = YES;
+    NSString * nameString = nameField.text;
+    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if([emptyName isEqualToString:@""]){
+        isReady = NO;
+    }else{
+        isReady = YES;
+    }
+    
+    if([self checkDuplicateCustomInstrumentName:nameString]){
+        isReady = NO;
+    }
+    
+    if(isReady){
+        [self showHideButton:saveButton isHidden:NO withSelector:@selector(userDidSave:)];
+        [saveButton.imageView setAlpha:1.0];
+    }else{
+        [self showHideButton:saveButton isHidden:YES withSelector:@selector(userDidSave:)];
+        [saveButton.imageView setAlpha:0.3];
+    }
+}
+
+- (NSString *)generateNextCustomInstrumentName
+{
+    NSMutableArray * customInstrumentOptions = [delegate getCustomInstrumentOptions];
+    int customCount = 0;
+    
+    for(int i = 0; i < [customInstrumentOptions count]; i++){
+         NSString * filename = [[customInstrumentOptions objectAtIndex:i] objectForKey:@"Name"];
+        
+         if(!([filename rangeOfString:@"TRACK"].location == NSNotFound)){
+             
+             NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"TRACK"] withString:@""];
+             int numFromSuffix = [customSuffix intValue];
+             
+             customCount = MAX(customCount,numFromSuffix);
+         }
+     }
+    
+    customCount++;
+    
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPaddingCharacter:@"0"];
+    [numberFormatter setPaddingPosition:NSNumberFormatterPadBeforePrefix];
+    [numberFormatter setMinimumIntegerDigits:2];
+    
+    NSNumber * number = [NSNumber numberWithInt:customCount];
+    
+    NSString * numberString = [numberFormatter stringFromNumber:number];
+    
+    return [@"TRACK" stringByAppendingString:numberString];
+}
+
+- (BOOL)checkDuplicateCustomInstrumentName:(NSString *)filename
+{
+    NSMutableArray * customInstrumentOptions = [delegate getCustomInstrumentOptions];
+    
+    for(int i = 0; i < [customInstrumentOptions count]; i++){
+        NSString * customFilename = [[customInstrumentOptions objectAtIndex:i] objectForKey:@"Name"];
+        if([customFilename isEqualToString:filename]){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 #pragma mark - Recording Name Field
 - (void)recordingNameFieldStartEdit:(id)sender
@@ -556,8 +624,9 @@
     NSString * nameString = recordingNameField.text;
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if([emptyName isEqualToString:@""]){
+    if([emptyName isEqualToString:@""] || [self checkDuplicateRecordingName:nameString]){
         [self setRecordDefaultText];
+        [self checkIfRecordingNameReady];
     }
 }
 
@@ -572,9 +641,9 @@
     // Look through Samples, get the max CustomXXXX name and label +1
     for(NSString * filename in tempList){
         
-        if(!([filename rangeOfString:@"Custom"].location == NSNotFound)){
+        if(!([filename rangeOfString:@"Sound"].location == NSNotFound)){
             
-            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Custom"] withString:@""];
+            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Sound"] withString:@""];
             int numFromSuffix = [customSuffix intValue];
             
             customCount = MAX(customCount,numFromSuffix);
@@ -592,7 +661,7 @@
     
     NSString * numberString = [numberFormatter stringFromNumber:number];
     
-    recordingNameField.text = [@"Custom" stringByAppendingString:numberString];
+    recordingNameField.text = [@"Sound" stringByAppendingString:numberString];
     
 }
 
@@ -846,14 +915,29 @@
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if([emptyName isEqualToString:@""]){
-        isRecordingNameReady = FALSE;
+        isRecordingNameReady = NO;
     }else{
-        isRecordingNameReady = TRUE;
+        isRecordingNameReady = YES;
+    }
+    
+    if([self checkDuplicateRecordingName:nameString]){
+        isRecordingNameReady = NO;
     }
     
     [self checkIfRecordSaveReady];
 }
 
+-(BOOL)checkDuplicateRecordingName:(NSString *)filename
+{
+    NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
+    
+    for(int i = 0; i < [tempList count]; i++){
+         if([tempList[i] isEqualToString:filename]){
+             return YES;
+         }
+     }
+    return NO;
+}
 
 -(void)userDidStartRecord
 {
@@ -2087,26 +2171,7 @@
     recordCircle.layer.cornerRadius = 7.5;
 }
 
-- (void)checkIfNameReady
-{
-    BOOL isReady = YES;
-    NSString * nameString = nameField.text;
-    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
-    if([nameString isEqualToString:INST_NAME_DEFAULT_TEXT] || [emptyName isEqualToString:@""]){
-        isReady = NO;
-    }else{
-        isReady = YES;
-    }
-    
-    if(isReady){
-        [self showHideButton:saveButton isHidden:NO withSelector:@selector(userDidSave:)];
-        [saveButton.imageView setAlpha:1.0];
-    }else{
-        [self showHideButton:saveButton isHidden:YES withSelector:@selector(userDidSave:)];
-        [saveButton.imageView setAlpha:0.3];
-    }
-}
+#pragma mark - Show/Hide/Highlight Sample Cells
 
 - (void)fadeSampleCell
 {

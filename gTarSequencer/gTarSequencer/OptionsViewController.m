@@ -703,8 +703,7 @@
 }
 
 - (NSString *)generateNextSetName
-{
-    
+{   
     int customCount = 0;
     
     for(int i = 0; i < [fileLoadSet count]; i++){

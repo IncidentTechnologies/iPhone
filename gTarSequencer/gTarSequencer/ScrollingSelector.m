@@ -615,7 +615,7 @@
 {
     CGFloat cancelWidth = 40;
     CGFloat cancelHeight = 50;
-    CGFloat insetX = 35;
+    CGFloat insetX = 44;
     CGFloat insetY = 17;
     CGRect cancelFrame = CGRectMake(x-insetX, insetY, cancelWidth, cancelHeight);
     cancelButton = [[UIButton alloc] initWithFrame:cancelFrame];

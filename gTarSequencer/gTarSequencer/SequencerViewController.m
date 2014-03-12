@@ -264,7 +264,7 @@
 
 - (void)closeLeftNavigator
 {
-    NSLog(@"Close left nav");
+    if(TESTMODE) NSLog(@"Close left nav");
     
     [seqSetViewController turnEditingOn];
     [UIView animateWithDuration:0.1 animations:^(){
@@ -277,7 +277,7 @@
 
 - (void)openLeftNavigator
 {
-    NSLog(@"Open left nav");
+    if(TESTMODE) NSLog(@"Open left nav");
     
     [seqSetViewController turnEditingOff];
     [UIView animateWithDuration:0.1 animations:^(){
@@ -300,7 +300,7 @@
 - (void)selectNavChoice:(NSString *)nav withShift:(BOOL)shift
 {
     
-    NSLog(@"Switch to %@ view",nav);
+    if(TESTMODE) NSLog(@"Switch to %@ view",nav);
     
     [optionsViewController.view setHidden:YES];
     [seqSetViewController.view setHidden:YES];
@@ -327,7 +327,6 @@
         [instrumentViewController reopenView];
         activeMainView = instrumentViewController.view;
         
-        NSLog(@"Get current instrument: Nav Controller");
         Instrument * newInstrument = [seqSetViewController getCurrentInstrument];
         
         [instrumentViewController setActiveInstrument:newInstrument];
@@ -657,7 +656,7 @@
 - (void)checkQueueForPatternsFromInstrument:(Instrument *)inst
 {
     
-    NSLog(@"CHECK QUEUE FOR PATTERNS FROM INSTRUMENT");
+    if(TESTMODE) NSLog(@"CHECK QUEUE FOR PATTERNS FROM INSTRUMENT");
     
     NSMutableArray * objectsToRemove = [NSMutableArray array];
   
@@ -671,7 +670,7 @@
             Instrument * nextPatternInstrument = [patternToSelect objectForKey:@"Instrument"];
             
             if (inst == nextPatternInstrument){
-                NSLog(@"DEQUEUEING THE NEXT PATTERN");
+                if(TESTMODE) NSLog(@"DEQUEUEING THE NEXT PATTERN");
                 [objectsToRemove addObject:patternToSelect];
                 [seqSetViewController commitSelectingPatternAtIndex:nextPatternIndex forInstrument:nextPatternInstrument];
                 
@@ -689,7 +688,7 @@
 
 - (void)enqueuePattern:(NSMutableDictionary *)pattern
 {
-    NSLog(@"Enqueue a new pattern");
+    if(TESTMODE) NSLog(@"Enqueue a new pattern");
     // For now, clear all the queued patterns for the active instrument
     [self removeQueuedPatternForInstrumentAtIndex:[seqSetViewController getCurrentInstrument].instrument];
     
@@ -697,7 +696,7 @@
         [patternQueue addObject:pattern];
     }
     
-    NSLog(@"Pattern Queue is: %@",patternQueue);
+   if(TESTMODE)  NSLog(@"Pattern Queue is: %@",patternQueue);
 }
 
 -(void)dequeueAllPatternsForInstrument:(Instrument *)inst
@@ -727,7 +726,7 @@
 
 - (void)dequeuePatternAtIndex:(int)instIndex
 {
-    NSLog(@"dequeuing pattern for instrument at index %i",instIndex);
+    if(TESTMODE) NSLog(@"dequeuing pattern for instrument at index %i",instIndex);
     [seqSetViewController clearQueuedPatternButtonAtIndex:instIndex];
 }
 
@@ -880,7 +879,7 @@
         }
     }
     
-    NSLog(@"updatePlaybandForInstrument");
+    if(TESTMODE) NSLog(@"updatePlaybandForInstrument");
 }
 
 - (void) numInstrumentsDidChange:(int)numInstruments
@@ -906,7 +905,7 @@
         return;
     }
     
-    NSLog(@"Valid selection & valid data, so playing");
+    if(TESTMODE) NSLog(@"Valid selection & valid data, so playing");
     
     SEQNote * note = [[SEQNote alloc] initWithString:str-1 andFret:fr-1];
     
@@ -916,7 +915,7 @@
 
 - (void)notePlayed:(SEQNote *)note
 {
-    NSLog(@"gTarSeq received note played message string %i and fret %i",note.string,note.fret);
+    if(TESTMODE) NSLog(@"gTarSeq received note played message string %i and fret %i",note.string,note.fret);
     
     // Pass note-played message onto the selected instrument
     [[seqSetViewController getCurrentInstrument] notePlayedAtString:note.string andFret:note.fret];

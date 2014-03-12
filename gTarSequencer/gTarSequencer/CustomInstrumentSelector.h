@@ -17,6 +17,7 @@
 
 - (void)closeCustomInstrumentSelectorAndScroll:(BOOL)scroll;
 - (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName;
+- (NSMutableArray *)getCustomInstrumentOptions;
 
 @end
 

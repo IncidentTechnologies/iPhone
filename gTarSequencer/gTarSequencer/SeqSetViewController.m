@@ -180,6 +180,11 @@
         return nil;
 }
 
+- (NSMutableArray *)getCustomInstrumentOptions
+{
+    return customInstrumentOptions;
+}
+
 #pragma mark - Instrument View Delegate
 - (void)reloadTableData
 {
@@ -397,7 +402,7 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        [cell.textLabel setText:@"ADD INSTRUMENT"];
+        [cell.textLabel setText:@"ADD TRACK"];
         
         [cell.textLabel setTextColor:[UIColor colorWithRed:36/255.0 green:109/255.0 blue:127/255.0 alpha:1]];
         [cell setBackgroundColor:[UIColor clearColor]];

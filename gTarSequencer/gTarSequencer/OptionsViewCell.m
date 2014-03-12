@@ -158,7 +158,7 @@
         
         if(!isEditingMode){
             
-            NSLog(@"Deselecting cell %i",rowid);
+            if(TESTMODE) NSLog(@"Deselecting cell %i",rowid);
             
             [self endNameEditing];
             
@@ -178,7 +178,7 @@
             [fileName setHidden:YES];
         }else{
             
-            NSLog(@"*** Not deselecting cell %i",rowid);
+            if(TESTMODE) NSLog(@"*** Not deselecting cell %i",rowid);
         }
         
     }
@@ -318,6 +318,12 @@
     
     // save a rename
     if([parent.selectMode isEqualToString:@"Load"] && ![fileName.text isEqualToString:@""]){
+        
+        // auto rename if duplicate
+        if([parent isDuplicateFilename:fileName.text]){
+            fileName.text = [parent generateNextSetName];
+        }
+        
         // rename
         [self userDidRename];
         
@@ -368,7 +374,7 @@
 
 -(void)resetFileNameIfBlank
 {
-    NSLog(@"Reset filename if blank");
+    if(TESTMODE) NSLog(@"Reset filename if blank");
     
     NSString * nameString = fileName.text;
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -377,6 +383,9 @@
         fileName.text = previousNameText;
     }else if([emptyName isEqualToString:@""]){
         fileName.text = DEFAULT_FILE_TEXT;
+    }else if([parent isDuplicateFilename:nameString]){
+        fileName.text = [parent generateNextSetName];
+        [self checkIfNameReady];
     }
 }
 
