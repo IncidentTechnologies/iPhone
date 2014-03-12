@@ -8,6 +8,8 @@
 
 #import "InstrumentViewController.h"
 
+#define TUTORIAL_STEPS 1
+
 #define MEASURE_WIDTH 480
 #define MEASURE_MARGIN_SM 0
 #define MEASURE_MARGIN_LG 14.7
@@ -21,6 +23,7 @@
 
 @implementation InstrumentViewController
 
+@synthesize isFirstLaunch;
 @synthesize delegate;
 @synthesize scrollView;
 @synthesize instrumentIconButton;
@@ -128,6 +131,11 @@
     // Pages
     [self initPages];
     
+    [self checkIsFirstLaunch];
+    if(isFirstLaunch){
+        [self launchFTUTutorial];
+    }
+    
 }
 
 - (void)initPages
@@ -158,6 +166,61 @@
         }
     }
     
+}
+
+#pragma mark - FTU Tutorial
+-(void)checkIsFirstLaunch
+{
+    // Check for first launch
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedInstrumentView"]){
+        isFirstLaunch = FALSE;
+    }else{
+        isFirstLaunch = TRUE;
+    }
+}
+
+-(void)launchFTUTutorial
+{
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    CGRect tutorialFrame = CGRectMake(0,0,x,y-BOTTOMBAR_HEIGHT);
+    UIColor * fillColor = [UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1];
+    
+    tutorialScreen = [[UIImageView alloc] initWithFrame:tutorialFrame];
+    [tutorialScreen setBackgroundColor:fillColor];
+    [tutorialScreen setImage:[UIImage imageNamed:@"Tutorial_Inst_1"]];
+    
+    [self.view addSubview:tutorialScreen];
+    tutorialScreen.userInteractionEnabled = YES;
+    
+    CGRect buttonFrame = CGRectMake(0, 0, tutorialScreen.frame.size.width, tutorialScreen.frame.size.height);
+    
+    tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
+    
+    [tutorialScreen addSubview:tutorialNext];
+    [tutorialNext addTarget:self action:@selector(incrementFTUTutorial) forControlEvents:UIControlEventTouchUpInside];
+    
+    tutorialStep = 1;
+}
+
+-(void)incrementFTUTutorial
+{
+    if(tutorialStep == TUTORIAL_STEPS){
+        [self endTutorial];
+    }else{
+        tutorialStep++;
+        
+        [tutorialScreen setImage:[UIImage imageNamed:[@"Tutorial_Intro_" stringByAppendingFormat:@"%i", tutorialStep]]];
+    }
+}
+
+-(void)endTutorial
+{
+    [tutorialScreen removeFromSuperview];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedInstrumentView"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Instrument Updates
@@ -536,7 +599,7 @@
     
     NSLog(@"REDRAW PLAYBAND");
     
-    CGRect playbandFrame = CGRectMake(0, 0, NOTE_WIDTH, NOTE_HEIGHT*STRINGS_ON_GTAR);
+    CGRect playbandFrame = CGRectMake(1, 2, NOTE_WIDTH-2, NOTE_HEIGHT*STRINGS_ON_GTAR-2);
     
     playbandView[measureIndex] = [[UIView alloc] initWithFrame:playbandFrame];
     [playbandView[measureIndex] setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7]];
@@ -726,7 +789,7 @@
 {
     if (playband[measureIndex] >= 0) {
         CGRect newFrame = playbandView[measureIndex].frame;
-        newFrame.origin.x = playband[measureIndex] * NOTE_WIDTH;
+        newFrame.origin.x = playband[measureIndex] * NOTE_WIDTH + 1;
         
         playbandView[measureIndex].frame = newFrame;
         
@@ -976,11 +1039,41 @@
 }
 
 #pragma mark - Scrolling
+- (void)userDidSelectNewMeasure:(id)sender
+{
+    NSLog(@"User did select new measure");
+    
+    int newMeasureIndex;
+    
+    if(sender == pageOne){
+        NSLog(@"Scroll to measure 1");
+        newMeasureIndex = 0;
+
+    }else if(sender == pageTwo){
+        NSLog(@"Scroll to measure 2");
+        newMeasureIndex = 1;
+        
+    }else if(sender == pageThree){
+        NSLog(@"Scroll to measure 3");
+        newMeasureIndex = 2;
+        
+    }else{
+        NSLog(@"Scroll to measure 4");
+        newMeasureIndex = 3;
+    }
+    
+    [self scrollToMeasure:newMeasureIndex scrollSlow:YES];
+}
+
 - (void)scrollToAndSetActiveMeasure:(int)measureIndex scrollSlow:(BOOL)isSlow
 {
     activeMeasure = measureIndex;
     [self setDeclaredActiveMeasure:measureIndex];
-    
+    [self scrollToMeasure:measureIndex scrollSlow:isSlow];
+}
+
+- (void)scrollToMeasure:(int)measureIndex scrollSlow:(BOOL)isSlow
+{
     float measureMargin = [self getMeasureMargin];
     
     CGPoint newOffset = CGPointMake(measureIndex*(MEASURE_WIDTH+measureMargin),0);

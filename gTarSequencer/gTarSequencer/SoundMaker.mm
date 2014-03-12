@@ -8,21 +8,18 @@
 
 
 #import "SoundMaker.h"
+#import "SoundMaster_.mm"
 #import "AudioController.h"
 #import "AUNodeNetwork.h"
 #import "AudioNodeCommon.h"
 
-#define MAX_AMPLITUDE 0.55
-#define MIN_AMPLITUDE 0.01
 #define GTAR_NUM_STRINGS 6
 
 @interface SoundMaker () {
 
-    //WavetableNode *m_wavNode;
-    //EnvelopeNode *m_envNode;
+    SoundMaster *m_soundMaster;
+    
     SampleNode *m_sampNode;
-    //DelayNode *m_delayNode;
-    SamplerNode *m_samplerNode;
     SamplerBankNode *m_samplerBank;
     
     char * filepath[6];
@@ -46,32 +43,25 @@
     return self;
 }
 
-- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index
+- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index andSoundMaster:(SoundMaster *)soundMaster
 {
     self = [super init];
     if(self){
-        
-        AudioController * audioController = [AudioController sharedAudioController];
-        AudioNode * root = [[audioController GetNodeNetwork] GetRootNode];
         
         audioStringSet = stringSet;
         audioStringPaths = stringPaths;
         
         instIndex = index;
         
+        gain = DEFAULT_VOLUME;
+        
+        m_soundMaster = soundMaster;
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
             NSLog(@"Loading files in background");
             
             [self loadStringSetAndStringPaths];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-
-                NSLog(@"Connect input to root");
-                root->ConnectInput(0, m_samplerNode, 0);
-                
-                [audioController startAUGraph];
-            });
 
         });
     }
@@ -81,18 +71,14 @@
 
 - (void)loadStringSetAndStringPaths
 {
-    m_samplerNode = new SamplerNode();
-    m_samplerBank = NULL;
     
     for(int i = 0; i < GTAR_NUM_STRINGS; i++){
         filepath[i] = (char *)malloc(sizeof(char) * 1024);
     }
     
-    m_samplerNode->CreateNewBank(m_samplerBank);
+    m_samplerBank = [m_soundMaster generateBank];
     
     for(int i = 0; i < GTAR_NUM_STRINGS; i++){
-        
-        //m_samplerNode->CreateNewBank(newBank);
         
         // Determine filetype
         if([audioStringPaths[i] isEqualToString:@"Custom"]){
@@ -113,32 +99,35 @@
         
         NSLog(@"Loading sample %s",filepath[i]);
         
-        m_samplerNode->LoadSampleIntoBank(0, filepath[i], m_sampNode);
+        m_samplerBank->LoadSampleIntoBank(filepath[i], m_sampNode);
         
     }
 }
 
-- (void)PluckStringFret:(int)str atFret:(int)fret withAmplitude:(double)amplitude
+- (void)pluckString:(int)str
 {
-    if(amplitude > MAX_AMPLITUDE){
-        amplitude = MAX_AMPLITUDE;
-    }else if(amplitude < MIN_AMPLITUDE){
-        amplitude = MIN_AMPLITUDE;
-    }
-    
-    NSLog(@"Playing note on string %i fret %i with amplitude %f",str,fret,amplitude);
-    
-    if(gain != amplitude){
-        m_samplerNode->SetBankGain(0, amplitude);
-        gain = amplitude;
-    }
+    if(TESTMODE) NSLog(@"Playing note on string %i",str);
     
     m_samplerBank->TriggerSample(str);
 }
 
-- (void)setSamplePackWithName:(NSString *)pack
+- (void)updateAmplitude:(double)amplitude
 {
-    //[audioController setSamplePackWithName:pack];
+    if(gain != amplitude){
+        
+        amplitude = MIN(amplitude,MAX_VOLUME);
+        amplitude = MAX(amplitude,MIN_VOLUME);
+        gain = amplitude;
+        
+        NSLog(@"Setting gain to %f",gain);
+        
+        [m_soundMaster setGain:gain];
+    }
+}
+
+- (void)releaseSounds
+{
+    [m_soundMaster releaseBank:m_samplerBank];
 }
 
 @end

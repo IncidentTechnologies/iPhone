@@ -60,6 +60,9 @@
     NSTimer * playBarTimer;
     NSTimer * playResetTimer;
     NSTimer * audioLoadTimer;
+    //NSTimer * recordProcessingTimer;
+    
+    int recordProcessingCounter;
     
     BOOL isRecordingReady;
     BOOL isRecordingNameReady;
@@ -103,7 +106,7 @@
 @property (nonatomic, weak) IBOutlet UIButton * recordRecordButton;
 @property (nonatomic, weak) IBOutlet UIButton * recordClearButton;
 @property (nonatomic, weak) IBOutlet UIButton * recordSaveButton;
-@property (nonatomic, weak) IBOutlet UILabel * recordProcessingLabel;
+@property (nonatomic, weak) IBOutlet UILabel * recordProcessing;
 @property (nonatomic) UIImageView * recordActionView;
 @property (nonatomic, weak) IBOutlet UIView * progressBar;
 @property (nonatomic, weak) IBOutlet UIView * progressBarContainer;

@@ -13,7 +13,6 @@
 
 #define SEGMENTS 5
 #define MUTE_SEGMENT_INDEX 4
-#define MAX_MEASURES_IN_UI 4
 
 @class SeqSetViewController;
 

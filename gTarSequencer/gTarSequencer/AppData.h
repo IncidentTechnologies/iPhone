@@ -16,10 +16,18 @@
 #define XBASE_SM 480
 #define XBASE 480
 #define YBASE 320
+#define BOTTOMBAR_HEIGHT 55
 
 #define DEFAULT_VOLUME 0.2
-#define MAX_VOLUME 0.55
-#define MIN_VOLUME 0.01
+#define MAX_VOLUME 0.5
+#define MIN_VOLUME 0.001
 
 #define VISIBLE 1.0
 #define NOT_VISIBLE 0.0
+
+#define STRINGS_ON_GTAR 6
+#define FRETS_ON_GTAR 16
+#define MAX_NOTES 96
+
+#define NUM_PATTERNS 4
+#define NUM_MEASURES 4

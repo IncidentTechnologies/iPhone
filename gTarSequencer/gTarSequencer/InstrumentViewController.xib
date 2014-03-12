@@ -86,25 +86,37 @@
                         <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="4h7-Zk-8F7"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="812-SO-khO">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="812-SO-khO" customClass="UIButton">
                     <rect key="frame" x="0.0" y="51" width="119" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.42352941176470588" green="0.75294117647058822" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="userDidSelectNewMeasure:" destination="-1" eventType="touchUpInside" id="RfQ-QJ-QyI"/>
+                    </connections>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E67-Tq-g7o">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E67-Tq-g7o" customClass="UIButton">
                     <rect key="frame" x="120" y="51" width="119" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.42352941179999998" green="0.75294117650000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="userDidSelectNewMeasure:" destination="-1" eventType="touchUpInside" id="Zl5-b8-RWJ"/>
+                    </connections>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfJ-5T-RMp">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfJ-5T-RMp" customClass="UIButton">
                     <rect key="frame" x="240" y="51" width="119" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.42352941179999998" green="0.75294117650000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="userDidSelectNewMeasure:" destination="-1" eventType="touchUpInside" id="Ieh-Hn-ERV"/>
+                    </connections>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZzM-Oh-COn">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZzM-Oh-COn" customClass="UIButton">
                     <rect key="frame" x="360" y="51" width="119" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.42352941179999998" green="0.75294117650000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="userDidSelectNewMeasure:" destination="-1" eventType="touchUpInside" id="ard-OR-TYW"/>
+                    </connections>
                 </view>
                 <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dop-q1-gTm">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="264"/>

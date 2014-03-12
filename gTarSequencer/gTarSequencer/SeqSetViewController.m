@@ -22,6 +22,8 @@
         
         NSLog(@"enter table view controller");
         
+        soundMaster = [[SoundMaster alloc] init];
+        
         // get instruments
         [self retrieveInstrumentOptions];
         
@@ -34,7 +36,7 @@
         instruments = [[NSMutableArray alloc] init];
         
         self.tableView.bounces = NO;
-        
+        [self turnContentDrawingOn];
 
     }
     return self;
@@ -114,7 +116,7 @@
     // clear table if it's not empty
     if([instruments count] > 0){
         for(int i = 0; i < [instruments count]; i++){
-            [self deleteCell:[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]];
+            [self deleteCell:[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] withAnimation:NO];
         }
     }
     
@@ -132,7 +134,7 @@
             if ( [[dict objectForKey:@"Name"] isEqualToString:inst.instrumentName] )
             {
                 found = true;
-                [inst initAudioWithInstrumentName:inst.instrumentName];
+                [inst initAudioWithInstrumentName:inst.instrumentName andSoundMaster:soundMaster];
                 [dictionariesToRemove addObject:dict];
             }
         }
@@ -251,8 +253,10 @@
     newInstrument.stringSet = stringSet;
     newInstrument.stringPaths = stringPaths;
     newInstrument.isCustom = isCustom;
-    [newInstrument performSelectorInBackground:@selector(initAudioWithInstrumentName:) withObject:instName];
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [newInstrument initAudioWithInstrumentName:instName andSoundMaster:soundMaster];
+    });
     
     [instruments addObject:newInstrument];
  
@@ -421,10 +425,33 @@
 
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self turnContentDrawingOff];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if(!decelerate){
+        [self scrollingDidFinish];
+    }
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self scrollingDidFinish];
+}
+
+-(void)scrollingDidFinish
+{
+    [self turnContentDrawingOn];
+    [self updateAllVisibleCells];
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(editingStyle == UITableViewCellEditingStyleDelete){
-        [self deleteCell:[tableView cellForRowAtIndexPath:indexPath]];
+        [self deleteCell:[tableView cellForRowAtIndexPath:indexPath] withAnimation:YES];
     }
 }
 
@@ -481,6 +508,16 @@
 - (void)turnEditingOn
 {
     canEdit = YES;
+}
+
+- (void)turnContentDrawingOff
+{
+    allowContentDrawing = NO;
+}
+
+- (void)turnContentDrawingOn
+{
+    allowContentDrawing = YES;
 }
 
 #pragma mark Instrument Selector
@@ -547,6 +584,8 @@
         [NSTimer scheduledTimerWithTimeInterval:0.2 target:instrumentSelector selector:@selector(scrollToMax) userInfo:nil repeats:NO];
     }
     
+    [self turnContentDrawingOff];
+    
 }
 
 - (void)closeInstrumentSelector
@@ -554,7 +593,10 @@
     // Animate movement offscreen to the left:
     [UIView animateWithDuration:0.5f
                      animations:^{[instrumentSelector moveFrame:offLeftSelectorFrame]; instrumentSelector.alpha = 0.3;}
-                     completion:^(BOOL finished){[self hideInstrumentSelector]; }];
+                     completion:^(BOOL finished){
+                         [self hideInstrumentSelector];
+                         [self turnContentDrawingOn];
+                     }];
 }
 
 - (void)hideInstrumentSelector
@@ -756,10 +798,10 @@
     }
 }
 
-- (void)deleteCell:(id)sender
+- (void)deleteCell:(id)sender withAnimation:(BOOL)animate
 {
     
-    NSLog(@"Delete cell");
+    if(TESTMODE) NSLog(@"Delete cell");
     
     NSIndexPath * pathToDelete = [instrumentTable indexPathForCell:sender];
     int row = pathToDelete.row;
@@ -770,62 +812,69 @@
         // Remove from data structure:
         [self removeSequencerWithIndex:pathToDelete.row];
         
-        NSLog(@"Removed from data structure");
+        if(TESTMODE) NSLog(@"Removed from data structure");
         
         SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
         
-        [UIView animateWithDuration:0.3 animations:^(void){
-            
-            [cell setAlpha:0.0];
-            
-        } completion:^(BOOL finished){
-            
-            [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:section]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            NSLog(@"Reload data");
-            
-            if ([instruments count] == 0){
-                [instrumentTable reloadData];
-            }
-            
-            // Remove any enqueued patterns
-            [delegate removeQueuedPatternForInstrumentAtIndex:pathToDelete.row];
-            
-            NSLog(@"Enqueued patterns removed");
-            
-            // Update cells:
-            if([instruments count] > 0){
-                if(![delegate checkIsPlaying]){
-                    [self updateAllVisibleCells];
-                }
-            }else{
-                [delegate forceStopAll];
-            }
-            
-            [delegate numInstrumentsDidChange:[instruments count]];
-            [delegate saveContext:nil];
-        }];
+        if(animate){
+            [UIView animateWithDuration:0.3 animations:^(void){
+                [cell setAlpha:0.0];
+            } completion:^(BOOL finished){
+                [self removeCellAtRow:row andSection:section];
+            }];
+        }else{
+            [self removeCellAtRow:row andSection:section];
+        }
         
-        
-        NSLog(@"Deleted row");
+        if(TESTMODE) NSLog(@"Deleted row");
     }
+}
+
+-(void)removeCellAtRow:(int)row andSection:(int)section
+{
+    
+    [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:section]] withRowAnimation:UITableViewRowAnimationFade];
+    
+    if(TESTMODE) NSLog(@"Reload data");
+    
+    if ([instruments count] == 0){
+        [instrumentTable reloadData];
+    }
+    
+    // Remove any enqueued patterns
+    [delegate removeQueuedPatternForInstrumentAtIndex:row];
+    
+   if(TESTMODE)  NSLog(@"Enqueued patterns removed");
+    
+    // Update cells:
+    if([instruments count] > 0){
+        if(![delegate checkIsPlaying]){
+            [self updateAllVisibleCells];
+        }
+    }else{
+        [delegate forceStopAll];
+    }
+    
+    [delegate numInstrumentsDidChange:[instruments count]];
+    [delegate saveContext:nil];
 }
 
 - (void)deleteAllCells
 {
     for(int i = [instruments count] - 1; i >= 0; i--){
         SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        [self deleteCell:cell];
+        [self deleteCell:cell withAnimation:NO];
     }
-    
 }
 
 - (void)removeSequencerWithIndex:(long)indexToRemove
 {
-    NSLog(@"Remove sequencer with index %li",indexToRemove);
+    if(TESTMODE) NSLog(@"Remove sequencer with index %li",indexToRemove);
     
     // Remove object from array:
     Instrument * removedInst = [instruments objectAtIndex:indexToRemove];
+    
+    [removedInst releaseSounds];
     [instruments removeObjectAtIndex:indexToRemove];
     
     // Add instrument back into instrument options array:
@@ -1056,16 +1105,17 @@
 
 - (void)updateAllVisibleCells
 {
-    NSArray * visibleCells = [[instrumentTable visibleCells] copy];
-    
-    long limit = [visibleCells count];
-    
-    for (int i=0;i<limit;i++){
+    if(allowContentDrawing){
+        NSArray * visibleCells = [[instrumentTable visibleCells] copy];
         
-        SeqSetViewCell * cell = (SeqSetViewCell *) [visibleCells objectAtIndex:i];
+        long limit = [visibleCells count];
         
-        if ([cell respondsToSelector:@selector(update)]){
-            [cell update];
+        for (int i=0;i<limit;i++){
+            SeqSetViewCell * cell = (SeqSetViewCell *) [visibleCells objectAtIndex:i];
+            if ([cell respondsToSelector:@selector(update)]){
+                //[cell update];
+                [cell performSelectorInBackground:@selector(update) withObject:nil];
+            }
         }
     }
     

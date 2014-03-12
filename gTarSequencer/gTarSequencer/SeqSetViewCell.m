@@ -125,10 +125,17 @@
     
     for(UIButton * p in patternButtons){
         if(p == selectedPatternButton){
-            [self hideButtonBorders:p];
+            [self setStateForButton:p state:2];
         }else{
-            [self showButtonBorders:p];
+            [self setStateForButton:p state:0];
         }
+    }
+    
+    // get previous selected pattern if off
+    if(selectedPatternButton == offButton){
+        int selectedPattern = instrument.selectedPatternIndex;
+        previousPatternButton = [patternButtons objectAtIndex:selectedPattern];
+        [self setStateForButton:previousPatternButton state:4];
     }
     
     // TODO: make different variants for the 4in
@@ -289,6 +296,7 @@
         
         //new button
         [self setStateForButton:selectedPatternButton state:2];
+        [self setStateForButton:previousPatternButton state:4];
         
     }else if(!isPlaying || selectedPatternButton == newButton){
         
@@ -375,6 +383,7 @@
             [self showButtonBorders:button];
             break;
         case 2: // on
+        case 4: // on but instrument mute
             titleColor = [UIColor whiteColor];
             backgroundColor = [UIColor clearColor];
             [self hideButtonBorders:button];
@@ -392,6 +401,7 @@
 
 -(void)showButtonBorders:(UIButton *)patternButton
 {
+    
     if(patternButton == patternA){
         
         [patternABorder setHidden:NO];
@@ -411,10 +421,13 @@
 -(void)hideButtonBorders:(UIButton *)patternButton
 {
     if(patternButton == patternA){
+        NSLog(@"hiding borders for A");
         [patternABorder setHidden:YES];
     }else if(patternButton == patternB || patternButton == patternC){
+        NSLog(@"hiding borders for B or C");
         patternButton.layer.borderWidth = 0.0f;
     }else if(patternButton == patternD){
+        NSLog(@"hiding borders for D");
         [patternDBorder setHidden:YES];
     }
 }
@@ -470,8 +483,10 @@
 
 - (void)update
 {
+    if(TESTMODE) NSLog(@"Minimap update");
+    
     // update selected pattern:
-   if ( instrument.selectedPatternDidChange )
+    if ( instrument.selectedPatternDidChange )
     {
         self.patternToDisplay = instrument.selectedPattern;
         
@@ -518,8 +533,9 @@
 
 - (void)fillWithMeasures:(int)newCount
 {
-    NSLog(@"Fill with measures");
-    for(int i = 0; i < MAX_MEASURES_IN_UI; i++){
+    if(TESTMODE) NSLog(@"Fill with measures");
+    
+    for(int i = 0; i < NUM_MEASURES; i++){
         if(i < newCount){
             [[measureBorders objectAtIndex:i] setHidden:NO];
             [[measureViews objectAtIndex:i] drawMeasure:FALSE];
@@ -534,7 +550,7 @@
 
 - (void)selectPatternButton:(int)index
 {
-    NSLog(@"Select pattern button");
+    if(TESTMODE) NSLog(@"Select pattern button");
     
     UIButton * newSelection = [patternButtons objectAtIndex:index];
     

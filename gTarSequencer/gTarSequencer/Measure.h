@@ -10,11 +10,8 @@
 #import "AppData.h"
 #import "SoundMaker.h"
 
-#define MAX_NOTES 96
 #define FIRST_FRET 0
 #define LAST_FRET 15
-#define FRETS_ON_GTAR 16
-#define STRINGS_ON_GTAR 6
 
 //extern SoundMaker * audio;
 

@@ -7,6 +7,7 @@
 //
 
 #import "AppData.h"
+#import "SoundMaster.h"
 
 @class AudioController;
 
@@ -20,7 +21,12 @@
 }
 
 
-- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index;
-- (void)PluckStringFret:(int)str atFret:(int)fret withAmplitude:(double)amplitude;
+- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index andSoundMaster:(SoundMaster *)soundMaster;
+
+- (void)pluckString:(int)str;
+
+- (void)updateAmplitude:(double)amplitude;
+
+- (void)releaseSounds;
 
 @end

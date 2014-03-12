@@ -52,7 +52,7 @@
 @synthesize recordRecordButton;
 @synthesize recordSaveButton;
 @synthesize recordActionView;
-@synthesize recordProcessingLabel;
+@synthesize recordProcessing;
 @synthesize progressBarContainer;
 @synthesize progressBar;
 @synthesize recordLine;
@@ -94,8 +94,6 @@
         
         [self retrieveSampleList];
         
-        [self checkFirstLaunch];
-        
     }
     return self;
 }
@@ -118,6 +116,8 @@
     
     [self initSubtables];
     
+    [self checkFirstLaunch];
+    
     if(isFirstLaunch){
         [self launchFTUTutorial];
     }
@@ -128,7 +128,7 @@
     
     // Left sample table
     [sampleTable setBackgroundColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0]];
-    [self drawSampleLibraryArrow];
+    //[self drawSampleLibraryArrow];
     
     // Right string table
     [stringTable setBackgroundColor:[UIColor colorWithRed:81/255.0 green:81/255.0 blue:81/255.0 alpha:1.0]];
@@ -143,7 +143,7 @@
     
     // Sample Library Title
     if([sampleStack count] > 0){
-        [sampleLibraryTitle setTitle:[sampleStack lastObject] forState:UIControlStateNormal];
+        [self setSampleLibraryTitleFromStack];
         [sampleLibraryArrow setHidden:NO];
     }
     
@@ -745,7 +745,7 @@
     [self setProgressBarDefaultWidth];
     
     // Init Sampler
-    recordProcessingLabel.text = @"PROCESSING";
+    [self showRecordProcessing];
     audioLoadTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(initDrawAudio) userInfo:nil repeats:NO];
     
     // Enable save
@@ -756,7 +756,8 @@
 -(void)initDrawAudio
 {
     [self drawAudio];
-    recordProcessingLabel.text = @"";
+    //[self performSelectorInBackground:@selector(drawAudio) withObject:nil];
+    [self hideRecordProcessing];
 }
 
 -(void)drawAudio
@@ -1213,6 +1214,99 @@
 - (void)setProgressBarDefaultWidth
 {
     progressBarDefaultWidth = progressBar.frame.size.width;
+}
+
+#pragma mark - Record Processing
+
+-(void)showRecordProcessing
+{
+    NSLog(@"Show record processing");
+    
+    [recordProcessing setHidden:NO];
+    [recordProcessing setText:@"PROCESSING"];
+    
+    /*recordProcessingCounter = 0;
+    [self animateRecordProcessing];
+    
+    if(recordProcessingTimer == nil){
+        NSLog(@"Init record processing timer");
+        recordProcessingCounter = 0;
+        [recordProcessing setHidden:NO];
+        
+        recordProcessingTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(animateRecordProcessing) userInfo:nil repeats:YES];
+    }*/
+    
+}
+/*
+-(void)animateRecordProcessing
+{
+    
+    UIView * recordProcessingInner = [[recordProcessing subviews] firstObject];
+    
+    recordProcessing.layer.borderWidth = 10.0;
+    recordProcessing.layer.cornerRadius = recordProcessing.frame.size.width/2;
+    recordProcessing.layer.borderColor = [UIColor whiteColor].CGColor;
+
+    recordProcessingInner.layer.borderWidth = 5.0;
+    recordProcessingInner.layer.cornerRadius = recordProcessingInner.frame.size.width/2;
+    recordProcessingInner.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    [recordProcessing setAlpha:1.0];
+    [recordProcessingInner setAlpha:0.5];
+    
+    //NSLog(@"Switch on %i",recordProcessingCounter);
+    
+    switch(recordProcessingCounter){
+        case 0:
+            [recordProcessing setAlpha:0.0];
+            [recordProcessingInner setAlpha:0.5];
+            break;
+        case 1:
+            [recordProcessing setAlpha:0.0];
+            [recordProcessingInner setAlpha:1.0];
+            break;
+        case 2:
+            [recordProcessing setAlpha:0.5];
+            [recordProcessingInner setAlpha:1.0];
+            break;
+        case 3:
+            [recordProcessing setAlpha:1.0];
+            [recordProcessingInner setAlpha:1.0];
+            break;
+        case 4:
+            [recordProcessing setAlpha:0.5];
+            [recordProcessingInner setAlpha:1.0];
+            break;
+        case 5:
+            [recordProcessing setAlpha:0.0];
+            [recordProcessingInner setAlpha:1.0];
+            break;
+        case 6:
+            [recordProcessing setAlpha:0.0];
+            [recordProcessingInner setAlpha:0.5];
+            break;
+        case 7:
+            [recordProcessing setAlpha:0.0];
+            [recordProcessingInner setAlpha:0.0];
+            break;
+    }
+    
+    NSLog(@"Switched");
+    
+    recordProcessingCounter++;
+    recordProcessingCounter %= 8;
+ 
+}
+ */
+
+-(void)hideRecordProcessing
+{
+    NSLog(@"Hide record processing");
+    //[recordProcessingTimer invalidate];
+    //recordProcessingTimer = nil;
+    
+    [recordProcessing setHidden:YES];
+    [recordProcessing setText:@""];
 }
 
 #pragma mark - Playback
@@ -1705,11 +1799,13 @@
 #pragma mark - Sampe Stack
 - (void)pushToSampleStack:(NSString *)newSection
 {
-    [sampleLibraryTitle setTitle:newSection forState:UIControlStateNormal];
+    //[sampleLibraryTitle setTitle:newSection forState:UIControlStateNormal];
     
     [sampleLibraryArrow setHidden:NO];
     
     [sampleStack addObject:newSection];
+    
+    [self setSampleLibraryTitleFromStack];
     
 }
 
@@ -1724,12 +1820,42 @@
     }
     
     if([sampleStack count] > 0){
-        [sampleLibraryTitle setTitle:[sampleStack lastObject] forState:UIControlStateNormal];
+        [self setSampleLibraryTitleFromStack];
         [sampleLibraryArrow setHidden:NO];
     }else{
-        [sampleLibraryTitle setTitle:@"Sound Library" forState:UIControlStateNormal];
+        [self resetSampleLibraryTitle];
         [sampleLibraryArrow setHidden:YES];
     }
+}
+
+-(void)resetSampleLibraryTitle
+{
+    [sampleLibraryTitle setTitleEdgeInsets:UIEdgeInsetsMake(0, 14, 0, 0)];
+    [sampleLibraryTitle setTitle:@"Sound Library" forState:UIControlStateNormal];
+}
+
+-(void)setSampleLibraryTitleFromStack
+{
+    int penultimateIndex = [sampleStack count] - 2;
+    NSString * sampleTitle = @"";
+    
+    [sampleLibraryTitle setTitleEdgeInsets:UIEdgeInsetsMake(0, 7, 0, 0)];
+   
+    if(penultimateIndex >= 0){
+        
+        if(penultimateIndex == 0){
+            sampleTitle = @"/";
+        }else{
+            sampleTitle = @"../";
+        }
+        sampleTitle = [sampleTitle stringByAppendingString:[sampleStack objectAtIndex:penultimateIndex]];
+        
+    }
+    
+    sampleTitle = [sampleTitle stringByAppendingString:@"/"];
+    sampleTitle = [sampleTitle stringByAppendingString:[sampleStack lastObject]];
+    
+    [sampleLibraryTitle setTitle:sampleTitle forState:UIControlStateNormal];
 }
 
 -(BOOL)isCustomInstrumentList
@@ -1879,7 +2005,7 @@
     sampleLibraryArrow = image;
     
     [sampleLibraryTitle addSubview:image];
-    [sampleLibraryArrow setAlpha:0.7];
+    [sampleLibraryArrow setAlpha:0.3];
     [sampleLibraryArrow setHidden:YES];
     
     UIGraphicsEndImageContext();

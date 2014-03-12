@@ -30,7 +30,7 @@
 - (Pattern *)selectPattern:(int)newSelection;
 - (Measure *)selectMeasure:(int)newSelection;
 
-- (void)initAudioWithInstrumentName:(NSString *)instName;
+- (void)initAudioWithInstrumentName:(NSString *)instName andSoundMaster:(SoundMaster *)soundMaster;
 - (void)notePlayedAtString:(int)str andFret:(int)fret;
 
 - (void)addMeasure;
@@ -48,6 +48,8 @@
 - (int)selectedPatternIndex;
 
 - (void)turnOnAllFlags;
+
+- (void)releaseSounds;
 
 @property (nonatomic) int instrument;
 @property (retain, nonatomic) NSString * instrumentName;

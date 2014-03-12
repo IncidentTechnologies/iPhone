@@ -9,13 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Instrument.h"
 
-#define NUM_PATTERNS 4
-#define NUM_MEASURES 4
-
-#define FRETS_ON_GTAR 16
-#define STRINGS_ON_GTAR 6
-#define MAX_NOTES 96
-
 @protocol InstrumentDelegate <NSObject>
 
 - (void) saveContext:(NSString *)filepath;
@@ -35,6 +28,11 @@
 
 @interface InstrumentViewController : UIViewController <UIScrollViewDelegate>
 {
+    // FTU tutorial
+    UIImageView * tutorialScreen;
+    UIButton * tutorialNext;
+    int tutorialStep;
+    
     // View data
     int activePattern;
     int activeMeasure;
@@ -80,7 +78,10 @@
 //-(IBAction)changePattern:(id)sender;
 //-(IBAction)stopChangePattern:(id)sender;
 -(IBAction)userDidSelectNewPattern:(id)sender;
+-(IBAction)userDidSelectNewMeasure:(id)sender;
 -(IBAction)viewSeqSet:(id)sender;
+
+@property (nonatomic) BOOL isFirstLaunch;
 
 @property (nonatomic) BOOL isMute;
 
@@ -96,10 +97,10 @@
 @property (weak, nonatomic) IBOutlet UIView * iconOverlap;
 @property (weak, nonatomic) IBOutlet UIView * customIndicator;
 
-@property (weak, nonatomic) IBOutlet UIView * pageOne;
-@property (weak, nonatomic) IBOutlet UIView * pageTwo;
-@property (weak, nonatomic) IBOutlet UIView * pageThree;
-@property (weak, nonatomic) IBOutlet UIView * pageFour;
+@property (weak, nonatomic) IBOutlet UIButton * pageOne;
+@property (weak, nonatomic) IBOutlet UIButton * pageTwo;
+@property (weak, nonatomic) IBOutlet UIButton * pageThree;
+@property (weak, nonatomic) IBOutlet UIButton * pageFour;
 
 @property (weak, nonatomic) IBOutlet UIView * offMask;
 

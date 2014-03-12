@@ -147,13 +147,14 @@
 {
     if (instrumentIndex >= 0)
     {
+        [audioSource updateAmplitude:amplitudeweight];
+        
         int startingLocation = fret * STRINGS_ON_GTAR;
         for (int i=0; i < STRINGS_ON_GTAR; i++)
         {
             if (notes[startingLocation+i])
             {
-                // TODO: amplitude[string] * amplitudeweight
-                [audioSource PluckStringFret:i atFret:0 withAmplitude:amplitudeweight];
+                [audioSource pluckString:i];
             }
         }
     }

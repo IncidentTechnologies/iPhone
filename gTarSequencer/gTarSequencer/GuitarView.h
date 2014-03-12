@@ -17,10 +17,6 @@
 
 @end
 
-// move these to Measure.h equivalent
-#define FRETS_ON_GTAR 16
-#define STRINGS_ON_GTAR 6
-
 // GuitarView governs all interaction with the gTar. It receives direct input from the gTar and passes it up to the controller
 //      as well as receiving input from the controller about what to change on the gTar. Another function of the GuitarView is
 //      to act similarly to MeasureView, in that it displays a single measure to the gTar fretboard. Like MV, it has a measure ptr

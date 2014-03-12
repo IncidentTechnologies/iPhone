@@ -76,9 +76,9 @@
     return self;
 }
 
-- (void)initAudioWithInstrumentName:(NSString *)instName
+- (void)initAudioWithInstrumentName:(NSString *)instName andSoundMaster:(SoundMaster *)soundMaster
 {
-    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths andIndex:instrument];
+    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths andIndex:instrument andSoundMaster:soundMaster];
 }
 
 - (void)setSelected:(BOOL)yesno
@@ -121,6 +121,11 @@
         [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument andAudio:audio withAmplitude:amplitude];
     else
         [selectedPattern playFret:fret inRealMeasure:measure withInstrument: -1 andAudio:audio withAmplitude:0.0];
+}
+
+- (void)releaseSounds
+{
+    [audio releaseSounds];
 }
 
 - (void)displayAllNotes {

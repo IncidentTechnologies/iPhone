@@ -8,7 +8,6 @@
 
 #import "OptionsViewController.h"
 
-#define BOTTOMBAR_HEIGHT 55
 #define TUTORIAL_STEPS 2
 
 #define ROW_HEIGHT 65
@@ -303,11 +302,13 @@
     
     [self reloadFileTable];
     [self showHideNewFileRow:YES];
+    
     [loadTable reloadData];
     [self resetTableOffset:nil];
     
     [delegate viewSeqSetWithAnimation:YES];
 }
+
 /*
 - (IBAction)userDidSelectRename:(id)sender
 {

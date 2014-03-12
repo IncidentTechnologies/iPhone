@@ -74,14 +74,15 @@
 
 - (void)update
 {
-    NSLog(@"Measure View update");
+    if(TESTMODE) NSLog(@"Measure View update");
     
     if (measure == nil)
         return;
     
     // Check if notes need to be redrawn:
     if ([measure shouldUpdateNotesOnMinimap]){
-        [self performSelectorInBackground:@selector(createImage) withObject:nil];
+        [self createImage];
+        //[self performSelectorInBackground:@selector(createImage) withObject:nil];
         [measure setUpdateNotesOnMinimap:NO];
     }
     
@@ -99,7 +100,9 @@
 }
 
 - (void)movePlayband {
-    NSLog(@"Move playband");
+    
+    if(TESTMODE)NSLog(@"Move playband");
+    
     if (measure.playband >= 0 && !isBlankMeasure) {
         CGRect newFrame = playbandView.frame;
         newFrame.origin.x = measure.playband * noteFrameWidth;
@@ -174,34 +177,42 @@
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     
     // Update all the notes:
-    for (int f = 0; f < FRETS_ON_GTAR; f++)
+    int f, s;
+    for (f = 0; f < FRETS_ON_GTAR; f++)
     {
-        for (int s = 0; s < STRINGS_ON_GTAR; s++)
+        CGContextMoveToPoint(context, f*noteFrameWidth, 0);
+        CGContextAddLineToPoint(context, f*noteFrameWidth, s*noteFrameHeight);
+        CGContextStrokePath(context);
+        
+        for (s = 0; s < STRINGS_ON_GTAR; s++)
         {
-            // Adjust frame:
-            noteFrame.origin.x = f*noteFrameWidth;
-            noteFrame.origin.y = s*noteFrameHeight;
-            
-            // Add rect:
-            CGContextAddRect(context, noteFrame);
-            CGContextStrokePath(context);
-            
-            if ([measure isNoteOnAtString:[self invertString:s] andFret:f]){
-                CGContextSetFillColorWithColor(context, [UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]].CGColor);  // Get color for that string and fill
-            }else{
-                CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+            if(f == 0){
+                CGContextMoveToPoint(context, 0, s*noteFrameHeight);
+                CGContextAddLineToPoint(context, FRETS_ON_GTAR*noteFrameWidth, s*noteFrameHeight);
+                CGContextStrokePath(context);
             }
             
-            CGContextFillRect(context, noteFrame);
+            if ([measure isNoteOnAtString:[self invertString:s] andFret:f]){
+                
+                // Adjust frame:
+                noteFrame.origin.x = f*noteFrameWidth;
+                noteFrame.origin.y = s*noteFrameHeight;
+                
+                CGContextAddRect(context, noteFrame);
+                
+                CGContextSetFillColorWithColor(context, [UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]].CGColor);  // Get color for that string and fill
+                
+                CGContextFillRect(context, noteFrame);
+            }
         }
     }
-    [measure setUpdateNotesOnMinimap:NO];
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
     imageView.image = newImage;
-    
     UIGraphicsEndImageContext();
+    
+    [measure setUpdateNotesOnMinimap:NO];
+    
 }
 
 - (int)invertString:(int)string

@@ -8,7 +8,6 @@
 
 #import "SequencerViewController.h"
 
-#define MAX_SEQUENCES 15
 #define LAST_FRET 15
 #define LAST_MEASURE 3
 
@@ -17,8 +16,7 @@
 #define NAVTAB 0
 #define SELECTORWIDTH 364
 #define SELECTORHEIGHT 276
-#define BOTTOMBAR_HEIGHT 55
-#define TUTORIAL_STEPS 3
+#define TUTORIAL_STEPS 5
 
 @implementation SequencerViewController
 
@@ -48,6 +46,7 @@
     // Load default set for FTU
     NSString * filePath = (isFirstLaunch) ? [self getDefaultSetFilepath] : nil;
     [self loadStateFromDisk:filePath];
+    [self saveContext:nil];
     
     if(isFirstLaunch){
         [self launchFTUTutorial];
@@ -206,18 +205,14 @@
     float x = [[UIScreen mainScreen] bounds].size.height;
     
     CGRect tutorialFrame = CGRectMake(0,0,x,y);
-    UIColor * fillColor = [UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1];
-    
     tutorialScreen = [[UIImageView alloc] initWithFrame:tutorialFrame];
-    [tutorialScreen setBackgroundColor:fillColor];
+    [tutorialScreen setImage:[UIImage imageNamed:@"Tutorial_Intro_1"]];
+    
     [self.view addSubview:tutorialScreen];
     tutorialScreen.userInteractionEnabled = YES;
     
-    float buttonWidth = 100;
-    float buttonHeight = 30;
-    CGRect buttonFrame = CGRectMake(tutorialFrame.size.width/2-buttonWidth/2, tutorialFrame.size.height/2-buttonHeight/2, buttonWidth, buttonHeight);
+    CGRect buttonFrame = CGRectMake(0, 0, tutorialFrame.size.width, tutorialFrame.size.height);
     tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
-    [tutorialNext setTitle:@"Tutorial 1" forState:UIControlStateNormal];
     
     [tutorialScreen addSubview:tutorialNext];
     [tutorialNext addTarget:self action:@selector(incrementFTUTutorial) forControlEvents:UIControlEventTouchUpInside];
@@ -236,6 +231,7 @@
         CGRect newTutorialFrame = CGRectMake(0, 0, tutorialScreen.frame.size.width, tutorialScreen.frame.size.height - BOTTOMBAR_HEIGHT);
         [tutorialScreen setFrame:newTutorialFrame];
         [tutorialScreen setBackgroundColor:fadedGray];
+        [tutorialScreen setImage:nil];
         
         float playButtonWidth = 130;
         CGRect bottomBarFrame = CGRectMake(playButtonWidth, newTutorialFrame.size.height, tutorialScreen.frame.size.width - playButtonWidth, BOTTOMBAR_HEIGHT);
@@ -249,14 +245,7 @@
     
         tutorialStep++;
         
-        // step through slides
-        if(tutorialStep % 2 == 0){
-            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:159/255.0 green:172/255.0 blue:106/255.0 alpha:1]];
-        }else{
-            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1]];
-        }
-        
-        [tutorialNext setTitle:[@"Tutorial " stringByAppendingFormat:@"%i", tutorialStep] forState:UIControlStateNormal];
+        [tutorialScreen setImage:[UIImage imageNamed:[@"Tutorial_Intro_" stringByAppendingFormat:@"%i", tutorialStep]]];
     }
 }
 
@@ -612,12 +601,15 @@
     
     // Tell all of the sequencers to play their next fret
     int instrumentCount = [seqSetViewController countInstruments];
-    @synchronized(self){
+    
+    Instrument * currentInst = [seqSetViewController getCurrentInstrument];
+    
+    //@synchronized(self){
         for (int i=0; i<instrumentCount; i++){
             
             Instrument * instToPlay = [seqSetViewController getInstrumentAtIndex:i];
             
-            //@synchronized(instToPlay.selectedPattern){
+            @synchronized(instToPlay.selectedPattern){
                 int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
                 
                 // If we are back at the beginning of the pattern, then check the queue:
@@ -643,12 +635,12 @@
                 [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted withAmplitude:playVolume];
                 
                 // update Instrument view if it's open
-                if(activeMainView == instrumentViewController.view && instToPlay == [seqSetViewController getCurrentInstrument]){
+                if(activeMainView == instrumentViewController.view && instToPlay == currentInst){
                     [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
                 }
-            //}
+            }
         }
-    }
+    //}
     
     [seqSetViewController updateAllVisibleCells];
     
