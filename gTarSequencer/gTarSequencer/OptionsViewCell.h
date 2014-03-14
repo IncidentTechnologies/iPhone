@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UITextField * fileName;
 @property (weak, nonatomic) IBOutlet UIButton * fileLoad;
 @property (weak, nonatomic) IBOutlet UILabel * fileDate;
+@property (weak, nonatomic) IBOutlet UIView * activeIndicator;
 
 @property (weak, nonatomic) IBOutlet UIButton * deleteButton;
 

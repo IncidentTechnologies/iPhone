@@ -29,7 +29,7 @@
                         <fragment content="Custom001">
                             <attributes>
                                 <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                <font key="NSFont" size="17" name="AvenirNext-Regular"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                             </attributes>
                         </fragment>
@@ -57,7 +57,7 @@
                 <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kb-XA-lfj">
                     <rect key="frame" x="243" y="234" width="121" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.55294117647058827" green="0.4392156862745098" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.63137254899999995" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="contentEdgeInsets" minX="49" minY="11" maxX="49" maxY="11"/>
@@ -90,7 +90,7 @@
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p08-tD-3Wh">
                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="151"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.090196078431372548" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.55294117649999996" green="0.43921568630000002" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="usI-8H-Aue">
                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="151"/>

@@ -8,12 +8,10 @@
 
 #import "CustomInstrumentSelector.h"
 
-#define TUTORIAL_STEPS 3
-
 #define GTAR_NUM_STRINGS 6
 #define MAX_RECORD_SECONDS 3.5
 #define RECORD_DRAW_INTERVAL 0.001
-#define ADJUSTOR_SIZE 30.0
+#define ADJUSTOR_SIZE 50.0
 
 #define VIEW_CUSTOM_INST 0
 #define VIEW_CUSTOM_NAME 1
@@ -24,9 +22,13 @@
 #define RECORD_STATE_RECORDED 2
 #define RECORD_STATE_PLAYING 3
 
+#define FONT_DEFAULT @"Avenir Next"
+#define FONT_BOLD @"AvenirNext-Bold"
+
 @implementation CustomInstrumentSelector
 
 @synthesize isFirstLaunch;
+@synthesize tutorialViewController;
 @synthesize viewFrame;
 @synthesize instName;
 @synthesize sampleTable;
@@ -151,51 +153,26 @@
 
 -(void)launchFTUTutorial
 {
-    CGRect tutorialFrame = CGRectMake(0,0,backgroundView.frame.size.width,backgroundView.frame.size.height);
-    UIColor * fillColor = [UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1];
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
     
-    tutorialScreen = [[UIImageView alloc] initWithFrame:tutorialFrame];
-    [tutorialScreen setBackgroundColor:fillColor];
-    [backgroundView addSubview:tutorialScreen];
-    tutorialScreen.userInteractionEnabled = YES;
+    NSLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
-    float buttonWidth = 300;
-    float buttonHeight = 30;
-    CGRect buttonFrame = CGRectMake(tutorialFrame.size.width/2-buttonWidth/2, tutorialFrame.size.height/2-buttonHeight/2, buttonWidth, buttonHeight);
-    tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
-    [tutorialNext setTitle:@"Custom Tutorial 1" forState:UIControlStateNormal];
+    CGRect tutorialFrame = CGRectMake(0,0,x,y);
+    tutorialViewController = [[TutorialViewController alloc] initWithFrame:tutorialFrame andTutorial:@"Custom"];
+    tutorialViewController.delegate = self;
     
-    [tutorialScreen addSubview:tutorialNext];
-    [tutorialNext addTarget:self action:@selector(incrementFTUTutorial) forControlEvents:UIControlEventTouchUpInside];
-    
-    tutorialStep = 1;
+    [self addSubview:tutorialViewController];
+    [tutorialViewController launch];
 }
 
--(void)incrementFTUTutorial
+- (void)endTutorialIfOpen
 {
-    if(tutorialStep == TUTORIAL_STEPS){
-        
-        [self endTutorial];
-        
-    }else{
-        
-        tutorialStep++;
-        
-        // step through slides
-        if(tutorialStep % 2 == 0){
-            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:159/255.0 green:172/255.0 blue:106/255.0 alpha:1]];
-        }else{
-            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1]];
-        }
-        
-        [tutorialNext setTitle:[@"Custom Tutorial " stringByAppendingFormat:@"%i", tutorialStep] forState:UIControlStateNormal];
-    }
+    [tutorialViewController end];
 }
 
--(void)endTutorial
+- (void)notifyTutorialEnded
 {
-    [tutorialScreen removeFromSuperview];
-    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedCustom"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -354,7 +331,7 @@
 - (void)initCustomIcon
 {
     if(!customIconSet){
-        customIconSet = [[NSArray alloc] initWithObjects:@"Icon_Music",@"Icon_Piano",@"Icon_Violin",@"Icon_Vibraphone",@"Icon_Percussion",@"Icon_WubWub",@"Icon_Saxophone",@"Icon_Trombone", nil];
+        customIconSet = [[NSArray alloc] initWithObjects:@"Icon_Custom",@"Icon_Piano",@"Icon_Violin",@"Icon_Vibraphone",@"Icon_Percussion",@"Icon_WubWub",@"Icon_Saxophone",@"Icon_Trombone",@"Icon_Trumpet",nil];
         customIconCounter = 0;
     }
     
@@ -756,7 +733,7 @@
     [recordingNameField addTarget:self action:@selector(recordingNameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     recordingNameField.delegate = self;
     isRecordingNameReady = TRUE;
-    [recordingNameField setFont:[UIFont systemFontOfSize:22.0]];
+    [recordingNameField setFont:[UIFont fontWithName:FONT_DEFAULT size:22.0]];
     
     // Init record editing buttons
     [self initRecordEditingButtons];
@@ -837,27 +814,12 @@
     
     unsigned long int samplesize = [customSoundRecorder fetchAudioBufferSize];
     unsigned long int samplelength = samplesize / sizeof(float);
-    float sampleRate = samplelength/[customSoundRecorder fetchSampleRate];
+    float * buffer = [customSoundRecorder fetchAudioBuffer];
     
-    float * buffer = (float *)malloc(samplesize);
-    buffer = [customSoundRecorder fetchAudioBuffer];
-   
-    // Draw sample
-    float sampleInterval = 4*sampleRate;
+    float screenWidth = recordLine.frame.size.width;
     float midpointY = recordLine.frame.size.height/2;
-    float intervalX = sampleInterval*recordLine.frame.size.width/samplelength;
-    float scaleY = 1;
-    
-    // Check the max y
-    //float maxY = 0;
-    float avgY = 0;
-    for(long int x = 0; x < samplelength; x+=sampleInterval){
-        //maxY = MAX(maxY,ABS(buffer[x]));
-        avgY += ABS(buffer[x]);
-    }
-    
-    avgY /= samplelength;
-    scaleY = 2000.0/(1.0-avgY);
+    float f = 1.0;
+    float scaleY = 200.0;
     
     CGSize size = CGSizeMake(recordLine.frame.size.width, recordLine.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
@@ -866,12 +828,13 @@
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, 0, midpointY);
     
-    for(long int x = 0; x < samplelength; x+=sampleInterval){
-        CGPathAddLineToPoint(path, NULL, x*intervalX, midpointY-buffer[x]*scaleY);
+    for(long int x = 0; x <= screenWidth/f; x+=f){
+        int n = x * samplelength / screenWidth;
+        CGPathAddLineToPoint(path, NULL, ceil(x), midpointY-buffer[n]*scaleY);
     }
     
     CGContextAddPath(context, path);
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:29/255.0 green:88/255.0 blue:103/255.0 alpha:1.0].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor);
     CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -1130,7 +1093,7 @@
         
         if([cell.sampleFilename isEqualToString:filename]){
             [self deselectString:cell];
-            cell.stringLabel.text = @"select a sound";
+            cell.stringLabel.text = @"";
         }
     }
     
@@ -1220,7 +1183,7 @@
     }
     
     float minX = 0 - ADJUSTOR_SIZE/2;
-    float maxX = rightAdjustor.frame.origin.x - ADJUSTOR_SIZE/2;
+    float maxX = rightAdjustor.frame.origin.x - 0.5*ADJUSTOR_SIZE/2;
     float newX = newPoint.x + leftFirstX;
     
     // wrap to boundary
@@ -1262,7 +1225,7 @@
         [rightAdjustor setAlpha:0.8];
     }
     
-    float minX = leftAdjustor.frame.origin.x + ADJUSTOR_SIZE/2;
+    float minX = leftAdjustor.frame.origin.x + 0.5*ADJUSTOR_SIZE/2;
     float maxX = progressBarDefaultWidth - ADJUSTOR_SIZE/2;
     float newX = newPoint.x + rightFirstX;
     
@@ -1307,7 +1270,7 @@
     NSLog(@"Show record processing");
     
     [recordProcessing setHidden:NO];
-    [recordProcessing setText:@"PROCESSING"];
+    [recordProcessing setText:@""];
     
     /*recordProcessingCounter = 0;
     [self animateRecordProcessing];
@@ -1720,9 +1683,9 @@
         [self clearImagesForCell:cell];
         if(indexPath.row == 0 && [self getNumSectionsInSampleTable] > 1){
             [self drawNextButtonArrowForCell:cell];
-            [cell.sampleTitle setFont:[UIFont fontWithName:@"Helvetica Bold" size:16.0]];
+            [cell.sampleTitle setFont:[UIFont fontWithName:FONT_BOLD size:16.0]];
         }else{
-            [cell.sampleTitle setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
+            [cell.sampleTitle setFont:[UIFont fontWithName:FONT_DEFAULT size:15.0]];
         }
         
         if(selectedSampleCell == cell){
@@ -1755,7 +1718,7 @@
         if(cell.sampleFilename!= nil){
             cell.stringLabel.text = cell.sampleFilename;
         }else{
-            cell.stringLabel.text = @"select a sound";
+            cell.stringLabel.text = @"";
             cell.defaultFontColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3];
         }
         [cell.stringLabel setTextColor:cell.defaultFontColor];

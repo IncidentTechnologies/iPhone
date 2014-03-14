@@ -18,14 +18,9 @@
 #import "OptionsViewController.h"
 #import "InstrumentViewController.h"
 #import "InfoViewController.h"
+#import "TutorialViewController.h"
 
-@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate> {
-    
-    // FTU tutorial
-    UIImageView * tutorialScreen;
-    UIView * tutorialBottomBar;
-    UIButton * tutorialNext;
-    int tutorialStep;
+@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate> {
     
     // gTar connection
     BOOL isConnected;
@@ -62,6 +57,11 @@
     
     UISwipeGestureRecognizer * swipeLeft;
     UISwipeGestureRecognizer * swipeRight;
+    
+    // Screen
+    BOOL isScreenLarge;
+    CGRect setNameOnScreenFrame;
+    CGRect setNameOffScreenFrame;
 }
 
 @property (nonatomic) BOOL isFirstLaunch;
@@ -70,6 +70,13 @@
 @property (retain, nonatomic) InstrumentViewController * instrumentViewController;
 @property (retain, nonatomic) InfoViewController * infoViewController;
 @property (retain, nonatomic) PlayControlViewController * playControlViewController;
+@property (retain, nonatomic) TutorialViewController * tutorialViewController;
 @property (retain, nonatomic) LeftNavigatorViewController * leftNavigator;
+
+@property (retain, nonatomic) UIButton * setName;
+
+// FTU Tutorial
+//@property (weak, nonatomic) IBOutlet UIButton * yesButton;
+//@property (weak, nonatomic) IBOutlet UIButton * noButton;
 
 @end

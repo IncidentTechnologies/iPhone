@@ -34,7 +34,6 @@
     UIImageView * filling;
     
     UILabel * volumeLabel;
-    UIColor * fillColor;
     
     float sliderCircleMaxY;
     float sliderCircleMinY;

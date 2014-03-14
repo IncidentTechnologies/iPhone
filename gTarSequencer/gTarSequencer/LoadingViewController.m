@@ -98,8 +98,6 @@
         
         [self transitionToSequencerController:FALSE];
     }else{
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
         
         NSLog(@"First time launch");
         

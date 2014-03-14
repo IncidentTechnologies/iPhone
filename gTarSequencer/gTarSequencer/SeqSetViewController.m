@@ -10,6 +10,9 @@
 
 #define MAX_INSTRUMENTS 5
 
+#define FONT_DEFAULT @"Avenir Next"
+#define FONT_BOLD @"AvenirNext-Bold"
+
 @implementation SeqSetViewController
 
 @synthesize instrumentTable;
@@ -408,7 +411,7 @@
         [cell setBackgroundColor:[UIColor clearColor]];
         [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
         
-        [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:25.0]];
+        [cell.textLabel setFont:[UIFont fontWithName:FONT_DEFAULT size:25.0]];
         
         [cell setMultipleTouchEnabled:NO];
         

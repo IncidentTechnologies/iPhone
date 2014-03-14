@@ -14,16 +14,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filename" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iL-ud-Ek4">
-                        <rect key="frame" x="25" y="15" width="350" height="35"/>
+                        <rect key="frame" x="36" y="15" width="350" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                         <color key="textColor" red="0.19607843137254902" green="0.2196078431372549" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gl6-HP-gn1">
                         <rect key="frame" x="420" y="15" width="50" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                         <color key="textColor" red="0.78823529410000004" green="0.80392156859999997" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -36,9 +36,9 @@
                         </state>
                     </button>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ck-Vb-gec">
-                        <rect key="frame" x="25" y="20" width="350" height="30"/>
+                        <rect key="frame" x="36" y="20" width="341" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zv2-S1-Nr9">
@@ -55,9 +55,15 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.78823529410000004" green="0.80392156859999997" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLV-fc-t2f">
+                        <rect key="frame" x="14" y="27" width="10" height="10"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.78823529410000004" green="0.80392156859999997" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="activeIndicator" destination="nLV-fc-t2f" id="4IN-Zw-uC2"/>
                 <outlet property="deleteButton" destination="zv2-S1-Nr9" id="tOc-m6-Arb"/>
                 <outlet property="fileDate" destination="Gl6-HP-gn1" id="eNC-yW-1M6"/>
                 <outlet property="fileLoad" destination="3TS-Jk-NcS" id="Lez-kZ-cXb"/>

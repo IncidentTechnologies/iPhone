@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Instrument.h"
+#import "TutorialViewController.h"
 
 @protocol InstrumentDelegate <NSObject>
 
@@ -26,13 +27,8 @@
 
 @end
 
-@interface InstrumentViewController : UIViewController <UIScrollViewDelegate>
+@interface InstrumentViewController : UIViewController <UIScrollViewDelegate,TutorialDelegate>
 {
-    // FTU tutorial
-    UIImageView * tutorialScreen;
-    UIButton * tutorialNext;
-    int tutorialStep;
-    
     // View data
     int activePattern;
     int activeMeasure;
@@ -80,6 +76,8 @@
 -(IBAction)userDidSelectNewPattern:(id)sender;
 -(IBAction)userDidSelectNewMeasure:(id)sender;
 -(IBAction)viewSeqSet:(id)sender;
+
+@property (retain, nonatomic) TutorialViewController * tutorialViewController;
 
 @property (nonatomic) BOOL isFirstLaunch;
 

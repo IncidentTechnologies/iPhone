@@ -8,8 +8,6 @@
 
 #import "OptionsViewController.h"
 
-#define TUTORIAL_STEPS 2
-
 #define ROW_HEIGHT 65
 #define TABLE_Y 55
 #define TABLE_HEIGHT 209
@@ -62,9 +60,6 @@
     
     [self reloadFileTable];
     
-    if(isFirstLaunch){
-        [self launchFTUTutorial];
-    }
 }
 
 - (void)unloadView
@@ -175,64 +170,6 @@
         fileDateSet[i] = newFileDateSet[i];
     }
 }
-
-#pragma mark - FTU Tutorial
-
--(void)launchFTUTutorial
-{
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
-    
-    CGRect tutorialFrame = CGRectMake(0,0,x,y-BOTTOMBAR_HEIGHT);
-    UIColor * fillColor = [UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1];
-    
-    tutorialScreen = [[UIImageView alloc] initWithFrame:tutorialFrame];
-    [tutorialScreen setBackgroundColor:fillColor];
-    [self.view addSubview:tutorialScreen];
-    tutorialScreen.userInteractionEnabled = YES;
-    
-    float buttonWidth = 300;
-    float buttonHeight = 30;
-    CGRect buttonFrame = CGRectMake(tutorialFrame.size.width/2-buttonWidth/2, tutorialFrame.size.height/2-buttonHeight/2, buttonWidth, buttonHeight);
-    tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
-    [tutorialNext setTitle:@"Options Tutorial 1" forState:UIControlStateNormal];
-    
-    [tutorialScreen addSubview:tutorialNext];
-    [tutorialNext addTarget:self action:@selector(incrementFTUTutorial) forControlEvents:UIControlEventTouchUpInside];
-    
-    tutorialStep = 1;
-}
-
--(void)incrementFTUTutorial
-{
-    
-    if(tutorialStep == TUTORIAL_STEPS){
-        
-        [self endTutorial];
-        
-    }else{
-        
-        tutorialStep++;
-        
-        // step through slides
-        if(tutorialStep % 2 == 0){
-            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:159/255.0 green:172/255.0 blue:106/255.0 alpha:1]];
-        }else{
-            [tutorialScreen setBackgroundColor:[UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1]];
-        }
-        
-        [tutorialNext setTitle:[@"Options Tutorial " stringByAppendingFormat:@"%i", tutorialStep] forState:UIControlStateNormal];
-    }
-}
-
--(void)endTutorial
-{
-    [tutorialScreen removeFromSuperview];
-    
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOptions"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 
 #pragma mark - Save Load Actions
 - (void)userDidLoadFile:(NSString *)filename
@@ -736,7 +673,7 @@
 
 -(void)drawBackButton
 {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    /*CGRect screenBounds = [[UIScreen mainScreen] bounds];
     float margin = (screenBounds.size.height == XBASE_LG) ? 12 : 0;
     
     CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
@@ -765,7 +702,12 @@
     
     [backButton addSubview:image];
     
-    UIGraphicsEndImageContext();
+    UIGraphicsEndImageContext();*/
+    
+    [backButton setImage:[UIImage imageNamed:@"Set_Icon"] forState:UIControlStateNormal];
+    [backButton setImageEdgeInsets:UIEdgeInsetsMake(15, 55, 15, 55)];
+    [backButton setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    backButton.tintColor = [UIColor whiteColor];
 }
 
 -(void)drawNewPlusButton

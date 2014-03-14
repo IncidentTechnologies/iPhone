@@ -239,7 +239,6 @@
     }
     
     SamplerBankNode * newBank = NULL;
-    
     m_samplerNode->CreateNewBank(newBank);
     
     // Reload sound into bank after new record
@@ -247,9 +246,9 @@
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * path = [paths objectAtIndex:0];
-    NSString * filename = [path stringByAppendingPathComponent:defaultFilename];
+    NSString * sampleFilename = [path stringByAppendingPathComponent:defaultFilename];
     
-    filepath = (char *) [filename UTF8String];
+    filepath = (char *) [sampleFilename UTF8String];
     
     m_samplerNode->LoadSampleIntoBank(++bankCount, filepath, m_sampNode);
     

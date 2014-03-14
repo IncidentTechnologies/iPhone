@@ -16,7 +16,9 @@
 #define NAVTAB 0
 #define SELECTORWIDTH 364
 #define SELECTORHEIGHT 276
-#define TUTORIAL_STEPS 5
+
+#define FONT_DEFAULT @"Avenir Next"
+#define FONT_BOLD @"AvenirNext-Bold"
 
 @implementation SequencerViewController
 
@@ -26,7 +28,12 @@
 @synthesize instrumentViewController;
 @synthesize playControlViewController;
 @synthesize infoViewController;
+@synthesize tutorialViewController;
 @synthesize leftNavigator;
+@synthesize setName;
+
+//@synthesize yesButton;
+//@synthesize noButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -95,7 +102,7 @@
 - (void)initSubviews
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    BOOL isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
+    isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
     int screensize = (isScreenLarge) ? XBASE_LG : XBASE_SM;
     
     onScreenMainFrame = CGRectMake(0,0,screensize,TABLEHEIGHT);
@@ -195,66 +202,6 @@
     
 }
 
-#pragma mark - FTU Tutorial
-
-- (void)launchFTUTutorial
-{
-    NSLog(@" *** Launch FTU Tutorial *** ");
-    
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
-    
-    CGRect tutorialFrame = CGRectMake(0,0,x,y);
-    tutorialScreen = [[UIImageView alloc] initWithFrame:tutorialFrame];
-    [tutorialScreen setImage:[UIImage imageNamed:@"Tutorial_Intro_1"]];
-    
-    [self.view addSubview:tutorialScreen];
-    tutorialScreen.userInteractionEnabled = YES;
-    
-    CGRect buttonFrame = CGRectMake(0, 0, tutorialFrame.size.width, tutorialFrame.size.height);
-    tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
-    
-    [tutorialScreen addSubview:tutorialNext];
-    [tutorialNext addTarget:self action:@selector(incrementFTUTutorial) forControlEvents:UIControlEventTouchUpInside];
-    
-    tutorialStep = 1;
-}
-
-- (void)incrementFTUTutorial
-{
-    
-    if(tutorialStep == TUTORIAL_STEPS){
-        
-        UIColor * fadedGray = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8];
-        
-        // pointer to play
-        CGRect newTutorialFrame = CGRectMake(0, 0, tutorialScreen.frame.size.width, tutorialScreen.frame.size.height - BOTTOMBAR_HEIGHT);
-        [tutorialScreen setFrame:newTutorialFrame];
-        [tutorialScreen setBackgroundColor:fadedGray];
-        [tutorialScreen setImage:nil];
-        
-        float playButtonWidth = 130;
-        CGRect bottomBarFrame = CGRectMake(playButtonWidth, newTutorialFrame.size.height, tutorialScreen.frame.size.width - playButtonWidth, BOTTOMBAR_HEIGHT);
-        tutorialBottomBar = [[UIView alloc] initWithFrame:bottomBarFrame];
-        [tutorialBottomBar setBackgroundColor:fadedGray];
-        [self.view addSubview:tutorialBottomBar];
-        
-        [tutorialNext removeFromSuperview];
-    
-    }else{
-    
-        tutorialStep++;
-        
-        [tutorialScreen setImage:[UIImage imageNamed:[@"Tutorial_Intro_" stringByAppendingFormat:@"%i", tutorialStep]]];
-    }
-}
-
-- (void)endTutorialIfOpen
-{
-    [tutorialScreen removeFromSuperview];
-    [tutorialBottomBar removeFromSuperview];
-}
-
 #pragma mark - Left Navigator Delegate
 
 - (BOOL)isLeftNavOpen
@@ -338,7 +285,13 @@
     }else if([nav isEqualToString:@"Info"]){
         
         activeMainView = infoViewController.view;
-        
+    }
+    
+    // Hover set name?
+    if([nav isEqualToString:@"Set"]){
+        [self hoverSetName];
+    }else{
+        [self hideSetName];
     }
     
     [activeMainView setAlpha:1.0];
@@ -445,6 +398,8 @@
     if([seqSetViewController countInstruments] > 0){
         [self saveWithName:filename];
     }
+    
+    activeSequencer = @"";
     
     // Delete all cells
     [seqSetViewController deleteAllCells];
@@ -816,6 +771,51 @@
     currentAbsoluteMeasure = 0;
 }
 
+#pragma mark - Hover Set Name
+- (void)hoverSetName
+{
+    NSString * setNameText = ([activeSequencer isEqualToString:@""] || activeSequencer == nil) ? @"New set" : activeSequencer;
+    
+    float x = (isScreenLarge) ? XBASE_LG : XBASE_SM;
+    float setNameWidth = [setNameText length]*14;
+    float setNameHeight = 40;
+    float cornerRadius = 10;
+
+    setNameOnScreenFrame = CGRectMake(x-setNameWidth+cornerRadius, -1*cornerRadius, setNameWidth, setNameHeight);
+    setNameOffScreenFrame = CGRectMake(x-setNameWidth+cornerRadius, -1*setNameHeight, setNameWidth, setNameHeight);
+    setName = [[UIButton alloc] initWithFrame:setNameOffScreenFrame];
+    [setName setBackgroundColor:[UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
+    [setName setTitle:setNameText forState:UIControlStateNormal];
+
+    [setName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [setName.titleLabel setFont:[UIFont fontWithName:FONT_BOLD size:17.0]];
+    [setName setTitleEdgeInsets:UIEdgeInsetsMake(7,0,0,0)];
+    
+    setName.layer.cornerRadius = 10.0;
+    setName.layer.borderColor = [UIColor whiteColor].CGColor;
+    setName.layer.borderWidth = 2.0f;
+
+    [self.view addSubview:setName];
+
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [setName setFrame:setNameOnScreenFrame];
+    } completion:^(BOOL finished){
+        [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(hideSetName) userInfo:nil repeats:NO];
+    }];
+}
+
+-(void)hideSetName
+{
+    if(setName != nil){
+        [setName setFrame:setNameOnScreenFrame];
+        [UIView animateWithDuration:0.5 animations:^(void){
+            [setName setFrame:setNameOffScreenFrame];
+        } completion:^(BOOL finished){
+            [setName removeFromSuperview];
+            setName = nil;
+        }];
+    }
+}
 
 #pragma mark - Seq Set Delegate
 
@@ -954,5 +954,37 @@
     
 }
 
+
+#pragma mark - FTU Tutorial
+
+- (void)launchFTUTutorial
+{
+    
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    NSLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
+    
+    CGRect tutorialFrame = CGRectMake(0,0,x,y);
+    tutorialViewController = [[TutorialViewController alloc] initWithFrame:tutorialFrame andTutorial:@"Intro"];
+    tutorialViewController.delegate = self;
+    
+    [self.view addSubview:tutorialViewController];
+    [tutorialViewController launch];
+    
+    [self stopGestures];
+}
+
+- (void)endTutorialIfOpen
+{
+    [tutorialViewController end];
+}
+
+- (void)notifyTutorialEnded
+{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self startGestures];
+}
 
 @end

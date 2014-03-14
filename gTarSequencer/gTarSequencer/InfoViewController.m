@@ -8,6 +8,9 @@
 
 #import "InfoViewController.h"
 
+#define FONT_DEFAULT @"Avenir Next"
+#define FONT_BOLD @"AvenirNext-Bold"
+
 @interface InfoViewController ()
 
 @end
@@ -35,7 +38,7 @@
     infoButton.layer.cornerRadius = 8.0;
     
     NSMutableAttributedString * titleString = [[NSMutableAttributedString alloc] initWithString:@"Visit gTar.fm to Learn More"];
-    [titleString setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:17.0]} range:NSMakeRange(6,7)];
+    [titleString setAttributes:@{NSFontAttributeName:[UIFont fontWithName:FONT_BOLD size:17.0]} range:NSMakeRange(6,7)];
     
     [infoButton setAttributedTitle:titleString forState:UIControlStateNormal];
     

@@ -11,6 +11,9 @@
 #define ZOOMFACTOR 2
 #define ZOOM_FONT 40
 
+#define FONT_DEFAULT @"Avenir Next"
+#define FONT_BOLD @"AvenirNext-Bold"
+
 @implementation RadialDisplay
 
 @synthesize center;
@@ -53,7 +56,7 @@
     double verticalOffset = 70;         // the bigger this number the higher up the center is located
     center = CGPointMake(x/2, self.frame.size.height - verticalOffset);
     
-    fillColor = [UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1.0];
+    fillColor = [UIColor colorWithRed:141/255.0 green:112/255.0 blue:166/255.0 alpha:1.0];
     
     // define the angular bounds:
     double angleWidth = 18;
@@ -272,7 +275,7 @@
     // Tempo number to show in white
     CGRect frame = CGRectMake(outline.frame.size.width/2-50, 174, ZOOMFACTOR*50, ZOOMFACTOR*30);
     tempoLabel = [[UILabel alloc] initWithFrame:frame];
-    tempoLabel.font = [UIFont boldSystemFontOfSize:ZOOM_FONT];
+    tempoLabel.font = [UIFont fontWithName:FONT_BOLD size:ZOOM_FONT];
     tempoLabel.textColor = [UIColor whiteColor];
     tempoLabel.backgroundColor = [UIColor clearColor];
     tempoLabel.textAlignment = NSTextAlignmentCenter;

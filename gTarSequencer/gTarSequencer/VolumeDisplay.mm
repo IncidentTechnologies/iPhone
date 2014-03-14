@@ -53,8 +53,6 @@
     frame.origin.y = 0;
     frame.size.width = x;
     
-    fillColor = [UIColor colorWithRed:106/255.0 green:159/255.0 blue:172/255.0 alpha:1];
-    
     outline = [[UIImageView alloc] initWithFrame:frame];
     [self addSubview:outline];
     
@@ -151,7 +149,7 @@
     CGRect sliderCircleFrame = CGRectMake(baseX+indent, sliderCircleMinY, circleWidth, circleWidth);
     
     sliderCircle = [[UIButton alloc] initWithFrame:sliderCircleFrame];
-    sliderCircle.backgroundColor = [UIColor colorWithRed:85/255.0 green:97/255.0 blue:100/255.0 alpha:1.0];
+    sliderCircle.backgroundColor = [UIColor colorWithRed:141/255.0 green:112/255.0 blue:166/255.0 alpha:1.0];
     sliderCircle.layer.cornerRadius = sliderWidth/2-indent;
     
     [self addSubview:sliderCircle];

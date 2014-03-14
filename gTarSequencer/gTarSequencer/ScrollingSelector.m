@@ -8,6 +8,9 @@
 
 #import "ScrollingSelector.h"
 
+#define FONT_DEFAULT @"Avenir Next"
+#define FONT_BOLD @"AvenirNext-Bold"
+
 @implementation ScrollingSelector
 
 @synthesize delegate;
@@ -326,7 +329,7 @@
     [label setTextColor:[UIColor whiteColor]];
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setText:[names objectAtIndex:index]];
-    [label setFont:[UIFont systemFontOfSize:14.0]];
+    [label setFont:[UIFont fontWithName:FONT_DEFAULT size:14.0]];
     
     [scrollView addSubview:label];
     

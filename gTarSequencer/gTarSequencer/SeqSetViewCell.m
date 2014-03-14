@@ -421,13 +421,10 @@
 -(void)hideButtonBorders:(UIButton *)patternButton
 {
     if(patternButton == patternA){
-        NSLog(@"hiding borders for A");
         [patternABorder setHidden:YES];
     }else if(patternButton == patternB || patternButton == patternC){
-        NSLog(@"hiding borders for B or C");
         patternButton.layer.borderWidth = 0.0f;
     }else if(patternButton == patternD){
-        NSLog(@"hiding borders for D");
         [patternDBorder setHidden:YES];
     }
 }

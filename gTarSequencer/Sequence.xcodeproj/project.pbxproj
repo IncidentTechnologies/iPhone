@@ -295,6 +295,7 @@
 		6D44A45A18B5937B00992D3D /* InfoLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45818B5937B00992D3D /* InfoLogo.png */; };
 		6D44A45B18B5937B00992D3D /* InfogTar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45918B5937B00992D3D /* InfogTar.png */; };
 		6D44A45D18B686C400992D3D /* G_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45C18B686C400992D3D /* G_Icon.png */; };
+		6D5FD01F18D12B5C00ED96F6 /* Tutorial_Dock.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D5FD01E18D12B5C00ED96F6 /* Tutorial_Dock.png */; };
 		6D72B28118BE7C7100969A8F /* CustomSampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D72B28018BE7C7100969A8F /* CustomSampleCell.m */; };
 		6D72B28318BE7C8400969A8F /* CustomSampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D72B28218BE7C8400969A8F /* CustomSampleCell.xib */; };
 		6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704618CAAE560068CC92 /* Pinch_Icon.png */; };
@@ -317,12 +318,8 @@
 		6DAB0CEB18C7B8F400FFBDE6 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DAB0CE518C7B8F400FFBDE6 /* release_notes.md */; };
 		6DAD2B3B18CF9B5500228F08 /* SoundMaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAD2B3A18CF9B5500228F08 /* SoundMaster.mm */; };
 		6DAD2B3E18CFA0CE00228F08 /* SoundMaster_.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */; };
-		6DAD2B4818CFE85B00228F08 /* Tutorial_Intro_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD2B4018CFE85B00228F08 /* Tutorial_Intro_1.png */; };
-		6DAD2B4918CFE85B00228F08 /* Tutorial_Intro_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD2B4118CFE85B00228F08 /* Tutorial_Intro_2.png */; };
-		6DAD2B4A18CFE85B00228F08 /* Tutorial_Intro_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD2B4218CFE85B00228F08 /* Tutorial_Intro_3.png */; };
-		6DAD2B4B18CFE85B00228F08 /* Tutorial_Inst_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD2B4318CFE85B00228F08 /* Tutorial_Inst_1.png */; };
-		6DAD2B4C18CFE85B00228F08 /* Tutorial_Intro_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD2B4418CFE85B00228F08 /* Tutorial_Intro_4.png */; };
-		6DAD2B4D18CFE85B00228F08 /* Tutorial_Intro_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD2B4518CFE85B00228F08 /* Tutorial_Intro_5.png */; };
+		6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAF30D718D2207700036958 /* Icon_Trumpet.png */; };
+		6DAF30DC18D2468500036958 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAF30DB18D2468500036958 /* TutorialViewController.m */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DF6BC7518CE5E1800D20EC7 /* defaultSet in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6BC7418CE5E1800D20EC7 /* defaultSet */; };
@@ -662,6 +659,7 @@
 		6D44A45818B5937B00992D3D /* InfoLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoLogo.png; sourceTree = "<group>"; };
 		6D44A45918B5937B00992D3D /* InfogTar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfogTar.png; sourceTree = "<group>"; };
 		6D44A45C18B686C400992D3D /* G_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = G_Icon.png; sourceTree = "<group>"; };
+		6D5FD01E18D12B5C00ED96F6 /* Tutorial_Dock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial_Dock.png; sourceTree = "<group>"; };
 		6D72B27F18BE7C7100969A8F /* CustomSampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSampleCell.h; sourceTree = "<group>"; };
 		6D72B28018BE7C7100969A8F /* CustomSampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSampleCell.m; sourceTree = "<group>"; };
 		6D72B28218BE7C8400969A8F /* CustomSampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSampleCell.xib; sourceTree = "<group>"; };
@@ -689,12 +687,9 @@
 		6DAD2B3918CF9B5500228F08 /* SoundMaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundMaster.h; sourceTree = "<group>"; };
 		6DAD2B3A18CF9B5500228F08 /* SoundMaster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundMaster.mm; sourceTree = "<group>"; };
 		6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundMaster_.mm; sourceTree = "<group>"; };
-		6DAD2B4018CFE85B00228F08 /* Tutorial_Intro_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial_Intro_1.png; sourceTree = "<group>"; };
-		6DAD2B4118CFE85B00228F08 /* Tutorial_Intro_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial_Intro_2.png; sourceTree = "<group>"; };
-		6DAD2B4218CFE85B00228F08 /* Tutorial_Intro_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial_Intro_3.png; sourceTree = "<group>"; };
-		6DAD2B4318CFE85B00228F08 /* Tutorial_Inst_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial_Inst_1.png; sourceTree = "<group>"; };
-		6DAD2B4418CFE85B00228F08 /* Tutorial_Intro_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial_Intro_4.png; sourceTree = "<group>"; };
-		6DAD2B4518CFE85B00228F08 /* Tutorial_Intro_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial_Intro_5.png; sourceTree = "<group>"; };
+		6DAF30D718D2207700036958 /* Icon_Trumpet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trumpet.png; sourceTree = "<group>"; };
+		6DAF30DA18D2468500036958 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
+		6DAF30DB18D2468500036958 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6DF6BC7418CE5E1800D20EC7 /* defaultSet */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = defaultSet; path = ../defaultSet; sourceTree = "<group>"; };
@@ -773,6 +768,7 @@
 		580A52101864E0230077240B /* Instrument Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6DAF30D718D2207700036958 /* Icon_Trumpet.png */,
 				58F5449218ABFDAA009E6E43 /* Icon_Saxophone.png */,
 				58F5449318ABFDAA009E6E43 /* Icon_Sound.png */,
 				58F61678188F5E2700020A74 /* Icon_Music.png */,
@@ -792,6 +788,7 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6D5FD01E18D12B5C00ED96F6 /* Tutorial_Dock.png */,
 				6D85704618CAAE560068CC92 /* Pinch_Icon.png */,
 				6DAA159218C66363003DAB30 /* Save_Icon.png */,
 				6DAA158C18C12525003DAB30 /* Sequencer_Icon58px.png */,
@@ -1308,7 +1305,6 @@
 		58D617581863BF5E001EB327 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6DAD2B3F18CFE85B00228F08 /* Tutorial */,
 				5811AA75187B88C700FC0BD2 /* Audio */,
 				584085871865355300BFF3C5 /* sequencerInstruments.plist */,
 				580A52101864E0230077240B /* Instrument Icons */,
@@ -1332,6 +1328,7 @@
 				58429A1618A1AD4D00BDD09B /* InstrumentViewController */,
 				580A52181864F7FC0077240B /* SeqSetViewController */,
 				6D44A44F18B58A3A00992D3D /* InfoViewController */,
+				6DAF30D918D2466600036958 /* TutorialViewController */,
 				584085921868C2F900BFF3C5 /* GuitarView */,
 			);
 			name = SequencerViewController;
@@ -1382,17 +1379,13 @@
 			path = gTarSequencer/TestFlightSDK3.0.0;
 			sourceTree = "<group>";
 		};
-		6DAD2B3F18CFE85B00228F08 /* Tutorial */ = {
+		6DAF30D918D2466600036958 /* TutorialViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6DAD2B4018CFE85B00228F08 /* Tutorial_Intro_1.png */,
-				6DAD2B4118CFE85B00228F08 /* Tutorial_Intro_2.png */,
-				6DAD2B4218CFE85B00228F08 /* Tutorial_Intro_3.png */,
-				6DAD2B4418CFE85B00228F08 /* Tutorial_Intro_4.png */,
-				6DAD2B4518CFE85B00228F08 /* Tutorial_Intro_5.png */,
-				6DAD2B4318CFE85B00228F08 /* Tutorial_Inst_1.png */,
+				6DAF30DA18D2468500036958 /* TutorialViewController.h */,
+				6DAF30DB18D2468500036958 /* TutorialViewController.m */,
 			);
-			path = Tutorial;
+			name = TutorialViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1508,7 +1501,6 @@
 				5811AB38187B88C800FC0BD2 /* Percussion 87.mp3 in Resources */,
 				6DAA158918C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png in Resources */,
 				587C9F811888C0E7001F57C7 /* Chiptune 3.mp3 in Resources */,
-				6DAD2B4B18CFE85B00228F08 /* Tutorial_Inst_1.png in Resources */,
 				5811AAF7187B88C800FC0BD2 /* Percussion 28.mp3 in Resources */,
 				58F5449418ABFDAA009E6E43 /* Icon_Saxophone.png in Resources */,
 				5811AAEF187B88C800FC0BD2 /* Percussion 20.mp3 in Resources */,
@@ -1534,7 +1526,6 @@
 				5811AAF8187B88C800FC0BD2 /* Percussion 29.mp3 in Resources */,
 				5811AAE5187B88C800FC0BD2 /* Percussion 11.mp3 in Resources */,
 				5811AAFD187B88C800FC0BD2 /* Percussion 33.mp3 in Resources */,
-				6DAD2B4D18CFE85B00228F08 /* Tutorial_Intro_5.png in Resources */,
 				587C9F9E1888C0E7001F57C7 /* Piano 2.mp3 in Resources */,
 				5811AB11187B88C800FC0BD2 /* Percussion 51.mp3 in Resources */,
 				5840858618652D9000BFF3C5 /* SeqSetView.xib in Resources */,
@@ -1547,6 +1538,7 @@
 				587C9F941888C0E7001F57C7 /* House 4.mp3 in Resources */,
 				6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */,
 				58D617261863B8D7001EB327 /* Images.xcassets in Resources */,
+				6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */,
 				587C9FB81888C0E7001F57C7 /* Trombone 4.mp3 in Resources */,
 				587C9F7C1888C0E7001F57C7 /* 808 4.mp3 in Resources */,
 				5811AAF0187B88C800FC0BD2 /* Percussion 21.mp3 in Resources */,
@@ -1627,6 +1619,7 @@
 				5811AAF9187B88C800FC0BD2 /* Percussion 3.mp3 in Resources */,
 				5811AAE3187B88C800FC0BD2 /* Percussion 100.mp3 in Resources */,
 				58D6176B1863BF5E001EB327 /* Sequence6.png in Resources */,
+				6D5FD01F18D12B5C00ED96F6 /* Tutorial_Dock.png in Resources */,
 				5811AAE0187B88C800FC0BD2 /* Percussion 0.mp3 in Resources */,
 				5811AB13187B88C800FC0BD2 /* Percussion 53.mp3 in Resources */,
 				5811AB3F187B88C800FC0BD2 /* Percussion 93.mp3 in Resources */,
@@ -1695,7 +1688,6 @@
 				6DF6BC7518CE5E1800D20EC7 /* defaultSet in Resources */,
 				587C9F841888C0E7001F57C7 /* Chiptune 6.mp3 in Resources */,
 				5811AAE2187B88C800FC0BD2 /* Percussion 10.mp3 in Resources */,
-				6DAD2B4A18CFE85B00228F08 /* Tutorial_Intro_3.png in Resources */,
 				6DAA159018C12525003DAB30 /* Sequencer_Icon80px.png in Resources */,
 				5811AAFA187B88C800FC0BD2 /* Percussion 30.mp3 in Resources */,
 				5811AB1F187B88C800FC0BD2 /* Percussion 64.mp3 in Resources */,
@@ -1710,7 +1702,6 @@
 				5811AB18187B88C800FC0BD2 /* Percussion 58.mp3 in Resources */,
 				587C9FBA1888C0E7001F57C7 /* Trombone 6.mp3 in Resources */,
 				5811AAE4187B88C800FC0BD2 /* Percussion 101.mp3 in Resources */,
-				6DAD2B4918CFE85B00228F08 /* Tutorial_Intro_2.png in Resources */,
 				587C9F851888C0E7001F57C7 /* Dubstep 1.mp3 in Resources */,
 				5811AB2A187B88C800FC0BD2 /* Percussion 74.mp3 in Resources */,
 				587C9FC11888C0E7001F57C7 /* Violin 1.mp3 in Resources */,
@@ -1732,7 +1723,6 @@
 				58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */,
 				587C9F981888C0E7001F57C7 /* Percussion 2.mp3 in Resources */,
 				580A52061864DFF50077240B /* Icon_Percussion.png in Resources */,
-				6DAD2B4C18CFE85B00228F08 /* Tutorial_Intro_4.png in Resources */,
 				587C9F8A1888C0E7001F57C7 /* Dubstep 6.mp3 in Resources */,
 				587C9FA01888C0E7001F57C7 /* Piano 4.mp3 in Resources */,
 				5811AB00187B88C800FC0BD2 /* Percussion 36.mp3 in Resources */,
@@ -1740,7 +1730,6 @@
 				587C9F9F1888C0E7001F57C7 /* Piano 3.mp3 in Resources */,
 				587C9F8D1888C0E7001F57C7 /* Guitar 3.mp3 in Resources */,
 				5811AAFE187B88C800FC0BD2 /* Percussion 34.mp3 in Resources */,
-				6DAD2B4818CFE85B00228F08 /* Tutorial_Intro_1.png in Resources */,
 				587C9FA61888C0E7001F57C7 /* Piano II 4.mp3 in Resources */,
 				58CA4E7E18A19C8A0026D83C /* LeftNavigatorViewController.xib in Resources */,
 				5811AAE7187B88C800FC0BD2 /* Percussion 13.mp3 in Resources */,
@@ -1793,6 +1782,7 @@
 				58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */,
 				6D44A45718B58C0000992D3D /* InfoViewController.m in Sources */,
 				58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */,
+				6DAF30DC18D2468500036958 /* TutorialViewController.m in Sources */,
 				58D6171E1863B8D7001EB327 /* AppDelegate.m in Sources */,
 				58868EDA187619ED00B469C2 /* PlayControlViewController.m in Sources */,
 				58429A1B18A1C09300BDD09B /* InstrumentViewController.m in Sources */,

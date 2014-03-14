@@ -260,7 +260,6 @@
 - (void)drawPlayButton
 {
     
-
     [startStopButton setBackgroundColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1]];
     
     CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);

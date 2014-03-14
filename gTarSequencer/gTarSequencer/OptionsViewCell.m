@@ -9,6 +9,9 @@
 #import "OptionsViewCell.h"
 #import "OptionsViewController.h"
 
+#define FONT_DEFAULT @"Avenir Next"
+#define FONT_BOLD @"AvenirNext-Bold"
+
 #define DEFAULT_FILE_TEXT @"Save as"
 
 @implementation OptionsViewCell
@@ -18,6 +21,7 @@
 @synthesize fileName;
 @synthesize fileLoad;
 @synthesize fileDate;
+@synthesize activeIndicator;
 @synthesize isRenamable;
 @synthesize rowid;
 @synthesize deleteButton;
@@ -90,6 +94,9 @@
     
     [self addGestureRecognizer:doubletap];
     
+    // Active indicator
+    activeIndicator.layer.cornerRadius = activeIndicator.frame.size.width/2;
+    
 }
 
 - (void)setAsActiveSequencer
@@ -98,6 +105,7 @@
         isActiveSequencer = YES;
         fileText.textColor = activeColor;
         [self applyBoldFont:YES toLabel:fileText];
+        [activeIndicator setBackgroundColor:blueColor];
     }
 }
 
@@ -110,14 +118,15 @@
         fileText.textColor = darkGrayColor;
     }
     [self applyBoldFont:NO toLabel:fileText];
+    [activeIndicator setBackgroundColor:[UIColor colorWithRed:201/255.0 green:205/255.0 blue:206/255.0 alpha:1.0]];
 }
 
 - (void)applyBoldFont:(BOOL)isBold toLabel:(UILabel *)text
 {
     if(isBold){
-        [text setFont:[UIFont boldSystemFontOfSize:18.0]];
+        [text setFont:[UIFont fontWithName:FONT_BOLD size:18.0]];
     }else{
-        [text setFont:[UIFont systemFontOfSize:18.0]];
+        [text setFont:[UIFont fontWithName:FONT_DEFAULT size:18.0]];
     }
 }
 
@@ -320,8 +329,10 @@
     if([parent.selectMode isEqualToString:@"Load"] && ![fileName.text isEqualToString:@""]){
         
         // auto rename if duplicate
-        if([parent isDuplicateFilename:fileName.text]){
+        if([parent isDuplicateFilename:fileName.text] && ![fileName.text isEqualToString:previousNameText]){
             fileName.text = [parent generateNextSetName];
+        }else{
+            fileName.text = previousNameText;
         }
         
         // rename

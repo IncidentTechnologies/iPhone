@@ -16,6 +16,9 @@
 #define NORMAL_FONT 17
 #define LARGE_FONT 30
 
+#define FONT_DEFAULT @"Avenir Next"
+#define FONT_BOLD @"AvenirNext-Bold"
+
 @implementation RadialButton
 
 @synthesize currentValue;
@@ -85,11 +88,11 @@
     
     // tempo label
     double titleWidth = 80;
-    double tempoWidth = 50;
+    double tempoWidth = 60;
     CGRect titleframe = CGRectMake(self.frame.size.width/2-titleWidth/2-tempoWidth/2,13,80,30);
     scrollTitle = [[UILabel alloc] initWithFrame:titleframe];
     [scrollTitle setText:@"TEMPO"];
-    scrollTitle.font = [UIFont systemFontOfSize:NORMAL_FONT];
+    scrollTitle.font = [UIFont fontWithName:FONT_DEFAULT size:NORMAL_FONT];
     scrollTitle.textColor = [UIColor whiteColor];
     
     [self addSubview:scrollTitle];
@@ -98,14 +101,14 @@
     normalFrame = CGRectMake(self.frame.size.width/2+10,13,tempoWidth,30);
     
     if(isScreenLarge){
-        zoomedFrame = CGRectMake(105, -90, ZOOMFACTOR*tempoWidth, ZOOMFACTOR*30);
+        zoomedFrame = CGRectMake(95, -90, ZOOMFACTOR*tempoWidth, ZOOMFACTOR*30);
     }else{
-        zoomedFrame = CGRectMake(62, -90, ZOOMFACTOR*tempoWidth, ZOOMFACTOR*30);
+        zoomedFrame = CGRectMake(52, -90, ZOOMFACTOR*tempoWidth, ZOOMFACTOR*30);
     }
     
     valueDisplay = [[UILabel alloc] initWithFrame:normalFrame];
     valueDisplay.contentMode = UIViewContentModeScaleAspectFit;
-    valueDisplay.font = [UIFont boldSystemFontOfSize:LARGE_FONT];
+    valueDisplay.font = [UIFont fontWithName:FONT_BOLD size:LARGE_FONT];
     valueDisplay.textColor = [UIColor whiteColor];
     
     [self addSubview:valueDisplay];

@@ -12,6 +12,7 @@
 #import "CustomStringCell.h"
 #import "CustomSampleCell.h"
 #import "CustomSoundRecorder.h"
+#import "TutorialViewController.h"
 
 @protocol CustomInstrumentSelectorDelegate <NSObject>
 
@@ -21,13 +22,8 @@
 
 @end
 
-@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate>
+@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate>
 {
-    // FTU tutorial
-    UIImageView * tutorialScreen;
-    UIButton * tutorialNext;
-    int tutorialStep;
-    
     int viewState;
     
     // Sample and string lists
@@ -81,6 +77,8 @@
 - (IBAction)reverseSampleStack:(id)sender;
 
 @property (nonatomic) BOOL isFirstLaunch;
+
+@property (retain, nonatomic) TutorialViewController * tutorialViewController;
 
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic) NSString * instName;
