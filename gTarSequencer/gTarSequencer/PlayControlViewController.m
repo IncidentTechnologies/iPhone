@@ -60,7 +60,7 @@
 
 #pragma mark - Tempo Slider Delegate
 
-- (void)radialButtonValueDidChange:(int)newValue
+- (void)radialButtonValueDidChange:(int)newValue withSave:(BOOL)save
 {
     if (tempo != newValue)
     {
@@ -70,9 +70,11 @@
             [self stopAll];
             [self playAll];
         }
+        
+        if(save){
+            [delegate saveContext:nil];
+        }
     }
-    
-    [delegate saveContext:nil];
 }
 
 - (BOOL) allowTempoDisplayToOpen
@@ -132,19 +134,24 @@
     [window addSubview:volumeDisplay];
 }
 
-- (void)volumeButtonValueDidChange:(double)newValue
+- (void)volumeButtonValueDidChange:(double)newValue withSave:(BOOL)save
 {
     if(volume != newValue)
     {
         volume = newValue;
-        if(isPlaying)
-        {
-            [self stopAll];
-            [self playAll];
-        }
+        
+        [delegate changePlayVolume:volume];
+       
+        //if(isPlaying)
+        //{
+            //[self stopAll];
+            //[self playAll];
+        //}
     }
     
-    [delegate saveContext:nil];
+    if(save){
+        [delegate saveContext:nil];
+    }
 }
 
 - (BOOL) allowVolumeDisplayToOpen
@@ -210,7 +217,6 @@
 
 - (void)stopAll
 {
-    
     [self clearButton:startStopButton];
     [self drawPlayButton];
     

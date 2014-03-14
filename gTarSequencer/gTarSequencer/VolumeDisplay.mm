@@ -219,9 +219,12 @@
     }
     
     // Set the volume
+    BOOL save = NO;
     if([sender state] == UIGestureRecognizerStateEnded){
-        [delegate volumeButtonValueDidChange:currentValue];
+        save = YES;
     }
+    
+    [delegate volumeButtonValueDidChange:currentValue withSave:save];
     
 }
 

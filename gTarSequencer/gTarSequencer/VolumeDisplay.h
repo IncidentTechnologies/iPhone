@@ -11,7 +11,7 @@
 
 @protocol VolumeDisplayDelegate <NSObject>
 
-- (void) volumeButtonValueDidChange:(double)newValue;
+- (void) volumeButtonValueDidChange:(double)newValue withSave:(BOOL)save;
 - (BOOL) allowVolumeDisplayToOpen;
 - (void) volumeDisplayDidOpen;
 - (void) volumeDisplayDidClose;

@@ -12,7 +12,7 @@
 
 @protocol RadialButtonDelegate <NSObject>
 
-- (void) radialButtonValueDidChange:(int)newValue;
+- (void) radialButtonValueDidChange:(int)newValue withSave:(BOOL)save;
 - (BOOL) allowTempoDisplayToOpen;
 - (void) tempoDisplayDidOpen;
 - (void) tempoDisplayDidClose;

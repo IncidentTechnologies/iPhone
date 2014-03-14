@@ -286,7 +286,8 @@
     if(![fileName.text isEqualToString:DEFAULT_FILE_TEXT] && ![fileName.text isEqualToString:@""]){
         // create attributed string
         NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:fileName.text];
-        [str addAttribute:NSBackgroundColorAttributeName value:blueColor range:NSMakeRange(0, fileName.text.length)];
+        [str addAttribute:NSBackgroundColorAttributeName value:[UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0] range:NSMakeRange(0, fileName.text.length)];
+        [str addAttribute:NSForegroundColorAttributeName value:blueColor range:NSMakeRange(0,fileName.text.length)];
         
         [fileName setAttributedText:str];
     }
@@ -298,6 +299,7 @@
     // create attributed string
     NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:fileName.text];
     [str addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:NSMakeRange(0, fileName.text.length)];
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0,fileName.text.length)];
     
     [fileName setAttributedText:str];
 }
@@ -331,7 +333,7 @@
         // auto rename if duplicate
         if([parent isDuplicateFilename:fileName.text] && ![fileName.text isEqualToString:previousNameText]){
             fileName.text = [parent generateNextSetName];
-        }else{
+        }else if([parent isDuplicateFilename:fileName.text]){
             fileName.text = previousNameText;
         }
         

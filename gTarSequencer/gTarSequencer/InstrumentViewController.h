@@ -58,6 +58,10 @@
     CGPoint lastContentOffset;
     int targetMeasure;
     
+    // Pages
+    UIColor * pageOnColor;
+    UIColor * pageOffColor;
+    
 }
 
 -(void)reopenView;

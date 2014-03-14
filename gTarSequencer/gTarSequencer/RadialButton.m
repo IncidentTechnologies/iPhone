@@ -192,6 +192,10 @@
 
         // Fill radial display to corresponding %:
         [radialDisplay fillToPercent:[self percentFull:newCurrentValue]];
+        
+        if(ABS(valueDifference) > 5){
+            //[delegate radialButtonValueDidChange:newCurrentValue withSave:NO];
+        }
     }
 }
 
@@ -237,7 +241,7 @@
         {
             currentValue = currentDisplayedValue;
             [self setToValue:currentValue];
-            [delegate radialButtonValueDidChange:currentValue];
+            [delegate radialButtonValueDidChange:currentValue withSave:YES];
         }
         
         displayOpen = false;

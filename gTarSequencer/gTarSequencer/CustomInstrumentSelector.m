@@ -550,8 +550,9 @@
     // Create attributed
     UIColor * blueColor = [UIColor colorWithRed:0/255.0 green:161/266.0 blue:222/255.0 alpha:1.0];
     NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:textField.text];
-    [str addAttribute:NSBackgroundColorAttributeName value:blueColor range:NSMakeRange(0, textField.text.length)];
+    [str addAttribute:NSBackgroundColorAttributeName value:[UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0] range:NSMakeRange(0, textField.text.length)];
     
+    [textField setTextColor:blueColor];
     [textField setAttributedText:str];
 }
 
@@ -560,6 +561,7 @@
     NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:textField.text];
     [str addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:NSMakeRange(0, textField.text.length)];
     
+    [textField setTextColor:[UIColor whiteColor]];
     [textField setAttributedText:str];
 }
 

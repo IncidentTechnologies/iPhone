@@ -53,6 +53,7 @@
     // Load default set for FTU
     NSString * filePath = (isFirstLaunch) ? [self getDefaultSetFilepath] : nil;
     [self loadStateFromDisk:filePath];
+    [self selectNavChoice:@"Set" withShift:NO];
     [self saveContext:nil];
     
     if(isFirstLaunch){
@@ -184,7 +185,6 @@
     [leftNavigator.view setFrame:offLeftNavigatorFrame];
     [leftNavigator setDelegate:self];
     leftNavOpen = false;
-    [self selectNavChoice:@"Set" withShift:NO];
     
     [self.view addSubview:leftNavigator.view];
     
@@ -263,6 +263,7 @@
         
         [optionsViewController reloadFileTable];
         activeMainView = optionsViewController.view;
+        [self stopAllPlaying];
         
     }else if([nav isEqualToString:@"Set"]){
     
@@ -541,13 +542,19 @@
 
 - (void)startBackgroundLoop:(NSNumber *)spb
 {
-    NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
-    
-    if(TESTMODE) NSLog(@"Starting Background Loop with %f seconds per beat",[spb floatValue]);
-    
-    playTimer = [NSTimer scheduledTimerWithTimeInterval:[spb floatValue] target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
-    
-    [runLoop run];
+    if(playTimer == nil){
+        NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
+        
+        if(TESTMODE) NSLog(@"Starting Background Loop with %f seconds per beat",[spb floatValue]);
+        
+        @synchronized(playTimer){
+            [playTimer invalidate];
+            
+            playTimer = [NSTimer scheduledTimerWithTimeInterval:[spb floatValue] target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
+            
+            [runLoop run];
+        }
+    }
 }
 
 - (void)mainEventLoop
@@ -736,10 +743,16 @@
 
 - (void)startAllPlaying:(float)spb withAmplitude:(double)volume
 {
+    [self stopAllPlaying];
     isPlaying = TRUE;
     playVolume = volume;
     
     [self performSelectorInBackground:@selector(startBackgroundLoop:) withObject:[NSNumber numberWithFloat:spb]];
+}
+
+- (void)changePlayVolume:(double)newVolume
+{
+    playVolume = newVolume;
 }
 
 - (void)initPlayLocation
@@ -777,7 +790,12 @@
     NSString * setNameText = ([activeSequencer isEqualToString:@""] || activeSequencer == nil) ? @"New set" : activeSequencer;
     
     float x = (isScreenLarge) ? XBASE_LG : XBASE_SM;
-    float setNameWidth = [setNameText length]*14;
+    float setNameWidth = [setNameText length];
+    if([setNameText length] < 11){
+        setNameWidth *= 14;
+    }else{
+        setNameWidth *= 10.5;
+    }
     float setNameHeight = 40;
     float cornerRadius = 10;
 

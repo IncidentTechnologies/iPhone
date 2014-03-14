@@ -673,6 +673,8 @@
 
 -(void)drawBackButton
 {
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    float margin = (screenBounds.size.height == XBASE_LG) ? 54 : 43;
     /*CGRect screenBounds = [[UIScreen mainScreen] bounds];
     float margin = (screenBounds.size.height == XBASE_LG) ? 12 : 0;
     
@@ -705,7 +707,7 @@
     UIGraphicsEndImageContext();*/
     
     [backButton setImage:[UIImage imageNamed:@"Set_Icon"] forState:UIControlStateNormal];
-    [backButton setImageEdgeInsets:UIEdgeInsetsMake(15, 55, 15, 55)];
+    [backButton setImageEdgeInsets:UIEdgeInsetsMake(15, margin, 15, margin)];
     [backButton setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     backButton.tintColor = [UIColor whiteColor];
 }

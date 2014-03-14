@@ -16,6 +16,10 @@
 
 @interface TutorialViewController : UIView
 {
+    
+    float screenX;
+    float screenY;
+    
     int tutorialStep;
     int tutorialTotalSteps;
     NSString * tutorialName;
@@ -23,14 +27,17 @@
     UIView * tutorialScreen;
     UIView * tutorialBottomBar;
     UIButton * tutorialNext;
-
+    
+    UISwipeGestureRecognizer * swipeLeft;
+    UISwipeGestureRecognizer * swipeRight;
+    
     BOOL isScreenLarge;
 }
 
 - (id)initWithFrame:(CGRect)frame andTutorial:(NSString *)tutorial;
 - (void)launch;
 - (void)end;
-- (void)fadeOutTutorialSubviews:(BOOL)removeAll;
+- (void)fadeOutTutorialSubviews:(BOOL)removeAll isReverseDirection:(BOOL)reverse;
 
 @property (weak, nonatomic) id<TutorialDelegate> delegate;
 

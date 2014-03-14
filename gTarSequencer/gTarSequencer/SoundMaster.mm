@@ -52,7 +52,9 @@
 
 -(void)setGain:(double)gain
 {
+    //[audioController stopAUGraph];
     m_samplerNode->SetChannelGain(gain, CONN_OUT);
+    //[audioController startAUGraph];
 }
 
 @end

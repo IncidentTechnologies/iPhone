@@ -8,6 +8,9 @@
 
 #import "InstrumentViewController.h"
 
+#define FONT_DEFAULT @"Avenir Next"
+#define FONT_BOLD @"AvenirNext-Bold"
+
 #define MEASURE_WIDTH 480
 #define MEASURE_MARGIN_SM 0
 #define MEASURE_MARGIN_LG 14.7
@@ -18,6 +21,10 @@
 #define MUTE_SEGMENT_INDEX 4
 #define SCROLL_SPEED_MIN 0
 #define SCROLL_SPEED_MAX 0.5
+
+#define PAGE_OPACITY_OFF 0.3
+#define PAGE_OPACITY_MID 0.5
+#define PAGE_OPACITY_ON 1.0
 
 @implementation InstrumentViewController
 
@@ -139,14 +146,22 @@
 
 - (void)initPages
 {
+    pageOnColor = [UIColor colorWithRed:108/255.0 green:192/255.0 blue:214/255.0 alpha:1.0];
+    pageOffColor = [UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0];
+    
     pages[0] = pageOne;
     pages[1] = pageTwo;
     pages[2] = pageThree;
     pages[3] = pageFour;
     
     for(int i = 0; i < NUM_MEASURES; i++){
-        //pages[i].layer.cornerRadius = 7.5;
-        pages[i].alpha = 0.4;
+        pages[i].alpha = PAGE_OPACITY_OFF;
+        
+        if(i < measureCounts[activePattern]){
+            [pages[i] setBackgroundColor:pageOnColor];
+        }else{
+            [pages[i] setBackgroundColor:pageOffColor];
+        }
     }
 }
 
@@ -316,9 +331,9 @@
     [UIView animateWithDuration:0.5 animations:^(){
         for(int i = 0; i < NUM_MEASURES; i++){
             if(i == activeMeasure){
-                [measureSet[patternIndex][i] setAlpha:1.0];
+                [measureSet[patternIndex][i] setAlpha:PAGE_OPACITY_ON];
             }else{
-                [measureSet[patternIndex][i] setAlpha:0.5];
+                [measureSet[patternIndex][i] setAlpha:PAGE_OPACITY_MID];
             }
         }
     } completion:^(BOOL finished){
@@ -326,120 +341,117 @@
     }];
 }
 
-- (void)pinchMeasure:(UIPinchGestureRecognizer *)recognizer
+- (void)doubletapMeasure:(UITapGestureRecognizer *)recognizer
 {
     
-    scrollView.scrollEnabled = NO;
-    
-    // pinch in
-    if(recognizer.scale < 1){
+    // measure is inactive
+    if(activeMeasure >= measureCounts[activePattern]){
         
-        // measure is active
-        if(activeMeasure < measureCounts[activePattern]){
-            
-            switch(activeMeasure){
-                case 1:
-                    NSLog(@"DEACTIVATE %i",activeMeasure);
+        switch (activeMeasure) {
+            case 1:
+                NSLog(@"ACTIVATE %i",activeMeasure);
+                
+                [self clearMeasure:1 forPattern:activePattern];
+                
+                // These must be called before drawing the measure so data is up to date
+                [self setMeasureCountTo:2 forPattern:activePattern];
+                
+                measureSet[activePattern][1] = [self drawMeasureOnActive:1 forPattern:activePattern];
+                
+                break;
+            case 2:
+            case 3:
+                NSLog(@"ACTIVATE %i",activeMeasure);
+                
+                if(measureCounts[activePattern] < 2){
                     
-                    if(measureCounts[activePattern] > 2){
-                        
-                        [self clearMeasure:1 forPattern:activePattern];
-                        [self clearMeasure:2 forPattern:activePattern];
-                        [self clearMeasure:3 forPattern:activePattern];
-                        
-                        [self setMeasureCountTo:1 forPattern:activePattern];
-                        
-                        measureSet[activePattern][1] = [self drawMeasureOff:1 forPattern:activePattern];
-                        measureSet[activePattern][2] = [self drawMeasureOff:2 forPattern:activePattern];
-                        measureSet[activePattern][3] = [self drawMeasureOff:3 forPattern:activePattern];
-                        
-                    }else{
-                        
-                        [self clearMeasure:1 forPattern:activePattern];
-                    
-                        [self setMeasureCountTo:1 forPattern:activePattern];
-                        
-                        measureSet[activePattern][1] = [self drawMeasureOff:1 forPattern:activePattern];
-                        
-                    }
-                    
-                    [self changeActiveMeasureToMeasure:0 scrollSlow:YES];
-                    
-                    break;
-                case 2:
-                case 3:
-                    NSLog(@"DEACTIVATE %i",activeMeasure);
-                    
+                    [self clearMeasure:1 forPattern:activePattern];
                     [self clearMeasure:2 forPattern:activePattern];
                     [self clearMeasure:3 forPattern:activePattern];
                     
-                    [self setMeasureCountTo:2 forPattern:activePattern];
+                    [self setMeasureCountTo:4 forPattern:activePattern];
                     
+                    measureSet[activePattern][1] = [self drawMeasureOnActive:1 forPattern:activePattern];
+                    measureSet[activePattern][2] = [self drawMeasureOnActive:2 forPattern:activePattern];
+                    measureSet[activePattern][3] = [self drawMeasureOnActive:3 forPattern:activePattern];
+                    
+                }else{
+                    [self clearMeasure:2 forPattern:activePattern];
+                    [self clearMeasure:3 forPattern:activePattern];
+                    
+                    [self setMeasureCountTo:4 forPattern:activePattern];
+                    
+                    measureSet[activePattern][2] = [self drawMeasureOnActive:2 forPattern:activePattern];
+                    measureSet[activePattern][3] = [self drawMeasureOnActive:3 forPattern:activePattern];
+                }
+                
+                break;
+        }
+        
+        [self changeActiveMeasureToMeasure:activeMeasure scrollSlow:YES];
+        
+        // SAVE CONTEXT
+        [delegate saveContext:nil];
+    }
+}
+
+- (void)holdMeasure:(UILongPressGestureRecognizer *)recognizer
+{
+    
+    //scrollView.scrollEnabled = NO;
+    
+    // measure is active
+    if(activeMeasure < measureCounts[activePattern]){
+        
+        switch(activeMeasure){
+            case 1:
+                NSLog(@"DEACTIVATE %i",activeMeasure);
+                
+                if(measureCounts[activePattern] > 2){
+                    
+                    [self clearMeasure:1 forPattern:activePattern];
+                    [self clearMeasure:2 forPattern:activePattern];
+                    [self clearMeasure:3 forPattern:activePattern];
+                    
+                    [self setMeasureCountTo:1 forPattern:activePattern];
+                    
+                    measureSet[activePattern][1] = [self drawMeasureOff:1 forPattern:activePattern];
                     measureSet[activePattern][2] = [self drawMeasureOff:2 forPattern:activePattern];
                     measureSet[activePattern][3] = [self drawMeasureOff:3 forPattern:activePattern];
                     
-                    [self changeActiveMeasureToMeasure:1 scrollSlow:YES];
-                    
-                    break;
-            }
-            
-            
-            // SAVE CONTEXT
-            [delegate saveContext:nil];
-        }
-        
-        
-    }else if(recognizer.scale > 1){ // pinch out
-        
-        // measure is inactive
-        if(activeMeasure >= measureCounts[activePattern]){
-            
-            switch (activeMeasure) {
-                case 1:
-                    NSLog(@"ACTIVATE %i",activeMeasure);
+                }else{
                     
                     [self clearMeasure:1 forPattern:activePattern];
+                
+                    [self setMeasureCountTo:1 forPattern:activePattern];
                     
-                    // These must be called before drawing the measure so data is up to date
-                    [self setMeasureCountTo:2 forPattern:activePattern];
+                    measureSet[activePattern][1] = [self drawMeasureOff:1 forPattern:activePattern];
                     
-                    measureSet[activePattern][1] = [self drawMeasureOnActive:1 forPattern:activePattern];
-                    
-                    break;
-                case 2:
-                case 3:
-                    NSLog(@"ACTIVATE %i",activeMeasure);
-                    
-                    if(measureCounts[activePattern] < 2){
-                        
-                        [self clearMeasure:1 forPattern:activePattern];
-                        [self clearMeasure:2 forPattern:activePattern];
-                        [self clearMeasure:3 forPattern:activePattern];
-                        
-                        [self setMeasureCountTo:4 forPattern:activePattern];
-                        
-                        measureSet[activePattern][1] = [self drawMeasureOnActive:1 forPattern:activePattern];
-                        measureSet[activePattern][2] = [self drawMeasureOnActive:2 forPattern:activePattern];
-                        measureSet[activePattern][3] = [self drawMeasureOnActive:3 forPattern:activePattern];
-                        
-                    }else{
-                        [self clearMeasure:2 forPattern:activePattern];
-                        [self clearMeasure:3 forPattern:activePattern];
-                        
-                        [self setMeasureCountTo:4 forPattern:activePattern];
-                        
-                        measureSet[activePattern][2] = [self drawMeasureOnActive:2 forPattern:activePattern];
-                        measureSet[activePattern][3] = [self drawMeasureOnActive:3 forPattern:activePattern];
-                    }
-                    
-                    break;
-            }
-            
-            [self changeActiveMeasureToMeasure:activeMeasure scrollSlow:YES];
-            
-            // SAVE CONTEXT
-            [delegate saveContext:nil];
+                }
+                
+                [self changeActiveMeasureToMeasure:0 scrollSlow:YES];
+                
+                break;
+            case 2:
+            case 3:
+                NSLog(@"DEACTIVATE %i",activeMeasure);
+                
+                [self clearMeasure:2 forPattern:activePattern];
+                [self clearMeasure:3 forPattern:activePattern];
+                
+                [self setMeasureCountTo:2 forPattern:activePattern];
+                
+                measureSet[activePattern][2] = [self drawMeasureOff:2 forPattern:activePattern];
+                measureSet[activePattern][3] = [self drawMeasureOff:3 forPattern:activePattern];
+                
+                [self changeActiveMeasureToMeasure:1 scrollSlow:YES];
+                
+                break;
         }
+        
+        
+        // SAVE CONTEXT
+        [delegate saveContext:nil];
     }
 }
 
@@ -488,7 +500,7 @@
         measureSet[activePattern][measureIndex].layer.borderColor = [UIColor whiteColor].CGColor;
         measureSet[activePattern][measureIndex].layer.borderWidth = 0.0f;
         
-        [measureSet[activePattern][measureIndex] setAlpha:1.0];
+        [measureSet[activePattern][measureIndex] setAlpha:PAGE_OPACITY_ON];
     }
 }
 
@@ -533,7 +545,7 @@
     }
     
     // default invisible
-    [newMeasure setAlpha:0.3];
+    [newMeasure setAlpha:PAGE_OPACITY_OFF];
     
     [scrollView addSubview:newMeasure];
     
@@ -557,8 +569,10 @@
     //
     
     if(measureIndex > 0){
-        UIPinchGestureRecognizer * pinchMeasure = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchMeasure:)];
-        [newMeasure addGestureRecognizer:pinchMeasure];
+        UILongPressGestureRecognizer * longPressMeasure = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdMeasure:)];
+        longPressMeasure.minimumPressDuration = 0.5;
+        
+        [newMeasure addGestureRecognizer:longPressMeasure];
     }
     
     return newMeasure;
@@ -568,7 +582,7 @@
 {
     float measureMargin = [self getMeasureMargin];
     
-    CGRect measureFrame = CGRectMake(3*measureMargin+measureIndex*(MEASURE_WIDTH+measureMargin),0,MEASURE_WIDTH,scrollView.frame.size.height);
+    CGRect measureFrame = CGRectMake(3*measureMargin+measureIndex*(MEASURE_WIDTH+measureMargin),1,MEASURE_WIDTH,scrollView.frame.size.height-2);
     UIView * newOffMeasure = [[UIView alloc] initWithFrame:measureFrame];
     
     [newOffMeasure setBackgroundColor:[UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
@@ -579,9 +593,16 @@
     float pinchWidth = 100;
     float pinchHeight = 100;
     CGRect labelFrame = CGRectMake(measureFrame.size.width/2-pinchWidth/2,measureFrame.size.height/2-pinchHeight/2,pinchWidth,pinchHeight);
-    UIButton * offMeasureLabel = [[UIButton alloc] initWithFrame:labelFrame];
+    UILabel * offMeasureLabel = [[UILabel alloc] initWithFrame:labelFrame];
     
-    [offMeasureLabel setImage:[UIImage imageNamed:@"Pinch_Icon"] forState:UIControlStateNormal];
+    [offMeasureLabel setText:[@"" stringByAppendingFormat:@"%i",measureIndex+1]];
+    [offMeasureLabel setTextColor:[UIColor whiteColor]];
+    [offMeasureLabel setFont:[UIFont fontWithName:FONT_BOLD size:50.0]];
+    [offMeasureLabel setTextAlignment:NSTextAlignmentCenter];
+    [offMeasureLabel setAlpha:PAGE_OPACITY_OFF];
+    
+    //UIButton * offMeasureLabel = [[UIButton alloc] initWithFrame:labelFrame];
+    //[offMeasureLabel setImage:[UIImage imageNamed:@"Pinch_Icon"] forState:UIControlStateNormal];
     
     [newOffMeasure addSubview:offMeasureLabel];
     
@@ -591,8 +612,10 @@
     //
     
     if(measureIndex > 0){
-        UIPinchGestureRecognizer * pinchMeasure = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchMeasure:)];
-        [newOffMeasure addGestureRecognizer:pinchMeasure];
+        UITapGestureRecognizer * doubleTapMeasure = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubletapMeasure:)];
+        doubleTapMeasure.numberOfTapsRequired = 2;
+        
+        [newOffMeasure addGestureRecognizer:doubleTapMeasure];
     }
     
     return newOffMeasure;
@@ -638,7 +661,7 @@
     [UIView animateWithDuration:0.5 animations:^(){
         for(int i = 0; i < NUM_MEASURES; i++){
             [playbandView[i] setHidden:YES];
-            [measureSet[patternIndex][i] setAlpha:0.3];
+            [measureSet[patternIndex][i] setAlpha:PAGE_OPACITY_OFF];
         }
     } completion:^(BOOL finished){
         @synchronized(self){
@@ -1027,17 +1050,23 @@
         [scrollView setContentOffset:newOffset];
         for(int i = 0; i < NUM_MEASURES; i++){
             if(i == measureIndex){
-                [measureSet[activePattern][i] setAlpha:1.0];
+                [measureSet[activePattern][i] setAlpha:PAGE_OPACITY_ON];
             }else{
-                [measureSet[activePattern][i] setAlpha:0.5];
+                [measureSet[activePattern][i] setAlpha:PAGE_OPACITY_MID];
             }
         }
     } completion:^(BOOL finished){
         for(int i=0; i<NUM_MEASURES;i++){
             if(i == measureIndex){
-                pages[i].alpha = 1.0;
+                pages[i].alpha = PAGE_OPACITY_ON;
             }else{
-                pages[i].alpha = 0.4;
+                pages[i].alpha = PAGE_OPACITY_OFF;
+            }
+            
+            if(i < measureCounts[activePattern]){
+                [pages[i] setBackgroundColor:pageOnColor];
+            }else{
+                [pages[i] setBackgroundColor:pageOffColor];
             }
         }
         scrollView.scrollEnabled = YES;
