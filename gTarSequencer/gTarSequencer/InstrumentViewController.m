@@ -180,6 +180,10 @@
         }
     }
     
+    [self checkIsFirstLaunch];
+    if(isFirstLaunch){
+        [self launchFTUTutorial];
+    }
 }
 
 #pragma mark - Instrument Updates
@@ -1218,10 +1222,16 @@
     NSLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
     CGRect tutorialFrame = CGRectMake(0,0,x,y-BOTTOMBAR_HEIGHT-1);
+    
+    if(tutorialViewController){
+        [tutorialViewController clear];
+    }
+    
     tutorialViewController = [[TutorialViewController alloc] initWithFrame:tutorialFrame andTutorial:@"Instrument"];
     tutorialViewController.delegate = self;
     
     [self.view addSubview:tutorialViewController];
+
     [tutorialViewController launch];
 }
 

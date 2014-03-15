@@ -17,6 +17,8 @@
 #define SELECTORWIDTH 364
 #define SELECTORHEIGHT 276
 
+#define DEFAULT_SET_NAME @"Tutorial"
+
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
 
@@ -263,7 +265,7 @@
         
         [optionsViewController reloadFileTable];
         activeMainView = optionsViewController.view;
-        [self stopAllPlaying];
+        [playControlViewController stopAll];
         
     }else if([nav isEqualToString:@"Set"]){
     
@@ -368,6 +370,10 @@
     
     [self loadStateFromDisk:filepath];
     [self saveContext:nil];
+    
+    if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
+        [self relaunchFTUTutorial];
+    }
 }
 
 - (void)renameFromName:(NSString *)filename toName:(NSString *)newname
@@ -975,19 +981,35 @@
 
 #pragma mark - FTU Tutorial
 
+-(void)relaunchFTUTutorial
+{
+    [self launchFTUTutorial];
+    
+    // Reset other BOOLs
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedInstrumentView"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedCustom"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)launchFTUTutorial
 {
-    
     float y = [[UIScreen mainScreen] bounds].size.width;
     float x = [[UIScreen mainScreen] bounds].size.height;
     
     NSLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
     CGRect tutorialFrame = CGRectMake(0,0,x,y);
+    
+    
+    if(tutorialViewController){
+        [tutorialViewController clear];
+    }
+    
     tutorialViewController = [[TutorialViewController alloc] initWithFrame:tutorialFrame andTutorial:@"Intro"];
     tutorialViewController.delegate = self;
-    
+        
     [self.view addSubview:tutorialViewController];
+    
     [tutorialViewController launch];
     
     [self stopGestures];

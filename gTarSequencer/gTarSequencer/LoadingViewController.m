@@ -101,6 +101,7 @@
         
         NSLog(@"First time launch");
         
+        [self copyTutorialFile];
         [self transitionToSequencerController:TRUE];
     }
 }
@@ -112,6 +113,21 @@
     [self.navigationController pushViewController:sequencerViewController animated:YES];
     [sequencerViewController setIsFirstLaunch:firstLaunch];
     
+}
+
+-(void)copyTutorialFile
+{
+    NSString * defaultSetPath = [[NSBundle mainBundle] pathForResource:@"defaultSet" ofType:@""];
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * newDefaultSetPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"usr_Tutorial"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSError * error;
+    if(![fileManager copyItemAtPath:defaultSetPath toPath:newDefaultSetPath error:&error]){
+        NSLog(@"Error copying");
+    }
 }
 
 @end

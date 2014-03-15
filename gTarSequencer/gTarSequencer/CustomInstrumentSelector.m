@@ -158,6 +158,10 @@
     
     NSLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
+    if(tutorialViewController){
+        [tutorialViewController clear];
+    }
+    
     CGRect tutorialFrame = CGRectMake(0,0,x,y);
     tutorialViewController = [[TutorialViewController alloc] initWithFrame:tutorialFrame andTutorial:@"Custom"];
     tutorialViewController.delegate = self;

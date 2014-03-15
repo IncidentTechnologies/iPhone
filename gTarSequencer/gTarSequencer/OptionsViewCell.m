@@ -12,6 +12,7 @@
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
 
+#define DEFAULT_SET_NAME @"Tutorial"
 #define DEFAULT_FILE_TEXT @"Save as"
 
 @implementation OptionsViewCell
@@ -92,7 +93,9 @@
     UITapGestureRecognizer * doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     doubletap.numberOfTapsRequired = 2;
     
-    [self addGestureRecognizer:doubletap];
+    if(![fileText.text isEqualToString:DEFAULT_SET_NAME]){
+        [self addGestureRecognizer:doubletap];
+    }
     
     // Active indicator
     activeIndicator.layer.cornerRadius = activeIndicator.frame.size.width/2;
@@ -266,7 +269,7 @@
     
     previousNameText = fileName.text;
     
-    if([fileName.text isEqualToString:DEFAULT_FILE_TEXT] || [fileName.text isEqualToString:@""]){
+    if([fileName.text isEqualToString:DEFAULT_FILE_TEXT] || [fileName.text isEqualToString:@""] || [fileName.text isEqualToString:DEFAULT_SET_NAME]){
         fileName.text = @"";
     }else{
         [self initFileAttributedString];
@@ -328,7 +331,7 @@
     isNameEditing = NO;
     
     // save a rename
-    if([parent.selectMode isEqualToString:@"Load"] && ![fileName.text isEqualToString:@""]){
+    if([parent.selectMode isEqualToString:@"Load"] && ![fileName.text isEqualToString:@""] && ![fileName.text isEqualToString:DEFAULT_SET_NAME]){
         
         // auto rename if duplicate
         if([parent isDuplicateFilename:fileName.text] && ![fileName.text isEqualToString:previousNameText]){
@@ -340,7 +343,7 @@
         // rename
         [self userDidRename];
         
-    }else if([fileName.text isEqualToString:@""]){
+    }else if([fileName.text isEqualToString:@""] || [fileName.text isEqualToString:DEFAULT_SET_NAME]){
         [self setSelected:NO animated:NO];
     }
     
@@ -422,7 +425,7 @@
      NSString * nameString = fileName.text;
      NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
      
-     if([emptyName isEqualToString:@""] || [nameString isEqualToString:DEFAULT_FILE_TEXT]){
+     if([emptyName isEqualToString:@""] || [nameString isEqualToString:DEFAULT_FILE_TEXT] || [nameString isEqualToString:DEFAULT_SET_NAME]){
          isReady = NO;
      }else{
          isReady = YES;

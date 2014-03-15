@@ -79,6 +79,11 @@
     [delegate notifyTutorialEnded];
 }
 
+- (void)clear
+{
+    [tutorialScreen removeFromSuperview];
+}
+
 - (void)drawTutorialScreenForStep:(int)step isReverseDirection:(BOOL)reverse
 {
     if([tutorialName isEqualToString:@"Intro"]){

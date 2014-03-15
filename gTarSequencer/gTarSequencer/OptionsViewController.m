@@ -12,6 +12,8 @@
 #define TABLE_Y 55
 #define TABLE_HEIGHT 209
 #define TABLE_MIN_HEIGHT 103
+
+#define DEFAULT_SET_NAME @"Tutorial"
 #define DEFAULT_FILE_TEXT @"Save as"
 
 @implementation OptionsViewController
@@ -395,7 +397,7 @@
 {
     OptionsViewCell * cell = (OptionsViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     
-    if([selectMode isEqualToString:@"Load"] && !cell.isNameEditing){
+    if([selectMode isEqualToString:@"Load"] && !cell.isNameEditing && ![cell.fileText.text isEqualToString:DEFAULT_SET_NAME]){
         return YES;
     }else{
         return NO;

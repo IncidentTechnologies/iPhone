@@ -37,6 +37,7 @@
 - (id)initWithFrame:(CGRect)frame andTutorial:(NSString *)tutorial;
 - (void)launch;
 - (void)end;
+- (void)clear;
 - (void)fadeOutTutorialSubviews:(BOOL)removeAll isReverseDirection:(BOOL)reverse;
 
 @property (weak, nonatomic) id<TutorialDelegate> delegate;
