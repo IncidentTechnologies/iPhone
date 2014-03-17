@@ -745,6 +745,8 @@
     isPlaying = FALSE;
     [playTimer invalidate];
     playTimer = nil;
+    
+    //[playControlViewController stopAll];
 }
 
 - (void)startAllPlaying:(float)spb withAmplitude:(double)volume
@@ -807,7 +809,12 @@
 
     setNameOnScreenFrame = CGRectMake(x-setNameWidth+cornerRadius, -1*cornerRadius, setNameWidth, setNameHeight);
     setNameOffScreenFrame = CGRectMake(x-setNameWidth+cornerRadius, -1*setNameHeight, setNameWidth, setNameHeight);
-    setName = [[UIButton alloc] initWithFrame:setNameOffScreenFrame];
+    
+    if(setName == nil){
+        setName = [[UIButton alloc] init];
+    }
+    
+    [setName setFrame:setNameOffScreenFrame];
     [setName setBackgroundColor:[UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
     [setName setTitle:setNameText forState:UIControlStateNormal];
 
@@ -821,6 +828,7 @@
 
     [self.view addSubview:setName];
 
+    [setName setHidden:NO];
     [UIView animateWithDuration:0.3 animations:^(void){
         [setName setFrame:setNameOnScreenFrame];
     } completion:^(BOOL finished){
@@ -830,28 +838,38 @@
 
 -(void)hideSetName
 {
-    if(setName != nil){
+    //if(setName != nil){
+    if(![setName isHidden]){
         [setName setFrame:setNameOnScreenFrame];
         [UIView animateWithDuration:0.5 animations:^(void){
             [setName setFrame:setNameOffScreenFrame];
         } completion:^(BOOL finished){
-            [setName removeFromSuperview];
-            setName = nil;
+            [setName setHidden:YES];
+            //[setName removeFromSuperview];
+            //setName = nil;
         }];
     }
+    //}
 }
 
-#pragma mark - Seq Set Delegate
+#pragma mark - Play control
 
 - (BOOL)checkIsPlaying
 {
     return isPlaying;
 }
 
-- (void)forceStopAll
+- (void)stopAll
 {
     [playControlViewController stopAll];
 }
+
+- (void)startAll
+{
+    [playControlViewController startStop:self];
+}
+
+#pragma mark - Seq Set Delegate
 
 - (void)setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying
 {

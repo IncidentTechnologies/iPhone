@@ -43,12 +43,7 @@
         
         defaultFilename = @"CustomSoundPlaceholder.m4a";
         
-        //NSArray * pathComponents = [NSArray arrayWithObjects:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject], defaultFilename, nil];
-        
         NSArray * pathComponents = [NSArray arrayWithObjects:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject], defaultFilename, nil];
-        
-        //NSArray * pathComponent = [NSArray arrayWithObjects:[NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES)] count:defaultFilename, nil];
-        
         
         NSURL * outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
         
@@ -202,13 +197,35 @@
         NSLog(@"Error moving");
 }
 
+- (void)saveRecordingToFilename:(NSString *)filename
+{
+    NSString * newFilename = filename;
+    newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
+    newFilename = [newFilename stringByAppendingString:@".m4a"];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Samples"];
+    
+    NSError * err = NULL;
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    
+    [fm createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
+
+    NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newFilename];
+    
+    char * pathName = (char *)malloc(sizeof(char) * [newPath length]);
+    pathName = (char *) [newPath UTF8String];
+    
+    m_sampNode->SaveToFile(pathName, YES);
+}
+
 - (void)deleteRecordingFilename:(NSString *)filename
 {
     // Create a subfolder Samples/{Category} if it doesn't exist yet
     NSLog(@"Deleting file %@.m4a",filename);
     
     NSString * newFilename = filename;
-    newFilename = [@"Samples/" stringByAppendingString:filename];
+    newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
     newFilename = [newFilename stringByAppendingString:@".m4a"];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

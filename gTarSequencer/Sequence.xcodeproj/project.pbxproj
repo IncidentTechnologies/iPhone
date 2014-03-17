@@ -15,108 +15,6 @@
 		580A52061864DFF50077240B /* Icon_Percussion.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F61864DFF50077240B /* Icon_Percussion.png */; };
 		580A52071864DFF50077240B /* Icon_Piano.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F71864DFF50077240B /* Icon_Piano.png */; };
 		580A52091864DFF50077240B /* Icon_WubWub.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F91864DFF50077240B /* Icon_WubWub.png */; };
-		5811AAE0187B88C800FC0BD2 /* Percussion 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA78187B88C700FC0BD2 /* Percussion 0.mp3 */; };
-		5811AAE1187B88C800FC0BD2 /* Percussion 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA79187B88C700FC0BD2 /* Percussion 1.mp3 */; };
-		5811AAE2187B88C800FC0BD2 /* Percussion 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA7A187B88C700FC0BD2 /* Percussion 10.mp3 */; };
-		5811AAE3187B88C800FC0BD2 /* Percussion 100.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA7B187B88C700FC0BD2 /* Percussion 100.mp3 */; };
-		5811AAE4187B88C800FC0BD2 /* Percussion 101.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA7C187B88C700FC0BD2 /* Percussion 101.mp3 */; };
-		5811AAE5187B88C800FC0BD2 /* Percussion 11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA7D187B88C700FC0BD2 /* Percussion 11.mp3 */; };
-		5811AAE6187B88C800FC0BD2 /* Percussion 12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA7E187B88C700FC0BD2 /* Percussion 12.mp3 */; };
-		5811AAE7187B88C800FC0BD2 /* Percussion 13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA7F187B88C700FC0BD2 /* Percussion 13.mp3 */; };
-		5811AAE8187B88C800FC0BD2 /* Percussion 14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA80187B88C700FC0BD2 /* Percussion 14.mp3 */; };
-		5811AAE9187B88C800FC0BD2 /* Percussion 15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA81187B88C700FC0BD2 /* Percussion 15.mp3 */; };
-		5811AAEA187B88C800FC0BD2 /* Percussion 16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA82187B88C700FC0BD2 /* Percussion 16.mp3 */; };
-		5811AAEB187B88C800FC0BD2 /* Percussion 17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA83187B88C700FC0BD2 /* Percussion 17.mp3 */; };
-		5811AAEC187B88C800FC0BD2 /* Percussion 18.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA84187B88C700FC0BD2 /* Percussion 18.mp3 */; };
-		5811AAED187B88C800FC0BD2 /* Percussion 19.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA85187B88C700FC0BD2 /* Percussion 19.mp3 */; };
-		5811AAEE187B88C800FC0BD2 /* Percussion 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA86187B88C700FC0BD2 /* Percussion 2.mp3 */; };
-		5811AAEF187B88C800FC0BD2 /* Percussion 20.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA87187B88C700FC0BD2 /* Percussion 20.mp3 */; };
-		5811AAF0187B88C800FC0BD2 /* Percussion 21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA88187B88C700FC0BD2 /* Percussion 21.mp3 */; };
-		5811AAF1187B88C800FC0BD2 /* Percussion 22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA89187B88C700FC0BD2 /* Percussion 22.mp3 */; };
-		5811AAF2187B88C800FC0BD2 /* Percussion 23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA8A187B88C700FC0BD2 /* Percussion 23.mp3 */; };
-		5811AAF3187B88C800FC0BD2 /* Percussion 24.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA8B187B88C700FC0BD2 /* Percussion 24.mp3 */; };
-		5811AAF4187B88C800FC0BD2 /* Percussion 25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA8C187B88C700FC0BD2 /* Percussion 25.mp3 */; };
-		5811AAF5187B88C800FC0BD2 /* Percussion 26.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA8D187B88C700FC0BD2 /* Percussion 26.mp3 */; };
-		5811AAF6187B88C800FC0BD2 /* Percussion 27.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA8E187B88C700FC0BD2 /* Percussion 27.mp3 */; };
-		5811AAF7187B88C800FC0BD2 /* Percussion 28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA8F187B88C700FC0BD2 /* Percussion 28.mp3 */; };
-		5811AAF8187B88C800FC0BD2 /* Percussion 29.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA90187B88C700FC0BD2 /* Percussion 29.mp3 */; };
-		5811AAF9187B88C800FC0BD2 /* Percussion 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA91187B88C700FC0BD2 /* Percussion 3.mp3 */; };
-		5811AAFA187B88C800FC0BD2 /* Percussion 30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA92187B88C700FC0BD2 /* Percussion 30.mp3 */; };
-		5811AAFB187B88C800FC0BD2 /* Percussion 31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA93187B88C700FC0BD2 /* Percussion 31.mp3 */; };
-		5811AAFC187B88C800FC0BD2 /* Percussion 32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA94187B88C700FC0BD2 /* Percussion 32.mp3 */; };
-		5811AAFD187B88C800FC0BD2 /* Percussion 33.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA95187B88C700FC0BD2 /* Percussion 33.mp3 */; };
-		5811AAFE187B88C800FC0BD2 /* Percussion 34.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA96187B88C700FC0BD2 /* Percussion 34.mp3 */; };
-		5811AAFF187B88C800FC0BD2 /* Percussion 35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA97187B88C700FC0BD2 /* Percussion 35.mp3 */; };
-		5811AB00187B88C800FC0BD2 /* Percussion 36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA98187B88C700FC0BD2 /* Percussion 36.mp3 */; };
-		5811AB01187B88C800FC0BD2 /* Percussion 37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA99187B88C700FC0BD2 /* Percussion 37.mp3 */; };
-		5811AB02187B88C800FC0BD2 /* Percussion 38.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA9A187B88C700FC0BD2 /* Percussion 38.mp3 */; };
-		5811AB03187B88C800FC0BD2 /* Percussion 39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA9B187B88C700FC0BD2 /* Percussion 39.mp3 */; };
-		5811AB04187B88C800FC0BD2 /* Percussion 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA9C187B88C700FC0BD2 /* Percussion 4.mp3 */; };
-		5811AB05187B88C800FC0BD2 /* Percussion 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA9D187B88C700FC0BD2 /* Percussion 40.mp3 */; };
-		5811AB06187B88C800FC0BD2 /* Percussion 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA9E187B88C700FC0BD2 /* Percussion 41.mp3 */; };
-		5811AB07187B88C800FC0BD2 /* Percussion 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AA9F187B88C700FC0BD2 /* Percussion 42.mp3 */; };
-		5811AB08187B88C800FC0BD2 /* Percussion 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA0187B88C700FC0BD2 /* Percussion 43.mp3 */; };
-		5811AB09187B88C800FC0BD2 /* Percussion 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA1187B88C700FC0BD2 /* Percussion 44.mp3 */; };
-		5811AB0A187B88C800FC0BD2 /* Percussion 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA2187B88C700FC0BD2 /* Percussion 45.mp3 */; };
-		5811AB0B187B88C800FC0BD2 /* Percussion 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA3187B88C700FC0BD2 /* Percussion 46.mp3 */; };
-		5811AB0C187B88C800FC0BD2 /* Percussion 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA4187B88C700FC0BD2 /* Percussion 47.mp3 */; };
-		5811AB0D187B88C800FC0BD2 /* Percussion 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA5187B88C700FC0BD2 /* Percussion 48.mp3 */; };
-		5811AB0E187B88C800FC0BD2 /* Percussion 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA6187B88C700FC0BD2 /* Percussion 49.mp3 */; };
-		5811AB0F187B88C800FC0BD2 /* Percussion 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA7187B88C700FC0BD2 /* Percussion 5.mp3 */; };
-		5811AB10187B88C800FC0BD2 /* Percussion 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA8187B88C700FC0BD2 /* Percussion 50.mp3 */; };
-		5811AB11187B88C800FC0BD2 /* Percussion 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAA9187B88C700FC0BD2 /* Percussion 51.mp3 */; };
-		5811AB12187B88C800FC0BD2 /* Percussion 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAAA187B88C700FC0BD2 /* Percussion 52.mp3 */; };
-		5811AB13187B88C800FC0BD2 /* Percussion 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAAB187B88C700FC0BD2 /* Percussion 53.mp3 */; };
-		5811AB14187B88C800FC0BD2 /* Percussion 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAAC187B88C700FC0BD2 /* Percussion 54.mp3 */; };
-		5811AB15187B88C800FC0BD2 /* Percussion 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAAD187B88C700FC0BD2 /* Percussion 55.mp3 */; };
-		5811AB16187B88C800FC0BD2 /* Percussion 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAAE187B88C700FC0BD2 /* Percussion 56.mp3 */; };
-		5811AB17187B88C800FC0BD2 /* Percussion 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAAF187B88C700FC0BD2 /* Percussion 57.mp3 */; };
-		5811AB18187B88C800FC0BD2 /* Percussion 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB0187B88C700FC0BD2 /* Percussion 58.mp3 */; };
-		5811AB19187B88C800FC0BD2 /* Percussion 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB1187B88C700FC0BD2 /* Percussion 59.mp3 */; };
-		5811AB1A187B88C800FC0BD2 /* Percussion 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB2187B88C700FC0BD2 /* Percussion 6.mp3 */; };
-		5811AB1B187B88C800FC0BD2 /* Percussion 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB3187B88C700FC0BD2 /* Percussion 60.mp3 */; };
-		5811AB1C187B88C800FC0BD2 /* Percussion 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB4187B88C700FC0BD2 /* Percussion 61.mp3 */; };
-		5811AB1D187B88C800FC0BD2 /* Percussion 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB5187B88C700FC0BD2 /* Percussion 62.mp3 */; };
-		5811AB1E187B88C800FC0BD2 /* Percussion 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB6187B88C700FC0BD2 /* Percussion 63.mp3 */; };
-		5811AB1F187B88C800FC0BD2 /* Percussion 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB7187B88C700FC0BD2 /* Percussion 64.mp3 */; };
-		5811AB20187B88C800FC0BD2 /* Percussion 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB8187B88C700FC0BD2 /* Percussion 65.mp3 */; };
-		5811AB21187B88C800FC0BD2 /* Percussion 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAB9187B88C700FC0BD2 /* Percussion 66.mp3 */; };
-		5811AB22187B88C800FC0BD2 /* Percussion 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AABA187B88C700FC0BD2 /* Percussion 67.mp3 */; };
-		5811AB23187B88C800FC0BD2 /* Percussion 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AABB187B88C700FC0BD2 /* Percussion 68.mp3 */; };
-		5811AB24187B88C800FC0BD2 /* Percussion 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AABC187B88C700FC0BD2 /* Percussion 69.mp3 */; };
-		5811AB25187B88C800FC0BD2 /* Percussion 7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AABD187B88C700FC0BD2 /* Percussion 7.mp3 */; };
-		5811AB26187B88C800FC0BD2 /* Percussion 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AABE187B88C700FC0BD2 /* Percussion 70.mp3 */; };
-		5811AB27187B88C800FC0BD2 /* Percussion 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AABF187B88C700FC0BD2 /* Percussion 71.mp3 */; };
-		5811AB28187B88C800FC0BD2 /* Percussion 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC0187B88C700FC0BD2 /* Percussion 72.mp3 */; };
-		5811AB29187B88C800FC0BD2 /* Percussion 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC1187B88C700FC0BD2 /* Percussion 73.mp3 */; };
-		5811AB2A187B88C800FC0BD2 /* Percussion 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC2187B88C700FC0BD2 /* Percussion 74.mp3 */; };
-		5811AB2B187B88C800FC0BD2 /* Percussion 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC3187B88C700FC0BD2 /* Percussion 75.mp3 */; };
-		5811AB2C187B88C800FC0BD2 /* Percussion 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC4187B88C700FC0BD2 /* Percussion 76.mp3 */; };
-		5811AB2D187B88C800FC0BD2 /* Percussion 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC5187B88C700FC0BD2 /* Percussion 77.mp3 */; };
-		5811AB2E187B88C800FC0BD2 /* Percussion 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC6187B88C700FC0BD2 /* Percussion 78.mp3 */; };
-		5811AB2F187B88C800FC0BD2 /* Percussion 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC7187B88C700FC0BD2 /* Percussion 79.mp3 */; };
-		5811AB30187B88C800FC0BD2 /* Percussion 8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC8187B88C700FC0BD2 /* Percussion 8.mp3 */; };
-		5811AB31187B88C800FC0BD2 /* Percussion 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAC9187B88C700FC0BD2 /* Percussion 80.mp3 */; };
-		5811AB32187B88C800FC0BD2 /* Percussion 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AACA187B88C700FC0BD2 /* Percussion 81.mp3 */; };
-		5811AB33187B88C800FC0BD2 /* Percussion 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AACB187B88C700FC0BD2 /* Percussion 82.mp3 */; };
-		5811AB34187B88C800FC0BD2 /* Percussion 83.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AACC187B88C700FC0BD2 /* Percussion 83.mp3 */; };
-		5811AB35187B88C800FC0BD2 /* Percussion 84.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AACD187B88C700FC0BD2 /* Percussion 84.mp3 */; };
-		5811AB36187B88C800FC0BD2 /* Percussion 85.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AACE187B88C700FC0BD2 /* Percussion 85.mp3 */; };
-		5811AB37187B88C800FC0BD2 /* Percussion 86.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AACF187B88C700FC0BD2 /* Percussion 86.mp3 */; };
-		5811AB38187B88C800FC0BD2 /* Percussion 87.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD0187B88C800FC0BD2 /* Percussion 87.mp3 */; };
-		5811AB39187B88C800FC0BD2 /* Percussion 88.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD1187B88C800FC0BD2 /* Percussion 88.mp3 */; };
-		5811AB3A187B88C800FC0BD2 /* Percussion 89.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD2187B88C800FC0BD2 /* Percussion 89.mp3 */; };
-		5811AB3B187B88C800FC0BD2 /* Percussion 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD3187B88C800FC0BD2 /* Percussion 9.mp3 */; };
-		5811AB3C187B88C800FC0BD2 /* Percussion 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD4187B88C800FC0BD2 /* Percussion 90.mp3 */; };
-		5811AB3D187B88C800FC0BD2 /* Percussion 91.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD5187B88C800FC0BD2 /* Percussion 91.mp3 */; };
-		5811AB3E187B88C800FC0BD2 /* Percussion 92.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD6187B88C800FC0BD2 /* Percussion 92.mp3 */; };
-		5811AB3F187B88C800FC0BD2 /* Percussion 93.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD7187B88C800FC0BD2 /* Percussion 93.mp3 */; };
-		5811AB40187B88C800FC0BD2 /* Percussion 94.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD8187B88C800FC0BD2 /* Percussion 94.mp3 */; };
-		5811AB41187B88C800FC0BD2 /* Percussion 95.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AAD9187B88C800FC0BD2 /* Percussion 95.mp3 */; };
-		5811AB42187B88C800FC0BD2 /* Percussion 96.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AADA187B88C800FC0BD2 /* Percussion 96.mp3 */; };
-		5811AB43187B88C800FC0BD2 /* Percussion 97.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AADB187B88C800FC0BD2 /* Percussion 97.mp3 */; };
-		5811AB44187B88C800FC0BD2 /* Percussion 98.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AADC187B88C800FC0BD2 /* Percussion 98.mp3 */; };
-		5811AB45187B88C800FC0BD2 /* Percussion 99.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5811AADD187B88C800FC0BD2 /* Percussion 99.mp3 */; };
 		5811AB46187B88C800FC0BD2 /* Sample Pack INFO in Resources */ = {isa = PBXBuildFile; fileRef = 5811AADE187B88C800FC0BD2 /* Sample Pack INFO */; };
 		5811AB49187B95BA00FC0BD2 /* SEQNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811AB48187B95BA00FC0BD2 /* SEQNote.m */; };
 		581C31F0188F258F00D7AD79 /* CustomStringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 581C31EF188F258F00D7AD79 /* CustomStringCell.m */; };
@@ -136,90 +34,6 @@
 		585916FE18774791002C21B9 /* MeasureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 585916FD18774791002C21B9 /* MeasureView.m */; };
 		587A91A818A5837300CFB154 /* CustomSoundRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 587A91A718A5837300CFB154 /* CustomSoundRecorder.mm */; };
 		587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 587B6EC71885E9720071BE15 /* libz.dylib */; };
-		587C9F791888C0E7001F57C7 /* 808 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F251888C0E7001F57C7 /* 808 1.mp3 */; };
-		587C9F7A1888C0E7001F57C7 /* 808 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F261888C0E7001F57C7 /* 808 2.mp3 */; };
-		587C9F7B1888C0E7001F57C7 /* 808 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F271888C0E7001F57C7 /* 808 3.mp3 */; };
-		587C9F7C1888C0E7001F57C7 /* 808 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F281888C0E7001F57C7 /* 808 4.mp3 */; };
-		587C9F7D1888C0E7001F57C7 /* 808 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F291888C0E7001F57C7 /* 808 5.mp3 */; };
-		587C9F7E1888C0E7001F57C7 /* 808 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F2A1888C0E7001F57C7 /* 808 6.mp3 */; };
-		587C9F7F1888C0E7001F57C7 /* Chiptune 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F2B1888C0E7001F57C7 /* Chiptune 1.mp3 */; };
-		587C9F801888C0E7001F57C7 /* Chiptune 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F2C1888C0E7001F57C7 /* Chiptune 2.mp3 */; };
-		587C9F811888C0E7001F57C7 /* Chiptune 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F2D1888C0E7001F57C7 /* Chiptune 3.mp3 */; };
-		587C9F821888C0E7001F57C7 /* Chiptune 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F2E1888C0E7001F57C7 /* Chiptune 4.mp3 */; };
-		587C9F831888C0E7001F57C7 /* Chiptune 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F2F1888C0E7001F57C7 /* Chiptune 5.mp3 */; };
-		587C9F841888C0E7001F57C7 /* Chiptune 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F301888C0E7001F57C7 /* Chiptune 6.mp3 */; };
-		587C9F851888C0E7001F57C7 /* Dubstep 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F311888C0E7001F57C7 /* Dubstep 1.mp3 */; };
-		587C9F861888C0E7001F57C7 /* Dubstep 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F321888C0E7001F57C7 /* Dubstep 2.mp3 */; };
-		587C9F871888C0E7001F57C7 /* Dubstep 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F331888C0E7001F57C7 /* Dubstep 3.mp3 */; };
-		587C9F881888C0E7001F57C7 /* Dubstep 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F341888C0E7001F57C7 /* Dubstep 4.mp3 */; };
-		587C9F891888C0E7001F57C7 /* Dubstep 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F351888C0E7001F57C7 /* Dubstep 5.mp3 */; };
-		587C9F8A1888C0E7001F57C7 /* Dubstep 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F361888C0E7001F57C7 /* Dubstep 6.mp3 */; };
-		587C9F8B1888C0E7001F57C7 /* Guitar 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F371888C0E7001F57C7 /* Guitar 1.mp3 */; };
-		587C9F8C1888C0E7001F57C7 /* Guitar 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F381888C0E7001F57C7 /* Guitar 2.mp3 */; };
-		587C9F8D1888C0E7001F57C7 /* Guitar 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F391888C0E7001F57C7 /* Guitar 3.mp3 */; };
-		587C9F8E1888C0E7001F57C7 /* Guitar 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F3A1888C0E7001F57C7 /* Guitar 4.mp3 */; };
-		587C9F8F1888C0E7001F57C7 /* Guitar 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F3B1888C0E7001F57C7 /* Guitar 5.mp3 */; };
-		587C9F901888C0E7001F57C7 /* Guitar 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F3C1888C0E7001F57C7 /* Guitar 6.mp3 */; };
-		587C9F911888C0E7001F57C7 /* House 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F3D1888C0E7001F57C7 /* House 1.mp3 */; };
-		587C9F921888C0E7001F57C7 /* House 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F3E1888C0E7001F57C7 /* House 2.mp3 */; };
-		587C9F931888C0E7001F57C7 /* House 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F3F1888C0E7001F57C7 /* House 3.mp3 */; };
-		587C9F941888C0E7001F57C7 /* House 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F401888C0E7001F57C7 /* House 4.mp3 */; };
-		587C9F951888C0E7001F57C7 /* House 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F411888C0E7001F57C7 /* House 5.mp3 */; };
-		587C9F961888C0E7001F57C7 /* House 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F421888C0E7001F57C7 /* House 6.mp3 */; };
-		587C9F971888C0E7001F57C7 /* Percussion 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F431888C0E7001F57C7 /* Percussion 1.mp3 */; };
-		587C9F981888C0E7001F57C7 /* Percussion 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F441888C0E7001F57C7 /* Percussion 2.mp3 */; };
-		587C9F991888C0E7001F57C7 /* Percussion 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F451888C0E7001F57C7 /* Percussion 3.mp3 */; };
-		587C9F9A1888C0E7001F57C7 /* Percussion 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F461888C0E7001F57C7 /* Percussion 4.mp3 */; };
-		587C9F9B1888C0E7001F57C7 /* Percussion 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F471888C0E7001F57C7 /* Percussion 5.mp3 */; };
-		587C9F9C1888C0E7001F57C7 /* Percussion 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F481888C0E7001F57C7 /* Percussion 6.mp3 */; };
-		587C9F9D1888C0E7001F57C7 /* Piano 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F491888C0E7001F57C7 /* Piano 1.mp3 */; };
-		587C9F9E1888C0E7001F57C7 /* Piano 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F4A1888C0E7001F57C7 /* Piano 2.mp3 */; };
-		587C9F9F1888C0E7001F57C7 /* Piano 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F4B1888C0E7001F57C7 /* Piano 3.mp3 */; };
-		587C9FA01888C0E7001F57C7 /* Piano 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F4C1888C0E7001F57C7 /* Piano 4.mp3 */; };
-		587C9FA11888C0E7001F57C7 /* Piano 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F4D1888C0E7001F57C7 /* Piano 5.mp3 */; };
-		587C9FA21888C0E7001F57C7 /* Piano 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F4E1888C0E7001F57C7 /* Piano 6.mp3 */; };
-		587C9FA31888C0E7001F57C7 /* Piano II 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F4F1888C0E7001F57C7 /* Piano II 1.mp3 */; };
-		587C9FA41888C0E7001F57C7 /* Piano II 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F501888C0E7001F57C7 /* Piano II 2.mp3 */; };
-		587C9FA51888C0E7001F57C7 /* Piano II 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F511888C0E7001F57C7 /* Piano II 3.mp3 */; };
-		587C9FA61888C0E7001F57C7 /* Piano II 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F521888C0E7001F57C7 /* Piano II 4.mp3 */; };
-		587C9FA71888C0E7001F57C7 /* Piano II 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F531888C0E7001F57C7 /* Piano II 5.mp3 */; };
-		587C9FA81888C0E7001F57C7 /* Piano II 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F541888C0E7001F57C7 /* Piano II 6.mp3 */; };
-		587C9FA91888C0E7001F57C7 /* Pluck 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F551888C0E7001F57C7 /* Pluck 1.mp3 */; };
-		587C9FAA1888C0E7001F57C7 /* Pluck 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F561888C0E7001F57C7 /* Pluck 2.mp3 */; };
-		587C9FAB1888C0E7001F57C7 /* Pluck 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F571888C0E7001F57C7 /* Pluck 3.mp3 */; };
-		587C9FAC1888C0E7001F57C7 /* Pluck 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F581888C0E7001F57C7 /* Pluck 4.mp3 */; };
-		587C9FAD1888C0E7001F57C7 /* Pluck 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F591888C0E7001F57C7 /* Pluck 5.mp3 */; };
-		587C9FAE1888C0E7001F57C7 /* Pluck 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F5A1888C0E7001F57C7 /* Pluck 6.mp3 */; };
-		587C9FAF1888C0E7001F57C7 /* Rock 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F5B1888C0E7001F57C7 /* Rock 1.mp3 */; };
-		587C9FB01888C0E7001F57C7 /* Rock 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F5C1888C0E7001F57C7 /* Rock 2.mp3 */; };
-		587C9FB11888C0E7001F57C7 /* Rock 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F5D1888C0E7001F57C7 /* Rock 3.mp3 */; };
-		587C9FB21888C0E7001F57C7 /* Rock 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F5E1888C0E7001F57C7 /* Rock 4.mp3 */; };
-		587C9FB31888C0E7001F57C7 /* Rock 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F5F1888C0E7001F57C7 /* Rock 5.mp3 */; };
-		587C9FB41888C0E7001F57C7 /* Rock 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F601888C0E7001F57C7 /* Rock 6.mp3 */; };
-		587C9FB51888C0E7001F57C7 /* Trombone 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F611888C0E7001F57C7 /* Trombone 1.mp3 */; };
-		587C9FB61888C0E7001F57C7 /* Trombone 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F621888C0E7001F57C7 /* Trombone 2.mp3 */; };
-		587C9FB71888C0E7001F57C7 /* Trombone 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F631888C0E7001F57C7 /* Trombone 3.mp3 */; };
-		587C9FB81888C0E7001F57C7 /* Trombone 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F641888C0E7001F57C7 /* Trombone 4.mp3 */; };
-		587C9FB91888C0E7001F57C7 /* Trombone 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F651888C0E7001F57C7 /* Trombone 5.mp3 */; };
-		587C9FBA1888C0E7001F57C7 /* Trombone 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F661888C0E7001F57C7 /* Trombone 6.mp3 */; };
-		587C9FBB1888C0E7001F57C7 /* Vibraphone 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F671888C0E7001F57C7 /* Vibraphone 1.mp3 */; };
-		587C9FBC1888C0E7001F57C7 /* Vibraphone 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F681888C0E7001F57C7 /* Vibraphone 2.mp3 */; };
-		587C9FBD1888C0E7001F57C7 /* Vibraphone 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F691888C0E7001F57C7 /* Vibraphone 3.mp3 */; };
-		587C9FBE1888C0E7001F57C7 /* Vibraphone 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F6A1888C0E7001F57C7 /* Vibraphone 4.mp3 */; };
-		587C9FBF1888C0E7001F57C7 /* Vibraphone 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F6B1888C0E7001F57C7 /* Vibraphone 5.mp3 */; };
-		587C9FC01888C0E7001F57C7 /* Vibraphone 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F6C1888C0E7001F57C7 /* Vibraphone 6.mp3 */; };
-		587C9FC11888C0E7001F57C7 /* Violin 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F6D1888C0E7001F57C7 /* Violin 1.mp3 */; };
-		587C9FC21888C0E7001F57C7 /* Violin 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F6E1888C0E7001F57C7 /* Violin 2.mp3 */; };
-		587C9FC31888C0E7001F57C7 /* Violin 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F6F1888C0E7001F57C7 /* Violin 3.mp3 */; };
-		587C9FC41888C0E7001F57C7 /* Violin 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F701888C0E7001F57C7 /* Violin 4.mp3 */; };
-		587C9FC51888C0E7001F57C7 /* Violin 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F711888C0E7001F57C7 /* Violin 5.mp3 */; };
-		587C9FC61888C0E7001F57C7 /* Violin 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F721888C0E7001F57C7 /* Violin 6.mp3 */; };
-		587C9FC71888C0E7001F57C7 /* WubWub 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F731888C0E7001F57C7 /* WubWub 1.mp3 */; };
-		587C9FC81888C0E7001F57C7 /* WubWub 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F741888C0E7001F57C7 /* WubWub 2.mp3 */; };
-		587C9FC91888C0E7001F57C7 /* WubWub 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F751888C0E7001F57C7 /* WubWub 3.mp3 */; };
-		587C9FCA1888C0E7001F57C7 /* WubWub 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F761888C0E7001F57C7 /* WubWub 4.mp3 */; };
-		587C9FCB1888C0E7001F57C7 /* WubWub 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F771888C0E7001F57C7 /* WubWub 5.mp3 */; };
-		587C9FCC1888C0E7001F57C7 /* WubWub 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 587C9F781888C0E7001F57C7 /* WubWub 6.mp3 */; };
 		58868EDA187619ED00B469C2 /* PlayControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58868ED8187619ED00B469C2 /* PlayControlViewController.m */; };
 		58868EDB187619ED00B469C2 /* BottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58868ED9187619ED00B469C2 /* BottomBar.xib */; };
 		588BF9E018AC4F380086E816 /* OptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BF9DF18AC4F370086E816 /* OptionsView.xib */; };
@@ -266,13 +80,6 @@
 		58D6176E1863BF5E001EB327 /* Sequence9.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D617631863BF5E001EB327 /* Sequence9.png */; };
 		58D6960D1864D20A00113AF2 /* SequencerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D6960B1864D20A00113AF2 /* SequencerViewController.m */; };
 		58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D6960C1864D20A00113AF2 /* SequencerViewController.xib */; };
-		58E635301889FD800036E4F1 /* Bacon 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58E6352A1889FD800036E4F1 /* Bacon 1.mp3 */; };
-		58E635311889FD800036E4F1 /* Bacon 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58E6352B1889FD800036E4F1 /* Bacon 2.mp3 */; };
-		58E635321889FD800036E4F1 /* Bacon 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58E6352C1889FD800036E4F1 /* Bacon 3.mp3 */; };
-		58E635331889FD800036E4F1 /* Bacon 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58E6352D1889FD800036E4F1 /* Bacon 4.mp3 */; };
-		58E635341889FD800036E4F1 /* Bacon 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58E6352E1889FD800036E4F1 /* Bacon 5.mp3 */; };
-		58E635351889FD800036E4F1 /* Bacon 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58E6352F1889FD800036E4F1 /* Bacon 6.mp3 */; };
-		58EB9D2C188F121300DCBA1C /* Silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58EB9D2B188F121300DCBA1C /* Silence.mp3 */; };
 		58EEB7AA1868EEAB0089BFD9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */; };
 		58EEB7AC1868EEB50089BFD9 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AB1868EEB50089BFD9 /* CoreMIDI.framework */; };
 		58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEB7AD1868EEC20089BFD9 /* AudioToolbox.framework */; };
@@ -307,12 +114,6 @@
 		6DAA159018C12525003DAB30 /* Sequencer_Icon80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */; };
 		6DAA159118C12525003DAB30 /* Sequencer_Icon120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */; };
 		6DAA159318C66363003DAB30 /* Save_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159218C66363003DAB30 /* Save_Icon.png */; };
-		6DAA159A18C6A68D003DAB30 /* Double Bass 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159418C6A68D003DAB30 /* Double Bass 1.mp3 */; };
-		6DAA159B18C6A68D003DAB30 /* Double Bass 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159518C6A68D003DAB30 /* Double Bass 2.mp3 */; };
-		6DAA159C18C6A68D003DAB30 /* Double Bass 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159618C6A68D003DAB30 /* Double Bass 3.mp3 */; };
-		6DAA159D18C6A68D003DAB30 /* Double Bass 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159718C6A68D003DAB30 /* Double Bass 4.mp3 */; };
-		6DAA159E18C6A68D003DAB30 /* Double Bass 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159818C6A68D003DAB30 /* Double Bass 5.mp3 */; };
-		6DAA159F18C6A68D003DAB30 /* Double Bass 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA159918C6A68D003DAB30 /* Double Bass 6.mp3 */; };
 		6DAB0CE918C7B8F400FFBDE6 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAB0CE318C7B8F400FFBDE6 /* libTestFlight.a */; };
 		6DAB0CEA18C7B8F400FFBDE6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DAB0CE418C7B8F400FFBDE6 /* README.md */; };
 		6DAB0CEB18C7B8F400FFBDE6 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DAB0CE518C7B8F400FFBDE6 /* release_notes.md */; };
@@ -322,6 +123,103 @@
 		6DAF30DC18D2468500036958 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAF30DB18D2468500036958 /* TutorialViewController.m */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
+		6DEAB49018D78FF800833D9C /* Piano_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB42918D78FF700833D9C /* Piano_A.mp3 */; };
+		6DEAB49118D78FF800833D9C /* Piano_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB42A18D78FF700833D9C /* Piano_B.mp3 */; };
+		6DEAB49218D78FF800833D9C /* Piano_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB42B18D78FF700833D9C /* Piano_C.mp3 */; };
+		6DEAB49318D78FF800833D9C /* Piano_D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB42C18D78FF700833D9C /* Piano_D.mp3 */; };
+		6DEAB49418D78FF800833D9C /* Piano_E.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB42D18D78FF700833D9C /* Piano_E.mp3 */; };
+		6DEAB49518D78FF800833D9C /* Piano_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB42E18D78FF700833D9C /* Piano_G.mp3 */; };
+		6DEAB49618D78FF800833D9C /* Pluck_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43018D78FF700833D9C /* Pluck_C.mp3 */; };
+		6DEAB49718D78FF800833D9C /* Pluck_D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43118D78FF700833D9C /* Pluck_D.mp3 */; };
+		6DEAB49818D78FF800833D9C /* Pluck_E.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43218D78FF700833D9C /* Pluck_E.mp3 */; };
+		6DEAB49918D78FF800833D9C /* Pluck_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43318D78FF700833D9C /* Pluck_G.mp3 */; };
+		6DEAB49A18D78FF800833D9C /* Pluck_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43418D78FF700833D9C /* Pluck_A.mp3 */; };
+		6DEAB49B18D78FF800833D9C /* Pluck_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43518D78FF700833D9C /* Pluck_B.mp3 */; };
+		6DEAB49C18D78FF800833D9C /* Vibraphone_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43718D78FF700833D9C /* Vibraphone_C.mp3 */; };
+		6DEAB49D18D78FF800833D9C /* Vibraphone_D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43818D78FF700833D9C /* Vibraphone_D.mp3 */; };
+		6DEAB49E18D78FF800833D9C /* Vibraphone_E.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43918D78FF700833D9C /* Vibraphone_E.mp3 */; };
+		6DEAB49F18D78FF800833D9C /* Vibraphone_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43A18D78FF700833D9C /* Vibraphone_G.mp3 */; };
+		6DEAB4A018D78FF800833D9C /* Vibraphone_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43B18D78FF700833D9C /* Vibraphone_A.mp3 */; };
+		6DEAB4A118D78FF800833D9C /* Vibraphone_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43C18D78FF700833D9C /* Vibraphone_B.mp3 */; };
+		6DEAB4A218D78FF800833D9C /* Double Bass_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB43F18D78FF700833D9C /* Double Bass_C.mp3 */; };
+		6DEAB4A318D78FF800833D9C /* Double Bass_D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44018D78FF700833D9C /* Double Bass_D.mp3 */; };
+		6DEAB4A418D78FF800833D9C /* Double Bass_E.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44118D78FF700833D9C /* Double Bass_E.mp3 */; };
+		6DEAB4A518D78FF800833D9C /* Double Bass_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44218D78FF700833D9C /* Double Bass_G.mp3 */; };
+		6DEAB4A618D78FF800833D9C /* Double Bass_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44318D78FF700833D9C /* Double Bass_A.mp3 */; };
+		6DEAB4A718D78FF800833D9C /* Double Bass_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44418D78FF700833D9C /* Double Bass_B.mp3 */; };
+		6DEAB4A818D78FF800833D9C /* Guitar_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44618D78FF700833D9C /* Guitar_C.mp3 */; };
+		6DEAB4A918D78FF800833D9C /* Guitar_D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44718D78FF700833D9C /* Guitar_D.mp3 */; };
+		6DEAB4AA18D78FF800833D9C /* Guitar_E.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44818D78FF700833D9C /* Guitar_E.mp3 */; };
+		6DEAB4AB18D78FF800833D9C /* Guitar_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44918D78FF700833D9C /* Guitar_G.mp3 */; };
+		6DEAB4AC18D78FF800833D9C /* Guitar_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44A18D78FF700833D9C /* Guitar_A.mp3 */; };
+		6DEAB4AD18D78FF800833D9C /* Guitar_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44B18D78FF700833D9C /* Guitar_B.mp3 */; };
+		6DEAB4AE18D78FF800833D9C /* Violin_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44D18D78FF700833D9C /* Violin_C.mp3 */; };
+		6DEAB4AF18D78FF800833D9C /* Violin_D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44E18D78FF700833D9C /* Violin_D.mp3 */; };
+		6DEAB4B018D78FF800833D9C /* Violin_E.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB44F18D78FF700833D9C /* Violin_E.mp3 */; };
+		6DEAB4B118D78FF800833D9C /* Violin_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB45018D78FF700833D9C /* Violin_G.mp3 */; };
+		6DEAB4B218D78FF800833D9C /* Violin_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB45118D78FF700833D9C /* Violin_A.mp3 */; };
+		6DEAB4B318D78FF800833D9C /* Violin_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB45218D78FF700833D9C /* Violin_B.mp3 */; };
+		6DEAB4BA18D78FF800833D9C /* Rock_Closed Hat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB45D18D78FF700833D9C /* Rock_Closed Hat.mp3 */; };
+		6DEAB4BB18D78FF800833D9C /* Rock_Crash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB45E18D78FF700833D9C /* Rock_Crash.mp3 */; };
+		6DEAB4BC18D78FF800833D9C /* Rock_Kick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB45F18D78FF700833D9C /* Rock_Kick.mp3 */; };
+		6DEAB4BD18D78FF800833D9C /* Rock_Open Hat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46018D78FF700833D9C /* Rock_Open Hat.mp3 */; };
+		6DEAB4BE18D78FF800833D9C /* Rock_Snare.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46118D78FF700833D9C /* Rock_Snare.mp3 */; };
+		6DEAB4BF18D78FF800833D9C /* Rock_Tom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46218D78FF700833D9C /* Rock_Tom.mp3 */; };
+		6DEAB4C018D78FF800833D9C /* 808_Clap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46518D78FF800833D9C /* 808_Clap.mp3 */; };
+		6DEAB4C118D78FF800833D9C /* 808_Closed Hat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46618D78FF800833D9C /* 808_Closed Hat.mp3 */; };
+		6DEAB4C218D78FF800833D9C /* 808_Kick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46718D78FF800833D9C /* 808_Kick.mp3 */; };
+		6DEAB4C318D78FF800833D9C /* 808_Open Hat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46818D78FF800833D9C /* 808_Open Hat.mp3 */; };
+		6DEAB4C418D78FF800833D9C /* 808_Snare.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46918D78FF800833D9C /* 808_Snare.mp3 */; };
+		6DEAB4C518D78FF800833D9C /* 808_Tom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46A18D78FF800833D9C /* 808_Tom.mp3 */; };
+		6DEAB4C618D78FF800833D9C /* Chiptune_Beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46C18D78FF800833D9C /* Chiptune_Beep.mp3 */; };
+		6DEAB4C718D78FF800833D9C /* Chiptune_Kick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46D18D78FF800833D9C /* Chiptune_Kick.mp3 */; };
+		6DEAB4C818D78FF800833D9C /* Chiptune_Lazer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46E18D78FF800833D9C /* Chiptune_Lazer.mp3 */; };
+		6DEAB4C918D78FF800833D9C /* Chiptune_Siren.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB46F18D78FF800833D9C /* Chiptune_Siren.mp3 */; };
+		6DEAB4CA18D78FF800833D9C /* Chiptune_Snare.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47018D78FF800833D9C /* Chiptune_Snare.mp3 */; };
+		6DEAB4CB18D78FF800833D9C /* Chiptune_Triangle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47118D78FF800833D9C /* Chiptune_Triangle.mp3 */; };
+		6DEAB4CC18D78FF800833D9C /* Dubstep_Clap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47318D78FF800833D9C /* Dubstep_Clap.mp3 */; };
+		6DEAB4CD18D78FF800833D9C /* Dubstep_Closed Hat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47418D78FF800833D9C /* Dubstep_Closed Hat.mp3 */; };
+		6DEAB4CE18D78FF800833D9C /* Dubstep_Kick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47518D78FF800833D9C /* Dubstep_Kick.mp3 */; };
+		6DEAB4CF18D78FF800833D9C /* Dubstep_Open Hat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47618D78FF800833D9C /* Dubstep_Open Hat.mp3 */; };
+		6DEAB4D018D78FF800833D9C /* Dubstep_Shaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47718D78FF800833D9C /* Dubstep_Shaker.mp3 */; };
+		6DEAB4D118D78FF800833D9C /* Dubstep_Snare.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47818D78FF800833D9C /* Dubstep_Snare.mp3 */; };
+		6DEAB4D218D78FF800833D9C /* House_Clap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47A18D78FF800833D9C /* House_Clap.mp3 */; };
+		6DEAB4D318D78FF800833D9C /* House_Snare.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47B18D78FF800833D9C /* House_Snare.mp3 */; };
+		6DEAB4D418D78FF800833D9C /* House_Closed Hat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47C18D78FF800833D9C /* House_Closed Hat.mp3 */; };
+		6DEAB4D518D78FF800833D9C /* House_Kick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47D18D78FF800833D9C /* House_Kick.mp3 */; };
+		6DEAB4D618D78FF800833D9C /* House_Open Hat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47E18D78FF800833D9C /* House_Open Hat.mp3 */; };
+		6DEAB4D718D78FF800833D9C /* House_Wood Block.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB47F18D78FF800833D9C /* House_Wood Block.mp3 */; };
+		6DEAB4D818D78FF800833D9C /* WubWub_Airhorn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48118D78FF800833D9C /* WubWub_Airhorn.mp3 */; };
+		6DEAB4D918D78FF800833D9C /* WubWub_Arp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48218D78FF800833D9C /* WubWub_Arp.mp3 */; };
+		6DEAB4DA18D78FF800833D9C /* WubWub_Bass Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48318D78FF800833D9C /* WubWub_Bass Synth.mp3 */; };
+		6DEAB4DB18D78FF800833D9C /* WubWub_Clap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48418D78FF800833D9C /* WubWub_Clap.mp3 */; };
+		6DEAB4DC18D78FF800833D9C /* WubWub_Kick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48518D78FF800833D9C /* WubWub_Kick.mp3 */; };
+		6DEAB4DD18D78FF800833D9C /* WubWub_Womp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48618D78FF800833D9C /* WubWub_Womp.mp3 */; };
+		6DEAB4DE18D78FF800833D9C /* Silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48718D78FF800833D9C /* Silence.mp3 */; };
+		6DEAB4DF18D78FF800833D9C /* Sounds_-con.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48A18D78FF800833D9C /* Sounds_-con.mp3 */; };
+		6DEAB4E018D78FF800833D9C /* Sounds_Ba-.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48B18D78FF800833D9C /* Sounds_Ba-.mp3 */; };
+		6DEAB4E118D78FF800833D9C /* Sounds_Bacon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48C18D78FF800833D9C /* Sounds_Bacon.mp3 */; };
+		6DEAB4E218D78FF800833D9C /* Sounds_I'm Bacon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48D18D78FF800833D9C /* Sounds_I'm Bacon.mp3 */; };
+		6DEAB4E318D78FF800833D9C /* Sounds_I'm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48E18D78FF800833D9C /* Sounds_I'm.mp3 */; };
+		6DEAB4E418D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48F18D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 */; };
+		6DEAB4EC18D790F800833D9C /* Trombone_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4E618D790F800833D9C /* Trombone_A.mp3 */; };
+		6DEAB4ED18D790F800833D9C /* Trombone_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4E718D790F800833D9C /* Trombone_B.mp3 */; };
+		6DEAB4EE18D790F800833D9C /* Trombone_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4E818D790F800833D9C /* Trombone_C.mp3 */; };
+		6DEAB4EF18D790F800833D9C /* Trombone_D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4E918D790F800833D9C /* Trombone_D.mp3 */; };
+		6DEAB4F018D790F800833D9C /* Trombone_E.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4EA18D790F800833D9C /* Trombone_E.mp3 */; };
+		6DEAB4F118D790F800833D9C /* Trombone_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4EB18D790F800833D9C /* Trombone_G.mp3 */; };
+		6DEAB4F918D7976400833D9C /* Flute_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4F318D7976400833D9C /* Flute_A.mp3 */; };
+		6DEAB4FA18D7976400833D9C /* Flute_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4F418D7976400833D9C /* Flute_B.mp3 */; };
+		6DEAB4FB18D7976400833D9C /* Flute_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4F518D7976400833D9C /* Flute_C.mp3 */; };
+		6DEAB4FC18D7976400833D9C /* Flute_D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4F618D7976400833D9C /* Flute_D.mp3 */; };
+		6DEAB4FD18D7976400833D9C /* Flute_E.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4F718D7976400833D9C /* Flute_E.mp3 */; };
+		6DEAB4FE18D7976400833D9C /* Flute_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4F818D7976400833D9C /* Flute_G.mp3 */; };
+		6DEAB50618D7BB7C00833D9C /* Hand Drum_Djembe Kick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB50018D7BB7C00833D9C /* Hand Drum_Djembe Kick.mp3 */; };
+		6DEAB50718D7BB7C00833D9C /* Hand Drum_Djembe High.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB50118D7BB7C00833D9C /* Hand Drum_Djembe High.mp3 */; };
+		6DEAB50818D7BB7C00833D9C /* Hand Drum_Tom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB50218D7BB7C00833D9C /* Hand Drum_Tom.mp3 */; };
+		6DEAB50918D7BB7C00833D9C /* Hand Drum_Shaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB50318D7BB7C00833D9C /* Hand Drum_Shaker.mp3 */; };
+		6DEAB50A18D7BB7C00833D9C /* Hand Drum_Knock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB50418D7BB7C00833D9C /* Hand Drum_Knock.mp3 */; };
+		6DEAB50B18D7BB7C00833D9C /* Hand Drum_Clink.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB50518D7BB7C00833D9C /* Hand Drum_Clink.mp3 */; };
 		6DF6BC7518CE5E1800D20EC7 /* defaultSet in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6BC7418CE5E1800D20EC7 /* defaultSet */; };
 		6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */; };
 		6DFDB02018C0278D004D573B /* BottomBar_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01F18C0278D004D573B /* BottomBar_4.xib */; };
@@ -348,108 +246,6 @@
 		580A51F61864DFF50077240B /* Icon_Percussion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Percussion.png; sourceTree = "<group>"; };
 		580A51F71864DFF50077240B /* Icon_Piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Piano.png; sourceTree = "<group>"; };
 		580A51F91864DFF50077240B /* Icon_WubWub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_WubWub.png; sourceTree = "<group>"; };
-		5811AA78187B88C700FC0BD2 /* Percussion 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 0.mp3"; sourceTree = "<group>"; };
-		5811AA79187B88C700FC0BD2 /* Percussion 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 1.mp3"; sourceTree = "<group>"; };
-		5811AA7A187B88C700FC0BD2 /* Percussion 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 10.mp3"; sourceTree = "<group>"; };
-		5811AA7B187B88C700FC0BD2 /* Percussion 100.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 100.mp3"; sourceTree = "<group>"; };
-		5811AA7C187B88C700FC0BD2 /* Percussion 101.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 101.mp3"; sourceTree = "<group>"; };
-		5811AA7D187B88C700FC0BD2 /* Percussion 11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 11.mp3"; sourceTree = "<group>"; };
-		5811AA7E187B88C700FC0BD2 /* Percussion 12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 12.mp3"; sourceTree = "<group>"; };
-		5811AA7F187B88C700FC0BD2 /* Percussion 13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 13.mp3"; sourceTree = "<group>"; };
-		5811AA80187B88C700FC0BD2 /* Percussion 14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 14.mp3"; sourceTree = "<group>"; };
-		5811AA81187B88C700FC0BD2 /* Percussion 15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 15.mp3"; sourceTree = "<group>"; };
-		5811AA82187B88C700FC0BD2 /* Percussion 16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 16.mp3"; sourceTree = "<group>"; };
-		5811AA83187B88C700FC0BD2 /* Percussion 17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 17.mp3"; sourceTree = "<group>"; };
-		5811AA84187B88C700FC0BD2 /* Percussion 18.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 18.mp3"; sourceTree = "<group>"; };
-		5811AA85187B88C700FC0BD2 /* Percussion 19.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 19.mp3"; sourceTree = "<group>"; };
-		5811AA86187B88C700FC0BD2 /* Percussion 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 2.mp3"; sourceTree = "<group>"; };
-		5811AA87187B88C700FC0BD2 /* Percussion 20.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 20.mp3"; sourceTree = "<group>"; };
-		5811AA88187B88C700FC0BD2 /* Percussion 21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 21.mp3"; sourceTree = "<group>"; };
-		5811AA89187B88C700FC0BD2 /* Percussion 22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 22.mp3"; sourceTree = "<group>"; };
-		5811AA8A187B88C700FC0BD2 /* Percussion 23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 23.mp3"; sourceTree = "<group>"; };
-		5811AA8B187B88C700FC0BD2 /* Percussion 24.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 24.mp3"; sourceTree = "<group>"; };
-		5811AA8C187B88C700FC0BD2 /* Percussion 25.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 25.mp3"; sourceTree = "<group>"; };
-		5811AA8D187B88C700FC0BD2 /* Percussion 26.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 26.mp3"; sourceTree = "<group>"; };
-		5811AA8E187B88C700FC0BD2 /* Percussion 27.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 27.mp3"; sourceTree = "<group>"; };
-		5811AA8F187B88C700FC0BD2 /* Percussion 28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 28.mp3"; sourceTree = "<group>"; };
-		5811AA90187B88C700FC0BD2 /* Percussion 29.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 29.mp3"; sourceTree = "<group>"; };
-		5811AA91187B88C700FC0BD2 /* Percussion 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 3.mp3"; sourceTree = "<group>"; };
-		5811AA92187B88C700FC0BD2 /* Percussion 30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 30.mp3"; sourceTree = "<group>"; };
-		5811AA93187B88C700FC0BD2 /* Percussion 31.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 31.mp3"; sourceTree = "<group>"; };
-		5811AA94187B88C700FC0BD2 /* Percussion 32.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 32.mp3"; sourceTree = "<group>"; };
-		5811AA95187B88C700FC0BD2 /* Percussion 33.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 33.mp3"; sourceTree = "<group>"; };
-		5811AA96187B88C700FC0BD2 /* Percussion 34.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 34.mp3"; sourceTree = "<group>"; };
-		5811AA97187B88C700FC0BD2 /* Percussion 35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 35.mp3"; sourceTree = "<group>"; };
-		5811AA98187B88C700FC0BD2 /* Percussion 36.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 36.mp3"; sourceTree = "<group>"; };
-		5811AA99187B88C700FC0BD2 /* Percussion 37.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 37.mp3"; sourceTree = "<group>"; };
-		5811AA9A187B88C700FC0BD2 /* Percussion 38.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 38.mp3"; sourceTree = "<group>"; };
-		5811AA9B187B88C700FC0BD2 /* Percussion 39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 39.mp3"; sourceTree = "<group>"; };
-		5811AA9C187B88C700FC0BD2 /* Percussion 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 4.mp3"; sourceTree = "<group>"; };
-		5811AA9D187B88C700FC0BD2 /* Percussion 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 40.mp3"; sourceTree = "<group>"; };
-		5811AA9E187B88C700FC0BD2 /* Percussion 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 41.mp3"; sourceTree = "<group>"; };
-		5811AA9F187B88C700FC0BD2 /* Percussion 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 42.mp3"; sourceTree = "<group>"; };
-		5811AAA0187B88C700FC0BD2 /* Percussion 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 43.mp3"; sourceTree = "<group>"; };
-		5811AAA1187B88C700FC0BD2 /* Percussion 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 44.mp3"; sourceTree = "<group>"; };
-		5811AAA2187B88C700FC0BD2 /* Percussion 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 45.mp3"; sourceTree = "<group>"; };
-		5811AAA3187B88C700FC0BD2 /* Percussion 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 46.mp3"; sourceTree = "<group>"; };
-		5811AAA4187B88C700FC0BD2 /* Percussion 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 47.mp3"; sourceTree = "<group>"; };
-		5811AAA5187B88C700FC0BD2 /* Percussion 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 48.mp3"; sourceTree = "<group>"; };
-		5811AAA6187B88C700FC0BD2 /* Percussion 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 49.mp3"; sourceTree = "<group>"; };
-		5811AAA7187B88C700FC0BD2 /* Percussion 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 5.mp3"; sourceTree = "<group>"; };
-		5811AAA8187B88C700FC0BD2 /* Percussion 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 50.mp3"; sourceTree = "<group>"; };
-		5811AAA9187B88C700FC0BD2 /* Percussion 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 51.mp3"; sourceTree = "<group>"; };
-		5811AAAA187B88C700FC0BD2 /* Percussion 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 52.mp3"; sourceTree = "<group>"; };
-		5811AAAB187B88C700FC0BD2 /* Percussion 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 53.mp3"; sourceTree = "<group>"; };
-		5811AAAC187B88C700FC0BD2 /* Percussion 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 54.mp3"; sourceTree = "<group>"; };
-		5811AAAD187B88C700FC0BD2 /* Percussion 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 55.mp3"; sourceTree = "<group>"; };
-		5811AAAE187B88C700FC0BD2 /* Percussion 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 56.mp3"; sourceTree = "<group>"; };
-		5811AAAF187B88C700FC0BD2 /* Percussion 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 57.mp3"; sourceTree = "<group>"; };
-		5811AAB0187B88C700FC0BD2 /* Percussion 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 58.mp3"; sourceTree = "<group>"; };
-		5811AAB1187B88C700FC0BD2 /* Percussion 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 59.mp3"; sourceTree = "<group>"; };
-		5811AAB2187B88C700FC0BD2 /* Percussion 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 6.mp3"; sourceTree = "<group>"; };
-		5811AAB3187B88C700FC0BD2 /* Percussion 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 60.mp3"; sourceTree = "<group>"; };
-		5811AAB4187B88C700FC0BD2 /* Percussion 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 61.mp3"; sourceTree = "<group>"; };
-		5811AAB5187B88C700FC0BD2 /* Percussion 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 62.mp3"; sourceTree = "<group>"; };
-		5811AAB6187B88C700FC0BD2 /* Percussion 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 63.mp3"; sourceTree = "<group>"; };
-		5811AAB7187B88C700FC0BD2 /* Percussion 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 64.mp3"; sourceTree = "<group>"; };
-		5811AAB8187B88C700FC0BD2 /* Percussion 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 65.mp3"; sourceTree = "<group>"; };
-		5811AAB9187B88C700FC0BD2 /* Percussion 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 66.mp3"; sourceTree = "<group>"; };
-		5811AABA187B88C700FC0BD2 /* Percussion 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 67.mp3"; sourceTree = "<group>"; };
-		5811AABB187B88C700FC0BD2 /* Percussion 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 68.mp3"; sourceTree = "<group>"; };
-		5811AABC187B88C700FC0BD2 /* Percussion 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 69.mp3"; sourceTree = "<group>"; };
-		5811AABD187B88C700FC0BD2 /* Percussion 7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 7.mp3"; sourceTree = "<group>"; };
-		5811AABE187B88C700FC0BD2 /* Percussion 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 70.mp3"; sourceTree = "<group>"; };
-		5811AABF187B88C700FC0BD2 /* Percussion 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 71.mp3"; sourceTree = "<group>"; };
-		5811AAC0187B88C700FC0BD2 /* Percussion 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 72.mp3"; sourceTree = "<group>"; };
-		5811AAC1187B88C700FC0BD2 /* Percussion 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 73.mp3"; sourceTree = "<group>"; };
-		5811AAC2187B88C700FC0BD2 /* Percussion 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 74.mp3"; sourceTree = "<group>"; };
-		5811AAC3187B88C700FC0BD2 /* Percussion 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 75.mp3"; sourceTree = "<group>"; };
-		5811AAC4187B88C700FC0BD2 /* Percussion 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 76.mp3"; sourceTree = "<group>"; };
-		5811AAC5187B88C700FC0BD2 /* Percussion 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 77.mp3"; sourceTree = "<group>"; };
-		5811AAC6187B88C700FC0BD2 /* Percussion 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 78.mp3"; sourceTree = "<group>"; };
-		5811AAC7187B88C700FC0BD2 /* Percussion 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 79.mp3"; sourceTree = "<group>"; };
-		5811AAC8187B88C700FC0BD2 /* Percussion 8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 8.mp3"; sourceTree = "<group>"; };
-		5811AAC9187B88C700FC0BD2 /* Percussion 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 80.mp3"; sourceTree = "<group>"; };
-		5811AACA187B88C700FC0BD2 /* Percussion 81.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 81.mp3"; sourceTree = "<group>"; };
-		5811AACB187B88C700FC0BD2 /* Percussion 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 82.mp3"; sourceTree = "<group>"; };
-		5811AACC187B88C700FC0BD2 /* Percussion 83.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 83.mp3"; sourceTree = "<group>"; };
-		5811AACD187B88C700FC0BD2 /* Percussion 84.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 84.mp3"; sourceTree = "<group>"; };
-		5811AACE187B88C700FC0BD2 /* Percussion 85.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 85.mp3"; sourceTree = "<group>"; };
-		5811AACF187B88C700FC0BD2 /* Percussion 86.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 86.mp3"; sourceTree = "<group>"; };
-		5811AAD0187B88C800FC0BD2 /* Percussion 87.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 87.mp3"; sourceTree = "<group>"; };
-		5811AAD1187B88C800FC0BD2 /* Percussion 88.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 88.mp3"; sourceTree = "<group>"; };
-		5811AAD2187B88C800FC0BD2 /* Percussion 89.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 89.mp3"; sourceTree = "<group>"; };
-		5811AAD3187B88C800FC0BD2 /* Percussion 9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 9.mp3"; sourceTree = "<group>"; };
-		5811AAD4187B88C800FC0BD2 /* Percussion 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 90.mp3"; sourceTree = "<group>"; };
-		5811AAD5187B88C800FC0BD2 /* Percussion 91.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 91.mp3"; sourceTree = "<group>"; };
-		5811AAD6187B88C800FC0BD2 /* Percussion 92.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 92.mp3"; sourceTree = "<group>"; };
-		5811AAD7187B88C800FC0BD2 /* Percussion 93.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 93.mp3"; sourceTree = "<group>"; };
-		5811AAD8187B88C800FC0BD2 /* Percussion 94.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 94.mp3"; sourceTree = "<group>"; };
-		5811AAD9187B88C800FC0BD2 /* Percussion 95.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 95.mp3"; sourceTree = "<group>"; };
-		5811AADA187B88C800FC0BD2 /* Percussion 96.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 96.mp3"; sourceTree = "<group>"; };
-		5811AADB187B88C800FC0BD2 /* Percussion 97.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 97.mp3"; sourceTree = "<group>"; };
-		5811AADC187B88C800FC0BD2 /* Percussion 98.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 98.mp3"; sourceTree = "<group>"; };
-		5811AADD187B88C800FC0BD2 /* Percussion 99.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 99.mp3"; sourceTree = "<group>"; };
 		5811AADE187B88C800FC0BD2 /* Sample Pack INFO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Sample Pack INFO"; sourceTree = "<group>"; };
 		5811AB47187B95BA00FC0BD2 /* SEQNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEQNote.h; sourceTree = "<group>"; };
 		5811AB48187B95BA00FC0BD2 /* SEQNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEQNote.m; sourceTree = "<group>"; };
@@ -481,90 +277,6 @@
 		587A91A718A5837300CFB154 /* CustomSoundRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomSoundRecorder.mm; sourceTree = "<group>"; };
 		587B6EBA1885E6D80071BE15 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		587B6EC71885E9720071BE15 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		587C9F251888C0E7001F57C7 /* 808 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808 1.mp3"; sourceTree = "<group>"; };
-		587C9F261888C0E7001F57C7 /* 808 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808 2.mp3"; sourceTree = "<group>"; };
-		587C9F271888C0E7001F57C7 /* 808 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808 3.mp3"; sourceTree = "<group>"; };
-		587C9F281888C0E7001F57C7 /* 808 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808 4.mp3"; sourceTree = "<group>"; };
-		587C9F291888C0E7001F57C7 /* 808 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808 5.mp3"; sourceTree = "<group>"; };
-		587C9F2A1888C0E7001F57C7 /* 808 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808 6.mp3"; sourceTree = "<group>"; };
-		587C9F2B1888C0E7001F57C7 /* Chiptune 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chiptune 1.mp3"; sourceTree = "<group>"; };
-		587C9F2C1888C0E7001F57C7 /* Chiptune 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chiptune 2.mp3"; sourceTree = "<group>"; };
-		587C9F2D1888C0E7001F57C7 /* Chiptune 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chiptune 3.mp3"; sourceTree = "<group>"; };
-		587C9F2E1888C0E7001F57C7 /* Chiptune 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chiptune 4.mp3"; sourceTree = "<group>"; };
-		587C9F2F1888C0E7001F57C7 /* Chiptune 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chiptune 5.mp3"; sourceTree = "<group>"; };
-		587C9F301888C0E7001F57C7 /* Chiptune 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chiptune 6.mp3"; sourceTree = "<group>"; };
-		587C9F311888C0E7001F57C7 /* Dubstep 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dubstep 1.mp3"; sourceTree = "<group>"; };
-		587C9F321888C0E7001F57C7 /* Dubstep 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dubstep 2.mp3"; sourceTree = "<group>"; };
-		587C9F331888C0E7001F57C7 /* Dubstep 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dubstep 3.mp3"; sourceTree = "<group>"; };
-		587C9F341888C0E7001F57C7 /* Dubstep 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dubstep 4.mp3"; sourceTree = "<group>"; };
-		587C9F351888C0E7001F57C7 /* Dubstep 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dubstep 5.mp3"; sourceTree = "<group>"; };
-		587C9F361888C0E7001F57C7 /* Dubstep 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dubstep 6.mp3"; sourceTree = "<group>"; };
-		587C9F371888C0E7001F57C7 /* Guitar 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Guitar 1.mp3"; sourceTree = "<group>"; };
-		587C9F381888C0E7001F57C7 /* Guitar 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Guitar 2.mp3"; sourceTree = "<group>"; };
-		587C9F391888C0E7001F57C7 /* Guitar 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Guitar 3.mp3"; sourceTree = "<group>"; };
-		587C9F3A1888C0E7001F57C7 /* Guitar 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Guitar 4.mp3"; sourceTree = "<group>"; };
-		587C9F3B1888C0E7001F57C7 /* Guitar 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Guitar 5.mp3"; sourceTree = "<group>"; };
-		587C9F3C1888C0E7001F57C7 /* Guitar 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Guitar 6.mp3"; sourceTree = "<group>"; };
-		587C9F3D1888C0E7001F57C7 /* House 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "House 1.mp3"; sourceTree = "<group>"; };
-		587C9F3E1888C0E7001F57C7 /* House 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "House 2.mp3"; sourceTree = "<group>"; };
-		587C9F3F1888C0E7001F57C7 /* House 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "House 3.mp3"; sourceTree = "<group>"; };
-		587C9F401888C0E7001F57C7 /* House 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "House 4.mp3"; sourceTree = "<group>"; };
-		587C9F411888C0E7001F57C7 /* House 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "House 5.mp3"; sourceTree = "<group>"; };
-		587C9F421888C0E7001F57C7 /* House 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "House 6.mp3"; sourceTree = "<group>"; };
-		587C9F431888C0E7001F57C7 /* Percussion 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 1.mp3"; sourceTree = "<group>"; };
-		587C9F441888C0E7001F57C7 /* Percussion 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 2.mp3"; sourceTree = "<group>"; };
-		587C9F451888C0E7001F57C7 /* Percussion 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 3.mp3"; sourceTree = "<group>"; };
-		587C9F461888C0E7001F57C7 /* Percussion 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 4.mp3"; sourceTree = "<group>"; };
-		587C9F471888C0E7001F57C7 /* Percussion 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 5.mp3"; sourceTree = "<group>"; };
-		587C9F481888C0E7001F57C7 /* Percussion 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Percussion 6.mp3"; sourceTree = "<group>"; };
-		587C9F491888C0E7001F57C7 /* Piano 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 1.mp3"; sourceTree = "<group>"; };
-		587C9F4A1888C0E7001F57C7 /* Piano 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 2.mp3"; sourceTree = "<group>"; };
-		587C9F4B1888C0E7001F57C7 /* Piano 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 3.mp3"; sourceTree = "<group>"; };
-		587C9F4C1888C0E7001F57C7 /* Piano 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 4.mp3"; sourceTree = "<group>"; };
-		587C9F4D1888C0E7001F57C7 /* Piano 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 5.mp3"; sourceTree = "<group>"; };
-		587C9F4E1888C0E7001F57C7 /* Piano 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 6.mp3"; sourceTree = "<group>"; };
-		587C9F4F1888C0E7001F57C7 /* Piano II 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano II 1.mp3"; sourceTree = "<group>"; };
-		587C9F501888C0E7001F57C7 /* Piano II 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano II 2.mp3"; sourceTree = "<group>"; };
-		587C9F511888C0E7001F57C7 /* Piano II 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano II 3.mp3"; sourceTree = "<group>"; };
-		587C9F521888C0E7001F57C7 /* Piano II 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano II 4.mp3"; sourceTree = "<group>"; };
-		587C9F531888C0E7001F57C7 /* Piano II 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano II 5.mp3"; sourceTree = "<group>"; };
-		587C9F541888C0E7001F57C7 /* Piano II 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano II 6.mp3"; sourceTree = "<group>"; };
-		587C9F551888C0E7001F57C7 /* Pluck 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pluck 1.mp3"; sourceTree = "<group>"; };
-		587C9F561888C0E7001F57C7 /* Pluck 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pluck 2.mp3"; sourceTree = "<group>"; };
-		587C9F571888C0E7001F57C7 /* Pluck 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pluck 3.mp3"; sourceTree = "<group>"; };
-		587C9F581888C0E7001F57C7 /* Pluck 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pluck 4.mp3"; sourceTree = "<group>"; };
-		587C9F591888C0E7001F57C7 /* Pluck 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pluck 5.mp3"; sourceTree = "<group>"; };
-		587C9F5A1888C0E7001F57C7 /* Pluck 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pluck 6.mp3"; sourceTree = "<group>"; };
-		587C9F5B1888C0E7001F57C7 /* Rock 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Rock 1.mp3"; sourceTree = "<group>"; };
-		587C9F5C1888C0E7001F57C7 /* Rock 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Rock 2.mp3"; sourceTree = "<group>"; };
-		587C9F5D1888C0E7001F57C7 /* Rock 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Rock 3.mp3"; sourceTree = "<group>"; };
-		587C9F5E1888C0E7001F57C7 /* Rock 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Rock 4.mp3"; sourceTree = "<group>"; };
-		587C9F5F1888C0E7001F57C7 /* Rock 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Rock 5.mp3"; sourceTree = "<group>"; };
-		587C9F601888C0E7001F57C7 /* Rock 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Rock 6.mp3"; sourceTree = "<group>"; };
-		587C9F611888C0E7001F57C7 /* Trombone 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Trombone 1.mp3"; sourceTree = "<group>"; };
-		587C9F621888C0E7001F57C7 /* Trombone 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Trombone 2.mp3"; sourceTree = "<group>"; };
-		587C9F631888C0E7001F57C7 /* Trombone 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Trombone 3.mp3"; sourceTree = "<group>"; };
-		587C9F641888C0E7001F57C7 /* Trombone 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Trombone 4.mp3"; sourceTree = "<group>"; };
-		587C9F651888C0E7001F57C7 /* Trombone 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Trombone 5.mp3"; sourceTree = "<group>"; };
-		587C9F661888C0E7001F57C7 /* Trombone 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Trombone 6.mp3"; sourceTree = "<group>"; };
-		587C9F671888C0E7001F57C7 /* Vibraphone 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Vibraphone 1.mp3"; sourceTree = "<group>"; };
-		587C9F681888C0E7001F57C7 /* Vibraphone 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Vibraphone 2.mp3"; sourceTree = "<group>"; };
-		587C9F691888C0E7001F57C7 /* Vibraphone 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Vibraphone 3.mp3"; sourceTree = "<group>"; };
-		587C9F6A1888C0E7001F57C7 /* Vibraphone 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Vibraphone 4.mp3"; sourceTree = "<group>"; };
-		587C9F6B1888C0E7001F57C7 /* Vibraphone 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Vibraphone 5.mp3"; sourceTree = "<group>"; };
-		587C9F6C1888C0E7001F57C7 /* Vibraphone 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Vibraphone 6.mp3"; sourceTree = "<group>"; };
-		587C9F6D1888C0E7001F57C7 /* Violin 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Violin 1.mp3"; sourceTree = "<group>"; };
-		587C9F6E1888C0E7001F57C7 /* Violin 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Violin 2.mp3"; sourceTree = "<group>"; };
-		587C9F6F1888C0E7001F57C7 /* Violin 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Violin 3.mp3"; sourceTree = "<group>"; };
-		587C9F701888C0E7001F57C7 /* Violin 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Violin 4.mp3"; sourceTree = "<group>"; };
-		587C9F711888C0E7001F57C7 /* Violin 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Violin 5.mp3"; sourceTree = "<group>"; };
-		587C9F721888C0E7001F57C7 /* Violin 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Violin 6.mp3"; sourceTree = "<group>"; };
-		587C9F731888C0E7001F57C7 /* WubWub 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "WubWub 1.mp3"; sourceTree = "<group>"; };
-		587C9F741888C0E7001F57C7 /* WubWub 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "WubWub 2.mp3"; sourceTree = "<group>"; };
-		587C9F751888C0E7001F57C7 /* WubWub 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "WubWub 3.mp3"; sourceTree = "<group>"; };
-		587C9F761888C0E7001F57C7 /* WubWub 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "WubWub 4.mp3"; sourceTree = "<group>"; };
-		587C9F771888C0E7001F57C7 /* WubWub 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "WubWub 5.mp3"; sourceTree = "<group>"; };
-		587C9F781888C0E7001F57C7 /* WubWub 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "WubWub 6.mp3"; sourceTree = "<group>"; };
 		58868ED7187619ED00B469C2 /* PlayControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayControlViewController.h; sourceTree = "<group>"; };
 		58868ED8187619ED00B469C2 /* PlayControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayControlViewController.m; sourceTree = "<group>"; };
 		58868ED9187619ED00B469C2 /* BottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomBar.xib; sourceTree = "<group>"; };
@@ -626,13 +338,6 @@
 		58D6960A1864D20A00113AF2 /* SequencerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerViewController.h; sourceTree = "<group>"; };
 		58D6960B1864D20A00113AF2 /* SequencerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequencerViewController.m; sourceTree = "<group>"; };
 		58D6960C1864D20A00113AF2 /* SequencerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SequencerViewController.xib; sourceTree = "<group>"; };
-		58E6352A1889FD800036E4F1 /* Bacon 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bacon 1.mp3"; sourceTree = "<group>"; };
-		58E6352B1889FD800036E4F1 /* Bacon 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bacon 2.mp3"; sourceTree = "<group>"; };
-		58E6352C1889FD800036E4F1 /* Bacon 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bacon 3.mp3"; sourceTree = "<group>"; };
-		58E6352D1889FD800036E4F1 /* Bacon 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bacon 4.mp3"; sourceTree = "<group>"; };
-		58E6352E1889FD800036E4F1 /* Bacon 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bacon 5.mp3"; sourceTree = "<group>"; };
-		58E6352F1889FD800036E4F1 /* Bacon 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bacon 6.mp3"; sourceTree = "<group>"; };
-		58EB9D2B188F121300DCBA1C /* Silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Silence.mp3; sourceTree = "<group>"; };
 		58EEB7A51868EE5E0089BFD9 /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarController.a; path = "../GtarSdk/GtarController/build/Debug-iphoneos/libGtarController.a"; sourceTree = "<group>"; };
 		58EEB7A71868EE630089BFD9 /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAudioController.a; path = "../GtarSdk/AudioController/build/Debug-iphoneos/libAudioController.a"; sourceTree = "<group>"; };
 		58EEB7A91868EEAB0089BFD9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -672,12 +377,6 @@
 		6DAA158D18C12525003DAB30 /* Sequencer_Icon80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon80px.png; sourceTree = "<group>"; };
 		6DAA158E18C12525003DAB30 /* Sequencer_Icon120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sequencer_Icon120px.png; sourceTree = "<group>"; };
 		6DAA159218C66363003DAB30 /* Save_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Save_Icon.png; sourceTree = "<group>"; };
-		6DAA159418C6A68D003DAB30 /* Double Bass 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass 1.mp3"; sourceTree = "<group>"; };
-		6DAA159518C6A68D003DAB30 /* Double Bass 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass 2.mp3"; sourceTree = "<group>"; };
-		6DAA159618C6A68D003DAB30 /* Double Bass 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass 3.mp3"; sourceTree = "<group>"; };
-		6DAA159718C6A68D003DAB30 /* Double Bass 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass 4.mp3"; sourceTree = "<group>"; };
-		6DAA159818C6A68D003DAB30 /* Double Bass 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass 5.mp3"; sourceTree = "<group>"; };
-		6DAA159918C6A68D003DAB30 /* Double Bass 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass 6.mp3"; sourceTree = "<group>"; };
 		6DAB0CE318C7B8F400FFBDE6 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		6DAB0CE418C7B8F400FFBDE6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6DAB0CE518C7B8F400FFBDE6 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
@@ -692,6 +391,103 @@
 		6DAF30DB18D2468500036958 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		6DEAB42918D78FF700833D9C /* Piano_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_A.mp3; sourceTree = "<group>"; };
+		6DEAB42A18D78FF700833D9C /* Piano_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_B.mp3; sourceTree = "<group>"; };
+		6DEAB42B18D78FF700833D9C /* Piano_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_C.mp3; sourceTree = "<group>"; };
+		6DEAB42C18D78FF700833D9C /* Piano_D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_D.mp3; sourceTree = "<group>"; };
+		6DEAB42D18D78FF700833D9C /* Piano_E.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_E.mp3; sourceTree = "<group>"; };
+		6DEAB42E18D78FF700833D9C /* Piano_G.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_G.mp3; sourceTree = "<group>"; };
+		6DEAB43018D78FF700833D9C /* Pluck_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pluck_C.mp3; sourceTree = "<group>"; };
+		6DEAB43118D78FF700833D9C /* Pluck_D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pluck_D.mp3; sourceTree = "<group>"; };
+		6DEAB43218D78FF700833D9C /* Pluck_E.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pluck_E.mp3; sourceTree = "<group>"; };
+		6DEAB43318D78FF700833D9C /* Pluck_G.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pluck_G.mp3; sourceTree = "<group>"; };
+		6DEAB43418D78FF700833D9C /* Pluck_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pluck_A.mp3; sourceTree = "<group>"; };
+		6DEAB43518D78FF700833D9C /* Pluck_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pluck_B.mp3; sourceTree = "<group>"; };
+		6DEAB43718D78FF700833D9C /* Vibraphone_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Vibraphone_C.mp3; sourceTree = "<group>"; };
+		6DEAB43818D78FF700833D9C /* Vibraphone_D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Vibraphone_D.mp3; sourceTree = "<group>"; };
+		6DEAB43918D78FF700833D9C /* Vibraphone_E.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Vibraphone_E.mp3; sourceTree = "<group>"; };
+		6DEAB43A18D78FF700833D9C /* Vibraphone_G.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Vibraphone_G.mp3; sourceTree = "<group>"; };
+		6DEAB43B18D78FF700833D9C /* Vibraphone_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Vibraphone_A.mp3; sourceTree = "<group>"; };
+		6DEAB43C18D78FF700833D9C /* Vibraphone_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Vibraphone_B.mp3; sourceTree = "<group>"; };
+		6DEAB43F18D78FF700833D9C /* Double Bass_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass_C.mp3"; sourceTree = "<group>"; };
+		6DEAB44018D78FF700833D9C /* Double Bass_D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass_D.mp3"; sourceTree = "<group>"; };
+		6DEAB44118D78FF700833D9C /* Double Bass_E.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass_E.mp3"; sourceTree = "<group>"; };
+		6DEAB44218D78FF700833D9C /* Double Bass_G.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass_G.mp3"; sourceTree = "<group>"; };
+		6DEAB44318D78FF700833D9C /* Double Bass_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass_A.mp3"; sourceTree = "<group>"; };
+		6DEAB44418D78FF700833D9C /* Double Bass_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Double Bass_B.mp3"; sourceTree = "<group>"; };
+		6DEAB44618D78FF700833D9C /* Guitar_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Guitar_C.mp3; sourceTree = "<group>"; };
+		6DEAB44718D78FF700833D9C /* Guitar_D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Guitar_D.mp3; sourceTree = "<group>"; };
+		6DEAB44818D78FF700833D9C /* Guitar_E.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Guitar_E.mp3; sourceTree = "<group>"; };
+		6DEAB44918D78FF700833D9C /* Guitar_G.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Guitar_G.mp3; sourceTree = "<group>"; };
+		6DEAB44A18D78FF700833D9C /* Guitar_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Guitar_A.mp3; sourceTree = "<group>"; };
+		6DEAB44B18D78FF700833D9C /* Guitar_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Guitar_B.mp3; sourceTree = "<group>"; };
+		6DEAB44D18D78FF700833D9C /* Violin_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Violin_C.mp3; sourceTree = "<group>"; };
+		6DEAB44E18D78FF700833D9C /* Violin_D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Violin_D.mp3; sourceTree = "<group>"; };
+		6DEAB44F18D78FF700833D9C /* Violin_E.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Violin_E.mp3; sourceTree = "<group>"; };
+		6DEAB45018D78FF700833D9C /* Violin_G.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Violin_G.mp3; sourceTree = "<group>"; };
+		6DEAB45118D78FF700833D9C /* Violin_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Violin_A.mp3; sourceTree = "<group>"; };
+		6DEAB45218D78FF700833D9C /* Violin_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Violin_B.mp3; sourceTree = "<group>"; };
+		6DEAB45D18D78FF700833D9C /* Rock_Closed Hat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Rock_Closed Hat.mp3"; sourceTree = "<group>"; };
+		6DEAB45E18D78FF700833D9C /* Rock_Crash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Rock_Crash.mp3; sourceTree = "<group>"; };
+		6DEAB45F18D78FF700833D9C /* Rock_Kick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Rock_Kick.mp3; sourceTree = "<group>"; };
+		6DEAB46018D78FF700833D9C /* Rock_Open Hat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Rock_Open Hat.mp3"; sourceTree = "<group>"; };
+		6DEAB46118D78FF700833D9C /* Rock_Snare.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Rock_Snare.mp3; sourceTree = "<group>"; };
+		6DEAB46218D78FF700833D9C /* Rock_Tom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Rock_Tom.mp3; sourceTree = "<group>"; };
+		6DEAB46518D78FF800833D9C /* 808_Clap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 808_Clap.mp3; sourceTree = "<group>"; };
+		6DEAB46618D78FF800833D9C /* 808_Closed Hat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808_Closed Hat.mp3"; sourceTree = "<group>"; };
+		6DEAB46718D78FF800833D9C /* 808_Kick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 808_Kick.mp3; sourceTree = "<group>"; };
+		6DEAB46818D78FF800833D9C /* 808_Open Hat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "808_Open Hat.mp3"; sourceTree = "<group>"; };
+		6DEAB46918D78FF800833D9C /* 808_Snare.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 808_Snare.mp3; sourceTree = "<group>"; };
+		6DEAB46A18D78FF800833D9C /* 808_Tom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 808_Tom.mp3; sourceTree = "<group>"; };
+		6DEAB46C18D78FF800833D9C /* Chiptune_Beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chiptune_Beep.mp3; sourceTree = "<group>"; };
+		6DEAB46D18D78FF800833D9C /* Chiptune_Kick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chiptune_Kick.mp3; sourceTree = "<group>"; };
+		6DEAB46E18D78FF800833D9C /* Chiptune_Lazer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chiptune_Lazer.mp3; sourceTree = "<group>"; };
+		6DEAB46F18D78FF800833D9C /* Chiptune_Siren.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chiptune_Siren.mp3; sourceTree = "<group>"; };
+		6DEAB47018D78FF800833D9C /* Chiptune_Snare.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chiptune_Snare.mp3; sourceTree = "<group>"; };
+		6DEAB47118D78FF800833D9C /* Chiptune_Triangle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chiptune_Triangle.mp3; sourceTree = "<group>"; };
+		6DEAB47318D78FF800833D9C /* Dubstep_Clap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dubstep_Clap.mp3; sourceTree = "<group>"; };
+		6DEAB47418D78FF800833D9C /* Dubstep_Closed Hat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dubstep_Closed Hat.mp3"; sourceTree = "<group>"; };
+		6DEAB47518D78FF800833D9C /* Dubstep_Kick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dubstep_Kick.mp3; sourceTree = "<group>"; };
+		6DEAB47618D78FF800833D9C /* Dubstep_Open Hat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dubstep_Open Hat.mp3"; sourceTree = "<group>"; };
+		6DEAB47718D78FF800833D9C /* Dubstep_Shaker.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dubstep_Shaker.mp3; sourceTree = "<group>"; };
+		6DEAB47818D78FF800833D9C /* Dubstep_Snare.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dubstep_Snare.mp3; sourceTree = "<group>"; };
+		6DEAB47A18D78FF800833D9C /* House_Clap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = House_Clap.mp3; sourceTree = "<group>"; };
+		6DEAB47B18D78FF800833D9C /* House_Snare.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = House_Snare.mp3; sourceTree = "<group>"; };
+		6DEAB47C18D78FF800833D9C /* House_Closed Hat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "House_Closed Hat.mp3"; sourceTree = "<group>"; };
+		6DEAB47D18D78FF800833D9C /* House_Kick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = House_Kick.mp3; sourceTree = "<group>"; };
+		6DEAB47E18D78FF800833D9C /* House_Open Hat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "House_Open Hat.mp3"; sourceTree = "<group>"; };
+		6DEAB47F18D78FF800833D9C /* House_Wood Block.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "House_Wood Block.mp3"; sourceTree = "<group>"; };
+		6DEAB48118D78FF800833D9C /* WubWub_Airhorn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WubWub_Airhorn.mp3; sourceTree = "<group>"; };
+		6DEAB48218D78FF800833D9C /* WubWub_Arp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WubWub_Arp.mp3; sourceTree = "<group>"; };
+		6DEAB48318D78FF800833D9C /* WubWub_Bass Synth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "WubWub_Bass Synth.mp3"; sourceTree = "<group>"; };
+		6DEAB48418D78FF800833D9C /* WubWub_Clap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WubWub_Clap.mp3; sourceTree = "<group>"; };
+		6DEAB48518D78FF800833D9C /* WubWub_Kick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WubWub_Kick.mp3; sourceTree = "<group>"; };
+		6DEAB48618D78FF800833D9C /* WubWub_Womp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WubWub_Womp.mp3; sourceTree = "<group>"; };
+		6DEAB48718D78FF800833D9C /* Silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Silence.mp3; sourceTree = "<group>"; };
+		6DEAB48A18D78FF800833D9C /* Sounds_-con.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_-con.mp3"; sourceTree = "<group>"; };
+		6DEAB48B18D78FF800833D9C /* Sounds_Ba-.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_Ba-.mp3"; sourceTree = "<group>"; };
+		6DEAB48C18D78FF800833D9C /* Sounds_Bacon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sounds_Bacon.mp3; sourceTree = "<group>"; };
+		6DEAB48D18D78FF800833D9C /* Sounds_I'm Bacon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_I'm Bacon.mp3"; sourceTree = "<group>"; };
+		6DEAB48E18D78FF800833D9C /* Sounds_I'm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_I'm.mp3"; sourceTree = "<group>"; };
+		6DEAB48F18D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_Reverse I'm Bacon.mp3"; sourceTree = "<group>"; };
+		6DEAB4E618D790F800833D9C /* Trombone_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trombone_A.mp3; sourceTree = "<group>"; };
+		6DEAB4E718D790F800833D9C /* Trombone_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trombone_B.mp3; sourceTree = "<group>"; };
+		6DEAB4E818D790F800833D9C /* Trombone_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trombone_C.mp3; sourceTree = "<group>"; };
+		6DEAB4E918D790F800833D9C /* Trombone_D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trombone_D.mp3; sourceTree = "<group>"; };
+		6DEAB4EA18D790F800833D9C /* Trombone_E.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trombone_E.mp3; sourceTree = "<group>"; };
+		6DEAB4EB18D790F800833D9C /* Trombone_G.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trombone_G.mp3; sourceTree = "<group>"; };
+		6DEAB4F318D7976400833D9C /* Flute_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Flute_A.mp3; sourceTree = "<group>"; };
+		6DEAB4F418D7976400833D9C /* Flute_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Flute_B.mp3; sourceTree = "<group>"; };
+		6DEAB4F518D7976400833D9C /* Flute_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Flute_C.mp3; sourceTree = "<group>"; };
+		6DEAB4F618D7976400833D9C /* Flute_D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Flute_D.mp3; sourceTree = "<group>"; };
+		6DEAB4F718D7976400833D9C /* Flute_E.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Flute_E.mp3; sourceTree = "<group>"; };
+		6DEAB4F818D7976400833D9C /* Flute_G.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Flute_G.mp3; sourceTree = "<group>"; };
+		6DEAB50018D7BB7C00833D9C /* Hand Drum_Djembe Kick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hand Drum_Djembe Kick.mp3"; sourceTree = "<group>"; };
+		6DEAB50118D7BB7C00833D9C /* Hand Drum_Djembe High.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hand Drum_Djembe High.mp3"; sourceTree = "<group>"; };
+		6DEAB50218D7BB7C00833D9C /* Hand Drum_Tom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hand Drum_Tom.mp3"; sourceTree = "<group>"; };
+		6DEAB50318D7BB7C00833D9C /* Hand Drum_Shaker.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hand Drum_Shaker.mp3"; sourceTree = "<group>"; };
+		6DEAB50418D7BB7C00833D9C /* Hand Drum_Knock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hand Drum_Knock.mp3"; sourceTree = "<group>"; };
+		6DEAB50518D7BB7C00833D9C /* Hand Drum_Clink.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hand Drum_Clink.mp3"; sourceTree = "<group>"; };
 		6DF6BC7418CE5E1800D20EC7 /* defaultSet */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = defaultSet; path = ../defaultSet; sourceTree = "<group>"; };
 		6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell_4.xib; sourceTree = "<group>"; };
 		6DFDB01F18C0278D004D573B /* BottomBar_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomBar_4.xib; sourceTree = "<group>"; };
@@ -834,120 +630,10 @@
 			children = (
 				6DF6BC7418CE5E1800D20EC7 /* defaultSet */,
 				587C9F241888C0E7001F57C7 /* Samples */,
-				5811AA77187B88C700FC0BD2 /* Percussion */,
 				5811AADE187B88C800FC0BD2 /* Sample Pack INFO */,
 				58241D7C188DE31000498DB5 /* sampleList.plist */,
 			);
 			path = Audio;
-			sourceTree = "<group>";
-		};
-		5811AA77187B88C700FC0BD2 /* Percussion */ = {
-			isa = PBXGroup;
-			children = (
-				5811AA78187B88C700FC0BD2 /* Percussion 0.mp3 */,
-				5811AA79187B88C700FC0BD2 /* Percussion 1.mp3 */,
-				5811AA7A187B88C700FC0BD2 /* Percussion 10.mp3 */,
-				5811AA7B187B88C700FC0BD2 /* Percussion 100.mp3 */,
-				5811AA7C187B88C700FC0BD2 /* Percussion 101.mp3 */,
-				5811AA7D187B88C700FC0BD2 /* Percussion 11.mp3 */,
-				5811AA7E187B88C700FC0BD2 /* Percussion 12.mp3 */,
-				5811AA7F187B88C700FC0BD2 /* Percussion 13.mp3 */,
-				5811AA80187B88C700FC0BD2 /* Percussion 14.mp3 */,
-				5811AA81187B88C700FC0BD2 /* Percussion 15.mp3 */,
-				5811AA82187B88C700FC0BD2 /* Percussion 16.mp3 */,
-				5811AA83187B88C700FC0BD2 /* Percussion 17.mp3 */,
-				5811AA84187B88C700FC0BD2 /* Percussion 18.mp3 */,
-				5811AA85187B88C700FC0BD2 /* Percussion 19.mp3 */,
-				5811AA86187B88C700FC0BD2 /* Percussion 2.mp3 */,
-				5811AA87187B88C700FC0BD2 /* Percussion 20.mp3 */,
-				5811AA88187B88C700FC0BD2 /* Percussion 21.mp3 */,
-				5811AA89187B88C700FC0BD2 /* Percussion 22.mp3 */,
-				5811AA8A187B88C700FC0BD2 /* Percussion 23.mp3 */,
-				5811AA8B187B88C700FC0BD2 /* Percussion 24.mp3 */,
-				5811AA8C187B88C700FC0BD2 /* Percussion 25.mp3 */,
-				5811AA8D187B88C700FC0BD2 /* Percussion 26.mp3 */,
-				5811AA8E187B88C700FC0BD2 /* Percussion 27.mp3 */,
-				5811AA8F187B88C700FC0BD2 /* Percussion 28.mp3 */,
-				5811AA90187B88C700FC0BD2 /* Percussion 29.mp3 */,
-				5811AA91187B88C700FC0BD2 /* Percussion 3.mp3 */,
-				5811AA92187B88C700FC0BD2 /* Percussion 30.mp3 */,
-				5811AA93187B88C700FC0BD2 /* Percussion 31.mp3 */,
-				5811AA94187B88C700FC0BD2 /* Percussion 32.mp3 */,
-				5811AA95187B88C700FC0BD2 /* Percussion 33.mp3 */,
-				5811AA96187B88C700FC0BD2 /* Percussion 34.mp3 */,
-				5811AA97187B88C700FC0BD2 /* Percussion 35.mp3 */,
-				5811AA98187B88C700FC0BD2 /* Percussion 36.mp3 */,
-				5811AA99187B88C700FC0BD2 /* Percussion 37.mp3 */,
-				5811AA9A187B88C700FC0BD2 /* Percussion 38.mp3 */,
-				5811AA9B187B88C700FC0BD2 /* Percussion 39.mp3 */,
-				5811AA9C187B88C700FC0BD2 /* Percussion 4.mp3 */,
-				5811AA9D187B88C700FC0BD2 /* Percussion 40.mp3 */,
-				5811AA9E187B88C700FC0BD2 /* Percussion 41.mp3 */,
-				5811AA9F187B88C700FC0BD2 /* Percussion 42.mp3 */,
-				5811AAA0187B88C700FC0BD2 /* Percussion 43.mp3 */,
-				5811AAA1187B88C700FC0BD2 /* Percussion 44.mp3 */,
-				5811AAA2187B88C700FC0BD2 /* Percussion 45.mp3 */,
-				5811AAA3187B88C700FC0BD2 /* Percussion 46.mp3 */,
-				5811AAA4187B88C700FC0BD2 /* Percussion 47.mp3 */,
-				5811AAA5187B88C700FC0BD2 /* Percussion 48.mp3 */,
-				5811AAA6187B88C700FC0BD2 /* Percussion 49.mp3 */,
-				5811AAA7187B88C700FC0BD2 /* Percussion 5.mp3 */,
-				5811AAA8187B88C700FC0BD2 /* Percussion 50.mp3 */,
-				5811AAA9187B88C700FC0BD2 /* Percussion 51.mp3 */,
-				5811AAAA187B88C700FC0BD2 /* Percussion 52.mp3 */,
-				5811AAAB187B88C700FC0BD2 /* Percussion 53.mp3 */,
-				5811AAAC187B88C700FC0BD2 /* Percussion 54.mp3 */,
-				5811AAAD187B88C700FC0BD2 /* Percussion 55.mp3 */,
-				5811AAAE187B88C700FC0BD2 /* Percussion 56.mp3 */,
-				5811AAAF187B88C700FC0BD2 /* Percussion 57.mp3 */,
-				5811AAB0187B88C700FC0BD2 /* Percussion 58.mp3 */,
-				5811AAB1187B88C700FC0BD2 /* Percussion 59.mp3 */,
-				5811AAB2187B88C700FC0BD2 /* Percussion 6.mp3 */,
-				5811AAB3187B88C700FC0BD2 /* Percussion 60.mp3 */,
-				5811AAB4187B88C700FC0BD2 /* Percussion 61.mp3 */,
-				5811AAB5187B88C700FC0BD2 /* Percussion 62.mp3 */,
-				5811AAB6187B88C700FC0BD2 /* Percussion 63.mp3 */,
-				5811AAB7187B88C700FC0BD2 /* Percussion 64.mp3 */,
-				5811AAB8187B88C700FC0BD2 /* Percussion 65.mp3 */,
-				5811AAB9187B88C700FC0BD2 /* Percussion 66.mp3 */,
-				5811AABA187B88C700FC0BD2 /* Percussion 67.mp3 */,
-				5811AABB187B88C700FC0BD2 /* Percussion 68.mp3 */,
-				5811AABC187B88C700FC0BD2 /* Percussion 69.mp3 */,
-				5811AABD187B88C700FC0BD2 /* Percussion 7.mp3 */,
-				5811AABE187B88C700FC0BD2 /* Percussion 70.mp3 */,
-				5811AABF187B88C700FC0BD2 /* Percussion 71.mp3 */,
-				5811AAC0187B88C700FC0BD2 /* Percussion 72.mp3 */,
-				5811AAC1187B88C700FC0BD2 /* Percussion 73.mp3 */,
-				5811AAC2187B88C700FC0BD2 /* Percussion 74.mp3 */,
-				5811AAC3187B88C700FC0BD2 /* Percussion 75.mp3 */,
-				5811AAC4187B88C700FC0BD2 /* Percussion 76.mp3 */,
-				5811AAC5187B88C700FC0BD2 /* Percussion 77.mp3 */,
-				5811AAC6187B88C700FC0BD2 /* Percussion 78.mp3 */,
-				5811AAC7187B88C700FC0BD2 /* Percussion 79.mp3 */,
-				5811AAC8187B88C700FC0BD2 /* Percussion 8.mp3 */,
-				5811AAC9187B88C700FC0BD2 /* Percussion 80.mp3 */,
-				5811AACA187B88C700FC0BD2 /* Percussion 81.mp3 */,
-				5811AACB187B88C700FC0BD2 /* Percussion 82.mp3 */,
-				5811AACC187B88C700FC0BD2 /* Percussion 83.mp3 */,
-				5811AACD187B88C700FC0BD2 /* Percussion 84.mp3 */,
-				5811AACE187B88C700FC0BD2 /* Percussion 85.mp3 */,
-				5811AACF187B88C700FC0BD2 /* Percussion 86.mp3 */,
-				5811AAD0187B88C800FC0BD2 /* Percussion 87.mp3 */,
-				5811AAD1187B88C800FC0BD2 /* Percussion 88.mp3 */,
-				5811AAD2187B88C800FC0BD2 /* Percussion 89.mp3 */,
-				5811AAD3187B88C800FC0BD2 /* Percussion 9.mp3 */,
-				5811AAD4187B88C800FC0BD2 /* Percussion 90.mp3 */,
-				5811AAD5187B88C800FC0BD2 /* Percussion 91.mp3 */,
-				5811AAD6187B88C800FC0BD2 /* Percussion 92.mp3 */,
-				5811AAD7187B88C800FC0BD2 /* Percussion 93.mp3 */,
-				5811AAD8187B88C800FC0BD2 /* Percussion 94.mp3 */,
-				5811AAD9187B88C800FC0BD2 /* Percussion 95.mp3 */,
-				5811AADA187B88C800FC0BD2 /* Percussion 96.mp3 */,
-				5811AADB187B88C800FC0BD2 /* Percussion 97.mp3 */,
-				5811AADC187B88C800FC0BD2 /* Percussion 98.mp3 */,
-				5811AADD187B88C800FC0BD2 /* Percussion 99.mp3 */,
-			);
-			path = Percussion;
 			sourceTree = "<group>";
 		};
 		581C31ED188F254E00D7AD79 /* CustomStringCell */ = {
@@ -1031,103 +717,10 @@
 		587C9F241888C0E7001F57C7 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				6DAA159418C6A68D003DAB30 /* Double Bass 1.mp3 */,
-				6DAA159518C6A68D003DAB30 /* Double Bass 2.mp3 */,
-				6DAA159618C6A68D003DAB30 /* Double Bass 3.mp3 */,
-				6DAA159718C6A68D003DAB30 /* Double Bass 4.mp3 */,
-				6DAA159818C6A68D003DAB30 /* Double Bass 5.mp3 */,
-				6DAA159918C6A68D003DAB30 /* Double Bass 6.mp3 */,
-				58EB9D2B188F121300DCBA1C /* Silence.mp3 */,
-				58E6352A1889FD800036E4F1 /* Bacon 1.mp3 */,
-				58E6352B1889FD800036E4F1 /* Bacon 2.mp3 */,
-				58E6352C1889FD800036E4F1 /* Bacon 3.mp3 */,
-				58E6352D1889FD800036E4F1 /* Bacon 4.mp3 */,
-				58E6352E1889FD800036E4F1 /* Bacon 5.mp3 */,
-				58E6352F1889FD800036E4F1 /* Bacon 6.mp3 */,
-				587C9F251888C0E7001F57C7 /* 808 1.mp3 */,
-				587C9F261888C0E7001F57C7 /* 808 2.mp3 */,
-				587C9F271888C0E7001F57C7 /* 808 3.mp3 */,
-				587C9F281888C0E7001F57C7 /* 808 4.mp3 */,
-				587C9F291888C0E7001F57C7 /* 808 5.mp3 */,
-				587C9F2A1888C0E7001F57C7 /* 808 6.mp3 */,
-				587C9F2B1888C0E7001F57C7 /* Chiptune 1.mp3 */,
-				587C9F2C1888C0E7001F57C7 /* Chiptune 2.mp3 */,
-				587C9F2D1888C0E7001F57C7 /* Chiptune 3.mp3 */,
-				587C9F2E1888C0E7001F57C7 /* Chiptune 4.mp3 */,
-				587C9F2F1888C0E7001F57C7 /* Chiptune 5.mp3 */,
-				587C9F301888C0E7001F57C7 /* Chiptune 6.mp3 */,
-				587C9F311888C0E7001F57C7 /* Dubstep 1.mp3 */,
-				587C9F321888C0E7001F57C7 /* Dubstep 2.mp3 */,
-				587C9F331888C0E7001F57C7 /* Dubstep 3.mp3 */,
-				587C9F341888C0E7001F57C7 /* Dubstep 4.mp3 */,
-				587C9F351888C0E7001F57C7 /* Dubstep 5.mp3 */,
-				587C9F361888C0E7001F57C7 /* Dubstep 6.mp3 */,
-				587C9F371888C0E7001F57C7 /* Guitar 1.mp3 */,
-				587C9F381888C0E7001F57C7 /* Guitar 2.mp3 */,
-				587C9F391888C0E7001F57C7 /* Guitar 3.mp3 */,
-				587C9F3A1888C0E7001F57C7 /* Guitar 4.mp3 */,
-				587C9F3B1888C0E7001F57C7 /* Guitar 5.mp3 */,
-				587C9F3C1888C0E7001F57C7 /* Guitar 6.mp3 */,
-				587C9F3D1888C0E7001F57C7 /* House 1.mp3 */,
-				587C9F3E1888C0E7001F57C7 /* House 2.mp3 */,
-				587C9F3F1888C0E7001F57C7 /* House 3.mp3 */,
-				587C9F401888C0E7001F57C7 /* House 4.mp3 */,
-				587C9F411888C0E7001F57C7 /* House 5.mp3 */,
-				587C9F421888C0E7001F57C7 /* House 6.mp3 */,
-				587C9F431888C0E7001F57C7 /* Percussion 1.mp3 */,
-				587C9F441888C0E7001F57C7 /* Percussion 2.mp3 */,
-				587C9F451888C0E7001F57C7 /* Percussion 3.mp3 */,
-				587C9F461888C0E7001F57C7 /* Percussion 4.mp3 */,
-				587C9F471888C0E7001F57C7 /* Percussion 5.mp3 */,
-				587C9F481888C0E7001F57C7 /* Percussion 6.mp3 */,
-				587C9F491888C0E7001F57C7 /* Piano 1.mp3 */,
-				587C9F4A1888C0E7001F57C7 /* Piano 2.mp3 */,
-				587C9F4B1888C0E7001F57C7 /* Piano 3.mp3 */,
-				587C9F4C1888C0E7001F57C7 /* Piano 4.mp3 */,
-				587C9F4D1888C0E7001F57C7 /* Piano 5.mp3 */,
-				587C9F4E1888C0E7001F57C7 /* Piano 6.mp3 */,
-				587C9F4F1888C0E7001F57C7 /* Piano II 1.mp3 */,
-				587C9F501888C0E7001F57C7 /* Piano II 2.mp3 */,
-				587C9F511888C0E7001F57C7 /* Piano II 3.mp3 */,
-				587C9F521888C0E7001F57C7 /* Piano II 4.mp3 */,
-				587C9F531888C0E7001F57C7 /* Piano II 5.mp3 */,
-				587C9F541888C0E7001F57C7 /* Piano II 6.mp3 */,
-				587C9F551888C0E7001F57C7 /* Pluck 1.mp3 */,
-				587C9F561888C0E7001F57C7 /* Pluck 2.mp3 */,
-				587C9F571888C0E7001F57C7 /* Pluck 3.mp3 */,
-				587C9F581888C0E7001F57C7 /* Pluck 4.mp3 */,
-				587C9F591888C0E7001F57C7 /* Pluck 5.mp3 */,
-				587C9F5A1888C0E7001F57C7 /* Pluck 6.mp3 */,
-				587C9F5B1888C0E7001F57C7 /* Rock 1.mp3 */,
-				587C9F5C1888C0E7001F57C7 /* Rock 2.mp3 */,
-				587C9F5D1888C0E7001F57C7 /* Rock 3.mp3 */,
-				587C9F5E1888C0E7001F57C7 /* Rock 4.mp3 */,
-				587C9F5F1888C0E7001F57C7 /* Rock 5.mp3 */,
-				587C9F601888C0E7001F57C7 /* Rock 6.mp3 */,
-				587C9F611888C0E7001F57C7 /* Trombone 1.mp3 */,
-				587C9F621888C0E7001F57C7 /* Trombone 2.mp3 */,
-				587C9F631888C0E7001F57C7 /* Trombone 3.mp3 */,
-				587C9F641888C0E7001F57C7 /* Trombone 4.mp3 */,
-				587C9F651888C0E7001F57C7 /* Trombone 5.mp3 */,
-				587C9F661888C0E7001F57C7 /* Trombone 6.mp3 */,
-				587C9F671888C0E7001F57C7 /* Vibraphone 1.mp3 */,
-				587C9F681888C0E7001F57C7 /* Vibraphone 2.mp3 */,
-				587C9F691888C0E7001F57C7 /* Vibraphone 3.mp3 */,
-				587C9F6A1888C0E7001F57C7 /* Vibraphone 4.mp3 */,
-				587C9F6B1888C0E7001F57C7 /* Vibraphone 5.mp3 */,
-				587C9F6C1888C0E7001F57C7 /* Vibraphone 6.mp3 */,
-				587C9F6D1888C0E7001F57C7 /* Violin 1.mp3 */,
-				587C9F6E1888C0E7001F57C7 /* Violin 2.mp3 */,
-				587C9F6F1888C0E7001F57C7 /* Violin 3.mp3 */,
-				587C9F701888C0E7001F57C7 /* Violin 4.mp3 */,
-				587C9F711888C0E7001F57C7 /* Violin 5.mp3 */,
-				587C9F721888C0E7001F57C7 /* Violin 6.mp3 */,
-				587C9F731888C0E7001F57C7 /* WubWub 1.mp3 */,
-				587C9F741888C0E7001F57C7 /* WubWub 2.mp3 */,
-				587C9F751888C0E7001F57C7 /* WubWub 3.mp3 */,
-				587C9F761888C0E7001F57C7 /* WubWub 4.mp3 */,
-				587C9F771888C0E7001F57C7 /* WubWub 5.mp3 */,
-				587C9F781888C0E7001F57C7 /* WubWub 6.mp3 */,
+				6DEAB42618D78FF700833D9C /* Melodic */,
+				6DEAB45A18D78FF700833D9C /* Percussion */,
+				6DEAB48718D78FF800833D9C /* Silence.mp3 */,
+				6DEAB48818D78FF800833D9C /* Sounds */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -1388,6 +981,292 @@
 			name = TutorialViewController;
 			sourceTree = "<group>";
 		};
+		6DEAB42618D78FF700833D9C /* Melodic */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB42718D78FF700833D9C /* Percussive */,
+				6DEAB43D18D78FF700833D9C /* Strings */,
+				6DEAB45318D78FF700833D9C /* Winds */,
+			);
+			path = Melodic;
+			sourceTree = "<group>";
+		};
+		6DEAB42718D78FF700833D9C /* Percussive */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB42818D78FF700833D9C /* Piano */,
+				6DEAB42F18D78FF700833D9C /* Pluck */,
+				6DEAB43618D78FF700833D9C /* Vibraphone */,
+			);
+			path = Percussive;
+			sourceTree = "<group>";
+		};
+		6DEAB42818D78FF700833D9C /* Piano */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB42B18D78FF700833D9C /* Piano_C.mp3 */,
+				6DEAB42C18D78FF700833D9C /* Piano_D.mp3 */,
+				6DEAB42D18D78FF700833D9C /* Piano_E.mp3 */,
+				6DEAB42E18D78FF700833D9C /* Piano_G.mp3 */,
+				6DEAB42918D78FF700833D9C /* Piano_A.mp3 */,
+				6DEAB42A18D78FF700833D9C /* Piano_B.mp3 */,
+			);
+			path = Piano;
+			sourceTree = "<group>";
+		};
+		6DEAB42F18D78FF700833D9C /* Pluck */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB43018D78FF700833D9C /* Pluck_C.mp3 */,
+				6DEAB43118D78FF700833D9C /* Pluck_D.mp3 */,
+				6DEAB43218D78FF700833D9C /* Pluck_E.mp3 */,
+				6DEAB43318D78FF700833D9C /* Pluck_G.mp3 */,
+				6DEAB43418D78FF700833D9C /* Pluck_A.mp3 */,
+				6DEAB43518D78FF700833D9C /* Pluck_B.mp3 */,
+			);
+			path = Pluck;
+			sourceTree = "<group>";
+		};
+		6DEAB43618D78FF700833D9C /* Vibraphone */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB43718D78FF700833D9C /* Vibraphone_C.mp3 */,
+				6DEAB43818D78FF700833D9C /* Vibraphone_D.mp3 */,
+				6DEAB43918D78FF700833D9C /* Vibraphone_E.mp3 */,
+				6DEAB43A18D78FF700833D9C /* Vibraphone_G.mp3 */,
+				6DEAB43B18D78FF700833D9C /* Vibraphone_A.mp3 */,
+				6DEAB43C18D78FF700833D9C /* Vibraphone_B.mp3 */,
+			);
+			name = Vibraphone;
+			path = Vibra;
+			sourceTree = "<group>";
+		};
+		6DEAB43D18D78FF700833D9C /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB43E18D78FF700833D9C /* Double Bass */,
+				6DEAB44518D78FF700833D9C /* Guitar */,
+				6DEAB44C18D78FF700833D9C /* Violin */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		6DEAB43E18D78FF700833D9C /* Double Bass */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB43F18D78FF700833D9C /* Double Bass_C.mp3 */,
+				6DEAB44018D78FF700833D9C /* Double Bass_D.mp3 */,
+				6DEAB44118D78FF700833D9C /* Double Bass_E.mp3 */,
+				6DEAB44218D78FF700833D9C /* Double Bass_G.mp3 */,
+				6DEAB44318D78FF700833D9C /* Double Bass_A.mp3 */,
+				6DEAB44418D78FF700833D9C /* Double Bass_B.mp3 */,
+			);
+			path = "Double Bass";
+			sourceTree = "<group>";
+		};
+		6DEAB44518D78FF700833D9C /* Guitar */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB44618D78FF700833D9C /* Guitar_C.mp3 */,
+				6DEAB44718D78FF700833D9C /* Guitar_D.mp3 */,
+				6DEAB44818D78FF700833D9C /* Guitar_E.mp3 */,
+				6DEAB44918D78FF700833D9C /* Guitar_G.mp3 */,
+				6DEAB44A18D78FF700833D9C /* Guitar_A.mp3 */,
+				6DEAB44B18D78FF700833D9C /* Guitar_B.mp3 */,
+			);
+			path = Guitar;
+			sourceTree = "<group>";
+		};
+		6DEAB44C18D78FF700833D9C /* Violin */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB44D18D78FF700833D9C /* Violin_C.mp3 */,
+				6DEAB44E18D78FF700833D9C /* Violin_D.mp3 */,
+				6DEAB44F18D78FF700833D9C /* Violin_E.mp3 */,
+				6DEAB45018D78FF700833D9C /* Violin_G.mp3 */,
+				6DEAB45118D78FF700833D9C /* Violin_A.mp3 */,
+				6DEAB45218D78FF700833D9C /* Violin_B.mp3 */,
+			);
+			path = Violin;
+			sourceTree = "<group>";
+		};
+		6DEAB45318D78FF700833D9C /* Winds */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB4F218D7976400833D9C /* Flute */,
+				6DEAB4E518D790F800833D9C /* Trombone */,
+			);
+			path = Winds;
+			sourceTree = "<group>";
+		};
+		6DEAB45A18D78FF700833D9C /* Percussion */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB45B18D78FF700833D9C /* Acoustic */,
+				6DEAB46318D78FF700833D9C /* Electronic */,
+			);
+			path = Percussion;
+			sourceTree = "<group>";
+		};
+		6DEAB45B18D78FF700833D9C /* Acoustic */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB4FF18D7BB7C00833D9C /* Hand Drum */,
+				6DEAB45C18D78FF700833D9C /* Rock */,
+			);
+			path = Acoustic;
+			sourceTree = "<group>";
+		};
+		6DEAB45C18D78FF700833D9C /* Rock */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB45D18D78FF700833D9C /* Rock_Closed Hat.mp3 */,
+				6DEAB45E18D78FF700833D9C /* Rock_Crash.mp3 */,
+				6DEAB45F18D78FF700833D9C /* Rock_Kick.mp3 */,
+				6DEAB46018D78FF700833D9C /* Rock_Open Hat.mp3 */,
+				6DEAB46118D78FF700833D9C /* Rock_Snare.mp3 */,
+				6DEAB46218D78FF700833D9C /* Rock_Tom.mp3 */,
+			);
+			path = Rock;
+			sourceTree = "<group>";
+		};
+		6DEAB46318D78FF700833D9C /* Electronic */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB46418D78FF800833D9C /* 808 */,
+				6DEAB46B18D78FF800833D9C /* Chiptune */,
+				6DEAB47218D78FF800833D9C /* Dubstep */,
+				6DEAB47918D78FF800833D9C /* House */,
+				6DEAB48018D78FF800833D9C /* WubWub */,
+			);
+			path = Electronic;
+			sourceTree = "<group>";
+		};
+		6DEAB46418D78FF800833D9C /* 808 */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB46518D78FF800833D9C /* 808_Clap.mp3 */,
+				6DEAB46618D78FF800833D9C /* 808_Closed Hat.mp3 */,
+				6DEAB46718D78FF800833D9C /* 808_Kick.mp3 */,
+				6DEAB46818D78FF800833D9C /* 808_Open Hat.mp3 */,
+				6DEAB46918D78FF800833D9C /* 808_Snare.mp3 */,
+				6DEAB46A18D78FF800833D9C /* 808_Tom.mp3 */,
+			);
+			path = 808;
+			sourceTree = "<group>";
+		};
+		6DEAB46B18D78FF800833D9C /* Chiptune */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB46C18D78FF800833D9C /* Chiptune_Beep.mp3 */,
+				6DEAB46D18D78FF800833D9C /* Chiptune_Kick.mp3 */,
+				6DEAB46E18D78FF800833D9C /* Chiptune_Lazer.mp3 */,
+				6DEAB46F18D78FF800833D9C /* Chiptune_Siren.mp3 */,
+				6DEAB47018D78FF800833D9C /* Chiptune_Snare.mp3 */,
+				6DEAB47118D78FF800833D9C /* Chiptune_Triangle.mp3 */,
+			);
+			path = Chiptune;
+			sourceTree = "<group>";
+		};
+		6DEAB47218D78FF800833D9C /* Dubstep */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB47318D78FF800833D9C /* Dubstep_Clap.mp3 */,
+				6DEAB47418D78FF800833D9C /* Dubstep_Closed Hat.mp3 */,
+				6DEAB47518D78FF800833D9C /* Dubstep_Kick.mp3 */,
+				6DEAB47618D78FF800833D9C /* Dubstep_Open Hat.mp3 */,
+				6DEAB47718D78FF800833D9C /* Dubstep_Shaker.mp3 */,
+				6DEAB47818D78FF800833D9C /* Dubstep_Snare.mp3 */,
+			);
+			path = Dubstep;
+			sourceTree = "<group>";
+		};
+		6DEAB47918D78FF800833D9C /* House */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB47A18D78FF800833D9C /* House_Clap.mp3 */,
+				6DEAB47B18D78FF800833D9C /* House_Snare.mp3 */,
+				6DEAB47C18D78FF800833D9C /* House_Closed Hat.mp3 */,
+				6DEAB47D18D78FF800833D9C /* House_Kick.mp3 */,
+				6DEAB47E18D78FF800833D9C /* House_Open Hat.mp3 */,
+				6DEAB47F18D78FF800833D9C /* House_Wood Block.mp3 */,
+			);
+			path = House;
+			sourceTree = "<group>";
+		};
+		6DEAB48018D78FF800833D9C /* WubWub */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB48118D78FF800833D9C /* WubWub_Airhorn.mp3 */,
+				6DEAB48218D78FF800833D9C /* WubWub_Arp.mp3 */,
+				6DEAB48318D78FF800833D9C /* WubWub_Bass Synth.mp3 */,
+				6DEAB48418D78FF800833D9C /* WubWub_Clap.mp3 */,
+				6DEAB48518D78FF800833D9C /* WubWub_Kick.mp3 */,
+				6DEAB48618D78FF800833D9C /* WubWub_Womp.mp3 */,
+			);
+			path = WubWub;
+			sourceTree = "<group>";
+		};
+		6DEAB48818D78FF800833D9C /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB48918D78FF800833D9C /* Bacon */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		6DEAB48918D78FF800833D9C /* Bacon */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB48A18D78FF800833D9C /* Sounds_-con.mp3 */,
+				6DEAB48B18D78FF800833D9C /* Sounds_Ba-.mp3 */,
+				6DEAB48C18D78FF800833D9C /* Sounds_Bacon.mp3 */,
+				6DEAB48D18D78FF800833D9C /* Sounds_I'm Bacon.mp3 */,
+				6DEAB48E18D78FF800833D9C /* Sounds_I'm.mp3 */,
+				6DEAB48F18D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 */,
+			);
+			path = Bacon;
+			sourceTree = "<group>";
+		};
+		6DEAB4E518D790F800833D9C /* Trombone */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB4E818D790F800833D9C /* Trombone_C.mp3 */,
+				6DEAB4E918D790F800833D9C /* Trombone_D.mp3 */,
+				6DEAB4EA18D790F800833D9C /* Trombone_E.mp3 */,
+				6DEAB4EB18D790F800833D9C /* Trombone_G.mp3 */,
+				6DEAB4E618D790F800833D9C /* Trombone_A.mp3 */,
+				6DEAB4E718D790F800833D9C /* Trombone_B.mp3 */,
+			);
+			path = Trombone;
+			sourceTree = "<group>";
+		};
+		6DEAB4F218D7976400833D9C /* Flute */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB4F318D7976400833D9C /* Flute_A.mp3 */,
+				6DEAB4F418D7976400833D9C /* Flute_B.mp3 */,
+				6DEAB4F518D7976400833D9C /* Flute_C.mp3 */,
+				6DEAB4F618D7976400833D9C /* Flute_D.mp3 */,
+				6DEAB4F718D7976400833D9C /* Flute_E.mp3 */,
+				6DEAB4F818D7976400833D9C /* Flute_G.mp3 */,
+			);
+			path = Flute;
+			sourceTree = "<group>";
+		};
+		6DEAB4FF18D7BB7C00833D9C /* Hand Drum */ = {
+			isa = PBXGroup;
+			children = (
+				6DEAB50018D7BB7C00833D9C /* Hand Drum_Djembe Kick.mp3 */,
+				6DEAB50118D7BB7C00833D9C /* Hand Drum_Djembe High.mp3 */,
+				6DEAB50218D7BB7C00833D9C /* Hand Drum_Tom.mp3 */,
+				6DEAB50318D7BB7C00833D9C /* Hand Drum_Shaker.mp3 */,
+				6DEAB50418D7BB7C00833D9C /* Hand Drum_Knock.mp3 */,
+				6DEAB50518D7BB7C00833D9C /* Hand Drum_Clink.mp3 */,
+			);
+			path = "Hand Drum";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1467,279 +1346,177 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				587C9FC91888C0E7001F57C7 /* WubWub 3.mp3 in Resources */,
-				5811AB31187B88C800FC0BD2 /* Percussion 80.mp3 in Resources */,
-				587C9F951888C0E7001F57C7 /* House 5.mp3 in Resources */,
 				58D617661863BF5E001EB327 /* Sequence11.png in Resources */,
-				5811AB1E187B88C800FC0BD2 /* Percussion 63.mp3 in Resources */,
-				5811AB2E187B88C800FC0BD2 /* Percussion 78.mp3 in Resources */,
-				5811AB3C187B88C800FC0BD2 /* Percussion 90.mp3 in Resources */,
-				5811AB27187B88C800FC0BD2 /* Percussion 71.mp3 in Resources */,
 				58BBFD1D1891BEA400E41CD2 /* CustomInstrumentNamer.xib in Resources */,
-				587C9F7D1888C0E7001F57C7 /* 808 5.mp3 in Resources */,
-				58E635351889FD800036E4F1 /* Bacon 6.mp3 in Resources */,
-				5811AB16187B88C800FC0BD2 /* Percussion 56.mp3 in Resources */,
-				5811AB08187B88C800FC0BD2 /* Percussion 43.mp3 in Resources */,
-				587C9FA41888C0E7001F57C7 /* Piano II 2.mp3 in Resources */,
-				587C9FAE1888C0E7001F57C7 /* Pluck 6.mp3 in Resources */,
+				6DEAB4CB18D78FF800833D9C /* Chiptune_Triangle.mp3 in Resources */,
+				6DEAB49C18D78FF800833D9C /* Vibraphone_C.mp3 in Resources */,
 				6DAA158818C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png in Resources */,
-				587C9F911888C0E7001F57C7 /* House 1.mp3 in Resources */,
-				5811AB23187B88C800FC0BD2 /* Percussion 68.mp3 in Resources */,
+				6DEAB4C318D78FF800833D9C /* 808_Open Hat.mp3 in Resources */,
+				6DEAB4D118D78FF800833D9C /* Dubstep_Snare.mp3 in Resources */,
 				58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */,
-				587C9FB71888C0E7001F57C7 /* Trombone 3.mp3 in Resources */,
-				587C9F901888C0E7001F57C7 /* Guitar 6.mp3 in Resources */,
-				5811AB37187B88C800FC0BD2 /* Percussion 86.mp3 in Resources */,
-				5811AB42187B88C800FC0BD2 /* Percussion 96.mp3 in Resources */,
+				6DEAB4A618D78FF800833D9C /* Double Bass_A.mp3 in Resources */,
+				6DEAB49218D78FF800833D9C /* Piano_C.mp3 in Resources */,
+				6DEAB4F018D790F800833D9C /* Trombone_E.mp3 in Resources */,
 				58F6167C188F5E2700020A74 /* Icon_Music.png in Resources */,
 				58F5449118AB161E009E6E43 /* Volume_Icon.png in Resources */,
-				587C9FC61888C0E7001F57C7 /* Violin 6.mp3 in Resources */,
-				587C9FA81888C0E7001F57C7 /* Piano II 6.mp3 in Resources */,
+				6DEAB4BC18D78FF800833D9C /* Rock_Kick.mp3 in Resources */,
+				6DEAB4FA18D7976400833D9C /* Flute_B.mp3 in Resources */,
+				6DEAB50618D7BB7C00833D9C /* Hand Drum_Djembe Kick.mp3 in Resources */,
+				6DEAB4E218D78FF800833D9C /* Sounds_I'm Bacon.mp3 in Resources */,
+				6DEAB4A718D78FF800833D9C /* Double Bass_B.mp3 in Resources */,
+				6DEAB4E418D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 in Resources */,
 				580A52091864DFF50077240B /* Icon_WubWub.png in Resources */,
-				587C9F9C1888C0E7001F57C7 /* Percussion 6.mp3 in Resources */,
-				5811AB2F187B88C800FC0BD2 /* Percussion 79.mp3 in Resources */,
+				6DEAB4D018D78FF800833D9C /* Dubstep_Shaker.mp3 in Resources */,
 				58F2900718A5626C00552A24 /* CustomInstrumentRecorder.xib in Resources */,
-				5811AB38187B88C800FC0BD2 /* Percussion 87.mp3 in Resources */,
+				6DEAB4D718D78FF800833D9C /* House_Wood Block.mp3 in Resources */,
 				6DAA158918C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png in Resources */,
-				587C9F811888C0E7001F57C7 /* Chiptune 3.mp3 in Resources */,
-				5811AAF7187B88C800FC0BD2 /* Percussion 28.mp3 in Resources */,
+				6DEAB4A818D78FF800833D9C /* Guitar_C.mp3 in Resources */,
 				58F5449418ABFDAA009E6E43 /* Icon_Saxophone.png in Resources */,
-				5811AAEF187B88C800FC0BD2 /* Percussion 20.mp3 in Resources */,
-				5811AB12187B88C800FC0BD2 /* Percussion 52.mp3 in Resources */,
-				587C9FAB1888C0E7001F57C7 /* Pluck 3.mp3 in Resources */,
-				587C9FC41888C0E7001F57C7 /* Violin 4.mp3 in Resources */,
-				587C9FCA1888C0E7001F57C7 /* WubWub 4.mp3 in Resources */,
 				58B4D3D5186E32AD0035D9E5 /* SeqSetViewCell.xib in Resources */,
+				6DEAB49018D78FF800833D9C /* Piano_A.mp3 in Resources */,
+				6DEAB4B018D78FF800833D9C /* Violin_E.mp3 in Resources */,
+				6DEAB49F18D78FF800833D9C /* Vibraphone_G.mp3 in Resources */,
+				6DEAB4E018D78FF800833D9C /* Sounds_Ba-.mp3 in Resources */,
 				6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */,
 				6DAB0CEA18C7B8F400FFBDE6 /* README.md in Resources */,
-				587C9F871888C0E7001F57C7 /* Dubstep 3.mp3 in Resources */,
-				5811AB36187B88C800FC0BD2 /* Percussion 85.mp3 in Resources */,
-				5811AB02187B88C800FC0BD2 /* Percussion 38.mp3 in Resources */,
+				6DEAB4FE18D7976400833D9C /* Flute_G.mp3 in Resources */,
 				6DFDB02218C02BB2004D573B /* SeqSetViewCell_4.xib in Resources */,
-				587C9FCC1888C0E7001F57C7 /* WubWub 6.mp3 in Resources */,
-				5811AB09187B88C800FC0BD2 /* Percussion 44.mp3 in Resources */,
-				587C9F8F1888C0E7001F57C7 /* Guitar 5.mp3 in Resources */,
-				587C9F8E1888C0E7001F57C7 /* Guitar 4.mp3 in Resources */,
 				580A52011864DFF50077240B /* gTarConnectedLogo.png in Resources */,
 				6D72B28318BE7C8400969A8F /* CustomSampleCell.xib in Resources */,
-				587C9FB51888C0E7001F57C7 /* Trombone 1.mp3 in Resources */,
 				58B1BE2718AD524900A3C0CC /* OptionsViewCell.xib in Resources */,
-				5811AAF8187B88C800FC0BD2 /* Percussion 29.mp3 in Resources */,
-				5811AAE5187B88C800FC0BD2 /* Percussion 11.mp3 in Resources */,
-				5811AAFD187B88C800FC0BD2 /* Percussion 33.mp3 in Resources */,
-				587C9F9E1888C0E7001F57C7 /* Piano 2.mp3 in Resources */,
-				5811AB11187B88C800FC0BD2 /* Percussion 51.mp3 in Resources */,
+				6DEAB4A218D78FF800833D9C /* Double Bass_C.mp3 in Resources */,
+				6DEAB4AA18D78FF800833D9C /* Guitar_E.mp3 in Resources */,
 				5840858618652D9000BFF3C5 /* SeqSetView.xib in Resources */,
-				5811AAED187B88C800FC0BD2 /* Percussion 19.mp3 in Resources */,
-				587C9FC71888C0E7001F57C7 /* WubWub 1.mp3 in Resources */,
-				5811AAF1187B88C800FC0BD2 /* Percussion 22.mp3 in Resources */,
-				587C9FA71888C0E7001F57C7 /* Piano II 5.mp3 in Resources */,
-				5811AB04187B88C800FC0BD2 /* Percussion 4.mp3 in Resources */,
-				587C9FAC1888C0E7001F57C7 /* Pluck 4.mp3 in Resources */,
-				587C9F941888C0E7001F57C7 /* House 4.mp3 in Resources */,
+				6DEAB4D518D78FF800833D9C /* House_Kick.mp3 in Resources */,
 				6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */,
+				6DEAB4AD18D78FF800833D9C /* Guitar_B.mp3 in Resources */,
 				58D617261863B8D7001EB327 /* Images.xcassets in Resources */,
+				6DEAB49118D78FF800833D9C /* Piano_B.mp3 in Resources */,
+				6DEAB4CA18D78FF800833D9C /* Chiptune_Snare.mp3 in Resources */,
 				6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */,
-				587C9FB81888C0E7001F57C7 /* Trombone 4.mp3 in Resources */,
-				587C9F7C1888C0E7001F57C7 /* 808 4.mp3 in Resources */,
-				5811AAF0187B88C800FC0BD2 /* Percussion 21.mp3 in Resources */,
 				6DAA158F18C12525003DAB30 /* Sequencer_Icon58px.png in Resources */,
+				6DEAB4BA18D78FF800833D9C /* Rock_Closed Hat.mp3 in Resources */,
+				6DEAB4BD18D78FF800833D9C /* Rock_Open Hat.mp3 in Resources */,
 				58D6176D1863BF5E001EB327 /* Sequence8.png in Resources */,
-				587C9FB31888C0E7001F57C7 /* Rock 5.mp3 in Resources */,
-				6DAA159B18C6A68D003DAB30 /* Double Bass 2.mp3 in Resources */,
-				5811AB0C187B88C800FC0BD2 /* Percussion 47.mp3 in Resources */,
 				580A52051864DFF50077240B /* Icon_Guitar.png in Resources */,
-				587C9F7A1888C0E7001F57C7 /* 808 2.mp3 in Resources */,
-				587C9FA21888C0E7001F57C7 /* Piano 6.mp3 in Resources */,
-				587C9FB21888C0E7001F57C7 /* Rock 4.mp3 in Resources */,
-				5811AAE1187B88C800FC0BD2 /* Percussion 1.mp3 in Resources */,
-				58E635311889FD800036E4F1 /* Bacon 2.mp3 in Resources */,
-				6DAA159F18C6A68D003DAB30 /* Double Bass 6.mp3 in Resources */,
+				6DEAB4D318D78FF800833D9C /* House_Snare.mp3 in Resources */,
+				6DEAB4AE18D78FF800833D9C /* Violin_C.mp3 in Resources */,
 				58D6176E1863BF5E001EB327 /* Sequence9.png in Resources */,
-				587C9FBE1888C0E7001F57C7 /* Vibraphone 4.mp3 in Resources */,
+				6DEAB4FC18D7976400833D9C /* Flute_D.mp3 in Resources */,
 				58F5449518ABFDAA009E6E43 /* Icon_Sound.png in Resources */,
+				6DEAB49D18D78FF800833D9C /* Vibraphone_D.mp3 in Resources */,
+				6DEAB4D618D78FF800833D9C /* House_Open Hat.mp3 in Resources */,
+				6DEAB4C818D78FF800833D9C /* Chiptune_Lazer.mp3 in Resources */,
+				6DEAB4D818D78FF800833D9C /* WubWub_Airhorn.mp3 in Resources */,
+				6DEAB4FB18D7976400833D9C /* Flute_C.mp3 in Resources */,
 				58D617641863BF5E001EB327 /* Sequence1.png in Resources */,
 				6D44A45B18B5937B00992D3D /* InfogTar.png in Resources */,
-				587C9F861888C0E7001F57C7 /* Dubstep 2.mp3 in Resources */,
-				587C9FB11888C0E7001F57C7 /* Rock 3.mp3 in Resources */,
 				584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */,
-				5811AB06187B88C800FC0BD2 /* Percussion 41.mp3 in Resources */,
-				5811AB2D187B88C800FC0BD2 /* Percussion 77.mp3 in Resources */,
-				6DAA159A18C6A68D003DAB30 /* Double Bass 1.mp3 in Resources */,
+				6DEAB49918D78FF800833D9C /* Pluck_G.mp3 in Resources */,
 				588BF9E018AC4F380086E816 /* OptionsView.xib in Resources */,
-				5811AB34187B88C800FC0BD2 /* Percussion 83.mp3 in Resources */,
+				6DEAB4DF18D78FF800833D9C /* Sounds_-con.mp3 in Resources */,
+				6DEAB4B318D78FF800833D9C /* Violin_B.mp3 in Resources */,
 				58D617681863BF5E001EB327 /* Sequence3.png in Resources */,
+				6DEAB4E318D78FF800833D9C /* Sounds_I'm.mp3 in Resources */,
+				6DEAB4A518D78FF800833D9C /* Double Bass_G.mp3 in Resources */,
 				58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */,
-				587C9FC51888C0E7001F57C7 /* Violin 5.mp3 in Resources */,
-				5811AB3E187B88C800FC0BD2 /* Percussion 92.mp3 in Resources */,
-				5811AAF6187B88C800FC0BD2 /* Percussion 27.mp3 in Resources */,
+				6DEAB4AF18D78FF800833D9C /* Violin_D.mp3 in Resources */,
 				58F5449718AC0C2B009E6E43 /* Trash_Icon.png in Resources */,
-				5811AB0A187B88C800FC0BD2 /* Percussion 45.mp3 in Resources */,
-				587C9FAF1888C0E7001F57C7 /* Rock 1.mp3 in Resources */,
-				5811AB1A187B88C800FC0BD2 /* Percussion 6.mp3 in Resources */,
-				5811AB20187B88C800FC0BD2 /* Percussion 65.mp3 in Resources */,
 				58868EDB187619ED00B469C2 /* BottomBar.xib in Resources */,
-				5811AB45187B88C800FC0BD2 /* Percussion 99.mp3 in Resources */,
-				5811AB35187B88C800FC0BD2 /* Percussion 84.mp3 in Resources */,
-				587C9F991888C0E7001F57C7 /* Percussion 3.mp3 in Resources */,
-				587C9FAD1888C0E7001F57C7 /* Pluck 5.mp3 in Resources */,
-				587C9F7E1888C0E7001F57C7 /* 808 6.mp3 in Resources */,
-				6DAA159C18C6A68D003DAB30 /* Double Bass 3.mp3 in Resources */,
-				587C9F931888C0E7001F57C7 /* House 3.mp3 in Resources */,
-				587C9F9A1888C0E7001F57C7 /* Percussion 4.mp3 in Resources */,
 				6DAA159118C12525003DAB30 /* Sequencer_Icon120px.png in Resources */,
-				5811AB19187B88C800FC0BD2 /* Percussion 59.mp3 in Resources */,
-				587C9F821888C0E7001F57C7 /* Chiptune 4.mp3 in Resources */,
-				587C9F7B1888C0E7001F57C7 /* 808 3.mp3 in Resources */,
-				587C9F961888C0E7001F57C7 /* House 6.mp3 in Resources */,
-				5811AB40187B88C800FC0BD2 /* Percussion 94.mp3 in Resources */,
-				5811AB05187B88C800FC0BD2 /* Percussion 40.mp3 in Resources */,
-				5811AAFC187B88C800FC0BD2 /* Percussion 32.mp3 in Resources */,
-				5811AB21187B88C800FC0BD2 /* Percussion 66.mp3 in Resources */,
-				6DAA159E18C6A68D003DAB30 /* Double Bass 5.mp3 in Resources */,
-				5811AB33187B88C800FC0BD2 /* Percussion 82.mp3 in Resources */,
-				587C9FBC1888C0E7001F57C7 /* Vibraphone 2.mp3 in Resources */,
-				5811AAEE187B88C800FC0BD2 /* Percussion 2.mp3 in Resources */,
+				6DEAB4F918D7976400833D9C /* Flute_A.mp3 in Resources */,
+				6DEAB4BF18D78FF800833D9C /* Rock_Tom.mp3 in Resources */,
+				6DEAB4A418D78FF800833D9C /* Double Bass_E.mp3 in Resources */,
 				58F5449018AB161E009E6E43 /* Set_Icon.png in Resources */,
 				6DAA159318C66363003DAB30 /* Save_Icon.png in Resources */,
-				587C9F8B1888C0E7001F57C7 /* Guitar 1.mp3 in Resources */,
 				580A52071864DFF50077240B /* Icon_Piano.png in Resources */,
+				6DEAB4CD18D78FF800833D9C /* Dubstep_Closed Hat.mp3 in Resources */,
 				5805D04B188DB3E7000832A9 /* Icon_Custom.png in Resources */,
+				6DEAB4D418D78FF800833D9C /* House_Closed Hat.mp3 in Resources */,
 				58D617671863BF5E001EB327 /* Sequence2.png in Resources */,
-				587C9FA91888C0E7001F57C7 /* Pluck 1.mp3 in Resources */,
-				587C9F8C1888C0E7001F57C7 /* Guitar 2.mp3 in Resources */,
-				5811AB28187B88C800FC0BD2 /* Percussion 72.mp3 in Resources */,
-				587C9FB61888C0E7001F57C7 /* Trombone 2.mp3 in Resources */,
-				5811AAE9187B88C800FC0BD2 /* Percussion 15.mp3 in Resources */,
-				5811AB14187B88C800FC0BD2 /* Percussion 54.mp3 in Resources */,
-				587C9FCB1888C0E7001F57C7 /* WubWub 5.mp3 in Resources */,
+				6DEAB49818D78FF800833D9C /* Pluck_E.mp3 in Resources */,
+				6DEAB50718D7BB7C00833D9C /* Hand Drum_Djembe High.mp3 in Resources */,
+				6DEAB4C218D78FF800833D9C /* 808_Kick.mp3 in Resources */,
+				6DEAB4C018D78FF800833D9C /* 808_Clap.mp3 in Resources */,
+				6DEAB4EE18D790F800833D9C /* Trombone_C.mp3 in Resources */,
 				58D6176A1863BF5E001EB327 /* Sequence5.png in Resources */,
-				587C9F791888C0E7001F57C7 /* 808 1.mp3 in Resources */,
+				6DEAB4AC18D78FF800833D9C /* Guitar_A.mp3 in Resources */,
 				581C31F2188F266D00D7AD79 /* CustomStringCell.xib in Resources */,
-				5811AB43187B88C800FC0BD2 /* Percussion 97.mp3 in Resources */,
-				5811AAF9187B88C800FC0BD2 /* Percussion 3.mp3 in Resources */,
-				5811AAE3187B88C800FC0BD2 /* Percussion 100.mp3 in Resources */,
 				58D6176B1863BF5E001EB327 /* Sequence6.png in Resources */,
+				6DEAB49B18D78FF800833D9C /* Pluck_B.mp3 in Resources */,
 				6D5FD01F18D12B5C00ED96F6 /* Tutorial_Dock.png in Resources */,
-				5811AAE0187B88C800FC0BD2 /* Percussion 0.mp3 in Resources */,
-				5811AB13187B88C800FC0BD2 /* Percussion 53.mp3 in Resources */,
-				5811AB3F187B88C800FC0BD2 /* Percussion 93.mp3 in Resources */,
 				580A52021864DFF50077240B /* gTarNotConnectedLogo.png in Resources */,
-				5811AAF3187B88C800FC0BD2 /* Percussion 24.mp3 in Resources */,
-				5811AAEC187B88C800FC0BD2 /* Percussion 18.mp3 in Resources */,
-				5811AB24187B88C800FC0BD2 /* Percussion 69.mp3 in Resources */,
-				587C9F831888C0E7001F57C7 /* Chiptune 5.mp3 in Resources */,
-				5811AB15187B88C800FC0BD2 /* Percussion 55.mp3 in Resources */,
-				58EB9D2C188F121300DCBA1C /* Silence.mp3 in Resources */,
+				6DEAB4BE18D78FF800833D9C /* Rock_Snare.mp3 in Resources */,
 				6DAB0CEB18C7B8F400FFBDE6 /* release_notes.md in Resources */,
-				587C9F9D1888C0E7001F57C7 /* Piano 1.mp3 in Resources */,
-				587C9FA31888C0E7001F57C7 /* Piano II 1.mp3 in Resources */,
-				5811AAF5187B88C800FC0BD2 /* Percussion 26.mp3 in Resources */,
-				5811AB39187B88C800FC0BD2 /* Percussion 88.mp3 in Resources */,
-				587C9FC01888C0E7001F57C7 /* Vibraphone 6.mp3 in Resources */,
+				6DEAB4DE18D78FF800833D9C /* Silence.mp3 in Resources */,
 				58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */,
+				6DEAB4DD18D78FF800833D9C /* WubWub_Womp.mp3 in Resources */,
 				6DFDB02018C0278D004D573B /* BottomBar_4.xib in Resources */,
+				6DEAB4C718D78FF800833D9C /* Chiptune_Kick.mp3 in Resources */,
+				6DEAB4C118D78FF800833D9C /* 808_Closed Hat.mp3 in Resources */,
 				5805D049188DAF4C000832A9 /* CustomInstrumentSelector.xib in Resources */,
-				587C9FC31888C0E7001F57C7 /* Violin 3.mp3 in Resources */,
-				5811AB30187B88C800FC0BD2 /* Percussion 8.mp3 in Resources */,
-				5811AB3A187B88C800FC0BD2 /* Percussion 89.mp3 in Resources */,
-				587C9FA11888C0E7001F57C7 /* Piano 5.mp3 in Resources */,
-				5811AB01187B88C800FC0BD2 /* Percussion 37.mp3 in Resources */,
-				58E635331889FD800036E4F1 /* Bacon 4.mp3 in Resources */,
 				6D44A45A18B5937B00992D3D /* InfoLogo.png in Resources */,
+				6DEAB4BB18D78FF800833D9C /* Rock_Crash.mp3 in Resources */,
 				583917951877995D006E3DC3 /* ScrollingSelector.xib in Resources */,
-				5811AAF2187B88C800FC0BD2 /* Percussion 23.mp3 in Resources */,
-				587C9F881888C0E7001F57C7 /* Dubstep 4.mp3 in Resources */,
-				5811AB0F187B88C800FC0BD2 /* Percussion 5.mp3 in Resources */,
-				5811AAF4187B88C800FC0BD2 /* Percussion 25.mp3 in Resources */,
+				6DEAB4E118D78FF800833D9C /* Sounds_Bacon.mp3 in Resources */,
 				58429A1818A1BD6A00BDD09B /* InstrumentViewController.xib in Resources */,
-				6DAA159D18C6A68D003DAB30 /* Double Bass 4.mp3 in Resources */,
-				5811AB17187B88C800FC0BD2 /* Percussion 57.mp3 in Resources */,
 				5811AB46187B88C800FC0BD2 /* Sample Pack INFO in Resources */,
 				6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */,
-				587C9FB41888C0E7001F57C7 /* Rock 6.mp3 in Resources */,
-				5811AB32187B88C800FC0BD2 /* Percussion 81.mp3 in Resources */,
-				587C9FBD1888C0E7001F57C7 /* Vibraphone 3.mp3 in Resources */,
+				6DEAB4C418D78FF800833D9C /* 808_Snare.mp3 in Resources */,
+				6DEAB4D918D78FF800833D9C /* WubWub_Arp.mp3 in Resources */,
 				6DAA158B18C12472003DAB30 /* Sequencer_AppIcon-114x114sq.png in Resources */,
-				587C9F971888C0E7001F57C7 /* Percussion 1.mp3 in Resources */,
-				5811AAE6187B88C800FC0BD2 /* Percussion 12.mp3 in Resources */,
-				587C9F9B1888C0E7001F57C7 /* Percussion 5.mp3 in Resources */,
-				58E635341889FD800036E4F1 /* Bacon 5.mp3 in Resources */,
-				587C9FB91888C0E7001F57C7 /* Trombone 5.mp3 in Resources */,
-				58E635321889FD800036E4F1 /* Bacon 3.mp3 in Resources */,
-				5811AB3D187B88C800FC0BD2 /* Percussion 91.mp3 in Resources */,
 				58B7FDC6188A15A800A2C1B1 /* Icon_Bacon.png in Resources */,
-				5811AB41187B88C800FC0BD2 /* Percussion 95.mp3 in Resources */,
+				6DEAB4DC18D78FF800833D9C /* WubWub_Kick.mp3 in Resources */,
+				6DEAB4EC18D790F800833D9C /* Trombone_A.mp3 in Resources */,
 				58D6176C1863BF5E001EB327 /* Sequence7.png in Resources */,
+				6DEAB4DA18D78FF800833D9C /* WubWub_Bass Synth.mp3 in Resources */,
 				6DAA158A18C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png in Resources */,
-				587C9FA51888C0E7001F57C7 /* Piano II 3.mp3 in Resources */,
-				5811AAFB187B88C800FC0BD2 /* Percussion 31.mp3 in Resources */,
 				58D617651863BF5E001EB327 /* Sequence10.png in Resources */,
-				5811AB0E187B88C800FC0BD2 /* Percussion 49.mp3 in Resources */,
-				587C9FAA1888C0E7001F57C7 /* Pluck 2.mp3 in Resources */,
-				5811AB1C187B88C800FC0BD2 /* Percussion 61.mp3 in Resources */,
-				587C9F801888C0E7001F57C7 /* Chiptune 2.mp3 in Resources */,
 				6D44A45D18B686C400992D3D /* G_Icon.png in Resources */,
-				5811AAFF187B88C800FC0BD2 /* Percussion 35.mp3 in Resources */,
-				5811AB07187B88C800FC0BD2 /* Percussion 42.mp3 in Resources */,
-				587C9FC81888C0E7001F57C7 /* WubWub 2.mp3 in Resources */,
-				5811AB29187B88C800FC0BD2 /* Percussion 73.mp3 in Resources */,
-				58E635301889FD800036E4F1 /* Bacon 1.mp3 in Resources */,
-				5811AB25187B88C800FC0BD2 /* Percussion 7.mp3 in Resources */,
 				6DF6BC7518CE5E1800D20EC7 /* defaultSet in Resources */,
-				587C9F841888C0E7001F57C7 /* Chiptune 6.mp3 in Resources */,
-				5811AAE2187B88C800FC0BD2 /* Percussion 10.mp3 in Resources */,
+				6DEAB4D218D78FF800833D9C /* House_Clap.mp3 in Resources */,
+				6DEAB4CF18D78FF800833D9C /* Dubstep_Open Hat.mp3 in Resources */,
 				6DAA159018C12525003DAB30 /* Sequencer_Icon80px.png in Resources */,
-				5811AAFA187B88C800FC0BD2 /* Percussion 30.mp3 in Resources */,
-				5811AB1F187B88C800FC0BD2 /* Percussion 64.mp3 in Resources */,
-				5811AB22187B88C800FC0BD2 /* Percussion 67.mp3 in Resources */,
 				58D617181863B8D7001EB327 /* InfoPlist.strings in Resources */,
-				587C9F921888C0E7001F57C7 /* House 2.mp3 in Resources */,
 				58F6167F188F5E2700020A74 /* Icon_Violin.png in Resources */,
-				5811AB3B187B88C800FC0BD2 /* Percussion 9.mp3 in Resources */,
 				58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */,
-				5811AB03187B88C800FC0BD2 /* Percussion 39.mp3 in Resources */,
+				6DEAB4A318D78FF800833D9C /* Double Bass_D.mp3 in Resources */,
+				6DEAB4C918D78FF800833D9C /* Chiptune_Siren.mp3 in Resources */,
 				6D3D9DC518BC0F890048E908 /* RecordRedo_Icon.png in Resources */,
-				5811AB18187B88C800FC0BD2 /* Percussion 58.mp3 in Resources */,
-				587C9FBA1888C0E7001F57C7 /* Trombone 6.mp3 in Resources */,
-				5811AAE4187B88C800FC0BD2 /* Percussion 101.mp3 in Resources */,
-				587C9F851888C0E7001F57C7 /* Dubstep 1.mp3 in Resources */,
-				5811AB2A187B88C800FC0BD2 /* Percussion 74.mp3 in Resources */,
-				587C9FC11888C0E7001F57C7 /* Violin 1.mp3 in Resources */,
-				587C9FBB1888C0E7001F57C7 /* Vibraphone 1.mp3 in Resources */,
-				5811AB1B187B88C800FC0BD2 /* Percussion 60.mp3 in Resources */,
-				5811AAEA187B88C800FC0BD2 /* Percussion 16.mp3 in Resources */,
-				587C9F891888C0E7001F57C7 /* Dubstep 5.mp3 in Resources */,
-				587C9FC21888C0E7001F57C7 /* Violin 2.mp3 in Resources */,
-				587C9FB01888C0E7001F57C7 /* Rock 2.mp3 in Resources */,
+				6DEAB4F118D790F800833D9C /* Trombone_G.mp3 in Resources */,
 				58241D7D188DE31000498DB5 /* sampleList.plist in Resources */,
+				6DEAB50818D7BB7C00833D9C /* Hand Drum_Tom.mp3 in Resources */,
+				6DEAB4CC18D78FF800833D9C /* Dubstep_Clap.mp3 in Resources */,
+				6DEAB4CE18D78FF800833D9C /* Dubstep_Kick.mp3 in Resources */,
+				6DEAB49518D78FF800833D9C /* Piano_G.mp3 in Resources */,
+				6DEAB50A18D7BB7C00833D9C /* Hand Drum_Knock.mp3 in Resources */,
+				6DEAB50918D7BB7C00833D9C /* Hand Drum_Shaker.mp3 in Resources */,
+				6DEAB49618D78FF800833D9C /* Pluck_C.mp3 in Resources */,
 				58F5448E18AB161E009E6E43 /* Options_Icon.png in Resources */,
+				6DEAB4FD18D7976400833D9C /* Flute_E.mp3 in Resources */,
+				6DEAB49418D78FF800833D9C /* Piano_E.mp3 in Resources */,
+				6DEAB4ED18D790F800833D9C /* Trombone_B.mp3 in Resources */,
 				58F5448F18AB161E009E6E43 /* Power_Icon.png in Resources */,
-				5811AB10187B88C800FC0BD2 /* Percussion 50.mp3 in Resources */,
-				5811AB0B187B88C800FC0BD2 /* Percussion 46.mp3 in Resources */,
-				5811AAE8187B88C800FC0BD2 /* Percussion 14.mp3 in Resources */,
-				5811AB2B187B88C800FC0BD2 /* Percussion 75.mp3 in Resources */,
-				5811AB44187B88C800FC0BD2 /* Percussion 98.mp3 in Resources */,
-				587C9F7F1888C0E7001F57C7 /* Chiptune 1.mp3 in Resources */,
 				58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */,
-				587C9F981888C0E7001F57C7 /* Percussion 2.mp3 in Resources */,
+				6DEAB49A18D78FF800833D9C /* Pluck_A.mp3 in Resources */,
+				6DEAB4B218D78FF800833D9C /* Violin_A.mp3 in Resources */,
+				6DEAB49E18D78FF800833D9C /* Vibraphone_E.mp3 in Resources */,
 				580A52061864DFF50077240B /* Icon_Percussion.png in Resources */,
-				587C9F8A1888C0E7001F57C7 /* Dubstep 6.mp3 in Resources */,
-				587C9FA01888C0E7001F57C7 /* Piano 4.mp3 in Resources */,
-				5811AB00187B88C800FC0BD2 /* Percussion 36.mp3 in Resources */,
-				5811AB2C187B88C800FC0BD2 /* Percussion 76.mp3 in Resources */,
-				587C9F9F1888C0E7001F57C7 /* Piano 3.mp3 in Resources */,
-				587C9F8D1888C0E7001F57C7 /* Guitar 3.mp3 in Resources */,
-				5811AAFE187B88C800FC0BD2 /* Percussion 34.mp3 in Resources */,
-				587C9FA61888C0E7001F57C7 /* Piano II 4.mp3 in Resources */,
+				6DEAB4EF18D790F800833D9C /* Trombone_D.mp3 in Resources */,
+				6DEAB4A918D78FF800833D9C /* Guitar_D.mp3 in Resources */,
 				58CA4E7E18A19C8A0026D83C /* LeftNavigatorViewController.xib in Resources */,
-				5811AAE7187B88C800FC0BD2 /* Percussion 13.mp3 in Resources */,
-				5811AB26187B88C800FC0BD2 /* Percussion 70.mp3 in Resources */,
 				6DFDB02418C0346B004D573B /* InstrumentViewController_4.xib in Resources */,
-				5811AAEB187B88C800FC0BD2 /* Percussion 17.mp3 in Resources */,
-				587C9FBF1888C0E7001F57C7 /* Vibraphone 5.mp3 in Resources */,
-				5811AB0D187B88C800FC0BD2 /* Percussion 48.mp3 in Resources */,
-				5811AB1D187B88C800FC0BD2 /* Percussion 62.mp3 in Resources */,
 				58D617691863BF5E001EB327 /* Sequence4.png in Resources */,
+				6DEAB4C518D78FF800833D9C /* 808_Tom.mp3 in Resources */,
+				6DEAB49718D78FF800833D9C /* Pluck_D.mp3 in Resources */,
+				6DEAB4A018D78FF800833D9C /* Vibraphone_A.mp3 in Resources */,
+				6DEAB4C618D78FF800833D9C /* Chiptune_Beep.mp3 in Resources */,
+				6DEAB4A118D78FF800833D9C /* Vibraphone_B.mp3 in Resources */,
+				6DEAB50B18D7BB7C00833D9C /* Hand Drum_Clink.mp3 in Resources */,
+				6DEAB4AB18D78FF800833D9C /* Guitar_G.mp3 in Resources */,
+				6DEAB4DB18D78FF800833D9C /* WubWub_Clap.mp3 in Resources */,
+				6DEAB49318D78FF800833D9C /* Piano_D.mp3 in Resources */,
+				6DEAB4B118D78FF800833D9C /* Violin_G.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

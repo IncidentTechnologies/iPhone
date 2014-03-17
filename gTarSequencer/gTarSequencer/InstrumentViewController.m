@@ -267,7 +267,7 @@
     
     // Custom Indicator
     [self showHideCustomIndicator:[currentInst checkIsCustom]];
-
+    
     // Update active pattern and active measure
     activePattern = inst.selectedPatternIndex;
     activeMeasure = inst.selectedPattern.selectedMeasureIndex;
@@ -347,13 +347,46 @@
 
 - (void)doubletapMeasure:(UITapGestureRecognizer *)recognizer
 {
-    
+    UIView * tappedMeasure = (UIView *)recognizer.view;
+
+    for(int i = 0; i <NUM_MEASURES; i++){
+        if(measureSet[activePattern][i] == tappedMeasure){
+            [self activateMeasure:i];
+            return;
+        }
+    }
+}
+
+- (void)doubleTapPage:(UITapGestureRecognizer *)recognizer
+{
+    UIButton * tappedPage = (UIButton *)recognizer.view;
+
+    for(int i =0; i < NUM_MEASURES; i++){
+        if(pages[i] == tappedPage){
+            [self activateMeasure:i];
+        }
+    }
+}
+
+- (void)longPressPage:(UILongPressGestureRecognizer *)recognizer
+{
+    UIButton * pressedPage = (UIButton *)recognizer.view;
+
+    for(int i =0; i < NUM_MEASURES; i++){
+        if(pages[i] == pressedPage){
+            [self showDeleteForMeasure:i];
+        }
+    }
+}
+
+- (void)activateMeasure:(int)tappedIndex
+{
     // measure is inactive
-    if(activeMeasure >= measureCounts[activePattern]){
+    if(tappedIndex >= measureCounts[activePattern]){
         
-        switch (activeMeasure) {
+        switch (tappedIndex) {
             case 1:
-                NSLog(@"ACTIVATE %i",activeMeasure);
+                NSLog(@"ACTIVATE %i",tappedIndex);
                 
                 [self clearMeasure:1 forPattern:activePattern];
                 
@@ -365,7 +398,7 @@
                 break;
             case 2:
             case 3:
-                NSLog(@"ACTIVATE %i",activeMeasure);
+                NSLog(@"ACTIVATE %i",tappedIndex);
                 
                 if(measureCounts[activePattern] < 2){
                     
@@ -392,24 +425,67 @@
                 break;
         }
         
-        [self changeActiveMeasureToMeasure:activeMeasure scrollSlow:YES];
+        [self changeActiveMeasureToMeasure:tappedIndex scrollSlow:YES];
         
         // SAVE CONTEXT
         [delegate saveContext:nil];
     }
 }
 
-- (void)holdMeasure:(UILongPressGestureRecognizer *)recognizer
+- (void)showDeleteForMeasure:(int)measureIndex
+{
+    if(measureToDelete > -1){
+        [self hideDeleteForMeasure:measureToDelete];
+    }
+    
+    if(measureIndex < measureCounts[activePattern]){
+        measureToDelete = measureIndex;
+        [pages[measureIndex] setBackgroundColor:[UIColor colorWithRed:216/255.0 green:64/255.0 blue:64/255.0 alpha:1.0]];
+        
+        UIImageView * trashButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Trash_Icon"]];
+        
+        float trashWidth = 22;
+        float trashHeight = 26;
+        
+        [trashButton setFrame:CGRectMake(pages[measureIndex].frame.size.width/2-trashWidth/2,2,trashWidth,trashHeight)];
+        
+        [pages[measureIndex] addSubview:trashButton];
+    }
+}
+
+- (void)hideDeleteForMeasure:(int)measureIndex
+{
+    if(measureIndex == activeMeasure){
+        pages[measureIndex].alpha = PAGE_OPACITY_ON;
+    }else{
+        pages[measureIndex].alpha = PAGE_OPACITY_OFF;
+    }
+
+    if(measureIndex < measureCounts[activePattern]){
+        [pages[measureIndex] setBackgroundColor:pageOnColor];
+    }else{
+        [pages[measureIndex] setBackgroundColor:pageOffColor];
+    }
+    
+    for(UIView * v in pages[measureIndex].subviews){
+        [v removeFromSuperview];
+    }
+    
+    measureToDelete = -1;
+    
+}
+
+- (void)deactivateMeasure:(int)tappedIndex
 {
     
     //scrollView.scrollEnabled = NO;
     
     // measure is active
-    if(activeMeasure < measureCounts[activePattern]){
+    if(tappedIndex < measureCounts[activePattern]){
         
-        switch(activeMeasure){
+        switch(tappedIndex){
             case 1:
-                NSLog(@"DEACTIVATE %i",activeMeasure);
+                NSLog(@"DEACTIVATE %i",tappedIndex);
                 
                 if(measureCounts[activePattern] > 2){
                     
@@ -438,7 +514,7 @@
                 break;
             case 2:
             case 3:
-                NSLog(@"DEACTIVATE %i",activeMeasure);
+                NSLog(@"DEACTIVATE %i",tappedIndex);
                 
                 [self clearMeasure:2 forPattern:activePattern];
                 [self clearMeasure:3 forPattern:activePattern];
@@ -453,6 +529,7 @@
                 break;
         }
         
+        [self hideDeleteForMeasure:tappedIndex];
         
         // SAVE CONTEXT
         [delegate saveContext:nil];
@@ -573,10 +650,11 @@
     //
     
     if(measureIndex > 0){
-        UILongPressGestureRecognizer * longPressMeasure = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdMeasure:)];
-        longPressMeasure.minimumPressDuration = 0.5;
         
-        [newMeasure addGestureRecognizer:longPressMeasure];
+        UILongPressGestureRecognizer * longPressPage = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressPage:)];
+        longPressPage.minimumPressDuration = 0.5;
+        
+        [pages[measureIndex] addGestureRecognizer:longPressPage];
     }
     
     return newMeasure;
@@ -616,10 +694,16 @@
     //
     
     if(measureIndex > 0){
+        
         UITapGestureRecognizer * doubleTapMeasure = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubletapMeasure:)];
         doubleTapMeasure.numberOfTapsRequired = 2;
         
         [newOffMeasure addGestureRecognizer:doubleTapMeasure];
+        
+        UITapGestureRecognizer * doubleTapPage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapPage:)];
+        doubleTapPage.numberOfTapsRequired = 2;
+        
+        [pages[measureIndex] addGestureRecognizer:doubleTapPage];
     }
     
     return newOffMeasure;
@@ -655,7 +739,6 @@
     }else{
         
         [self instateNewPattern:patternIndex andNewMeasure:measureIndex];
-    
     }
 }
 
@@ -796,6 +879,8 @@
 - (void)selectNewPattern:(id)sender
 {
     int tappedIndex = [patternButtons indexOfObject:sender];
+    
+    measureToDelete = -1;
     
     BOOL isPlaying = [delegate checkIsPlaying];
     
@@ -1033,7 +1118,18 @@
         newMeasureIndex = 3;
     }
     
-    [self scrollToMeasure:newMeasureIndex scrollSlow:YES];
+    if(measureToDelete > -1){
+        
+        if(measureToDelete == newMeasureIndex){
+            [self deactivateMeasure:measureToDelete];
+        }else{
+            [self hideDeleteForMeasure:measureToDelete];
+        }
+        
+    }else{
+        activeMeasure = newMeasureIndex;
+        [self scrollToMeasure:newMeasureIndex scrollSlow:YES];
+    }
 }
 
 - (void)scrollToAndSetActiveMeasure:(int)measureIndex scrollSlow:(BOOL)isSlow
@@ -1060,7 +1156,13 @@
             }
         }
     } completion:^(BOOL finished){
+        
         for(int i=0; i<NUM_MEASURES;i++){
+            
+            for(UIView * v in pages[i].subviews){
+                [v removeFromSuperview];
+            }
+            
             if(i == measureIndex){
                 pages[i].alpha = PAGE_OPACITY_ON;
             }else{
@@ -1073,6 +1175,7 @@
                 [pages[i] setBackgroundColor:pageOffColor];
             }
         }
+        
         scrollView.scrollEnabled = YES;
         
         [self updateGuitarView];

@@ -12,51 +12,106 @@
 				<dict>
 					<key>Section</key>
 					<string>Electronic</string>
-					<key>Sampleset</key>
+					<key>Sectionset</key>
 					<array>
-						<string>808 6</string>
-						<string>808 5</string>
-						<string>808 4</string>
-						<string>808 3</string>
-						<string>808 2</string>
-						<string>808 1</string>
-						<string>Chiptune 6</string>
-						<string>Chiptune 5</string>
-						<string>Chiptune 4</string>
-						<string>Chiptune 3</string>
-						<string>Chiptune 2</string>
-						<string>Chiptune 1</string>
-						<string>Dubstep 6</string>
-						<string>Dubstep 5</string>
-						<string>Dubstep 4</string>
-						<string>Dubstep 3</string>
-						<string>Dubstep 2</string>
-						<string>Dubstep 1</string>
-						<string>House 6</string>
-						<string>House 5</string>
-						<string>House 4</string>
-						<string>House 3</string>
-						<string>House 2</string>
-						<string>House 1</string>
-						<string>WubWub 6</string>
-						<string>WubWub 5</string>
-						<string>WubWub 4</string>
-						<string>WubWub 3</string>
-						<string>WubWub 2</string>
-						<string>WubWub 1</string>
+						<dict>
+							<key>Section</key>
+							<string>808</string>
+							<key>Sampleset</key>
+							<array>
+								<string>Kick</string>
+								<string>Snare</string>
+								<string>Closed Hat</string>
+								<string>Open Hat</string>
+								<string>Tom</string>
+								<string>Clap</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Chiptune</string>
+							<key>Sampleset</key>
+							<array>
+								<string>Kick</string>
+								<string>Snare</string>
+								<string>Siren</string>
+								<string>Beep</string>
+								<string>Triangle</string>
+								<string>Lazer</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Dubstep</string>
+							<key>Sampleset</key>
+							<array>
+								<string>Kick</string>
+								<string>Snare</string>
+								<string>Open Hat</string>
+								<string>Closed Hat</string>
+								<string>Clap</string>
+								<string>Shaker</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>House</string>
+							<key>Sampleset</key>
+							<array>
+								<string>Kick</string>
+								<string>Clap</string>
+								<string>Open Hat</string>
+								<string>Closed Hat</string>
+								<string>Snare</string>
+								<string>Wood Block</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>WubWub</string>
+							<key>Sampleset</key>
+							<array>
+								<string>Kick</string>
+								<string>Clap</string>
+								<string>Arp</string>
+								<string>Airhorn</string>
+								<string>Bass Synth</string>
+								<string>Womp</string>
+							</array>
+						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>Section</key>
 					<string>Acoustic</string>
-					<key>Sampleset</key>
+					<key>Sectionset</key>
 					<array>
-						<string>Rock 6</string>
-						<string>Rock 5</string>
-						<string>Rock 4</string>
-						<string>Rock 3</string>
-						<string>Rock 2</string>
-						<string>Rock 1</string>
+						<dict>
+							<key>Section</key>
+							<string>Rock</string>
+							<key>Sampleset</key>
+							<array>
+								<string>Kick</string>
+								<string>Snare</string>
+								<string>Closed Hat</string>
+								<string>Open Hat</string>
+								<string>Tom</string>
+								<string>Crash</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Hand Drum</string>
+							<key>Sampleset</key>
+							<array>
+								<string>Djembe Kick</string>
+								<string>Djembe High</string>
+								<string>Tom</string>
+								<string>Shaker</string>
+								<string>Knock</string>
+								<string>Clink</string>
+							</array>
+						</dict>
 					</array>
 				</dict>
 			</array>
@@ -69,64 +124,126 @@
 				<dict>
 					<key>Section</key>
 					<string>Percussive</string>
-					<key>Sampleset</key>
+					<key>Sectionset</key>
 					<array>
-						<string>Piano 6</string>
-						<string>Piano 5</string>
-						<string>Piano 4</string>
-						<string>Piano 3</string>
-						<string>Piano 2</string>
-						<string>Piano 1</string>
-						<string>Vibraphone 6</string>
-						<string>Vibraphone 5</string>
-						<string>Vibraphone 4</string>
-						<string>Vibraphone 3</string>
-						<string>Vibraphone 2</string>
-						<string>Vibraphone 1</string>
-						<string>Pluck 6</string>
-						<string>Pluck 5</string>
-						<string>Pluck 4</string>
-						<string>Pluck 3</string>
-						<string>Pluck 2</string>
-						<string>Pluck 1</string>
+						<dict>
+							<key>Section</key>
+							<string>Piano</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Vibraphone</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Pluck</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+							</array>
+						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>Section</key>
 					<string>Strings</string>
-					<key>Sampleset</key>
+					<key>Sectionset</key>
 					<array>
-						<string>Violin 6</string>
-						<string>Violin 5</string>
-						<string>Violin 4</string>
-						<string>Violin 3</string>
-						<string>Violin 2</string>
-						<string>Violin 1</string>
-						<string>Guitar 6</string>
-						<string>Guitar 5</string>
-						<string>Guitar 4</string>
-						<string>Guitar 3</string>
-						<string>Guitar 2</string>
-						<string>Guitar 1</string>
-						<string>Double Bass 6</string>
-						<string>Double Bass 5</string>
-						<string>Double Bass 4</string>
-						<string>Double Bass 3</string>
-						<string>Double Bass 2</string>
-						<string>Double Bass 1</string>
+						<dict>
+							<key>Section</key>
+							<string>Violin</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Guitar</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Double Bass</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+							</array>
+						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>Section</key>
 					<string>Winds</string>
-					<key>Sampleset</key>
+					<key>Sectionset</key>
 					<array>
-						<string>Trombone 6</string>
-						<string>Trombone 5</string>
-						<string>Trombone 4</string>
-						<string>Trombone 3</string>
-						<string>Trombone 2</string>
-						<string>Trombone 1</string>
+						<dict>
+							<key>Section</key>
+							<string>Trombone</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Flute</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+							</array>
+						</dict>
 					</array>
 				</dict>
 			</array>
@@ -136,12 +253,12 @@
 			<string>Sounds</string>
 			<key>Sampleset</key>
 			<array>
-				<string>Bacon 6</string>
-				<string>Bacon 5</string>
-				<string>Bacon 4</string>
-				<string>Bacon 3</string>
-				<string>Bacon 2</string>
-				<string>Bacon 1</string>
+				<string>I'm Bacon</string>
+				<string>I'm</string>
+				<string>Ba-</string>
+				<string>-con</string>
+				<string>Bacon</string>
+				<string>Reverse I'm Bacon</string>
 			</array>
 		</dict>
 	</array>

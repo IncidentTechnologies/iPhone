@@ -14,6 +14,7 @@
 @synthesize stringBox;
 @synthesize defaultFontColor;
 @synthesize sampleFilename;
+@synthesize sampleDisplayname;
 @synthesize useCustomPath;
 @synthesize stringColor;
 @synthesize stringImage;
@@ -59,9 +60,13 @@
 {
     sampleFilename = newFilename;
     
+    // parse _ to /
+    newFilename = [newFilename stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
+    sampleDisplayname = newFilename; //[@"../" stringByAppendingString:newFilename];
+    
     useCustomPath = isCustom;
     
-    [stringLabel setText:newFilename];
+    [stringLabel setText:sampleDisplayname];
     
     defaultFontColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8];
     

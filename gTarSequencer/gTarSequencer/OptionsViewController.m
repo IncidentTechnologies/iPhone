@@ -627,6 +627,13 @@
     return NO;
 }
 
+-(void)alertDuplicateFilename
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duplicate Set Name" message:@"Cannot override an existing set." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+}
+
 #pragma mark - Empty set
 
 - (void)showNoSetsLabel

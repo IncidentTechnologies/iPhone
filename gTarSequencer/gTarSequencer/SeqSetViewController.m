@@ -860,7 +860,7 @@
             [self updateAllVisibleCells];
         }
     }else{
-        [delegate forceStopAll];
+        [self stopAllPlaying];
     }
     
     [delegate numInstrumentsDidChange:[instruments count]];
@@ -916,7 +916,23 @@
          above it is, than the index in the array needs to be shifted */
         [self selectInstrument:selectedInstrumentIndex - 1];
     }
-    
+}
+
+#pragma mark - Check and start/stop playing
+
+- (void)stopAllPlaying
+{
+    [delegate stopAll];
+}
+
+- (BOOL)checkIsPlaying
+{
+    return [delegate checkIsPlaying];
+}
+
+- (void)startAllPlaying
+{
+    [delegate startAll];
 }
 
 #pragma mark Re-adding Instruments

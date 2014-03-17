@@ -452,6 +452,10 @@
     // hide keyboard
     [nameField resignFirstResponder];
     
+    if([self checkDuplicateCustomInstrumentName:nameField.text]){
+        [self alertDuplicateTrackName];
+    }
+    
     [self resetNameFieldIfBlank];
     
     // hide styles
@@ -542,6 +546,21 @@
     return NO;
 }
 
+-(void)alertDuplicateTrackName
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duplicate Track Name" message:@"Cannot override an existing track." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+-(void)alertDuplicateSoundName
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duplicate Sound Name" message:@"Cannot override an existing sound." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+
 #pragma mark - Recording Name Field
 - (void)recordingNameFieldStartEdit:(id)sender
 {
@@ -594,6 +613,11 @@
     [self checkIfRecordingNameReady];
     
     if(!isRecordingNameReady){
+        
+        if([self checkDuplicateRecordingName:recordingNameField.text]){
+            [self alertDuplicateSoundName];
+        }
+        
         [self resetRecordingNameIfBlank];
     }
     
@@ -662,8 +686,6 @@
     }
     return NO;
 }
-
-
 
 // single sample audio player
 - (void)playAudioForFile:(NSString *)filename withCustomPath:(BOOL)useCustomPath
@@ -800,6 +822,12 @@
     [self showRecordProcessing];
     audioLoadTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(initDrawAudio) userInfo:nil repeats:NO];
     
+    // Resume playing
+    if(pausePlaying){
+        [delegate startAllPlaying];
+        pausePlaying = NO;
+    }
+    
     // Enable save
     isRecordingReady = TRUE;
     [self checkIfRecordSaveReady];
@@ -910,6 +938,13 @@
 
 -(void)userDidStartRecord
 {
+    // Pause any playing
+    if([delegate checkIsPlaying]){
+        pausePlaying = YES;
+        [delegate stopAllPlaying];
+    }else{
+        pausePlaying = NO;
+    }
     
     // Double check
     [self userDidEndRecord];
@@ -1065,7 +1100,7 @@
     NSString * filename = recordingNameField.text;
     
     // Rename the file and save in Documents/Samples/ subdirectory
-    [customSoundRecorder renameRecordingToFilename:filename];
+    [customSoundRecorder saveRecordingToFilename:filename];
     
     // Add to customSampleList.pList
     [self updateCustomSampleListWithSample:filename];
@@ -1683,6 +1718,8 @@
         CustomSampleCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) cell = [[CustomSampleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
+        cell.parentCategory = [sampleStack lastObject];
+        
         [cell.sampleTitle setText:[self getSampleFromIndex:indexPath]];
         [cell setBackgroundColor:[UIColor clearColor]];
         
@@ -1786,14 +1823,30 @@
         BOOL useCustomPath = ([self isCustomInstrumentList]) ? TRUE : FALSE;
         
         // pass filename
-        [selectedStringCell updateFilename:selectedSampleCell.sampleTitle.text isCustom:useCustomPath];
+        NSString * filename = selectedSampleCell.parentCategory;
+        filename = [filename stringByAppendingString:@"_"];
+        filename = [filename stringByAppendingString:selectedSampleCell.sampleTitle.text];
+        [selectedStringCell updateFilename:filename isCustom:useCustomPath];
         
         // turn off sample to avoid reselecting
         [self styleSampleCell:nil turnOff:selectedSampleCell];
         selectedSampleCell = nil;
         
-        [self checkIfAllStringsReady];
+        if(![self checkIfAllStringsReady]){
+            [self selectNextString:selectedStringCell];
+        }
     }
+}
+
+- (void)selectNextString:(CustomStringCell *)cell
+{
+    int rowIndex = [stringTable indexPathForCell:cell].row;
+    int sectionIndex = [stringTable indexPathForCell:cell].section;
+    
+    [self toggleStringCellAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex]];
+    
+    [self toggleStringCellAtIndexPath:[NSIndexPath indexPathForRow:rowIndex+1 inSection:sectionIndex]];
+    
 }
 
 - (void)deselectString:(CustomStringCell *)cell
@@ -1988,7 +2041,7 @@
 
 
 // determine whether to show Next/Save button
-- (void)checkIfAllStringsReady
+- (BOOL)checkIfAllStringsReady
 {
     BOOL isReady = true;
     
@@ -2007,6 +2060,8 @@
         [nextButton.imageView setAlpha:0.3];
         [nextButtonArrow setAlpha:0.3];
     }
+    
+    return isReady;
 }
 
 #pragma mark - Drawing
@@ -2162,7 +2217,9 @@
         
         NSLog(@"PLAYING FILE ... %@.mp3",cell.sampleTitle.text);
         BOOL isCustom = ([self isCustomInstrumentList]) ? TRUE : FALSE;
-        [self playAudioForFile:cell.sampleTitle.text withCustomPath:isCustom];
+        NSString * filename = [cell.parentCategory stringByAppendingString:@"_"];
+        filename = [filename stringByAppendingString:cell.sampleTitle.text];
+        [self playAudioForFile:filename withCustomPath:isCustom];
         
         return YES;
     }

@@ -57,6 +57,7 @@
     
     CGPoint lastContentOffset;
     int targetMeasure;
+    int measureToDelete;
     
     // Pages
     UIColor * pageOnColor;

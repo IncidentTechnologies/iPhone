@@ -13,6 +13,7 @@
 @synthesize deleteButton;
 @synthesize sampleTitle;
 @synthesize sampleArrow;
+@synthesize parentCategory;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

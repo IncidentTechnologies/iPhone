@@ -143,7 +143,7 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IoH-0q-Ut2">
-                    <rect key="frame" x="44" y="39" width="4" height="4"/>
+                    <rect key="frame" x="45" y="38" width="4" height="4"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.80000000000000004" green="0.91764705879999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>

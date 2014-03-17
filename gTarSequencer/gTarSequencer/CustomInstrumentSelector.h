@@ -20,6 +20,10 @@
 - (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName;
 - (NSMutableArray *)getCustomInstrumentOptions;
 
+- (void)stopAllPlaying;
+- (void)startAllPlaying;
+- (BOOL)checkIsPlaying;
+
 @end
 
 @interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate>
@@ -64,6 +68,7 @@
     BOOL isRecordingReady;
     BOOL isRecordingNameReady;
     BOOL isPaused;
+    BOOL pausePlaying;
     
     float timePlayed;
     float leftFirstX;

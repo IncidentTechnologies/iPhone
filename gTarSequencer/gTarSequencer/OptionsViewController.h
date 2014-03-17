@@ -55,6 +55,7 @@
 
 - (void)deselectAllRows;
 - (BOOL)isDuplicateFilename:(NSString *)filename;
+- (void)alertDuplicateFilename;
 - (NSString *)generateNextSetName;
 - (void)disableScroll;
 - (void)enableScroll;

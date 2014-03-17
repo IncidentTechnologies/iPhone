@@ -33,6 +33,7 @@
 - (void)pausePlayback:(float)ms;
 - (void)unpausePlayback;
 - (void)renameRecordingToFilename:(NSString *)filename;
+- (void)saveRecordingToFilename:(NSString *)filename;
 - (void)deleteRecordingFilename:(NSString *)filename;
 - (void)initAudioForSample;
 - (unsigned long int)fetchAudioBufferSize;

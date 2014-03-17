@@ -84,16 +84,17 @@
     fileName.textColor = [UIColor whiteColor];
     fileName.borderStyle = UITextBorderStyleNone;
     
-    // Setup text field listener
-    [fileName addTarget:self action:@selector(saveFieldStartEdit:) forControlEvents:UIControlEventEditingDidBegin];
-    [fileName addTarget:self action:@selector(saveFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
-    [fileName addTarget:self action:@selector(saveFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
-    // Setup gesture recognizer
-    UITapGestureRecognizer * doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-    doubletap.numberOfTapsRequired = 2;
-    
     if(![fileText.text isEqualToString:DEFAULT_SET_NAME]){
+        
+        // Setup text field listener
+        [fileName addTarget:self action:@selector(saveFieldStartEdit:) forControlEvents:UIControlEventEditingDidBegin];
+        [fileName addTarget:self action:@selector(saveFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
+        [fileName addTarget:self action:@selector(saveFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        
+        // Setup gesture recognizer
+        UITapGestureRecognizer * doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+        doubletap.numberOfTapsRequired = 2;
+        
         [self addGestureRecognizer:doubletap];
     }
     
@@ -335,7 +336,9 @@
         
         // auto rename if duplicate
         if([parent isDuplicateFilename:fileName.text] && ![fileName.text isEqualToString:previousNameText]){
-            fileName.text = [parent generateNextSetName];
+            //fileName.text = [parent generateNextSetName];
+            fileName.text = previousNameText;
+            [parent alertDuplicateFilename];
         }else if([parent isDuplicateFilename:fileName.text]){
             fileName.text = previousNameText;
         }
@@ -509,13 +512,15 @@
     
     if([parent.selectMode isEqualToString:@"Load"]){
         
-        fileName.text = fileText.text;
-        
-        [fileText setHidden:YES];
-        [fileName setHidden:NO];
-        
-        // open keyboard
-        [self beginNameEditing];
+        if(![fileText.text isEqualToString:DEFAULT_SET_NAME]){
+            fileName.text = fileText.text;
+            
+            [fileText setHidden:YES];
+            [fileName setHidden:NO];
+            
+            // open keyboard
+            [self beginNameEditing];
+        }
     }
 }
 

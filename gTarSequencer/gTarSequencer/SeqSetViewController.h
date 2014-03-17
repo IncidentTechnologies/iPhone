@@ -16,9 +16,11 @@
 @protocol SeqSetDelegate <NSObject>
 
 - (void) saveContext:(NSString *)filepath;
-- (BOOL) checkIsPlaying;
 - (void) resetPlayLocation;
-- (void) forceStopAll;
+
+- (void) stopAll;
+- (void) startAll;
+- (BOOL) checkIsPlaying;
 
 - (void) turnOffGuitarEffects;
 - (void) setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying;

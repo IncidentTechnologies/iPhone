@@ -21,6 +21,7 @@
 
 @property (retain) AVAudioPlayer * audio;
 @property (nonatomic) NSString * sampleFilename;
+@property (nonatomic) NSString * sampleDisplayname;
 @property (nonatomic) UIColor * defaultFontColor;
 @property (nonatomic) int index;
 @property (weak, nonatomic) IBOutlet UIButton * stringBox;

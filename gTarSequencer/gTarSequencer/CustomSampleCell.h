@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIButton * deleteButton;
 @property (weak, nonatomic) IBOutlet UILabel * sampleTitle;
 @property (weak, nonatomic) IBOutlet UIImageView * sampleArrow;
+@property (nonatomic) NSString * parentCategory;
 
 @end
