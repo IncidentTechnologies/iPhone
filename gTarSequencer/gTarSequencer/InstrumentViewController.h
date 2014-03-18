@@ -65,6 +65,9 @@
     
 }
 
+-(void)leftNavWillOpen;
+-(void)leftNavDidClose;
+
 -(void)reopenView;
 
 -(void)setPlaybandForMeasure:(int)measureIndex toPlayband:(int)p;

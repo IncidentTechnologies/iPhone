@@ -20,7 +20,7 @@
 #define NOTE_GAP 2
 #define MUTE_SEGMENT_INDEX 4
 #define SCROLL_SPEED_MIN 0
-#define SCROLL_SPEED_MAX 0.5
+#define SCROLL_SPEED_MAX 0.3
 
 #define PAGE_OPACITY_OFF 0.3
 #define PAGE_OPACITY_MID 0.5
@@ -56,6 +56,7 @@
         activePattern = -1;
         activeMeasure = -1;
         targetMeasure = -1;
+        measureToDelete = -1;
         
         patternButtons = nil;
         selectedPatternButton = nil;
@@ -351,7 +352,12 @@
 
     for(int i = 0; i <NUM_MEASURES; i++){
         if(measureSet[activePattern][i] == tappedMeasure){
-            [self activateMeasure:i];
+            if(i < measureCounts[activePattern]){
+                [self setNewMeasureFromPage:i];
+            }else{
+                [self activateMeasure:i];
+            }
+            
             return;
         }
     }
@@ -360,10 +366,15 @@
 - (void)doubleTapPage:(UITapGestureRecognizer *)recognizer
 {
     UIButton * tappedPage = (UIButton *)recognizer.view;
-
+    
+    if(measureToDelete > -1){
+        [self hideDeleteForMeasure:measureToDelete];
+    }
+    
     for(int i =0; i < NUM_MEASURES; i++){
         if(pages[i] == tappedPage){
             [self activateMeasure:i];
+            return;
         }
     }
 }
@@ -374,7 +385,13 @@
 
     for(int i =0; i < NUM_MEASURES; i++){
         if(pages[i] == pressedPage){
+            
+            if(measureToDelete != i && measureToDelete > -1){
+                [self hideDeleteForMeasure:measureToDelete];
+            }
+            
             [self showDeleteForMeasure:i];
+            return;
         }
     }
 }
@@ -434,8 +451,12 @@
 
 - (void)showDeleteForMeasure:(int)measureIndex
 {
-    if(measureToDelete > -1){
+    if(measureToDelete > -1 && measureToDelete != measureIndex){
         [self hideDeleteForMeasure:measureToDelete];
+    }
+    
+    if(measureIndex != activeMeasure){
+        [self setNewMeasureFromPage:measureIndex];
     }
     
     if(measureIndex < measureCounts[activePattern]){
@@ -455,6 +476,7 @@
 
 - (void)hideDeleteForMeasure:(int)measureIndex
 {
+    
     if(measureIndex == activeMeasure){
         pages[measureIndex].alpha = PAGE_OPACITY_ON;
     }else{
@@ -474,6 +496,35 @@
     measureToDelete = -1;
     
 }
+
+
+
+- (void)setActivePage:(int)measureIndex
+{
+    // pagination
+    for(int i=0; i<NUM_MEASURES;i++){
+        
+        if(i == measureIndex){
+            pages[i].alpha = PAGE_OPACITY_ON;
+        }else{
+            pages[i].alpha = PAGE_OPACITY_OFF;
+        }
+        
+        if(i != measureToDelete){
+            for(UIView * v in pages[i].subviews){
+                [v removeFromSuperview];
+            }
+            
+            if(i < measureCounts[activePattern]){
+                [pages[i] setBackgroundColor:pageOnColor];
+            }else{
+                [pages[i] setBackgroundColor:pageOffColor];
+            }
+        }
+        
+    }
+}
+
 
 - (void)deactivateMeasure:(int)tappedIndex
 {
@@ -1118,23 +1169,35 @@
         newMeasureIndex = 3;
     }
     
+    [self setNewMeasureFromPage:newMeasureIndex];
+
+}
+
+- (void)setNewMeasureFromPage:(int)measureIndex
+{
     if(measureToDelete > -1){
         
-        if(measureToDelete == newMeasureIndex){
+        if(measureToDelete == measureIndex){
             [self deactivateMeasure:measureToDelete];
         }else{
             [self hideDeleteForMeasure:measureToDelete];
         }
         
     }else{
-        activeMeasure = newMeasureIndex;
-        [self scrollToMeasure:newMeasureIndex scrollSlow:YES];
+        
+        [self setActivePage:measureIndex];
+        [self highlightMeasure:measureIndex];
+        
+        activeMeasure = measureIndex;
+        targetMeasure = activeMeasure;
+        [self scrollToMeasure:measureIndex scrollSlow:YES];
     }
 }
 
 - (void)scrollToAndSetActiveMeasure:(int)measureIndex scrollSlow:(BOOL)isSlow
 {
     activeMeasure = measureIndex;
+    targetMeasure = activeMeasure;
     [self setDeclaredActiveMeasure:measureIndex];
     [self scrollToMeasure:measureIndex scrollSlow:isSlow];
 }
@@ -1145,6 +1208,8 @@
     
     CGPoint newOffset = CGPointMake(measureIndex*(MEASURE_WIDTH+measureMargin),0);
     double scrollSpeed = isSlow ? SCROLL_SPEED_MAX : SCROLL_SPEED_MIN;
+
+    NSLog(@"Active measure is %i",activeMeasure);
     
     [UIView animateWithDuration:scrollSpeed animations:^(){
         [scrollView setContentOffset:newOffset];
@@ -1157,29 +1222,24 @@
         }
     } completion:^(BOOL finished){
         
-        for(int i=0; i<NUM_MEASURES;i++){
-            
-            for(UIView * v in pages[i].subviews){
-                [v removeFromSuperview];
-            }
-            
-            if(i == measureIndex){
-                pages[i].alpha = PAGE_OPACITY_ON;
-            }else{
-                pages[i].alpha = PAGE_OPACITY_OFF;
-            }
-            
-            if(i < measureCounts[activePattern]){
-                [pages[i] setBackgroundColor:pageOnColor];
-            }else{
-                [pages[i] setBackgroundColor:pageOffColor];
-            }
-        }
-        
+        [self setActivePage:measureIndex];
         scrollView.scrollEnabled = YES;
-        
         [self updateGuitarView];
+        
     }];
+    
+}
+
+- (void)highlightMeasure:(int)measureIndex
+{
+    for(int i = 0; i < NUM_MEASURES; i++){
+        if(i == measureIndex){
+            [measureSet[activePattern][i] setAlpha:PAGE_OPACITY_ON];
+            
+        }else{
+            [measureSet[activePattern][i] setAlpha:PAGE_OPACITY_MID];
+        }
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scroller
@@ -1205,50 +1265,97 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scroller
 {
     
+    CGPoint location = [scroller.panGestureRecognizer locationInView:scroller];
+    float x = location.x - activeMeasure*(MEASURE_WIDTH+[self getMeasureMargin]);
+    float velocityX = [scroller.panGestureRecognizer velocityInView:scrollView].x;
+    
+    if((x < 80 || (activeMeasure == 0 && x < 300)) && velocityX >= 0){
+        [delegate openLeftNavigator];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scroller
 {
+    if(measureToDelete > -1){
+        [self hideDeleteForMeasure:measureToDelete];
+    }
     
+    if(!scrollView.scrollEnabled){
+        [self pinScrollViewToActiveMeasure];
+    }
+}
+
+-(void)leftNavWillOpen
+{
+    if(measureToDelete > -1){
+        [self hideDeleteForMeasure:measureToDelete];
+    }
+    
+    targetMeasure = activeMeasure;
+    scrollView.userInteractionEnabled = NO;
+    scrollView.scrollEnabled = NO;
+    [self pinScrollViewToActiveMeasure];
+    [self.view setUserInteractionEnabled:NO];
+    
+}
+
+- (void)leftNavDidClose
+{
+    targetMeasure = activeMeasure;
+    scrollView.userInteractionEnabled = YES;
+    scrollView.scrollEnabled = YES;
+    [self.view setUserInteractionEnabled:YES];
+    [self pinScrollViewToActiveMeasure];
+}
+
+- (void)pinScrollViewToActiveMeasure
+{
+
+    [scrollView setContentOffset:CGPointMake(activeMeasure*(MEASURE_WIDTH+[self getMeasureMargin]), 0)];
+    [self highlightMeasure:activeMeasure];
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scroller withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
+    float velocityX = [scroller.panGestureRecognizer velocityInView:scrollView].x;
     
-    // First check how swipes interfere with left nav
-    if(activeMeasure == 0 && velocity.x <= 0 && targetContentOffset->x <= 0 && lastContentOffset.x == 0 && ![delegate isLeftNavOpen]){
-        
-        [delegate openLeftNavigator];
-        targetMeasure = activeMeasure;
-        
-    }else if([delegate isLeftNavOpen]){
-        
-        [delegate closeLeftNavigator];
-        //velocity = CGPointMake(0, 0);
-        targetMeasure = activeMeasure;
-        
-    }else{
-        
+    if(scrollView.scrollEnabled){
         // Determine a target measure to scroll to
-        double velocityOffset = floor(abs(velocity.x)/3.0)+1;
+        //double velocityOffset = floor(abs(velocity.x)/3.0)+1;
+        double velocityOffset = 1;
         
-        if(scrollView.contentOffset.x > lastContentOffset.x){
+        /*if(scrollView.contentOffset.x > lastContentOffset.x){
             targetMeasure = MIN(activeMeasure+velocityOffset,NUM_MEASURES-1);
         }else if(scrollView.contentOffset.x < lastContentOffset.x){
             targetMeasure = MAX(activeMeasure-velocityOffset,0);
+        }*/
+        
+        if(velocityX < 0){
+            targetMeasure = MIN(activeMeasure+velocityOffset,NUM_MEASURES-1);
+        }else if(velocityX > 0){
+            targetMeasure = MAX(activeMeasure-velocityOffset,0);
         }
         
+        [self setActivePage:targetMeasure];
+        [self highlightMeasure:targetMeasure];
+
         CGPoint newOffset = CGPointMake(targetMeasure*(MEASURE_WIDTH+[self getMeasureMargin]),0);
         
         targetContentOffset->x = newOffset.x;
         lastContentOffset.x = newOffset.x;
+    }else{
+        [self pinScrollViewToActiveMeasure];
     }
     
 }
 
 - (void)snapScrollerToPlace:(UIScrollView *)scroller
 {
-    [self changeActiveMeasureToMeasure:targetMeasure scrollSlow:NO];
+    //if(scrollView.scrollEnabled){
+        [self changeActiveMeasureToMeasure:targetMeasure scrollSlow:NO];
+    //}else{
+    //    [self pinScrollViewToActiveMeasure];
+    //}
 }
 
 - (float)getMeasureMargin

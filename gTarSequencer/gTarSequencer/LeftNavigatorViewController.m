@@ -181,6 +181,7 @@
     [instrumentButton setAlpha:0.2];
     instrumentViewEnabled = false;
     [instrumentButton setImage:defaultInstrumentIcon forState:UIControlStateNormal];
+    [self hideCustomIndicator];
 }
 
 -(void)showCustomIndicator

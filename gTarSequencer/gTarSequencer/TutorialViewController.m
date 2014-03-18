@@ -36,8 +36,12 @@
     
     tutorialName = tutorial;
     
+    conditionalScreen = -1;
+    showConditionalScreen = NO;
+    
     if([tutorialName isEqualToString:@"Intro"]){
-        tutorialTotalSteps = 4;
+        tutorialTotalSteps = 6;
+        conditionalScreen = 5;
     }else if([tutorialName isEqualToString:@"Instrument"]){
         tutorialTotalSteps = 1;
     }else if([tutorialName isEqualToString:@"Custom"]){
@@ -104,9 +108,9 @@
     [UIView animateWithDuration:0.5 animations:^(void){
         for (UIView * v in views) {
             if(!reverse){
-                [v setFrame:CGRectMake(-1*screenWidth/2,v.frame.origin.y,v.frame.size.width,v.frame.size.height)];
+                [v setFrame:CGRectMake(-1*screenWidth+v.frame.origin.x,v.frame.origin.y,v.frame.size.width,v.frame.size.height)];
              }else{
-                 [v setFrame:CGRectMake(screenWidth+screenWidth/2, v.frame.origin.y, v.frame.size.width, v.frame.size.height)];
+                 [v setFrame:CGRectMake(screenWidth+v.frame.origin.x, v.frame.origin.y, v.frame.size.width, v.frame.size.height)];
              }
             [v setAlpha:0.0];
         }
@@ -129,9 +133,9 @@
     CGRect frame = v.frame;
     
     if(!reverse){
-        [v setFrame:CGRectMake(screenWidth+screenWidth/2,frame.origin.y,frame.size.width,frame.size.height)];
+        [v setFrame:CGRectMake(screenWidth+frame.origin.x,frame.origin.y,frame.size.width,frame.size.height)];
     }else{
-        [v setFrame:CGRectMake(-1*screenWidth/2, frame.origin.y, frame.size.width, frame.size.height)];
+        [v setFrame:CGRectMake(-1*screenWidth+frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)];
     }
     [v setAlpha:0.0];
     
@@ -175,6 +179,15 @@
     [tutorialScreen removeGestureRecognizer:swipeRight];
 }
 
+-(int)checkShowConditionalScreen:(int)screenIndex
+{
+    if(screenIndex == conditionalScreen && !showConditionalScreen){
+        screenIndex++;
+    }
+    
+    return screenIndex;
+}
+
 #pragma mark - Intro Tutorial
 
 - (void)drawIntroTutorialScreen:(int)screenIndex isReverseDirection:(BOOL)reverse
@@ -190,9 +203,13 @@
     // Clear out previous screen
     [self fadeOutTutorialSubviews:NO isReverseDirection:reverse];
     
+    // Show conditional screen?
+    screenIndex = [self checkShowConditionalScreen:screenIndex];
+    
     if(screenIndex == 1){
         
         [self stopRightSwipeGesture];
+        [self stopLeftSwipeGesture];
         
         //
         // WELCOME TO SEQUENCE
@@ -215,9 +232,9 @@
         CGRect yesButtonFrame = CGRectMake(tutorialScreen.frame.size.width/2 - 233,197,circleWidth,circleWidth);
         CGRect noButtonFrame = CGRectMake(tutorialScreen.frame.size.width/2 + 110,197,circleWidth,circleWidth);
         
-        [self drawTutorialCircle:yesButtonFrame withTitle:@"YES" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:[UIColor whiteColor] andAction:@selector(incrementFTUTutorial) isReverseDirection:reverse];
+        [self drawTutorialCircle:yesButtonFrame withTitle:@"YES" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:[UIColor whiteColor] andAction:@selector(setIntroConditionalScreenOn) isReverseDirection:reverse];
         
-        [self drawTutorialCircle:noButtonFrame withTitle:@"NO" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:[UIColor whiteColor] andAction:@selector(incrementFTUTutorial) isReverseDirection:reverse];
+        [self drawTutorialCircle:noButtonFrame withTitle:@"NO" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:[UIColor whiteColor] andAction:@selector(setIntroConditionalScreenOff) isReverseDirection:reverse];
         
         // Yes+No stripes/arrows
         CGRect yesStripeFrame = CGRectMake(yesButtonFrame.origin.x+yesButtonFrame.size.width-circleBorderWidth/2,yesButtonFrame.origin.y+yesButtonFrame.size.height/2-stripeWidth/2,15,stripeWidth);
@@ -300,6 +317,19 @@
         [self startSwipeGestures];
         
         if(screenIndex == 2){
+        
+            //
+            // WHAT IS SEQUENCE
+            //
+            
+            [tutorialScreen setBackgroundColor:blueColor];
+            
+            // Title label
+            CGRect titleFrame = CGRectMake(30,30,380,30);
+            
+            [self drawTutorialLabel:titleFrame withTitle:@"What is Sequence?" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
+            
+        }else if(screenIndex == 3){
             
             //
             // SET VIEW
@@ -381,7 +411,7 @@
             CGRect deleteArrowFrame = CGRectMake(deleteLabelFrame.origin.x-arrowWidth, deleteLabelFrame.origin.y-(arrowHeight-defaultLabelHeight)/2, arrowWidth, arrowHeight);
             [self drawTutorialArrow:deleteArrowFrame facesDirection:9 width:arrowWidth height:arrowHeight withColor:blueColor isReverseDirection:reverse];
             
-        }else if(screenIndex == 3){
+        }else if(screenIndex == 4){
             
             //
             // TEMPO VOLUME
@@ -510,7 +540,7 @@
             [self fadeInTutorialSubview:plusSymbol isReverseDirection:reverse];
             
             // 1, 2, 4
-            CGRect loopOneFrame;
+            /*CGRect loopOneFrame;
             CGRect loopTwoFrame;
             CGRect loopFourFrame;
             
@@ -527,19 +557,33 @@
             [self drawTutorialLabel:loopOneFrame withTitle:@"1" withColor:blueColor isHeader:YES isReverseDirection:reverse];
             [self drawTutorialLabel:loopTwoFrame withTitle:@"2" withColor:blueColor isHeader:YES isReverseDirection:reverse];
             [self drawTutorialLabel:loopFourFrame withTitle:@"4" withColor:blueColor isHeader:YES isReverseDirection:reverse];
+            */
             
             // Change Loop Length
             float trackHeaderHeight = defaultLabelHeight;
-            float trackHeaderWidth = 230;
-            CGRect titleFrame = CGRectMake(minusCircleFrame.origin.x+35,minusCircleFrame.origin.y+minusCircleFrame.size.height+15,trackHeaderWidth,trackHeaderHeight);
+            float trackHeaderWidth = 217;
+            CGRect titleFrame = CGRectMake(minusCircleFrame.origin.x+minusCircleFrame.size.width-3,minusCircleFrame.origin.y+(minusCircleFrame.size.height-trackHeaderHeight)/2,trackHeaderWidth,trackHeaderHeight);
             
             [self drawTutorialLabel:titleFrame withTitle:@"Change loop length" withColor:blueColor isHeader:NO isReverseDirection:reverse];
             
             // Change loop stripe
-            CGRect changeLoopStripeFrame = CGRectMake(titleFrame.origin.x,minusCircleFrame.origin.y+minusCircleFrame.size.height-3,stripeWidth,18);
-            UIView * changeLoopStripe = [[UIView alloc] initWithFrame:changeLoopStripeFrame];
-            [changeLoopStripe setBackgroundColor:blueColor];
-            [self fadeInTutorialSubview:changeLoopStripe isReverseDirection:reverse];
+            //CGRect changeLoopStripeFrame = CGRectMake(titleFrame.origin.x,minusCircleFrame.origin.y+minusCircleFrame.size.height-3,stripeWidth,18);
+            //UIView * changeLoopStripe = [[UIView alloc] initWithFrame:changeLoopStripeFrame];
+            //[changeLoopStripe setBackgroundColor:blueColor];
+            //[self fadeInTutorialSubview:changeLoopStripe isReverseDirection:reverse];
+            
+        }else if(screenIndex == 5){
+            
+            
+            //
+            // USE GTAR AS A CONTROLLER
+            //
+            
+            // Tempo circle
+            CGRect tempoCircleFrame = CGRectMake(tutorialScreen.frame.size.width/2-circleWidth/2+39.5,tutorialScreen.frame.size.height-3*circleWidth/4-3,circleWidth,circleWidth);
+            [self drawTutorialCircle:tempoCircleFrame withTitle:@"120" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:reverse];
+
+            
             
         }
         
@@ -547,6 +591,18 @@
     
     tutorialScreen.userInteractionEnabled = YES;
     
+}
+
+-(void)setIntroConditionalScreenOn
+{
+    showConditionalScreen = YES;
+    [self incrementFTUTutorial];
+}
+
+-(void)setIntroConditionalScreenOff
+{
+    showConditionalScreen = NO;
+    [self incrementFTUTutorial];
 }
 
 #pragma mark - Instrument Tutorial
@@ -628,10 +684,10 @@
         [self fadeInTutorialSubview:noteBox isReverseDirection:NO];
         
         // Control notes
-        float noteHeaderWidth = 320;
+        float noteHeaderWidth = 385;
         CGRect noteTitleFrame = CGRectMake(noteCircleFrame.origin.x+35,noteCircleFrame.origin.y+noteCircleFrame.size.height+10,noteHeaderWidth,defaultLabelHeight);
         
-        [self drawTutorialLabel:noteTitleFrame withTitle:@"Each colored square is a sound" withColor:blueColor isHeader:NO isReverseDirection:NO];
+        [self drawTutorialLabel:noteTitleFrame withTitle:@"Toggle sounds to play in the measure" withColor:blueColor isHeader:NO isReverseDirection:NO];
         
         // Note stripe
         CGRect noteStripeFrame = CGRectMake(noteTitleFrame.origin.x,noteCircleFrame.origin.y+noteCircleFrame.size.height-3,stripeWidth,15);
@@ -670,18 +726,19 @@
         
         // Header
         float customHeaderHeight = defaultLabelHeight + 15;
-        float customHeaderWidth = 290;
-        CGRect titleFrame = CGRectMake(tutorialScreen.frame.size.width/2-190,218,customHeaderWidth,customHeaderHeight);
+        float customHeaderWidth = 340;
+        CGRect titleFrame = CGRectMake(tutorialScreen.frame.size.width/2-180,218,customHeaderWidth,customHeaderHeight);
         
         UILabel * titleLabel = [self drawTutorialLabel:titleFrame withTitle:@"" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:NO];
         
-        NSMutableAttributedString * titleString = [[NSMutableAttributedString alloc] initWithString:@"Build a custom track."];
-        [titleString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(7,13)];
+        NSMutableAttributedString * titleString = [[NSMutableAttributedString alloc] initWithString:@"Build a track from 6 sounds."];
+        [titleString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(18,10)];
         
         [titleLabel setAttributedText:titleString];
         
         // First string / first sample
-        float stringWidth = 102;
+        float stringWidth = 153;
+        float sampleWidth = 213;
         float stringHeight = 39;
         
         CGRect stringBoxFrame;
@@ -689,10 +746,10 @@
         
         if(isScreenLarge){
             stringBoxFrame = CGRectMake(314-borderWidth,22-borderWidth,stringWidth+2*borderWidth,stringHeight+2*borderWidth);
-            sampleBoxFrame = CGRectMake(106-borderWidth,101-borderWidth,stringWidth+2*borderWidth,stringHeight-1+2*borderWidth);
+            sampleBoxFrame = CGRectMake(103-borderWidth,101-borderWidth,sampleWidth+2*borderWidth,stringHeight-1+2*borderWidth);
         }else{
-            stringBoxFrame = CGRectMake(268-borderWidth,22-borderWidth,stringWidth+2*borderWidth,stringHeight+2*borderWidth);
-            sampleBoxFrame = CGRectMake(60-borderWidth,101-borderWidth,stringWidth+2*borderWidth,stringHeight-1+2*borderWidth);
+            stringBoxFrame = CGRectMake(270-borderWidth,22-borderWidth,stringWidth+2*borderWidth,stringHeight+2*borderWidth);
+            sampleBoxFrame = CGRectMake(59-borderWidth,101-borderWidth,sampleWidth+2*borderWidth,stringHeight-1+2*borderWidth);
         }
         
         UIView * stringBox = [[UIView alloc] initWithFrame:stringBoxFrame];
@@ -710,15 +767,16 @@
         [self fadeInTutorialSubview:sampleBox isReverseDirection:NO];
         
         // First string+sample text
-        CGRect stringTextFrame = CGRectMake(stringBoxFrame.origin.x+12, stringBoxFrame.origin.y+1, stringBoxFrame.size.width, stringBoxFrame.size.height);
-        CGRect sampleTextFrame = CGRectMake(sampleBoxFrame.origin.x-8, sampleBoxFrame.origin.y+1, sampleBoxFrame.size.width, sampleBoxFrame.size.height);
+        CGRect stringTextFrame = CGRectMake(stringBoxFrame.origin.x+8, stringBoxFrame.origin.y+1, stringBoxFrame.size.width, stringBoxFrame.size.height);
+        CGRect sampleTextFrame = CGRectMake(sampleBoxFrame.origin.x+18, sampleBoxFrame.origin.y+1, sampleBoxFrame.size.width, sampleBoxFrame.size.height);
         
-        UILabel * stringText = [self drawTutorialLabel:stringTextFrame withTitle:@"Guitar 2" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:NO];
-        UILabel * sampleText = [self drawTutorialLabel:sampleTextFrame withTitle:@"Guitar 2" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:NO];
+        UILabel * stringText = [self drawTutorialLabel:stringTextFrame withTitle:@"House/Snare" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:NO];
+        UILabel * sampleText = [self drawTutorialLabel:sampleTextFrame withTitle:@"Snare" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:NO];
         
         [stringText setFont:[UIFont fontWithName:FONT_DEFAULT size:18.0]];
         [sampleText setFont:[UIFont fontWithName:FONT_DEFAULT size:18.0]];
         
+        [sampleText setTextAlignment:NSTextAlignmentLeft];
         [sampleText setTextColor:[UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1.0]];
         
         // Sample and string circles
@@ -742,13 +800,13 @@
         [self drawTutorialArrow:tutorialArrowFrame facesDirection:3 width:10 height:15 withColor:[UIColor whiteColor] isReverseDirection:NO];
         
         // Add sounds
-        float addSoundsTitleWidth = 277;
-        CGRect addSoundsTitleFrame = CGRectMake(sampleBoxFrame.origin.x,sampleBoxFrame.origin.y+sampleBoxFrame.size.height+10,addSoundsTitleWidth,defaultLabelHeight);
+        //float addSoundsTitleWidth = 277;
+       // CGRect addSoundsTitleFrame = CGRectMake(sampleBoxFrame.origin.x,sampleBoxFrame.origin.y+sampleBoxFrame.size.height+10,addSoundsTitleWidth,defaultLabelHeight);
         
-        [self drawTutorialLabel:addSoundsTitleFrame withTitle:@"Assign sounds to 6 colors" withColor:blueColor isHeader:NO isReverseDirection:NO];
+        //[self drawTutorialLabel:addSoundsTitleFrame withTitle:@"Assign sounds to 6 colors" withColor:blueColor isHeader:NO isReverseDirection:NO];
         
         // Sample/sound stripes
-        CGRect sampleStripeFrame = CGRectMake(sampleBoxFrame.origin.x+sampleBoxFrame.size.width-3,sampleBoxFrame.origin.y+(sampleBoxFrame.size.height-stripeWidth)/2,162,stripeWidth);
+        CGRect sampleStripeFrame = CGRectMake(sampleBoxFrame.origin.x+sampleBoxFrame.size.width-3,sampleBoxFrame.origin.y+(sampleBoxFrame.size.height-stripeWidth)/2,79.5,stripeWidth);
         CGRect stringStripeFrame = CGRectMake(stringBoxFrame.origin.x+(stringBoxFrame.size.width-stripeWidth)/2,stringBoxFrame.origin.y+stringBoxFrame.size.height-3,stripeWidth,45);
         
         UIView * sampleStripe = [[UIView alloc] initWithFrame:sampleStripeFrame];
@@ -761,10 +819,10 @@
         [self fadeInTutorialSubview:stringStripe isReverseDirection:NO];
         
         // Add sounds stripe
-        CGRect addSoundsStripeFrame = CGRectMake(stringStripeFrame.origin.x,sampleStripeFrame.origin.y+sampleStripeFrame.size.height,stripeWidth,37);
-        UIView * addSoundsStripe = [[UIView alloc] initWithFrame:addSoundsStripeFrame];
-        [addSoundsStripe setBackgroundColor:blueColor];
-        [self fadeInTutorialSubview:addSoundsStripe isReverseDirection:NO];
+        //CGRect addSoundsStripeFrame = CGRectMake(stringStripeFrame.origin.x,sampleStripeFrame.origin.y+sampleStripeFrame.size.height,stripeWidth,37);
+        //UIView * addSoundsStripe = [[UIView alloc] initWithFrame:addSoundsStripeFrame];
+        //[addSoundsStripe setBackgroundColor:blueColor];
+        //[self fadeInTutorialSubview:addSoundsStripe isReverseDirection:NO];
     }
 }
 

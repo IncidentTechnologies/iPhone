@@ -220,6 +220,7 @@
         [leftNavigator.view setFrame:offLeftNavigatorFrame];
         [activeMainView setFrame:onScreenMainFrame];
     } completion:^(BOOL finished){
+        [instrumentViewController leftNavDidClose];
         leftNavOpen = false;
     }];
 }
@@ -228,6 +229,7 @@
 {
     if(TESTMODE) NSLog(@"Open left nav");
     
+    [instrumentViewController leftNavWillOpen];
     [seqSetViewController turnEditingOff];
     [UIView animateWithDuration:0.1 animations:^(){
         [leftNavigator.view setFrame:onScreenNavigatorFrame];

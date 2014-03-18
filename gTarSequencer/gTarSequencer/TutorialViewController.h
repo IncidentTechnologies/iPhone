@@ -32,6 +32,9 @@
     UISwipeGestureRecognizer * swipeRight;
     
     BOOL isScreenLarge;
+    
+    int conditionalScreen;
+    BOOL showConditionalScreen;
 }
 
 - (id)initWithFrame:(CGRect)frame andTutorial:(NSString *)tutorial;
