@@ -459,8 +459,9 @@
         [self setNewMeasureFromPage:measureIndex];
     }
     
-    if(measureIndex < measureCounts[activePattern]){
+    if(measureIndex < measureCounts[activePattern] && measureToDelete != measureIndex){
         measureToDelete = measureIndex;
+        
         [pages[measureIndex] setBackgroundColor:[UIColor colorWithRed:216/255.0 green:64/255.0 blue:64/255.0 alpha:1.0]];
         
         UIImageView * trashButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Trash_Icon"]];
