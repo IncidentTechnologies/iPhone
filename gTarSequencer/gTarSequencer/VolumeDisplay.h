@@ -8,6 +8,7 @@
 
 #import "AppData.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Instrument.h"
 
 @protocol VolumeDisplayDelegate <NSObject>
 
@@ -15,6 +16,8 @@
 - (BOOL) allowVolumeDisplayToOpen;
 - (void) volumeDisplayDidOpen;
 - (void) volumeDisplayDidClose;
+
+- (NSMutableArray *)getInstruments;
 
 @end
 
@@ -39,12 +42,15 @@
     float sliderCircleMinY;
     
     float volumeFirstY;
+    
+    NSMutableArray * instruments;
 }
 
 - (void)fillToPercent:(double)percent;
 - (void)setVolume:(double)value;
 - (void)expand;
 - (void)contract;
+- (void)setInstruments:(NSMutableArray *)instrumentList;
 
 @property (weak, nonatomic) id <VolumeDisplayDelegate> delegate;
 @property (retain, nonatomic) UIButton * sliderCircle;

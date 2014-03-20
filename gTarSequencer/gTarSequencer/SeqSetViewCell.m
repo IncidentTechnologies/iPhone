@@ -257,25 +257,42 @@
 
 -(void)turnOnInstrumentView
 {
-    //[offMask setHidden:YES];
+    
+    NSLog(@"*** UNMUTING ***");
+    //[parent muteInstrument:self isMute:NO];
+    [offMask setHidden:YES];
+    if(volumeKnob && ![volumeKnob isEnabled]){
+        [volumeKnob EnableKnob];
+    }
+    [instrument setIsMuted:NO];
     isMute = NO;
+    
+    [parent saveContext:nil];
 }
 
 -(void)turnOffInstrumentView
 {
-    //[offMask setHidden:NO];
+    NSLog(@"*** MUTING ***");
+    //[parent muteInstrument:self isMute:YES];
+    [offMask setHidden:NO];
+    if(volumeKnob && [volumeKnob isEnabled]){
+        [volumeKnob DisableKnob];
+    }
+    [instrument setIsMuted:YES];
     isMute = YES;
+    
+    [parent saveContext:nil];
 }
 
 - (void)updatePatternButton:(UIButton *)newButton playState:(BOOL)isPlaying
 {
     
     // First check if switching off
-    if(newButton == offButton && selectedPatternButton != offButton){
-        [self turnOffInstrumentView];
-    }else{
-        [self turnOnInstrumentView];
-    }
+    //if(newButton == offButton && selectedPatternButton != offButton){
+    //    [self turnOffInstrumentView];
+    //}else{
+    //    [self turnOnInstrumentView];
+    //}
     
     // Adjust pattern buttons
     if(newButton == offButton && selectedPatternButton == offButton){
@@ -614,20 +631,17 @@
     NSLog(@"SeqSet Select new pattern at %i", tappedIndex);
     
     if (tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton != offButton){
-        isMute = YES;
-        [parent muteInstrument:self isMute:YES];
+        //[self turnOffInstrumentView];
         isPlaying = [parent.delegate checkIsPlaying];
         [self resetQueuedPatternButton];
         [parent dequeueAllPatternsForInstrument:self];
     }else if(tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton == offButton){
-        isMute = NO;
-        [parent muteInstrument:self isMute:NO];
+        //[self turnOnInstrumentView];
         isPlaying = [parent.delegate checkIsPlaying];
         [self resetQueuedPatternButton];
         [parent dequeueAllPatternsForInstrument:self];
     }else{
-        isMute = NO;
-        [parent muteInstrument:self isMute:NO];
+        //[self turnOnInstrumentView];
         isPlaying = [parent userDidSelectPattern:self atIndex:tappedIndex];
     }
     
@@ -684,10 +698,15 @@
         [volumeKnob setUserInteractionEnabled:NO];
         [offButton addSubview:volumeKnob];
         
+        [volumeKnob EnableKnob];
         [volumeKnob SetValue:[instrument getAmplitude]];
         
         NSLog(@"init volume is %f",[volumeKnob GetValue]);
         
+        offButtonDoubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enableKnobIfDisabled)];
+        offButtonDoubleTap.numberOfTapsRequired = 2;
+        
+        [offButton addGestureRecognizer:offButtonDoubleTap];
     }
     
     isTracking = NO;
@@ -696,20 +715,6 @@
 -(void)resetVolume
 {
     [volumeKnob SetValue:[instrument getAmplitude]];
-}
-
-- (IBAction)userDidSelectVolumeControl:(id)sender
-{
-    if(!isTracking){
-        [self drawVolumeOverlay];
-    }
-}
-
-- (IBAction)userDidReleaseVolumeControl:(id)sender
-{
-    if(isTracking){
-        [self trackingDidEnd];
-    }
 }
 
 - (void)drawVolumeOverlay
@@ -775,7 +780,7 @@
     UIView * hitView = [super hitTest:point withEvent:event];
     
     if(hitView == offButton || hitView == volumeKnob){
-        if(!isTracking){
+        if(!isTracking && [volumeKnob isEnabled]){
             [self drawVolumeOverlay];
         }
     }
@@ -783,15 +788,31 @@
     return hitView;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+-(void)enableKnobIfDisabled
 {
-    NSLog(@"touches began");
+    NSLog(@"Enable knob if disabled");
+    if(![volumeKnob isEnabled]){
+        NSLog(@"Enable previous button");
+        [self selectNewPattern:previousPatternButton];
+        [self turnOnInstrumentView];
+        [volumeKnob EnableKnob];
+    }
 }
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+-(void)enableKnob:(id)sender
 {
-    NSLog(@"touches ended");
-    [self trackingDidEnd];
+    
+}
+
+-(void)disableKnob:(id)sender
+{
+    UIKnob * senderKnob = (UIKnob *)sender;
+    
+    if(senderKnob == tempVolumeKnob && offButton != nil){
+        [volumeKnob DisableKnob];
+        [self selectNewPattern:offButton];
+        [self turnOffInstrumentView];
+    }
 }
 
 @end

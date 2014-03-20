@@ -14,7 +14,7 @@
 
 @end
 
-@interface VolumeKnobView : UIView
+@interface VolumeKnobView : UIButton
 {
     
     

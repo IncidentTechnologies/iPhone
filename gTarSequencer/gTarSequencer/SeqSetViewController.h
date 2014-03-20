@@ -74,7 +74,6 @@
 - (void)turnContentDrawingOn;
 - (void)turnContentDrawingOff;
 
-- (void)muteInstrument:(SeqSetViewCell *)sender isMute:(BOOL)isMute;
 - (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst;
 - (void)deleteCell:(id)sender withAnimation:(BOOL)animate;
 - (void)deleteAllCells;

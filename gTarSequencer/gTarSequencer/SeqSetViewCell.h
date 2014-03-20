@@ -29,6 +29,7 @@
     
     UIView * volumeBg;
     UIKnob * tempVolumeKnob;
+    UITapGestureRecognizer * offButtonDoubleTap;
     BOOL isTracking;
     
     int loopModCount;

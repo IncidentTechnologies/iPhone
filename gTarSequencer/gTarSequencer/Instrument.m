@@ -226,7 +226,7 @@
     [aCoder encodeBool:isMuted forKey:@"Is Muted"];
     [aCoder encodeObject:isCustom forKey:@"Custom"];
     [aCoder encodeDouble:amplitude forKey:@"Amplitude"];
-    
+        
 }
 
 @end

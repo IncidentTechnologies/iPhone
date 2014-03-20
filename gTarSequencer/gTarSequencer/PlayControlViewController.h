@@ -26,6 +26,8 @@
 
 - (void) endTutorialIfOpen;
 
+- (NSMutableArray *)getInstruments;
+
 @end
 
 

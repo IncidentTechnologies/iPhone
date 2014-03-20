@@ -113,10 +113,10 @@
     // NSLog(@"outline frame is %f %f %f %f",outline.frame.origin.x,outline.frame.origin.y,outline.frame.size.width,outline.frame.size.height);
     
     // Draw black background:
-    [outline setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
+    [outline setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.9]];
     
     // Draw right sidebar
-    float sidebarWidth = 130;
+    float sidebarWidth = 80;
     CGRect sidebarFrame = CGRectMake(outline.frame.size.width - sidebarWidth, -1, sidebarWidth+1, outline.frame.size.height+2);
     
     UIView * sidebar = [[UIView alloc] initWithFrame:sidebarFrame];
@@ -166,9 +166,26 @@
     
 }
 
+#pragma mark - Instruments
+- (void)drawInstruments
+{
+    
+    if(instruments != nil){
+        [instruments removeAllObjects];
+    }
+    
+    instruments = [[NSMutableArray alloc] initWithArray:[delegate getInstruments]];
+    
+    for(Instrument * inst in instruments){
+        // draw it
+    }
+}
+
 #pragma mark - Expand Contract
 - (void)expand
 {
+    [self drawInstruments];
+    
     // Animate...
     [UIView animateWithDuration:ANIMATION_DURATION
                           delay:0.0

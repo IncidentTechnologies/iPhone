@@ -937,6 +937,11 @@
     }
 }
 
+- (NSMutableArray *)getInstruments
+{
+    return [seqSetViewController getInstruments];
+}
+
 #pragma mark - Guitar Observer
 
 - (void)notePlayedAtString:(int)str andFret:(int)fr

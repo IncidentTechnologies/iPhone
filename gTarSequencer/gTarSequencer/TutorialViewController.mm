@@ -426,10 +426,12 @@
             [self drawTutorialLabel:toggleLabelFrame withTitle:@"Adjust sound" withColor:blueColor isHeader:NO isReverseDirection:reverse];
             
             UIKnob * volumeKnob = [[UIKnob alloc] initWithFrame:volumeFrame];
+            [volumeKnob SetValue:0.27];
             [volumeKnob setUserInteractionEnabled:NO];
             [volumeKnob setBackgroundColor:[UIColor clearColor]];
             [volumeKnob setOuterColor:[UIColor whiteColor]];
             [volumeKnob setLineColor:[UIColor whiteColor]];
+            [volumeKnob setHighlightColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
             [self fadeInTutorialSubview:volumeKnob isReverseDirection:reverse];
             
             

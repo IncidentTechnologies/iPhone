@@ -247,6 +247,9 @@
  
     currentInst = inst;
     
+    // Check muting before patterns
+    BOOL toMute = inst.isMuted;
+    
     // Icon
     [instrumentIcon setImage:[UIImage imageNamed:inst.iconName]];
     
@@ -291,7 +294,7 @@
     [volumeKnob SetValue:[currentInst getAmplitude]];
     
     // Determine on or off
-    isMute = inst.isMuted;
+    isMute = toMute;
     if(isMute){
         [self turnOffInstrumentView];
     }else{
@@ -834,14 +837,28 @@
 #pragma mark - On Off
 - (void)turnOnInstrumentView
 {
-    //[offMask setHidden:YES];
+    NSLog(@"*** UNMUTING ***");
+    [offMask setHidden:YES];
+    if(volumeKnob && ![volumeKnob isEnabled]){
+        [volumeKnob EnableKnob];
+    }
+    [currentInst setIsMuted:NO];
     isMute = NO;
+    
+    [delegate saveContext:nil];
 }
 
 - (void)turnOffInstrumentView
 {
-    //[offMask setHidden:NO];
+    NSLog(@"*** MUTING ***");
+    [offMask setHidden:NO];
+    if(volumeKnob && [volumeKnob isEnabled]){
+        [volumeKnob DisableKnob];
+    }
+    [currentInst setIsMuted:YES];
     isMute = YES;
+    
+    [delegate saveContext:nil];
 }
 
 
@@ -981,7 +998,11 @@
         
     }
     
-    currentInst.isMuted = isMute;
+    //if(isMute){
+    //    [self turnOffInstrumentView];
+    //}else{
+     //   [self turnOnInstrumentView];
+    //}
     [self updatePatternButton:sender playState:isPlaying];
     
 }
@@ -1028,11 +1049,11 @@
 {
     
     // First check if switching off
-    if(newButton == offButton && selectedPatternButton != offButton){
-        [self turnOffInstrumentView];
-    }else{
-        [self turnOnInstrumentView];
-    }
+    //if(newButton == offButton && selectedPatternButton != offButton){
+    //    [self turnOffInstrumentView];
+    //}else{
+    //    [self turnOnInstrumentView];
+    //}
     
     // Adjust pattern buttons
     if(newButton == offButton && selectedPatternButton == offButton){
@@ -1486,6 +1507,11 @@
         
         volumeKnobView.delegate = self;
         
+        offButtonDoubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enableKnobIfDisabled)];
+        offButtonDoubleTap.numberOfTapsRequired = 2;
+        
+        [volumeKnobView addGestureRecognizer:offButtonDoubleTap];
+        
     }
     
     isTracking = NO;
@@ -1493,7 +1519,7 @@
 
 - (void)knobRegionHit
 {
-    if(!isTracking){
+    if(!isTracking && [volumeKnob isEnabled]){
         [self drawVolumeOverlay];
     }
 }
@@ -1554,6 +1580,38 @@
     [volumeKnob setHidden:NO];
     
     [delegate saveContext:nil];
+}
+
+
+-(void)enableKnobIfDisabled
+{
+    NSLog(@"Enable knob if disabled");
+    if(![volumeKnob isEnabled]){
+        NSLog(@"Enable previous button");
+        if(previousPatternButton){
+            [self selectNewPattern:previousPatternButton];
+        }
+        [self turnOnInstrumentView];
+        [volumeKnob EnableKnob];
+    }
+}
+
+-(void)enableKnob:(id)sender
+{
+    
+}
+
+-(void)disableKnob:(id)sender
+{
+    UIKnob * senderKnob = (UIKnob *)sender;
+    
+    if(senderKnob == tempVolumeKnob && offButton != nil){
+        [volumeKnob DisableKnob];
+        if(offButton){
+            [self selectNewPattern:offButton];
+        }
+        [self turnOffInstrumentView];
+    }
 }
 
 @end

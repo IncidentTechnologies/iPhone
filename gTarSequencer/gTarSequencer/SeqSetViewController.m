@@ -372,6 +372,12 @@
         cell.instrument = tempInst;
         cell.isMute = tempInst.isMuted;
         
+        if(cell.isMute){
+            NSLog(@"INITTING MUTE");
+        }else{
+            NSLog(@"Initting normal");
+        }
+        
         [cell resetVolume];
         
         if([tempInst checkIsCustom]){
@@ -1013,12 +1019,12 @@
         return NO;
     }
 }
-
+/*
 #pragma mark Mute Unmute Instrument Update View
 - (void)muteInstrument:(SeqSetViewCell *)sender isMute:(BOOL)isMute
 {
-
     if(isMute == YES) NSLog(@"Mute instrument");
+    else NSLog(@"Unmute instrument");
     
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
@@ -1028,6 +1034,7 @@
     
     [delegate saveContext:nil];
 }
+ */
 
 #pragma mark UI Input
 

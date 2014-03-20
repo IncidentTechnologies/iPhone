@@ -68,6 +68,7 @@
     UIView * volumeBg;
     UIKnob * tempVolumeKnob;
     BOOL isTracking;
+    UITapGestureRecognizer * offButtonDoubleTap;
     
 }
 

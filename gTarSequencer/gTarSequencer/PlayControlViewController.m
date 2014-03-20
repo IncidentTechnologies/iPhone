@@ -329,5 +329,9 @@
     UIGraphicsEndImageContext();
 }
 
+-(NSMutableArray *)getInstruments
+{
+    return [delegate getInstruments];
+}
 
 @end
