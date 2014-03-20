@@ -21,6 +21,7 @@
 @synthesize isMuted;
 @synthesize isCustom;
 @synthesize patterns;
+@synthesize amplitude;
 
 - (id)init
 {
@@ -70,6 +71,8 @@
         
         isCustom = [aDecoder decodeObjectForKey:@"Custom"];
         
+        amplitude = [aDecoder decodeDoubleForKey:@"Amplitude"];
+        
         selectedPatternDidChange = YES;
         
     }
@@ -112,13 +115,20 @@
     return [isCustom boolValue];
 }
 
+- (double)getAmplitude
+{
+    return amplitude;
+}
+
 #pragma Playing Notes
 
 // Play audio:
-- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)amplitude
+- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)masteramplitude
 {
-    if (sound)
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument andAudio:audio withAmplitude:amplitude];
+    [audio updateMasterAmplitude:masteramplitude];
+    
+    if (sound && amplitude > 0)
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument andAudio:audio withAmplitude:AMPLITUDE_SCALE*amplitude];
     else
         [selectedPattern playFret:fret inRealMeasure:measure withInstrument: -1 andAudio:audio withAmplitude:0.0];
 }
@@ -215,6 +225,7 @@
     [aCoder encodeObject:stringPaths forKey:@"StringPaths"];
     [aCoder encodeBool:isMuted forKey:@"Is Muted"];
     [aCoder encodeObject:isCustom forKey:@"Custom"];
+    [aCoder encodeDouble:amplitude forKey:@"Amplitude"];
     
 }
 

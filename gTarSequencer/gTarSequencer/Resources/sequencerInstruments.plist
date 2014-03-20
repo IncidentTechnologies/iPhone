@@ -43,12 +43,12 @@
 			<string>Icon_Violin</string>
 			<key>Strings</key>
 			<array>
-				<string>Double Bass 1</string>
-				<string>Double Bass 2</string>
-				<string>Double Bass 3</string>
-				<string>Double Bass 4</string>
-				<string>Double Bass 5</string>
-				<string>Double Bass 6</string>
+				<string>Double Bass_C</string>
+				<string>Double Bass_D</string>
+				<string>Double Bass_E</string>
+				<string>Double Bass_G</string>
+				<string>Double Bass_A</string>
+				<string>Double Bass_B</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -71,12 +71,12 @@
 			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>808 1</string>
-				<string>808 2</string>
-				<string>808 3</string>
-				<string>808 4</string>
-				<string>808 5</string>
-				<string>808 6</string>
+				<string>808_Kick</string>
+				<string>808_Snare</string>
+				<string>808_Closed Hat</string>
+				<string>808_Open Hat</string>
+				<string>808_Tom</string>
+				<string>808_Clap</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -99,12 +99,12 @@
 			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>Dubstep 1</string>
-				<string>Dubstep 2</string>
-				<string>Dubstep 3</string>
-				<string>Dubstep 4</string>
-				<string>Dubstep 5</string>
-				<string>Dubstep 6</string>
+				<string>Dubstep_Kick</string>
+				<string>Dubstep_Snare</string>
+				<string>Dubstep_Open Hat</string>
+				<string>Dubstep_Closed Hat</string>
+				<string>Dubstep_Clap</string>
+				<string>Dubstep_Shaker</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -127,12 +127,12 @@
 			<string>Icon_Vibraphone</string>
 			<key>Strings</key>
 			<array>
-				<string>Pluck 1</string>
-				<string>Pluck 2</string>
-				<string>Pluck 3</string>
-				<string>Pluck 4</string>
-				<string>Pluck 5</string>
-				<string>Pluck 6</string>
+				<string>Pluck_C</string>
+				<string>Pluck_D</string>
+				<string>Pluck_E</string>
+				<string>Pluck_G</string>
+				<string>Pluck_A</string>
+				<string>Pluck_B</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -155,12 +155,12 @@
 			<string>Icon_Guitar</string>
 			<key>Strings</key>
 			<array>
-				<string>Guitar 1</string>
-				<string>Guitar 2</string>
-				<string>Guitar 3</string>
-				<string>Guitar 4</string>
-				<string>Guitar 5</string>
-				<string>Guitar 6</string>
+				<string>Guitar_C</string>
+				<string>Guitar_D</string>
+				<string>Guitar_E</string>
+				<string>Guitar_G</string>
+				<string>Guitar_A</string>
+				<string>Guitar_B</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -183,12 +183,12 @@
 			<string>Icon_Piano</string>
 			<key>Strings</key>
 			<array>
-				<string>Piano 1</string>
-				<string>Piano 2</string>
-				<string>Piano 3</string>
-				<string>Piano 4</string>
-				<string>Piano 5</string>
-				<string>Piano 6</string>
+				<string>Piano_C</string>
+				<string>Piano_D</string>
+				<string>Piano_E</string>
+				<string>Piano_G</string>
+				<string>Piano_A</string>
+				<string>Piano_B</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -211,12 +211,12 @@
 			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>Chiptune 1</string>
-				<string>Chiptune 2</string>
-				<string>Chiptune 3</string>
-				<string>Chiptune 4</string>
-				<string>Chiptune 5</string>
-				<string>Chiptune 6</string>
+				<string>Chiptune_Kick</string>
+				<string>Chiptune_Snare</string>
+				<string>Chiptune_Siren</string>
+				<string>Chiptune_Beep</string>
+				<string>Chiptune_Triangle</string>
+				<string>Chiptune_Lazer</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -239,12 +239,12 @@
 			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>Rock 1</string>
-				<string>Rock 2</string>
-				<string>Rock 3</string>
-				<string>Rock 4</string>
-				<string>Rock 5</string>
-				<string>Rock 6</string>
+				<string>Rock_Kick</string>
+				<string>Rock_Snare</string>
+				<string>Rock_Closed Hat</string>
+				<string>Rock_Open Hat</string>
+				<string>Rock_Tom</string>
+				<string>Rock_Crash</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -267,12 +267,12 @@
 			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>House 1</string>
-				<string>House 2</string>
-				<string>House 3</string>
-				<string>House 4</string>
-				<string>House 5</string>
-				<string>House 6</string>
+				<string>House_Kick</string>
+				<string>House_Clap</string>
+				<string>House_Open Hat</string>
+				<string>House_Closed Hat</string>
+				<string>House_Snare</string>
+				<string>House_Wood Block</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -295,12 +295,12 @@
 			<string>Icon_Violin</string>
 			<key>Strings</key>
 			<array>
-				<string>Violin 1</string>
-				<string>Violin 2</string>
-				<string>Violin 3</string>
-				<string>Violin 4</string>
-				<string>Violin 5</string>
-				<string>Violin 6</string>
+				<string>Violin_C</string>
+				<string>Violin_D</string>
+				<string>Violin_E</string>
+				<string>Violin_G</string>
+				<string>Violin_A</string>
+				<string>Violin_B</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -323,12 +323,12 @@
 			<string>Icon_Vibraphone</string>
 			<key>Strings</key>
 			<array>
-				<string>Vibraphone 1</string>
-				<string>Vibraphone 2</string>
-				<string>Vibraphone 3</string>
-				<string>Vibraphone 4</string>
-				<string>Vibraphone 5</string>
-				<string>Vibraphone 6</string>
+				<string>Vibraphone_C</string>
+				<string>Vibraphone_D</string>
+				<string>Vibraphone_E</string>
+				<string>Vibraphone_G</string>
+				<string>Vibraphone_A</string>
+				<string>Vibraphone_B</string>
 			</array>
 			<key>StringPaths</key>
 			<array>

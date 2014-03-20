@@ -27,6 +27,7 @@
     NSArray * audioStringPaths;
     
     double gain;
+    double bankgain;
 }
 
 @end
@@ -54,6 +55,7 @@
         instIndex = index;
         
         gain = DEFAULT_VOLUME;
+        bankgain = AMPLITUDE_SCALE;
         
         m_soundMaster = soundMaster;
         
@@ -93,13 +95,14 @@
             filepath[i] = (char *) [filename UTF8String];
             
         }else{
-            
             filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:audioStringSet[i] ofType:@"mp3"] UTF8String];
         }
         
         NSLog(@"Loading sample %s",filepath[i]);
         
-        m_samplerBank->LoadSampleIntoBank(filepath[i], m_sampNode);
+        if(filepath[i] != NULL){
+            m_samplerBank->LoadSampleIntoBank(filepath[i], m_sampNode);
+        }
         
     }
 }
@@ -113,15 +116,27 @@
 
 - (void)updateAmplitude:(double)amplitude
 {
+    if(bankgain != amplitude){
+        
+        bankgain = amplitude;
+        
+        NSLog(@"Setting track gain to %f",bankgain);
+        
+        [m_soundMaster setGain:bankgain forSamplerBank:m_samplerBank];
+    }
+}
+
+- (void)updateMasterAmplitude:(double)amplitude
+{
     if(gain != amplitude){
         
         amplitude = MIN(amplitude,MAX_VOLUME);
         amplitude = MAX(amplitude,MIN_VOLUME);
         gain = amplitude;
         
-        NSLog(@"Setting gain to %f",gain);
+        NSLog(@"Setting channel gain to %f",gain);
         
-        [m_soundMaster setGain:gain];
+        [m_soundMaster setChannelGain:gain];
     }
 }
 

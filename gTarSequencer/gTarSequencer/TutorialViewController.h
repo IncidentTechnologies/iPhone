@@ -7,6 +7,10 @@
 //
 
 #import <AppData.h>
+#import <AVFoundation/AVAudioPlayer.h>
+#import "UIKnob.h"
+
+#define NUM_SEQUENCE_NOTES 8
 
 @protocol TutorialDelegate <NSObject>
 
@@ -35,6 +39,13 @@
     
     int conditionalScreen;
     BOOL showConditionalScreen;
+    
+    NSMutableArray * sequenceNotes;
+    BOOL sequenceNoteActive[NUM_SEQUENCE_NOTES];
+    NSTimer * sequenceLoopTimer;
+    int sequenceLoopCounter;
+    
+    UIColor * colors[STRINGS_ON_GTAR];
 }
 
 - (id)initWithFrame:(CGRect)frame andTutorial:(NSString *)tutorial;

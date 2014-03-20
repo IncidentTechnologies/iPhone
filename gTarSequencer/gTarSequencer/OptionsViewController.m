@@ -331,6 +331,8 @@
         return 0;
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && ![fileLoadSet[indexPath.row-1] isEqualToString:activeSequencer]){
         return 0;
+    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileLoadSet[indexPath.row-1] isEqualToString:DEFAULT_SET_NAME]){
+        return 0;
     }else{
         return ROW_HEIGHT;
     }
@@ -338,13 +340,13 @@
 
 - (void)disableScroll
 {
-    NSLog(@"disable scroll");
+    if(TESTMODE) NSLog(@"disable scroll");
     loadTable.scrollEnabled = NO;
 }
 
 - (void)enableScroll
 {
-    NSLog(@"enable scroll");
+    if(TESTMODE) NSLog(@"enable scroll");
     loadTable.scrollEnabled = YES;
 }
 
@@ -406,7 +408,7 @@
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"***** will begin editing row at index path");
+    if(TESTMODE) NSLog(@"***** will begin editing row at index path");
     
     OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
     [cell editingDidBegin];

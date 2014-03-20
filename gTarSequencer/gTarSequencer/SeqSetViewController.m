@@ -64,6 +64,12 @@
     
 }
 
+#pragma mark Save Context
+- (void)saveContext:(NSString *)filepath
+{
+    [delegate saveContext:filepath];
+}
+
 #pragma mark Instruments Data
 
 - (void)retrieveInstrumentOptions
@@ -366,6 +372,8 @@
         cell.instrument = tempInst;
         cell.isMute = tempInst.isMuted;
         
+        [cell resetVolume];
+        
         if([tempInst checkIsCustom]){
             [cell showCustomIndicator];
         }else{
@@ -458,7 +466,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(editingStyle == UITableViewCellEditingStyleDelete){
+    // make sure the cell is open
+    SeqSetViewCell * cell = (SeqSetViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
+    if(editingStyle == UITableViewCellEditingStyleDelete && cell.editingScrollView.contentOffset.x > 0){
         [self deleteCell:[tableView cellForRowAtIndexPath:indexPath] withAnimation:YES];
     }
 }
@@ -809,7 +820,7 @@
 - (void)deleteCell:(id)sender withAnimation:(BOOL)animate
 {
     
-    if(TESTMODE) NSLog(@"Delete cell");
+    NSLog(@"Delete cell");
     
     NSIndexPath * pathToDelete = [instrumentTable indexPathForCell:sender];
     int row = pathToDelete.row;

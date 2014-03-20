@@ -102,6 +102,8 @@
 - (Instrument *)getCurrentInstrument;
 - (Instrument *)getInstrumentAtIndex:(int)i;
 
+- (void)saveContext:(NSString *)filepath;
+
 @property (weak, nonatomic) id<SeqSetDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UITableView *instrumentTable;
 

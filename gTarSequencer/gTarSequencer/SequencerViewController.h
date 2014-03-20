@@ -22,6 +22,9 @@
 
 @interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate> {
     
+    // tutorial
+    BOOL isTutorialOpen;
+    
     // gTar connection
     BOOL isConnected;
     GuitarView *guitarView;

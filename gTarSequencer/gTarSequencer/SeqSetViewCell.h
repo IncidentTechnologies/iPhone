@@ -9,6 +9,7 @@
 #import "AppData.h"
 #import "Instrument.h"
 #import "MeasureView.h"
+#import "UIKnob.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define SEGMENTS 5
@@ -16,7 +17,7 @@
 
 @class SeqSetViewController;
 
-@interface SeqSetViewCell : UITableViewCell <UIScrollViewDelegate>
+@interface SeqSetViewCell : UITableViewCell <UIScrollViewDelegate,UIKnobDelegate>
 {
     
     BOOL deleteMode;
@@ -26,6 +27,10 @@
     UIButton * previousPatternButton;
     UIButton * queuedPatternButton;
     
+    UIView * volumeBg;
+    UIKnob * tempVolumeKnob;
+    BOOL isTracking;
+    
     int loopModCount;
 
 }
@@ -33,6 +38,8 @@
 - (IBAction)userDidTapInstrumentIcon:(id)sender;
 - (IBAction)userDidSelectNewPattern:(id)sender;
 - (IBAction)userDidSelectNewMeasure:(id)sender;
+- (IBAction)userDidSelectVolumeControl:(id)sender;
+- (IBAction)userDidReleaseVolumeControl:(id)sender;
 - (IBAction)removeMeasures:(id)sender;
 - (IBAction)addMeasures:(id)sender;
 
@@ -47,11 +54,16 @@
 - (void)showCustomIndicator;
 - (void)hideCustomIndicator;
 
+- (void)resetVolume;
+
+
 @property (weak, nonatomic) SeqSetViewController * parent;
 
 @property (weak, nonatomic) Instrument * instrument;
 @property (retain, nonatomic) NSString * instrumentName;
 @property (retain, nonatomic) UIImage * instrumentIcon;
+
+@property (retain, nonatomic) UIScrollView * editingScrollView;
 
 @property (nonatomic) BOOL isSelected;
 @property (nonatomic) BOOL isMute;
@@ -72,6 +84,7 @@
 @property (weak, nonatomic) IBOutlet UIButton * patternC;
 @property (weak, nonatomic) IBOutlet UIButton * patternD;
 @property (weak, nonatomic) IBOutlet UIButton * offButton;
+@property (retain, nonatomic) UIKnob * volumeKnob;
 @property (weak, nonatomic) UIView * patternABorder;
 @property (weak, nonatomic) UIView * patternDBorder;
 

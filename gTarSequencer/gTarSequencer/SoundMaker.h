@@ -26,6 +26,7 @@
 - (void)pluckString:(int)str;
 
 - (void)updateAmplitude:(double)amplitude;
+- (void)updateMasterAmplitude:(double)amplitude;
 
 - (void)releaseSounds;
 

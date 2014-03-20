@@ -7,9 +7,21 @@
 //
 
 #import "TutorialViewController.h"
+#import "SoundMaster_.mm"
+
 
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
+
+@interface TutorialViewController(){
+    
+    SoundMaster * soundMaster;
+    
+    SampleNode * m_sampNode;
+    SamplerBankNode * m_bankNode;
+}
+
+@end
 
 @implementation TutorialViewController
 
@@ -51,7 +63,6 @@
     }
     
     tutorialScreen = self;
-    
     
     return self;
 }
@@ -105,6 +116,8 @@
     
     float screenWidth = tutorialScreen.frame.size.width;
     
+    [tutorialBottomBar setAlpha:0.0];
+    
     [UIView animateWithDuration:0.5 animations:^(void){
         for (UIView * v in views) {
             if(!reverse){
@@ -130,7 +143,7 @@
 {
     
     float screenWidth = tutorialScreen.frame.size.width;
-    CGRect frame = v.frame;
+    CGRect frame = CGRectMake(v.frame.origin.x,v.frame.origin.y,v.frame.size.width,v.frame.size.height);
     
     if(!reverse){
         [v setFrame:CGRectMake(screenWidth+frame.origin.x,frame.origin.y,frame.size.width,frame.size.height)];
@@ -208,8 +221,8 @@
     
     if(screenIndex == 1){
         
+        [self startSwipeGestures];
         [self stopRightSwipeGesture];
-        [self stopLeftSwipeGesture];
         
         //
         // WELCOME TO SEQUENCE
@@ -218,50 +231,76 @@
         [tutorialScreen setBackgroundColor:blueColor];
         
         // Title label
-        float midtitleWidth = 300;
         
-        CGRect titleFrame = CGRectMake(30,30,380,30);
-        CGRect subtitleFrame = CGRectMake(30,60,180,30);
-        CGRect midtitleFrame = CGRectMake(tutorialScreen.frame.size.width/2 - midtitleWidth/2,120,midtitleWidth,30);
+        CGRect titleFrame = CGRectMake(0,30,tutorialScreen.frame.size.width,30);
+        //CGRect subtitleFrame = CGRectMake(30,60,180,30);
         
-        [self drawTutorialLabel:titleFrame withTitle:@"WELCOME TO SEQUENCE" withColor:[UIColor clearColor] isHeader:YES isReverseDirection:reverse];
-        [self drawTutorialLabel:subtitleFrame withTitle:@"Let's get started..." withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
-        [self drawTutorialLabel:midtitleFrame withTitle:@"Do you have a gTar?" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
+        UILabel * titleLabel = [self drawTutorialLabel:titleFrame withTitle:@"WELCOME TO SEQUENCE" withColor:[UIColor clearColor] isHeader:YES isReverseDirection:reverse];
         
-        // Yes + No buttons
-        CGRect yesButtonFrame = CGRectMake(tutorialScreen.frame.size.width/2 - 233,197,circleWidth,circleWidth);
-        CGRect noButtonFrame = CGRectMake(tutorialScreen.frame.size.width/2 + 110,197,circleWidth,circleWidth);
+        [titleLabel setTextAlignment:NSTextAlignmentCenter];
         
-        [self drawTutorialCircle:yesButtonFrame withTitle:@"YES" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:[UIColor whiteColor] andAction:@selector(setIntroConditionalScreenOn) isReverseDirection:reverse];
+        //[self drawTutorialLabel:subtitleFrame withTitle:@"Let's get started..." withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
         
-        [self drawTutorialCircle:noButtonFrame withTitle:@"NO" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:[UIColor whiteColor] andAction:@selector(setIntroConditionalScreenOff) isReverseDirection:reverse];
         
-        // Yes+No stripes/arrows
-        CGRect yesStripeFrame = CGRectMake(yesButtonFrame.origin.x+yesButtonFrame.size.width-circleBorderWidth/2,yesButtonFrame.origin.y+yesButtonFrame.size.height/2-stripeWidth/2,15,stripeWidth);
-        CGRect noStripeFrame = CGRectMake(noButtonFrame.origin.x+noButtonFrame.size.width-circleBorderWidth/2,noButtonFrame.origin.y+noButtonFrame.size.height/2-stripeWidth/2,tutorialScreen.frame.size.width - (noButtonFrame.origin.x+noButtonFrame.size.width)+circleBorderWidth/2,stripeWidth);
+        // Title label
+        float desctitleWidth = 440;
         
-        UIView * noStripe = [[UIView alloc] initWithFrame:noStripeFrame];
-        UIView * yesStripe = [[UIView alloc] initWithFrame:yesStripeFrame];
+        //CGRect titleFrame = CGRectMake(30,30,300,30);
+        CGRect desctitleFrame = CGRectMake(tutorialScreen.frame.size.width/2 - desctitleWidth/2,90,desctitleWidth,30);
+        CGRect desctitle2Frame = CGRectMake(tutorialScreen.frame.size.width/2 - desctitleWidth/2,120,desctitleWidth,30);
+        CGRect desctitle3Frame = CGRectMake(tutorialScreen.frame.size.width/2 - desctitleWidth/2,150,desctitleWidth,35);
         
-        [noStripe setBackgroundColor:[UIColor whiteColor]];
-        [yesStripe setBackgroundColor:[UIColor whiteColor]];
+        //[self drawTutorialLabel:titleFrame withTitle:@"WHAT IS SEQUENCE" withColor:[UIColor clearColor] isHeader:YES isReverseDirection:reverse];
+        [self drawTutorialLabel:desctitleFrame withTitle:@"Sequence is like a drum machine" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
         
-        [self fadeInTutorialSubview:noStripe isReverseDirection:reverse];
-        [self fadeInTutorialSubview:yesStripe isReverseDirection:reverse];
+        [self drawTutorialLabel:desctitle2Frame withTitle:@"you can use to create looping" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
         
-        // Yes arrow
-        float arrowWidth = 35;
-        float arrowHeight = 40;
-        CGRect yesArrowFrame = CGRectMake(yesButtonFrame.origin.x+yesButtonFrame.size.width-circleBorderWidth/2+yesStripeFrame.size.width,yesButtonFrame.origin.y+yesButtonFrame.size.height/2-stripeWidth/2-(arrowHeight-stripeWidth)/2,arrowWidth,arrowHeight);
+        UILabel * titleLabel3 = [self drawTutorialLabel:desctitle3Frame withTitle:@"" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
         
-        [self drawTutorialArrow:yesArrowFrame facesDirection:3 width:arrowWidth height:arrowHeight withColor:[UIColor whiteColor] isReverseDirection:reverse];
+        NSMutableAttributedString * title3String = [[NSMutableAttributedString alloc] initWithString:@"rhythms & melodies."];
+        [title3String addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(0,8)];
+        [title3String addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(10,8)];
         
-        // Dock graphic
-        CGRect dockFrame = CGRectMake(yesArrowFrame.origin.x+yesArrowFrame.size.width + 10,yesArrowFrame.origin.y - 30,185,100);
-        UIImageView * dock = [[UIImageView alloc] initWithFrame:dockFrame];
-        [dock setImage:[UIImage imageNamed:@"Tutorial_Dock"]];
+        [titleLabel3 setAttributedText:title3String];
         
-        [self fadeInTutorialSubview:dock isReverseDirection:reverse];
+        // Draw boxes
+        float boxWidth = 30;
+        float boxSpace = 2;
+        float boxFrameWidth = boxWidth*NUM_SEQUENCE_NOTES+boxSpace*NUM_SEQUENCE_NOTES;
+        sequenceNotes = [[NSMutableArray alloc] init];
+        
+        for(int i = 0; i < NUM_SEQUENCE_NOTES; i++){
+            
+            CGRect noteFrame = CGRectMake(tutorialScreen.frame.size.width/2-boxFrameWidth/2+boxWidth*i+boxSpace*i, 200, boxWidth, boxWidth);
+            UIButton * note = [[UIButton alloc] initWithFrame:noteFrame];
+            
+            note.layer.borderColor = [UIColor whiteColor].CGColor;
+            note.layer.borderWidth = 0.5;
+            
+            if(i == 0 || i == 4 || i == 6){
+                [note setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+                sequenceNoteActive[i] = YES;
+            }else{
+                sequenceNoteActive[i] = NO;
+            }
+            
+            [note addTarget:self action:@selector(toggleSequenceNoteActive:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [sequenceNotes addObject:note];
+            [self fadeInTutorialSubview:note isReverseDirection:reverse];
+            
+        }
+        
+        [self initAudioForSequence];
+        [self startSequenceLoop];
+        
+        // Swipe label
+        float swipeFrameWidth = 300;
+        CGRect swipeFrame = CGRectMake(tutorialScreen.frame.size.width/2 - swipeFrameWidth/2,tutorialScreen.frame.size.height-60,swipeFrameWidth,30);
+        UILabel * swipeText = [self drawTutorialLabel:swipeFrame withTitle:@"swipe to learn how >" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
+        [swipeText setFont:[UIFont fontWithName:@"AvenirNext-Italic" size:15.0]];
+        
+        
         
     }else if(screenIndex == tutorialTotalSteps){
         
@@ -280,7 +319,8 @@
         CGRect bottomBarFrame = CGRectMake(playButtonWidth, newTutorialFrame.size.height, tutorialScreen.frame.size.width - playButtonWidth, BOTTOMBAR_HEIGHT);
         tutorialBottomBar = [[UIView alloc] initWithFrame:bottomBarFrame];
         [tutorialBottomBar setBackgroundColor:fadedGray];
-        [self addSubview:tutorialBottomBar];
+        
+        [self fadeInTutorialSubview:tutorialBottomBar isReverseDirection:reverse];
         
         // Start playing
         float playLabelWidth = 195;
@@ -317,34 +357,23 @@
         [self startSwipeGestures];
         
         if(screenIndex == 2){
-        
-            //
-            // WHAT IS SEQUENCE
-            //
-            
-            [tutorialScreen setBackgroundColor:blueColor];
-            
-            // Title label
-            CGRect titleFrame = CGRectMake(30,30,380,30);
-            
-            [self drawTutorialLabel:titleFrame withTitle:@"What is Sequence?" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
-            
-        }else if(screenIndex == 3){
             
             //
             // SET VIEW
             //
             
+            [self endSequenceLoop];
+            
             // Header
             float trackHeaderHeight = defaultLabelHeight + 15;
-            float trackHeaderWidth = 350;
-            CGRect titleFrame = CGRectMake(0,222,trackHeaderWidth,trackHeaderHeight);
+            float trackHeaderWidth = 390;
+            CGRect titleFrame = CGRectMake(0,218,trackHeaderWidth,trackHeaderHeight);
             
-            UILabel * titleLabel = [self drawTutorialLabel:titleFrame withTitle:@"" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
+            UILabel * titleLabel = [self drawTutorialLabel:titleFrame withTitle:@"" withColor:blueColor isHeader:NO isReverseDirection:reverse];
             
-            NSMutableAttributedString * titleString = [[NSMutableAttributedString alloc] initWithString:@"A set is composed of tracks."];
-            [titleString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(1,5)];
-            [titleString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(20,7)];
+            NSMutableAttributedString * titleString = [[NSMutableAttributedString alloc] initWithString:@"Work with tracks to build a set."];
+            [titleString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(27,4)];
+            [titleString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(9,8)];
             
             [titleLabel setAttributedText:titleString];
             
@@ -357,36 +386,52 @@
                 
                 // Toggle circle
                 CGRect toggleCircleFrame = CGRectMake(16,0,circleWidth,circleWidth);
-                [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:@"Icon_Violin" andEdgeInsets:UIEdgeInsetsMake(12, 12, 13, 12) withColor:blueColor andAction:nil isReverseDirection:reverse];
+                [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:@"Icon_Percussion" andEdgeInsets:UIEdgeInsetsMake(12, 12, 13, 12) withColor:blueColor andAction:nil isReverseDirection:reverse];
             }else{
-                viewTrackFrame = CGRectMake(85, 30, viewTrackLabelWidth, defaultLabelHeight);
+                viewTrackFrame = CGRectMake(79, 30, viewTrackLabelWidth, defaultLabelHeight);
                 
                 // Toggle circle
-                CGRect toggleCircleFrame = CGRectMake(0,0,circleWidth,circleWidth);
-                [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:@"Icon_Violin" andEdgeInsets:UIEdgeInsetsMake(12, 12, 13, 12) withColor:blueColor andAction:nil isReverseDirection:reverse];
+                CGRect toggleCircleFrame = CGRectMake(-6,0,circleWidth,circleWidth);
+                [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:@"Icon_Percussion" andEdgeInsets:UIEdgeInsetsMake(12, 12, 13, 12) withColor:blueColor andAction:nil isReverseDirection:reverse];
             }
             
             [self drawTutorialLabel:viewTrackFrame withTitle:@"View track" withColor:blueColor isHeader:NO isReverseDirection:reverse];
             
             // Toggle tracks
             CGRect toggleLabelFrame;
+            CGRect volumeFrame;
             float toggleLabelWidth = 155;
             
             if(isScreenLarge){
-                toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-100, 10, toggleLabelWidth, defaultLabelHeight);
+                toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-93, 25, toggleLabelWidth, defaultLabelHeight);
                 
                 // Toggle circle
-                CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth-14.5,-21,circleWidth,circleWidth);
-                [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:@"Power_Icon" andEdgeInsets:UIEdgeInsetsMake(14, 15.5, 14, 15.5) withColor:blueColor andAction:nil isReverseDirection:reverse];
+                CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth-10,-4,circleWidth,circleWidth);
+                [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:reverse];
+                
+                // Volume knob
+                volumeFrame = CGRectMake(toggleCircleFrame.origin.x+11,toggleCircleFrame.origin.y+14,66,66);
+                
             }else{
-                toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-71, 10, toggleLabelWidth, defaultLabelHeight);
+                toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-73, 25, toggleLabelWidth, defaultLabelHeight);
                 
                 // Toggle circle
-                CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth+13.5,-21.5,circleWidth,circleWidth);
-                [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:@"Power_Icon" andEdgeInsets:UIEdgeInsetsMake(15, 16, 15, 16) withColor:blueColor andAction:nil isReverseDirection:reverse];
+                CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth+10,-4,circleWidth,circleWidth);
+                [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:reverse];
+                
+                // Volume knob
+                volumeFrame = CGRectMake(toggleCircleFrame.origin.x+11,toggleCircleFrame.origin.y+14,66,66);
             }
             
-            [self drawTutorialLabel:toggleLabelFrame withTitle:@"Toggle sound" withColor:blueColor isHeader:NO isReverseDirection:reverse];
+            [self drawTutorialLabel:toggleLabelFrame withTitle:@"Adjust sound" withColor:blueColor isHeader:NO isReverseDirection:reverse];
+            
+            UIKnob * volumeKnob = [[UIKnob alloc] initWithFrame:volumeFrame];
+            [volumeKnob setUserInteractionEnabled:NO];
+            [volumeKnob setBackgroundColor:[UIColor clearColor]];
+            [volumeKnob setOuterColor:[UIColor whiteColor]];
+            [volumeKnob setLineColor:[UIColor whiteColor]];
+            [self fadeInTutorialSubview:volumeKnob isReverseDirection:reverse];
+            
             
             // Delete
             float deleteLabelWidth = 110;
@@ -411,7 +456,7 @@
             CGRect deleteArrowFrame = CGRectMake(deleteLabelFrame.origin.x-arrowWidth, deleteLabelFrame.origin.y-(arrowHeight-defaultLabelHeight)/2, arrowWidth, arrowHeight);
             [self drawTutorialArrow:deleteArrowFrame facesDirection:9 width:arrowWidth height:arrowHeight withColor:blueColor isReverseDirection:reverse];
             
-        }else if(screenIndex == 4){
+        }else if(screenIndex == 3){
             
             //
             // TEMPO VOLUME
@@ -493,8 +538,8 @@
                 minusCircleFrame = CGRectMake(88,24,circleWidth,circleWidth);
                 plusCircleFrame = CGRectMake(389,24,circleWidth,circleWidth);
             }else{
-                minusCircleFrame = CGRectMake(58,24,circleWidth,circleWidth);
-                plusCircleFrame = CGRectMake(359,24,circleWidth,circleWidth);
+                minusCircleFrame = CGRectMake(44,24,circleWidth,circleWidth);
+                plusCircleFrame = CGRectMake(345,24,circleWidth,circleWidth);
             }
             
             [self drawTutorialCircle:minusCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:reverse];
@@ -510,8 +555,8 @@
                 minusSymbolFrame = CGRectMake(120,55,minusPlusWidth,minusPlusWidth);
                 plusSymbolFrame = CGRectMake(421,55,minusPlusWidth,minusPlusWidth);
             }else{
-                minusSymbolFrame = CGRectMake(90,55,minusPlusWidth,minusPlusWidth);
-                plusSymbolFrame = CGRectMake(391,55,minusPlusWidth,minusPlusWidth);
+                minusSymbolFrame = CGRectMake(76,55,minusPlusWidth,minusPlusWidth);
+                plusSymbolFrame = CGRectMake(377,55,minusPlusWidth,minusPlusWidth);
             }
             
             UIButton * minusSymbol = [[UIButton alloc] initWithFrame:minusSymbolFrame];
@@ -572,6 +617,63 @@
             //[changeLoopStripe setBackgroundColor:blueColor];
             //[self fadeInTutorialSubview:changeLoopStripe isReverseDirection:reverse];
             
+        }else if(screenIndex == 4){
+            
+            [self stopLeftSwipeGesture];
+            
+            //
+            // CONNECT GTAR
+            //
+            
+            [tutorialScreen setBackgroundColor:blueColor];
+            
+            // Do you have a gTar
+            float midtitleWidth = 300;
+            CGRect titleFrame = CGRectMake(tutorialScreen.frame.size.width/2 - midtitleWidth/2,50,midtitleWidth,35);
+            
+            UILabel * titleLabel = [self drawTutorialLabel:titleFrame withTitle:@"" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
+            
+            NSMutableAttributedString * titleString = [[NSMutableAttributedString alloc] initWithString:@"Do you have a gTar ?"];
+            [titleString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(13,5)];
+            
+            [titleLabel setAttributedText:titleString];
+            
+            // Yes + No buttons
+            CGRect yesButtonFrame = CGRectMake(tutorialScreen.frame.size.width/2 - 223,150,circleWidth,circleWidth);
+            CGRect noButtonFrame = CGRectMake(tutorialScreen.frame.size.width/2 + 120,150,circleWidth,circleWidth);
+            
+            [self drawTutorialCircle:yesButtonFrame withTitle:@"YES" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:[UIColor whiteColor] andAction:@selector(setIntroConditionalScreenOn) isReverseDirection:reverse];
+            
+            [self drawTutorialCircle:noButtonFrame withTitle:@"NO" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:[UIColor whiteColor] andAction:@selector(setIntroConditionalScreenOff) isReverseDirection:reverse];
+            
+            // Yes+No stripes/arrows
+            CGRect yesStripeFrame = CGRectMake(yesButtonFrame.origin.x+yesButtonFrame.size.width-circleBorderWidth/2,yesButtonFrame.origin.y+yesButtonFrame.size.height/2-stripeWidth/2,15,stripeWidth);
+            CGRect noStripeFrame = CGRectMake(noButtonFrame.origin.x+noButtonFrame.size.width-circleBorderWidth/2,noButtonFrame.origin.y+noButtonFrame.size.height/2-stripeWidth/2,tutorialScreen.frame.size.width - (noButtonFrame.origin.x+noButtonFrame.size.width)+circleBorderWidth/2,stripeWidth);
+            
+            UIView * noStripe = [[UIView alloc] initWithFrame:noStripeFrame];
+            UIView * yesStripe = [[UIView alloc] initWithFrame:yesStripeFrame];
+            
+            [noStripe setBackgroundColor:[UIColor whiteColor]];
+            [yesStripe setBackgroundColor:[UIColor whiteColor]];
+            
+            [self fadeInTutorialSubview:noStripe isReverseDirection:reverse];
+            [self fadeInTutorialSubview:yesStripe isReverseDirection:reverse];
+            
+            // Yes arrow
+            float arrowWidth = 35;
+            float arrowHeight = 40;
+            CGRect yesArrowFrame = CGRectMake(yesButtonFrame.origin.x+yesButtonFrame.size.width-circleBorderWidth/2+yesStripeFrame.size.width,yesButtonFrame.origin.y+yesButtonFrame.size.height/2-stripeWidth/2-(arrowHeight-stripeWidth)/2,arrowWidth,arrowHeight);
+            
+            [self drawTutorialArrow:yesArrowFrame facesDirection:3 width:arrowWidth height:arrowHeight withColor:[UIColor whiteColor] isReverseDirection:reverse];
+            
+            // Dock graphic
+            CGRect dockFrame = CGRectMake(yesArrowFrame.origin.x+yesArrowFrame.size.width + 10,yesArrowFrame.origin.y - 30,185,100);
+            UIImageView * dock = [[UIImageView alloc] initWithFrame:dockFrame];
+            [dock setImage:[UIImage imageNamed:@"Tutorial_Dock"]];
+            
+            [self fadeInTutorialSubview:dock isReverseDirection:reverse];
+            
+            
         }else if(screenIndex == 5){
             
             
@@ -579,12 +681,85 @@
             // USE GTAR AS A CONTROLLER
             //
             
-            // Tempo circle
-            CGRect tempoCircleFrame = CGRectMake(tutorialScreen.frame.size.width/2-circleWidth/2+39.5,tutorialScreen.frame.size.height-3*circleWidth/4-3,circleWidth,circleWidth);
-            [self drawTutorialCircle:tempoCircleFrame withTitle:@"120" size:30.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:reverse];
-
+            // Measure image frame
+            CGRect measureImageFrame;
+            
+            if(isScreenLarge){
+                measureImageFrame = CGRectMake(154,60,64,18);
+            }else{
+                measureImageFrame = CGRectMake(110,60,64,18);
+            }
+            
+            // Measure Background
+            float borderWidth = 3;
+            CGRect measureBackgroundFrame = CGRectMake(measureImageFrame.origin.x-borderWidth,measureImageFrame.origin.y-borderWidth,measureImageFrame.size.width+2*borderWidth,measureImageFrame.size.height+2*borderWidth);
+            
+            UIView * measureBackground = [[UIView alloc] initWithFrame:measureBackgroundFrame];
+            
+            [measureBackground setBackgroundColor:[UIColor whiteColor]];
+            
+            [self fadeInTutorialSubview:measureBackground isReverseDirection:reverse];
+            
+            // Measure image
+            UIImage * measureImage = [self drawMeasure:measureImageFrame];
+            UIImageView * measureImageView = [[UIImageView alloc] initWithImage:measureImage];
+            
+            [self fadeInTutorialSubview:measureImageView isReverseDirection:reverse];
+            
+            // gTarBackground
+            CGRect gtarBackgroundFrame = CGRectMake(0,88,tutorialScreen.frame.size.width,tutorialScreen.frame.size.height-88);
+            CGRect gtarBorderFrame = CGRectMake(0,88,tutorialScreen.frame.size.width,1);
+            
+            UIView * gtarBackground = [[UIView alloc] initWithFrame:gtarBackgroundFrame];
+            UIView * gtarBorder = [[UIView alloc] initWithFrame:gtarBorderFrame];
+            
+            [gtarBackground setBackgroundColor:blueColor];
+            [gtarBorder setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]];
+            
+            [self fadeInTutorialSubview:gtarBackground isReverseDirection:reverse];
+            [self fadeInTutorialSubview:gtarBorder isReverseDirection:reverse];
+         
+            
+            // Dock graphic
+            float gtarWidth = 1.5*480;
+            //float gtarHeight = gtarWidth*0.56;
+            float gtarHeight = gtarWidth*0.37;
+            CGRect gtarFrame = CGRectMake(10,49,gtarWidth,gtarHeight);
+            UIImageView * gtar = [[UIImageView alloc] initWithFrame:gtarFrame];
+            [gtar setImage:[UIImage imageNamed:@"Tutorial_gTar"]];
+            
+            [self fadeInTutorialSubview:gtar isReverseDirection:reverse];
             
             
+            // Use the fretboard
+            
+            float desctitleWidth = 440;
+            float descIndent = (isScreenLarge) ? -10 : 30;
+            
+            //CGRect titleFrame = CGRectMake(30,30,300,30);
+            CGRect desctitleFrame = CGRectMake(descIndent+tutorialScreen.frame.size.width/2 - desctitleWidth/2,106,desctitleWidth,30);
+            CGRect desctitle3Frame = CGRectMake(20,235,desctitleWidth,35);
+            CGRect desctitle4Frame = CGRectMake(20,265,desctitleWidth,35);
+            
+            UILabel * desctitle = [self drawTutorialLabel:desctitleFrame withTitle:@"" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
+            
+            NSMutableAttributedString * desctitleString = [[NSMutableAttributedString alloc] initWithString:@"Choose a track measure."];
+            [desctitleString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(15,8)];
+            [desctitle setAttributedText:desctitleString];
+            
+            UILabel * desctitle3 = [self drawTutorialLabel:desctitle3Frame withTitle:@"" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
+            
+            NSMutableAttributedString * desctitle3String = [[NSMutableAttributedString alloc] initWithString:@"To control notes, fret down"];
+            [desctitle3String addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_BOLD size:30.0] range:NSMakeRange(10,6)];
+            [desctitle3 setAttributedText:desctitle3String];
+            
+            
+            UILabel * desctitle4 = [self drawTutorialLabel:desctitle4Frame withTitle:@"and pluck on the gTar." withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
+            
+            
+            
+            [desctitle3 setTextAlignment:NSTextAlignmentLeft];
+            [desctitle4 setTextAlignment:NSTextAlignmentLeft];
         }
         
     }
@@ -640,7 +815,7 @@
             //patternCFrame = CGRectMake(281,-21,circleWidth,circleWidth);
             //patternDFrame = CGRectMake(363,-21,circleWidth,circleWidth);
         }else{
-            patternAFrame = CGRectMake(87,-21,circleWidth,circleWidth);
+            patternAFrame = CGRectMake(73,-21,circleWidth,circleWidth);
             //patternBFrame = CGRectMake(169,-21,circleWidth,circleWidth);
             //patternCFrame = CGRectMake(251,-21,circleWidth,circleWidth);
             //patternDFrame = CGRectMake(333,-21,circleWidth,circleWidth);
@@ -930,6 +1105,154 @@
     return newLabel;
 }
 
+#pragma mark - Sequence Loop
+-(void)startSequenceLoop
+{
+    sequenceLoopCounter = 0;
+    
+    if(!sequenceLoopTimer){
+        
+        sequenceLoopTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(progressSequenceLoop) userInfo:nil repeats:YES];
+    }
+}
+
+-(void)progressSequenceLoop
+{
+    for(int i = 0; i < [sequenceNotes count]; i++){
+        UIButton * note = [sequenceNotes objectAtIndex:i];
+        if(i == sequenceLoopCounter){
+            if(sequenceNoteActive[i]){
+                [note setBackgroundColor:[UIColor colorWithRed:240/255.0 green:249/255.0 blue:179/255.0 alpha:1.0]];
+                [self playSequenceSound];
+            }else{
+                [note setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7]];
+            }
+        }else{
+            if(sequenceNoteActive[i]){
+                [note setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+            }else{
+                [note setBackgroundColor:[UIColor clearColor]];
+            }
+        }
+    }
+    
+    sequenceLoopCounter++;
+    sequenceLoopCounter %= 8;
+    
+}
+
+-(void)endSequenceLoop
+{
+    [sequenceLoopTimer invalidate];
+    sequenceLoopTimer = nil;
+    
+    [soundMaster releaseBank:m_bankNode];
+}
+
+-(void)playSequenceSound
+{
+    m_bankNode->TriggerSample(0);
+}
+
+- (void)initAudioForSequence
+{
+    if(!soundMaster){
+        soundMaster = [[SoundMaster alloc] init];
+    }
+    
+    m_bankNode = [soundMaster generateBank];
+    
+    // Reload sound into bank after new record
+    char * filepath = (char *)malloc(sizeof(char) * 1024);
+    filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Vibraphone_C" ofType:@"mp3"] UTF8String];
+    
+    m_bankNode->LoadSampleIntoBank(filepath, m_sampNode);
+    
+}
+
+-(void)toggleSequenceNoteActive:(id)sender
+{
+    UIButton * senderButton = (UIButton *)sender;
+    
+    for(int i = 0; i < [sequenceNotes count]; i++){
+        if([sequenceNotes objectAtIndex:i] == senderButton){
+            if(sequenceNoteActive[i] == YES){
+                
+                [[sequenceNotes objectAtIndex:i] setBackgroundColor:[UIColor clearColor]];
+                sequenceNoteActive[i] = NO;
+            }else{
+                
+                [[sequenceNotes objectAtIndex:i] setBackgroundColor:[UIColor colorWithRed:240/255.0 green:249/255.0 blue:179/255.0 alpha:1.0]];
+                sequenceNoteActive[i] = YES;
+            }
+        }
+    }
+}
+
+#pragma mark - Draw Measure
+
+- (UIImage *)drawMeasure:(CGRect)frame {
+    
+    CGSize size = CGSizeMake(self.frame.size.width, self.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size,NO,0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    double lineWidth = 0.2;
+    
+    CGFloat noteFrameHeight = frame.size.height / STRINGS_ON_GTAR;
+    CGFloat noteFrameWidth = frame.size.width / FRETS_ON_GTAR;
+    CGRect noteFrame = CGRectMake(frame.origin.x, frame.origin.y, noteFrameWidth, noteFrameHeight);
+    
+    // Set line width:
+    CGContextSetLineWidth(context, lineWidth);
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    [self initColors];
+    
+    // Update all the notes:
+    int f, s;
+    for (f = 0, s = 0; f < FRETS_ON_GTAR; f++)
+    {
+        for (s = 0; s < STRINGS_ON_GTAR; s++)
+        {
+            
+            noteFrame.origin.x = frame.origin.x+f*noteFrameWidth;
+            noteFrame.origin.y = frame.origin.y+s*noteFrameHeight;
+            
+            CGContextAddRect(context, noteFrame);
+            
+            if((s==5 && f%4==0) || (s==2 && f%4==2) || (s==4 && f%8==4)){
+                
+                CGContextSetFillColorWithColor(context, colors[STRINGS_ON_GTAR-s-1].CGColor);  // Get color for that string and fill
+            }else{
+                CGContextSetFillColorWithColor(context, [UIColor colorWithRed:110/255.0 green:218/255.0 blue:245/255.0 alpha:1.0].CGColor);  // Get color for that string and fill
+            }
+            
+            CGContextStrokeRect(context, noteFrame);
+            
+            CGContextFillRect(context, noteFrame);
+        }
+    }
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+    
+}
+
+
+- (void)initColors
+{
+    colors[5] = [UIColor colorWithRed:170/255.0 green:114/255.0 blue:233/255.0 alpha:1.0]; // purple
+    colors[4] = [UIColor colorWithRed:30/255.0 green:108/255.0 blue:213/255.0 alpha:1.0]; // blue
+    colors[3] = [UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0]; // green
+    colors[2] = [UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]; // yellow
+    colors[1] = [UIColor colorWithRed:234/255.0 green:154/255.0 blue:0/255.0 alpha:1.0]; // orange
+    colors[0] = [UIColor colorWithRed:238/255.0 green:28/255.0 blue:36/255.0 alpha:1.0]; // red
+    
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

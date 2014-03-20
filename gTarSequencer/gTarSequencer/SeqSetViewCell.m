@@ -15,6 +15,7 @@
 @synthesize instrumentIconView;
 @synthesize instrumentIconBorder;
 @synthesize instrument;
+@synthesize editingScrollView;
 @synthesize patternContainer;
 @synthesize borderContainer;
 @synthesize patternToDisplay;
@@ -38,6 +39,7 @@
 @synthesize patternC;
 @synthesize patternD;
 @synthesize offButton;
+@synthesize volumeKnob;
 @synthesize patternABorder;
 @synthesize patternDBorder;
 @synthesize addMeasuresButton;
@@ -93,6 +95,8 @@
         if([subview isKindOfClass:[UIScrollView class]]){
             UIScrollView * scrollView = (UIScrollView *)subview;
             scrollView.delegate = self;
+            
+            editingScrollView = scrollView;
         }
     }
 }
@@ -100,6 +104,8 @@
 - (void)layoutSubviews
 {
     [offMask setHidden:YES];
+    
+    [self initVolumeKnob];
     
     instrumentIconBorder.layer.cornerRadius = 5.0;
     instrumentIconBorder.layer.borderWidth = 1.0;
@@ -251,13 +257,13 @@
 
 -(void)turnOnInstrumentView
 {
-    [offMask setHidden:YES];
+    //[offMask setHidden:YES];
     isMute = NO;
 }
 
 -(void)turnOffInstrumentView
 {
-    [offMask setHidden:NO];
+    //[offMask setHidden:NO];
     isMute = YES;
 }
 
@@ -662,6 +668,130 @@
     if(scrollView.contentOffset.x >= targetOffset){
         scrollView.contentOffset = CGPointMake(targetOffset, 0.0);
     }
+}
+
+#pragma mark - Volume Control
+- (void)initVolumeKnob
+{
+    if(!volumeKnob){
+        volumeKnob = [[UIKnob alloc] initWithFrame:CGRectMake(0,0,offButton.frame.size.width,offButton.frame.size.height)];
+        [volumeKnob setBackgroundColor:[UIColor clearColor]];
+        [volumeKnob setOuterColor:[UIColor whiteColor]];
+        [volumeKnob setHighlightColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        [volumeKnob setLineColor:[UIColor whiteColor]];
+        [volumeKnob setTouchTrackerColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        [volumeKnob setDelegate:self];
+        [volumeKnob setUserInteractionEnabled:NO];
+        [offButton addSubview:volumeKnob];
+        
+        [volumeKnob SetValue:[instrument getAmplitude]];
+        
+        NSLog(@"init volume is %f",[volumeKnob GetValue]);
+        
+    }
+    
+    isTracking = NO;
+}
+
+-(void)resetVolume
+{
+    [volumeKnob SetValue:[instrument getAmplitude]];
+}
+
+- (IBAction)userDidSelectVolumeControl:(id)sender
+{
+    if(!isTracking){
+        [self drawVolumeOverlay];
+    }
+}
+
+- (IBAction)userDidReleaseVolumeControl:(id)sender
+{
+    if(isTracking){
+        [self trackingDidEnd];
+    }
+}
+
+- (void)drawVolumeOverlay
+{
+    NSLog(@"volume tracking began");
+    isTracking = YES;
+ 
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    BOOL isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
+    
+    // Set up radial display:
+    CGRect wholeScreen;
+    if(isScreenLarge){
+        wholeScreen = CGRectMake(0, 0, XBASE_LG, YBASE-1);
+    }else{
+        wholeScreen = CGRectMake(0, 0, XBASE_SM, YBASE-1);
+    }
+    
+    volumeBg = [[UIView alloc] initWithFrame:wholeScreen];
+    [volumeBg setBackgroundColor:[UIColor clearColor]];
+    
+    tempVolumeKnob = [[UIKnob alloc] initWithFrame:CGRectMake(self.frame.origin.x+offButton.frame.origin.x-editingScrollView.contentOffset.x,self.frame.origin.y+offButton.frame.origin.y-parent.instrumentTable.contentOffset.y,offButton.frame.size.width,offButton.frame.size.height)];
+    [tempVolumeKnob setBackgroundColor:[UIColor clearColor]];
+    [tempVolumeKnob setDelegate:self];
+    [tempVolumeKnob SetValue:[volumeKnob GetValue]];
+    [tempVolumeKnob setUserInteractionEnabled:YES];
+    [tempVolumeKnob setOuterColor:[UIColor whiteColor]];
+    [tempVolumeKnob setHighlightColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+    [tempVolumeKnob setTouchTrackerColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+    [tempVolumeKnob setLineColor:[UIColor whiteColor]];
+    
+    [volumeBg addSubview:tempVolumeKnob];
+    
+    // overlay by adding to the main view
+    UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    [window addSubview:volumeBg];
+
+    [volumeKnob setHidden:YES];
+}
+
+-(void)trackingDidBegin
+{
+    
+}
+
+-(void)trackingDidEnd
+{
+    isTracking = NO;
+    
+    [volumeKnob SetValue:[tempVolumeKnob GetValue]];
+    
+    NSLog(@"new volume is %f",[volumeKnob GetValue]);
+    [instrument setAmplitude:[volumeKnob GetValue]];
+    
+    [volumeBg removeFromSuperview];
+    [volumeKnob setHidden:NO];
+    
+    [parent saveContext:nil];
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView * hitView = [super hitTest:point withEvent:event];
+    
+    if(hitView == offButton || hitView == volumeKnob){
+        if(!isTracking){
+            [self drawVolumeOverlay];
+        }
+    }
+    
+    return hitView;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touches began");
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touches ended");
+    [self trackingDidEnd];
 }
 
 @end

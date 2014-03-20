@@ -105,6 +105,8 @@
 		6D5FD01F18D12B5C00ED96F6 /* Tutorial_Dock.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D5FD01E18D12B5C00ED96F6 /* Tutorial_Dock.png */; };
 		6D72B28118BE7C7100969A8F /* CustomSampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D72B28018BE7C7100969A8F /* CustomSampleCell.m */; };
 		6D72B28318BE7C8400969A8F /* CustomSampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D72B28218BE7C8400969A8F /* CustomSampleCell.xib */; };
+		6D813EC518DA268500D29F48 /* Tutorial_gTar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D813EC418DA268500D29F48 /* Tutorial_gTar.png */; };
+		6D813EC918DA804100D29F48 /* VolumeKnobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D813EC818DA804100D29F48 /* VolumeKnobView.m */; };
 		6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704618CAAE560068CC92 /* Pinch_Icon.png */; };
 		6DAA158818C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */; };
 		6DAA158918C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */; };
@@ -120,7 +122,7 @@
 		6DAD2B3B18CF9B5500228F08 /* SoundMaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAD2B3A18CF9B5500228F08 /* SoundMaster.mm */; };
 		6DAD2B3E18CFA0CE00228F08 /* SoundMaster_.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */; };
 		6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAF30D718D2207700036958 /* Icon_Trumpet.png */; };
-		6DAF30DC18D2468500036958 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAF30DB18D2468500036958 /* TutorialViewController.m */; };
+		6DAF30DC18D2468500036958 /* TutorialViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAF30DB18D2468500036958 /* TutorialViewController.mm */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DEAB49018D78FF800833D9C /* Piano_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB42918D78FF700833D9C /* Piano_A.mp3 */; };
@@ -368,6 +370,9 @@
 		6D72B27F18BE7C7100969A8F /* CustomSampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSampleCell.h; sourceTree = "<group>"; };
 		6D72B28018BE7C7100969A8F /* CustomSampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSampleCell.m; sourceTree = "<group>"; };
 		6D72B28218BE7C8400969A8F /* CustomSampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSampleCell.xib; sourceTree = "<group>"; };
+		6D813EC418DA268500D29F48 /* Tutorial_gTar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial_gTar.png; sourceTree = "<group>"; };
+		6D813EC718DA804100D29F48 /* VolumeKnobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeKnobView.h; sourceTree = "<group>"; };
+		6D813EC818DA804100D29F48 /* VolumeKnobView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeKnobView.m; sourceTree = "<group>"; };
 		6D85704618CAAE560068CC92 /* Pinch_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pinch_Icon.png; sourceTree = "<group>"; };
 		6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57rd.png"; sourceTree = "<group>"; };
 		6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57sq.png"; sourceTree = "<group>"; };
@@ -388,7 +393,7 @@
 		6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundMaster_.mm; sourceTree = "<group>"; };
 		6DAF30D718D2207700036958 /* Icon_Trumpet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trumpet.png; sourceTree = "<group>"; };
 		6DAF30DA18D2468500036958 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
-		6DAF30DB18D2468500036958 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
+		6DAF30DB18D2468500036958 /* TutorialViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TutorialViewController.mm; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6DEAB42918D78FF700833D9C /* Piano_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_A.mp3; sourceTree = "<group>"; };
@@ -584,6 +589,7 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6D813EC418DA268500D29F48 /* Tutorial_gTar.png */,
 				6D5FD01E18D12B5C00ED96F6 /* Tutorial_Dock.png */,
 				6D85704618CAAE560068CC92 /* Pinch_Icon.png */,
 				6DAA159218C66363003DAB30 /* Save_Icon.png */,
@@ -673,6 +679,7 @@
 				58429A1A18A1C09300BDD09B /* InstrumentViewController.m */,
 				6DFDB02318C0346B004D573B /* InstrumentViewController_4.xib */,
 				58429A1718A1BD6A00BDD09B /* InstrumentViewController.xib */,
+				6D813EC618DA802900D29F48 /* VolumeKnobView */,
 			);
 			name = InstrumentViewController;
 			sourceTree = "<group>";
@@ -958,6 +965,15 @@
 			name = CustomSampleCell;
 			sourceTree = "<group>";
 		};
+		6D813EC618DA802900D29F48 /* VolumeKnobView */ = {
+			isa = PBXGroup;
+			children = (
+				6D813EC718DA804100D29F48 /* VolumeKnobView.h */,
+				6D813EC818DA804100D29F48 /* VolumeKnobView.m */,
+			);
+			name = VolumeKnobView;
+			sourceTree = "<group>";
+		};
 		6DAB0CE218C7B8F400FFBDE6 /* TestFlightSDK3.0.0 */ = {
 			isa = PBXGroup;
 			children = (
@@ -976,7 +992,7 @@
 			isa = PBXGroup;
 			children = (
 				6DAF30DA18D2468500036958 /* TutorialViewController.h */,
-				6DAF30DB18D2468500036958 /* TutorialViewController.m */,
+				6DAF30DB18D2468500036958 /* TutorialViewController.mm */,
 			);
 			name = TutorialViewController;
 			sourceTree = "<group>";
@@ -1355,6 +1371,7 @@
 				6DEAB4D118D78FF800833D9C /* Dubstep_Snare.mp3 in Resources */,
 				58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */,
 				6DEAB4A618D78FF800833D9C /* Double Bass_A.mp3 in Resources */,
+				6D813EC518DA268500D29F48 /* Tutorial_gTar.png in Resources */,
 				6DEAB49218D78FF800833D9C /* Piano_C.mp3 in Resources */,
 				6DEAB4F018D790F800833D9C /* Trombone_E.mp3 in Resources */,
 				58F6167C188F5E2700020A74 /* Icon_Music.png in Resources */,
@@ -1543,6 +1560,7 @@
 				6DAD2B3E18CFA0CE00228F08 /* SoundMaster_.mm in Sources */,
 				58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */,
 				58241D7B188DC46C00498DB5 /* CustomInstrumentSelector.m in Sources */,
+				6D813EC918DA804100D29F48 /* VolumeKnobView.m in Sources */,
 				58B4D3D0186E1F570035D9E5 /* Pattern.m in Sources */,
 				58CA4E6F18A174EA0026D83C /* VolumeDisplay.mm in Sources */,
 				585916FE18774791002C21B9 /* MeasureView.m in Sources */,
@@ -1559,7 +1577,7 @@
 				58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */,
 				6D44A45718B58C0000992D3D /* InfoViewController.m in Sources */,
 				58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */,
-				6DAF30DC18D2468500036958 /* TutorialViewController.m in Sources */,
+				6DAF30DC18D2468500036958 /* TutorialViewController.mm in Sources */,
 				58D6171E1863B8D7001EB327 /* AppDelegate.m in Sources */,
 				58868EDA187619ED00B469C2 /* PlayControlViewController.m in Sources */,
 				58429A1B18A1C09300BDD09B /* InstrumentViewController.m in Sources */,

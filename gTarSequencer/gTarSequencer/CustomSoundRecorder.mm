@@ -7,18 +7,15 @@
 //
 
 #import "CustomSoundRecorder.h"
-#import "AudioController.h"
-#import "AUNodeNetwork.h"
-#import "AudioNodeCommon.h"
+#import "SoundMaster_.mm"
 
 @interface CustomSoundRecorder(){
 
-    AudioController * audioController;
-    AudioNode * root;
+    SoundMaster * soundMaster;
     
+    SamplerBankNode * m_sampleBankNode;
     SampleNode * m_sampNode;
-    SamplerNode * m_samplerNode;
-
+    
     int bankCount;
 }
 
@@ -35,12 +32,6 @@
     self = [super init];
     if (self)
     {
-        
-        audioController = nil;
-        root = nil;
-        m_samplerNode = nil;
-        bankCount = -1;
-        
         defaultFilename = @"CustomSoundPlaceholder.m4a";
         
         NSArray * pathComponents = [NSArray arrayWithObjects:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject], defaultFilename, nil];
@@ -140,12 +131,7 @@
         
         NSLog(@"Playback started");
         
-        //player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
-        //[player setDelegate:self];
-        //[player play];
-        
-        NSLog(@"Play audio for sample at %i with length %f",bankCount,m_sampNode->GetLength());
-        m_samplerNode->TriggerBankSample(bankCount, 0);
+        m_sampleBankNode->TriggerSample(0);
     }
 }
 
@@ -177,7 +163,7 @@
     NSLog(@"Moving file from %@ to %@.m4a",defaultFilename,filename);
     
     NSString * newFilename = filename;
-    newFilename = [@"Samples/" stringByAppendingString:filename];
+    newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
     newFilename = [newFilename stringByAppendingString:@".m4a"];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -195,6 +181,8 @@
     
     if(!result)
         NSLog(@"Error moving");
+    
+    [self releaseAudioBank];
 }
 
 - (void)saveRecordingToFilename:(NSString *)filename
@@ -216,7 +204,19 @@
     char * pathName = (char *)malloc(sizeof(char) * [newPath length]);
     pathName = (char *) [newPath UTF8String];
     
+    NSLog(@"Save path is %@",newPath);
+    
     m_sampNode->SaveToFile(pathName, YES);
+    
+    // Print directory
+    
+    NSArray * contents = [fm contentsOfDirectoryAtPath:directory error:&err];
+    
+    for(int i = 0; i < [contents count]; i++){
+        NSLog(@"%@",contents[i]);
+    }
+    
+    [self releaseAudioBank];
 }
 
 - (void)deleteRecordingFilename:(NSString *)filename
@@ -246,17 +246,12 @@
 
 - (void)initAudioForSample
 {
-    BOOL init = NO;
     
-    if(!audioController){
-        audioController = [AudioController sharedAudioController];
-        root = [[audioController GetNodeNetwork] GetRootNode];
-        m_samplerNode = new SamplerNode();
-        init=YES;
+    if(!soundMaster){
+        soundMaster = [[SoundMaster alloc] init];
     }
     
-    SamplerBankNode * newBank = NULL;
-    m_samplerNode->CreateNewBank(newBank);
+    m_sampleBankNode = [soundMaster generateBank];
     
     // Reload sound into bank after new record
     char * filepath = (char *)malloc(sizeof(char) * 1024);
@@ -267,14 +262,7 @@
     
     filepath = (char *) [sampleFilename UTF8String];
     
-    m_samplerNode->LoadSampleIntoBank(++bankCount, filepath, m_sampNode);
-    
-    NSLog(@"Init audio for sample at %i",bankCount);
-    
-    if(init){
-        root->ConnectInput(0, m_samplerNode, 0);
-        [audioController startAUGraph];
-    }
+    m_sampleBankNode->LoadSampleIntoBank(filepath, m_sampNode);
 }
 
 - (unsigned long int)fetchAudioBufferSize
@@ -307,6 +295,11 @@
 - (float)getSampleLength
 {
     return m_sampNode->GetLength();
+}
+
+- (void)releaseAudioBank
+{
+    [soundMaster releaseBank:m_sampleBankNode];
 }
 
 - (float)getSampleRelativeLength

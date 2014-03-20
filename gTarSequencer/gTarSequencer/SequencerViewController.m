@@ -293,7 +293,7 @@
     }
     
     // Hover set name?
-    if([nav isEqualToString:@"Set"]){
+    if([nav isEqualToString:@"Set"] && !isTutorialOpen){
         [self hoverSetName];
     }else{
         [self hideSetName];
@@ -516,6 +516,7 @@
         [seqSetViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
         
         // Decode array of instruments:
+        
         NSData * instrumentData = [currentState objectForKey:@"Instruments Data"];
         [seqSetViewController setInstrumentsFromData:instrumentData];
         
@@ -1032,6 +1033,8 @@
     
     [tutorialViewController launch];
     
+    isTutorialOpen = YES;
+    
     [self stopGestures];
 }
 
@@ -1042,6 +1045,7 @@
 
 - (void)notifyTutorialEnded
 {
+    isTutorialOpen = NO;
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self startGestures];

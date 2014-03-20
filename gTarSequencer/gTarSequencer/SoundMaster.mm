@@ -23,7 +23,7 @@
 
 - (void)initAudio
 {
-    NSLog(@"Init Sound Master");
+    if(TESTMODE) NSLog(@"Init Sound Master");
     
     audioController = [AudioController sharedAudioController];
     root = [[audioController GetNodeNetwork] GetRootNode];
@@ -50,11 +50,16 @@
     [audioController startAUGraph];
 }
 
--(void)setGain:(double)gain
+-(void)setChannelGain:(double)gain
 {
     //[audioController stopAUGraph];
     m_samplerNode->SetChannelGain(gain, CONN_OUT);
     //[audioController startAUGraph];
+}
+
+-(void)setGain:(double)gain forSamplerBank:(SamplerBankNode *)m_samplerBank
+{
+    m_samplerBank->SetBankGain(gain);
 }
 
 @end

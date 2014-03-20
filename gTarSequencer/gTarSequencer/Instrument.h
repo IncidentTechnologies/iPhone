@@ -51,6 +51,8 @@
 
 - (void)releaseSounds;
 
+- (double)getAmplitude;
+
 @property (nonatomic) int instrument;
 @property (retain, nonatomic) NSString * instrumentName;
 @property (retain, nonatomic) NSString * iconName;
@@ -63,5 +65,7 @@
 @property (nonatomic) BOOL selectedPatternDidChange;
 @property (nonatomic) BOOL isMuted;
 @property (nonatomic) NSNumber * isCustom;
+
+@property (nonatomic) double amplitude;
 
 @end

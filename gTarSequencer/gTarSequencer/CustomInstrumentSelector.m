@@ -1101,6 +1101,7 @@
     
     // Rename the file and save in Documents/Samples/ subdirectory
     [customSoundRecorder saveRecordingToFilename:filename];
+    //[customSoundRecorder renameRecordingToFilename:filename];
     
     // Add to customSampleList.pList
     [self updateCustomSampleListWithSample:filename];
@@ -2215,7 +2216,6 @@
         [self styleSampleCell:cell turnOff:selectedSampleCell];
         selectedSampleCell = cell;
         
-        NSLog(@"PLAYING FILE ... %@.mp3",cell.sampleTitle.text);
         BOOL isCustom = ([self isCustomInstrumentList]) ? TRUE : FALSE;
         NSString * filename = [cell.parentCategory stringByAppendingString:@"_"];
         filename = [filename stringByAppendingString:cell.sampleTitle.text];
@@ -2369,6 +2369,8 @@
     [wrapperDict setValue:customSampleList forKey:@"Samples"];
     
     NSLog(@"Writing custom sample list to path %@",customSampleListPath);
+    
+    NSLog(@"Custom sample list is %@",customSampleList);
     
     BOOL success = [wrapperDict writeToFile:customSampleListPath atomically:YES];
     

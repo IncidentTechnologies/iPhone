@@ -187,16 +187,16 @@
                                 <color key="backgroundColor" red="0.039215686274509803" green="0.086274509803921567" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTx-aJ-Y2K">
-                                <rect key="frame" x="487" y="-1" width="43" height="52"/>
+                                <rect key="frame" x="480" y="10" width="66" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <inset key="contentEdgeInsets" minX="8" minY="10" maxX="8" maxY="10"/>
-                                <state key="normal" image="Power_Icon.png">
+                                <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="userDidSelectNewPattern:" destination="XoE-pc-IxT" eventType="touchUpInside" id="6um-tn-HCT"/>
+                                    <action selector="userDidSelectVolumeControl:" destination="XoE-pc-IxT" eventType="touchUpInside" id="W0r-2Y-qYU"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4M-Sy-HyH">
@@ -252,7 +252,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Power_Icon.png" width="43" height="51"/>
         <image name="Trash_Icon.png" width="60" height="84"/>
     </resources>
 </document>

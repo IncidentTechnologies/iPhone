@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Instrument.h"
 #import "TutorialViewController.h"
+#import "UIKnob.h"
+#import "VolumeKnobView.h"
 
 @protocol InstrumentDelegate <NSObject>
 
@@ -27,7 +29,7 @@
 
 @end
 
-@interface InstrumentViewController : UIViewController <UIScrollViewDelegate,TutorialDelegate>
+@interface InstrumentViewController : UIViewController <UIScrollViewDelegate,TutorialDelegate,UIKnobDelegate,VolumeKnobViewDelegate>
 {
     // View data
     int activePattern;
@@ -62,6 +64,10 @@
     // Pages
     UIColor * pageOnColor;
     UIColor * pageOffColor;
+    
+    UIView * volumeBg;
+    UIKnob * tempVolumeKnob;
+    BOOL isTracking;
     
 }
 
@@ -98,6 +104,8 @@
 @property (weak, nonatomic) IBOutlet UIButton * patternC;
 @property (weak, nonatomic) IBOutlet UIButton * patternD;
 @property (weak, nonatomic) IBOutlet UIButton * offButton;
+@property (retain, nonatomic) UIKnob * volumeKnob;
+@property (weak, nonatomic) IBOutlet VolumeKnobView * volumeKnobView;
 @property (weak, nonatomic) IBOutlet UIButton * instrumentIconButton;
 @property (weak, nonatomic) IBOutlet UIImageView * instrumentIcon;
 @property (weak, nonatomic) IBOutlet UIView * iconOverlap;
