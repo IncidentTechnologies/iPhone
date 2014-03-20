@@ -942,6 +942,12 @@
     return [seqSetViewController getInstruments];
 }
 
+- (void)refreshVolumeSliders
+{
+    [seqSetViewController reloadTableData];
+    [instrumentViewController resetVolume];
+}
+
 #pragma mark - Guitar Observer
 
 - (void)notePlayedAtString:(int)str andFret:(int)fr
@@ -1009,6 +1015,8 @@
 
 -(void)relaunchFTUTutorial
 {
+    [self stopAll];
+    
     [self launchFTUTutorial];
     
     // Reset other BOOLs

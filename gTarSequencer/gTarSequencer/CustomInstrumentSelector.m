@@ -193,6 +193,8 @@
     [self checkInitCustomSoundRecorder];
     if(![customSoundRecorder isRecording]){
         
+        [customSoundRecorder releaseAudio];
+        
         // back from save
         if(viewState == VIEW_CUSTOM_NAME){
             // remember instrument name

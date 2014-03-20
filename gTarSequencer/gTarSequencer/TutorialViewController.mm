@@ -294,13 +294,12 @@
         [self initAudioForSequence];
         [self startSequenceLoop];
         
-        // Swipe label
-        float swipeFrameWidth = 300;
-        CGRect swipeFrame = CGRectMake(tutorialScreen.frame.size.width/2 - swipeFrameWidth/2,tutorialScreen.frame.size.height-60,swipeFrameWidth,30);
-        UILabel * swipeText = [self drawTutorialLabel:swipeFrame withTitle:@"swipe to learn how >" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
-        [swipeText setFont:[UIFont fontWithName:@"AvenirNext-Italic" size:15.0]];
-        
-        
+        // Swipe arrow
+        float swipeFrameWidth = 200;
+        float swipeFrameHeight = 30;
+        CGRect swipeFrame = CGRectMake(tutorialScreen.frame.size.width/2 - swipeFrameWidth/2,tutorialScreen.frame.size.height-59,swipeFrameWidth,swipeFrameHeight);
+
+        [self drawSwipeDottedLines:swipeFrame swipeText:@"swipe to learn how" swipeLeft:YES swipeRight:NO withAlpha:0.7 isReverseDirection:reverse];
         
     }else if(screenIndex == tutorialTotalSteps){
         
@@ -457,6 +456,15 @@
             float arrowHeight = 50;
             CGRect deleteArrowFrame = CGRectMake(deleteLabelFrame.origin.x-arrowWidth, deleteLabelFrame.origin.y-(arrowHeight-defaultLabelHeight)/2, arrowWidth, arrowHeight);
             [self drawTutorialArrow:deleteArrowFrame facesDirection:9 width:arrowWidth height:arrowHeight withColor:blueColor isReverseDirection:reverse];
+            
+            
+            // Swipe arrow
+            float swipeFrameWidth = 140;
+            float swipeFrameHeight = 30;
+            CGRect swipeFrame = CGRectMake(0,tutorialScreen.frame.size.height-43,swipeFrameWidth,swipeFrameHeight);
+            
+            [self drawSwipeDottedLines:swipeFrame swipeText:@"continue" swipeLeft:YES swipeRight:YES withAlpha:0.7 isReverseDirection:reverse];
+            
             
         }else if(screenIndex == 3){
             
@@ -619,6 +627,14 @@
             //[changeLoopStripe setBackgroundColor:blueColor];
             //[self fadeInTutorialSubview:changeLoopStripe isReverseDirection:reverse];
             
+            
+            // Swipe arrow
+            float swipeFrameWidth = 140;
+            float swipeFrameHeight = 30;
+            CGRect swipeFrame = CGRectMake(0,tutorialScreen.frame.size.height-43,swipeFrameWidth,swipeFrameHeight);
+            
+            [self drawSwipeDottedLines:swipeFrame swipeText:@"continue" swipeLeft:YES swipeRight:YES withAlpha:0.7 isReverseDirection:reverse];
+            
         }else if(screenIndex == 4){
             
             [self stopLeftSwipeGesture];
@@ -726,7 +742,7 @@
             float gtarWidth = 1.5*480;
             //float gtarHeight = gtarWidth*0.56;
             float gtarHeight = gtarWidth*0.37;
-            CGRect gtarFrame = CGRectMake(10,49,gtarWidth,gtarHeight);
+            CGRect gtarFrame = CGRectMake(10,39,gtarWidth,gtarHeight);
             UIImageView * gtar = [[UIImageView alloc] initWithFrame:gtarFrame];
             [gtar setImage:[UIImage imageNamed:@"Tutorial_gTar"]];
             
@@ -740,8 +756,8 @@
             
             //CGRect titleFrame = CGRectMake(30,30,300,30);
             CGRect desctitleFrame = CGRectMake(descIndent+tutorialScreen.frame.size.width/2 - desctitleWidth/2,106,desctitleWidth,30);
-            CGRect desctitle3Frame = CGRectMake(20,235,desctitleWidth,35);
-            CGRect desctitle4Frame = CGRectMake(20,265,desctitleWidth,35);
+            CGRect desctitle3Frame = CGRectMake(60,217,desctitleWidth,35);
+            CGRect desctitle4Frame = CGRectMake(60,247,desctitleWidth,35);
             
             UILabel * desctitle = [self drawTutorialLabel:desctitleFrame withTitle:@"" withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
             
@@ -758,10 +774,15 @@
             
             UILabel * desctitle4 = [self drawTutorialLabel:desctitle4Frame withTitle:@"and pluck on the gTar." withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
             
-            
-            
             [desctitle3 setTextAlignment:NSTextAlignmentLeft];
             [desctitle4 setTextAlignment:NSTextAlignmentLeft];
+            
+            // Swipe arrow
+            float swipeFrameWidth = 140;
+            float swipeFrameHeight = 30;
+            CGRect swipeFrame = CGRectMake(0,tutorialScreen.frame.size.height-35,swipeFrameWidth,swipeFrameHeight);
+            
+            [self drawSwipeDottedLines:swipeFrame swipeText:@"continue" swipeLeft:YES swipeRight:YES withAlpha:0.7 isReverseDirection:reverse];
         }
         
     }
@@ -1005,6 +1026,66 @@
 
 #pragma mark - Draw reusable interface
 
+-(UIView *)drawSwipeDottedLines:(CGRect)frame swipeText:(NSString *)swipeText swipeLeft:(BOOL)showSwipeLeft swipeRight:(BOOL)showSwipeRight withAlpha:(float)alpha isReverseDirection:(BOOL)reverse
+{
+    float swipeFrameWidth = frame.size.width;
+    float swipeFrameHeight = frame.size.height;
+    
+    UIView * swipeArrowTop = [[UIView alloc] initWithFrame:frame];
+    
+    CGSize size = CGSizeMake(frame.size.width, frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 2.0);
+    CGFloat pattern[] = {3,6};
+    CGContextSetLineDash(context,0.0,pattern,2);
+    
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, 0, 0);
+    CGContextAddLineToPoint(context, swipeFrameWidth, 0);
+    CGContextClosePath(context);
+    
+    CGContextStrokePath(context);
+    
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, 0, swipeFrameHeight);
+    CGContextAddLineToPoint(context, swipeFrameWidth, swipeFrameHeight);
+    CGContextClosePath(context);
+    
+    CGContextStrokePath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [swipeArrowTop addSubview:image];
+    
+    UIGraphicsEndImageContext();
+    
+    [self fadeInTutorialSubview:swipeArrowTop isReverseDirection:reverse];
+    
+    UILabel * swipeTextLabel = [self drawTutorialLabel:frame withTitle:swipeText withColor:[UIColor clearColor] isHeader:NO isReverseDirection:reverse];
+    [swipeTextLabel setFont:[UIFont fontWithName:@"AvenirNext-Italic" size:15.0]];
+    
+    if(showSwipeLeft){
+        UIView * lArrow = [self drawTutorialArrow:CGRectMake(frame.origin.x+17,frame.origin.y+10,10,10) facesDirection:9 width:10 height:10 withColor:[UIColor whiteColor] isReverseDirection:reverse];
+        [lArrow setAlpha:alpha];
+    }
+    
+    if(showSwipeRight){
+        UIView * rArrow = [self drawTutorialArrow:CGRectMake(frame.origin.x+frame.size.width-28,frame.origin.y+10,10,10) facesDirection:3 width:10 height:10 withColor:[UIColor whiteColor] isReverseDirection:reverse];
+        [rArrow setAlpha:alpha];
+    }
+    
+    [swipeTextLabel setAlpha:alpha];
+    [swipeArrowTop setAlpha:alpha];
+    
+    return swipeArrowTop;
+}
+
 -(UIView *)drawTutorialArrow:(CGRect)frame facesDirection:(int)faces width:(float)arrowWidth height:(float)arrowHeight withColor:(UIColor *)arrowColor isReverseDirection:(BOOL)reverse
 {
     UIView * newArrow = [[UIView alloc] initWithFrame:frame];
@@ -1148,7 +1229,7 @@
     [sequenceLoopTimer invalidate];
     sequenceLoopTimer = nil;
     
-    [soundMaster releaseBank:m_bankNode];
+    [soundMaster releaseBankAndDisconnect:m_bankNode];
 }
 
 -(void)playSequenceSound

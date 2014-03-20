@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-
 #import "SoundMaker.h"
 #import "SoundMaster_.mm"
 #import "AudioController.h"
@@ -142,6 +141,41 @@
 - (void)releaseSounds
 {
     [m_soundMaster releaseBank:m_samplerBank];
+}
+
+#pragma mark - Level Sliders
+- (void)releaseLevelSlider
+{
+    if(volumeSlider != nil){
+        
+        
+        // release volumeSlider
+    }
+}
+
+- (void)commitLevelSlider:(UILevelSlider *)slider
+{
+    volumeSlider = slider;
+    m_samplerBank->SubscribeAbsoluteMean((__bridge void *)volumeSlider, cbLevel, NULL);
+    
+}
+
+static void cbLevel(float val, void *pObject, void *pContext) {
+    
+    UILevelSlider *slider = (__bridge UILevelSlider*)(pObject);
+    
+    //val = 1.0f - val;
+    
+    val *= 10.0f;
+    
+    if(val > 1.0f)
+        val = 1.0f;
+    else if(val < 0.0f)
+        val = 0.0f;
+    
+    //NSLog(@"%f", val);
+    
+    [slider setDisplayValue:val];
 }
 
 @end

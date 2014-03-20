@@ -76,6 +76,8 @@
     
     // Prepare for dynamic instruments
     instrumentFrameContainer = [[UIView alloc] initWithFrame:CGRectMake(0, -1, outline.frame.size.width + 2, outline.frame.size.height+2)];
+    instrumentFrameContainer.userInteractionEnabled = YES;
+    outline.userInteractionEnabled = YES;
     [outline addSubview:instrumentFrameContainer];
     
 }
@@ -141,6 +143,8 @@
     slider.layer.borderWidth = 3.0f;
     slider.layer.cornerRadius = SLIDER_WIDTH/2;
     
+    [slider setBackgroundColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.3]];
+    
     [sidebar addSubview:slider];
     
     // Draw sidebar slider circle
@@ -184,6 +188,7 @@
     }
     
     instruments = [[NSMutableArray alloc] initWithArray:[delegate getInstruments]];
+    sliders = [[NSMutableDictionary alloc] init];
     
     int i = 0;
     float instrumentWidth = instrumentFrameContainer.frame.size.width / ([instruments count]+1);
@@ -215,7 +220,7 @@
         
         // draw instrument icon
         float iconWidth = 60;
-        CGRect instrumentIconFrame = CGRectMake(instrumentFrame.size.width/2 - iconWidth/2,20,iconWidth,iconWidth);
+        CGRect instrumentIconFrame = CGRectMake(instrumentFrame.size.width/2 - iconWidth/2,14,iconWidth,iconWidth);
         UIButton * instrumentIcon = [[UIButton alloc] initWithFrame:instrumentIconFrame];
         
         [instrumentIcon setImage:[UIImage imageNamed:inst.iconName] forState:UIControlStateNormal];
@@ -233,11 +238,31 @@
         CGRect levelSliderFrame = CGRectMake(instrumentFrame.size.width/2 - levelSliderWidth/2,90,levelSliderWidth,levelSliderHeight);
         UILevelSlider * volumeSlider = [[UILevelSlider alloc] initWithFrame:levelSliderFrame];
         [volumeSlider setBackgroundColor:[UIColor clearColor]];
-        [volumeSlider setSliderValue:0.5];
+        [volumeSlider setSliderValue:(1-inst.amplitude)];
+        volumeSlider.delegate = self;
+        [sliders setObject:volumeSlider forKey:[NSNumber numberWithInt:i]];
         
         [instrumentView addSubview:volumeSlider];
         
+        // Link volume sliders to instruments
+        [inst.audio releaseLevelSlider];
+        [inst.audio commitLevelSlider:volumeSlider];
+
         i++;
+    }
+}
+
+-(void)valueDidChange:(double)newValue forSlider:(id)sender
+{
+    Instrument * inst;
+    UILevelSlider * levelSender = (UILevelSlider *)sender;
+    
+    for(NSNumber * key in sliders){
+        if(levelSender == [sliders objectForKey:key]){
+            inst = [instruments objectAtIndex:[key intValue]];
+            inst.amplitude = newValue;            
+            return;
+        }
     }
 }
 

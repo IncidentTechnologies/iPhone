@@ -20,6 +20,7 @@
 
 -(SamplerBankNode *)generateBank;
 -(void)releaseBank:(SamplerBankNode *)m_samplerBank;
+-(void)releaseBankAndDisconnect:(SamplerBankNode *)m_samplerBank;
 -(void)setChannelGain:(double)gain;
 -(void)setGain:(double)gain forSamplerBank:(SamplerBankNode *)m_samplerBank;
 

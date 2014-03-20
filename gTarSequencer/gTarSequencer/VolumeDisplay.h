@@ -22,7 +22,7 @@
 
 @end
 
-@interface VolumeDisplay : UIView
+@interface VolumeDisplay : UIView <UILevelSliderDelegate>
 {
     double currentValue;
     
@@ -48,6 +48,7 @@
     UIView * slider;
     UIView * instrumentFrameContainer;
     NSMutableArray * instruments;
+    NSMutableDictionary * sliders;
 }
 
 - (void)fillToPercent:(double)percent;

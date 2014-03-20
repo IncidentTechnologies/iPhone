@@ -10,6 +10,7 @@
 
 @implementation Instrument
 
+@synthesize audio;
 @synthesize instrumentName;
 @synthesize iconName;
 @synthesize instrument;

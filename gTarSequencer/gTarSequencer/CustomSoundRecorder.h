@@ -43,6 +43,7 @@
 - (float)getSampleRelativeLength;
 - (void)setSampleStart:(float)ms;
 - (void)setSampleEnd:(float)ms;
+- (void)releaseAudio;
 
 @property (weak, nonatomic) id<CustomSoundDelegate> delegate;
 @property (retain) AVAudioRecorder * recorder;

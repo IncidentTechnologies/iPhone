@@ -50,6 +50,15 @@
     [audioController startAUGraph];
 }
 
+-(void)releaseBankAndDisconnect:(SamplerBankNode *)m_samplerBank
+{
+    [audioController stopAUGraph];
+    m_samplerNode->ReleaseBank(m_samplerBank);
+    root->DeleteAndDisconnect(CONN_OUT);
+    [audioController startAUGraph];
+    
+}
+
 -(void)setChannelGain:(double)gain
 {
     //[audioController stopAUGraph];

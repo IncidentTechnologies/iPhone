@@ -107,8 +107,10 @@
 -(void)clearRecord
 {
     if(sampleStart > 0 || sampleEnd > 0){
-        [self setSampleStart:0];
-        [self setSampleEnd:0];
+        //[self setSampleStart:0];
+        //[self setSampleEnd:0];
+        sampleStart = 0;
+        sampleEnd = 0;
     }
 }
 
@@ -297,9 +299,18 @@
     return m_sampNode->GetLength();
 }
 
+-(void)releaseAudio
+{
+    if(soundMaster){
+        [soundMaster releaseBankAndDisconnect:m_sampleBankNode];
+    }
+}
+
 - (void)releaseAudioBank
 {
-    [soundMaster releaseBank:m_sampleBankNode];
+    if(soundMaster){
+        [soundMaster releaseBank:m_sampleBankNode];
+    }
 }
 
 - (float)getSampleRelativeLength

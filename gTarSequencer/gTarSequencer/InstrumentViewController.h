@@ -86,6 +86,8 @@
 
 -(void)updateActiveMeasure;
 
+-(void)resetVolume;
+
 //-(IBAction)changePattern:(id)sender;
 //-(IBAction)stopChangePattern:(id)sender;
 -(IBAction)userDidSelectNewPattern:(id)sender;

@@ -169,6 +169,7 @@
 {
     isVolumeSliderOpen = false;
     [delegate startGestures];
+    [delegate refreshVolumeSliders];
 }
 
 #pragma mark - Volume Slider Interface

@@ -21,7 +21,7 @@
 {
     BOOL isSelected;
     
-    SoundMaker * audio;
+    //SoundMaker * audio;
     
 }
 
@@ -53,6 +53,7 @@
 
 - (double)getAmplitude;
 
+@property (retain, nonatomic) SoundMaker * audio;
 @property (nonatomic) int instrument;
 @property (retain, nonatomic) NSString * instrumentName;
 @property (retain, nonatomic) NSString * iconName;

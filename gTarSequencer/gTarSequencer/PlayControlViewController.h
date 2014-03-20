@@ -15,6 +15,7 @@
 - (void) stopAllPlaying;
 - (void) startAllPlaying:(float)secondsperbeat withAmplitude:(double)volume;
 - (void) changePlayVolume:(double)newVolume;
+- (void) refreshVolumeSliders;
 
 - (void) initPlayLocation;
 

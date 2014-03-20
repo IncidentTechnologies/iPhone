@@ -1523,6 +1523,11 @@
     isTracking = NO;
 }
 
+- (void)resetVolume
+{
+    [volumeKnob SetValue:[currentInst getAmplitude]];
+}
+
 - (void)knobRegionHit
 {
     if(!isTracking && [volumeKnob isEnabled]){
