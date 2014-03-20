@@ -9,7 +9,6 @@
 #import "AppData.h"
 #import "SoundMaster.h"
 #import "UILevelSlider.h"
-
 @class AudioController;
 
 // Serves as a wrapper class for the AudioController, because
@@ -19,7 +18,6 @@
 @interface SoundMaker : NSObject
 {
     int instIndex;
-    UILevelSlider * volumeSlider;
 }
 
 - (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index andSoundMaster:(SoundMaster *)soundMaster;

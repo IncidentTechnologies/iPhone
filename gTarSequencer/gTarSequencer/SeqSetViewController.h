@@ -68,6 +68,10 @@
     BOOL allowContentDrawing;
     
 }
+
+- (void)startSoundMaster;
+- (void)stopSoundMaster;
+
 - (void)turnEditingOn;
 - (void)turnEditingOff;
 

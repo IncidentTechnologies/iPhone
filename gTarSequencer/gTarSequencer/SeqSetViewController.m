@@ -946,6 +946,16 @@
     [delegate startAll];
 }
 
+- (void)startSoundMaster
+{
+    [soundMaster start];
+}
+
+- (void)stopSoundMaster
+{
+    [soundMaster stop];
+}
+
 #pragma mark Re-adding Instruments
 
 - (void)addInstrumentBackIntoOptions:(Instrument *)inst

@@ -16,6 +16,8 @@
     SamplerNode *m_samplerNode;
     AudioController *audioController;
     AudioNode *root;
+    
+    SamplerBankNode * bankToRelease;
 }
 
 -(SamplerBankNode *)generateBank;

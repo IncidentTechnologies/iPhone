@@ -35,6 +35,16 @@
     [audioController startAUGraph];
 }
 
+-(void)start
+{
+    [audioController startAUGraph];
+}
+
+-(void)stop
+{
+   [audioController stopAUGraph];
+}
+
 -(SamplerBankNode *)generateBank
 {
     SamplerBankNode * m_samplerBank = NULL;
@@ -46,6 +56,7 @@
 -(void)releaseBank:(SamplerBankNode *)m_samplerBank
 {
     [audioController stopAUGraph];
+    //m_samplerNode->ReleaseBank(0);
     m_samplerNode->ReleaseBank(m_samplerBank);
     [audioController startAUGraph];
 }

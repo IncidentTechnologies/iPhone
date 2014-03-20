@@ -201,6 +201,23 @@
     return screenIndex;
 }
 
+-(void)startSwipeToPlayGesture
+{
+    NSLog(@"Start swipe to play");
+    swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeToPlay)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [swipeLeft setNumberOfTouchesRequired:1];
+    
+    [tutorialScreen addGestureRecognizer:swipeLeft];
+}
+
+-(void)swipeToPlay
+{
+    NSLog(@"Start to play");
+    [delegate forceToPlay];
+    [self end];
+}
+
 #pragma mark - Intro Tutorial
 
 - (void)drawIntroTutorialScreen:(int)screenIndex isReverseDirection:(BOOL)reverse
@@ -304,6 +321,7 @@
     }else if(screenIndex == tutorialTotalSteps){
         
         [self stopLeftSwipeGesture];
+        [self startSwipeToPlayGesture];
         
         //
         // PLAY TO START
@@ -341,6 +359,7 @@
         [self drawTutorialCircle:playCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:@selector(end) isReverseDirection:reverse];
         
         [tutorialNext removeFromSuperview];
+        
         
     }else{
         
@@ -637,7 +656,7 @@
             
         }else if(screenIndex == 4){
             
-            [self stopLeftSwipeGesture];
+            //[self stopLeftSwipeGesture];
             
             //
             // CONNECT GTAR

@@ -449,35 +449,49 @@
 #pragma mark - Auto Save Load
 - (void)saveContext:(NSString *)filepath
 {
-    if(filepath == nil){
-        filepath = instrumentDataFilePath;
-        NSLog(@"Save state to disk");
-    }else{
-        NSLog(@"Save state to disk at %@",filepath);
+    if(saveContextTimer == nil || filepath != nil){
+        
+        // Prevent from saving many times in a row, but never block a manual save
+        [self clearSaveContextTimer];
+        saveContextTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(clearSaveContextTimer) userInfo:nil repeats:NO];
+        
+        if(filepath == nil){
+            filepath = instrumentDataFilePath;
+            NSLog(@"Save state to disk");
+        }else{
+            NSLog(@"Save state to disk at %@",filepath);
+        }
+        
+        NSData * instData = [NSKeyedArchiver archivedDataWithRootObject:[seqSetViewController getInstruments]];
+        
+        NSNumber * tempoNumber = [NSNumber numberWithInt:[playControlViewController getTempo]];
+        
+        NSNumber * volumeNumber = [NSNumber numberWithDouble:[playControlViewController getVolume]];
+        
+        NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[seqSetViewController getSelectedInstrumentIndex]];
+        
+        [currentState setObject:instData forKey:@"Instruments Data"];
+        [currentState setObject:tempoNumber forKey:@"Tempo"];
+        [currentState setObject:volumeNumber forKey:@"Volume"];
+        [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
+        
+        if(activeSequencer){
+            [currentState setObject:activeSequencer forKey:@"Active Sequencer"];
+        }else{
+            [currentState setObject:@"" forKey:@"Active Sequencer"];
+        }
+        
+        BOOL success = [currentState writeToFile:filepath atomically:YES];
+        
+        NSLog(@"Save success: %i", success);
+            
     }
-    
-    NSData * instData = [NSKeyedArchiver archivedDataWithRootObject:[seqSetViewController getInstruments]];
-    
-    NSNumber * tempoNumber = [NSNumber numberWithInt:[playControlViewController getTempo]];
-    
-    NSNumber * volumeNumber = [NSNumber numberWithDouble:[playControlViewController getVolume]];
-    
-    NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[seqSetViewController getSelectedInstrumentIndex]];
-    
-    [currentState setObject:instData forKey:@"Instruments Data"];
-    [currentState setObject:tempoNumber forKey:@"Tempo"];
-    [currentState setObject:volumeNumber forKey:@"Volume"];
-    [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
-    
-    if(activeSequencer){
-        [currentState setObject:activeSequencer forKey:@"Active Sequencer"];
-    }else{
-        [currentState setObject:@"" forKey:@"Active Sequencer"];
-    }
-    
-    BOOL success = [currentState writeToFile:filepath atomically:YES];
-    
-    NSLog(@"Save success: %i", success);
+}
+
+- (void)clearSaveContextTimer
+{
+    [saveContextTimer invalidate];
+    saveContextTimer = nil;
 }
 
 - (void)loadStateFromDisk:(NSString *)filepath
@@ -749,6 +763,9 @@
     [playTimer invalidate];
     playTimer = nil;
     
+    
+    [seqSetViewController stopSoundMaster];
+    
     //[playControlViewController stopAll];
 }
 
@@ -757,6 +774,8 @@
     [self stopAllPlaying];
     isPlaying = TRUE;
     playVolume = volume;
+    
+    [seqSetViewController startSoundMaster];
     
     [self performSelectorInBackground:@selector(startBackgroundLoop:) withObject:[NSNumber numberWithFloat:spb]];
 }
@@ -1062,6 +1081,11 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self startGestures];
+}
+
+- (void)forceToPlay
+{
+    [self startAll];
 }
 
 @end

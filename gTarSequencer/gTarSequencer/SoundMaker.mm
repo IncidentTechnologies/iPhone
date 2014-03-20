@@ -17,6 +17,7 @@
 @interface SoundMaker () {
 
     SoundMaster *m_soundMaster;
+    LevelSubscriber *m_volumeSubscriber;
     
     SampleNode *m_sampNode;
     SamplerBankNode *m_samplerBank;
@@ -146,17 +147,14 @@
 #pragma mark - Level Sliders
 - (void)releaseLevelSlider
 {
-    if(volumeSlider != nil){
-        
-        
-        // release volumeSlider
+    if(m_volumeSubscriber != nil){
+        m_samplerBank->UnSubscribe(m_volumeSubscriber);
     }
 }
 
 - (void)commitLevelSlider:(UILevelSlider *)slider
 {
-    volumeSlider = slider;
-    m_samplerBank->SubscribeAbsoluteMean((__bridge void *)volumeSlider, cbLevel, NULL);
+    m_volumeSubscriber = m_samplerBank->SubscribeAbsoluteMean((__bridge void *)slider, cbLevel, NULL);
     
 }
 

@@ -65,6 +65,8 @@
     BOOL isScreenLarge;
     CGRect setNameOnScreenFrame;
     CGRect setNameOffScreenFrame;
+    
+    NSTimer * saveContextTimer;
 }
 
 @property (nonatomic) BOOL isFirstLaunch;

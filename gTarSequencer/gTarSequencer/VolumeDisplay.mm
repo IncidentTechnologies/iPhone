@@ -239,7 +239,16 @@
         UILevelSlider * volumeSlider = [[UILevelSlider alloc] initWithFrame:levelSliderFrame];
         [volumeSlider setBackgroundColor:[UIColor clearColor]];
         [volumeSlider setSliderValue:(1-inst.amplitude)];
+        
+        [volumeSlider setRedColor:[UIColor colorWithRed:203/255.0 green:81/255.0 blue:26/255.0 alpha:1.0]];
+        [volumeSlider setGreenColor:[UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0]];
+        [volumeSlider setLightGreenColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1.0]];
+        [volumeSlider setYellowColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        [volumeSlider setControlColor:[UIColor whiteColor]];
+        
+        
         volumeSlider.delegate = self;
+        
         [sliders setObject:volumeSlider forKey:[NSNumber numberWithInt:i]];
         
         [instrumentView addSubview:volumeSlider];

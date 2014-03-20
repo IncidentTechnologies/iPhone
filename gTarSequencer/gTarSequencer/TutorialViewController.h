@@ -15,6 +15,7 @@
 @protocol TutorialDelegate <NSObject>
 
 - (void) notifyTutorialEnded;
+- (void) forceToPlay;
 
 @end
 
