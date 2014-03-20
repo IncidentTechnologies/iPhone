@@ -9,6 +9,7 @@
 #import "AppData.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Instrument.h"
+#import "UILevelSlider.h"
 
 @protocol VolumeDisplayDelegate <NSObject>
 
@@ -43,6 +44,9 @@
     
     float volumeFirstY;
     
+    UIView * sidebar;
+    UIView * slider;
+    UIView * instrumentFrameContainer;
     NSMutableArray * instruments;
 }
 

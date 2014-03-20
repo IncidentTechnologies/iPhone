@@ -372,12 +372,6 @@
         cell.instrument = tempInst;
         cell.isMute = tempInst.isMuted;
         
-        if(cell.isMute){
-            NSLog(@"INITTING MUTE");
-        }else{
-            NSLog(@"Initting normal");
-        }
-        
         [cell resetVolume];
         
         if([tempInst checkIsCustom]){

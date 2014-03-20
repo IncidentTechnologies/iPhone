@@ -103,7 +103,6 @@
         if(filepath[i] != NULL){
             m_samplerBank->LoadSampleIntoBank(filepath[i], m_sampNode);
         }
-        
     }
 }
 

@@ -40,6 +40,7 @@
         isSelected = NO;
         selectedPatternDidChange = YES;
         isMuted = NO;
+        amplitude = 0.27;
         isCustom = [NSNumber numberWithBool:FALSE];
         
     }

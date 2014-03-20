@@ -140,7 +140,6 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    
     int borderWidth = 0;
     CGRect wholeFrame = CGRectMake(borderWidth, borderWidth, self.frame.size.width-(2*borderWidth), self.frame.size.height-(2*borderWidth));
     CGContextAddRect(context, wholeFrame);
@@ -155,7 +154,9 @@
     CGContextFillPath(context);
     
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-    imageView.image = image;
+    if(image != nil && imageView != nil){
+        imageView.image = image;
+    }
     
     UIGraphicsEndImageContext();
 }

@@ -837,7 +837,7 @@
 #pragma mark - On Off
 - (void)turnOnInstrumentView
 {
-    NSLog(@"*** UNMUTING ***");
+    if(TESTMODE) NSLog(@"*** UNMUTING ***");
     [offMask setHidden:YES];
     if(volumeKnob && ![volumeKnob isEnabled]){
         [volumeKnob EnableKnob];
@@ -850,7 +850,7 @@
 
 - (void)turnOffInstrumentView
 {
-    NSLog(@"*** MUTING ***");
+    if(TESTMODE) NSLog(@"*** MUTING ***");
     [offMask setHidden:NO];
     if(volumeKnob && [volumeKnob isEnabled]){
         [volumeKnob DisableKnob];
@@ -925,6 +925,12 @@
         playbandView[measureIndex].frame = newFrame;
         
         [playbandView[measureIndex] setHidden:NO];
+        
+        if(isMute){
+            [playbandView[measureIndex] setAlpha:0.3];
+        }else{
+            [playbandView[measureIndex] setAlpha:0.7];
+        }
         
     } else {
         [playbandView[measureIndex] setHidden:YES];

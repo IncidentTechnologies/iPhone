@@ -258,7 +258,7 @@
 -(void)turnOnInstrumentView
 {
     
-    NSLog(@"*** UNMUTING ***");
+    if(TESTMODE) NSLog(@"*** UNMUTING ***");
     //[parent muteInstrument:self isMute:NO];
     [offMask setHidden:YES];
     if(volumeKnob && ![volumeKnob isEnabled]){
@@ -272,7 +272,7 @@
 
 -(void)turnOffInstrumentView
 {
-    NSLog(@"*** MUTING ***");
+    if(TESTMODE) NSLog(@"*** MUTING ***");
     //[parent muteInstrument:self isMute:YES];
     [offMask setHidden:NO];
     if(volumeKnob && [volumeKnob isEnabled]){

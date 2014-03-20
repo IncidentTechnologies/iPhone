@@ -12,6 +12,9 @@
 #import "AudioNodeCommon.h"
 
 #define ANIMATION_DURATION 0.2f
+#define SIDEBAR_WIDTH 130
+#define SLIDER_WIDTH 45
+#define SLIDER_HEIGHT 190
 
 @implementation VolumeDisplay
 
@@ -70,6 +73,11 @@
     // Prepare for touches
     zeroPosition.x = self.frame.size.width / 2;
     zeroPosition.y = self.frame.size.height / 4;
+    
+    // Prepare for dynamic instruments
+    instrumentFrameContainer = [[UIView alloc] initWithFrame:CGRectMake(0, -1, outline.frame.size.width + 2, outline.frame.size.height+2)];
+    [outline addSubview:instrumentFrameContainer];
+    
 }
 
 - (void)setVolume:(double)value
@@ -113,13 +121,12 @@
     // NSLog(@"outline frame is %f %f %f %f",outline.frame.origin.x,outline.frame.origin.y,outline.frame.size.width,outline.frame.size.height);
     
     // Draw black background:
-    [outline setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.9]];
+    [outline setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
     
     // Draw right sidebar
-    float sidebarWidth = 80;
-    CGRect sidebarFrame = CGRectMake(outline.frame.size.width - sidebarWidth, -1, sidebarWidth+1, outline.frame.size.height+2);
+    CGRect sidebarFrame = CGRectMake(outline.frame.size.width - SIDEBAR_WIDTH, -1, SIDEBAR_WIDTH+1, outline.frame.size.height+2);
     
-    UIView * sidebar = [[UIView alloc] initWithFrame:sidebarFrame];
+    sidebar = [[UIView alloc] initWithFrame:sidebarFrame];
     sidebar.backgroundColor = [UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0];
     sidebar.layer.borderColor = [UIColor whiteColor].CGColor;
     sidebar.layer.borderWidth = 1.0;
@@ -127,14 +134,12 @@
     [outline addSubview:sidebar];
     
     // Draw sidebar slider
-    float sliderWidth = 45;
-    float sliderHeight = 190;
-    CGRect sliderFrame = CGRectMake((sidebar.frame.size.width-sliderWidth)/2, (sidebar.frame.size.height-sliderHeight)/2, sliderWidth, sliderHeight);
+    CGRect sliderFrame = CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT);
     
-    UIView * slider = [[UIView alloc] initWithFrame:sliderFrame];
+    slider = [[UIView alloc] initWithFrame:sliderFrame];
     slider.layer.borderColor = [UIColor whiteColor].CGColor;
     slider.layer.borderWidth = 3.0f;
-    slider.layer.cornerRadius = sliderWidth/2;
+    slider.layer.cornerRadius = SLIDER_WIDTH/2;
     
     [sidebar addSubview:slider];
     
@@ -142,7 +147,7 @@
     float baseX = slider.frame.origin.x+sidebar.frame.origin.x;
     float baseY = slider.frame.origin.y;
     float indent = 5;
-    float circleWidth = sliderWidth-2*indent;
+    float circleWidth = SLIDER_WIDTH-2*indent;
     sliderCircleMaxY = indent+baseY-1;
     sliderCircleMinY = slider.frame.size.height - circleWidth - indent - 1 + baseY;
 
@@ -150,7 +155,7 @@
     
     sliderCircle = [[UIButton alloc] initWithFrame:sliderCircleFrame];
     sliderCircle.backgroundColor = [UIColor colorWithRed:141/255.0 green:112/255.0 blue:166/255.0 alpha:1.0];
-    sliderCircle.layer.cornerRadius = sliderWidth/2-indent;
+    sliderCircle.layer.cornerRadius = SLIDER_WIDTH/2-indent;
     
     [self addSubview:sliderCircle];
     
@@ -169,15 +174,70 @@
 #pragma mark - Instruments
 - (void)drawInstruments
 {
-    
     if(instruments != nil){
         [instruments removeAllObjects];
+        
+        // clear previous
+        for(UIView * v in instrumentFrameContainer.subviews){
+            [v removeFromSuperview];
+        }
     }
     
     instruments = [[NSMutableArray alloc] initWithArray:[delegate getInstruments]];
     
+    int i = 0;
+    float instrumentWidth = instrumentFrameContainer.frame.size.width / ([instruments count]+1);
+    
+    // reset other frames
+    if(instrumentWidth < 130){
+        [sidebar setFrame:CGRectMake([instruments count]*instrumentWidth-2, -1, instrumentWidth+1, instrumentFrameContainer.frame.size.height)];
+        [slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
+        [sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
+        
+    }else{
+        instrumentWidth = (instrumentFrameContainer.frame.size.width-SIDEBAR_WIDTH) / ([instruments count]);
+        
+        [sidebar setFrame:CGRectMake(outline.frame.size.width - SIDEBAR_WIDTH, -1, SIDEBAR_WIDTH+1, outline.frame.size.height+2)];
+        [slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
+        [sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
+    }
+    
     for(Instrument * inst in instruments){
-        // draw it
+        
+        // draw partial frame
+        CGRect instrumentFrame = CGRectMake(i*instrumentWidth-1, 0, instrumentWidth, instrumentFrameContainer.frame.size.height);
+        UIView * instrumentView = [[UIView alloc] initWithFrame:instrumentFrame];
+        
+        instrumentView.layer.borderColor = [UIColor whiteColor].CGColor;
+        instrumentView.layer.borderWidth = 1.0f;
+        
+        [instrumentFrameContainer addSubview:instrumentView];
+        
+        // draw instrument icon
+        float iconWidth = 60;
+        CGRect instrumentIconFrame = CGRectMake(instrumentFrame.size.width/2 - iconWidth/2,20,iconWidth,iconWidth);
+        UIButton * instrumentIcon = [[UIButton alloc] initWithFrame:instrumentIconFrame];
+        
+        [instrumentIcon setImage:[UIImage imageNamed:inst.iconName] forState:UIControlStateNormal];
+        [instrumentIcon setContentEdgeInsets:UIEdgeInsetsMake(10,10,10,10)];
+        
+        instrumentIcon.layer.cornerRadius = 5.0;
+        instrumentIcon.layer.borderWidth = 1.0;
+        instrumentIcon.layer.borderColor = [UIColor whiteColor].CGColor;
+        
+        [instrumentView addSubview:instrumentIcon];
+        
+        // draw level slider
+        float levelSliderWidth = 40.0;
+        float levelSliderHeight = 170.0;
+        CGRect levelSliderFrame = CGRectMake(instrumentFrame.size.width/2 - levelSliderWidth/2,90,levelSliderWidth,levelSliderHeight);
+        UILevelSlider * volumeSlider = [[UILevelSlider alloc] initWithFrame:levelSliderFrame];
+        [volumeSlider setBackgroundColor:[UIColor clearColor]];
+        [volumeSlider setSliderValue:0.5];
+        
+        [instrumentView addSubview:volumeSlider];
+        
+        i++;
     }
 }
 
