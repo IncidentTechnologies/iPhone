@@ -335,8 +335,19 @@
         save = YES;
     }
     
-    [delegate volumeButtonValueDidChange:currentValue withSave:save];
+    if(volumeChangeTimer == nil){
+
+        volumeChangeTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(allowVolumeChange) userInfo:nil repeats:NO];
+        [delegate volumeButtonValueDidChange:currentValue withSave:save];
+
+    }
     
+}
+
+-(void)allowVolumeChange
+{
+    [volumeChangeTimer invalidate];
+    volumeChangeTimer = nil;
 }
 
 #pragma mark - Audio Controller

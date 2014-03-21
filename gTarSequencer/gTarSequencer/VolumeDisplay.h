@@ -49,6 +49,8 @@
     UIView * instrumentFrameContainer;
     NSMutableArray * instruments;
     NSMutableDictionary * sliders;
+    
+    NSTimer * volumeChangeTimer;
 }
 
 - (void)fillToPercent:(double)percent;

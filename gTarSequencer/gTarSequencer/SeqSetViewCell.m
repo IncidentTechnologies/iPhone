@@ -760,6 +760,11 @@
     
 }
 
+-(void)trackingDidChange
+{
+    [instrument setAmplitude:[tempVolumeKnob GetValue]];
+}
+
 -(void)trackingDidEnd
 {
     isTracking = NO;

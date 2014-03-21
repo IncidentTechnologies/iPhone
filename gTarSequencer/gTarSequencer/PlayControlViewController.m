@@ -91,12 +91,14 @@
 {
     isTempoSliderOpen = true;
     [delegate stopGestures];
+    [delegate stopDrawing];
 }
 
 - (void) tempoDisplayDidClose
 {
     isTempoSliderOpen = false;
     [delegate startGestures];
+    [delegate startDrawing];
 }
 
 #pragma mark - Tempo Interface
@@ -163,12 +165,14 @@
 {
     isVolumeSliderOpen = true;
     [delegate stopGestures];
+    //[delegate stopDrawing];
 }
 
 - (void) volumeDisplayDidClose
 {
     isVolumeSliderOpen = false;
     [delegate startGestures];
+    //[delegate startDrawing];
     [delegate refreshVolumeSliders];
 }
 

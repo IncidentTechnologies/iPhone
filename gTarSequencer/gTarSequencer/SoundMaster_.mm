@@ -18,6 +18,8 @@
     AudioNode *root;
     
     SamplerBankNode * bankToRelease;
+    
+    double masterGain;
 }
 
 -(SamplerBankNode *)generateBank;

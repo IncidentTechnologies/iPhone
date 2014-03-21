@@ -16,6 +16,7 @@
 
 - (void) notifyTutorialEnded;
 - (void) forceToPlay;
+- (void) closeLeftNavigator;
 
 @end
 

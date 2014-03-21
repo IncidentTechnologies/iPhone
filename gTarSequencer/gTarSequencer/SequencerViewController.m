@@ -566,12 +566,13 @@
 - (void)startBackgroundLoop:(NSNumber *)spb
 {
     if(playTimer == nil){
-        NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
         
         if(TESTMODE) NSLog(@"Starting Background Loop with %f seconds per beat",[spb floatValue]);
         
         @synchronized(playTimer){
             [playTimer invalidate];
+            
+            NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
             
             playTimer = [NSTimer scheduledTimerWithTimeInterval:[spb floatValue] target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
             
@@ -755,6 +756,17 @@
     [self.view removeGestureRecognizer:swipeLeft];
     [self.view removeGestureRecognizer:swipeRight];
     [seqSetViewController.view setUserInteractionEnabled:NO];
+}
+
+- (void)stopDrawing
+{
+    [seqSetViewController turnContentDrawingOff];
+}
+
+- (void)startDrawing
+{
+    [seqSetViewController turnContentDrawingOn];
+    [seqSetViewController updateAllVisibleCells];
 }
 
 - (void)stopAllPlaying

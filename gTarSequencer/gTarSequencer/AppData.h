@@ -19,7 +19,7 @@
 #define BOTTOMBAR_HEIGHT 55
 
 #define DEFAULT_VOLUME 0.2
-#define MAX_VOLUME 0.5
+#define MAX_VOLUME 0.4
 #define MIN_VOLUME 0.001
 #define AMPLITUDE_SCALE 4.0
 

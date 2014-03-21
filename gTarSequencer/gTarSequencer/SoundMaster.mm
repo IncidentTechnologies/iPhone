@@ -72,9 +72,13 @@
 
 -(void)setChannelGain:(double)gain
 {
-    //[audioController stopAUGraph];
-    m_samplerNode->SetChannelGain(gain, CONN_OUT);
-    //[audioController startAUGraph];
+    if(masterGain != gain){
+        
+        NSLog(@"Setting channel gain to %f",gain);
+        
+        masterGain = gain;
+        m_samplerNode->SetChannelGain(masterGain, CONN_OUT);
+    }
 }
 
 -(void)setGain:(double)gain forSamplerBank:(SamplerBankNode *)m_samplerBank

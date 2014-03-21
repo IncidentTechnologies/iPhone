@@ -773,13 +773,15 @@
 - (void)updateActiveMeasure
 {
     // Redraw measure
-    [self clearMeasure:activeMeasure forPattern:activePattern];
-    UIView * newMeasure = [[UIView alloc] init];
-    newMeasure = [self drawMeasureOnActive:activeMeasure forPattern:activePattern];
-    measureSet[activePattern][activeMeasure] = newMeasure;
-    
-    // The measure the guitar is editing is always the active measure
-    [self setDeclaredActiveMeasure:activeMeasure];
+    if(activeMeasure > -1 && activePattern > -1){
+        [self clearMeasure:activeMeasure forPattern:activePattern];
+        UIView * newMeasure = [[UIView alloc] init];
+        newMeasure = [self drawMeasureOnActive:activeMeasure forPattern:activePattern];
+        measureSet[activePattern][activeMeasure] = newMeasure;
+        
+        // The measure the guitar is editing is always the active measure
+        [self setDeclaredActiveMeasure:activeMeasure];
+    }
 }
 
 - (void)updateGuitarView
@@ -1576,6 +1578,11 @@
 -(void)trackingDidBegin
 {
     
+}
+
+-(void)trackingDidChange
+{
+    [currentInst setAmplitude:[tempVolumeKnob GetValue]];
 }
 
 -(void)trackingDidEnd

@@ -69,6 +69,7 @@
 
 - (void)launch
 {
+    
     tutorialStep = 1;
     
     [self drawTutorialScreenForStep:tutorialStep isReverseDirection:NO];
@@ -90,6 +91,7 @@
 
 - (void)end
 {
+    [tutorialScreen setBackgroundColor:[UIColor clearColor]];
     [self fadeOutTutorialSubviews:YES isReverseDirection:NO];
     [delegate notifyTutorialEnded];
 }
@@ -240,6 +242,7 @@
         
         [self startSwipeGestures];
         [self stopRightSwipeGesture];
+        [delegate closeLeftNavigator];
         
         //
         // WELCOME TO SEQUENCE

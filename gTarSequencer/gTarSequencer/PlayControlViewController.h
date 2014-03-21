@@ -24,6 +24,8 @@
 
 - (void) stopGestures;
 - (void) startGestures;
+- (void) stopDrawing;
+- (void) startDrawing;
 
 - (void) endTutorialIfOpen;
 

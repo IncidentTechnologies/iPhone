@@ -133,8 +133,6 @@
         amplitude = MAX(amplitude,MIN_VOLUME);
         gain = amplitude;
         
-        NSLog(@"Setting channel gain to %f",gain);
-        
         [m_soundMaster setChannelGain:gain];
     }
 }
@@ -173,7 +171,7 @@ static void cbLevel(float val, void *pObject, void *pContext) {
     
     //NSLog(@"%f", val);
     
-    [slider setDisplayValue:val];
+    [slider setDisplayValue:val*[slider GetValue]];
 }
 
 @end

@@ -206,7 +206,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if([delegate allowTempoDisplayToOpen]){
+    if([delegate allowTempoDisplayToOpen] && !displayOpen){
         
         [delegate tempoDisplayDidOpen];
         
@@ -226,16 +226,20 @@
         
         displayOpen = false;
         
+        
+        [delegate tempoDisplayDidClose];
+        
+        [self contract];
+        
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
     if(displayOpen){
         
         [delegate tempoDisplayDidClose];
-            
-        [self contract];
         
         if ( previousValue != currentDisplayedValue )
         {
@@ -246,6 +250,9 @@
         
         displayOpen = false;
     }
+    
+    [self contract];
+    
 }
 
 #pragma mark Zoom
