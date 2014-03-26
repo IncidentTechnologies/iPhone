@@ -80,6 +80,8 @@
     outline.userInteractionEnabled = YES;
     [outline addSubview:instrumentFrameContainer];
     
+    instrumentIcons = [[NSMutableDictionary alloc] init];
+    
 }
 
 - (void)setVolume:(double)value
@@ -195,14 +197,14 @@
     
     // reset other frames
     if(instrumentWidth < 130){
-        [sidebar setFrame:CGRectMake([instruments count]*instrumentWidth-2, -1, instrumentWidth+1, instrumentFrameContainer.frame.size.height)];
+        [sidebar setFrame:CGRectMake([instruments count]*instrumentWidth-1, -1, instrumentWidth, instrumentFrameContainer.frame.size.height)];
         [slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
         [sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
         
     }else{
         instrumentWidth = (instrumentFrameContainer.frame.size.width-SIDEBAR_WIDTH) / ([instruments count]);
         
-        [sidebar setFrame:CGRectMake(outline.frame.size.width - SIDEBAR_WIDTH, -1, SIDEBAR_WIDTH+1, outline.frame.size.height+2)];
+        [sidebar setFrame:CGRectMake(outline.frame.size.width - SIDEBAR_WIDTH+1, -1, SIDEBAR_WIDTH, outline.frame.size.height+2)];
         [slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
         [sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
     }
@@ -210,7 +212,7 @@
     for(Instrument * inst in instruments){
         
         // draw partial frame
-        CGRect instrumentFrame = CGRectMake(i*instrumentWidth-1, 0, instrumentWidth, instrumentFrameContainer.frame.size.height);
+        CGRect instrumentFrame = CGRectMake(i*instrumentWidth-1, 0, instrumentWidth+1, instrumentFrameContainer.frame.size.height);
         UIView * instrumentView = [[UIView alloc] initWithFrame:instrumentFrame];
         
         instrumentView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -219,9 +221,11 @@
         [instrumentFrameContainer addSubview:instrumentView];
         
         // draw instrument icon
-        float iconWidth = 60;
-        CGRect instrumentIconFrame = CGRectMake(instrumentFrame.size.width/2 - iconWidth/2,14,iconWidth,iconWidth);
+        float iconWidth = 58;
+        CGRect instrumentIconFrame = CGRectMake(instrumentFrame.size.width/2 - iconWidth/2 - 0.66667,16,iconWidth,iconWidth);
         UIButton * instrumentIcon = [[UIButton alloc] initWithFrame:instrumentIconFrame];
+        
+        NSLog(@"Position is %f",instrumentIconFrame.origin.x);
         
         [instrumentIcon setImage:[UIImage imageNamed:inst.iconName] forState:UIControlStateNormal];
         [instrumentIcon setContentEdgeInsets:UIEdgeInsetsMake(10,10,10,10)];
@@ -229,6 +233,10 @@
         instrumentIcon.layer.cornerRadius = 5.0;
         instrumentIcon.layer.borderWidth = 1.0;
         instrumentIcon.layer.borderColor = [UIColor whiteColor].CGColor;
+        
+        [instrumentIcons setObject:instrumentIcon forKey:[NSNumber numberWithInt:i]];
+        
+        [instrumentIcon addTarget:self action:@selector(openInstrument:) forControlEvents:UIControlEventTouchUpInside];
         
         [instrumentView addSubview:instrumentIcon];
         
@@ -261,18 +269,17 @@
     }
 }
 
--(void)valueDidChange:(double)newValue forSlider:(id)sender
+- (void)openInstrument:(id)sender
 {
-    Instrument * inst;
-    UILevelSlider * levelSender = (UILevelSlider *)sender;
+    UIButton * senderButton = (UIButton *)sender;
     
-    for(NSNumber * key in sliders){
-        if(levelSender == [sliders objectForKey:key]){
-            inst = [instruments objectAtIndex:[key intValue]];
-            inst.amplitude = newValue;            
-            return;
+    for(NSNumber * instIndex in instrumentIcons){
+        if(senderButton == [instrumentIcons objectForKey:instIndex]){
+            [delegate openInstrument:[instIndex intValue]];
         }
     }
+    
+    [self contract];
 }
 
 #pragma mark - Expand Contract
@@ -343,6 +350,21 @@
     }
     
 }
+
+-(void)valueDidChange:(double)newValue forSlider:(id)sender
+{
+    Instrument * inst;
+    UILevelSlider * levelSender = (UILevelSlider *)sender;
+    
+    for(NSNumber * key in sliders){
+        if(levelSender == [sliders objectForKey:key]){
+            inst = [instruments objectAtIndex:[key intValue]];
+            inst.amplitude = newValue;
+            return;
+        }
+    }
+}
+
 
 -(void)allowVolumeChange
 {

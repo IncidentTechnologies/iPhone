@@ -30,6 +30,7 @@
 - (void) endTutorialIfOpen;
 
 - (NSMutableArray *)getInstruments;
+- (void) openInstrument:(int)instIndex;
 
 @end
 

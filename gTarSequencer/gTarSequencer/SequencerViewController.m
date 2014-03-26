@@ -31,6 +31,7 @@
 @synthesize playControlViewController;
 @synthesize infoViewController;
 @synthesize tutorialViewController;
+@synthesize recordShareController;
 @synthesize leftNavigator;
 @synthesize setName;
 
@@ -153,6 +154,17 @@
     [self.view addSubview:instrumentViewController.view];
     
     //
+    // SUBVIEW: RECORD SHARE
+    //
+    
+    recordShareController = [[RecordShareViewController alloc] initWithNibName:@"RecordShareView" bundle:nil];
+    [recordShareController.view setFrame:onScreenMainFrame];
+    [recordShareController setDelegate:self];
+    
+    [recordShareController.view setHidden:YES];
+    [self.view addSubview:recordShareController.view];
+    
+    //
     // SUBVIEW: INFO
     //
     
@@ -256,7 +268,7 @@
     [optionsViewController.view setHidden:YES];
     [seqSetViewController.view setHidden:YES];
     [instrumentViewController.view setHidden:YES];
-    [shareViewController.view setHidden:YES];
+    [recordShareController.view setHidden:YES];
     [infoViewController.view setHidden:YES];
     
     // Do any view unloading
@@ -285,7 +297,7 @@
         
     }else if([nav isEqualToString:@"Share"]){
         
-        activeMainView = shareViewController.view;
+        activeMainView = recordShareController.view;
         
     }else if([nav isEqualToString:@"Info"]){
         
@@ -341,6 +353,17 @@
 - (void)setSelectedInstrument:(Instrument *)inst
 {
     [leftNavigator enableInstrumentViewWithIcon:inst.iconName showCustom:[inst checkIsCustom]];
+}
+
+- (void)openInstrument:(int)instIndex
+{
+    Instrument * inst = [seqSetViewController getInstrumentAtIndex:instIndex];
+    
+    [self setSelectedInstrument:inst];
+    [self viewSelectedInstrument];
+ 
+    //[instrumentViewController reopenView];
+    [instrumentViewController setActiveInstrument:inst];
 }
 
 #pragma mark - Save Load Delegate

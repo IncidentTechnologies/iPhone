@@ -19,8 +19,9 @@
 #import "InstrumentViewController.h"
 #import "InfoViewController.h"
 #import "TutorialViewController.h"
+#import "RecordShareViewController.h"
 
-@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate> {
+@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate,RecordShareDelegate> {
     
     // tutorial
     BOOL isTutorialOpen;
@@ -39,9 +40,6 @@
     double playVolume;
     
     NSMutableArray * patternQueue;
-    
-    // Subviews
-    UIViewController * shareViewController;
     
     // State
     NSMutableDictionary * currentState;
@@ -77,6 +75,7 @@
 @property (retain, nonatomic) PlayControlViewController * playControlViewController;
 @property (retain, nonatomic) TutorialViewController * tutorialViewController;
 @property (retain, nonatomic) LeftNavigatorViewController * leftNavigator;
+@property (retain, nonatomic) RecordShareViewController * recordShareController;
 
 @property (retain, nonatomic) UIButton * setName;
 

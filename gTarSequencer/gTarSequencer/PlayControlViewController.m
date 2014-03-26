@@ -176,6 +176,12 @@
     [delegate refreshVolumeSliders];
 }
 
+- (void) openInstrument:(int)instIndex
+{
+    [self volumeDisplayDidClose];
+    [delegate openInstrument:instIndex];
+}
+
 #pragma mark - Volume Slider Interface
 - (double)getVolume
 {

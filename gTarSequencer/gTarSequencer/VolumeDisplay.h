@@ -19,6 +19,7 @@
 - (void) volumeDisplayDidClose;
 
 - (NSMutableArray *)getInstruments;
+- (void) openInstrument:(int)instIndex;
 
 @end
 
@@ -49,6 +50,7 @@
     UIView * instrumentFrameContainer;
     NSMutableArray * instruments;
     NSMutableDictionary * sliders;
+    NSMutableDictionary * instrumentIcons;
     
     NSTimer * volumeChangeTimer;
 }

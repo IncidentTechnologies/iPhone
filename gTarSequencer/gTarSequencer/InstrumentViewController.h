@@ -35,8 +35,10 @@
     int activePattern;
     int activeMeasure;
     
-    UIView * measureSet[NUM_PATTERNS][NUM_MEASURES];
-    UIButton * noteButtons[NUM_PATTERNS][NUM_MEASURES][MAX_NOTES];
+    UIView * activeMeasureSet[NUM_MEASURES];
+    UIView * inactiveMeasureSet[NUM_MEASURES];
+    UIButton * noteButtons[NUM_MEASURES][MAX_NOTES];
+    
     UIView * pages[NUM_MEASURES];
     
     UIColor * colors[STRINGS_ON_GTAR];

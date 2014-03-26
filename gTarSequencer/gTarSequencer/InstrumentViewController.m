@@ -72,15 +72,6 @@
         
         [self resetPlayband];
         
-        for(int i = 0; i < NUM_PATTERNS; i++){
-            for(int j = 0; j < NUM_MEASURES; j++){
-                measureSet[i][j] = nil;
-                for(int k = 0; k < MAX_NOTES; k++){
-                    noteButtons[i][j][k] = nil;
-                }
-            }
-        }
-        
     }
     return self;
 }
@@ -127,6 +118,12 @@
         patternButtons = [[NSMutableArray alloc] initWithObjects:patternA, patternB, patternC, patternD, offButton, nil];
     }
     
+    // Measures
+    for(int j = 0; j < NUM_MEASURES; j++){
+        activeMeasureSet[j] = [self drawActiveMeasures:j];
+        inactiveMeasureSet[j] = [self drawInactiveMeasures:j];
+    }
+    
     // Back button
     // [self drawBackButton];
     
@@ -167,13 +164,32 @@
         }else{
             [pages[i] setBackgroundColor:pageOffColor];
         }
+        
+        //
+        // GESTURES
+        //
+        
+        if(i > 0){
+            
+            // Double tap on
+            UITapGestureRecognizer * doubleTapPage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapPage:)];
+            doubleTapPage.numberOfTapsRequired = 2;
+            
+            [pages[i] addGestureRecognizer:doubleTapPage];
+            
+            // Long press off
+            UILongPressGestureRecognizer * longPressPage = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressPage:)];
+            longPressPage.minimumPressDuration = 0.5;
+            
+            [pages[i] addGestureRecognizer:longPressPage];
+        }
     }
 }
 
 - (void)reopenView
 {
     // Clear previous pattern data
-    if(activePattern > 0){
+    /*if(activePattern > 0){
         NSLog(@"Clear previous pattern data");
         
         @synchronized(self){
@@ -183,7 +199,7 @@
                 }
             }
         }
-    }
+    }*/
     
     [self checkIsFirstLaunch];
     if(isFirstLaunch){
@@ -257,13 +273,13 @@
     [self resetPlayband];
     
     // Clear everything
-    @synchronized(self){
+    /*@synchronized(self){
         for(int i = 0; i < NUM_PATTERNS; i++){
             for(int j = 0; j < NUM_MEASURES; j++){
                 [self clearMeasure:j forPattern:i];
             }
         }
-    }
+    }*/
     
     // Measure counts
     @synchronized(self){
@@ -329,38 +345,25 @@
     @synchronized(self){
         for(int i = 0; i < NUM_MEASURES; i++){
             
-            UIView * newMeasure = [[UIView alloc] init];
+            BOOL isActive = (i == activeMeasure) ? YES : NO;
             
             if(i < measureCounts[activePattern]){
-                newMeasure = [self drawMeasureOnActive:i forPattern:activePattern];
+                [self setMeasureOnActive:i forPattern:activePattern isActive:isActive];
             }else{
-                newMeasure = [self drawMeasureOff:i forPattern:activePattern];
+                [self setMeasureOff:i isActive:isActive];
             }
-                
-            measureSet[activePattern][i] = newMeasure;
         }
     }
-    
-    // Fade in
-    [UIView animateWithDuration:0.5 animations:^(){
-        for(int i = 0; i < NUM_MEASURES; i++){
-            if(i == activeMeasure){
-                [measureSet[patternIndex][i] setAlpha:PAGE_OPACITY_ON];
-            }else{
-                [measureSet[patternIndex][i] setAlpha:PAGE_OPACITY_MID];
-            }
-        }
-    } completion:^(BOOL finished){
-        
-    }];
 }
 
 - (void)doubletapMeasure:(UITapGestureRecognizer *)recognizer
 {
+    NSLog(@"Double tap measure");
+    
     UIView * tappedMeasure = (UIView *)recognizer.view;
 
     for(int i = 0; i <NUM_MEASURES; i++){
-        if(measureSet[activePattern][i] == tappedMeasure){
+        if(inactiveMeasureSet[i] == tappedMeasure){
             if(i < measureCounts[activePattern]){
                 [self setNewMeasureFromPage:i];
             }else{
@@ -374,6 +377,8 @@
 
 - (void)doubleTapPage:(UITapGestureRecognizer *)recognizer
 {
+    NSLog(@"Double tap page");
+    
     UIButton * tappedPage = (UIButton *)recognizer.view;
     
     if(measureToDelete > -1){
@@ -390,9 +395,11 @@
 
 - (void)longPressPage:(UILongPressGestureRecognizer *)recognizer
 {
+    NSLog(@"Long press page");
+    
     UIButton * pressedPage = (UIButton *)recognizer.view;
 
-    for(int i =0; i < NUM_MEASURES; i++){
+    for(int i = 0; i < NUM_MEASURES; i++){
         if(pages[i] == pressedPage){
             
             if(measureToDelete != i && measureToDelete > -1){
@@ -414,38 +421,41 @@
             case 1:
                 NSLog(@"ACTIVATE %i",tappedIndex);
                 
-                [self clearMeasure:1 forPattern:activePattern];
+                //[self clearMeasure:1 forPattern:activePattern];
                 
                 // These must be called before drawing the measure so data is up to date
                 [self setMeasureCountTo:2 forPattern:activePattern];
                 
-                measureSet[activePattern][1] = [self drawMeasureOnActive:1 forPattern:activePattern];
+                [self setMeasureOnActive:1 forPattern:activePattern isActive:YES];
                 
                 break;
             case 2:
             case 3:
                 NSLog(@"ACTIVATE %i",tappedIndex);
                 
+                BOOL isMeasure2Active = (tappedIndex == 2) ? YES : NO;
+                BOOL isMeasure3Active = (tappedIndex == 3) ? YES : NO;
+                
                 if(measureCounts[activePattern] < 2){
                     
-                    [self clearMeasure:1 forPattern:activePattern];
-                    [self clearMeasure:2 forPattern:activePattern];
-                    [self clearMeasure:3 forPattern:activePattern];
+                    //[self clearMeasure:1 forPattern:activePattern];
+                    //[self clearMeasure:2 forPattern:activePattern];
+                    //[self clearMeasure:3 forPattern:activePattern];
                     
                     [self setMeasureCountTo:4 forPattern:activePattern];
                     
-                    measureSet[activePattern][1] = [self drawMeasureOnActive:1 forPattern:activePattern];
-                    measureSet[activePattern][2] = [self drawMeasureOnActive:2 forPattern:activePattern];
-                    measureSet[activePattern][3] = [self drawMeasureOnActive:3 forPattern:activePattern];
+                    [self setMeasureOnActive:1 forPattern:activePattern isActive:NO];
+                    [self setMeasureOnActive:2 forPattern:activePattern isActive:isMeasure2Active];
+                    [self setMeasureOnActive:3 forPattern:activePattern isActive:isMeasure3Active];
                     
                 }else{
-                    [self clearMeasure:2 forPattern:activePattern];
-                    [self clearMeasure:3 forPattern:activePattern];
+                    //[self clearMeasure:2 forPattern:activePattern];
+                    //[self clearMeasure:3 forPattern:activePattern];
                     
                     [self setMeasureCountTo:4 forPattern:activePattern];
                     
-                    measureSet[activePattern][2] = [self drawMeasureOnActive:2 forPattern:activePattern];
-                    measureSet[activePattern][3] = [self drawMeasureOnActive:3 forPattern:activePattern];
+                    [self setMeasureOnActive:2 forPattern:activePattern isActive:isMeasure2Active];
+                    [self setMeasureOnActive:3 forPattern:activePattern isActive:isMeasure3Active];
                 }
                 
                 break;
@@ -550,24 +560,23 @@
                 
                 if(measureCounts[activePattern] > 2){
                     
-                    [self clearMeasure:1 forPattern:activePattern];
-                    [self clearMeasure:2 forPattern:activePattern];
-                    [self clearMeasure:3 forPattern:activePattern];
+                    //[self clearMeasure:1 forPattern:activePattern];
+                    //[self clearMeasure:2 forPattern:activePattern];
+                    //[self clearMeasure:3 forPattern:activePattern];
                     
                     [self setMeasureCountTo:1 forPattern:activePattern];
                     
-                    measureSet[activePattern][1] = [self drawMeasureOff:1 forPattern:activePattern];
-                    measureSet[activePattern][2] = [self drawMeasureOff:2 forPattern:activePattern];
-                    measureSet[activePattern][3] = [self drawMeasureOff:3 forPattern:activePattern];
+                    [self setMeasureOff:1 isActive:NO];
+                    [self setMeasureOff:2 isActive:NO];
+                    [self setMeasureOff:3 isActive:NO];
                     
                 }else{
                     
-                    [self clearMeasure:1 forPattern:activePattern];
+                    //[self clearMeasure:1 forPattern:activePattern];
                 
                     [self setMeasureCountTo:1 forPattern:activePattern];
                     
-                    measureSet[activePattern][1] = [self drawMeasureOff:1 forPattern:activePattern];
-                    
+                    [self setMeasureOff:1 isActive:NO];
                 }
                 
                 [self changeActiveMeasureToMeasure:0 scrollSlow:YES];
@@ -577,13 +586,13 @@
             case 3:
                 NSLog(@"DEACTIVATE %i",tappedIndex);
                 
-                [self clearMeasure:2 forPattern:activePattern];
-                [self clearMeasure:3 forPattern:activePattern];
+                //[self clearMeasure:2 forPattern:activePattern];
+                //[self clearMeasure:3 forPattern:activePattern];
                 
                 [self setMeasureCountTo:2 forPattern:activePattern];
                 
-                measureSet[activePattern][2] = [self drawMeasureOff:2 forPattern:activePattern];
-                measureSet[activePattern][3] = [self drawMeasureOff:3 forPattern:activePattern];
+                [self setMeasureOff:2 isActive:NO];
+                [self setMeasureOff:3 isActive:NO];
                 
                 [self changeActiveMeasureToMeasure:1 scrollSlow:YES];
                 
@@ -597,32 +606,13 @@
     }
 }
 
+/*
+// Drawn elements are now reused
 - (void)clearMeasure:(int)measureIndex forPattern:(int)patternIndex
 {
     NSLog(@"Clear measure %i at pattern %i",measureIndex,patternIndex);
-    
-    @synchronized(self){
-        // remove all gesture recognizers
-        while(measureSet[patternIndex][measureIndex].gestureRecognizers.count){
-            [measureSet[patternIndex][measureIndex] removeGestureRecognizer:[measureSet[patternIndex][measureIndex].gestureRecognizers objectAtIndex:0]];
-        }
-    
-        // remove button clicks
-        for(int k = 0; k < MAX_NOTES; k++){
-            [noteButtons[patternIndex][measureIndex][k] removeTarget:self action:@selector(toggleNote:) forControlEvents:UIControlEventTouchUpInside];
-            [noteButtons[patternIndex][measureIndex][k] removeFromSuperview];
-            noteButtons[patternIndex][measureIndex][k] = nil;
-        }
-        
-        // remove playbands
-        [playbandView[measureIndex] removeFromSuperview];
-        playbandView[measureIndex] = nil;
-        playband[measureIndex] = -1;
-        
-        [measureSet[patternIndex][measureIndex] removeFromSuperview];
-        measureSet[patternIndex][measureIndex] = nil;
-    }
 }
+*/
 
 - (void)setDeclaredActiveMeasure:(int)measureIndex
 {
@@ -635,20 +625,19 @@
         
         // remove old border
         if(prevIndex >= 0){
-            measureSet[activePattern][prevIndex].layer.borderWidth = 0.0f;
+            //measureSet[activePattern][prevIndex].layer.borderWidth = 0.0f;
+            activeMeasureSet[prevIndex].layer.borderWidth = 0.0f;
         }
-            
-        // draw new border
-        measureSet[activePattern][measureIndex].layer.borderColor = [UIColor whiteColor].CGColor;
-        measureSet[activePattern][measureIndex].layer.borderWidth = 0.0f;
         
-        [measureSet[activePattern][measureIndex] setAlpha:PAGE_OPACITY_ON];
+        activeMeasureSet[measureIndex].layer.borderColor = [UIColor whiteColor].CGColor;
+        activeMeasureSet[measureIndex].layer.borderWidth = 0.0f;
+        
+        [activeMeasureSet[measureIndex] setAlpha:PAGE_OPACITY_ON];
     }
 }
 
-- (UIView *)drawMeasureOnActive:(int)measureIndex forPattern:(int)patternIndex
+-(UIView *)drawActiveMeasures:(int)measureIndex
 {
-
     float measureMargin = [self getMeasureMargin];
     
     CGRect measureFrame = CGRectMake(3*measureMargin+measureIndex*(MEASURE_WIDTH+measureMargin), 0, MEASURE_WIDTH, scrollView.frame.size.height);
@@ -665,37 +654,24 @@
                 CGRect noteFrame = CGRectMake(NOTE_GAP+f*NOTE_WIDTH-1,NOTE_GAP+(STRINGS_ON_GTAR-s-1)*NOTE_HEIGHT,NOTE_WIDTH-NOTE_GAP,NOTE_HEIGHT-NOTE_GAP);
                 UIButton * newButton = [[UIButton alloc] initWithFrame:noteFrame];
                 
-                Pattern * p = currentInst.patterns[patternIndex];
-                Measure * m = p.measures[measureIndex];
-                
-                if([m isNoteOnAtString:s andFret:f]){
-                    [newButton setBackgroundColor:colors[s]];
-                }else{
-                    [newButton setBackgroundColor:[UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
-                }
-                
                 newButton.layer.borderWidth = 0.5;
                 newButton.layer.borderColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.6].CGColor;
                 
                 [newButton addTarget:self action:@selector(toggleNote:) forControlEvents:UIControlEventTouchUpInside];
                 
-                noteButtons[patternIndex][measureIndex][FRETS_ON_GTAR*s+f] = newButton;
+                noteButtons[measureIndex][FRETS_ON_GTAR*s+f] = newButton;
                 
                 [newMeasure addSubview:newButton];
             }
         }
     }
     
-    // default invisible
-    [newMeasure setAlpha:PAGE_OPACITY_OFF];
-    
+    [newMeasure setHidden:YES];
     [scrollView addSubview:newMeasure];
     
     //
     // PLAYBAND
     //
-    
-    NSLog(@"REDRAW PLAYBAND");
     
     CGRect playbandFrame = CGRectMake(1, 2, NOTE_WIDTH-2, NOTE_HEIGHT*STRINGS_ON_GTAR-2);
     
@@ -705,23 +681,10 @@
     
     [newMeasure addSubview:playbandView[measureIndex]];
     
-    
-    //
-    // GESTURES
-    //
-    
-    if(measureIndex > 0){
-        
-        UILongPressGestureRecognizer * longPressPage = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressPage:)];
-        longPressPage.minimumPressDuration = 0.5;
-        
-        [pages[measureIndex] addGestureRecognizer:longPressPage];
-    }
-    
     return newMeasure;
 }
 
-- (UIView *)drawMeasureOff:(int)measureIndex forPattern:(int)patternIndex
+- (UIView *)drawInactiveMeasures:(int)measureIndex
 {
     float measureMargin = [self getMeasureMargin];
     
@@ -729,8 +692,6 @@
     UIView * newOffMeasure = [[UIView alloc] initWithFrame:measureFrame];
     
     [newOffMeasure setBackgroundColor:[UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
-    
-    [scrollView addSubview:newOffMeasure];
     
     // Title
     float pinchWidth = 100;
@@ -744,40 +705,83 @@
     [offMeasureLabel setTextAlignment:NSTextAlignmentCenter];
     [offMeasureLabel setAlpha:PAGE_OPACITY_OFF];
     
-    //UIButton * offMeasureLabel = [[UIButton alloc] initWithFrame:labelFrame];
-    //[offMeasureLabel setImage:[UIImage imageNamed:@"Pinch_Icon"] forState:UIControlStateNormal];
-    
     [newOffMeasure addSubview:offMeasureLabel];
     
+    [newOffMeasure setHidden:YES];
+    [scrollView addSubview:newOffMeasure];
     
     //
     // GESTURES
     //
     
     if(measureIndex > 0){
-        
         UITapGestureRecognizer * doubleTapMeasure = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubletapMeasure:)];
         doubleTapMeasure.numberOfTapsRequired = 2;
         
         [newOffMeasure addGestureRecognizer:doubleTapMeasure];
-        
-        UITapGestureRecognizer * doubleTapPage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapPage:)];
-        doubleTapPage.numberOfTapsRequired = 2;
-        
-        [pages[measureIndex] addGestureRecognizer:doubleTapPage];
     }
     
     return newOffMeasure;
+}
+
+- (void)setMeasureOnActive:(int)measureIndex forPattern:(int)patternIndex isActive:(BOOL)isActive
+{
+    
+    @synchronized(self)
+    {
+        for (int s = 0; s < STRINGS_ON_GTAR; s++)
+        {
+            for (int f = 0; f < FRETS_ON_GTAR; f++)
+            {
+                UIButton * note = noteButtons[measureIndex][FRETS_ON_GTAR*s+f];
+                
+                Pattern * p = currentInst.patterns[patternIndex];
+                Measure * m = p.measures[measureIndex];
+                
+                if([m isNoteOnAtString:s andFret:f]){
+                    [note setBackgroundColor:colors[s]];
+                }else{
+                    [note setBackgroundColor:[UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
+                }
+            }
+        }
+    }
+    
+    //
+    // DISPLAY
+    //
+    
+    if(isActive){
+        [activeMeasureSet[measureIndex] setAlpha:PAGE_OPACITY_ON];
+    }else{
+        [activeMeasureSet[measureIndex] setAlpha:PAGE_OPACITY_MID];
+    }
+    
+    [activeMeasureSet[measureIndex] setHidden:NO];
+    [inactiveMeasureSet[measureIndex] setHidden:YES];
+    
+}
+
+- (void)setMeasureOff:(int)measureIndex isActive:(BOOL)isActive
+{
+    
+    if(isActive){
+        [inactiveMeasureSet[measureIndex] setAlpha:PAGE_OPACITY_ON];
+    }else{
+        [inactiveMeasureSet[measureIndex] setAlpha:PAGE_OPACITY_MID];
+    }
+    
+    [inactiveMeasureSet[measureIndex] setHidden:NO];
+    [activeMeasureSet[measureIndex] setHidden:YES];
+    
 }
 
 - (void)updateActiveMeasure
 {
     // Redraw measure
     if(activeMeasure > -1 && activePattern > -1){
-        [self clearMeasure:activeMeasure forPattern:activePattern];
-        UIView * newMeasure = [[UIView alloc] init];
-        newMeasure = [self drawMeasureOnActive:activeMeasure forPattern:activePattern];
-        measureSet[activePattern][activeMeasure] = newMeasure;
+        //[self clearMeasure:activeMeasure forPattern:activePattern];
+        [self setMeasureOnActive:activeMeasure forPattern:activePattern isActive:YES];
         
         // The measure the guitar is editing is always the active measure
         [self setDeclaredActiveMeasure:activeMeasure];
@@ -808,20 +812,18 @@
 - (void)fadeOutPattern:(int)patternIndex andLoadPattern:(int)newPattern andLoadMeasure:(int)newMeasure
 {
     
-    [UIView animateWithDuration:0.5 animations:^(){
+    for(int i = 0; i < NUM_MEASURES; i++){
+        [playbandView[i] setHidden:YES];
+    }
+    
+    /*@synchronized(self){
         for(int i = 0; i < NUM_MEASURES; i++){
-            [playbandView[i] setHidden:YES];
-            [measureSet[patternIndex][i] setAlpha:PAGE_OPACITY_OFF];
+            [self clearMeasure:i forPattern:patternIndex];
         }
-    } completion:^(BOOL finished){
-        @synchronized(self){
-            for(int i = 0; i < NUM_MEASURES; i++){
-                [self clearMeasure:i forPattern:patternIndex];
-            }
-        }
-        
-        [self instateNewPattern:newPattern andNewMeasure:newMeasure];
-    }];
+    }*/
+    
+    [self instateNewPattern:newPattern andNewMeasure:newMeasure];
+    
 }
 
 - (void)instateNewPattern:(int)patternIndex andNewMeasure:(int)measureIndex
@@ -875,7 +877,8 @@
     @synchronized(self){
         for(int s = 0; s < STRINGS_ON_GTAR; s++){
             for(int f = 0; f < FRETS_ON_GTAR; f++){
-                if(noteButtons[activePattern][activeMeasure][FRETS_ON_GTAR*s+f] == sender){
+                //noteButtons[activePattern][activeMeasure][FRETS_ON_GTAR*s+f] == sender
+                if(noteButtons[activeMeasure][FRETS_ON_GTAR*s+f] == sender){
                     fret = f;
                     string = s;
                     break;
@@ -912,8 +915,9 @@
     @synchronized(self){
         for(int i = 0; i < NUM_MEASURES; i++){
             playband[i] = -1;
-            [playbandView[i] removeFromSuperview];
-            playbandView[i] = nil;
+            [playbandView[i] setHidden:YES];
+            //[playbandView[i] removeFromSuperview];
+            //playbandView[i] = nil;
         }
     }
 }
@@ -972,17 +976,19 @@
     NSLog(@"Inst Select new pattern at %i", tappedIndex);
     
     if (tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton != offButton){
+        NSLog(@"Case 1");
         isMute = YES;
         isPlaying = [delegate checkIsPlaying];
         [self clearQueuedPatternButton];
         [delegate dequeueAllPatternsForInstrument:currentInst];
     }else if(tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton == offButton){
+        NSLog(@"Case 2");
         isMute = NO;
         isPlaying = [delegate checkIsPlaying];
         [self clearQueuedPatternButton];
         [delegate dequeueAllPatternsForInstrument:currentInst];
     }else{
-        
+        NSLog(@"Case 3");
         isMute = NO;
         
         if(isPlaying && tappedIndex != activePattern){
@@ -1002,8 +1008,6 @@
             
             [self commitPatternChange:tappedIndex];
         }
-        
-        
     }
     
     //if(isMute){
@@ -1251,13 +1255,7 @@
     
     [UIView animateWithDuration:scrollSpeed animations:^(){
         [scrollView setContentOffset:newOffset];
-        for(int i = 0; i < NUM_MEASURES; i++){
-            if(i == measureIndex){
-                [measureSet[activePattern][i] setAlpha:PAGE_OPACITY_ON];
-            }else{
-                [measureSet[activePattern][i] setAlpha:PAGE_OPACITY_MID];
-            }
-        }
+        [self highlightMeasure:measureIndex];
     } completion:^(BOOL finished){
         
         [self setActivePage:measureIndex];
@@ -1272,11 +1270,13 @@
 {
     if(activePattern > -1){
         for(int i = 0; i < NUM_MEASURES; i++){
-            if(i == measureIndex){
-                [measureSet[activePattern][i] setAlpha:PAGE_OPACITY_ON];
-                
+            
+            double activeOpacity = (i == measureIndex) ? PAGE_OPACITY_ON : PAGE_OPACITY_MID;
+            
+            if(i < measureCounts[activePattern]){
+                [activeMeasureSet[i] setAlpha:activeOpacity];
             }else{
-                [measureSet[activePattern][i] setAlpha:PAGE_OPACITY_MID];
+                [inactiveMeasureSet[i] setAlpha:activeOpacity];
             }
         }
     }
@@ -1565,6 +1565,7 @@
     [tempVolumeKnob setHighlightColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
     [tempVolumeKnob setTouchTrackerColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
     [tempVolumeKnob setLineColor:[UIColor whiteColor]];
+    [tempVolumeKnob setRotateFactor:0.004f];
     
     [volumeBg addSubview:tempVolumeKnob];
     

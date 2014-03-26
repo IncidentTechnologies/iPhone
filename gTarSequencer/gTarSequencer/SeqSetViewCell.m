@@ -745,6 +745,7 @@
     [tempVolumeKnob setHighlightColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
     [tempVolumeKnob setTouchTrackerColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
     [tempVolumeKnob setLineColor:[UIColor whiteColor]];
+    [tempVolumeKnob setRotateFactor:0.004f];
     
     [volumeBg addSubview:tempVolumeKnob];
     

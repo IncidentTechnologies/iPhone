@@ -89,6 +89,13 @@
     [self drawTutorialScreenForStep:tutorialStep isReverseDirection:YES];
 }
 
+-(void)skipTutorial
+{
+    tutorialStep = tutorialTotalSteps;
+    
+    [self drawTutorialScreenForStep:tutorialStep isReverseDirection:NO];
+}
+
 - (void)end
 {
     [tutorialScreen setBackgroundColor:[UIColor clearColor]];
@@ -321,6 +328,19 @@
 
         [self drawSwipeDottedLines:swipeFrame swipeText:@"swipe to learn how" swipeLeft:YES swipeRight:NO withAlpha:0.7 isReverseDirection:reverse];
         
+        // Skip tutorial
+        float skipWidth = 70;
+        CGRect skipFrame = CGRectMake(tutorialScreen.frame.size.width - skipWidth,10,skipWidth,30);
+        
+        UIButton * skipButton = [[UIButton alloc] initWithFrame:skipFrame];
+        [skipButton setTitle:@"SKIP" forState:UIControlStateNormal];
+        [skipButton.titleLabel setAlpha:0.7];
+        [skipButton.titleLabel setFont:[UIFont fontWithName:FONT_DEFAULT size:15.0]];
+        
+        [skipButton addTarget:self action:@selector(skipTutorial) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self fadeInTutorialSubview:skipButton isReverseDirection:reverse];
+        
     }else if(screenIndex == tutorialTotalSteps){
         
         [self stopLeftSwipeGesture];
@@ -362,7 +382,6 @@
         [self drawTutorialCircle:playCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:@selector(end) isReverseDirection:reverse];
         
         [tutorialNext removeFromSuperview];
-        
         
     }else{
         
