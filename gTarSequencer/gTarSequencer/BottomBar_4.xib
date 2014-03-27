@@ -48,12 +48,11 @@
                         <action selector="toggleVolumeOpen:" destination="-1" eventType="touchUpInside" id="fUJ-nM-VXb"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owG-hq-uwM">
-                    <rect key="frame" x="65" y="266" width="65" height="55"/>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owG-hq-uwM">
+                    <rect key="frame" x="0.0" y="266" width="65" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.41176470588235292" green="0.84313725490196079" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="65" id="Gzs-qx-sGj"/>
                         <constraint firstAttribute="height" constant="55" id="MV3-Iq-9AT"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
@@ -66,9 +65,9 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kig-H6-9zf">
-                    <rect key="frame" x="0.0" y="266" width="65" height="55"/>
+                    <rect key="frame" x="65" y="266" width="65" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.55294117649999996" green="0.43921568630000002" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="Hqs-fP-paT"/>
                         <constraint firstAttribute="width" constant="65" id="e3A-4F-TRO"/>
@@ -82,15 +81,17 @@
                         <action selector="recordSession:" destination="-1" eventType="touchUpInside" id="vN0-J7-NfC"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXs-ft-BUc">
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXs-ft-BUc">
                     <rect key="frame" x="130" y="266" width="308" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.15686274510000001" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="6gI-7b-mfe"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="25"/>
-                    <state key="normal" title="SHARE">
+                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="2" maxX="130" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="165" minY="11" maxX="108" maxY="11"/>
+                    <state key="normal" title="SHARE" image="Share_Icon.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -110,6 +111,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Share_Icon.png" width="57" height="64"/>
         <image name="Volume_Icon.png" width="57" height="49"/>
     </resources>
 </document>

@@ -105,6 +105,7 @@
 - (long)countInstruments;
 - (Instrument *)getCurrentInstrument;
 - (Instrument *)getInstrumentAtIndex:(int)i;
+- (BOOL)isValidInstrumentIndex:(int)inst;
 
 - (void)saveContext:(NSString *)filepath;
 

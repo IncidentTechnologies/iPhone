@@ -111,6 +111,7 @@
 		6DA724B318E25B0700872705 /* RecordShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA724B218E25B0700872705 /* RecordShareViewController.m */; };
 		6DA724B518E25B2B00872705 /* RecordShareView_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B418E25B2B00872705 /* RecordShareView_4.xib */; };
 		6DA724B718E35C8700872705 /* RecordShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B618E35C8700872705 /* RecordShareView.xib */; };
+		6DA724B918E4D72F00872705 /* Share_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B818E4D72F00872705 /* Share_Icon.png */; };
 		6DAA158818C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */; };
 		6DAA158918C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */; };
 		6DAA158A18C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */; };
@@ -381,6 +382,7 @@
 		6DA724B218E25B0700872705 /* RecordShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordShareViewController.m; sourceTree = "<group>"; };
 		6DA724B418E25B2B00872705 /* RecordShareView_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView_4.xib; sourceTree = "<group>"; };
 		6DA724B618E35C8700872705 /* RecordShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView.xib; sourceTree = "<group>"; };
+		6DA724B818E4D72F00872705 /* Share_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_Icon.png; sourceTree = "<group>"; };
 		6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57rd.png"; sourceTree = "<group>"; };
 		6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57sq.png"; sourceTree = "<group>"; };
 		6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-114x114rd.png"; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6DA724B818E4D72F00872705 /* Share_Icon.png */,
 				6D813EC418DA268500D29F48 /* Tutorial_gTar.png */,
 				6D5FD01E18D12B5C00ED96F6 /* Tutorial_Dock.png */,
 				6D85704618CAAE560068CC92 /* Pinch_Icon.png */,
@@ -1457,6 +1460,7 @@
 				6DEAB4A518D78FF800833D9C /* Double Bass_G.mp3 in Resources */,
 				58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */,
 				6DEAB4AF18D78FF800833D9C /* Violin_D.mp3 in Resources */,
+				6DA724B918E4D72F00872705 /* Share_Icon.png in Resources */,
 				58F5449718AC0C2B009E6E43 /* Trash_Icon.png in Resources */,
 				58868EDB187619ED00B469C2 /* BottomBar.xib in Resources */,
 				6DAA159118C12525003DAB30 /* Sequencer_Icon120px.png in Resources */,

@@ -21,12 +21,12 @@
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jJW-vp-Zbc">
                     <rect key="frame" x="65" y="0.0" width="415" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.55294117649999996" green="0.43921568630000002" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.41176470588235292" green="0.83921568627450982" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vcg-LX-MnW">
                     <rect key="frame" x="0.0" y="34" width="65" height="230"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.42352941179999998" green="0.75294117650000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.090196078431372548" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fz4-u1-MZo">
                     <rect key="frame" x="65" y="34" width="415" height="230"/>
@@ -36,7 +36,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEJ-tc-Thx">
                     <rect key="frame" x="0.0" y="0.0" width="65" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.33333333329999998" green="0.3803921569" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.11372549019607843" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="contentEdgeInsets" minX="20" minY="8" maxX="21" maxY="8"/>
                     <state key="normal" image="Set_Icon.png">
@@ -47,7 +47,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I49-dW-8TD">
-                    <rect key="frame" x="65" y="0.0" width="1" height="264"/>
+                    <rect key="frame" x="62" y="0.0" width="4" height="264"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>

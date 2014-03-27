@@ -35,7 +35,7 @@
     
     silverColor = [UIColor colorWithRed:201/255.0 green:205/255.0 blue:206/255.0 alpha:1.0];
     redColor = [UIColor colorWithRed:203/255.0 green:81/255.0 blue:26/255.0 alpha:1.0];
-    blueColor = [UIColor colorWithRed:34/255.0 green:140/255.0 blue:167/255.0 alpha:1.0];
+    blueColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:31/255.0 green:187/255.0 blue:40/255.0 alpha:1.0];
     backgroundColor = [UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0];
     
@@ -52,7 +52,7 @@
     [instrumentButton setImageEdgeInsets:UIEdgeInsetsMake((instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2, (instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2)];
     [self hideCustomIndicator];
     
-    [shareButton setImage:[UIImage imageNamed:@"RecordRedo_Icon"] forState:UIControlStateNormal];
+    [shareButton setImage:[UIImage imageNamed:@"Share_Icon"] forState:UIControlStateNormal];
     float shareImageHeight = 30.0;
     float shareImageWidth = 30.0;
     [shareButton setImageEdgeInsets:UIEdgeInsetsMake((shareButton.frame.size.height-shareImageHeight)/2, (shareButton.frame.size.width-shareImageWidth)/2, (shareButton.frame.size.height-shareImageHeight)/2, (shareButton.frame.size.width-shareImageWidth)/2)];

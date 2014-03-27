@@ -127,7 +127,6 @@
     float screenWidth = tutorialScreen.frame.size.width;
     
     [tutorialBottomBar setAlpha:0.0];
-    [tutorialBottomBarLeft setAlpha:0.0];
     
     [UIView animateWithDuration:0.5 animations:^(void){
         for (UIView * v in views) {
@@ -142,7 +141,6 @@
         if(removeAll){
             [tutorialScreen removeFromSuperview];
             [tutorialBottomBar removeFromSuperview];
-            [tutorialBottomBarLeft removeFromSuperview];
         }else{
             for (UIView * v in views) {
                 [v removeFromSuperview];
@@ -332,8 +330,8 @@
         [self drawSwipeDottedLines:swipeFrame swipeText:@"swipe to learn how" swipeLeft:YES swipeRight:NO withAlpha:0.7 isReverseDirection:reverse];
         
         // Skip tutorial
-        float skipWidth = 70;
-        CGRect skipFrame = CGRectMake(tutorialScreen.frame.size.width - skipWidth,10,skipWidth,30);
+        float skipWidth = 60;
+        CGRect skipFrame = CGRectMake(tutorialScreen.frame.size.width - skipWidth,10,skipWidth,20);
         
         UIButton * skipButton = [[UIButton alloc] initWithFrame:skipFrame];
         [skipButton setTitle:@"SKIP" forState:UIControlStateNormal];
@@ -358,23 +356,17 @@
         [tutorialScreen setFrame:newTutorialFrame];
         [tutorialScreen setBackgroundColor:fadedGray];
         
-        float playButtonWidth = 130;
+        float playButtonWidth = 65;
         CGRect bottomBarFrame = CGRectMake(playButtonWidth, newTutorialFrame.size.height, tutorialScreen.frame.size.width - playButtonWidth, BOTTOMBAR_HEIGHT);
         tutorialBottomBar = [[UIView alloc] initWithFrame:bottomBarFrame];
         [tutorialBottomBar setBackgroundColor:fadedGray];
         
         [self fadeInTutorialSubview:tutorialBottomBar isReverseDirection:reverse];
         
-        CGRect bottomBarLeftFrame = CGRectMake(0,newTutorialFrame.size.height,57,BOTTOMBAR_HEIGHT);
-        tutorialBottomBarLeft = [[UIView alloc] initWithFrame:bottomBarLeftFrame];
-        [tutorialBottomBarLeft setBackgroundColor:fadedGray];
-        
-        [self fadeInTutorialSubview:tutorialBottomBarLeft isReverseDirection:reverse];
-        
         // Start playing
         float playLabelWidth = 195;
         
-        CGRect playLabelFrame = CGRectMake(88, tutorialScreen.frame.size.height-85, playLabelWidth, defaultLabelHeight+15);
+        CGRect playLabelFrame = CGRectMake(23, tutorialScreen.frame.size.height-85, playLabelWidth, defaultLabelHeight+15);
         [self drawTutorialLabel:playLabelFrame withTitle:@"Tap to PLAY" withColor:blueColor isHeader:YES isReverseDirection:reverse];
         
         // Play stripe
@@ -389,7 +381,7 @@
         // Play frame
         float playBorderWidth = 8.0;
         
-        CGRect playButtonFrame = CGRectMake(65-playBorderWidth,tutorialBottomBar.frame.origin.y-playBorderWidth,65+2*playBorderWidth,55+2*playBorderWidth);
+        CGRect playButtonFrame = CGRectMake(0-playBorderWidth,tutorialBottomBar.frame.origin.y-playBorderWidth,65+2*playBorderWidth,55+2*playBorderWidth);
         UIView * playButton = [[UIView alloc] initWithFrame:playButtonFrame];
         
         playButton.layer.borderColor = blueColor.CGColor;

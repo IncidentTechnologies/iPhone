@@ -683,22 +683,28 @@
                     
                     if(currentFret == 0){
 
-                        [self updateMeasureDictionary:i withStartingPattern:patternIndex andDeltaI:0 andDelta:-1 andPatternRepeat:patternRepeat];
+                        [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:patternIndex andDeltaI:0 andDelta:-1 andPatternRepeat:patternRepeat];
                         
                         startPatterns[i] = patternIndex;
                         
                     }else{
-                        // if the instrument is toggled
+                        // if the instrument is toggled off
                         if(startPatterns[i] != patternIndex){
-                            [self updateMeasureDictionary:i withStartingPattern:-1 andDeltaI:(currentFret/16.0) andDelta:patternIndex andPatternRepeat:patternRepeat];
+                            [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:(currentFret/16.0) andDelta:patternIndex andPatternRepeat:patternRepeat];
                             
                             startPatterns[i] = patternIndex;
                         }
                         
-                        // if it's the last fret and about to change patterns
+                        // last fret, about to change patterns
                         if(currentFret == 15 && [self getQueuedPatternIndexForInstrument:instToPlay] > -1){
                             
-                            [self updateMeasureDictionary:i withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:NO];
+                            [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:NO];
+                            
+                        // pattern repeat may change if measures are added/subtracted
+                        }else if(currentFret == 15 && patternRepeat != [[tempMeasures[i] objectForKey:@"patternrepeat"] boolValue]){
+                            
+                            [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:patternRepeat];
+                            
                         }
                     }
                 }
@@ -709,8 +715,20 @@
     if(isRecording && currentFret == 15){
         
         NSMutableArray * newMeasure = [[NSMutableArray alloc] init];
-        for(int i = 0; i < instrumentCount; i++){
-            [newMeasure addObject:[NSMutableDictionary dictionaryWithDictionary:tempMeasures[i]]];
+        NSMutableArray * measureForIndex = [[NSMutableArray alloc] init];
+        
+        for(int i = 0; i < MAX_INSTRUMENTS; i++){
+            
+            int instIndex = [[tempMeasures[i] objectForKey:@"instrument"] intValue];
+            
+            // Check that it's a valid instrument and hasn't already been added
+            if([seqSetViewController isValidInstrumentIndex:instIndex] && [measureForIndex indexOfObject:[NSNumber numberWithInt:instIndex]] == NSNotFound){
+                [newMeasure addObject:[NSMutableDictionary dictionaryWithDictionary:tempMeasures[i]]];
+                [measureForIndex addObject:[NSNumber numberWithInt:instIndex]];
+            }
+            
+            // Clear temp data
+            [self clearMeasureDictionary:i];
         }
         
         [self addMeasureToPattern:newMeasure];
@@ -734,7 +752,10 @@
             [self selectNavChoice:@"Set" withShift:NO];
         }
     }else{
-        [self selectNavChoice:@"Share" withShift:NO];
+        
+        if([seqSetViewController countInstruments] > 0){
+            [self selectNavChoice:@"Share" withShift:NO];
+        }
     }
 }
 
@@ -745,17 +766,23 @@
     tempMeasures = [[NSMutableArray alloc] init];
     
     for(int i = 0; i < MAX_INSTRUMENTS; i++){
-        [tempMeasures addObject:[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"",@"",@"",@"",nil] forKeys:[NSArray arrayWithObjects:@"start",@"deltai",@"delta",@"patternrepeat",nil]]];
+        [tempMeasures addObject:[NSMutableDictionary dictionaryWithObjects: [NSArray arrayWithObjects:[NSNumber numberWithInt:-1],@"",[NSNumber numberWithInt:-1],@"",@"",nil] forKeys: [NSArray arrayWithObjects:@"instrument",@"start",@"deltai",@"delta",@"patternrepeat",nil]]];
     }
 
 }
 
-- (void)updateMeasureDictionary:(int)m withStartingPattern:(int)startIndex andDeltaI:(double)deltai andDelta:(int)delta andPatternRepeat:(BOOL)patternrepeat
+- (void)updateMeasureDictionaryForInstrumentIndex:(int)inst withStartingPattern:(int)startIndex andDeltaI:(double)deltai andDelta:(int)delta andPatternRepeat:(BOOL)patternrepeat
 {
     @synchronized(tempMeasures){
         
         NSArray * patternNames = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"OFF", nil];
+        
+        int m = [self chooseMeasureIndexForInstrument:inst];
     
+        if(inst > -1){
+            [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithInt:inst] forKey:@"instrument"];
+        }
+        
         if(startIndex > -1){
             [[tempMeasures objectAtIndex:m] setObject:patternNames[startIndex] forKey:@"start"];
         }
@@ -773,18 +800,34 @@
     }
     
 }
-/*
-- (void)updateMeasureDictionary:(NSMutableDictionary *)measureDict andDeltaI:(double)deltai andDelta:(int)delta andPatternRepeat:(BOOL)patternrepeat
+
+- (int)chooseMeasureIndexForInstrument:(int)instIndex
 {
-    NSArray * patternNames = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"OFF", nil];
-    NSString * deltaName = (delta < 0) ? @"" : patternNames[delta];
+    int i = 0;
+    for(; i < MAX_INSTRUMENTS; i++){
+        
+        int tempInst = [[tempMeasures[i] objectForKey:@"instrument"] intValue];
+        if(tempInst == -1 || tempInst == instIndex){
+            break;
+        }
+    }
     
-    [measureDict setObject:[NSNumber numberWithDouble:deltai] forKey:@"deltai"];
-    [measureDict setObject:deltaName forKey:@"delta"];
-    [measureDict setObject:[NSNumber numberWithBool:patternrepeat] forKey:@"patternrepeat"];
-    
+    return i;
 }
-*/
+
+- (void)clearMeasureDictionary:(int)m
+{
+    @synchronized(tempMeasures){
+        
+        [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithInt:-1] forKey:@"instrument"];
+        [[tempMeasures objectAtIndex:m] setObject:@"" forKey:@"start"];
+        [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithInt:-1] forKey:@"deltai"];
+        [[tempMeasures objectAtIndex:m] setObject:@"" forKey:@"delta"];
+        [[tempMeasures objectAtIndex:m] setObject:@"" forKey:@"patternrepeat"];
+        
+    }
+}
+
 - (void)addMeasureToPattern:(NSMutableArray *)m
 {
     [patternData addObject:m];

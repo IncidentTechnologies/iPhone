@@ -192,7 +192,7 @@
                                 <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.20784313725490194" green="0.76078431372549016" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tQa-SC-8ux">
                         <rect key="frame" x="480" y="0.0" width="82" height="88"/>
@@ -205,7 +205,7 @@
                         </state>
                     </button>
                 </subviews>
-                <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.20784313725490194" green="0.76078431372549016" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.054901960784313725" green="0.76078431372549016" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
             <connections>

@@ -421,14 +421,14 @@
         [v removeFromSuperview];
     }
     
-    [recordButton setBackgroundColor:[UIColor colorWithRed:141/255.0 green:112/255.0 blue:166/255.0 alpha:1.0]];
+    [recordButton setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
     
     float circleWidth = 20;
     UIButton * recordButtonCircle = [[UIButton alloc] initWithFrame:CGRectMake(recordButton.frame.size.width/2-circleWidth/2,recordButton.frame.size.height/2-circleWidth/2,circleWidth,circleWidth)];
     
     recordButtonCircle.layer.cornerRadius = circleWidth/2;
-    [recordButtonCircle setBackgroundColor:[UIColor whiteColor]];
-    [recordButtonCircle setAlpha:0.7];
+    [recordButtonCircle setBackgroundColor:[UIColor colorWithRed:216/266.0 green:64/255.0 blue:64/255.0 alpha:1.0]];
+    [recordButtonCircle setAlpha:1.0];
     
     [recordButtonCircle addTarget:self action:@selector(recordSession:) forControlEvents:UIControlEventTouchUpInside];
     

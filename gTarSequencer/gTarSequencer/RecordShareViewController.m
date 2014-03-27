@@ -56,6 +56,14 @@
     for(UIView * v in trackView.subviews){
         [v removeFromSuperview];
     }
+    
+    for(UIView * v in tickmarks){
+        [v removeFromSuperview];
+    }
+    
+    [tickmarks removeAllObjects];
+    
+    [self setMeasures:MIN_MEASURES];
 }
 
 - (void)reloadInstruments
@@ -99,7 +107,7 @@
         UIView * track = [[UIView alloc] initWithFrame:trackFrame];
         [track setBackgroundColor:[UIColor grayColor]];
         
-        track.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        track.layer.borderColor = [UIColor colorWithRed:81/255.0 green:81/255.0 blue:81/255.0 alpha:1.0].CGColor;
         track.layer.borderWidth = 1.0f;
         
         [trackView addSubview:track];
@@ -119,7 +127,7 @@
         
         CGRect instFrame = CGRectMake(-1, i*instHeight, instWidth+2, displayHeight);
         UIButton * instView = [[UIButton alloc] initWithFrame:instFrame];
-        [instView setBackgroundColor:[UIColor darkGrayColor]];
+        [instView setBackgroundColor:[UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0]];
         [instView setUserInteractionEnabled:NO];
         
         instView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -137,7 +145,7 @@
         UIView * track = [[UIView alloc] initWithFrame:trackFrame];
         [track setBackgroundColor:[UIColor grayColor]];
         
-        track.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        track.layer.borderColor = [UIColor colorWithRed:81/255.0 green:81/255.0 blue:81/255.0 alpha:1.0].CGColor;
         track.layer.borderWidth = 1.0f;
         
         [trackView addSubview:track];
@@ -146,6 +154,31 @@
         
     }
 
+}
+
+- (BOOL)isValidInstrumentIndex:(int)inst
+{
+
+    for(Instrument * i in instruments){
+        if(i.instrument == inst){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (int)getIndexForInstrument:(int)inst
+{
+    int k = 0;
+    for(Instrument * i in instruments){
+        if(i.instrument == inst){
+            return k;
+        }
+        k++;
+    }
+    
+    return -1;
 }
 
 - (void)loadPattern:(NSMutableArray *)patternData
@@ -178,14 +211,14 @@
         [trackView addSubview:measureLine];
     }
     
-    if(newContentSize.width > trackView.frame.size.width){
+    //if(newContentSize.width > trackView.frame.size.width){
         // for some reason this needs extra padding
         [trackView setContentSize:newContentSize];
         
         for(UIView * t in tracks){
             [t setFrame:CGRectMake(t.frame.origin.x, t.frame.origin.y, newContentSize.width+2, t.frame.size.height)];
         }
-    }
+    //}
     
 }
 
@@ -196,7 +229,7 @@
     UIColor * bColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.5];
     UIColor * cColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:0.5];
     UIColor * dColor = [UIColor colorWithRed:137/255.0 green:225/255.0 blue:247/255.0 alpha:0.5];
-    UIColor * offColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.5];
+    UIColor * offColor = [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:0.5];
     
     
     //
@@ -212,13 +245,27 @@
         prevTranspose[j] = 0;
     }
     
-    int i = 0;
+    NSLog(@"pattern data is %@",patternData);
     
+    int i = 0;
     for(NSMutableArray * measure in patternData){
-        int j = 0;
         for(NSMutableDictionary * measureData in measure){
             
-            UIView * track = [tracks objectAtIndex:j];
+            int instrumentIndex = [[measureData objectForKey:@"instrument"] intValue];
+            
+            // First make sure the instrument hasn't been deleted
+            if(![self isValidInstrumentIndex:instrumentIndex]){
+                
+                NSLog(@"Destroying %i",instrumentIndex);
+                
+                continue;
+            }
+            
+            int k = [self getIndexForInstrument:instrumentIndex];
+            
+            NSLog(@"using index %i for instrument %i",k,instrumentIndex);
+            
+            UIView * track = [tracks objectAtIndex:k];
             
             CGRect measureBarFrame;
             CGRect measureBarInterruptFrame;
@@ -259,21 +306,20 @@
             // Draw progress marker
             if(![pattern isEqualToString:@"OFF"]){
                 if(CGRectIsNull(measureBarInterruptFrame)){
-                    [self drawProgressMarkerForMeasure:i inRow:j startAt:0.0 withWidth:1.0];
+                    [self drawProgressMarkerForMeasure:i inRow:k startAt:0.0 withWidth:1.0];
                 }else{
-                    [self drawProgressMarkerForMeasure:i inRow:j startAt:0.0 withWidth:[[measureData objectForKey:@"deltai"] doubleValue]];
+                    [self drawProgressMarkerForMeasure:i inRow:k startAt:0.0 withWidth:[[measureData objectForKey:@"deltai"] doubleValue]];
                 }
             }
             
             // Draw interrupt measure
-            NSString * interruptPattern = nil;
+            NSString * interruptPattern = [measureData objectForKey:@"delta"];
             double interruptTranspose = 0;
             
             if(!CGRectIsNull(measureBarInterruptFrame)){
                 
                 UIView * measureInterruptBar = [[UIView alloc] initWithFrame:measureBarInterruptFrame];
                 
-                interruptPattern = [measureData objectForKey:@"delta"];
                 interruptTranspose = measureBarInterruptFrame.size.width;
                 
                 if([interruptPattern isEqualToString:@"A"]){
@@ -292,37 +338,38 @@
                 
                 if(![interruptPattern isEqualToString:@"OFF"]){
                     double deltai = [[measureData objectForKey:@"deltai"] doubleValue];
-                    [self drawProgressMarkerForMeasure:i inRow:j startAt:deltai withWidth:(1.0-deltai)];
+                    [self drawProgressMarkerForMeasure:i inRow:k startAt:deltai withWidth:(1.0-deltai)];
                 }
             }
             
             // Draw pattern end markers
             BOOL patternend = [[measureData objectForKey:@"patternrepeat"] boolValue];
             
-            if(patternend && i < [patternData count]-1){
+            if(patternend && i < [patternData count]-1 && ![interruptPattern isEqualToString:@"OFF"] && ![pattern isEqualToString:@"OFF"] && ![pattern isEqualToString:@""]){
                 
-                CGRect topTickFrame = CGRectMake(i*measureWidth+measureWidth-0.5,track.frame.origin.y,2,10);
-                CGRect bottomTickFrame = CGRectMake(i*measureWidth+measureWidth-0.5,track.frame.origin.y+track.frame.size.height-10,2,10);
+                CGRect topTickFrame = CGRectMake(i*measureWidth+measureWidth,track.frame.origin.y,1,12);
+                CGRect bottomTickFrame = CGRectMake(i*measureWidth+measureWidth,track.frame.origin.y+track.frame.size.height-12,1,12);
                 
                 UIView * topTick = [[UIView alloc] initWithFrame:topTickFrame];
                 UIView * bottomTick = [[UIView alloc] initWithFrame:bottomTickFrame];
                 
-                [topTick setBackgroundColor:[UIColor darkGrayColor]];
-                [bottomTick setBackgroundColor:[UIColor darkGrayColor]];
+                [topTick setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
+                [bottomTick setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
                 
                 [tickmarks addObject:topTick];
                 [tickmarks addObject:bottomTick];
+                
             }
             
             // Indicate letter
-            if(![prevPattern[j] isEqualToString:pattern] && ![pattern isEqualToString:@"OFF"] && ([interruptPattern isEqualToString:@""] || interruptPattern == nil)){
+            if(![prevPattern[k] isEqualToString:pattern] && ![pattern isEqualToString:@"OFF"] && ([interruptPattern isEqualToString:@""] || interruptPattern == nil)){
                 
                 CGRect patternLetterFrame;
                 float patternLetterWidth = 30;
                 float patternLetterIndent = 10;
                 
-                if(prevInterruptPattern != nil && [prevInterruptPattern[j] isEqualToString:pattern]){
-                    patternLetterFrame = CGRectMake(measureBar.frame.origin.x+patternLetterIndent-prevTranspose[j],track.frame.origin.y+track.frame.size.height/2-patternLetterWidth/2,patternLetterWidth,patternLetterWidth);
+                if(prevInterruptPattern != nil && [prevInterruptPattern[k] isEqualToString:pattern]){
+                    patternLetterFrame = CGRectMake(measureBar.frame.origin.x+patternLetterIndent-prevTranspose[k],track.frame.origin.y+track.frame.size.height/2-patternLetterWidth/2,patternLetterWidth,patternLetterWidth);
                 }else{
                     patternLetterFrame = CGRectMake(measureBar.frame.origin.x+patternLetterIndent,track.frame.origin.y+track.frame.size.height/2-patternLetterWidth/2,patternLetterWidth,patternLetterWidth);
                 }
@@ -336,11 +383,10 @@
                 [trackView addSubview:patternLetter];
             }
             
-            prevPattern[j] = pattern;
-            prevInterruptPattern[j] = interruptPattern;
-            prevTranspose[j] = interruptTranspose;
+            prevPattern[k] = pattern;
+            prevInterruptPattern[k] = interruptPattern;
+            prevTranspose[k] = interruptTranspose;
             
-            j++;
         }
         
         i++;

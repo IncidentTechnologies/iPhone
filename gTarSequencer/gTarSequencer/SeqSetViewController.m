@@ -189,6 +189,17 @@
         return nil;
 }
 
+- (BOOL)isValidInstrumentIndex:(int)inst
+{
+    for(Instrument * i in instruments){
+        if(i.instrument == inst){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (NSMutableArray *)getCustomInstrumentOptions
 {
     return customInstrumentOptions;

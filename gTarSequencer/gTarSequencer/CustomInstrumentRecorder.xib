@@ -57,7 +57,7 @@
                 <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kb-XA-lfj">
                     <rect key="frame" x="243" y="234" width="121" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.63137254899999995" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.20784313725490194" green="0.76078431372549016" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="contentEdgeInsets" minX="49" minY="11" maxX="49" maxY="11"/>
