@@ -24,8 +24,6 @@
 #define ANGLE_OK -1
 #define MIN_TEMPO 60.0
 #define MAX_TEMPO 180.0
-#define VISIBLE 1.0f
-#define NOT_VISIBLE 0.0f
 
 @interface RadialButton : UIButton
 {

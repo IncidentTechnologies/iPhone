@@ -19,12 +19,16 @@
 @interface LeftNavigatorViewController : UIViewController
 {
     BOOL instrumentViewEnabled;
+    
     UIColor * silverColor;
     UIColor * redColor;
     UIColor * greenColor;
     UIColor * blueColor;
+    UIColor * backgroundColor;
     
     UIImage * defaultInstrumentIcon;
+    
+    NSString * currentNavChoice;
 }
 
 -(IBAction)selectNav:(id)sender;
@@ -36,6 +40,7 @@
 @property (weak, nonatomic) id<LeftNavigatorDelegate> delegate;
 @property (nonatomic) CGRect viewFrame;
 
+@property (weak, nonatomic) IBOutlet UIView * toggleBorder;
 @property (weak, nonatomic) IBOutlet UIButton * optionsButton;
 @property (weak, nonatomic) IBOutlet UIButton * seqSetButton;
 @property (weak, nonatomic) IBOutlet UIButton * instrumentButton;

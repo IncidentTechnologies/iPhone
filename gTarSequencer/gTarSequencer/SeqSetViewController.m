@@ -941,6 +941,11 @@
     return [delegate checkIsPlaying];
 }
 
+- (BOOL)checkIsRecording
+{
+    return [delegate checkIsRecording];
+}
+
 - (void)startAllPlaying
 {
     [delegate startAll];

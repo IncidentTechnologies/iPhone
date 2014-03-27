@@ -157,7 +157,8 @@
     // SUBVIEW: RECORD SHARE
     //
     
-    recordShareController = [[RecordShareViewController alloc] initWithNibName:@"RecordShareView" bundle:nil];
+    NSString * recordShareNibName = (isScreenLarge) ? @"RecordShareView_4" : @"RecordShareView";
+    recordShareController = [[RecordShareViewController alloc] initWithNibName:recordShareNibName bundle:nil];
     [recordShareController.view setFrame:onScreenMainFrame];
     [recordShareController setDelegate:self];
     
@@ -263,7 +264,7 @@
 - (void)selectNavChoice:(NSString *)nav withShift:(BOOL)shift
 {
     
-    if(TESTMODE) NSLog(@"Switch to %@ view",nav);
+    NSLog(@"Switch to %@ view",nav);
     
     [optionsViewController.view setHidden:YES];
     [seqSetViewController.view setHidden:YES];
@@ -279,7 +280,6 @@
         
         [optionsViewController reloadFileTable];
         activeMainView = optionsViewController.view;
-        [playControlViewController stopAll];
         
     }else if([nav isEqualToString:@"Set"]){
     
@@ -298,6 +298,8 @@
     }else if([nav isEqualToString:@"Share"]){
         
         activeMainView = recordShareController.view;
+        [recordShareController reloadInstruments];
+        [self stopAll];
         
     }else if([nav isEqualToString:@"Info"]){
         
@@ -309,6 +311,13 @@
         [self hoverSetName];
     }else{
         [self hideSetName];
+    }
+    
+    // Share mode?
+    if([nav isEqualToString:@"Share"]){
+        [playControlViewController setShareMode:YES];
+    }else{
+        [playControlViewController setShareMode:NO];
     }
     
     [activeMainView setAlpha:1.0];
@@ -659,6 +668,19 @@
     if(TESTMODE) NSLog(@"Main event loop");
 }
 
+- (void)setRecordMode:(BOOL)record
+{
+    isRecording = record;
+    
+    
+    if(isRecording){
+        if(activeMainView != seqSetViewController.view && activeMainView != instrumentViewController.view){
+            [self selectNavChoice:@"Set" withShift:NO];
+        }
+    }else{
+        [self selectNavChoice:@"Share" withShift:NO];
+    }
+}
 
 #pragma mark - Pattern Queue
 
@@ -794,10 +816,11 @@
 
 - (void)stopAllPlaying
 {
+    
     isPlaying = FALSE;
+    isRecording = FALSE;
     [playTimer invalidate];
     playTimer = nil;
-    
     
     [seqSetViewController stopSoundMaster];
     
@@ -806,7 +829,13 @@
 
 - (void)startAllPlaying:(float)spb withAmplitude:(double)volume
 {
-    [self stopAllPlaying];
+    // Clean up playing without setting false
+    [playTimer invalidate];
+    playTimer = nil;
+    
+    [seqSetViewController stopSoundMaster];
+    
+    // Start again
     isPlaying = TRUE;
     playVolume = volume;
     
@@ -916,9 +945,20 @@
     return isPlaying;
 }
 
+- (BOOL)checkIsRecording
+{
+    if(isRecording){
+        NSLog(@"RECORDING");
+    }else{
+        NSLog(@"NOT RECORDING");
+    }
+    return isRecording;
+}
+
 - (void)stopAll
 {
-    [playControlViewController stopAll];
+    [playControlViewController stopPlayRecord];
+
 }
 
 - (void)startAll

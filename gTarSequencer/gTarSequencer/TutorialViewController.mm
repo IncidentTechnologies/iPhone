@@ -91,13 +91,14 @@
 
 -(void)skipTutorial
 {
-    tutorialStep = tutorialTotalSteps;
-    
-    [self drawTutorialScreenForStep:tutorialStep isReverseDirection:NO];
+    [self end];
+    //tutorialStep = tutorialTotalSteps;
+    //[self drawTutorialScreenForStep:tutorialStep isReverseDirection:NO];
 }
 
 - (void)end
 {
+    [self endSequenceLoop];
     [tutorialScreen setBackgroundColor:[UIColor clearColor]];
     [self fadeOutTutorialSubviews:YES isReverseDirection:NO];
     [delegate notifyTutorialEnded];
@@ -126,6 +127,7 @@
     float screenWidth = tutorialScreen.frame.size.width;
     
     [tutorialBottomBar setAlpha:0.0];
+    [tutorialBottomBarLeft setAlpha:0.0];
     
     [UIView animateWithDuration:0.5 animations:^(void){
         for (UIView * v in views) {
@@ -140,6 +142,7 @@
         if(removeAll){
             [tutorialScreen removeFromSuperview];
             [tutorialBottomBar removeFromSuperview];
+            [tutorialBottomBarLeft removeFromSuperview];
         }else{
             for (UIView * v in views) {
                 [v removeFromSuperview];
@@ -362,10 +365,16 @@
         
         [self fadeInTutorialSubview:tutorialBottomBar isReverseDirection:reverse];
         
+        CGRect bottomBarLeftFrame = CGRectMake(0,newTutorialFrame.size.height,57,BOTTOMBAR_HEIGHT);
+        tutorialBottomBarLeft = [[UIView alloc] initWithFrame:bottomBarLeftFrame];
+        [tutorialBottomBarLeft setBackgroundColor:fadedGray];
+        
+        [self fadeInTutorialSubview:tutorialBottomBarLeft isReverseDirection:reverse];
+        
         // Start playing
         float playLabelWidth = 195;
         
-        CGRect playLabelFrame = CGRectMake(53, tutorialScreen.frame.size.height-85, playLabelWidth, defaultLabelHeight+15);
+        CGRect playLabelFrame = CGRectMake(88, tutorialScreen.frame.size.height-85, playLabelWidth, defaultLabelHeight+15);
         [self drawTutorialLabel:playLabelFrame withTitle:@"Tap to PLAY" withColor:blueColor isHeader:YES isReverseDirection:reverse];
         
         // Play stripe
@@ -377,9 +386,16 @@
         
         [self fadeInTutorialSubview:playStripe isReverseDirection:reverse];
         
-        // Play circle
-        CGRect playCircleFrame = CGRectMake(17,tutorialBottomBar.frame.origin.y+tutorialBottomBar.frame.size.height-3*circleWidth/4-3,circleWidth,circleWidth);
-        [self drawTutorialCircle:playCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:@selector(end) isReverseDirection:reverse];
+        // Play frame
+        float playBorderWidth = 8.0;
+        
+        CGRect playButtonFrame = CGRectMake(65-playBorderWidth,tutorialBottomBar.frame.origin.y-playBorderWidth,65+2*playBorderWidth,55+2*playBorderWidth);
+        UIView * playButton = [[UIView alloc] initWithFrame:playButtonFrame];
+        
+        playButton.layer.borderColor = blueColor.CGColor;
+        playButton.layer.borderWidth = playBorderWidth;
+        
+        [self fadeInTutorialSubview:playButton isReverseDirection:reverse];
         
         [tutorialNext removeFromSuperview];
         

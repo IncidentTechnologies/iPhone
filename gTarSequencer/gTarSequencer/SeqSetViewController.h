@@ -21,6 +21,7 @@
 - (void) stopAll;
 - (void) startAll;
 - (BOOL) checkIsPlaying;
+- (BOOL) checkIsRecording;
 
 - (void) turnOffGuitarEffects;
 - (void) setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying;

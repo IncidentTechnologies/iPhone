@@ -37,6 +37,7 @@
     int currentFret;
     int currentAbsoluteMeasure;
     BOOL isPlaying;
+    BOOL isRecording;
     double playVolume;
     
     NSMutableArray * patternQueue;

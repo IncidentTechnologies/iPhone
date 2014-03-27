@@ -18,6 +18,7 @@
 @synthesize connectedButton;
 @synthesize leftSlider;
 @synthesize customIndicator;
+@synthesize toggleBorder;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +37,7 @@
     redColor = [UIColor colorWithRed:203/255.0 green:81/255.0 blue:26/255.0 alpha:1.0];
     blueColor = [UIColor colorWithRed:34/255.0 green:140/255.0 blue:167/255.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:31/255.0 green:187/255.0 blue:40/255.0 alpha:1.0];
+    backgroundColor = [UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0];
     
     // Add icons
     [seqSetButton setImage:[UIImage imageNamed:@"Set_Icon"] forState:UIControlStateNormal];
@@ -49,6 +51,11 @@
     float instrumentImageWidth = instrumentButton.frame.size.height-5.0;
     [instrumentButton setImageEdgeInsets:UIEdgeInsetsMake((instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2, (instrumentButton.frame.size.height-instrumentImageHeight)/2, (instrumentButton.frame.size.width-instrumentImageWidth)/2)];
     [self hideCustomIndicator];
+    
+    [shareButton setImage:[UIImage imageNamed:@"RecordRedo_Icon"] forState:UIControlStateNormal];
+    float shareImageHeight = 30.0;
+    float shareImageWidth = 30.0;
+    [shareButton setImageEdgeInsets:UIEdgeInsetsMake((shareButton.frame.size.height-shareImageHeight)/2, (shareButton.frame.size.width-shareImageWidth)/2, (shareButton.frame.size.height-shareImageHeight)/2, (shareButton.frame.size.width-shareImageWidth)/2)];
     
     [optionsButton setImage:[UIImage imageNamed:@"Save_Icon"] forState:UIControlStateNormal];
     float optionsImageHeight = 26.0;
@@ -104,42 +111,65 @@
 {
     [self resetButtonColors];
     
+    currentNavChoice = navChoice;
+    
     if([navChoice isEqualToString:@"Options"]){
         optionsButton.backgroundColor = blueColor;
         //optionsButton.layer.borderColor = blueColor.CGColor;
         optionsButton.tintColor = [UIColor whiteColor];
+        [self toggleSeqSetButton];
     }else if([navChoice isEqualToString:@"Set"]){
-        seqSetButton.backgroundColor = blueColor;
-        //seqSetButton.layer.borderColor = blueColor.CGColor;
-        seqSetButton.tintColor = [UIColor whiteColor];
+        if(instrumentViewEnabled){
+            [self toggleInstrumentButton];
+        }else{
+            [self toggleSeqSetButton];
+        }
     }else if([navChoice isEqualToString:@"Instrument"]){
-        instrumentButton.backgroundColor = blueColor;
-        //instrumentButton.layer.borderColor = blueColor.CGColor;
-        instrumentButton.tintColor = [UIColor whiteColor];
+        [self toggleSeqSetButton];
     }else if([navChoice isEqualToString:@"Share"]){
         shareButton.backgroundColor = blueColor;
         //shareButton.layer.borderColor = blueColor.CGColor;
         shareButton.tintColor = [UIColor whiteColor];
+        [self toggleSeqSetButton];
     }else if([navChoice isEqualToString:@"Info"]){
-        // todo
+        [self toggleSeqSetButton];
+    }
+    
+    
+}
+
+-(void)toggleInstrumentButton
+{
+    [instrumentButton setHidden:NO];
+    [seqSetButton setHidden:YES];
+}
+
+-(void)toggleSeqSetButton
+{
+    [instrumentButton setHidden:YES];
+    [seqSetButton setHidden:NO];
+    
+    if([currentNavChoice isEqualToString:@"Set"]){
+        seqSetButton.backgroundColor = blueColor;
+        seqSetButton.tintColor = [UIColor whiteColor];
     }
 }
 
 -(void)resetButtonColors
 {
-    optionsButton.backgroundColor = [UIColor clearColor];
+    optionsButton.backgroundColor = backgroundColor;
     optionsButton.layer.borderColor = silverColor.CGColor;
     optionsButton.layer.borderWidth = 1.0;
     optionsButton.layer.cornerRadius = 5.0;
     optionsButton.tintColor = silverColor;
     
-    seqSetButton.backgroundColor = [UIColor clearColor];
+    seqSetButton.backgroundColor = backgroundColor;
     seqSetButton.layer.borderColor = silverColor.CGColor;
     seqSetButton.layer.borderWidth = 1.0;
     seqSetButton.layer.cornerRadius = 5.0;
     seqSetButton.tintColor = silverColor;
     
-    instrumentButton.backgroundColor = [UIColor clearColor];
+    instrumentButton.backgroundColor = backgroundColor;
     instrumentButton.layer.borderColor = silverColor.CGColor;
     instrumentButton.layer.borderWidth = 1.0;
     instrumentButton.layer.cornerRadius = 5.0;
@@ -148,6 +178,17 @@
     connectedButton.layer.borderColor = silverColor.CGColor;
     connectedButton.layer.borderWidth = 1.0;
     connectedButton.layer.cornerRadius = 5.0;
+    
+    toggleBorder.layer.borderColor = silverColor.CGColor;
+    toggleBorder.layer.borderWidth = 1.0;
+    toggleBorder.layer.cornerRadius = 5.0;
+    
+    shareButton.backgroundColor = backgroundColor;
+    shareButton.layer.borderColor = silverColor.CGColor;
+    shareButton.layer.borderWidth = 1.0;
+    shareButton.layer.cornerRadius = 5.0;
+    shareButton.tintColor = silverColor;
+    
     
     // (share button)
 }
@@ -163,6 +204,8 @@
     [instrumentButton setAlpha:1.0];
     instrumentViewEnabled = true;
     [self setInstrumentIcon:instIcon showCustom:isCustom];
+    
+    [self toggleInstrumentButton];
 }
 
 -(void)setInstrumentIcon:(NSString *)instIcon showCustom:(BOOL)isCustom
@@ -182,6 +225,8 @@
     instrumentViewEnabled = false;
     [instrumentButton setImage:defaultInstrumentIcon forState:UIControlStateNormal];
     [self hideCustomIndicator];
+    
+    [self toggleSeqSetButton];
 }
 
 -(void)showCustomIndicator

@@ -866,7 +866,11 @@
     
     for(long int x = 0; x <= screenWidth/f; x+=f){
         int n = x * samplelength / screenWidth;
-        CGPathAddLineToPoint(path, NULL, ceil(x), midpointY-buffer[n]*scaleY);
+        double point = midpointY-buffer[n]*scaleY;
+    
+        if(point){
+            CGPathAddLineToPoint(path, NULL, ceil(x), point);
+        }
     }
     
     CGContextAddPath(context, path);
@@ -942,7 +946,13 @@
 {
     // Pause any playing
     if([delegate checkIsPlaying]){
-        pausePlaying = YES;
+        if([delegate checkIsRecording]){
+            pausePlaying = NO;
+        }else{
+            pausePlaying = YES;
+        }
+        
+        
         [delegate stopAllPlaying];
     }else{
         pausePlaying = NO;

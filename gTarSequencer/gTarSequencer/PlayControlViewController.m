@@ -16,6 +16,8 @@
 @synthesize tempoSlider;
 @synthesize volumeButton;
 @synthesize startStopButton;
+@synthesize recordButton;
+@synthesize shareButton;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,15 +34,17 @@
     [super viewDidLoad];
     
     // Tempo slider
-    if(TESTMODE) NSLog(@"Setup tempo slider");
     [tempoSlider setDelegate:self];
     
     // Set up volume display:
     [self initVolumeDisplay];
     
     // Play/Pause button
-    if(TESTMODE) NSLog(@"Draw Play Pause button");
     [self drawPlayButton];
+    [self drawRecordButton];
+    
+    // Hide share button
+    [self setShareMode:NO];
     
     isPlaying = FALSE;
     
@@ -58,6 +62,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Share Mode
+-(void)setShareMode:(BOOL)share
+{
+    if(share){
+        [shareButton setHidden:NO];
+    }else{
+        [shareButton setHidden:YES];
+    }
+}
+
 #pragma mark - Tempo Slider Delegate
 
 - (void)radialButtonValueDidChange:(int)newValue withSave:(BOOL)save
@@ -67,8 +81,8 @@
         tempo = newValue;
         if (isPlaying)
         {
-            [self stopAll];
-            [self playAll];
+            [self endPlaySession];
+            [self beginPlaySession];
         }
         
         if(save){
@@ -217,12 +231,16 @@
 
 - (IBAction)startStop:(id)sender
 {
-    if (isPlaying){
-        [self stopAll];
+    if(isRecording){
+        [self stopRecording];
     }else{
-        [delegate endTutorialIfOpen];
-        [delegate initPlayLocation];
-        [self playAll];
+        if (isPlaying){
+            [self stopAll];
+        }else{
+            [delegate endTutorialIfOpen];
+            [delegate initPlayLocation];
+            [self playAll];
+        }
     }
 }
 
@@ -230,18 +248,27 @@
 {
     [self clearButton:startStopButton];
     [self drawPlayButton];
+    [self endPlaySession];
+}
+
+- (void)stopPlayRecord
+{
+    [self stopAll];
     
-    [UIApplication sharedApplication].idleTimerDisabled = NO;
-    
-    [delegate stopAllPlaying];
-    
-    isPlaying = NO;
+    if(isRecording){
+        [self stopRecording];
+    }
 }
 
 - (void)playAll
 {
     [self clearButton:startStopButton];
     [self drawPauseButton];
+    [self beginPlaySession];
+}
+
+- (void)beginPlaySession
+{
     
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     
@@ -253,17 +280,65 @@
     [delegate startAllPlaying:secondsPerBeat withAmplitude:volume];
     
     isPlaying = YES;
+}
+
+- (void)endPlaySession
+{
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
     
+    [delegate stopAllPlaying];
+    
+    isPlaying = NO;
 }
 
 - (void)clearButton:(UIButton *)button
 {
-    
     NSArray *viewsToRemove = [button subviews];
     for (UIView *v in viewsToRemove) {
         [v removeFromSuperview];
     }
 }
+
+#pragma mark - Record Session
+
+-(IBAction)recordSession:(id)sender
+{
+    if(isPlaying && !isRecording){
+        [self stopAll];
+    }else{
+        if(isRecording){
+            [self stopRecording];
+        }else{
+            [self startRecording];
+        }
+    }
+    
+}
+
+-(void)startRecording
+{
+    isRecording = TRUE;
+    
+    if(isPlaying){
+        [self endPlaySession];
+    }
+    
+    [delegate setRecordMode:isRecording];
+    [delegate resetPlayLocation];
+    [delegate initPlayLocation];
+    [self beginPlaySession];
+    [self drawStopButton];
+}
+
+-(void)stopRecording
+{
+    isRecording = FALSE;
+    
+    [self endPlaySession];
+    [delegate setRecordMode:isRecording];
+    [self drawRecordButton];
+}
+
 
 #pragma mark - Save / Load
 
@@ -338,6 +413,45 @@
     [startStopButton addSubview:image];
     
     UIGraphicsEndImageContext();
+}
+
+- (void)drawRecordButton
+{
+    for(UIView * v in recordButton.subviews){
+        [v removeFromSuperview];
+    }
+    
+    [recordButton setBackgroundColor:[UIColor colorWithRed:141/255.0 green:112/255.0 blue:166/255.0 alpha:1.0]];
+    
+    float circleWidth = 20;
+    UIButton * recordButtonCircle = [[UIButton alloc] initWithFrame:CGRectMake(recordButton.frame.size.width/2-circleWidth/2,recordButton.frame.size.height/2-circleWidth/2,circleWidth,circleWidth)];
+    
+    recordButtonCircle.layer.cornerRadius = circleWidth/2;
+    [recordButtonCircle setBackgroundColor:[UIColor whiteColor]];
+    [recordButtonCircle setAlpha:0.7];
+    
+    [recordButtonCircle addTarget:self action:@selector(recordSession:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [recordButton addSubview:recordButtonCircle];
+}
+
+- (void)drawStopButton
+{
+    for(UIView * v in recordButton.subviews){
+        [v removeFromSuperview];
+    }
+    
+    [recordButton setBackgroundColor:[UIColor colorWithRed:216/255.0 green:64/255.0 blue:64/255.0 alpha:1.0]];
+    
+    float squareWidth = 20;
+    UIButton * recordButtonSquare = [[UIButton alloc] initWithFrame:CGRectMake(recordButton.frame.size.width/2-squareWidth/2,recordButton.frame.size.height/2-squareWidth/2,squareWidth,squareWidth)];
+    
+    [recordButtonSquare setBackgroundColor:[UIColor whiteColor]];
+    [recordButtonSquare setAlpha:0.7];
+    
+    [recordButtonSquare addTarget:self action:@selector(recordSession:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [recordButton addSubview:recordButtonSquare];
 }
 
 -(NSMutableArray *)getInstruments

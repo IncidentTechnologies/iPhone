@@ -8,10 +8,12 @@
             <connections>
                 <outlet property="connectedButton" destination="vD1-7S-aSe" id="EnC-bb-t85"/>
                 <outlet property="customIndicator" destination="PNW-tZ-pRM" id="FCO-AD-FSj"/>
-                <outlet property="instrumentButton" destination="wnJ-Sc-NM5" id="BsA-4M-Cck"/>
+                <outlet property="instrumentButton" destination="MGE-6S-5ak" id="ZgL-OG-nCq"/>
                 <outlet property="leftSlider" destination="hLY-41-9sc" id="fAy-79-74B"/>
                 <outlet property="optionsButton" destination="9e4-ri-NJR" id="KWQ-eL-eV5"/>
                 <outlet property="seqSetButton" destination="xfv-Rp-nMc" id="F2g-RO-aKO"/>
+                <outlet property="shareButton" destination="wnJ-Sc-NM5" id="gZ7-eI-a79"/>
+                <outlet property="toggleBorder" destination="cnh-xL-JIG" id="2Kd-dg-iE3"/>
                 <outlet property="view" destination="1" id="w9K-mJ-MD9"/>
             </connections>
         </placeholder>
@@ -20,6 +22,10 @@
             <rect key="frame" x="0.0" y="0.0" width="131" height="264"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnh-xL-JIG">
+                    <rect key="frame" x="34" y="9" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-Rp-nMc">
                     <rect key="frame" x="37" y="13" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -32,6 +38,20 @@
                     </state>
                     <connections>
                         <action selector="selectNav:" destination="-1" eventType="touchUpInside" id="C2L-Oj-XAc"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-6S-5ak">
+                    <rect key="frame" x="37" y="13" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectNav:" destination="-1" eventType="touchUpInside" id="l9M-2c-Pfc"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnJ-Sc-NM5">
@@ -78,24 +98,9 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PNW-tZ-pRM">
-                    <rect key="frame" x="40" y="118" width="5" height="5"/>
+                    <rect key="frame" x="40" y="55" width="5" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.80000000000000004" green="0.91764705879999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9d-y3-I7R">
-                    <rect key="frame" x="30" y="38" width="7" height="1"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.78823529410000004" green="0.80392156859999997" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VDb-i6-0zw">
-                    <rect key="frame" x="30" y="101" width="7" height="1"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.78823529410000004" green="0.80392156859999997" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8nQ-12-njZ">
-                    <rect key="frame" x="29" y="38" width="1" height="64"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.78823529411764703" green="0.80392156862745101" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mic-22-FLt">
                     <rect key="frame" x="117" y="0.0" width="1" height="264"/>

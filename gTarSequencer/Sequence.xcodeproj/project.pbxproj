@@ -109,7 +109,8 @@
 		6D813EC918DA804100D29F48 /* VolumeKnobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D813EC818DA804100D29F48 /* VolumeKnobView.m */; };
 		6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704618CAAE560068CC92 /* Pinch_Icon.png */; };
 		6DA724B318E25B0700872705 /* RecordShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA724B218E25B0700872705 /* RecordShareViewController.m */; };
-		6DA724B518E25B2B00872705 /* RecordShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B418E25B2B00872705 /* RecordShareView.xib */; };
+		6DA724B518E25B2B00872705 /* RecordShareView_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B418E25B2B00872705 /* RecordShareView_4.xib */; };
+		6DA724B718E35C8700872705 /* RecordShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B618E35C8700872705 /* RecordShareView.xib */; };
 		6DAA158818C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */; };
 		6DAA158918C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */; };
 		6DAA158A18C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */; };
@@ -378,7 +379,8 @@
 		6D85704618CAAE560068CC92 /* Pinch_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pinch_Icon.png; sourceTree = "<group>"; };
 		6DA724B118E25B0700872705 /* RecordShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordShareViewController.h; sourceTree = "<group>"; };
 		6DA724B218E25B0700872705 /* RecordShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordShareViewController.m; sourceTree = "<group>"; };
-		6DA724B418E25B2B00872705 /* RecordShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView.xib; sourceTree = "<group>"; };
+		6DA724B418E25B2B00872705 /* RecordShareView_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView_4.xib; sourceTree = "<group>"; };
+		6DA724B618E35C8700872705 /* RecordShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView.xib; sourceTree = "<group>"; };
 		6DAA158418C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57rd.png"; sourceTree = "<group>"; };
 		6DAA158518C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-57x57sq.png"; sourceTree = "<group>"; };
 		6DAA158618C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sequencer_AppIcon-114x114rd.png"; sourceTree = "<group>"; };
@@ -985,7 +987,8 @@
 			children = (
 				6DA724B118E25B0700872705 /* RecordShareViewController.h */,
 				6DA724B218E25B0700872705 /* RecordShareViewController.m */,
-				6DA724B418E25B2B00872705 /* RecordShareView.xib */,
+				6DA724B418E25B2B00872705 /* RecordShareView_4.xib */,
+				6DA724B618E35C8700872705 /* RecordShareView.xib */,
 			);
 			name = RecordShareViewController;
 			sourceTree = "<group>";
@@ -1461,6 +1464,7 @@
 				6DEAB4BF18D78FF800833D9C /* Rock_Tom.mp3 in Resources */,
 				6DEAB4A418D78FF800833D9C /* Double Bass_E.mp3 in Resources */,
 				58F5449018AB161E009E6E43 /* Set_Icon.png in Resources */,
+				6DA724B718E35C8700872705 /* RecordShareView.xib in Resources */,
 				6DAA159318C66363003DAB30 /* Save_Icon.png in Resources */,
 				580A52071864DFF50077240B /* Icon_Piano.png in Resources */,
 				6DEAB4CD18D78FF800833D9C /* Dubstep_Closed Hat.mp3 in Resources */,
@@ -1519,7 +1523,7 @@
 				6DEAB4F118D790F800833D9C /* Trombone_G.mp3 in Resources */,
 				58241D7D188DE31000498DB5 /* sampleList.plist in Resources */,
 				6DEAB50818D7BB7C00833D9C /* Hand Drum_Tom.mp3 in Resources */,
-				6DA724B518E25B2B00872705 /* RecordShareView.xib in Resources */,
+				6DA724B518E25B2B00872705 /* RecordShareView_4.xib in Resources */,
 				6DEAB4CC18D78FF800833D9C /* Dubstep_Clap.mp3 in Resources */,
 				6DEAB4CE18D78FF800833D9C /* Dubstep_Kick.mp3 in Resources */,
 				6DEAB49518D78FF800833D9C /* Piano_G.mp3 in Resources */,
@@ -1736,7 +1740,7 @@
 				OTHER_CFLAGS = "-mthumb";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Sequence;
-				PROVISIONING_PROFILE = "81067387-5602-45F4-97D6-5799798BB88B";
+				PROVISIONING_PROFILE = "6C248DBD-4D24-4368-A992-0801E2F9FB9A";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1766,7 +1770,7 @@
 				OTHER_CFLAGS = "-mthumb";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Sequence;
-				PROVISIONING_PROFILE = "81067387-5602-45F4-97D6-5799798BB88B";
+				PROVISIONING_PROFILE = "6C248DBD-4D24-4368-A992-0801E2F9FB9A";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "";

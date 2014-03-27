@@ -18,6 +18,7 @@
 - (void) refreshVolumeSliders;
 
 - (void) initPlayLocation;
+- (void) resetPlayLocation;
 
 - (void) saveContext:(NSString *)filepath;
 - (void) userDidLoadSequenceOptions;
@@ -31,6 +32,8 @@
 
 - (NSMutableArray *)getInstruments;
 - (void) openInstrument:(int)instIndex;
+
+- (void) setRecordMode:(BOOL)record;
 
 @end
 
@@ -47,16 +50,19 @@
     
     // Play loop
     BOOL isPlaying;
+    BOOL isRecording;
     float secondsPerBeat;
     
     VolumeDisplay * volumeDisplay;
+    
    
 }
 
 - (IBAction)userDidLoadOptions:(id)sender; // TODO: move to left nav
 - (IBAction)startStop:(id)sender;
 - (IBAction)toggleVolumeOpen:(id)sender;
-- (void)stopAll;
+- (IBAction)recordSession:(id)sender;
+- (void)stopPlayRecord;
 
 - (int)getTempo;
 - (void)resetTempo;
@@ -66,9 +72,13 @@
 - (void)resetVolume;
 - (void)setVolume:(double)newVolume;
 
+- (void)setShareMode:(BOOL)share;
+
 @property (weak, nonatomic) id<PlayControlDelegate> delegate;
 @property (weak, nonatomic) IBOutlet RadialButton * tempoSlider;
 @property (weak, nonatomic) IBOutlet UIButton * volumeButton;
 @property (weak, nonatomic) IBOutlet UIButton * startStopButton;
+@property (weak, nonatomic) IBOutlet UIButton * recordButton;
+@property (weak, nonatomic) IBOutlet UIButton * shareButton;
 
 @end

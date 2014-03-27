@@ -23,6 +23,7 @@
 - (void)stopAllPlaying;
 - (void)startAllPlaying;
 - (BOOL)checkIsPlaying;
+- (BOOL)checkIsRecording;
 
 @end
 
