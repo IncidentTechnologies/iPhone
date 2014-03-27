@@ -37,10 +37,15 @@
     int currentFret;
     int currentAbsoluteMeasure;
     BOOL isPlaying;
-    BOOL isRecording;
     double playVolume;
     
     NSMutableArray * patternQueue;
+    
+    // Record
+    BOOL isRecording;
+    NSMutableArray * patternData;
+    NSMutableArray * tempMeasures;
+    int startPatterns[5];
     
     // State
     NSMutableDictionary * currentState;

@@ -301,6 +301,10 @@
         [recordShareController reloadInstruments];
         [self stopAll];
         
+        if(patternData != nil){
+            [recordShareController loadPattern:patternData];
+        }
+        
     }else if([nav isEqualToString:@"Info"]){
         
         activeMainView = infoViewController.view;
@@ -606,6 +610,7 @@
             
             NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
             
+            [self resetPatternData];
             playTimer = [NSTimer scheduledTimerWithTimeInterval:[spb floatValue] target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
             
             [runLoop run];
@@ -627,6 +632,10 @@
             Instrument * instToPlay = [seqSetViewController getInstrumentAtIndex:i];
             
             @synchronized(instToPlay.selectedPattern){
+                
+                //
+                // PLAY
+                //
                 int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
                 
                 // If we are back at the beginning of the pattern, then check the queue:
@@ -655,9 +664,57 @@
                 if(activeMainView == instrumentViewController.view && instToPlay == currentInst){
                     [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
                 }
+                
+                
+                //
+                // RECORD
+                //
+                if(isRecording){
+                    
+                    int patternIndex = instToPlay.selectedPatternIndex;
+                    if(instToPlay.isMuted){
+                        patternIndex = 4;
+                    }
+                    
+                    BOOL patternRepeat = NO;
+                    if(instToPlay.selectedPattern.measureCount-1 == realMeasure && !instToPlay.isMuted){
+                        patternRepeat = YES;
+                    }
+                    
+                    if(currentFret == 0){
+
+                        [self updateMeasureDictionary:i withStartingPattern:patternIndex andDeltaI:0 andDelta:-1 andPatternRepeat:patternRepeat];
+                        
+                        startPatterns[i] = patternIndex;
+                        
+                    }else{
+                        // if the instrument is toggled
+                        if(startPatterns[i] != patternIndex){
+                            [self updateMeasureDictionary:i withStartingPattern:-1 andDeltaI:(currentFret/16.0) andDelta:patternIndex andPatternRepeat:patternRepeat];
+                            
+                            startPatterns[i] = patternIndex;
+                        }
+                        
+                        // if it's the last fret and about to change patterns
+                        if(currentFret == 15 && [self getQueuedPatternIndexForInstrument:instToPlay] > -1){
+                            
+                            [self updateMeasureDictionary:i withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:NO];
+                        }
+                    }
+                }
             }
         }
     //}
+    
+    if(isRecording && currentFret == 15){
+        
+        NSMutableArray * newMeasure = [[NSMutableArray alloc] init];
+        for(int i = 0; i < instrumentCount; i++){
+            [newMeasure addObject:[NSMutableDictionary dictionaryWithDictionary:tempMeasures[i]]];
+        }
+        
+        [self addMeasureToPattern:newMeasure];
+    }
     
     [seqSetViewController updateAllVisibleCells];
     
@@ -672,7 +729,6 @@
 {
     isRecording = record;
     
-    
     if(isRecording){
         if(activeMainView != seqSetViewController.view && activeMainView != instrumentViewController.view){
             [self selectNavChoice:@"Set" withShift:NO];
@@ -680,6 +736,58 @@
     }else{
         [self selectNavChoice:@"Share" withShift:NO];
     }
+}
+
+#pragma mark - Record
+- (void)resetPatternData
+{
+    patternData = [[NSMutableArray alloc] init];
+    tempMeasures = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < MAX_INSTRUMENTS; i++){
+        [tempMeasures addObject:[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"",@"",@"",@"",nil] forKeys:[NSArray arrayWithObjects:@"start",@"deltai",@"delta",@"patternrepeat",nil]]];
+    }
+
+}
+
+- (void)updateMeasureDictionary:(int)m withStartingPattern:(int)startIndex andDeltaI:(double)deltai andDelta:(int)delta andPatternRepeat:(BOOL)patternrepeat
+{
+    @synchronized(tempMeasures){
+        
+        NSArray * patternNames = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"OFF", nil];
+    
+        if(startIndex > -1){
+            [[tempMeasures objectAtIndex:m] setObject:patternNames[startIndex] forKey:@"start"];
+        }
+        
+        if(deltai > -1){
+            [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithDouble:deltai] forKey:@"deltai"];
+        }
+        
+        if (delta > -1) {
+            NSString * deltaName = (delta < 0) ? @"" : patternNames[delta];
+            [[tempMeasures objectAtIndex:m] setObject:deltaName forKey:@"delta"];
+        }
+        
+        [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithBool:patternrepeat] forKey:@"patternrepeat"];
+    }
+    
+}
+/*
+- (void)updateMeasureDictionary:(NSMutableDictionary *)measureDict andDeltaI:(double)deltai andDelta:(int)delta andPatternRepeat:(BOOL)patternrepeat
+{
+    NSArray * patternNames = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"OFF", nil];
+    NSString * deltaName = (delta < 0) ? @"" : patternNames[delta];
+    
+    [measureDict setObject:[NSNumber numberWithDouble:deltai] forKey:@"deltai"];
+    [measureDict setObject:deltaName forKey:@"delta"];
+    [measureDict setObject:[NSNumber numberWithBool:patternrepeat] forKey:@"patternrepeat"];
+    
+}
+*/
+- (void)addMeasureToPattern:(NSMutableArray *)m
+{
+    [patternData addObject:m];
 }
 
 #pragma mark - Pattern Queue

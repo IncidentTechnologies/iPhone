@@ -38,6 +38,7 @@
 }
 
 - (void)reloadInstruments;
+- (void)loadPattern:(NSMutableArray *)patternData;
 - (IBAction)userDidBack:(id)sender;
 
 @property (weak, nonatomic) id<RecordShareDelegate> delegate;

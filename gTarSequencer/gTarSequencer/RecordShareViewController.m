@@ -145,93 +145,7 @@
         [tracks addObject:track];
         
     }
-    
-    // fake pattern
-    
-    NSDictionary * pattern0i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern0j = [NSDictionary dictionaryWithObjectsAndKeys:@"D",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern0k = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern0 = [[NSMutableArray alloc] initWithObjects:pattern0i,pattern0j,pattern0k, nil];
-    
-    NSDictionary * pattern1i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern1j = [NSDictionary dictionaryWithObjectsAndKeys:@"D",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern1k = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0.9],@"delta_i",@"C",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern1 = [[NSMutableArray alloc] initWithObjects:pattern1i,pattern1j,pattern1k, nil];
-    
-    NSDictionary * pattern2i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern2j = [NSDictionary dictionaryWithObjectsAndKeys:@"D",@"start",[NSNumber numberWithDouble:0.3],@"delta_i",@"OFF",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern2k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern2 = [[NSMutableArray alloc] initWithObjects:pattern2i,pattern2j,pattern2k, nil];
-    
-    NSDictionary * pattern3i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:YES],@"patternrepeat", nil];
-    NSDictionary * pattern3j = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern3k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:YES],@"patternrepeat", nil];
-    NSMutableArray * pattern3 = [[NSMutableArray alloc] initWithObjects:pattern3i,pattern3j,pattern3k, nil];
-    
-    NSDictionary * pattern4i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern4j = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern4k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern4 = [[NSMutableArray alloc] initWithObjects:pattern4i,pattern4j,pattern4k, nil];
-    
-    NSDictionary * pattern5i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern5j = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0.5],@"delta_i",@"D",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern5k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:YES],@"patternrepeat", nil];
-    NSMutableArray * pattern5 = [[NSMutableArray alloc] initWithObjects:pattern5i,pattern5j,pattern5k, nil];
-    
-    NSDictionary * pattern6i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern6j = [NSDictionary dictionaryWithObjectsAndKeys:@"B",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern6k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern6 = [[NSMutableArray alloc] initWithObjects:pattern6i,pattern6j,pattern6k, nil];
-    
-    NSDictionary * pattern7i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern7j = [NSDictionary dictionaryWithObjectsAndKeys:@"B",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern7k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern7 = [[NSMutableArray alloc] initWithObjects:pattern7i,pattern7j,pattern7k, nil];
-    
-    NSDictionary * pattern8i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern8j = [NSDictionary dictionaryWithObjectsAndKeys:@"D",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern8k = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern8 = [[NSMutableArray alloc] initWithObjects:pattern8i,pattern8j,pattern8k, nil];
-    
-    NSDictionary * pattern9i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern9j = [NSDictionary dictionaryWithObjectsAndKeys:@"D",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern9k = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0.9],@"delta_i",@"C",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern9 = [[NSMutableArray alloc] initWithObjects:pattern9i,pattern9j,pattern9k, nil];
-    
-    NSDictionary * pattern10i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern10j = [NSDictionary dictionaryWithObjectsAndKeys:@"D",@"start",[NSNumber numberWithDouble:0.3],@"delta_i",@"OFF",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern10k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern10 = [[NSMutableArray alloc] initWithObjects:pattern10i,pattern10j,pattern10k, nil];
-    
-    NSDictionary * pattern11i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:YES],@"patternrepeat", nil];
-    NSDictionary * pattern11j = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern11k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:YES],@"patternrepeat", nil];
-    NSMutableArray * pattern11 = [[NSMutableArray alloc] initWithObjects:pattern11i,pattern11j,pattern11k, nil];
-    
-    NSDictionary * pattern12i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern12j = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern12k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern12 = [[NSMutableArray alloc] initWithObjects:pattern12i,pattern12j,pattern12k, nil];
-    
-    NSDictionary * pattern13i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern13j = [NSDictionary dictionaryWithObjectsAndKeys:@"OFF",@"start",[NSNumber numberWithDouble:0.5],@"delta_i",@"D",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern13k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:YES],@"patternrepeat", nil];
-    NSMutableArray * pattern13 = [[NSMutableArray alloc] initWithObjects:pattern13i,pattern13j,pattern13k, nil];
-    
-    NSDictionary * pattern14i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern14j = [NSDictionary dictionaryWithObjectsAndKeys:@"B",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern14k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern14 = [[NSMutableArray alloc] initWithObjects:pattern14i,pattern14j,pattern14k, nil];
-    
-    NSDictionary * pattern15i = [NSDictionary dictionaryWithObjectsAndKeys:@"A",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern15j = [NSDictionary dictionaryWithObjectsAndKeys:@"B",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSDictionary * pattern15k = [NSDictionary dictionaryWithObjectsAndKeys:@"C",@"start",[NSNumber numberWithDouble:0],@"delta_i",@"",@"delta",[NSNumber numberWithBool:NO],@"patternrepeat", nil];
-    NSMutableArray * pattern15 = [[NSMutableArray alloc] initWithObjects:pattern15i,pattern15j,pattern15k, nil];
-    
-    NSMutableArray * patternData = [[NSMutableArray alloc] initWithObjects:pattern0,pattern1,pattern2,pattern3,pattern4,pattern5,pattern6,pattern7,pattern8,pattern9,pattern10,pattern11,pattern12,pattern13,pattern14,pattern15,nil];
-    
-    [self loadPattern:patternData];
-    
+
 }
 
 - (void)loadPattern:(NSMutableArray *)patternData
@@ -302,7 +216,7 @@
     
     for(NSMutableArray * measure in patternData){
         int j = 0;
-        for(NSDictionary * measureData in measure){
+        for(NSMutableDictionary * measureData in measure){
             
             UIView * track = [tracks objectAtIndex:j];
             
@@ -313,10 +227,10 @@
             NSString * interruptMeasure = [measureData objectForKey:@"delta"];
             if(![interruptMeasure isEqualToString:@""]){
                 
-                double delta_i = [[measureData objectForKey:@"delta_i"] doubleValue];
+                double deltai = [[measureData objectForKey:@"deltai"] doubleValue];
                 
-                measureBarFrame = CGRectMake(i*measureWidth, track.frame.origin.y+1, measureWidth*delta_i, track.frame.size.height-2);
-                measureBarInterruptFrame = CGRectMake(i*measureWidth+measureWidth*delta_i, track.frame.origin.y+1, measureWidth - measureWidth*delta_i, track.frame.size.height-2);
+                measureBarFrame = CGRectMake(i*measureWidth, track.frame.origin.y+1, measureWidth*deltai, track.frame.size.height-2);
+                measureBarInterruptFrame = CGRectMake(i*measureWidth+measureWidth*deltai, track.frame.origin.y+1, measureWidth - measureWidth*deltai, track.frame.size.height-2);
                 
             }else{
                 measureBarFrame = CGRectMake(i*measureWidth, track.frame.origin.y+1, measureWidth, track.frame.size.height-2);
@@ -347,7 +261,7 @@
                 if(CGRectIsNull(measureBarInterruptFrame)){
                     [self drawProgressMarkerForMeasure:i inRow:j startAt:0.0 withWidth:1.0];
                 }else{
-                    [self drawProgressMarkerForMeasure:i inRow:j startAt:0.0 withWidth:[[measureData objectForKey:@"delta_i"] doubleValue]];
+                    [self drawProgressMarkerForMeasure:i inRow:j startAt:0.0 withWidth:[[measureData objectForKey:@"deltai"] doubleValue]];
                 }
             }
             
@@ -377,15 +291,15 @@
                 [trackView addSubview:measureInterruptBar];
                 
                 if(![interruptPattern isEqualToString:@"OFF"]){
-                    double delta_i = [[measureData objectForKey:@"delta_i"] doubleValue];
-                    [self drawProgressMarkerForMeasure:i inRow:j startAt:delta_i withWidth:(1.0-delta_i)];
+                    double deltai = [[measureData objectForKey:@"deltai"] doubleValue];
+                    [self drawProgressMarkerForMeasure:i inRow:j startAt:deltai withWidth:(1.0-deltai)];
                 }
             }
             
             // Draw pattern end markers
             BOOL patternend = [[measureData objectForKey:@"patternrepeat"] boolValue];
             
-            if(patternend){
+            if(patternend && i < [patternData count]-1){
                 
                 CGRect topTickFrame = CGRectMake(i*measureWidth+measureWidth-0.5,track.frame.origin.y,2,10);
                 CGRect bottomTickFrame = CGRectMake(i*measureWidth+measureWidth-0.5,track.frame.origin.y+track.frame.size.height-10,2,10);
