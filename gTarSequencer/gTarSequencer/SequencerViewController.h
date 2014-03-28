@@ -46,6 +46,7 @@
     NSMutableArray * patternData;
     NSMutableArray * tempMeasures;
     int startPatterns[5];
+    BOOL forceRecord;
     
     // State
     NSMutableDictionary * currentState;

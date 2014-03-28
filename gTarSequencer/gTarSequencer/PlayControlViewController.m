@@ -232,7 +232,7 @@
 - (IBAction)startStop:(id)sender
 {
     if(isRecording){
-        [self stopRecording];
+        [self stopRecordingAndAnimate:YES];
     }else{
         if (isPlaying){
             [self stopAll];
@@ -256,7 +256,7 @@
     [self stopAll];
     
     if(isRecording){
-        [self stopRecording];
+        [self stopRecordingAndAnimate:NO];
     }
 }
 
@@ -307,7 +307,7 @@
         [self stopAll];
     }else{
         if(isRecording){
-            [self stopRecording];
+            [self stopRecordingAndAnimate:YES];
         }else{
             [self startRecording];
         }
@@ -323,19 +323,19 @@
         [self endPlaySession];
     }
     
-    [delegate setRecordMode:isRecording];
+    [delegate setRecordMode:isRecording andAnimate:NO];
     [delegate resetPlayLocation];
     [delegate initPlayLocation];
     [self beginPlaySession];
     [self drawStopButton];
 }
 
--(void)stopRecording
+-(void)stopRecordingAndAnimate:(BOOL)animate
 {
     isRecording = FALSE;
     
     [self endPlaySession];
-    [delegate setRecordMode:isRecording];
+    [delegate setRecordMode:isRecording andAnimate:animate];
     [self drawRecordButton];
 }
 

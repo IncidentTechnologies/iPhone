@@ -33,7 +33,7 @@
 - (NSMutableArray *)getInstruments;
 - (void) openInstrument:(int)instIndex;
 
-- (void) setRecordMode:(BOOL)record;
+- (void) setRecordMode:(BOOL)record andAnimate:(BOOL)animate;
 
 @end
 

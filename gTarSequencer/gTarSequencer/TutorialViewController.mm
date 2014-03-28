@@ -69,6 +69,8 @@
 
 - (void)launch
 {
+    // Make sure animations are enabled
+    [UIView setAnimationsEnabled:YES];
     
     tutorialStep = 1;
     

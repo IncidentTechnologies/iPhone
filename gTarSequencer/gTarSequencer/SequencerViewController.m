@@ -229,6 +229,7 @@
     if(TESTMODE) NSLog(@"Close left nav");
     
     [seqSetViewController turnEditingOn];
+    [UIView setAnimationsEnabled:YES];
     [UIView animateWithDuration:0.1 animations:^(){
         [leftNavigator.view setFrame:offLeftNavigatorFrame];
         [activeMainView setFrame:onScreenMainFrame];
@@ -244,6 +245,7 @@
     
     [instrumentViewController leftNavWillOpen];
     [seqSetViewController turnEditingOff];
+    [UIView setAnimationsEnabled:YES];
     [UIView animateWithDuration:0.1 animations:^(){
         [leftNavigator.view setFrame:onScreenNavigatorFrame];
         [activeMainView setFrame:overScreenMainFrame];
@@ -636,7 +638,9 @@
             
             NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
             
+            forceRecord = NO;
             [self resetPatternData];
+            
             playTimer = [NSTimer scheduledTimerWithTimeInterval:[spb floatValue] target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
             
             [runLoop run];
@@ -730,7 +734,6 @@
                         }else if(currentFret == 15 && patternRepeat != [[tempMeasures[i] objectForKey:@"patternrepeat"] boolValue]){
                             
                             [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:patternRepeat];
-                            
                         }
                     }
                 }
@@ -738,7 +741,7 @@
         }
     //}
     
-    if(isRecording && currentFret == 15){
+    if(isRecording && (currentFret == 15 || forceRecord)){
         
         NSMutableArray * newMeasure = [[NSMutableArray alloc] init];
         NSMutableArray * measureForIndex = [[NSMutableArray alloc] init];
@@ -769,7 +772,7 @@
     if(TESTMODE) NSLog(@"Main event loop");
 }
 
-- (void)setRecordMode:(BOOL)record
+- (void)setRecordMode:(BOOL)record andAnimate:(BOOL)animate
 {
     isRecording = record;
     
@@ -780,9 +783,39 @@
     }else{
         
         if([seqSetViewController countInstruments] > 0){
-            [self selectNavChoice:@"Share" withShift:NO];
+            
+            if(animate){
+                [recordShareController reloadInstruments];
+                [self stopAll];
+                
+                if(patternData != nil){
+                    [recordShareController loadPattern:patternData];
+                }
+                
+                [UIView setAnimationsEnabled:YES];
+                
+                [recordShareController.view setHidden:NO];
+                [recordShareController.view setFrame:CGRectMake(0,-activeMainView.frame.size.height,activeMainView.frame.size.width,activeMainView.frame.size.height)];
+                
+                [UIView animateWithDuration:0.3 animations:^(void){
+                    [recordShareController.view setFrame:CGRectMake(0, 0, activeMainView.frame.size.width, activeMainView.frame.size.height)];
+                } completion:^(BOOL finished){
+                    [self selectNavChoice:@"Share" withShift:NO];
+                }];
+            }else{
+                [self selectNavChoice:@"Share" withShift:NO];
+            }
+            
+            
         }
     }
+}
+
+-(void)addFinalRecordedPartialMeasure
+{
+    forceRecord = YES;
+    [self mainEventLoop];
+    forceRecord = NO;
 }
 
 #pragma mark - Record
@@ -993,6 +1026,9 @@
 
 - (void)stopAllPlaying
 {
+    if(isRecording){
+        [self addFinalRecordedPartialMeasure];
+    }
     
     isPlaying = FALSE;
     isRecording = FALSE;

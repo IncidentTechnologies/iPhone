@@ -245,7 +245,7 @@
         prevTranspose[j] = 0;
     }
     
-    NSLog(@"pattern data is %@",patternData);
+    //NSLog(@"pattern data is %@",patternData);
     
     int i = 0;
     for(NSMutableArray * measure in patternData){
@@ -256,14 +256,10 @@
             // First make sure the instrument hasn't been deleted
             if(![self isValidInstrumentIndex:instrumentIndex]){
                 
-                NSLog(@"Destroying %i",instrumentIndex);
-                
                 continue;
             }
             
             int k = [self getIndexForInstrument:instrumentIndex];
-            
-            NSLog(@"using index %i for instrument %i",k,instrumentIndex);
             
             UIView * track = [tracks objectAtIndex:k];
             
