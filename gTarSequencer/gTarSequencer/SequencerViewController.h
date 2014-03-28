@@ -21,7 +21,7 @@
 #import "TutorialViewController.h"
 #import "RecordShareViewController.h"
 
-@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate,RecordShareDelegate> {
+@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate,RecordShareDelegate,UIAlertViewDelegate> {
     
     // tutorial
     BOOL isTutorialOpen;
@@ -53,6 +53,7 @@
     
     // Save/Load
     NSString * activeSequencer;
+    NSString * sequencerToSave;
     
     // Left nav
     BOOL leftNavOpen;

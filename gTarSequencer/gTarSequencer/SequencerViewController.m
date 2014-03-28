@@ -440,15 +440,41 @@
 - (void)createNewSaveName:(NSString *)filename
 {
     // Save previous set if not blank
-    if([seqSetViewController countInstruments] > 0){
-        [self saveWithName:filename];
+    if([seqSetViewController countInstruments] > 0 && ![filename isEqualToString:DEFAULT_SET_NAME]){
+        
+        // TODO: prompt
+        NSString * promptTitle = [@"Save " stringByAppendingFormat:@"%@",filename];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:promptTitle message:@"Save changes to your current set?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES",nil];
+        
+        [alert show];
+        
+        sequencerToSave = filename;
     }
-    
+}
+
+- (void)createNewSet
+{
     activeSequencer = @"";
     
     // Delete all cells
     [seqSetViewController deleteAllCells];
-    
+}
+
+- (void)createNewSetAndSave
+{
+    [self saveWithName:sequencerToSave];
+    sequencerToSave = @"";
+    [self createNewSet];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+        [self createNewSet];
+    }else if(buttonIndex == 1){
+        [self createNewSetAndSave];
+    }
 }
 
 - (void)deleteWithName:(NSString *)filename

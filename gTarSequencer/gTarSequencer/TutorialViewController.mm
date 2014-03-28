@@ -611,11 +611,11 @@
             CGRect plusSymbolFrame;
             
             if(isScreenLarge){
-                minusSymbolFrame = CGRectMake(120,55,minusPlusWidth,minusPlusWidth);
-                plusSymbolFrame = CGRectMake(421,55,minusPlusWidth,minusPlusWidth);
+                minusSymbolFrame = CGRectMake(117,55,minusPlusWidth,minusPlusWidth);
+                plusSymbolFrame = CGRectMake(422,55,minusPlusWidth,minusPlusWidth);
             }else{
-                minusSymbolFrame = CGRectMake(76,55,minusPlusWidth,minusPlusWidth);
-                plusSymbolFrame = CGRectMake(377,55,minusPlusWidth,minusPlusWidth);
+                minusSymbolFrame = CGRectMake(73,55,minusPlusWidth,minusPlusWidth);
+                plusSymbolFrame = CGRectMake(378,55,minusPlusWidth,minusPlusWidth);
             }
             
             UIButton * minusSymbol = [[UIButton alloc] initWithFrame:minusSymbolFrame];
