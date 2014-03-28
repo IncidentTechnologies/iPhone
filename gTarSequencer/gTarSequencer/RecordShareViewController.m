@@ -20,6 +20,7 @@
 @synthesize instrumentView;
 @synthesize trackView;
 @synthesize progressViewIndicator;
+@synthesize noSessionOverlay;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +42,8 @@
     [trackView setDelegate:self];
     
     [self reloadInstruments];
+    [self setMeasures:MIN_MEASURES];
+    [self showNoSessionOverlay];
 }
 
 - (void)clearAllSubviews
@@ -62,8 +65,6 @@
     }
     
     [tickmarks removeAllObjects];
-    
-    [self setMeasures:MIN_MEASURES];
 }
 
 - (void)reloadInstruments
@@ -153,6 +154,8 @@
         [tracks addObject:track];
         
     }
+    
+    [self setMeasures:MIN_MEASURES];
 
 }
 
@@ -183,10 +186,13 @@
 
 - (void)loadPattern:(NSMutableArray *)patternData
 {
+    if([patternData count] > 0){
+        [self hideNoSessionOverlay];
+    }
+    
     [self setMeasures:[patternData count]];
     [self drawPatternsOnMeasures:patternData];
     [self resetProgressView];
-    
     // figure out datastruct for pattern
 }
 
@@ -210,7 +216,6 @@
         
         [trackView addSubview:measureLine];
     }
-    
     //if(newContentSize.width > trackView.frame.size.width){
         // for some reason this needs extra padding
         [trackView setContentSize:newContentSize];
@@ -219,7 +224,6 @@
             [t setFrame:CGRectMake(t.frame.origin.x, t.frame.origin.y, newContentSize.width+2, t.frame.size.height)];
         }
     //}
-    
 }
 
 -(void)drawPatternsOnMeasures:(NSMutableArray *)patternData
@@ -427,6 +431,18 @@
     
     [progressView addSubview:marker];
     
+}
+
+#pragma mark - No Session Overlay
+
+-(void) showNoSessionOverlay
+{
+    [noSessionOverlay setHidden:NO];
+}
+
+-(void) hideNoSessionOverlay
+{
+    [noSessionOverlay setHidden:YES];
 }
 
 #pragma mark - Other Listeners

@@ -48,5 +48,6 @@
 @property (weak, nonatomic) IBOutlet UIView * instrumentView;
 @property (weak, nonatomic) IBOutlet UIScrollView * trackView;
 @property (retain, nonatomic) UIView * progressViewIndicator;
+@property (weak, nonatomic) IBOutlet UIView * noSessionOverlay;
 
 @end

@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="backButton" destination="fEJ-tc-Thx" id="cBs-lZ-5nt"/>
                 <outlet property="instrumentView" destination="Vcg-LX-MnW" id="98z-4b-Q0j"/>
+                <outlet property="noSessionOverlay" destination="occ-jE-SpO" id="Cyl-aD-MXp"/>
                 <outlet property="progressView" destination="jJW-vp-Zbc" id="d0F-Nx-vTh"/>
                 <outlet property="trackView" destination="Fz4-u1-MZo" id="pJd-qQ-lY4"/>
                 <outlet property="view" destination="TgF-Au-e5Z" id="Dvy-L1-QCW"/>
@@ -33,12 +34,52 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.10980392160000001" green="0.56078431370000004" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
                 </scrollView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I49-dW-8TD">
+                    <rect key="frame" x="62" y="0.0" width="4" height="264"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="occ-jE-SpO">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="264"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="248" translatesAutoresizingMaskIntoConstraints="NO" id="XeH-Bb-MNN">
+                            <rect key="frame" x="116" y="93" width="248" height="69"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Record a ">
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="22" name="AvenirNext-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="session">
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="22" name="AvenirNext-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content=" to share with your friends.">
+                                    <attributes>
+                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <font key="NSFont" size="22" name="AvenirNext-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.11372549019607843" green="0.18431372549019609" blue="0.20000000000000001" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEJ-tc-Thx">
-                    <rect key="frame" x="0.0" y="0.0" width="65" height="34"/>
+                    <rect key="frame" x="0.0" y="0.0" width="62" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.11372549019607843" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <inset key="contentEdgeInsets" minX="20" minY="8" maxX="21" maxY="8"/>
+                    <inset key="contentEdgeInsets" minX="20" minY="8" maxX="18" maxY="8"/>
                     <state key="normal" image="Set_Icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -46,11 +87,6 @@
                         <action selector="userDidBack:" destination="-1" eventType="touchUpInside" id="b6R-3L-yAR"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I49-dW-8TD">
-                    <rect key="frame" x="62" y="0.0" width="4" height="264"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
