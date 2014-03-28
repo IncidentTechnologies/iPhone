@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayControlViewController">
             <connections>
+                <outlet property="disablePlay" destination="FHF-5D-Hui" id="jpj-Sz-9YN"/>
+                <outlet property="disableShare" destination="Sml-pd-Pgj" id="XFp-eG-C3A"/>
                 <outlet property="recordButton" destination="ulp-6t-xKN" id="e3i-Yb-evq"/>
                 <outlet property="shareButton" destination="uz8-gM-6ag" id="65b-gQ-aTt"/>
                 <outlet property="startStopButton" destination="owG-hq-uwM" id="zn8-Bn-5pm"/>
@@ -98,14 +100,26 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sml-pd-Pgj">
+                    <rect key="frame" x="130" y="266" width="350" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHF-5D-Hui">
+                    <rect key="frame" x="0.0" y="266" width="65" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="3Po-ZS-uye"/>
                 <constraint firstAttribute="bottom" secondItem="ulp-6t-xKN" secondAttribute="bottom" constant="-1" id="RSO-io-tOv"/>
                 <constraint firstAttribute="bottom" secondItem="uz8-gM-6ag" secondAttribute="bottom" constant="-1" id="ehX-KQ-hUM"/>
+                <constraint firstAttribute="bottom" secondItem="Sml-pd-Pgj" secondAttribute="bottom" constant="-1" id="iun-PA-Qq0"/>
                 <constraint firstAttribute="bottom" secondItem="mEV-SP-95e" secondAttribute="bottom" constant="-1" id="uhs-ES-ozi"/>
                 <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-1" id="vHB-Xa-fad"/>
                 <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="y4d-mv-4xb"/>
+                <constraint firstAttribute="bottom" secondItem="FHF-5D-Hui" secondAttribute="bottom" constant="-1" id="z08-bm-Hea"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

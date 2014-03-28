@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayControlViewController">
             <connections>
+                <outlet property="disablePlay" destination="1Te-mN-mEr" id="kME-1m-QrN"/>
+                <outlet property="disableShare" destination="63f-SQ-QI9" id="wjc-W9-Wag"/>
                 <outlet property="recordButton" destination="Kig-H6-9zf" id="GRg-eh-GqS"/>
                 <outlet property="shareButton" destination="BXs-ft-BUc" id="lEg-Nu-ulu"/>
                 <outlet property="startStopButton" destination="owG-hq-uwM" id="zn8-Bn-5pm"/>
@@ -96,11 +98,28 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Te-mN-mEr">
+                    <rect key="frame" x="0.0" y="266" width="65" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="65" id="RLc-RP-aEE"/>
+                        <constraint firstAttribute="height" constant="55" id="Vf5-yK-Faf"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63f-SQ-QI9">
+                    <rect key="frame" x="130" y="266" width="438" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Kig-H6-9zf" secondAttribute="bottom" constant="-1" id="EH8-Wx-S1x"/>
                 <constraint firstAttribute="bottom" secondItem="BXs-ft-BUc" secondAttribute="bottom" constant="-1" id="IEc-EQ-1Ui"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="MOg-7L-xl5"/>
+                <constraint firstItem="63f-SQ-QI9" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="130" id="Nqr-tW-7YN"/>
+                <constraint firstAttribute="trailing" secondItem="63f-SQ-QI9" secondAttribute="trailing" id="e8o-n7-KYK"/>
+                <constraint firstAttribute="bottom" secondItem="1Te-mN-mEr" secondAttribute="bottom" constant="-1" id="eDu-XI-QSM"/>
+                <constraint firstAttribute="bottom" secondItem="63f-SQ-QI9" secondAttribute="bottom" constant="-1" id="h8C-eg-C9k"/>
                 <constraint firstAttribute="bottom" secondItem="mEV-SP-95e" secondAttribute="bottom" constant="-1" id="uhs-ES-ozi"/>
                 <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-1" id="vHB-Xa-fad"/>
                 <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="y4d-mv-4xb"/>

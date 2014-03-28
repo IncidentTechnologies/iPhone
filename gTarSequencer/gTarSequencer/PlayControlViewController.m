@@ -18,6 +18,8 @@
 @synthesize startStopButton;
 @synthesize recordButton;
 @synthesize shareButton;
+@synthesize disablePlay;
+@synthesize disableShare;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -47,6 +49,8 @@
     [self setShareMode:NO];
     
     isPlaying = FALSE;
+    
+    [self hideSessionOverlay];
     
 }
 
@@ -457,6 +461,19 @@
 -(NSMutableArray *)getInstruments
 {
     return [delegate getInstruments];
+}
+
+#pragma mark - Record Session Overlays
+-(void)showSessionOverlay
+{
+    [disablePlay setHidden:NO];
+    [disableShare setHidden:NO];
+}
+
+-(void)hideSessionOverlay
+{
+    [disablePlay setHidden:YES];
+    [disableShare setHidden:YES];
 }
 
 @end

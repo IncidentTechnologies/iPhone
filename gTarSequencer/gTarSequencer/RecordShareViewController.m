@@ -188,6 +188,8 @@
 {
     if([patternData count] > 0){
         [self hideNoSessionOverlay];
+    }else{
+        [self showNoSessionOverlay];
     }
     
     [self setMeasures:[patternData count]];
@@ -443,6 +445,11 @@
 -(void) hideNoSessionOverlay
 {
     [noSessionOverlay setHidden:YES];
+}
+
+-(BOOL) showHideSessionOverlay
+{
+    return [noSessionOverlay isHidden];
 }
 
 #pragma mark - Other Listeners

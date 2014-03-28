@@ -40,6 +40,7 @@
 - (void)reloadInstruments;
 - (void)loadPattern:(NSMutableArray *)patternData;
 - (IBAction)userDidBack:(id)sender;
+- (BOOL)showHideSessionOverlay;
 
 @property (weak, nonatomic) id<RecordShareDelegate> delegate;
 

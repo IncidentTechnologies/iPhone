@@ -41,7 +41,7 @@
 @end
 
 
-@interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate> {
+@interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate,TutorialDelegate> {
     
     SoundMaster * soundMaster;
     
@@ -111,5 +111,10 @@
 
 @property (weak, nonatomic) id<SeqSetDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UITableView *instrumentTable;
+
+@property (retain, nonatomic) TutorialViewController * tutorialViewController;
+
+@property (nonatomic) BOOL isFirstLaunch;
+
 
 @end

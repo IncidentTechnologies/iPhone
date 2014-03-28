@@ -15,6 +15,8 @@
 
 @implementation SeqSetViewController
 
+@synthesize tutorialViewController;
+@synthesize isFirstLaunch;
 @synthesize instrumentTable;
 @synthesize delegate;
 
@@ -62,6 +64,10 @@
     
     [self turnEditingOn];
     
+    [self checkIsFirstLaunch];
+    if(isFirstLaunch){
+        [self launchFTUTutorial];
+    }
 }
 
 #pragma mark Save Context
@@ -209,6 +215,11 @@
 - (void)reloadTableData
 {
     [instrumentTable reloadData];
+    
+    [self checkIsFirstLaunch];
+    if(isFirstLaunch){
+        [self launchFTUTutorial];
+    }
 }
 
 #pragma mark - Selected Instrument Data
@@ -1182,6 +1193,51 @@
     }
     
     //[self setSelectedCellToSelectedInstrument];
+}
+
+#pragma mark - FTU Tutorial
+-(void)checkIsFirstLaunch
+{
+    // Check for first launch
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedSeqSetView"]){
+        isFirstLaunch = FALSE;
+    }else{
+        isFirstLaunch = TRUE;
+    }
+}
+
+
+- (void)launchFTUTutorial
+{
+    
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    NSLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
+    
+    CGRect tutorialFrame = CGRectMake(0,0,x,y-BOTTOMBAR_HEIGHT-1);
+    
+    if(tutorialViewController){
+        [tutorialViewController clear];
+    }
+    
+    tutorialViewController = [[TutorialViewController alloc] initWithFrame:tutorialFrame andTutorial:@"SeqSet"];
+    tutorialViewController.delegate = self;
+    
+    [self.view addSubview:tutorialViewController];
+    
+    [tutorialViewController launch];
+}
+
+- (void)endTutorialIfOpen
+{
+    [tutorialViewController end];
+}
+
+- (void)notifyTutorialEnded
+{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedSeqSetView"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

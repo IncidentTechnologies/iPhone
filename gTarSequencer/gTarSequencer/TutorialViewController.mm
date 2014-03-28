@@ -58,6 +58,8 @@
         tutorialTotalSteps = 1;
     }else if([tutorialName isEqualToString:@"Custom"]){
         tutorialTotalSteps = 1;
+    }else if([tutorialName isEqualToString:@"SeqSet"]){
+        tutorialTotalSteps = 1;
     }else{
         tutorialTotalSteps = 0;
     }
@@ -119,6 +121,8 @@
         [self drawInstrumentTutorialScreen:step];
     }else if([tutorialName isEqualToString:@"Custom"]){
         [self drawCustomTutorialScreen:step];
+    }else if([tutorialName isEqualToString:@"SeqSet"]){
+        [self drawSeqSetTutorialScreen:step];
     }
 }
 
@@ -192,6 +196,17 @@
     
     [tutorialScreen addGestureRecognizer:swipeLeft];
     [tutorialScreen addGestureRecognizer:swipeRight];
+}
+
+-(void)startSingleSwipeGesture
+{
+    
+    swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(end)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [swipeLeft setNumberOfTouchesRequired:1];
+    
+    [tutorialScreen addGestureRecognizer:swipeLeft];
+    
 }
 
 -(void)stopLeftSwipeGesture
@@ -453,24 +468,24 @@
             float toggleLabelWidth = 155;
             
             if(isScreenLarge){
-                toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-93, 25, toggleLabelWidth, defaultLabelHeight);
+                toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-96, 25, toggleLabelWidth, defaultLabelHeight);
                 
                 // Toggle circle
-                CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth-10,-4,circleWidth,circleWidth);
+                CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth-13,-1,circleWidth,circleWidth);
                 [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:reverse];
                 
                 // Volume knob
-                volumeFrame = CGRectMake(toggleCircleFrame.origin.x+11,toggleCircleFrame.origin.y+14,66,66);
+                volumeFrame = CGRectMake(toggleCircleFrame.origin.x+13,toggleCircleFrame.origin.y+11,66,66);
                 
             }else{
-                toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-73, 25, toggleLabelWidth, defaultLabelHeight);
+                toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-76, 25, toggleLabelWidth, defaultLabelHeight);
                 
                 // Toggle circle
-                CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth+10,-4,circleWidth,circleWidth);
+                CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth+7,-1,circleWidth,circleWidth);
                 [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:reverse];
                 
                 // Volume knob
-                volumeFrame = CGRectMake(toggleCircleFrame.origin.x+11,toggleCircleFrame.origin.y+14,66,66);
+                volumeFrame = CGRectMake(toggleCircleFrame.origin.x+13,toggleCircleFrame.origin.y+11,66,66);
             }
             
             [self drawTutorialLabel:toggleLabelFrame withTitle:@"Adjust sound" withColor:blueColor isHeader:NO isReverseDirection:reverse];
@@ -854,6 +869,56 @@
     [self incrementFTUTutorial];
 }
 
+#pragma mark - Seq Set Tutorial
+
+-(void)drawSeqSetTutorialScreen:(int)screenIndex
+{
+    UIColor * blueColor = [UIColor colorWithRed:33/255.0 green:173/255.0 blue:211/255.0 alpha:1.0];
+    
+    float circleWidth = 90;
+    float defaultLabelHeight = 32;
+    float stripeWidth = 20;
+    
+    [tutorialScreen setBackgroundColor:[UIColor clearColor]];
+    
+    [tutorialScreen setFrame:CGRectMake(0,89*3,tutorialScreen.frame.size.width,88)];
+    
+    CGRect buttonFrame = CGRectMake(0, 0, tutorialScreen.frame.size.width, tutorialScreen.frame.size.height);
+    tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
+    
+    [tutorialScreen addSubview:tutorialNext];
+    [tutorialNext addTarget:self action:@selector(end) forControlEvents:UIControlEventTouchUpInside];
+    [self startSingleSwipeGesture];
+    
+    if(screenIndex == 1){
+        
+        //
+        // DOUBLE TAP VOLUME
+        //
+        
+        CGRect toggleLabelFrame;
+        float toggleLabelWidth = 230;
+        
+        if(isScreenLarge){
+            toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-96, 25, toggleLabelWidth, defaultLabelHeight);
+            
+            // Toggle circle
+            CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth-12,-1,circleWidth,circleWidth);
+            [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:NO];
+            
+        }else{
+            toggleLabelFrame = CGRectMake(tutorialScreen.frame.size.width-toggleLabelWidth-78, 25, toggleLabelWidth, defaultLabelHeight);
+            
+            // Toggle circle
+            CGRect toggleCircleFrame = CGRectMake(tutorialScreen.frame.size.width-circleWidth+7,-1,circleWidth,circleWidth);
+            [self drawTutorialCircle:toggleCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:NO];
+        }
+        
+        [self drawTutorialLabel:toggleLabelFrame withTitle:@"Double tap to turn on" withColor:blueColor isHeader:NO isReverseDirection:NO];
+        
+    }
+}
+
 #pragma mark - Instrument Tutorial
 
 -(void)drawInstrumentTutorialScreen:(int)screenIndex
@@ -873,6 +938,7 @@
     
     [tutorialScreen addSubview:tutorialNext];
     [tutorialNext addTarget:self action:@selector(end) forControlEvents:UIControlEventTouchUpInside];
+    [self startSingleSwipeGesture];
     
     if(screenIndex == 1){
         
@@ -966,6 +1032,7 @@
     
     [tutorialScreen addSubview:tutorialNext];
     [tutorialNext addTarget:self action:@selector(end) forControlEvents:UIControlEventTouchUpInside];
+    [self startSingleSwipeGesture];
     
     if(screenIndex == 1){
         

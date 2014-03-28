@@ -74,11 +74,17 @@
 
 - (void)setShareMode:(BOOL)share;
 
+- (void)showSessionOverlay;
+- (void)hideSessionOverlay;
+
 @property (weak, nonatomic) id<PlayControlDelegate> delegate;
 @property (weak, nonatomic) IBOutlet RadialButton * tempoSlider;
 @property (weak, nonatomic) IBOutlet UIButton * volumeButton;
 @property (weak, nonatomic) IBOutlet UIButton * startStopButton;
 @property (weak, nonatomic) IBOutlet UIButton * recordButton;
 @property (weak, nonatomic) IBOutlet UIButton * shareButton;
+
+@property (weak, nonatomic) IBOutlet UIView * disableShare;
+@property (weak, nonatomic) IBOutlet UIView * disablePlay;
 
 @end

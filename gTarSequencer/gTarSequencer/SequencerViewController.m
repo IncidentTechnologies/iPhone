@@ -276,6 +276,7 @@
     
     // Do any view unloading
     [optionsViewController unloadView];
+    [playControlViewController hideSessionOverlay];
     
     // Switch to new main subview
     if([nav isEqualToString:@"Options"]){
@@ -305,6 +306,12 @@
         
         if(patternData != nil){
             [recordShareController loadPattern:patternData];
+        }
+        
+        if([recordShareController showHideSessionOverlay]){
+            [playControlViewController hideSessionOverlay];
+        }else{
+            [playControlViewController showSessionOverlay];
         }
         
     }else if([nav isEqualToString:@"Info"]){
@@ -1329,6 +1336,7 @@
     // Reset other BOOLs
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedInstrumentView"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedCustom"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedSeqSetView"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
