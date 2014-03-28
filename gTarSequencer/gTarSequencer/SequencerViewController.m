@@ -718,16 +718,33 @@
                         patternRepeat = YES;
                     }
                     
+                    BOOL updateMeasure = FALSE;
+                    
+                    int startPattern = -1;
+                    double deltaI = -1;
+                    int delta = -1;
+                    
                     if(currentFret == 0){
 
-                        [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:patternIndex andDeltaI:0 andDelta:-1 andPatternRepeat:patternRepeat];
+                        startPattern = patternIndex;
+                        deltaI = 0;
+                        updateMeasure = TRUE;
+                        
+                        //[self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:patternIndex andDeltaI:0 andDelta:-1 andPatternRepeat:patternRepeat addFret:nil];
+                        
                         
                         startPatterns[i] = patternIndex;
                         
                     }else{
+                        
                         // if the instrument is toggled off
                         if(startPatterns[i] != patternIndex){
-                            [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:(currentFret/16.0) andDelta:patternIndex andPatternRepeat:patternRepeat];
+                            
+                            deltaI = currentFret/16.0;
+                            delta = patternIndex;
+                            updateMeasure = TRUE;
+                            
+                            //[self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:(currentFret/16.0) andDelta:patternIndex andPatternRepeat:patternRepeat addFret:nil];
                             
                             startPatterns[i] = patternIndex;
                         }
@@ -735,13 +752,39 @@
                         // last fret, about to change patterns
                         if(currentFret == 15 && [self getQueuedPatternIndexForInstrument:instToPlay] > -1){
                             
-                            [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:NO];
+                            patternRepeat = NO;
+                            updateMeasure = TRUE;
+                            //[self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:NO addFret:nil];
                             
                         // pattern repeat may change if measures are added/subtracted
                         }else if(currentFret == 15 && patternRepeat != [[tempMeasures[i] objectForKey:@"patternrepeat"] boolValue]){
                             
-                            [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:patternRepeat];
+                            updateMeasure = TRUE;
+                            
+                            //[[self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:patternRepeat addFret:nil];
+                         }
+                    }
+                    
+                    // Add notes at fret
+                    NSString * strings = @"";
+                    for(int s = 0; s < STRINGS_ON_GTAR; s++){
+                        BOOL isStringOn = [instToPlay.selectedPattern.measures[realMeasure] isNoteOnAtString:s andFret:currentFret];
+                        
+                        strings = [strings stringByAppendingString:((isStringOn) ? @"1" : @"0")];
+                        
+                        if(isStringOn){
+                            updateMeasure = TRUE;
                         }
+                     }
+                    
+                    if(updateMeasure){
+                        NSArray * fretObjArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentFret],strings,[NSNumber numberWithBool:instToPlay.isMuted],[NSNumber numberWithDouble:instToPlay.amplitude], nil];
+                        
+                        NSArray * fretKeyArray = [NSArray arrayWithObjects:@"fretindex",@"strings",@"ismuted",@"amplitude", nil];
+                        
+                        NSDictionary * fretDict = [[NSDictionary alloc] initWithObjects:fretObjArray forKeys:fretKeyArray];
+                        
+                        [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:startPattern andDeltaI:deltaI andDelta:delta andPatternRepeat:patternRepeat addFret:fretDict];
                     }
                 }
             }
@@ -832,12 +875,29 @@
     tempMeasures = [[NSMutableArray alloc] init];
     
     for(int i = 0; i < MAX_INSTRUMENTS; i++){
-        [tempMeasures addObject:[NSMutableDictionary dictionaryWithObjects: [NSArray arrayWithObjects:[NSNumber numberWithInt:-1],@"",[NSNumber numberWithInt:-1],@"",@"",nil] forKeys: [NSArray arrayWithObjects:@"instrument",@"start",@"deltai",@"delta",@"patternrepeat",nil]]];
+        
+        NSMutableArray * fretArray = [[NSMutableArray alloc] init];
+        
+        NSArray * objArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:-1],
+                              @"",
+                              [NSNumber numberWithInt:-1],
+                              @"",
+                              @"",
+                              fretArray,nil];
+        
+        NSArray * keyArray = [NSArray arrayWithObjects:@"instrument",
+                              @"start",
+                              @"deltai",
+                              @"delta",
+                              @"patternrepeat",
+                              @"frets",nil];
+        
+        [tempMeasures addObject:[NSMutableDictionary dictionaryWithObjects:objArray forKeys:keyArray]];
     }
 
 }
 
-- (void)updateMeasureDictionaryForInstrumentIndex:(int)inst withStartingPattern:(int)startIndex andDeltaI:(double)deltai andDelta:(int)delta andPatternRepeat:(BOOL)patternrepeat
+- (void)updateMeasureDictionaryForInstrumentIndex:(int)inst withStartingPattern:(int)startIndex andDeltaI:(double)deltai andDelta:(int)delta andPatternRepeat:(BOOL)patternrepeat addFret:(NSDictionary *)newfret
 {
     @synchronized(tempMeasures){
         
@@ -846,25 +906,28 @@
         int m = [self chooseMeasureIndexForInstrument:inst];
     
         if(inst > -1){
-            [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithInt:inst] forKey:@"instrument"];
+            [tempMeasures[m] setObject:[NSNumber numberWithInt:inst] forKey:@"instrument"];
         }
         
         if(startIndex > -1){
-            [[tempMeasures objectAtIndex:m] setObject:patternNames[startIndex] forKey:@"start"];
+            [tempMeasures[m] setObject:patternNames[startIndex] forKey:@"start"];
         }
         
         if(deltai > -1){
-            [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithDouble:deltai] forKey:@"deltai"];
+            [tempMeasures[m] setObject:[NSNumber numberWithDouble:deltai] forKey:@"deltai"];
         }
         
-        if (delta > -1) {
+        if(delta > -1) {
             NSString * deltaName = (delta < 0) ? @"" : patternNames[delta];
-            [[tempMeasures objectAtIndex:m] setObject:deltaName forKey:@"delta"];
+            [tempMeasures[m] setObject:deltaName forKey:@"delta"];
         }
         
         [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithBool:patternrepeat] forKey:@"patternrepeat"];
+        
+        if(newfret != nil){
+            [[tempMeasures[m] objectForKey:@"frets"] addObject:newfret];
+        }
     }
-    
 }
 
 - (int)chooseMeasureIndexForInstrument:(int)instIndex
@@ -890,6 +953,7 @@
         [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithInt:-1] forKey:@"deltai"];
         [[tempMeasures objectAtIndex:m] setObject:@"" forKey:@"delta"];
         [[tempMeasures objectAtIndex:m] setObject:@"" forKey:@"patternrepeat"];
+        [[tempMeasures objectAtIndex:m] setObject:[[NSMutableArray alloc] init] forKey:@"frets"];
         
     }
 }

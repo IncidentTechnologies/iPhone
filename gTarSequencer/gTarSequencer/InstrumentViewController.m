@@ -938,6 +938,9 @@
             [playbandView[measureIndex] setAlpha:0.7];
         }
         
+        // Move along with the playband
+        [self changeActiveMeasureToMeasure:measureIndex scrollSlow:YES];
+        
     } else {
         [playbandView[measureIndex] setHidden:YES];
     }
@@ -1309,7 +1312,7 @@
     float x = location.x - activeMeasure*(MEASURE_WIDTH+[self getMeasureMargin]);
     float velocityX = [scroller.panGestureRecognizer velocityInView:scrollView].x;
     
-    if((x < 80 || (activeMeasure == 0 && x < 300)) && velocityX >= 0){
+    if((x < 50 || (activeMeasure == 0 && x < 300)) && velocityX >= 0){
         [delegate openLeftNavigator];
     }
 }
