@@ -20,12 +20,19 @@
     SamplerBankNode * bankToRelease;
     
     double masterGain;
+    
+    NSString * recordingFilepath;
 }
 
 -(SamplerBankNode *)generateBank;
 -(void)releaseBank:(SamplerBankNode *)m_samplerBank;
 -(void)releaseBankAndDisconnect:(SamplerBankNode *)m_samplerBank;
+
+-(FileoutNode *)generateFileoutNode:(NSString *)filename;
+
 -(void)setChannelGain:(double)gain;
 -(void)setGain:(double)gain forSamplerBank:(SamplerBankNode *)m_samplerBank;
+
+//-(NSString *)showRecordingFilepath;
 
 @end

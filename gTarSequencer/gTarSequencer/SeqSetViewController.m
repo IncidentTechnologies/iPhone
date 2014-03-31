@@ -983,6 +983,11 @@
     [soundMaster stop];
 }
 
+- (SoundMaster *)getSoundMaster
+{
+    return soundMaster;
+}
+
 #pragma mark Re-adding Instruments
 
 - (void)addInstrumentBackIntoOptions:(Instrument *)inst

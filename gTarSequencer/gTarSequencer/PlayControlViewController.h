@@ -20,6 +20,9 @@
 - (void) initPlayLocation;
 - (void) resetPlayLocation;
 
+- (void) playRecordPlayback;
+- (void) pauseRecordPlayback;
+
 - (void) saveContext:(NSString *)filepath;
 - (void) userDidLoadSequenceOptions;
 
@@ -34,6 +37,8 @@
 - (void) openInstrument:(int)instIndex;
 
 - (void) setRecordMode:(BOOL)record andAnimate:(BOOL)animate;
+
+- (void) userDidSelectShare;
 
 @end
 
@@ -50,6 +55,7 @@
     
     // Play loop
     BOOL isPlaying;
+    BOOL isPlaybackPlaying;
     BOOL isRecording;
     float secondsPerBeat;
     
@@ -60,9 +66,12 @@
 
 - (IBAction)userDidLoadOptions:(id)sender; // TODO: move to left nav
 - (IBAction)startStop:(id)sender;
+- (IBAction)startStopRecordPlayback:(id)sender;
 - (IBAction)toggleVolumeOpen:(id)sender;
 - (IBAction)recordSession:(id)sender;
+- (IBAction)userDidSelectShare:(id)sender;
 - (void)stopPlayRecord;
+- (void)pauseRecordPlayback;
 
 - (int)getTempo;
 - (void)resetTempo;
@@ -81,6 +90,7 @@
 @property (weak, nonatomic) IBOutlet RadialButton * tempoSlider;
 @property (weak, nonatomic) IBOutlet UIButton * volumeButton;
 @property (weak, nonatomic) IBOutlet UIButton * startStopButton;
+@property (weak, nonatomic) IBOutlet UIButton * recordPlaybackButton;
 @property (weak, nonatomic) IBOutlet UIButton * recordButton;
 @property (weak, nonatomic) IBOutlet UIButton * shareButton;
 

@@ -108,8 +108,6 @@
 
 - (void)pluckString:(int)str
 {
-    if(TESTMODE) NSLog(@"Playing note on string %i",str);
-    
     m_samplerBank->TriggerSample(str);
 }
 

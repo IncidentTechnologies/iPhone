@@ -86,4 +86,38 @@
     m_samplerBank->SetBankGain(gain);
 }
 
+#pragma mark - File Recording
+-(FileoutNode *)generateFileoutNode:(NSString *)filename
+{
+    // Ensure Sessions directory exists
+    NSError * err = NULL;
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    
+    [fm createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&err];
+    
+    recordingFilepath = [documentsDirectory stringByAppendingPathComponent:filename];
+    
+    NSLog(@"Saving to %@",recordingFilepath);
+    
+    FileoutNode *fileNode = new FileoutNode((char*)[recordingFilepath UTF8String], true);
+    
+    fileNode->ConnectInput(0, m_samplerNode, 0);
+    
+    return fileNode;
+    
+}
+
+/* this has an error when done here instead of locally
+-(void)releaseFileoutNode:(FileoutNode *)fileNode
+{
+    if(fileNode != NULL) {
+        delete fileNode;
+        fileNode = NULL;
+    }
+}
+*/
+
 @end

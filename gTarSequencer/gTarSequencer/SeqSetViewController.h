@@ -72,6 +72,7 @@
 
 - (void)startSoundMaster;
 - (void)stopSoundMaster;
+- (SoundMaster *)getSoundMaster;
 
 - (void)turnEditingOn;
 - (void)turnEditingOff;

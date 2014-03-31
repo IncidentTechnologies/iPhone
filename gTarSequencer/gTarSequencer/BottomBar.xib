@@ -9,6 +9,7 @@
                 <outlet property="disablePlay" destination="FHF-5D-Hui" id="jpj-Sz-9YN"/>
                 <outlet property="disableShare" destination="Sml-pd-Pgj" id="XFp-eG-C3A"/>
                 <outlet property="recordButton" destination="ulp-6t-xKN" id="e3i-Yb-evq"/>
+                <outlet property="recordPlaybackButton" destination="nRY-If-pKk" id="gHu-HQ-68G"/>
                 <outlet property="shareButton" destination="uz8-gM-6ag" id="65b-gQ-aTt"/>
                 <outlet property="startStopButton" destination="owG-hq-uwM" id="zn8-Bn-5pm"/>
                 <outlet property="tempoSlider" destination="eiz-Ma-1pi" id="D7C-1J-qw9"/>
@@ -67,6 +68,23 @@
                         <action selector="startStop:" destination="-1" eventType="touchUpInside" id="pz4-Vn-gvs"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRY-If-pKk">
+                    <rect key="frame" x="0.0" y="266" width="65" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.41176470590000003" green="0.84313725490000002" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="cHC-fh-vul"/>
+                        <constraint firstAttribute="width" constant="65" id="xdj-3X-8gC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                    <state key="normal">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="startStopRecordPlayback:" destination="-1" eventType="touchUpInside" id="gD8-c1-Rxv"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulp-6t-xKN">
                     <rect key="frame" x="65" y="266" width="65" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -94,11 +112,14 @@
                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <inset key="titleEdgeInsets" minX="-12" minY="2" maxX="116" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="122" minY="11" maxX="65" maxY="11"/>
+                    <inset key="imageEdgeInsets" minX="122" minY="10" maxX="65" maxY="10"/>
                     <state key="normal" title="SHARE" image="Share_Icon.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="8hD-dc-Dg5"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sml-pd-Pgj">
                     <rect key="frame" x="130" y="266" width="350" height="55"/>
@@ -119,6 +140,7 @@
                 <constraint firstAttribute="bottom" secondItem="mEV-SP-95e" secondAttribute="bottom" constant="-1" id="uhs-ES-ozi"/>
                 <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-1" id="vHB-Xa-fad"/>
                 <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="y4d-mv-4xb"/>
+                <constraint firstAttribute="bottom" secondItem="nRY-If-pKk" secondAttribute="bottom" constant="-1" id="yEb-Q5-c8s"/>
                 <constraint firstAttribute="bottom" secondItem="FHF-5D-Hui" secondAttribute="bottom" constant="-1" id="z08-bm-Hea"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

@@ -305,7 +305,8 @@
         [self stopAll];
         
         if(patternData != nil){
-            [recordShareController loadPattern:patternData];
+            SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+            [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster];
         }
         
         if([recordShareController showHideSessionOverlay]){
@@ -839,7 +840,8 @@
                 [self stopAll];
                 
                 if(patternData != nil){
-                    [recordShareController loadPattern:patternData];
+                    SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+                    [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster];
                 }
                 
                 [UIView setAnimationsEnabled:YES];
@@ -855,10 +857,23 @@
             }else{
                 [self selectNavChoice:@"Share" withShift:NO];
             }
-            
-            
-        }
+        }        
     }
+}
+
+- (void)playRecordPlayback
+{
+    [recordShareController playRecordPlayback];
+}
+
+- (void)pauseRecordPlayback
+{
+    [recordShareController pauseRecordPlayback];
+}
+
+-(void)recordPlaybackDidEnd
+{
+    [playControlViewController pauseRecordPlayback];
 }
 
 -(void)addFinalRecordedPartialMeasure
@@ -1248,6 +1263,11 @@
 - (void)startAll
 {
     [playControlViewController startStop:self];
+}
+
+- (void)userDidSelectShare
+{
+    [recordShareController openShareScreen];
 }
 
 #pragma mark - Seq Set Delegate

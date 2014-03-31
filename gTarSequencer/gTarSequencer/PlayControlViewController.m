@@ -17,6 +17,7 @@
 @synthesize volumeButton;
 @synthesize startStopButton;
 @synthesize recordButton;
+@synthesize recordPlaybackButton;
 @synthesize shareButton;
 @synthesize disablePlay;
 @synthesize disableShare;
@@ -42,13 +43,15 @@
     [self initVolumeDisplay];
     
     // Play/Pause button
-    [self drawPlayButton];
+    [self drawPlayButton:startStopButton];
+    [self drawPlayButton:recordPlaybackButton];
     [self drawRecordButton];
     
     // Hide share button
     [self setShareMode:NO];
     
     isPlaying = FALSE;
+    isPlaybackPlaying = FALSE;
     
     [self hideSessionOverlay];
     
@@ -71,8 +74,10 @@
 {
     if(share){
         [shareButton setHidden:NO];
+        [recordPlaybackButton setHidden:NO];
     }else{
         [shareButton setHidden:YES];
+        [recordPlaybackButton setHidden:YES];
     }
 }
 
@@ -251,7 +256,7 @@
 - (void)stopAll
 {
     [self clearButton:startStopButton];
-    [self drawPlayButton];
+    [self drawPlayButton:startStopButton];
     [self endPlaySession];
 }
 
@@ -262,12 +267,16 @@
     if(isRecording){
         [self stopRecordingAndAnimate:NO];
     }
+    
+    if(isPlaybackPlaying){
+        [self startStopRecordPlayback:self];
+    }
 }
 
 - (void)playAll
 {
     [self clearButton:startStopButton];
-    [self drawPauseButton];
+    [self drawPauseButton:startStopButton];
     [self beginPlaySession];
 }
 
@@ -301,6 +310,35 @@
     for (UIView *v in viewsToRemove) {
         [v removeFromSuperview];
     }
+}
+
+#pragma mark - Record Playback
+-(IBAction)startStopRecordPlayback:(id)sender
+{
+    if(isPlaybackPlaying){
+        
+        [self clearButton:recordPlaybackButton];
+        [self drawPlayButton:recordPlaybackButton];
+        
+        [delegate pauseRecordPlayback];
+        isPlaybackPlaying = NO;
+        
+    }else{
+        
+        [self clearButton:recordPlaybackButton];
+        [self drawPauseButton:recordPlaybackButton];
+        
+        [delegate playRecordPlayback];
+        isPlaybackPlaying = YES;
+    }
+}
+
+-(void)pauseRecordPlayback
+{
+    isPlaybackPlaying = NO;
+    
+    [self clearButton:recordPlaybackButton];
+    [self drawPlayButton:recordPlaybackButton];
 }
 
 #pragma mark - Record Session
@@ -353,20 +391,20 @@
 
 #pragma mark - Drawing
 
-- (void)drawPlayButton
+- (void)drawPlayButton:(UIButton *)button
 {
     
-    [startStopButton setBackgroundColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1]];
+    [button setBackgroundColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1]];
     
-    CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);
+    CGSize size = CGSizeMake(button.frame.size.width, button.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     int playWidth = 20;
-    int playX = startStopButton.frame.size.width/2 - playWidth/2;
+    int playX = button.frame.size.width/2 - playWidth/2;
     int playY = 15;
-    CGFloat playHeight = startStopButton.frame.size.height - 2*playY;
+    CGFloat playHeight = button.frame.size.height - 2*playY;
     UIColor * transparentWhite = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7];
     
     CGContextSetStrokeColorWithColor(context, transparentWhite.CGColor);
@@ -384,25 +422,25 @@
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
     
-    [startStopButton addSubview:image];
+    [button addSubview:image];
     
     UIGraphicsEndImageContext();
 }
 
-- (void)drawPauseButton
+- (void)drawPauseButton:(UIButton *)button
 {
     
-    [startStopButton setBackgroundColor:[UIColor colorWithRed:244/255.0 green:151/255.0 blue:39/255.0 alpha:1]];
+    [button setBackgroundColor:[UIColor colorWithRed:244/255.0 green:151/255.0 blue:39/255.0 alpha:1]];
     
-    CGSize size = CGSizeMake(startStopButton.frame.size.width, startStopButton.frame.size.height);
+    CGSize size = CGSizeMake(button.frame.size.width, startStopButton.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     int pauseWidth = 8;
     
-    CGFloat pauseHeight = startStopButton.frame.size.height - 30;
-    CGRect pauseFrameLeft = CGRectMake(startStopButton.frame.size.width/2 - pauseWidth - 2, 15, pauseWidth, pauseHeight);
+    CGFloat pauseHeight = button.frame.size.height - 30;
+    CGRect pauseFrameLeft = CGRectMake(button.frame.size.width/2 - pauseWidth - 2, 15, pauseWidth, pauseHeight);
     CGRect pauseFrameRight = CGRectMake(pauseFrameLeft.origin.x+pauseWidth+3, 15, pauseWidth, pauseHeight);
     
     CGContextAddRect(context,pauseFrameLeft);
@@ -414,7 +452,7 @@
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
     
-    [startStopButton addSubview:image];
+    [button addSubview:image];
     
     UIGraphicsEndImageContext();
 }
@@ -476,4 +514,8 @@
     [disableShare setHidden:YES];
 }
 
+-(IBAction)userDidSelectShare:(id)sender
+{
+    [delegate userDidSelectShare];
+}
 @end

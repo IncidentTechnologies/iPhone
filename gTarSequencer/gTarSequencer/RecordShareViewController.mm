@@ -7,8 +7,18 @@
 //
 
 #import "RecordShareViewController.h"
+#import "AudioController.h"
+#import "AUNodeNetwork.h"
+#import "AudioNodeCommon.h"
+#import "SoundMaster_.mm"
 
 @interface RecordShareViewController ()
+{
+    
+    FileoutNode *fileNode;
+    SamplerBankNode *m_sampleBankNode;
+    SampleNode *m_sampNode;
+}
 
 @end
 
@@ -21,6 +31,14 @@
 @synthesize trackView;
 @synthesize progressViewIndicator;
 @synthesize noSessionOverlay;
+@synthesize shareEmailButton;
+@synthesize shareFacebookButton;
+@synthesize shareSMSButton;
+@synthesize shareSoundcloudButton;
+@synthesize shareEmailSelector;
+@synthesize shareFacebookSelector;
+@synthesize shareSMSSelector;
+@synthesize shareSoundcloudSelector;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +48,7 @@
         
         tracks = [[NSMutableArray alloc] init];
         tickmarks = [[NSMutableArray alloc] init];
+        isAudioPlaying = NO;
         
     }
     return self;
@@ -184,7 +203,7 @@
     return -1;
 }
 
-- (void)loadPattern:(NSMutableArray *)patternData
+- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster
 {
     if([patternData count] > 0){
         [self hideNoSessionOverlay];
@@ -194,6 +213,7 @@
     
     [self setMeasures:[patternData count]];
     [self drawPatternsOnMeasures:patternData];
+    [self startRecording:patternData withTempo:tempo andSoundMaster:m_soundMaster];
     [self resetProgressView];
     // figure out datastruct for pattern
 }
@@ -450,6 +470,211 @@
 -(BOOL) showHideSessionOverlay
 {
     return [noSessionOverlay isHidden];
+}
+
+#pragma mark - Share Screen
+-(void)initShareScreen
+{
+    // Get dimensions
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    CGRect wholeScreen = CGRectMake(0, 0, x, y);
+    
+    UIView * shareView = [[UIView alloc] initWithFrame:wholeScreen];
+    [shareView setBackgroundColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7]];
+    
+    UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    [window addSubview:shareView];
+    
+    float shareWidth = 364;
+    float shareHeight = 276;
+    NSArray * nibViews = [[NSBundle mainBundle] loadNibNamed:@"ShareView" owner:self options:nil];
+    UIView * shareScreen = nibViews[0];
+    [shareScreen setFrame:CGRectMake(x/2-shareWidth/2,y/2-shareHeight/2,shareWidth,shareHeight)];
+    [self initRoundedCorners:shareScreen];
+    
+    [shareView addSubview:shareScreen];
+    
+    shareEmailButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    shareEmailButton.layer.borderWidth = 1.0f;
+    shareEmailButton.layer.cornerRadius = 5.0;
+    
+    shareSMSButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    shareSMSButton.layer.borderWidth = 1.0f;
+    shareSMSButton.layer.cornerRadius = 5.0;
+    
+    shareSoundcloudButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    shareSoundcloudButton.layer.borderWidth = 1.0f;
+    shareSoundcloudButton.layer.cornerRadius = 5.0;
+    
+    shareFacebookButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    shareFacebookButton.layer.borderWidth = 1.0f;
+    shareFacebookButton.layer.cornerRadius = 5.0;
+    
+    shareEmailSelector.layer.cornerRadius = 4.0;
+    shareSMSSelector.layer.cornerRadius = 4.0;
+    shareSoundcloudSelector.layer.cornerRadius = 4.0;
+    shareFacebookSelector.layer.cornerRadius = 4.0;
+    
+}
+
+-(void)openShareScreen
+{
+    NSLog(@"Open share screen");
+    
+    [self initShareScreen];
+    
+}
+
+#pragma mark - Drawing
+- (void)initRoundedCorners:(UIView *)view
+{
+    UIBezierPath * pathRecord = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:(UIRectCornerAllCorners) cornerRadii:CGSizeMake(5.0,5.0)];
+    
+    [self drawShapedView:view withBezierPath:pathRecord];
+}
+
+-(void)drawShapedView:(UIView *)view withBezierPath:(UIBezierPath *)bezierPath
+{
+    CAShapeLayer * bodyLayer = [CAShapeLayer layer];
+    
+    [bodyLayer setPath:bezierPath.CGPath];
+    view.layer.mask = bodyLayer;
+    view.clipsToBounds = YES;
+    view.layer.masksToBounds = YES;
+}
+
+
+#pragma mark - Recording
+-(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster
+{
+    if(loadedPattern != patternData){
+        
+        NSString * placeholderName = @"RecordedSessionPlaceholder.m4a";
+        double recordinterval = 1/44100;
+        float beatspersecond = 4 * tempo/60.0;
+        secondperbeat = 44100 / beatspersecond;
+        
+        loadedPattern = patternData;
+        
+        r_measure = 0;
+        r_beat = 0;
+        
+        NSLog(@"Start recording %@",loadedPattern);
+        
+        fileNode = [m_soundMaster generateFileoutNode:placeholderName];
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+        sessionFilepath = [documentsDirectory stringByAppendingPathComponent:placeholderName];
+        
+        // set background loop
+        if(recordTimer == nil){
+            
+            // TODO: thread? runloop?
+            recordTimer = [NSTimer scheduledTimerWithTimeInterval:recordinterval target:self selector:@selector(recordToFile) userInfo:nil repeats:YES];
+        }
+    }
+}
+
+-(void)recordToFile
+{
+    NSArray * measure = [loadedPattern objectAtIndex:r_measure];
+    
+    // loop through measures
+    for(NSDictionary * measureinst in measure){
+        
+        int instIndex = [[measureinst objectForKey:@"instrument"] intValue];
+        Instrument * inst = [instruments objectAtIndex:[self getIndexForInstrument:instIndex]];
+        
+        // fret for the beat
+        NSMutableArray * frets = [measureinst objectForKey:@"frets"];
+        for(NSDictionary * f in frets){
+            int fretindex = [[f objectForKey:@"fretindex"] intValue];
+            if(fretindex == r_beat%FRETS_ON_GTAR && ![[f objectForKey:@"ismuted"] boolValue]){
+               
+                // strings for the fret
+                NSString * strings = [f objectForKey:@"strings"];
+                for(int s = 0; s < STRINGS_ON_GTAR; s++){
+                    if([strings characterAtIndex:s] == '1'){
+                        [inst.audio pluckString:s];
+                    }
+                }
+
+            }
+        }
+    }
+    
+    // todo: buffer this
+    fileNode->SaveSamples(secondperbeat);
+    
+    r_beat++;
+    if(r_beat%FRETS_ON_GTAR==FRETS_ON_GTAR-1){
+        r_measure++;
+    }
+    
+    if(r_measure == [loadedPattern count]){
+        [self stopRecording];
+    }
+    
+}
+
+-(void)stopRecording
+{
+    NSLog(@"Stop recording");
+    [recordTimer invalidate];
+    recordTimer = nil;
+    
+    // release
+    [self releaseFileoutNode];
+}
+
+-(void)releaseFileoutNode
+{
+    if(fileNode != NULL) {
+        delete fileNode;
+        fileNode = NULL;
+    }
+}
+
+#pragma mark - Record Playback
+-(void)playRecordPlayback
+{
+    if(!isAudioPlaying){
+        
+        NSLog(@"Play record playback");
+        
+        NSURL * url = [NSURL fileURLWithPath:sessionFilepath];
+        
+        NSError * error;
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        audioPlayer.numberOfLoops = 0;
+        audioPlayer.delegate = self;
+        
+        isAudioPlaying = YES;
+    }
+
+    [audioPlayer play];
+
+}
+
+-(void)pauseRecordPlayback
+{
+    [audioPlayer pause];
+}
+
+-(void)stopRecordPlayback
+{
+    isAudioPlaying = NO;
+    [audioPlayer stop];
+    [delegate recordPlaybackDidEnd];
+}
+
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    NSLog(@"Audio player did finish");
+    [self stopRecordPlayback];
 }
 
 #pragma mark - Other Listeners

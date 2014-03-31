@@ -8,6 +8,7 @@
 
 #import "AppData.h"
 #import "Instrument.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define MAX_INSTRUMENTS 5
 #define MIN_MEASURES 8
@@ -19,13 +20,15 @@
 @protocol RecordShareDelegate <NSObject>
 
 - (void) viewSeqSetWithAnimation:(BOOL)animate;
+- (void) recordPlaybackDidEnd;
 
 - (NSMutableArray *)getInstruments;
 
 @end
 
-@interface RecordShareViewController : UIViewController <UIScrollViewDelegate>
+@interface RecordShareViewController : UIViewController <UIScrollViewDelegate,AVAudioPlayerDelegate>
 {
+    NSMutableArray * loadedPattern;
     NSMutableArray * instruments;
     NSMutableArray * tracks;
     NSMutableArray * tickmarks;
@@ -35,12 +38,30 @@
     NSString * prevPattern[MAX_INSTRUMENTS];
     NSString * prevInterruptPattern[MAX_INSTRUMENTS];
     double prevTranspose[MAX_INSTRUMENTS];
+    
+    // Recording
+    NSTimer * recordTimer;
+    
+    int r_measure;
+    int r_beat;
+    
+    float secondperbeat;
+    
+    // Playback
+    AVAudioPlayer * audioPlayer;
+    NSString * sessionFilepath;
+    BOOL isAudioPlaying;
 }
 
 - (void)reloadInstruments;
-- (void)loadPattern:(NSMutableArray *)patternData;
+- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster;
 - (IBAction)userDidBack:(id)sender;
 - (BOOL)showHideSessionOverlay;
+- (void)openShareScreen;
+
+- (void)playRecordPlayback;
+- (void)stopRecordPlayback;
+- (void)pauseRecordPlayback;
 
 @property (weak, nonatomic) id<RecordShareDelegate> delegate;
 
@@ -51,4 +72,13 @@
 @property (retain, nonatomic) UIView * progressViewIndicator;
 @property (weak, nonatomic) IBOutlet UIView * noSessionOverlay;
 
+@property (weak, nonatomic) IBOutlet UIButton * shareEmailButton;
+@property (weak, nonatomic) IBOutlet UIButton * shareSMSButton;
+@property (weak, nonatomic) IBOutlet UIButton * shareSoundcloudButton;
+@property (weak, nonatomic) IBOutlet UIButton * shareFacebookButton;
+
+@property (weak, nonatomic) IBOutlet UIButton * shareEmailSelector;
+@property (weak, nonatomic) IBOutlet UIButton * shareSMSSelector;
+@property (weak, nonatomic) IBOutlet UIButton * shareSoundcloudSelector;
+@property (weak, nonatomic) IBOutlet UIButton * shareFacebookSelector;
 @end
