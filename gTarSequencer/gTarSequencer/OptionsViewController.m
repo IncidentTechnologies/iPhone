@@ -276,7 +276,11 @@
     selectMode = @"SaveCurrent";
     
     [self showHideNewFileRow:NO];
-    [loadTable reloadData];
+    //NSMutableArray * tempFileLoadSet = [[NSMutableArray alloc] initWithArray:fileLoadSet copyItems:YES];
+    //fileLoadSet = nil;
+    //[self.loadTable reloadData];
+    //fileLoadSet = tempFileLoadSet;
+    [self.loadTable reloadData];
     [self resetTableOffset:nil];
     
 }
@@ -291,7 +295,11 @@
     selectMode = @"Load";
     
     [self showHideNewFileRow:YES];
-    [loadTable reloadData];
+    //NSMutableArray * tempFileLoadSet = [[NSMutableArray alloc] initWithArray:fileLoadSet copyItems:YES];
+    //fileLoadSet = nil;
+    //[self.loadTable reloadData];
+    //fileLoadSet = tempFileLoadSet;
+    [self.loadTable reloadData];
     [self resetTableOffset:nil];
 
 }
@@ -386,10 +394,23 @@
         cell.fileText.text = DEFAULT_FILE_TEXT;
         cell.fileDate.text = @"0s";
         cell.isRenamable = YES;
-        
     }
     
-    cell.rowid = indexPath.row;
+    // iOS 7.1 seems to ignore heights
+    if(hideNewFileRow && indexPath.row == 0){
+        [cell setHidden:YES];
+    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && ![fileLoadSet[indexPath.row-1] isEqualToString:activeSequencer]){
+        [cell setHidden:YES];
+    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileLoadSet[indexPath.row-1] isEqualToString:DEFAULT_SET_NAME]){
+        [cell setHidden:YES];
+    }else{
+        [cell setHidden:NO];
+    }
+    
+    
+    cell.rowid = (int)indexPath.row;
+    
+    NSLog(@"Cell row id is %i",cell.rowid);
     
     return cell;
 }

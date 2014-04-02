@@ -332,6 +332,7 @@
         [playControlViewController setShareMode:YES];
     }else{
         [playControlViewController setShareMode:NO];
+        [recordShareController stopRecordPlayback];
     }
     
     [activeMainView setAlpha:1.0];
@@ -828,6 +829,9 @@
     isRecording = record;
     
     if(isRecording){
+        
+        [recordShareController interruptRecording];
+        
         if(activeMainView != seqSetViewController.view && activeMainView != instrumentViewController.view){
             [self selectNavChoice:@"Set" withShift:NO];
         }
@@ -1108,6 +1112,16 @@
 {
     [seqSetViewController turnContentDrawingOn];
     [seqSetViewController updateAllVisibleCells];
+}
+
+- (void)forceHideSessionOverlay
+{
+    [playControlViewController hideSessionOverlay];
+}
+
+- (void)forceShowSessionOverlay
+{
+    [playControlViewController showSessionOverlay];
 }
 
 - (void)stopAllPlaying
@@ -1406,6 +1420,68 @@
     // change connected button
     [leftNavigator changeConnectedButton:isConnected];
     
+}
+
+#pragma mark - External file sharing
+
+- (void)userDidLaunchEmailWithAttachment:(NSString *)filename
+{
+    MFMailComposeViewController * email = [[MFMailComposeViewController alloc] init];
+    email.mailComposeDelegate = self;
+    
+    // Subject
+    [email setSubject:@"Sequence Session"];
+    
+    // Body
+    NSString * body = @"Check out the session I recorded with Sequence by Incident.";
+    [email setMessageBody:body isHTML:NO];
+    
+    // Attachment
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    NSString * filepath = [documentsDirectory stringByAppendingPathComponent:filename];
+    NSData * fileData = [NSData dataWithContentsOfFile:filepath];
+    
+    [email addAttachmentData:fileData mimeType:@"audio/m4a" fileName:filename];
+    
+    [self.navigationController presentViewController:email animated:YES completion:nil];
+    
+}
+
+- (void)userDidLaunchSMSWithAttachment:(NSString *)filename
+{
+    NSLog(@"Launching SMS");
+    
+    MFMessageComposeViewController * message = [[MFMessageComposeViewController alloc] init];
+    message.messageComposeDelegate = self;
+    
+    // Body
+    NSString * body = @"Check out the session I recorded with Sequence by Incident.";
+    [message setBody:body];
+    
+    // Attachment
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    NSString * filepath = [documentsDirectory stringByAppendingPathComponent:filename];
+    NSData * fileData = [NSData dataWithContentsOfFile:filepath];
+    
+    //kUTTypeMPEG4Audio
+    [message addAttachmentData:fileData typeIdentifier:@"kUTTypeMPEG4Audio" filename:filename];
+    
+    if(message != nil){
+        [self.navigationController presentViewController:message animated:YES completion:nil];
+    }
+    
+}
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 

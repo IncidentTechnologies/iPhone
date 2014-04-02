@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayControlViewController">
@@ -121,22 +121,32 @@
                         <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="8hD-dc-Dg5"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sml-pd-Pgj">
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sml-pd-Pgj">
                     <rect key="frame" x="130" y="266" width="350" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="Y6J-8f-SzI"/>
+                        <constraint firstAttribute="width" constant="350" id="bGt-SA-AtW"/>
+                    </constraints>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHF-5D-Hui">
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHF-5D-Hui">
                     <rect key="frame" x="0.0" y="266" width="65" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="5K5-vl-hIT"/>
+                        <constraint firstAttribute="width" constant="65" id="P6i-zP-G0d"/>
+                    </constraints>
                 </view>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="3Po-ZS-uye"/>
                 <constraint firstAttribute="bottom" secondItem="ulp-6t-xKN" secondAttribute="bottom" constant="-1" id="RSO-io-tOv"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Sml-pd-Pgj" secondAttribute="bottom" constant="-1" id="ZO4-zC-oOF"/>
                 <constraint firstAttribute="bottom" secondItem="uz8-gM-6ag" secondAttribute="bottom" constant="-1" id="ehX-KQ-hUM"/>
                 <constraint firstAttribute="bottom" secondItem="Sml-pd-Pgj" secondAttribute="bottom" constant="-1" id="iun-PA-Qq0"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="FHF-5D-Hui" secondAttribute="bottom" constant="-1" id="sN9-zt-Uc9"/>
                 <constraint firstAttribute="bottom" secondItem="mEV-SP-95e" secondAttribute="bottom" constant="-1" id="uhs-ES-ozi"/>
                 <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-1" id="vHB-Xa-fad"/>
                 <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="y4d-mv-4xb"/>

@@ -31,14 +31,18 @@
 @synthesize trackView;
 @synthesize progressViewIndicator;
 @synthesize noSessionOverlay;
+@synthesize noSessionLabel;
+@synthesize processingLabel;
 @synthesize shareEmailButton;
-@synthesize shareFacebookButton;
 @synthesize shareSMSButton;
 @synthesize shareSoundcloudButton;
 @synthesize shareEmailSelector;
-@synthesize shareFacebookSelector;
 @synthesize shareSMSSelector;
 @synthesize shareSoundcloudSelector;
+@synthesize shareView;
+@synthesize shareScreen;
+@synthesize cancelButton;
+@synthesize songNameField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +53,7 @@
         tracks = [[NSMutableArray alloc] init];
         tickmarks = [[NSMutableArray alloc] init];
         isAudioPlaying = NO;
+        isWritingFile = NO;
         
     }
     return self;
@@ -63,6 +68,8 @@
     [self reloadInstruments];
     [self setMeasures:MIN_MEASURES];
     [self showNoSessionOverlay];
+    
+    [self initShareScreen];
 }
 
 - (void)clearAllSubviews
@@ -213,9 +220,15 @@
     
     [self setMeasures:[patternData count]];
     [self drawPatternsOnMeasures:patternData];
-    [self startRecording:patternData withTempo:tempo andSoundMaster:m_soundMaster];
+    
+    if(patternData != nil && [patternData count] > 0){
+        [self startRecording:patternData withTempo:tempo andSoundMaster:m_soundMaster];
+    }
+    
     [self resetProgressView];
-    // figure out datastruct for pattern
+    
+    // ensure record playback gets refreshed
+    [self stopRecordPlayback];
 }
 
 - (void)setMeasures:(int)newNumMeasures
@@ -460,16 +473,27 @@
 -(void) showNoSessionOverlay
 {
     [noSessionOverlay setHidden:NO];
+    [noSessionLabel setHidden:NO];
+    [processingLabel setHidden:YES];
 }
 
 -(void) hideNoSessionOverlay
 {
-    [noSessionOverlay setHidden:YES];
+    if(!isWritingFile){
+        [noSessionOverlay setHidden:YES];
+    }
 }
 
 -(BOOL) showHideSessionOverlay
 {
     return [noSessionOverlay isHidden];
+}
+
+-(void) showProcessingOverlay
+{
+    [noSessionOverlay setHidden:NO];
+    [noSessionLabel setHidden:YES];
+    [processingLabel setHidden:NO];
 }
 
 #pragma mark - Share Screen
@@ -481,7 +505,7 @@
     
     CGRect wholeScreen = CGRectMake(0, 0, x, y);
     
-    UIView * shareView = [[UIView alloc] initWithFrame:wholeScreen];
+    shareView = [[UIView alloc] initWithFrame:wholeScreen];
     [shareView setBackgroundColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7]];
     
     UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
@@ -490,12 +514,15 @@
     float shareWidth = 364;
     float shareHeight = 276;
     NSArray * nibViews = [[NSBundle mainBundle] loadNibNamed:@"ShareView" owner:self options:nil];
-    UIView * shareScreen = nibViews[0];
-    [shareScreen setFrame:CGRectMake(x/2-shareWidth/2,y/2-shareHeight/2,shareWidth,shareHeight)];
+    shareScreen = nibViews[0];
+    [shareScreen setFrame:CGRectMake(x/2-shareWidth/2,y+y/2-shareHeight/2,shareWidth,shareHeight)];
     [self initRoundedCorners:shareScreen];
     
     [shareView addSubview:shareScreen];
     
+    [self drawBackButtonForView:shareView withX:shareScreen.frame.origin.x];
+    
+    // Setup buttons
     shareEmailButton.layer.borderColor = [UIColor whiteColor].CGColor;
     shareEmailButton.layer.borderWidth = 1.0f;
     shareEmailButton.layer.cornerRadius = 5.0;
@@ -508,23 +535,105 @@
     shareSoundcloudButton.layer.borderWidth = 1.0f;
     shareSoundcloudButton.layer.cornerRadius = 5.0;
     
-    shareFacebookButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    shareFacebookButton.layer.borderWidth = 1.0f;
-    shareFacebookButton.layer.cornerRadius = 5.0;
+    shareEmailSelector.layer.cornerRadius = 5.0;
+    shareSMSSelector.layer.cornerRadius = 5.0;
+    shareSoundcloudSelector.layer.cornerRadius = 5.0;
     
-    shareEmailSelector.layer.cornerRadius = 4.0;
-    shareSMSSelector.layer.cornerRadius = 4.0;
-    shareSoundcloudSelector.layer.cornerRadius = 4.0;
-    shareFacebookSelector.layer.cornerRadius = 4.0;
+    selectedShareType = @"Email";
+    
+    // Setup text field listeners
+    songNameField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    [songNameField addTarget:self action:@selector(songNameFieldStartEdit:) forControlEvents:UIControlEventEditingDidBegin];
+    [songNameField addTarget:self action:@selector(songNameFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [songNameField addTarget:self action:@selector(songNameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    songNameField.delegate = self;
+    
+    [songNameField setFont:[UIFont fontWithName:FONT_DEFAULT size:22.0]];
+    
+    [shareView setHidden:YES];
     
 }
 
 -(void)openShareScreen
 {
-    NSLog(@"Open share screen");
+    // Get dimensions
+    float y = [[UIScreen mainScreen] bounds].size.width;
     
-    [self initShareScreen];
+    CGRect offScreenFrame = shareScreen.frame;
+    CGRect onScreenFrame = CGRectMake(shareScreen.frame.origin.x,shareScreen.frame.origin.y-y,shareScreen.frame.size.width,shareScreen.frame.size.height);
+
+    [shareView setHidden:NO];
     
+    [shareView setAlpha:0.0];
+    [shareScreen setFrame:offScreenFrame];
+    [UIView animateWithDuration:0.4f animations:^(void){
+        [shareView setAlpha:1.0];
+        [shareScreen setFrame:onScreenFrame];
+    }];
+    
+}
+
+- (IBAction)userDidSelectShare:(id)sender
+{
+    UIButton * senderButton = (UIButton *)sender;
+    
+    // reset selector backgrounds
+    [shareEmailSelector setBackgroundColor:[UIColor colorWithRed:36/255.0 green:36/255.0 blue:36/255.0 alpha:1.0]];
+    [shareSMSSelector setBackgroundColor:[UIColor colorWithRed:36/255.0 green:36/255.0 blue:36/255.0 alpha:1.0]];
+    [shareSoundcloudSelector setBackgroundColor:[UIColor colorWithRed:36/255.0 green:36/255.0 blue:36/255.0 alpha:1.0]];
+    
+    if(senderButton == shareEmailButton || senderButton == shareEmailSelector){
+        
+        selectedShareType = @"Email";
+        [shareEmailSelector setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        
+    }else if(senderButton == shareSMSButton || senderButton == shareSMSSelector){
+        
+        selectedShareType = @"SMS";
+        [shareSMSSelector setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        
+    }else if(senderButton == shareSoundcloudButton || senderButton == shareSoundcloudSelector){
+        
+        selectedShareType = @"Soundcloud";
+        [shareSoundcloudSelector setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        
+    }
+}
+
+- (void)userDidCloseShare
+{
+    // Wrap up song name editing in progress
+    [self songNameFieldDoneEditing:songNameField];
+    
+    
+    // Get dimensions
+    float y = [[UIScreen mainScreen] bounds].size.width;
+    
+    CGRect onScreenFrame = shareScreen.frame;
+    CGRect offScreenFrame = CGRectMake(shareScreen.frame.origin.x,y+shareScreen.frame.origin.y,shareScreen.frame.size.width,shareScreen.frame.size.height);
+    
+    [shareView setAlpha:1.0];
+    [shareScreen setFrame:onScreenFrame];
+    [UIView animateWithDuration:0.4f animations:^(void){
+        [shareView setAlpha:0.0];
+        [shareScreen setFrame:offScreenFrame];
+    } completion:^(BOOL finished){
+        [shareView setHidden:YES];
+    }];
+    
+}
+
+- (void)userDidShare:(id)sender
+{
+    if([selectedShareType isEqualToString:@"Email"]){
+       
+        [delegate userDidLaunchEmailWithAttachment:@"RecordedSessionPlaceholder.m4a"];
+        
+    }else if([selectedShareType isEqualToString:@"SMS"]){
+        
+        [delegate userDidLaunchSMSWithAttachment:@"RecordedSessionPlaceholder.m4a"];
+        
+    }
 }
 
 #pragma mark - Drawing
@@ -546,10 +655,57 @@
 }
 
 
+- (void)drawBackButtonForView:(UIView *)view withX:(int)x
+{
+    CGFloat cancelWidth = 40;
+    CGFloat cancelHeight = 50;
+    CGFloat insetX = 44;
+    CGFloat insetY = 17;
+    CGRect cancelFrame = CGRectMake(x-insetX, insetY, cancelWidth, cancelHeight);
+    cancelButton = [[UIButton alloc] initWithFrame:cancelFrame];
+    
+    [cancelButton addTarget:self action:@selector(userDidCloseShare) forControlEvents:UIControlEventTouchUpInside];
+    
+    [view addSubview: cancelButton];
+    
+    CGSize size = CGSizeMake(cancelButton.frame.size.width, cancelButton.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int buttonWidth = 20;
+    int buttonX = cancelButton.frame.size.width-buttonWidth/2-5;
+    int buttonY = 9;
+    CGFloat buttonHeight = cancelButton.frame.size.height - 2*buttonY;
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextSetLineWidth(context, 6.0);
+    
+    CGContextMoveToPoint(context, buttonX, buttonY);
+    CGContextAddLineToPoint(context, buttonX-buttonWidth, buttonY+(buttonHeight/2));
+    CGContextAddLineToPoint(context, buttonX, buttonY+buttonHeight);
+    
+    CGContextStrokePath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [cancelButton addSubview:image];
+    
+    UIGraphicsEndImageContext();
+    
+    
+}
+
+
 #pragma mark - Recording
 -(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster
 {
     if(loadedPattern != patternData){
+        
+        isWritingFile = YES;
         
         NSString * placeholderName = @"RecordedSessionPlaceholder.m4a";
         double recordinterval = 1/44100;
@@ -562,6 +718,8 @@
         r_beat = 0;
         
         NSLog(@"Start recording %@",loadedPattern);
+        [self showProcessingOverlay];
+        [delegate forceShowSessionOverlay];
         
         fileNode = [m_soundMaster generateFileoutNode:placeholderName];
         
@@ -622,12 +780,24 @@
 
 -(void)stopRecording
 {
+    isWritingFile = NO;
+    
     NSLog(@"Stop recording");
+    [self hideNoSessionOverlay];
+    [delegate forceHideSessionOverlay];
+    
     [recordTimer invalidate];
     recordTimer = nil;
     
     // release
     [self releaseFileoutNode];
+}
+
+-(void)interruptRecording
+{
+    if(isWritingFile){
+        [self stopRecording];
+    }
 }
 
 -(void)releaseFileoutNode
@@ -675,6 +845,167 @@
 {
     NSLog(@"Audio player did finish");
     [self stopRecordPlayback];
+}
+
+#pragma mark - Song Name Field
+- (void)songNameFieldStartEdit:(id)sender
+{
+    [self initAttributedStringForText:songNameField];
+}
+
+- (void)initAttributedStringForText:(UITextField *)textField
+{
+    
+    // Create attributed
+    UIColor * blueColor = [UIColor colorWithRed:53/255.0 green:194/266.0 blue:241/255.0 alpha:1.0];
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:textField.text];
+    [str addAttribute:NSBackgroundColorAttributeName value:[UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0] range:NSMakeRange(0, textField.text.length)];
+    
+    [textField setTextColor:blueColor];
+    [textField setAttributedText:str];
+}
+
+- (void)clearAttributedStringForText:(UITextField *)textField
+{
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:textField.text];
+    [str addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:NSMakeRange(0, textField.text.length)];
+    
+    [textField setTextColor:[UIColor whiteColor]];
+    [textField setAttributedText:str];
+}
+
+-(void)songNameFieldDidChange:(id)sender
+{
+    int maxLength = 15;
+    
+    if([songNameField.text length] > maxLength){
+        songNameField.text = [songNameField.text substringToIndex:maxLength];
+    }else if([songNameField.text length] == 1){
+        [self initAttributedStringForText:songNameField];
+    }
+    
+    // enforce capitalizing
+    songNameField.text = [songNameField.text capitalizedString];
+    
+    //[self checkIfRecordingNameReady];
+}
+
+-(void)songNameFieldDoneEditing:(id)sender
+{
+    // hide keyboard
+    [songNameField resignFirstResponder];
+    
+    //[self checkIfRecordingNameReady];
+    
+    /*if(!isRecordingNameReady){
+        
+        if([self checkDuplicateSongName:songNameField.text]){
+            [self alertDuplicateSoundName];
+        }
+        
+        [self resetSongNameIfBlank];
+    }*/
+    
+    [self resetSongNameIfBlank];
+    
+    // hide styles
+    [self clearAttributedStringForText:songNameField];
+}
+
+-(void)resetSongNameIfBlank
+{
+    NSString * nameString = songNameField.text;
+    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if([emptyName isEqualToString:@""] || [self checkDuplicateSongName:nameString]){
+        [self setRecordDefaultText];
+        //[self checkIfRecordingNameReady];
+    }
+}
+
+/*
+- (void)checkIfRecordingNameReady
+{
+    NSString * nameString = songNameField.text;
+    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if([emptyName isEqualToString:@""]){
+        isRecordingNameReady = NO;
+    }else{
+        isRecordingNameReady = YES;
+    }
+    
+    if([self checkDuplicateRecordingName:nameString]){
+        isRecordingNameReady = NO;
+    }
+    
+    [self checkIfRecordSaveReady];
+}
+ */
+
+-(BOOL)checkDuplicateSongName:(NSString *)filename
+{
+    /*NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
+    
+    for(int i = 0; i < [tempList count]; i++){
+        if([tempList[i] isEqualToString:filename]){
+            return YES;
+        }
+    }*/
+    
+    return NO;
+}
+
+- (void)setRecordDefaultText
+{
+    /*
+    NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
+    
+    NSLog(@"CustomSampleList is %@",tempList);
+    
+    int customCount = 0;
+    
+    // Look through Samples, get the max CustomXXXX name and label +1
+    for(NSString * filename in tempList){
+        
+        if(!([filename rangeOfString:@"Song"].location == NSNotFound)){
+            
+            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Song"] withString:@""];
+            int numFromSuffix = [customSuffix intValue];
+            
+            customCount = MAX(customCount,numFromSuffix);
+        }
+    }
+    
+    customCount++;
+     */
+    
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPaddingCharacter:@"0"];
+    [numberFormatter setPaddingPosition:NSNumberFormatterPadBeforePrefix];
+    [numberFormatter setMinimumIntegerDigits:3];
+    
+    NSNumber * number = [NSNumber numberWithInt:1];
+    
+    NSString * numberString = [numberFormatter stringFromNumber:number];
+    
+    songNameField.text = [@"Song" stringByAppendingString:numberString];
+    
+}
+
+
+#pragma mark - Name Field Shared
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSMutableCharacterSet * allowedCharacters = [NSMutableCharacterSet alphanumericCharacterSet];
+    [allowedCharacters formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    [allowedCharacters formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"_-|"]];
+    
+    if([string rangeOfCharacterFromSet:allowedCharacters.invertedSet].location == NSNotFound){
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Other Listeners

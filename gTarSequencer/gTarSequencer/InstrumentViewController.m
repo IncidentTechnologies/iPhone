@@ -932,6 +932,9 @@
         
         [playbandView[measureIndex] setHidden:NO];
         
+        // ensure notes can be turned on/off through it
+        [playbandView[measureIndex] setUserInteractionEnabled:NO];
+        
         if(isMute){
             [playbandView[measureIndex] setAlpha:0.3];
         }else{
@@ -939,7 +942,7 @@
         }
         
         // Move along with the playband
-        [self changeActiveMeasureToMeasure:measureIndex scrollSlow:YES];
+        //[self changeActiveMeasureToMeasure:measureIndex scrollSlow:YES];
         
     } else {
         [playbandView[measureIndex] setHidden:YES];

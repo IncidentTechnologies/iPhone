@@ -223,24 +223,32 @@
 
 - (void)deleteRecordingFilename:(NSString *)filename
 {
-    // Create a subfolder Samples/{Category} if it doesn't exist yet
-    NSLog(@"Deleting file %@.m4a",filename);
-    
-    NSString * newFilename = filename;
-    newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
-    newFilename = [newFilename stringByAppendingString:@".m4a"];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSError * err = NULL;
-    NSFileManager * fm = [[NSFileManager alloc] init];
-    
-    NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newFilename];
-    
-    BOOL result = [fm removeItemAtPath:newPath error:&err];
-    
-    if(!result)
-        NSLog(@"Error deleting");
+    if(filename != nil && [filename length] > 0){
+        
+        // Create a subfolder Samples/{Category} if it doesn't exist yet
+        NSLog(@"Deleting file %@.m4a",filename);
+        
+        NSString * newFilename = filename;
+        newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
+        newFilename = [newFilename stringByAppendingString:@".m4a"];
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        
+        NSError * err = NULL;
+        NSFileManager * fm = [[NSFileManager alloc] init];
+        
+        NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newFilename];
+        
+        BOOL result = [fm removeItemAtPath:newPath error:&err];
+        
+        if(!result)
+            NSLog(@"Error deleting");
+            
+    }else{
+        
+        NSLog(@"Trying to delete a nil file");
+        
+    }
 
 }
 

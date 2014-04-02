@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecordShareViewController">
             <connections>
                 <outlet property="shareEmailButton" destination="nGk-Vj-O73" id="1VL-C4-6mz"/>
                 <outlet property="shareEmailSelector" destination="tnU-oG-Ttu" id="eaj-Jh-lti"/>
-                <outlet property="shareFacebookButton" destination="wSs-Tj-G8m" id="3dh-67-cBc"/>
-                <outlet property="shareFacebookSelector" destination="mg5-VC-l7n" id="OyA-0J-uVj"/>
                 <outlet property="shareSMSButton" destination="DbZ-mL-NMT" id="IaS-JQ-b2f"/>
                 <outlet property="shareSMSSelector" destination="9mb-VJ-5hl" id="Iyw-OC-i1Q"/>
                 <outlet property="shareSoundcloudButton" destination="Omu-VE-57I" id="ByX-cI-th3"/>
                 <outlet property="shareSoundcloudSelector" destination="7rU-qL-eiA" id="Sdt-iz-oep"/>
+                <outlet property="songNameField" destination="YWl-xD-DCd" id="DFr-HV-xvY"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -56,76 +55,79 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="userDidShare:" destination="-1" eventType="touchUpInside" id="zuU-oS-Koo"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGk-Vj-O73">
-                    <rect key="frame" x="32" y="113" width="60" height="60"/>
+                    <rect key="frame" x="46" y="113" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="imageEdgeInsets" minX="12" minY="10" maxX="12" maxY="10"/>
                     <state key="normal" title="Button" image="Social_Email_Icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="zz5-F8-G00"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbZ-mL-NMT">
-                    <rect key="frame" x="112" y="113" width="60" height="60"/>
+                    <rect key="frame" x="152" y="113" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" title="Button" image="Social_SMS_Icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="YLs-nh-2QC"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omu-VE-57I">
-                    <rect key="frame" x="192" y="113" width="60" height="60"/>
+                    <rect key="frame" x="258" y="113" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                     <state key="normal" title="Button" image="Social_SoundCloud_Icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSs-Tj-G8m">
-                    <rect key="frame" x="272" y="113" width="60" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <inset key="imageEdgeInsets" minX="13" minY="12" maxX="13" maxY="12"/>
-                    <state key="normal" title="Button" image="Social_Facebook_Icon.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+                    <connections>
+                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="1hX-uB-Aex"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rU-qL-eiA">
-                    <rect key="frame" x="218" y="189" width="8" height="8"/>
+                    <rect key="frame" x="283" y="188" width="10" height="10"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.14117647059999999" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="HIx-RC-RSu"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mb-VJ-5hl">
-                    <rect key="frame" x="138" y="189" width="8" height="8"/>
+                    <rect key="frame" x="177" y="188" width="10" height="10"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.14117647058823529" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="0R4-qY-P44"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnU-oG-Ttu">
-                    <rect key="frame" x="58" y="189" width="8" height="8"/>
+                    <rect key="frame" x="71" y="188" width="10" height="10"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.80000000000000004" green="0.91764705882352937" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mg5-VC-l7n">
-                    <rect key="frame" x="298" y="189" width="8" height="8"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.14117647059999999" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+                    <connections>
+                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="kU6-cf-ucX"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -137,7 +139,6 @@
     <resources>
         <image name="Share_Icon.png" width="57" height="64"/>
         <image name="Social_Email_Icon.png" width="120" height="120"/>
-        <image name="Social_Facebook_Icon.png" width="120" height="120"/>
         <image name="Social_SMS_Icon.png" width="120" height="120"/>
         <image name="Social_SoundCloud_Icon.png" width="120" height="120"/>
     </resources>

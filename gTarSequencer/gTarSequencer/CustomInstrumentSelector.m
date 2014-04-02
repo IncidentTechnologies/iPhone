@@ -868,8 +868,10 @@
         int n = x * samplelength / screenWidth;
         double point = midpointY-buffer[n]*scaleY;
     
-        if(point){
+        if(!isnan(point)){
             CGPathAddLineToPoint(path, NULL, ceil(x), point);
+        }else{
+            NSLog(@"Error generating point");
         }
     }
     

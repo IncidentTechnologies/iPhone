@@ -55,7 +55,7 @@
         tutorialTotalSteps = 6;
         conditionalScreen = 5;
     }else if([tutorialName isEqualToString:@"Instrument"]){
-        tutorialTotalSteps = 1;
+        tutorialTotalSteps = 2;
     }else if([tutorialName isEqualToString:@"Custom"]){
         tutorialTotalSteps = 1;
     }else if([tutorialName isEqualToString:@"SeqSet"]){
@@ -118,7 +118,7 @@
     if([tutorialName isEqualToString:@"Intro"]){
         [self drawIntroTutorialScreen:step isReverseDirection:reverse];
     }else if([tutorialName isEqualToString:@"Instrument"]){
-        [self drawInstrumentTutorialScreen:step];
+        [self drawInstrumentTutorialScreen:step isReverseDirection:reverse];
     }else if([tutorialName isEqualToString:@"Custom"]){
         [self drawCustomTutorialScreen:step];
     }else if([tutorialName isEqualToString:@"SeqSet"]){
@@ -206,7 +206,17 @@
     [swipeLeft setNumberOfTouchesRequired:1];
     
     [tutorialScreen addGestureRecognizer:swipeLeft];
+}
+
+-(void)startFinalSwipeGesture
+{
+    [self startSingleSwipeGesture];
     
+    swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(decrementFTUTutorial)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [swipeRight setNumberOfTouchesRequired:1];
+    
+    [tutorialScreen addGestureRecognizer:swipeRight];
 }
 
 -(void)stopLeftSwipeGesture
@@ -921,7 +931,7 @@
 
 #pragma mark - Instrument Tutorial
 
--(void)drawInstrumentTutorialScreen:(int)screenIndex
+-(void)drawInstrumentTutorialScreen:(int)screenIndex isReverseDirection:(BOOL)reverse
 {
     
     UIColor * fadedGray = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.5];
@@ -931,16 +941,15 @@
     float defaultLabelHeight = 32;
     float stripeWidth = 20;
     
+    // Clear out previous screen
+    [self fadeOutTutorialSubviews:NO isReverseDirection:reverse];
+    
     [tutorialScreen setBackgroundColor:fadedGray];
     
-    CGRect buttonFrame = CGRectMake(0, 0, tutorialScreen.frame.size.width, tutorialScreen.frame.size.height);
-    tutorialNext = [[UIButton alloc] initWithFrame:buttonFrame];
-    
-    [tutorialScreen addSubview:tutorialNext];
-    [tutorialNext addTarget:self action:@selector(end) forControlEvents:UIControlEventTouchUpInside];
-    [self startSingleSwipeGesture];
-    
     if(screenIndex == 1){
+        
+        [self startSwipeGestures];
+        [self stopRightSwipeGesture];
         
         //
         // TRACK VIEW
@@ -950,66 +959,119 @@
         CGRect patternAFrame;
         
         if(isScreenLarge){
-            patternAFrame = CGRectMake(117,-21,circleWidth,circleWidth);
-            //patternBFrame = CGRectMake(199,-21,circleWidth,circleWidth);
-            //patternCFrame = CGRectMake(281,-21,circleWidth,circleWidth);
-            //patternDFrame = CGRectMake(363,-21,circleWidth,circleWidth);
+            patternAFrame = CGRectMake(115.5,-21,circleWidth,circleWidth);
         }else{
-            patternAFrame = CGRectMake(73,-21,circleWidth,circleWidth);
-            //patternBFrame = CGRectMake(169,-21,circleWidth,circleWidth);
-            //patternCFrame = CGRectMake(251,-21,circleWidth,circleWidth);
-            //patternDFrame = CGRectMake(333,-21,circleWidth,circleWidth);
+            patternAFrame = CGRectMake(71.5,-21,circleWidth,circleWidth);
         }
         
-        [self drawTutorialCircle:patternAFrame withTitle:@"A" size:40.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:NO];
-        //[self drawTutorialCircle:patternBFrame withTitle:@"B" size:40.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:NO];
-        //[self drawTutorialCircle:patternCFrame withTitle:@"C" size:40.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:NO];
-        //[self drawTutorialCircle:patternDFrame withTitle:@"D" size:40.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:NO];
+        [self drawTutorialCircle:patternAFrame withTitle:@"A" size:40.0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:reverse];
         
         // Program patterns
-        float patternHeaderWidth = 350;
+        float patternHeaderWidth = 265;
         CGRect titleFrame = CGRectMake(patternAFrame.origin.x+35,patternAFrame.origin.y+patternAFrame.size.height+10,patternHeaderWidth,defaultLabelHeight);
         
-        [self drawTutorialLabel:titleFrame withTitle:@"Program up to 4 different patterns" withColor:blueColor isHeader:NO isReverseDirection:NO];
+        [self drawTutorialLabel:titleFrame withTitle:@"Program up to 4 patterns" withColor:blueColor isHeader:NO isReverseDirection:reverse];
         
         // Pattern stripe
         CGRect patternStripeFrame = CGRectMake(titleFrame.origin.x,patternAFrame.origin.y+patternAFrame.size.height-3,stripeWidth,15);
         UIView * patternStripe = [[UIView alloc] initWithFrame:patternStripeFrame];
         [patternStripe setBackgroundColor:blueColor];
-        [self fadeInTutorialSubview:patternStripe isReverseDirection:NO];
+        [self fadeInTutorialSubview:patternStripe isReverseDirection:reverse];
         
         // Note circle
         CGRect noteCircleFrame;
         
         if(isScreenLarge){
-            noteCircleFrame = CGRectMake(75,113,circleWidth,circleWidth);
+            noteCircleFrame = CGRectMake(254,143,circleWidth,circleWidth);
         }else{
-            noteCircleFrame = CGRectMake(30,113,circleWidth,circleWidth);
+            noteCircleFrame = CGRectMake(210,143,circleWidth,circleWidth);
         }
         
-        [self drawTutorialCircle:noteCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:NO];
+        [self drawTutorialCircle:noteCircleFrame withTitle:nil size:0 andImage:nil andEdgeInsets:UIEdgeInsetsZero withColor:blueColor andAction:nil isReverseDirection:reverse];
         
         // Note box
         float noteWidth = 28;
         CGRect noteBoxFrame = CGRectMake(noteCircleFrame.origin.x+(noteCircleFrame.size.width-noteWidth)/2,noteCircleFrame.origin.y+(noteCircleFrame.size.height-noteWidth)/2,noteWidth,noteWidth);
         UIView * noteBox = [[UIView alloc] initWithFrame:noteBoxFrame];
-        [noteBox setBackgroundColor:[UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0]];
+        [noteBox setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
         noteBox.layer.borderColor = [UIColor whiteColor].CGColor;
         noteBox.layer.borderWidth = 0.5f;
-        [self fadeInTutorialSubview:noteBox isReverseDirection:NO];
+        [self fadeInTutorialSubview:noteBox isReverseDirection:reverse];
         
         // Control notes
-        float noteHeaderWidth = 385;
-        CGRect noteTitleFrame = CGRectMake(noteCircleFrame.origin.x+35,noteCircleFrame.origin.y+noteCircleFrame.size.height+10,noteHeaderWidth,defaultLabelHeight);
+        float noteHeaderWidth = 160;
+        CGRect noteTitleFrame = CGRectMake(noteCircleFrame.origin.x+noteCircleFrame.size.width-3,noteCircleFrame.origin.y+noteCircleFrame.size.height/2-defaultLabelHeight/2,noteHeaderWidth,defaultLabelHeight);
         
-        [self drawTutorialLabel:noteTitleFrame withTitle:@"Toggle sounds to play in the measure" withColor:blueColor isHeader:NO isReverseDirection:NO];
+        [self drawTutorialLabel:noteTitleFrame withTitle:@"Toggle sounds" withColor:blueColor isHeader:NO isReverseDirection:reverse];
         
-        // Note stripe
-        CGRect noteStripeFrame = CGRectMake(noteTitleFrame.origin.x,noteCircleFrame.origin.y+noteCircleFrame.size.height-3,stripeWidth,15);
-        UIView * noteStripe = [[UIView alloc] initWithFrame:noteStripeFrame];
-        [noteStripe setBackgroundColor:blueColor];
-        [self fadeInTutorialSubview:noteStripe isReverseDirection:NO];
+        // Swipe arrow
+        float swipeFrameWidth = 140;
+        float swipeFrameHeight = 30;
+        CGRect swipeFrame = CGRectMake(0,tutorialScreen.frame.size.height-35,swipeFrameWidth,swipeFrameHeight);
+        
+        [self drawSwipeDottedLines:swipeFrame swipeText:@"continue" swipeLeft:YES swipeRight:YES withAlpha:0.7 isReverseDirection:reverse];
+        
+    }else if(screenIndex == 2){
+        
+        //
+        // ADJUSTING MEASURES
+        //
+        
+        [self startFinalSwipeGesture];
+        
+        // Measure
+        CGRect measureFrame;
+        CGRect measureAddFrame;
+        CGRect measureSubFrame;
+        float measureBorder = 8;
+        
+        if(isScreenLarge){
+            measureFrame = CGRectMake(142-measureBorder,51-measureBorder,141+2*measureBorder,31+2*measureBorder);
+        }else{
+            measureFrame = CGRectMake(120-measureBorder,51-measureBorder,119+2*measureBorder,31+2*measureBorder);
+        }
+        
+        UIView * measureView = [[UIView alloc] initWithFrame:measureFrame];
+        measureView.layer.borderColor = blueColor.CGColor;
+        measureView.layer.borderWidth = measureBorder;
+        [measureView setBackgroundColor:[UIColor colorWithRed:28/255.0 green:75/255.0 blue:87/255.0 alpha:1.0]];
+        
+        [self fadeInTutorialSubview:measureView isReverseDirection:reverse];
+        
+        // Measure add label
+        float measureStripe = 20;
+        
+        measureAddFrame = CGRectMake(measureFrame.origin.x+measureBorder,measureFrame.origin.y+measureFrame.size.height+measureStripe,298,defaultLabelHeight);
+        
+        measureSubFrame = CGRectMake(measureAddFrame.origin.x,measureAddFrame.origin.y+measureAddFrame.size.height+measureStripe,155,defaultLabelHeight);
+        
+        [self drawTutorialLabel:measureAddFrame withTitle:@"Double tap to add measures" withColor:blueColor isHeader:NO isReverseDirection:reverse];
+        
+        [self drawTutorialLabel:measureSubFrame withTitle:@"Hold to delete" withColor:blueColor isHeader:NO isReverseDirection:reverse];
+        
+        // Measure stripes
+        CGRect addStripeFrame = CGRectMake(measureAddFrame.origin.x,measureAddFrame.origin.y-measureStripe,stripeWidth,measureStripe);
+        CGRect subStripeFrame = CGRectMake(measureAddFrame.origin.x,measureAddFrame.origin.y+measureAddFrame.size.height,stripeWidth,measureStripe);
+        
+        UIView * addStripe = [[UIView alloc] initWithFrame:addStripeFrame];
+        UIView * subStripe = [[UIView alloc] initWithFrame:subStripeFrame];
+        
+        [addStripe setBackgroundColor:blueColor];
+        [subStripe setBackgroundColor:blueColor];
+        
+        [self fadeInTutorialSubview:addStripe isReverseDirection:reverse];
+        [self fadeInTutorialSubview:subStripe isReverseDirection:reverse];
+
+        
+        // Swipe arrow
+        float swipeFrameWidth = 140;
+        float swipeFrameHeight = 30;
+        CGRect swipeFrame = CGRectMake(0,tutorialScreen.frame.size.height-35,swipeFrameWidth,swipeFrameHeight);
+        
+        [self drawSwipeDottedLines:swipeFrame swipeText:@"continue" swipeLeft:YES swipeRight:YES withAlpha:0.7 isReverseDirection:reverse];
+        
     }
+    
 }
 
 #pragma mark - Custom Tutorial
