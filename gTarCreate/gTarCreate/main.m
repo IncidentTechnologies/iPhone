@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
+#import "UIKnob.h"
+#import "UILevelSlider.h"
 
 int main(int argc, char * argv[])
 {
+    [UIKnob class];
+    [UILevelSlider class];
+    
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }

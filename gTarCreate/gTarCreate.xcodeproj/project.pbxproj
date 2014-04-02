@@ -25,6 +25,7 @@
 		2610F14E18AD6B59003F5CEB /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */; };
 		2610F15718AD9226003F5CEB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15618AD9226003F5CEB /* libc++.dylib */; };
 		2610F15918AD923C003F5CEB /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15818AD923C003F5CEB /* libstdc++.dylib */; };
+		2616854918E931C400094BB0 /* seqTest.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 2616854818E931C400094BB0 /* seqTest.xmp */; };
 		2630B82118B6D0F500687D29 /* Acoustic Guitar 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F618B6D0F500687D29 /* Acoustic Guitar 40.mp3 */; };
 		2630B82218B6D0F500687D29 /* Acoustic Guitar 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F718B6D0F500687D29 /* Acoustic Guitar 41.mp3 */; };
 		2630B82318B6D0F500687D29 /* Acoustic Guitar 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F818B6D0F500687D29 /* Acoustic Guitar 42.mp3 */; };
@@ -112,6 +113,7 @@
 		2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		2610F15618AD9226003F5CEB /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		2610F15818AD923C003F5CEB /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		2616854818E931C400094BB0 /* seqTest.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = seqTest.xmp; sourceTree = "<group>"; };
 		2630B7F618B6D0F500687D29 /* Acoustic Guitar 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 40.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 40.mp3"; sourceTree = "<group>"; };
 		2630B7F718B6D0F500687D29 /* Acoustic Guitar 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 41.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 41.mp3"; sourceTree = "<group>"; };
 		2630B7F818B6D0F500687D29 /* Acoustic Guitar 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 42.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 42.mp3"; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				2652382C18C4D9B100E38BA5 /* clap.xmp */,
 				2630B85018B6F7B900687D29 /* Clapping.m4a */,
 				2630B84D18B6D10200687D29 /* Acoustic Guitar */,
+				2616854818E931C400094BB0 /* seqTest.xmp */,
 			);
 			name = Samples;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				2610F09118AAB28E003F5CEB /* Images.xcassets in Resources */,
 				2630B82818B6D0F500687D29 /* Acoustic Guitar 47.mp3 in Resources */,
 				2630B83218B6D0F500687D29 /* Acoustic Guitar 57.mp3 in Resources */,
+				2616854918E931C400094BB0 /* seqTest.xmp in Resources */,
 				2630B82618B6D0F500687D29 /* Acoustic Guitar 45.mp3 in Resources */,
 				2630B84718B6D0F500687D29 /* Acoustic Guitar 78.mp3 in Resources */,
 				2630B82118B6D0F500687D29 /* Acoustic Guitar 40.mp3 in Resources */,

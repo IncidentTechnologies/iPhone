@@ -1,0 +1,38 @@
+<xmp>
+    <song>
+        <header>
+            <id value="0" />
+            <title>Test Song</title>
+            <author>Idan Rules</author>
+            <description>This is a test sequence song</description>
+            <tempo value="140"/>
+        </header>
+        <content>
+            <track name="track1">
+                <instrument name="track1">
+                    <sampler name="track1">
+                        <bank>
+                            <sample value="40" fileref="Acoustic Guitar 40.mp3"/>
+                            <sample value="41" fileref="Acoustic Guitar 41.mp3"/>
+                        </bank>
+                    </sampler>
+                </instrument>
+
+                <clip name="clip1" startbeat="0.0" endbeat="4.0">
+                    <note value="40" duration="0.5" beatstart="0.0"/>
+                    <note value="41" duration="0.5" beatstart="1.0"/>
+                    <note value="40" duration="0.5" beatstart="2.0"/>
+                    <note value="41" duration="0.5" beatstart="3.0"/>
+                </clip>
+
+                <clip name="clip2" startbeat="4.0" endbeat="6.0">
+                    <note value="40" duration="0.5" beatstart="0.0"/>
+                    <note value="41" duration="0.5" beatstart="1.0"/>
+                    <note value="40" duration="0.5" beatstart="2.0"/>
+                    <note value="41" duration="0.5" beatstart="3.0"/>
+                </clip>
+
+            </track>
+        </content>
+    </song>
+</xmp>

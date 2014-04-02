@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DefaultViewController">
             <connections>
+                <outlet property="m_knob" destination="WfJ-NS-ckK" id="CfZ-h8-sPk"/>
+                <outlet property="m_levelSlider" destination="YOF-bi-u8T" id="wdE-jy-Goc"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -48,6 +50,29 @@
                         <action selector="onButtonTriggerClicked:" destination="-1" eventType="touchUpInside" id="2Ha-jQ-f9I"/>
                     </connections>
                 </button>
+                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7vy-Wa-adO">
+                    <rect key="frame" x="325" y="267" width="212" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSliderChanged:" destination="-1" eventType="valueChanged" id="lpn-kF-Gec"/>
+                    </connections>
+                </slider>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-NS-ckK" customClass="UIKnob">
+                    <rect key="frame" x="20" y="200" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="onKnobChanged:" destination="-1" eventType="valueChanged" id="Spa-vQ-NSX"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YOF-bi-u8T" customClass="UILevelSlider">
+                    <rect key="frame" x="207" y="125" width="75" height="175"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="onLevelSliderChanged:" destination="-1" eventType="valueChanged" id="EFf-H8-2YQ"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
