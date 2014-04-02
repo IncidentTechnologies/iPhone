@@ -98,18 +98,18 @@ extern GtarController *g_gtarController;
 {
     [super viewDidLoad];
     
+    [self localizeViews];
+    
     if ( [_userSongArray count] == 0 ) {
         [_songListTable startAnimating];
     }
-    else
-    {
+    else {
         // Display cached items to avoid blank screen
         [self refreshDisplayedUserSongList];
         [_songListTable startAnimating];
     }
     
     [_topBar addShadow];
-    
     [_fullscreenButton setHidden:YES];
     
     _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
@@ -157,29 +157,41 @@ extern GtarController *g_gtarController;
     }
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
+- (void) localizeViews {
+    //[_easyButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
     
+    _easyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Easy", NULL)];
+    _mediumLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Medium", NULL)];
+    _hardLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Hard", NULL)];
+    
+    [_startButton setTitle:NSLocalizedString(@"PRESS TO PLAY", NULL) forState:UIControlStateNormal];
+    
+    [_skillButton setTitle:NSLocalizedString(@"SKILL", NULL) forState:UIControlStateNormal];
+    [_scoreButton setTitle:NSLocalizedString(@"SCORE", NULL) forState:UIControlStateNormal];
+    
+    _artistLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ARTIST", NULL)];
+    _titleLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TITLE", NULL)];
+    
+    _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    _songListLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Song List", NULL)];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if ( [_userSongArray count] == 0 )
-    {
+    if ( [_userSongArray count] == 0 ) {
         CloudRequest *cloudRequest = [g_cloudController requestSongListCallbackObj:nil andCallbackSel:nil];
         [self requestSongListCallback:cloudRequest.m_cloudResponse];
     }
     else
-    {
         [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
-    }
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

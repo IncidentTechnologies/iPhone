@@ -42,6 +42,8 @@ enum PlayViewControllerDifficulty
 
 @interface PlayViewController : MainEventController <GtarControllerObserver, NSSongModelDelegate>
 
+- (void) localizeViews;
+
 @property (retain, nonatomic) IBOutlet EAGLView *glView;
 @property (retain, nonatomic) IBOutlet UIView *menuView;
 @property (retain, nonatomic) IBOutlet UIView *topBar;
@@ -75,6 +77,16 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UISwitch *outputSwitch;
 @property (retain, nonatomic) IBOutlet UISwitch *feedSwitch;
 
+@property (retain, nonatomic) IBOutlet UILabel *scoreTextLabel;
+@property (retain, nonatomic) IBOutlet UILabel *outputLabel;
+@property (retain, nonatomic) IBOutlet UILabel *auxLabel;
+@property (retain, nonatomic) IBOutlet UILabel *speakerLabel;
+@property (retain, nonatomic) IBOutlet UILabel *postToFeedLabel;
+@property (retain, nonatomic) IBOutlet UILabel *offLabel;
+@property (retain, nonatomic) IBOutlet UILabel *onLabel;
+@property (retain, nonatomic) IBOutlet UILabel *easyLabel;
+@property (retain, nonatomic) IBOutlet UILabel *quitLabel;
+@property (retain, nonatomic) IBOutlet UILabel *restartLabel;
 
 @property (nonatomic, assign) enum PlayViewControllerDifficulty difficulty;
 @property (nonatomic, assign) double tempoModifier;

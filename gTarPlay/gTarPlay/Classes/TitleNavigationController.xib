@@ -27,7 +27,9 @@
                 <outlet property="menuPlayButton" destination="827" id="912"/>
                 <outlet property="menuStoreButton" destination="842" id="915"/>
                 <outlet property="notificationLabel" destination="2398" id="2565"/>
+                <outlet property="pleaseConnectLabel" destination="3123" id="OAm-Z4-xO4"/>
                 <outlet property="profileButton" destination="3433" id="3457"/>
+                <outlet property="profileLabel" destination="3443" id="ZdN-2c-ice"/>
                 <outlet property="rightPanel" destination="109" id="136"/>
                 <outlet property="signinPasswordText" destination="351" id="2626"/>
                 <outlet property="signinRightPanel" destination="3096" id="3100"/>

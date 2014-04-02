@@ -75,6 +75,7 @@ typedef enum
 @property (retain, nonatomic) IBOutlet UIButton *shapeButton;
 @property (retain, nonatomic) IBOutlet UIButton *colorButton;
 @property (retain, nonatomic) IBOutlet UIButton *loopButton;
+@property (retain, nonatomic) IBOutlet UIButton *clearButton;
 
 @property (retain, nonatomic) IBOutlet UIImageView *arrowFretsRight;
 @property (retain, nonatomic) IBOutlet UIImageView *arrowStringsTop;
@@ -124,6 +125,8 @@ typedef enum
 {
     [super viewDidLoad];
     
+    [self localizeViews];
+    
     _generalSurface.transform = CGAffineTransformMakeScale(1, -1);
     _stringSurface.transform = CGAffineTransformMakeScale(1, -1);
     
@@ -140,6 +143,15 @@ typedef enum
     
     _modeSingleButton.selected = YES;
     _colorWhite.selected = YES;
+}
+
+- (void)localizeViews {
+    _allLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ALL", NULL)];
+    
+    [_colorButton setTitle:NSLocalizedString(@"COLOR", NULL) forState:UIControlStateNormal];
+    [_shapeButton setTitle:NSLocalizedString(@"SHAPE", NULL) forState:UIControlStateNormal];
+    [_loopButton setTitle:NSLocalizedString(@"LOOP", NULL) forState:UIControlStateNormal];
+    [_clearButton setTitle:NSLocalizedString(@"CLEAR", NULL) forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface TimeFormatter : NSObject
-{
+@interface TimeFormatter : NSObject {
     
 }
 

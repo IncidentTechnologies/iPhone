@@ -20,6 +20,8 @@
 
 @property (retain, nonatomic) UserSongSession *userSongSession;
 
+@property (retain, nonatomic) IBOutlet UILabel *timeLabel;
+
 - (IBAction)likeButtonClicked:(id)sender;
 
 - (void)updateCell;

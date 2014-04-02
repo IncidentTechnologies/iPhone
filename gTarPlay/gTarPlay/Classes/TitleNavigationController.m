@@ -119,8 +119,9 @@ extern Facebook * g_facebook;
     _friendFeedCurrentPage = 1;
     
     g_facebook = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
-    
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    [self localizeView];
     
     // See if there are any cached credentials
     if ( [settings objectForKey:@"FBAccessTokenKey"] && [settings objectForKey:@"FBExpirationDateKey"] )
@@ -186,6 +187,31 @@ extern Facebook * g_facebook;
     
     // Now connect to the device
     [g_gtarController addObserver:self];
+}
+
+- (void)localizeView {
+    // Gate keeper
+    [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
+    [_gatekeeperVideoButton setTitle:NSLocalizedString(@"VIDEO", NULL) forState:UIControlStateNormal];
+    [_gatekeeperWebsiteButton setTitle:NSLocalizedString(@"INCIDENTGTAR.COM", NULL) forState:UIControlStateNormal];
+    
+    [_menuPlayButton setTitle:NSLocalizedString(@"PLAY", NULL) forState:UIControlStateNormal];
+    [_menuFreePlayButton setTitle:NSLocalizedString(@"FREE PLAY", NULL) forState:UIControlStateNormal];
+    [_menuStoreButton setTitle:NSLocalizedString(@"STORE", NULL) forState:UIControlStateNormal];
+    
+    [_loggedoutSigninButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
+    [_loggedoutSignupButton setTitle:NSLocalizedString(@"SIGN UP", NULL) forState:UIControlStateNormal];
+    
+    [_signinUsernameText setPlaceholder:NSLocalizedString(@"Username", NULL)];
+    [_signinPasswordText setPlaceholder:NSLocalizedString(@"Password", NULL)];
+ 
+    [_signupUsernameText setPlaceholder:NSLocalizedString(@"Username", NULL)];
+    [_signupPasswordText setPlaceholder:NSLocalizedString(@"Password", NULL)];
+    [_signupEmailText setPlaceholder:NSLocalizedString(@"Email (optional)", NULL)];
+    
+    _pleaseConnectLabel.text = NSLocalizedString(@"Please Connect Your gTar", NULL);
+
+    _profileLabel.text = NSLocalizedString(@"Profile", NULL);
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -322,48 +348,36 @@ extern Facebook * g_facebook;
 #pragma mark - Notification management
 
 // This changes the top bar notification
-- (void)displayNotification:(NSString *)notification turnRed:(BOOL)red
-{
-    [_notificationLabel setText:notification];
+- (void)displayNotification:(NSString *)notification turnRed:(BOOL)red {
+    [_notificationLabel setText:NSLocalizedString(notification, NULL)];
     [_notificationLabel.superview setHidden:NO];
     
     if ( red )
-    {
         _topBarView.backgroundColor = [UIColor redColor];
-    }
     else
-    {
         _topBarView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
-    }
 }
 
-- (void)hideNotification
-{
+- (void)hideNotification {
     [_notificationLabel.superview setHidden:YES];
-    
     _topBarView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
 }
 
 #pragma mark - Button management
 
-- (void)enableButton:(UIButton *)button
-{
+- (void)enableButton:(UIButton *)button {
     button.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
-    
     [button setEnabled:YES];
 }
 
-- (void)disableButton:(UIButton *)button
-{
+- (void)disableButton:(UIButton *)button {
     button.backgroundColor = [UIColor colorWithRed:2.0/256.0/2.0 green:160.0/256.0/2.0 blue:220.0/256.0/2.0 alpha:1.0];
-    
     [button setEnabled:NO];
 }
 
 #pragma mark - Panel collections
 
-- (void)gatekeeperScreen
-{
+- (void)gatekeeperScreen {
     [self swapLeftPanel:_gatekeeperLeftPanel];
     [self swapRightPanel:_videoRightPanel];
     
@@ -373,8 +387,7 @@ extern Facebook * g_facebook;
     [self hideNotification];
     
     // Open the video so we can grab a still image.
-    if ( _videoPreviewImage.image == nil )
-    {
+    if ( _videoPreviewImage.image == nil ) {
         NSString *moviePath = [[NSBundle mainBundle] pathForResource:@"MeetChrisVideo" ofType:@"mp4"];
         NSURL *movieURL = [NSURL fileURLWithPath:moviePath];
         MPMoviePlayerController *mpc = [[[MPMoviePlayerController alloc] initWithContentURL:movieURL] autorelease];
@@ -389,8 +402,7 @@ extern Facebook * g_facebook;
     }
 }
 
-- (void)loggedoutScreen
-{
+- (void)loggedoutScreen {
     [self swapLeftPanel:_loggedoutLeftPanel];
     [self swapRightPanel:_signinRightPanel];
     
@@ -401,16 +413,12 @@ extern Facebook * g_facebook;
     [[_profileButton superview] setHidden:YES];
 }
 
-- (void)loggedinScreen
-{
+- (void)loggedinScreen {
     if ( g_gtarController.connected == NO )
-    {
         [self swapLeftPanel:_disconnectedGtarLeftPanel];
-    }
     else
-    {
         [self swapLeftPanel:_menuLeftPanel];
-    }
+
     [self swapRightPanel:_feedRightPanel];
     
     [self enableButton:_menuPlayButton];
@@ -426,13 +434,9 @@ extern Facebook * g_facebook;
     UIImage *image = [g_fileController getFileOrReturnNil:loggedInEntry.m_userProfile.m_imgFileId];
     
     if ( image != nil )
-    {
         [_profileButton setImage:image forState:UIControlStateNormal];
-    }
     else
-    {
         [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
-    }
     
     // If we've logged in, regardles of whether the gtar was ever connected, we can act as if it was.
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -440,24 +444,20 @@ extern Facebook * g_facebook;
     BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
     
     // First log in, show the welcome screens
-	if ( guitarConnectedBefore == NO )
-	{
+	if ( guitarConnectedBefore == NO ) {
         [settings setBool:YES forKey:@"GuitarConnectedBefore"];
         [settings synchronize];
     }
 
 }
 
-- (void)profilePicDownloaded:(UIImage *)image
-{
+- (void)profilePicDownloaded:(UIImage *)image {
     [_profileButton setImage:image forState:UIControlStateNormal];
 }
 
 #pragma mark - Panel management
 
-- (void)swapRightPanel:(UIView *)rightPanel
-{
-    
+- (void)swapRightPanel:(UIView *)rightPanel {
     [_currentRightPanel removeFromSuperview];
     
     // Resize the subview as appropriate
@@ -466,12 +466,9 @@ extern Facebook * g_facebook;
     [_rightPanel addSubview:rightPanel];
     
     _currentRightPanel = rightPanel;
-    
 }
 
-- (void)swapLeftPanel:(UIView *)leftPanel
-{
-    
+- (void)swapLeftPanel:(UIView *)leftPanel {
     [_currentLeftPanel removeFromSuperview];
     
     // Resize the subview as appropriate
@@ -480,7 +477,6 @@ extern Facebook * g_facebook;
     [_leftPanel addSubview:leftPanel];
     
     _currentLeftPanel = leftPanel;
-    
 }
 
 #pragma mark - Button handling

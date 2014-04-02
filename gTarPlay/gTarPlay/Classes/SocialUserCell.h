@@ -22,7 +22,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *followButton;
 
 - (void)updateCell;
-
+- (void)localizeViews;
 - (IBAction)followButtonClicked:(id)sender;
 
 @end

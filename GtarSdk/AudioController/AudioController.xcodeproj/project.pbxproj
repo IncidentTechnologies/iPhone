@@ -26,6 +26,9 @@
 		26C3F91B1810F0FE00744A9D /* LocalMax.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F91A1810F0FE00744A9D /* LocalMax.mm */; };
 		26C3F91D1810F14300744A9D /* Compressor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F91C1810F14300744A9D /* Compressor.mm */; };
 		26C3F91F1810F19700744A9D /* Distortion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F91E1810F19700744A9D /* Distortion.mm */; };
+		26EDD16718EBADEF002ACE19 /* libAudioController.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DBF161A4AD3005BF0E5 /* libAudioController.a */; };
+		26EDD16818EBADF1002ACE19 /* Sampler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DD4161A4B37005BF0E5 /* Sampler.h */; };
+		26EDD16918EBADF8002ACE19 /* AudioController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DD2161A4B37005BF0E5 /* AudioController.h */; };
 		26F85ED218146C8C00326CE7 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C3F9221810F81800744A9D /* libstdc++.dylib */; };
 		EC7A0DC3161A4AD3005BF0E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7A0DC2161A4AD3005BF0E5 /* Foundation.framework */; };
 		EC7A0DD6161A4B37005BF0E5 /* AudioController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DD2161A4B37005BF0E5 /* AudioController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -94,6 +97,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		26EDD16618EBADB4002ACE19 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				26EDD16818EBADF1002ACE19 /* Sampler.h in CopyFiles */,
+				26EDD16918EBADF8002ACE19 /* AudioController.h in CopyFiles */,
+				26EDD16718EBADEF002ACE19 /* libAudioController.a in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECC11DCF162CEC0E001A231A /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -391,6 +406,7 @@
 				EC7A0DBB161A4AD3005BF0E5 /* Sources */,
 				EC7A0DBC161A4AD3005BF0E5 /* Frameworks */,
 				EC7A0DBD161A4AD3005BF0E5 /* Headers */,
+				26EDD16618EBADB4002ACE19 /* CopyFiles */,
 			);
 			buildRules = (
 			);

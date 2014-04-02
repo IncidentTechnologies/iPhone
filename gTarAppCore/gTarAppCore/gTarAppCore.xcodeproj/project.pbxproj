@@ -1038,6 +1038,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"$(BUILT_PRODUCTS_DIR)/include/AudioController/",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

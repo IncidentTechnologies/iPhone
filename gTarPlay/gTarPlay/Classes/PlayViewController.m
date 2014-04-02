@@ -130,6 +130,8 @@ extern AudioController * g_audioController;
 {
     [super viewDidLoad];
     
+    [self localizeViews];
+    
     // Hide the widgets we don't need initially
     [_menuDownArrow setHidden:YES];
     [_finishButton setHidden:YES];
@@ -171,6 +173,21 @@ extern AudioController * g_audioController;
 //    }
 //#endif
     
+}
+
+- (void) localizeViews {
+    [_finishButton setTitle:NSLocalizedString(@"SAVE & FINISH", NULL) forState:UIControlStateNormal];
+    
+    _scoreTextLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SCORE", NULL)];
+    _outputLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OUTPUT", NULL)];
+    _auxLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"AUX", NULL)];
+    _speakerLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SPEAKER", NULL)];
+    _postToFeedLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"POST TO FEED", NULL)];
+    _offLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OFF", NULL)];
+    _onLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ON", NULL)];
+    _easyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Easy", NULL)];
+    _quitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Quit", NULL)];
+    _restartLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Restart", NULL)];
 }
 
 - (void)viewDidLayoutSubviews

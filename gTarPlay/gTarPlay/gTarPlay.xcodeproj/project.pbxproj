@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		260AFCC41814757700F7536A /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 260AFCC31814757700F7536A /* libstdc++.dylib */; };
+		260CF0B218EBEFDF0083903A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 260CF0B418EBEFDF0083903A /* Localizable.strings */; };
 		26868D8617D2A46500DC990F /* StoreSongListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8517D2A46500DC990F /* StoreSongListCell.m */; };
 		26868D8817D2A8DF00DC990F /* StoreSongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */; };
 		26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8A17D2F3C500DC990F /* StoreListBuyButtonView.m */; };
@@ -1004,7 +1005,6 @@
 		EC24DFC3161A8A6500016B78 /* preloaded-content.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC995EB114DB3CBF00C86824 /* preloaded-content.plist */; };
 		EC24DFC4161A8A6700016B78 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DE6576714C902770034F437 /* instruments.plist */; };
 		EC24DFC6161A8A6D00016B78 /* tutorial.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC341B1D141702480011F6C2 /* tutorial.plist */; };
-		EC24DFC7161A8A6F00016B78 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC856EA214D74AAE00BB7783 /* Settings.bundle */; };
 		EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		EC26A3A516CB198F006E97E2 /* DefaultRot.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A316CB198E006E97E2 /* DefaultRot.png */; };
 		EC26A3A616CB198F006E97E2 /* DefaultRot.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A316CB198E006E97E2 /* DefaultRot.png */; };
@@ -1511,7 +1511,6 @@
 		ECC12193162D07AD001A231A /* preloaded-content.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC995EB114DB3CBF00C86824 /* preloaded-content.plist */; };
 		ECC12194162D07AD001A231A /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DE6576714C902770034F437 /* instruments.plist */; };
 		ECC12195162D07AD001A231A /* tutorial.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC341B1D141702480011F6C2 /* tutorial.plist */; };
-		ECC12196162D07AD001A231A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC856EA214D74AAE00BB7783 /* Settings.bundle */; };
 		ECC121C2162D07AD001A231A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		ECC121C3162D07AD001A231A /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */; };
 		ECC121C4162D07AD001A231A /* InstrumentTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF68161CF1F400BC5BE2 /* InstrumentTab.png */; };
@@ -1669,6 +1668,9 @@
 		1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = gTarPlayAppDelegate.m; path = Classes/gTarPlayAppDelegate.m; sourceTree = "<group>"; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		260AFCC31814757700F7536A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		260CF0B318EBEFDF0083903A /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		260CF0B718EBEFFB0083903A /* fr */ = {isa = PBXFileReference; lastKnownFileType = file; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		260CF0B818EBF00A0083903A /* ko */ = {isa = PBXFileReference; lastKnownFileType = file; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26868D8417D2A46500DC990F /* StoreSongListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSongListCell.h; sourceTree = "<group>"; };
 		26868D8517D2A46500DC990F /* StoreSongListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSongListCell.m; sourceTree = "<group>"; };
 		26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreSongListCell.xib; sourceTree = "<group>"; };
@@ -2416,7 +2418,6 @@
 		EC7CAE90174DAEAC004E26DE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		EC7D887A1651CE86002E2F77 /* gTarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarNavigationController.h; sourceTree = "<group>"; };
 		EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarNavigationController.m; sourceTree = "<group>"; };
-		EC856EA214D74AAE00BB7783 /* Settings.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = Settings.bundle; sourceTree = "<group>"; };
 		EC87EF8F1328B146007DAEC9 /* blank-note-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blank-note-left.png"; sourceTree = "<group>"; };
 		EC87EF901328B146007DAEC9 /* blank-note-middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blank-note-middle.png"; sourceTree = "<group>"; };
 		EC87EF911328B146007DAEC9 /* blank-note-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blank-note-right.png"; sourceTree = "<group>"; };
@@ -2639,6 +2640,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				260CF0B418EBEFDF0083903A /* Localizable.strings */,
 				9DCC3B6E1790DACD00DDD603 /* gTarIcon_114x114.png */,
 				9DCC3B6A1790D8B700DDD603 /* gTarIcon_57x57.png */,
 				EC6BD1FF13F44E130068E25C /* gTarColors.h */,
@@ -2677,7 +2679,6 @@
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* gTarPlay-Info.plist */,
 				EC341B1D141702480011F6C2 /* tutorial.plist */,
-				EC856EA214D74AAE00BB7783 /* Settings.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4087,6 +4088,11 @@
 				French,
 				German,
 				en,
+				fr,
+				ko,
+				"zh-Hans",
+				ja,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -4423,6 +4429,7 @@
 				EC24DE8D161A89F000016B78 /* Square 48.mp3 in Resources */,
 				EC24DE8E161A89F000016B78 /* Square 49.mp3 in Resources */,
 				EC24DE8F161A89F000016B78 /* Square 50.mp3 in Resources */,
+				260CF0B218EBEFDF0083903A /* Localizable.strings in Resources */,
 				EC24DE90161A89F000016B78 /* Square 51.mp3 in Resources */,
 				EC24DE91161A89F000016B78 /* Square 52.mp3 in Resources */,
 				EC24DE92161A89F000016B78 /* Square 53.mp3 in Resources */,
@@ -4528,7 +4535,6 @@
 				EC24DFC3161A8A6500016B78 /* preloaded-content.plist in Resources */,
 				EC24DFC4161A8A6700016B78 /* instruments.plist in Resources */,
 				EC24DFC6161A8A6D00016B78 /* tutorial.plist in Resources */,
-				EC24DFC7161A8A6F00016B78 /* Settings.bundle in Resources */,
 				EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */,
 				ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */,
 				ECBBBF6C161CF1F400BC5BE2 /* InstrumentTab.png in Resources */,
@@ -5292,7 +5298,6 @@
 				ECC12193162D07AD001A231A /* preloaded-content.plist in Resources */,
 				ECC12194162D07AD001A231A /* instruments.plist in Resources */,
 				ECC12195162D07AD001A231A /* tutorial.plist in Resources */,
-				ECC12196162D07AD001A231A /* Settings.bundle in Resources */,
 				ECC121C2162D07AD001A231A /* MainWindow.xib in Resources */,
 				ECC121C3162D07AD001A231A /* LightsTab.png in Resources */,
 				ECC121C4162D07AD001A231A /* InstrumentTab.png in Resources */,
@@ -5753,6 +5758,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		260CF0B418EBEFDF0083903A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				260CF0B318EBEFDF0083903A /* en */,
+				260CF0B718EBEFFB0083903A /* fr */,
+				260CF0B818EBF00A0083903A /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C01FCF4F08A954540054247B /* Debug */ = {

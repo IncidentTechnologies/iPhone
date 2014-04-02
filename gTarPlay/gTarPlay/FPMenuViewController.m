@@ -34,6 +34,8 @@ extern AudioController * g_audioController;
 {
     [super viewDidLoad];
     
+    [self localizeViews];
+    
     // Customize tone slider
     UIImage * sliderTrackMinImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:16 topCapHeight:0];
     UIImage * sliderTrackMaxImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:17 topCapHeight:0];
@@ -51,6 +53,19 @@ extern AudioController * g_audioController;
     self.slideSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
     self.slideSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.slideSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
+}
+
+- (void) localizeViews {
+    [_exitButton setTitle:NSLocalizedString(@"EXIT", NULL) forState:UIControlStateNormal];
+    
+    _toneLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TONE", NULL)];
+    _outputLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OUTPUT", NULL)];
+    _speakerLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SPEAKER", NULL)];
+    _auxLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"AUX", NULL)];
+    _slidingLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SLIDING", NULL)];
+    _offLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OFF", NULL)];
+    _onLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ON", NULL)];
+    _exitToMainLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"EXIT TO MAIN", NULL)];
 }
 
 - (void)didReceiveMemoryWarning

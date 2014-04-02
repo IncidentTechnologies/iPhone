@@ -28,6 +28,10 @@
 @property (retain, nonatomic) IBOutlet UIButton *cameraButton;
 @property (retain, nonatomic) IBOutlet UIButton *followButton;
 @property (retain, nonatomic) IBOutlet UIButton *followingButton;
+@property (retain, nonatomic) IBOutlet UIButton *logoutButton;
+
+@property (retain, nonatomic) IBOutlet UILabel *profileLabel;
+@property (retain, nonatomic) IBOutlet UILabel *backLabel;
 
 - (IBAction)backButtonClicked:(id)sender;
 - (IBAction)profileButtonClicked:(id)sender;
@@ -37,5 +41,7 @@
 - (IBAction)followingButtonClicked:(id)sender;
 - (IBAction)feedSelectorChanged:(id)sender;
 - (IBAction)fullscreenButtonClicked:(id)sender;
+
+- (void)localizeViews;
 
 @end

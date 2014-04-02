@@ -43,8 +43,7 @@ extern FileController *g_fileController;
     // Configure the view for the selected state
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_userProfile release];
     [_followInvocation release];
     [_profilePic release];
@@ -53,15 +52,18 @@ extern FileController *g_fileController;
     [super dealloc];
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
-    
 }
 
-- (void)updateCell
-{
+- (void) localizeViews {
+    [_followButton setTitle:NSLocalizedString(@"FOLLOW", NULL) forState:UIControlStateNormal];
+}
+
+- (void)updateCell {
     UIImage *pic = [g_fileController getFileOrReturnNil:_userProfile.m_imgFileId];
+    
+    [self localizeViews];
     
     if ( pic )
     {

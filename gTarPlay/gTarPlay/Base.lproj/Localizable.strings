@@ -1,0 +1,82 @@
+/* 
+  Localizable.strings
+  gTarPlay
+
+  Created by Idan Beck on 4/1/14.
+
+*/
+
+"Please connect your gTar" = "Please connect your gTar";
+"Profile" = "Profiless";
+"Friends" = "Friends";
+"Global" = "Global";
+"Played %@" = "Played %@";
+"PLAY" = "PLAY";
+"Free Play" = "Free Play";
+"Store" = "Store";
+"Title" = "Title";
+"Artist" = "Artist";
+"Skill" = "Skill";
+"Score" = "Score";
+"Back" = "Back";
+"Song List" = "Song List";
+"Search" = "Search";
+"Easy" = "Easy";
+"Medium" = "Medium";
+"hard" = "hard";
+"press to play" = "press to play";
+"Electric" = "Electric";
+"Acoustic Guitar" = "Acoustic Guitar";
+"Rock Guitar" = "Rock Guitar";
+"Upright Bass" = "Upright Bass";
+"Piano" = "Piano";
+"Rhodes" = "Rhodes";
+"Muted Clav" = "Muted Clav";
+"Bowed Strings" = "Bowed Strings";
+"Marimba" = "Marimba";
+"Carl's Synth" = "Carl's Synth";
+"Droplet" = "Droplet";
+"Square" = "Square";
+"Score" = "Score";
+"easy" = "easy";
+"quit" = "quit";
+"restart" = "restart";
+"post to feed" = "post to feed";
+"off" = "off";
+"on" = "on";
+"save & finish" = "save & finish";
+"output" = "output";
+"aux" = "aux";
+"speaker" = "speaker";
+"shape" = "shape";
+"color" = "color";
+"loop" = "loop";
+"clear" = "clear";
+"all" = "all";
+"single" = "single";
+"2 X 2" = "2 X 2";
+"continuous" = "continuous";
+"chorus" = "chorus";
+"echo" = "echo";
+"reverb" = "reverb";
+"distortion" = "distortion";
+"tone" = "tone";
+"sliding" = "sliding";
+"exit to main" = "exit to main";
+"exit" = "exit";
+"shop" = "shop";
+"title & artist" = "title & artist";
+"skill" = "skill";
+"buy" = "buy";
+"logout" = "logout";
+"sessions" = "sessions";
+"followers" = "followers";
+"following" = "following";
+"the future" = "the future";
+"%d days ago" = "%d days ago";
+"%d day ago" = "%d day ago";
+"%d weeks ago" = "%d weeks ago";
+"%d week ago" = "%d week ago";
+"%d month ago" = "%d month ago";
+"%d months ago" = "%d months ago";
+"updating" = "updating";

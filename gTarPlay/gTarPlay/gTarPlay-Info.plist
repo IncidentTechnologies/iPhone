@@ -8,6 +8,8 @@
 	<string>gTar</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>gTarIcon_57x57.png</string>
@@ -55,6 +57,8 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -63,16 +67,14 @@
 	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
-	<key>CFBundleGetInfoString</key>
-	<string></string>
-	<key>UIViewControllerBasedStatusBarApp</key>
-	<false/>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarApp</key>
+	<false/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

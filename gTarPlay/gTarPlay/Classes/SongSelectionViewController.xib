@@ -7,16 +7,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SongSelectionViewController">
             <connections>
+                <outlet property="artistLabel" destination="1785" id="lRc-79-LwJ"/>
+                <outlet property="backLabel" destination="73" id="t51-TT-ag4"/>
                 <outlet property="closeModalButton" destination="469" id="839"/>
                 <outlet property="easyButton" destination="663" id="844"/>
+                <outlet property="easyLabel" destination="794" id="MeQ-h3-VAj"/>
                 <outlet property="fullscreenButton" destination="1104" id="1115"/>
                 <outlet property="hardButton" destination="753" id="853"/>
+                <outlet property="hardLabel" destination="822" id="e7f-qB-9TJ"/>
                 <outlet property="instrumentButton" destination="508" id="840"/>
                 <outlet property="instrumentView" destination="929" id="934"/>
                 <outlet property="mediumButton" destination="744" id="851"/>
+                <outlet property="mediumLabel" destination="806" id="rih-se-XMH"/>
                 <outlet property="scoreButton" destination="269" id="366"/>
                 <outlet property="searchBar" destination="1074" id="1103"/>
                 <outlet property="skillButton" destination="245" id="365"/>
+                <outlet property="songListLabel" destination="109" id="z3J-a9-71o"/>
                 <outlet property="songListTable" destination="96" id="197"/>
                 <outlet property="songOptionsModal" destination="448" id="468"/>
                 <outlet property="songPlayerView" destination="887" id="916"/>
@@ -26,6 +32,7 @@
                 <outlet property="sortByTitleButtton" destination="1132" id="1368"/>
                 <outlet property="startButton" destination="527" id="1116"/>
                 <outlet property="titleArtistButton" destination="200" id="364"/>
+                <outlet property="titleLabel" destination="1581" id="nRT-0b-TY5"/>
                 <outlet property="topBar" destination="4" id="928"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="volumeButton" destination="489" id="838"/>

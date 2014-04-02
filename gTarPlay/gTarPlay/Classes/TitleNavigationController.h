@@ -31,9 +31,12 @@
 
 - (void)delayLoadingComplete;
 
+- (void)localizeView;
+
 // Top bar
 @property (retain, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (retain, nonatomic) IBOutlet UIButton *profileButton;
+@property (retain, nonatomic) IBOutlet UILabel *profileLabel;
 
 - (IBAction)profileButtonClicked:(id)sender;
 
@@ -45,7 +48,9 @@
 @property (retain, nonatomic) IBOutlet UIView *menuLeftPanel;
 @property (retain, nonatomic) IBOutlet UIView *feedRightPanel;
 @property (retain, nonatomic) IBOutlet UIView *loadingRightPanel;
+
 @property (retain, nonatomic) IBOutlet UIView *disconnectedGtarLeftPanel;
+@property (retain, nonatomic) IBOutlet UILabel *pleaseConnectLabel;
 
 // Left Panel buttons + clicks
 @property (retain, nonatomic) IBOutlet UIButton *gatekeeperVideoButton;

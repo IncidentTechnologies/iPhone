@@ -8,8 +8,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FPMenuViewController">
             <connections>
                 <outlet property="audioRouteSwitch" destination="1812" id="2221"/>
+                <outlet property="auxLabel" destination="339" id="dZi-DX-uWu"/>
+                <outlet property="exitButton" destination="1824" id="eYc-IR-w0p"/>
+                <outlet property="exitToMainLabel" destination="1131" id="L4F-r0-FRN"/>
+                <outlet property="offLabel" destination="2599" id="niW-qg-CNe"/>
+                <outlet property="onLabel" destination="2608" id="P9k-KZ-5wi"/>
+                <outlet property="outputLabel" destination="203" id="y03-u2-WgY"/>
                 <outlet property="slideSwitch" destination="2508" id="2798"/>
+                <outlet property="slidingLabel" destination="2648" id="zGI-Ra-nJe"/>
+                <outlet property="speakerLabel" destination="276" id="1FW-0A-ysH"/>
                 <outlet property="testText" destination="rIP-HK-grg" id="MnZ-BT-T8y"/>
+                <outlet property="toneLabel" destination="137" id="ROA-fx-GhV"/>
                 <outlet property="toneSlider" destination="1820" id="2220"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>

@@ -11,6 +11,7 @@
                 <outlet property="arrowFretsRight" destination="819" id="902"/>
                 <outlet property="arrowStringsBottom" destination="839" id="904"/>
                 <outlet property="arrowStringsTop" destination="832" id="903"/>
+                <outlet property="clearButton" destination="252" id="zjI-zz-LkO"/>
                 <outlet property="colorButton" destination="229" id="392"/>
                 <outlet property="colorView" destination="1743" id="2279"/>
                 <outlet property="colorWhite" destination="304" id="2442"/>

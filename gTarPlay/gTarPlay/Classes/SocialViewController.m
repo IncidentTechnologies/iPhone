@@ -69,6 +69,7 @@ extern Facebook *g_facebook;
 {
     [super viewDidLoad];
     
+    [self localizeViews];
     [_topBar addShadow];
     
     [_searchTable setHidden:YES];
@@ -87,8 +88,16 @@ extern Facebook *g_facebook;
     
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)localizeViews {
+    [_logoutButton setTitle:NSLocalizedString(@"Logout", NULL) forState:UIControlStateNormal];
+    [_followButton setTitle:NSLocalizedString(@"FOLLOW", NULL) forState:UIControlStateNormal];
+    [_followingButton setTitle:NSLocalizedString(@"FOLLOWING", NULL) forState:UIControlStateNormal];
+    
+    _profileLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Profile", NULL)];
+    _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

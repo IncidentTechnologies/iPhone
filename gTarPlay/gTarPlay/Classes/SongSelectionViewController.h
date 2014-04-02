@@ -39,8 +39,14 @@ struct SongSortOrder {
 @property (retain, nonatomic) IBOutlet UIButton *instrumentButton;
 
 @property (retain, nonatomic) IBOutlet UIButton *easyButton;
+@property (retain, nonatomic) IBOutlet UILabel *easyLabel;
+
 @property (retain, nonatomic) IBOutlet UIButton *mediumButton;
+@property (retain, nonatomic) IBOutlet UILabel *mediumLabel;
+
 @property (retain, nonatomic) IBOutlet UIButton *hardButton;
+@property (retain, nonatomic) IBOutlet UILabel *hardLabel;
+
 @property (retain, nonatomic) IBOutlet UIButton *startButton;
 
 @property (retain, nonatomic) IBOutlet UIView *volumeView;
@@ -54,7 +60,14 @@ struct SongSortOrder {
 @property (retain, nonatomic) IBOutlet UIButton *skillButton;
 @property (retain, nonatomic) IBOutlet UIButton *scoreButton;
 
+@property (retain, nonatomic) IBOutlet UILabel *titleLabel;
+@property (retain, nonatomic) IBOutlet UILabel *artistLabel;
+@property (retain, nonatomic) IBOutlet UILabel *backLabel;
+@property (retain, nonatomic) IBOutlet UILabel *songListLabel;
+
 @property (retain, nonatomic) IBOutlet PullToUpdateTableView *songListTable;
+
+- (void) localizeViews;
 
 - (IBAction)backButtonClicked:(id)sender;
 - (IBAction)startButtonClicked:(id)sender;

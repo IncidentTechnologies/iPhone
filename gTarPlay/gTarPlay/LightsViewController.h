@@ -10,6 +10,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LightsViewController : UIViewController <GtarControllerObserver>
+@interface LightsViewController : UIViewController <GtarControllerObserver> {
+    
+}
+
+@property (nonatomic, retain) IBOutlet UILabel *allLabel;
+
+- (void)localizeViews;
 
 @end

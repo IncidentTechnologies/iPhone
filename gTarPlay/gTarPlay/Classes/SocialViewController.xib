@@ -7,14 +7,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SocialViewController">
             <connections>
+                <outlet property="backLabel" destination="31" id="5bI-UL-33P"/>
                 <outlet property="cameraButton" destination="229" id="626"/>
                 <outlet property="feedSelector" destination="149" id="308"/>
                 <outlet property="feedTable" destination="10" id="309"/>
                 <outlet property="followButton" destination="551" id="633"/>
                 <outlet property="followingButton" destination="563" id="628"/>
                 <outlet property="fullscreenButton" destination="525" id="548"/>
+                <outlet property="logoutButton" destination="224" id="2kB-Ah-Mzw"/>
                 <outlet property="picImageView" destination="218" id="310"/>
                 <outlet property="profileButton" destination="701" id="737"/>
+                <outlet property="profileLabel" destination="30" id="UA0-fa-CRP"/>
                 <outlet property="searchBar" destination="473" id="550"/>
                 <outlet property="searchTable" destination="505" id="518"/>
                 <outlet property="topBar" destination="11" id="307"/>

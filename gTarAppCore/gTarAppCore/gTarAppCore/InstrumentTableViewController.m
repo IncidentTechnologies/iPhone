@@ -10,8 +10,7 @@
 
 #import <AudioController/AudioController.h>
 
-@interface InstrumentTableViewController ()
-{
+@interface InstrumentTableViewController () {
     BOOL _flickerState;
 }
 
@@ -26,11 +25,9 @@
 
 @implementation InstrumentTableViewController
 
-- (id)initWithAudioController:(AudioController*)AC
-{
+- (id)initWithAudioController:(AudioController*)AC {
     self = [super initWithNibName:nil bundle:nil];
-    if (self)
-    {
+    if (self) {
         _audioController = [AC retain];
         _instruments = [[AC getInstrumentNames] retain];
         
@@ -45,8 +42,7 @@
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"InstrumentChanged" object:nil];
     
     [_audioController release];
@@ -57,8 +53,7 @@
     [super dealloc];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
@@ -103,7 +98,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    cell.textLabel.text = [self.instruments objectAtIndex:indexPath.row];
+    cell.textLabel.text = NSLocalizedString([self.instruments objectAtIndex:indexPath.row], NULL);  // will localize the string
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
