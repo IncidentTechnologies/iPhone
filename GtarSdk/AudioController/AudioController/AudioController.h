@@ -12,8 +12,7 @@
 
 @class Sampler;
 
-typedef enum
-{
+typedef enum {
     KarplusStrong,
     SamplerSource,
     SinWave,
@@ -21,7 +20,7 @@ typedef enum
     SquareWave
 } AudioSource;
 
-@interface AudioController : NSObject 
+@interface AudioController : NSObject
 {
 	// Audio Graph Members
 	AUGraph augraph;

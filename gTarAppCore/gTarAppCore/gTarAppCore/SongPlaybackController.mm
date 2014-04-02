@@ -1,15 +1,7 @@
-//
-//  SongPlaybackController.m
-//  gTarAppCore
-//
-//  Created by Marty Greenia on 8/25/11.
-//  Copyright 2011 IncidentTech. All rights reserved.
-//
+
 
 #import "SongPlaybackController.h"
-
 #import <AudioController/AudioController.h>
-
 #import "AppCore.h"
 
 #import "UserSong.h"
@@ -29,71 +21,48 @@
 
 @synthesize m_songModel;
 
-- (id)init
-{
-    
+- (id)init {
     self = [super init];
     
-    if ( self )
-    {
-        
+    if ( self ) {
         // Create audio controller
         m_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
-        
         [m_audioController initializeAUGraph];
-        
     }
     
     return self;
-    
 }
 
-- (id)initWithAudioController:(AudioController*)audioController
-{
-    
+- (id)initWithAudioController:(AudioController*)audioController {
     self = [super init];
-    
-    if ( self )
-    {
+    if ( self ) {
         // Create audio controller
         m_audioController = [audioController retain];
     }
     
     return self;
-    
 }
 
 
-- (void)dealloc
-{
-    
+- (void)dealloc {
     [m_gtarController removeObserver:self];
     
     [m_gtarController release];
-    
 	[m_audioController release];
-	
     [m_songModel release];
-
-	[m_eventLoopTimer invalidate];
     
+	[m_eventLoopTimer invalidate];
     m_eventLoopTimer = nil;
     
     [m_audioTrailOffTimer invalidate];
-    
     m_audioTrailOffTimer = nil;
     
     [super dealloc];
-
 }
 
-- (void)startWithXmpBlob:(NSString*)xmpBlob
-{
-    
+- (void)startWithXmpBlob:(NSString*)xmpBlob {
     if ( xmpBlob == nil )
-    {
         return;
-    }
     
     [m_audioController reset];
     
@@ -112,13 +81,10 @@
 
 }
 
-- (void)startWithUserSong:(UserSong*)userSong
-{
+- (void)startWithUserSong:(UserSong*)userSong {
     // TODO This function doesn't work right now because the m_xmlDom doesn't have the XMP in it
     if ( userSong == nil )
-    {
         return;
-    }
     
     [m_audioController reset];
     
@@ -132,28 +98,18 @@
     [m_songModel startWithDelegate:self];
     
     [self startMainEventLoop];
-
 }
 
-- (void)playSong
-{
-    
+- (void)playSong {
     [self startMainEventLoop];
-    
 }
 
-- (void)pauseSong
-{
-    
+- (void)pauseSong {
     [self stopMainEventLoop];
-    
     [m_audioController stopAUGraph];
-    
 }
 
-- (void)endSong
-{
-    
+- (void)endSong {
     [self stopMainEventLoop];
     
     [m_audioController stopAUGraph];
@@ -165,9 +121,7 @@
     
 }
 
-- (void)observeGtarController:(GtarController*)gtarController
-{
-    
+- (void)observeGtarController:(GtarController*)gtarController {
     m_gtarController = [gtarController retain];
     
     // Register ourself as an observer
@@ -178,9 +132,7 @@
     
 }
 
-- (void)ignoreGtarController:(GtarController*)gtarController
-{
-    
+- (void)ignoreGtarController:(GtarController*)gtarController {
     [m_gtarController turnOffAllEffects];
     [m_gtarController turnOffAllLeds];
     
@@ -193,13 +145,9 @@
     
 }
 
-- (void)startMainEventLoop
-{
-    
+- (void)startMainEventLoop {
     if ( m_songModel.m_percentageComplete >= 1.0 )
-    {
         return;
-    }
     
     [m_eventLoopTimer invalidate];
     
@@ -215,21 +163,14 @@
     
 }
 
-- (void)stopMainEventLoop
-{
-	if ( m_eventLoopTimer != nil )
-	{
-        
+- (void)stopMainEventLoop {
+	if ( m_eventLoopTimer != nil ) {
 		[m_eventLoopTimer invalidate];
-		
 		m_eventLoopTimer = nil;
-
 	}
 }
 
-- (void)audioTrailOffEvent
-{
-    
+- (void)audioTrailOffEvent {
     [m_audioTrailOffTimer invalidate];
     
     m_audioTrailOffTimer = nil;
@@ -238,16 +179,13 @@
     [m_audioController reset];
 
 }
-- (void)mainEventLoop
-{
+- (void)mainEventLoop {
 	[m_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
 }
 
 #pragma mark - GuitarControllerObserver
 
-- (void)gtarNoteOn:(GtarPluck)pluck
-{
-    
+- (void)gtarNoteOn:(GtarPluck)pluck {
     GtarFret fret = pluck.position.fret;
     GtarString str = pluck.position.string;
     
@@ -259,16 +197,12 @@
 
 #pragma mark - NSSongModel delegate
 
-- (void)songModelEnterFrame:(NSNoteFrame*)frame
-{
-    for ( NSNote * note in frame.m_notes )
-    {
-        if ( note.m_fret == GTAR_GUITAR_FRET_MUTED )
-        {
+- (void)songModelEnterFrame:(NSNoteFrame*)frame {
+    for ( NSNote * note in frame.m_notes ) {
+        if ( note.m_fret == GTAR_GUITAR_FRET_MUTED ) {
             [m_audioController PluckMutedString:note.m_string-1];
         }
-        else
-        {
+        else {
             [m_audioController PluckString:note.m_string-1 atFret:note.m_fret];
             
             //[m_gtarController turnOnLedAtPosition:GtarPositionMake(note.m_fret, note.m_string) withColor:GtarLedColorMake(GtarMaxLedIntensity, GtarMaxLedIntensity, GtarMaxLedIntensity)];
@@ -278,10 +212,11 @@
     }
 }
 
-- (void)songModelExitFrame:(NSNoteFrame*)frame
-{
+/*
+- (void)songModelExitFrame:(NSNoteFrame*)frame {
 
 }
+ */
 
 - (void)delayedTurnLedOff:(NSNote *)note
 {
@@ -304,14 +239,13 @@
     }
 }
 
-- (void)songModelFrameExpired:(NSNoteFrame*)frame
-{
-    
+/*
+- (void)songModelFrameExpired:(NSNoteFrame*)frame {
     
 }
+ */
 
-- (void)songModelEndOfSong
-{
+- (void)songModelEndOfSong {
     [m_gtarController turnOffAllLeds];
     
     [self stopMainEventLoop];
@@ -325,54 +259,31 @@
 
 #pragma mark - Misc
 
-- (void)seekToLocation:(double)percentComplete
-{
-        
-    // not sure if percentComplete is the most intuitive
-    // parameter to seek on, but worth trying it out.
-    
+// Not sure if percentComplete is the most intuitive
+// parameter to seek on, but worth trying it out.
+- (void)seekToLocation:(double)percentComplete {
     double newBeat;
     
     if ( percentComplete < 0.01 )
-    {
-        
-        // reset to the beginning at this point
-        newBeat = 0;
-        
-    }
+        newBeat = 0;           // reset to the beginning at this point
     else if ( percentComplete > 1.0 )
-    {
-        
         newBeat = 1.0;
-        
-    }
     else
-    {
-        
         newBeat= m_songModel.m_lengthBeats * percentComplete;
-        
-    }
     
     [m_songModel changeBeatRandomAccess:newBeat];
     
 }
 
-- (BOOL)isPlaying
-{
+- (BOOL)isPlaying {
     
     if ( m_eventLoopTimer != nil )
-    {
         return true;
-    }
     else
-    {
         return false;
-    }
-    
 }
 
-- (double)percentageComplete
-{
+- (double)percentageComplete {
     return m_songModel.m_percentageComplete;
 }
 

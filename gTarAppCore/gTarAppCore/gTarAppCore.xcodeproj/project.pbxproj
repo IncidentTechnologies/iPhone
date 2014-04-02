@@ -159,6 +159,18 @@
 		EC5DA9C2161A67E20015832E /* NSSongCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA9C0161A67E20015832E /* NSSongCreator.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		26EDD16518EBACC0002ACE19 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		268E70C51810B2D9007404B0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		26C3F9241810F93A00744A9D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -841,6 +853,7 @@
 				EC5DA849161A5D160015832E /* Sources */,
 				EC5DA84A161A5D160015832E /* Frameworks */,
 				EC5DA84B161A5D160015832E /* Headers */,
+				26EDD16518EBACC0002ACE19 /* CopyFiles */,
 			);
 			buildRules = (
 			);

@@ -87,24 +87,25 @@
 		ECC11DCC162CEC0E001A231A /* EnvelopeFollower.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF6161A4BCC005BF0E5 /* EnvelopeFollower.h */; };
 		ECC11DCD162CEC0E001A231A /* Compressor.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF7161A4BCC005BF0E5 /* Compressor.h */; };
 		ECC11DCE162CEC0E001A231A /* Distortion.h in Headers */ = {isa = PBXBuildFile; fileRef = EC7A0DF8161A4BCC005BF0E5 /* Distortion.h */; };
-		ECC11DD0162CEC0E001A231A /* Effect.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DEB161A4BCC005BF0E5 /* Effect.h */; };
-		ECC11DD1162CEC0E001A231A /* Parameter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DF2161A4BCC005BF0E5 /* Parameter.h */; };
-		ECC11DD2162CEC0E001A231A /* AudioController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DD2161A4B37005BF0E5 /* AudioController.h */; };
-		ECC11DD3162CEC0E001A231A /* libAudioController.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC7A0DBF161A4AD3005BF0E5 /* libAudioController.a */; };
+		ECC11DD0162CEC0E001A231A /* Effect.h in Copy Files */ = {isa = PBXBuildFile; fileRef = EC7A0DEB161A4BCC005BF0E5 /* Effect.h */; };
+		ECC11DD1162CEC0E001A231A /* Parameter.h in Copy Files */ = {isa = PBXBuildFile; fileRef = EC7A0DF2161A4BCC005BF0E5 /* Parameter.h */; };
+		ECC11DD2162CEC0E001A231A /* AudioController.h in Copy Files */ = {isa = PBXBuildFile; fileRef = EC7A0DD2161A4B37005BF0E5 /* AudioController.h */; };
+		ECC11DD3162CEC0E001A231A /* libAudioController.a in Copy Files */ = {isa = PBXBuildFile; fileRef = EC7A0DBF161A4AD3005BF0E5 /* libAudioController.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		ECC11DCF162CEC0E001A231A /* CopyFiles */ = {
+		ECC11DCF162CEC0E001A231A /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "$(SRCROOT)/../PublicProducts/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/AudioController";
-			dstSubfolderSpec = 0;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
 			files = (
-				ECC11DD0162CEC0E001A231A /* Effect.h in CopyFiles */,
-				ECC11DD1162CEC0E001A231A /* Parameter.h in CopyFiles */,
-				ECC11DD2162CEC0E001A231A /* AudioController.h in CopyFiles */,
-				ECC11DD3162CEC0E001A231A /* libAudioController.a in CopyFiles */,
+				ECC11DD0162CEC0E001A231A /* Effect.h in Copy Files */,
+				ECC11DD1162CEC0E001A231A /* Parameter.h in Copy Files */,
+				ECC11DD2162CEC0E001A231A /* AudioController.h in Copy Files */,
+				ECC11DD3162CEC0E001A231A /* libAudioController.a in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -407,7 +408,7 @@
 				ECC11DAE162CEC0E001A231A /* Sources */,
 				ECC11DB2162CEC0E001A231A /* Frameworks */,
 				ECC11DB5162CEC0E001A231A /* Headers */,
-				ECC11DCF162CEC0E001A231A /* CopyFiles */,
+				ECC11DCF162CEC0E001A231A /* Copy Files */,
 			);
 			buildRules = (
 			);
