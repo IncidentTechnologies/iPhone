@@ -234,18 +234,18 @@
 {
     selectMode = @"Load";
     
-    NSString * newSet = ([activeSequencer isEqualToString:@""] || activeSequencer == nil) ? [self generateNextSetName] : activeSequencer;
+    NSString * newSet = ([activeSequencer isEqualToString:@""] || activeSequencer == nil || [activeSequencer isEqualToString:DEFAULT_SET_NAME]) ? [self generateNextSetName] : activeSequencer;
     
     [delegate createNewSaveName:newSet];
     activeSequencer = nil;
     
-    [self reloadFileTable];
+    //[self reloadFileTable];
     [self showHideNewFileRow:YES];
     
-    [loadTable reloadData];
+    //[loadTable reloadData];
     [self resetTableOffset:nil];
     
-    [delegate viewSeqSetWithAnimation:YES];
+    //[delegate viewSeqSetWithAnimation:YES];
 }
 
 /*
@@ -573,9 +573,9 @@
 {
     NSLog(@"Deselect all rows");
     @synchronized(self){
-        for(int i = 0; i < [fileLoadSet count]+1; i++){
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            [loadTable deselectRowAtIndexPath:indexPath animated:NO];
+        for(int i = 0; i < [loadTable numberOfRowsInSection:0]; i++){
+                NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+                [loadTable deselectRowAtIndexPath:indexPath animated:NO];
         }
     }
 }
@@ -586,7 +586,7 @@
     
     NSLog(@"Deselect all rows except %i",cellToIgnore.row);
     
-    for(int i = 0; i < [fileLoadSet count]+1; i++){
+    for(int i = 0; i < [loadTable numberOfRowsInSection:0]; i++){
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         OptionsViewCell * cellToCheck = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
         

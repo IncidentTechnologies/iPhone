@@ -57,6 +57,8 @@
 
 - (void)resetVolume;
 
+- (void)enableKnobIfDisabled;
+- (void)disableKnobIfEnabled;
 
 @property (weak, nonatomic) SeqSetViewController * parent;
 

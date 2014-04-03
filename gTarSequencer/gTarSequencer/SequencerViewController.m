@@ -57,7 +57,7 @@
     NSString * filePath = (isFirstLaunch) ? [self getDefaultSetFilepath] : nil;
     [self loadStateFromDisk:filePath];
     [self selectNavChoice:@"Set" withShift:NO];
-    [self saveContext:nil];
+    [self saveContext:nil force:NO];
     
     if(isFirstLaunch){
         [self launchFTUTutorial];
@@ -405,8 +405,8 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
     
-    [self saveContext:filepath];
-    [self saveContext:nil];
+    [self saveContext:filepath force:YES];
+    [self saveContext:nil force:YES];
 }
 
 - (void)loadFromName:(NSString *)filename
@@ -418,7 +418,7 @@
     NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
     
     [self loadStateFromDisk:filepath];
-    [self saveContext:nil];
+    [self saveContext:nil force:YES];
     
     if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
         [self relaunchFTUTutorial];
@@ -445,11 +445,12 @@
     if(!result)
         NSLog(@"Error moving");
    
-    [self saveContext:nil];
+    [self saveContext:nil force:YES];
 }
 
 - (void)createNewSaveName:(NSString *)filename
 {
+    
     // Save previous set if not blank
     if([seqSetViewController countInstruments] > 0 && ![filename isEqualToString:DEFAULT_SET_NAME]){
         
@@ -461,6 +462,8 @@
         [alert show];
         
         sequencerToSave = filename;
+    }else{
+        [self createNewSet];
     }
 }
 
@@ -470,6 +473,10 @@
     
     // Delete all cells
     [seqSetViewController deleteAllCells];
+    
+    [optionsViewController reloadFileTable];
+    [optionsViewController.loadTable reloadData];
+    [self viewSeqSetWithAnimation:YES];
 }
 
 - (void)createNewSetAndSave
@@ -515,14 +522,14 @@
     if(!result)
         NSLog(@"Error deleting");
     
-    [self saveContext:nil];
+    [self saveContext:nil force:YES];
 }
 
 
 #pragma mark - Auto Save Load
-- (void)saveContext:(NSString *)filepath
+- (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
-    if(saveContextTimer == nil || filepath != nil){
+    if(saveContextTimer == nil || filepath != nil || forceSave){
         
         // Prevent from saving many times in a row, but never block a manual save
         [self clearSaveContextTimer];
@@ -605,6 +612,7 @@
         // Decode array of instruments:
         
         NSData * instrumentData = [currentState objectForKey:@"Instruments Data"];
+        
         [seqSetViewController setInstrumentsFromData:instrumentData];
         
         // Decode active sequencer filename
@@ -1360,6 +1368,22 @@
     [instrumentViewController resetVolume];
 }
 
+- (void)enableInstrument:(int)instIndex
+{
+    if([seqSetViewController getCurrentInstrument].instrument == instIndex){
+        [instrumentViewController enableKnobIfDisabled];
+    }
+    [seqSetViewController enableKnobIfDisabledForInstrument:instIndex];
+}
+
+- (void)disableInstrument:(int)instIndex
+{
+    if([seqSetViewController getCurrentInstrument].instrument == instIndex){
+        [instrumentViewController disableKnobIfEnabled];
+    }
+    [seqSetViewController disableKnobIfEnabledForInstrument:instIndex];
+}
+
 #pragma mark - Guitar Observer
 
 - (void)notePlayedAtString:(int)str andFret:(int)fr
@@ -1393,7 +1417,7 @@
     
     [guitarView update];
     
-    [self saveContext:nil];
+    [self saveContext:nil force:NO];
 }
 
 #pragma mark - gTar Connected
@@ -1430,11 +1454,11 @@
     email.mailComposeDelegate = self;
     
     // Subject
-    [email setSubject:@"Sequence Session"];
+    [email setSubject:@"Sequence"];
     
     // Body
-    NSString * body = @"Check out the session I recorded with Sequence by Incident.";
-    [email setMessageBody:body isHTML:NO];
+    NSString * body = @"Check out this song I just made with <a href='http://www.incidentgtar.com/'>Sequence</a>!";
+    [email setMessageBody:body isHTML:YES];
     
     // Attachment
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -1456,7 +1480,7 @@
     message.messageComposeDelegate = self;
     
     // Body
-    NSString * body = @"Check out the session I recorded with Sequence by Incident.";
+    NSString * body = @"Check out this song I just made with Sequence! http://gtar.fm/";
     [message setBody:body];
     
     // Attachment

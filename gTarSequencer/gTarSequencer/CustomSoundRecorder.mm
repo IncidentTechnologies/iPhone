@@ -259,6 +259,9 @@
     
     if(!soundMaster){
         soundMaster = [[SoundMaster alloc] init];
+    }else{
+        // clean up recording
+        [self releaseAudioBank];
     }
     
     m_sampleBankNode = [soundMaster generateBank];
@@ -273,7 +276,19 @@
     filepath = (char *) [sampleFilename UTF8String];
     
     m_sampleBankNode->LoadSampleIntoBank(filepath, m_sampNode);
+    
+    //[soundMaster flushBuffer];
+    //[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(finishAudioInitAfterBufferFlush) userInfo:nil repeats:NO];
+//    [self finishAudioInitAfterBufferFlush];
+    
 }
+
+-(void)finishAudioInitAfterBufferFlush
+{
+    
+
+}
+
 
 - (unsigned long int)fetchAudioBufferSize
 {

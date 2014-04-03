@@ -21,6 +21,9 @@
 - (NSMutableArray *)getInstruments;
 - (void) openInstrument:(int)instIndex;
 
+- (void) enableInstrument:(int)instIndex;
+- (void) disableInstrument:(int)instIndex;
+
 @end
 
 @interface VolumeDisplay : UIView <UILevelSliderDelegate>

@@ -267,7 +267,7 @@
     [instrument setIsMuted:NO];
     isMute = NO;
     
-    [parent saveContext:nil];
+    [parent saveContext:nil force:NO];
 }
 
 -(void)turnOffInstrumentView
@@ -281,7 +281,7 @@
     [instrument setIsMuted:YES];
     isMute = YES;
     
-    [parent saveContext:nil];
+    [parent saveContext:nil force:NO];
 }
 
 - (void)updatePatternButton:(UIButton *)newButton playState:(BOOL)isPlaying
@@ -778,7 +778,7 @@
     [volumeBg removeFromSuperview];
     [volumeKnob setHidden:NO];
     
-    [parent saveContext:nil];
+    [parent saveContext:nil force:NO];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
@@ -796,13 +796,18 @@
 
 -(void)enableKnobIfDisabled
 {
-    NSLog(@"Enable knob if disabled");
+    /*NSLog(@"Enable knob if disabled");
     if(![volumeKnob isEnabled]){
         NSLog(@"Enable previous button");
         [self selectNewPattern:previousPatternButton];
         [self turnOnInstrumentView];
         [volumeKnob EnableKnob];
-    }
+    }*/
+    
+    NSLog(@"*** enable knob if disabled");
+    
+    [self selectNewPattern:previousPatternButton];
+    [self turnOnInstrumentView];
 }
 
 -(void)enableKnob:(id)sender
@@ -819,6 +824,19 @@
         [self selectNewPattern:offButton];
         [self turnOffInstrumentView];
     }
+}
+
+-(void)disableKnobIfEnabled
+{
+    /*NSLog(@"Disable knob if enabled");
+    if([volumeKnob isEnabled]){
+        [self disableKnob:tempVolumeKnob];
+    }*/
+    
+    NSLog(@"*** disable knob if enabled");
+    
+    [self selectNewPattern:offButton];
+    [self turnOffInstrumentView];
 }
 
 @end

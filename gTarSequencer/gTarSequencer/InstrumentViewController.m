@@ -336,7 +336,7 @@
     [self scrollToAndSetActiveMeasure:measureIndex scrollSlow:isSlow];
     
     // SAVE CONTEXT
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:NO];
 }
 
 - (void)drawMeasuresForPattern:(int)patternIndex
@@ -464,7 +464,7 @@
         [self changeActiveMeasureToMeasure:tappedIndex scrollSlow:YES];
         
         // SAVE CONTEXT
-        [delegate saveContext:nil];
+        [delegate saveContext:nil force:NO];
     }
 }
 
@@ -602,7 +602,7 @@
         [self hideDeleteForMeasure:tappedIndex];
         
         // SAVE CONTEXT
-        [delegate saveContext:nil];
+        [delegate saveContext:nil force:NO];
     }
 }
 
@@ -849,7 +849,7 @@
     [currentInst setIsMuted:NO];
     isMute = NO;
     
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:NO];
 }
 
 - (void)turnOffInstrumentView
@@ -862,7 +862,7 @@
     [currentInst setIsMuted:YES];
     isMute = YES;
     
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:NO];
 }
 
 
@@ -905,7 +905,7 @@
     [self updateGuitarView];
     
     // SAVE CONTEXT
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:YES];
 }
 
 #pragma mark - Playband
@@ -1525,7 +1525,6 @@
         offButtonDoubleTap.numberOfTapsRequired = 2;
         
         [volumeKnobView addGestureRecognizer:offButtonDoubleTap];
-        
     }
     
     isTracking = NO;
@@ -1604,7 +1603,7 @@
     [volumeBg removeFromSuperview];
     [volumeKnob setHidden:NO];
     
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:NO];
 }
 
 
@@ -1638,5 +1637,14 @@
         [self turnOffInstrumentView];
     }
 }
+
+-(void)disableKnobIfEnabled
+{
+    NSLog(@"Disable knob if enabled");
+    if([volumeKnob isEnabled]){
+        [self disableKnob:tempVolumeKnob];
+    }
+}
+
 
 @end

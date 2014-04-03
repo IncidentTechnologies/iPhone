@@ -10,6 +10,7 @@
                 <outlet property="instrumentView" destination="Vcg-LX-MnW" id="98z-4b-Q0j"/>
                 <outlet property="noSessionLabel" destination="XeH-Bb-MNN" id="Nmo-b7-gcF"/>
                 <outlet property="noSessionOverlay" destination="occ-jE-SpO" id="Cyl-aD-MXp"/>
+                <outlet property="playbandView" destination="gYc-2q-ZJs" id="PXi-8N-8DF"/>
                 <outlet property="processingLabel" destination="Ug1-qD-pnv" id="lIO-Wi-If8"/>
                 <outlet property="progressView" destination="jJW-vp-Zbc" id="d0F-Nx-vTh"/>
                 <outlet property="trackView" destination="Fz4-u1-MZo" id="pJd-qQ-lY4"/>
@@ -25,6 +26,17 @@
                     <rect key="frame" x="65" y="0.0" width="415" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.41176470588235292" green="0.83921568627450982" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eUT-dL-Ypm">
+                    <rect key="frame" x="65" y="0.0" width="415" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYc-2q-ZJs">
+                            <rect key="frame" x="0.0" y="0.0" width="5" height="34"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vcg-LX-MnW">
                     <rect key="frame" x="0.0" y="34" width="65" height="230"/>

@@ -70,6 +70,12 @@
     
 }
 
+-(void)flushBuffer
+{
+    [audioController stopAUGraph];
+    [audioController startAUGraph];
+}
+
 -(void)setChannelGain:(double)gain
 {
     if(masterGain != gain){

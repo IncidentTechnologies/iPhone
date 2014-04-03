@@ -23,7 +23,7 @@
 - (void) playRecordPlayback;
 - (void) pauseRecordPlayback;
 
-- (void) saveContext:(NSString *)filepath;
+- (void) saveContext:(NSString *)filepath force:(BOOL)forceSave;
 - (void) userDidLoadSequenceOptions;
 
 - (void) stopGestures;
@@ -39,6 +39,9 @@
 - (void) setRecordMode:(BOOL)record andAnimate:(BOOL)animate;
 
 - (void) userDidSelectShare;
+
+- (void) enableInstrument:(int)instIndex;
+- (void) disableInstrument:(int)instIndex;
 
 @end
 

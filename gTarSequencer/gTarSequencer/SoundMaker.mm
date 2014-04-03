@@ -22,6 +22,9 @@
     SampleNode *m_sampNode;
     SamplerBankNode *m_samplerBank;
     
+    SampleNode *m_silenceNode;
+    SamplerBankNode *m_silenceBank;
+    
     char * filepath[6];
     NSArray * audioStringSet;
     NSArray * audioStringPaths;
@@ -79,6 +82,7 @@
     }
     
     m_samplerBank = [m_soundMaster generateBank];
+    m_silenceBank = [m_soundMaster generateBank];
     
     for(int i = 0; i < GTAR_NUM_STRINGS; i++){
         
@@ -104,6 +108,19 @@
             m_samplerBank->LoadSampleIntoBank(filepath[i], m_sampNode);
         }
     }
+    
+    // Load a silent sample
+    //char * silencepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Silence" ofType:@"mp3"] UTF8String];
+    
+    //m_silenceBank->LoadSampleIntoBank(silencepath, m_silenceNode);
+}
+
+- (void)flushBuffer
+{
+    // TODO: actually flush the buffer
+    //m_silenceBank->TriggerSample(0);
+    [m_soundMaster flushBuffer];
+    
 }
 
 - (void)pluckString:(int)str

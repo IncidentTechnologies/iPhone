@@ -67,13 +67,15 @@
     [self checkIsFirstLaunch];
     if(isFirstLaunch){
         [self launchFTUTutorial];
+    }else{
+        [self endTutorialIfOpen];
     }
 }
 
 #pragma mark Save Context
-- (void)saveContext:(NSString *)filepath
+- (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
-    [delegate saveContext:filepath];
+    [delegate saveContext:filepath force:forceSave];
 }
 
 #pragma mark Instruments Data
@@ -219,6 +221,8 @@
     [self checkIsFirstLaunch];
     if(isFirstLaunch){
         [self launchFTUTutorial];
+    }else{
+        [self endTutorialIfOpen];
     }
 }
 
@@ -321,7 +325,7 @@
     }
     
     [delegate numInstrumentsDidChange:[instruments count]];
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:YES];
 }
 
 #pragma mark Table View Protocol
@@ -492,6 +496,7 @@
     SeqSetViewCell * cell = (SeqSetViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     
     if(editingStyle == UITableViewCellEditingStyleDelete && cell.editingScrollView.contentOffset.x > 0){
+        [self endTutorialIfOpen];
         [self deleteCell:[tableView cellForRowAtIndexPath:indexPath] withAnimation:YES];
     }
 }
@@ -897,7 +902,7 @@
     }
     
     [delegate numInstrumentsDidChange:[instruments count]];
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:YES];
 }
 
 - (void)deleteAllCells
@@ -948,6 +953,39 @@
         /* If the selected one is not being deleted, but something
          above it is, than the index in the array needs to be shifted */
         [self selectInstrument:selectedInstrumentIndex - 1];
+    }
+}
+
+- (void)enableKnobIfDisabledForInstrument:(int)instIndex
+{
+    NSLog(@"Enable knob if disabled for instrument");
+    
+    for(int i = 0; i < [instruments count]; i++){
+        Instrument * inst = [instruments objectAtIndex:i];
+        if(inst.instrument == instIndex){
+            
+            NSLog(@"Sending to %i",instIndex);
+            SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            [cell enableKnobIfDisabled];
+            
+            inst.isMuted = NO;
+        }
+    }
+}
+
+- (void)disableKnobIfEnabledForInstrument:(int)instIndex
+{
+    
+    NSLog(@"Disable knob if enabled for instrument");
+    
+    for(int i = 0; i < [instruments count]; i++){
+        Instrument * inst = [instruments objectAtIndex:i];
+        if(inst.instrument == instIndex){
+            SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            [cell disableKnobIfEnabled];
+            
+            inst.isMuted = YES;
+        }
     }
 }
 
@@ -1122,7 +1160,7 @@
         [self updateAllVisibleCells];
     }
     
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:NO];
 }
 
 - (void)userDidSelectMeasure:(SeqSetViewCell *)sender atIndex:(int)index
@@ -1142,7 +1180,7 @@
         [self updateAllVisibleCells];
     }
     
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:NO];
     
 }
 
@@ -1161,7 +1199,7 @@
         [self updateAllVisibleCells];
     }
     
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:YES];
     
 }
 
@@ -1178,7 +1216,7 @@
     
     [delegate setMeasureAndUpdate:instrumentAtIndex.selectedPattern.selectedMeasure checkNotPlaying:FALSE];
     
-    [delegate saveContext:nil];
+    [delegate saveContext:nil force:YES];
 }
 
 - (void)updateAllVisibleCells
@@ -1203,12 +1241,27 @@
 #pragma mark - FTU Tutorial
 -(void)checkIsFirstLaunch
 {
+    
     // Check for first launch
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedSeqSetView"]){
         isFirstLaunch = FALSE;
     }else{
         isFirstLaunch = TRUE;
     }
+    
+    // Double check for muted instrument
+    if([instruments count] > 3){
+        
+        Instrument * mutedInstrument = [instruments objectAtIndex:3];
+    
+        if(!mutedInstrument.isMuted){
+            isFirstLaunch = FALSE;
+        }
+        
+    }else{
+        isFirstLaunch = FALSE;
+    }
+    
 }
 
 

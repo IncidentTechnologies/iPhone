@@ -234,6 +234,10 @@
         instrumentIcon.layer.borderWidth = 1.0;
         instrumentIcon.layer.borderColor = [UIColor whiteColor].CGColor;
         
+        if(inst.isMuted){
+            [instrumentIcon setAlpha:0.5];
+        }
+        
         [instrumentIcons setObject:instrumentIcon forKey:[NSNumber numberWithInt:i]];
         
         [instrumentIcon addTarget:self action:@selector(openInstrument:) forControlEvents:UIControlEventTouchUpInside];
@@ -271,6 +275,7 @@
 
 - (void)openInstrument:(id)sender
 {
+    /*
     UIButton * senderButton = (UIButton *)sender;
     
     for(NSNumber * instIndex in instrumentIcons){
@@ -279,7 +284,27 @@
         }
     }
     
-    [self contract];
+    [self contract];*/
+    
+    // Toggle instrument muted
+    UIButton * senderButton = (UIButton *)sender;
+    
+    for(NSNumber * instIndex in instrumentIcons){
+        if(senderButton == [instrumentIcons objectForKey:instIndex]){
+            
+            int index = [instIndex intValue];
+            Instrument * inst = [instruments objectAtIndex:index];
+            
+            if(inst.isMuted){
+                [delegate enableInstrument:inst.instrument];
+                [senderButton setAlpha:1.0];
+            }else{
+                [delegate disableInstrument:inst.instrument];
+                [senderButton setAlpha:0.5];
+            }
+            
+        }
+    }
 }
 
 #pragma mark - Expand Contract

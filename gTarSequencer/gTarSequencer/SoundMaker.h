@@ -23,6 +23,7 @@
 - (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index andSoundMaster:(SoundMaster *)soundMaster;
 
 - (void)pluckString:(int)str;
+- (void)flushBuffer;
 
 - (void)updateAmplitude:(double)amplitude;
 - (void)updateMasterAmplitude:(double)amplitude;

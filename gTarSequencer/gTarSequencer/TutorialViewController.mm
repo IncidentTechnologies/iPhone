@@ -347,7 +347,6 @@
         }
         
         [self initAudioForSequence];
-        [self startSequenceLoop];
         
         // Swipe arrow
         float swipeFrameWidth = 200;
@@ -1009,7 +1008,7 @@
         float swipeFrameHeight = 30;
         CGRect swipeFrame = CGRectMake(0,tutorialScreen.frame.size.height-35,swipeFrameWidth,swipeFrameHeight);
         
-        [self drawSwipeDottedLines:swipeFrame swipeText:@"continue" swipeLeft:YES swipeRight:YES withAlpha:0.7 isReverseDirection:reverse];
+        [self drawSwipeDottedLines:swipeFrame swipeText:@"continue" swipeLeft:NO swipeRight:YES withAlpha:0.7 isReverseDirection:reverse];
         
     }else if(screenIndex == 2){
         
@@ -1388,8 +1387,7 @@
                 [note setBackgroundColor:[UIColor colorWithRed:240/255.0 green:249/255.0 blue:179/255.0 alpha:1.0]];
                 [self playSequenceSound];
             }else{
-                [note setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7]];
-            }
+                [note setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7]];            }
         }else{
             if(sequenceNoteActive[i]){
                 [note setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
@@ -1430,6 +1428,8 @@
     filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Vibraphone_C" ofType:@"mp3"] UTF8String];
     
     m_bankNode->LoadSampleIntoBank(filepath, m_sampNode);
+    
+    [self startSequenceLoop];
     
 }
 

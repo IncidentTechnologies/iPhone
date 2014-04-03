@@ -48,6 +48,7 @@
     int sequenceLoopCounter;
     
     UIColor * colors[STRINGS_ON_GTAR];
+
 }
 
 - (id)initWithFrame:(CGRect)frame andTutorial:(NSString *)tutorial;

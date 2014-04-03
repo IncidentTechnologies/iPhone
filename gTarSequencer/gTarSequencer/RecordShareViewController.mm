@@ -12,6 +12,8 @@
 #import "AudioNodeCommon.h"
 #import "SoundMaster_.mm"
 
+#define DEFAULT_SONG_NAME @"RecordedSessionPlaceholder.m4a"
+
 @interface RecordShareViewController ()
 {
     
@@ -43,6 +45,7 @@
 @synthesize shareScreen;
 @synthesize cancelButton;
 @synthesize songNameField;
+@synthesize playbandView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -625,13 +628,16 @@
 
 - (void)userDidShare:(id)sender
 {
+    
+    NSString * songname = [[self renameSongToSongname] stringByAppendingString:@".m4a"];
+    
     if([selectedShareType isEqualToString:@"Email"]){
        
-        [delegate userDidLaunchEmailWithAttachment:@"RecordedSessionPlaceholder.m4a"];
+        [delegate userDidLaunchEmailWithAttachment:songname];
         
     }else if([selectedShareType isEqualToString:@"SMS"]){
         
-        [delegate userDidLaunchSMSWithAttachment:@"RecordedSessionPlaceholder.m4a"];
+        [delegate userDidLaunchSMSWithAttachment:songname];
         
     }
 }
@@ -699,6 +705,99 @@
     
 }
 
+#pragma mark - Playband
+-(void)resetPlayband
+{
+    
+    NSLog(@"Reset playband");
+    
+    if(!isPlaybandAnimating){
+        [playbandView setFrame:CGRectMake(0,0,playbandView.frame.size.width,playbandView.frame.size.height)];
+        isPlaybandAnimating = YES;
+        [playbandView setHidden:YES];
+    }
+}
+
+-(void)movePlaybandToMeasure:(int)m andFret:(int)f andHide:(BOOL)hide
+{
+    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    float fretWidth = measureWidth / FRETS_ON_GTAR;
+    
+    float newX = ((m*measureWidth+f*fretWidth)/(numMeasures*measureWidth))*playbandView.superview.frame.size.width;
+    
+    [UIView animateWithDuration:0.1 animations:^(void){
+        
+        [playbandView setFrame:CGRectMake(newX,0,playbandView.frame.size.width,playbandView.frame.size.height)];
+    } completion:^(BOOL finished){
+        
+        if(hide){
+            [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(resetPlayband) userInfo:nil repeats:NO];
+        }
+    }];
+    
+    if(!hide){
+        [playbandView setHidden:NO];
+    }
+}
+
+-(void)incrementMeasureForPlayband
+{
+    
+    [self movePlaybandToMeasure:playMeasure andFret:playFret andHide:NO];
+    
+    playFret = (playFret+1)%FRETS_ON_GTAR;
+    
+    if(playFret == 0){
+        playMeasure++;
+    }
+    
+    if(playMeasure > [loadedPattern count]){
+        [self stopPlaybandAnimation];
+    }
+}
+
+-(void)startPlaybandAnimation
+{
+    isPlaybandAnimating = NO;
+    playMeasure = 0;
+    playFret = 0;
+    [self resetPlayband];
+    [self resumePlaybandAnimation];
+}
+
+-(void)resumePlaybandAnimation
+{
+    // determine timing from tempo
+    if(loadedTempo > 0){
+        
+        float beatspersecond = 1 / (4 * loadedTempo / 60);
+        
+        if(playbandTimer == nil){
+            
+            [self pausePlaybandAnimation];
+            
+            playbandTimer = [NSTimer scheduledTimerWithTimeInterval:beatspersecond target:self selector:@selector(incrementMeasureForPlayband) userInfo:nil repeats:YES];
+        }
+    }
+}
+
+-(void)pausePlaybandAnimation
+{
+    [playbandTimer invalidate];
+    playbandTimer = nil;
+}
+
+-(void)stopPlaybandAnimation
+{
+    [playbandTimer invalidate];
+    playbandTimer = nil;
+    
+    // Animate to the end
+    isPlaybandAnimating = NO;
+    [self movePlaybandToMeasure:[loadedPattern count]-1 andFret:FRETS_ON_GTAR-1 andHide:YES];
+    
+    
+}
 
 #pragma mark - Recording
 -(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster
@@ -707,12 +806,9 @@
         
         isWritingFile = YES;
         
-        NSString * placeholderName = @"RecordedSessionPlaceholder.m4a";
-        double recordinterval = 1/44100;
-        float beatspersecond = 4 * tempo/60.0;
-        secondperbeat = 44100 / beatspersecond;
-        
         loadedPattern = patternData;
+        loadedTempo = tempo;
+        loadedSoundMaster = m_soundMaster;
         
         r_measure = 0;
         r_beat = 0;
@@ -721,19 +817,35 @@
         [self showProcessingOverlay];
         [delegate forceShowSessionOverlay];
         
-        fileNode = [m_soundMaster generateFileoutNode:placeholderName];
-        
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
-        sessionFilepath = [documentsDirectory stringByAppendingPathComponent:placeholderName];
-        
-        // set background loop
-        if(recordTimer == nil){
-            
-            // TODO: thread? runloop?
-            recordTimer = [NSTimer scheduledTimerWithTimeInterval:recordinterval target:self selector:@selector(recordToFile) userInfo:nil repeats:YES];
-        }
+        [self flushBuffer];
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(beginRecordSession) userInfo:nil repeats:NO];
     }
+}
+
+-(void)beginRecordSession
+{
+    fileNode = [loadedSoundMaster generateFileoutNode:DEFAULT_SONG_NAME];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    sessionFilepath = [documentsDirectory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
+    
+    double recordinterval = 1/44100;
+    float beatspersecond = 4 * loadedTempo/60.0;
+    secondperbeat = 44100 / beatspersecond;
+    
+    // set background loop
+    if(recordTimer == nil){
+        
+        // TODO: thread? runloop?
+        recordTimer = [NSTimer scheduledTimerWithTimeInterval:recordinterval target:self selector:@selector(recordToFile) userInfo:nil repeats:YES];
+    }
+}
+
+-(void)flushBuffer
+{
+    Instrument * inst = [instruments objectAtIndex:0];
+    [inst.audio flushBuffer];
 }
 
 -(void)recordToFile
@@ -796,7 +908,10 @@
 -(void)interruptRecording
 {
     if(isWritingFile){
+        NSLog(@"Interrupt recording");
         [self stopRecording];
+    }else{
+        NSLog(@"Ignore interrupt recording");
     }
 }
 
@@ -823,6 +938,11 @@
         audioPlayer.delegate = self;
         
         isAudioPlaying = YES;
+        
+        [self startPlaybandAnimation];
+        
+    }else{
+        [self resumePlaybandAnimation];
     }
 
     [audioPlayer play];
@@ -832,11 +952,13 @@
 -(void)pauseRecordPlayback
 {
     [audioPlayer pause];
+    [self pausePlaybandAnimation];
 }
 
 -(void)stopRecordPlayback
 {
     isAudioPlaying = NO;
+    [self stopPlaybandAnimation];
     [audioPlayer stop];
     [delegate recordPlaybackDidEnd];
 }
@@ -993,9 +1115,6 @@
     
 }
 
-
-#pragma mark - Name Field Shared
-
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSMutableCharacterSet * allowedCharacters = [NSMutableCharacterSet alphanumericCharacterSet];
@@ -1006,6 +1125,35 @@
         return YES;
     }
     return NO;
+}
+
+#pragma mark - File System
+- (NSString *)renameSongToSongname
+{
+    NSString * songname = songNameField.text;
+    
+    // Create a subfolder Samples/{Category} if it doesn't exist yet
+    NSLog(@"Moving file from %@ to %@.m4a",DEFAULT_SONG_NAME,songname);
+    
+    NSString * newFilename = [songname stringByAppendingString:@".m4a"];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    
+    NSError * err = NULL;
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    
+    [fm createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
+    
+    NSString * currentPath = [directory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
+    NSString * newPath = [directory stringByAppendingPathComponent:newFilename];
+    
+    BOOL result = [fm moveItemAtPath:currentPath toPath:newPath error:&err];
+    
+    if(!result)
+        NSLog(@"Error moving");
+    
+    return songname;
 }
 
 #pragma mark - Other Listeners

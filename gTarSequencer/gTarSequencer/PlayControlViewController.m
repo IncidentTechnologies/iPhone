@@ -95,7 +95,7 @@
         }
         
         if(save){
-            [delegate saveContext:nil];
+            [delegate saveContext:nil force:NO];
         }
     }
 }
@@ -175,7 +175,7 @@
     }
     
     if(save){
-        [delegate saveContext:nil];
+        [delegate saveContext:nil force:NO];
     }
 }
 
@@ -234,6 +234,16 @@
         [volumeDisplay expand];
         [self volumeDisplayDidOpen];
     }
+}
+
+- (void)enableInstrument:(int)instIndex
+{
+    [delegate enableInstrument:instIndex];
+}
+
+- (void)disableInstrument:(int)instIndex
+{
+    [delegate disableInstrument:instIndex];
 }
 
 #pragma mark - Playing/Pausing

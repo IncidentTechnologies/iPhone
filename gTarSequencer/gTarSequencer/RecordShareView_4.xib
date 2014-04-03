@@ -10,6 +10,7 @@
                 <outlet property="instrumentView" destination="aza-Yz-ZjM" id="wZa-9h-6S7"/>
                 <outlet property="noSessionLabel" destination="wcq-C6-OKX" id="3Ej-Uu-ADX"/>
                 <outlet property="noSessionOverlay" destination="we2-ng-v2T" id="g78-zl-CLO"/>
+                <outlet property="playbandView" destination="sam-Dj-ncY" id="ezR-nT-Z49"/>
                 <outlet property="processingLabel" destination="DnS-5R-2Iz" id="xgm-JZ-Rmq"/>
                 <outlet property="progressView" destination="VDT-fJ-AEP" id="Vw1-Xb-csc"/>
                 <outlet property="trackView" destination="jjl-4y-I9y" id="hoW-Xw-w9O"/>
@@ -25,6 +26,17 @@
                     <rect key="frame" x="65" y="0.0" width="503" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.41176470588235292" green="0.83921568627450982" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JJo-E7-Hpd">
+                    <rect key="frame" x="65" y="0.0" width="503" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sam-Dj-ncY">
+                            <rect key="frame" x="0.0" y="0.0" width="5" height="34"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aza-Yz-ZjM">
                     <rect key="frame" x="0.0" y="34" width="65" height="230"/>

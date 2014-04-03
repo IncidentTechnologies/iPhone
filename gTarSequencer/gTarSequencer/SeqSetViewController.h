@@ -15,7 +15,7 @@
 
 @protocol SeqSetDelegate <NSObject>
 
-- (void) saveContext:(NSString *)filepath;
+- (void) saveContext:(NSString *)filepath force:(BOOL)forceSave;
 - (void) resetPlayLocation;
 
 - (void) stopAll;
@@ -108,7 +108,10 @@
 - (Instrument *)getInstrumentAtIndex:(int)i;
 - (BOOL)isValidInstrumentIndex:(int)inst;
 
-- (void)saveContext:(NSString *)filepath;
+- (void)saveContext:(NSString *)filepath force:(BOOL)forceSave;
+
+- (void)disableKnobIfEnabledForInstrument:(int)instIndex;
+- (void)enableKnobIfDisabledForInstrument:(int)instIndex;
 
 @property (weak, nonatomic) id<SeqSetDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UITableView *instrumentTable;

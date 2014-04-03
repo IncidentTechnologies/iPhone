@@ -14,7 +14,7 @@
 
 @protocol InstrumentDelegate <NSObject>
 
-- (void) saveContext:(NSString *)filepath;
+- (void) saveContext:(NSString *)filepath force:(BOOL)forceSave;
 - (BOOL) checkIsPlaying;
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
 - (void) dequeueAllPatternsForInstrument:(Instrument *)inst;
@@ -95,6 +95,9 @@
 -(IBAction)userDidSelectNewPattern:(id)sender;
 -(IBAction)userDidSelectNewMeasure:(id)sender;
 -(IBAction)viewSeqSet:(id)sender;
+
+-(void)enableKnobIfDisabled;
+-(void)disableKnobIfEnabled;
 
 @property (retain, nonatomic) TutorialViewController * tutorialViewController;
 

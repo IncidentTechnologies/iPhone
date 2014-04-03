@@ -822,7 +822,8 @@
     
     // Init Sampler
     [self showRecordProcessing];
-    audioLoadTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(initDrawAudio) userInfo:nil repeats:NO];
+    
+    audioLoadTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(initDrawAudio) userInfo:nil repeats:NO];
     
     // Resume playing
     if(pausePlaying){

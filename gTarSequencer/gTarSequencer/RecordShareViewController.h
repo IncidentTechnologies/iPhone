@@ -53,10 +53,19 @@
     
     float secondperbeat;
     
+    float loadedTempo;
+    SoundMaster * loadedSoundMaster;
+    
     // Playback
     AVAudioPlayer * audioPlayer;
     NSString * sessionFilepath;
     BOOL isAudioPlaying;
+    
+    // Playband
+    NSTimer * playbandTimer;
+    int playMeasure;
+    int playFret;
+    BOOL isPlaybandAnimating;
     
     // Sharing
     NSString * selectedShareType;
@@ -105,5 +114,6 @@
 @property (retain, nonatomic) UIView * shareView;
 
 @property (nonatomic, weak) IBOutlet UITextField * songNameField;
+@property (nonatomic, weak) IBOutlet UIView * playbandView;
 
 @end
