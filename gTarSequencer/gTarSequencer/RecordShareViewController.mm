@@ -708,13 +708,24 @@
 #pragma mark - Playband
 -(void)resetPlayband
 {
-    
     NSLog(@"Reset playband");
+    measurePlaybandView.userInteractionEnabled = NO;
     
     if(!isPlaybandAnimating){
         [playbandView setFrame:CGRectMake(0,0,playbandView.frame.size.width,playbandView.frame.size.height)];
+        
+        if(measurePlaybandView){
+            [measurePlaybandView removeFromSuperview];
+        }
+        
+        CGRect measurePlaybandViewFrame = CGRectMake(0,1,4,trackView.frame.size.height);
+        measurePlaybandView = [[UIView alloc] initWithFrame:measurePlaybandViewFrame];
+        [measurePlaybandView setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7]];
+        [trackView addSubview:measurePlaybandView];
+        
         isPlaybandAnimating = YES;
         [playbandView setHidden:YES];
+        [measurePlaybandView setHidden:YES];
     }
 }
 
@@ -723,11 +734,14 @@
     float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     float fretWidth = measureWidth / FRETS_ON_GTAR;
     
-    float newX = ((m*measureWidth+f*fretWidth)/(numMeasures*measureWidth))*playbandView.superview.frame.size.width;
+    float pb_x = ((m*measureWidth+f*fretWidth)/(numMeasures*measureWidth))*playbandView.superview.frame.size.width;
+    float mpb_x = m*measureWidth+f*fretWidth;
     
     [UIView animateWithDuration:0.1 animations:^(void){
         
-        [playbandView setFrame:CGRectMake(newX,0,playbandView.frame.size.width,playbandView.frame.size.height)];
+        [playbandView setFrame:CGRectMake(pb_x-1,0,playbandView.frame.size.width,playbandView.frame.size.height)];
+        [measurePlaybandView setFrame:CGRectMake(mpb_x,1,measurePlaybandView.frame.size.width,measurePlaybandView.frame.size.height)];
+        
     } completion:^(BOOL finished){
         
         if(hide){
@@ -737,12 +751,13 @@
     
     if(!hide){
         [playbandView setHidden:NO];
+        [measurePlaybandView setHidden:NO];
     }
 }
 
 -(void)incrementMeasureForPlayband
 {
-    
+    NSLog(@"Increment measure for playband");
     [self movePlaybandToMeasure:playMeasure andFret:playFret andHide:NO];
     
     playFret = (playFret+1)%FRETS_ON_GTAR;
@@ -777,6 +792,8 @@
             [self pausePlaybandAnimation];
             
             playbandTimer = [NSTimer scheduledTimerWithTimeInterval:beatspersecond target:self selector:@selector(incrementMeasureForPlayband) userInfo:nil repeats:YES];
+            
+            [[NSRunLoop currentRunLoop] addTimer:playbandTimer forMode:NSRunLoopCommonModes];
         }
     }
 }

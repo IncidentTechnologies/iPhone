@@ -62,6 +62,7 @@
     BOOL isAudioPlaying;
     
     // Playband
+    UIView * measurePlaybandView;
     NSTimer * playbandTimer;
     int playMeasure;
     int playFret;
@@ -114,6 +115,7 @@
 @property (retain, nonatomic) UIView * shareView;
 
 @property (nonatomic, weak) IBOutlet UITextField * songNameField;
+
 @property (nonatomic, weak) IBOutlet UIView * playbandView;
 
 @end
