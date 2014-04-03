@@ -390,6 +390,13 @@
     [instrumentViewController setActiveInstrument:inst];
 }
 
+- (void)commitMasterLevelSlider:(UILevelSlider *)masterSlider
+{
+    SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+    [soundMaster releaseMasterLevelSlider];
+    [soundMaster commitMasterLevelSlider:masterSlider];
+}
+
 #pragma mark - Save Load Delegate
 
 - (void)userDidLoadSequenceOptions
@@ -1480,7 +1487,7 @@
     message.messageComposeDelegate = self;
     
     // Body
-    NSString * body = @"Check out this song I just made with Sequence! http://gtar.fm/";
+    NSString * body = @"Check out this song I just made with Sequence! Get it here for free: http://gtar.fm/seq";
     [message setBody:body];
     
     // Attachment

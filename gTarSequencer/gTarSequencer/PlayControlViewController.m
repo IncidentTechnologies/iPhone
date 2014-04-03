@@ -205,6 +205,11 @@
     [delegate openInstrument:instIndex];
 }
 
+- (void) commitMasterLevelSlider:(UILevelSlider *)masterSlider
+{
+    [delegate commitMasterLevelSlider:masterSlider];
+}
+
 #pragma mark - Volume Slider Interface
 - (double)getVolume
 {

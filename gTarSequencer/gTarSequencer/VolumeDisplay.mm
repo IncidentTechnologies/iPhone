@@ -13,8 +13,8 @@
 
 #define ANIMATION_DURATION 0.2f
 #define SIDEBAR_WIDTH 130
-#define SLIDER_WIDTH 45
-#define SLIDER_HEIGHT 190
+#define SLIDER_WIDTH 40
+#define SLIDER_HEIGHT 250
 
 @implementation VolumeDisplay
 
@@ -63,9 +63,6 @@
     filling.clearsContextBeforeDrawing = NO;
     [self addSubview:filling];
     
-    [self createOutline];
-    [self addGestures];
-    
     // Get dimensions for filling
     CGSize fullScreen = CGSizeMake(x, 320);
     UIGraphicsBeginImageContextWithOptions(fullScreen, NO, 0);
@@ -94,6 +91,13 @@
     [self fillToPercent:[self percentFull:value]];
 }
 
+- (void)setVolumeByPercent:(double)percent
+{
+    currentValue = MAX_VOLUME*percent;
+    
+    [self fillToPercent:percent];
+}
+
 #pragma mark Filling
 
 - (double)percentFull:(double)value
@@ -107,13 +111,16 @@
 
 - (void)fillToPercent:(double)percent
 {
-    double y = sliderCircleMinY - (sliderCircleMinY - sliderCircleMaxY)*percent;
+    /*double y = sliderCircleMinY - (sliderCircleMinY - sliderCircleMaxY)*percent;
     
     //NSLog(@"y is %f",y);
     
     CGRect newFrame = CGRectMake(sliderCircle.frame.origin.x, y, sliderCircle.frame.size.width, sliderCircle.frame.size.height);
     
     [UIView animateWithDuration:0.1 animations:^(void){[sliderCircle setFrame:newFrame];}];
+     */
+    
+    [masterSlider setSliderValue:(1-percent)];
 
 }
 
@@ -129,16 +136,18 @@
     
     // Draw right sidebar
     CGRect sidebarFrame = CGRectMake(outline.frame.size.width - SIDEBAR_WIDTH, -1, SIDEBAR_WIDTH+1, outline.frame.size.height+2);
-    
-    sidebar = [[UIView alloc] initWithFrame:sidebarFrame];
-    sidebar.backgroundColor = [UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0];
-    sidebar.layer.borderColor = [UIColor whiteColor].CGColor;
-    sidebar.layer.borderWidth = 1.0;
-    
-    [outline addSubview:sidebar];
+    if(sidebar == nil){
+        sidebar = [[UIView alloc] initWithFrame:sidebarFrame];
+        sidebar.backgroundColor = [UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0];
+        sidebar.layer.borderColor = [UIColor whiteColor].CGColor;
+        sidebar.layer.borderWidth = 1.0;
+        sidebar.userInteractionEnabled = YES;
+        
+        [outline addSubview:sidebar];
+    }
     
     // Draw sidebar slider
-    CGRect sliderFrame = CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT);
+    /*CGRect sliderFrame = CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT);
     
     slider = [[UIView alloc] initWithFrame:sliderFrame];
     slider.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -164,17 +173,42 @@
     sliderCircle.layer.cornerRadius = SLIDER_WIDTH/2-indent;
     
     [self addSubview:sliderCircle];
+     */
+    
+    // Master volume level slider
+    if(masterSlider == nil){
+        CGRect levelSliderFrame = CGRectMake(sidebarFrame.size.width/2 - SLIDER_WIDTH/2,10,SLIDER_WIDTH,SLIDER_HEIGHT);
+        UILevelSlider * volumeSlider = [[UILevelSlider alloc] initWithFrame:levelSliderFrame];
+        [volumeSlider setBackgroundColor:[UIColor clearColor]];
+        //[volumeSlider setSliderValue:(1-inst.amplitude)];
+        
+        [volumeSlider setRedColor:[UIColor colorWithRed:203/255.0 green:81/255.0 blue:26/255.0 alpha:1.0]];
+        [volumeSlider setGreenColor:[UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0]];
+        [volumeSlider setLightGreenColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1.0]];
+        [volumeSlider setYellowColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        [volumeSlider setControlColor:[UIColor whiteColor]];
+        
+        volumeSlider.delegate = self;
+        
+        masterSlider = volumeSlider;
+        
+        [sidebar addSubview:volumeSlider];
+    }
+    
+    // Link volume sliders to soundmaster
+    [delegate commitMasterLevelSlider:masterSlider];
     
 }
 
 - (void)addGestures
 {
+    /*
     [sliderCircle setUserInteractionEnabled:YES];
     
     UIPanGestureRecognizer * sliderPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panVolume:)];
     
     [sliderCircle addGestureRecognizer:sliderPan];
-    
+    */
 }
 
 #pragma mark - Instruments
@@ -198,15 +232,19 @@
     // reset other frames
     if(instrumentWidth < 130){
         [sidebar setFrame:CGRectMake([instruments count]*instrumentWidth-1, -1, instrumentWidth, instrumentFrameContainer.frame.size.height)];
-        [slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
-        [sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
+        //[slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
+        //[sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
+        
+        [masterSlider setFrame:CGRectMake(sidebar.frame.size.width/2 - SLIDER_WIDTH/2,10,SLIDER_WIDTH,SLIDER_HEIGHT)];
         
     }else{
         instrumentWidth = (instrumentFrameContainer.frame.size.width-SIDEBAR_WIDTH) / ([instruments count]);
         
         [sidebar setFrame:CGRectMake(outline.frame.size.width - SIDEBAR_WIDTH+1, -1, SIDEBAR_WIDTH, outline.frame.size.height+2)];
-        [slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
-        [sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
+        //[slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
+        //[sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
+        
+        [masterSlider setFrame:CGRectMake(sidebar.frame.size.width/2 - SLIDER_WIDTH/2,10,SLIDER_WIDTH,SLIDER_HEIGHT)];
     }
     
     for(Instrument * inst in instruments){
@@ -257,7 +295,6 @@
         [volumeSlider setLightGreenColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1.0]];
         [volumeSlider setYellowColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
         [volumeSlider setControlColor:[UIColor whiteColor]];
-        
         
         volumeSlider.delegate = self;
         
@@ -310,7 +347,9 @@
 #pragma mark - Expand Contract
 - (void)expand
 {
+    [self createOutline];
     [self drawInstruments];
+    [self setVolume:[delegate getVolume]];
     
     // Animate...
     [UIView animateWithDuration:ANIMATION_DURATION
@@ -338,6 +377,7 @@
 #pragma mark - Drag slider
 - (void)panVolume:(UIPanGestureRecognizer *)sender
 {
+    /*
     CGPoint newPoint = [sender translationInView:self];
     
     if([sender state] == UIGestureRecognizerStateBegan){
@@ -373,13 +413,19 @@
         [delegate volumeButtonValueDidChange:currentValue withSave:save];
 
     }
-    
+ */
 }
 
 -(void)valueDidChange:(double)newValue forSlider:(id)sender
 {
     Instrument * inst;
     UILevelSlider * levelSender = (UILevelSlider *)sender;
+    
+    if(levelSender == masterSlider){
+        [self setVolumeByPercent:newValue];
+        [delegate volumeButtonValueDidChange:currentValue withSave:YES];
+        return;
+    }
     
     for(NSNumber * key in sliders){
         if(levelSender == [sliders objectForKey:key]){

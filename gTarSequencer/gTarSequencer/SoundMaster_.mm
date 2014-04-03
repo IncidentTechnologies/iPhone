@@ -13,6 +13,8 @@
 
 @interface SoundMaster () {
     
+    LevelSubscriber *m_volumeSubscriber;
+    
     SamplerNode *m_samplerNode;
     AudioController *audioController;
     AudioNode *root;

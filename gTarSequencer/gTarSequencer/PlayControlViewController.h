@@ -43,6 +43,8 @@
 - (void) enableInstrument:(int)instIndex;
 - (void) disableInstrument:(int)instIndex;
 
+- (void) commitMasterLevelSlider:(UILevelSlider *)masterSlider;
+
 @end
 
 

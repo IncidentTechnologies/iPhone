@@ -116,6 +116,38 @@
     
 }
 
+
+#pragma mark - Level Sliders
+- (void)releaseMasterLevelSlider
+{
+    if(m_volumeSubscriber != nil){
+        m_samplerNode->UnSubscribe(m_volumeSubscriber);
+    }
+}
+
+- (void)commitMasterLevelSlider:(UILevelSlider *)slider
+{
+    m_volumeSubscriber = m_samplerNode->SubscribeAbsoluteMean((__bridge void *)slider, cbLevel, NULL);
+}
+
+static void cbLevel(float val, void *pObject, void *pContext) {
+    
+    UILevelSlider *slider = (__bridge UILevelSlider*)(pObject);
+    
+    //val = 1.0f - val;
+    
+    val *= 10.0f;
+    
+    if(val > 1.0f)
+        val = 1.0f;
+    else if(val < 0.0f)
+        val = 0.0f;
+    
+    //NSLog(@"%f", val);
+    
+    [slider setDisplayValue:val*[slider GetValue]];
+}
+
 /* this has an error when done here instead of locally
 -(void)releaseFileoutNode:(FileoutNode *)fileNode
 {

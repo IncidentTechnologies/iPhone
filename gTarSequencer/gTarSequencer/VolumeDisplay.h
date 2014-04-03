@@ -17,12 +17,15 @@
 - (BOOL) allowVolumeDisplayToOpen;
 - (void) volumeDisplayDidOpen;
 - (void) volumeDisplayDidClose;
+- (double) getVolume;
 
 - (NSMutableArray *)getInstruments;
 - (void) openInstrument:(int)instIndex;
 
 - (void) enableInstrument:(int)instIndex;
 - (void) disableInstrument:(int)instIndex;
+
+- (void) commitMasterLevelSlider:(UILevelSlider *)masterSlider;
 
 @end
 
@@ -49,11 +52,12 @@
     float volumeFirstY;
     
     UIView * sidebar;
-    UIView * slider;
+    //UIView * slider;
     UIView * instrumentFrameContainer;
     NSMutableArray * instruments;
     NSMutableDictionary * sliders;
     NSMutableDictionary * instrumentIcons;
+    UILevelSlider * masterSlider;
     
     NSTimer * volumeChangeTimer;
 }

@@ -7,6 +7,7 @@
 //
 
 #import "AppData.h"
+#import "UILevelSlider.h"
 
 @class AudioController;
 
@@ -17,5 +18,8 @@
 
 -(void)start;
 -(void)stop;
+
+- (void)releaseMasterLevelSlider;
+- (void)commitMasterLevelSlider:(UILevelSlider *)slider;
 
 @end
