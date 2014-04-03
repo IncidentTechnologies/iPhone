@@ -40,8 +40,14 @@ struct StoreSortOrder {
 @property (retain, nonatomic) IBOutlet UIButton *instrumentButton;
 
 @property (retain, nonatomic) IBOutlet UIButton *easyButton;
+@property (retain, nonatomic) IBOutlet UILabel *easyLabel;
+
 @property (retain, nonatomic) IBOutlet UIButton *mediumButton;
+@property (retain, nonatomic) IBOutlet UILabel *mediumLabel;
+
 @property (retain, nonatomic) IBOutlet UIButton *hardButton;
+@property (retain, nonatomic) IBOutlet UILabel *hardLabel;
+
 @property (retain, nonatomic) IBOutlet UIButton *startButton;
 
 @property (retain, nonatomic) IBOutlet UIView *volumeView;
@@ -61,6 +67,10 @@ struct StoreSortOrder {
 @property (retain, nonatomic) IBOutlet UIButton *buttonSkill;
 @property (retain, nonatomic) IBOutlet UIButton *buttonBuy;
 
+@property (retain, nonatomic) IBOutlet UILabel *backLabel;
+@property (retain, nonatomic) IBOutlet UILabel *shopLabel;
+
+- (void)localizeViews;
 
 - (IBAction)getProductList:(id)sender;
 - (IBAction)onGetServerSongListTouchUpInside:(id)sender;

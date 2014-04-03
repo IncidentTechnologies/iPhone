@@ -1,80 +1,80 @@
-/* 
-  Localizable.strings
-  gTarPlay
-
-  Created by Idan Beck on 4/1/14.
-
-*/
+/*
+ Localizable.strings
+ gTarPlay
+ 
+ Created by Idan Beck on 4/1/14.
+ 
+ */
 
 // Title Screen
-"SIGN IN" = "SIGN IN";
-"VIDEO" = "VIDEO";
+"SIGN IN" = "로그인";
+"VIDEO" = "비디오";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
-"PLAY" = "PLAY";
-"FREE PLAY" = "FREE PLAY";
-"STORE" = "STORE";
-"SIGN IN" = "SIGN IN";
-"SIGN UP" = "SIGN UP";
-"Username" = "Username";
-"Password" = "Password";
-"Email (optional)" = "Email (optional)";
-"Please Connect Your gTar" = "Please Connect Your gTar";
-"Profile" = "Profile";
-"Please connect your gTar to sign up for an account." = "Please connect your gTar to sign up for an account.";
-"Invalid Username" = "Invalid Username";
-"Username must begin with a letter" = "Username must begin with a letter";
-"Invalid Password" = "Invalid Password";
-"Password must be at least 8 letters" = "Password must be at least 8 letters";
-"Invalid Email" = "Invalid Email";
-"Invalid Username" = "Invalid Username";
-"Invalid Password" = "Invalid Password";
-"Facebook failed to login" = "Facebook failed to login";
+"PLAY" = "연주하기";
+"FREE PLAY" = "자유연주하기";
+"STORE" = "스토어";
+"SIGN IN" = "로그인";
+"SIGN UP" = "가입";
+"Username" = "로그인 이름";
+"Password" = "암호";
+"Email (optional)" = "이메일 주소 (선택 사항)";
+"Please Connect Your gTar" = "gTar를 연결하세요";
+"Profile" = "프로필";
+"Please connect your gTar to sign up for an account." = "gTar를 연결하세요";
+"Invalid Username" = "잘못된 사용자 이름";
+"Username must begin with a letter" = "자명은 문자로 시작해야";
+"Invalid Password" = "유효하지 않은 암호";
+"Password must be at least 8 letters" = "암호는 8 글자이어야합니다";
+"Invalid Email" = "잘못된 이메일";
+"Invalid Username" = "잘못된 사용자 이름";
+"Invalid Password" = "유효하지 않은 암호";
+"Facebook failed to login" = "페이스 북 로그인 실패";
 
 // ActivityFeedCell
-"Someone" = "Someone";
-"Jamed out" = "Jamed out";
-"Played %@" = "Played %@";
+"Someone" = "누군가";
+"Jamed out" = "연주했다";
+"Played %@" = "연주했다 %@";
 
 // Song Selection Controller
-"Easy" = "Easy";
-"Medium" = "Medium";
-"Hard" = "Hard";
-"PRESS TO PLAY" = "PRESS TO PLAY";
-"SKILL" = "SKILL";
-"SCORE" = "SCORE";
-"ARTIST" = "ARTIST";
-"TITLE" = "TITLE";
-"Back" = "Back";
-"Song List" = "Song List";
+"Easy" = "쉬움";
+"Medium" = "중간";
+"Hard" = "어려움";
+"PRESS TO PLAY" = "연주를 하려면 누르세요.";
+"SKILL" = "기술";
+"SCORE" = "점수";
+"ARTIST" = "아티스트";
+"TITLE" = "제목";
+"Back" = "뒤로";
+"Song List" = "노래목록";
 
 // Play View
-"SAVE & FINISH" = "SAVE & FINISH";
-"SCORE" = "SCORE";
-"OUTPUT" = "OUTPUT";
-"AUX" = "AUX";
-"SPEAKER" = "SPEAKER";
-"POST TO FEED" = "POST TO FEED";
-"OFF" = "OFF";
-"ON" = "ON";
-"Easy" = "Easy";
-"Quit" = "Quit";
-"Restart" = "Restart";
+"SAVE & FINISH" = "저장하고 끝내기";
+"SCORE" = "점수";
+"OUTPUT" = "출력";
+"AUX" = "보조";
+"SPEAKER" = "스피커";
+"POST TO FEED" = "포스팅하기";
+"OFF" = "끄기";
+"ON" = "켜기";
+"Easy" = "쉬움";
+"Quit" = "그만두기";
+"Restart" = "재시작";
 
 // Social View
-"Logout" = "Logout";
-"FOLLOW" = "FOLLOW";
-"FOLLOWING" = "FOLLOWING";
+"Logout" = "로그아웃";
+"FOLLOW" = "팔로우하기";
+"FOLLOWING" = "팔로우하기";
 
 // Freeplay
-"ALL" = "ALL";
-"COLOR" = "COLOR";
-"SHAPE" = "SHAPE";
-"LOOP" = "LOOP";
-"CLEAR" = "CLEAR";
-"EXIT" = "EXIT";
-"TONE" = "TONE";
-"SLIDING" = "SLIDING";
-"EXIT TO MAIN" = "EXIT TO MAIN";
+"ALL" = "all";
+"COLOR" = "색상";
+"SHAPE" = "모양";
+"LOOP" = "고리";
+"CLEAR" = "삭제";
+"EXIT" = "나가기";
+"TONE" = "톤";
+"SLIDING" = "슬라이딩";
+"EXIT TO MAIN" = "메인으로 나가기";
 
 // Instruments
 "Electric" = "Electric";

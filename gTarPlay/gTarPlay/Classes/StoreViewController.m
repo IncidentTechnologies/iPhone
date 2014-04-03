@@ -90,6 +90,8 @@ extern FileController *g_fileController;
 {
     [super viewDidLoad];
     
+    [self localizeViews];
+    
     // iOS 7 Check
     if([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -188,6 +190,21 @@ extern FileController *g_fileController;
         _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
         [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
+}
+
+- (void)localizeViews {
+    [_buttonTitleArtist setTitle:NSLocalizedString(@"TITLE & ARTIST", NULL) forState:UIControlStateNormal];
+    [_buttonSkill setTitle:NSLocalizedString(@"SKILL", NULL) forState:UIControlStateNormal];
+    [_buttonBuy setTitle:NSLocalizedString(@"BUY", NULL) forState:UIControlStateNormal];
+    
+    _easyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Easy", NULL)];
+    _mediumLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Medium", NULL)];
+    _hardLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Hard", NULL)];
+    
+    [_startButton setTitle:NSLocalizedString(@"PRESS TO PLAY", NULL) forState:UIControlStateNormal];
+    
+    _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    _shopLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Shop", NULL)];
 }
 
 - (void)viewDidAppear:(BOOL)animated

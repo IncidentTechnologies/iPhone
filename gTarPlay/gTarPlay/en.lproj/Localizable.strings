@@ -90,3 +90,23 @@
 "Droplet" = "Droplet";
 "Square" = "Square";
 
+// Time formatter
+"The Future" = "The Future";
+"%u second ago" = "%u second ago";
+"%u seconds ago" = "%u seconds ago";
+"%u minute ago" = "%u minute ago";
+"%u minutes ago" = "%u minutes ago";
+"%u hour ago" = "%u hour ago";
+"%u hours ago" = "%u hours ago";
+"%u day ago" = "%u day ago";
+"%u days ago" = "%u days ago";
+"%u week ago" = "%u week ago";
+"%u weeks ago" = "%u weeks ago";
+"%u month ago" = "%u month ago";
+"%u months ago" = "%u months ago";
+
+// Store
+"TITLE & ARTIST" = "TITLE & ARTIST";
+"BUY" = "BUY";
+"Shop" = "Shop";
+

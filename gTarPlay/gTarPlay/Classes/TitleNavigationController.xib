@@ -25,7 +25,7 @@
                 <outlet property="menuFreePlayButton" destination="828" id="986"/>
                 <outlet property="menuLeftPanel" destination="820" id="920"/>
                 <outlet property="menuPlayButton" destination="827" id="912"/>
-                <outlet property="menuStoreButton" destination="842" id="915"/>
+                <outlet property="menuStoreButton" destination="3478" id="4dF-Uk-emY"/>
                 <outlet property="notificationLabel" destination="2398" id="2565"/>
                 <outlet property="pleaseConnectLabel" destination="3123" id="OAm-Z4-xO4"/>
                 <outlet property="profileButton" destination="3433" id="3457"/>

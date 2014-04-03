@@ -1,92 +1,93 @@
-/* 
-  Localizable.strings
-  gTarPlay
-
-  Created by Idan Beck on 4/1/14.
-
-*/
+/*
+ Localizable.strings
+ gTarPlay
+ 
+ Created by Idan Beck on 4/1/14.
+ 
+ */
 
 // Title Screen
-"SIGN IN" = "SIGN IN";
-"VIDEO" = "VIDEO";
+"SIGN IN" = "Identifiez-vous";
+"VIDEO" = "vidéo";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
-"PLAY" = "PLAY";
-"FREE PLAY" = "FREE PLAY";
-"STORE" = "STORE";
-"SIGN IN" = "SIGN IN";
-"SIGN UP" = "SIGN UP";
-"Username" = "Username";
-"Password" = "Password";
-"Email (optional)" = "Email (optional)";
-"Please Connect Your gTar" = "Please Connect Your gTar";
-"Profile" = "Profile";
-"Please connect your gTar to sign up for an account." = "Please connect your gTar to sign up for an account.";
-"Invalid Username" = "Invalid Username";
-"Username must begin with a letter" = "Username must begin with a letter";
+"PLAY" = "Jouer";
+"FREE PLAY" = "Jouer librement";
+"STORE" = "Magasin";
+"SIGN IN" = "Identifiez-vous";
+"SIGN UP" = "SIGNER";
+"Username" = "NOM D'UTILISATEUR";
+"Password" = "PASSE";
+"Email (optional)" = "ADRESSE EMAIL (EN OPTION)";
+"Please Connect Your gTar" = "Veuillez brancher votre gTar";
+"Profile" = "Profil";
+"Please connect your gTar to sign up for an account." = "Veuillez brancher votre gTar";
+"Invalid Username" = "NOM D'UTILISATEUR INVALID";
+"Username must begin with a letter" = "Nom d'utilisateur doit commencer par une lettre";
 "Invalid Password" = "Invalid Password";
-"Password must be at least 8 letters" = "Password must be at least 8 letters";
-"Invalid Email" = "Invalid Email";
-"Invalid Username" = "Invalid Username";
-"Invalid Password" = "Invalid Password";
-"Facebook failed to login" = "Facebook failed to login";
+"Password must be at least 8 letters" = "passe doit être d'au moins 8 lettres";
+"Invalid Email" = "Email invalide";
+"Invalid Username" = "NOM D'UTILISATEUR INVALID";
+"Invalid Password" = "passe invalide";
+"Facebook failed to login" = "FACEBOOK A OMIS DE LOGIN";
 
 // ActivityFeedCell
-"Someone" = "Someone";
-"Jamed out" = "Jamed out";
-"Played %@" = "Played %@";
+"Someone" = "QUELQU'UN";
+"Jammed out" = "joué";
+"Played %@" = "joué %@";
 
 // Song Selection Controller
-"Easy" = "Easy";
-"Medium" = "Medium";
-"Hard" = "Hard";
-"PRESS TO PLAY" = "PRESS TO PLAY";
-"SKILL" = "SKILL";
-"SCORE" = "SCORE";
-"ARTIST" = "ARTIST";
-"TITLE" = "TITLE";
-"Back" = "Back";
-"Song List" = "Song List";
+"Easy" = "Facile";
+"Medium" = "Moyen";
+"Hard" = "Difficile";
+"PRESS TO PLAY" = "Appuyez pour lecture";
+"SKILL" = "Compétence";
+"SCORE" = "Pointage";
+"ARTIST" = "Artiste";
+"TITLE" = "Titre";
+"Back" = "Retour";
+"Song List" = "Liste de chansons";
 
 // Play View
-"SAVE & FINISH" = "SAVE & FINISH";
-"SCORE" = "SCORE";
-"OUTPUT" = "OUTPUT";
-"AUX" = "AUX";
-"SPEAKER" = "SPEAKER";
-"POST TO FEED" = "POST TO FEED";
-"OFF" = "OFF";
+"SAVE & FINISH" = "sauver et terminer";
+"SCORE" = "Pointage";
+"OUTPUT" = "sortie";
+"AUX" = "auxiliaire";
+"SPEAKER" = "haut-parleur";
+"POST TO FEED" = "Publier";
+"OFF" = "off";
 "ON" = "ON";
-"Easy" = "Easy";
-"Quit" = "Quit";
-"Restart" = "Restart";
+"Easy" = "Facile";
+"Quit" = "abandonner";
+"Restart" = "reprendre";
 
 // Social View
-"Logout" = "Logout";
-"FOLLOW" = "FOLLOW";
-"FOLLOWING" = "FOLLOWING";
+"Logout" = "fermer la session";
+"FOLLOW" = "s'abonner";
+"FOLLOWING" = "abonnement";
 
 // Freeplay
-"ALL" = "ALL";
-"COLOR" = "COLOR";
-"SHAPE" = "SHAPE";
-"LOOP" = "LOOP";
-"CLEAR" = "CLEAR";
-"EXIT" = "EXIT";
-"TONE" = "TONE";
-"SLIDING" = "SLIDING";
-"EXIT TO MAIN" = "EXIT TO MAIN";
+"ALL" = "tous";
+"COLOR" = "couleur";
+"SHAPE" = "forme";
+"LOOP" = "boucle";
+"CLEAR" = "effacer";
+"EXIT" = "sortie";
+"TONE" = "Volume";
+"SLIDING" = "glissement";
+"EXIT TO MAIN" = "Menu principal";
 
 // Instruments
-"Electric" = "Electric";
-"Acoustic Guitar" = "Acoustic Guitar";
-"Rock Guitar" = "Rock Guitar";
-"Upright Bass" = "Upright Bass";
+"Electric" = "Guitare électrique";
+"Acoustic Guitar" = "Guitare acoustique";
+"Rock Guitar" = "Guitare rock";
+"Upright Bass" = "Contrebasse";
 "Piano" = "Piano";
-"Rhodes" = "Rhodes";
-"Muted Clav" = "Muted Clav";
-"Bowed Strings" = "Bowed Strings";
+"Rhodes" = "Piano électrique";
+"Muted Clav" = "Clavinet";
+"Bowed Strings" = "Instruments à cordes frottés";
 "Marimba" = "Marimba";
-"Carl's Synth" = "Carl's Synth";
-"Droplet" = "Droplet";
-"Square" = "Square";
+"Carl's Synth" = "Synthétiseur Carl";
+"Droplet" = "Gouttelette";
+"Square" = "Piano carré";
+
 

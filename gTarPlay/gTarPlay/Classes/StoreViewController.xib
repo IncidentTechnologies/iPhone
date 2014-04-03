@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoreViewController">
             <connections>
+                <outlet property="backLabel" destination="94" id="6cG-3t-ZNV"/>
                 <outlet property="buttonBuy" destination="129" id="339"/>
                 <outlet property="buttonSkill" destination="155" id="337"/>
                 <outlet property="buttonTitleArtist" destination="154" id="338"/>
@@ -19,6 +20,7 @@
                 <outlet property="mediumButton" destination="Ytz-kX-JNj" id="mx1-ff-6c0"/>
                 <outlet property="pullToUpdateSongList" destination="ouY-hX-hgj" id="8p1-qM-m48"/>
                 <outlet property="searchBar" destination="92" id="528"/>
+                <outlet property="shopLabel" destination="93" id="eqz-w9-xwa"/>
                 <outlet property="songOptionsModal" destination="7Xx-xc-6z3" id="RMM-iZ-avU"/>
                 <outlet property="songPlayerView" destination="OGT-Qa-jMu" id="mOp-XB-S4l"/>
                 <outlet property="startButton" destination="MKN-Oa-wZJ" id="uQi-eK-YnQ"/>

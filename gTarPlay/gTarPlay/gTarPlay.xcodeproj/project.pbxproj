@@ -1668,9 +1668,9 @@
 		1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = gTarPlayAppDelegate.m; path = Classes/gTarPlayAppDelegate.m; sourceTree = "<group>"; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		260AFCC31814757700F7536A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
-		260CF0B318EBEFDF0083903A /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		260CF0B718EBEFFB0083903A /* fr */ = {isa = PBXFileReference; lastKnownFileType = file; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		260CF0B818EBF00A0083903A /* ko */ = {isa = PBXFileReference; lastKnownFileType = file; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		260CF0B318EBEFDF0083903A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		260CF0B818EBF00A0083903A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		26742EAD18ECBA5A0041C2EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26868D8417D2A46500DC990F /* StoreSongListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSongListCell.h; sourceTree = "<group>"; };
 		26868D8517D2A46500DC990F /* StoreSongListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSongListCell.m; sourceTree = "<group>"; };
 		26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreSongListCell.xib; sourceTree = "<group>"; };
@@ -5764,8 +5764,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				260CF0B318EBEFDF0083903A /* en */,
-				260CF0B718EBEFFB0083903A /* fr */,
 				260CF0B818EBF00A0083903A /* ko */,
+				26742EAD18ECBA5A0041C2EF /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
