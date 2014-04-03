@@ -795,9 +795,12 @@
                      }
                     
                     if(updateMeasure){
-                        NSArray * fretObjArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentFret],strings,[NSNumber numberWithBool:instToPlay.isMuted],[NSNumber numberWithDouble:instToPlay.amplitude], nil];
+                        NSArray * patternNames = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"OFF", nil];
+                        NSString * fretPattern = [patternNames objectAtIndex:instToPlay.selectedPatternIndex];
                         
-                        NSArray * fretKeyArray = [NSArray arrayWithObjects:@"fretindex",@"strings",@"ismuted",@"amplitude", nil];
+                        NSArray * fretObjArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentFret],strings,[NSNumber numberWithBool:instToPlay.isMuted],[NSNumber numberWithDouble:instToPlay.amplitude],fretPattern,nil];
+                        
+                        NSArray * fretKeyArray = [NSArray arrayWithObjects:@"fretindex",@"strings",@"ismuted",@"amplitude",@"pattern",nil];
                         
                         NSDictionary * fretDict = [[NSDictionary alloc] initWithObjects:fretObjArray forKeys:fretKeyArray];
                         

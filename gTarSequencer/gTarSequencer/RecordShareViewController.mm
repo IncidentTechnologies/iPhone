@@ -274,6 +274,13 @@
     UIColor * offColor = [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:0.5];
     
     
+    UIColor * aColorSolid = [UIColor colorWithRed:76/255.0 green:146/255.0 blue:163/255.0 alpha:1.0];
+    UIColor * bColorSolid = [UIColor colorWithRed:71/255.0 green:161/255.0 blue:184/255.0 alpha:1.0];
+    UIColor * cColorSolid = [UIColor colorWithRed:64/255.0 green:145/255.0 blue:175/255.0 alpha:1.0];
+    UIColor * dColorSolid = [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0];
+    UIColor * offColorSolid = [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0];
+    
+    
     //
     // Draw measure content
     //
@@ -287,7 +294,7 @@
         prevTranspose[j] = 0;
     }
     
-    //NSLog(@"pattern data is %@",patternData);
+    NSLog(@"pattern data is %@",patternData);
     
     int i = 0;
     for(NSMutableArray * measure in patternData){
@@ -353,7 +360,7 @@
             // Draw interrupt measure
             NSString * interruptPattern = [measureData objectForKey:@"delta"];
             double interruptTranspose = 0;
-            
+          
             if(!CGRectIsNull(measureBarInterruptFrame)){
                 
                 UIView * measureInterruptBar = [[UIView alloc] initWithFrame:measureBarInterruptFrame];
@@ -379,6 +386,89 @@
                     [self drawProgressMarkerForMeasure:i inRow:k startAt:deltai withWidth:(1.0-deltai)];
                 }
             }
+           
+            
+            // Draw fret before interrupt pattern
+            NSMutableArray * frets = [measureData objectForKey:@"frets"];
+            NSMutableDictionary * tempPattern = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:-1],[NSNumber numberWithInt:-1],@"",@"",nil] forKeys:[NSArray arrayWithObjects:@"start",@"end",@"ismute",@"pattern",nil, nil]];
+            NSMutableArray * tempFretPatterns = [[NSMutableArray alloc] init];
+            
+            for(NSDictionary * fret in frets){
+                
+                // Mute -> Unmute before off
+                if(![[fret objectForKey:@"ismuted"] boolValue] && [pattern isEqualToString:@"OFF"] && [[tempPattern objectForKey:@"start"] intValue] == -1){
+                   
+                    // Start a temp pattern
+                    [tempPattern setObject:[fret objectForKey:@"fretindex"] forKey:@"start"];
+                    [tempPattern setObject:[NSNumber numberWithBool:false] forKey:@"ismute"];
+                    [tempPattern setObject:[fret objectForKey:@"pattern"] forKey:@"pattern"];
+                    
+                }else if([[fret objectForKey:@"ismuted"] boolValue] && ![pattern isEqualToString:@"OFF"] && [[tempPattern objectForKey:@"start"] intValue] == -1){
+
+                    // Start a temp pattern
+                    [tempPattern setObject:[fret objectForKey:@"fretindex"] forKey:@"start"];
+                    [tempPattern setObject:[NSNumber numberWithBool:true] forKey:@"ismute"];
+                    [tempPattern setObject:@"OFF" forKey:@"pattern"];
+                }
+                
+                // Reached the end
+                if([[fret objectForKey:@"fretindex"] intValue] > [[tempPattern objectForKey:@"start"] intValue] && [[tempPattern objectForKey:@"start"] intValue] > -1 && ((![[fret objectForKey:@"ismuted"] boolValue] && ![pattern isEqualToString:@"OFF"]) || ([[fret objectForKey:@"ismuted"] boolValue] && [pattern isEqualToString:@"OFF"]))){
+                    
+                    [tempPattern setObject:[fret objectForKey:@"fretindex"] forKey:@"end"];
+                    [tempFretPatterns addObject:tempPattern];
+                    
+                    tempPattern = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:-1],[NSNumber numberWithInt:-1],@"",@"",nil] forKeys:[NSArray arrayWithObjects:@"start",@"end",@"ismute",@"pattern",nil, nil]];
+                    
+                }
+                
+                if(((double)[[fret objectForKey:@"fretindex"] intValue])/FRETS_ON_GTAR >= [[measureData objectForKey:@"deltai"] doubleValue]){
+                    
+                    //NSLog(@"Return at fret %i",[[fret objectForKey:@"fretindex"] intValue]);
+                    break;
+                }
+            }
+            
+            // Draw the fret patterns
+            double fretWidth = measureWidth/FRETS_ON_GTAR;
+            for(int t = 0; t < [tempFretPatterns count]; t++){
+                
+                int start = [[[tempFretPatterns objectAtIndex:t] objectForKey:@"start"] intValue];
+                int end = [[[tempFretPatterns objectAtIndex:t] objectForKey:@"end"] intValue];
+                int fretslong = end - start;
+                
+                CGRect fretFrame = CGRectMake(measureBarFrame.origin.x+fretWidth*start,measureBarFrame.origin.y,fretslong*fretWidth,measureBarFrame.size.height);
+                
+                UIView * tempFret = [[UIView alloc] initWithFrame:fretFrame];
+                double deltastart = ((double)start)/FRETS_ON_GTAR;
+                double deltawidth = ((double)(end-start))/FRETS_ON_GTAR;
+                
+                if([[[tempFretPatterns objectAtIndex:t] objectForKey:@"ismute"] boolValue]){
+                    
+                    [tempFret setBackgroundColor:offColorSolid];
+                    
+                    [self eraseProgressMarkerForMeasure:i inRow:k startAt:deltastart withWidth:deltawidth];
+                    
+                }else{
+                    // record the color and get it
+                    NSString * fretPattern = [[tempFretPatterns objectAtIndex:t] objectForKey:@"pattern"];
+                    if([fretPattern isEqualToString:@"A"]){
+                        [tempFret setBackgroundColor:aColorSolid];
+                    }else if([fretPattern isEqualToString:@"B"]){
+                        [tempFret setBackgroundColor:bColorSolid];
+                    }else if([fretPattern isEqualToString:@"C"]){
+                        [tempFret setBackgroundColor:cColorSolid];
+                    }else if([fretPattern isEqualToString:@"D"]){
+                        [tempFret setBackgroundColor:dColorSolid];
+                    }else{
+                        [tempFret setBackgroundColor:offColor];
+                    }
+                    
+                    [self drawProgressMarkerForMeasure:i inRow:k startAt:deltastart withWidth:deltawidth];
+                }
+                
+                [trackView addSubview:tempFret];
+            }
+            
             
             // Draw pattern end markers
             BOOL patternend = [[measureData objectForKey:@"patternrepeat"] boolValue];
@@ -469,6 +559,19 @@
     
     [progressView addSubview:marker];
     
+}
+
+-(void)eraseProgressMarkerForMeasure:(int)m inRow:(int)row startAt:(double)start withWidth:(double)width
+{
+    float measureWidth = progressView.frame.size.width / numMeasures;
+    float rowHeight = (progressView.frame.size.height-10) / MAX_INSTRUMENTS;
+    
+    CGRect markerFrame = CGRectMake(m*measureWidth+measureWidth*start,row*rowHeight+5,width*measureWidth,1.0);
+    
+    UIView * marker = [[UIView alloc] initWithFrame:markerFrame];
+    [marker setBackgroundColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1.0]];
+    
+    [progressView addSubview:marker];
 }
 
 #pragma mark - No Session Overlay
@@ -757,7 +860,6 @@
 
 -(void)incrementMeasureForPlayband
 {
-    NSLog(@"Increment measure for playband");
     [self movePlaybandToMeasure:playMeasure andFret:playFret andHide:NO];
     
     playFret = (playFret+1)%FRETS_ON_GTAR;
@@ -870,25 +972,27 @@
     NSArray * measure = [loadedPattern objectAtIndex:r_measure];
     
     // loop through measures
-    for(NSDictionary * measureinst in measure){
-        
-        int instIndex = [[measureinst objectForKey:@"instrument"] intValue];
-        Instrument * inst = [instruments objectAtIndex:[self getIndexForInstrument:instIndex]];
-        
-        // fret for the beat
-        NSMutableArray * frets = [measureinst objectForKey:@"frets"];
-        for(NSDictionary * f in frets){
-            int fretindex = [[f objectForKey:@"fretindex"] intValue];
-            if(fretindex == r_beat%FRETS_ON_GTAR && ![[f objectForKey:@"ismuted"] boolValue]){
-               
-                // strings for the fret
-                NSString * strings = [f objectForKey:@"strings"];
-                for(int s = 0; s < STRINGS_ON_GTAR; s++){
-                    if([strings characterAtIndex:s] == '1'){
-                        [inst.audio pluckString:s];
+    @synchronized(measure){
+        for(NSDictionary * measureinst in measure){
+            
+            int instIndex = [[measureinst objectForKey:@"instrument"] intValue];
+            Instrument * inst = [instruments objectAtIndex:[self getIndexForInstrument:instIndex]];
+            
+            // fret for the beat
+            NSMutableArray * frets = [measureinst objectForKey:@"frets"];
+            for(NSDictionary * f in frets){
+                int fretindex = [[f objectForKey:@"fretindex"] intValue];
+                if(fretindex == r_beat%FRETS_ON_GTAR && ![[f objectForKey:@"ismuted"] boolValue]){
+                   
+                    // strings for the fret
+                    NSString * strings = [f objectForKey:@"strings"];
+                    for(int s = 0; s < STRINGS_ON_GTAR; s++){
+                        if([strings characterAtIndex:s] == '1'){
+                            [inst.audio pluckString:s];
+                        }
                     }
-                }
 
+                }
             }
         }
     }
