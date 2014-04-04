@@ -47,6 +47,11 @@
     return self;
 }
 
+- (void)layoutSubviews
+{
+    
+}
+
 #pragma mark Init
 
 - (void)commonInit
@@ -225,10 +230,7 @@
     }else{
         
         displayOpen = false;
-        
-        
         [delegate tempoDisplayDidClose];
-        
         [self contract];
         
     }
@@ -250,7 +252,6 @@
         
         displayOpen = false;
     }
-    
     [self contract];
     
 }

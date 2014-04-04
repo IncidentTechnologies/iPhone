@@ -27,6 +27,9 @@
 - (void) forceShowSessionOverlay;
 - (void) forceHideSessionOverlay;
 
+- (void) showRecordOverlay;
+- (void) hideRecordOverlay;
+
 - (NSMutableArray *)getInstruments;
 
 @end

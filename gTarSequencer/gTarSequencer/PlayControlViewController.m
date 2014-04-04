@@ -21,6 +21,7 @@
 @synthesize shareButton;
 @synthesize disablePlay;
 @synthesize disableShare;
+@synthesize disableRecord;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -54,6 +55,7 @@
     isPlaybackPlaying = FALSE;
     
     [self hideSessionOverlay];
+    [self hideRecordOverlay];
     
 }
 
@@ -88,8 +90,12 @@
     if (tempo != newValue)
     {
         tempo = newValue;
-        if (isPlaying)
-        {
+        if(isRecording){
+            
+            [self stopPlayRecordAndAnimate:YES];
+            
+        }else if(isPlaying){
+            
             [self endPlaySession];
             [self beginPlaySession];
         }
@@ -112,6 +118,7 @@
 
 - (void) tempoDisplayDidOpen
 {
+    //NSLog(@"**** tempo display did open");
     isTempoSliderOpen = true;
     [delegate stopGestures];
     [delegate stopDrawing];
@@ -119,6 +126,7 @@
 
 - (void) tempoDisplayDidClose
 {
+    //NSLog(@"**** tempo display did close");
     isTempoSliderOpen = false;
     [delegate startGestures];
     [delegate startDrawing];
@@ -275,12 +283,12 @@
     [self endPlaySession];
 }
 
-- (void)stopPlayRecord
+- (void)stopPlayRecordAndAnimate:(BOOL)animate
 {
-    [self stopAll];
-    
     if(isRecording){
-        [self stopRecordingAndAnimate:NO];
+        [self stopRecordingAndAnimate:animate];
+    }else{
+        [self stopAll];
     }
     
     if(isPlaybackPlaying){
@@ -360,6 +368,7 @@
 
 -(IBAction)recordSession:(id)sender
 {
+    
     if(isPlaying && !isRecording){
         [self stopAll];
     }else{
@@ -527,6 +536,16 @@
 {
     [disablePlay setHidden:YES];
     [disableShare setHidden:YES];
+}
+
+-(void)showRecordOverlay
+{
+    [disableRecord setHidden:NO];
+}
+
+-(void)hideRecordOverlay
+{
+    [disableRecord setHidden:YES];
 }
 
 -(IBAction)userDidSelectShare:(id)sender

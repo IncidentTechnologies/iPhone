@@ -853,19 +853,20 @@
         if(activeMainView != seqSetViewController.view && activeMainView != instrumentViewController.view){
             [self selectNavChoice:@"Set" withShift:NO];
         }
+        
     }else{
         
         if([seqSetViewController countInstruments] > 0){
             
+            [recordShareController reloadInstruments];
+            [self stopAll];
+            
+            if(patternData != nil){
+                SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+                [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster];
+            }
+            
             if(animate){
-                [recordShareController reloadInstruments];
-                [self stopAll];
-                
-                if(patternData != nil){
-                    SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-                    [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster];
-                }
-                
                 [UIView setAnimationsEnabled:YES];
                 
                 [recordShareController.view setHidden:NO];
@@ -1099,7 +1100,9 @@
 
 - (void)startGestures
 {
+    [self stopGestures];
     
+    //NSLog(@"******** start gestures");
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeLeftNavigator)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [swipeLeft setNumberOfTouchesRequired:1];
@@ -1116,6 +1119,7 @@
 
 - (void)stopGestures
 {
+    //NSLog(@" ***** stop gestures ");
     [self.view removeGestureRecognizer:swipeLeft];
     [self.view removeGestureRecognizer:swipeRight];
     [seqSetViewController.view setUserInteractionEnabled:NO];
@@ -1288,7 +1292,7 @@
 
 - (void)stopAll
 {
-    [playControlViewController stopPlayRecord];
+    [playControlViewController stopPlayRecordAndAnimate:NO];
 
 }
 
@@ -1300,6 +1304,16 @@
 - (void)userDidSelectShare
 {
     [recordShareController openShareScreen];
+}
+
+- (void)showRecordOverlay
+{
+    [playControlViewController showRecordOverlay];
+}
+
+- (void)hideRecordOverlay
+{
+    [playControlViewController hideRecordOverlay];
 }
 
 #pragma mark - Seq Set Delegate
@@ -1464,10 +1478,10 @@
     email.mailComposeDelegate = self;
     
     // Subject
-    [email setSubject:@"Sequence"];
+    [email setSubject:@"Check Out the Song I Made"];
     
     // Body
-    NSString * body = @"Check out this song I just made with <a href='http://www.incidentgtar.com/'>Sequence</a>!";
+    NSString * body = @"Check out the song I just made with Sequence!<br/><br/>Get it for free and make your own here: <a href='http://gtar.fm/seq'>http://gtar.fm/seq</a>";
     [email setMessageBody:body isHTML:YES];
     
     // Attachment
@@ -1490,7 +1504,7 @@
     message.messageComposeDelegate = self;
     
     // Body
-    NSString * body = @"Check out this song I just made with Sequence! Get it here for free: http://gtar.fm/seq";
+    NSString * body = @"Check out the song I just made with Sequence! Get it for free and make your own here: http://gtar.fm/seq";
     [message setBody:body];
     
     // Attachment

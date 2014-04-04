@@ -75,7 +75,7 @@
 - (IBAction)toggleVolumeOpen:(id)sender;
 - (IBAction)recordSession:(id)sender;
 - (IBAction)userDidSelectShare:(id)sender;
-- (void)stopPlayRecord;
+- (void)stopPlayRecordAndAnimate:(BOOL)animate;
 - (void)pauseRecordPlayback;
 
 - (int)getTempo;
@@ -90,6 +90,8 @@
 
 - (void)showSessionOverlay;
 - (void)hideSessionOverlay;
+- (void)showRecordOverlay;
+- (void)hideRecordOverlay;
 
 @property (weak, nonatomic) id<PlayControlDelegate> delegate;
 @property (weak, nonatomic) IBOutlet RadialButton * tempoSlider;
@@ -101,5 +103,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView * disableShare;
 @property (weak, nonatomic) IBOutlet UIView * disablePlay;
+@property (weak, nonatomic) IBOutlet UIView * disableRecord;
 
 @end

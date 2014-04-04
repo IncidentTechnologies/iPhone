@@ -134,16 +134,9 @@ static void cbLevel(float val, void *pObject, void *pContext) {
     
     UILevelSlider *slider = (__bridge UILevelSlider*)(pObject);
     
-    //val = 1.0f - val;
-    
-    val *= 10.0f;
-    
-    if(val > 1.0f)
-        val = 1.0f;
-    else if(val < 0.0f)
+    if(val < 0.0f){
         val = 0.0f;
-    
-    //NSLog(@"%f", val);
+    }
     
     [slider setDisplayValue:val*[slider GetValue]];
 }

@@ -576,30 +576,40 @@
 
 #pragma mark - No Session Overlay
 
--(void) showNoSessionOverlay
+-(void)showNoSessionOverlay
 {
     [noSessionOverlay setHidden:NO];
     [noSessionLabel setHidden:NO];
     [processingLabel setHidden:YES];
 }
 
--(void) hideNoSessionOverlay
+-(void)hideNoSessionOverlay
 {
     if(!isWritingFile){
         [noSessionOverlay setHidden:YES];
     }
 }
 
--(BOOL) showHideSessionOverlay
+-(BOOL)showHideSessionOverlay
 {
     return [noSessionOverlay isHidden];
 }
 
--(void) showProcessingOverlay
+-(void)showProcessingOverlay
 {
     [noSessionOverlay setHidden:NO];
     [noSessionLabel setHidden:YES];
     [processingLabel setHidden:NO];
+}
+
+-(void)showRecordOverlay
+{
+    [delegate showRecordOverlay];
+}
+
+-(void)hideRecordOverlay
+{
+    [delegate hideRecordOverlay];
 }
 
 #pragma mark - Share Screen
@@ -937,6 +947,7 @@
         [delegate forceShowSessionOverlay];
         
         [self flushBuffer];
+        [self showRecordOverlay];
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(beginRecordSession) userInfo:nil repeats:NO];
     }
 }
@@ -945,8 +956,20 @@
 {
     fileNode = [loadedSoundMaster generateFileoutNode:DEFAULT_SONG_NAME];
     
+    // Then write the file
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    
+    // First clear the directory
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    NSError * error = nil;
+    for(NSString * file in [fm contentsOfDirectoryAtPath:documentsDirectory error:&error]){
+        NSLog(@"Remove item at path %@",[NSString stringWithFormat:@"%@/%@",documentsDirectory,file]);
+        if(![file isEqualToString:DEFAULT_SONG_NAME]){
+            [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documentsDirectory,file] error:&error];
+        }
+    }
+    
     sessionFilepath = [documentsDirectory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
     
     double recordinterval = 1/44100;
@@ -1017,6 +1040,7 @@
     
     NSLog(@"Stop recording");
     [self hideNoSessionOverlay];
+    [self hideRecordOverlay];
     [delegate forceHideSessionOverlay];
     
     [recordTimer invalidate];
@@ -1254,7 +1278,7 @@
     NSString * songname = songNameField.text;
     
     // Create a subfolder Samples/{Category} if it doesn't exist yet
-    NSLog(@"Moving file from %@ to %@.m4a",DEFAULT_SONG_NAME,songname);
+    NSLog(@"Copying file from %@ to %@.m4a",DEFAULT_SONG_NAME,songname);
     
     NSString * newFilename = [songname stringByAppendingString:@".m4a"];
     
@@ -1269,7 +1293,12 @@
     NSString * currentPath = [directory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
     NSString * newPath = [directory stringByAppendingPathComponent:newFilename];
     
-    BOOL result = [fm moveItemAtPath:currentPath toPath:newPath error:&err];
+    
+    if([fm fileExistsAtPath:newPath]){
+        [fm removeItemAtPath:newPath error:&err];
+    }
+    
+    BOOL result = [fm copyItemAtPath:currentPath toPath:newPath error:&err];
     
     if(!result)
         NSLog(@"Error moving");

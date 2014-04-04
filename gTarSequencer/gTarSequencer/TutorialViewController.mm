@@ -886,7 +886,7 @@
     
     float circleWidth = 90;
     float defaultLabelHeight = 32;
-    float stripeWidth = 20;
+    //float stripeWidth = 20;
     
     [tutorialScreen setBackgroundColor:[UIColor clearColor]];
     

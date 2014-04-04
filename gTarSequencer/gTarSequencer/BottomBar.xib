@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayControlViewController">
             <connections>
                 <outlet property="disablePlay" destination="FHF-5D-Hui" id="jpj-Sz-9YN"/>
+                <outlet property="disableRecord" destination="vZe-pH-gpi" id="8LD-6u-q5k"/>
                 <outlet property="disableShare" destination="Sml-pd-Pgj" id="XFp-eG-C3A"/>
                 <outlet property="recordButton" destination="ulp-6t-xKN" id="e3i-Yb-evq"/>
                 <outlet property="recordPlaybackButton" destination="nRY-If-pKk" id="gHu-HQ-68G"/>
@@ -139,6 +140,15 @@
                         <constraint firstAttribute="width" constant="65" id="P6i-zP-G0d"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vZe-pH-gpi">
+                    <rect key="frame" x="65" y="266" width="65" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="65" id="Oqv-jr-LZI"/>
+                        <constraint firstAttribute="height" constant="55" id="ej0-I1-eGH"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="3Po-ZS-uye"/>
@@ -147,6 +157,7 @@
                 <constraint firstAttribute="bottom" secondItem="uz8-gM-6ag" secondAttribute="bottom" constant="-1" id="ehX-KQ-hUM"/>
                 <constraint firstAttribute="bottom" secondItem="Sml-pd-Pgj" secondAttribute="bottom" constant="-1" id="iun-PA-Qq0"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="FHF-5D-Hui" secondAttribute="bottom" constant="-1" id="sN9-zt-Uc9"/>
+                <constraint firstAttribute="bottom" secondItem="vZe-pH-gpi" secondAttribute="bottom" constant="-1" id="uPs-5c-xZw"/>
                 <constraint firstAttribute="bottom" secondItem="mEV-SP-95e" secondAttribute="bottom" constant="-1" id="uhs-ES-ozi"/>
                 <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-1" id="vHB-Xa-fad"/>
                 <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="y4d-mv-4xb"/>

@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayControlViewController">
             <connections>
                 <outlet property="disablePlay" destination="1Te-mN-mEr" id="kME-1m-QrN"/>
+                <outlet property="disableRecord" destination="hOd-9f-xMg" id="uX0-ZK-sLt"/>
                 <outlet property="disableShare" destination="63f-SQ-QI9" id="wjc-W9-Wag"/>
                 <outlet property="recordButton" destination="Kig-H6-9zf" id="GRg-eh-GqS"/>
                 <outlet property="recordPlaybackButton" destination="aIw-Qj-TRU" id="xdb-7Q-9Nt"/>
@@ -132,6 +133,15 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                 </view>
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hOd-9f-xMg">
+                    <rect key="frame" x="65" y="266" width="65" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.1137254902" green="0.1843137255" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="CtC-F5-uBT"/>
+                        <constraint firstAttribute="width" constant="65" id="YXP-uw-VEB"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Kig-H6-9zf" secondAttribute="bottom" constant="-1" id="EH8-Wx-S1x"/>
@@ -141,6 +151,7 @@
                 <constraint firstAttribute="bottom" secondItem="1Te-mN-mEr" secondAttribute="bottom" constant="-1" id="eDu-XI-QSM"/>
                 <constraint firstAttribute="bottom" secondItem="63f-SQ-QI9" secondAttribute="bottom" constant="-1" id="h8C-eg-C9k"/>
                 <constraint firstAttribute="bottom" secondItem="aIw-Qj-TRU" secondAttribute="bottom" constant="-1" id="r18-hF-yRN"/>
+                <constraint firstAttribute="bottom" secondItem="hOd-9f-xMg" secondAttribute="bottom" constant="-1" id="uFj-Wg-E0g"/>
                 <constraint firstAttribute="bottom" secondItem="mEV-SP-95e" secondAttribute="bottom" constant="-1" id="uhs-ES-ozi"/>
                 <constraint firstAttribute="bottom" secondItem="eiz-Ma-1pi" secondAttribute="bottom" constant="-1" id="vHB-Xa-fad"/>
                 <constraint firstAttribute="bottom" secondItem="owG-hq-uwM" secondAttribute="bottom" constant="-1" id="y4d-mv-4xb"/>
