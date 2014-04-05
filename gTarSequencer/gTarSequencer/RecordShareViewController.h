@@ -9,6 +9,7 @@
 #import "AppData.h"
 #import "Instrument.h"
 #import <AVFoundation/AVFoundation.h>
+#import "SCUI.h"
 
 #define MAX_INSTRUMENTS 5
 #define MIN_MEASURES 8
@@ -23,6 +24,7 @@
 - (void) recordPlaybackDidEnd;
 - (void) userDidLaunchEmailWithAttachment:(NSString *)filename;
 - (void) userDidLaunchSMSWithAttachment:(NSString *)filename;
+- (void) userDidLaunchSoundCloudAuthWithFile:(NSString *)filename;
 
 - (void) forceShowSessionOverlay;
 - (void) forceHideSessionOverlay;

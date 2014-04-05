@@ -1522,6 +1522,63 @@
     
 }
 
+- (void)userDidLaunchSoundCloudAuthWithFile:(NSString *)filename
+{
+    if([SCSoundCloud account] == nil){
+        
+        SCLoginViewControllerCompletionHandler handler = ^(NSError *error){
+            if(SC_CANCELED(error)){
+                NSLog(@"Canceled");
+            }else if(error){
+                NSLog(@"Error: %@", [error localizedDescription]);
+            }else{
+                NSLog(@"Done!");
+                [self shareFileToSoundCloud:filename];
+            }
+        };
+        
+        [SCSoundCloud requestAccessWithPreparedAuthorizationURLHandler:^(NSURL *preparedURL){
+            SCLoginViewController *loginViewController;
+            
+            loginViewController = [SCLoginViewController loginViewControllerWithPreparedURL:preparedURL completionHandler:handler];
+            
+            [self.navigationController presentViewController:loginViewController animated:YES completion:nil];
+        }];
+        
+    }else{
+        [self shareFileToSoundCloud:filename];
+    }
+}
+
+-(void)shareFileToSoundCloud:(NSString *)filename
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    NSString * filepath = [documentsDirectory stringByAppendingPathComponent:filename];
+    NSURL * fileURL = [NSURL fileURLWithPath:filepath];
+    
+    SCShareViewController *shareViewController;
+    SCSharingViewControllerCompletionHandler handler;
+    
+    handler = ^(NSDictionary *trackInfo, NSError *error){
+        if(SC_CANCELED(error)){
+            NSLog(@"Canceled!");
+        }else if(error){
+            NSLog(@"Error: %@", [error localizedDescription]);
+        }else{
+            NSLog(@"Uploaded track: %@", trackInfo);
+        }
+    };
+    
+    shareViewController = [SCShareViewController shareViewControllerWithFileURL:fileURL completionHandler:handler];
+    
+    [shareViewController setTitle:[filename substringToIndex:([filename length]-4)]];
+    [shareViewController setPrivate:YES];
+    
+    [self.navigationController presentViewController:shareViewController animated:YES completion:nil];
+    
+}
+
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:NULL];

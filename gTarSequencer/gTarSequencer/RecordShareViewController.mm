@@ -710,7 +710,7 @@
         
     }else if(senderButton == shareSoundcloudButton || senderButton == shareSoundcloudSelector){
         
-        selectedShareType = @"Soundcloud";
+        selectedShareType = @"SoundCloud";
         [shareSoundcloudSelector setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
         
     }
@@ -751,6 +751,10 @@
     }else if([selectedShareType isEqualToString:@"SMS"]){
         
         [delegate userDidLaunchSMSWithAttachment:songname];
+        
+    }else if([selectedShareType isEqualToString:@"SoundCloud"]){
+        
+        [delegate userDidLaunchSoundCloudAuthWithFile:songname];
         
     }
 }

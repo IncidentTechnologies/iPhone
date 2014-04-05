@@ -9,6 +9,7 @@
 #import "AppData.h"
 #import "LoadingViewController.h"
 #import "TestFlight.h"
+#import "SCUI.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {

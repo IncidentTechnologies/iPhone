@@ -18,6 +18,9 @@
     // TestFlight integration
     [TestFlight takeOff:@"e41b934c-d707-4ea6-97d4-f53a09b7617e"];
     
+    // Soundcloud integration
+    [SCSoundCloud setClientID:@"6c1217b3e9097c9dcc3e562b1b22bed9" secret:@"eb11f50b5d2b9f80a34e61a92150230f" redirectURL:[NSURL URLWithString:@"sampleproject://oauth"]];
+    
     // Launch app loading
     [self initAndLaunchApp];
     
@@ -41,6 +44,7 @@
     
     // display
     [self.window makeKeyAndVisible];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
