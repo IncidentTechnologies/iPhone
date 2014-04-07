@@ -1008,7 +1008,7 @@
         float swipeFrameHeight = 30;
         CGRect swipeFrame = CGRectMake(0,tutorialScreen.frame.size.height-35,swipeFrameWidth,swipeFrameHeight);
         
-        [self drawSwipeDottedLines:swipeFrame swipeText:@"continue" swipeLeft:NO swipeRight:YES withAlpha:0.7 isReverseDirection:reverse];
+        [self drawSwipeDottedLines:swipeFrame swipeText:@"continue" swipeLeft:YES swipeRight:NO withAlpha:0.7 isReverseDirection:reverse];
         
     }else if(screenIndex == 2){
         

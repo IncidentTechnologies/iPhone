@@ -96,6 +96,11 @@
 		58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F61679188F5E2700020A74 /* Icon_Trombone.png */; };
 		58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */; };
 		58F6167F188F5E2700020A74 /* Icon_Violin.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167B188F5E2700020A74 /* Icon_Violin.png */; };
+		6D02290418F31D6A000E2DE4 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA856F318EF43CE00CCA191 /* libJSONKit.a */; };
+		6D02290518F31D6A000E2DE4 /* libOAuth2Client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA856FE18EF43DA00CCA191 /* libOAuth2Client.a */; };
+		6D02290618F31D6A000E2DE4 /* libOHAttributedLabel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA8570418EF43E500CCA191 /* libOHAttributedLabel.a */; };
+		6D02290718F31D6A000E2DE4 /* libSoundCloudAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA856E318EF43AF00CCA191 /* libSoundCloudAPI.a */; };
+		6D02290818F31D6A000E2DE4 /* libSoundCloudUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC5014318EF72E900385472 /* libSoundCloudUI.a */; };
 		6D3D9DC518BC0F890048E908 /* RecordRedo_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D9DC418BC0F890048E908 /* RecordRedo_Icon.png */; };
 		6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45318B58A6C00992D3D /* InfoViewController.xib */; };
 		6D44A45718B58C0000992D3D /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D44A45618B58C0000992D3D /* InfoViewController.m */; };
@@ -117,10 +122,6 @@
 		6DA724C018E6479500872705 /* Social_SMS_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724BC18E6479500872705 /* Social_SMS_Icon.png */; };
 		6DA724C118E6479500872705 /* Social_SoundCloud_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724BD18E6479500872705 /* Social_SoundCloud_Icon.png */; };
 		6DA724C318E6493A00872705 /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724C218E6493A00872705 /* ShareView.xib */; };
-		6DA8570F18EF446F00CCA191 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA856F318EF43CE00CCA191 /* libJSONKit.a */; };
-		6DA8571018EF446F00CCA191 /* libOAuth2Client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA856FE18EF43DA00CCA191 /* libOAuth2Client.a */; };
-		6DA8571118EF446F00CCA191 /* libOHAttributedLabel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA8570418EF43E500CCA191 /* libOHAttributedLabel.a */; };
-		6DA8571218EF446F00CCA191 /* libSoundCloudAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA856E318EF43AF00CCA191 /* libSoundCloudAPI.a */; };
 		6DA8571618EF448400CCA191 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA8571418EF448400CCA191 /* AddressBook.framework */; };
 		6DA8571718EF448400CCA191 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA8571518EF448400CCA191 /* AddressBookUI.framework */; };
 		6DA8571918EF448E00CCA191 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA8571818EF448E00CCA191 /* CoreLocation.framework */; };
@@ -143,7 +144,6 @@
 		6DAD2B3E18CFA0CE00228F08 /* SoundMaster_.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */; };
 		6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAF30D718D2207700036958 /* Icon_Trumpet.png */; };
 		6DAF30DC18D2468500036958 /* TutorialViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAF30DB18D2468500036958 /* TutorialViewController.mm */; };
-		6DC5014718EF7B6C00385472 /* libSoundCloudUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC5014318EF72E900385472 /* libSoundCloudUI.a */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DEAB49018D78FF800833D9C /* Piano_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB42918D78FF700833D9C /* Piano_A.mp3 */; };
@@ -670,11 +670,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DC5014718EF7B6C00385472 /* libSoundCloudUI.a in Frameworks */,
-				6DA8570F18EF446F00CCA191 /* libJSONKit.a in Frameworks */,
-				6DA8571018EF446F00CCA191 /* libOAuth2Client.a in Frameworks */,
-				6DA8571118EF446F00CCA191 /* libOHAttributedLabel.a in Frameworks */,
-				6DA8571218EF446F00CCA191 /* libSoundCloudAPI.a in Frameworks */,
+				6D02290418F31D6A000E2DE4 /* libJSONKit.a in Frameworks */,
+				6D02290518F31D6A000E2DE4 /* libOAuth2Client.a in Frameworks */,
+				6D02290618F31D6A000E2DE4 /* libOHAttributedLabel.a in Frameworks */,
+				6D02290718F31D6A000E2DE4 /* libSoundCloudAPI.a in Frameworks */,
+				6D02290818F31D6A000E2DE4 /* libSoundCloudUI.a in Frameworks */,
 				6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */,
 				587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */,
 				58B9AD0E187B61C5001EDD33 /* libc++.dylib in Frameworks */,

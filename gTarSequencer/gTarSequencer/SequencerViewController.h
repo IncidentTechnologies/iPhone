@@ -20,6 +20,7 @@
 #import "InfoViewController.h"
 #import "TutorialViewController.h"
 #import "RecordShareViewController.h"
+#import "SCUI.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MessageUI.h>

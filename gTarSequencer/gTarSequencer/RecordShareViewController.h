@@ -9,7 +9,7 @@
 #import "AppData.h"
 #import "Instrument.h"
 #import <AVFoundation/AVFoundation.h>
-#import "SCUI.h"
+//#import "SCUI.h"
 
 #define MAX_INSTRUMENTS 5
 #define MIN_MEASURES 8
