@@ -99,10 +99,10 @@
             [self resetButtonState];
             
             // Show failure message
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Song Purchase Failed"
-                                                            message:@"No products available, no payments have been processed"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Song Purchase Failed", NULL)
+                                                            message:NSLocalizedString(@"No products available, no payments have been processed", NULL)
                                                            delegate:nil
-                                                  cancelButtonTitle:@"OK"
+                                                  cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
             [alert release];
@@ -115,10 +115,10 @@
             [self resetButtonState];
             
             // Show failure message
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Song Purchase Failed"
-                                                            message:@"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Song Purchase Failed", NULL)
+                                                            message:NSLocalizedString(@"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success", NULL)
                                                            delegate:nil
-                                                  cancelButtonTitle:@"OK"
+                                                  cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
             [alert release];
@@ -131,10 +131,10 @@
             [_buyButtonView updateBuyButtonState:m_buyButtonState];
             
             // Show failure message
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Song Purchase Succeeded"
-                                                            message:@"Song Purchase Succeeded!"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Song Purchase Succeeded", NULL)
+                                                            message:NSLocalizedString(@"Song Purchase Succeeded!", NULL)
                                                            delegate:nil
-                                                  cancelButtonTitle:@"OK"
+                                                  cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
             [alert release];
@@ -146,10 +146,10 @@
             [self resetButtonState];
             
             // Show failure message
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Song Purchase Failed"
-                                                            message:@"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Song Purchase Failed", NULL)
+                                                            message:NSLocalizedString(@"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success", NULL)
                                                            delegate:nil
-                                                  cancelButtonTitle:@"OK"
+                                                  cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
             [alert release];

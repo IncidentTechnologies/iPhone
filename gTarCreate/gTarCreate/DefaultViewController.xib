@@ -57,17 +57,19 @@
                         <action selector="onSliderChanged:" destination="-1" eventType="valueChanged" id="lpn-kF-Gec"/>
                     </connections>
                 </slider>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-NS-ckK" customClass="UIKnob">
-                    <rect key="frame" x="20" y="200" width="50" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <connections>
-                        <action selector="onKnobChanged:" destination="-1" eventType="valueChanged" id="Spa-vQ-NSX"/>
-                    </connections>
-                </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YOF-bi-u8T" customClass="UILevelSlider">
                     <rect key="frame" x="207" y="125" width="75" height="175"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-NS-ckK" customClass="UIKnob">
+                            <rect key="frame" x="25" y="37" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="onKnobChanged:" destination="-1" eventType="valueChanged" id="Spa-vQ-NSX"/>
+                            </connections>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <connections>
                         <action selector="onLevelSliderChanged:" destination="-1" eventType="valueChanged" id="EFf-H8-2YQ"/>
