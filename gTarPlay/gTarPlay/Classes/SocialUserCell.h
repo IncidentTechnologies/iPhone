@@ -21,6 +21,8 @@
 @property (retain, nonatomic) IBOutlet UIImageView *profilePic;
 @property (retain, nonatomic) IBOutlet UIButton *followButton;
 
+@property (retain, nonatomic) IBOutlet UILabel *followButtonText;
+
 - (void)updateCell;
 - (void)localizeViews;
 - (IBAction)followButtonClicked:(id)sender;

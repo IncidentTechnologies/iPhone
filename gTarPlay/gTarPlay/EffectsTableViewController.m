@@ -80,7 +80,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    cell.textLabel.text = [[self.audioController getEffectNames] objectAtIndex:indexPath.row];
+    cell.textLabel.text = NSLocalizedString([[self.audioController getEffectNames] objectAtIndex:indexPath.row], NULL);
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(162/255.0) blue:(54/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;

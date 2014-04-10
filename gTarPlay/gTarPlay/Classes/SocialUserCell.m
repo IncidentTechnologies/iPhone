@@ -57,7 +57,8 @@ extern FileController *g_fileController;
 }
 
 - (void) localizeViews {
-    [_followButton setTitle:NSLocalizedString(@"FOLLOW", NULL) forState:UIControlStateNormal];
+    //[_followButton setTitle:NSLocalizedString(@"FOLLOW", NULL) forState:UIControlStateNormal];
+    _followButtonText.text = [[NSString alloc] initWithString:NSLocalizedString(@"FOLLOW", NULL)];
 }
 
 - (void)updateCell {
@@ -96,12 +97,16 @@ extern FileController *g_fileController;
         [_followButton setHidden:NO];
         UIImage *image = [UIImage imageNamed:@"SocialFollowingButton.png"];
         [_followButton setImage:image forState:UIControlStateNormal];
+        
+        _followButtonText.text = [[NSString alloc] initWithString:NSLocalizedString(@"FOLLOWING", NULL)];
     }
     else
     {
         [_followButton setHidden:NO];
         UIImage *image = [UIImage imageNamed:@"SocialFollowButton.png"];
         [_followButton setImage:image forState:UIControlStateNormal];
+        
+        _followButtonText.text = [[NSString alloc] initWithString:NSLocalizedString(@"FOLLOW", NULL)];
     }
     
     [_followButton stopActivityIndicator];

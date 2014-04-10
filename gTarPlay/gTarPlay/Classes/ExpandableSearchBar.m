@@ -90,7 +90,7 @@
     _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _textField.background = [textFieldBackground resizableImageWithCapInsets:UIEdgeInsetsMake(0, 50, 0, 50) resizingMode:UIImageResizingModeStretch];
     _textField.borderStyle = UITextBorderStyleNone;
-    _textField.placeholder = @"Search...";
+    _textField.placeholder = NSLocalizedString(@"Search...", NULL);
     _textField.leftView = _contractedPadding;
     _textField.leftViewMode = UITextFieldViewModeAlways;
 //    _textField.rightView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 17)] autorelease];

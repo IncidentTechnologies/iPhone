@@ -283,9 +283,9 @@ extern Facebook *g_facebook;
 
 -(void)updateHeaders
 {
-    NSAttributedString *attributedString1 = [self createAttributedStringWithInteger:[_displayedUserEntry.m_sessionsList count] andText:@"SESSIONS"];
-    NSAttributedString *attributedString2 = [self createAttributedStringWithInteger:[_displayedUserEntry.m_followedByList count] andText:@"FOLLOWERS"];
-    NSAttributedString *attributedString3 = [self createAttributedStringWithInteger:[_displayedUserEntry.m_followsList count] andText:@"FOLLOWING"];
+    NSAttributedString *attributedString1 = [self createAttributedStringWithInteger:[_displayedUserEntry.m_sessionsList count] andText:NSLocalizedString(@"SESSIONS", NULL)];
+    NSAttributedString *attributedString2 = [self createAttributedStringWithInteger:[_displayedUserEntry.m_followedByList count] andText:NSLocalizedString(@"FOLLOWERS", NULL)];
+    NSAttributedString *attributedString3 = [self createAttributedStringWithInteger:[_displayedUserEntry.m_followsList count] andText:NSLocalizedString(@"FOLLOWING", NULL)];
     
     [_feedSelector setTitles:[NSArray arrayWithObjects:attributedString1, attributedString2, attributedString3, nil]];
 }
@@ -522,10 +522,10 @@ extern Facebook *g_facebook;
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
-                                           cancelButtonTitle:@"OK"
+                                           cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                            otherButtonTitles:nil] autorelease];
             [_alertView show];
         }
@@ -555,10 +555,10 @@ extern Facebook *g_facebook;
         
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
-                                           cancelButtonTitle:@"OK"
+                                           cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                            otherButtonTitles:nil] autorelease];
             [_alertView show];
         }
@@ -582,10 +582,10 @@ extern Facebook *g_facebook;
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
-                                           cancelButtonTitle:@"OK"
+                                           cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                            otherButtonTitles:nil] autorelease];
             [_alertView show];
         }
@@ -609,10 +609,10 @@ extern Facebook *g_facebook;
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
-                                           cancelButtonTitle:@"OK"
+                                           cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                            otherButtonTitles:nil] autorelease];
             [_alertView show];
         }
@@ -638,10 +638,10 @@ extern Facebook *g_facebook;
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
-                                           cancelButtonTitle:@"OK"
+                                           cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                            otherButtonTitles:nil] autorelease];
             [_alertView show];
         }
@@ -670,10 +670,10 @@ extern Facebook *g_facebook;
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:@"Error"
+            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
-                                           cancelButtonTitle:@"OK"
+                                           cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                            otherButtonTitles:nil] autorelease];
             [_alertView show];
         }

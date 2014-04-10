@@ -66,10 +66,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="arX-Jl-tCS" customClass="SocialUserCell">
-            <rect key="frame" x="0.0" y="0.0" width="298" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="arX-Jl-tCS" id="LQp-1M-i2B">
-                <rect key="frame" x="0.0" y="0.0" width="298" height="59"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="AllButton.png" translatesAutoresizingMaskIntoConstraints="NO" id="uKk-ni-g2a">
@@ -105,6 +105,13 @@
                             <action selector="followButtonClicked:" destination="arX-Jl-tCS" eventType="touchUpInside" id="awy-UO-it5"/>
                         </connections>
                     </button>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FOLLOW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ruw-op-8O9">
+                        <rect key="frame" x="209" y="10" width="82" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="uKk-ni-g2a" firstAttribute="leading" secondItem="LQp-1M-i2B" secondAttribute="leading" id="BDX-cn-3Jg"/>
@@ -121,6 +128,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="followButton" destination="x2F-5S-LS6" id="FMt-Gp-DBt"/>
+                <outlet property="followButtonText" destination="Ruw-op-8O9" id="t0z-VZ-imZ"/>
                 <outlet property="profilePic" destination="uKk-ni-g2a" id="dy3-eC-nPc"/>
                 <outlet property="selectedBackgroundView" destination="52" id="vzK-PI-JGK"/>
                 <outlet property="userName" destination="2IY-XG-H3b" id="CTM-ot-Jwx"/>

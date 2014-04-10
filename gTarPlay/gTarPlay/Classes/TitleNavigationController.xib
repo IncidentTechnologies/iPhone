@@ -31,9 +31,15 @@
                 <outlet property="profileButton" destination="3433" id="3457"/>
                 <outlet property="profileLabel" destination="3443" id="ZdN-2c-ice"/>
                 <outlet property="rightPanel" destination="109" id="136"/>
+                <outlet property="signInLoginLabel" destination="Pxk-fk-aDh" id="s0X-Sh-X21"/>
+                <outlet property="signInOrLabel" destination="1713" id="ipu-r8-kev"/>
+                <outlet property="signUpLoginLabel" destination="RtW-10-VEr" id="m55-0y-10I"/>
+                <outlet property="signUpOrLabel" destination="1957" id="g4h-f4-EWX"/>
+                <outlet property="signinButton" destination="348" id="2wF-ej-BWn"/>
                 <outlet property="signinPasswordText" destination="351" id="2626"/>
                 <outlet property="signinRightPanel" destination="3096" id="3100"/>
                 <outlet property="signinUsernameText" destination="364" id="2625"/>
+                <outlet property="signupButton" destination="237" id="XoO-zd-7uG"/>
                 <outlet property="signupEmailText" destination="230" id="2624"/>
                 <outlet property="signupPasswordText" destination="224" id="2623"/>
                 <outlet property="signupRightPanel" destination="3089" id="3095"/>
@@ -376,6 +382,13 @@
                                         <action selector="signupFacebookButtonClicked:" destination="-1" eventType="touchUpInside" id="630"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LOG IN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtW-10-VEr">
+                                    <rect key="frame" x="132" y="0.0" width="92" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -521,6 +534,13 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                     <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LOG IN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxk-fk-aDh">
+                                    <rect key="frame" x="132" y="0.0" width="92" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -882,9 +902,15 @@
     <resources>
         <image name="Default-568hRot.png" width="1136" height="640"/>
         <image name="FaceBookButton.png" width="209" height="76"/>
+        <image name="FaceBookButton.png" width="209" height="76"/>
         <image name="IncidentGtar_ComButton.png" width="233" height="74"/>
         <image name="PlayButtonVideo.png" width="173" height="173"/>
         <image name="SignUp_CircleButton.png" width="76" height="76"/>
+        <image name="SignUp_CircleButton.png" width="76" height="76"/>
+        <image name="TextBox.png" width="394" height="81"/>
+        <image name="TextBox.png" width="394" height="81"/>
+        <image name="TextBox.png" width="394" height="81"/>
+        <image name="TextBox.png" width="394" height="81"/>
         <image name="TextBox.png" width="394" height="81"/>
         <image name="gTarLogoTitle.png" width="317" height="203"/>
     </resources>

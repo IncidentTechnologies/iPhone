@@ -185,7 +185,9 @@ extern AudioController * g_audioController;
     _postToFeedLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"POST TO FEED", NULL)];
     _offLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OFF", NULL)];
     _onLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ON", NULL)];
-    _easyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Easy", NULL)];
+    
+    NSString *easyStr = [[NSString alloc] initWithString:NSLocalizedString(@"Easy", NULL)];
+    _easyLabel.text = [[NSString alloc] initWithString:easyStr];
     _quitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Quit", NULL)];
     _restartLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Restart", NULL)];
 }
@@ -796,19 +798,19 @@ extern AudioController * g_audioController;
         case PlayViewControllerDifficultyEasy:
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffEasyButton"] forState:UIControlStateNormal];
-            _difficultyLabel.text = @"Easy";
+            _difficultyLabel.text = NSLocalizedString(@"Easy", NULL);
         } break;
             
         case PlayViewControllerDifficultyMedium:
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffMedButton"] forState:UIControlStateNormal];
-            _difficultyLabel.text = @"Medium";
+            _difficultyLabel.text = NSLocalizedString(@"Medium", NULL);
         } break;
             
         case PlayViewControllerDifficultyHard:
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffHardButton"] forState:UIControlStateNormal];
-            _difficultyLabel.text = @"Hard";
+            _difficultyLabel.text = NSLocalizedString(@"Hard", NULL);
         } break;
     }
 }

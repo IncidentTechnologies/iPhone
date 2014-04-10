@@ -11,7 +11,6 @@
                 <outlet property="backButton" destination="342" id="343"/>
                 <outlet property="difficultyButton" destination="707" id="1324"/>
                 <outlet property="difficultyLabel" destination="719" id="1187"/>
-                <outlet property="easyLabel" destination="719" id="Z1I-Px-Qoz"/>
                 <outlet property="feedSwitch" destination="403" id="619"/>
                 <outlet property="finishButton" destination="357" id="360"/>
                 <outlet property="glView" destination="4" id="333"/>

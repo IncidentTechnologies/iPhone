@@ -8,12 +8,12 @@
 
 // Title Screen
 "SIGN IN" = "SIGN IN";
+"LOG IN" = "LOG IN";
 "VIDEO" = "VIDEO";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "PLAY";
 "FREE PLAY" = "FREE PLAY";
 "STORE" = "STORE";
-"SIGN IN" = "SIGN IN";
 "SIGN UP" = "SIGN UP";
 "Username" = "Username";
 "Password" = "Password";
@@ -29,6 +29,9 @@
 "Invalid Username" = "Invalid Username";
 "Invalid Password" = "Invalid Password";
 "Facebook failed to login" = "Facebook failed to login";
+"Sign In" = "Sign In";
+"Sign Up" = "Sign Up";
+"OR" = "OR";
 
 // ActivityFeedCell
 "Someone" = "Someone";
@@ -64,6 +67,9 @@
 "Logout" = "Logout";
 "FOLLOW" = "FOLLOW";
 "FOLLOWING" = "FOLLOWING";
+"SESSIONS" = "SESSIONS";
+"FOLLOWERS" = "FOLLOWERS";
+
 
 // Freeplay
 "ALL" = "ALL";
@@ -75,6 +81,10 @@
 "TONE" = "TONE";
 "SLIDING" = "SLIDING";
 "EXIT TO MAIN" = "EXIT TO MAIN";
+"Chorus" = "Chorus";
+"Echo" = "Echo";
+"Reverb" = "Reverb";
+"Distortion" = "Distortion";
 
 // Instruments
 "Electric" = "Electric";
@@ -107,6 +117,27 @@
 
 // Store
 "TITLE & ARTIST" = "TITLE & ARTIST";
+"99¢" = "99¢";
+"FREE" = "FREE";
 "BUY" = "BUY";
 "Shop" = "Shop";
+"OK" = "OK";
+"Song Purchase Failed" = "Song Purchase Failed";
+"No products available, no payments have been processed" = "No products available, no payments have been processed";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "Song Purchase Failed, your account has been credited and the song purchase will be attempted until success";
+"Song Purchase Succeeded" = "Song Purchase Succeeded";
+"Song Purchase Succeeded!" = "Song Purchase Succeeded!";
 
+// Pull to update
+"Updating..." = "Updating...";
+"Last update: Never" = "Last update: Never";
+"Pull to update" = "Pull to update";
+"Last update: %@" = "Last update: %@";
+"Release to update" = "Release to update";
+
+// Selector
+"FRIENDS" = "FRIENDS";
+"GLOBAL" = "GLOBAL";
+
+"Error" = "Error";
+"Search..." = "Search...";

@@ -29,7 +29,7 @@ static inline double radians (double degrees) {
     {
         // init code
         m_Complete = 0.0f;
-        m_strText = [[NSString alloc] initWithString:@"99¢"];
+        m_strText = [[NSString alloc] initWithString:NSLocalizedString(@"99¢", NULL)];
     }
     return self;
 }
@@ -59,7 +59,7 @@ static inline double radians (double degrees) {
             textRect.origin.y += 9;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            NSString *text = @"99¢";
+            NSString *text = NSLocalizedString(@"99¢", NULL);
             [text drawInRect:textRect withFont:[UIFont systemFontOfSize:19.0f]];
             
         } break;
@@ -74,7 +74,7 @@ static inline double radians (double degrees) {
             textRect.origin.y += 13.0f;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            NSString *text = @"FREE";
+            NSString *text = NSLocalizedString(@"FREE", NULL);
             [text drawInRect:textRect withFont:[UIFont systemFontOfSize:13.0f]];
             
         } break;
@@ -90,7 +90,7 @@ static inline double radians (double degrees) {
             textRect.origin.y += 12;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            NSString *text = @"BUY";
+            NSString *text = NSLocalizedString(@"BUY", NULL);
             [text drawInRect:textRect withFont:[UIFont systemFontOfSize:15.0f]];
         } break;
             

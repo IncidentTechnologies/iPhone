@@ -149,7 +149,7 @@ extern Facebook * g_facebook;
     _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
     _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
     
-    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:@"FRIENDS", @"GLOBAL", nil]];
+    [_feedSelectorControl setTitles:[NSArray arrayWithObjects:NSLocalizedString(@"FRIENDS", NULL), NSLocalizedString(@"GLOBAL", NULL), nil]];
     
     // Setup the feed's initial state
     UserEntry * entry = [g_userController getUserEntry:0];
@@ -194,6 +194,14 @@ extern Facebook * g_facebook;
     [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
     [_gatekeeperVideoButton setTitle:NSLocalizedString(@"VIDEO", NULL) forState:UIControlStateNormal];
     [_gatekeeperWebsiteButton setTitle:NSLocalizedString(@"INCIDENTGTAR.COM", NULL) forState:UIControlStateNormal];
+    
+    [_signinButton setTitle:NSLocalizedString(@"Sign In", NULL) forState:UIControlStateNormal];
+    [_signupButton setTitle:NSLocalizedString(@"Sign Up", NULL) forState:UIControlStateNormal];
+    _signUpOrLabel.text = NSLocalizedString(@"OR", NULL);
+    _signInOrLabel.text = NSLocalizedString(@"OR", NULL);
+    
+    _signInLoginLabel.text = NSLocalizedString(@"LOG IN", NULL);
+    _signUpLoginLabel.text = NSLocalizedString(@"LOG IN", NULL);
     
     [_menuPlayButton setTitle:NSLocalizedString(@"PLAY", NULL) forState:UIControlStateNormal];
     [_menuFreePlayButton setTitle:NSLocalizedString(@"FREE PLAY", NULL) forState:UIControlStateNormal];

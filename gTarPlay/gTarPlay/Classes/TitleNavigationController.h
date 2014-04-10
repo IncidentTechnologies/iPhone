@@ -53,6 +53,14 @@
 @property (retain, nonatomic) IBOutlet UILabel *pleaseConnectLabel;
 
 // Left Panel buttons + clicks
+@property (retain, nonatomic) IBOutlet UIButton *signinButton;
+@property (retain, nonatomic) IBOutlet UIButton *signupButton;
+@property (retain, nonatomic) IBOutlet UILabel *signInOrLabel;
+@property (retain, nonatomic) IBOutlet UILabel *signUpOrLabel;
+
+@property (retain, nonatomic) IBOutlet UILabel *signInLoginLabel;
+@property (retain, nonatomic) IBOutlet UILabel *signUpLoginLabel;
+
 @property (retain, nonatomic) IBOutlet UIButton *gatekeeperVideoButton;
 @property (retain, nonatomic) IBOutlet UIButton *gatekeeperSigninButton;
 @property (retain, nonatomic) IBOutlet UIButton *gatekeeperWebsiteButton;
