@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		268E70C61810B2D9007404B0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E70C51810B2D9007404B0 /* libc++.dylib */; };
 		26C3F9251810F93A00744A9D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C3F9241810F93A00744A9D /* libstdc++.dylib */; };
+		26D4B17318F626E1003380BF /* Facebook.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8B401B17A9ED52009D3FB4 /* Facebook.h */; };
+		26D4B17418F62778003380BF /* FBLoginDialog.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8B402417A9ED52009D3FB4 /* FBLoginDialog.h */; };
+		26D4B17518F62799003380BF /* FBDialog.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8B402017A9ED52009D3FB4 /* FBDialog.h */; };
+		26D4B17618F627B6003380BF /* FBRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8B402617A9ED52009D3FB4 /* FBRequest.h */; };
 		9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D4C70D017A8B02D00DC7B4D /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */; };
 		9D8B403617A9ED52009D3FB4 /* Facebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D8B401B17A9ED52009D3FB4 /* Facebook.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -166,6 +170,10 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				26D4B17518F62799003380BF /* FBDialog.h in CopyFiles */,
+				26D4B17618F627B6003380BF /* FBRequest.h in CopyFiles */,
+				26D4B17418F62778003380BF /* FBLoginDialog.h in CopyFiles */,
+				26D4B17318F626E1003380BF /* Facebook.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,11 +833,12 @@
 				EC24E01F161BBC0C00016B78 /* SettingsController.h in Headers */,
 				EC5DA87D161A5F500015832E /* ContentController.h in Headers */,
 				EC354E0516C9B084009D472A /* TelemetryEvents.h in Headers */,
-				9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */,
+				9D8B403E17A9ED52009D3FB4 /* FBLoginDialog.h in Headers */,
 				9D8B403A17A9ED52009D3FB4 /* FBDialog.h in Headers */,
+				9D8B404017A9ED52009D3FB4 /* FBRequest.h in Headers */,
+				9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */,
 				9D8B403617A9ED52009D3FB4 /* Facebook.h in Headers */,
 				9D8B403917A9ED52009D3FB4 /* FBConnect.h in Headers */,
-				9D8B404017A9ED52009D3FB4 /* FBRequest.h in Headers */,
 				9D8B403817A9ED52009D3FB4 /* facebook_ios_sdk_Prefix.pch in Headers */,
 				9D8B403C17A9ED52009D3FB4 /* FBFrictionlessRequestSettings.h in Headers */,
 				9D8B404217A9ED52009D3FB4 /* JSON.h in Headers */,
@@ -839,7 +848,6 @@
 				9D8B404B17A9ED52009D3FB4 /* SBJsonParser.h in Headers */,
 				9D8B404D17A9ED52009D3FB4 /* SBJsonWriter.h in Headers */,
 				9D8B404717A9ED52009D3FB4 /* SBJSON.h in Headers */,
-				9D8B403E17A9ED52009D3FB4 /* FBLoginDialog.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

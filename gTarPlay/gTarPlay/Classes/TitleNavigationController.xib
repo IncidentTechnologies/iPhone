@@ -902,15 +902,9 @@
     <resources>
         <image name="Default-568hRot.png" width="1136" height="640"/>
         <image name="FaceBookButton.png" width="209" height="76"/>
-        <image name="FaceBookButton.png" width="209" height="76"/>
         <image name="IncidentGtar_ComButton.png" width="233" height="74"/>
         <image name="PlayButtonVideo.png" width="173" height="173"/>
         <image name="SignUp_CircleButton.png" width="76" height="76"/>
-        <image name="SignUp_CircleButton.png" width="76" height="76"/>
-        <image name="TextBox.png" width="394" height="81"/>
-        <image name="TextBox.png" width="394" height="81"/>
-        <image name="TextBox.png" width="394" height="81"/>
-        <image name="TextBox.png" width="394" height="81"/>
         <image name="TextBox.png" width="394" height="81"/>
         <image name="gTarLogoTitle.png" width="317" height="203"/>
     </resources>
