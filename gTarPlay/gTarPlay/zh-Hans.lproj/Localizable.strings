@@ -88,55 +88,56 @@
 "Square" = "广场";
 
 // More
-"LOG IN" = "LOG IN";
-"Sign In" = "Sign In";
-"Sign Up" = "Sign Up";
-"OR" = "OR";
-"SESSIONS" = "SESSIONS";
-"FOLLOWERS" = "FOLLOWERS";
-"Chorus" = "Chorus";
-"Echo" = "Echo";
-"Reverb" = "Reverb";
-"Distortion" = "Distortion";
+"LOG IN" = "登录";
+"Sign In" = "登录";
+"Sign Up" = "报名";
+"OR" = "或者";
+"SESSIONS" = "部分";
+"FOLLOWERS" = "跟进人";
+"Chorus" = "副歌";
+"Echo" = "回音";
+"Reverb" = "反响";
+"Distortion" = "失真";
 
 // Time formatter
-"The Future" = "The Future";
-"%u second ago" = "%u second ago";
-"%u seconds ago" = "%u seconds ago";
-"%u minute ago" = "%u minute ago";
-"%u minutes ago" = "%u minutes ago";
-"%u hour ago" = "%u hour ago";
-"%u hours ago" = "%u hours ago";
-"%u day ago" = "%u day ago";
-"%u days ago" = "%u days ago";
-"%u week ago" = "%u week ago";
-"%u weeks ago" = "%u weeks ago";
-"%u month ago" = "%u month ago";
-"%u months ago" = "%u months ago";
+"The Future" = "将来";
+"%u second ago" = "%u秒前";
+"%u seconds ago" = "%u秒前";
+"%u minute ago" = "%u分钟前";
+"%u minutes ago" = "%u分钟前";
+"%u hour ago" = "%u小时前";
+"%u hours ago" = "%u小时前";
+"%u day ago" = "%u天前";
+"%u days ago" = "%u天前";
+"%u week ago" = "%u周前";
+"%u weeks ago" = "%u周前";
+"%u month ago" = "%u月前";
+"%u months ago" = "%u月前";
 
 // Store
-"TITLE & ARTIST" = "TITLE & ARTIST";
-"99¢" = "99¢";
-"FREE" = "FREE";
-"BUY" = "BUY";
-"Shop" = "Shop";
-"OK" = "OK";
-"Song Purchase Failed" = "Song Purchase Failed";
-"No products available, no payments have been processed" = "No products available, no payments have been processed";
-"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "Song Purchase Failed, your account has been credited and the song purchase will be attempted until success";
-"Song Purchase Succeeded" = "Song Purchase Succeeded";
-"Song Purchase Succeeded!" = "Song Purchase Succeeded!";
+"TITLE & ARTIST" = "歌曲名& 艺术家";
+"99¢" = "99美分";
+"FREE" = "免费";
+"BUY" = "购买";
+"Shop" = "商店";
+"OK" = "成功";
+"Song Purchase Failed" = "购买歌曲失败";
+"No products available, no payments have been processed" = "无作品可用，无已支付款项";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "购买歌曲失败，您的帐户已扣款，将继续尝试购买歌曲直到成功为止";
+"Song Purchase Succeeded" = "歌曲购买成功";
+"Song Purchase Succeeded!" = "歌曲购买成功";
 
 // Pull to update
-"Updating..." = "Updating...";
-"Last update: Never" = "Last update: Never";
-"Pull to update" = "Pull to update";
-"Last update: %@" = "Last update: %@";
-"Release to update" = "Release to update";
+"Updating..." = "更新中...";
+"Last update: Never" = "最近更新：从不";
+"Pull to update" = "下拉以更新";
+"Last update: %@" = "最近一次更新%@";
+"Release to update" = "发布更新";
 
 // Selector
-"FRIENDS" = "FRIENDS";
-"GLOBAL" = "GLOBAL";
+"FRIENDS" = "朋友";
+"GLOBAL" = "全球";
 
-"Error" = "Error";
-"Search..." = "Search...";
+"Error" = "错误";
+"Search..." = "搜索...";
+
