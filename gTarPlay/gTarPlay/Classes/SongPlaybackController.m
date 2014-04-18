@@ -1,14 +1,12 @@
-
+//
+//  SongPlaybackController.h
+//  gTarAppCore
+//
+//  Created by Marty Greenia on 8/25/11.
+//  Copyright 2011 IncidentTech. All rights reserved.
+//
 
 #import "SongPlaybackController.h"
-#import <AudioController/AudioController.h>
-#import "AppCore.h"
-
-#import "UserSong.h"
-#import "NSSong.h"
-#import "NSNoteFrame.h"
-#import "NSNote.h"
-#import "XmlDom.h"
 
 #define EVENT_LOOPS_PER_SECOND 30.0
 #define SECONDS_PER_EVENT_LOOP (1.0 / EVENT_LOOPS_PER_SECOND)
@@ -20,35 +18,58 @@
 @implementation SongPlaybackController
 
 @synthesize m_songModel;
+@synthesize g_soundMaster;
 
-- (id)init {
-    self = [super init];
+- (id)initWithSoundMaster:(SoundMaster *)soundMaster
+{
     
+    self = [super init];
     if ( self ) {
-        // Create audio controller
-        m_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
-        [m_audioController initializeAUGraph];
+        
+        if(soundMaster != nil){
+            g_soundMaster = soundMaster;
+            [g_soundMaster start];
+        }else{
+            g_soundMaster = [[SoundMaster alloc] init];
+            [g_soundMaster start];
+        }
     }
     
     return self;
 }
 
-- (id)initWithAudioController:(AudioController*)audioController {
-    self = [super init];
-    if ( self ) {
-        // Create audio controller
-        m_audioController = [audioController retain];
-    }
-    
-    return self;
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
+{
+    [g_soundMaster didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
 }
 
+- (void)stopAudioEffects
+{
+    [g_soundMaster stopAllEffects];
+}
+
+- (NSInteger)getSelectedInstrumentIndex
+{
+    return [g_soundMaster getCurrentInstrument];
+}
+
+- (NSArray *)getInstrumentList
+{
+    return [g_soundMaster getInstrumentList];
+}
 
 - (void)dealloc {
+    
     [m_gtarController removeObserver:self];
     
     [m_gtarController release];
-	[m_audioController release];
+    
+    /*if([g_soundMaster respondsToSelector:@selector(disconnectAndRelease)]){
+        [g_soundMaster disconnectAndRelease];
+        [g_soundMaster release];
+        g_soundMaster = nil;
+    }*/
+        
     [m_songModel release];
     
 	[m_eventLoopTimer invalidate];
@@ -58,13 +79,14 @@
     m_audioTrailOffTimer = nil;
     
     [super dealloc];
+    
 }
 
 - (void)startWithXmpBlob:(NSString*)xmpBlob {
     if ( xmpBlob == nil )
         return;
     
-    [m_audioController reset];
+    [g_soundMaster reset];
     
     // release the old song
     [m_songModel release];
@@ -75,10 +97,10 @@
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
-    [m_songModel startWithDelegate:self];
+    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES];
     
     [self startMainEventLoop];
-
+    
 }
 
 - (void)startWithUserSong:(UserSong*)userSong {
@@ -86,7 +108,7 @@
     if ( userSong == nil )
         return;
     
-    [m_audioController reset];
+    [g_soundMaster reset];
     
     // release the old song
     [m_songModel release];
@@ -95,28 +117,33 @@
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
-    [m_songModel startWithDelegate:self];
+    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES];
     
     [self startMainEventLoop];
 }
 
 - (void)playSong {
+    
+    NSLog(@"Song Playback Controller: play song");
+    
+    [g_soundMaster reset];
     [self startMainEventLoop];
 }
 
 - (void)pauseSong {
     [self stopMainEventLoop];
-    [m_audioController stopAUGraph];
+    [g_soundMaster stop];
+    //[m_audioController stopAUGraph];
 }
 
 - (void)endSong {
     [self stopMainEventLoop];
     
-    [m_audioController stopAUGraph];
-    [m_audioController reset];
+    
+    [g_soundMaster reset];
     
     [m_songModel release];
-
+    
     m_songModel = nil;
     
 }
@@ -146,6 +173,9 @@
 }
 
 - (void)startMainEventLoop {
+    
+    NSLog(@"Song Playback Controller: start main event loop");
+    
     if ( m_songModel.m_percentageComplete >= 1.0 )
         return;
     
@@ -157,8 +187,10 @@
     
     m_audioTrailOffTimer = nil;
     
-    [m_audioController startAUGraph];
+    //[m_audioController startAUGraph];
+    [g_soundMaster start];
     
+    //[m_songModel skipToNextFrame];
 	m_eventLoopTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)SECONDS_PER_EVENT_LOOP target:self selector:@selector(mainEventLoop) userInfo:nil repeats:TRUE];
     
 }
@@ -175,9 +207,8 @@
     
     m_audioTrailOffTimer = nil;
     
-    [m_audioController stopAUGraph];
-    [m_audioController reset];
-
+    [g_soundMaster reset];
+    
 }
 - (void)mainEventLoop {
 	[m_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
@@ -198,12 +229,18 @@
 #pragma mark - NSSongModel delegate
 
 - (void)songModelEnterFrame:(NSNoteFrame*)frame {
+    
+    NSLog(@"Song playback controller: song model enter frame");
+    
     for ( NSNote * note in frame.m_notes ) {
         if ( note.m_fret == GTAR_GUITAR_FRET_MUTED ) {
-            [m_audioController PluckMutedString:note.m_string-1];
+            NSLog(@"TODO: pluck muted string");
+            //[m_audioController PluckMutedString:note.m_string-1];
         }
         else {
-            [m_audioController PluckString:note.m_string-1 atFret:note.m_fret];
+            NSLog(@"pluck string %i %i",note.m_string-1,note.m_fret);
+  
+            [g_soundMaster PluckString:note.m_string-1 atFret:note.m_fret];
             
             //[m_gtarController turnOnLedAtPosition:GtarPositionMake(note.m_fret, note.m_string) withColor:GtarLedColorMake(GtarMaxLedIntensity, GtarMaxLedIntensity, GtarMaxLedIntensity)];
             
@@ -212,11 +249,11 @@
     }
 }
 
-/*
-- (void)songModelExitFrame:(NSNoteFrame*)frame {
 
+- (void)songModelExitFrame:(NSNoteFrame*)frame {
+ 
 }
- */
+
 
 - (void)delayedTurnLedOff:(NSNote *)note
 {
@@ -240,9 +277,9 @@
 }
 
 /*
-- (void)songModelFrameExpired:(NSNoteFrame*)frame {
-    
-}
+ - (void)songModelFrameExpired:(NSNoteFrame*)frame {
+ 
+ }
  */
 
 - (void)songModelEndOfSong {

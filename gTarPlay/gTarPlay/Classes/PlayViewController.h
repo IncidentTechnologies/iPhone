@@ -11,8 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import <GtarController/GtarController.h>
-#import <AudioController/AudioController.h>
-
+#import "SoundMaster.h"
 //#import <gTarAppCore/AppCore.h>
 #import <gTarAppCore/MainEventController.h>
 #import <gTarAppCore/NSSongModel.h>
@@ -42,7 +41,11 @@ enum PlayViewControllerDifficulty
 
 @interface PlayViewController : MainEventController <GtarControllerObserver, NSSongModelDelegate>
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;
+
 - (void) localizeViews;
+
+@property (retain, nonatomic) SoundMaster *g_soundMaster;
 
 @property (retain, nonatomic) IBOutlet EAGLView *glView;
 @property (retain, nonatomic) IBOutlet UIView *menuView;
@@ -58,7 +61,8 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UIImageView *menuDownArrow;
 
 @property (retain, nonatomic) IBOutlet UITextView *loadingLicenseInfo;
-@property (retain, nonatomic) IBOutlet UILabel *loadingSongInfo;
+@property (retain, nonatomic) IBOutlet UILabel *loadingSongArtist;
+@property (retain, nonatomic) IBOutlet UILabel * loadingSongTitle;
 
 @property (retain, nonatomic) IBOutlet UILabel *scoreLabel;
 

@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class AudioController;
+//@class AudioController;
 
 @protocol InstrumentSelectionDelegate <NSObject>
 
+- (void)stopAudioEffects;
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender;
+- (NSInteger)getSelectedInstrumentIndex;
+- (NSArray *)getInstrumentList;
+
 @optional
-- (void)didSelectInstrument;
 - (void)didLoadInstrument;
 
 @end
@@ -23,6 +27,8 @@
 @property (retain, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) id <InstrumentSelectionDelegate> delegate;
 
-- (id)initWithAudioController:(AudioController*)AC;
+//- (id)initWithAudioController:(AudioController*)AC;
+
+- (id)init;
 
 @end

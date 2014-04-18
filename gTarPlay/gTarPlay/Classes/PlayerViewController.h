@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SoundMaster.h"
 
 @class UserSong;
 
 @interface PlayerViewController : UIViewController
+
+@property (retain, nonatomic) SoundMaster *g_soundMaster;
 
 @property (retain, nonatomic) IBOutlet UIButton *playButton;
 
@@ -29,10 +32,18 @@
 
 @property (retain, nonatomic) NSInvocation *loadedInvocation;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;
+
 - (IBAction)playButtonClicked:(id)sender;
 
 - (void)attachToSuperview:(UIView *)view;
 
 - (void)endPlayback;
+
+
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender;
+- (void)stopAudioEffects;
+- (NSInteger)getSelectedInstrumentIndex;
+- (NSArray *)getInstrumentList;
 
 @end

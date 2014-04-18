@@ -12,15 +12,14 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import <gTarAppCore/SongPlaybackController.h>
+#import "SongPlaybackController.h"
 #import <gTarAppCore/UserSong.h>
 #import <gTarAppCore/NSSong.h>
-#import <AudioController/AudioController.h>
 
-@class AudioController;
+//@class AudioController;
 @class GtarController;
 
-extern AudioController *g_audioController;
+//extern AudioController *g_audioController;
 //extern GtarController *g_gtarController;
 
 @interface PlayerViewController ()
@@ -35,7 +34,9 @@ extern AudioController *g_audioController;
 
 @implementation PlayerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize g_soundMaster;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
@@ -43,6 +44,10 @@ extern AudioController *g_audioController;
         // Custom initialization
         _init = NO;
         _scrollable = YES;
+        
+        g_soundMaster = soundMaster;
+        [g_soundMaster start];
+        
     }
     return self;
 }
@@ -51,10 +56,10 @@ extern AudioController *g_audioController;
 {
     [super viewDidLoad];
 	
-    [_songTitle addShadowWithRadius:2.0 andOpacity:0.7];
-    [_songArtist addShadowWithRadius:2.0 andOpacity:0.7];
-    [_knobView addShadowWithRadius:6.0];
-    [_playButton addShadowWithRadius:2.0 andOpacity:0.5];
+    [_songTitle addShadowWithRadius:1.0 andOpacity:0.7];
+    [_songArtist addShadowWithRadius:1.0 andOpacity:0.7];
+    [_knobView addShadowWithRadius:2.0];
+    //[_playButton addShadowWithRadius:2.0 andOpacity:0.5];
     
     [self updateScrollable];
 }
@@ -65,30 +70,34 @@ extern AudioController *g_audioController;
     
     if ( _songPlaybackController == nil )
     {
-        _songPlaybackController = [[SongPlaybackController alloc] initWithAudioController:g_audioController];
+        NSLog(@"Player View Controller: init Song Playback");
+        _songPlaybackController = [[SongPlaybackController alloc] initWithSoundMaster:g_soundMaster];
     }
     
     _init = NO;
     
-//    [self performSelectorInBackground:@selector(backgroundLoading) withObject:nil];
-    
     // Start the progress bar at zero when we open up.
     _fillView.layer.transform = CATransform3DMakeTranslation( 0, 0, 0 );
     
-//    [_songPlaybackController observeGtarController:g_gtarController];
-    
+
     [_songPlaybackController startWithXmpBlob:_xmpBlob];
     [_songPlaybackController stopMainEventLoop];
-
-    // Change the current sample pack to the new one
-//    [g_audioController setSamplePackWithName:song.m_instrument];
-    [g_audioController setSamplePackWithName:_songPlaybackController.m_songModel.m_song.m_instrument withSelector:@selector(finishedLoadingSamplePack:) andOwner:self];
+    
+    if([_songPlaybackController.m_songModel.m_song.m_instrument length] > 0){
+        NSLog(@"Player View Select instrument %@",_songPlaybackController.m_songModel.m_song.m_instrument);
+        
+        [_songPlaybackController didSelectInstrument:_songPlaybackController.m_songModel.m_song.m_instrument withSelector:@selector(finishedLoadingSamplePack:) andOwner:self];
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
 //    [_songPlaybackController ignoreGtarController:g_gtarController];
+    
+    [_songPlaybackController release];
+    _songPlaybackController = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,8 +110,10 @@ extern AudioController *g_audioController;
 {
 //    [_songPlaybackController ignoreGtarController:g_gtarController];
     [_songPlaybackController release];
-    [_userSong release];
+    _songPlaybackController = nil;
     
+    [_userSong release];
+    //[g_soundMaster disconnectAndRelease];
     [_playButton release];
     [_fillView release];
     [_knobView release];
@@ -131,6 +142,8 @@ extern AudioController *g_audioController;
 - (void)finishedLoadingSamplePack:(NSNumber *)result
 {
     _init = YES;
+    
+    NSLog(@"Finished loading sample pack");
     
     [_loadedInvocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
 }
@@ -229,12 +242,39 @@ extern AudioController *g_audioController;
     }
 }
 
+
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
+{
+    NSLog(@"Did select instrument callback");
+    [_songPlaybackController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
+}
+
+- (void)stopAudioEffects
+{
+    [_songPlaybackController stopAudioEffects];
+}
+
+- (NSInteger)getSelectedInstrumentIndex
+{
+    return [_songPlaybackController getSelectedInstrumentIndex];
+}
+
+- (NSArray *)getInstrumentList
+{
+    return [_songPlaybackController getInstrumentList];
+}
+
 #pragma mark - Button click handlers
 
 - (IBAction)playButtonClicked:(id)sender
 {
+    NSLog(@"Player VC: play button clicked");
+    
     if ( _songPlaybackController.isPlaying == YES )
     {
+        NSLog(@"Playing, pause song");
+        
+        
         [_playButton setSelected:NO];
         
         [_songPlaybackController pauseSong];
@@ -243,11 +283,15 @@ extern AudioController *g_audioController;
     }
     else
     {
+        
+        NSLog(@"Not playing, play");
+        
         // Do this now because the AC might not be ready sooner
         @synchronized( self )
         {
             if ( _init == YES )
             {
+                NSLog(@"Successful play");
                 [_playButton setSelected:YES];
                 
 //                _init = YES;
@@ -286,6 +330,7 @@ extern AudioController *g_audioController;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"Touches began Player View Controller");
     
     if ( _init == NO )
     {

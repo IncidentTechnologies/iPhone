@@ -41,9 +41,9 @@ static unsigned int m_notesRemaining = 0;
 		
 		m_overlayModel = [overlay retain];
 		
-		[self changeColor:color];
+		//[self changeColor:color];
 		
-		[self createImagesWithHeight:size.height];
+		//[self createImagesWithHeight:size.height];
 		
 		m_texture = [m_noteTexture retain];
 		

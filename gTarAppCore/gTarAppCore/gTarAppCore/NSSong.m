@@ -11,6 +11,8 @@
 #import "NSMeasure.h"
 #import "XmlDom.h"
 
+#define DEFAULT_INSTRUMENT @"Electric"
+
 @implementation NSSong
 
 @synthesize m_measures;
@@ -62,6 +64,14 @@
         dom = [headerDom getChildWithName:@"instrument"];
         self.m_instrument = [dom getTextFromChildWithName:@"name"];
         NSLog(@"Using instrument: %@", m_instrument);
+        
+        // Ensure that instrument is not NULL
+        if(m_instrument == NULL){
+            
+            NSLog(@"Instrument is NULL using default, %@",DEFAULT_INSTRUMENT);
+            self.m_instrument = DEFAULT_INSTRUMENT;
+            
+        }
         
         dom = [headerDom getChildWithName:@"tempo"];
         self.m_tempo = [[dom getNumberFromChildWithName:@"value"] floatValue];

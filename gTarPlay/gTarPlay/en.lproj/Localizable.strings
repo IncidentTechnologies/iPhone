@@ -8,7 +8,7 @@
 
 // Title Screen
 "SIGN IN" = "SIGN IN";
-"LOG IN" = "LOG IN";
+"LOG IN" = "Sign In with Facebook";
 "VIDEO" = "VIDEO";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "PLAY";
@@ -17,7 +17,7 @@
 "SIGN UP" = "SIGN UP";
 "Username" = "Username";
 "Password" = "Password";
-"Email (optional)" = "Email (optional)";
+"Email" = "Email";
 "Please Connect Your gTar" = "Please Connect Your gTar";
 "Profile" = "Profile";
 "Please connect your gTar to sign up for an account." = "Please connect your gTar to sign up for an account.";
@@ -29,8 +29,8 @@
 "Invalid Username" = "Invalid Username";
 "Invalid Password" = "Invalid Password";
 "Facebook failed to login" = "Facebook failed to login";
-"Sign In" = "Sign In";
-"Sign Up" = "Sign Up";
+"Sign In" = "SIGN IN";
+"Sign Up" = "SIGN UP";
 "OR" = "OR";
 
 // ActivityFeedCell

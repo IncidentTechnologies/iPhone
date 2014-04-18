@@ -97,20 +97,37 @@ extern Facebook * g_facebook;
 
 @implementation TitleNavigationController
 
+@synthesize g_soundMaster;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if ( self )
     {
-        // Custom initialization
+        
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //if(g_soundMaster != nil){
+    //    [self releaseSoundMaster];
+    //}
+    
+    if(g_soundMaster == nil){
+        [self performSelectorInBackground:@selector(initSoundMaster) withObject:nil];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // TODO: figure out why a soundmaster needs to be created and destroyed before anything can happen
+    g_soundMaster = [[SoundMaster alloc] init];
+    [self releaseSoundMaster];
     
     _globalFeed = [[NSArray alloc] init];
     _friendFeed = [[NSArray alloc] init];
@@ -120,6 +137,12 @@ extern Facebook * g_facebook;
     
     g_facebook = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    // draw profile label button
+    _profileLabel = [[UILabel alloc] initWithFrame:CGRectMake(53, 1, 151, 45)];
+    [_profileLabel setTextColor:[UIColor whiteColor]];
+    [_profileLabel setFont:[UIFont fontWithName:@"Avenir Next" size:17.0]];
+    [_profileButton addSubview:_profileLabel];
     
     [self localizeView];
     
@@ -133,21 +156,17 @@ extern Facebook * g_facebook;
     // Add shadows
     [_topBarView addShadow];
     [_gtarLogoImage addShadow];
-    [_loggedoutSigninButton addShadow];
-    [_loggedoutSignupButton addShadow];
-    [_gatekeeperVideoButton addShadow];
-    [_gatekeeperSigninButton addShadow];
-    [_menuPlayButton addShadow];
-    [_menuFreePlayButton addShadow];
-    [_menuStoreButton addShadow];
+    //[_loggedoutSigninButton addShadow];
+    //[_loggedoutSignupButton addShadow];
+    //[_gatekeeperVideoButton addShadow];
+    //[_gatekeeperSigninButton addShadow];
+    //[_menuPlayButton addShadow];
+    //[_menuFreePlayButton addShadow];
+    //[_menuStoreButton addShadow];
     
     // Hide anything that needs hiding
     [[_profileButton superview] setHidden:YES];
     [_profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    
-    // Set up the modals
-    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
-    _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
     
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:NSLocalizedString(@"FRIENDS", NULL), NSLocalizedString(@"GLOBAL", NULL), nil]];
     
@@ -189,6 +208,19 @@ extern Facebook * g_facebook;
     [g_gtarController addObserver:self];
 }
 
+- (void)initSoundMaster
+{
+    g_soundMaster = [[SoundMaster alloc] init];
+    [g_soundMaster setCurrentInstrument:0];
+}
+
+- (void)releaseSoundMaster
+{
+    [g_soundMaster disconnectAndRelease];
+    [g_soundMaster release];
+    g_soundMaster = nil;
+}
+
 - (void)localizeView {
     // Gate keeper
     [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
@@ -197,8 +229,8 @@ extern Facebook * g_facebook;
     
     [_signinButton setTitle:NSLocalizedString(@"Sign In", NULL) forState:UIControlStateNormal];
     [_signupButton setTitle:NSLocalizedString(@"Sign Up", NULL) forState:UIControlStateNormal];
-    _signUpOrLabel.text = NSLocalizedString(@"OR", NULL);
-    _signInOrLabel.text = NSLocalizedString(@"OR", NULL);
+    //_signUpOrLabel.text = NSLocalizedString(@"OR", NULL);
+    //_signInOrLabel.text = NSLocalizedString(@"OR", NULL);
     
     _signInLoginLabel.text = NSLocalizedString(@"LOG IN", NULL);
     _signUpLoginLabel.text = NSLocalizedString(@"LOG IN", NULL);
@@ -215,15 +247,17 @@ extern Facebook * g_facebook;
  
     [_signupUsernameText setPlaceholder:NSLocalizedString(@"Username", NULL)];
     [_signupPasswordText setPlaceholder:NSLocalizedString(@"Password", NULL)];
-    [_signupEmailText setPlaceholder:NSLocalizedString(@"Email (optional)", NULL)];
+    [_signupEmailText setPlaceholder:NSLocalizedString(@"Email", NULL)];
     
-    _pleaseConnectLabel.text = NSLocalizedString(@"Please Connect Your gTar", NULL);
-
-    _profileLabel.text = NSLocalizedString(@"Profile", NULL);
+    //_pleaseConnectLabel.text = NSLocalizedString(@"Please Connect Your gTar", NULL);
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    
+    // Set up the modals
+    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
+    _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
     
     _displayingCell = NO;
     
@@ -274,7 +308,9 @@ extern Facebook * g_facebook;
     if ( image != nil )
     {
         [_profileButton setImage:image forState:UIControlStateNormal];
+        [_profileLabel setText:loggedInEntry.m_userProfile.m_name];
     }
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -283,7 +319,6 @@ extern Facebook * g_facebook;
     
     [_currentLeftPanel setFrame:_leftPanel.bounds];
     [_currentRightPanel setFrame:_rightPanel.bounds];
-
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -299,6 +334,9 @@ extern Facebook * g_facebook;
 
 - (void)dealloc
 {
+    
+    //[g_soundMaster disconnectAndRelease];
+    
     [_currentLeftPanel removeFromSuperview];
     [_currentRightPanel removeFromSuperview];
     [_fullScreenButton removeFromSuperview];
@@ -363,23 +401,23 @@ extern Facebook * g_facebook;
     if ( red )
         _topBarView.backgroundColor = [UIColor redColor];
     else
-        _topBarView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+        _topBarView.backgroundColor = [UIColor colorWithRed:2.0/255.0 green:160.0/255.0 blue:220.0/255.0 alpha:1.0];
 }
 
 - (void)hideNotification {
     [_notificationLabel.superview setHidden:YES];
-    _topBarView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+    _topBarView.backgroundColor = [UIColor colorWithRed:2.0/255.0 green:160.0/255.0 blue:220.0/255.0 alpha:1.0];
 }
 
 #pragma mark - Button management
 
 - (void)enableButton:(UIButton *)button {
-    button.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+    button.backgroundColor = [UIColor colorWithRed:2/255.0 green:160/255.0 blue:220/255.0 alpha:1.0];
     [button setEnabled:YES];
 }
 
 - (void)disableButton:(UIButton *)button {
-    button.backgroundColor = [UIColor colorWithRed:2.0/256.0/2.0 green:160.0/256.0/2.0 blue:220.0/256.0/2.0 alpha:1.0];
+    button.backgroundColor = [UIColor colorWithRed:1/255.0 green:120/255.0 blue:165/255.0 alpha:1.0];
     [button setEnabled:NO];
 }
 
@@ -412,10 +450,16 @@ extern Facebook * g_facebook;
 
 - (void)loggedoutScreen {
     [self swapLeftPanel:_loggedoutLeftPanel];
-    [self swapRightPanel:_signinRightPanel];
     
-    [self disableButton:_loggedoutSigninButton];
-    [self enableButton:_loggedoutSignupButton];
+    if(_currentRightPanel != _signupRightPanel && _currentRightPanel != _signinRightPanel){
+        [self swapRightPanel:_signinRightPanel];
+        [self disableButton:_loggedoutSigninButton];
+        [self enableButton:_loggedoutSignupButton];
+    }else if(_currentRightPanel == _signupRightPanel){
+        [self enableButton:_loggedoutSigninButton];
+        [self disableButton:_loggedoutSignupButton];
+    }
+    
     [self hideNotification];
     
     [[_profileButton superview] setHidden:YES];
@@ -441,10 +485,12 @@ extern Facebook * g_facebook;
     
     UIImage *image = [g_fileController getFileOrReturnNil:loggedInEntry.m_userProfile.m_imgFileId];
     
-    if ( image != nil )
+    if ( image != nil ){
         [_profileButton setImage:image forState:UIControlStateNormal];
-    else
+        [_profileLabel setText:loggedInEntry.m_userProfile.m_name];
+    }else{
         [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
+    }
     
     // If we've logged in, regardles of whether the gtar was ever connected, we can act as if it was.
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -466,6 +512,7 @@ extern Facebook * g_facebook;
 #pragma mark - Panel management
 
 - (void)swapRightPanel:(UIView *)rightPanel {
+    
     [_currentRightPanel removeFromSuperview];
     
     // Resize the subview as appropriate
@@ -497,6 +544,7 @@ extern Facebook * g_facebook;
     [self hideNotification];
     
     [self swapRightPanel:_signinRightPanel];
+    
 }
 
 - (IBAction)loggedoutSignupButtonClicked:(id)sender
@@ -528,7 +576,7 @@ extern Facebook * g_facebook;
     
     [_moviePlayer stop];
     
-    [self displayNotification:NOTIFICATION_GATEKEEPER_SIGNIN turnRed:NO];
+    //[self displayNotification:NOTIFICATION_GATEKEEPER_SIGNIN turnRed:NO];
     
     [self swapRightPanel:_signinRightPanel];
 }
@@ -542,7 +590,7 @@ extern Facebook * g_facebook;
 - (IBAction)menuPlayButtonClicked:(id)sender
 {
     // Start play mode
-    SongSelectionViewController *vc = [[SongSelectionViewController alloc] initWithNibName:nil bundle:nil];
+    SongSelectionViewController *vc = [[SongSelectionViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     [self.navigationController pushViewController:vc animated:YES];
     [vc release];
 }
@@ -550,7 +598,7 @@ extern Facebook * g_facebook;
 - (IBAction)menuFreePlayButtonClicked:(id)sender
 {
     // Start free play mode
-    FreePlayController * fpc = [[FreePlayController alloc] initWithNibName:nil bundle:nil];
+    FreePlayController * fpc = [[FreePlayController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster];
 	
 	[self.navigationController pushViewController:fpc animated:YES];
 	
@@ -766,7 +814,7 @@ extern Facebook * g_facebook;
 
 - (IBAction)profileButtonClicked:(id)sender
 {
-    SocialViewController *svc = [[SocialViewController alloc] initWithNibName:nil bundle:nil];
+    SocialViewController *svc = [[SocialViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     
     [self.navigationController pushViewController:svc animated:YES];
     
@@ -851,6 +899,9 @@ extern Facebook * g_facebook;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [tableView setSeparatorInset:UIEdgeInsetsZero];
+    
     static NSString * CellIdentifier = @"ActivityFeedCell";
 	ActivityFeedCell *tempCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
@@ -1006,6 +1057,8 @@ extern Facebook * g_facebook;
 
 - (IBAction)textFieldSelected:(id)sender
 {
+    
+    
     // Invalidate this, if its already running
     [_textFieldSliderTimer invalidate];
     
@@ -1013,12 +1066,16 @@ extern Facebook * g_facebook;
     
     CyclingTextField *cyclingTextField = (CyclingTextField *)sender;
     
-    UIView *parent = cyclingTextField.superview;
+    UIView *parent = cyclingTextField.superview.superview;
     
     // Shift the superview up enough so that the textfield is
     // centered in the remaining visble space once the keyboard displays.
     // I kinda just tweaked this value till it looked right.
-    CGFloat delta = cyclingTextField.frame.origin.y - 35;
+    //CGFloat delta = cyclingTextField.frame.origin.y - 35;
+    CGFloat delta = 0;
+    if(cyclingTextField == _signupEmailText){
+        delta = cyclingTextField.superview.frame.origin.y - 35;
+    }
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.2f];
@@ -1061,7 +1118,7 @@ extern Facebook * g_facebook;
     
     _textFieldSliderTimer = nil;
     
-    UIView *parent = cyclingTextField.superview;
+    UIView *parent = cyclingTextField.superview.superview;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.2f];
@@ -1301,6 +1358,7 @@ extern Facebook * g_facebook;
         }
         else
         {
+            
             [self swapRightPanel:_signinRightPanel];
             
             // Renable buttons

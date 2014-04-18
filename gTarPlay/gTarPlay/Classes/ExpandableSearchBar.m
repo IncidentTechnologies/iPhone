@@ -99,6 +99,7 @@
     _textField.returnKeyType = UIReturnKeySearch;
     _textField.delegate = self;
     _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [_textField setFont:[UIFont fontWithName:@"Avenir Next" size:17.0]];
     
     // make the cancel button
     _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width - CANCEL_BUTTON_HEIGHT, 0, CANCEL_BUTTON_HEIGHT, CANCEL_BUTTON_HEIGHT)];

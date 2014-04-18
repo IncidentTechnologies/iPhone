@@ -9,9 +9,28 @@
 #import <UIKit/UIKit.h>
 
 #import <GtarController/GtarController.h>
+#import <gTarAppCore/CloudController.h>
+#import <gTarAppCore/CloudResponse.h>
+#import <gTarAppCore/CloudRequest.h>
+#import <gTarAppCore/FileController.h>
+#import <gTarAppCore/UserSong.h>
+#import <gTarAppCore/UserSongs.h>
+#import <gTarAppCore/XmlDom.h>
+#import "SongPlaybackController.h"
+#import <gTarAppCore/UserController.h>
 
+#import "SongListCell.h"
+#import "PlayViewController.h"
+#import "SlidingModalViewController.h"
+#import "VolumeViewController.h"
+#import "SlidingInstrumentViewController.h"
+#import "PlayerViewController.h"
+#import "UIView+Gtar.h"
+#import "UIButton+Gtar.h"
 #import "PullToUpdateTableView.h"
 #import "ExpandableSearchBar.h"
+#import "SoundMaster.h"
+//#import "UILevelSlider.h"
 
 typedef enum {
     SORT_SONG_TITLE,
@@ -30,7 +49,10 @@ struct SongSortOrder {
 @class SlidingModalViewController;
 @class UserSong;
 
-@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver, ExpandableSearchBarDelegate>
+@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver, ExpandableSearchBarDelegate,SlidingInstrumentDelegate>
+
+// Audio Controller
+@property (retain, nonatomic) SoundMaster *g_soundMaster;
 
 // Song Options Modal
 @property (retain, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
@@ -66,6 +88,8 @@ struct SongSortOrder {
 @property (retain, nonatomic) IBOutlet UILabel *songListLabel;
 
 @property (retain, nonatomic) IBOutlet PullToUpdateTableView *songListTable;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;
 
 - (void) localizeViews;
 

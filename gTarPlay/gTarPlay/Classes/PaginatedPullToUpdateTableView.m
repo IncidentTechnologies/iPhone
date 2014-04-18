@@ -23,6 +23,7 @@
     m_footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, 0, self.frame.size.width - LEFT_MARGIN, FOOTER_HEIGHT)];
     [m_footerLabel setText:@"Updating..."];
     [m_footerLabel setTextColor:[UIColor grayColor]];
+    [m_footerLabel setFont:[UIFont fontWithName:@"Avenir Next" size:15.0]];
     
     m_activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [m_activityView setFrame:CGRectMake(0, 0, LEFT_MARGIN, FOOTER_HEIGHT)];

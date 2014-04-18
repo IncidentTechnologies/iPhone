@@ -11,7 +11,18 @@
 #import "SlidingViewController.h"
 #import <gTarAppCore/InstrumentTableViewController.h>
 
+@protocol SlidingInstrumentDelegate <NSObject>
+
+- (void)stopAudioEffects;
+- (NSInteger)getSelectedInstrumentIndex;
+- (NSArray *)getInstrumentList;
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender;
+
+@end
+
 @interface SlidingInstrumentViewController : SlidingViewController <InstrumentSelectionDelegate>
+
+@property (assign, nonatomic) id <SlidingInstrumentDelegate> delegate;
 
 @property (retain, nonatomic) IBOutlet UIView *innerContentView;
 

@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class AudioController;
+//@class AudioController;
 
 @protocol EffectSelectionDelegate
--(void) didSelectEffectAtIndex:(NSInteger)index;
+
+- (void)didSelectEffectAtIndex:(NSInteger)index;
+- (NSString *)getEffectNameAtIndex:(NSInteger)index;
+- (NSInteger)getNumEffects;
+- (BOOL)isEffectOnAtIndex:(NSInteger)index;
+- (void)toggleEffect:(NSInteger)index isOn:(BOOL)on;
+
 @end
 
 @interface EffectsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
@@ -19,6 +25,7 @@
 @property (retain, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) id <EffectSelectionDelegate> delegate;
 
-- (id)initWithAudioController:(AudioController*)AC;
+//- (id)initWithAudioController:(AudioController*)AC;
+- (id)init;
 
 @end

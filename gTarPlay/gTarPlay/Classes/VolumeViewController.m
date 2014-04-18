@@ -8,14 +8,12 @@
 
 #import "VolumeViewController.h"
 
-#import <AudioController/AudioController.h>
-
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-extern AudioController * g_audioController;
+//extern AudioController * g_audioController;
 
 @interface VolumeViewController ()
 {
@@ -86,8 +84,11 @@ extern AudioController * g_audioController;
     
     [_volumeView addSubview:_mpVolumeView];
     
-    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-    [self showVolumeSliderForRoute:routeName];
+    //NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
+    //[self showVolumeSliderForRoute:routeName];
+    
+    NSLog(@"TODO: show volume slider for audio route");
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,7 +132,9 @@ extern AudioController * g_audioController;
 - (IBAction)volumeValueChanged:(id)sender
 {
     // Change the volume of the audio controller
-    [g_audioController setM_volumeGain:_volumeSlider.value];
+    //[g_audioController setM_volumeGain:_volumeSlider.value];
+    
+    NSLog(@"TODO: change the volume of the audio controller");
 }
 
 - (void)attachToSuperview:(UIView *)view

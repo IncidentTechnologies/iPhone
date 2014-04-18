@@ -10,10 +10,13 @@
 
 #import "PaginatedPullToUpdateTableView.h"
 #import "ExpandableSearchBar.h"
+#import "SoundMaster.h"
 
 @class SelectorControl;
 
 @interface SocialViewController : UIViewController <PaginatedPullToUpdateTableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ExpandableSearchBarDelegate, UIAlertViewDelegate>
+
+@property (retain, nonatomic) SoundMaster * g_soundMaster;
 
 @property (retain, nonatomic) IBOutlet UIView *topBar;
 @property (retain, nonatomic) IBOutlet UIButton *profileButton;
@@ -32,6 +35,8 @@
 
 @property (retain, nonatomic) IBOutlet UILabel *profileLabel;
 @property (retain, nonatomic) IBOutlet UILabel *backLabel;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;
 
 - (IBAction)backButtonClicked:(id)sender;
 - (IBAction)profileButtonClicked:(id)sender;

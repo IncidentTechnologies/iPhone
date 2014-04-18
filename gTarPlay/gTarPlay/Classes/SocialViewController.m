@@ -54,13 +54,17 @@ extern Facebook *g_facebook;
 
 @implementation SocialViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize g_soundMaster;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if ( self )
     {
         // Custom initialization
+        g_soundMaster = soundMaster;
+        [g_soundMaster start];
     }
     return self;
 }
@@ -84,7 +88,7 @@ extern Facebook *g_facebook;
     
     [self displayAndUpdateUserId:0];
     
-    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
+    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     
 }
 
@@ -93,8 +97,9 @@ extern Facebook *g_facebook;
     [_followButton setTitle:NSLocalizedString(@"FOLLOW", NULL) forState:UIControlStateNormal];
     [_followingButton setTitle:NSLocalizedString(@"FOLLOWING", NULL) forState:UIControlStateNormal];
     
-    _profileLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Profile", NULL)];
+    //_profileLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Profile", NULL)];
     _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -239,6 +244,10 @@ extern Facebook *g_facebook;
     
     [_userNameLabel setText:_displayedUserEntry.m_userProfile.m_name];
     
+    // TODO: ensure this is the logged in user not the user displayed
+    [_profileLabel setText:loggedInEntry.m_userProfile.m_name];
+    
+    
     UIImage *image = [g_fileController getFileOrReturnNil:_displayedUserEntry.m_userProfile.m_imgFileId];
     
     // Nil is ok
@@ -320,6 +329,9 @@ extern Facebook *g_facebook;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [tableView setSeparatorInset:UIEdgeInsetsZero];
+    
     NSInteger row = [indexPath row];
     
     if ( tableView == _feedTable )

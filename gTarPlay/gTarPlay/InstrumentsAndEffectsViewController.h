@@ -8,14 +8,17 @@
 
 #import "JamPad.h"
 #import "EffectsTableViewController.h"
+#import <gtarAppCore/InstrumentTableViewController.h>
+#import "SoundMaster.h"
 
 #import <UIKit/UIKit.h>
 
 @class AudioController;
 
-@interface InstrumentsAndEffectsViewController : UIViewController <XYInputViewDelegate, EffectSelectionDelegate>
+@interface InstrumentsAndEffectsViewController : UIViewController <XYInputViewDelegate, EffectSelectionDelegate, InstrumentSelectionDelegate>
 
-- (id)initWithAudioController:(AudioController*)AC;
+//- (id)initWithAudioController:(AudioController*)AC;
+- (id)initWithSoundMaster:(SoundMaster*)SM;
 
 - (void)displayInstruments;
 - (void)displayEffects;

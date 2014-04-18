@@ -14,11 +14,16 @@
 
 #import "PaginatedPullToUpdateTableView.h"
 
+#import "SoundMaster.h"
+
 @class SelectorControl;
 @class SlidingModalViewController;
 @class CyclingTextField;
 
 @interface TitleNavigationController : UIViewController <UITableViewDataSource, PaginatedPullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate>
+
+// Audio Controller
+@property (retain, nonatomic) SoundMaster *g_soundMaster;
 
 // Main
 @property (retain, nonatomic) IBOutlet UIView *topBarView;
@@ -36,7 +41,7 @@
 // Top bar
 @property (retain, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (retain, nonatomic) IBOutlet UIButton *profileButton;
-@property (retain, nonatomic) IBOutlet UILabel *profileLabel;
+@property (retain, nonatomic) UILabel *profileLabel;
 
 - (IBAction)profileButtonClicked:(id)sender;
 
@@ -55,8 +60,8 @@
 // Left Panel buttons + clicks
 @property (retain, nonatomic) IBOutlet UIButton *signinButton;
 @property (retain, nonatomic) IBOutlet UIButton *signupButton;
-@property (retain, nonatomic) IBOutlet UILabel *signInOrLabel;
-@property (retain, nonatomic) IBOutlet UILabel *signUpOrLabel;
+//@property (retain, nonatomic) IBOutlet UILabel *signInOrLabel;
+//@property (retain, nonatomic) IBOutlet UILabel *signUpOrLabel;
 
 @property (retain, nonatomic) IBOutlet UILabel *signInLoginLabel;
 @property (retain, nonatomic) IBOutlet UILabel *signUpLoginLabel;

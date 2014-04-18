@@ -8,18 +8,10 @@
 
 #import "FPMenuViewController.h"
 
-extern AudioController * g_audioController;
-
-@interface FPMenuViewController ()
-
-@property (retain, nonatomic) IBOutlet UISlider *toneSlider;
-@property (retain, nonatomic) IBOutlet UISwitch *audioRouteSwitch;
-@property (retain, nonatomic) IBOutlet UISwitch *slideSwitch;
-@property (retain, nonatomic) IBOutlet UITextField *testText;
-
-@end
-
 @implementation FPMenuViewController
+
+@synthesize delegate;
+@synthesize audioRouteSwitch;
 
 - (id)init
 {
@@ -53,6 +45,10 @@ extern AudioController * g_audioController;
     self.slideSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
     self.slideSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.slideSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
+    
+    if(audioSwitchOn){
+        [self setAudioSwitchToDefault];
+    }
 }
 
 - (void) localizeViews {
@@ -79,29 +75,50 @@ extern AudioController * g_audioController;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
     
     [_toneSlider release];
-    [_audioRouteSwitch release];
+    [audioRouteSwitch release];
     
     [_slideSwitch release];
     [super dealloc];
 }
 
-#pragma mark - IBActions
+#pragma mark - Tone slider
 
 - (IBAction)setTone:(UISlider *)sender
 {
-    [g_audioController SetBWCutoff:sender.value];
+    [delegate setToneToBWCutoff:sender.value];
 }
+
+- (void)moveToneSliderToTone:(double)tone
+{
+    NSLog(@"Move tone slider to tone %f",tone);
+    [_toneSlider setValue:tone animated:NO];
+}
+
+#pragma mark - Audio Routing
 
 - (IBAction)setAudioRoute:(UISwitch *)sender
 {
-    if (sender.isOn)
-    {
-        [g_audioController RouteAudioToDefault];
+    if(sender.isOn){
+        // route to default
+        [delegate audioRouteChanged:NO];
+    }else{
+        // route to speaker
+        [delegate audioRouteChanged:YES];
     }
-    else
-    {
-        [g_audioController RouteAudioToSpeaker];
-    }
+}
+
+- (void)setAudioSwitchToDefault
+{
+    NSLog(@"Set audio switch to default");
+    [self.audioRouteSwitch setOn:YES];
+    audioSwitchOn = YES;
+}
+
+- (void)setAudioSwitchToSpeaker
+{
+    NSLog(@"Set audio switch to speaker");
+    [self.audioRouteSwitch setOn:NO];
+    audioSwitchOn = NO;
 }
 
 - (IBAction)setSlideHammer:(id)sender
@@ -125,6 +142,9 @@ extern AudioController * g_audioController;
 
 - (void) didChangeAudioRoute:(NSNotification *) notification
 {
+    
+    NSLog(@"Did change audio route *** ");
+    
     NSDictionary *data = [notification userInfo];
     BOOL routeIsSpeaker = [[data objectForKey:@"isRouteSpeaker"] boolValue];
     
@@ -154,11 +174,11 @@ extern AudioController * g_audioController;
     
     if (routeIsSpeaker)
     {
-        [self.audioRouteSwitch setOn:NO];
+        [self setAudioSwitchToSpeaker];
     }
     else
     {
-        [self.audioRouteSwitch setOn:YES];
+        [self setAudioSwitchToDefault];
     }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];

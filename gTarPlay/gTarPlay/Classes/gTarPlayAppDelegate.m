@@ -21,14 +21,12 @@
 #import <gTarAppCore/UserController.h>
 //#import <gTarAppCore/TelemetryController.h>
 
-#import <AudioController/AudioController.h>
-
 #define MIXPANEL_TOKEN @"da24d59140097cb9672b348ef05c6fab"
 
 Facebook *g_facebook;
 
 CloudController * g_cloudController;
-AudioController * g_audioController;
+//AudioController * g_audioController;
 FileController * g_fileController;
 GtarController * g_gtarController;
 UserController * g_userController;
@@ -95,6 +93,10 @@ UserController * g_userController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    // Test Flight Integration
+    [TestFlight takeOff:@"ad6b7150-d397-4188-9f1a-58f56c83d967"];
+    
     // Typical UI Setup
     
     // Override point for customization after application launch.
@@ -329,7 +331,7 @@ UserController * g_userController;
     NSLog(@"Begin delayed loading");
     
     // Create the audio controller -- this can take awhile
-    g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
+    // g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     
     NSLog(@"Finished delayed loading");
     

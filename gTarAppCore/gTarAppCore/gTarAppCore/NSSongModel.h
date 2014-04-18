@@ -66,7 +66,7 @@
 - (id)initWithSong:(NSSong*)song;
 
 - (void)startWithDelegate:(id)delegate;
-- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats;
+- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd;
 - (void)skipToNextFrame;
 //- (void)incrementBeat:(double)delta;
 //- (void)incrementTime:(double)delta;
@@ -80,5 +80,6 @@
 - (void)enterCurrentFrame;
 - (void)beginFrameTimer:(double)delta;
 - (void)frameExpired;
+- (double)getFirstAudibleBeat;
 
 @end

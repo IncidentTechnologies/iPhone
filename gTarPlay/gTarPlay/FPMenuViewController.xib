@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FPMenuViewController">
@@ -40,14 +40,14 @@
                                 <constraint firstAttribute="width" constant="428" id="1017"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="TONE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="137">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="TONE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="137">
                             <rect key="frame" x="80" y="30" width="60" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="1003"/>
                                 <constraint firstAttribute="height" constant="27" id="2419"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="19"/>
                             <color key="textColor" red="0.1960784314" green="0.22998403279999999" blue="0.2604071624" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -59,7 +59,7 @@
                                 <constraint firstAttribute="width" constant="16" id="977"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Minus.png" translatesAutoresizingMaskIntoConstraints="NO" id="641">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" misplaced="YES" image="Minus.png" translatesAutoresizingMaskIntoConstraints="NO" id="641">
                             <rect key="frame" x="212" y="30" width="16" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
@@ -82,13 +82,13 @@
                                 <constraint firstAttribute="width" constant="428" id="2513"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ON" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2608">
-                            <rect key="frame" x="348" y="164" width="30" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="ON" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2608">
+                            <rect key="frame" x="358" y="164" width="30" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="2714"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -99,7 +99,7 @@
                                 <constraint firstAttribute="width" constant="91" id="229"/>
                                 <constraint firstAttribute="height" constant="21" id="2581"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="19"/>
                             <color key="textColor" red="0.19613937040000001" green="0.22978444340000001" blue="0.25858234489999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -110,7 +110,7 @@
                                 <constraint firstAttribute="height" constant="21" id="2650"/>
                                 <constraint firstAttribute="width" constant="86" id="2893"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="19"/>
                             <color key="textColor" red="0.19613937040000001" green="0.22978444340000001" blue="0.25858234489999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -129,50 +129,51 @@
                                 <constraint firstAttribute="width" constant="136" id="1143"/>
                                 <constraint firstAttribute="height" constant="21" id="1158"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="19"/>
                             <color key="textColor" red="0.19593978100000001" green="0.229584854" blue="0.25775547450000003" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="SPEAKER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="276">
-                            <rect key="frame" x="207" y="98" width="81" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="SPEAKER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="276">
+                            <rect key="frame" x="209" y="98" width="81" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="81" id="2904"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="OFF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2599">
-                            <rect key="frame" x="245" y="164" width="34" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="OFF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2599">
+                            <rect key="frame" x="246" y="164" width="34" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="34" id="2918"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="AUX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="339">
-                            <rect key="frame" x="348" y="99" width="37" height="19"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="AUX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="339">
+                            <rect key="frame" x="358" y="99" width="37" height="19"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="19" id="374"/>
                                 <constraint firstAttribute="width" constant="37" id="375"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1812">
-                            <rect key="frame" x="287" y="93" width="51" height="31"/>
+                        <switch opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1812">
+                            <rect key="frame" x="294" y="93" width="51" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="onTintColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="setAudioRoute:" destination="-1" eventType="valueChanged" id="2263"/>
                             </connections>
                         </switch>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="8000" minValue="150" maxValue="8000" translatesAutoresizingMaskIntoConstraints="NO" id="1820">
-                            <rect key="frame" x="243" y="27" width="154" height="34"/>
+                        <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="8000" minValue="150" maxValue="8000" translatesAutoresizingMaskIntoConstraints="NO" id="1820">
+                            <rect key="frame" x="243" y="27" width="154" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="150" id="2364"/>
@@ -189,7 +190,7 @@
                                 <constraint firstAttribute="height" constant="35" id="2197"/>
                                 <constraint firstAttribute="width" constant="156" id="2217"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="21"/>
                             <state key="normal" title="EXIT">
                                 <color key="titleColor" red="0.0" green="0.47003307480000001" blue="0.64695483580000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -200,9 +201,10 @@
                                 <action selector="exitFreePlay:" destination="-1" eventType="touchUpInside" id="2222"/>
                             </connections>
                         </button>
-                        <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2508">
-                            <rect key="frame" x="287" y="156" width="51" height="31"/>
+                        <switch opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2508">
+                            <rect key="frame" x="294" y="156" width="51" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="onTintColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="setSlideHammer:" destination="-1" eventType="valueChanged" id="2797"/>
                             </connections>
@@ -225,7 +227,7 @@
                         <constraint firstItem="339" firstAttribute="top" secondItem="203" secondAttribute="top" id="2430"/>
                         <constraint firstItem="276" firstAttribute="baseline" secondItem="203" secondAttribute="baseline" id="2434"/>
                         <constraint firstItem="1824" firstAttribute="leading" secondItem="1131" secondAttribute="trailing" constant="64" id="2440"/>
-                        <constraint firstItem="1812" firstAttribute="leading" secondItem="276" secondAttribute="trailing" constant="-1" id="2470"/>
+                        <constraint firstItem="1812" firstAttribute="leading" secondItem="276" secondAttribute="trailing" constant="4" id="2470"/>
                         <constraint firstItem="1820" firstAttribute="leading" secondItem="641" secondAttribute="trailing" constant="17" id="2495"/>
                         <constraint firstItem="542" firstAttribute="leading" secondItem="1820" secondAttribute="trailing" constant="14" id="2496"/>
                         <constraint firstItem="1131" firstAttribute="leading" secondItem="96" secondAttribute="trailing" constant="-404" id="2505"/>
@@ -238,8 +240,7 @@
                         <constraint firstItem="2599" firstAttribute="baseline" secondItem="2608" secondAttribute="baseline" id="2646"/>
                         <constraint firstItem="2648" firstAttribute="top" secondItem="2599" secondAttribute="top" id="2674"/>
                         <constraint firstItem="2648" firstAttribute="bottom" secondItem="2599" secondAttribute="bottom" id="2675"/>
-                        <constraint firstItem="2508" firstAttribute="leading" secondItem="2599" secondAttribute="trailing" constant="8" symbolic="YES" id="2787"/>
-                        <constraint firstItem="2599" firstAttribute="leading" secondItem="1820" secondAttribute="leading" id="2788"/>
+                        <constraint firstItem="2508" firstAttribute="leading" secondItem="2599" secondAttribute="trailing" constant="14" id="2787"/>
                         <constraint firstItem="339" firstAttribute="leading" secondItem="2608" secondAttribute="leading" id="2795"/>
                         <constraint firstItem="2511" firstAttribute="leading" secondItem="81" secondAttribute="leading" id="2852"/>
                         <constraint firstItem="81" firstAttribute="top" secondItem="31" secondAttribute="top" constant="83" id="2882"/>
@@ -248,7 +249,7 @@
                         <constraint firstAttribute="bottom" secondItem="2508" secondAttribute="bottom" constant="78" id="2888"/>
                         <constraint firstItem="112" firstAttribute="top" secondItem="31" secondAttribute="top" constant="17" id="2890"/>
                         <constraint firstItem="641" firstAttribute="top" secondItem="31" secondAttribute="top" constant="30" id="2891"/>
-                        <constraint firstItem="339" firstAttribute="leading" secondItem="1812" secondAttribute="trailing" constant="12" id="2892"/>
+                        <constraint firstItem="339" firstAttribute="leading" secondItem="1812" secondAttribute="trailing" constant="15" id="2892"/>
                         <constraint firstItem="2511" firstAttribute="leading" secondItem="96" secondAttribute="leading" id="2906"/>
                         <constraint firstItem="81" firstAttribute="leading" secondItem="112" secondAttribute="leading" id="2911"/>
                         <constraint firstItem="1820" firstAttribute="centerX" secondItem="1824" secondAttribute="centerX" id="2917"/>
@@ -257,6 +258,8 @@
                         <constraint firstItem="2648" firstAttribute="centerX" secondItem="203" secondAttribute="centerX" id="2925"/>
                         <constraint firstItem="2511" firstAttribute="centerX" secondItem="31" secondAttribute="centerX" id="2928"/>
                         <constraint firstItem="137" firstAttribute="centerX" secondItem="203" secondAttribute="centerX" id="2934"/>
+                        <constraint firstItem="1812" firstAttribute="centerX" secondItem="2508" secondAttribute="centerX" id="Hgf-m5-WzC"/>
+                        <constraint firstItem="1824" firstAttribute="centerX" secondItem="2508" secondAttribute="centerX" id="IkE-8n-U4d"/>
                     </constraints>
                 </view>
             </subviews>

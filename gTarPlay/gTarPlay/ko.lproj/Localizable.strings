@@ -17,7 +17,7 @@
 "SIGN UP" = "가입";
 "Username" = "로그인 이름";
 "Password" = "암호";
-"Email (optional)" = "이메일 주소 (선택 사항)";
+"Email" = "이메일 주소";
 "Please Connect Your gTar" = "gTar를 연결하세요";
 "Profile" = "프로필";
 "Please connect your gTar to sign up for an account." = "gTar를 연결하세요";
@@ -80,10 +80,10 @@
 "TONE" = "톤";
 "SLIDING" = "슬라이딩";
 "EXIT TO MAIN" = "메인으로 나가기";
-"Chorus" = "XXXX";
-"Echo" = "XXXX";
-"Reverb" = "XXXXX";
-"Distortion" = "XXXXXXX";
+"Chorus" = "합창";
+"Echo" = "에코";
+"Reverb" = "반향";
+"Distortion" = "왜곡";
 
 // Instruments
 "Electric" = "Electric";

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TestFlight.h"
 #import <GtarController/GtarController.h>
-
 #import "gTarNavigationController.h"
+
 //#import <gTarAppCore/Facebbok/FBConnect.h>
 
 @class gTarPlayApplication;

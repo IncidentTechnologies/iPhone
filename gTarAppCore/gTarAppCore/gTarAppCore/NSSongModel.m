@@ -72,10 +72,10 @@
 
 - (void)startWithDelegate:(id)delegate
 {
-    [self startWithDelegate:delegate andBeatOffset:0];    
+    [self startWithDelegate:delegate andBeatOffset:0 fastForward:NO];
 }
 
-- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats
+- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd
 {
     // clear remnants from last song
     [m_noteFrames release];
@@ -124,6 +124,13 @@
     
     m_lengthSeconds = m_lengthBeats / m_beatsPerSecond;
     
+    if(ffwd){
+        
+        double firstAudibleBeat = [self getFirstAudibleBeat];
+        beats = beats + firstAudibleBeat;
+        
+    }
+    
     if ( m_lengthBeats == 0 )
     {
         // this is an empty song
@@ -150,6 +157,17 @@
     else
     {
         [m_delegate songModelEndOfSong];
+    }
+}
+
+- (double)getFirstAudibleBeat
+{
+    NSNoteFrame * nextFrame = [m_noteFrames objectAtIndex:0];
+    
+    if(nextFrame != nil){
+        return nextFrame.m_absoluteBeatStart;
+    }else{
+        return 0;
     }
 }
 

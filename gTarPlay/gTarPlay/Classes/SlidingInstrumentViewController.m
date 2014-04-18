@@ -8,10 +8,9 @@
 
 #import "SlidingInstrumentViewController.h"
 
-#import <AudioController/AudioController.h>
 #import "UIView+Gtar.h"
 
-extern AudioController *g_audioController;
+//extern AudioController *g_audioController;
 
 @interface SlidingInstrumentViewController ()
 {
@@ -20,6 +19,8 @@ extern AudioController *g_audioController;
 @end
 
 @implementation SlidingInstrumentViewController
+
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,8 +37,8 @@ extern AudioController *g_audioController;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _instrumentViewController = [[InstrumentTableViewController alloc] initWithAudioController:g_audioController];
-    
+    //_instrumentViewController = [[InstrumentTableViewController alloc] initWithAudioController:g_audioController];
+    _instrumentViewController = [[InstrumentTableViewController alloc] init];
     _instrumentViewController.delegate = self;
     
     // Forces viewDidLoad
@@ -81,15 +82,39 @@ extern AudioController *g_audioController;
 
 #pragma mark - InstrumentSelectionDelegate
 
-- (void)didSelectInstrument
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
     _loading = YES;
+    
+    [delegate didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
+
 }
 
 - (void)didLoadInstrument
 {
-    [g_audioController reset];
+    //[g_audioController reset];
+    NSLog(@"TODO: reset audio controller");
     _loading = NO;
+}
+
+- (void)stopAudioEffects
+{
+    [delegate stopAudioEffects];
+}
+
+- (NSInteger)getSelectedInstrumentIndex
+{
+    NSLog(@"Sliding instrument selector get selected instrument index");
+    return [delegate getSelectedInstrumentIndex];
+}
+
+- (NSArray *)getInstrumentList
+{
+    NSLog(@"Sliding instrument selector get instrument list");
+    
+    
+    
+    return [delegate getInstrumentList];
 }
 
 @end

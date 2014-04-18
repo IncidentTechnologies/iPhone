@@ -9,7 +9,6 @@
 #import "PlayViewController.h"
 #import "VolumeViewController.h"
 
-#import <AudioController/AudioController.h>
 #import <GtarController/GtarController.h>
 
 //#import <gTarAppCore/TelemetryController.h>
@@ -49,7 +48,7 @@
 extern CloudController * g_cloudController;
 extern GtarController * g_gtarController;
 extern UserController * g_userController;
-extern AudioController * g_audioController;
+//extern AudioController * g_audioController;
 //extern TelemetryController * g_telemetryController;
 
 @interface PlayViewController ()
@@ -103,11 +102,16 @@ extern AudioController * g_audioController;
 
 @implementation PlayViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize g_soundMaster;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
     {
+        g_soundMaster = soundMaster;
+        [g_soundMaster start];
+        
         // Custom initialization
         _playTimeAdjustment = 0;
         
@@ -151,12 +155,13 @@ extern AudioController * g_audioController;
     _feedSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
     
     // Setup the loading screen
-    _loadingView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    _loadingView.layer.borderWidth = 2.0;
+    //_loadingView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    //_loadingView.layer.borderWidth = 2.0;
     
     // Fill in song info
     _loadingLicenseInfo.text = _userSong.m_licenseInfo;
-    _loadingSongInfo.text = [[NSString stringWithFormat:@"%@ - %@", _userSong.m_author, _userSong.m_title] retain];
+    _loadingSongArtist.text = _userSong.m_author;
+    _loadingSongTitle.text = _userSong.m_title;
     
     // Hide the glview till it is done loading
     _glView.hidden = YES;
@@ -240,7 +245,8 @@ extern AudioController * g_audioController;
     
     // We let the previous screen set the sample pack of this song.
 //    [g_audioController setSamplePackWithName:_song.m_instrument];
-    [g_audioController startAUGraph];
+    [g_soundMaster didSelectInstrument:_song.m_instrument withSelector:@selector(instrumentDidLoad:) andOwner:self];
+    [g_soundMaster start];
     
     //
     // Set the audio routing destination
@@ -260,6 +266,11 @@ extern AudioController * g_audioController;
     // Observe the global guitar controller. This will call guitarConnected when it is connected.
     // This in turn starts the game mode.
     [g_gtarController addObserver:self];
+    
+}
+
+- (void)instrumentDidLoad:(id)sender
+{
     
 }
 
@@ -313,8 +324,7 @@ extern AudioController * g_audioController;
     
     [_metronomeTimeStart release];
     
-    [g_audioController stopAUGraph];
-    [g_audioController reset];
+    //[g_soundMaster disconnectAndRelease];
     
     [_glView release];
     [_menuView release];
@@ -339,7 +349,8 @@ extern AudioController * g_audioController;
     
     [_loadingView release];
     [_loadingLicenseInfo release];
-    [_loadingSongInfo release];
+    [_loadingSongArtist release];
+    [_loadingSongTitle release];
     [_difficultyButton release];
     [_difficultyLabel release];
     [_instrumentButton release];
@@ -493,7 +504,8 @@ extern AudioController * g_audioController;
         [self uploadUserSongSession];
     }
     
-    [g_audioController reset];
+    NSLog(@"TODO: reset audio");
+    //[g_audioController reset];
     [g_gtarController turnOffAllLeds];
     [_displayController shiftView:0];
     
@@ -655,11 +667,11 @@ extern AudioController * g_audioController;
     
     if ( _speakerRoute == YES)
     {
-        [g_audioController RouteAudioToSpeaker];
+        [g_soundMaster routeToSpeaker];
     }
     else
     {
-        [g_audioController RouteAudioToDefault];
+        [g_soundMaster routeToDefault];
     }
     
 }
@@ -782,12 +794,13 @@ extern AudioController * g_audioController;
 
 - (void)playMetronomeTick
 {
-    [g_audioController PluckMutedString:0];
+    NSLog(@"TODO: play metronome tick");
+    //[g_audioController PluckMutedString:0];
 }
 
 - (void)setVolumeGain:(float)gain
 {
-    [g_audioController setM_volumeGain:gain];
+    [g_soundMaster setChannelGain:gain];
 }
 
 - (void)updateDifficultyDisplay
@@ -896,8 +909,11 @@ extern AudioController * g_audioController;
     session.m_stars = _scoreTracker.m_stars;
     session.m_combo = _scoreTracker.m_streak;
     session.m_notes = @"Recorded in gTar Play";
+
+    _songRecorder.m_song.m_instrument = [[g_soundMaster getInstrumentList] objectAtIndex:[g_soundMaster getCurrentInstrument]];
     
-    _songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
+    NSLog(@"Get current instrument is %@",_songRecorder.m_song.m_instrument);
+   // _songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
     
     // Create the xmp
     session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
@@ -1108,7 +1124,8 @@ extern AudioController * g_audioController;
 {
     
     // Always mute notes on note-off for hard
-    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
+    NSLog(@"TODO: mute note");
+    //[g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
     
     @synchronized ( _deferredNotesQueue )
     {
@@ -1229,7 +1246,7 @@ extern AudioController * g_audioController;
     _songModel.m_frameWidthBeats = 0.1f;
     
     // Give a little runway to the player
-    [_songModel startWithDelegate:self andBeatOffset:-4.0];
+    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES];
     
     // Light up the first frame
     [self turnOnFrame:_songModel.m_nextFrame];
@@ -1663,11 +1680,14 @@ extern AudioController * g_audioController;
     
     if ( fret == GTAR_GUITAR_FRET_MUTED )
     {
-        [g_audioController PluckMutedString:str-1];
+        NSLog(@"TODO: pluck muted");
+        //[g_audioController PluckMutedString:str-1];
     }
     else
     {
-        [g_audioController PluckString:str-1 atFret:fret withAmplitude:((float)velocity)/GtarMaxPluckVelocity];
+        NSLog(@"Play View Controller Pluck String");
+        [g_soundMaster PluckString:str-1 atFret:fret];
+       // [g_audioController PluckString:str-1 atFret:fret withAmplitude:((float)velocity)/GtarMaxPluckVelocity];
     }
     
 }

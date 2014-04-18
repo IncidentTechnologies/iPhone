@@ -17,7 +17,7 @@
 "SIGN UP" = "SIGNER";
 "Username" = "NOM D'UTILISATEUR";
 "Password" = "PASSE";
-"Email (optional)" = "ADRESSE EMAIL (EN OPTION)";
+"Email" = "ADRESSE EMAIL";
 "Please Connect Your gTar" = "Veuillez brancher votre gTar";
 "Profile" = "Profil";
 "Please connect your gTar to sign up for an account." = "Veuillez brancher votre gTar";
@@ -75,6 +75,10 @@
 "TONE" = "Volume";
 "SLIDING" = "glissement";
 "EXIT TO MAIN" = "Menu principal";
+"Chorus" = "Chorus";
+"Echo" = "Écho";
+"Reverb" = "Réverbération";
+"Distortion" = "Distorsion";
 
 // Instruments
 "Electric" = "Guitare électrique";

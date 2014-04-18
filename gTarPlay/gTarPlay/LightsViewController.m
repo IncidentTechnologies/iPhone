@@ -8,97 +8,9 @@
 
 #import "LightsViewController.h"
 
-#import "RGBColor.h"
-
-#import <gTarAppCore/AppCore.h>
-
-extern GtarController * g_gtarController;
-
-typedef enum
-{
-    LEDTouchGeneral,
-    LEDTouchFret,
-    LEDTouchString,
-    LEDTouchAll,
-    LEDTouchNone
-} LEDTouchArea;
-
-typedef enum
-{
-    LEDModeSingle,
-    LEDModeTrail,
-    LEDModeHold
-} LEDMode;
-
-typedef enum
-{
-    LEDColorSingle,
-    LEDColorRoatating,
-    LEDColorRandom
-} LEDColorMode;
-
-typedef enum
-{
-    LEDShapeDot,
-    LEDShapeCross,
-    LEDShapeSquare
-} LEDShape;
-
-typedef enum
-{
-    LEDLoopSolid,
-    LEDLoopUp,
-    LEDLoopSide,
-    LEDRainbow,
-    LEDSquares,
-    LEDLgSquares,
-    LEDLoopRandom,
-    
-    // KEEP AT END OF LIST!
-    NUM_LEDLoop_ENTRIES // keep track of the number of entries in this enum
-} LEDLoop;
-
-
-@interface LightsViewController ()
-{
-    LEDMode _LEDMode;
-}
-
-@property (retain, nonatomic) IBOutlet UIView *generalSurface;
-@property (retain, nonatomic) IBOutlet UIView *fretSurface;
-@property (retain, nonatomic) IBOutlet UIView *stringSurface;
-@property (retain, nonatomic) IBOutlet UIView *allSurface;
-
-@property (retain, nonatomic) IBOutlet UIView *shapeView;
-@property (retain, nonatomic) IBOutlet UIView *colorView;
-
-@property (retain, nonatomic) IBOutlet UIButton *shapeButton;
-@property (retain, nonatomic) IBOutlet UIButton *colorButton;
-@property (retain, nonatomic) IBOutlet UIButton *loopButton;
-@property (retain, nonatomic) IBOutlet UIButton *clearButton;
-
-@property (retain, nonatomic) IBOutlet UIImageView *arrowFretsRight;
-@property (retain, nonatomic) IBOutlet UIImageView *arrowStringsTop;
-@property (retain, nonatomic) IBOutlet UIImageView *arrowStringsBottom;
-
-@property (retain, nonatomic) IBOutlet UIButton *modeSingleButton;
-@property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *modeButtons;
-
-@property (retain, nonatomic) IBOutlet UIButton *colorWhite;
-@property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *colorButtons;
-
-@property (assign, nonatomic) LEDTouchArea LEDTouchArea;
-@property (assign, nonatomic) CGPoint lastLEDTouch;
-@property (assign, nonatomic) LEDColorMode LEDColorMode;
-@property (retain, nonatomic) NSArray *colors;
-@property (assign, nonatomic) NSInteger currentColorIndex;
-@property (assign, nonatomic) LEDShape LEDShape;
-@property (assign, nonatomic) LEDLoop LEDLoop;
-@property (retain, nonatomic) NSTimer *LEDTimer;
-
-@end
-
 @implementation LightsViewController
+
+@synthesize delegate;
 
 - (id)init
 {
@@ -280,6 +192,10 @@ typedef enum
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"Touches began Lights View Controller");
+    
+    [delegate touchesBegan:touches withEvent:event];
+    
 	// For now we just want to recognize that a touch (any touch) occurred
 	UITouch * touch = [[touches allObjects] objectAtIndex:0];
     
@@ -320,6 +236,8 @@ typedef enum
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [delegate touchesMoved:touches withEvent:event];
+    
     // Only take action if the touch is inside a designated LED area
     if (LEDTouchNone != _LEDTouchArea)
     {
@@ -329,6 +247,8 @@ typedef enum
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [delegate touchesEnded:touches withEvent:event];
+    
     // Check that last touchBegan was inside an LED touch area
     if (LEDTouchNone != _LEDTouchArea)
     {
@@ -714,7 +634,9 @@ typedef enum
 
 - (IBAction)playLoop:(id)sender
 {
-    if (++_LEDLoop >= NUM_LEDLoop_ENTRIES)
+    // TODO: fix this
+    if(_LEDLoop >= NUM_LEDLoop_ENTRIES)
+    //if (++_LEDLoop >= NUM_LEDLoop_ENTRIES)
     {
         _LEDLoop = LEDLoopSolid;
     }

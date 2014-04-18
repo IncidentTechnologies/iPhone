@@ -8,13 +8,11 @@
 
 #import "InstrumentTableViewController.h"
 
-#import <AudioController/AudioController.h>
-
 @interface InstrumentTableViewController () {
     BOOL _flickerState;
 }
 
-@property (retain, nonatomic) AudioController *audioController;
+//@property (retain, nonatomic) AudioController *audioController;
 @property (retain, nonatomic) NSArray *instruments;
 
 @property (retain, nonatomic) NSTimer *loadingTimer;
@@ -25,11 +23,14 @@
 
 @implementation InstrumentTableViewController
 
-- (id)initWithAudioController:(AudioController*)AC {
+@synthesize delegate;
+@synthesize instruments;
+
+//- (id)initWithAudioController:(AudioController*)AC {
+-(id)init
+{
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        _audioController = [AC retain];
-        _instruments = [[AC getInstrumentNames] retain];
         
         CGRect frame = CGRectMake(0, 0, 0, 0);
         _tableView = [[[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain] retain];
@@ -45,8 +46,8 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"InstrumentChanged" object:nil];
     
-    [_audioController release];
-    [_instruments release];
+    [delegate release];
+    [instruments release];
     [_loadingTimer release];
     
     [_tableView release];
@@ -57,9 +58,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    instruments = [[NSArray alloc] initWithArray:[delegate getInstrumentList]];
+    
+    NSLog(@"Instrument array is %@",instruments);
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView reloadData];
+    
+    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     
     self.tableView.showsVerticalScrollIndicator = NO;
     
@@ -70,9 +77,9 @@
 {
     [super viewWillAppear:animated];
     
-    NSInteger instrumentIndex = [_audioController getCurrentSamplePackIndex];
+    NSInteger instrumentIndex = [delegate getSelectedInstrumentIndex];
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:instrumentIndex inSection:0];
-    [self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,6 +105,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
+    [cell.textLabel setFont:[UIFont fontWithName:@"Avenir Next" size:17.0]];
     cell.textLabel.text = NSLocalizedString([self.instruments objectAtIndex:indexPath.row], NULL);  // will localize the string
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
@@ -109,13 +117,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *instrumentName = [self.instruments objectAtIndex:indexPath.row];
-    [self flickerSelectedItem];
+    NSString *instrumentName = [instruments objectAtIndex:indexPath.row];
     
-    if ([_delegate respondsToSelector:@selector(didSelectInstrument)])
-        [_delegate didSelectInstrument];
+    [self waitForCell:indexPath];
     
-    [self.audioController setSamplePackWithName:instrumentName withSelector:@selector(samplerFinishedLoadingCB:) andOwner:self];
+    [delegate didSelectInstrument:instrumentName withSelector:@selector(samplerFinishedLoadingCB:) andOwner:self];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -127,29 +133,37 @@
 
 - (void)samplerFinishedLoadingCB:(NSNumber*)result
 {
-    // TODO telemetry
+    NSLog(@"Sampler finished loading CB");
+    
     if ([result boolValue])
     {
-        [self.audioController ClearOutEffects];
-        [self.audioController startAUGraph];
+        // Keep audio effects for now
+        //[delegate stopAudioEffects];
         [self stopFlicker];
     }
     
-    if ([_delegate respondsToSelector:@selector(didLoadInstrument)])
-        [_delegate didLoadInstrument];
+    if ([delegate respondsToSelector:@selector(didLoadInstrument)])
+        [delegate didLoadInstrument];
 }
 
 // Make the currently selected (center) item flash on and off. The flashing will
 // continue until stopFlicker is called. If scroll is moved to select a new item
 // then the first item will stop flickering and the newly selected item will flicker.
-- (void) flickerSelectedItem
+- (void) waitForCell:(NSIndexPath *)indexPath
 {
+    NSLog(@"*** flicker selected item ***");
+    
+    UITableViewCell* cell = [_tableView cellForRowAtIndexPath:[_tableView indexPathForSelectedRow]];
+    
+    cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0)  alpha:0.5];
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    
     // If selected item is already flickering do nothing, i.e. only start a
     // new timer if it is currently invalid, let a running timer continue
     if (![_loadingTimer isValid])
     {
         [_loadingTimer invalidate];
-        self.loadingTimer = [NSTimer scheduledTimerWithTimeInterval:0.45 target:self selector:@selector(animateFlicker:) userInfo:nil repeats:YES];
+        self.loadingTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(animateFlicker:) userInfo:nil repeats:YES];
     }
 }
 
@@ -175,7 +189,7 @@
         cell.textLabel.highlightedTextColor = [UIColor blackColor];
     }
     else{
-        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0)  alpha:1];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0)  alpha:0.5];
         cell.textLabel.highlightedTextColor = [UIColor whiteColor];
     }
 }
@@ -189,8 +203,8 @@
     
     [self stopFlicker];
     
-    if ([_delegate respondsToSelector:@selector(didLoadInstrument)])
-        [_delegate didLoadInstrument];
+    if ([delegate respondsToSelector:@selector(didLoadInstrument)])
+        [delegate didLoadInstrument];
 }
 
 @end
