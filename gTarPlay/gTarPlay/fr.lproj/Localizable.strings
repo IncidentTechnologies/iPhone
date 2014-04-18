@@ -94,4 +94,59 @@
 "Droplet" = "Gouttelette";
 "Square" = "Piano carré";
 
+// More
+"LOG IN" = "XXXX";
+"Sign In" = "XXXX";
+"Sign Up" = "XXXX";
+"OR" = "XX";
+"SESSIONS" = "XXXXXX";
+"FOLLOWERS" = "XXXXXXX";
+"Chorus" = "XXXX";
+"Echo" = "XXXX";
+"Reverb" = "XXXXX";
+"Distortion" = "XXXXXXX";
+
+// Time formatter
+"The Future" = "XXXXX";
+"%u second ago" = "%u XXXXX";
+"%u seconds ago" = "%u XXXXXX";
+"%u minute ago" = "%u XXXXXX";
+"%u minutes ago" = "%u XXXXX";
+"%u hour ago" = "%u XXXXX";
+"%u hours ago" = "%u XXXXX";
+"%u day ago" = "%u XXXXX";
+"%u days ago" = "%u XXXXX";
+"%u week ago" = "%u XXXXX";
+"%u weeks ago" = "%u XXXXX";
+"%u month ago" = "%u XXXXX";
+"%u months ago" = "%u XXXXX";
+
+// Store
+"TITLE & ARTIST" = "XXXXX & XXXXXX";
+"99¢" = "XX";
+"FREE" = "XXXX";
+"BUY" = "XXX";
+"Shop" = "XXXX";
+"OK" = "XX";
+"Song Purchase Failed" = "XXXXXXX";
+"No products available, no payments have been processed" = "XXXXX";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "XXXXXX";
+"Song Purchase Succeeded" = "XXXXXX";
+"Song Purchase Succeeded!" = "XXXXXX!";
+
+// Pull to update
+"Updating..." = "XXXXXX...";
+"Last update: Never" = "XXXXX: XXXXX";
+"Pull to update" = "XXXXX";
+"Last update: %@" = "XXXXXXXX: %@";
+"Release to update" = "XXXXXX";
+
+// Selector
+"FRIENDS" = "XXXXX";
+"GLOBAL" = "XXXXXX";
+
+// ETC
+"Error" = "XXXX";
+"Search..." = "XXXX...";
+
 

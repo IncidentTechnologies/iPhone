@@ -1689,6 +1689,7 @@
 		26868D8D17D6C5AB00DC990F /* SongPurchaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPurchaseRequest.m; sourceTree = "<group>"; };
 		26868D8F17E29AD700DC990F /* UITriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITriangleView.h; sourceTree = "<group>"; };
 		26868D9017E29AD700DC990F /* UITriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITriangleView.m; sourceTree = "<group>"; };
+		26D4B17218F62062003380BF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		26F85ED718146FA500326CE7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlay_Prefix.pch; sourceTree = "<group>"; };
@@ -5828,6 +5829,8 @@
 				260CF0B318EBEFDF0083903A /* en */,
 				260CF0B718EBEFFB0083903A /* fr */,
 				260CF0B818EBF00A0083903A /* ko */,
+				26742EAD18ECBA5A0041C2EF /* fr */,
+				26D4B17218F62062003380BF /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5953,7 +5956,8 @@
 		ECC121C9162D07AD001A231A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -5971,10 +5975,12 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
-					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../include\"/**",
+					"\"$(BUILT_PRODUCTS_DIR)/include/gTarAppCore\"/**",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = gTarPlay;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -5985,7 +5991,8 @@
 		ECC121CA162D07AD001A231A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -5996,10 +6003,12 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
-					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../include\"/**",
+					"\"$(BUILT_PRODUCTS_DIR)/include/gTarAppCore\"/**",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = gTarPlay;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

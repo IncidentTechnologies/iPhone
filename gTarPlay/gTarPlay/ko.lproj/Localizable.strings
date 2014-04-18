@@ -8,7 +8,6 @@
 
 // Title Screen
 "SIGN IN" = "로그인";
-"LOG IN" = "XXXX";
 "VIDEO" = "비디오";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "연주하기";
@@ -29,9 +28,6 @@
 "Invalid Username" = "잘못된 사용자 이름";
 "Invalid Password" = "유효하지 않은 암호";
 "Facebook failed to login" = "페이스 북 로그인 실패";
-"Sign In" = "XXXX";
-"Sign Up" = "XXXX";
-"OR" = "XX";
 
 // ActivityFeedCell
 "Someone" = "누군가";
@@ -67,8 +63,6 @@
 "Logout" = "로그아웃";
 "FOLLOW" = "팔로우하기";
 "FOLLOWING" = "팔로우하기";
-"SESSIONS" = "XXXXXX";
-"FOLLOWERS" = "XXXXXXX";
 
 // Freeplay
 "ALL" = "ALL";
@@ -98,6 +92,18 @@
 "Carl's Synth" = "Carl's Synth";
 "Droplet" = "Droplet";
 "Square" = "Square";
+
+// More
+"LOG IN" = "XXXX";
+"Sign In" = "XXXX";
+"Sign Up" = "XXXX";
+"OR" = "XX";
+"SESSIONS" = "XXXXXX";
+"FOLLOWERS" = "XXXXXXX";
+"Chorus" = "XXXX";
+"Echo" = "XXXX";
+"Reverb" = "XXXXX";
+"Distortion" = "XXXXXXX";
 
 // Time formatter
 "The Future" = "XXXXX";

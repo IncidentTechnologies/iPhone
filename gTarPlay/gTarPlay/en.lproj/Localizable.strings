@@ -67,9 +67,6 @@
 "Logout" = "Logout";
 "FOLLOW" = "FOLLOW";
 "FOLLOWING" = "FOLLOWING";
-"SESSIONS" = "SESSIONS";
-"FOLLOWERS" = "FOLLOWERS";
-
 
 // Freeplay
 "ALL" = "ALL";
@@ -81,10 +78,6 @@
 "TONE" = "TONE";
 "SLIDING" = "SLIDING";
 "EXIT TO MAIN" = "EXIT TO MAIN";
-"Chorus" = "Chorus";
-"Echo" = "Echo";
-"Reverb" = "Reverb";
-"Distortion" = "Distortion";
 
 // Instruments
 "Electric" = "Electric";
@@ -99,6 +92,18 @@
 "Carl's Synth" = "Carl's Synth";
 "Droplet" = "Droplet";
 "Square" = "Square";
+
+// More
+"LOG IN" = "LOG IN";
+"Sign In" = "Sign In";
+"Sign Up" = "Sign Up";
+"OR" = "OR";
+"SESSIONS" = "SESSIONS";
+"FOLLOWERS" = "FOLLOWERS";
+"Chorus" = "Chorus";
+"Echo" = "Echo";
+"Reverb" = "Reverb";
+"Distortion" = "Distortion";
 
 // Time formatter
 "The Future" = "The Future";

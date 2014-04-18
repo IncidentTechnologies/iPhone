@@ -1,0 +1,143 @@
+/*
+ Localizable.strings
+ gTarPlay
+*/
+
+// Title Screen
+"SIGN IN" = "登录";
+"VIDEO" = "视频";
+"INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
+"PLAY" = "演奏";
+"FREE PLAY" = "免费演奏";
+"STORE" = "商店";
+"SIGN IN" = "登录";
+"SIGN UP" = "报名";
+"Username" = "用户名称";
+"Password" = "密码";
+"Email (optional)" = "邮件（可选";
+"Please Connect Your gTar" = "请联接你的gTar";
+"Profile" = "简介";
+"Please connect your gTar to sign up for an account." = "请联接gTar以登录账户";
+"Invalid Username" = "无效用户名";
+"Username must begin with a letter" = "用户名须以字母开头";
+"Invalid Password" = "无效密码";
+"Password must be at least 8 letters" = "密码最少须8位字母";
+"Invalid Email" = "无效邮件";
+"Invalid Username" = "无效用户名";
+"Invalid Password" = "无效密码";
+"Facebook failed to login" = "无法注册Facebook";
+
+// ActivityFeedCell
+"Someone" = "某人";
+"Jamed out" = "卡住了";
+"Played %@" = "在….已完成%";
+
+// Song Selection Controller
+"Easy" = "简单";
+"Medium" = "中等";
+"Hard" = "困难";
+"PRESS TO PLAY" = "点按以开始";
+"SKILL" = "技能";
+"SCORE" = "得分";
+"ARTIST" = "艺术家";
+"TITLE" = "标题";
+"Back" = "返回";
+"Song List" = "歌单";
+
+// Play View
+"SAVE & FINISH" = "保存并结束";
+"SCORE" = "得分";
+"OUTPUT" = "输出";
+"AUX" = "切换";
+"SPEAKER" = "扬声器";
+"POST TO FEED" = "发布给";
+"OFF" = "关闭";
+"ON" = "打开";
+"Easy" = "简单";
+"Quit" = "推出";
+"Restart" = "重新开始";
+
+// Social View
+"Logout" = "注销";
+"FOLLOW" = "跟随";
+"FOLLOWING" = "跟随者";
+
+// Freeplay
+"ALL" = "全部";
+"COLOR" = "色彩";
+"SHAPE" = "形状";
+"LOOP" = "环";
+"CLEAR" = "清除";
+"EXIT" = "退出";
+"TONE" = "定调";
+"SLIDING" = "滑行";
+"EXIT TO MAIN" = "退出至主界面";
+
+// Instruments
+"Electric" = "电吉他";
+"Acoustic Guitar" = "原声吉他";
+"Rock Guitar" = "摇滚吉他";
+"Upright Bass" = "低音贝斯";
+"Piano" = "钢琴";
+"Rhodes" = "罗德";
+"Muted Clav" = "无声键盘";
+"Bowed Strings" = "弓弦乐";
+"Marimba" = "马林巴琴";
+"Carl's Synth" = "卡尔合成器";
+"Droplet" = "水滴";
+"Square" = "广场";
+
+// More
+"LOG IN" = "登录";
+"Sign In" = "登录";
+"Sign Up" = "报名";
+"OR" = "或者";
+"SESSIONS" = "部分";
+"FOLLOWERS" = "跟进人";
+"Chorus" = "副歌";
+"Echo" = "回音";
+"Reverb" = "反响";
+"Distortion" = "失真";
+
+// Time formatter
+"The Future" = "将来";
+"%u second ago" = "%u秒前";
+"%u seconds ago" = "%u秒前";
+"%u minute ago" = "%u分钟前";
+"%u minutes ago" = "%u分钟前";
+"%u hour ago" = "%u小时前";
+"%u hours ago" = "%u小时前";
+"%u day ago" = "%u天前";
+"%u days ago" = "%u天前";
+"%u week ago" = "%u周前";
+"%u weeks ago" = "%u周前";
+"%u month ago" = "%u月前";
+"%u months ago" = "%u月前";
+
+// Store
+"TITLE & ARTIST" = "歌曲名& 艺术家";
+"99¢" = "99美分";
+"FREE" = "免费";
+"BUY" = "购买";
+"Shop" = "商店";
+"OK" = "成功";
+"Song Purchase Failed" = "购买歌曲失败";
+"No products available, no payments have been processed" = "无作品可用，无已支付款项";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "购买歌曲失败，您的帐户已扣款，将继续尝试购买歌曲直到成功为止";
+"Song Purchase Succeeded" = "歌曲购买成功";
+"Song Purchase Succeeded!" = "歌曲购买成功";
+
+// Pull to update
+"Updating..." = "更新中...";
+"Last update: Never" = "最近更新：从不";
+"Pull to update" = "下拉以更新";
+"Last update: %@" = "最近一次更新%@";
+"Release to update" = "发布更新";
+
+// Selector
+"FRIENDS" = "朋友";
+"GLOBAL" = "全球";
+
+"Error" = "错误";
+"Search..." = "搜索...";
+
