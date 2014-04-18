@@ -38,9 +38,9 @@ extern GtarController *g_gtarController;
 }
 
 @property (retain, nonatomic) IBOutlet UIButton *sortByTitleButtton;
-@property (retain, nonatomic) IBOutlet UIButton *sortByArtistButton;
-@property (retain, nonatomic) IBOutlet UIImageView *sortByTitleArrow;
-@property (retain, nonatomic) IBOutlet UIImageView *sortByArtistArrow;
+//@property (retain, nonatomic) IBOutlet UIButton *sortByArtistButton;
+//@property (retain, nonatomic) IBOutlet UIImageView *sortByTitleArrow;
+//@property (retain, nonatomic) IBOutlet UIImageView *sortByArtistArrow;
 
 @end
 
@@ -125,9 +125,9 @@ extern GtarController *g_gtarController;
     _sortOrder.type = SORT_SONG_TITLE;
     _sortOrder.fAscending = TRUE;
     
-    _sortByArtistArrow.hidden = YES;
+    //_sortByArtistArrow.hidden = YES;
     _sortByTitleButtton.selected = YES;
-    _sortByTitleArrow.highlighted = YES;
+    //_sortByTitleArrow.highlighted = YES;
     
     [self sortSongList];    // push sorting
     
@@ -208,9 +208,9 @@ extern GtarController *g_gtarController;
     [_searchBar release];
     [_fullscreenButton release];
     [_startButton release];
-    [_sortByTitleArrow release];
-    [_sortByArtistArrow release];
-    [_sortByArtistButton release];
+    //[_sortByTitleArrow release];
+    //[_sortByArtistArrow release];
+    //[_sortByArtistButton release];
     [_sortByTitleButtton release];
     [super dealloc];
 }
@@ -329,7 +329,7 @@ extern GtarController *g_gtarController;
     [_fullscreenButton setHidden:YES];
 }
 
-- (IBAction)sortByArtistButtonClicked:(UIButton*)sender
+/*- (IBAction)sortByArtistButtonClicked:(UIButton*)sender
 {
     sender.selected = !sender.selected;
     _sortByTitleButtton.selected = NO;
@@ -349,12 +349,12 @@ extern GtarController *g_gtarController;
     _sortByArtistArrow.highlighted = sender.selected;
     
     [self refreshDisplayedUserSongList];
-}
+}*/
 
 - (IBAction)sortByTitleButtonClicked:(UIButton*)sender
 {
     sender.selected = !sender.selected;
-    _sortByArtistButton.selected = NO;
+    //_sortByArtistButton.selected = NO;
     
     if(sender.selected) {
         _sortOrder.type = SORT_SONG_TITLE;
@@ -366,9 +366,9 @@ extern GtarController *g_gtarController;
     }
     
     // Sort Arrows
-    _sortByArtistArrow.hidden = YES;
-    _sortByTitleArrow.hidden = NO;
-    _sortByTitleArrow.highlighted = sender.selected;
+    //_sortByArtistArrow.hidden = YES;
+    //_sortByTitleArrow.hidden = NO;
+    //_sortByTitleArrow.highlighted = sender.selected;
     
     [self refreshDisplayedUserSongList];
 }

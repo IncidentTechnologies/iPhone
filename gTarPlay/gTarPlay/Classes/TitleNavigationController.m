@@ -227,13 +227,13 @@ extern Facebook * g_facebook;
     [_gatekeeperVideoButton setTitle:NSLocalizedString(@"VIDEO", NULL) forState:UIControlStateNormal];
     [_gatekeeperWebsiteButton setTitle:NSLocalizedString(@"INCIDENTGTAR.COM", NULL) forState:UIControlStateNormal];
     
-    [_signinButton setTitle:NSLocalizedString(@"Sign In", NULL) forState:UIControlStateNormal];
-    [_signupButton setTitle:NSLocalizedString(@"Sign Up", NULL) forState:UIControlStateNormal];
+    [_signinButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
+    [_signupButton setTitle:NSLocalizedString(@"SIGN UP", NULL) forState:UIControlStateNormal];
     //_signUpOrLabel.text = NSLocalizedString(@"OR", NULL);
     //_signInOrLabel.text = NSLocalizedString(@"OR", NULL);
     
-    _signInLoginLabel.text = NSLocalizedString(@"LOG IN", NULL);
-    _signUpLoginLabel.text = NSLocalizedString(@"LOG IN", NULL);
+    _signInLoginLabel.text = NSLocalizedString(@"Sign In with Facebook", NULL);
+    _signUpLoginLabel.text = NSLocalizedString(@"Sign In with Facebook", NULL);
     
     [_menuPlayButton setTitle:NSLocalizedString(@"PLAY", NULL) forState:UIControlStateNormal];
     [_menuFreePlayButton setTitle:NSLocalizedString(@"FREE PLAY", NULL) forState:UIControlStateNormal];

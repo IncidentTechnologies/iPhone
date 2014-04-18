@@ -5829,7 +5829,6 @@
 				260CF0B318EBEFDF0083903A /* en */,
 				260CF0B718EBEFFB0083903A /* fr */,
 				260CF0B818EBF00A0083903A /* ko */,
-				26742EAD18ECBA5A0041C2EF /* fr */,
 				26D4B17218F62062003380BF /* zh-Hans */,
 			);
 			name = Localizable.strings;

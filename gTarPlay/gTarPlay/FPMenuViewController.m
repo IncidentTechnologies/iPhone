@@ -52,8 +52,7 @@
 }
 
 - (void) localizeViews {
-    [_exitButton setTitle:NSLocalizedString(@"EXIT", NULL) forState:UIControlStateNormal];
-    
+    _quitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Quit", NULL)];
     _toneLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TONE", NULL)];
     _outputLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OUTPUT", NULL)];
     _speakerLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SPEAKER", NULL)];
@@ -61,7 +60,7 @@
     _slidingLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SLIDING", NULL)];
     _offLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OFF", NULL)];
     _onLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ON", NULL)];
-    _exitToMainLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"EXIT TO MAIN", NULL)];
+    //_exitToMainLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"EXIT TO MAIN", NULL)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -148,7 +147,7 @@
     NSDictionary *data = [notification userInfo];
     BOOL routeIsSpeaker = [[data objectForKey:@"isRouteSpeaker"] boolValue];
     
-    NSString *routeName = [[NSString alloc] initWithString:[data objectForKey:@"routeName"]];
+    //NSString *routeName = [[NSString alloc] initWithString:[data objectForKey:@"routeName"]];
     /*
      TODO telemetry
      // Telemetetry log -- invert the speaker route so we log the previous state
@@ -170,7 +169,7 @@
      }
      */
     
-    [_testText setText:routeName];
+    //[_testText setText:routeName];
     
     if (routeIsSpeaker)
     {

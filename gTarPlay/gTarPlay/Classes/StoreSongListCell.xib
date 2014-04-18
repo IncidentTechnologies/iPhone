@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-ck-mWW" userLabel="SkillView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-ck-mWW" userLabel="SkillView">
                         <rect key="frame" x="360" y="0.0" width="60" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -27,7 +27,7 @@
                             <constraint firstAttribute="width" constant="60" id="bhk-XV-lSs"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" horizontalHuggingPriority="921" verticalHuggingPriority="921" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mXT-6h-0Yh" userLabel="PurchaseSongView">
+                    <view contentMode="scaleToFill" horizontalHuggingPriority="921" verticalHuggingPriority="921" translatesAutoresizingMaskIntoConstraints="NO" id="mXT-6h-0Yh" userLabel="PurchaseSongView">
                         <rect key="frame" x="420" y="0.0" width="60" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>

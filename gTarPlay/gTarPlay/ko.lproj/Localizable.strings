@@ -6,23 +6,24 @@
  
  */
 
+/*#*/ // = translate short as possible
+
 // Title Screen
 "SIGN IN" = "로그인";
+"SIGN UP" = "가입";
 "VIDEO" = "비디오";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "연주하기";
-"FREE PLAY" = "자유연주하기";
+/*#*/ "FREE PLAY" = "자유연주하기";
 "STORE" = "스토어";
-"SIGN UP" = "가입";
+"Sign In with Facebook" = "Sign In with Facebook";
 "Username" = "로그인 이름";
 "Password" = "암호";
 "Email" = "이메일 주소";
 "Please Connect Your gTar" = "gTar를 연결하세요";
 "Profile" = "프로필";
 "Please connect your gTar to sign up for an account." = "gTar를 연결하세요";
-"Invalid Username" = "잘못된 사용자 이름";
 "Username must begin with a letter" = "자명은 문자로 시작해야";
-"Invalid Password" = "유효하지 않은 암호";
 "Password must be at least 8 letters" = "암호는 8 글자이어야합니다";
 "Invalid Email" = "잘못된 이메일";
 "Invalid Username" = "잘못된 사용자 이름";
@@ -39,7 +40,7 @@
 "Medium" = "중간";
 "Hard" = "어려움";
 "PRESS TO PLAY" = "연주를 하려면 누르세요.";
-"SKILL" = "기술";
+/*#*/ "SKILL" = "기술";
 "SCORE" = "점수";
 "ARTIST" = "아티스트";
 "TITLE" = "제목";
@@ -50,8 +51,8 @@
 "SAVE & FINISH" = "저장하고 끝내기";
 "SCORE" = "점수";
 "OUTPUT" = "출력";
-"AUX" = "보조";
-"SPEAKER" = "스피커";
+/*#*/ "AUX" = "보조";
+/*#*/ "SPEAKER" = "스피커";
 "POST TO FEED" = "포스팅하기";
 "OFF" = "끄기";
 "ON" = "켜기";
@@ -60,90 +61,78 @@
 "Restart" = "재시작";
 
 // Social View
-"Logout" = "로그아웃";
-"FOLLOW" = "팔로우하기";
-"FOLLOWING" = "팔로우하기";
+/*#*/ "Logout" = "로그아웃";
+"FOLLOW" = "구독하다";
+"FOLLOWING" = "기부의 신청";
+"SESSIONS" = "세션";
+"FOLLOWERS" = "기명자";
 
 // Freeplay
-"ALL" = "ALL";
+/*#*/ "ALL" = "모든";
 "COLOR" = "색상";
 "SHAPE" = "모양";
 "LOOP" = "고리";
 "CLEAR" = "삭제";
-"EXIT" = "나가기";
 "TONE" = "톤";
 "SLIDING" = "슬라이딩";
-"EXIT TO MAIN" = "메인으로 나가기";
 "Chorus" = "합창";
 "Echo" = "에코";
 "Reverb" = "반향";
 "Distortion" = "왜곡";
 
 // Instruments
-"Electric" = "Electric";
-"Acoustic Guitar" = "Acoustic Guitar";
-"Rock Guitar" = "Rock Guitar";
-"Upright Bass" = "Upright Bass";
-"Piano" = "Piano";
-"Rhodes" = "Rhodes";
-"Muted Clav" = "Muted Clav";
-"Bowed Strings" = "Bowed Strings";
-"Marimba" = "Marimba";
-"Carl's Synth" = "Carl's Synth";
-"Droplet" = "Droplet";
-"Square" = "Square";
-
-// More
-"LOG IN" = "XXXX";
-"Sign In" = "XXXX";
-"Sign Up" = "XXXX";
-"OR" = "XX";
-"SESSIONS" = "XXXXXX";
-"FOLLOWERS" = "XXXXXXX";
-"Chorus" = "XXXX";
-"Echo" = "XXXX";
-"Reverb" = "XXXXX";
-"Distortion" = "XXXXXXX";
+"Electric" = "일렉트릭 기타";
+"Acoustic Guitar" = "어쿠스틱 기타";
+"Rock Guitar" = "록 기타";
+"Upright Bass" = "베이스";
+"Piano" = "피아노";
+"Rhodes" = "전자 피아노";
+"Muted Clav" = "클라비";
+"Bowed Strings" = "문질러 문자열";
+"Marimba" = "마림바";
+"Carl's Synth" = "칼의 신디사이저";
+"Droplet" = "작은 물방울";
+"Square" = "스퀘어 피아노";
 
 // Time formatter
-"The Future" = "XXXXX";
-"%u second ago" = "%u XXXXX";
-"%u seconds ago" = "%u XXXXXX";
-"%u minute ago" = "%u XXXXXX";
-"%u minutes ago" = "%u XXXXX";
-"%u hour ago" = "%u XXXXX";
-"%u hours ago" = "%u XXXXX";
-"%u day ago" = "%u XXXXX";
-"%u days ago" = "%u XXXXX";
-"%u week ago" = "%u XXXXX";
-"%u weeks ago" = "%u XXXXX";
-"%u month ago" = "%u XXXXX";
-"%u months ago" = "%u XXXXX";
+"The Future" = "미래";
+"%u second ago" = "%u초 전";
+"%u seconds ago" = "%u초 전";
+"%u minute ago" = "%u분 전";
+"%u minutes ago" = "%u분 전";
+"%u hour ago" = "%u시간 전";
+"%u hours ago" = "%u시간 전";
+"%u day ago" = "%u일 전";
+"%u days ago" = "%u일 전";
+"%u week ago" = "%u주 전";
+"%u weeks ago" = "%u주 전";
+"%u month ago" = "%u개월 전";
+"%u months ago" = "%u개월 전";
 
 // Store
-"TITLE & ARTIST" = "XXXXX & XXXXXX";
-"99¢" = "XX";
-"FREE" = "XXXX";
-"BUY" = "XXX";
-"Shop" = "XXXX";
-"OK" = "XX";
-"Song Purchase Failed" = "XXXXXXX";
-"No products available, no payments have been processed" = "XXXXX";
-"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "XXXXXX";
-"Song Purchase Succeeded" = "XXXXXX";
-"Song Purchase Succeeded!" = "XXXXXX!";
+"TITLE & ARTIST" = "제목과아티스트";
+/*#*/ "99¢" = "천원";
+/*#*/ "FREE" = "무료";
+/*#*/ "BUY" = "사다";
+"Shop" = "가게";
+"OK" = "OK";
+"Song Purchase Failed" = "구입 실패";
+"No products available, no payments have been processed" = "제품에 사용할 수없는, 처리 더 지불하지.";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "구입 실패. 처리 지불, 다운로드하기.";
+"Song Purchase Succeeded" = "구입 성공";
+"Song Purchase Succeeded!" = "구입 성공!";
 
 // Pull to update
-"Updating..." = "XXXXXX...";
-"Last update: Never" = "XXXXX: XXXXX";
-"Pull to update" = "XXXXX";
-"Last update: %@" = "XXXXXXXX: %@";
-"Release to update" = "XXXXXX";
+"Updating..." = "업데이트...";
+"Last update: Never" = "마지막 업데이트: 어머 놀랐다";
+"Pull to update" = "업데이트 당겨";
+"Last update: %@" = "마지막 업데이트: %@";
+"Release to update" = "업데이트에 해제";
 
 // Selector
-"FRIENDS" = "XXXXX";
-"GLOBAL" = "XXXXXX";
+/*#*/ "FRIENDS" = "친구";
+/*#*/ "GLOBAL" = "모두";
 
 // ETC
-"Error" = "XXXX";
-"Search..." = "XXXX...";
+"Error" = "에러";
+"Search..." = "검색...";

@@ -6,32 +6,29 @@
 
 */
 
+/*#*/ // = translate short as possible
+
 // Title Screen
 "SIGN IN" = "SIGN IN";
-"LOG IN" = "Sign In with Facebook";
+"SIGN UP" = "SIGN UP";
 "VIDEO" = "VIDEO";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "PLAY";
-"FREE PLAY" = "FREE PLAY";
+/*#*/ "FREE PLAY" = "FREE PLAY";
 "STORE" = "STORE";
-"SIGN UP" = "SIGN UP";
+"Sign In with Facebook" = "Sign In with Facebook";
 "Username" = "Username";
 "Password" = "Password";
 "Email" = "Email";
 "Please Connect Your gTar" = "Please Connect Your gTar";
 "Profile" = "Profile";
 "Please connect your gTar to sign up for an account." = "Please connect your gTar to sign up for an account.";
-"Invalid Username" = "Invalid Username";
 "Username must begin with a letter" = "Username must begin with a letter";
-"Invalid Password" = "Invalid Password";
 "Password must be at least 8 letters" = "Password must be at least 8 letters";
 "Invalid Email" = "Invalid Email";
 "Invalid Username" = "Invalid Username";
 "Invalid Password" = "Invalid Password";
 "Facebook failed to login" = "Facebook failed to login";
-"Sign In" = "SIGN IN";
-"Sign Up" = "SIGN UP";
-"OR" = "OR";
 
 // ActivityFeedCell
 "Someone" = "Someone";
@@ -43,7 +40,7 @@
 "Medium" = "Medium";
 "Hard" = "Hard";
 "PRESS TO PLAY" = "PRESS TO PLAY";
-"SKILL" = "SKILL";
+/*#*/ "SKILL" = "SKILL";
 "SCORE" = "SCORE";
 "ARTIST" = "ARTIST";
 "TITLE" = "TITLE";
@@ -54,8 +51,8 @@
 "SAVE & FINISH" = "SAVE & FINISH";
 "SCORE" = "SCORE";
 "OUTPUT" = "OUTPUT";
-"AUX" = "AUX";
-"SPEAKER" = "SPEAKER";
+/*#*/ "AUX" = "AUX";
+/*#*/ "SPEAKER" = "SPEAKER";
 "POST TO FEED" = "POST TO FEED";
 "OFF" = "OFF";
 "ON" = "ON";
@@ -64,20 +61,24 @@
 "Restart" = "Restart";
 
 // Social View
-"Logout" = "Logout";
+/*#*/ "Logout" = "Logout";
 "FOLLOW" = "FOLLOW";
 "FOLLOWING" = "FOLLOWING";
+"SESSIONS" = "SESSIONS";
+"FOLLOWERS" = "FOLLOWERS";
 
 // Freeplay
-"ALL" = "ALL";
+/*#*/ "ALL" = "ALL";
 "COLOR" = "COLOR";
 "SHAPE" = "SHAPE";
 "LOOP" = "LOOP";
 "CLEAR" = "CLEAR";
-"EXIT" = "EXIT";
 "TONE" = "TONE";
 "SLIDING" = "SLIDING";
-"EXIT TO MAIN" = "EXIT TO MAIN";
+"Chorus" = "Chorus";
+"Echo" = "Echo";
+"Reverb" = "Reverb";
+"Distortion" = "Distortion";
 
 // Instruments
 "Electric" = "Electric";
@@ -93,20 +94,8 @@
 "Droplet" = "Droplet";
 "Square" = "Square";
 
-// More
-"LOG IN" = "LOG IN";
-"Sign In" = "Sign In";
-"Sign Up" = "Sign Up";
-"OR" = "OR";
-"SESSIONS" = "SESSIONS";
-"FOLLOWERS" = "FOLLOWERS";
-"Chorus" = "Chorus";
-"Echo" = "Echo";
-"Reverb" = "Reverb";
-"Distortion" = "Distortion";
-
 // Time formatter
-"The Future" = "The Future";
+"The Future" = "the future";
 "%u second ago" = "%u second ago";
 "%u seconds ago" = "%u seconds ago";
 "%u minute ago" = "%u minute ago";
@@ -122,9 +111,9 @@
 
 // Store
 "TITLE & ARTIST" = "TITLE & ARTIST";
-"99¢" = "99¢";
-"FREE" = "FREE";
-"BUY" = "BUY";
+/*#*/ "99¢" = "99¢";
+/*#*/ "FREE" = "FREE";
+/*#*/ "BUY" = "BUY";
 "Shop" = "Shop";
 "OK" = "OK";
 "Song Purchase Failed" = "Song Purchase Failed";
@@ -141,8 +130,8 @@
 "Release to update" = "Release to update";
 
 // Selector
-"FRIENDS" = "FRIENDS";
-"GLOBAL" = "GLOBAL";
+/*#*/ "FRIENDS" = "FRIENDS";
+/*#*/ "GLOBAL" = "GLOBAL";
 
 "Error" = "Error";
 "Search..." = "Search...";
