@@ -68,17 +68,12 @@
 {
     [super viewWillAppear:animated];
     
-    if ( _songPlaybackController == nil )
-    {
-        NSLog(@"Player View Controller: init Song Playback");
-        _songPlaybackController = [[SongPlaybackController alloc] initWithSoundMaster:g_soundMaster];
-    }
+    [self checkInitSongPlaybackController];
     
     _init = NO;
     
     // Start the progress bar at zero when we open up.
     _fillView.layer.transform = CATransform3DMakeTranslation( 0, 0, 0 );
-    
 
     [_songPlaybackController startWithXmpBlob:_xmpBlob];
     [_songPlaybackController stopMainEventLoop];
@@ -89,6 +84,16 @@
         [_songPlaybackController didSelectInstrument:_songPlaybackController.m_songModel.m_song.m_instrument withSelector:@selector(finishedLoadingSamplePack:) andOwner:self];
     }
     
+}
+
+
+- (void)checkInitSongPlaybackController
+{
+    if ( _songPlaybackController == nil )
+    {
+        NSLog(@"Player View Controller: init Song Playback");
+        _songPlaybackController = [[SongPlaybackController alloc] initWithSoundMaster:g_soundMaster];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -113,7 +118,7 @@
     _songPlaybackController = nil;
     
     [_userSong release];
-    //[g_soundMaster disconnectAndRelease];
+    //[g_soundMaster releaseAfterUse];
     [_playButton release];
     [_fillView release];
     [_knobView release];
@@ -261,6 +266,8 @@
 
 - (NSArray *)getInstrumentList
 {
+    [self checkInitSongPlaybackController];
+    
     return [_songPlaybackController getInstrumentList];
 }
 

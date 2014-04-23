@@ -154,8 +154,6 @@
 		EC5DA997161A637E0015832E /* UserSongSession.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA993161A637E0015832E /* UserSongSession.m */; };
 		EC5DA998161A637E0015832E /* UserSongSessions.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA994161A637E0015832E /* UserSongSessions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA999161A637E0015832E /* UserSongSessions.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA995161A637E0015832E /* UserSongSessions.m */; };
-		EC5DA9A0161A64010015832E /* _SongPlaybackController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA99A161A64010015832E /* _SongPlaybackController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA9A1161A64010015832E /* _SongPlaybackController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA99B161A64010015832E /* _SongPlaybackController.mm */; };
 		EC5DA9A4161A64010015832E /* MainEventController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA99E161A64010015832E /* MainEventController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA9A5161A64010015832E /* MainEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA99F161A64010015832E /* MainEventController.m */; };
 		EC5DA9A7161A66600015832E /* AppCore.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA9A6161A66600015832E /* AppCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -326,8 +324,6 @@
 		EC5DA993161A637E0015832E /* UserSongSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSongSession.m; sourceTree = "<group>"; };
 		EC5DA994161A637E0015832E /* UserSongSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSongSessions.h; sourceTree = "<group>"; };
 		EC5DA995161A637E0015832E /* UserSongSessions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSongSessions.m; sourceTree = "<group>"; };
-		EC5DA99A161A64010015832E /* _SongPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SongPlaybackController.h; sourceTree = "<group>"; };
-		EC5DA99B161A64010015832E /* _SongPlaybackController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = _SongPlaybackController.mm; sourceTree = "<group>"; };
 		EC5DA99E161A64010015832E /* MainEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainEventController.h; sourceTree = "<group>"; };
 		EC5DA99F161A64010015832E /* MainEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainEventController.m; sourceTree = "<group>"; };
 		EC5DA9A6161A66600015832E /* AppCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCore.h; sourceTree = "<group>"; };
@@ -463,8 +459,6 @@
 			children = (
 				9D8B401A17A9ED52009D3FB4 /* Facebook */,
 				EC5DA9A6161A66600015832E /* AppCore.h */,
-				EC5DA99A161A64010015832E /* _SongPlaybackController.h */,
-				EC5DA99B161A64010015832E /* _SongPlaybackController.mm */,
 				EC5DA99E161A64010015832E /* MainEventController.h */,
 				EC5DA99F161A64010015832E /* MainEventController.m */,
 				EC5DA96C161A62F50015832E /* CloudController */,
@@ -812,7 +806,6 @@
 				EC5DA990161A63780015832E /* UserSongs.h in Headers */,
 				EC5DA996161A637E0015832E /* UserSongSession.h in Headers */,
 				EC5DA998161A637E0015832E /* UserSongSessions.h in Headers */,
-				EC5DA9A0161A64010015832E /* _SongPlaybackController.h in Headers */,
 				EC5DA9A4161A64010015832E /* MainEventController.h in Headers */,
 				EC5DA9A7161A66600015832E /* AppCore.h in Headers */,
 				EC5DA9C1161A67E20015832E /* NSSongCreator.h in Headers */,
@@ -950,7 +943,6 @@
 				EC5DA991161A63780015832E /* UserSongs.m in Sources */,
 				EC5DA997161A637E0015832E /* UserSongSession.m in Sources */,
 				EC5DA999161A637E0015832E /* UserSongSessions.m in Sources */,
-				EC5DA9A1161A64010015832E /* _SongPlaybackController.mm in Sources */,
 				EC5DA9A5161A64010015832E /* MainEventController.m in Sources */,
 				EC5DA9C2161A67E20015832E /* NSSongCreator.m in Sources */,
 				EC24E011161BBBA900016B78 /* StoreController.m in Sources */,

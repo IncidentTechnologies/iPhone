@@ -94,7 +94,7 @@ extern FileController *g_fileController;
 
 - (void)dealloc
 {   
-    //[g_soundMaster disconnectAndRelease];
+    //[g_soundMaster releaseAfterUse];
     [_volumeView release];
     [_instrumentView release];
     [_menuButton release];
@@ -179,6 +179,7 @@ extern FileController *g_fileController;
 
 - (NSArray *)getInstrumentList
 {
+    
     return [_playerViewController getInstrumentList];
     //return [g_soundMaster getInstrumentList];
 }

@@ -7,8 +7,8 @@
 		<dict>
 			<key>Name</key>
 			<string>Electric</string>
-			<key>FriendlyName</key>
-			<string>Electric</string>
+			<key>SecondName</key>
+			<string>Strat</string>
 			<key>FirstNoteMidiNum</key>
 			<integer>2</integer>
 			<key>NumNotes</key>
@@ -26,6 +26,8 @@
 		<dict>
 			<key>Name</key>
 			<string>Acoustic Guitar</string>
+			<key>SecondName</key>
+			<string>Acoustic</string>
 			<key>FirstNoteMidiNum</key>
 			<integer>40</integer>
 			<key>NumNotes</key>

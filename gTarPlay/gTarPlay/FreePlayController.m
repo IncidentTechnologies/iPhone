@@ -225,7 +225,7 @@ extern GtarController * g_gtarController;
     //[m_menuTab release];
     //[m_toneSlider release];
     
-    //[g_soundMaster disconnectAndRelease];
+    //[g_soundMaster releaseAfterUse];
     
     [m_colors release];
     [m_instrumentsScroll release];
@@ -251,8 +251,10 @@ extern GtarController * g_gtarController;
     [m_scaleTimeStart release];
     
     // Turn off all LEDs
-    [g_gtarController turnOffAllLeds];
-
+    if(g_gtarController.connected){
+        [g_gtarController turnOffAllLeds];
+    }
+        
     [_m_effectsScroll release];
     [_mainContentView release];
     [_menuButton release];
@@ -283,7 +285,6 @@ extern GtarController * g_gtarController;
     [_arrowLights addShadow];
     [_arrowEffects addShadow];
     [_arrowInstruments addShadow];
-    
     [_menuBarDropShadowView addShadow];
 
     // images for slider
@@ -684,7 +685,7 @@ extern GtarController * g_gtarController;
     [g_gtarController turnOffAllLeds];
     [g_gtarController setMinimumInterarrivalTime:0.05f];
     
-    [self startMainEventLoop];
+    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
     
 }
 
@@ -1495,6 +1496,7 @@ extern GtarController * g_gtarController;
 
 - (IBAction)toggleVolumeView:(id)sender
 {
+    [_volumeVC colorTriangleIndicator:[UIColor colorWithRed:71/255.0 green:94/255.0 blue:69/255.0 alpha:1.0]];
     [self.mainContentView bringSubviewToFront:_volumeVC.view];
     [_volumeVC toggleView:YES];
 }

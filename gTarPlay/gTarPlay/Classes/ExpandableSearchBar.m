@@ -104,7 +104,7 @@
     // make the cancel button
     _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width - CANCEL_BUTTON_HEIGHT, 0, CANCEL_BUTTON_HEIGHT, CANCEL_BUTTON_HEIGHT)];
     _cancelButton.alpha = 0.0;
-    [_cancelButton setImage:[UIImage imageNamed:@"SearchCancelButton.png"] forState:UIControlStateNormal];
+    [_cancelButton setImage:[UIImage imageNamed:@"CancelButton"] forState:UIControlStateNormal];
     [_cancelButton addTarget:self action:@selector(cancelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:_textField];

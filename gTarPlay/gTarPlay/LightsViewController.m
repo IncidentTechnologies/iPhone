@@ -64,6 +64,11 @@
     [_shapeButton setTitle:NSLocalizedString(@"SHAPE", NULL) forState:UIControlStateNormal];
     [_loopButton setTitle:NSLocalizedString(@"LOOP", NULL) forState:UIControlStateNormal];
     [_clearButton setTitle:NSLocalizedString(@"CLEAR", NULL) forState:UIControlStateNormal];
+    
+    
+    [_ledSingleLabel setText:NSLocalizedString(@"Single", NULL)];
+    [_ledQuadLabel setText:NSLocalizedString(@"2 X 2", NULL)];
+    [_ledContinuousLabel setText:NSLocalizedString(@"Continuous", NULL)];
 }
 
 - (void)viewWillAppear:(BOOL)animated

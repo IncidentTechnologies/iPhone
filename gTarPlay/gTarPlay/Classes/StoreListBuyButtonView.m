@@ -54,12 +54,14 @@ static inline double radians (double degrees) {
             CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(100.0f/255.0f) green:(108.0f/255.0f) blue:(113.0f/255.0f) alpha:1.0f].CGColor);
             CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
             
-            CGRect textRect = CGRectInset(rect, 4, 4);
-            textRect.origin.x += 6;
-            textRect.origin.y += 9;
-            
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
             NSString *text = NSLocalizedString(@"99¢", NULL);
+            
+            CGRect textRect = CGRectInset(rect, 4, 4);
+            //textRect.origin.x += 6;
+            textRect.origin.x = 50/2-[text length]*10/2;
+            textRect.origin.y += 9;
+            
             [text drawInRect:textRect withFont:[UIFont systemFontOfSize:19.0f]];
             
         } break;

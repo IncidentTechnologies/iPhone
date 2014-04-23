@@ -23,7 +23,7 @@
 @property (retain, nonatomic) IBOutlet SelectorControl *feedSelector;
 @property (retain, nonatomic) IBOutlet PaginatedPullToUpdateTableView *feedTable;
 @property (retain, nonatomic) IBOutlet UITableView *searchTable;
-@property (retain, nonatomic) IBOutlet UIButton *fullscreenButton;
+//@property (retain, nonatomic) IBOutlet UIButton *fullscreenButton;
 @property (retain, nonatomic) IBOutlet ExpandableSearchBar *searchBar;
 
 @property (retain, nonatomic) IBOutlet UIImageView *picImageView;
@@ -45,7 +45,7 @@
 - (IBAction)followButtonClicked:(id)sender;
 - (IBAction)followingButtonClicked:(id)sender;
 - (IBAction)feedSelectorChanged:(id)sender;
-- (IBAction)fullscreenButtonClicked:(id)sender;
+//- (IBAction)fullscreenButtonClicked:(id)sender;
 
 - (void)localizeViews;
 

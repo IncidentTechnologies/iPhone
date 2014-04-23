@@ -98,6 +98,11 @@ typedef enum
 @property (retain, nonatomic) IBOutlet UIButton *colorWhite;
 @property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *colorButtons;
 
+
+@property (nonatomic, retain) IBOutlet UILabel *ledSingleLabel;
+@property (nonatomic, retain) IBOutlet UILabel *ledQuadLabel;
+@property (nonatomic, retain) IBOutlet UILabel *ledContinuousLabel;
+
 @property (assign, nonatomic) LEDTouchArea LEDTouchArea;
 @property (assign, nonatomic) CGPoint lastLEDTouch;
 @property (assign, nonatomic) LEDColorMode LEDColorMode;

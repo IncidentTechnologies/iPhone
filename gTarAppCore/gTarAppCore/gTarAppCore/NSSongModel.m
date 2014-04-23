@@ -12,8 +12,6 @@
 #import "NSNote.h"
 #import "NSSong.h"
 
-#define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats
-
 @implementation NSSongModel
 
 @synthesize m_song;
@@ -26,6 +24,9 @@
 @synthesize m_lengthBeats;
 @synthesize m_lengthSeconds;
 @synthesize m_frameWidthBeats;
+
+#define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats, see also PlayViewController
+#define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.4f)
 
 //- (id)initWithSongXmp:(NSString*)xmpBlob
 //{
@@ -365,8 +366,12 @@
         //
         // Check if we've passed the end of this frame
         //
-        if ( m_currentBeat > (beatEnd + m_frameWidthBeats/2.0) )
+        //if ( m_currentBeat > (beatEnd + m_frameWidthBeats/2.0) )
+        
+        // TODO: get the swipe precision down here
+        if ( m_currentBeat > (beatEnd + SONG_MODEL_NOTE_FRAME_WIDTH_MAX/2.0) )
         {
+            NSLog(@"Current beat is %f, beat end is %f",m_currentBeat,(beatEnd + m_frameWidthBeats/2.0));
             [self exitCurrentFrame];
         }
         
@@ -408,6 +413,7 @@
     m_frameTimer = nil;
 
     // we are done with this frame
+    
     [m_delegate songModelExitFrame:m_currentFrame];
 
     m_currentFrame = nil;

@@ -27,7 +27,7 @@
                                 <rect key="frame" x="14" y="9" width="292" height="24"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="22"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.10980392156862745" green="0.13333333333333333" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozd-tb-acT">
@@ -45,9 +45,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Skill_GREY.png" translatesAutoresizingMaskIntoConstraints="NO" id="cqd-yy-DeJ">
-                                <rect key="frame" x="20" y="10" width="40" height="40"/>
+                                <rect key="frame" x="18" y="10" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tsM-XN-zZZ">
+                                <rect key="frame" x="5" y="0.0" width="1" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MsQ-r3-PXr">
+                                <rect key="frame" x="72" y="0.0" width="1" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -66,7 +76,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="KHl-Da-p0I">
-                                <rect key="frame" x="22" y="11" width="37" height="37"/>
+                                <rect key="frame" x="17" y="13" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
@@ -76,6 +86,16 @@
                             <constraint firstAttribute="width" constant="80" id="WSI-25-d3h"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o1o-jt-DGI">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UBs-Fk-orV">
+                        <rect key="frame" x="0.0" y="60" width="480" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ZWm-n6-Mhv" secondAttribute="trailing" constant="160" id="7aV-8m-GRI"/>
@@ -83,10 +103,14 @@
                     <constraint firstAttribute="bottom" secondItem="ZWm-n6-Mhv" secondAttribute="bottom" constant="-1" id="VU0-kO-6A1"/>
                     <constraint firstItem="Ydz-Ln-jRr" firstAttribute="top" secondItem="0bp-cN-Ox2" secondAttribute="top" id="Yjg-sK-zY4"/>
                     <constraint firstItem="ZWm-n6-Mhv" firstAttribute="top" secondItem="0bp-cN-Ox2" secondAttribute="top" id="bQ4-FU-zi3"/>
+                    <constraint firstAttribute="trailing" secondItem="UBs-Fk-orV" secondAttribute="trailing" id="j0c-bu-squ"/>
                     <constraint firstAttribute="trailing" secondItem="Ydz-Ln-jRr" secondAttribute="trailing" constant="83" id="jYz-q3-sJJ"/>
                     <constraint firstAttribute="bottom" secondItem="Ydz-Ln-jRr" secondAttribute="bottom" constant="-1" id="mT6-51-F5C"/>
+                    <constraint firstItem="UBs-Fk-orV" firstAttribute="leading" secondItem="0bp-cN-Ox2" secondAttribute="leading" id="orv-Uz-XOh"/>
                     <constraint firstItem="dv8-jZ-xrP" firstAttribute="top" secondItem="0bp-cN-Ox2" secondAttribute="top" id="p35-Kk-U8C"/>
                     <constraint firstAttribute="trailing" secondItem="dv8-jZ-xrP" secondAttribute="trailing" id="qMF-Zv-gjx"/>
+                    <constraint firstAttribute="trailing" secondItem="o1o-jt-DGI" secondAttribute="trailing" id="qPk-Pt-XUb"/>
+                    <constraint firstItem="o1o-jt-DGI" firstAttribute="leading" secondItem="0bp-cN-Ox2" secondAttribute="leading" id="vYg-K8-sCi"/>
                     <constraint firstItem="ZWm-n6-Mhv" firstAttribute="leading" secondItem="0bp-cN-Ox2" secondAttribute="leading" id="wpr-op-CuG"/>
                 </constraints>
             </tableViewCellContentView>

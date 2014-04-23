@@ -155,6 +155,7 @@ extern Facebook * g_facebook;
     
     // Add shadows
     [_topBarView addShadow];
+        
     [_gtarLogoImage addShadow];
     //[_loggedoutSigninButton addShadow];
     //[_loggedoutSignupButton addShadow];
@@ -165,7 +166,8 @@ extern Facebook * g_facebook;
     //[_menuStoreButton addShadow];
     
     // Hide anything that needs hiding
-    [[_profileButton superview] setHidden:YES];
+    //[[_profileButton superview] setHidden:YES];
+    [_profileButton setHidden:YES];
     [_profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:NSLocalizedString(@"FRIENDS", NULL), NSLocalizedString(@"GLOBAL", NULL), nil]];
@@ -211,12 +213,12 @@ extern Facebook * g_facebook;
 - (void)initSoundMaster
 {
     g_soundMaster = [[SoundMaster alloc] init];
-    [g_soundMaster setCurrentInstrument:0];
+    [g_soundMaster setCurrentInstrument:1];
 }
 
 - (void)releaseSoundMaster
 {
-    [g_soundMaster disconnectAndRelease];
+    [g_soundMaster releaseCompletely];
     [g_soundMaster release];
     g_soundMaster = nil;
 }
@@ -288,10 +290,11 @@ extern Facebook * g_facebook;
     }
     else
     {
-        if ( g_gtarController.connected == NO )
+        /*if ( g_gtarController.connected == NO )
         {
             [self swapLeftPanel:_disconnectedGtarLeftPanel];
         }
+         */
         
         // We are logged in
         [g_userController sendPendingUploads];
@@ -305,12 +308,32 @@ extern Facebook * g_facebook;
     UserEntry *loggedInEntry = [g_userController getUserEntry:0];
     UIImage *image = [g_fileController getFileOrReturnNil:loggedInEntry.m_userProfile.m_imgFileId];
     
-    if ( image != nil )
-    {
-        [_profileButton setImage:image forState:UIControlStateNormal];
+    if(loggedInEntry != nil){
         [_profileLabel setText:loggedInEntry.m_userProfile.m_name];
     }
     
+    if ( image != nil )
+    {
+        [_profileButton setImage:image forState:UIControlStateNormal];
+    }
+    
+    [self showHideFreePlay];
+    
+}
+
+- (void)showHideFreePlay
+{
+    
+    // Show Free Play if/if not standalone
+    if(g_gtarController.connected){
+        [_menuFreePlayButton setHidden:NO];
+        [_menuPlayButton setBounds:CGRectMake(_menuPlayButton.bounds.origin.x,0,_menuPlayButton.bounds.size.width,_menuPlayButton.bounds.size.height)];
+        [_menuStoreButton setBounds:CGRectMake(_menuStoreButton.bounds.origin.x,0,_menuStoreButton.bounds.size.width,_menuStoreButton.bounds.size.height)];
+    }else{
+        [_menuFreePlayButton setHidden:YES];
+        [_menuPlayButton setBounds:CGRectMake(_menuPlayButton.bounds.origin.x,35,_menuPlayButton.bounds.size.width,_menuPlayButton.bounds.size.height)];
+        [_menuStoreButton setBounds:CGRectMake(_menuStoreButton.bounds.origin.x,-35,_menuStoreButton.bounds.size.width,_menuStoreButton.bounds.size.height)];
+    }
 }
 
 - (void)viewDidLayoutSubviews
@@ -335,7 +358,7 @@ extern Facebook * g_facebook;
 - (void)dealloc
 {
     
-    //[g_soundMaster disconnectAndRelease];
+    //[g_soundMaster releaseAfterUse];
     
     [_currentLeftPanel removeFromSuperview];
     [_currentRightPanel removeFromSuperview];
@@ -462,15 +485,19 @@ extern Facebook * g_facebook;
     
     [self hideNotification];
     
-    [[_profileButton superview] setHidden:YES];
+    //[[_profileButton superview] setHidden:YES];
+    [_profileButton setHidden:YES];
 }
 
 - (void)loggedinScreen {
-    if ( g_gtarController.connected == NO )
+    /*if ( g_gtarController.connected == NO )
         [self swapLeftPanel:_disconnectedGtarLeftPanel];
     else
         [self swapLeftPanel:_menuLeftPanel];
+    */
 
+    [self swapLeftPanel:_menuLeftPanel];
+    
     [self swapRightPanel:_feedRightPanel];
     
     [self enableButton:_menuPlayButton];
@@ -479,15 +506,19 @@ extern Facebook * g_facebook;
     
     [self hideNotification];
     
-    [[_profileButton superview] setHidden:NO];
+    //[[_profileButton superview] setHidden:NO];
+    [_profileButton setHidden:NO];
     
     UserEntry *loggedInEntry = [g_userController getUserEntry:0];
     
     UIImage *image = [g_fileController getFileOrReturnNil:loggedInEntry.m_userProfile.m_imgFileId];
     
+    if(loggedInEntry != nil){
+        [_profileLabel setText:loggedInEntry.m_userProfile.m_name];
+    }
+    
     if ( image != nil ){
         [_profileButton setImage:image forState:UIControlStateNormal];
-        [_profileLabel setText:loggedInEntry.m_userProfile.m_name];
     }else{
         [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
     }
@@ -506,6 +537,7 @@ extern Facebook * g_facebook;
 }
 
 - (void)profilePicDownloaded:(UIImage *)image {
+    
     [_profileButton setImage:image forState:UIControlStateNormal];
 }
 
@@ -1221,20 +1253,25 @@ extern Facebook * g_facebook;
 //    
 //    [self checkCurrentFirmwareVersion];
     
+    [self showHideFreePlay];
+    
 }
 
 - (void)gtarDisconnected
 {
-    if ( g_cloudController.m_loggedIn == YES )
+    /*if ( g_cloudController.m_loggedIn == YES )
     {
         [self swapLeftPanel:_disconnectedGtarLeftPanel];
     }
+     */
     
     // Pull down the firmare view controller after disconnection
     if ( self.presentedViewController == _firmwareViewController )
     {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    
+    [self showHideFreePlay];
 }
 
 #pragma mark - GtarControllerDelegate

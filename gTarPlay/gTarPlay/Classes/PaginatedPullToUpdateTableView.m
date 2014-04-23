@@ -21,7 +21,7 @@
     UIView * footer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, FOOTER_HEIGHT)] autorelease];
     
     m_footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, 0, self.frame.size.width - LEFT_MARGIN, FOOTER_HEIGHT)];
-    [m_footerLabel setText:@"Updating..."];
+    [m_footerLabel setText:NSLocalizedString(@"Updating...", NULL)];
     [m_footerLabel setTextColor:[UIColor grayColor]];
     [m_footerLabel setFont:[UIFont fontWithName:@"Avenir Next" size:15.0]];
     

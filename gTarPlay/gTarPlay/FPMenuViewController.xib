@@ -203,18 +203,18 @@
                         <constraint firstItem="641" firstAttribute="top" secondItem="31" secondAttribute="top" constant="30" id="2891"/>
                         <constraint firstItem="81" firstAttribute="leading" secondItem="112" secondAttribute="leading" id="2911"/>
                         <constraint firstItem="2511" firstAttribute="centerX" secondItem="31" secondAttribute="centerX" id="2928"/>
-                        <constraint firstItem="203" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="27" id="2w0-4A-zhf"/>
                         <constraint firstItem="1812" firstAttribute="leading" secondItem="81" secondAttribute="trailing" constant="-152" id="9g7-Rp-xE6"/>
                         <constraint firstAttribute="centerX" secondItem="1824" secondAttribute="centerX" id="DkR-lX-5vi"/>
                         <constraint firstItem="1812" firstAttribute="centerX" secondItem="2508" secondAttribute="centerX" id="Hgf-m5-WzC"/>
                         <constraint firstItem="1812" firstAttribute="leading" secondItem="339" secondAttribute="trailing" constant="15" id="MNw-KY-nDQ"/>
                         <constraint firstAttribute="bottom" secondItem="1824" secondAttribute="bottom" constant="48" id="MoU-i1-X2q"/>
                         <constraint firstItem="9YN-MN-VAB" firstAttribute="centerX" secondItem="1824" secondAttribute="centerX" id="Osn-ph-MiQ"/>
+                        <constraint firstItem="2511" firstAttribute="leading" secondItem="2648" secondAttribute="trailing" constant="-172" id="VtD-SX-kpn"/>
                         <constraint firstItem="276" firstAttribute="leading" secondItem="1812" secondAttribute="trailing" constant="15" id="XnH-ys-IfU"/>
                         <constraint firstItem="2608" firstAttribute="leading" secondItem="2508" secondAttribute="trailing" constant="15" id="YPt-rJ-c7Y"/>
-                        <constraint firstItem="2648" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="27" id="kUU-ek-Ugu"/>
                         <constraint firstItem="2508" firstAttribute="leading" secondItem="2511" secondAttribute="trailing" constant="-152" id="qFs-J0-WBV"/>
                         <constraint firstItem="2508" firstAttribute="leading" secondItem="2599" secondAttribute="trailing" constant="15" id="sGP-kr-eFx"/>
+                        <constraint firstItem="81" firstAttribute="leading" secondItem="203" secondAttribute="trailing" constant="-172" id="w1q-La-Wyd"/>
                     </constraints>
                 </view>
             </subviews>

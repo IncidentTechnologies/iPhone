@@ -20,6 +20,7 @@
     {
         
 		m_center = center;
+        m_size = size;
         
 		[self changeColor:color];
         
@@ -53,6 +54,7 @@
     {
 		
 		m_center = center;
+        m_size = size;
 		
 		[self changeColor:color];
 		
@@ -67,6 +69,16 @@
 	
 	return self;
 	
+}
+
+-(CGPoint)getCenter
+{
+    return m_center;
+}
+
+-(CGSize)getSize
+{
+    return m_size;
 }
 
 @end

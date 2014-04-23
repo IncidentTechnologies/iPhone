@@ -100,14 +100,14 @@
 	
 }
 
-- (void)startMainEventLoop
+- (void)startMainEventLoop:(double)timeInterval
 {
 	if ( m_eventLoopTimer != nil )
 	{
 		[self stopMainEventLoop];
 	}
-	
-	m_eventLoopTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)SECONDS_PER_EVENT_LOOP target:self selector:@selector(mainEventLoop) userInfo:nil repeats:TRUE];
+    
+	m_eventLoopTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)timeInterval target:self selector:@selector(mainEventLoop) userInfo:nil repeats:TRUE];
     
     m_isRunning = YES;
     

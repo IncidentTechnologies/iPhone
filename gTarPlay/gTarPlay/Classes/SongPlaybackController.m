@@ -55,6 +55,7 @@
 
 - (NSArray *)getInstrumentList
 {
+    
     return [g_soundMaster getInstrumentList];
 }
 
@@ -69,6 +70,8 @@
         [g_soundMaster release];
         g_soundMaster = nil;
     }*/
+    
+    //[g_soundMaster releaseAfterUse];
         
     [m_songModel release];
     
@@ -154,14 +157,18 @@
     // Register ourself as an observer
     [m_gtarController addObserver:self];
     
-    [m_gtarController turnOffAllEffects];
-    [m_gtarController turnOffAllLeds];
+    if(m_gtarController.connected){
+        [m_gtarController turnOffAllEffects];
+        [m_gtarController turnOffAllLeds];
+    }
     
 }
 
 - (void)ignoreGtarController:(GtarController*)gtarController {
-    [m_gtarController turnOffAllEffects];
-    [m_gtarController turnOffAllLeds];
+    if(m_gtarController.connected){
+        [m_gtarController turnOffAllEffects];
+        [m_gtarController turnOffAllLeds];
+    }
     
     // Remove ourself as an observer
     [m_gtarController removeObserver:self];
@@ -234,7 +241,11 @@
     
     for ( NSNote * note in frame.m_notes ) {
         if ( note.m_fret == GTAR_GUITAR_FRET_MUTED ) {
+            
             NSLog(@"TODO: pluck muted string");
+            
+            [g_soundMaster PluckString:note.m_string-1 atFret:note.m_fret];
+            
             //[m_audioController PluckMutedString:note.m_string-1];
         }
         else {
@@ -262,16 +273,24 @@
 
 - (void)songModelNextFrame:(NSNoteFrame*)frame
 {
-    [m_gtarController turnOffAllLeds];
+    if(m_gtarController.connected){
+        [m_gtarController turnOffAllLeds];
+    }
+    
     for ( NSNote * note in frame.m_notes )
     {
-        if ( note.m_fret == GTAR_GUITAR_FRET_MUTED )
-        {
-            [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(0, note.m_string)];
-        }
-        else
-        {
-            [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(note.m_fret, note.m_string)];
+        
+        if(m_gtarController.connected){
+            
+            if ( note.m_fret == GTAR_GUITAR_FRET_MUTED )
+            {
+                [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(0, note.m_string)];
+            }
+            else
+            {
+                [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(note.m_fret, note.m_string)];
+            }
+            
         }
     }
 }
@@ -283,8 +302,11 @@
  */
 
 - (void)songModelEndOfSong {
-    [m_gtarController turnOffAllLeds];
     
+    if(m_gtarController.connected){
+        [m_gtarController turnOffAllLeds];
+    }
+        
     [self stopMainEventLoop];
     
     m_audioTrailOffTimer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(audioTrailOffEvent) userInfo:nil repeats:NO];

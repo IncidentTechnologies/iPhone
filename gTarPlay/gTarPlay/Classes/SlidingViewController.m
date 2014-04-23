@@ -217,6 +217,12 @@
     }
 }
 
+
+- (void)colorTriangleIndicator:(UIColor *)color
+{
+    _triangleIndicatorImage.tintColor = color;
+}
+
 //- (UIImage *)drawTriangleInRect:(CGSize)size
 //{
 //    UIGraphicsBeginImageContext(size);

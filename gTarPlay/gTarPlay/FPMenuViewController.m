@@ -46,8 +46,10 @@
     self.slideSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.slideSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
     
-    if(audioSwitchOn){
+    if(!audioSwitchOn){
         [self setAudioSwitchToDefault];
+    }else{
+        [self setAudioSwitchToSpeaker];
     }
 }
 
@@ -97,7 +99,7 @@
 
 - (IBAction)setAudioRoute:(UISwitch *)sender
 {
-    if(sender.isOn){
+    if(!sender.isOn){
         // route to default
         [delegate audioRouteChanged:NO];
     }else{
@@ -109,15 +111,15 @@
 - (void)setAudioSwitchToDefault
 {
     NSLog(@"Set audio switch to default");
-    [self.audioRouteSwitch setOn:YES];
-    audioSwitchOn = YES;
+    [self.audioRouteSwitch setOn:NO];
+    audioSwitchOn = NO;
 }
 
 - (void)setAudioSwitchToSpeaker
 {
     NSLog(@"Set audio switch to speaker");
-    [self.audioRouteSwitch setOn:NO];
-    audioSwitchOn = NO;
+    [self.audioRouteSwitch setOn:YES];
+    audioSwitchOn = YES;
 }
 
 - (IBAction)setSlideHammer:(id)sender

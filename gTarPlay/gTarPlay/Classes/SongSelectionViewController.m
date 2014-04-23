@@ -35,6 +35,7 @@ extern GtarController *g_gtarController;
     NSInteger _nextUserSong;
     
     struct SongSortOrder _sortOrder;
+    int sortChange;
 }
 
 @property (retain, nonatomic) IBOutlet UIButton *sortByTitleButtton;
@@ -77,6 +78,8 @@ extern GtarController *g_gtarController;
         _userSongArray = userSongArray;
         NSLog(@"Found %d cached songs",[_userSongArray count]);
         [_userSongArray retain];
+        
+        sortChange = 0;
     }
     return self;
 }
@@ -99,7 +102,7 @@ extern GtarController *g_gtarController;
     [_topBar addShadow];
     [_fullscreenButton setHidden:YES];
     
-    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:nil];
+    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     
     [_playerViewController attachToSuperview:_songPlayerView];
     
@@ -149,6 +152,8 @@ extern GtarController *g_gtarController;
 - (void) localizeViews {
     //[_easyButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
     
+    [_sortByTitleButtton setAttributedTitle:[self generateTitleArtistLabel:YES] forState:UIControlStateNormal];
+    
     _easyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Easy", NULL)];
     _mediumLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Medium", NULL)];
     _hardLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Hard", NULL)];
@@ -163,6 +168,32 @@ extern GtarController *g_gtarController;
     
     _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
     _songListLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Song List", NULL)];
+}
+
+- (NSMutableAttributedString *) generateTitleArtistLabel:(BOOL)boldTitle
+{
+    
+    NSString * title = NSLocalizedString(@"TITLE", NULL);
+    NSString * artist = NSLocalizedString(@"ARTIST", NULL);
+    
+    NSString * titleArtist = title;
+    titleArtist = [titleArtist stringByAppendingString:@" & "];
+    titleArtist = [titleArtist stringByAppendingString:artist];
+    
+    NSDictionary * boldattributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"AvenirNext-Bold" size:15.0],NSFontAttributeName,[UIColor whiteColor],NSForegroundColorAttributeName,nil];
+    NSDictionary * normalattributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Avenir Next" size:15.0],NSFontAttributeName,[UIColor whiteColor],NSForegroundColorAttributeName,nil];
+    
+    NSMutableAttributedString * titleArtistString = [[NSMutableAttributedString alloc] initWithString:titleArtist];
+    
+    if(boldTitle){
+        [titleArtistString setAttributes:normalattributes range:NSMakeRange(0, [titleArtist length])];
+        [titleArtistString setAttributes:boldattributes range:NSMakeRange(0, [title length])];
+    }else{
+        [titleArtistString setAttributes:normalattributes range:NSMakeRange(0, [titleArtist length])];
+        [titleArtistString setAttributes:boldattributes range:NSMakeRange([title length]+3, [artist length])];
+    }
+    
+    return titleArtistString;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -188,7 +219,7 @@ extern GtarController *g_gtarController;
 - (void)dealloc
 {
     [g_gtarController removeObserver:self];
-    //[g_soundMaster disconnectAndRelease];
+    //[g_soundMaster releaseAfterUse];
     [_userSongArray release];
     [_songListTable release];
     [_titleArtistButton release];
@@ -353,22 +384,37 @@ extern GtarController *g_gtarController;
 
 - (IBAction)sortByTitleButtonClicked:(UIButton*)sender
 {
-    sender.selected = !sender.selected;
-    //_sortByArtistButton.selected = NO;
+    sortChange++;
     
-    if(sender.selected) {
-        _sortOrder.type = SORT_SONG_TITLE;
-        _sortOrder.fAscending = TRUE;
-    }
-    else {
-        _sortOrder.type = SORT_SONG_TITLE;
-        _sortOrder.fAscending = FALSE;
+    BOOL boldTitle = YES;
+    
+    switch(sortChange%4){
+        case 0:
+            _sortOrder.type = SORT_SONG_TITLE;
+            _sortOrder.fAscending = TRUE;
+            break;
+        case 1:
+            _sortOrder.type = SORT_SONG_TITLE;
+            _sortOrder.fAscending = FALSE;
+            break;
+        case 2:
+            _sortOrder.type = SORT_SONG_ARTIST;
+            _sortOrder.fAscending = TRUE;
+            boldTitle = NO;
+            break;
+        case 3:
+            _sortOrder.type = SORT_SONG_ARTIST;
+            _sortOrder.fAscending = FALSE;
+            boldTitle = NO;
+            break;
     }
     
     // Sort Arrows
     //_sortByArtistArrow.hidden = YES;
     //_sortByTitleArrow.hidden = NO;
     //_sortByTitleArrow.highlighted = sender.selected;
+    
+    [_sortByTitleButtton setAttributedTitle:[self generateTitleArtistLabel:boldTitle] forState:UIControlStateNormal];
     
     [self refreshDisplayedUserSongList];
 }
@@ -446,6 +492,8 @@ extern GtarController *g_gtarController;
     [self sortSongList];
     
     [_songListTable reloadData];
+    
+    _searching = NO;
 }
 
 #pragma mark - Callbacks
@@ -753,6 +801,9 @@ extern GtarController *g_gtarController;
 
 - (void)searchForString:(NSString *)searchString
 {
+    
+    NSLog(@"SearchString is %@",searchString);
+    
     NSMutableArray *searchResults = [[NSMutableArray alloc] init];
     
     for ( UserSong *userSong in _userSongArray )

@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #define EVENT_LOOPS_PER_SECOND 30.0
+#define EVENT_LOOPS_PER_SECOND_STANDALONE 300.0
+
 #define SECONDS_PER_EVENT_LOOP (1.0 / EVENT_LOOPS_PER_SECOND)
+#define SECONDS_PER_EVENT_LOOP_STANDALONE (1.0 / EVENT_LOOPS_PER_SECOND_STANDALONE)
 
 @interface MainEventController : UIViewController
 {
@@ -26,7 +29,7 @@
 - (void)sharedInit;
 
 - (void)mainEventLoop;
-- (void)startMainEventLoop;
+- (void)startMainEventLoop:(double)timeInterval;
 - (void)stopMainEventLoop;
 
 @end

@@ -10,6 +10,23 @@
 
 #import <gTarAppCore/DisplayController.h>
 #import <gTarAppCore/EAGLView.h>
+#import <gTarAppCore/AppCore.h>
+
+#import "SongES1Renderer.h"
+
+#import <gTarAppCore/NoteAnimation.h>
+#import "NoteModel.h"
+#import "LineModel.h"
+#import "StringModel.h"
+#import "NumberModel.h"
+
+#import <gTarAppCore/NSNote.h>
+#import <gTarAppCore/NSSong.h>
+#import <gTarAppCore/NSMeasure.h>
+#import <gTarAppCore/NSSongModel.h>
+#import <gTarAppCore/NSNoteFrame.h>
+
+#import "gTarColors.h"
 
 @class NSSong;
 @class NSNote;
@@ -47,9 +64,11 @@
     
     NumberModel * m_mutedTexture;
     
+    BOOL isStandalone;
+    
 }
 
-- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView;
+- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone;
 - (void)cancelPreloading;
 - (void)createLineModels;
 - (void)createNumberModels;
@@ -65,10 +84,14 @@
 - (void)shiftView:(double)shift;
 - (void)shiftViewDelta:(double)shift;
 
-- (double)convertTimeToCoordSpace:(double)dealta;
-- (double)convertBeatToCoordSpace:(double)beat;
-- (double)convertCoordSpaceToBeat:(double)coord;
-- (double)convertStringToCoordSpace:(NSInteger)str;
-- (double)calculateMaxShiftCoordSpace;
+- (double)convertTimeToCoordSpace:(double)dealta isStandalone:(BOOL)standalone;
+- (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone;
+- (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone;
+- (double)convertStringToCoordSpace:(NSInteger)str isStandalone:(BOOL)standalone;
+- (double)calculateMaxShiftCoordSpace:(BOOL)standalone;
+
+// Standalone
+-(int)getMappedStringFromString:(int)str;
+- (int)getStringPluckFromTap:(CGPoint)touchPoint;
 
 @end

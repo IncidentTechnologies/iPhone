@@ -8,24 +8,6 @@
 
 #import "SongDisplayController.h"
 
-#import <gTarAppCore/AppCore.h>
-
-#import "SongES1Renderer.h"
-
-#import <gTarAppCore/NoteAnimation.h>
-#import "NoteModel.h"
-#import "LineModel.h"
-#import "StringModel.h"
-#import "NumberModel.h"
-
-#import <gTarAppCore/NSNote.h>
-#import <gTarAppCore/NSSong.h>
-#import <gTarAppCore/NSMeasure.h>
-#import <gTarAppCore/NSSongModel.h>
-#import <gTarAppCore/NSNoteFrame.h>
-
-#import "gTarColors.h"
-
 #define PRELOAD_INITIAL 128
 #define PRELOAD_MAX 256
 #define PRELOAD_INCREMENT 8
@@ -37,7 +19,7 @@
 // empirically determined ratios defining screen layout for what looks good.
 #define GL_SCREEN_TOP_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_SCREEN_BOTTOM_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
-#define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH / 8.0 )
+#define GL_SCREEN_SEEK_LINE_OFFSET (GL_SCREEN_WIDTH - GL_SCREEN_WIDTH / 8.0 )
 
 #define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_STRING_HEIGHT ( GL_SCREEN_HEIGHT / 60.0 )
@@ -48,7 +30,7 @@
 
 @implementation SongDisplayController
 
-- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView
+- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone
 {
     // Force linking
     [EAGLView class];
@@ -72,6 +54,9 @@
         m_beatsToPreloadAsync = SONG_BEATS_PER_SCREEN * 4;
         
         m_framesDisplayed = 0;
+        
+        
+        isStandalone = standalone;
         
         //
 		// Create a renderer and give it to the view, or reuse an existing one.
@@ -162,14 +147,24 @@
 
     [self updateDisplayedFrames];
     
-    double position = [self convertBeatToCoordSpace:m_songModel.m_currentBeat];
+    double position = [self convertBeatToCoordSpace:m_songModel.m_currentBeat isStandalone:isStandalone];
     
     // pull down the shift as time goes by
-    double end = [self calculateMaxShiftCoordSpace];
+    double end = [self calculateMaxShiftCoordSpace:isStandalone];
 
-    if ( m_renderer.m_viewShift > end )
+    /*if ( m_renderer.m_viewShift > end )
     {
         m_renderer.m_viewShift = end;
+    }*/
+    
+    // Don't pass the end
+    if(m_renderer.m_viewShift < end){
+        m_renderer.m_viewShift = end;
+    }
+    
+    // Don't linger at the end if scrolled over and autoscrolling
+    if(m_songModel.m_lengthBeats - m_songModel.m_currentBeat < SONG_BEATS_PER_SCREEN){
+        [self shiftView:m_songModel.m_lengthBeats - m_songModel.m_currentBeat];
     }
     
     [m_renderer updatePositionAndRender:position];
@@ -308,13 +303,15 @@
     {
         
         CGPoint center;
-		center.x = [self convertBeatToCoordSpace:note.m_absoluteBeatStart];
-		center.y = [self convertStringToCoordSpace:note.m_string];
+		center.x = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone];
+		center.y = [self convertStringToCoordSpace:note.m_string isStandalone:isStandalone];
 		
 		// number texture overlay
 		NumberModel * overlay;
         
-        if ( note.m_fret == GTAR_GUITAR_FRET_MUTED )
+        if(isStandalone){
+            overlay = nil;
+        }else if ( note.m_fret == GTAR_GUITAR_FRET_MUTED)
         {
             overlay = m_mutedTexture;
         }
@@ -365,18 +362,27 @@
     m_viewShift = shift;
     
     // Let us shift through the entire song .. but nothing more.
-    double end = [self calculateMaxShiftCoordSpace];
+    double end = [self calculateMaxShiftCoordSpace:isStandalone];
     
-    if ( m_viewShift < 0.0 )
+    /*if ( m_viewShift < 0.0 )
     {
         m_viewShift = 0.0;
     }
     else if ( end < m_viewShift )
     {
         m_viewShift = end;
+    }*/
+    
+    if( m_viewShift > 0.0)
+    {
+        m_viewShift = 0.0;
+    }
+    else if (end > m_viewShift)
+    {
+        m_viewShift = end;
     }
     
-    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
+    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift isStandalone:isStandalone] + SONG_BEATS_PER_SCREEN;
     
 //    if ( viewShiftBeats > m_beatsToPreload )
     {
@@ -394,18 +400,27 @@
     m_viewShift += shift;
     
     // Let us shift through the entire song .. but nothing more.
-    double end = [self calculateMaxShiftCoordSpace];
+    double end = [self calculateMaxShiftCoordSpace:isStandalone];
     
-    if ( m_viewShift < 0.0 )
+    /*if ( m_viewShift < 0.0 )
     {
         m_viewShift = 0.0;
     }
     else if ( end < m_viewShift )
     {
         m_viewShift = end;
+    }*/
+    
+    if(m_viewShift > 0.0)
+    {
+        m_viewShift = 0.0;
+    }
+    else if (end > m_viewShift)
+    {
+        m_viewShift = end;
     }
     
-    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
+    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift isStandalone:isStandalone] + SONG_BEATS_PER_SCREEN;
     
 //    if ( viewShiftBeats > m_beatsToPreload )
     {
@@ -428,15 +443,17 @@
     //
     
 	CGSize size;
-	size.width = GL_NOTE_HEIGHT / 3.0;
+	//size.width = GL_NOTE_HEIGHT / 3.0;
+    size.width = GL_NOTE_HEIGHT;
 	size.height = GL_SCREEN_HEIGHT;
     
     // The center will automatically be offset in the rendering
 	CGPoint center;
 	center.y = GL_SCREEN_HEIGHT / 2.0;
 	center.x = 0;
-	
-	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_lightGrayColor] autorelease];
+	//center.x = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/4;
+    
+	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent] autorelease];
     
     //
     // Create the strings
@@ -451,7 +468,7 @@
         
         // strings number and size are inversely proportional -- get slightly bigger
         size.height = GL_STRING_HEIGHT + (GTAR_GUITAR_STRING_COUNT - 1 - i) * GL_STRING_HEIGHT_INCREMENT;
-        center.y = [self convertStringToCoordSpace:(i+1)];
+        center.y = [self convertStringToCoordSpace:(i+1) isStandalone:isStandalone];
         
         StringModel * stringModel = [[StringModel alloc] initWithCenter:center andSize:size andColor:( g_stringColors[i] )];
         
@@ -585,36 +602,123 @@
 
 #pragma mark - Helpers
 
-- (double)convertTimeToCoordSpace:(double)delta
+- (double)convertTimeToCoordSpace:(double)delta isStandalone:(BOOL)standalone
 {
-    return [self convertBeatToCoordSpace:(m_songModel.m_beatsPerSecond * delta)];
+    return [self convertBeatToCoordSpace:(m_songModel.m_beatsPerSecond * delta) isStandalone:standalone];
 }
  
-- (double)convertBeatToCoordSpace:(double)beat
+- (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone
 {
-	return beat / (GLfloat)SONG_BEATS_PER_SCREEN * GL_SCREEN_WIDTH;
+	//return (beat/(GLfloat)SONG_BEATS_PER_SCREEN) * GL_SCREEN_WIDTH;
+    
+    return GL_SCREEN_WIDTH - (beat/(GLfloat)SONG_BEATS_PER_SCREEN) * GL_SCREEN_WIDTH;
 }
 
-- (double)convertCoordSpaceToBeat:(double)coord
+- (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone
 {
-	return coord * (GLfloat)SONG_BEATS_PER_SCREEN / GL_SCREEN_WIDTH;
+	//return coord * ((GLfloat)SONG_BEATS_PER_SCREEN / GL_SCREEN_WIDTH);
+    
+    return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN) / GL_SCREEN_WIDTH;
 }
 
-- (double)convertStringToCoordSpace:(NSInteger)str
+- (double)convertStringToCoordSpace:(NSInteger)str isStandalone:(BOOL)standalone
 {
+    if(standalone){
+        str = [self getMappedStringFromString:str];
+    }
+    
 	GLfloat effectiveScreenHeight = (GL_SCREEN_HEIGHT) - (GL_SCREEN_TOP_BUFFER + GL_SCREEN_BOTTOM_BUFFER);
 	
 	GLfloat heightPerString = effectiveScreenHeight / ((GLfloat)GTAR_GUITAR_STRING_COUNT-1);
+    
+    if(standalone){
+        heightPerString *= 2;
+    }
 	
     // bias it down to zero-base it
 	return GL_SCREEN_BOTTOM_BUFFER + ( (str-1) * heightPerString );
 }
 
-- (double)calculateMaxShiftCoordSpace
+- (double)calculateMaxShiftCoordSpace:(BOOL)standalone
 {
-    double beatsToShift = m_songModel.m_lengthBeats - m_songModel.m_currentBeat - SONG_BEATS_PER_SCREEN + SONG_BEAT_OFFSET;
-    double end = [self convertBeatToCoordSpace:MAX(beatsToShift,0)];
-    return end;    
+    //double beatsToShift = m_songModel.m_lengthBeats - m_songModel.m_currentBeat - SONG_BEATS_PER_SCREEN + SONG_BEAT_OFFSET;
+    
+    double beatsToShift = ceil(m_songModel.m_lengthBeats) - m_songModel.m_currentBeat + SONG_BEATS_PER_SCREEN;
+    
+    double end = [self convertBeatToCoordSpace:MAX(beatsToShift,0) isStandalone:standalone];
+    
+    if(m_songModel.m_lengthBeats - m_songModel.m_currentBeat <= SONG_BEATS_PER_SCREEN){
+        return end;
+    }else{
+        return end+GL_SCREEN_WIDTH;
+    }
+}
+
+#pragma mark - Standalone helper functions
+
+-(int)getMappedStringFromString:(int)str
+{
+    int newstr = floor(((double)str-1)/2.0) + 1;
+    return newstr;
+}
+
+- (int)getStringPluckFromTap:(CGPoint)touchPoint
+{
+    if(!isStandalone){
+        return -1;
+    }
+    
+    // Make sure x is on the touchband
+    double touchBuffer = 5;
+    
+    double xmax = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineModel getCenter].x + [m_renderer.m_seekLineModel getSize].width/2 + touchBuffer;
+    double xmin = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineModel getCenter].x - [m_renderer.m_seekLineModel getSize].width/2 - touchBuffer;
+    
+    //NSLog(@"X min is %f, max is %f",xmin,xmax);
+    //NSLog(@"Touched x was %f",touchPoint.x);
+    
+    if(touchPoint.x > xmax || touchPoint.x < xmin){
+        return -1;
+    }
+    
+    // Determine string
+    
+	GLfloat effectiveScreenHeight = (GL_SCREEN_HEIGHT) - (GL_SCREEN_TOP_BUFFER + GL_SCREEN_BOTTOM_BUFFER);
+	
+	GLfloat heightPerString = effectiveScreenHeight / ((GLfloat)GTAR_GUITAR_STRING_COUNT-1);
+    heightPerString *= 2;
+
+    double stringBuffer = 15;
+    
+    double string1Center = heightPerString;
+    double string2Center = 2*heightPerString;
+    double string3Center = 3*heightPerString;
+
+    // Top string
+    if(touchPoint.y > string1Center-stringBuffer && touchPoint.y < string1Center+stringBuffer){
+        
+        //NSLog(@"*** hit string 1 *** ");
+        
+        return 3;
+    }
+    
+    // Middle string
+    if(touchPoint.y > string2Center-stringBuffer && touchPoint.y < string2Center+stringBuffer){
+        
+        //NSLog(@"*** hit string 2 *** ");
+        
+        return 2;
+    }
+    
+    // Bottom string
+    if(touchPoint.y > string3Center-stringBuffer && touchPoint.y < string3Center+stringBuffer){
+        
+        //NSLog(@"*** hit string 3 *** ");
+        
+        return 1;
+    }
+    
+    return -1;
 }
 
 @end

@@ -20,5 +20,6 @@
 - (void)closeView:(BOOL)animated;
 - (void)openView:(BOOL)animated;
 - (void)setFrame:(CGRect)frame;
+- (void)colorTriangleIndicator:(UIColor *)color;
 
 @end

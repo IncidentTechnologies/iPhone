@@ -77,14 +77,14 @@ extern Facebook *g_facebook;
     [_topBar addShadow];
     
     [_searchTable setHidden:YES];
-    [_fullscreenButton setHidden:YES];
+    //[_fullscreenButton setHidden:YES];
     
     [_feedTable disablePagination];
     
     [_profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     [self.view bringSubviewToFront:_searchTable];
-    [self.view bringSubviewToFront:_fullscreenButton];
+    //[self.view bringSubviewToFront:_fullscreenButton];
     
     [self displayAndUpdateUserId:0];
     
@@ -116,7 +116,7 @@ extern Facebook *g_facebook;
     [_userNameLabel release];
     [_sessionViewController release];
     [_searchTable release];
-    [_fullscreenButton release];
+    //[_fullscreenButton release];
     [_searchBar release];
     [_cameraButton release];
     [_followButton release];
@@ -189,8 +189,9 @@ extern Facebook *g_facebook;
 
 - (IBAction)fullscreenButtonClicked:(id)sender
 {
+    
     [_searchBar minimizeKeyboard];
-    [_fullscreenButton setHidden:YES];
+    //[_fullscreenButton setHidden:YES];
 }
 
 #pragma mark - Helpers
@@ -812,13 +813,16 @@ extern Facebook *g_facebook;
 
 - (void)searchBarDidBeginEditing:(ExpandableSearchBar *)searchBar
 {
+    
     // Show the table view
     [_searchTable setHidden:NO];
-    [_fullscreenButton setHidden:NO];
+    //[_fullscreenButton setHidden:NO];
+    
     // I appologize for this ugly hack, i.e. passing a bool as a pointer (numberWithBool != NO)
     // but it isn't worth the time doing it the proper way.
 //    [_profileButton setHidden:YES];
     [_profileButton performSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES] afterDelay:0.2];
+    [_profileLabel performSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES] afterDelay:0.2];
 }
 
 - (void)searchBarSearch:(ExpandableSearchBar *)searchBar
@@ -832,8 +836,9 @@ extern Facebook *g_facebook;
 {
     // Remove the table view
     [_searchTable setHidden:YES];
-    [_fullscreenButton setHidden:YES];
+    //[_fullscreenButton setHidden:YES];
     [_profileButton performSelector:@selector(setHidden:) withObject:nil afterDelay:0.1];
+    [_profileLabel performSelector:@selector(setHidden:) withObject:nil afterDelay:0.1];
 }
 
 #pragma mark - PullToUpdate

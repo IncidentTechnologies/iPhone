@@ -22,12 +22,15 @@
     
     BOOL isLoadingInstrument;
     
+    NSTimer * releaseTimer;
+    
 }
 
 - (void) reset;
 - (void) start;
 - (void) stop;
-- (void) disconnectAndRelease;
+- (void) releaseAfterUse;
+- (void) releaseCompletely;
 
 - (void) stopAllEffects;
 - (void) toggleEffect:(NSInteger)index isOn:(BOOL)on;

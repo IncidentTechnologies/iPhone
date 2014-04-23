@@ -79,6 +79,9 @@
 "Echo" = "에코";
 "Reverb" = "반향";
 "Distortion" = "왜곡";
+"Single" = "하나의";
+"2 X 2" = "2 X 2";
+"Continuous" = "끊임없는";
 
 // Instruments
 "Electric" = "일렉트릭 기타";
@@ -111,7 +114,7 @@
 
 // Store
 "TITLE & ARTIST" = "제목과아티스트";
-/*#*/ "99¢" = "천원";
+/*#*/ "99¢" = "99¢";
 /*#*/ "FREE" = "무료";
 /*#*/ "BUY" = "사다";
 "Shop" = "가게";

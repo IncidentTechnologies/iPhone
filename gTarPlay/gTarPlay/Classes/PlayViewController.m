@@ -33,6 +33,9 @@
 //#define FRAME_TIMER_DURATION_MED (0.40f) // seconds
 //#define FRAME_TIMER_DURATION_EASY (0.06f) // seconds
 
+#define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats, see also NSSongModel
+#define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.4f)
+
 #define CHORD_DELAY_TIMER 0.010f
 #define CHORD_GRACE_PERIOD 0.100f
 
@@ -96,6 +99,11 @@ extern UserController * g_userController;
     BOOL _skipNotes;
     BOOL _menuIsOpen;
     BOOL _songUploadQueueFull;
+    
+    // Standalone
+    CGPoint initPoint;
+    BOOL isStandalone;
+    
 }
 
 @end
@@ -168,16 +176,26 @@ extern UserController * g_userController;
     
     [self updateDifficultyDisplay];
     
-    // testing
-//#ifdef Debug_BUILD
-//    if ( g_gtarController.connected == NO )
-//    {
-//        NSLog(@"debugging this thing");
-//        
-//        [NSTimer scheduledTimerWithTimeInterval:1.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
-//    }
-//#endif
     
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    
+    if(g_gtarController.connected == NO){
+        
+        NSLog(@"GTAR DISCONNECTED USE STANDALONE");
+        
+        isStandalone = YES;
+        [self standaloneReady];
+        
+    }else{
+        
+        NSLog(@"GTAR IS CONNECTED USE NORMAL");
+        
+        isStandalone = NO;
+        
+    }
 }
 
 - (void) localizeViews {
@@ -290,7 +308,9 @@ extern UserController * g_userController;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
     
-    [g_gtarController turnOffAllLeds];
+    if(g_gtarController.connected){
+        [g_gtarController turnOffAllLeds];
+    }
     [g_gtarController removeObserver:self];
     
     [_displayController cancelPreloading];
@@ -324,7 +344,7 @@ extern UserController * g_userController;
     
     [_metronomeTimeStart release];
     
-    //[g_soundMaster disconnectAndRelease];
+    //[g_soundMaster releaseAfterUse];
     
     [_glView release];
     [_menuView release];
@@ -471,7 +491,9 @@ extern UserController * g_userController;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
         
-        _menuView.transform = CGAffineTransformIdentity;
+        //_menuView.transform = CGAffineTransformIdentity;
+        
+        _menuView.transform = CGAffineTransformMakeTranslation(0,-46);
         
         [UIView commitAnimations];
     }
@@ -482,7 +504,8 @@ extern UserController * g_userController;
             _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
         }
         
-        [self startMainEventLoop];
+        double timeInterval = (isStandalone) ? SECONDS_PER_EVENT_LOOP_STANDALONE : SECONDS_PER_EVENT_LOOP;
+        [self startMainEventLoop:timeInterval];
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
@@ -506,7 +529,9 @@ extern UserController * g_userController;
     
     NSLog(@"TODO: reset audio");
     //[g_audioController reset];
-    [g_gtarController turnOffAllLeds];
+    if(g_gtarController.connected == YES){
+        [g_gtarController turnOffAllLeds];
+    }
     [_displayController shiftView:0];
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
@@ -629,7 +654,8 @@ extern UserController * g_userController;
     
     [UIView commitAnimations];
     
-    [self startMainEventLoop];
+    double timeInterval = (isStandalone) ? SECONDS_PER_EVENT_LOOP_STANDALONE : SECONDS_PER_EVENT_LOOP;
+    [self startMainEventLoop:timeInterval];
 }
 
 - (void)revealPlayView
@@ -951,37 +977,40 @@ extern UserController * g_userController;
 {
     
 #ifdef Debug_BUILD
-    // DEBUG tapping screen hits the current notes
-    if ( _skipNotes == YES )
-    {
+    if(g_gtarController.connected){
         
-        _skipNotes = NO;
-        
-        if ( [_songModel.m_currentFrame.m_notesPending count] > 0 )
+        // DEBUG tapping screen hits the current notes (see: touchesbegan)
+        if ( _skipNotes == YES )
         {
-            NSNote * note = [_songModel.m_currentFrame.m_notesPending objectAtIndex:0];
             
-            GtarPluck pluck;
-            pluck.velocity = GtarMaxPluckVelocity;
-            pluck.position.fret = note.m_fret;
-            pluck.position.string = note.m_string;
+            _skipNotes = NO;
             
-            [self gtarNoteOn:pluck];
+            if ( [_songModel.m_currentFrame.m_notesPending count] > 0 )
+            {
+                NSNote * note = [_songModel.m_currentFrame.m_notesPending objectAtIndex:0];
+                
+                GtarPluck pluck;
+                pluck.velocity = GtarMaxPluckVelocity;
+                pluck.position.fret = note.m_fret;
+                pluck.position.string = note.m_string;
+                
+                [self gtarNoteOn:pluck];
+            }
+            else if ( [_songModel.m_nextFrame.m_notesPending count] > 0 )
+            {
+                NSNote * note = [_songModel.m_nextFrame.m_notesPending objectAtIndex:0];
+                
+                GtarPluck pluck;
+                pluck.velocity = GtarMaxPluckVelocity;
+                pluck.position.fret = note.m_fret;
+                pluck.position.string = note.m_string;
+                
+                [self gtarNoteOn:pluck];
+            }
+            
+            _refreshDisplay = YES;
+            
         }
-        else if ( [_songModel.m_nextFrame.m_notesPending count] > 0 )
-        {
-            NSNote * note = [_songModel.m_nextFrame.m_notesPending objectAtIndex:0];
-            
-            GtarPluck pluck;
-            pluck.velocity = GtarMaxPluckVelocity;
-            pluck.position.fret = note.m_fret;
-            pluck.position.string = note.m_string;
-            
-            [self gtarNoteOn:pluck];
-        }
-        
-        _refreshDisplay = YES;
-        
     }
 #endif
     
@@ -989,13 +1018,15 @@ extern UserController * g_userController;
     // Advance song model and recorder
     //
     
+    double timeInterval = (isStandalone) ? SECONDS_PER_EVENT_LOOP_STANDALONE : SECONDS_PER_EVENT_LOOP;
+    
     if ( _animateSongScrolling == YES )
     {
-        [_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
+        [_songModel incrementTimeSerialAccess:timeInterval];
     }
     
     // song recorder always records in real time
-    [_songRecorder advanceRecordingByTimeDelta:SECONDS_PER_EVENT_LOOP];
+    [_songRecorder advanceRecordingByTimeDelta:timeInterval];
     
     // Only refresh when we need to
     if ( _animateSongScrolling == YES || _refreshDisplay == YES )
@@ -1124,7 +1155,7 @@ extern UserController * g_userController;
 {
     
     // Always mute notes on note-off for hard
-    NSLog(@"TODO: mute note");
+    NSLog(@"TODO: attenuate and mute note");
     //[g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
     
     @synchronized ( _deferredNotesQueue )
@@ -1158,6 +1189,22 @@ extern UserController * g_userController;
             [_deferredNotesQueue removeObject:canceledPluck];
         }
     }
+}
+
+- (void)standaloneReady
+{
+    NSLog(@"Standalone ready");
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
+    
+    // Stop ourselves before we start so the connecting screen can display
+    [self stopMainEventLoop];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(startWithSongXmlDom) userInfo:nil repeats:NO];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
+    
 }
 
 - (void)gtarConnected
@@ -1219,8 +1266,9 @@ extern UserController * g_userController;
 
 - (void)startWithSongXmlDom
 {
-    
-    [g_gtarController turnOffAllLeds];
+    if(g_gtarController.connected){
+        [g_gtarController turnOffAllLeds];
+    }
     [_displayController cancelPreloading];
     [_displayController release];
     [_songModel release];
@@ -1243,14 +1291,16 @@ extern UserController * g_userController;
     _songModel = [[NSSongModel alloc] initWithSong:_song];
     
     // Very small frame window
-    _songModel.m_frameWidthBeats = 0.1f;
+    _songModel.m_frameWidthBeats = SONG_MODEL_NOTE_FRAME_WIDTH;
     
     // Give a little runway to the player
     [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES];
     
     // Light up the first frame
-    [self turnOnFrame:_songModel.m_nextFrame];
-    
+    if(g_gtarController.connected == YES){
+        [self turnOnFrame:_songModel.m_nextFrame];
+    }
+        
     _songRecorder = [[SongRecorder alloc] initWithTempo:_song.m_tempo];
     
     [_songRecorder beginSong];
@@ -1279,7 +1329,7 @@ extern UserController * g_userController;
     //
     // Init display
     //
-    _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView];
+    _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView isStandalone:isStandalone];
     
     // An initial display render
     [_displayController renderImage];
@@ -1297,7 +1347,8 @@ extern UserController * g_userController;
     
     _deferredNotesQueue = [[NSMutableArray alloc] init];
     
-    [self startMainEventLoop];
+    double timeInterval = (isStandalone) ? SECONDS_PER_EVENT_LOOP_STANDALONE : SECONDS_PER_EVENT_LOOP;
+    [self startMainEventLoop:timeInterval];
     
 }
 
@@ -1633,44 +1684,51 @@ extern UserController * g_userController;
 
 - (void)turnOnString:(GtarString)str andFret:(GtarFret)fret
 {
+    if(g_gtarController.connected){
     
-    if ( fret == GTAR_GUITAR_FRET_MUTED )
-    {
-        [g_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(0, str)];
+        if ( fret == GTAR_GUITAR_FRET_MUTED )
+        {
+            [g_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(0, str)];
+        }
+        else
+        {
+            [g_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(fret, str)];
+        }
+        
     }
-    else
-    {
-        [g_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(fret, str)];
-    }
-    
 }
 
 - (void)turnOnWhiteString:(GtarString)str andFret:(GtarFret)fret
 {
     
-    if ( fret == GTAR_GUITAR_FRET_MUTED )
-    {
-        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, str)
-                                    withColor:GtarLedColorMake(3, 3, 3)];
-    }
-    else
-    {
-        [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, str)
-                                    withColor:GtarLedColorMake(3, 3, 3)];
+    if(g_gtarController.connected){
+        
+        if ( fret == GTAR_GUITAR_FRET_MUTED )
+        {
+            [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, str)
+                                        withColor:GtarLedColorMake(3, 3, 3)];
+        }
+        else
+        {
+            [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, str)
+                                        withColor:GtarLedColorMake(3, 3, 3)];
+        }
+            
     }
     
 }
 
 - (void)turnOffString:(GtarString)str andFret:(GtarFret)fret
 {
-    
-    if ( fret == GTAR_GUITAR_FRET_MUTED )
-    {
-        [g_gtarController turnOffLedAtPosition:GtarPositionMake(0, str)];
-    }
-    else
-    {
-        [g_gtarController turnOffLedAtPosition:GtarPositionMake(fret, str)];
+    if(g_gtarController.connected){
+        if ( fret == GTAR_GUITAR_FRET_MUTED )
+        {
+            [g_gtarController turnOffLedAtPosition:GtarPositionMake(0, str)];
+        }
+        else
+        {
+            [g_gtarController turnOffLedAtPosition:GtarPositionMake(fret, str)];
+        }
     }
     
 }
@@ -1681,6 +1739,7 @@ extern UserController * g_userController;
     if ( fret == GTAR_GUITAR_FRET_MUTED )
     {
         NSLog(@"TODO: pluck muted");
+        [g_soundMaster PluckString:str-1 atFret:fret];
         //[g_audioController PluckMutedString:str-1];
     }
     else
@@ -1696,7 +1755,7 @@ extern UserController * g_userController;
 
 - (void)songModelEnterFrame:(NSNoteFrame*)frame
 {
-    
+    NSLog(@"Song model enter frame");
     [_currentFrame release];
     
     _currentFrame = [frame retain];
@@ -1706,12 +1765,16 @@ extern UserController * g_userController;
     
     _refreshDisplay = YES;
     
-    _animateSongScrolling = NO;
-    
+    if(isStandalone){
+        _animateSongScrolling = YES;
+    }else{
+        _animateSongScrolling = NO;
+    }
 }
 
 - (void)songModelExitFrame:(NSNoteFrame*)frame
 {
+    NSLog(@"Song model exit frame");
     
     [_currentFrame release];
     
@@ -1781,7 +1844,9 @@ extern UserController * g_userController;
     [self stopMainEventLoop];
     
     // Turn of the LEDs
-    [g_gtarController turnOffAllLeds];
+    if(g_gtarController.connected){
+        [g_gtarController turnOffAllLeds];
+    }
     
     [_songRecorder finishSong];
     
@@ -1863,6 +1928,9 @@ extern UserController * g_userController;
 	// For now we just want to recognize that a touch (any touch) occurred
 	UITouch * touch = [[touches allObjects] objectAtIndex:0];
     
+    CGPoint touchPoint = [touch locationInView:self.glView];
+    initPoint = touchPoint;
+    
     // If double-tap reset the shift to zero
     if ( [touch tapCount] == 2 )
     {
@@ -1870,7 +1938,20 @@ extern UserController * g_userController;
         _refreshDisplay = YES;
     }
     
-	_skipNotes = YES;
+    //NSLog(@"Touch is %f %f",touchPoint.x,touchPoint.y);
+    //NSLog(@"Current frame is %@",_currentFrame);
+    
+    // Determine whether to play the tapped string
+    if(isStandalone){
+        if([self shouldPluckStringFromTap]){
+            [self pluckStringFromTouchPoint:touchPoint];
+        }
+    }
+    
+    // Debug
+    if(g_gtarController.connected){
+        _skipNotes = YES;
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -1880,9 +1961,20 @@ extern UserController * g_userController;
     CGPoint currentPoint = [touch locationInView:self.view];
     CGPoint previousPoint = [touch previousLocationInView:self.view];
     
-    CGFloat delta = currentPoint.x - previousPoint.x;
+    CGFloat deltaX = currentPoint.x - previousPoint.x;
     
-    [_displayController shiftViewDelta:-delta];
+    // Only shift render view if delta x is large enough
+    if(abs(initPoint.x - currentPoint.x) > 50){
+        [_displayController shiftViewDelta:-deltaX];
+    }
+    
+    // If delta y is large enough then strum
+    if(isStandalone && abs(initPoint.y - currentPoint.y) > 10){
+        
+        CGPoint touchPoint = [touch locationInView:self.glView];
+        [self pluckStringFromTouchPoint:touchPoint];
+        
+    }
     
     _refreshDisplay = YES;
     
@@ -1892,6 +1984,53 @@ extern UserController * g_userController;
 {
     
     
+}
+
+
+#pragma mark - Standalone logic
+- (BOOL)shouldPluckStringFromTap
+{
+    BOOL testNote = FALSE;
+    
+    // If 1 note pending, play the tapped string
+    if([_currentFrame.m_notesPending count] == 1){
+        testNote = TRUE;
+    }else if([_currentFrame.m_notesPending count] == 2){
+        // Check if 2 notes on the same string
+        NSNote * firstNote = [_currentFrame.m_notesPending objectAtIndex:0];
+        NSNote * secondNote = [_currentFrame.m_notesPending objectAtIndex:1];
+        
+        if([_displayController getMappedStringFromString:firstNote.m_string] == [_displayController getMappedStringFromString:secondNote.m_string]){
+            testNote = TRUE;
+        }
+    }
+    
+    return testNote;
+}
+
+- (void)pluckStringFromTouchPoint:(CGPoint)touchPoint
+{
+    int tappedString = [_displayController getStringPluckFromTap:touchPoint];
+    
+    if(tappedString >= 0){
+        //NSLog(@"Notes pending is %@",_currentFrame.m_notesPending);
+        
+        for(NSNote * n in _currentFrame.m_notesPending){
+            if([_displayController getMappedStringFromString:n.m_string] == tappedString){
+                
+                GtarPluck pluck;
+                pluck.velocity = GtarMaxPluckVelocity;
+                pluck.position.fret = n.m_fret;
+                pluck.position.string = n.m_string;
+                
+                NSLog(@"Pluck string %i",n.m_string);
+                
+                [self gtarNoteOn:pluck];
+                
+                break;
+            }
+        }
+    }
 }
 
 @end

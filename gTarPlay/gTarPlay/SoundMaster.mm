@@ -30,12 +30,14 @@
     SamplerBankNode * m_activeBankNode;
     
     // Effects
+    // TODO:ADDEFFECTSBACK
+    /*
     DelayNode * m_delayNode;
     ReverbNode * m_reverbNode;
     ChorusEffectNode * m_chorusEffectNode;
     DistortionNode * m_distortionNode;
     ButterWorthFilterNode * m_butterworthNode;
-    
+    */
 }
 @end
 
@@ -54,11 +56,14 @@
         numInstruments = 0;
         currentInstrumentIndex = -1;
         
+        // TODO:ADDEFFECTSBACK
+        /*
         m_reverbNode = nil;
         m_chorusEffectNode = nil;
         m_delayNode = nil;
         m_distortionNode = nil;
         m_butterworthNode = nil;
+         */
         
         BOOL init = [self initAudio];
         
@@ -128,9 +133,12 @@
 {
     
     NSLog(@"Release bank");
-    [audioController stopAUGraph];
+    
+    [self stop];
+    
     m_samplerNode->ReleaseBank(bank);
-    [audioController startAUGraph];
+    
+    [self start];
 }
 
 - (void)start
@@ -145,7 +153,7 @@
     [audioController stopAUGraph];
 }
 
-- (void)disconnectAndRelease
+- (void)releaseCompletely
 {
     NSLog(@"Disconnect and release SoundMaster");
     
@@ -199,9 +207,10 @@
 #pragma mark - Tone
 - (bool) SetBWCutoff:(double)cutoff
 {
-    NSLog(@"SoundMaker: set BW cutoff to %f",cutoff);
+    NSLog(@"SoundMaster: set BW cutoff to %f",cutoff);
     
-    m_butterworthNode->SetCutoff(cutoff);
+    // TODO:ADDEFFECTSBACK
+    //m_butterworthNode->SetCutoff(cutoff);
     
     //if(m_pBwFilter != NULL)
     //    return m_pBwFilter->SetCutoff(cutoff);
@@ -240,10 +249,18 @@
 
 #pragma mark - Instrument
 - (void) loadInstrument:(NSInteger)index
-{    
+{
+    if(index == currentInstrumentIndex){
+        NSLog(@"Instrument already loaded");
+        return;
+    }else{
+        
+        NSLog(@"Release %i, set new to %i",currentInstrumentIndex,index);
+    }
+    
     isLoadingInstrument = YES;
     
-    if(m_instruments && index < [m_instruments count]){
+    if(m_instruments && index < [m_instruments count] && index > -1){
         
         [self releaseInstrument:currentInstrumentIndex];
         
@@ -292,8 +309,10 @@
     //    [m_tuning release];
     //}
     
-    [self stopAllEffects];
-    [self releaseBank:m_activeBankNode];
+    if(index > -1){
+        [self stopAllEffects];
+        [self releaseBank:m_activeBankNode];
+    }
 }
 
 - (bool) loadInstrumentArray
@@ -335,7 +354,7 @@
 - (void) didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
     NSLog(@"SoundMaster didSelectInstrument %@",instrumentName);
-    
+        
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
         NSInteger newInstrument = [self getIndexForInstrument:instrumentName];
@@ -369,11 +388,18 @@
         }
     }
     
+    for(int i = 0; i < numInstruments; i++){
+        if([[[m_instruments objectAtIndex:i] objectForKey:@"SecondName"] isEqualToString:instrumentName]){
+            return i;
+        }
+    }
+    
     return -1;
 }
 
 - (NSArray *)getInstrumentList
 {
+    
     if(!m_instruments){
         [self loadInstrumentArray];
     }
@@ -457,6 +483,9 @@
     // setup a chain of effects
     
     // init metadata
+    
+    // TODO:ADDEFFECTSBACK
+    /*
     effectNames = [[NSArray alloc] initWithObjects:
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)],
@@ -470,6 +499,7 @@
                     [NSNumber numberWithBool:NO],nil];
     
     numEffects = [effectNames count];
+     */
     
     //[self toggleEffect:0 isOn:NO];
     
@@ -482,6 +512,9 @@
 
 - (void)stopAllEffects
 {
+    
+    // TODO:ADDEFFECTSBACK
+    /*
     [self stop];
 
     @synchronized(self){
@@ -513,10 +546,14 @@
     }
     
     [self start];
+     */
 }
 
 - (void)toggleEffect:(NSInteger)index isOn:(BOOL)on
 {
+    
+    // TODO:ADDEFFECTSBACK
+    /*
     BOOL isOn = [[effectStatus objectAtIndex:index] boolValue];
     
     NSString * effectNode = [effectNames objectAtIndex:index];
@@ -590,6 +627,7 @@
         
         // TODO: refresh jampad
     }
+     */
     
 }
 
@@ -606,23 +644,35 @@
 
 - (NSInteger)getNumEffects
 {
-    return numEffects;
+    
+    // TODO:ADDEFFECTSBACK
+    return 0;
+//    return numEffects;
 }
 
 - (BOOL)isEffectOnAtIndex:(NSInteger)index
 {
+    
+    // TODO:ADDEFFECTSBACK
+    /*
     if(index >= numEffects){
         NSLog(@"Trying to get effect index %i out of range",index);
         index = numEffects-1;
     }
     
     return [[effectStatus objectAtIndex:index] boolValue];
+     */
+    return NO;
 }
 
 #pragma mark - JamPad
 // set the normalized default value for JamPad
 - (CGPoint)getPointForEffectAtIndex:(NSInteger)index
 {
+    
+    // TODO:ADDEFFECTSBACK
+    
+    /*
     NSString *effectNode = [effectNames objectAtIndex:index];
     Parameter *primary;
     Parameter *secondary;
@@ -665,12 +715,18 @@
     y = (secondary->getValue() - secondary->getMin()) / (secondary->getMax() - primary->getMin());
     
     return CGPointMake(x,y);
+     */
+    return CGPointMake(0,0);
 }
 
 // translate the normalized value the JamPad position to a range
 // in [min, max] for the respective parameter
 - (void)adjustEffectAtIndex:(NSInteger)index toPoint:(CGPoint)position
 {
+    
+    // TODO:ADDEFFECTSBACK
+    /*
+    
     NSString * effectNode = [effectNames objectAtIndex:index];
     Parameter *primary;
     Parameter *secondary;
@@ -743,6 +799,7 @@
         m_distortionNode->setSecondaryParam(snew);
         
     }
+     */
     
 }
 

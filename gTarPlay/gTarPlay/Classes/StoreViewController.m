@@ -146,6 +146,8 @@ extern FileController *g_fileController;
     if([_pullToUpdateSongList respondsToSelector:@selector(setSeparatorInset:)])
         _pullToUpdateSongList.separatorInset = UIEdgeInsetsZero;
     
+    [self updateTopHeaderTextFormatting];
+    
     // InAppPurchaseManager is a Singleton
     InAppPurchaseManager* purchaseManager = [InAppPurchaseManager sharedInstance];
     if ([purchaseManager canMakePurchases])
@@ -377,22 +379,23 @@ extern FileController *g_fileController;
 -(void)updateTopHeaderTextFormatting
 {
     NSUInteger startRangeTitleArtist = 0, rangeLengthTitleArtist = 0;
+    NSString * title = NSLocalizedString(@"TITLE", NULL);
+    NSString * artist = NSLocalizedString(@"ARTIST", NULL);
     
     if(m_storeSortOrder.type == SORT_ARTIST) {
-        startRangeTitleArtist = 7;
-        rangeLengthTitleArtist = 7;
+        startRangeTitleArtist = [title length]+3;
+        rangeLengthTitleArtist = [artist length];
     }
     else if(m_storeSortOrder.type == SORT_TITLE) {
         startRangeTitleArtist = 0;
-        rangeLengthTitleArtist = 6;
+        rangeLengthTitleArtist = [title length];
     }
     
     // Set the new text
     if([_buttonTitleArtist respondsToSelector:@selector(setAttributedTitle:forState:)])
     {
-        const CGFloat fontSize = 15;
-        UIFont *boldFont = [UIFont boldSystemFontOfSize:fontSize];
-        UIFont *regularFont = [UIFont systemFontOfSize:fontSize];
+        UIFont *boldFont = [UIFont fontWithName:@"AvenirNext-Bold" size:15.0];
+        UIFont *regularFont = [UIFont fontWithName:@"Avenir Next" size:15.0];
         UIColor *foregroundColor = [UIColor whiteColor];
         
         // Create the attributes
@@ -401,14 +404,14 @@ extern FileController *g_fileController;
                                foregroundColor, NSForegroundColorAttributeName, nil];
         
         NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  boldFont, NSFontAttributeName, nil];
+                                  boldFont, NSFontAttributeName, foregroundColor, NSForegroundColorAttributeName, nil];
         
         const NSRange rangeTitleArtist = NSMakeRange(startRangeTitleArtist, rangeLengthTitleArtist);
         const NSRange rangeSkill = NSMakeRange(0, (m_storeSortOrder.type == SORT_SKILL) ? 5 : 0);
         const NSRange rangeBuy = NSMakeRange(0, (m_storeSortOrder.type == SORT_COST) ? 3 : 0);
         
         // Create the attributed string (text + attributes)
-        NSMutableAttributedString *attributedTextTitleArtist = [[NSMutableAttributedString alloc] initWithString:@"TITLE & ARTIST" attributes:attrs];
+        NSMutableAttributedString *attributedTextTitleArtist = [[NSMutableAttributedString alloc] initWithString:[[title stringByAppendingString:@" & "] stringByAppendingString:artist] attributes:attrs];
         [attributedTextTitleArtist setAttributes:subAttrs range:rangeTitleArtist];
         
         NSMutableAttributedString *attributedTextSkill = [[NSMutableAttributedString alloc] initWithString:@"SKILL" attributes:attrs];

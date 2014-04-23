@@ -279,10 +279,13 @@ static unsigned int m_notesRemaining = 0;
 	{
 		// this is a texture
 		[m_texture drawAtPoint:m_center];
+        
 		// this is a model
-		[m_overlayModel drawAt:m_center];
+        if(m_overlayModel != nil){
+            [m_overlayModel drawAt:m_center];
+        }
 	}
-	else 
+	else
 	{
 		
 //		[m_start drawAtPoint:CGPointMake(m_startX, m_startY)];

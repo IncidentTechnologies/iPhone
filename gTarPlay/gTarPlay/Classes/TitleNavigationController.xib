@@ -40,7 +40,7 @@
                 <outlet property="signupPasswordText" destination="224" id="2623"/>
                 <outlet property="signupRightPanel" destination="3089" id="3095"/>
                 <outlet property="signupUsernameText" destination="209" id="2622"/>
-                <outlet property="topBarView" destination="30" id="707"/>
+                <outlet property="topBarView" destination="mgE-x0-Ngx" id="hcK-wx-Pga"/>
                 <outlet property="videoPreviewImage" destination="3186" id="3198"/>
                 <outlet property="videoRightPanel" destination="143" id="2397"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -59,8 +59,8 @@
                         <constraint firstAttribute="width" constant="182" id="3461"/>
                     </constraints>
                 </view>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="109" userLabel="RightPanel">
-                    <rect key="frame" x="182" y="47" width="298" height="273"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="109" userLabel="RightPanel">
+                    <rect key="frame" x="182" y="46" width="298" height="274"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -68,31 +68,15 @@
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="298" id="3462"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30" userLabel="TopBar">
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgE-x0-Ngx">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3433">
-                            <rect key="frame" x="182" y="0.0" width="200" height="46"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="60" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="154" maxY="0.0"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="profileButtonClicked:" destination="-1" eventType="touchUpInside" id="3458"/>
-                            </connections>
-                        </button>
-                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2408">
-                            <rect key="frame" x="132" y="0.0" width="348" height="48"/>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2408">
+                            <rect key="frame" x="147" y="-1" width="348" height="48"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Please connect your gTar to sign up for an account." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="315" translatesAutoresizingMaskIntoConstraints="NO" id="2398">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Please connect your gTar to sign up for an account." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="315" translatesAutoresizingMaskIntoConstraints="NO" id="2398">
                                     <rect key="frame" x="35" y="0.0" width="315" height="48"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
@@ -102,7 +86,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2429">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2429">
                                     <rect key="frame" x="0.0" y="0.0" width="35" height="48"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
@@ -117,16 +101,39 @@
                             <constraints>
                                 <constraint firstItem="2398" firstAttribute="top" secondItem="2408" secondAttribute="top" id="2422"/>
                                 <constraint firstItem="2398" firstAttribute="bottom" secondItem="2408" secondAttribute="bottom" id="2423"/>
-                                <constraint firstItem="2429" firstAttribute="top" secondItem="2408" secondAttribute="top" id="2461"/>
-                                <constraint firstItem="2429" firstAttribute="bottom" secondItem="2408" secondAttribute="bottom" id="2463"/>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="348" id="2524"/>
                                 <constraint firstItem="2429" firstAttribute="leading" secondItem="2408" secondAttribute="leading" id="2542"/>
                                 <constraint firstAttribute="trailing" secondItem="2398" secondAttribute="trailing" constant="-2" id="2558"/>
                                 <constraint firstItem="2398" firstAttribute="leading" secondItem="2429" secondAttribute="trailing" id="2564"/>
+                                <constraint firstAttribute="height" constant="48" id="JvK-ng-4r6"/>
+                                <constraint firstAttribute="width" constant="348" id="Z27-EV-4XH"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3433">
+                            <rect key="frame" x="182" y="0.0" width="200" height="46"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="46" id="FNN-Zr-QFv"/>
+                                <constraint firstAttribute="width" constant="200" id="PoV-fz-MSg"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="60" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="154" maxY="0.0"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="profileButtonClicked:" destination="-1" eventType="touchUpInside" id="3458"/>
+                            </connections>
+                        </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="2408" secondAttribute="trailing" constant="-15" id="EmE-gX-ewA"/>
+                        <constraint firstItem="3433" firstAttribute="leading" secondItem="mgE-x0-Ngx" secondAttribute="leading" constant="182" id="Yka-0U-IWr"/>
+                    </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gTarLogoTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="96">
                     <rect key="frame" x="30" y="16" width="121" height="78"/>
@@ -179,9 +186,9 @@
                 <constraint firstItem="3056" firstAttribute="top" secondItem="1" secondAttribute="top" id="3079"/>
                 <constraint firstAttribute="centerX" secondItem="3056" secondAttribute="centerX" id="3082"/>
                 <constraint firstAttribute="centerY" secondItem="3056" secondAttribute="centerY" id="3083"/>
-                <constraint firstAttribute="trailing" secondItem="30" secondAttribute="trailing" id="hoM-66-4Nc"/>
-                <constraint firstItem="30" firstAttribute="top" secondItem="1" secondAttribute="top" id="lTl-FC-7Gm"/>
-                <constraint firstItem="30" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="tun-Nj-MJZ"/>
+                <constraint firstAttribute="trailing" secondItem="mgE-x0-Ngx" secondAttribute="trailing" id="NdM-4m-bSL"/>
+                <constraint firstItem="mgE-x0-Ngx" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="YYe-0B-Ak5"/>
+                <constraint firstItem="mgE-x0-Ngx" firstAttribute="top" secondItem="1" secondAttribute="top" id="axC-Wy-rs9"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>

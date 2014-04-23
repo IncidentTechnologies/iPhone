@@ -79,6 +79,9 @@
 "Echo" = "Écho";
 "Reverb" = "Réverb";
 "Distortion" = "Distorsion";
+"Single" = "Unique";
+"2 X 2" = "2 X 2";
+"Continuous" = "Continu";
 
 // Instruments
 "Electric" = "Guitare électrique";
