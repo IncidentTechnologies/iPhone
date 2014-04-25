@@ -28,6 +28,8 @@
 
 #import "gTarColors.h"
 
+#import "PlayViewController.h"
+
 @class NSSong;
 @class NSNote;
 @class NSSongModel;
@@ -66,9 +68,15 @@
     
     BOOL isStandalone;
     
+    PlayViewControllerDifficulty difficulty;
+    
+    BOOL fretOne;
+    BOOL fretTwo;
+    BOOL fretThree;
+    
 }
 
-- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone;
+- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty;
 - (void)cancelPreloading;
 - (void)createLineModels;
 - (void)createNumberModels;
@@ -89,6 +97,11 @@
 - (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone;
 - (double)convertStringToCoordSpace:(NSInteger)str isStandalone:(BOOL)standalone;
 - (double)calculateMaxShiftCoordSpace:(BOOL)standalone;
+
+- (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn;
+
+- (void)hitNote:(NSNote*)note;
+- (void)missNote:(NSNote*)note;
 
 // Standalone
 -(int)getMappedStringFromString:(int)str;

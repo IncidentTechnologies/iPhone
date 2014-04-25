@@ -30,7 +30,7 @@
 
 @implementation SongDisplayController
 
-- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone
+- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty
 {
     // Force linking
     [EAGLView class];
@@ -55,6 +55,7 @@
         
         m_framesDisplayed = 0;
         
+        difficulty = useDifficulty;
         
         isStandalone = standalone;
         
@@ -88,6 +89,10 @@
         [self createBackgroundTexture];
         
         m_preloadTimer = [NSTimer scheduledTimerWithTimeInterval:PRELOAD_TIMER_DURATION target:self selector:@selector(preloadFramesTimer) userInfo:nil repeats:YES];
+        
+        fretOne = NO;
+        fretTwo = NO;
+        fretThree = NO;
         
     }
 
@@ -138,13 +143,6 @@
 
     m_framesDisplayed++;
     
-    // increase the preloading window overtime
-//    if ( (m_framesDisplayed % 10) == 0 )
-//    {
-//        m_beatsToPreloadSync = MIN(m_songModel.m_lengthBeats, m_beatsToPreloadSync+1);
-//        m_beatsToPreloadAsync = MAX(m_beatsToPreloadSync, m_beatsToPreloadAsync);
-//    }
-
     [self updateDisplayedFrames];
     
     double position = [self convertBeatToCoordSpace:m_songModel.m_currentBeat isStandalone:isStandalone];
@@ -152,11 +150,6 @@
     // pull down the shift as time goes by
     double end = [self calculateMaxShiftCoordSpace:isStandalone];
 
-    /*if ( m_renderer.m_viewShift > end )
-    {
-        m_renderer.m_viewShift = end;
-    }*/
-    
     // Don't pass the end
     if(m_renderer.m_viewShift < end){
         m_renderer.m_viewShift = end;
@@ -169,7 +162,11 @@
     
     [m_renderer updatePositionAndRender:position];
     
-    [m_glView drawView];
+    if(isStandalone){
+        [m_glView drawViewWithHighlightsFretOne:fretOne fretTwo:fretTwo fretThree:fretThree];
+    }else{
+        [m_glView drawView];
+    }
     
 }
 
@@ -200,7 +197,6 @@
             [keysToRemove addObject:key];
             
         }
-        
     }
     
     [m_noteModelDictionary removeObjectsForKeys:keysToRemove];
@@ -216,7 +212,6 @@
     {
         for ( NSNoteFrame * frame in m_undisplayedFrames )
         {
-            
             if ( frame.m_absoluteBeatStart < (currentBeat + m_beatsToPreloadSync) )
             {
                 
@@ -274,7 +269,6 @@
     {
         for ( NSNoteFrame * frame in m_undisplayedFrames )
         {
-            
             [self displayFrame:frame];
                 
             [framesToRemove addObject:frame];
@@ -298,9 +292,40 @@
 
 - (void)displayFrame:(NSNoteFrame*)frame
 {
-        
+    
+    //NSLog(@"Frame is %@",frame);
+    
+    NSMutableDictionary * standaloneNotesForStrings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+               [NSNull null],[NSNumber numberWithInt:1],
+               [NSNull null],[NSNumber numberWithInt:2],
+               [NSNull null],[NSNumber numberWithInt:3], nil];
+    
+    //NSLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
+    
+    int countFrets = 0;
+    
+    NSNote * firstNote = nil;
+    
     for ( NSNote * note in frame.m_notes )
+    //for(int k = [frame.m_notes count]-1; k >= 0; k--)
     {
+        
+        //NSNote * note = [frame.m_notes objectAtIndex:k];
+        
+        if(!firstNote){
+            firstNote = note;
+        }
+        
+        // Determine if active for standalone (first in a row)
+        int standalonestring = [self getMappedStringFromString:note.m_string];
+        if([standaloneNotesForStrings objectForKey:[NSNumber numberWithInt:standalonestring]] == [NSNull null]){
+            [standaloneNotesForStrings setObject:note forKey:[NSNumber numberWithInt:standalonestring]];
+            note.m_standaloneActive = YES;
+        }else{
+            note.m_standaloneActive = NO;
+        }
+        
+        //NSLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
         
         CGPoint center;
 		center.x = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone];
@@ -322,8 +347,56 @@
         
         NoteModel * model;
         
-        model = [[NoteModel alloc] initWithCenter:center andColor:g_stringColors[note.m_string - 1] andTexture:m_noteTexture andOverlay:overlay];
+        // Check mode + difficulty for note color
+        GLubyte * noteColor;
+        
+        if(!isStandalone){
             
+            noteColor = g_stringColors[note.m_string - 1];
+            
+        }else if(difficulty == PlayViewControllerDifficultyEasy){ // Easy
+            
+            noteColor = g_standaloneFretColors[0];
+            
+        }else if(difficulty == PlayViewControllerDifficultyMedium){ // Medium
+            
+            noteColor = g_standaloneFretColors[firstNote.m_fret];
+            
+            if(note.m_standaloneActive){
+                countFrets = (firstNote.m_fret > 0) ? countFrets+1 : countFrets;
+            }
+            
+        }else{ // Hard
+            
+            noteColor = g_standaloneFretColors[note.m_fret];
+            
+            if(note.m_standaloneActive){
+                countFrets = (note.m_fret > 0) ? countFrets+1 : countFrets;
+            }
+            
+        }
+        
+        model = [[NoteModel alloc] initWithCenter:center andColor:noteColor andTexture:m_noteTexture andOverlay:overlay];
+        
+        model.m_fret = note.m_fret;
+        
+        if(isStandalone){
+            
+            if(note.m_standaloneActive == NO){
+                
+                model.m_standalonefret = -1;
+                
+            }else{
+                if(difficulty == PlayViewControllerDifficultyEasy){
+                    model.m_standalonefret = 0;
+                }else if(difficulty == PlayViewControllerDifficultyMedium){
+                    model.m_standalonefret = ceil(firstNote.m_fret/4.0);
+                }else if(difficulty == PlayViewControllerDifficultyHard){
+                    model.m_standalonefret = ceil(note.m_fret/4.0);
+                }
+            }
+        }
+        
         NSValue * key = [NSValue valueWithNonretainedObject:note];
         
         [m_noteModelDictionary setObject:model forKey:key];
@@ -332,6 +405,20 @@
         
         [model release];
         
+    }
+    
+    // Set the note counts for the model
+    if(isStandalone){
+        for ( NSNote * note in frame.m_notes )
+        {
+            if(note.m_standaloneActive){
+                
+                NSValue * key = [NSValue valueWithNonretainedObject:note];
+                NoteModel * model = [m_noteModelDictionary objectForKey:key];
+                
+                model.m_notecount = countFrets;
+            }
+        }
     }
     
 }
@@ -470,7 +557,10 @@
         size.height = GL_STRING_HEIGHT + (GTAR_GUITAR_STRING_COUNT - 1 - i) * GL_STRING_HEIGHT_INCREMENT;
         center.y = [self convertStringToCoordSpace:(i+1) isStandalone:isStandalone];
         
-        StringModel * stringModel = [[StringModel alloc] initWithCenter:center andSize:size andColor:( g_stringColors[i] )];
+        
+        GLubyte * stringColor = (isStandalone) ? g_standaloneStringColors[i] : g_stringColors[i];
+        
+        StringModel * stringModel = [[StringModel alloc] initWithCenter:center andSize:size andColor:stringColor];
         
         [m_renderer addString:stringModel];
         
@@ -522,7 +612,7 @@
 	
 	CGSize size;
 	size.width = GL_NOTE_HEIGHT;
-	size.height = GL_NOTE_HEIGHT;
+	size.height = GL_NOTE_HEIGHT-3;
 	
     // Create number models for 0..16
 	for ( unsigned int i = 0; i < (GTAR_GUITAR_FRET_COUNT+1); i++ )
@@ -719,6 +809,34 @@
     }
     
     return -1;
+}
+
+#pragma mark - Live Info from Play Controller
+
+
+- (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn
+{
+    fretOne = fretOneOn;
+    fretTwo = fretTwoOn;
+    fretThree = fretThreeOn;
+}
+
+- (void)hitNote:(NSNote *)note
+{
+    NSValue * key = [NSValue valueWithNonretainedObject:note];
+    NoteModel * notehit = [m_noteModelDictionary objectForKey:key];
+    if(notehit != nil){
+        [notehit hitNote];
+    }
+}
+
+- (void)missNote:(NSNote *)note
+{
+    NSValue * key = [NSValue valueWithNonretainedObject:note];
+    NoteModel * notehit = [m_noteModelDictionary objectForKey:key];
+    if(notehit != nil){
+        [notehit missNote];
+    }
 }
 
 @end

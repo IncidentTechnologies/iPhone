@@ -137,7 +137,7 @@ extern GtarController *g_gtarController;
     // Init volume / instrument views
     if ( _volumeViewController == nil )
     {
-        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil isInverse:NO];
         [_volumeViewController attachToSuperview:_songOptionsModal.contentView withFrame:_volumeView.frame];
     }
     

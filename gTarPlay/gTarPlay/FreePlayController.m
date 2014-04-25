@@ -131,7 +131,7 @@ extern GtarController * g_gtarController;
         _fpMenuVC = [[FPMenuViewController alloc] init];
         [_fpMenuVC setDelegate:self];
         
-        _volumeVC = [[VolumeViewController alloc] init];
+        _volumeVC = [[VolumeViewController alloc] initWithNibName:nil bundle:nil isInverse:NO];
         
         for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
         {

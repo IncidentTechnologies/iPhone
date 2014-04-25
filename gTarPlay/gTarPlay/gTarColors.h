@@ -45,6 +45,47 @@ static unsigned char g_stringColors[6][4] =
 	{ 0, 141, 218, 255 }, // B
 	{ 167, 102, 179, 255 } // P
 };
+static unsigned char g_standaloneStringColors[6][4] =
+{
+	{ 255, 255, 255, 255 }, // W
+	{ 255, 255, 255, 255 }, // W
+	{ 255, 255, 255, 255 }, // W
+	{ 255, 255, 255, 255 }, // W
+	{ 255, 255, 255, 255 }, // W
+	{ 255, 255, 255, 255 }  // W
+};
+static unsigned char g_standaloneFretColors[17][4] =
+{
+    { 225, 255, 255, 255}, // W
+	{ 239, 92, 53, 255 },  // R
+	{ 239, 92, 53, 255 },  // R
+	{ 239, 92, 53, 255 },  // R
+	{ 239, 92, 53, 255 },  // R
+	{ 238, 188, 53, 255 }, // Y
+	{ 238, 188, 53, 255 }, // Y
+	{ 238, 188, 53, 255 }, // Y
+	{ 238, 188, 53, 255 }, // Y
+	{ 0, 141, 218, 255 },  // B
+	{ 0, 141, 218, 255 },  // B
+	{ 0, 141, 218, 255 },  // B
+	{ 0, 141, 218, 255 }   // B
+};
+static unsigned char g_standaloneHighlightColors[4][4] =
+{
+	{ 255, 255, 255, 130 }, // W
+	{ 239, 92, 53, 130 },   // R
+	{ 238, 188, 53, 130 },  // Y
+	{ 0, 141, 218, 130 }    // B
+};
+static unsigned char g_standaloneHitFretColor[4] =
+    { 31, 195, 72, 130 }; // Green
+
+static unsigned char g_standaloneMissFretColor[4] =
+    { 0, 0, 0, 255 }; // Black
+    //{ 38, 45, 51, 255 }; // Black
+
+static unsigned char g_standaloneClearColor[4] =
+    { 1, 1, 1, 0}; // Clear
 /*
 static unsigned char g_stringColorsQuads[6][16] =
 { 

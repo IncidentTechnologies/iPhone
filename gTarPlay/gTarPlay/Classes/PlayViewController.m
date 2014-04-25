@@ -104,6 +104,10 @@ extern UserController * g_userController;
     CGPoint initPoint;
     BOOL isStandalone;
     
+    BOOL fretOneOn;
+    BOOL fretTwoOn;
+    BOOL fretThreeOn;
+    
 }
 
 @end
@@ -174,6 +178,7 @@ extern UserController * g_userController;
     // Hide the glview till it is done loading
     _glView.hidden = YES;
     
+    [self setStandalone];
     [self updateDifficultyDisplay];
     
     
@@ -181,7 +186,11 @@ extern UserController * g_userController;
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    
+    [self setStandalone];
+}
+
+- (void) setStandalone
+{
     if(g_gtarController.connected == NO){
         
         NSLog(@"GTAR DISCONNECTED USE STANDALONE");
@@ -242,7 +251,7 @@ extern UserController * g_userController;
     // Attach the volume view controller
     CGRect targetFrame = [_topBar convertRect:_volumeSliderView.frame toView:self.view];
     
-    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil isInverse:YES];
     
     [_volumeViewController attachToSuperview:self.view withFrame:targetFrame];
     
@@ -831,6 +840,8 @@ extern UserController * g_userController;
 
 - (void)updateDifficultyDisplay
 {
+    [self hideFrets];
+    
     switch ( _difficulty )
     {
         default:
@@ -838,20 +849,57 @@ extern UserController * g_userController;
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffEasyButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = NSLocalizedString(@"Easy", NULL);
+            
         } break;
             
         case PlayViewControllerDifficultyMedium:
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffMedButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = NSLocalizedString(@"Medium", NULL);
+            
+            if(isStandalone){
+                [self showFrets];
+            }
+            
         } break;
             
         case PlayViewControllerDifficultyHard:
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffHardButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = NSLocalizedString(@"Hard", NULL);
+            
+            if(isStandalone){
+                [self showFrets];
+            }
+            
         } break;
     }
+}
+
+- (void)hideFrets
+{
+    fretOneOn = NO;
+    fretTwoOn = NO;
+    fretThreeOn = NO;
+    
+    [_fretOne setHidden:YES];
+    [_fretTwo setHidden:YES];
+    [_fretThree setHidden:YES];
+}
+
+- (void)showFrets
+{
+    fretOneOn = NO;
+    fretTwoOn = NO;
+    fretThreeOn = NO;
+    
+    [_fretOne setHidden:NO];
+    [_fretTwo setHidden:NO];
+    [_fretThree setHidden:NO];
+    
+    _fretOne.layer.cornerRadius = 50.0;
+    _fretTwo.layer.cornerRadius = 50.0;
+    _fretThree.layer.cornerRadius = 50.0;
 }
 
 - (void)updateScoreDisplay
@@ -1329,7 +1377,7 @@ extern UserController * g_userController;
     //
     // Init display
     //
-    _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView isStandalone:isStandalone];
+    _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView isStandalone:isStandalone setDifficulty:_difficulty];
     
     // An initial display render
     [_displayController renderImage];
@@ -1776,6 +1824,14 @@ extern UserController * g_userController;
 {
     NSLog(@"Song model exit frame");
     
+    // Miss all the remaining notes
+    for(NSNote * n in frame.m_notesPending){
+        
+        [_displayController missNote:n];
+        
+    }
+    
+    
     [_currentFrame release];
     
     _currentFrame = nil;
@@ -1964,8 +2020,10 @@ extern UserController * g_userController;
     CGFloat deltaX = currentPoint.x - previousPoint.x;
     
     // Only shift render view if delta x is large enough
-    if(abs(initPoint.x - currentPoint.x) > 50){
-        [_displayController shiftViewDelta:-deltaX];
+    if(!isStandalone){
+        if(abs(initPoint.x - currentPoint.x) > 50){
+                [_displayController shiftViewDelta:-deltaX];
+        }
     }
     
     // If delta y is large enough then strum
@@ -2015,22 +2073,211 @@ extern UserController * g_userController;
     if(tappedString >= 0){
         //NSLog(@"Notes pending is %@",_currentFrame.m_notesPending);
         
+        NSNote * firstNote = nil;
+        
+        if(_difficulty == PlayViewControllerDifficultyHard){
+            
+            BOOL playFretOne = FALSE;
+            BOOL playFretTwo = FALSE;
+            BOOL playFretThree = FALSE;
+            int fretsOn = 0;
+            
+            // Hard: make sure the exact right fretting is held
+            for(NSNote * n in _currentFrame.m_notes){
+                
+                // Ignore hidden notes
+                if(!n.m_standaloneActive){
+                    continue;
+                }
+                
+                int fret = ceil(n.m_fret/4.0);
+                
+                switch(fret){
+                    case 1:
+                        if(!playFretOne) fretsOn++;
+                        playFretOne = TRUE;
+                        break;
+                    case 2:
+                        if(!playFretTwo) fretsOn++;
+                        playFretTwo = TRUE;
+                        break;
+                    case 3:
+                        if(!playFretThree) fretsOn++;
+                        playFretThree = TRUE;
+                        break;
+                }
+            }
+            
+            // Look at expected fretting and return if held fret combo violates
+            switch(fretsOn){
+                case 0:
+                    if(fretOneOn || fretTwoOn || fretThreeOn){
+                        return;
+                    }
+                    break;
+                case 1:
+                    if(playFretOne && (!fretOneOn || fretTwoOn || fretThreeOn)){
+                        return;
+                    }else if(playFretTwo && (!fretTwoOn || fretOneOn || fretThreeOn)){
+                        return;
+                    }else if(playFretThree && (!fretThreeOn || fretOneOn || fretTwoOn)){
+                        return;
+                    }
+                    break;
+                case 2:
+                    if(playFretOne && playFretTwo && (!playFretOne || !playFretTwo || playFretThree)){
+                        return;
+                    }else if(playFretOne && playFretThree && (!playFretOne || !playFretThree || playFretTwo)){
+                        return;
+                    }else if(playFretTwo && playFretThree && (!playFretTwo || !playFretThree || playFretOne)){
+                        return;
+                    }
+                    break;
+                case 3:
+                    if(!fretOneOn || !fretTwoOn || !fretThreeOn){
+                        return;
+                    }
+                    break;
+                    
+            }
+            
+        }else if(_difficulty == PlayViewControllerDifficultyMedium){
+           
+            // Medium: make sure the fret for the first note is held
+            // (UI ensures only 1 fret down at a time)
+            for(NSNote * n in _currentFrame.m_notes){
+                
+                if(!firstNote){
+                    firstNote = n;
+                }
+                
+                // Ignore hidden notes
+                if(!n.m_standaloneActive){
+                    continue;
+                }
+                
+                int fret = ceil(firstNote.m_fret/4.0);
+                
+                switch (fret) {
+                    case 0:
+                        if(fretOneOn || fretTwoOn || fretThreeOn){
+                            return;
+                        }
+                        break;
+                    case 1:
+                        if(!fretOneOn){
+                            return;
+                        }
+                        break;
+                    case 2:
+                        if(!fretTwoOn){
+                            return;
+                        }
+                        break;
+                    case 3:
+                        if(!fretThreeOn){
+                            return;
+                        }
+                        break;
+                }
+            }
+        }
+        
+        
+        // Go through and play the notes if the string mapping is correct
         for(NSNote * n in _currentFrame.m_notesPending){
+            
             if([_displayController getMappedStringFromString:n.m_string] == tappedString){
                 
-                GtarPluck pluck;
-                pluck.velocity = GtarMaxPluckVelocity;
-                pluck.position.fret = n.m_fret;
-                pluck.position.string = n.m_string;
+                // Got one string right, autocomplete on easy or medium
+                if(_difficulty == PlayViewControllerDifficultyEasy || _difficulty == PlayViewControllerDifficultyMedium){
+                    
+                    for(NSNote * nn in _currentFrame.m_notesPending){
+                        
+                        GtarPluck pluck;
+                        pluck.velocity = GtarMaxPluckVelocity;
+                        pluck.position.fret = nn.m_fret;
+                        pluck.position.string = nn.m_string;
+                        
+                        NSLog(@"Pluck string %i",nn.m_string);
+                        
+                        [_displayController hitNote:nn];
+                        [self gtarNoteOn:pluck];
+                        
+                    }
+                    
+                }else{
                 
-                NSLog(@"Pluck string %i",n.m_string);
-                
-                [self gtarNoteOn:pluck];
+                    GtarPluck pluck;
+                    pluck.velocity = GtarMaxPluckVelocity;
+                    pluck.position.fret = n.m_fret;
+                    pluck.position.string = n.m_string;
+                    
+                    NSLog(@"Pluck string %i",n.m_string);
+                    
+                    [_displayController hitNote:n];
+                    [self gtarNoteOn:pluck];
+                    
+                }
                 
                 break;
             }
         }
     }
+}
+
+- (void)fretDown:(id)sender
+{
+    UIButton * fret = (UIButton *)sender;
+    
+    [fret setAlpha:1.0];
+    
+    if(fret == _fretOne){
+        fretOneOn = YES;
+        
+        // highlight one fret at a time on Medium
+        if(_difficulty == PlayViewControllerDifficultyMedium){
+            [self fretUp:_fretTwo];
+            [self fretUp:_fretThree];
+        }
+        
+    }else if(fret == _fretTwo){
+        fretTwoOn = YES;
+        
+        // highlight one fret at a time on Medium
+        if(_difficulty == PlayViewControllerDifficultyMedium){
+            [self fretUp:_fretOne];
+            [self fretUp:_fretThree];
+        }
+        
+    }else if(fret == _fretThree){
+        fretThreeOn = YES;
+        
+        // highlight one fret at a time on Medium
+        if(_difficulty == PlayViewControllerDifficultyMedium){
+            [self fretUp:_fretOne];
+            [self fretUp:_fretTwo];
+        }
+    }
+    
+    [_displayController fretsDownOne:fretOneOn fretTwo:fretTwoOn fretThree:fretThreeOn];
+}
+
+- (void)fretUp:(id)sender
+{
+    UIButton * fret = (UIButton *)sender;
+    
+    [fret setAlpha:0.5];
+    
+    if(fret == _fretOne){
+        fretOneOn = NO;
+    }else if(fret == _fretTwo){
+        fretTwoOn = NO;
+    }else if(fret == _fretThree){
+        fretThreeOn = NO;
+    }
+    
+    [_displayController fretsDownOne:fretOneOn fretTwo:fretTwoOn fretThree:fretThreeOn];
 }
 
 @end

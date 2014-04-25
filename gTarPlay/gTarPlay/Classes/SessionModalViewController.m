@@ -49,7 +49,7 @@ extern FileController *g_fileController;
     _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     [_playerViewController attachToSuperview:_playerView];
     
-    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil isInverse:NO];
     [_volumeViewController attachToSuperview:self.contentView withFrame:_volumeView.frame];
     
     _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];

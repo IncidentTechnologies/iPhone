@@ -57,6 +57,8 @@
             self.m_fret = [fretString integerValue];
         }
         
+        self.m_standaloneActive = YES;
+        
     }
     
     return self;

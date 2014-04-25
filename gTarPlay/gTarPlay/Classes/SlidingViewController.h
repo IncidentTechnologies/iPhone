@@ -21,5 +21,7 @@
 - (void)openView:(BOOL)animated;
 - (void)setFrame:(CGRect)frame;
 - (void)colorTriangleIndicator:(UIColor *)color;
+- (void)invertTriangleIndicator;
+- (void)invertView:(BOOL)invert;
 
 @end

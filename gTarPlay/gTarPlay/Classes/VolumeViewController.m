@@ -17,6 +17,7 @@
 
 @interface VolumeViewController ()
 {
+    BOOL invertView;
     MPVolumeView *_mpVolumeView;
 }
 
@@ -24,12 +25,16 @@
 
 @implementation VolumeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isInverse:(BOOL)invert;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
+        
+        invertView = invert;
+        [super invertView:invert];
+        
     }
     return self;
 }
@@ -91,6 +96,13 @@
     
 }
 
+-(void)invertVolumeView
+{
+    [_innerView setFrame:CGRectMake(_innerView.frame.origin.x,8,_innerView.frame.size.width,_innerView.frame.size.height)];
+    
+    [super invertTriangleIndicator];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -112,6 +124,10 @@
     [_mpVolumeView setFrame:_volumeView.bounds];
     
     _mpVolumeView.center = CGPointMake( _volumeView.frame.size.width / 2.0, _volumeView.frame.size.height / 2.0 );
+    
+    if(invertView){
+        [self invertVolumeView];
+    }
     
 }
 

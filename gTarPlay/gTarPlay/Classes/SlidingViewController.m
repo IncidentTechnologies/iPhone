@@ -10,10 +10,13 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+#define SCREEN_HEIGHT 320
+
 @interface SlidingViewController ()
 {
 //    BOOL _isDown;
     BOOL _isSliding;
+    BOOL invertView;
 }
 @end
 
@@ -57,7 +60,9 @@
     
     self.view.userInteractionEnabled = NO;
     
-    _contentView.layer.transform = CATransform3DMakeTranslation(0 , -self.view.frame.size.height, 0);
+    //_contentView.layer.transform = CATransform3DMakeTranslation(0 , -self.view.frame.size.height, 0);
+    
+    [_contentView setFrame:[self contentViewOffFrame]];
     
     [view addSubview:self.view];
     
@@ -67,6 +72,10 @@
     [_triangleIndicatorImage setHidden:YES];
 }
 
+- (void)invertView:(BOOL)invert
+{
+    invertView = invert;
+}
 
 - (void)toggleView:(BOOL)animated
 {
@@ -120,6 +129,27 @@
     }
 }
 
+- (CGRect)contentViewOnFrame
+{
+    CGRect onFrame = CGRectMake(_contentView.frame.origin.x, 0, _contentView.frame.size.width, _contentView.frame.size.height);
+    
+    return onFrame;
+}
+
+- (CGRect)contentViewOffFrame
+{
+    // check for inversion
+    CGRect offFrame;
+    
+    if(invertView){
+        offFrame = CGRectMake(_contentView.frame.origin.x, SCREEN_HEIGHT, _contentView.frame.size.width, _contentView.frame.size.height);
+    }else{
+        offFrame = CGRectMake(_contentView.frame.origin.x, -1*_contentView.frame.size.height, _contentView.frame.size.width, _contentView.frame.size.height);
+    }
+    
+    return offFrame;
+}
+
 - (void)closeView:(BOOL)animated
 {
 //    if ( _isSliding )
@@ -138,18 +168,27 @@
     
     self.view.userInteractionEnabled = NO;
     
+    float animationDuration = 0.0;
+    
     // Animate as requested
     if ( animated == YES )
     {
         _isSliding = YES ;
+        animationDuration = 0.3;
         
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.3f];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(slidingComplete)];
+        //[UIView beginAnimations:nil context:NULL];
+        //[UIView setAnimationDuration:0.3f];
+        //[UIView setAnimationDelegate:self];
+        //[UIView setAnimationDidStopSelector:@selector(slidingComplete)];
     }
     
-    _contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
+    //_contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
+    
+    [UIView animateWithDuration:animationDuration animations:^(void){
+        [_contentView setFrame:[self contentViewOffFrame]];
+    } completion:^(BOOL finished){
+        [self slidingComplete];
+    }];
     
     if ( animated == YES )
     {
@@ -181,18 +220,28 @@
     
     [_triangleIndicatorImage setHidden:NO];
     
+    float animationDuration = 0.0;
+    
     // Animate as requested
     if ( animated == YES )
     {
         _isSliding = YES ;
         
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.3f];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(slidingComplete)];
+        animationDuration = 0.3;
+        //[UIView beginAnimations:nil context:NULL];
+        //[UIView setAnimationDuration:0.3f];
+        //[UIView setAnimationDelegate:self];
+        //[UIView setAnimationDidStopSelector:@selector(slidingComplete)];
     }
     
-    _contentView.layer.transform = CATransform3DIdentity;
+    
+    //    _contentView.layer.transform = CATransform3DIdentity;
+    
+    [UIView animateWithDuration:animationDuration animations:^(void){
+        [_contentView setFrame:[self contentViewOnFrame]];
+    } completion:^(BOOL finished){
+        [self slidingComplete];
+    }];
     
     if ( animated == YES )
     {
@@ -203,17 +252,23 @@
 
 - (void)setFrame:(CGRect)frame
 {
-    _contentView.layer.transform = CATransform3DIdentity;
+    //_contentView.layer.transform = CATransform3DIdentity;
+    
+    [_contentView setFrame:[self contentViewOnFrame]];
     
     self.view.frame = frame;
     
     if ( _isDown == YES )
     {
-        _contentView.layer.transform = CATransform3DIdentity;
+        //_contentView.layer.transform = CATransform3DIdentity;
+        
+        [_contentView setFrame:[self contentViewOnFrame]];
     }
     else
     {
-        _contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
+        //_contentView.layer.transform = CATransform3DMakeTranslation(0 , -_contentView.frame.size.height, 0);
+        
+        [_contentView setFrame:[self contentViewOffFrame]];
     }
 }
 
@@ -221,6 +276,13 @@
 - (void)colorTriangleIndicator:(UIColor *)color
 {
     _triangleIndicatorImage.tintColor = color;
+}
+
+- (void)invertTriangleIndicator
+{
+    [_triangleIndicatorImage setFrame:CGRectMake(_triangleIndicatorImage.frame.origin.x, _contentView.frame.size.height-_triangleIndicatorImage.frame.size.height, _triangleIndicatorImage.frame.size.width, _triangleIndicatorImage.frame.size.height)];
+    
+    _triangleIndicatorImage.transform = CGAffineTransformMakeScale(1, -1);
 }
 
 //- (UIImage *)drawTriangleInRect:(CGSize)size

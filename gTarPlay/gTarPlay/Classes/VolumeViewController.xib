@@ -7,7 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VolumeViewController">
             <connections>
                 <outlet property="contentView" destination="1" id="156"/>
-                <outlet property="sliderView" destination="41" id="55"/>
+                <outlet property="innerView" destination="18" id="D33-hk-0s3"/>
+                <outlet property="sliderView" destination="41" id="hVi-iw-MZG"/>
                 <outlet property="triangleIndicatorImage" destination="TRy-pl-GLg" id="gut-WV-REv"/>
                 <outlet property="view" destination="154" id="155"/>
                 <outlet property="volumeSlider" destination="42" id="144"/>

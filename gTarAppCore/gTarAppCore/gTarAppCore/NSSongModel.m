@@ -26,7 +26,7 @@
 @synthesize m_frameWidthBeats;
 
 #define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats, see also PlayViewController
-#define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.4f)
+#define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.2f)
 
 //- (id)initWithSongXmp:(NSString*)xmpBlob
 //{

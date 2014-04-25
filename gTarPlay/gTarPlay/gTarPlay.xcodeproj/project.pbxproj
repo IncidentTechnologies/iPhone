@@ -22,6 +22,7 @@
 		6D3D06DE18F4D2E8007683DB /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3D06D818F4D2E8007683DB /* libTestFlight.a */; };
 		6D3D06DF18F4D2E8007683DB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06D918F4D2E8007683DB /* README.md */; };
 		6D3D06E018F4D2E8007683DB /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06DA18F4D2E8007683DB /* release_notes.md */; };
+		6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D594C101909BCF900CF3128 /* HighlightModel.m */; };
 		6D72F22018FF1EC100D68394 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */; };
 		6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */; };
 		9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
@@ -1706,6 +1707,8 @@
 		6D3D06DB18F4D2E8007683DB /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		6D3D06DC18F4D2E8007683DB /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		6D3D06DD18F4D2E8007683DB /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		6D594C0F1909BCF900CF3128 /* HighlightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightModel.h; sourceTree = "<group>"; };
+		6D594C101909BCF900CF3128 /* HighlightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightModel.m; sourceTree = "<group>"; };
 		6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = FacebookIcon.jpg; path = Resources/Images/Title/FacebookIcon.jpg; sourceTree = SOURCE_ROOT; };
 		6DD5FB0018FCB8A40066C888 /* SongPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongPlaybackController.h; sourceTree = "<group>"; };
 		6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPlaybackController.m; sourceTree = "<group>"; };
@@ -3880,6 +3883,8 @@
 				ECCC030B170A2B8F0021DB00 /* NumberModel.m */,
 				ECCC030C170A2B900021DB00 /* TextModel.h */,
 				ECCC030D170A2B900021DB00 /* TextModel.m */,
+				6D594C0F1909BCF900CF3128 /* HighlightModel.h */,
+				6D594C101909BCF900CF3128 /* HighlightModel.m */,
 			);
 			name = Models;
 			path = Classes;
@@ -5706,6 +5711,7 @@
 				EC24DC53161A897A00016B78 /* SongDisplayController.m in Sources */,
 				EC24DC54161A897A00016B78 /* SongES1Renderer.m in Sources */,
 				EC24DC5D161A898700016B78 /* PullToUpdateTableView.m in Sources */,
+				6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */,
 				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
 				EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
 				6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */,
@@ -5911,7 +5917,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+				PROVISIONING_PROFILE = "7B481418-B152-4A26-BD85-D5112440FD60";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5945,7 +5951,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+				PROVISIONING_PROFILE = "7B481418-B152-4A26-BD85-D5112440FD60";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

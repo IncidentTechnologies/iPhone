@@ -36,6 +36,7 @@
 @property (nonatomic, assign) double m_absoluteBeatStart;
 @property (nonatomic, assign) GtarString m_string;
 @property (nonatomic, assign) GtarFret m_fret;
+@property (nonatomic, assign) BOOL m_standaloneActive;
 
 - (id)initWithXmlDom:(XmlDom*)xmlDom;
 

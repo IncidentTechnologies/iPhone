@@ -92,6 +92,10 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UILabel *quitLabel;
 @property (retain, nonatomic) IBOutlet UILabel *restartLabel;
 
+@property (retain, nonatomic) IBOutlet UIButton *fretOne;
+@property (retain, nonatomic) IBOutlet UIButton *fretTwo;
+@property (retain, nonatomic) IBOutlet UIButton *fretThree;
+
 @property (nonatomic, assign) enum PlayViewControllerDifficulty difficulty;
 @property (nonatomic, assign) double tempoModifier;
 @property (nonatomic, assign) BOOL muffleWrongNotes;
@@ -113,5 +117,8 @@ enum PlayViewControllerDifficulty
 - (IBAction)feedSwitchChanged:(id)sender;
 - (IBAction)difficultyButtonClicked:(id)sender;
 - (IBAction)instrumentButtonClicked:(id)sender;
+
+- (IBAction)fretDown:(id)sender;
+- (IBAction)fretUp:(id)sender;
 
 @end

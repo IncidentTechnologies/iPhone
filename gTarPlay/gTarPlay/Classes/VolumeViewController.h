@@ -15,8 +15,12 @@
 @property (retain, nonatomic) IBOutlet UISlider *volumeSlider;
 @property (retain, nonatomic) IBOutlet UIView *volumeView;
 @property (retain, nonatomic) IBOutlet UIImageView *volumeTrackView;
+@property (retain, nonatomic) IBOutlet UIView * innerView;
 
 @property (readonly, nonatomic) BOOL displayed;
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isInverse:(BOOL)invert;
 
 - (IBAction)volumeValueChanged:(id)sender;
 
