@@ -25,7 +25,7 @@
 #define GL_STRING_HEIGHT ( GL_SCREEN_HEIGHT / 60.0 )
 #define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 )
 
-#define SONG_BEATS_PER_SCREEN 4
+#define SONG_BEATS_PER_SCREEN 4.0
 #define SONG_BEAT_OFFSET (SONG_BEATS_PER_SCREEN * GL_SCREEN_SEEK_LINE_OFFSET / GL_SCREEN_WIDTH )
 
 @implementation SongDisplayController
@@ -530,17 +530,41 @@
     //
     
 	CGSize size;
-	//size.width = GL_NOTE_HEIGHT / 3.0;
-    size.width = GL_NOTE_HEIGHT;
-	size.height = GL_SCREEN_HEIGHT;
+    if(isStandalone){
+        size.width = GL_NOTE_HEIGHT;
+        size.height = GL_SCREEN_HEIGHT;
+    }else{
+        size.width = GL_NOTE_HEIGHT / 3.0;
+        size.height = GL_SCREEN_HEIGHT;
+    }
     
     // The center will automatically be offset in the rendering
 	CGPoint center;
-	center.y = GL_SCREEN_HEIGHT / 2.0;
-	center.x = 0;
-	//center.x = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/4;
+    if(isStandalone){
+        center.y = GL_SCREEN_HEIGHT / 2.0;
+        center.x = - GL_SCREEN_WIDTH / 8.0;
+    }else{
+        center.y = GL_SCREEN_HEIGHT / 2.0;
+        center.x = 0;
+    }
     
-	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent] autorelease];
+	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparentLight] autorelease];
+    
+    // Draw a wider seek line area for standalone
+    if(isStandalone){
+        
+        size.width = GL_NOTE_HEIGHT * 3;
+        size.height = GL_SCREEN_HEIGHT;
+        
+        m_renderer.m_seekLineStandaloneModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparentLight] autorelease];
+        
+    }else{
+        
+        m_renderer.m_seekLineStandaloneModel = nil;
+        
+    }
+    
+    
     
     //
     // Create the strings
@@ -567,7 +591,7 @@
         [stringModel release];
         
     }
-    
+    /*
 #if 0
     // This takes too long to load right now. Do something lazily
     
@@ -604,6 +628,7 @@
     }
     
 #endif
+     */
     
 }
 
@@ -752,23 +777,70 @@
     return newstr;
 }
 
-- (int)getStringPluckFromTap:(CGPoint)touchPoint
+- (NSMutableDictionary *)getStringPluckFromTap:(CGPoint)touchPoint
 {
     if(!isStandalone){
-        return -1;
+        return nil;
     }
     
     // Make sure x is on the touchband
     double touchBuffer = 5;
     
+    /*
     double xmax = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineModel getCenter].x + [m_renderer.m_seekLineModel getSize].width/2 + touchBuffer;
     double xmin = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineModel getCenter].x - [m_renderer.m_seekLineModel getSize].width/2 - touchBuffer;
+    */
     
-    //NSLog(@"X min is %f, max is %f",xmin,xmax);
-    //NSLog(@"Touched x was %f",touchPoint.x);
+    double xmax = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineStandaloneModel getCenter].x + [m_renderer.m_seekLineStandaloneModel getSize].width/2 + touchBuffer;
+    double xmin = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineStandaloneModel getCenter].x - [m_renderer.m_seekLineStandaloneModel getSize].width/2 - touchBuffer;
     
     if(touchPoint.x > xmax || touchPoint.x < xmin){
-        return -1;
+        return nil;
+    }
+    
+    // TODO: get the frame from the touchpoint so we know note they tried to play
+    // Since it's in our touchzone we'll score it
+    // (If it's in our special touchzone we'll score it 100%)
+    // Do we care about currentFrame?
+    
+    // Determine which frame was played
+    NSNoteFrame * activeFrame = nil;
+    
+    for(NSNoteFrame * frame in m_songModel.m_noteFrames){
+        
+        if(frame.m_absoluteBeatStart > m_songModel.m_currentBeat + SONG_BEATS_PER_SCREEN){
+            
+            return nil;
+            
+        }else if(m_songModel.m_currentBeat <= frame.m_absoluteBeatStart){
+            
+            float beatMinusBeat = [self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat isStandalone:isStandalone];
+            
+            // what is renderer offset?
+            float noteCenter = beatMinusBeat - GL_SCREEN_WIDTH/8.0;
+            float noteMin = noteCenter - GL_NOTE_HEIGHT/2.0;
+            float noteMax = noteCenter + GL_NOTE_HEIGHT/2.0;
+           
+            //NSLog(@"Touchpoint x is %f in note range %f to %f",touchPoint.x,noteMin,noteMax);
+            
+            if(touchPoint.x >= noteMin && touchPoint.x <= noteMax){
+                
+                NSLog(@"Touchpoint x is %f in note range %f to %f",touchPoint.x,noteMin,noteMax);
+                
+                activeFrame = frame;
+                break;
+            }
+        }
+    }
+    
+    if(activeFrame == nil || [activeFrame.m_notesPending count] == 0){
+        
+        return nil;
+        
+    }else{
+        
+        NSLog(@"Found frame %@",activeFrame);
+        
     }
     
     // Determine string
@@ -784,12 +856,16 @@
     double string2Center = 2*heightPerString;
     double string3Center = 3*heightPerString;
 
+    NSMutableDictionary * frameWithString = [[NSMutableDictionary alloc] initWithObjectsAndKeys:activeFrame,@"Frame",[NSNumber numberWithInt:-1],@"String",nil];
+    
     // Top string
     if(touchPoint.y > string1Center-stringBuffer && touchPoint.y < string1Center+stringBuffer){
         
         //NSLog(@"*** hit string 1 *** ");
         
-        return 3;
+        [frameWithString setObject:[NSNumber numberWithInt:3] forKey:@"String"];
+        
+        // return 3;
     }
     
     // Middle string
@@ -797,7 +873,9 @@
         
         //NSLog(@"*** hit string 2 *** ");
         
-        return 2;
+        [frameWithString setObject:[NSNumber numberWithInt:2] forKey:@"String"];
+        
+        //return 2;
     }
     
     // Bottom string
@@ -805,10 +883,12 @@
         
         //NSLog(@"*** hit string 3 *** ");
         
-        return 1;
+        [frameWithString setObject:[NSNumber numberWithInt:1] forKey:@"String"];
+        
+        //return 1;
     }
     
-    return -1;
+    return frameWithString;
 }
 
 #pragma mark - Live Info from Play Controller

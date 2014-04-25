@@ -297,6 +297,7 @@ extern GtarController *g_gtarController;
 
 - (IBAction)instrumentButtonClicked:(id)sender
 {
+    
     if ( _instrumentViewController.loading == YES )
     {
         return;
@@ -570,7 +571,7 @@ extern GtarController *g_gtarController;
     
     static NSString * CellIdentifier = @"SongListCell";
 	SongListCell *tempCell = [_songListTable dequeueReusableCellWithIdentifier:CellIdentifier];
-	
+    
 	if (tempCell == NULL)
 	{
         NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"SongListCell" owner:nil options:nil];

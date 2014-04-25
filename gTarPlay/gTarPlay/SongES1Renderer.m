@@ -24,6 +24,7 @@
 @implementation SongES1Renderer
 
 @synthesize m_seekLineModel;
+@synthesize m_seekLineStandaloneModel;
 @synthesize m_backgroundTexture;
 @synthesize m_offset;
 @synthesize m_viewShift;
@@ -59,6 +60,7 @@
     [m_lineModels release];
         
     [m_seekLineModel release];
+    [m_seekLineStandaloneModel release];
     [m_backgroundTexture release];
     
     [super dealloc];
@@ -123,8 +125,10 @@
     m_lineModels = [[NSMutableArray alloc] init];
     
     [m_seekLineModel release];
+    [m_seekLineStandaloneModel release];
     
     m_seekLineModel = nil;
+    m_seekLineStandaloneModel = nil;
     
 }
 
@@ -240,9 +244,13 @@
     
     glTranslatef( -(m_offset - m_currentPosition), 0.0f, 0.0f);
     
-    // draw the seek line
+    // draw the seek line(s)
 	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
     
+    if(m_seekLineStandaloneModel != nil){
+        [m_seekLineStandaloneModel drawWithOffset:CGPointMake(m_offset, 0)];
+    }
+        
     // The strings are fixed, so undo any translattion
     glTranslatef( +m_viewShift, 0.0f, 0.0f);
     

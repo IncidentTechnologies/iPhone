@@ -23,6 +23,8 @@
 @property (retain, nonatomic) IBOutlet UILabel *songScore;
 @property (retain, nonatomic) IBOutlet UIImageView *songSkill;
 
+@property (retain, nonatomic) IBOutlet UIView * selectedBgView;
+
 @property (retain, nonatomic) UserSong *userSong;
 @property (assign, nonatomic) NSInteger playScore;
 

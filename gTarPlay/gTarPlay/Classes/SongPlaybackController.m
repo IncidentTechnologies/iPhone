@@ -85,7 +85,8 @@
     
 }
 
-- (void)startWithXmpBlob:(NSString*)xmpBlob {
+- (void)startWithXmpBlob:(NSString*)xmpBlob
+{
     if ( xmpBlob == nil )
         return;
     
@@ -100,13 +101,16 @@
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
-    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES];
+    
+    
+    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isStandalone:!m_gtarController.connected];
     
     [self startMainEventLoop];
     
 }
 
-- (void)startWithUserSong:(UserSong*)userSong {
+- (void)startWithUserSong:(UserSong*)userSong
+{
     // TODO This function doesn't work right now because the m_xmlDom doesn't have the XMP in it
     if ( userSong == nil )
         return;
@@ -120,7 +124,7 @@
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
-    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES];
+    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isStandalone:!m_gtarController.connected];
     
     [self startMainEventLoop];
 }

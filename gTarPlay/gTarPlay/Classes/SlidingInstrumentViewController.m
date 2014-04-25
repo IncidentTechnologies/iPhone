@@ -112,8 +112,6 @@
 {
     NSLog(@"Sliding instrument selector get instrument list");
     
-    
-    
     return [delegate getInstrumentList];
 }
 

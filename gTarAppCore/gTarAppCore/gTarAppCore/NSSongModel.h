@@ -66,7 +66,7 @@
 - (id)initWithSong:(NSSong*)song;
 
 - (void)startWithDelegate:(id)delegate;
-- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd;
+- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isStandalone:(BOOL)standalone;
 - (void)skipToNextFrame;
 //- (void)incrementBeat:(double)delta;
 //- (void)incrementTime:(double)delta;

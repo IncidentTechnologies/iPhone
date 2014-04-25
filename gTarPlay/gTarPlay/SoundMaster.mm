@@ -293,6 +293,13 @@
         // Add an entry
         m_activeBankNode = newBank;
         
+        
+        // broadcast instrument changed
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:currentInstrumentIndex ], @"instrumentIndex", nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"InstrumentChanged" object:self userInfo:userInfo];
+        
+        NSLog(@"Changed instrument to %@",[instrument objectForKey:@"Name"]);
+        
     }else{
         
         NSLog(@"Cannot load samples for instrument %i",index);

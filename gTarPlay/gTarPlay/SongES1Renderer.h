@@ -30,6 +30,7 @@
 	NSMutableArray * m_lineModels;
 
 	LineModel * m_seekLineModel;
+    LineModel * m_seekLineStandaloneModel;
     
     Model * m_backgroundTexture;
     
@@ -37,6 +38,7 @@
 }
 
 @property (nonatomic, retain) LineModel * m_seekLineModel;
+@property (nonatomic, retain) LineModel * m_seekLineStandaloneModel;
 @property (nonatomic, retain) Model * m_backgroundTexture;
 @property (nonatomic, assign) GLfloat m_offset;
 @property (nonatomic, assign) GLfloat m_viewShift;

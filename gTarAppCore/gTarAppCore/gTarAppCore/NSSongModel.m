@@ -73,10 +73,10 @@
 
 - (void)startWithDelegate:(id)delegate
 {
-    [self startWithDelegate:delegate andBeatOffset:0 fastForward:NO];
+    [self startWithDelegate:delegate andBeatOffset:0 fastForward:NO isStandalone:NO];
 }
 
-- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd
+- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isStandalone:(BOOL)standalone
 {
     // clear remnants from last song
     [m_noteFrames release];
@@ -121,7 +121,16 @@
         
     }
     
-    m_beatsPerSecond = m_song.m_tempo / 60.0;
+    // Control the tempo throughout Standalone
+    if(standalone){
+    
+        m_beatsPerSecond = 1;
+    
+    }else{
+        
+        m_beatsPerSecond = m_song.m_tempo / 60.0;
+        
+    }
     
     m_lengthSeconds = m_lengthBeats / m_beatsPerSecond;
     
@@ -163,10 +172,15 @@
 
 - (double)getFirstAudibleBeat
 {
-    NSNoteFrame * nextFrame = [m_noteFrames objectAtIndex:0];
-    
-    if(nextFrame != nil){
-        return nextFrame.m_absoluteBeatStart;
+    if([m_noteFrames count] > 0){
+        
+        NSNoteFrame * nextFrame = [m_noteFrames objectAtIndex:0];
+        
+        if(nextFrame != nil){
+            return nextFrame.m_absoluteBeatStart;
+        }else{
+            return 0;
+        }
     }else{
         return 0;
     }
@@ -215,7 +229,7 @@
 {
     
     m_currentBeat += (delta * m_beatsPerSecond);
-    
+        
     m_percentageComplete = m_currentBeat / m_lengthBeats;
     
     if ( m_percentageComplete < 0.0 )

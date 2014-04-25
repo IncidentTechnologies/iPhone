@@ -12,6 +12,9 @@ static unsigned char g_whiteColor[4] =
 static unsigned char g_whiteColorTransparent[4] =
 { 255, 255, 255, 100 };
 
+static unsigned char g_whiteColorTransparentLight[4] =
+{ 255, 255, 255, 50 };
+
 static unsigned char g_lightGrayColor[4] =
 { 192, 192, 192, 255 };
 

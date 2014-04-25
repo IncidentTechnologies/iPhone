@@ -104,7 +104,7 @@
 - (void)missNote:(NSNote*)note;
 
 // Standalone
--(int)getMappedStringFromString:(int)str;
-- (int)getStringPluckFromTap:(CGPoint)touchPoint;
+- (int)getMappedStringFromString:(int)str;
+- (NSMutableDictionary*)getStringPluckFromTap:(CGPoint)touchPoint;
 
 @end

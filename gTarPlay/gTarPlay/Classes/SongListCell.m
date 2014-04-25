@@ -40,6 +40,7 @@
     [_scoreView release];
     [_songSkill release];
     [_activityView release];
+    [_selectedBgView release];
     [super dealloc];
 }
 
@@ -88,6 +89,8 @@
     }
 
     [_songScore setText:[NSString stringWithFormat:@"%d", _playScore]];
+    
+    self.selectedBackgroundView = _selectedBgView;
     
 }
 

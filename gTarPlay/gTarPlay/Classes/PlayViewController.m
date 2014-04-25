@@ -271,8 +271,7 @@ extern UserController * g_userController;
     _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom];
     
     // We let the previous screen set the sample pack of this song.
-//    [g_audioController setSamplePackWithName:_song.m_instrument];
-    [g_soundMaster didSelectInstrument:_song.m_instrument withSelector:@selector(instrumentDidLoad:) andOwner:self];
+    //[g_soundMaster didSelectInstrument:_song.m_instrument withSelector:@selector(instrumentDidLoad:) andOwner:self];
     [g_soundMaster start];
     
     //
@@ -513,8 +512,7 @@ extern UserController * g_userController;
             _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
         }
         
-        double timeInterval = (isStandalone) ? SECONDS_PER_EVENT_LOOP_STANDALONE : SECONDS_PER_EVENT_LOOP;
-        [self startMainEventLoop:timeInterval];
+        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
@@ -663,8 +661,7 @@ extern UserController * g_userController;
     
     [UIView commitAnimations];
     
-    double timeInterval = (isStandalone) ? SECONDS_PER_EVENT_LOOP_STANDALONE : SECONDS_PER_EVENT_LOOP;
-    [self startMainEventLoop:timeInterval];
+    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
 }
 
 - (void)revealPlayView
@@ -1042,7 +1039,7 @@ extern UserController * g_userController;
                 pluck.position.fret = note.m_fret;
                 pluck.position.string = note.m_string;
                 
-                [self gtarNoteOn:pluck];
+                [self gtarNoteOn:pluck forFrame:nil];
             }
             else if ( [_songModel.m_nextFrame.m_notesPending count] > 0 )
             {
@@ -1053,7 +1050,7 @@ extern UserController * g_userController;
                 pluck.position.fret = note.m_fret;
                 pluck.position.string = note.m_string;
                 
-                [self gtarNoteOn:pluck];
+                [self gtarNoteOn:pluck forFrame:nil];
             }
             
             _refreshDisplay = YES;
@@ -1066,15 +1063,13 @@ extern UserController * g_userController;
     // Advance song model and recorder
     //
     
-    double timeInterval = (isStandalone) ? SECONDS_PER_EVENT_LOOP_STANDALONE : SECONDS_PER_EVENT_LOOP;
-    
     if ( _animateSongScrolling == YES )
     {
-        [_songModel incrementTimeSerialAccess:timeInterval];
+        [_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
     }
     
     // song recorder always records in real time
-    [_songRecorder advanceRecordingByTimeDelta:timeInterval];
+    [_songRecorder advanceRecordingByTimeDelta:SECONDS_PER_EVENT_LOOP];
     
     // Only refresh when we need to
     if ( _animateSongScrolling == YES || _refreshDisplay == YES )
@@ -1100,9 +1095,8 @@ extern UserController * g_userController;
     
 }
 
-- (void)gtarNoteOn:(GtarPluck)pluck
+- (void)gtarNoteOn:(GtarPluck)pluck forFrame:(NSNoteFrame*)frameToPlay
 {
-    
     // If we are not running (i.e. paused) then we ignore input from the midi
     if ( m_isRunning == NO )
     {
@@ -1121,9 +1115,13 @@ extern UserController * g_userController;
     GtarString str = pluck.position.string;
     GtarPluckVelocity velocity = pluck.velocity;
     
-    if ( _currentFrame == nil )
+    if ( _currentFrame == nil && frameToPlay == nil)
     {
         [_songModel skipToNextFrame];
+    }
+    
+    if(frameToPlay == nil){
+        frameToPlay = _currentFrame;
     }
     
     // Play a pluck noise immediately
@@ -1131,11 +1129,11 @@ extern UserController * g_userController;
     
     if ( _difficulty == PlayViewControllerDifficultyEasy )
     {
-        hit = [_currentFrame testString:str];
+        hit = [frameToPlay testString:str];
     }
     else
     {
-        hit = [_currentFrame testString:str andFret:fret];
+        hit = [frameToPlay testString:str andFret:fret];
     }
     
     // Play the note.
@@ -1342,7 +1340,7 @@ extern UserController * g_userController;
     _songModel.m_frameWidthBeats = SONG_MODEL_NOTE_FRAME_WIDTH;
     
     // Give a little runway to the player
-    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES];
+    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isStandalone:isStandalone];
     
     // Light up the first frame
     if(g_gtarController.connected == YES){
@@ -1395,8 +1393,7 @@ extern UserController * g_userController;
     
     _deferredNotesQueue = [[NSMutableArray alloc] init];
     
-    double timeInterval = (isStandalone) ? SECONDS_PER_EVENT_LOOP_STANDALONE : SECONDS_PER_EVENT_LOOP;
-    [self startMainEventLoop:timeInterval];
+    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
     
 }
 
@@ -1999,9 +1996,9 @@ extern UserController * g_userController;
     
     // Determine whether to play the tapped string
     if(isStandalone){
-        if([self shouldPluckStringFromTap]){
-            [self pluckStringFromTouchPoint:touchPoint];
-        }
+        //if([self shouldPluckStringFromTap]){
+            [self tapNoteFromTouchPoint:touchPoint];
+        //}
     }
     
     // Debug
@@ -2030,7 +2027,7 @@ extern UserController * g_userController;
     if(isStandalone && abs(initPoint.y - currentPoint.y) > 10){
         
         CGPoint touchPoint = [touch locationInView:self.glView];
-        [self pluckStringFromTouchPoint:touchPoint];
+        [self strumNoteFromTouchPoint:touchPoint];
         
     }
     
@@ -2066,164 +2063,208 @@ extern UserController * g_userController;
     return testNote;
 }
 
-- (void)pluckStringFromTouchPoint:(CGPoint)touchPoint
+- (void)tapNoteFromTouchPoint:(CGPoint)touchPoint
 {
-    int tappedString = [_displayController getStringPluckFromTap:touchPoint];
+    NSMutableDictionary * frameWithString = [_displayController getStringPluckFromTap:touchPoint];
     
-    if(tappedString >= 0){
-        //NSLog(@"Notes pending is %@",_currentFrame.m_notesPending);
+    if(frameWithString == nil){
+        return;
+    }
+    
+    int tappedString = [[frameWithString objectForKey:@"String"] intValue];
+    NSNoteFrame * tappedFrame = [frameWithString objectForKey:@"Frame"];
+    
+    if(tappedString >= 0 && [tappedFrame.m_notesPending count] == 1){
+        [self playNoteOnString:tappedString atFrame:tappedFrame];
+    }
+}
+
+- (void)strumNoteFromTouchPoint:(CGPoint)touchPoint
+{
+    NSMutableDictionary * frameWithString = [_displayController getStringPluckFromTap:touchPoint];
+    
+    if(frameWithString == nil){
+        return;
+    }
+    
+    int tappedString = [[frameWithString objectForKey:@"String"] intValue];
+    NSNoteFrame * tappedFrame = [frameWithString objectForKey:@"Frame"];
+    
+    if(tappedString >= 0 && [tappedFrame.m_notesPending count] > 1){
+        [self playNoteOnString:tappedString atFrame:tappedFrame];
+    }
+}
+
+- (void)playNoteOnString:(int)tappedString atFrame:(NSNoteFrame*)tappedFrame
+{
+
+    NSNote * firstNote = nil;
+    
+    if(_difficulty == PlayViewControllerDifficultyHard){
         
-        NSNote * firstNote = nil;
+        BOOL playFretOne = FALSE;
+        BOOL playFretTwo = FALSE;
+        BOOL playFretThree = FALSE;
+        int fretsOn = 0;
         
-        if(_difficulty == PlayViewControllerDifficultyHard){
+        // Hard: make sure the exact right fretting is held
+        for(NSNote * n in tappedFrame.m_notes){
             
-            BOOL playFretOne = FALSE;
-            BOOL playFretTwo = FALSE;
-            BOOL playFretThree = FALSE;
-            int fretsOn = 0;
-            
-            // Hard: make sure the exact right fretting is held
-            for(NSNote * n in _currentFrame.m_notes){
-                
-                // Ignore hidden notes
-                if(!n.m_standaloneActive){
-                    continue;
-                }
-                
-                int fret = ceil(n.m_fret/4.0);
-                
-                switch(fret){
-                    case 1:
-                        if(!playFretOne) fretsOn++;
-                        playFretOne = TRUE;
-                        break;
-                    case 2:
-                        if(!playFretTwo) fretsOn++;
-                        playFretTwo = TRUE;
-                        break;
-                    case 3:
-                        if(!playFretThree) fretsOn++;
-                        playFretThree = TRUE;
-                        break;
-                }
+            // Ignore hidden notes
+            if(!n.m_standaloneActive){
+                continue;
             }
             
-            // Look at expected fretting and return if held fret combo violates
-            switch(fretsOn){
+            int fret = ceil(n.m_fret/4.0);
+            
+            switch(fret){
+                case 1:
+                    if(!playFretOne) fretsOn++;
+                    playFretOne = TRUE;
+                    break;
+                case 2:
+                    if(!playFretTwo) fretsOn++;
+                    playFretTwo = TRUE;
+                    break;
+                case 3:
+                    if(!playFretThree) fretsOn++;
+                    playFretThree = TRUE;
+                    break;
+            }
+        }
+        
+        // Look at expected fretting and return if held fret combo violates
+        switch(fretsOn){
+            case 0:
+                if(fretOneOn || fretTwoOn || fretThreeOn){
+                    return;
+                }
+                break;
+            case 1:
+                if(playFretOne && (!fretOneOn || fretTwoOn || fretThreeOn)){
+                    return;
+                }else if(playFretTwo && (!fretTwoOn || fretOneOn || fretThreeOn)){
+                    return;
+                }else if(playFretThree && (!fretThreeOn || fretOneOn || fretTwoOn)){
+                    return;
+                }
+                break;
+            case 2:
+                if(playFretOne && playFretTwo && (!playFretOne || !playFretTwo || playFretThree)){
+                    return;
+                }else if(playFretOne && playFretThree && (!playFretOne || !playFretThree || playFretTwo)){
+                    return;
+                }else if(playFretTwo && playFretThree && (!playFretTwo || !playFretThree || playFretOne)){
+                    return;
+                }
+                break;
+            case 3:
+                if(!fretOneOn || !fretTwoOn || !fretThreeOn){
+                    return;
+                }
+                break;
+                
+        }
+        
+    }else if(_difficulty == PlayViewControllerDifficultyMedium){
+       
+        // Medium: make sure the fret for the first note is held
+        // (UI ensures only 1 fret down at a time)
+        for(NSNote * n in tappedFrame.m_notes){
+            
+            if(!firstNote){
+                firstNote = n;
+            }
+            
+            // Ignore hidden notes
+            if(!n.m_standaloneActive){
+                continue;
+            }
+            
+            int fret = ceil(firstNote.m_fret/4.0);
+            
+            switch (fret) {
                 case 0:
                     if(fretOneOn || fretTwoOn || fretThreeOn){
                         return;
                     }
                     break;
                 case 1:
-                    if(playFretOne && (!fretOneOn || fretTwoOn || fretThreeOn)){
-                        return;
-                    }else if(playFretTwo && (!fretTwoOn || fretOneOn || fretThreeOn)){
-                        return;
-                    }else if(playFretThree && (!fretThreeOn || fretOneOn || fretTwoOn)){
+                    if(!fretOneOn){
                         return;
                     }
                     break;
                 case 2:
-                    if(playFretOne && playFretTwo && (!playFretOne || !playFretTwo || playFretThree)){
-                        return;
-                    }else if(playFretOne && playFretThree && (!playFretOne || !playFretThree || playFretTwo)){
-                        return;
-                    }else if(playFretTwo && playFretThree && (!playFretTwo || !playFretThree || playFretOne)){
+                    if(!fretTwoOn){
                         return;
                     }
                     break;
                 case 3:
-                    if(!fretOneOn || !fretTwoOn || !fretThreeOn){
+                    if(!fretThreeOn){
                         return;
                     }
                     break;
-                    
-            }
-            
-        }else if(_difficulty == PlayViewControllerDifficultyMedium){
-           
-            // Medium: make sure the fret for the first note is held
-            // (UI ensures only 1 fret down at a time)
-            for(NSNote * n in _currentFrame.m_notes){
-                
-                if(!firstNote){
-                    firstNote = n;
-                }
-                
-                // Ignore hidden notes
-                if(!n.m_standaloneActive){
-                    continue;
-                }
-                
-                int fret = ceil(firstNote.m_fret/4.0);
-                
-                switch (fret) {
-                    case 0:
-                        if(fretOneOn || fretTwoOn || fretThreeOn){
-                            return;
-                        }
-                        break;
-                    case 1:
-                        if(!fretOneOn){
-                            return;
-                        }
-                        break;
-                    case 2:
-                        if(!fretTwoOn){
-                            return;
-                        }
-                        break;
-                    case 3:
-                        if(!fretThreeOn){
-                            return;
-                        }
-                        break;
-                }
-            }
-        }
-        
-        
-        // Go through and play the notes if the string mapping is correct
-        for(NSNote * n in _currentFrame.m_notesPending){
-            
-            if([_displayController getMappedStringFromString:n.m_string] == tappedString){
-                
-                // Got one string right, autocomplete on easy or medium
-                if(_difficulty == PlayViewControllerDifficultyEasy || _difficulty == PlayViewControllerDifficultyMedium){
-                    
-                    for(NSNote * nn in _currentFrame.m_notesPending){
-                        
-                        GtarPluck pluck;
-                        pluck.velocity = GtarMaxPluckVelocity;
-                        pluck.position.fret = nn.m_fret;
-                        pluck.position.string = nn.m_string;
-                        
-                        NSLog(@"Pluck string %i",nn.m_string);
-                        
-                        [_displayController hitNote:nn];
-                        [self gtarNoteOn:pluck];
-                        
-                    }
-                    
-                }else{
-                
-                    GtarPluck pluck;
-                    pluck.velocity = GtarMaxPluckVelocity;
-                    pluck.position.fret = n.m_fret;
-                    pluck.position.string = n.m_string;
-                    
-                    NSLog(@"Pluck string %i",n.m_string);
-                    
-                    [_displayController hitNote:n];
-                    [self gtarNoteOn:pluck];
-                    
-                }
-                
-                break;
             }
         }
     }
+    
+    
+    // Go through and play the notes if the string mapping is correct
+    NSMutableArray * notesToRemove = [[NSMutableArray alloc] init];
+    
+    for(NSNote * n in tappedFrame.m_notesPending){
+        
+        if([_displayController getMappedStringFromString:n.m_string] == tappedString){
+            
+            // Got one string right, autocomplete on easy or medium
+            if(_difficulty == PlayViewControllerDifficultyEasy || _difficulty == PlayViewControllerDifficultyMedium){
+                
+                for(NSNote * nn in tappedFrame.m_notesPending){
+                    
+                    GtarPluck pluck;
+                    pluck.velocity = GtarMaxPluckVelocity;
+                    pluck.position.fret = nn.m_fret;
+                    pluck.position.string = nn.m_string;
+                    
+                    NSLog(@"Pluck string %i",nn.m_string);
+                    
+                    [_displayController hitNote:nn];
+                    
+                    [self gtarNoteOn:pluck forFrame:tappedFrame];
+                    
+                    [notesToRemove addObject:nn];
+                    
+                    //[tappedFrame removeString:nn.m_string andFret:nn.m_fret];
+                    
+                }
+                
+            }else{
+            
+                GtarPluck pluck;
+                pluck.velocity = GtarMaxPluckVelocity;
+                pluck.position.fret = n.m_fret;
+                pluck.position.string = n.m_string;
+                
+                NSLog(@"Pluck string %i",n.m_string);
+                
+                [_displayController hitNote:n];
+                
+                [self gtarNoteOn:pluck forFrame:tappedFrame];
+                
+                [notesToRemove addObject:n];
+                
+                //[tappedFrame removeString:n.m_string andFret:n.m_fret];
+                
+            }
+            
+            break;
+        }
+    }
+    
+    for(NSNote * nnn in notesToRemove){
+        [tappedFrame removeString:nnn.m_string andFret:nnn.m_fret];
+    }
+
 }
 
 - (void)fretDown:(id)sender

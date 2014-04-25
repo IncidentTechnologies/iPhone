@@ -65,6 +65,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView reloadData];
+    self.tableView.allowsMultipleSelection = NO;
     
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     
@@ -78,6 +79,7 @@
     [super viewWillAppear:animated];
     
     NSInteger instrumentIndex = [delegate getSelectedInstrumentIndex];
+    
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:instrumentIndex inSection:0];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionNone];
 }
@@ -107,6 +109,7 @@
     
     [cell.textLabel setFont:[UIFont fontWithName:@"Avenir Next" size:17.0]];
     cell.textLabel.text = NSLocalizedString([self.instruments objectAtIndex:indexPath.row], NULL);  // will localize the string
+    
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
@@ -172,11 +175,12 @@
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         
         [_loadingTimer invalidate];
-        UITableViewCell* cell = [_tableView cellForRowAtIndexPath:[_tableView indexPathForSelectedRow]];
+        UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:[_tableView indexPathForSelectedRow]];
+        
         cell.textLabel.highlightedTextColor = [UIColor whiteColor];
         cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
     }];
-    
+        
 }
 
 - (void) animateFlicker:(NSTimer*)theTimer
@@ -196,15 +200,27 @@
 
 - (void) didChangeInstrument:(NSNotification *)notification
 {
+    
     NSInteger instrumentIndex = [[[notification userInfo] objectForKey:@"instrumentIndex"] intValue];
+    
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:instrumentIndex inSection:0];
     
-    [self.tableView selectRowAtIndexPath:indexPath animated:NO  scrollPosition:UITableViewScrollPositionNone];
+    if([self.tableView numberOfRowsInSection:0] > indexPath.row){
+        
+        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+        
+        [self stopFlicker];
+        
+    }else{
+        
+        NSLog(@" *** attempted to select instrument not available in table");
+        
+    }
     
-    [self stopFlicker];
     
     if ([delegate respondsToSelector:@selector(didLoadInstrument)])
         [delegate didLoadInstrument];
+    
 }
 
 @end
