@@ -1,0 +1,140 @@
+/* 
+  Localizable.strings
+  gTarPlay
+
+  Created by Idan Beck on 4/1/14.
+
+*/
+
+/*#*/ // = translate short as possible
+
+// Title Screen
+"SIGN IN" = "ENTRAR";
+"SIGN UP" = "REGISTRAR";
+"VIDEO" = "VIDEO";
+"INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
+"PLAY" = "TOCAR";
+/*#*/ "FREE PLAY" = "TOCAR LIVRE";
+"STORE" = "LOJA";
+"Sign In with Facebook" = "Entrar com Facebook";
+"Username" = "Usuário";
+"Password" = "Senha";
+"Email" = "Email";
+"Please Connect Your gTar" = "Conecte o gTar";
+"Profile" = "Perfil";
+"Please connect your gTar to sign up for an account." = "Por favor, conecte o gTar para se inscrever para uma conta.";
+"Username must begin with a letter" = "Usuário deve começar com uma letra";
+"Password must be at least 8 letters" = "Senha deve ter pelo menos 8 letras";
+"Invalid Email" = "Email inválido";
+"Invalid Username" = "Usuário inválido";
+"Invalid Password" = "Senha inválida";
+"Facebook failed to login" = "Facebook falha ao efetuar login";
+
+// ActivityFeedCell
+"Someone" = "Alguém";
+"Jamed out" = "Jamed out";
+"Played %@" = "Tocado %@";
+
+// Song Selection Controller
+"Easy" = "Fácil";
+"Medium" = "Médio";
+"Hard" = "Difícil";
+"PRESS TO PLAY" = "PRESSIONE PARA TOCAR";
+/*#*/ "SKILL" = "PERÍCIA";
+"SCORE" = "PARTITURA";
+"ARTIST" = "ARTISTA";
+"TITLE" = "TÍTULO";
+"Back" = "Voltar";
+"Song List" = "Lista de Canção";
+
+// Play View
+"SAVE & FINISH" = "SALVAR E TERMINAR";
+"SCORE" = "PARTITURA";
+"OUTPUT" = "PRODUÇÃO";
+/*#*/ "AUX" = "AUX";
+/*#*/ "SPEAKER" = "FALANTE";
+"POST TO FEED" = "PUBLICAR";
+"OFF" = "DESLIGAR";
+"ON" = "ACENDER";
+"Easy" = "Fácil";
+"Quit" = "Desistir";
+"Restart" = "Reiniciar";
+
+// Social View
+/*#*/ "Logout" = "Sair";
+"FOLLOW" = "SIGA";
+"FOLLOWING" = "SIGUIENTE";
+"SESSIONS" = "SESSÕES";
+"FOLLOWERS" = "SEGUIDORES";
+
+// Freeplay
+/*#*/ "ALL" = "TUDA";
+"COLOR" = "COR";
+"SHAPE" = "FORMA";
+"LOOP" = "LOOP";
+"CLEAR" = "APAGAR";
+"TONE" = "TON";
+"SLIDING" = "DESLIZAMENTO";
+"Chorus" = "Coro";
+"Echo" = "Eco";
+"Reverb" = "Reverberar";
+"Distortion" = "Distorção";
+"Single" = "Único";
+"2 X 2" = "2 X 2";
+"Continuous" = "Contínuo";
+
+// Instruments
+"Electric" = "Elétrica";
+"Acoustic Guitar" = "Violão";
+"Rock Guitar" = "Rock";
+"Upright Bass" = "Contrabaixo";
+"Piano" = "Piano";
+"Rhodes" = "Rhodes";
+"Muted Clav" = "Mudo Clav";
+"Bowed Strings" = "Cordas";
+"Marimba" = "Marimba";
+"Carl's Synth" = "Synth de Carl";
+"Droplet" = "Gotinha";
+"Square" = "Square";
+
+// Time formatter
+"The Future" = "o futuro";
+"%u second ago" = "%u segundo atrás";
+"%u seconds ago" = "%u segundos atrás";
+"%u minute ago" = "%u minuto atrás";
+"%u minutes ago" = "%u minutos atrás";
+"%u hour ago" = "%u hora atrás";
+"%u hours ago" = "%u horas atrás";
+"%u day ago" = "%u dia atrás";
+"%u days ago" = "%u dias atrás";
+"%u week ago" = "%u semana atrás";
+"%u weeks ago" = "%u semanas atrás";
+"%u month ago" = "%u mês atrás";
+"%u months ago" = "%u meses atrás";
+
+// Store
+"TITLE & ARTIST" = "TÍTULO E ARTISTA";
+/*#*/ "99¢" = ".99€";
+/*#*/ "FREE" = "GRÁTIS";
+/*#*/ "BUY" = "Compra";
+"Shop" = "LOJA";
+"OK" = "OK";
+"Song Purchase Failed" = "Canção Compra Falha";
+"No products available, no payments have been processed" = "Não há produtos disponíveis, pagamento não foi processado";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "Canção compra falhou, sua conta foi creditada e a compra de música será tentada até sucesso";
+"Song Purchase Succeeded" = "Música compra conseguiu!";
+"Song Purchase Succeeded!" = "Música compra conseguiu!!";
+
+// Pull to update
+"Updating..." = "Atualização...";
+"Last update: Never" = "Última atualização: Nunca";
+"Pull to update" = "Puxe para atualizar";
+"Last update: %@" = "Última atualização: %@";
+"Release to update" = "Solte para atualizar";
+
+// Selector
+/*#*/ "FRIENDS" = "AMIGOS";
+/*#*/ "GLOBAL" = "GLOBAL";
+
+"Error" = "Erro";
+"Search..." = "Pesquisa...";

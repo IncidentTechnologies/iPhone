@@ -211,15 +211,16 @@
         
         [self stopFlicker];
         
+        
+        if (delegate && [delegate respondsToSelector:@selector(didLoadInstrument)])
+            [delegate didLoadInstrument];
+        
     }else{
         
         NSLog(@" *** attempted to select instrument not available in table");
         
     }
     
-    
-    if ([delegate respondsToSelector:@selector(didLoadInstrument)])
-        [delegate didLoadInstrument];
     
 }
 

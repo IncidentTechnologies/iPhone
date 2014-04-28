@@ -114,7 +114,7 @@
 
 // Store
 "TITLE & ARTIST" = "TITRE & ARTISTE";
-/*#*/ "99¢" = ".99€";
+/*#*/ "99¢" = "99¢";
 /*#*/ "FREE" = "GRATIS";
 /*#*/ "BUY" = "PRIX";
 "Shop" = "MAGASIN";

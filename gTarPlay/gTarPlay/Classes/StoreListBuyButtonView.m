@@ -59,10 +59,10 @@ static inline double radians (double degrees) {
             
             CGRect textRect = CGRectInset(rect, 4, 4);
             //textRect.origin.x += 6;
-            textRect.origin.x = 50/2-[text length]*10/2;
-            textRect.origin.y += 9;
+            textRect.origin.x = 50/2-[text length]*9/2;
+            textRect.origin.y += 10;
             
-            [text drawInRect:textRect withFont:[UIFont systemFontOfSize:19.0f]];
+            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:18.0]];
             
         } break;
             
@@ -70,14 +70,15 @@ static inline double radians (double degrees) {
             // draw circle
             CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(4.0f/255.0f) green:(161.0f/255.0f) blue:(222.0f/255.0f) alpha:1.0f].CGColor);
             CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
+            NSString *text = NSLocalizedString(@"FREE", NULL);
             
             CGRect textRect = CGRectInset(rect, 4, 4);
-            textRect.origin.x += 4.0f;
+            textRect.origin.x = 40/2-[text length]*5/2;
             textRect.origin.y += 13.0f;
+            textRect.size.width = 60;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            NSString *text = NSLocalizedString(@"FREE", NULL);
-            [text drawInRect:textRect withFont:[UIFont systemFontOfSize:13.0f]];
+            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:12.0]];
             
         } break;
             

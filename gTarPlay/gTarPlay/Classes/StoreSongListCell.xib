@@ -15,30 +15,43 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-ck-mWW" userLabel="SkillView">
-                        <rect key="frame" x="360" y="0.0" width="60" height="60"/>
+                        <rect key="frame" x="348" y="0.0" width="66" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Skill_GREY.png" translatesAutoresizingMaskIntoConstraints="NO" id="fqG-ZZ-6cP">
-                                <rect key="frame" x="10" y="10" width="40" height="40"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="Skill_GREY.png" translatesAutoresizingMaskIntoConstraints="NO" id="fqG-ZZ-6cP">
+                                <rect key="frame" x="10" y="10" width="46" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Oaq-ZV-KL1"/>
+                                    <constraint firstAttribute="width" constant="46" id="hMl-N8-DKB"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="bhk-XV-lSs"/>
+                            <constraint firstAttribute="width" constant="66" id="bhk-XV-lSs"/>
+                            <constraint firstAttribute="centerX" secondItem="fqG-ZZ-6cP" secondAttribute="centerX" id="jkd-nZ-Tai"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" horizontalHuggingPriority="921" verticalHuggingPriority="921" translatesAutoresizingMaskIntoConstraints="NO" id="mXT-6h-0Yh" userLabel="PurchaseSongView">
-                        <rect key="frame" x="420" y="0.0" width="60" height="60"/>
+                        <rect key="frame" x="414" y="0.0" width="66" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7xG-iJ-9B2" customClass="StoreListBuyButtonView">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7xG-iJ-9B2" customClass="StoreListBuyButtonView">
                                 <rect key="frame" x="5" y="5" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="EtI-w5-4Af"/>
+                                    <constraint firstAttribute="height" constant="50" id="sjF-W0-LPf"/>
+                                </constraints>
                             </view>
-                            <button clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amw-BD-ZfO" userLabel="BuyButton">
-                                <rect key="frame" x="5" y="5" width="50" height="50"/>
+                            <button clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amw-BD-ZfO" userLabel="BuyButton">
+                                <rect key="frame" x="5" y="5" width="60" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="LVJ-9A-h62"/>
+                                    <constraint firstAttribute="height" constant="50" id="f5D-nA-Off"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                 <inset key="contentEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal">
@@ -54,7 +67,9 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="P0Z-pN-kDT"/>
+                            <constraint firstAttribute="centerX" secondItem="7xG-iJ-9B2" secondAttribute="centerX" id="IHT-Iv-zf0"/>
+                            <constraint firstAttribute="centerX" secondItem="amw-BD-ZfO" secondAttribute="centerX" id="JSG-dn-e6Z"/>
+                            <constraint firstAttribute="width" constant="66" id="P0Z-pN-kDT"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVS-Ue-qcP" userLabel="TitleArtistView">
@@ -88,7 +103,7 @@
                     <constraint firstAttribute="bottom" secondItem="TKh-ck-mWW" secondAttribute="bottom" constant="-1" id="Opc-7S-VRu"/>
                     <constraint firstItem="TKh-ck-mWW" firstAttribute="top" secondItem="g7m-k6-6Zx" secondAttribute="top" id="TMN-e1-hNe"/>
                     <constraint firstAttribute="bottom" secondItem="mXT-6h-0Yh" secondAttribute="bottom" constant="-1" id="TN2-Ci-Tbt"/>
-                    <constraint firstAttribute="trailing" secondItem="TKh-ck-mWW" secondAttribute="trailing" constant="60" id="sdz-9p-3Zb"/>
+                    <constraint firstAttribute="trailing" secondItem="TKh-ck-mWW" secondAttribute="trailing" constant="66" id="sdz-9p-3Zb"/>
                     <constraint firstAttribute="bottom" secondItem="fVS-Ue-qcP" secondAttribute="bottom" constant="-1" id="vNu-wa-zzJ"/>
                     <constraint firstItem="fVS-Ue-qcP" firstAttribute="top" secondItem="g7m-k6-6Zx" secondAttribute="top" id="x5n-dF-PbK"/>
                 </constraints>

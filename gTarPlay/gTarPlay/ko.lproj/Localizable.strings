@@ -114,10 +114,10 @@
 
 // Store
 "TITLE & ARTIST" = "제목과아티스트";
-/*#*/ "99¢" = "99¢";
+/*#*/ "99¢" = "₩1000";
 /*#*/ "FREE" = "무료";
 /*#*/ "BUY" = "사다";
-"Shop" = "가게";
+"Shop" = "스토어";
 "OK" = "OK";
 "Song Purchase Failed" = "구입 실패";
 "No products available, no payments have been processed" = "제품에 사용할 수없는, 처리 더 지불하지.";

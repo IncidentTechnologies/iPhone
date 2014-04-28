@@ -124,7 +124,7 @@
     // Control the tempo throughout Standalone
     if(standalone){
     
-        m_beatsPerSecond = 1;
+        m_beatsPerSecond = 0.7;
     
     }else{
         

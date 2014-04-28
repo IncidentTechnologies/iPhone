@@ -237,6 +237,7 @@ extern Facebook * g_facebook;
     _signInLoginLabel.text = NSLocalizedString(@"Sign In with Facebook", NULL);
     _signUpLoginLabel.text = NSLocalizedString(@"Sign In with Facebook", NULL);
     
+    
     [_menuPlayButton setTitle:NSLocalizedString(@"PLAY", NULL) forState:UIControlStateNormal];
     [_menuFreePlayButton setTitle:NSLocalizedString(@"FREE PLAY", NULL) forState:UIControlStateNormal];
     [_menuStoreButton setTitle:NSLocalizedString(@"STORE", NULL) forState:UIControlStateNormal];

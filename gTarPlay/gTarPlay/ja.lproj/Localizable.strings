@@ -1,0 +1,140 @@
+/* 
+  Localizable.strings
+  gTarPlay
+
+  Created by Idan Beck on 4/1/14.
+
+*/
+
+/*#*/ // = translate short as possible
+
+// Title Screen
+"SIGN IN" = "ログイン";
+"SIGN UP" = "登録";
+"VIDEO" = "ビデオ";
+"INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
+"PLAY" = "再生";
+/*#*/ "FREE PLAY" = "自由な再生";
+"STORE" = "お店";
+"Sign In with Facebook" = "Facebookでログイン";
+"Username" = "ユーザ名";
+"Password" = "パスワード";
+"Email" = "メール";
+"Please Connect Your gTar" = "に接続してください gTar";
+"Profile" = "Profile";
+"Please connect your gTar to sign up for an account." = "アカウントにサインアップする gTar を接続してください。";
+"Username must begin with a letter" = "ユーザー名は文字で始まる必要があります";
+"Password must be at least 8 letters" = "パスワードは少なくとも 8 文字をする必要があります。";
+"Invalid Email" = "無効なメール";
+"Invalid Username" = "無効なユーザー名";
+"Invalid Password" = "無効なパスワード";
+"Facebook failed to login" = "Facebookはログインに失敗しました";
+
+// ActivityFeedCell
+"Someone" = "誰か";
+"Jamed out" = "Jamed out";
+"Played %@" = "完成した %@";
+
+// Song Selection Controller
+"Easy" = "簡単";
+"Medium" = "媒体";
+"Hard" = "難しい";
+"PRESS TO PLAY" = "再生するにはキーを押し";
+/*#*/ "SKILL" = "技量";
+"SCORE" = "スコア";
+"ARTIST" = "アーティスト";
+"TITLE" = "タイトル";
+"Back" = "戻る";
+"Song List" = "曲一覧";
+
+// Play View
+"SAVE & FINISH" = "保存と終了";
+"SCORE" = "スコア";
+"OUTPUT" = "出力";
+/*#*/ "AUX" = "補助の";
+/*#*/ "SPEAKER" = "スピーカー";
+"POST TO FEED" = "出版する";
+"OFF" = "無効にする";
+"ON" = "オンにする";
+"Easy" = "簡単";
+"Quit" = "やめる";
+"Restart" = "再起動";
+
+// Social View
+/*#*/ "Logout" = "ログアウト";
+"FOLLOW" = "従う";
+"FOLLOWING" = "以下";
+"SESSIONS" = "会期";
+"FOLLOWERS" = "信者";
+
+// Freeplay
+/*#*/ "ALL" = "全部";
+"COLOR" = "色";
+"SHAPE" = "形状";
+"LOOP" = "ループ";
+"CLEAR" = "消去";
+"TONE" = "トーン";
+"SLIDING" = "スライディング";
+"Chorus" = "コーラス";
+"Echo" = "エコー";
+"Reverb" = "反響する";
+"Distortion" = "歪み";
+"Single" = "シングル";
+"2 X 2" = "2 X 2";
+"Continuous" = "連続";
+
+// Instruments
+"Electric" = "電気ギター";
+"Acoustic Guitar" = "ギター";
+"Rock Guitar" = "ロックギター";
+"Upright Bass" = "低音";
+"Piano" = "ピアノ";
+"Rhodes" = "ロードス";
+"Muted Clav" = "クラビネット";
+"Bowed Strings" = "弦楽器";
+"Marimba" = "マリンバ";
+"Carl's Synth" = "カールのシンセ";
+"Droplet" = "液滴";
+"Square" = "四角";
+
+// Time formatter
+"The Future" = "将来";
+"%u second ago" = "%u秒前";
+"%u seconds ago" = "%u秒前";
+"%u minute ago" = "%u分前";
+"%u minutes ago" = "%u分前";
+"%u hour ago" = "%u時間前";
+"%u hours ago" = "%u時間前";
+"%u day ago" = "%u日前";
+"%u days ago" = "%u日前";
+"%u week ago" = "%u週間前";
+"%u weeks ago" = "%u週間前";
+"%u month ago" = "%uヶ月前";
+"%u months ago" = "%uヶ月前";
+
+// Store
+"TITLE & ARTIST" = "タイトルとアーティスト";
+/*#*/ "99¢" = "円99";
+/*#*/ "FREE" = "無料";
+/*#*/ "BUY" = "買う";
+"Shop" = "お店";
+"OK" = "OK";
+"Song Purchase Failed" = "曲の購入に失敗しました";
+"No products available, no payments have been processed" = "利用可能な製品ないので、何の支払いが処理されていません";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "曲の購入に失敗しました;あなたのアカウントが入金されており、楽曲購入は成功するまで試行されます";
+"Song Purchase Succeeded" = "成功曲購入";
+"Song Purchase Succeeded!" = "成功曲購入";
+
+// Pull to update
+"Updating..." = "更新...";
+"Last update: Never" = "最後の更新: 決して";
+"Pull to update" = "更新するプル";
+"Last update: %@" = "最後の更新: %@";
+"Release to update" = "アップデートへのリリース";
+
+// Selector
+/*#*/ "FRIENDS" = "友達";
+/*#*/ "GLOBAL" = "グローバル";
+
+"Error" = "エラー";
+"Search..." = "検索...";

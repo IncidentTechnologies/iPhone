@@ -126,12 +126,12 @@ extern FileController *g_fileController;
     [_colBar.layer addSublayer:bottomBorderHeader];
     
     CALayer *borderTitleArtist = [CALayer layer];
-    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 120.0f, 0.0f, 1.0f, _colBar.frame.size.height);
+    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 132.0f, 0.0f, 1.0f, _colBar.frame.size.height);
     borderTitleArtist.backgroundColor = [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f].CGColor;
     [_colBar.layer addSublayer:borderTitleArtist];
     
     CALayer *borderSkill = [CALayer layer];
-    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 60.0f, 0.0f, 1.0f, _colBar.frame.size.height);
+    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 66.0f, 0.0f, 1.0f, _colBar.frame.size.height);
     borderSkill.backgroundColor = [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f].CGColor;
     [_colBar.layer addSublayer:borderSkill];
     
@@ -195,6 +195,8 @@ extern FileController *g_fileController;
 }
 
 - (void)localizeViews {
+    
+    
     [_buttonTitleArtist setTitle:NSLocalizedString(@"TITLE & ARTIST", NULL) forState:UIControlStateNormal];
     [_buttonSkill setTitle:NSLocalizedString(@"SKILL", NULL) forState:UIControlStateNormal];
     [_buttonBuy setTitle:NSLocalizedString(@"BUY", NULL) forState:UIControlStateNormal];
@@ -414,10 +416,10 @@ extern FileController *g_fileController;
         NSMutableAttributedString *attributedTextTitleArtist = [[NSMutableAttributedString alloc] initWithString:[[title stringByAppendingString:@" & "] stringByAppendingString:artist] attributes:attrs];
         [attributedTextTitleArtist setAttributes:subAttrs range:rangeTitleArtist];
         
-        NSMutableAttributedString *attributedTextSkill = [[NSMutableAttributedString alloc] initWithString:@"SKILL" attributes:attrs];
+        NSMutableAttributedString *attributedTextSkill = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"SKILL", NULL) attributes:attrs];
         [attributedTextSkill setAttributes:subAttrs range:rangeSkill];
         
-        NSMutableAttributedString *attributedTextBuy = [[NSMutableAttributedString alloc] initWithString:@"BUY" attributes:attrs];
+        NSMutableAttributedString *attributedTextBuy = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"BUY", NULL) attributes:attrs];
         [attributedTextBuy setAttributes:subAttrs range:rangeBuy];
         
         [_buttonTitleArtist setAttributedTitle:attributedTextTitleArtist forState:UIControlStateNormal];
@@ -426,9 +428,9 @@ extern FileController *g_fileController;
     }
     else
     {
-        [_buttonTitleArtist setTitle:@"TITLE & ARTIST" forState:UIControlStateNormal];
-        [_buttonSkill setTitle:@"SKILL" forState:UIControlStateNormal];
-        [_buttonBuy setTitle:@"BUY" forState:UIControlStateNormal];
+        [_buttonTitleArtist setTitle:NSLocalizedString(@"TITLE & ARTIST", NULL) forState:UIControlStateNormal];
+        [_buttonSkill setTitle:NSLocalizedString(@"SKILL", NULL) forState:UIControlStateNormal];
+        [_buttonBuy setTitle:NSLocalizedString(@"BUY", NULL) forState:UIControlStateNormal];
     }
 }
 

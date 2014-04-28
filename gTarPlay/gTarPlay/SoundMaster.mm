@@ -31,13 +31,11 @@
     
     // Effects
     // TODO:ADDEFFECTSBACK
-    /*
     DelayNode * m_delayNode;
     ReverbNode * m_reverbNode;
     ChorusEffectNode * m_chorusEffectNode;
     DistortionNode * m_distortionNode;
     ButterWorthFilterNode * m_butterworthNode;
-    */
 }
 @end
 
@@ -57,13 +55,11 @@
         currentInstrumentIndex = -1;
         
         // TODO:ADDEFFECTSBACK
-        /*
         m_reverbNode = nil;
         m_chorusEffectNode = nil;
         m_delayNode = nil;
         m_distortionNode = nil;
         m_butterworthNode = nil;
-         */
         
         BOOL init = [self initAudio];
         
@@ -257,6 +253,11 @@
         
         NSLog(@"Release %i, set new to %i",currentInstrumentIndex,index);
     }
+    
+    // TODO: FIGURE OUT WHY INST 0 IS CRASHING ON IPHONE
+    index = 1;
+    //
+    
     
     isLoadingInstrument = YES;
     
@@ -492,7 +493,6 @@
     // init metadata
     
     // TODO:ADDEFFECTSBACK
-    /*
     effectNames = [[NSArray alloc] initWithObjects:
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)],
@@ -506,7 +506,6 @@
                     [NSNumber numberWithBool:NO],nil];
     
     numEffects = [effectNames count];
-     */
     
     //[self toggleEffect:0 isOn:NO];
     
@@ -521,7 +520,6 @@
 {
     
     // TODO:ADDEFFECTSBACK
-    /*
     [self stop];
 
     @synchronized(self){
@@ -553,14 +551,12 @@
     }
     
     [self start];
-     */
 }
 
 - (void)toggleEffect:(NSInteger)index isOn:(BOOL)on
 {
     
     // TODO:ADDEFFECTSBACK
-    /*
     BOOL isOn = [[effectStatus objectAtIndex:index] boolValue];
     
     NSString * effectNode = [effectNames objectAtIndex:index];
@@ -634,7 +630,6 @@
         
         // TODO: refresh jampad
     }
-     */
     
 }
 
@@ -653,23 +648,21 @@
 {
     
     // TODO:ADDEFFECTSBACK
-    return 0;
-//    return numEffects;
+//    return 0;
+    return numEffects;
 }
 
 - (BOOL)isEffectOnAtIndex:(NSInteger)index
 {
     
     // TODO:ADDEFFECTSBACK
-    /*
     if(index >= numEffects){
         NSLog(@"Trying to get effect index %i out of range",index);
         index = numEffects-1;
     }
     
     return [[effectStatus objectAtIndex:index] boolValue];
-     */
-    return NO;
+//    return NO;
 }
 
 #pragma mark - JamPad
@@ -679,7 +672,6 @@
     
     // TODO:ADDEFFECTSBACK
     
-    /*
     NSString *effectNode = [effectNames objectAtIndex:index];
     Parameter *primary;
     Parameter *secondary;
@@ -722,8 +714,7 @@
     y = (secondary->getValue() - secondary->getMin()) / (secondary->getMax() - primary->getMin());
     
     return CGPointMake(x,y);
-     */
-    return CGPointMake(0,0);
+    //return CGPointMake(0,0);
 }
 
 // translate the normalized value the JamPad position to a range
@@ -732,7 +723,6 @@
 {
     
     // TODO:ADDEFFECTSBACK
-    /*
     
     NSString * effectNode = [effectNames objectAtIndex:index];
     Parameter *primary;
@@ -805,9 +795,7 @@
         m_distortionNode->setPrimaryParam(pnew);
         m_distortionNode->setSecondaryParam(snew);
         
-    }
-     */
-    
+    }    
 }
 
 @end
