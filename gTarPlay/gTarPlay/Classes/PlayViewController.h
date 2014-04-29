@@ -10,7 +10,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import <GtarController/GtarController.h>
+#import "GtarController.h"
 #import "SoundMaster.h"
 //#import <gTarAppCore/AppCore.h>
 #import <gTarAppCore/MainEventController.h>
@@ -55,6 +55,7 @@ enum PlayViewControllerDifficulty
 
 @property (retain, nonatomic) IBOutlet UIButton *menuButton;
 @property (retain, nonatomic) IBOutlet UIButton *volumeButton;
+@property (retain, nonatomic) IBOutlet UIButton *pauseButton;
 @property (retain, nonatomic) IBOutlet UIButton *backButton;
 @property (retain, nonatomic) IBOutlet UIButton *finishButton;
 @property (retain, nonatomic) IBOutlet UIView *volumeSliderView;
@@ -110,6 +111,7 @@ enum PlayViewControllerDifficulty
 
 - (IBAction)menuButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;
+- (IBAction)pauseButtonClicked:(id)sender;
 - (IBAction)volumeButtonClicked:(id)sender;
 - (IBAction)finishButtonClicked:(id)sender;
 - (IBAction)restartButtonClicked:(id)sender;

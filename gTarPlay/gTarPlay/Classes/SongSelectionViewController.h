@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <GtarController/GtarController.h>
+#import "GtarController.h"
 #import <gTarAppCore/CloudController.h>
 #import <gTarAppCore/CloudResponse.h>
 #import <gTarAppCore/CloudRequest.h>

@@ -225,7 +225,7 @@ extern Facebook * g_facebook;
 
 - (void)localizeView {
     // Gate keeper
-    [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
+    [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN UP", NULL) forState:UIControlStateNormal];
     [_gatekeeperVideoButton setTitle:NSLocalizedString(@"VIDEO", NULL) forState:UIControlStateNormal];
     [_gatekeeperWebsiteButton setTitle:NSLocalizedString(@"INCIDENTGTAR.COM", NULL) forState:UIControlStateNormal];
     
@@ -612,6 +612,9 @@ extern Facebook * g_facebook;
     //[self displayNotification:NOTIFICATION_GATEKEEPER_SIGNIN turnRed:NO];
     
     [self swapRightPanel:_signinRightPanel];
+    [self swapLeftPanel:_loggedoutLeftPanel];
+    [self disableButton:_loggedoutSigninButton];
+    [self enableButton:_loggedoutSignupButton];
 }
 
 - (IBAction)gatekeeperWebsiteButtonClicked:(id)sender

@@ -27,6 +27,7 @@
 
 #define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats, see also PlayViewController
 #define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.2f)
+#define STANDALONE_BEATS_PER_SECOND 42/60.0
 
 //- (id)initWithSongXmp:(NSString*)xmpBlob
 //{
@@ -124,7 +125,7 @@
     // Control the tempo throughout Standalone
     if(standalone){
     
-        m_beatsPerSecond = 0.7;
+        m_beatsPerSecond = STANDALONE_BEATS_PER_SECOND;
     
     }else{
         

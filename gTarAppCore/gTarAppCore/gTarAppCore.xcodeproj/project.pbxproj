@@ -999,6 +999,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)/usr/local/include",
 					"$(BUILD_ROOT)/../IntermediateBuildFilesPath",
+					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1032,7 +1035,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)/usr/local/include",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform",
 					"$(BUILD_ROOT)/../IntermediateBuildFilesPath",
+					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1055,7 +1061,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
-					"$(BUILT_PRODUCTS_DIR)/include/AudioController/",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1073,6 +1079,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

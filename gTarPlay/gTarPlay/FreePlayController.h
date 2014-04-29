@@ -9,7 +9,7 @@
 #import <gTarAppCore/MainEventController.h>
 
 #import "SoundMaster.h"
-#import <GtarController/GtarController.h>
+#import "GtarController.h"
 
 #import "JamPad.h"
 
@@ -25,8 +25,6 @@
 
 #import <MediaPlayer/MediaPlayer.h>
 #import <QuartzCore/QuartzCore.h>
-
-#import <GtarController/GtarController.h>
 
 #import <gTarAppCore/AppCore.h>
 //#import <gTarAppCore/TelemetryController.h>

@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import <GtarController/GtarController.h>
-#import <GtarController/GtarControllerInternal.h>
+#import "GtarController.h"
+#import "GtarControllerInternal.h"
 #import <gTarAppCore/Facebook.h>
 
 #import "PaginatedPullToUpdateTableView.h"

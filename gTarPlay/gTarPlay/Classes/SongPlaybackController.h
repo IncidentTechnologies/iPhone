@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import <GtarController/Gtar.h>
-#import <GtarController/GtarController.h>
+#import "Gtar.h"
+#import "GtarController.h"
 #import <gTarAppCore/NSSongModel.h>
 
 #import <gTarAppCore/AppCore.h>

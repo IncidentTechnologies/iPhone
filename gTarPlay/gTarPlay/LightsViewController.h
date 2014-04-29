@@ -6,7 +6,7 @@
 //
 //
 
-#import <GtarController/GtarController.h>
+#import "GtarController.h"
 #import "RGBColor.h"
 #import <gTarAppCore/AppCore.h>
 #import <UIKit/UIKit.h>

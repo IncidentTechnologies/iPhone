@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TestFlight.h"
-#import <GtarController/GtarController.h>
+#import "GtarController.h"
 #import "gTarNavigationController.h"
 
 //#import <gTarAppCore/Facebbok/FBConnect.h>

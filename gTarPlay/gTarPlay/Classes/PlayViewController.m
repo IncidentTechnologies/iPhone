@@ -9,7 +9,7 @@
 #import "PlayViewController.h"
 #import "VolumeViewController.h"
 
-#import <GtarController/GtarController.h>
+#import "GtarController.h"
 
 //#import <gTarAppCore/TelemetryController.h>
 
@@ -98,6 +98,7 @@ extern UserController * g_userController;
     BOOL _speakerRoute;
     BOOL _skipNotes;
     BOOL _menuIsOpen;
+    BOOL _songIsPaused;
     BOOL _songUploadQueueFull;
     
     // Standalone
@@ -197,12 +198,14 @@ extern UserController * g_userController;
         
         isStandalone = YES;
         [self standaloneReady];
+        [self showPauseButton];
         
     }else{
         
         NSLog(@"GTAR IS CONNECTED USE NORMAL");
         
         isStandalone = NO;
+        [self hidePauseButton];
         
     }
 }
@@ -210,7 +213,7 @@ extern UserController * g_userController;
 - (void) localizeViews {
     [_finishButton setTitle:NSLocalizedString(@"SAVE & FINISH", NULL) forState:UIControlStateNormal];
     
-    _scoreTextLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SCORE", NULL)];
+    //_scoreTextLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SCORE", NULL)];
     _outputLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OUTPUT", NULL)];
     _auxLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"AUX", NULL)];
     _speakerLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SPEAKER", NULL)];
@@ -245,6 +248,7 @@ extern UserController * g_userController;
     [_menuView setBounds:self.view.bounds];
     
     _menuIsOpen = NO;
+    _songIsPaused = NO;
     
     _menuView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
     
@@ -359,6 +363,7 @@ extern UserController * g_userController;
     [_topBar release];
     [_menuButton release];
     [_backButton release];
+    [_pauseButton release];
     [_volumeButton release];
     
     [_scoreLabel release];
@@ -525,6 +530,24 @@ extern UserController * g_userController;
     }
 }
 
+- (IBAction)pauseButtonClicked:(id)sender
+{
+    _songIsPaused = !_songIsPaused;
+    
+    if(_songIsPaused == YES){
+        
+        [self stopMainEventLoop];
+        
+        [self drawPlayButton:_pauseButton];
+        
+    }else{
+        
+        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+        
+        [self drawPauseButton:_pauseButton];
+    }
+}
+
 - (IBAction)restartButtonClicked:(id)sender
 {
     
@@ -628,6 +651,97 @@ extern UserController * g_userController;
 }
 
 - (IBAction)instrumentButtonClicked:(id)sender {
+}
+
+#pragma mark - Pause Button
+// Pause Button drawing a logic
+// TODO: move this somewhere generic/reusable
+
+- (void)showPauseButton
+{
+    [_pauseButton setHidden:NO];
+    [self drawPauseButton:_pauseButton];
+}
+
+- (void)hidePauseButton
+{
+    [_pauseButton setHidden:YES];
+}
+
+- (void)clearButton:(UIButton*)button
+{
+    NSArray *viewsToRemove = [button subviews];
+    for (UIView *v in viewsToRemove) {
+        [v removeFromSuperview];
+    }
+}
+
+- (void)drawPlayButton:(UIButton*)button
+{
+    [self clearButton:button];
+    
+    [button setBackgroundColor:[UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1]];
+    
+    CGSize size = CGSizeMake(button.frame.size.width, button.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int playWidth = 20;
+    int playX = button.frame.size.width/2 - playWidth/2;
+    int playY = 12;
+    CGFloat playHeight = button.frame.size.height - 2*playY;
+    UIColor * transparentWhite = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7];
+    
+    CGContextSetStrokeColorWithColor(context, transparentWhite.CGColor);
+    CGContextSetFillColorWithColor(context, transparentWhite.CGColor);
+    
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGContextMoveToPoint(context, playX, playY);
+    CGContextAddLineToPoint(context, playX, playY+playHeight);
+    CGContextAddLineToPoint(context, playX+playWidth, playY+(playHeight/2));
+    CGContextClosePath(context);
+    
+    CGContextFillPath(context);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [button addSubview:image];
+    
+    UIGraphicsEndImageContext();
+}
+
+- (void)drawPauseButton:(UIButton*)button
+{
+    [self clearButton:button];
+    
+    [button setBackgroundColor:[UIColor colorWithRed:244/255.0 green:151/255.0 blue:39/255.0 alpha:1]];
+    
+    CGSize size = CGSizeMake(button.frame.size.width, button.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    int pauseWidth = 8;
+    
+    CGFloat pauseHeight = button.frame.size.height - 22;
+    CGRect pauseFrameLeft = CGRectMake(button.frame.size.width/2 - pauseWidth - 3, 12, pauseWidth, pauseHeight);
+    CGRect pauseFrameRight = CGRectMake(pauseFrameLeft.origin.x+pauseWidth+4, 12, pauseWidth, pauseHeight);
+    
+    CGContextAddRect(context,pauseFrameLeft);
+    CGContextAddRect(context,pauseFrameRight);
+    CGContextSetFillColorWithColor(context,[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5].CGColor);
+    CGContextFillRect(context,pauseFrameLeft);
+    CGContextFillRect(context,pauseFrameRight);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+    
+    [button addSubview:image];
+    
+    UIGraphicsEndImageContext();
 }
 
 #pragma mark - UI & Misc related helpers
@@ -838,6 +952,8 @@ extern UserController * g_userController;
 - (void)updateDifficultyDisplay
 {
     [self hideFrets];
+    
+    [_displayController updateDifficulty:_difficulty];
     
     switch ( _difficulty )
     {
@@ -1148,53 +1264,65 @@ extern UserController * g_userController;
         fret = hit.m_fret;
     }
     
-    //
-    // The rest of the handling is deferred till later.
-    //
-    
-    // If this is called from the midi thread, there won't be an autorelease pool in place.
-    // I'll handle all the alloc's manually just in case.
-    NSNumber * fretNumber = [[NSNumber alloc] initWithChar:fret];
-    NSNumber * strNumber = [[NSNumber alloc] initWithChar:str];
-    NSNumber * velNumber = [[NSNumber alloc] initWithChar:velocity];
-    
-    NSDate * when = [[NSDate alloc] initWithTimeIntervalSinceNow:NOTE_DEFERMENT_TIME];
-    
-    NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                        fretNumber, @"Fret",
-                                        strNumber, @"String",
-                                        velNumber, @"Velocity",
-                                        nil];
-    
-    NSTimer * timer = [[NSTimer alloc] initWithFireDate:when
-                                               interval:0.0
-                                                 target:self
-                                               selector:@selector(deferredNoteOn:)
-                                               userInfo:dictionary
-                                                repeats:NO];
-    
-    [dictionary setObject:timer forKey:@"Timer"];
-    
-    @synchronized ( _deferredNotesQueue )
-    {
-        [_deferredNotesQueue addObject:dictionary];
+    if(isStandalone && hit != nil){
+        
+        //
+        // Standalone Song Recorder
+        //
+        
+        [_songRecorder playString:str andFret:fret];
+        
+    }else{
+        
+        //
+        // The rest of the handling is deferred till later.
+        //
+        
+        // If this is called from the midi thread, there won't be an autorelease pool in place.
+        // I'll handle all the alloc's manually just in case.
+        NSNumber * fretNumber = [[NSNumber alloc] initWithChar:fret];
+        NSNumber * strNumber = [[NSNumber alloc] initWithChar:str];
+        NSNumber * velNumber = [[NSNumber alloc] initWithChar:velocity];
+        
+        NSDate * when = [[NSDate alloc] initWithTimeIntervalSinceNow:NOTE_DEFERMENT_TIME];
+        
+        NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                            fretNumber, @"Fret",
+                                            strNumber, @"String",
+                                            velNumber, @"Velocity",
+                                            nil];
+        
+        NSTimer * timer = [[NSTimer alloc] initWithFireDate:when
+                                                   interval:0.0
+                                                     target:self
+                                                   selector:@selector(deferredNoteOn:)
+                                                   userInfo:dictionary
+                                                    repeats:NO];
+        
+        [dictionary setObject:timer forKey:@"Timer"];
+        
+        @synchronized ( _deferredNotesQueue )
+        {
+            [_deferredNotesQueue addObject:dictionary];
+        }
+        
+        // Add the timer to the run loop
+        NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
+        
+        [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
+        
+        // release everything
+        [timer release];
+        
+        [when release];
+            
+        [fretNumber release];
+        [strNumber release];
+        [velNumber release];
+        
+        [dictionary release];
+        
     }
-    
-    // Add the timer to the run loop
-    NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
-    
-    [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
-    
-    // release everything
-    [timer release];
-    
-    [when release];
-    
-    [fretNumber release];
-    [strNumber release];
-    [velNumber release];
-    
-    [dictionary release];
 }
 
 - (void)gtarNoteOff:(GtarPosition)position
@@ -1346,7 +1474,7 @@ extern UserController * g_userController;
     if(g_gtarController.connected == YES){
         [self turnOnFrame:_songModel.m_nextFrame];
     }
-        
+    
     _songRecorder = [[SongRecorder alloc] initWithTempo:_song.m_tempo];
     
     [_songRecorder beginSong];
@@ -2090,7 +2218,7 @@ extern UserController * g_userController;
     int tappedString = [[frameWithString objectForKey:@"String"] intValue];
     NSNoteFrame * tappedFrame = [frameWithString objectForKey:@"Frame"];
     
-    if(tappedString >= 0 && [tappedFrame.m_notesPending count] > 1){
+    if(tappedString >= 0 && [tappedFrame.m_notesPending count] > 0){
         [self playNoteOnString:tappedString atFrame:tappedFrame];
     }
 }

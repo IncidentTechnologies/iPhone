@@ -30,6 +30,7 @@
                 <outlet property="outputLabel" destination="407" id="hsQ-vE-ydR"/>
                 <outlet property="outputSwitch" destination="408" id="620"/>
                 <outlet property="outputView" destination="401" id="550"/>
+                <outlet property="pauseButton" destination="DSk-3J-rsF" id="tLS-mb-a3n"/>
                 <outlet property="postToFeedLabel" destination="404" id="OOo-9P-9mY"/>
                 <outlet property="postToFeedView" destination="402" id="549"/>
                 <outlet property="progressFillView" destination="72" id="350"/>
@@ -158,10 +159,10 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="387" userLabel="ButtonView">
-                            <rect key="frame" x="0.0" y="0.0" width="200" height="46"/>
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" image="BlueMenu.png" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" image="BlueMenu.png" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
                                     <rect key="frame" x="35" y="46" width="30" height="15"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
@@ -174,7 +175,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="129" userLabel="MenuButton" customClass="IconButton">
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="129" userLabel="MenuButton" customClass="IconButton">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="46"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -194,7 +195,7 @@
                                         <action selector="menuButtonClicked:" destination="-1" eventType="touchUpInside" id="339"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="150" userLabel="VolumeButton" customClass="IconButton">
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="150" userLabel="VolumeButton" customClass="IconButton">
                                     <rect key="frame" x="100" y="0.0" width="100" height="46"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.64705882349999999" green="0.79607843140000001" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -213,8 +214,27 @@
                                         <action selector="volumeButtonClicked:" destination="-1" eventType="touchUpInside" id="185"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSk-3J-rsF" userLabel="PauseButton" customClass="IconButton">
+                                    <rect key="frame" x="200" y="0.0" width="100" height="46"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="46" id="wnK-SF-Pkl"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                    <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="pauseButtonClicked:" destination="-1" eventType="touchUpInside" id="I8z-iY-8Xl"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="357">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="46"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="46"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -233,7 +253,6 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.066666670139999995" green="0.54901963470000004" blue="0.82352948189999997" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstItem="150" firstAttribute="bottom" secondItem="387" secondAttribute="bottom" id="450"/>
                                 <constraint firstItem="129" firstAttribute="leading" secondItem="387" secondAttribute="leading" id="451"/>
@@ -244,26 +263,26 @@
                                 <constraint firstItem="129" firstAttribute="top" secondItem="387" secondAttribute="top" id="457"/>
                                 <constraint firstItem="129" firstAttribute="bottom" secondItem="387" secondAttribute="bottom" id="458"/>
                                 <constraint firstItem="357" firstAttribute="trailing" secondItem="387" secondAttribute="trailing" id="460"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="576"/>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="577"/>
-                                <constraint firstItem="150" firstAttribute="trailing" secondItem="387" secondAttribute="trailing" id="583"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="576"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="577"/>
                                 <constraint firstItem="129" firstAttribute="width" secondItem="150" secondAttribute="width" id="1191"/>
                                 <constraint firstItem="1291" firstAttribute="centerX" secondItem="129" secondAttribute="centerX" id="1301"/>
                                 <constraint firstItem="150" firstAttribute="leading" secondItem="129" secondAttribute="trailing" id="1314"/>
+                                <constraint firstItem="150" firstAttribute="width" secondItem="DSk-3J-rsF" secondAttribute="width" id="915-dJ-ev0"/>
                                 <constraint firstItem="1192" firstAttribute="width" secondItem="150" secondAttribute="width" id="Fqs-OE-6Ba"/>
                                 <constraint firstItem="1192" firstAttribute="centerX" secondItem="150" secondAttribute="centerX" id="NWA-Zu-kPY"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="162" userLabel="ScoreView">
-                            <rect key="frame" x="200" y="0.0" width="280" height="46"/>
+                            <rect key="frame" x="300" y="0.0" width="180" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="386" userLabel="LayoutView">
-                                    <rect key="frame" x="21" y="6" width="239" height="34"/>
+                                    <rect key="frame" x="43" y="6" width="131" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" misplaced="YES" text="SCORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="347">
-                                            <rect key="frame" x="158" y="7" width="92" height="21"/>
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" ambiguous="YES" misplaced="YES" text="SCORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="347">
+                                            <rect key="frame" x="49" y="7" width="92" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="436"/>
@@ -272,46 +291,21 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="346" userLabel="ScoreBoxView">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="34"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ScoreBox.png" translatesAutoresizingMaskIntoConstraints="NO" id="385">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="348">
-                                                    <rect key="frame" x="15" y="0.0" width="120" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="120" id="449"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="25"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="348">
+                                            <rect key="frame" x="5" y="-3" width="120" height="34"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
-                                                <constraint firstItem="385" firstAttribute="leading" secondItem="346" secondAttribute="leading" id="461"/>
-                                                <constraint firstItem="348" firstAttribute="bottom" secondItem="346" secondAttribute="bottom" id="462"/>
-                                                <constraint firstItem="385" firstAttribute="top" secondItem="346" secondAttribute="top" id="463"/>
-                                                <constraint firstItem="385" firstAttribute="bottom" secondItem="346" secondAttribute="bottom" id="464"/>
-                                                <constraint firstItem="348" firstAttribute="top" secondItem="346" secondAttribute="top" id="465"/>
-                                                <constraint firstItem="348" firstAttribute="centerX" secondItem="385" secondAttribute="centerX" id="466"/>
-                                                <constraint firstItem="385" firstAttribute="trailing" secondItem="346" secondAttribute="trailing" id="467"/>
+                                                <constraint firstAttribute="width" constant="120" id="449"/>
                                             </constraints>
-                                        </view>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="346" firstAttribute="top" secondItem="386" secondAttribute="top" id="445"/>
-                                        <constraint firstAttribute="trailing" secondItem="346" secondAttribute="trailing" constant="89" id="446"/>
-                                        <constraint firstItem="346" firstAttribute="bottom" secondItem="386" secondAttribute="bottom" id="447"/>
-                                        <constraint firstItem="346" firstAttribute="leading" secondItem="386" secondAttribute="leading" id="448"/>
-                                        <constraint firstAttribute="width" constant="239" id="545"/>
+                                        <constraint firstAttribute="width" constant="131" id="545"/>
                                         <constraint firstAttribute="height" constant="34" id="546"/>
-                                        <constraint firstItem="347" firstAttribute="centerY" secondItem="346" secondAttribute="centerY" id="587"/>
                                         <constraint firstAttribute="trailing" secondItem="347" secondAttribute="trailing" constant="-11" id="3pW-mO-TFz"/>
                                     </constraints>
                                 </view>
@@ -319,12 +313,12 @@
                             <color key="backgroundColor" red="0.60392156860000001" green="0.72156862749999995" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="centerY" secondItem="386" secondAttribute="centerY" id="540"/>
-                                <constraint firstAttribute="centerX" secondItem="386" secondAttribute="centerX" id="544"/>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="318" id="1189"/>
+                                <constraint firstAttribute="trailing" secondItem="386" secondAttribute="trailing" constant="6" id="5Lb-dt-d1P"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.60392156862745094" green="0.72156862745098038" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="162" firstAttribute="bottom" secondItem="209" secondAttribute="bottom" id="425"/>
                         <constraint firstItem="387" firstAttribute="bottom" secondItem="209" secondAttribute="bottom" id="427"/>
@@ -687,7 +681,6 @@
         <image name="PlayBG.png" width="1136" height="640"/>
         <image name="PlayCancelButton.png" width="86" height="86"/>
         <image name="RestartButton.png" width="86" height="86"/>
-        <image name="ScoreBox.png" width="280" height="60"/>
         <image name="VolumeIcon.png" width="57" height="49"/>
     </resources>
 </document>
