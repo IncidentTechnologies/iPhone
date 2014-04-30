@@ -500,6 +500,7 @@ extern UserController * g_userController;
         [_menuDownArrow setHidden:NO];
         
         [self stopMainEventLoop];
+        [self drawPlayButton:_pauseButton];
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
@@ -518,6 +519,7 @@ extern UserController * g_userController;
         }
         
         [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+        [self drawPauseButton:_pauseButton];
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
@@ -532,19 +534,21 @@ extern UserController * g_userController;
 
 - (IBAction)pauseButtonClicked:(id)sender
 {
-    _songIsPaused = !_songIsPaused;
-    
-    if(_songIsPaused == YES){
+    if(!_menuIsOpen){
+        _songIsPaused = !_songIsPaused;
         
-        [self stopMainEventLoop];
-        
-        [self drawPlayButton:_pauseButton];
-        
-    }else{
-        
-        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-        
-        [self drawPauseButton:_pauseButton];
+        if(_songIsPaused == YES){
+            
+            [self stopMainEventLoop];
+            
+            [self drawPlayButton:_pauseButton];
+            
+        }else{
+            
+            [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+            
+            [self drawPauseButton:_pauseButton];
+        }
     }
 }
 
@@ -776,6 +780,7 @@ extern UserController * g_userController;
     [UIView commitAnimations];
     
     [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+    [self drawPauseButton:_pauseButton];
 }
 
 - (void)revealPlayView
@@ -1222,7 +1227,8 @@ extern UserController * g_userController;
     // This should only be used sparingly, but sometimes we
     // just want to completely drop the input e.g. in certain
     // chord strumming situations.
-    if ( _ignoreInput == YES )
+    // But never in standalone
+    if ( _ignoreInput == YES && !isStandalone )
     {
         return;
     }
@@ -1373,6 +1379,8 @@ extern UserController * g_userController;
     
     // Stop ourselves before we start so the connecting screen can display
     [self stopMainEventLoop];
+    [self drawPlayButton:_pauseButton];
+
     
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(startWithSongXmlDom) userInfo:nil repeats:NO];
     
@@ -1394,6 +1402,7 @@ extern UserController * g_userController;
     
     // Stop ourselves before we start so the connecting screen can display
     [self stopMainEventLoop];
+    [self drawPlayButton:_pauseButton];
     
     [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
@@ -1522,6 +1531,7 @@ extern UserController * g_userController;
     _deferredNotesQueue = [[NSMutableArray alloc] init];
     
     [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+    [self drawPauseButton:_pauseButton];
     
 }
 
@@ -1934,7 +1944,9 @@ extern UserController * g_userController;
     _currentFrame = [frame retain];
     
     // Align us more pefectly with the frame
-    [_songModel incrementBeatSerialAccess:(frame.m_absoluteBeatStart - _songModel.m_currentBeat)];
+    if(!isStandalone){
+        [_songModel incrementBeatSerialAccess:(frame.m_absoluteBeatStart - _songModel.m_currentBeat)];
+    }
     
     _refreshDisplay = YES;
     
@@ -2023,6 +2035,7 @@ extern UserController * g_userController;
 {
     
     [self stopMainEventLoop];
+    [self drawPlayButton:_pauseButton];
     
     // Turn of the LEDs
     if(g_gtarController.connected){
@@ -2124,9 +2137,7 @@ extern UserController * g_userController;
     
     // Determine whether to play the tapped string
     if(isStandalone){
-        //if([self shouldPluckStringFromTap]){
-            [self tapNoteFromTouchPoint:touchPoint];
-        //}
+        [self tapNoteFromTouchPoint:touchPoint];
     }
     
     // Debug
@@ -2171,26 +2182,6 @@ extern UserController * g_userController;
 
 
 #pragma mark - Standalone logic
-- (BOOL)shouldPluckStringFromTap
-{
-    BOOL testNote = FALSE;
-    
-    // If 1 note pending, play the tapped string
-    if([_currentFrame.m_notesPending count] == 1){
-        testNote = TRUE;
-    }else if([_currentFrame.m_notesPending count] == 2){
-        // Check if 2 notes on the same string
-        NSNote * firstNote = [_currentFrame.m_notesPending objectAtIndex:0];
-        NSNote * secondNote = [_currentFrame.m_notesPending objectAtIndex:1];
-        
-        if([_displayController getMappedStringFromString:firstNote.m_string] == [_displayController getMappedStringFromString:secondNote.m_string]){
-            testNote = TRUE;
-        }
-    }
-    
-    return testNote;
-}
-
 - (void)tapNoteFromTouchPoint:(CGPoint)touchPoint
 {
     NSMutableDictionary * frameWithString = [_displayController getStringPluckFromTap:touchPoint];
@@ -2204,6 +2195,15 @@ extern UserController * g_userController;
     
     if(tappedString >= 0 && [tappedFrame.m_notesPending count] == 1){
         [self playNoteOnString:tappedString atFrame:tappedFrame];
+    }else if(tappedString >= 0 && [tappedFrame.m_notesPending count] == 2){
+        
+        NSNote * firstNote = [tappedFrame.m_notesPending objectAtIndex:0];
+        NSNote * secondNote = [tappedFrame.m_notesPending objectAtIndex:1];
+        
+        if([_displayController getMappedStringFromString:firstNote.m_string] == [_displayController getMappedStringFromString:secondNote.m_string]){
+            [self playNoteOnString:tappedString atFrame:tappedFrame];
+        }
+        
     }
 }
 
@@ -2243,7 +2243,7 @@ extern UserController * g_userController;
                 continue;
             }
             
-            int fret = ceil(n.m_fret/4.0);
+            int fret = [_displayController getStandaloneFretFromFret:n.m_fret];
             
             switch(fret){
                 case 1:
@@ -2278,11 +2278,11 @@ extern UserController * g_userController;
                 }
                 break;
             case 2:
-                if(playFretOne && playFretTwo && (!playFretOne || !playFretTwo || playFretThree)){
+                if(playFretOne && playFretTwo && (!fretOneOn || !fretTwoOn || fretThreeOn)){
                     return;
-                }else if(playFretOne && playFretThree && (!playFretOne || !playFretThree || playFretTwo)){
+                }else if(playFretOne && playFretThree && (!fretOneOn || !fretThreeOn || fretTwoOn)){
                     return;
-                }else if(playFretTwo && playFretThree && (!playFretTwo || !playFretThree || playFretOne)){
+                }else if(playFretTwo && playFretThree && (!fretTwoOn || !fretThreeOn || fretOneOn)){
                     return;
                 }
                 break;
@@ -2309,7 +2309,7 @@ extern UserController * g_userController;
                 continue;
             }
             
-            int fret = ceil(firstNote.m_fret/4.0);
+            int fret = [_displayController getStandaloneFretFromFret:firstNote.m_fret];
             
             switch (fret) {
                 case 0:
@@ -2344,8 +2344,9 @@ extern UserController * g_userController;
         
         if([_displayController getMappedStringFromString:n.m_string] == tappedString){
             
-            // Got one string right, autocomplete on easy or medium
-            if(_difficulty == PlayViewControllerDifficultyEasy || _difficulty == PlayViewControllerDifficultyMedium){
+            // Strummed with the right fretting, autocomplete
+            
+            //if(_difficulty == PlayViewControllerDifficultyEasy || _difficulty == PlayViewControllerDifficultyMedium){
                 
                 for(NSNote * nn in tappedFrame.m_notesPending){
                     
@@ -2362,11 +2363,9 @@ extern UserController * g_userController;
                     
                     [notesToRemove addObject:nn];
                     
-                    //[tappedFrame removeString:nn.m_string andFret:nn.m_fret];
-                    
                 }
                 
-            }else{
+            /*}else{
             
                 GtarPluck pluck;
                 pluck.velocity = GtarMaxPluckVelocity;
@@ -2381,9 +2380,7 @@ extern UserController * g_userController;
                 
                 [notesToRemove addObject:n];
                 
-                //[tappedFrame removeString:n.m_string andFret:n.m_fret];
-                
-            }
+            }*/
             
             break;
         }

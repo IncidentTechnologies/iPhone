@@ -19,7 +19,10 @@
 // empirically determined ratios defining screen layout for what looks good.
 #define GL_SCREEN_TOP_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_SCREEN_BOTTOM_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
-#define GL_SCREEN_SEEK_LINE_OFFSET (GL_SCREEN_WIDTH - GL_SCREEN_WIDTH / 8.0 )
+#define GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN ( 0 )
+#define GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN )
+#define GL_SCREEN_SEEK_LINE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
+#define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_MARGIN )
 
 #define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_STRING_HEIGHT ( GL_SCREEN_HEIGHT / 60.0 )
@@ -69,7 +72,7 @@
 		
             m_glView.m_renderer = m_renderer;
 
-            m_renderer.m_offset = GL_SCREEN_SEEK_LINE_OFFSET;
+            m_renderer.m_offset = (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
             
             [m_glView layoutSubviews];
         }
@@ -329,7 +332,12 @@
     
     //NSLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
     
-    int countFrets = 0;
+    // Initialize fret count
+    int countFrets[4];
+    for(int f = 0; f < 4; f++){
+        countFrets[f] = 0;
+    }
+    
     
     NSNote * firstNote = nil;
     
@@ -390,7 +398,10 @@
             noteColor = g_standaloneFretColors[firstNote.m_fret];
             
             if(note.m_standaloneActive){
-                countFrets = (firstNote.m_fret > 0) ? countFrets+1 : countFrets;
+                if(firstNote.m_fret > 0){
+                    countFrets[0]++;
+                    countFrets[[self getStandaloneFretFromFret:firstNote.m_fret]]++;
+                }
             }
             
         }else{ // Hard
@@ -398,7 +409,10 @@
             noteColor = g_standaloneFretColors[note.m_fret];
             
             if(note.m_standaloneActive){
-                countFrets = (note.m_fret > 0) ? countFrets+1 : countFrets;
+                if(note.m_fret > 0){
+                    countFrets[0]++;
+                    countFrets[[self getStandaloneFretFromFret:note.m_fret]]++;
+                }
             }
             
         }
@@ -417,9 +431,9 @@
                 if(difficulty == PlayViewControllerDifficultyEasy){
                     model.m_standalonefret = 0;
                 }else if(difficulty == PlayViewControllerDifficultyMedium){
-                    model.m_standalonefret = ceil(firstNote.m_fret/4.0);
+                    model.m_standalonefret = [self getStandaloneFretFromFret:firstNote.m_fret];
                 }else if(difficulty == PlayViewControllerDifficultyHard){
-                    model.m_standalonefret = ceil(note.m_fret/4.0);
+                    model.m_standalonefret = [self getStandaloneFretFromFret:note.m_fret];
                 }
             }
         }
@@ -443,7 +457,9 @@
                 NSValue * key = [NSValue valueWithNonretainedObject:note];
                 NoteModel * model = [m_noteModelDictionary objectForKey:key];
                 
-                model.m_notecount = countFrets;
+                for(int f = 0; f < 4; f++){
+                    [model setFretNoteCount:countFrets[f] AtIndex:f];
+                }
             }
         }
     }
@@ -569,13 +585,13 @@
 	CGPoint center;
     if(isStandalone){
         center.y = GL_SCREEN_HEIGHT / 2.0;
-        center.x = - GL_SCREEN_WIDTH / 8.0;
+        center.x = - GL_SCREEN_SEEK_LINE_MARGIN;
     }else{
         center.y = GL_SCREEN_HEIGHT / 2.0;
         center.x = 0;
     }
     
-	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparentLight] autorelease];
+	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent] autorelease];
     
     // Draw a wider seek line area for standalone
     if(isStandalone){
@@ -711,7 +727,7 @@
 
 - (void)createBackgroundTexture
 {
-    
+    /*
     NSString * filePath;
 	UIImage * normalImage;
 	UIImage * scaledImage;
@@ -720,11 +736,11 @@
 	newSize.height = m_renderer.m_backingHeight;
 	newSize.width = m_renderer.m_backingWidth;
     
-    filePath = [[NSBundle mainBundle] pathForResource:@"PlayBG" ofType:@"png"];
-    normalImage = [[UIImage alloc] initWithContentsOfFile:filePath];
+    //filePath = [[NSBundle mainBundle] pathForResource:@"PlayBG" ofType:@"png"];
+    //normalImage = [[UIImage alloc] initWithContentsOfFile:filePath];
     
     UIGraphicsBeginImageContext(newSize);
-    [normalImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    //[normalImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
     scaledImage = UIGraphicsGetImageFromCurrentImageContext();    
     UIGraphicsEndImageContext();
     
@@ -738,8 +754,8 @@
     
     [model release];
     [backgroundTexture release];
-    [normalImage release];
-    
+    //[normalImage release];
+    */
 }
 
 #pragma mark - Helpers
@@ -797,6 +813,18 @@
 }
 
 #pragma mark - Standalone helper functions
+- (int)getStandaloneFretFromFret:(int)fret
+{
+    if(fret == 0){
+        return 0;
+    }else if(fret < 5){
+        return 1;
+    }else if(fret < 11){
+        return 2;
+    }else{
+        return 3;
+    }
+}
 
 -(int)getMappedStringFromString:(int)str
 {
@@ -813,17 +841,12 @@
     // Make sure x is on the touchband
     double touchBuffer = 5;
     
-    /*
-    double xmax = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineModel getCenter].x + [m_renderer.m_seekLineModel getSize].width/2 + touchBuffer;
-    double xmin = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineModel getCenter].x - [m_renderer.m_seekLineModel getSize].width/2 - touchBuffer;
-    */
+    double xmax = GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET + [m_renderer.m_seekLineStandaloneModel getCenter].x + [m_renderer.m_seekLineStandaloneModel getSize].width/2 + touchBuffer;
+    double xmin = GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET + [m_renderer.m_seekLineStandaloneModel getCenter].x - [m_renderer.m_seekLineStandaloneModel getSize].width/2 - touchBuffer;
     
-    double xmax = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineStandaloneModel getCenter].x + [m_renderer.m_seekLineStandaloneModel getSize].width/2 + touchBuffer;
-    double xmin = GL_SCREEN_WIDTH - GL_SCREEN_WIDTH/8 + [m_renderer.m_seekLineStandaloneModel getCenter].x - [m_renderer.m_seekLineStandaloneModel getSize].width/2 - touchBuffer;
-    
-    if(touchPoint.x > xmax || touchPoint.x < xmin){
-        return nil;
-    }
+    //if(touchPoint.x > xmax || touchPoint.x < xmin){
+    //    return nil;
+    //}
     
     // TODO: get the frame from the touchpoint so we know note they tried to play
     // Since it's in our touchzone we'll score it
@@ -844,15 +867,16 @@
             float beatMinusBeat = [self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat isStandalone:isStandalone];
             
             // what is renderer offset?
-            float noteCenter = beatMinusBeat - GL_SCREEN_WIDTH/8.0;
-            float noteMin = noteCenter - GL_NOTE_HEIGHT/2.0;
-            float noteMax = noteCenter + GL_NOTE_HEIGHT/2.0;
+            float marginoffset = (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN : GL_SCREEN_SEEK_LINE_MARGIN;
+            float noteCenter = beatMinusBeat - marginoffset;
+            float noteMin = noteCenter - GL_NOTE_HEIGHT/2.0 - touchBuffer;
+            float noteMax = noteCenter + GL_NOTE_HEIGHT/2.0 + touchBuffer;
            
             //NSLog(@"Touchpoint x is %f in note range %f to %f",touchPoint.x,noteMin,noteMax);
             
             if(touchPoint.x >= noteMin && touchPoint.x <= noteMax){
                 
-                NSLog(@"Touchpoint x is %f in note range %f to %f",touchPoint.x,noteMin,noteMax);
+                //NSLog(@"Touchpoint x is %f in note range %f to %f",touchPoint.x,noteMin,noteMax);
                 
                 activeFrame = frame;
                 break;

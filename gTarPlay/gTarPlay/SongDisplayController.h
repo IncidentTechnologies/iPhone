@@ -93,6 +93,7 @@
 - (void)shiftView:(double)shift;
 - (void)shiftViewDelta:(double)shift;
 
+- (int)getStandaloneFretFromFret:(int)fret;
 - (double)convertTimeToCoordSpace:(double)dealta isStandalone:(BOOL)standalone;
 - (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone;
 - (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone;

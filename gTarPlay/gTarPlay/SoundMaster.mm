@@ -16,6 +16,7 @@
 
 #define GRAPH_SAMPLE_RATE 44100.0f
 
+#define EFFECTS_AVAILABLE 1
 #define EFFECT_NAME_REVERB @"Reverb"
 #define EFFECT_NAME_DELAY @"Echo"
 #define EFFECT_NAME_CHORUS @"Chorus"
@@ -30,12 +31,13 @@
     SamplerBankNode * m_activeBankNode;
     
     // Effects
-    // TODO:ADDEFFECTSBACK
+#ifdef EFFECTS_AVAILABLE
     DelayNode * m_delayNode;
     ReverbNode * m_reverbNode;
     ChorusEffectNode * m_chorusEffectNode;
     DistortionNode * m_distortionNode;
     ButterWorthFilterNode * m_butterworthNode;
+#endif
 }
 @end
 
@@ -54,12 +56,13 @@
         numInstruments = 0;
         currentInstrumentIndex = -1;
         
-        // TODO:ADDEFFECTSBACK
+#ifdef EFFECTS_AVAILABLE
         m_reverbNode = nil;
         m_chorusEffectNode = nil;
         m_delayNode = nil;
         m_distortionNode = nil;
         m_butterworthNode = nil;
+#endif
         
         BOOL init = [self initAudio];
         
@@ -205,13 +208,14 @@
 {
     NSLog(@"SoundMaster: set BW cutoff to %f",cutoff);
     
-    // TODO:ADDEFFECTSBACK
+#ifdef EFFECTS_AVAILABLE
     //m_butterworthNode->SetCutoff(cutoff);
     
     //if(m_pBwFilter != NULL)
     //    return m_pBwFilter->SetCutoff(cutoff);
     //else
     //    return false;
+#endif
     
     return true;
 }
@@ -492,7 +496,7 @@
     
     // init metadata
     
-    // TODO:ADDEFFECTSBACK
+#ifdef EFFECTS_AVAILABLE
     effectNames = [[NSArray alloc] initWithObjects:
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)],
@@ -506,6 +510,7 @@
                     [NSNumber numberWithBool:NO],nil];
     
     numEffects = [effectNames count];
+
     
     //[self toggleEffect:0 isOn:NO];
     
@@ -513,13 +518,14 @@
     //m_butterworthNode = new ButterWorthFilterNode(2,8000,GRAPH_SAMPLE_RATE);
     //m_butterworthNode->ConnectInput(0, m_samplerNode, 0);
     //root->ConnectInput(0, m_butterworthNode, 0);
+#endif
     
 }
 
 - (void)stopAllEffects
 {
     
-    // TODO:ADDEFFECTSBACK
+#ifdef EFFECTS_AVAILABLE
     [self stop];
 
     @synchronized(self){
@@ -551,12 +557,13 @@
     }
     
     [self start];
+#endif
 }
 
 - (void)toggleEffect:(NSInteger)index isOn:(BOOL)on
 {
-    
-    // TODO:ADDEFFECTSBACK
+
+#ifdef EFFECTS_AVAILABLE
     BOOL isOn = [[effectStatus objectAtIndex:index] boolValue];
     
     NSString * effectNode = [effectNames objectAtIndex:index];
@@ -630,7 +637,7 @@
         
         // TODO: refresh jampad
     }
-    
+#endif
 }
 
 - (NSString *)getEffectNameAtIndex:(NSInteger)index
@@ -646,23 +653,24 @@
 
 - (NSInteger)getNumEffects
 {
-    
-    // TODO:ADDEFFECTSBACK
-//    return 0;
+#ifdef EFFECTS_AVAILABLE
     return numEffects;
+#endif
+    return 0;
 }
 
 - (BOOL)isEffectOnAtIndex:(NSInteger)index
 {
     
-    // TODO:ADDEFFECTSBACK
+#ifdef EFFECTS_AVAILABLE
     if(index >= numEffects){
         NSLog(@"Trying to get effect index %i out of range",index);
         index = numEffects-1;
     }
     
     return [[effectStatus objectAtIndex:index] boolValue];
-//    return NO;
+#endif
+    return NO;
 }
 
 #pragma mark - JamPad
@@ -670,8 +678,7 @@
 - (CGPoint)getPointForEffectAtIndex:(NSInteger)index
 {
     
-    // TODO:ADDEFFECTSBACK
-    
+#ifdef EFFECTS_AVAILABLE
     NSString *effectNode = [effectNames objectAtIndex:index];
     Parameter *primary;
     Parameter *secondary;
@@ -714,7 +721,8 @@
     y = (secondary->getValue() - secondary->getMin()) / (secondary->getMax() - primary->getMin());
     
     return CGPointMake(x,y);
-    //return CGPointMake(0,0);
+#endif
+    return CGPointMake(0,0);
 }
 
 // translate the normalized value the JamPad position to a range
@@ -722,8 +730,7 @@
 - (void)adjustEffectAtIndex:(NSInteger)index toPoint:(CGPoint)position
 {
     
-    // TODO:ADDEFFECTSBACK
-    
+#ifdef EFFECTS_AVAILABLE
     NSString * effectNode = [effectNames objectAtIndex:index];
     Parameter *primary;
     Parameter *secondary;
@@ -794,8 +801,9 @@
         
         m_distortionNode->setPrimaryParam(pnew);
         m_distortionNode->setSecondaryParam(snew);
-        
+
     }    
+#endif
 }
 
 @end

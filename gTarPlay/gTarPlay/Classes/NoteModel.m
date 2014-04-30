@@ -44,7 +44,10 @@ static unsigned int m_notesRemaining = 0;
         m_highlightModel = [[[HighlightModel alloc] initWithCenter:m_center andSize:CGSizeMake(25, 25) andColor:g_standaloneClearColor andShape:@"Round"] retain];
         
         m_hit = 0;
-		
+        
+        l_color = color;
+        
+        [self initFretNoteCounts];
 	}
 	
 	return self;
@@ -64,6 +67,10 @@ static unsigned int m_notesRemaining = 0;
         m_highlightModel = [[[HighlightModel alloc] initWithCenter:m_center andSize:CGSizeMake(25, 25) andColor:g_standaloneClearColor andShape:@"Round"] retain];
         
         m_hit = 0;
+        
+        l_color = color;
+        
+        [self initFretNoteCounts];
     }
     
     return self;
@@ -98,7 +105,7 @@ static unsigned int m_notesRemaining = 0;
 	[m_noteTexture release];
     
     [m_highlightModel release];
-	
+    
 	m_noteImage  = nil;
 	
 	m_noteTexture  = nil;
@@ -119,9 +126,32 @@ static unsigned int m_notesRemaining = 0;
     }
 }
 
-- (void)drawWithHighlights:(BOOL)highlight highlightColor:(GLubyte *)color
+- (void)initFretNoteCounts
+{
+    for(int f = 0; f < 4; f++){
+        m_fretNoteCounts[f] = 0;
+    }
+}
+
+- (void)setFretNoteCount:(int)count AtIndex:(int)index
+{
+    m_fretNoteCounts[index] = count;
+}
+
+- (int)getFretNoteCountAtIndex:(int)index
+{
+    return m_fretNoteCounts[index];
+}
+
+- (void)drawWithHighlights:(BOOL)highlight highlightColor:(GLubyte *)color recolorNote:(BOOL)recolor
 {
 	if(_m_standalonefret >= 0){
+        
+        // Recolor notes on hit
+        if(recolor){
+            [super changeColor:color];
+        }
+        
         // This allows the texture to take on the color of the geometry
         glEnable(GL_COLOR_MATERIAL);
         

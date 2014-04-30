@@ -575,9 +575,7 @@
 		EC24DC21161A841A00016B78 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC87F3BA132AE2E2007DAEC9 /* AudioToolbox.framework */; };
 		EC24DC22161A841A00016B78 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24A384133A994A00EA2FED /* MediaPlayer.framework */; };
 		EC24DC23161A841A00016B78 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE3FC9F132CA6E5002812B6 /* QuartzCore.framework */; };
-		EC24DC27161A847A00016B78 /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24DC24161A847A00016B78 /* libAudioController.a */; };
 		EC24DC28161A847A00016B78 /* libgTarAppCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24DC25161A847A00016B78 /* libgTarAppCore.a */; };
-		EC24DC29161A847A00016B78 /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24DC26161A847A00016B78 /* libGtarController.a */; };
 		EC24DC2A161A84F300016B78 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EC2F25C51468B3C100D0FC7F /* Default.png */; };
 		EC24DC2B161A84F500016B78 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC9A92021468BB33009CAC83 /* Default@2x.png */; };
 		EC24DC37161A895000016B78 /* gTarPlayAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */; };
@@ -2605,9 +2603,7 @@
 				6D26A81918F3794900887E40 /* libz.dylib in Frameworks */,
 				6D26A81718F3794300887E40 /* libc++.dylib in Frameworks */,
 				260AFCC41814757700F7536A /* libstdc++.dylib in Frameworks */,
-				EC24DC27161A847A00016B78 /* libAudioController.a in Frameworks */,
 				EC24DC28161A847A00016B78 /* libgTarAppCore.a in Frameworks */,
-				EC24DC29161A847A00016B78 /* libGtarController.a in Frameworks */,
 				EC24DC09161A821200016B78 /* Foundation.framework in Frameworks */,
 				EC24DC1E161A841A00016B78 /* AVFoundation.framework in Frameworks */,
 				EC24DC1F161A841A00016B78 /* CoreMIDI.framework in Frameworks */,

@@ -32,6 +32,8 @@
 //	//Texture2D * m_overlay;
     
 	Model * m_overlayModel;
+    GLubyte * l_color;
+    int m_fretNoteCounts[4];
 
 }
 
@@ -42,15 +44,16 @@
 - (NoteModel*)initWithCenter:(CGPoint)center andColor:(GLubyte*)color andTexture:(Texture2D*)texture andOverlay:(Model*)overlay;
 //- (NoteModel*)initWidthWithCoords:(GLfloat*)coords andColor:(GLubyte*)color andHeight:(GLfloat)height;
 
-- (void)drawWithHighlights:(BOOL)highlight highlightColor:(GLubyte*)color;
+- (void)drawWithHighlights:(BOOL)highlight highlightColor:(GLubyte*)color recolorNote:(BOOL)recolor;
 - (void)dealloc;
 - (void)releaseCachedImages;
 - (void)hitNote;
 - (void)missNote;
+- (void)setFretNoteCount:(int)count AtIndex:(int)index;
+- (int)getFretNoteCountAtIndex:(int)index;
 
 @property (nonatomic, assign) int m_fret;
 @property (nonatomic, assign) int m_standalonefret;
 @property (nonatomic, assign) int m_hit;
-@property (nonatomic, assign) int m_notecount;
 
 @end

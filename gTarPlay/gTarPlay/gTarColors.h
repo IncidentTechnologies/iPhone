@@ -10,10 +10,10 @@ static unsigned char g_whiteColor[4] =
 { 255, 255, 255, 255 };
 
 static unsigned char g_whiteColorTransparent[4] =
-{ 255, 255, 255, 100 };
+{ 154, 184, 195, 100 };
 
 static unsigned char g_whiteColorTransparentLight[4] =
-{ 255, 255, 255, 50 };
+{ 154, 184, 195, 50 };
 
 static unsigned char g_lightGrayColor[4] =
 { 192, 192, 192, 255 };
@@ -59,23 +59,23 @@ static unsigned char g_standaloneStringColors[6][4] =
 };
 static unsigned char g_standaloneFretColors[17][4] =
 {
-    { 225, 255, 255, 255}, // W
-	{ 239, 92, 53, 255 },  // R
-	{ 239, 92, 53, 255 },  // R
-	{ 239, 92, 53, 255 },  // R
-	{ 239, 92, 53, 255 },  // R
-	{ 239, 92, 53, 255 },  // R
-	{ 238, 188, 53, 255 }, // Y
-	{ 238, 188, 53, 255 }, // Y
-	{ 238, 188, 53, 255 }, // Y
-	{ 238, 188, 53, 255 }, // Y
-	{ 238, 188, 53, 255 }, // Y
-	{ 0, 141, 218, 255 },  // B
-	{ 0, 141, 218, 255 },  // B
-	{ 0, 141, 218, 255 },  // B
-	{ 0, 141, 218, 255 },  // B
-	{ 0, 141, 218, 255 },  // B
-	{ 0, 141, 218, 255 }   // B
+    { 225, 255, 255, 255}, // W 0
+	{ 239, 92, 53, 255 },  // R 1
+	{ 239, 92, 53, 255 },  // R 2
+	{ 239, 92, 53, 255 },  // R 3
+	{ 239, 92, 53, 255 },  // R 4
+	{ 238, 188, 53, 255 }, // Y 5
+	{ 238, 188, 53, 255 }, // Y 6
+	{ 238, 188, 53, 255 }, // Y 7
+	{ 238, 188, 53, 255 }, // Y 8
+	{ 238, 188, 53, 255 }, // Y 9
+	{ 238, 188, 53, 255 }, // Y 10
+	{ 0, 141, 218, 255 },  // B 11
+	{ 0, 141, 218, 255 },  // B 12
+	{ 0, 141, 218, 255 },  // B 13
+	{ 0, 141, 218, 255 },  // B 14
+	{ 0, 141, 218, 255 },  // B 15
+	{ 0, 141, 218, 255 }   // B 16
 };
 static unsigned char g_standaloneHighlightColors[4][4] =
 {
@@ -84,6 +84,10 @@ static unsigned char g_standaloneHighlightColors[4][4] =
 	{ 238, 188, 53, 130 },  // Y
 	{ 0, 141, 218, 130 }    // B
 };
+
+static unsigned char g_standaloneEarlyHitFretColor[4] =
+    { 174, 209, 124, 130 }; // Light Green
+
 static unsigned char g_standaloneHitFretColor[4] =
     { 31, 195, 72, 130 }; // Green
 

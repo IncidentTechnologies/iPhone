@@ -13,6 +13,7 @@
 		26D4B17418F62778003380BF /* FBLoginDialog.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8B402417A9ED52009D3FB4 /* FBLoginDialog.h */; };
 		26D4B17518F62799003380BF /* FBDialog.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8B402017A9ED52009D3FB4 /* FBDialog.h */; };
 		26D4B17618F627B6003380BF /* FBRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8B402617A9ED52009D3FB4 /* FBRequest.h */; };
+		6D6162A8191036E000CBEF87 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6162A7191036E000CBEF87 /* libIncidentPlatform.a */; };
 		9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D4C70D017A8B02D00DC7B4D /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */; };
 		9D8B403617A9ED52009D3FB4 /* Facebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D8B401B17A9ED52009D3FB4 /* Facebook.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -56,8 +57,6 @@
 		EC24E020161BBC0C00016B78 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC24E01E161BBC0C00016B78 /* SettingsController.m */; };
 		EC354E0516C9B084009D472A /* TelemetryEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = EC354E0416C9B084009D472A /* TelemetryEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA851161A5D160015832E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA850161A5D160015832E /* Foundation.framework */; };
-		EC5DA873161A5D7A0015832E /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA871161A5D7A0015832E /* libAudioController.a */; };
-		EC5DA874161A5D7A0015832E /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA872161A5D7A0015832E /* libGtarController.a */; };
 		EC5DA878161A5EF40015832E /* TelemetryController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA876161A5EF40015832E /* TelemetryController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA879161A5EF40015832E /* TelemetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA877161A5EF40015832E /* TelemetryController.m */; };
 		EC5DA87D161A5F500015832E /* ContentController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA87B161A5F500015832E /* ContentController.h */; };
@@ -180,6 +179,7 @@
 /* Begin PBXFileReference section */
 		268E70C51810B2D9007404B0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		26C3F9241810F93A00744A9D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		6D6162A7191036E000CBEF87 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/gTarPlay-acmtbmpranhylpfpoqywbtnizqpd/Build/Products/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
 		9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
 		9D8B401B17A9ED52009D3FB4 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -336,10 +336,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D6162A8191036E000CBEF87 /* libIncidentPlatform.a in Frameworks */,
 				26C3F9251810F93A00744A9D /* libstdc++.dylib in Frameworks */,
 				268E70C61810B2D9007404B0 /* libc++.dylib in Frameworks */,
-				EC5DA873161A5D7A0015832E /* libAudioController.a in Frameworks */,
-				EC5DA874161A5D7A0015832E /* libGtarController.a in Frameworks */,
 				EC5DA851161A5D160015832E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +444,7 @@
 		EC5DA84F161A5D160015832E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D6162A7191036E000CBEF87 /* libIncidentPlatform.a */,
 				26C3F9241810F93A00744A9D /* libstdc++.dylib */,
 				268E70C51810B2D9007404B0 /* libc++.dylib */,
 				EC5DA871161A5D7A0015832E /* libAudioController.a */,
@@ -1063,6 +1063,10 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarPlay-acmtbmpranhylpfpoqywbtnizqpd/Build/Products/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1080,6 +1084,10 @@
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
 					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarPlay-acmtbmpranhylpfpoqywbtnizqpd/Build/Products/Debug-iphoneos",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
