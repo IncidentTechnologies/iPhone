@@ -19,7 +19,7 @@
 // empirically determined ratios defining screen layout for what looks good.
 #define GL_SCREEN_TOP_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_SCREEN_BOTTOM_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
-#define GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN ( 0 )
+#define GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
 #define GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN )
 #define GL_SCREEN_SEEK_LINE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
 #define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_MARGIN )
@@ -573,28 +573,28 @@
     //
     
 	CGSize size;
-    if(isStandalone){
-        size.width = GL_NOTE_HEIGHT;
-        size.height = GL_SCREEN_HEIGHT;
-    }else{
+    //if(isStandalone){
+    //    size.width = GL_NOTE_HEIGHT;
+    //    size.height = GL_SCREEN_HEIGHT;
+    //}else{
         size.width = GL_NOTE_HEIGHT / 3.0;
         size.height = GL_SCREEN_HEIGHT;
-    }
+    //}
     
     // The center will automatically be offset in the rendering
 	CGPoint center;
-    if(isStandalone){
-        center.y = GL_SCREEN_HEIGHT / 2.0;
-        center.x = - GL_SCREEN_SEEK_LINE_MARGIN;
-    }else{
+    //if(isStandalone){
+    //    center.y = GL_SCREEN_HEIGHT / 2.0;
+    //    center.x = - GL_SCREEN_SEEK_LINE_MARGIN;
+    //}else{
         center.y = GL_SCREEN_HEIGHT / 2.0;
         center.x = 0;
-    }
+    //}
     
 	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent] autorelease];
     
     // Draw a wider seek line area for standalone
-    if(isStandalone){
+    /*if(isStandalone){
         
         size.width = GL_NOTE_HEIGHT * 3;
         size.height = GL_SCREEN_HEIGHT;
@@ -605,7 +605,9 @@
         
         m_renderer.m_seekLineStandaloneModel = nil;
         
-    }
+    }*/
+    
+    m_renderer.m_seekLineStandaloneModel = nil;
     
     
     
@@ -768,8 +770,9 @@
 - (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone
 {
 	//return (beat/(GLfloat)SONG_BEATS_PER_SCREEN) * GL_SCREEN_WIDTH;
+    double beatsPerScreen = (isStandalone) ? 3.0*SONG_BEATS_PER_SCREEN/4.0 : SONG_BEATS_PER_SCREEN;
     
-    return GL_SCREEN_WIDTH - (beat/(GLfloat)SONG_BEATS_PER_SCREEN) * GL_SCREEN_WIDTH;
+    return GL_SCREEN_WIDTH - (beat/(GLfloat)beatsPerScreen) * GL_SCREEN_WIDTH;
 }
 
 - (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone
@@ -967,6 +970,33 @@
     NoteModel * notehit = [m_noteModelDictionary objectForKey:key];
     if(notehit != nil){
         [notehit missNote];
+    }
+}
+
+- (void)attemptFrame:(NSNoteFrame *)frame
+{
+    for(NSNote * note in frame.m_notesPending){
+        
+        NSValue * key = [NSValue valueWithNonretainedObject:note];
+        NoteModel * notehit = [m_noteModelDictionary objectForKey:key];
+        
+        [notehit attemptNote];
+    }
+
+    // set a timer to unset the attempt highlight if not yet green
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(unattemptFrame:) userInfo:frame repeats:NO];
+}
+
+- (void)unattemptFrame:(NSTimer *)timer
+{
+    NSNoteFrame * frame = [timer userInfo];
+    
+    for(NSNote * note in frame.m_notesPending){
+        
+        NSValue * key = [NSValue valueWithNonretainedObject:note];
+        NoteModel * notehit = [m_noteModelDictionary objectForKey:key];
+        
+        [notehit unattemptNote];
     }
 }
 

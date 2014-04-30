@@ -22,6 +22,7 @@
 	UInt32 m_hitsAttempted;
     UInt32 m_hitsCorrect;
 	UInt32 m_hitsIncorrect;
+    UInt32 m_hitsMissed;
     
     UInt32 m_multiplier;
     UInt32 m_streak;
@@ -31,6 +32,11 @@
 
     UInt32 m_multiplierPerfect;
     UInt32 m_streakPerfect;
+    
+    // running tallies
+    UInt32 m_streakMax;
+    NSMutableArray * m_frameHits;
+    NSMutableArray * m_frameTimings;
     
     // stars
     UInt32 m_stars;
@@ -54,8 +60,11 @@
 
 - (id)initWithBaseScore:(UInt32)baseScore;
 
-- (void)scoreFrame:(NSNoteFrame*)frame;
+- (void)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone;
 - (void)scoreFramePerfectly:(NSNoteFrame*)frame;
 - (void)starRateScore;
+- (void)scoreEndOfFrame:(NSNoteFrame*)frame;
+
+- (NSDictionary *)aggregateScoreEndOfSong;
 
 @end

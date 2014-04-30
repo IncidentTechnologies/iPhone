@@ -104,6 +104,7 @@
 
 - (void)hitNote:(NSNote*)note;
 - (void)missNote:(NSNote*)note;
+- (void)attemptFrame:(NSNoteFrame *)frame;
 
 // Standalone
 - (int)getMappedStringFromString:(int)str;

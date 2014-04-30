@@ -97,6 +97,7 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UIButton *fretTwo;
 @property (retain, nonatomic) IBOutlet UIButton *fretThree;
 
+@property (nonatomic, assign) NSNoteFrame * lastTappedFrame;
 @property (nonatomic, assign) enum PlayViewControllerDifficulty difficulty;
 @property (nonatomic, assign) double tempoModifier;
 @property (nonatomic, assign) BOOL muffleWrongNotes;

@@ -49,6 +49,8 @@
 - (void)releaseCachedImages;
 - (void)hitNote;
 - (void)missNote;
+- (void)attemptNote;
+- (void)unattemptNote;
 - (void)setFretNoteCount:(int)count AtIndex:(int)index;
 - (int)getFretNoteCountAtIndex:(int)index;
 

@@ -43,6 +43,7 @@
 #define AUDIO_CONTROLLER_ATTENUATION_MUFFLED 0.70f
 #define AUDIO_CONTROLLER_AMPLITUDE_MUFFLED 0.15f
 
+#define STANDALONE_SONG_BEATS_PER_SCREEN 3.0
 #define NOTE_DEFERMENT_TIME 0.040f
 #define INTER_FRAME_QUIET_PERIOD (0.60/(float)_song.m_tempo)
 
@@ -390,6 +391,7 @@ extern UserController * g_userController;
     [_instrumentLabel release];
     [_volumeSliderView release];
     [_menuDownArrow release];
+    [_lastTappedFrame release];
     [super dealloc];
 }
 
@@ -1460,6 +1462,7 @@ extern UserController * g_userController;
     [_songRecorder release];
     
     _currentFrame = nil;
+    _lastTappedFrame = nil;
     
     // Update the menu labels
     [_songTitleLabel setText:_userSong.m_title];
@@ -1973,11 +1976,15 @@ extern UserController * g_userController;
     
     _currentFrame = nil;
     
-    // account the score for this frame
-    [_scoreTracker scoreFrame:frame];
+    if(!isStandalone){
+        // Calculate score only on frame release for regular play
+        [_scoreTracker scoreFrame:frame onBeat:-1 withComplexity:0 endStreak:NO isStandalone:NO];
+        [self updateScoreDisplay];
+    }
     
-    [self updateScoreDisplay];
-    
+    // Score checking on frame release
+    [_scoreTracker scoreEndOfFrame:frame];
+        
     // turn off any lights that might have been skipped
     [self turnOffFrame:frame];
     
@@ -2036,6 +2043,10 @@ extern UserController * g_userController;
     
     [self stopMainEventLoop];
     [self drawPlayButton:_pauseButton];
+    
+    NSDictionary * scoreData = [_scoreTracker aggregateScoreEndOfSong];
+    
+    //NSLog(@"ScoreData is %@",scoreData);
     
     // Turn of the LEDs
     if(g_gtarController.connected){
@@ -2225,7 +2236,7 @@ extern UserController * g_userController;
 
 - (void)playNoteOnString:(int)tappedString atFrame:(NSNoteFrame*)tappedFrame
 {
-
+    
     NSNote * firstNote = nil;
     
     if(_difficulty == PlayViewControllerDifficultyHard){
@@ -2265,29 +2276,37 @@ extern UserController * g_userController;
         switch(fretsOn){
             case 0:
                 if(fretOneOn || fretTwoOn || fretThreeOn){
+                    [_displayController attemptFrame:tappedFrame];
                     return;
                 }
                 break;
             case 1:
                 if(playFretOne && (!fretOneOn || fretTwoOn || fretThreeOn)){
+                    [_displayController attemptFrame:tappedFrame];
                     return;
                 }else if(playFretTwo && (!fretTwoOn || fretOneOn || fretThreeOn)){
+                    [_displayController attemptFrame:tappedFrame];
                     return;
                 }else if(playFretThree && (!fretThreeOn || fretOneOn || fretTwoOn)){
+                    [_displayController attemptFrame:tappedFrame];
                     return;
                 }
                 break;
             case 2:
                 if(playFretOne && playFretTwo && (!fretOneOn || !fretTwoOn || fretThreeOn)){
+                    [_displayController attemptFrame:tappedFrame];
                     return;
                 }else if(playFretOne && playFretThree && (!fretOneOn || !fretThreeOn || fretTwoOn)){
+                    [_displayController attemptFrame:tappedFrame];
                     return;
                 }else if(playFretTwo && playFretThree && (!fretTwoOn || !fretThreeOn || fretOneOn)){
+                    [_displayController attemptFrame:tappedFrame];
                     return;
                 }
                 break;
             case 3:
                 if(!fretOneOn || !fretTwoOn || !fretThreeOn){
+                    [_displayController attemptFrame:tappedFrame];
                     return;
                 }
                 break;
@@ -2314,21 +2333,25 @@ extern UserController * g_userController;
             switch (fret) {
                 case 0:
                     if(fretOneOn || fretTwoOn || fretThreeOn){
+                        [_displayController attemptFrame:tappedFrame];
                         return;
                     }
                     break;
                 case 1:
                     if(!fretOneOn){
+                        [_displayController attemptFrame:tappedFrame];
                         return;
                     }
                     break;
                 case 2:
                     if(!fretTwoOn){
+                        [_displayController attemptFrame:tappedFrame];
                         return;
                     }
                     break;
                 case 3:
                     if(!fretThreeOn){
+                        [_displayController attemptFrame:tappedFrame];
                         return;
                     }
                     break;
@@ -2390,6 +2413,32 @@ extern UserController * g_userController;
         [tappedFrame removeString:nnn.m_string andFret:nnn.m_fret];
     }
 
+    // Prepare data to score
+    
+    // Count number of frets on
+    int numFretsOn = 0;
+    if(fretOneOn) numFretsOn++;
+    if(fretTwoOn) numFretsOn++;
+    if(fretThreeOn) numFretsOn++;
+
+    // Check if the streak ends
+    // Check everything between a frame hit and the last hit frame
+    BOOL endStreak = NO;
+    
+    for(NSNoteFrame * ff in _songModel.m_noteFrames){
+        if(ff.m_absoluteBeatStart < tappedFrame.m_absoluteBeatStart && [ff.m_notesPending count] > 0 && (!_lastTappedFrame || _lastTappedFrame.m_absoluteBeatStart < ff.m_absoluteBeatStart)){
+            endStreak = YES;
+        }else if(ff.m_absoluteBeatStart > _songModel.m_currentBeat + STANDALONE_SONG_BEATS_PER_SCREEN){
+            break;
+        }
+    }
+    
+    [_scoreTracker scoreFrame:tappedFrame onBeat:_songModel.m_currentBeat withComplexity:numFretsOn endStreak:endStreak isStandalone:isStandalone];
+    
+    [self updateScoreDisplay];
+    
+    _lastTappedFrame = tappedFrame;
+    
 }
 
 - (void)fretDown:(id)sender

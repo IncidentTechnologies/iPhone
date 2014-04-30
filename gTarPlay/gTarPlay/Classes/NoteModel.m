@@ -126,6 +126,18 @@ static unsigned int m_notesRemaining = 0;
     }
 }
 
+- (void)attemptNote
+{
+    m_hit = -1;
+}
+
+- (void)unattemptNote
+{
+    if(m_hit == -1){
+        m_hit = 0;
+    }
+}
+
 - (void)initFretNoteCounts
 {
     for(int f = 0; f < 4; f++){

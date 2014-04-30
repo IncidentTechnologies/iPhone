@@ -381,12 +381,11 @@
         //
         // Check if we've passed the end of this frame
         //
-        //if ( m_currentBeat > (beatEnd + m_frameWidthBeats/2.0) )
         
-        // TODO: get the swipe precision down here
+        //if ( m_currentBeat > (beatEnd + m_frameWidthBeats/2.0) )
         if ( m_currentBeat > (beatEnd + SONG_MODEL_NOTE_FRAME_WIDTH_MAX/2.0) )
         {
-            NSLog(@"Current beat is %f, beat end is %f",m_currentBeat,(beatEnd + m_frameWidthBeats/2.0));
+            //NSLog(@"Current beat is %f, beat end is %f",m_currentBeat,(beatEnd + m_frameWidthBeats/2.0));
             [self exitCurrentFrame];
         }
         
