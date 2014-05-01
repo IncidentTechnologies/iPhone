@@ -59,6 +59,11 @@
 "Easy" = "Facile";
 "Quit" = "Smettere";
 "Restart" = "Riavviare";
+"RESTART" = "RIAVVIARE";
+"SCORE" = "PARTITURA";
+"NOTES HIT" = "NOTE SUONATE";
+"IN A ROW" = "CONSECUTIVO";
+"ACCURACY" = "PRECISIONE";
 
 // Social View
 /*#*/ "Logout" = "Esci";

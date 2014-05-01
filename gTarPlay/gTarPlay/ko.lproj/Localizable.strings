@@ -59,6 +59,11 @@
 "Easy" = "쉬움";
 "Quit" = "그만두기";
 "Restart" = "재시작";
+"RESTART" = "재시작";
+"SCORE" = "점수";
+"NOTES HIT" = "연주된음";
+"IN A ROW" = "연속적인";
+"ACCURACY" = "정확성";
 
 // Social View
 /*#*/ "Logout" = "로그아웃";

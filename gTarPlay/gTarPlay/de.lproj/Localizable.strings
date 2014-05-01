@@ -59,6 +59,11 @@
 "Easy" = "Leicht";
 "Quit" = "Verlassen";
 "Restart" = "Neustart";
+"RESTART" = "NEUSTART";
+"SCORE" = "PARTITUR";
+"NOTES HIT" = "NOTEN GESPIELT";
+"IN A ROW" = "KONSEKUTIV";
+"ACCURACY" = "PRÄZISION";
 
 // Social View
 /*#*/ "Logout" = "Abmelden";

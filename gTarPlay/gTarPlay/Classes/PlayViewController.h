@@ -49,6 +49,7 @@ enum PlayViewControllerDifficulty
 
 @property (retain, nonatomic) IBOutlet EAGLView *glView;
 @property (retain, nonatomic) IBOutlet UIView *menuView;
+@property (retain, nonatomic) IBOutlet UIView *songScoreView;
 @property (retain, nonatomic) IBOutlet UIView *topBar;
 @property (retain, nonatomic) IBOutlet UIView *progressFillView;
 @property (retain, nonatomic) IBOutlet UIView *loadingView;
@@ -58,6 +59,7 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UIButton *pauseButton;
 @property (retain, nonatomic) IBOutlet UIButton *backButton;
 @property (retain, nonatomic) IBOutlet UIButton *finishButton;
+@property (retain, nonatomic) IBOutlet UIButton *finishRestartButton;
 @property (retain, nonatomic) IBOutlet UIView *volumeSliderView;
 @property (retain, nonatomic) IBOutlet UIImageView *menuDownArrow;
 
@@ -66,12 +68,29 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UILabel * loadingSongTitle;
 
 @property (retain, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (retain, nonatomic) IBOutlet UILabel *scoreTextLabel;
+@property (retain, nonatomic) IBOutlet UILabel *multiplierTextLabel;
+@property (retain, nonatomic) IBOutlet UILabel *subscoreLabel;
 
 @property (retain, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (retain, nonatomic) IBOutlet UILabel *songArtistLabel;
+@property (retain, nonatomic) IBOutlet UILabel *scoreSongTitleLabel;
+@property (retain, nonatomic) IBOutlet UILabel *scoreSongArtistLabel;
+
+@property (retain, nonatomic) IBOutlet UILabel *scoreScoreLabel;
+@property (retain, nonatomic) IBOutlet UILabel *scoreNotesHitLabel;
+@property (retain, nonatomic) IBOutlet UILabel *scoreInARowLabel;
+@property (retain, nonatomic) IBOutlet UILabel *scoreAccuracyLabel;
+@property (retain, nonatomic) IBOutlet UILabel *scoreScore;
+@property (retain, nonatomic) IBOutlet UILabel *scoreNotesHit;
+@property (retain, nonatomic) IBOutlet UILabel *scoreInARow;
+@property (retain, nonatomic) IBOutlet UILabel *scoreAccuracy;
+@property (retain, nonatomic) IBOutlet UIView *heatMapView;
 
 @property (retain, nonatomic) IBOutlet UIButton *difficultyButton;
+@property (retain, nonatomic) IBOutlet UIButton *scoreDifficultyButton;
 @property (retain, nonatomic) IBOutlet UILabel *difficultyLabel;
+@property (retain, nonatomic) IBOutlet UILabel *scoreDifficultyLabel;
 
 @property (retain, nonatomic) IBOutlet UIButton *instrumentButton;
 @property (retain, nonatomic) IBOutlet UILabel *instrumentLabel;
@@ -82,7 +101,6 @@ enum PlayViewControllerDifficulty
 @property (retain, nonatomic) IBOutlet UISwitch *outputSwitch;
 @property (retain, nonatomic) IBOutlet UISwitch *feedSwitch;
 
-@property (retain, nonatomic) IBOutlet UILabel *scoreTextLabel;
 @property (retain, nonatomic) IBOutlet UILabel *outputLabel;
 @property (retain, nonatomic) IBOutlet UILabel *auxLabel;
 @property (retain, nonatomic) IBOutlet UILabel *speakerLabel;

@@ -56,6 +56,6 @@
 
 @property (nonatomic, assign) int m_fret;
 @property (nonatomic, assign) int m_standalonefret;
-@property (nonatomic, assign) int m_hit;
+@property (nonatomic, assign) double m_hit;
 
 @end

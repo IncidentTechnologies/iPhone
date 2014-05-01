@@ -19,7 +19,7 @@
 // empirically determined ratios defining screen layout for what looks good.
 #define GL_SCREEN_TOP_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_SCREEN_BOTTOM_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
-#define GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
+#define GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN ( GL_SCREEN_WIDTH / 12.0 )
 #define GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN )
 #define GL_SCREEN_SEEK_LINE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
 #define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_MARGIN )
@@ -44,6 +44,7 @@
     {
         
         m_noteModelDictionary = [[NSMutableDictionary alloc] init];
+        m_noteModelUniversalDictionary = [[NSMutableDictionary alloc] init];
 
         m_numberModels = [[NSMutableArray alloc] init];
         
@@ -145,6 +146,8 @@
     [m_noteTexture release];
     
     [m_noteModelDictionary release];
+    
+    [m_noteModelUniversalDictionary release];
     
     [m_undisplayedFrames release];
     
@@ -442,6 +445,8 @@
         
         [m_noteModelDictionary setObject:model forKey:key];
         
+        [m_noteModelUniversalDictionary setObject:model forKey:key];
+        
         [m_renderer addModel:model];
         
         [model release];
@@ -583,13 +588,13 @@
     
     // The center will automatically be offset in the rendering
 	CGPoint center;
-    //if(isStandalone){
-    //    center.y = GL_SCREEN_HEIGHT / 2.0;
-    //    center.x = - GL_SCREEN_SEEK_LINE_MARGIN;
-    //}else{
+    if(isStandalone){
+        center.y = GL_SCREEN_HEIGHT / 2.0;
+        center.x = - (GL_SCREEN_SEEK_LINE_MARGIN - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN);
+    }else{
         center.y = GL_SCREEN_HEIGHT / 2.0;
         center.x = 0;
-    //}
+    }
     
 	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent] autorelease];
     
@@ -973,12 +978,33 @@
     }
 }
 
+- (void)setNoteHit:(NSNote *)note toValue:(double)hit
+{
+    NSValue * key = [NSValue valueWithNonretainedObject:note];
+    NoteModel * notehit = [m_noteModelUniversalDictionary objectForKey:key];
+    if(notehit != nil){
+        notehit.m_hit = hit;
+    }
+}
+
+- (double)getNoteHit:(NSNote*)note
+{
+    NSValue * key = [NSValue valueWithNonretainedObject:note];
+    NoteModel * notehit = [m_noteModelUniversalDictionary objectForKey:key];
+    
+    if(notehit != nil){
+        return notehit.m_hit;
+    }else{
+        return -2;
+    }
+}
+
 - (void)attemptFrame:(NSNoteFrame *)frame
 {
     for(NSNote * note in frame.m_notesPending){
         
         NSValue * key = [NSValue valueWithNonretainedObject:note];
-        NoteModel * notehit = [m_noteModelDictionary objectForKey:key];
+        NoteModel * notehit = [m_noteModelUniversalDictionary objectForKey:key];
         
         [notehit attemptNote];
     }
@@ -994,7 +1020,7 @@
     for(NSNote * note in frame.m_notesPending){
         
         NSValue * key = [NSValue valueWithNonretainedObject:note];
-        NoteModel * notehit = [m_noteModelDictionary objectForKey:key];
+        NoteModel * notehit = [m_noteModelUniversalDictionary objectForKey:key];
         
         [notehit unattemptNote];
     }

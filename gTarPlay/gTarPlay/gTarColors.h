@@ -97,6 +97,7 @@ static unsigned char g_standaloneMissFretColor[4] =
 
 static unsigned char g_standaloneClearColor[4] =
     { 1, 1, 1, 0}; // Clear
+
 /*
 static unsigned char g_stringColorsQuads[6][16] =
 { 

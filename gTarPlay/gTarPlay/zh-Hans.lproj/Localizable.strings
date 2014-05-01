@@ -56,6 +56,11 @@
 "Easy" = "简单";
 "Quit" = "推出";
 "Restart" = "重新开始";
+"RESTART" = "重新开始";
+"SCORE" = "得分";
+"NOTES HIT" = "弹奏的音符";
+"IN A ROW" = "连续";
+"ACCURACY" = "准确性";
 
 // Social View
 "Logout" = "注销";

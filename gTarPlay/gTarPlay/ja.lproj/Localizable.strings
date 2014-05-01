@@ -59,6 +59,11 @@
 "Easy" = "簡単";
 "Quit" = "やめる";
 "Restart" = "再起動";
+"RESTART" = "再起動";
+"SCORE" = "スコア";
+"NOTES HIT" = "完成したノート";
+"IN A ROW" = "連続した";
+"ACCURACY" = "精度";
 
 // Social View
 /*#*/ "Logout" = "ログアウト";

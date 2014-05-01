@@ -59,6 +59,11 @@
 "Easy" = "Easy";
 "Quit" = "Quit";
 "Restart" = "Restart";
+"RESTART" = "RESTART";
+"SCORE" = "SCORE";
+"NOTES HIT" = "NOTES HIT";
+"IN A ROW" = "IN A ROW";
+"ACCURACY" = "ACCURACY";
 
 // Social View
 /*#*/ "Logout" = "Logout";

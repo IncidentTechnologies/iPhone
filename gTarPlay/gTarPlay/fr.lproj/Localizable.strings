@@ -59,6 +59,11 @@
 "Easy" = "Facile";
 "Quit" = "Abandonner";
 "Restart" = "Reprendre";
+"RESTART" = "REPRENDRE";
+"SCORE" = "POINTAGE";
+"NOTES HIT" = "NOTES JOUÉES";
+"IN A ROW" = "CONSÉCUTIF";
+"ACCURACY" = "PRÉCISION";
 
 // Social View
 /*#*/ "Logout" = "Sortir";

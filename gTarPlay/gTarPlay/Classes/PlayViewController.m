@@ -99,6 +99,7 @@ extern UserController * g_userController;
     BOOL _speakerRoute;
     BOOL _skipNotes;
     BOOL _menuIsOpen;
+    BOOL _songScoreIsOpen;
     BOOL _songIsPaused;
     BOOL _songUploadQueueFull;
     
@@ -153,6 +154,7 @@ extern UserController * g_userController;
     // Hide the widgets we don't need initially
     [_menuDownArrow setHidden:YES];
     [_finishButton setHidden:YES];
+    [_finishRestartButton setHidden:YES];
     [_progressFillView setHidden:YES];
     
     // Fiddle with the button images
@@ -213,6 +215,12 @@ extern UserController * g_userController;
 
 - (void) localizeViews {
     [_finishButton setTitle:NSLocalizedString(@"SAVE & FINISH", NULL) forState:UIControlStateNormal];
+    [_finishRestartButton setTitle:NSLocalizedString(@"RESTART", NULL) forState:UIControlStateNormal];
+    
+    _scoreScoreLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SCORE", NULL)];
+    _scoreNotesHitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"NOTES HIT", NULL)];
+    _scoreInARowLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"IN A ROW", NULL)];
+    _scoreAccuracyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ACCURACY", NULL)];
     
     //_scoreTextLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SCORE", NULL)];
     _outputLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OUTPUT", NULL)];
@@ -226,6 +234,8 @@ extern UserController * g_userController;
     _easyLabel.text = [[NSString alloc] initWithString:easyStr];
     _quitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Quit", NULL)];
     _restartLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Restart", NULL)];
+    
+    _multiplierTextLabel.layer.cornerRadius = _multiplierTextLabel.frame.size.width/2.0;
 }
 
 - (void)viewDidLayoutSubviews
@@ -244,14 +254,20 @@ extern UserController * g_userController;
     
     // Setup the menu
     [self.view addSubview:_menuView];
+    [self.view addSubview:_songScoreView];
     
     [_menuView setFrame:self.view.frame];
     [_menuView setBounds:self.view.bounds];
     
+    [_songScoreView setFrame:self.view.frame];
+    [_songScoreView setBounds:self.view.bounds];
+    
     _menuIsOpen = NO;
+    _songScoreIsOpen = NO;
     _songIsPaused = NO;
     
     _menuView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
+    _songScoreView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
     
     // Attach the volume view controller
     CGRect targetFrame = [_topBar convertRect:_volumeSliderView.frame toView:self.view];
@@ -361,6 +377,7 @@ extern UserController * g_userController;
     
     [_glView release];
     [_menuView release];
+    [_songScoreView release];
     [_topBar release];
     [_menuButton release];
     [_backButton release];
@@ -368,12 +385,27 @@ extern UserController * g_userController;
     [_volumeButton release];
     
     [_scoreLabel release];
+    [_multiplierTextLabel release];
+    [_subscoreLabel release];
     [_progressFillView release];
     [_songTitleLabel release];
     [_songArtistLabel release];
+    [_scoreSongTitleLabel release];
+    [_scoreSongArtistLabel release];
     [_finishButton release];
+    [_finishRestartButton release];
     [_outputView release];
     [_postToFeedView release];
+    
+    [_scoreScoreLabel release];
+    [_scoreNotesHitLabel release];
+    [_scoreInARowLabel release];
+    [_scoreAccuracyLabel release];
+    [_scoreScore release];
+    [_scoreNotesHit release];
+    [_scoreInARow release];
+    [_scoreAccuracy release];
+    [_heatMapView release];
     
 //    [_feedSwitch.thumbTintColor release];
     [_feedSwitch release];
@@ -386,7 +418,9 @@ extern UserController * g_userController;
     [_loadingSongArtist release];
     [_loadingSongTitle release];
     [_difficultyButton release];
+    [_scoreDifficultyButton release];
     [_difficultyLabel release];
+    [_scoreDifficultyLabel release];
     [_instrumentButton release];
     [_instrumentLabel release];
     [_volumeSliderView release];
@@ -496,10 +530,38 @@ extern UserController * g_userController;
     
     if ( _menuIsOpen == YES )
     {
+        [self showHideMenu:_menuView isOpen:YES];
+        [_menuDownArrow setHidden:NO];
+        
+    }
+    else
+    {
+        [self showHideMenu:_menuView isOpen:NO];
+    }
+
+}
+
+- (IBAction)songScoreButtonClicked:(id)sender
+{
+    _songScoreIsOpen = !_songScoreIsOpen;
+    
+    if( _songScoreIsOpen == YES) {
+        
+        [self showHideMenu:_songScoreView isOpen:YES];
+        
+    }else{
+        
+        [self showHideMenu:_songScoreView isOpen:NO];
+        
+    }
+}
+
+- (void)showHideMenu:(UIView *)menu isOpen:(BOOL)open
+{
+    if(open){
+        
         [_metronomeTimer invalidate];
         _metronomeTimer = nil;
-        
-        [_menuDownArrow setHidden:NO];
         
         [self stopMainEventLoop];
         [self drawPlayButton:_pauseButton];
@@ -507,14 +569,12 @@ extern UserController * g_userController;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
         
-        //_menuView.transform = CGAffineTransformIdentity;
-        
-        _menuView.transform = CGAffineTransformMakeTranslation(0,-46);
+        menu.transform = CGAffineTransformMakeTranslation(0,-46);
         
         [UIView commitAnimations];
-    }
-    else
-    {
+        
+    }else{
+        
         if ( _playMetronome == YES )
         {
             _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
@@ -528,7 +588,7 @@ extern UserController * g_userController;
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDidStopSelector:@selector(menuSlideComplete)];
         
-        _menuView.transform = CGAffineTransformMakeTranslation( 0, -_menuView.frame.size.height );
+        menu.transform = CGAffineTransformMakeTranslation( 0, -menu.frame.size.height );
         
         [UIView commitAnimations];
     }
@@ -595,7 +655,13 @@ extern UserController * g_userController;
 
     [self startWithSongXmlDom];
     
-    [self menuButtonClicked:nil];
+    if(_menuIsOpen){
+        [self menuButtonClicked:nil];
+    }
+    
+    if(_songScoreIsOpen){
+        [self songScoreButtonClicked:nil];
+    }
     
 }
 
@@ -697,7 +763,7 @@ extern UserController * g_userController;
     int playX = button.frame.size.width/2 - playWidth/2;
     int playY = 12;
     CGFloat playHeight = button.frame.size.height - 2*playY;
-    UIColor * transparentWhite = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7];
+    UIColor * transparentWhite = [UIColor colorWithRed:171/255.0 green:135/255.0 blue:35/255.0 alpha:1.0];
     
     CGContextSetStrokeColorWithColor(context, transparentWhite.CGColor);
     CGContextSetFillColorWithColor(context, transparentWhite.CGColor);
@@ -723,7 +789,7 @@ extern UserController * g_userController;
 {
     [self clearButton:button];
     
-    [button setBackgroundColor:[UIColor colorWithRed:244/255.0 green:151/255.0 blue:39/255.0 alpha:1]];
+    [button setBackgroundColor:[UIColor colorWithRed:237/255.0 green:132/255.0 blue:63/255.0 alpha:1]];
     
     CGSize size = CGSizeMake(button.frame.size.width, button.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
@@ -738,7 +804,7 @@ extern UserController * g_userController;
     
     CGContextAddRect(context,pauseFrameLeft);
     CGContextAddRect(context,pauseFrameRight);
-    CGContextSetFillColorWithColor(context,[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5].CGColor);
+    CGContextSetFillColorWithColor(context,[UIColor colorWithRed:170/255.0 green:93/255.0 blue:43/255.0 alpha:1.0].CGColor);
     CGContextFillRect(context,pauseFrameLeft);
     CGContextFillRect(context,pauseFrameRight);
     
@@ -968,14 +1034,18 @@ extern UserController * g_userController;
         case PlayViewControllerDifficultyEasy:
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffEasyButton"] forState:UIControlStateNormal];
+            [_scoreDifficultyButton setImage:[UIImage imageNamed:@"DiffEasyButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = NSLocalizedString(@"Easy", NULL);
+            _scoreDifficultyLabel.text = NSLocalizedString(@"Easy", NULL);
             
         } break;
             
         case PlayViewControllerDifficultyMedium:
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffMedButton"] forState:UIControlStateNormal];
+            [_scoreDifficultyButton setImage:[UIImage imageNamed:@"DiffMedButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = NSLocalizedString(@"Medium", NULL);
+            _scoreDifficultyLabel.text = NSLocalizedString(@"Medium", NULL);
             
             if(isStandalone){
                 [self showFrets];
@@ -986,7 +1056,9 @@ extern UserController * g_userController;
         case PlayViewControllerDifficultyHard:
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffHardButton"] forState:UIControlStateNormal];
+            [_scoreDifficultyButton setImage:[UIImage imageNamed:@"DiffHardButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = NSLocalizedString(@"Hard", NULL);
+            _scoreDifficultyLabel.text = NSLocalizedString(@"Hard", NULL);
             
             if(isStandalone){
                 [self showFrets];
@@ -1024,13 +1096,64 @@ extern UserController * g_userController;
 
 - (void)updateScoreDisplay
 {
+    int prevScore = [[self unformatScore:_scoreLabel.text] intValue];
+    int newScore = _scoreTracker.m_score;
+    int scoreDiff = newScore - prevScore;
+    
+    [self animateSubscoreWithText:[NSString stringWithFormat:@"+%i",scoreDiff]];
+    
+    [_scoreLabel setText:[self formatScore:_scoreTracker.m_score]];
+    [self setScoreMultiplier:_scoreTracker.m_multiplier];
+}
+
+- (void)animateSubscoreWithText:(NSString*)subscore
+{
+    _subscoreLabel.text = subscore;
+    [_subscoreLabel setAlpha:0.8];
+    [_subscoreLabel setHidden:NO];
+    [self.view bringSubviewToFront:_subscoreLabel];
+    
+    
+    [_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,252,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
+    
+    [UIView animateWithDuration:0.5 animations:^(void){
+    
+        [_subscoreLabel setAlpha:0.0];
+        [_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,282,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
+        
+    } completion:^(BOOL finished){
+        [_subscoreLabel setHidden:YES];
+        [_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,252,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
+    }];
+}
+
+- (void)setScoreMultiplier:(int)multiplier
+{
+    _multiplierTextLabel.text = [NSString stringWithFormat:@"%iX",multiplier];
+    
+    if(multiplier <= 1){
+        [_multiplierTextLabel setAlpha:0.2];
+    }else{
+        [_multiplierTextLabel setAlpha:1.0];
+    }
+}
+
+- (NSString *)formatScore:(int)scoreVal
+{
     NSNumberFormatter * numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
     
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    NSString * numberAsString = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:_scoreTracker.m_score]];
+    NSString * numberAsString = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:scoreVal]];
+        
+    return numberAsString;
+}
+
+- (NSString *)unformatScore:(NSString*)scoreStr
+{
+    scoreStr = [scoreStr stringByReplacingOccurrencesOfString:@"," withString:@""];
     
-    [_scoreLabel setText:numberAsString];
+    return scoreStr;
 }
 
 - (void)updateProgressDisplay
@@ -1466,8 +1589,11 @@ extern UserController * g_userController;
     
     // Update the menu labels
     [_songTitleLabel setText:_userSong.m_title];
+    [_scoreSongTitleLabel setText:_userSong.m_title];
     [_songArtistLabel setText:_userSong.m_author];
+    [_scoreSongArtistLabel setText:_userSong.m_author];
     [_finishButton setHidden:YES];
+    [_finishRestartButton setHidden:YES];
     [_outputView setHidden:NO];
     [_backButton setEnabled:YES];
     
@@ -1535,6 +1661,9 @@ extern UserController * g_userController;
     
     [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
     [self drawPauseButton:_pauseButton];
+    
+    
+    [self updateScoreDisplay];
     
 }
 
@@ -2038,6 +2167,85 @@ extern UserController * g_userController;
     
 }
 
+// Accuracy heat map
+- (void)drawHeatMap
+{
+    
+    // TODO: FrameHits will be different on regular playmode
+    NSMutableArray * frameHits = [[NSMutableArray alloc] init];
+    
+    double runningAccuracy[4];
+    
+    for (int f = 0; f < [_songModel.m_noteFrames count]; f++)
+    {
+    
+        NSNoteFrame * frame = [_songModel.m_noteFrames objectAtIndex:f];
+        NSNote * firstNote = [frame.m_notes firstObject];
+        double accuracy = [_displayController getNoteHit:firstNote];
+        
+        // build average
+        if(f==0){
+            for(int r=0; r < 4; r++){
+                runningAccuracy[r] = accuracy;
+            }
+        }else{
+            runningAccuracy[0] = runningAccuracy[1];
+            runningAccuracy[1] = runningAccuracy[2];
+            runningAccuracy[2] = runningAccuracy[3];
+            runningAccuracy[3] = accuracy;
+        }
+        
+        // calculate average
+        double avgaccuracy = 0;
+        for(int r=0;r<4;r++){
+            avgaccuracy+=runningAccuracy[r];
+        }
+        avgaccuracy/=4.0;
+        
+        [frameHits addObject:[NSNumber numberWithDouble:avgaccuracy]];
+        
+    }
+    
+    NSLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
+    
+    double sliceWidth = _heatMapView.frame.size.width / [frameHits count];
+    
+    // Draw
+    CGSize size = CGSizeMake(_heatMapView.frame.size.width,_heatMapView.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    for(int f = 0; f < [frameHits count]; f++){
+        
+        // Calculate accuracy color
+        double accuracy = [[frameHits objectAtIndex:f] doubleValue];
+        UIColor * accuracyColor;
+        
+        if(accuracy < 0.5){
+            accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*135.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
+        }else{
+            accuracyColor = [UIColor colorWithRed:2.0*(1.0-accuracy)*255.0/255.0 green:180/255.0 blue:50/255.0 alpha:0.9];
+        }
+        
+        CGRect sliceRect = CGRectMake(sliceWidth*f,0,sliceWidth+0.25,_heatMapView.frame.size.height);
+        
+        CGContextAddRect(context,sliceRect);
+        CGContextSetFillColorWithColor(context, accuracyColor.CGColor);
+        CGContextFillRect(context, sliceRect);
+        
+    }
+    
+    UIImage * rectImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * image = [[[UIImageView alloc] initWithImage:rectImage] autorelease];
+    
+    [_heatMapView addSubview:image];
+    
+    UIGraphicsEndImageContext();
+    
+    [frameHits release];
+}
+
 - (void)songModelEndOfSong
 {
     
@@ -2046,7 +2254,18 @@ extern UserController * g_userController;
     
     NSDictionary * scoreData = [_scoreTracker aggregateScoreEndOfSong];
     
-    //NSLog(@"ScoreData is %@",scoreData);
+    double score = [[scoreData objectForKey:@"Score"] doubleValue];
+    double percentNotesHit = 100*[[scoreData objectForKey:@"PercentNotesHit"] doubleValue];
+    double maxStreak = [[scoreData objectForKey:@"MaxStreak"] doubleValue];
+    double accuracy = 100*[[scoreData objectForKey:@"AverageTiming"] doubleValue];
+    
+    _scoreScore.text = [self formatScore:(int)score];
+    _scoreNotesHit.text = [NSString stringWithFormat:@"%i%%",(int)percentNotesHit];
+    _scoreInARow.text = [NSString stringWithFormat:@"%i",(int)maxStreak];
+    _scoreAccuracy.text = [NSString stringWithFormat:@"%i%%",(int)accuracy];
+
+    // Build the heat map
+    [self drawHeatMap];
     
     // Turn of the LEDs
     if(g_gtarController.connected){
@@ -2086,6 +2305,7 @@ extern UserController * g_userController;
     [g_userController addScore:_scoreTracker.m_score forSong:_userSong.m_songId];
     
     [_finishButton setHidden:NO];
+    [_finishRestartButton setHidden:NO];
     [_backButton setEnabled:NO];
     
     // If our queue is full, don't let them upload more songs
@@ -2094,10 +2314,7 @@ extern UserController * g_userController;
         [_feedSwitch setOn:NO];
     }
     
-    [self menuButtonClicked:nil];
-    
-    [_outputView setHidden:YES];
-    [_postToFeedView setHidden:NO];
+    [self songScoreButtonClicked:nil];
     
 }
 
@@ -2414,30 +2631,38 @@ extern UserController * g_userController;
     }
 
     // Prepare data to score
-    
-    // Count number of frets on
-    int numFretsOn = 0;
-    if(fretOneOn) numFretsOn++;
-    if(fretTwoOn) numFretsOn++;
-    if(fretThreeOn) numFretsOn++;
+    if([tappedFrame.m_notesHit count] > 0){
+        
+        // Count number of frets on
+        int numFretsOn = 0;
+        if(fretOneOn) numFretsOn++;
+        if(fretTwoOn) numFretsOn++;
+        if(fretThreeOn) numFretsOn++;
 
-    // Check if the streak ends
-    // Check everything between a frame hit and the last hit frame
-    BOOL endStreak = NO;
-    
-    for(NSNoteFrame * ff in _songModel.m_noteFrames){
-        if(ff.m_absoluteBeatStart < tappedFrame.m_absoluteBeatStart && [ff.m_notesPending count] > 0 && (!_lastTappedFrame || _lastTappedFrame.m_absoluteBeatStart < ff.m_absoluteBeatStart)){
-            endStreak = YES;
-        }else if(ff.m_absoluteBeatStart > _songModel.m_currentBeat + STANDALONE_SONG_BEATS_PER_SCREEN){
-            break;
+        // Check if the streak ends
+        // Check everything between a frame hit and the last hit frame
+        BOOL endStreak = NO;
+        
+        for(NSNoteFrame * ff in _songModel.m_noteFrames){
+            if(ff.m_absoluteBeatStart < tappedFrame.m_absoluteBeatStart && [ff.m_notesPending count] > 0 && (!_lastTappedFrame || _lastTappedFrame.m_absoluteBeatStart < ff.m_absoluteBeatStart)){
+                endStreak = YES;
+            }else if(ff.m_absoluteBeatStart > _songModel.m_currentBeat + STANDALONE_SONG_BEATS_PER_SCREEN){
+                break;
+            }
         }
+        
+        double accuracy = [_scoreTracker scoreFrame:tappedFrame onBeat:_songModel.m_currentBeat withComplexity:numFretsOn endStreak:endStreak isStandalone:isStandalone];
+        
+        // Save the accuracy in note.m_hit
+        for(NSNote * nn in tappedFrame.m_notes){
+            [_displayController setNoteHit:nn toValue:accuracy];
+        }
+        
+        [self updateScoreDisplay];
+        
+        _lastTappedFrame = tappedFrame;
+        
     }
-    
-    [_scoreTracker scoreFrame:tappedFrame onBeat:_songModel.m_currentBeat withComplexity:numFretsOn endStreak:endStreak isStandalone:isStandalone];
-    
-    [self updateScoreDisplay];
-    
-    _lastTappedFrame = tappedFrame;
     
 }
 
@@ -2496,3 +2721,4 @@ extern UserController * g_userController;
 }
 
 @end
+

@@ -60,7 +60,7 @@
 
 - (id)initWithBaseScore:(UInt32)baseScore;
 
-- (void)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone;
+- (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone;
 - (void)scoreFramePerfectly:(NSNoteFrame*)frame;
 - (void)starRateScore;
 - (void)scoreEndOfFrame:(NSNoteFrame*)frame;

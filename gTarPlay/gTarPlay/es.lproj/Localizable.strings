@@ -60,6 +60,11 @@
 "Easy" = "Fácil";
 "Quit" = "Dejar";
 "Restart" = "Reiniciar";
+"RESTART" = "REINICIAR";
+"SCORE" = "PARTITURA";
+"NOTES HIT" = "NOTAS TOCADAS";
+"IN A ROW" = "CONSECUTIVO";
+"ACCURACY" = "PRECISIÓN";
 
 // Social View
 /*#*/ "Logout" = "Sair";

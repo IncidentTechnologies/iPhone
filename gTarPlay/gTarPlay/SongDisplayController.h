@@ -50,6 +50,7 @@
     
     // NSNote -> NoteAnimation
     NSMutableDictionary * m_noteModelDictionary;
+    NSMutableDictionary * m_noteModelUniversalDictionary;
     NSMutableArray * m_undisplayedFrames;
     NSMutableArray * m_numberModels;
     
@@ -102,9 +103,11 @@
 
 - (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn;
 
+- (double)getNoteHit:(NSNote*)note;
 - (void)hitNote:(NSNote*)note;
 - (void)missNote:(NSNote*)note;
 - (void)attemptFrame:(NSNoteFrame *)frame;
+- (void)setNoteHit:(NSNote*)note toValue:(double)hit;
 
 // Standalone
 - (int)getMappedStringFromString:(int)str;

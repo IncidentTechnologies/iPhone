@@ -70,7 +70,7 @@
 }
 
 // Called on exit frame for normal, or anytime during Standalone
-- (void)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone
+- (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone
 {
     
     UInt32 frameMissedHits = [frame.m_notesPending count];
@@ -79,9 +79,9 @@
 
     if(isStandalone){
         
-        double streakMultiplier = 1;
         double complexMultiplier = 1;
         double noteScore = 0;
+        m_multiplier = 1;
         
         if(endStreak){
             m_streak = 0;
@@ -94,22 +94,24 @@
         
         NSLog(@"Adding note score %f (%f per frame)",noteScore,noteScore/frameCorrectHits);
         
-        // Stash to build heat map later and get avg
+        // Stash to get avg
         [m_frameTimings addObject:[NSNumber numberWithDouble:percentAccuracy]];
+        
         
         //
         // Streak
         //
         
-        // TODO: make sure there's nothing in between
         m_streak++;
         
-        if(m_streak > 4 && m_streak < 8){
-            streakMultiplier = 2;
-        }else if(m_streak < 16){
-            streakMultiplier = 4;
-        }else{
-            streakMultiplier = 8;
+        if(m_streak >= 4 && m_streak < 8){
+            m_multiplier = 2;
+        }else if(m_streak >= 8 && m_streak < 16){
+            m_multiplier = 4;
+        }else if(m_streak >= 16){
+            m_multiplier = 6;
+        }else if(m_streak >= 32){
+            m_multiplier = 8;
         }
         
         // Calculate ** max streak **
@@ -125,7 +127,11 @@
         // Score
         //
         
-        m_score += noteScore * streakMultiplier * complexMultiplier;
+        NSLog(@"Score is %f * %i * %f",noteScore,(int)m_multiplier,complexMultiplier);
+        
+        m_score += noteScore * m_multiplier * complexMultiplier;
+        
+        return percentAccuracy;
         
     }else{
         
@@ -144,7 +150,7 @@
         // Multiply the base score and add it in
         m_score += ((frameCorrectHits * m_baseScore) * m_multiplier);
         
-        
+        return 1.0;
     }
     
 }
@@ -203,15 +209,18 @@
         totalTiming += [timing doubleValue];
     }
     
-    avgTiming = totalTiming/numFrames;
-    
+    if(numFrames == 0){
+        avgTiming = 0;
+    }else{
+        avgTiming = totalTiming/numFrames;
+    }
     
     // return data for display
     NSDictionary * data = [[NSDictionary alloc] initWithObjectsAndKeys:
+                           [NSNumber numberWithDouble:m_score],@"Score",
                            [NSNumber numberWithDouble:percentNotesHit],@"PercentNotesHit",
                            [NSNumber numberWithDouble:avgTiming],@"AverageTiming",
-                           [NSNumber numberWithDouble:m_streakMax],@"MaxStreak",
-                           m_frameTimings,@"HeatMapData",nil];
+                           [NSNumber numberWithDouble:m_streakMax],@"MaxStreak",nil];
     
     return data;
     
