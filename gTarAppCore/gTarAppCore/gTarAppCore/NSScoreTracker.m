@@ -8,6 +8,7 @@
 
 #import "NSScoreTracker.h"
 #import "NSNoteFrame.h"
+#import "NSNote.h"
 
 #define SCORE_TRACKER_HITS_PER_MULTIPLIER 4
 #define SCORE_TRACKER_MULTIPLIER_MAX 4
@@ -73,85 +74,101 @@
 - (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone
 {
     
-    UInt32 frameMissedHits = [frame.m_notesPending count];
-    UInt32 frameCorrectHits = [frame.m_notesHit count];
-    UInt32 frameIncorrectHits = frame.m_notesWrong;
-
+    int frameMissedHits = (int)[frame.m_notesPending count];
+    int frameCorrectHits = (int)[frame.m_notesHit count];
+    int frameIncorrectHits = (int)frame.m_notesWrong;
+    
+    double percentAccuracy = 0;
+    double complexMultiplier = 1;
+    double noteScore = 0;
+    m_multiplier = 1;
+    
     if(isStandalone){
         
-        double complexMultiplier = 1;
-        double noteScore = 0;
-        m_multiplier = 1;
-        
+        // End streak logic
         if(endStreak){
             m_streak = 0;
         }
         
-        // Get note start and compare to beat hit for accuracy
-        double percentAccuracy = (STANDALONE_SONG_BEATS_PER_SCREEN-frame.m_absoluteBeatStart+beat)/STANDALONE_SONG_BEATS_PER_SCREEN;
-        
-        noteScore += NOTE_MAX_POINTS * percentAccuracy;
-        
-        NSLog(@"Adding note score %f (%f per frame)",noteScore,noteScore/frameCorrectHits);
-        
-        // Stash to get avg
-        [m_frameTimings addObject:[NSNumber numberWithDouble:percentAccuracy]];
-        
-        
         //
-        // Streak
+        // Accuracy
         //
         
-        m_streak++;
-        
-        if(m_streak >= 4 && m_streak < 8){
-            m_multiplier = 2;
-        }else if(m_streak >= 8 && m_streak < 16){
-            m_multiplier = 4;
-        }else if(m_streak >= 16){
-            m_multiplier = 6;
-        }else if(m_streak >= 32){
-            m_multiplier = 8;
-        }
-        
-        // Calculate ** max streak **
-        m_streakMax = MAX(m_streakMax,m_streak);
-        
-        //
-        // Complexity
-        //
-        // Counts the # of frets down
-        complexMultiplier += 0.1*complexity + 0.1*(frameCorrectHits - 1);
-        
-        //
-        // Score
-        //
-        
-        NSLog(@"Score is %f * %i * %f",noteScore,(int)m_multiplier,complexMultiplier);
-        
-        m_score += noteScore * m_multiplier * complexMultiplier;
-        
-        return percentAccuracy;
+        // Compare note start to beat hit
+        percentAccuracy = (STANDALONE_SONG_BEATS_PER_SCREEN-frame.m_absoluteBeatStart+beat)/STANDALONE_SONG_BEATS_PER_SCREEN;
         
     }else{
         
-        // If they mess up (wrong notes or expird notes), reset the streak and multiplier
+        // End streak logic
         if ( frameMissedHits > 0 || frameIncorrectHits > 0 )
         {
             m_multiplier = 1;
             m_streak = 0;
         }
         
-        m_streak += frameCorrectHits;
+        //
+        // Accuracy
+        //
         
-        // At least 1, no more than MAX
-        m_multiplier = MIN( SCORE_TRACKER_MULTIPLIER_MAX, (m_streak/SCORE_TRACKER_HITS_PER_MULTIPLIER)+1);
+        // Compare how many notes were hit in the frame
+        percentAccuracy = frameCorrectHits / (frameCorrectHits + frameIncorrectHits + frameMissedHits);
         
-        // Multiply the base score and add it in
-        m_score += ((frameCorrectHits * m_baseScore) * m_multiplier);
+        //
+        // Complexity
+        //
+        // Count the # of different frets down
+        int fretson[17];
+        complexity = 0;
         
-        return 1.0;
+        for(int i = 0; i < 17; i++) fretson[i] = 0;
+        for(NSNote * nn in frame.m_notesHit) fretson[nn.m_fret] = 1;
+        for(int i = 0; i < 17; i++) complexity += fretson[i];
+        
+        complexity -= 1;
     }
+    
+    //
+    // Accuracy
+    //
+    // Stash to get avg
+    [m_frameTimings addObject:[NSNumber numberWithDouble:percentAccuracy]];
+    
+    noteScore += NOTE_MAX_POINTS * percentAccuracy;
+    
+    //
+    // Streak
+    //
+    
+    m_streak++;
+    
+    if(m_streak >= 4 && m_streak < 8){
+        m_multiplier = 2;
+    }else if(m_streak >= 8 && m_streak < 16){
+        m_multiplier = 4;
+    }else if(m_streak >= 16){
+        m_multiplier = 6;
+    }else if(m_streak >= 32){
+        m_multiplier = 8;
+    }
+    
+    // Calculate ** max streak **
+    m_streakMax = MAX(m_streakMax,m_streak);
+    
+    //
+    // Complexity
+    //
+    // Counts the # of frets down
+    complexMultiplier += 0.1*complexity + 0.1*(frameCorrectHits - 1);
+    
+    //
+    // Score
+    //
+    
+    NSLog(@"Score is %f * %i * %f",noteScore,(int)m_multiplier,complexMultiplier);
+    
+    m_score += noteScore * m_multiplier * complexMultiplier;
+    
+    return percentAccuracy;
     
 }
 
@@ -159,9 +176,9 @@
 // Called only on exit frame
 - (void)scoreEndOfFrame:(NSNoteFrame*)frame
 {
-    UInt32 frameMissedHits = [frame.m_notesPending count];
-    UInt32 frameCorrectHits = [frame.m_notesHit count];
-    UInt32 frameIncorrectHits = frame.m_notesWrong;
+    int frameMissedHits = (int)[frame.m_notesPending count];
+    int frameCorrectHits = (int)[frame.m_notesHit count];
+    int frameIncorrectHits = (int)frame.m_notesWrong;
     
     m_hitsAttempted += (frameCorrectHits + frameIncorrectHits);
     m_hitsCorrect += frameCorrectHits;

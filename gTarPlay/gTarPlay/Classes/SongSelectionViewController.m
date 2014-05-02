@@ -684,7 +684,7 @@ extern GtarController *g_gtarController;
 - (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty
 {
     
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.
@@ -733,12 +733,12 @@ extern GtarController *g_gtarController;
 
 - (void)gtarDisconnected
 {
-    if ( self.presentedViewController != nil )
+    /*if ( self.presentedViewController != nil )
     {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];*/
 }
 
 #pragma mark - ExpandableSearchBarDelegate

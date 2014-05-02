@@ -41,7 +41,7 @@ enum PlayViewControllerDifficulty
 
 @interface PlayViewController : MainEventController <GtarControllerObserver, NSSongModelDelegate>
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone;
 
 - (void) localizeViews;
 

@@ -119,7 +119,7 @@ extern UserController * g_userController;
 
 @synthesize g_soundMaster;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
@@ -133,6 +133,8 @@ extern UserController * g_userController;
         _playTimeStart = [[NSDate date] retain];
         _audioRouteTimeStart = [[NSDate date] retain];
         _metronomeTimeStart = [[NSDate date] retain];
+        
+        isStandalone = standalone;
         
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -1333,12 +1335,17 @@ extern UserController * g_userController;
 
 - (void)gtarFretDown:(GtarPosition)position
 {
-    
+
 }
 
 - (void)gtarFretUp:(GtarPosition)position
 {
     
+}
+
+- (void)gtarNoteOn:(GtarPluck)pluck
+{
+    [self gtarNoteOn:pluck forFrame:nil];
 }
 
 - (void)gtarNoteOn:(GtarPluck)pluck forFrame:(NSNoteFrame*)frameToPlay
@@ -1462,6 +1469,7 @@ extern UserController * g_userController;
     // Always mute notes on note-off for hard
     NSLog(@"TODO: attenuate and mute note");
     //[g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
+    [g_soundMaster NoteOffAtString:position.string-1 andFret:position.fret];
     
     @synchronized ( _deferredNotesQueue )
     {
@@ -1516,27 +1524,40 @@ extern UserController * g_userController;
 
 - (void)gtarConnected
 {
-    
+    // Standalone -> Normal
     NSLog(@"SongViewController: gTar has been connected");
+
+    [_metronomeTimer invalidate];
+    _metronomeTimer = nil;
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
-    
-    [g_gtarController setMinimumInterarrivalTime:0.10f];
-    
-    [self startWithSongXmlDom];
-    
-    // Stop ourselves before we start so the connecting screen can display
-    [self stopMainEventLoop];
-    [self drawPlayButton:_pauseButton];
-    
-    [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
+    // Only disconnect if mid-song
+    if(isStandalone){
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }else{
+        
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
+        
+        [g_gtarController setMinimumInterarrivalTime:0.10f];
+        
+        [self startWithSongXmlDom];
+        
+        // Stop ourselves before we start so the connecting screen can display
+        [self stopMainEventLoop];
+        [self drawPlayButton:_pauseButton];
+        
+        [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
+        
+    }
 
 }
 
 - (void)gtarDisconnected
 {
-    
+ 
+    // Normal -> Standalone
     NSLog(@"SongViewController: gTar has been disconnected");
     
 //    [self backButtonClicked:nil];
@@ -1544,15 +1565,6 @@ extern UserController * g_userController;
     _metronomeTimer = nil;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
-    
-//    [g_telemetryController logEvent:GtarPlaySongDisconnected
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-//                                     _userSong.m_title, @"Title",
-//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-//                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -2171,7 +2183,6 @@ extern UserController * g_userController;
 - (void)drawHeatMap
 {
     
-    // TODO: FrameHits will be different on regular playmode
     NSMutableArray * frameHits = [[NSMutableArray alloc] init];
     
     double runningAccuracy[4];
@@ -2179,9 +2190,14 @@ extern UserController * g_userController;
     for (int f = 0; f < [_songModel.m_noteFrames count]; f++)
     {
     
+        double accuracy;
         NSNoteFrame * frame = [_songModel.m_noteFrames objectAtIndex:f];
-        NSNote * firstNote = [frame.m_notes firstObject];
-        double accuracy = [_displayController getNoteHit:firstNote];
+        
+        if(isStandalone){
+            accuracy = [_displayController getNoteHit:[frame.m_notes firstObject]];
+        }else{
+            accuracy = (double)[frame.m_notesHit count] / (double)([frame.m_notesHit count]+[frame.m_notesPending count]+frame.m_notesWrong);
+        }
         
         // build average
         if(f==0){
@@ -2206,7 +2222,7 @@ extern UserController * g_userController;
         
     }
     
-    NSLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
+    //NSLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
     
     double sliceWidth = _heatMapView.frame.size.width / [frameHits count];
     
@@ -2278,15 +2294,6 @@ extern UserController * g_userController;
     _metronomeTimer = nil;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
-    
-//    [g_telemetryController logEvent:GtarPlaySongCompleted
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-//                                     _userSong.m_title, @"Title",
-//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-//                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -2369,9 +2376,11 @@ extern UserController * g_userController;
     }
     
     // Debug
-    if(g_gtarController.connected){
-        _skipNotes = YES;
-    }
+#ifdef Debug_BUILD
+    //if(g_gtarController.connected){
+    //    _skipNotes = YES;
+    //}
+#endif
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -2410,6 +2419,7 @@ extern UserController * g_userController;
 
 
 #pragma mark - Standalone logic
+// Standalone
 - (void)tapNoteFromTouchPoint:(CGPoint)touchPoint
 {
     NSMutableDictionary * frameWithString = [_displayController getStringPluckFromTap:touchPoint];
@@ -2435,6 +2445,7 @@ extern UserController * g_userController;
     }
 }
 
+// Standalone
 - (void)strumNoteFromTouchPoint:(CGPoint)touchPoint
 {
     NSMutableDictionary * frameWithString = [_displayController getStringPluckFromTap:touchPoint];
@@ -2451,6 +2462,7 @@ extern UserController * g_userController;
     }
 }
 
+// Standalone
 - (void)playNoteOnString:(int)tappedString atFrame:(NSNoteFrame*)tappedFrame
 {
     
@@ -2666,6 +2678,7 @@ extern UserController * g_userController;
     
 }
 
+// Standalone
 - (void)fretDown:(id)sender
 {
     UIButton * fret = (UIButton *)sender;
@@ -2703,6 +2716,7 @@ extern UserController * g_userController;
     [_displayController fretsDownOne:fretOneOn fretTwo:fretTwoOn fretThree:fretThreeOn];
 }
 
+// Standalone
 - (void)fretUp:(id)sender
 {
     UIButton * fret = (UIButton *)sender;

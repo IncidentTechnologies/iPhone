@@ -346,7 +346,7 @@ extern FileController *g_fileController;
 - (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty
 {
     
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil];
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:nil isStandalone:NO];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.
