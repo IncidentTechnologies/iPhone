@@ -25,7 +25,7 @@
     
 }
 
-@property (nonatomic, retain) CloudController * m_cloudController;
+@property (nonatomic, strong) CloudController * m_cloudController;
 
 - (id)initWithCloudController:(CloudController*)cloudController;
 - (void)clearCache;

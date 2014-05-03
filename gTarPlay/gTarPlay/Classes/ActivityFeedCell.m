@@ -89,13 +89,6 @@ extern UserController * g_userController;
     m_timelabel.text = [[NSString alloc] initWithString:[TimeFormatter stringFromNow:_userSongSession.m_created]];
 }
 
-- (void)dealloc
-{
-    [_userSongSession release];
-    [_activityView release];
-    [_likeButton release];
-    [super dealloc];
-}
 
 - (void)profilePicDownloadComplete:(UIImage *)pic
 {

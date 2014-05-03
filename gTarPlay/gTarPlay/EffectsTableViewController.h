@@ -22,8 +22,8 @@
 
 @interface EffectsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (retain, nonatomic) UITableView *tableView;
-@property (assign, nonatomic) id <EffectSelectionDelegate> delegate;
+@property (strong, nonatomic) UITableView *tableView;
+@property (weak, nonatomic) id <EffectSelectionDelegate> delegate;
 
 //- (id)initWithAudioController:(AudioController*)AC;
 - (id)init;

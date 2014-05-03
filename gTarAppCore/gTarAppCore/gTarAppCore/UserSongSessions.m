@@ -39,14 +39,6 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_sessionsArray release];
-    
-    [super dealloc];
-    
-}
 
 - (void)addSessionsFromXmlDom:(XmlDom*)xmlDom
 {
@@ -60,7 +52,6 @@
         
         [m_sessionsArray addObject:userSongSession];
         
-        [userSongSession release];
     }
     
 }

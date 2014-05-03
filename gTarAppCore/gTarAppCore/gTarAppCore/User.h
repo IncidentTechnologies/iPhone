@@ -16,7 +16,7 @@
 	NSInteger m_userId;
 }
 
-@property (nonatomic, retain) NSString * m_username;
+@property (nonatomic, strong) NSString * m_username;
 @property (nonatomic, assign) NSInteger m_userId;
 
 - (id)initWithXmlDom:(XmlDom*)xmlDom;

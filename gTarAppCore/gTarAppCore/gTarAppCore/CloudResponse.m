@@ -55,7 +55,7 @@
         // We don't retain the Response in this action to avoid loops
         cloudRequest.m_cloudResponse = self;
         
-        m_cloudRequest = [cloudRequest retain];
+        m_cloudRequest = cloudRequest;
         
         self.m_statusText = @"Connection error";
     }
@@ -64,30 +64,4 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_cloudRequest release];
-    
-    [m_mimeType release];
-    [m_statusText release];
-    
-    [m_receivedData release];
-    [m_receivedDataString release];
-    [m_responseXmlDom release];
-    
-    [m_responseUserCredits release];
-    [m_responseUserProfile release];
-    [m_responseUserProfiles release];
-    [m_responseUserProfilesFollows release];
-    [m_responseUserProfilesFollowedBy release];
-    [m_responseUserSongs release];
-    [m_responseUserSongSession release];
-    [m_responseUserSongSessions release];
-    [m_responseStoreFeatureCollection release];
-    [m_responseProductIds release];
-    
-    [super dealloc];
-    
-}
 @end

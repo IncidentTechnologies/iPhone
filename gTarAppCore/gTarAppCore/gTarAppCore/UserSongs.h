@@ -25,7 +25,7 @@
 
 }
 
-@property (nonatomic, retain) NSString * m_songsXml;
+@property (nonatomic, strong) NSString * m_songsXml;
 @property (nonatomic, readonly) NSMutableArray * m_songsArray;
 
 - (id)initWithXmlBlob:(NSString*)xmlBlob;

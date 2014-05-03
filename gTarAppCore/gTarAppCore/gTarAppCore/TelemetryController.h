@@ -40,11 +40,11 @@
     
 }
 
-@property (nonatomic, retain) NSString * m_compileDate;
-@property (nonatomic, retain) NSString * m_appName;
-@property (nonatomic, retain) NSString * m_appVersion;
-@property (nonatomic, retain) NSString * m_deviceId;
-@property (nonatomic, retain) NSString * m_username;
+@property (nonatomic, strong) NSString * m_compileDate;
+@property (nonatomic, strong) NSString * m_appName;
+@property (nonatomic, strong) NSString * m_appVersion;
+@property (nonatomic, strong) NSString * m_deviceId;
+@property (nonatomic, strong) NSString * m_username;
 
 - (id)initWithCloudController:(CloudController*)cloudController;
 

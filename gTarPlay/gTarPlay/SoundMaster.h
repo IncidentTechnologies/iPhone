@@ -74,8 +74,8 @@
  - (bool) NoteOnAtString:(int)string andFret:(int)fret;
  - (bool) NoteOffAtString:(int)string andFret:(int)fret;
 
-@property (retain) NSArray *m_instruments;
-@property (retain) NSArray *m_tuning;
-@property (retain) NSArray *m_standardTuning;
+@property (strong) NSArray *m_instruments;
+@property (strong) NSArray *m_tuning;
+@property (strong) NSArray *m_standardTuning;
 
 @end

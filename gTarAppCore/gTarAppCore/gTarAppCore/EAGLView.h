@@ -13,7 +13,7 @@
 	ViewRenderer * m_renderer;
 }
 
-@property (nonatomic, retain) ViewRenderer * m_renderer;
+@property (nonatomic, strong) ViewRenderer * m_renderer;
 
 - (void)drawView;
 - (void)drawViewWithHighlightsFretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree;

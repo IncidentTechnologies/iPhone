@@ -73,10 +73,10 @@ extern FileController *g_fileController;
         if ( songArrayData == nil )
             storeSongArray = [[NSArray alloc] init];
         else
-            storeSongArray = [[NSKeyedUnarchiver unarchiveObjectWithData:songArrayData] retain];
+            storeSongArray = [NSKeyedUnarchiver unarchiveObjectWithData:songArrayData];
         
-        m_storeSongArray = [storeSongArray retain];
-        m_displayedStoreSongArray = [storeSongArray retain];
+        m_storeSongArray = storeSongArray;
+        m_displayedStoreSongArray = storeSongArray;
         
         m_storeSortOrder.type = SORT_TITLE;
         m_storeSortOrder.fAscending = FALSE;
@@ -353,7 +353,7 @@ extern FileController *g_fileController;
     NSString *songString = (NSString *)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     playViewController.userSong = userSong;
-    playViewController.userSong.m_xmlDom = [[[XmlDom alloc] initWithXmlString:songString] autorelease];
+    playViewController.userSong.m_xmlDom = [[XmlDom alloc] initWithXmlString:songString];
     
     if ( difficulty == 0 )
     {
@@ -374,7 +374,6 @@ extern FileController *g_fileController;
     }
     
     [self.navigationController pushViewController:playViewController animated:YES];
-    [playViewController release];
 }
 
 #pragma mark - Store List Sorting
@@ -494,15 +493,6 @@ extern FileController *g_fileController;
     [self refreshDisplayedStoreSongList];
 }
 
-- (void)dealloc
-{
-    [m_storeSongArray release];
-    
-    [_buttonGetProductList release];
-    [_pullToUpdateSongList release];
-    [_buttonGetServerSongList release];
-    [super dealloc];
-}
 
 - (void)refreshSongList
 {
@@ -534,20 +524,19 @@ extern FileController *g_fileController;
 
 - (void)setStoreSongArray:(NSArray *)storeSongArray
 {
-    [m_storeSongArray autorelease];
-    m_storeSongArray = [storeSongArray retain];
+    m_storeSongArray = storeSongArray;
     
     [self refreshDisplayedStoreSongList];
 }
 
 - (void)refreshDisplayedStoreSongList
 {
-    [m_displayedStoreSongArray autorelease];
+    //[m_displayedStoreSongArray autorelease];
     
     if ( m_fSearching == TRUE )
-        m_displayedStoreSongArray = [m_searchedStoreSongArray retain];
+        m_displayedStoreSongArray = m_searchedStoreSongArray;
     else
-        m_displayedStoreSongArray = [m_storeSongArray retain];
+        m_displayedStoreSongArray = m_storeSongArray;
 
     
     [self sortSongList];
@@ -592,19 +581,19 @@ extern FileController *g_fileController;
     switch (m_storeSortOrder.type)
     {
         case SORT_TITLE: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:m_storeSortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:m_storeSortOrder.fAscending];
         } break;
             
         case SORT_ARTIST: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:m_storeSortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:m_storeSortOrder.fAscending];
         } break;
             
         case SORT_SKILL: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_difficulty" ascending:m_storeSortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_difficulty" ascending:m_storeSortOrder.fAscending];
         } break;
             
         case SORT_COST: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_cost" ascending:m_storeSortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_cost" ascending:m_storeSortOrder.fAscending];
         } break;
             
         default: break;
@@ -613,8 +602,7 @@ extern FileController *g_fileController;
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [m_displayedStoreSongArray sortedArrayUsingDescriptors:sortDescriptors];
     
-    [m_displayedStoreSongArray autorelease];
-    m_displayedStoreSongArray = [sortedArray retain];
+    m_displayedStoreSongArray = sortedArray;
 }
 
 
@@ -770,8 +758,7 @@ extern FileController *g_fileController;
         }
     }
     
-    [m_searchedStoreSongArray release];
-    m_searchedStoreSongArray = [searchResults retain];
+    m_searchedStoreSongArray = searchResults;
 }
 
 -(void) dismissSearchBar

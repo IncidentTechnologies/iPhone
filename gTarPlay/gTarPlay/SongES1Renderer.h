@@ -37,9 +37,9 @@
     CGFloat m_backgroundOffset;
 }
 
-@property (nonatomic, retain) LineModel * m_seekLineModel;
-@property (nonatomic, retain) LineModel * m_seekLineStandaloneModel;
-@property (nonatomic, retain) Model * m_backgroundTexture;
+@property (nonatomic, strong) LineModel * m_seekLineModel;
+@property (nonatomic, strong) LineModel * m_seekLineStandaloneModel;
+@property (nonatomic, strong) Model * m_backgroundTexture;
 @property (nonatomic, assign) GLfloat m_offset;
 @property (nonatomic, assign) GLfloat m_viewShift;
 

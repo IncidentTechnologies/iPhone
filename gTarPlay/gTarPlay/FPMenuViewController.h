@@ -21,20 +21,20 @@
     
 }
 
-@property (nonatomic, assign) id <FPMenuDelegate> delegate;
-@property (nonatomic, retain) IBOutlet UIButton *exitButton;
-@property (nonatomic, retain) IBOutlet UILabel *quitLabel;
-@property (nonatomic, retain) IBOutlet UILabel *toneLabel;
-@property (nonatomic, retain) IBOutlet UILabel *outputLabel;
-@property (nonatomic, retain) IBOutlet UILabel *speakerLabel;
-@property (nonatomic, retain) IBOutlet UILabel *auxLabel;
-@property (nonatomic, retain) IBOutlet UILabel *slidingLabel;
-@property (nonatomic, retain) IBOutlet UILabel *offLabel;
-@property (nonatomic, retain) IBOutlet UILabel *onLabel;
-@property (nonatomic, retain) IBOutlet UILabel *exitToMainLabel;
-@property (retain, nonatomic) IBOutlet UISlider *toneSlider;
-@property (retain, nonatomic) IBOutlet UISwitch *audioRouteSwitch;
-@property (retain, nonatomic) IBOutlet UISwitch *slideSwitch;
+@property (nonatomic, weak) id <FPMenuDelegate> delegate;
+@property (nonatomic, strong) IBOutlet UIButton *exitButton;
+@property (nonatomic, strong) IBOutlet UILabel *quitLabel;
+@property (nonatomic, strong) IBOutlet UILabel *toneLabel;
+@property (nonatomic, strong) IBOutlet UILabel *outputLabel;
+@property (nonatomic, strong) IBOutlet UILabel *speakerLabel;
+@property (nonatomic, strong) IBOutlet UILabel *auxLabel;
+@property (nonatomic, strong) IBOutlet UILabel *slidingLabel;
+@property (nonatomic, strong) IBOutlet UILabel *offLabel;
+@property (nonatomic, strong) IBOutlet UILabel *onLabel;
+@property (nonatomic, strong) IBOutlet UILabel *exitToMainLabel;
+@property (strong, nonatomic) IBOutlet UISlider *toneSlider;
+@property (strong, nonatomic) IBOutlet UISwitch *audioRouteSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *slideSwitch;
 //@property (retain, nonatomic) IBOutlet UITextField *testText;
 
 - (void)localizeViews;

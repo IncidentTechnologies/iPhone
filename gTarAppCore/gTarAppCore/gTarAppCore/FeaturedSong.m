@@ -105,7 +105,7 @@
         // create the user song
         XmlDom * userSongDom = [xmlDom getChildWithName:@"UserSong"];
         
-        self.m_userSong = [[[UserSong alloc] initWithXmlDom:userSongDom] autorelease];
+        self.m_userSong = [[UserSong alloc] initWithXmlDom:userSongDom];
         
         // convenience in case the featued song wasn't populated ..
         if ( m_genre == nil || [m_genre isEqualToString:@""] == YES )
@@ -119,17 +119,6 @@
     
 }
 
-- (void)dealloc
-{
-
-    [m_htmlPreview release];
-    [m_genre release];
-    [m_userSong release];
-    [m_featuedImage release];
-
-    [super dealloc];
-
-}
 
 #pragma mark - Misc
 

@@ -10,12 +10,12 @@
 
 @interface UserCommentCell : UITableViewCell
 
-@property (retain, nonatomic) NSString *name;
-@property (retain, nonatomic) NSString *comment;
-@property (retain, nonatomic) UIImage *picture;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *comment;
+@property (strong, nonatomic) UIImage *picture;
 
-@property (retain, nonatomic) IBOutlet UIImageView *pictureImageView;
-@property (retain, nonatomic) IBOutlet UILabel *commentLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *pictureImageView;
+@property (strong, nonatomic) IBOutlet UILabel *commentLabel;
 
 - (void)updateCell;
 

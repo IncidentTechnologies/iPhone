@@ -11,8 +11,8 @@
 @interface SlidingViewController : UIViewController
 
 @property (assign, nonatomic) BOOL isDown;
-@property (retain, nonatomic) IBOutlet UIView *contentView;
-@property (retain, nonatomic) IBOutlet UIButton *triangleIndicatorImage;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIButton *triangleIndicatorImage;
 
 - (void)attachToSuperview:(UIView *)view withFrame:(CGRect)rect;
 - (void)toggleView:(BOOL)animated;

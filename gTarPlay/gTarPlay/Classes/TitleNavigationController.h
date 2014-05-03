@@ -23,66 +23,66 @@
 @interface TitleNavigationController : UIViewController <UITableViewDataSource, PaginatedPullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate>
 
 // Audio Controller
-@property (retain, nonatomic) SoundMaster *g_soundMaster;
+@property (strong, nonatomic) SoundMaster *g_soundMaster;
 
 // Main
-@property (retain, nonatomic) IBOutlet UIView *topBarView;
-@property (retain, nonatomic) IBOutlet UIImageView *gtarLogoImage;
-@property (retain, nonatomic) IBOutlet UIView *rightPanel;
-@property (retain, nonatomic) IBOutlet UIView *leftPanel;
-@property (retain, nonatomic) IBOutlet UIView *videoRightPanel;
-@property (retain, nonatomic) IBOutlet UIView *delayLoadingView;
-@property (retain, nonatomic) IBOutlet UIImageView *videoPreviewImage;
+@property (strong, nonatomic) IBOutlet UIView *topBarView;
+@property (strong, nonatomic) IBOutlet UIImageView *gtarLogoImage;
+@property (strong, nonatomic) IBOutlet UIView *rightPanel;
+@property (strong, nonatomic) IBOutlet UIView *leftPanel;
+@property (strong, nonatomic) IBOutlet UIView *videoRightPanel;
+@property (strong, nonatomic) IBOutlet UIView *delayLoadingView;
+@property (strong, nonatomic) IBOutlet UIImageView *videoPreviewImage;
 
 - (void)delayLoadingComplete;
 
 - (void)localizeView;
 
 // Top bar
-@property (retain, nonatomic) IBOutlet UILabel *notificationLabel;
-@property (retain, nonatomic) IBOutlet UIButton *profileButton;
-@property (retain, nonatomic) UILabel *profileLabel;
+@property (strong, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (strong, nonatomic) IBOutlet UIButton *profileButton;
+@property (strong, nonatomic) UILabel *profileLabel;
 
 - (IBAction)profileButtonClicked:(id)sender;
 
 // Panels
-@property (retain, nonatomic) IBOutlet UIView *loggedoutLeftPanel;
-@property (retain, nonatomic) IBOutlet UIView *signupRightPanel;
-@property (retain, nonatomic) IBOutlet UIView *signinRightPanel;
-@property (retain, nonatomic) IBOutlet UIView *gatekeeperLeftPanel;
-@property (retain, nonatomic) IBOutlet UIView *menuLeftPanel;
-@property (retain, nonatomic) IBOutlet UIView *feedRightPanel;
-@property (retain, nonatomic) IBOutlet UIView *loadingRightPanel;
+@property (strong, nonatomic) IBOutlet UIView *loggedoutLeftPanel;
+@property (strong, nonatomic) IBOutlet UIView *signupRightPanel;
+@property (strong, nonatomic) IBOutlet UIView *signinRightPanel;
+@property (strong, nonatomic) IBOutlet UIView *gatekeeperLeftPanel;
+@property (strong, nonatomic) IBOutlet UIView *menuLeftPanel;
+@property (strong, nonatomic) IBOutlet UIView *feedRightPanel;
+@property (strong, nonatomic) IBOutlet UIView *loadingRightPanel;
 
-@property (retain, nonatomic) IBOutlet UIView *disconnectedGtarLeftPanel;
-@property (retain, nonatomic) IBOutlet UILabel *pleaseConnectLabel;
+@property (strong, nonatomic) IBOutlet UIView *disconnectedGtarLeftPanel;
+@property (strong, nonatomic) IBOutlet UILabel *pleaseConnectLabel;
 
 // Left Panel buttons + clicks
-@property (retain, nonatomic) IBOutlet UIButton *signinButton;
-@property (retain, nonatomic) IBOutlet UIButton *signupButton;
+@property (strong, nonatomic) IBOutlet UIButton *signinButton;
+@property (strong, nonatomic) IBOutlet UIButton *signupButton;
 //@property (retain, nonatomic) IBOutlet UILabel *signInOrLabel;
 //@property (retain, nonatomic) IBOutlet UILabel *signUpOrLabel;
 
-@property (retain, nonatomic) IBOutlet UILabel *signInLoginLabel;
-@property (retain, nonatomic) IBOutlet UILabel *signUpLoginLabel;
+@property (strong, nonatomic) IBOutlet UILabel *signInLoginLabel;
+@property (strong, nonatomic) IBOutlet UILabel *signUpLoginLabel;
 
-@property (retain, nonatomic) IBOutlet UIButton *gatekeeperVideoButton;
-@property (retain, nonatomic) IBOutlet UIButton *gatekeeperSigninButton;
-@property (retain, nonatomic) IBOutlet UIButton *gatekeeperWebsiteButton;
+@property (strong, nonatomic) IBOutlet UIButton *gatekeeperVideoButton;
+@property (strong, nonatomic) IBOutlet UIButton *gatekeeperSigninButton;
+@property (strong, nonatomic) IBOutlet UIButton *gatekeeperWebsiteButton;
 
-@property (retain, nonatomic) IBOutlet UIButton *loggedoutSignupButton;
-@property (retain, nonatomic) IBOutlet UIButton *loggedoutSigninButton;
+@property (strong, nonatomic) IBOutlet UIButton *loggedoutSignupButton;
+@property (strong, nonatomic) IBOutlet UIButton *loggedoutSigninButton;
 
-@property (retain, nonatomic) IBOutlet UIButton *menuPlayButton;
-@property (retain, nonatomic) IBOutlet UIButton *menuFreePlayButton;
-@property (retain, nonatomic) IBOutlet UIButton *menuStoreButton;
+@property (strong, nonatomic) IBOutlet UIButton *menuPlayButton;
+@property (strong, nonatomic) IBOutlet UIButton *menuFreePlayButton;
+@property (strong, nonatomic) IBOutlet UIButton *menuStoreButton;
 
-@property (retain, nonatomic) IBOutlet CyclingTextField *signinUsernameText;
-@property (retain, nonatomic) IBOutlet CyclingTextField *signinPasswordText;
+@property (strong, nonatomic) IBOutlet CyclingTextField *signinUsernameText;
+@property (strong, nonatomic) IBOutlet CyclingTextField *signinPasswordText;
 
-@property (retain, nonatomic) IBOutlet CyclingTextField *signupUsernameText;
-@property (retain, nonatomic) IBOutlet CyclingTextField *signupPasswordText;
-@property (retain, nonatomic) IBOutlet CyclingTextField *signupEmailText;
+@property (strong, nonatomic) IBOutlet CyclingTextField *signupUsernameText;
+@property (strong, nonatomic) IBOutlet CyclingTextField *signupPasswordText;
+@property (strong, nonatomic) IBOutlet CyclingTextField *signupEmailText;
 
 - (IBAction)loggedoutSigninButtonClicked:(id)sender;
 - (IBAction)loggedoutSignupButtonClicked:(id)sender;
@@ -103,8 +103,8 @@
 - (IBAction)videoButtonClicked:(id)sender;
 
 // Feed
-@property (retain, nonatomic) IBOutlet PaginatedPullToUpdateTableView *feedTable;
-@property (retain, nonatomic) IBOutlet SelectorControl *feedSelectorControl;
+@property (strong, nonatomic) IBOutlet PaginatedPullToUpdateTableView *feedTable;
+@property (strong, nonatomic) IBOutlet SelectorControl *feedSelectorControl;
 
 - (IBAction)feedSelectorChanged:(id)sender;
 

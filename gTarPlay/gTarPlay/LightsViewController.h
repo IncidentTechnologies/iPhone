@@ -71,46 +71,46 @@ typedef enum
     
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *allLabel;
-@property (assign, nonatomic) id <LightsViewDelegate> delegate;
+@property (nonatomic, strong) IBOutlet UILabel *allLabel;
+@property (weak, nonatomic) id <LightsViewDelegate> delegate;
 
 
-@property (retain, nonatomic) IBOutlet UIView *generalSurface;
-@property (retain, nonatomic) IBOutlet UIView *fretSurface;
-@property (retain, nonatomic) IBOutlet UIView *stringSurface;
-@property (retain, nonatomic) IBOutlet UIView *allSurface;
+@property (strong, nonatomic) IBOutlet UIView *generalSurface;
+@property (strong, nonatomic) IBOutlet UIView *fretSurface;
+@property (strong, nonatomic) IBOutlet UIView *stringSurface;
+@property (strong, nonatomic) IBOutlet UIView *allSurface;
 
-@property (retain, nonatomic) IBOutlet UIView *shapeView;
-@property (retain, nonatomic) IBOutlet UIView *colorView;
+@property (strong, nonatomic) IBOutlet UIView *shapeView;
+@property (strong, nonatomic) IBOutlet UIView *colorView;
 
-@property (retain, nonatomic) IBOutlet UIButton *shapeButton;
-@property (retain, nonatomic) IBOutlet UIButton *colorButton;
-@property (retain, nonatomic) IBOutlet UIButton *loopButton;
-@property (retain, nonatomic) IBOutlet UIButton *clearButton;
+@property (strong, nonatomic) IBOutlet UIButton *shapeButton;
+@property (strong, nonatomic) IBOutlet UIButton *colorButton;
+@property (strong, nonatomic) IBOutlet UIButton *loopButton;
+@property (strong, nonatomic) IBOutlet UIButton *clearButton;
 
-@property (retain, nonatomic) IBOutlet UIImageView *arrowFretsRight;
-@property (retain, nonatomic) IBOutlet UIImageView *arrowStringsTop;
-@property (retain, nonatomic) IBOutlet UIImageView *arrowStringsBottom;
+@property (strong, nonatomic) IBOutlet UIImageView *arrowFretsRight;
+@property (strong, nonatomic) IBOutlet UIImageView *arrowStringsTop;
+@property (strong, nonatomic) IBOutlet UIImageView *arrowStringsBottom;
 
-@property (retain, nonatomic) IBOutlet UIButton *modeSingleButton;
-@property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *modeButtons;
+@property (strong, nonatomic) IBOutlet UIButton *modeSingleButton;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *modeButtons;
 
-@property (retain, nonatomic) IBOutlet UIButton *colorWhite;
-@property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *colorButtons;
+@property (strong, nonatomic) IBOutlet UIButton *colorWhite;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *colorButtons;
 
 
-@property (nonatomic, retain) IBOutlet UILabel *ledSingleLabel;
-@property (nonatomic, retain) IBOutlet UILabel *ledQuadLabel;
-@property (nonatomic, retain) IBOutlet UILabel *ledContinuousLabel;
+@property (nonatomic, strong) IBOutlet UILabel *ledSingleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *ledQuadLabel;
+@property (nonatomic, strong) IBOutlet UILabel *ledContinuousLabel;
 
 @property (assign, nonatomic) LEDTouchArea LEDTouchArea;
 @property (assign, nonatomic) CGPoint lastLEDTouch;
 @property (assign, nonatomic) LEDColorMode LEDColorMode;
-@property (retain, nonatomic) NSArray *colors;
+@property (strong, nonatomic) NSArray *colors;
 @property (assign, nonatomic) NSInteger currentColorIndex;
 @property (assign, nonatomic) LEDShape LEDShape;
 @property (assign, nonatomic) LEDLoop LEDLoop;
-@property (retain, nonatomic) NSTimer *LEDTimer;
+@property (strong, nonatomic) NSTimer *LEDTimer;
 
 - (void)localizeViews;
 

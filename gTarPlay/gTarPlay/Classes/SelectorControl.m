@@ -44,10 +44,7 @@
         [button removeFromSuperview];
     }
     
-    [_buttonViews release];
-    [_titleArray release];
     
-    [super dealloc];
 }
 
 - (void)layoutSubviews
@@ -66,7 +63,6 @@
         [button removeFromSuperview];
     }
     
-    [_buttonViews release];
     
     //
     // Create the new buttons.
@@ -98,8 +94,8 @@
         
         if ( [title isKindOfClass:[NSAttributedString class]] == YES )
         {
-            NSMutableAttributedString *whiteString = [[[NSMutableAttributedString alloc] initWithAttributedString:title] autorelease];
-            NSMutableAttributedString *grayString = [[[NSMutableAttributedString alloc] initWithAttributedString:title] autorelease];
+            NSMutableAttributedString *whiteString = [[NSMutableAttributedString alloc] initWithAttributedString:title];
+            NSMutableAttributedString *grayString = [[NSMutableAttributedString alloc] initWithAttributedString:title];
             
             [whiteString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0,[whiteString length])];
             [grayString addAttribute:NSForegroundColorAttributeName value:deselectedColor range:NSMakeRange(0,[grayString length])];
@@ -149,7 +145,7 @@
         return;
     }
     
-    _titleArray = [titleArray retain];
+    _titleArray = titleArray;
     
     [self layoutSubviews];
 }

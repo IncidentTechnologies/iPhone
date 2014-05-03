@@ -177,9 +177,8 @@ extern Facebook * g_facebook;
     
     if ( [entry.m_followsSessionsList count] > 0 )
     {
-        [_friendFeed release];
         
-        _friendFeed = [entry.m_followsSessionsList retain];
+        _friendFeed = entry.m_followsSessionsList;
         
         // If the newest session is greater that 1 week ago, show the global feed
         UserSongSession * recentSession = [_friendFeed objectAtIndex:0];
@@ -219,7 +218,6 @@ extern Facebook * g_facebook;
 - (void)releaseSoundMaster
 {
     [g_soundMaster releaseCompletely];
-    [g_soundMaster release];
     g_soundMaster = nil;
 }
 
@@ -364,7 +362,7 @@ extern Facebook * g_facebook;
     [_currentLeftPanel removeFromSuperview];
     [_currentRightPanel removeFromSuperview];
     [_fullScreenButton removeFromSuperview];
-    
+    /*
     [_globalFeed release];
     [_friendFeed release];
     
@@ -408,11 +406,11 @@ extern Facebook * g_facebook;
     [_sessionViewController release];
     [_profileButton release];
     
-    [g_facebook release];
+    [g_facebook release];*/
     
     g_facebook = nil;
 
-    [super dealloc];
+    //[super dealloc];
 }
 
 #pragma mark - Notification management
@@ -460,7 +458,7 @@ extern Facebook * g_facebook;
     if ( _videoPreviewImage.image == nil ) {
         NSString *moviePath = [[NSBundle mainBundle] pathForResource:@"MeetChrisVideo" ofType:@"mp4"];
         NSURL *movieURL = [NSURL fileURLWithPath:moviePath];
-        MPMoviePlayerController *mpc = [[[MPMoviePlayerController alloc] initWithContentURL:movieURL] autorelease];
+        MPMoviePlayerController *mpc = [[MPMoviePlayerController alloc] initWithContentURL:movieURL];
         
         mpc.scalingMode = MPMovieScalingModeAspectFit;
         mpc.shouldAutoplay = NO;
@@ -628,7 +626,6 @@ extern Facebook * g_facebook;
     // Start play mode
     SongSelectionViewController *vc = [[SongSelectionViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
 }
 
 - (IBAction)menuFreePlayButtonClicked:(id)sender
@@ -638,7 +635,6 @@ extern Facebook * g_facebook;
 	
 	[self.navigationController pushViewController:fpc animated:YES];
 	
-	[fpc release];
     
 }
 
@@ -648,7 +644,6 @@ extern Facebook * g_facebook;
     
     [self.navigationController pushViewController:svc animated:YES];
 	
-	[svc release];
     
 }
 
@@ -854,7 +849,6 @@ extern Facebook * g_facebook;
     
     [self.navigationController pushViewController:svc animated:YES];
     
-    [svc release];
 }
 
 #pragma mark - Movie Playback
@@ -877,7 +871,6 @@ extern Facebook * g_facebook;
                                                   object:nil];
     
     [_moviePlayer.view removeFromSuperview];
-    [_moviePlayer release];
     
     _moviePlayer = nil;
     
@@ -1071,11 +1064,11 @@ extern Facebook * g_facebook;
     {
         [cell.activityView stopAnimating];
         _displayingCell = NO;
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                          message:@"Cannot connect to server"
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil] autorelease];
+                                               otherButtonTitles:nil];
         [alert show];
 
         return;
@@ -1313,11 +1306,11 @@ extern Facebook * g_facebook;
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Success"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
                                                      message:@"Update Succeeded"
                                                     delegate:nil
                                            cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
     [alert show];
 }
 
@@ -1347,11 +1340,11 @@ extern Facebook * g_facebook;
 {
 //    [self dismissViewControllerAnimated:YES completion:nil];
     
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                      message:@"Update Failed -- Restart the gTar"
                                                     delegate:nil
                                            cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
     [alert show];
 }
 
@@ -1507,9 +1500,8 @@ extern Facebook * g_facebook;
     {
         if ( [cloudResponse.m_responseUserSongSessions.m_sessionsArray count] > 0 )
         {
-            [_globalFeed autorelease];
             
-            _globalFeed = [[_globalFeed arrayByAddingObjectsFromArray:cloudResponse.m_responseUserSongSessions.m_sessionsArray] retain];
+            _globalFeed = [_globalFeed arrayByAddingObjectsFromArray:cloudResponse.m_responseUserSongSessions.m_sessionsArray];
             _globalFeedCurrentPage++;
         }
         else
@@ -1558,11 +1550,10 @@ extern Facebook * g_facebook;
             
             [sortedIncoming sortUsingSelector:@selector(compareCreatedNewestFirst:)];
             
-            NSArray *array = [[_friendFeed arrayByAddingObjectsFromArray:sortedIncoming] retain];
+            NSArray *array = [_friendFeed arrayByAddingObjectsFromArray:sortedIncoming];
             
-            [_friendFeed release];
             
-            _friendFeed = [array retain];
+            _friendFeed = array;
             _friendFeedCurrentPage++;
         }
         else
@@ -1812,7 +1803,7 @@ extern Facebook * g_facebook;
 - (void)beginUpdatingFirmware
 {
     // output some messages
-    NSString * msg = [[[NSString alloc] initWithFormat:@"Firmware updating"] autorelease];
+    NSString * msg = [[NSString alloc] initWithFormat:@"Firmware updating"];
     
     NSLog(@"%@", msg);
     
@@ -1834,7 +1825,7 @@ extern Facebook * g_facebook;
     if ( firmware == nil )
     {
         
-        NSString * msg = [[[NSString alloc] initWithFormat:@"Firmware is nil"] autorelease];
+        NSString * msg = [[NSString alloc] initWithFormat:@"Firmware is nil"];
         
         NSLog(@"%@", msg);
         
@@ -1853,11 +1844,11 @@ extern Facebook * g_facebook;
 
         [self dismissViewControllerAnimated:YES completion:nil];
         
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Failed"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed"
                                                          message:@"Failed to download firmware"
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil] autorelease];
+                                               otherButtonTitles:nil];
         [alert show];
         
         return;
@@ -1870,7 +1861,7 @@ extern Facebook * g_facebook;
     else
     {
         
-        NSString * msg = [[[NSString alloc] initWithFormat:@"Update failed to start"] autorelease];
+        NSString * msg = [[NSString alloc] initWithFormat:@"Update failed to start"];
         
         NSLog(@"%@", msg);
         
@@ -1889,11 +1880,11 @@ extern Facebook * g_facebook;
         
         [self dismissViewControllerAnimated:YES completion:nil];
         
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Failed"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed"
                                                          message:@"Failed to update firmware"
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil] autorelease];
+                                               otherButtonTitles:nil];
         [alert show];
     }
 

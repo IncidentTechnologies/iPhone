@@ -10,16 +10,16 @@
 
 @interface FirmwareModalViewController : SlidingModalViewController
 
-@property (retain, nonatomic) IBOutlet UILabel *currentFirmwareLabel;
-@property (retain, nonatomic) IBOutlet UILabel *availableFirmwareLabel;
-@property (retain, nonatomic) IBOutlet UILabel *progressLabel;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (retain, nonatomic) IBOutlet UIButton *updateButton;
+@property (strong, nonatomic) IBOutlet UILabel *currentFirmwareLabel;
+@property (strong, nonatomic) IBOutlet UILabel *availableFirmwareLabel;
+@property (strong, nonatomic) IBOutlet UILabel *progressLabel;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutlet UIButton *updateButton;
 
-@property (retain, nonatomic) NSString *currentFirmwareVersion;
-@property (retain, nonatomic) NSString *availableFirmwareVersion;
+@property (strong, nonatomic) NSString *currentFirmwareVersion;
+@property (strong, nonatomic) NSString *availableFirmwareVersion;
 
-@property (retain, nonatomic) NSInvocation *updateInvocation;
+@property (strong, nonatomic) NSInvocation *updateInvocation;
 @property (assign, nonatomic) unsigned char updateProgress;
 
 - (IBAction)updateButtonClicked:(id)sender;

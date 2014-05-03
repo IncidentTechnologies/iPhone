@@ -310,9 +310,8 @@ UserController * g_userController;
     CFStringRef uuidCFString = CFUUIDCreateString(nil, uuid);
     
     // Convert to NSString
-    uuidString = (NSString*)uuidCFString;
+    uuidString = (__bridge NSString*)uuidCFString;
     
-    [uuidString retain];
     
     // Save this UUID
     [settings setObject:uuidString forKey:@"UUIDString"];
@@ -322,7 +321,7 @@ UserController * g_userController;
     CFRelease(uuid);
     CFRelease(uuidCFString);
     
-    return [uuidString autorelease];
+    return uuidString;
 }
 
 - (void)delayedLoad
@@ -370,25 +369,6 @@ UserController * g_userController;
 }
 
 
-- (void)dealloc
-{
-    
-    [g_userController release];
-    
-    [g_gtarController release];
-    
-    [g_fileController release];
-    
-//    [g_telemetryController release];
-    
-    [g_cloudController release];
-    
-	[m_navigationController release];
-    
-	[m_window release];
-    
-	[super dealloc];
-}
 
 #pragma mark -
 #pragma mark GtarControllerObserver

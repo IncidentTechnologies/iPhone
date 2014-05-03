@@ -50,22 +50,6 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_noteAnimations release];
-    [m_noteModels release];
-    
-    [m_stringModels release];
-    [m_lineModels release];
-        
-    [m_seekLineModel release];
-    [m_seekLineStandaloneModel release];
-    [m_backgroundTexture release];
-    
-    [super dealloc];
-    
-}
 
 #pragma mark - Accessors
 
@@ -112,20 +96,21 @@
 - (void)clearModelData
 {
     
-    [m_noteAnimations release];
-    [m_noteModels release];
+    [m_noteModels removeAllObjects];
+    [m_noteAnimations removeAllObjects];
+    [m_stringModels removeAllObjects];
+    [m_lineModels removeAllObjects];
     
-    [m_stringModels release];
-    [m_lineModels release];
+    m_noteAnimations = nil;
+    m_noteModels = nil;
+    m_stringModels = nil;
+    m_lineModels = nil;
     
     m_noteAnimations = [[NSMutableArray alloc] init];
     m_noteModels = [[NSMutableArray alloc] init];
     
     m_stringModels = [[NSMutableArray alloc] init];
     m_lineModels = [[NSMutableArray alloc] init];
-    
-    [m_seekLineModel release];
-    [m_seekLineStandaloneModel release];
     
     m_seekLineModel = nil;
     m_seekLineStandaloneModel = nil;

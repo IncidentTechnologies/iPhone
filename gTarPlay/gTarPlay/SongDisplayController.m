@@ -48,14 +48,14 @@
 
         m_numberModels = [[NSMutableArray alloc] init];
         
-        m_songModel = [song retain];
+        m_songModel = song;
         
         m_undisplayedFrames = [[NSMutableArray alloc] initWithArray:m_songModel.m_noteFrames];
         
-		m_glView = [glView retain];
+		m_glView = glView;
         
         m_beatsToPreloadSync = SONG_BEATS_PER_SCREEN;
-        m_beatsToPreloadAsync = SONG_BEATS_PER_SCREEN * 4;
+        m_beatsToPreloadAsync = SONG_BEATS_PER_SCREEN * 2;
         
         m_framesDisplayed = 0;
         
@@ -76,12 +76,13 @@
             m_renderer.m_offset = (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
             
             [m_glView layoutSubviews];
-        }
-        else
-        {
-            m_renderer = (SongES1Renderer*)[m_glView.m_renderer retain];
+            
+        }else{
+            m_renderer = (SongES1Renderer*)m_glView.m_renderer;
         }
         
+        //[self cancelPreloading];
+    
         [self createNoteTexture];
         
         [self createNumberModels];
@@ -133,41 +134,13 @@
 
 - (void)cancelPreloading
 {
-    
-    [m_preloadTimer invalidate];
-    
-    m_preloadTimer = nil;
-    
-}
-
-- (void)dealloc
-{
-    
-    [m_noteTexture release];
-    
-    [m_noteModelDictionary release];
-    
-    [m_noteModelUniversalDictionary release];
-    
-    [m_undisplayedFrames release];
-    
-    [m_numberModels release];
-    
-    [m_mutedTexture release];
-    
-    [m_songModel release];
-    
-    [m_glView release];
-    
     [m_renderer clearModelData];
     
-    [m_renderer release];
+    //m_renderer = nil;
     
     [m_preloadTimer invalidate];
     
     m_preloadTimer = nil;
-    
-    [super dealloc];
     
 }
 
@@ -265,8 +238,6 @@
         
     }
     
-    [framesToRemove release];
-    [keysToRemove release];
 }
 
 - (void)preloadFramesTimer
@@ -319,7 +290,6 @@
         
     }
     
-    [framesToRemove release];
 
 }
 
@@ -449,7 +419,6 @@
         
         [m_renderer addModel:model];
         
-        [model release];
         
     }
     
@@ -596,7 +565,7 @@
         center.x = 0;
     }
     
-	m_renderer.m_seekLineModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent] autorelease];
+	m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
     
     // Draw a wider seek line area for standalone
     /*if(isStandalone){
@@ -638,7 +607,6 @@
         
         [m_renderer addString:stringModel];
         
-        [stringModel release];
         
     }
     /*
@@ -700,10 +668,8 @@
 		
 		[m_numberModels addObject:numberModel];
 		
-		[numberModel release];
 	}
     
-    [m_mutedTexture release];
     
     m_mutedTexture = [[NumberModel alloc] initWithCenter:CGPointMake(0, 0)
                                                  andSize:size
@@ -713,9 +679,6 @@
 
 - (void)createNoteTexture
 {
-    
-    [m_noteTexture release];
-    
     UIImage * scaledImage;
     UIImage * image = [UIImage imageNamed:@"NoteGreyscale.png"];
     
@@ -727,9 +690,9 @@
     [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
     scaledImage = UIGraphicsGetImageFromCurrentImageContext();    
     UIGraphicsEndImageContext();
-    
+
     m_noteTexture = [[Texture2D alloc] initWithImage:scaledImage];
-        
+     
 }
 
 - (void)createBackgroundTexture

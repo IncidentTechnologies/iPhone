@@ -19,12 +19,12 @@
 {
     UIWindow * m_window;
     gTarNavigationController * m_navigationController;
-    gTarPlayApplication * m_playApplication;
+    gTarPlayApplication * __weak m_playApplication;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow * m_window;
-@property (nonatomic, retain) IBOutlet UINavigationController * m_navigationController;
-@property (nonatomic, assign) gTarPlayApplication * m_playApplication;
+@property (nonatomic, strong) IBOutlet UIWindow * m_window;
+@property (nonatomic, strong) IBOutlet UINavigationController * m_navigationController;
+@property (nonatomic, weak) gTarPlayApplication * m_playApplication;
 
 - (void)checkAndClearCache;
 //- (void)installPreloadedContent;

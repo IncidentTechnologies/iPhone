@@ -63,7 +63,6 @@
     
     [m_gtarController removeObserver:self];
     
-    [m_gtarController release];
     
     /*if([g_soundMaster respondsToSelector:@selector(disconnectAndRelease)]){
         [g_soundMaster disconnectAndRelease];
@@ -73,7 +72,6 @@
     
     //[g_soundMaster releaseAfterUse];
         
-    [m_songModel release];
     
 	[m_eventLoopTimer invalidate];
     m_eventLoopTimer = nil;
@@ -81,7 +79,6 @@
     [m_audioTrailOffTimer invalidate];
     m_audioTrailOffTimer = nil;
     
-    [super dealloc];
     
 }
 
@@ -93,11 +90,10 @@
     [g_soundMaster reset];
     
     // release the old song
-    [m_songModel release];
     
-    XmlDom * songDom = [[[XmlDom alloc] initWithXmlString:xmpBlob] autorelease];
+    XmlDom * songDom = [[XmlDom alloc] initWithXmlString:xmpBlob];
     
-    NSSong * song = [[[NSSong alloc] initWithXmlDom:songDom] autorelease];
+    NSSong * song = [[NSSong alloc] initWithXmlDom:songDom];
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
@@ -118,9 +114,8 @@
     [g_soundMaster reset];
     
     // release the old song
-    [m_songModel release];
     
-    NSSong * song = [[[NSSong alloc] initWithXmlDom:userSong.m_xmlDom] autorelease];
+    NSSong * song = [[NSSong alloc] initWithXmlDom:userSong.m_xmlDom];
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
@@ -149,14 +144,13 @@
     
     [g_soundMaster reset];
     
-    [m_songModel release];
     
     m_songModel = nil;
     
 }
 
 - (void)observeGtarController:(GtarController*)gtarController {
-    m_gtarController = [gtarController retain];
+    m_gtarController = gtarController;
     
     // Register ourself as an observer
     [m_gtarController addObserver:self];
@@ -177,7 +171,6 @@
     // Remove ourself as an observer
     [m_gtarController removeObserver:self];
     
-    [m_gtarController release];
     
     m_gtarController = nil;
     

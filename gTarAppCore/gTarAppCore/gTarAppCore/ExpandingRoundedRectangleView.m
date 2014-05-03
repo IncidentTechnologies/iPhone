@@ -47,7 +47,6 @@
 
 - (void)dealloc
 {
-    [super dealloc];
 	
 	[m_animationTimer invalidate];
     m_animationTimer = nil;

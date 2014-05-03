@@ -43,11 +43,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    [_contentView release];
-    [super dealloc];
-}
 
 //- (void)attachToSuperview:(UIView *)view
 //{

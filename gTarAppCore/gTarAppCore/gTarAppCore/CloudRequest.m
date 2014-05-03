@@ -73,7 +73,7 @@
         {
             m_isSynchronous = NO;
             
-            m_callbackObject = [obj retain];
+            m_callbackObject = obj;
             m_callbackSelector = sel;
         }
 
@@ -86,13 +86,12 @@
 - (void)dealloc
 {
 	
-	[m_callbackObject release];
+	//[m_callbackObject release];
     
-    m_callbackObject = nil;
     
 	m_status = CloudRequestStatusUnknown;
 	
-    [m_facebookAccessToken release];
+    /*[m_facebookAccessToken release];
     [m_username release];
     [m_password release];
     [m_email release];
@@ -109,7 +108,7 @@
     [m_appString release];
     
 	[super dealloc];
-	
+	*/
 }
 
 @end

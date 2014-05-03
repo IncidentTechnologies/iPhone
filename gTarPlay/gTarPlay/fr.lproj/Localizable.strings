@@ -71,6 +71,8 @@
 "FOLLOWING" = "ABONNEMENT";
 "SESSIONS" = "SESSIONS";
 "FOLLOWERS" = "ABONNÉS";
+"Follow" = "S'Abonner";
+"Following" = "Abonnement";
 
 // Freeplay
 /*#*/ "ALL" = "TOUS";

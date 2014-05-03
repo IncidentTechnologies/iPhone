@@ -93,10 +93,6 @@
 	
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 //- (void)animate
 //{

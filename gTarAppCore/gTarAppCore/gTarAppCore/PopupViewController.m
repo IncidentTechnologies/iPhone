@@ -42,20 +42,13 @@
 - (void)dealloc
 {
 
-    [m_closeButtonImage release];
-    [m_closeButton release];
     
     [m_fullScreenButton removeFromSuperview];
-    [m_fullScreenButton release];
 
     [m_blackBackgroundView removeFromSuperview];
-    [m_blackBackgroundView release];
     
-    [m_popupTitle release];
 //    [m_popupTitleLabel release];
-    [m_popupTitleView release];
     
-    [super dealloc];
     
 }
 
@@ -238,7 +231,7 @@
         
         // create a label and stick it in the view
         CGRect frame = CGRectMake(CLOSE_BUTTON_SIZE, 0, self.view.frame.size.width - 2*CLOSE_BUTTON_SIZE, 30);
-        UILabel * label = [[[UILabel alloc] initWithFrame:frame] autorelease];
+        UILabel * label = [[UILabel alloc] initWithFrame:frame];
         
         [label setText:m_popupTitle];
         
@@ -308,7 +301,6 @@
     [UIView commitAnimations];
     
     [m_fullScreenButton removeFromSuperview];
-    [m_fullScreenButton release];
     m_fullScreenButton = nil;
     
 }
@@ -319,7 +311,6 @@
     [self.view removeFromSuperview];
 
     [m_blackBackgroundView removeFromSuperview];
-    [m_blackBackgroundView release];
     m_blackBackgroundView = nil;
 
     [self viewWillDisappear:NO];
@@ -330,7 +321,6 @@
     }
     
     [m_popupTitleView removeFromSuperview];
-    [m_popupTitleView release];
     m_popupTitleView = nil;
     
     m_attached = NO;

@@ -32,11 +32,11 @@
 @property (nonatomic, assign) NSInteger m_id;
 @property (nonatomic, assign) NSInteger m_userSongId;
 @property (nonatomic, assign) NSInteger m_picFileId;
-@property (nonatomic, retain) NSString * m_htmlPreview;
-@property (nonatomic, retain) NSString * m_genre;
+@property (nonatomic, strong) NSString * m_htmlPreview;
+@property (nonatomic, strong) NSString * m_genre;
 @property (nonatomic, assign) NSInteger m_created;
-@property (nonatomic, retain) UserSong * m_userSong;
-@property (nonatomic, retain) UIImage * m_featuedImage;
+@property (nonatomic, strong) UserSong * m_userSong;
+@property (nonatomic, strong) UIImage * m_featuedImage;
 
 - (id)initWithXmlDictionary:(NSDictionary*)dictionary;
 - (id)initWithXmlDom:(XmlDom*)xmlDom;

@@ -21,11 +21,11 @@
     NSInteger m_sessionsListCurrentPage;
 }
 
-@property (nonatomic, retain) UserProfile * m_userProfile;
-@property (nonatomic, retain) NSArray * m_followsList;
-@property (nonatomic, retain) NSArray * m_followedByList;
-@property (nonatomic, retain) NSArray * m_sessionsList;
-@property (nonatomic, retain) NSArray * m_followsSessionsList;
-@property (nonatomic, retain) NSArray * m_facebookFriendsList;
+@property (nonatomic, strong) UserProfile * m_userProfile;
+@property (nonatomic, strong) NSArray * m_followsList;
+@property (nonatomic, strong) NSArray * m_followedByList;
+@property (nonatomic, strong) NSArray * m_sessionsList;
+@property (nonatomic, strong) NSArray * m_followsSessionsList;
+@property (nonatomic, strong) NSArray * m_facebookFriendsList;
 @property (nonatomic, assign) NSInteger m_sessionsListCurrentPage;
 @end

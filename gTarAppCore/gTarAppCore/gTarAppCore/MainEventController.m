@@ -60,7 +60,6 @@
     
     m_eventLoopTimer = nil;
 
-    [super dealloc];
     
 }
 

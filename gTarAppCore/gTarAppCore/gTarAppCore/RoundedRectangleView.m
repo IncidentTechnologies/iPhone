@@ -139,10 +139,6 @@
 
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 - (void)changeFillColor:(CGFloat*)fillColor
 {

@@ -85,9 +85,6 @@ static unsigned char g_standaloneHighlightColors[4][4] =
 	{ 0, 141, 218, 130 }    // B
 };
 
-static unsigned char g_standaloneEarlyHitFretColor[4] =
-    { 174, 209, 124, 130 }; // Light Green
-
 static unsigned char g_standaloneHitFretColor[4] =
     { 31, 195, 72, 130 }; // Green
 

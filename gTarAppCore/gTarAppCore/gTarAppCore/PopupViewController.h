@@ -18,7 +18,7 @@
 @interface PopupViewController : UIViewController
 {
 
-    id<PopupViewControllerDelegate> m_popupDelegate;
+    id<PopupViewControllerDelegate> __weak m_popupDelegate;
 
 //    RoundedRectangleView * m_backgroundView;
     
@@ -39,10 +39,10 @@
     
 }
 
-@property (nonatomic, assign) id<PopupViewControllerDelegate> m_popupDelegate;
+@property (nonatomic, weak) id<PopupViewControllerDelegate> m_popupDelegate;
 //@property (nonatomic, retain) RoundedRectangleView * m_backgroundView;
-@property (nonatomic, retain) UIImage * m_closeButtonImage;
-@property (nonatomic, retain) NSString * m_popupTitle;
+@property (nonatomic, strong) UIImage * m_closeButtonImage;
+@property (nonatomic, strong) NSString * m_popupTitle;
 
 - (void)attachToSuperView:(UIView*)superview;
 - (void)attachToSuperViewWithBlackBackground:(UIView *)superview;

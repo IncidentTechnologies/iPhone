@@ -36,11 +36,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_contentView release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad
 {

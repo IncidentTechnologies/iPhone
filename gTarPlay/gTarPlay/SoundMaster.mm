@@ -67,7 +67,6 @@
         BOOL init = [self initAudio];
         
         if(!init){
-            [self release];
             return nil;
         }
     }
@@ -193,7 +192,7 @@
     CFStringRef audioRoute = [audioController GetAudioRoute];
     
     // ARC: (__bridge NSString *)audioRoute
-    return (NSString *)audioRoute;
+    return (__bridge NSString *)audioRoute;
 }
 
 #pragma mark - Volume
@@ -259,7 +258,7 @@
     }
     
     // TODO: FIGURE OUT WHY INST 0 IS CRASHING ON IPHONE
-    index = 1;
+    //index = 1;
     //
     
     
@@ -350,11 +349,9 @@
     
     if (!plistDict) {
         NSLog(@"Error reading plist: %@", [error localizedDescription]);
-        [error release];
         return false;
     }
     
-    [error release];
     
     // get sample pack info from plist
     m_instruments = [[NSArray alloc] initWithArray:[plistDict objectForKey:@"instruments"]];

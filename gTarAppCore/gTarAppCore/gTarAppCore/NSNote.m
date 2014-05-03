@@ -91,11 +91,6 @@
 	
 }
 
-- (void)dealloc
-{
-    [m_value release];
-    [super dealloc];
-}
 
 - (NSComparisonResult)compare:(NSNote*)note
 {

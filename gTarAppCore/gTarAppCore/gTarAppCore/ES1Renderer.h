@@ -26,7 +26,6 @@
 @property (nonatomic, readonly) GLint m_backingWidth;
 @property (nonatomic, readonly) GLint m_backingHeight;
 
-
 - (BOOL)resizeFromLayer:(CAEAGLLayer*)layer;
 
 @end

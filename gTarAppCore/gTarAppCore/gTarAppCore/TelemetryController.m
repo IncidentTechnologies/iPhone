@@ -31,7 +31,7 @@
     {
         m_droppedMessages = 0;
         
-        m_cloudController = [cloudController retain];
+        m_cloudController = cloudController;
         
         m_compileDate = @"default";
         m_appName = @"default";
@@ -44,7 +44,7 @@
         NSString * pathsDirectory = [paths objectAtIndex:0];
         NSString * telemetryPath = [pathsDirectory stringByAppendingPathComponent:@"Telemetry"];
         
-        m_telemetryFilePath = [telemetryPath retain];
+        m_telemetryFilePath = telemetryPath;
         
         if ( [[NSFileManager defaultManager] fileExistsAtPath:m_telemetryFilePath] == NO )
         {
@@ -58,7 +58,6 @@
             {
                 NSLog(@"Error: '%@' creating Telemetry path: '%@'", [error localizedDescription], m_telemetryFilePath);
                 
-                [self release];
                 
                 return nil;
             }
@@ -74,21 +73,6 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_cloudController release];
-    [m_messageQueue release];
-    
-    [m_compileDate release];
-    [m_appName release];
-    [m_appVersion release];
-    [m_deviceId release];
-    [m_username release];
-    
-    [super dealloc];
-    
-}
 
 #pragma mark - Methods
 
@@ -106,8 +90,6 @@
     
     [self addMessageToQueue:logMessage];
     
-    [logMessage release];
-    [date release];
     
 }
 
@@ -248,7 +230,7 @@
         // Remove these logs from the queue
         [m_messageQueue removeObjectsInRange:range];
         
-        m_pendingUpload = [logsToUpload retain];
+        m_pendingUpload = logsToUpload;
         
         // Commit this
         [self saveCache];
@@ -257,7 +239,6 @@
     
     [m_cloudController requestLogUpload:logsToUpload andVersion:m_appVersion andDevice:m_deviceId andApp:m_appName andCallbackObj:self andCallbackSel:@selector(uploadLogMessagesComplete:)];
     
-    [logsToUpload release];
     
 }
 
@@ -275,7 +256,6 @@
         if ( cloudResponse.m_status == CloudResponseStatusSuccess )
         {
             
-            [m_pendingUpload release];
             
             m_pendingUpload = nil;
             
@@ -298,12 +278,10 @@
     NSString * droppedPath = [m_telemetryFilePath stringByAppendingPathComponent:@"DroppedMessages"];
     NSString * pendingPath = [m_telemetryFilePath stringByAppendingPathComponent:@"PendingUpload"];
     
-    [m_messageQueue release];
-    [m_pendingUpload release];
     
-    m_messageQueue = [[NSKeyedUnarchiver unarchiveObjectWithFile:logsPath] retain];
+    m_messageQueue = [NSKeyedUnarchiver unarchiveObjectWithFile:logsPath];
     m_droppedMessages = [[NSKeyedUnarchiver unarchiveObjectWithFile:droppedPath] integerValue];
-    m_pendingUpload = [[NSKeyedUnarchiver unarchiveObjectWithFile:pendingPath] retain];
+    m_pendingUpload = [NSKeyedUnarchiver unarchiveObjectWithFile:pendingPath];
     
     if ( m_messageQueue == nil )
     {

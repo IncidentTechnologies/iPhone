@@ -47,7 +47,7 @@
     if ( self )
     {
         
-        m_song = [song retain];
+        m_song = song;
         
         m_frameWidthBeats = SONG_MODEL_NOTE_FRAME_WIDTH;
 
@@ -60,15 +60,11 @@
 - (void)dealloc
 {
 
-    [m_song release];
-    [m_noteFrames release];
-    [m_noteFramesRemaining release];
     
     [m_frameTimer invalidate];
     
     m_frameTimer = nil;
 
-    [super dealloc];
     
 }
 
@@ -80,8 +76,6 @@
 - (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isStandalone:(BOOL)standalone
 {
     // clear remnants from last song
-    [m_noteFrames release];
-    [m_noteFramesRemaining release];
 
     m_currentFrame = nil;
     
@@ -107,7 +101,6 @@
             
             [m_noteFrames addObject:noteFrame];
             
-            [noteFrame release];
             
         }
         
@@ -264,7 +257,6 @@
         [m_delegate songModelEndOfSong];
     }
     
-    [m_noteFramesRemaining release];
     
     m_noteFramesRemaining = [[NSMutableArray alloc] init];
     

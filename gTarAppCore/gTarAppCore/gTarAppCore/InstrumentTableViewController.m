@@ -13,9 +13,9 @@
 }
 
 //@property (retain, nonatomic) AudioController *audioController;
-@property (retain, nonatomic) NSArray *instruments;
+@property (strong, nonatomic) NSArray *instruments;
 
-@property (retain, nonatomic) NSTimer *loadingTimer;
+@property (strong, nonatomic) NSTimer *loadingTimer;
 
 - (void) samplerFinishedLoadingCB:(NSNumber*)result;
 
@@ -33,7 +33,7 @@
     if (self) {
         
         CGRect frame = CGRectMake(0, 0, 0, 0);
-        _tableView = [[[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain] retain];
+        _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
         
         _flickerState = NO;
         
@@ -44,17 +44,13 @@
 }
 
 - (void)dealloc {
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"InstrumentChanged" object:nil];
     
-    [delegate release];
-    [instruments release];
-    [_loadingTimer release];
-    
-    [_tableView release];
-    [super dealloc];
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
@@ -113,7 +109,6 @@
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
-    [selectionColor release];
     
     return cell;
 }

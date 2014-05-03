@@ -70,17 +70,17 @@
 
 }
 
-@property (nonatomic, retain) XmlDom * m_xmlDom;
+@property (nonatomic, strong) XmlDom * m_xmlDom;
 
 @property (nonatomic, assign) NSInteger m_songId;
 @property (nonatomic, assign) NSInteger m_authorId;
 @property (nonatomic, assign) NSInteger m_tempo;
 
-@property (nonatomic, retain) NSString * m_title;
-@property (nonatomic, retain) NSString * m_author;
-@property (nonatomic, retain) NSString * m_genre;
-@property (nonatomic, retain) NSString * m_description;
-@property (nonatomic, retain) NSString * m_licenseInfo;
+@property (nonatomic, strong) NSString * m_title;
+@property (nonatomic, strong) NSString * m_author;
+@property (nonatomic, strong) NSString * m_genre;
+@property (nonatomic, strong) NSString * m_description;
+@property (nonatomic, strong) NSString * m_licenseInfo;
 
 @property (nonatomic, assign) NSInteger m_xmpFileId;
 @property (nonatomic, assign) NSInteger m_imgFileId;
@@ -91,17 +91,17 @@
 @property (nonatomic, assign) NSInteger m_timeCreated;
 @property (nonatomic, assign) NSInteger m_timeModified;
 
-@property (nonatomic, retain) NSNumber * m_cost;
-@property (nonatomic, retain) NSString * m_productId;
+@property (nonatomic, strong) NSNumber * m_cost;
+@property (nonatomic, strong) NSString * m_productId;
 
 @property (nonatomic, assign) NSInteger m_difficulty;
 
 @property (nonatomic, assign) NSInteger m_viewCount;
-@property (nonatomic, retain) NSNumber * m_rating;
+@property (nonatomic, strong) NSNumber * m_rating;
 @property (nonatomic, assign) NSInteger m_permissions;
 @property (nonatomic, assign) NSInteger m_score;
 
-@property (nonatomic, retain) UIImage * m_albumArtImage;
+@property (nonatomic, strong) UIImage * m_albumArtImage;
 
 @property (nonatomic, assign) BOOL m_userLeased;
 @property (nonatomic, assign) BOOL m_userOwned;

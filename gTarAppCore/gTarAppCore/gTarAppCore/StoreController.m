@@ -36,7 +36,7 @@
         
         m_delegate = delegate;
         
-        m_cloudController = [cloudController retain];
+        m_cloudController = cloudController;
 
         // create the arrays
         m_productIdentifiers = [[NSMutableArray alloc] init];
@@ -77,13 +77,9 @@
 - (void)dealloc
 {
     
-    [m_productIdentifiers release];
     
-    [m_cloudController release];
 
-    [m_credits release];
     
-    [m_featureCollection release];
     
     // effectively release
     m_delegate = nil;
@@ -91,7 +87,6 @@
     // add ourselves as an observer to the default queue
     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
     
-    [super dealloc];
     
 }
 
@@ -150,14 +145,12 @@
 
     NSLog(@"%@", error.localizedDescription);
     
-    [request release];
     
 }
 
 - (void)requestDidFinish:(SKRequest *)request
 {
     
-    [request release];
     
 }
 
@@ -184,7 +177,6 @@
         
     }
 
-    [numberFormatter release];
     
 }
 
@@ -198,7 +190,7 @@
     
     if ( credits != nil )
     {
-        m_credits = [credits retain];
+        m_credits = credits;
         
         [m_delegate creditCountUpdated:m_credits];
     }
@@ -280,7 +272,6 @@
         
         UserSongs * userSongs = cloudResponse.m_responseUserSongs;
         
-        [m_ownedSongs release];
         
         m_ownedSongs = [[NSMutableDictionary alloc] init];
         
@@ -303,7 +294,6 @@
 {
     
     // get the feature collection from the store object and use it for something.
-    [m_featureCollection release];
     
     m_featureCollection = cloudResponse.m_responseStoreFeatureCollection;
     
@@ -326,7 +316,6 @@
         UserSongs * userSongs = cloudResponse.m_responseUserSongs;
         
         // also put them in a dictionary for easy searching
-        [m_allSongs release];
         
         m_allSongs = [[NSMutableDictionary alloc] init];
         
@@ -373,7 +362,6 @@
         // add this song manually for now. we are about to request an official new list 
         [m_ownedSongs setObject:userSong forKey:key];
 
-        [m_currentUserSong release];
         
         m_currentUserSong = nil;
         
@@ -387,7 +375,7 @@
         
         if ( credits != nil )
         {
-            m_credits = [credits retain];
+            m_credits = credits;
             
             [m_delegate creditCountUpdated:m_credits];
         }
@@ -466,7 +454,6 @@
 
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
         
-        [m_currentTransaction release];
 
         m_currentTransaction = nil;
 
@@ -488,7 +475,6 @@
         {
 
             // tell user to go log in
-            [m_currentTransaction release];
             
             m_currentTransaction = nil;
             
@@ -514,7 +500,6 @@
             
             [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
             
-            [m_currentTransaction release];
             
             m_currentTransaction = nil;
             
@@ -533,7 +518,6 @@
             
             NSLog(@"Server error");
             
-            [m_currentTransaction release];
             
             m_currentTransaction = nil;
 
@@ -666,9 +650,8 @@
     
     if ( credits != nil )
     {
-        [m_credits release];
         
-        m_credits = [credits retain];
+        m_credits = credits;
         
         [m_delegate creditCountUpdated:m_credits];
     }
@@ -680,9 +663,8 @@
     {
 
         // save the new current song.
-        [m_currentUserSong release];
         
-        m_currentUserSong = [userSong retain];
+        m_currentUserSong = userSong;
         
         // see if the server is up
         if ( [m_cloudController requestServerStatus] == YES )
@@ -705,9 +687,8 @@
     {
         
         // save the new current song.
-        [m_currentUserSong release];
         
-        m_currentUserSong = [userSong retain];
+        m_currentUserSong = userSong;
         
         // buy the credits now
         [self buyCredits1];
@@ -787,7 +768,6 @@
         UserSong * failedSong = m_failedUserSong;
         
         // we want to free up this song before starting the buy process.
-        [m_failedUserSong release];
         
         m_failedUserSong = nil;
         
@@ -861,9 +841,8 @@
         
     }
 
-    [m_currentTransaction release];
     
-    m_currentTransaction = [transaction retain];
+    m_currentTransaction = transaction;
 
     [self requestVerifyReceipt:transaction.transactionReceipt];
 
@@ -1027,7 +1006,6 @@
                     
                 }
                 
-                [m_currentUserSong release];
                 
                 m_currentUserSong = nil;
 

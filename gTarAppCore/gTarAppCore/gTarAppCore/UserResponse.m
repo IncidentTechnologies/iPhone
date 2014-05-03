@@ -26,7 +26,7 @@
     if ( self )
     {
         
-        m_userRequest = [userRequest retain];
+        m_userRequest = userRequest;
         
         self.m_statusText = @"Connection error";
     }
@@ -35,15 +35,5 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_userRequest release];
-    [m_statusText release];
-    [m_searchResults release];
-    
-    [super dealloc];
-    
-}
 
 @end

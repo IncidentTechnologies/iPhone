@@ -104,10 +104,6 @@ void DrawStar( CGContextRef context, CGFloat starSize )
 }
 
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 - (void)updateStarRating:(CGFloat)rating
 {

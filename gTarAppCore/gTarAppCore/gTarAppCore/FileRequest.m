@@ -56,15 +56,6 @@
     [m_callbackSelectorArray addObject:NSStringFromSelector(sel)];
 }
 
-- (void)dealloc
-{
-    
-    [m_callbackObjectArray release];
-    [m_callbackSelectorArray release];
-    
-    [super dealloc];
-    
-}
 
 - (void)returnResponse:(id)file
 {

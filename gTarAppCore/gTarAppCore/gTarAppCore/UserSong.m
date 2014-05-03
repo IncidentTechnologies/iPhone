@@ -60,7 +60,6 @@
         
         [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
-        [dateFormat release];
         
         self.m_songId = [xmlDom getIntegerFromChildWithName:@"id"];
         self.m_authorId = [xmlDom getIntegerFromChildWithName:@"user_id"];
@@ -211,22 +210,6 @@
     
 }
 
-- (void)dealloc
-{
-	
-    [m_xmlDom release];
-    
-	[m_title release];
-	[m_author release];
-	[m_genre release];
-	[m_description release];
-    [m_cost release];
-    [m_productId release];
-    [m_rating release];
-    
-	[super dealloc];
-
-}
 
 - (BOOL)isEqual:(id)anObject
 {

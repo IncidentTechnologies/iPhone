@@ -22,9 +22,9 @@
 
 @interface SlidingInstrumentViewController : SlidingViewController <InstrumentSelectionDelegate>
 
-@property (assign, nonatomic) id <SlidingInstrumentDelegate> delegate;
+@property (weak, nonatomic) id <SlidingInstrumentDelegate> delegate;
 
-@property (retain, nonatomic) IBOutlet UIView *innerContentView;
+@property (strong, nonatomic) IBOutlet UIView *innerContentView;
 
 @property (readonly, nonatomic) BOOL loading;
 

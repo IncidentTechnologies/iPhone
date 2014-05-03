@@ -105,7 +105,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return;
         } break;
         
@@ -121,7 +120,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return;
         } break;
             
@@ -137,7 +135,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return;
         } break;
             
@@ -152,7 +149,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return;
         } break;
     }

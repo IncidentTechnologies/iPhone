@@ -11,11 +11,11 @@
 
 @interface VolumeViewController : SlidingViewController
 
-@property (retain, nonatomic) IBOutlet UIView *sliderView;
-@property (retain, nonatomic) IBOutlet UISlider *volumeSlider;
-@property (retain, nonatomic) IBOutlet UIView *volumeView;
-@property (retain, nonatomic) IBOutlet UIImageView *volumeTrackView;
-@property (retain, nonatomic) IBOutlet UIView * innerView;
+@property (strong, nonatomic) IBOutlet UIView *sliderView;
+@property (strong, nonatomic) IBOutlet UISlider *volumeSlider;
+@property (strong, nonatomic) IBOutlet UIView *volumeView;
+@property (strong, nonatomic) IBOutlet UIImageView *volumeTrackView;
+@property (strong, nonatomic) IBOutlet UIView * innerView;
 
 @property (readonly, nonatomic) BOOL displayed;
 

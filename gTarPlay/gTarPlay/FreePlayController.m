@@ -17,28 +17,28 @@ extern GtarController * g_gtarController;
 
 @interface FreePlayController ()
 
-@property (retain, nonatomic) SoundMaster *g_soundMaster;
+@property (strong, nonatomic) SoundMaster *g_soundMaster;
 
-@property (retain, nonatomic) InstrumentsAndEffectsViewController *instrumentsAndEffectsVC;
-@property (retain, nonatomic) LightsViewController *lightsVC;
-@property (retain, nonatomic) FPMenuViewController *fpMenuVC;
-@property (retain, nonatomic) VolumeViewController *volumeVC;
+@property (strong, nonatomic) InstrumentsAndEffectsViewController *instrumentsAndEffectsVC;
+@property (strong, nonatomic) LightsViewController *lightsVC;
+@property (strong, nonatomic) FPMenuViewController *fpMenuVC;
+@property (strong, nonatomic) VolumeViewController *volumeVC;
 
-@property (retain, nonatomic) IBOutlet UIView *mainContentView;
-@property (assign, nonatomic) UIViewController *currentMainContentVC;
+@property (strong, nonatomic) IBOutlet UIView *mainContentView;
+@property (weak, nonatomic) UIViewController *currentMainContentVC;
 
-@property (retain, nonatomic) IBOutlet UIButton *menuButton;
-@property (retain, nonatomic) IBOutlet UIButton *volumeButton;
-@property (retain, nonatomic) IBOutlet UIButton *lightsButton;
-@property (retain, nonatomic) IBOutlet UIButton *effectsButton;
-@property (retain, nonatomic) IBOutlet UIButton *instrumentsButton;
+@property (strong, nonatomic) IBOutlet UIButton *menuButton;
+@property (strong, nonatomic) IBOutlet UIButton *volumeButton;
+@property (strong, nonatomic) IBOutlet UIButton *lightsButton;
+@property (strong, nonatomic) IBOutlet UIButton *effectsButton;
+@property (strong, nonatomic) IBOutlet UIButton *instrumentsButton;
 
-@property (retain, nonatomic) IBOutlet UIButton *arrowMenu;
-@property (retain, nonatomic) IBOutlet UIButton *arrowLights;
-@property (retain, nonatomic) IBOutlet UIButton *arrowEffects;
-@property (retain, nonatomic) IBOutlet UIButton *arrowInstruments;
+@property (strong, nonatomic) IBOutlet UIButton *arrowMenu;
+@property (strong, nonatomic) IBOutlet UIButton *arrowLights;
+@property (strong, nonatomic) IBOutlet UIButton *arrowEffects;
+@property (strong, nonatomic) IBOutlet UIButton *arrowInstruments;
 
-@property (retain, nonatomic) IBOutlet UIView *menuBarDropShadowView;
+@property (strong, nonatomic) IBOutlet UIView *menuBarDropShadowView;
 
 @property BOOL isSlideEnabled;
 
@@ -115,10 +115,10 @@ extern GtarController * g_gtarController;
         
         _isSlideEnabled = YES;
         
-        m_playTimeStart = [[NSDate date] retain];
-        m_audioRouteTimeStart = [[NSDate date] retain];
-        m_instrumentTimeStart = [[NSDate date] retain];
-        m_scaleTimeStart = [[NSDate date] retain];
+        m_playTimeStart = [NSDate date];
+        m_audioRouteTimeStart = [NSDate date];
+        m_instrumentTimeStart = [NSDate date];
+        m_scaleTimeStart = [NSDate date];
         
         g_soundMaster = soundMaster;
         [g_soundMaster start];
@@ -135,7 +135,7 @@ extern GtarController * g_gtarController;
         
         for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
         {
-            m_effectTimeStart[effect] = [[NSDate date] retain];
+            m_effectTimeStart[effect] = [NSDate date];
         }
 
         m_playTimeAdjustment = 0;
@@ -145,14 +145,14 @@ extern GtarController * g_gtarController;
         //[g_audioController startAUGraph];
         [g_soundMaster start];
         
-        RGBColor *white = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:3] autorelease];
-        RGBColor *red = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:0] autorelease];
-        RGBColor *green = [[[RGBColor alloc] initWithRed:0 Green:3 Blue:0] autorelease];
-        RGBColor *blue = [[[RGBColor alloc] initWithRed:0 Green:0 Blue:3] autorelease];
-        RGBColor *cyan = [[[RGBColor alloc] initWithRed:0 Green:3 Blue:3] autorelease];
-        RGBColor *magenta = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:3] autorelease];
-        RGBColor *yellow = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:0] autorelease];
-        RGBColor *orange = [[[RGBColor alloc] initWithRed:3 Green:1 Blue:0] autorelease];
+        RGBColor *white = [[RGBColor alloc] initWithRed:3 Green:3 Blue:3];
+        RGBColor *red = [[RGBColor alloc] initWithRed:3 Green:0 Blue:0];
+        RGBColor *green = [[RGBColor alloc] initWithRed:0 Green:3 Blue:0];
+        RGBColor *blue = [[RGBColor alloc] initWithRed:0 Green:0 Blue:3];
+        RGBColor *cyan = [[RGBColor alloc] initWithRed:0 Green:3 Blue:3];
+        RGBColor *magenta = [[RGBColor alloc] initWithRed:3 Green:0 Blue:3];
+        RGBColor *yellow = [[RGBColor alloc] initWithRed:3 Green:3 Blue:0];
+        RGBColor *orange = [[RGBColor alloc] initWithRed:3 Green:1 Blue:0];
         
         m_colors = [[NSArray alloc] initWithObjects:white, red, magenta, blue, cyan, green, yellow, orange, nil];
         
@@ -196,78 +196,28 @@ extern GtarController * g_gtarController;
     
     [g_gtarController removeObserver:self];
     
-    [_instrumentsAndEffectsVC release];
-    [_lightsVC release];
-    [_fpMenuVC release];
-    [_volumeVC release];
     
-    [m_harmonizer release];
     //[m_volumeView release];
-    [m_activityIndicatorView release];
-    [m_connectingView release];
-    [m_jamPad release];
-    [m_wetSlider release];
-    [m_effectsTab release];
-    [m_effect1OnOff release];
-    [m_effect2OnOff release];
-    [m_effect3OnOff release];
-    [m_effect4OnOff release];
-    [m_effect1Select release];
-    [m_effect2Select release];
-    [m_effect3Select release];
-    [m_effect4Select release];
-    [m_effect1Name release];
-    [m_effect2Name release];
-    [m_effect3Name release];
-    [m_effect4Name release];
-    [m_currentEffectName release];
-    [m_instrumentsTab release];
     //[m_menuTab release];
     //[m_toneSlider release];
     
     //[g_soundMaster releaseAfterUse];
     
-    [m_colors release];
-    [m_instrumentsScroll release];
     //[m_lineOutVolumeSlider release];
-    [m_LEDTab release];
-    [m_LEDGeneralSurface release];
-    [m_LEDFretSurface release];
-    [m_LEDStringSurface release];
-    [m_LEDAllSurface release];
     
     if (m_LEDTimer != nil)
     {
         [m_LEDTimer invalidate];
-        m_LEDTimer = nil;
     }
 
     //[m_audioRouteSwitch release];
-    [m_scaleSwitch release];
     
-    [m_playTimeStart release];
-    [m_audioRouteTimeStart release];
-    [m_instrumentTimeStart release];
-    [m_scaleTimeStart release];
     
     // Turn off all LEDs
     if(g_gtarController.connected){
         [g_gtarController turnOffAllLeds];
     }
         
-    [_m_effectsScroll release];
-    [_mainContentView release];
-    [_menuButton release];
-    [_volumeButton release];
-    [_lightsButton release];
-    [_effectsButton release];
-    [_instrumentsButton release];
-    [_arrowMenu release];
-    [_arrowLights release];
-    [_arrowEffects release];
-    [_arrowInstruments release];
-    [_menuBarDropShadowView release];
-	[super dealloc];	
 }
 
 
@@ -360,7 +310,6 @@ extern GtarController * g_gtarController;
     // not match directly the index in the instruments scroll, due to the extra header
     // entries
     
-    [instrumentScrollText release];
     
     // nln - no longer needed
     //m_volumeView.transform = CGAffineTransformMakeRotation(-M_PI_2);
@@ -534,24 +483,19 @@ extern GtarController * g_gtarController;
 
 - (void)handleBecomeActive
 {
-    [m_playTimeStart release];
-    [m_audioRouteTimeStart release];
-    [m_instrumentTimeStart release];
-    [m_scaleTimeStart release];
     
     for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
     {
-        [m_effectTimeStart[effect] release];
     }
     
-    m_playTimeStart = [[NSDate date] retain];
-    m_audioRouteTimeStart = [[NSDate date] retain];
-    m_instrumentTimeStart = [[NSDate date] retain];
-    m_scaleTimeStart = [[NSDate date] retain];
+    m_playTimeStart = [NSDate date];
+    m_audioRouteTimeStart = [NSDate date];
+    m_instrumentTimeStart = [NSDate date];
+    m_scaleTimeStart = [NSDate date];
     
     for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
     {
-        m_effectTimeStart[effect] = [[NSDate date] retain];
+        m_effectTimeStart[effect] = [NSDate date];
     }
 }
 
@@ -613,7 +557,6 @@ extern GtarController * g_gtarController;
                                                                    nil]];
         }
         
-        [m_effectTimeStart[effect] release];
     }
     
 }
@@ -1436,8 +1379,7 @@ extern GtarController * g_gtarController;
                                                                [NSNumber numberWithInteger:delta], @"PlayTime",
                                                                nil]];
 
-        [m_instrumentTimeStart release];
-        m_instrumentTimeStart = [[NSDate date] retain];
+        m_instrumentTimeStart = [NSDate date];
     }
     
     NSString *sampleName = [m_instrumentsScroll getNameAtIndex:[sender m_selectedIndex]];
@@ -1575,8 +1517,7 @@ extern GtarController * g_gtarController;
                                                                @"On", @"ScaleLights",
                                                                nil]];
 
-        [m_scaleTimeStart release];
-        m_scaleTimeStart = [[NSDate date] retain];
+        m_scaleTimeStart = [NSDate date];
         
     }
     else
@@ -1597,8 +1538,7 @@ extern GtarController * g_gtarController;
                                                                [NSNumber numberWithInteger:delta], @"PlayTime",
                                                                nil]];
 
-        [m_scaleTimeStart release];
-        m_scaleTimeStart = [[NSDate date] retain];
+        m_scaleTimeStart = [NSDate date];
         
     }
     

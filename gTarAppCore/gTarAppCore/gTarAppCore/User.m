@@ -36,14 +36,6 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_username release];
-    
-    [super dealloc];
-    
-}
 
 // Encode an object to an archive
 - (void)encodeWithCoder:(NSCoder *)coder

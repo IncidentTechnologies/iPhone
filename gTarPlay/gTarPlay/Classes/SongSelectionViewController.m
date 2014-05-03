@@ -38,7 +38,7 @@ extern GtarController *g_gtarController;
     int sortChange;
 }
 
-@property (retain, nonatomic) IBOutlet UIButton *sortByTitleButtton;
+@property (strong, nonatomic) IBOutlet UIButton *sortByTitleButtton;
 //@property (retain, nonatomic) IBOutlet UIButton *sortByArtistButton;
 //@property (retain, nonatomic) IBOutlet UIImageView *sortByTitleArrow;
 //@property (retain, nonatomic) IBOutlet UIImageView *sortByArtistArrow;
@@ -72,12 +72,11 @@ extern GtarController *g_gtarController;
         }
         else
         {
-            userSongArray = [[NSKeyedUnarchiver unarchiveObjectWithData:songArrayData] retain];
+            userSongArray = [NSKeyedUnarchiver unarchiveObjectWithData:songArrayData];
         }
         
         _userSongArray = userSongArray;
         NSLog(@"Found %d cached songs",[_userSongArray count]);
-        [_userSongArray retain];
         
         sortChange = 0;
     }
@@ -220,30 +219,9 @@ extern GtarController *g_gtarController;
 {
     [g_gtarController removeObserver:self];
     //[g_soundMaster releaseAfterUse];
-    [_userSongArray release];
-    [_songListTable release];
-    [_titleArtistButton release];
-    [_skillButton release];
-    [_scoreButton release];
-    [_songOptionsModal release];
-    [_volumeButton release];
-    [_closeModalButton release];
-    [_instrumentButton release];
-    [_easyButton release];
-    [_mediumButton release];
-    [_hardButton release];
-    [_volumeView release];
-    [_songPlayerView release];
-    [_topBar release];
-    [_instrumentView release];
-    [_searchBar release];
-    [_fullscreenButton release];
-    [_startButton release];
     //[_sortByTitleArrow release];
     //[_sortByArtistArrow release];
     //[_sortByArtistButton release];
-    [_sortByTitleButtton release];
-    [super dealloc];
 }
 
 #pragma mark - Button Click Handlers
@@ -464,9 +442,8 @@ extern GtarController *g_gtarController;
 
 - (void)setUserSongArray:(NSArray *)userSongArray
 {
-    [_userSongArray autorelease];
     
-    _userSongArray = [userSongArray retain];
+    _userSongArray = userSongArray;
     
     // refresh the search list with the new songs
     if ( _searching == YES )
@@ -481,13 +458,11 @@ extern GtarController *g_gtarController;
 {
     if ( _searching == YES )
     {
-        [_displayedUserSongArray autorelease];
-        _displayedUserSongArray = [_searchedUserSongArray retain];
+        _displayedUserSongArray = _searchedUserSongArray;
     }
     else
     {
-        [_displayedUserSongArray autorelease];
-        _displayedUserSongArray = [_userSongArray retain];
+        _displayedUserSongArray = _userSongArray;
     }
     
     [self sortSongList];
@@ -691,7 +666,7 @@ extern GtarController *g_gtarController;
     NSString *songString = (NSString *)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     playViewController.userSong = userSong;
-    playViewController.userSong.m_xmlDom = [[[XmlDom alloc] initWithXmlString:songString] autorelease];
+    playViewController.userSong.m_xmlDom = [[XmlDom alloc] initWithXmlString:songString];
     
     if ( difficulty == 0 )
     {
@@ -713,7 +688,6 @@ extern GtarController *g_gtarController;
 
     [self.navigationController pushViewController:playViewController animated:YES];
     
-    [playViewController release];
 }
 
 //- (void)previewUserSong:(UserSong*)userSong
@@ -773,31 +747,29 @@ extern GtarController *g_gtarController;
     NSSortDescriptor *sortDescriptor;
     switch (_sortOrder.type) {
         case SORT_SONG_TITLE: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:_sortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:_sortOrder.fAscending];
         } break;
             
         case SORT_SONG_ARTIST: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:_sortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:_sortOrder.fAscending];
         } break;
             
         default: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:TRUE] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:TRUE];
         } break;
     }
     
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [_displayedUserSongArray sortedArrayUsingDescriptors:sortDescriptors];
     
-    [_displayedUserSongArray autorelease];
-    _displayedUserSongArray = [sortedArray retain];
+    _displayedUserSongArray = sortedArray;
 }
 
 - (void)sortByScore
 {
     NSArray *sortedArray = [_userSongArray sortedArrayUsingSelector:@selector(comparePlayScore:)];
     
-    [_userSongArray release];
-    _userSongArray = [sortedArray retain];
+    _userSongArray = sortedArray;
 }
 
 - (void)searchForString:(NSString *)searchString
@@ -822,7 +794,6 @@ extern GtarController *g_gtarController;
         }
     }
     
-    [_searchedUserSongArray release];
     _searchedUserSongArray = searchResults;
 }
 

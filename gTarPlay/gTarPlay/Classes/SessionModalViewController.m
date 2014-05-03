@@ -92,19 +92,6 @@ extern FileController *g_fileController;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{   
-    //[g_soundMaster releaseAfterUse];
-    [_volumeView release];
-    [_instrumentView release];
-    [_menuButton release];
-    [_volumeButton release];
-    [_shortcutButton release];
-    [_playerView release];
-    [_blackButton release];
-    [_userSongSession release];
-    [super dealloc];
-}
 
 #pragma mark - Button click handlers
 

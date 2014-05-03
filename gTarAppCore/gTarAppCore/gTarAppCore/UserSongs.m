@@ -43,7 +43,6 @@
 	{
 		m_songsXml = xmlBlob;
 		
-		[m_songsXml retain];
 		
 		[self parseXml];
 	}
@@ -139,20 +138,6 @@
     
 }
 
-- (void)dealloc
-{
-	
-	[m_songsXml release];
-	
-	[m_songsArray release];
-    
-	[m_currentSong release];
-	
-	[m_accumulatedText release];
-	
-	[super dealloc];
-    
-}
 
 - (void)addSongsFromXmlDom:(XmlDom*)xmlDom
 {
@@ -165,7 +150,6 @@
         
         [m_songsArray addObject:userSong];
         
-        [userSong release];
     }
     
 }
@@ -235,7 +219,6 @@
         
         [m_songsArray addObject:userSong];
         
-        [userSong release];
 
     }
     
@@ -290,7 +273,6 @@
 		
 		if ( m_songsArray != nil )
 		{
-			[m_songsArray release];
 			
 			m_songsArray = nil;
 		}
@@ -400,7 +382,6 @@
 		
 		[m_songsArray addObject:m_currentSong];
 		
-		[m_currentSong release];
 		
 		m_currentSong = nil;
 		
@@ -410,7 +391,6 @@
 		
 		m_currentSong.m_title = m_accumulatedText;
 		
-		[m_accumulatedText release];
 		
 		m_accumulatedText = nil;
 		
@@ -420,7 +400,6 @@
 		
 		m_currentSong.m_author = m_accumulatedText;
 		
-		[m_accumulatedText release];
 		
 		m_accumulatedText = nil;
 		
@@ -430,7 +409,6 @@
 		
 		m_currentSong.m_genre = m_accumulatedText;
 		
-		[m_accumulatedText release];
 		
 		m_accumulatedText = nil;
 		
@@ -440,7 +418,6 @@
 		
 		m_currentSong.m_description = m_accumulatedText;
 		
-		[m_accumulatedText release];
 		
 		m_accumulatedText = nil;
 		
@@ -470,7 +447,6 @@
 		
 		m_currentSong.m_timeCreated = [m_accumulatedText integerValue];
 		
-		[m_accumulatedText release];
 		
 		m_accumulatedText = nil;
 		
@@ -481,7 +457,6 @@
 		
 		m_currentSong.m_timeModified = [m_accumulatedText integerValue];
 		
-		[m_accumulatedText release];
 		
 		m_accumulatedText = nil;
 		
@@ -491,7 +466,6 @@
 		
 		m_currentSong.m_timeCreated = [m_accumulatedText integerValue];
 		
-		[m_accumulatedText release];
 		
 		m_accumulatedText = nil;
 		
@@ -502,7 +476,6 @@
 		
 		m_currentSong.m_timeModified = [m_accumulatedText integerValue];
 		
-		[m_accumulatedText release];
 		
 		m_accumulatedText = nil;
 		

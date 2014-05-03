@@ -68,6 +68,8 @@
 "FOLLOWING" = "跟随者";
 "SESSIONS" = "部分";
 "FOLLOWERS" = "跟进人";
+"Follow" = "跟随";
+"Following" = "跟随者";
 
 // Freeplay
 /*#*/ "ALL" = "全部";

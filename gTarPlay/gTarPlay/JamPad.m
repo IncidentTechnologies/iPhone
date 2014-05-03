@@ -109,20 +109,15 @@
 			UIView * image;
 			image = m_ledOffGrid[h][w];
 			[image removeFromSuperview];
-			[image release];
 			
 			image = m_ledOnGrid[h][w];
 			[image removeFromSuperview];
-			[image release];
 			
 		}
 		
 	}
 	
-	[m_ledOff release];
-	[m_ledOn release];
 	
-	[super dealloc];
 }
 
 - (void)setCurrentPosition:(CGPoint)point

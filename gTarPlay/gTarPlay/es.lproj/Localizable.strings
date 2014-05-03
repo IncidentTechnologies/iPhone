@@ -72,6 +72,8 @@
 "FOLLOWING" = "SIGUIENTE";
 "SESSIONS" = "SESIONES";
 "FOLLOWERS" = "SEGUIDORES";
+"Follow" = "Siga";
+"Following" = "Siguiente";
 
 // Freeplay
 /*#*/ "ALL" = "TODO";

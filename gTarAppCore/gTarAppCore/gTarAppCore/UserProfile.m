@@ -191,21 +191,6 @@
 }
 
 
-- (void)dealloc
-{
- 
-    [m_firstName release];
-    [m_middleName release];
-    [m_lastName release];
-    [m_name release];
-    [m_email release];
-    [m_profileText release];
-    
-//    [m_profilePic release];
-    
-    [super dealloc];
-    
-}
 
 - (BOOL)isEqual:(id)anObject
 {

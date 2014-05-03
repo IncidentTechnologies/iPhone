@@ -59,7 +59,6 @@
         [string drawAtPoint:CGPointMake(size.width/2-textWidth/2, 11.0)
              withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Bold" size:8.0],NSForegroundColorAttributeName:[UIColor whiteColor]}];
         
-        [string release];
         
         UIImage * textImage = UIGraphicsGetImageFromCurrentImageContext();
         //UIImageView * img = [[UIImageView alloc] initWithImage:textImage];

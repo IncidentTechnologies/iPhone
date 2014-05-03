@@ -26,14 +26,14 @@
     if ( self )
     {
         
-        m_cloudController = [cloudController retain];
+        m_cloudController = cloudController;
         
         // Create a little place to store our content stuff
         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString * documentsDirectory = [paths objectAtIndex:0];
         NSString * contentPath = [documentsDirectory stringByAppendingPathComponent:@"Content"];
         
-        m_contentFilePath = [contentPath retain];
+        m_contentFilePath = contentPath;
         
         if ( [[NSFileManager defaultManager] fileExistsAtPath:m_contentFilePath] == NO )
         {
@@ -47,7 +47,6 @@
             {
                 NSLog(@"Error: '%@' creating Content path: '%@'", [error localizedDescription], m_contentFilePath);
                 
-                [self release];
                 
                 return nil;
             }
@@ -87,25 +86,6 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_contentFilePath release];
-    
-    [m_cloudController release];
-    
-    [m_allProductIds release];
-    [m_allUserSongs release];
-    
-    [m_ownedProductIds release];
-    [m_ownedUserSongs release];
-    
-    [m_allProductIdsToProducts release];
-    [m_allProductIdsToUserSongs release];
-    
-    [super dealloc];
-    
-}
 
 #pragma mark - External helpers
 
@@ -123,7 +103,6 @@
 {
     
     // Resolved all the product IDs into product objects
-    [m_allProductIdsToProducts release];
     
     m_allProductIdsToProducts = [[NSMutableDictionary alloc] init];
     
@@ -140,7 +119,6 @@
 - (void)updateOwnedProductIds
 {
     
-    [m_ownedProductIds release];
     
     m_ownedProductIds = [[NSMutableArray alloc] init];
     
@@ -158,7 +136,6 @@
         return;
     }
     
-    [m_ownedUserSongs release];
     
     m_ownedUserSongs = [[NSMutableArray alloc] init];
     
@@ -184,7 +161,6 @@
         return;
     }
     
-    [m_allProductIdsToUserSongs release];
     
     m_allProductIdsToUserSongs = [[NSMutableDictionary alloc] init];
     
@@ -264,9 +240,8 @@
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
         
-        [m_allUserSongs release];
         
-        m_allUserSongs = [cloudResponse.m_responseUserSongs.m_songsArray retain];
+        m_allUserSongs = cloudResponse.m_responseUserSongs.m_songsArray;
         
         [self createOwnedUserSongsList]; 
         
@@ -297,9 +272,8 @@
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
         
-        [m_allProductIds release];
         
-        m_allProductIds = [cloudResponse.m_responseProductIds retain];
+        m_allProductIds = cloudResponse.m_responseProductIds;
         
     }
     
@@ -352,7 +326,6 @@
         
     }
     
-    [numberFormatter release];
     
 }
 
@@ -361,14 +334,12 @@
     
     NSLog(@"SKProduct request failed: %@", error.localizedDescription);
     
-    [request release];
     
 }
 
 - (void)requestDidFinish:(SKRequest *)request
 {
     
-    [request release];
     
 }
 

@@ -52,42 +52,42 @@ struct SongSortOrder {
 @interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver, ExpandableSearchBarDelegate,SlidingInstrumentDelegate>
 
 // Audio Controller
-@property (retain, nonatomic) SoundMaster *g_soundMaster;
+@property (strong, nonatomic) SoundMaster *g_soundMaster;
 
 // Song Options Modal
-@property (retain, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
-@property (retain, nonatomic) IBOutlet UIButton *closeModalButton;
-@property (retain, nonatomic) IBOutlet UIButton *volumeButton;
-@property (retain, nonatomic) IBOutlet UIButton *instrumentButton;
+@property (strong, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
+@property (strong, nonatomic) IBOutlet UIButton *closeModalButton;
+@property (strong, nonatomic) IBOutlet UIButton *volumeButton;
+@property (strong, nonatomic) IBOutlet UIButton *instrumentButton;
 
-@property (retain, nonatomic) IBOutlet UIButton *easyButton;
-@property (retain, nonatomic) IBOutlet UILabel *easyLabel;
+@property (strong, nonatomic) IBOutlet UIButton *easyButton;
+@property (strong, nonatomic) IBOutlet UILabel *easyLabel;
 
-@property (retain, nonatomic) IBOutlet UIButton *mediumButton;
-@property (retain, nonatomic) IBOutlet UILabel *mediumLabel;
+@property (strong, nonatomic) IBOutlet UIButton *mediumButton;
+@property (strong, nonatomic) IBOutlet UILabel *mediumLabel;
 
-@property (retain, nonatomic) IBOutlet UIButton *hardButton;
-@property (retain, nonatomic) IBOutlet UILabel *hardLabel;
+@property (strong, nonatomic) IBOutlet UIButton *hardButton;
+@property (strong, nonatomic) IBOutlet UILabel *hardLabel;
 
-@property (retain, nonatomic) IBOutlet UIButton *startButton;
+@property (strong, nonatomic) IBOutlet UIButton *startButton;
 
-@property (retain, nonatomic) IBOutlet UIView *volumeView;
-@property (retain, nonatomic) IBOutlet UIView *instrumentView;
-@property (retain, nonatomic) IBOutlet UIView *songPlayerView;
+@property (strong, nonatomic) IBOutlet UIView *volumeView;
+@property (strong, nonatomic) IBOutlet UIView *instrumentView;
+@property (strong, nonatomic) IBOutlet UIView *songPlayerView;
 
-@property (retain, nonatomic) IBOutlet UIView *topBar;
-@property (retain, nonatomic) IBOutlet ExpandableSearchBar *searchBar;
-@property (retain, nonatomic) IBOutlet UIButton *fullscreenButton;
-@property (retain, nonatomic) IBOutlet UIButton *titleArtistButton;
-@property (retain, nonatomic) IBOutlet UIButton *skillButton;
-@property (retain, nonatomic) IBOutlet UIButton *scoreButton;
+@property (strong, nonatomic) IBOutlet UIView *topBar;
+@property (strong, nonatomic) IBOutlet ExpandableSearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UIButton *fullscreenButton;
+@property (strong, nonatomic) IBOutlet UIButton *titleArtistButton;
+@property (strong, nonatomic) IBOutlet UIButton *skillButton;
+@property (strong, nonatomic) IBOutlet UIButton *scoreButton;
 
-@property (retain, nonatomic) IBOutlet UILabel *titleLabel;
-@property (retain, nonatomic) IBOutlet UILabel *artistLabel;
-@property (retain, nonatomic) IBOutlet UILabel *backLabel;
-@property (retain, nonatomic) IBOutlet UILabel *songListLabel;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *artistLabel;
+@property (strong, nonatomic) IBOutlet UILabel *backLabel;
+@property (strong, nonatomic) IBOutlet UILabel *songListLabel;
 
-@property (retain, nonatomic) IBOutlet PullToUpdateTableView *songListTable;
+@property (strong, nonatomic) IBOutlet PullToUpdateTableView *songListTable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;
 

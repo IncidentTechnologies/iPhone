@@ -19,14 +19,14 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willExitFreePlay:) name:@"ExitFreePlay" object:nil];
 
-        RGBColor *white = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:3] autorelease];
-        RGBColor *red = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:0] autorelease];
-        RGBColor *green = [[[RGBColor alloc] initWithRed:0 Green:3 Blue:0] autorelease];
-        RGBColor *blue = [[[RGBColor alloc] initWithRed:0 Green:0 Blue:3] autorelease];
-        RGBColor *cyan = [[[RGBColor alloc] initWithRed:0 Green:3 Blue:3] autorelease];
-        RGBColor *magenta = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:3] autorelease];
-        RGBColor *yellow = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:0] autorelease];
-        RGBColor *orange = [[[RGBColor alloc] initWithRed:3 Green:1 Blue:0] autorelease];
+        RGBColor *white = [[RGBColor alloc] initWithRed:3 Green:3 Blue:3];
+        RGBColor *red = [[RGBColor alloc] initWithRed:3 Green:0 Blue:0];
+        RGBColor *green = [[RGBColor alloc] initWithRed:0 Green:3 Blue:0];
+        RGBColor *blue = [[RGBColor alloc] initWithRed:0 Green:0 Blue:3];
+        RGBColor *cyan = [[RGBColor alloc] initWithRed:0 Green:3 Blue:3];
+        RGBColor *magenta = [[RGBColor alloc] initWithRed:3 Green:0 Blue:3];
+        RGBColor *yellow = [[RGBColor alloc] initWithRed:3 Green:3 Blue:0];
+        RGBColor *orange = [[RGBColor alloc] initWithRed:3 Green:1 Blue:0];
         
         _colors = [[NSArray alloc] initWithObjects:white, red, magenta, blue, cyan, green, yellow, orange, nil];
     }
@@ -109,26 +109,9 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ExitFreePlay" object:nil];
     
-    [_generalSurface release];
-    [_fretSurface release];
-    [_stringSurface release];
-    [_allSurface release];
-    [_colors release];
     
     [self stopLoop];
     
-    [_shapeView release];
-    [_colorView release];
-    [_shapeButton release];
-    [_colorButton release];
-    [_loopButton release];
-    [_arrowFretsRight release];
-    [_arrowStringsTop release];
-    [_arrowStringsBottom release];
-    [_colorWhite release];
-    [_modeButtons release];
-    [_colorButtons release];
-    [super dealloc];
 }
 
 

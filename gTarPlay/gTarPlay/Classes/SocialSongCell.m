@@ -31,14 +31,6 @@
     // Configure the view for the selected state
 }
 
-- (void)dealloc
-{
-    [_userSongSession release];
-    [_titleLabel release];
-    [_artistLabel release];
-    [_timeLabel release];
-    [super dealloc];
-}
 
 - (void)updateCell
 {

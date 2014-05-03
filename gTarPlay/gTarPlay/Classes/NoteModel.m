@@ -16,55 +16,17 @@
 // (static variables in the class def don't work as expected)
 // pretend that they are class variables for NoteModel
 
-static UIImage * m_noteImage;
-
-static Texture2D * m_noteTexture;
-
 static HighlightModel * m_highlightModel;
 
-static GLfloat m_noteHeight = 0;
-
-static unsigned int m_notesRemaining = 0;
-
-- (id)initWithCenter:(CGPoint)center andSize:(CGSize)size andColor:(GLubyte*)color andOverlay:(Model*)overlay
-{
-	
-    self = [super init];
-    
-	if ( self )
-	{
-		m_notesRemaining++;
-		
-		m_center = center;
-		
-		m_overlayModel = [overlay retain];
-		
-		m_texture = [m_noteTexture retain];
-        
-        m_highlightModel = [[[HighlightModel alloc] initWithCenter:m_center andSize:CGSizeMake(25, 25) andColor:g_standaloneClearColor andShape:@"Round"] retain];
-        
-        m_hit = 0;
-        
-        l_color = color;
-        
-        [self initFretNoteCounts];
-	}
-	
-	return self;
-	
-}
-
-// This might be the only relevant constructor right now
 - (id)initWithCenter:(CGPoint)center andColor:(GLubyte*)color andTexture:(Texture2D*)texture andOverlay:(Model*)overlay
 {
-    
     self = [super initWithCenter:center andColor:color andTexture:texture];
     
     if ( self )
     {
-        m_overlayModel = [overlay retain];
+        m_overlayModel = overlay;
         
-        m_highlightModel = [[[HighlightModel alloc] initWithCenter:m_center andSize:CGSizeMake(25, 25) andColor:g_standaloneClearColor andShape:@"Round"] retain];
+        m_highlightModel = [[HighlightModel alloc] initWithCenter:m_center andSize:CGSizeMake(25, 25) andColor:g_standaloneClearColor andShape:@"Round"];
         
         m_hit = 0;
         
@@ -74,44 +36,6 @@ static unsigned int m_notesRemaining = 0;
     }
     
     return self;
-}
-
-- (void)dealloc
-{
-	
-	[m_overlayModel release];
-	
-    if ( m_notesRemaining > 0 )
-    {
-        m_notesRemaining--;
-
-        if ( m_notesRemaining == 0 )
-        {
-            // we can clear out all the static state
-            m_noteHeight = 0;
-            
-            [self releaseCachedImages];
-            
-        }
-    }
-	
-	[super dealloc];
-}
-
-- (void)releaseCachedImages
-{
-	[m_noteImage release];
-	
-	[m_noteTexture release];
-    
-    [m_highlightModel release];
-    
-	m_noteImage  = nil;
-	
-	m_noteTexture  = nil;
-    
-    m_highlightModel = nil;
-	
 }
 
 - (void)hitNote
@@ -159,9 +83,10 @@ static unsigned int m_notesRemaining = 0;
 {
 	if(_m_standalonefret >= 0){
         
-        // Recolor notes on hit
+        // Recolor notes on hit, ensure opaque
         if(recolor){
-            [super changeColor:color];
+            GLubyte solidColor[4] = {color[0],color[1],color[2],255.0};
+            [super changeColor:solidColor];
         }
         
         // This allows the texture to take on the color of the geometry
@@ -179,6 +104,7 @@ static unsigned int m_notesRemaining = 0;
                 [m_overlayModel drawAt:m_center];
             }
         }
+        
         
         glDisable(GL_COLOR_MATERIAL);
         

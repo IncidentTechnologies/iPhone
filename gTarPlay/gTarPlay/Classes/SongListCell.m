@@ -29,24 +29,21 @@
     // Configure the view for the selected state
 }
 
-- (void)dealloc
-{
-    [_userSong release];
-    [_songTitle release];
-    [_songArtist release];
-    [_songScore release];
-    [_titleArtistView release];
-    [_skillView release];
-    [_scoreView release];
-    [_songSkill release];
-    [_activityView release];
-    [_selectedBgView release];
-    [super dealloc];
-}
 
 - (void)updateCell
 {
     [self setUserInteractionEnabled:YES];
+    
+    // Add Borders
+    CALayer *topBorder = [CALayer layer];
+    topBorder.frame = CGRectMake(0.0f, -1.0f, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    topBorder.backgroundColor = [UIColor colorWithWhite:(170.0f/255.0f) alpha:1.0f].CGColor;
+    [self.layer addSublayer:topBorder];
+    
+    CALayer *bottomBorder = [CALayer layer];
+    bottomBorder.frame = CGRectMake(0.0f, 60.0f, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    bottomBorder.backgroundColor = [UIColor colorWithWhite:(170.0f/255.0f) alpha:1.0f].CGColor;
+    [self.layer addSublayer:bottomBorder];
     
     [_activityView stopAnimating];
     

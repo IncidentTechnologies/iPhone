@@ -46,9 +46,6 @@
         [self addSubview:blackView];
         [self addSubview:activity];
         
-        [blackView release];
-        [grayView release];
-        [activity release];
         
     }
     

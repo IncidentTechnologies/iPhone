@@ -43,14 +43,6 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_renderer release];
-    
-    [super dealloc];
-    
-}
 
 - (void)drawView
 {

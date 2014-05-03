@@ -27,16 +27,11 @@
         //_audioController = [AC retain];
         
         CGRect frame = CGRectMake(0, 0, 0, 0);
-        tableView = [[[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain] retain];
+        tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [tableView release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad
 {

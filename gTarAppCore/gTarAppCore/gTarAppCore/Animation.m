@@ -36,14 +36,6 @@
     
 }
 
-- (void)dealloc
-{
-
-	[m_models release];
-	
-	[super dealloc];
-	
-}
 
 - (void)addModel:(Model*)model
 {
@@ -71,9 +63,6 @@
 	
 	[self addModel:model];
 	
-	[texture release];
-	[model release];
-	[image release];
 
 }
 	

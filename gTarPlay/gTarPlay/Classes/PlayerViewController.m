@@ -101,7 +101,6 @@
     [super viewWillDisappear:animated];
 //    [_songPlaybackController ignoreGtarController:g_gtarController];
     
-    [_songPlaybackController release];
     _songPlaybackController = nil;
 }
 
@@ -114,20 +113,10 @@
 - (void)dealloc
 {
 //    [_songPlaybackController ignoreGtarController:g_gtarController];
-    [_songPlaybackController release];
     _songPlaybackController = nil;
     
-    [_userSong release];
     //[g_soundMaster releaseAfterUse];
-    [_playButton release];
-    [_fillView release];
-    [_knobView release];
-    [_songTitle release];
-    [_songArtist release];
-    [_touchSurfaceView release];
-    [_indicatorView release];
     
-    [super dealloc];
 }
 
 // This loads the preview song in the background
@@ -162,8 +151,7 @@
 
 - (void)setUserSong:(UserSong *)userSong
 {
-    [_userSong release];
-    _userSong = [userSong retain];
+    _userSong = userSong;
     
     [_songTitle setText:_userSong.m_author];
     [_songArtist setText:_userSong.m_title];
@@ -171,8 +159,7 @@
 
 - (void)setXmpBlob:(NSString *)xmpBlob
 {
-    [_xmpBlob release];
-    _xmpBlob = [xmpBlob retain];
+    _xmpBlob = xmpBlob;
     
 //    [self updateProgress];
 }

@@ -38,11 +38,11 @@
     [self.toneSlider setThumbImage:sliderKnob forState:UIControlStateNormal];
     
     // Customize audio route switch
-    self.audioRouteSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
+    self.audioRouteSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
     self.audioRouteSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.audioRouteSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
     
-    self.slideSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
+    self.slideSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
     self.slideSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.slideSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
     
@@ -75,11 +75,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
     
-    [_toneSlider release];
-    [audioRouteSwitch release];
     
-    [_slideSwitch release];
-    [super dealloc];
 }
 
 #pragma mark - Tone slider

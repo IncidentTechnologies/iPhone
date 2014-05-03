@@ -11,16 +11,16 @@
 @interface InstrumentsAndEffectsViewController ()
 
 // @property (retain, nonatomic) AudioController *audioController;
-@property (retain, nonatomic) SoundMaster *soundMaster;
-@property (retain, nonatomic) InstrumentTableViewController *instrumentTableVC;
-@property (retain, nonatomic) EffectsTableViewController *effectsTableVC;
+@property (strong, nonatomic) SoundMaster *soundMaster;
+@property (strong, nonatomic) InstrumentTableViewController *instrumentTableVC;
+@property (strong, nonatomic) EffectsTableViewController *effectsTableVC;
 
 @property (nonatomic) NSInteger selectedEffectIndex;
 
-@property (retain, nonatomic) IBOutlet JamPad *jamPad;
+@property (strong, nonatomic) IBOutlet JamPad *jamPad;
 
-@property (retain, nonatomic) IBOutlet UIView *contentTable;
-@property (retain, nonatomic) UIViewController *currentMainContentVC;
+@property (strong, nonatomic) IBOutlet UIView *contentTable;
+@property (strong, nonatomic) UIViewController *currentMainContentVC;
 
 -(void) switchMainContentControllerToVC:(UIViewController *)newVC;
 -(void) setupJamPadWithEffectAtIndex:(int)index;
@@ -42,7 +42,7 @@
         
         // _audioController = [AC retain];
         
-        soundMaster = [SM retain];
+        soundMaster = SM;
         
         //_instrumentTableVC = [[InstrumentTableViewController alloc] initWithAudioController:AC];
         instrumentTableVC = [[InstrumentTableViewController alloc] init];
@@ -93,15 +93,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    // [_audioController release];
-    [soundMaster release];
-    [_contentTable release];
-    [_currentMainContentVC release];
-    
-    [jamPad release];
-    [super dealloc];
-}
 
 - (void)displayInstruments
 {

@@ -237,7 +237,7 @@
         NSLog(@"Verify failed: %@", cloudResponse.m_statusText);
         
         // Song purchase failed, remove pending purchase and let the cell know
-        SongPurchaseRequest *pSongPurchaseRequest = [[m_pendingSongPurchases objectAtIndex:([m_pendingSongPurchases count] - 1)] retain];
+        SongPurchaseRequest *pSongPurchaseRequest = [m_pendingSongPurchases objectAtIndex:([m_pendingSongPurchases count] - 1)];
         [pSongPurchaseRequest.m_obj performSelector:pSongPurchaseRequest.m_sel withObject:cloudResponse];
         [m_pendingSongPurchases removeLastObject];
     }
@@ -283,7 +283,7 @@
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
 {
     // TODO: If a user hits multiple songs to purchase at once, this might not do it in the right order
-    SongPurchaseRequest *pSongPurchaseRequest = [[m_pendingSongPurchases objectAtIndex:([m_pendingSongPurchases count] - 1)] retain];
+    SongPurchaseRequest *pSongPurchaseRequest = [m_pendingSongPurchases objectAtIndex:([m_pendingSongPurchases count] - 1)];
     [pSongPurchaseRequest.m_obj performSelector:pSongPurchaseRequest.m_sel withObject:NULL];
     [m_pendingSongPurchases  removeObject:pSongPurchaseRequest];
     
@@ -342,7 +342,7 @@
         return;
     }
     
-    SongPurchaseRequest *pSongPurchaseRequest = [[m_pendingSongPurchases objectAtIndex:([m_pendingSongPurchases count] - 1)] retain];
+    SongPurchaseRequest *pSongPurchaseRequest = [m_pendingSongPurchases objectAtIndex:([m_pendingSongPurchases count] - 1)];
     UserSong *pSong = [pSongPurchaseRequest m_pSong];
     
     [m_purchasedSongs addObject:pSongPurchaseRequest];

@@ -70,7 +70,7 @@ typedef enum
 @interface CloudRequest : NSObject
 {
     
-    CloudResponse * m_cloudResponse;
+    CloudResponse * __weak m_cloudResponse;
     
     // Async callbacks 
 	id m_callbackObject;
@@ -129,7 +129,7 @@ typedef enum
     
 }
 
-@property (nonatomic, assign) CloudResponse * m_cloudResponse;
+@property (nonatomic, weak) CloudResponse * m_cloudResponse;
 
 @property (nonatomic, readonly) id m_callbackObject;
 @property (nonatomic, readonly) SEL m_callbackSelector;
@@ -138,24 +138,24 @@ typedef enum
 @property (nonatomic, assign) CloudRequestStatus m_status;
 @property (nonatomic, readonly) BOOL m_isSynchronous;
 
-@property (nonatomic, retain) NSString * m_facebookAccessToken;
-@property (nonatomic, retain) NSString * m_username;
-@property (nonatomic, retain) NSString * m_password;
-@property (nonatomic, retain) NSString * m_email;
-@property (nonatomic, retain) NSHTTPCookie * m_cookie;
+@property (nonatomic, strong) NSString * m_facebookAccessToken;
+@property (nonatomic, strong) NSString * m_username;
+@property (nonatomic, strong) NSString * m_password;
+@property (nonatomic, strong) NSString * m_email;
+@property (nonatomic, strong) NSHTTPCookie * m_cookie;
 @property (nonatomic, assign) NSInteger m_fileId;
 @property (nonatomic, assign) NSInteger m_userId;
 @property (nonatomic, assign) NSInteger m_page;
-@property (nonatomic, retain) NSString * m_searchString;
-@property (nonatomic, retain) NSString * m_creditCode;
-@property (nonatomic, retain) UserSong * m_userSong;
-@property (nonatomic, retain) UserSongSession * m_userSongSession;
-@property (nonatomic, retain) NSData * m_itunesReceipt;
-@property (nonatomic, retain) UIImage * m_profileImage;
-@property (nonatomic, retain) NSString * m_logEntries;
-@property (nonatomic, retain) NSString * m_versionString;
-@property (nonatomic, retain) NSString * m_deviceString;
-@property (nonatomic, retain) NSString * m_appString;
+@property (nonatomic, strong) NSString * m_searchString;
+@property (nonatomic, strong) NSString * m_creditCode;
+@property (nonatomic, strong) UserSong * m_userSong;
+@property (nonatomic, strong) UserSongSession * m_userSongSession;
+@property (nonatomic, strong) NSData * m_itunesReceipt;
+@property (nonatomic, strong) UIImage * m_profileImage;
+@property (nonatomic, strong) NSString * m_logEntries;
+@property (nonatomic, strong) NSString * m_versionString;
+@property (nonatomic, strong) NSString * m_deviceString;
+@property (nonatomic, strong) NSString * m_appString;
 
 - (id)initWithType:(CloudRequestType)type;
 - (id)initWithType:(CloudRequestType)type andCallbackObject:(id)obj andCallbackSelector:(SEL)sel;

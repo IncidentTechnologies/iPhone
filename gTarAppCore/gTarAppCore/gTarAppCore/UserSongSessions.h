@@ -17,7 +17,7 @@
 
 }
 
-@property (nonatomic, retain) NSArray * m_sessionsArray;
+@property (nonatomic, strong) NSArray * m_sessionsArray;
 
 - (id)initWithXmlDom:(XmlDom*)xmlDom;
 - (void)addSessionsFromXmlDom:(XmlDom*)xmlDom;

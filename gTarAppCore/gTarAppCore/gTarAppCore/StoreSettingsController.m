@@ -17,22 +17,6 @@
 @synthesize m_previousPurchaseUserSong;
 @synthesize m_isDirty;
 
-- (void)dealloc
-{
-    
-    [m_currentPurchaseProductId release];
-    [m_currentPurchaseUserSong release];
-    [m_currentTransaction release];
-    [m_previousPurchaseUserSong release];
-    
-    m_currentPurchaseProductId = nil;
-    m_currentPurchaseUserSong = nil;
-    m_currentTransaction = nil;
-    m_previousPurchaseUserSong = nil;
-    
-    [super dealloc];
-    
-}
 
 // Encode an object for an archive
 - (void)encodeWithCoder:(NSCoder *)coder
@@ -57,11 +41,11 @@
 	if ( self )
 	{
 		
-        m_currentPurchaseProductId = [[coder decodeObjectForKey:@"ProductId"] retain];
-        m_currentPurchaseUserSong = [[coder decodeObjectForKey:@"UserSong"] retain];
-        m_currentTransaction = [[coder decodeObjectForKey:@"Transaction"] retain];
+        m_currentPurchaseProductId = [coder decodeObjectForKey:@"ProductId"];
+        m_currentPurchaseUserSong = [coder decodeObjectForKey:@"UserSong"];
+        m_currentTransaction = [coder decodeObjectForKey:@"Transaction"];
         
-        m_previousPurchaseUserSong = [[coder decodeObjectForKey:@"PreviousUserSong"] retain];
+        m_previousPurchaseUserSong = [coder decodeObjectForKey:@"PreviousUserSong"];
         
 	}
 	
@@ -84,8 +68,10 @@
         return NO;
     }
     
-    m_currentPurchaseProductId = [productId retain];
-    m_currentPurchaseUserSong = [userSong retain];
+    //m_currentPurchaseProductId = [productId retain];
+    //m_currentPurchaseUserSong = [userSong retain];
+    m_currentPurchaseProductId = productId;
+    m_currentPurchaseUserSong = userSong;
   
     return [self saveArchive];;
 
@@ -94,10 +80,10 @@
 - (void)clearCurrentPurchase
 {
     
-    [m_currentPurchaseProductId release];
+    /*[m_currentPurchaseProductId release];
     [m_currentPurchaseUserSong release];
     [m_currentTransaction release];
-
+*/
     m_currentPurchaseProductId = nil;
     m_currentPurchaseUserSong = nil;
     m_currentTransaction = nil;

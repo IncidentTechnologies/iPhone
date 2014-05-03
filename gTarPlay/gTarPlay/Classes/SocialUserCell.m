@@ -43,14 +43,6 @@ extern FileController *g_fileController;
     // Configure the view for the selected state
 }
 
-- (void)dealloc {
-    [_userProfile release];
-    [_followInvocation release];
-    [_profilePic release];
-    [_userName release];
-    [_followButton release];
-    [super dealloc];
-}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -95,16 +87,20 @@ extern FileController *g_fileController;
     else if ( self.following == YES)
     {
         [_followButton setHidden:NO];
-        UIImage *image = [UIImage imageNamed:@"SocialFollowingButton.png"];
-        [_followButton setImage:image forState:UIControlStateNormal];
+        _followButton.layer.cornerRadius = 20.0;
+        [_followButton setBackgroundColor:[UIColor colorWithRed:0/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
+        //UIImage *image = [UIImage imageNamed:@"SocialFollowingButton.png"];
+        //[_followButton setImage:image forState:UIControlStateNormal];
         
         _followButtonText.text = [[NSString alloc] initWithString:NSLocalizedString(@"FOLLOWING", NULL)];
     }
     else
     {
         [_followButton setHidden:NO];
-        UIImage *image = [UIImage imageNamed:@"SocialFollowButton.png"];
-        [_followButton setImage:image forState:UIControlStateNormal];
+        _followButton.layer.cornerRadius = 20.0;
+        [_followButton setBackgroundColor:[UIColor colorWithRed:165/255.0 green:203/255.0 blue:111/255.0 alpha:1.0]];
+        //UIImage *image = [UIImage imageNamed:@"SocialFollowButton.png"];
+        //[_followButton setImage:image forState:UIControlStateNormal];
         
         _followButtonText.text = [[NSString alloc] initWithString:NSLocalizedString(@"FOLLOW", NULL)];
     }

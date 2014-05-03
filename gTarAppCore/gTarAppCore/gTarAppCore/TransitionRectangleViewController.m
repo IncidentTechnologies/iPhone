@@ -36,28 +36,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-    
-    [m_viewArray release];
-    
-    [m_currentView release];
-    [m_nextView release];
-    
-    [m_title release];
-    [m_imageArray release];
-    [m_textArray release];
-    
-    [m_displayView release];
-    
-    [m_nextButton release];
-    [m_backButton release];
-    [m_doneButton release];
-    
-    [m_pageControl release];
-    
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -86,12 +64,10 @@
     recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(backButtonClicked:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [self.view addGestureRecognizer:recognizer];
-    [recognizer release];
     
     recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextButtonClicked:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self.view addGestureRecognizer:recognizer];
-    [recognizer release];
     
 }
 
@@ -166,7 +142,6 @@
     m_currentView = nil;
     
     // clear out old junk
-    [m_viewArray release];
     m_viewArray = nil;
 
 }
@@ -291,7 +266,6 @@
         return;
     }
     
-    [m_viewArray release];
     
     m_viewArray = [[NSMutableArray alloc] init];
 
@@ -320,8 +294,6 @@
         
         [m_viewArray addObject:currentView];
         
-        [textView release];
-        [currentView release];
         
     }
     
@@ -364,11 +336,9 @@
                 
                 [imageView addSubview:textView];
                 
-                [textView release];
                 
             }
             
-            [imageView release];
             
         }
         else if ( [textString isEqualToString:@""] == NO )
@@ -389,13 +359,11 @@
             textView.numberOfLines = 10;
             
             [currentView addSubview:textView];
-            [textView release];
             
         }
         
         [m_viewArray addObject:currentView];
         
-        [currentView release];
         
     }
 
@@ -606,7 +574,6 @@
 
         self.m_displayView = displayView;
         
-        [displayView release];
         
         m_displayView.backgroundColor = [UIColor whiteColor];
     }

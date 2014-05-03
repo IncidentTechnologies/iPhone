@@ -71,6 +71,8 @@
 "FOLLOWING" = "기부의 신청";
 "SESSIONS" = "세션";
 "FOLLOWERS" = "기명자";
+"Follow" = "구독하다";
+"Following" = "기부의 신청";
 
 // Freeplay
 /*#*/ "ALL" = "모든";

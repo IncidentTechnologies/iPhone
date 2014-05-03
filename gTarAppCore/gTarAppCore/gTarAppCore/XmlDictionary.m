@@ -28,30 +28,16 @@
 	return self;
 	
 }
-- (void)dealloc
-{
-
-//    NSLog(@"dict %u", [m_xmlDictionary retainCount]);
-    
-	[m_xmlBlobData release];
-	[m_xmlDictionary release];
-	[m_dictionaryArray release];
-	[m_accumulatedText release];
-
-	[super dealloc];
-	
-}	
 
 + (NSDictionary*)dictionaryFromXmlBlob:(NSString*)xmlBlob
 {
 
 	XmlDictionary * xmlDictionary = [[XmlDictionary alloc] initWithXmlBlobData:[xmlBlob dataUsingEncoding:NSASCIIStringEncoding]];
 	
-	NSDictionary * dictionary = [xmlDictionary.m_xmlDictionary retain];
+	NSDictionary * dictionary = xmlDictionary.m_xmlDictionary;
 	
-	[xmlDictionary release];
     
-	return [dictionary autorelease];
+	return dictionary;
 }
 
 + (NSDictionary*)dictionaryFromXmlBlobData:(NSData*)xmlBlobData
@@ -59,23 +45,19 @@
 
 	XmlDictionary * xmlDictionary = [[XmlDictionary alloc] initWithXmlBlobData:xmlBlobData];
 	
-	NSDictionary * dictionary = [xmlDictionary.m_xmlDictionary retain];
+	NSDictionary * dictionary = xmlDictionary.m_xmlDictionary;
 	
-	[xmlDictionary release];
     
-	return [dictionary autorelease];	
+	return dictionary;	
 }
 
 - (void)parseXmlBlobData:(NSData*)xmlBlobData
 {
 
 	// hold onto the xml blob we are parsing
-    [m_xmlBlobData release];
-	m_xmlBlobData = [xmlBlobData retain];
+	m_xmlBlobData = xmlBlobData;
 	
 	// allocate some useful objects
-    [m_dictionaryArray release];
-    [m_accumulatedText release];
 	m_dictionaryArray = [[NSMutableArray alloc] init];
 	m_accumulatedText = [[NSMutableString alloc] init];
 	
@@ -86,7 +68,6 @@
 	
 	[parser parse];
     
-    [parser release];
 	
 	// do something with the result?
 	
@@ -130,7 +111,6 @@
 			
 			[parentDictionary setObject:childArray forKey:elementName];
             
-            [childArray release];
 			
 		}
 		
@@ -143,7 +123,6 @@
 	// This node is done. make the current child the new parent node.
 	[m_dictionaryArray addObject:childDictionary];
     
-    [childDictionary release];
     
 }
 
@@ -158,7 +137,7 @@
 	if ( [m_accumulatedText length] > 0 )
 	{
         
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        @autoreleasepool {
         
         // strip and whitespace
         NSString * stripString = [m_accumulatedText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -168,16 +147,14 @@
             [currentDictionary setObject:stripString forKey:XML_DICTIONARY_TEXT_NODE];
 		}
         
-		[m_accumulatedText release];
         
 		m_accumulatedText = [[NSMutableString alloc] init];
         
-        [pool release];
+        }
         
 	}
 	
     // Hold onto this dictionary untill we can confirm we are done with it
-    [currentDictionary retain];
     
 	// Now that we are done with this node, we can pop it off the stack.
 	[m_dictionaryArray removeObject:currentDictionary];
@@ -186,11 +163,9 @@
     // then we are done with this dictionary
 	if ( [m_dictionaryArray count] == 0 )
 	{
-        [m_xmlDictionary release];
-		m_xmlDictionary = [currentDictionary retain];
+		m_xmlDictionary = currentDictionary;
 	}
     
-    [currentDictionary release];
     
 }
 

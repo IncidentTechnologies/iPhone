@@ -62,13 +62,6 @@
     
 }
 
-- (void)dealloc
-{
-    [m_frameHits release];
-    [m_frameTimings release];
-    
-    [super dealloc];
-}
 
 // Called on exit frame for normal, or anytime during Standalone
 - (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone
@@ -145,7 +138,7 @@
         m_multiplier = 2;
     }else if(m_streak >= 8 && m_streak < 16){
         m_multiplier = 4;
-    }else if(m_streak >= 16){
+    }else if(m_streak >= 16 && m_streak < 32){
         m_multiplier = 6;
     }else if(m_streak >= 32){
         m_multiplier = 8;
@@ -194,7 +187,6 @@
     
     [m_frameHits addObject:hitDict];
     
-    [hitDict release];
     
     [self scoreFramePerfectly:frame];
     

@@ -36,17 +36,17 @@
     
 }
 
-@property (nonatomic, retain) NSString * m_title;
-@property (nonatomic, retain) NSArray * m_imageArray;
-@property (nonatomic, retain) NSArray * m_textArray;
+@property (nonatomic, strong) NSString * m_title;
+@property (nonatomic, strong) NSArray * m_imageArray;
+@property (nonatomic, strong) NSArray * m_textArray;
 
-@property (nonatomic, retain) IBOutlet UIView * m_displayView;
+@property (nonatomic, strong) IBOutlet UIView * m_displayView;
 
-@property (nonatomic, retain) IBOutlet UIButton * m_nextButton;
-@property (nonatomic, retain) IBOutlet UIButton * m_backButton;
-@property (nonatomic, retain) IBOutlet UIButton * m_doneButton;
+@property (nonatomic, strong) IBOutlet UIButton * m_nextButton;
+@property (nonatomic, strong) IBOutlet UIButton * m_backButton;
+@property (nonatomic, strong) IBOutlet UIButton * m_doneButton;
 
-@property (nonatomic, retain) IBOutlet UIPageControl * m_pageControl;
+@property (nonatomic, strong) IBOutlet UIPageControl * m_pageControl;
 
 - (IBAction)nextButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;

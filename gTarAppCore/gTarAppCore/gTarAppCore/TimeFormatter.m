@@ -11,7 +11,7 @@
 @implementation TimeFormatter
 
 + (NSTimeInterval)convertDateStringToInterval:(NSString*)dateString {
-    NSDateFormatter * dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     return [[dateFormat dateFromString:dateString] timeIntervalSince1970];
 }

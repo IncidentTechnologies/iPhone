@@ -61,16 +61,6 @@
 
 }
 
-- (void)dealloc
-{
-    
-    [m_notes release];
-    [m_notesPending release];
-    [m_notesHit release];
-    
-    [super dealloc];
-    
-}
 
 - (void)addNote:(NSNote*)note
 {

@@ -45,81 +45,82 @@ enum PlayViewControllerDifficulty
 
 - (void) localizeViews;
 
-@property (retain, nonatomic) SoundMaster *g_soundMaster;
+@property (strong, nonatomic) SoundMaster *g_soundMaster;
 
-@property (retain, nonatomic) IBOutlet EAGLView *glView;
-@property (retain, nonatomic) IBOutlet UIView *menuView;
-@property (retain, nonatomic) IBOutlet UIView *songScoreView;
-@property (retain, nonatomic) IBOutlet UIView *topBar;
-@property (retain, nonatomic) IBOutlet UIView *progressFillView;
-@property (retain, nonatomic) IBOutlet UIView *loadingView;
 
-@property (retain, nonatomic) IBOutlet UIButton *menuButton;
-@property (retain, nonatomic) IBOutlet UIButton *volumeButton;
-@property (retain, nonatomic) IBOutlet UIButton *pauseButton;
-@property (retain, nonatomic) IBOutlet UIButton *backButton;
-@property (retain, nonatomic) IBOutlet UIButton *finishButton;
-@property (retain, nonatomic) IBOutlet UIButton *finishRestartButton;
-@property (retain, nonatomic) IBOutlet UIView *volumeSliderView;
-@property (retain, nonatomic) IBOutlet UIImageView *menuDownArrow;
+@property (strong, nonatomic) IBOutlet EAGLView *glView;
+@property (strong, nonatomic) IBOutlet UIView *menuView;
+@property (strong, nonatomic) IBOutlet UIView *songScoreView;
+@property (strong, nonatomic) IBOutlet UIView *topBar;
+@property (strong, nonatomic) IBOutlet UIView *progressFillView;
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
 
-@property (retain, nonatomic) IBOutlet UITextView *loadingLicenseInfo;
-@property (retain, nonatomic) IBOutlet UILabel *loadingSongArtist;
-@property (retain, nonatomic) IBOutlet UILabel * loadingSongTitle;
+@property (strong, nonatomic) IBOutlet UIButton *menuButton;
+@property (strong, nonatomic) IBOutlet UIButton *volumeButton;
+@property (strong, nonatomic) IBOutlet UIButton *pauseButton;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIButton *finishButton;
+@property (strong, nonatomic) IBOutlet UIButton *finishRestartButton;
+@property (strong, nonatomic) IBOutlet UIView *volumeSliderView;
+@property (strong, nonatomic) IBOutlet UIImageView *menuDownArrow;
 
-@property (retain, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (retain, nonatomic) IBOutlet UILabel *scoreTextLabel;
-@property (retain, nonatomic) IBOutlet UILabel *multiplierTextLabel;
-@property (retain, nonatomic) IBOutlet UILabel *subscoreLabel;
+@property (strong, nonatomic) IBOutlet UITextView *loadingLicenseInfo;
+@property (strong, nonatomic) IBOutlet UILabel *loadingSongArtist;
+@property (strong, nonatomic) IBOutlet UILabel * loadingSongTitle;
 
-@property (retain, nonatomic) IBOutlet UILabel *songTitleLabel;
-@property (retain, nonatomic) IBOutlet UILabel *songArtistLabel;
-@property (retain, nonatomic) IBOutlet UILabel *scoreSongTitleLabel;
-@property (retain, nonatomic) IBOutlet UILabel *scoreSongArtistLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreTextLabel;
+@property (strong, nonatomic) IBOutlet UILabel *multiplierTextLabel;
+@property (strong, nonatomic) IBOutlet UILabel *subscoreLabel;
 
-@property (retain, nonatomic) IBOutlet UILabel *scoreScoreLabel;
-@property (retain, nonatomic) IBOutlet UILabel *scoreNotesHitLabel;
-@property (retain, nonatomic) IBOutlet UILabel *scoreInARowLabel;
-@property (retain, nonatomic) IBOutlet UILabel *scoreAccuracyLabel;
-@property (retain, nonatomic) IBOutlet UILabel *scoreScore;
-@property (retain, nonatomic) IBOutlet UILabel *scoreNotesHit;
-@property (retain, nonatomic) IBOutlet UILabel *scoreInARow;
-@property (retain, nonatomic) IBOutlet UILabel *scoreAccuracy;
-@property (retain, nonatomic) IBOutlet UIView *heatMapView;
+@property (strong, nonatomic) IBOutlet UILabel *songTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *songArtistLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreSongTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreSongArtistLabel;
 
-@property (retain, nonatomic) IBOutlet UIButton *difficultyButton;
-@property (retain, nonatomic) IBOutlet UIButton *scoreDifficultyButton;
-@property (retain, nonatomic) IBOutlet UILabel *difficultyLabel;
-@property (retain, nonatomic) IBOutlet UILabel *scoreDifficultyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreScoreLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreNotesHitLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreInARowLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreAccuracyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreScore;
+@property (strong, nonatomic) IBOutlet UILabel *scoreNotesHit;
+@property (strong, nonatomic) IBOutlet UILabel *scoreInARow;
+@property (strong, nonatomic) IBOutlet UILabel *scoreAccuracy;
+@property (strong, nonatomic) IBOutlet UIView *heatMapView;
 
-@property (retain, nonatomic) IBOutlet UIButton *instrumentButton;
-@property (retain, nonatomic) IBOutlet UILabel *instrumentLabel;
+@property (strong, nonatomic) IBOutlet UIButton *difficultyButton;
+@property (strong, nonatomic) IBOutlet UIButton *scoreDifficultyButton;
+@property (strong, nonatomic) IBOutlet UILabel *difficultyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreDifficultyLabel;
 
-@property (retain, nonatomic) IBOutlet UIView *outputView;
-@property (retain, nonatomic) IBOutlet UIView *postToFeedView;
+@property (strong, nonatomic) IBOutlet UIButton *instrumentButton;
+@property (strong, nonatomic) IBOutlet UILabel *instrumentLabel;
 
-@property (retain, nonatomic) IBOutlet UISwitch *outputSwitch;
-@property (retain, nonatomic) IBOutlet UISwitch *feedSwitch;
+@property (strong, nonatomic) IBOutlet UIView *outputView;
+@property (strong, nonatomic) IBOutlet UIView *postToFeedView;
 
-@property (retain, nonatomic) IBOutlet UILabel *outputLabel;
-@property (retain, nonatomic) IBOutlet UILabel *auxLabel;
-@property (retain, nonatomic) IBOutlet UILabel *speakerLabel;
-@property (retain, nonatomic) IBOutlet UILabel *postToFeedLabel;
-@property (retain, nonatomic) IBOutlet UILabel *offLabel;
-@property (retain, nonatomic) IBOutlet UILabel *onLabel;
-@property (retain, nonatomic) IBOutlet UILabel *easyLabel;
-@property (retain, nonatomic) IBOutlet UILabel *quitLabel;
-@property (retain, nonatomic) IBOutlet UILabel *restartLabel;
+@property (strong, nonatomic) IBOutlet UISwitch *outputSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *feedSwitch;
 
-@property (retain, nonatomic) IBOutlet UIButton *fretOne;
-@property (retain, nonatomic) IBOutlet UIButton *fretTwo;
-@property (retain, nonatomic) IBOutlet UIButton *fretThree;
+@property (strong, nonatomic) IBOutlet UILabel *outputLabel;
+@property (strong, nonatomic) IBOutlet UILabel *auxLabel;
+@property (strong, nonatomic) IBOutlet UILabel *speakerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *postToFeedLabel;
+@property (strong, nonatomic) IBOutlet UILabel *offLabel;
+@property (strong, nonatomic) IBOutlet UILabel *onLabel;
+@property (strong, nonatomic) IBOutlet UILabel *easyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *quitLabel;
+@property (strong, nonatomic) IBOutlet UILabel *restartLabel;
 
-@property (nonatomic, assign) NSNoteFrame * lastTappedFrame;
+@property (strong, nonatomic) IBOutlet UIButton *fretOne;
+@property (strong, nonatomic) IBOutlet UIButton *fretTwo;
+@property (strong, nonatomic) IBOutlet UIButton *fretThree;
+
+@property (nonatomic, weak) NSNoteFrame * lastTappedFrame;
 @property (nonatomic, assign) enum PlayViewControllerDifficulty difficulty;
 @property (nonatomic, assign) double tempoModifier;
 @property (nonatomic, assign) BOOL muffleWrongNotes;
-@property (nonatomic, retain) UserSong *userSong;
+@property (nonatomic, strong) UserSong *userSong;
 
 //@property (nonatomic, retain) IBOutlet EAGLView * m_glView;
 //@property (nonatomic, retain) IBOutlet UIView * m_connectingView;

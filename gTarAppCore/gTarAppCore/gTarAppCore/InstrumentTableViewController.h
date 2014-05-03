@@ -24,8 +24,8 @@
 
 @interface InstrumentTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (retain, nonatomic) UITableView *tableView;
-@property (assign, nonatomic) id <InstrumentSelectionDelegate> delegate;
+@property (strong, nonatomic) UITableView *tableView;
+@property (weak, nonatomic) id <InstrumentSelectionDelegate> delegate;
 
 //- (id)initWithAudioController:(AudioController*)AC;
 

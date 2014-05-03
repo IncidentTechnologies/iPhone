@@ -115,11 +115,5 @@
 }
 */
 
-- (void)dealloc
-{
-    [m_backgroundView release];
-    
-    [super dealloc];
-}
 
 @end

@@ -124,16 +124,6 @@
     }
 }
 
-- (void)dealloc
-{
-    [_textField release];
-    [_cancelButton release];
-    [_contractedPadding release];
-    [_expandedPadding release];
-    [_activityView release];
-    
-    [super dealloc];
-}
 
 //- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 //{

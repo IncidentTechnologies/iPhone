@@ -35,7 +35,6 @@
     // release this delegate so ref counts match
 	self.m_delegate = nil;
     
-    [super dealloc];
 }
 
 #pragma mark  -

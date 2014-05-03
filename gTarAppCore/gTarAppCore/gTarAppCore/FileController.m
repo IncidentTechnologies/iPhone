@@ -29,7 +29,7 @@
     if ( self )
     {
         
-        m_cloudController = [cloudController retain];
+        m_cloudController = cloudController;
         
         m_fileCacheMap = [[NSMutableDictionary alloc] init];
         
@@ -40,7 +40,6 @@
         //
         if ( [self enumerateFileCache] == NO )
         {
-            [self release];
             
             return nil;
         }
@@ -50,16 +49,6 @@
     
 }
 
-- (void)dealloc
-{
-    [m_cloudController release];
-    
-    [m_pendingFileRequests release];
-    
-    [m_fileCacheMap release];
-        
-    [super dealloc];
-}
 
 - (void)clearCache
 {
@@ -196,7 +185,6 @@
                                      ofItemAtPath:filePath
                                             error:&error];
     
-    [now release];
     
     if ( [filePath hasSuffix:@".png"] == YES )
     {
@@ -349,7 +337,6 @@
                                      ofItemAtPath:filePath
                                             error:&error];
     
-    [now release];
 
     // Don't backup this file
     [self addSkipBackupAttributeToFileId:fileId];
@@ -437,7 +424,7 @@
     if ( fileRequest == nil )
     {
         
-        fileRequest = [[[FileRequest alloc] initWithFileId:fileId] autorelease];
+        fileRequest = [[FileRequest alloc] initWithFileId:fileId];
         [m_pendingFileRequests setObject:fileRequest forKey:key];
 
         // send it to the cloud
@@ -458,7 +445,7 @@
     if ( fileRequest == nil )
     {
         // send off the request
-        fileRequest = [[[FileRequest alloc] initWithFileId:fileId andCallbackObject:obj andSelector:sel] autorelease];
+        fileRequest = [[FileRequest alloc] initWithFileId:fileId andCallbackObject:obj andSelector:sel];
         [m_pendingFileRequests setObject:fileRequest forKey:key];
     }
     else
@@ -524,7 +511,7 @@
     
     if ( [mimeType isEqualToString:@"text/xml"] == YES )
     {
-        NSString * xmpBlob = [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
+        NSString * xmpBlob = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
         
         return xmpBlob;
     }
@@ -532,7 +519,7 @@
               ([mimeType isEqualToString:@"image/jpeg"] == YES) ||
               ([mimeType isEqualToString:@"image/jpg"] == YES) )
     {
-        UIImage * image = [[[UIImage alloc] initWithData:data] autorelease];
+        UIImage * image = [[UIImage alloc] initWithData:data];
         
         // Normalize as needed
         if ( image.size.width > MAX_IMAGE_SIZE || image.size.height > MAX_IMAGE_SIZE )

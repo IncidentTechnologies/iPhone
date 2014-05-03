@@ -18,7 +18,7 @@
 
 }
 
-@property (nonatomic, retain) NSMutableArray * m_profilesArray;
+@property (nonatomic, strong) NSMutableArray * m_profilesArray;
 
 - (id)initWithXmlDom:(XmlDom*)xmlDom;
 - (void)addProfilesFromXmlDom:(XmlDom*)xmlDom;

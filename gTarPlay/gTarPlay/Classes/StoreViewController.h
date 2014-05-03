@@ -34,41 +34,41 @@ struct StoreSortOrder {
 }
 
 // Options Modal
-@property (retain, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
-@property (retain, nonatomic) IBOutlet UIButton *closeModalButton;
-@property (retain, nonatomic) IBOutlet UIButton *volumeButton;
-@property (retain, nonatomic) IBOutlet UIButton *instrumentButton;
+@property (strong, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
+@property (strong, nonatomic) IBOutlet UIButton *closeModalButton;
+@property (strong, nonatomic) IBOutlet UIButton *volumeButton;
+@property (strong, nonatomic) IBOutlet UIButton *instrumentButton;
 
-@property (retain, nonatomic) IBOutlet UIButton *easyButton;
-@property (retain, nonatomic) IBOutlet UILabel *easyLabel;
+@property (strong, nonatomic) IBOutlet UIButton *easyButton;
+@property (strong, nonatomic) IBOutlet UILabel *easyLabel;
 
-@property (retain, nonatomic) IBOutlet UIButton *mediumButton;
-@property (retain, nonatomic) IBOutlet UILabel *mediumLabel;
+@property (strong, nonatomic) IBOutlet UIButton *mediumButton;
+@property (strong, nonatomic) IBOutlet UILabel *mediumLabel;
 
-@property (retain, nonatomic) IBOutlet UIButton *hardButton;
-@property (retain, nonatomic) IBOutlet UILabel *hardLabel;
+@property (strong, nonatomic) IBOutlet UIButton *hardButton;
+@property (strong, nonatomic) IBOutlet UILabel *hardLabel;
 
-@property (retain, nonatomic) IBOutlet UIButton *startButton;
+@property (strong, nonatomic) IBOutlet UIButton *startButton;
 
-@property (retain, nonatomic) IBOutlet UIView *volumeView;
-@property (retain, nonatomic) IBOutlet UIView *instrumentView;
-@property (retain, nonatomic) IBOutlet UIView *songPlayerView;
+@property (strong, nonatomic) IBOutlet UIView *volumeView;
+@property (strong, nonatomic) IBOutlet UIView *instrumentView;
+@property (strong, nonatomic) IBOutlet UIView *songPlayerView;
 
-@property (retain, nonatomic) IBOutlet ExpandableSearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet ExpandableSearchBar *searchBar;
 
-@property (retain, nonatomic) IBOutlet UIButton *buttonGetProductList;
-@property (retain, nonatomic) IBOutlet PullToUpdateTableView *pullToUpdateSongList;
-@property (retain, nonatomic) IBOutlet UIButton *buttonGetServerSongList;
+@property (strong, nonatomic) IBOutlet UIButton *buttonGetProductList;
+@property (strong, nonatomic) IBOutlet PullToUpdateTableView *pullToUpdateSongList;
+@property (strong, nonatomic) IBOutlet UIButton *buttonGetServerSongList;
 
-@property (retain, nonatomic) IBOutlet UIView *viewTopBar;
-@property (retain, nonatomic) IBOutlet UIView *colBar;
+@property (strong, nonatomic) IBOutlet UIView *viewTopBar;
+@property (strong, nonatomic) IBOutlet UIView *colBar;
 
-@property (retain, nonatomic) IBOutlet UIButton *buttonTitleArtist;
-@property (retain, nonatomic) IBOutlet UIButton *buttonSkill;
-@property (retain, nonatomic) IBOutlet UIButton *buttonBuy;
+@property (strong, nonatomic) IBOutlet UIButton *buttonTitleArtist;
+@property (strong, nonatomic) IBOutlet UIButton *buttonSkill;
+@property (strong, nonatomic) IBOutlet UIButton *buttonBuy;
 
-@property (retain, nonatomic) IBOutlet UILabel *backLabel;
-@property (retain, nonatomic) IBOutlet UILabel *shopLabel;
+@property (strong, nonatomic) IBOutlet UILabel *backLabel;
+@property (strong, nonatomic) IBOutlet UILabel *shopLabel;
 
 - (void)localizeViews;
 

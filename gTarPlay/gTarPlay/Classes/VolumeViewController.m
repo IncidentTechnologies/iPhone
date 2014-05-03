@@ -135,12 +135,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
     
-    [_mpVolumeView release];
-    [_sliderView release];
-    [_volumeSlider release];
-    [_volumeView release];
-    [_volumeTrackView release];
-    [super dealloc];
 }
 
 #pragma mark - Slider methods

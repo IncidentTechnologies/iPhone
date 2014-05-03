@@ -136,7 +136,7 @@
     
     if ( self ) 
     {
-        m_serverName = [serverName retain];
+        m_serverName = serverName;
         m_serverRoot = [[NSString alloc] initWithFormat:@"%@/app_iphone", serverName];                
     }
     
@@ -159,21 +159,6 @@
     }
 }
 
-- (void)dealloc
-{
-    
-    [m_requestResponseDictionary release];
-    [m_connectionResponseDictionary release];
-    [m_requestQueue release];
-    
-    [m_username release];
-    [m_facebookAccessToken release];
-    [m_serverName release];
-    [m_serverRoot release];
-    
-    [super dealloc];
-    
-}
 
 #pragma mark -
 #pragma mark Misc
@@ -285,7 +270,6 @@
         status = NO;
     }
     
-    [dom release];
     
     return status;
     
@@ -313,7 +297,6 @@
         status = NO;
     }
     
-    [dom release];
     
     return status;
     
@@ -349,7 +332,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -365,7 +348,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -401,7 +384,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -419,7 +402,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
 	
 }
 
@@ -435,7 +418,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -478,7 +461,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
 	
 }
 
@@ -496,7 +479,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -512,7 +495,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
 
 }
 
@@ -530,7 +513,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -546,7 +529,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -559,7 +542,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -576,7 +559,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -590,7 +573,7 @@
     CloudRequest *cloudRequest = [[CloudRequest alloc] initWithType:CloudRequestTypeVerifyItunesReceipt andCallbackObject:obj andCallbackSelector:sel];
     cloudRequest.m_itunesReceipt = receipt;
     [self cloudSendRequest:cloudRequest];
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -605,7 +588,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -618,7 +601,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -631,7 +614,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -647,7 +630,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -665,7 +648,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -685,7 +668,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -701,7 +684,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -717,7 +700,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -733,7 +716,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -749,7 +732,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -768,7 +751,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -784,7 +767,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -806,7 +789,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
 
 }
 
@@ -819,7 +802,7 @@
     
     [self cloudSendRequest:cloudRequest];
     
-    return [cloudRequest autorelease];
+    return cloudRequest;
     
 }
 
@@ -832,7 +815,6 @@
 	// need to make the object a NSValue in order to use it as a key 
 	NSValue * key = [NSValue valueWithNonretainedObject:connection];
 	
-    [cloudResponse retain];
     
 	[m_connectionResponseDictionary setObject:cloudResponse forKey:key];
 	
@@ -860,7 +842,6 @@
 	
 	[m_connectionResponseDictionary removeObjectForKey:key];
     
-    [cloudResponse autorelease];
     
     return cloudResponse;
     
@@ -910,7 +891,7 @@
 - (CloudResponse*)cloudProcessRequest:(CloudRequest*)cloudRequest
 {
     // Create a response object
-    CloudResponse * cloudResponse = [[[CloudResponse alloc] initWithCloudRequest:cloudRequest] autorelease];
+    CloudResponse * cloudResponse = [[CloudResponse alloc] initWithCloudRequest:cloudRequest];
     
     // If we are offline, abort now... unless we are testing server status,
     // in which case we should proceed, naturally.
@@ -968,7 +949,7 @@
         else
         {
             
-            cloudResponse.m_receivedData = [[responseData mutableCopy] autorelease];
+            cloudResponse.m_receivedData = [responseData mutableCopy];
             
             cloudResponse.m_receivedDataString = [NSString stringWithCString:(char*)[responseData bytes] encoding:NSASCIIStringEncoding];
             
@@ -1024,7 +1005,6 @@
         
         [connection start];
         
-        [connection release];
         
         // The response is returned asynchronously
         return nil;
@@ -1036,18 +1016,18 @@
 - (void)cloudReceiveResponse:(CloudResponse*)cloudResponse
 {
     // This comes in from the 'NSUrl thread' so it doesn't have a pool
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
 
     // Parse the results
-    [self parseResultsForResponse:cloudResponse];
+        [self parseResultsForResponse:cloudResponse];
+        
+        // Update our logged in status, based on what just came in.
+        cloudResponse.m_loggedIn = self.m_loggedIn;
+        
+        // Return to sender
+        [self cloudReturnResponse:cloudResponse];
     
-    // Update our logged in status, based on what just came in.
-    cloudResponse.m_loggedIn = self.m_loggedIn;
-    
-    // Return to sender
-    [self cloudReturnResponse:cloudResponse];
-    
-    [pool release];
+    }
     
 }
 
@@ -1194,7 +1174,7 @@
     // Convert the POST body to data bytes
 //    NSData * postBodyData = [postBody dataUsingEncoding:NSUTF8StringEncoding];
 #if TARGET_IPHONE_SIMULATOR
-    NSString * postString = [[[NSString alloc] initWithData:postBodyData encoding:NSUTF8StringEncoding] autorelease];
+    NSString * postString = [[NSString alloc] initWithData:postBodyData encoding:NSUTF8StringEncoding];
     NSLog(postString);
 #endif
     // Stick the post body (now as encoded bytes) into the request
@@ -1204,7 +1184,7 @@
     // and the iphone doesn't appear to be adding it automatically.
 	[request addValue:[NSString stringWithFormat:@"%u", [postBodyData length]] forHTTPHeaderField:@"Content-Length"];
     
-    return [request autorelease];
+    return request;
     
 }
 
@@ -1413,7 +1393,7 @@
                 output[index + 3] = (i + 2) < cloudRequest.m_itunesReceipt.length ? table[(value >> 0)  & 0x3F] : '=';
             }
             
-            NSString *strBase64EncodedData = [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
+            NSString *strBase64EncodedData = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             
             /*
             NSDictionary * param = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -1701,9 +1681,8 @@
         case CloudRequestTypeRegister:
         {
             
-            [m_username release];
             
-            m_username = [[cloudResponse.m_responseXmlDom getTextFromChildWithName:@"Username"] retain];
+            m_username = [cloudResponse.m_responseXmlDom getTextFromChildWithName:@"Username"];
             
             XmlDom * dom = cloudResponse.m_responseXmlDom;
             
@@ -1720,7 +1699,7 @@
             
             XmlDom * profileDom = [dom getChildWithName:@"UserProfile"];
             
-            UserProfile * userProfile = [[[UserProfile alloc] initWithXmlDom:profileDom] autorelease];
+            UserProfile * userProfile = [[UserProfile alloc] initWithXmlDom:profileDom];
             
             cloudResponse.m_responseUserProfile = userProfile;
 
@@ -1730,11 +1709,10 @@
         case CloudRequestTypeLoginFacebook:
         {
             
-            [m_username release];
             
-            m_username = [[cloudResponse.m_responseXmlDom getTextFromChildWithName:@"Username"] retain];
+            m_username = [cloudResponse.m_responseXmlDom getTextFromChildWithName:@"Username"];
             
-            m_facebookAccessToken = [cloudResponse.m_cloudRequest.m_facebookAccessToken retain];
+            m_facebookAccessToken = cloudResponse.m_cloudRequest.m_facebookAccessToken;
             
             XmlDom * dom = cloudResponse.m_responseXmlDom;
             
@@ -1751,7 +1729,7 @@
             
             XmlDom * profileDom = [dom getChildWithName:@"UserProfile"];
             
-            UserProfile * userProfile = [[[UserProfile alloc] initWithXmlDom:profileDom] autorelease];
+            UserProfile * userProfile = [[UserProfile alloc] initWithXmlDom:profileDom];
             
             cloudResponse.m_responseUserProfile = userProfile;
             
@@ -1760,9 +1738,8 @@
         case CloudRequestTypeLogin:
         {
             
-            [m_username release];
             
-            m_username = [[cloudResponse.m_responseXmlDom getTextFromChildWithName:@"Username"] retain];
+            m_username = [cloudResponse.m_responseXmlDom getTextFromChildWithName:@"Username"];
             
             XmlDom * dom = cloudResponse.m_responseXmlDom;
             
@@ -1779,7 +1756,7 @@
             
             XmlDom * profileDom = [dom getChildWithName:@"UserProfile"];
             
-            UserProfile * userProfile = [[[UserProfile alloc] initWithXmlDom:profileDom] autorelease];
+            UserProfile * userProfile = [[UserProfile alloc] initWithXmlDom:profileDom];
             
             cloudResponse.m_responseUserProfile = userProfile;
             
@@ -1818,7 +1795,6 @@
             
             m_loggedIn = NO;
             
-            [m_facebookAccessToken release];
             
             m_facebookAccessToken = nil;
             
@@ -1831,7 +1807,7 @@
             
             XmlDom * profileDom = [dom getChildWithName:@"UserProfile"];
             
-            UserProfile * userProfile = [[[UserProfile alloc] initWithXmlDom:profileDom] autorelease];
+            UserProfile * userProfile = [[UserProfile alloc] initWithXmlDom:profileDom];
             
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
             cloudResponse.m_responseUserProfile = userProfile;
@@ -1845,7 +1821,7 @@
             
             XmlDom * profileDom = [dom getChildWithName:@"UserProfile"];
             
-            UserProfile * userProfile = [[[UserProfile alloc] initWithXmlDom:profileDom] autorelease];
+            UserProfile * userProfile = [[UserProfile alloc] initWithXmlDom:profileDom];
             
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
             cloudResponse.m_responseUserProfile = userProfile;
@@ -1859,7 +1835,7 @@
             
             XmlDom * profilesDom = [dom getChildWithName:@"UserProfiles"];
             
-            UserProfiles * userProfiles = [[[UserProfiles alloc] initWithXmlDom:profilesDom] autorelease];
+            UserProfiles * userProfiles = [[UserProfiles alloc] initWithXmlDom:profilesDom];
             
             cloudResponse.m_responseUserProfiles = userProfiles;
             
@@ -1872,7 +1848,7 @@
             
             XmlDom * profilesDom = [dom getChildWithName:@"UserProfiles"];
             
-            UserProfiles * userProfiles = [[[UserProfiles alloc] initWithXmlDom:profilesDom] autorelease];
+            UserProfiles * userProfiles = [[UserProfiles alloc] initWithXmlDom:profilesDom];
             
             cloudResponse.m_responseUserProfiles = userProfiles;
             
@@ -1930,7 +1906,7 @@
             
             XmlDom * songsDom = [dom getChildWithName:@"AllSongsList"];
             
-            UserSongs * userSongs = [[[UserSongs alloc] initWithXmlDom:songsDom] autorelease];
+            UserSongs * userSongs = [[UserSongs alloc] initWithXmlDom:songsDom];
             
             cloudResponse.m_responseUserSongs = userSongs;
             
@@ -1943,7 +1919,7 @@
             
             XmlDom * songsDom = [dom getChildWithName:@"UserSongsList"];
             
-            UserSongs * userSongs = [[[UserSongs alloc] initWithXmlDom:songsDom] autorelease];
+            UserSongs * userSongs = [[UserSongs alloc] initWithXmlDom:songsDom];
             
             cloudResponse.m_responseUserSongs = userSongs;
             
@@ -1956,7 +1932,7 @@
             
             XmlDom * songsDom = [dom getChildWithName:@"StoreSongsList"];
             
-            UserSongs * userSongs = [[[UserSongs alloc] initWithXmlDom:songsDom] autorelease];
+            UserSongs * userSongs = [[UserSongs alloc] initWithXmlDom:songsDom];
             
             cloudResponse.m_responseUserSongs = userSongs;
             
@@ -1984,7 +1960,7 @@
             
             XmlDom * responseDom = cloudResponse.m_responseXmlDom;
             
-            UserSongSessions * userSongSessions = [[[UserSongSessions alloc] initWithXmlDom:responseDom] autorelease];
+            UserSongSessions * userSongSessions = [[UserSongSessions alloc] initWithXmlDom:responseDom];
             
             cloudResponse.m_responseUserSongSessions = userSongSessions;
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
@@ -1999,9 +1975,9 @@
             XmlDom * userProfilesFollowsDom = [responseDom getChildWithName:@"FollowsUsers"];
             XmlDom * userProfilesFollowedDom = [responseDom getChildWithName:@"FollowedByUsers"];
             
-            UserProfiles * userProfilesFollows = [[[UserProfiles alloc] initWithXmlDom:userProfilesFollowsDom] autorelease];
-            UserProfiles * userProfilesFollowedBy = [[[UserProfiles alloc] initWithXmlDom:userProfilesFollowedDom] autorelease];
-            UserSongSessions * userSongSessions = [[[UserSongSessions alloc] initWithXmlDom:responseDom] autorelease];
+            UserProfiles * userProfilesFollows = [[UserProfiles alloc] initWithXmlDom:userProfilesFollowsDom];
+            UserProfiles * userProfilesFollowedBy = [[UserProfiles alloc] initWithXmlDom:userProfilesFollowedDom];
+            UserSongSessions * userSongSessions = [[UserSongSessions alloc] initWithXmlDom:responseDom];
             
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
             cloudResponse.m_responseUserProfilesFollows = userProfilesFollows;
@@ -2018,9 +1994,9 @@
             XmlDom * userProfilesFollowsDom = [responseDom getChildWithName:@"FollowsUsers"];
             XmlDom * userProfilesFollowedDom = [responseDom getChildWithName:@"FollowedByUsers"];
             
-            UserProfiles * userProfilesFollows = [[[UserProfiles alloc] initWithXmlDom:userProfilesFollowsDom] autorelease];
-            UserProfiles * userProfilesFollowedBy = [[[UserProfiles alloc] initWithXmlDom:userProfilesFollowedDom] autorelease];
-            UserSongSessions * userSongSessions = [[[UserSongSessions alloc] initWithXmlDom:responseDom] autorelease];
+            UserProfiles * userProfilesFollows = [[UserProfiles alloc] initWithXmlDom:userProfilesFollowsDom];
+            UserProfiles * userProfilesFollowedBy = [[UserProfiles alloc] initWithXmlDom:userProfilesFollowedDom];
+            UserSongSessions * userSongSessions = [[UserSongSessions alloc] initWithXmlDom:responseDom];
             
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
             cloudResponse.m_responseUserProfilesFollows = userProfilesFollows;
@@ -2036,7 +2012,7 @@
             
             XmlDom * userProfilesDom = [responseDom getChildWithName:@"FollowsUsers"];
             
-            UserProfiles * userProfiles = [[[UserProfiles alloc] initWithXmlDom:userProfilesDom] autorelease];
+            UserProfiles * userProfiles = [[UserProfiles alloc] initWithXmlDom:userProfilesDom];
             
             cloudResponse.m_responseUserProfiles = userProfiles;
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
@@ -2050,7 +2026,7 @@
             
             XmlDom * userProfilesDom = [responseDom getChildWithName:@"FollowedByUsers"];
             
-            UserProfiles * userProfiles = [[[UserProfiles alloc] initWithXmlDom:userProfilesDom] autorelease];
+            UserProfiles * userProfiles = [[UserProfiles alloc] initWithXmlDom:userProfilesDom];
             
             cloudResponse.m_responseUserProfiles = userProfiles;
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
@@ -2062,7 +2038,7 @@
             
             XmlDom * responseDom = cloudResponse.m_responseXmlDom;
             
-            UserSongSessions * userSongSessions = [[[UserSongSessions alloc] initWithXmlDom:responseDom] autorelease];
+            UserSongSessions * userSongSessions = [[UserSongSessions alloc] initWithXmlDom:responseDom];
             
             cloudResponse.m_responseUserSongSessions = userSongSessions;
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
@@ -2074,7 +2050,7 @@
             
             XmlDom * responseDom = cloudResponse.m_responseXmlDom;
             
-            UserSongSessions * userSongSessions = [[[UserSongSessions alloc] initWithXmlDom:responseDom] autorelease];
+            UserSongSessions * userSongSessions = [[UserSongSessions alloc] initWithXmlDom:responseDom];
             
             cloudResponse.m_responseUserSongSessions = userSongSessions;
             cloudResponse.m_responseUserId = cloudResponse.m_cloudRequest.m_userId;
@@ -2164,7 +2140,6 @@
         cloudResponse.m_statusText = @"Response parsing issue";
     }
     
-    [dom release];
     
 }
     
@@ -2202,7 +2177,7 @@
     
     cloudResponse.m_statusCode = [httpResponse statusCode];
     
-    cloudResponse.m_receivedData = [[[NSMutableData alloc] init] autorelease];
+    cloudResponse.m_receivedData = [[NSMutableData alloc] init];
     cloudResponse.m_receivedData.length = 0;
 
 }   

@@ -16,21 +16,18 @@
     
     if ( xmlString == nil )
     {
-        [self release];
         return nil;
     }
     
-    NSDictionary * xmlDictionary = [[XmlDictionary dictionaryFromXmlBlob:xmlString] retain];
+    NSDictionary * xmlDictionary = [XmlDictionary dictionaryFromXmlBlob:xmlString];
     
     if ( xmlDictionary == nil )
     {
-        [self release];
         return nil;
     }
     
     self = [self initWithXmlDictionary:xmlDictionary];
     
-    [xmlDictionary release];
     
     if ( self )
     {
@@ -46,21 +43,18 @@
     
     if ( xmlData == nil )
     {
-        [self release];
         return nil;
     }
 
-    NSDictionary * xmlDictionary = [[XmlDictionary dictionaryFromXmlBlobData:xmlData] retain];
+    NSDictionary * xmlDictionary = [XmlDictionary dictionaryFromXmlBlobData:xmlData];
     
     if ( xmlDictionary == nil )
     {
-        [self release];
         return nil;
     }
     
     self = [self initWithXmlDictionary:xmlDictionary];
     
-    [xmlDictionary release];
     
     if ( self )
     {
@@ -76,13 +70,11 @@
     
     if ( xmlDictionary == nil )
     {
-        [self release];
         return nil;
     }
     
     if ( [xmlDictionary isKindOfClass:[NSDictionary class]] == NO )
     {
-        [self release];
         return nil;
     }
     
@@ -91,8 +83,7 @@
     if ( self )
     {
         // save the dictionary
-        [m_backingDictionary release];
-        m_backingDictionary = [xmlDictionary retain];
+        m_backingDictionary = xmlDictionary;
 
     }
     
@@ -100,14 +91,6 @@
     
 }
 
-- (void)dealloc
-{
-
-    [m_backingDictionary release];
-    
-    [super dealloc];
-    
-}
 
 #pragma mark - Navigation
 
@@ -128,7 +111,7 @@
     {
 //        NSLog(@"Child is an attribute string, creating dummy text node");
         
-        NSMutableDictionary * tempChild = [[[NSMutableDictionary alloc] init] autorelease];
+        NSMutableDictionary * tempChild = [[NSMutableDictionary alloc] init];
         [tempChild setObject:child forKey:XML_DICTIONARY_TEXT_NODE];
         child = tempChild;
     }
@@ -138,7 +121,7 @@
         return nil;
     }
     
-    XmlDom * returnDom = [[[XmlDom alloc] initWithXmlDictionary:child] autorelease];
+    XmlDom * returnDom = [[XmlDom alloc] initWithXmlDictionary:child];
     return returnDom;
 }
 
@@ -162,7 +145,7 @@
         
 //        NSLog(@"Child is a dictionary, creating dummy array");
         
-        XmlDom * tempDom = [[[XmlDom alloc] initWithXmlDictionary:(NSDictionary*)child] autorelease];
+        XmlDom * tempDom = [[XmlDom alloc] initWithXmlDictionary:(NSDictionary*)child];
         
         return [NSArray arrayWithObject:tempDom];
         
@@ -185,11 +168,10 @@
         
         [domArray addObject:dom];
         
-        [dom release];
         
     }
 
-    return [domArray autorelease];
+    return domArray;
 
 }
 
@@ -296,7 +278,7 @@
 
     NSString * dateString = [self getText];
 
-    NSDateFormatter * dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 
     return [[dateFormat dateFromString:dateString] timeIntervalSince1970];
@@ -319,11 +301,10 @@
         
         [domArray addObject:dom];
         
-        [dom release];
         
     }
     
-    return [domArray autorelease];
+    return domArray;
 
 }
 

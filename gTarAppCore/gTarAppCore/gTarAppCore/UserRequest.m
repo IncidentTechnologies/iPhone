@@ -37,7 +37,7 @@
 	if ( self )
 	{
         
-        m_callbackObject = [obj retain];
+        m_callbackObject = obj;
 		m_callbackSelector = sel;
         m_type = type;
         
@@ -47,13 +47,5 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_callbackObject release];
-    
-    [super dealloc];
-    
-}
 
 @end

@@ -58,20 +58,10 @@
 	return self;	
 }
 
-- (void)dealloc
-{
-    
-    [m_song release];
-    [m_notes release];
-    
-    [super dealloc];
-    
-}
 
 - (void)beginSong
 {
 
-	[m_notes release];
 	
 	m_notes = [[NSMutableArray alloc] init];
 	
@@ -95,7 +85,6 @@
 	
 	m_isRecording = NO;
 
-    [m_song release];
     
 	m_song = [[NSSong alloc] initWithAuthor:@"gTarUser"
 								   andTitle:@"gTarSong"
@@ -139,7 +128,6 @@
 		
 		[m_song addMeasure:measure];
         
-        [measure release];
 
 	}
 
@@ -200,7 +188,6 @@
 											 andFret:fret];
 	[m_notes addObject:note];
 	
-	[note release];
 
 }
 

@@ -42,13 +42,4 @@
     _commentLabel.attributedText = attributedString;
 }
 
-- (void)dealloc
-{
-    [_name release];
-    [_comment release];
-    [_picture release];
-    [_pictureImageView release];
-    [_commentLabel release];
-    [super dealloc];
-}
 @end

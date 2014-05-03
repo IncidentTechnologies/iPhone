@@ -33,13 +33,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_nextTextField release];
-    [_submitButton release];
-    
-    [super dealloc];
-}
 
 
 @end

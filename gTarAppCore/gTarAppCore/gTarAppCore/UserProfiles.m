@@ -48,18 +48,9 @@
         
         [m_profilesArray addObject:userProfile];
         
-        [userProfile release];
     }
     
 }
 
-- (void)dealloc
-{
-    
-    [m_profilesArray release];
-    
-    [super dealloc];
-    
-}
 
 @end

@@ -40,7 +40,7 @@
 }
 
 // State members
-@property (nonatomic, retain) NSMutableString * m_xmpBlob;
+@property (nonatomic, strong) NSMutableString * m_xmpBlob;
 
 // Init functions
 - (id)initWithSong:(NSSong*)song;

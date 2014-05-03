@@ -46,7 +46,7 @@
 }
 
 @property (nonatomic, readonly) NSSongModel * m_songModel;
-@property (retain, nonatomic) SoundMaster * g_soundMaster;
+@property (strong, nonatomic) SoundMaster * g_soundMaster;
 
 //- (id)initWithAudioController:(AudioController*)audioController;
 - (id)initWithSoundMaster:(SoundMaster*)soundMaster;

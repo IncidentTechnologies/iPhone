@@ -33,12 +33,12 @@
 
 @property (nonatomic, assign) NSInteger m_profileId;
 @property (nonatomic, assign) NSInteger m_userId;
-@property (nonatomic, retain) NSString * m_firstName;
-@property (nonatomic, retain) NSString * m_middleName;
-@property (nonatomic, retain) NSString * m_lastName;
-@property (nonatomic, retain) NSString * m_name;
-@property (nonatomic, retain) NSString * m_email;
-@property (nonatomic, retain) NSString * m_profileText;
+@property (nonatomic, strong) NSString * m_firstName;
+@property (nonatomic, strong) NSString * m_middleName;
+@property (nonatomic, strong) NSString * m_lastName;
+@property (nonatomic, strong) NSString * m_name;
+@property (nonatomic, strong) NSString * m_email;
+@property (nonatomic, strong) NSString * m_profileText;
 @property (nonatomic, assign) NSInteger m_imgFileId;
 
 //@property (nonatomic, retain) UIImage * m_profilePic;

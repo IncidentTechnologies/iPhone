@@ -32,8 +32,8 @@
     NSMutableArray * m_noteFrames;
     NSMutableArray * m_noteFramesRemaining;
     
-    NSNoteFrame * m_currentFrame;
-    NSNoteFrame * m_nextFrame;
+    NSNoteFrame * __weak m_currentFrame;
+    NSNoteFrame * __weak m_nextFrame;
     NSInteger m_currentFrameIndex;
     
     double m_beatsPerSecond;
@@ -52,8 +52,8 @@
 }
 
 @property (nonatomic, readonly) NSSong * m_song;
-@property (nonatomic, readonly) NSNoteFrame * m_currentFrame;
-@property (nonatomic, readonly) NSNoteFrame * m_nextFrame;
+@property (weak, nonatomic, readonly) NSNoteFrame * m_currentFrame;
+@property (weak, nonatomic, readonly) NSNoteFrame * m_nextFrame;
 @property (nonatomic, readonly) double m_beatsPerSecond;
 @property (nonatomic, readonly) double m_currentBeat;
 @property (nonatomic, readonly) double m_percentageComplete;

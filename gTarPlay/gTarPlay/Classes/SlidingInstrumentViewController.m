@@ -58,11 +58,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    [_innerContentView release];
-    [super dealloc];
-}
 
 - (void)viewDidLayoutSubviews
 {

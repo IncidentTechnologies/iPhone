@@ -158,19 +158,6 @@
 	
 }
 
-- (void)dealloc
-{
-    
-    [m_user release];
-    [m_userProfile release];
-    [m_userSong release];
-    
-    [m_notes release];
-    [m_xmpBlob release];
-    
-    [super dealloc];
-    
-}
 
 - (NSComparisonResult)compareCreated:(id)anObject
 {

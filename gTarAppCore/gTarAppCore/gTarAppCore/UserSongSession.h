@@ -35,9 +35,9 @@
 	
 }
 
-@property (nonatomic, retain) User * m_user;
-@property (nonatomic, retain) UserProfile * m_userProfile;
-@property (nonatomic, retain) UserSong * m_userSong;
+@property (nonatomic, strong) User * m_user;
+@property (nonatomic, strong) UserProfile * m_userProfile;
+@property (nonatomic, strong) UserSong * m_userSong;
 
 @property (nonatomic, assign) NSInteger m_sessionId;
 @property (nonatomic, assign) NSInteger m_songId;
@@ -51,8 +51,8 @@
 @property (nonatomic, assign) NSInteger m_length;
 @property (nonatomic, assign) NSInteger m_appId;
 
-@property (nonatomic, retain) NSString * m_notes;
-@property (nonatomic, retain) NSString * m_xmpBlob;
+@property (nonatomic, strong) NSString * m_notes;
+@property (nonatomic, strong) NSString * m_xmpBlob;
 
 - (id)initWithXmlDom:(XmlDom*)xmlDom;
 - (NSComparisonResult)compareCreated:(id)anObject;

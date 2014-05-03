@@ -57,7 +57,7 @@ extern UserController * g_userController;
 
 @interface PlayViewController ()
 {
-    SongDisplayController *_displayController;
+    //SongDisplayController *_displayController;
     
     VolumeViewController *_volumeViewController;
     
@@ -113,6 +113,9 @@ extern UserController * g_userController;
     
 }
 
+@property (strong, nonatomic) SongDisplayController *displayController;
+
+
 @end
 
 @implementation PlayViewController
@@ -130,9 +133,9 @@ extern UserController * g_userController;
         // Custom initialization
         _playTimeAdjustment = 0;
         
-        _playTimeStart = [[NSDate date] retain];
-        _audioRouteTimeStart = [[NSDate date] retain];
-        _metronomeTimeStart = [[NSDate date] retain];
+        _playTimeStart = [NSDate date];
+        _audioRouteTimeStart = [NSDate date];
+        _metronomeTimeStart = [NSDate date];
         
         isStandalone = standalone;
         
@@ -164,11 +167,11 @@ extern UserController * g_userController;
 //    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     // Fiddle with the switch images
-    _outputSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
+    _outputSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
     _outputSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     _outputSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
     
-    _feedSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
+    _feedSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
     _feedSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     _feedSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
     
@@ -329,9 +332,9 @@ extern UserController * g_userController;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
+- (void)viewDidDisappear:(BOOL)animated
 {
-    // enable idle sleeping
+    
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
@@ -345,18 +348,6 @@ extern UserController * g_userController;
     [g_gtarController removeObserver:self];
     
     [_displayController cancelPreloading];
-    [_displayController release];
-    [_volumeViewController release];
-    
-    [_song release];
-    [_userSong release];
-    [_songModel release];
-    [_songRecorder release];
-    
-    [_currentFrame release];
-    [_nextFrame release];
-    
-    [_scoreTracker release];
     
     [_interFrameDelayTimer invalidate];
     _interFrameDelayTimer = nil;
@@ -367,68 +358,7 @@ extern UserController * g_userController;
     [_metronomeTimer invalidate];
     _metronomeTimer = nil;
     
-    [_deferredNotesQueue release];
     
-    [_playTimeStart release];
-    
-    [_audioRouteTimeStart release];
-    
-    [_metronomeTimeStart release];
-    
-    //[g_soundMaster releaseAfterUse];
-    
-    [_glView release];
-    [_menuView release];
-    [_songScoreView release];
-    [_topBar release];
-    [_menuButton release];
-    [_backButton release];
-    [_pauseButton release];
-    [_volumeButton release];
-    
-    [_scoreLabel release];
-    [_multiplierTextLabel release];
-    [_subscoreLabel release];
-    [_progressFillView release];
-    [_songTitleLabel release];
-    [_songArtistLabel release];
-    [_scoreSongTitleLabel release];
-    [_scoreSongArtistLabel release];
-    [_finishButton release];
-    [_finishRestartButton release];
-    [_outputView release];
-    [_postToFeedView release];
-    
-    [_scoreScoreLabel release];
-    [_scoreNotesHitLabel release];
-    [_scoreInARowLabel release];
-    [_scoreAccuracyLabel release];
-    [_scoreScore release];
-    [_scoreNotesHit release];
-    [_scoreInARow release];
-    [_scoreAccuracy release];
-    [_heatMapView release];
-    
-//    [_feedSwitch.thumbTintColor release];
-    [_feedSwitch release];
-    
-//    [_outputSwitch.thumbTintColor release];
-    [_outputSwitch release];
-    
-    [_loadingView release];
-    [_loadingLicenseInfo release];
-    [_loadingSongArtist release];
-    [_loadingSongTitle release];
-    [_difficultyButton release];
-    [_scoreDifficultyButton release];
-    [_difficultyLabel release];
-    [_scoreDifficultyLabel release];
-    [_instrumentButton release];
-    [_instrumentLabel release];
-    [_volumeSliderView release];
-    [_menuDownArrow release];
-    [_lastTappedFrame release];
-    [super dealloc];
 }
 
 #pragma mark - Button click handlers
@@ -678,11 +608,11 @@ extern UserController * g_userController;
     {
         [_feedSwitch setOn:NO];
 
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Cannot Post"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Post"
                                                          message:@"The upload queue is full, cannot post songs until network connectivity restored."
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil] autorelease];
+                                               otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -829,13 +759,10 @@ extern UserController * g_userController;
 
 - (void)handleBecomeActive
 {
-    [_playTimeStart release];
-    [_audioRouteTimeStart release];
-    [_metronomeTimeStart release];
     
-    _playTimeStart = [[NSDate date] retain];
-    _audioRouteTimeStart = [[NSDate date] retain];
-    _metronomeTimeStart = [[NSDate date] retain];
+    _playTimeStart = [NSDate date];
+    _audioRouteTimeStart = [NSDate date];
+    _metronomeTimeStart = [NSDate date];
 }
 
 - (void)removeLoadingView
@@ -936,8 +863,7 @@ extern UserController * g_userController;
                                                                route, @"AudioRoute",
                                                                nil]];
         
-        [_audioRouteTimeStart release];
-        _audioRouteTimeStart = [[NSDate date] retain];
+        _audioRouteTimeStart = [NSDate date];
     }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
@@ -975,8 +901,7 @@ extern UserController * g_userController;
                                                              @"On", @"Metronome",
                                                              nil]];
 
-        [_metronomeTimeStart release];
-        _metronomeTimeStart = [[NSDate date] retain];
+        _metronomeTimeStart = [NSDate date];
         
     }
     else
@@ -1006,8 +931,7 @@ extern UserController * g_userController;
                                                              [NSNumber numberWithInteger:delta], @"PlayTime",
                                                              nil]];
         
-        [_metronomeTimeStart release];
-        _metronomeTimeStart = [[NSDate date] retain];
+        _metronomeTimeStart = [NSDate date];
         
     }
     
@@ -1096,21 +1020,42 @@ extern UserController * g_userController;
     _fretThree.layer.cornerRadius = 50.0;
 }
 
-- (void)updateScoreDisplay
+- (void)updateScoreDisplayWithAccuracy:(double)accuracy
 {
     int prevScore = [[self unformatScore:_scoreLabel.text] intValue];
     int newScore = _scoreTracker.m_score;
     int scoreDiff = newScore - prevScore;
     
-    [self animateSubscoreWithText:[NSString stringWithFormat:@"+%i",scoreDiff]];
+    // Determine accuracy color
+    UIColor * accuracyColor;
     
+    if(accuracy < 0){
+        accuracyColor = [UIColor whiteColor];
+    }
+    if(accuracy < 0.5){
+        accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*115.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
+    }else{
+        accuracyColor = [UIColor colorWithRed:2.0*(1.0-accuracy)*255.0/255.0 green:180/255.0 blue:50/255.0 alpha:0.9];
+    }
+    
+    //[_scoreLabel setTextColor:accuracyColor];
+    
+    // Animate subscore
+    if(scoreDiff > 0){
+        [self animateSubscoreWithText:[NSString stringWithFormat:@"+%i",scoreDiff] andColor:accuracyColor];
+    }
+    
+    // Update score label
     [_scoreLabel setText:[self formatScore:_scoreTracker.m_score]];
     [self setScoreMultiplier:_scoreTracker.m_multiplier];
+    
+
 }
 
-- (void)animateSubscoreWithText:(NSString*)subscore
+- (void)animateSubscoreWithText:(NSString*)subscore andColor:(UIColor *)textColor
 {
     _subscoreLabel.text = subscore;
+    [_subscoreLabel setTextColor:textColor];
     [_subscoreLabel setAlpha:0.8];
     [_subscoreLabel setHidden:NO];
     [self.view bringSubviewToFront:_subscoreLabel];
@@ -1133,16 +1078,30 @@ extern UserController * g_userController;
 {
     _multiplierTextLabel.text = [NSString stringWithFormat:@"%iX",multiplier];
     
-    if(multiplier <= 1){
+    
+    /*if(multiplier <= 1){
         [_multiplierTextLabel setAlpha:0.2];
     }else{
         [_multiplierTextLabel setAlpha:1.0];
+    }*/
+    
+    // Determine color
+    if(multiplier <= 1){
+        [_multiplierTextLabel setBackgroundColor:[UIColor colorWithRed:255/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
+    }else if(multiplier < 4){
+        [_multiplierTextLabel setBackgroundColor:[UIColor colorWithRed:180/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
+    }else if(multiplier < 6){
+        [_multiplierTextLabel setBackgroundColor:[UIColor colorWithRed:135/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
+    }else if(multiplier < 8){
+        [_multiplierTextLabel setBackgroundColor:[UIColor colorWithRed:85/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
+    }else{
+        [_multiplierTextLabel setBackgroundColor:[UIColor colorWithRed:0/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
     }
 }
 
 - (NSString *)formatScore:(int)scoreVal
 {
-    NSNumberFormatter * numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
     
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
@@ -1221,7 +1180,7 @@ extern UserController * g_userController;
 
 - (void)uploadUserSongSession
 {
-    UserSongSession * session = [[[UserSongSession alloc] init] autorelease];
+    UserSongSession * session = [[UserSongSession alloc] init];
     
     session.m_userSong = _userSong;
     session.m_score = _scoreTracker.m_score;
@@ -1450,15 +1409,9 @@ extern UserController * g_userController;
         [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
         
         // release everything
-        [timer release];
         
-        [when release];
             
-        [fretNumber release];
-        [strNumber release];
-        [velNumber release];
         
-        [dictionary release];
         
     }
 }
@@ -1590,11 +1543,6 @@ extern UserController * g_userController;
         [g_gtarController turnOffAllLeds];
     }
     [_displayController cancelPreloading];
-    [_displayController release];
-    [_songModel release];
-    [_scoreTracker release];
-    [_currentFrame release];
-    [_songRecorder release];
     
     _currentFrame = nil;
     _lastTappedFrame = nil;
@@ -1667,7 +1615,6 @@ extern UserController * g_userController;
         _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
     }
     
-    [_deferredNotesQueue release];
     
     _deferredNotesQueue = [[NSMutableArray alloc] init];
     
@@ -1675,7 +1622,7 @@ extern UserController * g_userController;
     [self drawPauseButton:_pauseButton];
     
     
-    [self updateScoreDisplay];
+    [self updateScoreDisplayWithAccuracy:-1];
     
 }
 
@@ -2083,9 +2030,8 @@ extern UserController * g_userController;
 - (void)songModelEnterFrame:(NSNoteFrame*)frame
 {
     NSLog(@"Song model enter frame");
-    [_currentFrame release];
     
-    _currentFrame = [frame retain];
+    _currentFrame = frame;
     
     // Align us more pefectly with the frame
     if(!isStandalone){
@@ -2113,14 +2059,13 @@ extern UserController * g_userController;
     }
     
     
-    [_currentFrame release];
     
     _currentFrame = nil;
     
     if(!isStandalone){
         // Calculate score only on frame release for regular play
-        [_scoreTracker scoreFrame:frame onBeat:-1 withComplexity:0 endStreak:NO isStandalone:NO];
-        [self updateScoreDisplay];
+        double accuracy = [_scoreTracker scoreFrame:frame onBeat:-1 withComplexity:0 endStreak:NO isStandalone:NO];
+        [self updateScoreDisplayWithAccuracy:accuracy];
     }
     
     // Score checking on frame release
@@ -2143,9 +2088,8 @@ extern UserController * g_userController;
 - (void)songModelNextFrame:(NSNoteFrame*)frame
 {
     
-    [_nextFrame release];
     
-    _nextFrame = [frame retain];
+    _nextFrame = frame;
     
     //    [self turnOnFrame:m_nextFrame];
     
@@ -2239,7 +2183,7 @@ extern UserController * g_userController;
         UIColor * accuracyColor;
         
         if(accuracy < 0.5){
-            accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*135.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
+            accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*115.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
         }else{
             accuracyColor = [UIColor colorWithRed:2.0*(1.0-accuracy)*255.0/255.0 green:180/255.0 blue:50/255.0 alpha:0.9];
         }
@@ -2253,13 +2197,12 @@ extern UserController * g_userController;
     }
     
     UIImage * rectImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIImageView * image = [[[UIImageView alloc] initWithImage:rectImage] autorelease];
+    UIImageView * image = [[UIImageView alloc] initWithImage:rectImage];
     
     [_heatMapView addSubview:image];
     
     UIGraphicsEndImageContext();
     
-    [frameHits release];
 }
 
 - (void)songModelEndOfSong
@@ -2371,15 +2314,15 @@ extern UserController * g_userController;
     //NSLog(@"Current frame is %@",_currentFrame);
     
     // Determine whether to play the tapped string
-    if(isStandalone){
+    if(isStandalone && !_songIsPaused){
         [self tapNoteFromTouchPoint:touchPoint];
     }
     
     // Debug
 #ifdef Debug_BUILD
-    //if(g_gtarController.connected){
-    //    _skipNotes = YES;
-    //}
+    if(g_gtarController.connected){
+        _skipNotes = YES;
+    }
 #endif
 }
 
@@ -2400,7 +2343,7 @@ extern UserController * g_userController;
     }
     
     // If delta y is large enough then strum
-    if(isStandalone && abs(initPoint.y - currentPoint.y) > 10){
+    if(isStandalone && abs(initPoint.y - currentPoint.y) > 10 && !_songIsPaused){
         
         CGPoint touchPoint = [touch locationInView:self.glView];
         [self strumNoteFromTouchPoint:touchPoint];
@@ -2670,7 +2613,7 @@ extern UserController * g_userController;
             [_displayController setNoteHit:nn toValue:accuracy];
         }
         
-        [self updateScoreDisplay];
+        [self updateScoreDisplayWithAccuracy:accuracy];
         
         _lastTappedFrame = tappedFrame;
         
@@ -2714,6 +2657,7 @@ extern UserController * g_userController;
     }
     
     [_displayController fretsDownOne:fretOneOn fretTwo:fretTwoOn fretThree:fretThreeOn];
+    
 }
 
 // Standalone
@@ -2732,6 +2676,7 @@ extern UserController * g_userController;
     }
     
     [_displayController fretsDownOne:fretOneOn fretTwo:fretTwoOn fretThree:fretThreeOn];
+    
 }
 
 @end

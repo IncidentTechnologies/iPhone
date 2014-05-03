@@ -45,15 +45,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [m_instructionsLabel release];
-    [m_lastUpdateLabel release];
-    [m_arrowTriangleView release];
-    [m_updatingIndicatorView release];
-    
-    [super dealloc];
-}
 
 -(void)setIndicatorTextColor:(UIColor*)color
 {
@@ -261,7 +252,6 @@
     
     m_lastUpdateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Last update: %@", NULL), currentTime];
     
-    [dateFormatter release];
     
 }
 

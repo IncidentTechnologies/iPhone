@@ -70,26 +70,26 @@ typedef enum
 
 @property (nonatomic, assign) CloudResponseStatus m_status;
 @property (nonatomic, assign) NSInteger m_statusCode;
-@property (nonatomic, retain) NSString * m_mimeType;
-@property (nonatomic, retain) NSString * m_statusText;
+@property (nonatomic, strong) NSString * m_mimeType;
+@property (nonatomic, strong) NSString * m_statusText;
 @property (nonatomic, assign) BOOL m_loggedIn;
 
-@property (nonatomic, retain) NSMutableData * m_receivedData;
-@property (nonatomic, retain) NSString * m_receivedDataString;
-@property (nonatomic, retain) XmlDom * m_responseXmlDom;
+@property (nonatomic, strong) NSMutableData * m_receivedData;
+@property (nonatomic, strong) NSString * m_receivedDataString;
+@property (nonatomic, strong) XmlDom * m_responseXmlDom;
 
 @property (nonatomic, assign) NSInteger m_responseFileId;
 @property (nonatomic, assign) NSInteger m_responseUserId;
-@property (nonatomic, retain) NSNumber * m_responseUserCredits;
-@property (nonatomic, retain) UserProfile * m_responseUserProfile;
-@property (nonatomic, retain) UserProfiles * m_responseUserProfiles;
-@property (nonatomic, retain) UserProfiles * m_responseUserProfilesFollows;
-@property (nonatomic, retain) UserProfiles * m_responseUserProfilesFollowedBy;
-@property (nonatomic, retain) UserSongs * m_responseUserSongs;
-@property (nonatomic, retain) UserSongSession * m_responseUserSongSession;
-@property (nonatomic, retain) UserSongSessions * m_responseUserSongSessions;
-@property (nonatomic, retain) StoreFeatureCollection * m_responseStoreFeatureCollection;
-@property (nonatomic, retain) NSArray * m_responseProductIds;
+@property (nonatomic, strong) NSNumber * m_responseUserCredits;
+@property (nonatomic, strong) UserProfile * m_responseUserProfile;
+@property (nonatomic, strong) UserProfiles * m_responseUserProfiles;
+@property (nonatomic, strong) UserProfiles * m_responseUserProfilesFollows;
+@property (nonatomic, strong) UserProfiles * m_responseUserProfilesFollowedBy;
+@property (nonatomic, strong) UserSongs * m_responseUserSongs;
+@property (nonatomic, strong) UserSongSession * m_responseUserSongSession;
+@property (nonatomic, strong) UserSongSessions * m_responseUserSongSessions;
+@property (nonatomic, strong) StoreFeatureCollection * m_responseStoreFeatureCollection;
+@property (nonatomic, strong) NSArray * m_responseProductIds;
 @property (nonatomic, assign) NSInteger m_responseFirmwareMajorVersion;
 @property (nonatomic, assign) NSInteger m_responseFirmwareMinorVersion;
 

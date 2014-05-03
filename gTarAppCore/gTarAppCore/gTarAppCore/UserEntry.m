@@ -54,16 +54,5 @@
     
 }
 
-- (void)dealloc
-{
-    [m_userProfile release];
-    [m_followsList release];
-    [m_followedByList release];
-    [m_sessionsList release];
-    [m_followsSessionsList release];
-    [m_facebookFriendsList release];
-    
-    [super dealloc];
-}
 
 @end
