@@ -14,6 +14,10 @@
 		26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8A17D2F3C500DC990F /* StoreListBuyButtonView.m */; };
 		26868D8E17D6C5AB00DC990F /* SongPurchaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8D17D6C5AB00DC990F /* SongPurchaseRequest.m */; };
 		26868D9117E29AD700DC990F /* UITriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D9017E29AD700DC990F /* UITriangleView.m */; };
+		26D4B17E18F62F02003380BF /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D4B17818F62F02003380BF /* libTestFlight.a */; };
+		26D4B17F18F62F02003380BF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26D4B17918F62F02003380BF /* README.md */; };
+		26D4B18018F62F02003380BF /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 26D4B17A18F62F02003380BF /* release_notes.md */; };
+		26D4B18118F62F0E003380BF /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D4B17818F62F02003380BF /* libTestFlight.a */; };
 		26F85ED818146FA500326CE7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F85ED718146FA500326CE7 /* StoreKit.framework */; };
 		9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CAF174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
@@ -1681,6 +1685,12 @@
 		26868D8F17E29AD700DC990F /* UITriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITriangleView.h; sourceTree = "<group>"; };
 		26868D9017E29AD700DC990F /* UITriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITriangleView.m; sourceTree = "<group>"; };
 		26D4B17218F62062003380BF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		26D4B17818F62F02003380BF /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		26D4B17918F62F02003380BF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		26D4B17A18F62F02003380BF /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		26D4B17B18F62F02003380BF /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		26D4B17C18F62F02003380BF /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		26D4B17D18F62F02003380BF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		26F85ED718146FA500326CE7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlay_Prefix.pch; sourceTree = "<group>"; };
@@ -2577,6 +2587,7 @@
 				EC24DC1F161A841A00016B78 /* CoreMIDI.framework in Frameworks */,
 				EC24DC08161A821200016B78 /* UIKit.framework in Frameworks */,
 				EC24DC23161A841A00016B78 /* QuartzCore.framework in Frameworks */,
+				26D4B17E18F62F02003380BF /* libTestFlight.a in Frameworks */,
 				EC24DC0A161A821200016B78 /* CoreGraphics.framework in Frameworks */,
 				EC24DC20161A841A00016B78 /* OpenGLES.framework in Frameworks */,
 				EC24DC21161A841A00016B78 /* AudioToolbox.framework in Frameworks */,
@@ -2595,6 +2606,7 @@
 				ECC11E47162D07AD001A231A /* libAudioController.a in Frameworks */,
 				ECC11E48162D07AD001A231A /* libgTarAppCore.a in Frameworks */,
 				ECC11E49162D07AD001A231A /* libGtarController.a in Frameworks */,
+				26D4B18118F62F0E003380BF /* libTestFlight.a in Frameworks */,
 				ECC11E4A162D07AD001A231A /* AVFoundation.framework in Frameworks */,
 				ECC11E4B162D07AD001A231A /* CoreMIDI.framework in Frameworks */,
 				ECC11E4C162D07AD001A231A /* UIKit.framework in Frameworks */,
@@ -2638,9 +2650,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		26D4B17718F62F02003380BF /* TestFlightSDK3.0.0 */ = {
+			isa = PBXGroup;
+			children = (
+				26D4B17818F62F02003380BF /* libTestFlight.a */,
+				26D4B17918F62F02003380BF /* README.md */,
+				26D4B17A18F62F02003380BF /* release_notes.md */,
+				26D4B17B18F62F02003380BF /* TestFlight+AsyncLogging.h */,
+				26D4B17C18F62F02003380BF /* TestFlight+ManualSessions.h */,
+				26D4B17D18F62F02003380BF /* TestFlight.h */,
+			);
+			path = TestFlightSDK3.0.0;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				26D4B17718F62F02003380BF /* TestFlightSDK3.0.0 */,
 				260CF0B418EBEFDF0083903A /* Localizable.strings */,
 				9DCC3B6E1790DACD00DDD603 /* gTarIcon_114x114.png */,
 				9DCC3B6A1790D8B700DDD603 /* gTarIcon_57x57.png */,
@@ -4260,6 +4286,7 @@
 				EC24DD16161A89C400016B78 /* Rock Guitar 42.mp3 in Resources */,
 				EC24DD17161A89C400016B78 /* Rock Guitar 43.mp3 in Resources */,
 				EC24DD18161A89C400016B78 /* Rock Guitar 44.mp3 in Resources */,
+				26D4B17F18F62F02003380BF /* README.md in Resources */,
 				EC24DD19161A89C400016B78 /* Rock Guitar 45.mp3 in Resources */,
 				EC24DD1A161A89C400016B78 /* Rock Guitar 46.mp3 in Resources */,
 				EC24DD1B161A89C400016B78 /* Rock Guitar 47.mp3 in Resources */,
@@ -4694,6 +4721,7 @@
 				9D054CFA174C68E000FA3239 /* Bowed Strings 78.mp3 in Resources */,
 				9D054CFC174C68E000FA3239 /* Bowed Strings 79.mp3 in Resources */,
 				9D054CFE174C68E000FA3239 /* Bowed Strings 80.mp3 in Resources */,
+				26D4B18018F62F02003380BF /* release_notes.md in Resources */,
 				9D054D2A174C68E700FA3239 /* Carl's Synth 40.mp3 in Resources */,
 				9D054D2C174C68E700FA3239 /* Carl's Synth 41.mp3 in Resources */,
 				9D054D2E174C68E700FA3239 /* Carl's Synth 42.mp3 in Resources */,
@@ -5842,6 +5870,10 @@
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/idanbeck/dev/IncidentTechnologies/iPhone/gTarPlay/gTarPlay/TestFlightSDK3.0.0,
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5871,6 +5903,10 @@
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/idanbeck/dev/IncidentTechnologies/iPhone/gTarPlay/gTarPlay/TestFlightSDK3.0.0,
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5907,6 +5943,10 @@
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/idanbeck/dev/IncidentTechnologies/iPhone/gTarPlay/gTarPlay/TestFlightSDK3.0.0,
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = gTarPlay;
 				PROVISIONING_PROFILE = "";
@@ -5935,6 +5975,10 @@
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/idanbeck/dev/IncidentTechnologies/iPhone/gTarPlay/gTarPlay/TestFlightSDK3.0.0,
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = gTarPlay;
 				PROVISIONING_PROFILE = "";

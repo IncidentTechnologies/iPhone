@@ -6,6 +6,8 @@
 //  Copyright 2011 Msft. All rights reserved.
 //
 
+#import "TestFlight.h"
+
 #import "gTarPlayAppDelegate.h"
 #import "gTarPlayApplication.h"
 
@@ -96,6 +98,7 @@ UserController * g_userController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Typical UI Setup
+    [TestFlight takeOff:@"ad6b7150-d397-4188-9f1a-58f56c83d967"];
     
     // Override point for customization after application launch.
 	m_navigationController.navigationBarHidden = YES;

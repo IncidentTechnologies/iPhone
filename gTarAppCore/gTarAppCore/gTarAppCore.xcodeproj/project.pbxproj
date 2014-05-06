@@ -1039,6 +1039,7 @@
 		EC5DA85B161A5D160015832E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/gTarAppCore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarAppCore/gTarAppCore-Prefix.pch";
@@ -1057,6 +1058,7 @@
 		EC5DA85C161A5D160015832E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/gTarAppCore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarAppCore/gTarAppCore-Prefix.pch";
