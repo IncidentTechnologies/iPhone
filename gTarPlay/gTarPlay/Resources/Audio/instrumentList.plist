@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>instruments</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>Electric Guitar</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+			<key>Tuning</key>
+			<array>
+				<string>0</string>
+				<string>5</string>
+				<string>10</string>
+				<string>15</string>
+				<string>19</string>
+				<string>24</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Acoustic Guitar</string>
+			<key>SecondName</key>
+			<string>Acoustic</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Rock Guitar</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<string>41</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Upright Bass</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Piano</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Rhodes</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Muted Clav</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Bowed Strings</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Marimba</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Carl&apos;s Synth</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Droplet</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>52</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Square</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Warm Analogue</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

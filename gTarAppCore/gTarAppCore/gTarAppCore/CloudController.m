@@ -815,7 +815,6 @@
 	// need to make the object a NSValue in order to use it as a key 
 	NSValue * key = [NSValue valueWithNonretainedObject:connection];
 	
-    
 	[m_connectionResponseDictionary setObject:cloudResponse forKey:key];
 	
 }

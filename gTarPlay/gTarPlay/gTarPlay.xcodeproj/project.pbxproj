@@ -24,7 +24,89 @@
 		6D3D06E018F4D2E8007683DB /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06DA18F4D2E8007683DB /* release_notes.md */; };
 		6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D594C101909BCF900CF3128 /* HighlightModel.m */; };
 		6D72F22018FF1EC100D68394 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */; };
+		6DAD0B1119187F1F005B3807 /* Warm Analogue 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AE819187F1F005B3807 /* Warm Analogue 40.mp3 */; };
+		6DAD0B1219187F1F005B3807 /* Warm Analogue 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AE919187F1F005B3807 /* Warm Analogue 41.mp3 */; };
+		6DAD0B1319187F1F005B3807 /* Warm Analogue 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AEA19187F1F005B3807 /* Warm Analogue 42.mp3 */; };
+		6DAD0B1419187F1F005B3807 /* Warm Analogue 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AEB19187F1F005B3807 /* Warm Analogue 43.mp3 */; };
+		6DAD0B1519187F1F005B3807 /* Warm Analogue 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AEC19187F1F005B3807 /* Warm Analogue 44.mp3 */; };
+		6DAD0B1619187F1F005B3807 /* Warm Analogue 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AED19187F1F005B3807 /* Warm Analogue 45.mp3 */; };
+		6DAD0B1719187F1F005B3807 /* Warm Analogue 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AEE19187F1F005B3807 /* Warm Analogue 46.mp3 */; };
+		6DAD0B1819187F1F005B3807 /* Warm Analogue 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AEF19187F1F005B3807 /* Warm Analogue 47.mp3 */; };
+		6DAD0B1919187F1F005B3807 /* Warm Analogue 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF019187F1F005B3807 /* Warm Analogue 48.mp3 */; };
+		6DAD0B1A19187F1F005B3807 /* Warm Analogue 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF119187F1F005B3807 /* Warm Analogue 49.mp3 */; };
+		6DAD0B1B19187F1F005B3807 /* Warm Analogue 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF219187F1F005B3807 /* Warm Analogue 50.mp3 */; };
+		6DAD0B1C19187F1F005B3807 /* Warm Analogue 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF319187F1F005B3807 /* Warm Analogue 51.mp3 */; };
+		6DAD0B1D19187F1F005B3807 /* Warm Analogue 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF419187F1F005B3807 /* Warm Analogue 52.mp3 */; };
+		6DAD0B1E19187F1F005B3807 /* Warm Analogue 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF519187F1F005B3807 /* Warm Analogue 53.mp3 */; };
+		6DAD0B1F19187F1F005B3807 /* Warm Analogue 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF619187F1F005B3807 /* Warm Analogue 54.mp3 */; };
+		6DAD0B2019187F1F005B3807 /* Warm Analogue 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF719187F1F005B3807 /* Warm Analogue 55.mp3 */; };
+		6DAD0B2119187F1F005B3807 /* Warm Analogue 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF819187F1F005B3807 /* Warm Analogue 56.mp3 */; };
+		6DAD0B2219187F1F005B3807 /* Warm Analogue 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AF919187F1F005B3807 /* Warm Analogue 57.mp3 */; };
+		6DAD0B2319187F1F005B3807 /* Warm Analogue 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AFA19187F1F005B3807 /* Warm Analogue 58.mp3 */; };
+		6DAD0B2419187F1F005B3807 /* Warm Analogue 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AFB19187F1F005B3807 /* Warm Analogue 59.mp3 */; };
+		6DAD0B2519187F1F005B3807 /* Warm Analogue 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AFC19187F1F005B3807 /* Warm Analogue 60.mp3 */; };
+		6DAD0B2619187F1F005B3807 /* Warm Analogue 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AFD19187F1F005B3807 /* Warm Analogue 61.mp3 */; };
+		6DAD0B2719187F1F005B3807 /* Warm Analogue 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AFE19187F1F005B3807 /* Warm Analogue 62.mp3 */; };
+		6DAD0B2819187F1F005B3807 /* Warm Analogue 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AFF19187F1F005B3807 /* Warm Analogue 63.mp3 */; };
+		6DAD0B2919187F1F005B3807 /* Warm Analogue 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0019187F1F005B3807 /* Warm Analogue 64.mp3 */; };
+		6DAD0B2A19187F1F005B3807 /* Warm Analogue 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0119187F1F005B3807 /* Warm Analogue 65.mp3 */; };
+		6DAD0B2B19187F1F005B3807 /* Warm Analogue 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0219187F1F005B3807 /* Warm Analogue 66.mp3 */; };
+		6DAD0B2C19187F1F005B3807 /* Warm Analogue 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0319187F1F005B3807 /* Warm Analogue 67.mp3 */; };
+		6DAD0B2D19187F1F005B3807 /* Warm Analogue 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0419187F1F005B3807 /* Warm Analogue 68.mp3 */; };
+		6DAD0B2E19187F1F005B3807 /* Warm Analogue 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0519187F1F005B3807 /* Warm Analogue 69.mp3 */; };
+		6DAD0B2F19187F1F005B3807 /* Warm Analogue 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0619187F1F005B3807 /* Warm Analogue 70.mp3 */; };
+		6DAD0B3019187F1F005B3807 /* Warm Analogue 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0719187F1F005B3807 /* Warm Analogue 71.mp3 */; };
+		6DAD0B3119187F1F005B3807 /* Warm Analogue 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0819187F1F005B3807 /* Warm Analogue 72.mp3 */; };
+		6DAD0B3219187F1F005B3807 /* Warm Analogue 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0919187F1F005B3807 /* Warm Analogue 73.mp3 */; };
+		6DAD0B3319187F1F005B3807 /* Warm Analogue 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0A19187F1F005B3807 /* Warm Analogue 74.mp3 */; };
+		6DAD0B3419187F1F005B3807 /* Warm Analogue 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0B19187F1F005B3807 /* Warm Analogue 75.mp3 */; };
+		6DAD0B3519187F1F005B3807 /* Warm Analogue 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0C19187F1F005B3807 /* Warm Analogue 76.mp3 */; };
+		6DAD0B3619187F1F005B3807 /* Warm Analogue 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0D19187F1F005B3807 /* Warm Analogue 77.mp3 */; };
+		6DAD0B3719187F1F005B3807 /* Warm Analogue 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0E19187F1F005B3807 /* Warm Analogue 78.mp3 */; };
+		6DAD0B3819187F1F005B3807 /* Warm Analogue 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0F19187F1F005B3807 /* Warm Analogue 79.mp3 */; };
+		6DAD0B3919187F1F005B3807 /* Warm Analogue 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B1019187F1F005B3807 /* Warm Analogue 80.mp3 */; };
 		6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */; };
+		6DED8791191874460091721E /* Electric Guitar 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8768191874460091721E /* Electric Guitar 40.mp3 */; };
+		6DED8792191874460091721E /* Electric Guitar 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8769191874460091721E /* Electric Guitar 41.mp3 */; };
+		6DED8793191874460091721E /* Electric Guitar 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876A191874460091721E /* Electric Guitar 42.mp3 */; };
+		6DED8794191874460091721E /* Electric Guitar 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876B191874460091721E /* Electric Guitar 43.mp3 */; };
+		6DED8795191874460091721E /* Electric Guitar 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876C191874460091721E /* Electric Guitar 44.mp3 */; };
+		6DED8796191874460091721E /* Electric Guitar 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876D191874460091721E /* Electric Guitar 45.mp3 */; };
+		6DED8797191874460091721E /* Electric Guitar 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876E191874460091721E /* Electric Guitar 46.mp3 */; };
+		6DED8798191874460091721E /* Electric Guitar 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876F191874460091721E /* Electric Guitar 47.mp3 */; };
+		6DED8799191874460091721E /* Electric Guitar 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8770191874460091721E /* Electric Guitar 48.mp3 */; };
+		6DED879A191874460091721E /* Electric Guitar 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8771191874460091721E /* Electric Guitar 49.mp3 */; };
+		6DED879B191874460091721E /* Electric Guitar 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8772191874460091721E /* Electric Guitar 50.mp3 */; };
+		6DED879C191874460091721E /* Electric Guitar 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8773191874460091721E /* Electric Guitar 51.mp3 */; };
+		6DED879D191874460091721E /* Electric Guitar 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8774191874460091721E /* Electric Guitar 52.mp3 */; };
+		6DED879E191874460091721E /* Electric Guitar 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8775191874460091721E /* Electric Guitar 53.mp3 */; };
+		6DED879F191874460091721E /* Electric Guitar 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8776191874460091721E /* Electric Guitar 54.mp3 */; };
+		6DED87A0191874460091721E /* Electric Guitar 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8777191874460091721E /* Electric Guitar 55.mp3 */; };
+		6DED87A1191874460091721E /* Electric Guitar 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8778191874460091721E /* Electric Guitar 56.mp3 */; };
+		6DED87A2191874460091721E /* Electric Guitar 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8779191874460091721E /* Electric Guitar 57.mp3 */; };
+		6DED87A3191874460091721E /* Electric Guitar 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877A191874460091721E /* Electric Guitar 58.mp3 */; };
+		6DED87A4191874460091721E /* Electric Guitar 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877B191874460091721E /* Electric Guitar 59.mp3 */; };
+		6DED87A5191874460091721E /* Electric Guitar 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877C191874460091721E /* Electric Guitar 60.mp3 */; };
+		6DED87A6191874460091721E /* Electric Guitar 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877D191874460091721E /* Electric Guitar 61.mp3 */; };
+		6DED87A7191874460091721E /* Electric Guitar 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877E191874460091721E /* Electric Guitar 62.mp3 */; };
+		6DED87A8191874460091721E /* Electric Guitar 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877F191874460091721E /* Electric Guitar 63.mp3 */; };
+		6DED87A9191874460091721E /* Electric Guitar 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8780191874460091721E /* Electric Guitar 64.mp3 */; };
+		6DED87AA191874460091721E /* Electric Guitar 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8781191874460091721E /* Electric Guitar 65.mp3 */; };
+		6DED87AB191874460091721E /* Electric Guitar 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8782191874460091721E /* Electric Guitar 66.mp3 */; };
+		6DED87AC191874460091721E /* Electric Guitar 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8783191874460091721E /* Electric Guitar 67.mp3 */; };
+		6DED87AD191874460091721E /* Electric Guitar 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8784191874460091721E /* Electric Guitar 68.mp3 */; };
+		6DED87AE191874460091721E /* Electric Guitar 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8785191874460091721E /* Electric Guitar 69.mp3 */; };
+		6DED87AF191874460091721E /* Electric Guitar 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8786191874460091721E /* Electric Guitar 70.mp3 */; };
+		6DED87B0191874460091721E /* Electric Guitar 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8787191874460091721E /* Electric Guitar 71.mp3 */; };
+		6DED87B1191874460091721E /* Electric Guitar 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8788191874460091721E /* Electric Guitar 72.mp3 */; };
+		6DED87B2191874460091721E /* Electric Guitar 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8789191874460091721E /* Electric Guitar 73.mp3 */; };
+		6DED87B3191874460091721E /* Electric Guitar 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878A191874460091721E /* Electric Guitar 74.mp3 */; };
+		6DED87B4191874460091721E /* Electric Guitar 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878B191874460091721E /* Electric Guitar 75.mp3 */; };
+		6DED87B5191874460091721E /* Electric Guitar 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878C191874460091721E /* Electric Guitar 76.mp3 */; };
+		6DED87B6191874460091721E /* Electric Guitar 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878D191874460091721E /* Electric Guitar 77.mp3 */; };
+		6DED87B7191874460091721E /* Electric Guitar 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878E191874460091721E /* Electric Guitar 78.mp3 */; };
+		6DED87B8191874460091721E /* Electric Guitar 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878F191874460091721E /* Electric Guitar 79.mp3 */; };
+		6DED87B9191874460091721E /* Electric Guitar 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8790191874460091721E /* Electric Guitar 80.mp3 */; };
 		9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CAF174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CB0174C68E000FA3239 /* Bowed Strings 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */; };
@@ -590,108 +672,6 @@
 		EC24DC53161A897A00016B78 /* SongDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6BD1D813F070660068E25C /* SongDisplayController.m */; };
 		EC24DC54161A897A00016B78 /* SongES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6BD1DD13F073FD0068E25C /* SongES1Renderer.m */; };
 		EC24DC5D161A898700016B78 /* PullToUpdateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1E4DF21549E2AD0033F904 /* PullToUpdateTableView.m */; };
-		EC24DC85161A89BC00016B78 /* Electric 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E741582D3230015ED49 /* Electric 2.mp3 */; };
-		EC24DC86161A89BC00016B78 /* Electric 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E751582D3230015ED49 /* Electric 3.mp3 */; };
-		EC24DC87161A89BC00016B78 /* Electric 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E761582D3230015ED49 /* Electric 4.mp3 */; };
-		EC24DC88161A89BC00016B78 /* Electric 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E771582D3230015ED49 /* Electric 5.mp3 */; };
-		EC24DC89161A89BC00016B78 /* Electric 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E781582D3230015ED49 /* Electric 6.mp3 */; };
-		EC24DC8A161A89BC00016B78 /* Electric 7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E791582D3230015ED49 /* Electric 7.mp3 */; };
-		EC24DC8B161A89BC00016B78 /* Electric 8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7A1582D3230015ED49 /* Electric 8.mp3 */; };
-		EC24DC8C161A89BC00016B78 /* Electric 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7B1582D3230015ED49 /* Electric 9.mp3 */; };
-		EC24DC8D161A89BC00016B78 /* Electric 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7C1582D3230015ED49 /* Electric 10.mp3 */; };
-		EC24DC8E161A89BC00016B78 /* Electric 11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7D1582D3230015ED49 /* Electric 11.mp3 */; };
-		EC24DC8F161A89BC00016B78 /* Electric 12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7E1582D3230015ED49 /* Electric 12.mp3 */; };
-		EC24DC90161A89BC00016B78 /* Electric 13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7F1582D3230015ED49 /* Electric 13.mp3 */; };
-		EC24DC91161A89BC00016B78 /* Electric 14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E801582D3230015ED49 /* Electric 14.mp3 */; };
-		EC24DC92161A89BC00016B78 /* Electric 15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E811582D3230015ED49 /* Electric 15.mp3 */; };
-		EC24DC93161A89BC00016B78 /* Electric 16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E821582D3230015ED49 /* Electric 16.mp3 */; };
-		EC24DC94161A89BC00016B78 /* Electric 17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E831582D3230015ED49 /* Electric 17.mp3 */; };
-		EC24DC95161A89BC00016B78 /* Electric 18.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E841582D3230015ED49 /* Electric 18.mp3 */; };
-		EC24DC96161A89BC00016B78 /* Electric 19.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E851582D3230015ED49 /* Electric 19.mp3 */; };
-		EC24DC97161A89BC00016B78 /* Electric 20.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E861582D3230015ED49 /* Electric 20.mp3 */; };
-		EC24DC98161A89BC00016B78 /* Electric 21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E871582D3230015ED49 /* Electric 21.mp3 */; };
-		EC24DC99161A89BC00016B78 /* Electric 22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E881582D3230015ED49 /* Electric 22.mp3 */; };
-		EC24DC9A161A89BC00016B78 /* Electric 23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E891582D3230015ED49 /* Electric 23.mp3 */; };
-		EC24DC9B161A89BC00016B78 /* Electric 24.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8A1582D3230015ED49 /* Electric 24.mp3 */; };
-		EC24DC9C161A89BC00016B78 /* Electric 25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8B1582D3230015ED49 /* Electric 25.mp3 */; };
-		EC24DC9D161A89BC00016B78 /* Electric 26.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8C1582D3230015ED49 /* Electric 26.mp3 */; };
-		EC24DC9E161A89BC00016B78 /* Electric 27.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8D1582D3230015ED49 /* Electric 27.mp3 */; };
-		EC24DC9F161A89BC00016B78 /* Electric 28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8E1582D3230015ED49 /* Electric 28.mp3 */; };
-		EC24DCA0161A89BC00016B78 /* Electric 29.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8F1582D3230015ED49 /* Electric 29.mp3 */; };
-		EC24DCA1161A89BC00016B78 /* Electric 30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E901582D3230015ED49 /* Electric 30.mp3 */; };
-		EC24DCA2161A89BC00016B78 /* Electric 31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E911582D3230015ED49 /* Electric 31.mp3 */; };
-		EC24DCA3161A89BC00016B78 /* Electric 32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E921582D3230015ED49 /* Electric 32.mp3 */; };
-		EC24DCA4161A89BC00016B78 /* Electric 33.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E931582D3230015ED49 /* Electric 33.mp3 */; };
-		EC24DCA5161A89BC00016B78 /* Electric 34.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E941582D3230015ED49 /* Electric 34.mp3 */; };
-		EC24DCA6161A89BC00016B78 /* Electric 35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E951582D3230015ED49 /* Electric 35.mp3 */; };
-		EC24DCA7161A89BC00016B78 /* Electric 36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E961582D3230015ED49 /* Electric 36.mp3 */; };
-		EC24DCA8161A89BC00016B78 /* Electric 37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E971582D3230015ED49 /* Electric 37.mp3 */; };
-		EC24DCA9161A89BC00016B78 /* Electric 38.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E981582D3230015ED49 /* Electric 38.mp3 */; };
-		EC24DCAA161A89BC00016B78 /* Electric 39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E991582D3230015ED49 /* Electric 39.mp3 */; };
-		EC24DCAB161A89BC00016B78 /* Electric 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9A1582D3230015ED49 /* Electric 40.mp3 */; };
-		EC24DCAC161A89BC00016B78 /* Electric 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9B1582D3230015ED49 /* Electric 41.mp3 */; };
-		EC24DCAD161A89BC00016B78 /* Electric 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9C1582D3230015ED49 /* Electric 42.mp3 */; };
-		EC24DCAE161A89BC00016B78 /* Electric 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9D1582D3230015ED49 /* Electric 43.mp3 */; };
-		EC24DCAF161A89BC00016B78 /* Electric 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9E1582D3230015ED49 /* Electric 44.mp3 */; };
-		EC24DCB0161A89BC00016B78 /* Electric 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9F1582D3230015ED49 /* Electric 45.mp3 */; };
-		EC24DCB1161A89BC00016B78 /* Electric 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA01582D3230015ED49 /* Electric 46.mp3 */; };
-		EC24DCB2161A89BC00016B78 /* Electric 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA11582D3230015ED49 /* Electric 47.mp3 */; };
-		EC24DCB3161A89BC00016B78 /* Electric 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA21582D3230015ED49 /* Electric 48.mp3 */; };
-		EC24DCB4161A89BC00016B78 /* Electric 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA31582D3230015ED49 /* Electric 49.mp3 */; };
-		EC24DCB5161A89BC00016B78 /* Electric 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA41582D3230015ED49 /* Electric 50.mp3 */; };
-		EC24DCB6161A89BC00016B78 /* Electric 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA51582D3230015ED49 /* Electric 51.mp3 */; };
-		EC24DCB7161A89BC00016B78 /* Electric 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA61582D3230015ED49 /* Electric 52.mp3 */; };
-		EC24DCB8161A89BC00016B78 /* Electric 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA71582D3230015ED49 /* Electric 53.mp3 */; };
-		EC24DCB9161A89BC00016B78 /* Electric 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA81582D3230015ED49 /* Electric 54.mp3 */; };
-		EC24DCBA161A89BC00016B78 /* Electric 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA91582D3230015ED49 /* Electric 55.mp3 */; };
-		EC24DCBB161A89BC00016B78 /* Electric 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAA1582D3230015ED49 /* Electric 56.mp3 */; };
-		EC24DCBC161A89BC00016B78 /* Electric 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAB1582D3230015ED49 /* Electric 57.mp3 */; };
-		EC24DCBD161A89BC00016B78 /* Electric 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAC1582D3230015ED49 /* Electric 58.mp3 */; };
-		EC24DCBE161A89BC00016B78 /* Electric 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAD1582D3230015ED49 /* Electric 59.mp3 */; };
-		EC24DCBF161A89BC00016B78 /* Electric 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAE1582D3230015ED49 /* Electric 60.mp3 */; };
-		EC24DCC0161A89BC00016B78 /* Electric 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAF1582D3230015ED49 /* Electric 61.mp3 */; };
-		EC24DCC1161A89BC00016B78 /* Electric 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB01582D3230015ED49 /* Electric 62.mp3 */; };
-		EC24DCC2161A89BC00016B78 /* Electric 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB11582D3230015ED49 /* Electric 63.mp3 */; };
-		EC24DCC3161A89BC00016B78 /* Electric 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB21582D3230015ED49 /* Electric 64.mp3 */; };
-		EC24DCC4161A89BC00016B78 /* Electric 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB31582D3230015ED49 /* Electric 65.mp3 */; };
-		EC24DCC5161A89BC00016B78 /* Electric 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB41582D3230015ED49 /* Electric 66.mp3 */; };
-		EC24DCC6161A89BC00016B78 /* Electric 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB51582D3230015ED49 /* Electric 67.mp3 */; };
-		EC24DCC7161A89BC00016B78 /* Electric 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB61582D3230015ED49 /* Electric 68.mp3 */; };
-		EC24DCC8161A89BC00016B78 /* Electric 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB71582D3230015ED49 /* Electric 69.mp3 */; };
-		EC24DCC9161A89BC00016B78 /* Electric 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB81582D3230015ED49 /* Electric 70.mp3 */; };
-		EC24DCCA161A89BC00016B78 /* Electric 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB91582D3230015ED49 /* Electric 71.mp3 */; };
-		EC24DCCB161A89BC00016B78 /* Electric 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBA1582D3230015ED49 /* Electric 72.mp3 */; };
-		EC24DCCC161A89BC00016B78 /* Electric 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBB1582D3230015ED49 /* Electric 73.mp3 */; };
-		EC24DCCD161A89BC00016B78 /* Electric 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBC1582D3230015ED49 /* Electric 74.mp3 */; };
-		EC24DCCE161A89BC00016B78 /* Electric 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBD1582D3230015ED49 /* Electric 75.mp3 */; };
-		EC24DCCF161A89BC00016B78 /* Electric 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBE1582D3230015ED49 /* Electric 76.mp3 */; };
-		EC24DCD0161A89BC00016B78 /* Electric 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBF1582D3230015ED49 /* Electric 77.mp3 */; };
-		EC24DCD1161A89BC00016B78 /* Electric 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC01582D3230015ED49 /* Electric 78.mp3 */; };
-		EC24DCD2161A89BC00016B78 /* Electric 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC11582D3230015ED49 /* Electric 79.mp3 */; };
-		EC24DCD3161A89BC00016B78 /* Electric 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC21582D3230015ED49 /* Electric 80.mp3 */; };
-		EC24DCD4161A89BC00016B78 /* Electric 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC31582D3230015ED49 /* Electric 81.mp3 */; };
-		EC24DCD5161A89BC00016B78 /* Electric 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC41582D3230015ED49 /* Electric 82.mp3 */; };
-		EC24DCD6161A89BC00016B78 /* Electric 83.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC51582D3230015ED49 /* Electric 83.mp3 */; };
-		EC24DCD7161A89BC00016B78 /* Electric 84.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC61582D3230015ED49 /* Electric 84.mp3 */; };
-		EC24DCD8161A89BC00016B78 /* Electric 85.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC71582D3230015ED49 /* Electric 85.mp3 */; };
-		EC24DCD9161A89BC00016B78 /* Electric 86.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC81582D3230015ED49 /* Electric 86.mp3 */; };
-		EC24DCDA161A89BC00016B78 /* Electric 87.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC91582D3230015ED49 /* Electric 87.mp3 */; };
-		EC24DCDB161A89BC00016B78 /* Electric 88.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECA1582D3230015ED49 /* Electric 88.mp3 */; };
-		EC24DCDC161A89BC00016B78 /* Electric 89.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECB1582D3230015ED49 /* Electric 89.mp3 */; };
-		EC24DCDD161A89BC00016B78 /* Electric 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECC1582D3230015ED49 /* Electric 90.mp3 */; };
-		EC24DCDE161A89BC00016B78 /* Electric 91.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECD1582D3230015ED49 /* Electric 91.mp3 */; };
-		EC24DCDF161A89BC00016B78 /* Electric 92.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECE1582D3230015ED49 /* Electric 92.mp3 */; };
-		EC24DCE0161A89BC00016B78 /* Electric 93.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECF1582D3230015ED49 /* Electric 93.mp3 */; };
-		EC24DCE1161A89BC00016B78 /* Electric 94.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED01582D3230015ED49 /* Electric 94.mp3 */; };
-		EC24DCE2161A89BC00016B78 /* Electric 95.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED11582D3230015ED49 /* Electric 95.mp3 */; };
-		EC24DCE3161A89BC00016B78 /* Electric 96.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED21582D3230015ED49 /* Electric 96.mp3 */; };
-		EC24DCE4161A89BC00016B78 /* Electric 97.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED31582D3230015ED49 /* Electric 97.mp3 */; };
-		EC24DCE5161A89BC00016B78 /* Electric 98.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED41582D3230015ED49 /* Electric 98.mp3 */; };
-		EC24DCE6161A89BC00016B78 /* Electric 99.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED51582D3230015ED49 /* Electric 99.mp3 */; };
-		EC24DCE7161A89BC00016B78 /* Electric 100.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED61582D3230015ED49 /* Electric 100.mp3 */; };
-		EC24DCE8161A89BC00016B78 /* Electric 101.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED71582D3230015ED49 /* Electric 101.mp3 */; };
-		EC24DCE9161A89BC00016B78 /* Electric 102.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED81582D3230015ED49 /* Electric 102.mp3 */; };
-		EC24DCEA161A89BC00016B78 /* Electric 103.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED91582D3230015ED49 /* Electric 103.mp3 */; };
 		EC24DCEB161A89C000016B78 /* Acoustic Guitar 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2A05831534F6A500218ABB /* Acoustic Guitar 40.mp3 */; };
 		EC24DCEC161A89C000016B78 /* Acoustic Guitar 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2A05841534F6A500218ABB /* Acoustic Guitar 41.mp3 */; };
 		EC24DCED161A89C000016B78 /* Acoustic Guitar 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2A05851534F6A500218ABB /* Acoustic Guitar 42.mp3 */; };
@@ -1011,7 +991,7 @@
 		EC24DFC1161A8A4E00016B78 /* string-light-vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = EC677875136B7ECD005FE8D9 /* string-light-vertical.png */; };
 		EC24DFC2161A8A4E00016B78 /* string.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE30033132D9290002812B6 /* string.png */; };
 		EC24DFC3161A8A6500016B78 /* preloaded-content.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC995EB114DB3CBF00C86824 /* preloaded-content.plist */; };
-		EC24DFC4161A8A6700016B78 /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DE6576714C902770034F437 /* instruments.plist */; };
+		EC24DFC4161A8A6700016B78 /* instrumentList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DE6576714C902770034F437 /* instrumentList.plist */; };
 		EC24DFC6161A8A6D00016B78 /* tutorial.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC341B1D141702480011F6C2 /* tutorial.plist */; };
 		EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		EC26A3A516CB198F006E97E2 /* DefaultRot.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A316CB198E006E97E2 /* DefaultRot.png */; };
@@ -1096,108 +1076,6 @@
 		ECC11E52162D07AD001A231A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE3FC9F132CA6E5002812B6 /* QuartzCore.framework */; };
 		ECC11E56162D07AD001A231A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EC2F25C51468B3C100D0FC7F /* Default.png */; };
 		ECC11E57162D07AD001A231A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC9A92021468BB33009CAC83 /* Default@2x.png */; };
-		ECC11E59162D07AD001A231A /* Electric 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E741582D3230015ED49 /* Electric 2.mp3 */; };
-		ECC11E5A162D07AD001A231A /* Electric 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E751582D3230015ED49 /* Electric 3.mp3 */; };
-		ECC11E5B162D07AD001A231A /* Electric 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E761582D3230015ED49 /* Electric 4.mp3 */; };
-		ECC11E5C162D07AD001A231A /* Electric 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E771582D3230015ED49 /* Electric 5.mp3 */; };
-		ECC11E5D162D07AD001A231A /* Electric 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E781582D3230015ED49 /* Electric 6.mp3 */; };
-		ECC11E5E162D07AD001A231A /* Electric 7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E791582D3230015ED49 /* Electric 7.mp3 */; };
-		ECC11E5F162D07AD001A231A /* Electric 8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7A1582D3230015ED49 /* Electric 8.mp3 */; };
-		ECC11E60162D07AD001A231A /* Electric 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7B1582D3230015ED49 /* Electric 9.mp3 */; };
-		ECC11E61162D07AD001A231A /* Electric 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7C1582D3230015ED49 /* Electric 10.mp3 */; };
-		ECC11E62162D07AD001A231A /* Electric 11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7D1582D3230015ED49 /* Electric 11.mp3 */; };
-		ECC11E63162D07AD001A231A /* Electric 12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7E1582D3230015ED49 /* Electric 12.mp3 */; };
-		ECC11E64162D07AD001A231A /* Electric 13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E7F1582D3230015ED49 /* Electric 13.mp3 */; };
-		ECC11E65162D07AD001A231A /* Electric 14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E801582D3230015ED49 /* Electric 14.mp3 */; };
-		ECC11E66162D07AD001A231A /* Electric 15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E811582D3230015ED49 /* Electric 15.mp3 */; };
-		ECC11E67162D07AD001A231A /* Electric 16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E821582D3230015ED49 /* Electric 16.mp3 */; };
-		ECC11E68162D07AD001A231A /* Electric 17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E831582D3230015ED49 /* Electric 17.mp3 */; };
-		ECC11E69162D07AD001A231A /* Electric 18.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E841582D3230015ED49 /* Electric 18.mp3 */; };
-		ECC11E6A162D07AD001A231A /* Electric 19.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E851582D3230015ED49 /* Electric 19.mp3 */; };
-		ECC11E6B162D07AD001A231A /* Electric 20.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E861582D3230015ED49 /* Electric 20.mp3 */; };
-		ECC11E6C162D07AD001A231A /* Electric 21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E871582D3230015ED49 /* Electric 21.mp3 */; };
-		ECC11E6D162D07AD001A231A /* Electric 22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E881582D3230015ED49 /* Electric 22.mp3 */; };
-		ECC11E6E162D07AD001A231A /* Electric 23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E891582D3230015ED49 /* Electric 23.mp3 */; };
-		ECC11E6F162D07AD001A231A /* Electric 24.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8A1582D3230015ED49 /* Electric 24.mp3 */; };
-		ECC11E70162D07AD001A231A /* Electric 25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8B1582D3230015ED49 /* Electric 25.mp3 */; };
-		ECC11E71162D07AD001A231A /* Electric 26.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8C1582D3230015ED49 /* Electric 26.mp3 */; };
-		ECC11E72162D07AD001A231A /* Electric 27.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8D1582D3230015ED49 /* Electric 27.mp3 */; };
-		ECC11E73162D07AD001A231A /* Electric 28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8E1582D3230015ED49 /* Electric 28.mp3 */; };
-		ECC11E74162D07AD001A231A /* Electric 29.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E8F1582D3230015ED49 /* Electric 29.mp3 */; };
-		ECC11E75162D07AD001A231A /* Electric 30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E901582D3230015ED49 /* Electric 30.mp3 */; };
-		ECC11E76162D07AD001A231A /* Electric 31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E911582D3230015ED49 /* Electric 31.mp3 */; };
-		ECC11E77162D07AD001A231A /* Electric 32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E921582D3230015ED49 /* Electric 32.mp3 */; };
-		ECC11E78162D07AD001A231A /* Electric 33.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E931582D3230015ED49 /* Electric 33.mp3 */; };
-		ECC11E79162D07AD001A231A /* Electric 34.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E941582D3230015ED49 /* Electric 34.mp3 */; };
-		ECC11E7A162D07AD001A231A /* Electric 35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E951582D3230015ED49 /* Electric 35.mp3 */; };
-		ECC11E7B162D07AD001A231A /* Electric 36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E961582D3230015ED49 /* Electric 36.mp3 */; };
-		ECC11E7C162D07AD001A231A /* Electric 37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E971582D3230015ED49 /* Electric 37.mp3 */; };
-		ECC11E7D162D07AD001A231A /* Electric 38.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E981582D3230015ED49 /* Electric 38.mp3 */; };
-		ECC11E7E162D07AD001A231A /* Electric 39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E991582D3230015ED49 /* Electric 39.mp3 */; };
-		ECC11E7F162D07AD001A231A /* Electric 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9A1582D3230015ED49 /* Electric 40.mp3 */; };
-		ECC11E80162D07AD001A231A /* Electric 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9B1582D3230015ED49 /* Electric 41.mp3 */; };
-		ECC11E81162D07AD001A231A /* Electric 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9C1582D3230015ED49 /* Electric 42.mp3 */; };
-		ECC11E82162D07AD001A231A /* Electric 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9D1582D3230015ED49 /* Electric 43.mp3 */; };
-		ECC11E83162D07AD001A231A /* Electric 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9E1582D3230015ED49 /* Electric 44.mp3 */; };
-		ECC11E84162D07AD001A231A /* Electric 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86E9F1582D3230015ED49 /* Electric 45.mp3 */; };
-		ECC11E85162D07AD001A231A /* Electric 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA01582D3230015ED49 /* Electric 46.mp3 */; };
-		ECC11E86162D07AD001A231A /* Electric 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA11582D3230015ED49 /* Electric 47.mp3 */; };
-		ECC11E87162D07AD001A231A /* Electric 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA21582D3230015ED49 /* Electric 48.mp3 */; };
-		ECC11E88162D07AD001A231A /* Electric 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA31582D3230015ED49 /* Electric 49.mp3 */; };
-		ECC11E89162D07AD001A231A /* Electric 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA41582D3230015ED49 /* Electric 50.mp3 */; };
-		ECC11E8A162D07AD001A231A /* Electric 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA51582D3230015ED49 /* Electric 51.mp3 */; };
-		ECC11E8B162D07AD001A231A /* Electric 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA61582D3230015ED49 /* Electric 52.mp3 */; };
-		ECC11E8C162D07AD001A231A /* Electric 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA71582D3230015ED49 /* Electric 53.mp3 */; };
-		ECC11E8D162D07AD001A231A /* Electric 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA81582D3230015ED49 /* Electric 54.mp3 */; };
-		ECC11E8E162D07AD001A231A /* Electric 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EA91582D3230015ED49 /* Electric 55.mp3 */; };
-		ECC11E8F162D07AD001A231A /* Electric 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAA1582D3230015ED49 /* Electric 56.mp3 */; };
-		ECC11E90162D07AD001A231A /* Electric 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAB1582D3230015ED49 /* Electric 57.mp3 */; };
-		ECC11E91162D07AD001A231A /* Electric 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAC1582D3230015ED49 /* Electric 58.mp3 */; };
-		ECC11E92162D07AD001A231A /* Electric 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAD1582D3230015ED49 /* Electric 59.mp3 */; };
-		ECC11E93162D07AD001A231A /* Electric 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAE1582D3230015ED49 /* Electric 60.mp3 */; };
-		ECC11E94162D07AD001A231A /* Electric 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EAF1582D3230015ED49 /* Electric 61.mp3 */; };
-		ECC11E95162D07AD001A231A /* Electric 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB01582D3230015ED49 /* Electric 62.mp3 */; };
-		ECC11E96162D07AD001A231A /* Electric 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB11582D3230015ED49 /* Electric 63.mp3 */; };
-		ECC11E97162D07AD001A231A /* Electric 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB21582D3230015ED49 /* Electric 64.mp3 */; };
-		ECC11E98162D07AD001A231A /* Electric 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB31582D3230015ED49 /* Electric 65.mp3 */; };
-		ECC11E99162D07AD001A231A /* Electric 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB41582D3230015ED49 /* Electric 66.mp3 */; };
-		ECC11E9A162D07AD001A231A /* Electric 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB51582D3230015ED49 /* Electric 67.mp3 */; };
-		ECC11E9B162D07AD001A231A /* Electric 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB61582D3230015ED49 /* Electric 68.mp3 */; };
-		ECC11E9C162D07AD001A231A /* Electric 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB71582D3230015ED49 /* Electric 69.mp3 */; };
-		ECC11E9D162D07AD001A231A /* Electric 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB81582D3230015ED49 /* Electric 70.mp3 */; };
-		ECC11E9E162D07AD001A231A /* Electric 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EB91582D3230015ED49 /* Electric 71.mp3 */; };
-		ECC11E9F162D07AD001A231A /* Electric 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBA1582D3230015ED49 /* Electric 72.mp3 */; };
-		ECC11EA0162D07AD001A231A /* Electric 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBB1582D3230015ED49 /* Electric 73.mp3 */; };
-		ECC11EA1162D07AD001A231A /* Electric 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBC1582D3230015ED49 /* Electric 74.mp3 */; };
-		ECC11EA2162D07AD001A231A /* Electric 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBD1582D3230015ED49 /* Electric 75.mp3 */; };
-		ECC11EA3162D07AD001A231A /* Electric 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBE1582D3230015ED49 /* Electric 76.mp3 */; };
-		ECC11EA4162D07AD001A231A /* Electric 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EBF1582D3230015ED49 /* Electric 77.mp3 */; };
-		ECC11EA5162D07AD001A231A /* Electric 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC01582D3230015ED49 /* Electric 78.mp3 */; };
-		ECC11EA6162D07AD001A231A /* Electric 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC11582D3230015ED49 /* Electric 79.mp3 */; };
-		ECC11EA7162D07AD001A231A /* Electric 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC21582D3230015ED49 /* Electric 80.mp3 */; };
-		ECC11EA8162D07AD001A231A /* Electric 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC31582D3230015ED49 /* Electric 81.mp3 */; };
-		ECC11EA9162D07AD001A231A /* Electric 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC41582D3230015ED49 /* Electric 82.mp3 */; };
-		ECC11EAA162D07AD001A231A /* Electric 83.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC51582D3230015ED49 /* Electric 83.mp3 */; };
-		ECC11EAB162D07AD001A231A /* Electric 84.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC61582D3230015ED49 /* Electric 84.mp3 */; };
-		ECC11EAC162D07AD001A231A /* Electric 85.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC71582D3230015ED49 /* Electric 85.mp3 */; };
-		ECC11EAD162D07AD001A231A /* Electric 86.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC81582D3230015ED49 /* Electric 86.mp3 */; };
-		ECC11EAE162D07AD001A231A /* Electric 87.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86EC91582D3230015ED49 /* Electric 87.mp3 */; };
-		ECC11EAF162D07AD001A231A /* Electric 88.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECA1582D3230015ED49 /* Electric 88.mp3 */; };
-		ECC11EB0162D07AD001A231A /* Electric 89.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECB1582D3230015ED49 /* Electric 89.mp3 */; };
-		ECC11EB1162D07AD001A231A /* Electric 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECC1582D3230015ED49 /* Electric 90.mp3 */; };
-		ECC11EB2162D07AD001A231A /* Electric 91.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECD1582D3230015ED49 /* Electric 91.mp3 */; };
-		ECC11EB3162D07AD001A231A /* Electric 92.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECE1582D3230015ED49 /* Electric 92.mp3 */; };
-		ECC11EB4162D07AD001A231A /* Electric 93.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ECF1582D3230015ED49 /* Electric 93.mp3 */; };
-		ECC11EB5162D07AD001A231A /* Electric 94.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED01582D3230015ED49 /* Electric 94.mp3 */; };
-		ECC11EB6162D07AD001A231A /* Electric 95.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED11582D3230015ED49 /* Electric 95.mp3 */; };
-		ECC11EB7162D07AD001A231A /* Electric 96.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED21582D3230015ED49 /* Electric 96.mp3 */; };
-		ECC11EB8162D07AD001A231A /* Electric 97.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED31582D3230015ED49 /* Electric 97.mp3 */; };
-		ECC11EB9162D07AD001A231A /* Electric 98.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED41582D3230015ED49 /* Electric 98.mp3 */; };
-		ECC11EBA162D07AD001A231A /* Electric 99.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED51582D3230015ED49 /* Electric 99.mp3 */; };
-		ECC11EBB162D07AD001A231A /* Electric 100.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED61582D3230015ED49 /* Electric 100.mp3 */; };
-		ECC11EBC162D07AD001A231A /* Electric 101.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED71582D3230015ED49 /* Electric 101.mp3 */; };
-		ECC11EBD162D07AD001A231A /* Electric 102.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED81582D3230015ED49 /* Electric 102.mp3 */; };
-		ECC11EBE162D07AD001A231A /* Electric 103.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DA86ED91582D3230015ED49 /* Electric 103.mp3 */; };
 		ECC11EBF162D07AD001A231A /* Acoustic Guitar 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2A05831534F6A500218ABB /* Acoustic Guitar 40.mp3 */; };
 		ECC11EC0162D07AD001A231A /* Acoustic Guitar 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2A05841534F6A500218ABB /* Acoustic Guitar 41.mp3 */; };
 		ECC11EC1162D07AD001A231A /* Acoustic Guitar 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2A05851534F6A500218ABB /* Acoustic Guitar 42.mp3 */; };
@@ -1517,7 +1395,7 @@
 		ECC12191162D07AD001A231A /* string-light-vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = EC677875136B7ECD005FE8D9 /* string-light-vertical.png */; };
 		ECC12192162D07AD001A231A /* string.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE30033132D9290002812B6 /* string.png */; };
 		ECC12193162D07AD001A231A /* preloaded-content.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC995EB114DB3CBF00C86824 /* preloaded-content.plist */; };
-		ECC12194162D07AD001A231A /* instruments.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DE6576714C902770034F437 /* instruments.plist */; };
+		ECC12194162D07AD001A231A /* instrumentList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DE6576714C902770034F437 /* instrumentList.plist */; };
 		ECC12195162D07AD001A231A /* tutorial.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC341B1D141702480011F6C2 /* tutorial.plist */; };
 		ECC121C2162D07AD001A231A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		ECC121C3162D07AD001A231A /* LightsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF67161CF1F400BC5BE2 /* LightsTab.png */; };
@@ -1708,6 +1586,47 @@
 		6D594C0F1909BCF900CF3128 /* HighlightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightModel.h; sourceTree = "<group>"; };
 		6D594C101909BCF900CF3128 /* HighlightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightModel.m; sourceTree = "<group>"; };
 		6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = FacebookIcon.jpg; path = Resources/Images/Title/FacebookIcon.jpg; sourceTree = SOURCE_ROOT; };
+		6DAD0AE819187F1F005B3807 /* Warm Analogue 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 40.mp3"; sourceTree = "<group>"; };
+		6DAD0AE919187F1F005B3807 /* Warm Analogue 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 41.mp3"; sourceTree = "<group>"; };
+		6DAD0AEA19187F1F005B3807 /* Warm Analogue 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 42.mp3"; sourceTree = "<group>"; };
+		6DAD0AEB19187F1F005B3807 /* Warm Analogue 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 43.mp3"; sourceTree = "<group>"; };
+		6DAD0AEC19187F1F005B3807 /* Warm Analogue 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 44.mp3"; sourceTree = "<group>"; };
+		6DAD0AED19187F1F005B3807 /* Warm Analogue 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 45.mp3"; sourceTree = "<group>"; };
+		6DAD0AEE19187F1F005B3807 /* Warm Analogue 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 46.mp3"; sourceTree = "<group>"; };
+		6DAD0AEF19187F1F005B3807 /* Warm Analogue 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 47.mp3"; sourceTree = "<group>"; };
+		6DAD0AF019187F1F005B3807 /* Warm Analogue 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 48.mp3"; sourceTree = "<group>"; };
+		6DAD0AF119187F1F005B3807 /* Warm Analogue 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 49.mp3"; sourceTree = "<group>"; };
+		6DAD0AF219187F1F005B3807 /* Warm Analogue 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 50.mp3"; sourceTree = "<group>"; };
+		6DAD0AF319187F1F005B3807 /* Warm Analogue 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 51.mp3"; sourceTree = "<group>"; };
+		6DAD0AF419187F1F005B3807 /* Warm Analogue 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 52.mp3"; sourceTree = "<group>"; };
+		6DAD0AF519187F1F005B3807 /* Warm Analogue 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 53.mp3"; sourceTree = "<group>"; };
+		6DAD0AF619187F1F005B3807 /* Warm Analogue 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 54.mp3"; sourceTree = "<group>"; };
+		6DAD0AF719187F1F005B3807 /* Warm Analogue 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 55.mp3"; sourceTree = "<group>"; };
+		6DAD0AF819187F1F005B3807 /* Warm Analogue 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 56.mp3"; sourceTree = "<group>"; };
+		6DAD0AF919187F1F005B3807 /* Warm Analogue 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 57.mp3"; sourceTree = "<group>"; };
+		6DAD0AFA19187F1F005B3807 /* Warm Analogue 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 58.mp3"; sourceTree = "<group>"; };
+		6DAD0AFB19187F1F005B3807 /* Warm Analogue 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 59.mp3"; sourceTree = "<group>"; };
+		6DAD0AFC19187F1F005B3807 /* Warm Analogue 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 60.mp3"; sourceTree = "<group>"; };
+		6DAD0AFD19187F1F005B3807 /* Warm Analogue 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 61.mp3"; sourceTree = "<group>"; };
+		6DAD0AFE19187F1F005B3807 /* Warm Analogue 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 62.mp3"; sourceTree = "<group>"; };
+		6DAD0AFF19187F1F005B3807 /* Warm Analogue 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 63.mp3"; sourceTree = "<group>"; };
+		6DAD0B0019187F1F005B3807 /* Warm Analogue 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 64.mp3"; sourceTree = "<group>"; };
+		6DAD0B0119187F1F005B3807 /* Warm Analogue 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 65.mp3"; sourceTree = "<group>"; };
+		6DAD0B0219187F1F005B3807 /* Warm Analogue 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 66.mp3"; sourceTree = "<group>"; };
+		6DAD0B0319187F1F005B3807 /* Warm Analogue 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 67.mp3"; sourceTree = "<group>"; };
+		6DAD0B0419187F1F005B3807 /* Warm Analogue 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 68.mp3"; sourceTree = "<group>"; };
+		6DAD0B0519187F1F005B3807 /* Warm Analogue 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 69.mp3"; sourceTree = "<group>"; };
+		6DAD0B0619187F1F005B3807 /* Warm Analogue 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 70.mp3"; sourceTree = "<group>"; };
+		6DAD0B0719187F1F005B3807 /* Warm Analogue 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 71.mp3"; sourceTree = "<group>"; };
+		6DAD0B0819187F1F005B3807 /* Warm Analogue 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 72.mp3"; sourceTree = "<group>"; };
+		6DAD0B0919187F1F005B3807 /* Warm Analogue 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 73.mp3"; sourceTree = "<group>"; };
+		6DAD0B0A19187F1F005B3807 /* Warm Analogue 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 74.mp3"; sourceTree = "<group>"; };
+		6DAD0B0B19187F1F005B3807 /* Warm Analogue 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 75.mp3"; sourceTree = "<group>"; };
+		6DAD0B0C19187F1F005B3807 /* Warm Analogue 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 76.mp3"; sourceTree = "<group>"; };
+		6DAD0B0D19187F1F005B3807 /* Warm Analogue 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 77.mp3"; sourceTree = "<group>"; };
+		6DAD0B0E19187F1F005B3807 /* Warm Analogue 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 78.mp3"; sourceTree = "<group>"; };
+		6DAD0B0F19187F1F005B3807 /* Warm Analogue 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 79.mp3"; sourceTree = "<group>"; };
+		6DAD0B1019187F1F005B3807 /* Warm Analogue 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 80.mp3"; sourceTree = "<group>"; };
 		6DC3D837190ED80E003AAD4E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC3D838190ED83A003AAD4E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC3D839190ED847003AAD4E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1717,6 +1636,47 @@
 		6DC3D83D190F0240003AAD4E /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6DD5FB0018FCB8A40066C888 /* SongPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongPlaybackController.h; sourceTree = "<group>"; };
 		6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPlaybackController.m; sourceTree = "<group>"; };
+		6DED8768191874460091721E /* Electric Guitar 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 40.mp3"; sourceTree = "<group>"; };
+		6DED8769191874460091721E /* Electric Guitar 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 41.mp3"; sourceTree = "<group>"; };
+		6DED876A191874460091721E /* Electric Guitar 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 42.mp3"; sourceTree = "<group>"; };
+		6DED876B191874460091721E /* Electric Guitar 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 43.mp3"; sourceTree = "<group>"; };
+		6DED876C191874460091721E /* Electric Guitar 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 44.mp3"; sourceTree = "<group>"; };
+		6DED876D191874460091721E /* Electric Guitar 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 45.mp3"; sourceTree = "<group>"; };
+		6DED876E191874460091721E /* Electric Guitar 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 46.mp3"; sourceTree = "<group>"; };
+		6DED876F191874460091721E /* Electric Guitar 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 47.mp3"; sourceTree = "<group>"; };
+		6DED8770191874460091721E /* Electric Guitar 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 48.mp3"; sourceTree = "<group>"; };
+		6DED8771191874460091721E /* Electric Guitar 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 49.mp3"; sourceTree = "<group>"; };
+		6DED8772191874460091721E /* Electric Guitar 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 50.mp3"; sourceTree = "<group>"; };
+		6DED8773191874460091721E /* Electric Guitar 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 51.mp3"; sourceTree = "<group>"; };
+		6DED8774191874460091721E /* Electric Guitar 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 52.mp3"; sourceTree = "<group>"; };
+		6DED8775191874460091721E /* Electric Guitar 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 53.mp3"; sourceTree = "<group>"; };
+		6DED8776191874460091721E /* Electric Guitar 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 54.mp3"; sourceTree = "<group>"; };
+		6DED8777191874460091721E /* Electric Guitar 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 55.mp3"; sourceTree = "<group>"; };
+		6DED8778191874460091721E /* Electric Guitar 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 56.mp3"; sourceTree = "<group>"; };
+		6DED8779191874460091721E /* Electric Guitar 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 57.mp3"; sourceTree = "<group>"; };
+		6DED877A191874460091721E /* Electric Guitar 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 58.mp3"; sourceTree = "<group>"; };
+		6DED877B191874460091721E /* Electric Guitar 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 59.mp3"; sourceTree = "<group>"; };
+		6DED877C191874460091721E /* Electric Guitar 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 60.mp3"; sourceTree = "<group>"; };
+		6DED877D191874460091721E /* Electric Guitar 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 61.mp3"; sourceTree = "<group>"; };
+		6DED877E191874460091721E /* Electric Guitar 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 62.mp3"; sourceTree = "<group>"; };
+		6DED877F191874460091721E /* Electric Guitar 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 63.mp3"; sourceTree = "<group>"; };
+		6DED8780191874460091721E /* Electric Guitar 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 64.mp3"; sourceTree = "<group>"; };
+		6DED8781191874460091721E /* Electric Guitar 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 65.mp3"; sourceTree = "<group>"; };
+		6DED8782191874460091721E /* Electric Guitar 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 66.mp3"; sourceTree = "<group>"; };
+		6DED8783191874460091721E /* Electric Guitar 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 67.mp3"; sourceTree = "<group>"; };
+		6DED8784191874460091721E /* Electric Guitar 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 68.mp3"; sourceTree = "<group>"; };
+		6DED8785191874460091721E /* Electric Guitar 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 69.mp3"; sourceTree = "<group>"; };
+		6DED8786191874460091721E /* Electric Guitar 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 70.mp3"; sourceTree = "<group>"; };
+		6DED8787191874460091721E /* Electric Guitar 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 71.mp3"; sourceTree = "<group>"; };
+		6DED8788191874460091721E /* Electric Guitar 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 72.mp3"; sourceTree = "<group>"; };
+		6DED8789191874460091721E /* Electric Guitar 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 73.mp3"; sourceTree = "<group>"; };
+		6DED878A191874460091721E /* Electric Guitar 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 74.mp3"; sourceTree = "<group>"; };
+		6DED878B191874460091721E /* Electric Guitar 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 75.mp3"; sourceTree = "<group>"; };
+		6DED878C191874460091721E /* Electric Guitar 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 76.mp3"; sourceTree = "<group>"; };
+		6DED878D191874460091721E /* Electric Guitar 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 77.mp3"; sourceTree = "<group>"; };
+		6DED878E191874460091721E /* Electric Guitar 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 78.mp3"; sourceTree = "<group>"; };
+		6DED878F191874460091721E /* Electric Guitar 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 79.mp3"; sourceTree = "<group>"; };
+		6DED8790191874460091721E /* Electric Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 80.mp3"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* gTarPlay-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "gTarPlay-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bowed Strings 40.mp3"; sourceTree = "<group>"; };
 		9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bowed Strings 41.mp3"; sourceTree = "<group>"; };
@@ -2115,108 +2075,6 @@
 		9DA3138E1704FA3000CFF104 /* FPMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPMenuViewController.h; sourceTree = "<group>"; };
 		9DA3138F1704FA3000CFF104 /* FPMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPMenuViewController.m; sourceTree = "<group>"; };
 		9DA313901704FA3000CFF104 /* FPMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPMenuViewController.xib; sourceTree = "<group>"; };
-		9DA86E741582D3230015ED49 /* Electric 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 2.mp3"; path = "Strat/Electric 2.mp3"; sourceTree = "<group>"; };
-		9DA86E751582D3230015ED49 /* Electric 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 3.mp3"; path = "Strat/Electric 3.mp3"; sourceTree = "<group>"; };
-		9DA86E761582D3230015ED49 /* Electric 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 4.mp3"; path = "Strat/Electric 4.mp3"; sourceTree = "<group>"; };
-		9DA86E771582D3230015ED49 /* Electric 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 5.mp3"; path = "Strat/Electric 5.mp3"; sourceTree = "<group>"; };
-		9DA86E781582D3230015ED49 /* Electric 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 6.mp3"; path = "Strat/Electric 6.mp3"; sourceTree = "<group>"; };
-		9DA86E791582D3230015ED49 /* Electric 7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 7.mp3"; path = "Strat/Electric 7.mp3"; sourceTree = "<group>"; };
-		9DA86E7A1582D3230015ED49 /* Electric 8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 8.mp3"; path = "Strat/Electric 8.mp3"; sourceTree = "<group>"; };
-		9DA86E7B1582D3230015ED49 /* Electric 9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 9.mp3"; path = "Strat/Electric 9.mp3"; sourceTree = "<group>"; };
-		9DA86E7C1582D3230015ED49 /* Electric 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 10.mp3"; path = "Strat/Electric 10.mp3"; sourceTree = "<group>"; };
-		9DA86E7D1582D3230015ED49 /* Electric 11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 11.mp3"; path = "Strat/Electric 11.mp3"; sourceTree = "<group>"; };
-		9DA86E7E1582D3230015ED49 /* Electric 12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 12.mp3"; path = "Strat/Electric 12.mp3"; sourceTree = "<group>"; };
-		9DA86E7F1582D3230015ED49 /* Electric 13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 13.mp3"; path = "Strat/Electric 13.mp3"; sourceTree = "<group>"; };
-		9DA86E801582D3230015ED49 /* Electric 14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 14.mp3"; path = "Strat/Electric 14.mp3"; sourceTree = "<group>"; };
-		9DA86E811582D3230015ED49 /* Electric 15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 15.mp3"; path = "Strat/Electric 15.mp3"; sourceTree = "<group>"; };
-		9DA86E821582D3230015ED49 /* Electric 16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 16.mp3"; path = "Strat/Electric 16.mp3"; sourceTree = "<group>"; };
-		9DA86E831582D3230015ED49 /* Electric 17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 17.mp3"; path = "Strat/Electric 17.mp3"; sourceTree = "<group>"; };
-		9DA86E841582D3230015ED49 /* Electric 18.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 18.mp3"; path = "Strat/Electric 18.mp3"; sourceTree = "<group>"; };
-		9DA86E851582D3230015ED49 /* Electric 19.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 19.mp3"; path = "Strat/Electric 19.mp3"; sourceTree = "<group>"; };
-		9DA86E861582D3230015ED49 /* Electric 20.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 20.mp3"; path = "Strat/Electric 20.mp3"; sourceTree = "<group>"; };
-		9DA86E871582D3230015ED49 /* Electric 21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 21.mp3"; path = "Strat/Electric 21.mp3"; sourceTree = "<group>"; };
-		9DA86E881582D3230015ED49 /* Electric 22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 22.mp3"; path = "Strat/Electric 22.mp3"; sourceTree = "<group>"; };
-		9DA86E891582D3230015ED49 /* Electric 23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 23.mp3"; path = "Strat/Electric 23.mp3"; sourceTree = "<group>"; };
-		9DA86E8A1582D3230015ED49 /* Electric 24.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 24.mp3"; path = "Strat/Electric 24.mp3"; sourceTree = "<group>"; };
-		9DA86E8B1582D3230015ED49 /* Electric 25.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 25.mp3"; path = "Strat/Electric 25.mp3"; sourceTree = "<group>"; };
-		9DA86E8C1582D3230015ED49 /* Electric 26.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 26.mp3"; path = "Strat/Electric 26.mp3"; sourceTree = "<group>"; };
-		9DA86E8D1582D3230015ED49 /* Electric 27.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 27.mp3"; path = "Strat/Electric 27.mp3"; sourceTree = "<group>"; };
-		9DA86E8E1582D3230015ED49 /* Electric 28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 28.mp3"; path = "Strat/Electric 28.mp3"; sourceTree = "<group>"; };
-		9DA86E8F1582D3230015ED49 /* Electric 29.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 29.mp3"; path = "Strat/Electric 29.mp3"; sourceTree = "<group>"; };
-		9DA86E901582D3230015ED49 /* Electric 30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 30.mp3"; path = "Strat/Electric 30.mp3"; sourceTree = "<group>"; };
-		9DA86E911582D3230015ED49 /* Electric 31.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 31.mp3"; path = "Strat/Electric 31.mp3"; sourceTree = "<group>"; };
-		9DA86E921582D3230015ED49 /* Electric 32.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 32.mp3"; path = "Strat/Electric 32.mp3"; sourceTree = "<group>"; };
-		9DA86E931582D3230015ED49 /* Electric 33.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 33.mp3"; path = "Strat/Electric 33.mp3"; sourceTree = "<group>"; };
-		9DA86E941582D3230015ED49 /* Electric 34.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 34.mp3"; path = "Strat/Electric 34.mp3"; sourceTree = "<group>"; };
-		9DA86E951582D3230015ED49 /* Electric 35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 35.mp3"; path = "Strat/Electric 35.mp3"; sourceTree = "<group>"; };
-		9DA86E961582D3230015ED49 /* Electric 36.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 36.mp3"; path = "Strat/Electric 36.mp3"; sourceTree = "<group>"; };
-		9DA86E971582D3230015ED49 /* Electric 37.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 37.mp3"; path = "Strat/Electric 37.mp3"; sourceTree = "<group>"; };
-		9DA86E981582D3230015ED49 /* Electric 38.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 38.mp3"; path = "Strat/Electric 38.mp3"; sourceTree = "<group>"; };
-		9DA86E991582D3230015ED49 /* Electric 39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 39.mp3"; path = "Strat/Electric 39.mp3"; sourceTree = "<group>"; };
-		9DA86E9A1582D3230015ED49 /* Electric 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 40.mp3"; path = "Strat/Electric 40.mp3"; sourceTree = "<group>"; };
-		9DA86E9B1582D3230015ED49 /* Electric 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 41.mp3"; path = "Strat/Electric 41.mp3"; sourceTree = "<group>"; };
-		9DA86E9C1582D3230015ED49 /* Electric 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 42.mp3"; path = "Strat/Electric 42.mp3"; sourceTree = "<group>"; };
-		9DA86E9D1582D3230015ED49 /* Electric 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 43.mp3"; path = "Strat/Electric 43.mp3"; sourceTree = "<group>"; };
-		9DA86E9E1582D3230015ED49 /* Electric 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 44.mp3"; path = "Strat/Electric 44.mp3"; sourceTree = "<group>"; };
-		9DA86E9F1582D3230015ED49 /* Electric 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 45.mp3"; path = "Strat/Electric 45.mp3"; sourceTree = "<group>"; };
-		9DA86EA01582D3230015ED49 /* Electric 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 46.mp3"; path = "Strat/Electric 46.mp3"; sourceTree = "<group>"; };
-		9DA86EA11582D3230015ED49 /* Electric 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 47.mp3"; path = "Strat/Electric 47.mp3"; sourceTree = "<group>"; };
-		9DA86EA21582D3230015ED49 /* Electric 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 48.mp3"; path = "Strat/Electric 48.mp3"; sourceTree = "<group>"; };
-		9DA86EA31582D3230015ED49 /* Electric 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 49.mp3"; path = "Strat/Electric 49.mp3"; sourceTree = "<group>"; };
-		9DA86EA41582D3230015ED49 /* Electric 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 50.mp3"; path = "Strat/Electric 50.mp3"; sourceTree = "<group>"; };
-		9DA86EA51582D3230015ED49 /* Electric 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 51.mp3"; path = "Strat/Electric 51.mp3"; sourceTree = "<group>"; };
-		9DA86EA61582D3230015ED49 /* Electric 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 52.mp3"; path = "Strat/Electric 52.mp3"; sourceTree = "<group>"; };
-		9DA86EA71582D3230015ED49 /* Electric 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 53.mp3"; path = "Strat/Electric 53.mp3"; sourceTree = "<group>"; };
-		9DA86EA81582D3230015ED49 /* Electric 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 54.mp3"; path = "Strat/Electric 54.mp3"; sourceTree = "<group>"; };
-		9DA86EA91582D3230015ED49 /* Electric 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 55.mp3"; path = "Strat/Electric 55.mp3"; sourceTree = "<group>"; };
-		9DA86EAA1582D3230015ED49 /* Electric 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 56.mp3"; path = "Strat/Electric 56.mp3"; sourceTree = "<group>"; };
-		9DA86EAB1582D3230015ED49 /* Electric 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 57.mp3"; path = "Strat/Electric 57.mp3"; sourceTree = "<group>"; };
-		9DA86EAC1582D3230015ED49 /* Electric 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 58.mp3"; path = "Strat/Electric 58.mp3"; sourceTree = "<group>"; };
-		9DA86EAD1582D3230015ED49 /* Electric 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 59.mp3"; path = "Strat/Electric 59.mp3"; sourceTree = "<group>"; };
-		9DA86EAE1582D3230015ED49 /* Electric 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 60.mp3"; path = "Strat/Electric 60.mp3"; sourceTree = "<group>"; };
-		9DA86EAF1582D3230015ED49 /* Electric 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 61.mp3"; path = "Strat/Electric 61.mp3"; sourceTree = "<group>"; };
-		9DA86EB01582D3230015ED49 /* Electric 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 62.mp3"; path = "Strat/Electric 62.mp3"; sourceTree = "<group>"; };
-		9DA86EB11582D3230015ED49 /* Electric 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 63.mp3"; path = "Strat/Electric 63.mp3"; sourceTree = "<group>"; };
-		9DA86EB21582D3230015ED49 /* Electric 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 64.mp3"; path = "Strat/Electric 64.mp3"; sourceTree = "<group>"; };
-		9DA86EB31582D3230015ED49 /* Electric 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 65.mp3"; path = "Strat/Electric 65.mp3"; sourceTree = "<group>"; };
-		9DA86EB41582D3230015ED49 /* Electric 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 66.mp3"; path = "Strat/Electric 66.mp3"; sourceTree = "<group>"; };
-		9DA86EB51582D3230015ED49 /* Electric 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 67.mp3"; path = "Strat/Electric 67.mp3"; sourceTree = "<group>"; };
-		9DA86EB61582D3230015ED49 /* Electric 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 68.mp3"; path = "Strat/Electric 68.mp3"; sourceTree = "<group>"; };
-		9DA86EB71582D3230015ED49 /* Electric 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 69.mp3"; path = "Strat/Electric 69.mp3"; sourceTree = "<group>"; };
-		9DA86EB81582D3230015ED49 /* Electric 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 70.mp3"; path = "Strat/Electric 70.mp3"; sourceTree = "<group>"; };
-		9DA86EB91582D3230015ED49 /* Electric 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 71.mp3"; path = "Strat/Electric 71.mp3"; sourceTree = "<group>"; };
-		9DA86EBA1582D3230015ED49 /* Electric 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 72.mp3"; path = "Strat/Electric 72.mp3"; sourceTree = "<group>"; };
-		9DA86EBB1582D3230015ED49 /* Electric 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 73.mp3"; path = "Strat/Electric 73.mp3"; sourceTree = "<group>"; };
-		9DA86EBC1582D3230015ED49 /* Electric 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 74.mp3"; path = "Strat/Electric 74.mp3"; sourceTree = "<group>"; };
-		9DA86EBD1582D3230015ED49 /* Electric 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 75.mp3"; path = "Strat/Electric 75.mp3"; sourceTree = "<group>"; };
-		9DA86EBE1582D3230015ED49 /* Electric 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 76.mp3"; path = "Strat/Electric 76.mp3"; sourceTree = "<group>"; };
-		9DA86EBF1582D3230015ED49 /* Electric 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 77.mp3"; path = "Strat/Electric 77.mp3"; sourceTree = "<group>"; };
-		9DA86EC01582D3230015ED49 /* Electric 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 78.mp3"; path = "Strat/Electric 78.mp3"; sourceTree = "<group>"; };
-		9DA86EC11582D3230015ED49 /* Electric 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 79.mp3"; path = "Strat/Electric 79.mp3"; sourceTree = "<group>"; };
-		9DA86EC21582D3230015ED49 /* Electric 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 80.mp3"; path = "Strat/Electric 80.mp3"; sourceTree = "<group>"; };
-		9DA86EC31582D3230015ED49 /* Electric 81.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 81.mp3"; path = "Strat/Electric 81.mp3"; sourceTree = "<group>"; };
-		9DA86EC41582D3230015ED49 /* Electric 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 82.mp3"; path = "Strat/Electric 82.mp3"; sourceTree = "<group>"; };
-		9DA86EC51582D3230015ED49 /* Electric 83.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 83.mp3"; path = "Strat/Electric 83.mp3"; sourceTree = "<group>"; };
-		9DA86EC61582D3230015ED49 /* Electric 84.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 84.mp3"; path = "Strat/Electric 84.mp3"; sourceTree = "<group>"; };
-		9DA86EC71582D3230015ED49 /* Electric 85.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 85.mp3"; path = "Strat/Electric 85.mp3"; sourceTree = "<group>"; };
-		9DA86EC81582D3230015ED49 /* Electric 86.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 86.mp3"; path = "Strat/Electric 86.mp3"; sourceTree = "<group>"; };
-		9DA86EC91582D3230015ED49 /* Electric 87.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 87.mp3"; path = "Strat/Electric 87.mp3"; sourceTree = "<group>"; };
-		9DA86ECA1582D3230015ED49 /* Electric 88.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 88.mp3"; path = "Strat/Electric 88.mp3"; sourceTree = "<group>"; };
-		9DA86ECB1582D3230015ED49 /* Electric 89.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 89.mp3"; path = "Strat/Electric 89.mp3"; sourceTree = "<group>"; };
-		9DA86ECC1582D3230015ED49 /* Electric 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 90.mp3"; path = "Strat/Electric 90.mp3"; sourceTree = "<group>"; };
-		9DA86ECD1582D3230015ED49 /* Electric 91.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 91.mp3"; path = "Strat/Electric 91.mp3"; sourceTree = "<group>"; };
-		9DA86ECE1582D3230015ED49 /* Electric 92.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 92.mp3"; path = "Strat/Electric 92.mp3"; sourceTree = "<group>"; };
-		9DA86ECF1582D3230015ED49 /* Electric 93.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 93.mp3"; path = "Strat/Electric 93.mp3"; sourceTree = "<group>"; };
-		9DA86ED01582D3230015ED49 /* Electric 94.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 94.mp3"; path = "Strat/Electric 94.mp3"; sourceTree = "<group>"; };
-		9DA86ED11582D3230015ED49 /* Electric 95.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 95.mp3"; path = "Strat/Electric 95.mp3"; sourceTree = "<group>"; };
-		9DA86ED21582D3230015ED49 /* Electric 96.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 96.mp3"; path = "Strat/Electric 96.mp3"; sourceTree = "<group>"; };
-		9DA86ED31582D3230015ED49 /* Electric 97.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 97.mp3"; path = "Strat/Electric 97.mp3"; sourceTree = "<group>"; };
-		9DA86ED41582D3230015ED49 /* Electric 98.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 98.mp3"; path = "Strat/Electric 98.mp3"; sourceTree = "<group>"; };
-		9DA86ED51582D3230015ED49 /* Electric 99.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 99.mp3"; path = "Strat/Electric 99.mp3"; sourceTree = "<group>"; };
-		9DA86ED61582D3230015ED49 /* Electric 100.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 100.mp3"; path = "Strat/Electric 100.mp3"; sourceTree = "<group>"; };
-		9DA86ED71582D3230015ED49 /* Electric 101.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 101.mp3"; path = "Strat/Electric 101.mp3"; sourceTree = "<group>"; };
-		9DA86ED81582D3230015ED49 /* Electric 102.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 102.mp3"; path = "Strat/Electric 102.mp3"; sourceTree = "<group>"; };
-		9DA86ED91582D3230015ED49 /* Electric 103.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Electric 103.mp3"; path = "Strat/Electric 103.mp3"; sourceTree = "<group>"; };
 		9DB5C4BA17430FA700EAF9A6 /* Shape_2x2ButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shape_2x2ButtonOFF.png; path = Resources/Images/Freeplay/Shape_2x2ButtonOFF.png; sourceTree = "<group>"; };
 		9DB5C4BB17430FA700EAF9A6 /* Shape_2x2ButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shape_2x2ButtonON.png; path = Resources/Images/Freeplay/Shape_2x2ButtonON.png; sourceTree = "<group>"; };
 		9DB5C4BC17430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shape_ContinuousButtonOFF.png; path = Resources/Images/Freeplay/Shape_ContinuousButtonOFF.png; sourceTree = "<group>"; };
@@ -2278,7 +2136,7 @@
 		9DDE46A6152D1EBD002CD6AA /* LgSquareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LgSquareButton.png; path = images/FreePlay/LgSquareButton.png; sourceTree = "<group>"; };
 		9DDE46A7152D1EBD002CD6AA /* SmSquareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SmSquareButton.png; path = images/FreePlay/SmSquareButton.png; sourceTree = "<group>"; };
 		9DE5C64516F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "12b-Ver2_FreePlay_INSTR2.jpg"; path = "Resources/Images/Freeplay/12b-Ver2_FreePlay_INSTR2.jpg"; sourceTree = "<group>"; };
-		9DE6576714C902770034F437 /* instruments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instruments.plist; sourceTree = "<group>"; };
+		9DE6576714C902770034F437 /* instrumentList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instrumentList.plist; sourceTree = "<group>"; };
 		9DE6B3491713A69B0083B980 /* EffectsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsTableViewController.h; sourceTree = "<group>"; };
 		9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectsTableViewController.m; sourceTree = "<group>"; };
 		9DE9FFBD155CD9C500F92DBE /* Droplet 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 52.mp3"; sourceTree = "<group>"; };
@@ -2758,6 +2616,54 @@
 			path = TestFlightSDK3.0.0;
 			sourceTree = "<group>";
 		};
+		6DAD0AE719187F1F005B3807 /* Warm Analogue */ = {
+			isa = PBXGroup;
+			children = (
+				6DAD0AE819187F1F005B3807 /* Warm Analogue 40.mp3 */,
+				6DAD0AE919187F1F005B3807 /* Warm Analogue 41.mp3 */,
+				6DAD0AEA19187F1F005B3807 /* Warm Analogue 42.mp3 */,
+				6DAD0AEB19187F1F005B3807 /* Warm Analogue 43.mp3 */,
+				6DAD0AEC19187F1F005B3807 /* Warm Analogue 44.mp3 */,
+				6DAD0AED19187F1F005B3807 /* Warm Analogue 45.mp3 */,
+				6DAD0AEE19187F1F005B3807 /* Warm Analogue 46.mp3 */,
+				6DAD0AEF19187F1F005B3807 /* Warm Analogue 47.mp3 */,
+				6DAD0AF019187F1F005B3807 /* Warm Analogue 48.mp3 */,
+				6DAD0AF119187F1F005B3807 /* Warm Analogue 49.mp3 */,
+				6DAD0AF219187F1F005B3807 /* Warm Analogue 50.mp3 */,
+				6DAD0AF319187F1F005B3807 /* Warm Analogue 51.mp3 */,
+				6DAD0AF419187F1F005B3807 /* Warm Analogue 52.mp3 */,
+				6DAD0AF519187F1F005B3807 /* Warm Analogue 53.mp3 */,
+				6DAD0AF619187F1F005B3807 /* Warm Analogue 54.mp3 */,
+				6DAD0AF719187F1F005B3807 /* Warm Analogue 55.mp3 */,
+				6DAD0AF819187F1F005B3807 /* Warm Analogue 56.mp3 */,
+				6DAD0AF919187F1F005B3807 /* Warm Analogue 57.mp3 */,
+				6DAD0AFA19187F1F005B3807 /* Warm Analogue 58.mp3 */,
+				6DAD0AFB19187F1F005B3807 /* Warm Analogue 59.mp3 */,
+				6DAD0AFC19187F1F005B3807 /* Warm Analogue 60.mp3 */,
+				6DAD0AFD19187F1F005B3807 /* Warm Analogue 61.mp3 */,
+				6DAD0AFE19187F1F005B3807 /* Warm Analogue 62.mp3 */,
+				6DAD0AFF19187F1F005B3807 /* Warm Analogue 63.mp3 */,
+				6DAD0B0019187F1F005B3807 /* Warm Analogue 64.mp3 */,
+				6DAD0B0119187F1F005B3807 /* Warm Analogue 65.mp3 */,
+				6DAD0B0219187F1F005B3807 /* Warm Analogue 66.mp3 */,
+				6DAD0B0319187F1F005B3807 /* Warm Analogue 67.mp3 */,
+				6DAD0B0419187F1F005B3807 /* Warm Analogue 68.mp3 */,
+				6DAD0B0519187F1F005B3807 /* Warm Analogue 69.mp3 */,
+				6DAD0B0619187F1F005B3807 /* Warm Analogue 70.mp3 */,
+				6DAD0B0719187F1F005B3807 /* Warm Analogue 71.mp3 */,
+				6DAD0B0819187F1F005B3807 /* Warm Analogue 72.mp3 */,
+				6DAD0B0919187F1F005B3807 /* Warm Analogue 73.mp3 */,
+				6DAD0B0A19187F1F005B3807 /* Warm Analogue 74.mp3 */,
+				6DAD0B0B19187F1F005B3807 /* Warm Analogue 75.mp3 */,
+				6DAD0B0C19187F1F005B3807 /* Warm Analogue 76.mp3 */,
+				6DAD0B0D19187F1F005B3807 /* Warm Analogue 77.mp3 */,
+				6DAD0B0E19187F1F005B3807 /* Warm Analogue 78.mp3 */,
+				6DAD0B0F19187F1F005B3807 /* Warm Analogue 79.mp3 */,
+				6DAD0B1019187F1F005B3807 /* Warm Analogue 80.mp3 */,
+			);
+			path = "Warm Analogue";
+			sourceTree = "<group>";
+		};
 		6DD5FAFF18FCA3460066C888 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -2767,6 +2673,54 @@
 				6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */,
 			);
 			name = Audio;
+			sourceTree = "<group>";
+		};
+		6DED8767191874460091721E /* Electric Guitar */ = {
+			isa = PBXGroup;
+			children = (
+				6DED8768191874460091721E /* Electric Guitar 40.mp3 */,
+				6DED8769191874460091721E /* Electric Guitar 41.mp3 */,
+				6DED876A191874460091721E /* Electric Guitar 42.mp3 */,
+				6DED876B191874460091721E /* Electric Guitar 43.mp3 */,
+				6DED876C191874460091721E /* Electric Guitar 44.mp3 */,
+				6DED876D191874460091721E /* Electric Guitar 45.mp3 */,
+				6DED876E191874460091721E /* Electric Guitar 46.mp3 */,
+				6DED876F191874460091721E /* Electric Guitar 47.mp3 */,
+				6DED8770191874460091721E /* Electric Guitar 48.mp3 */,
+				6DED8771191874460091721E /* Electric Guitar 49.mp3 */,
+				6DED8772191874460091721E /* Electric Guitar 50.mp3 */,
+				6DED8773191874460091721E /* Electric Guitar 51.mp3 */,
+				6DED8774191874460091721E /* Electric Guitar 52.mp3 */,
+				6DED8775191874460091721E /* Electric Guitar 53.mp3 */,
+				6DED8776191874460091721E /* Electric Guitar 54.mp3 */,
+				6DED8777191874460091721E /* Electric Guitar 55.mp3 */,
+				6DED8778191874460091721E /* Electric Guitar 56.mp3 */,
+				6DED8779191874460091721E /* Electric Guitar 57.mp3 */,
+				6DED877A191874460091721E /* Electric Guitar 58.mp3 */,
+				6DED877B191874460091721E /* Electric Guitar 59.mp3 */,
+				6DED877C191874460091721E /* Electric Guitar 60.mp3 */,
+				6DED877D191874460091721E /* Electric Guitar 61.mp3 */,
+				6DED877E191874460091721E /* Electric Guitar 62.mp3 */,
+				6DED877F191874460091721E /* Electric Guitar 63.mp3 */,
+				6DED8780191874460091721E /* Electric Guitar 64.mp3 */,
+				6DED8781191874460091721E /* Electric Guitar 65.mp3 */,
+				6DED8782191874460091721E /* Electric Guitar 66.mp3 */,
+				6DED8783191874460091721E /* Electric Guitar 67.mp3 */,
+				6DED8784191874460091721E /* Electric Guitar 68.mp3 */,
+				6DED8785191874460091721E /* Electric Guitar 69.mp3 */,
+				6DED8786191874460091721E /* Electric Guitar 70.mp3 */,
+				6DED8787191874460091721E /* Electric Guitar 71.mp3 */,
+				6DED8788191874460091721E /* Electric Guitar 72.mp3 */,
+				6DED8789191874460091721E /* Electric Guitar 73.mp3 */,
+				6DED878A191874460091721E /* Electric Guitar 74.mp3 */,
+				6DED878B191874460091721E /* Electric Guitar 75.mp3 */,
+				6DED878C191874460091721E /* Electric Guitar 76.mp3 */,
+				6DED878D191874460091721E /* Electric Guitar 77.mp3 */,
+				6DED878E191874460091721E /* Electric Guitar 78.mp3 */,
+				6DED878F191874460091721E /* Electric Guitar 79.mp3 */,
+				6DED8790191874460091721E /* Electric Guitar 80.mp3 */,
+			);
+			path = "Electric Guitar";
 			sourceTree = "<group>";
 		};
 		9D054C84174C68E000FA3239 /* Bowed Strings */ = {
@@ -3012,19 +2966,20 @@
 		9D0BF7B814B57F8F00CF6372 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				6DAD0AE719187F1F005B3807 /* Warm Analogue */,
+				6DED8767191874460091721E /* Electric Guitar */,
 				9D054E74174D425B00FA3239 /* Marimba */,
 				9D054DF8174C68FB00FA3239 /* Upright Bass */,
 				9D054D7C174C68EE00FA3239 /* Muted Clav */,
 				9D054D00174C68E700FA3239 /* Carl's Synth */,
 				9D054C84174C68E000FA3239 /* Bowed Strings */,
-				9DA86E721582D3070015ED49 /* Electric */,
 				9D2A05821534E2BD00218ABB /* Acoustic Guitar */,
 				9D63D7D1155085FE00FABD5B /* Rock Guitar */,
 				9D63D34C154F221100FABD5B /* Piano */,
 				EC31B9C314E0726D00DC7083 /* Rhodes */,
 				9DE9FFBC155CD9C400F92DBE /* Droplet */,
 				9D2DFF7A1564DCBF006B38C0 /* Square */,
-				9DE6576714C902770034F437 /* instruments.plist */,
+				9DE6576714C902770034F437 /* instrumentList.plist */,
 			);
 			name = Audio;
 			path = Resources/Audio;
@@ -3239,115 +3194,6 @@
 				26868D8D17D6C5AB00DC990F /* SongPurchaseRequest.m */,
 			);
 			name = Store;
-			sourceTree = "<group>";
-		};
-		9DA86E721582D3070015ED49 /* Electric */ = {
-			isa = PBXGroup;
-			children = (
-				9DA86E741582D3230015ED49 /* Electric 2.mp3 */,
-				9DA86E751582D3230015ED49 /* Electric 3.mp3 */,
-				9DA86E761582D3230015ED49 /* Electric 4.mp3 */,
-				9DA86E771582D3230015ED49 /* Electric 5.mp3 */,
-				9DA86E781582D3230015ED49 /* Electric 6.mp3 */,
-				9DA86E791582D3230015ED49 /* Electric 7.mp3 */,
-				9DA86E7A1582D3230015ED49 /* Electric 8.mp3 */,
-				9DA86E7B1582D3230015ED49 /* Electric 9.mp3 */,
-				9DA86E7C1582D3230015ED49 /* Electric 10.mp3 */,
-				9DA86E7D1582D3230015ED49 /* Electric 11.mp3 */,
-				9DA86E7E1582D3230015ED49 /* Electric 12.mp3 */,
-				9DA86E7F1582D3230015ED49 /* Electric 13.mp3 */,
-				9DA86E801582D3230015ED49 /* Electric 14.mp3 */,
-				9DA86E811582D3230015ED49 /* Electric 15.mp3 */,
-				9DA86E821582D3230015ED49 /* Electric 16.mp3 */,
-				9DA86E831582D3230015ED49 /* Electric 17.mp3 */,
-				9DA86E841582D3230015ED49 /* Electric 18.mp3 */,
-				9DA86E851582D3230015ED49 /* Electric 19.mp3 */,
-				9DA86E861582D3230015ED49 /* Electric 20.mp3 */,
-				9DA86E871582D3230015ED49 /* Electric 21.mp3 */,
-				9DA86E881582D3230015ED49 /* Electric 22.mp3 */,
-				9DA86E891582D3230015ED49 /* Electric 23.mp3 */,
-				9DA86E8A1582D3230015ED49 /* Electric 24.mp3 */,
-				9DA86E8B1582D3230015ED49 /* Electric 25.mp3 */,
-				9DA86E8C1582D3230015ED49 /* Electric 26.mp3 */,
-				9DA86E8D1582D3230015ED49 /* Electric 27.mp3 */,
-				9DA86E8E1582D3230015ED49 /* Electric 28.mp3 */,
-				9DA86E8F1582D3230015ED49 /* Electric 29.mp3 */,
-				9DA86E901582D3230015ED49 /* Electric 30.mp3 */,
-				9DA86E911582D3230015ED49 /* Electric 31.mp3 */,
-				9DA86E921582D3230015ED49 /* Electric 32.mp3 */,
-				9DA86E931582D3230015ED49 /* Electric 33.mp3 */,
-				9DA86E941582D3230015ED49 /* Electric 34.mp3 */,
-				9DA86E951582D3230015ED49 /* Electric 35.mp3 */,
-				9DA86E961582D3230015ED49 /* Electric 36.mp3 */,
-				9DA86E971582D3230015ED49 /* Electric 37.mp3 */,
-				9DA86E981582D3230015ED49 /* Electric 38.mp3 */,
-				9DA86E991582D3230015ED49 /* Electric 39.mp3 */,
-				9DA86E9A1582D3230015ED49 /* Electric 40.mp3 */,
-				9DA86E9B1582D3230015ED49 /* Electric 41.mp3 */,
-				9DA86E9C1582D3230015ED49 /* Electric 42.mp3 */,
-				9DA86E9D1582D3230015ED49 /* Electric 43.mp3 */,
-				9DA86E9E1582D3230015ED49 /* Electric 44.mp3 */,
-				9DA86E9F1582D3230015ED49 /* Electric 45.mp3 */,
-				9DA86EA01582D3230015ED49 /* Electric 46.mp3 */,
-				9DA86EA11582D3230015ED49 /* Electric 47.mp3 */,
-				9DA86EA21582D3230015ED49 /* Electric 48.mp3 */,
-				9DA86EA31582D3230015ED49 /* Electric 49.mp3 */,
-				9DA86EA41582D3230015ED49 /* Electric 50.mp3 */,
-				9DA86EA51582D3230015ED49 /* Electric 51.mp3 */,
-				9DA86EA61582D3230015ED49 /* Electric 52.mp3 */,
-				9DA86EA71582D3230015ED49 /* Electric 53.mp3 */,
-				9DA86EA81582D3230015ED49 /* Electric 54.mp3 */,
-				9DA86EA91582D3230015ED49 /* Electric 55.mp3 */,
-				9DA86EAA1582D3230015ED49 /* Electric 56.mp3 */,
-				9DA86EAB1582D3230015ED49 /* Electric 57.mp3 */,
-				9DA86EAC1582D3230015ED49 /* Electric 58.mp3 */,
-				9DA86EAD1582D3230015ED49 /* Electric 59.mp3 */,
-				9DA86EAE1582D3230015ED49 /* Electric 60.mp3 */,
-				9DA86EAF1582D3230015ED49 /* Electric 61.mp3 */,
-				9DA86EB01582D3230015ED49 /* Electric 62.mp3 */,
-				9DA86EB11582D3230015ED49 /* Electric 63.mp3 */,
-				9DA86EB21582D3230015ED49 /* Electric 64.mp3 */,
-				9DA86EB31582D3230015ED49 /* Electric 65.mp3 */,
-				9DA86EB41582D3230015ED49 /* Electric 66.mp3 */,
-				9DA86EB51582D3230015ED49 /* Electric 67.mp3 */,
-				9DA86EB61582D3230015ED49 /* Electric 68.mp3 */,
-				9DA86EB71582D3230015ED49 /* Electric 69.mp3 */,
-				9DA86EB81582D3230015ED49 /* Electric 70.mp3 */,
-				9DA86EB91582D3230015ED49 /* Electric 71.mp3 */,
-				9DA86EBA1582D3230015ED49 /* Electric 72.mp3 */,
-				9DA86EBB1582D3230015ED49 /* Electric 73.mp3 */,
-				9DA86EBC1582D3230015ED49 /* Electric 74.mp3 */,
-				9DA86EBD1582D3230015ED49 /* Electric 75.mp3 */,
-				9DA86EBE1582D3230015ED49 /* Electric 76.mp3 */,
-				9DA86EBF1582D3230015ED49 /* Electric 77.mp3 */,
-				9DA86EC01582D3230015ED49 /* Electric 78.mp3 */,
-				9DA86EC11582D3230015ED49 /* Electric 79.mp3 */,
-				9DA86EC21582D3230015ED49 /* Electric 80.mp3 */,
-				9DA86EC31582D3230015ED49 /* Electric 81.mp3 */,
-				9DA86EC41582D3230015ED49 /* Electric 82.mp3 */,
-				9DA86EC51582D3230015ED49 /* Electric 83.mp3 */,
-				9DA86EC61582D3230015ED49 /* Electric 84.mp3 */,
-				9DA86EC71582D3230015ED49 /* Electric 85.mp3 */,
-				9DA86EC81582D3230015ED49 /* Electric 86.mp3 */,
-				9DA86EC91582D3230015ED49 /* Electric 87.mp3 */,
-				9DA86ECA1582D3230015ED49 /* Electric 88.mp3 */,
-				9DA86ECB1582D3230015ED49 /* Electric 89.mp3 */,
-				9DA86ECC1582D3230015ED49 /* Electric 90.mp3 */,
-				9DA86ECD1582D3230015ED49 /* Electric 91.mp3 */,
-				9DA86ECE1582D3230015ED49 /* Electric 92.mp3 */,
-				9DA86ECF1582D3230015ED49 /* Electric 93.mp3 */,
-				9DA86ED01582D3230015ED49 /* Electric 94.mp3 */,
-				9DA86ED11582D3230015ED49 /* Electric 95.mp3 */,
-				9DA86ED21582D3230015ED49 /* Electric 96.mp3 */,
-				9DA86ED31582D3230015ED49 /* Electric 97.mp3 */,
-				9DA86ED41582D3230015ED49 /* Electric 98.mp3 */,
-				9DA86ED51582D3230015ED49 /* Electric 99.mp3 */,
-				9DA86ED61582D3230015ED49 /* Electric 100.mp3 */,
-				9DA86ED71582D3230015ED49 /* Electric 101.mp3 */,
-				9DA86ED81582D3230015ED49 /* Electric 102.mp3 */,
-				9DA86ED91582D3230015ED49 /* Electric 103.mp3 */,
-			);
-			name = Electric;
 			sourceTree = "<group>";
 		};
 		9DD919711491593D00BE8751 /* Images */ = {
@@ -4182,108 +4028,6 @@
 			files = (
 				EC24DC2A161A84F300016B78 /* Default.png in Resources */,
 				EC24DC2B161A84F500016B78 /* Default@2x.png in Resources */,
-				EC24DC85161A89BC00016B78 /* Electric 2.mp3 in Resources */,
-				EC24DC86161A89BC00016B78 /* Electric 3.mp3 in Resources */,
-				EC24DC87161A89BC00016B78 /* Electric 4.mp3 in Resources */,
-				EC24DC88161A89BC00016B78 /* Electric 5.mp3 in Resources */,
-				EC24DC89161A89BC00016B78 /* Electric 6.mp3 in Resources */,
-				EC24DC8A161A89BC00016B78 /* Electric 7.mp3 in Resources */,
-				EC24DC8B161A89BC00016B78 /* Electric 8.mp3 in Resources */,
-				EC24DC8C161A89BC00016B78 /* Electric 9.mp3 in Resources */,
-				EC24DC8D161A89BC00016B78 /* Electric 10.mp3 in Resources */,
-				EC24DC8E161A89BC00016B78 /* Electric 11.mp3 in Resources */,
-				EC24DC8F161A89BC00016B78 /* Electric 12.mp3 in Resources */,
-				EC24DC90161A89BC00016B78 /* Electric 13.mp3 in Resources */,
-				EC24DC91161A89BC00016B78 /* Electric 14.mp3 in Resources */,
-				EC24DC92161A89BC00016B78 /* Electric 15.mp3 in Resources */,
-				EC24DC93161A89BC00016B78 /* Electric 16.mp3 in Resources */,
-				EC24DC94161A89BC00016B78 /* Electric 17.mp3 in Resources */,
-				EC24DC95161A89BC00016B78 /* Electric 18.mp3 in Resources */,
-				EC24DC96161A89BC00016B78 /* Electric 19.mp3 in Resources */,
-				EC24DC97161A89BC00016B78 /* Electric 20.mp3 in Resources */,
-				EC24DC98161A89BC00016B78 /* Electric 21.mp3 in Resources */,
-				EC24DC99161A89BC00016B78 /* Electric 22.mp3 in Resources */,
-				EC24DC9A161A89BC00016B78 /* Electric 23.mp3 in Resources */,
-				EC24DC9B161A89BC00016B78 /* Electric 24.mp3 in Resources */,
-				EC24DC9C161A89BC00016B78 /* Electric 25.mp3 in Resources */,
-				EC24DC9D161A89BC00016B78 /* Electric 26.mp3 in Resources */,
-				EC24DC9E161A89BC00016B78 /* Electric 27.mp3 in Resources */,
-				EC24DC9F161A89BC00016B78 /* Electric 28.mp3 in Resources */,
-				EC24DCA0161A89BC00016B78 /* Electric 29.mp3 in Resources */,
-				EC24DCA1161A89BC00016B78 /* Electric 30.mp3 in Resources */,
-				EC24DCA2161A89BC00016B78 /* Electric 31.mp3 in Resources */,
-				EC24DCA3161A89BC00016B78 /* Electric 32.mp3 in Resources */,
-				EC24DCA4161A89BC00016B78 /* Electric 33.mp3 in Resources */,
-				EC24DCA5161A89BC00016B78 /* Electric 34.mp3 in Resources */,
-				EC24DCA6161A89BC00016B78 /* Electric 35.mp3 in Resources */,
-				EC24DCA7161A89BC00016B78 /* Electric 36.mp3 in Resources */,
-				EC24DCA8161A89BC00016B78 /* Electric 37.mp3 in Resources */,
-				EC24DCA9161A89BC00016B78 /* Electric 38.mp3 in Resources */,
-				EC24DCAA161A89BC00016B78 /* Electric 39.mp3 in Resources */,
-				EC24DCAB161A89BC00016B78 /* Electric 40.mp3 in Resources */,
-				EC24DCAC161A89BC00016B78 /* Electric 41.mp3 in Resources */,
-				EC24DCAD161A89BC00016B78 /* Electric 42.mp3 in Resources */,
-				EC24DCAE161A89BC00016B78 /* Electric 43.mp3 in Resources */,
-				EC24DCAF161A89BC00016B78 /* Electric 44.mp3 in Resources */,
-				EC24DCB0161A89BC00016B78 /* Electric 45.mp3 in Resources */,
-				EC24DCB1161A89BC00016B78 /* Electric 46.mp3 in Resources */,
-				EC24DCB2161A89BC00016B78 /* Electric 47.mp3 in Resources */,
-				EC24DCB3161A89BC00016B78 /* Electric 48.mp3 in Resources */,
-				EC24DCB4161A89BC00016B78 /* Electric 49.mp3 in Resources */,
-				EC24DCB5161A89BC00016B78 /* Electric 50.mp3 in Resources */,
-				EC24DCB6161A89BC00016B78 /* Electric 51.mp3 in Resources */,
-				EC24DCB7161A89BC00016B78 /* Electric 52.mp3 in Resources */,
-				EC24DCB8161A89BC00016B78 /* Electric 53.mp3 in Resources */,
-				EC24DCB9161A89BC00016B78 /* Electric 54.mp3 in Resources */,
-				EC24DCBA161A89BC00016B78 /* Electric 55.mp3 in Resources */,
-				EC24DCBB161A89BC00016B78 /* Electric 56.mp3 in Resources */,
-				EC24DCBC161A89BC00016B78 /* Electric 57.mp3 in Resources */,
-				EC24DCBD161A89BC00016B78 /* Electric 58.mp3 in Resources */,
-				EC24DCBE161A89BC00016B78 /* Electric 59.mp3 in Resources */,
-				EC24DCBF161A89BC00016B78 /* Electric 60.mp3 in Resources */,
-				EC24DCC0161A89BC00016B78 /* Electric 61.mp3 in Resources */,
-				EC24DCC1161A89BC00016B78 /* Electric 62.mp3 in Resources */,
-				EC24DCC2161A89BC00016B78 /* Electric 63.mp3 in Resources */,
-				EC24DCC3161A89BC00016B78 /* Electric 64.mp3 in Resources */,
-				EC24DCC4161A89BC00016B78 /* Electric 65.mp3 in Resources */,
-				EC24DCC5161A89BC00016B78 /* Electric 66.mp3 in Resources */,
-				EC24DCC6161A89BC00016B78 /* Electric 67.mp3 in Resources */,
-				EC24DCC7161A89BC00016B78 /* Electric 68.mp3 in Resources */,
-				EC24DCC8161A89BC00016B78 /* Electric 69.mp3 in Resources */,
-				EC24DCC9161A89BC00016B78 /* Electric 70.mp3 in Resources */,
-				EC24DCCA161A89BC00016B78 /* Electric 71.mp3 in Resources */,
-				EC24DCCB161A89BC00016B78 /* Electric 72.mp3 in Resources */,
-				EC24DCCC161A89BC00016B78 /* Electric 73.mp3 in Resources */,
-				EC24DCCD161A89BC00016B78 /* Electric 74.mp3 in Resources */,
-				EC24DCCE161A89BC00016B78 /* Electric 75.mp3 in Resources */,
-				EC24DCCF161A89BC00016B78 /* Electric 76.mp3 in Resources */,
-				EC24DCD0161A89BC00016B78 /* Electric 77.mp3 in Resources */,
-				EC24DCD1161A89BC00016B78 /* Electric 78.mp3 in Resources */,
-				EC24DCD2161A89BC00016B78 /* Electric 79.mp3 in Resources */,
-				EC24DCD3161A89BC00016B78 /* Electric 80.mp3 in Resources */,
-				EC24DCD4161A89BC00016B78 /* Electric 81.mp3 in Resources */,
-				EC24DCD5161A89BC00016B78 /* Electric 82.mp3 in Resources */,
-				EC24DCD6161A89BC00016B78 /* Electric 83.mp3 in Resources */,
-				EC24DCD7161A89BC00016B78 /* Electric 84.mp3 in Resources */,
-				EC24DCD8161A89BC00016B78 /* Electric 85.mp3 in Resources */,
-				EC24DCD9161A89BC00016B78 /* Electric 86.mp3 in Resources */,
-				EC24DCDA161A89BC00016B78 /* Electric 87.mp3 in Resources */,
-				EC24DCDB161A89BC00016B78 /* Electric 88.mp3 in Resources */,
-				EC24DCDC161A89BC00016B78 /* Electric 89.mp3 in Resources */,
-				EC24DCDD161A89BC00016B78 /* Electric 90.mp3 in Resources */,
-				EC24DCDE161A89BC00016B78 /* Electric 91.mp3 in Resources */,
-				EC24DCDF161A89BC00016B78 /* Electric 92.mp3 in Resources */,
-				EC24DCE0161A89BC00016B78 /* Electric 93.mp3 in Resources */,
-				EC24DCE1161A89BC00016B78 /* Electric 94.mp3 in Resources */,
-				EC24DCE2161A89BC00016B78 /* Electric 95.mp3 in Resources */,
-				EC24DCE3161A89BC00016B78 /* Electric 96.mp3 in Resources */,
-				EC24DCE4161A89BC00016B78 /* Electric 97.mp3 in Resources */,
-				EC24DCE5161A89BC00016B78 /* Electric 98.mp3 in Resources */,
-				EC24DCE6161A89BC00016B78 /* Electric 99.mp3 in Resources */,
-				EC24DCE7161A89BC00016B78 /* Electric 100.mp3 in Resources */,
-				EC24DCE8161A89BC00016B78 /* Electric 101.mp3 in Resources */,
-				EC24DCE9161A89BC00016B78 /* Electric 102.mp3 in Resources */,
-				EC24DCEA161A89BC00016B78 /* Electric 103.mp3 in Resources */,
 				EC24DCEB161A89C000016B78 /* Acoustic Guitar 40.mp3 in Resources */,
 				EC24DCEC161A89C000016B78 /* Acoustic Guitar 41.mp3 in Resources */,
 				EC24DCED161A89C000016B78 /* Acoustic Guitar 42.mp3 in Resources */,
@@ -4291,6 +4035,7 @@
 				EC24DCEF161A89C000016B78 /* Acoustic Guitar 44.mp3 in Resources */,
 				EC24DCF0161A89C000016B78 /* Acoustic Guitar 45.mp3 in Resources */,
 				EC24DCF1161A89C000016B78 /* Acoustic Guitar 46.mp3 in Resources */,
+				6DED8793191874460091721E /* Electric Guitar 42.mp3 in Resources */,
 				EC24DCF2161A89C000016B78 /* Acoustic Guitar 47.mp3 in Resources */,
 				EC24DCF3161A89C000016B78 /* Acoustic Guitar 48.mp3 in Resources */,
 				EC24DCF4161A89C000016B78 /* Acoustic Guitar 49.mp3 in Resources */,
@@ -4301,24 +4046,29 @@
 				EC24DCF9161A89C000016B78 /* Acoustic Guitar 54.mp3 in Resources */,
 				EC24DCFA161A89C000016B78 /* Acoustic Guitar 55.mp3 in Resources */,
 				EC24DCFB161A89C000016B78 /* Acoustic Guitar 56.mp3 in Resources */,
+				6DAD0B2F19187F1F005B3807 /* Warm Analogue 70.mp3 in Resources */,
 				EC24DCFC161A89C000016B78 /* Acoustic Guitar 57.mp3 in Resources */,
 				EC24DCFD161A89C000016B78 /* Acoustic Guitar 58.mp3 in Resources */,
+				6DAD0B2C19187F1F005B3807 /* Warm Analogue 67.mp3 in Resources */,
 				EC24DCFE161A89C000016B78 /* Acoustic Guitar 59.mp3 in Resources */,
 				EC24DCFF161A89C000016B78 /* Acoustic Guitar 60.mp3 in Resources */,
 				EC24DD00161A89C000016B78 /* Acoustic Guitar 61.mp3 in Resources */,
 				EC24DD01161A89C000016B78 /* Acoustic Guitar 62.mp3 in Resources */,
 				EC24DD02161A89C000016B78 /* Acoustic Guitar 63.mp3 in Resources */,
 				EC24DD03161A89C000016B78 /* Acoustic Guitar 64.mp3 in Resources */,
+				6DED879F191874460091721E /* Electric Guitar 54.mp3 in Resources */,
 				EC24DD04161A89C000016B78 /* Acoustic Guitar 65.mp3 in Resources */,
 				EC24DD05161A89C000016B78 /* Acoustic Guitar 66.mp3 in Resources */,
 				EC24DD06161A89C000016B78 /* Acoustic Guitar 67.mp3 in Resources */,
 				EC24DD07161A89C000016B78 /* Acoustic Guitar 68.mp3 in Resources */,
 				EC24DD08161A89C000016B78 /* Acoustic Guitar 69.mp3 in Resources */,
 				EC24DD09161A89C000016B78 /* Acoustic Guitar 70.mp3 in Resources */,
+				6DAD0B1119187F1F005B3807 /* Warm Analogue 40.mp3 in Resources */,
 				EC24DD0A161A89C000016B78 /* Acoustic Guitar 71.mp3 in Resources */,
 				EC24DD0B161A89C000016B78 /* Acoustic Guitar 72.mp3 in Resources */,
 				EC24DD0C161A89C000016B78 /* Acoustic Guitar 73.mp3 in Resources */,
 				EC24DD0D161A89C000016B78 /* Acoustic Guitar 74.mp3 in Resources */,
+				6DAD0B2819187F1F005B3807 /* Warm Analogue 63.mp3 in Resources */,
 				EC24DD0E161A89C000016B78 /* Acoustic Guitar 75.mp3 in Resources */,
 				EC24DD0F161A89C000016B78 /* Acoustic Guitar 76.mp3 in Resources */,
 				EC24DD10161A89C000016B78 /* Acoustic Guitar 77.mp3 in Resources */,
@@ -4335,6 +4085,7 @@
 				EC24DD1A161A89C400016B78 /* Rock Guitar 46.mp3 in Resources */,
 				EC24DD1B161A89C400016B78 /* Rock Guitar 47.mp3 in Resources */,
 				EC24DD1C161A89C400016B78 /* Rock Guitar 48.mp3 in Resources */,
+				6DED87B0191874460091721E /* Electric Guitar 71.mp3 in Resources */,
 				EC24DD1D161A89C400016B78 /* Rock Guitar 49.mp3 in Resources */,
 				EC24DD1E161A89C400016B78 /* Rock Guitar 50.mp3 in Resources */,
 				EC24DD1F161A89C400016B78 /* Rock Guitar 51.mp3 in Resources */,
@@ -4358,6 +4109,7 @@
 				EC24DD31161A89C400016B78 /* Rock Guitar 69.mp3 in Resources */,
 				EC24DD32161A89C400016B78 /* Rock Guitar 70.mp3 in Resources */,
 				EC24DD33161A89C400016B78 /* Rock Guitar 71.mp3 in Resources */,
+				6DED87B3191874460091721E /* Electric Guitar 74.mp3 in Resources */,
 				EC24DD34161A89C400016B78 /* Rock Guitar 72.mp3 in Resources */,
 				EC24DD35161A89C400016B78 /* Rock Guitar 73.mp3 in Resources */,
 				EC24DD36161A89C400016B78 /* Rock Guitar 74.mp3 in Resources */,
@@ -4366,12 +4118,14 @@
 				EC24DD39161A89C400016B78 /* Rock Guitar 77.mp3 in Resources */,
 				EC24DD3A161A89C400016B78 /* Rock Guitar 78.mp3 in Resources */,
 				EC24DD3B161A89C400016B78 /* Rock Guitar 79.mp3 in Resources */,
+				6DAD0B3119187F1F005B3807 /* Warm Analogue 72.mp3 in Resources */,
 				EC24DD3C161A89C400016B78 /* Rock Guitar 80.mp3 in Resources */,
 				EC24DD3D161A89C800016B78 /* Piano 40.mp3 in Resources */,
 				EC24DD3E161A89C800016B78 /* Piano 41.mp3 in Resources */,
 				EC24DD3F161A89C800016B78 /* Piano 42.mp3 in Resources */,
 				EC24DD40161A89C800016B78 /* Piano 43.mp3 in Resources */,
 				EC24DD41161A89C800016B78 /* Piano 44.mp3 in Resources */,
+				6DAD0B2D19187F1F005B3807 /* Warm Analogue 68.mp3 in Resources */,
 				EC24DD42161A89C800016B78 /* Piano 45.mp3 in Resources */,
 				EC24DD43161A89C800016B78 /* Piano 46.mp3 in Resources */,
 				EC24DD44161A89C800016B78 /* Piano 47.mp3 in Resources */,
@@ -4388,6 +4142,7 @@
 				EC24DD4F161A89C800016B78 /* Piano 58.mp3 in Resources */,
 				EC24DD50161A89C800016B78 /* Piano 59.mp3 in Resources */,
 				EC24DD51161A89C800016B78 /* Piano 60.mp3 in Resources */,
+				6DED8799191874460091721E /* Electric Guitar 48.mp3 in Resources */,
 				EC24DD52161A89C800016B78 /* Piano 61.mp3 in Resources */,
 				EC24DD53161A89C800016B78 /* Piano 62.mp3 in Resources */,
 				EC24DD54161A89C800016B78 /* Piano 63.mp3 in Resources */,
@@ -4395,8 +4150,10 @@
 				EC24DD56161A89C800016B78 /* Piano 65.mp3 in Resources */,
 				EC24DD57161A89C800016B78 /* Piano 66.mp3 in Resources */,
 				EC24DD58161A89C800016B78 /* Piano 67.mp3 in Resources */,
+				6DAD0B3319187F1F005B3807 /* Warm Analogue 74.mp3 in Resources */,
 				EC24DD59161A89C800016B78 /* Piano 68.mp3 in Resources */,
 				EC24DD5A161A89C800016B78 /* Piano 69.mp3 in Resources */,
+				6DAD0B3919187F1F005B3807 /* Warm Analogue 80.mp3 in Resources */,
 				EC24DD5B161A89C800016B78 /* Piano 70.mp3 in Resources */,
 				EC24DD5C161A89C800016B78 /* Piano 71.mp3 in Resources */,
 				EC24DD5D161A89C800016B78 /* Piano 72.mp3 in Resources */,
@@ -4411,6 +4168,7 @@
 				EC24DD66161A89CD00016B78 /* Rhodes 40.mp3 in Resources */,
 				EC24DD67161A89CD00016B78 /* Rhodes 41.mp3 in Resources */,
 				EC24DD68161A89CD00016B78 /* Rhodes 42.mp3 in Resources */,
+				6DAD0B2A19187F1F005B3807 /* Warm Analogue 65.mp3 in Resources */,
 				EC24DD69161A89CD00016B78 /* Rhodes 43.mp3 in Resources */,
 				EC24DD6A161A89CD00016B78 /* Rhodes 44.mp3 in Resources */,
 				EC24DD6B161A89CD00016B78 /* Rhodes 45.mp3 in Resources */,
@@ -4418,6 +4176,8 @@
 				EC24DD6D161A89CD00016B78 /* Rhodes 47.mp3 in Resources */,
 				EC24DD6E161A89CD00016B78 /* Rhodes 48.mp3 in Resources */,
 				EC24DD6F161A89CD00016B78 /* Rhodes 49.mp3 in Resources */,
+				6DED87A6191874460091721E /* Electric Guitar 61.mp3 in Resources */,
+				6DED87B6191874460091721E /* Electric Guitar 77.mp3 in Resources */,
 				EC24DD70161A89CD00016B78 /* Rhodes 50.mp3 in Resources */,
 				EC24DD71161A89CD00016B78 /* Rhodes 51.mp3 in Resources */,
 				EC24DD72161A89CD00016B78 /* Rhodes 52.mp3 in Resources */,
@@ -4432,14 +4192,17 @@
 				EC24DD7B161A89CD00016B78 /* Rhodes 61.mp3 in Resources */,
 				EC24DD7C161A89CD00016B78 /* Rhodes 62.mp3 in Resources */,
 				EC24DD7D161A89CD00016B78 /* Rhodes 63.mp3 in Resources */,
+				6DED87AF191874460091721E /* Electric Guitar 70.mp3 in Resources */,
 				EC24DD7E161A89CD00016B78 /* Rhodes 64.mp3 in Resources */,
 				EC24DD7F161A89CD00016B78 /* Rhodes 65.mp3 in Resources */,
 				EC24DD80161A89CD00016B78 /* Rhodes 66.mp3 in Resources */,
 				EC24DD81161A89CD00016B78 /* Rhodes 67.mp3 in Resources */,
+				6DAD0B1519187F1F005B3807 /* Warm Analogue 44.mp3 in Resources */,
 				EC24DD82161A89CD00016B78 /* Rhodes 68.mp3 in Resources */,
 				EC24DD83161A89CD00016B78 /* Rhodes 69.mp3 in Resources */,
 				EC24DD84161A89CD00016B78 /* Rhodes 70.mp3 in Resources */,
 				EC24DD85161A89CD00016B78 /* Rhodes 71.mp3 in Resources */,
+				6DAD0B3819187F1F005B3807 /* Warm Analogue 79.mp3 in Resources */,
 				EC24DD86161A89CD00016B78 /* Rhodes 72.mp3 in Resources */,
 				EC24DD87161A89CD00016B78 /* Rhodes 73.mp3 in Resources */,
 				EC24DD88161A89CD00016B78 /* Rhodes 74.mp3 in Resources */,
@@ -4454,6 +4217,7 @@
 				EC24DD91161A89D200016B78 /* Droplet 54.mp3 in Resources */,
 				EC24DD92161A89D200016B78 /* Droplet 55.mp3 in Resources */,
 				EC24DD93161A89D200016B78 /* Droplet 56.mp3 in Resources */,
+				6DED87B5191874460091721E /* Electric Guitar 76.mp3 in Resources */,
 				EC24DD94161A89D200016B78 /* Droplet 57.mp3 in Resources */,
 				EC24DD95161A89D200016B78 /* Droplet 58.mp3 in Resources */,
 				EC24DD96161A89D200016B78 /* Droplet 59.mp3 in Resources */,
@@ -4475,6 +4239,7 @@
 				EC24DDA6161A89D200016B78 /* Droplet 75.mp3 in Resources */,
 				EC24DDA7161A89D200016B78 /* Droplet 76.mp3 in Resources */,
 				EC24DDA8161A89D200016B78 /* Droplet 77.mp3 in Resources */,
+				6DED879D191874460091721E /* Electric Guitar 52.mp3 in Resources */,
 				EC24DDA9161A89D200016B78 /* Droplet 78.mp3 in Resources */,
 				EC24DDAA161A89D200016B78 /* Droplet 79.mp3 in Resources */,
 				EC24DDAB161A89D200016B78 /* Droplet 80.mp3 in Resources */,
@@ -4490,17 +4255,21 @@
 				EC24DDB5161A89D200016B78 /* Droplet 90.mp3 in Resources */,
 				EC24DDB6161A89D200016B78 /* Droplet 91.mp3 in Resources */,
 				EC24DDB7161A89D200016B78 /* Droplet 92.mp3 in Resources */,
+				6DAD0B3219187F1F005B3807 /* Warm Analogue 73.mp3 in Resources */,
 				EC24DE85161A89F000016B78 /* Square 40.mp3 in Resources */,
 				EC24DE86161A89F000016B78 /* Square 41.mp3 in Resources */,
 				EC24DE87161A89F000016B78 /* Square 42.mp3 in Resources */,
 				EC24DE88161A89F000016B78 /* Square 43.mp3 in Resources */,
 				EC24DE89161A89F000016B78 /* Square 44.mp3 in Resources */,
+				6DED8798191874460091721E /* Electric Guitar 47.mp3 in Resources */,
 				EC24DE8A161A89F000016B78 /* Square 45.mp3 in Resources */,
 				EC24DE8B161A89F000016B78 /* Square 46.mp3 in Resources */,
+				6DAD0B3519187F1F005B3807 /* Warm Analogue 76.mp3 in Resources */,
 				EC24DE8C161A89F000016B78 /* Square 47.mp3 in Resources */,
 				EC24DE8D161A89F000016B78 /* Square 48.mp3 in Resources */,
 				EC24DE8E161A89F000016B78 /* Square 49.mp3 in Resources */,
 				EC24DE8F161A89F000016B78 /* Square 50.mp3 in Resources */,
+				6DED8796191874460091721E /* Electric Guitar 45.mp3 in Resources */,
 				260CF0B218EBEFDF0083903A /* Localizable.strings in Resources */,
 				EC24DE90161A89F000016B78 /* Square 51.mp3 in Resources */,
 				EC24DE91161A89F000016B78 /* Square 52.mp3 in Resources */,
@@ -4520,6 +4289,7 @@
 				EC24DE9F161A89F000016B78 /* Square 66.mp3 in Resources */,
 				EC24DEA0161A89F000016B78 /* Square 67.mp3 in Resources */,
 				EC24DEA1161A89F000016B78 /* Square 68.mp3 in Resources */,
+				6DAD0B2619187F1F005B3807 /* Warm Analogue 61.mp3 in Resources */,
 				EC24DEA2161A89F000016B78 /* Square 69.mp3 in Resources */,
 				EC24DEA3161A89F000016B78 /* Square 70.mp3 in Resources */,
 				EC24DEA4161A89F000016B78 /* Square 71.mp3 in Resources */,
@@ -4527,6 +4297,7 @@
 				EC24DEA6161A89F000016B78 /* Square 73.mp3 in Resources */,
 				EC24DEA7161A89F000016B78 /* Square 74.mp3 in Resources */,
 				EC24DEA8161A89F000016B78 /* Square 75.mp3 in Resources */,
+				6DAD0B2919187F1F005B3807 /* Warm Analogue 64.mp3 in Resources */,
 				EC24DEA9161A89F000016B78 /* Square 76.mp3 in Resources */,
 				EC24DEAA161A89F000016B78 /* Square 77.mp3 in Resources */,
 				EC24DEAB161A89F000016B78 /* Square 78.mp3 in Resources */,
@@ -4543,11 +4314,15 @@
 				EC24DEE7161A8A1B00016B78 /* MultiColorsButton.png in Resources */,
 				EC24DEE8161A8A1B00016B78 /* AllButton.png in Resources */,
 				EC24DEE9161A8A1B00016B78 /* BlueButton.png in Resources */,
+				6DED87A1191874460091721E /* Electric Guitar 56.mp3 in Resources */,
 				EC24DEEA161A8A1B00016B78 /* ClearButton.png in Resources */,
 				EC24DEEB161A8A1B00016B78 /* ColorLinesButton.png in Resources */,
 				EC24DEEC161A8A1B00016B78 /* CrossButton.png in Resources */,
 				EC24DEED161A8A1B00016B78 /* CyanButton.png in Resources */,
+				6DED879E191874460091721E /* Electric Guitar 53.mp3 in Resources */,
 				EC24DEEE161A8A1B00016B78 /* GreenButton.png in Resources */,
+				6DAD0B1D19187F1F005B3807 /* Warm Analogue 52.mp3 in Resources */,
+				6DED87AC191874460091721E /* Electric Guitar 67.mp3 in Resources */,
 				EC24DEEF161A8A1B00016B78 /* HoldButton.png in Resources */,
 				EC24DEF0161A8A1B00016B78 /* MagentaButton.png in Resources */,
 				EC24DEF1161A8A1B00016B78 /* RedButton.png in Resources */,
@@ -4555,14 +4330,18 @@
 				EC24DEF3161A8A1B00016B78 /* YellowButton.png in Resources */,
 				EC24DEF5161A8A1B00016B78 /* AuxSpeakerSlider.png in Resources */,
 				EC24DEF6161A8A1B00016B78 /* AuxSpeakerSwitch.png in Resources */,
+				6DAD0B3019187F1F005B3807 /* Warm Analogue 71.mp3 in Resources */,
 				EC24DEF7161A8A1B00016B78 /* SliderKnob.png in Resources */,
 				EC24DEF8161A8A1B00016B78 /* HomeButton.png in Resources */,
 				EC24DEFB161A8A1B00016B78 /* SliderEndMin.png in Resources */,
 				EC24DEFD161A8A1B00016B78 /* EffectOffButton.png in Resources */,
+				6DAD0B3619187F1F005B3807 /* Warm Analogue 77.mp3 in Resources */,
 				EC24DEFE161A8A1B00016B78 /* EffectOnButton.png in Resources */,
 				EC24DEFF161A8A1B00016B78 /* EffectSelectOffButton.png in Resources */,
 				EC24DF00161A8A1B00016B78 /* EffectSelectOnButton.png in Resources */,
+				6DED87B9191874460091721E /* Electric Guitar 80.mp3 in Resources */,
 				EC24DF01161A8A1B00016B78 /* FreePlayBG.png in Resources */,
+				6DED87B1191874460091721E /* Electric Guitar 72.mp3 in Resources */,
 				EC24DF02161A8A1B00016B78 /* WETDRY_Border.png in Resources */,
 				EC24DF66161A8A4000016B78 /* gTarLogo.png in Resources */,
 				EC24DF6C161A8A4300016B78 /* gray82.png in Resources */,
@@ -4578,8 +4357,10 @@
 				EC24DF89161A8A4E00016B78 /* blank-note-left.png in Resources */,
 				EC24DF8A161A8A4E00016B78 /* blank-note-middle.png in Resources */,
 				EC24DF8B161A8A4E00016B78 /* blank-note-right.png in Resources */,
+				6DAD0B2019187F1F005B3807 /* Warm Analogue 55.mp3 in Resources */,
 				EC24DF8C161A8A4E00016B78 /* blank-note.png in Resources */,
 				EC24DF8D161A8A4E00016B78 /* note-blank4.png in Resources */,
+				6DED87A7191874460091721E /* Electric Guitar 62.mp3 in Resources */,
 				EC24DF8E161A8A4E00016B78 /* note-0.png in Resources */,
 				EC24DF8F161A8A4E00016B78 /* note-1.png in Resources */,
 				EC24DF90161A8A4E00016B78 /* note-2.png in Resources */,
@@ -4589,6 +4370,7 @@
 				EC24DF94161A8A4E00016B78 /* note-6.png in Resources */,
 				EC24DF95161A8A4E00016B78 /* note-7.png in Resources */,
 				EC24DF96161A8A4E00016B78 /* note-8.png in Resources */,
+				6DAD0B2B19187F1F005B3807 /* Warm Analogue 66.mp3 in Resources */,
 				EC24DF97161A8A4E00016B78 /* note-9.png in Resources */,
 				EC24DF98161A8A4E00016B78 /* note-10.png in Resources */,
 				EC24DF99161A8A4E00016B78 /* note-11.png in Resources */,
@@ -4604,8 +4386,9 @@
 				EC24DFC0161A8A4E00016B78 /* string-light.png in Resources */,
 				EC24DFC1161A8A4E00016B78 /* string-light-vertical.png in Resources */,
 				EC24DFC2161A8A4E00016B78 /* string.png in Resources */,
+				6DAD0B1C19187F1F005B3807 /* Warm Analogue 51.mp3 in Resources */,
 				EC24DFC3161A8A6500016B78 /* preloaded-content.plist in Resources */,
-				EC24DFC4161A8A6700016B78 /* instruments.plist in Resources */,
+				EC24DFC4161A8A6700016B78 /* instrumentList.plist in Resources */,
 				EC24DFC6161A8A6D00016B78 /* tutorial.plist in Resources */,
 				EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */,
 				ECBBBF6B161CF1F400BC5BE2 /* LightsTab.png in Resources */,
@@ -4622,6 +4405,7 @@
 				ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */,
 				ECE9D23D16FBB7DA00BB6C53 /* SongListCell.xib in Resources */,
 				9DE5C64616F9296700CDCBEE /* 12b-Ver2_FreePlay_INSTR2.jpg in Resources */,
+				6DED8791191874460091721E /* Electric Guitar 40.mp3 in Resources */,
 				9DA3137E1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */,
 				9DA313851704DDD900CFF104 /* LightsViewController.xib in Resources */,
 				9DA313931704FA3100CFF104 /* FPMenuViewController.xib in Resources */,
@@ -4638,6 +4422,7 @@
 				ECCC032F170A45E90021DB00 /* MenuPauseBG.jpg in Resources */,
 				ECCC0331170A45E90021DB00 /* PlayBG.png in Resources */,
 				ECCC0337170A493E0021DB00 /* DiffEasyButtonON.png in Resources */,
+				6DED87A4191874460091721E /* Electric Guitar 59.mp3 in Resources */,
 				ECCC0339170A493E0021DB00 /* DiffHardButtonON.png in Resources */,
 				ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */,
@@ -4653,8 +4438,13 @@
 				EC69BA1717137072004E982F /* InstrumentIcon.png in Resources */,
 				9DEB90501714D66100A7C0CF /* EffectsOffButton.png in Resources */,
 				9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
+				6DAD0B2719187F1F005B3807 /* Warm Analogue 62.mp3 in Resources */,
 				ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */,
+				6DAD0B3419187F1F005B3807 /* Warm Analogue 75.mp3 in Resources */,
+				6DAD0B1619187F1F005B3807 /* Warm Analogue 45.mp3 in Resources */,
 				ECE8321C1718905B006E2391 /* GreenVolume.png in Resources */,
+				6DAD0B2E19187F1F005B3807 /* Warm Analogue 69.mp3 in Resources */,
+				6DED87B7191874460091721E /* Electric Guitar 78.mp3 in Resources */,
 				ECE8322117189C1B006E2391 /* LikeOFF.png in Resources */,
 				ECE8322317189C1B006E2391 /* LikeON.png in Resources */,
 				ECE832261718A767006E2391 /* BlueMenu.png in Resources */,
@@ -4662,6 +4452,7 @@
 				ECE8322E1718D6C0006E2391 /* Skill_GREEN.png in Resources */,
 				ECE832301718D6C0006E2391 /* Skill_RED.png in Resources */,
 				ECE832321718D6C0006E2391 /* Skill_YELLOW.png in Resources */,
+				6DAD0B1F19187F1F005B3807 /* Warm Analogue 54.mp3 in Resources */,
 				ECE832361718D82C006E2391 /* Skill_GREY.png in Resources */,
 				ECE8323E1718EA34006E2391 /* SocialViewController.xib in Resources */,
 				9DF148271725EFDB0056A6D1 /* EffectsIcon.png in Resources */,
@@ -4685,10 +4476,13 @@
 				ECDF7F66173D590F003E51EC /* SocialFollowButton.png in Resources */,
 				ECDF7F68173D590F003E51EC /* SocialFollowingButton.png in Resources */,
 				9D21E3D0173DBD2B00AD6C1F /* LightsGrid.png in Resources */,
+				6DED8795191874460091721E /* Electric Guitar 44.mp3 in Resources */,
 				ECFF771A1742EA1C002D7D40 /* Bear_Brown.png in Resources */,
 				ECFF771D1742EA9E002D7D40 /* BackButtonRev.png in Resources */,
 				9D64729E1741DEEE00C63B1B /* LightsArrow.png in Resources */,
 				ECFF773617440BA9002D7D40 /* FirmwareModalViewController.xib in Resources */,
+				6DAD0B1419187F1F005B3807 /* Warm Analogue 43.mp3 in Resources */,
+				6DED87AA191874460091721E /* Electric Guitar 65.mp3 in Resources */,
 				9DB5C4C017430FA700EAF9A6 /* Shape_2x2ButtonOFF.png in Resources */,
 				9DB5C4C217430FA700EAF9A6 /* Shape_2x2ButtonON.png in Resources */,
 				9DB5C4C417430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png in Resources */,
@@ -4700,9 +4494,13 @@
 				ECFF776A17457E3D002D7D40 /* TextBox.png in Resources */,
 				ECFF776C17457E3D002D7D40 /* FaceBookButton.png in Resources */,
 				ECFF776E17457E3D002D7D40 /* PlayButtonVideo.png in Resources */,
+				6DED879C191874460091721E /* Electric Guitar 51.mp3 in Resources */,
 				ECFF777017457E3D002D7D40 /* IncidentGtar_ComButton.png in Resources */,
+				6DAD0B1719187F1F005B3807 /* Warm Analogue 46.mp3 in Resources */,
+				6DED87B4191874460091721E /* Electric Guitar 75.mp3 in Resources */,
 				ECFF777217457E3D002D7D40 /* gTarLogoTitle.png in Resources */,
 				ECFF777717457ECA002D7D40 /* CancelButton.png in Resources */,
+				6DED879B191874460091721E /* Electric Guitar 50.mp3 in Resources */,
 				ECFF777917457ECA002D7D40 /* MagGlass.png in Resources */,
 				ECFF777B17457ECA002D7D40 /* SearchBar.png in Resources */,
 				9DB5C4D6174448E100EAF9A6 /* Color_alternating.png in Resources */,
@@ -4716,6 +4514,7 @@
 				9DB5C4E8174448E100EAF9A6 /* Color_yellow.png in Resources */,
 				9DB5C4EB1744495300EAF9A6 /* Color_white.png in Resources */,
 				9DB5C4FD1745ACE700EAF9A6 /* Color_blue_Select.png in Resources */,
+				6DED87A8191874460091721E /* Electric Guitar 63.mp3 in Resources */,
 				9DB5C4FF1745ACE700EAF9A6 /* Color_cyan_Select.png in Resources */,
 				9DB5C5011745ACE700EAF9A6 /* Color_green_Select.png in Resources */,
 				9DB5C5071745ACE700EAF9A6 /* Color_multi_Select.png in Resources */,
@@ -4728,8 +4527,10 @@
 				9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */,
 				9D054CB0174C68E000FA3239 /* Bowed Strings 41.mp3 in Resources */,
 				9D054CB2174C68E000FA3239 /* Bowed Strings 42.mp3 in Resources */,
+				6DED87B8191874460091721E /* Electric Guitar 79.mp3 in Resources */,
 				9D054CB4174C68E000FA3239 /* Bowed Strings 43.mp3 in Resources */,
 				9D054CB6174C68E000FA3239 /* Bowed Strings 44.mp3 in Resources */,
+				6DAD0B1919187F1F005B3807 /* Warm Analogue 48.mp3 in Resources */,
 				9D054CB8174C68E000FA3239 /* Bowed Strings 45.mp3 in Resources */,
 				9D054CBA174C68E000FA3239 /* Bowed Strings 46.mp3 in Resources */,
 				9D054CBC174C68E000FA3239 /* Bowed Strings 47.mp3 in Resources */,
@@ -4741,6 +4542,7 @@
 				9D054CC8174C68E000FA3239 /* Bowed Strings 53.mp3 in Resources */,
 				9D054CCA174C68E000FA3239 /* Bowed Strings 54.mp3 in Resources */,
 				9D054CCC174C68E000FA3239 /* Bowed Strings 55.mp3 in Resources */,
+				6DED8792191874460091721E /* Electric Guitar 41.mp3 in Resources */,
 				9D054CCE174C68E000FA3239 /* Bowed Strings 56.mp3 in Resources */,
 				9D054CD0174C68E000FA3239 /* Bowed Strings 57.mp3 in Resources */,
 				9D054CD2174C68E000FA3239 /* Bowed Strings 58.mp3 in Resources */,
@@ -4759,9 +4561,11 @@
 				9D054CEC174C68E000FA3239 /* Bowed Strings 71.mp3 in Resources */,
 				9D054CEE174C68E000FA3239 /* Bowed Strings 72.mp3 in Resources */,
 				9D054CF0174C68E000FA3239 /* Bowed Strings 73.mp3 in Resources */,
+				6DAD0B1319187F1F005B3807 /* Warm Analogue 42.mp3 in Resources */,
 				9D054CF2174C68E000FA3239 /* Bowed Strings 74.mp3 in Resources */,
 				9D054CF4174C68E000FA3239 /* Bowed Strings 75.mp3 in Resources */,
 				9D054CF6174C68E000FA3239 /* Bowed Strings 76.mp3 in Resources */,
+				6DED879A191874460091721E /* Electric Guitar 49.mp3 in Resources */,
 				9D054CF8174C68E000FA3239 /* Bowed Strings 77.mp3 in Resources */,
 				9D054CFA174C68E000FA3239 /* Bowed Strings 78.mp3 in Resources */,
 				9D054CFC174C68E000FA3239 /* Bowed Strings 79.mp3 in Resources */,
@@ -4807,17 +4611,21 @@
 				9D054D74174C68E700FA3239 /* Carl's Synth 77.mp3 in Resources */,
 				9D054D76174C68E700FA3239 /* Carl's Synth 78.mp3 in Resources */,
 				9D054D78174C68E700FA3239 /* Carl's Synth 79.mp3 in Resources */,
+				6DED87AD191874460091721E /* Electric Guitar 68.mp3 in Resources */,
 				9D054D7A174C68E700FA3239 /* Carl's Synth 80.mp3 in Resources */,
 				9D054DA6174C68EE00FA3239 /* Muted Clav 40.mp3 in Resources */,
+				6DAD0B1219187F1F005B3807 /* Warm Analogue 41.mp3 in Resources */,
 				9D054DA8174C68EE00FA3239 /* Muted Clav 41.mp3 in Resources */,
 				9D054DAA174C68EE00FA3239 /* Muted Clav 42.mp3 in Resources */,
 				9D054DAC174C68EE00FA3239 /* Muted Clav 43.mp3 in Resources */,
 				9D054DAE174C68EE00FA3239 /* Muted Clav 44.mp3 in Resources */,
 				9D054DB0174C68EE00FA3239 /* Muted Clav 45.mp3 in Resources */,
+				6DED87A5191874460091721E /* Electric Guitar 60.mp3 in Resources */,
 				9D054DB2174C68EE00FA3239 /* Muted Clav 46.mp3 in Resources */,
 				9D054DB4174C68EE00FA3239 /* Muted Clav 47.mp3 in Resources */,
 				9D054DB6174C68EE00FA3239 /* Muted Clav 48.mp3 in Resources */,
 				9D054DB8174C68EE00FA3239 /* Muted Clav 49.mp3 in Resources */,
+				6DAD0B2419187F1F005B3807 /* Warm Analogue 59.mp3 in Resources */,
 				9D054DBA174C68EE00FA3239 /* Muted Clav 50.mp3 in Resources */,
 				9D054DBC174C68EE00FA3239 /* Muted Clav 51.mp3 in Resources */,
 				9D054DBE174C68EE00FA3239 /* Muted Clav 52.mp3 in Resources */,
@@ -4828,9 +4636,11 @@
 				9D054DC8174C68EE00FA3239 /* Muted Clav 57.mp3 in Resources */,
 				9D054DCA174C68EE00FA3239 /* Muted Clav 58.mp3 in Resources */,
 				9D054DCC174C68EE00FA3239 /* Muted Clav 59.mp3 in Resources */,
+				6DAD0B1B19187F1F005B3807 /* Warm Analogue 50.mp3 in Resources */,
 				9D054DCE174C68EE00FA3239 /* Muted Clav 60.mp3 in Resources */,
 				9D054DD0174C68EE00FA3239 /* Muted Clav 61.mp3 in Resources */,
 				9D054DD2174C68EE00FA3239 /* Muted Clav 62.mp3 in Resources */,
+				6DAD0B3719187F1F005B3807 /* Warm Analogue 78.mp3 in Resources */,
 				9D054DD4174C68EE00FA3239 /* Muted Clav 63.mp3 in Resources */,
 				9D054DD6174C68EE00FA3239 /* Muted Clav 64.mp3 in Resources */,
 				9D054DD8174C68EE00FA3239 /* Muted Clav 65.mp3 in Resources */,
@@ -4843,11 +4653,13 @@
 				9D054DE6174C68EE00FA3239 /* Muted Clav 72.mp3 in Resources */,
 				9D054DE8174C68EE00FA3239 /* Muted Clav 73.mp3 in Resources */,
 				9D054DEA174C68EE00FA3239 /* Muted Clav 74.mp3 in Resources */,
+				6DAD0B1E19187F1F005B3807 /* Warm Analogue 53.mp3 in Resources */,
 				9D054DEC174C68EE00FA3239 /* Muted Clav 75.mp3 in Resources */,
 				9D054DEE174C68EE00FA3239 /* Muted Clav 76.mp3 in Resources */,
 				9D054DF0174C68EE00FA3239 /* Muted Clav 77.mp3 in Resources */,
 				9D054DF2174C68EE00FA3239 /* Muted Clav 78.mp3 in Resources */,
 				9D054DF4174C68EE00FA3239 /* Muted Clav 79.mp3 in Resources */,
+				6DED87A3191874460091721E /* Electric Guitar 58.mp3 in Resources */,
 				9D054DF6174C68EE00FA3239 /* Muted Clav 80.mp3 in Resources */,
 				9D054E22174C68FB00FA3239 /* Upright Bass 40.mp3 in Resources */,
 				9D054E24174C68FB00FA3239 /* Upright Bass 41.mp3 in Resources */,
@@ -4857,9 +4669,12 @@
 				9D054E2C174C68FB00FA3239 /* Upright Bass 45.mp3 in Resources */,
 				9D054E2E174C68FB00FA3239 /* Upright Bass 46.mp3 in Resources */,
 				9D054E30174C68FB00FA3239 /* Upright Bass 47.mp3 in Resources */,
+				6DED87A9191874460091721E /* Electric Guitar 64.mp3 in Resources */,
 				9D054E32174C68FB00FA3239 /* Upright Bass 48.mp3 in Resources */,
 				9D054E34174C68FB00FA3239 /* Upright Bass 49.mp3 in Resources */,
 				9D054E36174C68FB00FA3239 /* Upright Bass 50.mp3 in Resources */,
+				6DAD0B2319187F1F005B3807 /* Warm Analogue 58.mp3 in Resources */,
+				6DED8794191874460091721E /* Electric Guitar 43.mp3 in Resources */,
 				9D054E38174C68FB00FA3239 /* Upright Bass 51.mp3 in Resources */,
 				9D054E3A174C68FB00FA3239 /* Upright Bass 52.mp3 in Resources */,
 				9D054E3C174C68FB00FA3239 /* Upright Bass 53.mp3 in Resources */,
@@ -4867,6 +4682,7 @@
 				9D054E40174C68FB00FA3239 /* Upright Bass 55.mp3 in Resources */,
 				9D054E42174C68FB00FA3239 /* Upright Bass 56.mp3 in Resources */,
 				9D054E44174C68FB00FA3239 /* Upright Bass 57.mp3 in Resources */,
+				6DAD0B2119187F1F005B3807 /* Warm Analogue 56.mp3 in Resources */,
 				9D054E46174C68FB00FA3239 /* Upright Bass 58.mp3 in Resources */,
 				9D054E48174C68FB00FA3239 /* Upright Bass 59.mp3 in Resources */,
 				9D054E4A174C68FB00FA3239 /* Upright Bass 60.mp3 in Resources */,
@@ -4874,6 +4690,7 @@
 				9D054E4E174C68FB00FA3239 /* Upright Bass 62.mp3 in Resources */,
 				9D054E50174C68FB00FA3239 /* Upright Bass 63.mp3 in Resources */,
 				9D054E52174C68FB00FA3239 /* Upright Bass 64.mp3 in Resources */,
+				6DED87B2191874460091721E /* Electric Guitar 73.mp3 in Resources */,
 				9D054E54174C68FB00FA3239 /* Upright Bass 65.mp3 in Resources */,
 				9D054E56174C68FB00FA3239 /* Upright Bass 66.mp3 in Resources */,
 				9D054E58174C68FB00FA3239 /* Upright Bass 67.mp3 in Resources */,
@@ -4885,21 +4702,26 @@
 				9D054E64174C68FB00FA3239 /* Upright Bass 73.mp3 in Resources */,
 				9D054E66174C68FB00FA3239 /* Upright Bass 74.mp3 in Resources */,
 				9D054E68174C68FB00FA3239 /* Upright Bass 75.mp3 in Resources */,
+				6DAD0B1A19187F1F005B3807 /* Warm Analogue 49.mp3 in Resources */,
 				9D054E6A174C68FB00FA3239 /* Upright Bass 76.mp3 in Resources */,
 				9D054E6C174C68FB00FA3239 /* Upright Bass 77.mp3 in Resources */,
+				6DAD0B2219187F1F005B3807 /* Warm Analogue 57.mp3 in Resources */,
 				9D054E6E174C68FB00FA3239 /* Upright Bass 78.mp3 in Resources */,
 				9D054E70174C68FB00FA3239 /* Upright Bass 79.mp3 in Resources */,
+				6DED87A2191874460091721E /* Electric Guitar 57.mp3 in Resources */,
 				9D054E72174C68FB00FA3239 /* Upright Bass 80.mp3 in Resources */,
 				9D054E9E174D425B00FA3239 /* Marimba 40.mp3 in Resources */,
 				9D054EA0174D425B00FA3239 /* Marimba 41.mp3 in Resources */,
 				9D054EA2174D425B00FA3239 /* Marimba 42.mp3 in Resources */,
 				9D054EA4174D425B00FA3239 /* Marimba 43.mp3 in Resources */,
 				9D054EA6174D425B00FA3239 /* Marimba 44.mp3 in Resources */,
+				6DAD0B2519187F1F005B3807 /* Warm Analogue 60.mp3 in Resources */,
 				9D054EA8174D425B00FA3239 /* Marimba 45.mp3 in Resources */,
 				9D054EAA174D425B00FA3239 /* Marimba 46.mp3 in Resources */,
 				9D054EAC174D425B00FA3239 /* Marimba 47.mp3 in Resources */,
 				9D054EAE174D425B00FA3239 /* Marimba 48.mp3 in Resources */,
 				9D054EB0174D425B00FA3239 /* Marimba 49.mp3 in Resources */,
+				6DED8797191874460091721E /* Electric Guitar 46.mp3 in Resources */,
 				9D054EB2174D425B00FA3239 /* Marimba 50.mp3 in Resources */,
 				9D054EB4174D425B00FA3239 /* Marimba 51.mp3 in Resources */,
 				9D054EB6174D425B00FA3239 /* Marimba 52.mp3 in Resources */,
@@ -4921,8 +4743,11 @@
 				9D054ED6174D425B00FA3239 /* Marimba 68.mp3 in Resources */,
 				9D054ED8174D425B00FA3239 /* Marimba 69.mp3 in Resources */,
 				9D054EDA174D425B00FA3239 /* Marimba 70.mp3 in Resources */,
+				6DED87AB191874460091721E /* Electric Guitar 66.mp3 in Resources */,
 				9D054EDC174D425B00FA3239 /* Marimba 71.mp3 in Resources */,
+				6DED87A0191874460091721E /* Electric Guitar 55.mp3 in Resources */,
 				9D054EDE174D425B00FA3239 /* Marimba 72.mp3 in Resources */,
+				6DED87AE191874460091721E /* Electric Guitar 69.mp3 in Resources */,
 				9D054EE0174D425B00FA3239 /* Marimba 73.mp3 in Resources */,
 				9D054EE2174D425B00FA3239 /* Marimba 74.mp3 in Resources */,
 				9D054EE4174D425B00FA3239 /* Marimba 75.mp3 in Resources */,
@@ -4931,6 +4756,7 @@
 				9D054EEA174D425B00FA3239 /* Marimba 78.mp3 in Resources */,
 				9D054EEC174D425B00FA3239 /* Marimba 79.mp3 in Resources */,
 				9D054EEE174D425B00FA3239 /* Marimba 80.mp3 in Resources */,
+				6DAD0B1819187F1F005B3807 /* Warm Analogue 47.mp3 in Resources */,
 				9DCC3B6B1790D8B700DDD603 /* gTarIcon_57x57.png in Resources */,
 				9DCC3B6F1790DACD00DDD603 /* gTarIcon_114x114.png in Resources */,
 				9DDB4E7817A2005400499808 /* PauseButtonVideo.png in Resources */,
@@ -4949,108 +4775,6 @@
 				9D846E7A1797711600A28FF6 /* gTarIcon_57x57.png in Resources */,
 				ECC11E56162D07AD001A231A /* Default.png in Resources */,
 				ECC11E57162D07AD001A231A /* Default@2x.png in Resources */,
-				ECC11E59162D07AD001A231A /* Electric 2.mp3 in Resources */,
-				ECC11E5A162D07AD001A231A /* Electric 3.mp3 in Resources */,
-				ECC11E5B162D07AD001A231A /* Electric 4.mp3 in Resources */,
-				ECC11E5C162D07AD001A231A /* Electric 5.mp3 in Resources */,
-				ECC11E5D162D07AD001A231A /* Electric 6.mp3 in Resources */,
-				ECC11E5E162D07AD001A231A /* Electric 7.mp3 in Resources */,
-				ECC11E5F162D07AD001A231A /* Electric 8.mp3 in Resources */,
-				ECC11E60162D07AD001A231A /* Electric 9.mp3 in Resources */,
-				ECC11E61162D07AD001A231A /* Electric 10.mp3 in Resources */,
-				ECC11E62162D07AD001A231A /* Electric 11.mp3 in Resources */,
-				ECC11E63162D07AD001A231A /* Electric 12.mp3 in Resources */,
-				ECC11E64162D07AD001A231A /* Electric 13.mp3 in Resources */,
-				ECC11E65162D07AD001A231A /* Electric 14.mp3 in Resources */,
-				ECC11E66162D07AD001A231A /* Electric 15.mp3 in Resources */,
-				ECC11E67162D07AD001A231A /* Electric 16.mp3 in Resources */,
-				ECC11E68162D07AD001A231A /* Electric 17.mp3 in Resources */,
-				ECC11E69162D07AD001A231A /* Electric 18.mp3 in Resources */,
-				ECC11E6A162D07AD001A231A /* Electric 19.mp3 in Resources */,
-				ECC11E6B162D07AD001A231A /* Electric 20.mp3 in Resources */,
-				ECC11E6C162D07AD001A231A /* Electric 21.mp3 in Resources */,
-				ECC11E6D162D07AD001A231A /* Electric 22.mp3 in Resources */,
-				ECC11E6E162D07AD001A231A /* Electric 23.mp3 in Resources */,
-				ECC11E6F162D07AD001A231A /* Electric 24.mp3 in Resources */,
-				ECC11E70162D07AD001A231A /* Electric 25.mp3 in Resources */,
-				ECC11E71162D07AD001A231A /* Electric 26.mp3 in Resources */,
-				ECC11E72162D07AD001A231A /* Electric 27.mp3 in Resources */,
-				ECC11E73162D07AD001A231A /* Electric 28.mp3 in Resources */,
-				ECC11E74162D07AD001A231A /* Electric 29.mp3 in Resources */,
-				ECC11E75162D07AD001A231A /* Electric 30.mp3 in Resources */,
-				ECC11E76162D07AD001A231A /* Electric 31.mp3 in Resources */,
-				ECC11E77162D07AD001A231A /* Electric 32.mp3 in Resources */,
-				ECC11E78162D07AD001A231A /* Electric 33.mp3 in Resources */,
-				ECC11E79162D07AD001A231A /* Electric 34.mp3 in Resources */,
-				ECC11E7A162D07AD001A231A /* Electric 35.mp3 in Resources */,
-				ECC11E7B162D07AD001A231A /* Electric 36.mp3 in Resources */,
-				ECC11E7C162D07AD001A231A /* Electric 37.mp3 in Resources */,
-				ECC11E7D162D07AD001A231A /* Electric 38.mp3 in Resources */,
-				ECC11E7E162D07AD001A231A /* Electric 39.mp3 in Resources */,
-				ECC11E7F162D07AD001A231A /* Electric 40.mp3 in Resources */,
-				ECC11E80162D07AD001A231A /* Electric 41.mp3 in Resources */,
-				ECC11E81162D07AD001A231A /* Electric 42.mp3 in Resources */,
-				ECC11E82162D07AD001A231A /* Electric 43.mp3 in Resources */,
-				ECC11E83162D07AD001A231A /* Electric 44.mp3 in Resources */,
-				ECC11E84162D07AD001A231A /* Electric 45.mp3 in Resources */,
-				ECC11E85162D07AD001A231A /* Electric 46.mp3 in Resources */,
-				ECC11E86162D07AD001A231A /* Electric 47.mp3 in Resources */,
-				ECC11E87162D07AD001A231A /* Electric 48.mp3 in Resources */,
-				ECC11E88162D07AD001A231A /* Electric 49.mp3 in Resources */,
-				ECC11E89162D07AD001A231A /* Electric 50.mp3 in Resources */,
-				ECC11E8A162D07AD001A231A /* Electric 51.mp3 in Resources */,
-				ECC11E8B162D07AD001A231A /* Electric 52.mp3 in Resources */,
-				ECC11E8C162D07AD001A231A /* Electric 53.mp3 in Resources */,
-				ECC11E8D162D07AD001A231A /* Electric 54.mp3 in Resources */,
-				ECC11E8E162D07AD001A231A /* Electric 55.mp3 in Resources */,
-				ECC11E8F162D07AD001A231A /* Electric 56.mp3 in Resources */,
-				ECC11E90162D07AD001A231A /* Electric 57.mp3 in Resources */,
-				ECC11E91162D07AD001A231A /* Electric 58.mp3 in Resources */,
-				ECC11E92162D07AD001A231A /* Electric 59.mp3 in Resources */,
-				ECC11E93162D07AD001A231A /* Electric 60.mp3 in Resources */,
-				ECC11E94162D07AD001A231A /* Electric 61.mp3 in Resources */,
-				ECC11E95162D07AD001A231A /* Electric 62.mp3 in Resources */,
-				ECC11E96162D07AD001A231A /* Electric 63.mp3 in Resources */,
-				ECC11E97162D07AD001A231A /* Electric 64.mp3 in Resources */,
-				ECC11E98162D07AD001A231A /* Electric 65.mp3 in Resources */,
-				ECC11E99162D07AD001A231A /* Electric 66.mp3 in Resources */,
-				ECC11E9A162D07AD001A231A /* Electric 67.mp3 in Resources */,
-				ECC11E9B162D07AD001A231A /* Electric 68.mp3 in Resources */,
-				ECC11E9C162D07AD001A231A /* Electric 69.mp3 in Resources */,
-				ECC11E9D162D07AD001A231A /* Electric 70.mp3 in Resources */,
-				ECC11E9E162D07AD001A231A /* Electric 71.mp3 in Resources */,
-				ECC11E9F162D07AD001A231A /* Electric 72.mp3 in Resources */,
-				ECC11EA0162D07AD001A231A /* Electric 73.mp3 in Resources */,
-				ECC11EA1162D07AD001A231A /* Electric 74.mp3 in Resources */,
-				ECC11EA2162D07AD001A231A /* Electric 75.mp3 in Resources */,
-				ECC11EA3162D07AD001A231A /* Electric 76.mp3 in Resources */,
-				ECC11EA4162D07AD001A231A /* Electric 77.mp3 in Resources */,
-				ECC11EA5162D07AD001A231A /* Electric 78.mp3 in Resources */,
-				ECC11EA6162D07AD001A231A /* Electric 79.mp3 in Resources */,
-				ECC11EA7162D07AD001A231A /* Electric 80.mp3 in Resources */,
-				ECC11EA8162D07AD001A231A /* Electric 81.mp3 in Resources */,
-				ECC11EA9162D07AD001A231A /* Electric 82.mp3 in Resources */,
-				ECC11EAA162D07AD001A231A /* Electric 83.mp3 in Resources */,
-				ECC11EAB162D07AD001A231A /* Electric 84.mp3 in Resources */,
-				ECC11EAC162D07AD001A231A /* Electric 85.mp3 in Resources */,
-				ECC11EAD162D07AD001A231A /* Electric 86.mp3 in Resources */,
-				ECC11EAE162D07AD001A231A /* Electric 87.mp3 in Resources */,
-				ECC11EAF162D07AD001A231A /* Electric 88.mp3 in Resources */,
-				ECC11EB0162D07AD001A231A /* Electric 89.mp3 in Resources */,
-				ECC11EB1162D07AD001A231A /* Electric 90.mp3 in Resources */,
-				ECC11EB2162D07AD001A231A /* Electric 91.mp3 in Resources */,
-				ECC11EB3162D07AD001A231A /* Electric 92.mp3 in Resources */,
-				ECC11EB4162D07AD001A231A /* Electric 93.mp3 in Resources */,
-				ECC11EB5162D07AD001A231A /* Electric 94.mp3 in Resources */,
-				ECC11EB6162D07AD001A231A /* Electric 95.mp3 in Resources */,
-				ECC11EB7162D07AD001A231A /* Electric 96.mp3 in Resources */,
-				ECC11EB8162D07AD001A231A /* Electric 97.mp3 in Resources */,
-				ECC11EB9162D07AD001A231A /* Electric 98.mp3 in Resources */,
-				ECC11EBA162D07AD001A231A /* Electric 99.mp3 in Resources */,
-				ECC11EBB162D07AD001A231A /* Electric 100.mp3 in Resources */,
-				ECC11EBC162D07AD001A231A /* Electric 101.mp3 in Resources */,
-				ECC11EBD162D07AD001A231A /* Electric 102.mp3 in Resources */,
-				ECC11EBE162D07AD001A231A /* Electric 103.mp3 in Resources */,
 				ECC11EBF162D07AD001A231A /* Acoustic Guitar 40.mp3 in Resources */,
 				ECC11EC0162D07AD001A231A /* Acoustic Guitar 41.mp3 in Resources */,
 				ECC11EC1162D07AD001A231A /* Acoustic Guitar 42.mp3 in Resources */,
@@ -5370,7 +5094,7 @@
 				ECC12191162D07AD001A231A /* string-light-vertical.png in Resources */,
 				ECC12192162D07AD001A231A /* string.png in Resources */,
 				ECC12193162D07AD001A231A /* preloaded-content.plist in Resources */,
-				ECC12194162D07AD001A231A /* instruments.plist in Resources */,
+				ECC12194162D07AD001A231A /* instrumentList.plist in Resources */,
 				ECC12195162D07AD001A231A /* tutorial.plist in Resources */,
 				ECC121C2162D07AD001A231A /* MainWindow.xib in Resources */,
 				ECC121C3162D07AD001A231A /* LightsTab.png in Resources */,

@@ -10,6 +10,7 @@
 
 @interface InstrumentTableViewController () {
     BOOL _flickerState;
+    BOOL _isLoadingInstrument;
 }
 
 //@property (retain, nonatomic) AudioController *audioController;
@@ -35,6 +36,7 @@
         CGRect frame = CGRectMake(0, 0, 0, 0);
         _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
         
+        _isLoadingInstrument = NO;
         _flickerState = NO;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeInstrument:) name:@"InstrumentChanged" object:nil];
@@ -113,13 +115,26 @@
     return cell;
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(_isLoadingInstrument){
+        return nil;
+    }else{
+        return indexPath;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    _isLoadingInstrument = YES;
+    
     NSString *instrumentName = [instruments objectAtIndex:indexPath.row];
     
     [self waitForCell:indexPath];
     
     [delegate didSelectInstrument:instrumentName withSelector:@selector(samplerFinishedLoadingCB:) andOwner:self];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,6 +147,8 @@
 - (void)samplerFinishedLoadingCB:(NSNumber*)result
 {
     NSLog(@"Sampler finished loading CB");
+    
+    _isLoadingInstrument = NO;
     
     if ([result boolValue])
     {

@@ -41,7 +41,7 @@
 - (void)adjustEffectAtIndex:(NSInteger)index toPoint:(CGPoint)position;
 
 - (void) didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender;
-- (void) setCurrentInstrument:(NSInteger)index;
+- (void) setCurrentInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender;
 - (NSInteger) getCurrentInstrument;
 - (NSArray *) getInstrumentList;
 - (NSInteger) getIndexForInstrument:(NSString *)instrumentName;

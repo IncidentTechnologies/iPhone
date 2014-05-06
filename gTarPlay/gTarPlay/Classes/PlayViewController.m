@@ -2315,7 +2315,8 @@ extern UserController * g_userController;
     
     // Determine whether to play the tapped string
     if(isStandalone && !_songIsPaused){
-        [self tapNoteFromTouchPoint:touchPoint];
+        //[self performSelectorInBackground:@selector(tapNoteFromTouchPoint:) withObject:[NSValue valueWithCGPoint:touchPoint]];
+        [self tapNoteFromTouchPoint:[NSValue valueWithCGPoint:touchPoint]];
     }
     
     // Debug
@@ -2346,7 +2347,9 @@ extern UserController * g_userController;
     if(isStandalone && abs(initPoint.y - currentPoint.y) > 10 && !_songIsPaused){
         
         CGPoint touchPoint = [touch locationInView:self.glView];
-        [self strumNoteFromTouchPoint:touchPoint];
+        //[self strumNoteFromTouchPoint:touchPoint];
+        [self strumNoteFromTouchPoint:[NSValue valueWithCGPoint:touchPoint]];
+        //[self performSelectorInBackground:@selector(strumNoteFromTouchPoint:) withObject:[NSValue valueWithCGPoint:touchPoint]];
         
     }
     
@@ -2363,8 +2366,10 @@ extern UserController * g_userController;
 
 #pragma mark - Standalone logic
 // Standalone
-- (void)tapNoteFromTouchPoint:(CGPoint)touchPoint
+- (void)tapNoteFromTouchPoint:(NSValue *)touchPointVaue
 {
+    CGPoint touchPoint = [touchPointVaue CGPointValue];
+    
     NSMutableDictionary * frameWithString = [_displayController getStringPluckFromTap:touchPoint];
     
     if(frameWithString == nil){
@@ -2389,8 +2394,10 @@ extern UserController * g_userController;
 }
 
 // Standalone
-- (void)strumNoteFromTouchPoint:(CGPoint)touchPoint
+- (void)strumNoteFromTouchPoint:(NSValue *)touchPointValue
 {
+    CGPoint touchPoint = [touchPointValue CGPointValue];
+    
     NSMutableDictionary * frameWithString = [_displayController getStringPluckFromTap:touchPoint];
     
     if(frameWithString == nil){
@@ -2542,7 +2549,8 @@ extern UserController * g_userController;
             // Strummed with the right fretting, autocomplete
             
             //if(_difficulty == PlayViewControllerDifficultyEasy || _difficulty == PlayViewControllerDifficultyMedium){
-                
+            
+            @synchronized(tappedFrame.m_notesPending){
                 for(NSNote * nn in tappedFrame.m_notesPending){
                     
                     GtarPluck pluck;
@@ -2559,7 +2567,8 @@ extern UserController * g_userController;
                     [notesToRemove addObject:nn];
                     
                 }
-                
+            }
+            
             /*}else{
             
                 GtarPluck pluck;
@@ -2581,8 +2590,10 @@ extern UserController * g_userController;
         }
     }
     
-    for(NSNote * nnn in notesToRemove){
-        [tappedFrame removeString:nnn.m_string andFret:nnn.m_fret];
+    @synchronized(tappedFrame.m_notesPending){
+        for(NSNote * nnn in notesToRemove){
+            [tappedFrame removeString:nnn.m_string andFret:nnn.m_fret];
+        }
     }
 
     // Prepare data to score

@@ -212,7 +212,7 @@ extern Facebook * g_facebook;
 - (void)initSoundMaster
 {
     g_soundMaster = [[SoundMaster alloc] init];
-    [g_soundMaster setCurrentInstrument:1];
+    [g_soundMaster setCurrentInstrument:0 withSelector:nil andOwner:nil];
 }
 
 - (void)releaseSoundMaster

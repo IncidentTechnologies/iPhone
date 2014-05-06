@@ -55,7 +55,7 @@
 		m_glView = glView;
         
         m_beatsToPreloadSync = SONG_BEATS_PER_SCREEN;
-        m_beatsToPreloadAsync = SONG_BEATS_PER_SCREEN * 2;
+        m_beatsToPreloadAsync = SONG_BEATS_PER_SCREEN * 4;
         
         m_framesDisplayed = 0;
         
@@ -88,8 +88,8 @@
         [self createNumberModels];
         
         [self createLineModels];
-        
-        [self preloadFrames:PRELOAD_INITIAL];
+    
+        [self preloadFrames:PRELOAD_INCREMENT*4];
         
         [self createBackgroundTexture];
         
@@ -221,7 +221,9 @@
             if ( frame.m_absoluteBeatStart < (currentBeat + m_beatsToPreloadSync) )
             {
                 
-                [self displayFrame:frame];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                    [self displayFrame:frame];
+                });
                 
                 [framesToRemove addObject:frame];
                 
@@ -784,13 +786,14 @@
 }
 
 #pragma mark - Standalone helper functions
+// To adjust fret coloring, refer to this mapping function and g_standaloneFretColors
 - (int)getStandaloneFretFromFret:(int)fret
 {
     if(fret == 0){
         return 0;
-    }else if(fret < 5){
+    }else if(fret == 1 || fret == 4 || fret == 7 || fret == 10 || fret == 13){
         return 1;
-    }else if(fret < 11){
+    }else if(fret == 2 || fret == 5 || fret == 8 || fret == 11 || fret == 14){
         return 2;
     }else{
         return 3;

@@ -30,8 +30,8 @@
             g_soundMaster = soundMaster;
             [g_soundMaster start];
         }else{
-            g_soundMaster = [[SoundMaster alloc] init];
-            [g_soundMaster start];
+            //g_soundMaster = [[SoundMaster alloc] init];
+            //[g_soundMaster start];
         }
     }
     

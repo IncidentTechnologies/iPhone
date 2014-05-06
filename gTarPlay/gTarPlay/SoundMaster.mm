@@ -22,6 +22,8 @@
 #define EFFECT_NAME_CHORUS @"Chorus"
 #define EFFECT_NAME_DISTORT @"Distortion"
 
+#define DEFAULT_INSTRUMENT @"Electric Guitar"
+
 @interface SoundMaster ()
 {
     AudioController * audioController;
@@ -38,6 +40,7 @@
     DistortionNode * m_distortionNode;
     ButterWorthFilterNode * m_butterworthNode;
 #endif
+    
 }
 @end
 
@@ -100,7 +103,7 @@
     
     [self initEffects];
     
-    [audioController initializeAUGraph];
+    //[audioController initializeAUGraph];
     
     return true;
     
@@ -130,19 +133,19 @@
 - (void)releaseBank:(SamplerBankNode *)bank
 {
     
+    // Start and stop the AUGraph with timing
+    
     NSLog(@"Release bank");
     
-    [self stop];
-    
     m_samplerNode->ReleaseBank(bank);
-    
-    [self start];
 }
 
 - (void)start
 {
-    NSLog(@"Start");
-    [audioController startAUGraph];
+    if(!isLoadingInstrument){
+        NSLog(@"Start");
+        [audioController startAUGraph];
+    }
 }
 
 - (void)stop
@@ -168,10 +171,10 @@
 
 - (void)disconnectAndReleaseEffectNode:(EffectNode *)effectNode
 {
-    [audioController stopAUGraph];
+    [self stop];
     effectNode->DeleteAndDisconnect(CONN_OUT);
     effectNode = nil;
-    [audioController startAUGraph];
+    [self start];
 }
 
 #pragma mark - Routing
@@ -247,71 +250,107 @@
 }*/
 
 #pragma mark - Instrument
-- (void) loadInstrument:(NSInteger)index
+- (void) loadInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender
 {
+    //NSInteger index = [[timer userInfo] intValue];
+    
     if(index == currentInstrumentIndex){
         NSLog(@"Instrument already loaded");
+
+        // Callback
+        if(sender != nil){
+            [sender performSelectorInBackground:cb withObject:[NSNumber numberWithBool:TRUE]];
+        }
         return;
+        
+    }else if (index >= [m_instruments count] || index < 0){
+        
+        NSLog(@"Attempting to access instrument index out of bounds");
+        
+        // Callback
+        if(sender != nil){
+            [sender performSelectorInBackground:cb withObject:[NSNumber numberWithBool:TRUE]];
+        }
+        return;
+        
     }else{
         
         NSLog(@"Release %i, set new to %i",currentInstrumentIndex,index);
     }
     
-    // TODO: FIGURE OUT WHY INST 0 IS CRASHING ON IPHONE
-    //index = 1;
-    //
-    
-    
     isLoadingInstrument = YES;
+    
+    dispatch_semaphore_wait([audioController TakeSemaphore], DISPATCH_TIME_FOREVER);
+    
+    [self releaseInstrument:currentInstrumentIndex];
+    
+    currentInstrumentIndex = index;
+    
+    // Generate a bank
+    SamplerBankNode * newBank = [self generateBank];
+    NSMutableDictionary * instrument = [m_instruments objectAtIndex:index];
+    
+    NSLog(@"Load samples for instrument %i",index);
+    
+    int firstNote = [[instrument objectForKey:@"FirstNoteMidiNum"] intValue];
+    int numNotes = [[instrument objectForKey:@"NumNotes"] intValue];
     
     if(m_instruments && index < [m_instruments count] && index > -1){
         
-        [self releaseInstrument:currentInstrumentIndex];
-        
-        currentInstrumentIndex = index;
-        
-        // Generate a bank
-        SampleNode * newSample;
-        SamplerBankNode * newBank = [self generateBank];
-        NSMutableDictionary * instrument = [m_instruments objectAtIndex:index];
-        
-        NSLog(@"Load samples for instrument %i",index);
-        
-        int firstNote = [[instrument objectForKey:@"FirstNoteMidiNum"] intValue];
-        int numNotes = [[instrument objectForKey:@"NumNotes"] intValue];
-        
-        for(int j = firstNote; j < firstNote+numNotes; j++){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             
-            char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:[[instrument objectForKey:@"Name"] stringByAppendingFormat:@" %i",j] ofType:@"mp3"] UTF8String];
+            SampleNode * newSample;
             
-            newBank->LoadSampleIntoBank(filepath, newSample);
-        }
-        
-        // Determine the tuning
-        if([instrument objectForKey:@"Tuning"]){
-            m_tuning = [[NSArray alloc] initWithArray:[instrument objectForKey:@"Tuning"]];
-        }else{
-            m_tuning = [[NSArray alloc] initWithArray:m_standardTuning];
-        }
-        
-        // Add an entry
-        m_activeBankNode = newBank;
-        
-        
-        // broadcast instrument changed
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:currentInstrumentIndex ], @"instrumentIndex", nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"InstrumentChanged" object:self userInfo:userInfo];
-        
-        NSLog(@"Changed instrument to %@",[instrument objectForKey:@"Name"]);
+            NSString * instrumentName = [instrument objectForKey:@"Name"];
+            if([instrumentName isEqualToString:@"Electric"] || [instrumentName isEqualToString:@"Strat"]){
+                instrumentName = DEFAULT_INSTRUMENT;
+            }
+            
+            for(int j = firstNote; j < firstNote+numNotes; j++){
+                
+                // make sure instrument hasn't been released off thread
+                if(currentInstrumentIndex == index){
+                    char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:[instrumentName stringByAppendingFormat:@" %i",j] ofType:@"mp3"] UTF8String];
+                    
+                    newBank->LoadSampleIntoBank(filepath, newSample);
+                }
+            }
+            
+            // broadcast instrument changed
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:currentInstrumentIndex ], @"instrumentIndex", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"InstrumentChanged" object:self userInfo:userInfo];
+            
+            NSLog(@"Changed instrument to %@",[instrument objectForKey:@"Name"]);
+            
+            // Add an entry
+            m_activeBankNode = newBank;
+            
+            // End loading
+            isLoadingInstrument = NO;
+            
+            [self start];
+            
+            // Determine the tuning
+            if([instrument objectForKey:@"Tuning"]){
+                m_tuning = [[NSArray alloc] initWithArray:[instrument objectForKey:@"Tuning"]];
+            }else{
+                m_tuning = [[NSArray alloc] initWithArray:m_standardTuning];
+            }
+            
+            dispatch_semaphore_signal([audioController TakeSemaphore]);
+            
+            // Perform callback
+            
+            if(sender != nil){
+                [sender performSelectorInBackground:cb withObject:[NSNumber numberWithBool:TRUE]];
+            }
+        });
         
     }else{
         
         NSLog(@"Cannot load samples for instrument %i",index);
     
     }
-    
-    isLoadingInstrument = NO;
-    
 }
 
 - (void) releaseInstrument:(NSInteger)index
@@ -334,14 +373,14 @@
     NSString *plistPath;
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    plistPath = [rootPath stringByAppendingPathComponent:@"instruments.plist"];
+    plistPath = [rootPath stringByAppendingPathComponent:@"instrumentList.plist"];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-        plistPath = [[NSBundle mainBundle] pathForResource:@"instruments" ofType:@"plist"];
+        plistPath = [[NSBundle mainBundle] pathForResource:@"instrumentList" ofType:@"plist"];
     }
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-        plistPath = [[NSBundle mainBundle] pathForResource:@"instruments" ofType:@"plist"];
+        plistPath = [[NSBundle mainBundle] pathForResource:@"instrumentList" ofType:@"plist"];
     }
     
     NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
@@ -367,18 +406,20 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
         NSInteger newInstrument = [self getIndexForInstrument:instrumentName];
-        [self setCurrentInstrument:newInstrument];
+        [self setCurrentInstrument:newInstrument withSelector:cb andOwner:sender];
         
-        [sender performSelectorInBackground:cb withObject:[NSNumber numberWithBool:TRUE]];
-            
     });
 }
 
-- (void) setCurrentInstrument:(NSInteger)index
+- (void) setCurrentInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender
 {
     if(index < numInstruments){
         NSLog(@"Selecting instrument at index %i",index);
-        [self loadInstrument:index];
+        
+        [self stop];
+        
+        [self loadInstrument:index withSelector:cb andOwner:sender];
+        
     }else{
         NSLog(@"Attempting to select instrument with index %i out of range",index);
     }
@@ -403,7 +444,8 @@
         }
     }
     
-    return -1;
+    // Default to instrument 0
+    return 0;
 }
 
 - (NSArray *)getInstrumentList
@@ -429,7 +471,7 @@
         if(string >= 0 && string < GTAR_NUM_STRINGS && fret >= 0 && fret <= GTAR_NUM_FRETS){
             
             if(m_activeBankNode == nil){
-                [self setCurrentInstrument:0];
+                [self setCurrentInstrument:0 withSelector:nil andOwner:nil];
             }
             
             int noteIndex = [[m_tuning objectAtIndex:string] intValue] + fret;

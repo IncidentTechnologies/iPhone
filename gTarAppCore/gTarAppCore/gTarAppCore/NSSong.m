@@ -11,7 +11,7 @@
 #import "NSMeasure.h"
 #import "XmlDom.h"
 
-#define DEFAULT_INSTRUMENT @"Electric"
+#define DEFAULT_INSTRUMENT @"Electric Guitar"
 
 @implementation NSSong
 
