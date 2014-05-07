@@ -8,7 +8,7 @@
 
 #import "JamPad.h"
 #import "EffectsTableViewController.h"
-#import <gtarAppCore/InstrumentTableViewController.h>
+#import "InstrumentTableViewController.h"
 #import "SoundMaster.h"
 
 #import <UIKit/UIKit.h>

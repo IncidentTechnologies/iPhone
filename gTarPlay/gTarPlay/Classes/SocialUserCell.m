@@ -8,8 +8,8 @@
 
 #import "SocialUserCell.h"
 
-#import <gTarAppCore/UserProfile.h>
-#import <gTarAppCore/FileController.h>
+#import "UserProfile.h"
+#import "FileController.h"
 
 #import "UIButton+Gtar.h"
 

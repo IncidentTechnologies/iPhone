@@ -6,11 +6,15 @@
 //
 //
 
-#import <QuartzCore/QuartzCore.h>"
+#import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
 #import "PaginatedPullToUpdateTableView.h"
 #import "ExpandableSearchBar.h"
+
+#import "SoundMaster.h"
+#import "GtarController.h"
+#import "SlidingInstrumentViewController.h"
 
 @class UserSong;
 
@@ -29,11 +33,13 @@ struct StoreSortOrder {
 
 @class SlidingModalViewController;
 
-@interface StoreViewController : UIViewController <PullToUpdateTableViewDelegate, ExpandableSearchBarDelegate> {
+@interface StoreViewController : UIViewController <GtarControllerObserver, PullToUpdateTableViewDelegate, ExpandableSearchBarDelegate,SlidingInstrumentDelegate> {
 
 }
 
 // Options Modal
+@property (strong, nonatomic) SoundMaster *g_soundMaster;
+
 @property (strong, nonatomic) IBOutlet SlidingModalViewController *songOptionsModal;
 @property (strong, nonatomic) IBOutlet UIButton *closeModalButton;
 @property (strong, nonatomic) IBOutlet UIButton *volumeButton;
@@ -69,6 +75,8 @@ struct StoreSortOrder {
 
 @property (strong, nonatomic) IBOutlet UILabel *backLabel;
 @property (strong, nonatomic) IBOutlet UILabel *shopLabel;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster *)soundMaster;
 
 - (void)localizeViews;
 

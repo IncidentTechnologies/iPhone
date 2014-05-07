@@ -85,16 +85,16 @@ static inline double radians (double degrees) {
         case BUY_BUTTON_CONFIRM: {
             // draw a more different circle
             CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(124.0f/255.0f) green:(178.0f/255.0f) blue:(102.0f/255.0f) alpha:1.0f].CGColor);
-
-            CGContextFillEllipseInRect(context, CGRectInset(rect, 3, 3));
+            CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
+            NSString *text = NSLocalizedString(@"BUY", NULL);
             
             CGRect textRect = CGRectInset(rect, 4, 4);
-            textRect.origin.x += 6;
-            textRect.origin.y += 12;
+            textRect.origin.x = 40/2-[text length]*5/2;
+            textRect.origin.y += 13.0f;
+            textRect.size.width = 60;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            NSString *text = NSLocalizedString(@"BUY", NULL);
-            [text drawInRect:textRect withFont:[UIFont systemFontOfSize:15.0f]];
+            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:12.0]];
         } break;
             
         case BUY_BUTTON_PROCESSING: {            

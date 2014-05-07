@@ -24,6 +24,16 @@
 		6D3D06E018F4D2E8007683DB /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06DA18F4D2E8007683DB /* release_notes.md */; };
 		6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D594C101909BCF900CF3128 /* HighlightModel.m */; };
 		6D72F22018FF1EC100D68394 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */; };
+		6D7D46F31919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */; };
+		6D7D46F41919BA0F00EF8C75 /* FullScreenActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E41919BA0F00EF8C75 /* FullScreenActivityView.m */; };
+		6D7D46F51919BA0F00EF8C75 /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E61919BA0F00EF8C75 /* InstrumentTableViewController.m */; };
+		6D7D46F61919BA0F00EF8C75 /* MarqueeExpandingRoundedRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E81919BA0F00EF8C75 /* MarqueeExpandingRoundedRectangleView.m */; };
+		6D7D46F71919BA0F00EF8C75 /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46EA1919BA0F00EF8C75 /* PopupViewController.m */; };
+		6D7D46F81919BA0F00EF8C75 /* RoundedRectangleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46EC1919BA0F00EF8C75 /* RoundedRectangleButton.m */; };
+		6D7D46F91919BA0F00EF8C75 /* RoundedRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46EE1919BA0F00EF8C75 /* RoundedRectangleView.m */; };
+		6D7D46FA1919BA0F00EF8C75 /* StarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46F01919BA0F00EF8C75 /* StarRatingView.m */; };
+		6D7D46FB1919BA0F00EF8C75 /* TransitionRectangleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46F21919BA0F00EF8C75 /* TransitionRectangleViewController.m */; };
+		6D7D47051919BB8D00EF8C75 /* TimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D47041919BB8D00EF8C75 /* TimeFormatter.m */; };
 		6DAD0B1119187F1F005B3807 /* Warm Analogue 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AE819187F1F005B3807 /* Warm Analogue 40.mp3 */; };
 		6DAD0B1219187F1F005B3807 /* Warm Analogue 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AE919187F1F005B3807 /* Warm Analogue 41.mp3 */; };
 		6DAD0B1319187F1F005B3807 /* Warm Analogue 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AEA19187F1F005B3807 /* Warm Analogue 42.mp3 */; };
@@ -1586,6 +1596,26 @@
 		6D594C0F1909BCF900CF3128 /* HighlightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightModel.h; sourceTree = "<group>"; };
 		6D594C101909BCF900CF3128 /* HighlightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightModel.m; sourceTree = "<group>"; };
 		6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = FacebookIcon.jpg; path = Resources/Images/Title/FacebookIcon.jpg; sourceTree = SOURCE_ROOT; };
+		6D7D46E11919BA0F00EF8C75 /* ExpandingRoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpandingRoundedRectangleView.h; path = CustomUI/ExpandingRoundedRectangleView.h; sourceTree = SOURCE_ROOT; };
+		6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpandingRoundedRectangleView.m; path = CustomUI/ExpandingRoundedRectangleView.m; sourceTree = SOURCE_ROOT; };
+		6D7D46E31919BA0F00EF8C75 /* FullScreenActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FullScreenActivityView.h; path = CustomUI/FullScreenActivityView.h; sourceTree = SOURCE_ROOT; };
+		6D7D46E41919BA0F00EF8C75 /* FullScreenActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FullScreenActivityView.m; path = CustomUI/FullScreenActivityView.m; sourceTree = SOURCE_ROOT; };
+		6D7D46E51919BA0F00EF8C75 /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstrumentTableViewController.h; path = CustomUI/InstrumentTableViewController.h; sourceTree = SOURCE_ROOT; };
+		6D7D46E61919BA0F00EF8C75 /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstrumentTableViewController.m; path = CustomUI/InstrumentTableViewController.m; sourceTree = SOURCE_ROOT; };
+		6D7D46E71919BA0F00EF8C75 /* MarqueeExpandingRoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarqueeExpandingRoundedRectangleView.h; path = CustomUI/MarqueeExpandingRoundedRectangleView.h; sourceTree = SOURCE_ROOT; };
+		6D7D46E81919BA0F00EF8C75 /* MarqueeExpandingRoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarqueeExpandingRoundedRectangleView.m; path = CustomUI/MarqueeExpandingRoundedRectangleView.m; sourceTree = SOURCE_ROOT; };
+		6D7D46E91919BA0F00EF8C75 /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopupViewController.h; path = CustomUI/PopupViewController.h; sourceTree = SOURCE_ROOT; };
+		6D7D46EA1919BA0F00EF8C75 /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopupViewController.m; path = CustomUI/PopupViewController.m; sourceTree = SOURCE_ROOT; };
+		6D7D46EB1919BA0F00EF8C75 /* RoundedRectangleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoundedRectangleButton.h; path = CustomUI/RoundedRectangleButton.h; sourceTree = SOURCE_ROOT; };
+		6D7D46EC1919BA0F00EF8C75 /* RoundedRectangleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoundedRectangleButton.m; path = CustomUI/RoundedRectangleButton.m; sourceTree = SOURCE_ROOT; };
+		6D7D46ED1919BA0F00EF8C75 /* RoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoundedRectangleView.h; path = CustomUI/RoundedRectangleView.h; sourceTree = SOURCE_ROOT; };
+		6D7D46EE1919BA0F00EF8C75 /* RoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoundedRectangleView.m; path = CustomUI/RoundedRectangleView.m; sourceTree = SOURCE_ROOT; };
+		6D7D46EF1919BA0F00EF8C75 /* StarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StarRatingView.h; path = CustomUI/StarRatingView.h; sourceTree = SOURCE_ROOT; };
+		6D7D46F01919BA0F00EF8C75 /* StarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StarRatingView.m; path = CustomUI/StarRatingView.m; sourceTree = SOURCE_ROOT; };
+		6D7D46F11919BA0F00EF8C75 /* TransitionRectangleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransitionRectangleViewController.h; path = CustomUI/TransitionRectangleViewController.h; sourceTree = SOURCE_ROOT; };
+		6D7D46F21919BA0F00EF8C75 /* TransitionRectangleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransitionRectangleViewController.m; path = CustomUI/TransitionRectangleViewController.m; sourceTree = SOURCE_ROOT; };
+		6D7D47031919BB8D00EF8C75 /* TimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFormatter.h; sourceTree = "<group>"; };
+		6D7D47041919BB8D00EF8C75 /* TimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFormatter.m; sourceTree = "<group>"; };
 		6DAD0AE819187F1F005B3807 /* Warm Analogue 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 40.mp3"; sourceTree = "<group>"; };
 		6DAD0AE919187F1F005B3807 /* Warm Analogue 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 41.mp3"; sourceTree = "<group>"; };
 		6DAD0AEA19187F1F005B3807 /* Warm Analogue 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 42.mp3"; sourceTree = "<group>"; };
@@ -2616,6 +2646,88 @@
 			path = TestFlightSDK3.0.0;
 			sourceTree = "<group>";
 		};
+		6D7D46E01919B9A200EF8C75 /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				6D7D46FC1919BA2A00EF8C75 /* Rounded Rectangle */,
+				6D7D46FE1919BA3F00EF8C75 /* Activity View */,
+				6D7D46FF1919BA4800EF8C75 /* Instrument Selector */,
+				6D7D46FD1919BA3700EF8C75 /* Popup View */,
+				6D7D47011919BA6600EF8C75 /* Star Rating View */,
+				6D7D47001919BA5500EF8C75 /* Transition View */,
+			);
+			path = CustomUI;
+			sourceTree = SOURCE_ROOT;
+		};
+		6D7D46FC1919BA2A00EF8C75 /* Rounded Rectangle */ = {
+			isa = PBXGroup;
+			children = (
+				6D7D46E11919BA0F00EF8C75 /* ExpandingRoundedRectangleView.h */,
+				6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */,
+				6D7D46E71919BA0F00EF8C75 /* MarqueeExpandingRoundedRectangleView.h */,
+				6D7D46E81919BA0F00EF8C75 /* MarqueeExpandingRoundedRectangleView.m */,
+				6D7D46EB1919BA0F00EF8C75 /* RoundedRectangleButton.h */,
+				6D7D46EC1919BA0F00EF8C75 /* RoundedRectangleButton.m */,
+				6D7D46ED1919BA0F00EF8C75 /* RoundedRectangleView.h */,
+				6D7D46EE1919BA0F00EF8C75 /* RoundedRectangleView.m */,
+			);
+			name = "Rounded Rectangle";
+			sourceTree = "<group>";
+		};
+		6D7D46FD1919BA3700EF8C75 /* Popup View */ = {
+			isa = PBXGroup;
+			children = (
+				6D7D46E91919BA0F00EF8C75 /* PopupViewController.h */,
+				6D7D46EA1919BA0F00EF8C75 /* PopupViewController.m */,
+			);
+			name = "Popup View";
+			sourceTree = "<group>";
+		};
+		6D7D46FE1919BA3F00EF8C75 /* Activity View */ = {
+			isa = PBXGroup;
+			children = (
+				6D7D46E31919BA0F00EF8C75 /* FullScreenActivityView.h */,
+				6D7D46E41919BA0F00EF8C75 /* FullScreenActivityView.m */,
+			);
+			name = "Activity View";
+			sourceTree = "<group>";
+		};
+		6D7D46FF1919BA4800EF8C75 /* Instrument Selector */ = {
+			isa = PBXGroup;
+			children = (
+				6D7D46E51919BA0F00EF8C75 /* InstrumentTableViewController.h */,
+				6D7D46E61919BA0F00EF8C75 /* InstrumentTableViewController.m */,
+			);
+			name = "Instrument Selector";
+			sourceTree = "<group>";
+		};
+		6D7D47001919BA5500EF8C75 /* Transition View */ = {
+			isa = PBXGroup;
+			children = (
+				6D7D46F11919BA0F00EF8C75 /* TransitionRectangleViewController.h */,
+				6D7D46F21919BA0F00EF8C75 /* TransitionRectangleViewController.m */,
+			);
+			name = "Transition View";
+			sourceTree = "<group>";
+		};
+		6D7D47011919BA6600EF8C75 /* Star Rating View */ = {
+			isa = PBXGroup;
+			children = (
+				6D7D46EF1919BA0F00EF8C75 /* StarRatingView.h */,
+				6D7D46F01919BA0F00EF8C75 /* StarRatingView.m */,
+			);
+			name = "Star Rating View";
+			sourceTree = "<group>";
+		};
+		6D7D47021919BB7F00EF8C75 /* TimeFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				6D7D47031919BB8D00EF8C75 /* TimeFormatter.h */,
+				6D7D47041919BB8D00EF8C75 /* TimeFormatter.m */,
+			);
+			name = TimeFormatter;
+			sourceTree = "<group>";
+		};
 		6DAD0AE719187F1F005B3807 /* Warm Analogue */ = {
 			isa = PBXGroup;
 			children = (
@@ -3401,6 +3513,8 @@
 		EC0BAD8116F1791300E567A6 /* UI Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				6D7D47021919BB7F00EF8C75 /* TimeFormatter */,
+				6D7D46E01919B9A200EF8C75 /* CustomUI */,
 				9DDB4E7117A2005400499808 /* PlayerViewController */,
 				EC341610173894D100501AF4 /* Categories */,
 				ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */,
@@ -5445,6 +5559,7 @@
 				EC24DC5D161A898700016B78 /* PullToUpdateTableView.m in Sources */,
 				6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */,
 				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
+				6D7D46F41919BA0F00EF8C75 /* FullScreenActivityView.m in Sources */,
 				EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
 				6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */,
 				EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
@@ -5459,15 +5574,19 @@
 				9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */,
 				9DA313831704DDD900CFF104 /* LightsViewController.m in Sources */,
 				9DA313911704FA3100CFF104 /* FPMenuViewController.m in Sources */,
+				6D7D47051919BB8D00EF8C75 /* TimeFormatter.m in Sources */,
 				ECE9D2481705133900BB6C53 /* PlayViewController.m in Sources */,
 				ECCC030E170A2B900021DB00 /* NoteModel.m in Sources */,
 				ECCC0310170A2B900021DB00 /* StringModel.m in Sources */,
 				ECCC0312170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0314170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0316170A2B900021DB00 /* TextModel.m in Sources */,
+				6D7D46F71919BA0F00EF8C75 /* PopupViewController.m in Sources */,
 				ECCC0359170CBA570021DB00 /* VolumeViewController.m in Sources */,
+				6D7D46F61919BA0F00EF8C75 /* MarqueeExpandingRoundedRectangleView.m in Sources */,
 				9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 				ECE831FB171764C0006E2391 /* UserCommentCell.m in Sources */,
+				6D7D46F51919BA0F00EF8C75 /* InstrumentTableViewController.m in Sources */,
 				ECE8323C1718EA34006E2391 /* SocialViewController.m in Sources */,
 				EC48665417287E8D0066194D /* SlidingViewController.m in Sources */,
 				EC48665A172889CA0066194D /* SlidingInstrumentViewController.m in Sources */,
@@ -5482,16 +5601,21 @@
 				EC7CAE80174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */,
 				EC7CAE82174DA940004E26DE /* MPCJSONSerializer.m in Sources */,
 				EC7CAE84174DA940004E26DE /* MPCSerializedJSONData.m in Sources */,
+				6D7D46FA1919BA0F00EF8C75 /* StarRatingView.m in Sources */,
 				EC7CAE86174DA940004E26DE /* NSData+MPBase64.m in Sources */,
+				6D7D46F91919BA0F00EF8C75 /* RoundedRectangleView.m in Sources */,
 				EC7CAE88174DA940004E26DE /* ODIN.m in Sources */,
 				EC7CAE8A174DA940004E26DE /* Mixpanel.m in Sources */,
 				ECEB331C175D6E28009913F4 /* PaginatedPullToUpdateTableView.m in Sources */,
 				9D4C70CA17A8AD9D00DC7B4D /* PlayerViewController.m in Sources */,
+				6D7D46F31919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m in Sources */,
 				9D85CD2C17CE8CF60064CE79 /* InAppPurchaseManager.m in Sources */,
 				9D85CD3317CE8F890064CE79 /* StoreViewController.m in Sources */,
 				26868D8617D2A46500DC990F /* StoreSongListCell.m in Sources */,
 				26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */,
+				6D7D46F81919BA0F00EF8C75 /* RoundedRectangleButton.m in Sources */,
 				26868D8E17D6C5AB00DC990F /* SongPurchaseRequest.m in Sources */,
+				6D7D46FB1919BA0F00EF8C75 /* TransitionRectangleViewController.m in Sources */,
 				26868D9117E29AD700DC990F /* UITriangleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5657,7 +5781,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7B481418-B152-4A26-BD85-D5112440FD60";
+				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5692,7 +5816,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7B481418-B152-4A26-BD85-D5112440FD60";
+				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

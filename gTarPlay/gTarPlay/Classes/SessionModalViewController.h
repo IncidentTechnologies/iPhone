@@ -12,9 +12,9 @@
 #import "VolumeViewController.h"
 #import "SlidingInstrumentViewController.h"
 #import "UIView+Gtar.h"
-#import <gTarAppCore/FileController.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/UserSongSession.h>
+#import "FileController.h"
+#import "UserSong.h"
+#import "UserSongSession.h"
 #import "SoundMaster.h"
 
 @class UserSongSession;

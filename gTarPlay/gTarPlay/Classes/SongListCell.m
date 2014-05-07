@@ -8,7 +8,7 @@
 
 #import "SongListCell.h"
 
-#import <gTarAppCore/UserSong.h>
+#import "UserSong.h"
 
 @implementation SongListCell
 

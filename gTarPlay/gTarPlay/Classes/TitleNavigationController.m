@@ -9,17 +9,16 @@
 #import <QuartzCore/QuartzCore.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/FileController.h>
+#import "CloudController.h"
+#import "FileController.h"
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserResponse.h>
 #import <gTarAppCore/UserEntry.h>
-//#import <gTarAppCore/TelemetryController.h>
-#import <gTarAppCore/UserSongSession.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/UserSongSessions.h>
-#import <gTarAppCore/UserProfile.h>
-#import <gTarAppCore/CloudResponse.h>
+#import "UserSongSession.h"
+#import "UserSong.h"
+#import "UserSongSessions.h"
+#import "UserProfile.h"
+#import "CloudResponse.h"
 #import <gTarAppCore/Facebook.h>
 
 #import "TitleNavigationController.h"
@@ -640,7 +639,7 @@ extern Facebook * g_facebook;
 
 - (IBAction)menuStoreButtonClicked:(id)sender
 {
-    StoreViewController *svc = [[StoreViewController alloc] init];
+    StoreViewController *svc = [[StoreViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster];
     
     [self.navigationController pushViewController:svc animated:YES];
 	

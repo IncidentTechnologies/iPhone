@@ -14,8 +14,6 @@
 		26D4B17518F62799003380BF /* FBDialog.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8B402017A9ED52009D3FB4 /* FBDialog.h */; };
 		26D4B17618F627B6003380BF /* FBRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8B402617A9ED52009D3FB4 /* FBRequest.h */; };
 		6D6162A8191036E000CBEF87 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6162A7191036E000CBEF87 /* libIncidentPlatform.a */; };
-		9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9D4C70D017A8B02D00DC7B4D /* InstrumentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */; };
 		9D8B403617A9ED52009D3FB4 /* Facebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D8B401B17A9ED52009D3FB4 /* Facebook.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D8B403717A9ED52009D3FB4 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B401C17A9ED52009D3FB4 /* Facebook.m */; };
 		9D8B403817A9ED52009D3FB4 /* facebook_ios_sdk_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 9D8B401D17A9ED52009D3FB4 /* facebook_ios_sdk_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -55,10 +53,7 @@
 		EC24E01B161BBBA900016B78 /* FeaturedSong.m in Sources */ = {isa = PBXBuildFile; fileRef = EC24E00F161BBBA800016B78 /* FeaturedSong.m */; };
 		EC24E01F161BBC0C00016B78 /* SettingsController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC24E01D161BBC0C00016B78 /* SettingsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC24E020161BBC0C00016B78 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC24E01E161BBC0C00016B78 /* SettingsController.m */; };
-		EC354E0516C9B084009D472A /* TelemetryEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = EC354E0416C9B084009D472A /* TelemetryEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA851161A5D160015832E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA850161A5D160015832E /* Foundation.framework */; };
-		EC5DA878161A5EF40015832E /* TelemetryController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA876161A5EF40015832E /* TelemetryController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA879161A5EF40015832E /* TelemetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA877161A5EF40015832E /* TelemetryController.m */; };
 		EC5DA87D161A5F500015832E /* ContentController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA87B161A5F500015832E /* ContentController.h */; };
 		EC5DA87E161A5F500015832E /* ContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA87C161A5F500015832E /* ContentController.m */; };
 		EC5DA888161A5F850015832E /* UserController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA880161A5F850015832E /* UserController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -69,32 +64,6 @@
 		EC5DA88D161A5F850015832E /* UserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA885161A5F850015832E /* UserRequest.m */; };
 		EC5DA88E161A5F850015832E /* UserResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA886161A5F850015832E /* UserResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA88F161A5F850015832E /* UserResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA887161A5F850015832E /* UserResponse.m */; };
-		EC5DA899161A5F980015832E /* FileController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA891161A5F980015832E /* FileController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA89A161A5F980015832E /* FileController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA892161A5F980015832E /* FileController.m */; };
-		EC5DA89D161A5F980015832E /* FileRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA895161A5F980015832E /* FileRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA89E161A5F980015832E /* FileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA896161A5F980015832E /* FileRequest.m */; };
-		EC5DA8A4161A5FB20015832E /* TimeFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8A2161A5FB20015832E /* TimeFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8A5161A5FB20015832E /* TimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8A3161A5FB20015832E /* TimeFormatter.m */; };
-		EC5DA8AF161A601F0015832E /* TransitionRectangleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8AD161A601F0015832E /* TransitionRectangleViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8B0161A601F0015832E /* TransitionRectangleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8AE161A601F0015832E /* TransitionRectangleViewController.m */; };
-		EC5DA8B3161A60270015832E /* PopupViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8B1161A60270015832E /* PopupViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8B4161A60270015832E /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8B2161A60270015832E /* PopupViewController.m */; };
-		EC5DA8BD161A602D0015832E /* RoundedRectangleView.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8B5161A602D0015832E /* RoundedRectangleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8BE161A602D0015832E /* RoundedRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8B6161A602D0015832E /* RoundedRectangleView.m */; };
-		EC5DA8BF161A602D0015832E /* ExpandingRoundedRectangleView.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8B7161A602D0015832E /* ExpandingRoundedRectangleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8C0161A602D0015832E /* ExpandingRoundedRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8B8161A602D0015832E /* ExpandingRoundedRectangleView.m */; };
-		EC5DA8C1161A602D0015832E /* MarqueeExpandingRoundedRectangleView.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8B9161A602D0015832E /* MarqueeExpandingRoundedRectangleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8C2161A602D0015832E /* MarqueeExpandingRoundedRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8BA161A602D0015832E /* MarqueeExpandingRoundedRectangleView.m */; };
-		EC5DA8C3161A602D0015832E /* RoundedRectangleButton.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8BB161A602D0015832E /* RoundedRectangleButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8C4161A602D0015832E /* RoundedRectangleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8BC161A602D0015832E /* RoundedRectangleButton.m */; };
-		EC5DA8C7161A60320015832E /* StarRatingView.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8C5161A60320015832E /* StarRatingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8C8161A60320015832E /* StarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8C6161A60320015832E /* StarRatingView.m */; };
-		EC5DA8CB161A60390015832E /* FullScreenActivityView.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8C9161A60390015832E /* FullScreenActivityView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8CC161A60390015832E /* FullScreenActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8CA161A60390015832E /* FullScreenActivityView.m */; };
-		EC5DA8D2161A60600015832E /* XmlDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8CE161A60600015832E /* XmlDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8D3161A60600015832E /* XmlDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8CF161A60600015832E /* XmlDictionary.m */; };
-		EC5DA8D4161A60600015832E /* XmlDom.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8D0161A60600015832E /* XmlDom.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA8D5161A60600015832E /* XmlDom.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8D1161A60600015832E /* XmlDom.m */; };
 		EC5DA8FA161A60A60015832E /* DisplayController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8D8161A60A60015832E /* DisplayController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA8FB161A60A60015832E /* DisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA8D9161A60A60015832E /* DisplayController.m */; };
 		EC5DA8FC161A60A60015832E /* EAGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA8DA161A60A60015832E /* EAGLView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -133,26 +102,6 @@
 		EC5DA969161A62D20015832E /* NSMeasure.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA94B161A62D20015832E /* NSMeasure.m */; };
 		EC5DA96A161A62D20015832E /* NSSong.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA94C161A62D20015832E /* NSSong.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA96B161A62D20015832E /* NSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA94D161A62D20015832E /* NSSong.m */; };
-		EC5DA96F161A63020015832E /* CloudController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA96D161A63020015832E /* CloudController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA970161A63020015832E /* CloudController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA96E161A63020015832E /* CloudController.m */; };
-		EC5DA976161A63250015832E /* CloudRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA972161A63250015832E /* CloudRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA977161A63250015832E /* CloudRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA973161A63250015832E /* CloudRequest.m */; };
-		EC5DA978161A63250015832E /* CloudResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA974161A63250015832E /* CloudResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA979161A63250015832E /* CloudResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA975161A63250015832E /* CloudResponse.m */; };
-		EC5DA984161A636F0015832E /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA97E161A636F0015832E /* User.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA985161A636F0015832E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA97F161A636F0015832E /* User.m */; };
-		EC5DA986161A636F0015832E /* UserProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA980161A636F0015832E /* UserProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA987161A636F0015832E /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA981161A636F0015832E /* UserProfile.m */; };
-		EC5DA988161A636F0015832E /* UserProfiles.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA982161A636F0015832E /* UserProfiles.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA989161A636F0015832E /* UserProfiles.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA983161A636F0015832E /* UserProfiles.m */; };
-		EC5DA98E161A63780015832E /* UserSong.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA98A161A63780015832E /* UserSong.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA98F161A63780015832E /* UserSong.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA98B161A63780015832E /* UserSong.m */; };
-		EC5DA990161A63780015832E /* UserSongs.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA98C161A63780015832E /* UserSongs.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA991161A63780015832E /* UserSongs.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA98D161A63780015832E /* UserSongs.m */; };
-		EC5DA996161A637E0015832E /* UserSongSession.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA992161A637E0015832E /* UserSongSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA997161A637E0015832E /* UserSongSession.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA993161A637E0015832E /* UserSongSession.m */; };
-		EC5DA998161A637E0015832E /* UserSongSessions.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA994161A637E0015832E /* UserSongSessions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA999161A637E0015832E /* UserSongSessions.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA995161A637E0015832E /* UserSongSessions.m */; };
 		EC5DA9A4161A64010015832E /* MainEventController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA99E161A64010015832E /* MainEventController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA9A5161A64010015832E /* MainEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA99F161A64010015832E /* MainEventController.m */; };
 		EC5DA9A7161A66600015832E /* AppCore.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA9A6161A66600015832E /* AppCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -180,8 +129,6 @@
 		268E70C51810B2D9007404B0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		26C3F9241810F93A00744A9D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6D6162A7191036E000CBEF87 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/gTarPlay-acmtbmpranhylpfpoqywbtnizqpd/Build/Products/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
-		9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
-		9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentTableViewController.m; sourceTree = "<group>"; };
 		9D8B401B17A9ED52009D3FB4 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		9D8B401C17A9ED52009D3FB4 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
 		9D8B401D17A9ED52009D3FB4 /* facebook_ios_sdk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = facebook_ios_sdk_Prefix.pch; sourceTree = "<group>"; };
@@ -222,14 +169,9 @@
 		EC24E00F161BBBA800016B78 /* FeaturedSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedSong.m; sourceTree = "<group>"; };
 		EC24E01D161BBC0C00016B78 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		EC24E01E161BBC0C00016B78 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
-		EC354E0416C9B084009D472A /* TelemetryEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelemetryEvents.h; sourceTree = "<group>"; };
 		EC5DA84D161A5D160015832E /* libgTarAppCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libgTarAppCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC5DA850161A5D160015832E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EC5DA854161A5D160015832E /* gTarAppCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gTarAppCore-Prefix.pch"; sourceTree = "<group>"; };
-		EC5DA871161A5D7A0015832E /* libAudioController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAudioController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC5DA872161A5D7A0015832E /* libGtarController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGtarController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC5DA876161A5EF40015832E /* TelemetryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelemetryController.h; sourceTree = "<group>"; };
-		EC5DA877161A5EF40015832E /* TelemetryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelemetryController.m; sourceTree = "<group>"; };
 		EC5DA87B161A5F500015832E /* ContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentController.h; sourceTree = "<group>"; };
 		EC5DA87C161A5F500015832E /* ContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentController.m; sourceTree = "<group>"; };
 		EC5DA880161A5F850015832E /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
@@ -240,32 +182,6 @@
 		EC5DA885161A5F850015832E /* UserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRequest.m; sourceTree = "<group>"; };
 		EC5DA886161A5F850015832E /* UserResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserResponse.h; sourceTree = "<group>"; };
 		EC5DA887161A5F850015832E /* UserResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserResponse.m; sourceTree = "<group>"; };
-		EC5DA891161A5F980015832E /* FileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileController.h; sourceTree = "<group>"; };
-		EC5DA892161A5F980015832E /* FileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileController.m; sourceTree = "<group>"; };
-		EC5DA895161A5F980015832E /* FileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileRequest.h; sourceTree = "<group>"; };
-		EC5DA896161A5F980015832E /* FileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileRequest.m; sourceTree = "<group>"; };
-		EC5DA8A2161A5FB20015832E /* TimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFormatter.h; sourceTree = "<group>"; };
-		EC5DA8A3161A5FB20015832E /* TimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFormatter.m; sourceTree = "<group>"; };
-		EC5DA8AD161A601F0015832E /* TransitionRectangleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionRectangleViewController.h; sourceTree = "<group>"; };
-		EC5DA8AE161A601F0015832E /* TransitionRectangleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionRectangleViewController.m; sourceTree = "<group>"; };
-		EC5DA8B1161A60270015832E /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
-		EC5DA8B2161A60270015832E /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
-		EC5DA8B5161A602D0015832E /* RoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedRectangleView.h; sourceTree = "<group>"; };
-		EC5DA8B6161A602D0015832E /* RoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedRectangleView.m; sourceTree = "<group>"; };
-		EC5DA8B7161A602D0015832E /* ExpandingRoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandingRoundedRectangleView.h; sourceTree = "<group>"; };
-		EC5DA8B8161A602D0015832E /* ExpandingRoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandingRoundedRectangleView.m; sourceTree = "<group>"; };
-		EC5DA8B9161A602D0015832E /* MarqueeExpandingRoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeExpandingRoundedRectangleView.h; sourceTree = "<group>"; };
-		EC5DA8BA161A602D0015832E /* MarqueeExpandingRoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeExpandingRoundedRectangleView.m; sourceTree = "<group>"; };
-		EC5DA8BB161A602D0015832E /* RoundedRectangleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedRectangleButton.h; sourceTree = "<group>"; };
-		EC5DA8BC161A602D0015832E /* RoundedRectangleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedRectangleButton.m; sourceTree = "<group>"; };
-		EC5DA8C5161A60320015832E /* StarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarRatingView.h; sourceTree = "<group>"; };
-		EC5DA8C6161A60320015832E /* StarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarRatingView.m; sourceTree = "<group>"; };
-		EC5DA8C9161A60390015832E /* FullScreenActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenActivityView.h; sourceTree = "<group>"; };
-		EC5DA8CA161A60390015832E /* FullScreenActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenActivityView.m; sourceTree = "<group>"; };
-		EC5DA8CE161A60600015832E /* XmlDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlDictionary.h; sourceTree = "<group>"; };
-		EC5DA8CF161A60600015832E /* XmlDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlDictionary.m; sourceTree = "<group>"; };
-		EC5DA8D0161A60600015832E /* XmlDom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlDom.h; sourceTree = "<group>"; };
-		EC5DA8D1161A60600015832E /* XmlDom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlDom.m; sourceTree = "<group>"; };
 		EC5DA8D8161A60A60015832E /* DisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayController.h; sourceTree = "<group>"; };
 		EC5DA8D9161A60A60015832E /* DisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayController.m; sourceTree = "<group>"; };
 		EC5DA8DA161A60A60015832E /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
@@ -304,26 +220,6 @@
 		EC5DA94B161A62D20015832E /* NSMeasure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMeasure.m; sourceTree = "<group>"; };
 		EC5DA94C161A62D20015832E /* NSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSong.h; sourceTree = "<group>"; };
 		EC5DA94D161A62D20015832E /* NSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSong.m; sourceTree = "<group>"; };
-		EC5DA96D161A63020015832E /* CloudController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudController.h; sourceTree = "<group>"; };
-		EC5DA96E161A63020015832E /* CloudController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudController.m; sourceTree = "<group>"; };
-		EC5DA972161A63250015832E /* CloudRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudRequest.h; sourceTree = "<group>"; };
-		EC5DA973161A63250015832E /* CloudRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudRequest.m; sourceTree = "<group>"; };
-		EC5DA974161A63250015832E /* CloudResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudResponse.h; sourceTree = "<group>"; };
-		EC5DA975161A63250015832E /* CloudResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudResponse.m; sourceTree = "<group>"; };
-		EC5DA97E161A636F0015832E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		EC5DA97F161A636F0015832E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		EC5DA980161A636F0015832E /* UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfile.h; sourceTree = "<group>"; };
-		EC5DA981161A636F0015832E /* UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfile.m; sourceTree = "<group>"; };
-		EC5DA982161A636F0015832E /* UserProfiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfiles.h; sourceTree = "<group>"; };
-		EC5DA983161A636F0015832E /* UserProfiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfiles.m; sourceTree = "<group>"; };
-		EC5DA98A161A63780015832E /* UserSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSong.h; sourceTree = "<group>"; };
-		EC5DA98B161A63780015832E /* UserSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSong.m; sourceTree = "<group>"; };
-		EC5DA98C161A63780015832E /* UserSongs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSongs.h; sourceTree = "<group>"; };
-		EC5DA98D161A63780015832E /* UserSongs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSongs.m; sourceTree = "<group>"; };
-		EC5DA992161A637E0015832E /* UserSongSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSongSession.h; sourceTree = "<group>"; };
-		EC5DA993161A637E0015832E /* UserSongSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSongSession.m; sourceTree = "<group>"; };
-		EC5DA994161A637E0015832E /* UserSongSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSongSessions.h; sourceTree = "<group>"; };
-		EC5DA995161A637E0015832E /* UserSongSessions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSongSessions.m; sourceTree = "<group>"; };
 		EC5DA99E161A64010015832E /* MainEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainEventController.h; sourceTree = "<group>"; };
 		EC5DA99F161A64010015832E /* MainEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainEventController.m; sourceTree = "<group>"; };
 		EC5DA9A6161A66600015832E /* AppCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCore.h; sourceTree = "<group>"; };
@@ -346,15 +242,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9D4C70CC17A8AFBE00DC7B4D /* Instrument Selector */ = {
-			isa = PBXGroup;
-			children = (
-				9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */,
-				9D4C70CE17A8B02D00DC7B4D /* InstrumentTableViewController.m */,
-			);
-			name = "Instrument Selector";
-			sourceTree = "<group>";
-		};
 		9D8B401A17A9ED52009D3FB4 /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,8 +334,6 @@
 				6D6162A7191036E000CBEF87 /* libIncidentPlatform.a */,
 				26C3F9241810F93A00744A9D /* libstdc++.dylib */,
 				268E70C51810B2D9007404B0 /* libc++.dylib */,
-				EC5DA871161A5D7A0015832E /* libAudioController.a */,
-				EC5DA872161A5D7A0015832E /* libGtarController.a */,
 				EC5DA850161A5D160015832E /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -461,16 +346,10 @@
 				EC5DA9A6161A66600015832E /* AppCore.h */,
 				EC5DA99E161A64010015832E /* MainEventController.h */,
 				EC5DA99F161A64010015832E /* MainEventController.m */,
-				EC5DA96C161A62F50015832E /* CloudController */,
 				EC5DA92E161A62BE0015832E /* SongModel */,
 				EC5DA8D7161A60930015832E /* DisplayController */,
-				EC5DA8CD161A60470015832E /* Xml */,
-				EC5DA8A6161A5FCA0015832E /* Custom UI */,
-				EC5DA8A1161A5FA30015832E /* TimeFormatter */,
-				EC5DA890161A5F8E0015832E /* FileController */,
 				EC5DA87F161A5F790015832E /* UserController */,
 				EC5DA87A161A5F3D0015832E /* ContentController */,
-				EC5DA875161A5EE10015832E /* TelemetryController */,
 				EC24DFF8161BBB7B00016B78 /* StoreController */,
 				EC24E01C161BBC0300016B78 /* SettingsController */,
 				EC5DA853161A5D160015832E /* Supporting Files */,
@@ -484,16 +363,6 @@
 				EC5DA854161A5D160015832E /* gTarAppCore-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		EC5DA875161A5EE10015832E /* TelemetryController */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA876161A5EF40015832E /* TelemetryController.h */,
-				EC5DA877161A5EF40015832E /* TelemetryController.m */,
-				EC354E0416C9B084009D472A /* TelemetryEvents.h */,
-			);
-			name = TelemetryController;
 			sourceTree = "<group>";
 		};
 		EC5DA87A161A5F3D0015832E /* ContentController */ = {
@@ -518,101 +387,6 @@
 				EC5DA887161A5F850015832E /* UserResponse.m */,
 			);
 			name = UserController;
-			sourceTree = "<group>";
-		};
-		EC5DA890161A5F8E0015832E /* FileController */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA891161A5F980015832E /* FileController.h */,
-				EC5DA892161A5F980015832E /* FileController.m */,
-				EC5DA895161A5F980015832E /* FileRequest.h */,
-				EC5DA896161A5F980015832E /* FileRequest.m */,
-			);
-			name = FileController;
-			sourceTree = "<group>";
-		};
-		EC5DA8A1161A5FA30015832E /* TimeFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA8A2161A5FB20015832E /* TimeFormatter.h */,
-				EC5DA8A3161A5FB20015832E /* TimeFormatter.m */,
-			);
-			name = TimeFormatter;
-			sourceTree = "<group>";
-		};
-		EC5DA8A6161A5FCA0015832E /* Custom UI */ = {
-			isa = PBXGroup;
-			children = (
-				9D4C70CC17A8AFBE00DC7B4D /* Instrument Selector */,
-				EC5DA8AC161A5FFB0015832E /* ActivityView */,
-				EC5DA8AB161A5FF90015832E /* StarRatingView */,
-				EC5DA8A9161A5FE00015832E /* Rounded Rectangle */,
-				EC5DA8A8161A5FDE0015832E /* Popup View */,
-				EC5DA8A7161A5FDC0015832E /* Transition View */,
-			);
-			name = "Custom UI";
-			sourceTree = "<group>";
-		};
-		EC5DA8A7161A5FDC0015832E /* Transition View */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA8AD161A601F0015832E /* TransitionRectangleViewController.h */,
-				EC5DA8AE161A601F0015832E /* TransitionRectangleViewController.m */,
-			);
-			name = "Transition View";
-			sourceTree = "<group>";
-		};
-		EC5DA8A8161A5FDE0015832E /* Popup View */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA8B1161A60270015832E /* PopupViewController.h */,
-				EC5DA8B2161A60270015832E /* PopupViewController.m */,
-			);
-			name = "Popup View";
-			sourceTree = "<group>";
-		};
-		EC5DA8A9161A5FE00015832E /* Rounded Rectangle */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA8B5161A602D0015832E /* RoundedRectangleView.h */,
-				EC5DA8B6161A602D0015832E /* RoundedRectangleView.m */,
-				EC5DA8B7161A602D0015832E /* ExpandingRoundedRectangleView.h */,
-				EC5DA8B8161A602D0015832E /* ExpandingRoundedRectangleView.m */,
-				EC5DA8B9161A602D0015832E /* MarqueeExpandingRoundedRectangleView.h */,
-				EC5DA8BA161A602D0015832E /* MarqueeExpandingRoundedRectangleView.m */,
-				EC5DA8BB161A602D0015832E /* RoundedRectangleButton.h */,
-				EC5DA8BC161A602D0015832E /* RoundedRectangleButton.m */,
-			);
-			name = "Rounded Rectangle";
-			sourceTree = "<group>";
-		};
-		EC5DA8AB161A5FF90015832E /* StarRatingView */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA8C5161A60320015832E /* StarRatingView.h */,
-				EC5DA8C6161A60320015832E /* StarRatingView.m */,
-			);
-			name = StarRatingView;
-			sourceTree = "<group>";
-		};
-		EC5DA8AC161A5FFB0015832E /* ActivityView */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA8C9161A60390015832E /* FullScreenActivityView.h */,
-				EC5DA8CA161A60390015832E /* FullScreenActivityView.m */,
-			);
-			name = ActivityView;
-			sourceTree = "<group>";
-		};
-		EC5DA8CD161A60470015832E /* Xml */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA8CE161A60600015832E /* XmlDictionary.h */,
-				EC5DA8CF161A60600015832E /* XmlDictionary.m */,
-				EC5DA8D0161A60600015832E /* XmlDom.h */,
-				EC5DA8D1161A60600015832E /* XmlDom.m */,
-			);
-			name = Xml;
 			sourceTree = "<group>";
 		};
 		EC5DA8D7161A60930015832E /* DisplayController */ = {
@@ -701,65 +475,6 @@
 			name = SongModel;
 			sourceTree = "<group>";
 		};
-		EC5DA96C161A62F50015832E /* CloudController */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA971161A631A0015832E /* CloudRequest */,
-				EC5DA97C161A63530015832E /* Users */,
-				EC5DA97A161A632D0015832E /* UserSongs */,
-				EC5DA97D161A63550015832E /* UserSongSessions */,
-				EC5DA96D161A63020015832E /* CloudController.h */,
-				EC5DA96E161A63020015832E /* CloudController.m */,
-			);
-			name = CloudController;
-			sourceTree = "<group>";
-		};
-		EC5DA971161A631A0015832E /* CloudRequest */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA972161A63250015832E /* CloudRequest.h */,
-				EC5DA973161A63250015832E /* CloudRequest.m */,
-				EC5DA974161A63250015832E /* CloudResponse.h */,
-				EC5DA975161A63250015832E /* CloudResponse.m */,
-			);
-			name = CloudRequest;
-			sourceTree = "<group>";
-		};
-		EC5DA97A161A632D0015832E /* UserSongs */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA98A161A63780015832E /* UserSong.h */,
-				EC5DA98B161A63780015832E /* UserSong.m */,
-				EC5DA98C161A63780015832E /* UserSongs.h */,
-				EC5DA98D161A63780015832E /* UserSongs.m */,
-			);
-			name = UserSongs;
-			sourceTree = "<group>";
-		};
-		EC5DA97C161A63530015832E /* Users */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA97E161A636F0015832E /* User.h */,
-				EC5DA97F161A636F0015832E /* User.m */,
-				EC5DA980161A636F0015832E /* UserProfile.h */,
-				EC5DA981161A636F0015832E /* UserProfile.m */,
-				EC5DA982161A636F0015832E /* UserProfiles.h */,
-				EC5DA983161A636F0015832E /* UserProfiles.m */,
-			);
-			name = Users;
-			sourceTree = "<group>";
-		};
-		EC5DA97D161A63550015832E /* UserSongSessions */ = {
-			isa = PBXGroup;
-			children = (
-				EC5DA992161A637E0015832E /* UserSongSession.h */,
-				EC5DA993161A637E0015832E /* UserSongSession.m */,
-				EC5DA994161A637E0015832E /* UserSongSessions.h */,
-				EC5DA995161A637E0015832E /* UserSongSessions.m */,
-			);
-			name = UserSongSessions;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -767,17 +482,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC5DA878161A5EF40015832E /* TelemetryController.h in Headers */,
 				EC5DA888161A5F850015832E /* UserController.h in Headers */,
 				EC5DA88A161A5F850015832E /* UserEntry.h in Headers */,
 				EC5DA88C161A5F850015832E /* UserRequest.h in Headers */,
 				EC5DA88E161A5F850015832E /* UserResponse.h in Headers */,
-				EC5DA899161A5F980015832E /* FileController.h in Headers */,
-				EC5DA89D161A5F980015832E /* FileRequest.h in Headers */,
-				EC5DA8B3161A60270015832E /* PopupViewController.h in Headers */,
-				EC5DA8CB161A60390015832E /* FullScreenActivityView.h in Headers */,
-				EC5DA8D2161A60600015832E /* XmlDictionary.h in Headers */,
-				EC5DA8D4161A60600015832E /* XmlDom.h in Headers */,
 				EC5DA8FC161A60A60015832E /* EAGLView.h in Headers */,
 				EC5DA8FE161A60A60015832E /* ViewRenderer.h in Headers */,
 				EC5DA900161A60A60015832E /* Texture2D.h in Headers */,
@@ -796,26 +504,9 @@
 				EC5DA966161A62D20015832E /* NSNote.h in Headers */,
 				EC5DA968161A62D20015832E /* NSMeasure.h in Headers */,
 				EC5DA96A161A62D20015832E /* NSSong.h in Headers */,
-				EC5DA96F161A63020015832E /* CloudController.h in Headers */,
-				EC5DA976161A63250015832E /* CloudRequest.h in Headers */,
-				EC5DA978161A63250015832E /* CloudResponse.h in Headers */,
-				EC5DA984161A636F0015832E /* User.h in Headers */,
-				EC5DA986161A636F0015832E /* UserProfile.h in Headers */,
-				EC5DA988161A636F0015832E /* UserProfiles.h in Headers */,
-				EC5DA98E161A63780015832E /* UserSong.h in Headers */,
-				EC5DA990161A63780015832E /* UserSongs.h in Headers */,
-				EC5DA996161A637E0015832E /* UserSongSession.h in Headers */,
-				EC5DA998161A637E0015832E /* UserSongSessions.h in Headers */,
 				EC5DA9A4161A64010015832E /* MainEventController.h in Headers */,
 				EC5DA9A7161A66600015832E /* AppCore.h in Headers */,
 				EC5DA9C1161A67E20015832E /* NSSongCreator.h in Headers */,
-				EC5DA8AF161A601F0015832E /* TransitionRectangleViewController.h in Headers */,
-				EC5DA8BD161A602D0015832E /* RoundedRectangleView.h in Headers */,
-				EC5DA8BF161A602D0015832E /* ExpandingRoundedRectangleView.h in Headers */,
-				EC5DA8C1161A602D0015832E /* MarqueeExpandingRoundedRectangleView.h in Headers */,
-				EC5DA8A4161A5FB20015832E /* TimeFormatter.h in Headers */,
-				EC5DA8C7161A60320015832E /* StarRatingView.h in Headers */,
-				EC5DA8C3161A602D0015832E /* RoundedRectangleButton.h in Headers */,
 				EC5DA95A161A62D20015832E /* SongRecorder.h in Headers */,
 				EC24E010161BBBA800016B78 /* StoreController.h in Headers */,
 				EC24E012161BBBA900016B78 /* StoreSettingsController.h in Headers */,
@@ -825,11 +516,9 @@
 				EC24E01A161BBBA900016B78 /* FeaturedSong.h in Headers */,
 				EC24E01F161BBC0C00016B78 /* SettingsController.h in Headers */,
 				EC5DA87D161A5F500015832E /* ContentController.h in Headers */,
-				EC354E0516C9B084009D472A /* TelemetryEvents.h in Headers */,
 				9D8B403E17A9ED52009D3FB4 /* FBLoginDialog.h in Headers */,
 				9D8B403A17A9ED52009D3FB4 /* FBDialog.h in Headers */,
 				9D8B404017A9ED52009D3FB4 /* FBRequest.h in Headers */,
-				9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */,
 				9D8B403617A9ED52009D3FB4 /* Facebook.h in Headers */,
 				9D8B403917A9ED52009D3FB4 /* FBConnect.h in Headers */,
 				9D8B403817A9ED52009D3FB4 /* facebook_ios_sdk_Prefix.pch in Headers */,
@@ -895,25 +584,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC5DA879161A5EF40015832E /* TelemetryController.m in Sources */,
 				EC5DA87E161A5F500015832E /* ContentController.m in Sources */,
 				EC5DA889161A5F850015832E /* UserController.m in Sources */,
 				EC5DA88B161A5F850015832E /* UserEntry.m in Sources */,
 				EC5DA88D161A5F850015832E /* UserRequest.m in Sources */,
 				EC5DA88F161A5F850015832E /* UserResponse.m in Sources */,
-				EC5DA89A161A5F980015832E /* FileController.m in Sources */,
-				EC5DA89E161A5F980015832E /* FileRequest.m in Sources */,
-				EC5DA8A5161A5FB20015832E /* TimeFormatter.m in Sources */,
-				EC5DA8B0161A601F0015832E /* TransitionRectangleViewController.m in Sources */,
-				EC5DA8B4161A60270015832E /* PopupViewController.m in Sources */,
-				EC5DA8BE161A602D0015832E /* RoundedRectangleView.m in Sources */,
-				EC5DA8C0161A602D0015832E /* ExpandingRoundedRectangleView.m in Sources */,
-				EC5DA8C2161A602D0015832E /* MarqueeExpandingRoundedRectangleView.m in Sources */,
-				EC5DA8C4161A602D0015832E /* RoundedRectangleButton.m in Sources */,
-				EC5DA8C8161A60320015832E /* StarRatingView.m in Sources */,
-				EC5DA8CC161A60390015832E /* FullScreenActivityView.m in Sources */,
-				EC5DA8D3161A60600015832E /* XmlDictionary.m in Sources */,
-				EC5DA8D5161A60600015832E /* XmlDom.m in Sources */,
 				EC5DA8FB161A60A60015832E /* DisplayController.m in Sources */,
 				EC5DA8FD161A60A60015832E /* EAGLView.m in Sources */,
 				EC5DA8FF161A60A60015832E /* ViewRenderer.mm in Sources */,
@@ -933,16 +608,6 @@
 				EC5DA967161A62D20015832E /* NSNote.m in Sources */,
 				EC5DA969161A62D20015832E /* NSMeasure.m in Sources */,
 				EC5DA96B161A62D20015832E /* NSSong.m in Sources */,
-				EC5DA970161A63020015832E /* CloudController.m in Sources */,
-				EC5DA977161A63250015832E /* CloudRequest.m in Sources */,
-				EC5DA979161A63250015832E /* CloudResponse.m in Sources */,
-				EC5DA985161A636F0015832E /* User.m in Sources */,
-				EC5DA987161A636F0015832E /* UserProfile.m in Sources */,
-				EC5DA989161A636F0015832E /* UserProfiles.m in Sources */,
-				EC5DA98F161A63780015832E /* UserSong.m in Sources */,
-				EC5DA991161A63780015832E /* UserSongs.m in Sources */,
-				EC5DA997161A637E0015832E /* UserSongSession.m in Sources */,
-				EC5DA999161A637E0015832E /* UserSongSessions.m in Sources */,
 				EC5DA9A5161A64010015832E /* MainEventController.m in Sources */,
 				EC5DA9C2161A67E20015832E /* NSSongCreator.m in Sources */,
 				EC24E011161BBBA900016B78 /* StoreController.m in Sources */,
@@ -952,7 +617,6 @@
 				EC24E019161BBBA900016B78 /* StoreGenreCollection.m in Sources */,
 				EC24E01B161BBBA900016B78 /* FeaturedSong.m in Sources */,
 				EC24E020161BBC0C00016B78 /* SettingsController.m in Sources */,
-				9D4C70D017A8B02D00DC7B4D /* InstrumentTableViewController.m in Sources */,
 				9D8B403717A9ED52009D3FB4 /* Facebook.m in Sources */,
 				9D8B403B17A9ED52009D3FB4 /* FBDialog.m in Sources */,
 				9D8B403D17A9ED52009D3FB4 /* FBFrictionlessRequestSettings.m in Sources */,

@@ -19,13 +19,13 @@
 #import "UIButton+Gtar.h"
 
 #import <gTarAppCore/UserController.h>
-#import <gTarAppCore/UserProfile.h>
-#import <gTarAppCore/UserSongSession.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/CloudResponse.h>
+#import "UserProfile.h"
+#import "UserSongSession.h"
+#import "UserSong.h"
+#import "CloudController.h"
+#import "CloudResponse.h"
 #import <gTarAppCore/UserEntry.h>
-#import <gTarAppCore/FileController.h>
+#import "FileController.h"
 #import <gTarAppCore/UserResponse.h>
 
 extern UserController *g_userController;

@@ -27,7 +27,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import <gTarAppCore/AppCore.h>
-//#import <gTarAppCore/TelemetryController.h>
 
 #import "UIView+Gtar.h"
 #import "Mixpanel.h"

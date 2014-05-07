@@ -14,11 +14,11 @@
 
 #import <gTarAppCore/AppCore.h>
 
-#import <gTarAppCore/UserSong.h>
+#import "UserSong.h"
 #import <gTarAppCore/NSSong.h>
 #import <gTarAppCore/NSNoteFrame.h>
 #import <gTarAppCore/NSNote.h>
-#import <gTarAppCore/XmlDom.h>
+#import "XmlDom.h"
 
 #import "SoundMaster.h"
 

@@ -7,9 +7,9 @@
 //
 
 #import "StoreSongListCell.h"
-#import <gTarAppCore/UserSong.h>
+#import "UserSong.h"
 #import "InAppPurchaseManager.h"
-#import <gTarAppCore/CloudResponse.h>
+#import "CloudResponse.h"
 
 #import "SongSelectionViewController.h"
 

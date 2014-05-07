@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <gTarAppCore/UserSong.h>
+#import "UserSong.h"
 
 @interface SongPurchaseRequest : NSObject {
 

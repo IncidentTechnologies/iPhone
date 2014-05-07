@@ -13,7 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "SongPlaybackController.h"
-#import <gTarAppCore/UserSong.h>
+#import "UserSong.h"
 #import <gTarAppCore/NSSong.h>
 
 //@class AudioController;

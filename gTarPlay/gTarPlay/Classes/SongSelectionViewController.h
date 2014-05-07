@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "GtarController.h"
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/CloudResponse.h>
-#import <gTarAppCore/CloudRequest.h>
-#import <gTarAppCore/FileController.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/UserSongs.h>
-#import <gTarAppCore/XmlDom.h>
+#import "CloudController.h"
+#import "CloudResponse.h"
+#import "CloudRequest.h"
+#import "FileController.h"
+#import "UserSong.h"
+#import "UserSongs.h"
+#import "XmlDom.h"
 #import "SongPlaybackController.h"
 #import <gTarAppCore/UserController.h>
 

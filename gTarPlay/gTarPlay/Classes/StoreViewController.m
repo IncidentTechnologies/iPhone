@@ -9,14 +9,14 @@
 #import "StoreViewController.h"
 #import "InAppPurchaseManager.h"
 
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/CloudResponse.h>
-#import <gTarAppCore/CloudRequest.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/UserSongs.h>
-#import <gTarAppCore/XmlDom.h>
+#import "CloudController.h"
+#import "CloudResponse.h"
+#import "CloudRequest.h"
+#import "UserSong.h"
+#import "UserSongs.h"
+#import "XmlDom.h"
 #import <gTarAppCore/UserController.h>
-#import <gTarAppCore/FileController.h>
+#import "FileController.h"
 
 #import "SongSelectionViewController.h"
 #import "StoreSongListCell.h"
@@ -31,6 +31,7 @@
 
 #define kStoreSongCacheKey @"StoreSongArray"
 
+extern GtarController * g_gtarController;
 extern CloudController *g_cloudController;
 extern FileController *g_fileController;
 
@@ -57,7 +58,9 @@ extern FileController *g_fileController;
 
 @implementation StoreViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize g_soundMaster;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster *)soundMaster
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
@@ -74,6 +77,9 @@ extern FileController *g_fileController;
             storeSongArray = [[NSArray alloc] init];
         else
             storeSongArray = [NSKeyedUnarchiver unarchiveObjectWithData:songArrayData];
+        
+        g_soundMaster = soundMaster;
+        [g_soundMaster start];
         
         m_storeSongArray = storeSongArray;
         m_displayedStoreSongArray = storeSongArray;
@@ -170,7 +176,7 @@ extern FileController *g_fileController;
     }
     
     // Set up song options
-    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
+    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     [_playerViewController attachToSuperview:_songPlayerView];
     
     _currentDifficulty = 0;
@@ -190,8 +196,11 @@ extern FileController *g_fileController;
     if ( _instrumentViewController == nil )
     {
         _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
+        [_instrumentViewController setDelegate:self];
         [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
+    
+    [g_gtarController addObserver:self];
 }
 
 - (void)localizeViews {
@@ -223,6 +232,16 @@ extern FileController *g_fileController;
     else
     {
         [g_cloudController requestSongStoreListCallbackObj:self andCallbackSel:@selector(requestStoreSongListCallback:)];
+    }
+}
+
+- (void)dealloc
+{
+    [g_gtarController removeObserver:self];
+    
+    // Turn off all LEDs
+    if(g_gtarController.connected){
+        [g_gtarController turnOffAllLeds];
     }
 }
 
@@ -345,8 +364,8 @@ extern FileController *g_fileController;
 
 - (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty
 {
-    
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:nil isStandalone:NO];
+    // TODO: pass gTarController
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.
@@ -805,6 +824,35 @@ extern FileController *g_fileController;
         
         NSLog(@"Something bad happened, no data to show");
     }
+}
+
+
+#pragma mark - Sliding Instrument Selector delegate and other audio stuff
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
+{
+    NSLog(@"Song Selection VC: did select instrument %@",instrumentName);
+    [_playerViewController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
+}
+
+- (void)stopAudioEffects
+{
+    NSLog(@"Song Selection View Controller: stop audio effects");
+    
+    [_playerViewController stopAudioEffects];
+}
+
+-(NSInteger)getSelectedInstrumentIndex
+{
+    NSLog(@"Song Selection View Controller: get selected instrument index");
+    
+    return [_playerViewController getSelectedInstrumentIndex];
+}
+
+-(NSArray *)getInstrumentList
+{
+    NSLog(@"Song Selection View Controller: get instrument list");
+    
+    return [_playerViewController getInstrumentList];
 }
 
 @end

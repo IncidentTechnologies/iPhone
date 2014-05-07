@@ -11,10 +11,10 @@
 
 #import "InAppPurchaseManager.h"
 
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/CloudResponse.h>
-#import <gTarAppCore/CloudRequest.h>
-#import <gTarAppCore/UserSong.h>
+#import "CloudController.h"
+#import "CloudResponse.h"
+#import "CloudRequest.h"
+#import "UserSong.h"
 
 #define kInAppPurchaseSongProductId @"gtarsong"
 

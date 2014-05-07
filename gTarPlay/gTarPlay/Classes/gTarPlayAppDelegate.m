@@ -16,10 +16,9 @@
 #import "TitleNavigationController.h"
 #import "Mixpanel.h"
 
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/FileController.h>
+#import "CloudController.h"
+#import "FileController.h"
 #import <gTarAppCore/UserController.h>
-//#import <gTarAppCore/TelemetryController.h>
 
 #define MIXPANEL_TOKEN @"da24d59140097cb9672b348ef05c6fab"
 
@@ -78,7 +77,7 @@ UserController * g_userController;
         [g_gtarController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR | Debug_BUILD
-        //[NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 #endif
         
 #if Debug_BUILD

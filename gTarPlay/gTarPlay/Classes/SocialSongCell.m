@@ -8,9 +8,9 @@
 
 #import "SocialSongCell.h"
 
-#import <gTarAppCore/UserSongSession.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/TimeFormatter.h>
+#import "UserSongSession.h"
+#import "UserSong.h"
+#import "TimeFormatter.h"
 
 @implementation SocialSongCell
 

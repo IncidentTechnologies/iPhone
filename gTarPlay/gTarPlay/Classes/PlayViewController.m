@@ -11,13 +11,11 @@
 
 #import "GtarController.h"
 
-//#import <gTarAppCore/TelemetryController.h>
-
-#import <gTarAppCore/CloudController.h>
+#import "CloudController.h"
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserResponse.h>
-#import <gTarAppCore/UserSongSession.h>
-#import <gTarAppCore/UserSong.h>
+#import "UserSongSession.h"
+#import "UserSong.h"
 #import <gTarAppCore/SongRecorder.h>
 #import <gTarAppCore/NSSongCreator.h>
 #import <gTarAppCore/NSSongModel.h>
