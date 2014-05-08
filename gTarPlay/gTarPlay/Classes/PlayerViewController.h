@@ -11,7 +11,14 @@
 
 @class UserSong;
 
+@protocol PlayerViewDelegate <NSObject>
+@optional
+- (void)instrumentLoadingReady;
+@end
+
 @interface PlayerViewController : UIViewController
+
+@property (weak, nonatomic) id <PlayerViewDelegate> delegate;
 
 @property (strong, nonatomic) SoundMaster *g_soundMaster;
 

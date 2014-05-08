@@ -33,9 +33,9 @@
     UIImage * sliderTrackMaxImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:17 topCapHeight:0];
     UIImage * sliderKnob = [UIImage imageNamed:@"SliderKnobBlue.png"];
     
-    [self.toneSlider setMinimumTrackImage:sliderTrackMinImage forState:UIControlStateNormal];
-    [self.toneSlider setMaximumTrackImage:sliderTrackMaxImage forState:UIControlStateNormal];
-    [self.toneSlider setThumbImage:sliderKnob forState:UIControlStateNormal];
+    //[self.toneSlider setMinimumTrackImage:sliderTrackMinImage forState:UIControlStateNormal];
+    //[self.toneSlider setMaximumTrackImage:sliderTrackMaxImage forState:UIControlStateNormal];
+    //[self.toneSlider setThumbImage:sliderKnob forState:UIControlStateNormal];
     
     // Customize audio route switch
     self.audioRouteSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
@@ -55,7 +55,7 @@
 
 - (void) localizeViews {
     _quitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Quit", NULL)];
-    _toneLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TONE", NULL)];
+    //_toneLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TONE", NULL)];
     _outputLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OUTPUT", NULL)];
     _speakerLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SPEAKER", NULL)];
     _auxLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"AUX", NULL)];
@@ -88,7 +88,7 @@
 - (void)moveToneSliderToTone:(double)tone
 {
     NSLog(@"Move tone slider to tone %f",tone);
-    [_toneSlider setValue:tone animated:NO];
+    //[_toneSlider setValue:tone animated:NO];
 }
 
 #pragma mark - Audio Routing

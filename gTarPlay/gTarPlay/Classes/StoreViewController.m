@@ -21,11 +21,6 @@
 #import "SongSelectionViewController.h"
 #import "StoreSongListCell.h"
 
-#import "PlayViewController.h"
-#import "PlayerViewController.h"
-#import "SlidingModalViewController.h"
-#import "VolumeViewController.h"
-#import "SlidingInstrumentViewController.h"
 
 #import "UIButton+Gtar.h"
 
@@ -177,6 +172,7 @@ extern FileController *g_fileController;
     
     // Set up song options
     _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
+    [_playerViewController setDelegate:self];
     [_playerViewController attachToSuperview:_songPlayerView];
     
     _currentDifficulty = 0;
@@ -216,7 +212,7 @@ extern FileController *g_fileController;
     
     [_startButton setTitle:NSLocalizedString(@"PRESS TO PLAY", NULL) forState:UIControlStateNormal];
     
-    _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    //_backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
     _shopLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Shop", NULL)];
 }
 
@@ -257,7 +253,17 @@ extern FileController *g_fileController;
     [_playerViewController endPlayback];
     
     [self dismissViewControllerAnimated:NO completion:nil];
-    [self startSong:_currentUserSong withDifficulty:_currentDifficulty];
+    
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:NO];
+}
+
+- (IBAction)practiceButtonClicked:(id)sender
+{
+    [_playerViewController endPlayback];
+    
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:YES];
 }
 
 - (IBAction)closeModalButtonClicked:(id)sender
@@ -362,10 +368,10 @@ extern FileController *g_fileController;
 
 #pragma mark - ViewController stuff
 
-- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty
+- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty practiceMode:(BOOL)practiceMode
 {
     // TODO: pass gTarController
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected];
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected practiceMode:practiceMode];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.
@@ -570,6 +576,7 @@ extern FileController *g_fileController;
     
     _currentUserSong = userSong;
     [_startButton startActivityIndicator];
+    [_startButton setImage:nil forState:UIControlStateNormal];
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     _playerViewController.userSong = userSong;
@@ -583,12 +590,17 @@ extern FileController *g_fileController;
     
     _playerViewController.loadedInvocation = invocation;
     
+    // Disable instrument menu until instrument has loaded
+    [_instrumentButton setEnabled:NO];
+    
     [self presentViewController:_songOptionsModal animated:YES completion:nil];
 }
 
 - (void)playerLoaded
 {
+    [_instrumentButton setEnabled:YES];
     [_startButton stopActivityIndicator];
+    [_startButton setImage:[UIImage imageNamed:@"PlayButtonVideo.png"] forState:UIControlStateNormal];
 }
 
 #pragma mark - Sort, Search

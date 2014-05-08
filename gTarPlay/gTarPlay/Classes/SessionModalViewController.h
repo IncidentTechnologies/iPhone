@@ -19,7 +19,7 @@
 
 @class UserSongSession;
 
-@interface SessionModalViewController : SlidingModalViewController <SlidingInstrumentDelegate>
+@interface SessionModalViewController : SlidingModalViewController <SlidingInstrumentDelegate, PlayerViewDelegate>
 
 @property (strong, nonatomic) SoundMaster * g_soundMaster;
 

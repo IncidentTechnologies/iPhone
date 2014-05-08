@@ -102,7 +102,7 @@ extern GtarController *g_gtarController;
     [_fullscreenButton setHidden:YES];
     
     _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
-    
+    [_playerViewController setDelegate:self];
     [_playerViewController attachToSuperview:_songPlayerView];
     
     _currentDifficulty = 0;
@@ -158,6 +158,7 @@ extern GtarController *g_gtarController;
     _hardLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Hard", NULL)];
     
     [_startButton setTitle:NSLocalizedString(@"PRESS TO PLAY", NULL) forState:UIControlStateNormal];
+    [_practiceButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
     
     [_skillButton setTitle:NSLocalizedString(@"SKILL", NULL) forState:UIControlStateNormal];
     [_scoreButton setTitle:NSLocalizedString(@"SCORE", NULL) forState:UIControlStateNormal];
@@ -165,7 +166,7 @@ extern GtarController *g_gtarController;
     _artistLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ARTIST", NULL)];
     _titleLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TITLE", NULL)];
     
-    _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    //_backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
     _songListLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Song List", NULL)];
 }
 
@@ -237,7 +238,16 @@ extern GtarController *g_gtarController;
 
     [self dismissViewControllerAnimated:NO completion:nil];
     
-    [self startSong:_currentUserSong withDifficulty:_currentDifficulty];
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:NO];
+}
+
+- (IBAction)practiceButtonClicked:(id)sender
+{
+    [_playerViewController endPlayback];
+    
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:YES];
 }
 
 - (IBAction)closeModalButtonClicked:(id)sender
@@ -404,21 +414,6 @@ extern GtarController *g_gtarController;
 {
     [_songListTable startAnimating];
     [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
-    
-    // Start animating offscreen if there are already songs displayed.
-//    if ( [_userSongArray count] > 0 )
-    {
-//        [_songListTable startAnimatingOffscreen];
-//        [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
-    }
-//    else
-    {
-        // First time, do a sync request so we can show the song list quickly
-//        [_songListTable startAnimating];
-//        CloudRequest *cloudRequest = [g_cloudController requestSongListCallbackObj:nil andCallbackSel:nil];
-//        [self requestSongListCallback:cloudRequest.m_cloudResponse];
-    }
-    
 }
 
 - (void)downloadUserSongs
@@ -621,6 +616,7 @@ extern GtarController *g_gtarController;
     
     _currentUserSong = userSong;
     [_startButton startActivityIndicator];
+    [_startButton setImage:nil forState:UIControlStateNormal];
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     _playerViewController.userSong = userSong;
@@ -634,6 +630,9 @@ extern GtarController *g_gtarController;
     
     _playerViewController.loadedInvocation = invocation;
     
+    // Disable instrument menu until instrument has loaded
+    [_instrumentButton setEnabled:NO];
+    
     [self presentViewController:_songOptionsModal animated:YES completion:nil];
 }
 
@@ -646,7 +645,9 @@ extern GtarController *g_gtarController;
 
 - (void)playerLoaded
 {
+    [_instrumentButton setEnabled:YES];
     [_startButton stopActivityIndicator];
+    [_startButton setImage:[UIImage imageNamed:@"PlayButtonVideo.png"] forState:UIControlStateNormal];
 }
 
 - (void)updateTable
@@ -656,10 +657,10 @@ extern GtarController *g_gtarController;
 
 #pragma mark - ViewController stuff
 
-- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty
+- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty practiceMode:(BOOL)practiceMode
 {
     
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected];
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected practiceMode:practiceMode];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.

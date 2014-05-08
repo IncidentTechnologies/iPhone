@@ -41,7 +41,7 @@ enum PlayViewControllerDifficulty
 
 @interface PlayViewController : MainEventController <GtarControllerObserver, NSSongModelDelegate>
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode;
 
 - (void) localizeViews;
 
@@ -59,10 +59,14 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UIButton *volumeButton;
 @property (strong, nonatomic) IBOutlet UIButton *pauseButton;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIButton *finishPracticeButton;
 @property (strong, nonatomic) IBOutlet UIButton *finishButton;
 @property (strong, nonatomic) IBOutlet UIButton *finishRestartButton;
 @property (strong, nonatomic) IBOutlet UIView *volumeSliderView;
 @property (strong, nonatomic) IBOutlet UIImageView *menuDownArrow;
+
+@property (strong, nonatomic) IBOutlet UIView *practiceView;
+@property (strong, nonatomic) IBOutlet UIButton *startPracticeButton;
 
 @property (strong, nonatomic) IBOutlet UITextView *loadingLicenseInfo;
 @property (strong, nonatomic) IBOutlet UILabel *loadingSongArtist;
@@ -77,6 +81,8 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UILabel *songArtistLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreSongTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreSongArtistLabel;
+@property (strong, nonatomic) IBOutlet UILabel *practiceSongTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *practiceSongArtistLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *scoreScoreLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreNotesHitLabel;
@@ -86,12 +92,16 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UILabel *scoreNotesHit;
 @property (strong, nonatomic) IBOutlet UILabel *scoreInARow;
 @property (strong, nonatomic) IBOutlet UILabel *scoreAccuracy;
+
+@property (strong, nonatomic) IBOutlet UIView *practiceHeatMapView;
 @property (strong, nonatomic) IBOutlet UIView *heatMapView;
 
 @property (strong, nonatomic) IBOutlet UIButton *difficultyButton;
 @property (strong, nonatomic) IBOutlet UIButton *scoreDifficultyButton;
+@property (strong, nonatomic) IBOutlet UIButton *practiceDifficultyButton;
 @property (strong, nonatomic) IBOutlet UILabel *difficultyLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreDifficultyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *practiceDifficultyLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *instrumentButton;
 @property (strong, nonatomic) IBOutlet UILabel *instrumentLabel;
@@ -133,6 +143,7 @@ enum PlayViewControllerDifficulty
 - (IBAction)backButtonClicked:(id)sender;
 - (IBAction)pauseButtonClicked:(id)sender;
 - (IBAction)volumeButtonClicked:(id)sender;
+- (IBAction)practiceButtonClicked:(id)sender;
 - (IBAction)finishButtonClicked:(id)sender;
 - (IBAction)restartButtonClicked:(id)sender;
 - (IBAction)outputSwitchChanged:(id)sender;

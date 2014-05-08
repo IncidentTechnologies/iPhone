@@ -47,6 +47,7 @@ extern FileController *g_fileController;
     
     // Set up the player modal
     _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
+    [_playerViewController setDelegate:self];
     [_playerViewController attachToSuperview:_playerView];
     
     _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil isInverse:NO];
@@ -76,6 +77,9 @@ extern FileController *g_fileController;
     
     _playerViewController.userSong = _userSongSession.m_userSong;
     _playerViewController.xmpBlob = _userSongSession.m_xmpBlob;
+    
+    // Wait for instrument to load
+    [_shortcutButton setEnabled:NO];
 }
 
 - (void)viewDidLayoutSubviews
@@ -97,6 +101,11 @@ extern FileController *g_fileController;
 
 - (IBAction)closeButtonClicked:(id)sender;
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     [_playerViewController endPlayback];
     
     [_blackButton setHidden:YES];
@@ -108,6 +117,11 @@ extern FileController *g_fileController;
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     if ( _volumeViewController.isDown == YES )
     {
         [_blackButton setHidden:YES];
@@ -124,6 +138,11 @@ extern FileController *g_fileController;
 {
     NSLog(@"Session Modal VC: shortcut button clicked");
     
+    if( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     if ( _instrumentViewController.isDown == YES )
     {
         [_blackButton setHidden:YES];
@@ -139,6 +158,11 @@ extern FileController *g_fileController;
 
 - (IBAction)blackButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     [_blackButton setHidden:YES];
     [_volumeViewController closeView:YES];
     [_instrumentViewController closeView:YES];
@@ -149,26 +173,29 @@ extern FileController *g_fileController;
 {
     NSLog(@"Session Modal VC: did select instrument %@",instrumentName);
     [_playerViewController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
-    //[g_soundMaster didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
 }
 
 - (void)stopAudioEffects
 {
     [_playerViewController stopAudioEffects];
-    //[g_soundMaster stopAllEffects];
 }
 
 - (NSInteger)getSelectedInstrumentIndex
 {
     return [_playerViewController getSelectedInstrumentIndex];
-    //return [g_soundMaster getCurrentInstrument];
 }
 
 - (NSArray *)getInstrumentList
 {
     
     return [_playerViewController getInstrumentList];
-    //return [g_soundMaster getInstrumentList];
+}
+
+#pragma mark - Player View Delegate
+
+- (void) instrumentLoadingReady
+{
+    [_shortcutButton setEnabled:YES];
 }
 
 @end

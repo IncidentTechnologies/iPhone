@@ -98,7 +98,7 @@ extern Facebook *g_facebook;
     [_followingButton setTitle:NSLocalizedString(@"Following", NULL) forState:UIControlStateNormal];
     
     //_profileLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Profile", NULL)];
-    _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    //_backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
     
 }
 

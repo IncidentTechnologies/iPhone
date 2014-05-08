@@ -109,6 +109,10 @@ extern UserController * g_userController;
     BOOL fretTwoOn;
     BOOL fretThreeOn;
     
+    // Practice
+    BOOL isPracticeMode;
+    BOOL _practiceViewOpen;
+    
 }
 
 @property (strong, nonatomic) SongDisplayController *displayController;
@@ -120,7 +124,7 @@ extern UserController * g_userController;
 
 @synthesize g_soundMaster;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
@@ -136,6 +140,7 @@ extern UserController * g_userController;
         _metronomeTimeStart = [NSDate date];
         
         isStandalone = standalone;
+        isPracticeMode = practiceMode;
         
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -144,6 +149,7 @@ extern UserController * g_userController;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
+        
     }
     return self;
 }
@@ -154,15 +160,37 @@ extern UserController * g_userController;
     
     [self localizeViews];
     
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGRect fullScreen = CGRectMake(0,0,screenBounds.size.height,screenBounds.size.width);
+    
+    // Setup the menu
+    [self.view addSubview:_menuView];
+    [self.view addSubview:_songScoreView];
+    [self.view addSubview:_practiceView];
+    
+    [_menuView setFrame:fullScreen];
+    [_menuView setBounds:fullScreen];
+    
+    [_songScoreView setFrame:fullScreen];
+    [_songScoreView setBounds:fullScreen];
+
+    [_practiceView setFrame:fullScreen];
+    [_practiceView setBounds:fullScreen];
+    
+    _menuView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
+    _songScoreView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
+    
+    _practiceViewOpen = NO;
+    _menuIsOpen = NO;
+    _songScoreIsOpen = NO;
+    _songIsPaused = NO;
+    
     // Hide the widgets we don't need initially
     [_menuDownArrow setHidden:YES];
+    [_finishPracticeButton setHidden:YES];
     [_finishButton setHidden:YES];
     [_finishRestartButton setHidden:YES];
     [_progressFillView setHidden:YES];
-    
-    // Fiddle with the button images
-//    [_menuButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-//    [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     // Fiddle with the switch images
     _outputSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
@@ -185,15 +213,35 @@ extern UserController * g_userController;
     // Hide the glview till it is done loading
     _glView.hidden = YES;
     
-    [self setStandalone];
+    //[self setStandalone];
     [self updateDifficultyDisplay];
     
-    
+    [self setPracticeMode];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [self setStandalone];
+}
+
+- (void) setPracticeMode
+{
+    // Show dropdown when the view appears if specified
+    if(isPracticeMode){
+        
+        _practiceViewOpen = YES;
+        [_practiceView setHidden:NO];
+        
+        [_practiceSongTitleLabel setText:_userSong.m_title];
+        [_practiceSongArtistLabel setText:_userSong.m_author];
+        
+    }else{
+        
+        _practiceViewOpen = NO;        
+        [_practiceView setHidden:YES];
+        
+    }
+
 }
 
 - (void) setStandalone
@@ -217,6 +265,7 @@ extern UserController * g_userController;
 }
 
 - (void) localizeViews {
+    [_finishPracticeButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
     [_finishButton setTitle:NSLocalizedString(@"SAVE & FINISH", NULL) forState:UIControlStateNormal];
     [_finishRestartButton setTitle:NSLocalizedString(@"RESTART", NULL) forState:UIControlStateNormal];
     
@@ -255,23 +304,6 @@ extern UserController * g_userController;
 {
     [super viewDidAppear:animated];
     
-    // Setup the menu
-    [self.view addSubview:_menuView];
-    [self.view addSubview:_songScoreView];
-    
-    [_menuView setFrame:self.view.frame];
-    [_menuView setBounds:self.view.bounds];
-    
-    [_songScoreView setFrame:self.view.frame];
-    [_songScoreView setBounds:self.view.bounds];
-    
-    _menuIsOpen = NO;
-    _songScoreIsOpen = NO;
-    _songIsPaused = NO;
-    
-    _menuView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
-    _songScoreView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
-    
     // Attach the volume view controller
     CGRect targetFrame = [_topBar convertRect:_volumeSliderView.frame toView:self.view];
     
@@ -280,9 +312,10 @@ extern UserController * g_userController;
     [_volumeViewController attachToSuperview:self.view withFrame:targetFrame];
     
     // Make sure the top bar stays on top
-    [self.view bringSubviewToFront:_topBar];
+    //[self.view bringSubviewToFront:_topBar];
     
     [self performSelectorOnMainThread:@selector(delayedLoaded) withObject:nil waitUntilDone:NO];
+    
 }
 
 - (void)delayedLoaded
@@ -363,17 +396,6 @@ extern UserController * g_userController;
 
 - (IBAction)backButtonClicked:(id)sender
 {
-    
-    // If the finish button is visible (i.e. we are done) we want
-    // to shortcut there instead.
-    // I'm disabling the cancel button now, don't need this.
-//    if ( _finishButton.isHidden == NO )
-//    {
-//        [self finishButtonClicked:nil];
-//        
-//        return;
-//    }
-    
     [_metronomeTimer invalidate];
     _metronomeTimer = nil;
     
@@ -381,29 +403,8 @@ extern UserController * g_userController;
     [g_userController addStars:_scoreTracker.m_stars forSong:_userSong.m_songId];
     [g_userController addScore:_scoreTracker.m_score forSong:_userSong.m_songId];
     
-    // If user finished more that 15% of a song and they chose to share the song, upload the userSong session
-    if (_songModel.m_percentageComplete >= 0.15 && _feedSwitch.isOn == YES)
-    {
-        [_songRecorder finishSong];
-        // This implicitly saves the user cache
-        [self uploadUserSongSession];
-    }
-    else
-    {
-        // Otherwise, we should do it manually
-        [g_userController saveCache];
-    }
-    
+    // Logging
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
-    
-//    [g_telemetryController logEvent:GtarPlaySongAborted
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-//                                     _userSong.m_title, @"Title",
-//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-//                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -416,10 +417,21 @@ extern UserController * g_userController;
                                                 nil]];
     
     [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
-
+    
     [self finalLogging];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    // If user finished more that 15% of a song and they chose to share the song, upload the userSong session
+    if (_songModel.m_percentageComplete >= 0.15 && _feedSwitch.isOn == YES)
+    {
+        // Show end of song screen
+        [self endSong];
+    }else{
+        // Otherwise, we should do it manually
+        [g_userController saveCache];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 - (IBAction)volumeButtonClicked:(id)sender
@@ -448,6 +460,49 @@ extern UserController * g_userController;
     }
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)practiceButtonClicked:(id)sender
+{
+    _practiceViewOpen = !_practiceViewOpen;
+    
+    if( _practiceViewOpen == YES) {
+        
+        [_practiceView setHidden:NO];
+        
+        [self stopMainEventLoop];
+        [self drawPlayButton:_pauseButton];
+        [self restartButtonClicked:nil];
+        
+    }else{
+        
+        // Animate out
+        int prevheight = _practiceView.frame.size.height;
+        int newheight = _practiceView.frame.size.height - 46;
+        
+        
+        [_startPracticeButton setHidden:YES];
+        [_practiceView setFrame:CGRectMake(0, 0, _practiceView.frame.size.width, newheight)];
+        
+        [UIView animateWithDuration:0.5 animations:^(void){
+            [_practiceView setFrame:CGRectMake(0,-prevheight,_practiceView.frame.size.width,newheight)];
+        }completion:^(BOOL finished){
+            [_practiceView setFrame:CGRectMake(0,0,_practiceView.frame.size.width,prevheight)];
+            [_practiceView setHidden:YES];
+            [_startPracticeButton setHidden:NO];
+        }];
+        
+        
+        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+        [self drawPauseButton:_pauseButton];
+        
+    }
+}
+
+- (IBAction)startPracticeButtonClicked:(id)sender
+{
+    // Close the practice selector view
+    [self practiceButtonClicked:sender];
 }
 
 - (IBAction)menuButtonClicked:(id)sender
@@ -510,8 +565,10 @@ extern UserController * g_userController;
             _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
         }
         
-        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-        [self drawPauseButton:_pauseButton];
+        if(!_practiceViewOpen){
+            [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+            [self drawPauseButton:_pauseButton];
+        }
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
@@ -774,8 +831,10 @@ extern UserController * g_userController;
     
     [UIView commitAnimations];
     
-    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-    [self drawPauseButton:_pauseButton];
+    if(!_practiceViewOpen){
+        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+        [self drawPauseButton:_pauseButton];
+    }
 }
 
 - (void)revealPlayView
@@ -959,8 +1018,10 @@ extern UserController * g_userController;
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffEasyButton"] forState:UIControlStateNormal];
             [_scoreDifficultyButton setImage:[UIImage imageNamed:@"DiffEasyButton"] forState:UIControlStateNormal];
+            [_practiceDifficultyButton setImage:[UIImage imageNamed:@"DiffEasyButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = NSLocalizedString(@"Easy", NULL);
             _scoreDifficultyLabel.text = NSLocalizedString(@"Easy", NULL);
+            _practiceDifficultyLabel.text = NSLocalizedString(@"Easy", NULL);
             
         } break;
             
@@ -968,8 +1029,10 @@ extern UserController * g_userController;
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffMedButton"] forState:UIControlStateNormal];
             [_scoreDifficultyButton setImage:[UIImage imageNamed:@"DiffMedButton"] forState:UIControlStateNormal];
+            [_practiceDifficultyButton setImage:[UIImage imageNamed:@"DiffMedButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = NSLocalizedString(@"Medium", NULL);
             _scoreDifficultyLabel.text = NSLocalizedString(@"Medium", NULL);
+            _practiceDifficultyLabel.text = NSLocalizedString(@"Medium", NULL);
             
             if(isStandalone){
                 [self showFrets];
@@ -981,8 +1044,10 @@ extern UserController * g_userController;
         {
             [_difficultyButton setImage:[UIImage imageNamed:@"DiffHardButton"] forState:UIControlStateNormal];
             [_scoreDifficultyButton setImage:[UIImage imageNamed:@"DiffHardButton"] forState:UIControlStateNormal];
+            [_practiceDifficultyButton setImage:[UIImage imageNamed:@"DiffHardButton"] forState:UIControlStateNormal];
             _difficultyLabel.text = NSLocalizedString(@"Hard", NULL);
             _scoreDifficultyLabel.text = NSLocalizedString(@"Hard", NULL);
+            _practiceDifficultyLabel.text = NSLocalizedString(@"Hard", NULL);
             
             if(isStandalone){
                 [self showFrets];
@@ -1406,11 +1471,6 @@ extern UserController * g_userController;
         
         [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
         
-        // release everything
-        
-            
-        
-        
     }
 }
 
@@ -1548,8 +1608,11 @@ extern UserController * g_userController;
     // Update the menu labels
     [_songTitleLabel setText:_userSong.m_title];
     [_scoreSongTitleLabel setText:_userSong.m_title];
+    [_practiceSongTitleLabel setText:_userSong.m_title];
     [_songArtistLabel setText:_userSong.m_author];
     [_scoreSongArtistLabel setText:_userSong.m_author];
+    [_practiceSongArtistLabel setText:_userSong.m_author];
+    [_finishPracticeButton setHidden:YES];
     [_finishButton setHidden:YES];
     [_finishRestartButton setHidden:YES];
     [_outputView setHidden:NO];
@@ -1616,8 +1679,10 @@ extern UserController * g_userController;
     
     _deferredNotesQueue = [[NSMutableArray alloc] init];
     
-    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-    [self drawPauseButton:_pauseButton];
+    if(!_practiceViewOpen){
+        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+        [self drawPauseButton:_pauseButton];
+    }
     
     
     [self updateScoreDisplayWithAccuracy:-1];
@@ -2196,8 +2261,10 @@ extern UserController * g_userController;
     
     UIImage * rectImage = UIGraphicsGetImageFromCurrentImageContext();
     UIImageView * image = [[UIImageView alloc] initWithImage:rectImage];
+    UIImageView * practiceImage = [[UIImageView alloc] initWithImage:rectImage];
     
     [_heatMapView addSubview:image];
+    [_practiceHeatMapView addSubview:practiceImage];
     
     UIGraphicsEndImageContext();
     
@@ -2209,27 +2276,7 @@ extern UserController * g_userController;
     [self stopMainEventLoop];
     [self drawPlayButton:_pauseButton];
     
-    NSDictionary * scoreData = [_scoreTracker aggregateScoreEndOfSong];
-    
-    double score = [[scoreData objectForKey:@"Score"] doubleValue];
-    double percentNotesHit = 100*[[scoreData objectForKey:@"PercentNotesHit"] doubleValue];
-    double maxStreak = [[scoreData objectForKey:@"MaxStreak"] doubleValue];
-    double accuracy = 100*[[scoreData objectForKey:@"AverageTiming"] doubleValue];
-    
-    _scoreScore.text = [self formatScore:(int)score];
-    _scoreNotesHit.text = [NSString stringWithFormat:@"%i%%",(int)percentNotesHit];
-    _scoreInARow.text = [NSString stringWithFormat:@"%i",(int)maxStreak];
-    _scoreAccuracy.text = [NSString stringWithFormat:@"%i%%",(int)accuracy];
-
-    // Build the heat map
-    [self drawHeatMap];
-    
-    // Turn of the LEDs
-    if(g_gtarController.connected){
-        [g_gtarController turnOffAllLeds];
-    }
-    
-    [_songRecorder finishSong];
+    [self endSong];
     
     [_metronomeTimer invalidate];
     _metronomeTimer = nil;
@@ -2252,18 +2299,51 @@ extern UserController * g_userController;
     [g_userController addStars:_scoreTracker.m_stars forSong:_userSong.m_songId];
     [g_userController addScore:_scoreTracker.m_score forSong:_userSong.m_songId];
     
-    [_finishButton setHidden:NO];
-    [_finishRestartButton setHidden:NO];
-    [_backButton setEnabled:NO];
-    
     // If our queue is full, don't let them upload more songs
     if ( [g_userController isUserSongSessionQueueFull] == YES )
     {
         [_feedSwitch setOn:NO];
     }
     
-    [self songScoreButtonClicked:nil];
+}
+
+- (void)endSong
+{
     
+    NSDictionary * scoreData = [_scoreTracker aggregateScoreEndOfSong];
+    
+    double score = [[scoreData objectForKey:@"Score"] doubleValue];
+    double percentNotesHit = 100*[[scoreData objectForKey:@"PercentNotesHit"] doubleValue];
+    double maxStreak = [[scoreData objectForKey:@"MaxStreak"] doubleValue];
+    double accuracy = 100*[[scoreData objectForKey:@"AverageTiming"] doubleValue];
+    
+    _scoreScore.text = [self formatScore:(int)score];
+    _scoreNotesHit.text = [NSString stringWithFormat:@"%i%%",(int)percentNotesHit];
+    _scoreInARow.text = [NSString stringWithFormat:@"%i",(int)maxStreak];
+    _scoreAccuracy.text = [NSString stringWithFormat:@"%i%%",(int)accuracy];
+    
+    // Build the heat map
+    [self drawHeatMap];
+    
+    // Turn of the LEDs
+    if(g_gtarController.connected){
+        [g_gtarController turnOffAllLeds];
+    }
+    
+    [_songRecorder finishSong];
+    
+    // Show final screen
+    [_finishPracticeButton setHidden:NO];
+    [_finishButton setHidden:NO];
+    [_finishRestartButton setHidden:NO];
+    [_backButton setEnabled:NO];
+    
+    if(_menuIsOpen){
+        [self menuButtonClicked:nil];
+    }
+    
+    [self songScoreButtonClicked:nil];
+
 }
 
 #pragma mark - Cloud callbacks

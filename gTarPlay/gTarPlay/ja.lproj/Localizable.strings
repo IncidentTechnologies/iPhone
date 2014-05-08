@@ -6,15 +6,13 @@
 
 */
 
-/*#*/ // = translate short as possible
-
 // Title Screen
 "SIGN IN" = "ログイン";
 "SIGN UP" = "登録";
 "VIDEO" = "ビデオ";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "再生";
-/*#*/ "FREE PLAY" = "自由な再生";
+"FREE PLAY" = "自由な再生";
 "STORE" = "お店";
 "Sign In with Facebook" = "Facebookでログイン";
 "Username" = "ユーザ名";
@@ -39,24 +37,24 @@
 "Easy" = "簡単";
 "Medium" = "媒体";
 "Hard" = "難しい";
-"PRESS TO PLAY" = "再生するにはキーを押し";
-/*#*/ "SKILL" = "技量";
+"PRESS TO PLAY" = "再生";
+"PRACTICE" = "練習";
+"SKILL" = "技量";
 "SCORE" = "スコア";
 "ARTIST" = "アーティスト";
 "TITLE" = "タイトル";
 "Back" = "戻る";
-"Song List" = "曲一覧";
+"Song List" = "歌";
 
 // Play View
 "SAVE & FINISH" = "保存と終了";
 "SCORE" = "スコア";
 "OUTPUT" = "出力";
-/*#*/ "AUX" = "補助の";
-/*#*/ "SPEAKER" = "スピーカー";
+"AUX" = "補助の";
+"SPEAKER" = "スピーカー";
 "POST TO FEED" = "出版する";
 "OFF" = "無効にする";
 "ON" = "オンにする";
-"Easy" = "簡単";
 "Quit" = "やめる";
 "Restart" = "再起動";
 "RESTART" = "再起動";
@@ -66,7 +64,7 @@
 "ACCURACY" = "精度";
 
 // Social View
-/*#*/ "Logout" = "ログアウト";
+"Logout" = "ログアウト";
 "FOLLOW" = "従う";
 "FOLLOWING" = "以下";
 "SESSIONS" = "会期";
@@ -75,7 +73,7 @@
 "Follwoing" = "以下";
 
 // Freeplay
-/*#*/ "ALL" = "全部";
+"ALL" = "全部";
 "COLOR" = "色";
 "SHAPE" = "形状";
 "LOOP" = "ループ";
@@ -121,9 +119,9 @@
 
 // Store
 "TITLE & ARTIST" = "タイトルとアーティスト";
-/*#*/ "99¢" = "円99";
-/*#*/ "FREE" = "無料";
-/*#*/ "BUY" = "買う";
+"99¢" = "円99";
+"FREE" = "無料";
+"BUY" = "買う";
 "Shop" = "お店";
 "OK" = "OK";
 "Song Purchase Failed" = "曲の購入に失敗しました";
@@ -140,8 +138,8 @@
 "Release to update" = "アップデートへのリリース";
 
 // Selector
-/*#*/ "FRIENDS" = "友達";
-/*#*/ "GLOBAL" = "グローバル";
+"FRIENDS" = "友達";
+"GLOBAL" = "グローバル";
 
 "Error" = "エラー";
 "Search..." = "検索...";

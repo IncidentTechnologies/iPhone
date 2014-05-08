@@ -16,6 +16,12 @@
 #import "GtarController.h"
 #import "SlidingInstrumentViewController.h"
 
+#import "PlayViewController.h"
+#import "PlayerViewController.h"
+#import "SlidingModalViewController.h"
+#import "VolumeViewController.h"
+#import "SlidingInstrumentViewController.h"
+
 @class UserSong;
 
 typedef enum {
@@ -33,7 +39,7 @@ struct StoreSortOrder {
 
 @class SlidingModalViewController;
 
-@interface StoreViewController : UIViewController <GtarControllerObserver, PullToUpdateTableViewDelegate, ExpandableSearchBarDelegate,SlidingInstrumentDelegate> {
+@interface StoreViewController : UIViewController <GtarControllerObserver, PullToUpdateTableViewDelegate, ExpandableSearchBarDelegate,SlidingInstrumentDelegate, PlayerViewDelegate> {
 
 }
 
@@ -55,6 +61,7 @@ struct StoreSortOrder {
 @property (strong, nonatomic) IBOutlet UILabel *hardLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
+@property (strong, nonatomic) IBOutlet UIButton *practiceButton;
 
 @property (strong, nonatomic) IBOutlet UIView *volumeView;
 @property (strong, nonatomic) IBOutlet UIView *instrumentView;
@@ -73,7 +80,7 @@ struct StoreSortOrder {
 @property (strong, nonatomic) IBOutlet UIButton *buttonSkill;
 @property (strong, nonatomic) IBOutlet UIButton *buttonBuy;
 
-@property (strong, nonatomic) IBOutlet UILabel *backLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *backLabel;
 @property (strong, nonatomic) IBOutlet UILabel *shopLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster *)soundMaster;
@@ -95,6 +102,7 @@ struct StoreSortOrder {
 
 // Song Selection
 - (IBAction)startButtonClicked:(id)sender;
+- (IBAction)practiceButtonClicked:(id)sender;
 - (IBAction)closeModalButtonClicked:(id)sender;
 - (IBAction)volumeButtonClicked:(id)sender;
 - (IBAction)instrumentButtonClicked:(id)sender;

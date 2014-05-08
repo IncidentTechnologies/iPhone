@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
@@ -79,12 +78,12 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="101" userLabel="MenuButton" customClass="IconButton">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="46"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.10196078431372549" green="0.63529411764705879" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="0.62745098039215685" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="155"/>
                                         <constraint firstAttribute="height" constant="46" id="156"/>
                                     </constraints>
-                                    <color key="tintColor" red="0.066666666666666666" green="0.47058823529411764" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="tintColor" red="0.066666666669999999" green="0.47058823529999999" blue="0.64705882349999999" alpha="1" colorSpace="deviceRGB"/>
                                     <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
                                     <state key="normal" image="CloseXButton.png"/>
                                     <connections>

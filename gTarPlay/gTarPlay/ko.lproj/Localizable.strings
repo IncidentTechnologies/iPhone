@@ -6,15 +6,13 @@
  
  */
 
-/*#*/ // = translate short as possible
-
 // Title Screen
 "SIGN IN" = "로그인";
 "SIGN UP" = "가입";
 "VIDEO" = "비디오";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "연주하기";
-/*#*/ "FREE PLAY" = "자유연주하기";
+"FREE PLAY" = "자유연주하기";
 "STORE" = "스토어";
 "Sign In with Facebook" = "Sign In with Facebook";
 "Username" = "로그인 이름";
@@ -39,24 +37,24 @@
 "Easy" = "쉬움";
 "Medium" = "중간";
 "Hard" = "어려움";
-"PRESS TO PLAY" = "연주를 하려면 누르세요.";
-/*#*/ "SKILL" = "기술";
+"PRESS TO PLAY" = "연주하기";
+"PRACTICE" = "연습";
+"SKILL" = "기술";
 "SCORE" = "점수";
 "ARTIST" = "아티스트";
 "TITLE" = "제목";
 "Back" = "뒤로";
-"Song List" = "노래목록";
+"Song List" = "노래";
 
 // Play View
 "SAVE & FINISH" = "저장하고 끝내기";
 "SCORE" = "점수";
 "OUTPUT" = "출력";
-/*#*/ "AUX" = "보조";
-/*#*/ "SPEAKER" = "스피커";
+"AUX" = "보조";
+"SPEAKER" = "스피커";
 "POST TO FEED" = "포스팅하기";
 "OFF" = "끄기";
 "ON" = "켜기";
-"Easy" = "쉬움";
 "Quit" = "그만두기";
 "Restart" = "재시작";
 "RESTART" = "재시작";
@@ -66,7 +64,7 @@
 "ACCURACY" = "정확성";
 
 // Social View
-/*#*/ "Logout" = "로그아웃";
+"Logout" = "로그아웃";
 "FOLLOW" = "구독하다";
 "FOLLOWING" = "기부의 신청";
 "SESSIONS" = "세션";
@@ -75,7 +73,7 @@
 "Following" = "기부의 신청";
 
 // Freeplay
-/*#*/ "ALL" = "모든";
+"ALL" = "모든";
 "COLOR" = "색상";
 "SHAPE" = "모양";
 "LOOP" = "고리";
@@ -121,9 +119,9 @@
 
 // Store
 "TITLE & ARTIST" = "제목과아티스트";
-/*#*/ "99¢" = "₩1000";
-/*#*/ "FREE" = "무료";
-/*#*/ "BUY" = "사다";
+"99¢" = "₩1000";
+"FREE" = "무료";
+"BUY" = "사다";
 "Shop" = "스토어";
 "OK" = "OK";
 "Song Purchase Failed" = "구입 실패";

@@ -3,15 +3,13 @@
  gTarPlay
 */
 
-/*#*/ // = translate short as possible
-
 // Title Screen
 "SIGN IN" = "登录";
 "SIGN UP" = "报名";
 "VIDEO" = "视频";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "演奏";
-/*#*/ "FREE PLAY" = "免费演奏";
+"FREE PLAY" = "免费演奏";
 "STORE" = "商店";
 "Sign In with Facebook" = "Sign In with Facebook";
 "Username" = "用户名称";
@@ -36,24 +34,24 @@
 "Easy" = "简单";
 "Medium" = "中等";
 "Hard" = "困难";
-"PRESS TO PLAY" = "点按以开始";
-/*#*/ "SKILL" = "技能";
+"PRESS TO PLAY" = "演奏";
+"PRACTICE" = "实践";
+"SKILL" = "技能";
 "SCORE" = "得分";
 "ARTIST" = "艺术家";
 "TITLE" = "标题";
 "Back" = "返回";
-"Song List" = "歌单";
+"Song List" = "歌曲";
 
 // Play View
 "SAVE & FINISH" = "保存并结束";
 "SCORE" = "得分";
 "OUTPUT" = "输出";
-/*#*/ "AUX" = "切换";
-/*#*/ "SPEAKER" = "扬声器";
+"AUX" = "切换";
+"SPEAKER" = "扬声器";
 "POST TO FEED" = "发布给";
 "OFF" = "关闭";
 "ON" = "打开";
-"Easy" = "简单";
 "Quit" = "推出";
 "Restart" = "重新开始";
 "RESTART" = "重新开始";
@@ -72,7 +70,7 @@
 "Following" = "跟随者";
 
 // Freeplay
-/*#*/ "ALL" = "全部";
+"ALL" = "全部";
 "COLOR" = "色彩";
 "SHAPE" = "形状";
 "LOOP" = "环";
@@ -119,9 +117,9 @@
 
 // Store
 "TITLE & ARTIST" = "歌曲名& 艺术家";
-/*#*/ "99¢" = "¥6";
-/*#*/ "FREE" = "免费";
-/*#*/ "BUY" = "购买";
+"99¢" = "¥6";
+"FREE" = "免费";
+"BUY" = "购买";
 "Shop" = "商店";
 "OK" = "成功";
 "Song Purchase Failed" = "购买歌曲失败";
@@ -138,8 +136,8 @@
 "Release to update" = "发布更新";
 
 // Selector
-/*#*/ "FRIENDS" = "朋友";
-/*#*/ "GLOBAL" = "全球";
+"FRIENDS" = "朋友";
+"GLOBAL" = "全球";
 
 "Error" = "错误";
 "Search..." = "搜索...";

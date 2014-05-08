@@ -49,7 +49,7 @@ struct SongSortOrder {
 @class SlidingModalViewController;
 @class UserSong;
 
-@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver, ExpandableSearchBarDelegate,SlidingInstrumentDelegate>
+@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver, ExpandableSearchBarDelegate,SlidingInstrumentDelegate, PlayerViewDelegate>
 
 // Audio Controller
 @property (strong, nonatomic) SoundMaster *g_soundMaster;
@@ -69,6 +69,7 @@ struct SongSortOrder {
 @property (strong, nonatomic) IBOutlet UIButton *hardButton;
 @property (strong, nonatomic) IBOutlet UILabel *hardLabel;
 
+@property (strong, nonatomic) IBOutlet UIButton *practiceButton;
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
 
 @property (strong, nonatomic) IBOutlet UIView *volumeView;
@@ -84,7 +85,7 @@ struct SongSortOrder {
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *artistLabel;
-@property (strong, nonatomic) IBOutlet UILabel *backLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *backLabel;
 @property (strong, nonatomic) IBOutlet UILabel *songListLabel;
 
 @property (strong, nonatomic) IBOutlet PullToUpdateTableView *songListTable;
@@ -94,6 +95,7 @@ struct SongSortOrder {
 - (void) localizeViews;
 
 - (IBAction)backButtonClicked:(id)sender;
+- (IBAction)practiceButtonClicked:(id)sender;
 - (IBAction)startButtonClicked:(id)sender;
 - (IBAction)closeModalButtonClicked:(id)sender;
 - (IBAction)volumeButtonClicked:(id)sender;

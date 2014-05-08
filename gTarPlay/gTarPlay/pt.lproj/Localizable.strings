@@ -6,15 +6,13 @@
 
 */
 
-/*#*/ // = translate short as possible
-
 // Title Screen
 "SIGN IN" = "ENTRAR";
 "SIGN UP" = "REGISTRAR";
 "VIDEO" = "VIDEO";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "TOCAR";
-/*#*/ "FREE PLAY" = "TOCAR LIVRE";
+"FREE PLAY" = "TOCAR LIVRE";
 "STORE" = "LOJA";
 "Sign In with Facebook" = "Entrar com Facebook";
 "Username" = "Usuário";
@@ -39,24 +37,24 @@
 "Easy" = "Fácil";
 "Medium" = "Médio";
 "Hard" = "Difícil";
-"PRESS TO PLAY" = "PRESSIONE PARA TOCAR";
-/*#*/ "SKILL" = "PERÍCIA";
+"PRESS TO PLAY" = "TOCAR";
+"PRACTICE" = "PRÁTICA";
+"SKILL" = "PERÍCIA";
 "SCORE" = "PARTITURA";
 "ARTIST" = "ARTISTA";
 "TITLE" = "TÍTULO";
 "Back" = "Voltar";
-"Song List" = "Lista de Canção";
+"Song List" = "Canção";
 
 // Play View
 "SAVE & FINISH" = "SALVAR E TERMINAR";
 "SCORE" = "PARTITURA";
 "OUTPUT" = "PRODUÇÃO";
-/*#*/ "AUX" = "AUX";
-/*#*/ "SPEAKER" = "FALANTE";
+"AUX" = "AUX";
+"SPEAKER" = "FALANTE";
 "POST TO FEED" = "PUBLICAR";
 "OFF" = "DESLIGAR";
 "ON" = "ACENDER";
-"Easy" = "Fácil";
 "Quit" = "Desistir";
 "Restart" = "Reiniciar";
 "RESTART" = "REINICIAR";
@@ -66,7 +64,7 @@
 "ACCURACY" = "PRECISÃO";
 
 // Social View
-/*#*/ "Logout" = "Sair";
+"Logout" = "Sair";
 "FOLLOW" = "SIGA";
 "FOLLOWING" = "SIGUIENTE";
 "SESSIONS" = "SESSÕES";
@@ -75,7 +73,7 @@
 "Following" = "Siguiente";
 
 // Freeplay
-/*#*/ "ALL" = "TUDA";
+"ALL" = "TUDA";
 "COLOR" = "COR";
 "SHAPE" = "FORMA";
 "LOOP" = "LOOP";
@@ -121,9 +119,9 @@
 
 // Store
 "TITLE & ARTIST" = "TÍTULO E ARTISTA";
-/*#*/ "99¢" = ".99€";
-/*#*/ "FREE" = "GRÁTIS";
-/*#*/ "BUY" = "Compra";
+"99¢" = ".99€";
+"FREE" = "GRÁTIS";
+"BUY" = "COMPRA";
 "Shop" = "LOJA";
 "OK" = "OK";
 "Song Purchase Failed" = "Canção Compra Falha";
@@ -140,8 +138,8 @@
 "Release to update" = "Solte para atualizar";
 
 // Selector
-/*#*/ "FRIENDS" = "AMIGOS";
-/*#*/ "GLOBAL" = "GLOBAL";
+"FRIENDS" = "AMIGOS";
+"GLOBAL" = "GLOBAL";
 
 "Error" = "Erro";
 "Search..." = "Pesquisa...";

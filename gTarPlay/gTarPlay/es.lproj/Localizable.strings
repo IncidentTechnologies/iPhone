@@ -6,15 +6,13 @@
 
 */
 
-/*#*/ // = translate short as possible
-
 // Title Screen
 "SIGN IN" = "INICIA SESIÓN";
 "SIGN UP" = "REGISTRAR";
 "VIDEO" = "VIDEO";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "TOCAR";
-/*#*/ "FREE PLAY" = "TOCAR LIBRE";
+"FREE PLAY" = "TOCAR LIBRE";
 "STORE" = "TIENDA";
 "Sign In with Facebook" = "Registrar con Facebook";
 "Username" = "Usuario";
@@ -30,7 +28,6 @@
 "Invalid Password" = "Contraseña Inválido";
 "Facebook failed to login" = "Facebook no inicia sesión";
 
-
 // ActivityFeedCell
 "Someone" = "Alguien";
 "Jamed out" = "Jamed out";
@@ -40,24 +37,24 @@
 "Easy" = "Fácil";
 "Medium" = "Médio";
 "Hard" = "Difícil";
-"PRESS TO PLAY" = "PULSA PARA TOCAR";
-/*#*/ "SKILL" = "PERICIA";
+"PRESS TO PLAY" = "TOCAR";
+"PRACTICE" = "PRÁCTICA";
+"SKILL" = "PERICIA";
 "SCORE" = "PARTITURA";
 "ARTIST" = "ARTISTA";
 "TITLE" = "TÍTULO";
 "Back" = "Volver";
-"Song List" = "Lista de Canciones";
+"Song List" = "Canciones";
 
 // Play View
 "SAVE & FINISH" = "SALVE Y TERMINAR";
 "SCORE" = "PARTITURA";
 "OUTPUT" = "PRODUCCIÓN";
-/*#*/ "AUX" = "AUX";
-/*#*/ "SPEAKER" = "ALTAVOZ";
+"AUX" = "AUX";
+"SPEAKER" = "ALTAVOZ";
 "POST TO FEED" = "PUBLICAR";
 "OFF" = "NO";
 "ON" = "SÍ";
-"Easy" = "Fácil";
 "Quit" = "Dejar";
 "Restart" = "Reiniciar";
 "RESTART" = "REINICIAR";
@@ -67,7 +64,7 @@
 "ACCURACY" = "PRECISIÓN";
 
 // Social View
-/*#*/ "Logout" = "Sair";
+"Logout" = "Sair";
 "FOLLOW" = "SIGA";
 "FOLLOWING" = "SIGUIENTE";
 "SESSIONS" = "SESIONES";
@@ -76,7 +73,7 @@
 "Following" = "Siguiente";
 
 // Freeplay
-/*#*/ "ALL" = "TODO";
+"ALL" = "TODO";
 "COLOR" = "COLOR";
 "SHAPE" = "FORMA";
 "LOOP" = "LAZO";
@@ -122,9 +119,9 @@
 
 // Store
 "TITLE & ARTIST" = "TÍTULO Y ARTISTA";
-/*#*/ "99¢" = ".99€";
-/*#*/ "FREE" = "GRATIS";
-/*#*/ "BUY" = "PRECIO";
+"99¢" = ".99€";
+"FREE" = "GRATIS";
+"BUY" = "PRECIO";
 "Shop" = "TIENDA";
 "OK" = "OK";
 "Song Purchase Failed" = "Compra Canción Error";
@@ -141,8 +138,8 @@
 "Release to update" = "Suelte para actualizar";
 
 // Selector
-/*#*/ "FRIENDS" = "AMIGOS";
-/*#*/ "GLOBAL" = "GLOBAL";
+"FRIENDS" = "AMIGOS";
+"GLOBAL" = "GLOBAL";
 
 "Error" = "Error";
 "Search..." = "Buscar...";

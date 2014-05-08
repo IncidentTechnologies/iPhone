@@ -6,15 +6,13 @@
 
 */
 
-/*#*/ // = translate short as possible
-
 // Title Screen
 "SIGN IN" = "EINLOGGEN";
 "SIGN UP" = "ANMELDEN";
 "VIDEO" = "VIDEO";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "SPIEL";
-/*#*/ "FREE PLAY" = "FREIES SPIEL";
+"FREE PLAY" = "FREIES SPIEL";
 "STORE" = "GESCHÄFT";
 "Sign In with Facebook" = "Einloggen mit Facebook";
 "Username" = "Benutzername";
@@ -39,24 +37,24 @@
 "Easy" = "Leicht";
 "Medium" = "Medium";
 "Hard" = "Schwer";
-"PRESS TO PLAY" = "BEDRÄNGEN SIE ZU SPIELEN";
-/*#*/ "SKILL" = "MODUS";
+"PRESS TO PLAY" = "SPIELEN";
+"PRACTICE" = "PRAXIS";
+"SKILL" = "MODUS";
 "SCORE" = "PARTITUR";
 "ARTIST" = "KÜNSTLER";
 "TITLE" = "TITEL";
 "Back" = "Zurück";
-"Song List" = "Songliste";
+"Song List" = "Songs";
 
 // Play View
 "SAVE & FINISH" = "Sparen & Beenden";
 "SCORE" = "PARTITUR";
 "OUTPUT" = "PRODUKTION";
-/*#*/ "AUX" = "AUX";
-/*#*/ "SPEAKER" = "SPRECHER";
+"AUX" = "AUX";
+"SPEAKER" = "SPRECHER";
 "POST TO FEED" = "MITTEILEN";
 "OFF" = "NICHT";
 "ON" = "JA";
-"Easy" = "Leicht";
 "Quit" = "Verlassen";
 "Restart" = "Neustart";
 "RESTART" = "NEUSTART";
@@ -66,7 +64,7 @@
 "ACCURACY" = "PRÄZISION";
 
 // Social View
-/*#*/ "Logout" = "Abmelden";
+"Logout" = "Abmelden";
 "FOLLOW" = "FOLGEN";
 "FOLLOWING" = "FOLGENDE";
 "SESSIONS" = "SITZUNGEN";
@@ -75,7 +73,7 @@
 "Following" = "Folgende";
 
 // Freeplay
-/*#*/ "ALL" = "ALLE";
+"ALL" = "ALLE";
 "COLOR" = "FARBE";
 "SHAPE" = "FORM";
 "LOOP" = "SCHLEIFE";
@@ -121,9 +119,9 @@
 
 // Store
 "TITLE & ARTIST" = "TITEL & KÜNSTLER";
-/*#*/ "99¢" = ".99€";
-/*#*/ "FREE" = "GRATIS";
-/*#*/ "BUY" = "KAUF";
+"99¢" = ".99€";
+"FREE" = "GRATIS";
+"BUY" = "KAUF";
 "Shop" = "GESCHÄFT";
 "OK" = "OK";
 "Song Purchase Failed" = "Song Kauf fehlgeschlagen";
@@ -140,8 +138,8 @@
 "Release to update" = "Freigabe Sie zum aktualisieren";
 
 // Selector
-/*#*/ "FRIENDS" = "FREUNDE";
-/*#*/ "GLOBAL" = "GLOBAL";
+"FRIENDS" = "FREUNDE";
+"GLOBAL" = "GLOBAL";
 
 "Error" = "Fehler";
 "Search..." = "Suche...";

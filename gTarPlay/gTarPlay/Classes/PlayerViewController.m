@@ -16,6 +16,8 @@
 #import "UserSong.h"
 #import <gTarAppCore/NSSong.h>
 
+#import "UIButton+Gtar.h"
+
 //@class AudioController;
 @class GtarController;
 
@@ -35,6 +37,7 @@
 @implementation PlayerViewController
 
 @synthesize g_soundMaster;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster
 {
@@ -78,6 +81,8 @@
     [_songPlaybackController startWithXmpBlob:_xmpBlob];
     [_songPlaybackController stopMainEventLoop];
     
+    [self waitForInstrumentToLoad];
+    
     if([_songPlaybackController.m_songModel.m_song.m_instrument length] > 0){
         NSLog(@"Player View Select instrument %@",_songPlaybackController.m_songModel.m_song.m_instrument);
         
@@ -119,6 +124,12 @@
     
 }
 
+- (void)waitForInstrumentToLoad
+{
+    [_playButton setImage:nil forState:UIControlStateNormal];
+    [_playButton startActivityIndicator];
+}
+
 // This loads the preview song in the background
 - (void)backgroundLoading
 {
@@ -137,9 +148,17 @@
 {
     _init = YES;
     
+    [_playButton setImage:[UIImage imageNamed:@"PreviewIcon.png"] forState:UIControlStateNormal];
+    [_playButton stopActivityIndicator];
+    
     NSLog(@"Finished loading sample pack");
     
     [_loadedInvocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
+    
+    if([delegate respondsToSelector:@selector(instrumentLoadingReady)]){
+        [delegate instrumentLoadingReady];
+    }
+    
 }
 
 - (void)attachToSuperview:(UIView *)view
@@ -268,8 +287,8 @@
     {
         NSLog(@"Playing, pause song");
         
-        
-        [_playButton setSelected:NO];
+        //[_playButton setSelected:NO];
+        [_playButton setImage:[UIImage imageNamed:@"PreviewIcon.png"] forState:UIControlStateNormal];
         
         [_songPlaybackController pauseSong];
         
@@ -286,7 +305,8 @@
             if ( _init == YES )
             {
                 NSLog(@"Successful play");
-                [_playButton setSelected:YES];
+                //[_playButton setSelected:YES];
+                [_playButton setImage:[UIImage imageNamed:@"PauseButtonVideo.png"] forState:UIControlStateNormal];
                 
 //                _init = YES;
                 
