@@ -47,7 +47,7 @@
 "Song List" = "歌";
 
 // Play View
-"SAVE & FINISH" = "保存と終了";
+"SAVE & FINISH" = "終了";
 "SCORE" = "スコア";
 "OUTPUT" = "出力";
 "AUX" = "補助の";
@@ -62,6 +62,10 @@
 "NOTES HIT" = "完成したノート";
 "IN A ROW" = "連続した";
 "ACCURACY" = "精度";
+"REPEAT" = "繰り返す";
+"TEMPO" = "テンポ";
+"METRONOME" = "メトロノーム";
+"NONE" = "なし";
 
 // Social View
 "Logout" = "ログアウト";

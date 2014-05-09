@@ -47,7 +47,7 @@
 "Song List" = "Songs";
 
 // Play View
-"SAVE & FINISH" = "Sparen & Beenden";
+"SAVE & FINISH" = "BEENDEN";
 "SCORE" = "PARTITUR";
 "OUTPUT" = "PRODUKTION";
 "AUX" = "AUX";
@@ -62,6 +62,10 @@
 "NOTES HIT" = "NOTEN GESPIELT";
 "IN A ROW" = "KONSEKUTIV";
 "ACCURACY" = "PRÄZISION";
+"REPEAT" = "WIEDERHOLEN";
+"TEMPO" = "TEMPO";
+"METRONOME" = "METRONOM";
+"NONE" = "NICHTS";
 
 // Social View
 "Logout" = "Abmelden";

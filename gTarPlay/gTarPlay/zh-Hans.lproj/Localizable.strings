@@ -44,7 +44,7 @@
 "Song List" = "歌曲";
 
 // Play View
-"SAVE & FINISH" = "保存并结束";
+"SAVE & FINISH" = "完";
 "SCORE" = "得分";
 "OUTPUT" = "输出";
 "AUX" = "切换";
@@ -59,6 +59,10 @@
 "NOTES HIT" = "弹奏的音符";
 "IN A ROW" = "连续";
 "ACCURACY" = "准确性";
+"REPEAT" = "重复";
+"TEMPO" = "拍子";
+"METRONOME" = "节拍器";
+"NONE" = "零";
 
 // Social View
 "Logout" = "注销";

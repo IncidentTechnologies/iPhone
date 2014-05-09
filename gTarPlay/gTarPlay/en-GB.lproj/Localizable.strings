@@ -49,7 +49,7 @@
 "Song List" = "Songs";
 
 // Play View
-"SAVE & FINISH" = "SAVE & FINISH";
+"SAVE & FINISH" = "FINISH";
 "SCORE" = "SCORE";
 "OUTPUT" = "OUTPUT";
 "AUX" = "AUX";
@@ -64,6 +64,10 @@
 "NOTES HIT" = "NOTES HIT";
 "IN A ROW" = "IN A ROW";
 "ACCURACY" = "ACCURACY";
+"REPEAT" = "REPEAT";
+"TEMPO" = "TEMPO";
+"METRONOME" = "METRONOME";
+"NONE" = "NONE";
 
 // Social View
 "Logout" = "Logout";

@@ -271,6 +271,7 @@ extern UserController * g_userController;
 
 - (void) localizeViews {
     [_finishPracticeButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
+    [_startPracticeButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
     [_finishButton setTitle:NSLocalizedString(@"SAVE & FINISH", NULL) forState:UIControlStateNormal];
     [_finishRestartButton setTitle:NSLocalizedString(@"RESTART", NULL) forState:UIControlStateNormal];
     
@@ -278,6 +279,10 @@ extern UserController * g_userController;
     _scoreNotesHitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"NOTES HIT", NULL)];
     _scoreInARowLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"IN A ROW", NULL)];
     _scoreAccuracyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ACCURACY", NULL)];
+    
+    _repeatLabel.text = NSLocalizedString(@"REPEAT", NULL);
+    _tempoLabel.text = NSLocalizedString(@"TEMPO", NULL);
+    _metronomeLabel.text = NSLocalizedString(@"METRONOME", NULL);
     
     //_scoreTextLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SCORE", NULL)];
     _outputLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OUTPUT", NULL)];
@@ -518,7 +523,7 @@ extern UserController * g_userController;
     NSString *tempo = _tempoButton.titleLabel.text;
     NSString *newTempo;
     
-    if([tempo isEqualToString:@"NONE"]){
+    if([tempo isEqualToString:NSLocalizedString(@"NONE", NULL)]){
         newTempo = @"25%";
     }else if([tempo isEqualToString:@"25%"]){
         newTempo = @"50%";
@@ -529,7 +534,7 @@ extern UserController * g_userController;
     }else if([tempo isEqualToString:@"75%"]){
         newTempo = @"100%";
     }else{
-        newTempo = @"NONE";
+        newTempo = NSLocalizedString(@"NONE", NULL);
     }
     
     [_tempoButton setTitle:newTempo forState:UIControlStateNormal];

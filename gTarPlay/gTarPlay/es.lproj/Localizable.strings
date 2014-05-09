@@ -47,7 +47,7 @@
 "Song List" = "Canciones";
 
 // Play View
-"SAVE & FINISH" = "SALVE Y TERMINAR";
+"SAVE & FINISH" = "TERMINAR";
 "SCORE" = "PARTITURA";
 "OUTPUT" = "PRODUCCIÓN";
 "AUX" = "AUX";
@@ -62,6 +62,10 @@
 "NOTES HIT" = "NOTAS TOCADAS";
 "IN A ROW" = "CONSECUTIVO";
 "ACCURACY" = "PRECISIÓN";
+"REPEAT" = "REPETIR";
+"TEMPO" = "TEMPO";
+"METRONOME" = "METRÓNOMO";
+"NONE" = "NADA";
 
 // Social View
 "Logout" = "Sair";

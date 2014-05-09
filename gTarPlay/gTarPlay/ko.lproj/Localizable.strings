@@ -47,7 +47,7 @@
 "Song List" = "노래";
 
 // Play View
-"SAVE & FINISH" = "저장하고 끝내기";
+"SAVE & FINISH" = "완성하다";
 "SCORE" = "점수";
 "OUTPUT" = "출력";
 "AUX" = "보조";
@@ -62,6 +62,10 @@
 "NOTES HIT" = "연주된음";
 "IN A ROW" = "연속적인";
 "ACCURACY" = "정확성";
+"REPEAT" = "다시 나타나다";
+"TEMPO" = "속도";
+"METRONOME" = "메트로놈";
+"NONE" = "무";
 
 // Social View
 "Logout" = "로그아웃";
