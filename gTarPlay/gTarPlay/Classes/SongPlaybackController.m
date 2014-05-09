@@ -99,7 +99,7 @@
     
     
     
-    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isStandalone:!m_gtarController.connected];
+    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isStandalone:!m_gtarController.connected fromStart:0 toEnd:-1 withLoops:0];
     
     [self startMainEventLoop];
     
@@ -119,7 +119,7 @@
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
-    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isStandalone:!m_gtarController.connected];
+    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isStandalone:!m_gtarController.connected fromStart:0 toEnd:-1 withLoops:0];
     
     [self startMainEventLoop];
 }
@@ -318,7 +318,7 @@
 
 // Not sure if percentComplete is the most intuitive
 // parameter to seek on, but worth trying it out.
-- (void)seekToLocation:(double)percentComplete {
+/*- (void)seekToLocation:(double)percentComplete {
     double newBeat;
     
     if ( percentComplete < 0.01 )
@@ -330,7 +330,7 @@
     
     [m_songModel changeBeatRandomAccess:newBeat];
     
-}
+}*/
 
 - (BOOL)isPlaying {
     

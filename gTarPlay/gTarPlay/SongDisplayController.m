@@ -28,7 +28,7 @@
 #define GL_STRING_HEIGHT ( GL_SCREEN_HEIGHT / 60.0 )
 #define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 )
 
-#define SONG_BEATS_PER_SCREEN 4.0
+#define SONG_BEATS_PER_SCREEN 3.0
 #define SONG_BEAT_OFFSET (SONG_BEATS_PER_SCREEN * GL_SCREEN_SEEK_LINE_OFFSET / GL_SCREEN_WIDTH )
 
 @implementation SongDisplayController
@@ -740,7 +740,9 @@
 - (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone
 {
 	//return (beat/(GLfloat)SONG_BEATS_PER_SCREEN) * GL_SCREEN_WIDTH;
-    double beatsPerScreen = (isStandalone) ? 3.0*SONG_BEATS_PER_SCREEN/4.0 : SONG_BEATS_PER_SCREEN;
+    //double beatsPerScreen = (isStandalone) ? 3.0*SONG_BEATS_PER_SCREEN/4.0 : SONG_BEATS_PER_SCREEN;
+    
+    double beatsPerScreen = SONG_BEATS_PER_SCREEN;
     
     return GL_SCREEN_WIDTH - (beat/(GLfloat)beatsPerScreen) * GL_SCREEN_WIDTH;
 }

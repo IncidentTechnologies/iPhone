@@ -16,6 +16,10 @@
 #import <gTarAppCore/MainEventController.h>
 #import <gTarAppCore/NSSongModel.h>
 
+#define MARKER_SIZE 10.0
+#define MARKER_HEIGHT 18.0
+#define ADJUSTOR_SIZE 35.0
+
 @class EAGLView;
 @class UserSong;
 
@@ -66,6 +70,11 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UIImageView *menuDownArrow;
 
 @property (strong, nonatomic) IBOutlet UIView *practiceView;
+@property (strong, nonatomic) IBOutlet UILabel *repeatLabel;
+@property (strong, nonatomic) IBOutlet UILabel *tempoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *metronomeLabel;
+@property (strong, nonatomic) IBOutlet UIButton *repeatButton;
+@property (strong, nonatomic) IBOutlet UIButton *tempoButton;
 @property (strong, nonatomic) IBOutlet UIButton *startPracticeButton;
 
 @property (strong, nonatomic) IBOutlet UITextView *loadingLicenseInfo;
@@ -93,8 +102,13 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UILabel *scoreInARow;
 @property (strong, nonatomic) IBOutlet UILabel *scoreAccuracy;
 
-@property (strong, nonatomic) IBOutlet UIView *practiceHeatMapView;
 @property (strong, nonatomic) IBOutlet UIView *heatMapView;
+@property (strong, nonatomic) IBOutlet UIView *practiceHeatMapView;
+@property (strong, nonatomic) UIImageView *practiceHeatMapViewImageView;
+@property (strong, nonatomic) IBOutlet UIView *practiceHeatMapMarkerArea;
+@property (strong, nonatomic) UIView *heatMapSelector;
+@property (strong, nonatomic) UIButton *heatMapLeftSlider;
+@property (strong, nonatomic) UIButton *heatMapRightSlider;
 
 @property (strong, nonatomic) IBOutlet UIButton *difficultyButton;
 @property (strong, nonatomic) IBOutlet UIButton *scoreDifficultyButton;
@@ -150,6 +164,8 @@ enum PlayViewControllerDifficulty
 - (IBAction)feedSwitchChanged:(id)sender;
 - (IBAction)difficultyButtonClicked:(id)sender;
 - (IBAction)instrumentButtonClicked:(id)sender;
+- (IBAction)repeatButtonClicked:(id)sender;
+- (IBAction)tempoButtonClicked:(id)sender;
 
 - (IBAction)fretDown:(id)sender;
 - (IBAction)fretUp:(id)sender;

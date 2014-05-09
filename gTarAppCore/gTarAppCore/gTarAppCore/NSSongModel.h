@@ -49,6 +49,8 @@
     
     double m_frameWidthBeats;
     
+    int m_loops;
+    
 }
 
 @property (nonatomic, readonly) NSSong * m_song;
@@ -61,12 +63,15 @@
 @property (nonatomic, readonly) double m_lengthBeats;
 @property (nonatomic, readonly) double m_lengthSeconds;
 @property (nonatomic, assign) double m_frameWidthBeats;
+@property (nonatomic, readonly) double m_endBeat;
+@property (nonatomic, readonly) double m_startBeat;
 
 //- (id)initWithSongXmp:(NSString*)xmpBlob;
 - (id)initWithSong:(NSSong*)song;
 
 - (void)startWithDelegate:(id)delegate;
 - (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isStandalone:(BOOL)standalone;
+- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isStandalone:(BOOL)standalone fromStart:(double)start toEnd:(double)end withLoops:(int)loops;
 - (void)skipToNextFrame;
 //- (void)incrementBeat:(double)delta;
 //- (void)incrementTime:(double)delta;
@@ -81,5 +86,9 @@
 - (void)beginFrameTimer:(double)delta;
 - (void)frameExpired;
 - (double)getFirstAudibleBeat;
+
+- (void)setSongLoops:(int)loops;
+- (void)setStartBeat:(double)start;
+- (void)setEndBeat:(double)end;
 
 @end

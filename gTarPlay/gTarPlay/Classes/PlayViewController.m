@@ -110,6 +110,9 @@ extern UserController * g_userController;
     BOOL fretThreeOn;
     
     // Practice
+    NSMutableArray * markerButtons;
+    int leftFirstX;
+    int rightFirstX;
     BOOL isPracticeMode;
     BOOL _practiceViewOpen;
     
@@ -234,6 +237,8 @@ extern UserController * g_userController;
         
         [_practiceSongTitleLabel setText:_userSong.m_title];
         [_practiceSongArtistLabel setText:_userSong.m_author];
+        
+        [self drawPracticeMarkersForSong];
         
     }else{
         
@@ -499,8 +504,56 @@ extern UserController * g_userController;
     }
 }
 
+- (void)repeatButtonClicked:(id)sender
+{
+    int repeatLoops = [[_repeatButton.titleLabel.text stringByReplacingOccurrencesOfString:@"x" withString:@""] intValue];
+    repeatLoops *= 2;
+    repeatLoops %= 255;
+    
+    [_repeatButton setTitle:[NSString stringWithFormat:@"%ix",repeatLoops] forState:UIControlStateNormal];
+}
+
+- (void)tempoButtonClicked:(id)sender
+{
+    NSString *tempo = _tempoButton.titleLabel.text;
+    NSString *newTempo;
+    
+    if([tempo isEqualToString:@"NONE"]){
+        newTempo = @"25%";
+    }else if([tempo isEqualToString:@"25%"]){
+        newTempo = @"50%";
+    }else if([tempo isEqualToString:@"50%"]){
+        newTempo = @"66%";
+    }else if([tempo isEqualToString:@"66%"]){
+        newTempo = @"75%";
+    }else if([tempo isEqualToString:@"75%"]){
+        newTempo = @"100%";
+    }else{
+        newTempo = @"NONE";
+    }
+    
+    [_tempoButton setTitle:newTempo forState:UIControlStateNormal];
+    
+}
+
 - (IBAction)startPracticeButtonClicked:(id)sender
 {
+    // Get start and end from the heatmap section selected
+    int repeatLoops = [_repeatButton.titleLabel.text intValue] - 1;
+    double start = _heatMapSelector.frame.origin.x / _practiceHeatMapView.frame.size.width;
+    double end = (_heatMapSelector.frame.origin.x + _heatMapSelector.frame.size.width) / _practiceHeatMapView.frame.size.width;
+    
+    [self startWithSongXmlDomPracticeFrom:start toEnd:end withLoops:repeatLoops];
+    
+    // Then...
+    // Set tempo
+    // Set metronome
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
+    
+    
     // Close the practice selector view
     [self practiceButtonClicked:sender];
 }
@@ -650,6 +703,9 @@ extern UserController * g_userController;
         [self songScoreButtonClicked:nil];
     }
     
+    // This will also help flush the renderer
+    [self updateDifficultyDisplay];
+    
 }
 
 - (IBAction)outputSwitchChanged:(id)sender
@@ -710,6 +766,215 @@ extern UserController * g_userController;
 }
 
 - (IBAction)instrumentButtonClicked:(id)sender {
+}
+
+#pragma mark - Practice Mode
+
+- (void)drawPracticeMarkersForSong
+{
+    // TODO: check for markers in the actual song
+    // Draw four markers by default
+    
+    UIColor * yellowMarkerColor = [UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1.0];
+    
+    // Percentages
+    NSDictionary * markerOne = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.0],@"StartBeat",@"Section1",@"Name", nil];
+    NSDictionary * markerTwo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.25],@"StartBeat",@"Section2",@"Name", nil];
+    NSDictionary * markerThree = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.5],@"StartBeat",@"Section3",@"Name", nil];
+    NSDictionary * markerFour = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.75],@"StartBeat",@"Section4",@"Name", nil];
+    
+    NSArray * defaultMarkers = [[NSArray alloc] initWithObjects:markerOne,markerTwo,markerThree,markerFour, nil];
+    
+    markerButtons = [[NSMutableArray alloc] init];
+    
+    double mapWidth = _practiceHeatMapView.frame.size.width;
+    
+    for(int d = 0; d < [defaultMarkers count]; d++){
+        
+        NSDictionary * marker = [defaultMarkers objectAtIndex:d];
+        
+        UIButton * markerButton = [[UIButton alloc] initWithFrame:CGRectMake(mapWidth*[[marker objectForKey:@"StartBeat"] doubleValue], 0, MARKER_SIZE*3, MARKER_HEIGHT*1.5)];
+        
+        // Draw marker
+        
+        CGSize size = CGSizeMake(markerButton.frame.size.width, markerButton.frame.size.height);
+        UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+        
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        CGContextSetStrokeColorWithColor(context, yellowMarkerColor.CGColor);
+        CGContextSetFillColorWithColor(context, yellowMarkerColor.CGColor);
+        
+        CGContextSetLineWidth(context, 2.0);
+        
+        CGContextMoveToPoint(context, 0, 0);
+        CGContextAddLineToPoint(context, 0, MARKER_HEIGHT);
+        CGContextAddLineToPoint(context, MARKER_SIZE, MARKER_HEIGHT);
+        CGContextClosePath(context);
+        
+        CGContextFillPath(context);
+        
+        UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+        
+        [markerButton addSubview:image];
+        
+        UIGraphicsEndImageContext();
+        
+        //
+        
+        [_practiceHeatMapMarkerArea addSubview:markerButton];
+        
+        [markerButton addTarget:self action:@selector(selectSection:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [markerButtons addObject:markerButton];
+        
+    }
+    
+    // Clear previous
+    [_heatMapSelector removeFromSuperview];
+    [_heatMapLeftSlider removeFromSuperview];
+    [_heatMapRightSlider removeFromSuperview];
+    
+    // Draw section selection area and invisible left/right draggers
+    UIButton * firstMarker = [markerButtons firstObject];
+    UIButton * secondMarker = [markerButtons objectAtIndex:1];
+    double start = firstMarker.frame.origin.x / _practiceHeatMapView.frame.size.width;
+    double end = secondMarker.frame.origin.x / _practiceHeatMapView.frame.size.width;
+    
+    _heatMapSelector = [[UIView alloc] initWithFrame:CGRectMake(start*mapWidth, 0, (end-start)*mapWidth, _practiceHeatMapView.frame.size.height)];
+    [_heatMapSelector setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.5]];
+    
+    _heatMapLeftSlider = [[UIButton alloc] initWithFrame:CGRectMake(start*mapWidth-ADJUSTOR_SIZE/2.0, 0, ADJUSTOR_SIZE, _practiceHeatMapView.frame.size.height)];
+    [_heatMapLeftSlider setBackgroundColor:[UIColor whiteColor]];
+    [_heatMapLeftSlider setAlpha:0.5];
+    _heatMapLeftSlider.layer.cornerRadius = ADJUSTOR_SIZE/2.0;
+    
+    _heatMapRightSlider = [[UIButton alloc] initWithFrame:CGRectMake(end*mapWidth-ADJUSTOR_SIZE/2.0, 0, ADJUSTOR_SIZE, _practiceHeatMapView.frame.size.height)];
+    [_heatMapRightSlider setBackgroundColor:[UIColor whiteColor]];
+    [_heatMapRightSlider setAlpha:0.5];
+    _heatMapRightSlider.layer.cornerRadius = ADJUSTOR_SIZE/2.0;
+    
+    [_practiceHeatMapView addSubview:_heatMapSelector];
+    [_practiceHeatMapView addSubview:_heatMapLeftSlider];
+    [_practiceHeatMapView addSubview:_heatMapRightSlider];
+    
+    UIPanGestureRecognizer * leftPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panHeatMapLeft:)];
+    UIPanGestureRecognizer * rightPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panHeatMapRight:)];
+    
+    [_heatMapLeftSlider addGestureRecognizer:leftPan];
+    [_heatMapRightSlider addGestureRecognizer:rightPan];
+    
+}
+
+-(void)setPracticeHeatMapViewImageView:(UIImageView*)imageView
+{
+    if(_practiceHeatMapViewImageView != nil){
+        [_practiceHeatMapViewImageView removeFromSuperview];
+    }
+    
+    _practiceHeatMapViewImageView = imageView;
+    
+    [_practiceHeatMapView addSubview:imageView];
+    
+    [_practiceHeatMapView bringSubviewToFront:_heatMapSelector];
+    [_practiceHeatMapView bringSubviewToFront:_heatMapLeftSlider];
+    [_practiceHeatMapView bringSubviewToFront:_heatMapRightSlider];
+}
+
+-(void)selectSection:(id)sender
+{
+    UIButton * senderButton = (UIButton*)sender;
+    UIButton * nextButton = nil;
+    
+    for(int b = 0; b < [markerButtons count]-1; b++){
+        if([markerButtons objectAtIndex:b] == senderButton){
+            nextButton = [markerButtons objectAtIndex:b+1];
+        }
+    }
+    
+    // Move the left slider and heat map selector to this button
+    double leftX = senderButton.frame.origin.x;
+    double rightX;
+    
+    if(nextButton == nil){
+        rightX = _practiceHeatMapView.frame.size.width;
+    }else{
+        rightX = nextButton.frame.origin.x;
+    }
+    
+    [_heatMapLeftSlider setFrame:CGRectMake(leftX-ADJUSTOR_SIZE/2.0,0,ADJUSTOR_SIZE,_practiceHeatMapView.frame.size.height)];
+    
+    [_heatMapRightSlider setFrame:CGRectMake(rightX-ADJUSTOR_SIZE/2.0,0,ADJUSTOR_SIZE,_practiceHeatMapView.frame.size.height)];
+    
+    [_heatMapSelector setFrame:CGRectMake(leftX, 0, rightX-leftX, _heatMapSelector.frame.size.height)];
+    
+}
+
+-(void)panHeatMapLeft:(UIPanGestureRecognizer *)sender
+{
+    CGPoint newPoint = [sender translationInView:_practiceHeatMapView];
+    
+    if([sender state] == UIGestureRecognizerStateBegan){
+        leftFirstX = _heatMapLeftSlider.frame.origin.x;
+        [_heatMapLeftSlider setAlpha:0.8];
+    }
+    
+    float minX = -ADJUSTOR_SIZE/2.0;
+    float maxX = _heatMapRightSlider.frame.origin.x - ADJUSTOR_SIZE;
+    float newX = newPoint.x + leftFirstX;
+    
+    // wrap to boundary
+    if(newX < minX || newX < minX+0.2*ADJUSTOR_SIZE/2){
+        newX=minX;
+    }
+    
+    if(newX >= minX && newX <= maxX){
+        CGRect newLeftFrame = CGRectMake(newX,0,ADJUSTOR_SIZE,_practiceHeatMapView.frame.size.height);
+        
+        [_heatMapLeftSlider setFrame:newLeftFrame];
+        
+        CGRect newHeatMapFrame = CGRectMake(newX+ADJUSTOR_SIZE/2, 0, _heatMapRightSlider.frame.origin.x-_heatMapLeftSlider.frame.origin.x, _practiceHeatMapView.frame.size.height);
+        
+        [_heatMapSelector setFrame:newHeatMapFrame];
+    }
+    
+    if([sender state] == UIGestureRecognizerStateEnded){
+        [_heatMapLeftSlider setAlpha:0.5];
+    }
+}
+
+- (void)panHeatMapRight:(UIPanGestureRecognizer *)sender
+{
+     CGPoint newPoint = [sender translationInView:_practiceHeatMapView];
+     
+     if([sender state] == UIGestureRecognizerStateBegan){
+         rightFirstX = _heatMapRightSlider.frame.origin.x;
+         [_heatMapRightSlider setAlpha:0.8];
+     }
+     
+    float minX = _heatMapLeftSlider.frame.origin.x + ADJUSTOR_SIZE;
+    float maxX = _practiceHeatMapView.frame.size.width - ADJUSTOR_SIZE/2.0;
+    float newX = newPoint.x + rightFirstX;
+    
+     // wrap to boundary
+     if(newX > maxX || newX > maxX-0.2*ADJUSTOR_SIZE/2){
+         newX=maxX;
+     }
+     
+    if(newX >= minX && newX <= maxX){
+        CGRect newRightFrame = CGRectMake(newX,0,ADJUSTOR_SIZE,_practiceHeatMapView.frame.size.height);
+
+        [_heatMapRightSlider setFrame:newRightFrame];
+
+        CGRect newHeatMapFrame = CGRectMake(_heatMapSelector.frame.origin.x, 0, _heatMapRightSlider.frame.origin.x-_heatMapLeftSlider.frame.origin.x, _practiceHeatMapView.frame.size.height);
+
+        [_heatMapSelector setFrame:newHeatMapFrame];
+    }
+    
+    if([sender state] == UIGestureRecognizerStateEnded){
+        [_heatMapRightSlider setAlpha:0.5];
+    }
 }
 
 #pragma mark - Pause Button
@@ -900,15 +1165,6 @@ extern UserController * g_userController;
     
     if ( delta > 0 )
     {
-//        [g_telemetryController logEvent:GtarPlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-//                                         _userSong.m_title, @"Title",
-//                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-//                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-//                                         route, @"AudioRoute",
-//                                         nil]];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
         [mixpanel track:@"Play toggle audio route" properties:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -939,15 +1195,6 @@ extern UserController * g_userController;
         
         _playMetronome = YES;
         
-//        [g_telemetryController logEvent:GtarPlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-//                                         _userSong.m_title, @"Title",
-//                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-//                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-//                                         @"On", @"Metronome",
-//                                         nil]];
-        
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
         [mixpanel track:@"Play toggle metronome" properties:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -966,16 +1213,6 @@ extern UserController * g_userController;
         _playMetronome = NO;
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_metronomeTimeStart timeIntervalSince1970] + _playTimeAdjustment;
-        
-//        [g_telemetryController logEvent:GtarPlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-//                                         _userSong.m_title, @"Title",
-//                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-//                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-//                                         @"Off", @"Metronome",
-//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                         nil]];
         
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
@@ -1196,12 +1433,6 @@ extern UserController * g_userController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_audioRouteTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-//    [g_telemetryController logEvent:GtarPlayToggleFeature
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     route, @"AudioRoute",
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     nil]];
-    
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
     [mixpanel track:@"Play toggle audio route" properties:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -1217,15 +1448,6 @@ extern UserController * g_userController;
     {
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_metronomeTimeStart timeIntervalSince1970] + _playTimeAdjustment;
         
-//        [g_telemetryController logEvent:GtarPlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-//                                         _userSong.m_title, @"Title",
-//                                         [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-//                                         [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-//                                         @"Off", @"Metronome",
-//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                         nil]];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
         [mixpanel track:@"Play toggle metronome" properties:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -1243,6 +1465,7 @@ extern UserController * g_userController;
 
 - (void)uploadUserSongSession
 {
+    /*
     UserSongSession * session = [[UserSongSession alloc] init];
     
     session.m_userSong = _userSong;
@@ -1283,6 +1506,7 @@ extern UserController * g_userController;
                                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
                                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
                                                     nil]];
+     */
 
 }
 
@@ -1519,17 +1743,18 @@ extern UserController * g_userController;
 {
     NSLog(@"Standalone ready");
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
     
     // Stop ourselves before we start so the connecting screen can display
     [self stopMainEventLoop];
     [self drawPlayButton:_pauseButton];
 
+    if(!isPracticeMode){
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(startWithSongXmlDom) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
+    }
     
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(startWithSongXmlDom) userInfo:nil repeats:NO];
-    
-    [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
     
 }
 
@@ -1548,18 +1773,22 @@ extern UserController * g_userController;
         
     }else{
         
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
         
         [g_gtarController setMinimumInterarrivalTime:0.10f];
         
-        [self startWithSongXmlDom];
-        
+        if(!isPracticeMode){
+            [self startWithSongXmlDom];
+        }
+            
         // Stop ourselves before we start so the connecting screen can display
         [self stopMainEventLoop];
         [self drawPlayButton:_pauseButton];
         
-        [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
-        [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
+        if(!isPracticeMode){
+            [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
+            [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
+            [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
+        }
         
     }
 
@@ -1594,8 +1823,7 @@ extern UserController * g_userController;
 }
 
 #pragma mark - Gameplay related helpers
-
-- (void)startWithSongXmlDom
+- (void)initSongModel
 {
     if(g_gtarController.connected){
         [g_gtarController turnOffAllLeds];
@@ -1626,17 +1854,26 @@ extern UserController * g_userController;
     // Very small frame window
     _songModel.m_frameWidthBeats = SONG_MODEL_NOTE_FRAME_WIDTH;
     
-    // Give a little runway to the player
-    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isStandalone:isStandalone];
+    _deferredNotesQueue = [[NSMutableArray alloc] init];
     
-    // Light up the first frame
-    if(g_gtarController.connected == YES){
-        [self turnOnFrame:_songModel.m_nextFrame];
-    }
+}
+
+- (void)initSongRecorder
+{
+    //
+    // Init recorder
+    //
     
     _songRecorder = [[SongRecorder alloc] initWithTempo:_song.m_tempo];
     
     [_songRecorder beginSong];
+}
+
+- (void)initSongDisplay
+{
+    //
+    // Init score with difficulty
+    //
     
     switch ( _difficulty )
     {
@@ -1670,20 +1907,55 @@ extern UserController * g_userController;
     [self updateProgressDisplay];
     
     _animateSongScrolling = YES;
+}
+
+// This is the song init for practice mode standalone/regular
+- (void)startWithSongXmlDomPracticeFrom:(double)start toEnd:(double)end withLoops:(int)loops
+{
+    [self initSongModel];
     
-    if ( _playMetronome == YES )
-    {
-        _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
+    // Give a little runway to the player
+    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isStandalone:isStandalone fromStart:start toEnd:end withLoops:loops];
+    
+    // Light up the first frame
+    if(g_gtarController.connected == YES){
+        [self turnOnFrame:_songModel.m_nextFrame];
     }
     
+    [self initSongRecorder];
     
-    _deferredNotesQueue = [[NSMutableArray alloc] init];
+    [self initSongDisplay];
     
     if(!_practiceViewOpen){
         [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
         [self drawPauseButton:_pauseButton];
     }
     
+    [self updateScoreDisplayWithAccuracy:-1];
+    
+}
+
+// This is the normal song init for standalone/regular
+- (void)startWithSongXmlDom
+{
+    [self initSongModel];
+    
+    // Give a little runway to the player
+    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isStandalone:isStandalone fromStart:0 toEnd:-1 withLoops:0];
+    
+    // Light up the first frame
+    if(g_gtarController.connected == YES){
+        [self turnOnFrame:_songModel.m_nextFrame];
+    }
+    
+    [self initSongRecorder];
+
+    [self initSongDisplay];
+    
+    if(!_practiceViewOpen){
+        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+        [self drawPauseButton:_pauseButton];
+    }
     
     [self updateScoreDisplayWithAccuracy:-1];
     
@@ -2121,8 +2393,6 @@ extern UserController * g_userController;
         
     }
     
-    
-    
     _currentFrame = nil;
     
     if(!isStandalone){
@@ -2264,7 +2534,7 @@ extern UserController * g_userController;
     UIImageView * practiceImage = [[UIImageView alloc] initWithImage:rectImage];
     
     [_heatMapView addSubview:image];
-    [_practiceHeatMapView addSubview:practiceImage];
+    [self setPracticeHeatMapViewImageView:practiceImage];
     
     UIGraphicsEndImageContext();
     
