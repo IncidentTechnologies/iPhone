@@ -33,7 +33,7 @@
 
 @implementation SongDisplayController
 
-- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty
+- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops
 {
     // Force linking
     [EAGLView class];
@@ -52,6 +52,8 @@
         
         m_undisplayedFrames = [[NSMutableArray alloc] initWithArray:m_songModel.m_noteFrames];
         
+        m_allFrames = [[NSMutableArray alloc] initWithArray:m_songModel.m_noteFrames];
+        
 		m_glView = glView;
         
         m_beatsToPreloadSync = SONG_BEATS_PER_SCREEN;
@@ -62,6 +64,8 @@
         difficulty = useDifficulty;
         
         isStandalone = standalone;
+        
+        m_loops = numLoops;
         
         //
 		// Create a renderer and give it to the view, or reuse an existing one.
@@ -90,6 +94,8 @@
         [self createLineModels];
     
         [self preloadFrames:PRELOAD_INCREMENT*4];
+        
+        [self createLoopModels];
         
         [self createBackgroundTexture];
         
@@ -611,45 +617,38 @@
         
         
     }
-    /*
-#if 0
-    // This takes too long to load right now. Do something lazily
+    
+    
+}
+
+- (void)createLoopModels
+{
+    CGSize size;
+	CGPoint center;
     
     //
-    // Create the measures
+    // Create the loop indicators
     //
-    for ( NSMeasure * measure in m_songModel.m_song.m_measures )
-    {
-        size.width = GL_STRING_HEIGHT/4.0;
+    
+    for(int i = 0; i <= m_loops; i++){
+        
+        int numFrames = [m_allFrames count];
+        int frameindex = (double)numFrames/(double)(m_loops+1) * (i+1) - 1;
+        
+        NSNoteFrame * noteFrame = [m_allFrames objectAtIndex:frameindex];
+        NSNote * note = [noteFrame.m_notes firstObject];
+        
+        center.x = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone]; // get X from note positions
+        center.y = GL_SCREEN_HEIGHT / 2;
+        
+        size.width = 5.0;
         size.height = GL_SCREEN_HEIGHT;
-        center.x = [self convertBeatToCoordSpace:measure.m_startBeat];
-        center.y = GL_SCREEN_HEIGHT/2.0;
         
-        LineModel * lineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_measureColors];
+        LineModel * loopModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColor];
         
-        [m_renderer addLine:lineModel];
-        
-        [lineModel release];
-        
-        // Also allocate some beat markers
-        for ( NSInteger beat = 1; beat < measure.m_beatCount; beat++ )
-        {
-            
-            center.x = [self convertBeatToCoordSpace:measure.m_startBeat + (measure.m_beatValue*beat)];
-            
-            LineModel * lineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_beatColors];
-            
-            [m_renderer addLine:lineModel];
-            
-            [lineModel release];
-            
-        }
+        [m_renderer addLoop:loopModel];
         
     }
-    
-#endif
-     */
-    
 }
 
 - (void)createNumberModels

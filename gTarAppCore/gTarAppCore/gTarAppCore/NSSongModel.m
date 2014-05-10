@@ -423,6 +423,13 @@
     [m_delegate songModelEndOfSong];
 }
 
+- (int)getCurrentLoop
+{
+    int currentLoop = m_currentBeat / (m_endBeat - m_startBeat);
+    
+    return currentLoop;
+}
+
 - (void)setStartBeat:(double)start
 {
     m_startBeat = start;

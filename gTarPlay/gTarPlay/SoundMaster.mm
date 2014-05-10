@@ -31,6 +31,7 @@
     
     SamplerNode * m_samplerNode;
     SamplerBankNode * m_activeBankNode;
+    SamplerBankNode * m_metronome;
     
     // Effects
 #ifdef EFFECTS_AVAILABLE
@@ -103,6 +104,8 @@
     
     [self initEffects];
     
+    [self initMetronome];
+    
     //[audioController initializeAUGraph];
     
     return true;
@@ -161,6 +164,9 @@
     [self stop];
     
     [self stopAllEffects];
+    
+    // release metronome
+    [self releaseMetronome];
     
     // release bank
     [self releaseBank:m_activeBankNode];
@@ -526,6 +532,28 @@
         
     }
     return NO;
+}
+
+#pragma mark - Metronome
+- (void)initMetronome
+{
+    m_metronome = [self generateBank];
+    SampleNode * newSample;
+    
+    char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Metronome" ofType:@"mp3"] UTF8String];
+    
+    m_metronome->LoadSampleIntoBank(filepath, newSample);
+
+}
+
+- (void)releaseMetronome
+{
+    [self releaseBank:m_metronome];
+}
+
+- (void)playMetronomeTick
+{
+    m_metronome->TriggerSample(0);
 }
 
 #pragma mark - Effects

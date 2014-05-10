@@ -24,6 +24,7 @@
 		6D3D06DF18F4D2E8007683DB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06D918F4D2E8007683DB /* README.md */; };
 		6D3D06E018F4D2E8007683DB /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06DA18F4D2E8007683DB /* release_notes.md */; };
 		6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D594C101909BCF900CF3128 /* HighlightModel.m */; };
+		6D62271F191D84D9003D8534 /* Metronome.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D62271E191D84D9003D8534 /* Metronome.mp3 */; };
 		6D72F22018FF1EC100D68394 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */; };
 		6D7D46F31919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */; };
 		6D7D46F41919BA0F00EF8C75 /* FullScreenActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E41919BA0F00EF8C75 /* FullScreenActivityView.m */; };
@@ -1441,6 +1442,7 @@
 		6D3D06DD18F4D2E8007683DB /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		6D594C0F1909BCF900CF3128 /* HighlightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightModel.h; sourceTree = "<group>"; };
 		6D594C101909BCF900CF3128 /* HighlightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightModel.m; sourceTree = "<group>"; };
+		6D62271E191D84D9003D8534 /* Metronome.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Metronome.mp3; sourceTree = "<group>"; };
 		6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = FacebookIcon.jpg; path = Resources/Images/Title/FacebookIcon.jpg; sourceTree = SOURCE_ROOT; };
 		6D7D46E11919BA0F00EF8C75 /* ExpandingRoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpandingRoundedRectangleView.h; path = CustomUI/ExpandingRoundedRectangleView.h; sourceTree = SOURCE_ROOT; };
 		6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpandingRoundedRectangleView.m; path = CustomUI/ExpandingRoundedRectangleView.m; sourceTree = SOURCE_ROOT; };
@@ -2846,6 +2848,7 @@
 		9D0BF7B814B57F8F00CF6372 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				6D62271E191D84D9003D8534 /* Metronome.mp3 */,
 				6DAD0AE719187F1F005B3807 /* Warm Analogue */,
 				6DED8767191874460091721E /* Electric Guitar */,
 				9D054E74174D425B00FA3239 /* Marimba */,
@@ -3867,6 +3870,7 @@
 				EC24DD0D161A89C000016B78 /* Acoustic Guitar 74.mp3 in Resources */,
 				6DAD0B2819187F1F005B3807 /* Warm Analogue 63.mp3 in Resources */,
 				EC24DD0E161A89C000016B78 /* Acoustic Guitar 75.mp3 in Resources */,
+				6D62271F191D84D9003D8534 /* Metronome.mp3 in Resources */,
 				EC24DD0F161A89C000016B78 /* Acoustic Guitar 76.mp3 in Resources */,
 				EC24DD10161A89C000016B78 /* Acoustic Guitar 77.mp3 in Resources */,
 				EC24DD11161A89C000016B78 /* Acoustic Guitar 78.mp3 in Resources */,

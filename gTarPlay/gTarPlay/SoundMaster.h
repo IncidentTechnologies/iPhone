@@ -52,6 +52,7 @@
 
 - (void) setChannelGain:(float)gain;
 
+- (void) playMetronomeTick;
 - (void) PluckString:(int)string atFret:(int)fret;
 //- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amp;
 //- (void) PluckMutedString:(int)string;

@@ -28,6 +28,7 @@
 	
 	NSMutableArray * m_stringModels;	
 	NSMutableArray * m_lineModels;
+    NSMutableArray * m_loopModels;
 
 	LineModel * m_seekLineModel;
     LineModel * m_seekLineStandaloneModel;
@@ -50,6 +51,8 @@
 - (void)removeModel:(NoteModel*)model;
 - (void)addString:(StringModel*)str;
 - (void)removeString:(StringModel*)str;
+- (void)addLoop:(LineModel*)loop;
+- (void)removeLoop:(LineModel*)loop;
 - (void)addLine:(LineModel*)line;
 - (void)removeLine:(LineModel*)line;
 - (void)clearModelData;

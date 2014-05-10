@@ -43,6 +43,7 @@
         
         m_stringModels = [[NSMutableArray alloc] init];
         m_lineModels = [[NSMutableArray alloc] init];
+        m_loopModels = [[NSMutableArray alloc] init];
         
     }
     
@@ -83,6 +84,16 @@
     [m_stringModels removeObject:str];
 }
 
+- (void)addLoop:(LineModel *)loop
+{
+    [m_loopModels addObject:loop];
+}
+
+- (void)removeLoop:(LineModel *)loop
+{
+    [m_loopModels removeObject:loop];
+}
+
 - (void)addLine:(LineModel*)line
 {
     [m_lineModels addObject:line];
@@ -100,6 +111,7 @@
     [m_noteAnimations removeAllObjects];
     [m_stringModels removeAllObjects];
     [m_lineModels removeAllObjects];
+    [m_loopModels removeAllObjects];
     
     m_noteAnimations = nil;
     m_noteModels = nil;
@@ -254,6 +266,17 @@
     //
     //	// draw the seek line
     //	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
+    
+    
+    //
+    // Draw loops
+    //
+    for (LineModel * loopModel in m_loopModels)
+    {
+        CGPoint center = [loopModel getCenter];
+        
+        [loopModel drawAt:CGPointMake(center.x +m_offset - m_currentPosition,center.y)];
+    }
     
     //
     // Now we translate forward for the notes

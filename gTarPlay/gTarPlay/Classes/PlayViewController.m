@@ -111,6 +111,10 @@ extern UserController * g_userController;
     
     // Practice
     NSMutableArray * markerButtons;
+    int m_loops;
+    double m_loopStart;
+    double m_loopEnd;
+    int dragFirstX;
     int leftFirstX;
     int rightFirstX;
     BOOL isPracticeMode;
@@ -246,7 +250,6 @@ extern UserController * g_userController;
         [_practiceView setHidden:YES];
         
     }
-
 }
 
 - (void) setStandalone
@@ -272,10 +275,13 @@ extern UserController * g_userController;
 - (void) localizeViews {
     [_finishPracticeButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
     [_startPracticeButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
+    [_practiceBackButton setTitle:NSLocalizedString(@"BACK", NULL) forState:UIControlStateNormal];
     [_finishButton setTitle:NSLocalizedString(@"SAVE & FINISH", NULL) forState:UIControlStateNormal];
     [_finishRestartButton setTitle:NSLocalizedString(@"RESTART", NULL) forState:UIControlStateNormal];
     
     _scoreScoreLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SCORE", NULL)];
+    _scoreBestSessionLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"BEST SESSION", NULL)];
+    _scoreTotalLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TOTAL", NULL)];
     _scoreNotesHitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"NOTES HIT", NULL)];
     _scoreInARowLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"IN A ROW", NULL)];
     _scoreAccuracyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ACCURACY", NULL)];
@@ -472,6 +478,16 @@ extern UserController * g_userController;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)finishPracticeButtonClicked:(id)sender
+{
+    isPracticeMode = YES;
+    
+    [self practiceButtonClicked:sender];
+    
+    [self drawPracticeMarkersForSong];
+    
+}
+
 - (IBAction)practiceButtonClicked:(id)sender
 {
     _practiceViewOpen = !_practiceViewOpen;
@@ -482,7 +498,7 @@ extern UserController * g_userController;
         
         [self stopMainEventLoop];
         [self drawPlayButton:_pauseButton];
-        [self restartButtonClicked:nil];
+        [self restartSong:NO];
         
     }else{
         
@@ -492,7 +508,10 @@ extern UserController * g_userController;
         
         
         [_startPracticeButton setHidden:YES];
+        [_practiceBackButton setHidden:YES];
         [_practiceView setFrame:CGRectMake(0, 0, _practiceView.frame.size.width, newheight)];
+        
+        [UIView setAnimationsEnabled:YES];
         
         [UIView animateWithDuration:0.5 animations:^(void){
             [_practiceView setFrame:CGRectMake(0,-prevheight,_practiceView.frame.size.width,newheight)];
@@ -500,6 +519,7 @@ extern UserController * g_userController;
             [_practiceView setFrame:CGRectMake(0,0,_practiceView.frame.size.width,prevheight)];
             [_practiceView setHidden:YES];
             [_startPracticeButton setHidden:NO];
+            [_practiceBackButton setHidden:NO];
         }];
         
         
@@ -544,11 +564,22 @@ extern UserController * g_userController;
 - (IBAction)startPracticeButtonClicked:(id)sender
 {
     // Get start and end from the heatmap section selected
-    int repeatLoops = [_repeatButton.titleLabel.text intValue] - 1;
-    double start = _heatMapSelector.frame.origin.x / _practiceHeatMapView.frame.size.width;
-    double end = (_heatMapSelector.frame.origin.x + _heatMapSelector.frame.size.width) / _practiceHeatMapView.frame.size.width;
+    double loops = [_repeatButton.titleLabel.text intValue] - 1;
+    double loopStart = _heatMapSelector.frame.origin.x / _practiceHeatMapView.frame.size.width;
+    double loopEnd = (_heatMapSelector.frame.origin.x + _heatMapSelector.frame.size.width) / _practiceHeatMapView.frame.size.width;
     
-    [self startWithSongXmlDomPracticeFrom:start toEnd:end withLoops:repeatLoops];
+    if(_practiceMetronomeSwitch.isOn != _playMetronome){
+        [self toggleMetronome];
+    }
+    
+    [self startWithSongXmlDomPracticeFrom:loopStart toEnd:loopEnd withLoops:loops];
+    
+    if(_playMetronome){
+        _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
+        
+        NSLog(@"Beat is %f",1.0/_songModel.m_beatsPerSecond);
+    }
+    
     
     // Then...
     // Set tempo
@@ -603,8 +634,8 @@ extern UserController * g_userController;
 {
     if(open){
         
-        [_metronomeTimer invalidate];
-        _metronomeTimer = nil;
+        //[_metronomeTimer invalidate];
+        //_metronomeTimer = nil;
         
         [self stopMainEventLoop];
         [self drawPlayButton:_pauseButton];
@@ -618,10 +649,10 @@ extern UserController * g_userController;
         
     }else{
         
-        if ( _playMetronome == YES )
+        /*if ( _playMetronome == YES )
         {
             _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
-        }
+        }*/
         
         if(!_practiceViewOpen){
             [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
@@ -661,6 +692,17 @@ extern UserController * g_userController;
 
 - (IBAction)restartButtonClicked:(id)sender
 {
+    [self restartSong:YES];
+    
+}
+
+- (void)restartSong:(BOOL)resetPractice
+{
+    if(resetPractice){
+        isPracticeMode = NO;
+        [self setPracticeMode];
+    }
+    
     
     // Only upload at the end of a song
     if ( _finishButton.isHidden == NO && _feedSwitch.isOn == YES )
@@ -677,14 +719,14 @@ extern UserController * g_userController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-//    [g_telemetryController logEvent:GtarPlaySongRestarted
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-//                                     _userSong.m_title, @"Title",
-//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-//                                     nil]];
+    //    [g_telemetryController logEvent:GtarPlaySongRestarted
+    //                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+    //                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+    //                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+    //                                     _userSong.m_title, @"Title",
+    //                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+    //                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+    //                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -697,7 +739,7 @@ extern UserController * g_userController;
                                                   nil]];
     
     [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
-
+    
     [self startWithSongXmlDom];
     
     if(_menuIsOpen){
@@ -783,22 +825,24 @@ extern UserController * g_userController;
     UIColor * yellowMarkerColor = [UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1.0];
     
     // Percentages
-    NSDictionary * markerOne = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.0],@"StartBeat",@"Section1",@"Name", nil];
-    NSDictionary * markerTwo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.25],@"StartBeat",@"Section2",@"Name", nil];
-    NSDictionary * markerThree = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.5],@"StartBeat",@"Section3",@"Name", nil];
-    NSDictionary * markerFour = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.75],@"StartBeat",@"Section4",@"Name", nil];
+    NSDictionary * markerOne = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.0],@"StartBeat",@"Section I",@"Name", nil];
+    NSDictionary * markerTwo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.25],@"StartBeat",@"Section II",@"Name", nil];
+    NSDictionary * markerThree = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.5],@"StartBeat",@"Section III",@"Name", nil];
+    NSDictionary * markerFour = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.75],@"StartBeat",@"Section IV",@"Name", nil];
     
     NSArray * defaultMarkers = [[NSArray alloc] initWithObjects:markerOne,markerTwo,markerThree,markerFour, nil];
     
     markerButtons = [[NSMutableArray alloc] init];
     
-    double mapWidth = _practiceHeatMapView.frame.size.width;
+    double mapWidth = [[UIScreen mainScreen] bounds].size.height - 34;
+    
+    NSLog(@"MapWidth is %f",mapWidth);
     
     for(int d = 0; d < [defaultMarkers count]; d++){
         
         NSDictionary * marker = [defaultMarkers objectAtIndex:d];
         
-        UIButton * markerButton = [[UIButton alloc] initWithFrame:CGRectMake(mapWidth*[[marker objectForKey:@"StartBeat"] doubleValue], 0, MARKER_SIZE*3, MARKER_HEIGHT*1.5)];
+        UIButton * markerButton = [[UIButton alloc] initWithFrame:CGRectMake(mapWidth*[[marker objectForKey:@"StartBeat"] doubleValue], 0, MARKER_SIZE*5, MARKER_HEIGHT*1.5)];
         
         // Draw marker
         
@@ -826,6 +870,14 @@ extern UserController * g_userController;
         
         UIGraphicsEndImageContext();
         
+        UILabel * markerTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(MARKER_SIZE-2,-2,100,MARKER_HEIGHT)];
+        [markerTextLabel setFont:[UIFont fontWithName:@"Avenir Next" size:10.0]];
+        [markerTextLabel setTextColor:yellowMarkerColor];
+        [markerTextLabel setAlpha:0.7];
+        markerTextLabel.text = [marker objectForKey:@"Name"];
+        
+        [markerButton addSubview:markerTextLabel];
+        
         //
         
         [_practiceHeatMapMarkerArea addSubview:markerButton];
@@ -844,10 +896,10 @@ extern UserController * g_userController;
     // Draw section selection area and invisible left/right draggers
     UIButton * firstMarker = [markerButtons firstObject];
     UIButton * secondMarker = [markerButtons objectAtIndex:1];
-    double start = firstMarker.frame.origin.x / _practiceHeatMapView.frame.size.width;
-    double end = secondMarker.frame.origin.x / _practiceHeatMapView.frame.size.width;
+    double start = firstMarker.frame.origin.x / mapWidth;
+    double end = secondMarker.frame.origin.x / mapWidth;
     
-    _heatMapSelector = [[UIView alloc] initWithFrame:CGRectMake(start*mapWidth, 0, (end-start)*mapWidth, _practiceHeatMapView.frame.size.height)];
+    _heatMapSelector = [[UIButton alloc] initWithFrame:CGRectMake(start*mapWidth, 0, (end-start)*mapWidth, _practiceHeatMapView.frame.size.height)];
     [_heatMapSelector setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.5]];
     
     _heatMapLeftSlider = [[UIButton alloc] initWithFrame:CGRectMake(start*mapWidth-ADJUSTOR_SIZE/2.0, 0, ADJUSTOR_SIZE, _practiceHeatMapView.frame.size.height)];
@@ -864,9 +916,12 @@ extern UserController * g_userController;
     [_practiceHeatMapView addSubview:_heatMapLeftSlider];
     [_practiceHeatMapView addSubview:_heatMapRightSlider];
     
+    
+    UIPanGestureRecognizer * heatMapDrag = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panHeatMap:)];
     UIPanGestureRecognizer * leftPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panHeatMapLeft:)];
     UIPanGestureRecognizer * rightPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panHeatMapRight:)];
     
+    [_heatMapSelector addGestureRecognizer:heatMapDrag];
     [_heatMapLeftSlider addGestureRecognizer:leftPan];
     [_heatMapRightSlider addGestureRecognizer:rightPan];
     
@@ -913,6 +968,39 @@ extern UserController * g_userController;
     [_heatMapRightSlider setFrame:CGRectMake(rightX-ADJUSTOR_SIZE/2.0,0,ADJUSTOR_SIZE,_practiceHeatMapView.frame.size.height)];
     
     [_heatMapSelector setFrame:CGRectMake(leftX, 0, rightX-leftX, _heatMapSelector.frame.size.height)];
+    
+}
+
+-(void)panHeatMap:(UIPanGestureRecognizer *)sender
+{
+    CGPoint newPoint = [sender translationInView:_practiceHeatMapView];
+    
+    if([sender state] == UIGestureRecognizerStateBegan){
+        dragFirstX = _heatMapSelector.frame.origin.x;
+    }
+    
+    float minX = 0;
+    float maxX = _practiceHeatMapView.frame.size.width - _heatMapSelector.frame.size.width;
+    float newX = newPoint.x + dragFirstX;
+    
+    // wrap to boundary
+    if(newX < minX){
+        newX=minX;
+    }else if(newX > maxX){
+        newX = maxX;
+    }
+    
+    if(newX >= minX && newX <= maxX){
+        
+        CGRect newHeatMapFrame = CGRectMake(newX, 0, _heatMapSelector.frame.size.width, _heatMapSelector.frame.size.height);
+        
+        [_heatMapSelector setFrame:newHeatMapFrame];
+        
+        CGRect newLeftFrame = CGRectMake(newX-ADJUSTOR_SIZE/2.0,0,ADJUSTOR_SIZE,_practiceHeatMapView.frame.size.height);
+        CGRect newRightFrame = CGRectMake(newX+_heatMapSelector.frame.size.width-ADJUSTOR_SIZE/2.0,0,ADJUSTOR_SIZE,_practiceHeatMapView.frame.size.height);
+        [_heatMapLeftSlider setFrame:newLeftFrame];
+        [_heatMapRightSlider setFrame:newRightFrame];
+    }
     
 }
 
@@ -1238,8 +1326,9 @@ extern UserController * g_userController;
 
 - (void)playMetronomeTick
 {
-    NSLog(@"TODO: play metronome tick");
-    //[g_audioController PluckMutedString:0];
+    if(!_songIsPaused && !_menuIsOpen){
+        [g_soundMaster playMetronomeTick];
+    }
 }
 
 - (void)setVolumeGain:(float)gain
@@ -1365,17 +1454,16 @@ extern UserController * g_userController;
     [_subscoreLabel setHidden:NO];
     [self.view bringSubviewToFront:_subscoreLabel];
     
-    
     [_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,252,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
     
     [UIView animateWithDuration:0.5 animations:^(void){
     
         [_subscoreLabel setAlpha:0.0];
-        [_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,282,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
+        //[_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,282,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
         
     } completion:^(BOOL finished){
-        [_subscoreLabel setHidden:YES];
-        [_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,252,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
+        //[_subscoreLabel setHidden:YES];
+        //[_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,252,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
     }];
 }
 
@@ -1874,7 +1962,7 @@ extern UserController * g_userController;
     [_songRecorder beginSong];
 }
 
-- (void)initSongDisplay
+- (void)initSongDisplayWithLoops:(int)loops
 {
     //
     // Init score with difficulty
@@ -1885,18 +1973,18 @@ extern UserController * g_userController;
             
         case PlayViewControllerDifficultyEasy:
         {
-            _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:10];
+            _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:10 isPracticeMode:isPracticeMode numLoops:loops];
         } break;
             
         default:
         case PlayViewControllerDifficultyMedium:
         {
-            _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:20];
+            _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:20 isPracticeMode:isPracticeMode numLoops:loops];
         } break;
             
         case PlayViewControllerDifficultyHard:
         {
-            _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:40];
+            _scoreTracker = [[NSScoreTracker alloc] initWithBaseScore:40 isPracticeMode:isPracticeMode numLoops:loops];
         } break;
             
     }
@@ -1904,7 +1992,7 @@ extern UserController * g_userController;
     //
     // Init display
     //
-    _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView isStandalone:isStandalone setDifficulty:_difficulty];
+    _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView isStandalone:isStandalone setDifficulty:_difficulty andLoops:loops];
     
     // An initial display render
     [_displayController renderImage];
@@ -1917,6 +2005,11 @@ extern UserController * g_userController;
 // This is the song init for practice mode standalone/regular
 - (void)startWithSongXmlDomPracticeFrom:(double)start toEnd:(double)end withLoops:(int)loops
 {
+    
+    m_loopStart = start;
+    m_loopEnd = end;
+    m_loops = loops;
+    
     [self initSongModel];
     
     // Give a little runway to the player
@@ -1929,7 +2022,7 @@ extern UserController * g_userController;
     
     [self initSongRecorder];
     
-    [self initSongDisplay];
+    [self initSongDisplayWithLoops:loops];
     
     if(!_practiceViewOpen){
         [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
@@ -1943,6 +2036,11 @@ extern UserController * g_userController;
 // This is the normal song init for standalone/regular
 - (void)startWithSongXmlDom
 {
+    
+    m_loopStart = 0;
+    m_loopEnd = 1.0;
+    m_loops = 0;
+    
     [self initSongModel];
     
     // Give a little runway to the player
@@ -1955,7 +2053,7 @@ extern UserController * g_userController;
     
     [self initSongRecorder];
 
-    [self initSongDisplay];
+    [self initSongDisplayWithLoops:0];
     
     if(!_practiceViewOpen){
         [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
@@ -2402,7 +2500,7 @@ extern UserController * g_userController;
     
     if(!isStandalone){
         // Calculate score only on frame release for regular play
-        double accuracy = [_scoreTracker scoreFrame:frame onBeat:-1 withComplexity:0 endStreak:NO isStandalone:NO];
+        double accuracy = [_scoreTracker scoreFrame:frame onBeat:-1 withComplexity:0 endStreak:NO isStandalone:NO forLoop:[_songModel getCurrentLoop]];
         [self updateScoreDisplayWithAccuracy:accuracy];
     }
     
@@ -2464,7 +2562,8 @@ extern UserController * g_userController;
 // Accuracy heat map
 - (void)drawHeatMap
 {
-    
+
+    NSMutableArray * tempFrameHits = [[NSMutableArray alloc] init];
     NSMutableArray * frameHits = [[NSMutableArray alloc] init];
     
     double runningAccuracy[4];
@@ -2500,13 +2599,37 @@ extern UserController * g_userController;
         }
         avgaccuracy/=4.0;
         
-        [frameHits addObject:[NSNumber numberWithDouble:avgaccuracy]];
-        
+        [tempFrameHits addObject:[NSNumber numberWithDouble:avgaccuracy]];
+       
     }
+    
     
     //NSLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
     
-    double sliceWidth = _heatMapView.frame.size.width / [frameHits count];
+    double numSlices = [tempFrameHits count];
+    double sliceWidth = _heatMapView.frame.size.width / [tempFrameHits count];
+    
+    // Aggregate frame hits
+    if(isPracticeMode){
+        
+        int framesPerSlice = numSlices/(m_loops+1);
+        
+        for(int i = 0; i < framesPerSlice; i++){
+            
+            double sliceAccuracy = 0;
+            
+            for(int j = 0; j < m_loops; j++){
+                sliceAccuracy += [[tempFrameHits objectAtIndex:i*j+j] doubleValue];
+            }
+            
+            sliceAccuracy /= (m_loops+1);
+            
+            [frameHits addObject:[NSNumber numberWithDouble:sliceAccuracy]];
+            
+        }
+    }else{
+        frameHits = tempFrameHits;
+    }
     
     // Draw
     CGSize size = CGSizeMake(_heatMapView.frame.size.width,_heatMapView.frame.size.height);
@@ -2514,23 +2637,50 @@ extern UserController * g_userController;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    for(int f = 0; f < [frameHits count]; f++){
+    for(int f = 0, g = 0; f < numSlices; f++){
         
         // Calculate accuracy color
-        double accuracy = [[frameHits objectAtIndex:f] doubleValue];
-        UIColor * accuracyColor;
+        double accuracy = 0;
+        UIColor * accuracyColor = [UIColor blackColor];
         
-        if(accuracy < 0.5){
-            accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*115.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
-        }else{
-            accuracyColor = [UIColor colorWithRed:2.0*(1.0-accuracy)*255.0/255.0 green:180/255.0 blue:50/255.0 alpha:0.9];
+        double trimmedSliceWidth = sliceWidth+0.25;
+        double trimmedSliceExtra = 0;
+        
+        if((double)f/(double)numSlices >= m_loopStart && (double)f/(double)numSlices < m_loopEnd){
+        
+            accuracy = [[frameHits objectAtIndex:g] doubleValue];
+        
+            if(accuracy < 0.5){
+                accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*115.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
+            }else{
+                accuracyColor = [UIColor colorWithRed:2.0*(1.0-accuracy)*255.0/255.0 green:180/255.0 blue:50/255.0 alpha:0.9];
+            }
+            
+            g++;
+            
+            // Ensure that wide frames don't go over the expected area
+            if(m_loopEnd < 1 && sliceWidth*f+sliceWidth+0.25 > _heatMapView.frame.size.width * m_loopEnd){
+                trimmedSliceWidth = _heatMapView.frame.size.width * m_loopEnd - sliceWidth*f;
+                trimmedSliceExtra = sliceWidth+0.25 - trimmedSliceWidth;
+            }
+            
         }
         
-        CGRect sliceRect = CGRectMake(sliceWidth*f,0,sliceWidth+0.25,_heatMapView.frame.size.height);
+        CGRect sliceRect = CGRectMake(sliceWidth*f,0,trimmedSliceWidth,_heatMapView.frame.size.height);
         
         CGContextAddRect(context,sliceRect);
         CGContextSetFillColorWithColor(context, accuracyColor.CGColor);
         CGContextFillRect(context, sliceRect);
+        
+        // Add in extra filler if area gets cropped
+        if(trimmedSliceExtra > 0){
+            
+            CGRect sliceExtraRect = CGRectMake(sliceWidth*f+trimmedSliceWidth,0,trimmedSliceExtra,_heatMapView.frame.size.height);
+            
+            CGContextAddRect(context,sliceExtraRect);
+            CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+            CGContextFillRect(context, sliceExtraRect);
+        }
         
     }
     
@@ -2538,6 +2688,12 @@ extern UserController * g_userController;
     UIImageView * image = [[UIImageView alloc] initWithImage:rectImage];
     UIImageView * practiceImage = [[UIImageView alloc] initWithImage:rectImage];
     
+    // First clear subviews for heat map view
+    for(UIView * v in [_heatMapView subviews]){
+        [v removeFromSuperview];
+    }
+    
+    // Add new subviews
     [_heatMapView addSubview:image];
     [self setPracticeHeatMapViewImageView:practiceImage];
     
@@ -2552,9 +2708,6 @@ extern UserController * g_userController;
     [self drawPlayButton:_pauseButton];
     
     [self endSong];
-    
-    [_metronomeTimer invalidate];
-    _metronomeTimer = nil;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
@@ -2585,14 +2738,35 @@ extern UserController * g_userController;
 - (void)endSong
 {
     
+    [_metronomeTimer invalidate];
+    _metronomeTimer = nil;
+    
     NSDictionary * scoreData = [_scoreTracker aggregateScoreEndOfSong];
     
+    double totalscore = [[scoreData objectForKey:@"TotalScore"] doubleValue];
+    double bestscore = [[scoreData objectForKey:@"BestScore"] doubleValue];
     double score = [[scoreData objectForKey:@"Score"] doubleValue];
     double percentNotesHit = 100*[[scoreData objectForKey:@"PercentNotesHit"] doubleValue];
     double maxStreak = [[scoreData objectForKey:@"MaxStreak"] doubleValue];
     double accuracy = 100*[[scoreData objectForKey:@"AverageTiming"] doubleValue];
     
-    _scoreScore.text = [self formatScore:(int)score];
+    
+    [_scoreBestSession setHidden:!isPracticeMode];
+    [_scoreBestSessionLabel setHidden:!isPracticeMode];
+    [_scoreTotal setHidden:!isPracticeMode];
+    [_scoreTotalLabel setHidden:!isPracticeMode];
+    
+    if(isPracticeMode){
+        
+        _scoreBestSession.text = [self formatScore:(int)bestscore];
+        _scoreScore.text = [self formatScore:(int)score];
+        _scoreTotal.text = [self formatScore:(int)totalscore];
+        
+    }else{
+        
+        _scoreScore.text = [self formatScore:(int)score];
+    }
+    
     _scoreNotesHit.text = [NSString stringWithFormat:@"%i%%",(int)percentNotesHit];
     _scoreInARow.text = [NSString stringWithFormat:@"%i",(int)maxStreak];
     _scoreAccuracy.text = [NSString stringWithFormat:@"%i%%",(int)accuracy];
@@ -2970,7 +3144,7 @@ extern UserController * g_userController;
             }
         }
         
-        double accuracy = [_scoreTracker scoreFrame:tappedFrame onBeat:_songModel.m_currentBeat withComplexity:numFretsOn endStreak:endStreak isStandalone:isStandalone];
+        double accuracy = [_scoreTracker scoreFrame:tappedFrame onBeat:_songModel.m_currentBeat withComplexity:numFretsOn endStreak:endStreak isStandalone:isStandalone forLoop:[_songModel getCurrentLoop]];
         
         // Save the accuracy in note.m_hit
         for(NSNote * nn in tappedFrame.m_notes){

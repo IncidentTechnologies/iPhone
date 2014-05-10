@@ -19,6 +19,7 @@
 
 @synthesize m_baseScore;
 @synthesize m_score;
+@synthesize m_totalScore;
 @synthesize m_hitsAttempted;
 @synthesize m_hitsCorrect;
 @synthesize m_hitsIncorrect;
@@ -26,7 +27,7 @@
 @synthesize m_streak;
 @synthesize m_stars;
 
-- (id)initWithBaseScore:(UInt32)baseScore
+- (id)initWithBaseScore:(UInt32)baseScore isPracticeMode:(BOOL)practiceMode numLoops:(int)loops
 {
     self = [super init];
     
@@ -54,7 +55,17 @@
         m_frameTimings = [[NSMutableArray alloc] init];
         
         m_stars = 0;
-
+        
+        isPracticeMode = practiceMode;
+        m_loops = loops;
+        m_loopScores = [[NSMutableArray alloc] init];
+        m_totalScore = 0;
+        
+        // Init loops to score of 0
+        for(int l = 0; l <= m_loops; l++){
+            [m_loopScores addObject:[NSNumber numberWithInt:0]];
+        }
+        
 
     }
     
@@ -64,7 +75,7 @@
 
 
 // Called on exit frame for normal, or anytime during Standalone
-- (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone
+- (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone forLoop:(int)loop
 {
     
     int frameMissedHits = (int)[frame.m_notesPending count];
@@ -93,7 +104,7 @@
     }else{
         
         // End streak logic
-        if ( frameMissedHits > 0 || frameIncorrectHits > 0 )
+        if ( frameMissedHits > 0 || frameIncorrectHits > 0 || (isPracticeMode && [[m_loopScores objectAtIndex:loop] intValue] == 0))
         {
             m_multiplier = 1;
             m_streak = 0;
@@ -104,7 +115,7 @@
         //
         
         // Compare how many notes were hit in the frame
-        percentAccuracy = frameCorrectHits / (frameCorrectHits + frameIncorrectHits + frameMissedHits);
+        percentAccuracy = (double)frameCorrectHits / (double)(frameCorrectHits + frameIncorrectHits + frameMissedHits);
         
         //
         // Complexity
@@ -158,8 +169,24 @@
     //
     
     NSLog(@"Score is %f * %i * %f",noteScore,(int)m_multiplier,complexMultiplier);
+    NSLog(@"Current loops is %i",loop);
     
-    m_score += noteScore * m_multiplier * complexMultiplier;
+    int subscore = noteScore * m_multiplier * complexMultiplier;
+    
+    // Add to loop score for practice
+    
+    // Add to total
+    m_totalScore += subscore;
+    if(isPracticeMode){
+        int loopScore = [[m_loopScores objectAtIndex:loop] intValue];
+        int newScore = loopScore + subscore;
+        
+        [m_loopScores setObject:[NSNumber numberWithInt:newScore] atIndexedSubscript:loop];
+        m_score = newScore;
+        
+    }else{
+        m_score += subscore;
+    }
     
     return percentAccuracy;
     
@@ -224,9 +251,22 @@
         avgTiming = totalTiming/numFrames;
     }
     
+    int bestscore = 0;
+    if(isPracticeMode){
+        int scoresubtotal = 0;
+        for(int l = 0; l < [m_loopScores count]; l++){
+            bestscore = MAX(bestscore,[[m_loopScores objectAtIndex:l] intValue]);
+            scoresubtotal += [[m_loopScores objectAtIndex:l] intValue];
+        }
+        scoresubtotal /= [m_loopScores count];
+        m_score = scoresubtotal;
+    }
+    
     // return data for display
     NSDictionary * data = [[NSDictionary alloc] initWithObjectsAndKeys:
                            [NSNumber numberWithDouble:m_score],@"Score",
+                           [NSNumber numberWithDouble:bestscore],@"BestScore",
+                           [NSNumber numberWithDouble:m_totalScore],@"TotalScore",
                            [NSNumber numberWithDouble:percentNotesHit],@"PercentNotesHit",
                            [NSNumber numberWithDouble:avgTiming],@"AverageTiming",
                            [NSNumber numberWithDouble:m_streakMax],@"MaxStreak",nil];

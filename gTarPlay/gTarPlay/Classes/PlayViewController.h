@@ -76,6 +76,7 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UIButton *repeatButton;
 @property (strong, nonatomic) IBOutlet UIButton *tempoButton;
 @property (strong, nonatomic) IBOutlet UIButton *startPracticeButton;
+@property (strong, nonatomic) IBOutlet UIButton *practiceBackButton;
 
 @property (strong, nonatomic) IBOutlet UITextView *loadingLicenseInfo;
 @property (strong, nonatomic) IBOutlet UILabel *loadingSongArtist;
@@ -93,10 +94,14 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UILabel *practiceSongTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *practiceSongArtistLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *scoreBestSessionLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreTotalLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreScoreLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreNotesHitLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreInARowLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreAccuracyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreBestSession;
+@property (strong, nonatomic) IBOutlet UILabel *scoreTotal;
 @property (strong, nonatomic) IBOutlet UILabel *scoreScore;
 @property (strong, nonatomic) IBOutlet UILabel *scoreNotesHit;
 @property (strong, nonatomic) IBOutlet UILabel *scoreInARow;
@@ -106,9 +111,10 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UIView *practiceHeatMapView;
 @property (strong, nonatomic) UIImageView *practiceHeatMapViewImageView;
 @property (strong, nonatomic) IBOutlet UIView *practiceHeatMapMarkerArea;
-@property (strong, nonatomic) UIView *heatMapSelector;
+@property (strong, nonatomic) UIButton *heatMapSelector;
 @property (strong, nonatomic) UIButton *heatMapLeftSlider;
 @property (strong, nonatomic) UIButton *heatMapRightSlider;
+@property (strong, nonatomic) IBOutlet UISwitch *practiceMetronomeSwitch;
 
 @property (strong, nonatomic) IBOutlet UIButton *difficultyButton;
 @property (strong, nonatomic) IBOutlet UIButton *scoreDifficultyButton;
@@ -157,6 +163,7 @@ enum PlayViewControllerDifficulty
 - (IBAction)backButtonClicked:(id)sender;
 - (IBAction)pauseButtonClicked:(id)sender;
 - (IBAction)volumeButtonClicked:(id)sender;
+- (IBAction)finishPracticeButtonClicked:(id)sender;
 - (IBAction)practiceButtonClicked:(id)sender;
 - (IBAction)finishButtonClicked:(id)sender;
 - (IBAction)restartButtonClicked:(id)sender;

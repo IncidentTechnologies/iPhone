@@ -51,6 +51,7 @@
     // NSNote -> NoteAnimation
     NSMutableDictionary * m_noteModelDictionary;
     NSMutableDictionary * m_noteModelUniversalDictionary;
+    NSMutableArray * m_allFrames;
     NSMutableArray * m_undisplayedFrames;
     NSMutableArray * m_numberModels;
     
@@ -75,9 +76,11 @@
     BOOL fretTwo;
     BOOL fretThree;
     
+    int m_loops;
+    
 }
 
-- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty;
+- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops;
 - (void)updateDifficulty:(PlayViewControllerDifficulty)useDifficulty;
 - (void)cancelPreloading;
 - (void)createLineModels;

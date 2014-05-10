@@ -47,10 +47,16 @@
 //    UInt32 m_currentFrameStringsIncorrect;
 //    UInt32 m_currentFrameNotesIncorrect;
 
+    // practice
+    int m_loops;
+    UInt32 m_totalScore;
+    NSMutableArray * m_loopScores;
+    BOOL isPracticeMode;
 }
 
 @property (nonatomic, assign) UInt32 m_baseScore;
 @property (nonatomic, readonly) UInt32 m_score;
+@property (nonatomic, readonly) UInt32 m_totalScore;
 @property (nonatomic, readonly) UInt32 m_hitsAttempted;
 @property (nonatomic, readonly) UInt32 m_hitsCorrect;
 @property (nonatomic, readonly) UInt32 m_hitsIncorrect;
@@ -58,9 +64,9 @@
 @property (nonatomic, readonly) UInt32 m_streak;
 @property (nonatomic, readonly) UInt32 m_stars;
 
-- (id)initWithBaseScore:(UInt32)baseScore;
+- (id)initWithBaseScore:(UInt32)baseScore isPracticeMode:(BOOL)practiceMode numLoops:(int)loops;
 
-- (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone;
+- (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone forLoop:(int)loop;
 - (void)scoreFramePerfectly:(NSNoteFrame*)frame;
 - (void)starRateScore;
 - (void)scoreEndOfFrame:(NSNoteFrame*)frame;

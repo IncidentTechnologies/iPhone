@@ -90,5 +90,6 @@
 - (void)setSongLoops:(int)loops;
 - (void)setStartBeat:(double)start;
 - (void)setEndBeat:(double)end;
+- (int)getCurrentLoop;
 
 @end
