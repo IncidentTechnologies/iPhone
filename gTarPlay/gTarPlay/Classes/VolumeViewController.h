@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SlidingViewController.h"
+#import "SoundMaster.h"
 
 @interface VolumeViewController : SlidingViewController
 
@@ -19,8 +20,7 @@
 
 @property (readonly, nonatomic) BOOL displayed;
 
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isInverse:(BOOL)invert;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster*)soundMaster  isInverse:(BOOL)invert;
 
 - (IBAction)volumeValueChanged:(id)sender;
 

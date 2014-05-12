@@ -12,10 +12,13 @@
                 <outlet property="closeModalButton" destination="LYj-ht-iau" id="SkI-oX-kUS"/>
                 <outlet property="colBar" destination="123" id="484"/>
                 <outlet property="easyButton" destination="77Z-1R-1JH" id="274-Vc-8Jy"/>
+                <outlet property="easyLabel" destination="zWJ-mf-KkR" id="QlS-xU-F7k"/>
                 <outlet property="hardButton" destination="Ov4-2M-eFM" id="FdK-cP-g1O"/>
+                <outlet property="hardLabel" destination="pyV-Ef-Ziv" id="oAc-W3-hEu"/>
                 <outlet property="instrumentButton" destination="GBa-Mh-Lg4" id="U2V-ik-S6F"/>
                 <outlet property="instrumentView" destination="BPW-RK-GKg" id="TJv-p9-Cs5"/>
                 <outlet property="mediumButton" destination="Ytz-kX-JNj" id="mx1-ff-6c0"/>
+                <outlet property="mediumLabel" destination="yMr-0K-cz0" id="xIg-PC-UrX"/>
                 <outlet property="practiceButton" destination="h2Y-wi-peY" id="OZR-eb-8hy"/>
                 <outlet property="pullToUpdateSongList" destination="ouY-hX-hgj" id="8p1-qM-m48"/>
                 <outlet property="searchBar" destination="92" id="528"/>
@@ -235,7 +238,7 @@
                                     <constraint firstAttribute="height" constant="56" id="sqV-gz-iv8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="25"/>
-                                <inset key="titleEdgeInsets" minX="-210" minY="1" maxX="0.0" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="-215" minY="1" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="128" minY="10" maxX="38" maxY="10"/>
                                 <state key="normal" title="PLAY" image="PlayButtonVideo.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

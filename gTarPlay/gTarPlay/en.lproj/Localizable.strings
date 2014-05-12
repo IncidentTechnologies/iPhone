@@ -26,6 +26,7 @@
 "Invalid Email" = "Invalid Email";
 "Invalid Username" = "Invalid Username";
 "Invalid Password" = "Invalid Password";
+"Invalid login credentials" = "Invalid login credentials";
 "Facebook failed to login" = "Facebook failed to login";
 
 // ActivityFeedCell
@@ -44,6 +45,7 @@
 "ARTIST" = "ARTIST";
 "TITLE" = "TITLE";
 "Back" = "Back";
+"BACK" = "BACK";
 "Song List" = "Songs";
 
 // Play View
@@ -59,6 +61,8 @@
 "Restart" = "Restart";
 "RESTART" = "RESTART";
 "SCORE" = "SCORE";
+"BEST SESSION" = "BEST SESSION";
+"TOTAL" = "TOTAL";
 "NOTES HIT" = "NOTES HIT";
 "IN A ROW" = "IN A ROW";
 "ACCURACY" = "ACCURACY";
@@ -105,6 +109,7 @@
 "Carl's Synth" = "Carl's Synth";
 "Droplet" = "Droplet";
 "Square" = "Square";
+"Warm Analogue" = "Warm Analogue";
 
 // Time formatter
 "The Future" = "the future";

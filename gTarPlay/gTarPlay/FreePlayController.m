@@ -131,7 +131,7 @@ extern GtarController * g_gtarController;
         _fpMenuVC = [[FPMenuViewController alloc] init];
         [_fpMenuVC setDelegate:self];
         
-        _volumeVC = [[VolumeViewController alloc] initWithNibName:nil bundle:nil isInverse:NO];
+        _volumeVC = [[VolumeViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster isInverse:NO];
         
         for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
         {
@@ -238,32 +238,8 @@ extern GtarController * g_gtarController;
     [_menuBarDropShadowView addShadow];
 
     // images for slider
-    UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-    UIImage *sliderTrackMaxImage = [[UIImage imageNamed: @"SliderEndMax.png"] stretchableImageWithLeftCapWidth: 1 topCapHeight: 0];
-
-    // Attach a volume view
-   /* m_volumeView.backgroundColor = [UIColor clearColor];
-    MPVolumeView * myVolumeView = [[[MPVolumeView alloc] initWithFrame:m_volumeView.bounds] autorelease];
-    NSArray *subViews = myVolumeView.subviews;
-    
-    for (id current in subViews)
-    {
-        if ([current isKindOfClass:[UISlider class]])
-        {
-            UISlider *slider = (UISlider*) current;
-            [slider setMinimumTrackImage: sliderTrackMinImage forState: UIControlStateNormal];
-            [slider setMaximumTrackImage: sliderTrackMaxImage forState: UIControlStateNormal];
-            [slider setThumbImage:[UIImage imageNamed: @"Knob_BlueLine.png"] forState:UIControlStateNormal];
-        }
-    }
-    
-    [myVolumeView setShowsRouteButton:NO];
-	[m_volumeView addSubview:myVolumeView];
-    [myVolumeView sizeToFit];
-    
-    // For some reason, releasing this crashes the app
-//    [myVolumeView release];
-    */
+    //UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+    //UIImage *sliderTrackMaxImage = [[UIImage imageNamed: @"SliderEndMax.png"] stretchableImageWithLeftCapWidth: 1 topCapHeight: 0];
     
     // centered in the x dimension (and y dimension, we change that in a moment)
     m_effectsTab.center = self.view.center;
@@ -305,19 +281,6 @@ extern GtarController * g_gtarController;
     NSMutableArray * instrumentScrollText = [[NSMutableArray alloc] initWithArray:[g_soundMaster getInstrumentList]];
     [m_instrumentsScroll populateWithText:instrumentScrollText];
     
-    // TODO: snap to the currently selected sample, not just the first. Currently we
-    // can get the current sample index from the audioController, but this number will
-    // not match directly the index in the instruments scroll, due to the extra header
-    // entries
-    
-    
-    // nln - no longer needed
-    //m_volumeView.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    //m_effectsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    //m_instrumentsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    //m_menuTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    //m_LEDTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    
     // Set up effects tab. Set image to display when button is "selected"
     [m_effect1OnOff setImage:[UIImage imageNamed:@"EffectOnButton.png"] forState:UIControlStateSelected];
     [m_effect1Select setImage:[UIImage imageNamed:@"EffectSelectOnButton.png"] forState:UIControlStateSelected];
@@ -331,22 +294,12 @@ extern GtarController * g_gtarController;
     [m_effect4OnOff setImage:[UIImage imageNamed:@"EffectOnButton.png"] forState:UIControlStateSelected];
     [m_effect4Select setImage:[UIImage imageNamed:@"EffectSelectOnButton.png"] forState:UIControlStateSelected];
 
-    // set effects name
-    //m_effects = [g_audioController GetEffects];
-/*    [m_effect1Name setText:[[NSString stringWithCString:m_effects[0]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    [m_effect2Name setText:[[NSString stringWithCString:m_effects[1]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    [m_effect3Name setText:[[NSString stringWithCString:m_effects[2]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    [m_effect4Name setText:[[NSString stringWithCString:m_effects[3]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    
-    [m_effect1Select setSelected:YES];
- */
-    
     // set custom images for sliders
     //UIImage *sliderKnobImage = [UIImage imageNamed: @"Knob_BlueLine.png"];
     
-    [m_wetSlider setMinimumTrackImage: sliderTrackMinImage forState: UIControlStateNormal];
-    [m_wetSlider setMaximumTrackImage: sliderTrackMaxImage forState: UIControlStateNormal];
-    [m_wetSlider setThumbImage: [UIImage imageNamed: @"SliderKnob.png"] forState:UIControlStateNormal];
+    //[m_wetSlider setMinimumTrackImage: sliderTrackMinImage forState: UIControlStateNormal];
+    //[m_wetSlider setMaximumTrackImage: sliderTrackMaxImage forState: UIControlStateNormal];
+    //[m_wetSlider setThumbImage: [UIImage imageNamed: @"SliderKnob.png"] forState:UIControlStateNormal];
     
     //[m_toneSlider setMinimumTrackImage: sliderTrackMinImage forState: UIControlStateNormal];
     //[m_toneSlider setMaximumTrackImage: sliderTrackMaxImage forState: UIControlStateNormal];
@@ -356,7 +309,7 @@ extern GtarController * g_gtarController;
     //[m_lineOutVolumeSlider setMaximumTrackImage: sliderTrackMaxImage forState:UIControlStateNormal];
     //[m_lineOutVolumeSlider setThumbImage: sliderKnobImage forState:UIControlStateNormal];
     
-    m_wetSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    //m_wetSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
     //m_toneSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
     //m_lineOutVolumeSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
     

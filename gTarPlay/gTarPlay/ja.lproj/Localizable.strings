@@ -26,6 +26,7 @@
 "Invalid Email" = "無効なメール";
 "Invalid Username" = "無効なユーザー名";
 "Invalid Password" = "無効なパスワード";
+"Invalid login credentials" = "無効なログイン";
 "Facebook failed to login" = "Facebookはログインに失敗しました";
 
 // ActivityFeedCell
@@ -44,6 +45,7 @@
 "ARTIST" = "アーティスト";
 "TITLE" = "タイトル";
 "Back" = "戻る";
+"BACK" = "戻る";
 "Song List" = "歌";
 
 // Play View
@@ -59,6 +61,8 @@
 "Restart" = "再起動";
 "RESTART" = "再起動";
 "SCORE" = "スコア";
+"BEST SESSION" = "ベスト";
+"TOTAL" = "合計";
 "NOTES HIT" = "完成したノート";
 "IN A ROW" = "連続した";
 "ACCURACY" = "精度";
@@ -74,7 +78,7 @@
 "SESSIONS" = "会期";
 "FOLLOWERS" = "信者";
 "Follow" = "従う";
-"Follwoing" = "以下";
+"Following" = "以下";
 
 // Freeplay
 "ALL" = "全部";
@@ -105,6 +109,7 @@
 "Carl's Synth" = "カールのシンセ";
 "Droplet" = "液滴";
 "Square" = "四角";
+"Warm Analogue" = "暖かいアナログ";
 
 // Time formatter
 "The Future" = "将来";

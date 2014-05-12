@@ -1443,6 +1443,7 @@
 		6D594C0F1909BCF900CF3128 /* HighlightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightModel.h; sourceTree = "<group>"; };
 		6D594C101909BCF900CF3128 /* HighlightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightModel.m; sourceTree = "<group>"; };
 		6D62271E191D84D9003D8534 /* Metronome.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Metronome.mp3; sourceTree = "<group>"; };
+		6D622720191DA91E003D8534 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = FacebookIcon.jpg; path = Resources/Images/Title/FacebookIcon.jpg; sourceTree = SOURCE_ROOT; };
 		6D7D46E11919BA0F00EF8C75 /* ExpandingRoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpandingRoundedRectangleView.h; path = CustomUI/ExpandingRoundedRectangleView.h; sourceTree = SOURCE_ROOT; };
 		6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpandingRoundedRectangleView.m; path = CustomUI/ExpandingRoundedRectangleView.m; sourceTree = SOURCE_ROOT; };
@@ -3809,6 +3810,7 @@
 				it,
 				"en-GB",
 				"fr-CA",
+				ru,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -5230,6 +5232,7 @@
 				6DC3D83B190ED853003AAD4E /* it */,
 				6DC3D83C190F01AA003AAD4E /* en-GB */,
 				6DC3D83D190F0240003AAD4E /* fr-CA */,
+				6D622720191DA91E003D8534 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

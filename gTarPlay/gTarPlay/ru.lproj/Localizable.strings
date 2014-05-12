@@ -1,0 +1,153 @@
+/* 
+  Localizable.strings
+  gTarPlay
+
+  Created by Idan Beck on 4/1/14.
+
+*/
+
+// Title Screen
+"SIGN IN" = "ВОЙТИ";
+"SIGN UP" = "ВЫЙТИP";
+"VIDEO" = "ВИДЕО";
+"INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
+"PLAY" = "ИГРАТЬ";
+"FREE PLAY" = "ИГРАЙ САМ";
+"STORE" = "МАГАЗИН";
+"Sign In with Facebook" = "Войти через Facebook";
+"Username" = "Логин";
+"Password" = "Пароль";
+"Email" = "Email";
+"Please Connect Your gTar" = "Пожалуйста подключите gTar";
+"Profile" = "Профиль";
+"Please connect your gTar to sign up for an account." = "Пожалуйста подключите гитару чтобы зарегистрироваться";
+"Username must begin with a letter" = "Имя пользоваться должно начинаться с буквы";
+"Password must be at least 8 letters" = "Пароль должен содержать не менее 8 знаков";
+"Invalid Email" = "Неверный Email";
+"Invalid Username" = "Неверное имя пользователя";
+"Invalid Password" = "Неверный пароль";
+"Invalid login credentials" = "Неверный Войти";
+"Facebook failed to login" = "Facebook отказал в регистрации";
+
+// ActivityFeedCell
+"Someone" = "Кто-то";
+"Jammed out" = "Зажигал";
+"Played %@" = "Играл %@";
+
+// Song Selection Controller
+"Easy" = "Лёгкий";
+"Medium" = "Средний";
+"Hard" = "Тяжёлый";
+"PRESS TO PLAY" = "ИГРАТЬ";
+"PRACTICE" = "ПРАКТИКА";
+"SKILL" = "УМЕНИЕ";
+"SCORE" = "БАЛЛЫ";
+"ARTIST" = "ИСПОЛНИТЕЛЬ";
+"TITLE" = "НАЗВАНИЕ";
+"Back" = "Назад";
+"BACK" = "НАЗАД";
+"Song List" = "Песни";
+
+// Play View
+"SAVE & FINISH" = "Закончить";
+"SCORE" = "БАЛЛЫ";
+"OUTPUT" = "ВЫХОД";
+"AUX" = "AUX";
+"SPEAKER" = "КОЛОНКА";
+"POST TO FEED" = "ПОДЕЛИТЬСЯ В ЛЕНТЕ";
+"OFF" = "ВЫКЛ";
+"ON" = "ВКЛ";
+"Quit" = "Выйти";
+"Restart" = "Начать заново";
+"RESTART" = "Начать заново";
+"BEST SESSION" = "лучший";
+"TOTAL" = "общий";
+"NOTES HIT" = "сыгранные";
+"IN A ROW" = "подряд";
+"ACCURACY" = "точность";
+"REPEAT" = "повторять";
+"TEMPO" = "темп";
+"METRONOME" = "метроном";
+"NONE" = "ничто";
+
+// Social View
+"Logout" = "Выйти";
+"FOLLOW" = "ПОДПИСАТЬСЯ";
+"FOLLOWING" = "СЛЕЖУ ЗА";
+"SESSIONS" = "СЕССИИ";
+"FOLLOWERS" = "ПОДПИСЧИКИ";
+"Follow" = "ПОДПИСАТЬСЯ";
+"Following" = "СЛЕЖУ ЗА";
+
+// Freeplay
+"ALL" = "ВСЁ";
+"COLOR" = "ЦВЕТ";
+"SHAPE" = "ФОРМА";
+"LOOP" = "ПЕТЛЯ";
+"CLEAR" = "ЧИСТЫЙ";
+"TONE" = "ТОН";
+"SLIDING" = "СЛАЙД";
+"Chorus" = "Хорус";
+"Echo" = "Эхо";
+"Reverb" = "Ревер";
+"Distortion" = "Дистошн";
+"Single" = "Одной";
+"2 X 2" = "2 X 2";
+"Continuous" = "Непрерывный";
+
+// Instruments
+"Electric Guitar" = "Электрогитара";
+"Acoustic Guitar" = "Акустическая гитара";
+"Rock Guitar" = "Рок гитара";
+"Upright Bass" = "Контрабас";
+"Piano" = "Фортепиано";
+"Rhodes" = "Родес-пиано";
+"Muted Clav" = "Клавир";
+"Bowed Strings" = "Струнные";
+"Marimba" = "Маримба";
+"Carl's Synth" = "Синтезатор";
+"Droplet" = "Капля";
+"Square" = "Квадратный";
+"Warm Analogue" = "Теплый Аналоговый";
+
+// Time formatter
+"The Future" = "Будущий";
+"%u second ago" = "%u сек назад";
+"%u seconds ago" = "%u сек назад";
+"%u minute ago" = "%u мин назад";
+"%u minutes ago" = "%u мин назад";
+"%u hour ago" = "%u ч назад";
+"%u hours ago" = "%u ч назад";
+"%u day ago" = "%u дн назад";
+"%u days ago" = "%u дн назад";
+"%u week ago" = "%u нед назад";
+"%u weeks ago" = "%u нед назад";
+"%u month ago" = "%u мес назад";
+"%u months ago" = "%u мес назад";
+
+// Store
+"TITLE & ARTIST" = "НАЗВАНИЕ & АРТИСТ";
+"99¢" = "P35";
+"FREE" = "ДАРОМ";
+"BUY" = "КУПИТЬ";
+"Shop" = "Магазин";
+"OK" = "OK";
+"Song Purchase Failed" = "Невозможно купить мелодию";
+"No products available, no payments have been processed" = "Продукт не доступен, платёж не принят";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "Купленная мелодия недоступна, Ваш аккаунт был кредитован до тех пор пока мелодия не станет доступной";
+"Song Purchase Succeeded" = "Покупка прошла успешно";
+"Song Purchase Succeeded!" = "Покупка прошла успешно!";
+
+// Pull to update
+"Updating..." = "Обновление…";
+"Last update: Never" = "Следующее обновление: Не ожидается";
+"Pull to update" = "Потяните чтобы обновить версию";
+"Last update: %@" = "Следующее обновление: %@";
+"Release to update" = "Релиз обновления";
+
+// Selector
+"FRIENDS" = "ДРУЗЬЯ";
+"GLOBAL" = "ВСЕМИРНЫЙ" ;
+
+"Error" = "Ошибка";
+"Search..." = "Искать…";

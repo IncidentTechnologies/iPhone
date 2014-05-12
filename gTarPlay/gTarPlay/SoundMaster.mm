@@ -24,6 +24,9 @@
 
 #define DEFAULT_INSTRUMENT @"Electric Guitar"
 
+#define DEFAULT_GAIN 0.8
+#define GAIN_MULTIPLIER 1.2
+
 @interface SoundMaster ()
 {
     AudioController * audioController;
@@ -93,7 +96,7 @@
     root = [[audioController GetNodeNetwork] GetRootNode];
     
     m_samplerNode = new SamplerNode;
-    m_samplerNode->SetChannelGain(0.1, CONN_OUT);
+    m_samplerNode->SetChannelGain(DEFAULT_GAIN, CONN_OUT);
     
     root->ConnectInput(0, m_samplerNode, 0);
     
@@ -207,8 +210,8 @@
 #pragma mark - Volume
 - (void) setChannelGain:(float)gain
 {
-    NSLog(@"Set channel gain to %f",gain);
-    m_samplerNode->SetChannelGain(gain, CONN_OUT);
+    NSLog(@"Set channel gain to %f",gain*GAIN_MULTIPLIER);
+    m_samplerNode->SetChannelGain(gain*GAIN_MULTIPLIER, CONN_OUT);
 }
 
 #pragma mark - Tone

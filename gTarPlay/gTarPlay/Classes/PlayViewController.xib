@@ -1004,7 +1004,7 @@
                                     <color key="textColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SCL-07-BTW">
+                                <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SCL-07-BTW">
                                     <rect key="frame" x="356" y="92" width="51" height="31"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="onTintColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1024,14 +1024,15 @@
                                         <action selector="repeatButtonClicked:" destination="-1" eventType="touchUpInside" id="oOp-vD-Udx"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jt2-0z-TIu">
-                                    <rect key="frame" x="164" y="92" width="120" height="36"/>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="jt2-0z-TIu">
+                                    <rect key="frame" x="153" y="92" width="140" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="36" id="ZNA-nS-2aD"/>
+                                        <constraint firstAttribute="width" constant="140" id="eR6-la-fBk"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
-                                    <state key="normal" title="50%">
+                                    <state key="normal" title="10000">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -1043,13 +1044,13 @@
                             <color key="backgroundColor" red="0.12941176469999999" green="0.1764705882" blue="0.19215686269999999" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstItem="DcN-xw-A18" firstAttribute="leading" secondItem="d02-XP-wMU" secondAttribute="leading" id="CDh-0P-l3h"/>
-                                <constraint firstItem="jt2-0z-TIu" firstAttribute="leading" secondItem="fcb-6o-im5" secondAttribute="trailing" constant="39" id="CvJ-5L-OIu"/>
                                 <constraint firstItem="TpL-dV-1Cj" firstAttribute="leading" secondItem="d02-XP-wMU" secondAttribute="leading" id="E9X-eH-3iS"/>
-                                <constraint firstItem="SCL-07-BTW" firstAttribute="leading" secondItem="jt2-0z-TIu" secondAttribute="trailing" constant="72" id="EgZ-Dd-goA"/>
                                 <constraint firstItem="C8W-Wa-7wj" firstAttribute="leading" secondItem="d02-XP-wMU" secondAttribute="leading" id="Jrg-ZJ-gMM"/>
                                 <constraint firstAttribute="centerX" secondItem="fT7-Lh-BpM" secondAttribute="centerX" id="KxD-IO-s05"/>
-                                <constraint firstAttribute="centerX" secondItem="jt2-0z-TIu" secondAttribute="centerX" id="OAG-Ah-7rm"/>
+                                <constraint firstAttribute="centerX" secondItem="jt2-0z-TIu" secondAttribute="centerX" id="M8t-rF-vwW"/>
+                                <constraint firstItem="SCL-07-BTW" firstAttribute="leading" secondItem="jt2-0z-TIu" secondAttribute="trailing" constant="63" id="Mcc-iJ-NmJ"/>
                                 <constraint firstAttribute="trailing" secondItem="TpL-dV-1Cj" secondAttribute="trailing" id="Owa-MN-C7b"/>
+                                <constraint firstItem="jt2-0z-TIu" firstAttribute="leading" secondItem="fcb-6o-im5" secondAttribute="trailing" constant="28" id="aEi-8k-HCa"/>
                                 <constraint firstAttribute="trailing" secondItem="DcN-xw-A18" secondAttribute="trailing" id="b0k-li-2Vj"/>
                                 <constraint firstItem="QEj-01-DXf" firstAttribute="centerX" secondItem="SCL-07-BTW" secondAttribute="centerX" id="cal-CW-oTa"/>
                                 <constraint firstAttribute="height" constant="172" id="fyT-aq-Y4j"/>

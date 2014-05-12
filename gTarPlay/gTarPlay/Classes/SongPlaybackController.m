@@ -97,9 +97,8 @@
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
-    
-    
-    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isStandalone:!m_gtarController.connected fromStart:0 toEnd:-1 withLoops:0];
+    // Double tempo because for some reason it's incredibly slow in playback    
+    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:2.0 fromStart:0 toEnd:-1 withLoops:0];
     
     [self startMainEventLoop];
     
@@ -119,7 +118,7 @@
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
-    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isStandalone:!m_gtarController.connected fromStart:0 toEnd:-1 withLoops:0];
+    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
     
     [self startMainEventLoop];
 }

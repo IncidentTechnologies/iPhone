@@ -9,6 +9,7 @@
 #import "NSSong.h"
 
 #import "NSMeasure.h"
+#import "NSMarker.h"
 #import "XmlDom.h"
 
 #define DEFAULT_INSTRUMENT @"Electric Guitar"
@@ -16,6 +17,7 @@
 @implementation NSSong
 
 @synthesize m_measures;
+@synthesize m_markers;
 @synthesize m_author;
 @synthesize m_title;
 @synthesize m_description;
@@ -37,6 +39,7 @@
     {
         
         m_measures = [[NSMutableArray alloc] init];
+        m_markers = [[NSMutableArray alloc] init];
         
         XmlDom * dom;
 
@@ -90,6 +93,8 @@
         
         NSArray * measureArray = [trackDom getChildArrayWithName:@"measure"];
         
+        NSArray * markerArray = [trackDom getChildArrayWithName:@"marker"];
+        
         for ( XmlDom * measureDom in measureArray )
         {
             
@@ -100,6 +105,15 @@
             
             [self addMeasure:measure];
             
+            
+        }
+        
+        for ( XmlDom * markerDom in markerArray )
+        {
+            
+            NSMarker * marker = [[NSMarker alloc] initWithXmlDom:markerDom];
+            
+            [m_markers addObject:marker];
             
         }
 

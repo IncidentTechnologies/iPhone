@@ -116,24 +116,26 @@
     if(difficulty != useDifficulty){
         difficulty = useDifficulty;
         
-        // Remove all displayed notes
-        NSArray * displayedNotesKeys = [m_noteModelDictionary allKeys];
+        @synchronized(self){
+            // Remove all displayed notes
+            NSArray * displayedNotesKeys = [m_noteModelDictionary allKeys];
 
-        NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
-        
-        for ( NSValue * key in displayedNotesKeys )
-        {
-            NoteModel * note = [m_noteModelDictionary objectForKey:key];
-            [m_renderer removeModel:note];
-            [keysToRemove addObject:key];
+            NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
+            
+            for ( NSValue * key in displayedNotesKeys )
+            {
+                NoteModel * note = [m_noteModelDictionary objectForKey:key];
+                [m_renderer removeModel:note];
+                [keysToRemove addObject:key];
+            }
+            
+            [m_noteModelDictionary removeObjectsForKeys:keysToRemove];
+            
+            // Redisplay them
+            m_undisplayedFrames = [[NSMutableArray alloc] initWithArray:m_songModel.m_noteFrames];
+            
+            [self updateDisplayedFrames];
         }
-        
-        [m_noteModelDictionary removeObjectsForKeys:keysToRemove];
-        
-        // Redisplay them
-        m_undisplayedFrames = [[NSMutableArray alloc] initWithArray:m_songModel.m_noteFrames];
-        
-        [self updateDisplayedFrames];
         
     }
 }

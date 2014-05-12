@@ -57,12 +57,10 @@ static inline double radians (double degrees) {
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
             NSString *text = NSLocalizedString(@"99¢", NULL);
             
-            CGRect textRect = CGRectInset(rect, 4, 4);
-            //textRect.origin.x += 6;
-            textRect.origin.x = 50/2-[text length]*9/2;
-            textRect.origin.y += 10;
+            CGRect textRect = rect;
+            textRect.origin.y += 14;
             
-            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:18.0]];
+            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:18.0] lineBreakMode:NSLineBreakByClipping alignment:NSTextAlignmentCenter];
             
         } break;
             
@@ -72,14 +70,12 @@ static inline double radians (double degrees) {
             CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
             NSString *text = NSLocalizedString(@"FREE", NULL);
             
-            CGRect textRect = CGRectInset(rect, 4, 4);
-            textRect.origin.x = 40/2-[text length]*5/2;
-            textRect.origin.y += 13.0f;
-            textRect.size.width = 60;
+            CGRect textRect = rect;
+            textRect.origin.y += 17;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:12.0]];
-            
+            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:12.0] lineBreakMode:NSLineBreakByClipping alignment:NSTextAlignmentCenter];
+        
         } break;
             
         case BUY_BUTTON_CONFIRM: {
@@ -88,13 +84,11 @@ static inline double radians (double degrees) {
             CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
             NSString *text = NSLocalizedString(@"BUY", NULL);
             
-            CGRect textRect = CGRectInset(rect, 4, 4);
-            textRect.origin.x = 40/2-[text length]*5/2;
-            textRect.origin.y += 13.0f;
-            textRect.size.width = 60;
+            CGRect textRect = rect;
+            textRect.origin.y += 17;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:12.0]];
+            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:12.0] lineBreakMode:NSLineBreakByClipping alignment:NSTextAlignmentCenter];
         } break;
             
         case BUY_BUTTON_PROCESSING: {            

@@ -31,7 +31,7 @@
                             <color key="backgroundColor" red="0.270588249" green="0.3058823645" blue="0.32549020649999999" alpha="1" colorSpace="deviceRGB"/>
                         </view>
                         <view contentMode="scaleToFill" id="41" userLabel="SliderView">
-                            <rect key="frame" x="41" y="139" width="210" height="34"/>
+                            <rect key="frame" x="41" y="137" width="210" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" id="42">
@@ -46,7 +46,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <view contentMode="scaleToFill" id="47" userLabel="VolumeView">
-                                    <rect key="frame" x="30" y="5" width="150" height="22"/>
+                                    <rect key="frame" x="30" y="6" width="150" height="22"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>

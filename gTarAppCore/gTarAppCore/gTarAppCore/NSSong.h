@@ -24,6 +24,7 @@
 }
 
 @property (nonatomic, readonly) NSMutableArray * m_measures;
+@property (nonatomic, readonly) NSMutableArray * m_markers;
 
 @property (nonatomic, strong) NSString * m_author;
 @property (nonatomic, strong) NSString * m_title;

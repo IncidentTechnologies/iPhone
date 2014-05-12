@@ -35,16 +35,40 @@
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RlE-Dc-dOV">
                                     <rect key="frame" x="176" y="3" width="249" height="39"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EOI-UG-OcW">
+                                            <rect key="frame" x="100" y="4" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="49" id="ihA-DW-jwm"/>
+                                            </constraints>
+                                            <color key="onTintColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
+                                            <connections>
+                                                <action selector="setAudioRoute:" destination="-1" eventType="valueChanged" id="FsE-3I-Tvq"/>
+                                            </connections>
+                                        </switch>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="SPEAKER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwo-RH-Gqz">
+                                            <rect key="frame" x="159" y="6" width="86" height="27"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="AUX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnv-N9-rPa">
+                                            <rect key="frame" x="4" y="4" width="87" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" red="0.19215686269999999" green="0.23137254900000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="Wwo-RH-Gqz" firstAttribute="leading" secondItem="EOI-UG-OcW" secondAttribute="trailing" constant="10" id="JOI-Uo-4XC"/>
+                                        <constraint firstItem="EOI-UG-OcW" firstAttribute="leading" secondItem="fnv-N9-rPa" secondAttribute="trailing" constant="10" id="PLN-aT-rum"/>
+                                        <constraint firstAttribute="centerX" secondItem="EOI-UG-OcW" secondAttribute="centerX" id="PSY-2g-fcB"/>
+                                    </constraints>
                                 </view>
-                                <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EOI-UG-OcW">
-                                    <rect key="frame" x="272" y="7" width="51" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="onTintColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
-                                    <connections>
-                                        <action selector="setAudioRoute:" destination="-1" eventType="valueChanged" id="FsE-3I-Tvq"/>
-                                    </connections>
-                                </switch>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="OUTPUT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v26-ll-xDh">
                                     <rect key="frame" x="20" y="9" width="145" height="27"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -56,25 +80,10 @@
                                     <color key="textColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="SPEAKER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwo-RH-Gqz">
-                                    <rect key="frame" x="336" y="9" width="77" height="27"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="AUX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnv-N9-rPa">
-                                    <rect key="frame" x="185" y="7" width="72" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.60392156860000001" green="0.72156862749999995" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="Wwo-RH-Gqz" firstAttribute="leading" secondItem="EOI-UG-OcW" secondAttribute="trailing" constant="15" id="DSL-e4-oIc"/>
-                                <constraint firstItem="EOI-UG-OcW" firstAttribute="leading" secondItem="fnv-N9-rPa" secondAttribute="trailing" constant="15" id="HwK-Im-BcZ"/>
+                                <constraint firstAttribute="width" constant="428" id="0uM-3S-wGx"/>
                                 <constraint firstItem="RlE-Dc-dOV" firstAttribute="top" secondItem="fVG-pC-Cok" secondAttribute="top" constant="3" id="aj0-6t-whM"/>
                                 <constraint firstAttribute="trailing" secondItem="RlE-Dc-dOV" secondAttribute="trailing" constant="3" id="bsx-1i-CqX"/>
                                 <constraint firstItem="v26-ll-xDh" firstAttribute="leading" secondItem="fVG-pC-Cok" secondAttribute="leading" constant="20" symbolic="YES" id="i4y-L7-oQ6"/>
@@ -89,17 +98,41 @@
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qd5-sG-aRn">
                                     <rect key="frame" x="176" y="3" width="249" height="39"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="ON" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V19-pg-XOY">
+                                            <rect key="frame" x="159" y="6" width="77" height="27"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="OFF" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dm-3K-ZtF">
+                                            <rect key="frame" x="18" y="4" width="72" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sK5-GF-gB1">
+                                            <rect key="frame" x="100" y="4" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="49" id="Rh0-Dr-4GZ"/>
+                                            </constraints>
+                                            <color key="onTintColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
+                                            <connections>
+                                                <action selector="setAudioRoute:" destination="-1" eventType="valueChanged" id="iwu-Uh-JcB"/>
+                                                <action selector="setSlideHammer:" destination="-1" eventType="valueChanged" id="PFu-fU-D2p"/>
+                                            </connections>
+                                        </switch>
+                                    </subviews>
                                     <color key="backgroundColor" red="0.19215686269999999" green="0.23137254900000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="V19-pg-XOY" firstAttribute="leading" secondItem="sK5-GF-gB1" secondAttribute="trailing" constant="10" id="lne-l8-jXD"/>
+                                        <constraint firstItem="sK5-GF-gB1" firstAttribute="leading" secondItem="3Dm-3K-ZtF" secondAttribute="trailing" constant="10" id="q8U-HM-Ntf"/>
+                                        <constraint firstAttribute="centerX" secondItem="sK5-GF-gB1" secondAttribute="centerX" id="r6A-p3-2Wr"/>
+                                    </constraints>
                                 </view>
-                                <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sK5-GF-gB1">
-                                    <rect key="frame" x="272" y="7" width="51" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="onTintColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
-                                    <connections>
-                                        <action selector="setAudioRoute:" destination="-1" eventType="valueChanged" id="iwu-Uh-JcB"/>
-                                        <action selector="setSlideHammer:" destination="-1" eventType="valueChanged" id="PFu-fU-D2p"/>
-                                    </connections>
-                                </switch>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="SLIDING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHB-X5-W8j">
                                     <rect key="frame" x="20" y="9" width="145" height="27"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -111,29 +144,14 @@
                                     <color key="textColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="ON" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V19-pg-XOY">
-                                    <rect key="frame" x="336" y="9" width="77" height="27"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="OFF" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dm-3K-ZtF">
-                                    <rect key="frame" x="185" y="7" width="72" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.60392156860000001" green="0.72156862749999995" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="qd5-sG-aRn" secondAttribute="trailing" constant="3" id="1Oj-ts-HgD"/>
                                 <constraint firstItem="RHB-X5-W8j" firstAttribute="leading" secondItem="z6L-AQ-rdV" secondAttribute="leading" constant="20" symbolic="YES" id="7d1-Gg-kT0"/>
-                                <constraint firstItem="V19-pg-XOY" firstAttribute="leading" secondItem="sK5-GF-gB1" secondAttribute="trailing" constant="15" id="Kqh-Jr-S5w"/>
-                                <constraint firstItem="sK5-GF-gB1" firstAttribute="leading" secondItem="3Dm-3K-ZtF" secondAttribute="trailing" constant="15" id="adC-DN-SVp"/>
                                 <constraint firstItem="qd5-sG-aRn" firstAttribute="top" secondItem="z6L-AQ-rdV" secondAttribute="top" constant="3" id="apV-IY-QsJ"/>
                                 <constraint firstItem="qd5-sG-aRn" firstAttribute="centerY" secondItem="z6L-AQ-rdV" secondAttribute="centerY" id="aza-OH-vBJ"/>
+                                <constraint firstAttribute="width" constant="428" id="h8f-oH-lce"/>
                                 <constraint firstItem="qd5-sG-aRn" firstAttribute="leading" secondItem="z6L-AQ-rdV" secondAttribute="leading" constant="176" id="sZb-Sa-cms"/>
                             </constraints>
                         </view>
@@ -165,12 +183,10 @@
                     </subviews>
                     <color key="backgroundColor" red="0.1960784314" green="0.23137254900000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="fVG-pC-Cok" secondAttribute="trailing" constant="18" id="B4Q-Ul-9ia"/>
+                        <constraint firstAttribute="centerX" secondItem="z6L-AQ-rdV" secondAttribute="centerX" id="DQS-zH-mGj"/>
                         <constraint firstAttribute="centerX" secondItem="1824" secondAttribute="centerX" id="DkR-lX-5vi"/>
-                        <constraint firstAttribute="trailing" secondItem="z6L-AQ-rdV" secondAttribute="trailing" constant="18" id="FPx-U4-n8U"/>
                         <constraint firstItem="9YN-MN-VAB" firstAttribute="centerX" secondItem="1824" secondAttribute="centerX" id="Osn-ph-MiQ"/>
-                        <constraint firstItem="fVG-pC-Cok" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="18" id="gdF-ti-aR6"/>
-                        <constraint firstItem="z6L-AQ-rdV" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="18" id="vdD-5I-tPQ"/>
+                        <constraint firstAttribute="centerX" secondItem="fVG-pC-Cok" secondAttribute="centerX" id="Q1o-RK-b79"/>
                     </constraints>
                 </view>
             </subviews>

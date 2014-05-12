@@ -23,13 +23,20 @@
 }
 
 + (NSString*)stringFromNow:(NSTimeInterval)time {
+    
     NSDate * date = [NSDate date];
     NSTimeInterval now = [date timeIntervalSince1970];
+    NSTimeInterval timeZoneOffset = [[NSTimeZone localTimeZone] secondsFromGMT];
+    
+    now = now - timeZoneOffset;
+    
+    // Adjust "time"
     
     if ( time > now )
         return [NSString stringWithFormat:NSLocalizedString(@"The Future", NULL)];
     
     NSTimeInterval delta = now - time;
+    
     NSInteger seconds = (NSInteger)delta;
     // seconds
     if ( seconds == 1 )

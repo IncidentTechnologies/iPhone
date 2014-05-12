@@ -26,6 +26,7 @@
 "Invalid Email" = "Email non valido";
 "Invalid Username" = "Nome utente non valido";
 "Invalid Password" = "Password non valida";
+"Invalid login credentials" = "Accesso non valido";
 "Facebook failed to login" = "Facebook login non riuscito";
 
 // ActivityFeedCell
@@ -44,6 +45,7 @@
 "ARTIST" = "ARTISTA";
 "TITLE" = "TITOLO";
 "Back" = "Indietro";
+"BACK" = "INDIETRO";
 "Song List" = "Canzoni";
 
 // Play View
@@ -59,6 +61,8 @@
 "Restart" = "Riavviare";
 "RESTART" = "RIAVVIARE";
 "SCORE" = "PARTITURA";
+"BEST SESSION" = "MIGLIORE";
+"TOTAL" = "TOTALE";
 "NOTES HIT" = "NOTE SUONATE";
 "IN A ROW" = "CONSECUTIVO";
 "ACCURACY" = "PRECISIONE";
@@ -105,6 +109,7 @@
 "Carl's Synth" = "Synth di Carl";
 "Droplet" = "Gocciolina";
 "Square" = "Square";
+"Warm Analogue" = "Caldo Analogico";
 
 // Time formatter
 "The Future" = "il futuro";

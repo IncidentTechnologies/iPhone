@@ -23,6 +23,7 @@
 #import <gTarAppCore/NSSong.h>
 #import <gTarAppCore/NSNoteFrame.h>
 #import <gTarAppCore/NSScoreTracker.h>
+#import <gTarAppCore/NSMarker.h>
 
 #import "Mixpanel.h"
 #import "SongDisplayController.h"
@@ -103,6 +104,7 @@ extern UserController * g_userController;
     
     // Standalone
     CGPoint initPoint;
+    BOOL isScrolling;
     BOOL isStandalone;
     
     BOOL fretOneOn;
@@ -146,6 +148,7 @@ extern UserController * g_userController;
         _audioRouteTimeStart = [NSDate date];
         _metronomeTimeStart = [NSDate date];
         
+        isScrolling = standalone;
         isStandalone = standalone;
         isPracticeMode = practiceMode;
         
@@ -223,7 +226,14 @@ extern UserController * g_userController;
     //[self setStandalone];
     [self updateDifficultyDisplay];
     
+    // The first time we load this up, parse the song
+    _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom];
+    
+    // Init song XML
+    [self initSongModel];
+    
     [self setPracticeMode];
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -244,6 +254,14 @@ extern UserController * g_userController;
         
         [self drawPracticeMarkersForSong];
         
+        _tempoButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        
+        if(!isStandalone){
+            _tempoButton.titleLabel.text = NSLocalizedString(@"NONE", NULL);
+        }else{
+            _tempoButton.titleLabel.text = @"100%";
+        }
+        
     }else{
         
         _practiceViewOpen = NO;        
@@ -259,6 +277,7 @@ extern UserController * g_userController;
         NSLog(@"GTAR DISCONNECTED USE STANDALONE");
         
         isStandalone = YES;
+        isScrolling = YES;
         [self standaloneReady];
         [self showPauseButton];
         
@@ -267,6 +286,7 @@ extern UserController * g_userController;
         NSLog(@"GTAR IS CONNECTED USE NORMAL");
         
         isStandalone = NO;
+        isScrolling = NO;
         [self hidePauseButton];
         
     }
@@ -323,7 +343,7 @@ extern UserController * g_userController;
     // Attach the volume view controller
     CGRect targetFrame = [_topBar convertRect:_volumeSliderView.frame toView:self.view];
     
-    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil isInverse:YES];
+    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster isInverse:YES];
     
     [_volumeViewController attachToSuperview:self.view withFrame:targetFrame];
     
@@ -339,9 +359,6 @@ extern UserController * g_userController;
     // We want the main thread to finish running the above and updating the views
     // before this stuff runs. It will take awhile, and we want the user
     // to see all the views while they wait.
-    
-    // The first time we load this up, parse the song
-    _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom];
     
     // We let the previous screen set the sample pack of this song.
     //[g_soundMaster didSelectInstrument:_song.m_instrument withSelector:@selector(instrumentDidLoad:) andOwner:self];
@@ -543,9 +560,7 @@ extern UserController * g_userController;
     NSString *tempo = _tempoButton.titleLabel.text;
     NSString *newTempo;
     
-    if([tempo isEqualToString:NSLocalizedString(@"NONE", NULL)]){
-        newTempo = @"25%";
-    }else if([tempo isEqualToString:@"25%"]){
+    if([tempo isEqualToString:NSLocalizedString(@"NONE", NULL)] || [tempo isEqualToString:@"150%"]){
         newTempo = @"50%";
     }else if([tempo isEqualToString:@"50%"]){
         newTempo = @"66%";
@@ -553,8 +568,14 @@ extern UserController * g_userController;
         newTempo = @"75%";
     }else if([tempo isEqualToString:@"75%"]){
         newTempo = @"100%";
+    }else if([tempo isEqualToString:@"100%"]){
+        newTempo = @"125%";
     }else{
-        newTempo = NSLocalizedString(@"NONE", NULL);
+        if(isStandalone){
+            newTempo = @"150%";
+        }else{
+            newTempo = NSLocalizedString(@"NONE", NULL);
+        }
     }
     
     [_tempoButton setTitle:newTempo forState:UIControlStateNormal];
@@ -568,11 +589,20 @@ extern UserController * g_userController;
     double loopStart = _heatMapSelector.frame.origin.x / _practiceHeatMapView.frame.size.width;
     double loopEnd = (_heatMapSelector.frame.origin.x + _heatMapSelector.frame.size.width) / _practiceHeatMapView.frame.size.width;
     
+    // Set tempo
+    isScrolling = [_tempoButton.titleLabel.text isEqualToString:NSLocalizedString(@"NONE", NULL)] ? NO : YES;
+    double tempoPercent = 1.0;
+    
+    if(isScrolling){
+        tempoPercent = [[_tempoButton.titleLabel.text stringByReplacingOccurrencesOfString:@"%" withString:@""] doubleValue]/100;
+    }
+    
+    // Set metronome
     if(_practiceMetronomeSwitch.isOn != _playMetronome){
         [self toggleMetronome];
     }
     
-    [self startWithSongXmlDomPracticeFrom:loopStart toEnd:loopEnd withLoops:loops];
+    [self startWithSongXmlDomPracticeFrom:loopStart toEnd:loopEnd withLoops:loops andTempoPercent:tempoPercent];
     
     if(_playMetronome){
         _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
@@ -580,11 +610,7 @@ extern UserController * g_userController;
         NSLog(@"Beat is %f",1.0/_songModel.m_beatsPerSecond);
     }
     
-    
-    // Then...
-    // Set tempo
-    // Set metronome
-    
+    // Load screen
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
     [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
@@ -819,18 +845,21 @@ extern UserController * g_userController;
 
 - (void)drawPracticeMarkersForSong
 {
-    // TODO: check for markers in the actual song
-    // Draw four markers by default
-    
+
     UIColor * yellowMarkerColor = [UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1.0];
     
-    // Percentages
-    NSDictionary * markerOne = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.0],@"StartBeat",@"Section I",@"Name", nil];
-    NSDictionary * markerTwo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.25],@"StartBeat",@"Section II",@"Name", nil];
-    NSDictionary * markerThree = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.5],@"StartBeat",@"Section III",@"Name", nil];
-    NSDictionary * markerFour = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.75],@"StartBeat",@"Section IV",@"Name", nil];
-    
-    NSArray * defaultMarkers = [[NSArray alloc] initWithObjects:markerOne,markerTwo,markerThree,markerFour, nil];
+    // Check for markers in the song or use defaults
+    double songBeats = MAX(_songModel.m_lengthBeats,1); // ensure not 0 in case of error
+    NSArray * songMarkers = _songModel.m_song.m_markers;
+    if(songMarkers == nil || [songMarkers count] == 0){
+        NSMarker * markerOne = [[NSMarker alloc] initWithStartBeat:0.0*songBeats andName:@"Section I"];
+        NSMarker * markerTwo = [[NSMarker alloc] initWithStartBeat:0.25*songBeats andName:@"Section II"];
+        NSMarker * markerThree = [[NSMarker alloc] initWithStartBeat:0.5*songBeats andName:@"Section III"];
+        NSMarker * markerFour = [[NSMarker alloc] initWithStartBeat:0.75*songBeats andName:@"Section IV"];
+        
+        NSArray * defaultMarkers = [[NSArray alloc] initWithObjects:markerOne,markerTwo,markerThree,markerFour,nil];
+        songMarkers = defaultMarkers;
+    }
     
     markerButtons = [[NSMutableArray alloc] init];
     
@@ -838,11 +867,11 @@ extern UserController * g_userController;
     
     NSLog(@"MapWidth is %f",mapWidth);
     
-    for(int d = 0; d < [defaultMarkers count]; d++){
+    for(int d = 0; d < [songMarkers count]; d++){
         
-        NSDictionary * marker = [defaultMarkers objectAtIndex:d];
+        NSMarker * marker = [songMarkers objectAtIndex:d];
         
-        UIButton * markerButton = [[UIButton alloc] initWithFrame:CGRectMake(mapWidth*[[marker objectForKey:@"StartBeat"] doubleValue], 0, MARKER_SIZE*5, MARKER_HEIGHT*1.5)];
+        UIButton * markerButton = [[UIButton alloc] initWithFrame:CGRectMake(mapWidth*(marker.m_startBeat/songBeats), 0, MARKER_SIZE*5, MARKER_HEIGHT*1.5)];
         
         // Draw marker
         
@@ -874,7 +903,7 @@ extern UserController * g_userController;
         [markerTextLabel setFont:[UIFont fontWithName:@"Avenir Next" size:10.0]];
         [markerTextLabel setTextColor:yellowMarkerColor];
         [markerTextLabel setAlpha:0.7];
-        markerTextLabel.text = [marker objectForKey:@"Name"];
+        markerTextLabel.text = marker.m_name;
         
         [markerButton addSubview:markerTextLabel];
         
@@ -1599,7 +1628,7 @@ extern UserController * g_userController;
                                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
                                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
                                                     nil]];
-     */
+    */
 
 }
 
@@ -1926,19 +1955,6 @@ extern UserController * g_userController;
     _currentFrame = nil;
     _lastTappedFrame = nil;
     
-    // Update the menu labels
-    [_songTitleLabel setText:_userSong.m_title];
-    [_scoreSongTitleLabel setText:_userSong.m_title];
-    [_practiceSongTitleLabel setText:_userSong.m_title];
-    [_songArtistLabel setText:_userSong.m_author];
-    [_scoreSongArtistLabel setText:_userSong.m_author];
-    [_practiceSongArtistLabel setText:_userSong.m_author];
-    [_finishPracticeButton setHidden:YES];
-    [_finishButton setHidden:YES];
-    [_finishRestartButton setHidden:YES];
-    [_outputView setHidden:NO];
-    [_backButton setEnabled:YES];
-    
     //
     // Start off the song stuff
     //
@@ -2002,18 +2018,37 @@ extern UserController * g_userController;
     _animateSongScrolling = YES;
 }
 
+- (void)updateMenuLabelsForSongStart
+{
+    
+    // Update the menu labels
+    [_songTitleLabel setText:_userSong.m_title];
+    [_scoreSongTitleLabel setText:_userSong.m_title];
+    [_practiceSongTitleLabel setText:_userSong.m_title];
+    [_songArtistLabel setText:_userSong.m_author];
+    [_scoreSongArtistLabel setText:_userSong.m_author];
+    [_practiceSongArtistLabel setText:_userSong.m_author];
+    [_finishPracticeButton setHidden:YES];
+    [_finishButton setHidden:YES];
+    [_finishRestartButton setHidden:YES];
+    [_outputView setHidden:NO];
+    [_backButton setEnabled:YES];
+    
+}
+
 // This is the song init for practice mode standalone/regular
-- (void)startWithSongXmlDomPracticeFrom:(double)start toEnd:(double)end withLoops:(int)loops
+- (void)startWithSongXmlDomPracticeFrom:(double)start toEnd:(double)end withLoops:(int)loops andTempoPercent:(double)tempoPercent
 {
     
     m_loopStart = start;
     m_loopEnd = end;
     m_loops = loops;
     
-    [self initSongModel];
+    [self initSongModel]; // reinit
+    [self updateMenuLabelsForSongStart];
     
     // Give a little runway to the player
-    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isStandalone:isStandalone fromStart:start toEnd:end withLoops:loops];
+    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:isScrolling withTempoPercent:tempoPercent fromStart:start toEnd:end withLoops:loops];
     
     // Light up the first frame
     if(g_gtarController.connected == YES){
@@ -2041,10 +2076,11 @@ extern UserController * g_userController;
     m_loopEnd = 1.0;
     m_loops = 0;
     
-    [self initSongModel];
+    [self initSongModel]; // reinit
+    [self updateMenuLabelsForSongStart];
     
     // Give a little runway to the player
-    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isStandalone:isStandalone fromStart:0 toEnd:-1 withLoops:0];
+    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
     
     // Light up the first frame
     if(g_gtarController.connected == YES){
@@ -2472,13 +2508,13 @@ extern UserController * g_userController;
     _currentFrame = frame;
     
     // Align us more pefectly with the frame
-    if(!isStandalone){
+    if(!isScrolling){
         [_songModel incrementBeatSerialAccess:(frame.m_absoluteBeatStart - _songModel.m_currentBeat)];
     }
     
     _refreshDisplay = YES;
     
-    if(isStandalone){
+    if(isScrolling){
         _animateSongScrolling = YES;
     }else{
         _animateSongScrolling = NO;
@@ -2500,7 +2536,7 @@ extern UserController * g_userController;
     
     if(!isStandalone){
         // Calculate score only on frame release for regular play
-        double accuracy = [_scoreTracker scoreFrame:frame onBeat:-1 withComplexity:0 endStreak:NO isStandalone:NO forLoop:[_songModel getCurrentLoop]];
+        double accuracy = [_scoreTracker scoreFrame:frame onBeat:-1 withComplexity:0 endStreak:NO isStandalone:NO forLoop:MIN([_songModel getCurrentLoop],m_loops)];
         [self updateScoreDisplayWithAccuracy:accuracy];
     }
     
@@ -2864,7 +2900,7 @@ extern UserController * g_userController;
     CGFloat deltaX = currentPoint.x - previousPoint.x;
     
     // Only shift render view if delta x is large enough
-    if(!isStandalone){
+    if(!isScrolling){
         if(abs(initPoint.x - currentPoint.x) > 50){
                 [_displayController shiftViewDelta:-deltaX];
         }
@@ -2874,9 +2910,7 @@ extern UserController * g_userController;
     if(isStandalone && abs(initPoint.y - currentPoint.y) > 10 && !_songIsPaused){
         
         CGPoint touchPoint = [touch locationInView:self.glView];
-        //[self strumNoteFromTouchPoint:touchPoint];
         [self strumNoteFromTouchPoint:[NSValue valueWithCGPoint:touchPoint]];
-        //[self performSelectorInBackground:@selector(strumNoteFromTouchPoint:) withObject:[NSValue valueWithCGPoint:touchPoint]];
         
     }
     
@@ -3144,7 +3178,7 @@ extern UserController * g_userController;
             }
         }
         
-        double accuracy = [_scoreTracker scoreFrame:tappedFrame onBeat:_songModel.m_currentBeat withComplexity:numFretsOn endStreak:endStreak isStandalone:isStandalone forLoop:[_songModel getCurrentLoop]];
+        double accuracy = [_scoreTracker scoreFrame:tappedFrame onBeat:_songModel.m_currentBeat withComplexity:numFretsOn endStreak:endStreak isStandalone:isStandalone forLoop:MIN([_songModel getLoopForBeat:tappedFrame.m_absoluteBeatStart],m_loops)];
         
         // Save the accuracy in note.m_hit
         for(NSNote * nn in tappedFrame.m_notes){

@@ -197,12 +197,12 @@
     if(_userSong.m_title != NULL)
         [_labelSongTitle setText:_userSong.m_title];
     else
-        [_labelSongTitle setText:@"Unkown"];
+        [_labelSongTitle setText:@"Unknown"];
     
     if(_userSong.m_author != NULL)
         [_labelSongArtist setText:_userSong.m_author];
     else
-        [_labelSongArtist setText:@"Unkown"];
+        [_labelSongArtist setText:@"Unknown"];
     
     if ( _userSong.m_difficulty == 0)
         _songSkill.image = [UIImage imageNamed:@"Skill_GREEN.png"];

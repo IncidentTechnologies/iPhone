@@ -19,13 +19,14 @@
 {
     BOOL invertView;
     MPVolumeView *_mpVolumeView;
+    SoundMaster *g_soundMaster;
 }
 
 @end
 
 @implementation VolumeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isInverse:(BOOL)invert;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster *)soundMaster isInverse:(BOOL)invert;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
@@ -34,6 +35,8 @@
         
         invertView = invert;
         [super invertView:invert];
+        
+        g_soundMaster = soundMaster;
         
     }
     return self;
@@ -49,10 +52,6 @@
     UIImage * sliderTrackMinImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:16 topCapHeight:0];
     UIImage * sliderTrackMaxImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:17 topCapHeight:0];
     UIImage * sliderKnob = [UIImage imageNamed:@"VolumeKnob.png"];
-    
-    // This is the non-deprecated way of doing it
-//    sliderTrackMinImage = [sliderTrackMinImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 17) resizingMode:UIImageResizingModeStretch];
-//    sliderTrackMaxImage = [sliderTrackMinImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 17, 0, 16) resizingMode:UIImageResizingModeStretch];
     
     [_volumeSlider setMinimumTrackImage:sliderTrackMinImage forState:UIControlStateNormal];
     [_volumeSlider setMaximumTrackImage:sliderTrackMaxImage forState:UIControlStateNormal];
@@ -89,10 +88,7 @@
     
     [_volumeView addSubview:_mpVolumeView];
     
-    //NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-    //[self showVolumeSliderForRoute:routeName];
-    
-    NSLog(@"TODO: show volume slider for audio route");
+    [self showVolumeSliderForRoute:nil];
     
 }
 
@@ -141,10 +137,7 @@
 
 - (IBAction)volumeValueChanged:(id)sender
 {
-    // Change the volume of the audio controller
-    //[g_audioController setM_volumeGain:_volumeSlider.value];
-    
-    NSLog(@"TODO: change the volume of the audio controller");
+    [g_soundMaster setChannelGain:_volumeSlider.value];
 }
 
 - (void)attachToSuperview:(UIView *)view
@@ -165,19 +158,17 @@
     [self showVolumeSliderForRoute:routeName];
 }
 
-// The global volume slider is not available when audio is routed to lineout.
-// If the audio is not being outputed to lineout hide the global volume slider,
-// and display our own slider that controlls volume in this mode.
+// For the new audio controller always show the volume slider
 - (void)showVolumeSliderForRoute:(NSString*)routeName
 {
-    if ([routeName isEqualToString:(NSString*)kAudioSessionOutputRoute_LineOut])
-    {
+    //if ([routeName isEqualToString:(NSString*)kAudioSessionOutputRoute_LineOut])
+    //{
         // show custom volume view
         [_volumeView setHidden:YES];
         [_volumeTrackView setHidden:YES];
         
         [_volumeSlider setHidden:NO];
-    }
+    /*}
     else
     {
         // show standard MPVolumeView
@@ -186,6 +177,7 @@
         
         [_volumeSlider setHidden:YES];
     }
+    */
 }
 
 @end

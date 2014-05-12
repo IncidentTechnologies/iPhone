@@ -29,7 +29,8 @@
 
 #define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats, see also PlayViewController
 #define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.2f)
-#define STANDALONE_BEATS_PER_SECOND 42/60.0
+#define SCROLLING_BEATS_PER_SECOND 42/60.0
+#define LOOP_GAP 1.0
 
 //- (id)initWithSongXmp:(NSString*)xmpBlob
 //{
@@ -55,6 +56,15 @@
         
         m_loops = 0;
         
+        NSArray * notesArray = [m_song getSortedNotes];
+        
+        // First set length of beats
+        for ( NSNote * note in notesArray )
+        {
+            m_lengthBeats = MAX(m_lengthBeats,note.m_absoluteBeatStart + note.m_duration);
+        }
+        
+        
     }
     
     return self;
@@ -70,10 +80,10 @@
 
 - (void)startWithDelegate:(id)delegate
 {
-    [self startWithDelegate:delegate andBeatOffset:0 fastForward:NO isStandalone:NO];
+    [self startWithDelegate:delegate andBeatOffset:0 fastForward:NO isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
 }
 
-- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isStandalone:(BOOL)standalone fromStart:(double)start toEnd:(double)end withLoops:(int)loops
+- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isScrolling:(BOOL)isScrolling withTempoPercent:(double)tempoPercent fromStart:(double)start toEnd:(double)end withLoops:(int)loops
 {
     
     // clear remnants from last song
@@ -88,10 +98,10 @@
     NSNoteFrame * noteFrame = nil;
     
     // First set length of beats
-    for ( NSNote * note in notesArray )
-    {
-        m_lengthBeats = MAX(m_lengthBeats,note.m_absoluteBeatStart + note.m_duration);
-    }
+    //for ( NSNote * note in notesArray )
+    //{
+    //    m_lengthBeats = MAX(m_lengthBeats,note.m_absoluteBeatStart + note.m_duration);
+    //}
     
     // Then set start and end
     [self setStartBeat:start*m_lengthBeats];
@@ -100,15 +110,21 @@
     
     [self setEndBeat:end*m_lengthBeats];
     
+    // Detect first audible beat
+    double firstAudibleBeat = [self getFirstAudibleBeat:notesArray];
+    if(ffwd){
+        beats += firstAudibleBeat;
+    }
+    
     // Sort the notes into note frames
     m_lengthBeats = 0;
     
     for( int l = 0; l <= loops; l++ ){
         for ( NSNote * note in notesArray )
         {
-            if(note.m_absoluteBeatStart < m_endBeat && note.m_absoluteBeatStart >= m_startBeat){
+            if(note.m_absoluteBeatStart+note.m_duration < m_endBeat && note.m_absoluteBeatStart-firstAudibleBeat >= m_startBeat){
                 
-                double timedNoteStart = (note.m_absoluteBeatStart - m_startBeat) + l*(m_endBeat - m_startBeat);
+                double timedNoteStart = (note.m_absoluteBeatStart - m_startBeat) + l*(m_endBeat - m_startBeat) - l*firstAudibleBeat + l*LOOP_GAP;
                 
                 if ( noteFrame == nil ||
                     (timedNoteStart - noteFrame.m_absoluteBeatStart) > m_frameWidthBeats )
@@ -140,9 +156,9 @@
     
     
     // Control the tempo throughout Standalone
-    if(standalone){
+    if(isScrolling){
     
-        m_beatsPerSecond = STANDALONE_BEATS_PER_SECOND;
+        m_beatsPerSecond = SCROLLING_BEATS_PER_SECOND * tempoPercent;
     
     }else{
         
@@ -151,13 +167,6 @@
     }
     
     m_lengthSeconds = m_lengthBeats / m_beatsPerSecond;
-    
-    if(ffwd){
-        
-        double firstAudibleBeat = [self getFirstAudibleBeat];
-        beats = beats + firstAudibleBeat;
-        
-    }
     
     if ( m_lengthBeats == 0 )
     {
@@ -188,20 +197,31 @@
     }
 }
 
-- (double)getFirstAudibleBeat
+- (double)getFirstAudibleBeat:(NSArray *)notesArray
 {
-    if([m_noteFrames count] > 0){
+    if([notesArray count] > 0){
+        
+        NSNote * note = [notesArray objectAtIndex:0];
+        
+        return note.m_absoluteBeatStart;
+    }
+    
+    return 0;
+    
+    /*if([m_noteFrames count] > 0){
         
         NSNoteFrame * nextFrame = [m_noteFrames objectAtIndex:0];
+        NSNoteFrame * impliedNextFrame = m_nextFrame;
         
         if(nextFrame != nil){
             return nextFrame.m_absoluteBeatStart;
         }else{
             return 0;
         }
+        
     }else{
         return 0;
-    }
+    }*/
 }
 
 - (void)incrementBeatSerialAccess:(double)delta
@@ -263,7 +283,6 @@
         [self loopSongOrEndSong];
         
     }
-    
     
     m_noteFramesRemaining = [[NSMutableArray alloc] init];
     
@@ -428,6 +447,15 @@
     int currentLoop = m_currentBeat / (m_endBeat - m_startBeat);
     
     return currentLoop;
+}
+
+- (int)getLoopForBeat:(double)beat
+{
+    int beatLoop = beat / (m_endBeat - m_startBeat);
+    
+    NSLog(@"LOOP IS %i",beatLoop);
+    
+    return beatLoop;
 }
 
 - (void)setStartBeat:(double)start

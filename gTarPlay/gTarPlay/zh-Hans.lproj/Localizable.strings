@@ -23,6 +23,7 @@
 "Invalid Email" = "无效邮件";
 "Invalid Username" = "无效用户名";
 "Invalid Password" = "无效密码";
+"Invalid login credentials" = "无效登录";
 "Facebook failed to login" = "无法注册Facebook";
 
 // ActivityFeedCell
@@ -41,6 +42,7 @@
 "ARTIST" = "艺术家";
 "TITLE" = "标题";
 "Back" = "返回";
+"BACK" = "返回";
 "Song List" = "歌曲";
 
 // Play View
@@ -56,6 +58,8 @@
 "Restart" = "重新开始";
 "RESTART" = "重新开始";
 "SCORE" = "得分";
+"BEST SESSION" = "最好的会话";
+"TOTAL" = "总";
 "NOTES HIT" = "弹奏的音符";
 "IN A ROW" = "连续";
 "ACCURACY" = "准确性";
@@ -103,6 +107,7 @@
 "Carl's Synth" = "卡尔合成器";
 "Droplet" = "水滴";
 "Square" = "广场";
+"Warm Analogue" = "温暖的模拟";
 
 // Time formatter
 "The Future" = "将来";

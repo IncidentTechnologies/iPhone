@@ -178,11 +178,20 @@
     // Add to total
     m_totalScore += subscore;
     if(isPracticeMode){
-        int loopScore = [[m_loopScores objectAtIndex:loop] intValue];
-        int newScore = loopScore + subscore;
         
-        [m_loopScores setObject:[NSNumber numberWithInt:newScore] atIndexedSubscript:loop];
-        m_score = newScore;
+        if(loop > [m_loopScores count]){
+            
+            NSLog(@"Trying to access the next loop");
+            return percentAccuracy;
+            
+        }else{
+        
+            int loopScore = [[m_loopScores objectAtIndex:loop] intValue];
+            int newScore = loopScore + subscore;
+            
+            [m_loopScores setObject:[NSNumber numberWithInt:newScore] atIndexedSubscript:loop];
+            m_score = newScore;
+        }
         
     }else{
         m_score += subscore;

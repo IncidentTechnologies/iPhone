@@ -26,6 +26,7 @@
 "Invalid Email" = "EMAIL INVALIDE";
 "Invalid Username" = "NOM D'UTILISATEUR INVALIDE";
 "Invalid Password" = "MOT DE PASSE INVALIDE";
+"Invalid login credentials" = "CONNEXION INVALIDE";
 "Facebook failed to login" = "FACEBOOK A OMIS DE LOGIN";
 
 // ActivityFeedCell
@@ -44,6 +45,7 @@
 "ARTIST" = "ARTISTE";
 "TITLE" = "TITRE";
 "Back" = "Retour";
+"BACK" = "RETOUR";
 "Song List" = "Chansons";
 
 // Play View
@@ -59,6 +61,8 @@
 "Restart" = "Reprendre";
 "RESTART" = "REPRENDRE";
 "SCORE" = "POINTAGE";
+"BEST SESSION" = "MEILLEUR";
+"TOTAL" = "TOTAL";
 "NOTES HIT" = "NOTES JOUÉES";
 "IN A ROW" = "CONSÉCUTIF";
 "ACCURACY" = "PRÉCISION";
@@ -105,6 +109,7 @@
 "Carl's Synth" = "Synthétiseur Carl";
 "Droplet" = "Gouttelette";
 "Square" = "Piano carré";
+"Warm Analogue" = "Chaud Analogique";
 
 // Time formatter
 "The Future" = "la futre";
