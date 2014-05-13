@@ -38,7 +38,6 @@
 		58868EDB187619ED00B469C2 /* BottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58868ED9187619ED00B469C2 /* BottomBar.xib */; };
 		588BF9E018AC4F380086E816 /* OptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BF9DF18AC4F370086E816 /* OptionsView.xib */; };
 		5894D61A186505BD00849C71 /* SeqSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894D619186505BD00849C71 /* SeqSetViewController.m */; };
-		58A59522188619C100696614 /* libGtarControllerDeploy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A59521188619C100696614 /* libGtarControllerDeploy.a */; };
 		58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */; };
 		58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */; };
 		58B1BE2718AD524900A3C0CC /* OptionsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */; };
@@ -680,7 +679,6 @@
 				58B9AD0E187B61C5001EDD33 /* libc++.dylib in Frameworks */,
 				6DAB0CE918C7B8F400FFBDE6 /* libTestFlight.a in Frameworks */,
 				6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */,
-				58A59522188619C100696614 /* libGtarControllerDeploy.a in Frameworks */,
 				6DA8571618EF448400CCA191 /* AddressBook.framework in Frameworks */,
 				6DA8571718EF448400CCA191 /* AddressBookUI.framework in Frameworks */,
 				58EEB7AE1868EEC20089BFD9 /* AudioToolbox.framework in Frameworks */,
@@ -2115,10 +2113,9 @@
 				);
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					/Users/kateschnippering/Documents/Sites/incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
-					/Users/kateschnippering/Documents/Sites/incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
-					/Users/kateschnippering/Documents/Sites/incident/iPhone,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarSequencer-fbyfpltlmuzdzqfokmqpbtlpszfi/Build/Products/Debug-iphoneos",
+					/Users/kateschnippering/Documents/Sites/incident/Sequence/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
+					/Users/kateschnippering/Documents/Sites/incident/Sequence/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
+					/Users/kateschnippering/Documents/Sites/incident/Sequence,
 					"$(PROJECT_DIR)/gTarSequencer/TestFlightSDK3.0.0",
 				);
 				OTHER_CFLAGS = "-mthumb";
@@ -2153,10 +2150,9 @@
 				);
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					/Users/kateschnippering/Documents/Sites/incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
-					/Users/kateschnippering/Documents/Sites/incident/iPhone/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
-					/Users/kateschnippering/Documents/Sites/incident/iPhone,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/gTarSequencer-fbyfpltlmuzdzqfokmqpbtlpszfi/Build/Products/Debug-iphoneos",
+					/Users/kateschnippering/Documents/Sites/incident/Sequence/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
+					/Users/kateschnippering/Documents/Sites/incident/Sequence/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
+					/Users/kateschnippering/Documents/Sites/incident/Sequence,
 					"$(PROJECT_DIR)/gTarSequencer/TestFlightSDK3.0.0",
 				);
 				OTHER_CFLAGS = "-mthumb";

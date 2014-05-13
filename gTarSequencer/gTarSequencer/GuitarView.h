@@ -7,7 +7,7 @@
 //
 
 #import "AppData.h"
-#import <GtarController/GtarController.h>
+#import "GtarController.h"
 #import "Measure.h"
 
 @protocol GuitarViewDelegate <NSObject>

@@ -7,7 +7,7 @@
 //
 
 #import "AppData.h"
-#import <GtarController/GtarController.h>
+#import "GtarController.h"
 #import "Pattern.h"
 #import "SoundMaker.h"
 

@@ -1,5 +1,5 @@
 //
-//  SoundMakerInterface.m
+//  SoundMaster_.mm
 //  Sequence
 //
 //  Created by Kate Schnippering on 3/11/14.

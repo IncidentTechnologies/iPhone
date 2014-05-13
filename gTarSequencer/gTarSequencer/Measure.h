@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <GtarController/GtarController.h>
+#import "GtarController.h"
 #import "AppData.h"
 #import "SoundMaker.h"
 
