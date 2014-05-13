@@ -134,6 +134,8 @@
      postNotificationName:@"ExitFreePlay"
      object:self];
     
+    [delegate backButtonClicked];
+    
     [self.parentViewController.navigationController popViewControllerAnimated:YES];
 }
 

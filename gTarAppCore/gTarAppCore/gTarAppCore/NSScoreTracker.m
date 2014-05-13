@@ -226,7 +226,7 @@
     
     [self scoreFramePerfectly:frame];
     
-    [self starRateScore];
+    //[self starRateScore];
 }
 
 - (NSDictionary *)aggregateScoreEndOfSong

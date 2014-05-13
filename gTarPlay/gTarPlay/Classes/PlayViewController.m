@@ -254,14 +254,6 @@ extern UserController * g_userController;
         
         [self drawPracticeMarkersForSong];
         
-        _tempoButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        
-        if(!isStandalone){
-            _tempoButton.titleLabel.text = NSLocalizedString(@"NONE", NULL);
-        }else{
-            _tempoButton.titleLabel.text = @"100%";
-        }
-        
     }else{
         
         _practiceViewOpen = NO;        
@@ -277,18 +269,27 @@ extern UserController * g_userController;
         NSLog(@"GTAR DISCONNECTED USE STANDALONE");
         
         isStandalone = YES;
-        isScrolling = YES;
         [self standaloneReady];
-        [self showPauseButton];
         
     }else{
         
         NSLog(@"GTAR IS CONNECTED USE NORMAL");
         
         isStandalone = NO;
-        isScrolling = NO;
-        [self hidePauseButton];
         
+    }
+    
+    [self setScrolling:isStandalone];
+}
+
+- (void) setScrolling:(BOOL)scrolling
+{
+    isScrolling = scrolling;
+    
+    if(isScrolling){
+        [self showPauseButton];
+    }else{
+        [self hidePauseButton];
     }
 }
 
@@ -297,7 +298,7 @@ extern UserController * g_userController;
     [_startPracticeButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
     [_practiceBackButton setTitle:NSLocalizedString(@"BACK", NULL) forState:UIControlStateNormal];
     [_finishButton setTitle:NSLocalizedString(@"SAVE & FINISH", NULL) forState:UIControlStateNormal];
-    [_finishRestartButton setTitle:NSLocalizedString(@"RESTART", NULL) forState:UIControlStateNormal];
+    [_finishRestartButton setTitle:NSLocalizedString(@"PLAY", NULL) forState:UIControlStateNormal];
     
     _scoreScoreLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SCORE", NULL)];
     _scoreBestSessionLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"BEST SESSION", NULL)];
@@ -451,6 +452,8 @@ extern UserController * g_userController;
     
     [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
     
+    [g_soundMaster stop];
+    
     [self finalLogging];
     
     // If user finished more that 15% of a song and they chose to share the song, upload the userSong session
@@ -491,6 +494,8 @@ extern UserController * g_userController;
         // Otherwise, we should do it manually
         [g_userController saveCache];
     }
+    
+    [g_soundMaster stop];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -550,7 +555,7 @@ extern UserController * g_userController;
 {
     int repeatLoops = [[_repeatButton.titleLabel.text stringByReplacingOccurrencesOfString:@"x" withString:@""] intValue];
     repeatLoops *= 2;
-    repeatLoops %= 255;
+    repeatLoops %= 63;
     
     [_repeatButton setTitle:[NSString stringWithFormat:@"%ix",repeatLoops] forState:UIControlStateNormal];
 }
@@ -592,6 +597,7 @@ extern UserController * g_userController;
     // Set tempo
     isScrolling = [_tempoButton.titleLabel.text isEqualToString:NSLocalizedString(@"NONE", NULL)] ? NO : YES;
     double tempoPercent = 1.0;
+    [self setScrolling:isScrolling];
     
     if(isScrolling){
         tempoPercent = [[_tempoButton.titleLabel.text stringByReplacingOccurrencesOfString:@"%" withString:@""] doubleValue]/100;
@@ -726,6 +732,7 @@ extern UserController * g_userController;
 {
     if(resetPractice){
         isPracticeMode = NO;
+        [self setScrolling:isStandalone];
         [self setPracticeMode];
     }
     
@@ -736,23 +743,12 @@ extern UserController * g_userController;
         [self uploadUserSongSession];
     }
     
-    NSLog(@"TODO: reset audio");
-    //[g_audioController reset];
     if(g_gtarController.connected == YES){
         [g_gtarController turnOffAllLeds];
     }
     [_displayController shiftView:0];
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
-    
-    //    [g_telemetryController logEvent:GtarPlaySongRestarted
-    //                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-    //                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-    //                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-    //                                     _userSong.m_title, @"Title",
-    //                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-    //                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-    //                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -953,6 +949,15 @@ extern UserController * g_userController;
     [_heatMapSelector addGestureRecognizer:heatMapDrag];
     [_heatMapLeftSlider addGestureRecognizer:leftPan];
     [_heatMapRightSlider addGestureRecognizer:rightPan];
+    
+    // Draw tempo standard
+    _tempoButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    if(!isStandalone){
+        _tempoButton.titleLabel.text = NSLocalizedString(@"NONE", NULL);
+    }else{
+        _tempoButton.titleLabel.text = @"100%";
+    }
     
 }
 
@@ -1891,6 +1896,8 @@ extern UserController * g_userController;
     // Only disconnect if mid-song
     if(isStandalone){
         
+        [g_soundMaster stop];
+        
         [self.navigationController popToRootViewControllerAnimated:YES];
         
     }else{
@@ -1939,6 +1946,8 @@ extern UserController * g_userController;
                                                      nil]];
     
     [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
+    
+    [g_soundMaster stop];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
     
@@ -2048,7 +2057,7 @@ extern UserController * g_userController;
     [self updateMenuLabelsForSongStart];
     
     // Give a little runway to the player
-    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:isScrolling withTempoPercent:tempoPercent fromStart:start toEnd:end withLoops:loops];
+    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:(isScrolling || isStandalone) withTempoPercent:tempoPercent fromStart:start toEnd:end withLoops:loops];
     
     // Light up the first frame
     if(g_gtarController.connected == YES){
@@ -2080,7 +2089,7 @@ extern UserController * g_userController;
     [self updateMenuLabelsForSongStart];
     
     // Give a little runway to the player
-    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
+    [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:(isScrolling || isStandalone) withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
     
     // Light up the first frame
     if(g_gtarController.connected == YES){
@@ -2534,15 +2543,17 @@ extern UserController * g_userController;
     
     _currentFrame = nil;
     
-    if(!isStandalone){
+    if(!isStandalone && frame != nil){
         // Calculate score only on frame release for regular play
         double accuracy = [_scoreTracker scoreFrame:frame onBeat:-1 withComplexity:0 endStreak:NO isStandalone:NO forLoop:MIN([_songModel getCurrentLoop],m_loops)];
         [self updateScoreDisplayWithAccuracy:accuracy];
     }
     
     // Score checking on frame release
-    [_scoreTracker scoreEndOfFrame:frame];
-        
+    if(frame != nil){
+        [_scoreTracker scoreEndOfFrame:frame];
+    }
+    
     // turn off any lights that might have been skipped
     [self turnOffFrame:frame];
     

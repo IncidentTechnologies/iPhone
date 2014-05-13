@@ -77,48 +77,109 @@
 		6DAD0B3719187F1F005B3807 /* Warm Analogue 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0E19187F1F005B3807 /* Warm Analogue 78.mp3 */; };
 		6DAD0B3819187F1F005B3807 /* Warm Analogue 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B0F19187F1F005B3807 /* Warm Analogue 79.mp3 */; };
 		6DAD0B3919187F1F005B3807 /* Warm Analogue 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0B1019187F1F005B3807 /* Warm Analogue 80.mp3 */; };
+		6DB285AB1921915600B3D14C /* Electric Guitar 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285451921915600B3D14C /* Electric Guitar 10.mp3 */; };
+		6DB285AC1921915600B3D14C /* Electric Guitar 100.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285461921915600B3D14C /* Electric Guitar 100.mp3 */; };
+		6DB285AD1921915600B3D14C /* Electric Guitar 101.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285471921915600B3D14C /* Electric Guitar 101.mp3 */; };
+		6DB285AE1921915600B3D14C /* Electric Guitar 102.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285481921915600B3D14C /* Electric Guitar 102.mp3 */; };
+		6DB285AF1921915600B3D14C /* Electric Guitar 103.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285491921915600B3D14C /* Electric Guitar 103.mp3 */; };
+		6DB285B01921915600B3D14C /* Electric Guitar 11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2854A1921915600B3D14C /* Electric Guitar 11.mp3 */; };
+		6DB285B11921915600B3D14C /* Electric Guitar 12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2854B1921915600B3D14C /* Electric Guitar 12.mp3 */; };
+		6DB285B21921915600B3D14C /* Electric Guitar 13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2854C1921915600B3D14C /* Electric Guitar 13.mp3 */; };
+		6DB285B31921915600B3D14C /* Electric Guitar 14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2854D1921915600B3D14C /* Electric Guitar 14.mp3 */; };
+		6DB285B41921915600B3D14C /* Electric Guitar 15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2854E1921915600B3D14C /* Electric Guitar 15.mp3 */; };
+		6DB285B51921915600B3D14C /* Electric Guitar 16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2854F1921915600B3D14C /* Electric Guitar 16.mp3 */; };
+		6DB285B61921915600B3D14C /* Electric Guitar 17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285501921915600B3D14C /* Electric Guitar 17.mp3 */; };
+		6DB285B71921915600B3D14C /* Electric Guitar 18.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285511921915600B3D14C /* Electric Guitar 18.mp3 */; };
+		6DB285B81921915600B3D14C /* Electric Guitar 19.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285521921915600B3D14C /* Electric Guitar 19.mp3 */; };
+		6DB285B91921915600B3D14C /* Electric Guitar 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285531921915600B3D14C /* Electric Guitar 2.mp3 */; };
+		6DB285BA1921915600B3D14C /* Electric Guitar 20.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285541921915600B3D14C /* Electric Guitar 20.mp3 */; };
+		6DB285BB1921915600B3D14C /* Electric Guitar 21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285551921915600B3D14C /* Electric Guitar 21.mp3 */; };
+		6DB285BC1921915600B3D14C /* Electric Guitar 22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285561921915600B3D14C /* Electric Guitar 22.mp3 */; };
+		6DB285BD1921915600B3D14C /* Electric Guitar 23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285571921915600B3D14C /* Electric Guitar 23.mp3 */; };
+		6DB285BE1921915600B3D14C /* Electric Guitar 24.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285581921915600B3D14C /* Electric Guitar 24.mp3 */; };
+		6DB285BF1921915600B3D14C /* Electric Guitar 25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285591921915600B3D14C /* Electric Guitar 25.mp3 */; };
+		6DB285C01921915600B3D14C /* Electric Guitar 26.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2855A1921915600B3D14C /* Electric Guitar 26.mp3 */; };
+		6DB285C11921915600B3D14C /* Electric Guitar 27.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2855B1921915600B3D14C /* Electric Guitar 27.mp3 */; };
+		6DB285C21921915600B3D14C /* Electric Guitar 28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2855C1921915600B3D14C /* Electric Guitar 28.mp3 */; };
+		6DB285C31921915600B3D14C /* Electric Guitar 29.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2855D1921915600B3D14C /* Electric Guitar 29.mp3 */; };
+		6DB285C41921915600B3D14C /* Electric Guitar 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2855E1921915600B3D14C /* Electric Guitar 3.mp3 */; };
+		6DB285C51921915600B3D14C /* Electric Guitar 30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2855F1921915600B3D14C /* Electric Guitar 30.mp3 */; };
+		6DB285C61921915600B3D14C /* Electric Guitar 31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285601921915600B3D14C /* Electric Guitar 31.mp3 */; };
+		6DB285C71921915600B3D14C /* Electric Guitar 32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285611921915600B3D14C /* Electric Guitar 32.mp3 */; };
+		6DB285C81921915600B3D14C /* Electric Guitar 33.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285621921915600B3D14C /* Electric Guitar 33.mp3 */; };
+		6DB285C91921915600B3D14C /* Electric Guitar 34.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285631921915600B3D14C /* Electric Guitar 34.mp3 */; };
+		6DB285CA1921915600B3D14C /* Electric Guitar 35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285641921915600B3D14C /* Electric Guitar 35.mp3 */; };
+		6DB285CB1921915600B3D14C /* Electric Guitar 36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285651921915600B3D14C /* Electric Guitar 36.mp3 */; };
+		6DB285CC1921915600B3D14C /* Electric Guitar 37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285661921915600B3D14C /* Electric Guitar 37.mp3 */; };
+		6DB285CD1921915600B3D14C /* Electric Guitar 38.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285671921915600B3D14C /* Electric Guitar 38.mp3 */; };
+		6DB285CE1921915600B3D14C /* Electric Guitar 39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285681921915600B3D14C /* Electric Guitar 39.mp3 */; };
+		6DB285CF1921915600B3D14C /* Electric Guitar 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285691921915600B3D14C /* Electric Guitar 4.mp3 */; };
+		6DB285D01921915600B3D14C /* Electric Guitar 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2856A1921915600B3D14C /* Electric Guitar 40.mp3 */; };
+		6DB285D11921915600B3D14C /* Electric Guitar 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2856B1921915600B3D14C /* Electric Guitar 41.mp3 */; };
+		6DB285D21921915600B3D14C /* Electric Guitar 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2856C1921915600B3D14C /* Electric Guitar 42.mp3 */; };
+		6DB285D31921915600B3D14C /* Electric Guitar 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2856D1921915600B3D14C /* Electric Guitar 43.mp3 */; };
+		6DB285D41921915600B3D14C /* Electric Guitar 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2856E1921915600B3D14C /* Electric Guitar 44.mp3 */; };
+		6DB285D51921915600B3D14C /* Electric Guitar 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2856F1921915600B3D14C /* Electric Guitar 45.mp3 */; };
+		6DB285D61921915600B3D14C /* Electric Guitar 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285701921915600B3D14C /* Electric Guitar 46.mp3 */; };
+		6DB285D71921915600B3D14C /* Electric Guitar 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285711921915600B3D14C /* Electric Guitar 47.mp3 */; };
+		6DB285D81921915600B3D14C /* Electric Guitar 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285721921915600B3D14C /* Electric Guitar 48.mp3 */; };
+		6DB285D91921915600B3D14C /* Electric Guitar 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285731921915600B3D14C /* Electric Guitar 49.mp3 */; };
+		6DB285DA1921915600B3D14C /* Electric Guitar 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285741921915600B3D14C /* Electric Guitar 5.mp3 */; };
+		6DB285DB1921915600B3D14C /* Electric Guitar 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285751921915600B3D14C /* Electric Guitar 50.mp3 */; };
+		6DB285DC1921915600B3D14C /* Electric Guitar 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285761921915600B3D14C /* Electric Guitar 51.mp3 */; };
+		6DB285DD1921915600B3D14C /* Electric Guitar 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285771921915600B3D14C /* Electric Guitar 52.mp3 */; };
+		6DB285DE1921915600B3D14C /* Electric Guitar 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285781921915600B3D14C /* Electric Guitar 53.mp3 */; };
+		6DB285DF1921915600B3D14C /* Electric Guitar 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285791921915600B3D14C /* Electric Guitar 54.mp3 */; };
+		6DB285E01921915600B3D14C /* Electric Guitar 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2857A1921915600B3D14C /* Electric Guitar 55.mp3 */; };
+		6DB285E11921915600B3D14C /* Electric Guitar 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2857B1921915600B3D14C /* Electric Guitar 56.mp3 */; };
+		6DB285E21921915600B3D14C /* Electric Guitar 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2857C1921915600B3D14C /* Electric Guitar 57.mp3 */; };
+		6DB285E31921915600B3D14C /* Electric Guitar 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2857D1921915600B3D14C /* Electric Guitar 58.mp3 */; };
+		6DB285E41921915600B3D14C /* Electric Guitar 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2857E1921915600B3D14C /* Electric Guitar 59.mp3 */; };
+		6DB285E51921915600B3D14C /* Electric Guitar 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2857F1921915600B3D14C /* Electric Guitar 6.mp3 */; };
+		6DB285E61921915600B3D14C /* Electric Guitar 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285801921915600B3D14C /* Electric Guitar 60.mp3 */; };
+		6DB285E71921915600B3D14C /* Electric Guitar 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285811921915600B3D14C /* Electric Guitar 61.mp3 */; };
+		6DB285E81921915600B3D14C /* Electric Guitar 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285821921915600B3D14C /* Electric Guitar 62.mp3 */; };
+		6DB285E91921915600B3D14C /* Electric Guitar 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285831921915600B3D14C /* Electric Guitar 63.mp3 */; };
+		6DB285EA1921915600B3D14C /* Electric Guitar 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285841921915600B3D14C /* Electric Guitar 64.mp3 */; };
+		6DB285EB1921915600B3D14C /* Electric Guitar 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285851921915600B3D14C /* Electric Guitar 65.mp3 */; };
+		6DB285EC1921915600B3D14C /* Electric Guitar 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285861921915600B3D14C /* Electric Guitar 66.mp3 */; };
+		6DB285ED1921915600B3D14C /* Electric Guitar 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285871921915600B3D14C /* Electric Guitar 67.mp3 */; };
+		6DB285EE1921915600B3D14C /* Electric Guitar 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285881921915600B3D14C /* Electric Guitar 68.mp3 */; };
+		6DB285EF1921915600B3D14C /* Electric Guitar 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285891921915600B3D14C /* Electric Guitar 69.mp3 */; };
+		6DB285F01921915600B3D14C /* Electric Guitar 7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2858A1921915600B3D14C /* Electric Guitar 7.mp3 */; };
+		6DB285F11921915600B3D14C /* Electric Guitar 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2858B1921915600B3D14C /* Electric Guitar 70.mp3 */; };
+		6DB285F21921915600B3D14C /* Electric Guitar 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2858C1921915600B3D14C /* Electric Guitar 71.mp3 */; };
+		6DB285F31921915600B3D14C /* Electric Guitar 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2858D1921915600B3D14C /* Electric Guitar 72.mp3 */; };
+		6DB285F41921915600B3D14C /* Electric Guitar 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2858E1921915600B3D14C /* Electric Guitar 73.mp3 */; };
+		6DB285F51921915600B3D14C /* Electric Guitar 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2858F1921915600B3D14C /* Electric Guitar 74.mp3 */; };
+		6DB285F61921915600B3D14C /* Electric Guitar 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285901921915600B3D14C /* Electric Guitar 75.mp3 */; };
+		6DB285F71921915600B3D14C /* Electric Guitar 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285911921915600B3D14C /* Electric Guitar 76.mp3 */; };
+		6DB285F81921915600B3D14C /* Electric Guitar 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285921921915600B3D14C /* Electric Guitar 77.mp3 */; };
+		6DB285F91921915600B3D14C /* Electric Guitar 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285931921915600B3D14C /* Electric Guitar 78.mp3 */; };
+		6DB285FA1921915600B3D14C /* Electric Guitar 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285941921915600B3D14C /* Electric Guitar 79.mp3 */; };
+		6DB285FB1921915600B3D14C /* Electric Guitar 8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285951921915600B3D14C /* Electric Guitar 8.mp3 */; };
+		6DB285FC1921915600B3D14C /* Electric Guitar 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285961921915600B3D14C /* Electric Guitar 80.mp3 */; };
+		6DB285FD1921915600B3D14C /* Electric Guitar 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285971921915600B3D14C /* Electric Guitar 81.mp3 */; };
+		6DB285FE1921915600B3D14C /* Electric Guitar 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285981921915600B3D14C /* Electric Guitar 82.mp3 */; };
+		6DB285FF1921915600B3D14C /* Electric Guitar 83.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285991921915600B3D14C /* Electric Guitar 83.mp3 */; };
+		6DB286001921915600B3D14C /* Electric Guitar 84.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2859A1921915600B3D14C /* Electric Guitar 84.mp3 */; };
+		6DB286011921915600B3D14C /* Electric Guitar 85.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2859B1921915600B3D14C /* Electric Guitar 85.mp3 */; };
+		6DB286021921915600B3D14C /* Electric Guitar 86.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2859C1921915600B3D14C /* Electric Guitar 86.mp3 */; };
+		6DB286031921915600B3D14C /* Electric Guitar 87.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2859D1921915600B3D14C /* Electric Guitar 87.mp3 */; };
+		6DB286041921915600B3D14C /* Electric Guitar 88.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2859E1921915600B3D14C /* Electric Guitar 88.mp3 */; };
+		6DB286051921915600B3D14C /* Electric Guitar 89.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB2859F1921915600B3D14C /* Electric Guitar 89.mp3 */; };
+		6DB286061921915600B3D14C /* Electric Guitar 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A01921915600B3D14C /* Electric Guitar 9.mp3 */; };
+		6DB286071921915600B3D14C /* Electric Guitar 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A11921915600B3D14C /* Electric Guitar 90.mp3 */; };
+		6DB286081921915600B3D14C /* Electric Guitar 91.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A21921915600B3D14C /* Electric Guitar 91.mp3 */; };
+		6DB286091921915600B3D14C /* Electric Guitar 92.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A31921915600B3D14C /* Electric Guitar 92.mp3 */; };
+		6DB2860A1921915600B3D14C /* Electric Guitar 93.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A41921915600B3D14C /* Electric Guitar 93.mp3 */; };
+		6DB2860B1921915600B3D14C /* Electric Guitar 94.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A51921915600B3D14C /* Electric Guitar 94.mp3 */; };
+		6DB2860C1921915600B3D14C /* Electric Guitar 95.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A61921915600B3D14C /* Electric Guitar 95.mp3 */; };
+		6DB2860D1921915600B3D14C /* Electric Guitar 96.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A71921915600B3D14C /* Electric Guitar 96.mp3 */; };
+		6DB2860E1921915600B3D14C /* Electric Guitar 97.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A81921915600B3D14C /* Electric Guitar 97.mp3 */; };
+		6DB2860F1921915600B3D14C /* Electric Guitar 98.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A91921915600B3D14C /* Electric Guitar 98.mp3 */; };
+		6DB286101921915600B3D14C /* Electric Guitar 99.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285AA1921915600B3D14C /* Electric Guitar 99.mp3 */; };
 		6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */; };
-		6DED8791191874460091721E /* Electric Guitar 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8768191874460091721E /* Electric Guitar 40.mp3 */; };
-		6DED8792191874460091721E /* Electric Guitar 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8769191874460091721E /* Electric Guitar 41.mp3 */; };
-		6DED8793191874460091721E /* Electric Guitar 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876A191874460091721E /* Electric Guitar 42.mp3 */; };
-		6DED8794191874460091721E /* Electric Guitar 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876B191874460091721E /* Electric Guitar 43.mp3 */; };
-		6DED8795191874460091721E /* Electric Guitar 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876C191874460091721E /* Electric Guitar 44.mp3 */; };
-		6DED8796191874460091721E /* Electric Guitar 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876D191874460091721E /* Electric Guitar 45.mp3 */; };
-		6DED8797191874460091721E /* Electric Guitar 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876E191874460091721E /* Electric Guitar 46.mp3 */; };
-		6DED8798191874460091721E /* Electric Guitar 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED876F191874460091721E /* Electric Guitar 47.mp3 */; };
-		6DED8799191874460091721E /* Electric Guitar 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8770191874460091721E /* Electric Guitar 48.mp3 */; };
-		6DED879A191874460091721E /* Electric Guitar 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8771191874460091721E /* Electric Guitar 49.mp3 */; };
-		6DED879B191874460091721E /* Electric Guitar 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8772191874460091721E /* Electric Guitar 50.mp3 */; };
-		6DED879C191874460091721E /* Electric Guitar 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8773191874460091721E /* Electric Guitar 51.mp3 */; };
-		6DED879D191874460091721E /* Electric Guitar 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8774191874460091721E /* Electric Guitar 52.mp3 */; };
-		6DED879E191874460091721E /* Electric Guitar 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8775191874460091721E /* Electric Guitar 53.mp3 */; };
-		6DED879F191874460091721E /* Electric Guitar 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8776191874460091721E /* Electric Guitar 54.mp3 */; };
-		6DED87A0191874460091721E /* Electric Guitar 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8777191874460091721E /* Electric Guitar 55.mp3 */; };
-		6DED87A1191874460091721E /* Electric Guitar 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8778191874460091721E /* Electric Guitar 56.mp3 */; };
-		6DED87A2191874460091721E /* Electric Guitar 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8779191874460091721E /* Electric Guitar 57.mp3 */; };
-		6DED87A3191874460091721E /* Electric Guitar 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877A191874460091721E /* Electric Guitar 58.mp3 */; };
-		6DED87A4191874460091721E /* Electric Guitar 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877B191874460091721E /* Electric Guitar 59.mp3 */; };
-		6DED87A5191874460091721E /* Electric Guitar 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877C191874460091721E /* Electric Guitar 60.mp3 */; };
-		6DED87A6191874460091721E /* Electric Guitar 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877D191874460091721E /* Electric Guitar 61.mp3 */; };
-		6DED87A7191874460091721E /* Electric Guitar 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877E191874460091721E /* Electric Guitar 62.mp3 */; };
-		6DED87A8191874460091721E /* Electric Guitar 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED877F191874460091721E /* Electric Guitar 63.mp3 */; };
-		6DED87A9191874460091721E /* Electric Guitar 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8780191874460091721E /* Electric Guitar 64.mp3 */; };
-		6DED87AA191874460091721E /* Electric Guitar 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8781191874460091721E /* Electric Guitar 65.mp3 */; };
-		6DED87AB191874460091721E /* Electric Guitar 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8782191874460091721E /* Electric Guitar 66.mp3 */; };
-		6DED87AC191874460091721E /* Electric Guitar 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8783191874460091721E /* Electric Guitar 67.mp3 */; };
-		6DED87AD191874460091721E /* Electric Guitar 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8784191874460091721E /* Electric Guitar 68.mp3 */; };
-		6DED87AE191874460091721E /* Electric Guitar 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8785191874460091721E /* Electric Guitar 69.mp3 */; };
-		6DED87AF191874460091721E /* Electric Guitar 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8786191874460091721E /* Electric Guitar 70.mp3 */; };
-		6DED87B0191874460091721E /* Electric Guitar 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8787191874460091721E /* Electric Guitar 71.mp3 */; };
-		6DED87B1191874460091721E /* Electric Guitar 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8788191874460091721E /* Electric Guitar 72.mp3 */; };
-		6DED87B2191874460091721E /* Electric Guitar 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8789191874460091721E /* Electric Guitar 73.mp3 */; };
-		6DED87B3191874460091721E /* Electric Guitar 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878A191874460091721E /* Electric Guitar 74.mp3 */; };
-		6DED87B4191874460091721E /* Electric Guitar 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878B191874460091721E /* Electric Guitar 75.mp3 */; };
-		6DED87B5191874460091721E /* Electric Guitar 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878C191874460091721E /* Electric Guitar 76.mp3 */; };
-		6DED87B6191874460091721E /* Electric Guitar 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878D191874460091721E /* Electric Guitar 77.mp3 */; };
-		6DED87B7191874460091721E /* Electric Guitar 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878E191874460091721E /* Electric Guitar 78.mp3 */; };
-		6DED87B8191874460091721E /* Electric Guitar 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED878F191874460091721E /* Electric Guitar 79.mp3 */; };
-		6DED87B9191874460091721E /* Electric Guitar 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DED8790191874460091721E /* Electric Guitar 80.mp3 */; };
 		9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CAF174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CB0174C68E000FA3239 /* Bowed Strings 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */; };
@@ -1506,6 +1567,108 @@
 		6DAD0B0E19187F1F005B3807 /* Warm Analogue 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 78.mp3"; sourceTree = "<group>"; };
 		6DAD0B0F19187F1F005B3807 /* Warm Analogue 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 79.mp3"; sourceTree = "<group>"; };
 		6DAD0B1019187F1F005B3807 /* Warm Analogue 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 80.mp3"; sourceTree = "<group>"; };
+		6DB285451921915600B3D14C /* Electric Guitar 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 10.mp3"; sourceTree = "<group>"; };
+		6DB285461921915600B3D14C /* Electric Guitar 100.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 100.mp3"; sourceTree = "<group>"; };
+		6DB285471921915600B3D14C /* Electric Guitar 101.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 101.mp3"; sourceTree = "<group>"; };
+		6DB285481921915600B3D14C /* Electric Guitar 102.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 102.mp3"; sourceTree = "<group>"; };
+		6DB285491921915600B3D14C /* Electric Guitar 103.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 103.mp3"; sourceTree = "<group>"; };
+		6DB2854A1921915600B3D14C /* Electric Guitar 11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 11.mp3"; sourceTree = "<group>"; };
+		6DB2854B1921915600B3D14C /* Electric Guitar 12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 12.mp3"; sourceTree = "<group>"; };
+		6DB2854C1921915600B3D14C /* Electric Guitar 13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 13.mp3"; sourceTree = "<group>"; };
+		6DB2854D1921915600B3D14C /* Electric Guitar 14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 14.mp3"; sourceTree = "<group>"; };
+		6DB2854E1921915600B3D14C /* Electric Guitar 15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 15.mp3"; sourceTree = "<group>"; };
+		6DB2854F1921915600B3D14C /* Electric Guitar 16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 16.mp3"; sourceTree = "<group>"; };
+		6DB285501921915600B3D14C /* Electric Guitar 17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 17.mp3"; sourceTree = "<group>"; };
+		6DB285511921915600B3D14C /* Electric Guitar 18.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 18.mp3"; sourceTree = "<group>"; };
+		6DB285521921915600B3D14C /* Electric Guitar 19.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 19.mp3"; sourceTree = "<group>"; };
+		6DB285531921915600B3D14C /* Electric Guitar 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 2.mp3"; sourceTree = "<group>"; };
+		6DB285541921915600B3D14C /* Electric Guitar 20.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 20.mp3"; sourceTree = "<group>"; };
+		6DB285551921915600B3D14C /* Electric Guitar 21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 21.mp3"; sourceTree = "<group>"; };
+		6DB285561921915600B3D14C /* Electric Guitar 22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 22.mp3"; sourceTree = "<group>"; };
+		6DB285571921915600B3D14C /* Electric Guitar 23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 23.mp3"; sourceTree = "<group>"; };
+		6DB285581921915600B3D14C /* Electric Guitar 24.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 24.mp3"; sourceTree = "<group>"; };
+		6DB285591921915600B3D14C /* Electric Guitar 25.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 25.mp3"; sourceTree = "<group>"; };
+		6DB2855A1921915600B3D14C /* Electric Guitar 26.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 26.mp3"; sourceTree = "<group>"; };
+		6DB2855B1921915600B3D14C /* Electric Guitar 27.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 27.mp3"; sourceTree = "<group>"; };
+		6DB2855C1921915600B3D14C /* Electric Guitar 28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 28.mp3"; sourceTree = "<group>"; };
+		6DB2855D1921915600B3D14C /* Electric Guitar 29.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 29.mp3"; sourceTree = "<group>"; };
+		6DB2855E1921915600B3D14C /* Electric Guitar 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 3.mp3"; sourceTree = "<group>"; };
+		6DB2855F1921915600B3D14C /* Electric Guitar 30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 30.mp3"; sourceTree = "<group>"; };
+		6DB285601921915600B3D14C /* Electric Guitar 31.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 31.mp3"; sourceTree = "<group>"; };
+		6DB285611921915600B3D14C /* Electric Guitar 32.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 32.mp3"; sourceTree = "<group>"; };
+		6DB285621921915600B3D14C /* Electric Guitar 33.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 33.mp3"; sourceTree = "<group>"; };
+		6DB285631921915600B3D14C /* Electric Guitar 34.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 34.mp3"; sourceTree = "<group>"; };
+		6DB285641921915600B3D14C /* Electric Guitar 35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 35.mp3"; sourceTree = "<group>"; };
+		6DB285651921915600B3D14C /* Electric Guitar 36.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 36.mp3"; sourceTree = "<group>"; };
+		6DB285661921915600B3D14C /* Electric Guitar 37.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 37.mp3"; sourceTree = "<group>"; };
+		6DB285671921915600B3D14C /* Electric Guitar 38.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 38.mp3"; sourceTree = "<group>"; };
+		6DB285681921915600B3D14C /* Electric Guitar 39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 39.mp3"; sourceTree = "<group>"; };
+		6DB285691921915600B3D14C /* Electric Guitar 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 4.mp3"; sourceTree = "<group>"; };
+		6DB2856A1921915600B3D14C /* Electric Guitar 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 40.mp3"; sourceTree = "<group>"; };
+		6DB2856B1921915600B3D14C /* Electric Guitar 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 41.mp3"; sourceTree = "<group>"; };
+		6DB2856C1921915600B3D14C /* Electric Guitar 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 42.mp3"; sourceTree = "<group>"; };
+		6DB2856D1921915600B3D14C /* Electric Guitar 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 43.mp3"; sourceTree = "<group>"; };
+		6DB2856E1921915600B3D14C /* Electric Guitar 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 44.mp3"; sourceTree = "<group>"; };
+		6DB2856F1921915600B3D14C /* Electric Guitar 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 45.mp3"; sourceTree = "<group>"; };
+		6DB285701921915600B3D14C /* Electric Guitar 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 46.mp3"; sourceTree = "<group>"; };
+		6DB285711921915600B3D14C /* Electric Guitar 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 47.mp3"; sourceTree = "<group>"; };
+		6DB285721921915600B3D14C /* Electric Guitar 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 48.mp3"; sourceTree = "<group>"; };
+		6DB285731921915600B3D14C /* Electric Guitar 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 49.mp3"; sourceTree = "<group>"; };
+		6DB285741921915600B3D14C /* Electric Guitar 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 5.mp3"; sourceTree = "<group>"; };
+		6DB285751921915600B3D14C /* Electric Guitar 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 50.mp3"; sourceTree = "<group>"; };
+		6DB285761921915600B3D14C /* Electric Guitar 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 51.mp3"; sourceTree = "<group>"; };
+		6DB285771921915600B3D14C /* Electric Guitar 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 52.mp3"; sourceTree = "<group>"; };
+		6DB285781921915600B3D14C /* Electric Guitar 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 53.mp3"; sourceTree = "<group>"; };
+		6DB285791921915600B3D14C /* Electric Guitar 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 54.mp3"; sourceTree = "<group>"; };
+		6DB2857A1921915600B3D14C /* Electric Guitar 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 55.mp3"; sourceTree = "<group>"; };
+		6DB2857B1921915600B3D14C /* Electric Guitar 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 56.mp3"; sourceTree = "<group>"; };
+		6DB2857C1921915600B3D14C /* Electric Guitar 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 57.mp3"; sourceTree = "<group>"; };
+		6DB2857D1921915600B3D14C /* Electric Guitar 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 58.mp3"; sourceTree = "<group>"; };
+		6DB2857E1921915600B3D14C /* Electric Guitar 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 59.mp3"; sourceTree = "<group>"; };
+		6DB2857F1921915600B3D14C /* Electric Guitar 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 6.mp3"; sourceTree = "<group>"; };
+		6DB285801921915600B3D14C /* Electric Guitar 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 60.mp3"; sourceTree = "<group>"; };
+		6DB285811921915600B3D14C /* Electric Guitar 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 61.mp3"; sourceTree = "<group>"; };
+		6DB285821921915600B3D14C /* Electric Guitar 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 62.mp3"; sourceTree = "<group>"; };
+		6DB285831921915600B3D14C /* Electric Guitar 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 63.mp3"; sourceTree = "<group>"; };
+		6DB285841921915600B3D14C /* Electric Guitar 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 64.mp3"; sourceTree = "<group>"; };
+		6DB285851921915600B3D14C /* Electric Guitar 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 65.mp3"; sourceTree = "<group>"; };
+		6DB285861921915600B3D14C /* Electric Guitar 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 66.mp3"; sourceTree = "<group>"; };
+		6DB285871921915600B3D14C /* Electric Guitar 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 67.mp3"; sourceTree = "<group>"; };
+		6DB285881921915600B3D14C /* Electric Guitar 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 68.mp3"; sourceTree = "<group>"; };
+		6DB285891921915600B3D14C /* Electric Guitar 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 69.mp3"; sourceTree = "<group>"; };
+		6DB2858A1921915600B3D14C /* Electric Guitar 7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 7.mp3"; sourceTree = "<group>"; };
+		6DB2858B1921915600B3D14C /* Electric Guitar 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 70.mp3"; sourceTree = "<group>"; };
+		6DB2858C1921915600B3D14C /* Electric Guitar 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 71.mp3"; sourceTree = "<group>"; };
+		6DB2858D1921915600B3D14C /* Electric Guitar 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 72.mp3"; sourceTree = "<group>"; };
+		6DB2858E1921915600B3D14C /* Electric Guitar 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 73.mp3"; sourceTree = "<group>"; };
+		6DB2858F1921915600B3D14C /* Electric Guitar 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 74.mp3"; sourceTree = "<group>"; };
+		6DB285901921915600B3D14C /* Electric Guitar 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 75.mp3"; sourceTree = "<group>"; };
+		6DB285911921915600B3D14C /* Electric Guitar 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 76.mp3"; sourceTree = "<group>"; };
+		6DB285921921915600B3D14C /* Electric Guitar 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 77.mp3"; sourceTree = "<group>"; };
+		6DB285931921915600B3D14C /* Electric Guitar 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 78.mp3"; sourceTree = "<group>"; };
+		6DB285941921915600B3D14C /* Electric Guitar 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 79.mp3"; sourceTree = "<group>"; };
+		6DB285951921915600B3D14C /* Electric Guitar 8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 8.mp3"; sourceTree = "<group>"; };
+		6DB285961921915600B3D14C /* Electric Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 80.mp3"; sourceTree = "<group>"; };
+		6DB285971921915600B3D14C /* Electric Guitar 81.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 81.mp3"; sourceTree = "<group>"; };
+		6DB285981921915600B3D14C /* Electric Guitar 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 82.mp3"; sourceTree = "<group>"; };
+		6DB285991921915600B3D14C /* Electric Guitar 83.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 83.mp3"; sourceTree = "<group>"; };
+		6DB2859A1921915600B3D14C /* Electric Guitar 84.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 84.mp3"; sourceTree = "<group>"; };
+		6DB2859B1921915600B3D14C /* Electric Guitar 85.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 85.mp3"; sourceTree = "<group>"; };
+		6DB2859C1921915600B3D14C /* Electric Guitar 86.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 86.mp3"; sourceTree = "<group>"; };
+		6DB2859D1921915600B3D14C /* Electric Guitar 87.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 87.mp3"; sourceTree = "<group>"; };
+		6DB2859E1921915600B3D14C /* Electric Guitar 88.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 88.mp3"; sourceTree = "<group>"; };
+		6DB2859F1921915600B3D14C /* Electric Guitar 89.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 89.mp3"; sourceTree = "<group>"; };
+		6DB285A01921915600B3D14C /* Electric Guitar 9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 9.mp3"; sourceTree = "<group>"; };
+		6DB285A11921915600B3D14C /* Electric Guitar 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 90.mp3"; sourceTree = "<group>"; };
+		6DB285A21921915600B3D14C /* Electric Guitar 91.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 91.mp3"; sourceTree = "<group>"; };
+		6DB285A31921915600B3D14C /* Electric Guitar 92.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 92.mp3"; sourceTree = "<group>"; };
+		6DB285A41921915600B3D14C /* Electric Guitar 93.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 93.mp3"; sourceTree = "<group>"; };
+		6DB285A51921915600B3D14C /* Electric Guitar 94.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 94.mp3"; sourceTree = "<group>"; };
+		6DB285A61921915600B3D14C /* Electric Guitar 95.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 95.mp3"; sourceTree = "<group>"; };
+		6DB285A71921915600B3D14C /* Electric Guitar 96.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 96.mp3"; sourceTree = "<group>"; };
+		6DB285A81921915600B3D14C /* Electric Guitar 97.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 97.mp3"; sourceTree = "<group>"; };
+		6DB285A91921915600B3D14C /* Electric Guitar 98.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 98.mp3"; sourceTree = "<group>"; };
+		6DB285AA1921915600B3D14C /* Electric Guitar 99.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 99.mp3"; sourceTree = "<group>"; };
 		6DC3D837190ED80E003AAD4E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC3D838190ED83A003AAD4E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC3D839190ED847003AAD4E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1515,47 +1678,6 @@
 		6DC3D83D190F0240003AAD4E /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6DD5FB0018FCB8A40066C888 /* SongPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongPlaybackController.h; sourceTree = "<group>"; };
 		6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPlaybackController.m; sourceTree = "<group>"; };
-		6DED8768191874460091721E /* Electric Guitar 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 40.mp3"; sourceTree = "<group>"; };
-		6DED8769191874460091721E /* Electric Guitar 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 41.mp3"; sourceTree = "<group>"; };
-		6DED876A191874460091721E /* Electric Guitar 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 42.mp3"; sourceTree = "<group>"; };
-		6DED876B191874460091721E /* Electric Guitar 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 43.mp3"; sourceTree = "<group>"; };
-		6DED876C191874460091721E /* Electric Guitar 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 44.mp3"; sourceTree = "<group>"; };
-		6DED876D191874460091721E /* Electric Guitar 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 45.mp3"; sourceTree = "<group>"; };
-		6DED876E191874460091721E /* Electric Guitar 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 46.mp3"; sourceTree = "<group>"; };
-		6DED876F191874460091721E /* Electric Guitar 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 47.mp3"; sourceTree = "<group>"; };
-		6DED8770191874460091721E /* Electric Guitar 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 48.mp3"; sourceTree = "<group>"; };
-		6DED8771191874460091721E /* Electric Guitar 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 49.mp3"; sourceTree = "<group>"; };
-		6DED8772191874460091721E /* Electric Guitar 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 50.mp3"; sourceTree = "<group>"; };
-		6DED8773191874460091721E /* Electric Guitar 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 51.mp3"; sourceTree = "<group>"; };
-		6DED8774191874460091721E /* Electric Guitar 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 52.mp3"; sourceTree = "<group>"; };
-		6DED8775191874460091721E /* Electric Guitar 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 53.mp3"; sourceTree = "<group>"; };
-		6DED8776191874460091721E /* Electric Guitar 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 54.mp3"; sourceTree = "<group>"; };
-		6DED8777191874460091721E /* Electric Guitar 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 55.mp3"; sourceTree = "<group>"; };
-		6DED8778191874460091721E /* Electric Guitar 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 56.mp3"; sourceTree = "<group>"; };
-		6DED8779191874460091721E /* Electric Guitar 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 57.mp3"; sourceTree = "<group>"; };
-		6DED877A191874460091721E /* Electric Guitar 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 58.mp3"; sourceTree = "<group>"; };
-		6DED877B191874460091721E /* Electric Guitar 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 59.mp3"; sourceTree = "<group>"; };
-		6DED877C191874460091721E /* Electric Guitar 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 60.mp3"; sourceTree = "<group>"; };
-		6DED877D191874460091721E /* Electric Guitar 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 61.mp3"; sourceTree = "<group>"; };
-		6DED877E191874460091721E /* Electric Guitar 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 62.mp3"; sourceTree = "<group>"; };
-		6DED877F191874460091721E /* Electric Guitar 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 63.mp3"; sourceTree = "<group>"; };
-		6DED8780191874460091721E /* Electric Guitar 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 64.mp3"; sourceTree = "<group>"; };
-		6DED8781191874460091721E /* Electric Guitar 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 65.mp3"; sourceTree = "<group>"; };
-		6DED8782191874460091721E /* Electric Guitar 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 66.mp3"; sourceTree = "<group>"; };
-		6DED8783191874460091721E /* Electric Guitar 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 67.mp3"; sourceTree = "<group>"; };
-		6DED8784191874460091721E /* Electric Guitar 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 68.mp3"; sourceTree = "<group>"; };
-		6DED8785191874460091721E /* Electric Guitar 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 69.mp3"; sourceTree = "<group>"; };
-		6DED8786191874460091721E /* Electric Guitar 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 70.mp3"; sourceTree = "<group>"; };
-		6DED8787191874460091721E /* Electric Guitar 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 71.mp3"; sourceTree = "<group>"; };
-		6DED8788191874460091721E /* Electric Guitar 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 72.mp3"; sourceTree = "<group>"; };
-		6DED8789191874460091721E /* Electric Guitar 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 73.mp3"; sourceTree = "<group>"; };
-		6DED878A191874460091721E /* Electric Guitar 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 74.mp3"; sourceTree = "<group>"; };
-		6DED878B191874460091721E /* Electric Guitar 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 75.mp3"; sourceTree = "<group>"; };
-		6DED878C191874460091721E /* Electric Guitar 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 76.mp3"; sourceTree = "<group>"; };
-		6DED878D191874460091721E /* Electric Guitar 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 77.mp3"; sourceTree = "<group>"; };
-		6DED878E191874460091721E /* Electric Guitar 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 78.mp3"; sourceTree = "<group>"; };
-		6DED878F191874460091721E /* Electric Guitar 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 79.mp3"; sourceTree = "<group>"; };
-		6DED8790191874460091721E /* Electric Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 80.mp3"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* gTarPlay-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "gTarPlay-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bowed Strings 40.mp3"; sourceTree = "<group>"; };
 		9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bowed Strings 41.mp3"; sourceTree = "<group>"; };
@@ -2547,6 +2669,115 @@
 			path = "Warm Analogue";
 			sourceTree = "<group>";
 		};
+		6DB285441921915600B3D14C /* Electric */ = {
+			isa = PBXGroup;
+			children = (
+				6DB285451921915600B3D14C /* Electric Guitar 10.mp3 */,
+				6DB285461921915600B3D14C /* Electric Guitar 100.mp3 */,
+				6DB285471921915600B3D14C /* Electric Guitar 101.mp3 */,
+				6DB285481921915600B3D14C /* Electric Guitar 102.mp3 */,
+				6DB285491921915600B3D14C /* Electric Guitar 103.mp3 */,
+				6DB2854A1921915600B3D14C /* Electric Guitar 11.mp3 */,
+				6DB2854B1921915600B3D14C /* Electric Guitar 12.mp3 */,
+				6DB2854C1921915600B3D14C /* Electric Guitar 13.mp3 */,
+				6DB2854D1921915600B3D14C /* Electric Guitar 14.mp3 */,
+				6DB2854E1921915600B3D14C /* Electric Guitar 15.mp3 */,
+				6DB2854F1921915600B3D14C /* Electric Guitar 16.mp3 */,
+				6DB285501921915600B3D14C /* Electric Guitar 17.mp3 */,
+				6DB285511921915600B3D14C /* Electric Guitar 18.mp3 */,
+				6DB285521921915600B3D14C /* Electric Guitar 19.mp3 */,
+				6DB285531921915600B3D14C /* Electric Guitar 2.mp3 */,
+				6DB285541921915600B3D14C /* Electric Guitar 20.mp3 */,
+				6DB285551921915600B3D14C /* Electric Guitar 21.mp3 */,
+				6DB285561921915600B3D14C /* Electric Guitar 22.mp3 */,
+				6DB285571921915600B3D14C /* Electric Guitar 23.mp3 */,
+				6DB285581921915600B3D14C /* Electric Guitar 24.mp3 */,
+				6DB285591921915600B3D14C /* Electric Guitar 25.mp3 */,
+				6DB2855A1921915600B3D14C /* Electric Guitar 26.mp3 */,
+				6DB2855B1921915600B3D14C /* Electric Guitar 27.mp3 */,
+				6DB2855C1921915600B3D14C /* Electric Guitar 28.mp3 */,
+				6DB2855D1921915600B3D14C /* Electric Guitar 29.mp3 */,
+				6DB2855E1921915600B3D14C /* Electric Guitar 3.mp3 */,
+				6DB2855F1921915600B3D14C /* Electric Guitar 30.mp3 */,
+				6DB285601921915600B3D14C /* Electric Guitar 31.mp3 */,
+				6DB285611921915600B3D14C /* Electric Guitar 32.mp3 */,
+				6DB285621921915600B3D14C /* Electric Guitar 33.mp3 */,
+				6DB285631921915600B3D14C /* Electric Guitar 34.mp3 */,
+				6DB285641921915600B3D14C /* Electric Guitar 35.mp3 */,
+				6DB285651921915600B3D14C /* Electric Guitar 36.mp3 */,
+				6DB285661921915600B3D14C /* Electric Guitar 37.mp3 */,
+				6DB285671921915600B3D14C /* Electric Guitar 38.mp3 */,
+				6DB285681921915600B3D14C /* Electric Guitar 39.mp3 */,
+				6DB285691921915600B3D14C /* Electric Guitar 4.mp3 */,
+				6DB2856A1921915600B3D14C /* Electric Guitar 40.mp3 */,
+				6DB2856B1921915600B3D14C /* Electric Guitar 41.mp3 */,
+				6DB2856C1921915600B3D14C /* Electric Guitar 42.mp3 */,
+				6DB2856D1921915600B3D14C /* Electric Guitar 43.mp3 */,
+				6DB2856E1921915600B3D14C /* Electric Guitar 44.mp3 */,
+				6DB2856F1921915600B3D14C /* Electric Guitar 45.mp3 */,
+				6DB285701921915600B3D14C /* Electric Guitar 46.mp3 */,
+				6DB285711921915600B3D14C /* Electric Guitar 47.mp3 */,
+				6DB285721921915600B3D14C /* Electric Guitar 48.mp3 */,
+				6DB285731921915600B3D14C /* Electric Guitar 49.mp3 */,
+				6DB285741921915600B3D14C /* Electric Guitar 5.mp3 */,
+				6DB285751921915600B3D14C /* Electric Guitar 50.mp3 */,
+				6DB285761921915600B3D14C /* Electric Guitar 51.mp3 */,
+				6DB285771921915600B3D14C /* Electric Guitar 52.mp3 */,
+				6DB285781921915600B3D14C /* Electric Guitar 53.mp3 */,
+				6DB285791921915600B3D14C /* Electric Guitar 54.mp3 */,
+				6DB2857A1921915600B3D14C /* Electric Guitar 55.mp3 */,
+				6DB2857B1921915600B3D14C /* Electric Guitar 56.mp3 */,
+				6DB2857C1921915600B3D14C /* Electric Guitar 57.mp3 */,
+				6DB2857D1921915600B3D14C /* Electric Guitar 58.mp3 */,
+				6DB2857E1921915600B3D14C /* Electric Guitar 59.mp3 */,
+				6DB2857F1921915600B3D14C /* Electric Guitar 6.mp3 */,
+				6DB285801921915600B3D14C /* Electric Guitar 60.mp3 */,
+				6DB285811921915600B3D14C /* Electric Guitar 61.mp3 */,
+				6DB285821921915600B3D14C /* Electric Guitar 62.mp3 */,
+				6DB285831921915600B3D14C /* Electric Guitar 63.mp3 */,
+				6DB285841921915600B3D14C /* Electric Guitar 64.mp3 */,
+				6DB285851921915600B3D14C /* Electric Guitar 65.mp3 */,
+				6DB285861921915600B3D14C /* Electric Guitar 66.mp3 */,
+				6DB285871921915600B3D14C /* Electric Guitar 67.mp3 */,
+				6DB285881921915600B3D14C /* Electric Guitar 68.mp3 */,
+				6DB285891921915600B3D14C /* Electric Guitar 69.mp3 */,
+				6DB2858A1921915600B3D14C /* Electric Guitar 7.mp3 */,
+				6DB2858B1921915600B3D14C /* Electric Guitar 70.mp3 */,
+				6DB2858C1921915600B3D14C /* Electric Guitar 71.mp3 */,
+				6DB2858D1921915600B3D14C /* Electric Guitar 72.mp3 */,
+				6DB2858E1921915600B3D14C /* Electric Guitar 73.mp3 */,
+				6DB2858F1921915600B3D14C /* Electric Guitar 74.mp3 */,
+				6DB285901921915600B3D14C /* Electric Guitar 75.mp3 */,
+				6DB285911921915600B3D14C /* Electric Guitar 76.mp3 */,
+				6DB285921921915600B3D14C /* Electric Guitar 77.mp3 */,
+				6DB285931921915600B3D14C /* Electric Guitar 78.mp3 */,
+				6DB285941921915600B3D14C /* Electric Guitar 79.mp3 */,
+				6DB285951921915600B3D14C /* Electric Guitar 8.mp3 */,
+				6DB285961921915600B3D14C /* Electric Guitar 80.mp3 */,
+				6DB285971921915600B3D14C /* Electric Guitar 81.mp3 */,
+				6DB285981921915600B3D14C /* Electric Guitar 82.mp3 */,
+				6DB285991921915600B3D14C /* Electric Guitar 83.mp3 */,
+				6DB2859A1921915600B3D14C /* Electric Guitar 84.mp3 */,
+				6DB2859B1921915600B3D14C /* Electric Guitar 85.mp3 */,
+				6DB2859C1921915600B3D14C /* Electric Guitar 86.mp3 */,
+				6DB2859D1921915600B3D14C /* Electric Guitar 87.mp3 */,
+				6DB2859E1921915600B3D14C /* Electric Guitar 88.mp3 */,
+				6DB2859F1921915600B3D14C /* Electric Guitar 89.mp3 */,
+				6DB285A01921915600B3D14C /* Electric Guitar 9.mp3 */,
+				6DB285A11921915600B3D14C /* Electric Guitar 90.mp3 */,
+				6DB285A21921915600B3D14C /* Electric Guitar 91.mp3 */,
+				6DB285A31921915600B3D14C /* Electric Guitar 92.mp3 */,
+				6DB285A41921915600B3D14C /* Electric Guitar 93.mp3 */,
+				6DB285A51921915600B3D14C /* Electric Guitar 94.mp3 */,
+				6DB285A61921915600B3D14C /* Electric Guitar 95.mp3 */,
+				6DB285A71921915600B3D14C /* Electric Guitar 96.mp3 */,
+				6DB285A81921915600B3D14C /* Electric Guitar 97.mp3 */,
+				6DB285A91921915600B3D14C /* Electric Guitar 98.mp3 */,
+				6DB285AA1921915600B3D14C /* Electric Guitar 99.mp3 */,
+			);
+			path = Electric;
+			sourceTree = "<group>";
+		};
 		6DD5FAFF18FCA3460066C888 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -2556,54 +2787,6 @@
 				6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */,
 			);
 			name = Audio;
-			sourceTree = "<group>";
-		};
-		6DED8767191874460091721E /* Electric Guitar */ = {
-			isa = PBXGroup;
-			children = (
-				6DED8768191874460091721E /* Electric Guitar 40.mp3 */,
-				6DED8769191874460091721E /* Electric Guitar 41.mp3 */,
-				6DED876A191874460091721E /* Electric Guitar 42.mp3 */,
-				6DED876B191874460091721E /* Electric Guitar 43.mp3 */,
-				6DED876C191874460091721E /* Electric Guitar 44.mp3 */,
-				6DED876D191874460091721E /* Electric Guitar 45.mp3 */,
-				6DED876E191874460091721E /* Electric Guitar 46.mp3 */,
-				6DED876F191874460091721E /* Electric Guitar 47.mp3 */,
-				6DED8770191874460091721E /* Electric Guitar 48.mp3 */,
-				6DED8771191874460091721E /* Electric Guitar 49.mp3 */,
-				6DED8772191874460091721E /* Electric Guitar 50.mp3 */,
-				6DED8773191874460091721E /* Electric Guitar 51.mp3 */,
-				6DED8774191874460091721E /* Electric Guitar 52.mp3 */,
-				6DED8775191874460091721E /* Electric Guitar 53.mp3 */,
-				6DED8776191874460091721E /* Electric Guitar 54.mp3 */,
-				6DED8777191874460091721E /* Electric Guitar 55.mp3 */,
-				6DED8778191874460091721E /* Electric Guitar 56.mp3 */,
-				6DED8779191874460091721E /* Electric Guitar 57.mp3 */,
-				6DED877A191874460091721E /* Electric Guitar 58.mp3 */,
-				6DED877B191874460091721E /* Electric Guitar 59.mp3 */,
-				6DED877C191874460091721E /* Electric Guitar 60.mp3 */,
-				6DED877D191874460091721E /* Electric Guitar 61.mp3 */,
-				6DED877E191874460091721E /* Electric Guitar 62.mp3 */,
-				6DED877F191874460091721E /* Electric Guitar 63.mp3 */,
-				6DED8780191874460091721E /* Electric Guitar 64.mp3 */,
-				6DED8781191874460091721E /* Electric Guitar 65.mp3 */,
-				6DED8782191874460091721E /* Electric Guitar 66.mp3 */,
-				6DED8783191874460091721E /* Electric Guitar 67.mp3 */,
-				6DED8784191874460091721E /* Electric Guitar 68.mp3 */,
-				6DED8785191874460091721E /* Electric Guitar 69.mp3 */,
-				6DED8786191874460091721E /* Electric Guitar 70.mp3 */,
-				6DED8787191874460091721E /* Electric Guitar 71.mp3 */,
-				6DED8788191874460091721E /* Electric Guitar 72.mp3 */,
-				6DED8789191874460091721E /* Electric Guitar 73.mp3 */,
-				6DED878A191874460091721E /* Electric Guitar 74.mp3 */,
-				6DED878B191874460091721E /* Electric Guitar 75.mp3 */,
-				6DED878C191874460091721E /* Electric Guitar 76.mp3 */,
-				6DED878D191874460091721E /* Electric Guitar 77.mp3 */,
-				6DED878E191874460091721E /* Electric Guitar 78.mp3 */,
-				6DED878F191874460091721E /* Electric Guitar 79.mp3 */,
-				6DED8790191874460091721E /* Electric Guitar 80.mp3 */,
-			);
-			path = "Electric Guitar";
 			sourceTree = "<group>";
 		};
 		9D054C84174C68E000FA3239 /* Bowed Strings */ = {
@@ -2849,9 +3032,9 @@
 		9D0BF7B814B57F8F00CF6372 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				6DB285441921915600B3D14C /* Electric */,
 				6D62271E191D84D9003D8534 /* Metronome.mp3 */,
 				6DAD0AE719187F1F005B3807 /* Warm Analogue */,
-				6DED8767191874460091721E /* Electric Guitar */,
 				9D054E74174D425B00FA3239 /* Marimba */,
 				9D054DF8174C68FB00FA3239 /* Upright Bass */,
 				9D054D7C174C68EE00FA3239 /* Muted Clav */,
@@ -3831,13 +4014,13 @@
 				EC24DC2B161A84F500016B78 /* Default@2x.png in Resources */,
 				EC24DCEB161A89C000016B78 /* Acoustic Guitar 40.mp3 in Resources */,
 				EC24DCEC161A89C000016B78 /* Acoustic Guitar 41.mp3 in Resources */,
+				6DB285F71921915600B3D14C /* Electric Guitar 76.mp3 in Resources */,
 				EC24DCED161A89C000016B78 /* Acoustic Guitar 42.mp3 in Resources */,
 				EC24DCEE161A89C000016B78 /* Acoustic Guitar 43.mp3 in Resources */,
 				EC24DCEF161A89C000016B78 /* Acoustic Guitar 44.mp3 in Resources */,
 				EC24DCF0161A89C000016B78 /* Acoustic Guitar 45.mp3 in Resources */,
 				EC24DCF1161A89C000016B78 /* Acoustic Guitar 46.mp3 in Resources */,
 				6D20EF5F191AA68600E78A9D /* PreviewIcon.png in Resources */,
-				6DED8793191874460091721E /* Electric Guitar 42.mp3 in Resources */,
 				EC24DCF2161A89C000016B78 /* Acoustic Guitar 47.mp3 in Resources */,
 				EC24DCF3161A89C000016B78 /* Acoustic Guitar 48.mp3 in Resources */,
 				EC24DCF4161A89C000016B78 /* Acoustic Guitar 49.mp3 in Resources */,
@@ -3846,9 +4029,11 @@
 				EC24DCF7161A89C000016B78 /* Acoustic Guitar 52.mp3 in Resources */,
 				EC24DCF8161A89C000016B78 /* Acoustic Guitar 53.mp3 in Resources */,
 				EC24DCF9161A89C000016B78 /* Acoustic Guitar 54.mp3 in Resources */,
+				6DB285EE1921915600B3D14C /* Electric Guitar 68.mp3 in Resources */,
 				EC24DCFA161A89C000016B78 /* Acoustic Guitar 55.mp3 in Resources */,
 				EC24DCFB161A89C000016B78 /* Acoustic Guitar 56.mp3 in Resources */,
 				6DAD0B2F19187F1F005B3807 /* Warm Analogue 70.mp3 in Resources */,
+				6DB286081921915600B3D14C /* Electric Guitar 91.mp3 in Resources */,
 				EC24DCFC161A89C000016B78 /* Acoustic Guitar 57.mp3 in Resources */,
 				EC24DCFD161A89C000016B78 /* Acoustic Guitar 58.mp3 in Resources */,
 				6DAD0B2C19187F1F005B3807 /* Warm Analogue 67.mp3 in Resources */,
@@ -3858,12 +4043,13 @@
 				EC24DD01161A89C000016B78 /* Acoustic Guitar 62.mp3 in Resources */,
 				EC24DD02161A89C000016B78 /* Acoustic Guitar 63.mp3 in Resources */,
 				EC24DD03161A89C000016B78 /* Acoustic Guitar 64.mp3 in Resources */,
-				6DED879F191874460091721E /* Electric Guitar 54.mp3 in Resources */,
+				6DB285FB1921915600B3D14C /* Electric Guitar 8.mp3 in Resources */,
 				EC24DD04161A89C000016B78 /* Acoustic Guitar 65.mp3 in Resources */,
 				EC24DD05161A89C000016B78 /* Acoustic Guitar 66.mp3 in Resources */,
 				EC24DD06161A89C000016B78 /* Acoustic Guitar 67.mp3 in Resources */,
 				EC24DD07161A89C000016B78 /* Acoustic Guitar 68.mp3 in Resources */,
 				EC24DD08161A89C000016B78 /* Acoustic Guitar 69.mp3 in Resources */,
+				6DB285F81921915600B3D14C /* Electric Guitar 77.mp3 in Resources */,
 				EC24DD09161A89C000016B78 /* Acoustic Guitar 70.mp3 in Resources */,
 				6DAD0B1119187F1F005B3807 /* Warm Analogue 40.mp3 in Resources */,
 				EC24DD0A161A89C000016B78 /* Acoustic Guitar 71.mp3 in Resources */,
@@ -3877,10 +4063,12 @@
 				EC24DD10161A89C000016B78 /* Acoustic Guitar 77.mp3 in Resources */,
 				EC24DD11161A89C000016B78 /* Acoustic Guitar 78.mp3 in Resources */,
 				EC24DD12161A89C000016B78 /* Acoustic Guitar 79.mp3 in Resources */,
+				6DB286051921915600B3D14C /* Electric Guitar 89.mp3 in Resources */,
 				EC24DD13161A89C000016B78 /* Acoustic Guitar 80.mp3 in Resources */,
 				EC24DD14161A89C400016B78 /* Rock Guitar 40.mp3 in Resources */,
 				EC24DD15161A89C400016B78 /* Rock Guitar 41.mp3 in Resources */,
 				EC24DD16161A89C400016B78 /* Rock Guitar 42.mp3 in Resources */,
+				6DB2860D1921915600B3D14C /* Electric Guitar 96.mp3 in Resources */,
 				EC24DD17161A89C400016B78 /* Rock Guitar 43.mp3 in Resources */,
 				EC24DD18161A89C400016B78 /* Rock Guitar 44.mp3 in Resources */,
 				6D3D06DF18F4D2E8007683DB /* README.md in Resources */,
@@ -3888,9 +4076,9 @@
 				EC24DD1A161A89C400016B78 /* Rock Guitar 46.mp3 in Resources */,
 				EC24DD1B161A89C400016B78 /* Rock Guitar 47.mp3 in Resources */,
 				EC24DD1C161A89C400016B78 /* Rock Guitar 48.mp3 in Resources */,
-				6DED87B0191874460091721E /* Electric Guitar 71.mp3 in Resources */,
 				EC24DD1D161A89C400016B78 /* Rock Guitar 49.mp3 in Resources */,
 				EC24DD1E161A89C400016B78 /* Rock Guitar 50.mp3 in Resources */,
+				6DB285F01921915600B3D14C /* Electric Guitar 7.mp3 in Resources */,
 				EC24DD1F161A89C400016B78 /* Rock Guitar 51.mp3 in Resources */,
 				EC24DD20161A89C400016B78 /* Rock Guitar 52.mp3 in Resources */,
 				EC24DD21161A89C400016B78 /* Rock Guitar 53.mp3 in Resources */,
@@ -3909,10 +4097,10 @@
 				EC24DD2E161A89C400016B78 /* Rock Guitar 66.mp3 in Resources */,
 				EC24DD2F161A89C400016B78 /* Rock Guitar 67.mp3 in Resources */,
 				EC24DD30161A89C400016B78 /* Rock Guitar 68.mp3 in Resources */,
+				6DB285FD1921915600B3D14C /* Electric Guitar 81.mp3 in Resources */,
 				EC24DD31161A89C400016B78 /* Rock Guitar 69.mp3 in Resources */,
 				EC24DD32161A89C400016B78 /* Rock Guitar 70.mp3 in Resources */,
 				EC24DD33161A89C400016B78 /* Rock Guitar 71.mp3 in Resources */,
-				6DED87B3191874460091721E /* Electric Guitar 74.mp3 in Resources */,
 				EC24DD34161A89C400016B78 /* Rock Guitar 72.mp3 in Resources */,
 				EC24DD35161A89C400016B78 /* Rock Guitar 73.mp3 in Resources */,
 				EC24DD36161A89C400016B78 /* Rock Guitar 74.mp3 in Resources */,
@@ -3924,11 +4112,13 @@
 				6DAD0B3119187F1F005B3807 /* Warm Analogue 72.mp3 in Resources */,
 				EC24DD3C161A89C400016B78 /* Rock Guitar 80.mp3 in Resources */,
 				EC24DD3D161A89C800016B78 /* Piano 40.mp3 in Resources */,
+				6DB285B61921915600B3D14C /* Electric Guitar 17.mp3 in Resources */,
 				EC24DD3E161A89C800016B78 /* Piano 41.mp3 in Resources */,
 				EC24DD3F161A89C800016B78 /* Piano 42.mp3 in Resources */,
 				EC24DD40161A89C800016B78 /* Piano 43.mp3 in Resources */,
 				EC24DD41161A89C800016B78 /* Piano 44.mp3 in Resources */,
 				6DAD0B2D19187F1F005B3807 /* Warm Analogue 68.mp3 in Resources */,
+				6DB285CC1921915600B3D14C /* Electric Guitar 37.mp3 in Resources */,
 				EC24DD42161A89C800016B78 /* Piano 45.mp3 in Resources */,
 				EC24DD43161A89C800016B78 /* Piano 46.mp3 in Resources */,
 				EC24DD44161A89C800016B78 /* Piano 47.mp3 in Resources */,
@@ -3942,17 +4132,19 @@
 				EC24DD4C161A89C800016B78 /* Piano 55.mp3 in Resources */,
 				EC24DD4D161A89C800016B78 /* Piano 56.mp3 in Resources */,
 				EC24DD4E161A89C800016B78 /* Piano 57.mp3 in Resources */,
+				6DB285BE1921915600B3D14C /* Electric Guitar 24.mp3 in Resources */,
 				EC24DD4F161A89C800016B78 /* Piano 58.mp3 in Resources */,
 				EC24DD50161A89C800016B78 /* Piano 59.mp3 in Resources */,
 				EC24DD51161A89C800016B78 /* Piano 60.mp3 in Resources */,
-				6DED8799191874460091721E /* Electric Guitar 48.mp3 in Resources */,
 				EC24DD52161A89C800016B78 /* Piano 61.mp3 in Resources */,
 				EC24DD53161A89C800016B78 /* Piano 62.mp3 in Resources */,
 				EC24DD54161A89C800016B78 /* Piano 63.mp3 in Resources */,
 				EC24DD55161A89C800016B78 /* Piano 64.mp3 in Resources */,
 				EC24DD56161A89C800016B78 /* Piano 65.mp3 in Resources */,
+				6DB285AC1921915600B3D14C /* Electric Guitar 100.mp3 in Resources */,
 				EC24DD57161A89C800016B78 /* Piano 66.mp3 in Resources */,
 				EC24DD58161A89C800016B78 /* Piano 67.mp3 in Resources */,
+				6DB285C01921915600B3D14C /* Electric Guitar 26.mp3 in Resources */,
 				6DAD0B3319187F1F005B3807 /* Warm Analogue 74.mp3 in Resources */,
 				EC24DD59161A89C800016B78 /* Piano 68.mp3 in Resources */,
 				EC24DD5A161A89C800016B78 /* Piano 69.mp3 in Resources */,
@@ -3961,10 +4153,12 @@
 				EC24DD5C161A89C800016B78 /* Piano 71.mp3 in Resources */,
 				EC24DD5D161A89C800016B78 /* Piano 72.mp3 in Resources */,
 				EC24DD5E161A89C800016B78 /* Piano 73.mp3 in Resources */,
+				6DB285B51921915600B3D14C /* Electric Guitar 16.mp3 in Resources */,
 				EC24DD5F161A89C800016B78 /* Piano 74.mp3 in Resources */,
 				EC24DD60161A89C800016B78 /* Piano 75.mp3 in Resources */,
 				EC24DD61161A89C800016B78 /* Piano 76.mp3 in Resources */,
 				EC24DD62161A89C800016B78 /* Piano 77.mp3 in Resources */,
+				6DB285EC1921915600B3D14C /* Electric Guitar 66.mp3 in Resources */,
 				EC24DD63161A89C800016B78 /* Piano 78.mp3 in Resources */,
 				EC24DD64161A89C800016B78 /* Piano 79.mp3 in Resources */,
 				EC24DD65161A89C800016B78 /* Piano 80.mp3 in Resources */,
@@ -3977,15 +4171,18 @@
 				EC24DD6B161A89CD00016B78 /* Rhodes 45.mp3 in Resources */,
 				EC24DD6C161A89CD00016B78 /* Rhodes 46.mp3 in Resources */,
 				EC24DD6D161A89CD00016B78 /* Rhodes 47.mp3 in Resources */,
+				6DB2860A1921915600B3D14C /* Electric Guitar 93.mp3 in Resources */,
 				EC24DD6E161A89CD00016B78 /* Rhodes 48.mp3 in Resources */,
 				EC24DD6F161A89CD00016B78 /* Rhodes 49.mp3 in Resources */,
-				6DED87A6191874460091721E /* Electric Guitar 61.mp3 in Resources */,
-				6DED87B6191874460091721E /* Electric Guitar 77.mp3 in Resources */,
 				EC24DD70161A89CD00016B78 /* Rhodes 50.mp3 in Resources */,
 				EC24DD71161A89CD00016B78 /* Rhodes 51.mp3 in Resources */,
+				6DB285BB1921915600B3D14C /* Electric Guitar 21.mp3 in Resources */,
+				6DB285B31921915600B3D14C /* Electric Guitar 14.mp3 in Resources */,
 				EC24DD72161A89CD00016B78 /* Rhodes 52.mp3 in Resources */,
+				6DB286071921915600B3D14C /* Electric Guitar 90.mp3 in Resources */,
 				EC24DD73161A89CD00016B78 /* Rhodes 53.mp3 in Resources */,
 				EC24DD74161A89CD00016B78 /* Rhodes 54.mp3 in Resources */,
+				6DB285BA1921915600B3D14C /* Electric Guitar 20.mp3 in Resources */,
 				EC24DD75161A89CD00016B78 /* Rhodes 55.mp3 in Resources */,
 				EC24DD76161A89CD00016B78 /* Rhodes 56.mp3 in Resources */,
 				EC24DD77161A89CD00016B78 /* Rhodes 57.mp3 in Resources */,
@@ -3995,7 +4192,6 @@
 				EC24DD7B161A89CD00016B78 /* Rhodes 61.mp3 in Resources */,
 				EC24DD7C161A89CD00016B78 /* Rhodes 62.mp3 in Resources */,
 				EC24DD7D161A89CD00016B78 /* Rhodes 63.mp3 in Resources */,
-				6DED87AF191874460091721E /* Electric Guitar 70.mp3 in Resources */,
 				EC24DD7E161A89CD00016B78 /* Rhodes 64.mp3 in Resources */,
 				EC24DD7F161A89CD00016B78 /* Rhodes 65.mp3 in Resources */,
 				EC24DD80161A89CD00016B78 /* Rhodes 66.mp3 in Resources */,
@@ -4014,26 +4210,32 @@
 				EC24DD8B161A89CD00016B78 /* Rhodes 77.mp3 in Resources */,
 				EC24DD8C161A89CD00016B78 /* Rhodes 78.mp3 in Resources */,
 				EC24DD8D161A89CD00016B78 /* Rhodes 79.mp3 in Resources */,
+				6DB285B01921915600B3D14C /* Electric Guitar 11.mp3 in Resources */,
 				EC24DD8E161A89CD00016B78 /* Rhodes 80.mp3 in Resources */,
 				EC24DD8F161A89D200016B78 /* Droplet 52.mp3 in Resources */,
 				EC24DD90161A89D200016B78 /* Droplet 53.mp3 in Resources */,
 				EC24DD91161A89D200016B78 /* Droplet 54.mp3 in Resources */,
 				EC24DD92161A89D200016B78 /* Droplet 55.mp3 in Resources */,
 				EC24DD93161A89D200016B78 /* Droplet 56.mp3 in Resources */,
-				6DED87B5191874460091721E /* Electric Guitar 76.mp3 in Resources */,
 				EC24DD94161A89D200016B78 /* Droplet 57.mp3 in Resources */,
 				EC24DD95161A89D200016B78 /* Droplet 58.mp3 in Resources */,
 				EC24DD96161A89D200016B78 /* Droplet 59.mp3 in Resources */,
 				EC24DD97161A89D200016B78 /* Droplet 60.mp3 in Resources */,
 				EC24DD98161A89D200016B78 /* Droplet 61.mp3 in Resources */,
 				EC24DD99161A89D200016B78 /* Droplet 62.mp3 in Resources */,
+				6DB285FE1921915600B3D14C /* Electric Guitar 82.mp3 in Resources */,
 				EC24DD9A161A89D200016B78 /* Droplet 63.mp3 in Resources */,
 				EC24DD9B161A89D200016B78 /* Droplet 64.mp3 in Resources */,
+				6DB285DA1921915600B3D14C /* Electric Guitar 5.mp3 in Resources */,
 				EC24DD9C161A89D200016B78 /* Droplet 65.mp3 in Resources */,
+				6DB285D91921915600B3D14C /* Electric Guitar 49.mp3 in Resources */,
+				6DB285EF1921915600B3D14C /* Electric Guitar 69.mp3 in Resources */,
 				EC24DD9D161A89D200016B78 /* Droplet 66.mp3 in Resources */,
 				EC24DD9E161A89D200016B78 /* Droplet 67.mp3 in Resources */,
 				EC24DD9F161A89D200016B78 /* Droplet 68.mp3 in Resources */,
+				6DB285CB1921915600B3D14C /* Electric Guitar 36.mp3 in Resources */,
 				EC24DDA0161A89D200016B78 /* Droplet 69.mp3 in Resources */,
+				6DB285CE1921915600B3D14C /* Electric Guitar 39.mp3 in Resources */,
 				EC24DDA1161A89D200016B78 /* Droplet 70.mp3 in Resources */,
 				EC24DDA2161A89D200016B78 /* Droplet 71.mp3 in Resources */,
 				EC24DDA3161A89D200016B78 /* Droplet 72.mp3 in Resources */,
@@ -4042,20 +4244,24 @@
 				EC24DDA6161A89D200016B78 /* Droplet 75.mp3 in Resources */,
 				EC24DDA7161A89D200016B78 /* Droplet 76.mp3 in Resources */,
 				EC24DDA8161A89D200016B78 /* Droplet 77.mp3 in Resources */,
-				6DED879D191874460091721E /* Electric Guitar 52.mp3 in Resources */,
 				EC24DDA9161A89D200016B78 /* Droplet 78.mp3 in Resources */,
 				EC24DDAA161A89D200016B78 /* Droplet 79.mp3 in Resources */,
 				EC24DDAB161A89D200016B78 /* Droplet 80.mp3 in Resources */,
+				6DB285FC1921915600B3D14C /* Electric Guitar 80.mp3 in Resources */,
 				EC24DDAC161A89D200016B78 /* Droplet 81.mp3 in Resources */,
 				EC24DDAD161A89D200016B78 /* Droplet 82.mp3 in Resources */,
 				EC24DDAE161A89D200016B78 /* Droplet 83.mp3 in Resources */,
+				6DB285F11921915600B3D14C /* Electric Guitar 70.mp3 in Resources */,
 				EC24DDAF161A89D200016B78 /* Droplet 84.mp3 in Resources */,
 				EC24DDB0161A89D200016B78 /* Droplet 85.mp3 in Resources */,
 				EC24DDB1161A89D200016B78 /* Droplet 86.mp3 in Resources */,
+				6DB285C71921915600B3D14C /* Electric Guitar 32.mp3 in Resources */,
 				EC24DDB2161A89D200016B78 /* Droplet 87.mp3 in Resources */,
+				6DB285C41921915600B3D14C /* Electric Guitar 3.mp3 in Resources */,
 				EC24DDB3161A89D200016B78 /* Droplet 88.mp3 in Resources */,
 				EC24DDB4161A89D200016B78 /* Droplet 89.mp3 in Resources */,
 				EC24DDB5161A89D200016B78 /* Droplet 90.mp3 in Resources */,
+				6DB285E41921915600B3D14C /* Electric Guitar 59.mp3 in Resources */,
 				EC24DDB6161A89D200016B78 /* Droplet 91.mp3 in Resources */,
 				EC24DDB7161A89D200016B78 /* Droplet 92.mp3 in Resources */,
 				6DAD0B3219187F1F005B3807 /* Warm Analogue 73.mp3 in Resources */,
@@ -4063,34 +4269,42 @@
 				EC24DE86161A89F000016B78 /* Square 41.mp3 in Resources */,
 				EC24DE87161A89F000016B78 /* Square 42.mp3 in Resources */,
 				EC24DE88161A89F000016B78 /* Square 43.mp3 in Resources */,
+				6DB285DD1921915600B3D14C /* Electric Guitar 52.mp3 in Resources */,
 				EC24DE89161A89F000016B78 /* Square 44.mp3 in Resources */,
-				6DED8798191874460091721E /* Electric Guitar 47.mp3 in Resources */,
 				EC24DE8A161A89F000016B78 /* Square 45.mp3 in Resources */,
 				EC24DE8B161A89F000016B78 /* Square 46.mp3 in Resources */,
 				6DAD0B3519187F1F005B3807 /* Warm Analogue 76.mp3 in Resources */,
+				6DB2860C1921915600B3D14C /* Electric Guitar 95.mp3 in Resources */,
 				EC24DE8C161A89F000016B78 /* Square 47.mp3 in Resources */,
 				EC24DE8D161A89F000016B78 /* Square 48.mp3 in Resources */,
 				EC24DE8E161A89F000016B78 /* Square 49.mp3 in Resources */,
+				6DB285CD1921915600B3D14C /* Electric Guitar 38.mp3 in Resources */,
 				EC24DE8F161A89F000016B78 /* Square 50.mp3 in Resources */,
-				6DED8796191874460091721E /* Electric Guitar 45.mp3 in Resources */,
 				260CF0B218EBEFDF0083903A /* Localizable.strings in Resources */,
 				EC24DE90161A89F000016B78 /* Square 51.mp3 in Resources */,
 				EC24DE91161A89F000016B78 /* Square 52.mp3 in Resources */,
 				EC24DE92161A89F000016B78 /* Square 53.mp3 in Resources */,
+				6DB286011921915600B3D14C /* Electric Guitar 85.mp3 in Resources */,
+				6DB285F31921915600B3D14C /* Electric Guitar 72.mp3 in Resources */,
 				EC24DE93161A89F000016B78 /* Square 54.mp3 in Resources */,
 				EC24DE94161A89F000016B78 /* Square 55.mp3 in Resources */,
 				EC24DE95161A89F000016B78 /* Square 56.mp3 in Resources */,
 				EC24DE96161A89F000016B78 /* Square 57.mp3 in Resources */,
 				EC24DE97161A89F000016B78 /* Square 58.mp3 in Resources */,
 				EC24DE98161A89F000016B78 /* Square 59.mp3 in Resources */,
+				6DB285ED1921915600B3D14C /* Electric Guitar 67.mp3 in Resources */,
+				6DB285C51921915600B3D14C /* Electric Guitar 30.mp3 in Resources */,
+				6DB285F61921915600B3D14C /* Electric Guitar 75.mp3 in Resources */,
 				EC24DE99161A89F000016B78 /* Square 60.mp3 in Resources */,
 				EC24DE9A161A89F000016B78 /* Square 61.mp3 in Resources */,
+				6DB285C21921915600B3D14C /* Electric Guitar 28.mp3 in Resources */,
 				EC24DE9B161A89F000016B78 /* Square 62.mp3 in Resources */,
 				EC24DE9C161A89F000016B78 /* Square 63.mp3 in Resources */,
 				EC24DE9D161A89F000016B78 /* Square 64.mp3 in Resources */,
 				EC24DE9E161A89F000016B78 /* Square 65.mp3 in Resources */,
 				EC24DE9F161A89F000016B78 /* Square 66.mp3 in Resources */,
 				EC24DEA0161A89F000016B78 /* Square 67.mp3 in Resources */,
+				6DB285E21921915600B3D14C /* Electric Guitar 57.mp3 in Resources */,
 				EC24DEA1161A89F000016B78 /* Square 68.mp3 in Resources */,
 				6DAD0B2619187F1F005B3807 /* Warm Analogue 61.mp3 in Resources */,
 				EC24DEA2161A89F000016B78 /* Square 69.mp3 in Resources */,
@@ -4100,20 +4314,18 @@
 				EC24DEA6161A89F000016B78 /* Square 73.mp3 in Resources */,
 				EC24DEA7161A89F000016B78 /* Square 74.mp3 in Resources */,
 				EC24DEA8161A89F000016B78 /* Square 75.mp3 in Resources */,
+				6DB2860B1921915600B3D14C /* Electric Guitar 94.mp3 in Resources */,
 				6DAD0B2919187F1F005B3807 /* Warm Analogue 64.mp3 in Resources */,
 				EC24DEA9161A89F000016B78 /* Square 76.mp3 in Resources */,
 				EC24DEAA161A89F000016B78 /* Square 77.mp3 in Resources */,
+				6DB285E01921915600B3D14C /* Electric Guitar 55.mp3 in Resources */,
 				EC24DEAB161A89F000016B78 /* Square 78.mp3 in Resources */,
 				EC24DEAC161A89F000016B78 /* Square 79.mp3 in Resources */,
 				EC24DEAD161A89F000016B78 /* Square 80.mp3 in Resources */,
-				6DED87A1191874460091721E /* Electric Guitar 56.mp3 in Resources */,
-				6DED879E191874460091721E /* Electric Guitar 53.mp3 in Resources */,
 				6DAD0B1D19187F1F005B3807 /* Warm Analogue 52.mp3 in Resources */,
-				6DED87AC191874460091721E /* Electric Guitar 67.mp3 in Resources */,
 				6DAD0B3019187F1F005B3807 /* Warm Analogue 71.mp3 in Resources */,
 				6DAD0B3619187F1F005B3807 /* Warm Analogue 77.mp3 in Resources */,
-				6DED87B9191874460091721E /* Electric Guitar 80.mp3 in Resources */,
-				6DED87B1191874460091721E /* Electric Guitar 72.mp3 in Resources */,
+				6DB285DF1921915600B3D14C /* Electric Guitar 54.mp3 in Resources */,
 				EC24DF6C161A8A4300016B78 /* gray82.png in Resources */,
 				EC24DF6D161A8A4800016B78 /* BlackBackArrow_DOWN.png in Resources */,
 				EC24DF6E161A8A4800016B78 /* BlackBackArrow_RIGHT.png in Resources */,
@@ -4124,14 +4336,16 @@
 				EC24DF73161A8A4800016B78 /* WhiteBackArrow_UP.png in Resources */,
 				EC24DF74161A8A4800016B78 /* WhiteBackArrow_LEFT.png in Resources */,
 				EC24DF75161A8A4800016B78 /* XButton.png in Resources */,
+				6DB285DE1921915600B3D14C /* Electric Guitar 53.mp3 in Resources */,
 				6DAD0B2019187F1F005B3807 /* Warm Analogue 55.mp3 in Resources */,
-				6DED87A7191874460091721E /* Electric Guitar 62.mp3 in Resources */,
 				6DAD0B2B19187F1F005B3807 /* Warm Analogue 66.mp3 in Resources */,
 				6DAD0B1C19187F1F005B3807 /* Warm Analogue 51.mp3 in Resources */,
+				6DB286061921915600B3D14C /* Electric Guitar 9.mp3 in Resources */,
 				EC24DFC3161A8A6500016B78 /* preloaded-content.plist in Resources */,
 				EC24DFC4161A8A6700016B78 /* instrumentList.plist in Resources */,
 				EC24DFC6161A8A6D00016B78 /* tutorial.plist in Resources */,
 				EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */,
+				6DB285C11921915600B3D14C /* Electric Guitar 27.mp3 in Resources */,
 				ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */,
 				EC26A3A516CB198F006E97E2 /* DefaultRot.png in Resources */,
 				EC26A3A716CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
@@ -4140,7 +4354,7 @@
 				EC0BAD8716F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
 				ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */,
 				ECE9D23D16FBB7DA00BB6C53 /* SongListCell.xib in Resources */,
-				6DED8791191874460091721E /* Electric Guitar 40.mp3 in Resources */,
+				6DB285C31921915600B3D14C /* Electric Guitar 29.mp3 in Resources */,
 				9DA3137E1704DD8400CFF104 /* InstrumentsAndEffectsViewController.xib in Resources */,
 				9DA313851704DDD900CFF104 /* LightsViewController.xib in Resources */,
 				9DA313931704FA3100CFF104 /* FPMenuViewController.xib in Resources */,
@@ -4154,34 +4368,42 @@
 				ECCC032B170A45E90021DB00 /* DiffHardButton.png in Resources */,
 				ECCC032D170A45E90021DB00 /* DiffMedButton.png in Resources */,
 				ECCC032F170A45E90021DB00 /* MenuPauseBG.jpg in Resources */,
+				6DB285CA1921915600B3D14C /* Electric Guitar 35.mp3 in Resources */,
 				ECCC0337170A493E0021DB00 /* DiffEasyButtonON.png in Resources */,
-				6DED87A4191874460091721E /* Electric Guitar 59.mp3 in Resources */,
+				6DB285F21921915600B3D14C /* Electric Guitar 71.mp3 in Resources */,
 				ECCC0339170A493E0021DB00 /* DiffHardButtonON.png in Resources */,
 				ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
 				ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */,
+				6DB286101921915600B3D14C /* Electric Guitar 99.mp3 in Resources */,
 				ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */,
 				ECCC035B170CBA570021DB00 /* VolumeViewController.xib in Resources */,
 				ECCC0366170CD53E0021DB00 /* Minus.png in Resources */,
 				ECCC0368170CD53E0021DB00 /* Plus.png in Resources */,
+				6DB285B11921915600B3D14C /* Electric Guitar 12.mp3 in Resources */,
 				ECCC036A170CD53E0021DB00 /* VolumeKnob.png in Resources */,
 				ECCC0393170E33600021DB00 /* MinusRotated.png in Resources */,
 				ECCC039B170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */,
+				6DB285B81921915600B3D14C /* Electric Guitar 19.mp3 in Resources */,
 				ECCC039E170F862C0021DB00 /* EndCap.png in Resources */,
 				ECCC03A1170FBA140021DB00 /* InvisibleTrack.png in Resources */,
 				EC69BA1717137072004E982F /* InstrumentIcon.png in Resources */,
+				6DB286031921915600B3D14C /* Electric Guitar 87.mp3 in Resources */,
+				6DB285D11921915600B3D14C /* Electric Guitar 41.mp3 in Resources */,
 				9DEB90501714D66100A7C0CF /* EffectsOffButton.png in Resources */,
 				9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 				6DAD0B2719187F1F005B3807 /* Warm Analogue 62.mp3 in Resources */,
 				ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */,
 				6DAD0B3419187F1F005B3807 /* Warm Analogue 75.mp3 in Resources */,
+				6DB285E61921915600B3D14C /* Electric Guitar 60.mp3 in Resources */,
 				6DAD0B1619187F1F005B3807 /* Warm Analogue 45.mp3 in Resources */,
+				6DB285E81921915600B3D14C /* Electric Guitar 62.mp3 in Resources */,
 				ECE8321C1718905B006E2391 /* GreenVolume.png in Resources */,
 				6DAD0B2E19187F1F005B3807 /* Warm Analogue 69.mp3 in Resources */,
-				6DED87B7191874460091721E /* Electric Guitar 78.mp3 in Resources */,
 				ECE8322117189C1B006E2391 /* LikeOFF.png in Resources */,
 				ECE8322317189C1B006E2391 /* LikeON.png in Resources */,
 				ECE832261718A767006E2391 /* BlueMenu.png in Resources */,
 				ECE832291718BE81006E2391 /* Default-568hRot.png in Resources */,
+				6DB285F91921915600B3D14C /* Electric Guitar 78.mp3 in Resources */,
 				ECE8322E1718D6C0006E2391 /* Skill_GREEN.png in Resources */,
 				ECE832301718D6C0006E2391 /* Skill_RED.png in Resources */,
 				ECE832321718D6C0006E2391 /* Skill_YELLOW.png in Resources */,
@@ -4189,6 +4411,7 @@
 				ECE832361718D82C006E2391 /* Skill_GREY.png in Resources */,
 				ECE8323E1718EA34006E2391 /* SocialViewController.xib in Resources */,
 				9DF148271725EFDB0056A6D1 /* EffectsIcon.png in Resources */,
+				6DB285F51921915600B3D14C /* Electric Guitar 74.mp3 in Resources */,
 				9DF1482A1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
 				9DF1482D1725EFEE0056A6D1 /* LightIcon.png in Resources */,
 				EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */,
@@ -4202,46 +4425,49 @@
 				EC3415F8173863AD00501AF4 /* SocialUserCell.xib in Resources */,
 				EC3416161739983800501AF4 /* SocialSongCell.xib in Resources */,
 				EC34161D1739ADA600501AF4 /* SessionModalViewController.xib in Resources */,
+				6DB285BC1921915600B3D14C /* Electric Guitar 22.mp3 in Resources */,
 				ECDF7F62173D590F003E51EC /* SocialCameraIcon.png in Resources */,
 				9D21E3D0173DBD2B00AD6C1F /* LightsGrid.png in Resources */,
-				6DED8795191874460091721E /* Electric Guitar 44.mp3 in Resources */,
 				ECFF771A1742EA1C002D7D40 /* Bear_Brown.png in Resources */,
 				ECFF771D1742EA9E002D7D40 /* BackButtonRev.png in Resources */,
 				9D64729E1741DEEE00C63B1B /* LightsArrow.png in Resources */,
 				ECFF773617440BA9002D7D40 /* FirmwareModalViewController.xib in Resources */,
 				6DAD0B1419187F1F005B3807 /* Warm Analogue 43.mp3 in Resources */,
-				6DED87AA191874460091721E /* Electric Guitar 65.mp3 in Resources */,
 				9DB5C4C017430FA700EAF9A6 /* Shape_2x2ButtonOFF.png in Resources */,
 				9DB5C4C217430FA700EAF9A6 /* Shape_2x2ButtonON.png in Resources */,
 				9DB5C4C417430FA700EAF9A6 /* Shape_ContinuousButtonOFF.png in Resources */,
 				9DB5C4C617430FA700EAF9A6 /* Shape_ContinuousButtonON.png in Resources */,
 				9DB5C4C817430FA700EAF9A6 /* Shape_SingleButtonOFF.png in Resources */,
+				6DB285F41921915600B3D14C /* Electric Guitar 73.mp3 in Resources */,
+				6DB285D81921915600B3D14C /* Electric Guitar 48.mp3 in Resources */,
 				9DB5C4CA17430FA700EAF9A6 /* Shape_SingleButtonON.png in Resources */,
 				ECFF776617457E3D002D7D40 /* CloseXButton.png in Resources */,
 				ECFF776E17457E3D002D7D40 /* PlayButtonVideo.png in Resources */,
-				6DED879C191874460091721E /* Electric Guitar 51.mp3 in Resources */,
 				ECFF777017457E3D002D7D40 /* IncidentGtar_ComButton.png in Resources */,
+				6DB285E71921915600B3D14C /* Electric Guitar 61.mp3 in Resources */,
 				6DAD0B1719187F1F005B3807 /* Warm Analogue 46.mp3 in Resources */,
-				6DED87B4191874460091721E /* Electric Guitar 75.mp3 in Resources */,
 				ECFF777217457E3D002D7D40 /* gTarLogoTitle.png in Resources */,
+				6DB285AE1921915600B3D14C /* Electric Guitar 102.mp3 in Resources */,
 				ECFF777717457ECA002D7D40 /* CancelButton.png in Resources */,
-				6DED879B191874460091721E /* Electric Guitar 50.mp3 in Resources */,
 				ECFF777917457ECA002D7D40 /* MagGlass.png in Resources */,
 				ECFF777B17457ECA002D7D40 /* SearchBar.png in Resources */,
 				9DB5C4D6174448E100EAF9A6 /* Color_alternating.png in Resources */,
 				9DB5C4D8174448E100EAF9A6 /* Color_blue.png in Resources */,
 				9DB5C4DA174448E100EAF9A6 /* Color_cyan.png in Resources */,
+				6DB286001921915600B3D14C /* Electric Guitar 84.mp3 in Resources */,
 				9DB5C4DC174448E100EAF9A6 /* Color_green.png in Resources */,
 				9DB5C4DE174448E100EAF9A6 /* Color_multi.png in Resources */,
 				9DB5C4E0174448E100EAF9A6 /* Color_orange.png in Resources */,
+				6DB285AD1921915600B3D14C /* Electric Guitar 101.mp3 in Resources */,
 				9DB5C4E2174448E100EAF9A6 /* Color_purple.png in Resources */,
 				9DB5C4E4174448E100EAF9A6 /* Color_red.png in Resources */,
 				9DB5C4E8174448E100EAF9A6 /* Color_yellow.png in Resources */,
 				9DB5C4EB1744495300EAF9A6 /* Color_white.png in Resources */,
+				6DB285E11921915600B3D14C /* Electric Guitar 56.mp3 in Resources */,
 				9DB5C4FD1745ACE700EAF9A6 /* Color_blue_Select.png in Resources */,
-				6DED87A8191874460091721E /* Electric Guitar 63.mp3 in Resources */,
 				9DB5C4FF1745ACE700EAF9A6 /* Color_cyan_Select.png in Resources */,
 				9DB5C5011745ACE700EAF9A6 /* Color_green_Select.png in Resources */,
+				6DB285BD1921915600B3D14C /* Electric Guitar 23.mp3 in Resources */,
 				9DB5C5071745ACE700EAF9A6 /* Color_multi_Select.png in Resources */,
 				9DB5C5091745ACE700EAF9A6 /* Color_orange_Select.png in Resources */,
 				9DB5C50B1745ACE700EAF9A6 /* Color_red_Select.png in Resources */,
@@ -4249,12 +4475,13 @@
 				9DB5C50F1745ACE700EAF9A6 /* Color_yellow_Select.png in Resources */,
 				9DB5C5151745BE9100EAF9A6 /* Color_purple_Select.png in Resources */,
 				9DB5C51B1745C0C000EAF9A6 /* Color_alternating_Select.png in Resources */,
+				6DB285B41921915600B3D14C /* Electric Guitar 15.mp3 in Resources */,
 				9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */,
 				9D054CB0174C68E000FA3239 /* Bowed Strings 41.mp3 in Resources */,
 				9D054CB2174C68E000FA3239 /* Bowed Strings 42.mp3 in Resources */,
-				6DED87B8191874460091721E /* Electric Guitar 79.mp3 in Resources */,
 				9D054CB4174C68E000FA3239 /* Bowed Strings 43.mp3 in Resources */,
 				9D054CB6174C68E000FA3239 /* Bowed Strings 44.mp3 in Resources */,
+				6DB2860F1921915600B3D14C /* Electric Guitar 98.mp3 in Resources */,
 				6DAD0B1919187F1F005B3807 /* Warm Analogue 48.mp3 in Resources */,
 				9D054CB8174C68E000FA3239 /* Bowed Strings 45.mp3 in Resources */,
 				9D054CBA174C68E000FA3239 /* Bowed Strings 46.mp3 in Resources */,
@@ -4267,8 +4494,8 @@
 				9D054CC8174C68E000FA3239 /* Bowed Strings 53.mp3 in Resources */,
 				9D054CCA174C68E000FA3239 /* Bowed Strings 54.mp3 in Resources */,
 				9D054CCC174C68E000FA3239 /* Bowed Strings 55.mp3 in Resources */,
-				6DED8792191874460091721E /* Electric Guitar 41.mp3 in Resources */,
 				9D054CCE174C68E000FA3239 /* Bowed Strings 56.mp3 in Resources */,
+				6DB286041921915600B3D14C /* Electric Guitar 88.mp3 in Resources */,
 				9D054CD0174C68E000FA3239 /* Bowed Strings 57.mp3 in Resources */,
 				9D054CD2174C68E000FA3239 /* Bowed Strings 58.mp3 in Resources */,
 				9D054CD4174C68E000FA3239 /* Bowed Strings 59.mp3 in Resources */,
@@ -4284,15 +4511,18 @@
 				9D054CE8174C68E000FA3239 /* Bowed Strings 69.mp3 in Resources */,
 				9D054CEA174C68E000FA3239 /* Bowed Strings 70.mp3 in Resources */,
 				9D054CEC174C68E000FA3239 /* Bowed Strings 71.mp3 in Resources */,
+				6DB285DC1921915600B3D14C /* Electric Guitar 51.mp3 in Resources */,
 				9D054CEE174C68E000FA3239 /* Bowed Strings 72.mp3 in Resources */,
 				9D054CF0174C68E000FA3239 /* Bowed Strings 73.mp3 in Resources */,
+				6DB285E91921915600B3D14C /* Electric Guitar 63.mp3 in Resources */,
+				6DB285B91921915600B3D14C /* Electric Guitar 2.mp3 in Resources */,
 				6DAD0B1319187F1F005B3807 /* Warm Analogue 42.mp3 in Resources */,
 				9D054CF2174C68E000FA3239 /* Bowed Strings 74.mp3 in Resources */,
 				9D054CF4174C68E000FA3239 /* Bowed Strings 75.mp3 in Resources */,
 				9D054CF6174C68E000FA3239 /* Bowed Strings 76.mp3 in Resources */,
-				6DED879A191874460091721E /* Electric Guitar 49.mp3 in Resources */,
 				9D054CF8174C68E000FA3239 /* Bowed Strings 77.mp3 in Resources */,
 				9D054CFA174C68E000FA3239 /* Bowed Strings 78.mp3 in Resources */,
+				6DB286021921915600B3D14C /* Electric Guitar 86.mp3 in Resources */,
 				9D054CFC174C68E000FA3239 /* Bowed Strings 79.mp3 in Resources */,
 				9D054CFE174C68E000FA3239 /* Bowed Strings 80.mp3 in Resources */,
 				6D3D06E018F4D2E8007683DB /* release_notes.md in Resources */,
@@ -4313,19 +4543,24 @@
 				9D054D46174C68E700FA3239 /* Carl's Synth 54.mp3 in Resources */,
 				9D054D48174C68E700FA3239 /* Carl's Synth 55.mp3 in Resources */,
 				9D054D4A174C68E700FA3239 /* Carl's Synth 56.mp3 in Resources */,
+				6DB285E51921915600B3D14C /* Electric Guitar 6.mp3 in Resources */,
 				9D054D4C174C68E700FA3239 /* Carl's Synth 57.mp3 in Resources */,
+				6DB285B71921915600B3D14C /* Electric Guitar 18.mp3 in Resources */,
 				9D054D4E174C68E700FA3239 /* Carl's Synth 58.mp3 in Resources */,
 				9D054D50174C68E700FA3239 /* Carl's Synth 59.mp3 in Resources */,
 				9D054D52174C68E700FA3239 /* Carl's Synth 60.mp3 in Resources */,
 				9D054D54174C68E700FA3239 /* Carl's Synth 61.mp3 in Resources */,
 				9D054D56174C68E700FA3239 /* Carl's Synth 62.mp3 in Resources */,
+				6DB285AB1921915600B3D14C /* Electric Guitar 10.mp3 in Resources */,
 				9D054D58174C68E700FA3239 /* Carl's Synth 63.mp3 in Resources */,
 				9D054D5A174C68E700FA3239 /* Carl's Synth 64.mp3 in Resources */,
 				9D054D5C174C68E700FA3239 /* Carl's Synth 65.mp3 in Resources */,
 				9D054D5E174C68E700FA3239 /* Carl's Synth 66.mp3 in Resources */,
 				9D054D60174C68E700FA3239 /* Carl's Synth 67.mp3 in Resources */,
+				6DB285D31921915600B3D14C /* Electric Guitar 43.mp3 in Resources */,
 				9D054D62174C68E700FA3239 /* Carl's Synth 68.mp3 in Resources */,
 				9D054D64174C68E700FA3239 /* Carl's Synth 69.mp3 in Resources */,
+				6DB285FA1921915600B3D14C /* Electric Guitar 79.mp3 in Resources */,
 				9D054D66174C68E700FA3239 /* Carl's Synth 70.mp3 in Resources */,
 				9D054D68174C68E700FA3239 /* Carl's Synth 71.mp3 in Resources */,
 				9D054D6A174C68E700FA3239 /* Carl's Synth 72.mp3 in Resources */,
@@ -4336,7 +4571,6 @@
 				9D054D74174C68E700FA3239 /* Carl's Synth 77.mp3 in Resources */,
 				9D054D76174C68E700FA3239 /* Carl's Synth 78.mp3 in Resources */,
 				9D054D78174C68E700FA3239 /* Carl's Synth 79.mp3 in Resources */,
-				6DED87AD191874460091721E /* Electric Guitar 68.mp3 in Resources */,
 				9D054D7A174C68E700FA3239 /* Carl's Synth 80.mp3 in Resources */,
 				9D054DA6174C68EE00FA3239 /* Muted Clav 40.mp3 in Resources */,
 				6DAD0B1219187F1F005B3807 /* Warm Analogue 41.mp3 in Resources */,
@@ -4345,7 +4579,6 @@
 				9D054DAC174C68EE00FA3239 /* Muted Clav 43.mp3 in Resources */,
 				9D054DAE174C68EE00FA3239 /* Muted Clav 44.mp3 in Resources */,
 				9D054DB0174C68EE00FA3239 /* Muted Clav 45.mp3 in Resources */,
-				6DED87A5191874460091721E /* Electric Guitar 60.mp3 in Resources */,
 				9D054DB2174C68EE00FA3239 /* Muted Clav 46.mp3 in Resources */,
 				9D054DB4174C68EE00FA3239 /* Muted Clav 47.mp3 in Resources */,
 				9D054DB6174C68EE00FA3239 /* Muted Clav 48.mp3 in Resources */,
@@ -4354,9 +4587,12 @@
 				9D054DBA174C68EE00FA3239 /* Muted Clav 50.mp3 in Resources */,
 				9D054DBC174C68EE00FA3239 /* Muted Clav 51.mp3 in Resources */,
 				9D054DBE174C68EE00FA3239 /* Muted Clav 52.mp3 in Resources */,
+				6DB285FF1921915600B3D14C /* Electric Guitar 83.mp3 in Resources */,
 				9D054DC0174C68EE00FA3239 /* Muted Clav 53.mp3 in Resources */,
 				9D054DC2174C68EE00FA3239 /* Muted Clav 54.mp3 in Resources */,
+				6DB285B21921915600B3D14C /* Electric Guitar 13.mp3 in Resources */,
 				9D054DC4174C68EE00FA3239 /* Muted Clav 55.mp3 in Resources */,
+				6DB285C81921915600B3D14C /* Electric Guitar 33.mp3 in Resources */,
 				9D054DC6174C68EE00FA3239 /* Muted Clav 56.mp3 in Resources */,
 				9D054DC8174C68EE00FA3239 /* Muted Clav 57.mp3 in Resources */,
 				9D054DCA174C68EE00FA3239 /* Muted Clav 58.mp3 in Resources */,
@@ -4364,16 +4600,20 @@
 				6DAD0B1B19187F1F005B3807 /* Warm Analogue 50.mp3 in Resources */,
 				9D054DCE174C68EE00FA3239 /* Muted Clav 60.mp3 in Resources */,
 				9D054DD0174C68EE00FA3239 /* Muted Clav 61.mp3 in Resources */,
+				6DB285D21921915600B3D14C /* Electric Guitar 42.mp3 in Resources */,
 				9D054DD2174C68EE00FA3239 /* Muted Clav 62.mp3 in Resources */,
 				6DAD0B3719187F1F005B3807 /* Warm Analogue 78.mp3 in Resources */,
 				9D054DD4174C68EE00FA3239 /* Muted Clav 63.mp3 in Resources */,
 				9D054DD6174C68EE00FA3239 /* Muted Clav 64.mp3 in Resources */,
 				9D054DD8174C68EE00FA3239 /* Muted Clav 65.mp3 in Resources */,
 				9D054DDA174C68EE00FA3239 /* Muted Clav 66.mp3 in Resources */,
+				6DB285C91921915600B3D14C /* Electric Guitar 34.mp3 in Resources */,
 				9D054DDC174C68EE00FA3239 /* Muted Clav 67.mp3 in Resources */,
 				9D054DDE174C68EE00FA3239 /* Muted Clav 68.mp3 in Resources */,
 				9D054DE0174C68EE00FA3239 /* Muted Clav 69.mp3 in Resources */,
+				6DB285E31921915600B3D14C /* Electric Guitar 58.mp3 in Resources */,
 				9D054DE2174C68EE00FA3239 /* Muted Clav 70.mp3 in Resources */,
+				6DB285BF1921915600B3D14C /* Electric Guitar 25.mp3 in Resources */,
 				9D054DE4174C68EE00FA3239 /* Muted Clav 71.mp3 in Resources */,
 				9D054DE6174C68EE00FA3239 /* Muted Clav 72.mp3 in Resources */,
 				9D054DE8174C68EE00FA3239 /* Muted Clav 73.mp3 in Resources */,
@@ -4384,7 +4624,6 @@
 				9D054DF0174C68EE00FA3239 /* Muted Clav 77.mp3 in Resources */,
 				9D054DF2174C68EE00FA3239 /* Muted Clav 78.mp3 in Resources */,
 				9D054DF4174C68EE00FA3239 /* Muted Clav 79.mp3 in Resources */,
-				6DED87A3191874460091721E /* Electric Guitar 58.mp3 in Resources */,
 				9D054DF6174C68EE00FA3239 /* Muted Clav 80.mp3 in Resources */,
 				9D054E22174C68FB00FA3239 /* Upright Bass 40.mp3 in Resources */,
 				9D054E24174C68FB00FA3239 /* Upright Bass 41.mp3 in Resources */,
@@ -4394,18 +4633,20 @@
 				9D054E2C174C68FB00FA3239 /* Upright Bass 45.mp3 in Resources */,
 				9D054E2E174C68FB00FA3239 /* Upright Bass 46.mp3 in Resources */,
 				9D054E30174C68FB00FA3239 /* Upright Bass 47.mp3 in Resources */,
-				6DED87A9191874460091721E /* Electric Guitar 64.mp3 in Resources */,
 				9D054E32174C68FB00FA3239 /* Upright Bass 48.mp3 in Resources */,
 				9D054E34174C68FB00FA3239 /* Upright Bass 49.mp3 in Resources */,
 				9D054E36174C68FB00FA3239 /* Upright Bass 50.mp3 in Resources */,
 				6DAD0B2319187F1F005B3807 /* Warm Analogue 58.mp3 in Resources */,
-				6DED8794191874460091721E /* Electric Guitar 43.mp3 in Resources */,
 				9D054E38174C68FB00FA3239 /* Upright Bass 51.mp3 in Resources */,
+				6DB286091921915600B3D14C /* Electric Guitar 92.mp3 in Resources */,
 				9D054E3A174C68FB00FA3239 /* Upright Bass 52.mp3 in Resources */,
 				9D054E3C174C68FB00FA3239 /* Upright Bass 53.mp3 in Resources */,
 				9D054E3E174C68FB00FA3239 /* Upright Bass 54.mp3 in Resources */,
+				6DB285D61921915600B3D14C /* Electric Guitar 46.mp3 in Resources */,
 				9D054E40174C68FB00FA3239 /* Upright Bass 55.mp3 in Resources */,
+				6DB285DB1921915600B3D14C /* Electric Guitar 50.mp3 in Resources */,
 				9D054E42174C68FB00FA3239 /* Upright Bass 56.mp3 in Resources */,
+				6DB285C61921915600B3D14C /* Electric Guitar 31.mp3 in Resources */,
 				9D054E44174C68FB00FA3239 /* Upright Bass 57.mp3 in Resources */,
 				6DAD0B2119187F1F005B3807 /* Warm Analogue 56.mp3 in Resources */,
 				9D054E46174C68FB00FA3239 /* Upright Bass 58.mp3 in Resources */,
@@ -4415,7 +4656,6 @@
 				9D054E4E174C68FB00FA3239 /* Upright Bass 62.mp3 in Resources */,
 				9D054E50174C68FB00FA3239 /* Upright Bass 63.mp3 in Resources */,
 				9D054E52174C68FB00FA3239 /* Upright Bass 64.mp3 in Resources */,
-				6DED87B2191874460091721E /* Electric Guitar 73.mp3 in Resources */,
 				9D054E54174C68FB00FA3239 /* Upright Bass 65.mp3 in Resources */,
 				9D054E56174C68FB00FA3239 /* Upright Bass 66.mp3 in Resources */,
 				9D054E58174C68FB00FA3239 /* Upright Bass 67.mp3 in Resources */,
@@ -4425,6 +4665,7 @@
 				9D054E60174C68FB00FA3239 /* Upright Bass 71.mp3 in Resources */,
 				9D054E62174C68FB00FA3239 /* Upright Bass 72.mp3 in Resources */,
 				9D054E64174C68FB00FA3239 /* Upright Bass 73.mp3 in Resources */,
+				6DB285AF1921915600B3D14C /* Electric Guitar 103.mp3 in Resources */,
 				9D054E66174C68FB00FA3239 /* Upright Bass 74.mp3 in Resources */,
 				9D054E68174C68FB00FA3239 /* Upright Bass 75.mp3 in Resources */,
 				6DAD0B1A19187F1F005B3807 /* Warm Analogue 49.mp3 in Resources */,
@@ -4433,12 +4674,12 @@
 				6DAD0B2219187F1F005B3807 /* Warm Analogue 57.mp3 in Resources */,
 				9D054E6E174C68FB00FA3239 /* Upright Bass 78.mp3 in Resources */,
 				9D054E70174C68FB00FA3239 /* Upright Bass 79.mp3 in Resources */,
-				6DED87A2191874460091721E /* Electric Guitar 57.mp3 in Resources */,
 				9D054E72174C68FB00FA3239 /* Upright Bass 80.mp3 in Resources */,
 				9D054E9E174D425B00FA3239 /* Marimba 40.mp3 in Resources */,
 				9D054EA0174D425B00FA3239 /* Marimba 41.mp3 in Resources */,
 				9D054EA2174D425B00FA3239 /* Marimba 42.mp3 in Resources */,
 				9D054EA4174D425B00FA3239 /* Marimba 43.mp3 in Resources */,
+				6DB285EA1921915600B3D14C /* Electric Guitar 64.mp3 in Resources */,
 				9D054EA6174D425B00FA3239 /* Marimba 44.mp3 in Resources */,
 				6DAD0B2519187F1F005B3807 /* Warm Analogue 60.mp3 in Resources */,
 				9D054EA8174D425B00FA3239 /* Marimba 45.mp3 in Resources */,
@@ -4446,7 +4687,7 @@
 				9D054EAC174D425B00FA3239 /* Marimba 47.mp3 in Resources */,
 				9D054EAE174D425B00FA3239 /* Marimba 48.mp3 in Resources */,
 				9D054EB0174D425B00FA3239 /* Marimba 49.mp3 in Resources */,
-				6DED8797191874460091721E /* Electric Guitar 46.mp3 in Resources */,
+				6DB285D01921915600B3D14C /* Electric Guitar 40.mp3 in Resources */,
 				9D054EB2174D425B00FA3239 /* Marimba 50.mp3 in Resources */,
 				9D054EB4174D425B00FA3239 /* Marimba 51.mp3 in Resources */,
 				9D054EB6174D425B00FA3239 /* Marimba 52.mp3 in Resources */,
@@ -4457,22 +4698,23 @@
 				9D054EC0174D425B00FA3239 /* Marimba 57.mp3 in Resources */,
 				9D054EC2174D425B00FA3239 /* Marimba 58.mp3 in Resources */,
 				9D054EC4174D425B00FA3239 /* Marimba 59.mp3 in Resources */,
+				6DB285EB1921915600B3D14C /* Electric Guitar 65.mp3 in Resources */,
 				9D054EC6174D425B00FA3239 /* Marimba 60.mp3 in Resources */,
 				9D054EC8174D425B00FA3239 /* Marimba 61.mp3 in Resources */,
 				9D054ECA174D425B00FA3239 /* Marimba 62.mp3 in Resources */,
 				9D054ECC174D425B00FA3239 /* Marimba 63.mp3 in Resources */,
+				6DB2860E1921915600B3D14C /* Electric Guitar 97.mp3 in Resources */,
 				9D054ECE174D425B00FA3239 /* Marimba 64.mp3 in Resources */,
+				6DB285D71921915600B3D14C /* Electric Guitar 47.mp3 in Resources */,
 				9D054ED0174D425B00FA3239 /* Marimba 65.mp3 in Resources */,
 				9D054ED2174D425B00FA3239 /* Marimba 66.mp3 in Resources */,
 				9D054ED4174D425B00FA3239 /* Marimba 67.mp3 in Resources */,
 				9D054ED6174D425B00FA3239 /* Marimba 68.mp3 in Resources */,
 				9D054ED8174D425B00FA3239 /* Marimba 69.mp3 in Resources */,
 				9D054EDA174D425B00FA3239 /* Marimba 70.mp3 in Resources */,
-				6DED87AB191874460091721E /* Electric Guitar 66.mp3 in Resources */,
 				9D054EDC174D425B00FA3239 /* Marimba 71.mp3 in Resources */,
-				6DED87A0191874460091721E /* Electric Guitar 55.mp3 in Resources */,
+				6DB285D51921915600B3D14C /* Electric Guitar 45.mp3 in Resources */,
 				9D054EDE174D425B00FA3239 /* Marimba 72.mp3 in Resources */,
-				6DED87AE191874460091721E /* Electric Guitar 69.mp3 in Resources */,
 				9D054EE0174D425B00FA3239 /* Marimba 73.mp3 in Resources */,
 				9D054EE2174D425B00FA3239 /* Marimba 74.mp3 in Resources */,
 				9D054EE4174D425B00FA3239 /* Marimba 75.mp3 in Resources */,
@@ -4486,6 +4728,8 @@
 				9DCC3B6F1790DACD00DDD603 /* gTarIcon_114x114.png in Resources */,
 				9DDB4E7817A2005400499808 /* PauseButtonVideo.png in Resources */,
 				9DDB4E7A17A2005400499808 /* PreviewProgressBar.png in Resources */,
+				6DB285CF1921915600B3D14C /* Electric Guitar 4.mp3 in Resources */,
+				6DB285D41921915600B3D14C /* Electric Guitar 44.mp3 in Resources */,
 				9DDB4E7D17A2009A00499808 /* PlayerViewController.xib in Resources */,
 				9D85CD3517CE8F890064CE79 /* StoreViewController.xib in Resources */,
 				26868D8817D2A8DF00DC990F /* StoreSongListCell.xib in Resources */,
@@ -5292,7 +5536,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -5315,7 +5559,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+				PROVISIONING_PROFILE = "7B481418-B152-4A26-BD85-D5112440FD60";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5333,6 +5577,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -5350,7 +5595,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+				PROVISIONING_PROFILE = "7B481418-B152-4A26-BD85-D5112440FD60";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

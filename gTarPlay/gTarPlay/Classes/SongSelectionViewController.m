@@ -615,6 +615,7 @@ extern GtarController *g_gtarController;
         return;
     
     _currentUserSong = userSong;
+    [_practiceButton startActivityIndicator];
     [_startButton startActivityIndicator];
     [_startButton setImage:nil forState:UIControlStateNormal];
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
@@ -647,6 +648,7 @@ extern GtarController *g_gtarController;
 {
     [_instrumentButton setEnabled:YES];
     [_startButton stopActivityIndicator];
+    [_practiceButton stopActivityIndicator];
     [_startButton setImage:[UIImage imageNamed:@"PlayButtonVideo.png"] forState:UIControlStateNormal];
 }
 

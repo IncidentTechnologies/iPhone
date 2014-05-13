@@ -122,7 +122,7 @@
     for( int l = 0; l <= loops; l++ ){
         for ( NSNote * note in notesArray )
         {
-            if(note.m_absoluteBeatStart+note.m_duration < m_endBeat && note.m_absoluteBeatStart-firstAudibleBeat >= m_startBeat){
+            if(note.m_absoluteBeatStart < m_endBeat && note.m_absoluteBeatStart-firstAudibleBeat >= m_startBeat){
                 
                 double timedNoteStart = (note.m_absoluteBeatStart - m_startBeat) + l*(m_endBeat - m_startBeat) - l*firstAudibleBeat + l*LOOP_GAP;
                 

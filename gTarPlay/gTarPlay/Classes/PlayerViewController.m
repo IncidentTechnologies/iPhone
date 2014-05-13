@@ -224,6 +224,9 @@
 
 - (void)pauseUpdating
 {
+    
+    [_playButton setImage:[UIImage imageNamed:@"PreviewIcon.png"] forState:UIControlStateNormal];
+    
     [_updateTimer invalidate];
     _updateTimer = nil;
 }
@@ -288,7 +291,6 @@
         NSLog(@"Playing, pause song");
         
         //[_playButton setSelected:NO];
-        [_playButton setImage:[UIImage imageNamed:@"PreviewIcon.png"] forState:UIControlStateNormal];
         
         [_songPlaybackController pauseSong];
         

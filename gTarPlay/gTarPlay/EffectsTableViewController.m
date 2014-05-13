@@ -131,39 +131,11 @@
     {
         [delegate toggleEffect:effectNum isOn:FALSE];
         
-        // TODO telemetry
-        // Telemetetry log
-        /*NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
-        
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"On", name,
-                                         nil]];
-        
-        [m_effectTimeStart[effectNum] release];
-        m_effectTimeStart[effectNum] = [[NSDate date] retain];
-         */
-        
     }
     else
     {
         [delegate toggleEffect:effectNum isOn:TRUE];
         
-        // Telemetetry log
-        /*
-        NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
-        
-        NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_effectTimeStart[effectNum] timeIntervalSince1970] + m_playTimeAdjustment;
-        
-        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         @"Off", name,
-                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-                                         nil]];
-        
-        [m_effectTimeStart[effectNum] release];
-        m_effectTimeStart[effectNum] = [[NSDate date] retain];
-         */  
     }
 }
 

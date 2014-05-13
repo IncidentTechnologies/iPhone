@@ -24,8 +24,8 @@
 
 #define DEFAULT_INSTRUMENT @"Electric Guitar"
 
-#define DEFAULT_GAIN 0.8
-#define GAIN_MULTIPLIER 1.2
+#define DEFAULT_GAIN 0.5
+#define GAIN_MULTIPLIER 1.0
 
 @interface SoundMaster ()
 {
@@ -37,6 +37,7 @@
     SamplerBankNode * m_metronome;
     
     // Effects
+    //EnvelopeNode * m_envelopeNode;
 #ifdef EFFECTS_AVAILABLE
     DelayNode * m_delayNode;
     ReverbNode * m_reverbNode;
@@ -157,6 +158,15 @@
 - (void)stop
 {
     NSLog(@"Stop");
+    
+    // End all samples that might be playing
+    if(m_activeBankNode != nil){
+        int numSamples = m_activeBankNode->m_samples.length();
+        for(int i = 0; i < numSamples; i++){
+            m_activeBankNode->StopSample(i);
+        }
+    }
+    
     [audioController stopAUGraph];
 }
 
@@ -167,6 +177,10 @@
     [self stop];
     
     [self stopAllEffects];
+    
+    // release envelope node
+    //m_envelopeNode->DeleteAndDisconnect(CONN_OUT);
+    //m_envelopeNode = nil;
     
     // release metronome
     [self releaseMetronome];
@@ -487,15 +501,6 @@
             
             NSLog(@"Note at index %i",noteIndex);
             
-            /*
-            NSString * pluckMessage = [@"Pluck string " stringByAppendingFormat:@"%i fret %i note %i inst %li",string,fret,noteIndex,currentInstrumentIndex];
-            
-            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Pluck" message:pluckMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            
-            [alert show];
-            [alert release];
-            */
-            
             m_activeBankNode->TriggerSample(noteIndex);
         }
     }
@@ -532,7 +537,7 @@
 {
     NSLog(@" *** fret down *** at f%i s%i",fret,string);
     if(!isLoadingInstrument){
-        
+        //m_envelopeNode->NoteOff();
     }
     return NO;
 }
@@ -589,6 +594,11 @@
     //m_butterworthNode->ConnectInput(0, m_samplerNode, 0);
     //root->ConnectInput(0, m_butterworthNode, 0);
 #endif
+    
+    // Always on
+    //m_envelopeNode = new EnvelopeNode();
+    //m_envelopeNode->ConnectInput(0, m_samplerNode, 0);
+    //root->ConnectInput(0, m_envelopeNode, 0);
     
 }
 

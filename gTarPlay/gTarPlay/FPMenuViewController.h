@@ -12,6 +12,7 @@
 
 - (void)audioRouteChanged:(BOOL)routeIsSpeaker;
 - (void)setToneToBWCutoff:(double)tone;
+- (void)backButtonClicked;
 
 @end
 

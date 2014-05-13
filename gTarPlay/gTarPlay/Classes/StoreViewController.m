@@ -575,6 +575,7 @@ extern FileController *g_fileController;
         return;
     
     _currentUserSong = userSong;
+    [_practiceButton startActivityIndicator];
     [_startButton startActivityIndicator];
     [_startButton setImage:nil forState:UIControlStateNormal];
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
@@ -599,6 +600,7 @@ extern FileController *g_fileController;
 - (void)playerLoaded
 {
     [_instrumentButton setEnabled:YES];
+    [_practiceButton stopActivityIndicator];
     [_startButton stopActivityIndicator];
     [_startButton setImage:[UIImage imageNamed:@"PlayButtonVideo.png"] forState:UIControlStateNormal];
 }

@@ -608,6 +608,8 @@ extern GtarController * g_gtarController;
                                                          nil]];
     
     [self finalLogging];
+    
+    [g_soundMaster stop];
 
     [self.navigationController popViewControllerAnimated:YES];
 
@@ -1349,7 +1351,7 @@ extern GtarController * g_gtarController;
     }
 }
 
-- (IBAction)backButtonClicked:(id)sender
+- (void)backButtonClicked
 {   
     if (m_LEDTimer != nil)
     {
@@ -1371,6 +1373,8 @@ extern GtarController * g_gtarController;
                                                       nil]];
 
     [self finalLogging];
+    
+    [g_soundMaster stop];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

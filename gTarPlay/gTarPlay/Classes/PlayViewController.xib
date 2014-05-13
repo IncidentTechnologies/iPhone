@@ -198,6 +198,10 @@
                                     <rect key="frame" x="140" y="9" width="30" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="1" green="0.70588235294117641" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="9ev-pe-Sx2"/>
+                                        <constraint firstAttribute="width" constant="30" id="BiN-84-NZS"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -311,12 +315,12 @@
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COZ-pp-yg8">
                             <rect key="frame" x="320" y="0.0" width="160" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.2470588235" green="0.37647058820000001" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="46" id="pVW-YX-UBM"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                            <state key="normal" title="RESTART">
+                            <state key="normal" title="PLAY">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -328,7 +332,7 @@
                             </connections>
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcZ-NW-bfr">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="46"/>
+                            <rect key="frame" x="160" y="0.0" width="160" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.2470588235" green="0.37647058820000001" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -347,9 +351,9 @@
                             </connections>
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="357">
-                            <rect key="frame" x="160" y="0.0" width="160" height="46"/>
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.2470588235" green="0.37647058820000001" blue="0.41568627450000001" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="46" id="1337"/>
                             </constraints>
@@ -376,14 +380,14 @@
                         <constraint firstItem="387" firstAttribute="top" secondItem="209" secondAttribute="top" id="432"/>
                         <constraint firstItem="162" firstAttribute="leading" secondItem="387" secondAttribute="trailing" id="547"/>
                         <constraint firstAttribute="height" constant="46" id="1320"/>
-                        <constraint firstItem="VcZ-NW-bfr" firstAttribute="leading" secondItem="209" secondAttribute="leading" id="07x-WC-pXS"/>
-                        <constraint firstItem="VcZ-NW-bfr" firstAttribute="width" secondItem="COZ-pp-yg8" secondAttribute="width" id="ByJ-FK-yeP"/>
-                        <constraint firstItem="357" firstAttribute="leading" secondItem="VcZ-NW-bfr" secondAttribute="trailing" id="LpR-0b-ndp"/>
+                        <constraint firstItem="VcZ-NW-bfr" firstAttribute="leading" secondItem="357" secondAttribute="trailing" id="CrB-Sk-wyT"/>
                         <constraint firstAttribute="trailing" secondItem="COZ-pp-yg8" secondAttribute="trailing" id="R7q-ne-q0Y"/>
-                        <constraint firstAttribute="bottom" secondItem="VcZ-NW-bfr" secondAttribute="bottom" id="s2U-RY-HdW"/>
-                        <constraint firstItem="COZ-pp-yg8" firstAttribute="leading" secondItem="357" secondAttribute="trailing" id="t01-yd-bvT"/>
+                        <constraint firstItem="VcZ-NW-bfr" firstAttribute="width" secondItem="357" secondAttribute="width" id="UBJ-Vf-LMB"/>
+                        <constraint firstAttribute="bottom" secondItem="VcZ-NW-bfr" secondAttribute="bottom" id="f8D-64-3YZ"/>
+                        <constraint firstItem="COZ-pp-yg8" firstAttribute="leading" secondItem="VcZ-NW-bfr" secondAttribute="trailing" id="gOl-0j-BfD"/>
+                        <constraint firstItem="COZ-pp-yg8" firstAttribute="width" secondItem="VcZ-NW-bfr" secondAttribute="width" id="o4M-vc-iZB"/>
                         <constraint firstAttribute="bottom" secondItem="357" secondAttribute="bottom" id="vBw-HQ-TO0"/>
-                        <constraint firstItem="VcZ-NW-bfr" firstAttribute="width" secondItem="357" secondAttribute="width" id="yYn-XG-rJ1"/>
+                        <constraint firstItem="357" firstAttribute="leading" secondItem="209" secondAttribute="leading" id="z3o-Wl-ayR"/>
                         <constraint firstAttribute="bottom" secondItem="COZ-pp-yg8" secondAttribute="bottom" id="z4q-U6-gs7"/>
                     </constraints>
                 </view>
@@ -1032,7 +1036,7 @@
                                         <constraint firstAttribute="width" constant="140" id="eR6-la-fBk"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
-                                    <state key="normal" title="10000">
+                                    <state key="normal" title="100%">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
