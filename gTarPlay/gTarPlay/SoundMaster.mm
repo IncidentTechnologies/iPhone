@@ -11,6 +11,8 @@
 #import "AUNodeNetwork.h"
 #import "AudioNodeCommon.h"
 
+#define FLATSAMPLER
+
 #define GTAR_NUM_STRINGS 6
 #define GTAR_NUM_FRETS 16
 
@@ -33,6 +35,7 @@
     AudioNode * root;
     
     SamplerNode * m_samplerNode;
+    GtarSamplerNode * m_gtarSamplerNode;
     SamplerBankNode * m_activeBankNode;
     SamplerBankNode * m_metronome;
     
@@ -45,6 +48,8 @@
     DistortionNode * m_distortionNode;
     ButterWorthFilterNode * m_butterworthNode;
 #endif
+    
+    int activeFretOnString[GTAR_NUM_STRINGS];
     
 }
 @end
@@ -96,10 +101,14 @@
     audioController = [AudioController sharedAudioController];
     root = [[audioController GetNodeNetwork] GetRootNode];
     
-    m_samplerNode = new SamplerNode;
-    m_samplerNode->SetChannelGain(DEFAULT_GAIN, CONN_OUT);
+    //m_samplerNode = new SamplerNode;
+    //m_samplerNode->SetChannelGain(DEFAULT_GAIN, CONN_OUT);
     
-    root->ConnectInput(0, m_samplerNode, 0);
+    m_gtarSamplerNode = new GtarSamplerNode;
+    m_gtarSamplerNode->SetChannelGain(DEFAULT_GAIN, CONN_OUT);
+    
+    //root->ConnectInput(0, m_samplerNode, 0);
+    root->ConnectInput(0, m_gtarSamplerNode, 0);
     
     if(!m_instruments && ![self loadInstrumentArray]){
         NSLog(@"Failed to load instrument array from instrument.plist");
@@ -127,14 +136,21 @@
     //[self start];
 }
 
-- (SamplerBankNode *)generateBank
+- (SamplerBankNode *)generateBank:(int)numSamples
 {
     NSLog(@"Generate bank");
     
-    SamplerBankNode * m_samplerBank = NULL;
-    m_samplerNode->CreateNewBank(m_samplerBank);
+    m_gtarSamplerNode->CreateNewBank(numSamples);
+    
+    return nil;
+    /*
+    GtarSamplerBankNode * m_samplerBank = NULL;
+    //m_samplerNode->CreateNewBank(m_samplerBank);
+    m_gtarSamplerNode->CreateNewBank(m_samplerBank);
     
     return m_samplerBank;
+    */
+
 }
 
 - (void)releaseBank:(SamplerBankNode *)bank
@@ -144,7 +160,8 @@
     
     NSLog(@"Release bank");
     
-    m_samplerNode->ReleaseBank(bank);
+    //m_samplerNode->ReleaseBank(bank);
+    m_gtarSamplerNode->ReleaseBank();
 }
 
 - (void)start
@@ -160,10 +177,10 @@
     NSLog(@"Stop");
     
     // End all samples that might be playing
-    if(m_activeBankNode != nil){
-        int numSamples = m_activeBankNode->m_samples.length();
+    if(m_gtarSamplerNode != nil){
+        int numSamples = m_gtarSamplerNode->m_numSamples;
         for(int i = 0; i < numSamples; i++){
-            m_activeBankNode->StopSample(i);
+            m_gtarSamplerNode->StopSample(i);
         }
     }
     
@@ -217,7 +234,6 @@
 {
     CFStringRef audioRoute = [audioController GetAudioRoute];
     
-    // ARC: (__bridge NSString *)audioRoute
     return (__bridge NSString *)audioRoute;
 }
 
@@ -225,7 +241,8 @@
 - (void) setChannelGain:(float)gain
 {
     NSLog(@"Set channel gain to %f",gain*GAIN_MULTIPLIER);
-    m_samplerNode->SetChannelGain(gain*GAIN_MULTIPLIER, CONN_OUT);
+    //m_samplerNode->SetChannelGain(gain*GAIN_MULTIPLIER, CONN_OUT);
+    m_gtarSamplerNode->SetChannelGain(gain*GAIN_MULTIPLIER, CONN_OUT);
 }
 
 #pragma mark - Tone
@@ -309,14 +326,19 @@
     
     currentInstrumentIndex = index;
     
-    // Generate a bank
-    SamplerBankNode * newBank = [self generateBank];
     NSMutableDictionary * instrument = [m_instruments objectAtIndex:index];
+    int firstNote = [[instrument objectForKey:@"FirstNoteMidiNum"] intValue];
+    int numNotes = [[instrument objectForKey:@"NumNotes"] intValue];
+    
+    // Generate a bank
+    SamplerBankNode * newBank = [self generateBank:numNotes];
     
     NSLog(@"Load samples for instrument %i",index);
     
-    int firstNote = [[instrument objectForKey:@"FirstNoteMidiNum"] intValue];
-    int numNotes = [[instrument objectForKey:@"NumNotes"] intValue];
+    // Reset active frets
+    for(int i = 0; i < GTAR_NUM_STRINGS; i++){
+        activeFretOnString[i] = 0;
+    }
     
     if(m_instruments && index < [m_instruments count] && index > -1){
         
@@ -329,13 +351,15 @@
                 instrumentName = DEFAULT_INSTRUMENT;
             }
             
+            //for(int j = firstNote; j <= firstNote; j++){
             for(int j = firstNote; j < firstNote+numNotes; j++){
                 
                 // make sure instrument hasn't been released off thread
                 if(currentInstrumentIndex == index){
                     char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:[instrumentName stringByAppendingFormat:@" %i",j] ofType:@"mp3"] UTF8String];
                     
-                    newBank->LoadSampleIntoBank(filepath, newSample);
+                    //newBank->LoadSampleIntoBank(filepath, newSample);
+                    m_gtarSamplerNode->LoadSampleIntoBank(filepath);
                 }
             }
             
@@ -493,17 +517,42 @@
     if(!isLoadingInstrument){
         if(string >= 0 && string < GTAR_NUM_STRINGS && fret >= 0 && fret <= GTAR_NUM_FRETS){
             
-            if(m_activeBankNode == nil){
+            if(m_gtarSamplerNode == nil){
                 [self setCurrentInstrument:0 withSelector:nil andOwner:nil];
             }
+            
+            [self stopString:string setFret:fret];
             
             int noteIndex = [[m_tuning objectAtIndex:string] intValue] + fret;
             
             NSLog(@"Note at index %i",noteIndex);
             
-            m_activeBankNode->TriggerSample(noteIndex);
+            //m_activeBankNode->TriggerSample(noteIndex);
+            m_gtarSamplerNode->TriggerSample(noteIndex);
         }
     }
+}
+
+- (void) stopString:(int)string setFret:(int)fret
+{
+    // Stop all other notes playing on that string by keeping an active note per string
+    int stopIndex = [[m_tuning objectAtIndex:string] intValue] + activeFretOnString[string];
+    BOOL overlapNotePlaying = NO;
+    
+    // Make sure it's not playing on another string
+    for(int s = 0; s < GTAR_NUM_STRINGS; s++){
+        if(s != string && [[m_tuning objectAtIndex:s] intValue] + activeFretOnString[s] == stopIndex){
+            overlapNotePlaying = YES;
+            break;
+        }
+    }
+    
+    // Stop that string from playing
+    if(!overlapNotePlaying){
+        m_gtarSamplerNode->StopSample(stopIndex);
+    }
+    
+    activeFretOnString[string] = fret;
 }
 
 - (bool) FretDown:(int)fret onString:(int)string
@@ -545,18 +594,18 @@
 #pragma mark - Metronome
 - (void)initMetronome
 {
-    m_metronome = [self generateBank];
+    //m_metronome = [self generateBank:1];
     SampleNode * newSample;
     
     char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Metronome" ofType:@"mp3"] UTF8String];
     
-    m_metronome->LoadSampleIntoBank(filepath, newSample);
+    //m_metronome->LoadSampleIntoBank(filepath, newSample);
 
 }
 
 - (void)releaseMetronome
 {
-    [self releaseBank:m_metronome];
+    //[self releaseBank:m_metronome];
 }
 
 - (void)playMetronomeTick
@@ -682,7 +731,7 @@
         if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)]){
             
             m_reverbNode = new ReverbNode(0.75); // wet
-            m_reverbNode->ConnectInput(0, m_samplerNode, 0);
+            m_reverbNode->ConnectInput(0, m_gtarSamplerNode, 0);
             root->ConnectInput(0, m_reverbNode, 0);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)]){
@@ -691,7 +740,7 @@
                                         0.5,    // feedback
                                         1.0     // wet
                                         );
-            m_delayNode->ConnectInput(0, m_samplerNode, 0);
+            m_delayNode->ConnectInput(0, m_gtarSamplerNode, 0);
             root->ConnectInput(0, m_delayNode, 0);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)]){
@@ -702,7 +751,7 @@
                                                       3.0,              // frequency
                                                       1.0,              // wet
                                                       GRAPH_SAMPLE_RATE);
-            m_chorusEffectNode->ConnectInput(0, m_samplerNode, 0);
+            m_chorusEffectNode->ConnectInput(0, m_gtarSamplerNode, 0);
             root->ConnectInput(0, m_chorusEffectNode, 0);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)]){
@@ -710,7 +759,7 @@
             m_distortionNode = new DistortionNode(3.78,             // gain
                                                   0.25,             // wet
                                                   GRAPH_SAMPLE_RATE);
-            m_distortionNode->ConnectInput(0, m_samplerNode, 0);
+            m_distortionNode->ConnectInput(0, m_gtarSamplerNode, 0);
             root->ConnectInput(0, m_distortionNode, 0);
             
         }

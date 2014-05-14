@@ -609,6 +609,7 @@ extern GtarController * g_gtarController;
     
     [self finalLogging];
     
+    [g_soundMaster stopAllEffects];
     [g_soundMaster stop];
 
     [self.navigationController popViewControllerAnimated:YES];
@@ -1374,6 +1375,7 @@ extern GtarController * g_gtarController;
 
     [self finalLogging];
     
+    [g_soundMaster stopAllEffects];
     [g_soundMaster stop];
     
     [self.navigationController popViewControllerAnimated:YES];
