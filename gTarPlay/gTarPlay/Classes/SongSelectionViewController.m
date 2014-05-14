@@ -730,6 +730,10 @@ extern GtarController *g_gtarController;
 {
     _searching = YES;
     
+    if(searchBar.searchString == nil || [searchBar.searchString length] == 0){
+        return;
+    }
+    
     [self searchForString:searchBar.searchString];
     [self refreshDisplayedUserSongList];
     [_fullscreenButton setHidden:YES];

@@ -28,6 +28,9 @@
         
         CGRect frame = CGRectMake(0, 0, 0, 0);
         tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+        
+        effectsButtons = [[NSMutableArray alloc] init];
+        
     }
     return self;
 }
@@ -92,6 +95,8 @@
     button.tag = indexPath.row;
     [button addTarget:self action:@selector(toggleEffect:) forControlEvents:UIControlEventTouchUpInside];
     
+    [effectsButtons addObject:button];
+    
     // Set button size. When adding view to accessoryView it is automatically
     // centered in within the accessory view space, so no need to set buttons
     // frame x, y coordinates
@@ -136,6 +141,15 @@
     {
         [delegate toggleEffect:effectNum isOn:TRUE];
         
+    }
+}
+
+- (void) turnOffAllEffects
+{
+    for(UIButton * b in effectsButtons) {
+        if(b.selected){
+            b.selected = NO;
+        }
     }
 }
 

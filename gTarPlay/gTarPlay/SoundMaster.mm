@@ -36,11 +36,10 @@
     
     SamplerNode * m_samplerNode;
     GtarSamplerNode * m_gtarSamplerNode;
-    SamplerBankNode * m_activeBankNode;
-    SamplerBankNode * m_metronome;
+    int m_activeBankNode;
+    int m_metronome;
     
     // Effects
-    //EnvelopeNode * m_envelopeNode;
 #ifdef EFFECTS_AVAILABLE
     DelayNode * m_delayNode;
     ReverbNode * m_reverbNode;
@@ -136,32 +135,19 @@
     //[self start];
 }
 
-- (SamplerBankNode *)generateBank:(int)numSamples
+- (int)generateBank:(int)bank numSamples:(int)numSamples
 {
     NSLog(@"Generate bank");
     
-    m_gtarSamplerNode->CreateNewBank(numSamples);
-    
-    return nil;
-    /*
-    GtarSamplerBankNode * m_samplerBank = NULL;
-    //m_samplerNode->CreateNewBank(m_samplerBank);
-    m_gtarSamplerNode->CreateNewBank(m_samplerBank);
-    
-    return m_samplerBank;
-    */
+    return m_gtarSamplerNode->CreateNewBank(bank,numSamples);
 
 }
 
-- (void)releaseBank:(SamplerBankNode *)bank
+- (void)releaseBank:(int)bank
 {
-    
-    // Start and stop the AUGraph with timing
-    
     NSLog(@"Release bank");
     
-    //m_samplerNode->ReleaseBank(bank);
-    m_gtarSamplerNode->ReleaseBank();
+    m_gtarSamplerNode->ReleaseBank(bank);
 }
 
 - (void)start
@@ -178,10 +164,11 @@
     
     // End all samples that might be playing
     if(m_gtarSamplerNode != nil){
-        int numSamples = m_gtarSamplerNode->m_numSamples;
+        int numSamples = m_gtarSamplerNode->m_numSamples[m_activeBankNode];
         for(int i = 0; i < numSamples; i++){
-            m_gtarSamplerNode->StopSample(i);
+            m_gtarSamplerNode->StopSample(m_activeBankNode,i);
         }
+        m_gtarSamplerNode->StopSample(m_metronome, 0);
     }
     
     [audioController stopAUGraph];
@@ -194,10 +181,6 @@
     [self stop];
     
     [self stopAllEffects];
-    
-    // release envelope node
-    //m_envelopeNode->DeleteAndDisconnect(CONN_OUT);
-    //m_envelopeNode = nil;
     
     // release metronome
     [self releaseMetronome];
@@ -322,16 +305,17 @@
     
     dispatch_semaphore_wait([audioController TakeSemaphore], DISPATCH_TIME_FOREVER);
     
+    // Release the previous instrument before starting anew
     [self releaseInstrument:currentInstrumentIndex];
     
+    // Get all the instrument info
     currentInstrumentIndex = index;
-    
     NSMutableDictionary * instrument = [m_instruments objectAtIndex:index];
     int firstNote = [[instrument objectForKey:@"FirstNoteMidiNum"] intValue];
     int numNotes = [[instrument objectForKey:@"NumNotes"] intValue];
     
     // Generate a bank
-    SamplerBankNode * newBank = [self generateBank:numNotes];
+    m_activeBankNode = [self generateBank:0 numSamples:numNotes];
     
     NSLog(@"Load samples for instrument %i",index);
     
@@ -351,15 +335,13 @@
                 instrumentName = DEFAULT_INSTRUMENT;
             }
             
-            //for(int j = firstNote; j <= firstNote; j++){
             for(int j = firstNote; j < firstNote+numNotes; j++){
                 
                 // make sure instrument hasn't been released off thread
                 if(currentInstrumentIndex == index){
                     char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:[instrumentName stringByAppendingFormat:@" %i",j] ofType:@"mp3"] UTF8String];
                     
-                    //newBank->LoadSampleIntoBank(filepath, newSample);
-                    m_gtarSamplerNode->LoadSampleIntoBank(filepath);
+                    m_gtarSamplerNode->LoadSampleIntoBank(m_activeBankNode,filepath);
                 }
             }
             
@@ -368,9 +350,6 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"InstrumentChanged" object:self userInfo:userInfo];
             
             NSLog(@"Changed instrument to %@",[instrument objectForKey:@"Name"]);
-            
-            // Add an entry
-            m_activeBankNode = newBank;
             
             // End loading
             isLoadingInstrument = NO;
@@ -402,10 +381,6 @@
 
 - (void) releaseInstrument:(NSInteger)index
 {
-    //if(m_tuning != nil){
-    //    [m_tuning release];
-    //}
-    
     if(index > -1){
         [self stopAllEffects];
         [self releaseBank:m_activeBankNode];
@@ -437,7 +412,6 @@
         NSLog(@"Error reading plist: %@", [error localizedDescription]);
         return false;
     }
-    
     
     // get sample pack info from plist
     m_instruments = [[NSArray alloc] initWithArray:[plistDict objectForKey:@"instruments"]];
@@ -527,8 +501,7 @@
             
             NSLog(@"Note at index %i",noteIndex);
             
-            //m_activeBankNode->TriggerSample(noteIndex);
-            m_gtarSamplerNode->TriggerSample(noteIndex);
+            m_gtarSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
         }
     }
 }
@@ -549,7 +522,7 @@
     
     // Stop that string from playing
     if(!overlapNotePlaying){
-        m_gtarSamplerNode->StopSample(stopIndex);
+        m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
     }
     
     activeFretOnString[string] = fret;
@@ -557,16 +530,14 @@
 
 - (bool) FretDown:(int)fret onString:(int)string
 {
-    NSLog(@" *** fret down *** at f%i s%i",fret,string);
     if(!isLoadingInstrument){
-        //[self PluckString:string atFret:fret];
+
     }
     return YES;
 }
 
 - (bool) FretUp:(int)fret onString:(int)string
 {
-    NSLog(@" *** fret down *** at f%i s%i",fret,string);
     if(!isLoadingInstrument){
         
     }
@@ -575,18 +546,17 @@
 
 - (bool) NoteOnAtString:(int)string andFret:(int)fret
 {
-    NSLog(@" *** fret down *** at f%i s%i",fret,string);
     if(!isLoadingInstrument){
-        //[self PluckString:string atFret:fret];
+        // Note is already plucked
     }
     return YES;
 }
 
 - (bool) NoteOffAtString:(int)string andFret:(int)fret
 {
-    NSLog(@" *** fret down *** at f%i s%i",fret,string);
     if(!isLoadingInstrument){
-        //m_envelopeNode->NoteOff();
+        int stopIndex = [[m_tuning objectAtIndex:string] intValue] + fret;
+        m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
     }
     return NO;
 }
@@ -594,23 +564,22 @@
 #pragma mark - Metronome
 - (void)initMetronome
 {
-    //m_metronome = [self generateBank:1];
-    SampleNode * newSample;
+    m_metronome = [self generateBank:1 numSamples:1];
     
     char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Metronome" ofType:@"mp3"] UTF8String];
     
-    //m_metronome->LoadSampleIntoBank(filepath, newSample);
+    m_gtarSamplerNode->LoadSampleIntoBank(m_metronome, filepath);
 
 }
 
 - (void)releaseMetronome
 {
-    //[self releaseBank:m_metronome];
+    [self releaseBank:m_metronome];
 }
 
 - (void)playMetronomeTick
 {
-    m_metronome->TriggerSample(0);
+    m_gtarSamplerNode->TriggerSample(m_metronome,0);
 }
 
 #pragma mark - Effects
@@ -643,11 +612,6 @@
     //m_butterworthNode->ConnectInput(0, m_samplerNode, 0);
     //root->ConnectInput(0, m_butterworthNode, 0);
 #endif
-    
-    // Always on
-    //m_envelopeNode = new EnvelopeNode();
-    //m_envelopeNode->ConnectInput(0, m_samplerNode, 0);
-    //root->ConnectInput(0, m_envelopeNode, 0);
     
 }
 

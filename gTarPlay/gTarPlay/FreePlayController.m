@@ -548,8 +548,6 @@ extern GtarController * g_gtarController;
     GtarFret fret = pluck.position.fret;
     GtarString str = pluck.position.string;
     
-    //GtarPluckVelocity velocity = pluck.velocity;
-    
     // zero base the string
     str--;
     
@@ -561,13 +559,11 @@ extern GtarController * g_gtarController;
         fret = [[harmonizedValues valueForKey:@"Fret"] intValue];
     }
     
-    //[g_audioController PluckString:str atFret:fret withAmplitude:(float)velocity/127.0f];
     [g_soundMaster PluckString:str atFret:fret];
 }
 
 - (void)gtarNoteOff:(GtarPosition)position
 {
-    //[g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
     [g_soundMaster NoteOffAtString:position.string-1 andFret:position.fret];
 }
 

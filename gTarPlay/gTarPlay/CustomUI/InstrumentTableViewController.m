@@ -153,7 +153,7 @@
     if ([result boolValue])
     {
         // Keep audio effects for now
-        //[delegate stopAudioEffects];
+        [delegate stopAudioEffects];
         [self stopFlicker];
     }
     

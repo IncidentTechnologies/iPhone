@@ -187,15 +187,18 @@
     NSLog(@"InstrumentsAndEffectsViewController stopAudioEffects");
     [soundMaster stopAllEffects];
     
+    [effectsTableVC turnOffAllEffects];
+    
     // Reset effect buttons
-    int numEffects = (int)[self getNumEffects];
+/*    int numEffects = (int)[self getNumEffects];
     for(int i = 0; i < numEffects; i++){
         
         if([self isEffectOnAtIndex:i]){
-            // TODO: reset buttons
+            // TODO: turn effect button off
+            [effectsTableVC tu]
         }
         
-    }
+    }*/
 
 }
 

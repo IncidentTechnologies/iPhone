@@ -21,11 +21,15 @@
 @end
 
 @interface EffectsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+{
+    NSMutableArray * effectsButtons;
+}
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (weak, nonatomic) id <EffectSelectionDelegate> delegate;
 
 //- (id)initWithAudioController:(AudioController*)AC;
 - (id)init;
+- (void)turnOffAllEffects;
 
 @end

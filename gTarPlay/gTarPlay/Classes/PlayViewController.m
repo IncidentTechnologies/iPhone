@@ -736,7 +736,6 @@ extern UserController * g_userController;
         [self setPracticeMode];
     }
     
-    
     // Only upload at the end of a song
     if ( _finishButton.isHidden == NO && _feedSwitch.isOn == YES )
     {
@@ -761,6 +760,8 @@ extern UserController * g_userController;
                                                   nil]];
     
     [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
+    
+    [g_soundMaster start];
     
     [self startWithSongXmlDom];
     
@@ -1830,7 +1831,6 @@ extern UserController * g_userController;
     
     // Always mute notes on note-off for hard
     NSLog(@"TODO: attenuate and mute note");
-    //[g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
     [g_soundMaster NoteOffAtString:position.string-1 andFret:position.fret];
     
     @synchronized ( _deferredNotesQueue )
