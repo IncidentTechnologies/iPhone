@@ -14,7 +14,7 @@
 #define FLATSAMPLER
 
 #define GTAR_NUM_STRINGS 6
-#define GTAR_NUM_FRETS 16
+#define GTAR_NUM_FRETS 17
 
 #define GRAPH_SAMPLE_RATE 44100.0f
 
@@ -48,7 +48,11 @@
     ButterWorthFilterNode * m_butterworthNode;
 #endif
     
+    // Slides and fret tracking
+    BOOL isSlideEnabled;
     int activeFretOnString[GTAR_NUM_STRINGS];
+    int pendingFretOnString[GTAR_NUM_STRINGS];
+    BOOL fretsPressedDown[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
     
 }
 @end
@@ -67,6 +71,7 @@
         numEffects = 0;
         numInstruments = 0;
         currentInstrumentIndex = -1;
+        isSlideEnabled = YES;
         
 #ifdef EFFECTS_AVAILABLE
         m_reverbNode = nil;
@@ -322,6 +327,11 @@
     // Reset active frets
     for(int i = 0; i < GTAR_NUM_STRINGS; i++){
         activeFretOnString[i] = 0;
+        pendingFretOnString[i] = 0;
+        
+        for(int j = 0; j < GTAR_NUM_FRETS; j++){
+            fretsPressedDown[i][j] = false;
+        }
     }
     
     if(m_instruments && index < [m_instruments count] && index > -1){
@@ -377,6 +387,11 @@
         NSLog(@"Cannot load samples for instrument %i",index);
     
     }
+}
+
+- (int) noteIndexForString:(int)string andFret:(int)fret
+{
+    return [[m_tuning objectAtIndex:string] intValue] + fret;
 }
 
 - (void) releaseInstrument:(NSInteger)index
@@ -489,7 +504,7 @@
 - (void) PluckString:(int)string atFret:(int)fret
 {
     if(!isLoadingInstrument){
-        if(string >= 0 && string < GTAR_NUM_STRINGS && fret >= 0 && fret <= GTAR_NUM_FRETS){
+        if(string >= 0 && string < GTAR_NUM_STRINGS && fret >= 0 && fret < GTAR_NUM_FRETS){
             
             if(m_gtarSamplerNode == nil){
                 [self setCurrentInstrument:0 withSelector:nil andOwner:nil];
@@ -497,11 +512,36 @@
             
             [self stopString:string setFret:fret];
             
-            int noteIndex = [[m_tuning objectAtIndex:string] intValue] + fret;
+            int noteIndex = [self noteIndexForString:string andFret:fret];
+            int pendingIndex = [self noteIndexForString:string andFret:pendingFretOnString[string]];
             
             NSLog(@"Note at index %i",noteIndex);
             
-            m_gtarSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
+            if(!isSlideEnabled){
+                m_gtarSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
+            }else{
+                m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
+            }
+        }
+    }
+}
+
+- (void) PluckMutedString:(int)string
+{
+    if(!isLoadingInstrument){
+        if(string >= 0 && string < GTAR_NUM_STRINGS){
+            
+            if(m_gtarSamplerNode == nil){
+                [self setCurrentInstrument:0 withSelector:nil andOwner:nil];
+            }
+            
+            [self stopString:string setFret:0];
+            
+            int noteIndex = [self noteIndexForString:string andFret:0];
+            
+            NSLog(@"Muted note at index %i",noteIndex);
+            
+            m_gtarSamplerNode->TriggerMutedSample(m_activeBankNode,noteIndex);
         }
     }
 }
@@ -509,12 +549,12 @@
 - (void) stopString:(int)string setFret:(int)fret
 {
     // Stop all other notes playing on that string by keeping an active note per string
-    int stopIndex = [[m_tuning objectAtIndex:string] intValue] + activeFretOnString[string];
+    int stopIndex = [self noteIndexForString:string andFret:activeFretOnString[string]];
     BOOL overlapNotePlaying = NO;
     
     // Make sure it's not playing on another string
     for(int s = 0; s < GTAR_NUM_STRINGS; s++){
-        if(s != string && [[m_tuning objectAtIndex:s] intValue] + activeFretOnString[s] == stopIndex){
+        if(s != string && [self noteIndexForString:s andFret:activeFretOnString[s]] == stopIndex){
             overlapNotePlaying = YES;
             break;
         }
@@ -531,7 +571,23 @@
 - (bool) FretDown:(int)fret onString:(int)string
 {
     if(!isLoadingInstrument){
-
+    
+        fretsPressedDown[string][fret] = YES;
+        
+        // Stop open string from playing on fretdown
+        if(fret != 0){
+            [self NoteOffAtString:string andFret:0];
+        }
+        
+        // Slides
+        int activeNoteIndex = [self noteIndexForString:string andFret:activeFretOnString[string]];
+        
+        // Make sure the string is playing and that the fret is greater than
+        if(m_gtarSamplerNode->IsNoteOn(m_activeBankNode, activeNoteIndex) && fret > activeFretOnString[string] && fret > pendingFretOnString[string]){
+            
+            pendingFretOnString[string] = fret;
+        }
+        
     }
     return YES;
 }
@@ -540,6 +596,29 @@
 {
     if(!isLoadingInstrument){
         
+        fretsPressedDown[string][fret] = NO;
+        
+        // If fret lifted is the one being played it will trigger hammer off
+        if(fret == activeFretOnString[string] || fret == pendingFretOnString[string]){
+            int highestRemainingFretDown = -1;
+            
+            // Determine fret to hammer off to
+            for(int f = GTAR_NUM_FRETS-1; f >= 0; f--){
+                if(fretsPressedDown[string][f]){
+                    highestRemainingFretDown = f;
+                    break;
+                }
+            }
+            
+            if(highestRemainingFretDown > 0){
+                pendingFretOnString[string] = highestRemainingFretDown;
+            }else{
+                // Nothing else pressed down - kill the note
+                pendingFretOnString[string] = 0;
+                [self NoteOffAtString:string andFret:fret];
+            }
+            
+        }
     }
     return NO;
 }
@@ -554,9 +633,12 @@
 
 - (bool) NoteOffAtString:(int)string andFret:(int)fret
 {
+    // && fret == fretToPlay[string] && pendingFretToPlay[string] == -1
     if(!isLoadingInstrument){
-        int stopIndex = [[m_tuning objectAtIndex:string] intValue] + fret;
+        
+        int stopIndex = [self noteIndexForString:string andFret:fret];
         m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
+    
     }
     return NO;
 }

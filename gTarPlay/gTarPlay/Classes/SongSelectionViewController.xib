@@ -147,7 +147,7 @@
                         <constraint firstAttribute="trailing" secondItem="1132" secondAttribute="trailing" constant="158" id="ARZ-4j-exd"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="TopBar">
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="TopBar">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>

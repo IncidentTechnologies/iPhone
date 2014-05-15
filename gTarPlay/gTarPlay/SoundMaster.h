@@ -54,11 +54,7 @@
 
 - (void) playMetronomeTick;
 - (void) PluckString:(int)string atFret:(int)fret;
-//- (void) PluckString:(int)string atFret:(int)fret withAmplitude:(float)amp;
-//- (void) PluckMutedString:(int)string;
-//- (void) SetAttentuation:(float)atten;
-//- (void) SetKSAttenuation:(float)atten forString:(int)string;
-//- (bool) SetAttenuationVariation:(float)variation;
+- (void) PluckMutedString:(int)string;
 
 // TODO: go into BW filter
 - (bool) SetBWCutoff:(double)cutoff;

@@ -46,6 +46,8 @@
     self.slideSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.slideSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
     
+    [_slideSwitch setOn:YES];
+    
     if(!audioSwitchOn){
         [self setAudioSwitchToDefault];
     }else{

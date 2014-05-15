@@ -131,6 +131,7 @@ enum PlayViewControllerDifficulty
 
 @property (strong, nonatomic) IBOutlet UISwitch *outputSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *feedSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *metronomeSwitch;
 
 @property (strong, nonatomic) IBOutlet UILabel *outputLabel;
 @property (strong, nonatomic) IBOutlet UILabel *auxLabel;
@@ -141,6 +142,7 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UILabel *easyLabel;
 @property (strong, nonatomic) IBOutlet UILabel *quitLabel;
 @property (strong, nonatomic) IBOutlet UILabel *restartLabel;
+@property (strong, nonatomic) IBOutlet UILabel *menuMetronomeLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *fretOne;
 @property (strong, nonatomic) IBOutlet UIButton *fretTwo;

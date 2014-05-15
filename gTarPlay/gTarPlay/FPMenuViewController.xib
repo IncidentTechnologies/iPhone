@@ -91,7 +91,7 @@
                                 <constraint firstItem="RlE-Dc-dOV" firstAttribute="leading" secondItem="fVG-pC-Cok" secondAttribute="leading" constant="176" id="ytO-dt-YTP"/>
                             </constraints>
                         </view>
-                        <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z6L-AQ-rdV" userLabel="SlidingView">
+                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z6L-AQ-rdV" userLabel="SlidingView">
                             <rect key="frame" x="18" y="202" width="428" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -121,7 +121,6 @@
                                             </constraints>
                                             <color key="onTintColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
                                             <connections>
-                                                <action selector="setAudioRoute:" destination="-1" eventType="valueChanged" id="iwu-Uh-JcB"/>
                                                 <action selector="setSlideHammer:" destination="-1" eventType="valueChanged" id="PFu-fU-D2p"/>
                                             </connections>
                                         </switch>

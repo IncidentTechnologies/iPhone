@@ -528,7 +528,6 @@ extern GtarController * g_gtarController;
     // Only act upon this message if sliding/hammering is enabled
     if (_isSlideEnabled)
     {
-        //[g_audioController FretDown:position.fret onString:position.string - 1];
         [g_soundMaster FretDown:position.fret onString:position.string-1];
     }
 }
@@ -538,7 +537,6 @@ extern GtarController * g_gtarController;
     // Only act upon this message if sliding/hammering is enabled
     if (_isSlideEnabled)
     {
-        //[g_audioController FretUp:position.fret onString:position.string - 1];
         [g_soundMaster FretUp:position.fret onString:position.string-1];
     }
 }

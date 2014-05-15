@@ -323,6 +323,7 @@ extern UserController * g_userController;
     _easyLabel.text = [[NSString alloc] initWithString:easyStr];
     _quitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Quit", NULL)];
     _restartLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Restart", NULL)];
+    _menuMetronomeLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Metronome", NULL)];
     
     _multiplierTextLabel.layer.cornerRadius = _multiplierTextLabel.frame.size.width/2.0;
 }
@@ -610,11 +611,7 @@ extern UserController * g_userController;
     
     [self startWithSongXmlDomPracticeFrom:loopStart toEnd:loopEnd withLoops:loops andTempoPercent:tempoPercent];
     
-    if(_playMetronome){
-        _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
-        
-        NSLog(@"Beat is %f",1.0/_songModel.m_beatsPerSecond);
-    }
+    [self startMetronomeIfOn];
     
     // Load screen
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
@@ -628,7 +625,6 @@ extern UserController * g_userController;
 
 - (IBAction)menuButtonClicked:(id)sender
 {
-    
     _menuIsOpen = !_menuIsOpen;
     
     // Close the volume everytime we push the menu button
@@ -636,15 +632,21 @@ extern UserController * g_userController;
     
     if ( _menuIsOpen == YES )
     {
+        [_metronomeSwitch setOn:_playMetronome];
         [self showHideMenu:_menuView isOpen:YES];
         [_menuDownArrow setHidden:NO];
-        
     }
     else
     {
+        // Toggle Metronome?
+        if(_metronomeSwitch.isOn != _playMetronome){
+            [self toggleMetronome];
+            [self startMetronomeIfOn];
+            [self stopMetronomeIfOff];
+        }
+        
         [self showHideMenu:_menuView isOpen:NO];
     }
-
 }
 
 - (IBAction)songScoreButtonClicked:(id)sender
@@ -664,10 +666,11 @@ extern UserController * g_userController;
 
 - (void)showHideMenu:(UIView *)menu isOpen:(BOOL)open
 {
+    
     if(open){
         
-        //[_metronomeTimer invalidate];
-        //_metronomeTimer = nil;
+        [_metronomeSwitch setHidden:!isPracticeMode];
+        [_menuMetronomeLabel setHidden:!isPracticeMode];
         
         [self stopMainEventLoop];
         [self drawPlayButton:_pauseButton];
@@ -680,11 +683,6 @@ extern UserController * g_userController;
         [UIView commitAnimations];
         
     }else{
-        
-        /*if ( _playMetronome == YES )
-        {
-            _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
-        }*/
         
         if(!_practiceViewOpen){
             [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
@@ -724,7 +722,13 @@ extern UserController * g_userController;
 
 - (IBAction)restartButtonClicked:(id)sender
 {
-    [self restartSong:YES];
+    if(!isPracticeMode){
+        [self restartSong:YES];
+    }else{
+        _practiceViewOpen = YES; // Fake view open so it doesn't load again
+        [self startPracticeButtonClicked:_startPracticeButton];
+        [self menuButtonClicked:_menuButton];
+    }
     
 }
 
@@ -1359,6 +1363,28 @@ extern UserController * g_userController;
     
 }
 
+- (void)startMetronomeIfOn
+{
+    
+    if(_playMetronome && isPracticeMode){
+        
+        [_metronomeTimer invalidate];
+        _metronomeTimer = nil;
+        
+        _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
+        
+        NSLog(@"Beat is %f",1.0/_songModel.m_beatsPerSecond);
+    }
+}
+
+- (void)stopMetronomeIfOff
+{
+    if(!_playMetronome && isPracticeMode){
+        [_metronomeTimer invalidate];
+        _metronomeTimer = nil;
+    }
+}
+
 - (void)playMetronomeTick
 {
     if(!_songIsPaused && !_menuIsOpen){
@@ -1830,7 +1856,6 @@ extern UserController * g_userController;
 {
     
     // Always mute notes on note-off for hard
-    NSLog(@"TODO: attenuate and mute note");
     [g_soundMaster NoteOffAtString:position.string-1 andFret:position.fret];
     
     @synchronized ( _deferredNotesQueue )
@@ -1869,7 +1894,6 @@ extern UserController * g_userController;
 - (void)standaloneReady
 {
     NSLog(@"Standalone ready");
-    
     
     // Stop ourselves before we start so the connecting screen can display
     [self stopMainEventLoop];
@@ -2495,15 +2519,13 @@ extern UserController * g_userController;
     
     if ( fret == GTAR_GUITAR_FRET_MUTED )
     {
-        NSLog(@"TODO: pluck muted");
-        [g_soundMaster PluckString:str-1 atFret:fret];
-        //[g_audioController PluckMutedString:str-1];
+        NSLog(@"Play View Controller Pluck Muted String");
+        [g_soundMaster PluckMutedString:str-1];
     }
     else
     {
         NSLog(@"Play View Controller Pluck String");
         [g_soundMaster PluckString:str-1 atFret:fret];
-       // [g_audioController PluckString:str-1 atFret:fret withAmplitude:((float)velocity)/GtarMaxPluckVelocity];
     }
     
 }

@@ -239,11 +239,10 @@
     for ( NSNote * note in frame.m_notes ) {
         if ( note.m_fret == GTAR_GUITAR_FRET_MUTED ) {
             
-            NSLog(@"TODO: pluck muted string");
+            NSLog(@"pluck muted string %i",note.m_string-1);
             
-            [g_soundMaster PluckString:note.m_string-1 atFret:note.m_fret];
+            [g_soundMaster PluckMutedString:note.m_string-1];
             
-            //[m_audioController PluckMutedString:note.m_string-1];
         }
         else {
             NSLog(@"pluck string %i %i",note.m_string-1,note.m_fret);
