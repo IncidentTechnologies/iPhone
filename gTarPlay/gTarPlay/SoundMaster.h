@@ -56,6 +56,9 @@
 - (void) PluckString:(int)string atFret:(int)fret;
 - (void) PluckMutedString:(int)string;
 
+- (void) enableSliding;
+- (void) disableSliding;
+
 // TODO: go into BW filter
 - (bool) SetBWCutoff:(double)cutoff;
 // - (bool) SetBWOrder:(int)order;

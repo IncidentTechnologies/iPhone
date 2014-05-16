@@ -315,14 +315,14 @@ extern GtarController * g_gtarController;
     
     // Set up menu tab
     // Get audio route setting and move route knob appropriately
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    [settings synchronize];
+    
+    //NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    //[settings synchronize];
     // temporarily set the bool to the opposite of the actual value
-    m_bSpeakerRoute = ![settings boolForKey:@"RouteToSpeaker"];
+     //m_bSpeakerRoute = ![settings boolForKey:@"RouteToSpeaker"];
     // toogle the route so that its what we actually want
     //[self toggleAudioRoute:self];
-    m_bSpeakerRoute = !m_bSpeakerRoute;
-    [self audioRouteChanged:m_bSpeakerRoute];
+    //m_bSpeakerRoute = !m_bSpeakerRoute;
     
     // To avoid displaying the wrong image when the switch selected and being pressed,
     // we must set an image for the selected AND highlighted state (UIControlState
@@ -379,6 +379,8 @@ extern GtarController * g_gtarController;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [g_soundMaster enableSliding];
     
     [[_menuButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
     [[_volumeButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
@@ -526,19 +528,19 @@ extern GtarController * g_gtarController;
 - (void)gtarFretDown:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    if (_isSlideEnabled)
-    {
+    //if (_isSlideEnabled)
+    //{
         [g_soundMaster FretDown:position.fret onString:position.string-1];
-    }
+    //}
 }
 
 - (void)gtarFretUp:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    if (_isSlideEnabled)
-    {
+    //if (_isSlideEnabled)
+    //{
         [g_soundMaster FretUp:position.fret onString:position.string-1];
-    }
+    //}
 }
 
 - (void)gtarNoteOn:(GtarPluck)pluck
@@ -603,6 +605,7 @@ extern GtarController * g_gtarController;
     
     [self finalLogging];
     
+    [g_soundMaster disableSliding];
     [g_soundMaster stopAllEffects];
     [g_soundMaster stop];
 
@@ -615,6 +618,12 @@ extern GtarController * g_gtarController;
 {
     NSDictionary *data = [notification userInfo];
     _isSlideEnabled = [[data objectForKey:@"isSlideEnabled"] boolValue];
+    
+    if(_isSlideEnabled){
+        [g_soundMaster enableSliding];
+    }else{
+        [g_soundMaster disableSliding];
+    }
 }
 
 #pragma mark - Touches
@@ -1368,7 +1377,8 @@ extern GtarController * g_gtarController;
                                                       nil]];
 
     [self finalLogging];
-    
+
+    [g_soundMaster disableSliding];
     [g_soundMaster stopAllEffects];
     [g_soundMaster stop];
     
@@ -1564,30 +1574,6 @@ extern GtarController * g_gtarController;
 {
     m_bSpeakerRoute = routeIsSpeaker;
     
-    // Telemetetry log -- invert the speaker route so we log the previous state
-    //NSString* route = !m_bSpeakerRoute ? @"Speaker" : @"Aux";
-    
-    /*NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
-    
-    // Avoid the first setting
-    if ( delta > 0 )
-    {
-//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         route, @"AudioRoute",
-//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                         nil]];
-        
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        
-        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                               route, @"AudioRoute",
-                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
-                                                               nil]];
-        [m_audioRouteTimeStart release];
-        m_audioRouteTimeStart = [[NSDate date] retain];
-    }*/
-    
     if (m_bSpeakerRoute){
         
         [g_soundMaster routeToSpeaker];
@@ -1598,21 +1584,6 @@ extern GtarController * g_gtarController;
         [g_soundMaster routeToDefault];
         [_fpMenuVC setAudioSwitchToDefault];
     }
-    
-    // The global volume slider is not available when audio is routed to lineout.
-    // If the audio is not being outputed to lineout hide the global volume slider,
-    //// and display our own slider that controlls volume in this mode.
-    //NSString * routeName = [g_soundMaster getAudioRoute];
-    //if ([routeName isEqualToString:@"LineOut"])
-    //{
-        //[m_lineOutVolumeSlider setHidden:NO];
-        //[m_volumeView setHidden:YES];
-    //}
-    //else
-    //{
-        //[m_lineOutVolumeSlider setHidden:YES];
-        //[m_volumeView setHidden:NO];
-    //}
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     [settings setBool:m_bSpeakerRoute forKey:@"RouteToSpeaker"];

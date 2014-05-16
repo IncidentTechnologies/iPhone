@@ -567,6 +567,8 @@ extern UserController * g_userController;
     NSString *newTempo;
     
     if([tempo isEqualToString:NSLocalizedString(@"NONE", NULL)] || [tempo isEqualToString:@"150%"]){
+        newTempo = @"25%";
+    }else if([tempo isEqualToString:@"25%"]){
         newTempo = @"50%";
     }else if([tempo isEqualToString:@"50%"]){
         newTempo = @"66%";
@@ -1619,7 +1621,7 @@ extern UserController * g_userController;
 
 - (void)uploadUserSongSession
 {
-    /*
+
     UserSongSession * session = [[UserSongSession alloc] init];
     
     session.m_userSong = _userSong;
@@ -1660,7 +1662,7 @@ extern UserController * g_userController;
                                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
                                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
                                                     nil]];
-    */
+    
 
 }
 
@@ -2330,6 +2332,7 @@ extern UserController * g_userController;
     {
         // Play the note at normal intensity
 //        [self pluckString:str andFret:fret andVelocity:velocity];
+        [g_soundMaster NoteOffAtString:str-1 andFret:fret];
         
         // Record the note
         [_songRecorder playString:str andFret:fret];
