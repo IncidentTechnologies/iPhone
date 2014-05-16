@@ -124,10 +124,6 @@ extern Facebook * g_facebook;
 {
     [super viewDidLoad];
     
-    // TODO: figure out why a soundmaster needs to be created and destroyed before anything can happen
-    g_soundMaster = [[SoundMaster alloc] init];
-    [self releaseSoundMaster];
-    
     _globalFeed = [[NSArray alloc] init];
     _friendFeed = [[NSArray alloc] init];
     

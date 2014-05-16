@@ -97,8 +97,6 @@
         
         [self createLoopModels];
         
-        [self createBackgroundTexture];
-        
         m_preloadTimer = [NSTimer scheduledTimerWithTimeInterval:PRELOAD_TIMER_DURATION target:self selector:@selector(preloadFramesTimer) userInfo:nil repeats:YES];
         
         fretOne = NO;
@@ -696,39 +694,6 @@
 
     m_noteTexture = [[Texture2D alloc] initWithImage:scaledImage];
      
-}
-
-- (void)createBackgroundTexture
-{
-    /*
-    NSString * filePath;
-	UIImage * normalImage;
-	UIImage * scaledImage;
-	
-	CGSize newSize;
-	newSize.height = m_renderer.m_backingHeight;
-	newSize.width = m_renderer.m_backingWidth;
-    
-    //filePath = [[NSBundle mainBundle] pathForResource:@"PlayBG" ofType:@"png"];
-    //normalImage = [[UIImage alloc] initWithContentsOfFile:filePath];
-    
-    UIGraphicsBeginImageContext(newSize);
-    //[normalImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    scaledImage = UIGraphicsGetImageFromCurrentImageContext();    
-    UIGraphicsEndImageContext();
-    
-    Texture2D * backgroundTexture = [[Texture2D alloc] initWithImage:scaledImage];
-    
-    Model * model = [[Model alloc] initWithCenter:CGPointMake(m_renderer.m_backingWidth, m_renderer.m_backingHeight)
-                                         andColor:g_whiteColor
-                                       andTexture:backgroundTexture];
-    
-    m_renderer.m_backgroundTexture = model;
-    
-    [model release];
-    [backgroundTexture release];
-    //[normalImage release];
-    */
 }
 
 #pragma mark - Helpers

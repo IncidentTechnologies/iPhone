@@ -29,9 +29,6 @@
         if(soundMaster != nil){
             g_soundMaster = soundMaster;
             [g_soundMaster start];
-        }else{
-            //g_soundMaster = [[SoundMaster alloc] init];
-            //[g_soundMaster start];
         }
     }
     
@@ -103,7 +100,7 @@
     [self startMainEventLoop];
     
 }
-
+/*
 - (void)startWithUserSong:(UserSong*)userSong
 {
     // TODO This function doesn't work right now because the m_xmlDom doesn't have the XMP in it
@@ -122,7 +119,7 @@
     
     [self startMainEventLoop];
 }
-
+*/
 - (void)playSong {
     
     NSLog(@"Song Playback Controller: play song");
@@ -140,9 +137,7 @@
 - (void)endSong {
     [self stopMainEventLoop];
     
-    
     [g_soundMaster reset];
-    
     
     m_songModel = nil;
     

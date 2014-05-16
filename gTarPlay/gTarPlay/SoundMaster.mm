@@ -105,13 +105,9 @@
     audioController = [AudioController sharedAudioController];
     root = [[audioController GetNodeNetwork] GetRootNode];
     
-    //m_samplerNode = new SamplerNode;
-    //m_samplerNode->SetChannelGain(DEFAULT_GAIN, CONN_OUT);
-    
     m_gtarSamplerNode = new GtarSamplerNode;
     m_gtarSamplerNode->SetChannelGain(DEFAULT_GAIN, CONN_OUT);
     
-    //root->ConnectInput(0, m_samplerNode, 0);
     root->ConnectInput(0, m_gtarSamplerNode, 0);
     
     if(!m_instruments && ![self loadInstrumentArray]){
@@ -122,8 +118,6 @@
     [self initEffects];
     
     [self initMetronome];
-    
-    //[audioController initializeAUGraph];
     
     return true;
     
@@ -229,7 +223,7 @@
 - (void) setChannelGain:(float)gain
 {
     NSLog(@"Set channel gain to %f",gain*GAIN_MULTIPLIER);
-    //m_samplerNode->SetChannelGain(gain*GAIN_MULTIPLIER, CONN_OUT);
+    
     m_gtarSamplerNode->SetChannelGain(gain*GAIN_MULTIPLIER, CONN_OUT);
 }
 
@@ -280,7 +274,6 @@
 #pragma mark - Instrument
 - (void) loadInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender
 {
-    //NSInteger index = [[timer userInfo] intValue];
     
     if(index == currentInstrumentIndex){
         NSLog(@"Instrument already loaded");
@@ -338,7 +331,7 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             
-            SampleNode * newSample;
+            //SampleNode * newSample;
             
             NSString * instrumentName = [instrument objectForKey:@"Name"];
             if([instrumentName isEqualToString:@"Electric"] || [instrumentName isEqualToString:@"Strat"]){

@@ -141,8 +141,6 @@ extern GtarController * g_gtarController;
         m_playTimeAdjustment = 0;
         
         // Create audio controller
-        //[g_audioController initializeAUGraph];
-        //[g_audioController startAUGraph];
         [g_soundMaster start];
         
         RGBColor *white = [[RGBColor alloc] initWithRed:3 Green:3 Blue:3];

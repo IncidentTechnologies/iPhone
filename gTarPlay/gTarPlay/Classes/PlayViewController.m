@@ -520,6 +520,7 @@ extern UserController * g_userController;
         [_practiceView setHidden:NO];
         
         [self stopMainEventLoop];
+        [g_soundMaster stop];
         [self drawPlayButton:_pauseButton];
         [self restartSong:NO];
         
@@ -528,7 +529,6 @@ extern UserController * g_userController;
         // Animate out
         int prevheight = _practiceView.frame.size.height;
         int newheight = _practiceView.frame.size.height - 46;
-        
         
         [_startPracticeButton setHidden:YES];
         [_practiceBackButton setHidden:YES];
@@ -546,6 +546,7 @@ extern UserController * g_userController;
         }];
         
         
+        [g_soundMaster start];
         [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
         [self drawPauseButton:_pauseButton];
         
@@ -675,7 +676,9 @@ extern UserController * g_userController;
         [_menuMetronomeLabel setHidden:!isPracticeMode];
         
         [self stopMainEventLoop];
+        [g_soundMaster stop];
         [self drawPlayButton:_pauseButton];
+        _songIsPaused = YES;
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
@@ -687,8 +690,10 @@ extern UserController * g_userController;
     }else{
         
         if(!_practiceViewOpen){
+            [g_soundMaster start];
             [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
             [self drawPauseButton:_pauseButton];
+            _songIsPaused = NO;
         }
         
         [UIView beginAnimations:nil context:NULL];
@@ -710,11 +715,13 @@ extern UserController * g_userController;
         if(_songIsPaused == YES){
             
             [self stopMainEventLoop];
+            [g_soundMaster stop];
             
             [self drawPlayButton:_pauseButton];
             
         }else{
             
+            [g_soundMaster start];
             [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
             
             [self drawPauseButton:_pauseButton];
@@ -1231,6 +1238,7 @@ extern UserController * g_userController;
     [UIView commitAnimations];
     
     if(!_practiceViewOpen){
+        [g_soundMaster start];
         [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
         [self drawPauseButton:_pauseButton];
     }
@@ -1534,13 +1542,6 @@ extern UserController * g_userController;
 {
     _multiplierTextLabel.text = [NSString stringWithFormat:@"%iX",multiplier];
     
-    
-    /*if(multiplier <= 1){
-        [_multiplierTextLabel setAlpha:0.2];
-    }else{
-        [_multiplierTextLabel setAlpha:1.0];
-    }*/
-    
     // Determine color
     if(multiplier <= 1){
         [_multiplierTextLabel setBackgroundColor:[UIColor colorWithRed:255/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
@@ -1621,7 +1622,7 @@ extern UserController * g_userController;
 
 - (void)uploadUserSongSession
 {
-
+/*
     UserSongSession * session = [[UserSongSession alloc] init];
     
     session.m_userSong = _userSong;
@@ -1663,7 +1664,7 @@ extern UserController * g_userController;
                                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
                                                     nil]];
     
-
+*/
 }
 
 #pragma mark - Main event loop
@@ -1937,6 +1938,7 @@ extern UserController * g_userController;
             
         // Stop ourselves before we start so the connecting screen can display
         [self stopMainEventLoop];
+        [g_soundMaster stop];
         [self drawPlayButton:_pauseButton];
         
         if(!isPracticeMode){
@@ -2086,15 +2088,16 @@ extern UserController * g_userController;
     [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:(isScrolling || isStandalone) withTempoPercent:tempoPercent fromStart:start toEnd:end withLoops:loops];
     
     // Light up the first frame
-    if(g_gtarController.connected == YES){
+    //if(g_gtarController.connected == YES){
         [self turnOnFrame:_songModel.m_nextFrame];
-    }
+    //}
     
     [self initSongRecorder];
     
     [self initSongDisplayWithLoops:loops];
     
     if(!_practiceViewOpen){
+        [g_soundMaster start];
         [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
         [self drawPauseButton:_pauseButton];
     }
@@ -2118,15 +2121,16 @@ extern UserController * g_userController;
     [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:(isScrolling || isStandalone) withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
     
     // Light up the first frame
-    if(g_gtarController.connected == YES){
+    //if(g_gtarController.connected == YES){
         [self turnOnFrame:_songModel.m_nextFrame];
-    }
+    //}
     
     [self initSongRecorder];
 
     [self initSongDisplayWithLoops:0];
     
     if(!_practiceViewOpen){
+        [g_soundMaster start];
         [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
         [self drawPauseButton:_pauseButton];
     }
@@ -2596,10 +2600,8 @@ extern UserController * g_userController;
 - (void)songModelNextFrame:(NSNoteFrame*)frame
 {
     
-    
     _nextFrame = frame;
-    
-    //    [self turnOnFrame:m_nextFrame];
+    [self turnOnFrame:_nextFrame];
     
 }
 
