@@ -10,9 +10,29 @@
 #import "UIKnob.h"
 #import "UILevelSlider.h"
 
+#import "CreateRootViewController.h"
+#import "SettingsViewController.h"
+#import "SynthViewController.h"
+#import "GtarViewController.h"
+#import "LEDViewController.h"
+
 @interface DefaultViewController : UIViewController {
+    UINavigationController *m_navigationController;
     
+    CreateRootViewController *m_createRootViewController;
+    SettingsViewController *m_settingsViewController;
+    SynthViewController *m_synthViewController;
+    GtarViewController *m_gtarViewController;
+    LEDViewController *m_ledViewController;
 }
+
+@property (nonatomic, retain) IBOutlet UIView *m_navView;
+
+@property (nonatomic, retain) IBOutlet UIButton *m_buttonSynth;
+@property (nonatomic, retain) IBOutlet UIButton *m_buttonEffects;
+@property (nonatomic, retain) IBOutlet UIButton *m_buttonLED;
+@property (nonatomic, retain) IBOutlet UIButton *m_buttonGtar;
+@property (nonatomic, retain) IBOutlet UIButton *m_buttonSettings;
 
 @property (nonatomic, retain) IBOutlet UIButton *m_buttonTest;
 @property (nonatomic, retain) IBOutlet UIButton *m_buttonTrigger;
@@ -31,7 +51,9 @@
 
 -(void) testFxNode;
 -(void) testFilenode;
+-(void)testDisconnect;
 
--(void)testDisconnect; 
+-(IBAction)onNavButtonClicked:(id)sender;
+
 
 @end

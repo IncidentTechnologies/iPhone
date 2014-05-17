@@ -12,8 +12,7 @@
 #import "UIKnob.h"
 #import "UILevelSlider.h"
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
     [UIKnob class];
     [UILevelSlider class];
     

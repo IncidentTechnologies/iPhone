@@ -21,11 +21,15 @@
 		2610F0A418AAB28E003F5CEB /* gTarCreateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2610F0A318AAB28E003F5CEB /* gTarCreateTests.m */; };
 		2610F0B318AAB7EC003F5CEB /* DefaultViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2610F0B118AAB7EC003F5CEB /* DefaultViewController.mm */; };
 		2610F0B418AAB7EC003F5CEB /* DefaultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2610F0B218AAB7EC003F5CEB /* DefaultViewController.xib */; };
-		2610F0BE18AB0E36003F5CEB /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F0BB18AB0E36003F5CEB /* libGtarController.a */; };
 		2610F14E18AD6B59003F5CEB /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F14D18AD6B59003F5CEB /* libIncidentPlatform.a */; };
 		2610F15718AD9226003F5CEB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15618AD9226003F5CEB /* libc++.dylib */; };
 		2610F15918AD923C003F5CEB /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2610F15818AD923C003F5CEB /* libstdc++.dylib */; };
 		2616854918E931C400094BB0 /* seqTest.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 2616854818E931C400094BB0 /* seqTest.xmp */; };
+		261E343C191E4CEA0065C392 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261E343B191E4CEA0065C392 /* CoreMIDI.framework */; };
+		261E344019204EF20065C392 /* SynthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 261E343E19204EF10065C392 /* SynthViewController.m */; };
+		261E344119204EF20065C392 /* SynthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 261E343F19204EF10065C392 /* SynthViewController.xib */; };
+		261E344519204F440065C392 /* SynthSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 261E344319204F440065C392 /* SynthSourceViewController.m */; };
+		261E344619204F440065C392 /* SynthSourceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 261E344419204F440065C392 /* SynthSourceViewController.xib */; };
 		2630B82118B6D0F500687D29 /* Acoustic Guitar 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F618B6D0F500687D29 /* Acoustic Guitar 40.mp3 */; };
 		2630B82218B6D0F500687D29 /* Acoustic Guitar 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F718B6D0F500687D29 /* Acoustic Guitar 41.mp3 */; };
 		2630B82318B6D0F500687D29 /* Acoustic Guitar 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B7F818B6D0F500687D29 /* Acoustic Guitar 42.mp3 */; };
@@ -71,6 +75,17 @@
 		2630B84B18B6D0F500687D29 /* Acoustic Guitar 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2630B82018B6D0F500687D29 /* Acoustic Guitar 82.mp3 */; };
 		2630B85118B6F7B900687D29 /* Clapping.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2630B85018B6F7B900687D29 /* Clapping.m4a */; };
 		2652382D18C4D9B100E38BA5 /* clap.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 2652382C18C4D9B100E38BA5 /* clap.xmp */; };
+		266BA233191C9B23003E8B79 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266BA231191C9B23003E8B79 /* SettingsViewController.m */; };
+		266BA234191C9B23003E8B79 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266BA232191C9B23003E8B79 /* SettingsViewController.xib */; };
+		269C304F19233D6200B1B3B4 /* gTarFW_200_20140424.bin in Resources */ = {isa = PBXBuildFile; fileRef = 269C304E19233D6200B1B3B4 /* gTarFW_200_20140424.bin */; };
+		269C305319233E4200B1B3B4 /* GtarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269C305119233E4200B1B3B4 /* GtarViewController.m */; };
+		269C305419233E4200B1B3B4 /* GtarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269C305219233E4200B1B3B4 /* GtarViewController.xib */; };
+		269C30571923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin in Resources */ = {isa = PBXBuildFile; fileRef = 269C30551923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin */; };
+		269C30581923563200B1B3B4 /* gTarFW_200_20140514.bin in Resources */ = {isa = PBXBuildFile; fileRef = 269C30561923563200B1B3B4 /* gTarFW_200_20140514.bin */; };
+		269C305C192358E000B1B3B4 /* LEDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269C305A192358E000B1B3B4 /* LEDViewController.m */; };
+		269C305D192358E000B1B3B4 /* LEDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269C305B192358E000B1B3B4 /* LEDViewController.xib */; };
+		26E64D851928050400D3C3AC /* CreateRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E64D831928050400D3C3AC /* CreateRootViewController.m */; };
+		26E64D861928050400D3C3AC /* CreateRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E64D841928050400D3C3AC /* CreateRootViewController.xib */; };
 		26EBC39B18ADBF9C0068BEC6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */; };
 		26EBC39F18ADC0690068BEC6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -114,6 +129,13 @@
 		2610F15618AD9226003F5CEB /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		2610F15818AD923C003F5CEB /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		2616854818E931C400094BB0 /* seqTest.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = seqTest.xmp; sourceTree = "<group>"; };
+		261E343B191E4CEA0065C392 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		261E343D19204EF10065C392 /* SynthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthViewController.h; sourceTree = "<group>"; };
+		261E343E19204EF10065C392 /* SynthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthViewController.m; sourceTree = "<group>"; };
+		261E343F19204EF10065C392 /* SynthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthViewController.xib; sourceTree = "<group>"; };
+		261E344219204F440065C392 /* SynthSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthSourceViewController.h; sourceTree = "<group>"; };
+		261E344319204F440065C392 /* SynthSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthSourceViewController.m; sourceTree = "<group>"; };
+		261E344419204F440065C392 /* SynthSourceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthSourceViewController.xib; sourceTree = "<group>"; };
 		2630B7F618B6D0F500687D29 /* Acoustic Guitar 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 40.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 40.mp3"; sourceTree = "<group>"; };
 		2630B7F718B6D0F500687D29 /* Acoustic Guitar 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 41.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 41.mp3"; sourceTree = "<group>"; };
 		2630B7F818B6D0F500687D29 /* Acoustic Guitar 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 42.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 42.mp3"; sourceTree = "<group>"; };
@@ -159,6 +181,21 @@
 		2630B82018B6D0F500687D29 /* Acoustic Guitar 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 82.mp3"; path = "Samples/Acoustic Guitar/Acoustic Guitar 82.mp3"; sourceTree = "<group>"; };
 		2630B85018B6F7B900687D29 /* Clapping.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Clapping.m4a; path = Samples/Clapping.m4a; sourceTree = "<group>"; };
 		2652382C18C4D9B100E38BA5 /* clap.xmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = clap.xmp; path = Samples/clap.xmp; sourceTree = "<group>"; };
+		266BA230191C9B23003E8B79 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		266BA231191C9B23003E8B79 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		266BA232191C9B23003E8B79 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		269C304E19233D6200B1B3B4 /* gTarFW_200_20140424.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = gTarFW_200_20140424.bin; sourceTree = "<group>"; };
+		269C305019233E4200B1B3B4 /* GtarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GtarViewController.h; sourceTree = "<group>"; };
+		269C305119233E4200B1B3B4 /* GtarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GtarViewController.m; sourceTree = "<group>"; };
+		269C305219233E4200B1B3B4 /* GtarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GtarViewController.xib; sourceTree = "<group>"; };
+		269C30551923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = gTarFW_NO_OPEN_200_20140514.bin; sourceTree = "<group>"; };
+		269C30561923563200B1B3B4 /* gTarFW_200_20140514.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = gTarFW_200_20140514.bin; sourceTree = "<group>"; };
+		269C3059192358E000B1B3B4 /* LEDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEDViewController.h; sourceTree = "<group>"; };
+		269C305A192358E000B1B3B4 /* LEDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEDViewController.m; sourceTree = "<group>"; };
+		269C305B192358E000B1B3B4 /* LEDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LEDViewController.xib; sourceTree = "<group>"; };
+		26E64D821928050400D3C3AC /* CreateRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateRootViewController.h; sourceTree = "<group>"; };
+		26E64D831928050400D3C3AC /* CreateRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateRootViewController.m; sourceTree = "<group>"; };
+		26E64D841928050400D3C3AC /* CreateRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateRootViewController.xib; sourceTree = "<group>"; };
 		26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		26EBC39C18ADC0690068BEC6 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -169,12 +206,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				261E343C191E4CEA0065C392 /* CoreMIDI.framework in Frameworks */,
 				26EBC39F18ADC0690068BEC6 /* AVFoundation.framework in Frameworks */,
 				26EBC39B18ADBF9C0068BEC6 /* AudioToolbox.framework in Frameworks */,
 				2610F15918AD923C003F5CEB /* libstdc++.dylib in Frameworks */,
 				2610F15718AD9226003F5CEB /* libc++.dylib in Frameworks */,
 				2610F14E18AD6B59003F5CEB /* libIncidentPlatform.a in Frameworks */,
-				2610F0BE18AB0E36003F5CEB /* libGtarController.a in Frameworks */,
 				2610F08118AAB28E003F5CEB /* CoreGraphics.framework in Frameworks */,
 				2610F08318AAB28E003F5CEB /* UIKit.framework in Frameworks */,
 				2610F07F18AAB28E003F5CEB /* Foundation.framework in Frameworks */,
@@ -216,6 +253,7 @@
 		2610F07D18AAB28E003F5CEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				261E343B191E4CEA0065C392 /* CoreMIDI.framework */,
 				26EBC39C18ADC0690068BEC6 /* AudioUnit.framework */,
 				26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */,
 				26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */,
@@ -238,6 +276,7 @@
 		2610F08418AAB28E003F5CEB /* gTarCreate */ = {
 			isa = PBXGroup;
 			children = (
+				269C304D19233CC900B1B3B4 /* Firmwares */,
 				2630B84C18B6D0FB00687D29 /* Samples */,
 				2610F08D18AAB28E003F5CEB /* AppDelegate.h */,
 				2610F08E18AAB28E003F5CEB /* AppDelegate.m */,
@@ -246,6 +285,24 @@
 				2610F0B018AAB7EC003F5CEB /* DefaultViewController.h */,
 				2610F0B118AAB7EC003F5CEB /* DefaultViewController.mm */,
 				2610F0B218AAB7EC003F5CEB /* DefaultViewController.xib */,
+				266BA230191C9B23003E8B79 /* SettingsViewController.h */,
+				266BA231191C9B23003E8B79 /* SettingsViewController.m */,
+				266BA232191C9B23003E8B79 /* SettingsViewController.xib */,
+				261E343D19204EF10065C392 /* SynthViewController.h */,
+				261E343E19204EF10065C392 /* SynthViewController.m */,
+				261E343F19204EF10065C392 /* SynthViewController.xib */,
+				261E344219204F440065C392 /* SynthSourceViewController.h */,
+				261E344319204F440065C392 /* SynthSourceViewController.m */,
+				261E344419204F440065C392 /* SynthSourceViewController.xib */,
+				269C305019233E4200B1B3B4 /* GtarViewController.h */,
+				269C305119233E4200B1B3B4 /* GtarViewController.m */,
+				269C305219233E4200B1B3B4 /* GtarViewController.xib */,
+				269C3059192358E000B1B3B4 /* LEDViewController.h */,
+				269C305A192358E000B1B3B4 /* LEDViewController.m */,
+				269C305B192358E000B1B3B4 /* LEDViewController.xib */,
+				26E64D821928050400D3C3AC /* CreateRootViewController.h */,
+				26E64D831928050400D3C3AC /* CreateRootViewController.m */,
+				26E64D841928050400D3C3AC /* CreateRootViewController.xib */,
 			);
 			path = gTarCreate;
 			sourceTree = "<group>";
@@ -340,6 +397,16 @@
 			name = "Acoustic Guitar";
 			sourceTree = "<group>";
 		};
+		269C304D19233CC900B1B3B4 /* Firmwares */ = {
+			isa = PBXGroup;
+			children = (
+				269C30551923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin */,
+				269C30561923563200B1B3B4 /* gTarFW_200_20140514.bin */,
+				269C304E19233D6200B1B3B4 /* gTarFW_200_20140424.bin */,
+			);
+			name = Firmwares;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -387,6 +454,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Incident Technologies, Inc";
 				TargetAttributes = {
+					2610F07A18AAB28E003F5CEB = {
+						DevelopmentTeam = AE9ZEG65F3;
+					};
 					2610F09518AAB28E003F5CEB = {
 						TestTargetID = 2610F07A18AAB28E003F5CEB;
 					};
@@ -417,13 +487,17 @@
 			files = (
 				2630B82F18B6D0F500687D29 /* Acoustic Guitar 54.mp3 in Resources */,
 				2610F0B418AAB7EC003F5CEB /* DefaultViewController.xib in Resources */,
+				269C30571923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin in Resources */,
 				2630B83818B6D0F500687D29 /* Acoustic Guitar 63.mp3 in Resources */,
 				2630B84B18B6D0F500687D29 /* Acoustic Guitar 82.mp3 in Resources */,
 				2630B84918B6D0F500687D29 /* Acoustic Guitar 80.mp3 in Resources */,
 				2630B82E18B6D0F500687D29 /* Acoustic Guitar 53.mp3 in Resources */,
 				2630B84118B6D0F500687D29 /* Acoustic Guitar 72.mp3 in Resources */,
 				2630B83F18B6D0F500687D29 /* Acoustic Guitar 70.mp3 in Resources */,
+				269C305419233E4200B1B3B4 /* GtarViewController.xib in Resources */,
+				269C30581923563200B1B3B4 /* gTarFW_200_20140514.bin in Resources */,
 				2630B84318B6D0F500687D29 /* Acoustic Guitar 74.mp3 in Resources */,
+				266BA234191C9B23003E8B79 /* SettingsViewController.xib in Resources */,
 				2610F08918AAB28E003F5CEB /* InfoPlist.strings in Resources */,
 				2630B84518B6D0F500687D29 /* Acoustic Guitar 76.mp3 in Resources */,
 				2652382D18C4D9B100E38BA5 /* clap.xmp in Resources */,
@@ -431,6 +505,7 @@
 				2630B82A18B6D0F500687D29 /* Acoustic Guitar 49.mp3 in Resources */,
 				2630B84018B6D0F500687D29 /* Acoustic Guitar 71.mp3 in Resources */,
 				2630B83018B6D0F500687D29 /* Acoustic Guitar 55.mp3 in Resources */,
+				269C305D192358E000B1B3B4 /* LEDViewController.xib in Resources */,
 				2630B85118B6F7B900687D29 /* Clapping.m4a in Resources */,
 				2630B82C18B6D0F500687D29 /* Acoustic Guitar 51.mp3 in Resources */,
 				2630B83D18B6D0F500687D29 /* Acoustic Guitar 68.mp3 in Resources */,
@@ -438,12 +513,15 @@
 				2630B82518B6D0F500687D29 /* Acoustic Guitar 44.mp3 in Resources */,
 				2630B83C18B6D0F500687D29 /* Acoustic Guitar 67.mp3 in Resources */,
 				2610F09118AAB28E003F5CEB /* Images.xcassets in Resources */,
+				261E344619204F440065C392 /* SynthSourceViewController.xib in Resources */,
 				2630B82818B6D0F500687D29 /* Acoustic Guitar 47.mp3 in Resources */,
 				2630B83218B6D0F500687D29 /* Acoustic Guitar 57.mp3 in Resources */,
 				2616854918E931C400094BB0 /* seqTest.xmp in Resources */,
 				2630B82618B6D0F500687D29 /* Acoustic Guitar 45.mp3 in Resources */,
 				2630B84718B6D0F500687D29 /* Acoustic Guitar 78.mp3 in Resources */,
+				261E344119204EF20065C392 /* SynthViewController.xib in Resources */,
 				2630B82118B6D0F500687D29 /* Acoustic Guitar 40.mp3 in Resources */,
+				26E64D861928050400D3C3AC /* CreateRootViewController.xib in Resources */,
 				2630B82218B6D0F500687D29 /* Acoustic Guitar 41.mp3 in Resources */,
 				2630B83918B6D0F500687D29 /* Acoustic Guitar 64.mp3 in Resources */,
 				2630B82318B6D0F500687D29 /* Acoustic Guitar 42.mp3 in Resources */,
@@ -464,6 +542,7 @@
 				2630B83318B6D0F500687D29 /* Acoustic Guitar 58.mp3 in Resources */,
 				2630B82918B6D0F500687D29 /* Acoustic Guitar 48.mp3 in Resources */,
 				2630B83718B6D0F500687D29 /* Acoustic Guitar 62.mp3 in Resources */,
+				269C304F19233D6200B1B3B4 /* gTarFW_200_20140424.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,9 +561,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				261E344519204F440065C392 /* SynthSourceViewController.m in Sources */,
+				261E344019204EF20065C392 /* SynthViewController.m in Sources */,
+				269C305C192358E000B1B3B4 /* LEDViewController.m in Sources */,
+				269C305319233E4200B1B3B4 /* GtarViewController.m in Sources */,
+				26E64D851928050400D3C3AC /* CreateRootViewController.m in Sources */,
 				2610F08F18AAB28E003F5CEB /* AppDelegate.m in Sources */,
 				2610F0B318AAB7EC003F5CEB /* DefaultViewController.mm in Sources */,
 				2610F08B18AAB28E003F5CEB /* main.m in Sources */,
+				266BA233191C9B23003E8B79 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +688,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarCreate/gTarCreate-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -615,6 +701,7 @@
 				);
 				INFOPLIST_FILE = "gTarCreate/gTarCreate-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0649DC3B-A549-4E0D-B85E-82DB3CA0A99B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -624,6 +711,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarCreate/gTarCreate-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -636,6 +724,7 @@
 				);
 				INFOPLIST_FILE = "gTarCreate/gTarCreate-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0649DC3B-A549-4E0D-B85E-82DB3CA0A99B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

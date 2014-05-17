@@ -195,7 +195,7 @@ static void cbLevel(float val, void *pObject, void *pContext) {
     
     //[self testDisconnect];
     
-    //[self setUpSamplerWithBaseName:@"Acoustic Guitar"];
+    [self setUpSamplerWithBaseName:@"Acoustic Guitar"];
 
     //[self testFxNode];
     
@@ -211,6 +211,7 @@ static void cbLevel(float val, void *pObject, void *pContext) {
     //XMPObject *xmpObj = [XMPObjectFactory MakeXMPObjectFromFilename:@"seqTest"];
     //int a = 5;
     
+    /*
     XMPObject *xmpObj = [[XMPObject alloc] init];
     XMPSong *xmpSong = [[XMPSong alloc] initWithSongTitle:@"test song" author:@"test author" description:@"test description"];
     [xmpObj AddXMPObject:xmpSong];
@@ -230,6 +231,7 @@ static void cbLevel(float val, void *pObject, void *pContext) {
     NSString *newFilepath = [documentsDirectory stringByAppendingPathComponent:@"test.xmp"];
     
     tree->SaveXMPToFile((char*)[newFilepath UTF8String], true);
+     */
     
     /*m_envNode = new EnvelopeNode();
     m_delayNode = new DelayNode(500.0f, 0.75f, 1.0f);
@@ -263,7 +265,7 @@ static void cbLevel(float val, void *pObject, void *pContext) {
         m_envNode->NoteOff();
     */
     
-    m_sampNode->Trigger();
+    //m_sampNode->Trigger();
     
     
     //m_envNode->NoteOn();
@@ -275,7 +277,7 @@ static void cbLevel(float val, void *pObject, void *pContext) {
     
     
     
-    /*
+    ///*
     static int str = 0;
     static int ind = 0;
     
@@ -290,13 +292,55 @@ static void cbLevel(float val, void *pObject, void *pContext) {
             str = 0;
     }
     //*/
-       
 }
 
-- (void)viewDidLoad
-{
+-(IBAction)onNavButtonClicked:(id)sender {
+    UIButton *senderButton = (UIButton*)(sender);
+    
+    //[m_navigationController popViewControllerAnimated:false];
+    [m_navigationController popToRootViewControllerAnimated:false];
+    
+    NSArray *tempArr = [m_navigationController viewControllers];
+    
+    if(senderButton == _m_buttonSynth) {
+        if((id)(m_synthViewController) != [[m_navigationController viewControllers] lastObject])
+            [m_navigationController pushViewController:m_synthViewController animated:false];
+    }
+    else if(senderButton == _m_buttonSettings) {
+        if((id)(m_settingsViewController) != [[m_navigationController viewControllers] lastObject])
+            [m_navigationController pushViewController:m_settingsViewController animated:false];
+    }
+    else if(senderButton == _m_buttonGtar) {
+        if((id)(m_gtarViewController) != [[m_navigationController viewControllers] lastObject])
+            [m_navigationController pushViewController:m_gtarViewController animated:false];
+    }
+    else if(senderButton == _m_buttonLED) {
+        if((id)(m_ledViewController) != [[m_navigationController viewControllers] lastObject])
+            [m_navigationController pushViewController:m_ledViewController animated:false];
+    }
+    
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    m_navigationController = [[UINavigationController alloc] init];
+    m_navigationController.view.frame = CGRectOffset(_m_navView.frame, 0.0f, 48.0f);
+    
+    [m_navigationController setNavigationBarHidden:YES];
+    [_m_navView addSubview:m_navigationController.view];
+    
+    m_createRootViewController = [[CreateRootViewController alloc] initWithNibName:@"CreateRootViewController" bundle:NULL];
+    
+    m_synthViewController = [[SynthViewController alloc] initWithNibName:@"SynthViewController" bundle:NULL];
+    m_settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:NULL];
+    m_gtarViewController = [[GtarViewController alloc] initWithNibName:@"GtarViewController" bundle:NULL];
+    m_ledViewController = [[LEDViewController alloc] initWithNibName:@"LEDViewController" bundle:NULL];
+    
+    // Push the default
+    [m_navigationController pushViewController:m_createRootViewController animated:FALSE];  // should never hit this
+    [m_navigationController pushViewController:m_gtarViewController animated:FALSE];
 }
 
 - (void)didReceiveMemoryWarning

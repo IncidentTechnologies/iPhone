@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+GtarController *g_gtarController;
+
 @implementation AppDelegate
 
 - (id)init {
@@ -16,6 +18,15 @@
     if ( self ) {
         // Hide status bar
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        
+        
+        // Connect to the gtar device
+        g_gtarController = [[GtarController alloc] init];
+        g_gtarController.responseThread = GtarControllerThreadMain;
+        
+        // By default it just outputs 'LevelError'
+        g_gtarController.logLevel = GtarControllerLogLevelAll;
+        [g_gtarController addObserver:self];
         
         /*
          // Init the cloud controller
@@ -27,13 +38,7 @@
          // Create the user controller to manage users
          g_userController = [[UserController alloc] initWithCloudController:g_cloudController];
          
-         // Connect to the gtar device
-         g_gtarController = [[GtarController alloc] init];
-         g_gtarController.responseThread = GtarControllerThreadMain;
          
-         // By default it just outputs 'LevelError'
-         g_gtarController.logLevel = GtarControllerLogLevelAll;
-         [g_gtarController addObserver:self];
          
          #if TARGET_IPHONE_SIMULATOR | Debug_BUILD
          [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
@@ -52,11 +57,13 @@
     return self;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     UINavigationController *navController = [[UINavigationController alloc] init];
+    [navController setNavigationBarHidden:YES];
     self.window.rootViewController = navController;
     
     // Load Title view

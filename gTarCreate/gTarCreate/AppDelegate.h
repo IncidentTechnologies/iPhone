@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import "DefaultViewController.h"
+#import "GtarControllerInternal.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+@interface AppDelegate : UIResponder <UIApplicationDelegate, GtarControllerObserver>
+{
     
 }
 
