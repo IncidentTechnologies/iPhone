@@ -239,6 +239,7 @@ extern UserController * g_userController;
 - (void) viewWillAppear:(BOOL)animated
 {
     [self setStandalone];
+    
 }
 
 - (void) setPracticeMode
@@ -271,11 +272,14 @@ extern UserController * g_userController;
         isStandalone = YES;
         [self standaloneReady];
         
+        [_tempoButton setTitle:@"100%" forState:UIControlStateNormal];
     }else{
         
         NSLog(@"GTAR IS CONNECTED USE NORMAL");
         
         isStandalone = NO;
+        
+        [_tempoButton setTitle:NSLocalizedString(@"NONE", NULL) forState:UIControlStateNormal];
         
     }
     
@@ -363,22 +367,14 @@ extern UserController * g_userController;
     // to see all the views while they wait.
     
     // We let the previous screen set the sample pack of this song.
-    //[g_soundMaster didSelectInstrument:_song.m_instrument withSelector:@selector(instrumentDidLoad:) andOwner:self];
     [g_soundMaster start];
     
     //
     // Set the audio routing destination
     //
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    NSString * audioRoute = [g_soundMaster getAudioRoute];
+    _speakerRoute = ([audioRoute isEqualToString:@"Speaker"]) ? YES : NO;
     
-    // We need to synch first in case the value was set the the Settings dialog
-    [settings synchronize];
-    
-    // Temporarily set the bool to the opposite of the actual value
-    _speakerRoute = ![settings boolForKey:@"RouteToSpeaker"];
-    
-    // Toggle the route so that its what we actually want
-    [self toggleAudioRoute];
     [self updateAudioState];
     
     // Observe the global guitar controller. This will call guitarConnected when it is connected.
@@ -966,13 +962,7 @@ extern UserController * g_userController;
     
     // Draw tempo standard
     _tempoButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    
-    if(!isStandalone){
-        _tempoButton.titleLabel.text = NSLocalizedString(@"NONE", NULL);
-    }else{
-        _tempoButton.titleLabel.text = @"100%";
-    }
-    
+        
 }
 
 -(void)setPracticeHeatMapViewImageView:(UIImageView*)imageView
@@ -1929,7 +1919,6 @@ extern UserController * g_userController;
         
     }else{
         
-        
         [g_gtarController setMinimumInterarrivalTime:0.10f];
         
         if(!isPracticeMode){
@@ -1948,6 +1937,8 @@ extern UserController * g_userController;
         }
         
     }
+    
+    [g_soundMaster routeToDefault];
 
 }
 
@@ -2599,9 +2590,13 @@ extern UserController * g_userController;
 
 - (void)songModelNextFrame:(NSNoteFrame*)frame
 {
+    // Light up in advance
+    if(isScrolling){
+        [self turnOffFrame:_nextFrame];
+        [self turnOnFrame:frame];
+    }
     
     _nextFrame = frame;
-    [self turnOnFrame:_nextFrame];
     
 }
 

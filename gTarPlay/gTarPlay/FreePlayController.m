@@ -577,6 +577,8 @@ extern GtarController * g_gtarController;
     
     [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
     
+    [g_soundMaster routeToDefault];
+    
 }
 
 - (void)gtarDisconnected

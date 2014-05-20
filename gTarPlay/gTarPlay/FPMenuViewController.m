@@ -149,30 +149,6 @@
     NSDictionary *data = [notification userInfo];
     BOOL routeIsSpeaker = [[data objectForKey:@"isRouteSpeaker"] boolValue];
     
-    //NSString *routeName = [[NSString alloc] initWithString:[data objectForKey:@"routeName"]];
-    /*
-     TODO telemetry
-     // Telemetetry log -- invert the speaker route so we log the previous state
-     NSString* route = !m_bSpeakerRoute ? @"Speaker" : @"Aux";
-     
-     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
-     
-     // Avoid the first setting
-     if ( delta > 0 )
-     {
-     [g_telemetryController logEvent:GtarFreePlayToggleFeature
-     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-     route, @"AudioRoute",
-     [NSNumber numberWithInteger:delta], @"PlayTime",
-     nil]];
-     
-     [m_audioRouteTimeStart release];
-     m_audioRouteTimeStart = [[NSDate date] retain];
-     }
-     */
-    
-    //[_testText setText:routeName];
-    
     if (routeIsSpeaker)
     {
         [self setAudioSwitchToSpeaker];

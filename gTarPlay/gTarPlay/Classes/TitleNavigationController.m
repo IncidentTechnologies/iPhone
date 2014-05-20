@@ -1253,6 +1253,9 @@ extern Facebook * g_facebook;
     
     [self showHideFreePlay];
     
+    [g_soundMaster routeToDefault];
+    
+    
 }
 
 - (void)gtarDisconnected

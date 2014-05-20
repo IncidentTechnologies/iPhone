@@ -203,12 +203,15 @@
 - (void)routeToSpeaker
 {
     NSLog(@"Route to speaker");
+    
     [audioController RouteAudioToSpeaker];
+    
 }
 
 - (void)routeToDefault
 {
     NSLog(@"Route to default");
+    
     [audioController RouteAudioToDefault];
 }
 
