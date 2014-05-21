@@ -13,6 +13,8 @@
 #import <gTarAppCore/Facebook.h>
 
 #import "PaginatedPullToUpdateTableView.h"
+#import "RegisterPromptViewController.h"
+#import "SettingsViewController.h"
 
 #import "SoundMaster.h"
 
@@ -20,7 +22,7 @@
 @class SlidingModalViewController;
 @class CyclingTextField;
 
-@interface TitleNavigationController : UIViewController <UITableViewDataSource, PaginatedPullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate>
+@interface TitleNavigationController : UIViewController <UITableViewDataSource, PaginatedPullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate, RegisterPromptDelegate, SettingsDelegate>
 
 // Audio Controller
 @property (strong, nonatomic) SoundMaster *g_soundMaster;

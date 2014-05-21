@@ -22,8 +22,6 @@
 #import <gTarAppCore/Facebook.h>
 
 #import "TitleNavigationController.h"
-#import "RegisterPromptViewController.h"
-#import "SettingsViewController.h"
 #import "SongSelectionViewController.h"
 #import "SocialViewController.h"
 #import "VolumeViewController.h"
@@ -259,6 +257,7 @@ extern Facebook * g_facebook;
     _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
     _settingsViewController = [[SettingsViewController alloc] initWithNibName:nil bundle:nil];
+    _settingsViewController.delegate = self;
     
     _displayingCell = NO;
     
@@ -471,17 +470,6 @@ extern Facebook * g_facebook;
     }else{
         [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
     }
-    
-    // If we've logged in, regardles of whether the gtar was ever connected, we can act as if it was.
-    /*NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    
-    BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
-    
-    // First log in, show the welcome screens
-	if ( guitarConnectedBefore == NO ) {
-        [settings setBool:YES forKey:@"GuitarConnectedBefore"];
-        [settings synchronize];
-    }*/
     
     if(g_gtarController.connected){
         [self promptGtarRegistration];
@@ -1237,20 +1225,54 @@ extern Facebook * g_facebook;
 {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     BOOL gtarRegistered = [settings boolForKey:@"GtarRegistered"];
+    BOOL gtarRegisterPromptShown = [settings boolForKey:@"GtarRegisterPrompt"];
     
     // First log in, show the welcome screens
-	if ( gtarRegistered == NO )
+	if ( gtarRegistered == NO && gtarRegisterPromptShown == NO )
 	{
-        [settings setBool:YES forKey:@"GtarRegistered"];
+        
+        [settings setBool:YES forKey:@"GtarRegisterPrompt"];
         [settings synchronize];
         
         // Prompt registration
         RegisterPromptViewController * rpvc = [[RegisterPromptViewController alloc] initWithNibName:nil bundle:nil];
         
+        rpvc.delegate = self;
+        
         // if anything is up, hide it, then show register prompt
         [self dismissViewControllerAnimated:NO completion:NULL];
         [self presentViewController:rpvc animated:YES completion:^(void){}];
     }
+}
+
+- (void)registerDevice
+{
+    
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    
+    BOOL gtarRegistered = [settings boolForKey:@"GtarRegistered"];
+    
+    if(!gtarRegistered){
+        
+        [settings setBool:YES forKey:@"GtarRegistered"];
+        [settings synchronize];
+    
+        // TODO: make sure this is in the right format and called at the right time
+        NSString * serialNumber = [g_gtarController GetSerialNumber];
+        
+        // TODO: pass to cloud controller
+        
+    }
+    
+}
+
+- (BOOL)isDeviceRegistered
+{
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    
+    return [settings boolForKey:@"GtarRegistered"];
+    
+    // TODO: cloud controller call
 }
 
 #pragma mark - GtarControllerDelegate

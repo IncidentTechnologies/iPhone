@@ -8,11 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RegisterPromptDelegate <NSObject>
+
+- (void)registerDevice;
+
+@end
+
 @interface RegisterPromptViewController : UIViewController
 {
     CGRect onFrame;
     CGRect offFrame;
 }
+
+@property (weak, nonatomic) id <RegisterPromptDelegate> delegate;
 
 @property (nonatomic, strong) IBOutlet UIView *backgroundView;
 @property (nonatomic, strong) IBOutlet UIView *contentView;

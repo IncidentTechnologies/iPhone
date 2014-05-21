@@ -14,6 +14,8 @@
 
 @implementation RegisterPromptViewController
 
+@synthesize delegate;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,7 +36,7 @@
 
 - (void)localizeViews
 {
-    int numFreeSongs = 10;
+    int numFreeSongs = 15;
     
     _freeSongsLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Get %u free songs.", NULL), numFreeSongs];
     
@@ -47,7 +49,9 @@
 
 - (IBAction)registerButtonClicked:(id)sender
 {
+    [delegate registerDevice];
     
+    [self startSlideDown];
 }
 
 - (IBAction)laterButtonClicked:(id)sender

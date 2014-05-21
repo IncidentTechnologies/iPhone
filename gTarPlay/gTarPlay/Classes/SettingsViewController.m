@@ -22,6 +22,8 @@ unsigned char g_sensitivity[6];
 
 @implementation SettingsViewController
 
+@synthesize delegate;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,7 +32,9 @@ unsigned char g_sensitivity[6];
         // Custom initialization
         _firmwareVersion = nil;
         _serialNumber = nil;
+        
         m_isLoading = NO;
+        m_isRegistered = NO;
     }
     return self;
 }
@@ -46,6 +50,7 @@ unsigned char g_sensitivity[6];
     [_settingsSelector setTitles:[NSArray arrayWithObjects:NSLocalizedString(@"GTAR",NULL), NSLocalizedString(@"CALIBRATE",NULL), NSLocalizedString(@"CONTROLS",NULL), nil]];
     [_topBar addShadow];
     
+    [self updateGtarRegistered];
     [self updateCalibrate];
     [self updateFirmwareVersion];
     [self updateSerialNumber];
@@ -74,7 +79,6 @@ unsigned char g_sensitivity[6];
     _gtarSerialLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"gTar Serial", NULL)];
     _firmwareVersionLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Firmware", NULL)];
     
-    [_registerButton setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"REGISTER", NULL)] forState:UIControlStateNormal];
     [_updateButton setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"CHECK FOR UPDATES", NULL)] forState:UIControlStateNormal];
     
     _postToFeedLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"POST TO FEED", NULL)];
@@ -101,12 +105,39 @@ unsigned char g_sensitivity[6];
 
 - (IBAction)registerButtonClicked:(id)sender
 {
-    NSLog(@"Register gTar");
+    if(!m_isRegistered){
+        [delegate registerDevice];
+        
+        [self updateGtarRegistered];
+    }
 }
 
 - (IBAction)updateButtonClicked:(id)sender
 {
     [g_gtarController sendRequestFirmwareVersion];
+}
+
+- (void)updateGtarRegistered
+{
+    
+    if([delegate isDeviceRegistered]){
+        
+        m_isRegistered = YES;
+        
+        [_registerButton setEnabled:NO];
+        [_registerButton setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"REGISTERED", NULL)] forState:UIControlStateNormal];
+        [_registerButton setBackgroundColor:[UIColor colorWithRed:0/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
+        
+        
+    }else{
+        
+        m_isRegistered = NO;
+        
+        [_registerButton setEnabled:YES];
+        [_registerButton setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"REGISTER", NULL)] forState:UIControlStateNormal];
+        [_registerButton setBackgroundColor:[UIColor colorWithRed:0/255.0 green:160/255.0 blue:220/255.0 alpha:1.0]];
+        
+    }
 }
 
 - (void)updateSerialNumber
@@ -132,14 +163,20 @@ unsigned char g_sensitivity[6];
     if(_serialNumber != nil){
         
         [_serialLabel setText:_serialNumber];
-        [_registerButton setEnabled:YES];
-        [_registerButton setAlpha:1.0];
+        
+        if(!m_isRegistered){
+            [_registerButton setEnabled:YES];
+            [_registerButton setAlpha:1.0];
+        }
         
     }else{
         
         [_serialLabel setText:NSLocalizedString(@"Unavailable", NULL)];
-        [_registerButton setEnabled:NO];
-        [_registerButton setAlpha:0.5];
+        
+        if(!m_isRegistered){
+            [_registerButton setEnabled:NO];
+            [_registerButton setAlpha:0.5];
+        }
         
     }
 }
@@ -222,6 +259,7 @@ unsigned char g_sensitivity[6];
 
 - (void)gtarConnected
 {
+    [self updateGtarRegistered];
     [self updateCalibrate];
     [self updateFirmwareVersion];
     [self updateSerialNumber];
@@ -229,6 +267,7 @@ unsigned char g_sensitivity[6];
 
 - (void)gtarDisconnected
 {
+    [self updateGtarRegistered];
     [self updateCalibrate];
     [self updateFirmwareVersion];
     [self updateSerialNumber];

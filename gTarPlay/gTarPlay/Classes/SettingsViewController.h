@@ -13,10 +13,16 @@
 #import "GtarController.h"
 #import "GtarControllerInternal.h"
 
-
 @class SelectorControl;
 
 extern GtarController *g_gtarController;
+
+@protocol SettingsDelegate <NSObject>
+
+- (BOOL)isDeviceRegistered;
+- (void)registerDevice;
+
+@end
 
 @interface SettingsViewController : UIViewController <GtarControllerObserver>
 {
@@ -33,7 +39,10 @@ extern GtarController *g_gtarController;
     
     BOOL m_fPendingRequest;
     BOOL m_isLoading;
+    BOOL m_isRegistered;
 }
+
+@property (weak, nonatomic) id <SettingsDelegate> delegate;
 
 @property (nonatomic, strong) NSString *firmwareVersion;
 @property (nonatomic, strong) NSString *serialNumber;
