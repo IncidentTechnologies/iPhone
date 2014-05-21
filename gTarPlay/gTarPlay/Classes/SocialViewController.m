@@ -19,13 +19,13 @@
 #import "UIButton+Gtar.h"
 
 #import <gTarAppCore/UserController.h>
-#import <gTarAppCore/UserProfile.h>
-#import <gTarAppCore/UserSongSession.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/CloudResponse.h>
+#import "UserProfile.h"
+#import "UserSongSession.h"
+#import "UserSong.h"
+#import "CloudController.h"
+#import "CloudResponse.h"
 #import <gTarAppCore/UserEntry.h>
-#import <gTarAppCore/FileController.h>
+#import "FileController.h"
 #import <gTarAppCore/UserResponse.h>
 
 extern UserController *g_userController;
@@ -54,13 +54,17 @@ extern Facebook *g_facebook;
 
 @implementation SocialViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize g_soundMaster;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if ( self )
     {
         // Custom initialization
+        g_soundMaster = soundMaster;
+        [g_soundMaster start];
     }
     return self;
 }
@@ -73,28 +77,29 @@ extern Facebook *g_facebook;
     [_topBar addShadow];
     
     [_searchTable setHidden:YES];
-    [_fullscreenButton setHidden:YES];
+    //[_fullscreenButton setHidden:YES];
     
     [_feedTable disablePagination];
     
     [_profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     [self.view bringSubviewToFront:_searchTable];
-    [self.view bringSubviewToFront:_fullscreenButton];
+    //[self.view bringSubviewToFront:_fullscreenButton];
     
     [self displayAndUpdateUserId:0];
     
-    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
+    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     
 }
 
 - (void)localizeViews {
     [_logoutButton setTitle:NSLocalizedString(@"Logout", NULL) forState:UIControlStateNormal];
-    [_followButton setTitle:NSLocalizedString(@"FOLLOW", NULL) forState:UIControlStateNormal];
-    [_followingButton setTitle:NSLocalizedString(@"FOLLOWING", NULL) forState:UIControlStateNormal];
+    [_followButton setTitle:NSLocalizedString(@"Follow", NULL) forState:UIControlStateNormal];
+    [_followingButton setTitle:NSLocalizedString(@"Following", NULL) forState:UIControlStateNormal];
     
-    _profileLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Profile", NULL)];
-    _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    //_profileLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Profile", NULL)];
+    //_backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,23 +109,10 @@ extern Facebook *g_facebook;
 
 - (void)dealloc
 {
-    [_topBar release];
-    [_feedSelector release];
-    [_feedTable release];
-    [_picImageView release];
-    [_userNameLabel release];
-    [_sessionViewController release];
-    [_searchTable release];
-    [_fullscreenButton release];
-    [_searchBar release];
-    [_cameraButton release];
-    [_followButton release];
-    [_followingButton release];
-    [_profileButton release];
+    //[_fullscreenButton release];
     
     _alertView.delegate = nil;
     
-    [super dealloc];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -184,8 +176,9 @@ extern Facebook *g_facebook;
 
 - (IBAction)fullscreenButtonClicked:(id)sender
 {
+    
     [_searchBar minimizeKeyboard];
-    [_fullscreenButton setHidden:YES];
+    //[_fullscreenButton setHidden:YES];
 }
 
 #pragma mark - Helpers
@@ -203,7 +196,7 @@ extern Facebook *g_facebook;
     [attributedString addAttribute:NSFontAttributeName value:fontBig range:NSMakeRange(0,[numString length])];
     [attributedString addAttribute:NSFontAttributeName value:fontSmall range:NSMakeRange([numString length]+1,[text length])];
     
-    return [attributedString autorelease];
+    return attributedString;
 }
 
 - (void)displayAndUpdateUserId:(NSInteger)userId
@@ -238,6 +231,9 @@ extern Facebook *g_facebook;
     _displayedUserEntry = [g_userController getUserEntry:_displayedUserId];
     
     [_userNameLabel setText:_displayedUserEntry.m_userProfile.m_name];
+    
+    // Ensure this is the logged in user not the user displayed
+    [_profileLabel setText:loggedInEntry.m_userProfile.m_name];
     
     UIImage *image = [g_fileController getFileOrReturnNil:_displayedUserEntry.m_userProfile.m_imgFileId];
     
@@ -320,6 +316,9 @@ extern Facebook *g_facebook;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [tableView setSeparatorInset:UIEdgeInsetsZero];
+    
     NSInteger row = [indexPath row];
     
     if ( tableView == _feedTable )
@@ -446,6 +445,8 @@ extern Facebook *g_facebook;
         [tempCell setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
         [tempCell.accessoryView setFrame:CGRectMake(0, 0, cellRow, cellHeight)];
         
+        
+        // TODO: fix this
         NSMethodSignature *signature = [SocialViewController instanceMethodSignatureForSelector:@selector(socialUserFollowInvocation:)];
         
         tempCell.followInvocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -453,6 +454,7 @@ extern Facebook *g_facebook;
         [tempCell.followInvocation setTarget:self];
         [tempCell.followInvocation setSelector:@selector(socialUserFollowInvocation:)];
         [tempCell.followInvocation setArgument:&tempCell atIndex:2];
+
     }
     
     //[tempCell updateCell];
@@ -516,17 +518,29 @@ extern Facebook *g_facebook;
         
         UserEntry *entry = [g_userController getUserEntry:_displayedUserId];
         
+        if(entry.m_sessionsList == nil){
+            [g_userController requestUserSessions:_displayedUserId andPage:1 andCallbackObj:self andCallbackSel:@selector(userSessionsCallback:)];
+        }
+        
+        if(entry.m_followsList == nil){
+            
+        }
+        
+        if(entry.m_followedByList == nil){
+            
+        }
+        
         [g_fileController getFileOrDownloadAsync:entry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
     }
     else
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
+            _alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
                                            cancelButtonTitle:NSLocalizedString(@"OK", NULL)
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
             [_alertView show];
         }
     }
@@ -555,11 +569,11 @@ extern Facebook *g_facebook;
         
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
+            _alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
                                            cancelButtonTitle:NSLocalizedString(@"OK", NULL)
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
             [_alertView show];
         }
     }
@@ -582,11 +596,11 @@ extern Facebook *g_facebook;
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
+            _alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
                                            cancelButtonTitle:NSLocalizedString(@"OK", NULL)
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
             [_alertView show];
         }
     }
@@ -609,11 +623,11 @@ extern Facebook *g_facebook;
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
+            _alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
                                            cancelButtonTitle:NSLocalizedString(@"OK", NULL)
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
             [_alertView show];
         }
     }
@@ -638,11 +652,11 @@ extern Facebook *g_facebook;
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
+            _alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
                                            cancelButtonTitle:NSLocalizedString(@"OK", NULL)
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
             [_alertView show];
         }
     }
@@ -654,9 +668,8 @@ extern Facebook *g_facebook;
     
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
-        [_userProfileSearchResults release];
         
-        _userProfileSearchResults = [userResponse.m_searchResults retain];
+        _userProfileSearchResults = userResponse.m_searchResults;
         
         // pull down all the images -- this takes too long
 //        for ( UserProfile *userProfile in _userProfileSearchResults )
@@ -670,11 +683,11 @@ extern Facebook *g_facebook;
     {
         if ( _alertView == nil )
         {
-            _alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
+            _alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", NULL)
                                                      message:userResponse.m_statusText
                                                     delegate:self
                                            cancelButtonTitle:NSLocalizedString(@"OK", NULL)
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
             [_alertView show];
         }
     }
@@ -713,7 +726,6 @@ extern Facebook *g_facebook;
     
     [self presentViewController:picker animated:YES completion:nil];
     
-    [picker release];
 }
 
 //- (UIImage*)captureView:(UIView*)view
@@ -744,7 +756,7 @@ extern Facebook *g_facebook;
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info
 {
     
-    UIImage * pickedImage = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
+    UIImage * pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
 //    UIImageOrientation orientation = pickedImage.imageOrientation;
     
@@ -772,7 +784,6 @@ extern Facebook *g_facebook;
     
     [self uploadProfilePic:editedImage];
     
-    [pickedImage release];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -800,13 +811,16 @@ extern Facebook *g_facebook;
 
 - (void)searchBarDidBeginEditing:(ExpandableSearchBar *)searchBar
 {
+    
     // Show the table view
     [_searchTable setHidden:NO];
-    [_fullscreenButton setHidden:NO];
+    //[_fullscreenButton setHidden:NO];
+    
     // I appologize for this ugly hack, i.e. passing a bool as a pointer (numberWithBool != NO)
     // but it isn't worth the time doing it the proper way.
 //    [_profileButton setHidden:YES];
     [_profileButton performSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES] afterDelay:0.2];
+    [_profileLabel performSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES] afterDelay:0.2];
 }
 
 - (void)searchBarSearch:(ExpandableSearchBar *)searchBar
@@ -820,8 +834,9 @@ extern Facebook *g_facebook;
 {
     // Remove the table view
     [_searchTable setHidden:YES];
-    [_fullscreenButton setHidden:YES];
+    //[_fullscreenButton setHidden:YES];
     [_profileButton performSelector:@selector(setHidden:) withObject:nil afterDelay:0.1];
+    [_profileLabel performSelector:@selector(setHidden:) withObject:nil afterDelay:0.1];
 }
 
 #pragma mark - PullToUpdate

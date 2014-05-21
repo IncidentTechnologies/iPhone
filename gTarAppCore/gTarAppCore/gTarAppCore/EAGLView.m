@@ -43,20 +43,17 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_renderer release];
-    
-    [super dealloc];
-    
-}
 
 - (void)drawView
 {
     
     [m_renderer render];
 
+}
+
+- (void)drawViewWithHighlightsFretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree
+{
+    [m_renderer renderWithHighlights:YES fretOne:fretOne fretTwo:fretTwo fretThree:fretThree];
 }
 
 - (void)layoutSubviews

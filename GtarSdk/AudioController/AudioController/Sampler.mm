@@ -235,7 +235,7 @@
         {
             return i;
         }
-        else if ([name caseInsensitiveCompare:[[m_instruments objectAtIndex:i] objectForKey:@"FriendlyName"]] == NSOrderedSame)
+        else if ([name caseInsensitiveCompare:[[m_instruments objectAtIndex:i] objectForKey:@"SecondName"]] == NSOrderedSame)
         {
             return i;
         }
@@ -743,7 +743,7 @@
     NSMutableArray *instrumentNames = [[NSMutableArray alloc] init];
     for (NSDictionary *instrument in m_instruments) 
     {
-        NSString *name = [instrument objectForKey:@"FriendlyName"];
+        NSString *name = [instrument objectForKey:@"SecondName"];
         if (nil == name)
         {
             name = [instrument objectForKey:@"Name"];

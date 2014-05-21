@@ -14,7 +14,6 @@
         
         if (!m_context || ![EAGLContext setCurrentContext:m_context])
 		{
-            [self release];
             return nil;
         }
 		
@@ -49,12 +48,9 @@
 	if ([EAGLContext currentContext] == m_context)
         [EAGLContext setCurrentContext:nil];
 	
-	[m_context release];
 	m_context = nil;
-	
-	[super dealloc];
+    
 }
-
 
 - (BOOL)resizeFromLayer:(CAEAGLLayer *)layer
 {	

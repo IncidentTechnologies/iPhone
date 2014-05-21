@@ -8,9 +8,9 @@
 
 #import "SocialSongCell.h"
 
-#import <gTarAppCore/UserSongSession.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/TimeFormatter.h>
+#import "UserSongSession.h"
+#import "UserSong.h"
+#import "TimeFormatter.h"
 
 @implementation SocialSongCell
 
@@ -31,14 +31,6 @@
     // Configure the view for the selected state
 }
 
-- (void)dealloc
-{
-    [_userSongSession release];
-    [_titleLabel release];
-    [_artistLabel release];
-    [_timeLabel release];
-    [super dealloc];
-}
 
 - (void)updateCell
 {

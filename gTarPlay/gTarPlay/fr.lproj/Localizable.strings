@@ -7,142 +7,152 @@
  */
 
 // Title Screen
-"SIGN IN" = "Identifiez-vous";
-"VIDEO" = "vidéo";
-"INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
-"PLAY" = "Jouer";
-"FREE PLAY" = "Jouer librement";
-"STORE" = "Magasin";
-"SIGN IN" = "Identifiez-vous";
+"SIGN IN" = "CONNEXION";
 "SIGN UP" = "SIGNER";
-"Username" = "NOM D'UTILISATEUR";
-"Password" = "PASSE";
-"Email (optional)" = "ADRESSE EMAIL (EN OPTION)";
+"VIDEO" = "VIDÉO";
+"INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
+"PLAY" = "JOUER";
+"FREE PLAY" = "JOUER LIBRE";
+"STORE" = "MAGASIN";
+"Sign In with Facebook" = "Signer avec Facebook";
+"Username" = "Nom d'Utilisateur";
+"Password" = "Mot de Passe";
+"Email" = "Adresse Email";
 "Please Connect Your gTar" = "Veuillez brancher votre gTar";
 "Profile" = "Profil";
 "Please connect your gTar to sign up for an account." = "Veuillez brancher votre gTar";
-"Invalid Username" = "NOM D'UTILISATEUR INVALID";
 "Username must begin with a letter" = "Nom d'utilisateur doit commencer par une lettre";
-"Invalid Password" = "Invalid Password";
 "Password must be at least 8 letters" = "passe doit être d'au moins 8 lettres";
-"Invalid Email" = "Email invalide";
-"Invalid Username" = "NOM D'UTILISATEUR INVALID";
-"Invalid Password" = "passe invalide";
+"Invalid Email" = "EMAIL INVALIDE";
+"Invalid Username" = "NOM D'UTILISATEUR INVALIDE";
+"Invalid Password" = "MOT DE PASSE INVALIDE";
+"Invalid login credentials" = "CONNEXION INVALIDE";
 "Facebook failed to login" = "FACEBOOK A OMIS DE LOGIN";
 
 // ActivityFeedCell
-"Someone" = "QUELQU'UN";
-"Jammed out" = "joué";
-"Played %@" = "joué %@";
+"Someone" = "Quenqu'un";
+"Jammed out" = "Joué";
+"Played %@" = "Joué %@";
 
 // Song Selection Controller
 "Easy" = "Facile";
 "Medium" = "Moyen";
 "Hard" = "Difficile";
-"PRESS TO PLAY" = "Appuyez pour lecture";
-"SKILL" = "Compétence";
-"SCORE" = "Pointage";
-"ARTIST" = "Artiste";
-"TITLE" = "Titre";
+"PRESS TO PLAY" = "JOUER";
+"PRACTICE" = "PRATIQUE";
+"SKILL" = "DÉFI";
+"SCORE" = "POINTAGE";
+"ARTIST" = "ARTISTE";
+"TITLE" = "TITRE";
 "Back" = "Retour";
-"Song List" = "Liste de chansons";
+"BACK" = "RETOUR";
+"Song List" = "Chansons";
 
 // Play View
-"SAVE & FINISH" = "sauver et terminer";
-"SCORE" = "Pointage";
-"OUTPUT" = "sortie";
-"AUX" = "auxiliaire";
-"SPEAKER" = "haut-parleur";
-"POST TO FEED" = "Publier";
-"OFF" = "off";
-"ON" = "ON";
-"Easy" = "Facile";
-"Quit" = "abandonner";
-"Restart" = "reprendre";
+"SAVE & FINISH" = "TERMINER";
+"SCORE" = "POINTAGE";
+"OUTPUT" = "SORTIE";
+"AUX" = "AUX";
+"SPEAKER" = "PHONE";
+"POST TO FEED" = "PUBLIER";
+"OFF" = "ÉTEINDRE";
+"ON" = "ALLUMER";
+"Quit" = "Abandonner";
+"Restart" = "Reprendre";
+"RESTART" = "REPRENDRE";
+"SCORE" = "POINTAGE";
+"BEST SESSION" = "MEILLEUR";
+"TOTAL" = "TOTAL";
+"NOTES HIT" = "NOTES JOUÉES";
+"IN A ROW" = "CONSÉCUTIF";
+"ACCURACY" = "PRÉCISION";
+"REPEAT" = "RÉPÉTER";
+"TEMPO" = "TEMPO";
+"METRONOME" = "MÉTRONOME";
+"Metronome" = "Métronome";
+"NONE" = "RIEN";
 
 // Social View
-"Logout" = "fermer la session";
-"FOLLOW" = "s'abonner";
-"FOLLOWING" = "abonnement";
+"Logout" = "Sortir";
+"FOLLOW" = "S'ABONNER";
+"FOLLOWING" = "ABONNEMENT";
+"SESSIONS" = "SESSIONS";
+"FOLLOWERS" = "ABONNÉS";
+"Follow" = "S'Abonner";
+"Following" = "Abonnement";
 
 // Freeplay
-"ALL" = "tous";
-"COLOR" = "couleur";
-"SHAPE" = "forme";
-"LOOP" = "boucle";
-"CLEAR" = "effacer";
-"EXIT" = "sortie";
-"TONE" = "Volume";
-"SLIDING" = "glissement";
-"EXIT TO MAIN" = "Menu principal";
+"ALL" = "TOUS";
+"COLOR" = "COULEUR";
+"SHAPE" = "FORME";
+"LOOP" = "BOUCLE";
+"CLEAR" = "EFFACER";
+"TONE" = "VOLUME";
+"SLIDING" = "GLISSEMENT";
+"Chorus" = "Chorus";
+"Echo" = "Écho";
+"Reverb" = "Réverb";
+"Distortion" = "Distorsion";
+"Single" = "Unique";
+"2 X 2" = "2 X 2";
+"Continuous" = "Continu";
 
 // Instruments
-"Electric" = "Guitare électrique";
+"Electric Guitar" = "Guitare électrique";
 "Acoustic Guitar" = "Guitare acoustique";
 "Rock Guitar" = "Guitare rock";
 "Upright Bass" = "Contrebasse";
 "Piano" = "Piano";
 "Rhodes" = "Piano électrique";
 "Muted Clav" = "Clavinet";
-"Bowed Strings" = "Instruments à cordes frottés";
+"Bowed Strings" = "Crdes frottés";
 "Marimba" = "Marimba";
 "Carl's Synth" = "Synthétiseur Carl";
 "Droplet" = "Gouttelette";
 "Square" = "Piano carré";
-
-// More
-"LOG IN" = "XXXX";
-"Sign In" = "XXXX";
-"Sign Up" = "XXXX";
-"OR" = "XX";
-"SESSIONS" = "XXXXXX";
-"FOLLOWERS" = "XXXXXXX";
-"Chorus" = "XXXX";
-"Echo" = "XXXX";
-"Reverb" = "XXXXX";
-"Distortion" = "XXXXXXX";
+"Warm Analogue" = "Chaud Analogique";
 
 // Time formatter
-"The Future" = "XXXXX";
-"%u second ago" = "%u XXXXX";
-"%u seconds ago" = "%u XXXXXX";
-"%u minute ago" = "%u XXXXXX";
-"%u minutes ago" = "%u XXXXX";
-"%u hour ago" = "%u XXXXX";
-"%u hours ago" = "%u XXXXX";
-"%u day ago" = "%u XXXXX";
-"%u days ago" = "%u XXXXX";
-"%u week ago" = "%u XXXXX";
-"%u weeks ago" = "%u XXXXX";
-"%u month ago" = "%u XXXXX";
-"%u months ago" = "%u XXXXX";
+"The Future" = "la futre";
+"%u second ago" = "il ya %u seconde";
+"%u seconds ago" = "il ya %u secondes";
+"%u minute ago" = "il ya %u minute";
+"%u minutes ago" = "il ya %u minutes";
+"%u hour ago" = "il ya %u heure";
+"%u hours ago" = "il ya %u heures";
+"%u day ago" = "il ya %u jour";
+"%u days ago" = "il ya %u jours";
+"%u week ago" = "il ya %u semaine";
+"%u weeks ago" = "il ya %u semaines";
+"%u month ago" = "il ya %u mois";
+"%u months ago" = "il ya %u mois";
 
 // Store
-"TITLE & ARTIST" = "XXXXX & XXXXXX";
-"99¢" = "XX";
-"FREE" = "XXXX";
-"BUY" = "XXX";
-"Shop" = "XXXX";
-"OK" = "XX";
-"Song Purchase Failed" = "XXXXXXX";
-"No products available, no payments have been processed" = "XXXXX";
-"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "XXXXXX";
-"Song Purchase Succeeded" = "XXXXXX";
-"Song Purchase Succeeded!" = "XXXXXX!";
+"TITLE & ARTIST" = "TITRE & ARTISTE";
+"99¢" = ".99€";
+"FREE" = "GRATIS";
+"BUY" = "PRIX";
+"Shop" = "MAGASIN";
+"OK" = "OK";
+"Song Purchase Failed" = "Achat de chanson échoué.";
+"No products available, no payments have been processed" = "pas de produits disponibles, aucun paiement traitées.";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "Achat de chanson échoué.";
+"Song Purchase Succeeded" = "Achat de chanson réussi, votre compte a été crédité et l'achat sera tentée jusqu'à ce que le succès.";
+"Song Purchase Succeeded!" = "Achat de chanson réussi!";
 
 // Pull to update
-"Updating..." = "XXXXXX...";
-"Last update: Never" = "XXXXX: XXXXX";
-"Pull to update" = "XXXXX";
-"Last update: %@" = "XXXXXXXX: %@";
-"Release to update" = "XXXXXX";
+"Updating..." = "Réactualisant...";
+"Last update: Never" = "Dernière réactualisé: Jamais";
+"Pull to update" = "Tirer à réactualiser";
+"Last update: %@" = "Dernière réactualisé: %@";
+"Release to update" = "Relâchez à réactualiser";
 
 // Selector
-"FRIENDS" = "XXXXX";
-"GLOBAL" = "XXXXXX";
+"FRIENDS" = "AMIS";
+"GLOBAL" = "MONDIAL";
 
 // ETC
-"Error" = "XXXX";
-"Search..." = "XXXX...";
+"Error" = "Erreur";
+"Search..." = "Recherche...";
 
 

@@ -1,48 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FreePlayController">
             <connections>
-                <outlet property="arrowEffects" destination="2406" id="2478"/>
-                <outlet property="arrowInstruments" destination="2449" id="2479"/>
-                <outlet property="arrowLights" destination="2417" id="2477"/>
-                <outlet property="arrowMenu" destination="2377" id="2476"/>
+                <outlet property="arrowEffects" destination="x0o-iq-SNy" id="11b-zi-v2p"/>
+                <outlet property="arrowInstruments" destination="8hs-zW-wpd" id="gNC-ez-NFg"/>
+                <outlet property="arrowLights" destination="X7E-0N-uM0" id="NhJ-04-uAI"/>
+                <outlet property="arrowMenu" destination="bM7-Sb-UBK" id="7iy-Xf-eS7"/>
                 <outlet property="effectsButton" destination="294" id="2241"/>
                 <outlet property="instrumentsButton" destination="398" id="2242"/>
                 <outlet property="lightsButton" destination="447" id="2240"/>
-                <outlet property="m_LEDAllSurface" destination="422" id="445"/>
-                <outlet property="m_LEDFretSurface" destination="421" id="443"/>
-                <outlet property="m_LEDGeneralSurface" destination="419" id="446"/>
-                <outlet property="m_LEDStringSurface" destination="420" id="444"/>
-                <outlet property="m_LEDTab" destination="418" id="441"/>
-                <outlet property="m_activityIndicatorView" destination="42" id="43"/>
-                <outlet property="m_audioRouteSwitch" destination="389" id="504"/>
-                <outlet property="m_connectingView" destination="44" id="50"/>
-                <outlet property="m_effect1Name" destination="282" id="306"/>
-                <outlet property="m_effect1OnOff" destination="277" id="298"/>
-                <outlet property="m_effect1Select" destination="278" id="302"/>
-                <outlet property="m_effect2Name" destination="285" id="307"/>
-                <outlet property="m_effect2OnOff" destination="283" id="299"/>
-                <outlet property="m_effect2Select" destination="284" id="303"/>
-                <outlet property="m_effect3Name" destination="288" id="308"/>
-                <outlet property="m_effect3OnOff" destination="286" id="300"/>
-                <outlet property="m_effect3Select" destination="287" id="304"/>
-                <outlet property="m_effect4Name" destination="291" id="309"/>
-                <outlet property="m_effect4OnOff" destination="289" id="301"/>
-                <outlet property="m_effect4Select" destination="290" id="305"/>
-                <outlet property="m_effectsTab" destination="275" id="295"/>
-                <outlet property="m_instrumentsScroll" destination="391" id="410"/>
-                <outlet property="m_instrumentsTab" destination="394" id="401"/>
                 <outlet property="m_jamPad" destination="27" id="58"/>
-                <outlet property="m_lineOutVolumeSlider" destination="415" id="416"/>
-                <outlet property="m_menuTab" destination="322" id="331"/>
-                <outlet property="m_scaleSwitch" destination="508" id="509"/>
-                <outlet property="m_toneSlider" destination="327" id="333"/>
-                <outlet property="m_volumeView" destination="20" id="25"/>
                 <outlet property="m_wetSlider" destination="59" id="64"/>
                 <outlet property="m_xParamLabel" destination="51" id="57"/>
                 <outlet property="m_yParamLabel" destination="52" id="54"/>
@@ -65,7 +36,7 @@
                         <constraint firstAttribute="width" constant="107" id="752"/>
                         <constraint firstAttribute="height" constant="14" id="753"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -88,177 +59,138 @@
                         <constraint firstAttribute="height" constant="273" id="2539"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2788" userLabel="Drop Shadow View">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="47"/>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2788" userLabel="Drop Shadow View">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="62"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hs-zW-wpd">
+                            <rect key="frame" x="417" y="47" width="30" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="aw4-9M-zTw"/>
+                                <constraint firstAttribute="width" constant="30" id="d1Y-3a-m8a"/>
+                            </constraints>
+                            <color key="tintColor" red="0.35686274509803922" green="0.28627450980392155" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" image="DownArrowOrange.png"/>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bM7-Sb-UBK">
+                            <rect key="frame" x="33" y="47" width="30" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="T75-ZJ-3BB"/>
+                                <constraint firstAttribute="width" constant="30" id="uH0-BF-acs"/>
+                            </constraints>
+                            <color key="tintColor" red="0.094117647058823528" green="0.31764705882352939" blue="0.396078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" image="DownArrowOrange.png"/>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7E-0N-uM0">
+                            <rect key="frame" x="224" y="47" width="30" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="ede-p7-rhK"/>
+                                <constraint firstAttribute="width" constant="30" id="oNG-09-1Ig"/>
+                            </constraints>
+                            <color key="tintColor" red="0.36078431372549019" green="0.34901960784313724" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" image="DownArrowOrange.png"/>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0o-iq-SNy">
+                            <rect key="frame" x="323" y="47" width="30" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="Avv-66-cfe"/>
+                                <constraint firstAttribute="width" constant="30" id="Co5-bX-Stk"/>
+                            </constraints>
+                            <color key="tintColor" red="0.36078431372549019" green="0.32549019607843138" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" image="DownArrowOrange.png"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="329" userLabel="Menu Button">
+                            <rect key="frame" x="0.0" y="0.0" width="96" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.094117647058823528" green="0.31764705882352939" blue="0.396078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="47" id="1828"/>
+                            </constraints>
+                            <color key="tintColor" red="0.10196078431372549" green="0.62352941176470589" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="13" maxX="0.0" maxY="13"/>
+                            <state key="normal" image="MenuIcon.png"/>
+                            <connections>
+                                <action selector="toggleMenuTab:" destination="-1" eventType="touchUpInside" id="334"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="294" userLabel="Effects Button">
+                            <rect key="frame" x="287" y="0.0" width="96" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.36078431372549019" green="0.32549019607843138" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="47" id="2362"/>
+                            </constraints>
+                            <color key="tintColor" red="0.92549019607843142" green="0.63137254901960782" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                            <state key="normal" image="EffectsIcon.png"/>
+                            <connections>
+                                <action selector="toggleEffectsTab:" destination="-1" eventType="touchUpInside" id="296"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1785" userLabel="Volume Button">
+                            <rect key="frame" x="96" y="0.0" width="95" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.27843137254901962" green="0.36862745098039218" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="47" id="2360"/>
+                            </constraints>
+                            <color key="tintColor" red="0.65490196078431373" green="0.79607843137254897" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                            <state key="normal" image="VolumeIcon.png"/>
+                            <connections>
+                                <action selector="toggleVolumeView:" destination="-1" eventType="touchUpInside" id="2532"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="447" userLabel="Lights Button">
+                            <rect key="frame" x="191" y="0.0" width="96" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.36078431372549019" green="0.34901960784313724" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="47" id="2361"/>
+                            </constraints>
+                            <color key="tintColor" red="0.92941176470588238" green="0.73725490196078436" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                            <state key="normal" image="LightIcon.png"/>
+                            <connections>
+                                <action selector="toggleLEDTab:" destination="-1" eventType="touchUpInside" id="449"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="398" userLabel="Inst. Button">
+                            <rect key="frame" x="383" y="0.0" width="97" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.35686274509803922" green="0.28627450980392155" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="47" id="2363"/>
+                            </constraints>
+                            <color key="tintColor" red="0.92941176470588238" green="0.51764705882352935" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                            <state key="normal" image="InstrumentIcon.png"/>
+                            <connections>
+                                <action selector="toggleInstrumentsTab:" destination="-1" eventType="touchUpInside" id="406"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="x0o-iq-SNy" firstAttribute="centerX" secondItem="294" secondAttribute="centerX" id="9dD-7w-eQG"/>
+                        <constraint firstItem="447" firstAttribute="width" secondItem="398" secondAttribute="width" id="BYv-ot-qbk"/>
+                        <constraint firstItem="294" firstAttribute="leading" secondItem="447" secondAttribute="trailing" id="HnW-hY-uo3"/>
+                        <constraint firstItem="447" firstAttribute="width" secondItem="329" secondAttribute="width" id="Hw9-gF-aa8"/>
+                        <constraint firstItem="8hs-zW-wpd" firstAttribute="centerX" secondItem="398" secondAttribute="centerX" id="Rri-fX-5Nv"/>
+                        <constraint firstItem="447" firstAttribute="width" secondItem="294" secondAttribute="width" id="c8b-Zv-iRf"/>
+                        <constraint firstItem="1785" firstAttribute="leading" secondItem="329" secondAttribute="trailing" id="gTY-i7-Wcv"/>
+                        <constraint firstItem="398" firstAttribute="leading" secondItem="294" secondAttribute="trailing" id="lak-S8-i5T"/>
+                        <constraint firstAttribute="trailing" secondItem="398" secondAttribute="trailing" id="lwr-OC-xlO"/>
+                        <constraint firstItem="447" firstAttribute="centerX" secondItem="X7E-0N-uM0" secondAttribute="centerX" id="r9q-PC-L7w"/>
+                        <constraint firstItem="447" firstAttribute="width" secondItem="1785" secondAttribute="width" id="rVR-IR-bbI"/>
+                        <constraint firstItem="447" firstAttribute="leading" secondItem="1785" secondAttribute="trailing" id="sdt-Ms-vhH"/>
+                        <constraint firstItem="329" firstAttribute="leading" secondItem="2788" secondAttribute="leading" id="uxK-ix-oKf"/>
+                        <constraint firstItem="bM7-Sb-UBK" firstAttribute="centerX" secondItem="329" secondAttribute="centerX" id="vNu-no-1DP"/>
+                    </constraints>
                 </view>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="BlueMenu.png" translatesAutoresizingMaskIntoConstraints="NO" id="2377">
-                    <rect key="frame" x="36" y="47" width="25" height="12"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="2382"/>
-                        <constraint firstAttribute="height" constant="12" id="2383"/>
-                    </constraints>
-                </imageView>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="DownArrowOrange.png" translatesAutoresizingMaskIntoConstraints="NO" id="2406">
-                    <rect key="frame" x="324" y="47" width="25" height="12"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="2408"/>
-                    </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="DownArrowRedOrange.png" translatesAutoresizingMaskIntoConstraints="NO" id="2449">
-                    <rect key="frame" x="420" y="47" width="25" height="12"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="2450"/>
-                    </constraints>
-                </imageView>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="DownArrowYellow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2417">
-                    <rect key="frame" x="228" y="47" width="25" height="12"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="398" userLabel="Inst. Button">
-                    <rect key="frame" x="384" y="0.0" width="96" height="47"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.51764705879999995" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="47" id="2363"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="13" maxX="0.0" maxY="13"/>
-                    <state key="normal">
-                        <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleInstrumentsTab:" destination="-1" eventType="touchUpInside" id="406"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="left" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="329" userLabel="Menu Button">
-                    <rect key="frame" x="0.0" y="0.0" width="96" height="47"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0039215686269999999" green="0.63137254899999995" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="47" id="1828"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="13" maxX="0.0" maxY="13"/>
-                    <state key="normal">
-                        <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleMenuTab:" destination="-1" eventType="touchUpInside" id="334"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="447" userLabel="Lights Button">
-                    <rect key="frame" x="192" y="0.0" width="96" height="47"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.74117647060000003" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="47" id="2361"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="13" maxX="0.0" maxY="13"/>
-                    <state key="normal">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleLEDTab:" destination="-1" eventType="touchUpInside" id="449"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="294" userLabel="Effects Button">
-                    <rect key="frame" x="288" y="0.0" width="96" height="47"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.63529411759999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="47" id="2362"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="13" maxX="0.0" maxY="13"/>
-                    <state key="normal">
-                        <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleEffectsTab:" destination="-1" eventType="touchUpInside" id="296"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1785" userLabel="Volume Button">
-                    <rect key="frame" x="96" y="0.0" width="96" height="47"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.65490196079999996" green="0.80000000000000004" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="47" id="2360"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="13" maxX="0.0" maxY="13"/>
-                    <state key="normal">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleVolumeView:" destination="-1" eventType="touchUpInside" id="2532"/>
-                    </connections>
-                </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="MenuIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="2244">
-                    <rect key="frame" x="37" y="14" width="23" height="20"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="23" id="2249"/>
-                        <constraint firstAttribute="height" constant="20" id="2394"/>
-                    </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="VolumeIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="2309">
-                    <rect key="frame" x="130" y="11" width="29" height="25"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="29" id="2314"/>
-                        <constraint firstAttribute="height" constant="25" id="2365"/>
-                    </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="LightIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="2320">
-                    <rect key="frame" x="228" y="12" width="25" height="24"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="2325"/>
-                        <constraint firstAttribute="height" constant="24" id="2326"/>
-                    </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="EffectsIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="2335">
-                    <rect key="frame" x="323" y="9" width="27" height="29"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="29" id="2341"/>
-                        <constraint firstAttribute="width" constant="27" id="2447"/>
-                    </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="InstrumentIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="2344">
-                    <rect key="frame" x="415" y="9" width="34" height="30"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="34" id="2349"/>
-                        <constraint firstAttribute="height" constant="30" id="2367"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -266,881 +198,15 @@
                 <constraint firstAttribute="bottom" secondItem="51" secondAttribute="bottom" constant="5" id="1522"/>
                 <constraint firstItem="1306" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="1667"/>
                 <constraint firstItem="1306" firstAttribute="bottom" secondItem="2" secondAttribute="bottom" id="1705"/>
-                <constraint firstItem="398" firstAttribute="top" secondItem="2" secondAttribute="top" id="1802"/>
-                <constraint firstItem="294" firstAttribute="top" secondItem="2" secondAttribute="top" id="1809"/>
-                <constraint firstItem="447" firstAttribute="bottom" secondItem="294" secondAttribute="bottom" id="1818"/>
-                <constraint firstItem="447" firstAttribute="top" secondItem="2" secondAttribute="top" id="1819"/>
-                <constraint firstItem="1785" firstAttribute="top" secondItem="2" secondAttribute="top" id="1821"/>
-                <constraint firstItem="329" firstAttribute="top" secondItem="2" secondAttribute="top" id="1829"/>
                 <constraint firstItem="52" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="49" id="1968"/>
                 <constraint firstItem="51" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="115" id="1998"/>
-                <constraint firstItem="329" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="2134"/>
                 <constraint firstItem="1306" firstAttribute="trailing" secondItem="2" secondAttribute="trailing" id="2161"/>
-                <constraint firstItem="398" firstAttribute="trailing" secondItem="2" secondAttribute="trailing" id="2165"/>
-                <constraint firstItem="329" firstAttribute="width" secondItem="1785" secondAttribute="width" id="2167"/>
-                <constraint firstItem="447" firstAttribute="width" secondItem="1785" secondAttribute="width" id="2168"/>
-                <constraint firstItem="447" firstAttribute="width" secondItem="294" secondAttribute="width" id="2169"/>
-                <constraint firstItem="398" firstAttribute="width" secondItem="294" secondAttribute="width" id="2170"/>
-                <constraint firstItem="1785" firstAttribute="leading" secondItem="329" secondAttribute="trailing" id="2171"/>
-                <constraint firstItem="447" firstAttribute="leading" secondItem="1785" secondAttribute="trailing" id="2172"/>
-                <constraint firstItem="294" firstAttribute="leading" secondItem="447" secondAttribute="trailing" id="2173"/>
-                <constraint firstItem="398" firstAttribute="leading" secondItem="294" secondAttribute="trailing" id="2174"/>
-                <constraint firstItem="2244" firstAttribute="centerX" secondItem="329" secondAttribute="centerX" id="2306"/>
-                <constraint firstItem="2309" firstAttribute="centerX" secondItem="1785" secondAttribute="centerX" id="2319"/>
-                <constraint firstItem="447" firstAttribute="centerX" secondItem="2320" secondAttribute="centerX" id="2332"/>
-                <constraint firstItem="2335" firstAttribute="centerX" secondItem="294" secondAttribute="centerX" id="2343"/>
-                <constraint firstItem="2344" firstAttribute="centerX" secondItem="398" secondAttribute="centerX" id="2358"/>
-                <constraint firstItem="1306" firstAttribute="top" secondItem="2344" secondAttribute="bottom" constant="8" symbolic="YES" id="2368"/>
-                <constraint firstItem="2244" firstAttribute="centerY" secondItem="2320" secondAttribute="centerY" id="2372"/>
-                <constraint firstItem="2309" firstAttribute="bottom" secondItem="2320" secondAttribute="bottom" id="2373"/>
-                <constraint firstItem="2335" firstAttribute="top" secondItem="2344" secondAttribute="top" id="2375"/>
-                <constraint firstItem="2377" firstAttribute="centerX" secondItem="2244" secondAttribute="centerX" id="2393"/>
-                <constraint firstItem="2309" firstAttribute="centerY" secondItem="1785" secondAttribute="centerY" id="2402"/>
-                <constraint firstItem="2417" firstAttribute="top" secondItem="2406" secondAttribute="top" id="2424"/>
-                <constraint firstItem="2417" firstAttribute="bottom" secondItem="2406" secondAttribute="bottom" id="2425"/>
-                <constraint firstItem="2417" firstAttribute="leading" secondItem="2320" secondAttribute="leading" id="2437"/>
-                <constraint firstItem="2417" firstAttribute="trailing" secondItem="2320" secondAttribute="trailing" id="2438"/>
-                <constraint firstItem="2335" firstAttribute="centerY" secondItem="294" secondAttribute="centerY" id="2442"/>
-                <constraint firstItem="2406" firstAttribute="centerX" secondItem="2335" secondAttribute="centerX" id="2448"/>
-                <constraint firstItem="2449" firstAttribute="top" secondItem="2406" secondAttribute="top" id="2463"/>
-                <constraint firstItem="2449" firstAttribute="bottom" secondItem="2406" secondAttribute="bottom" id="2464"/>
-                <constraint firstItem="2449" firstAttribute="top" secondItem="2344" secondAttribute="bottom" constant="8" symbolic="YES" id="2465"/>
-                <constraint firstItem="2449" firstAttribute="centerX" secondItem="2344" secondAttribute="centerX" id="2475"/>
                 <constraint firstItem="2788" firstAttribute="top" secondItem="2" secondAttribute="top" id="2795"/>
                 <constraint firstItem="2788" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="2797"/>
-                <constraint firstItem="2377" firstAttribute="bottom" secondItem="2417" secondAttribute="bottom" id="2799"/>
-                <constraint firstItem="2417" firstAttribute="top" secondItem="2377" secondAttribute="top" id="2800"/>
-                <constraint firstItem="2788" firstAttribute="bottom" secondItem="329" secondAttribute="bottom" id="2801"/>
                 <constraint firstItem="2788" firstAttribute="trailing" secondItem="2" secondAttribute="trailing" id="2802"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-        </view>
-        <view contentMode="scaleToFill" id="44">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Connecting to gTar..." textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="45">
-                    <rect key="frame" x="146" y="149" width="168" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="168" id="781"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tap to Cancel" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="46">
-                    <rect key="frame" x="146" y="178" width="168" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="47">
-                    <rect key="frame" x="212" y="104" width="37" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48">
-                    <rect key="frame" x="0.0" y="0.0" width="460" height="320"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="backButtonClicked:" destination="-1" eventType="touchUpInside" id="49"/>
-                    </connections>
-                </button>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="42">
-                    <rect key="frame" x="380" y="53" width="37" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
-            </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="42" secondAttribute="trailing" constant="63" id="782"/>
-                <constraint firstItem="45" firstAttribute="centerX" secondItem="48" secondAttribute="centerX" id="783"/>
-                <constraint firstItem="47" firstAttribute="top" secondItem="44" secondAttribute="top" constant="104" id="784"/>
-                <constraint firstItem="48" firstAttribute="top" secondItem="44" secondAttribute="top" id="785"/>
-                <constraint firstItem="48" firstAttribute="bottom" secondItem="44" secondAttribute="bottom" id="786"/>
-                <constraint firstItem="46" firstAttribute="leading" secondItem="45" secondAttribute="leading" id="787"/>
-                <constraint firstItem="45" firstAttribute="centerX" secondItem="47" secondAttribute="centerX" id="788"/>
-                <constraint firstAttribute="trailing" secondItem="48" secondAttribute="trailing" constant="20" symbolic="YES" id="789"/>
-                <constraint firstItem="45" firstAttribute="top" secondItem="47" secondAttribute="bottom" constant="8" symbolic="YES" id="790"/>
-                <constraint firstItem="46" firstAttribute="top" secondItem="45" secondAttribute="bottom" constant="8" symbolic="YES" id="791"/>
-                <constraint firstItem="48" firstAttribute="leading" secondItem="44" secondAttribute="leading" id="792"/>
-                <constraint firstItem="42" firstAttribute="top" secondItem="44" secondAttribute="top" constant="53" id="793"/>
-                <constraint firstItem="46" firstAttribute="trailing" secondItem="45" secondAttribute="trailing" id="794"/>
-            </constraints>
-            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-        </view>
-        <view opaque="NO" contentMode="scaleToFill" id="275" userLabel="Effects Tab" customClass="TransparentAreaView">
-            <rect key="frame" x="0.0" y="0.0" width="127" height="296"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView contentMode="scaleToFill" image="EffectsTab.png" translatesAutoresizingMaskIntoConstraints="NO" id="276">
-                    <rect key="frame" x="0.0" y="0.0" width="127" height="296"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="277">
-                    <rect key="frame" x="11" y="46" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="845"/>
-                        <constraint firstAttribute="width" constant="35" id="846"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="EffectOffButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleEffectOnOff:" destination="-1" eventType="touchUpInside" id="311"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="278">
-                    <rect key="frame" x="57" y="46" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="847"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="EffectSelectOffButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="selectEffect:" destination="-1" eventType="touchUpInside" id="315"/>
-                    </connections>
-                </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="EFFECT NAME" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="282">
-                    <rect key="frame" x="13" y="81" width="73" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="796"/>
-                        <constraint firstAttribute="width" constant="73" id="797"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="9.5"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="283">
-                    <rect key="frame" x="11" y="108" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="844"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="EffectOffButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleEffectOnOff:" destination="-1" eventType="touchUpInside" id="312"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="284">
-                    <rect key="frame" x="57" y="108" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="EffectSelectOffButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="selectEffect:" destination="-1" eventType="touchUpInside" id="316"/>
-                    </connections>
-                </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="EFFECT NAME" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="285">
-                    <rect key="frame" x="14" y="143" width="73" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="73" id="849"/>
-                        <constraint firstAttribute="height" constant="21" id="850"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="9.5"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="286">
-                    <rect key="frame" x="11" y="170" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="848"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="EffectOffButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleEffectOnOff:" destination="-1" eventType="touchUpInside" id="313"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="287">
-                    <rect key="frame" x="57" y="170" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="EffectSelectOffButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="selectEffect:" destination="-1" eventType="touchUpInside" id="317"/>
-                    </connections>
-                </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="EFFECT NAME" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="288">
-                    <rect key="frame" x="14" y="205" width="73" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="795"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="9.5"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="289">
-                    <rect key="frame" x="11" y="232" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="798"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="EffectOffButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleEffectOnOff:" destination="-1" eventType="touchUpInside" id="314"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="290">
-                    <rect key="frame" x="57" y="232" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="EffectSelectOffButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="selectEffect:" destination="-1" eventType="touchUpInside" id="318"/>
-                    </connections>
-                </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="EFFECT NAME" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="291">
-                    <rect key="frame" x="15" y="267" width="73" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="73" id="799"/>
-                        <constraint firstAttribute="height" constant="21" id="800"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="9.5"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
-            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-            <constraints>
-                <constraint firstItem="277" firstAttribute="leading" secondItem="275" secondAttribute="leading" constant="11" id="803"/>
-                <constraint firstItem="286" firstAttribute="trailing" secondItem="289" secondAttribute="trailing" id="804"/>
-                <constraint firstItem="286" firstAttribute="leading" secondItem="283" secondAttribute="leading" id="805"/>
-                <constraint firstItem="289" firstAttribute="top" secondItem="290" secondAttribute="top" id="806"/>
-                <constraint firstAttribute="bottom" secondItem="289" secondAttribute="bottom" constant="29" id="807"/>
-                <constraint firstItem="277" firstAttribute="top" secondItem="278" secondAttribute="top" id="808"/>
-                <constraint firstItem="287" firstAttribute="leading" secondItem="290" secondAttribute="leading" id="809"/>
-                <constraint firstItem="285" firstAttribute="top" secondItem="275" secondAttribute="top" constant="143" id="810"/>
-                <constraint firstAttribute="bottom" secondItem="286" secondAttribute="bottom" constant="91" id="811"/>
-                <constraint firstItem="278" firstAttribute="trailing" secondItem="284" secondAttribute="trailing" id="812"/>
-                <constraint firstItem="290" firstAttribute="bottom" secondItem="289" secondAttribute="bottom" id="813"/>
-                <constraint firstItem="278" firstAttribute="leading" secondItem="275" secondAttribute="leading" constant="57" id="814"/>
-                <constraint firstItem="285" firstAttribute="leading" secondItem="275" secondAttribute="leading" constant="14" id="815"/>
-                <constraint firstItem="276" firstAttribute="top" secondItem="275" secondAttribute="top" id="816"/>
-                <constraint firstItem="277" firstAttribute="top" secondItem="275" secondAttribute="top" constant="46" id="817"/>
-                <constraint firstItem="284" firstAttribute="top" secondItem="283" secondAttribute="top" id="818"/>
-                <constraint firstItem="282" firstAttribute="leading" secondItem="275" secondAttribute="leading" constant="13" id="819"/>
-                <constraint firstItem="277" firstAttribute="trailing" secondItem="283" secondAttribute="trailing" id="820"/>
-                <constraint firstAttribute="bottom" secondItem="291" secondAttribute="bottom" constant="8" id="821"/>
-                <constraint firstItem="291" firstAttribute="leading" secondItem="275" secondAttribute="leading" constant="15" id="822"/>
-                <constraint firstItem="282" firstAttribute="top" secondItem="275" secondAttribute="top" constant="81" id="823"/>
-                <constraint firstItem="287" firstAttribute="top" secondItem="286" secondAttribute="top" id="824"/>
-                <constraint firstItem="276" firstAttribute="trailing" secondItem="275" secondAttribute="trailing" id="825"/>
-                <constraint firstItem="277" firstAttribute="leading" secondItem="283" secondAttribute="leading" id="826"/>
-                <constraint firstItem="283" firstAttribute="top" secondItem="275" secondAttribute="top" constant="108" id="827"/>
-                <constraint firstItem="283" firstAttribute="trailing" secondItem="286" secondAttribute="trailing" id="828"/>
-                <constraint firstItem="289" firstAttribute="leading" secondItem="286" secondAttribute="leading" id="829"/>
-                <constraint firstItem="287" firstAttribute="bottom" secondItem="286" secondAttribute="bottom" id="830"/>
-                <constraint firstItem="288" firstAttribute="trailing" secondItem="285" secondAttribute="trailing" id="831"/>
-                <constraint firstItem="288" firstAttribute="leading" secondItem="285" secondAttribute="leading" id="832"/>
-                <constraint firstItem="287" firstAttribute="trailing" secondItem="284" secondAttribute="trailing" id="834"/>
-                <constraint firstItem="276" firstAttribute="bottom" secondItem="275" secondAttribute="bottom" id="835"/>
-                <constraint firstItem="283" firstAttribute="bottom" secondItem="284" secondAttribute="bottom" id="837"/>
-                <constraint firstItem="276" firstAttribute="leading" secondItem="275" secondAttribute="leading" id="838"/>
-                <constraint firstItem="287" firstAttribute="trailing" secondItem="290" secondAttribute="trailing" id="839"/>
-                <constraint firstAttribute="bottom" secondItem="288" secondAttribute="bottom" constant="70" id="840"/>
-                <constraint firstItem="277" firstAttribute="bottom" secondItem="278" secondAttribute="bottom" id="841"/>
-                <constraint firstItem="287" firstAttribute="leading" secondItem="284" secondAttribute="leading" id="842"/>
-                <constraint firstItem="284" firstAttribute="leading" secondItem="278" secondAttribute="leading" id="843"/>
-            </constraints>
-        </view>
-        <view contentMode="scaleToFill" id="394" userLabel="Instrument Tab" customClass="TransparentAreaView">
-            <rect key="frame" x="0.0" y="0.0" width="127" height="296"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView contentMode="scaleToFill" image="InstrumentTab.png" translatesAutoresizingMaskIntoConstraints="NO" id="395">
-                    <rect key="frame" x="0.0" y="0.0" width="127" height="296"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="391" customClass="CustomComboBox">
-                    <rect key="frame" x="15" y="56" width="72" height="194"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.95092341420000004" green="1" blue="0.2275234364" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <action selector="instrumentSelected:" destination="-1" eventType="valueChanged" id="412"/>
-                    </connections>
-                </view>
-            </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="395" firstAttribute="top" secondItem="394" secondAttribute="top" id="853"/>
-                <constraint firstItem="395" firstAttribute="trailing" secondItem="394" secondAttribute="trailing" id="854"/>
-                <constraint firstAttribute="bottom" secondItem="391" secondAttribute="bottom" constant="46" id="855"/>
-                <constraint firstItem="391" firstAttribute="top" secondItem="394" secondAttribute="top" constant="56" id="856"/>
-                <constraint firstItem="395" firstAttribute="bottom" secondItem="394" secondAttribute="bottom" id="857"/>
-                <constraint firstItem="395" firstAttribute="leading" secondItem="394" secondAttribute="leading" id="858"/>
-                <constraint firstAttribute="trailing" secondItem="391" secondAttribute="trailing" constant="40" id="859"/>
-                <constraint firstItem="391" firstAttribute="leading" secondItem="394" secondAttribute="leading" constant="15" id="860"/>
-            </constraints>
-        </view>
-        <view contentMode="scaleToFill" id="418" userLabel="Light Tab" customClass="TransparentAreaView">
-            <rect key="frame" x="0.0" y="0.0" width="468" height="296"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="LightsTab.png" translatesAutoresizingMaskIntoConstraints="NO" id="472">
-                    <rect key="frame" x="0.0" y="0.0" width="468" height="296"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="419">
-                    <rect key="frame" x="9" y="22" width="401" height="149"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.95092341420000004" green="1" blue="0.2275234364" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="421">
-                    <rect key="frame" x="9" y="173" width="401" height="24"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="423">
-                    <rect key="frame" x="7" y="207" width="70" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="868"/>
-                        <constraint firstAttribute="height" constant="35" id="869"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="SmSquareButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDMode:" destination="-1" eventType="touchUpInside" id="466"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="425">
-                    <rect key="frame" x="160" y="207" width="70" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="865"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="HoldButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDMode:" destination="-1" eventType="touchUpInside" id="479"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="473">
-                    <rect key="frame" x="238" y="207" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="947"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="ClearButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="clearAllLEDs:" destination="-1" eventType="touchUpInside" id="475"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="428">
-                    <rect key="frame" x="84" y="207" width="70" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="946"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="LgSquareButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDMode:" destination="-1" eventType="touchUpInside" id="478"/>
-                    </connections>
-                </button>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="429">
-                    <rect key="frame" x="287" y="207" width="68" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="68" id="948"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="AllButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="422">
-                    <rect key="frame" x="286" y="207" width="70" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.62271897809999999" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="430">
-                    <rect key="frame" x="8" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="870"/>
-                        <constraint firstAttribute="width" constant="35" id="871"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="WhiteButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="457"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="431">
-                    <rect key="frame" x="50" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="949"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="RedButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="458"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="432">
-                    <rect key="frame" x="93" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="867"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="MagentaButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="459"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="433">
-                    <rect key="frame" x="136" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="863"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="BlueButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="460"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="434">
-                    <rect key="frame" x="179" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="950"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="CyanButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="461"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="435">
-                    <rect key="frame" x="222" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="874"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="GreenButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="462"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="436">
-                    <rect key="frame" x="265" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="875"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="YellowButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="463"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="437">
-                    <rect key="frame" x="359" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="866"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="ColorLinesButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="464"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="438">
-                    <rect key="frame" x="402" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="876"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="MultiColorsButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="465"/>
-                    </connections>
-                </button>
-                <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="420">
-                    <rect key="frame" x="411" y="23" width="25" height="148"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="480">
-                    <rect key="frame" x="369" y="207" width="70" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="864"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="AutoplayButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="autoPlayLEDs:" destination="-1" eventType="touchUpInside" id="481"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="482">
-                    <rect key="frame" x="308" y="252" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="945"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="OrangeButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="setLEDColor:" destination="-1" eventType="touchUpInside" id="483"/>
-                    </connections>
-                </button>
-            </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="433" firstAttribute="leading" secondItem="432" secondAttribute="trailing" constant="8" symbolic="YES" id="877"/>
-                <constraint firstAttribute="trailing" secondItem="480" secondAttribute="trailing" constant="29" id="878"/>
-                <constraint firstItem="425" firstAttribute="bottom" secondItem="473" secondAttribute="bottom" id="879"/>
-                <constraint firstItem="422" firstAttribute="top" secondItem="418" secondAttribute="top" constant="207" id="880"/>
-                <constraint firstItem="429" firstAttribute="bottom" secondItem="422" secondAttribute="bottom" id="881"/>
-                <constraint firstItem="482" firstAttribute="bottom" secondItem="437" secondAttribute="bottom" id="882"/>
-                <constraint firstAttribute="trailing" secondItem="438" secondAttribute="trailing" constant="31" id="883"/>
-                <constraint firstItem="437" firstAttribute="top" secondItem="482" secondAttribute="top" id="884"/>
-                <constraint firstItem="425" firstAttribute="leading" secondItem="418" secondAttribute="leading" constant="160" id="885"/>
-                <constraint firstItem="428" firstAttribute="leading" secondItem="418" secondAttribute="leading" constant="84" id="886"/>
-                <constraint firstItem="421" firstAttribute="leading" secondItem="419" secondAttribute="leading" id="887"/>
-                <constraint firstItem="472" firstAttribute="top" secondItem="418" secondAttribute="top" id="888"/>
-                <constraint firstItem="473" firstAttribute="top" secondItem="429" secondAttribute="top" id="889"/>
-                <constraint firstItem="419" firstAttribute="leading" secondItem="418" secondAttribute="leading" constant="9" id="890"/>
-                <constraint firstItem="429" firstAttribute="top" secondItem="480" secondAttribute="top" id="891"/>
-                <constraint firstItem="422" firstAttribute="leading" secondItem="418" secondAttribute="leading" constant="286" id="892"/>
-                <constraint firstItem="435" firstAttribute="bottom" secondItem="434" secondAttribute="bottom" id="893"/>
-                <constraint firstItem="429" firstAttribute="centerX" secondItem="422" secondAttribute="centerX" id="894"/>
-                <constraint firstItem="433" firstAttribute="top" secondItem="434" secondAttribute="top" id="895"/>
-                <constraint firstItem="436" firstAttribute="bottom" secondItem="482" secondAttribute="bottom" id="896"/>
-                <constraint firstItem="435" firstAttribute="leading" secondItem="434" secondAttribute="trailing" constant="8" symbolic="YES" id="897"/>
-                <constraint firstAttribute="trailing" secondItem="420" secondAttribute="trailing" constant="32" id="898"/>
-                <constraint firstItem="433" firstAttribute="bottom" secondItem="432" secondAttribute="bottom" id="899"/>
-                <constraint firstItem="423" firstAttribute="bottom" secondItem="428" secondAttribute="bottom" id="900"/>
-                <constraint firstItem="436" firstAttribute="top" secondItem="435" secondAttribute="top" id="901"/>
-                <constraint firstItem="428" firstAttribute="top" secondItem="423" secondAttribute="top" id="902"/>
-                <constraint firstItem="431" firstAttribute="leading" secondItem="418" secondAttribute="leading" constant="50" id="903"/>
-                <constraint firstAttribute="bottom" secondItem="421" secondAttribute="bottom" constant="99" id="904"/>
-                <constraint firstItem="420" firstAttribute="top" secondItem="418" secondAttribute="top" constant="23" id="905"/>
-                <constraint firstItem="473" firstAttribute="top" secondItem="425" secondAttribute="top" id="906"/>
-                <constraint firstItem="472" firstAttribute="leading" secondItem="418" secondAttribute="leading" id="907"/>
-                <constraint firstItem="432" firstAttribute="top" secondItem="431" secondAttribute="top" id="908"/>
-                <constraint firstItem="419" firstAttribute="top" secondItem="418" secondAttribute="top" constant="22" id="909"/>
-                <constraint firstItem="431" firstAttribute="top" secondItem="430" secondAttribute="top" id="911"/>
-                <constraint firstItem="430" firstAttribute="bottom" secondItem="431" secondAttribute="bottom" id="912"/>
-                <constraint firstItem="473" firstAttribute="bottom" secondItem="429" secondAttribute="bottom" id="914"/>
-                <constraint firstItem="420" firstAttribute="bottom" secondItem="419" secondAttribute="bottom" id="915"/>
-                <constraint firstItem="438" firstAttribute="top" secondItem="437" secondAttribute="top" id="916"/>
-                <constraint firstItem="429" firstAttribute="top" secondItem="422" secondAttribute="top" id="917"/>
-                <constraint firstItem="432" firstAttribute="leading" secondItem="431" secondAttribute="trailing" constant="8" symbolic="YES" id="918"/>
-                <constraint firstItem="428" firstAttribute="bottom" secondItem="425" secondAttribute="bottom" id="919"/>
-                <constraint firstItem="438" firstAttribute="leading" secondItem="437" secondAttribute="trailing" constant="8" symbolic="YES" id="920"/>
-                <constraint firstItem="436" firstAttribute="leading" secondItem="435" secondAttribute="trailing" constant="8" symbolic="YES" id="921"/>
-                <constraint firstItem="423" firstAttribute="leading" secondItem="418" secondAttribute="leading" constant="7" id="922"/>
-                <constraint firstItem="433" firstAttribute="bottom" secondItem="434" secondAttribute="bottom" id="923"/>
-                <constraint firstItem="473" firstAttribute="leading" secondItem="425" secondAttribute="trailing" constant="8" symbolic="YES" id="924"/>
-                <constraint firstItem="434" firstAttribute="leading" secondItem="433" secondAttribute="trailing" constant="8" symbolic="YES" id="925"/>
-                <constraint firstItem="438" firstAttribute="bottom" secondItem="437" secondAttribute="bottom" id="926"/>
-                <constraint firstAttribute="trailing" secondItem="422" secondAttribute="trailing" constant="112" id="927"/>
-                <constraint firstItem="472" firstAttribute="bottom" secondItem="418" secondAttribute="bottom" id="928"/>
-                <constraint firstItem="480" firstAttribute="bottom" secondItem="429" secondAttribute="bottom" id="929"/>
-                <constraint firstItem="420" firstAttribute="leading" secondItem="418" secondAttribute="leading" constant="411" id="930"/>
-                <constraint firstItem="428" firstAttribute="top" secondItem="425" secondAttribute="top" id="931"/>
-                <constraint firstAttribute="bottom" secondItem="419" secondAttribute="bottom" constant="125" id="932"/>
-                <constraint firstItem="435" firstAttribute="bottom" secondItem="436" secondAttribute="bottom" id="933"/>
-                <constraint firstAttribute="trailing" secondItem="419" secondAttribute="trailing" constant="58" id="934"/>
-                <constraint firstItem="434" firstAttribute="top" secondItem="435" secondAttribute="top" id="935"/>
-                <constraint firstItem="482" firstAttribute="top" secondItem="436" secondAttribute="top" id="936"/>
-                <constraint firstItem="482" firstAttribute="leading" secondItem="436" secondAttribute="trailing" constant="8" symbolic="YES" id="937"/>
-                <constraint firstItem="421" firstAttribute="trailing" secondItem="419" secondAttribute="trailing" id="938"/>
-                <constraint firstItem="472" firstAttribute="trailing" secondItem="418" secondAttribute="trailing" id="939"/>
-                <constraint firstAttribute="bottom" secondItem="430" secondAttribute="bottom" constant="9" id="940"/>
-                <constraint firstItem="432" firstAttribute="bottom" secondItem="431" secondAttribute="bottom" id="941"/>
-                <constraint firstItem="421" firstAttribute="top" secondItem="418" secondAttribute="top" constant="173" id="942"/>
-                <constraint firstItem="432" firstAttribute="top" secondItem="433" secondAttribute="top" id="943"/>
-                <constraint firstItem="430" firstAttribute="leading" secondItem="418" secondAttribute="leading" constant="8" id="944"/>
-            </constraints>
-            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-        </view>
-        <view opaque="NO" contentMode="scaleToFill" id="322" userLabel="Menu Tab" customClass="TransparentAreaView">
-            <rect key="frame" x="0.0" y="0.0" width="350" height="296"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="MenuTab.png" translatesAutoresizingMaskIntoConstraints="NO" id="323">
-                    <rect key="frame" x="0.0" y="0.0" width="350" height="296"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="324">
-                    <rect key="frame" x="24" y="27" width="58" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="977"/>
-                        <constraint firstAttribute="width" constant="58" id="978"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="ExitButton.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="backButtonClicked:" destination="-1" eventType="touchUpInside" id="337"/>
-                    </connections>
-                </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20" userLabel="Volume">
-                    <rect key="frame" x="178" y="155" width="197" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                </view>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="415" userLabel="LineOut Volume Slider">
-                    <rect key="frame" x="173" y="157" width="197" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="193" id="980"/>
-                    </constraints>
-                    <color key="minimumTrackTintColor" red="0.95092341420000004" green="1" blue="0.2275234364" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <action selector="setLineoutGain:" destination="-1" eventType="valueChanged" id="417"/>
-                    </connections>
-                </slider>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="8000" minValue="150" maxValue="8000" translatesAutoresizingMaskIntoConstraints="NO" id="327" userLabel="Tone Slider">
-                    <rect key="frame" x="61" y="157" width="197" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="193" id="951"/>
-                    </constraints>
-                    <connections>
-                        <action selector="setTone:" destination="-1" eventType="valueChanged" id="336"/>
-                    </connections>
-                </slider>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="389" userLabel="Output Select Button">
-                    <rect key="frame" x="9" y="110" width="48" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="48" id="954"/>
-                        <constraint firstAttribute="height" constant="60" id="955"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="SwitchDown.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" image="SwitchUp.png"/>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleAudioRoute:" destination="-1" eventType="touchUpInside" id="390"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="508" userLabel="Scale Switch">
-                    <rect key="frame" x="9" y="225" width="48" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="979"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="SwitchDown.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" image="SwitchUp.png"/>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleScaleLights:" destination="-1" eventType="touchUpInside" id="510"/>
-                    </connections>
-                </button>
-            </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="324" firstAttribute="top" secondItem="322" secondAttribute="top" constant="27" id="956"/>
-                <constraint firstItem="389" firstAttribute="leading" secondItem="322" secondAttribute="leading" constant="9" id="957"/>
-                <constraint firstItem="327" firstAttribute="leading" secondItem="322" secondAttribute="leading" constant="63" id="958"/>
-                <constraint firstItem="20" firstAttribute="top" secondItem="322" secondAttribute="top" constant="155" id="959"/>
-                <constraint firstItem="389" firstAttribute="leading" secondItem="508" secondAttribute="leading" id="960"/>
-                <constraint firstItem="327" firstAttribute="top" secondItem="415" secondAttribute="top" id="961"/>
-                <constraint firstItem="389" firstAttribute="trailing" secondItem="508" secondAttribute="trailing" id="964"/>
-                <constraint firstItem="389" firstAttribute="top" secondItem="322" secondAttribute="top" constant="110" id="965"/>
-                <constraint firstItem="415" firstAttribute="top" secondItem="322" secondAttribute="top" constant="157" id="966"/>
-                <constraint firstItem="20" firstAttribute="leading" secondItem="322" secondAttribute="leading" constant="178" id="967"/>
-                <constraint firstItem="323" firstAttribute="leading" secondItem="322" secondAttribute="leading" id="968"/>
-                <constraint firstAttribute="trailing" secondItem="20" secondAttribute="trailing" constant="-25" id="969"/>
-                <constraint firstItem="323" firstAttribute="bottom" secondItem="322" secondAttribute="bottom" id="970"/>
-                <constraint firstAttribute="bottom" secondItem="508" secondAttribute="bottom" constant="11" id="971"/>
-                <constraint firstItem="324" firstAttribute="leading" secondItem="322" secondAttribute="leading" constant="24" id="972"/>
-                <constraint firstItem="323" firstAttribute="top" secondItem="322" secondAttribute="top" id="973"/>
-                <constraint firstItem="323" firstAttribute="trailing" secondItem="322" secondAttribute="trailing" id="974"/>
-                <constraint firstItem="415" firstAttribute="leading" secondItem="322" secondAttribute="leading" constant="175" id="975"/>
-                <constraint firstItem="20" firstAttribute="centerY" secondItem="415" secondAttribute="centerY" id="976"/>
-            </constraints>
         </view>
         <view contentMode="scaleToFill" id="27" customClass="JamPad">
             <rect key="frame" x="0.0" y="0.0" width="273" height="262"/>
@@ -1154,46 +220,13 @@
                 <action selector="setWet:" destination="-1" eventType="valueChanged" id="65"/>
             </connections>
         </slider>
-        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="12b-Ver2_FreePlay_INSTR2.jpg" id="270">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-        </imageView>
     </objects>
     <resources>
-        <image name="12b-Ver2_FreePlay_INSTR2.jpg" width="960" height="640"/>
-        <image name="AllButton.png" width="136" height="70"/>
-        <image name="AutoplayButton.png" width="136" height="70"/>
-        <image name="BlueButton.png" width="70" height="70"/>
-        <image name="BlueMenu.png" width="50" height="24"/>
-        <image name="ClearButton.png" width="70" height="70"/>
-        <image name="ColorLinesButton.png" width="70" height="70"/>
-        <image name="CyanButton.png" width="70" height="70"/>
         <image name="DownArrowOrange.png" width="50" height="24"/>
-        <image name="DownArrowRedOrange.png" width="50" height="24"/>
-        <image name="DownArrowYellow.png" width="50" height="24"/>
-        <image name="EffectOffButton.png" width="70" height="70"/>
-        <image name="EffectSelectOffButton.png" width="70" height="70"/>
         <image name="EffectsIcon.png" width="54" height="58"/>
-        <image name="EffectsTab.png" width="253" height="591"/>
-        <image name="ExitButton.png" width="146" height="75"/>
-        <image name="GreenButton.png" width="70" height="70"/>
-        <image name="HoldButton.png" width="136" height="70"/>
         <image name="InstrumentIcon.png" width="67" height="60"/>
-        <image name="InstrumentTab.png" width="253" height="591"/>
-        <image name="LgSquareButton.png" width="136" height="70"/>
         <image name="LightIcon.png" width="49" height="47"/>
-        <image name="LightsTab.png" width="935" height="591"/>
-        <image name="MagentaButton.png" width="70" height="70"/>
         <image name="MenuIcon.png" width="46" height="40"/>
-        <image name="MenuTab.png" width="700" height="591"/>
-        <image name="MultiColorsButton.png" width="70" height="70"/>
-        <image name="OrangeButton.png" width="70" height="70"/>
-        <image name="RedButton.png" width="70" height="70"/>
-        <image name="SmSquareButton.png" width="136" height="70"/>
-        <image name="SwitchDown.png" width="16" height="16"/>
-        <image name="SwitchUp.png" width="16" height="16"/>
         <image name="VolumeIcon.png" width="57" height="49"/>
-        <image name="WhiteButton.png" width="70" height="70"/>
-        <image name="YellowButton.png" width="70" height="70"/>
     </resources>
 </document>

@@ -91,7 +91,7 @@ NSString * ODIN1(){
     
     free(buf);
     
-    NSString *odinstring = [[[NSString alloc] initWithString:(NSString*)string] autorelease];
+    NSString *odinstring = [[NSString alloc] initWithString:(__bridge NSString*)string];
     CFRelease(data);
     CFRelease(string);
 

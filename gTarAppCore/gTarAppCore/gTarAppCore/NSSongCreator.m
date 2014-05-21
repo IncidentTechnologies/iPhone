@@ -42,17 +42,11 @@
 	
 	NSString * xmpBlock = songCreator.m_xmpBlob;
 	
-	[songCreator autorelease];
+	//[songCreator autorelease];
 	
 	return xmpBlock;
 }
 
-- (void)dealloc
-{
-	[m_xmpBlob release];
-
-	[super dealloc];
-}
 
 // XML (XMP) functions
 - (void)createXmp

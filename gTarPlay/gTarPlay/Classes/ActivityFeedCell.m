@@ -8,14 +8,14 @@
 
 #import "ActivityFeedCell.h"
 
-#import <gTarAppCore/CloudController.h>
+#import "CloudController.h"
 #import <gTarAppCore/UserController.h>
-#import <gTarAppCore/FileController.h>
-#import <gTarAppCore/UserProfile.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/UserSongSession.h>
+#import "FileController.h"
+#import "UserProfile.h"
+#import "UserSong.h"
+#import "UserSongSession.h"
 
-#import <gTarAppCore/TimeFormatter.h>
+#import "TimeFormatter.h"
 
 extern CloudController * g_cloudController;
 extern FileController * g_fileController;
@@ -89,13 +89,6 @@ extern UserController * g_userController;
     m_timelabel.text = [[NSString alloc] initWithString:[TimeFormatter stringFromNow:_userSongSession.m_created]];
 }
 
-- (void)dealloc
-{
-    [_userSongSession release];
-    [_activityView release];
-    [_likeButton release];
-    [super dealloc];
-}
 
 - (void)profilePicDownloadComplete:(UIImage *)pic
 {

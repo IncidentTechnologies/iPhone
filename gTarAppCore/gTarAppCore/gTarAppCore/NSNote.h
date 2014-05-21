@@ -31,11 +31,12 @@
 }
 
 @property (nonatomic, assign) double m_duration;
-@property (nonatomic, retain) NSString * m_value;
+@property (nonatomic, strong) NSString * m_value;
 @property (nonatomic, assign) double m_measureStart;
 @property (nonatomic, assign) double m_absoluteBeatStart;
 @property (nonatomic, assign) GtarString m_string;
 @property (nonatomic, assign) GtarFret m_fret;
+@property (nonatomic, assign) BOOL m_standaloneActive;
 
 - (id)initWithXmlDom:(XmlDom*)xmlDom;
 

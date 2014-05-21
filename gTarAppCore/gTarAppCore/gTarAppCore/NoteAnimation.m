@@ -19,7 +19,7 @@
 	if ( self )
 	{
 		
-		m_overlay = [overlay retain];
+		m_overlay = overlay;
 		
 		m_center = center;
 		
@@ -46,9 +46,6 @@
 		
 		[self addModel:model];
 		
-		[texture release];
-		[model release];
-		[image release];
 		
 		
 #if 0
@@ -155,14 +152,6 @@
 	
 }
 
-- (void)dealloc
-{
-	
-	[m_overlay release];
-	
-	[super dealloc];
-	
-}
 
 - (void)drawCurrentFrame
 {

@@ -18,19 +18,16 @@
 #import "TitleNavigationController.h"
 #import "Mixpanel.h"
 
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/FileController.h>
+#import "CloudController.h"
+#import "FileController.h"
 #import <gTarAppCore/UserController.h>
-//#import <gTarAppCore/TelemetryController.h>
-
-#import <AudioController/AudioController.h>
 
 #define MIXPANEL_TOKEN @"da24d59140097cb9672b348ef05c6fab"
 
 Facebook *g_facebook;
 
 CloudController * g_cloudController;
-AudioController * g_audioController;
+//AudioController * g_audioController;
 FileController * g_fileController;
 GtarController * g_gtarController;
 UserController * g_userController;
@@ -82,7 +79,7 @@ UserController * g_userController;
         [g_gtarController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR | Debug_BUILD
-        [NSTimer scheduledTimerWithTimeInterval:5.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        //[NSTimer scheduledTimerWithTimeInterval:3.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 #endif
         
 #if Debug_BUILD
@@ -97,6 +94,10 @@ UserController * g_userController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    // Test Flight Integration
+    [TestFlight takeOff:@"ad6b7150-d397-4188-9f1a-58f56c83d967"];
+    
     // Typical UI Setup
     [TestFlight takeOff:@"ad6b7150-d397-4188-9f1a-58f56c83d967"];
     
@@ -311,9 +312,8 @@ UserController * g_userController;
     CFStringRef uuidCFString = CFUUIDCreateString(nil, uuid);
     
     // Convert to NSString
-    uuidString = (NSString*)uuidCFString;
+    uuidString = (__bridge NSString*)uuidCFString;
     
-    [uuidString retain];
     
     // Save this UUID
     [settings setObject:uuidString forKey:@"UUIDString"];
@@ -323,7 +323,7 @@ UserController * g_userController;
     CFRelease(uuid);
     CFRelease(uuidCFString);
     
-    return [uuidString autorelease];
+    return uuidString;
 }
 
 - (void)delayedLoad
@@ -332,7 +332,7 @@ UserController * g_userController;
     NSLog(@"Begin delayed loading");
     
     // Create the audio controller -- this can take awhile
-    g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
+    // g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     
     NSLog(@"Finished delayed loading");
     
@@ -371,25 +371,6 @@ UserController * g_userController;
 }
 
 
-- (void)dealloc
-{
-    
-    [g_userController release];
-    
-    [g_gtarController release];
-    
-    [g_fileController release];
-    
-//    [g_telemetryController release];
-    
-    [g_cloudController release];
-    
-	[m_navigationController release];
-    
-	[m_window release];
-    
-	[super dealloc];
-}
 
 #pragma mark -
 #pragma mark GtarControllerObserver

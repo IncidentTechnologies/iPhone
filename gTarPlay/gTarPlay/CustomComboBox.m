@@ -41,7 +41,6 @@
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler:)];
         tap.numberOfTapsRequired = 1;
         [m_scrollView addGestureRecognizer:tap];
-        [tap release];
                 
         [self addSubview:m_scrollView];
         [self bringSubviewToFront:m_scrollView];
@@ -57,13 +56,7 @@
 {
     
     [m_scrollView removeFromSuperview];
-    [m_scrollView release];
-    [m_contentArray release];
-    [m_headerIndices release];
-    [m_contentSubviews release];
-    [m_flickerTimer release];
     
-    [super dealloc];
     
 }
 
@@ -97,7 +90,6 @@
         [m_scrollView addSubview:imageView];
         [m_contentSubviews addObject:imageView];
         
-        [imageView release];
         
         // Increment for the next image
         fr.origin.y += m_rowHeight;
@@ -145,7 +137,6 @@
         
         [m_scrollView addSubview:label];
         [m_contentSubviews addObject:label];
-        [label release];
         
         // Increment for the next row
         fr.origin.y += m_rowHeight;

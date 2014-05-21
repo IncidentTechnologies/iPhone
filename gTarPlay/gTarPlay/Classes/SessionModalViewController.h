@@ -8,20 +8,33 @@
 
 #import "SlidingModalViewController.h"
 
+#import "PlayerViewController.h"
+#import "VolumeViewController.h"
+#import "SlidingInstrumentViewController.h"
+#import "UIView+Gtar.h"
+#import "FileController.h"
+#import "UserSong.h"
+#import "UserSongSession.h"
+#import "SoundMaster.h"
+
 @class UserSongSession;
 
-@interface SessionModalViewController : SlidingModalViewController
+@interface SessionModalViewController : SlidingModalViewController <SlidingInstrumentDelegate, PlayerViewDelegate>
 
-@property (retain, nonatomic) IBOutlet UIView *volumeView;
-@property (retain, nonatomic) IBOutlet UIView *instrumentView;
-@property (retain, nonatomic) IBOutlet UIView *playerView;
+@property (strong, nonatomic) SoundMaster * g_soundMaster;
 
-@property (retain, nonatomic) IBOutlet UIButton *menuButton;
-@property (retain, nonatomic) IBOutlet UIButton *volumeButton;
-@property (retain, nonatomic) IBOutlet UIButton *shortcutButton;
-@property (retain, nonatomic) IBOutlet UIButton *blackButton;
+@property (strong, nonatomic) IBOutlet UIView *volumeView;
+@property (strong, nonatomic) IBOutlet UIView *instrumentView;
+@property (strong, nonatomic) IBOutlet UIView *playerView;
 
-@property (retain, nonatomic) UserSongSession *userSongSession;
+@property (strong, nonatomic) IBOutlet UIButton *menuButton;
+@property (strong, nonatomic) IBOutlet UIButton *volumeButton;
+@property (strong, nonatomic) IBOutlet UIButton *shortcutButton;
+@property (strong, nonatomic) IBOutlet UIButton *blackButton;
+
+@property (strong, nonatomic) UserSongSession *userSongSession;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;
 
 - (IBAction)volumeButtonClicked:(id)sender;
 - (IBAction)shortcutButtonClicked:(id)sender;

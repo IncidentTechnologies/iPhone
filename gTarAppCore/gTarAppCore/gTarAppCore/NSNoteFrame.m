@@ -61,16 +61,6 @@
 
 }
 
-- (void)dealloc
-{
-    
-    [m_notes release];
-    [m_notesPending release];
-    [m_notesHit release];
-    
-    [super dealloc];
-    
-}
 
 - (void)addNote:(NSNote*)note
 {
@@ -127,6 +117,38 @@
     
     return foundNote;
     
+}
+
+- (void)removeString:(GtarString)str andFret:(GtarFret)fret
+{
+    NSNote * foundNote = nil;
+    
+    
+    for ( NSNote * testNote in m_notesPending )
+    {
+        
+        if ( testNote.m_string == str &&
+            testNote.m_fret == fret )
+        {
+            foundNote = testNote;
+            break;
+        }
+        
+        if ( testNote.m_string == str &&
+            testNote.m_fret == GTAR_GUITAR_FRET_MUTED &&
+            fret == 0 )
+        {
+            foundNote = testNote;
+            break;
+        }
+        
+    }
+    
+    if ( foundNote != nil )
+    {
+        [m_notesPending removeObject:foundNote];
+        [m_notesHit addObject:foundNote];
+    }
 }
 
 - (NSNote*)hitTestAndRemoveString:(GtarString)str andFret:(GtarFret)fret

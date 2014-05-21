@@ -8,14 +8,6 @@
 
 #import "SessionModalViewController.h"
 
-#import "PlayerViewController.h"
-#import "VolumeViewController.h"
-#import "SlidingInstrumentViewController.h"
-#import "UIView+Gtar.h"
-#import <gTarAppCore/FileController.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/UserSongSession.h>
-
 extern FileController *g_fileController;
 
 @interface SessionModalViewController ()
@@ -28,12 +20,17 @@ extern FileController *g_fileController;
 
 @implementation SessionModalViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize g_soundMaster;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
         // Custom initialization
+        //NSLog(@"Alloc Session Modal VC SoundMaster");
+        g_soundMaster = soundMaster;
+        [g_soundMaster start];
     }
     return self;
 }
@@ -49,13 +46,15 @@ extern FileController *g_fileController;
 //    [_likeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     // Set up the player modal
-    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
+    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
+    [_playerViewController setDelegate:self];
     [_playerViewController attachToSuperview:_playerView];
     
-    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster isInverse:NO];
     [_volumeViewController attachToSuperview:self.contentView withFrame:_volumeView.frame];
     
     _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
+    [_instrumentViewController setDelegate:self];
     [_instrumentViewController attachToSuperview:self.contentView withFrame:_instrumentView.frame];
     
 }
@@ -78,6 +77,9 @@ extern FileController *g_fileController;
     
     _playerViewController.userSong = _userSongSession.m_userSong;
     _playerViewController.xmpBlob = _userSongSession.m_xmpBlob;
+    
+    // Wait for instrument to load
+    [_shortcutButton setEnabled:NO];
 }
 
 - (void)viewDidLayoutSubviews
@@ -94,23 +96,16 @@ extern FileController *g_fileController;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    [_volumeView release];
-    [_instrumentView release];
-    [_menuButton release];
-    [_volumeButton release];
-    [_shortcutButton release];
-    [_playerView release];
-    [_blackButton release];
-    [_userSongSession release];
-    [super dealloc];
-}
 
 #pragma mark - Button click handlers
 
 - (IBAction)closeButtonClicked:(id)sender;
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     [_playerViewController endPlayback];
     
     [_blackButton setHidden:YES];
@@ -122,6 +117,11 @@ extern FileController *g_fileController;
 
 - (IBAction)volumeButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     if ( _volumeViewController.isDown == YES )
     {
         [_blackButton setHidden:YES];
@@ -136,6 +136,13 @@ extern FileController *g_fileController;
 
 - (IBAction)shortcutButtonClicked:(id)sender
 {
+    NSLog(@"Session Modal VC: shortcut button clicked");
+    
+    if( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     if ( _instrumentViewController.isDown == YES )
     {
         [_blackButton setHidden:YES];
@@ -151,8 +158,44 @@ extern FileController *g_fileController;
 
 - (IBAction)blackButtonClicked:(id)sender
 {
+    if ( _instrumentViewController.loading == YES )
+    {
+        return;
+    }
+    
     [_blackButton setHidden:YES];
     [_volumeViewController closeView:YES];
     [_instrumentViewController closeView:YES];
 }
+
+#pragma mark - Sliding Instrument Selector delegate
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
+{
+    NSLog(@"Session Modal VC: did select instrument %@",instrumentName);
+    [_playerViewController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
+}
+
+- (void)stopAudioEffects
+{
+    [_playerViewController stopAudioEffects];
+}
+
+- (NSInteger)getSelectedInstrumentIndex
+{
+    return [_playerViewController getSelectedInstrumentIndex];
+}
+
+- (NSArray *)getInstrumentList
+{
+    
+    return [_playerViewController getInstrumentList];
+}
+
+#pragma mark - Player View Delegate
+
+- (void) instrumentLoadingReady
+{
+    [_shortcutButton setEnabled:YES];
+}
+
 @end

@@ -53,24 +53,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    [_currentFirmwareLabel release];
-    [_availableFirmwareLabel release];
-    [_currentFirmwareVersion release];
-    [_availableFirmwareVersion release];
-    [_activityIndicator release];
-    [_progressLabel release];
-    [_updateButton release];
-    [super dealloc];
-}
 
 // Setting this invocation will enable the 'Update' button
 - (void)setUpdateInvocation:(NSInvocation *)updateInvocation
 {
-    [_updateInvocation release];
     
-    _updateInvocation = [updateInvocation retain];
+    _updateInvocation = updateInvocation;
     
     [self performSelectorOnMainThread:@selector(setUpdateInvocationMain) withObject:nil waitUntilDone:YES];
 }
@@ -91,18 +79,16 @@
 
 - (void)setCurrentFirmwareVersion:(NSString *)currentFirmwareVersion
 {
-    [_currentFirmwareVersion release];
     
-    _currentFirmwareVersion = [currentFirmwareVersion retain];
+    _currentFirmwareVersion = currentFirmwareVersion;
     
     [_currentFirmwareLabel setText:_currentFirmwareVersion];
 }
 
 - (void)setAvailableFirmwareVersion:(NSString *)availableFirmwareVersion
 {
-    [_availableFirmwareVersion release];
     
-    _availableFirmwareVersion = [availableFirmwareVersion retain];
+    _availableFirmwareVersion = availableFirmwareVersion;
     
     [_availableFirmwareLabel setText:_availableFirmwareVersion];
 }

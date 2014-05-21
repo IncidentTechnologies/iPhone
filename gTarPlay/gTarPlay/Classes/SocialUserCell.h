@@ -12,16 +12,16 @@
 
 @interface SocialUserCell : UITableViewCell
 
-@property (retain, nonatomic) UserProfile *userProfile;
-@property (retain, nonatomic) NSInvocation *followInvocation;
+@property (strong, nonatomic) UserProfile *userProfile;
+@property (strong, nonatomic) NSInvocation *followInvocation;
 @property (assign, nonatomic) BOOL following;
 @property (assign, nonatomic) BOOL isUser;
 
-@property (retain, nonatomic) IBOutlet UILabel *userName;
-@property (retain, nonatomic) IBOutlet UIImageView *profilePic;
-@property (retain, nonatomic) IBOutlet UIButton *followButton;
+@property (strong, nonatomic) IBOutlet UILabel *userName;
+@property (strong, nonatomic) IBOutlet UIImageView *profilePic;
+@property (strong, nonatomic) IBOutlet UIButton *followButton;
 
-@property (retain, nonatomic) IBOutlet UILabel *followButtonText;
+@property (strong, nonatomic) IBOutlet UILabel *followButtonText;
 
 - (void)updateCell;
 - (void)localizeViews;

@@ -25,13 +25,13 @@
 
 }
 
-@property (nonatomic, retain) NSString * m_productId;
-@property (nonatomic, retain) UserSong * m_userSong;
+@property (nonatomic, strong) NSString * m_productId;
+@property (nonatomic, strong) UserSong * m_userSong;
 
-@property (nonatomic, retain) NSData * m_transactionReceipt;
-@property (nonatomic, retain) NSDate * m_transactionDate;
-@property (nonatomic, retain) NSString * m_transactionIdentifier;
+@property (nonatomic, strong) NSData * m_transactionReceipt;
+@property (nonatomic, strong) NSDate * m_transactionDate;
+@property (nonatomic, strong) NSString * m_transactionIdentifier;
 
-@property (nonatomic, retain) SKPaymentTransaction * m_paymentTransaction;
+@property (nonatomic, strong) SKPaymentTransaction * m_paymentTransaction;
 
 @end

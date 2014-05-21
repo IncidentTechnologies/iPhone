@@ -12,15 +12,15 @@
 
 @interface ActivityFeedCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet UIImageView *picture;
-@property (retain, nonatomic) IBOutlet UILabel *name;
-@property (retain, nonatomic) IBOutlet UILabel *activity;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
-@property (retain, nonatomic) IBOutlet UIButton *likeButton;
+@property (strong, nonatomic) IBOutlet UIImageView *picture;
+@property (strong, nonatomic) IBOutlet UILabel *name;
+@property (strong, nonatomic) IBOutlet UILabel *activity;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
+@property (strong, nonatomic) IBOutlet UIButton *likeButton;
 
-@property (retain, nonatomic) UserSongSession *userSongSession;
+@property (strong, nonatomic) UserSongSession *userSongSession;
 
-@property (retain, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
 - (IBAction)likeButtonClicked:(id)sender;
 

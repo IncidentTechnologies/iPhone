@@ -24,6 +24,7 @@
 @implementation SongES1Renderer
 
 @synthesize m_seekLineModel;
+@synthesize m_seekLineStandaloneModel;
 @synthesize m_backgroundTexture;
 @synthesize m_offset;
 @synthesize m_viewShift;
@@ -42,6 +43,7 @@
         
         m_stringModels = [[NSMutableArray alloc] init];
         m_lineModels = [[NSMutableArray alloc] init];
+        m_loopModels = [[NSMutableArray alloc] init];
         
     }
     
@@ -49,21 +51,6 @@
     
 }
 
-- (void)dealloc
-{
-    
-    [m_noteAnimations release];
-    [m_noteModels release];
-    
-    [m_stringModels release];
-    [m_lineModels release];
-        
-    [m_seekLineModel release];
-    [m_backgroundTexture release];
-    
-    [super dealloc];
-    
-}
 
 #pragma mark - Accessors
 
@@ -97,6 +84,16 @@
     [m_stringModels removeObject:str];
 }
 
+- (void)addLoop:(LineModel *)loop
+{
+    [m_loopModels addObject:loop];
+}
+
+- (void)removeLoop:(LineModel *)loop
+{
+    [m_loopModels removeObject:loop];
+}
+
 - (void)addLine:(LineModel*)line
 {
     [m_lineModels addObject:line];
@@ -110,11 +107,16 @@
 - (void)clearModelData
 {
     
-    [m_noteAnimations release];
-    [m_noteModels release];
+    [m_noteModels removeAllObjects];
+    [m_noteAnimations removeAllObjects];
+    [m_stringModels removeAllObjects];
+    [m_lineModels removeAllObjects];
+    [m_loopModels removeAllObjects];
     
-    [m_stringModels release];
-    [m_lineModels release];
+    m_noteAnimations = nil;
+    m_noteModels = nil;
+    m_stringModels = nil;
+    m_lineModels = nil;
     
     m_noteAnimations = [[NSMutableArray alloc] init];
     m_noteModels = [[NSMutableArray alloc] init];
@@ -122,9 +124,8 @@
     m_stringModels = [[NSMutableArray alloc] init];
     m_lineModels = [[NSMutableArray alloc] init];
     
-    [m_seekLineModel release];
-    
     m_seekLineModel = nil;
+    m_seekLineStandaloneModel = nil;
     
 }
 
@@ -150,10 +151,30 @@
 
 - (void)render
 {
+
+    [self startRender];
+	
+    [self renderNoteModelsWithHighlights:NO fretOne:NO fretTwo:NO fretThree:NO];
+    
+    [self endRender];
+    
+    
+}
+
+- (void)renderWithHighlights:(BOOL)highlight fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree
+{
+    [self startRender];
+    [self renderNoteModelsWithHighlights:YES fretOne:fretOne fretTwo:fretTwo fretThree:fretThree];
+    [self endRender];
+}
+
+- (void)startRender
+{
+    
     
 	// update model
-//	[self updateCurrentPosition];
-//    NSLog(@"Rendering GL frame");
+    //	[self updateCurrentPosition];
+    //    NSLog(@"Rendering GL frame");
     
 	// init stuff
 	[EAGLContext setCurrentContext:m_context];
@@ -166,8 +187,8 @@
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrthof( GL_ORTHO_LEFT, GL_ORTHO_RIGHT,
-              GL_ORTHO_BOTTOM, GL_ORTHO_TOP,
-              GL_ORTHO_NEAR, GL_ORTHO_FAR );
+             GL_ORTHO_BOTTOM, GL_ORTHO_TOP,
+             GL_ORTHO_NEAR, GL_ORTHO_FAR );
 	
 	//
 	// Draw the model geometry
@@ -176,7 +197,7 @@
 	glLoadIdentity();
 	
     // Set background color
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(38/255.0, 45/255.0, 51/255.0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
 	//
@@ -192,20 +213,20 @@
 	// Blend function for textures
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	
-    // 
+    //
     // Draw the background that doesn't move
-    // 
-    [m_backgroundTexture drawAt:CGPointMake(m_backingWidth/2.0, m_backingHeight/2.0)];
+    //
+    //[m_backgroundTexture drawAt:CGPointMake(m_backingWidth/2.0, m_backingHeight/2.0)];
     
     //
     // These backgrounds move
     //
-//    [m_backgroundTexture drawAt:CGPointMake(-fmod(m_backgroundOffset+m_currentPosition+m_viewShift, m_backingWidth) + m_backingWidth/2.0,
-//                                            m_backingHeight/2.0)];
-//    [m_backgroundTexture drawAt:CGPointMake(-fmod(m_backgroundOffset+m_currentPosition+m_viewShift, m_backingWidth) + m_backingWidth/2.0 + m_backingWidth,
-//                                            m_backingHeight/2.0)];
+    //    [m_backgroundTexture drawAt:CGPointMake(-fmod(m_backgroundOffset+m_currentPosition+m_viewShift, m_backingWidth) + m_backingWidth/2.0,
+    //                                            m_backingHeight/2.0)];
+    //    [m_backgroundTexture drawAt:CGPointMake(-fmod(m_backgroundOffset+m_currentPosition+m_viewShift, m_backingWidth) + m_backingWidth/2.0 + m_backingWidth,
+    //                                            m_backingHeight/2.0)];
     
-    // 
+    //
     // First translate for the measure lines -- view shift + position
     //
     
@@ -213,16 +234,20 @@
 	glTranslatef( m_offset - m_currentPosition, 0.0f, 0.0f);
     
 	// draw measure lines
-    for ( LineModel * lineModel in m_lineModels ) 
+    for ( LineModel * lineModel in m_lineModels )
     {
-		[lineModel draw];		
+		[lineModel draw];
 	}
     
     glTranslatef( -(m_offset - m_currentPosition), 0.0f, 0.0f);
     
-    // draw the seek line
+    // draw the seek line(s)
 	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
     
+    if(m_seekLineStandaloneModel != nil){
+        [m_seekLineStandaloneModel drawWithOffset:CGPointMake(m_offset, 0)];
+    }
+        
     // The strings are fixed, so undo any translattion
     glTranslatef( +m_viewShift, 0.0f, 0.0f);
     
@@ -231,16 +256,27 @@
     //
     for ( LineModel * stringModel in m_stringModels )
     {
-		[stringModel draw];		
-	}	
+		[stringModel draw];
+	}
     
-//    //
-//    // Translate the view to draw the seek line
-//    //
+    //    //
+    //    // Translate the view to draw the seek line
+    //    //
     glTranslatef( -m_viewShift, 0.0f, 0.0f);
-//
-//	// draw the seek line
-//	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
+    //
+    //	// draw the seek line
+    //	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
+    
+    
+    //
+    // Draw loops
+    //
+    for (LineModel * loopModel in m_loopModels)
+    {
+        CGPoint center = [loopModel getCenter];
+        
+        [loopModel drawAt:CGPointMake(center.x +m_offset - m_currentPosition,center.y)];
+    }
     
     //
     // Now we translate forward for the notes
@@ -250,23 +286,97 @@
 	// draw notes
     for ( Animation * animation in m_noteAnimations )
     {
-		[animation drawCurrentFrameAndAdvanceFrame];		
-	}	
-	
-    for ( Model * model in m_noteModels )
-    {
-        [model draw];
-    }
+		[animation drawCurrentFrameAndAdvanceFrame];
+	}
+}
+
+- (void)endRender
+{
     
     //
-    // Done -- Switch the buffer 
+    // Done -- Switch the buffer
     //
     
 	// finish stuff
 	glBindRenderbufferOES( GL_RENDERBUFFER_OES, m_colorRenderbuffer );
-
-    [m_context presentRenderbuffer: GL_RENDERBUFFER_OES ];
     
+    [m_context presentRenderbuffer: GL_RENDERBUFFER_OES ];
+}
+
+- (void)renderNoteModelsWithHighlights:(BOOL)highlights fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree
+{
+    for(int n = [m_noteModels count] - 1; n >= 0; n--){
+        
+        NoteModel * model = [m_noteModels objectAtIndex:n];
+        
+        if(highlights){
+            
+            if(model.m_hit > 0){
+                
+                [model drawWithHighlights:highlights highlightColor:g_standaloneHitFretColor recolorNote:YES];
+                
+            }else if(model.m_hit < 0){
+                
+                [model drawWithHighlights:highlights highlightColor:g_standaloneMissFretColor recolorNote:NO];
+                
+            }else{
+                
+                int fretNoteCounts[4];
+                for(int f = 0; f < 4; f++){
+                    fretNoteCounts[f] = [model getFretNoteCountAtIndex:f];
+                }
+                
+                // Which fret to show?
+                if(fretOne && model.m_standalonefret == 1){
+                    
+                    // Unhighlight if fretTwo || fretThree and no notes in the chord
+                    // Unhighlight if !fretTwo || !fretThree and expecting notes in the chord
+                    if((fretTwo && fretNoteCounts[2] == 0) || (fretThree && fretNoteCounts[3] == 0) || (!fretTwo && fretNoteCounts[2] > 0) || (!fretThree && fretNoteCounts[3] > 0)){
+                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
+                    }else{
+                        [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[1] recolorNote:NO];
+                    }
+                    
+                }else if(fretTwo && model.m_standalonefret == 2){
+                    
+                    // Unhighlight if fretOne || fretThree and notecount for 1+3 == 0
+                    // Unhighlight if !fretOne || !fretThree and expecting notes in the chord
+                    if((fretOne && fretNoteCounts[1] == 0) || (fretThree && fretNoteCounts[3] == 0) || (!fretOne && fretNoteCounts[1] > 0) || (!fretThree && fretNoteCounts[3] > 0)){
+                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
+                    }else{
+                        [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[2] recolorNote:NO];
+                    }
+                
+                }else if(fretThree && model.m_standalonefret == 3){
+                    
+                    // Unhighlight if fretOne || fretTwo and notecount for 1+2 == 0
+                    // Unhighlight if !fretOne || !fretTwo and expecting notes in the chord
+                    if((fretOne && fretNoteCounts[1] == 0) || (fretTwo && fretNoteCounts[2] == 0) || (!fretOne && fretNoteCounts[1] > 0) || (!fretTwo && fretNoteCounts[2] > 0)){
+                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
+                    }else{
+                        [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[3] recolorNote:NO];
+                    }
+                    
+                }else if(model.m_standalonefret == 0){
+                    
+                    // Still ensure the fretting is correct before highlighting
+                    if((fretOne && fretNoteCounts[1] == 0) || (fretTwo && fretNoteCounts[2] == 0) || (fretThree && fretNoteCounts[3] == 0) || (!fretOne && fretNoteCounts[1] > 0) || (!fretTwo && fretNoteCounts[2] > 0) || (!fretThree && fretNoteCounts[3] > 0)){
+                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
+                    }else if((fretNoteCounts[0] == 0 && !fretOne && !fretTwo && !fretThree) || (fretNoteCounts[0] > 0)){
+                        [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[0] recolorNote:NO];
+                    }else{
+                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
+                    }
+                    
+                }else{
+                    [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
+                }
+            }
+            
+        }else{
+            [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
+        }
+    }
 }
 
 @end

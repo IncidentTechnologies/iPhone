@@ -9,56 +9,36 @@
 
 #import "FreePlayController.h"
 
-#import "InstrumentsAndEffectsViewController.h"
-#import "LightsViewController.h"
-#import "FPMenuViewController.h"
-#import "VolumeViewController.h"
-
-#import "TransparentAreaView.h"
-#import "CustomComboBox.h"
-#import "RGBColor.h"
-#import "Harmonizer.h"
-
-#import <MediaPlayer/MediaPlayer.h>
-#import <QuartzCore/QuartzCore.h>
-
-#import <AudioController/Effect.h>
-#import <AudioController/Parameter.h>
-
-#import <GtarController/GtarController.h>
-
-#import <gTarAppCore/AppCore.h>
-//#import <gTarAppCore/TelemetryController.h>
-
-#import "UIView+Gtar.h"
-#import "Mixpanel.h"
 
 extern GtarController * g_gtarController;
-extern AudioController * g_audioController;
+//extern SoundMaster * g_soundMaster;
+//extern AudioController * g_audioController;
 //extern TelemetryController * g_telemetryConstroller;
 
 @interface FreePlayController ()
 
-@property (retain, nonatomic) InstrumentsAndEffectsViewController *instrumentsAndEffectsVC;
-@property (retain, nonatomic) LightsViewController *lightsVC;
-@property (retain, nonatomic) FPMenuViewController *fpMenuVC;
-@property (retain, nonatomic) VolumeViewController *volumeVC;
+@property (strong, nonatomic) SoundMaster *g_soundMaster;
 
-@property (retain, nonatomic) IBOutlet UIView *mainContentView;
-@property (assign, nonatomic) UIViewController *currentMainContentVC;
+@property (strong, nonatomic) InstrumentsAndEffectsViewController *instrumentsAndEffectsVC;
+@property (strong, nonatomic) LightsViewController *lightsVC;
+@property (strong, nonatomic) FPMenuViewController *fpMenuVC;
+@property (strong, nonatomic) VolumeViewController *volumeVC;
 
-@property (retain, nonatomic) IBOutlet UIButton *menuButton;
-@property (retain, nonatomic) IBOutlet UIButton *volumeButton;
-@property (retain, nonatomic) IBOutlet UIButton *lightsButton;
-@property (retain, nonatomic) IBOutlet UIButton *effectsButton;
-@property (retain, nonatomic) IBOutlet UIButton *instrumentsButton;
+@property (strong, nonatomic) IBOutlet UIView *mainContentView;
+@property (weak, nonatomic) UIViewController *currentMainContentVC;
 
-@property (retain, nonatomic) IBOutlet UIImageView *arrowMenu;
-@property (retain, nonatomic) IBOutlet UIImageView *arrowLights;
-@property (retain, nonatomic) IBOutlet UIImageView *arrowEffects;
-@property (retain, nonatomic) IBOutlet UIImageView *arrowInstruments;
+@property (strong, nonatomic) IBOutlet UIButton *menuButton;
+@property (strong, nonatomic) IBOutlet UIButton *volumeButton;
+@property (strong, nonatomic) IBOutlet UIButton *lightsButton;
+@property (strong, nonatomic) IBOutlet UIButton *effectsButton;
+@property (strong, nonatomic) IBOutlet UIButton *instrumentsButton;
 
-@property (retain, nonatomic) IBOutlet UIView *menuBarDropShadowView;
+@property (strong, nonatomic) IBOutlet UIButton *arrowMenu;
+@property (strong, nonatomic) IBOutlet UIButton *arrowLights;
+@property (strong, nonatomic) IBOutlet UIButton *arrowEffects;
+@property (strong, nonatomic) IBOutlet UIButton *arrowInstruments;
+
+@property (strong, nonatomic) IBOutlet UIView *menuBarDropShadowView;
 
 @property BOOL isSlideEnabled;
 
@@ -72,9 +52,9 @@ extern AudioController * g_audioController;
 @synthesize m_wetSlider;
 @synthesize m_currentEffectName;
 @synthesize m_effectsTab;
-@synthesize m_volumeView;
-@synthesize m_lineOutVolumeSlider;
-@synthesize m_audioRouteSwitch;
+//@synthesize m_volumeView;
+//@synthesize m_lineOutVolumeSlider;
+//@synthesize m_audioRouteSwitch;
 @synthesize m_activityIndicatorView;
 @synthesize m_connectingView;
 @synthesize m_xParamLabel;
@@ -93,8 +73,8 @@ extern AudioController * g_audioController;
 @synthesize m_effect4Name;
 @synthesize m_instrumentsTab;
 @synthesize m_instrumentsScroll;
-@synthesize m_menuTab;
-@synthesize m_toneSlider;
+//@synthesize m_menuTab;
+//@synthesize m_toneSlider;
 @synthesize m_bSpeakerRoute;
 @synthesize m_LEDTab;
 @synthesize m_LEDGeneralSurface;
@@ -114,7 +94,9 @@ extern AudioController * g_audioController;
 @synthesize m_harmonizerValue;
 @synthesize m_scaleSwitch;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize g_soundMaster;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster *)soundMaster
 {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -133,35 +115,42 @@ extern AudioController * g_audioController;
         
         _isSlideEnabled = YES;
         
-        m_playTimeStart = [[NSDate date] retain];
-        m_audioRouteTimeStart = [[NSDate date] retain];
-        m_instrumentTimeStart = [[NSDate date] retain];
-        m_scaleTimeStart = [[NSDate date] retain];
+        m_playTimeStart = [NSDate date];
+        m_audioRouteTimeStart = [NSDate date];
+        m_instrumentTimeStart = [NSDate date];
+        m_scaleTimeStart = [NSDate date];
         
-        _instrumentsAndEffectsVC = [[InstrumentsAndEffectsViewController alloc] initWithAudioController:g_audioController];
+        g_soundMaster = soundMaster;
+        [g_soundMaster start];
+        
+        //_instrumentsAndEffectsVC = [[InstrumentsAndEffectsViewController alloc] initWithAudioController:g_audioController];
+        _instrumentsAndEffectsVC = [[InstrumentsAndEffectsViewController alloc] initWithSoundMaster:g_soundMaster];
         _lightsVC = [[LightsViewController alloc] init];
+        _lightsVC.delegate = self;
+        
         _fpMenuVC = [[FPMenuViewController alloc] init];
-        _volumeVC = [[VolumeViewController alloc] init];
+        [_fpMenuVC setDelegate:self];
+        
+        _volumeVC = [[VolumeViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster isInverse:NO];
         
         for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
         {
-            m_effectTimeStart[effect] = [[NSDate date] retain];
+            m_effectTimeStart[effect] = [NSDate date];
         }
 
         m_playTimeAdjustment = 0;
         
         // Create audio controller
-        //[g_audioController initializeAUGraph];
-        [g_audioController startAUGraph];
+        [g_soundMaster start];
         
-        RGBColor *white = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:3] autorelease];
-        RGBColor *red = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:0] autorelease];
-        RGBColor *green = [[[RGBColor alloc] initWithRed:0 Green:3 Blue:0] autorelease];
-        RGBColor *blue = [[[RGBColor alloc] initWithRed:0 Green:0 Blue:3] autorelease];
-        RGBColor *cyan = [[[RGBColor alloc] initWithRed:0 Green:3 Blue:3] autorelease];
-        RGBColor *magenta = [[[RGBColor alloc] initWithRed:3 Green:0 Blue:3] autorelease];
-        RGBColor *yellow = [[[RGBColor alloc] initWithRed:3 Green:3 Blue:0] autorelease];
-        RGBColor *orange = [[[RGBColor alloc] initWithRed:3 Green:1 Blue:0] autorelease];
+        RGBColor *white = [[RGBColor alloc] initWithRed:3 Green:3 Blue:3];
+        RGBColor *red = [[RGBColor alloc] initWithRed:3 Green:0 Blue:0];
+        RGBColor *green = [[RGBColor alloc] initWithRed:0 Green:3 Blue:0];
+        RGBColor *blue = [[RGBColor alloc] initWithRed:0 Green:0 Blue:3];
+        RGBColor *cyan = [[RGBColor alloc] initWithRed:0 Green:3 Blue:3];
+        RGBColor *magenta = [[RGBColor alloc] initWithRed:3 Green:0 Blue:3];
+        RGBColor *yellow = [[RGBColor alloc] initWithRed:3 Green:3 Blue:0];
+        RGBColor *orange = [[RGBColor alloc] initWithRed:3 Green:1 Blue:0];
         
         m_colors = [[NSArray alloc] initWithObjects:white, red, magenta, blue, cyan, green, yellow, orange, nil];
         
@@ -205,83 +194,33 @@ extern AudioController * g_audioController;
     
     [g_gtarController removeObserver:self];
     
-    [_instrumentsAndEffectsVC release];
-    [_lightsVC release];
-    [_fpMenuVC release];
-    [_volumeVC release];
     
-    [m_harmonizer release];
-    [m_volumeView release];
-    [m_activityIndicatorView release];
-    [m_connectingView release];
-    [m_jamPad release];
-    [m_wetSlider release];
-    [m_effectsTab release];
-    [m_effect1OnOff release];
-    [m_effect2OnOff release];
-    [m_effect3OnOff release];
-    [m_effect4OnOff release];
-    [m_effect1Select release];
-    [m_effect2Select release];
-    [m_effect3Select release];
-    [m_effect4Select release];
-    [m_effect1Name release];
-    [m_effect2Name release];
-    [m_effect3Name release];
-    [m_effect4Name release];
-    [m_currentEffectName release];
-    [m_instrumentsTab release];
-    [m_menuTab release];
-    [m_toneSlider release];
+    //[m_volumeView release];
+    //[m_menuTab release];
+    //[m_toneSlider release];
     
-    [g_audioController stopAUGraph];
-    [g_audioController reset];
+    //[g_soundMaster releaseAfterUse];
     
-    [m_colors release];
-    [m_instrumentsScroll release];
-    [m_lineOutVolumeSlider release];
-    [m_LEDTab release];
-    [m_LEDGeneralSurface release];
-    [m_LEDFretSurface release];
-    [m_LEDStringSurface release];
-    [m_LEDAllSurface release];
+    //[m_lineOutVolumeSlider release];
     
     if (m_LEDTimer != nil)
     {
         [m_LEDTimer invalidate];
-        m_LEDTimer = nil;
     }
 
-    [m_audioRouteSwitch release];
-    [m_scaleSwitch release];
+    //[m_audioRouteSwitch release];
     
-    [m_playTimeStart release];
-    [m_audioRouteTimeStart release];
-    [m_instrumentTimeStart release];
-    [m_scaleTimeStart release];
     
     // Turn off all LEDs
-    [g_gtarController turnOffAllLeds];
-
-    [_m_effectsScroll release];
-    [_mainContentView release];
-    [_menuButton release];
-    [_volumeButton release];
-    [_lightsButton release];
-    [_effectsButton release];
-    [_instrumentsButton release];
-    [_arrowMenu release];
-    [_arrowLights release];
-    [_arrowEffects release];
-    [_arrowInstruments release];
-    [_menuBarDropShadowView release];
-	[super dealloc];	
+    if(g_gtarController.connected){
+        [g_gtarController turnOffAllLeds];
+    }
+        
 }
 
 
 - (void)viewDidLoad
 {
-
     [super viewDidLoad];
     
     // Set up initial content VC to be instruments & effects.
@@ -294,56 +233,32 @@ extern AudioController * g_audioController;
     [_arrowLights addShadow];
     [_arrowEffects addShadow];
     [_arrowInstruments addShadow];
-    
     [_menuBarDropShadowView addShadow];
 
     // images for slider
-    UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-    UIImage *sliderTrackMaxImage = [[UIImage imageNamed: @"SliderEndMax.png"] stretchableImageWithLeftCapWidth: 1 topCapHeight: 0];
-
-    // Attach a volume view
-    m_volumeView.backgroundColor = [UIColor clearColor];
-    MPVolumeView * myVolumeView = [[[MPVolumeView alloc] initWithFrame:m_volumeView.bounds] autorelease];
-    NSArray *subViews = myVolumeView.subviews;
-    
-    for (id current in subViews)
-    {
-        if ([current isKindOfClass:[UISlider class]])
-        {
-            UISlider *slider = (UISlider*) current;
-            [slider setMinimumTrackImage: sliderTrackMinImage forState: UIControlStateNormal];
-            [slider setMaximumTrackImage: sliderTrackMaxImage forState: UIControlStateNormal];
-            [slider setThumbImage:[UIImage imageNamed: @"Knob_BlueLine.png"] forState:UIControlStateNormal];
-        }
-    }
-    
-    [myVolumeView setShowsRouteButton:NO];
-	[m_volumeView addSubview:myVolumeView];
-    [myVolumeView sizeToFit];
-    
-    // For some reason, releasing this crashes the app
-//    [myVolumeView release];
+    //UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+    //UIImage *sliderTrackMaxImage = [[UIImage imageNamed: @"SliderEndMax.png"] stretchableImageWithLeftCapWidth: 1 topCapHeight: 0];
     
     // centered in the x dimension (and y dimension, we change that in a moment)
     m_effectsTab.center = self.view.center;
     m_instrumentsTab.center = self.view.center;
-    m_menuTab.center = self.view.center;
+    //m_menuTab.center = self.view.center;
     m_LEDTab.center = self.view.center;
     
     CGRect smallTabFrame = m_effectsTab.frame;
-    CGRect menuTabFrame = m_menuTab.frame;
+    //CGRect menuTabFrame = m_menuTab.frame;
     CGRect largeTabFrame = m_LEDTab.frame;
     
     smallTabFrame.origin.x = -105; 
-    menuTabFrame.origin.x = -328; 
+    //menuTabFrame.origin.x = -328;
     largeTabFrame.origin.x = -446; 
     // move tab up to align with wet/dry frame
     smallTabFrame.origin.y = 0;
     largeTabFrame.origin.y = 0;
-    menuTabFrame.origin.y = 0;
+    //menuTabFrame.origin.y = 0;
     [m_effectsTab setFrame:smallTabFrame];
     [m_instrumentsTab setFrame:smallTabFrame];
-    [m_menuTab setFrame:menuTabFrame];
+    //[m_menuTab setFrame:menuTabFrame];
     [m_LEDTab setFrame:largeTabFrame];
     
     [m_effectsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_effectsTab.frame.size.width yMin:80 yMax:m_effectsTab.frame.size.height]; 
@@ -351,7 +266,7 @@ extern AudioController * g_audioController;
     [m_instrumentsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_instrumentsTab.frame.size.width yMin:155 yMax:m_instrumentsTab.frame.size.height];
     [m_LEDTab addTransparentAreaWithXmin:m_LEDTab.frame.size.width - 30 xMax:m_LEDTab.frame.size.width yMin:0 yMax:155];
     [m_LEDTab addTransparentAreaWithXmin:m_LEDTab.frame.size.width - 30 xMax:m_LEDTab.frame.size.width yMin:225 yMax:m_LEDTab.frame.size.height];
-    [m_menuTab addTransparentAreaWithXmin:(m_menuTab.frame.size.width - 30) xMax:m_menuTab.frame.size.width yMin:0 yMax:225];
+    //[m_menuTab addTransparentAreaWithXmin:(m_menuTab.frame.size.width - 30) xMax:m_menuTab.frame.size.width yMin:0 yMax:225];
 
     /*[self.view addSubview:m_effectsTab];
     [self.view addSubview:m_instrumentsTab];
@@ -359,30 +274,10 @@ extern AudioController * g_audioController;
     [self.view addSubview:m_menuTab];*/
     
     [m_instrumentsScroll setBackgroundColor:[UIColor clearColor]];
-    NSArray *ar = [g_audioController getInstrumentNames];
-    NSMutableArray *instrumentScrollText = [ar mutableCopy];
-    [instrumentScrollText insertObject:@"Guitars"  atIndex:0];
-    [instrumentScrollText insertObject:@"Keys" atIndex:4];
-    [instrumentScrollText insertObject:@"Synths" atIndex:7];
+    
+    //NSMutableArray *instrumentScrollText = [ar mutableCopy];
+    NSMutableArray * instrumentScrollText = [[NSMutableArray alloc] initWithArray:[g_soundMaster getInstrumentList]];
     [m_instrumentsScroll populateWithText:instrumentScrollText];
-    //[m_instrumentsScroll makeHeaderEntryAtIndex:0];
-    //[m_instrumentsScroll makeHeaderEntryAtIndex:4];
-    //[m_instrumentsScroll makeHeaderEntryAtIndex:7];
-    // TODO: snap to the currently selected sample, not just the first. Currently we
-    // can get the current sample index from the audioController, but this number will
-    // not match directly the index in the instruments scroll, due to the extra header
-    // entries
-    //[m_instrumentsScroll snapToIndex:0];
-    
-    [instrumentScrollText release];
-    
-    // nln - no longer needed
-    //m_volumeView.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    //m_effectsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    //m_instrumentsTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    //m_menuTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    //m_LEDTabButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    
     
     // Set up effects tab. Set image to display when button is "selected"
     [m_effect1OnOff setImage:[UIImage imageNamed:@"EffectOnButton.png"] forState:UIControlStateSelected];
@@ -397,50 +292,40 @@ extern AudioController * g_audioController;
     [m_effect4OnOff setImage:[UIImage imageNamed:@"EffectOnButton.png"] forState:UIControlStateSelected];
     [m_effect4Select setImage:[UIImage imageNamed:@"EffectSelectOnButton.png"] forState:UIControlStateSelected];
 
-    // set effects name
-    //m_effects = [g_audioController GetEffects];
-/*    [m_effect1Name setText:[[NSString stringWithCString:m_effects[0]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    [m_effect2Name setText:[[NSString stringWithCString:m_effects[1]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    [m_effect3Name setText:[[NSString stringWithCString:m_effects[2]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    [m_effect4Name setText:[[NSString stringWithCString:m_effects[3]->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    
-    [m_effect1Select setSelected:YES];
- */
-    
     // set custom images for sliders
-    UIImage *sliderKnobImage = [UIImage imageNamed: @"Knob_BlueLine.png"];
+    //UIImage *sliderKnobImage = [UIImage imageNamed: @"Knob_BlueLine.png"];
     
-    [m_wetSlider setMinimumTrackImage: sliderTrackMinImage forState: UIControlStateNormal];
-    [m_wetSlider setMaximumTrackImage: sliderTrackMaxImage forState: UIControlStateNormal];
-    [m_wetSlider setThumbImage: [UIImage imageNamed: @"SliderKnob.png"] forState:UIControlStateNormal];
+    //[m_wetSlider setMinimumTrackImage: sliderTrackMinImage forState: UIControlStateNormal];
+    //[m_wetSlider setMaximumTrackImage: sliderTrackMaxImage forState: UIControlStateNormal];
+    //[m_wetSlider setThumbImage: [UIImage imageNamed: @"SliderKnob.png"] forState:UIControlStateNormal];
     
-    [m_toneSlider setMinimumTrackImage: sliderTrackMinImage forState: UIControlStateNormal];
-    [m_toneSlider setMaximumTrackImage: sliderTrackMaxImage forState: UIControlStateNormal];
-    [m_toneSlider setThumbImage: sliderKnobImage forState:UIControlStateNormal];
+    //[m_toneSlider setMinimumTrackImage: sliderTrackMinImage forState: UIControlStateNormal];
+    //[m_toneSlider setMaximumTrackImage: sliderTrackMaxImage forState: UIControlStateNormal];
+    //[m_toneSlider setThumbImage: sliderKnobImage forState:UIControlStateNormal];
     
-    [m_lineOutVolumeSlider setMinimumTrackImage: sliderTrackMinImage forState:UIControlStateNormal];
-    [m_lineOutVolumeSlider setMaximumTrackImage: sliderTrackMaxImage forState:UIControlStateNormal];
-    [m_lineOutVolumeSlider setThumbImage: sliderKnobImage forState:UIControlStateNormal];
+    //[m_lineOutVolumeSlider setMinimumTrackImage: sliderTrackMinImage forState:UIControlStateNormal];
+    //[m_lineOutVolumeSlider setMaximumTrackImage: sliderTrackMaxImage forState:UIControlStateNormal];
+    //[m_lineOutVolumeSlider setThumbImage: sliderKnobImage forState:UIControlStateNormal];
     
-    m_wetSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    m_toneSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    m_lineOutVolumeSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    //m_wetSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    //m_toneSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    //m_lineOutVolumeSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
     
     // Set up menu tab
     // Get audio route setting and move route knob appropriately
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    [settings synchronize];
+    
+    //NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    //[settings synchronize];
     // temporarily set the bool to the opposite of the actual value
-    m_bSpeakerRoute = ![settings boolForKey:@"RouteToSpeaker"];
+     //m_bSpeakerRoute = ![settings boolForKey:@"RouteToSpeaker"];
     // toogle the route so that its what we actually want
-    [self toggleAudioRoute:self];
-    m_bSpeakerRoute = !m_bSpeakerRoute;
-    [self audioRouteChanged:m_bSpeakerRoute];
+    //[self toggleAudioRoute:self];
+    //m_bSpeakerRoute = !m_bSpeakerRoute;
     
     // To avoid displaying the wrong image when the switch selected and being pressed,
     // we must set an image for the selected AND highlighted state (UIControlState
     // is a bit map), besides having set the image for selected state in IB
-    [m_audioRouteSwitch setImage:[UIImage imageNamed:@"SwitchUp.png"] forState:UIControlStateHighlighted | UIControlStateSelected];
+    //[m_audioRouteSwitch setImage:[UIImage imageNamed:@"SwitchUp.png"] forState:UIControlStateHighlighted | UIControlStateSelected];
     [m_scaleSwitch setImage:[UIImage imageNamed:@"SwitchUp.png"] forState:UIControlStateHighlighted | UIControlStateSelected];
     
     // Setup Jam Pad
@@ -473,6 +358,8 @@ extern AudioController * g_audioController;
     
     [g_gtarController addObserver:self];
     
+    [g_soundMaster start];
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -482,27 +369,6 @@ extern AudioController * g_audioController;
     CGRect frame = CGRectMake(_volumeButton.frame.origin.x, _mainContentView.frame.origin.y, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
     _volumeVC.view.frame = frame;
     
-    // if adjusting zPosition transform is not necessary remove this block and
-    // remove import of QuartzCore
-    /*
-    _volumeVC.view.layer.zPosition = 101;
-    _menuBarDropShadowView.layer.zPosition = 100;
-    
-    _arrowMenu.layer.zPosition = 101;
-    _volumeVC.triangleIndicatorImage.layer.zPosition = 101;
-    _arrowLights.layer.zPosition = 101;
-    _arrowEffects.layer.zPosition = 101;
-    _arrowInstruments.layer.zPosition = 101;
-    
-    _menuButton.layer.zPosition = 102;
-    _volumeButton.layer.zPosition = 102;
-    _lightsButton.layer.zPosition = 102;
-    _effectsButton.layer.zPosition = 102;
-    _instrumentsButton.layer.zPosition = 102;
-    */
-    
-    //_volumeVC.triangleIndicatorImage.layer.zPosition = 1000;
-    
     [_instrumentsAndEffectsVC.view setFrame:_mainContentView.bounds];
     [_lightsVC.view setFrame:_mainContentView.bounds];
     [_fpMenuVC.view setFrame:_mainContentView.bounds];
@@ -511,6 +377,14 @@ extern AudioController * g_audioController;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [g_soundMaster enableSliding];
+    
+    [[_menuButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
+    [[_volumeButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
+    [[_lightsButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
+    [[_effectsButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
+    [[_instrumentsButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
     
     CGRect frame = CGRectMake(_volumeButton.frame.origin.x, _mainContentView.frame.origin.y, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
     [_volumeVC attachToSuperview:self.view withFrame:frame];
@@ -522,7 +396,7 @@ extern AudioController * g_audioController;
     [self setM_jamPad:nil];
     [self setM_wetSlider:nil];
     
-    self.m_volumeView = nil;
+    //self.m_volumeView = nil;
     self.m_activityIndicatorView = nil;
     self.m_connectingView = nil;
 
@@ -540,17 +414,17 @@ extern AudioController * g_audioController;
     [self setM_effect3Name:nil];
     [self setM_effect4Name:nil];
     [self setM_currentEffectName:nil];
-    [self setM_menuTab:nil];
-    [self setM_toneSlider:nil];
+    //[self setM_menuTab:nil];
+    //[self setM_toneSlider:nil];
     [self setM_instrumentsScroll:nil];
-    [self setM_lineOutVolumeSlider:nil];
+    //[self setM_lineOutVolumeSlider:nil];
     [self setM_LEDTab:nil];
     [self setM_LEDGeneralSurface:nil];
     [self setM_LEDFretSurface:nil];
     [self setM_LEDStringSurface:nil];
     [self setM_LEDAllSurface:nil];
     
-    [self setM_audioRouteSwitch:nil];
+    //[self setM_audioRouteSwitch:nil];
     [self setM_scaleSwitch:nil];
     [super viewDidUnload];
 }
@@ -562,24 +436,19 @@ extern AudioController * g_audioController;
 
 - (void)handleBecomeActive
 {
-    [m_playTimeStart release];
-    [m_audioRouteTimeStart release];
-    [m_instrumentTimeStart release];
-    [m_scaleTimeStart release];
     
     for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
     {
-        [m_effectTimeStart[effect] release];
     }
     
-    m_playTimeStart = [[NSDate date] retain];
-    m_audioRouteTimeStart = [[NSDate date] retain];
-    m_instrumentTimeStart = [[NSDate date] retain];
-    m_scaleTimeStart = [[NSDate date] retain];
+    m_playTimeStart = [NSDate date];
+    m_audioRouteTimeStart = [NSDate date];
+    m_instrumentTimeStart = [NSDate date];
+    m_scaleTimeStart = [NSDate date];
     
     for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
     {
-        m_effectTimeStart[effect] = [[NSDate date] retain];
+        m_effectTimeStart[effect] = [NSDate date];
     }
 }
 
@@ -604,7 +473,7 @@ extern AudioController * g_audioController;
                                                            [NSNumber numberWithInteger:delta], @"PlayTime",
                                                            nil]];
 
-    NSString *instrumentName = [m_instrumentsScroll getNameAtIndex:[g_audioController getCurrentSamplePackIndex]];
+    NSString *instrumentName = [m_instrumentsScroll getNameAtIndex:[g_soundMaster getCurrentInstrument]];
     
     delta = [[NSDate date] timeIntervalSince1970] - [m_instrumentTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
@@ -623,7 +492,8 @@ extern AudioController * g_audioController;
     
     for ( NSInteger effect = 0; effect < FREE_PLAY_EFFECT_COUNT; effect++ )
     {
-        NSString* name = [g_audioController getEffectNames][effect];
+        //NSString* name = [g_audioController getEffectNames][effect];
+        NSString * name = [g_soundMaster getEffectNameAtIndex:effect];
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_effectTimeStart[effect] timeIntervalSince1970] + m_playTimeAdjustment;
         
@@ -640,7 +510,6 @@ extern AudioController * g_audioController;
                                                                    nil]];
         }
         
-        [m_effectTimeStart[effect] release];
     }
     
 }
@@ -657,27 +526,25 @@ extern AudioController * g_audioController;
 - (void)gtarFretDown:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    if (_isSlideEnabled)
-    {
-        [g_audioController FretDown:position.fret onString:position.string - 1];
-    }
+    //if (_isSlideEnabled)
+    //{
+        [g_soundMaster FretDown:position.fret onString:position.string-1];
+    //}
 }
 
 - (void)gtarFretUp:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    if (_isSlideEnabled)
-    {
-        [g_audioController FretUp:position.fret onString:position.string - 1];
-    }
+    //if (_isSlideEnabled)
+    //{
+        [g_soundMaster FretUp:position.fret onString:position.string-1];
+    //}
 }
 
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
     GtarFret fret = pluck.position.fret;
     GtarString str = pluck.position.string;
-    
-    GtarPluckVelocity velocity = pluck.velocity;
     
     // zero base the string
     str--;
@@ -690,12 +557,12 @@ extern AudioController * g_audioController;
         fret = [[harmonizedValues valueForKey:@"Fret"] intValue];
     }
     
-    [g_audioController PluckString:str atFret:fret withAmplitude:(float)velocity/127.0f];
+    [g_soundMaster PluckString:str atFret:fret];
 }
 
 - (void)gtarNoteOff:(GtarPosition)position
 {
-    [g_audioController NoteOffAtString:position.string - 1 andFret:position.fret];
+    [g_soundMaster NoteOffAtString:position.string-1 andFret:position.fret];
 }
 
 - (void)gtarConnected
@@ -708,7 +575,9 @@ extern AudioController * g_audioController;
     [g_gtarController turnOffAllLeds];
     [g_gtarController setMinimumInterarrivalTime:0.05f];
     
-    [self startMainEventLoop];
+    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+    
+    [g_soundMaster routeToDefault];
     
 }
 
@@ -735,6 +604,10 @@ extern AudioController * g_audioController;
                                                          nil]];
     
     [self finalLogging];
+    
+    [g_soundMaster disableSliding];
+    [g_soundMaster stopAllEffects];
+    [g_soundMaster stop];
 
     [self.navigationController popViewControllerAnimated:YES];
 
@@ -745,33 +618,24 @@ extern AudioController * g_audioController;
 {
     NSDictionary *data = [notification userInfo];
     _isSlideEnabled = [[data objectForKey:@"isSlideEnabled"] boolValue];
-}
-
-- (void) setupJamPadWithEffectAtIndex:(int)index
-{
-    //m_selectedEffect = m_effects[index];
-    /*
-    [m_currentEffectName setText:[[NSString stringWithCString:m_selectedEffect->getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    Parameter &primary = m_selectedEffect->getPrimaryParam();
-    Parameter &secondary = m_selectedEffect->getSecondaryParam();
-    [m_xParamLabel setText:[[NSString stringWithCString:primary.getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    [m_yParamLabel setText:[[NSString stringWithCString:secondary.getName().c_str() encoding:[NSString defaultCStringEncoding]] uppercaseString]];
-    // set inital position of JamPad, set normalized value
-    float x = (primary.getValue() - primary.getMin()) / (primary.getMax() - primary.getMin());
-    float y = (secondary.getValue() - secondary.getMin()) / (secondary.getMax() - primary.getMin());
-    [m_jamPad setNormalizedPosition:CGPointMake(x, y)];
-    // set wet slider
-    [m_wetSlider setValue:m_selectedEffect->GetWet()];
-     */
+    
+    if(_isSlideEnabled){
+        [g_soundMaster enableSliding];
+    }else{
+        [g_soundMaster disableSliding];
+    }
 }
 
 #pragma mark - Touches
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"touches began free play controller");
+    
 	// For now we just want to recognize that a touch (any touch) occurred
 	UITouch * touch = [[touches allObjects] objectAtIndex:0];
     
+     /*
     if (LEDColorRoatating == m_LEDColorMode)
     {
         m_currentColorIndex++;
@@ -800,14 +664,22 @@ extern AudioController * g_audioController;
     }
     else
     {
+        */
+        
 #ifdef Debug_BUILD
         CGPoint point = [touch locationInView:self.view];
+    
+    if(point.y > 60 && point.y < 202 && point.x > 15 && point.x < 410){
+    
+        int str = GTAR_GUITAR_STRING_COUNT - ceil((point.y-60) / (143/GTAR_GUITAR_STRING_COUNT));
+        if (str >= GTAR_GUITAR_STRING_COUNT){
+            str = (GTAR_GUITAR_STRING_COUNT-1);
+        }
         
-        int str = point.x / (480/GTAR_GUITAR_STRING_COUNT);
-        if ( str >= GTAR_GUITAR_STRING_COUNT ) str = (GTAR_GUITAR_STRING_COUNT-1);
-        
-        int fret = point.y / (320/GTAR_GUITAR_FRET_COUNT);
-        if ( fret >= GTAR_GUITAR_FRET_COUNT ) fret = (GTAR_GUITAR_FRET_COUNT-1);
+        int fret = GTAR_GUITAR_FRET_COUNT - (point.x-15)/(395/GTAR_GUITAR_FRET_COUNT);
+        if(fret >= GTAR_GUITAR_FRET_COUNT){
+            fret = (GTAR_GUITAR_FRET_COUNT-1);
+        }
         
         GtarPluck pluck;
         pluck.velocity = GtarMaxPluckVelocity;
@@ -815,34 +687,42 @@ extern AudioController * g_audioController;
         pluck.position.string = (str+1);
         
         [self gtarNoteOn:pluck];
+        
+    }
 #endif
+        /*
         m_LEDTouchArea = LEDTouchNone;
         return;
-    }
+    }*/
     
-    [self touchedLEDs:touches];
+    //[self touchedLEDs:touches];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
+    NSLog(@"touches moved free play controller");
+    
     // Only take action if the touch is inside a designated LED area
-    if (LEDTouchNone != m_LEDTouchArea)
+    /*if (LEDTouchNone != m_LEDTouchArea)
     {
         [self touchedLEDs:touches];
-    }
+    }*/
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"touches ended free play controller");
+    
     // Check that last touchBegan was inside an LED touch area
-    if (LEDTouchNone != m_LEDTouchArea)
+    /*if (LEDTouchNone != m_LEDTouchArea)
     {
         // Turn off last LED touch point when finger touch ends
         [self turnOffLED:m_lastLEDTouch.x AndFret:m_lastLEDTouch.y];
     }
     
     // reset the last touch point
-    m_lastLEDTouch = CGPointMake(-1, -1);
+    m_lastLEDTouch = CGPointMake(-1, -1);*/
 }
 
 #pragma mark - LED light logic
@@ -1196,7 +1076,9 @@ extern AudioController * g_audioController;
 
 - (IBAction)autoPlayLEDs:(id)sender
 {
-    if (++m_LEDLoop >= NUM_LEDLoop_ENTRIES)
+    // TODO: fix this
+    if(m_LEDLoop >= NUM_LEDLoop_ENTRIES)
+    //if (++m_LEDLoop >= NUM_LEDLoop_ENTRIES)
     {
         m_LEDLoop = LEDLoopSolid;
     }
@@ -1433,111 +1315,10 @@ extern AudioController * g_audioController;
 
 #pragma mark - Button clicked handlers
 
-- (IBAction)toggleEffectOnOff:(id)sender
-{
-    // get effect number, this tag is manually set in Interface Builder for each button
-    int effectNum = [sender tag];
-    
-    // toggle senders selected state
-    [sender setSelected:![sender isSelected]];
-    
-    // set pass through of effect based on new state
-    if ([sender isSelected])
-    {
-        //m_effects[effectNum]->SetPassThru(false);
-        
-        // Telemetetry log
-        //NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
-        
-//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         @"On", name,
-//                                         nil]];
-        
-        //Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        
-        /*[mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                               @"On", name,
-                                                               nil]];
-         */
-
-        [m_effectTimeStart[effectNum] release];
-        m_effectTimeStart[effectNum] = [[NSDate date] retain];
-        
-    }
-    else
-    {
-
-        //m_effects[effectNum]->SetPassThru(true);
-        
-        // Telemetetry log
-        //NSString* name = [NSString stringWithCString:m_effects[effectNum]->getName().c_str() encoding:[NSString defaultCStringEncoding]];
-        
-        NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_effectTimeStart[effectNum] timeIntervalSince1970] + m_playTimeAdjustment;
-        
-//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         @"Off", name,
-//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                         nil]];
-        
-        //Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        
-        /*[mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                               @"Off", name,
-                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
-                                                               nil]];
-         */
-        
-        [m_effectTimeStart[effectNum] release];
-        m_effectTimeStart[effectNum] = [[NSDate date] retain];
-        
-    }
-    
-}
-
-- (IBAction)selectEffect:(id)sender
-{
-    // get effect number, this tag is manually set in Interface Builder for each button
-    int effectNum = [sender tag];
-    
-    // unselect all effects
-    [m_effect1Select setSelected:NO];
-    [m_effect2Select setSelected:NO];
-    [m_effect3Select setSelected:NO];
-    [m_effect4Select setSelected:NO];
-    // set only this button as selected
-    [sender setSelected:YES];
-    
-    [self setupJamPadWithEffectAtIndex:effectNum];
-}
-
-- (IBAction)setTone:(id)sender
-{
-    [g_audioController SetBWCutoff:[m_toneSlider value]];
-}
-
-- (IBAction)toggleAudioRoute:(id)sender
-{
-    if (m_bSpeakerRoute)
-    {
-        [g_audioController RouteAudioToDefault];
-    }
-    else
-    {
-        [g_audioController RouteAudioToSpeaker];
-    }
-}
-
-- (IBAction)setLineoutGain:(id)sender
-{
-    [g_audioController setM_volumeGain:[m_lineOutVolumeSlider value]];
-}
-
 - (IBAction)instrumentSelected:(id)sender
 {
     
-    NSString *instrumentName = [m_instrumentsScroll getNameAtIndex:[g_audioController getCurrentSamplePackIndex]];
+    NSString *instrumentName = [m_instrumentsScroll getNameAtIndex:[g_soundMaster getCurrentInstrument]];
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_instrumentTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
@@ -1557,26 +1338,24 @@ extern AudioController * g_audioController;
                                                                [NSNumber numberWithInteger:delta], @"PlayTime",
                                                                nil]];
 
-        [m_instrumentTimeStart release];
-        m_instrumentTimeStart = [[NSDate date] retain];
+        m_instrumentTimeStart = [NSDate date];
     }
     
     NSString *sampleName = [m_instrumentsScroll getNameAtIndex:[sender m_selectedIndex]];
     [m_instrumentsScroll flickerSelectedItem];
-    [g_audioController setSamplePackWithName:sampleName withSelector:@selector(samplerFinishedLoadingCB:) andOwner:self];
+    [g_soundMaster didSelectInstrument:sampleName withSelector:@selector(samplerFinishedLoadingCB:) andOwner:self];
 }
 
 - (void) samplerFinishedLoadingCB:(NSNumber*)result
 {
     if ([result boolValue])
     {
-        [g_audioController ClearOutEffects];
-        [g_audioController startAUGraph];
+        [g_soundMaster stopAllEffects];
         [m_instrumentsScroll stopFlicker];
     }
 }
 
-- (IBAction)backButtonClicked:(id)sender
+- (void)backButtonClicked
 {   
     if (m_LEDTimer != nil)
     {
@@ -1598,6 +1377,10 @@ extern AudioController * g_audioController;
                                                       nil]];
 
     [self finalLogging];
+
+    [g_soundMaster disableSliding];
+    [g_soundMaster stopAllEffects];
+    [g_soundMaster stop];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -1607,28 +1390,6 @@ extern AudioController * g_audioController;
     [self.instrumentsAndEffectsVC displayEffects];
     [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
     [self showArrow:_arrowEffects];
-    
-    /*
-    // First toggle selected state
-    [m_effectsTabButton setSelected:![m_effectsTabButton isSelected]];
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5];
-    // Then perform action based on new state
-    if ([m_effectsTabButton isSelected])
-    {
-        // open tab
-        m_effectsTab.transform = CGAffineTransformMakeTranslation(-1 * m_effectsTab.frame.origin.x, 0);
-        [self.view bringSubviewToFront:m_effectsTab];
-    }
-    else
-    {
-        // close tab
-        m_effectsTab.transform = CGAffineTransformIdentity;
-    }
-    
-    [UIView commitAnimations];
-     */
 }
 
 - (IBAction)toggleInstrumentsTab:(id)sender
@@ -1636,31 +1397,11 @@ extern AudioController * g_audioController;
     [self.instrumentsAndEffectsVC displayInstruments];
     [self switchMainContentControllerToVC:self.instrumentsAndEffectsVC];
     [self showArrow:_arrowInstruments];
-    
-    /*
-    // First toggle selected state
-    [m_instrumentsTabButton setSelected:![m_instrumentsTabButton isSelected]];
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5];
-    // Then perform action based on new state
-    if ([m_instrumentsTabButton isSelected])
-    {
-        // open tab
-        m_instrumentsTab.transform = CGAffineTransformMakeTranslation(-1 * m_instrumentsTab.frame.origin.x, 0);
-        [self.view bringSubviewToFront:m_instrumentsTab];
-    }
-    else
-    {
-        m_instrumentsTab.transform = CGAffineTransformIdentity;
-    }
-    
-    [UIView commitAnimations];
-     */
 }
 
 - (IBAction)toggleVolumeView:(id)sender
 {
+    [_volumeVC colorTriangleIndicator:[UIColor colorWithRed:71/255.0 green:94/255.0 blue:69/255.0 alpha:1.0]];
     [self.mainContentView bringSubviewToFront:_volumeVC.view];
     [_volumeVC toggleView:YES];
 }
@@ -1669,29 +1410,6 @@ extern AudioController * g_audioController;
 {
     [self switchMainContentControllerToVC:self.lightsVC];
     [self showArrow:_arrowLights];
-    
-    /*
-     OLD UI code
-    // First toggle selected state
-    [m_LEDTabButton setSelected:![m_LEDTabButton isSelected]];
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.8];
-    // Then perform action based on new state
-    if ([m_LEDTabButton isSelected])
-    {
-        // open tab
-        m_LEDTab.transform = CGAffineTransformMakeTranslation(-1 * m_LEDTab.frame.origin.x, 0);
-        [self.view bringSubviewToFront:m_LEDTab];
-    }
-    else
-    {
-        // close tab
-        m_LEDTab.transform = CGAffineTransformIdentity;
-    }
-    
-    [UIView commitAnimations];
-     */
 }
 
 - (void)showArrow:(UIView*)arrow
@@ -1725,8 +1443,7 @@ extern AudioController * g_audioController;
             // Turn on LED for each fret position that should be on
             while (fret <= 16 )
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1)
-                                            withColor:GtarLedColorMake(0, 0, 3)];
+                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1) withColor:GtarLedColorMake(0, 0, 3)];
                 
                 index++;
                 fret = m_ScaleArray[index] - stringOffset[string - 1];
@@ -1745,8 +1462,7 @@ extern AudioController * g_audioController;
     else
     {
         // Turn off all LEDs on the fret board
-        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0)
-                                    withColor:GtarLedColorMake(0, 0, 0)];
+        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0) withColor:GtarLedColorMake(0, 0, 0)];
     }
     
     // Telemetetry log
@@ -1764,8 +1480,7 @@ extern AudioController * g_audioController;
                                                                @"On", @"ScaleLights",
                                                                nil]];
 
-        [m_scaleTimeStart release];
-        m_scaleTimeStart = [[NSDate date] retain];
+        m_scaleTimeStart = [NSDate date];
         
     }
     else
@@ -1786,8 +1501,7 @@ extern AudioController * g_audioController;
                                                                [NSNumber numberWithInteger:delta], @"PlayTime",
                                                                nil]];
 
-        [m_scaleTimeStart release];
-        m_scaleTimeStart = [[NSDate date] retain];
+        m_scaleTimeStart = [NSDate date];
         
     }
     
@@ -1796,30 +1510,10 @@ extern AudioController * g_audioController;
 
 - (IBAction)toggleMenuTab:(id)sender
 {
+    
     [self switchMainContentControllerToVC:self.fpMenuVC];
     [self showArrow:_arrowMenu];
     
-    /*
-    // First toggle selected state
-    [m_menuTabButton setSelected:![m_menuTabButton isSelected]];
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.7];
-    // Then perform action based on new state
-    if ([m_menuTabButton isSelected])
-    {
-        // open tab 
-        m_menuTab.transform = CGAffineTransformMakeTranslation(-1 * m_menuTab.frame.origin.x, 0);
-        [self.view bringSubviewToFront:m_menuTab];
-    }
-    else
-    {
-        // close tab
-        m_menuTab.transform = CGAffineTransformIdentity;
-    }
-        
-    [UIView commitAnimations];
-     */
 }
 
 
@@ -1851,7 +1545,11 @@ extern AudioController * g_audioController;
 
 
 #pragma mark - Misc
-
+-(void) setToneToBWCutoff:(double)value
+{
+    [g_soundMaster SetBWCutoff:value];
+    //[g_audioController SetBWCutoff:sender.value];
+}
 
 -(void) positionChanged:(CGPoint)position forView:(XYInputView *)view
 {
@@ -1872,56 +1570,19 @@ extern AudioController * g_audioController;
      */
 }
 
--(void) audioRouteChanged:(bool)routeIsSpeaker
+-(void) audioRouteChanged:(BOOL)routeIsSpeaker
 {
     m_bSpeakerRoute = routeIsSpeaker;
     
-    // Telemetetry log -- invert the speaker route so we log the previous state
-    NSString* route = !m_bSpeakerRoute ? @"Speaker" : @"Aux";
-    
-    NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
-    
-    // Avoid the first setting
-    if ( delta > 0 )
-    {
-//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         route, @"AudioRoute",
-//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                         nil]];
+    if (m_bSpeakerRoute){
         
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [g_soundMaster routeToSpeaker];
+        [_fpMenuVC setAudioSwitchToSpeaker];
         
-        [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                               route, @"AudioRoute",
-                                                               [NSNumber numberWithInteger:delta], @"PlayTime",
-                                                               nil]];
-        [m_audioRouteTimeStart release];
-        m_audioRouteTimeStart = [[NSDate date] retain];
-    }
-    
-    if (m_bSpeakerRoute)
-    {
-        [m_audioRouteSwitch setSelected:NO];
-    }
-    else
-    {
-        [m_audioRouteSwitch setSelected:YES];
-    }
-    
-    // The global volume slider is not available when audio is routed to lineout. 
-    // If the audio is not being outputed to lineout hide the global volume slider,
-    // and display our own slider that controlls volume in this mode.
-    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-    if ([routeName isEqualToString:@"LineOut"])
-    {
-        [m_lineOutVolumeSlider setHidden:NO];
-        [m_volumeView setHidden:YES];
-    }
-    else
-    {
-        [m_lineOutVolumeSlider setHidden:YES];
-        [m_volumeView setHidden:NO];
+    }else{
+        
+        [g_soundMaster routeToDefault];
+        [_fpMenuVC setAudioSwitchToDefault];
     }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];

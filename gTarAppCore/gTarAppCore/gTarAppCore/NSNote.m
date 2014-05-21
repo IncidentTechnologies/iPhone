@@ -57,6 +57,8 @@
             self.m_fret = [fretString integerValue];
         }
         
+        self.m_standaloneActive = YES;
+        
     }
     
     return self;
@@ -89,11 +91,6 @@
 	
 }
 
-- (void)dealloc
-{
-    [m_value release];
-    [super dealloc];
-}
 
 - (NSComparisonResult)compare:(NSNote*)note
 {

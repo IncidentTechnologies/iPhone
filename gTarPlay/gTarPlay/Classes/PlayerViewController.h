@@ -7,32 +7,50 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SoundMaster.h"
 
 @class UserSong;
 
+@protocol PlayerViewDelegate <NSObject>
+@optional
+- (void)instrumentLoadingReady;
+@end
+
 @interface PlayerViewController : UIViewController
 
-@property (retain, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) id <PlayerViewDelegate> delegate;
 
-@property (retain, nonatomic) IBOutlet UIView *fillView;
-@property (retain, nonatomic) IBOutlet UIView *knobView;
-@property (retain, nonatomic) IBOutlet UIView *indicatorView;
+@property (strong, nonatomic) SoundMaster *g_soundMaster;
 
-@property (retain, nonatomic) IBOutlet UILabel *songTitle;
-@property (retain, nonatomic) IBOutlet UILabel *songArtist;
+@property (strong, nonatomic) IBOutlet UIButton *playButton;
 
-@property (retain, nonatomic) IBOutlet UIView *touchSurfaceView;
+@property (strong, nonatomic) IBOutlet UIView *fillView;
+@property (strong, nonatomic) IBOutlet UIView *knobView;
+@property (strong, nonatomic) IBOutlet UIView *indicatorView;
 
-@property (retain, nonatomic) UserSong *userSong;
-@property (retain, nonatomic) NSString *xmpBlob;
+@property (strong, nonatomic) IBOutlet UILabel *songTitle;
+@property (strong, nonatomic) IBOutlet UILabel *songArtist;
+
+@property (strong, nonatomic) IBOutlet UIView *touchSurfaceView;
+
+@property (strong, nonatomic) UserSong *userSong;
+@property (strong, nonatomic) NSString *xmpBlob;
 @property (assign, nonatomic) BOOL scrollable;
 
-@property (retain, nonatomic) NSInvocation *loadedInvocation;
+@property (strong, nonatomic) NSInvocation *loadedInvocation;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;
 
 - (IBAction)playButtonClicked:(id)sender;
 
 - (void)attachToSuperview:(UIView *)view;
 
 - (void)endPlayback;
+
+
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender;
+- (void)stopAudioEffects;
+- (NSInteger)getSelectedInstrumentIndex;
+- (NSArray *)getInstrumentList;
 
 @end

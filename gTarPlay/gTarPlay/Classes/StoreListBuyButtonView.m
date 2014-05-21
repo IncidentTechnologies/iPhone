@@ -54,13 +54,13 @@ static inline double radians (double degrees) {
             CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(100.0f/255.0f) green:(108.0f/255.0f) blue:(113.0f/255.0f) alpha:1.0f].CGColor);
             CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
             
-            CGRect textRect = CGRectInset(rect, 4, 4);
-            textRect.origin.x += 6;
-            textRect.origin.y += 9;
-            
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
             NSString *text = NSLocalizedString(@"99¢", NULL);
-            [text drawInRect:textRect withFont:[UIFont systemFontOfSize:19.0f]];
+            
+            CGRect textRect = rect;
+            textRect.origin.y += 14;
+            
+            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:18.0] lineBreakMode:NSLineBreakByClipping alignment:NSTextAlignmentCenter];
             
         } break;
             
@@ -68,30 +68,27 @@ static inline double radians (double degrees) {
             // draw circle
             CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(4.0f/255.0f) green:(161.0f/255.0f) blue:(222.0f/255.0f) alpha:1.0f].CGColor);
             CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
+            NSString *text = NSLocalizedString(@"FREE", NULL);
             
-            CGRect textRect = CGRectInset(rect, 4, 4);
-            textRect.origin.x += 4.0f;
-            textRect.origin.y += 13.0f;
+            CGRect textRect = rect;
+            textRect.origin.y += 17;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            NSString *text = NSLocalizedString(@"FREE", NULL);
-            [text drawInRect:textRect withFont:[UIFont systemFontOfSize:13.0f]];
-            
+            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:12.0] lineBreakMode:NSLineBreakByClipping alignment:NSTextAlignmentCenter];
+        
         } break;
             
         case BUY_BUTTON_CONFIRM: {
             // draw a more different circle
             CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(124.0f/255.0f) green:(178.0f/255.0f) blue:(102.0f/255.0f) alpha:1.0f].CGColor);
-
-            CGContextFillEllipseInRect(context, CGRectInset(rect, 3, 3));
+            CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
+            NSString *text = NSLocalizedString(@"BUY", NULL);
             
-            CGRect textRect = CGRectInset(rect, 4, 4);
-            textRect.origin.x += 6;
-            textRect.origin.y += 12;
+            CGRect textRect = rect;
+            textRect.origin.y += 17;
             
             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-            NSString *text = NSLocalizedString(@"BUY", NULL);
-            [text drawInRect:textRect withFont:[UIFont systemFontOfSize:15.0f]];
+            [text drawInRect:textRect withFont:[UIFont fontWithName:@"Avenir Next" size:12.0] lineBreakMode:NSLineBreakByClipping alignment:NSTextAlignmentCenter];
         } break;
             
         case BUY_BUTTON_PROCESSING: {            

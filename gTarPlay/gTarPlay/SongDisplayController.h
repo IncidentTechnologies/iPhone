@@ -10,6 +10,25 @@
 
 #import <gTarAppCore/DisplayController.h>
 #import <gTarAppCore/EAGLView.h>
+#import <gTarAppCore/AppCore.h>
+
+#import "SongES1Renderer.h"
+
+#import <gTarAppCore/NoteAnimation.h>
+#import "NoteModel.h"
+#import "LineModel.h"
+#import "StringModel.h"
+#import "NumberModel.h"
+
+#import <gTarAppCore/NSNote.h>
+#import <gTarAppCore/NSSong.h>
+#import <gTarAppCore/NSMeasure.h>
+#import <gTarAppCore/NSSongModel.h>
+#import <gTarAppCore/NSNoteFrame.h>
+
+#import "gTarColors.h"
+
+#import "PlayViewController.h"
 
 @class NSSong;
 @class NSNote;
@@ -31,6 +50,8 @@
     
     // NSNote -> NoteAnimation
     NSMutableDictionary * m_noteModelDictionary;
+    NSMutableDictionary * m_noteModelUniversalDictionary;
+    NSMutableArray * m_allFrames;
     NSMutableArray * m_undisplayedFrames;
     NSMutableArray * m_numberModels;
     
@@ -47,9 +68,20 @@
     
     NumberModel * m_mutedTexture;
     
+    BOOL isStandalone;
+    
+    PlayViewControllerDifficulty difficulty;
+    
+    BOOL fretOne;
+    BOOL fretTwo;
+    BOOL fretThree;
+    
+    int m_loops;
+    
 }
 
-- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView;
+- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops;
+- (void)updateDifficulty:(PlayViewControllerDifficulty)useDifficulty;
 - (void)cancelPreloading;
 - (void)createLineModels;
 - (void)createNumberModels;
@@ -65,10 +97,23 @@
 - (void)shiftView:(double)shift;
 - (void)shiftViewDelta:(double)shift;
 
-- (double)convertTimeToCoordSpace:(double)dealta;
-- (double)convertBeatToCoordSpace:(double)beat;
-- (double)convertCoordSpaceToBeat:(double)coord;
-- (double)convertStringToCoordSpace:(NSInteger)str;
-- (double)calculateMaxShiftCoordSpace;
+- (int)getStandaloneFretFromFret:(int)fret;
+- (double)convertTimeToCoordSpace:(double)dealta isStandalone:(BOOL)standalone;
+- (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone;
+- (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone;
+- (double)convertStringToCoordSpace:(NSInteger)str isStandalone:(BOOL)standalone;
+- (double)calculateMaxShiftCoordSpace:(BOOL)standalone;
+
+- (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn;
+
+- (double)getNoteHit:(NSNote*)note;
+- (void)hitNote:(NSNote*)note;
+- (void)missNote:(NSNote*)note;
+- (void)attemptFrame:(NSNoteFrame *)frame;
+- (void)setNoteHit:(NSNote*)note toValue:(double)hit;
+
+// Standalone
+- (int)getMappedStringFromString:(int)str;
+- (NSMutableDictionary*)getStringPluckFromTap:(CGPoint)touchPoint;
 
 @end

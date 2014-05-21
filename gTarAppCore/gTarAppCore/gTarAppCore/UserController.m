@@ -35,7 +35,7 @@
     if ( self )
     {
         
-        m_cloudController = [cloudController retain];
+        m_cloudController = cloudController;
         
         m_cloudToUserRequest = [[NSMutableDictionary alloc] init];
         
@@ -44,7 +44,7 @@
         NSString * pathsDirectory = [paths objectAtIndex:0];
         NSString * userPath = [pathsDirectory stringByAppendingPathComponent:@"User"];
         
-        m_userFilePath = [userPath retain];
+        m_userFilePath = userPath;
         
         if ( [[NSFileManager defaultManager] fileExistsAtPath:m_userFilePath] == NO )
         {
@@ -58,7 +58,6 @@
             {
                 NSLog(@"Error: '%@' creating User path: '%@'", [error localizedDescription], m_userFilePath);
                 
-                [self release];
                 
                 return nil;
             }
@@ -99,25 +98,6 @@
     }
 }
 
-- (void)dealloc
-{
-    
-    [m_loggedInUsername release];
-    [m_loggedInPassword release];
-    [m_loggedInUserProfile release];
-    [m_loggedInFacebookToken release];
-    
-    [m_cloudController release];
-    
-    [m_userCache release];
-    
-    [m_cloudToUserRequest release];
-    
-    [m_pendingUserSongSessionUploads release];
-    
-    [super dealloc];
-    
-}
 
 - (void)clearCache
 {
@@ -143,13 +123,7 @@
     }
     
     // Now that all the files are deleted, clear the mapping to them.
-    [m_loggedInUsername release];
-    [m_loggedInPassword release];
-    [m_loggedInUserProfile release];
-    [m_loggedInFacebookToken release];
     
-    [m_userCache release];
-    [m_pendingUserSongSessionUploads release];
     
     m_loggedInUsername = nil;
     m_loggedInPassword = nil;
@@ -185,16 +159,16 @@
     NSString * starCachePath = [m_userFilePath stringByAppendingPathComponent:@"StarCache"];
     NSString * scoreCachePath = [m_userFilePath stringByAppendingPathComponent:@"ScoreCache"];
     
-    m_loggedInUsername = [[NSKeyedUnarchiver unarchiveObjectWithFile:usernamePath] retain];
-    m_loggedInPassword = [[NSKeyedUnarchiver unarchiveObjectWithFile:passwordPath] retain];
+    m_loggedInUsername = [NSKeyedUnarchiver unarchiveObjectWithFile:usernamePath];
+    m_loggedInPassword = [NSKeyedUnarchiver unarchiveObjectWithFile:passwordPath];
     
-    m_loggedInUserProfile = [[NSKeyedUnarchiver unarchiveObjectWithFile:userProfilePath] retain];
+    m_loggedInUserProfile = [NSKeyedUnarchiver unarchiveObjectWithFile:userProfilePath];
     
-    m_loggedInFacebookToken = [[NSKeyedUnarchiver unarchiveObjectWithFile:facebookTokenPath] retain];
-    m_pendingUserSongSessionUploads = [[NSKeyedUnarchiver unarchiveObjectWithFile:pendingUploadPath] retain];
-    m_userCache = [[NSKeyedUnarchiver unarchiveObjectWithFile:userCachePath] retain];
-    m_starCache = [[NSKeyedUnarchiver unarchiveObjectWithFile:starCachePath] retain];
-    m_scoreCache = [[NSKeyedUnarchiver unarchiveObjectWithFile:scoreCachePath] retain];
+    m_loggedInFacebookToken = [NSKeyedUnarchiver unarchiveObjectWithFile:facebookTokenPath];
+    m_pendingUserSongSessionUploads = [NSKeyedUnarchiver unarchiveObjectWithFile:pendingUploadPath];
+    m_userCache = [NSKeyedUnarchiver unarchiveObjectWithFile:userCachePath];
+    m_starCache = [NSKeyedUnarchiver unarchiveObjectWithFile:starCachePath];
+    m_scoreCache = [NSKeyedUnarchiver unarchiveObjectWithFile:scoreCachePath];
     
     if ( m_pendingUserSongSessionUploads == nil )
     {
@@ -298,13 +272,11 @@
     {
         // This variable gets released later on, and we don't want it
         // to disappear before the call returns.
-        [m_loggedInFacebookToken retain];
         
         [self requestLoginUserFacebookToken:m_loggedInFacebookToken
                              andCallbackObj:obj
                              andCallbackSel:sel];
         
-        [m_loggedInFacebookToken release];
     }
     else
     {
@@ -330,7 +302,7 @@
                                               andCallbackSelector:sel];
     if ( username == nil || password == nil )
     {
-        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
         
         userResponse.m_status = UserResponseStatusFailure;
         userResponse.m_statusText = @"Invalid credentials";
@@ -353,12 +325,12 @@
 - (void)requestSignupUserCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -367,13 +339,10 @@
         
         userResponse.m_status = UserResponseStatusSuccess;
         
-        [m_loggedInUsername release];
-        [m_loggedInPassword release];
-        [m_loggedInUserProfile release];
         
-        m_loggedInUsername = [cloudResponse.m_cloudRequest.m_username retain];
-        m_loggedInPassword = [cloudResponse.m_cloudRequest.m_password retain];
-        m_loggedInUserProfile = [cloudResponse.m_responseUserProfile retain];
+        m_loggedInUsername = cloudResponse.m_cloudRequest.m_username;
+        m_loggedInPassword = cloudResponse.m_cloudRequest.m_password;
+        m_loggedInUserProfile = cloudResponse.m_responseUserProfile;
         
         [self setUserProfileForUserId:0
                             toProfile:m_loggedInUserProfile];
@@ -406,7 +375,7 @@
     
     if ( username == nil || password == nil )
     {
-        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
         
         userResponse.m_status = UserResponseStatusFailure;
         userResponse.m_statusText = @"No login credentials";
@@ -428,12 +397,12 @@
 - (void)requestLoginUserCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -441,13 +410,10 @@
     {
         userResponse.m_status = UserResponseStatusSuccess;
         
-        [m_loggedInUsername release];
-        [m_loggedInPassword release];
-        [m_loggedInUserProfile release];
         
-        m_loggedInUsername = [cloudResponse.m_cloudRequest.m_username retain];
-        m_loggedInPassword = [cloudResponse.m_cloudRequest.m_password retain];
-        m_loggedInUserProfile = [cloudResponse.m_responseUserProfile retain];
+        m_loggedInUsername = cloudResponse.m_cloudRequest.m_username;
+        m_loggedInPassword = cloudResponse.m_cloudRequest.m_password;
+        m_loggedInUserProfile = cloudResponse.m_responseUserProfile;
         
         [self setUserProfileForUserId:0
                             toProfile:m_loggedInUserProfile];
@@ -487,7 +453,7 @@
     
     if ( facebookToken == nil )
     {
-        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
         
         userResponse.m_status = UserResponseStatusFailure;
         userResponse.m_statusText = @"No facebook token";
@@ -497,7 +463,6 @@
         return;
     }
     
-    [m_loggedInFacebookToken release];
     
     m_loggedInFacebookToken = nil;
     
@@ -512,12 +477,12 @@
 - (void)requestLoginUserFacebookTokenCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -525,11 +490,9 @@
     {
         userResponse.m_status = UserResponseStatusSuccess;
         
-        [m_loggedInUserProfile release];
-        [m_loggedInFacebookToken release];
         
-        m_loggedInUserProfile = [cloudResponse.m_responseUserProfile retain];
-        m_loggedInFacebookToken = [cloudResponse.m_cloudRequest.m_facebookAccessToken retain];
+        m_loggedInUserProfile = cloudResponse.m_responseUserProfile;
+        m_loggedInFacebookToken = cloudResponse.m_cloudRequest.m_facebookAccessToken;
         
         [self setUserProfileForUserId:0
                             toProfile:m_loggedInUserProfile];
@@ -639,12 +602,12 @@
 - (void)requestLogoutUserCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = NO;
     
@@ -677,12 +640,12 @@
 - (void)requestUserProfileCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
 
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -716,7 +679,7 @@
     
     if ( m_cloudController.m_loggedIn == NO )
     {
-        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
         
         userResponse.m_status = UserResponseStatusFailure;
         userResponse.m_statusText = @"Not logged in";
@@ -739,12 +702,12 @@
 - (void)requestUserProfileChangePictureCallback:(CloudResponse *)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -788,12 +751,12 @@
 - (void)requestUserProfileSearchCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -839,12 +802,12 @@
 - (void)requestUserSessionsCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -881,7 +844,7 @@
     
     if ( m_cloudController.m_loggedIn == NO )
     {
-        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
         
         userResponse.m_status = UserResponseStatusFailure;
         userResponse.m_statusText = @"Not logged in";
@@ -902,12 +865,12 @@
 - (void)requestAddUserFollowCallback:(CloudResponse*)cloudResponse;
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -951,7 +914,7 @@
     
     if ( m_cloudController.m_loggedIn == NO )
     {
-        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
         
         userResponse.m_status = UserResponseStatusFailure;
         userResponse.m_statusText = @"Not logged in";
@@ -972,12 +935,12 @@
 - (void)requestRemoveUserFollowCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -1022,7 +985,7 @@
     
     if ( m_cloudController.m_loggedIn == NO )
     {
-        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
         
         userResponse.m_status = UserResponseStatusFailure;
         userResponse.m_statusText = @"Not logged in";
@@ -1044,12 +1007,12 @@
 - (void)requestUserFollowsSessionsCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -1138,12 +1101,12 @@
 - (void)requestUserFollowsCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -1188,12 +1151,12 @@
 - (void)requestUserFollowedByCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -1230,7 +1193,7 @@
     
     if ( m_cloudController.m_loggedIn == NO )
     {
-        UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+        UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
         
         userResponse.m_status = UserResponseStatusFailure;
         userResponse.m_statusText = @"Not logged in";
@@ -1251,12 +1214,12 @@
 - (void)requestUserFacebookFriendsCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -1305,12 +1268,12 @@
 - (void)requestUserSongSessionUploadCallback:(CloudResponse*)cloudResponse
 {
     
-    UserRequest * userRequest = [[m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]] autorelease];
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
     
     // Create response
-    UserResponse * userResponse = [[[UserResponse alloc] initWithUserRequest:userRequest] autorelease];
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
     
     userResponse.m_loggedIn = m_cloudController.m_loggedIn;
     
@@ -1338,6 +1301,7 @@
 
 - (UserEntry*)getUserEntry:(NSInteger)userId
 {
+    NSLog(@"Get user entry for ID %i",userId);
     
     NSNumber * key = [NSNumber numberWithInteger:userId];
     
@@ -1356,7 +1320,7 @@
     
     if ( entry == nil )
     {
-        entry = [[[UserEntry alloc] init] autorelease];
+        entry = [[UserEntry alloc] init];
     }
     
     entry.m_userProfile = profile;
@@ -1368,8 +1332,7 @@
     {
         [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:m_loggedInUserProfile.m_userId]];
         
-        [m_loggedInUserProfile release];
-        m_loggedInUserProfile = [profile retain];        
+        m_loggedInUserProfile = profile;        
     }
     
 }
@@ -1383,7 +1346,7 @@
     
     if ( entry == nil )
     {
-        entry = [[[UserEntry alloc] init] autorelease];
+        entry = [[UserEntry alloc] init];
     }
     
     if ( page > 1 )
@@ -1425,12 +1388,20 @@
     
     if ( entry == nil )
     {
-        entry = [[[UserEntry alloc] init] autorelease];
+        entry = [[UserEntry alloc] init];
     }
     
     entry.m_followsList = list;
     
     [m_userCache setObject:entry forKey:key];
+    
+    // Cache the follows info as well
+    // This isn't getting called properly elsewhere
+    /*for(UserProfile * profile in list){
+        UserEntry * entry = [[UserEntry alloc] init];
+        entry.m_userProfile = profile;
+        [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:profile.m_userId]];
+    }*/
     
     // Create an alias for the 0 id (ie the current user).
     // We only technically need to do this the first time because 
@@ -1451,12 +1422,19 @@
     
     if ( entry == nil )
     {
-        entry = [[[UserEntry alloc] init] autorelease];
+        entry = [[UserEntry alloc] init];
     }
     
     entry.m_followedByList = list;
     
     [m_userCache setObject:entry forKey:key];
+    
+    // Cache the followers info as well
+    /*for(UserProfile * profile in list){
+        UserEntry * entry = [[UserEntry alloc] init];
+        entry.m_userProfile = profile;
+        [m_userCache setObject:entry forKey:[NSNumber numberWithInteger:profile.m_userId]];
+    }*/
     
     // Create an alias for the 0 id (ie the current user).
     // We only technically need to do this the first time because 
@@ -1477,7 +1455,7 @@
     
     if ( entry == nil )
     {
-        entry = [[[UserEntry alloc] init] autorelease];
+        entry = [[UserEntry alloc] init];
     }
     
     entry.m_facebookFriendsList = list;
@@ -1503,7 +1481,7 @@
     
     if ( entry == nil )
     {
-        entry = [[[UserEntry alloc] init] autorelease];
+        entry = [[UserEntry alloc] init];
     }
     
     entry.m_followsSessionsList = list;

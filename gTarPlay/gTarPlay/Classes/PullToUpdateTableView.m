@@ -45,15 +45,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [m_instructionsLabel release];
-    [m_lastUpdateLabel release];
-    [m_arrowTriangleView release];
-    [m_updatingIndicatorView release];
-    
-    [super dealloc];
-}
 
 -(void)setIndicatorTextColor:(UIColor*)color
 {
@@ -81,7 +72,7 @@
     m_instructionsLabel.text = NSLocalizedString(@"Pull to update", NULL);
     m_instructionsLabel.textColor = [UIColor grayColor];
     m_instructionsLabel.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.0f]; // transparent background
-    m_instructionsLabel.font = [m_instructionsLabel.font fontWithSize:14];
+    [m_instructionsLabel setFont:[UIFont fontWithName:@"Avenir Next" size:14]];
     
     [self addSubview:m_instructionsLabel];
     
@@ -261,7 +252,6 @@
     
     m_lastUpdateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Last update: %@", NULL), currentTime];
     
-    [dateFormatter release];
     
 }
 

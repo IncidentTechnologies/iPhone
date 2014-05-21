@@ -98,10 +98,9 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 - (void) dealloc
 {
-	if(_name)
-	 glDeleteTextures(1, &_name);
+	//if(_name)
+	// glDeleteTextures(1, &_name);
 	
-	[super dealloc];
 }
 
 - (NSString*) description
@@ -138,7 +137,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	orientation = [uiImage imageOrientation]; 
 	
 	if(image == NULL) {
-		[self release];
 		NSLog(@"Image is Null");
 		return nil;
 	}

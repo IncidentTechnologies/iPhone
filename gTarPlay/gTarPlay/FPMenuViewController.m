@@ -8,18 +8,10 @@
 
 #import "FPMenuViewController.h"
 
-extern AudioController * g_audioController;
-
-@interface FPMenuViewController ()
-
-@property (retain, nonatomic) IBOutlet UISlider *toneSlider;
-@property (retain, nonatomic) IBOutlet UISwitch *audioRouteSwitch;
-@property (retain, nonatomic) IBOutlet UISwitch *slideSwitch;
-@property (retain, nonatomic) IBOutlet UITextField *testText;
-
-@end
-
 @implementation FPMenuViewController
+
+@synthesize delegate;
+@synthesize audioRouteSwitch;
 
 - (id)init
 {
@@ -41,31 +33,38 @@ extern AudioController * g_audioController;
     UIImage * sliderTrackMaxImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:17 topCapHeight:0];
     UIImage * sliderKnob = [UIImage imageNamed:@"SliderKnobBlue.png"];
     
-    [self.toneSlider setMinimumTrackImage:sliderTrackMinImage forState:UIControlStateNormal];
-    [self.toneSlider setMaximumTrackImage:sliderTrackMaxImage forState:UIControlStateNormal];
-    [self.toneSlider setThumbImage:sliderKnob forState:UIControlStateNormal];
+    //[self.toneSlider setMinimumTrackImage:sliderTrackMinImage forState:UIControlStateNormal];
+    //[self.toneSlider setMaximumTrackImage:sliderTrackMaxImage forState:UIControlStateNormal];
+    //[self.toneSlider setThumbImage:sliderKnob forState:UIControlStateNormal];
     
     // Customize audio route switch
-    self.audioRouteSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
+    self.audioRouteSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
     self.audioRouteSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.audioRouteSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
     
-    self.slideSwitch.thumbTintColor = [[UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0] retain];
+    self.slideSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
     self.slideSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     self.slideSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
+    
+    [_slideSwitch setOn:YES];
+    
+    if(!audioSwitchOn){
+        [self setAudioSwitchToDefault];
+    }else{
+        [self setAudioSwitchToSpeaker];
+    }
 }
 
 - (void) localizeViews {
-    [_exitButton setTitle:NSLocalizedString(@"EXIT", NULL) forState:UIControlStateNormal];
-    
-    _toneLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TONE", NULL)];
+    _quitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Quit", NULL)];
+    //_toneLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TONE", NULL)];
     _outputLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OUTPUT", NULL)];
     _speakerLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SPEAKER", NULL)];
     _auxLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"AUX", NULL)];
     _slidingLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SLIDING", NULL)];
     _offLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OFF", NULL)];
     _onLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ON", NULL)];
-    _exitToMainLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"EXIT TO MAIN", NULL)];
+    //_exitToMainLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"EXIT TO MAIN", NULL)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,30 +77,47 @@ extern AudioController * g_audioController;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
     
-    [_toneSlider release];
-    [_audioRouteSwitch release];
     
-    [_slideSwitch release];
-    [super dealloc];
 }
 
-#pragma mark - IBActions
+#pragma mark - Tone slider
 
 - (IBAction)setTone:(UISlider *)sender
 {
-    [g_audioController SetBWCutoff:sender.value];
+    [delegate setToneToBWCutoff:sender.value];
 }
+
+- (void)moveToneSliderToTone:(double)tone
+{
+    NSLog(@"Move tone slider to tone %f",tone);
+    //[_toneSlider setValue:tone animated:NO];
+}
+
+#pragma mark - Audio Routing
 
 - (IBAction)setAudioRoute:(UISwitch *)sender
 {
-    if (sender.isOn)
-    {
-        [g_audioController RouteAudioToDefault];
+    if(!sender.isOn){
+        // route to default
+        [delegate audioRouteChanged:NO];
+    }else{
+        // route to speaker
+        [delegate audioRouteChanged:YES];
     }
-    else
-    {
-        [g_audioController RouteAudioToSpeaker];
-    }
+}
+
+- (void)setAudioSwitchToDefault
+{
+    NSLog(@"Set audio switch to default");
+    [self.audioRouteSwitch setOn:NO];
+    audioSwitchOn = NO;
+}
+
+- (void)setAudioSwitchToSpeaker
+{
+    NSLog(@"Set audio switch to speaker");
+    [self.audioRouteSwitch setOn:YES];
+    audioSwitchOn = YES;
 }
 
 - (IBAction)setSlideHammer:(id)sender
@@ -120,45 +136,26 @@ extern AudioController * g_audioController;
      postNotificationName:@"ExitFreePlay"
      object:self];
     
+    [delegate backButtonClicked];
+    
     [self.parentViewController.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) didChangeAudioRoute:(NSNotification *) notification
 {
+    
+    NSLog(@"Did change audio route *** ");
+    
     NSDictionary *data = [notification userInfo];
     BOOL routeIsSpeaker = [[data objectForKey:@"isRouteSpeaker"] boolValue];
     
-    NSString *routeName = [[NSString alloc] initWithString:[data objectForKey:@"routeName"]];
-    /*
-     TODO telemetry
-     // Telemetetry log -- invert the speaker route so we log the previous state
-     NSString* route = !m_bSpeakerRoute ? @"Speaker" : @"Aux";
-     
-     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
-     
-     // Avoid the first setting
-     if ( delta > 0 )
-     {
-     [g_telemetryController logEvent:GtarFreePlayToggleFeature
-     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-     route, @"AudioRoute",
-     [NSNumber numberWithInteger:delta], @"PlayTime",
-     nil]];
-     
-     [m_audioRouteTimeStart release];
-     m_audioRouteTimeStart = [[NSDate date] retain];
-     }
-     */
-    
-    [_testText setText:routeName];
-    
     if (routeIsSpeaker)
     {
-        [self.audioRouteSwitch setOn:NO];
+        [self setAudioSwitchToSpeaker];
     }
     else
     {
-        [self.audioRouteSwitch setOn:YES];
+        [self setAudioSwitchToDefault];
     }
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];

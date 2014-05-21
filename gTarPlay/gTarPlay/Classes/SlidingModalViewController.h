@@ -10,8 +10,8 @@
 
 @interface SlidingModalViewController : UIViewController
 
-@property (retain, nonatomic) IBOutlet UIView *contentView;
-@property (retain, nonatomic) IBOutlet UIButton *blackButtonOrig;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIButton *blackButtonOrig;
 
 - (IBAction)closeButtonClicked:(id)sender;
 

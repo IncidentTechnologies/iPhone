@@ -12,11 +12,11 @@
 
 @interface SocialSongCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet UILabel *titleLabel;
-@property (retain, nonatomic) IBOutlet UILabel *artistLabel;
-@property (retain, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *artistLabel;
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
-@property (retain, nonatomic) UserSongSession *userSongSession;
+@property (strong, nonatomic) UserSongSession *userSongSession;
 
 - (void)updateCell;
 

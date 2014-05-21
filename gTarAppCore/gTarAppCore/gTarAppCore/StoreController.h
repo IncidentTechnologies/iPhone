@@ -54,7 +54,7 @@
 @interface StoreController : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>
 {
     
-    id<StoreControllerDelegate> m_delegate;
+    id<StoreControllerDelegate> __weak m_delegate;
     
     CloudController * m_cloudController;
     
@@ -71,7 +71,7 @@
     NSMutableDictionary * m_ownedSongs;
     NSMutableDictionary * m_allSongs;
     
-    StoreFeatureCollection * m_featureCollection;
+    StoreFeatureCollection * __weak m_featureCollection;
     
     NSNumber * m_credits;
     
@@ -86,10 +86,10 @@
 }
 
 //@property (nonatomic, readonly) NSString * m_searchString;
-@property (nonatomic, assign) id<StoreControllerDelegate> m_delegate;
+@property (nonatomic, weak) id<StoreControllerDelegate> m_delegate;
 @property (nonatomic, readonly) NSDictionary * m_ownedSongs;
 @property (nonatomic, readonly) NSDictionary * m_allSongs;
-@property (nonatomic, readonly) StoreFeatureCollection * m_featureCollection;
+@property (weak, nonatomic, readonly) StoreFeatureCollection * m_featureCollection;
 @property (nonatomic, readonly) NSNumber * m_credits;
 
 //- (id)initWithCloudController:(CloudController*)cloudController;

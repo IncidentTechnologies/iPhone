@@ -59,14 +59,5 @@
 	
 }
 
-- (void)dealloc
-{
-
-    [m_productId release];
-    [m_userSong release];
-
-    [super dealloc];
-    
-}
 
 @end

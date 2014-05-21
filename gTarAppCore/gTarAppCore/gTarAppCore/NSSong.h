@@ -24,11 +24,12 @@
 }
 
 @property (nonatomic, readonly) NSMutableArray * m_measures;
+@property (nonatomic, readonly) NSMutableArray * m_markers;
 
-@property (nonatomic, retain) NSString * m_author;
-@property (nonatomic, retain) NSString * m_title;
-@property (nonatomic, retain) NSString * m_description;
-@property (nonatomic, retain) NSString * m_instrument;
+@property (nonatomic, strong) NSString * m_author;
+@property (nonatomic, strong) NSString * m_title;
+@property (nonatomic, strong) NSString * m_description;
+@property (nonatomic, strong) NSString * m_instrument;
 @property (nonatomic, assign) NSUInteger m_id;
 @property (nonatomic, assign) double m_tempo;
 

@@ -67,14 +67,8 @@
     b->yMax = yMax;
     
     [m_tranparentAreas addObject:b];
-    [b autorelease];
+    //[b autorelease];
 }
 
-- (void) dealloc
-{
-    [m_tranparentAreas release];
-    
-    [super dealloc];
-}
 
 @end

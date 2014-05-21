@@ -7,31 +7,12 @@
 //
 
 #import "SongSelectionViewController.h"
-#import "SongListCell.h"
-#import "PlayViewController.h"
-#import "SlidingModalViewController.h"
-#import "VolumeViewController.h"
-#import "SlidingInstrumentViewController.h"
-#import "PlayerViewController.h"
-#import "UIView+Gtar.h"
-#import "UIButton+Gtar.h"
-
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/CloudResponse.h>
-#import <gTarAppCore/CloudRequest.h>
-#import <gTarAppCore/FileController.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/UserSongs.h>
-#import <gTarAppCore/XmlDom.h>
-#import <gTarAppCore/SongPlaybackController.h>
-#import <gTarAppCore/UserController.h>
-#import <gTarAppCore/SongPlaybackController.h>
 
 #define MAX_SIMULTANEOUS_SONG_DOWNLOADS 10
 
 extern FileController *g_fileController;
 extern CloudController *g_cloudController;
-extern AudioController *g_audioController;
+//extern AudioController *g_audioController;
 extern UserController *g_userController;
 extern GtarController *g_gtarController;
 
@@ -54,23 +35,30 @@ extern GtarController *g_gtarController;
     NSInteger _nextUserSong;
     
     struct SongSortOrder _sortOrder;
+    int sortChange;
 }
 
-@property (retain, nonatomic) IBOutlet UIButton *sortByTitleButtton;
-@property (retain, nonatomic) IBOutlet UIButton *sortByArtistButton;
-@property (retain, nonatomic) IBOutlet UIImageView *sortByTitleArrow;
-@property (retain, nonatomic) IBOutlet UIImageView *sortByArtistArrow;
+@property (strong, nonatomic) IBOutlet UIButton *sortByTitleButtton;
+//@property (retain, nonatomic) IBOutlet UIButton *sortByArtistButton;
+//@property (retain, nonatomic) IBOutlet UIImageView *sortByTitleArrow;
+//@property (retain, nonatomic) IBOutlet UIImageView *sortByArtistArrow;
 
 @end
 
 @implementation SongSelectionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize g_soundMaster;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
     {
         // Custom initialization
+        
+        NSLog(@"Alloc Song Selection VC SoundMaster");
+        g_soundMaster = soundMaster;
+        [g_soundMaster start];
         
         // See if we have any cached songs from previous runs
         NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
@@ -84,12 +72,13 @@ extern GtarController *g_gtarController;
         }
         else
         {
-            userSongArray = [[NSKeyedUnarchiver unarchiveObjectWithData:songArrayData] retain];
+            userSongArray = [NSKeyedUnarchiver unarchiveObjectWithData:songArrayData];
         }
         
         _userSongArray = userSongArray;
         NSLog(@"Found %d cached songs",[_userSongArray count]);
-        [_userSongArray retain];
+        
+        sortChange = 0;
     }
     return self;
 }
@@ -112,7 +101,8 @@ extern GtarController *g_gtarController;
     [_topBar addShadow];
     [_fullscreenButton setHidden:YES];
     
-    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
+    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
+    [_playerViewController setDelegate:self];
     [_playerViewController attachToSuperview:_songPlayerView];
     
     _currentDifficulty = 0;
@@ -137,22 +127,23 @@ extern GtarController *g_gtarController;
     _sortOrder.type = SORT_SONG_TITLE;
     _sortOrder.fAscending = TRUE;
     
-    _sortByArtistArrow.hidden = YES;
+    //_sortByArtistArrow.hidden = YES;
     _sortByTitleButtton.selected = YES;
-    _sortByTitleArrow.highlighted = YES;
+    //_sortByTitleArrow.highlighted = YES;
     
     [self sortSongList];    // push sorting
     
     // Init volume / instrument views
     if ( _volumeViewController == nil )
     {
-        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster isInverse:NO];
         [_volumeViewController attachToSuperview:_songOptionsModal.contentView withFrame:_volumeView.frame];
     }
     
     if ( _instrumentViewController == nil )
     {
         _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
+        [_instrumentViewController setDelegate:self];
         [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
 }
@@ -160,11 +151,14 @@ extern GtarController *g_gtarController;
 - (void) localizeViews {
     //[_easyButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
     
+    [_sortByTitleButtton setAttributedTitle:[self generateTitleArtistLabel:YES] forState:UIControlStateNormal];
+    
     _easyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Easy", NULL)];
     _mediumLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Medium", NULL)];
     _hardLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Hard", NULL)];
     
     [_startButton setTitle:NSLocalizedString(@"PRESS TO PLAY", NULL) forState:UIControlStateNormal];
+    [_practiceButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
     
     [_skillButton setTitle:NSLocalizedString(@"SKILL", NULL) forState:UIControlStateNormal];
     [_scoreButton setTitle:NSLocalizedString(@"SCORE", NULL) forState:UIControlStateNormal];
@@ -172,8 +166,34 @@ extern GtarController *g_gtarController;
     _artistLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ARTIST", NULL)];
     _titleLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TITLE", NULL)];
     
-    _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    //_backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
     _songListLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Song List", NULL)];
+}
+
+- (NSMutableAttributedString *) generateTitleArtistLabel:(BOOL)boldTitle
+{
+    
+    NSString * title = NSLocalizedString(@"TITLE", NULL);
+    NSString * artist = NSLocalizedString(@"ARTIST", NULL);
+    
+    NSString * titleArtist = title;
+    titleArtist = [titleArtist stringByAppendingString:@" & "];
+    titleArtist = [titleArtist stringByAppendingString:artist];
+    
+    NSDictionary * boldattributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"AvenirNext-Bold" size:15.0],NSFontAttributeName,[UIColor whiteColor],NSForegroundColorAttributeName,nil];
+    NSDictionary * normalattributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Avenir Next" size:15.0],NSFontAttributeName,[UIColor whiteColor],NSForegroundColorAttributeName,nil];
+    
+    NSMutableAttributedString * titleArtistString = [[NSMutableAttributedString alloc] initWithString:titleArtist];
+    
+    if(boldTitle){
+        [titleArtistString setAttributes:normalattributes range:NSMakeRange(0, [titleArtist length])];
+        [titleArtistString setAttributes:boldattributes range:NSMakeRange(0, [title length])];
+    }else{
+        [titleArtistString setAttributes:normalattributes range:NSMakeRange(0, [titleArtist length])];
+        [titleArtistString setAttributes:boldattributes range:NSMakeRange([title length]+3, [artist length])];
+    }
+    
+    return titleArtistString;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -199,30 +219,10 @@ extern GtarController *g_gtarController;
 - (void)dealloc
 {
     [g_gtarController removeObserver:self];
-    [_userSongArray release];
-    [_songListTable release];
-    [_titleArtistButton release];
-    [_skillButton release];
-    [_scoreButton release];
-    [_songOptionsModal release];
-    [_volumeButton release];
-    [_closeModalButton release];
-    [_instrumentButton release];
-    [_easyButton release];
-    [_mediumButton release];
-    [_hardButton release];
-    [_volumeView release];
-    [_songPlayerView release];
-    [_topBar release];
-    [_instrumentView release];
-    [_searchBar release];
-    [_fullscreenButton release];
-    [_startButton release];
-    [_sortByTitleArrow release];
-    [_sortByArtistArrow release];
-    [_sortByArtistButton release];
-    [_sortByTitleButtton release];
-    [super dealloc];
+    //[g_soundMaster releaseAfterUse];
+    //[_sortByTitleArrow release];
+    //[_sortByArtistArrow release];
+    //[_sortByArtistButton release];
 }
 
 #pragma mark - Button Click Handlers
@@ -238,7 +238,16 @@ extern GtarController *g_gtarController;
 
     [self dismissViewControllerAnimated:NO completion:nil];
     
-    [self startSong:_currentUserSong withDifficulty:_currentDifficulty];
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:NO];
+}
+
+- (IBAction)practiceButtonClicked:(id)sender
+{
+    [_playerViewController endPlayback];
+    
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:YES];
 }
 
 - (IBAction)closeModalButtonClicked:(id)sender
@@ -276,6 +285,7 @@ extern GtarController *g_gtarController;
 
 - (IBAction)instrumentButtonClicked:(id)sender
 {
+    
     if ( _instrumentViewController.loading == YES )
     {
         return;
@@ -339,7 +349,7 @@ extern GtarController *g_gtarController;
     [_fullscreenButton setHidden:YES];
 }
 
-- (IBAction)sortByArtistButtonClicked:(UIButton*)sender
+/*- (IBAction)sortByArtistButtonClicked:(UIButton*)sender
 {
     sender.selected = !sender.selected;
     _sortByTitleButtton.selected = NO;
@@ -359,26 +369,41 @@ extern GtarController *g_gtarController;
     _sortByArtistArrow.highlighted = sender.selected;
     
     [self refreshDisplayedUserSongList];
-}
+}*/
 
 - (IBAction)sortByTitleButtonClicked:(UIButton*)sender
 {
-    sender.selected = !sender.selected;
-    _sortByArtistButton.selected = NO;
+    sortChange++;
     
-    if(sender.selected) {
-        _sortOrder.type = SORT_SONG_TITLE;
-        _sortOrder.fAscending = TRUE;
-    }
-    else {
-        _sortOrder.type = SORT_SONG_TITLE;
-        _sortOrder.fAscending = FALSE;
+    BOOL boldTitle = YES;
+    
+    switch(sortChange%4){
+        case 0:
+            _sortOrder.type = SORT_SONG_TITLE;
+            _sortOrder.fAscending = TRUE;
+            break;
+        case 1:
+            _sortOrder.type = SORT_SONG_TITLE;
+            _sortOrder.fAscending = FALSE;
+            break;
+        case 2:
+            _sortOrder.type = SORT_SONG_ARTIST;
+            _sortOrder.fAscending = TRUE;
+            boldTitle = NO;
+            break;
+        case 3:
+            _sortOrder.type = SORT_SONG_ARTIST;
+            _sortOrder.fAscending = FALSE;
+            boldTitle = NO;
+            break;
     }
     
     // Sort Arrows
-    _sortByArtistArrow.hidden = YES;
-    _sortByTitleArrow.hidden = NO;
-    _sortByTitleArrow.highlighted = sender.selected;
+    //_sortByArtistArrow.hidden = YES;
+    //_sortByTitleArrow.hidden = NO;
+    //_sortByTitleArrow.highlighted = sender.selected;
+    
+    [_sortByTitleButtton setAttributedTitle:[self generateTitleArtistLabel:boldTitle] forState:UIControlStateNormal];
     
     [self refreshDisplayedUserSongList];
 }
@@ -389,21 +414,6 @@ extern GtarController *g_gtarController;
 {
     [_songListTable startAnimating];
     [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
-    
-    // Start animating offscreen if there are already songs displayed.
-//    if ( [_userSongArray count] > 0 )
-    {
-//        [_songListTable startAnimatingOffscreen];
-//        [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
-    }
-//    else
-    {
-        // First time, do a sync request so we can show the song list quickly
-//        [_songListTable startAnimating];
-//        CloudRequest *cloudRequest = [g_cloudController requestSongListCallbackObj:nil andCallbackSel:nil];
-//        [self requestSongListCallback:cloudRequest.m_cloudResponse];
-    }
-    
 }
 
 - (void)downloadUserSongs
@@ -427,9 +437,8 @@ extern GtarController *g_gtarController;
 
 - (void)setUserSongArray:(NSArray *)userSongArray
 {
-    [_userSongArray autorelease];
     
-    _userSongArray = [userSongArray retain];
+    _userSongArray = userSongArray;
     
     // refresh the search list with the new songs
     if ( _searching == YES )
@@ -444,18 +453,18 @@ extern GtarController *g_gtarController;
 {
     if ( _searching == YES )
     {
-        [_displayedUserSongArray autorelease];
-        _displayedUserSongArray = [_searchedUserSongArray retain];
+        _displayedUserSongArray = _searchedUserSongArray;
     }
     else
     {
-        [_displayedUserSongArray autorelease];
-        _displayedUserSongArray = [_userSongArray retain];
+        _displayedUserSongArray = _userSongArray;
     }
     
     [self sortSongList];
     
     [_songListTable reloadData];
+    
+    _searching = NO;
 }
 
 #pragma mark - Callbacks
@@ -529,9 +538,10 @@ extern GtarController *g_gtarController;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     static NSString * CellIdentifier = @"SongListCell";
 	SongListCell *tempCell = [_songListTable dequeueReusableCellWithIdentifier:CellIdentifier];
-	
+    
 	if (tempCell == NULL)
 	{
         NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"SongListCell" owner:nil options:nil];
@@ -605,7 +615,9 @@ extern GtarController *g_gtarController;
         return;
     
     _currentUserSong = userSong;
+    [_practiceButton startActivityIndicator];
     [_startButton startActivityIndicator];
+    [_startButton setImage:nil forState:UIControlStateNormal];
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     _playerViewController.userSong = userSong;
@@ -619,6 +631,9 @@ extern GtarController *g_gtarController;
     
     _playerViewController.loadedInvocation = invocation;
     
+    // Disable instrument menu until instrument has loaded
+    [_instrumentButton setEnabled:NO];
+    
     [self presentViewController:_songOptionsModal animated:YES completion:nil];
 }
 
@@ -631,7 +646,10 @@ extern GtarController *g_gtarController;
 
 - (void)playerLoaded
 {
+    [_instrumentButton setEnabled:YES];
     [_startButton stopActivityIndicator];
+    [_practiceButton stopActivityIndicator];
+    [_startButton setImage:[UIImage imageNamed:@"PlayButtonVideo.png"] forState:UIControlStateNormal];
 }
 
 - (void)updateTable
@@ -641,17 +659,17 @@ extern GtarController *g_gtarController;
 
 #pragma mark - ViewController stuff
 
-- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty
+- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty practiceMode:(BOOL)practiceMode
 {
     
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil];
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected practiceMode:practiceMode];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.
     NSString *songString = (NSString *)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     playViewController.userSong = userSong;
-    playViewController.userSong.m_xmlDom = [[[XmlDom alloc] initWithXmlString:songString] autorelease];
+    playViewController.userSong.m_xmlDom = [[XmlDom alloc] initWithXmlString:songString];
     
     if ( difficulty == 0 )
     {
@@ -673,7 +691,6 @@ extern GtarController *g_gtarController;
 
     [self.navigationController pushViewController:playViewController animated:YES];
     
-    [playViewController release];
 }
 
 //- (void)previewUserSong:(UserSong*)userSong
@@ -693,12 +710,12 @@ extern GtarController *g_gtarController;
 
 - (void)gtarDisconnected
 {
-    if ( self.presentedViewController != nil )
+    /*if ( self.presentedViewController != nil )
     {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];*/
 }
 
 #pragma mark - ExpandableSearchBarDelegate
@@ -712,6 +729,10 @@ extern GtarController *g_gtarController;
 - (void)searchBarSearch:(ExpandableSearchBar *)searchBar
 {
     _searching = YES;
+    
+    if(searchBar.searchString == nil || [searchBar.searchString length] == 0){
+        return;
+    }
     
     [self searchForString:searchBar.searchString];
     [self refreshDisplayedUserSongList];
@@ -733,35 +754,36 @@ extern GtarController *g_gtarController;
     NSSortDescriptor *sortDescriptor;
     switch (_sortOrder.type) {
         case SORT_SONG_TITLE: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:_sortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:_sortOrder.fAscending];
         } break;
             
         case SORT_SONG_ARTIST: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:_sortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:_sortOrder.fAscending];
         } break;
             
         default: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:TRUE] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:TRUE];
         } break;
     }
     
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [_displayedUserSongArray sortedArrayUsingDescriptors:sortDescriptors];
     
-    [_displayedUserSongArray autorelease];
-    _displayedUserSongArray = [sortedArray retain];
+    _displayedUserSongArray = sortedArray;
 }
 
 - (void)sortByScore
 {
     NSArray *sortedArray = [_userSongArray sortedArrayUsingSelector:@selector(comparePlayScore:)];
     
-    [_userSongArray release];
-    _userSongArray = [sortedArray retain];
+    _userSongArray = sortedArray;
 }
 
 - (void)searchForString:(NSString *)searchString
 {
+    
+    NSLog(@"SearchString is %@",searchString);
+    
     NSMutableArray *searchResults = [[NSMutableArray alloc] init];
     
     for ( UserSong *userSong in _userSongArray )
@@ -779,8 +801,36 @@ extern GtarController *g_gtarController;
         }
     }
     
-    [_searchedUserSongArray release];
     _searchedUserSongArray = searchResults;
+}
+
+
+#pragma mark - Sliding Instrument Selector delegate and other audio stuff
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
+{
+    NSLog(@"Song Selection VC: did select instrument %@",instrumentName);
+    [_playerViewController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
+}
+
+- (void)stopAudioEffects
+{
+    NSLog(@"Song Selection View Controller: stop audio effects");
+    
+    [_playerViewController stopAudioEffects];
+}
+
+-(NSInteger)getSelectedInstrumentIndex
+{
+    NSLog(@"Song Selection View Controller: get selected instrument index");
+    
+    return [_playerViewController getSelectedInstrumentIndex];
+}
+
+-(NSArray *)getInstrumentList
+{
+    NSLog(@"Song Selection View Controller: get instrument list");
+    
+    return [_playerViewController getInstrumentList];
 }
 
 @end

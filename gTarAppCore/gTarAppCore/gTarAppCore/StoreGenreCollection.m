@@ -29,7 +29,7 @@
     if ( self )
     {
         
-        m_genreName = [genreName retain];
+        m_genreName = genreName;
         
 //        m_popularUserSongs = [[NSMutableArray alloc] init];
 //        m_newUserSongs = [[NSMutableArray alloc] init];
@@ -42,19 +42,6 @@
     
 }
 
-- (void)dealloc
-{
-
-    [m_genreName release];
-    
-//    [m_popularUserSongs release];
-//    [m_newUserSongs release];
-//    
-//    [m_featuredSongs release];
-    
-    [super dealloc];
-    
-}
 
 //- (void)addNewSong:(UserSong*)userSong
 //{

@@ -7,9 +7,9 @@
 //
 
 #import "StoreSongListCell.h"
-#import <gTarAppCore/UserSong.h>
+#import "UserSong.h"
 #import "InAppPurchaseManager.h"
-#import <gTarAppCore/CloudResponse.h>
+#import "CloudResponse.h"
 
 #import "SongSelectionViewController.h"
 
@@ -105,7 +105,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return;
         } break;
         
@@ -121,7 +120,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return;
         } break;
             
@@ -137,7 +135,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return;
         } break;
             
@@ -152,7 +149,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", NULL)
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return;
         } break;
     }
@@ -174,12 +170,12 @@
     [self.layer addSublayer:bottomBorder];
     
     CALayer *borderTitleArtist = [CALayer layer];
-    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 120.0f, 0.0f, 1.0f, 60.0f);
+    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 132.0f, 0.0f, 1.0f, 60.0f);
     borderTitleArtist.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
     [self.layer addSublayer:borderTitleArtist];
     
     CALayer *borderSkill = [CALayer layer];
-    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 60.0f, 0.0f, 1.0f, 60.0f);
+    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 66.0f, 0.0f, 1.0f, 60.0f);
     borderSkill.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
     [self.layer addSublayer:borderSkill];
     
@@ -201,12 +197,12 @@
     if(_userSong.m_title != NULL)
         [_labelSongTitle setText:_userSong.m_title];
     else
-        [_labelSongTitle setText:@"Unkown"];
+        [_labelSongTitle setText:@"Unknown"];
     
     if(_userSong.m_author != NULL)
         [_labelSongArtist setText:_userSong.m_author];
     else
-        [_labelSongArtist setText:@"Unkown"];
+        [_labelSongArtist setText:@"Unknown"];
     
     if ( _userSong.m_difficulty == 0)
         _songSkill.image = [UIImage imageNamed:@"Skill_GREEN.png"];

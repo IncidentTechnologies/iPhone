@@ -34,8 +34,8 @@ typedef enum
 
 @property (nonatomic, readonly) UserRequest * m_userRequest;
 @property (nonatomic, assign) UserResponseStatus m_status;
-@property (nonatomic, retain) NSString * m_statusText;
-@property (nonatomic, retain) NSArray * m_searchResults;
+@property (nonatomic, strong) NSString * m_statusText;
+@property (nonatomic, strong) NSArray * m_searchResults;
 @property (nonatomic, assign) BOOL m_loggedIn;
 
 - (id)initWithUserRequest:(UserRequest*)userRequest;

@@ -14,6 +14,9 @@
 {
     NSArray *_titleArray;
     NSArray *_buttonViews;
+    
+    UIColor * selectedColor;
+    UIColor * deselectedColor;
 }
 
 @end
@@ -41,16 +44,16 @@
         [button removeFromSuperview];
     }
     
-    [_buttonViews release];
-    [_titleArray release];
     
-    [super dealloc];
 }
 
 - (void)layoutSubviews
 {
+    
+    [self initColors];
+    
     // Can't do this in the init, let's do it here
-    self.backgroundColor = [UIColor darkGrayColor];
+    self.backgroundColor = deselectedColor;
     
     //
     // Clean out the old buttons
@@ -60,7 +63,6 @@
         [button removeFromSuperview];
     }
     
-    [_buttonViews release];
     
     //
     // Create the new buttons.
@@ -83,19 +85,20 @@
         // +1 for the border between buttons
         [button setFrame:CGRectMake(i*(width+1), 0, width, height)];
         
-        [button setBackgroundColor:[UIColor lightGrayColor]];
+        [button setBackgroundColor:selectedColor];
         
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         button.titleLabel.numberOfLines = 2;
+        [button.titleLabel setFont:[UIFont fontWithName:@"Avenir Next" size:20.0]];
         
         if ( [title isKindOfClass:[NSAttributedString class]] == YES )
         {
-            NSMutableAttributedString *whiteString = [[[NSMutableAttributedString alloc] initWithAttributedString:title] autorelease];
-            NSMutableAttributedString *grayString = [[[NSMutableAttributedString alloc] initWithAttributedString:title] autorelease];
+            NSMutableAttributedString *whiteString = [[NSMutableAttributedString alloc] initWithAttributedString:title];
+            NSMutableAttributedString *grayString = [[NSMutableAttributedString alloc] initWithAttributedString:title];
             
             [whiteString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0,[whiteString length])];
-            [grayString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(0,[grayString length])];
+            [grayString addAttribute:NSForegroundColorAttributeName value:deselectedColor range:NSMakeRange(0,[grayString length])];
             
             [button setAttributedTitle:whiteString forState:UIControlStateNormal];
             [button setAttributedTitle:grayString forState:UIControlStateHighlighted];
@@ -104,7 +107,7 @@
         {
             [button setTitle:title forState:UIControlStateNormal];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+            [button setTitleColor:deselectedColor forState:UIControlStateHighlighted];
         }
 //        [button setTitleShadowColor:[UIColor grayColor] forState:UIControlStateNormal];
 //        [button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
@@ -129,6 +132,12 @@
     [self setSelectedIndex:_selectedIndex];
 }
 
+- (void)initColors
+{
+    deselectedColor = [UIColor colorWithRed:63/255.0 green:96/255.0 blue:106/255.0 alpha:1.0];
+    selectedColor = [UIColor colorWithRed:110/255.0 green:148/255.0 blue:158/255.0 alpha:1.0];
+}
+
 - (void)setTitles:(NSArray*)titleArray
 {
     if ( [titleArray count] == 0 )
@@ -136,7 +145,7 @@
         return;
     }
     
-    _titleArray = [titleArray retain];
+    _titleArray = titleArray;
     
     [self layoutSubviews];
 }
@@ -160,6 +169,8 @@
         return;
     }
     
+    [self initColors];
+    
     // revert the previous segment
     UIButton * oldButton = [_buttonViews objectAtIndex:_selectedIndex];
     UIButton * newButton = [_buttonViews objectAtIndex:index];
@@ -167,8 +178,8 @@
     [oldButton setEnabled:YES];
     [newButton setEnabled:NO];
     
-    [oldButton setBackgroundColor:[UIColor lightGrayColor]];
-    [newButton setBackgroundColor:[UIColor grayColor]];
+    [oldButton setBackgroundColor:selectedColor];
+    [newButton setBackgroundColor:deselectedColor];
     
     _selectedIndex = index;
 }

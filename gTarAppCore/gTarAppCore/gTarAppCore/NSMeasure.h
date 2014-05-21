@@ -20,7 +20,7 @@
 	
 }
 
-@property (nonatomic, retain) NSArray * m_notes;
+@property (nonatomic, strong) NSArray * m_notes;
 
 @property (nonatomic, assign) double m_startBeat;
 @property (nonatomic, assign) double m_beatCount;

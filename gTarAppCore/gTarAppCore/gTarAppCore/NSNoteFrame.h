@@ -40,5 +40,6 @@
 - (NSNote*)testString:(GtarString)str;
 - (NSNote*)hitTestAndRemoveString:(GtarString)str andFret:(GtarFret)fret;
 - (NSNote*)hitTestAndRemoveStringOnly:(GtarString)str;
+- (void)removeString:(GtarString)str andFret:(GtarFret)fret;
 
 @end

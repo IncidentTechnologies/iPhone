@@ -58,7 +58,6 @@
             
             [self addNote:note];
             
-            [note release];
             
         }
         
@@ -92,14 +91,6 @@
     
 }
 
-- (void)dealloc
-{
-	
-	[m_notes release];
-	
-	[super dealloc];
-	
-}
 
 - (void)addNote:(NSNote*)note
 {

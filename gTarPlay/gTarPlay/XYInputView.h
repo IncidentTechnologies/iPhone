@@ -22,8 +22,8 @@
 	
 }
 
-@property (nonatomic, assign) id<XYInputViewDelegate> m_delegate;
-@property (nonatomic, retain) UIImageView * m_slider;
+@property (nonatomic, weak) id<XYInputViewDelegate> m_delegate;
+@property (nonatomic, strong) UIImageView * m_slider;
 
 - (void)clearSliderFromPosition:(CGPoint)position;
 - (void)setCurrentPosition:(CGPoint)point;

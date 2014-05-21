@@ -9,28 +9,24 @@
 #import "StoreViewController.h"
 #import "InAppPurchaseManager.h"
 
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/CloudResponse.h>
-#import <gTarAppCore/CloudRequest.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/UserSongs.h>
-#import <gTarAppCore/XmlDom.h>
+#import "CloudController.h"
+#import "CloudResponse.h"
+#import "CloudRequest.h"
+#import "UserSong.h"
+#import "UserSongs.h"
+#import "XmlDom.h"
 #import <gTarAppCore/UserController.h>
-#import <gTarAppCore/FileController.h>
+#import "FileController.h"
 
 #import "SongSelectionViewController.h"
 #import "StoreSongListCell.h"
 
-#import "PlayViewController.h"
-#import "PlayerViewController.h"
-#import "SlidingModalViewController.h"
-#import "VolumeViewController.h"
-#import "SlidingInstrumentViewController.h"
 
 #import "UIButton+Gtar.h"
 
 #define kStoreSongCacheKey @"StoreSongArray"
 
+extern GtarController * g_gtarController;
 extern CloudController *g_cloudController;
 extern FileController *g_fileController;
 
@@ -57,7 +53,9 @@ extern FileController *g_fileController;
 
 @implementation StoreViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize g_soundMaster;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster *)soundMaster
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
@@ -73,10 +71,13 @@ extern FileController *g_fileController;
         if ( songArrayData == nil )
             storeSongArray = [[NSArray alloc] init];
         else
-            storeSongArray = [[NSKeyedUnarchiver unarchiveObjectWithData:songArrayData] retain];
+            storeSongArray = [NSKeyedUnarchiver unarchiveObjectWithData:songArrayData];
         
-        m_storeSongArray = [storeSongArray retain];
-        m_displayedStoreSongArray = [storeSongArray retain];
+        g_soundMaster = soundMaster;
+        [g_soundMaster start];
+        
+        m_storeSongArray = storeSongArray;
+        m_displayedStoreSongArray = storeSongArray;
         
         m_storeSortOrder.type = SORT_TITLE;
         m_storeSortOrder.fAscending = FALSE;
@@ -126,12 +127,12 @@ extern FileController *g_fileController;
     [_colBar.layer addSublayer:bottomBorderHeader];
     
     CALayer *borderTitleArtist = [CALayer layer];
-    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 120.0f, 0.0f, 1.0f, _colBar.frame.size.height);
+    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 132.0f, 0.0f, 1.0f, _colBar.frame.size.height);
     borderTitleArtist.backgroundColor = [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f].CGColor;
     [_colBar.layer addSublayer:borderTitleArtist];
     
     CALayer *borderSkill = [CALayer layer];
-    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 60.0f, 0.0f, 1.0f, _colBar.frame.size.height);
+    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 66.0f, 0.0f, 1.0f, _colBar.frame.size.height);
     borderSkill.backgroundColor = [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f].CGColor;
     [_colBar.layer addSublayer:borderSkill];
     
@@ -145,6 +146,8 @@ extern FileController *g_fileController;
     // iOS 7 issue
     if([_pullToUpdateSongList respondsToSelector:@selector(setSeparatorInset:)])
         _pullToUpdateSongList.separatorInset = UIEdgeInsetsZero;
+    
+    [self updateTopHeaderTextFormatting];
     
     // InAppPurchaseManager is a Singleton
     InAppPurchaseManager* purchaseManager = [InAppPurchaseManager sharedInstance];
@@ -168,7 +171,8 @@ extern FileController *g_fileController;
     }
     
     // Set up song options
-    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil];
+    _playerViewController = [[PlayerViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
+    [_playerViewController setDelegate:self];
     [_playerViewController attachToSuperview:_songPlayerView];
     
     _currentDifficulty = 0;
@@ -181,18 +185,23 @@ extern FileController *g_fileController;
     
     if ( _volumeViewController == nil )
     {
-        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil];
+        _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster isInverse:NO];
         [_volumeViewController attachToSuperview:_songOptionsModal.contentView withFrame:_volumeView.frame];
     }
     
     if ( _instrumentViewController == nil )
     {
         _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
+        [_instrumentViewController setDelegate:self];
         [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
+    
+    [g_gtarController addObserver:self];
 }
 
 - (void)localizeViews {
+    
+    
     [_buttonTitleArtist setTitle:NSLocalizedString(@"TITLE & ARTIST", NULL) forState:UIControlStateNormal];
     [_buttonSkill setTitle:NSLocalizedString(@"SKILL", NULL) forState:UIControlStateNormal];
     [_buttonBuy setTitle:NSLocalizedString(@"BUY", NULL) forState:UIControlStateNormal];
@@ -203,7 +212,7 @@ extern FileController *g_fileController;
     
     [_startButton setTitle:NSLocalizedString(@"PRESS TO PLAY", NULL) forState:UIControlStateNormal];
     
-    _backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
+    //_backLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Back", NULL)];
     _shopLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Shop", NULL)];
 }
 
@@ -222,6 +231,16 @@ extern FileController *g_fileController;
     }
 }
 
+- (void)dealloc
+{
+    [g_gtarController removeObserver:self];
+    
+    // Turn off all LEDs
+    if(g_gtarController.connected){
+        [g_gtarController turnOffAllLeds];
+    }
+}
+
 #pragma mark - Button Event Handlers
 
 - (IBAction)onBackButtonTouchUpInside:(id)sender
@@ -234,7 +253,17 @@ extern FileController *g_fileController;
     [_playerViewController endPlayback];
     
     [self dismissViewControllerAnimated:NO completion:nil];
-    [self startSong:_currentUserSong withDifficulty:_currentDifficulty];
+    
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:NO];
+}
+
+- (IBAction)practiceButtonClicked:(id)sender
+{
+    [_playerViewController endPlayback];
+    
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:YES];
 }
 
 - (IBAction)closeModalButtonClicked:(id)sender
@@ -339,17 +368,17 @@ extern FileController *g_fileController;
 
 #pragma mark - ViewController stuff
 
-- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty
+- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty practiceMode:(BOOL)practiceMode
 {
-    
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil];
+    // TODO: pass gTarController
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected practiceMode:practiceMode];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.
     NSString *songString = (NSString *)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     playViewController.userSong = userSong;
-    playViewController.userSong.m_xmlDom = [[[XmlDom alloc] initWithXmlString:songString] autorelease];
+    playViewController.userSong.m_xmlDom = [[XmlDom alloc] initWithXmlString:songString];
     
     if ( difficulty == 0 )
     {
@@ -370,29 +399,29 @@ extern FileController *g_fileController;
     }
     
     [self.navigationController pushViewController:playViewController animated:YES];
-    [playViewController release];
 }
 
 #pragma mark - Store List Sorting
 -(void)updateTopHeaderTextFormatting
 {
     NSUInteger startRangeTitleArtist = 0, rangeLengthTitleArtist = 0;
+    NSString * title = NSLocalizedString(@"TITLE", NULL);
+    NSString * artist = NSLocalizedString(@"ARTIST", NULL);
     
     if(m_storeSortOrder.type == SORT_ARTIST) {
-        startRangeTitleArtist = 7;
-        rangeLengthTitleArtist = 7;
+        startRangeTitleArtist = [title length]+3;
+        rangeLengthTitleArtist = [artist length];
     }
     else if(m_storeSortOrder.type == SORT_TITLE) {
         startRangeTitleArtist = 0;
-        rangeLengthTitleArtist = 6;
+        rangeLengthTitleArtist = [title length];
     }
     
     // Set the new text
     if([_buttonTitleArtist respondsToSelector:@selector(setAttributedTitle:forState:)])
     {
-        const CGFloat fontSize = 15;
-        UIFont *boldFont = [UIFont boldSystemFontOfSize:fontSize];
-        UIFont *regularFont = [UIFont systemFontOfSize:fontSize];
+        UIFont *boldFont = [UIFont fontWithName:@"AvenirNext-Bold" size:15.0];
+        UIFont *regularFont = [UIFont fontWithName:@"Avenir Next" size:15.0];
         UIColor *foregroundColor = [UIColor whiteColor];
         
         // Create the attributes
@@ -401,20 +430,20 @@ extern FileController *g_fileController;
                                foregroundColor, NSForegroundColorAttributeName, nil];
         
         NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  boldFont, NSFontAttributeName, nil];
+                                  boldFont, NSFontAttributeName, foregroundColor, NSForegroundColorAttributeName, nil];
         
         const NSRange rangeTitleArtist = NSMakeRange(startRangeTitleArtist, rangeLengthTitleArtist);
         const NSRange rangeSkill = NSMakeRange(0, (m_storeSortOrder.type == SORT_SKILL) ? 5 : 0);
         const NSRange rangeBuy = NSMakeRange(0, (m_storeSortOrder.type == SORT_COST) ? 3 : 0);
         
         // Create the attributed string (text + attributes)
-        NSMutableAttributedString *attributedTextTitleArtist = [[NSMutableAttributedString alloc] initWithString:@"TITLE & ARTIST" attributes:attrs];
+        NSMutableAttributedString *attributedTextTitleArtist = [[NSMutableAttributedString alloc] initWithString:[[title stringByAppendingString:@" & "] stringByAppendingString:artist] attributes:attrs];
         [attributedTextTitleArtist setAttributes:subAttrs range:rangeTitleArtist];
         
-        NSMutableAttributedString *attributedTextSkill = [[NSMutableAttributedString alloc] initWithString:@"SKILL" attributes:attrs];
+        NSMutableAttributedString *attributedTextSkill = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"SKILL", NULL) attributes:attrs];
         [attributedTextSkill setAttributes:subAttrs range:rangeSkill];
         
-        NSMutableAttributedString *attributedTextBuy = [[NSMutableAttributedString alloc] initWithString:@"BUY" attributes:attrs];
+        NSMutableAttributedString *attributedTextBuy = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"BUY", NULL) attributes:attrs];
         [attributedTextBuy setAttributes:subAttrs range:rangeBuy];
         
         [_buttonTitleArtist setAttributedTitle:attributedTextTitleArtist forState:UIControlStateNormal];
@@ -423,9 +452,9 @@ extern FileController *g_fileController;
     }
     else
     {
-        [_buttonTitleArtist setTitle:@"TITLE & ARTIST" forState:UIControlStateNormal];
-        [_buttonSkill setTitle:@"SKILL" forState:UIControlStateNormal];
-        [_buttonBuy setTitle:@"BUY" forState:UIControlStateNormal];
+        [_buttonTitleArtist setTitle:NSLocalizedString(@"TITLE & ARTIST", NULL) forState:UIControlStateNormal];
+        [_buttonSkill setTitle:NSLocalizedString(@"SKILL", NULL) forState:UIControlStateNormal];
+        [_buttonBuy setTitle:NSLocalizedString(@"BUY", NULL) forState:UIControlStateNormal];
     }
 }
 
@@ -489,15 +518,6 @@ extern FileController *g_fileController;
     [self refreshDisplayedStoreSongList];
 }
 
-- (void)dealloc
-{
-    [m_storeSongArray release];
-    
-    [_buttonGetProductList release];
-    [_pullToUpdateSongList release];
-    [_buttonGetServerSongList release];
-    [super dealloc];
-}
 
 - (void)refreshSongList
 {
@@ -529,20 +549,19 @@ extern FileController *g_fileController;
 
 - (void)setStoreSongArray:(NSArray *)storeSongArray
 {
-    [m_storeSongArray autorelease];
-    m_storeSongArray = [storeSongArray retain];
+    m_storeSongArray = storeSongArray;
     
     [self refreshDisplayedStoreSongList];
 }
 
 - (void)refreshDisplayedStoreSongList
 {
-    [m_displayedStoreSongArray autorelease];
+    //[m_displayedStoreSongArray autorelease];
     
     if ( m_fSearching == TRUE )
-        m_displayedStoreSongArray = [m_searchedStoreSongArray retain];
+        m_displayedStoreSongArray = m_searchedStoreSongArray;
     else
-        m_displayedStoreSongArray = [m_storeSongArray retain];
+        m_displayedStoreSongArray = m_storeSongArray;
 
     
     [self sortSongList];
@@ -556,7 +575,9 @@ extern FileController *g_fileController;
         return;
     
     _currentUserSong = userSong;
+    [_practiceButton startActivityIndicator];
     [_startButton startActivityIndicator];
+    [_startButton setImage:nil forState:UIControlStateNormal];
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     _playerViewController.userSong = userSong;
@@ -570,12 +591,18 @@ extern FileController *g_fileController;
     
     _playerViewController.loadedInvocation = invocation;
     
+    // Disable instrument menu until instrument has loaded
+    [_instrumentButton setEnabled:NO];
+    
     [self presentViewController:_songOptionsModal animated:YES completion:nil];
 }
 
 - (void)playerLoaded
 {
+    [_instrumentButton setEnabled:YES];
+    [_practiceButton stopActivityIndicator];
     [_startButton stopActivityIndicator];
+    [_startButton setImage:[UIImage imageNamed:@"PlayButtonVideo.png"] forState:UIControlStateNormal];
 }
 
 #pragma mark - Sort, Search
@@ -587,19 +614,19 @@ extern FileController *g_fileController;
     switch (m_storeSortOrder.type)
     {
         case SORT_TITLE: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:m_storeSortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_title" ascending:m_storeSortOrder.fAscending];
         } break;
             
         case SORT_ARTIST: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:m_storeSortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_author" ascending:m_storeSortOrder.fAscending];
         } break;
             
         case SORT_SKILL: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_difficulty" ascending:m_storeSortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_difficulty" ascending:m_storeSortOrder.fAscending];
         } break;
             
         case SORT_COST: {
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"m_cost" ascending:m_storeSortOrder.fAscending] autorelease];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"m_cost" ascending:m_storeSortOrder.fAscending];
         } break;
             
         default: break;
@@ -608,8 +635,7 @@ extern FileController *g_fileController;
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [m_displayedStoreSongArray sortedArrayUsingDescriptors:sortDescriptors];
     
-    [m_displayedStoreSongArray autorelease];
-    m_displayedStoreSongArray = [sortedArray retain];
+    m_displayedStoreSongArray = sortedArray;
 }
 
 
@@ -765,8 +791,7 @@ extern FileController *g_fileController;
         }
     }
     
-    [m_searchedStoreSongArray release];
-    m_searchedStoreSongArray = [searchResults retain];
+    m_searchedStoreSongArray = searchResults;
 }
 
 -(void) dismissSearchBar
@@ -813,6 +838,35 @@ extern FileController *g_fileController;
         
         NSLog(@"Something bad happened, no data to show");
     }
+}
+
+
+#pragma mark - Sliding Instrument Selector delegate and other audio stuff
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
+{
+    NSLog(@"Song Selection VC: did select instrument %@",instrumentName);
+    [_playerViewController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
+}
+
+- (void)stopAudioEffects
+{
+    NSLog(@"Song Selection View Controller: stop audio effects");
+    
+    [_playerViewController stopAudioEffects];
+}
+
+-(NSInteger)getSelectedInstrumentIndex
+{
+    NSLog(@"Song Selection View Controller: get selected instrument index");
+    
+    return [_playerViewController getSelectedInstrumentIndex];
+}
+
+-(NSArray *)getInstrumentList
+{
+    NSLog(@"Song Selection View Controller: get instrument list");
+    
+    return [_playerViewController getInstrumentList];
 }
 
 @end

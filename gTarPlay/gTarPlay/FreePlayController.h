@@ -8,12 +8,31 @@
 
 #import <gTarAppCore/MainEventController.h>
 
-#import <AudioController/AudioController.h>
-#import <GtarController/GtarController.h>
+#import "SoundMaster.h"
+#import "GtarController.h"
 
 #import "JamPad.h"
 
+#import "InstrumentsAndEffectsViewController.h"
+#import "LightsViewController.h"
+#import "FPMenuViewController.h"
+#import "VolumeViewController.h"
+
+#import "TransparentAreaView.h"
+#import "CustomComboBox.h"
+#import "RGBColor.h"
+#import "Harmonizer.h"
+
+#import <MediaPlayer/MediaPlayer.h>
+#import <QuartzCore/QuartzCore.h>
+
+#import <gTarAppCore/AppCore.h>
+
+#import "UIView+Gtar.h"
+#import "Mixpanel.h"
+
 #define FREE_PLAY_EFFECT_COUNT 4
+//#define Debug_BUILD 1
 
 
 @class TransparentAreaView;
@@ -21,6 +40,7 @@
 @class RGBColor;
 @class Harmonizer;
 
+/*
 typedef enum
 {
     LEDTouchGeneral,
@@ -64,8 +84,9 @@ typedef enum
     // KEEP AT END OF LIST!
     NUM_LEDLoop_ENTRIES // keep track of the number of entries in this enum
 } LEDLoop;
+ */
 
-@interface FreePlayController: MainEventController <GtarControllerObserver, XYInputViewDelegate>
+@interface FreePlayController: MainEventController <GtarControllerObserver, XYInputViewDelegate, LightsViewDelegate, FPMenuDelegate>
 {
     IBOutlet UIActivityIndicatorView * m_activityIndicatorView;
     IBOutlet UIView * m_connectingView;
@@ -84,64 +105,66 @@ typedef enum
 }
 
 
-@property (retain, nonatomic) IBOutlet JamPad *m_jamPad;
-@property (retain, nonatomic) IBOutlet UISlider *m_wetSlider;
-@property (retain, nonatomic) IBOutlet UILabel *m_currentEffectName;
+@property (strong, nonatomic) IBOutlet JamPad *m_jamPad;
+@property (strong, nonatomic) IBOutlet UISlider *m_wetSlider;
+@property (strong, nonatomic) IBOutlet UILabel *m_currentEffectName;
 
 
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView * m_activityIndicatorView;
-@property (nonatomic, retain) IBOutlet UIView * m_connectingView;
-@property (retain, nonatomic) IBOutlet UILabel *m_xParamLabel;
-@property (retain, nonatomic) IBOutlet UILabel *m_yParamLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView * m_activityIndicatorView;
+@property (nonatomic, strong) IBOutlet UIView * m_connectingView;
+@property (strong, nonatomic) IBOutlet UILabel *m_xParamLabel;
+@property (strong, nonatomic) IBOutlet UILabel *m_yParamLabel;
 
-@property (retain, nonatomic) IBOutlet UIView *m_effectsView;
-@property (retain, nonatomic) IBOutlet UITableView *m_effectsScroll;
+@property (strong, nonatomic) IBOutlet UIView *m_effectsView;
+@property (strong, nonatomic) IBOutlet UITableView *m_effectsScroll;
 
-@property (retain, nonatomic) IBOutlet TransparentAreaView *m_effectsTab;
-@property (retain, nonatomic) IBOutlet UIButton *m_effect1OnOff;
-@property (retain, nonatomic) IBOutlet UIButton *m_effect1Select;
-@property (retain, nonatomic) IBOutlet UILabel *m_effect1Name;
-@property (retain, nonatomic) IBOutlet UIButton *m_effect2OnOff;
-@property (retain, nonatomic) IBOutlet UIButton *m_effect2Select;
-@property (retain, nonatomic) IBOutlet UILabel *m_effect2Name;
-@property (retain, nonatomic) IBOutlet UIButton *m_effect3OnOff;
-@property (retain, nonatomic) IBOutlet UIButton *m_effect3Select;
-@property (retain, nonatomic) IBOutlet UILabel *m_effect3Name;
-@property (retain, nonatomic) IBOutlet UIButton *m_effect4OnOff;
-@property (retain, nonatomic) IBOutlet UIButton *m_effect4Select;
-@property (retain, nonatomic) IBOutlet UILabel *m_effect4Name;
+@property (strong, nonatomic) IBOutlet TransparentAreaView *m_effectsTab;
+@property (strong, nonatomic) IBOutlet UIButton *m_effect1OnOff;
+@property (strong, nonatomic) IBOutlet UIButton *m_effect1Select;
+@property (strong, nonatomic) IBOutlet UILabel *m_effect1Name;
+@property (strong, nonatomic) IBOutlet UIButton *m_effect2OnOff;
+@property (strong, nonatomic) IBOutlet UIButton *m_effect2Select;
+@property (strong, nonatomic) IBOutlet UILabel *m_effect2Name;
+@property (strong, nonatomic) IBOutlet UIButton *m_effect3OnOff;
+@property (strong, nonatomic) IBOutlet UIButton *m_effect3Select;
+@property (strong, nonatomic) IBOutlet UILabel *m_effect3Name;
+@property (strong, nonatomic) IBOutlet UIButton *m_effect4OnOff;
+@property (strong, nonatomic) IBOutlet UIButton *m_effect4Select;
+@property (strong, nonatomic) IBOutlet UILabel *m_effect4Name;
 
-@property (retain, nonatomic) IBOutlet TransparentAreaView *m_instrumentsTab;
-@property (retain, nonatomic) IBOutlet CustomComboBox *m_instrumentsScroll;
+@property (strong, nonatomic) IBOutlet TransparentAreaView *m_instrumentsTab;
+@property (strong, nonatomic) IBOutlet CustomComboBox *m_instrumentsScroll;
 
 
-@property (retain, nonatomic) IBOutlet TransparentAreaView *m_menuTab;
-@property (retain, nonatomic) IBOutlet UISlider *m_toneSlider;
-@property (nonatomic, retain) IBOutlet UIView * m_volumeView;
-@property (retain, nonatomic) IBOutlet UISlider *m_lineOutVolumeSlider;
-@property (retain, nonatomic) IBOutlet UIButton *m_audioRouteSwitch;
+//@property (retain, nonatomic) IBOutlet TransparentAreaView *m_menuTab;
+//@property (retain, nonatomic) IBOutlet UISlider *m_toneSlider;
+//@property (nonatomic, retain) IBOutlet UIView * m_volumeView;
+//@property (retain, nonatomic) IBOutlet UISlider *m_lineOutVolumeSlider;
+//@property (retain, nonatomic) IBOutlet UIButton *m_audioRouteSwitch;
 @property (assign) BOOL m_bSpeakerRoute;
 
 // LED light tab
-@property (retain, nonatomic) IBOutlet TransparentAreaView *m_LEDTab;
-@property (retain, nonatomic) IBOutlet UIView *m_LEDGeneralSurface;
-@property (retain, nonatomic) IBOutlet UIView *m_LEDFretSurface;
-@property (retain, nonatomic) IBOutlet UIView *m_LEDStringSurface;
-@property (retain, nonatomic) IBOutlet UIView *m_LEDAllSurface;
+@property (strong, nonatomic) IBOutlet TransparentAreaView *m_LEDTab;
+@property (strong, nonatomic) IBOutlet UIView *m_LEDGeneralSurface;
+@property (strong, nonatomic) IBOutlet UIView *m_LEDFretSurface;
+@property (strong, nonatomic) IBOutlet UIView *m_LEDStringSurface;
+@property (strong, nonatomic) IBOutlet UIView *m_LEDAllSurface;
 @property (assign, nonatomic) LEDTouchArea m_LEDTouchArea;
 @property (assign, nonatomic) CGPoint m_lastLEDTouch;
 @property (assign, nonatomic) LEDMode m_LEDMode;
 @property (assign, nonatomic) LEDColorMode m_LEDColorMode;
-@property (retain, nonatomic) NSArray *m_colors;
+@property (strong, nonatomic) NSArray *m_colors;
 @property (assign, nonatomic) NSInteger m_currentColorIndex;
 @property (assign, nonatomic) LEDShape m_LEDShape;
 @property (assign, nonatomic) LEDLoop m_LEDLoop;
-@property (retain, nonatomic) NSTimer *m_LEDTimer;
+@property (strong, nonatomic) NSTimer *m_LEDTimer;
 
 // Harmonizer
-@property (retain, nonatomic) Harmonizer *m_harmonizer;
+@property (strong, nonatomic) Harmonizer *m_harmonizer;
 @property (assign, nonatomic) NSInteger m_harmonizerValue;
-@property (retain, nonatomic) IBOutlet UIButton *m_scaleSwitch;
+@property (strong, nonatomic) IBOutlet UIButton *m_scaleSwitch;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster *)soundMaster;
 
 - (void)handleResignActive;
 - (void)handleBecomeActive;

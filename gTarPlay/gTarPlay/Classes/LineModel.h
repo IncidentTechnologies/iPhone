@@ -10,9 +10,12 @@
 
 @interface LineModel : Model
 {
-
+    CGSize m_size;
 }
 
+
+- (CGPoint)getCenter;
+- (CGSize)getSize;
 - (id)initWithCenter:(CGPoint)center andSize:(CGSize)size andColor:(GLubyte*)color;
 - (id)initWithCenter:(CGPoint)center andSize:(CGSize)size andColor:(GLubyte*)color andImage:(UIImage*)image;
 

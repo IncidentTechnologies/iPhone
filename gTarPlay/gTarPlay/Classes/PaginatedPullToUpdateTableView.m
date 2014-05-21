@@ -18,11 +18,12 @@
 {
     [super sharedInit];
     
-    UIView * footer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, FOOTER_HEIGHT)] autorelease];
+    UIView * footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, FOOTER_HEIGHT)];
     
     m_footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_MARGIN, 0, self.frame.size.width - LEFT_MARGIN, FOOTER_HEIGHT)];
-    [m_footerLabel setText:@"Updating..."];
+    [m_footerLabel setText:NSLocalizedString(@"Updating...", NULL)];
     [m_footerLabel setTextColor:[UIColor grayColor]];
+    [m_footerLabel setFont:[UIFont fontWithName:@"Avenir Next" size:15.0]];
     
     m_activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [m_activityView setFrame:CGRectMake(0, 0, LEFT_MARGIN, FOOTER_HEIGHT)];
@@ -36,12 +37,6 @@
     [self disablePagination];
 }
 
-- (void)dealloc
-{
-    [m_footerLabel release];
-    [m_activityView release];
-    [super dealloc];
-}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -14,7 +14,7 @@
 
 - (void)addShadow
 {
-    [self addShadowWithRadius:7.0];
+    [self addShadowWithRadius:5.0];
 }
 
 - (void)addShadowWithRadius:(CGFloat)radius

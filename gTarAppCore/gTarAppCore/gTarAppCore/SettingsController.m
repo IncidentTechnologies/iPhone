@@ -22,7 +22,7 @@
 	if ( self )
 	{
 		
-		m_name = [name retain];
+		m_name = name;
 		
 	}
 	
@@ -51,21 +51,12 @@
 	if ( sc == nil )
 	{
 		sc = [[self alloc] initWithName:name];
-		[sc autorelease];
 	}
 
 	return sc;
 
 }
 
-- (void)dealloc
-{
-	
-	[m_name release];
-	
-	[super dealloc];
-	
-}
 
 - (BOOL)saveArchive
 {
@@ -101,7 +92,7 @@
 	if ( self )
 	{
 		
-		m_name = [[coder decodeObjectForKey:@"Name"] retain];
+		m_name = [coder decodeObjectForKey:@"Name"];
 		
 	}
 	

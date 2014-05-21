@@ -23,19 +23,13 @@
 		
 		[self changeColor:color];
 		
-		m_texture = [texture retain];
+		m_texture = texture;
 	}
 	
 	return self;
 	
 }
 
-- (void)dealloc
-{	
-	[m_texture release];
-	
-	[super dealloc];	
-}
 
 - (void)draw
 {

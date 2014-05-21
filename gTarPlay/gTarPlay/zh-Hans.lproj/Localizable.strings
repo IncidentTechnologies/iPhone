@@ -5,47 +5,48 @@
 
 // Title Screen
 "SIGN IN" = "登录";
+"SIGN UP" = "报名";
 "VIDEO" = "视频";
 "INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
 "PLAY" = "演奏";
 "FREE PLAY" = "免费演奏";
 "STORE" = "商店";
-"SIGN IN" = "登录";
-"SIGN UP" = "报名";
+"Sign In with Facebook" = "Sign In with Facebook";
 "Username" = "用户名称";
 "Password" = "密码";
-"Email (optional)" = "邮件（可选";
+"Email" = "邮件";
 "Please Connect Your gTar" = "请联接你的gTar";
 "Profile" = "简介";
 "Please connect your gTar to sign up for an account." = "请联接gTar以登录账户";
-"Invalid Username" = "无效用户名";
 "Username must begin with a letter" = "用户名须以字母开头";
-"Invalid Password" = "无效密码";
 "Password must be at least 8 letters" = "密码最少须8位字母";
 "Invalid Email" = "无效邮件";
 "Invalid Username" = "无效用户名";
 "Invalid Password" = "无效密码";
+"Invalid login credentials" = "无效登录";
 "Facebook failed to login" = "无法注册Facebook";
 
 // ActivityFeedCell
 "Someone" = "某人";
 "Jamed out" = "卡住了";
-"Played %@" = "在….已完成%";
+"Played %@" = "演奏%@";
 
 // Song Selection Controller
 "Easy" = "简单";
 "Medium" = "中等";
 "Hard" = "困难";
-"PRESS TO PLAY" = "点按以开始";
+"PRESS TO PLAY" = "演奏";
+"PRACTICE" = "实践";
 "SKILL" = "技能";
 "SCORE" = "得分";
 "ARTIST" = "艺术家";
 "TITLE" = "标题";
 "Back" = "返回";
-"Song List" = "歌单";
+"BACK" = "返回";
+"Song List" = "歌曲";
 
 // Play View
-"SAVE & FINISH" = "保存并结束";
+"SAVE & FINISH" = "完";
 "SCORE" = "得分";
 "OUTPUT" = "输出";
 "AUX" = "切换";
@@ -53,14 +54,29 @@
 "POST TO FEED" = "发布给";
 "OFF" = "关闭";
 "ON" = "打开";
-"Easy" = "简单";
 "Quit" = "推出";
 "Restart" = "重新开始";
+"RESTART" = "重新开始";
+"SCORE" = "得分";
+"BEST SESSION" = "最好的会话";
+"TOTAL" = "总";
+"NOTES HIT" = "弹奏的音符";
+"IN A ROW" = "连续";
+"ACCURACY" = "准确性";
+"REPEAT" = "重复";
+"TEMPO" = "拍子";
+"METRONOME" = "节拍器";
+"Metronome" = "节拍器";
+"NONE" = "零";
 
 // Social View
 "Logout" = "注销";
 "FOLLOW" = "跟随";
 "FOLLOWING" = "跟随者";
+"SESSIONS" = "部分";
+"FOLLOWERS" = "跟进人";
+"Follow" = "跟随";
+"Following" = "跟随者";
 
 // Freeplay
 "ALL" = "全部";
@@ -71,10 +87,16 @@
 "EXIT" = "退出";
 "TONE" = "定调";
 "SLIDING" = "滑行";
-"EXIT TO MAIN" = "退出至主界面";
+"Chorus" = "副歌";
+"Echo" = "回音";
+"Reverb" = "反响";
+"Distortion" = "失真";
+"Single" = "单一";
+"2 X 2" = "2 X 2";
+"Continuous" = "持续";
 
 // Instruments
-"Electric" = "电吉他";
+"Electric Guitar" = "电吉他";
 "Acoustic Guitar" = "原声吉他";
 "Rock Guitar" = "摇滚吉他";
 "Upright Bass" = "低音贝斯";
@@ -86,18 +108,7 @@
 "Carl's Synth" = "卡尔合成器";
 "Droplet" = "水滴";
 "Square" = "广场";
-
-// More
-"LOG IN" = "登录";
-"Sign In" = "登录";
-"Sign Up" = "报名";
-"OR" = "或者";
-"SESSIONS" = "部分";
-"FOLLOWERS" = "跟进人";
-"Chorus" = "副歌";
-"Echo" = "回音";
-"Reverb" = "反响";
-"Distortion" = "失真";
+"Warm Analogue" = "温暖的模拟";
 
 // Time formatter
 "The Future" = "将来";
@@ -116,7 +127,7 @@
 
 // Store
 "TITLE & ARTIST" = "歌曲名& 艺术家";
-"99¢" = "99美分";
+"99¢" = "¥6";
 "FREE" = "免费";
 "BUY" = "购买";
 "Shop" = "商店";

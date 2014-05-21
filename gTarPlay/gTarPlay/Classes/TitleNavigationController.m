@@ -9,17 +9,16 @@
 #import <QuartzCore/QuartzCore.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-#import <gTarAppCore/CloudController.h>
-#import <gTarAppCore/FileController.h>
+#import "CloudController.h"
+#import "FileController.h"
 #import <gTarAppCore/UserController.h>
 #import <gTarAppCore/UserResponse.h>
 #import <gTarAppCore/UserEntry.h>
-//#import <gTarAppCore/TelemetryController.h>
-#import <gTarAppCore/UserSongSession.h>
-#import <gTarAppCore/UserSong.h>
-#import <gTarAppCore/UserSongSessions.h>
-#import <gTarAppCore/UserProfile.h>
-#import <gTarAppCore/CloudResponse.h>
+#import "UserSongSession.h"
+#import "UserSong.h"
+#import "UserSongSessions.h"
+#import "UserProfile.h"
+#import "CloudResponse.h"
 #import <gTarAppCore/Facebook.h>
 
 #import "TitleNavigationController.h"
@@ -97,15 +96,28 @@ extern Facebook * g_facebook;
 
 @implementation TitleNavigationController
 
+@synthesize g_soundMaster;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if ( self )
     {
-        // Custom initialization
+        
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //if(g_soundMaster != nil){
+    //    [self releaseSoundMaster];
+    //}
+    
+    if(g_soundMaster == nil){
+        [self performSelectorInBackground:@selector(initSoundMaster) withObject:nil];
+    }
 }
 
 - (void)viewDidLoad
@@ -121,6 +133,12 @@ extern Facebook * g_facebook;
     g_facebook = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
+    // draw profile label button
+    _profileLabel = [[UILabel alloc] initWithFrame:CGRectMake(53, 1, 151, 45)];
+    [_profileLabel setTextColor:[UIColor whiteColor]];
+    [_profileLabel setFont:[UIFont fontWithName:@"Avenir Next" size:17.0]];
+    [_profileButton addSubview:_profileLabel];
+    
     [self localizeView];
     
     // See if there are any cached credentials
@@ -132,22 +150,20 @@ extern Facebook * g_facebook;
     
     // Add shadows
     [_topBarView addShadow];
+        
     [_gtarLogoImage addShadow];
-    [_loggedoutSigninButton addShadow];
-    [_loggedoutSignupButton addShadow];
-    [_gatekeeperVideoButton addShadow];
-    [_gatekeeperSigninButton addShadow];
-    [_menuPlayButton addShadow];
-    [_menuFreePlayButton addShadow];
-    [_menuStoreButton addShadow];
+    //[_loggedoutSigninButton addShadow];
+    //[_loggedoutSignupButton addShadow];
+    //[_gatekeeperVideoButton addShadow];
+    //[_gatekeeperSigninButton addShadow];
+    //[_menuPlayButton addShadow];
+    //[_menuFreePlayButton addShadow];
+    //[_menuStoreButton addShadow];
     
     // Hide anything that needs hiding
-    [[_profileButton superview] setHidden:YES];
+    //[[_profileButton superview] setHidden:YES];
+    [_profileButton setHidden:YES];
     [_profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    
-    // Set up the modals
-    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil];
-    _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
     
     [_feedSelectorControl setTitles:[NSArray arrayWithObjects:NSLocalizedString(@"FRIENDS", NULL), NSLocalizedString(@"GLOBAL", NULL), nil]];
     
@@ -156,9 +172,8 @@ extern Facebook * g_facebook;
     
     if ( [entry.m_followsSessionsList count] > 0 )
     {
-        [_friendFeed release];
         
-        _friendFeed = [entry.m_followsSessionsList retain];
+        _friendFeed = entry.m_followsSessionsList;
         
         // If the newest session is greater that 1 week ago, show the global feed
         UserSongSession * recentSession = [_friendFeed objectAtIndex:0];
@@ -189,19 +204,33 @@ extern Facebook * g_facebook;
     [g_gtarController addObserver:self];
 }
 
+- (void)initSoundMaster
+{
+    g_soundMaster = [[SoundMaster alloc] init];
+    [_menuFreePlayButton startActivityIndicator];
+    [g_soundMaster setCurrentInstrument:0 withSelector:@selector(instrumentLoaded:) andOwner:self];
+}
+
+- (void)releaseSoundMaster
+{
+    [g_soundMaster releaseCompletely];
+    g_soundMaster = nil;
+}
+
 - (void)localizeView {
     // Gate keeper
-    [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
+    [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN UP", NULL) forState:UIControlStateNormal];
     [_gatekeeperVideoButton setTitle:NSLocalizedString(@"VIDEO", NULL) forState:UIControlStateNormal];
     [_gatekeeperWebsiteButton setTitle:NSLocalizedString(@"INCIDENTGTAR.COM", NULL) forState:UIControlStateNormal];
     
-    [_signinButton setTitle:NSLocalizedString(@"Sign In", NULL) forState:UIControlStateNormal];
-    [_signupButton setTitle:NSLocalizedString(@"Sign Up", NULL) forState:UIControlStateNormal];
-    _signUpOrLabel.text = NSLocalizedString(@"OR", NULL);
-    _signInOrLabel.text = NSLocalizedString(@"OR", NULL);
+    [_signinButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
+    [_signupButton setTitle:NSLocalizedString(@"SIGN UP", NULL) forState:UIControlStateNormal];
+    //_signUpOrLabel.text = NSLocalizedString(@"OR", NULL);
+    //_signInOrLabel.text = NSLocalizedString(@"OR", NULL);
     
-    _signInLoginLabel.text = NSLocalizedString(@"LOG IN", NULL);
-    _signUpLoginLabel.text = NSLocalizedString(@"LOG IN", NULL);
+    _signInLoginLabel.text = NSLocalizedString(@"Sign In with Facebook", NULL);
+    _signUpLoginLabel.text = NSLocalizedString(@"Sign In with Facebook", NULL);
+    
     
     [_menuPlayButton setTitle:NSLocalizedString(@"PLAY", NULL) forState:UIControlStateNormal];
     [_menuFreePlayButton setTitle:NSLocalizedString(@"FREE PLAY", NULL) forState:UIControlStateNormal];
@@ -215,15 +244,17 @@ extern Facebook * g_facebook;
  
     [_signupUsernameText setPlaceholder:NSLocalizedString(@"Username", NULL)];
     [_signupPasswordText setPlaceholder:NSLocalizedString(@"Password", NULL)];
-    [_signupEmailText setPlaceholder:NSLocalizedString(@"Email (optional)", NULL)];
+    [_signupEmailText setPlaceholder:NSLocalizedString(@"Email", NULL)];
     
-    _pleaseConnectLabel.text = NSLocalizedString(@"Please Connect Your gTar", NULL);
-
-    _profileLabel.text = NSLocalizedString(@"Profile", NULL);
+    //_pleaseConnectLabel.text = NSLocalizedString(@"Please Connect Your gTar", NULL);
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    
+    // Set up the modals
+    _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
+    _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
     
     _displayingCell = NO;
     
@@ -254,10 +285,11 @@ extern Facebook * g_facebook;
     }
     else
     {
-        if ( g_gtarController.connected == NO )
+        /*if ( g_gtarController.connected == NO )
         {
             [self swapLeftPanel:_disconnectedGtarLeftPanel];
         }
+         */
         
         // We are logged in
         [g_userController sendPendingUploads];
@@ -271,9 +303,36 @@ extern Facebook * g_facebook;
     UserEntry *loggedInEntry = [g_userController getUserEntry:0];
     UIImage *image = [g_fileController getFileOrReturnNil:loggedInEntry.m_userProfile.m_imgFileId];
     
+    if(loggedInEntry != nil){
+        [_profileLabel setText:loggedInEntry.m_userProfile.m_name];
+    }
+    
     if ( image != nil )
     {
         [_profileButton setImage:image forState:UIControlStateNormal];
+    }
+    
+    [self showHideFreePlay];
+    
+}
+
+-(void)instrumentLoaded:(id)sender
+{
+    [_menuFreePlayButton stopActivityIndicator];
+}
+
+- (void)showHideFreePlay
+{
+    
+    // Show Free Play if/if not standalone
+    if(g_gtarController.connected){
+        [_menuFreePlayButton setHidden:NO];
+        [_menuPlayButton setBounds:CGRectMake(_menuPlayButton.bounds.origin.x,0,_menuPlayButton.bounds.size.width,_menuPlayButton.bounds.size.height)];
+        [_menuStoreButton setBounds:CGRectMake(_menuStoreButton.bounds.origin.x,0,_menuStoreButton.bounds.size.width,_menuStoreButton.bounds.size.height)];
+    }else{
+        [_menuFreePlayButton setHidden:YES];
+        [_menuPlayButton setBounds:CGRectMake(_menuPlayButton.bounds.origin.x,35,_menuPlayButton.bounds.size.width,_menuPlayButton.bounds.size.height)];
+        [_menuStoreButton setBounds:CGRectMake(_menuStoreButton.bounds.origin.x,-35,_menuStoreButton.bounds.size.width,_menuStoreButton.bounds.size.height)];
     }
 }
 
@@ -283,7 +342,6 @@ extern Facebook * g_facebook;
     
     [_currentLeftPanel setFrame:_leftPanel.bounds];
     [_currentRightPanel setFrame:_rightPanel.bounds];
-
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -299,10 +357,13 @@ extern Facebook * g_facebook;
 
 - (void)dealloc
 {
+    
+    //[g_soundMaster releaseAfterUse];
+    
     [_currentLeftPanel removeFromSuperview];
     [_currentRightPanel removeFromSuperview];
     [_fullScreenButton removeFromSuperview];
-    
+    /*
     [_globalFeed release];
     [_friendFeed release];
     
@@ -346,11 +407,11 @@ extern Facebook * g_facebook;
     [_sessionViewController release];
     [_profileButton release];
     
-    [g_facebook release];
+    [g_facebook release];*/
     
     g_facebook = nil;
 
-    [super dealloc];
+    //[super dealloc];
 }
 
 #pragma mark - Notification management
@@ -363,23 +424,23 @@ extern Facebook * g_facebook;
     if ( red )
         _topBarView.backgroundColor = [UIColor redColor];
     else
-        _topBarView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+        _topBarView.backgroundColor = [UIColor colorWithRed:2.0/255.0 green:160.0/255.0 blue:220.0/255.0 alpha:1.0];
 }
 
 - (void)hideNotification {
     [_notificationLabel.superview setHidden:YES];
-    _topBarView.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+    _topBarView.backgroundColor = [UIColor colorWithRed:2.0/255.0 green:160.0/255.0 blue:220.0/255.0 alpha:1.0];
 }
 
 #pragma mark - Button management
 
 - (void)enableButton:(UIButton *)button {
-    button.backgroundColor = [UIColor colorWithRed:2.0/256.0 green:160.0/256.0 blue:220.0/256.0 alpha:1.0];
+    button.backgroundColor = [UIColor colorWithRed:2/255.0 green:160/255.0 blue:220/255.0 alpha:1.0];
     [button setEnabled:YES];
 }
 
 - (void)disableButton:(UIButton *)button {
-    button.backgroundColor = [UIColor colorWithRed:2.0/256.0/2.0 green:160.0/256.0/2.0 blue:220.0/256.0/2.0 alpha:1.0];
+    button.backgroundColor = [UIColor colorWithRed:1/255.0 green:120/255.0 blue:165/255.0 alpha:1.0];
     [button setEnabled:NO];
 }
 
@@ -398,7 +459,7 @@ extern Facebook * g_facebook;
     if ( _videoPreviewImage.image == nil ) {
         NSString *moviePath = [[NSBundle mainBundle] pathForResource:@"MeetChrisVideo" ofType:@"mp4"];
         NSURL *movieURL = [NSURL fileURLWithPath:moviePath];
-        MPMoviePlayerController *mpc = [[[MPMoviePlayerController alloc] initWithContentURL:movieURL] autorelease];
+        MPMoviePlayerController *mpc = [[MPMoviePlayerController alloc] initWithContentURL:movieURL];
         
         mpc.scalingMode = MPMovieScalingModeAspectFit;
         mpc.shouldAutoplay = NO;
@@ -412,21 +473,31 @@ extern Facebook * g_facebook;
 
 - (void)loggedoutScreen {
     [self swapLeftPanel:_loggedoutLeftPanel];
-    [self swapRightPanel:_signinRightPanel];
     
-    [self disableButton:_loggedoutSigninButton];
-    [self enableButton:_loggedoutSignupButton];
+    if(_currentRightPanel != _signupRightPanel && _currentRightPanel != _signinRightPanel){
+        [self swapRightPanel:_signinRightPanel];
+        [self disableButton:_loggedoutSigninButton];
+        [self enableButton:_loggedoutSignupButton];
+    }else if(_currentRightPanel == _signupRightPanel){
+        [self enableButton:_loggedoutSigninButton];
+        [self disableButton:_loggedoutSignupButton];
+    }
+    
     [self hideNotification];
     
-    [[_profileButton superview] setHidden:YES];
+    //[[_profileButton superview] setHidden:YES];
+    [_profileButton setHidden:YES];
 }
 
 - (void)loggedinScreen {
-    if ( g_gtarController.connected == NO )
+    /*if ( g_gtarController.connected == NO )
         [self swapLeftPanel:_disconnectedGtarLeftPanel];
     else
         [self swapLeftPanel:_menuLeftPanel];
+    */
 
+    [self swapLeftPanel:_menuLeftPanel];
+    
     [self swapRightPanel:_feedRightPanel];
     
     [self enableButton:_menuPlayButton];
@@ -435,16 +506,22 @@ extern Facebook * g_facebook;
     
     [self hideNotification];
     
-    [[_profileButton superview] setHidden:NO];
+    //[[_profileButton superview] setHidden:NO];
+    [_profileButton setHidden:NO];
     
     UserEntry *loggedInEntry = [g_userController getUserEntry:0];
     
     UIImage *image = [g_fileController getFileOrReturnNil:loggedInEntry.m_userProfile.m_imgFileId];
     
-    if ( image != nil )
+    if(loggedInEntry != nil){
+        [_profileLabel setText:loggedInEntry.m_userProfile.m_name];
+    }
+    
+    if ( image != nil ){
         [_profileButton setImage:image forState:UIControlStateNormal];
-    else
+    }else{
         [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
+    }
     
     // If we've logged in, regardles of whether the gtar was ever connected, we can act as if it was.
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -460,12 +537,14 @@ extern Facebook * g_facebook;
 }
 
 - (void)profilePicDownloaded:(UIImage *)image {
+    
     [_profileButton setImage:image forState:UIControlStateNormal];
 }
 
 #pragma mark - Panel management
 
 - (void)swapRightPanel:(UIView *)rightPanel {
+    
     [_currentRightPanel removeFromSuperview];
     
     // Resize the subview as appropriate
@@ -497,6 +576,7 @@ extern Facebook * g_facebook;
     [self hideNotification];
     
     [self swapRightPanel:_signinRightPanel];
+    
 }
 
 - (IBAction)loggedoutSignupButtonClicked:(id)sender
@@ -528,9 +608,12 @@ extern Facebook * g_facebook;
     
     [_moviePlayer stop];
     
-    [self displayNotification:NOTIFICATION_GATEKEEPER_SIGNIN turnRed:NO];
+    //[self displayNotification:NOTIFICATION_GATEKEEPER_SIGNIN turnRed:NO];
     
     [self swapRightPanel:_signinRightPanel];
+    [self swapLeftPanel:_loggedoutLeftPanel];
+    [self disableButton:_loggedoutSigninButton];
+    [self enableButton:_loggedoutSignupButton];
 }
 
 - (IBAction)gatekeeperWebsiteButtonClicked:(id)sender
@@ -542,29 +625,26 @@ extern Facebook * g_facebook;
 - (IBAction)menuPlayButtonClicked:(id)sender
 {
     // Start play mode
-    SongSelectionViewController *vc = [[SongSelectionViewController alloc] initWithNibName:nil bundle:nil];
+    SongSelectionViewController *vc = [[SongSelectionViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
 }
 
 - (IBAction)menuFreePlayButtonClicked:(id)sender
 {
     // Start free play mode
-    FreePlayController * fpc = [[FreePlayController alloc] initWithNibName:nil bundle:nil];
+    FreePlayController * fpc = [[FreePlayController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster];
 	
 	[self.navigationController pushViewController:fpc animated:YES];
 	
-	[fpc release];
     
 }
 
 - (IBAction)menuStoreButtonClicked:(id)sender
 {
-    StoreViewController *svc = [[StoreViewController alloc] init];
+    StoreViewController *svc = [[StoreViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster];
     
     [self.navigationController pushViewController:svc animated:YES];
 	
-	[svc release];
     
 }
 
@@ -766,11 +846,10 @@ extern Facebook * g_facebook;
 
 - (IBAction)profileButtonClicked:(id)sender
 {
-    SocialViewController *svc = [[SocialViewController alloc] initWithNibName:nil bundle:nil];
+    SocialViewController *svc = [[SocialViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     
     [self.navigationController pushViewController:svc animated:YES];
     
-    [svc release];
 }
 
 #pragma mark - Movie Playback
@@ -793,7 +872,6 @@ extern Facebook * g_facebook;
                                                   object:nil];
     
     [_moviePlayer.view removeFromSuperview];
-    [_moviePlayer release];
     
     _moviePlayer = nil;
     
@@ -851,6 +929,9 @@ extern Facebook * g_facebook;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [tableView setSeparatorInset:UIEdgeInsetsZero];
+    
     static NSString * CellIdentifier = @"ActivityFeedCell";
 	ActivityFeedCell *tempCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
@@ -984,11 +1065,11 @@ extern Facebook * g_facebook;
     {
         [cell.activityView stopAnimating];
         _displayingCell = NO;
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                          message:@"Cannot connect to server"
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil] autorelease];
+                                               otherButtonTitles:nil];
         [alert show];
 
         return;
@@ -1006,6 +1087,8 @@ extern Facebook * g_facebook;
 
 - (IBAction)textFieldSelected:(id)sender
 {
+    
+    
     // Invalidate this, if its already running
     [_textFieldSliderTimer invalidate];
     
@@ -1013,12 +1096,16 @@ extern Facebook * g_facebook;
     
     CyclingTextField *cyclingTextField = (CyclingTextField *)sender;
     
-    UIView *parent = cyclingTextField.superview;
+    UIView *parent = cyclingTextField.superview.superview;
     
     // Shift the superview up enough so that the textfield is
     // centered in the remaining visble space once the keyboard displays.
     // I kinda just tweaked this value till it looked right.
-    CGFloat delta = cyclingTextField.frame.origin.y - 35;
+    //CGFloat delta = cyclingTextField.frame.origin.y - 35;
+    CGFloat delta = 0;
+    if(cyclingTextField == _signupEmailText){
+        delta = cyclingTextField.superview.frame.origin.y - 35;
+    }
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.2f];
@@ -1061,7 +1148,7 @@ extern Facebook * g_facebook;
     
     _textFieldSliderTimer = nil;
     
-    UIView *parent = cyclingTextField.superview;
+    UIView *parent = cyclingTextField.superview.superview;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.2f];
@@ -1164,20 +1251,28 @@ extern Facebook * g_facebook;
 //    
 //    [self checkCurrentFirmwareVersion];
     
+    [self showHideFreePlay];
+    
+    [g_soundMaster routeToDefault];
+    
+    
 }
 
 - (void)gtarDisconnected
 {
-    if ( g_cloudController.m_loggedIn == YES )
+    /*if ( g_cloudController.m_loggedIn == YES )
     {
         [self swapLeftPanel:_disconnectedGtarLeftPanel];
     }
+     */
     
     // Pull down the firmare view controller after disconnection
     if ( self.presentedViewController == _firmwareViewController )
     {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    
+    [self showHideFreePlay];
 }
 
 #pragma mark - GtarControllerDelegate
@@ -1215,11 +1310,11 @@ extern Facebook * g_facebook;
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Success"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
                                                      message:@"Update Succeeded"
                                                     delegate:nil
                                            cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
     [alert show];
 }
 
@@ -1249,11 +1344,11 @@ extern Facebook * g_facebook;
 {
 //    [self dismissViewControllerAnimated:YES completion:nil];
     
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Error"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                      message:@"Update Failed -- Restart the gTar"
                                                     delegate:nil
                                            cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil] autorelease];
+                                           otherButtonTitles:nil];
     [alert show];
 }
 
@@ -1301,6 +1396,7 @@ extern Facebook * g_facebook;
         }
         else
         {
+            
             [self swapRightPanel:_signinRightPanel];
             
             // Renable buttons
@@ -1408,9 +1504,8 @@ extern Facebook * g_facebook;
     {
         if ( [cloudResponse.m_responseUserSongSessions.m_sessionsArray count] > 0 )
         {
-            [_globalFeed autorelease];
             
-            _globalFeed = [[_globalFeed arrayByAddingObjectsFromArray:cloudResponse.m_responseUserSongSessions.m_sessionsArray] retain];
+            _globalFeed = [_globalFeed arrayByAddingObjectsFromArray:cloudResponse.m_responseUserSongSessions.m_sessionsArray];
             _globalFeedCurrentPage++;
         }
         else
@@ -1459,11 +1554,10 @@ extern Facebook * g_facebook;
             
             [sortedIncoming sortUsingSelector:@selector(compareCreatedNewestFirst:)];
             
-            NSArray *array = [[_friendFeed arrayByAddingObjectsFromArray:sortedIncoming] retain];
+            NSArray *array = [_friendFeed arrayByAddingObjectsFromArray:sortedIncoming];
             
-            [_friendFeed release];
             
-            _friendFeed = [array retain];
+            _friendFeed = array;
             _friendFeedCurrentPage++;
         }
         else
@@ -1713,7 +1807,7 @@ extern Facebook * g_facebook;
 - (void)beginUpdatingFirmware
 {
     // output some messages
-    NSString * msg = [[[NSString alloc] initWithFormat:@"Firmware updating"] autorelease];
+    NSString * msg = [[NSString alloc] initWithFormat:@"Firmware updating"];
     
     NSLog(@"%@", msg);
     
@@ -1735,7 +1829,7 @@ extern Facebook * g_facebook;
     if ( firmware == nil )
     {
         
-        NSString * msg = [[[NSString alloc] initWithFormat:@"Firmware is nil"] autorelease];
+        NSString * msg = [[NSString alloc] initWithFormat:@"Firmware is nil"];
         
         NSLog(@"%@", msg);
         
@@ -1754,11 +1848,11 @@ extern Facebook * g_facebook;
 
         [self dismissViewControllerAnimated:YES completion:nil];
         
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Failed"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed"
                                                          message:@"Failed to download firmware"
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil] autorelease];
+                                               otherButtonTitles:nil];
         [alert show];
         
         return;
@@ -1771,7 +1865,7 @@ extern Facebook * g_facebook;
     else
     {
         
-        NSString * msg = [[[NSString alloc] initWithFormat:@"Update failed to start"] autorelease];
+        NSString * msg = [[NSString alloc] initWithFormat:@"Update failed to start"];
         
         NSLog(@"%@", msg);
         
@@ -1790,11 +1884,11 @@ extern Facebook * g_facebook;
         
         [self dismissViewControllerAnimated:YES completion:nil];
         
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Failed"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed"
                                                          message:@"Failed to update firmware"
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil] autorelease];
+                                               otherButtonTitles:nil];
         [alert show];
     }
 

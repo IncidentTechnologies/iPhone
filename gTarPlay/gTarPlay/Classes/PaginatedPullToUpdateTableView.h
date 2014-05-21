@@ -21,7 +21,7 @@
     BOOL m_enabled;
 }
 
-@property (nonatomic, assign) IBOutlet id<PaginatedPullToUpdateTableViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<PaginatedPullToUpdateTableViewDelegate> delegate;
 @property (nonatomic, readonly) BOOL m_enabled;
 
 - (void)resetUpdateTrigger;

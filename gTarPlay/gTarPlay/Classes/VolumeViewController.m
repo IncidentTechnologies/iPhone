@@ -8,30 +8,36 @@
 
 #import "VolumeViewController.h"
 
-#import <AudioController/AudioController.h>
-
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-extern AudioController * g_audioController;
+//extern AudioController * g_audioController;
 
 @interface VolumeViewController ()
 {
+    BOOL invertView;
     MPVolumeView *_mpVolumeView;
+    SoundMaster *g_soundMaster;
 }
 
 @end
 
 @implementation VolumeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster *)soundMaster isInverse:(BOOL)invert;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
+        
+        invertView = invert;
+        [super invertView:invert];
+        
+        g_soundMaster = soundMaster;
+        
     }
     return self;
 }
@@ -46,10 +52,6 @@ extern AudioController * g_audioController;
     UIImage * sliderTrackMinImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:16 topCapHeight:0];
     UIImage * sliderTrackMaxImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:17 topCapHeight:0];
     UIImage * sliderKnob = [UIImage imageNamed:@"VolumeKnob.png"];
-    
-    // This is the non-deprecated way of doing it
-//    sliderTrackMinImage = [sliderTrackMinImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 17) resizingMode:UIImageResizingModeStretch];
-//    sliderTrackMaxImage = [sliderTrackMinImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 17, 0, 16) resizingMode:UIImageResizingModeStretch];
     
     [_volumeSlider setMinimumTrackImage:sliderTrackMinImage forState:UIControlStateNormal];
     [_volumeSlider setMaximumTrackImage:sliderTrackMaxImage forState:UIControlStateNormal];
@@ -86,8 +88,15 @@ extern AudioController * g_audioController;
     
     [_volumeView addSubview:_mpVolumeView];
     
-    NSString * routeName = (NSString *)[g_audioController GetAudioRoute];
-    [self showVolumeSliderForRoute:routeName];
+    [self showVolumeSliderForRoute:nil];
+    
+}
+
+-(void)invertVolumeView
+{
+    [_innerView setFrame:CGRectMake(_innerView.frame.origin.x,8,_innerView.frame.size.width,_innerView.frame.size.height)];
+    
+    [super invertTriangleIndicator];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,26 +121,23 @@ extern AudioController * g_audioController;
     
     _mpVolumeView.center = CGPointMake( _volumeView.frame.size.width / 2.0, _volumeView.frame.size.height / 2.0 );
     
+    if(invertView){
+        [self invertVolumeView];
+    }
+    
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
     
-    [_mpVolumeView release];
-    [_sliderView release];
-    [_volumeSlider release];
-    [_volumeView release];
-    [_volumeTrackView release];
-    [super dealloc];
 }
 
 #pragma mark - Slider methods
 
 - (IBAction)volumeValueChanged:(id)sender
 {
-    // Change the volume of the audio controller
-    [g_audioController setM_volumeGain:_volumeSlider.value];
+    [g_soundMaster setChannelGain:_volumeSlider.value];
 }
 
 - (void)attachToSuperview:(UIView *)view
@@ -152,19 +158,17 @@ extern AudioController * g_audioController;
     [self showVolumeSliderForRoute:routeName];
 }
 
-// The global volume slider is not available when audio is routed to lineout.
-// If the audio is not being outputed to lineout hide the global volume slider,
-// and display our own slider that controlls volume in this mode.
+// For the new audio controller always show the volume slider
 - (void)showVolumeSliderForRoute:(NSString*)routeName
 {
-    if ([routeName isEqualToString:(NSString*)kAudioSessionOutputRoute_LineOut])
-    {
+    //if ([routeName isEqualToString:(NSString*)kAudioSessionOutputRoute_LineOut])
+    //{
         // show custom volume view
         [_volumeView setHidden:YES];
         [_volumeTrackView setHidden:YES];
         
         [_volumeSlider setHidden:NO];
-    }
+    /*}
     else
     {
         // show standard MPVolumeView
@@ -173,6 +177,7 @@ extern AudioController * g_audioController;
         
         [_volumeSlider setHidden:YES];
     }
+    */
 }
 
 @end

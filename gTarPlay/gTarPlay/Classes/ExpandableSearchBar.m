@@ -99,11 +99,12 @@
     _textField.returnKeyType = UIReturnKeySearch;
     _textField.delegate = self;
     _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [_textField setFont:[UIFont fontWithName:@"Avenir Next" size:17.0]];
     
     // make the cancel button
     _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width - CANCEL_BUTTON_HEIGHT, 0, CANCEL_BUTTON_HEIGHT, CANCEL_BUTTON_HEIGHT)];
     _cancelButton.alpha = 0.0;
-    [_cancelButton setImage:[UIImage imageNamed:@"SearchCancelButton.png"] forState:UIControlStateNormal];
+    [_cancelButton setImage:[UIImage imageNamed:@"CancelButton"] forState:UIControlStateNormal];
     [_cancelButton addTarget:self action:@selector(cancelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:_textField];
@@ -123,16 +124,6 @@
     }
 }
 
-- (void)dealloc
-{
-    [_textField release];
-    [_cancelButton release];
-    [_contractedPadding release];
-    [_expandedPadding release];
-    [_activityView release];
-    
-    [super dealloc];
-}
 
 //- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 //{

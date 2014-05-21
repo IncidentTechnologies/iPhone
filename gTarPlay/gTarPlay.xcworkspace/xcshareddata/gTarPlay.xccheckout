@@ -5,36 +5,48 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>6110C223-AC63-4DC9-9D71-5D5722502955</string>
+	<string>96F738C6-E6B8-4AB6-9E8B-01FAC85326BC</string>
 	<key>IDESourceControlProjectName</key>
 	<string>gTarPlay</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5FFE1A51-51BB-4C38-8B63-509E65E2267C</key>
-		<string>https://github.com/IncidentTechnologies/iPhone</string>
+		<key>21B0207D-DDD4-401F-B643-45681BCDF2E1</key>
+		<string>https://github.com/IncidentTechnologies/iPhone.git</string>
+		<key>8E8E1815-96B7-45BC-A731-4FCBB7791C05</key>
+		<string>https://github.com/IncidentTechnologies/IncidentPlatform.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>gTarPlay/gTarPlay.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5FFE1A51-51BB-4C38-8B63-509E65E2267C</key>
+		<key>21B0207D-DDD4-401F-B643-45681BCDF2E1</key>
 		<string>../..</string>
+		<key>8E8E1815-96B7-45BC-A731-4FCBB7791C05</key>
+		<string>../../../IncidentPlatform</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/IncidentTechnologies/iPhone</string>
+	<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5FFE1A51-51BB-4C38-8B63-509E65E2267C</string>
+	<string>21B0207D-DDD4-401F-B643-45681BCDF2E1</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5FFE1A51-51BB-4C38-8B63-509E65E2267C</string>
+			<string>8E8E1815-96B7-45BC-A731-4FCBB7791C05</string>
 			<key>IDESourceControlWCCName</key>
-			<string>iPhone</string>
+			<string>IncidentPlatform</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>21B0207D-DDD4-401F-B643-45681BCDF2E1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Play</string>
 		</dict>
 	</array>
 </dict>

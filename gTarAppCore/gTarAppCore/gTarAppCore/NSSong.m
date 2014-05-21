@@ -9,11 +9,15 @@
 #import "NSSong.h"
 
 #import "NSMeasure.h"
+#import "NSMarker.h"
 #import "XmlDom.h"
+
+#define DEFAULT_INSTRUMENT @"Electric Guitar"
 
 @implementation NSSong
 
 @synthesize m_measures;
+@synthesize m_markers;
 @synthesize m_author;
 @synthesize m_title;
 @synthesize m_description;
@@ -35,6 +39,7 @@
     {
         
         m_measures = [[NSMutableArray alloc] init];
+        m_markers = [[NSMutableArray alloc] init];
         
         XmlDom * dom;
 
@@ -63,6 +68,14 @@
         self.m_instrument = [dom getTextFromChildWithName:@"name"];
         NSLog(@"Using instrument: %@", m_instrument);
         
+        // Ensure that instrument is not NULL
+        if(m_instrument == NULL){
+            
+            NSLog(@"Instrument is NULL using default, %@",DEFAULT_INSTRUMENT);
+            self.m_instrument = DEFAULT_INSTRUMENT;
+            
+        }
+        
         dom = [headerDom getChildWithName:@"tempo"];
         self.m_tempo = [[dom getNumberFromChildWithName:@"value"] floatValue];
         
@@ -80,6 +93,8 @@
         
         NSArray * measureArray = [trackDom getChildArrayWithName:@"measure"];
         
+        NSArray * markerArray = [trackDom getChildArrayWithName:@"marker"];
+        
         for ( XmlDom * measureDom in measureArray )
         {
             
@@ -90,7 +105,15 @@
             
             [self addMeasure:measure];
             
-            [measure release];
+            
+        }
+        
+        for ( XmlDom * markerDom in markerArray )
+        {
+            
+            NSMarker * marker = [[NSMarker alloc] initWithXmlDom:markerDom];
+            
+            [m_markers addObject:marker];
             
         }
 
@@ -127,18 +150,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	
-	[m_measures release];
-    [m_author release];
-	[m_title release];
-    [m_description release];
-    [m_instrument release];
-    
-	[super dealloc];
-	
-}
 
 - (void)addMeasure:(NSMeasure*)measure
 {
@@ -159,7 +170,7 @@
     
     [notesArray sortUsingSelector:@selector(compare:)];
     
-    return [notesArray autorelease];
+    return notesArray;
     
 }
 

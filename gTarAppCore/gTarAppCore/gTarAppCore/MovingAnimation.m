@@ -15,10 +15,6 @@
 @synthesize m_sinusoidalAmplitude;
 @synthesize m_sinusoidalFrequency;
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 - (void)changePositioin:(CGPoint)position
 {

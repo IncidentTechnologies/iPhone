@@ -54,20 +54,20 @@
 @interface Mixpanel ()
 
 // re-declare internally as readwrite
-@property(nonatomic,retain) MixpanelPeople *people;
+@property(nonatomic,strong) MixpanelPeople *people;
 @property(nonatomic,copy) NSString *distinctId;
 
 @property(nonatomic,copy)   NSString *apiToken;
-@property(nonatomic,retain) NSMutableDictionary *superProperties;
-@property(nonatomic,retain) NSTimer *timer;
-@property(nonatomic,retain) NSMutableArray *eventsQueue;
-@property(nonatomic,retain) NSMutableArray *peopleQueue;
-@property(nonatomic,retain) NSArray *eventsBatch;
-@property(nonatomic,retain) NSArray *peopleBatch;
-@property(nonatomic,retain) NSURLConnection *eventsConnection;
-@property(nonatomic,retain) NSURLConnection *peopleConnection;
-@property(nonatomic,retain) NSMutableData *eventsResponseData;
-@property(nonatomic,retain) NSMutableData *peopleResponseData;
+@property(nonatomic,strong) NSMutableDictionary *superProperties;
+@property(nonatomic,strong) NSTimer *timer;
+@property(nonatomic,strong) NSMutableArray *eventsQueue;
+@property(nonatomic,strong) NSMutableArray *peopleQueue;
+@property(nonatomic,strong) NSArray *eventsBatch;
+@property(nonatomic,strong) NSArray *peopleBatch;
+@property(nonatomic,strong) NSURLConnection *eventsConnection;
+@property(nonatomic,strong) NSURLConnection *peopleConnection;
+@property(nonatomic,strong) NSMutableData *eventsResponseData;
+@property(nonatomic,strong) NSMutableData *peopleResponseData;
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 40000
 @property(nonatomic,assign) UIBackgroundTaskIdentifier taskId;
@@ -77,8 +77,8 @@
 
 @interface MixpanelPeople ()
 
-@property(nonatomic,assign) Mixpanel *mixpanel;
-@property(nonatomic,retain) NSMutableArray *unidentifiedQueue;
+@property(nonatomic,weak) Mixpanel *mixpanel;
+@property(nonatomic,strong) NSMutableArray *unidentifiedQueue;
 @property(nonatomic,copy) NSString *distinctId;
 
 - (id)initWithMixpanel:(Mixpanel *)mixpanel;
@@ -117,7 +117,6 @@ static Mixpanel *sharedInstance = nil;
 
     CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
     CTCarrier *carrier = [networkInfo subscriberCellularProvider];
-    [networkInfo release];
 
     if (carrier.carrierName.length) {
         [properties setValue:carrier.carrierName forKey:@"$carrier"];
@@ -245,7 +244,6 @@ static Mixpanel *sharedInstance = nil;
         [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
         [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
         NSString *s = [formatter stringFromDate:obj];
-        [formatter release];
         return s;
     } else if ([obj isKindOfClass:[NSURL class]]) {
         return [obj absoluteString];
@@ -263,13 +261,13 @@ static Mixpanel *sharedInstance = nil;
     NSData *data = [Mixpanel JSONSerializeObject:array];
     if (data) {
         b64String = [data mp_base64EncodedString];
-        b64String = (id)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+        b64String = (__bridge_transfer id)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                 (CFStringRef)b64String,
                                                                 NULL,
                                                                 CFSTR("!*'();:@&=+$,/?%#[]"),
                                                                 kCFStringEncodingUTF8);
     }
-    return [b64String autorelease];
+    return b64String;
 }
 
 + (void)assertPropertyTypes:(NSDictionary *)properties
@@ -323,7 +321,7 @@ static Mixpanel *sharedInstance = nil;
         NSLog(@"%@ warning empty api token", self);
     }
     if (self = [self init]) {
-        self.people = [[[MixpanelPeople alloc] initWithMixpanel:self] autorelease];
+        self.people = [[MixpanelPeople alloc] initWithMixpanel:self];
 
         self.apiToken = apiToken;
         self.flushInterval = flushInterval;
@@ -490,7 +488,7 @@ static Mixpanel *sharedInstance = nil;
 - (NSDictionary *)currentSuperProperties
 {
     @synchronized(self) {
-        return [[self.superProperties copy] autorelease];
+        return [self.superProperties copy];
     }
 }
 
@@ -980,7 +978,6 @@ static Mixpanel *sharedInstance = nil;
             if ([response intValue] == 0) {
                 NSLog(@"%@ track api error: %@", self, response);
             }
-            [response release];
 
             [self.eventsQueue removeObjectsInArray:self.eventsBatch];
             [self archiveEvents];
@@ -994,7 +991,6 @@ static Mixpanel *sharedInstance = nil;
             if ([response intValue] == 0) {
                 NSLog(@"%@ engage api error: %@", self, response);
             }
-            [response release];
 
             [self.peopleQueue removeObjectsInArray:self.peopleBatch];
             [self archivePeople];
@@ -1022,25 +1018,9 @@ static Mixpanel *sharedInstance = nil;
     [self stopFlushTimer];
     [self removeApplicationObservers];
     
-    self.people = nil;
-    self.distinctId = nil;
-    self.nameTag = nil;
-    self.serverURL = nil;
     self.delegate = nil;
     
-    self.apiToken = nil;
-    self.superProperties = nil;
-    self.timer = nil;
-    self.eventsQueue = nil;
-    self.peopleQueue = nil;
-    self.eventsBatch = nil;
-    self.peopleBatch = nil;
-    self.eventsConnection = nil;
-    self.peopleConnection = nil;
-    self.eventsResponseData = nil;
-    self.peopleResponseData = nil;
     
-    [super dealloc];
 }
 
 @end
@@ -1210,9 +1190,6 @@ static Mixpanel *sharedInstance = nil;
 - (void)dealloc
 {
     self.mixpanel = nil;
-    self.distinctId = nil;
-    self.unidentifiedQueue = nil;
-    [super dealloc];
 }
 
 @end

@@ -10,7 +10,7 @@
 
 @interface CyclingTextField : UITextField
 
-@property (retain, nonatomic) IBOutlet UITextField *nextTextField;
-@property (retain, nonatomic) IBOutlet UIButton *submitButton;
+@property (strong, nonatomic) IBOutlet UITextField *nextTextField;
+@property (strong, nonatomic) IBOutlet UIButton *submitButton;
 
 @end

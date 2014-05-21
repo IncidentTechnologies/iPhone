@@ -26,7 +26,7 @@
     BOOL m_animating;
 }
 
-@property (nonatomic, assign) IBOutlet id<PullToUpdateTableViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<PullToUpdateTableViewDelegate> delegate;
 
 - (void)sharedInit;
 

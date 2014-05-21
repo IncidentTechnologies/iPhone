@@ -32,8 +32,8 @@
     NSMutableArray * m_noteFrames;
     NSMutableArray * m_noteFramesRemaining;
     
-    NSNoteFrame * m_currentFrame;
-    NSNoteFrame * m_nextFrame;
+    NSNoteFrame * __weak m_currentFrame;
+    NSNoteFrame * __weak m_nextFrame;
     NSInteger m_currentFrameIndex;
     
     double m_beatsPerSecond;
@@ -49,11 +49,13 @@
     
     double m_frameWidthBeats;
     
+    int m_loops;
+    
 }
 
 @property (nonatomic, readonly) NSSong * m_song;
-@property (nonatomic, readonly) NSNoteFrame * m_currentFrame;
-@property (nonatomic, readonly) NSNoteFrame * m_nextFrame;
+@property (weak, nonatomic, readonly) NSNoteFrame * m_currentFrame;
+@property (weak, nonatomic, readonly) NSNoteFrame * m_nextFrame;
 @property (nonatomic, readonly) double m_beatsPerSecond;
 @property (nonatomic, readonly) double m_currentBeat;
 @property (nonatomic, readonly) double m_percentageComplete;
@@ -61,12 +63,15 @@
 @property (nonatomic, readonly) double m_lengthBeats;
 @property (nonatomic, readonly) double m_lengthSeconds;
 @property (nonatomic, assign) double m_frameWidthBeats;
+@property (nonatomic, readonly) double m_endBeat;
+@property (nonatomic, readonly) double m_startBeat;
 
 //- (id)initWithSongXmp:(NSString*)xmpBlob;
 - (id)initWithSong:(NSSong*)song;
 
 - (void)startWithDelegate:(id)delegate;
-- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats;
+//- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isStandalone:(BOOL)standalone;
+- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isScrolling:(BOOL)scolling withTempoPercent:(double)tempoPercent fromStart:(double)start toEnd:(double)end withLoops:(int)loops;
 - (void)skipToNextFrame;
 //- (void)incrementBeat:(double)delta;
 //- (void)incrementTime:(double)delta;
@@ -80,5 +85,12 @@
 - (void)enterCurrentFrame;
 - (void)beginFrameTimer:(double)delta;
 - (void)frameExpired;
+- (double)getFirstAudibleBeat;
+
+- (void)setSongLoops:(int)loops;
+- (void)setStartBeat:(double)start;
+- (void)setEndBeat:(double)end;
+- (int)getCurrentLoop;
+- (int)getLoopForBeat:(double)beat;
 
 @end

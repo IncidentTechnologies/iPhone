@@ -8,21 +8,19 @@
 
 #import "InstrumentsAndEffectsViewController.h"
 
-#import <gTarAppCore/InstrumentTableViewController.h>
-#import <AudioController/AudioController.h>
-#import <AudioController/Effect.h>
-
 @interface InstrumentsAndEffectsViewController ()
 
-@property (retain, nonatomic) AudioController *audioController;
-@property (retain, nonatomic) InstrumentTableViewController *instrumentTableVC;
-@property (retain, nonatomic) EffectsTableViewController *effectsTableVC;
+// @property (retain, nonatomic) AudioController *audioController;
+@property (strong, nonatomic) SoundMaster *soundMaster;
+@property (strong, nonatomic) InstrumentTableViewController *instrumentTableVC;
+@property (strong, nonatomic) EffectsTableViewController *effectsTableVC;
+
 @property (nonatomic) NSInteger selectedEffectIndex;
 
-@property (retain, nonatomic) IBOutlet JamPad *jamPad;
+@property (strong, nonatomic) IBOutlet JamPad *jamPad;
 
-@property (retain, nonatomic) IBOutlet UIView *contentTable;
-@property (retain, nonatomic) UIViewController *currentMainContentVC;
+@property (strong, nonatomic) IBOutlet UIView *contentTable;
+@property (strong, nonatomic) UIViewController *currentMainContentVC;
 
 -(void) switchMainContentControllerToVC:(UIViewController *)newVC;
 -(void) setupJamPadWithEffectAtIndex:(int)index;
@@ -31,14 +29,28 @@
 
 @implementation InstrumentsAndEffectsViewController
 
-- (id)initWithAudioController:(AudioController*)AC
+@synthesize soundMaster;
+@synthesize instrumentTableVC;
+@synthesize effectsTableVC;
+@synthesize jamPad;
+
+//- (id)initWithAudioController:(AudioController*)AC
+- (id)initWithSoundMaster:(SoundMaster*)SM
 {
     self = [super initWithNibName:@"InstrumentsAndEffectsViewController" bundle:nil];
     if (self) {
-        _audioController = [AC retain];
-        _instrumentTableVC = [[InstrumentTableViewController alloc] initWithAudioController:AC];
-        _effectsTableVC = [[EffectsTableViewController alloc] initWithAudioController:AC];
-        _effectsTableVC.delegate = self;
+        
+        // _audioController = [AC retain];
+        
+        soundMaster = SM;
+        
+        //_instrumentTableVC = [[InstrumentTableViewController alloc] initWithAudioController:AC];
+        instrumentTableVC = [[InstrumentTableViewController alloc] init];
+        instrumentTableVC.delegate = self;
+        
+        //_effectsTableVC = [[EffectsTableViewController alloc] initWithAudioController:AC];
+        effectsTableVC = [[EffectsTableViewController alloc] init];
+        effectsTableVC.delegate = self;
     }
     return self;
 }
@@ -47,7 +59,7 @@
 {
     [super viewDidLoad];
     
-    [_jamPad setupJamPadWithRows:9 andColumns:10];
+    [jamPad setupJamPadWithRows:9 andColumns:10];
     
     // Do any additional setup after loading the view from its nib.
     
@@ -81,14 +93,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [_audioController release];
-    [_contentTable release];
-    [_currentMainContentVC release];
-    
-    [_jamPad release];
-    [super dealloc];
-}
 
 - (void)displayInstruments
 {
@@ -124,44 +128,93 @@
                             }];
 }
 
+// Called whenever a new effect is selected
 -(void) setupJamPadWithEffectAtIndex:(int)index
 {
-    Effect *selectedEffect = (Effect*)[[[self.audioController GetEffects] objectAtIndex:index] pointerValue];
-    Parameter &primary = selectedEffect->getPrimaryParam();
-    Parameter &secondary = selectedEffect->getSecondaryParam();
-    // set inital position of JamPad, set normalized value
-    float x = (primary.getValue() - primary.getMin()) / (primary.getMax() - primary.getMin());
-    float y = (secondary.getValue() - secondary.getMin()) / (secondary.getMax() - primary.getMin());
+    CGPoint normalizedPoint = [soundMaster getPointForEffectAtIndex:index];
     
-    [self.jamPad setNormalizedPosition:CGPointMake(x, y)];
+    NSLog(@"Setup jam pad with effect at index %i using %f %f", index,normalizedPoint.x,normalizedPoint.y);
+    
+    [self.jamPad setNormalizedPosition:normalizedPoint];
+    
 }
 
 #pragma mark - XYInputViewDelegate (JamPad delegate)
 
 -(void) positionChanged:(CGPoint)position forView:(XYInputView *)view
 {
-    // translate the normalized value the JamPad position to a range
-    // in [min, max] for the respective parameter
-    Effect *selectedEffect = (Effect*)[[[self.audioController GetEffects] objectAtIndex:self.selectedEffectIndex] pointerValue];
-    Parameter *p = &(selectedEffect->getPrimaryParam());
-    float min = p->getMin();
-    float max = p->getMax();
-    float newVal = position.x*(max - min) + min;
-    selectedEffect->setPrimaryParam(newVal);
+    NSLog(@"Instruments and Effects VC position changed");
     
-    p = &(selectedEffect->getSecondaryParam());
-    min = p->getMin();
-    max = p->getMax();
-    newVal = position.y*(max - min) + min;
-    selectedEffect->setSecondaryParam(newVal);
+    [soundMaster adjustEffectAtIndex:self.selectedEffectIndex toPoint:position];
+    
 }
 
 #pragma mark - EffectSelectionDelegate
--(void) didSelectEffectAtIndex:(NSInteger)index
+- (void)didSelectEffectAtIndex:(NSInteger)index
 {
+    NSLog(@"Did select effect at index %li",index);
     self.selectedEffectIndex = index;
-    [self setupJamPadWithEffectAtIndex:self.selectedEffectIndex];
+   
+    if([self isEffectOnAtIndex:self.selectedEffectIndex]){
+        [self setupJamPadWithEffectAtIndex:(int)self.selectedEffectIndex];
+    }
 }
 
+- (NSString *)getEffectNameAtIndex:(NSInteger)index
+{
+    return [soundMaster getEffectNameAtIndex:index];
+}
+
+- (NSInteger)getNumEffects
+{
+    return [soundMaster getNumEffects];
+}
+
+- (BOOL)isEffectOnAtIndex:(NSInteger)index
+{
+    return [soundMaster isEffectOnAtIndex:index];
+}
+
+- (void)toggleEffect:(NSInteger)index isOn:(BOOL)on
+{
+    [soundMaster toggleEffect:index isOn:on];
+}
+
+
+#pragma mark - Instrument Selector delegate
+- (void)stopAudioEffects
+{
+    NSLog(@"InstrumentsAndEffectsViewController stopAudioEffects");
+    [soundMaster stopAllEffects];
+    
+    [effectsTableVC turnOffAllEffects];
+    
+    // Reset effect buttons
+/*    int numEffects = (int)[self getNumEffects];
+    for(int i = 0; i < numEffects; i++){
+        
+        if([self isEffectOnAtIndex:i]){
+            // TODO: turn effect button off
+            [effectsTableVC tu]
+        }
+        
+    }*/
+
+}
+
+- (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
+{
+    [soundMaster didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
+}
+
+- (NSArray *)getInstrumentList
+{
+    return [soundMaster getInstrumentList];
+}
+
+- (NSInteger)getSelectedInstrumentIndex
+{
+    return [soundMaster getCurrentInstrument];
+}
 
 @end

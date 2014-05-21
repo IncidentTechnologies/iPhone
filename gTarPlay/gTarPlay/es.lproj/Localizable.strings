@@ -1,0 +1,156 @@
+/* 
+  Localizable.strings
+  gTarPlay
+
+  Created by Idan Beck on 4/1/14.
+
+*/
+
+// Title Screen
+"SIGN IN" = "INICIA SESIÓN";
+"SIGN UP" = "REGISTRAR";
+"VIDEO" = "VIDEO";
+"INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
+"PLAY" = "TOCAR";
+"FREE PLAY" = "TOCAR LIBRE";
+"STORE" = "TIENDA";
+"Sign In with Facebook" = "Registrar con Facebook";
+"Username" = "Usuario";
+"Password" = "Contraseña";
+"Email" = "Email";
+"Please Connect Your gTar" = "Por favor, conecte su gTar";
+"Profile" = "Perfil";
+"Please connect your gTar to sign up for an account." = "Por favor, conecte su gTar a registrar.";
+"Username must begin with a letter" = "Usuario debe comenzar con una letra";
+"Password must be at least 8 letters" = "Contraseña debe tener al menos 8 letras";
+"Invalid Email" = "Email Inválido";
+"Invalid Username" = "Usuario Inválido";
+"Invalid Password" = "Contraseña Inválido";
+"Invalid login credentials" = "Acceso Inválido";
+"Facebook failed to login" = "Facebook no inicia sesión";
+
+// ActivityFeedCell
+"Someone" = "Alguien";
+"Jamed out" = "Jamed out";
+"Played %@" = "Tocado %@";
+
+// Song Selection Controller
+"Easy" = "Fácil";
+"Medium" = "Médio";
+"Hard" = "Difícil";
+"PRESS TO PLAY" = "TOCAR";
+"PRACTICE" = "PRÁCTICA";
+"SKILL" = "PERICIA";
+"SCORE" = "PARTITURA";
+"ARTIST" = "ARTISTA";
+"TITLE" = "TÍTULO";
+"Back" = "Volver";
+"BACK" = "VOLVER";
+"Song List" = "Canciones";
+
+// Play View
+"SAVE & FINISH" = "TERMINAR";
+"SCORE" = "PARTITURA";
+"OUTPUT" = "PRODUCCIÓN";
+"AUX" = "AUX";
+"SPEAKER" = "ALTAVOZ";
+"POST TO FEED" = "PUBLICAR";
+"OFF" = "NO";
+"ON" = "SÍ";
+"Quit" = "Dejar";
+"Restart" = "Reiniciar";
+"RESTART" = "REINICIAR";
+"SCORE" = "PARTITURA";
+"BEST SESSION" = "MEJOR";
+"TOTAL" = "TOTAL";
+"NOTES HIT" = "NOTAS TOCADAS";
+"IN A ROW" = "CONSECUTIVO";
+"ACCURACY" = "PRECISIÓN";
+"REPEAT" = "REPETIR";
+"TEMPO" = "TEMPO";
+"METRONOME" = "METRÓNOMO";
+"Metronome" = "Metrónomo";
+"NONE" = "NADA";
+
+// Social View
+"Logout" = "Sair";
+"FOLLOW" = "SIGA";
+"FOLLOWING" = "SIGUIENTE";
+"SESSIONS" = "SESIONES";
+"FOLLOWERS" = "SEGUIDORES";
+"Follow" = "Siga";
+"Following" = "Siguiente";
+
+// Freeplay
+"ALL" = "TODO";
+"COLOR" = "COLOR";
+"SHAPE" = "FORMA";
+"LOOP" = "LAZO";
+"CLEAR" = "BORRAR";
+"TONE" = "TONO";
+"SLIDING" = "CORREDERA";
+"Chorus" = "Coro";
+"Echo" = "Eco";
+"Reverb" = "Reverberar";
+"Distortion" = "Distorsión";
+"Single" = "Solo";
+"2 X 2" = "2 X 2";
+"Continuous" = "Continuo";
+
+// Instruments
+"Electric Guitar" = "Guitarra Elétrico";
+"Acoustic Guitar" = "Guitarra Acústica";
+"Rock Guitar" = "Guitarra de Rock";
+"Upright Bass" = "Contrabajo";
+"Piano" = "Piano";
+"Rhodes" = "Rhodes";
+"Muted Clav" = "Sordina Clav";
+"Bowed Strings" = "Cuerdas";
+"Marimba" = "Marimba";
+"Carl's Synth" = "Synth de Carl";
+"Droplet" = "Gotita";
+"Square" = "Piano Cuadrado";
+"Warm Analogue" = "Analógio Caliente";
+
+// Time formatter
+"The Future" = "El Futuro";
+"%u second ago" = "%u hace segundo";
+"%u seconds ago" = "%u hace segundos";
+"%u minute ago" = "%u hace minuto";
+"%u minutes ago" = "%u hace minutos";
+"%u hour ago" = "%u hace hora";
+"%u hours ago" = "%u hace horas";
+"%u day ago" = "%u hace dia";
+"%u days ago" = "%u hace dias";
+"%u week ago" = "%u hace semana";
+"%u weeks ago" = "%u hace semanas";
+"%u month ago" = "%u hace mes";
+"%u months ago" = "%u hace meses";
+
+// Store
+"TITLE & ARTIST" = "TÍTULO Y ARTISTA";
+"99¢" = ".99€";
+"FREE" = "GRATIS";
+"BUY" = "PRECIO";
+"Shop" = "TIENDA";
+"OK" = "OK";
+"Song Purchase Failed" = "Compra Canción Error";
+"No products available, no payments have been processed" = "No hay productos disponibles, ningún pago ha sido procesado";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "Compra Canción Error, que su cuenta ha sido acreditada y la compra de la canción se intentó hasta que el éxito";
+"Song Purchase Succeeded" = "Compra Exitosa Canción";
+"Song Purchase Succeeded!" = "Compra Exitosa Canción!";
+
+// Pull to update
+"Updating..." = "Actualización...";
+"Last update: Never" = "Última actualización: Jámas";
+"Pull to update" = "Tire para actualizar";
+"Last update: %@" = "Última actualización: %@";
+"Release to update" = "Suelte para actualizar";
+
+// Selector
+"FRIENDS" = "AMIGOS";
+"GLOBAL" = "GLOBAL";
+
+"Error" = "Error";
+"Search..." = "Buscar...";
+

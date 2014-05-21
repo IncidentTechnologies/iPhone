@@ -12,20 +12,20 @@
 
 @interface StoreSongListCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet StoreViewController *parentStoreViewController;
+@property (strong, nonatomic) IBOutlet StoreViewController *parentStoreViewController;
 
-@property (retain, nonatomic) IBOutlet UIView *titleArtistView;
-@property (retain, nonatomic) IBOutlet UIView *skillView;
-@property (retain, nonatomic) IBOutlet UIView *purchaseSongView;
+@property (strong, nonatomic) IBOutlet UIView *titleArtistView;
+@property (strong, nonatomic) IBOutlet UIView *skillView;
+@property (strong, nonatomic) IBOutlet UIView *purchaseSongView;
 
 @property (nonatomic, strong) IBOutlet UILabel *labelSongTitle;
 @property (nonatomic, strong) IBOutlet UILabel *labelSongArtist;
-@property (retain, nonatomic) IBOutlet UIImageView *songSkill;
+@property (strong, nonatomic) IBOutlet UIImageView *songSkill;
 
-@property (retain, nonatomic) IBOutlet UIButton *buttonBuySong;
-@property (retain, nonatomic) IBOutlet StoreListBuyButtonView *buyButtonView;
+@property (strong, nonatomic) IBOutlet UIButton *buttonBuySong;
+@property (strong, nonatomic) IBOutlet StoreListBuyButtonView *buyButtonView;
 
-@property (retain, nonatomic) UserSong *userSong;
+@property (strong, nonatomic) UserSong *userSong;
 
 - (void)updateCell;
 

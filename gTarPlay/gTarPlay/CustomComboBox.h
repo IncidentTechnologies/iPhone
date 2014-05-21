@@ -15,14 +15,14 @@
     
 }
 
-@property (retain) UIScrollView *m_scrollView;
+@property (strong) UIScrollView *m_scrollView;
 @property (nonatomic, readonly) NSInteger m_contentLength;
 @property (nonatomic, readonly) NSInteger m_selectedIndex;
-@property (nonatomic, retain) NSArray *m_contentArray;
-@property (nonatomic, retain) NSMutableArray *m_headerIndices;
-@property (retain) NSMutableArray *m_contentSubviews;
+@property (nonatomic, strong) NSArray *m_contentArray;
+@property (nonatomic, strong) NSMutableArray *m_headerIndices;
+@property (strong) NSMutableArray *m_contentSubviews;
 
-@property (retain) NSTimer *m_flickerTimer;
+@property (strong) NSTimer *m_flickerTimer;
 
 - (void) populateWithImages:(NSArray*)images;
 - (void) populateWithText:(NSArray*)text;

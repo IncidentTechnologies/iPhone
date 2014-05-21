@@ -1,0 +1,157 @@
+/* 
+  Localizable.strings
+  gTarPlay
+
+  Created by Idan Beck on 4/1/14.
+
+*/
+
+/*#*/ // = translate short as possible
+
+// Title Screen
+"SIGN IN" = "SIGN IN";
+"SIGN UP" = "SIGN UP";
+"VIDEO" = "VIDEO";
+"INCIDENTGTAR.COM" = "INCIDENTGTAR.COM";
+"PLAY" = "PLAY";
+"FREE PLAY" = "FREE PLAY";
+"STORE" = "STORE";
+"Sign In with Facebook" = "Sign In with Facebook";
+"Username" = "Username";
+"Password" = "Password";
+"Email" = "Email";
+"Please Connect Your gTar" = "Please Connect Your gTar";
+"Profile" = "Profile";
+"Please connect your gTar to sign up for an account." = "Please connect your gTar to sign up for an account.";
+"Username must begin with a letter" = "Username must begin with a letter";
+"Password must be at least 8 letters" = "Password must be at least 8 letters";
+"Invalid Email" = "Invalid Email";
+"Invalid Username" = "Invalid Username";
+"Invalid Password" = "Invalid Password";
+"Invalid login credentials" = "Invalid login credentials";
+"Facebook failed to login" = "Facebook failed to login";
+
+// ActivityFeedCell
+"Someone" = "Someone";
+"Jamed out" = "Jamed out";
+"Played %@" = "Played %@";
+
+// Song Selection Controller
+"Easy" = "Easy";
+"Medium" = "Medium";
+"Hard" = "Hard";
+"PRESS TO PLAY" = "PLAY";
+"PRACTICE" = "PRACTISE";
+"SKILL" = "SKILL";
+"SCORE" = "SCORE";
+"ARTIST" = "ARTIST";
+"TITLE" = "TITLE";
+"Back" = "Back";
+"BACK" = "BACK";
+"Song List" = "Songs";
+
+// Play View
+"SAVE & FINISH" = "FINISH";
+"SCORE" = "SCORE";
+"OUTPUT" = "OUTPUT";
+"AUX" = "AUX";
+"SPEAKER" = "SPEAKER";
+"POST TO FEED" = "POST TO FEED";
+"OFF" = "OFF";
+"ON" = "ON";
+"Quit" = "Finish";
+"Restart" = "Restart";
+"RESTART" = "RESTART";
+"SCORE" = "SCORE";
+"BEST SESSION" = "BEST SESSION";
+"TOTAL" = "TOTAL";
+"NOTES HIT" = "NOTES HIT";
+"IN A ROW" = "IN A ROW";
+"ACCURACY" = "ACCURACY";
+"REPEAT" = "REPEAT";
+"TEMPO" = "TEMPO";
+"METRONOME" = "METRONOME";
+"Metronome" = "Metronome";
+"NONE" = "NONE";
+
+// Social View
+"Logout" = "Logout";
+"FOLLOW" = "FOLLOW";
+"FOLLOWING" = "FOLLOWING";
+"SESSIONS" = "SESSIONS";
+"FOLLOWERS" = "FOLLOWERS";
+"Follow" = "Follow";
+"Following" = "Following";
+
+// Freeplay
+"ALL" = "ALL";
+"COLOR" = "COLOUR";
+"SHAPE" = "SHAPE";
+"LOOP" = "LOOP";
+"CLEAR" = "CLEAR";
+"TONE" = "TONE";
+"SLIDING" = "SLIDING";
+"Chorus" = "Chorus";
+"Echo" = "Echo";
+"Reverb" = "Reverb";
+"Distortion" = "Distortion";
+"Single" = "Single";
+"2 X 2" = "2 X 2";
+"Continuous" = "Continuous";
+
+// Instruments
+"Electric Guitar" = "Electric";
+"Acoustic Guitar" = "Acoustic Guitar";
+"Rock Guitar" = "Rock Guitar";
+"Upright Bass" = "Upright Bass";
+"Piano" = "Piano";
+"Rhodes" = "Rhodes";
+"Muted Clav" = "Muted Clav";
+"Bowed Strings" = "Bowed Strings";
+"Marimba" = "Marimba";
+"Carl's Synth" = "Carl's Synth";
+"Droplet" = "Droplet";
+"Square" = "Square";
+"Warm Analogue" = "Warm Analogue";
+
+// Time formatter
+"The Future" = "the future";
+"%u second ago" = "%u second ago";
+"%u seconds ago" = "%u seconds ago";
+"%u minute ago" = "%u minute ago";
+"%u minutes ago" = "%u minutes ago";
+"%u hour ago" = "%u hour ago";
+"%u hours ago" = "%u hours ago";
+"%u day ago" = "%u day ago";
+"%u days ago" = "%u days ago";
+"%u week ago" = "%u week ago";
+"%u weeks ago" = "%u weeks ago";
+"%u month ago" = "%u month ago";
+"%u months ago" = "%u months ago";
+
+// Store
+"TITLE & ARTIST" = "TITLE & ARTIST";
+"99¢" = "99p";
+"FREE" = "FREE";
+"BUY" = "BUY";
+"Shop" = "STORE";
+"OK" = "OK";
+"Song Purchase Failed" = "Song Purchase Failed";
+"No products available, no payments have been processed" = "No products available, no payments have been processed";
+"Song Purchase Failed, your account has been credited and the song purchase will be attempted until success" = "Song Purchase Failed, your account has been credited and the song purchase will be attempted until success";
+"Song Purchase Succeeded" = "Song Purchase Succeeded";
+"Song Purchase Succeeded!" = "Song Purchase Succeeded!";
+
+// Pull to update
+"Updating..." = "Updating...";
+"Last update: Never" = "Last update: Never";
+"Pull to update" = "Pull to update";
+"Last update: %@" = "Last update: %@";
+"Release to update" = "Release to update";
+
+// Selector
+"FRIENDS" = "FRIENDS";
+"GLOBAL" = "GLOBAL";
+
+"Error" = "Error";
+"Search..." = "Search...";

@@ -77,7 +77,7 @@
         // New songs
         //
         XmlDom * newSongsDom = [xmlDom getChildWithName:@"NewSongsList"];
-        UserSongs * newUserSongs = [[[UserSongs alloc] initWithXmlDom:newSongsDom] autorelease];
+        UserSongs * newUserSongs = [[UserSongs alloc] initWithXmlDom:newSongsDom];
 
         for ( UserSong * userSong in newUserSongs.m_songsArray )
         {
@@ -90,7 +90,7 @@
         // Popular songs
         //
         XmlDom * popSongsDom = [xmlDom getChildWithName:@"PopularSongsList"];
-        UserSongs * popUserSongs = [[[UserSongs alloc] initWithXmlDom:popSongsDom] autorelease];
+        UserSongs * popUserSongs = [[UserSongs alloc] initWithXmlDom:popSongsDom];
 
         for ( UserSong * userSong in popUserSongs.m_songsArray )
         {
@@ -112,7 +112,6 @@
             
             [self addFeaturedSong:featuredSong];
             
-            [featuredSong release];
             
         }
         
@@ -125,21 +124,6 @@
 }
 
 
-- (void)dealloc
-{
-
-    [m_popularUserSongs release];
-    [m_newUserSongs release];
-    [m_featuredSongs release];
-    
-    [m_genreList release];
-    [m_genreCollectionDictionary release];
-    
-    [m_allUserSongs release];
-    
-    [super dealloc];
-
-}
 
 
 - (void)addNewSong:(UserSong*)userSong
@@ -173,7 +157,7 @@
     if ( genreCollection == nil )
     {
     
-        genreCollection = [[[StoreGenreCollection alloc] initWithGenreName:genre] autorelease];
+        genreCollection = [[StoreGenreCollection alloc] initWithGenreName:genre];
         
         [m_genreCollectionDictionary setObject:genreCollection forKey:genre];
         
@@ -214,7 +198,7 @@
     if ( genreCollection == nil )
     {
         
-        genreCollection = [[[StoreGenreCollection alloc] initWithGenreName:genre] autorelease];
+        genreCollection = [[StoreGenreCollection alloc] initWithGenreName:genre];
         
         [m_genreCollectionDictionary setObject:genreCollection forKey:genre];
         
@@ -255,7 +239,7 @@
     if ( genreCollection == nil )
     {
         
-        genreCollection = [[[StoreGenreCollection alloc] initWithGenreName:genre] autorelease];
+        genreCollection = [[StoreGenreCollection alloc] initWithGenreName:genre];
         
         [m_genreCollectionDictionary setObject:genreCollection forKey:genre];
         
