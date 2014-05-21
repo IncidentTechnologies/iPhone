@@ -1621,7 +1621,7 @@ extern UserController * g_userController;
 
 - (void)uploadUserSongSession
 {
-/*
+
     UserSongSession * session = [[UserSongSession alloc] init];
     
     session.m_userSong = _userSong;
@@ -1663,7 +1663,7 @@ extern UserController * g_userController;
                                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
                                                     nil]];
     
-*/
+
 }
 
 #pragma mark - Main event loop

@@ -110,4 +110,14 @@
 
 - (IBAction)feedSelectorChanged:(id)sender;
 
+// gTar Delegate Functions
+- (void)receivedCTMatrixValue:(unsigned char)value row:(unsigned char)row col:(unsigned char)col;
+- (void)receivedSensitivityValue:(unsigned char)value string:(unsigned char)str;
+- (void)receivedPiezoWindow:(unsigned char)value;
+- (void)receivedCommitUserspaceAck:(unsigned char)status;
+- (void)receivedResetUserspaceAck:(unsigned char)status;
+- (void)receivedSerialNumber:(unsigned char *)number;
+
+
+
 @end

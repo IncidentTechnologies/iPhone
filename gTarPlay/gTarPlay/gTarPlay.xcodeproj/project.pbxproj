@@ -40,6 +40,7 @@
 		6D7D47051919BB8D00EF8C75 /* TimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D47041919BB8D00EF8C75 /* TimeFormatter.m */; };
 		6DA8C1F8192C2C8400182BCF /* RegisterPromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA8C1F6192C2C8400182BCF /* RegisterPromptViewController.m */; };
 		6DA8C1F9192C2C8400182BCF /* RegisterPromptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA8C1F7192C2C8400182BCF /* RegisterPromptViewController.xib */; };
+		6DA8C1FB192D12DF00182BCF /* SettingsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA8C1FA192D12DF00182BCF /* SettingsIcon.png */; };
 		6DAD0B1119187F1F005B3807 /* Warm Analogue 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AE819187F1F005B3807 /* Warm Analogue 40.mp3 */; };
 		6DAD0B1219187F1F005B3807 /* Warm Analogue 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AE919187F1F005B3807 /* Warm Analogue 41.mp3 */; };
 		6DAD0B1319187F1F005B3807 /* Warm Analogue 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AEA19187F1F005B3807 /* Warm Analogue 42.mp3 */; };
@@ -1536,6 +1537,7 @@
 		6DA8C1F5192C2C8400182BCF /* RegisterPromptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPromptViewController.h; sourceTree = "<group>"; };
 		6DA8C1F6192C2C8400182BCF /* RegisterPromptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPromptViewController.m; sourceTree = "<group>"; };
 		6DA8C1F7192C2C8400182BCF /* RegisterPromptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterPromptViewController.xib; sourceTree = "<group>"; };
+		6DA8C1FA192D12DF00182BCF /* SettingsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsIcon.png; path = Resources/Images/General/SettingsIcon.png; sourceTree = SOURCE_ROOT; };
 		6DAD0AE819187F1F005B3807 /* Warm Analogue 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 40.mp3"; sourceTree = "<group>"; };
 		6DAD0AE919187F1F005B3807 /* Warm Analogue 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 41.mp3"; sourceTree = "<group>"; };
 		6DAD0AEA19187F1F005B3807 /* Warm Analogue 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 42.mp3"; sourceTree = "<group>"; };
@@ -3430,6 +3432,7 @@
 		EC0BAD3516EEA06600E567A6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6DA8C1FA192D12DF00182BCF /* SettingsIcon.png */,
 				6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */,
 				ECFF775F17457E39002D7D40 /* CloseXButton.png */,
 				ECFF776317457E3B002D7D40 /* PlayButtonVideo.png */,
@@ -4697,6 +4700,7 @@
 				9D054E5C174C68FB00FA3239 /* Upright Bass 69.mp3 in Resources */,
 				9D054E5E174C68FB00FA3239 /* Upright Bass 70.mp3 in Resources */,
 				9D054E60174C68FB00FA3239 /* Upright Bass 71.mp3 in Resources */,
+				6DA8C1FB192D12DF00182BCF /* SettingsIcon.png in Resources */,
 				9D054E62174C68FB00FA3239 /* Upright Bass 72.mp3 in Resources */,
 				9D054E64174C68FB00FA3239 /* Upright Bass 73.mp3 in Resources */,
 				6DB285AF1921915600B3D14C /* Electric Guitar 103.mp3 in Resources */,

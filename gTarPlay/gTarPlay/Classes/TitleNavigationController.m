@@ -1187,6 +1187,7 @@ extern Facebook * g_facebook;
         [settings synchronize];
     }
     
+    [g_gtarController InitiateSerialNumberRequest];
     [g_gtarController turnOffAllEffects];
     [g_gtarController turnOffAllLeds];
     [g_gtarController sendDisableDebug];
@@ -1220,6 +1221,8 @@ extern Facebook * g_facebook;
 
 - (void)gtarDisconnected
 {
+    
+    [g_gtarController InterruptSerialNumberRequest];
     
     // Pull down the firmare view controller after disconnection
     if ( self.presentedViewController == _firmwareViewController )
@@ -1330,6 +1333,40 @@ extern Facebook * g_facebook;
 - (void)receivedFirmwareUpdateProgress:(unsigned char)percentage
 {
     _firmwareViewController.updateProgress = percentage;
+}
+
+- (void)receivedCTMatrixValue:(unsigned char)value row:(unsigned char)row col:(unsigned char)col {
+    [_settingsViewController receivedCTMatrixValue:value row:row col:col];
+}
+
+- (void)receivedSensitivityValue:(unsigned char)value string:(unsigned char)str {
+    [_settingsViewController receivedSensitivityValue:value string:str];
+}
+
+- (void)receivedSerialNumber:(unsigned char *)number {
+    [_settingsViewController receivedSerialNumber:number];
+}
+
+- (void)receivedPiezoWindow:(unsigned char)value {
+    // TODO: Set window
+}
+
+- (void)receivedResponse:(unsigned char)response
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Received Response" message:[NSString stringWithFormat:@"%u",response] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
+    }];
+}
+
+- (void)receivedCommitUserspaceAck:(unsigned char)status {
+    [_settingsViewController receivedCommitUserspaceAck:status];
+}
+
+- (void)receivedResetUserspaceAck:(unsigned char)status {
+    [_settingsViewController receivedResetUserspaceAck:status];
 }
 
 #pragma mark - UserController callbacks

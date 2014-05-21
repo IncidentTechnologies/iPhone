@@ -127,15 +127,15 @@
                                 <action selector="profileButtonClicked:" destination="-1" eventType="touchUpInside" id="3458"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60i-qr-0tD">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60i-qr-0tD">
                             <rect key="frame" x="434" y="0.0" width="46" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="46" id="1ye-tf-vgS"/>
                                 <constraint firstAttribute="height" constant="46" id="gz2-0M-9tP"/>
                             </constraints>
-                            <state key="normal">
+                            <inset key="imageEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="3"/>
+                            <state key="normal" image="SettingsIcon.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -888,6 +888,7 @@
         <image name="FacebookIcon.jpg" width="25" height="48"/>
         <image name="IncidentGtar_ComButton.png" width="233" height="74"/>
         <image name="PlayButtonVideo.png" width="173" height="173"/>
+        <image name="SettingsIcon.png" width="85" height="73"/>
         <image name="gTarLogoTitle.png" width="317" height="203"/>
     </resources>
 </document>
