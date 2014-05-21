@@ -154,5 +154,29 @@
 // ETC
 "Error" = "Erreur";
 "Search..." = "Recherche...";
+// Settings
+"Settings" = "Paramètres";
+"GTAR" = "GTAR";
+"CALIBRATE" = "ÉTALONNER";
+"CONTROLS" = "CONTRÔLES";
+"gTar Serial" = "Numéro de Série";
+"Firmware" = "FFirmware";
+"CHECK FOR UPDATES" = "RÉACTUALISER";
+"UP TO DATE" = "COURANT";
+"Unavailable" = "Indisponible";
+"version" = "version";
 
+// Prompt Registration
+"Register your gTar." = "Enregistrez votre gTar.";
+"Get %u free songs." = "%u chansons gratuites.";
+"LATER" = "PLUS TARD";
+"REGISTER" = "ENREGISTRER";
+"REGISTERED" = "ENREGISTRÉ";
+
+// Firmware
+"Firmware Update" = "Révision du Firmware";
+"Current Version" = "Version Actuelle";
+"Available Version" = "Version Disponible";
+"Progress" = "Progrès";
+"UPDATE" = "RÉACTUALISER";
 

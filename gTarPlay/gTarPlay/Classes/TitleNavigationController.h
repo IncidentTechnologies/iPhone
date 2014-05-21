@@ -54,7 +54,6 @@
 @property (strong, nonatomic) IBOutlet UIView *feedRightPanel;
 @property (strong, nonatomic) IBOutlet UIView *loadingRightPanel;
 
-@property (strong, nonatomic) IBOutlet UIView *disconnectedGtarLeftPanel;
 @property (strong, nonatomic) IBOutlet UILabel *pleaseConnectLabel;
 
 // Left Panel buttons + clicks
@@ -76,6 +75,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *menuPlayButton;
 @property (strong, nonatomic) IBOutlet UIButton *menuFreePlayButton;
 @property (strong, nonatomic) IBOutlet UIButton *menuStoreButton;
+@property (strong, nonatomic) IBOutlet UIButton *menuSettingsButton;
 
 @property (strong, nonatomic) IBOutlet CyclingTextField *signinUsernameText;
 @property (strong, nonatomic) IBOutlet CyclingTextField *signinPasswordText;
@@ -94,6 +94,8 @@
 - (IBAction)menuPlayButtonClicked:(id)sender;
 - (IBAction)menuFreePlayButtonClicked:(id)sender;
 - (IBAction)menuStoreButtonClicked:(id)sender;
+
+- (IBAction)menuSettingsButtonClicked:(id)sender;
 
 // Right Panel buttons + clicks
 - (IBAction)signupButtonClicked:(id)sender;

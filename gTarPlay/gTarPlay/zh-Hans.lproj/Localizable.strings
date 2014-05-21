@@ -152,3 +152,30 @@
 "Error" = "错误";
 "Search..." = "搜索...";
 
+// Settings
+"Settings" = "竖立";
+"GTAR" = "GTAR";
+"CALIBRATE" = "校准";
+"CONTROLS" = "控制";
+"gTar Serial" = "编号";
+"Firmware" = "固件";
+"CHECK FOR UPDATES" = "检查更新";
+"UP TO DATE" = "没有更新";
+"Unavailable" = "不可用";
+"version" = "版本";
+
+// Prompt Registration
+"Register your gTar." = "注册您了gTar";
+"Get %u free songs." = "%u首免费歌曲";
+"LATER" = "后来";
+"REGISTER" = "注册";
+"REGISTERED" = "已注册";
+
+// Firmware
+"Firmware Update" = "固件更新";
+"Current Version" = "当前版本";
+"Available Version" = "可用版本";
+"Progress" = "进展";
+"UPDATE" = "更新";
+
+

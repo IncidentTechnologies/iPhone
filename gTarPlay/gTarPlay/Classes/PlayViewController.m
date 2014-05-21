@@ -102,6 +102,8 @@ extern UserController * g_userController;
     BOOL _songIsPaused;
     BOOL _songUploadQueueFull;
     
+    BOOL _postToFeed;
+    
     // Standalone
     CGPoint initPoint;
     BOOL isScrolling;
@@ -223,7 +225,8 @@ extern UserController * g_userController;
     // Hide the glview till it is done loading
     _glView.hidden = YES;
     
-    //[self setStandalone];
+    [self initPostToFeed];
+    ;
     [self updateDifficultyDisplay];
     
     // The first time we load this up, parse the song
@@ -454,7 +457,7 @@ extern UserController * g_userController;
     [self finalLogging];
     
     // If user finished more that 15% of a song and they chose to share the song, upload the userSong session
-    if (_songModel.m_percentageComplete >= 0.15 && _feedSwitch.isOn == YES)
+    if (_songModel.m_percentageComplete >= 0.15)
     {
         // Show end of song screen
         [self endSong];
@@ -481,7 +484,7 @@ extern UserController * g_userController;
     // Log our final state before exiting
     [self finalLogging];
     
-    if ( _feedSwitch.isOn == YES )
+    if ( _postToFeed == YES )
     {
         // This implicitly saves the user cache
         [self uploadUserSongSession];
@@ -746,7 +749,7 @@ extern UserController * g_userController;
     }
     
     // Only upload at the end of a song
-    if ( _finishButton.isHidden == NO && _feedSwitch.isOn == YES )
+    if ( _finishButton.isHidden == NO && _postToFeed == YES )
     {
         [self uploadUserSongSession];
     }
@@ -1200,6 +1203,12 @@ extern UserController * g_userController;
 }
 
 #pragma mark - UI & Misc related helpers
+
+- (void)initPostToFeed
+{
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    _postToFeed = ![settings boolForKey:@"DisablePostToFeed"];
+}
 
 - (void)handleResignActive
 {
