@@ -80,6 +80,9 @@ unsigned char g_sensitivity[6];
     _firmwareVersionLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Firmware", NULL)];
     
     [_updateButton setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"CHECK FOR UPDATES", NULL)] forState:UIControlStateNormal];
+    [_buttonCommitFW setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"COMMIT", NULL)] forState:UIControlStateNormal];
+    [_buttonResetFactory setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"RESET", NULL)] forState:UIControlStateNormal];
+    [_buttonLoadValues setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"LOAD", NULL)] forState:UIControlStateNormal];
     
     _postToFeedLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"POST TO FEED", NULL)];
     _offLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OFF", NULL)];
@@ -459,7 +462,7 @@ unsigned char g_sensitivity[6];
         [m_pSensSettingsButtons[m_selectedSensString] setBackgroundColor:highlightColor];
         
         // Load in value widget
-        NSString *labelString = [[NSString alloc] initWithFormat:@"String %d Sensitivity", m_selectedSensString];
+        NSString *labelString = [[NSString alloc] initWithFormat:NSLocalizedString(@"String %d Sensitivity", NULL), m_selectedSensString];
         NSString *labelValue = [[NSString alloc] initWithFormat:@"%d", [g_gtarController GetSensitivityString:m_selectedSensString]];
         [_selectedCtrlLabel setText:labelString];
         [_selectedCtrlValue setText:labelValue];

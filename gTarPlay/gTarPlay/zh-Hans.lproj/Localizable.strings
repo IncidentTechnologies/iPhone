@@ -163,6 +163,10 @@
 "UP TO DATE" = "没有更新";
 "Unavailable" = "不可用";
 "version" = "版本";
+"LOAD" = "负荷";
+"RESET" = "重置";
+"COMMIT" = "犯";
+"String %d Sensitivity" = "字串 %d 灵敏度";
 
 // Prompt Registration
 "Register your gTar." = "注册您了gTar";

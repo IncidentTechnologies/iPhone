@@ -165,6 +165,10 @@
 "UP TO DATE" = "変更なし";
 "Unavailable" = "利用できない";
 "version" = "改作";
+"LOAD" = "積み込む";
+"RESET" = "晴らす";
+"COMMIT" = "溜める";
+"String %d Sensitivity" = "弦 %d 感度";
 
 // Prompt Registration
 "Register your gTar." = "gTarを登録する";

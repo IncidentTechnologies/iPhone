@@ -165,6 +165,10 @@
 "UP TO DATE" = "AGGIORNAMENTI";
 "Unavailable" = "Non Disponibile";
 "version" = "versione";
+"LOAD" = "CARICARE";
+"RESET" = "AZZERARE";
+"COMMIT" = "COMMETTERE";
+"String %d Sensitivity" = "Stringa %d Sensibilità";
 
 // Prompt Registration
 "Register your gTar." = "Registrare il gTar.";

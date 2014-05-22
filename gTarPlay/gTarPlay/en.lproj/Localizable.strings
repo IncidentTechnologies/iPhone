@@ -165,6 +165,10 @@
 "UP TO DATE" = "UP TO DATE";
 "Unavailable" = "Unavailable";
 "version" = "version";
+"LOAD" = "LOAD";
+"RESET" = "RESET";
+"COMMIT" = "COMMIT";
+"String %d Sensitivity" = "String %d Sensitivity";
 
 // Prompt Registration
 "Register your gTar." = "Register your gTar.";

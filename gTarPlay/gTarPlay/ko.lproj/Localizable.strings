@@ -166,6 +166,10 @@
 "UP TO DATE" = "버전은 현재입니다";
 "Unavailable" = "없는";
 "version" = "버전";
+"LOAD" = "하중";
+"RESET" = "재설정";
+"COMMIT" = "커밋";
+"String %d Sensitivity" = "문자열 %d 감도";
 
 // Prompt Registration
 "Register your gTar." = "당신의 gTar 등록";

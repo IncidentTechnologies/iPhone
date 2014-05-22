@@ -164,6 +164,10 @@
 "UP TO DATE" = "не было изменений";
 "Unavailable" = "недоступен";
 "version" = "версия";
+"LOAD" = "нагружать";
+"RESET" = "реставрировать";
+"COMMIT" = "совершать";
+"String %d Sensitivity" = "строка %d Чувствительность";
 
 // Prompt Registration
 "Register your gTar." = "зарегистрировать gTar.";
