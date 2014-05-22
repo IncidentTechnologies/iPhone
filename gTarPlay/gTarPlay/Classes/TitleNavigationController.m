@@ -1257,13 +1257,20 @@ extern Facebook * g_facebook;
         [settings setBool:YES forKey:@"GtarRegistered"];
         [settings synchronize];
     
-        // TODO: make sure this is in the right format and called at the right time
-        NSString * serialNumber = [g_gtarController GetSerialNumber];
+        NSString * serialNumberUpper = [g_gtarController GetSerialNumberUpper];
+        NSString * serialNumberLower = [g_gtarController GetSerialNumberLower];
         
-        // TODO: pass to cloud controller
+        NSLog(@"Register device serial number %@, %@",serialNumberLower, serialNumberLower);
+        
+        [g_userController requestRegisterGtarSerialUpper:serialNumberUpper SerialLower:serialNumberLower andCallbackObj:self andCallbackSel:@selector(registerDeviceCallback)];
         
     }
     
+}
+
+- (void)registerDeviceCallback
+{
+    NSLog(@"Registered device on title view controller");
 }
 
 - (BOOL)isDeviceRegistered

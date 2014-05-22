@@ -27,6 +27,7 @@ typedef enum
     UserRequestTypeUserFollows,
     UserRequestTypeUserFollowed,
     UserRequestTypeUserFacebookFriends,
+    UserRequestTypeRegisterGtarSerial,
     UserRequestTypeUserSongSessionUpload
 } UserRequestType;
 

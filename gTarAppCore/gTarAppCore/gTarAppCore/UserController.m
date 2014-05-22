@@ -289,6 +289,15 @@
 }
 
 #pragma mark - Account mgmt
+- (void) requestRegisterGtarSerialUpper:(NSString *)serial_upper SerialLower:(NSString *)serial_lower andCallbackObj:(id)obj andCallbackSel:(SEL)sel
+{
+    
+    UserRequest * userRequest = [[UserRequest alloc] initWithType:UserRequestTypeRegisterGtarSerial andCallbackObject:obj andCallbackSelector:sel];
+    
+    CloudRequest * cloudRequest = [m_cloudController requestRegisterGtarSerialUpper:serial_upper SerialLower:serial_lower andCallbackObj:self andCallbackSel:@selector(requestRegisterGtarCallback:)];
+    
+    [m_cloudToUserRequest setObject:userRequest forKey:[NSValue valueWithNonretainedObject:cloudRequest]];
+}
 
 - (void)requestSignupUser:(NSString*)username
               andPassword:(NSString*)password
@@ -361,6 +370,36 @@
     
     [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
     
+}
+
+- (void) requestRegisterGtarCallback:(CloudResponse *)cloudResponse
+{
+    UserRequest * userRequest = [m_cloudToUserRequest objectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
+    
+    [m_cloudToUserRequest removeObjectForKey:[NSValue valueWithNonretainedObject:cloudResponse.m_cloudRequest]];
+    
+    // Create response
+    UserResponse * userResponse = [[UserResponse alloc] initWithUserRequest:userRequest];
+
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+    {
+        NSLog(@"Registered");
+        
+        userResponse.m_status = UserResponseStatusSuccess;
+        
+    }
+    else
+    {
+        
+        userResponse.m_status = UserResponseStatusFailure;
+        userResponse.m_statusText = cloudResponse.m_statusText;
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Registration" message:@"This gTar has already been registered." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [alert show];
+    }
+    
+    [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
 }
 
 - (void)requestLoginUser:(NSString*)username
