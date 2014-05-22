@@ -106,6 +106,8 @@
 - (void)requestUserSongSessionUpload:(UserSongSession*)songSession andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
 - (void)requestUserSongSessionUploadCallback:(CloudResponse*)cloudResponse;
 
+- (void)requestRegisterGtarSerialUpper:(NSString*)serial_upper SerialLower:(NSString*)serial_lower andCallbackObj:(id)obj andCallbackSel:(SEL)sel;
+
 // Accesors
 - (UserEntry*)getUserEntry:(NSInteger)userId;
 - (void)setUserProfileForUserId:(NSInteger)userId toProfile:(UserProfile*)profile;

@@ -28,12 +28,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    [self localizeViews];
+    
     [_updateButton addShadowWithRadius:2.0 andOpacity:0.9];
     
     [_currentFirmwareLabel setText:_currentFirmwareVersion];
     [_availableFirmwareLabel setText:_availableFirmwareVersion];
 }
+
+
+- (void)localizeViews
+{
+    _firmwareUpdateLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Firmware Update", NULL)];
+    
+    _currentVersionLabel.text = [NSLocalizedString(@"Current Version", NULL) stringByAppendingString:@":"];
+    _availableVersionLabel.text = [NSLocalizedString(@"Available Version", NULL) stringByAppendingString:@":"];
+    _progressLabel.text = [NSLocalizedString(@"Progress", NULL) stringByAppendingString:@":"];
+    
+    [_updateButton setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"UPDATE", NULL)] forState:UIControlStateNormal];
+    
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {

@@ -152,3 +152,34 @@
 
 "Error" = "Ошибка";
 "Search..." = "Искать…";
+
+// Settings
+"Settings" = "настройки";
+"GTAR" = "GTAR";
+"CALIBRATE" = "калибровать";
+"CONTROLS" = "управления";
+"gTar Serial" = "серийный номер";
+"Firmware" = "прошивки";
+"CHECK FOR UPDATES" = "обновлять";
+"UP TO DATE" = "не было изменений";
+"Unavailable" = "недоступен";
+"version" = "версия";
+"LOAD" = "нагружать";
+"RESET" = "реставрировать";
+"COMMIT" = "совершать";
+"String %d Sensitivity" = "строка %d Чувствительность";
+
+// Prompt Registration
+"Register your gTar." = "зарегистрировать gTar.";
+"Get %u free songs." = "%u бесплатных песен.";
+"LATER" = "позже";
+"REGISTER" = "регистрировать";
+"REGISTERED" = "поступил";
+
+// Firmware
+"Firmware Update" = "обновление прошивки";
+"Current Version" = "текущая версия";
+"Available Version" = "доступный";
+"Progress" = "прогресс";
+"UPDATE" = "обновлять";
+

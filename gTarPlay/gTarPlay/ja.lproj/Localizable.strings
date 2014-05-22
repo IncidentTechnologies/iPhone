@@ -153,3 +153,34 @@
 
 "Error" = "エラー";
 "Search..." = "検索...";
+
+// Settings
+"Settings" = "設定";
+"GTAR" = "GTAR";
+"CALIBRATE" = "調整する";
+"CONTROLS" = "コントロール";
+"gTar Serial" = "シリアルナンバー";
+"Firmware" = "ファームウェア";
+"CHECK FOR UPDATES" = "更新を確認する";
+"UP TO DATE" = "変更なし";
+"Unavailable" = "利用できない";
+"version" = "改作";
+"LOAD" = "積み込む";
+"RESET" = "晴らす";
+"COMMIT" = "溜める";
+"String %d Sensitivity" = "弦 %d 感度";
+
+// Prompt Registration
+"Register your gTar." = "gTarを登録する";
+"Get %u free songs." = "%u自由曲";
+"LATER" = "後で";
+"REGISTER" = "登録する";
+"REGISTERED" = "登録された";
+
+// Firmware
+"Firmware Update" = "ファームウェアの変更";
+"Current Version" = "現バージョン";
+"Available Version" = "新バージョン";
+"Progress" = "進捗";
+"UPDATE" = "更新";
+

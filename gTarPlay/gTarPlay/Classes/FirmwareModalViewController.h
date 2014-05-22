@@ -10,6 +10,9 @@
 
 @interface FirmwareModalViewController : SlidingModalViewController
 
+@property (strong, nonatomic) IBOutlet UILabel *firmwareUpdateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *currentVersionLabel;
+@property (strong, nonatomic) IBOutlet UILabel *availableVersionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *currentFirmwareLabel;
 @property (strong, nonatomic) IBOutlet UILabel *availableFirmwareLabel;
 @property (strong, nonatomic) IBOutlet UILabel *progressLabel;

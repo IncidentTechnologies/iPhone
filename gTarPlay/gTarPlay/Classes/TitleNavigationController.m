@@ -63,6 +63,7 @@ extern Facebook * g_facebook;
 {
     SessionModalViewController *_sessionViewController;
     FirmwareModalViewController *_firmwareViewController;
+    SettingsViewController *_settingsViewController;
     
     UIView *_currentLeftPanel;
     UIView *_currentRightPanel;
@@ -161,7 +162,7 @@ extern Facebook * g_facebook;
     //[_menuStoreButton addShadow];
     
     // Hide anything that needs hiding
-    //[[_profileButton superview] setHidden:YES];
+    [_menuSettingsButton setHidden:YES];
     [_profileButton setHidden:YES];
     [_profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
@@ -255,6 +256,8 @@ extern Facebook * g_facebook;
     // Set up the modals
     _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
+    _settingsViewController = [[SettingsViewController alloc] initWithNibName:nil bundle:nil];
+    _settingsViewController.delegate = self;
     
     _displayingCell = NO;
     
@@ -285,11 +288,6 @@ extern Facebook * g_facebook;
     }
     else
     {
-        /*if ( g_gtarController.connected == NO )
-        {
-            [self swapLeftPanel:_disconnectedGtarLeftPanel];
-        }
-         */
         
         // We are logged in
         [g_userController sendPendingUploads];
@@ -363,51 +361,6 @@ extern Facebook * g_facebook;
     [_currentLeftPanel removeFromSuperview];
     [_currentRightPanel removeFromSuperview];
     [_fullScreenButton removeFromSuperview];
-    /*
-    [_globalFeed release];
-    [_friendFeed release];
-    
-    [_rightPanel release];
-    [_leftPanel release];
-    [_loggedoutLeftPanel release];
-    [_signupRightPanel release];
-
-    [_loggedoutSignupButton release];
-    [_loggedoutSigninButton release];
-    [_signinRightPanel release];
-    [_gtarLogoImage release];
-    
-    [_topBarView release];
-    [_gatekeeperVideoButton release];
-    [_gatekeeperSigninButton release];
-
-    [_gatekeeperLeftPanel release];
-    [_videoRightPanel release];
-    
-    [_menuPlayButton release];
-    [_menuFreePlayButton release];
-    [_menuStoreButton release];
-    [_menuLeftPanel release];
-    [_feedRightPanel release];
-    [_feedTable release];
-    [_feedSelectorControl release];
-    
-    [_gatekeeperWebsiteButton release];
-    [_notificationLabel release];
-    
-    [_loadingRightPanel release];
-    [_signinUsernameText release];
-    [_signinPasswordText release];
-    [_signupUsernameText release];
-    [_signupPasswordText release];
-    [_signupEmailText release];
-    [_delayLoadingView release];
-    [_disconnectedGtarLeftPanel release];
-    [_videoPreviewImage release];
-    [_sessionViewController release];
-    [_profileButton release];
-    
-    [g_facebook release];*/
     
     g_facebook = nil;
 
@@ -485,16 +438,11 @@ extern Facebook * g_facebook;
     
     [self hideNotification];
     
-    //[[_profileButton superview] setHidden:YES];
+    [_menuSettingsButton setHidden:YES];
     [_profileButton setHidden:YES];
 }
 
 - (void)loggedinScreen {
-    /*if ( g_gtarController.connected == NO )
-        [self swapLeftPanel:_disconnectedGtarLeftPanel];
-    else
-        [self swapLeftPanel:_menuLeftPanel];
-    */
 
     [self swapLeftPanel:_menuLeftPanel];
     
@@ -506,7 +454,7 @@ extern Facebook * g_facebook;
     
     [self hideNotification];
     
-    //[[_profileButton superview] setHidden:NO];
+    [_menuSettingsButton setHidden:NO];
     [_profileButton setHidden:NO];
     
     UserEntry *loggedInEntry = [g_userController getUserEntry:0];
@@ -523,17 +471,10 @@ extern Facebook * g_facebook;
         [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
     }
     
-    // If we've logged in, regardles of whether the gtar was ever connected, we can act as if it was.
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    
-    BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
-    
-    // First log in, show the welcome screens
-	if ( guitarConnectedBefore == NO ) {
-        [settings setBool:YES forKey:@"GuitarConnectedBefore"];
-        [settings synchronize];
+    if(g_gtarController.connected){
+        [self promptGtarRegistration];
     }
-
+    
 }
 
 - (void)profilePicDownloaded:(UIImage *)image {
@@ -636,7 +577,11 @@ extern Facebook * g_facebook;
 	
 	[self.navigationController pushViewController:fpc animated:YES];
 	
-    
+}
+
+- (IBAction)menuSettingsButtonClicked:(id)sender
+{
+    [self.navigationController pushViewController:_settingsViewController animated:YES];
 }
 
 - (IBAction)menuStoreButtonClicked:(id)sender
@@ -1221,15 +1166,16 @@ extern Facebook * g_facebook;
     
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     
-    BOOL guitarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
+    BOOL gtarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
     
     // First log in, show the welcome screens
-	if ( guitarConnectedBefore == NO )
+	if ( gtarConnectedBefore == NO )
 	{
         [settings setBool:YES forKey:@"GuitarConnectedBefore"];
         [settings synchronize];
     }
     
+    [g_gtarController InitiateSerialNumberRequest];
     [g_gtarController turnOffAllEffects];
     [g_gtarController turnOffAllLeds];
     [g_gtarController sendDisableDebug];
@@ -1237,6 +1183,10 @@ extern Facebook * g_facebook;
     if ( g_cloudController.m_loggedIn == YES )
     {
         [self loggedinScreen];
+        
+        if(!gtarConnectedBefore){
+            [self promptGtarRegistration];
+        }
     }
     else
     {
@@ -1255,16 +1205,12 @@ extern Facebook * g_facebook;
     
     [g_soundMaster routeToDefault];
     
-    
 }
 
 - (void)gtarDisconnected
 {
-    /*if ( g_cloudController.m_loggedIn == YES )
-    {
-        [self swapLeftPanel:_disconnectedGtarLeftPanel];
-    }
-     */
+    
+    [g_gtarController InterruptSerialNumberRequest];
     
     // Pull down the firmare view controller after disconnection
     if ( self.presentedViewController == _firmwareViewController )
@@ -1273,6 +1219,67 @@ extern Facebook * g_facebook;
     }
     
     [self showHideFreePlay];
+}
+
+- (void)promptGtarRegistration
+{
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    BOOL gtarRegistered = [settings boolForKey:@"GtarRegistered"];
+    BOOL gtarRegisterPromptShown = [settings boolForKey:@"GtarRegisterPrompt"];
+    
+    // First log in, show the welcome screens
+	if ( gtarRegistered == NO && gtarRegisterPromptShown == NO )
+	{
+        
+        [settings setBool:YES forKey:@"GtarRegisterPrompt"];
+        [settings synchronize];
+        
+        // Prompt registration
+        RegisterPromptViewController * rpvc = [[RegisterPromptViewController alloc] initWithNibName:nil bundle:nil];
+        
+        rpvc.delegate = self;
+        
+        // if anything is up, hide it, then show register prompt
+        [self dismissViewControllerAnimated:NO completion:NULL];
+        [self presentViewController:rpvc animated:YES completion:^(void){}];
+    }
+}
+
+- (void)registerDevice
+{
+    
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    
+    BOOL gtarRegistered = [settings boolForKey:@"GtarRegistered"];
+    
+    if(!gtarRegistered){
+        
+        [settings setBool:YES forKey:@"GtarRegistered"];
+        [settings synchronize];
+    
+        NSString * serialNumberUpper = [g_gtarController GetSerialNumberUpper];
+        NSString * serialNumberLower = [g_gtarController GetSerialNumberLower];
+        
+        NSLog(@"Register device serial number %@, %@",serialNumberLower, serialNumberLower);
+        
+        [g_userController requestRegisterGtarSerialUpper:serialNumberUpper SerialLower:serialNumberLower andCallbackObj:self andCallbackSel:@selector(registerDeviceCallback)];
+        
+    }
+    
+}
+
+- (void)registerDeviceCallback
+{
+    NSLog(@"Registered device on title view controller");
+}
+
+- (BOOL)isDeviceRegistered
+{
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    
+    return [settings boolForKey:@"GtarRegistered"];
+    
+    // TODO: cloud controller call
 }
 
 #pragma mark - GtarControllerDelegate
@@ -1355,6 +1362,40 @@ extern Facebook * g_facebook;
 - (void)receivedFirmwareUpdateProgress:(unsigned char)percentage
 {
     _firmwareViewController.updateProgress = percentage;
+}
+
+- (void)receivedCTMatrixValue:(unsigned char)value row:(unsigned char)row col:(unsigned char)col {
+    [_settingsViewController receivedCTMatrixValue:value row:row col:col];
+}
+
+- (void)receivedSensitivityValue:(unsigned char)value string:(unsigned char)str {
+    [_settingsViewController receivedSensitivityValue:value string:str];
+}
+
+- (void)receivedSerialNumber:(unsigned char *)number {
+    [_settingsViewController receivedSerialNumber:number];
+}
+
+- (void)receivedPiezoWindow:(unsigned char)value {
+    // TODO: Set window
+}
+
+- (void)receivedResponse:(unsigned char)response
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Received Response" message:[NSString stringWithFormat:@"%u",response] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
+    }];
+}
+
+- (void)receivedCommitUserspaceAck:(unsigned char)status {
+    [_settingsViewController receivedCommitUserspaceAck:status];
+}
+
+- (void)receivedResetUserspaceAck:(unsigned char)status {
+    [_settingsViewController receivedResetUserspaceAck:status];
 }
 
 #pragma mark - UserController callbacks
@@ -1466,15 +1507,9 @@ extern Facebook * g_facebook;
     
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
-//        [g_telemetryController logEvent:GtarPlayAppLogin
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
-//                                         nil]];
         [self logLoginEvent];
         
         [g_userController sendPendingUploads];
-        
-//        [g_telemetryController uploadLogMessages];
         
         [self loggedinScreen];
         
@@ -1695,6 +1730,7 @@ extern Facebook * g_facebook;
 
 - (void)receivedAvailableFirmwareVersion:(CloudResponse*)cloudResponse
 {
+    [_settingsViewController updateFirmwareVersion];
     
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
@@ -1711,12 +1747,17 @@ extern Facebook * g_facebook;
             _firmwareViewController.availableFirmwareVersion = [NSString stringWithFormat:@"%u.%u", cloudResponse.m_responseFirmwareMajorVersion, cloudResponse.m_responseFirmwareMinorVersion];
             
             [g_fileController getFileOrDownloadAsync:_firmwareFileId callbackObject:self callbackSelector:@selector(firmwareDownloadFinished:)];
+        }else{
+            
+            [_settingsViewController noUpdates];
         }
     }
     else
     {
         // Failed to get firmware, nothing more to worry about for now
         NSLog(@"Failed to get available firmware version");
+        
+        [_settingsViewController noUpdates];
     }
 }
 

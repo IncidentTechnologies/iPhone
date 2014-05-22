@@ -25,6 +25,8 @@
 		6D3D06E018F4D2E8007683DB /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06DA18F4D2E8007683DB /* release_notes.md */; };
 		6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D594C101909BCF900CF3128 /* HighlightModel.m */; };
 		6D62271F191D84D9003D8534 /* Metronome.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D62271E191D84D9003D8534 /* Metronome.mp3 */; };
+		6D6C5E2F192C0AD40039A85F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C5E2E192C0AD40039A85F /* SettingsViewController.xib */; };
+		6D6C5E32192C0B1F0039A85F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C5E31192C0B1F0039A85F /* SettingsViewController.m */; };
 		6D72F22018FF1EC100D68394 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */; };
 		6D7D46F31919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */; };
 		6D7D46F41919BA0F00EF8C75 /* FullScreenActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E41919BA0F00EF8C75 /* FullScreenActivityView.m */; };
@@ -36,6 +38,9 @@
 		6D7D46FA1919BA0F00EF8C75 /* StarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46F01919BA0F00EF8C75 /* StarRatingView.m */; };
 		6D7D46FB1919BA0F00EF8C75 /* TransitionRectangleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46F21919BA0F00EF8C75 /* TransitionRectangleViewController.m */; };
 		6D7D47051919BB8D00EF8C75 /* TimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D47041919BB8D00EF8C75 /* TimeFormatter.m */; };
+		6DA8C1F8192C2C8400182BCF /* RegisterPromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA8C1F6192C2C8400182BCF /* RegisterPromptViewController.m */; };
+		6DA8C1F9192C2C8400182BCF /* RegisterPromptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA8C1F7192C2C8400182BCF /* RegisterPromptViewController.xib */; };
+		6DA8C1FB192D12DF00182BCF /* SettingsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA8C1FA192D12DF00182BCF /* SettingsIcon.png */; };
 		6DAD0B1119187F1F005B3807 /* Warm Analogue 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AE819187F1F005B3807 /* Warm Analogue 40.mp3 */; };
 		6DAD0B1219187F1F005B3807 /* Warm Analogue 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AE919187F1F005B3807 /* Warm Analogue 41.mp3 */; };
 		6DAD0B1319187F1F005B3807 /* Warm Analogue 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DAD0AEA19187F1F005B3807 /* Warm Analogue 42.mp3 */; };
@@ -1511,6 +1516,9 @@
 		6D594C101909BCF900CF3128 /* HighlightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightModel.m; sourceTree = "<group>"; };
 		6D62271E191D84D9003D8534 /* Metronome.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Metronome.mp3; sourceTree = "<group>"; };
 		6D622720191DA91E003D8534 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6D6C5E2E192C0AD40039A85F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		6D6C5E30192C0B1F0039A85F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		6D6C5E31192C0B1F0039A85F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = FacebookIcon.jpg; path = Resources/Images/Title/FacebookIcon.jpg; sourceTree = SOURCE_ROOT; };
 		6D7D46E11919BA0F00EF8C75 /* ExpandingRoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpandingRoundedRectangleView.h; path = CustomUI/ExpandingRoundedRectangleView.h; sourceTree = SOURCE_ROOT; };
 		6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpandingRoundedRectangleView.m; path = CustomUI/ExpandingRoundedRectangleView.m; sourceTree = SOURCE_ROOT; };
@@ -1532,6 +1540,10 @@
 		6D7D46F21919BA0F00EF8C75 /* TransitionRectangleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransitionRectangleViewController.m; path = CustomUI/TransitionRectangleViewController.m; sourceTree = SOURCE_ROOT; };
 		6D7D47031919BB8D00EF8C75 /* TimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFormatter.h; sourceTree = "<group>"; };
 		6D7D47041919BB8D00EF8C75 /* TimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFormatter.m; sourceTree = "<group>"; };
+		6DA8C1F5192C2C8400182BCF /* RegisterPromptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPromptViewController.h; sourceTree = "<group>"; };
+		6DA8C1F6192C2C8400182BCF /* RegisterPromptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPromptViewController.m; sourceTree = "<group>"; };
+		6DA8C1F7192C2C8400182BCF /* RegisterPromptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterPromptViewController.xib; sourceTree = "<group>"; };
+		6DA8C1FA192D12DF00182BCF /* SettingsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsIcon.png; path = Resources/Images/General/SettingsIcon.png; sourceTree = SOURCE_ROOT; };
 		6DAD0AE819187F1F005B3807 /* Warm Analogue 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 40.mp3"; sourceTree = "<group>"; };
 		6DAD0AE919187F1F005B3807 /* Warm Analogue 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 41.mp3"; sourceTree = "<group>"; };
 		6DAD0AEA19187F1F005B3807 /* Warm Analogue 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Warm Analogue 42.mp3"; sourceTree = "<group>"; };
@@ -2443,7 +2455,9 @@
 				29B97315FDCFA39411CA2CEA /* AppDelegate */,
 				EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */,
 				EC0BAD8016F14A7800E567A6 /* SongSelectionViewController */,
+				6DA8C1F4192C2C6400182BCF /* RegisterPromptViewController */,
 				ECE9D2441705119100BB6C53 /* PlayViewController */,
+				6D6C5E2D192C0AA50039A85F /* SettingsViewController */,
 				ECE832381718EA0A006E2391 /* SocialViewController */,
 				ECE302641330322F002812B6 /* FreePlay Experience */,
 			);
@@ -2560,6 +2574,16 @@
 			path = TestFlightSDK3.0.0;
 			sourceTree = "<group>";
 		};
+		6D6C5E2D192C0AA50039A85F /* SettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D6C5E2E192C0AD40039A85F /* SettingsViewController.xib */,
+				6D6C5E30192C0B1F0039A85F /* SettingsViewController.h */,
+				6D6C5E31192C0B1F0039A85F /* SettingsViewController.m */,
+			);
+			name = SettingsViewController;
+			sourceTree = "<group>";
+		};
 		6D7D46E01919B9A200EF8C75 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2640,6 +2664,16 @@
 				6D7D47041919BB8D00EF8C75 /* TimeFormatter.m */,
 			);
 			name = TimeFormatter;
+			sourceTree = "<group>";
+		};
+		6DA8C1F4192C2C6400182BCF /* RegisterPromptViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6DA8C1F5192C2C8400182BCF /* RegisterPromptViewController.h */,
+				6DA8C1F6192C2C8400182BCF /* RegisterPromptViewController.m */,
+				6DA8C1F7192C2C8400182BCF /* RegisterPromptViewController.xib */,
+			);
+			name = RegisterPromptViewController;
 			sourceTree = "<group>";
 		};
 		6DAD0AE719187F1F005B3807 /* Warm Analogue */ = {
@@ -3419,6 +3453,7 @@
 		EC0BAD3516EEA06600E567A6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6DA8C1FA192D12DF00182BCF /* SettingsIcon.png */,
 				6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */,
 				ECFF775F17457E39002D7D40 /* CloseXButton.png */,
 				ECFF776317457E3B002D7D40 /* PlayButtonVideo.png */,
@@ -4174,6 +4209,7 @@
 				EC24DD5C161A89C800016B78 /* Piano 71.mp3 in Resources */,
 				EC24DD5D161A89C800016B78 /* Piano 72.mp3 in Resources */,
 				EC24DD5E161A89C800016B78 /* Piano 73.mp3 in Resources */,
+				6D6C5E2F192C0AD40039A85F /* SettingsViewController.xib in Resources */,
 				6DB285B51921915600B3D14C /* Electric Guitar 16.mp3 in Resources */,
 				EC24DD5F161A89C800016B78 /* Piano 74.mp3 in Resources */,
 				EC24DD60161A89C800016B78 /* Piano 75.mp3 in Resources */,
@@ -4661,6 +4697,7 @@
 				9D054E38174C68FB00FA3239 /* Upright Bass 51.mp3 in Resources */,
 				6DB286091921915600B3D14C /* Electric Guitar 92.mp3 in Resources */,
 				9D054E3A174C68FB00FA3239 /* Upright Bass 52.mp3 in Resources */,
+				6DA8C1F9192C2C8400182BCF /* RegisterPromptViewController.xib in Resources */,
 				9D054E3C174C68FB00FA3239 /* Upright Bass 53.mp3 in Resources */,
 				9D054E3E174C68FB00FA3239 /* Upright Bass 54.mp3 in Resources */,
 				6DB285D61921915600B3D14C /* Electric Guitar 46.mp3 in Resources */,
@@ -4684,6 +4721,7 @@
 				9D054E5C174C68FB00FA3239 /* Upright Bass 69.mp3 in Resources */,
 				9D054E5E174C68FB00FA3239 /* Upright Bass 70.mp3 in Resources */,
 				9D054E60174C68FB00FA3239 /* Upright Bass 71.mp3 in Resources */,
+				6DA8C1FB192D12DF00182BCF /* SettingsIcon.png in Resources */,
 				9D054E62174C68FB00FA3239 /* Upright Bass 72.mp3 in Resources */,
 				9D054E64174C68FB00FA3239 /* Upright Bass 73.mp3 in Resources */,
 				6DB285AF1921915600B3D14C /* Electric Guitar 103.mp3 in Resources */,
@@ -5356,6 +5394,7 @@
 				EC24DC54161A897A00016B78 /* SongES1Renderer.m in Sources */,
 				EC24DC5D161A898700016B78 /* PullToUpdateTableView.m in Sources */,
 				6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */,
+				6D6C5E32192C0B1F0039A85F /* SettingsViewController.m in Sources */,
 				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
 				6D7D46F41919BA0F00EF8C75 /* FullScreenActivityView.m in Sources */,
 				EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
@@ -5363,6 +5402,7 @@
 				EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
 				EC0BAD8416F18AA000E567A6 /* ActivityFeedCell.m in Sources */,
 				EC0BAD9416F2472900E567A6 /* SelectorControl.m in Sources */,
+				6DA8C1F8192C2C8400182BCF /* RegisterPromptViewController.m in Sources */,
 				EC0BAD9916F2784800E567A6 /* CyclingTextField.m in Sources */,
 				6D3D06D618F4A870007683DB /* SoundMaster.mm in Sources */,
 				EC0BAD9E16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */,

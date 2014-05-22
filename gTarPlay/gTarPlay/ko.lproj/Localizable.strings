@@ -154,3 +154,33 @@
 // ETC
 "Error" = "에러";
 "Search..." = "검색...";
+
+// Settings
+"Settings" = "설정";
+"GTAR" = "GTAR";
+"CALIBRATE" = "교정";
+"CONTROLS" = "컨트롤";
+"gTar Serial" = "일련 번호";
+"Firmware" = "펌웨어";
+"CHECK FOR UPDATES" = "업데이트를 확인";
+"UP TO DATE" = "버전은 현재입니다";
+"Unavailable" = "없는";
+"version" = "버전";
+"LOAD" = "하중";
+"RESET" = "재설정";
+"COMMIT" = "커밋";
+"String %d Sensitivity" = "문자열 %d 감도";
+
+// Prompt Registration
+"Register your gTar." = "당신의 gTar 등록";
+"Get %u free songs." = "%u 무료 노래";
+"LATER" = "후";
+"REGISTER" = "기록하다";
+"REGISTERED" = "이미기록하다";
+
+// Firmware
+"Firmware Update" = "펌웨어 업데이트";
+"Current Version" = "현재 버전";
+"Available Version" = "사용 가능한 버전";
+"Progress" = "진행";
+"UPDATE" = "새롭게 하다";

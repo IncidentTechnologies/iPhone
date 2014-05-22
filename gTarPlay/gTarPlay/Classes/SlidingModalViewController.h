@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SlidingModalViewController : UIViewController
+{
+    CGRect onFrame;
+    CGRect offFrame;
+}
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UIButton *blackButtonOrig;

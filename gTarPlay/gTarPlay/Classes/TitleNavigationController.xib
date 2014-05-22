@@ -7,7 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TitleNavigationController">
             <connections>
                 <outlet property="delayLoadingView" destination="3056" id="3063"/>
-                <outlet property="disconnectedGtarLeftPanel" destination="3107" id="3185"/>
                 <outlet property="feedRightPanel" destination="819" id="921"/>
                 <outlet property="feedSelectorControl" destination="971" id="984"/>
                 <outlet property="feedTable" destination="949" id="959"/>
@@ -24,9 +23,9 @@
                 <outlet property="menuFreePlayButton" destination="828" id="986"/>
                 <outlet property="menuLeftPanel" destination="820" id="920"/>
                 <outlet property="menuPlayButton" destination="827" id="912"/>
+                <outlet property="menuSettingsButton" destination="60i-qr-0tD" id="ggP-0k-7mt"/>
                 <outlet property="menuStoreButton" destination="3478" id="4dF-Uk-emY"/>
                 <outlet property="notificationLabel" destination="2398" id="2565"/>
-                <outlet property="pleaseConnectLabel" destination="3123" id="OAm-Z4-xO4"/>
                 <outlet property="profileButton" destination="3433" id="3457"/>
                 <outlet property="rightPanel" destination="109" id="136"/>
                 <outlet property="signInLoginLabel" destination="Pxk-fk-aDh" id="s0X-Sh-X21"/>
@@ -68,7 +67,7 @@
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="298" id="3462"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgE-x0-Ngx">
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgE-x0-Ngx" userLabel="TopView">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -128,10 +127,26 @@
                                 <action selector="profileButtonClicked:" destination="-1" eventType="touchUpInside" id="3458"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60i-qr-0tD">
+                            <rect key="frame" x="434" y="0.0" width="46" height="46"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="1ye-tf-vgS"/>
+                                <constraint firstAttribute="height" constant="46" id="gz2-0M-9tP"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="3"/>
+                            <state key="normal" image="SettingsIcon.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="menuSettingsButtonClicked:" destination="-1" eventType="touchUpInside" id="Kjn-DP-LVm"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="2408" secondAttribute="trailing" constant="-15" id="EmE-gX-ewA"/>
+                        <constraint firstAttribute="trailing" secondItem="60i-qr-0tD" secondAttribute="trailing" id="Px6-hq-HeQ"/>
                         <constraint firstItem="3433" firstAttribute="leading" secondItem="mgE-x0-Ngx" secondAttribute="leading" constant="182" id="Yka-0U-IWr"/>
                     </constraints>
                 </view>
@@ -240,41 +255,6 @@
                 <constraint firstItem="152" firstAttribute="leading" secondItem="145" secondAttribute="leading" id="2259"/>
                 <constraint firstItem="152" firstAttribute="trailing" secondItem="145" secondAttribute="trailing" id="2260"/>
                 <constraint firstAttribute="bottom" secondItem="152" secondAttribute="bottom" constant="57" id="2340"/>
-            </constraints>
-        </view>
-        <view contentMode="scaleToFill" id="3107" userLabel="DisconnectedGtarLeftPanel">
-            <rect key="frame" x="0.0" y="0.0" width="182" height="273"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3120">
-                    <rect key="frame" x="29" y="50" width="124" height="140"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="124" id="3176"/>
-                        <constraint firstAttribute="height" constant="140" id="3184"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="151"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Please Connect Your gTar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="124" translatesAutoresizingMaskIntoConstraints="NO" id="3123">
-                    <rect key="frame" x="29" y="198" width="124" height="55"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="55" id="3146"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
-            <color key="backgroundColor" red="0.1960784314" green="0.23137254900000001" blue="0.25882352939999997" alpha="1" colorSpace="deviceRGB"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="3123" secondAttribute="bottom" constant="20" symbolic="YES" id="3150"/>
-                <constraint firstItem="3120" firstAttribute="trailing" secondItem="3123" secondAttribute="trailing" id="3179"/>
-                <constraint firstItem="3120" firstAttribute="centerX" secondItem="3107" secondAttribute="centerX" id="3180"/>
-                <constraint firstItem="3120" firstAttribute="leading" secondItem="3123" secondAttribute="leading" id="3181"/>
-                <constraint firstItem="3123" firstAttribute="top" secondItem="3120" secondAttribute="bottom" constant="8" symbolic="YES" id="3183"/>
             </constraints>
         </view>
         <view contentMode="scaleToFill" id="3089" userLabel="SignupRightPanel">
@@ -908,6 +888,7 @@
         <image name="FacebookIcon.jpg" width="25" height="48"/>
         <image name="IncidentGtar_ComButton.png" width="233" height="74"/>
         <image name="PlayButtonVideo.png" width="173" height="173"/>
+        <image name="SettingsIcon.png" width="85" height="73"/>
         <image name="gTarLogoTitle.png" width="317" height="203"/>
     </resources>
 </document>

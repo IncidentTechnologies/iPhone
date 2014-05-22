@@ -90,7 +90,7 @@
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         button.titleLabel.numberOfLines = 2;
-        [button.titleLabel setFont:[UIFont fontWithName:@"Avenir Next" size:20.0]];
+        [button.titleLabel setFont:[UIFont fontWithName:@"Avenir Next" size:17.0]];
         
         if ( [title isKindOfClass:[NSAttributedString class]] == YES )
         {

@@ -49,7 +49,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [self startSlideUp];
 }
@@ -65,44 +65,42 @@
 
 - (void)startSlideUp
 {
+    [UIView setAnimationsEnabled:YES];
+    
+    // Needs to be on screen to measure components
+    double screenWidth = [[UIScreen mainScreen] bounds].size.height;
+    double contentWidth = _contentView.frame.size.width;
+    
+    onFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, _contentView.frame.origin.y, contentWidth, _contentView.frame.size.height);
+    
+    offFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, _contentView.frame.size.height, contentWidth, _contentView.frame.size.height);
+    
     // Start off screen
-//    _contentView.transform = CGAffineTransformMakeTranslation(0, _contentView.frame.size.height);
-    _contentView.layer.transform = CATransform3DMakeTranslation( 0, _contentView.frame.size.height, 0 );
+    [_contentView setHidden:NO];
+    [_contentView setFrame:offFrame];
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3f];
-    
-    // Slide up from the bottom of the screen
-//    _contentView.transform = CGAffineTransformIdentity;
-    _contentView.layer.transform = CATransform3DIdentity;
-
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [_contentView setFrame:onFrame];
+    }completion:^(BOOL finished){}];
 }
 
 - (void)startSlideDown
 {
-    // Start on the screen
-//    _contentView.transform = CGAffineTransformIdentity;
-    _contentView.layer.transform = CATransform3DIdentity;
+    [UIView setAnimationsEnabled:YES];
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3f];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(endSlideDown)];
+    // Start on screen
+    [_contentView setFrame:onFrame];
     
-    // Slide off the bottom of the screen
-    // For some reason, transform isn't working properly. Might be Apple bug?
-//    _contentView.transform = CGAffineTransformMakeTranslation(0, _contentView.frame.size.height);
-    _contentView.layer.transform = CATransform3DMakeTranslation( 0, _contentView.frame.size.height, 0 );
-
-    // Animating the center is fine.
-//    _contentView.center = CGPointMake(_contentView.center.x, _contentView.center.y+_contentView.frame.size.height);
-    
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [_contentView setFrame:offFrame];
+    }completion:^(BOOL finished){[self endSlideDown];}];
 }
 
 - (void)endSlideDown
 {
+    [_contentView setHidden:YES];
+    [_contentView setFrame:onFrame];
+    
     [self.presentingViewController dismissViewControllerAnimated:NO completion:NULL];
 }
 

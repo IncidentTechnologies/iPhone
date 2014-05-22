@@ -13,6 +13,8 @@
 #import <gTarAppCore/Facebook.h>
 
 #import "PaginatedPullToUpdateTableView.h"
+#import "RegisterPromptViewController.h"
+#import "SettingsViewController.h"
 
 #import "SoundMaster.h"
 
@@ -20,7 +22,7 @@
 @class SlidingModalViewController;
 @class CyclingTextField;
 
-@interface TitleNavigationController : UIViewController <UITableViewDataSource, PaginatedPullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate>
+@interface TitleNavigationController : UIViewController <UITableViewDataSource, PaginatedPullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate, RegisterPromptDelegate, SettingsDelegate>
 
 // Audio Controller
 @property (strong, nonatomic) SoundMaster *g_soundMaster;
@@ -54,7 +56,6 @@
 @property (strong, nonatomic) IBOutlet UIView *feedRightPanel;
 @property (strong, nonatomic) IBOutlet UIView *loadingRightPanel;
 
-@property (strong, nonatomic) IBOutlet UIView *disconnectedGtarLeftPanel;
 @property (strong, nonatomic) IBOutlet UILabel *pleaseConnectLabel;
 
 // Left Panel buttons + clicks
@@ -76,6 +77,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *menuPlayButton;
 @property (strong, nonatomic) IBOutlet UIButton *menuFreePlayButton;
 @property (strong, nonatomic) IBOutlet UIButton *menuStoreButton;
+@property (strong, nonatomic) IBOutlet UIButton *menuSettingsButton;
 
 @property (strong, nonatomic) IBOutlet CyclingTextField *signinUsernameText;
 @property (strong, nonatomic) IBOutlet CyclingTextField *signinPasswordText;
@@ -95,6 +97,8 @@
 - (IBAction)menuFreePlayButtonClicked:(id)sender;
 - (IBAction)menuStoreButtonClicked:(id)sender;
 
+- (IBAction)menuSettingsButtonClicked:(id)sender;
+
 // Right Panel buttons + clicks
 - (IBAction)signupButtonClicked:(id)sender;
 - (IBAction)signupFacebookButtonClicked:(id)sender;
@@ -107,5 +111,15 @@
 @property (strong, nonatomic) IBOutlet SelectorControl *feedSelectorControl;
 
 - (IBAction)feedSelectorChanged:(id)sender;
+
+// gTar Delegate Functions
+- (void)receivedCTMatrixValue:(unsigned char)value row:(unsigned char)row col:(unsigned char)col;
+- (void)receivedSensitivityValue:(unsigned char)value string:(unsigned char)str;
+- (void)receivedPiezoWindow:(unsigned char)value;
+- (void)receivedCommitUserspaceAck:(unsigned char)status;
+- (void)receivedResetUserspaceAck:(unsigned char)status;
+- (void)receivedSerialNumber:(unsigned char *)number;
+
+
 
 @end
