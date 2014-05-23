@@ -726,6 +726,7 @@
 		EC5DA85B161A5D160015832E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/gTarAppCore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -749,6 +750,7 @@
 		EC5DA85C161A5D160015832E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/gTarAppCore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

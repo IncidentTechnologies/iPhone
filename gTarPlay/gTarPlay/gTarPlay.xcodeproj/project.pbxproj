@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		260AFCC41814757700F7536A /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 260AFCC31814757700F7536A /* libstdc++.dylib */; };
 		260CF0B218EBEFDF0083903A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 260CF0B418EBEFDF0083903A /* Localizable.strings */; };
+		261582C8192F00CA00AB0CFC /* gTar_AppIcon_58.png in Resources */ = {isa = PBXBuildFile; fileRef = 261582C5192F00CA00AB0CFC /* gTar_AppIcon_58.png */; };
+		261582C9192F00CA00AB0CFC /* gTar_AppIcon_80.png in Resources */ = {isa = PBXBuildFile; fileRef = 261582C6192F00CA00AB0CFC /* gTar_AppIcon_80.png */; };
+		261582CA192F00CA00AB0CFC /* gTar_AppIcon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 261582C7192F00CA00AB0CFC /* gTar_AppIcon_120.png */; };
 		26868D8617D2A46500DC990F /* StoreSongListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8517D2A46500DC990F /* StoreSongListCell.m */; };
 		26868D8817D2A8DF00DC990F /* StoreSongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */; };
 		26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8A17D2F3C500DC990F /* StoreListBuyButtonView.m */; };
@@ -1479,6 +1482,9 @@
 		260CF0B318EBEFDF0083903A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		260CF0B718EBEFFB0083903A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		260CF0B818EBF00A0083903A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		261582C5192F00CA00AB0CFC /* gTar_AppIcon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_AppIcon_58.png; sourceTree = "<group>"; };
+		261582C6192F00CA00AB0CFC /* gTar_AppIcon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_AppIcon_80.png; sourceTree = "<group>"; };
+		261582C7192F00CA00AB0CFC /* gTar_AppIcon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_AppIcon_120.png; sourceTree = "<group>"; };
 		26868D8417D2A46500DC990F /* StoreSongListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSongListCell.h; sourceTree = "<group>"; };
 		26868D8517D2A46500DC990F /* StoreSongListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSongListCell.m; sourceTree = "<group>"; };
 		26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreSongListCell.xib; sourceTree = "<group>"; };
@@ -1489,12 +1495,6 @@
 		26868D8F17E29AD700DC990F /* UITriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITriangleView.h; sourceTree = "<group>"; };
 		26868D9017E29AD700DC990F /* UITriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITriangleView.m; sourceTree = "<group>"; };
 		26D4B17218F62062003380BF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		26D4B17818F62F02003380BF /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		26D4B17918F62F02003380BF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		26D4B17A18F62F02003380BF /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		26D4B17B18F62F02003380BF /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		26D4B17C18F62F02003380BF /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		26D4B17D18F62F02003380BF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		26F85ED718146FA500326CE7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlay_Prefix.pch; sourceTree = "<group>"; };
@@ -2408,7 +2408,6 @@
 				EC24DC1F161A841A00016B78 /* CoreMIDI.framework in Frameworks */,
 				EC24DC08161A821200016B78 /* UIKit.framework in Frameworks */,
 				EC24DC23161A841A00016B78 /* QuartzCore.framework in Frameworks */,
-				26D4B17E18F62F02003380BF /* libTestFlight.a in Frameworks */,
 				EC24DC0A161A821200016B78 /* CoreGraphics.framework in Frameworks */,
 				EC24DC20161A841A00016B78 /* OpenGLES.framework in Frameworks */,
 				EC24DC21161A841A00016B78 /* AudioToolbox.framework in Frameworks */,
@@ -2428,7 +2427,6 @@
 				ECC11E47162D07AD001A231A /* libAudioController.a in Frameworks */,
 				ECC11E48162D07AD001A231A /* libgTarAppCore.a in Frameworks */,
 				ECC11E49162D07AD001A231A /* libGtarController.a in Frameworks */,
-				26D4B18118F62F0E003380BF /* libTestFlight.a in Frameworks */,
 				ECC11E4A162D07AD001A231A /* AVFoundation.framework in Frameworks */,
 				ECC11E4B162D07AD001A231A /* CoreMIDI.framework in Frameworks */,
 				ECC11E4C162D07AD001A231A /* UIKit.framework in Frameworks */,
@@ -2474,22 +2472,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		26D4B17718F62F02003380BF /* TestFlightSDK3.0.0 */ = {
-			isa = PBXGroup;
-			children = (
-				26D4B17818F62F02003380BF /* libTestFlight.a */,
-				26D4B17918F62F02003380BF /* README.md */,
-				26D4B17A18F62F02003380BF /* release_notes.md */,
-				26D4B17B18F62F02003380BF /* TestFlight+AsyncLogging.h */,
-				26D4B17C18F62F02003380BF /* TestFlight+ManualSessions.h */,
-				26D4B17D18F62F02003380BF /* TestFlight.h */,
-			);
-			path = TestFlightSDK3.0.0;
-			sourceTree = "<group>";
-		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				261582C5192F00CA00AB0CFC /* gTar_AppIcon_58.png */,
+				261582C6192F00CA00AB0CFC /* gTar_AppIcon_80.png */,
+				261582C7192F00CA00AB0CFC /* gTar_AppIcon_120.png */,
 				6D3D06D718F4D2E8007683DB /* TestFlightSDK3.0.0 */,
 				260CF0B418EBEFDF0083903A /* Localizable.strings */,
 				9DCC3B6E1790DACD00DDD603 /* gTarIcon_114x114.png */,
@@ -4122,6 +4110,8 @@
 				6DB286051921915600B3D14C /* Electric Guitar 89.mp3 in Resources */,
 				EC24DD13161A89C000016B78 /* Acoustic Guitar 80.mp3 in Resources */,
 				EC24DD14161A89C400016B78 /* Rock Guitar 40.mp3 in Resources */,
+				261582C8192F00CA00AB0CFC /* gTar_AppIcon_58.png in Resources */,
+				261582CA192F00CA00AB0CFC /* gTar_AppIcon_120.png in Resources */,
 				EC24DD15161A89C400016B78 /* Rock Guitar 41.mp3 in Resources */,
 				EC24DD16161A89C400016B78 /* Rock Guitar 42.mp3 in Resources */,
 				6DB2860D1921915600B3D14C /* Electric Guitar 96.mp3 in Resources */,
@@ -4685,6 +4675,7 @@
 				9D054E22174C68FB00FA3239 /* Upright Bass 40.mp3 in Resources */,
 				9D054E24174C68FB00FA3239 /* Upright Bass 41.mp3 in Resources */,
 				9D054E26174C68FB00FA3239 /* Upright Bass 42.mp3 in Resources */,
+				261582C9192F00CA00AB0CFC /* gTar_AppIcon_80.png in Resources */,
 				9D054E28174C68FB00FA3239 /* Upright Bass 43.mp3 in Resources */,
 				9D054E2A174C68FB00FA3239 /* Upright Bass 44.mp3 in Resources */,
 				9D054E2C174C68FB00FA3239 /* Upright Bass 45.mp3 in Resources */,
@@ -5588,11 +5579,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -5613,14 +5603,14 @@
 					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK3.0.0",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+				PROVISIONING_PROFILE = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5630,11 +5620,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
@@ -5649,14 +5638,14 @@
 					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform",
 				);
 				INFOPLIST_FILE = "gTarPlay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK3.0.0",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+				PROVISIONING_PROFILE = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -5668,8 +5657,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -5696,8 +5685,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = gTarPlay;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5707,8 +5696,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -5728,8 +5717,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = gTarPlay;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

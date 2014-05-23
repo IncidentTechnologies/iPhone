@@ -83,18 +83,21 @@
     [self startWithDelegate:delegate andBeatOffset:0 fastForward:NO isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
 }
 
-- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isScrolling:(BOOL)isScrolling withTempoPercent:(double)tempoPercent fromStart:(double)start toEnd:(double)end withLoops:(int)loops
+- (void)startWithDelegate:(id)delegate
+            andBeatOffset:(double)beats
+              fastForward:(BOOL)ffwd
+              isScrolling:(BOOL)isScrolling
+         withTempoPercent:(double)tempoPercent
+                fromStart:(double)start
+                    toEnd:(double)end
+                withLoops:(int)loops
 {
     
     // clear remnants from last song
     m_currentFrame = nil;
-    
     m_noteFrames = [[NSMutableArray alloc] init];
-    
     m_delegate = delegate;
-    
     NSArray * notesArray = [m_song getSortedNotes];
-    
     NSNoteFrame * noteFrame = nil;
     
     // First set length of beats
@@ -108,7 +111,7 @@
     
     end = (end < start) ? 1.0 : end;
     
-    [self setEndBeat:end*m_lengthBeats];
+    [self setEndBeat:end * m_lengthBeats];
     
     // Detect first audible beat
     double firstAudibleBeat = [self getFirstAudibleBeat:notesArray];
@@ -127,13 +130,9 @@
                 double timedNoteStart = (note.m_absoluteBeatStart - m_startBeat) + l*(m_endBeat - m_startBeat) - l*firstAudibleBeat + l*LOOP_GAP;
                 
                 if ( noteFrame == nil ||
-                    (timedNoteStart - noteFrame.m_absoluteBeatStart) > m_frameWidthBeats )
-                {
-                    
+                    (timedNoteStart - noteFrame.m_absoluteBeatStart) > m_frameWidthBeats ) {
                     noteFrame = [[NSNoteFrame alloc] initWithStart:timedNoteStart andDuration:m_frameWidthBeats];
-                    
                     [m_noteFrames addObject:noteFrame];
-                    
                 }
                 
                 NSNote * timedNote = [[NSNote alloc] initWithDuration:note.m_duration andValue:note.m_value andMeasureStart:note.m_measureStart andAbsoluteBeatStart:timedNoteStart andString:note.m_string andFret:note.m_fret];
@@ -143,27 +142,21 @@
                 double noteEnd = timedNoteStart + note.m_duration;
                 
                 if ( noteEnd > m_lengthBeats )
-                {
                     m_lengthBeats = noteEnd;
-                }
-                
-            }           
-            
+            }
         }
     }
     
     NSLog(@"NoteFrames is %@ between %f and %f",m_noteFrames,m_startBeat,m_endBeat);
     
-    
     // Control the tempo throughout Standalone
-    if(isScrolling){
-    
-        m_beatsPerSecond = SCROLLING_BEATS_PER_SECOND * tempoPercent;
-    
-    }else{
-        
+    if(isScrolling) {
+        m_beatsPerSecond = (m_song.m_tempo * 0.75f) / 60.0;
+        m_beatsPerSecond *= tempoPercent;
+        //m_beatsPerSecond = SCROLLING_BEATS_PER_SECOND * tempoPercent;
+    }
+    else {
         m_beatsPerSecond = m_song.m_tempo / 60.0;
-        
     }
     
     m_lengthSeconds = m_lengthBeats / m_beatsPerSecond;
@@ -249,15 +242,12 @@
 {
     
     m_currentBeat += (delta * m_beatsPerSecond);
-    
     m_percentageComplete = m_currentBeat / m_lengthBeats;
     
     if ( m_percentageComplete < 0.0 )
-    {
         m_percentageComplete = 0.0;
-    }
-    if ( m_percentageComplete >= 1.0 )
-    {
+    
+    if ( m_percentageComplete >= 1.0 ) {
         m_percentageComplete = 1.0;
         [self loopSongOrEndSong];
     }
@@ -266,22 +256,16 @@
     
 }
 
-- (void)changeBeatRandomAccess:(double)beat
-{
-    
+- (void)changeBeatRandomAccess:(double)beat {
     m_currentBeat = beat;
-    
     m_percentageComplete = m_currentBeat / m_lengthBeats;
     
     if ( m_percentageComplete < 0.0 )
-    {
         m_percentageComplete = 0.0;
-    }
-    if ( m_percentageComplete >= 1.0 )
-    {
+
+    if ( m_percentageComplete >= 1.0 ) {
         m_percentageComplete = 1.0;
         [self loopSongOrEndSong];
-        
     }
     
     m_noteFramesRemaining = [[NSMutableArray alloc] init];

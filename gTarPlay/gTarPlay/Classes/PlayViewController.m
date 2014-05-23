@@ -1668,20 +1668,16 @@ extern UserController * g_userController;
 
 #pragma mark - Main event loop
 
-- (void)mainEventLoop
-{
+- (void)mainEventLoop {
     
 #ifdef Debug_BUILD
     if(g_gtarController.connected){
         
         // DEBUG tapping screen hits the current notes (see: touchesbegan)
-        if ( _skipNotes == YES )
-        {
+        if ( _skipNotes == YES ) {
             
             _skipNotes = NO;
-            
-            if ( [_songModel.m_currentFrame.m_notesPending count] > 0 )
-            {
+            if ( [_songModel.m_currentFrame.m_notesPending count] > 0 ) {
                 NSNote * note = [_songModel.m_currentFrame.m_notesPending objectAtIndex:0];
                 
                 GtarPluck pluck;
@@ -1691,8 +1687,7 @@ extern UserController * g_userController;
                 
                 [self gtarNoteOn:pluck forFrame:nil];
             }
-            else if ( [_songModel.m_nextFrame.m_notesPending count] > 0 )
-            {
+            else if ( [_songModel.m_nextFrame.m_notesPending count] > 0 ) {
                 NSNote * note = [_songModel.m_nextFrame.m_notesPending objectAtIndex:0];
                 
                 GtarPluck pluck;
@@ -1709,12 +1704,9 @@ extern UserController * g_userController;
     }
 #endif
     
-    //
     // Advance song model and recorder
-    //
     
-    if ( _animateSongScrolling == YES )
-    {
+    if ( _animateSongScrolling == YES ) {
         [_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
     }
     
