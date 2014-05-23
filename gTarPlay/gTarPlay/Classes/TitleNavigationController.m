@@ -1161,50 +1161,43 @@ extern Facebook * g_facebook;
 
 #pragma mark - GtarControllerObserver
 
-- (void)gtarConnected
-{
-    
+- (void)gtarConnected {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    
     BOOL gtarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
     
     // First log in, show the welcome screens
-	if ( gtarConnectedBefore == NO )
-	{
+	if ( gtarConnectedBefore == NO ) {
         [settings setBool:YES forKey:@"GuitarConnectedBefore"];
         [settings synchronize];
     }
     
-    [g_gtarController InitiateSerialNumberRequest];
     [g_gtarController turnOffAllEffects];
     [g_gtarController turnOffAllLeds];
     [g_gtarController sendDisableDebug];
     
-    if ( g_cloudController.m_loggedIn == YES )
-    {
+    if ( g_cloudController.m_loggedIn == YES ) {
         [self loggedinScreen];
         
         if(!gtarConnectedBefore){
             [self promptGtarRegistration];
         }
     }
-    else
-    {
+    else {
         [self loggedoutScreen];
     }
     
     g_gtarController.m_delegate = self;
-    
     [g_gtarController sendRequestFirmwareVersion];
     
 //    [self playStartupLightSequence];
 //    
 //    [self checkCurrentFirmwareVersion];
     
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ { [NSThread sleepForTimeInterval:WAIT_INT]; }];
+    [g_gtarController InitiateSerialNumberRequest];
+    
     [self showHideFreePlay];
-    
     [g_soundMaster routeToDefault];
-    
 }
 
 - (void)gtarDisconnected
@@ -1347,8 +1340,7 @@ extern Facebook * g_facebook;
     [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusFailedMain) withObject:nil waitUntilDone:YES];
 }
 
-- (void)receivedFirmwareUpdateStatusFailedMain
-{
+- (void)receivedFirmwareUpdateStatusFailedMain {
 //    [self dismissViewControllerAnimated:YES completion:nil];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -1359,21 +1351,28 @@ extern Facebook * g_facebook;
     [alert show];
 }
 
-- (void)receivedFirmwareUpdateProgress:(unsigned char)percentage
-{
-    _firmwareViewController.updateProgress = percentage;
+- (void)receivedFirmwareUpdateProgress:(unsigned char)percentage {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        _firmwareViewController.updateProgress = percentage;
+    }];
 }
 
 - (void)receivedCTMatrixValue:(unsigned char)value row:(unsigned char)row col:(unsigned char)col {
-    [_settingsViewController receivedCTMatrixValue:value row:row col:col];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [_settingsViewController receivedCTMatrixValue:value row:row col:col];
+    }];
 }
 
 - (void)receivedSensitivityValue:(unsigned char)value string:(unsigned char)str {
-    [_settingsViewController receivedSensitivityValue:value string:str];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [_settingsViewController receivedSensitivityValue:value string:str];
+    }];
 }
 
 - (void)receivedSerialNumber:(unsigned char *)number {
-    [_settingsViewController receivedSerialNumber:number];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [_settingsViewController receivedSerialNumber:number];
+    }];
 }
 
 - (void)receivedPiezoWindow:(unsigned char)value {
