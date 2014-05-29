@@ -185,7 +185,7 @@ extern UserController * g_userController;
     
     [_songScoreView setFrame:fullScreen];
     [_songScoreView setBounds:fullScreen];
-
+    
     [_practiceView setFrame:fullScreen];
     [_practiceView setBounds:fullScreen];
     
@@ -260,7 +260,7 @@ extern UserController * g_userController;
         
     }else{
         
-        _practiceViewOpen = NO;        
+        _practiceViewOpen = NO;
         [_practiceView setHidden:YES];
         
     }
@@ -303,7 +303,7 @@ extern UserController * g_userController;
 - (void) localizeViews {
     [_finishPracticeButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
     [_startPracticeButton setTitle:NSLocalizedString(@"PRACTICE", NULL) forState:UIControlStateNormal];
-    [_practiceBackButton setTitle:NSLocalizedString(@"BACK", NULL) forState:UIControlStateNormal];
+    [_practiceBackButton setTitle:NSLocalizedString(@"FINISH", NULL) forState:UIControlStateNormal];
     [_finishButton setTitle:NSLocalizedString(@"SAVE & FINISH", NULL) forState:UIControlStateNormal];
     [_finishRestartButton setTitle:NSLocalizedString(@"PLAY", NULL) forState:UIControlStateNormal];
     
@@ -545,6 +545,7 @@ extern UserController * g_userController;
         }];
         
         
+        _songIsPaused = NO;
         [g_soundMaster start];
         [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
         [self drawPauseButton:_pauseButton];
@@ -731,13 +732,25 @@ extern UserController * g_userController;
 - (IBAction)restartButtonClicked:(id)sender
 {
     if(!isPracticeMode){
+        
         [self restartSong:YES];
+        
     }else{
+        
         _practiceViewOpen = YES; // Fake view open so it doesn't load again
         [self startPracticeButtonClicked:_startPracticeButton];
+        
         [self menuButtonClicked:_menuButton];
     }
     
+}
+
+- (IBAction)restartPlayButtonClicked:(id)sender
+{
+    [self restartSong:YES];
+    
+    _songScoreIsOpen = YES; // Ensure view closes
+    [self songScoreButtonClicked:sender];
 }
 
 - (void)restartSong:(BOOL)resetPractice
@@ -800,12 +813,12 @@ extern UserController * g_userController;
     if ( [g_userController isUserSongSessionQueueFull] == YES && _feedSwitch.isOn == YES )
     {
         [_feedSwitch setOn:NO];
-
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Post"
-                                                         message:@"The upload queue is full, cannot post songs until network connectivity restored."
-                                                        delegate:nil
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil];
+                                                        message:@"The upload queue is full, cannot post songs until network connectivity restored."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -854,7 +867,7 @@ extern UserController * g_userController;
 
 - (void)drawPracticeMarkersForSong
 {
-
+    
     UIColor * yellowMarkerColor = [UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1.0];
     
     // Check for markers in the song or use defaults
@@ -965,7 +978,7 @@ extern UserController * g_userController;
     
     // Draw tempo standard
     _tempoButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        
+    
 }
 
 -(void)setPracticeHeatMapViewImageView:(UIImageView*)imageView
@@ -1080,29 +1093,29 @@ extern UserController * g_userController;
 
 - (void)panHeatMapRight:(UIPanGestureRecognizer *)sender
 {
-     CGPoint newPoint = [sender translationInView:_practiceHeatMapView];
-     
-     if([sender state] == UIGestureRecognizerStateBegan){
-         rightFirstX = _heatMapRightSlider.frame.origin.x;
-         [_heatMapRightSlider setAlpha:0.8];
-     }
-     
+    CGPoint newPoint = [sender translationInView:_practiceHeatMapView];
+    
+    if([sender state] == UIGestureRecognizerStateBegan){
+        rightFirstX = _heatMapRightSlider.frame.origin.x;
+        [_heatMapRightSlider setAlpha:0.8];
+    }
+    
     float minX = _heatMapLeftSlider.frame.origin.x + ADJUSTOR_SIZE;
     float maxX = _practiceHeatMapView.frame.size.width - ADJUSTOR_SIZE/2.0;
     float newX = newPoint.x + rightFirstX;
     
-     // wrap to boundary
-     if(newX > maxX || newX > maxX-0.2*ADJUSTOR_SIZE/2){
-         newX=maxX;
-     }
-     
+    // wrap to boundary
+    if(newX > maxX || newX > maxX-0.2*ADJUSTOR_SIZE/2){
+        newX=maxX;
+    }
+    
     if(newX >= minX && newX <= maxX){
         CGRect newRightFrame = CGRectMake(newX,0,ADJUSTOR_SIZE,_practiceHeatMapView.frame.size.height);
-
+        
         [_heatMapRightSlider setFrame:newRightFrame];
-
+        
         CGRect newHeatMapFrame = CGRectMake(_heatMapSelector.frame.origin.x, 0, _heatMapRightSlider.frame.origin.x-_heatMapLeftSlider.frame.origin.x, _practiceHeatMapView.frame.size.height);
-
+        
         [_heatMapSelector setFrame:newHeatMapFrame];
     }
     
@@ -1229,8 +1242,8 @@ extern UserController * g_userController;
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.6f];
-//    [UIView setAnimationDelegate:_loadingView];
-//    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+    //    [UIView setAnimationDelegate:_loadingView];
+    //    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
     
     _loadingView.alpha = 0.0f;
     
@@ -1247,10 +1260,10 @@ extern UserController * g_userController;
 {
     _glView.alpha = 0.0f;
     _glView.hidden = NO;
-
+    
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.6f];
-
+    
     _glView.alpha = 1.0f;
     
     [UIView commitAnimations];
@@ -1345,7 +1358,7 @@ extern UserController * g_userController;
                                                              [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
                                                              @"On", @"Metronome",
                                                              nil]];
-
+        
         _metronomeTimeStart = [NSDate date];
         
     }
@@ -1513,7 +1526,7 @@ extern UserController * g_userController;
     [_scoreLabel setText:[self formatScore:_scoreTracker.m_score]];
     [self setScoreMultiplier:_scoreTracker.m_multiplier];
     
-
+    
 }
 
 - (void)animateSubscoreWithText:(NSString*)subscore andColor:(UIColor *)textColor
@@ -1527,7 +1540,7 @@ extern UserController * g_userController;
     [_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,252,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
     
     [UIView animateWithDuration:0.5 animations:^(void){
-    
+        
         [_subscoreLabel setAlpha:0.0];
         //[_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,282,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
         
@@ -1562,7 +1575,7 @@ extern UserController * g_userController;
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
     NSString * numberAsString = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:scoreVal]];
-        
+    
     return numberAsString;
 }
 
@@ -1614,14 +1627,14 @@ extern UserController * g_userController;
                                                              @"Off", @"Metronome",
                                                              [NSNumber numberWithInteger:delta], @"PlayTime",
                                                              nil]];
-
+        
     }
     
 }
 
 - (void)uploadUserSongSession
 {
-
+    
     UserSongSession * session = [[UserSongSession alloc] init];
     
     session.m_userSong = _userSong;
@@ -1629,11 +1642,11 @@ extern UserController * g_userController;
     session.m_stars = _scoreTracker.m_stars;
     session.m_combo = _scoreTracker.m_streak;
     session.m_notes = @"Recorded in gTar Play";
-
+    
     _songRecorder.m_song.m_instrument = [[g_soundMaster getInstrumentList] objectAtIndex:[g_soundMaster getCurrentInstrument]];
     
     NSLog(@"Get current instrument is %@",_songRecorder.m_song.m_instrument);
-   // _songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
+    // _songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
     
     // Create the xmp
     session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
@@ -1644,14 +1657,14 @@ extern UserController * g_userController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-//    [g_telemetryController logEvent:GtarPlaySongShared
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
-//                                     _userSong.m_title, @"Title",
-//                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
-//                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
-//                                     nil]];
+    //    [g_telemetryController logEvent:GtarPlaySongShared
+    //                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+    //                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+    //                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
+    //                                     _userSong.m_title, @"Title",
+    //                                     [NSNumber numberWithInteger:_difficulty], @"Difficulty",
+    //                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
+    //                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -1663,7 +1676,7 @@ extern UserController * g_userController;
                                                     [NSNumber numberWithInteger:(_songModel.m_percentageComplete*100)], @"Percent",
                                                     nil]];
     
-
+    
 }
 
 #pragma mark - Main event loop
@@ -1671,13 +1684,15 @@ extern UserController * g_userController;
 - (void)mainEventLoop {
     
 #ifdef Debug_BUILD
-    if(g_gtarController.connected){
+    if(g_gtarController.connected) {
         
         // DEBUG tapping screen hits the current notes (see: touchesbegan)
         if ( _skipNotes == YES ) {
             
             _skipNotes = NO;
+            
             if ( [_songModel.m_currentFrame.m_notesPending count] > 0 ) {
+                
                 NSNote * note = [_songModel.m_currentFrame.m_notesPending objectAtIndex:0];
                 
                 GtarPluck pluck;
@@ -1686,8 +1701,9 @@ extern UserController * g_userController;
                 pluck.position.string = note.m_string;
                 
                 [self gtarNoteOn:pluck forFrame:nil];
-            }
-            else if ( [_songModel.m_nextFrame.m_notesPending count] > 0 ) {
+                
+            } else if ( [_songModel.m_nextFrame.m_notesPending count] > 0 ) {
+                
                 NSNote * note = [_songModel.m_nextFrame.m_notesPending objectAtIndex:0];
                 
                 GtarPluck pluck;
@@ -1729,7 +1745,7 @@ extern UserController * g_userController;
 
 - (void)gtarFretDown:(GtarPosition)position
 {
-
+    
 }
 
 - (void)gtarFretUp:(GtarPosition)position
@@ -1892,7 +1908,7 @@ extern UserController * g_userController;
     // Stop ourselves before we start so the connecting screen can display
     [self stopMainEventLoop];
     [self drawPlayButton:_pauseButton];
-
+    
     if(!isPracticeMode){
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startLicenseScroll) userInfo:nil repeats:NO];
         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(startWithSongXmlDom) userInfo:nil repeats:NO];
@@ -1907,7 +1923,7 @@ extern UserController * g_userController;
 {
     // Standalone -> Normal
     NSLog(@"SongViewController: gTar has been connected");
-
+    
     [_metronomeTimer invalidate];
     _metronomeTimer = nil;
     
@@ -1925,7 +1941,7 @@ extern UserController * g_userController;
         if(!isPracticeMode){
             [self startWithSongXmlDom];
         }
-            
+        
         // Stop ourselves before we start so the connecting screen can display
         [self stopMainEventLoop];
         [g_soundMaster stop];
@@ -1940,16 +1956,16 @@ extern UserController * g_userController;
     }
     
     [g_soundMaster routeToDefault];
-
+    
 }
 
 - (void)gtarDisconnected
 {
- 
+    
     // Normal -> Standalone
     NSLog(@"SongViewController: gTar has been disconnected");
     
-//    [self backButtonClicked:nil];
+    //    [self backButtonClicked:nil];
     [_metronomeTimer invalidate];
     _metronomeTimer = nil;
     
@@ -2081,7 +2097,7 @@ extern UserController * g_userController;
     
     // Light up the first frame
     //if(g_gtarController.connected == YES){
-        [self turnOnFrame:_songModel.m_nextFrame];
+    [self turnOnFrame:_songModel.m_nextFrame];
     //}
     
     [self initSongRecorder];
@@ -2114,11 +2130,11 @@ extern UserController * g_userController;
     
     // Light up the first frame
     //if(g_gtarController.connected == YES){
-        [self turnOnFrame:_songModel.m_nextFrame];
+    [self turnOnFrame:_songModel.m_nextFrame];
     //}
     
     [self initSongRecorder];
-
+    
     [self initSongDisplayWithLoops:0];
     
     if(!_practiceViewOpen){
@@ -2327,7 +2343,7 @@ extern UserController * g_userController;
     if ( _difficulty == PlayViewControllerDifficultyHard )
     {
         // Play the note at normal intensity
-//        [self pluckString:str andFret:fret andVelocity:velocity];
+        //        [self pluckString:str andFret:fret andVelocity:velocity];
         [g_soundMaster NoteOffAtString:str-1 andFret:fret];
         
         // Record the note
@@ -2347,7 +2363,7 @@ extern UserController * g_userController;
     // The same string was plucked twice, change in direction
     if ( stringDelta == 0 )
     {
-//        NSLog(@"Same note in a row");
+        //        NSLog(@"Same note in a row");
         [self interFrameDelayExpired];
     }
     
@@ -2357,13 +2373,13 @@ extern UserController * g_userController;
         // We were going 'up'
         if ( _previousChordPluckDirection < 0 )
         {
-//            NSLog(@"Changed direction: up->down");
+            //            NSLog(@"Changed direction: up->down");
             [self interFrameDelayExpired];
         }
         else
         {
             // Save the direction and reset the timer
-//            NSLog(@"Going down, reup the timer");
+            //            NSLog(@"Going down, reup the timer");
             _previousChordPluckDirection = +1;
             [_interFrameDelayTimer invalidate];
             _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
@@ -2376,13 +2392,13 @@ extern UserController * g_userController;
         // We were going 'down'
         if ( _previousChordPluckDirection > 0 )
         {
-//            NSLog(@"Changed direction: down->up");
+            //            NSLog(@"Changed direction: down->up");
             [self interFrameDelayExpired];
         }
         else
         {
             // Save the direction and reset the timer
-//            NSLog(@"Going up, reup the timer");
+            //            NSLog(@"Going up, reup the timer");
             _previousChordPluckDirection = -1;
             [_interFrameDelayTimer invalidate];
             _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
@@ -2465,7 +2481,7 @@ extern UserController * g_userController;
 - (void)turnOnString:(GtarString)str andFret:(GtarFret)fret
 {
     if(g_gtarController.connected){
-    
+        
         if ( fret == GTAR_GUITAR_FRET_MUTED )
         {
             [g_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(0, str)];
@@ -2493,7 +2509,7 @@ extern UserController * g_userController;
             [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, str)
                                         withColor:GtarLedColorMake(3, 3, 3)];
         }
-            
+        
     }
     
 }
@@ -2619,7 +2635,7 @@ extern UserController * g_userController;
              _difficulty == PlayViewControllerDifficultyHard )
     {
         // On medium/hard mode, we don't play anything. The lack of sound is punishment enough.
-//        [m_songModel skipToNextFrame];
+        //        [m_songModel skipToNextFrame];
         [self songModelExitFrame:_currentFrame];
         
     }
@@ -2632,7 +2648,7 @@ extern UserController * g_userController;
 // Accuracy heat map
 - (void)drawHeatMap
 {
-
+    
     NSMutableArray * tempFrameHits = [[NSMutableArray alloc] init];
     NSMutableArray * frameHits = [[NSMutableArray alloc] init];
     
@@ -2640,7 +2656,7 @@ extern UserController * g_userController;
     
     for (int f = 0; f < [_songModel.m_noteFrames count]; f++)
     {
-    
+        
         double accuracy;
         NSNoteFrame * frame = [_songModel.m_noteFrames objectAtIndex:f];
         
@@ -2670,7 +2686,7 @@ extern UserController * g_userController;
         avgaccuracy/=4.0;
         
         [tempFrameHits addObject:[NSNumber numberWithDouble:avgaccuracy]];
-       
+        
     }
     
     
@@ -2717,9 +2733,9 @@ extern UserController * g_userController;
         double trimmedSliceExtra = 0;
         
         if((double)f/(double)numSlices >= m_loopStart && (double)f/(double)numSlices < m_loopEnd){
-        
+            
             accuracy = [[frameHits objectAtIndex:g] doubleValue];
-        
+            
             if(accuracy < 0.5){
                 accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*115.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
             }else{
@@ -2862,7 +2878,7 @@ extern UserController * g_userController;
     }
     
     [self songScoreButtonClicked:nil];
-
+    
 }
 
 #pragma mark - Cloud callbacks
@@ -2870,16 +2886,16 @@ extern UserController * g_userController;
 - (void)requestUploadUserSongSessionCallback:(UserResponse*)userResponse
 {
     
-//    if ( userResponse.m_status == UserResponseStatusSuccess )
-//    {
-//        // Stop spinning the thing
-//        [m_ampView shareSucceeded];
-//    }
-//    else
-//    {
-//        // Also stop, but say something extra
-//        [m_ampView shareFailed];
-//    }
+    //    if ( userResponse.m_status == UserResponseStatusSuccess )
+    //    {
+    //        // Stop spinning the thing
+    //        [m_ampView shareSucceeded];
+    //    }
+    //    else
+    //    {
+    //        // Also stop, but say something extra
+    //        [m_ampView shareFailed];
+    //    }
     
 }
 
@@ -2936,7 +2952,7 @@ extern UserController * g_userController;
     // Only shift render view if delta x is large enough
     if(!isScrolling){
         if(abs(initPoint.x - currentPoint.x) > 50){
-                [_displayController shiftViewDelta:-deltaX];
+            [_displayController shiftViewDelta:-deltaX];
         }
     }
     
@@ -3088,7 +3104,7 @@ extern UserController * g_userController;
         }
         
     }else if(_difficulty == PlayViewControllerDifficultyMedium){
-       
+        
         // Medium: make sure the fret for the first note is held
         // (UI ensures only 1 fret down at a time)
         for(NSNote * n in tappedFrame.m_notes){
@@ -3165,21 +3181,21 @@ extern UserController * g_userController;
             }
             
             /*}else{
-            
-                GtarPluck pluck;
-                pluck.velocity = GtarMaxPluckVelocity;
-                pluck.position.fret = n.m_fret;
-                pluck.position.string = n.m_string;
-                
-                NSLog(@"Pluck string %i",n.m_string);
-                
-                [_displayController hitNote:n];
-                
-                [self gtarNoteOn:pluck forFrame:tappedFrame];
-                
-                [notesToRemove addObject:n];
-                
-            }*/
+             
+             GtarPluck pluck;
+             pluck.velocity = GtarMaxPluckVelocity;
+             pluck.position.fret = n.m_fret;
+             pluck.position.string = n.m_string;
+             
+             NSLog(@"Pluck string %i",n.m_string);
+             
+             [_displayController hitNote:n];
+             
+             [self gtarNoteOn:pluck forFrame:tappedFrame];
+             
+             [notesToRemove addObject:n];
+             
+             }*/
             
             break;
         }
@@ -3190,7 +3206,7 @@ extern UserController * g_userController;
             [tappedFrame removeString:nnn.m_string andFret:nnn.m_fret];
         }
     }
-
+    
     // Prepare data to score
     if([tappedFrame.m_notesHit count] > 0){
         
@@ -3199,7 +3215,7 @@ extern UserController * g_userController;
         if(fretOneOn) numFretsOn++;
         if(fretTwoOn) numFretsOn++;
         if(fretThreeOn) numFretsOn++;
-
+        
         // Check if the streak ends
         // Check everything between a frame hit and the last hit frame
         BOOL endStreak = NO;

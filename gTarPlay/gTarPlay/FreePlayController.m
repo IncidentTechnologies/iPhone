@@ -526,19 +526,19 @@ extern GtarController * g_gtarController;
 - (void)gtarFretDown:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    //if (_isSlideEnabled)
-    //{
+    if (_isSlideEnabled)
+    {
         [g_soundMaster FretDown:position.fret onString:position.string-1];
-    //}
+    }
 }
 
 - (void)gtarFretUp:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    //if (_isSlideEnabled)
-    //{
+    if (_isSlideEnabled)
+    {
         [g_soundMaster FretUp:position.fret onString:position.string-1];
-    //}
+    }
 }
 
 - (void)gtarNoteOn:(GtarPluck)pluck

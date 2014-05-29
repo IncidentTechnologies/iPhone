@@ -29,7 +29,7 @@
 
 #define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats, see also PlayViewController
 #define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.2f)
-#define SCROLLING_BEATS_PER_SECOND 42/60.0
+#define SCROLLING_BEATS_PER_SECOND 1.0
 #define LOOP_GAP 1.0
 
 //- (id)initWithSongXmp:(NSString*)xmpBlob
@@ -151,7 +151,7 @@
     
     // Control the tempo throughout Standalone
     if(isScrolling) {
-        m_beatsPerSecond = (m_song.m_tempo * 0.75f) / 60.0;
+        m_beatsPerSecond = MIN((m_song.m_tempo * 0.75f) / 60.0, SCROLLING_BEATS_PER_SECOND);
         m_beatsPerSecond *= tempoPercent;
         //m_beatsPerSecond = SCROLLING_BEATS_PER_SECOND * tempoPercent;
     }

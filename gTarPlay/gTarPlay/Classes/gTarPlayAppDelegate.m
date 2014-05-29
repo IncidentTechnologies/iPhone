@@ -79,7 +79,7 @@ UserController * g_userController;
         [g_gtarController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
-        [NSTimer scheduledTimerWithTimeInterval:10.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        //[NSTimer scheduledTimerWithTimeInterval:10.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 #endif
         
 #if Debug_BUILD
@@ -99,7 +99,7 @@ UserController * g_userController;
     [TestFlight takeOff:@"ad6b7150-d397-4188-9f1a-58f56c83d967"];
     
     // Typical UI Setup
-    [TestFlight takeOff:@"ad6b7150-d397-4188-9f1a-58f56c83d967"];
+    //[TestFlight takeOff:@"ad6b7150-d397-4188-9f1a-58f56c83d967"];
     
     // Override point for customization after application launch.
 	m_navigationController.navigationBarHidden = YES;

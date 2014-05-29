@@ -15,6 +15,7 @@
 
 #define GTAR_NUM_STRINGS 6
 #define GTAR_NUM_FRETS 17
+#define GTAR_NOTE_DURATION 1.0
 
 #define GRAPH_SAMPLE_RATE 44100.0f
 
@@ -52,7 +53,9 @@
     BOOL isSlideEnabled;
     int activeFretOnString[GTAR_NUM_STRINGS];
     int pendingFretOnString[GTAR_NUM_STRINGS];
-    BOOL fretsPressedDown[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
+    int fretsPressedDown[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
+    
+    NSTimer * playingNotesTimers[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
     
 }
 @end
@@ -119,8 +122,19 @@
     
     [self initMetronome];
     
+    [self initTimers];
+    
     return true;
     
+}
+
+- (void)initTimers
+{
+    for(int s = 0; s < GTAR_NUM_STRINGS; s++){
+        for(int f = 0; f < GTAR_NUM_FRETS; f++){
+            playingNotesTimers[s][f] = nil;
+        }
+    }
 }
 
 - (void)reset
@@ -326,7 +340,7 @@
         pendingFretOnString[i] = -1;
         
         for(int j = 0; j < GTAR_NUM_FRETS; j++){
-            fretsPressedDown[i][j] = false;
+            fretsPressedDown[i][j] = 0;
         }
     }
     
@@ -518,10 +532,31 @@
             
             NSLog(@"Note at index %i",noteIndex);
             
+            // First check if there's a timer on the note already
+            if(playingNotesTimers[string][fret] != nil){
+                [self EndPluckString:playingNotesTimers[string][fret]];
+            }
+            
             m_gtarSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
             
+            // Set a timer to keep the note short
+            playingNotesTimers[string][fret] = [NSTimer scheduledTimerWithTimeInterval:GTAR_NOTE_DURATION target:self selector:@selector(EndPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:fret],@"Fret", nil] repeats:NO];
         }
     }
+}
+
+- (void) EndPluckString:(NSTimer *)timer
+{
+    NSDictionary * info = [timer userInfo];
+    
+    int string = [[info objectForKey:@"String"] intValue];
+    int fret = [[info objectForKey:@"Fret"] intValue];
+    
+    [self NoteOffAtString:string andFret:fret];
+    
+    [playingNotesTimers[string][fret] invalidate];
+    playingNotesTimers[string][fret] = nil;
+    
 }
 
 - (void) PluckContinuousString:(int)string atFret:(int)fret
@@ -534,17 +569,16 @@
     
     if(noteIndex != pendingIndex){
         
+        /*NSString * message = [@"Trigger continuous from " stringByAppendingFormat:@"%i to %i",noteIndex,pendingIndex];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pluck String" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        */
         m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
         
         activeFretOnString[string] = pendingFretOnString[string];
         pendingFretOnString[string] = -1;
         
-        /*
-         NSString * message = [@"Trigger continuous from " stringByAppendingFormat:@"%i to %i, crossing at index %li",noteIndex,pendingIndex,index];
-         
-         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pluck String" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-         [alert show];
-         */
     }
 
 }
@@ -599,11 +633,11 @@
 {
     if(!isLoadingInstrument){
     
-        fretsPressedDown[string][fret] = YES;
+        fretsPressedDown[string][fret] = 1;
         
-        // Stop open string from playing on fretdown
-        if(fret != 0 && activeFretOnString[string] == 0){
-            [self NoteOffAtString:string andFret:0];
+        // Stop string from playing on fretdown
+        if(fret != 0){
+            [self NoteOffAtString:string andFret:activeFretOnString[string]];
         }
         
         if(activeFretOnString[string] <= 0){
@@ -613,14 +647,12 @@
         
         // Slides
         if(isSlideEnabled){
-            
-                // Make sure the string is playing and that the fret is greater than
-                if(fret > activeFretOnString[string] && fret > pendingFretOnString[string]){
-                    
-                    pendingFretOnString[string] = fret;
-                    [self PluckContinuousString:string atFret:activeFretOnString[string]];
+        
+            if(fret > 0 && fret != activeFretOnString[string] && fret != pendingFretOnString[string]){
                 
-                }
+                pendingFretOnString[string] = fret;
+                [self PluckContinuousString:string atFret:activeFretOnString[string]];
+            }
         }
         
     }
@@ -631,36 +663,33 @@
 {
     if(!isLoadingInstrument){
         
-        fretsPressedDown[string][fret] = NO;
+        fretsPressedDown[string][fret] = 0;
         
         // If fret lifted is the one being played it will trigger hammer off
         if(isSlideEnabled){
             
-            if(fret == activeFretOnString[string] || fret == pendingFretOnString[string]){
+            //if(fret == activeFretOnString[string] || fret == pendingFretOnString[string]){
                 int highestRemainingFretDown = -1;
                 
                 // Determine fret to hammer off to
                 for(int f = GTAR_NUM_FRETS-1; f > 0; f--){
-                    if(fretsPressedDown[string][f]){
+                    if(fretsPressedDown[string][f] == 1){
                         highestRemainingFretDown = f;
                         break;
                     }
                 }
                 
-                if(highestRemainingFretDown > 0){
-                    
-                    pendingFretOnString[string] = highestRemainingFretDown;
-                    [self PluckContinuousString:string atFret:activeFretOnString[string]];
-                    
-                }else{
+                if(highestRemainingFretDown <= 0 || abs(highestRemainingFretDown - fret) > 1){
                     
                     // Nothing else pressed down - kill the note
                     pendingFretOnString[string] = -1;
                     
                     // Probably want this:
                     activeFretOnString[string] = -1;
+                    
+                    //[self NoteOffAtString:string andFret:fret];
                 }
-            }
+            //}
         }
     }
     return NO;
@@ -680,8 +709,11 @@
     if(!isLoadingInstrument){
         
         int stopIndex = [self noteIndexForString:string andFret:fret];
-        m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
-    
+        
+        if(stopIndex >= 0){
+            m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
+        }
+        
     }
     return NO;
 }

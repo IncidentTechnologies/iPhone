@@ -169,6 +169,7 @@ enum PlayViewControllerDifficulty
 - (IBAction)practiceButtonClicked:(id)sender;
 - (IBAction)finishButtonClicked:(id)sender;
 - (IBAction)restartButtonClicked:(id)sender;
+- (IBAction)restartPlayButtonClicked:(id)sender;
 - (IBAction)outputSwitchChanged:(id)sender;
 - (IBAction)feedSwitchChanged:(id)sender;
 - (IBAction)difficultyButtonClicked:(id)sender;
