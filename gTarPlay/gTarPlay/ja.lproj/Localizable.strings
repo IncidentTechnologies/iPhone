@@ -169,6 +169,7 @@
 "RESET" = "晴らす";
 "COMMIT" = "溜める";
 "String %d Sensitivity" = "弦 %d 感度";
+"COMPLETE CHORDS" = "完全なコード";
 
 // Prompt Registration
 "Register your gTar." = "gTarを登録する";

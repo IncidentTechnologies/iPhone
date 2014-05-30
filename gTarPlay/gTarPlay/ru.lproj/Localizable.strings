@@ -168,6 +168,7 @@
 "RESET" = "реставрировать";
 "COMMIT" = "совершать";
 "String %d Sensitivity" = "строка %d Чувствительность";
+"COMPLETE CHORDS" = "полные аккорды";
 
 // Prompt Registration
 "Register your gTar." = "зарегистрировать gTar.";

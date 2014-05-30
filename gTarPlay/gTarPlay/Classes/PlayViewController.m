@@ -103,6 +103,7 @@ extern UserController * g_userController;
     BOOL _songUploadQueueFull;
     
     BOOL _postToFeed;
+    BOOL _autocomplete;
     
     // Standalone
     CGPoint initPoint;
@@ -225,7 +226,7 @@ extern UserController * g_userController;
     // Hide the glview till it is done loading
     _glView.hidden = YES;
     
-    [self initPostToFeed];
+    [self initControls];
     ;
     [self updateDifficultyDisplay];
     
@@ -557,7 +558,7 @@ extern UserController * g_userController;
 {
     int repeatLoops = [[_repeatButton.titleLabel.text stringByReplacingOccurrencesOfString:@"x" withString:@""] intValue];
     repeatLoops *= 2;
-    repeatLoops %= 63;
+    repeatLoops %= 15;
     
     [_repeatButton setTitle:[NSString stringWithFormat:@"%ix",repeatLoops] forState:UIControlStateNormal];
 }
@@ -1217,10 +1218,11 @@ extern UserController * g_userController;
 
 #pragma mark - UI & Misc related helpers
 
-- (void)initPostToFeed
+- (void)initControls
 {
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     _postToFeed = ![settings boolForKey:@"DisablePostToFeed"];
+    _autocomplete = ![settings boolForKey:@"DisableCompleteChords"];
 }
 
 - (void)handleResignActive
@@ -2238,13 +2240,28 @@ extern UserController * g_userController;
     [self turnOffString:str andFret:fret];
     
     //
-    // Begin a frame timer if there are any more note left
+    // Frame ended
     //
-    if ( [_currentFrame.m_notesPending count] > 0 )
-    {
+    if([_currentFrame.m_notesPending count] == 0){
         
         //
-        // This block of code handles chords
+        // There are no notes left in this frame, skip along.
+        //
+        _animateSongScrolling = YES;
+        
+        //
+        // We want to kill the timer so we don't get a "double-skip"
+        //
+        if ( _interFrameDelayTimer != nil )
+        {
+            [_interFrameDelayTimer invalidate];
+            _interFrameDelayTimer = nil;
+        }
+        
+    }else if (_autocomplete || _difficulty == PlayViewControllerDifficultyEasy){
+        
+        //
+        // Autocomplete chords
         //
         
         // If there is already a timer pending, we don't need to create another one
@@ -2311,24 +2328,6 @@ extern UserController * g_userController;
         }
         
     }
-    else
-    {
-        //
-        // There are no notes left in this frame, skip along.
-        //
-        _animateSongScrolling = YES;
-        
-        //
-        // We want to kill the timer so we don't get a "double-skip"
-        //
-        if ( _interFrameDelayTimer != nil )
-        {
-            [_interFrameDelayTimer invalidate];
-            _interFrameDelayTimer = nil;
-        }
-        
-    }
-    
 }
 
 - (void)incorrectHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity

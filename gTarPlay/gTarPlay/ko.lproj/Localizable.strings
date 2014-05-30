@@ -170,6 +170,7 @@
 "RESET" = "재설정";
 "COMMIT" = "커밋";
 "String %d Sensitivity" = "문자열 %d 감도";
+"COMPLETE CHORDS" = "완벽한 화음";
 
 // Prompt Registration
 "Register your gTar." = "당신의 gTar 등록";

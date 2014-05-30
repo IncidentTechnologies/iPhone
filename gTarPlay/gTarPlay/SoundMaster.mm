@@ -18,8 +18,8 @@
 
 #define GTAR_NOTE_DURATION 1.0
 #define GTAR_CONTINUOUS_NOTE_DURATION 0.5
-#define GTAR_FRET_DOWN_DURATION 0.15
-#define GTAR_FRET_DOWN_SLIDE_DURATION 0.01
+#define GTAR_FRET_DOWN_DURATION 0.01
+#define GTAR_FRET_UP_DURATION 0.06
 
 #define GRAPH_SAMPLE_RATE 44100.0f
 
@@ -31,7 +31,7 @@
 
 #define DEFAULT_INSTRUMENT @"Electric Guitar"
 
-#define DEFAULT_GAIN 0.5
+#define DEFAULT_GAIN 0.4
 #define GAIN_MULTIPLIER 1.0
 
 @interface SoundMaster ()
@@ -43,6 +43,8 @@
     GtarSamplerNode * m_gtarSamplerNode;
     int m_activeBankNode;
     int m_metronome;
+    
+    float m_channelGain;
     
     // Effects
 #ifdef EFFECTS_AVAILABLE
@@ -118,7 +120,7 @@
     root = [[audioController GetNodeNetwork] GetRootNode];
     
     m_gtarSamplerNode = new GtarSamplerNode;
-    m_gtarSamplerNode->SetChannelGain(DEFAULT_GAIN, CONN_OUT);
+    [self setChannelGain:DEFAULT_GAIN];
     
     root->ConnectInput(0, m_gtarSamplerNode, 0);
     
@@ -249,8 +251,17 @@
 - (void) setChannelGain:(float)gain
 {
     NSLog(@"Set channel gain to %f",gain*GAIN_MULTIPLIER);
+
+    m_channelGain = gain * GAIN_MULTIPLIER;
     
-    m_gtarSamplerNode->SetChannelGain(gain*GAIN_MULTIPLIER, CONN_OUT);
+    m_gtarSamplerNode->SetChannelGain(m_channelGain, CONN_OUT);
+
+    
+}
+
+- (float) getChannelGain
+{
+    return m_channelGain / GAIN_MULTIPLIER;
 }
 
 #pragma mark - Tone
@@ -668,20 +679,12 @@
 {
     if(!isLoadingInstrument){
     
-        if(fretDownTimer[string] == nil){
+        if(fretDownTimer[string] == nil && isSlideEnabled){
             
-            // Guess at timer for hammer vs slide
-            float timerDuration = (isSlideEnabled) ? GTAR_FRET_DOWN_SLIDE_DURATION : GTAR_FRET_DOWN_DURATION;
-            
-            if(activeFretOnString[string] > 0 && fret > activeFretOnString[string] + 1){
-                timerDuration = GTAR_FRET_DOWN_DURATION;
-            }
-            
-            fretDownTimer[string] = [NSTimer scheduledTimerWithTimeInterval:timerDuration target:self selector:@selector(EndFretDownWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
+            fretDownTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_DOWN_DURATION target:self selector:@selector(EndFretDownWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
         }
         
         fretDownWindow[string][fret] = 1;
-        
         
     }
     
@@ -737,21 +740,21 @@
     int highestFret = [self highestFretDownIndexForString:s];
     int activeFret = activeFretOnString[s];
     
-    if(activeFret >= 0 && highestFret > activeFret){
+    if(activeFret == 0){
+    
+        [self NoteOffAtString:s andFret:activeFret];
         
-        if(!isSlideEnabled){
-            [self NoteOffAtString:s andFret:activeFret];
-        }
-            
+    }else if(activeFret > 0 && highestFret > activeFret){
+    
         // Hammer On or Slide Up
         pendingFretOnString[s] = highestFret;
         [self PluckContinuousString:s atFret:activeFret];
         
-    }else if(activeFret <= 0 && isSlideEnabled){
+    }else if(activeFret < 0){
         
         activeFretOnString[s] = highestFret;
         
-    }else if(isSlideEnabled){
+    }else{
         
         // Slide
         pendingFretOnString[s] = highestFret;
@@ -770,11 +773,9 @@
         fretDownWindow[string][fret] = 0;
         fretsPressedDown[string][fret] = 0;
 
-        if(fretUpTimer[string] == nil){
+        if(fretUpTimer[string] == nil && isSlideEnabled){
             
-            float timerDuration = (isSlideEnabled) ? GTAR_FRET_DOWN_SLIDE_DURATION : GTAR_FRET_DOWN_DURATION;
-            
-            fretUpTimer[string] = [NSTimer scheduledTimerWithTimeInterval:timerDuration target:self selector:@selector(EndFretUpWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
+            fretUpTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_UP_DURATION target:self selector:@selector(EndFretUpWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
         }
         
     }
@@ -800,10 +801,8 @@
         }else if(highestFret < activeFret){
             
             // Pull off
-            if(!isSlideEnabled || highestFret < activeFret - 1){
-                pendingFretOnString[s] = highestFret;
-                [self PluckContinuousString:s atFret:activeFret];
-            }
+            pendingFretOnString[s] = highestFret;
+            [self PluckContinuousString:s atFret:activeFret];
         }
         
     }

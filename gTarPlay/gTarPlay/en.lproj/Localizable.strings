@@ -169,6 +169,7 @@
 "RESET" = "RESET";
 "COMMIT" = "COMMIT";
 "String %d Sensitivity" = "String %d Sensitivity";
+"COMPLETE CHORDS" = "COMPLETE CHORDS";
 
 // Prompt Registration
 "Register your gTar." = "Register your gTar.";
