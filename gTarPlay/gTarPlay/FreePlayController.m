@@ -526,26 +526,27 @@ extern GtarController * g_gtarController;
 - (void)gtarFretDown:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    if (_isSlideEnabled)
-    {
+    //if (_isSlideEnabled)
+    //{
         [g_soundMaster FretDown:position.fret onString:position.string-1];
-    }
+    //}
 }
 
 - (void)gtarFretUp:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    if (_isSlideEnabled)
-    {
+    //if (_isSlideEnabled)
+    //{
         [g_soundMaster FretUp:position.fret onString:position.string-1];
-    }
+    //}
 }
 
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
     GtarFret fret = pluck.position.fret;
-    GtarString str = pluck.position.string;
+    GtarString str = pluck.position.string-1;
     
+    /*
     // zero base the string
     str--;
     
@@ -556,8 +557,9 @@ extern GtarController * g_gtarController;
         str = [[harmonizedValues valueForKey:@"String"] intValue];
         fret = [[harmonizedValues valueForKey:@"Fret"] intValue];
     }
+     */
     
-    [g_soundMaster PluckString:str atFret:fret];
+    [g_soundMaster NoteOnAtString:str andFret:fret];
 }
 
 - (void)gtarNoteOff:(GtarPosition)position

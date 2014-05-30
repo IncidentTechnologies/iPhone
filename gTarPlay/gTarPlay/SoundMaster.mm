@@ -15,7 +15,11 @@
 
 #define GTAR_NUM_STRINGS 6
 #define GTAR_NUM_FRETS 17
+
 #define GTAR_NOTE_DURATION 1.0
+#define GTAR_CONTINUOUS_NOTE_DURATION 0.5
+#define GTAR_FRET_DOWN_DURATION 0.15
+#define GTAR_FRET_DOWN_SLIDE_DURATION 0.01
 
 #define GRAPH_SAMPLE_RATE 44100.0f
 
@@ -51,10 +55,15 @@
     
     // Slides and fret tracking
     BOOL isSlideEnabled;
+    
     int activeFretOnString[GTAR_NUM_STRINGS];
     int pendingFretOnString[GTAR_NUM_STRINGS];
     int fretsPressedDown[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
     
+    int fretDownWindow[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
+    
+    NSTimer * fretDownTimer[GTAR_NUM_STRINGS];
+    NSTimer * fretUpTimer[GTAR_NUM_STRINGS];
     NSTimer * playingNotesTimers[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
     
 }
@@ -341,6 +350,7 @@
         
         for(int j = 0; j < GTAR_NUM_FRETS; j++){
             fretsPressedDown[i][j] = 0;
+            fretDownWindow[i][j] = 0;
         }
     }
     
@@ -397,6 +407,17 @@
         NSLog(@"Cannot load samples for instrument %i",index);
     
     }
+}
+
+- (int) highestFretDownIndexForString:(int)string
+{
+    for(int f = GTAR_NUM_FRETS-1; f >= 0; f--){
+        if(fretsPressedDown[string][f] == 1){
+            return f;
+        }
+    }
+    
+    return -1;
 }
 
 - (int) noteIndexForString:(int)string andFret:(int)fret
@@ -518,25 +539,31 @@
 - (void) PluckString:(int)string atFret:(int)fret
 {
     if(!isLoadingInstrument){
+        
+        // Ensure it's a valid string + fret
         if(string >= 0 && string < GTAR_NUM_STRINGS && fret >= 0 && fret < GTAR_NUM_FRETS){
             
+            // Ensure there's a valid instrument enabled
             if(m_gtarSamplerNode == nil){
                 [self setCurrentInstrument:0 withSelector:nil andOwner:nil];
+                return;
             }
             
+            // Stop anything playing on the string
             [self stopString:string setFret:fret];
-            
             activeFretOnString[string] = fret;
             
+            // Get note index
             int noteIndex = [self noteIndexForString:string andFret:fret];
             
             NSLog(@"Note at index %i",noteIndex);
             
-            // First check if there's a timer on the note already
+            // First check if there's a timer on the note already (playing again before it's timed out) and stop it
             if(playingNotesTimers[string][fret] != nil){
                 [self EndPluckString:playingNotesTimers[string][fret]];
             }
             
+            // Trigger the note
             m_gtarSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
             
             // Set a timer to keep the note short
@@ -545,6 +572,7 @@
     }
 }
 
+// Timer End Pluck String
 - (void) EndPluckString:(NSTimer *)timer
 {
     NSDictionary * info = [timer userInfo];
@@ -552,7 +580,11 @@
     int string = [[info objectForKey:@"String"] intValue];
     int fret = [[info objectForKey:@"Fret"] intValue];
     
-    [self NoteOffAtString:string andFret:fret];
+    int stopIndex = [self noteIndexForString:string andFret:fret];
+    
+    if(stopIndex >= 0 && [self IsNoteOnAtString:string andFret:fret]){
+        [self EndNoteOnString:string andFret:fret];
+    }
     
     [playingNotesTimers[string][fret] invalidate];
     playingNotesTimers[string][fret] = nil;
@@ -569,15 +601,18 @@
     
     if(noteIndex != pendingIndex){
         
-        /*NSString * message = [@"Trigger continuous from " stringByAppendingFormat:@"%i to %i",noteIndex,pendingIndex];
+        // First check if there's a timer on the note already (playing again before it's timed out) and stop it
+        if(playingNotesTimers[string][fret] != nil){
+            [self EndPluckString:playingNotesTimers[string][fret]];
+        }
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pluck String" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        */
         m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
         
         activeFretOnString[string] = pendingFretOnString[string];
         pendingFretOnString[string] = -1;
+        
+        // Set a timer to keep the note short
+        playingNotesTimers[string][activeFretOnString[string]] = [NSTimer scheduledTimerWithTimeInterval:GTAR_CONTINUOUS_NOTE_DURATION target:self selector:@selector(EndPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:activeFretOnString[string]],@"Fret", nil] repeats:NO];
         
     }
 
@@ -623,7 +658,7 @@
     
     // Stop that string from playing
     if(!overlapNotePlaying){
-        m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
+        [self EndNoteOnString:string andFret:activeFretOnString[string]];
     }
     
     activeFretOnString[string] = fret;
@@ -633,89 +668,205 @@
 {
     if(!isLoadingInstrument){
     
-        fretsPressedDown[string][fret] = 1;
-        
-        // Stop string from playing on fretdown
-        if(fret != 0){
-            [self NoteOffAtString:string andFret:activeFretOnString[string]];
-        }
-        
-        if(activeFretOnString[string] <= 0){
-            activeFretOnString[string] = fret;
-            return YES;
-        }
-        
-        // Slides
-        if(isSlideEnabled){
-        
-            if(fret > 0 && fret != activeFretOnString[string] && fret != pendingFretOnString[string]){
-                
-                pendingFretOnString[string] = fret;
-                [self PluckContinuousString:string atFret:activeFretOnString[string]];
+        if(fretDownTimer[string] == nil){
+            
+            // Guess at timer for hammer vs slide
+            float timerDuration = (isSlideEnabled) ? GTAR_FRET_DOWN_SLIDE_DURATION : GTAR_FRET_DOWN_DURATION;
+            
+            if(activeFretOnString[string] > 0 && fret > activeFretOnString[string] + 1){
+                timerDuration = GTAR_FRET_DOWN_DURATION;
             }
+            
+            fretDownTimer[string] = [NSTimer scheduledTimerWithTimeInterval:timerDuration target:self selector:@selector(EndFretDownWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
         }
+        
+        fretDownWindow[string][fret] = 1;
+        
         
     }
+    
     return YES;
+}
+
+- (void) EndFretDownWindow:(NSTimer *)timer
+{
+    
+    int s = [[[timer userInfo] objectForKey:@"String"] intValue];
+    
+    // Evaluate fretDownWindow
+    for(int f = GTAR_NUM_FRETS - 1; f > 0; f--){
+        
+        if(f == 1){
+            
+            // Bottom fret is down if the next fret is not down
+            // Unhandled edge case: 1st and 2nd fret are pressed at the same time will not hammer off
+            if(fretDownWindow[s][f] == 1 && fretDownWindow[s][f+1] == 0){
+                fretsPressedDown[s][f] = 1;
+            }
+            
+        }else if(f == GTAR_NUM_FRETS - 1){
+            
+            // Top fret is always down if it says it's down
+            if(fretDownWindow[s][f] == 1){
+                fretsPressedDown[s][f] = 1;
+            }
+            
+        }else{
+            
+            if(fretDownWindow[s][f] == 1 && fretDownWindow[s][f+1] == 0 && fretDownWindow[s][f-1] == 0){
+                
+                // Clean fret down
+                fretsPressedDown[s][f] = 1;
+                
+            }else if(fretDownWindow[s][f] == 1 && fretDownWindow[s][f-1] == 1){
+                
+                // Max fret is the only fret down
+                // Unhandled edge case: frets spaced one apart pressed at the same time
+                fretsPressedDown[s][f] = 1;
+                
+            }
+            
+        }
+    }
+    
+    // Reset the string
+    for(int f = 0; f < GTAR_NUM_FRETS; f++){
+        fretDownWindow[s][f] = 0;
+    }
+    
+    int highestFret = [self highestFretDownIndexForString:s];
+    int activeFret = activeFretOnString[s];
+    
+    if(activeFret >= 0 && highestFret > activeFret){
+        
+        if(!isSlideEnabled){
+            [self NoteOffAtString:s andFret:activeFret];
+        }
+            
+        // Hammer On or Slide Up
+        pendingFretOnString[s] = highestFret;
+        [self PluckContinuousString:s atFret:activeFret];
+        
+    }else if(activeFret <= 0 && isSlideEnabled){
+        
+        activeFretOnString[s] = highestFret;
+        
+    }else if(isSlideEnabled){
+        
+        // Slide
+        pendingFretOnString[s] = highestFret;
+        [self PluckContinuousString:s atFret:activeFret];
+    }
+    
+    [fretDownTimer[s] invalidate];
+    fretDownTimer[s] = nil;
+    
 }
 
 - (bool) FretUp:(int)fret onString:(int)string
 {
     if(!isLoadingInstrument){
         
+        fretDownWindow[string][fret] = 0;
         fretsPressedDown[string][fret] = 0;
-        
-        // If fret lifted is the one being played it will trigger hammer off
-        if(isSlideEnabled){
+
+        if(fretUpTimer[string] == nil){
             
-            //if(fret == activeFretOnString[string] || fret == pendingFretOnString[string]){
-                int highestRemainingFretDown = -1;
-                
-                // Determine fret to hammer off to
-                for(int f = GTAR_NUM_FRETS-1; f > 0; f--){
-                    if(fretsPressedDown[string][f] == 1){
-                        highestRemainingFretDown = f;
-                        break;
-                    }
-                }
-                
-                if(highestRemainingFretDown <= 0 || abs(highestRemainingFretDown - fret) > 1){
-                    
-                    // Nothing else pressed down - kill the note
-                    pendingFretOnString[string] = -1;
-                    
-                    // Probably want this:
-                    activeFretOnString[string] = -1;
-                    
-                    //[self NoteOffAtString:string andFret:fret];
-                }
-            //}
+            float timerDuration = (isSlideEnabled) ? GTAR_FRET_DOWN_SLIDE_DURATION : GTAR_FRET_DOWN_DURATION;
+            
+            fretUpTimer[string] = [NSTimer scheduledTimerWithTimeInterval:timerDuration target:self selector:@selector(EndFretUpWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
         }
+        
     }
+    
     return NO;
+}
+
+- (void) EndFretUpWindow:(NSTimer *)timer
+{
+    int s = [[[timer userInfo] objectForKey:@"String"] intValue];
+    
+    int activeFret = activeFretOnString[s];
+    
+    if(activeFret >= 0 && fretsPressedDown[s][activeFret] == 0){
+        
+        int highestFret = [self highestFretDownIndexForString:s];
+        
+        if(highestFret <= 0){
+            
+            pendingFretOnString[s] = -1;
+            activeFretOnString[s] = -1;
+            
+        }else if(highestFret < activeFret){
+            
+            // Pull off
+            if(!isSlideEnabled || highestFret < activeFret - 1){
+                pendingFretOnString[s] = highestFret;
+                [self PluckContinuousString:s atFret:activeFret];
+            }
+        }
+        
+    }
+    
+    [fretUpTimer[s] invalidate];
+    fretUpTimer[s] = nil;
 }
 
 - (bool) NoteOnAtString:(int)string andFret:(int)fret
 {
     if(!isLoadingInstrument){
-        // Note is already plucked
+        
+        [self PluckString:string atFret:fret];
+        
     }
     return YES;
 }
 
+- (bool) IsNoteOnAtString:(int)string andFret:(int)fret
+{
+    int noteIndex = [self noteIndexForString:string andFret:fret];
+    
+    return m_gtarSamplerNode->IsNoteOn(m_activeBankNode, noteIndex);
+}
+
+// Gtar Note Off At String
 - (bool) NoteOffAtString:(int)string andFret:(int)fret
 {
-    // && fret == fretToPlay[string] && pendingFretToPlay[string] == -1
     if(!isLoadingInstrument){
         
         int stopIndex = [self noteIndexForString:string andFret:fret];
         
-        if(stopIndex >= 0){
-            m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
+        if(stopIndex >= 0 && [self IsNoteOnAtString:string andFret:fret]){
+            
+            if(playingNotesTimers[string][fret] != nil){
+                [self EndPluckString:playingNotesTimers[string][fret]];
+                
+                return YES;
+                
+            }else{
+                [self EndNoteOnString:string andFret:fret];
+                
+                return YES;
+            }
+            
         }
         
     }
     return NO;
+}
+
+// Note Off Event
+- (void) EndNoteOnString:(int)string andFret:(int)fret
+{
+    int stopIndex = [self noteIndexForString:string andFret:fret];
+    
+    if(stopIndex >= 0){
+        m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
+        
+        //if(activeFretOnString[string] == fret){
+            //activeFretOnString[string] = [self highestFretDownIndexForString:string];
+        //}
+    }
 }
 
 #pragma mark - Sliding
