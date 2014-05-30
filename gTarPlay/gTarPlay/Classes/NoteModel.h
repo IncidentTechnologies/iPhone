@@ -31,5 +31,6 @@
 @property (nonatomic, assign) int m_fret;
 @property (nonatomic, assign) int m_standalonefret;
 @property (nonatomic, assign) double m_hit;
+@property (nonatomic, retain) HighlightModel * m_highlightModel;
 
 @end

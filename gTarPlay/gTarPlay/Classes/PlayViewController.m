@@ -2731,9 +2731,6 @@ extern UserController * g_userController;
         
     }
     
-    
-    //NSLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
-    
     double numSlices = [tempFrameHits count];
     double sliceWidth = _heatMapView.frame.size.width / [tempFrameHits count];
     
@@ -2746,8 +2743,8 @@ extern UserController * g_userController;
             
             double sliceAccuracy = 0;
             
-            for(int j = 0; j < m_loops; j++){
-                sliceAccuracy += [[tempFrameHits objectAtIndex:i*j+j] doubleValue];
+            for(int j = 0; j < m_loops+1; j++){
+                sliceAccuracy += [[tempFrameHits objectAtIndex:i*j+i] doubleValue];
             }
             
             sliceAccuracy /= (m_loops+1);
@@ -2758,6 +2755,8 @@ extern UserController * g_userController;
     }else{
         frameHits = tempFrameHits;
     }
+    
+    //NSLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
     
     // Draw
     CGSize size = CGSizeMake(_heatMapView.frame.size.width,_heatMapView.frame.size.height);

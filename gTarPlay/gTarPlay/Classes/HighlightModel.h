@@ -16,4 +16,6 @@
 // also add shape
 - (id)initWithCenter:(CGPoint)center andSize:(CGSize)size andColor:(GLubyte*)color andShape:(NSString *)shape;
 
+@property (nonatomic, retain) UIImage * highlightImage;
+
 @end

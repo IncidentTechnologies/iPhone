@@ -115,6 +115,7 @@
         difficulty = useDifficulty;
         
         @synchronized(self){
+            
             // Remove all displayed notes
             NSArray * displayedNotesKeys = [m_noteModelDictionary allKeys];
 
@@ -133,6 +134,7 @@
             m_undisplayedFrames = [[NSMutableArray alloc] initWithArray:m_songModel.m_noteFrames];
             
             [self updateDisplayedFrames];
+            
         }
         
     }
@@ -227,9 +229,9 @@
             if ( frame.m_absoluteBeatStart < (currentBeat + m_beatsToPreloadSync) )
             {
                 
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     [self displayFrame:frame];
-                });
+                //});
                 
                 [framesToRemove addObject:frame];
                 

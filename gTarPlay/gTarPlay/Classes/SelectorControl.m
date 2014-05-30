@@ -134,8 +134,8 @@
 
 - (void)initColors
 {
-    deselectedColor = [UIColor colorWithRed:63/255.0 green:96/255.0 blue:106/255.0 alpha:1.0];
-    selectedColor = [UIColor colorWithRed:110/255.0 green:148/255.0 blue:158/255.0 alpha:1.0];
+    selectedColor = [UIColor colorWithRed:63/255.0 green:96/255.0 blue:106/255.0 alpha:1.0];
+    deselectedColor = [UIColor colorWithRed:110/255.0 green:148/255.0 blue:158/255.0 alpha:1.0];
 }
 
 - (void)setTitles:(NSArray*)titleArray

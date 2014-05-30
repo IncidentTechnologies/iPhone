@@ -10,6 +10,8 @@
 
 @implementation HighlightModel
 
+@synthesize highlightImage;
+
 - (id)initWithCenter:(CGPoint)center andSize:(CGSize)size andColor:(GLubyte*)color andShape:(NSString *)shape
 {
 	
@@ -32,7 +34,7 @@
         CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height));
     }
     
-    UIImage * highlightImage = UIGraphicsGetImageFromCurrentImageContext();
+    highlightImage = UIGraphicsGetImageFromCurrentImageContext();
     
     m_texture = [[Texture2D alloc] initWithImage:highlightImage];
     
