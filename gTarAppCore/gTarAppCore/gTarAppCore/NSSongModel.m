@@ -29,8 +29,11 @@
 
 #define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats, see also PlayViewController
 #define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.2f)
+
 #define SCROLLING_BEATS_PER_SECOND 1.0
-#define LOOP_GAP 1.0
+#define LOOP_GAP 2.0
+
+#define RESTRICTFRAME_PREVIEW_BEATS 0.5
 
 //- (id)initWithSongXmp:(NSString*)xmpBlob
 //{
@@ -122,12 +125,22 @@
     // Sort the notes into note frames
     m_lengthBeats = 0;
     
+    NSNote * firstNote = [notesArray firstObject];
+    NSNote * lastNote = [notesArray lastObject];
+//    double lastNoteGap = lastNote.m_absoluteBeatStart - floor(lastNote.m_absoluteBeatStart);
+    
+    double widthGap = (m_endBeat - m_startBeat) - floor(m_endBeat - m_startBeat);
+    double firstNoteGap = ceil(firstNote.m_absoluteBeatStart) - firstNote.m_absoluteBeatStart;
+    
+    
     for( int l = 0; l <= loops; l++ ){
         for ( NSNote * note in notesArray )
         {
             if(note.m_absoluteBeatStart < m_endBeat && note.m_absoluteBeatStart-firstAudibleBeat >= m_startBeat){
                 
-                double timedNoteStart = (note.m_absoluteBeatStart - m_startBeat) + l*(m_endBeat - m_startBeat) - l*firstAudibleBeat + l*LOOP_GAP;
+                double timedNoteStart = (note.m_absoluteBeatStart - m_startBeat) + l*(m_endBeat - m_startBeat) + l*LOOP_GAP - l*widthGap + firstNoteGap;
+                
+                // firstAudibleBeat
                 
                 if ( noteFrame == nil ||
                     (timedNoteStart - noteFrame.m_absoluteBeatStart) > m_frameWidthBeats ) {
@@ -182,7 +195,7 @@
     {
         double delta = m_nextFrame.m_absoluteBeatStart - m_currentBeat;
         
-        [self incrementBeatSerialAccess:delta];
+        [self incrementBeatSerialAccess:delta isRestrictFrame:NO];
     }
     else
     {
@@ -217,7 +230,7 @@
     }*/
 }
 
-- (void)incrementBeatSerialAccess:(double)delta
+- (void)incrementBeatSerialAccess:(double)delta isRestrictFrame:(BOOL)restrictFrame
 {
     
     m_currentBeat += delta;
@@ -234,11 +247,11 @@
         [self loopSongOrEndSong];
     }    
     
-    [self checkFrames];
+    [self checkFrames:restrictFrame];
     
 }
 
-- (void)incrementTimeSerialAccess:(double)delta
+- (double)incrementTimeSerialAccess:(double)delta isRestrictFrame:(BOOL)restrictFrame
 {
     
     m_currentBeat += (delta * m_beatsPerSecond);
@@ -252,7 +265,9 @@
         [self loopSongOrEndSong];
     }
     
-    [self checkFrames];
+    [self checkFrames:restrictFrame];
+    
+    return m_currentBeat;
     
 }
 
@@ -320,23 +335,17 @@
     
 }
 
-- (void)checkFrames
+- (void)checkFrames:(BOOL)restrictFrame
 {
     
-    // these three conditionals can both be hit no problem    
     if ( m_currentFrame != nil )
     {
-//        double beatEnd = m_currentFrame.m_absoluteBeatStart + m_currentFrame.m_duration;
+        
         double beatEnd = m_currentFrame.m_absoluteBeatStart;
         
-        //
         // Check if we've passed the end of this frame
-        //
-        
-        //if ( m_currentBeat > (beatEnd + m_frameWidthBeats/2.0) )
         if ( m_currentBeat > (beatEnd + SONG_MODEL_NOTE_FRAME_WIDTH_MAX/2.0) )
         {
-            //NSLog(@"Current beat is %f, beat end is %f",m_currentBeat,(beatEnd + m_frameWidthBeats/2.0));
             [self exitCurrentFrame];
         }
         
@@ -347,7 +356,8 @@
         
         double beatStart = m_nextFrame.m_absoluteBeatStart;
 
-        if ( m_currentBeat >= (beatStart - m_frameWidthBeats/2.0) )
+        if ( (!restrictFrame && m_currentBeat >= (beatStart - m_frameWidthBeats/2.0))
+            || (restrictFrame && m_currentBeat + RESTRICTFRAME_PREVIEW_BEATS >= (beatStart - m_frameWidthBeats/2.0) && m_currentFrame == nil))
         {
             [self enterCurrentFrame];
             

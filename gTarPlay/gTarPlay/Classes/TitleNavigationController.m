@@ -208,6 +208,7 @@ extern Facebook * g_facebook;
 - (void)initSoundMaster
 {
     g_soundMaster = [[SoundMaster alloc] init];
+    //[_menuPlayButton startActivityIndicator];
     [_menuFreePlayButton startActivityIndicator];
     [g_soundMaster setCurrentInstrument:0 withSelector:@selector(instrumentLoaded:) andOwner:self];
 }
@@ -316,6 +317,7 @@ extern Facebook * g_facebook;
 
 -(void)instrumentLoaded:(id)sender
 {
+    //[_menuPlayButton stopActivityIndicator];
     [_menuFreePlayButton stopActivityIndicator];
 }
 

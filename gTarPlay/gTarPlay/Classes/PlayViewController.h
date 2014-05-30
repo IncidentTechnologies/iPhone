@@ -47,6 +47,8 @@ enum PlayViewControllerDifficulty
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode;
 
+- (void) releasePlayViewController;
+
 - (void) localizeViews;
 
 @property (strong, nonatomic) SoundMaster *g_soundMaster;

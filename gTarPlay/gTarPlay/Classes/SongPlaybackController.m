@@ -210,7 +210,7 @@
 }
 - (void)mainEventLoop {
     
-	[m_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
+	[m_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP isRestrictFrame:NO];
 }
 
 #pragma mark - GuitarControllerObserver

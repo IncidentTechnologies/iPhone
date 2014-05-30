@@ -76,6 +76,7 @@ extern UserController * g_userController;
     BOOL _refreshDisplay;
     BOOL _ignoreInput;
     BOOL _playMetronome;
+    double lastMetronomeBeat;
     
     NSTimer *_interFrameDelayTimer;
     NSTimer *_delayedChordTimer;
@@ -109,6 +110,7 @@ extern UserController * g_userController;
     CGPoint initPoint;
     BOOL isScrolling;
     BOOL isStandalone;
+    BOOL isRestrictPlayFrame;
     
     BOOL fretOneOn;
     BOOL fretTwoOn;
@@ -234,7 +236,7 @@ extern UserController * g_userController;
     _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom];
     
     // Init song XML
-    [self initSongModel];
+    //[self initSongModel];
     
     [self setPracticeMode];
     
@@ -244,6 +246,12 @@ extern UserController * g_userController;
 {
     [self setStandalone];
     
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    _songModel = nil;
+    [self stopMainEventLoop];
 }
 
 - (void) setPracticeMode
@@ -277,6 +285,9 @@ extern UserController * g_userController;
         [self standaloneReady];
         
         [_tempoButton setTitle:@"100%" forState:UIControlStateNormal];
+        
+        [self setRestrictPlayFrame:NO];
+        
     }else{
         
         NSLog(@"GTAR IS CONNECTED USE NORMAL");
@@ -299,6 +310,11 @@ extern UserController * g_userController;
     }else{
         [self hidePauseButton];
     }
+}
+
+- (void) setRestrictPlayFrame:(BOOL)restrictPlayFrame
+{
+    isRestrictPlayFrame = restrictPlayFrame;
 }
 
 - (void) localizeViews {
@@ -524,6 +540,11 @@ extern UserController * g_userController;
         [self drawPlayButton:_pauseButton];
         [self restartSong:NO];
         
+        // return LEDs to off
+        if(g_gtarController.connected == YES){
+            [g_gtarController turnOffAllLeds];
+        }
+        
     }else{
         
         // Animate out
@@ -568,7 +589,7 @@ extern UserController * g_userController;
     NSString *tempo = _tempoButton.titleLabel.text;
     NSString *newTempo;
     
-    if([tempo isEqualToString:NSLocalizedString(@"NONE", NULL)] || [tempo isEqualToString:@"150%"]){
+    if([tempo isEqualToString:NSLocalizedString(@"NONE", NULL)] || [tempo isEqualToString:@"125%"]){
         newTempo = @"25%";
     }else if([tempo isEqualToString:@"25%"]){
         newTempo = @"50%";
@@ -578,11 +599,9 @@ extern UserController * g_userController;
         newTempo = @"75%";
     }else if([tempo isEqualToString:@"75%"]){
         newTempo = @"100%";
-    }else if([tempo isEqualToString:@"100%"]){
-        newTempo = @"125%";
     }else{
         if(isStandalone){
-            newTempo = @"150%";
+            newTempo = @"125%";
         }else{
             newTempo = NSLocalizedString(@"NONE", NULL);
         }
@@ -603,6 +622,7 @@ extern UserController * g_userController;
     isScrolling = [_tempoButton.titleLabel.text isEqualToString:NSLocalizedString(@"NONE", NULL)] ? NO : YES;
     double tempoPercent = 1.0;
     [self setScrolling:isScrolling];
+    [self setRestrictPlayFrame:(isScrolling && g_gtarController.connected)];
     
     if(isScrolling){
         tempoPercent = [[_tempoButton.titleLabel.text stringByReplacingOccurrencesOfString:@"%" withString:@""] doubleValue]/100;
@@ -760,6 +780,7 @@ extern UserController * g_userController;
         isPracticeMode = NO;
         [self setScrolling:isStandalone];
         [self setPracticeMode];
+        [self setRestrictPlayFrame:NO];
     }
     
     // Only upload at the end of a song
@@ -1395,7 +1416,7 @@ extern UserController * g_userController;
         [_metronomeTimer invalidate];
         _metronomeTimer = nil;
         
-        _metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
+        //_metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
         
         NSLog(@"Beat is %f",1.0/_songModel.m_beatsPerSecond);
     }
@@ -1725,7 +1746,14 @@ extern UserController * g_userController;
     // Advance song model and recorder
     
     if ( _animateSongScrolling == YES ) {
-        [_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
+        double currentBeat = [_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP isRestrictFrame:isRestrictPlayFrame];
+        
+        if(_playMetronome){
+            if(currentBeat >= lastMetronomeBeat + 1.0){
+                lastMetronomeBeat = floor(currentBeat);
+                [self playMetronomeTick];
+            }
+        }
     }
     
     // song recorder always records in real time
@@ -1781,7 +1809,7 @@ extern UserController * g_userController;
     GtarString str = pluck.position.string;
     GtarPluckVelocity velocity = pluck.velocity;
     
-    if ( _currentFrame == nil && frameToPlay == nil)
+    if ( _currentFrame == nil && frameToPlay == nil && !isRestrictPlayFrame)
     {
         [_songModel skipToNextFrame];
     }
@@ -2001,6 +2029,7 @@ extern UserController * g_userController;
     
     _currentFrame = nil;
     _lastTappedFrame = nil;
+    _songModel = nil;
     
     //
     // Start off the song stuff
@@ -2013,6 +2042,7 @@ extern UserController * g_userController;
     _deferredNotesQueue = [[NSMutableArray alloc] init];
     
 }
+
 
 - (void)initSongRecorder
 {
@@ -2090,6 +2120,7 @@ extern UserController * g_userController;
     m_loopStart = start;
     m_loopEnd = end;
     m_loops = loops;
+    lastMetronomeBeat = -2;
     
     [self initSongModel]; // reinit
     [self updateMenuLabelsForSongStart];
@@ -2098,9 +2129,9 @@ extern UserController * g_userController;
     [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:(isScrolling || isStandalone) withTempoPercent:tempoPercent fromStart:start toEnd:end withLoops:loops];
     
     // Light up the first frame
-    //if(g_gtarController.connected == YES){
-    [self turnOnFrame:_songModel.m_nextFrame];
-    //}
+    if(!isRestrictPlayFrame){
+        [self turnOnFrame:_songModel.m_nextFrame];
+    }
     
     [self initSongRecorder];
     
@@ -2123,6 +2154,7 @@ extern UserController * g_userController;
     m_loopStart = 0;
     m_loopEnd = 1.0;
     m_loops = 0;
+    lastMetronomeBeat = -2;
     
     [self initSongModel]; // reinit
     [self updateMenuLabelsForSongStart];
@@ -2554,7 +2586,12 @@ extern UserController * g_userController;
     
     // Align us more pefectly with the frame
     if(!isScrolling){
-        [_songModel incrementBeatSerialAccess:(frame.m_absoluteBeatStart - _songModel.m_currentBeat)];
+        [_songModel incrementBeatSerialAccess:(frame.m_absoluteBeatStart - _songModel.m_currentBeat) isRestrictFrame:NO];
+    }
+    
+    // If restricted play frame then turn on frame
+    if(isRestrictPlayFrame){
+        [self turnOnFrame:_currentFrame];
     }
     
     _refreshDisplay = YES;
@@ -2577,6 +2614,10 @@ extern UserController * g_userController;
         
     }
     
+    if(isRestrictPlayFrame){
+        [self turnOffFrame:_currentFrame];
+    }
+    
     _currentFrame = nil;
     
     if(!isStandalone && frame != nil){
@@ -2594,8 +2635,10 @@ extern UserController * g_userController;
     [self turnOffFrame:frame];
     
     // turn on the next frame
-    [self turnOnFrame:_nextFrame];
-    
+    if(!isRestrictPlayFrame){
+        [self turnOnFrame:_nextFrame];
+    }
+        
     [self disableInput];
     
     _refreshDisplay = YES;
@@ -2607,7 +2650,7 @@ extern UserController * g_userController;
 - (void)songModelNextFrame:(NSNoteFrame*)frame
 {
     // Light up in advance
-    if(isScrolling){
+    if(isScrolling && !isRestrictPlayFrame){
         [self turnOffFrame:_nextFrame];
         [self turnOnFrame:frame];
     }
@@ -2871,6 +2914,8 @@ extern UserController * g_userController;
     [_finishButton setHidden:NO];
     [_finishRestartButton setHidden:NO];
     [_backButton setEnabled:NO];
+    
+    _songModel = nil;
     
     if(_menuIsOpen){
         [self menuButtonClicked:nil];
