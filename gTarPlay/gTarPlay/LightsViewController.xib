@@ -7,7 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LightsViewController">
             <connections>
                 <outlet property="allLabel" destination="2576" id="GeJ-n1-qJV"/>
-                <outlet property="allSurface" destination="2495" id="2635"/>
+                <outlet property="allSurface" destination="W0Y-1L-G1z" id="FTG-L8-C3c"/>
                 <outlet property="arrowFretsRight" destination="819" id="902"/>
                 <outlet property="arrowStringsBottom" destination="839" id="904"/>
                 <outlet property="arrowStringsTop" destination="832" id="903"/>

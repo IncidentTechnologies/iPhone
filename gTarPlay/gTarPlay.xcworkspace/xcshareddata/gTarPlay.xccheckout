@@ -5,31 +5,31 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>40CB0565-9A9C-48EE-95F2-A58D1D7E2098</string>
+	<string>B7A506E4-BD64-4036-AB1E-FA37538FF336</string>
 	<key>IDESourceControlProjectName</key>
 	<string>gTarPlay</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>3799064A-6338-4FF4-BA9A-5BF20CF3FBB0</key>
+		<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 		<key>8E8E1815-96B7-45BC-A731-4FCBB7791C05</key>
 		<string>https://github.com/IncidentTechnologies/IncidentPlatform.git</string>
-		<key>FE157BF3-9922-4C49-BD75-1B263D921768</key>
-		<string>https://github.com/IncidentTechnologies/iPhone</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>gTarPlay/gTarPlay.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>3799064A-6338-4FF4-BA9A-5BF20CF3FBB0</key>
+		<string>../..</string>
 		<key>8E8E1815-96B7-45BC-A731-4FCBB7791C05</key>
 		<string>../../../IncidentPlatform</string>
-		<key>FE157BF3-9922-4C49-BD75-1B263D921768</key>
-		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/IncidentTechnologies/iPhone</string>
+	<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>FE157BF3-9922-4C49-BD75-1B263D921768</string>
+	<string>3799064A-6338-4FF4-BA9A-5BF20CF3FBB0</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -44,9 +44,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FE157BF3-9922-4C49-BD75-1B263D921768</string>
+			<string>3799064A-6338-4FF4-BA9A-5BF20CF3FBB0</string>
 			<key>IDESourceControlWCCName</key>
-			<string>iPhone</string>
+			<string>Play</string>
 		</dict>
 	</array>
 </dict>

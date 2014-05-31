@@ -30,5 +30,6 @@
 //- (id)initWithAudioController:(AudioController*)AC;
 
 - (id)init;
+- (void)refreshView;
 
 @end

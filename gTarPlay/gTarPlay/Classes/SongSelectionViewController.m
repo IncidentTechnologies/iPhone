@@ -26,6 +26,7 @@ extern GtarController *g_gtarController;
     NSArray *_displayedUserSongArray;
     SongPlaybackController *_playbackController;
     PlayerViewController *_playerViewController;
+    PlayViewController *_playViewController;
     
     UserSong *_currentUserSong;
     NSInteger _currentDifficulty;
@@ -661,35 +662,36 @@ extern GtarController *g_gtarController;
 
 - (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty practiceMode:(BOOL)practiceMode
 {
+    _playViewController = nil;
     
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected practiceMode:practiceMode];
+    _playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected practiceMode:practiceMode];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.
     NSString *songString = (NSString *)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
-    playViewController.userSong = userSong;
-    playViewController.userSong.m_xmlDom = [[XmlDom alloc] initWithXmlString:songString];
+    _playViewController.userSong = userSong;
+    _playViewController.userSong.m_xmlDom = [[XmlDom alloc] initWithXmlString:songString];
     
     if ( difficulty == 0 )
     {
         // Easy
-        playViewController.difficulty = PlayViewControllerDifficultyEasy;
+        _playViewController.difficulty = PlayViewControllerDifficultyEasy;
     }
     else if ( difficulty == 1 )
     {
         // Medium
-        playViewController.difficulty = PlayViewControllerDifficultyMedium;
-        playViewController.muffleWrongNotes = YES;
+        _playViewController.difficulty = PlayViewControllerDifficultyMedium;
+        _playViewController.muffleWrongNotes = YES;
     }
     else if ( difficulty == 2 )
     {
         // Hard
-        playViewController.difficulty = PlayViewControllerDifficultyHard;
-        playViewController.muffleWrongNotes = NO;
+        _playViewController.difficulty = PlayViewControllerDifficultyHard;
+        _playViewController.muffleWrongNotes = NO;
     }
 
-    [self.navigationController pushViewController:playViewController animated:YES];
+    [self.navigationController pushViewController:_playViewController animated:YES];
     
 }
 

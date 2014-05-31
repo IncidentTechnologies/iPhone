@@ -51,6 +51,7 @@
 - (NSString *) getAudioRoute;
 
 - (void) setChannelGain:(float)gain;
+- (float) getChannelGain;
 
 - (void) playMetronomeTick;
 - (void) PluckString:(int)string atFret:(int)fret;

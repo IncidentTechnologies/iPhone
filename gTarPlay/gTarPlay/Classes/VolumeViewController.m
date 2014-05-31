@@ -127,6 +127,13 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    [_volumeSlider setValue:[g_soundMaster getChannelGain]];
+    
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];

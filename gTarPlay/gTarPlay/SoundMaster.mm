@@ -16,6 +16,11 @@
 #define GTAR_NUM_STRINGS 6
 #define GTAR_NUM_FRETS 17
 
+#define GTAR_NOTE_DURATION 1.0
+#define GTAR_CONTINUOUS_NOTE_DURATION 1.0
+#define GTAR_FRET_DOWN_DURATION 0.01
+#define GTAR_FRET_UP_DURATION 0.01
+
 #define GRAPH_SAMPLE_RATE 44100.0f
 
 #define EFFECTS_AVAILABLE 1
@@ -26,7 +31,7 @@
 
 #define DEFAULT_INSTRUMENT @"Electric Guitar"
 
-#define DEFAULT_GAIN 0.5
+#define DEFAULT_GAIN 0.4
 #define GAIN_MULTIPLIER 1.0
 
 @interface SoundMaster ()
@@ -39,6 +44,8 @@
     int m_activeBankNode;
     int m_metronome;
     
+    float m_channelGain;
+    
     // Effects
 #ifdef EFFECTS_AVAILABLE
     DelayNode * m_delayNode;
@@ -50,9 +57,16 @@
     
     // Slides and fret tracking
     BOOL isSlideEnabled;
+    
     int activeFretOnString[GTAR_NUM_STRINGS];
     int pendingFretOnString[GTAR_NUM_STRINGS];
-    BOOL fretsPressedDown[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
+    int fretsPressedDown[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
+    
+    int fretDownWindow[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
+    
+    NSTimer * fretDownTimer[GTAR_NUM_STRINGS];
+    NSTimer * fretUpTimer[GTAR_NUM_STRINGS];
+    NSTimer * playingNotesTimers[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
     
 }
 @end
@@ -106,21 +120,43 @@
     root = [[audioController GetNodeNetwork] GetRootNode];
     
     m_gtarSamplerNode = new GtarSamplerNode;
-    m_gtarSamplerNode->SetChannelGain(DEFAULT_GAIN, CONN_OUT);
+    [self setChannelGain:DEFAULT_GAIN];
     
-    root->ConnectInput(0, m_gtarSamplerNode, 0);
+    [self initEffects];
+    
+    //root->ConnectInput(0, m_gtarSamplerNode, 0);
     
     if(!m_instruments && ![self loadInstrumentArray]){
         NSLog(@"Failed to load instrument array from instrument.plist");
         return false;
     }
     
-    [self initEffects];
     
     [self initMetronome];
     
+    [self initTimers];
+    
     return true;
     
+}
+
+- (void)initTimers
+{
+    for(int s = 0; s < GTAR_NUM_STRINGS; s++){
+        for(int f = 0; f < GTAR_NUM_FRETS; f++){
+            playingNotesTimers[s][f] = nil;
+        }
+    }
+}
+
+- (void)releaseAllTimers
+{
+    for(int s = 0; s < GTAR_NUM_STRINGS; s++){
+        for(int f = 0; f < GTAR_NUM_FRETS; f++){
+            [playingNotesTimers[s][f] invalidate];
+            playingNotesTimers[s][f] = nil;
+        }
+    }
 }
 
 - (void)reset
@@ -226,8 +262,17 @@
 - (void) setChannelGain:(float)gain
 {
     NSLog(@"Set channel gain to %f",gain*GAIN_MULTIPLIER);
+
+    m_channelGain = gain * GAIN_MULTIPLIER;
     
-    m_gtarSamplerNode->SetChannelGain(gain*GAIN_MULTIPLIER, CONN_OUT);
+    m_gtarSamplerNode->SetChannelGain(m_channelGain, CONN_OUT);
+
+    
+}
+
+- (float) getChannelGain
+{
+    return m_channelGain / GAIN_MULTIPLIER;
 }
 
 #pragma mark - Tone
@@ -326,7 +371,8 @@
         pendingFretOnString[i] = -1;
         
         for(int j = 0; j < GTAR_NUM_FRETS; j++){
-            fretsPressedDown[i][j] = false;
+            fretsPressedDown[i][j] = 0;
+            fretDownWindow[i][j] = 0;
         }
     }
     
@@ -385,6 +431,30 @@
     }
 }
 
+- (BOOL) isAnyFretDownOnString:(int)string
+{
+    for(int f = 1; f < GTAR_NUM_FRETS; f++){
+        
+        if(fretsPressedDown[string][f] || fretDownWindow[string][f]){
+            return YES;
+        }
+        
+    }
+    
+    return NO;
+}
+
+- (int) highestFretDownIndexForString:(int)string
+{
+    for(int f = GTAR_NUM_FRETS-1; f >= 0; f--){
+        if(fretsPressedDown[string][f] == 1){
+            return f;
+        }
+    }
+    
+    return -1;
+}
+
 - (int) noteIndexForString:(int)string andFret:(int)fret
 {
     if(fret < 0){
@@ -397,6 +467,7 @@
 - (void) releaseInstrument:(NSInteger)index
 {
     if(index > -1){
+        [self releaseAllTimers];
         [self stopAllEffects];
         [self releaseBank:m_activeBankNode];
     }
@@ -504,24 +575,56 @@
 - (void) PluckString:(int)string atFret:(int)fret
 {
     if(!isLoadingInstrument){
+        
+        // Ensure it's a valid string + fret
         if(string >= 0 && string < GTAR_NUM_STRINGS && fret >= 0 && fret < GTAR_NUM_FRETS){
             
+            // Ensure there's a valid instrument enabled
             if(m_gtarSamplerNode == nil){
                 [self setCurrentInstrument:0 withSelector:nil andOwner:nil];
+                return;
             }
             
+            // Stop anything playing on the string
             [self stopString:string setFret:fret];
-            
             activeFretOnString[string] = fret;
             
+            // Get note index
             int noteIndex = [self noteIndexForString:string andFret:fret];
             
             NSLog(@"Note at index %i",noteIndex);
             
+            // First check if there's a timer on the note already (playing again before it's timed out) and stop it
+            if(playingNotesTimers[string][fret] != nil){
+                [self EndPluckString:playingNotesTimers[string][fret]];
+            }
+            
+            // Trigger the note
             m_gtarSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
             
+            // Set a timer to keep the note short
+            playingNotesTimers[string][fret] = [NSTimer scheduledTimerWithTimeInterval:GTAR_NOTE_DURATION target:self selector:@selector(EndPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:fret],@"Fret", nil] repeats:NO];
         }
     }
+}
+
+// Timer End Pluck String
+- (void) EndPluckString:(NSTimer *)timer
+{
+    NSDictionary * info = [timer userInfo];
+    
+    int string = [[info objectForKey:@"String"] intValue];
+    int fret = [[info objectForKey:@"Fret"] intValue];
+    
+    int stopIndex = [self noteIndexForString:string andFret:fret];
+    
+    if(stopIndex >= 0 && [self IsNoteOnAtString:string andFret:fret]){
+        [self EndNoteOnString:string andFret:fret];
+    }
+    
+    [playingNotesTimers[string][fret] invalidate];
+    playingNotesTimers[string][fret] = nil;
+    
 }
 
 - (void) PluckContinuousString:(int)string atFret:(int)fret
@@ -534,17 +637,19 @@
     
     if(noteIndex != pendingIndex){
         
+        // First check if there's a timer on the note already (playing again before it's timed out) and stop it
+        if(playingNotesTimers[string][fret] != nil){
+            [self EndPluckString:playingNotesTimers[string][fret]];
+        }
+        
         m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
         
         activeFretOnString[string] = pendingFretOnString[string];
         pendingFretOnString[string] = -1;
         
-        /*
-         NSString * message = [@"Trigger continuous from " stringByAppendingFormat:@"%i to %i, crossing at index %li",noteIndex,pendingIndex,index];
-         
-         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pluck String" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-         [alert show];
-         */
+        // Set a timer to keep the note short
+        playingNotesTimers[string][activeFretOnString[string]] = [NSTimer scheduledTimerWithTimeInterval:GTAR_CONTINUOUS_NOTE_DURATION target:self selector:@selector(EndPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:activeFretOnString[string]],@"Fret", nil] repeats:NO];
+        
     }
 
 }
@@ -589,7 +694,7 @@
     
     // Stop that string from playing
     if(!overlapNotePlaying){
-        m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
+        [self EndNoteOnString:string andFret:activeFretOnString[string]];
     }
     
     activeFretOnString[string] = fret;
@@ -599,98 +704,216 @@
 {
     if(!isLoadingInstrument){
     
-        fretsPressedDown[string][fret] = YES;
-        
-        // Stop open string from playing on fretdown
-        if(fret != 0 && activeFretOnString[string] == 0){
-            [self NoteOffAtString:string andFret:0];
-        }
-        
-        if(activeFretOnString[string] <= 0){
-            activeFretOnString[string] = fret;
-            return YES;
-        }
-        
-        // Slides
-        if(isSlideEnabled){
+        if(fretDownTimer[string] == nil && isSlideEnabled){
             
-                // Make sure the string is playing and that the fret is greater than
-                if(fret > activeFretOnString[string] && fret > pendingFretOnString[string]){
-                    
-                    pendingFretOnString[string] = fret;
-                    [self PluckContinuousString:string atFret:activeFretOnString[string]];
-                
-                }
+            fretDownTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_DOWN_DURATION target:self selector:@selector(EndFretDownWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
         }
+        
+        fretDownWindow[string][fret] = 1;
         
     }
+    
     return YES;
+}
+
+- (void) EndFretDownWindow:(NSTimer *)timer
+{
+    
+    int s = [[[timer userInfo] objectForKey:@"String"] intValue];
+    
+    // Evaluate fretDownWindow
+    for(int f = GTAR_NUM_FRETS - 1; f > 0; f--){
+        
+        if(f == 1){
+            
+            // Bottom fret is down if the next fret is not down
+            // Unhandled edge case: 1st and 2nd fret are pressed at the same time will not hammer off
+            if(fretDownWindow[s][f] == 1 && fretDownWindow[s][f+1] == 0){
+                fretsPressedDown[s][f] = 1;
+            }
+            
+        }else if(f == GTAR_NUM_FRETS - 1){
+            
+            // Top fret is always down if it says it's down
+            if(fretDownWindow[s][f] == 1){
+                fretsPressedDown[s][f] = 1;
+            }
+            
+        }else{
+            
+            if(fretDownWindow[s][f] == 1 && fretDownWindow[s][f+1] == 0 && fretDownWindow[s][f-1] == 0){
+                
+                // Clean fret down
+                fretsPressedDown[s][f] = 1;
+                
+            }else if(fretDownWindow[s][f] == 1 && fretDownWindow[s][f-1] == 1){
+                
+                // Max fret is the only fret down
+                // Unhandled edge case: frets spaced one apart pressed at the same time
+                fretsPressedDown[s][f] = 1;
+                
+            }
+            
+        }
+    }
+    
+    // Reset the string
+    for(int f = 0; f < GTAR_NUM_FRETS; f++){
+        fretDownWindow[s][f] = 0;
+    }
+    
+    int highestFret = [self highestFretDownIndexForString:s];
+    int activeFret = activeFretOnString[s];
+    
+    if(activeFret == 0){
+    
+        [self NoteOffAtString:s andFret:activeFret];
+        
+    }else if(activeFret > 0 && highestFret > activeFret){
+    
+        // Hammer On or Slide Up
+        pendingFretOnString[s] = highestFret;
+        [self PluckContinuousString:s atFret:activeFret];
+        
+    }else if(activeFret < 0){
+        
+        activeFretOnString[s] = highestFret;
+        
+    }else{
+        
+        // Slide
+        pendingFretOnString[s] = highestFret;
+        [self PluckContinuousString:s atFret:activeFret];
+    }
+    
+    [fretDownTimer[s] invalidate];
+    fretDownTimer[s] = nil;
+    
 }
 
 - (bool) FretUp:(int)fret onString:(int)string
 {
     if(!isLoadingInstrument){
         
-        fretsPressedDown[string][fret] = NO;
+        fretDownWindow[string][fret] = 0;
+        fretsPressedDown[string][fret] = 0;
         
-        // If fret lifted is the one being played it will trigger hammer off
         if(isSlideEnabled){
-            
-            if(fret == activeFretOnString[string] || fret == pendingFretOnString[string]){
-                int highestRemainingFretDown = -1;
+            if(fretUpTimer[string] == nil){
                 
-                // Determine fret to hammer off to
-                for(int f = GTAR_NUM_FRETS-1; f > 0; f--){
-                    if(fretsPressedDown[string][f]){
-                        highestRemainingFretDown = f;
-                        break;
-                    }
-                }
-                
-                if(highestRemainingFretDown > 0){
-                    
-                    pendingFretOnString[string] = highestRemainingFretDown;
-                    [self PluckContinuousString:string atFret:activeFretOnString[string]];
-                    
-                }else{
-                    
-                    // Nothing else pressed down - kill the note
-                    pendingFretOnString[string] = -1;
-                    
-                    // Probably want this:
-                    activeFretOnString[string] = -1;
-                }
+                fretUpTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_UP_DURATION target:self selector:@selector(EndFretUpWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
+            }
+        
+            if(![self isAnyFretDownOnString:string]){
+                [self StopNoteOnString:string andFret:fret];
             }
         }
+        
     }
+    
     return NO;
+}
+
+- (void) EndFretUpWindow:(NSTimer *)timer
+{
+    int s = [[[timer userInfo] objectForKey:@"String"] intValue];
+    
+    int activeFret = activeFretOnString[s];
+    
+    if(activeFret >= 0 && fretsPressedDown[s][activeFret] == 0){
+        
+        int highestFret = [self highestFretDownIndexForString:s];
+        
+        if(highestFret <= 0){
+            
+            pendingFretOnString[s] = -1;
+            activeFretOnString[s] = -1;
+            
+        }else if(highestFret < activeFret){
+            
+            // Pull off
+            pendingFretOnString[s] = highestFret;
+            [self PluckContinuousString:s atFret:activeFret];
+        }
+        
+    }
+    
+    [fretUpTimer[s] invalidate];
+    fretUpTimer[s] = nil;
 }
 
 - (bool) NoteOnAtString:(int)string andFret:(int)fret
 {
     if(!isLoadingInstrument){
-        // Note is already plucked
+        
+        [self PluckString:string atFret:fret];
+        
     }
     return YES;
 }
 
+- (bool) IsNoteOnAtString:(int)string andFret:(int)fret
+{
+    int noteIndex = [self noteIndexForString:string andFret:fret];
+    
+    return m_gtarSamplerNode->IsNoteOn(m_activeBankNode, noteIndex);
+}
+
+// Gtar Note Off At String
 - (bool) NoteOffAtString:(int)string andFret:(int)fret
 {
-    // && fret == fretToPlay[string] && pendingFretToPlay[string] == -1
     if(!isLoadingInstrument){
         
         int stopIndex = [self noteIndexForString:string andFret:fret];
-        m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
-    
+        
+        if(stopIndex >= 0 && [self IsNoteOnAtString:string andFret:fret]){
+            
+            if(playingNotesTimers[string][fret] != nil){
+                [self EndPluckString:playingNotesTimers[string][fret]];
+                
+                return YES;
+                
+            }else{
+                [self EndNoteOnString:string andFret:fret];
+                
+                return YES;
+            }
+            
+        }
+        
     }
     return NO;
+}
+
+// Note Off Event
+- (void) EndNoteOnString:(int)string andFret:(int)fret
+{
+    int stopIndex = [self noteIndexForString:string andFret:fret];
+    
+    if(stopIndex >= 0){
+        m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
+        
+        //if(activeFretOnString[string] == fret){
+            //activeFretOnString[string] = [self highestFretDownIndexForString:string];
+        //}
+    }
+}
+
+- (void) StopNoteOnString:(int)string andFret:(int)fret
+{
+    int stopIndex = [self noteIndexForString:string andFret:fret];
+    
+    if(stopIndex >= 0){
+        m_gtarSamplerNode->StopNote(m_activeBankNode, stopIndex);
+    }
+    
 }
 
 #pragma mark - Sliding
 
 - (void)enableSliding
 {
-    isSlideEnabled = YES;
+    isSlideEnabled = NO;
 }
 
 - (void)disableSliding
@@ -741,13 +964,41 @@
     
     numEffects = [effectNames count];
 
+    // Chorus
+    //
+    m_chorusEffectNode = new ChorusEffectNode(25,               // delay
+                                              0.75,             // depth
+                                              0.05,             // width
+                                              3.0,              // frequency
+                                              1.0,              // wet
+                                              GRAPH_SAMPLE_RATE);
+    m_chorusEffectNode->ConnectInput(0, m_gtarSamplerNode, 0);
+    m_chorusEffectNode->SetPassThru(YES);
     
-    //[self toggleEffect:0 isOn:NO];
+    // Delay
+    //
+    m_delayNode = new DelayNode(500,     // ms delay
+                                0.5,    // feedback
+                                1.0     // wet
+                                );
+    m_delayNode->ConnectInput(0, m_chorusEffectNode, 0);
+    m_delayNode->SetPassThru(YES);
     
-    // always on
-    //m_butterworthNode = new ButterWorthFilterNode(2,8000,GRAPH_SAMPLE_RATE);
-    //m_butterworthNode->ConnectInput(0, m_samplerNode, 0);
-    //root->ConnectInput(0, m_butterworthNode, 0);
+    // Reverb
+    //
+    m_reverbNode = new ReverbNode(0.75); // wet
+    m_reverbNode->ConnectInput(0, m_delayNode, 0);
+    m_reverbNode->SetPassThru(YES);
+    
+    // Distort
+    //
+    m_distortionNode = new DistortionNode(3.78,             // gain
+                                          0.25,             // wet
+                                          GRAPH_SAMPLE_RATE);
+    m_distortionNode->ConnectInput(0, m_reverbNode, 0);
+    root->ConnectInput(0, m_distortionNode, 0);
+    m_distortionNode->SetPassThru(YES);
+
 #endif
     
 }
@@ -756,37 +1007,15 @@
 {
     
 #ifdef EFFECTS_AVAILABLE
-    [self stop];
-
-    @synchronized(self){
-        if(m_reverbNode){
-            
-            [self disconnectAndReleaseEffectNode:m_reverbNode];
-            m_reverbNode = nil;
-            
-        }else if(m_delayNode){
-            
-            [self disconnectAndReleaseEffectNode:m_delayNode];
-            m_delayNode = nil;
-            
-        }else if(m_chorusEffectNode){
-            
-            [self disconnectAndReleaseEffectNode:m_chorusEffectNode];
-            m_chorusEffectNode = nil;
-            
-        }else if(m_distortionNode){
-            
-            [self disconnectAndReleaseEffectNode:m_distortionNode];
-            m_distortionNode = nil;
-            
+    
+    for(int i = 0; i < [effectStatus count]; i++){
+        BOOL isOn = [[effectStatus objectAtIndex:i] boolValue];
+        
+        if(isOn){
+            [self toggleEffect:i isOn:YES];
         }
     }
     
-    for(int i = 0; i < [effectStatus count]; i++){
-        [effectStatus setObject:[NSNumber numberWithBool:NO] atIndexedSubscript:i];
-    }
-    
-    [self start];
 #endif
 }
 
@@ -801,27 +1030,26 @@
     [effectStatus setObject:[NSNumber numberWithBool:!isOn] atIndexedSubscript:index];
     
     if(isOn){
+        
         NSLog(@"Toggle effect off for %@",effectNode);
         
         if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)]){
             
-            [self disconnectAndReleaseEffectNode:m_reverbNode];
-            m_reverbNode = nil;
+            m_reverbNode->SetPassThru(YES);
+            //[self disconnectAndReleaseEffectNode:m_reverbNode];
+            //m_reverbNode = nil;
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)]){
             
-            [self disconnectAndReleaseEffectNode:m_delayNode];
-            m_delayNode = nil;
+            m_delayNode->SetPassThru(YES);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)]){
             
-            [self disconnectAndReleaseEffectNode:m_chorusEffectNode];
-            m_chorusEffectNode = nil;
+            m_chorusEffectNode->SetPassThru(YES);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)]){
             
-            [self disconnectAndReleaseEffectNode:m_distortionNode];
-            m_distortionNode = nil;
+            m_distortionNode->SetPassThru(YES);
             
         }
         
@@ -831,37 +1059,19 @@
         
         if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)]){
             
-            m_reverbNode = new ReverbNode(0.75); // wet
-            m_reverbNode->ConnectInput(0, m_gtarSamplerNode, 0);
-            root->ConnectInput(0, m_reverbNode, 0);
+            m_reverbNode->SetPassThru(NO);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)]){
             
-            m_delayNode = new DelayNode(500,     // ms delay
-                                        0.5,    // feedback
-                                        1.0     // wet
-                                        );
-            m_delayNode->ConnectInput(0, m_gtarSamplerNode, 0);
-            root->ConnectInput(0, m_delayNode, 0);
+            m_delayNode->SetPassThru(NO);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)]){
             
-            m_chorusEffectNode = new ChorusEffectNode(25,               // delay
-                                                      0.75,             // depth
-                                                      0.05,             // width
-                                                      3.0,              // frequency
-                                                      1.0,              // wet
-                                                      GRAPH_SAMPLE_RATE);
-            m_chorusEffectNode->ConnectInput(0, m_gtarSamplerNode, 0);
-            root->ConnectInput(0, m_chorusEffectNode, 0);
+            m_chorusEffectNode->SetPassThru(NO);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)]){
             
-            m_distortionNode = new DistortionNode(3.78,             // gain
-                                                  0.25,             // wet
-                                                  GRAPH_SAMPLE_RATE);
-            m_distortionNode->ConnectInput(0, m_gtarSamplerNode, 0);
-            root->ConnectInput(0, m_distortionNode, 0);
+            m_distortionNode->SetPassThru(NO);
             
         }
         

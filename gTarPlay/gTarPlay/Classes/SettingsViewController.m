@@ -85,6 +85,7 @@ unsigned char g_sensitivity[6];
     [_buttonLoadValues setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"LOAD", NULL)] forState:UIControlStateNormal];
     
     _postToFeedLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"POST TO FEED", NULL)];
+    _completeChordsLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"COMPLETE CHORDS", NULL)];
     _offLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"OFF", NULL)];
     _onLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ON", NULL)];
 }
@@ -95,8 +96,10 @@ unsigned char g_sensitivity[6];
     // Post To Feed?
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     BOOL disablePostToFeed = [settings boolForKey:@"DisablePostToFeed"];
+    BOOL completeChords = [settings boolForKey:@"DisableCompleteChords"];
     
     [_feedSwitch setOn:!disablePostToFeed];
+    [_chordSwitch setOn:!completeChords];
 }
 
 - (IBAction)backButtonClicked:(id)sender
@@ -256,6 +259,15 @@ unsigned char g_sensitivity[6];
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
     [settings setBool:!_feedSwitch.isOn forKey:@"DisablePostToFeed"];
+    
+    [settings synchronize];
+}
+
+- (IBAction)chordSwitchChanged:(id)sender
+{
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    [settings setBool:!_chordSwitch.isOn forKey:@"DisableCompleteChords"];
     
     [settings synchronize];
 }

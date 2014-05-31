@@ -309,6 +309,10 @@
         
         NoteModel * model = [m_noteModels objectAtIndex:n];
         
+        if(model == nil){
+            continue;
+        }
+        
         if(highlights){
             
             if(model.m_hit > 0){

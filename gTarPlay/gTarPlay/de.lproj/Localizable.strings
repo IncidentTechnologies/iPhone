@@ -169,6 +169,7 @@
 "RESET" = "RÜCKSETZEN";
 "COMMIT" = "VERPFLICHTEN";
 "String %d Sensitivity" = "String %d Empfindlichkeits";
+"COMPLETE CHORDS" = "KOMPLETTE AKKORDE";
 
 // Prompt Registration
 "Register your gTar." = "Registrieren Sie Ihr gTar.";

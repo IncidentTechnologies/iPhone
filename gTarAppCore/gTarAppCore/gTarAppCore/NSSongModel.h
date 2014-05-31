@@ -51,6 +51,9 @@
     
     int m_loops;
     
+    double widthGap;
+    double firstNoteGap;
+    
 }
 
 @property (nonatomic, readonly) NSSong * m_song;
@@ -75,12 +78,12 @@
 - (void)skipToNextFrame;
 //- (void)incrementBeat:(double)delta;
 //- (void)incrementTime:(double)delta;
-- (void)incrementBeatSerialAccess:(double)delta;
-- (void)incrementTimeSerialAccess:(double)delta;
+- (void)incrementBeatSerialAccess:(double)delta isRestrictFrame:(BOOL)restrictFrame;
+- (double)incrementTimeSerialAccess:(double)delta isRestrictFrame:(BOOL)restrictFrame;
 - (void)changeBeatRandomAccess:(double)beat;
 - (void)changePercentageComplete:(double)percentage;
 //- (void)changeBeat:(double)beat;
-- (void)checkFrames;
+- (void)checkFrames:(BOOL)restrictFrame;
 - (void)exitCurrentFrame;
 - (void)enterCurrentFrame;
 - (void)beginFrameTimer:(double)delta;

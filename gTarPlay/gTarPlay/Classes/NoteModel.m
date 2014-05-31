@@ -11,12 +11,13 @@
 @implementation NoteModel
 
 @synthesize m_hit;
+@synthesize m_highlightModel;
 
 // these have to go here, basically because objc says so.
 // (static variables in the class def don't work as expected)
 // pretend that they are class variables for NoteModel
 
-static HighlightModel * m_highlightModel;
+//static HighlightModel * m_highlightModel;
 
 - (id)initWithCenter:(CGPoint)center andColor:(GLubyte*)color andTexture:(Texture2D*)texture andOverlay:(Model*)overlay
 {

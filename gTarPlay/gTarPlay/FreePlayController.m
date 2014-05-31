@@ -113,7 +113,7 @@ extern GtarController * g_gtarController;
         // Register for slide/hammer state change notification
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeSlideHammer:) name:@"SlideHammerStateChange" object:nil];
         
-        _isSlideEnabled = YES;
+        _isSlideEnabled = NO;
         
         m_playTimeStart = [NSDate date];
         m_audioRouteTimeStart = [NSDate date];
@@ -544,8 +544,9 @@ extern GtarController * g_gtarController;
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
     GtarFret fret = pluck.position.fret;
-    GtarString str = pluck.position.string;
+    GtarString str = pluck.position.string-1;
     
+    /*
     // zero base the string
     str--;
     
@@ -556,8 +557,9 @@ extern GtarController * g_gtarController;
         str = [[harmonizedValues valueForKey:@"String"] intValue];
         fret = [[harmonizedValues valueForKey:@"Fret"] intValue];
     }
+     */
     
-    [g_soundMaster PluckString:str atFret:fret];
+    [g_soundMaster NoteOnAtString:str andFret:fret];
 }
 
 - (void)gtarNoteOff:(GtarPosition)position
@@ -616,26 +618,24 @@ extern GtarController * g_gtarController;
 // selector to update the slide/hammer state when NSNotification is received
 - (void) didChangeSlideHammer:(NSNotification *) notification
 {
-    NSDictionary *data = [notification userInfo];
+    /*NSDictionary *data = [notification userInfo];
     _isSlideEnabled = [[data objectForKey:@"isSlideEnabled"] boolValue];
-    
+
     if(_isSlideEnabled){
         [g_soundMaster enableSliding];
     }else{
         [g_soundMaster disableSliding];
     }
+     */
 }
 
 #pragma mark - Touches
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    NSLog(@"touches began free play controller");
-    
+{    
 	// For now we just want to recognize that a touch (any touch) occurred
 	UITouch * touch = [[touches allObjects] objectAtIndex:0];
     
-     /*
     if (LEDColorRoatating == m_LEDColorMode)
     {
         m_currentColorIndex++;
@@ -664,7 +664,6 @@ extern GtarController * g_gtarController;
     }
     else
     {
-        */
         
 #ifdef Debug_BUILD
         CGPoint point = [touch locationInView:self.view];
@@ -690,12 +689,12 @@ extern GtarController * g_gtarController;
         
     }
 #endif
-        /*
+        
         m_LEDTouchArea = LEDTouchNone;
         return;
-    }*/
+    }
     
-    //[self touchedLEDs:touches];
+    [self touchedLEDs:touches];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -704,10 +703,10 @@ extern GtarController * g_gtarController;
     NSLog(@"touches moved free play controller");
     
     // Only take action if the touch is inside a designated LED area
-    /*if (LEDTouchNone != m_LEDTouchArea)
+    if (LEDTouchNone != m_LEDTouchArea)
     {
         [self touchedLEDs:touches];
-    }*/
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -715,14 +714,14 @@ extern GtarController * g_gtarController;
     NSLog(@"touches ended free play controller");
     
     // Check that last touchBegan was inside an LED touch area
-    /*if (LEDTouchNone != m_LEDTouchArea)
+    if (LEDTouchNone != m_LEDTouchArea)
     {
         // Turn off last LED touch point when finger touch ends
         [self turnOffLED:m_lastLEDTouch.x AndFret:m_lastLEDTouch.y];
     }
     
     // reset the last touch point
-    m_lastLEDTouch = CGPointMake(-1, -1);*/
+    m_lastLEDTouch = CGPointMake(-1, -1);
 }
 
 #pragma mark - LED light logic
@@ -796,9 +795,11 @@ extern GtarController * g_gtarController;
     int string = -1;
     int fret = -1;
     CGPoint point;
+    
     switch (m_LEDTouchArea)
     {
         case LEDTouchGeneral:
+            
             point = [touch locationInView:self.m_LEDGeneralSurface];
             
             string = (point.y / (m_LEDGeneralSurface.frame.size.height/GTAR_GUITAR_STRING_COUNT)) + 1;

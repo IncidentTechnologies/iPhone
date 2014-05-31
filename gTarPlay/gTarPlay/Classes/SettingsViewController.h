@@ -65,9 +65,11 @@ extern GtarController *g_gtarController;
 
 // Controls
 @property (strong, nonatomic) IBOutlet UILabel *postToFeedLabel;
+@property (strong, nonatomic) IBOutlet UILabel *completeChordsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *offLabel;
 @property (strong, nonatomic) IBOutlet UILabel *onLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *feedSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *chordSwitch;
 
 // Calibration
 @property (nonatomic, retain) IBOutlet UIButton *buttonCommitFW;
@@ -91,6 +93,7 @@ extern GtarController *g_gtarController;
 
 // Controls
 - (IBAction)feedSwitchChanged:(id)sender;
+- (IBAction)chordSwitchChanged:(id)sender;
 
 // Calibrate
 - (IBAction)OnCTButtonClicked:(id)sender;
