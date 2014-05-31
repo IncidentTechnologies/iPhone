@@ -24,6 +24,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#define MIXPANEL_NO_IFA
+
 @class    MixpanelPeople;
 @protocol MixpanelDelegate;
 

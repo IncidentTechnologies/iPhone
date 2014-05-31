@@ -22,14 +22,18 @@
 #include <sys/socket.h>
 #include <sys/sysctl.h>
 
+#import "Mixpanel.h"
+
+#ifndef MIXPANEL_NO_IFA
 #import <AdSupport/ASIdentifierManager.h>
+#endif
+
 #import <CommonCrypto/CommonDigest.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
 #import "MPCJSONDataSerializer.h"
-#import "Mixpanel.h"
 #import "NSData+MPBase64.h"
 #import "ODIN.h"
 
@@ -122,9 +126,11 @@ static Mixpanel *sharedInstance = nil;
         [properties setValue:carrier.carrierName forKey:@"$carrier"];
     }
 
+#ifndef MIXPANEL_NO_IFA
     if (NSClassFromString(@"ASIdentifierManager")) {
         [properties setValue:ASIdentifierManager.sharedManager.advertisingIdentifier.UUIDString forKey:@"$ios_ifa"];
     }
+#endif
 
     return [NSDictionary dictionaryWithDictionary:properties];
 }
@@ -369,9 +375,13 @@ static Mixpanel *sharedInstance = nil;
 - (NSString *)defaultDistinctId
 {
     NSString *distinctId = nil;
+    
+#ifndef MIXPANEL_NO_IFA
     if (NSClassFromString(@"ASIdentifierManager")) {
         distinctId = ASIdentifierManager.sharedManager.advertisingIdentifier.UUIDString;
     }
+#endif
+    
     if (!distinctId) {
         distinctId = ODIN1();
     }
@@ -1037,9 +1047,13 @@ static Mixpanel *sharedInstance = nil;
     [properties setValue:[device systemVersion] forKey:@"$ios_version"];
     [properties setValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"$ios_app_version"];
     [properties setValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"$ios_app_release"];
+    
+#ifndef MIXPANEL_NO_IFA
     if (NSClassFromString(@"ASIdentifierManager")) {
         [properties setValue:ASIdentifierManager.sharedManager.advertisingIdentifier.UUIDString forKey:@"$ios_ifa"];
     }
+#endif
+    
     return [NSDictionary dictionaryWithDictionary:properties];
 }
 
