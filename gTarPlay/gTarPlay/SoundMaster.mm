@@ -149,6 +149,16 @@
     }
 }
 
+- (void)releaseAllTimers
+{
+    for(int s = 0; s < GTAR_NUM_STRINGS; s++){
+        for(int f = 0; f < GTAR_NUM_FRETS; f++){
+            [playingNotesTimers[s][f] invalidate];
+            playingNotesTimers[s][f] = nil;
+        }
+    }
+}
+
 - (void)reset
 {
     NSLog(@"Reset audio");
@@ -457,6 +467,7 @@
 - (void) releaseInstrument:(NSInteger)index
 {
     if(index > -1){
+        [self releaseAllTimers];
         [self stopAllEffects];
         [self releaseBank:m_activeBankNode];
     }
