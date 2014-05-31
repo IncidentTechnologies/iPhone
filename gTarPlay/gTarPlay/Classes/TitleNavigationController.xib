@@ -282,7 +282,7 @@
                                 <action selector="signupButtonClicked:" destination="-1" eventType="touchUpInside" id="317"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2101" userLabel="ButtonView">
+                        <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2101" userLabel="ButtonView">
                             <rect key="frame" x="50" y="207" width="198" height="41"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>

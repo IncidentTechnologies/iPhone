@@ -2732,7 +2732,8 @@ extern UserController * g_userController;
     }
     
     double numSlices = [tempFrameHits count];
-    double sliceWidth = _heatMapView.frame.size.width / [tempFrameHits count];
+    
+    NSLog(@"TempFrameHits is %@ for %i frames",tempFrameHits,[tempFrameHits count]);
     
     // Aggregate frame hits
     if(isPracticeMode){
@@ -2744,7 +2745,9 @@ extern UserController * g_userController;
             double sliceAccuracy = 0;
             
             for(int j = 0; j < m_loops+1; j++){
-                sliceAccuracy += [[tempFrameHits objectAtIndex:i*j+i] doubleValue];
+                if((i*j+i) < [tempFrameHits count]){
+                    sliceAccuracy += [[tempFrameHits objectAtIndex:(i*j+i)] doubleValue];
+                }
             }
             
             sliceAccuracy /= (m_loops+1);
@@ -2756,7 +2759,7 @@ extern UserController * g_userController;
         frameHits = tempFrameHits;
     }
     
-    //NSLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
+    NSLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
     
     // Draw
     CGSize size = CGSizeMake(_heatMapView.frame.size.width,_heatMapView.frame.size.height);
@@ -2764,7 +2767,26 @@ extern UserController * g_userController;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    for(int f = 0, g = 0; f < numSlices; f++){
+    double sliceWidth = _heatMapView.frame.size.width * (m_loopEnd - m_loopStart) / [frameHits count];
+    
+    double slicesToFill = _heatMapView.frame.size.width / sliceWidth;
+    double slicesToPrefill = slicesToFill * m_loopStart;
+    
+    //NSLog(@"SliceWidth is %f from %f to %f for %i slices",sliceWidth, m_loopStart,m_loopEnd,[frameHits count]);
+    
+    for(int f = 0; f < slicesToPrefill; f++){
+        
+        double trimmedSliceWidth = sliceWidth+0.25;
+        UIColor * accuracyColor = [UIColor blackColor];
+        
+        CGRect sliceRect = CGRectMake(sliceWidth*f,0,trimmedSliceWidth,_heatMapView.frame.size.height);
+        
+        CGContextAddRect(context,sliceRect);
+        CGContextSetFillColorWithColor(context, accuracyColor.CGColor);
+        CGContextFillRect(context, sliceRect);
+    }
+    
+    for(int f = slicesToPrefill, g = 0; f < slicesToFill; f++){
         
         // Calculate accuracy color
         double accuracy = 0;
@@ -2773,25 +2795,30 @@ extern UserController * g_userController;
         double trimmedSliceWidth = sliceWidth+0.25;
         double trimmedSliceExtra = 0;
         
-        if((double)f/(double)numSlices >= m_loopStart && (double)f/(double)numSlices < m_loopEnd){
+        //if((double)f/(double)numSlices >= m_loopStart && (double)f/(double)numSlices < m_loopEnd){
             
-            accuracy = [[frameHits objectAtIndex:g] doubleValue];
-            
-            if(accuracy < 0.5){
-                accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*115.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
+            if(g < [frameHits count]){
+                accuracy = [[frameHits objectAtIndex:g] doubleValue];
+                
+                if(accuracy < 0.5){
+                    accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*115.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
+                }else{
+                    accuracyColor = [UIColor colorWithRed:2.0*(1.0-accuracy)*255.0/255.0 green:180/255.0 blue:50/255.0 alpha:0.9];
+                }
+                
             }else{
-                accuracyColor = [UIColor colorWithRed:2.0*(1.0-accuracy)*255.0/255.0 green:180/255.0 blue:50/255.0 alpha:0.9];
+                accuracyColor = [UIColor blackColor];
             }
             
             g++;
             
             // Ensure that wide frames don't go over the expected area
-            if(m_loopEnd < 1 && sliceWidth*f+sliceWidth+0.25 > _heatMapView.frame.size.width * m_loopEnd){
-                trimmedSliceWidth = _heatMapView.frame.size.width * m_loopEnd - sliceWidth*f;
-                trimmedSliceExtra = sliceWidth+0.25 - trimmedSliceWidth;
-            }
+            //if(m_loopEnd < 1 && sliceWidth*f+sliceWidth+0.25 > _heatMapView.frame.size.width * m_loopEnd){
+                //trimmedSliceWidth = _heatMapView.frame.size.width * m_loopEnd - sliceWidth*f;
+                //trimmedSliceExtra = sliceWidth+0.25 - trimmedSliceWidth;
+            //}
             
-        }
+        //}
         
         CGRect sliceRect = CGRectMake(sliceWidth*f,0,trimmedSliceWidth,_heatMapView.frame.size.height);
         
@@ -2800,14 +2827,14 @@ extern UserController * g_userController;
         CGContextFillRect(context, sliceRect);
         
         // Add in extra filler if area gets cropped
-        if(trimmedSliceExtra > 0){
+        /*if(trimmedSliceExtra > 0){
             
             CGRect sliceExtraRect = CGRectMake(sliceWidth*f+trimmedSliceWidth,0,trimmedSliceExtra,_heatMapView.frame.size.height);
             
             CGContextAddRect(context,sliceExtraRect);
             CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
             CGContextFillRect(context, sliceExtraRect);
-        }
+        }*/
         
     }
     

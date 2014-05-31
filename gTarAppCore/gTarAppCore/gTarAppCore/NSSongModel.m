@@ -103,6 +103,8 @@
     NSArray * notesArray = [m_song getSortedNotes];
     NSNoteFrame * noteFrame = nil;
     
+    m_loops = loops;
+    
     // First set length of beats
     //for ( NSNote * note in notesArray )
     //{
@@ -129,8 +131,8 @@
     NSNote * lastNote = [notesArray lastObject];
 //    double lastNoteGap = lastNote.m_absoluteBeatStart - floor(lastNote.m_absoluteBeatStart);
     
-    double widthGap = (m_endBeat - m_startBeat) - floor(m_endBeat - m_startBeat);
-    double firstNoteGap = ceil(firstNote.m_absoluteBeatStart) - firstNote.m_absoluteBeatStart;
+    widthGap = (m_endBeat - m_startBeat) - floor(m_endBeat - m_startBeat);
+    firstNoteGap = ceil(firstNote.m_absoluteBeatStart) - firstNote.m_absoluteBeatStart;
     
     
     for( int l = 0; l <= loops; l++ ){
@@ -438,16 +440,26 @@
 
 - (int)getCurrentLoop
 {
-    int currentLoop = m_currentBeat / (m_endBeat - m_startBeat);
+    // Song length
+    NSNoteFrame  * lastNoteFrame = [m_noteFrames lastObject];
+    NSNote * lastNote = [lastNoteFrame.m_notes lastObject];
+    
+    double numBeats = lastNote.m_absoluteBeatStart + lastNote.m_duration;
+    
+    int currentLoop = (m_currentBeat / numBeats) * (m_loops+1);
     
     return currentLoop;
 }
 
 - (int)getLoopForBeat:(double)beat
 {
-    int beatLoop = beat / (m_endBeat - m_startBeat);
+    // Song length
+    NSNoteFrame  * lastNoteFrame = [m_noteFrames lastObject];
+    NSNote * lastNote = [lastNoteFrame.m_notes lastObject];
     
-    NSLog(@"LOOP IS %i",beatLoop);
+    double numBeats = lastNote.m_absoluteBeatStart + lastNote.m_duration;
+    
+    int beatLoop = (beat / numBeats) * (m_loops+1);
     
     return beatLoop;
 }

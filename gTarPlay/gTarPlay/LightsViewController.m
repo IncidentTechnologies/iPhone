@@ -180,7 +180,6 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"Touches began Lights View Controller");
     
     [delegate touchesBegan:touches withEvent:event];
     
@@ -238,7 +237,7 @@
     [delegate touchesEnded:touches withEvent:event];
     
     // Check that last touchBegan was inside an LED touch area
-    if (LEDTouchNone != _LEDTouchArea)
+    if (LEDTouchNone != _LEDTouchArea && LEDTouchAll != _LEDTouchArea)
     {
         // Turn off last LED touch point when finger touch ends
         [self turnOffLED:_lastLEDTouch.x AndFret:_lastLEDTouch.y];
@@ -273,7 +272,7 @@
             return;
         }
         
-        if (string == _lastLEDTouch.x && fret == _lastLEDTouch.y)
+        if (string == _lastLEDTouch.x && fret == _lastLEDTouch.y && (string > 0 || fret > 0))
         {
             // finger is on same fret, do nothing
             return;
@@ -622,9 +621,10 @@
 
 - (IBAction)playLoop:(id)sender
 {
-    // TODO: fix this
+    // ++_LEDLoop
+    _LEDLoop = (LEDLoop)int(_LEDLoop+1);
+    
     if(_LEDLoop >= NUM_LEDLoop_ENTRIES)
-    //if (++_LEDLoop >= NUM_LEDLoop_ENTRIES)
     {
         _LEDLoop = LEDLoopSolid;
     }

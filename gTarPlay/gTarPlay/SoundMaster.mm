@@ -17,9 +17,9 @@
 #define GTAR_NUM_FRETS 17
 
 #define GTAR_NOTE_DURATION 1.0
-#define GTAR_CONTINUOUS_NOTE_DURATION 0.5
+#define GTAR_CONTINUOUS_NOTE_DURATION 1.0
 #define GTAR_FRET_DOWN_DURATION 0.01
-#define GTAR_FRET_UP_DURATION 0.06
+#define GTAR_FRET_UP_DURATION 0.01
 
 #define GRAPH_SAMPLE_RATE 44100.0f
 
@@ -122,14 +122,15 @@
     m_gtarSamplerNode = new GtarSamplerNode;
     [self setChannelGain:DEFAULT_GAIN];
     
-    root->ConnectInput(0, m_gtarSamplerNode, 0);
+    [self initEffects];
+    
+    //root->ConnectInput(0, m_gtarSamplerNode, 0);
     
     if(!m_instruments && ![self loadInstrumentArray]){
         NSLog(@"Failed to load instrument array from instrument.plist");
         return false;
     }
     
-    [self initEffects];
     
     [self initMetronome];
     
@@ -418,6 +419,19 @@
         NSLog(@"Cannot load samples for instrument %i",index);
     
     }
+}
+
+- (BOOL) isAnyFretDownOnString:(int)string
+{
+    for(int f = 1; f < GTAR_NUM_FRETS; f++){
+        
+        if(fretsPressedDown[string][f] || fretDownWindow[string][f]){
+            return YES;
+        }
+        
+    }
+    
+    return NO;
 }
 
 - (int) highestFretDownIndexForString:(int)string
@@ -772,10 +786,16 @@
         
         fretDownWindow[string][fret] = 0;
         fretsPressedDown[string][fret] = 0;
-
-        if(fretUpTimer[string] == nil && isSlideEnabled){
-            
-            fretUpTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_UP_DURATION target:self selector:@selector(EndFretUpWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
+        
+        if(isSlideEnabled){
+            if(fretUpTimer[string] == nil){
+                
+                fretUpTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_UP_DURATION target:self selector:@selector(EndFretUpWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
+            }
+        
+            if(![self isAnyFretDownOnString:string]){
+                [self StopNoteOnString:string andFret:fret];
+            }
         }
         
     }
@@ -868,11 +888,21 @@
     }
 }
 
+- (void) StopNoteOnString:(int)string andFret:(int)fret
+{
+    int stopIndex = [self noteIndexForString:string andFret:fret];
+    
+    if(stopIndex >= 0){
+        m_gtarSamplerNode->StopNote(m_activeBankNode, stopIndex);
+    }
+    
+}
+
 #pragma mark - Sliding
 
 - (void)enableSliding
 {
-    isSlideEnabled = YES;
+    isSlideEnabled = NO;
 }
 
 - (void)disableSliding
@@ -923,13 +953,41 @@
     
     numEffects = [effectNames count];
 
+    // Chorus
+    //
+    m_chorusEffectNode = new ChorusEffectNode(25,               // delay
+                                              0.75,             // depth
+                                              0.05,             // width
+                                              3.0,              // frequency
+                                              1.0,              // wet
+                                              GRAPH_SAMPLE_RATE);
+    m_chorusEffectNode->ConnectInput(0, m_gtarSamplerNode, 0);
+    m_chorusEffectNode->SetPassThru(YES);
     
-    //[self toggleEffect:0 isOn:NO];
+    // Delay
+    //
+    m_delayNode = new DelayNode(500,     // ms delay
+                                0.5,    // feedback
+                                1.0     // wet
+                                );
+    m_delayNode->ConnectInput(0, m_chorusEffectNode, 0);
+    m_delayNode->SetPassThru(YES);
     
-    // always on
-    //m_butterworthNode = new ButterWorthFilterNode(2,8000,GRAPH_SAMPLE_RATE);
-    //m_butterworthNode->ConnectInput(0, m_samplerNode, 0);
-    //root->ConnectInput(0, m_butterworthNode, 0);
+    // Reverb
+    //
+    m_reverbNode = new ReverbNode(0.75); // wet
+    m_reverbNode->ConnectInput(0, m_delayNode, 0);
+    m_reverbNode->SetPassThru(YES);
+    
+    // Distort
+    //
+    m_distortionNode = new DistortionNode(3.78,             // gain
+                                          0.25,             // wet
+                                          GRAPH_SAMPLE_RATE);
+    m_distortionNode->ConnectInput(0, m_reverbNode, 0);
+    root->ConnectInput(0, m_distortionNode, 0);
+    m_distortionNode->SetPassThru(YES);
+
 #endif
     
 }
@@ -938,37 +996,15 @@
 {
     
 #ifdef EFFECTS_AVAILABLE
-    [self stop];
-
-    @synchronized(self){
-        if(m_reverbNode){
-            
-            [self disconnectAndReleaseEffectNode:m_reverbNode];
-            m_reverbNode = nil;
-            
-        }else if(m_delayNode){
-            
-            [self disconnectAndReleaseEffectNode:m_delayNode];
-            m_delayNode = nil;
-            
-        }else if(m_chorusEffectNode){
-            
-            [self disconnectAndReleaseEffectNode:m_chorusEffectNode];
-            m_chorusEffectNode = nil;
-            
-        }else if(m_distortionNode){
-            
-            [self disconnectAndReleaseEffectNode:m_distortionNode];
-            m_distortionNode = nil;
-            
+    
+    for(int i = 0; i < [effectStatus count]; i++){
+        BOOL isOn = [[effectStatus objectAtIndex:i] boolValue];
+        
+        if(isOn){
+            [self toggleEffect:i isOn:YES];
         }
     }
     
-    for(int i = 0; i < [effectStatus count]; i++){
-        [effectStatus setObject:[NSNumber numberWithBool:NO] atIndexedSubscript:i];
-    }
-    
-    [self start];
 #endif
 }
 
@@ -983,27 +1019,26 @@
     [effectStatus setObject:[NSNumber numberWithBool:!isOn] atIndexedSubscript:index];
     
     if(isOn){
+        
         NSLog(@"Toggle effect off for %@",effectNode);
         
         if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)]){
             
-            [self disconnectAndReleaseEffectNode:m_reverbNode];
-            m_reverbNode = nil;
+            m_reverbNode->SetPassThru(YES);
+            //[self disconnectAndReleaseEffectNode:m_reverbNode];
+            //m_reverbNode = nil;
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)]){
             
-            [self disconnectAndReleaseEffectNode:m_delayNode];
-            m_delayNode = nil;
+            m_delayNode->SetPassThru(YES);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)]){
             
-            [self disconnectAndReleaseEffectNode:m_chorusEffectNode];
-            m_chorusEffectNode = nil;
+            m_chorusEffectNode->SetPassThru(YES);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)]){
             
-            [self disconnectAndReleaseEffectNode:m_distortionNode];
-            m_distortionNode = nil;
+            m_distortionNode->SetPassThru(YES);
             
         }
         
@@ -1013,37 +1048,19 @@
         
         if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)]){
             
-            m_reverbNode = new ReverbNode(0.75); // wet
-            m_reverbNode->ConnectInput(0, m_gtarSamplerNode, 0);
-            root->ConnectInput(0, m_reverbNode, 0);
+            m_reverbNode->SetPassThru(NO);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)]){
             
-            m_delayNode = new DelayNode(500,     // ms delay
-                                        0.5,    // feedback
-                                        1.0     // wet
-                                        );
-            m_delayNode->ConnectInput(0, m_gtarSamplerNode, 0);
-            root->ConnectInput(0, m_delayNode, 0);
+            m_delayNode->SetPassThru(NO);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)]){
             
-            m_chorusEffectNode = new ChorusEffectNode(25,               // delay
-                                                      0.75,             // depth
-                                                      0.05,             // width
-                                                      3.0,              // frequency
-                                                      1.0,              // wet
-                                                      GRAPH_SAMPLE_RATE);
-            m_chorusEffectNode->ConnectInput(0, m_gtarSamplerNode, 0);
-            root->ConnectInput(0, m_chorusEffectNode, 0);
+            m_chorusEffectNode->SetPassThru(NO);
             
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)]){
             
-            m_distortionNode = new DistortionNode(3.78,             // gain
-                                                  0.25,             // wet
-                                                  GRAPH_SAMPLE_RATE);
-            m_distortionNode->ConnectInput(0, m_gtarSamplerNode, 0);
-            root->ConnectInput(0, m_distortionNode, 0);
+            m_distortionNode->SetPassThru(NO);
             
         }
         

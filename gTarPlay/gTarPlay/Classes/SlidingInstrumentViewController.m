@@ -75,6 +75,14 @@
 //    [_instrumentViewController.tableView setFrame:_innerContentView.bounds];
 }
 
+- (void)toggleView:(BOOL)animated
+{
+    [super toggleView:animated];
+    
+    [_instrumentViewController refreshView];
+    
+}
+
 #pragma mark - InstrumentSelectionDelegate
 
 - (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender

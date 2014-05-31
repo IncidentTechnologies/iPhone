@@ -51,6 +51,9 @@
     
     int m_loops;
     
+    double widthGap;
+    double firstNoteGap;
+    
 }
 
 @property (nonatomic, readonly) NSSong * m_song;

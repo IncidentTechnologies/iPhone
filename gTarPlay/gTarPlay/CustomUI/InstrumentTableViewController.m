@@ -64,6 +64,7 @@
     self.tableView.dataSource = self;
     [self.tableView reloadData];
     self.tableView.allowsMultipleSelection = NO;
+    self.tableView.clearsContextBeforeDrawing = YES;
     
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     
@@ -76,10 +77,32 @@
 {
     [super viewWillAppear:animated];
     
+    //NSInteger instrumentIndex = [delegate getSelectedInstrumentIndex];
+    
+    //NSLog(@"Instrument index is %i",instrumentIndex);
+    
+    [self.tableView reloadData];
+    
+    [self refreshView];
+    
+    //NSIndexPath *indexPath=[NSIndexPath indexPathForRow:instrumentIndex inSection:0];
+    
+    //[self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionNone];
+}
+
+- (void)refreshView
+{
+    
     NSInteger instrumentIndex = [delegate getSelectedInstrumentIndex];
     
+    NSLog(@"Instrument index is %i",instrumentIndex);
+    
+    [self.tableView reloadData];
+    
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:instrumentIndex inSection:0];
+    
     [self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionNone];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,6 +130,7 @@
     
     [cell.textLabel setFont:[UIFont fontWithName:@"Avenir Next" size:17.0]];
     cell.textLabel.text = NSLocalizedString([self.instruments objectAtIndex:indexPath.row], NULL);  // will localize the string
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
     
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];
@@ -222,7 +246,6 @@
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         
         [self stopFlicker];
-        
         
         if (delegate && [delegate respondsToSelector:@selector(didLoadInstrument)])
             [delegate didLoadInstrument];
