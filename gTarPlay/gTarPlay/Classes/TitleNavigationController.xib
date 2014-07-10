@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -12,7 +12,7 @@
                 <outlet property="feedTable" destination="949" id="959"/>
                 <outlet property="gatekeeperLeftPanel" destination="142" id="811"/>
                 <outlet property="gatekeeperSigninButton" destination="720" id="797"/>
-                <outlet property="gatekeeperVideoButton" destination="721" id="2395"/>
+                <outlet property="gatekeeperSignupButton" destination="721" id="VJj-6b-c48"/>
                 <outlet property="gatekeeperWebsiteButton" destination="2352" id="2392"/>
                 <outlet property="gtarLogoImage" destination="96" id="704"/>
                 <outlet property="leftPanel" destination="46" id="140"/>
@@ -24,6 +24,8 @@
                 <outlet property="menuLeftPanel" destination="820" id="920"/>
                 <outlet property="menuPlayButton" destination="827" id="912"/>
                 <outlet property="menuSettingsButton" destination="60i-qr-0tD" id="ggP-0k-7mt"/>
+                <outlet property="menuStandalonePlayButton" destination="IEf-Qy-JAN" id="xx6-t7-tV9"/>
+                <outlet property="menuStandaloneStoreButton" destination="PjI-Ll-RCr" id="2es-Dk-2BG"/>
                 <outlet property="menuStoreButton" destination="3478" id="4dF-Uk-emY"/>
                 <outlet property="notificationLabel" destination="2398" id="2565"/>
                 <outlet property="profileButton" destination="3433" id="3457"/>
@@ -613,7 +615,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="23"/>
                     <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="SIGN UP">
+                    <state key="normal" title="SIGN IN">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -653,12 +655,12 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="23"/>
                     <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="VIDEO">
+                    <state key="normal" title="SIGN UP">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="gatekeeperVideoButtonClicked:" destination="-1" eventType="touchUpInside" id="2394"/>
+                        <action selector="gatekeeperSignupButtonClicked:" destination="-1" eventType="touchUpInside" id="QJJ-Ki-qft"/>
                     </connections>
                 </button>
             </subviews>
@@ -727,7 +729,7 @@
             <rect key="frame" x="0.0" y="0.0" width="182" height="273"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="827">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="827">
                     <rect key="frame" x="13" y="53" width="156" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -750,7 +752,30 @@
                         <action selector="menuPlayButtonClicked:" destination="-1" eventType="touchUpInside" id="916"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="828">
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IEf-Qy-JAN">
+                    <rect key="frame" x="13" y="84" width="156" height="58"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="58" id="1je-Q0-6bu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="23"/>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="PLAY">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="disabled">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="menuPlayButtonClicked:" destination="-1" eventType="touchUpInside" id="Rz9-PX-UBl"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="828">
                     <rect key="frame" x="13" y="126" width="156" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -773,7 +798,7 @@
                         <action selector="menuFreePlayButtonClicked:" destination="-1" eventType="touchUpInside" id="918"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3478">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3478">
                     <rect key="frame" x="13" y="200" width="156" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.30980392156862746" green="0.45098039215686275" blue="0.49019607843137253" alpha="1" colorSpace="deviceRGB"/>
@@ -796,18 +821,33 @@
                         <action selector="menuStoreButtonClicked:" destination="-1" eventType="touchUpInside" id="3492"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PjI-Ll-RCr">
+                    <rect key="frame" x="13" y="157" width="156" height="58"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.30980392159999998" green="0.45098039220000002" blue="0.49019607840000001" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="58" id="mgX-Fw-ycI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="23"/>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="STORE">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="disabled">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="menuStoreButtonClicked:" destination="-1" eventType="touchUpInside" id="WHR-G7-hnV"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.1960784314" green="0.23137254900000001" blue="0.25882352939999997" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
                 <constraint firstItem="827" firstAttribute="centerX" secondItem="820" secondAttribute="centerX" id="2241"/>
-                <constraint firstAttribute="trailing" secondItem="827" secondAttribute="trailing" constant="13" id="2243"/>
-                <constraint firstItem="828" firstAttribute="leading" secondItem="827" secondAttribute="leading" id="2245"/>
-                <constraint firstItem="828" firstAttribute="trailing" secondItem="827" secondAttribute="trailing" id="3463"/>
-                <constraint firstItem="3478" firstAttribute="trailing" secondItem="828" secondAttribute="trailing" id="3484"/>
-                <constraint firstItem="3478" firstAttribute="leading" secondItem="828" secondAttribute="leading" id="3485"/>
-                <constraint firstItem="828" firstAttribute="top" secondItem="820" secondAttribute="top" constant="126" id="3582"/>
-                <constraint firstAttribute="bottom" secondItem="3478" secondAttribute="bottom" constant="15" id="3583"/>
-                <constraint firstItem="827" firstAttribute="top" secondItem="820" secondAttribute="top" constant="53" id="3584"/>
             </constraints>
         </view>
         <view contentMode="scaleToFill" id="819" userLabel="FeedRightPanel">

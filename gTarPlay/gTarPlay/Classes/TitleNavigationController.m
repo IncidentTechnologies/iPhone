@@ -110,17 +110,6 @@ extern Facebook * g_facebook;
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    //if(g_soundMaster != nil){
-    //    [self releaseSoundMaster];
-    //}
-    
-    if(g_soundMaster == nil){
-        [self performSelectorInBackground:@selector(initSoundMaster) withObject:nil];
-    }
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -221,8 +210,8 @@ extern Facebook * g_facebook;
 
 - (void)localizeView {
     // Gate keeper
-    [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN UP", NULL) forState:UIControlStateNormal];
-    [_gatekeeperVideoButton setTitle:NSLocalizedString(@"VIDEO", NULL) forState:UIControlStateNormal];
+    [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
+    [_gatekeeperSignupButton setTitle:NSLocalizedString(@"SIGN UP", NULL) forState:UIControlStateNormal];
     [_gatekeeperWebsiteButton setTitle:NSLocalizedString(@"INCIDENTGTAR.COM", NULL) forState:UIControlStateNormal];
     
     [_signinButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
@@ -251,8 +240,19 @@ extern Facebook * g_facebook;
     //_pleaseConnectLabel.text = NSLocalizedString(@"Please Connect Your gTar", NULL);
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
+    //- (void)viewWillAppear:(BOOL)animated
+    //{
+        //if(g_soundMaster != nil){
+        //    [self releaseSoundMaster];
+        //}
+        
+        if(g_soundMaster == nil){
+            [self performSelectorInBackground:@selector(initSoundMaster) withObject:nil];
+        }
+    //}
+
     
     // Set up the modals
     _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
@@ -277,7 +277,7 @@ extern Facebook * g_facebook;
         [self loggedinScreen];
         
     }
-    else if ( guitarConnectedBefore == NO )
+    else if ( g_cloudController.m_loggedIn == NO && guitarConnectedBefore == NO )
     {
         // We aren't logged in, and never plugged in a guitar. Display the gatekeeping view.
         [self gatekeeperScreen];
@@ -299,6 +299,12 @@ extern Facebook * g_facebook;
         [_feedTable startAnimatingOffscreen];
     }
     
+    //[self showHideFreePlay];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     UserEntry *loggedInEntry = [g_userController getUserEntry:0];
     UIImage *image = [g_fileController getFileOrReturnNil:loggedInEntry.m_userProfile.m_imgFileId];
     
@@ -312,7 +318,6 @@ extern Facebook * g_facebook;
     }
     
     [self showHideFreePlay];
-    
 }
 
 -(void)instrumentLoaded:(id)sender
@@ -326,13 +331,26 @@ extern Facebook * g_facebook;
     
     // Show Free Play if/if not standalone
     if(g_gtarController.connected){
+        
+        [_menuStandalonePlayButton setHidden:YES];
+        [_menuStandaloneStoreButton setHidden:YES];
+        
+        [_menuPlayButton setHidden:NO];
+        [_menuStoreButton setHidden:NO];
         [_menuFreePlayButton setHidden:NO];
-        [_menuPlayButton setBounds:CGRectMake(_menuPlayButton.bounds.origin.x,0,_menuPlayButton.bounds.size.width,_menuPlayButton.bounds.size.height)];
-        [_menuStoreButton setBounds:CGRectMake(_menuStoreButton.bounds.origin.x,0,_menuStoreButton.bounds.size.width,_menuStoreButton.bounds.size.height)];
+        //[_menuPlayButton setBounds:CGRectMake(_menuPlayButton.bounds.origin.x,0,_menuPlayButton.bounds.size.width,_menuPlayButton.bounds.size.height)];
+        //[_menuStoreButton setBounds:CGRectMake(_menuStoreButton.bounds.origin.x,0,_menuStoreButton.bounds.size.width,_menuStoreButton.bounds.size.height)];
     }else{
+        
+        [_menuStandalonePlayButton setHidden:NO];
+        [_menuStandaloneStoreButton setHidden:NO];
+        
+        [_menuPlayButton setHidden:YES];
+        [_menuStoreButton setHidden:YES];
         [_menuFreePlayButton setHidden:YES];
-        [_menuPlayButton setBounds:CGRectMake(_menuPlayButton.bounds.origin.x,35,_menuPlayButton.bounds.size.width,_menuPlayButton.bounds.size.height)];
-        [_menuStoreButton setBounds:CGRectMake(_menuStoreButton.bounds.origin.x,-35,_menuStoreButton.bounds.size.width,_menuStoreButton.bounds.size.height)];
+        //[_menuPlayButton setBounds:CGRectMake(_menuPlayButton.bounds.origin.x,35,_menuPlayButton.bounds.size.width,_menuPlayButton.bounds.size.height)];
+        //[_menuStoreButton setBounds:CGRectMake(_menuStoreButton.bounds.origin.x,-35,_menuStoreButton.bounds.size.width,_menuStoreButton.bounds.size.height)];
+        
     }
 }
 
@@ -405,7 +423,7 @@ extern Facebook * g_facebook;
     [self swapLeftPanel:_gatekeeperLeftPanel];
     [self swapRightPanel:_videoRightPanel];
     
-    [self disableButton:_gatekeeperVideoButton];
+    [self enableButton:_gatekeeperSignupButton];
     [self enableButton:_gatekeeperSigninButton];
     [self enableButton:_gatekeeperWebsiteButton];
     [self hideNotification];
@@ -453,6 +471,8 @@ extern Facebook * g_facebook;
     [self enableButton:_menuPlayButton];
     [self enableButton:_menuFreePlayButton];
 //    [self enableButton:_menuStoreButton];
+    
+    //[self showHideFreePlay];
     
     [self hideNotification];
     
@@ -532,20 +552,25 @@ extern Facebook * g_facebook;
     [self swapRightPanel:_signupRightPanel];
 }
 
-- (IBAction)gatekeeperVideoButtonClicked:(id)sender
+- (IBAction)gatekeeperSignupButtonClicked:(id)sender
 {
-    [self disableButton:_gatekeeperVideoButton];
+    [self disableButton:_gatekeeperSignupButton];
     [self enableButton:_gatekeeperSigninButton];
     [self enableButton:_gatekeeperWebsiteButton];
     
-    [self hideNotification];
+    [_moviePlayer stop];
     
-    [self swapRightPanel:_videoRightPanel];
+    //[self displayNotification:NOTIFICATION_GATEKEEPER_SIGNIN turnRed:NO];
+    
+    [self swapRightPanel:_signupRightPanel];
+    [self swapLeftPanel:_loggedoutLeftPanel];
+    [self enableButton:_loggedoutSigninButton];
+    [self disableButton:_loggedoutSignupButton];
 }
 
 - (IBAction)gatekeeperSigninButtonClicked:(id)sender
 {
-    [self enableButton:_gatekeeperVideoButton];
+    [self enableButton:_gatekeeperSignupButton];
     [self disableButton:_gatekeeperSigninButton];
     [self enableButton:_gatekeeperWebsiteButton];
     
@@ -722,7 +747,7 @@ extern Facebook * g_facebook;
     
     [self disableButton:_loggedoutSigninButton];
     [self disableButton:_loggedoutSignupButton];
-    [self disableButton:_gatekeeperVideoButton];
+    [self disableButton:_gatekeeperSignupButton];
     [self disableButton:_gatekeeperSigninButton];
     [self disableButton:_gatekeeperWebsiteButton];
     
@@ -1442,7 +1467,7 @@ extern Facebook * g_facebook;
             [self swapRightPanel:_signinRightPanel];
             
             // Renable buttons
-            [self enableButton:_gatekeeperVideoButton];
+            [self enableButton:_gatekeeperSignupButton];
             [self enableButton:_gatekeeperWebsiteButton];
             [self enableButton:_loggedoutSignupButton];
         }
@@ -1496,7 +1521,7 @@ extern Facebook * g_facebook;
             [self swapRightPanel:_signinRightPanel];
         
             // Renable buttons
-            [self enableButton:_gatekeeperVideoButton];
+            [self enableButton:_gatekeeperSignupButton];
             [self enableButton:_gatekeeperWebsiteButton];
             [self enableButton:_loggedoutSignupButton];
         }

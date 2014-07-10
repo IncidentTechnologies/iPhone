@@ -32,7 +32,7 @@
 #define DEFAULT_INSTRUMENT @"Electric Guitar"
 
 #define DEFAULT_GAIN 0.4
-#define GAIN_MULTIPLIER 1.0
+#define GAIN_MULTIPLIER 0.6
 
 @interface SoundMaster ()
 {

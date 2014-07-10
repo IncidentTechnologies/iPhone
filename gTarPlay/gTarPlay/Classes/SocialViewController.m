@@ -544,6 +544,7 @@ extern Facebook *g_facebook;
             [_alertView show];
         }
     }
+    
 }
 
 - (void)userSessionsCallback:(UserResponse*)userResponse
@@ -784,13 +785,18 @@ extern Facebook *g_facebook;
     
     [self uploadProfilePic:editedImage];
     
-    
     [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    // Ensure the status bar is hidden
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    // Ensure the status bar is hidden
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 }
 
 //#pragma mark - UINavigationControllerDelegate

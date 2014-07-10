@@ -1049,7 +1049,6 @@
 		EC7CAE89174DA940004E26DE /* ODIN.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7D174DA940004E26DE /* ODIN.m */; };
 		EC7CAE8A174DA940004E26DE /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7F174DA940004E26DE /* Mixpanel.m */; };
 		EC7CAE8B174DA940004E26DE /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7F174DA940004E26DE /* Mixpanel.m */; };
-		EC7CAE8D174DAE97004E26DE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE8C174DAE97004E26DE /* AdSupport.framework */; };
 		EC7CAE8F174DAEA1004E26DE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE8E174DAEA1004E26DE /* SystemConfiguration.framework */; };
 		EC7CAE91174DAEAC004E26DE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE90174DAEAC004E26DE /* CoreTelephony.framework */; };
 		EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
@@ -2416,7 +2415,6 @@
 				EC24DC22161A841A00016B78 /* MediaPlayer.framework in Frameworks */,
 				EC7CAE91174DAEAC004E26DE /* CoreTelephony.framework in Frameworks */,
 				EC7CAE8F174DAEA1004E26DE /* SystemConfiguration.framework in Frameworks */,
-				EC7CAE8D174DAE97004E26DE /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5582,8 +5580,8 @@
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kate Schnippering (RTA23J392S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kate Schnippering (RTA23J392S)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -5624,8 +5622,8 @@
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kate Schnippering (RTA23J392S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kate Schnippering (RTA23J392S)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;

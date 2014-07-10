@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>28831297-0924-4B0A-A156-0AAB24D03BC4</string>
+	<string>B2227DFF-4A20-44EA-B283-25D07CFB358C</string>
 	<key>IDESourceControlProjectName</key>
 	<string>gTarSequencer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>EEBB365C-18A7-46CA-A880-5F1B6D963C08</key>
-		<string>https://github.com/IncidentTechnologies/iPhone</string>
+		<key>3799064A-6338-4FF4-BA9A-5BF20CF3FBB0</key>
+		<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>gTarSequencer/gTarSequencer.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>EEBB365C-18A7-46CA-A880-5F1B6D963C08</key>
+		<key>3799064A-6338-4FF4-BA9A-5BF20CF3FBB0</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/IncidentTechnologies/iPhone</string>
+	<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>EEBB365C-18A7-46CA-A880-5F1B6D963C08</string>
+	<string>3799064A-6338-4FF4-BA9A-5BF20CF3FBB0</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>EEBB365C-18A7-46CA-A880-5F1B6D963C08</string>
+			<string>3799064A-6338-4FF4-BA9A-5BF20CF3FBB0</string>
 			<key>IDESourceControlWCCName</key>
-			<string>iPhone</string>
+			<string>Play</string>
 		</dict>
 	</array>
 </dict>

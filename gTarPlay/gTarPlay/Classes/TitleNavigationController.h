@@ -67,7 +67,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *signInLoginLabel;
 @property (strong, nonatomic) IBOutlet UILabel *signUpLoginLabel;
 
-@property (strong, nonatomic) IBOutlet UIButton *gatekeeperVideoButton;
+@property (strong, nonatomic) IBOutlet UIButton *gatekeeperSignupButton;
 @property (strong, nonatomic) IBOutlet UIButton *gatekeeperSigninButton;
 @property (strong, nonatomic) IBOutlet UIButton *gatekeeperWebsiteButton;
 
@@ -75,8 +75,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *loggedoutSigninButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *menuPlayButton;
+@property (strong, nonatomic) IBOutlet UIButton *menuStandalonePlayButton;
 @property (strong, nonatomic) IBOutlet UIButton *menuFreePlayButton;
 @property (strong, nonatomic) IBOutlet UIButton *menuStoreButton;
+@property (strong, nonatomic) IBOutlet UIButton *menuStandaloneStoreButton;
 @property (strong, nonatomic) IBOutlet UIButton *menuSettingsButton;
 
 @property (strong, nonatomic) IBOutlet CyclingTextField *signinUsernameText;
@@ -89,7 +91,7 @@
 - (IBAction)loggedoutSigninButtonClicked:(id)sender;
 - (IBAction)loggedoutSignupButtonClicked:(id)sender;
 
-- (IBAction)gatekeeperVideoButtonClicked:(id)sender;
+- (IBAction)gatekeeperSignupButtonClicked:(id)sender;
 - (IBAction)gatekeeperSigninButtonClicked:(id)sender;
 - (IBAction)gatekeeperWebsiteButtonClicked:(id)sender;
 
