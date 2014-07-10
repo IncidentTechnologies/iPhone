@@ -10,25 +10,34 @@
 #import "AudioController.h"
 #import "AUNodeNetwork.h"
 #import "AudioNodeCommon.h"
+#import "EnvelopeNode.h"
 
 @interface SoundMaster () {
     
     LevelSubscriber *m_volumeSubscriber;
     
-    SamplerNode *m_samplerNode;
     AudioController *audioController;
     AudioNode *root;
     
-    SamplerBankNode * bankToRelease;
+    SamplerNode * m_samplerNode;
+    GtarSamplerNode *m_gtarSamplerNode;
+    
+    EnvelopeNode * m_envelopeNode;
+    ChorusEffectNode * m_chorusEffectNode;
+    
+    int m_activeBankNode;
     
     double masterGain;
     
     NSString * recordingFilepath;
+    
 }
 
 -(SamplerBankNode *)generateBank;
--(void)releaseBank:(SamplerBankNode *)m_samplerBank;
--(void)releaseBankAndDisconnect:(SamplerBankNode *)m_samplerBank;
+-(void)releaseBank:(SamplerBankNode *)samplerBank;
+-(void)releaseBankAndDisconnect:(SamplerBankNode *)samplerBank;
+-(void)loadSample:(char *)filepath intoBank:(SamplerBankNode *)samplerBank;
+-(void)triggerSample:(int)sample forBank:(SamplerBankNode *)samplerBank;
 
 -(FileoutNode *)generateFileoutNode:(NSString *)filename;
 

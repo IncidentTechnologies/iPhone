@@ -7,6 +7,7 @@
 //
 
 #import "SeqSetViewController.h"
+#import "SoundMaster_.mm"
 
 #define MAX_INSTRUMENTS 5
 
@@ -609,6 +610,8 @@
 
 - (IBAction)loadInstrumentSelector:(id)sender andScroll:(BOOL)scroll
 {
+    // Clear all sounds
+    [soundMaster reset];
     
     // Turn off selected status of the add instrument button (which was just clicked):
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[instruments count] inSection:0];
@@ -1019,6 +1022,11 @@
 - (void)stopSoundMaster
 {
     [soundMaster stop];
+}
+
+- (void)resetSoundMaster
+{
+    [soundMaster reset];
 }
 
 - (SoundMaster *)getSoundMaster

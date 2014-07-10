@@ -21,7 +21,7 @@
 #define DEFAULT_VOLUME 0.2
 #define MAX_VOLUME 0.4
 #define MIN_VOLUME 0.001
-#define AMPLITUDE_SCALE 3.0
+#define AMPLITUDE_SCALE 1.8
 
 #define VISIBLE 1.0
 #define NOT_VISIBLE 0.0

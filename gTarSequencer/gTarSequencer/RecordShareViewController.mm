@@ -950,7 +950,7 @@
         [self showProcessingOverlay];
         [delegate forceShowSessionOverlay];
         
-        [self flushBuffer];
+        [self resetAudio];
         [self showRecordOverlay];
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(beginRecordSession) userInfo:nil repeats:NO];
     }
@@ -988,10 +988,9 @@
     }
 }
 
--(void)flushBuffer
+-(void)resetAudio
 {
-    Instrument * inst = [instruments objectAtIndex:0];
-    [inst.audio flushBuffer];
+    [loadedSoundMaster reset];
 }
 
 -(void)recordToFile

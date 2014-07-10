@@ -75,7 +75,8 @@
 - (IBAction)toggleVolumeOpen:(id)sender;
 - (IBAction)recordSession:(id)sender;
 - (IBAction)userDidSelectShare:(id)sender;
-- (void)stopPlayRecordAndAnimate:(BOOL)animate;
+- (void)stopPlayRecordAndAnimate:(BOOL)animate showEndScreen:(BOOL)showEndScreen;
+
 - (void)pauseRecordPlayback;
 
 - (int)getTempo;
@@ -87,6 +88,7 @@
 - (void)setVolume:(double)newVolume;
 
 - (void)setShareMode:(BOOL)share;
+- (void)setLockRecord:(BOOL)lock;
 
 - (void)showSessionOverlay;
 - (void)hideSessionOverlay;

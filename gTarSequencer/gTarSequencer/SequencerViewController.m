@@ -335,6 +335,20 @@
         [recordShareController stopRecordPlayback];
     }
     
+    // Lock record?
+    if([nav isEqualToString:@"Options"]){
+        if(isRecording){
+            [recordShareController interruptRecording];
+            [playControlViewController stopPlayRecordAndAnimate:NO showEndScreen:NO];
+            
+            NSLog(@"IS Recording is %i",isRecording);
+            
+        }
+        [playControlViewController setLockRecord:YES];
+    }else{
+        [playControlViewController setLockRecord:NO];
+    }
+    
     [activeMainView setAlpha:1.0];
     
     // set nav button
@@ -418,6 +432,9 @@
 
 - (void)loadFromName:(NSString *)filename
 {
+    // First clear any sound playing
+    [seqSetViewController resetSoundMaster];
+    
     activeSequencer = filename;
     filename = [@"usr_" stringByAppendingString:filename];
     
@@ -1158,6 +1175,7 @@
     playTimer = nil;
     
     [seqSetViewController stopSoundMaster];
+    [seqSetViewController resetSoundMaster];
     
     //[playControlViewController stopAll];
 }
@@ -1292,7 +1310,7 @@
 
 - (void)stopAll
 {
-    [playControlViewController stopPlayRecordAndAnimate:NO];
+    [playControlViewController stopPlayRecordAndAnimate:NO showEndScreen:YES];
 
 }
 

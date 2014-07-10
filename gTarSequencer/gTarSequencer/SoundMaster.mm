@@ -29,9 +29,10 @@
     root = [[audioController GetNodeNetwork] GetRootNode];
     
     m_samplerNode = new SamplerNode;
-    m_samplerNode->SetChannelGain(DEFAULT_VOLUME, CONN_OUT);
-    
+    [self setChannelGain:DEFAULT_VOLUME];
+  
     root->ConnectInput(0, m_samplerNode, 0);
+    
     [audioController startAUGraph];
 }
 
@@ -70,10 +71,9 @@
     
 }
 
--(void)flushBuffer
+-(void)reset
 {
-    [audioController stopAUGraph];
-    [audioController startAUGraph];
+    m_samplerNode->StopAllBankSamples();
 }
 
 -(void)setChannelGain:(double)gain

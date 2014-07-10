@@ -18,6 +18,7 @@
 
 -(void)start;
 -(void)stop;
+-(void)reset;
 
 - (void)releaseMasterLevelSlider;
 - (void)commitMasterLevelSlider:(UILevelSlider *)slider;

@@ -83,6 +83,19 @@
     }
 }
 
+#pragma mark - Allow Record
+- (void)setLockRecord:(BOOL)lock
+{
+    if(lock){
+        [self drawRecordButton];
+        [recordButton setEnabled:NO];
+        [recordButton setAlpha:0.5];
+    }else{
+        [recordButton setEnabled:YES];
+        [recordButton setAlpha:1.0];
+    }
+}
+
 #pragma mark - Tempo Slider Delegate
 
 - (void)radialButtonValueDidChange:(int)newValue withSave:(BOOL)save
@@ -92,7 +105,7 @@
         tempo = newValue;
         if(isRecording){
             
-            [self stopPlayRecordAndAnimate:YES];
+            [self stopPlayRecordAndAnimate:YES showEndScreen:YES];
             
         }else if(isPlaying){
             
@@ -263,8 +276,10 @@
 
 - (IBAction)startStop:(id)sender
 {
+    NSLog(@"Start stop, %i",isRecording);
+    
     if(isRecording){
-        [self stopRecordingAndAnimate:YES];
+        [self stopRecordingAndAnimate:YES showEndScreen:YES];
     }else{
         if (isPlaying){
             [self stopAll];
@@ -283,10 +298,10 @@
     [self endPlaySession];
 }
 
-- (void)stopPlayRecordAndAnimate:(BOOL)animate
+- (void)stopPlayRecordAndAnimate:(BOOL)animate showEndScreen:(BOOL)showEndScreen;
 {
     if(isRecording){
-        [self stopRecordingAndAnimate:animate];
+        [self stopRecordingAndAnimate:animate showEndScreen:showEndScreen];
     }else{
         [self stopAll];
     }
@@ -373,7 +388,7 @@
         [self stopAll];
     }else{
         if(isRecording){
-            [self stopRecordingAndAnimate:YES];
+            [self stopRecordingAndAnimate:YES showEndScreen:YES];
         }else{
             [self startRecording];
         }
@@ -396,12 +411,14 @@
     [self drawStopButton];
 }
 
--(void)stopRecordingAndAnimate:(BOOL)animate
+-(void)stopRecordingAndAnimate:(BOOL)animate showEndScreen:(BOOL)showEndScreen
 {
     isRecording = FALSE;
     
     [self endPlaySession];
-    [delegate setRecordMode:isRecording andAnimate:animate];
+    if(showEndScreen){
+        [delegate setRecordMode:isRecording andAnimate:animate];
+    }
     [self drawRecordButton];
 }
 

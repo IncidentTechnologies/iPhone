@@ -68,6 +68,7 @@
 
 -(void)startRecord
 {
+
     if(!recorder.recording){
         
         NSLog(@"Recording began");
@@ -256,7 +257,6 @@
 
 - (void)initAudioForSample
 {
-    
     if(!soundMaster){
         soundMaster = [[SoundMaster alloc] init];
     }else{
@@ -277,10 +277,7 @@
     
     m_sampleBankNode->LoadSampleIntoBank(filepath, m_sampNode);
     
-    //[soundMaster flushBuffer];
-    //[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(finishAudioInitAfterBufferFlush) userInfo:nil repeats:NO];
-//    [self finishAudioInitAfterBufferFlush];
-    
+    [soundMaster reset];
 }
 
 -(void)finishAudioInitAfterBufferFlush

@@ -37,7 +37,7 @@
 		58868EDA187619ED00B469C2 /* PlayControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58868ED8187619ED00B469C2 /* PlayControlViewController.m */; };
 		58868EDB187619ED00B469C2 /* BottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58868ED9187619ED00B469C2 /* BottomBar.xib */; };
 		588BF9E018AC4F380086E816 /* OptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BF9DF18AC4F370086E816 /* OptionsView.xib */; };
-		5894D61A186505BD00849C71 /* SeqSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894D619186505BD00849C71 /* SeqSetViewController.m */; };
+		5894D61A186505BD00849C71 /* SeqSetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5894D619186505BD00849C71 /* SeqSetViewController.mm */; };
 		58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */; };
 		58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */; };
 		58B1BE2718AD524900A3C0CC /* OptionsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */; };
@@ -402,7 +402,7 @@
 		58868ED9187619ED00B469C2 /* BottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomBar.xib; sourceTree = "<group>"; };
 		588BF9DF18AC4F370086E816 /* OptionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsView.xib; sourceTree = "<group>"; };
 		5894D618186505BD00849C71 /* SeqSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeqSetViewController.h; sourceTree = "<group>"; };
-		5894D619186505BD00849C71 /* SeqSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeqSetViewController.m; sourceTree = "<group>"; };
+		5894D619186505BD00849C71 /* SeqSetViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SeqSetViewController.mm; sourceTree = "<group>"; };
 		58A59521188619C100696614 /* libGtarControllerDeploy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarControllerDeploy.a; path = "../../../../Library/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos/libGtarControllerDeploy.a"; sourceTree = "<group>"; };
 		58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoading.png; sourceTree = "<group>"; };
 		58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoadingWide.png; sourceTree = "<group>"; };
@@ -800,7 +800,7 @@
 			isa = PBXGroup;
 			children = (
 				5894D618186505BD00849C71 /* SeqSetViewController.h */,
-				5894D619186505BD00849C71 /* SeqSetViewController.m */,
+				5894D619186505BD00849C71 /* SeqSetViewController.mm */,
 				5840858518652D9000BFF3C5 /* SeqSetView.xib */,
 				5840858A18653AF900BFF3C5 /* SeqSetViewCell */,
 				58B4D3CA186E1ECC0035D9E5 /* Instrument */,
@@ -1946,7 +1946,7 @@
 				58B4D3D3186E1F7F0035D9E5 /* Measure.m in Sources */,
 				6D72B28118BE7C7100969A8F /* CustomSampleCell.m in Sources */,
 				587A91A818A5837300CFB154 /* CustomSoundRecorder.mm in Sources */,
-				5894D61A186505BD00849C71 /* SeqSetViewController.m in Sources */,
+				5894D61A186505BD00849C71 /* SeqSetViewController.mm in Sources */,
 				58547AE4186CD55C003638EF /* RadialButton.m in Sources */,
 				58F4B951189849BA0071609B /* OptionsViewController.m in Sources */,
 				58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */,
