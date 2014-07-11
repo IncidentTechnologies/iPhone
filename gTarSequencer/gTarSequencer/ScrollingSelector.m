@@ -412,16 +412,34 @@
     withAnimation = YES;
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scroller withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+-(int)pageForXOrigin:(double)x isUp:(double)velocity
 {
     double scrollDistance = (gap + iconBorderSize.width) * cols;
-    double velocityOffset = floor(abs(velocity.x)/3.0)+1;
+    double velocityOffset = floor(abs(velocity)/3.0)+1;
     
-    if(scrollView.contentOffset.x > lastContentOffset.x){
-        targetPage = MIN(pageCount-1,currentPage+velocityOffset);
-    }else if(scrollView.contentOffset.x < lastContentOffset.x){
-        targetPage = MAX(0,currentPage-velocityOffset);
+    if(velocity >= 0){
+        
+        return MIN(pageCount-1,currentPage+velocityOffset);
+        
+    }else{
+        
+        return MAX(0,currentPage-velocityOffset);
     }
+    
+    if(x >= (pageCount-1) * scrollDistance){
+        return pageCount - 1;
+    }else{
+        return 0;
+    }
+}
+
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scroller withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    
+    double scrollDistance = (gap + iconBorderSize.width) * cols;
+    
+    targetPage = [self pageForXOrigin:targetContentOffset->x isUp:velocity.x];
     
     CGPoint newOffset = CGPointMake(targetPage*scrollDistance,0);
     

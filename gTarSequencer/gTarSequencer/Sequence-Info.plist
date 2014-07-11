@@ -72,6 +72,26 @@
 			<key>UILaunchImageName</key>
 			<string>gTarbyIncidentLoadingWide</string>
 			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 568}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>gTarbyIncidentLoading</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 480}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>gTarbyIncidentLoadingWide</string>
+			<key>UILaunchImageOrientation</key>
 			<string>Landscape</string>
 			<key>UILaunchImageSize</key>
 			<string>{320, 568}</string>
