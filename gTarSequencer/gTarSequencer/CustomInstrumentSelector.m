@@ -82,12 +82,12 @@
         
         // Init string colours
         colorList = [NSArray arrayWithObjects:
-                     [UIColor colorWithRed:238/255.0 green:28/255.0 blue:36/255.0 alpha:1.0],
-                     [UIColor colorWithRed:234/255.0 green:154/255.0 blue:0/255.0 alpha:1.0],
-                     [UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0],
-                     [UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0],
-                     [UIColor colorWithRed:30/255.0 green:108/255.0 blue:213/255.0 alpha:1.0],
-                     [UIColor colorWithRed:170/255.0 green:114/255.0 blue:233/255.0 alpha:1.0],
+                     [UIColor colorWithRed:239/255.0 green:92/255.0 blue:53/255.0 alpha:1.0],
+                     [UIColor colorWithRed:234/255.0 green:154/255.0 blue:41/255.0 alpha:1.0],
+                     [UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1.0],
+                     [UIColor colorWithRed:43/255.0 green:198/255.0 blue:34/255.0 alpha:1.0],
+                     [UIColor colorWithRed:0/255.0 green:141/255.0 blue:218/255.0 alpha:1.0],
+                     [UIColor colorWithRed:148/255.0 green:102/255.0 blue:177/255.0 alpha:1.0],
                      nil];
     
         viewFrame = frame;

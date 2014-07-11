@@ -34,63 +34,7 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>DOUBLE BASS</string>
-			<key>Custom</key>
-			<false/>
-			<key>Index</key>
-			<integer>1</integer>
-			<key>IconName</key>
-			<string>Icon_Violin</string>
-			<key>Strings</key>
-			<array>
-				<string>Double Bass_C</string>
-				<string>Double Bass_D</string>
-				<string>Double Bass_E</string>
-				<string>Double Bass_G</string>
-				<string>Double Bass_A</string>
-				<string>Double Bass_B</string>
-			</array>
-			<key>StringPaths</key>
-			<array>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>808</string>
-			<key>Custom</key>
-			<false/>
-			<key>Index</key>
-			<integer>2</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
-			<key>Strings</key>
-			<array>
-				<string>808_Kick</string>
-				<string>808_Snare</string>
-				<string>808_Closed Hat</string>
-				<string>808_Open Hat</string>
-				<string>808_Tom</string>
-				<string>808_Clap</string>
-			</array>
-			<key>StringPaths</key>
-			<array>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>DUBSTEP</string>
+			<string>JUNO</string>
 			<key>Custom</key>
 			<false/>
 			<key>Index</key>
@@ -99,40 +43,12 @@
 			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
-				<string>Dubstep_Kick</string>
-				<string>Dubstep_Snare</string>
-				<string>Dubstep_Open Hat</string>
-				<string>Dubstep_Closed Hat</string>
-				<string>Dubstep_Clap</string>
-				<string>Dubstep_Shaker</string>
-			</array>
-			<key>StringPaths</key>
-			<array>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>PLUCK</string>
-			<key>Custom</key>
-			<false/>
-			<key>Index</key>
-			<integer>4</integer>
-			<key>IconName</key>
-			<string>Icon_Vibraphone</string>
-			<key>Strings</key>
-			<array>
-				<string>Pluck_C</string>
-				<string>Pluck_D</string>
-				<string>Pluck_E</string>
-				<string>Pluck_G</string>
-				<string>Pluck_A</string>
-				<string>Pluck_B</string>
+				<string>Juno_C</string>
+				<string>Juno_D</string>
+				<string>Juno_E</string>
+				<string>Juno_G</string>
+				<string>Juno_A</string>
+				<string>Juno_B</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -202,90 +118,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>CHIPTUNE</string>
-			<key>Custom</key>
-			<false/>
-			<key>Index</key>
-			<integer>7</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
-			<key>Strings</key>
-			<array>
-				<string>Chiptune_Kick</string>
-				<string>Chiptune_Snare</string>
-				<string>Chiptune_Siren</string>
-				<string>Chiptune_Beep</string>
-				<string>Chiptune_Triangle</string>
-				<string>Chiptune_Lazer</string>
-			</array>
-			<key>StringPaths</key>
-			<array>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>ROCK</string>
-			<key>Custom</key>
-			<false/>
-			<key>Index</key>
-			<integer>8</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
-			<key>Strings</key>
-			<array>
-				<string>Rock_Kick</string>
-				<string>Rock_Snare</string>
-				<string>Rock_Closed Hat</string>
-				<string>Rock_Open Hat</string>
-				<string>Rock_Tom</string>
-				<string>Rock_Crash</string>
-			</array>
-			<key>StringPaths</key>
-			<array>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>HOUSE</string>
-			<key>Custom</key>
-			<false/>
-			<key>Index</key>
-			<integer>9</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
-			<key>Strings</key>
-			<array>
-				<string>House_Kick</string>
-				<string>House_Clap</string>
-				<string>House_Open Hat</string>
-				<string>House_Closed Hat</string>
-				<string>House_Snare</string>
-				<string>House_Wood Block</string>
-			</array>
-			<key>StringPaths</key>
-			<array>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-				<string>Default</string>
-			</array>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>VIOLIN</string>
 			<key>Custom</key>
 			<false/>
@@ -329,6 +161,174 @@
 				<string>Vibraphone_G</string>
 				<string>Vibraphone_A</string>
 				<string>Vibraphone_B</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>CHIPTUNE</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>7</integer>
+			<key>IconName</key>
+			<string>Icon_Percussion</string>
+			<key>Strings</key>
+			<array>
+				<string>Chiptune_Kick</string>
+				<string>Chiptune_Snare</string>
+				<string>Chiptune_Siren</string>
+				<string>Chiptune_Beep</string>
+				<string>Chiptune_Triangle</string>
+				<string>Chiptune_Lazer</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>PLUCK</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>4</integer>
+			<key>IconName</key>
+			<string>Icon_Vibraphone</string>
+			<key>Strings</key>
+			<array>
+				<string>Pluck_C</string>
+				<string>Pluck_D</string>
+				<string>Pluck_E</string>
+				<string>Pluck_G</string>
+				<string>Pluck_A</string>
+				<string>Pluck_B</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>DOUBLE BASS</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>1</integer>
+			<key>IconName</key>
+			<string>Icon_Violin</string>
+			<key>Strings</key>
+			<array>
+				<string>Double Bass_C</string>
+				<string>Double Bass_D</string>
+				<string>Double Bass_E</string>
+				<string>Double Bass_G</string>
+				<string>Double Bass_A</string>
+				<string>Double Bass_B</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>808</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>2</integer>
+			<key>IconName</key>
+			<string>Icon_Percussion</string>
+			<key>Strings</key>
+			<array>
+				<string>808_Kick</string>
+				<string>808_Snare</string>
+				<string>808_Closed Hat</string>
+				<string>808_Open Hat</string>
+				<string>808_Tom</string>
+				<string>808_Clap</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>HOUSE</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>9</integer>
+			<key>IconName</key>
+			<string>Icon_Percussion</string>
+			<key>Strings</key>
+			<array>
+				<string>House_Kick</string>
+				<string>House_Clap</string>
+				<string>House_Open Hat</string>
+				<string>House_Closed Hat</string>
+				<string>House_Snare</string>
+				<string>House_Wood Block</string>
+			</array>
+			<key>StringPaths</key>
+			<array>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+				<string>Default</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>ROCK</string>
+			<key>Custom</key>
+			<false/>
+			<key>Index</key>
+			<integer>8</integer>
+			<key>IconName</key>
+			<string>Icon_Percussion</string>
+			<key>Strings</key>
+			<array>
+				<string>Rock_Kick</string>
+				<string>Rock_Snare</string>
+				<string>Rock_Closed Hat</string>
+				<string>Rock_Open Hat</string>
+				<string>Rock_Tom</string>
+				<string>Rock_Crash</string>
 			</array>
 			<key>StringPaths</key>
 			<array>

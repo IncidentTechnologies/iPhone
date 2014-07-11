@@ -34,8 +34,8 @@
 - (void)sharedInit {
     measure = nil;
     
-    defaultBackgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:1.0];
-    highlightBackgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.6];
+    defaultBackgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.6];
+    highlightBackgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.2];
     
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [self addSubview:imageView];
@@ -55,13 +55,22 @@
 
 - (void)initColors
 {
-    CGFloat initColors[STRINGS_ON_GTAR][4] = {
+    /*CGFloat initColors[STRINGS_ON_GTAR][4] = {
         {170/255.0, 114/255.0, 233/255.0, 1},
         {30/255.0, 108/255.0, 213/255.0, 1},
         {5/255.0, 195/255.0, 77/255.0, 1},
         {204/255.0, 234/255.0, 0/255.0, 1},
         {234/255.0, 154/255.0, 0/255.0, 1},
         {238/255.0, 28/255.0, 36/255.0, 1}
+    };*/
+    
+    CGFloat initColors[STRINGS_ON_GTAR][4] = {
+        {148/255.0, 102/255.0, 177/255.0, 1},
+        {0/255.0, 141/255.0, 218/255.0, 1},
+        {43/255.0, 198/255.0, 34/255.0, 1},
+        {238/255.0, 188/255.0, 53/255.0, 1},
+        {234/255.0, 154/255.0, 41/255.0, 1},
+        {239/255.0, 92/255.0, 53/255.0, 1}
     };
     
     memcpy(colors, initColors, sizeof(initColors));

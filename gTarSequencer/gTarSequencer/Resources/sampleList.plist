@@ -137,6 +137,12 @@
 								<string>E</string>
 								<string>D</string>
 								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
 							</array>
 						</dict>
 						<dict>
@@ -150,19 +156,12 @@
 								<string>E</string>
 								<string>D</string>
 								<string>C</string>
-							</array>
-						</dict>
-						<dict>
-							<key>Section</key>
-							<string>Pluck</string>
-							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
 							</array>
 						</dict>
 					</array>
@@ -183,6 +182,12 @@
 								<string>E</string>
 								<string>D</string>
 								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
 							</array>
 						</dict>
 						<dict>
@@ -196,6 +201,31 @@
 								<string>E</string>
 								<string>D</string>
 								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Acoustic</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
 							</array>
 						</dict>
 						<dict>
@@ -209,6 +239,12 @@
 								<string>E</string>
 								<string>D</string>
 								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
 							</array>
 						</dict>
 					</array>
@@ -233,6 +269,25 @@
 						</dict>
 						<dict>
 							<key>Section</key>
+							<string>Trumpet</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
 							<string>Flute</string>
 							<key>Sampleset</key>
 							<array>
@@ -242,6 +297,95 @@
 								<string>E</string>
 								<string>D</string>
 								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
+							</array>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>Section</key>
+					<string>Synths</string>
+					<key>Sectionset</key>
+					<array>
+						<dict>
+							<key>Section</key>
+							<string>Pluck</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Juno</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Ladder</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
+							</array>
+						</dict>
+						<dict>
+							<key>Section</key>
+							<string>Mini Bass</string>
+							<key>Sampleset</key>
+							<array>
+								<string>B</string>
+								<string>A</string>
+								<string>G</string>
+								<string>E</string>
+								<string>D</string>
+								<string>C</string>
+								<string>F</string>
+								<string>A#</string>
+								<string>G#</string>
+								<string>F#</string>
+								<string>D#</string>
+								<string>C#</string>
 							</array>
 						</dict>
 					</array>
@@ -253,12 +397,12 @@
 			<string>Sounds</string>
 			<key>Sampleset</key>
 			<array>
-				<string>I'm Bacon</string>
-				<string>I'm</string>
+				<string>I&apos;m Bacon</string>
+				<string>I&apos;m</string>
 				<string>Ba-</string>
 				<string>-con</string>
 				<string>Bacon</string>
-				<string>Reverse I'm Bacon</string>
+				<string>Reverse I&apos;m Bacon</string>
 			</array>
 		</dict>
 	</array>
