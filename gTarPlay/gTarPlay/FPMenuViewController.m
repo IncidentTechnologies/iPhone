@@ -122,14 +122,14 @@
 
 - (IBAction)setSlideHammer:(id)sender
 {
-    /*
+    
     NSDictionary *routeData = [NSDictionary dictionaryWithObjectsAndKeys:
                                [NSNumber numberWithBool:_slideSwitch.isOn], @"isSlideEnabled", nil];
     
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"SlideHammerStateChange"
      object:self userInfo:routeData];
-    */
+    
 }
 
 - (IBAction)exitFreePlay:(id)sender

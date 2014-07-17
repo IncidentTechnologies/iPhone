@@ -3005,7 +3005,7 @@ extern UserController * g_userController;
     // Debug
 #ifdef Debug_BUILD
     if(g_gtarController.connected){
-        _skipNotes = YES;
+        //_skipNotes = YES;
     }
 #endif
 }

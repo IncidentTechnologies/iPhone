@@ -42,7 +42,7 @@ static unsigned char g_stringColorsOriginal[6][4] =
 static unsigned char g_stringColors[6][4] =
 {
 	{ 214, 10, 1, 255 }, // R
-	{ 221, 151, 17, 255 }, // O
+	{ 234, 154, 17, 255 }, // O
 	{ 170, 196, 13, 255 }, // Y
 	{ 49, 181, 9, 255 }, // G
 	{ 0, 141, 218, 255 }, // B

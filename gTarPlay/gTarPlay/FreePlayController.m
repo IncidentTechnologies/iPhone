@@ -115,6 +115,7 @@ extern GtarController * g_gtarController;
         
         _isSlideEnabled = NO;
         
+        
         m_playTimeStart = [NSDate date];
         m_audioRouteTimeStart = [NSDate date];
         m_instrumentTimeStart = [NSDate date];
@@ -526,19 +527,19 @@ extern GtarController * g_gtarController;
 - (void)gtarFretDown:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    //if (_isSlideEnabled)
-    //{
+    if (_isSlideEnabled)
+    {
         [g_soundMaster FretDown:position.fret onString:position.string-1];
-    //}
+    }
 }
 
 - (void)gtarFretUp:(GtarPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
-    //if (_isSlideEnabled)
-    //{
+    if (_isSlideEnabled)
+    {
         [g_soundMaster FretUp:position.fret onString:position.string-1];
-    //}
+    }
 }
 
 - (void)gtarNoteOn:(GtarPluck)pluck
@@ -618,7 +619,7 @@ extern GtarController * g_gtarController;
 // selector to update the slide/hammer state when NSNotification is received
 - (void) didChangeSlideHammer:(NSNotification *) notification
 {
-    /*NSDictionary *data = [notification userInfo];
+    NSDictionary *data = [notification userInfo];
     _isSlideEnabled = [[data objectForKey:@"isSlideEnabled"] boolValue];
 
     if(_isSlideEnabled){
@@ -626,7 +627,7 @@ extern GtarController * g_gtarController;
     }else{
         [g_soundMaster disableSliding];
     }
-     */
+    
 }
 
 #pragma mark - Touches
