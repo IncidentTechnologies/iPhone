@@ -19,7 +19,9 @@
 #define GTAR_NOTE_DURATION 1.0
 #define GTAR_FRET_DOWN_DURATION 0.005
 #define GTAR_FRET_UP_DURATION 0.005
+#define GTAR_STOP_FRET_DURATION 0.01
 #define GTAR_SLIDE_FRET_DURATION 0.015
+//#define GTAR_SLIDE_FRET_DURATION 0.1
 
 #define GRAPH_SAMPLE_RATE 44100.0f
 
@@ -61,8 +63,6 @@
     int activeFretOnString[GTAR_NUM_STRINGS];
     int pendingFretOnString[GTAR_NUM_STRINGS];
     int fretsPressedDown[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
-    
-    int fretDownWindow[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
     
     BOOL blockContinuousPluckString;
     
@@ -173,7 +173,7 @@
 
 - (int)generateBank:(int)bank numSamples:(int)numSamples
 {
-    NSLog(@"Generate bank");
+    NSLog(@"Generate bank %i",bank);
     
     return m_gtarSamplerNode->CreateNewBank(bank,numSamples);
 
@@ -435,7 +435,7 @@
 {
     for(int f = 1; f < GTAR_NUM_FRETS; f++){
         
-        if(fretsPressedDown[string][f] || fretDownWindow[string][f]){
+        if(fretsPressedDown[string][f] == 1){
             return YES;
         }
         
@@ -632,19 +632,21 @@
     if(!blockContinuousPluckString){
         blockContinuousPluckString = true;
         
+        int highestFret = [self highestFretDownIndexForString:string];
         int noteIndex = [self noteIndexForString:string andFret:fret];
-        int pendingIndex = [self noteIndexForString:string andFret:[self highestFretDownIndexForString:string]];
+        int pendingIndex = [self noteIndexForString:string andFret:highestFret];
+        //int pendingIndex = [self noteIndexForString:string andFret:pendingFretOnString[string]];
         
         NSLog(@"Note at index %i",noteIndex);
     
         if(pendingIndex > 0){
             
-            m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
+            //m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
             
-            activeFretOnString[string] = pendingFretOnString[string];
-            pendingFretOnString[string] = -1;
+            //activeFretOnString[string] = highestFret;
+            //pendingFretOnString[string] = -1;
         
-            [NSTimer scheduledTimerWithTimeInterval:GTAR_SLIDE_FRET_DURATION target:self selector:@selector(EndBlockContinuousPluckString) userInfo:nil repeats:NO];
+            [NSTimer scheduledTimerWithTimeInterval:GTAR_SLIDE_FRET_DURATION target:self selector:@selector(EndBlockContinuousPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:fret],@"Fret", nil] repeats:NO];
             
             //blockContinuousPluckString = false;
             
@@ -655,9 +657,26 @@
 
 }
 
-- (void)EndBlockContinuousPluckString
+- (void)EndBlockContinuousPluckString:(NSTimer *)timer
 {
+    
+    int string = [[[timer userInfo] objectForKey:@"String"] intValue];
+    int fret = [[[timer userInfo] objectForKey:@"Fret"] intValue];
+    
     blockContinuousPluckString = false;
+    
+    int highestFret = [self highestFretDownIndexForString:string];
+    int noteIndex = [self noteIndexForString:string andFret:fret];
+    int pendingIndex = [self noteIndexForString:string andFret:highestFret];
+    
+    if(activeFretOnString[string] > 0){
+        
+        activeFretOnString[string] = highestFret;
+        pendingFretOnString[string] = -1;
+        
+        m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
+    
+    }
 }
 
 - (void) PluckMutedString:(int)string
@@ -721,14 +740,12 @@
             
         }else if(activeFret > 0){
             
-            /*
-            if(continuousFretTimer[string] == nil && isSlideEnabled){
+            /*if(continuousFretTimer[string] == nil && isSlideEnabled){
                 
                 // Slide Up or Hammer On
                 continuousFretTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_DOWN_DURATION target:self selector:@selector(EndContinuousFretWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
                 
-            }
-             */
+            }*/
             
             if(isSlideEnabled){
                 pendingFretOnString[string] = [self highestFretDownIndexForString:string];
@@ -749,24 +766,33 @@
     
     int highestFret = [self highestFretDownIndexForString:s];
     
-    //if(highestFret <= 0){
-        //[self stopString:s setFret:highestFret];
-    //}else{
-        pendingFretOnString[s] = highestFret;
-        [self PluckContinuousString:s atFret:activeFretOnString[s]];
-    //}
-        
+    pendingFretOnString[s] = highestFret;
+    [self PluckContinuousString:s atFret:activeFretOnString[s]];
+
     [continuousFretTimer[s] invalidate];
     continuousFretTimer[s] = nil;
     
+}
+
+- (void) EndStopStringWindow:(NSTimer *)timer
+{
+    int s = [[[timer userInfo] objectForKey:@"String"] intValue];
+    
+    if(![self isAnyFretDownOnString:s]){
+        [self stopString:s setFret:-1];
+    }
 }
 
 - (bool) FretUp:(int)fret onString:(int)string
 {
     if(!isLoadingInstrument){
         
-        fretDownWindow[string][fret] = 0;
         fretsPressedDown[string][fret] = 0;
+        
+        // Consider stopping the string
+        if(![self isAnyFretDownOnString:string]){
+            [NSTimer scheduledTimerWithTimeInterval:GTAR_STOP_FRET_DURATION target:self selector:@selector(EndStopStringWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
+        }
         
         if(isSlideEnabled){
             
@@ -776,8 +802,8 @@
                 
                 if(highestFret <= 0){
                     
-                    pendingFretOnString[string] = -1;
-                    activeFretOnString[string] = -1;
+                    //pendingFretOnString[string] = -1;
+                    //activeFretOnString[string] = -1;
                     
                 }else{
                     
@@ -785,15 +811,11 @@
                      
                         // Slide Down or Pull Off
                         continuousFretTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_UP_DURATION target:self selector:@selector(EndContinuousFretWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
-                    }
-                     */
+                    }*/
                     
+                    pendingFretOnString[string] = [self highestFretDownIndexForString:string];
+                    [self PluckContinuousString:string atFret:activeFretOnString[string]];
                     
-                    if(isSlideEnabled){
-                        pendingFretOnString[string] = [self highestFretDownIndexForString:string];
-                        [self PluckContinuousString:string atFret:activeFretOnString[string]];
-                    }
-                
                 }
                 
             }
