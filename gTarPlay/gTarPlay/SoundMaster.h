@@ -59,6 +59,7 @@
 
 - (void) enableSliding;
 - (void) disableSliding;
+- (BOOL) isSlideEnabled;
 
 // TODO: go into BW filter
 - (bool) SetBWCutoff:(double)cutoff;

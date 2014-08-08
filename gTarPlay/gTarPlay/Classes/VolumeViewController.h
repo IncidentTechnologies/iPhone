@@ -17,11 +17,13 @@
 @property (strong, nonatomic) IBOutlet UIView *volumeView;
 @property (strong, nonatomic) IBOutlet UIImageView *volumeTrackView;
 @property (strong, nonatomic) IBOutlet UIView * innerView;
+@property (strong, nonatomic) IBOutlet UIButton * outputToggleButton;
 
 @property (readonly, nonatomic) BOOL displayed;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSoundMaster:(SoundMaster*)soundMaster  isInverse:(BOOL)invert;
 
 - (IBAction)volumeValueChanged:(id)sender;
+- (IBAction)outputToggleButtonClicked:(id)sender;
 
 @end

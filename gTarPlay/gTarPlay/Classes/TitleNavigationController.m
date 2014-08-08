@@ -259,7 +259,7 @@ extern Facebook * g_facebook;
     _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
     _settingsViewController = [[SettingsViewController alloc] initWithNibName:nil bundle:nil];
     _settingsViewController.delegate = self;
-    
+        
     _displayingCell = NO;
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
@@ -1756,6 +1756,11 @@ extern Facebook * g_facebook;
 
 - (void)receivedAvailableFirmwareVersion:(CloudResponse*)cloudResponse
 {
+    
+    /*UIAlertView * alertview = [[UIAlertView alloc] initWithTitle:@"Firmware Version" message:[NSString stringWithFormat:@"Received: %u.%u | gTar: %u.%u",cloudResponse.m_responseFirmwareMajorVersion,cloudResponse.m_responseFirmwareMinorVersion,g_gtarController.m_firmwareMajorVersion,g_gtarController.m_firmwareMinorVersion] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
+    [alertview show];*/
+    
     [_settingsViewController updateFirmwareVersion];
     
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
@@ -1767,7 +1772,9 @@ extern Facebook * g_facebook;
         {
             _firmwareFileId = cloudResponse.m_responseFileId;
             
-            [self presentViewController:_firmwareViewController animated:YES completion:nil];
+            if(self.presentedViewController != _firmwareViewController){
+                [self presentViewController:_firmwareViewController animated:YES completion:nil];
+            }
             
             _firmwareViewController.currentFirmwareVersion = [NSString stringWithFormat:@"%u.%u", g_gtarController.m_firmwareMajorVersion, g_gtarController.m_firmwareMinorVersion];
             _firmwareViewController.availableFirmwareVersion = [NSString stringWithFormat:@"%u.%u", cloudResponse.m_responseFirmwareMajorVersion, cloudResponse.m_responseFirmwareMinorVersion];

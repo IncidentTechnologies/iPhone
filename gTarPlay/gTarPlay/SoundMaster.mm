@@ -30,6 +30,7 @@
 #define EFFECT_NAME_DELAY @"Echo"
 #define EFFECT_NAME_CHORUS @"Chorus"
 #define EFFECT_NAME_DISTORT @"Distortion"
+#define EFFECT_NAME_SLIDING @"Sliding"
 
 #define DEFAULT_INSTRUMENT @"Electric Guitar"
 
@@ -86,7 +87,6 @@
         numEffects = 0;
         numInstruments = 0;
         currentInstrumentIndex = -1;
-        [self disableSliding];
         
 #ifdef EFFECTS_AVAILABLE
         m_reverbNode = nil;
@@ -123,8 +123,6 @@
     m_gtarSamplerNode = new GtarSamplerNode;
     [self setChannelGain:DEFAULT_GAIN];
     
-    [self initEffects];
-    
     //root->ConnectInput(0, m_gtarSamplerNode, 0);
     
     if(!m_instruments && ![self loadInstrumentArray]){
@@ -136,6 +134,8 @@
     [self initMetronome];
     
     [self initTimers];
+    
+    [self initEffects];
     
     return true;
     
@@ -638,7 +638,7 @@
         //int pendingIndex = [self noteIndexForString:string andFret:pendingFretOnString[string]];
         
         NSLog(@"Note at index %i",noteIndex);
-    
+        
         if(pendingIndex > 0){
             
             //m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
@@ -659,7 +659,6 @@
 
 - (void)EndBlockContinuousPluckString:(NSTimer *)timer
 {
-    
     int string = [[[timer userInfo] objectForKey:@"String"] intValue];
     int fret = [[[timer userInfo] objectForKey:@"Fret"] intValue];
     
@@ -901,6 +900,12 @@
 - (void)disableSliding
 {
     isSlideEnabled = NO;
+    
+}
+
+- (BOOL)isSlideEnabled
+{
+    return isSlideEnabled;
 }
 
 #pragma mark - Metronome
@@ -932,13 +937,18 @@
     // init metadata
     
 #ifdef EFFECTS_AVAILABLE
+    
+    isSlideEnabled = YES;
+    
     effectNames = [[NSArray alloc] initWithObjects:
+                   [NSString stringWithString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)],nil];
     
     effectStatus = [[NSMutableArray alloc] initWithObjects:
+                    [NSNumber numberWithBool:isSlideEnabled],
                     [NSNumber numberWithBool:NO],
                     [NSNumber numberWithBool:NO],
                     [NSNumber numberWithBool:NO],
@@ -989,7 +999,6 @@
 {
     
 #ifdef EFFECTS_AVAILABLE
-    
     for(int i = 0; i < [effectStatus count]; i++){
         BOOL isOn = [[effectStatus objectAtIndex:i] boolValue];
         
@@ -1033,6 +1042,10 @@
             
             m_distortionNode->SetPassThru(YES);
             
+        }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
+            
+            [self disableSliding];
+            
         }
         
     }else{
@@ -1054,6 +1067,10 @@
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)]){
             
             m_distortionNode->SetPassThru(NO);
+            
+        }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
+            
+            [self enableSliding];
             
         }
         
@@ -1134,6 +1151,11 @@
         primary = m_distortionNode->getPrimaryParam();
         secondary = m_distortionNode->getSecondaryParam();
         
+    }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
+        
+        primary = m_gtarSamplerNode->getPrimaryParam();
+        secondary = m_gtarSamplerNode->getSecondaryParam();
+        
     }else{
         
         return CGPointMake(x,y);
@@ -1189,6 +1211,11 @@
         primary = m_distortionNode->getPrimaryParam();
         secondary = m_distortionNode->getSecondaryParam();
     
+    }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
+        
+        primary = m_gtarSamplerNode->getPrimaryParam();
+        secondary = m_gtarSamplerNode->getSecondaryParam();
+        
     }else{
         
         return;
@@ -1224,7 +1251,13 @@
         m_distortionNode->setPrimaryParam(pnew);
         m_distortionNode->setSecondaryParam(snew);
 
-    }    
+    }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
+        
+        m_gtarSamplerNode->setPrimaryParam(pnew);
+        m_gtarSamplerNode->setSecondaryParam(snew);
+        
+    }
+    
 #endif
 }
 

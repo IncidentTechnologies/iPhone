@@ -116,4 +116,9 @@
     [_updateInvocation invoke];
 }
 
+- (void)delayLoadingComplete
+{
+    // placeholder
+}
+
 @end

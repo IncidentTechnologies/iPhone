@@ -26,5 +26,6 @@
 @property (assign, nonatomic) unsigned char updateProgress;
 
 - (IBAction)updateButtonClicked:(id)sender;
+- (void)delayLoadingComplete;
 
 @end

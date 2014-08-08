@@ -6,16 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FPMenuViewController">
             <connections>
-                <outlet property="audioRouteSwitch" destination="EOI-UG-OcW" id="i2e-8f-uA2"/>
-                <outlet property="auxLabel" destination="fnv-N9-rPa" id="qBY-oT-zMl"/>
                 <outlet property="exitButton" destination="1824" id="eYc-IR-w0p"/>
                 <outlet property="offLabel" destination="3Dm-3K-ZtF" id="Ml3-Ms-sta"/>
                 <outlet property="onLabel" destination="V19-pg-XOY" id="LXq-nV-xlf"/>
-                <outlet property="outputLabel" destination="v26-ll-xDh" id="h5j-mY-n7r"/>
                 <outlet property="quitLabel" destination="9YN-MN-VAB" id="YLy-ZV-6L0"/>
                 <outlet property="slideSwitch" destination="sK5-GF-gB1" id="CUI-jx-kQc"/>
                 <outlet property="slidingLabel" destination="RHB-X5-W8j" id="t0w-lZ-Upi"/>
-                <outlet property="speakerLabel" destination="Wwo-RH-Gqz" id="McT-LO-M4g"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -28,71 +24,8 @@
                     <rect key="frame" x="8" y="0.0" width="464" height="265"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVG-pC-Cok" userLabel="OutputView">
-                            <rect key="frame" x="18" y="152" width="428" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RlE-Dc-dOV">
-                                    <rect key="frame" x="176" y="3" width="249" height="39"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EOI-UG-OcW">
-                                            <rect key="frame" x="100" y="4" width="51" height="31"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="49" id="ihA-DW-jwm"/>
-                                            </constraints>
-                                            <color key="onTintColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
-                                            <connections>
-                                                <action selector="setAudioRoute:" destination="-1" eventType="valueChanged" id="FsE-3I-Tvq"/>
-                                            </connections>
-                                        </switch>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="SPEAKER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwo-RH-Gqz">
-                                            <rect key="frame" x="159" y="6" width="86" height="27"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="AUX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnv-N9-rPa">
-                                            <rect key="frame" x="4" y="4" width="87" height="31"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.19215686269999999" green="0.23137254900000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="Wwo-RH-Gqz" firstAttribute="leading" secondItem="EOI-UG-OcW" secondAttribute="trailing" constant="10" id="JOI-Uo-4XC"/>
-                                        <constraint firstItem="EOI-UG-OcW" firstAttribute="leading" secondItem="fnv-N9-rPa" secondAttribute="trailing" constant="10" id="PLN-aT-rum"/>
-                                        <constraint firstAttribute="centerX" secondItem="EOI-UG-OcW" secondAttribute="centerX" id="PSY-2g-fcB"/>
-                                    </constraints>
-                                </view>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="OUTPUT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v26-ll-xDh">
-                                    <rect key="frame" x="20" y="9" width="145" height="27"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="145" id="8q9-vp-Gb5"/>
-                                        <constraint firstAttribute="height" constant="27" id="K67-Qi-MTU"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
-                                    <color key="textColor" red="0.15294118230000001" green="0.18823531269999999" blue="0.20392158630000001" alpha="1" colorSpace="deviceRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" red="0.60392156860000001" green="0.72156862749999995" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="428" id="0uM-3S-wGx"/>
-                                <constraint firstItem="RlE-Dc-dOV" firstAttribute="top" secondItem="fVG-pC-Cok" secondAttribute="top" constant="3" id="aj0-6t-whM"/>
-                                <constraint firstAttribute="trailing" secondItem="RlE-Dc-dOV" secondAttribute="trailing" constant="3" id="bsx-1i-CqX"/>
-                                <constraint firstItem="v26-ll-xDh" firstAttribute="leading" secondItem="fVG-pC-Cok" secondAttribute="leading" constant="20" symbolic="YES" id="i4y-L7-oQ6"/>
-                                <constraint firstItem="RlE-Dc-dOV" firstAttribute="centerY" secondItem="fVG-pC-Cok" secondAttribute="centerY" id="lta-ZI-Ura"/>
-                                <constraint firstItem="RlE-Dc-dOV" firstAttribute="leading" secondItem="fVG-pC-Cok" secondAttribute="leading" constant="176" id="ytO-dt-YTP"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z6L-AQ-rdV" userLabel="SlidingView">
-                            <rect key="frame" x="18" y="202" width="428" height="45"/>
+                        <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z6L-AQ-rdV" userLabel="SlidingView">
+                            <rect key="frame" x="18" y="167" width="428" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qd5-sG-aRn">
@@ -113,7 +46,7 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sK5-GF-gB1">
+                                        <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sK5-GF-gB1">
                                             <rect key="frame" x="100" y="4" width="51" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
@@ -185,7 +118,6 @@
                         <constraint firstAttribute="centerX" secondItem="z6L-AQ-rdV" secondAttribute="centerX" id="DQS-zH-mGj"/>
                         <constraint firstAttribute="centerX" secondItem="1824" secondAttribute="centerX" id="DkR-lX-5vi"/>
                         <constraint firstItem="9YN-MN-VAB" firstAttribute="centerX" secondItem="1824" secondAttribute="centerX" id="Osn-ph-MiQ"/>
-                        <constraint firstAttribute="centerX" secondItem="fVG-pC-Cok" secondAttribute="centerX" id="Q1o-RK-b79"/>
                     </constraints>
                 </view>
             </subviews>

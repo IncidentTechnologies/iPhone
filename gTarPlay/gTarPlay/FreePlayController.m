@@ -113,8 +113,8 @@ extern GtarController * g_gtarController;
         // Register for slide/hammer state change notification
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeSlideHammer:) name:@"SlideHammerStateChange" object:nil];
         
-        _isSlideEnabled = NO;
-        
+        // Register for output change notification
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
         
         m_playTimeStart = [NSDate date];
         m_audioRouteTimeStart = [NSDate date];
@@ -191,6 +191,8 @@ extern GtarController * g_gtarController;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SlideHammerStateChange" object:nil];
     
     [g_gtarController removeObserver:self];
@@ -219,6 +221,11 @@ extern GtarController * g_gtarController;
         
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self initSliding];
+    
+}
 
 - (void)viewDidLoad
 {
@@ -379,8 +386,6 @@ extern GtarController * g_gtarController;
 {
     [super viewWillAppear:animated];
     
-    [g_soundMaster enableSliding];
-    
     [[_menuButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
     [[_volumeButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
     [[_lightsButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
@@ -389,6 +394,15 @@ extern GtarController * g_gtarController;
     
     CGRect frame = CGRectMake(_volumeButton.frame.origin.x, _mainContentView.frame.origin.y, _volumeButton.frame.size.width, _mainContentView.frame.size.height);
     [_volumeVC attachToSuperview:self.view withFrame:frame];
+    
+    //
+    // Set the audio routing destination
+    //
+    NSString * audioRoute = [g_soundMaster getAudioRoute];
+    BOOL isSpeakerRoute = ([audioRoute isEqualToString:@"Speaker"]) ? YES : NO;
+    
+    [self audioRouteChanged:isSpeakerRoute];
+    
     
 }
 
@@ -512,6 +526,14 @@ extern GtarController * g_gtarController;
         }
         
     }
+    
+}
+
+- (void)initSliding
+{
+    _isSlideEnabled = YES;
+    
+    [g_soundMaster enableSliding];
     
 }
 
@@ -1357,7 +1379,8 @@ extern GtarController * g_gtarController;
     }
 }
 
-- (void)backButtonClicked
+// -(void)backButtonClicked
+- (IBAction)backButtonClicked:(id)sender
 {   
     if (m_LEDTimer != nil)
     {
@@ -1572,16 +1595,28 @@ extern GtarController * g_gtarController;
      */
 }
 
+- (void)didChangeAudioRoute:(NSNotification *) notification
+{
+    BOOL speakerRoute = [[[notification userInfo] objectForKey:@"isRouteSpeaker"] boolValue];
+    
+    [self audioRouteChanged:speakerRoute];
+}
+
 -(void) audioRouteChanged:(BOOL)routeIsSpeaker
 {
     m_bSpeakerRoute = routeIsSpeaker;
     
     if (m_bSpeakerRoute){
         
+        [_volumeButton setImage:[UIImage imageNamed:@"SpeakerIcon"] forState:UIControlStateNormal];
+        [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(3, 0, 3, 0)];
+        
         [g_soundMaster routeToSpeaker];
         [_fpMenuVC setAudioSwitchToSpeaker];
         
     }else{
+        [_volumeButton setImage:[UIImage imageNamed:@"AuxIcon"] forState:UIControlStateNormal];
+        [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         
         [g_soundMaster routeToDefault];
         [_fpMenuVC setAudioSwitchToDefault];

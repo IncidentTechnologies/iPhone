@@ -31,6 +31,8 @@ extern FileController *g_fileController;
         //NSLog(@"Alloc Session Modal VC SoundMaster");
         g_soundMaster = soundMaster;
         [g_soundMaster start];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
     }
     return self;
 }
@@ -56,7 +58,6 @@ extern FileController *g_fileController;
     _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
     [_instrumentViewController setDelegate:self];
     [_instrumentViewController attachToSuperview:self.contentView withFrame:_instrumentView.frame];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,6 +81,15 @@ extern FileController *g_fileController;
     
     // Wait for instrument to load
     [_shortcutButton setEnabled:NO];
+    
+    //
+    // Set the audio routing destination
+    //
+    NSString * audioRoute = [g_soundMaster getAudioRoute];
+    BOOL isSpeakerRoute = ([audioRoute isEqualToString:@"Speaker"]) ? YES : NO;
+    
+    [self updateAudioState:isSpeakerRoute];
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -197,5 +207,36 @@ extern FileController *g_fileController;
 {
     [_shortcutButton setEnabled:YES];
 }
+
+#pragma mark - Audio Route Update
+
+
+- (void)didChangeAudioRoute:(NSNotification *) notification
+{
+    BOOL isSpeakerRoute = [[[notification userInfo] objectForKey:@"isRouteSpeaker"] boolValue];
+    
+    [self updateAudioState:isSpeakerRoute];
+}
+
+
+- (void)updateAudioState:(BOOL)isSpeakerRoute
+{
+    
+    if ( isSpeakerRoute == YES )
+    {
+        
+        [_volumeButton setImage:[UIImage imageNamed:@"SpeakerIcon"] forState:UIControlStateNormal];
+        [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(3, 0, 3, 0)];
+        
+    }
+    else
+    {
+        [_volumeButton setImage:[UIImage imageNamed:@"AuxIcon"] forState:UIControlStateNormal];
+        [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        
+    }
+    
+}
+
 
 @end

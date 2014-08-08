@@ -31,6 +31,9 @@
         
         effectsButtons = [[NSMutableArray alloc] init];
         
+        
+        
+        
     }
     return self;
 }
@@ -51,6 +54,16 @@
     [self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
     
     [self.view addSubview:self.tableView];
+    
+    if(![[effectsButtons firstObject] isSelected]){
+        [self turnOnFirstEffect];
+    }
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -153,5 +166,12 @@
     }
 }
 
+- (void) turnOnFirstEffect
+{
+    UIButton * firstButton = [effectsButtons firstObject];
+    [firstButton setSelected:NO];
+    
+    [self toggleEffect:firstButton];
+}
 
 @end

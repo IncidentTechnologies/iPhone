@@ -216,6 +216,9 @@ extern UserController * g_userController;
     _feedSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
     _feedSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
     
+    // Setup the volume button which will take a second to load
+    [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(3, 0, 3, 0)];
+    
     // Setup the loading screen
     //_loadingView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     //_loadingView.layer.borderWidth = 2.0;
@@ -245,7 +248,6 @@ extern UserController * g_userController;
 - (void) viewWillAppear:(BOOL)animated
 {
     [self setStandalone];
-    
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -1328,11 +1330,16 @@ extern UserController * g_userController;
     
     if ( _speakerRoute == YES )
     {
-        [_outputSwitch setOn:YES];
+        
+        [_volumeButton setImage:[UIImage imageNamed:@"SpeakerIcon"] forState:UIControlStateNormal];
+        [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(3, 0, 3, 0)];
+        
     }
     else
     {
-        [_outputSwitch setOn:NO];
+        [_volumeButton setImage:[UIImage imageNamed:@"AuxIcon"] forState:UIControlStateNormal];
+        [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        
     }
     
     // Invert it so we log the route we came from
@@ -1705,7 +1712,7 @@ extern UserController * g_userController;
 #pragma mark - Main event loop
 
 - (void)mainEventLoop {
-    
+    /*
 #ifdef Debug_BUILD
     if(g_gtarController.connected) {
         
@@ -1742,6 +1749,7 @@ extern UserController * g_userController;
         }
     }
 #endif
+     */
     
     // Advance song model and recorder
     
@@ -3004,9 +3012,9 @@ extern UserController * g_userController;
     
     // Debug
 #ifdef Debug_BUILD
-    if(g_gtarController.connected){
+    //if(g_gtarController.connected){
         //_skipNotes = YES;
-    }
+    //}
 #endif
 }
 

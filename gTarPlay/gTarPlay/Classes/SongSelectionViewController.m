@@ -79,6 +79,9 @@ extern GtarController *g_gtarController;
         _userSongArray = userSongArray;
         NSLog(@"Found %d cached songs",[_userSongArray count]);
         
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
+        
         sortChange = 0;
     }
     return self;
@@ -147,6 +150,18 @@ extern GtarController *g_gtarController;
         [_instrumentViewController setDelegate:self];
         [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    //
+    // Set the audio routing destination
+    //
+    NSString * audioRoute = [g_soundMaster getAudioRoute];
+    BOOL isSpeakerRoute = ([audioRoute isEqualToString:@"Speaker"]) ? YES : NO;
+    
+    [self updateAudioState:isSpeakerRoute];
 }
 
 - (void) localizeViews {
@@ -834,5 +849,37 @@ extern GtarController *g_gtarController;
     
     return [_playerViewController getInstrumentList];
 }
+
+
+#pragma mark - Audio Route Update
+
+
+- (void)didChangeAudioRoute:(NSNotification *) notification
+{
+    BOOL isSpeakerRoute = [[[notification userInfo] objectForKey:@"isRouteSpeaker"] boolValue];
+    
+    [self updateAudioState:isSpeakerRoute];
+}
+
+
+- (void)updateAudioState:(BOOL)isSpeakerRoute
+{
+    
+    if ( isSpeakerRoute == YES )
+    {
+        
+        [_volumeButton setImage:[UIImage imageNamed:@"SpeakerIcon"] forState:UIControlStateNormal];
+        [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(3, 0, 3, 0)];
+        
+    }
+    else
+    {
+        [_volumeButton setImage:[UIImage imageNamed:@"AuxIcon"] forState:UIControlStateNormal];
+        [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        
+    }
+    
+}
+
 
 @end

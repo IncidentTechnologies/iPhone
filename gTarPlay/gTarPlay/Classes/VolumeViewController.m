@@ -46,55 +46,70 @@
 {
     [super viewDidLoad];
     
-    //
-    // Stylize the normal slider
-    //
-    UIImage * sliderTrackMinImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:16 topCapHeight:0];
-    UIImage * sliderTrackMaxImage = [[UIImage imageNamed: @"EndCap.png"] stretchableImageWithLeftCapWidth:17 topCapHeight:0];
-    UIImage * sliderKnob = [UIImage imageNamed:@"VolumeKnob.png"];
+    [self drawTrack];
+    [self drawSliderKnob];
     
-    [_volumeSlider setMinimumTrackImage:sliderTrackMinImage forState:UIControlStateNormal];
-    [_volumeSlider setMaximumTrackImage:sliderTrackMaxImage forState:UIControlStateNormal];
+}
+
+- (void)drawTrack
+{
+    // Slider Knob
+    CGSize size = CGSizeMake(1,6);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:24/255.0 green:29/255.0 blue:33/255.0 alpha:1.0].CGColor);
+    
+    CGContextFillRect(context, CGRectMake(0,0,size.width,size.height));
+    
+    UIImage * maxSliderKnob = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    // Min slider knob
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:166/255.0 green:203/255.0 blue:116/255.0 alpha:1.0].CGColor);
+    
+    CGContextFillRect(context, CGRectMake(0,0,size.width,size.height));
+    
+    UIImage * minSliderKnob = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    [_volumeSlider setMaximumTrackImage:maxSliderKnob forState:UIControlStateNormal];
+    [_volumeSlider setMinimumTrackImage:minSliderKnob forState:UIControlStateNormal];
+}
+
+- (void)drawSliderKnob
+{
+    // Slider Knob
+    CGSize size = CGSizeMake(25,25);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:166/255.0 green:203/255.0 blue:116/255.0 alpha:1.0].CGColor);
+    
+    CGContextFillEllipseInRect(context, CGRectMake(0,0,size.width,size.height));
+    
+    UIImage * sliderKnob = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
     [_volumeSlider setThumbImage:sliderKnob forState:UIControlStateNormal];
-    
-    //
-    // Set the MP volume view slider too
-    //
-    _mpVolumeView = [[MPVolumeView alloc] initWithFrame:_volumeView.bounds];
-    
-    NSArray * subViews = _mpVolumeView.subviews;
-    
-    UIImage *invisibleImage = [[UIImage imageNamed:@"InvisibleTrack.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1) resizingMode:UIImageResizingModeStretch];
-    
-    for (id current in subViews)
-    {
-        if ([current isKindOfClass:[UISlider class]])
-        {
-            UISlider * slider = (UISlider *)current;
-            
-            // I gave up trying to align the track on the volume slider properly. Now I'm just hiding it and doing it in the nib
-            [slider setMinimumTrackImage:invisibleImage forState:UIControlStateNormal];
-            [slider setMaximumTrackImage:invisibleImage forState:UIControlStateNormal];
-            [slider setThumbImage:sliderKnob forState:UIControlStateNormal];
-            
-            // This is placed behind the MP volume slider
-            _volumeTrackView.image = sliderTrackMaxImage;
-            
-            break;
-        }
-    }
-    
-    [_mpVolumeView setShowsRouteButton:NO];
-    
-    [_volumeView addSubview:_mpVolumeView];
-    
-    [self showVolumeSliderForRoute:nil];
-    
 }
 
 -(void)invertVolumeView
 {
     [_innerView setFrame:CGRectMake(_innerView.frame.origin.x,8,_innerView.frame.size.width,_innerView.frame.size.height)];
+    
+    [_outputToggleButton setFrame:CGRectMake(_innerView.frame.size.width/2.0-_outputToggleButton.frame.size.width/2.0,5,_outputToggleButton.frame.size.width,_outputToggleButton.frame.size.height)];
+    
+    [_sliderView setFrame:CGRectMake(_sliderView.frame.origin.x,self.view.frame.size.height-_sliderView.frame.size.height,_sliderView.frame.size.width,_sliderView.frame.size.height)];
     
     [super invertTriangleIndicator];
 }
@@ -113,13 +128,15 @@
     
     newFrame.size.width = self.view.frame.size.height - 55;
     
-    _sliderView.center = CGPointMake( self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 );
+    _sliderView.center = CGPointMake( self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 14.0 );
     
     [_sliderView setBounds:newFrame];
     
     [_mpVolumeView setFrame:_volumeView.bounds];
     
     _mpVolumeView.center = CGPointMake( _volumeView.frame.size.width / 2.0, _volumeView.frame.size.height / 2.0 );
+    
+    [_outputToggleButton setFrame:CGRectMake(_innerView.frame.size.width/2.0-_outputToggleButton.frame.size.width/2.0,self.view.frame.size.height-10-_outputToggleButton.frame.size.height,_outputToggleButton.frame.size.width,_outputToggleButton.frame.size.height)];
     
     if(invertView){
         [self invertVolumeView];
@@ -130,6 +147,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     
+    [self showOutputToggleButton];
     [_volumeSlider setValue:[g_soundMaster getChannelGain]];
     
 }
@@ -145,6 +163,40 @@
 - (IBAction)volumeValueChanged:(id)sender
 {
     [g_soundMaster setChannelGain:_volumeSlider.value];
+}
+
+- (IBAction)outputToggleButtonClicked:(id)sender
+{
+    // Determine current routing
+    NSString * audioRoute = [g_soundMaster getAudioRoute];
+    BOOL _speakerRoute = ([audioRoute isEqualToString:@"Speaker"]) ? YES : NO;
+    
+    if ( _speakerRoute == NO)
+    {
+        [g_soundMaster routeToSpeaker];
+    }
+    else
+    {
+        [g_soundMaster routeToDefault];
+    }
+    
+    //[self showOutputToggleButton];
+}
+
+- (void)showOutputToggleButton
+{
+    // Determine current routing
+    NSString * audioRoute = [g_soundMaster getAudioRoute];
+    BOOL _speakerRoute = ([audioRoute isEqualToString:@"Speaker"]) ? YES : NO;
+    
+    if ( _speakerRoute == NO)
+    {
+        [_outputToggleButton setImage:[UIImage imageNamed:@"SpeakerIcon"] forState:UIControlStateNormal];
+        [_outputToggleButton setImageEdgeInsets:UIEdgeInsetsMake(11, 8, 11, 8)];
+    }else{
+        [_outputToggleButton setImage:[UIImage imageNamed:@"AuxIcon"] forState:UIControlStateNormal];
+        [_outputToggleButton setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    }
 }
 
 - (void)attachToSuperview:(UIView *)view
@@ -163,28 +215,16 @@
 {
     NSString * routeName = [[notification userInfo] objectForKey:@"routeName"];
     [self showVolumeSliderForRoute:routeName];
+    [self showOutputToggleButton];
 }
 
 // For the new audio controller always show the volume slider
 - (void)showVolumeSliderForRoute:(NSString*)routeName
 {
-    //if ([routeName isEqualToString:(NSString*)kAudioSessionOutputRoute_LineOut])
-    //{
-        // show custom volume view
-        [_volumeView setHidden:YES];
-        [_volumeTrackView setHidden:YES];
-        
-        [_volumeSlider setHidden:NO];
-    /*}
-    else
-    {
-        // show standard MPVolumeView
-        [_volumeView setHidden:NO];
-        [_volumeTrackView setHidden:NO];
-        
-        [_volumeSlider setHidden:YES];
-    }
-    */
+    [_volumeView setHidden:YES];
+    [_volumeTrackView setHidden:YES];
+    
+    [_volumeSlider setHidden:NO];
 }
 
 @end

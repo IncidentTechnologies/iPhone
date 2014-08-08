@@ -188,6 +188,8 @@
 		6DB2860F1921915600B3D14C /* Electric Guitar 98.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A91921915600B3D14C /* Electric Guitar 98.mp3 */; };
 		6DB286101921915600B3D14C /* Electric Guitar 99.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285AA1921915600B3D14C /* Electric Guitar 99.mp3 */; };
 		6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */; };
+		6DE1556F19789A9B00E8B360 /* AuxIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1556D19789A9B00E8B360 /* AuxIcon.png */; };
+		6DE1557019789A9B00E8B360 /* SpeakerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1556E19789A9B00E8B360 /* SpeakerIcon.png */; };
 		9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CAF174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CB0174C68E000FA3239 /* Bowed Strings 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */; };
@@ -1695,6 +1697,8 @@
 		6DC3D83D190F0240003AAD4E /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6DD5FB0018FCB8A40066C888 /* SongPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongPlaybackController.h; sourceTree = "<group>"; };
 		6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPlaybackController.m; sourceTree = "<group>"; };
+		6DE1556D19789A9B00E8B360 /* AuxIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AuxIcon.png; path = Resources/Images/Play/AuxIcon.png; sourceTree = SOURCE_ROOT; };
+		6DE1556E19789A9B00E8B360 /* SpeakerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SpeakerIcon.png; path = Resources/Images/Play/SpeakerIcon.png; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* gTarPlay-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "gTarPlay-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bowed Strings 40.mp3"; sourceTree = "<group>"; };
 		9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bowed Strings 41.mp3"; sourceTree = "<group>"; };
@@ -3784,6 +3788,8 @@
 		ECCC036C170CD5480021DB00 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6DE1556D19789A9B00E8B360 /* AuxIcon.png */,
+				6DE1556E19789A9B00E8B360 /* SpeakerIcon.png */,
 				ECE8321B1718905B006E2391 /* GreenVolume.png */,
 				ECCC039D170F862B0021DB00 /* EndCap.png */,
 				ECCC035F170CD53D0021DB00 /* Minus.png */,
@@ -4063,6 +4069,7 @@
 				EC24DCF0161A89C000016B78 /* Acoustic Guitar 45.mp3 in Resources */,
 				EC24DCF1161A89C000016B78 /* Acoustic Guitar 46.mp3 in Resources */,
 				6D20EF5F191AA68600E78A9D /* PreviewIcon.png in Resources */,
+				6DE1556F19789A9B00E8B360 /* AuxIcon.png in Resources */,
 				EC24DCF2161A89C000016B78 /* Acoustic Guitar 47.mp3 in Resources */,
 				EC24DCF3161A89C000016B78 /* Acoustic Guitar 48.mp3 in Resources */,
 				EC24DCF4161A89C000016B78 /* Acoustic Guitar 49.mp3 in Resources */,
@@ -4250,6 +4257,7 @@
 				EC24DD86161A89CD00016B78 /* Rhodes 72.mp3 in Resources */,
 				EC24DD87161A89CD00016B78 /* Rhodes 73.mp3 in Resources */,
 				EC24DD88161A89CD00016B78 /* Rhodes 74.mp3 in Resources */,
+				6DE1557019789A9B00E8B360 /* SpeakerIcon.png in Resources */,
 				EC24DD89161A89CD00016B78 /* Rhodes 75.mp3 in Resources */,
 				EC24DD8A161A89CD00016B78 /* Rhodes 76.mp3 in Resources */,
 				EC24DD8B161A89CD00016B78 /* Rhodes 77.mp3 in Resources */,
@@ -5609,7 +5617,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30B9B78E-7DFD-461F-AC87-3F2E75670AC8";
+				PROVISIONING_PROFILE = "E301996F-FDF7-48D8-97F1-611BB2AAEA2D";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5645,7 +5653,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30B9B78E-7DFD-461F-AC87-3F2E75670AC8";
+				PROVISIONING_PROFILE = "E301996F-FDF7-48D8-97F1-611BB2AAEA2D";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

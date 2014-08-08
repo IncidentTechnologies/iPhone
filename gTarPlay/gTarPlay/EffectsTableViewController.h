@@ -31,5 +31,6 @@
 //- (id)initWithAudioController:(AudioController*)AC;
 - (id)init;
 - (void)turnOffAllEffects;
+- (void)turnOnFirstEffect;
 
 @end

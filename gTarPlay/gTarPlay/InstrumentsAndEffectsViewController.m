@@ -77,6 +77,7 @@
     self.currentMainContentVC = self.instrumentTableVC;
     
     self.effectsTableVC.tableView.frame = self.contentTable.bounds;
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -143,10 +144,7 @@
 
 -(void) positionChanged:(CGPoint)position forView:(XYInputView *)view
 {
-    NSLog(@"Instruments and Effects VC position changed");
-    
     [soundMaster adjustEffectAtIndex:self.selectedEffectIndex toPoint:position];
-    
 }
 
 #pragma mark - EffectSelectionDelegate
@@ -185,9 +183,16 @@
 - (void)stopAudioEffects
 {
     NSLog(@"InstrumentsAndEffectsViewController stopAudioEffects");
+    BOOL enableSlide = [soundMaster isSlideEnabled];
+    
     [soundMaster stopAllEffects];
     
     [effectsTableVC turnOffAllEffects];
+    
+    if(enableSlide){
+        [effectsTableVC turnOnFirstEffect];
+    }
+    
     
     // Reset effect buttons
 /*    int numEffects = (int)[self getNumEffects];
@@ -204,7 +209,17 @@
 
 - (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
+    
+    BOOL enableSlide = [soundMaster isSlideEnabled];
+    
     [soundMaster didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
+    
+    // But restore sliding
+    if(enableSlide){
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:effectsTableVC selector:@selector(turnOnFirstEffect) userInfo:nil repeats:NO];
+        //[soundMaster enableSliding];
+        //[effectsTableVC turnOnFirstEffect];
+    }
 }
 
 - (NSArray *)getInstrumentList
