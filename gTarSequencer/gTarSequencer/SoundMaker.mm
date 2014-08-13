@@ -15,7 +15,7 @@
 #define GTAR_NUM_STRINGS 6
 
 @interface SoundMaker () {
-
+    
     SoundMaster *m_soundMaster;
     LevelSubscriber *m_volumeSubscriber;
     
@@ -60,11 +60,11 @@
         m_soundMaster = soundMaster;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        
-            NSLog(@"Loading files in background");
+            
+            DLog(@"Loading files in background");
             
             [self loadStringSetAndStringPaths];
-
+            
         });
     }
     
@@ -98,7 +98,7 @@
             filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:audioStringSet[i] ofType:@"mp3"] UTF8String];
         }
         
-        NSLog(@"Loading sample %s",filepath[i]);
+        DLog(@"Loading sample %s",filepath[i]);
         
         if(filepath[i] != NULL){
             m_samplerBank->LoadSampleIntoBank(filepath[i], m_sampNode);
@@ -122,7 +122,7 @@
         
         bankgain = amplitude;
         
-        NSLog(@"Setting track gain to %f",bankgain);
+        DLog(@"Setting track gain to %f",bankgain);
         
         [m_soundMaster setGain:bankgain forSamplerBank:m_samplerBank];
     }
@@ -172,7 +172,7 @@ static void cbLevel(float val, void *pObject, void *pContext) {
     else if(val < 0.0f)
         val = 0.0f;
     
-    //NSLog(@"%f", val);
+    //DLog(@"%f", val);
     
     [slider setDisplayValue:val*[slider GetValue]];
 }

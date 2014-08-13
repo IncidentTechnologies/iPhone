@@ -181,7 +181,7 @@
 #pragma mark - Swipe Gestures
 -(void)startSwipeGestures
 {
-    NSLog(@"Start swipe gestures");
+    DLog(@"Start swipe gestures");
     
     [self stopLeftSwipeGesture];
     [self stopRightSwipeGesture];
@@ -240,7 +240,7 @@
 
 -(void)startSwipeToPlayGesture
 {
-    NSLog(@"Start swipe to play");
+    DLog(@"Start swipe to play");
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeToPlay)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [swipeLeft setNumberOfTouchesRequired:1];
@@ -250,7 +250,7 @@
 
 -(void)swipeToPlay
 {
-    NSLog(@"Start to play");
+    DLog(@"Start to play");
     [delegate forceToPlay];
     [self end];
 }
@@ -531,7 +531,6 @@
             float arrowHeight = 50;
             CGRect deleteArrowFrame = CGRectMake(deleteLabelFrame.origin.x-arrowWidth, deleteLabelFrame.origin.y-(arrowHeight-defaultLabelHeight)/2, arrowWidth, arrowHeight);
             [self drawTutorialArrow:deleteArrowFrame facesDirection:9 width:arrowWidth height:arrowHeight withColor:blueColor isReverseDirection:reverse];
-            
             
             // Swipe arrow
             float swipeFrameWidth = 140;

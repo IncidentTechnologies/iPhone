@@ -89,7 +89,7 @@
                      [UIColor colorWithRed:0/255.0 green:141/255.0 blue:218/255.0 alpha:1.0],
                      [UIColor colorWithRed:148/255.0 green:102/255.0 blue:177/255.0 alpha:1.0],
                      nil];
-    
+        
         viewFrame = frame;
         
         [self retrieveSampleList];
@@ -156,7 +156,7 @@
     float y = [[UIScreen mainScreen] bounds].size.width;
     float x = [[UIScreen mainScreen] bounds].size.height;
     
-    NSLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
+    DLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
     if(tutorialViewController){
         [tutorialViewController clear];
@@ -342,7 +342,7 @@
     }
     
     customIndicator.layer.cornerRadius = customIndicator.frame.size.width/2.0;
-        
+    
     CGRect imageFrame = CGRectMake(10, 10, customIcon.frame.size.width - 20, customIcon.frame.size.height - 20);
     
     [customIcon setBackgroundColor:[UIColor clearColor]];
@@ -373,7 +373,7 @@
 - (void)userDidSave:(id)sender
 {
     NSString * filename = nameField.text;
-
+    
     [delegate saveCustomInstrumentWithStrings:stringSet andName:filename andStringPaths:stringPaths andIcon:[customIconSet objectAtIndex:customIconCounter]];
 }
 
@@ -392,7 +392,7 @@
 #pragma mark - Name Field
 - (void)nameFieldStartEdit:(id)sender
 {
-    NSLog(@"Name field start edit");
+    DLog(@"Name field start edit");
     
     float frameOffset = 35.0;
     CGRect prevIconFrame = customIcon.frame;
@@ -431,7 +431,7 @@
     nameField.text = [nameField.text uppercaseString];
     
     [self checkIfNameReady];
-
+    
 }
 
 -(void)nameFieldDoneEditing:(id)sender
@@ -509,16 +509,16 @@
     int customCount = 0;
     
     for(int i = 0; i < [customInstrumentOptions count]; i++){
-         NSString * filename = [[customInstrumentOptions objectAtIndex:i] objectForKey:@"Name"];
+        NSString * filename = [[customInstrumentOptions objectAtIndex:i] objectForKey:@"Name"];
         
-         if(!([filename rangeOfString:@"TRACK"].location == NSNotFound)){
-             
-             NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"TRACK"] withString:@""];
-             int numFromSuffix = [customSuffix intValue];
-             
-             customCount = MAX(customCount,numFromSuffix);
-         }
-     }
+        if(!([filename rangeOfString:@"TRACK"].location == NSNotFound)){
+            
+            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"TRACK"] withString:@""];
+            int numFromSuffix = [customSuffix intValue];
+            
+            customCount = MAX(customCount,numFromSuffix);
+        }
+    }
     
     customCount++;
     
@@ -643,7 +643,7 @@
 {
     NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
     
-    NSLog(@"CustomSampleList is %@",tempList);
+    DLog(@"CustomSampleList is %@",tempList);
     
     int customCount = 0;
     
@@ -696,7 +696,7 @@
     NSString * path;
     
     if(filename == nil){
-        NSLog(@"Attempting to play nil file");
+        DLog(@"Attempting to play nil file");
         return;
     }
     
@@ -715,7 +715,7 @@
     NSURL * url = [NSURL fileURLWithPath:path];
     
     
-    NSLog(@"Playing URL %@",url);
+    DLog(@"Playing URL %@",url);
     
     self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
     
@@ -747,7 +747,7 @@
     // Load record frame
     CGRect newFrame = backgroundView.frame;
     [self setBackgroundViewFromNib:@"CustomInstrumentRecorder" withFrame:newFrame andRemove:backgroundView forViewState:VIEW_CUSTOM_RECORD];
-
+    
     // Load active buttons
     [self drawRecordActionButton];
     [self hideRecordEditingButtons];
@@ -845,7 +845,7 @@
 
 -(void)drawAudio
 {
-    NSLog(@"Draw audio for sample");
+    DLog(@"Draw audio for sample");
     
     [customSoundRecorder initAudioForSample];
     
@@ -868,11 +868,11 @@
     for(long int x = 0; x <= screenWidth/f; x+=f){
         int n = x * samplelength / screenWidth;
         double point = midpointY-buffer[n]*scaleY;
-    
+        
         if(!isnan(point)){
             CGPathAddLineToPoint(path, NULL, ceil(x), point);
         }else{
-            NSLog(@"Error generating point");
+            DLog(@"Error generating point");
         }
     }
     
@@ -905,11 +905,11 @@
 {
     // Ensure both recording name and recording are ready
     if(isRecordingNameReady && isRecordingReady){
-        NSLog(@"Showing save");
+        DLog(@"Showing save");
         [self showHideButton:recordSaveButton isHidden:NO withSelector:@selector(userDidSaveRecord:)];
         recordSaveButton.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
     }else{
-        NSLog(@"Hiding save");
+        DLog(@"Hiding save");
         [self showHideButton:recordSaveButton isHidden:YES withSelector:@selector(userDidSaveRecord:)];
         recordSaveButton.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3];
     }
@@ -938,10 +938,10 @@
     NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
     
     for(int i = 0; i < [tempList count]; i++){
-         if([tempList[i] isEqualToString:filename]){
-             return YES;
-         }
-     }
+        if([tempList[i] isEqualToString:filename]){
+            return YES;
+        }
+    }
     return NO;
 }
 
@@ -1044,7 +1044,7 @@
             [recordRecordButton setBackgroundColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1.0]];
             [recordActionView setBackgroundColor:[UIColor clearColor]];
             recordActionView.layer.cornerRadius = 0.0;
-
+            
             size = CGSizeMake(recordActionView.frame.size.width, recordActionView.frame.size.height);
             UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
             
@@ -1111,7 +1111,7 @@
 
 -(void)userDidSaveRecord:(id)sender
 {
-    NSLog(@"User did save record");
+    DLog(@"User did save record");
     NSString * filename = recordingNameField.text;
     
     // Rename the file and save in Documents/Samples/ subdirectory
@@ -1270,7 +1270,7 @@
         
         [customSoundRecorder setSampleStart:newStart];
     }
-
+    
 }
 
 -(void)panRecordRight:(UIPanGestureRecognizer *)sender
@@ -1293,7 +1293,7 @@
     
     if(newX >= minX && newX <= maxX){
         CGRect newRightFrame = CGRectMake(newX,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
-    
+        
         [rightAdjustor setFrame:newRightFrame];
         
         CGRect newProgressBarFrame = CGRectMake(progressBar.frame.origin.x, 0, rightAdjustor.frame.origin.x-leftAdjustor.frame.origin.x, progressBar.frame.size.height);
@@ -1324,88 +1324,88 @@
 
 -(void)showRecordProcessing
 {
-    NSLog(@"Show record processing");
+    DLog(@"Show record processing");
     
     [recordProcessing setHidden:NO];
     [recordProcessing setText:@""];
     
     /*recordProcessingCounter = 0;
-    [self animateRecordProcessing];
-    
-    if(recordProcessingTimer == nil){
-        NSLog(@"Init record processing timer");
-        recordProcessingCounter = 0;
-        [recordProcessing setHidden:NO];
-        
-        recordProcessingTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(animateRecordProcessing) userInfo:nil repeats:YES];
-    }*/
+     [self animateRecordProcessing];
+     
+     if(recordProcessingTimer == nil){
+     DLog(@"Init record processing timer");
+     recordProcessingCounter = 0;
+     [recordProcessing setHidden:NO];
+     
+     recordProcessingTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(animateRecordProcessing) userInfo:nil repeats:YES];
+     }*/
     
 }
 /*
--(void)animateRecordProcessing
-{
-    
-    UIView * recordProcessingInner = [[recordProcessing subviews] firstObject];
-    
-    recordProcessing.layer.borderWidth = 10.0;
-    recordProcessing.layer.cornerRadius = recordProcessing.frame.size.width/2;
-    recordProcessing.layer.borderColor = [UIColor whiteColor].CGColor;
-
-    recordProcessingInner.layer.borderWidth = 5.0;
-    recordProcessingInner.layer.cornerRadius = recordProcessingInner.frame.size.width/2;
-    recordProcessingInner.layer.borderColor = [UIColor whiteColor].CGColor;
-    
-    [recordProcessing setAlpha:1.0];
-    [recordProcessingInner setAlpha:0.5];
-    
-    //NSLog(@"Switch on %i",recordProcessingCounter);
-    
-    switch(recordProcessingCounter){
-        case 0:
-            [recordProcessing setAlpha:0.0];
-            [recordProcessingInner setAlpha:0.5];
-            break;
-        case 1:
-            [recordProcessing setAlpha:0.0];
-            [recordProcessingInner setAlpha:1.0];
-            break;
-        case 2:
-            [recordProcessing setAlpha:0.5];
-            [recordProcessingInner setAlpha:1.0];
-            break;
-        case 3:
-            [recordProcessing setAlpha:1.0];
-            [recordProcessingInner setAlpha:1.0];
-            break;
-        case 4:
-            [recordProcessing setAlpha:0.5];
-            [recordProcessingInner setAlpha:1.0];
-            break;
-        case 5:
-            [recordProcessing setAlpha:0.0];
-            [recordProcessingInner setAlpha:1.0];
-            break;
-        case 6:
-            [recordProcessing setAlpha:0.0];
-            [recordProcessingInner setAlpha:0.5];
-            break;
-        case 7:
-            [recordProcessing setAlpha:0.0];
-            [recordProcessingInner setAlpha:0.0];
-            break;
-    }
-    
-    NSLog(@"Switched");
-    
-    recordProcessingCounter++;
-    recordProcessingCounter %= 8;
+ -(void)animateRecordProcessing
+ {
  
-}
+ UIView * recordProcessingInner = [[recordProcessing subviews] firstObject];
+ 
+ recordProcessing.layer.borderWidth = 10.0;
+ recordProcessing.layer.cornerRadius = recordProcessing.frame.size.width/2;
+ recordProcessing.layer.borderColor = [UIColor whiteColor].CGColor;
+ 
+ recordProcessingInner.layer.borderWidth = 5.0;
+ recordProcessingInner.layer.cornerRadius = recordProcessingInner.frame.size.width/2;
+ recordProcessingInner.layer.borderColor = [UIColor whiteColor].CGColor;
+ 
+ [recordProcessing setAlpha:1.0];
+ [recordProcessingInner setAlpha:0.5];
+ 
+ //DLog(@"Switch on %i",recordProcessingCounter);
+ 
+ switch(recordProcessingCounter){
+ case 0:
+ [recordProcessing setAlpha:0.0];
+ [recordProcessingInner setAlpha:0.5];
+ break;
+ case 1:
+ [recordProcessing setAlpha:0.0];
+ [recordProcessingInner setAlpha:1.0];
+ break;
+ case 2:
+ [recordProcessing setAlpha:0.5];
+ [recordProcessingInner setAlpha:1.0];
+ break;
+ case 3:
+ [recordProcessing setAlpha:1.0];
+ [recordProcessingInner setAlpha:1.0];
+ break;
+ case 4:
+ [recordProcessing setAlpha:0.5];
+ [recordProcessingInner setAlpha:1.0];
+ break;
+ case 5:
+ [recordProcessing setAlpha:0.0];
+ [recordProcessingInner setAlpha:1.0];
+ break;
+ case 6:
+ [recordProcessing setAlpha:0.0];
+ [recordProcessingInner setAlpha:0.5];
+ break;
+ case 7:
+ [recordProcessing setAlpha:0.0];
+ [recordProcessingInner setAlpha:0.0];
+ break;
+ }
+ 
+ DLog(@"Switched");
+ 
+ recordProcessingCounter++;
+ recordProcessingCounter %= 8;
+ 
+ }
  */
 
 -(void)hideRecordProcessing
 {
-    NSLog(@"Hide record processing");
+    DLog(@"Hide record processing");
     //[recordProcessingTimer invalidate];
     //recordProcessingTimer = nil;
     
@@ -1526,7 +1526,7 @@
         playBar.frame = newFrame;
         
     }else{
-
+        
         [self resetPlayBar];
         
     }
@@ -1797,7 +1797,7 @@
     }
     
     return nil;
-
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1826,7 +1826,7 @@
         // String
         
         [self toggleStringCellAtIndexPath:indexPath];
-
+        
     }else{
         
         // Save
@@ -1903,7 +1903,7 @@
 
 - (void)deleteCell:(NSIndexPath *)pathToDelete
 {
-    NSLog(@"Delete cell at section %i index %i",pathToDelete.section,pathToDelete.row);
+    DLog(@"Delete cell at section %i index %i",pathToDelete.section,pathToDelete.row);
     
     CustomSampleCell * cell = (CustomSampleCell *)[sampleTable cellForRowAtIndexPath:pathToDelete];
     
@@ -1938,7 +1938,7 @@
         NSString * oldSection = [sampleStack lastObject];
         [sampleStack removeObject:[sampleStack lastObject]];
         
-        NSLog(@"Removing current selection %@",oldSection);
+        DLog(@"Removing current selection %@",oldSection);
     }
     
     if([sampleStack count] > 0){
@@ -1962,7 +1962,7 @@
     NSString * sampleTitle = @"";
     
     [sampleLibraryTitle setTitleEdgeInsets:UIEdgeInsetsMake(0, 7, 0, 0)];
-   
+    
     if(penultimateIndex >= 0){
         
         if(penultimateIndex == 0){
@@ -1993,11 +1993,11 @@
 
 -(IBAction)reverseSampleStack:(id)sender
 {
-    NSLog(@"Reverse sample stack");
+    DLog(@"Reverse sample stack");
     
     [self popFromSampleStack];
     
-    NSLog(@"Sample stack count is now %i",[sampleStack count]);
+    DLog(@"Sample stack count is now %i",[sampleStack count]);
     
     [self buildNewSampleSubset];
     
@@ -2023,7 +2023,7 @@
             }else{
                 [stringPaths addObject:@"Default"];
             }
-
+            
         }else{
             [stringSet addObject:@""];
             [stringPaths addObject:@""];
@@ -2039,7 +2039,7 @@
         
         CustomStringCell * cell = (CustomStringCell *)[stringTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         
-        //NSLog(@"Trying to update string %@ for cell %@",stringSet[GTAR_NUM_STRINGS-i-1],cell);
+        //DLog(@"Trying to update string %@ for cell %@",stringSet[GTAR_NUM_STRINGS-i-1],cell);
         
         if(![stringSet[GTAR_NUM_STRINGS-i-1] isEqualToString:@""]){
             
@@ -2048,7 +2048,7 @@
                 useCustomPath = TRUE;
             }
             
-           [cell updateFilename:stringSet[GTAR_NUM_STRINGS-i-1] isCustom:useCustomPath];
+            [cell updateFilename:stringSet[GTAR_NUM_STRINGS-i-1] isCustom:useCustomPath];
         }
     }
     
@@ -2253,7 +2253,7 @@
         
         [selectedStringCell notifySelected:NO];
         [cell notifySelected:YES];
-
+        
         selectedStringCell = cell;
         return YES;
     }
@@ -2296,9 +2296,9 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if ([fileManager fileExistsAtPath:path]) {
-        NSLog(@"The sample plist exists");
+        DLog(@"The sample plist exists");
     } else {
-        NSLog(@"The sample plist does not exist");
+        DLog(@"The sample plist does not exist");
     }
     
     NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
@@ -2309,7 +2309,7 @@
     
     // Append a second local custom sounds pList to the regular sample list
     if ([fileManager fileExistsAtPath:customSampleListPath]) {
-        NSLog(@"The custom sample plist exists");
+        DLog(@"The custom sample plist exists");
         NSMutableDictionary * customDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:customSampleListPath];
         
         [customSampleList addObjectsFromArray:[customDictionary objectForKey:@"Samples"]];
@@ -2320,11 +2320,11 @@
         
         
     } else {
-        NSLog(@"The custom sample plist does not exist");
+        DLog(@"The custom sample plist does not exist");
         
         sampleList = [plistDictionary objectForKey:@"Samples"];
         customSampleList = nil;
-
+        
     }
     
 }
@@ -2333,7 +2333,7 @@
 {
     customSampleList = nil;
     
-    NSLog(@"Deleting custom sample list");
+    DLog(@"Deleting custom sample list");
     
     NSError * err = NULL;
     NSFileManager * fm = [[NSFileManager alloc] init];
@@ -2341,13 +2341,13 @@
     BOOL result = [fm removeItemAtPath:customSampleListPath error:&err];
     
     if(!result)
-        NSLog(@"Error deleting");
+        DLog(@"Error deleting");
 }
 
 - (void)updateCustomSampleListWithSample:(NSString *)filename
 {
     
-    NSLog(@"Adding %@ to custom sample list",filename);
+    DLog(@"Adding %@ to custom sample list",filename);
     
     // Init the custom sample list pList
     if(customSampleList == nil){
@@ -2362,7 +2362,7 @@
         [sampleList removeAllObjects];
         [sampleList addObjectsFromArray:customSampleList];
         [sampleList addObjectsFromArray:tempSampleList];
-    
+        
     }else{
         // Beware, this also adds the filename to sampleList
         [[[customSampleList objectAtIndex:0] objectForKey:@"Sampleset"] addObject:filename];
@@ -2374,7 +2374,7 @@
     if([self isCustomInstrumentList]){
         [[[sampleListSubset objectAtIndex:0] objectForKey:@"Leafsampleset"] addObject:filename];
     }
-
+    
     [self saveCustomSampleList];
 }
 
@@ -2383,28 +2383,28 @@
     NSMutableDictionary * wrapperDict = [[NSMutableDictionary alloc] init];
     [wrapperDict setValue:customSampleList forKey:@"Samples"];
     
-    NSLog(@"Writing custom sample list to path %@",customSampleListPath);
+    DLog(@"Writing custom sample list to path %@",customSampleListPath);
     
-    NSLog(@"Custom sample list is %@",customSampleList);
+    DLog(@"Custom sample list is %@",customSampleList);
     
     BOOL success = [wrapperDict writeToFile:customSampleListPath atomically:YES];
     
     if(success){
-        NSLog(@"Succeeded");
+        DLog(@"Succeeded");
     }else{
-        NSLog(@"Failed");
+        DLog(@"Failed");
     }
     
 }
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 @end

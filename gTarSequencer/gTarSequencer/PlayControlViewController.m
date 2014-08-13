@@ -131,7 +131,7 @@
 
 - (void) tempoDisplayDidOpen
 {
-    //NSLog(@"**** tempo display did open");
+    //DLog(@"**** tempo display did open");
     isTempoSliderOpen = true;
     [delegate stopGestures];
     [delegate stopDrawing];
@@ -139,7 +139,7 @@
 
 - (void) tempoDisplayDidClose
 {
-    //NSLog(@"**** tempo display did close");
+    //DLog(@"**** tempo display did close");
     isTempoSliderOpen = false;
     [delegate startGestures];
     [delegate startDrawing];
@@ -187,11 +187,11 @@
         volume = newValue;
         
         [delegate changePlayVolume:volume];
-       
+        
         //if(isPlaying)
         //{
-            //[self stopAll];
-            //[self playAll];
+        //[self stopAll];
+        //[self playAll];
         //}
     }
     
@@ -251,7 +251,7 @@
 
 - (IBAction)toggleVolumeOpen:(id)sender
 {
-    NSLog(@"Toggle volume open");
+    DLog(@"Toggle volume open");
     
     if(isVolumeSliderOpen){
         [volumeDisplay contract];
@@ -276,7 +276,7 @@
 
 - (IBAction)startStop:(id)sender
 {
-    NSLog(@"Start stop, %i",isRecording);
+    DLog(@"Start stop, %i",isRecording);
     
     if(isRecording){
         [self stopRecordingAndAnimate:YES showEndScreen:YES];

@@ -23,14 +23,14 @@
 
 - (void)initAudio
 {
-    if(TESTMODE) NSLog(@"Init Sound Master");
+    DLog(@"Init Sound Master");
     
     audioController = [AudioController sharedAudioController];
     root = [[audioController GetNodeNetwork] GetRootNode];
     
     m_samplerNode = new SamplerNode;
     [self setChannelGain:DEFAULT_VOLUME];
-  
+    
     root->ConnectInput(0, m_samplerNode, 0);
     
     [audioController startAUGraph];
@@ -43,7 +43,7 @@
 
 -(void)stop
 {
-   [audioController stopAUGraph];
+    [audioController stopAUGraph];
 }
 
 -(SamplerBankNode *)generateBank
@@ -80,7 +80,7 @@
 {
     if(masterGain != gain){
         
-        NSLog(@"Setting channel gain to %f",gain);
+        DLog(@"Setting channel gain to %f",gain);
         
         masterGain = gain;
         m_samplerNode->SetChannelGain(masterGain, CONN_OUT);
@@ -106,7 +106,7 @@
     
     recordingFilepath = [documentsDirectory stringByAppendingPathComponent:filename];
     
-    NSLog(@"Saving to %@",recordingFilepath);
+    DLog(@"Saving to %@",recordingFilepath);
     
     FileoutNode *fileNode = new FileoutNode((char*)[recordingFilepath UTF8String], true);
     
@@ -142,13 +142,13 @@ static void cbLevel(float val, void *pObject, void *pContext) {
 }
 
 /* this has an error when done here instead of locally
--(void)releaseFileoutNode:(FileoutNode *)fileNode
-{
-    if(fileNode != NULL) {
-        delete fileNode;
-        fileNode = NULL;
-    }
-}
-*/
+ -(void)releaseFileoutNode:(FileoutNode *)fileNode
+ {
+ if(fileNode != NULL) {
+ delete fileNode;
+ fileNode = NULL;
+ }
+ }
+ */
 
 @end

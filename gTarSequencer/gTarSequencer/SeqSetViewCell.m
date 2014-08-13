@@ -148,22 +148,22 @@
     
     // Table Cells require programmatic constraints
     /*NSLayoutConstraint * bodyleading = [NSLayoutConstraint
-                                        constraintWithItem:patternContainer
-                                        attribute:NSLayoutAttributeLeading
-                                        relatedBy:NSLayoutRelationEqual
-                                        toItem: self
-                                        attribute:NSLayoutAttributeLeading
-                                        multiplier:1.0f
-                                        constant:0];
-    
-    NSLayoutConstraint * bodytrailing = [NSLayoutConstraint
-                                         constraintWithItem:patternContainer
-                                         attribute:NSLayoutAttributeTrailing
-                                         relatedBy:NSLayoutRelationEqual
-                                         toItem: self
-                                         attribute:NSLayoutAttributeTrailing
-                                         multiplier:1.0f
-                                         constant:0];*/
+     constraintWithItem:patternContainer
+     attribute:NSLayoutAttributeLeading
+     relatedBy:NSLayoutRelationEqual
+     toItem: self
+     attribute:NSLayoutAttributeLeading
+     multiplier:1.0f
+     constant:0];
+     
+     NSLayoutConstraint * bodytrailing = [NSLayoutConstraint
+     constraintWithItem:patternContainer
+     attribute:NSLayoutAttributeTrailing
+     relatedBy:NSLayoutRelationEqual
+     toItem: self
+     attribute:NSLayoutAttributeTrailing
+     multiplier:1.0f
+     constant:0];*/
     
     //[self addConstraints:@[bodyleading,bodytrailing]];
     
@@ -178,7 +178,7 @@
  */
 - (void)initMeasureViews
 {
-   if (measureViews == nil)
+    if (measureViews == nil)
     {
         measureViews = [[NSMutableArray alloc] initWithObjects:measureOne, measureTwo, measureThree, measureFour, nil];
         
@@ -258,7 +258,7 @@
 -(void)turnOnInstrumentView
 {
     
-    if(TESTMODE) NSLog(@"*** UNMUTING ***");
+    if(TESTMODE) DLog(@"*** UNMUTING ***");
     //[parent muteInstrument:self isMute:NO];
     [offMask setHidden:YES];
     if(volumeKnob && ![volumeKnob isEnabled]){
@@ -272,7 +272,7 @@
 
 -(void)turnOffInstrumentView
 {
-    if(TESTMODE) NSLog(@"*** MUTING ***");
+    if(TESTMODE) DLog(@"*** MUTING ***");
     //[parent muteInstrument:self isMute:YES];
     [offMask setHidden:NO];
     if(volumeKnob && [volumeKnob isEnabled]){
@@ -378,7 +378,7 @@
         }else{
             [self setStateForButton:queuedPatternButton state:1];
         }
-            
+        
         loopModCount++;
     }
     
@@ -437,7 +437,7 @@
     }else if(patternButton == patternD){
         
         [patternDBorder setHidden:NO];
-    
+        
     }
 }
 
@@ -460,7 +460,7 @@
     patternButton.layer.mask = bodyLayer;
     patternButton.clipsToBounds = YES;
     patternButton.layer.masksToBounds = YES;
-
+    
 }
 
 -(UIView *)drawStrokedButton:(UIButton *)patternButton withBezierPath:(UIBezierPath *)bezierPath andBorderColor:(UIColor *)borderColor
@@ -494,7 +494,7 @@
 #pragma mark Change Instrument
 - (IBAction)userDidTapInstrumentIcon:(id)sender
 {
-    NSLog(@"User did tap instrument icon for instrument %@ id %i",instrument,instrument.instrument);
+    DLog(@"User did tap instrument icon for instrument %@ id %i",instrument,instrument.instrument);
     
     [parent viewSelectedInstrument:self];
 }
@@ -503,7 +503,7 @@
 
 - (void)update
 {
-    if(TESTMODE) NSLog(@"Minimap update");
+    if(TESTMODE) DLog(@"Minimap update");
     
     // update selected pattern:
     if ( instrument.selectedPatternDidChange )
@@ -553,7 +553,7 @@
 
 - (void)fillWithMeasures:(int)newCount
 {
-    if(TESTMODE) NSLog(@"Fill with measures");
+    if(TESTMODE) DLog(@"Fill with measures");
     
     for(int i = 0; i < NUM_MEASURES; i++){
         if(i < newCount){
@@ -570,16 +570,16 @@
 
 - (void)selectPatternButton:(int)index
 {
-    if(TESTMODE) NSLog(@"Select pattern button");
+    if(TESTMODE) DLog(@"Select pattern button");
     
     UIButton * newSelection = [patternButtons objectAtIndex:index];
     
     /*if (selectedPatternButton == newSelection){
-        NSLog(@"Already set - returning");
-        return;
-    }else {
-        NSLog(@"Now updating");*/
-        [self updatePatternButton:newSelection playState:NO];
+     DLog(@"Already set - returning");
+     return;
+     }else {
+     DLog(@"Now updating");*/
+    [self updatePatternButton:newSelection playState:NO];
     //}
 }
 
@@ -617,7 +617,7 @@
 {
     [self selectNewPattern:sender];
     
-//    [self performSelector:@selector(selectNewPattern:) withObject:sender afterDelay:0.0];
+    //    [self performSelector:@selector(selectNewPattern:) withObject:sender afterDelay:0.0];
     
 }
 
@@ -628,7 +628,7 @@
     
     BOOL isPlaying = NO;
     
-    NSLog(@"SeqSet Select new pattern at %i", tappedIndex);
+    DLog(@"SeqSet Select new pattern at %i", tappedIndex);
     
     if (tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton != offButton){
         //[self turnOffInstrumentView];
@@ -665,12 +665,12 @@
 #pragma mark - Adding and Removing Measures
 
 - (IBAction)addMeasures:(id)sender {
-    NSLog(@"add a measure");
+    DLog(@"add a measure");
     [parent userDidAddMeasures:self];
 }
 
 - (IBAction)removeMeasures:(id)sender {
-    NSLog(@"remove a measure");
+    DLog(@"remove a measure");
     [parent userDidRemoveMeasures:self];
 }
 
@@ -701,7 +701,7 @@
         [volumeKnob EnableKnob];
         [volumeKnob SetValue:[instrument getAmplitude]];
         
-        NSLog(@"init volume is %f",[volumeKnob GetValue]);
+        DLog(@"init volume is %f",[volumeKnob GetValue]);
         
         offButtonDoubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enableKnobIfDisabled)];
         offButtonDoubleTap.numberOfTapsRequired = 2;
@@ -719,9 +719,9 @@
 
 - (void)drawVolumeOverlay
 {
-    NSLog(@"volume tracking began");
+    DLog(@"volume tracking began");
     isTracking = YES;
- 
+    
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     BOOL isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
     
@@ -752,7 +752,7 @@
     // overlay by adding to the main view
     UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
     [window addSubview:volumeBg];
-
+    
     [volumeKnob setHidden:YES];
 }
 
@@ -772,7 +772,7 @@
     
     [volumeKnob SetValue:[tempVolumeKnob GetValue]];
     
-    NSLog(@"new volume is %f",[volumeKnob GetValue]);
+    DLog(@"new volume is %f",[volumeKnob GetValue]);
     [instrument setAmplitude:[volumeKnob GetValue]];
     
     [volumeBg removeFromSuperview];
@@ -796,15 +796,15 @@
 
 -(void)enableKnobIfDisabled
 {
-    /*NSLog(@"Enable knob if disabled");
-    if(![volumeKnob isEnabled]){
-        NSLog(@"Enable previous button");
-        [self selectNewPattern:previousPatternButton];
-        [self turnOnInstrumentView];
-        [volumeKnob EnableKnob];
-    }*/
+    /*DLog(@"Enable knob if disabled");
+     if(![volumeKnob isEnabled]){
+     DLog(@"Enable previous button");
+     [self selectNewPattern:previousPatternButton];
+     [self turnOnInstrumentView];
+     [volumeKnob EnableKnob];
+     }*/
     
-    NSLog(@"*** enable knob if disabled");
+    DLog(@"*** enable knob if disabled");
     
     [self selectNewPattern:previousPatternButton];
     [self turnOnInstrumentView];
@@ -828,12 +828,12 @@
 
 -(void)disableKnobIfEnabled
 {
-    /*NSLog(@"Disable knob if enabled");
-    if([volumeKnob isEnabled]){
-        [self disableKnob:tempVolumeKnob];
-    }*/
+    /*DLog(@"Disable knob if enabled");
+     if([volumeKnob isEnabled]){
+     [self disableKnob:tempVolumeKnob];
+     }*/
     
-    NSLog(@"*** disable knob if enabled");
+    DLog(@"*** disable knob if enabled");
     
     [self selectNewPattern:offButton];
     [self turnOffInstrumentView];

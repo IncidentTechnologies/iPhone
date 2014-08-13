@@ -129,7 +129,7 @@
             
         }
     }
-
+    
     // Sort by date order
     if([fileLoadSet count] > 0){
         [self sortFilesByDates];
@@ -159,10 +159,10 @@
                 }
             }
             
-            NSLog(@"Max date index %i",maxDateIndex);
+            DLog(@"Max date index %i",maxDateIndex);
             newFileDateSet[i] = fileDateSet[maxDateIndex];
             newFileLoadSet[i] = fileLoadSet[maxDateIndex];
-
+            
             fileDateSet[maxDateIndex] = [NSDate distantPast];
         }
     }
@@ -176,7 +176,7 @@
 #pragma mark - Save Load Actions
 - (void)userDidLoadFile:(NSString *)filename
 {
-    NSLog(@"user did load %@",filename);
+    DLog(@"user did load %@",filename);
     
     activeSequencer = filename;
     [delegate loadFromName:filename];
@@ -186,12 +186,12 @@
 
 - (void)userDidSaveFile:(NSString *)filename
 {
-    NSLog(@"user did save as %@",filename);
+    DLog(@"user did save as %@",filename);
     
     NSString * emptyName = [filename stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if([emptyName isEqualToString:@""]){
-        NSLog(@"Error: trying to save with blank set name");
+        DLog(@"Error: trying to save with blank set name");
     }else{
         activeSequencer = filename;
         [delegate saveWithName:filename];
@@ -203,7 +203,7 @@
 - (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname
 {
     // move file to newname
-    NSLog(@"user did move %@ to %@",filename,newname);
+    DLog(@"user did move %@ to %@",filename,newname);
     
     if([activeSequencer isEqualToString:filename]){
         activeSequencer = newname;
@@ -215,12 +215,12 @@
 
 - (void)userDidDeleteFile:(NSString *)filename
 {
-    NSLog(@"user did delete as %@",filename);
+    DLog(@"user did delete as %@",filename);
     if([activeSequencer isEqualToString:filename]){
         activeSequencer = @"";
     }
     [delegate deleteWithName:filename];
-
+    
 }
 
 #pragma mark - Button Actions
@@ -249,26 +249,26 @@
 }
 
 /*
-- (IBAction)userDidSelectRename:(id)sender
-{
-    
-    NSLog(@"User did select rename");
-    
-    BOOL buttonChanged = [self setSelectedButtonTo:sender];
-    if(!buttonChanged) return;
-
-    selectMode = @"Rename";
+ - (IBAction)userDidSelectRename:(id)sender
+ {
  
-    [self showHideNewFileRow:YES];
-    [loadTable reloadData];
-    [self resetTableOffset:nil];
-    
-}
-*/
+ DLog(@"User did select rename");
+ 
+ BOOL buttonChanged = [self setSelectedButtonTo:sender];
+ if(!buttonChanged) return;
+ 
+ selectMode = @"Rename";
+ 
+ [self showHideNewFileRow:YES];
+ [loadTable reloadData];
+ [self resetTableOffset:nil];
+ 
+ }
+ */
 - (IBAction)userDidSelectSaveCurrent:(id)sender
 {
     
-    NSLog(@"User did select save current");
+    DLog(@"User did select save current");
     
     BOOL buttonChanged = [self setSelectedButtonTo:sender];
     if(!buttonChanged) return;
@@ -287,7 +287,7 @@
 
 -(IBAction)userDidSelectLoad:(id)sender
 {
-    NSLog(@"User did select load");
+    DLog(@"User did select load");
     
     BOOL buttonChanged = [self setSelectedButtonTo:sender];
     if(!buttonChanged) return;
@@ -301,7 +301,7 @@
     //fileLoadSet = tempFileLoadSet;
     [self.loadTable reloadData];
     [self resetTableOffset:nil];
-
+    
 }
 
 - (BOOL)setSelectedButtonTo:(UIButton *)button
@@ -348,13 +348,13 @@
 
 - (void)disableScroll
 {
-    if(TESTMODE) NSLog(@"disable scroll");
+    if(TESTMODE) DLog(@"disable scroll");
     loadTable.scrollEnabled = NO;
 }
 
 - (void)enableScroll
 {
-    if(TESTMODE) NSLog(@"enable scroll");
+    if(TESTMODE) DLog(@"enable scroll");
     loadTable.scrollEnabled = YES;
 }
 
@@ -410,7 +410,7 @@
     
     cell.rowid = (int)indexPath.row;
     
-    NSLog(@"Cell row id is %i",cell.rowid);
+    DLog(@"Cell row id is %i",cell.rowid);
     
     return cell;
 }
@@ -429,7 +429,7 @@
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(TESTMODE) NSLog(@"***** will begin editing row at index path");
+    if(TESTMODE) DLog(@"***** will begin editing row at index path");
     
     OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
     [cell editingDidBegin];
@@ -487,7 +487,7 @@
     [loadTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
     [loadTable reloadData];
-
+    
     if([fileLoadSet count] == 0){
         // schedule this because the table loading inevitably has a delay
         [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(showNoSetsLabel) userInfo:nil repeats:NO];
@@ -512,7 +512,7 @@
     double secondsPerWeek = 3600*24*7;
     
     NSArray * monthSet = [[NSArray alloc] initWithObjects:@"Jan",@"Feb",@"Mar",@"Apr",@"May",@"Jun",@"Jul",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec", nil];
-                        
+    
     int gapMins = gap / secondsPerMinute;
     int gapHours = gap / secondsPerHour;
     int gapDays = gap / secondsPerDay;
@@ -534,7 +534,7 @@
     }
     
     return dateString;
-
+    
 }
 
 -(void)highlightActiveSequencer
@@ -571,11 +571,11 @@
 
 -(void)deselectAllRows
 {
-    NSLog(@"Deselect all rows");
+    DLog(@"Deselect all rows");
     @synchronized(self){
         for(int i = 0; i < [loadTable numberOfRowsInSection:0]; i++){
-                NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-                [loadTable deselectRowAtIndexPath:indexPath animated:NO];
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [loadTable deselectRowAtIndexPath:indexPath animated:NO];
         }
     }
 }
@@ -584,7 +584,7 @@
 {
     NSIndexPath * cellToIgnore = [loadTable indexPathForCell:cell];
     
-    NSLog(@"Deselect all rows except %i",cellToIgnore.row);
+    DLog(@"Deselect all rows except %i",cellToIgnore.row);
     
     for(int i = 0; i < [loadTable numberOfRowsInSection:0]; i++){
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
@@ -672,7 +672,7 @@
 }
 
 - (NSString *)generateNextSetName
-{   
+{
     int customCount = 0;
     
     for(int i = 0; i < [fileLoadSet count]; i++){
@@ -708,35 +708,35 @@
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     float margin = (screenBounds.size.height == XBASE_LG) ? 54 : 43;
     /*CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    float margin = (screenBounds.size.height == XBASE_LG) ? 12 : 0;
-    
-    CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    int playWidth = 13;
-    int playX = margin+backButton.frame.size.width/2 - playWidth/2;
-    int playY = 17;
-    CGFloat playHeight = backButton.frame.size.height - 2*playY;
-    
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-    
-    CGContextSetLineWidth(context, 4.0);
-    
-    CGContextMoveToPoint(context, playX, playY);
-    CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
-    CGContextAddLineToPoint(context, playX, playY+playHeight);
-    
-    CGContextStrokePath(context);
-    
-    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
-    
-    [backButton addSubview:image];
-    
-    UIGraphicsEndImageContext();*/
+     float margin = (screenBounds.size.height == XBASE_LG) ? 12 : 0;
+     
+     CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
+     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+     
+     CGContextRef context = UIGraphicsGetCurrentContext();
+     
+     int playWidth = 13;
+     int playX = margin+backButton.frame.size.width/2 - playWidth/2;
+     int playY = 17;
+     CGFloat playHeight = backButton.frame.size.height - 2*playY;
+     
+     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+     
+     CGContextSetLineWidth(context, 4.0);
+     
+     CGContextMoveToPoint(context, playX, playY);
+     CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
+     CGContextAddLineToPoint(context, playX, playY+playHeight);
+     
+     CGContextStrokePath(context);
+     
+     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+     UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+     
+     [backButton addSubview:image];
+     
+     UIGraphicsEndImageContext();*/
     
     [backButton setImage:[UIImage imageNamed:@"Set_Icon"] forState:UIControlStateNormal];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(15, margin, 15, margin)];
@@ -784,12 +784,12 @@
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 @end

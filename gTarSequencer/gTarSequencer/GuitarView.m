@@ -39,7 +39,9 @@
 {
     if (measure == nil)
     {
-        [guitar turnOffAllLeds];
+        if(guitar.connected){
+            [guitar turnOffAllLeds];
+        }
         return;
     }
     
@@ -55,7 +57,7 @@
         [measure setUpdatePlaybandOnGuitar:NO];
     }
     
-    if(TESTMODE) NSLog(@"gv update");
+    if(TESTMODE) DLog(@"gv update");
 }
 
 - (void)setMeasure:(Measure *)newMeasure
@@ -74,16 +76,22 @@
             
             if ([measure isNoteOnAtString:s andFret:f] && !notesOn[s][f]){
                 notesOn[s][f] = YES;
-                [guitar turnOnLedAtPositionWithColorMap:GtarPositionMake(f+1, s+1)];
+                if(guitar.connected){
+                    [guitar turnOnLedAtPositionWithColorMap:GtarPositionMake(f+1, s+1)];
+                }
                 
             }else if (![measure isNoteOnAtString:s andFret:f] && notesOn[s][f]){
                 notesOn[s][f] = NO;
-                [guitar turnOffLedAtPosition:GtarPositionMake(f+1, s+1)];
+                if(guitar.connected){
+                    [guitar turnOffLedAtPosition:GtarPositionMake(f+1, s+1)];
+                }
             }
             
             if (playband == f){
-                [guitar turnOnLedAtPosition:GtarPositionMake(f+1, s+1)
+                if(guitar.connected){
+                    [guitar turnOnLedAtPosition:GtarPositionMake(f+1, s+1)
                                   withColor:GtarLedColorMake(3, 3, 3)];
+                }
             }
         }
     }
@@ -96,8 +104,10 @@
     if (whichFret >= 0){
         playband = whichFret;
         
-        [guitar turnOnLedAtPosition:GtarPositionMake(whichFret+1, 0)
+        if(guitar.connected){
+            [guitar turnOnLedAtPosition:GtarPositionMake(whichFret+1, 0)
                           withColor:GtarLedColorMake(3, 3, 3)];
+        }
     }
 }
 
@@ -114,10 +124,14 @@
     for (int i=0;i<STRINGS_ON_GTAR;i++){
         
         if ([measure isNoteOnAtString:i andFret:whichFret]){
-            [guitar turnOnLedAtPositionWithColorMap:GtarPositionMake(whichFret+1, i+1)];
+            if(guitar.connected){
+                [guitar turnOnLedAtPositionWithColorMap:GtarPositionMake(whichFret+1, i+1)];
+            }
             
         }else{
-            [guitar turnOffLedAtPosition:GtarPositionMake(whichFret+1, i+1)];
+            if(guitar.connected){
+                [guitar turnOffLedAtPosition:GtarPositionMake(whichFret+1, i+1)];
+            }
         }
     }
 }
@@ -135,7 +149,7 @@
 
 - (void)gtarNoteOn:(GtarPluck)pluck
 {
-    NSLog(@"Note played");
+    DLog(@"Note played");
     
     
     [delegate notePlayedAtString:pluck.position.string andFret:pluck.position.fret];
@@ -143,7 +157,7 @@
 
 - (void)gtarConnected
 {
-    NSLog(@"Guitar connected");
+    DLog(@"Guitar connected");
     
     
     // Turn off effects & LEDs

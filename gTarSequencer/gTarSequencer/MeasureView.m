@@ -68,7 +68,7 @@
         {148/255.0, 102/255.0, 177/255.0, 1},
         {0/255.0, 141/255.0, 218/255.0, 1},
         {43/255.0, 198/255.0, 34/255.0, 1},
-        {238/255.0, 188/255.0, 53/255.0, 1},
+        {204/255.0, 234/255.0, 0/255.0, 1},
         {234/255.0, 154/255.0, 41/255.0, 1},
         {239/255.0, 92/255.0, 53/255.0, 1}
     };
@@ -83,7 +83,7 @@
 
 - (void)update
 {
-    if(TESTMODE) NSLog(@"Measure View update");
+    if(TESTMODE) DLog(@"Measure View update");
     
     if (measure == nil)
         return;
@@ -110,7 +110,7 @@
 
 - (void)movePlayband {
     
-    if(TESTMODE)NSLog(@"Move playband");
+    if(TESTMODE)DLog(@"Move playband");
     
     if (measure.playband >= 0 && !isBlankMeasure) {
         CGRect newFrame = playbandView.frame;

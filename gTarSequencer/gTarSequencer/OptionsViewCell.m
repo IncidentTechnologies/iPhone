@@ -76,7 +76,7 @@
     fileLoad.layer.borderColor = [UIColor whiteColor].CGColor;
     fileLoad.layer.borderWidth = 2.0f;
     fileLoad.layer.cornerRadius = 20;
-
+    
     // Style and setup fileName field
     [fileName setHidden:YES];
     fileName.delegate = self;
@@ -140,7 +140,7 @@
     
     if(selected){
         
-        NSLog(@"Selecting cell at row %i",rowid);
+        DLog(@"Selecting cell at row %i",rowid);
         
         self.contentView.backgroundColor = darkGrayColor;
         self.backgroundColor = darkGrayColor;
@@ -153,7 +153,7 @@
         // Modal changes
         if([parent.selectMode isEqualToString:@"SaveCurrent"] && isRenamable){
             
-            NSLog(@"Selected cell is Renamable");
+            DLog(@"Selected cell is Renamable");
             
             [fileText setHidden:YES];
             [fileName setHidden:NO];
@@ -171,7 +171,7 @@
         
         if(!isEditingMode){
             
-            if(TESTMODE) NSLog(@"Deselecting cell %i",rowid);
+            if(TESTMODE) DLog(@"Deselecting cell %i",rowid);
             
             [self endNameEditing];
             
@@ -191,7 +191,7 @@
             [fileName setHidden:YES];
         }else{
             
-            if(TESTMODE) NSLog(@"*** Not deselecting cell %i",rowid);
+            if(TESTMODE) DLog(@"*** Not deselecting cell %i",rowid);
         }
         
     }
@@ -214,7 +214,7 @@
 {
     if([parent.selectMode isEqualToString:@"Load"]){
         
-        NSLog(@"Load file %@",fileText.text);
+        DLog(@"Load file %@",fileText.text);
         
         // Load
         [parent userDidLoadFile:fileText.text];
@@ -233,7 +233,7 @@
         [self endNameEditing];
         
         [parent deselectAllRows];
-    
+        
     }
 }
 
@@ -252,13 +252,13 @@
 #pragma mark - Editing
 -(void)editingDidBegin
 {
-    NSLog(@"Editing cell mode began");
+    DLog(@"Editing cell mode began");
     isEditingMode = YES;
 }
 
 -(void)editingDidEnd
 {
-    NSLog(@"Editing cell mode ended");
+    DLog(@"Editing cell mode ended");
     
     isEditingMode = NO;
 }
@@ -285,7 +285,7 @@
 
 - (void)initFileAttributedString
 {
-    NSLog(@"Init file attributed string");
+    DLog(@"Init file attributed string");
     
     if(![fileName.text isEqualToString:DEFAULT_FILE_TEXT] && ![fileName.text isEqualToString:@""]){
         // create attributed string
@@ -311,7 +311,7 @@
 - (void)saveFieldDidChange:(id)sender
 {
     int maxLength = 30;
-
+    
     // check length
     if([fileName.text length] > maxLength){
         fileName.text = [fileName.text substringToIndex:maxLength];
@@ -359,7 +359,7 @@
 {
     isNameEditing = YES;
     
-    NSLog(@"Begin name editing");
+    DLog(@"Begin name editing");
     
     // This function may be called while already open for editing
     if(![fileName isFirstResponder]){
@@ -378,7 +378,7 @@
 {
     isNameEditing = NO;
     
-    NSLog(@"End name editing");
+    DLog(@"End name editing");
     
     // hide keyboard
     if([fileName isFirstResponder]){
@@ -393,7 +393,7 @@
 
 -(void)resetFileNameIfBlank
 {
-    if(TESTMODE) NSLog(@"Reset filename if blank");
+    if(TESTMODE) DLog(@"Reset filename if blank");
     
     NSString * nameString = fileName.text;
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -422,17 +422,17 @@
 
 - (void)checkIfNameReady
 {
-    NSLog(@"Check if name ready");
+    DLog(@"Check if name ready");
     
-     BOOL isReady = YES;
-     NSString * nameString = fileName.text;
-     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-     
-     if([emptyName isEqualToString:@""] || [nameString isEqualToString:DEFAULT_FILE_TEXT] || [nameString isEqualToString:DEFAULT_SET_NAME]){
-         isReady = NO;
-     }else{
-         isReady = YES;
-     }
+    BOOL isReady = YES;
+    NSString * nameString = fileName.text;
+    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if([emptyName isEqualToString:@""] || [nameString isEqualToString:DEFAULT_FILE_TEXT] || [nameString isEqualToString:DEFAULT_SET_NAME]){
+        isReady = NO;
+    }else{
+        isReady = YES;
+    }
     
     if([parent isDuplicateFilename:nameString]){
         isReady = NO;
@@ -486,15 +486,15 @@
         CGContextMoveToPoint(context, loadArrowX+loadArrowWidth/2, topOfArrow);
         CGContextAddLineToPoint(context, loadArrowX+loadArrowWidth/2, loadArrowY);
         CGContextStrokePath(context);
-    
+        
         UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
         
         [fileLoad setImage:newImage forState:UIControlStateNormal];
-
+        
         UIGraphicsEndImageContext();
         
         [fileLoad setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-
+        
     }else{
         [fileLoad setImage:[UIImage imageNamed:@"Save_Icon"] forState:UIControlStateNormal];
         [fileLoad setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
@@ -506,7 +506,7 @@
 {
     // ensure selected
     if(!self.isSelected){
-        NSLog(@"****** force select");
+        DLog(@"****** force select");
         [self setSelected:YES animated:NO];
     }
     

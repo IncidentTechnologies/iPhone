@@ -76,7 +76,7 @@
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
-    NSLog(@"######## LOW MEMORY #########");
+    DLog(@"######## LOW MEMORY #########");
 }
 
 @end

@@ -55,7 +55,7 @@
     
     // Local instrument data
     Instrument * currentInst;
-
+    
     int measureCounts[NUM_PATTERNS];
     int declaredActiveMeasures[NUM_PATTERNS];
     

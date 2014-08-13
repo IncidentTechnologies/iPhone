@@ -15,13 +15,9 @@
 #define FIRST_FRET 0
 #define LAST_FRET 15
 
-//extern GtarController * guitar;
-
 @interface Instrument : NSObject <NSCoding>
 {
     BOOL isSelected;
-    
-    //SoundMaker * audio;
     
 }
 

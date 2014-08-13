@@ -10,7 +10,7 @@
 #import "SoundMaster_.mm"
 
 @interface CustomSoundRecorder(){
-
+    
     SoundMaster * soundMaster;
     
     SamplerBankNode * m_sampleBankNode;
@@ -38,7 +38,7 @@
         
         NSURL * outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
         
-        NSLog(@"Output file URL is %@",outputFileURL);
+        DLog(@"Output file URL is %@",outputFileURL);
         
         // Setup audio session
         AVAudioSession * session = [AVAudioSession sharedInstance];
@@ -68,10 +68,10 @@
 
 -(void)startRecord
 {
-
+    
     if(!recorder.recording){
         
-        NSLog(@"Recording began");
+        DLog(@"Recording began");
         
         AVAudioSession * session = [AVAudioSession sharedInstance];
         [session setActive:YES error:nil];
@@ -81,7 +81,7 @@
         
     }else{
         
-        NSLog(@"Recording paused");
+        DLog(@"Recording paused");
         
         // Pause recording
         [recorder pause];
@@ -91,7 +91,7 @@
 -(void)stopRecord
 {
     
-    NSLog(@"Recording stopped");
+    DLog(@"Recording stopped");
     if(recorder.recording){
         [recorder stop];
         
@@ -120,9 +120,9 @@
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
     if(flag){
-        NSLog(@"Recording finished with success");
+        DLog(@"Recording finished with success");
     }else{
-        NSLog(@"Recording finished with no success");
+        DLog(@"Recording finished with no success");
     }
 }
 
@@ -132,7 +132,7 @@
 {
     if(!recorder.recording){
         
-        NSLog(@"Playback started");
+        DLog(@"Playback started");
         
         m_sampleBankNode->TriggerSample(0);
     }
@@ -140,14 +140,14 @@
 
 -(void)pausePlayback:(float)ms
 {
-    NSLog(@"Pause playback at %f",ms);
+    DLog(@"Pause playback at %f",ms);
     timePaused = ms;
     m_sampNode->Stop();
 }
 
 -(void)unpausePlayback
 {
-    NSLog(@"Unpause playback from %f",timePaused);
+    DLog(@"Unpause playback from %f",timePaused);
     m_sampNode->Resume();
 }
 
@@ -155,7 +155,7 @@
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    //NSLog(@"Playback finished");
+    //DLog(@"Playback finished");
     //[delegate playbackDidEnd];
 }
 
@@ -163,7 +163,7 @@
 - (void)renameRecordingToFilename:(NSString *)filename;
 {
     // Create a subfolder Samples/{Category} if it doesn't exist yet
-    NSLog(@"Moving file from %@ to %@.m4a",defaultFilename,filename);
+    DLog(@"Moving file from %@ to %@.m4a",defaultFilename,filename);
     
     NSString * newFilename = filename;
     newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
@@ -183,7 +183,7 @@
     BOOL result = [fm moveItemAtPath:currentPath toPath:newPath error:&err];
     
     if(!result)
-        NSLog(@"Error moving");
+        DLog(@"Error moving");
     
     [self releaseAudioBank];
 }
@@ -201,13 +201,13 @@
     NSFileManager * fm = [[NSFileManager alloc] init];
     
     [fm createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
-
+    
     NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newFilename];
     
     char * pathName = (char *)malloc(sizeof(char) * [newPath length]);
     pathName = (char *) [newPath UTF8String];
     
-    NSLog(@"Save path is %@",newPath);
+    DLog(@"Save path is %@",newPath);
     
     m_sampNode->SaveToFile(pathName, YES);
     
@@ -216,7 +216,7 @@
     NSArray * contents = [fm contentsOfDirectoryAtPath:directory error:&err];
     
     for(int i = 0; i < [contents count]; i++){
-        NSLog(@"%@",contents[i]);
+        DLog(@"%@",contents[i]);
     }
     
     [self releaseAudioBank];
@@ -227,7 +227,7 @@
     if(filename != nil && [filename length] > 0){
         
         // Create a subfolder Samples/{Category} if it doesn't exist yet
-        NSLog(@"Deleting file %@.m4a",filename);
+        DLog(@"Deleting file %@.m4a",filename);
         
         NSString * newFilename = filename;
         newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
@@ -243,14 +243,14 @@
         BOOL result = [fm removeItemAtPath:newPath error:&err];
         
         if(!result)
-            NSLog(@"Error deleting");
-            
+            DLog(@"Error deleting");
+        
     }else{
         
-        NSLog(@"Trying to delete a nil file");
+        DLog(@"Trying to delete a nil file");
         
     }
-
+    
 }
 
 #pragma mark - Audio Controller Sampler
@@ -283,7 +283,7 @@
 -(void)finishAudioInitAfterBufferFlush
 {
     
-
+    
 }
 
 
@@ -338,7 +338,7 @@
     
     float sampleRelativeLength = sampleEnd - sampleStart;
     
-    NSLog(@"sampleRelativeLength is now %f with sampleEnd %f and sampleStart %f",sampleRelativeLength,sampleEnd,sampleStart);
+    DLog(@"sampleRelativeLength is now %f with sampleEnd %f and sampleStart %f",sampleRelativeLength,sampleEnd,sampleStart);
     
     if(sampleRelativeLength <= 0){
         return [self getSampleLength]-sampleStart;

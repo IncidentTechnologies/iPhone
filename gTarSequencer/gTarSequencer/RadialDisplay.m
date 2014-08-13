@@ -206,12 +206,12 @@
 
 - (void)printArray:(NSArray *)array
 {
-    NSLog(@"Angles to fill: \n");
+    DLog(@"Angles to fill: \n");
     for (NSNumber * num in array )
     {
-        NSLog(@"%f", [num doubleValue]);
+        DLog(@"%f", [num doubleValue]);
     }
-    NSLog(@"\n");
+    DLog(@"\n");
 }
 
 #pragma mark Gap Functions
@@ -283,34 +283,34 @@
     
     // Add UILabels labeling min, max, and medium values:
     /*CGFloat labelWidth = 30;
-    CGFloat labelHeight = 20;
-    CGFloat labelYOffset = 240;
-    CGFloat labelXOffset = outline.frame.size.width/2-230;
-    CGRect frame;
-    
-    frame = CGRectMake(labelXOffset, labelYOffset, labelWidth, labelHeight);
-    bottomLabel = [[UILabel alloc] initWithFrame:frame];
-    bottomLabel.text = @"60";
-    bottomLabel.textColor = [UIColor whiteColor];
-    bottomLabel.backgroundColor = [UIColor clearColor];
-    bottomLabel.textAlignment = NSTextAlignmentCenter;
-    [outline addSubview:bottomLabel];
-    
-    frame = CGRectMake(outline.frame.size.width/2 - labelWidth/2, 4, labelWidth, labelHeight);
-    middleLabel = [[UILabel alloc] initWithFrame:frame];
-    middleLabel.text = @"120";
-    middleLabel.textColor = [UIColor whiteColor];
-    middleLabel.backgroundColor = [UIColor clearColor];
-    middleLabel.textAlignment = NSTextAlignmentCenter;
-    [outline addSubview:middleLabel];
-    
-    frame = CGRectMake(outline.frame.size.width - labelXOffset - labelWidth, labelYOffset, labelWidth, labelHeight);
-    topLabel = [[UILabel alloc] initWithFrame:frame];
-    topLabel.text = @"180";
-    topLabel.textColor = [UIColor whiteColor];
-    topLabel.backgroundColor = [UIColor clearColor];
-    topLabel.textAlignment = NSTextAlignmentCenter;
-    [outline addSubview:topLabel];*/
+     CGFloat labelHeight = 20;
+     CGFloat labelYOffset = 240;
+     CGFloat labelXOffset = outline.frame.size.width/2-230;
+     CGRect frame;
+     
+     frame = CGRectMake(labelXOffset, labelYOffset, labelWidth, labelHeight);
+     bottomLabel = [[UILabel alloc] initWithFrame:frame];
+     bottomLabel.text = @"60";
+     bottomLabel.textColor = [UIColor whiteColor];
+     bottomLabel.backgroundColor = [UIColor clearColor];
+     bottomLabel.textAlignment = NSTextAlignmentCenter;
+     [outline addSubview:bottomLabel];
+     
+     frame = CGRectMake(outline.frame.size.width/2 - labelWidth/2, 4, labelWidth, labelHeight);
+     middleLabel = [[UILabel alloc] initWithFrame:frame];
+     middleLabel.text = @"120";
+     middleLabel.textColor = [UIColor whiteColor];
+     middleLabel.backgroundColor = [UIColor clearColor];
+     middleLabel.textAlignment = NSTextAlignmentCenter;
+     [outline addSubview:middleLabel];
+     
+     frame = CGRectMake(outline.frame.size.width - labelXOffset - labelWidth, labelYOffset, labelWidth, labelHeight);
+     topLabel = [[UILabel alloc] initWithFrame:frame];
+     topLabel.text = @"180";
+     topLabel.textColor = [UIColor whiteColor];
+     topLabel.backgroundColor = [UIColor clearColor];
+     topLabel.textAlignment = NSTextAlignmentCenter;
+     [outline addSubview:topLabel];*/
 }
 
 - (void)setTempo:(NSString *)value

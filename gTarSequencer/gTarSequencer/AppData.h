@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "TestFlightSDK3.0.0/TestFlight.h"
+
+#ifdef DEBUG
+#define DLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#define DLog( s, ... )
+#endif
 
 #define TESTMODE 0
 #define CUSTOMINSTRUMENT 1

@@ -198,7 +198,7 @@
 		6D126A2619706F5E00A2A612 /* Trumpet_G#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A1A19706F5E00A2A612 /* Trumpet_G#.mp3 */; };
 		6D126A33197071D400A2A612 /* Pluck_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A27197071D400A2A612 /* Pluck_A.mp3 */; };
 		6D126A34197071D400A2A612 /* Pluck_A#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A28197071D400A2A612 /* Pluck_A#.mp3 */; };
-		6D126A35197071D400A2A612 /* Plucked_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A29197071D400A2A612 /* Plucked_B.mp3 */; };
+		6D126A35197071D400A2A612 /* Pluck_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A29197071D400A2A612 /* Pluck_B.mp3 */; };
 		6D126A36197071D400A2A612 /* Pluck_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A2A197071D400A2A612 /* Pluck_C.mp3 */; };
 		6D126A37197071D400A2A612 /* Pluck_C#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A2B197071D400A2A612 /* Pluck_C#.mp3 */; };
 		6D126A38197071D400A2A612 /* Pluck_D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A2C197071D400A2A612 /* Pluck_D.mp3 */; };
@@ -287,6 +287,13 @@
 		6DAD2B3E18CFA0CE00228F08 /* SoundMaster_.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */; };
 		6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAF30D718D2207700036958 /* Icon_Trumpet.png */; };
 		6DAF30DC18D2468500036958 /* TutorialViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAF30DB18D2468500036958 /* TutorialViewController.mm */; };
+		6DC78A01199BFEC5006B14F5 /* NSSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A00199BFEC5006B14F5 /* NSSampler.m */; };
+		6DC78A04199BFED1006B14F5 /* NSSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A03199BFED1006B14F5 /* NSSample.m */; };
+		6DC78A07199BFEF7006B14F5 /* NSSequence.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A06199BFEF7006B14F5 /* NSSequence.mm */; };
+		6DC78A0C199C008C006B14F5 /* NSTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A0B199C008C006B14F5 /* NSTrack.m */; };
+		6DC78A0F199C0099006B14F5 /* NSInstrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A0E199C0099006B14F5 /* NSInstrument.m */; };
+		6DC78A12199C00A9006B14F5 /* NSPattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A11199C00A9006B14F5 /* NSPattern.m */; };
+		6DC78A15199C00C3006B14F5 /* NSNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A14199C00C3006B14F5 /* NSNote.m */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DEAB4BA18D78FF800833D9C /* Rock_Closed Hat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB45D18D78FF700833D9C /* Rock_Closed Hat.mp3 */; };
@@ -677,7 +684,7 @@
 		6D126A1A19706F5E00A2A612 /* Trumpet_G#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Trumpet_G#.mp3"; path = "gTarSequencer/Resources/Audio/Samples/Melodic/Winds/Trumpet/Trumpet_G#.mp3"; sourceTree = SOURCE_ROOT; };
 		6D126A27197071D400A2A612 /* Pluck_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Pluck_A.mp3; path = gTarSequencer/Resources/Audio/Samples/Melodic/Synths/Pluck/Pluck_A.mp3; sourceTree = SOURCE_ROOT; };
 		6D126A28197071D400A2A612 /* Pluck_A#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Pluck_A#.mp3"; path = "gTarSequencer/Resources/Audio/Samples/Melodic/Synths/Pluck/Pluck_A#.mp3"; sourceTree = SOURCE_ROOT; };
-		6D126A29197071D400A2A612 /* Plucked_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Plucked_B.mp3; path = gTarSequencer/Resources/Audio/Samples/Melodic/Synths/Pluck/Plucked_B.mp3; sourceTree = SOURCE_ROOT; };
+		6D126A29197071D400A2A612 /* Pluck_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Pluck_B.mp3; path = gTarSequencer/Resources/Audio/Samples/Melodic/Synths/Pluck/Pluck_B.mp3; sourceTree = SOURCE_ROOT; };
 		6D126A2A197071D400A2A612 /* Pluck_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Pluck_C.mp3; path = gTarSequencer/Resources/Audio/Samples/Melodic/Synths/Pluck/Pluck_C.mp3; sourceTree = SOURCE_ROOT; };
 		6D126A2B197071D400A2A612 /* Pluck_C#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Pluck_C#.mp3"; path = "gTarSequencer/Resources/Audio/Samples/Melodic/Synths/Pluck/Pluck_C#.mp3"; sourceTree = SOURCE_ROOT; };
 		6D126A2C197071D400A2A612 /* Pluck_D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Pluck_D.mp3; path = gTarSequencer/Resources/Audio/Samples/Melodic/Synths/Pluck/Pluck_D.mp3; sourceTree = SOURCE_ROOT; };
@@ -804,6 +811,20 @@
 		6DAF30DA18D2468500036958 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
 		6DAF30DB18D2468500036958 /* TutorialViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TutorialViewController.mm; sourceTree = "<group>"; };
 		6DC5013D18EF72E900385472 /* SoundCloudUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoundCloudUI.xcodeproj; path = ../CocoaSoundCloudUI/SoundCloudUI.xcodeproj; sourceTree = "<group>"; };
+		6DC789FF199BFEC5006B14F5 /* NSSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSampler.h; sourceTree = "<group>"; };
+		6DC78A00199BFEC5006B14F5 /* NSSampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSampler.m; sourceTree = "<group>"; };
+		6DC78A02199BFED1006B14F5 /* NSSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSample.h; sourceTree = "<group>"; };
+		6DC78A03199BFED1006B14F5 /* NSSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSample.m; sourceTree = "<group>"; };
+		6DC78A05199BFEF7006B14F5 /* NSSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSequence.h; sourceTree = "<group>"; };
+		6DC78A06199BFEF7006B14F5 /* NSSequence.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSSequence.mm; sourceTree = "<group>"; };
+		6DC78A0A199C008C006B14F5 /* NSTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTrack.h; sourceTree = "<group>"; };
+		6DC78A0B199C008C006B14F5 /* NSTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTrack.m; sourceTree = "<group>"; };
+		6DC78A0D199C0099006B14F5 /* NSInstrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSInstrument.h; sourceTree = "<group>"; };
+		6DC78A0E199C0099006B14F5 /* NSInstrument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSInstrument.m; sourceTree = "<group>"; };
+		6DC78A10199C00A9006B14F5 /* NSPattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPattern.h; sourceTree = "<group>"; };
+		6DC78A11199C00A9006B14F5 /* NSPattern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPattern.m; sourceTree = "<group>"; };
+		6DC78A13199C00C3006B14F5 /* NSNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNote.h; sourceTree = "<group>"; };
+		6DC78A14199C00C3006B14F5 /* NSNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNote.m; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6DEAB45D18D78FF700833D9C /* Rock_Closed Hat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Rock_Closed Hat.mp3"; sourceTree = "<group>"; };
@@ -1003,13 +1024,10 @@
 		580A52181864F7FC0077240B /* SeqSetViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5840858A18653AF900BFF3C5 /* SeqSetViewCell */,
 				5894D618186505BD00849C71 /* SeqSetViewController.h */,
 				5894D619186505BD00849C71 /* SeqSetViewController.mm */,
 				5840858518652D9000BFF3C5 /* SeqSetView.xib */,
-				5840858A18653AF900BFF3C5 /* SeqSetViewCell */,
-				58B4D3CA186E1ECC0035D9E5 /* Instrument */,
-				5805D044188DAED7000832A9 /* CustomInstrumentSelector */,
-				58547AEC186CD6B4003638EF /* ScrollingSelector */,
 			);
 			name = SeqSetViewController;
 			sourceTree = "<group>";
@@ -1062,7 +1080,6 @@
 				58429A1A18A1C09300BDD09B /* InstrumentViewController.m */,
 				6DFDB02318C0346B004D573B /* InstrumentViewController_4.xib */,
 				58429A1718A1BD6A00BDD09B /* InstrumentViewController.xib */,
-				6D813EC618DA802900D29F48 /* VolumeKnobView */,
 			);
 			name = InstrumentViewController;
 			sourceTree = "<group>";
@@ -1122,8 +1139,6 @@
 				58868ED8187619ED00B469C2 /* PlayControlViewController.m */,
 				6DFDB01F18C0278D004D573B /* BottomBar_4.xib */,
 				58868ED9187619ED00B469C2 /* BottomBar.xib */,
-				58CA4E6A18A1749F0026D83C /* Volume */,
-				58CA4E6B18A174AF0026D83C /* Tempo */,
 			);
 			name = BottomBarViewController;
 			sourceTree = "<group>";
@@ -1139,44 +1154,43 @@
 			name = OptionsViewCell;
 			sourceTree = "<group>";
 		};
-		58B4D3CA186E1ECC0035D9E5 /* Instrument */ = {
+		58B4D3CA186E1ECC0035D9E5 /* SequenceModel */ = {
 			isa = PBXGroup;
 			children = (
-				58B4D3C7186E1EC80035D9E5 /* Instrument.h */,
-				58B4D3C8186E1EC80035D9E5 /* Instrument.m */,
-				58B4D3CE186E1F570035D9E5 /* Pattern.h */,
-				58B4D3CF186E1F570035D9E5 /* Pattern.m */,
-				58B4D3D1186E1F7F0035D9E5 /* Measure.h */,
-				58B4D3D2186E1F7F0035D9E5 /* Measure.m */,
-				585916FC18774790002C21B9 /* MeasureView.h */,
-				585916FD18774791002C21B9 /* MeasureView.m */,
-				5811AB47187B95BA00FC0BD2 /* SEQNote.h */,
-				5811AB48187B95BA00FC0BD2 /* SEQNote.m */,
-				58B4D3CB186E1F210035D9E5 /* SoundMaker.h */,
-				58B4D3CC186E1F210035D9E5 /* SoundMaker.mm */,
-				6DAD2B3918CF9B5500228F08 /* SoundMaster.h */,
-				6DAD2B3A18CF9B5500228F08 /* SoundMaster.mm */,
-				6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */,
+				6DC78A05199BFEF7006B14F5 /* NSSequence.h */,
+				6DC78A06199BFEF7006B14F5 /* NSSequence.mm */,
+				6DC78A0A199C008C006B14F5 /* NSTrack.h */,
+				6DC78A0B199C008C006B14F5 /* NSTrack.m */,
+				6DC78A0D199C0099006B14F5 /* NSInstrument.h */,
+				6DC78A0E199C0099006B14F5 /* NSInstrument.m */,
+				6DC789FF199BFEC5006B14F5 /* NSSampler.h */,
+				6DC78A00199BFEC5006B14F5 /* NSSampler.m */,
+				6DC78A02199BFED1006B14F5 /* NSSample.h */,
+				6DC78A03199BFED1006B14F5 /* NSSample.m */,
+				6DC78A10199C00A9006B14F5 /* NSPattern.h */,
+				6DC78A11199C00A9006B14F5 /* NSPattern.m */,
+				6DC78A13199C00C3006B14F5 /* NSNote.h */,
+				6DC78A14199C00C3006B14F5 /* NSNote.m */,
 			);
-			name = Instrument;
+			name = SequenceModel;
 			sourceTree = "<group>";
 		};
-		58CA4E6A18A1749F0026D83C /* Volume */ = {
+		58CA4E6A18A1749F0026D83C /* VolumeDisplay */ = {
 			isa = PBXGroup;
 			children = (
 				58CA4E6D18A174EA0026D83C /* VolumeDisplay.h */,
 				58CA4E6E18A174EA0026D83C /* VolumeDisplay.mm */,
 			);
-			name = Volume;
+			name = VolumeDisplay;
 			sourceTree = "<group>";
 		};
-		58CA4E6B18A174AF0026D83C /* Tempo */ = {
+		58CA4E6B18A174AF0026D83C /* TempoDisplay */ = {
 			isa = PBXGroup;
 			children = (
 				58547AE1186CD52F003638EF /* RadialButton */,
 				58547AE5186CD5C2003638EF /* RadialDisplay */,
 			);
-			name = Tempo;
+			name = TempoDisplay;
 			sourceTree = "<group>";
 		};
 		58CA4E7F18A19C940026D83C /* LeftNavigatorViewController */ = {
@@ -1272,6 +1286,10 @@
 				587B6EBA1885E6D80071BE15 /* AppData.h */,
 				58D6171C1863B8D7001EB327 /* AppDelegate.h */,
 				58D6171D1863B8D7001EB327 /* AppDelegate.m */,
+				6DC789FA199BF933006B14F5 /* UIWidgets */,
+				6DC789FB199BFA23006B14F5 /* SoundMaster */,
+				6DC78A08199C0062006B14F5 /* SequenceArchaicModel */,
+				58B4D3CA186E1ECC0035D9E5 /* SequenceModel */,
 				58D617561863BD81001EB327 /* LoadingViewController */,
 				58D6960F1864D23100113AF2 /* SequencerViewController */,
 				58D617251863B8D7001EB327 /* Images.xcassets */,
@@ -1349,7 +1367,6 @@
 				580A52181864F7FC0077240B /* SeqSetViewController */,
 				6D44A44F18B58A3A00992D3D /* InfoViewController */,
 				6DAF30D918D2466600036958 /* TutorialViewController */,
-				584085921868C2F900BFF3C5 /* GuitarView */,
 			);
 			name = SequencerViewController;
 			sourceTree = "<group>";
@@ -1357,10 +1374,10 @@
 		58F4B94618983B6E0071609B /* OptionsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				58B1BE2518AD522200A3C0CC /* OptionsViewCell */,
 				58F4B94F189849B90071609B /* OptionsViewController.h */,
 				58F4B950189849BA0071609B /* OptionsViewController.m */,
 				588BF9DF18AC4F370086E816 /* OptionsView.xib */,
-				58B1BE2518AD522200A3C0CC /* OptionsViewCell */,
 			);
 			name = OptionsViewController;
 			sourceTree = "<group>";
@@ -1439,7 +1456,7 @@
 			children = (
 				6D126A27197071D400A2A612 /* Pluck_A.mp3 */,
 				6D126A28197071D400A2A612 /* Pluck_A#.mp3 */,
-				6D126A29197071D400A2A612 /* Plucked_B.mp3 */,
+				6D126A29197071D400A2A612 /* Pluck_B.mp3 */,
 				6D126A2A197071D400A2A612 /* Pluck_C.mp3 */,
 				6D126A2B197071D400A2A612 /* Pluck_C#.mp3 */,
 				6D126A2C197071D400A2A612 /* Pluck_D.mp3 */,
@@ -1598,6 +1615,48 @@
 				6DC5014518EF72E900385472 /* SoundCloudUI.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6DC789FA199BF933006B14F5 /* UIWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				584085921868C2F900BFF3C5 /* GuitarView */,
+				5805D044188DAED7000832A9 /* CustomInstrumentSelector */,
+				58547AEC186CD6B4003638EF /* ScrollingSelector */,
+				6D813EC618DA802900D29F48 /* VolumeKnobView */,
+				58CA4E6A18A1749F0026D83C /* VolumeDisplay */,
+				58CA4E6B18A174AF0026D83C /* TempoDisplay */,
+			);
+			name = UIWidgets;
+			sourceTree = "<group>";
+		};
+		6DC789FB199BFA23006B14F5 /* SoundMaster */ = {
+			isa = PBXGroup;
+			children = (
+				58B4D3CB186E1F210035D9E5 /* SoundMaker.h */,
+				58B4D3CC186E1F210035D9E5 /* SoundMaker.mm */,
+				6DAD2B3918CF9B5500228F08 /* SoundMaster.h */,
+				6DAD2B3A18CF9B5500228F08 /* SoundMaster.mm */,
+				6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */,
+			);
+			name = SoundMaster;
+			sourceTree = "<group>";
+		};
+		6DC78A08199C0062006B14F5 /* SequenceArchaicModel */ = {
+			isa = PBXGroup;
+			children = (
+				58B4D3C7186E1EC80035D9E5 /* Instrument.h */,
+				58B4D3C8186E1EC80035D9E5 /* Instrument.m */,
+				58B4D3CE186E1F570035D9E5 /* Pattern.h */,
+				58B4D3CF186E1F570035D9E5 /* Pattern.m */,
+				58B4D3D1186E1F7F0035D9E5 /* Measure.h */,
+				58B4D3D2186E1F7F0035D9E5 /* Measure.m */,
+				585916FC18774790002C21B9 /* MeasureView.h */,
+				585916FD18774791002C21B9 /* MeasureView.m */,
+				5811AB47187B95BA00FC0BD2 /* SEQNote.h */,
+				5811AB48187B95BA00FC0BD2 /* SEQNote.m */,
+			);
+			name = SequenceArchaicModel;
 			sourceTree = "<group>";
 		};
 		6DEAB42618D78FF700833D9C /* Melodic */ = {
@@ -2243,7 +2302,7 @@
 				58D617671863BF5E001EB327 /* Sequence2.png in Resources */,
 				6D12695C19706B0F00A2A612 /* Piano_C#.mp3 in Resources */,
 				6DEAB50718D7BB7C00833D9C /* Hand Drum_Djembe High.mp3 in Resources */,
-				6D126A35197071D400A2A612 /* Plucked_B.mp3 in Resources */,
+				6D126A35197071D400A2A612 /* Pluck_B.mp3 in Resources */,
 				6D126A521970720900A2A612 /* Mini Bass_E.mp3 in Resources */,
 				6DEAB4C218D78FF800833D9C /* 808_Kick.mp3 in Resources */,
 				6DEAB4C018D78FF800833D9C /* 808_Clap.mp3 in Resources */,
@@ -2384,11 +2443,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DC78A07199BFEF7006B14F5 /* NSSequence.mm in Sources */,
 				58D617241863B8D7001EB327 /* LoadingViewController.m in Sources */,
 				6DAD2B3B18CF9B5500228F08 /* SoundMaster.mm in Sources */,
 				5840858D18653B5C00BFF3C5 /* SeqSetViewCell.m in Sources */,
 				584085951868C33700BFF3C5 /* GuitarView.m in Sources */,
 				58CA4E7D18A19C8A0026D83C /* LeftNavigatorViewController.m in Sources */,
+				6DC78A01199BFEC5006B14F5 /* NSSampler.m in Sources */,
 				6DAD2B3E18CFA0CE00228F08 /* SoundMaster_.mm in Sources */,
 				58547AE8186CD5EF003638EF /* RadialDisplay.m in Sources */,
 				6DA724B318E25B0700872705 /* RecordShareViewController.mm in Sources */,
@@ -2396,6 +2457,7 @@
 				6D813EC918DA804100D29F48 /* VolumeKnobView.m in Sources */,
 				58B4D3D0186E1F570035D9E5 /* Pattern.m in Sources */,
 				58CA4E6F18A174EA0026D83C /* VolumeDisplay.mm in Sources */,
+				6DC78A0C199C008C006B14F5 /* NSTrack.m in Sources */,
 				585916FE18774791002C21B9 /* MeasureView.m in Sources */,
 				58B1BE2A18AD52AB00A3C0CC /* OptionsViewCell.m in Sources */,
 				5811AB49187B95BA00FC0BD2 /* SEQNote.m in Sources */,
@@ -2407,12 +2469,16 @@
 				5894D61A186505BD00849C71 /* SeqSetViewController.mm in Sources */,
 				58547AE4186CD55C003638EF /* RadialButton.m in Sources */,
 				58F4B951189849BA0071609B /* OptionsViewController.m in Sources */,
+				6DC78A15199C00C3006B14F5 /* NSNote.m in Sources */,
 				58547AEB186CD6AF003638EF /* ScrollingSelector.m in Sources */,
+				6DC78A12199C00A9006B14F5 /* NSPattern.m in Sources */,
 				6D44A45718B58C0000992D3D /* InfoViewController.m in Sources */,
 				58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */,
 				6DAF30DC18D2468500036958 /* TutorialViewController.mm in Sources */,
 				58D6171E1863B8D7001EB327 /* AppDelegate.m in Sources */,
 				58868EDA187619ED00B469C2 /* PlayControlViewController.m in Sources */,
+				6DC78A04199BFED1006B14F5 /* NSSample.m in Sources */,
+				6DC78A0F199C0099006B14F5 /* NSInstrument.m in Sources */,
 				58429A1B18A1C09300BDD09B /* InstrumentViewController.m in Sources */,
 				58D6960D1864D20A00113AF2 /* SequencerViewController.m in Sources */,
 				58D6171A1863B8D7001EB327 /* main.m in Sources */,
@@ -2582,7 +2648,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Sequence;
-				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+				PROVISIONING_PROFILE = "BF958B3A-EC1E-46FE-A39B-BB92E6CDF0E9";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2619,7 +2685,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Sequence;
-				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+				PROVISIONING_PROFILE = "BF958B3A-EC1E-46FE-A39B-BB92E6CDF0E9";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "";

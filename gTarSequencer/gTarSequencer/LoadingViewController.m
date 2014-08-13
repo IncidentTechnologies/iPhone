@@ -29,13 +29,13 @@
 // Initialize and trigger the animation
 - (void)viewDidAppear:(BOOL)animated
 {
-
+    
     // Get dimensions
     float y = [[UIScreen mainScreen] bounds].size.width;
     float x = [[UIScreen mainScreen] bounds].size.height;
     
     [self initAnimation:x y:y];
-
+    
 }
 
 // Animation initialization
@@ -51,17 +51,17 @@
     
     // Prepare animation
     imageView.animationImages = [[NSArray alloc] initWithObjects:
-                                      [UIImage imageNamed:@"Sequence1"],
-                                      [UIImage imageNamed:@"Sequence2"],
-                                      [UIImage imageNamed:@"Sequence3"],
-                                      [UIImage imageNamed:@"Sequence4"],
-                                      [UIImage imageNamed:@"Sequence5"],
-                                      [UIImage imageNamed:@"Sequence6"],
-                                      [UIImage imageNamed:@"Sequence7"],
-                                      [UIImage imageNamed:@"Sequence8"],
-                                      [UIImage imageNamed:@"Sequence9"],
-                                      [UIImage imageNamed:@"Sequence10"],
-                                      [UIImage imageNamed:@"Sequence11"],nil];
+                                 [UIImage imageNamed:@"Sequence1"],
+                                 [UIImage imageNamed:@"Sequence2"],
+                                 [UIImage imageNamed:@"Sequence3"],
+                                 [UIImage imageNamed:@"Sequence4"],
+                                 [UIImage imageNamed:@"Sequence5"],
+                                 [UIImage imageNamed:@"Sequence6"],
+                                 [UIImage imageNamed:@"Sequence7"],
+                                 [UIImage imageNamed:@"Sequence8"],
+                                 [UIImage imageNamed:@"Sequence9"],
+                                 [UIImage imageNamed:@"Sequence10"],
+                                 [UIImage imageNamed:@"Sequence11"],nil];
     
     lastImage = [UIImage imageNamed:@"Sequence11"];
     
@@ -76,7 +76,7 @@
     
     [self performSelector:@selector(initSequence) withObject:nil afterDelay: totalWait];
     
-    NSLog(@"Animation time: %f", WAIT_TO_ANIMATE + ANIMATION_DURATION + HOLD_ANIMATION);
+    DLog(@"Animation time: %f", WAIT_TO_ANIMATE + ANIMATION_DURATION + HOLD_ANIMATION);
     
 }
 
@@ -94,12 +94,12 @@
     
     // Check for first launch
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]){
-        NSLog(@"Nth time launch");
+        DLog(@"Nth time launch");
         
         [self transitionToSequencerController:FALSE];
     }else{
         
-        NSLog(@"First time launch");
+        DLog(@"First time launch");
         
         [self copyTutorialFile];
         [self transitionToSequencerController:TRUE];
@@ -126,7 +126,7 @@
     
     NSError * error;
     if(![fileManager copyItemAtPath:defaultSetPath toPath:newDefaultSetPath error:&error]){
-        NSLog(@"Error copying");
+        DLog(@"Error copying");
     }
 }
 

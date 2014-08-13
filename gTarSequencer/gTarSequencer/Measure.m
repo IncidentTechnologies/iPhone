@@ -47,11 +47,11 @@
 - (void)initFakeNotes
 {
     int numnotes = random()%8;
-    NSLog(@"initting for %i notes",numnotes);
+    DLog(@"initting for %i notes",numnotes);
     
     for(int i=0;i<numnotes;i++){
         int r = random()%MAX_NOTES;
-        NSLog(@"at index %i",r);
+        DLog(@"at index %i",r);
         notes[r] = true;
     }
 }

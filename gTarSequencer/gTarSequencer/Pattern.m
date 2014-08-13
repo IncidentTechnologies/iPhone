@@ -108,7 +108,7 @@
         return 0;
     }
     else {
-        NSLog(@"GIVEN BAD ABSOLUTE MEASURE TO PLAY");
+        DLog(@"GIVEN BAD ABSOLUTE MEASURE TO PLAY");
         return -1;
     }
 }
@@ -129,7 +129,7 @@
 
 - (void)doubleMeasures
 {
-    NSLog(@"Doubling measures");
+    DLog(@"Doubling measures");
     
     countChanged = YES;
     
@@ -150,7 +150,7 @@
 
 - (void)halveMeasures
 {
-    NSLog(@"halving measures");
+    DLog(@"halving measures");
     
     countChanged = YES;
     

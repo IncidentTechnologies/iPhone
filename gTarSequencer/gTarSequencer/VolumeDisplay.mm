@@ -83,7 +83,7 @@
 
 - (void)setVolume:(double)value
 {
-    NSLog(@"Set volume to %f",value);
+    DLog(@"Set volume to %f",value);
     
     currentValue = value;
     
@@ -104,7 +104,7 @@
 {
     double percentFull = (value-MIN_VOLUME)/(MAX_VOLUME-MIN_VOLUME);
     
-    //NSLog(@" *** fill to %f percent ", percentFull);
+    //DLog(@" *** fill to %f percent ", percentFull);
     
     return percentFull;
 }
@@ -112,16 +112,16 @@
 - (void)fillToPercent:(double)percent
 {
     /*double y = sliderCircleMinY - (sliderCircleMinY - sliderCircleMaxY)*percent;
-    
-    //NSLog(@"y is %f",y);
-    
-    CGRect newFrame = CGRectMake(sliderCircle.frame.origin.x, y, sliderCircle.frame.size.width, sliderCircle.frame.size.height);
-    
-    [UIView animateWithDuration:0.1 animations:^(void){[sliderCircle setFrame:newFrame];}];
+     
+     //DLog(@"y is %f",y);
+     
+     CGRect newFrame = CGRectMake(sliderCircle.frame.origin.x, y, sliderCircle.frame.size.width, sliderCircle.frame.size.height);
+     
+     [UIView animateWithDuration:0.1 animations:^(void){[sliderCircle setFrame:newFrame];}];
      */
     
     [masterSlider setSliderValue:(1-percent)];
-
+    
 }
 
 
@@ -129,7 +129,7 @@
 
 - (void)createOutline
 {
-    // NSLog(@"outline frame is %f %f %f %f",outline.frame.origin.x,outline.frame.origin.y,outline.frame.size.width,outline.frame.size.height);
+    // DLog(@"outline frame is %f %f %f %f",outline.frame.origin.x,outline.frame.origin.y,outline.frame.size.width,outline.frame.size.height);
     
     // Draw black background:
     [outline setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
@@ -148,31 +148,31 @@
     
     // Draw sidebar slider
     /*CGRect sliderFrame = CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT);
-    
-    slider = [[UIView alloc] initWithFrame:sliderFrame];
-    slider.layer.borderColor = [UIColor whiteColor].CGColor;
-    slider.layer.borderWidth = 3.0f;
-    slider.layer.cornerRadius = SLIDER_WIDTH/2;
-    
-    [slider setBackgroundColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.3]];
-    
-    [sidebar addSubview:slider];
-    
-    // Draw sidebar slider circle
-    float baseX = slider.frame.origin.x+sidebar.frame.origin.x;
-    float baseY = slider.frame.origin.y;
-    float indent = 5;
-    float circleWidth = SLIDER_WIDTH-2*indent;
-    sliderCircleMaxY = indent+baseY-1;
-    sliderCircleMinY = slider.frame.size.height - circleWidth - indent - 1 + baseY;
-
-    CGRect sliderCircleFrame = CGRectMake(baseX+indent, sliderCircleMinY, circleWidth, circleWidth);
-    
-    sliderCircle = [[UIButton alloc] initWithFrame:sliderCircleFrame];
-    sliderCircle.backgroundColor = [UIColor colorWithRed:141/255.0 green:112/255.0 blue:166/255.0 alpha:1.0];
-    sliderCircle.layer.cornerRadius = SLIDER_WIDTH/2-indent;
-    
-    [self addSubview:sliderCircle];
+     
+     slider = [[UIView alloc] initWithFrame:sliderFrame];
+     slider.layer.borderColor = [UIColor whiteColor].CGColor;
+     slider.layer.borderWidth = 3.0f;
+     slider.layer.cornerRadius = SLIDER_WIDTH/2;
+     
+     [slider setBackgroundColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.3]];
+     
+     [sidebar addSubview:slider];
+     
+     // Draw sidebar slider circle
+     float baseX = slider.frame.origin.x+sidebar.frame.origin.x;
+     float baseY = slider.frame.origin.y;
+     float indent = 5;
+     float circleWidth = SLIDER_WIDTH-2*indent;
+     sliderCircleMaxY = indent+baseY-1;
+     sliderCircleMinY = slider.frame.size.height - circleWidth - indent - 1 + baseY;
+     
+     CGRect sliderCircleFrame = CGRectMake(baseX+indent, sliderCircleMinY, circleWidth, circleWidth);
+     
+     sliderCircle = [[UIButton alloc] initWithFrame:sliderCircleFrame];
+     sliderCircle.backgroundColor = [UIColor colorWithRed:141/255.0 green:112/255.0 blue:166/255.0 alpha:1.0];
+     sliderCircle.layer.cornerRadius = SLIDER_WIDTH/2-indent;
+     
+     [self addSubview:sliderCircle];
      */
     
     // Master volume level slider
@@ -203,12 +203,12 @@
 - (void)addGestures
 {
     /*
-    [sliderCircle setUserInteractionEnabled:YES];
-    
-    UIPanGestureRecognizer * sliderPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panVolume:)];
-    
-    [sliderCircle addGestureRecognizer:sliderPan];
-    */
+     [sliderCircle setUserInteractionEnabled:YES];
+     
+     UIPanGestureRecognizer * sliderPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panVolume:)];
+     
+     [sliderCircle addGestureRecognizer:sliderPan];
+     */
 }
 
 #pragma mark - Instruments
@@ -263,7 +263,7 @@
         CGRect instrumentIconFrame = CGRectMake(instrumentFrame.size.width/2 - iconWidth/2 - 0.66667,16,iconWidth,iconWidth);
         UIButton * instrumentIcon = [[UIButton alloc] initWithFrame:instrumentIconFrame];
         
-        NSLog(@"Position is %f",instrumentIconFrame.origin.x);
+        DLog(@"Position is %f",instrumentIconFrame.origin.x);
         
         [instrumentIcon setImage:[UIImage imageNamed:inst.iconName] forState:UIControlStateNormal];
         [instrumentIcon setContentEdgeInsets:UIEdgeInsetsMake(10,10,10,10)];
@@ -305,7 +305,7 @@
         // Link volume sliders to instruments
         [inst.audio releaseLevelSlider];
         [inst.audio commitLevelSlider:volumeSlider];
-
+        
         i++;
     }
 }
@@ -313,15 +313,15 @@
 - (void)openInstrument:(id)sender
 {
     /*
-    UIButton * senderButton = (UIButton *)sender;
-    
-    for(NSNumber * instIndex in instrumentIcons){
-        if(senderButton == [instrumentIcons objectForKey:instIndex]){
-            [delegate openInstrument:[instIndex intValue]];
-        }
-    }
-    
-    [self contract];*/
+     UIButton * senderButton = (UIButton *)sender;
+     
+     for(NSNumber * instIndex in instrumentIcons){
+     if(senderButton == [instrumentIcons objectForKey:instIndex]){
+     [delegate openInstrument:[instIndex intValue]];
+     }
+     }
+     
+     [self contract];*/
     
     // Toggle instrument muted
     UIButton * senderButton = (UIButton *)sender;
@@ -378,42 +378,42 @@
 - (void)panVolume:(UIPanGestureRecognizer *)sender
 {
     /*
-    CGPoint newPoint = [sender translationInView:self];
-    
-    if([sender state] == UIGestureRecognizerStateBegan){
-        volumeFirstY = sliderCircle.frame.origin.y;
-    }
-    
-    float newY = newPoint.y + volumeFirstY;
-    
-    // Wrap to boundary
-    if(newY <= sliderCircleMaxY*1.2){
-        newY = sliderCircleMaxY;
-    }else if(newY >= sliderCircleMinY*1.2){
-        newY = sliderCircleMinY;
-    }
-    
-    float height = 1-(newY - sliderCircleMaxY)/(sliderCircleMinY - sliderCircleMaxY);
-    float volume = MAX(height*MAX_VOLUME,MIN_VOLUME);
-    
-    
-    if(newY <= sliderCircleMinY && newY >= sliderCircleMaxY){
-        [self setVolume:volume];
-    }
-    
-    // Set the volume
-    BOOL save = NO;
-    if([sender state] == UIGestureRecognizerStateEnded){
-        save = YES;
-    }
-    
-    if(volumeChangeTimer == nil){
-
-        volumeChangeTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(allowVolumeChange) userInfo:nil repeats:NO];
-        [delegate volumeButtonValueDidChange:currentValue withSave:save];
-
-    }
- */
+     CGPoint newPoint = [sender translationInView:self];
+     
+     if([sender state] == UIGestureRecognizerStateBegan){
+     volumeFirstY = sliderCircle.frame.origin.y;
+     }
+     
+     float newY = newPoint.y + volumeFirstY;
+     
+     // Wrap to boundary
+     if(newY <= sliderCircleMaxY*1.2){
+     newY = sliderCircleMaxY;
+     }else if(newY >= sliderCircleMinY*1.2){
+     newY = sliderCircleMinY;
+     }
+     
+     float height = 1-(newY - sliderCircleMaxY)/(sliderCircleMinY - sliderCircleMaxY);
+     float volume = MAX(height*MAX_VOLUME,MIN_VOLUME);
+     
+     
+     if(newY <= sliderCircleMinY && newY >= sliderCircleMaxY){
+     [self setVolume:volume];
+     }
+     
+     // Set the volume
+     BOOL save = NO;
+     if([sender state] == UIGestureRecognizerStateEnded){
+     save = YES;
+     }
+     
+     if(volumeChangeTimer == nil){
+     
+     volumeChangeTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(allowVolumeChange) userInfo:nil repeats:NO];
+     [delegate volumeButtonValueDidChange:currentValue withSave:save];
+     
+     }
+     */
 }
 
 -(void)valueDidChange:(double)newValue forSlider:(id)sender
@@ -445,18 +445,18 @@
 
 #pragma mark - Audio Controller
 /*
--(void)setVolumeGainTo:(double)value
-{
-    
-    NSLog(@" **** Set channel gain to %f *** ",value);
-    
-    AudioController * audioController = [AudioController sharedAudioController];
-    AudioNode * root = [[audioController GetNodeNetwork] GetRootNode];
-    
-    root->SetChannelGain(value, CONN_OUT);
-    
-}
-*/
+ -(void)setVolumeGainTo:(double)value
+ {
+ 
+ DLog(@" **** Set channel gain to %f *** ",value);
+ 
+ AudioController * audioController = [AudioController sharedAudioController];
+ AudioNode * root = [[audioController GetNodeNetwork] GetRootNode];
+ 
+ root->SetChannelGain(value, CONN_OUT);
+ 
+ }
+ */
 
 
 @end

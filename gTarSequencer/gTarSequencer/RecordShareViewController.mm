@@ -185,12 +185,12 @@
     }
     
     [self setMeasures:MIN_MEASURES];
-
+    
 }
 
 - (BOOL)isValidInstrumentIndex:(int)inst
 {
-
+    
     for(Instrument * i in instruments){
         if(i.instrument == inst){
             return YES;
@@ -255,18 +255,18 @@
         [trackView addSubview:measureLine];
     }
     //if(newContentSize.width > trackView.frame.size.width){
-        // for some reason this needs extra padding
-        [trackView setContentSize:newContentSize];
-        
-        for(UIView * t in tracks){
-            [t setFrame:CGRectMake(t.frame.origin.x, t.frame.origin.y, newContentSize.width+2, t.frame.size.height)];
-        }
+    // for some reason this needs extra padding
+    [trackView setContentSize:newContentSize];
+    
+    for(UIView * t in tracks){
+        [t setFrame:CGRectMake(t.frame.origin.x, t.frame.origin.y, newContentSize.width+2, t.frame.size.height)];
+    }
     //}
 }
 
 -(void)drawPatternsOnMeasures:(NSMutableArray *)patternData
 {
-
+    
     UIColor * aColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:0.5];
     UIColor * bColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.5];
     UIColor * cColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:0.5];
@@ -294,7 +294,7 @@
         prevTranspose[j] = 0;
     }
     
-    NSLog(@"pattern data is %@",patternData);
+    DLog(@"pattern data is %@",patternData);
     
     int i = 0;
     for(NSMutableArray * measure in patternData){
@@ -360,7 +360,7 @@
             // Draw interrupt measure
             NSString * interruptPattern = [measureData objectForKey:@"delta"];
             double interruptTranspose = 0;
-          
+            
             if(!CGRectIsNull(measureBarInterruptFrame)){
                 
                 UIView * measureInterruptBar = [[UIView alloc] initWithFrame:measureBarInterruptFrame];
@@ -386,7 +386,7 @@
                     [self drawProgressMarkerForMeasure:i inRow:k startAt:deltai withWidth:(1.0-deltai)];
                 }
             }
-           
+            
             
             // Draw fret before interrupt pattern
             NSMutableArray * frets = [measureData objectForKey:@"frets"];
@@ -397,14 +397,14 @@
                 
                 // Mute -> Unmute before off
                 if(![[fret objectForKey:@"ismuted"] boolValue] && [pattern isEqualToString:@"OFF"] && [[tempPattern objectForKey:@"start"] intValue] == -1){
-                   
+                    
                     // Start a temp pattern
                     [tempPattern setObject:[fret objectForKey:@"fretindex"] forKey:@"start"];
                     [tempPattern setObject:[NSNumber numberWithBool:false] forKey:@"ismute"];
                     [tempPattern setObject:[fret objectForKey:@"pattern"] forKey:@"pattern"];
                     
                 }else if([[fret objectForKey:@"ismuted"] boolValue] && ![pattern isEqualToString:@"OFF"] && [[tempPattern objectForKey:@"start"] intValue] == -1){
-
+                    
                     // Start a temp pattern
                     [tempPattern setObject:[fret objectForKey:@"fretindex"] forKey:@"start"];
                     [tempPattern setObject:[NSNumber numberWithBool:true] forKey:@"ismute"];
@@ -423,7 +423,7 @@
                 
                 if(((double)[[fret objectForKey:@"fretindex"] intValue])/FRETS_ON_GTAR >= [[measureData objectForKey:@"deltai"] doubleValue]){
                     
-                    //NSLog(@"Return at fret %i",[[fret objectForKey:@"fretindex"] intValue]);
+                    //DLog(@"Return at fret %i",[[fret objectForKey:@"fretindex"] intValue]);
                     break;
                 }
             }
@@ -677,7 +677,7 @@
     
     CGRect offScreenFrame = shareScreen.frame;
     CGRect onScreenFrame = CGRectMake(shareScreen.frame.origin.x,shareScreen.frame.origin.y-y,shareScreen.frame.size.width,shareScreen.frame.size.height);
-
+    
     [shareView setHidden:NO];
     
     [shareView setAlpha:0.0];
@@ -745,7 +745,7 @@
     NSString * songname = [[self renameSongToSongname] stringByAppendingString:@".m4a"];
     
     if([selectedShareType isEqualToString:@"Email"]){
-       
+        
         [delegate userDidLaunchEmailWithAttachment:songname];
         
     }else if([selectedShareType isEqualToString:@"SMS"]){
@@ -825,7 +825,7 @@
 #pragma mark - Playband
 -(void)resetPlayband
 {
-    NSLog(@"Reset playband");
+    DLog(@"Reset playband");
     measurePlaybandView.userInteractionEnabled = NO;
     
     if(!isPlaybandAnimating){
@@ -946,7 +946,7 @@
         r_measure = 0;
         r_beat = 0;
         
-        NSLog(@"Start recording %@",loadedPattern);
+        DLog(@"Start recording %@",loadedPattern);
         [self showProcessingOverlay];
         [delegate forceShowSessionOverlay];
         
@@ -968,7 +968,7 @@
     NSFileManager * fm = [[NSFileManager alloc] init];
     NSError * error = nil;
     for(NSString * file in [fm contentsOfDirectoryAtPath:documentsDirectory error:&error]){
-        NSLog(@"Remove item at path %@",[NSString stringWithFormat:@"%@/%@",documentsDirectory,file]);
+        DLog(@"Remove item at path %@",[NSString stringWithFormat:@"%@/%@",documentsDirectory,file]);
         if(![file isEqualToString:DEFAULT_SONG_NAME]){
             [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documentsDirectory,file] error:&error];
         }
@@ -1009,7 +1009,7 @@
             for(NSDictionary * f in frets){
                 int fretindex = [[f objectForKey:@"fretindex"] intValue];
                 if(fretindex == r_beat%FRETS_ON_GTAR && ![[f objectForKey:@"ismuted"] boolValue]){
-                   
+                    
                     // strings for the fret
                     NSString * strings = [f objectForKey:@"strings"];
                     for(int s = 0; s < STRINGS_ON_GTAR; s++){
@@ -1017,7 +1017,7 @@
                             [inst.audio pluckString:s];
                         }
                     }
-
+                    
                 }
             }
         }
@@ -1041,7 +1041,7 @@
 {
     isWritingFile = NO;
     
-    NSLog(@"Stop recording");
+    DLog(@"Stop recording");
     [self hideNoSessionOverlay];
     [self hideRecordOverlay];
     [delegate forceHideSessionOverlay];
@@ -1056,10 +1056,10 @@
 -(void)interruptRecording
 {
     if(isWritingFile){
-        NSLog(@"Interrupt recording");
+        DLog(@"Interrupt recording");
         [self stopRecording];
     }else{
-        NSLog(@"Ignore interrupt recording");
+        DLog(@"Ignore interrupt recording");
     }
 }
 
@@ -1076,7 +1076,7 @@
 {
     if(!isAudioPlaying){
         
-        NSLog(@"Play record playback");
+        DLog(@"Play record playback");
         
         NSURL * url = [NSURL fileURLWithPath:sessionFilepath];
         
@@ -1092,9 +1092,9 @@
     }else{
         [self resumePlaybandAnimation];
     }
-
+    
     [audioPlayer play];
-
+    
 }
 
 -(void)pauseRecordPlayback
@@ -1113,7 +1113,7 @@
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    NSLog(@"Audio player did finish");
+    DLog(@"Audio player did finish");
     [self stopRecordPlayback];
 }
 
@@ -1168,13 +1168,13 @@
     //[self checkIfRecordingNameReady];
     
     /*if(!isRecordingNameReady){
-        
-        if([self checkDuplicateSongName:songNameField.text]){
-            [self alertDuplicateSoundName];
-        }
-        
-        [self resetSongNameIfBlank];
-    }*/
+     
+     if([self checkDuplicateSongName:songNameField.text]){
+     [self alertDuplicateSoundName];
+     }
+     
+     [self resetSongNameIfBlank];
+     }*/
     
     [self resetSongNameIfBlank];
     
@@ -1194,34 +1194,34 @@
 }
 
 /*
-- (void)checkIfRecordingNameReady
-{
-    NSString * nameString = songNameField.text;
-    NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
-    if([emptyName isEqualToString:@""]){
-        isRecordingNameReady = NO;
-    }else{
-        isRecordingNameReady = YES;
-    }
-    
-    if([self checkDuplicateRecordingName:nameString]){
-        isRecordingNameReady = NO;
-    }
-    
-    [self checkIfRecordSaveReady];
-}
+ - (void)checkIfRecordingNameReady
+ {
+ NSString * nameString = songNameField.text;
+ NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+ 
+ if([emptyName isEqualToString:@""]){
+ isRecordingNameReady = NO;
+ }else{
+ isRecordingNameReady = YES;
+ }
+ 
+ if([self checkDuplicateRecordingName:nameString]){
+ isRecordingNameReady = NO;
+ }
+ 
+ [self checkIfRecordSaveReady];
+ }
  */
 
 -(BOOL)checkDuplicateSongName:(NSString *)filename
 {
     /*NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
-    
-    for(int i = 0; i < [tempList count]; i++){
-        if([tempList[i] isEqualToString:filename]){
-            return YES;
-        }
-    }*/
+     
+     for(int i = 0; i < [tempList count]; i++){
+     if([tempList[i] isEqualToString:filename]){
+     return YES;
+     }
+     }*/
     
     return NO;
 }
@@ -1229,25 +1229,25 @@
 - (void)setRecordDefaultText
 {
     /*
-    NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
-    
-    NSLog(@"CustomSampleList is %@",tempList);
-    
-    int customCount = 0;
-    
-    // Look through Samples, get the max CustomXXXX name and label +1
-    for(NSString * filename in tempList){
-        
-        if(!([filename rangeOfString:@"Song"].location == NSNotFound)){
-            
-            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Song"] withString:@""];
-            int numFromSuffix = [customSuffix intValue];
-            
-            customCount = MAX(customCount,numFromSuffix);
-        }
-    }
-    
-    customCount++;
+     NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
+     
+     DLog(@"CustomSampleList is %@",tempList);
+     
+     int customCount = 0;
+     
+     // Look through Samples, get the max CustomXXXX name and label +1
+     for(NSString * filename in tempList){
+     
+     if(!([filename rangeOfString:@"Song"].location == NSNotFound)){
+     
+     NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Song"] withString:@""];
+     int numFromSuffix = [customSuffix intValue];
+     
+     customCount = MAX(customCount,numFromSuffix);
+     }
+     }
+     
+     customCount++;
      */
     
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
@@ -1281,7 +1281,7 @@
     NSString * songname = songNameField.text;
     
     // Create a subfolder Samples/{Category} if it doesn't exist yet
-    NSLog(@"Copying file from %@ to %@.m4a",DEFAULT_SONG_NAME,songname);
+    DLog(@"Copying file from %@ to %@.m4a",DEFAULT_SONG_NAME,songname);
     
     NSString * newFilename = [songname stringByAppendingString:@".m4a"];
     
@@ -1304,7 +1304,7 @@
     BOOL result = [fm copyItemAtPath:currentPath toPath:newPath error:&err];
     
     if(!result)
-        NSLog(@"Error moving");
+        DLog(@"Error moving");
     
     return songname;
 }

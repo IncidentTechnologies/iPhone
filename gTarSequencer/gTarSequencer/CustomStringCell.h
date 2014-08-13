@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
+#import "AppData.h"
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>

@@ -805,7 +805,7 @@
 
 -(void)deleteInstrument
 {
-    NSLog(@"Delete instrument at index %i",indexToDelete);
+    DLog(@"Delete instrument at index %i",indexToDelete);
     
     // Animate the removal
     NSArray * iconObj = [instrumentObjects objectForKey:[NSNumber numberWithInt:indexToDelete]];

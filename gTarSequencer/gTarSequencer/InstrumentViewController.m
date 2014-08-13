@@ -81,20 +81,20 @@
     colors[5] = [UIColor colorWithRed:148/255.0 green:102/255.0 blue:177/255.0 alpha:1.0]; // purple
     colors[4] = [UIColor colorWithRed:0/255.0 green:141/255.0 blue:218/255.0 alpha:1.0]; // blue
     colors[3] = [UIColor colorWithRed:43/255.0 green:198/255.0 blue:34/255.0 alpha:1.0]; // green
-    colors[2] = [UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1.0]; // yellow
+    colors[2] = [UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]; // yellow
     colors[1] = [UIColor colorWithRed:234/255.0 green:154/255.0 blue:41/255.0 alpha:1.0]; // orange
     colors[0] = [UIColor colorWithRed:239/255.0 green:92/255.0 blue:53/255.0 alpha:1.0]; // red
     
     /*
      
-    colors[5] = [UIColor colorWithRed:170/255.0 green:114/255.0 blue:233/255.0 alpha:1.0]; // blue
-    colors[4] = [UIColor colorWithRed:30/255.0 green:108/255.0 blue:213/255.0 alpha:1.0]; // blue
-    colors[3] = [UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0]; // green
-    colors[2] = [UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]; // yellow
-    colors[1] = [UIColor colorWithRed:234/255.0 green:154/255.0 blue:0/255.0 alpha:1.0]; // orange
-    colors[0] = [UIColor colorWithRed:238/255.0 green:28/255.0 blue:36/255.0 alpha:1.0]; // red
-    
-    */
+     colors[5] = [UIColor colorWithRed:170/255.0 green:114/255.0 blue:233/255.0 alpha:1.0]; // blue
+     colors[4] = [UIColor colorWithRed:30/255.0 green:108/255.0 blue:213/255.0 alpha:1.0]; // blue
+     colors[3] = [UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0]; // green
+     colors[2] = [UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]; // yellow
+     colors[1] = [UIColor colorWithRed:234/255.0 green:154/255.0 blue:0/255.0 alpha:1.0]; // orange
+     colors[0] = [UIColor colorWithRed:238/255.0 green:28/255.0 blue:36/255.0 alpha:1.0]; // red
+     
+     */
     
 }
 
@@ -201,16 +201,16 @@
 {
     // Clear previous pattern data
     /*if(activePattern > 0){
-        NSLog(@"Clear previous pattern data");
-        
-        @synchronized(self){
-            for(int i = 0; i < NUM_PATTERNS; i++){
-                for(int j = 0; j < NUM_MEASURES; j++){
-                    [self clearMeasure:j forPattern:i];
-                }
-            }
-        }
-    }*/
+     DLog(@"Clear previous pattern data");
+     
+     @synchronized(self){
+     for(int i = 0; i < NUM_PATTERNS; i++){
+     for(int j = 0; j < NUM_MEASURES; j++){
+     [self clearMeasure:j forPattern:i];
+     }
+     }
+     }
+     }*/
     
     [self checkIsFirstLaunch];
     if(isFirstLaunch){
@@ -243,7 +243,7 @@
 
 - (void)setActiveMeasureIndex:(int)measureIndex forPattern:(int)patternIndex
 {
-    NSLog(@"Set Active Measure Index m:%i, p:%i, i:%@",measureIndex,patternIndex,currentInst);
+    DLog(@"Set Active Measure Index m:%i, p:%i, i:%@",measureIndex,patternIndex,currentInst);
     
     Pattern * p = [currentInst.patterns objectAtIndex:patternIndex];
     Measure * m = [p.measures objectAtIndex:measureIndex];
@@ -266,12 +266,12 @@
 
 - (void)setActiveInstrument:(Instrument *)inst
 {
- 
+    
     if(inst == NULL){
         // TODO: handle 0 instruments case
         return;
     }
- 
+    
     currentInst = inst;
     
     // Check muting before patterns
@@ -285,12 +285,12 @@
     
     // Clear everything
     /*@synchronized(self){
-        for(int i = 0; i < NUM_PATTERNS; i++){
-            for(int j = 0; j < NUM_MEASURES; j++){
-                [self clearMeasure:j forPattern:i];
-            }
-        }
-    }*/
+     for(int i = 0; i < NUM_PATTERNS; i++){
+     for(int j = 0; j < NUM_MEASURES; j++){
+     [self clearMeasure:j forPattern:i];
+     }
+     }
+     }*/
     
     // Measure counts
     @synchronized(self){
@@ -314,7 +314,7 @@
     // Determine if there is a queued pattern
     int queuedIndex = [delegate getQueuedPatternIndexForInstrument:currentInst];
     if(queuedIndex >= 0){
-        NSLog(@"Enqueue pattern button for newly added instrument");
+        DLog(@"Enqueue pattern button for newly added instrument");
         [self enqueuePatternButton:queuedIndex];
     }
     
@@ -328,7 +328,7 @@
         [self turnOnInstrumentView];
     }
     
-    NSLog(@"Using pattern %i and measure %i",activePattern,activeMeasure);
+    DLog(@"Using pattern %i and measure %i",activePattern,activeMeasure);
 }
 
 - (void)showHideCustomIndicator:(BOOL)isCustom
@@ -369,10 +369,10 @@
 
 - (void)doubletapMeasure:(UITapGestureRecognizer *)recognizer
 {
-    NSLog(@"Double tap measure");
+    DLog(@"Double tap measure");
     
     UIView * tappedMeasure = (UIView *)recognizer.view;
-
+    
     for(int i = 0; i <NUM_MEASURES; i++){
         if(inactiveMeasureSet[i] == tappedMeasure){
             if(i < measureCounts[activePattern]){
@@ -388,7 +388,7 @@
 
 - (void)doubleTapPage:(UITapGestureRecognizer *)recognizer
 {
-    NSLog(@"Double tap page");
+    DLog(@"Double tap page");
     
     UIButton * tappedPage = (UIButton *)recognizer.view;
     
@@ -406,10 +406,10 @@
 
 - (void)longPressPage:(UILongPressGestureRecognizer *)recognizer
 {
-    NSLog(@"Long press page");
+    DLog(@"Long press page");
     
     UIButton * pressedPage = (UIButton *)recognizer.view;
-
+    
     for(int i = 0; i < NUM_MEASURES; i++){
         if(pages[i] == pressedPage){
             
@@ -430,7 +430,7 @@
         
         switch (tappedIndex) {
             case 1:
-                NSLog(@"ACTIVATE %i",tappedIndex);
+                DLog(@"ACTIVATE %i",tappedIndex);
                 
                 //[self clearMeasure:1 forPattern:activePattern];
                 
@@ -442,7 +442,7 @@
                 break;
             case 2:
             case 3:
-                NSLog(@"ACTIVATE %i",tappedIndex);
+                DLog(@"ACTIVATE %i",tappedIndex);
                 
                 BOOL isMeasure2Active = (tappedIndex == 2) ? YES : NO;
                 BOOL isMeasure3Active = (tappedIndex == 3) ? YES : NO;
@@ -513,7 +513,7 @@
     }else{
         pages[measureIndex].alpha = PAGE_OPACITY_OFF;
     }
-
+    
     if(measureIndex < measureCounts[activePattern]){
         [pages[measureIndex] setBackgroundColor:pageOnColor];
     }else{
@@ -567,7 +567,7 @@
         
         switch(tappedIndex){
             case 1:
-                NSLog(@"DEACTIVATE %i",tappedIndex);
+                DLog(@"DEACTIVATE %i",tappedIndex);
                 
                 if(measureCounts[activePattern] > 2){
                     
@@ -584,7 +584,7 @@
                 }else{
                     
                     //[self clearMeasure:1 forPattern:activePattern];
-                
+                    
                     [self setMeasureCountTo:1 forPattern:activePattern];
                     
                     [self setMeasureOff:1 isActive:NO];
@@ -595,7 +595,7 @@
                 break;
             case 2:
             case 3:
-                NSLog(@"DEACTIVATE %i",tappedIndex);
+                DLog(@"DEACTIVATE %i",tappedIndex);
                 
                 //[self clearMeasure:2 forPattern:activePattern];
                 //[self clearMeasure:3 forPattern:activePattern];
@@ -618,12 +618,12 @@
 }
 
 /*
-// Drawn elements are now reused
-- (void)clearMeasure:(int)measureIndex forPattern:(int)patternIndex
-{
-    NSLog(@"Clear measure %i at pattern %i",measureIndex,patternIndex);
-}
-*/
+ // Drawn elements are now reused
+ - (void)clearMeasure:(int)measureIndex forPattern:(int)patternIndex
+ {
+ DLog(@"Clear measure %i at pattern %i",measureIndex,patternIndex);
+ }
+ */
 
 - (void)setDeclaredActiveMeasure:(int)measureIndex
 {
@@ -828,10 +828,10 @@
     }
     
     /*@synchronized(self){
-        for(int i = 0; i < NUM_MEASURES; i++){
-            [self clearMeasure:i forPattern:patternIndex];
-        }
-    }*/
+     for(int i = 0; i < NUM_MEASURES; i++){
+     [self clearMeasure:i forPattern:patternIndex];
+     }
+     }*/
     
     [self instateNewPattern:newPattern andNewMeasure:newMeasure];
     
@@ -852,7 +852,7 @@
 #pragma mark - On Off
 - (void)turnOnInstrumentView
 {
-    if(TESTMODE) NSLog(@"*** UNMUTING ***");
+    if(TESTMODE) DLog(@"*** UNMUTING ***");
     [offMask setHidden:YES];
     if(volumeKnob && ![volumeKnob isEnabled]){
         [volumeKnob EnableKnob];
@@ -865,7 +865,7 @@
 
 - (void)turnOffInstrumentView
 {
-    if(TESTMODE) NSLog(@"*** MUTING ***");
+    if(TESTMODE) DLog(@"*** MUTING ***");
     [offMask setHidden:NO];
     if(volumeKnob && [volumeKnob isEnabled]){
         [volumeKnob DisableKnob];
@@ -899,7 +899,7 @@
     }
     
     if(string > STRINGS_ON_GTAR || fret > FRETS_ON_GTAR){
-        NSLog(@"ERROR with string %i or fret %i",string,fret);
+        DLog(@"ERROR with string %i or fret %i",string,fret);
         return;
     }
     
@@ -990,22 +990,22 @@
     
     BOOL isPlaying = [delegate checkIsPlaying];
     
-    NSLog(@"Inst Select new pattern at %i", tappedIndex);
+    DLog(@"Inst Select new pattern at %i", tappedIndex);
     
     if (tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton != offButton){
-        NSLog(@"Case 1");
+        DLog(@"Case 1");
         isMute = YES;
         isPlaying = [delegate checkIsPlaying];
         [self clearQueuedPatternButton];
         [delegate dequeueAllPatternsForInstrument:currentInst];
     }else if(tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton == offButton){
-        NSLog(@"Case 2");
+        DLog(@"Case 2");
         isMute = NO;
         isPlaying = [delegate checkIsPlaying];
         [self clearQueuedPatternButton];
         [delegate dequeueAllPatternsForInstrument:currentInst];
     }else{
-        NSLog(@"Case 3");
+        DLog(@"Case 3");
         isMute = NO;
         
         if(isPlaying && tappedIndex != activePattern){
@@ -1030,7 +1030,7 @@
     //if(isMute){
     //    [self turnOffInstrumentView];
     //}else{
-     //   [self turnOnInstrumentView];
+    //   [self turnOnInstrumentView];
     //}
     [self updatePatternButton:sender playState:isPlaying];
     
@@ -1050,11 +1050,11 @@
     UIButton * newSelection = [patternButtons objectAtIndex:index];
     
     //if (selectedPatternButton == newSelection){
-    //    NSLog(@"Already set - returning");
+    //    DLog(@"Already set - returning");
     //    return;
     //}else {
-    //    NSLog(@"Now updating");
-        [self updatePatternButton:newSelection playState:NO];
+    //    DLog(@"Now updating");
+    [self updatePatternButton:newSelection playState:NO];
     //}
 }
 
@@ -1207,29 +1207,29 @@
 #pragma mark - Scrolling
 - (void)userDidSelectNewMeasure:(id)sender
 {
-    NSLog(@"User did select new measure");
+    DLog(@"User did select new measure");
     
     int newMeasureIndex;
     
     if(sender == pageOne){
-        NSLog(@"Scroll to measure 1");
+        DLog(@"Scroll to measure 1");
         newMeasureIndex = 0;
-
+        
     }else if(sender == pageTwo){
-        NSLog(@"Scroll to measure 2");
+        DLog(@"Scroll to measure 2");
         newMeasureIndex = 1;
         
     }else if(sender == pageThree){
-        NSLog(@"Scroll to measure 3");
+        DLog(@"Scroll to measure 3");
         newMeasureIndex = 2;
         
     }else{
-        NSLog(@"Scroll to measure 4");
+        DLog(@"Scroll to measure 4");
         newMeasureIndex = 3;
     }
     
     [self setNewMeasureFromPage:newMeasureIndex];
-
+    
 }
 
 - (void)setNewMeasureFromPage:(int)measureIndex
@@ -1267,8 +1267,8 @@
     
     CGPoint newOffset = CGPointMake(measureIndex*(MEASURE_WIDTH+measureMargin),0);
     double scrollSpeed = isSlow ? SCROLL_SPEED_MAX : SCROLL_SPEED_MIN;
-
-    NSLog(@"Active measure is %i",activeMeasure);
+    
+    DLog(@"Active measure is %i",activeMeasure);
     
     [UIView animateWithDuration:scrollSpeed animations:^(){
         [scrollView setContentOffset:newOffset];
@@ -1367,7 +1367,7 @@
 
 - (void)pinScrollViewToActiveMeasure
 {
-
+    
     [scrollView setContentOffset:CGPointMake(activeMeasure*(MEASURE_WIDTH+[self getMeasureMargin]), 0)];
     [self highlightMeasure:activeMeasure];
 }
@@ -1382,10 +1382,10 @@
         double velocityOffset = 1;
         
         /*if(scrollView.contentOffset.x > lastContentOffset.x){
-            targetMeasure = MIN(activeMeasure+velocityOffset,NUM_MEASURES-1);
-        }else if(scrollView.contentOffset.x < lastContentOffset.x){
-            targetMeasure = MAX(activeMeasure-velocityOffset,0);
-        }*/
+         targetMeasure = MIN(activeMeasure+velocityOffset,NUM_MEASURES-1);
+         }else if(scrollView.contentOffset.x < lastContentOffset.x){
+         targetMeasure = MAX(activeMeasure-velocityOffset,0);
+         }*/
         
         if(velocityX < 0){
             targetMeasure = MIN(activeMeasure+velocityOffset,NUM_MEASURES-1);
@@ -1395,7 +1395,7 @@
         
         [self setActivePage:targetMeasure];
         [self highlightMeasure:targetMeasure];
-
+        
         CGPoint newOffset = CGPointMake(targetMeasure*(MEASURE_WIDTH+[self getMeasureMargin]),0);
         
         targetContentOffset->x = newOffset.x;
@@ -1409,7 +1409,7 @@
 - (void)snapScrollerToPlace:(UIScrollView *)scroller
 {
     //if(scrollView.scrollEnabled){
-        [self changeActiveMeasureToMeasure:targetMeasure scrollSlow:NO];
+    [self changeActiveMeasureToMeasure:targetMeasure scrollSlow:NO];
     //}else{
     //    [self pinScrollViewToActiveMeasure];
     //}
@@ -1425,39 +1425,39 @@
 
 #pragma mark - Other Drawing
 /*
--(void)drawBackButton
-{
-    CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    int playWidth = 12;
-    int playX = backButton.frame.size.width;
-    int marginX = 6;
-    int playY = 5;
-    CGFloat playHeight = backButton.frame.size.height - 2*playY;
-    
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-    
-    CGContextSetLineWidth(context, 4.0);
-    
-    CGContextMoveToPoint(context, playX-marginX, playY);
-    CGContextAddLineToPoint(context, playX-marginX-playWidth, playY+(playHeight/2));
-    CGContextAddLineToPoint(context, playX-marginX, playY+playHeight);
-    //CGContextClosePath(context);
-    //CGContextFillPath(context);
-    CGContextStrokePath(context);
-    
-    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
-    
-    [backButton addSubview:image];
-    
-    UIGraphicsEndImageContext();
-}
-*/
+ -(void)drawBackButton
+ {
+ CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
+ UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+ 
+ CGContextRef context = UIGraphicsGetCurrentContext();
+ 
+ int playWidth = 12;
+ int playX = backButton.frame.size.width;
+ int marginX = 6;
+ int playY = 5;
+ CGFloat playHeight = backButton.frame.size.height - 2*playY;
+ 
+ CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+ CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+ 
+ CGContextSetLineWidth(context, 4.0);
+ 
+ CGContextMoveToPoint(context, playX-marginX, playY);
+ CGContextAddLineToPoint(context, playX-marginX-playWidth, playY+(playHeight/2));
+ CGContextAddLineToPoint(context, playX-marginX, playY+playHeight);
+ //CGContextClosePath(context);
+ //CGContextFillPath(context);
+ CGContextStrokePath(context);
+ 
+ UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+ UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
+ 
+ [backButton addSubview:image];
+ 
+ UIGraphicsEndImageContext();
+ }
+ */
 
 #pragma mark - System
 
@@ -1486,7 +1486,7 @@
     float y = [[UIScreen mainScreen] bounds].size.width;
     float x = [[UIScreen mainScreen] bounds].size.height;
     
-    NSLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
+    DLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
     CGRect tutorialFrame = CGRectMake(0,0,x,y-BOTTOMBAR_HEIGHT-1);
     
@@ -1498,7 +1498,7 @@
     tutorialViewController.delegate = self;
     
     [self.view addSubview:tutorialViewController];
-
+    
     [tutorialViewController launch];
 }
 
@@ -1555,7 +1555,7 @@
 
 - (void)drawVolumeOverlay
 {
-    NSLog(@"volume tracking began");
+    DLog(@"volume tracking began");
     isTracking = YES;
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
@@ -1608,7 +1608,7 @@
     
     [volumeKnob SetValue:[tempVolumeKnob GetValue]];
     
-    NSLog(@"new volume is %f",[volumeKnob GetValue]);
+    DLog(@"new volume is %f",[volumeKnob GetValue]);
     [currentInst setAmplitude:[volumeKnob GetValue]];
     
     [volumeBg removeFromSuperview];
@@ -1620,9 +1620,9 @@
 
 -(void)enableKnobIfDisabled
 {
-    NSLog(@"Enable knob if disabled");
+    DLog(@"Enable knob if disabled");
     if(![volumeKnob isEnabled]){
-        NSLog(@"Enable previous button");
+        DLog(@"Enable previous button");
         if(previousPatternButton){
             [self selectNewPattern:previousPatternButton];
         }
@@ -1651,7 +1651,7 @@
 
 -(void)disableKnobIfEnabled
 {
-    NSLog(@"Disable knob if enabled");
+    DLog(@"Disable knob if enabled");
     if([volumeKnob isEnabled]){
         [self disableKnob:tempVolumeKnob];
     }

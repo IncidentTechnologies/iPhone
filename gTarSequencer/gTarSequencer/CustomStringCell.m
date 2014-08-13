@@ -180,7 +180,7 @@
     NSString * path;
     
     if(sampleFilename == nil){
-        NSLog(@"Trying to play nil file");
+        DLog(@"Trying to play nil file");
         return;
     }
     

@@ -26,7 +26,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        NSLog(@"enter table view controller");
+        DLog(@"enter table view controller");
         
         soundMaster = [[SoundMaster alloc] init];
         
@@ -43,7 +43,7 @@
         
         self.tableView.bounces = NO;
         [self turnContentDrawingOn];
-
+        
     }
     return self;
 }
@@ -99,7 +99,7 @@
     
     // If it exists append it to the regular list
     if([fileManager fileExistsAtPath:customInstrumentsPath]){
-        NSLog(@"The custom instruments plist exists");
+        DLog(@"The custom instruments plist exists");
         
         NSMutableDictionary * customDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:customInstrumentsPath];
         
@@ -110,12 +110,12 @@
         
         
     }else{
-        NSLog(@"The custom instruments plist does not exist");
+        DLog(@"The custom instruments plist does not exist");
         masterInstrumentOptions = [plistDictionary objectForKey:@"Instruments"];
     }
-
+    
     [self setRemainingInstrumentOptionsFromMasterOptions];
- 
+    
 }
 
 - (void)setRemainingInstrumentOptionsFromMasterOptions
@@ -138,7 +138,7 @@
         }
     }
     
-    [self setRemainingInstrumentOptionsFromMasterOptions];    
+    [self setRemainingInstrumentOptionsFromMasterOptions];
     instruments = [NSKeyedUnarchiver unarchiveObjectWithData:instData];
     
     // Remove all the previously used instruments from the remaining list:
@@ -248,7 +248,7 @@
 {
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
-    NSLog(@"Selecting instrument at index %li",senderIndex);
+    DLog(@"Selecting instrument at index %li",senderIndex);
     
     [self selectInstrument:senderIndex];
     
@@ -258,22 +258,22 @@
 - (void)setSelectedCellToSelectedInstrument
 {
     /*@synchronized(instruments){
-        for(int i = 0; i < [instruments count]; i++){
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
-            
-            if([cell respondsToSelector:@selector(instrument)] && cell.instrument != nil){
-                
-                if(i == selectedInstrumentIndex){
-                    [self fadeCell:cell animateIn:YES];
-                }else{
-                    [self fadeCell:cell animateIn:NO];
-                }
-            }else{
-                return;
-            }
-        }
-    }*/
+     for(int i = 0; i < [instruments count]; i++){
+     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+     SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
+     
+     if([cell respondsToSelector:@selector(instrument)] && cell.instrument != nil){
+     
+     if(i == selectedInstrumentIndex){
+     [self fadeCell:cell animateIn:YES];
+     }else{
+     [self fadeCell:cell animateIn:NO];
+     }
+     }else{
+     return;
+     }
+     }
+     }*/
 }
 
 - (void)fadeCell:(SeqSetViewCell *)cell animateIn:(BOOL)isIn
@@ -300,7 +300,7 @@
     });
     
     [instruments addObject:newInstrument];
- 
+    
     [self selectInstrument:[instruments count] - 1];
     
     // insert cell:
@@ -332,7 +332,7 @@
 #pragma mark Table View Protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+    
     return 1;
 }
 
@@ -380,7 +380,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     if (indexPath.row < [instruments count]){
-    
+        
         static NSString *CellIdentifier = @"TrackCell";
         
         SeqSetViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -421,11 +421,11 @@
         
         // Check if selected
         /*if(cell.isSelected || selectedInstrumentIndex == indexPath.row){
-            selectedInstrumentIndex = indexPath.row;
-            [self fadeCell:cell animateIn:YES];
-        }else{
-            [self fadeCell:cell animateIn:NO];
-        }*/
+         selectedInstrumentIndex = indexPath.row;
+         [self fadeCell:cell animateIn:YES];
+         }else{
+         [self fadeCell:cell animateIn:NO];
+         }*/
         
         return cell;
         
@@ -465,7 +465,7 @@
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -511,7 +511,7 @@
     if(![cell hasQueuedPatternButton]){
         int queuedIndex = [delegate getQueuedPatternIndexForInstrument:cell.instrument];
         if(queuedIndex >= 0){
-            NSLog(@"Auto enqueuing a pattern button");
+            DLog(@"Auto enqueuing a pattern button");
             [cell enqueuePatternButton:queuedIndex];
         }
     }
@@ -596,7 +596,7 @@
     // overlay by adding to the main view
     UIWindow *window = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
     [window addSubview:instrumentSelector];
-
+    
     [instrumentSelector setHidden:YES];
     
 }
@@ -685,10 +685,10 @@
         NSDictionary * instOption = [remainingInstrumentOptions objectAtIndex:indexSelected];
         NSNumber * instIndex = [instOption objectForKey:@"Index"];
         
-        NSLog(@"Remove instrument at selected index %i",indexSelected);
+        DLog(@"Remove instrument at selected index %i",indexSelected);
         
         [remainingInstrumentOptions removeObjectAtIndex:indexSelected];
-
+        
         for(int i = 0; i < [masterInstrumentOptions count]; i++){
             NSDictionary * dict = [masterInstrumentOptions objectAtIndex:i];
             if([dict objectForKey:@"Index"] == instIndex){
@@ -707,7 +707,7 @@
         
         // Resave pList
         [self saveCustomInstrumentToPlist:customInstrumentOptions];
-    
+        
     }
 }
 
@@ -715,7 +715,7 @@
 {
     
     // TODO: figure out positioning for 4"
-    NSLog(@"Init custom instrument selector");
+    DLog(@"Init custom instrument selector");
     
     // Get dimensions
     float y = [[UIScreen mainScreen] bounds].size.width;
@@ -726,9 +726,9 @@
     CGFloat selectorHeight = 276;
     
     onScreenCustomSelectorFrame = CGRectMake((x-selectorWidth)/2,
-                                       (y-selectorHeight)/2,
-                                       selectorWidth,
-                                       selectorHeight);
+                                             (y-selectorHeight)/2,
+                                             selectorWidth,
+                                             selectorHeight);
     
     offLeftCustomSelectorFrame = CGRectMake(onScreenCustomSelectorFrame.origin.x,
                                             y,
@@ -766,7 +766,7 @@
     [UIView animateWithDuration:0.5f
                      animations:^{[customSelector moveFrame:offLeftCustomSelectorFrame]; customSelector.alpha = 0.3;}
                      completion:^(BOOL finished){[self hideCustomInstrumentSelector]; }];
-
+    
     [self loadInstrumentSelector:self andScroll:scroll];
 }
 
@@ -780,7 +780,7 @@
 - (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName
 {
     NSNumber * newIndex = [NSNumber numberWithInt:[self getCustomInstrumentsNewIndex]];
-
+    
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
     [dict setValue:[NSNumber numberWithBool:TRUE] forKey:@"Custom"];
     [dict setValue:iconName forKey:@"IconName"];
@@ -850,7 +850,7 @@
 - (void)deleteCell:(id)sender withAnimation:(BOOL)animate
 {
     
-    NSLog(@"Delete cell");
+    DLog(@"Delete cell");
     
     NSIndexPath * pathToDelete = [instrumentTable indexPathForCell:sender];
     int row = pathToDelete.row;
@@ -861,7 +861,7 @@
         // Remove from data structure:
         [self removeSequencerWithIndex:pathToDelete.row];
         
-        if(TESTMODE) NSLog(@"Removed from data structure");
+        if(TESTMODE) DLog(@"Removed from data structure");
         
         SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
         
@@ -875,7 +875,7 @@
             [self removeCellAtRow:row andSection:section];
         }
         
-        if(TESTMODE) NSLog(@"Deleted row");
+        if(TESTMODE) DLog(@"Deleted row");
     }
 }
 
@@ -884,7 +884,7 @@
     
     [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:section]] withRowAnimation:UITableViewRowAnimationFade];
     
-    if(TESTMODE) NSLog(@"Reload data");
+    if(TESTMODE) DLog(@"Reload data");
     
     if ([instruments count] == 0){
         [instrumentTable reloadData];
@@ -893,7 +893,7 @@
     // Remove any enqueued patterns
     [delegate removeQueuedPatternForInstrumentAtIndex:row];
     
-   if(TESTMODE)  NSLog(@"Enqueued patterns removed");
+    if(TESTMODE)  DLog(@"Enqueued patterns removed");
     
     // Update cells:
     if([instruments count] > 0){
@@ -918,7 +918,7 @@
 
 - (void)removeSequencerWithIndex:(long)indexToRemove
 {
-    if(TESTMODE) NSLog(@"Remove sequencer with index %li",indexToRemove);
+    if(TESTMODE) DLog(@"Remove sequencer with index %li",indexToRemove);
     
     // Remove object from array:
     Instrument * removedInst = [instruments objectAtIndex:indexToRemove];
@@ -939,7 +939,7 @@
             // Clear guitarView and playspot
             selectedInstrumentIndex = -1;
             [delegate setMeasureAndUpdate:nil checkNotPlaying:FALSE];
-
+            
             [delegate resetPlayLocation];
         }else{
             // If there are instruments before this one...
@@ -961,13 +961,13 @@
 
 - (void)enableKnobIfDisabledForInstrument:(int)instIndex
 {
-    NSLog(@"Enable knob if disabled for instrument");
+    DLog(@"Enable knob if disabled for instrument");
     
     for(int i = 0; i < [instruments count]; i++){
         Instrument * inst = [instruments objectAtIndex:i];
         if(inst.instrument == instIndex){
             
-            NSLog(@"Sending to %i",instIndex);
+            DLog(@"Sending to %i",instIndex);
             SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             [cell enableKnobIfDisabled];
             
@@ -979,7 +979,7 @@
 - (void)disableKnobIfEnabledForInstrument:(int)instIndex
 {
     
-    NSLog(@"Disable knob if enabled for instrument");
+    DLog(@"Disable knob if enabled for instrument");
     
     for(int i = 0; i < [instruments count]; i++){
         Instrument * inst = [instruments objectAtIndex:i];
@@ -1038,7 +1038,7 @@
 
 - (void)addInstrumentBackIntoOptions:(Instrument *)inst
 {
-    NSLog(@"Add instrument back into options");
+    DLog(@"Add instrument back into options");
     
     // Get the dictionary associated with this inst:
     NSDictionary * instrumentDictionary;
@@ -1054,7 +1054,7 @@
     }
     
     // Add this dictionary to the end:
-    NSLog(@"Add dictionary to the end");
+    DLog(@"Add dictionary to the end");
     if(instrumentDictionary != nil){
         [remainingInstrumentOptions addObject:instrumentDictionary];
     }
@@ -1064,7 +1064,7 @@
     
     [self bubbleUp:lastIndex];
     
-    NSLog(@"Bubbled up");
+    DLog(@"Bubbled up");
     
 }
 
@@ -1076,7 +1076,7 @@
     }
     
     if([self does:[remainingInstrumentOptions objectAtIndex:index] comeBefore:[remainingInstrumentOptions objectAtIndex:index-1]
-            inArray:masterInstrumentOptions]){
+          inArray:masterInstrumentOptions]){
         
         [self swap:index with:index-1 inArray:remainingInstrumentOptions];
     }
@@ -1102,20 +1102,20 @@
     }
 }
 /*
-#pragma mark Mute Unmute Instrument Update View
-- (void)muteInstrument:(SeqSetViewCell *)sender isMute:(BOOL)isMute
-{
-    if(isMute == YES) NSLog(@"Mute instrument");
-    else NSLog(@"Unmute instrument");
-    
-    long senderIndex = [instrumentTable indexPathForCell:sender].row;
-    
-    Instrument * tempInst = [instruments objectAtIndex:senderIndex];
-    
-    tempInst.isMuted = isMute;
-    
-    [delegate saveContext:nil];
-}
+ #pragma mark Mute Unmute Instrument Update View
+ - (void)muteInstrument:(SeqSetViewCell *)sender isMute:(BOOL)isMute
+ {
+ if(isMute == YES) DLog(@"Mute instrument");
+ else DLog(@"Unmute instrument");
+ 
+ long senderIndex = [instrumentTable indexPathForCell:sender].row;
+ 
+ Instrument * tempInst = [instruments objectAtIndex:senderIndex];
+ 
+ tempInst.isMuted = isMute;
+ 
+ [delegate saveContext:nil];
+ }
  */
 
 #pragma mark UI Input
@@ -1163,7 +1163,7 @@
     [self selectInstrument:[instruments indexOfObject:inst]];
     
     [delegate setMeasureAndUpdate:newSelection.selectedMeasure checkNotPlaying:TRUE];
-
+    
     if (![delegate checkIsPlaying]){
         [self updateAllVisibleCells];
     }
@@ -1261,7 +1261,7 @@
     if([instruments count] > 3){
         
         Instrument * mutedInstrument = [instruments objectAtIndex:3];
-    
+        
         if(!mutedInstrument.isMuted){
             isFirstLaunch = FALSE;
         }
@@ -1279,7 +1279,7 @@
     float y = [[UIScreen mainScreen] bounds].size.width;
     float x = [[UIScreen mainScreen] bounds].size.height;
     
-    NSLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
+    DLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
     CGRect tutorialFrame = CGRectMake(0,0,x,y-BOTTOMBAR_HEIGHT-1);
     
