@@ -15,6 +15,10 @@
 @synthesize m_iconName;
 @synthesize m_custom;
 @synthesize m_sampler;
+@synthesize audio;
+
+@synthesize stringPaths;
+@synthesize stringSet;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -61,6 +65,11 @@
     return self;
 }
 
+- (void)initAudioWithInstrumentName:(NSString *)instName andSoundMaster:(SoundMaster *)soundMaster
+{
+    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths andIndex:m_id andSoundMaster:soundMaster];
+}
+
 -(XMPNode *)convertToXmp
 {
     XMPNode *node = NULL;
@@ -79,5 +88,32 @@
     
     return node;
 }
+
+-(void)releaseSounds
+{
+    [audio releaseSounds];
+}
+
+/*
+ 
+ #pragma mark Saving To Disk
+ 
+ - (void)encodeWithCoder:(NSCoder *)aCoder
+ {
+ [aCoder encodeObject:patterns forKey:@"Patterns"];
+ [aCoder encodeInt:instrument forKey:@"Instrument"];
+ [aCoder encodeInt:selectedPatternIndex forKey:@"Selected Pattern Index"];
+ [aCoder encodeObject:instrumentName forKey:@"Instrument Name"];
+ [aCoder encodeObject:iconName forKey:@"Icon Name"];
+ [aCoder encodeBool:isSelected forKey:@"Is Selected"];
+ [aCoder encodeObject:stringSet forKey:@"Strings"];
+ [aCoder encodeObject:stringPaths forKey:@"StringPaths"];
+ [aCoder encodeBool:isMuted forKey:@"Is Muted"];
+ [aCoder encodeObject:isCustom forKey:@"Custom"];
+ [aCoder encodeDouble:amplitude forKey:@"Amplitude"];
+ 
+ }
+ 
+ */
 
 @end

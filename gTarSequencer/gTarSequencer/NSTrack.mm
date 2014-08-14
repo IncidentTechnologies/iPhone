@@ -66,16 +66,28 @@
     
 	if ( self )
     {
-        m_patterns = [[NSMutableArray alloc] init];
-
+        
         m_instrument = [[NSInstrument alloc] init];
+        
+        m_patterns = [[NSMutableArray alloc] init];
+        
+        // Add Four Patterns
+        NSPattern * patternA = [[NSPattern alloc] initWithName:@"A" on:YES];
+        NSPattern * patternB = [[NSPattern alloc] initWithName:@"B" on:NO];
+        NSPattern * patternC = [[NSPattern alloc] initWithName:@"C" on:NO];
+        NSPattern * patternD = [[NSPattern alloc] initWithName:@"D" on:NO];
+        
+        [self addPattern:patternA];
+        [self addPattern:patternB];
+        [self addPattern:patternC];
+        [self addPattern:patternD];
 
         m_name = name;
         m_volume = volume;
         m_muted = muted;
         
-        selectedPattern = nil;
-        selectedPatternIndex = nil;
+        selectedPattern = patternA;
+        selectedPatternIndex = 0;
         selectedPatternDidChange = NO;
         
         isSelected = NO;
@@ -109,6 +121,111 @@
 -(void)addPattern:(NSPattern *)pattern
 {
     [m_patterns addObject:pattern];
+}
+
+#pragma mark Track Actions
+- (void)setSelected:(BOOL)selected
+{
+    isSelected = selected;
+    
+    if ( selected == YES )
+    {
+        selectedPattern.selectionChanged = YES;
+    }
+}
+
+- (BOOL)isSelected
+{
+    return isSelected;
+}
+
+#pragma mark Pattern Actions
+
+- (NSPattern *)selectPattern:(int)newSelection
+{
+    // -- update flag
+    selectedPatternDidChange = YES;
+    
+    // -- remove playband from old beat seq
+    selectedPattern.selectedMeasure.playband = -1;
+    
+    // -- formally select new beat seq
+    selectedPatternIndex = newSelection;
+    selectedPattern = [m_patterns objectAtIndex:selectedPatternIndex];
+    
+    // -- update beat seq's flags
+    [selectedPattern turnOnAllFlags];
+    
+    return selectedPattern;
+}
+
+- (void)turnOnAllFlags
+{
+    selectedPatternDidChange = YES;
+    [selectedPattern turnOnAllFlags];
+}
+
+- (void)notePlayedAtString:(int)str andFret:(int)fret
+{
+    [selectedPattern changeNoteAtString:str andFret:fret];
+}
+
+#pragma mark Measure Actions
+
+- (NSMeasure *)selectMeasure:(int)newSelection {
+    NSMeasure * newlySelectedMeasure = [selectedPattern selectMeasure:newSelection];
+    return newlySelectedMeasure;
+}
+
+- (void)addMeasure
+{
+    if ( selectedPattern.measureCount == MAX_BEAT_SEQUENCES )
+    {
+        return;
+    }
+    
+    // Update data structure:
+    [selectedPattern doubleMeasures];
+}
+
+- (void)removeMeasure {
+    
+    if (selectedPattern.measureCount == 1){
+        return;
+    }
+    
+    @synchronized(selectedPattern){
+        // Remove half the measures:
+        [selectedPattern halveMeasures];
+    }
+}
+
+- (void)clearSelectedMeasure {
+    [selectedPattern clearSelectedMeasure];
+}
+
+#pragma mark - Playing Notes
+
+// Play audio:
+- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)masteramplitude
+{
+    [m_instrument.audio updateMasterAmplitude:masteramplitude];
+    
+    if (sound && m_volume > 0)
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:m_instrument.m_id andAudio:m_instrument.audio withAmplitude:AMPLITUDE_SCALE*m_volume];
+    else
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:-1 andAudio:m_instrument.audio withAmplitude:0.0];
+}
+
+- (void)releaseSounds
+{
+    [m_instrument releaseSounds];
+}
+
+
+- (void)displayAllNotes {
+    for (NSMeasure * m in selectedPattern.m_measures)
+        [m setUpdateNotesOnMinimap:YES];
 }
 
 @end

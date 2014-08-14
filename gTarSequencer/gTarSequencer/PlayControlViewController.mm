@@ -537,9 +537,9 @@
     [recordButton addSubview:recordButtonSquare];
 }
 
--(NSMutableArray *)getInstruments
+-(NSMutableArray *)getTracks
 {
-    return [delegate getInstruments];
+    return [delegate getTracks];
 }
 
 #pragma mark - Record Session Overlays

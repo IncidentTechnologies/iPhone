@@ -33,7 +33,7 @@
 
 - (void) endTutorialIfOpen;
 
-- (NSMutableArray *)getInstruments;
+- (NSMutableArray *)getTracks;
 - (void) openInstrument:(int)instIndex;
 
 - (void) setRecordMode:(BOOL)record andAnimate:(BOOL)animate;

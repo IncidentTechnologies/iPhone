@@ -7,11 +7,11 @@
 //
 
 #import "AppData.h"
-#import "Instrument.h"
+#import "NSSequence.h"
 #import <AVFoundation/AVFoundation.h>
 //#import "SCUI.h"
 
-#define MAX_INSTRUMENTS 5
+#define MAX_TRACKS 5
 #define MIN_MEASURES 8
 #define MEASURES_PER_SCREEN 8.0
 
@@ -32,7 +32,7 @@
 - (void) showRecordOverlay;
 - (void) hideRecordOverlay;
 
-- (NSMutableArray *)getInstruments;
+- (NSMutableArray *)getTracks;
 
 @end
 
@@ -45,9 +45,9 @@
     
     int numMeasures;
     
-    NSString * prevPattern[MAX_INSTRUMENTS];
-    NSString * prevInterruptPattern[MAX_INSTRUMENTS];
-    double prevTranspose[MAX_INSTRUMENTS];
+    NSString * prevPattern[MAX_TRACKS];
+    NSString * prevInterruptPattern[MAX_TRACKS];
+    double prevTranspose[MAX_TRACKS];
     
     // Recording
     NSTimer * recordTimer;

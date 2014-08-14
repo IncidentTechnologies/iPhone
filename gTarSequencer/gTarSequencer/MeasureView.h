@@ -7,7 +7,7 @@
 //
 
 #import "AppData.h"
-#import "Measure.h"
+#import "NSMeasure.h"
 #import <QuartzCore/QuartzCore.h>
 
 // MeasureView (MV) is the graphical represenation of a measure. It implements a pull-based update system,
@@ -29,7 +29,7 @@
     BOOL isBlankMeasure;
 }
 
-@property (retain, nonatomic) Measure * measure;
+@property (retain, nonatomic) NSMeasure * measure;
 
 - (void)update;
 - (void)drawMeasure:(BOOL)isBlank;

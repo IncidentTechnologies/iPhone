@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Instrument.h"
+#import "NSSequence.h"
 #import "TutorialViewController.h"
 #import "UIKnob.h"
 #import "VolumeKnobView.h"
@@ -17,15 +17,15 @@
 - (void) saveContext:(NSString *)filepath force:(BOOL)forceSave;
 - (BOOL) checkIsPlaying;
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
-- (void) dequeueAllPatternsForInstrument:(Instrument *)inst;
-- (int) getQueuedPatternIndexForInstrument:(Instrument *)inst;
+- (void) dequeueAllPatternsForTrack:(NSTrack *)track;
+- (int) getQueuedPatternIndexForTrack:(NSTrack *)track;
 - (void) viewSeqSetWithAnimation:(BOOL)animate;
 
 - (BOOL) isLeftNavOpen;
 - (void) openLeftNavigator;
 - (void) closeLeftNavigator;
 
-- (void) setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying;
+- (void) setMeasureAndUpdate:(NSMeasure *)measure checkNotPlaying:(BOOL)checkNotPlaying;
 
 @end
 
@@ -54,7 +54,7 @@
     int playband[NUM_MEASURES];
     
     // Local instrument data
-    Instrument * currentInst;
+    NSTrack * currentTrack;
     
     int measureCounts[NUM_PATTERNS];
     int declaredActiveMeasures[NUM_PATTERNS];
@@ -84,7 +84,7 @@
 
 -(void)notifyQueuedPatternAndResetCount:(BOOL)resetCount;
 
--(void)setActiveInstrument:(Instrument *)inst;
+-(void)setActiveTrack:(NSTrack *)track;
 
 -(void)updateActiveMeasure;
 

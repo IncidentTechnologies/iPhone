@@ -7,7 +7,7 @@
 //
 
 #import "AppData.h"
-#import "Instrument.h"
+#import "NSSequence.h"
 #import "MeasureView.h"
 #import "UIKnob.h"
 #import <QuartzCore/QuartzCore.h>
@@ -62,7 +62,7 @@
 
 @property (weak, nonatomic) SeqSetViewController * parent;
 
-@property (weak, nonatomic) Instrument * instrument;
+@property (weak, nonatomic) NSTrack * track;
 @property (retain, nonatomic) NSString * instrumentName;
 @property (retain, nonatomic) UIImage * instrumentIcon;
 
@@ -70,7 +70,7 @@
 
 @property (nonatomic) BOOL isSelected;
 @property (nonatomic) BOOL isMute;
-@property (weak, nonatomic) Pattern * patternToDisplay;
+@property (weak, nonatomic) NSPattern * patternToDisplay;
 @property (retain, nonatomic) NSMutableArray * measureViews;
 @property (retain, nonatomic) NSMutableArray * measureBorders;
 

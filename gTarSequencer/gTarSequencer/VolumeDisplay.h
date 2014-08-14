@@ -8,7 +8,7 @@
 
 #import "AppData.h"
 #import <QuartzCore/QuartzCore.h>
-#import "Instrument.h"
+#import "NSSequence.h"
 #import "UILevelSlider.h"
 
 @protocol VolumeDisplayDelegate <NSObject>
@@ -19,7 +19,7 @@
 - (void) volumeDisplayDidClose;
 - (double) getVolume;
 
-- (NSMutableArray *)getInstruments;
+- (NSMutableArray *)getTracks;
 - (void) openInstrument:(int)instIndex;
 
 - (void) enableInstrument:(int)instIndex;
@@ -54,7 +54,7 @@
     UIView * sidebar;
     //UIView * slider;
     UIView * instrumentFrameContainer;
-    NSMutableArray * instruments;
+    NSMutableArray * tracks;
     NSMutableDictionary * sliders;
     NSMutableDictionary * instrumentIcons;
     UILevelSlider * masterSlider;
@@ -66,7 +66,6 @@
 - (void)setVolume:(double)value;
 - (void)expand;
 - (void)contract;
-- (void)setInstruments:(NSMutableArray *)instrumentList;
 
 @property (weak, nonatomic) id <VolumeDisplayDelegate> delegate;
 @property (retain, nonatomic) UIButton * sliderCircle;

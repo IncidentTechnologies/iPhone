@@ -221,7 +221,7 @@
 #pragma mark - Instrument Updates
 - (void)setMeasureCountTo:(int)measureCount forPattern:(int)patternIndex
 {
-    Pattern * p = [currentInst.patterns objectAtIndex:patternIndex];
+    NSPattern * p = [currentTrack.m_patterns objectAtIndex:patternIndex];
     
     if(measureCount < measureCounts[patternIndex]){
         
@@ -243,10 +243,10 @@
 
 - (void)setActiveMeasureIndex:(int)measureIndex forPattern:(int)patternIndex
 {
-    DLog(@"Set Active Measure Index m:%i, p:%i, i:%@",measureIndex,patternIndex,currentInst);
+    DLog(@"Set Active Measure Index m:%i, p:%i, i:%@",measureIndex,patternIndex,currentTrack.m_instrument);
     
-    Pattern * p = [currentInst.patterns objectAtIndex:patternIndex];
-    Measure * m = [p.measures objectAtIndex:measureIndex];
+    NSPattern * p = [currentTrack.m_patterns objectAtIndex:patternIndex];
+    NSMeasure * m = [p.m_measures objectAtIndex:measureIndex];
     
     [p setSelectedMeasure:m];
     [p setSelectedMeasureIndex:measureIndex];
@@ -254,8 +254,8 @@
 
 - (void)setActivePatternIndex:(int)patternIndex
 {
-    [currentInst setSelectedPatternIndex:patternIndex];
-    [currentInst setSelectedPattern:currentInst.patterns[patternIndex]];
+    [currentTrack setSelectedPatternIndex:patternIndex];
+    [currentTrack setSelectedPattern:currentTrack.m_patterns[patternIndex]];
 }
 
 #pragma mark - Instruments
@@ -264,21 +264,21 @@
     [delegate viewSeqSetWithAnimation:NO];
 }
 
-- (void)setActiveInstrument:(Instrument *)inst
+- (void)setActiveTrack:(NSTrack *)track
 {
     
-    if(inst == NULL){
+    if(track == NULL){
         // TODO: handle 0 instruments case
         return;
     }
     
-    currentInst = inst;
+    currentTrack = track;
     
     // Check muting before patterns
-    BOOL toMute = inst.isMuted;
+    BOOL toMute = track.m_muted;
     
     // Icon
-    [instrumentIcon setImage:[UIImage imageNamed:inst.iconName]];
+    [instrumentIcon setImage:[UIImage imageNamed:track.m_instrument.m_iconName]];
     
     // Reset playband
     [self resetPlayband];
@@ -295,30 +295,30 @@
     // Measure counts
     @synchronized(self){
         for(int i = 0; i < NUM_PATTERNS; i++){
-            Pattern * p = [inst.patterns objectAtIndex:i];
+            NSPattern * p = [track.m_patterns objectAtIndex:i];
             measureCounts[i] = p.measureCount;
         }
     }
     
     // Custom Indicator
-    [self showHideCustomIndicator:[currentInst checkIsCustom]];
+    [self showHideCustomIndicator:currentTrack.m_instrument.m_custom];
     
     // Update active pattern and active measure
-    activePattern = inst.selectedPatternIndex;
-    activeMeasure = inst.selectedPattern.selectedMeasureIndex;
-    [self changePatternToPattern:inst.selectedPatternIndex thenChangeActiveMeasure:inst.selectedPattern.selectedMeasureIndex];
+    activePattern = track.selectedPatternIndex;
+    activeMeasure = track.selectedPattern.selectedMeasureIndex;
+    [self changePatternToPattern:track.selectedPatternIndex thenChangeActiveMeasure:track.selectedPattern.selectedMeasureIndex];
     
     // Set pattern button
     [self selectPatternButton:activePattern];
     
     // Determine if there is a queued pattern
-    int queuedIndex = [delegate getQueuedPatternIndexForInstrument:currentInst];
+    int queuedIndex = [delegate getQueuedPatternIndexForTrack:currentTrack];
     if(queuedIndex >= 0){
         DLog(@"Enqueue pattern button for newly added instrument");
         [self enqueuePatternButton:queuedIndex];
     }
     
-    [volumeKnob SetValue:[currentInst getAmplitude]];
+    [volumeKnob SetValue:currentTrack.m_volume];
     
     // Determine on or off
     isMute = toMute;
@@ -746,8 +746,8 @@
             {
                 UIButton * note = noteButtons[measureIndex][FRETS_ON_GTAR*s+f];
                 
-                Pattern * p = currentInst.patterns[patternIndex];
-                Measure * m = p.measures[measureIndex];
+                NSPattern * p = currentTrack.m_patterns[patternIndex];
+                NSMeasure * m = p.m_measures[measureIndex];
                 
                 if([m isNoteOnAtString:s andFret:f]){
                     [note setBackgroundColor:colors[s]];
@@ -801,8 +801,8 @@
 
 - (void)updateGuitarView
 {
-    [currentInst.selectedPattern.selectedMeasure turnOnGuitarFlags];
-    [delegate setMeasureAndUpdate:currentInst.selectedPattern.selectedMeasure checkNotPlaying:NO];
+    [currentTrack.selectedPattern.selectedMeasure turnOnGuitarFlags];
+    [delegate setMeasureAndUpdate:currentTrack.selectedPattern.selectedMeasure checkNotPlaying:NO];
 }
 
 #pragma mark - Patterns
@@ -857,7 +857,7 @@
     if(volumeKnob && ![volumeKnob isEnabled]){
         [volumeKnob EnableKnob];
     }
-    [currentInst setIsMuted:NO];
+    currentTrack.m_muted = NO;
     isMute = NO;
     
     [delegate saveContext:nil force:NO];
@@ -870,7 +870,7 @@
     if(volumeKnob && [volumeKnob isEnabled]){
         [volumeKnob DisableKnob];
     }
-    [currentInst setIsMuted:YES];
+    currentTrack.m_muted = YES;
     isMute = YES;
     
     [delegate saveContext:nil force:NO];
@@ -903,8 +903,8 @@
         return;
     }
     
-    Pattern * p = currentInst.patterns[activePattern];
-    Measure * m = p.measures[activeMeasure];
+    NSPattern * p = currentTrack.m_patterns[activePattern];
+    NSMeasure * m = p.m_measures[activeMeasure];
     
     if([m isNoteOnAtString:string andFret:fret]){
         [noteButton setBackgroundColor:[UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0]];
@@ -997,13 +997,13 @@
         isMute = YES;
         isPlaying = [delegate checkIsPlaying];
         [self clearQueuedPatternButton];
-        [delegate dequeueAllPatternsForInstrument:currentInst];
+        [delegate dequeueAllPatternsForTrack:currentTrack];
     }else if(tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton == offButton){
         DLog(@"Case 2");
         isMute = NO;
         isPlaying = [delegate checkIsPlaying];
         [self clearQueuedPatternButton];
-        [delegate dequeueAllPatternsForInstrument:currentInst];
+        [delegate dequeueAllPatternsForTrack:currentTrack];
     }else{
         DLog(@"Case 3");
         isMute = NO;
@@ -1012,13 +1012,13 @@
             
             NSMutableDictionary * pattern = [NSMutableDictionary dictionary];
             [pattern setObject:[NSNumber numberWithInt:tappedIndex] forKey:@"Index"];
-            [pattern setObject:currentInst forKey:@"Instrument"];
+            [pattern setObject:currentTrack forKey:@"Instrument"];
             
             [delegate enqueuePattern:pattern];
             
         }else if(tappedIndex == activePattern){
             
-            [delegate dequeueAllPatternsForInstrument:currentInst];
+            [delegate dequeueAllPatternsForTrack:currentTrack];
             
             [self commitPatternChange:tappedIndex];
         }else{
@@ -1528,7 +1528,7 @@
         [volumeKnob setUserInteractionEnabled:NO];
         [offButton addSubview:volumeKnob];
         
-        [volumeKnob SetValue:[currentInst getAmplitude]];
+        [volumeKnob SetValue:currentTrack.m_volume];
         
         volumeKnobView.delegate = self;
         
@@ -1543,7 +1543,7 @@
 
 - (void)resetVolume
 {
-    [volumeKnob SetValue:[currentInst getAmplitude]];
+    [volumeKnob SetValue:currentTrack.m_volume];
 }
 
 - (void)knobRegionHit
@@ -1599,7 +1599,7 @@
 
 -(void)trackingDidChange
 {
-    [currentInst setAmplitude:[tempVolumeKnob GetValue]];
+    currentTrack.m_volume = [tempVolumeKnob GetValue];
 }
 
 -(void)trackingDidEnd
@@ -1609,7 +1609,7 @@
     [volumeKnob SetValue:[tempVolumeKnob GetValue]];
     
     DLog(@"new volume is %f",[volumeKnob GetValue]);
-    [currentInst setAmplitude:[volumeKnob GetValue]];
+    currentTrack.m_volume = [volumeKnob GetValue];
     
     [volumeBg removeFromSuperview];
     [volumeKnob setHidden:NO];

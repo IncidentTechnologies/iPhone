@@ -39,4 +39,6 @@
 
 -(void)addTrack:(NSTrack *)track;
 
+-(int)trackCount;
+
 @end

@@ -214,8 +214,8 @@
 #pragma mark - Instruments
 - (void)drawInstruments
 {
-    if(instruments != nil){
-        [instruments removeAllObjects];
+    if(tracks != nil){
+        [tracks removeAllObjects];
         
         // clear previous
         for(UIView * v in instrumentFrameContainer.subviews){
@@ -223,22 +223,22 @@
         }
     }
     
-    instruments = [[NSMutableArray alloc] initWithArray:[delegate getInstruments]];
+    tracks = [[NSMutableArray alloc] initWithArray:[delegate getTracks]];
     sliders = [[NSMutableDictionary alloc] init];
     
     int i = 0;
-    float instrumentWidth = instrumentFrameContainer.frame.size.width / ([instruments count]+1);
+    float instrumentWidth = instrumentFrameContainer.frame.size.width / ([tracks count]+1);
     
     // reset other frames
     if(instrumentWidth < 130){
-        [sidebar setFrame:CGRectMake([instruments count]*instrumentWidth-1, -1, instrumentWidth, instrumentFrameContainer.frame.size.height)];
+        [sidebar setFrame:CGRectMake([tracks count]*instrumentWidth-1, -1, instrumentWidth, instrumentFrameContainer.frame.size.height)];
         //[slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
         //[sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
         
         [masterSlider setFrame:CGRectMake(sidebar.frame.size.width/2 - SLIDER_WIDTH/2,10,SLIDER_WIDTH,SLIDER_HEIGHT)];
         
     }else{
-        instrumentWidth = (instrumentFrameContainer.frame.size.width-SIDEBAR_WIDTH) / ([instruments count]);
+        instrumentWidth = (instrumentFrameContainer.frame.size.width-SIDEBAR_WIDTH) / ([tracks count]);
         
         [sidebar setFrame:CGRectMake(outline.frame.size.width - SIDEBAR_WIDTH+1, -1, SIDEBAR_WIDTH, outline.frame.size.height+2)];
         //[slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
@@ -247,7 +247,7 @@
         [masterSlider setFrame:CGRectMake(sidebar.frame.size.width/2 - SLIDER_WIDTH/2,10,SLIDER_WIDTH,SLIDER_HEIGHT)];
     }
     
-    for(Instrument * inst in instruments){
+    for(NSTrack * track in tracks){
         
         // draw partial frame
         CGRect instrumentFrame = CGRectMake(i*instrumentWidth-1, 0, instrumentWidth+1, instrumentFrameContainer.frame.size.height);
@@ -265,14 +265,14 @@
         
         DLog(@"Position is %f",instrumentIconFrame.origin.x);
         
-        [instrumentIcon setImage:[UIImage imageNamed:inst.iconName] forState:UIControlStateNormal];
+        [instrumentIcon setImage:[UIImage imageNamed:track.m_instrument.m_iconName] forState:UIControlStateNormal];
         [instrumentIcon setContentEdgeInsets:UIEdgeInsetsMake(10,10,10,10)];
         
         instrumentIcon.layer.cornerRadius = 5.0;
         instrumentIcon.layer.borderWidth = 1.0;
         instrumentIcon.layer.borderColor = [UIColor whiteColor].CGColor;
         
-        if(inst.isMuted){
+        if(track.m_muted){
             [instrumentIcon setAlpha:0.5];
         }
         
@@ -288,7 +288,7 @@
         CGRect levelSliderFrame = CGRectMake(instrumentFrame.size.width/2 - levelSliderWidth/2,90,levelSliderWidth,levelSliderHeight);
         UILevelSlider * volumeSlider = [[UILevelSlider alloc] initWithFrame:levelSliderFrame];
         [volumeSlider setBackgroundColor:[UIColor clearColor]];
-        [volumeSlider setSliderValue:(1-inst.amplitude)];
+        [volumeSlider setSliderValue:(1-track.m_volume)];
         
         [volumeSlider setRedColor:[UIColor colorWithRed:203/255.0 green:81/255.0 blue:26/255.0 alpha:1.0]];
         [volumeSlider setGreenColor:[UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0]];
@@ -303,8 +303,8 @@
         [instrumentView addSubview:volumeSlider];
         
         // Link volume sliders to instruments
-        [inst.audio releaseLevelSlider];
-        [inst.audio commitLevelSlider:volumeSlider];
+        [track.m_instrument.audio releaseLevelSlider];
+        [track.m_instrument.audio commitLevelSlider:volumeSlider];
         
         i++;
     }
@@ -330,13 +330,13 @@
         if(senderButton == [instrumentIcons objectForKey:instIndex]){
             
             int index = [instIndex intValue];
-            Instrument * inst = [instruments objectAtIndex:index];
+            NSTrack * track = [tracks objectAtIndex:index];
             
-            if(inst.isMuted){
-                [delegate enableInstrument:inst.instrument];
+            if(track.m_muted){
+                [delegate enableInstrument:track.m_instrument.m_id];
                 [senderButton setAlpha:1.0];
             }else{
-                [delegate disableInstrument:inst.instrument];
+                [delegate disableInstrument:track.m_instrument.m_id];
                 [senderButton setAlpha:0.5];
             }
             
@@ -418,7 +418,7 @@
 
 -(void)valueDidChange:(double)newValue forSlider:(id)sender
 {
-    Instrument * inst;
+    NSTrack * track;
     UILevelSlider * levelSender = (UILevelSlider *)sender;
     
     if(levelSender == masterSlider){
@@ -429,8 +429,8 @@
     
     for(NSNumber * key in sliders){
         if(levelSender == [sliders objectForKey:key]){
-            inst = [instruments objectAtIndex:[key intValue]];
-            inst.amplitude = newValue;
+            track = [tracks objectAtIndex:[key intValue]];
+            track.m_volume = newValue;
             return;
         }
     }

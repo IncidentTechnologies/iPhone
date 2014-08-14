@@ -9,7 +9,7 @@
 #import "SeqSetViewController.h"
 #import "SoundMaster_.mm"
 
-#define MAX_INSTRUMENTS 5
+#define MAX_TRACKS 5
 
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
@@ -40,7 +40,6 @@
         [self initCustomInstrumentSelector];
         
         sequence = [[NSSequence alloc] initWithName:@"sequence" tempo:120 volume:1.0];
-        instruments = [[NSMutableArray alloc] init];
         
         self.tableView.bounces = NO;
         [self turnContentDrawingOn];
@@ -129,23 +128,25 @@
     }
 }
 
+/*
 - (void)setInstrumentsFromData:(NSData *)instData
 {
     
     // clear table if it's not empty
-    if([instruments count] > 0){
-        for(int i = 0; i < [instruments count]; i++){
+    //if([sequence trackCount] > 0){
+        for(int i = 0; i < [sequence trackCount]; i++){
             [self deleteCell:[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] withAnimation:NO];
         }
-    }
+    //}
     
     [self setRemainingInstrumentOptionsFromMasterOptions];
+    
     instruments = [NSKeyedUnarchiver unarchiveObjectWithData:instData];
     
     // Remove all the previously used instruments from the remaining list:
     NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
     NSMutableArray * instrumentsToRemove = [[NSMutableArray alloc] init];
-    for (Instrument * inst in instruments)
+    for (NSInstrument * inst in instruments)
     {
         BOOL found = false;
         for (NSDictionary * dict in remainingInstrumentOptions)
@@ -169,21 +170,15 @@
     
     [instrumentTable reloadData];
     
-    [delegate numInstrumentsDidChange:[instruments count]];
+    [delegate numInstrumentsDidChange:[sequence trackCount]];
     
 }
+ */
 
-- (Instrument *)getCurrentInstrument
-{
-    if([instruments count] > 0 && selectedInstrumentIndex >= 0 && selectedInstrumentIndex < [instruments count])
-        return [instruments objectAtIndex:selectedInstrumentIndex];
-    else
-        return nil;
-}
 
-- (long)countInstruments
+- (long)countTracks
 {
-    return [instruments count];
+    return [sequence trackCount];
 }
 
 - (NSSequence *)getSequence
@@ -191,23 +186,24 @@
     return sequence;
 }
 
-- (NSMutableArray *)getInstruments
+- (NSMutableArray *)getTracks
 {
-    return instruments;
+    return sequence.m_tracks;
 }
 
-- (Instrument *)getInstrumentAtIndex:(int)i
+- (NSTrack *)getTrackAtIndex:(int)index
 {
-    if(i < [instruments count] && i >= 0)
-        return [instruments objectAtIndex:i];
-    else
+    if(index < [sequence trackCount] && index >= 0){
+        return [sequence.m_tracks objectAtIndex:index];
+    }else{
         return nil;
+    }
 }
 
 - (BOOL)isValidInstrumentIndex:(int)inst
 {
-    for(Instrument * i in instruments){
-        if(i.instrument == inst){
+    for(NSTrack * t in sequence.m_tracks){
+        if(t.m_instrument.m_id == inst){
             return YES;
         }
     }
@@ -258,7 +254,8 @@
     
     [self selectInstrument:senderIndex];
     
-    [delegate viewSelectedInstrument];
+    [delegate openInstrument:senderIndex];
+    
 }
 
 - (void)setSelectedCellToSelectedInstrument
@@ -293,24 +290,30 @@
 
 - (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIsCustom:(NSNumber *)isCustom
 {
-    Instrument * newInstrument = [[Instrument alloc] init];
-    newInstrument.instrument = index;
-    newInstrument.instrumentName = instName;
-    newInstrument.iconName = iconName;
+    NSTrack * newTrack = [[NSTrack alloc] initWithName:instName volume:1.0 muted:NO];
+    
+    // Add Track
+    [sequence addTrack:newTrack];
+
+    NSInstrument * newInstrument = newTrack.m_instrument;
+    newInstrument.m_id = index;
+    newInstrument.m_name= instName;
+    newInstrument.m_iconName = iconName;
+    newInstrument.m_custom = isCustom;
+    
     newInstrument.stringSet = stringSet;
     newInstrument.stringPaths = stringPaths;
-    newInstrument.isCustom = isCustom;
-    
+        
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [newInstrument initAudioWithInstrumentName:instName andSoundMaster:soundMaster];
     });
     
-    [instruments addObject:newInstrument];
+    //[instruments addObject:newInstrument];
     
-    [self selectInstrument:[instruments count] - 1];
+    [self selectInstrument:[sequence trackCount] - 1];
     
     // insert cell:
-    if ([instruments count] == 1){
+    if ([sequence trackCount] == 1){
         
         [delegate turnOffGuitarEffects];
         
@@ -323,7 +326,7 @@
         if ([remainingInstrumentOptions count] == 0){
             [instrumentTable reloadData];
         }else{
-            [instrumentTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[instruments count] -1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+            [instrumentTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sequence trackCount] -1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
             
             if(![delegate checkIsPlaying]){
                 [self updateAllVisibleCells];
@@ -331,7 +334,7 @@
         }
     }
     
-    [delegate numInstrumentsDidChange:[instruments count]];
+    [delegate numInstrumentsDidChange:[sequence trackCount]];
     [delegate saveContext:nil force:YES];
 }
 
@@ -345,9 +348,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if ([remainingInstrumentOptions count] == 0){
-        return [instruments count];
+        return [sequence trackCount];
     }else{
-        return [instruments count] + 1;
+        return [sequence trackCount] + 1;
     }
 }
 
@@ -355,15 +358,15 @@
 {
     int tableHeight = instrumentTable.frame.size.height;
     
-    if([instruments count] >= MAX_INSTRUMENTS && indexPath.row == [instruments count]){
+    if([sequence trackCount] >= MAX_TRACKS && indexPath.row == [sequence trackCount]){
         return 0;
-    }else if([instruments count] == 0)
+    }else if([sequence trackCount] == 0)
         return tableHeight;
-    else if(indexPath.row < [instruments count])
+    else if(indexPath.row < [sequence trackCount])
         return tableHeight/3+1;
-    else if([instruments count] == 1)
+    else if([sequence trackCount] == 1)
         return 2*tableHeight/3-1;
-    else if([instruments count] == 2)
+    else if([sequence trackCount] == 2)
         return tableHeight/3-2;
     
     // else
@@ -385,7 +388,7 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    if (indexPath.row < [instruments count]){
+    if (indexPath.row < [sequence trackCount]){
         
         static NSString *CellIdentifier = @"TrackCell";
         
@@ -397,17 +400,17 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.parent = self;
         
-        Instrument * tempInst = [instruments objectAtIndex:indexPath.row];
-        [tempInst turnOnAllFlags];
+        NSTrack * tempTrack = [sequence.m_tracks objectAtIndex:indexPath.row];
+        [tempTrack turnOnAllFlags];
         
-        cell.instrumentName = tempInst.instrumentName;
-        cell.instrumentIcon = [UIImage imageNamed:tempInst.iconName];
-        cell.instrument = tempInst;
-        cell.isMute = tempInst.isMuted;
+        cell.instrumentName = tempTrack.m_instrument.m_name;
+        cell.instrumentIcon = [UIImage imageNamed:tempTrack.m_instrument.m_iconName];
+        cell.track = tempTrack;
+        cell.isMute = tempTrack.m_muted;
         
         [cell resetVolume];
         
-        if([tempInst checkIsCustom]){
+        if(tempTrack.m_instrument.m_custom){
             [cell showCustomIndicator];
         }else{
             [cell hideCustomIndicator];
@@ -462,7 +465,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == [instruments count]){
+    if(indexPath.row == [sequence trackCount]){
         return NO;
     }else{
         return canEdit;
@@ -515,7 +518,7 @@
     
     // Double check the cell knows it has a queued pattern
     if(![cell hasQueuedPatternButton]){
-        int queuedIndex = [delegate getQueuedPatternIndexForInstrument:cell.instrument];
+        int queuedIndex = [delegate getQueuedPatternIndexForTrack:cell.track];
         if(queuedIndex >= 0){
             DLog(@"Auto enqueuing a pattern button");
             [cell enqueuePatternButton:queuedIndex];
@@ -535,18 +538,18 @@
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
         
-        if(cell.instrument.instrument == index){
+        if(cell.track.m_instrument.m_id == index){
             [cell resetQueuedPatternButton];
         }
     }
 }
 
 // Bottom to top
-- (void)dequeueAllPatternsForInstrument:(id)sender
+- (void)dequeueAllPatternsForTrack:(id)sender
 {
     SeqSetViewCell * cell = (SeqSetViewCell *)sender;
-    Instrument * inst = cell.instrument;
-    int instIndex = inst.instrument;
+    NSTrack * track = cell.track;
+    int instIndex = track.m_instrument.m_id;
     
     [delegate removeQueuedPatternForInstrumentAtIndex:instIndex];
     
@@ -609,7 +612,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == [instruments count]){
+    if(indexPath.row == [sequence trackCount]){
         [self loadInstrumentSelector:self andScroll:NO];
     }
 }
@@ -620,7 +623,7 @@
     [soundMaster reset];
     
     // Turn off selected status of the add instrument button (which was just clicked):
-    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[instruments count] inSection:0];
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[sequence trackCount] inSection:0];
     UITableViewCell * addInstCell = [instrumentTable cellForRowAtIndexPath:indexPath];
     addInstCell.selected = NO;
     
@@ -829,17 +832,17 @@
 - (void)selectInstrument:(long)index
 {
     // Deselect old:
-    for (Instrument * seq in instruments)
+    for (NSTrack * t in sequence.m_tracks)
     {
-        [seq setSelected:NO];
+        [t setSelected:NO];
     }
     
     selectedInstrumentIndex = index;
     
     // Select new:
-    if(selectedInstrumentIndex >= 0 && selectedInstrumentIndex < [instruments count]){
+    if(selectedInstrumentIndex >= 0 && selectedInstrumentIndex < [sequence trackCount]){
         
-        Instrument * newSelection = [instruments objectAtIndex:selectedInstrumentIndex];
+        NSTrack * newSelection = [sequence.m_tracks objectAtIndex:selectedInstrumentIndex];
         [newSelection setSelected:YES];
         
         // Update guitarView's measureToDisplay
@@ -853,6 +856,17 @@
     }
 }
 
+- (NSTrack *)getCurrentTrack
+{
+    for (NSTrack * t in sequence.m_tracks){
+        if(t.m_instrument.m_id == selectedInstrumentIndex){
+            return t;
+        }
+    }
+    
+    return nil;
+}
+
 - (void)deleteCell:(id)sender withAnimation:(BOOL)animate
 {
     
@@ -863,7 +877,7 @@
     int section = pathToDelete.section;
     
     // Beware race conditions deleting 5+ instruments at a time
-    @synchronized(instruments){
+    @synchronized(sequence.m_tracks){
         // Remove from data structure:
         [self removeSequencerWithIndex:pathToDelete.row];
         
@@ -892,7 +906,7 @@
     
     if(TESTMODE) DLog(@"Reload data");
     
-    if ([instruments count] == 0){
+    if ([sequence trackCount] == 0){
         [instrumentTable reloadData];
     }
     
@@ -902,7 +916,7 @@
     if(TESTMODE)  DLog(@"Enqueued patterns removed");
     
     // Update cells:
-    if([instruments count] > 0){
+    if([sequence trackCount] > 0){
         if(![delegate checkIsPlaying]){
             [self updateAllVisibleCells];
         }
@@ -910,13 +924,13 @@
         [self stopAllPlaying];
     }
     
-    [delegate numInstrumentsDidChange:[instruments count]];
+    [delegate numInstrumentsDidChange:[sequence trackCount]];
     [delegate saveContext:nil force:YES];
 }
 
 - (void)deleteAllCells
 {
-    for(int i = [instruments count] - 1; i >= 0; i--){
+    for(int i = [sequence trackCount] - 1; i >= 0; i--){
         SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         [self deleteCell:cell withAnimation:NO];
     }
@@ -927,13 +941,13 @@
     if(TESTMODE) DLog(@"Remove sequencer with index %li",indexToRemove);
     
     // Remove object from array:
-    Instrument * removedInst = [instruments objectAtIndex:indexToRemove];
+    NSTrack * removedTrack = [sequence.m_tracks objectAtIndex:indexToRemove];
     
-    [removedInst releaseSounds];
-    [instruments removeObjectAtIndex:indexToRemove];
+    [removedTrack releaseSounds];
+    [sequence.m_tracks removeObjectAtIndex:indexToRemove];
     
     // Add instrument back into instrument options array:
-    [self addInstrumentBackIntoOptions:removedInst];
+    [self addInstrumentBackIntoOptions:removedTrack.m_instrument];
     
     /* If the selected instrument is about to be removed, then a new one must be selected.
      The selected index must also be updated if an instrument above the selected is deleted.
@@ -941,7 +955,7 @@
      and the playband reset */
     if(selectedInstrumentIndex == indexToRemove){
         // If there are no more instruments:
-        if ([instruments count] == 0){
+        if ([sequence trackCount] == 0){
             // Clear guitarView and playspot
             selectedInstrumentIndex = -1;
             [delegate setMeasureAndUpdate:nil checkNotPlaying:FALSE];
@@ -969,15 +983,15 @@
 {
     DLog(@"Enable knob if disabled for instrument");
     
-    for(int i = 0; i < [instruments count]; i++){
-        Instrument * inst = [instruments objectAtIndex:i];
-        if(inst.instrument == instIndex){
+    for(int i = 0; i < [sequence trackCount]; i++){
+        NSTrack * track = [sequence.m_tracks objectAtIndex:i];
+        if(track.m_instrument.m_id == instIndex){
             
             DLog(@"Sending to %i",instIndex);
             SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             [cell enableKnobIfDisabled];
             
-            inst.isMuted = NO;
+            track.m_muted = NO;
         }
     }
 }
@@ -987,13 +1001,13 @@
     
     DLog(@"Disable knob if enabled for instrument");
     
-    for(int i = 0; i < [instruments count]; i++){
-        Instrument * inst = [instruments objectAtIndex:i];
-        if(inst.instrument == instIndex){
+    for(int i = 0; i < [sequence trackCount]; i++){
+        NSTrack * track = [sequence.m_tracks objectAtIndex:i];
+        if(track.m_instrument.m_id == instIndex){
             SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             [cell disableKnobIfEnabled];
             
-            inst.isMuted = YES;
+            track.m_muted = YES;
         }
     }
 }
@@ -1042,7 +1056,7 @@
 
 #pragma mark Re-adding Instruments
 
-- (void)addInstrumentBackIntoOptions:(Instrument *)inst
+- (void)addInstrumentBackIntoOptions:(NSInstrument *)inst
 {
     DLog(@"Add instrument back into options");
     
@@ -1052,7 +1066,7 @@
     int i = 0;
     for(NSDictionary * instDict in masterInstrumentOptions){
         
-        if([[instDict objectForKey:@"Name"] isEqualToString:inst.instrumentName]){
+        if([[instDict objectForKey:@"Name"] isEqualToString:inst.m_name]){
             instrumentDictionary = instDict;
         }
         
@@ -1116,7 +1130,7 @@
  
  long senderIndex = [instrumentTable indexPathForCell:sender].row;
  
- Instrument * tempInst = [instruments objectAtIndex:senderIndex];
+ NSInstrument * tempInst = [instruments objectAtIndex:senderIndex];
  
  tempInst.isMuted = isMute;
  
@@ -1130,43 +1144,43 @@
 {
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
-    Instrument * tempInst = [instruments objectAtIndex:senderIndex];
+    NSTrack * tempTrack = [sequence.m_tracks objectAtIndex:senderIndex];
     
     // double check this isn't the current pattern
-    if ([delegate checkIsPlaying] && tempInst.selectedPatternIndex != index){
+    if ([delegate checkIsPlaying] && tempTrack.selectedPatternIndex != index){
         
         // Add it to the queue:
         NSMutableDictionary * pattern = [NSMutableDictionary dictionary];
         
         [pattern setObject:[NSNumber numberWithInt:index] forKey:@"Index"];
-        [pattern setObject:tempInst forKey:@"Instrument"];
+        [pattern setObject:tempTrack forKey:@"Instrument"];
         
         [delegate enqueuePattern:pattern];
         
         return YES;
         
-    } else if (tempInst.selectedPatternIndex == index){
+    } else if (tempTrack.selectedPatternIndex == index){
         
-        [self dequeueAllPatternsForInstrument:sender];
+        [self dequeueAllPatternsForTrack:sender];
         
     }
     
-    [self commitSelectingPatternAtIndex:index forInstrument:tempInst];
+    [self commitSelectingPatternAtIndex:index forTrack:tempTrack];
     
     return NO;
 }
 
-- (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst
+- (void)commitSelectingPatternAtIndex:(int)indexToSelect forTrack:(NSTrack *)track
 {
-    if (inst.selectedPatternIndex == indexToSelect){
+    if (track.selectedPatternIndex == indexToSelect){
         return;
     }
     
-    Pattern * newSelection = [inst selectPattern:indexToSelect];
+    NSPattern * newSelection = [track selectPattern:indexToSelect];
     
-    [delegate updatePlaybandForInstrument:inst];
+    [delegate updatePlaybandForTrack:track];
     
-    [self selectInstrument:[instruments indexOfObject:inst]];
+    [self selectInstrument:track.m_instrument.m_id];
     
     [delegate setMeasureAndUpdate:newSelection.selectedMeasure checkNotPlaying:TRUE];
     
@@ -1181,10 +1195,10 @@
 {
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
-    Instrument * sequencerAtIndex = [instruments objectAtIndex:senderIndex];
+    NSTrack * trackAtIndex = [sequence.m_tracks objectAtIndex:senderIndex];
     
     // -- update DS
-    [sequencerAtIndex selectMeasure:index];
+    [trackAtIndex selectMeasure:index];
     
     // -- select the (potentially new) instrument
     [self selectInstrument:senderIndex];
@@ -1202,10 +1216,10 @@
 {
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
-    Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
-    [instrumentAtIndex addMeasure];
+    NSTrack * trackAtIndex = [sequence.m_tracks objectAtIndex:senderIndex];
+    [trackAtIndex addMeasure];
     
-    [delegate updatePlaybandForInstrument:instrumentAtIndex];
+    [delegate updatePlaybandForTrack:trackAtIndex];
     
     [self selectInstrument:senderIndex];
     
@@ -1221,14 +1235,14 @@
 {
     long senderIndex = [instrumentTable indexPathForCell:sender].row;
     
-    Instrument * instrumentAtIndex = [instruments objectAtIndex:senderIndex];
-    [instrumentAtIndex removeMeasure];
+    NSTrack * trackAtIndex = [sequence.m_tracks objectAtIndex:senderIndex];
+    [trackAtIndex removeMeasure];
     
-    [delegate updatePlaybandForInstrument:instrumentAtIndex];
+    [delegate updatePlaybandForTrack:trackAtIndex];
     
     [sender update];
     
-    [delegate setMeasureAndUpdate:instrumentAtIndex.selectedPattern.selectedMeasure checkNotPlaying:FALSE];
+    [delegate setMeasureAndUpdate:trackAtIndex.selectedPattern.selectedMeasure checkNotPlaying:FALSE];
     
     [delegate saveContext:nil force:YES];
 }
@@ -1264,11 +1278,11 @@
     }
     
     // Double check for muted instrument
-    if([instruments count] > 3){
+    if([sequence trackCount] > 3){
         
-        Instrument * mutedInstrument = [instruments objectAtIndex:3];
+        NSTrack * mutedTrack = [sequence.m_tracks objectAtIndex:3];
         
-        if(!mutedInstrument.isMuted){
+        if(!mutedTrack.m_muted){
             isFirstLaunch = FALSE;
         }
         

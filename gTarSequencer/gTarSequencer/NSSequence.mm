@@ -180,4 +180,9 @@
     [m_tracks addObject:track];
 }
 
+-(int)trackCount
+{
+    return [m_tracks count];
+}
+
 @end

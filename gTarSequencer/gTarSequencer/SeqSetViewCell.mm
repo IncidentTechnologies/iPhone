@@ -14,7 +14,7 @@
 @synthesize parent;
 @synthesize instrumentIconView;
 @synthesize instrumentIconBorder;
-@synthesize instrument;
+@synthesize track;
 @synthesize editingScrollView;
 @synthesize patternContainer;
 @synthesize borderContainer;
@@ -139,7 +139,7 @@
     
     // get previous selected pattern if off
     if(selectedPatternButton == offButton){
-        int selectedPattern = instrument.selectedPatternIndex;
+        int selectedPattern = track.selectedPatternIndex;
         previousPatternButton = [patternButtons objectAtIndex:selectedPattern];
         [self setStateForButton:previousPatternButton state:4];
     }
@@ -202,7 +202,7 @@
     }
 }
 
-- (void)setBeatSequenceToDisplay:(Pattern *)newBS
+- (void)setBeatSequenceToDisplay:(NSPattern *)newBS
 {
     patternToDisplay = newBS;
     
@@ -264,7 +264,8 @@
     if(volumeKnob && ![volumeKnob isEnabled]){
         [volumeKnob EnableKnob];
     }
-    [instrument setIsMuted:NO];
+    
+    track.m_muted = NO;
     isMute = NO;
     
     [parent saveContext:nil force:NO];
@@ -278,7 +279,7 @@
     if(volumeKnob && [volumeKnob isEnabled]){
         [volumeKnob DisableKnob];
     }
-    [instrument setIsMuted:YES];
+    track.m_muted = YES;
     isMute = YES;
     
     [parent saveContext:nil force:NO];
@@ -494,7 +495,7 @@
 #pragma mark Change Instrument
 - (IBAction)userDidTapInstrumentIcon:(id)sender
 {
-    DLog(@"User did tap instrument icon for instrument %@ id %i",instrument,instrument.instrument);
+    DLog(@"User did tap instrument icon for instrument %@ id %li",track.m_instrument,track.m_instrument.m_id);
     
     [parent viewSelectedInstrument:self];
 }
@@ -506,20 +507,20 @@
     if(TESTMODE) DLog(@"Minimap update");
     
     // update selected pattern:
-    if ( instrument.selectedPatternDidChange )
+    if ( track.selectedPatternDidChange )
     {
-        self.patternToDisplay = instrument.selectedPattern;
+        self.patternToDisplay = track.selectedPattern;
         
         // If the instrument is muted, then the OFF button needs to be selected
-        if (instrument.isMuted){
+        if (track.m_muted){
             [self selectPatternButton:MUTE_SEGMENT_INDEX];
             [self turnOffInstrumentView];
         } else {
-            [self selectPatternButton:instrument.selectedPatternIndex];
+            [self selectPatternButton:track.selectedPatternIndex];
             [self turnOnInstrumentView];
         }
         
-        instrument.selectedPatternDidChange = NO;
+        track.selectedPatternDidChange = NO;
     }
     
     // update the number of measures:
@@ -532,7 +533,7 @@
     }
     
     // update the currently selected measure:
-    if ( [instrument isSelected] )
+    if ( [track isSelected] )
     {
         if ( patternToDisplay.selectionChanged )
         {
@@ -601,11 +602,11 @@
 
 - (void)distributeMeasures
 {
-    for (int i=0;i<[patternToDisplay.measures count];i++)
+    for (int i=0;i<[patternToDisplay.m_measures count];i++)
     {
         MeasureView * mv = [measureViews objectAtIndex:i];
         
-        Measure * tempMeasure = [patternToDisplay.measures objectAtIndex:i];
+        NSMeasure * tempMeasure = [patternToDisplay.m_measures objectAtIndex:i];
         
         [mv setMeasure:tempMeasure];
     }
@@ -634,12 +635,12 @@
         //[self turnOffInstrumentView];
         isPlaying = [parent.delegate checkIsPlaying];
         [self resetQueuedPatternButton];
-        [parent dequeueAllPatternsForInstrument:self];
+        [parent dequeueAllPatternsForTrack:self];
     }else if(tappedIndex == MUTE_SEGMENT_INDEX && selectedPatternButton == offButton){
         //[self turnOnInstrumentView];
         isPlaying = [parent.delegate checkIsPlaying];
         [self resetQueuedPatternButton];
-        [parent dequeueAllPatternsForInstrument:self];
+        [parent dequeueAllPatternsForTrack:self];
     }else{
         //[self turnOnInstrumentView];
         isPlaying = [parent userDidSelectPattern:self atIndex:tappedIndex];
@@ -699,7 +700,7 @@
         [offButton addSubview:volumeKnob];
         
         [volumeKnob EnableKnob];
-        [volumeKnob SetValue:[instrument getAmplitude]];
+        [volumeKnob SetValue:track.m_volume];
         
         DLog(@"init volume is %f",[volumeKnob GetValue]);
         
@@ -714,7 +715,7 @@
 
 -(void)resetVolume
 {
-    [volumeKnob SetValue:[instrument getAmplitude]];
+    [volumeKnob SetValue:track.m_volume];
 }
 
 - (void)drawVolumeOverlay
@@ -763,7 +764,7 @@
 
 -(void)trackingDidChange
 {
-    [instrument setAmplitude:[tempVolumeKnob GetValue]];
+    track.m_volume = [tempVolumeKnob GetValue];
 }
 
 -(void)trackingDidEnd
@@ -773,7 +774,7 @@
     [volumeKnob SetValue:[tempVolumeKnob GetValue]];
     
     DLog(@"new volume is %f",[volumeKnob GetValue]);
-    [instrument setAmplitude:[volumeKnob GetValue]];
+    track.m_volume = [volumeKnob GetValue];
     
     [volumeBg removeFromSuperview];
     [volumeKnob setHidden:NO];

@@ -994,20 +994,25 @@
     
     switch(recordState){
         case RECORD_STATE_OFF:
+        {
             // RECORD BUTTON
             [recordRecordButton setBackgroundColor:[UIColor colorWithRed:235/255.0 green:33/255.0 blue:46/255.0 alpha:1.0]];
             [recordActionView setBackgroundColor:[UIColor whiteColor]];
             recordActionView.layer.cornerRadius = 10.0;
             [recordActionView setImage:nil];
             break;
+        }
         case RECORD_STATE_RECORDING:
+        {
             // STOP BUTTON
             [recordRecordButton setBackgroundColor:[UIColor colorWithRed:235/255.0 green:33/255.0 blue:46/255.0 alpha:1.0]];
             [recordActionView setBackgroundColor:[UIColor whiteColor]];
             recordActionView.layer.cornerRadius = 0.0;
             [recordActionView setImage:nil];
             break;
+        }
         case RECORD_STATE_PLAYING:
+        {
             // PAUSE BUTTON
             [recordRecordButton setBackgroundColor:[UIColor colorWithRed:244/255.0 green:151/255.0 blue:39/255.0 alpha:1.0]];
             [recordActionView setBackgroundColor:[UIColor clearColor]];
@@ -1038,8 +1043,9 @@
             UIGraphicsEndImageContext();
             
             break;
-            
+        }
         case RECORD_STATE_RECORDED:
+        {
             // PLAY BUTTON;
             [recordRecordButton setBackgroundColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1.0]];
             [recordActionView setBackgroundColor:[UIColor clearColor]];
@@ -1073,6 +1079,7 @@
             UIGraphicsEndImageContext();
             
             break;
+        }
     }
 }
 

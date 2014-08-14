@@ -11,6 +11,11 @@
 #import "XMPObject.h"
 #import "NSInstrument.h"
 #import "NSPattern.h"
+#import "NSMeasure.h"
+
+#define MAX_BEAT_SEQUENCES 4
+#define FIRST_FRET 0
+#define LAST_FRET 15
 
 @interface NSTrack : NSObject
 {
@@ -30,49 +35,35 @@
 
 // TODO: use a separate context save for these
 @property (nonatomic) BOOL selectedPatternDidChange;
-@property (retain, nonatomic) NSString * selectedPatternIndex; // key into the patterns
+@property (nonatomic) int selectedPatternIndex; // TODO: convert to string
 @property (retain, nonatomic) NSPattern * selectedPattern;
 @property (nonatomic) BOOL isSelected;
 
+- (id)initWithXMPNode:(XMPNode *)xmpNode;
 
--(id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithName:(NSString *)name volume:(double)volume muted:(bool)muted;
 
--(id)initWithName:(NSString *)name volume:(double)volume muted:(bool)muted;
+- (XMPNode *)convertToXmp;
 
--(XMPNode *)convertToXmp;
+// Track Actions
+- (void)setSelected:(BOOL)selected;
+- (BOOL)isSelected;
 
--(void)addPattern:(NSPattern *)pattern;
+// Track's Pattern Actions
+- (void)addPattern:(NSPattern *)pattern;
+- (NSPattern *)selectPattern:(int)newSelection;
+- (void)turnOnAllFlags;
+- (void)notePlayedAtString:(int)str andFret:(int)fret;
 
-/*
- 
- - (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)amplitude;
- 
- - (Pattern *)selectPattern:(int)newSelection;
- - (Measure *)selectMeasure:(int)newSelection;
- 
- - (void)initAudioWithInstrumentName:(NSString *)instName andSoundMaster:(SoundMaster *)soundMaster;
- - (void)notePlayedAtString:(int)str andFret:(int)fret;
- 
- - (void)addMeasure;
- - (void)removeMeasure;
- - (void)clearSelectedMeasure;
- 
- - (void)displayAllNotes;
- 
- - (void)setSelected:(BOOL)yesno;
- - (BOOL)isSelected;
- 
- - (void)setCustom:(BOOL)yesno;
- - (BOOL)checkIsCustom;
- 
- - (int)selectedPatternIndex;
- 
- - (void)turnOnAllFlags;
- 
- - (void)releaseSounds;
- 
- - (double)getAmplitude;
- 
- */
+// Track's Pattern's Measure Actions
+- (NSMeasure *)selectMeasure:(int)newSelection;
+- (void)addMeasure;
+- (void)removeMeasure;
+- (void)clearSelectedMeasure;
+
+// Playing Notes
+- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)amplitude;
+- (void)displayAllNotes;
+- (void)releaseSounds;
 
 @end

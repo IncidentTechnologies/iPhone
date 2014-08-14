@@ -7,6 +7,7 @@
 //
 
 #import "SequencerViewController.h"
+#import "NSSequence.h"
 
 #define LAST_FRET 15
 #define LAST_MEASURE 3
@@ -132,10 +133,10 @@
     [seqSetViewController setDelegate:self];
     
     DLog(@"Get current instrument: Sequencer View Controller");
-    Instrument * currentInstrument = [seqSetViewController getCurrentInstrument];
+    NSTrack * currentTrack = [seqSetViewController getCurrentTrack];
     
-    if (currentInstrument){
-        guitarView.measure = currentInstrument.selectedPattern.selectedMeasure;
+    if (currentTrack){
+        guitarView.measure = currentTrack.selectedPattern.selectedMeasure;
     }
     
     [seqSetViewController.view setHidden:NO];
@@ -294,9 +295,9 @@
         [instrumentViewController reopenView];
         activeMainView = instrumentViewController.view;
         
-        Instrument * newInstrument = [seqSetViewController getCurrentInstrument];
+        NSTrack * track = [seqSetViewController getCurrentTrack];
         
-        [instrumentViewController setActiveInstrument:newInstrument];
+        [instrumentViewController setActiveTrack:track];
         
     }else if([nav isEqualToString:@"Share"]){
         
@@ -388,20 +389,19 @@
     [self selectNavChoice:@"Instrument" withShift:NO];
 }
 
-- (void)setSelectedInstrument:(Instrument *)inst
+- (void)setSelectedInstrument:(NSInstrument *)inst
 {
-    [leftNavigator enableInstrumentViewWithIcon:inst.iconName showCustom:[inst checkIsCustom]];
+    [leftNavigator enableInstrumentViewWithIcon:inst.m_iconName showCustom:inst.m_custom];
 }
 
 - (void)openInstrument:(int)instIndex
 {
-    Instrument * inst = [seqSetViewController getInstrumentAtIndex:instIndex];
+    NSTrack * track = [seqSetViewController getTrackAtIndex:instIndex];
     
-    [self setSelectedInstrument:inst];
+    [self setSelectedInstrument:track.m_instrument];
     [self viewSelectedInstrument];
     
-    //[instrumentViewController reopenView];
-    [instrumentViewController setActiveInstrument:inst];
+    [instrumentViewController setActiveTrack:track];
 }
 
 - (void)commitMasterLevelSlider:(UILevelSlider *)masterSlider
@@ -476,7 +476,7 @@
 {
     
     // Save previous set if not blank
-    if([seqSetViewController countInstruments] > 0 && ![filename isEqualToString:DEFAULT_SET_NAME]){
+    if([seqSetViewController countTracks] > 0 && ![filename isEqualToString:DEFAULT_SET_NAME]){
         
         // TODO: prompt
         NSString * promptTitle = [@"Save " stringByAppendingFormat:@"%@",filename];
@@ -553,6 +553,7 @@
 #pragma mark - Auto Save Load
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
+    /*
     if(saveContextTimer == nil || filepath != nil || forceSave){
         
         // Prevent from saving many times in a row, but never block a manual save
@@ -566,7 +567,7 @@
             DLog(@"Save state to disk at %@",filepath);
         }
         
-        NSData * instData = [NSKeyedArchiver archivedDataWithRootObject:[seqSetViewController getInstruments]];
+        NSData * instData = [NSKeyedArchiver archivedDataWithRootObject:[seqSetViewController getTracks]];
         
         NSNumber * tempoNumber = [NSNumber numberWithInt:[playControlViewController getTempo]];
         
@@ -590,6 +591,7 @@
         DLog(@"Save success: %i", success);
         
     }
+     */
 }
 
 - (void)clearSaveContextTimer
@@ -649,9 +651,9 @@
         // Load icon into left navigator
         
         DLog(@"Get current instrument: Load Icon");
-        Instrument * selectedInst = [seqSetViewController getCurrentInstrument];
-        if(selectedInst != nil){
-            [leftNavigator enableInstrumentViewWithIcon:selectedInst.iconName showCustom:[selectedInst checkIsCustom]];
+        NSTrack * track = [seqSetViewController getCurrentTrack];
+        if(track != nil){
+            [leftNavigator enableInstrumentViewWithIcon:track.m_instrument.m_iconName showCustom:track.m_instrument.m_custom];
         }
         
     }else{
@@ -693,25 +695,25 @@
 {
     
     // Tell all of the sequencers to play their next fret
-    int instrumentCount = [seqSetViewController countInstruments];
+    int trackCount = [seqSetViewController countTracks];
     
-    Instrument * currentInst = [seqSetViewController getCurrentInstrument];
+    NSTrack * currentTrack = [seqSetViewController getCurrentTrack];
     
     //@synchronized(self){
-    for (int i=0; i<instrumentCount; i++){
+    for (int i=0; i<trackCount; i++){
         
-        Instrument * instToPlay = [seqSetViewController getInstrumentAtIndex:i];
+        NSTrack * trackToPlay = [seqSetViewController getTrackAtIndex:i];
         
-        @synchronized(instToPlay.selectedPattern){
+        @synchronized(trackToPlay.selectedPattern){
             
             //
             // PLAY
             //
-            int realMeasure = [instToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
+            int realMeasure = [trackToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
             
             // If we are back at the beginning of the pattern, then check the queue:
             if (realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0){
-                [self checkQueueForPatternsFromInstrument:instToPlay];
+                [self checkQueueForPatternsFromTrack:trackToPlay];
             }else if([patternQueue count] > 0){
                 
                 BOOL resetCount = NO;
@@ -723,16 +725,16 @@
                 [seqSetViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
                 
                 // update Instrument view if it's open
-                if(activeMainView == instrumentViewController.view && instToPlay == [seqSetViewController getCurrentInstrument]){
+                if(activeMainView == instrumentViewController.view && trackToPlay == [seqSetViewController getCurrentTrack]){
                     [instrumentViewController notifyQueuedPatternAndResetCount:resetCount];
                 }
             }
             
             // play sound and update Set view
-            [instToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!instToPlay.isMuted withAmplitude:playVolume];
+            [trackToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!trackToPlay.m_muted withAmplitude:playVolume];
             
             // update Instrument view if it's open
-            if(activeMainView == instrumentViewController.view && instToPlay == currentInst){
+            if(activeMainView == instrumentViewController.view && trackToPlay == currentTrack){
                 [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
             }
             
@@ -742,13 +744,13 @@
             //
             if(isRecording){
                 
-                int patternIndex = instToPlay.selectedPatternIndex;
-                if(instToPlay.isMuted){
+                int patternIndex = trackToPlay.selectedPatternIndex;
+                if(trackToPlay.m_muted){
                     patternIndex = 4;
                 }
                 
                 BOOL patternRepeat = NO;
-                if(instToPlay.selectedPattern.measureCount-1 == realMeasure && !instToPlay.isMuted){
+                if(trackToPlay.selectedPattern.measureCount-1 == realMeasure && !trackToPlay.m_muted){
                     patternRepeat = YES;
                 }
                 
@@ -784,7 +786,7 @@
                     }
                     
                     // last fret, about to change patterns
-                    if(currentFret == 15 && [self getQueuedPatternIndexForInstrument:instToPlay] > -1){
+                    if(currentFret == 15 && [self getQueuedPatternIndexForTrack:trackToPlay] > -1){
                         
                         patternRepeat = NO;
                         updateMeasure = TRUE;
@@ -802,7 +804,7 @@
                 // Add notes at fret
                 NSString * strings = @"";
                 for(int s = 0; s < STRINGS_ON_GTAR; s++){
-                    BOOL isStringOn = [instToPlay.selectedPattern.measures[realMeasure] isNoteOnAtString:s andFret:currentFret];
+                    BOOL isStringOn = [trackToPlay.selectedPattern.m_measures[realMeasure] isNoteOnAtString:s andFret:currentFret];
                     
                     strings = [strings stringByAppendingString:((isStringOn) ? @"1" : @"0")];
                     
@@ -813,15 +815,15 @@
                 
                 if(updateMeasure){
                     NSArray * patternNames = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"OFF", nil];
-                    NSString * fretPattern = [patternNames objectAtIndex:instToPlay.selectedPatternIndex];
+                    NSString * fretPattern = [patternNames objectAtIndex:trackToPlay.selectedPatternIndex];
                     
-                    NSArray * fretObjArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentFret],strings,[NSNumber numberWithBool:instToPlay.isMuted],[NSNumber numberWithDouble:instToPlay.amplitude],fretPattern,nil];
+                    NSArray * fretObjArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentFret],strings,[NSNumber numberWithBool:trackToPlay.m_muted],[NSNumber numberWithDouble:trackToPlay.m_volume],fretPattern,nil];
                     
                     NSArray * fretKeyArray = [NSArray arrayWithObjects:@"fretindex",@"strings",@"ismuted",@"amplitude",@"pattern",nil];
                     
                     NSDictionary * fretDict = [[NSDictionary alloc] initWithObjects:fretObjArray forKeys:fretKeyArray];
                     
-                    [self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:startPattern andDeltaI:deltaI andDelta:delta andPatternRepeat:patternRepeat addFret:fretDict];
+                    [self updateMeasureDictionaryForInstrumentIndex:trackToPlay.m_instrument.m_id withStartingPattern:startPattern andDeltaI:deltaI andDelta:delta andPatternRepeat:patternRepeat addFret:fretDict];
                 }
             }
         }
@@ -833,7 +835,7 @@
         NSMutableArray * newMeasure = [[NSMutableArray alloc] init];
         NSMutableArray * measureForIndex = [[NSMutableArray alloc] init];
         
-        for(int i = 0; i < MAX_INSTRUMENTS; i++){
+        for(int i = 0; i < MAX_TRACKS; i++){
             
             int instIndex = [[tempMeasures[i] objectForKey:@"instrument"] intValue];
             
@@ -873,7 +875,7 @@
         
     }else{
         
-        if([seqSetViewController countInstruments] > 0){
+        if([seqSetViewController countTracks] > 0){
             
             [recordShareController reloadInstruments];
             [self stopAll];
@@ -929,7 +931,7 @@
     patternData = [[NSMutableArray alloc] init];
     tempMeasures = [[NSMutableArray alloc] init];
     
-    for(int i = 0; i < MAX_INSTRUMENTS; i++){
+    for(int i = 0; i < MAX_TRACKS; i++){
         
         NSMutableArray * fretArray = [[NSMutableArray alloc] init];
         
@@ -988,7 +990,7 @@
 - (int)chooseMeasureIndexForInstrument:(int)instIndex
 {
     int i = 0;
-    for(; i < MAX_INSTRUMENTS; i++){
+    for(; i < MAX_TRACKS; i++){
         
         int tempInst = [[tempMeasures[i] objectForKey:@"instrument"] intValue];
         if(tempInst == -1 || tempInst == instIndex){
@@ -1020,13 +1022,12 @@
 
 #pragma mark - Pattern Queue
 
-- (void)checkQueueForPatternsFromInstrument:(Instrument *)inst
+- (void)checkQueueForPatternsFromTrack:(NSTrack *)track
 {
     
     if(TESTMODE) DLog(@"CHECK QUEUE FOR PATTERNS FROM INSTRUMENT");
     
     NSMutableArray * objectsToRemove = [NSMutableArray array];
-    
     
     @synchronized(patternQueue)
     {
@@ -1034,18 +1035,18 @@
         for (NSDictionary * patternToSelect in patternQueue)
         {
             int nextPatternIndex = [[patternToSelect objectForKey:@"Index"] intValue];
-            Instrument * nextPatternInstrument = [patternToSelect objectForKey:@"Instrument"];
+            NSTrack * nextPatternTrack = [patternToSelect objectForKey:@"Instrument"];
             
-            if (inst == nextPatternInstrument){
+            if (track == nextPatternTrack){
                 if(TESTMODE) DLog(@"DEQUEUEING THE NEXT PATTERN");
                 [objectsToRemove addObject:patternToSelect];
-                [seqSetViewController commitSelectingPatternAtIndex:nextPatternIndex forInstrument:nextPatternInstrument];
+                [seqSetViewController commitSelectingPatternAtIndex:nextPatternIndex forTrack:nextPatternTrack];
                 
-                if(activeMainView == instrumentViewController.view && inst==[seqSetViewController getCurrentInstrument]){
+                if(activeMainView == instrumentViewController.view && track==[seqSetViewController getCurrentTrack]){
                     [instrumentViewController commitPatternChange:nextPatternIndex];
                 }
                 
-                [self dequeuePatternAtIndex:inst.instrument];
+                [self dequeuePatternAtIndex:track.m_instrument.m_id];
             }
         }
         
@@ -1057,7 +1058,7 @@
 {
     if(TESTMODE) DLog(@"Enqueue a new pattern");
     // For now, clear all the queued patterns for the active instrument
-    [self removeQueuedPatternForInstrumentAtIndex:[seqSetViewController getCurrentInstrument].instrument];
+    [self removeQueuedPatternForInstrumentAtIndex:[[seqSetViewController getCurrentTrack] m_instrument].m_id];
     
     @synchronized(patternQueue){
         [patternQueue addObject:pattern];
@@ -1066,12 +1067,12 @@
     if(TESTMODE)  DLog(@"Pattern Queue is: %@",patternQueue);
 }
 
--(void)dequeueAllPatternsForInstrument:(Instrument *)inst
+-(void)dequeueAllPatternsForTrack:(NSTrack *)track
 {
     @synchronized(patternQueue){
         for(NSMutableDictionary * p in patternQueue){
-            Instrument * i = [p objectForKey:@"Instrument"];
-            if(i == inst){
+            NSTrack * t = [p objectForKey:@"Instrument"];
+            if(t == track){
                 [patternQueue removeObject:p];
             }
         }
@@ -1082,8 +1083,8 @@
 {
     @synchronized(patternQueue){
         for(NSMutableDictionary * p in patternQueue){
-            Instrument * i = [p objectForKey:@"Instrument"];
-            if(i.instrument == instIndex)
+            NSTrack * t = [p objectForKey:@"Instrument"];
+            if(t.m_instrument.m_id == instIndex)
             {
                 [patternQueue removeObject:p];
             }
@@ -1097,12 +1098,12 @@
     [seqSetViewController clearQueuedPatternButtonAtIndex:instIndex];
 }
 
-- (int)getQueuedPatternIndexForInstrument:(Instrument *)inst
+- (int)getQueuedPatternIndexForTrack:(NSTrack *)track
 {
     @synchronized(patternQueue){
         for(NSMutableDictionary * pq in patternQueue){
-            Instrument * i = [pq objectForKey:@"Instrument"];
-            if(i == inst){
+            NSTrack * t = [pq objectForKey:@"Instrument"];
+            if(t == track){
                 NSNumber * p = [pq objectForKey:@"Index"];
                 int pIndex = (int)[p intValue];
                 return pIndex;
@@ -1336,7 +1337,7 @@
 
 #pragma mark - Seq Set Delegate
 
-- (void)setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying
+- (void)setMeasureAndUpdate:(NSMeasure *)measure checkNotPlaying:(BOOL)checkNotPlaying
 {
     guitarView.measure = measure;
     
@@ -1358,8 +1359,8 @@
     [guitarView update];
     
     // Also update selected instrument
-    Instrument * inst = [seqSetViewController getCurrentInstrument];
-    [self setSelectedInstrument:inst];
+    NSTrack * track = [seqSetViewController getCurrentTrack];
+    [self setSelectedInstrument:track.m_instrument];
     
     // Also update the selected table cell
     //[seqSetViewController setSelectedCellToSelectedInstrument];
@@ -1368,40 +1369,40 @@
 
 - (void)updateSelectedInstrument
 {
-    Instrument * inst = [seqSetViewController getCurrentInstrument];
-    [self setSelectedInstrument:inst];
+    NSTrack * track = [seqSetViewController getCurrentTrack];
+    [self setSelectedInstrument:track.m_instrument];
 }
 
 // Ensure current playband is reflected in the data if displayed (>=0)
 // Only need to call when # measures changes
-- (void)updatePlaybandForInstrument:(Instrument *)inst
+- (void)updatePlaybandForTrack:(NSTrack *)track
 {
     if (currentFret >= 0){
-        int realMeasure = [inst.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
-        [inst playFret:currentFret inRealMeasure:realMeasure withSound:NO withAmplitude:playVolume];
+        int realMeasure = [track.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
+        [track playFret:currentFret inRealMeasure:realMeasure withSound:NO withAmplitude:playVolume];
         
         // update Instrument view if it's open
-        if(activeMainView == instrumentViewController.view && inst == [seqSetViewController getCurrentInstrument]){
+        if(activeMainView == instrumentViewController.view && track == [seqSetViewController getCurrentTrack]){
             [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
         }
     }
     
-    if(TESTMODE) DLog(@"updatePlaybandForInstrument");
+    DLog(@"updatePlaybandForInstrument");
 }
 
 - (void) numInstrumentsDidChange:(int)numInstruments
 {
     if(numInstruments > 0){
-        Instrument * inst = [seqSetViewController getCurrentInstrument];
-        [leftNavigator enableInstrumentViewWithIcon:inst.iconName showCustom:[inst checkIsCustom]];
+        NSTrack * track = [seqSetViewController getCurrentTrack];
+        [leftNavigator enableInstrumentViewWithIcon:track.m_instrument.m_iconName showCustom:track.m_instrument.m_custom];
     }else{
         [leftNavigator disableInstrumentView];
     }
 }
 
-- (NSMutableArray *)getInstruments
+- (NSMutableArray *)getTracks
 {
-    return [seqSetViewController getInstruments];
+    return [seqSetViewController getTracks];
 }
 
 - (void)refreshVolumeSliders
@@ -1412,7 +1413,7 @@
 
 - (void)enableInstrument:(int)instIndex
 {
-    if([seqSetViewController getCurrentInstrument].instrument == instIndex){
+    if([[seqSetViewController getCurrentTrack] m_instrument].m_id == instIndex){
         [instrumentViewController enableKnobIfDisabled];
     }
     [seqSetViewController enableKnobIfDisabledForInstrument:instIndex];
@@ -1420,7 +1421,7 @@
 
 - (void)disableInstrument:(int)instIndex
 {
-    if([seqSetViewController getCurrentInstrument].instrument == instIndex){
+    if([[seqSetViewController getCurrentTrack] m_instrument].m_id == instIndex){
         [instrumentViewController disableKnobIfEnabled];
     }
     [seqSetViewController disableKnobIfEnabledForInstrument:instIndex];
@@ -1434,7 +1435,7 @@
         return;
     }
     
-    if ([seqSetViewController getSelectedInstrumentIndex] < 0 || [seqSetViewController countInstruments] == 0){
+    if ([seqSetViewController getSelectedInstrumentIndex] < 0 || [seqSetViewController countTracks] == 0){
         DLog(@"No Instruments opened, or selected instrument index < 0");
         return;
     }
@@ -1452,7 +1453,7 @@
     if(TESTMODE) DLog(@"gTarSeq received note played message string %i and fret %i",note.string,note.fret);
     
     // Pass note-played message onto the selected instrument
-    [[seqSetViewController getCurrentInstrument] notePlayedAtString:note.string andFret:note.fret];
+    [[seqSetViewController getCurrentTrack] notePlayedAtString:note.string andFret:note.fret];
     
     [seqSetViewController updateAllVisibleCells];
     [instrumentViewController updateActiveMeasure];
@@ -1480,7 +1481,7 @@
     
     // display active measure on gTar
     if(isConnected){
-        guitarView.measure = [seqSetViewController getCurrentInstrument].selectedPattern.selectedMeasure;
+        guitarView.measure = [seqSetViewController getCurrentTrack].selectedPattern.selectedMeasure;
     }
     
     // change connected button

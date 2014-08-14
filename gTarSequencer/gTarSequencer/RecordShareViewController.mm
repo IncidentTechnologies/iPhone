@@ -98,18 +98,20 @@
 
 - (void)reloadInstruments
 {
-    instruments = [[NSMutableArray alloc] initWithArray:[delegate getInstruments]];
+    instruments = [[NSMutableArray alloc] initWithArray:[delegate getTracks]];
     
     [self clearAllSubviews];
     
     int i = 0;
     
-    float instHeight = (instrumentView.frame.size.height+1) / MAX_INSTRUMENTS;
+    float instHeight = (instrumentView.frame.size.height+1) / MAX_TRACKS;
     float instWidth = instrumentView.frame.size.width;
     
-    for(Instrument * inst in instruments){
+    for(NSTrack * t in instruments){
         
-        float displayHeight = (i == MAX_INSTRUMENTS-1) ? instHeight : instHeight + 1;
+        NSInstrument * inst = t.m_instrument;
+        
+        float displayHeight = (i == MAX_TRACKS-1) ? instHeight : instHeight + 1;
         
         //
         // Instrument icon
@@ -118,7 +120,7 @@
         CGRect instFrame = CGRectMake(-1, i*instHeight, instWidth+2, displayHeight);
         
         UIButton * instView = [[UIButton alloc] initWithFrame:instFrame];
-        [instView setImage:[UIImage imageNamed:inst.iconName] forState:UIControlStateNormal];
+        [instView setImage:[UIImage imageNamed:inst.m_iconName] forState:UIControlStateNormal];
         [instView setUserInteractionEnabled:NO];
         [instView setImageEdgeInsets:UIEdgeInsetsMake(5,14,5,14)];
         
@@ -147,13 +149,13 @@
         i++;
     }
     
-    for(;i<MAX_INSTRUMENTS;i++){
+    for(;i<MAX_TRACKS;i++){
         
         //
         // Blank instrument
         //
         
-        float displayHeight = (i == MAX_INSTRUMENTS-1) ? instHeight : instHeight + 1;
+        float displayHeight = (i == MAX_TRACKS-1) ? instHeight : instHeight + 1;
         
         CGRect instFrame = CGRectMake(-1, i*instHeight, instWidth+2, displayHeight);
         UIButton * instView = [[UIButton alloc] initWithFrame:instFrame];
@@ -191,8 +193,8 @@
 - (BOOL)isValidInstrumentIndex:(int)inst
 {
     
-    for(Instrument * i in instruments){
-        if(i.instrument == inst){
+    for(NSInstrument * i in instruments){
+        if(i.m_id == inst){
             return YES;
         }
     }
@@ -203,8 +205,8 @@
 - (int)getIndexForInstrument:(int)inst
 {
     int k = 0;
-    for(Instrument * i in instruments){
-        if(i.instrument == inst){
+    for(NSInstrument * i in instruments){
+        if(i.m_id == inst){
             return k;
         }
         k++;
@@ -288,7 +290,7 @@
     float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     
     // clear prev patterns
-    for(int j = 0; j < MAX_INSTRUMENTS; j++){
+    for(int j = 0; j < MAX_TRACKS; j++){
         prevPattern[j] = @"";
         prevInterruptPattern[j] = nil;
         prevTranspose[j] = 0;
@@ -550,7 +552,7 @@
 -(void)drawProgressMarkerForMeasure:(int)m inRow:(int)row startAt:(double)start withWidth:(double)width
 {
     float measureWidth = progressView.frame.size.width / numMeasures;
-    float rowHeight = (progressView.frame.size.height-10) / MAX_INSTRUMENTS;
+    float rowHeight = (progressView.frame.size.height-10) / MAX_TRACKS;
     
     CGRect markerFrame = CGRectMake(m*measureWidth+measureWidth*start,row*rowHeight+5,width*measureWidth,1.0);
     
@@ -564,7 +566,7 @@
 -(void)eraseProgressMarkerForMeasure:(int)m inRow:(int)row startAt:(double)start withWidth:(double)width
 {
     float measureWidth = progressView.frame.size.width / numMeasures;
-    float rowHeight = (progressView.frame.size.height-10) / MAX_INSTRUMENTS;
+    float rowHeight = (progressView.frame.size.height-10) / MAX_TRACKS;
     
     CGRect markerFrame = CGRectMake(m*measureWidth+measureWidth*start,row*rowHeight+5,width*measureWidth,1.0);
     
@@ -1002,7 +1004,7 @@
         for(NSDictionary * measureinst in measure){
             
             int instIndex = [[measureinst objectForKey:@"instrument"] intValue];
-            Instrument * inst = [instruments objectAtIndex:[self getIndexForInstrument:instIndex]];
+            NSInstrument * inst = [instruments objectAtIndex:[self getIndexForInstrument:instIndex]];
             
             // fret for the beat
             NSMutableArray * frets = [measureinst objectForKey:@"frets"];

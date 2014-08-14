@@ -10,6 +10,8 @@
 #import "XMPNode.h"
 #import "XMPObject.h"
 #import "NSNote.h"
+#import "NSMeasure.h"
+#import "SoundMaker.h"
 
 @interface NSPattern : NSObject
 {
@@ -17,11 +19,27 @@
     bool m_on;
     
     NSMutableArray * m_notes;
+    
+    // archaic
+    
+    int measureCount;
+    
+    NSMeasure * selectedMeasure;
+    int selectedMeasureIndex;
+    
+    NSMutableArray * m_measures;
 }
 
 @property (nonatomic, retain) NSString * m_name;
 @property (nonatomic) bool m_on;
 @property (nonatomic, retain) NSMutableArray * m_notes;
+
+@property char selectionChanged;
+@property char countChanged;
+@property (nonatomic) int selectedMeasureIndex;
+@property (nonatomic) int measureCount;
+@property (nonatomic) NSMeasure * selectedMeasure;
+@property (nonatomic, readonly) NSMutableArray * m_measures;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
 
@@ -29,6 +47,25 @@
 
 -(XMPNode *)convertToXmp;
 
--(void)addNote:(NSNote *)note;
+- (void)addNote:(NSNote *)note;
+- (void)addMeasure:(NSMeasure *)measure;
+
+- (void)turnOnAllFlags;
+
+/********* archaic ***********/
+
+- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitude:(double)amplitude;
+- (int)computeRealMeasureFromAbsolute:(int)absoluteMeasure;
+
+- (void)changeNoteAtString:(int)str andFret:(int)fret;
+- (BOOL)isNoteOnAtString:(int)str andFret:(int)fret;
+
+- (void)doubleMeasures;
+- (void)halveMeasures;
+- (void)clearSelectedMeasure;
+
+- (NSMeasure *)selectMeasure:(NSUInteger)newSelection;
+
+//
 
 @end

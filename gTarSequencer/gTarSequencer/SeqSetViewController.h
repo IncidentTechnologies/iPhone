@@ -8,11 +8,9 @@
 
 #import "AppData.h"
 #import "NSSequence.h"
-#import "Instrument.h"
 #import "SeqSetViewCell.h"
 #import "ScrollingSelector.h"
 #import "CustomInstrumentSelector.h"
-
 
 @protocol SeqSetDelegate <NSObject>
 
@@ -25,31 +23,27 @@
 - (BOOL) checkIsRecording;
 
 - (void) turnOffGuitarEffects;
-- (void) setMeasureAndUpdate:(Measure *)measure checkNotPlaying:(BOOL)checkNotPlaying;
+- (void) setMeasureAndUpdate:(NSMeasure *)measure checkNotPlaying:(BOOL)checkNotPlaying;
 
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
-- (int) getQueuedPatternIndexForInstrument:(Instrument *)inst;
+- (int) getQueuedPatternIndexForTrack:(NSTrack *)track;
 - (void) removeQueuedPatternForInstrumentAtIndex:(int)instIndex;
 
 - (void) updateGuitarView;
-- (void) updatePlaybandForInstrument:(Instrument *)inst;
+- (void) updatePlaybandForTrack:(NSTrack *)track;
 
 
 - (void) numInstrumentsDidChange:(int)numInstruments;
 
-- (void) viewSelectedInstrument;
 - (void) updateSelectedInstrument;
+- (void)openInstrument:(int)instIndex;
 @end
 
-
-@interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate,TutorialDelegate> {
-    
+@interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate,TutorialDelegate>
+{
     SoundMaster * soundMaster;
     
-    //UITableView * instrumentTable;
-    
     NSSequence * sequence;
-    NSMutableArray * instruments;
     long selectedInstrumentIndex;
     
     NSMutableArray * masterInstrumentOptions;
@@ -69,8 +63,16 @@
     
     BOOL canEdit;
     BOOL allowContentDrawing;
-    
 }
+
+
+@property (weak, nonatomic) id<SeqSetDelegate> delegate;
+@property (nonatomic, weak) IBOutlet UITableView *instrumentTable;
+
+@property (retain, nonatomic) TutorialViewController * tutorialViewController;
+
+@property (nonatomic) BOOL isFirstLaunch;
+
 
 - (void)startSoundMaster;
 - (void)stopSoundMaster;
@@ -83,7 +85,7 @@
 - (void)turnContentDrawingOn;
 - (void)turnContentDrawingOff;
 
-- (void)commitSelectingPatternAtIndex:(int)indexToSelect forInstrument:(Instrument *)inst;
+- (void)commitSelectingPatternAtIndex:(int)indexToSelect forTrack:(NSTrack *)track;
 - (void)deleteCell:(id)sender withAnimation:(BOOL)animate;
 - (void)deleteAllCells;
 
@@ -102,27 +104,24 @@
 
 - (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset;
 - (void)clearQueuedPatternButtonAtIndex:(int)index;
-- (void)dequeueAllPatternsForInstrument:(id)sender;
+- (void)dequeueAllPatternsForTrack:(id)sender;
 
 - (void)setInstrumentsFromData:(NSData *)instData;
+
 - (NSSequence *)getSequence;
-- (NSMutableArray *)getInstruments;
-- (long)countInstruments;
-- (Instrument *)getCurrentInstrument;
-- (Instrument *)getInstrumentAtIndex:(int)i;
+- (NSMutableArray *)getTracks;
+
+- (long)countTracks;
+
+- (NSTrack *)getCurrentTrack;
+- (NSTrack *)getTrackAtIndex:(int)index;
+- (BOOL)isValidTrackIndex:(int)index;
+
 - (BOOL)isValidInstrumentIndex:(int)inst;
 
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave;
 
 - (void)disableKnobIfEnabledForInstrument:(int)instIndex;
 - (void)enableKnobIfDisabledForInstrument:(int)instIndex;
-
-@property (weak, nonatomic) id<SeqSetDelegate> delegate;
-@property (nonatomic, weak) IBOutlet UITableView *instrumentTable;
-
-@property (retain, nonatomic) TutorialViewController * tutorialViewController;
-
-@property (nonatomic) BOOL isFirstLaunch;
-
 
 @end

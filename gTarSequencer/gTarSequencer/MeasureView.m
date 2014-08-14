@@ -76,7 +76,7 @@
     memcpy(colors, initColors, sizeof(initColors));
 }
 
-- (void)setMeasure:(Measure *)newMeasure
+- (void)setMeasure:(NSMeasure *)newMeasure
 {
     measure = newMeasure;
 }

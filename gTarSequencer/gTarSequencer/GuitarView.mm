@@ -60,7 +60,7 @@
     if(TESTMODE) DLog(@"gv update");
 }
 
-- (void)setMeasure:(Measure *)newMeasure
+- (void)setMeasure:(NSMeasure *)newMeasure
 {
     measure = newMeasure;
     
