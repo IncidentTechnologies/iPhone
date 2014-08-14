@@ -55,7 +55,7 @@
     
     // Load default set for FTU
     NSString * filePath = (isFirstLaunch) ? [self getDefaultSetFilepath] : nil;
-    [self loadStateFromDisk:filePath];
+    //[self loadStateFromDisk:filePath];
     [self selectNavChoice:@"Set" withShift:NO];
     [self saveContext:nil force:NO];
     
@@ -441,7 +441,7 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
     
-    [self loadStateFromDisk:filepath];
+    //[self loadStateFromDisk:filepath];
     [self saveContext:nil force:YES];
     
     if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){

@@ -39,6 +39,7 @@
         // load custom instrument selector
         [self initCustomInstrumentSelector];
         
+        sequence = [[NSSequence alloc] initWithName:@"sequence" tempo:120 volume:1.0];
         instruments = [[NSMutableArray alloc] init];
         
         self.tableView.bounces = NO;
@@ -183,6 +184,11 @@
 - (long)countInstruments
 {
     return [instruments count];
+}
+
+- (NSSequence *)getSequence
+{
+    return sequence;
 }
 
 - (NSMutableArray *)getInstruments

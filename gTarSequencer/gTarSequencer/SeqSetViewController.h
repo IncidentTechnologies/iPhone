@@ -7,6 +7,7 @@
 //
 
 #import "AppData.h"
+#import "NSSequence.h"
 #import "Instrument.h"
 #import "SeqSetViewCell.h"
 #import "ScrollingSelector.h"
@@ -47,6 +48,7 @@
     
     //UITableView * instrumentTable;
     
+    NSSequence * sequence;
     NSMutableArray * instruments;
     long selectedInstrumentIndex;
     
@@ -103,6 +105,7 @@
 - (void)dequeueAllPatternsForInstrument:(id)sender;
 
 - (void)setInstrumentsFromData:(NSData *)instData;
+- (NSSequence *)getSequence;
 - (NSMutableArray *)getInstruments;
 - (long)countInstruments;
 - (Instrument *)getCurrentInstrument;
