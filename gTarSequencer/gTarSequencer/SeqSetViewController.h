@@ -110,7 +110,7 @@
 - (void)clearQueuedPatternButtonAtIndex:(int)index;
 - (void)dequeueAllPatternsForTrack:(id)sender;
 
-- (void)setInstrumentsFromData:(NSData *)instData;
+- (void)setInstrumentsFromData;
 
 - (void)initSequenceWithFilename:(NSString *)filename;
 - (NSSequence *)getSequence;

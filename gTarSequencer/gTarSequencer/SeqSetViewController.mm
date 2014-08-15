@@ -52,6 +52,8 @@
         
         sequence = [[NSSequence alloc] initWithXMPFilename:filename];
         
+        [self setInstrumentsFromData];
+        
         [delegate setTempo:sequence.m_tempo];
         [delegate setVolume:sequence.m_volume];
         
@@ -146,44 +148,34 @@
     }
 }
 
-/*
-- (void)setInstrumentsFromData:(NSData *)instData
+- (void)setInstrumentsFromData
 {
-    
-    // clear table if it's not empty
-    //if([sequence trackCount] > 0){
-        for(int i = 0; i < [sequence trackCount]; i++){
-            [self deleteCell:[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] withAnimation:NO];
-        }
-    //}
     
     [self setRemainingInstrumentOptionsFromMasterOptions];
     
-    instruments = [NSKeyedUnarchiver unarchiveObjectWithData:instData];
-    
-    // Remove all the previously used instruments from the remaining list:
     NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
-    NSMutableArray * instrumentsToRemove = [[NSMutableArray alloc] init];
-    for (NSInstrument * inst in instruments)
-    {
-        BOOL found = false;
-        for (NSDictionary * dict in remainingInstrumentOptions)
-        {
-            if ( [[dict objectForKey:@"Name"] isEqualToString:inst.instrumentName] )
-            {
-                found = true;
-                [inst initAudioWithInstrumentName:inst.instrumentName andSoundMaster:soundMaster];
+    for(NSTrack * track in sequence.m_tracks){
+        NSInstrument * inst = track.m_instrument;
+        
+        for(NSDictionary * dict in remainingInstrumentOptions){
+            if([[dict objectForKey:@"Name"] isEqualToString:inst.m_name]){
+                
+                NSMutableArray * stringPaths = [[NSMutableArray alloc] init];
+                NSMutableArray * stringSet = [[NSMutableArray alloc] init];
+                
+                for(NSSample * sample in inst.m_sampler.m_samples){
+                    NSString * isCustom = (sample.m_custom) ? @"Custom" : @"Default";
+                    [stringSet addObject:sample.m_name];
+                    [stringPaths addObject:isCustom];
+                }
+                
+                [inst.m_sampler initAudioWithInstrument:inst.m_id andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths];
                 [dictionariesToRemove addObject:dict];
             }
         }
         
-        // extra cleanup
-        if(!found){
-            [instrumentsToRemove addObject:inst];
-        }
     }
     
-    [instruments removeObjectsInArray:instrumentsToRemove];
     [remainingInstrumentOptions removeObjectsInArray:dictionariesToRemove];
     
     [instrumentTable reloadData];
@@ -191,8 +183,6 @@
     [delegate numInstrumentsDidChange:[sequence trackCount]];
     
 }
- */
-
 
 - (long)countTracks
 {
