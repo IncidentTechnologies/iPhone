@@ -21,9 +21,11 @@
     BOOL guitarUpdatePlayband;
     BOOL minimapUpdateNotes;
     BOOL minimapUpdatePlayband;
+
 }
 
 @property (nonatomic, readwrite) int playband;
+@property (nonatomic) bool activated;
 
 - (id)init;
 - (id)initWithMeasure:(NSMeasure *)measure;

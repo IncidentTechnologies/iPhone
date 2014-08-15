@@ -53,7 +53,7 @@
 - (void)turnOnAllFlags;
 
 - (void)changeNoteAtString:(int)str andFret:(int)fret forMeasure:(NSMeasure *)measure;
-- (void)doubleMeasures;
+- (void)doubleMeasures:(BOOL)duplicate;
 - (void)halveMeasures;
 - (void)clearSelectedMeasure;
 

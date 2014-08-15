@@ -39,13 +39,27 @@
         // load custom instrument selector
         [self initCustomInstrumentSelector];
         
-        sequence = [[NSSequence alloc] initWithName:@"sequence" tempo:120 volume:1.0];
-        
         self.tableView.bounces = NO;
         [self turnContentDrawingOn];
         
     }
     return self;
+}
+
+- (void)initSequenceWithFilename:(NSString *)filename
+{
+    if(filename != nil){
+        
+        sequence = [[NSSequence alloc] initWithXMPFilename:filename];
+        
+        [delegate setTempo:sequence.m_tempo];
+        [delegate setVolume:sequence.m_volume];
+        
+    }else{
+        
+        sequence = [[NSSequence alloc] initWithName:@"sequence" tempo:DEFAULT_TEMPO volume:DEFAULT_VOLUME];
+    }
+    
 }
 
 - (void)viewDidLoad
@@ -202,6 +216,16 @@
     }else{
         return nil;
     }
+}
+
+- (void)updateTrackTempo:(int)tempo
+{
+    sequence.m_tempo = tempo;
+}
+
+- (void)updateMasterVolume:(double)volume
+{
+    sequence.m_volume = volume;
 }
 
 - (BOOL)isValidInstrumentIndex:(int)inst

@@ -26,41 +26,21 @@
     
     if(self){
         
-        // Copy the course file from bundle to working documents directory
-        NSString * bundleFilepath = [[NSBundle mainBundle] pathForResource:filename ofType:@"xml"];
-        
-        NSFileManager * fileManager = [NSFileManager defaultManager];
-        
-        if([fileManager fileExistsAtPath:bundleFilepath]){
-            //DLog(@"The course exists in bundle");
-        }else{
-            //DLog(@"The course does not exist in bundle");
-        }
-        
         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences"];
-        
-        NSError * err = NULL;
-        [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
         
         NSString * sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Sequences/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
         
-        if([fileManager fileExistsAtPath:sequenceFilepath]){
-            DLog(@"The course exists in docs directory");
-            [fileManager removeItemAtPath:sequenceFilepath error:&err];
-        }
-        //else{
-        [fileManager copyItemAtPath:bundleFilepath toPath:sequenceFilepath error:&err];
-        DLog(@"Copied sequence");
-        //}
-        
         char * filepath = (char *)[sequenceFilepath UTF8String];
+        
+        DLog(@"initWithXMPFilename Sequences/%@.xml",filename);
         
         XMPTree MyTree(filepath);
         
         XMPNode * root = MyTree.GetRootNode()->FindChildByName((char *)"xmp")->FindChildByName((char *)"sequence");
         
         self = [self initWithXMPNode:root];
+        
+        DLog(@"Finished init?");
         
     }
     
@@ -88,6 +68,8 @@
         m_tracks = [[NSMutableArray alloc] init];
         
         m_selectedTrackIndex = 0;
+        
+        DLog(@"SEQUENCE");
         
         list<XMPNode *>* t_tracks = xmpNode->FindChildByName((char *)"content")->GetChildren();
         

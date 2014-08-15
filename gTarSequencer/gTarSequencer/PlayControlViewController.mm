@@ -113,6 +113,8 @@
             [self beginPlaySession];
         }
         
+        [delegate updateTempo:newValue];
+        
         if(save){
             [delegate saveContext:nil force:NO];
         }

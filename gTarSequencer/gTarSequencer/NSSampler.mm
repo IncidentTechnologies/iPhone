@@ -26,6 +26,10 @@
     {
         //XMPObject * sampler = [[XMPObject alloc] initWithXMPNode:xmpNode];
         
+        DLog(@"SAMPLER");
+        
+        m_samples = [[NSMutableArray alloc] init];
+        
         list<XMPNode *>* t_samples = xmpNode->GetChildren();
         
         for(list<XMPNode *>::iterator it = t_samples->First(); it != NULL; it++){

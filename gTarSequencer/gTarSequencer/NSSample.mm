@@ -33,6 +33,9 @@
         
         [sample GetAttributeValueWithName:@"custom"].GetValueBool(&m_custom);
         
+        DLog(@"SAMPLE %@",m_name);
+        
+        
     }
     
     return self;

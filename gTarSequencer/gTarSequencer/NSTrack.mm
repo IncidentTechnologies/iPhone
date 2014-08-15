@@ -41,16 +41,32 @@
         
         m_instrument = [[NSInstrument alloc] initWithXMPNode:xmpNode->FindChildByName((char *)"instrument")];
         
+        m_patterns = [[NSMutableArray alloc] init];
+        
+        selectedPatternDidChange = NO;
+        isSelected = NO;
+        
+        DLog(@"TRACK");
+        
         list<XMPNode *>* t_patterns = xmpNode->GetChildren();
         
+        int patternIndex = 0;
         for(list<XMPNode *>::iterator it = t_patterns->First(); it != NULL; it++){
             
             XMPNode * m_it = *it;
             
             if(strcmp(m_it->GetName(),"pattern") == 0){
+                
                 NSPattern * pattern = [[NSPattern alloc] initWithXMPNode:m_it];
                 
                 [self addPattern:pattern];
+                
+                if(pattern.m_on){
+                    selectedPattern = pattern;
+                    selectedPatternIndex = patternIndex;
+                }
+                
+                patternIndex++;
             }
         }
         
@@ -189,7 +205,7 @@
     }
     
     // Update data structure:
-    [selectedPattern doubleMeasures];
+    [selectedPattern doubleMeasures:YES];
 }
 
 - (void)removeMeasure {

@@ -11,6 +11,7 @@
 @implementation NSMeasure
 
 @synthesize playband = playband;
+@synthesize activated;
 
 - (id)init
 {
@@ -24,6 +25,8 @@
         
         //[self initFakeNotes];
         
+        activated = false;
+        
         [self sharedInit];
     }
     return self;
@@ -34,9 +37,15 @@
     self = [super init];
     if (self)
     {
+        activated = false;
+        
         for (int i=0;i<MAX_NOTES;i++)
         {
             notes[i] = [measure isNoteOnAtLocation:i];
+            
+            if(notes[i]){
+                activated = true;
+            }
         }
         
         [self sharedInit];
@@ -54,6 +63,8 @@
         DLog(@"at index %i",r);
         notes[r] = true;
     }
+    
+    activated = true;
 }
 
 - (void)sharedInit
@@ -177,6 +188,10 @@
 - (void)changeNoteStatusAtLocation:(NSUInteger)location;
 {
     notes[location] = !notes[location];
+    
+    if(notes[location]){
+        activated = true;
+    }
 }
 
 - (BOOL)isNoteOnAtString:(int)str andFret:(int)fret

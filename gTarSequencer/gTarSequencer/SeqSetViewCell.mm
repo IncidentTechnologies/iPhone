@@ -461,6 +461,7 @@
     patternButton.layer.mask = bodyLayer;
     patternButton.clipsToBounds = YES;
     patternButton.layer.masksToBounds = YES;
+
     
 }
 

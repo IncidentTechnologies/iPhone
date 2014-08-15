@@ -38,6 +38,10 @@
         
         [pattern GetAttributeValueWithName:@"on"].GetValueBool(&m_on);
         
+        DLog(@"PATTERN");
+        
+        [self initFirstMeasure];
+        
         list<XMPNode *>* t_notes = xmpNode->GetChildren();
         
         for(list<XMPNode *>::iterator it = t_notes->First(); it != NULL; it++){
@@ -61,24 +65,28 @@
         m_name = name;
         m_on = on;
         
-        m_notes = [[NSMutableArray alloc] init];
-        m_measures = [[NSMutableArray alloc] init];
-        
-        // Add First Measure
-        NSMeasure * measure1 = [[NSMeasure alloc] init];
-        
-        [self addMeasure:measure1];
-        
-        selectedMeasure = measure1;
-        selectedMeasureIndex = 0;
-        measureCount = [m_measures count];
-        
-        selectionChanged = YES;
-        countChanged = YES;
-        
+        [self initFirstMeasure];
     }
     
     return self;
+}
+
+-(void)initFirstMeasure
+{
+    m_notes = [[NSMutableArray alloc] init];
+    m_measures = [[NSMutableArray alloc] init];
+    
+    // Add First Measure
+    NSMeasure * measure1 = [[NSMeasure alloc] init];
+    
+    [self addMeasure:measure1];
+    
+    selectedMeasure = measure1;
+    selectedMeasureIndex = 0;
+    measureCount = [m_measures count];
+    
+    selectionChanged = YES;
+    countChanged = YES;
 }
 
 -(XMPNode *)convertToXmp
@@ -111,40 +119,46 @@
     int numMeasures = [m_measures count];
     int fret = floor(note.m_beatstart);
     int string = note.m_stringvalue;
+    int measureIndex = 0;
     
-    if(note.m_beatstart < 16){
+    if(note.m_beatstart < FRETS_ON_GTAR){
         
         // Add to first measure
-        m = [m_measures objectAtIndex:0];
+        measureIndex = 0;
         
-    }else if(note.m_beatstart < 32){
+    }else if(note.m_beatstart < 2*FRETS_ON_GTAR){
         
         if(numMeasures < 2){
-            [self doubleMeasures];
+            [self doubleMeasures:NO];
         }
         
         // Add to second measure
-        m = [m_measures objectAtIndex:1];
+        measureIndex = 1;
         
-    }else if(note.m_beatstart < 48){
+    }else if(note.m_beatstart < 3*FRETS_ON_GTAR){
         
         if(numMeasures < 3){
-            [self doubleMeasures];
+            [self doubleMeasures:NO];
         }
         
         // Add to third measure
-        m = [m_measures objectAtIndex:2];
+        measureIndex = 2;
         
-    }else if(note.m_beatstart < 64){
+    }else if(note.m_beatstart < 4*FRETS_ON_GTAR){
         
         if(numMeasures < 3){
-            [self doubleMeasures];
+            [self doubleMeasures:NO];
         }
         
         // Add to fourth measure
-        m = [m_measures objectAtIndex:3];
+        measureIndex = 3;
         
     }
+    
+    m = [m_measures objectAtIndex:measureIndex];
+    [[m_measures objectAtIndex:measureIndex] setActivated:true];
+    
+    fret -= FRETS_ON_GTAR*measureIndex;
     
     if(![m isNoteOnAtString:string andFret:fret]){
         [m changeNoteAtString:string andFret:fret];
@@ -168,7 +182,7 @@
 - (void)changeNoteAtString:(int)str andFret:(int)fret forMeasure:(NSMeasure *)measure
 {
     int measureIndex = [m_measures indexOfObject:measure];
-    int measureOffset = 16*measureIndex;
+    int measureOffset = FRETS_ON_GTAR*measureIndex;
     
     if([measure isNoteOnAtString:str andFret:fret]){
         
@@ -196,7 +210,7 @@
     NSMutableArray * notesToRemove = [[NSMutableArray alloc] init];
     
     for(NSNote * note in m_notes){
-        if(note.m_beatstart > 16*maxMeasure-1){
+        if(note.m_beatstart > FRETS_ON_GTAR*maxMeasure-1){
             [notesToRemove addObject:note];
         }
     }
@@ -281,7 +295,7 @@
 
 #pragma mark Add/Remove Measures
 
-- (void)doubleMeasures
+- (void)doubleMeasures:(BOOL)duplicate
 {
     DLog(@"Doubling measures");
     
@@ -292,24 +306,32 @@
     
     for (int i=0;i<previousCount;i++)
     {
-        NSMeasure * oldMeasure = [m_measures objectAtIndex:i];
-        [oldMeasure setUpdateNotesOnMinimap:YES];
-        
-        NSMeasure * newMeasure = [[NSMeasure alloc] initWithMeasure:oldMeasure];
-        [m_measures addObject:newMeasure];
-        
-        // Add notes that get turned on
-        int newMeasureIndex = [m_measures indexOfObject:newMeasure];
-        int newMeasureOffset = 16*newMeasureIndex;
-        
-        for(int s = 0; s < 6; s++){
-            for(int f = 0; f < 16; f++){
-                if([oldMeasure isNoteOnAtString:s andFret:f]){
-                    NSNote * note = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:f+newMeasureOffset];
-                    
-                    [self addNoteObject:note];
+        if(duplicate){
+            
+            NSMeasure * oldMeasure = [m_measures objectAtIndex:i];
+            [oldMeasure setUpdateNotesOnMinimap:YES];
+            
+            NSMeasure * newMeasure = [[NSMeasure alloc] initWithMeasure:oldMeasure];
+            [m_measures addObject:newMeasure];
+            
+            // Add notes that get turned on
+            int newMeasureIndex = [m_measures indexOfObject:newMeasure];
+            int newMeasureOffset = FRETS_ON_GTAR*newMeasureIndex;
+            
+            for(int s = 0; s < STRINGS_ON_GTAR; s++){
+                for(int f = 0; f < FRETS_ON_GTAR; f++){
+                    if([oldMeasure isNoteOnAtString:s andFret:f]){
+                        NSNote * note = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:f+newMeasureOffset];
+                        
+                        [self addNoteObject:note];
+                    }
                 }
             }
+                
+        }else{
+            
+            NSMeasure * newMeasure = [[NSMeasure alloc] init];
+            [m_measures addObject:newMeasure];
         }
     }
     

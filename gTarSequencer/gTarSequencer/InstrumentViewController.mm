@@ -232,9 +232,9 @@
         
     }else if(measureCount > measureCounts[patternIndex]){
         
-        [p doubleMeasures];
+        [p doubleMeasures:YES];
         if(measureCount == measureCounts[patternIndex]*4){
-            [p doubleMeasures];
+            [p doubleMeasures:YES];
         }
     }
     

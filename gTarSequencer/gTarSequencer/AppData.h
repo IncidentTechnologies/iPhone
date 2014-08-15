@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "TestFlightSDK3.0.0/TestFlight.h"
 
-#ifndef DEBUG
+#ifdef DEBUG
 #define DLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
 #define DLog( s, ... )
@@ -24,6 +24,7 @@
 #define YBASE 320
 #define BOTTOMBAR_HEIGHT 55
 
+#define DEFAULT_TEMPO 120
 #define DEFAULT_VOLUME 0.2
 #define MAX_VOLUME 0.4
 #define MIN_VOLUME 0.001

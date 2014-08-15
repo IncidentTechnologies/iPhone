@@ -33,6 +33,7 @@
         
         [note GetAttributeValueWithName:@"value"].GetValueInt(&m_stringvalue);
         
+        DLog(@"NOTE");
     }
     
     return self;

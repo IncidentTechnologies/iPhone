@@ -45,6 +45,8 @@
 
 - (void) commitMasterLevelSlider:(UILevelSlider *)masterSlider;
 
+- (void)updateTempo:(int)tempo;
+
 @end
 
 

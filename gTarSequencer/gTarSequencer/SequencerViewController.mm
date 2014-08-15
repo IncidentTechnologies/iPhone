@@ -56,13 +56,9 @@
     
     // Load default set for FTU
     NSString * filePath = (isFirstLaunch) ? [self getDefaultSetFilepath] : nil;
-    //[self loadStateFromDisk:filePath];
-    //
-    // SET DEFAULTS IF NOT LOADING STATE FROM DISK
-        [playControlViewController resetTempo];
-        [playControlViewController resetVolume];
-        [seqSetViewController resetSelectedInstrumentIndex];
-    //
+    
+    [self loadStateFromDisk:filePath];
+    
     [self selectNavChoice:@"Set" withShift:NO];
     [self saveContext:nil force:NO];
     
@@ -446,7 +442,7 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
     
-    //[self loadStateFromDisk:filepath];
+    [self loadStateFromDisk:filepath];
     [self saveContext:nil force:YES];
     
     if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
@@ -593,6 +589,22 @@
     saveContextTimer = nil;
 }
 
+- (void)updateTempo:(int)tempo
+{
+    [seqSetViewController updateTrackTempo:tempo];
+}
+
+- (void)setTempo:(int)tempo
+{
+    [playControlViewController setTempo:tempo];
+}
+
+-(void)setVolume:(double)volume
+{
+    volume = MIN(volume,MAX_VOLUME);
+    [playControlViewController setVolume:volume];
+}
+
 - (void)loadStateFromDisk:(NSString *)filepath
 {
     
@@ -610,6 +622,21 @@
         DLog(@"The sequencer save plist does not exist");
     }
     
+    // Read file load into all the things, make sure the data generates
+    [seqSetViewController initSequenceWithFilename:@"unsavedSequence"];
+    
+    if(filepath == nil){
+        
+        [playControlViewController resetTempo];
+        [playControlViewController resetVolume];
+        [seqSetViewController resetSelectedInstrumentIndex];
+        
+    }else{
+        
+        
+    }
+    
+    /*
     currentState = [[NSDictionary dictionaryWithContentsOfFile:filepath] mutableCopy];
     
     if (currentState == nil )
@@ -617,14 +644,6 @@
     
     if ( [[currentState allKeys] count] > 0 )
     {
-        // Decode tempo:
-        int tempo = [[currentState objectForKey:@"Tempo"] intValue];
-        [playControlViewController setTempo:tempo];
-        
-        double volume = [[currentState objectForKey:@"Volume"] doubleValue];
-        volume = MIN(volume,MAX_VOLUME);
-        [playControlViewController setVolume:volume];
-        
         // Decode selectedInstrumentIndex
         [seqSetViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
         
@@ -654,6 +673,8 @@
         [playControlViewController resetVolume];
         [seqSetViewController resetSelectedInstrumentIndex];
     }
+    
+    */
 }
 
 - (NSString *)getDefaultSetFilepath
@@ -1194,6 +1215,7 @@
 - (void)changePlayVolume:(double)newVolume
 {
     playVolume = newVolume;
+    [seqSetViewController updateMasterVolume:newVolume];
 }
 
 - (void)initPlayLocation

@@ -36,7 +36,11 @@
 - (void) numInstrumentsDidChange:(int)numInstruments;
 
 - (void) updateSelectedInstrument;
-- (void)openInstrument:(int)instIndex;
+- (void) openInstrument:(int)instIndex;
+
+- (void) setTempo:(int)tempo;
+- (void) setVolume:(double)volume;
+
 @end
 
 @interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate,TutorialDelegate>
@@ -108,6 +112,7 @@
 
 - (void)setInstrumentsFromData:(NSData *)instData;
 
+- (void)initSequenceWithFilename:(NSString *)filename;
 - (NSSequence *)getSequence;
 - (NSMutableArray *)getTracks;
 
@@ -115,7 +120,9 @@
 
 - (NSTrack *)getCurrentTrack;
 - (NSTrack *)getTrackAtIndex:(int)index;
-- (BOOL)isValidTrackIndex:(int)index;
+
+- (void)updateTrackTempo:(int)tempo;
+- (void)updateMasterVolume:(double)volume;
 
 - (BOOL)isValidInstrumentIndex:(int)inst;
 
