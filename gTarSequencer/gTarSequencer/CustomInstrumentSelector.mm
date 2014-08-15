@@ -700,6 +700,8 @@
         return;
     }
     
+    filename = [filename stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
     if(useCustomPath){
         
         // different filetype and location

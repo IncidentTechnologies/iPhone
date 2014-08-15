@@ -82,6 +82,11 @@
 
 -(void)addSample:(NSSample *)sample
 {
+    for(NSSample * s in m_samples){
+        if([s.m_name isEqualToString:sample.m_name] && [s.m_value isEqualToString:sample.m_value]){
+            return;
+        }
+    }
     [m_samples addObject:sample];
 }
 

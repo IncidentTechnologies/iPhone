@@ -59,7 +59,7 @@
         
     }else{
         
-        sequence = [[NSSequence alloc] initWithName:@"sequence" tempo:DEFAULT_TEMPO volume:DEFAULT_VOLUME];
+        sequence = [[NSSequence alloc] initWithName:DEFAULT_SET_NAME tempo:DEFAULT_TEMPO volume:DEFAULT_VOLUME];
     }
     
 }
@@ -92,11 +92,46 @@
 #pragma mark Save Context
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
-    if(filepath == nil){
-        filepath = @"unsavedSequence";
+    if(saveContextTimer == nil || filepath != nil || forceSave){
+        
+        // Prevent from saving many times in a row, but never block a manual save
+        [self clearSaveContextTimer];
+        saveContextTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(clearSaveContextTimer) userInfo:nil repeats:NO];
+        
+        // Save state instead of to file
+        if(filepath == nil){
+            filepath = @"sequenceCurrentState";
+        }
+        
+        // Save the sequence
+        [sequence saveToFile:filepath];
+        
+        
+        // Anything else to save?
+        /*
+         NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[seqSetViewController getSelectedInstrumentIndex]];
+         
+         [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
+         
+         if(activeSequencer){
+         [currentState setObject:activeSequencer forKey:@"Active Sequencer"];
+         }else{
+         [currentState setObject:@"" forKey:@"Active Sequencer"];
+         }
+         
+         BOOL success = [currentState writeToFile:instrumentDataFilePath atomically:YES];
+         
+         DLog(@"Save success: %i", success);
+         */
+        
+        
     }
-    
-    [sequence saveToFile:filepath];
+}
+
+- (void)clearSaveContextTimer
+{
+    [saveContextTimer invalidate];
+    saveContextTimer = nil;
 }
 
 #pragma mark Instruments Data

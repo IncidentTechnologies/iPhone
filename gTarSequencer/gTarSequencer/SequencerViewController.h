@@ -54,7 +54,6 @@
     
     // State
     NSMutableDictionary * currentState;
-    NSString * instrumentDataFilePath;
     
     // Save/Load
     NSString * activeSequencer;
@@ -75,8 +74,6 @@
     BOOL isScreenLarge;
     CGRect setNameOnScreenFrame;
     CGRect setNameOffScreenFrame;
-    
-    NSTimer * saveContextTimer;
 }
 
 @property (nonatomic) BOOL isFirstLaunch;

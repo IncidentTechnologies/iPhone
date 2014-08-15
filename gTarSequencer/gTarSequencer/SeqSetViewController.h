@@ -41,6 +41,7 @@
 - (void) setTempo:(int)tempo;
 - (void) setVolume:(double)volume;
 
+
 @end
 
 @interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate,TutorialDelegate>
@@ -67,6 +68,9 @@
     
     BOOL canEdit;
     BOOL allowContentDrawing;
+    
+    
+    NSTimer * saveContextTimer;
 }
 
 

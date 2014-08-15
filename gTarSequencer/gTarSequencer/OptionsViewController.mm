@@ -104,6 +104,7 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSError * error;
     NSString * directoryPath = [paths objectAtIndex:0];
+    directoryPath = [directoryPath stringByAppendingPathComponent:@"Sequences"];
     
     //fileSet = [[NSMutableDictionary alloc] init];
     
@@ -124,6 +125,8 @@
             
             // remove usr_ prefix
             fileLoadSet[i] = [fileLoadSet[i] stringByReplacingCharactersInRange:[fileLoadSet[i] rangeOfString:@"usr_"] withString:@""];
+            
+            fileLoadSet[i] = [fileLoadSet[i] stringByReplacingCharactersInRange:[fileLoadSet[i] rangeOfString:@".xml"] withString:@""];
             
             fileDateSet[i] = [attrs objectForKey:NSFileModificationDate];
             

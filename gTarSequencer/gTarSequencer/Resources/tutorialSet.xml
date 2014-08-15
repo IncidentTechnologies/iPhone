@@ -1,0 +1,33 @@
+<xmp>
+    <sequence>
+        <header>
+            <name>
+                Tutorial
+            </name>
+            <tempo value="120.000000" />
+            <volume value="0.200000" />
+        </header>
+        <content>
+            <track name="DOUBLE BASS" volume="1.000000" muted="0">
+                <instrument name="DOUBLE BASS" iconname="Icon_Violin" index="1" custom="0">
+                    <sampler>
+                        <sample name="DoubleBass_C" value="0" custom="0" />
+                        <sample name="DoubleBass_D" value="1" custom="0" />
+                        <sample name="DoubleBass_E" value="2" custom="0" />
+                        <sample name="DoubleBass_G" value="3" custom="0" />
+                        <sample name="DoubleBass_A" value="4" custom="0" />
+                        <sample name="DoubleBass_B" value="5" custom="0" />
+                    </sampler>
+                </instrument>
+                <pattern name="-A" on="1">
+                    <note value="4" beatstart="2.000000" />
+                    <note value="2" beatstart="7.000000" />
+                    <note value="2" beatstart="11.000000" />
+                </pattern>
+                <pattern name="-B" on="0" />
+                <pattern name="-C" on="0" />
+                <pattern name="-D" on="0" />
+            </track>
+        </content>
+    </sequence>
+</xmp>

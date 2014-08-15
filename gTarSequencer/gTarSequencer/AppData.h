@@ -39,3 +39,5 @@
 
 #define NUM_PATTERNS 4
 #define NUM_MEASURES 4
+
+#define DEFAULT_SET_NAME @"Tutorial"

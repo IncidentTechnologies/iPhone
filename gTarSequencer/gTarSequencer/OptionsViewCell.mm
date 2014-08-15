@@ -12,7 +12,7 @@
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
 
-#define DEFAULT_SET_NAME @"Tutorial"
+//#define DEFAULT_SET_NAME @"Tutorial"
 #define DEFAULT_FILE_TEXT @"Save as"
 
 @implementation OptionsViewCell

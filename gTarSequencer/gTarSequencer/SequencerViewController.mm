@@ -55,7 +55,12 @@
     [self initSubviews];
     
     // Load default set for FTU
-    NSString * filePath = (isFirstLaunch) ? [self getDefaultSetFilepath] : nil;
+    if(isFirstLaunch){
+        [self copyTutorialFile];
+    }
+    
+    
+    NSString * filePath = (isFirstLaunch) ? @"usr_Tutorial" : nil;
     
     [self loadStateFromDisk:filePath];
     
@@ -83,12 +88,6 @@
 
 - (void)initGlobalData
 {
-    
-    // Paths to load/save on disk
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    instrumentDataFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"sequencerCurrentState"];
-    
     // Gtar delegate and connection spoof
     DLog(@"Setup and connect gTar");
     //isConnected = NO;
@@ -218,6 +217,32 @@
     [self startGestures];
     
 }
+
+
+-(void)copyTutorialFile
+{
+    NSString * defaultSetPath = [[NSBundle mainBundle] pathForResource:@"tutorialSet" ofType:@"xml"];
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * newDefaultSetPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences/usr_Tutorial.xml"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences"];
+    
+    NSError * err = NULL;
+    [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
+    
+    NSError * error;
+    if(![fileManager copyItemAtPath:defaultSetPath toPath:newDefaultSetPath error:&error]){
+        DLog(@"Error copying");
+    }
+    
+    DLog(@"Copied tutorial file from %@ to %@",defaultSetPath,newDefaultSetPath);
+    
+    
+}
+
 
 #pragma mark - Left Navigator Delegate
 
@@ -424,10 +449,7 @@
     activeSequencer = filename;
     filename = [@"usr_" stringByAppendingString:filename];
     
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
-    
-    [self saveContext:filepath force:YES];
+    [self saveContext:filename force:YES];
     [self saveContext:nil force:YES];
 }
 
@@ -439,10 +461,7 @@
     activeSequencer = filename;
     filename = [@"usr_" stringByAppendingString:filename];
     
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
-    
-    [self loadStateFromDisk:filepath];
+    [self loadStateFromDisk:filename];
     [self saveContext:nil force:YES];
     
     if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
@@ -456,8 +475,10 @@
         activeSequencer = newname;
     }
     
-    filename = [@"usr_" stringByAppendingString:filename];
-    newname = [@"usr_" stringByAppendingString:newname];
+    filename = [@"Sequences/usr_" stringByAppendingString:filename];
+    filename = [filename stringByAppendingString:@".xml"];
+    newname = [@"Sequences/usr_" stringByAppendingString:newname];
+    newname = [newname stringByAppendingString:@".xml"];
     
     // move
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -554,39 +575,9 @@
 #pragma mark - Auto Save Load
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
-    if(saveContextTimer == nil || filepath != nil || forceSave){
-        
-        // Save the sequence
-        [seqSetViewController saveContext:filepath force:forceSave];
-        
-        // Prevent from saving many times in a row, but never block a manual save
-        [self clearSaveContextTimer];
-        saveContextTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(clearSaveContextTimer) userInfo:nil repeats:NO];
-        
-        // Then save state
-        // Anything else to save?
-        /*
-            NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[seqSetViewController getSelectedInstrumentIndex]];
-            
-            [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
-            
-            if(activeSequencer){
-                [currentState setObject:activeSequencer forKey:@"Active Sequencer"];
-            }else{
-                [currentState setObject:@"" forKey:@"Active Sequencer"];
-            }
-            
-            BOOL success = [currentState writeToFile:instrumentDataFilePath atomically:YES];
-            
-            DLog(@"Save success: %i", success);
-        */
-    }
-}
+    // Save the sequence
+    [seqSetViewController saveContext:filepath force:forceSave];
 
-- (void)clearSaveContextTimer
-{
-    [saveContextTimer invalidate];
-    saveContextTimer = nil;
 }
 
 - (void)updateTempo:(int)tempo
@@ -609,7 +600,7 @@
 {
     
     if(filepath == nil){
-        filepath = instrumentDataFilePath;
+        filepath = @"sequenceCurrentState";
         DLog(@"Load state from disk");
     }else{
         DLog(@"Load sequencer from disk at %@", filepath);
@@ -623,7 +614,7 @@
     }
     
     // Read file load into all the things, make sure the data generates
-    [seqSetViewController initSequenceWithFilename:@"unsavedSequence"];
+    [seqSetViewController initSequenceWithFilename:filepath];
     
     if(filepath == nil){
         
@@ -633,53 +624,36 @@
         
     }else{
         
+        /*
+         currentState = [[NSDictionary dictionaryWithContentsOfFile:filepath] mutableCopy];
+         
+         if (currentState == nil )
+         currentState = [[NSMutableDictionary alloc] init];
+         
+         if ( [[currentState allKeys] count] > 0 )
+         {
+         // Decode selectedInstrumentIndex
+         [seqSetViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
+         
+         // Decode active sequencer filename
+         NSString * sequencerName = [currentState objectForKey:@"Active Sequencer"];
+         if(![sequencerName isEqualToString:@""]){
+         activeSequencer = sequencerName;
+         optionsViewController.activeSequencer = sequencerName;
+         }
+         
+         // Load icon into left navigator
+         
+         DLog(@"Get current instrument: Load Icon");
+         NSTrack * track = [seqSetViewController getCurrentTrack];
+         if(track != nil){
+         [leftNavigator enableInstrumentViewWithIcon:track.m_instrument.m_iconName showCustom:track.m_instrument.m_custom];
+         }
+         
+         }
+         */
         
     }
-    
-    /*
-    currentState = [[NSDictionary dictionaryWithContentsOfFile:filepath] mutableCopy];
-    
-    if (currentState == nil )
-        currentState = [[NSMutableDictionary alloc] init];
-    
-    if ( [[currentState allKeys] count] > 0 )
-    {
-        // Decode selectedInstrumentIndex
-        [seqSetViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
-        
-        // Decode array of instruments:
-        
-        NSData * instrumentData = [currentState objectForKey:@"Instruments Data"];
-        
-        [seqSetViewController setInstrumentsFromData:instrumentData];
-        
-        // Decode active sequencer filename
-        NSString * sequencerName = [currentState objectForKey:@"Active Sequencer"];
-        if(![sequencerName isEqualToString:@""]){
-            activeSequencer = sequencerName;
-            optionsViewController.activeSequencer = sequencerName;
-        }
-        
-        // Load icon into left navigator
-        
-        DLog(@"Get current instrument: Load Icon");
-        NSTrack * track = [seqSetViewController getCurrentTrack];
-        if(track != nil){
-            [leftNavigator enableInstrumentViewWithIcon:track.m_instrument.m_iconName showCustom:track.m_instrument.m_custom];
-        }
-        
-    }else{
-        [playControlViewController resetTempo];
-        [playControlViewController resetVolume];
-        [seqSetViewController resetSelectedInstrumentIndex];
-    }
-    
-    */
-}
-
-- (NSString *)getDefaultSetFilepath
-{
-    return [[NSBundle mainBundle] pathForResource:@"defaultSet" ofType:@""];
 }
 
 #pragma mark - Play Events

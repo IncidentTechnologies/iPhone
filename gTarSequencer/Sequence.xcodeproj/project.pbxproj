@@ -353,7 +353,7 @@
 		6DEAB50A18D7BB7C00833D9C /* HandDrum_Knock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB50418D7BB7C00833D9C /* HandDrum_Knock.mp3 */; };
 		6DEAB50B18D7BB7C00833D9C /* HandDrum_Clink.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB50518D7BB7C00833D9C /* HandDrum_Clink.mp3 */; };
 		6DED45D3199C4E4400E4AF08 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DED45D2199C4E4400E4AF08 /* MessageUI.framework */; };
-		6DF6BC7518CE5E1800D20EC7 /* defaultSet in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6BC7418CE5E1800D20EC7 /* defaultSet */; };
+		6DF6BC7518CE5E1800D20EC7 /* tutorialSet.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6BC7418CE5E1800D20EC7 /* tutorialSet.xml */; };
 		6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */; };
 		6DFDB02018C0278D004D573B /* BottomBar_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01F18C0278D004D573B /* BottomBar_4.xib */; };
 		6DFDB02218C02BB2004D573B /* SeqSetViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB02118C02BB2004D573B /* SeqSetViewCell_4.xib */; };
@@ -887,7 +887,7 @@
 		6DEAB50418D7BB7C00833D9C /* HandDrum_Knock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HandDrum_Knock.mp3; sourceTree = "<group>"; };
 		6DEAB50518D7BB7C00833D9C /* HandDrum_Clink.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HandDrum_Clink.mp3; sourceTree = "<group>"; };
 		6DED45D2199C4E4400E4AF08 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		6DF6BC7418CE5E1800D20EC7 /* defaultSet */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = defaultSet; path = ../defaultSet; sourceTree = "<group>"; };
+		6DF6BC7418CE5E1800D20EC7 /* tutorialSet.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = tutorialSet.xml; path = ../tutorialSet.xml; sourceTree = "<group>"; };
 		6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell_4.xib; sourceTree = "<group>"; };
 		6DFDB01F18C0278D004D573B /* BottomBar_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomBar_4.xib; sourceTree = "<group>"; };
 		6DFDB02118C02BB2004D573B /* SeqSetViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeqSetViewCell_4.xib; sourceTree = "<group>"; };
@@ -1041,7 +1041,7 @@
 		5811AA75187B88C700FC0BD2 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				6DF6BC7418CE5E1800D20EC7 /* defaultSet */,
+				6DF6BC7418CE5E1800D20EC7 /* tutorialSet.xml */,
 				587C9F241888C0E7001F57C7 /* Samples */,
 				5811AADE187B88C800FC0BD2 /* Sample Pack INFO */,
 				58241D7C188DE31000498DB5 /* sampleList.plist */,
@@ -2381,7 +2381,7 @@
 				6DAA158A18C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png in Resources */,
 				58D617651863BF5E001EB327 /* Sequence10.png in Resources */,
 				6D44A45D18B686C400992D3D /* G_Icon.png in Resources */,
-				6DF6BC7518CE5E1800D20EC7 /* defaultSet in Resources */,
+				6DF6BC7518CE5E1800D20EC7 /* tutorialSet.xml in Resources */,
 				6D12697819706B1900A2A612 /* Vibraphone_F.mp3 in Resources */,
 				6DEAB4D218D78FF800833D9C /* House_Clap.mp3 in Resources */,
 				6DEAB4CF18D78FF800833D9C /* Dubstep_OpenHat.mp3 in Resources */,
