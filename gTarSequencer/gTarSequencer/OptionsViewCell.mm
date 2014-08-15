@@ -171,7 +171,7 @@
         
         if(!isEditingMode){
             
-            if(TESTMODE) DLog(@"Deselecting cell %i",rowid);
+            DLog(@"Deselecting cell %i",rowid);
             
             [self endNameEditing];
             
@@ -191,7 +191,7 @@
             [fileName setHidden:YES];
         }else{
             
-            if(TESTMODE) DLog(@"*** Not deselecting cell %i",rowid);
+            DLog(@"*** Not deselecting cell %i",rowid);
         }
         
     }
@@ -393,7 +393,7 @@
 
 -(void)resetFileNameIfBlank
 {
-    if(TESTMODE) DLog(@"Reset filename if blank");
+    DLog(@"Reset filename if blank");
     
     NSString * nameString = fileName.text;
     NSString * emptyName = [nameString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

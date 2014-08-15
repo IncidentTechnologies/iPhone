@@ -30,7 +30,7 @@
     NSMutableArray * m_measures;
 }
 
-@property (nonatomic, retain) NSString * m_name;
+@property (retain, nonatomic) NSString * m_name;
 @property (nonatomic) bool m_on;
 @property (nonatomic, retain) NSMutableArray * m_notes;
 
@@ -52,19 +52,19 @@
 
 - (void)turnOnAllFlags;
 
-/********* archaic ***********/
-
-- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitude:(double)amplitude;
-- (int)computeRealMeasureFromAbsolute:(int)absoluteMeasure;
-
-- (void)changeNoteAtString:(int)str andFret:(int)fret;
-- (BOOL)isNoteOnAtString:(int)str andFret:(int)fret;
-
+- (void)changeNoteAtString:(int)str andFret:(int)fret forMeasure:(NSMeasure *)measure;
 - (void)doubleMeasures;
 - (void)halveMeasures;
 - (void)clearSelectedMeasure;
 
 - (NSMeasure *)selectMeasure:(NSUInteger)newSelection;
+
+/********* archaic ***********/
+
+- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitude:(double)amplitude;
+- (int)computeRealMeasureFromAbsolute:(int)absoluteMeasure;
+
+- (BOOL)isNoteOnAtString:(int)str andFret:(int)fret;
 
 //
 

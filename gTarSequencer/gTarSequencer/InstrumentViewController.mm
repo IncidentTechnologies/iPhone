@@ -852,7 +852,7 @@
 #pragma mark - On Off
 - (void)turnOnInstrumentView
 {
-    if(TESTMODE) DLog(@"*** UNMUTING ***");
+    DLog(@"*** UNMUTING ***");
     [offMask setHidden:YES];
     if(volumeKnob && ![volumeKnob isEnabled]){
         [volumeKnob EnableKnob];
@@ -865,7 +865,7 @@
 
 - (void)turnOffInstrumentView
 {
-    if(TESTMODE) DLog(@"*** MUTING ***");
+    DLog(@"*** MUTING ***");
     [offMask setHidden:NO];
     if(volumeKnob && [volumeKnob isEnabled]){
         [volumeKnob DisableKnob];
@@ -912,7 +912,7 @@
         [noteButton setBackgroundColor:colors[string]];
     }
     
-    [m changeNoteAtString:string andFret:fret];
+    [p changeNoteAtString:string andFret:fret forMeasure:m];
     [self updateGuitarView];
     
     // SAVE CONTEXT

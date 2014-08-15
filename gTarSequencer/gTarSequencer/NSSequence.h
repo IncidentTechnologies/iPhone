@@ -36,6 +36,7 @@
 -(id)initWithName:(NSString *)name tempo:(double)tempo volume:(double)volume instruments:(NSArray *)instruments;
 
 -(XMPNode *)convertToXmp;
+-(void)saveToFile:(NSString *)filename;
 
 -(void)addTrack:(NSTrack *)track;
 

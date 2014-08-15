@@ -239,12 +239,12 @@
 			<string>Icon_Violin</string>
 			<key>Strings</key>
 			<array>
-				<string>Double Bass_C</string>
-				<string>Double Bass_D</string>
-				<string>Double Bass_E</string>
-				<string>Double Bass_G</string>
-				<string>Double Bass_A</string>
-				<string>Double Bass_B</string>
+				<string>DoubleBass_C</string>
+				<string>DoubleBass_D</string>
+				<string>DoubleBass_E</string>
+				<string>DoubleBass_G</string>
+				<string>DoubleBass_A</string>
+				<string>DoubleBass_B</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -269,8 +269,8 @@
 			<array>
 				<string>808_Kick</string>
 				<string>808_Snare</string>
-				<string>808_Closed Hat</string>
-				<string>808_Open Hat</string>
+				<string>808_ClosedHat</string>
+				<string>808_OpenHat</string>
 				<string>808_Tom</string>
 				<string>808_Clap</string>
 			</array>
@@ -297,10 +297,10 @@
 			<array>
 				<string>House_Kick</string>
 				<string>House_Clap</string>
-				<string>House_Open Hat</string>
-				<string>House_Closed Hat</string>
+				<string>House_OpenHat</string>
+				<string>House_ClosedHat</string>
 				<string>House_Snare</string>
-				<string>House_Wood Block</string>
+				<string>House_WoodBlock</string>
 			</array>
 			<key>StringPaths</key>
 			<array>
@@ -325,8 +325,8 @@
 			<array>
 				<string>Rock_Kick</string>
 				<string>Rock_Snare</string>
-				<string>Rock_Closed Hat</string>
-				<string>Rock_Open Hat</string>
+				<string>Rock_ClosedHat</string>
+				<string>Rock_OpenHat</string>
 				<string>Rock_Tom</string>
 				<string>Rock_Crash</string>
 			</array>

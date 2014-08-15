@@ -91,6 +91,10 @@
     
     node->AddAttribute(new XMPAttribute((char *)"on", m_on));
     
+    for(NSNote * note in m_notes){
+        node->AddChild([note convertToXmp]);
+    }
+    
     return node;
 }
 
@@ -101,7 +105,103 @@
 
 -(void)addNote:(NSNote *)note
 {
+    [self addNoteObject:note];
+    
+    NSMeasure * m;
+    int numMeasures = [m_measures count];
+    int fret = floor(note.m_beatstart);
+    int string = note.m_stringvalue;
+    
+    if(note.m_beatstart < 16){
+        
+        // Add to first measure
+        m = [m_measures objectAtIndex:0];
+        
+    }else if(note.m_beatstart < 32){
+        
+        if(numMeasures < 2){
+            [self doubleMeasures];
+        }
+        
+        // Add to second measure
+        m = [m_measures objectAtIndex:1];
+        
+    }else if(note.m_beatstart < 48){
+        
+        if(numMeasures < 3){
+            [self doubleMeasures];
+        }
+        
+        // Add to third measure
+        m = [m_measures objectAtIndex:2];
+        
+    }else if(note.m_beatstart < 64){
+        
+        if(numMeasures < 3){
+            [self doubleMeasures];
+        }
+        
+        // Add to fourth measure
+        m = [m_measures objectAtIndex:3];
+        
+    }
+    
+    if(![m isNoteOnAtString:string andFret:fret]){
+        [m changeNoteAtString:string andFret:fret];
+    }
+    
+}
+
+-(void)addNoteObject:(NSNote *)note
+{
     [m_notes addObject:note];
+    
+    NSArray * sortedArray = [m_notes sortedArrayUsingComparator:^NSComparisonResult(NSNote *n1, NSNote *n2){
+        if(n1.m_beatstart > n2.m_beatstart) return NSOrderedDescending;
+        else if(n1.m_beatstart < n2.m_beatstart) return NSOrderedAscending;
+        else return NSOrderedSame;
+    }];
+    
+    m_notes = [NSMutableArray arrayWithArray:sortedArray];
+}
+
+- (void)changeNoteAtString:(int)str andFret:(int)fret forMeasure:(NSMeasure *)measure
+{
+    int measureIndex = [m_measures indexOfObject:measure];
+    int measureOffset = 16*measureIndex;
+    
+    if([measure isNoteOnAtString:str andFret:fret]){
+        
+        // Remove from note array
+        for(NSNote * note in m_notes){
+            if(note.m_stringvalue == str && (floor(note.m_beatstart)-measureOffset) == fret){
+                [m_notes removeObject:note];
+            }
+        }
+        
+    }else{
+        
+        // Add to note array
+        NSNote * note = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",str] beatstart:fret+measureOffset];
+        
+        [self addNoteObject:note];
+    }
+    
+    [measure changeNoteAtString:str andFret:fret];
+    
+}
+
+- (void)removeAllInvalidNotes:(int)maxMeasure
+{
+    NSMutableArray * notesToRemove = [[NSMutableArray alloc] init];
+    
+    for(NSNote * note in m_notes){
+        if(note.m_beatstart > 16*maxMeasure-1){
+            [notesToRemove addObject:note];
+        }
+    }
+    
+    [m_notes removeObjectsInArray:notesToRemove];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -179,18 +279,6 @@
     }
 }
 
-#pragma mark Change Note
-
-- (void)changeNoteAtString:(int)str andFret:(int)fret
-{
-    [selectedMeasure changeNoteAtString:str andFret:fret];
-}
-
-- (BOOL)isNoteOnAtString:(int)str andFret:(int)fret
-{
-    return [selectedMeasure isNoteOnAtString:str andFret:fret];
-}
-
 #pragma mark Add/Remove Measures
 
 - (void)doubleMeasures
@@ -209,6 +297,20 @@
         
         NSMeasure * newMeasure = [[NSMeasure alloc] initWithMeasure:oldMeasure];
         [m_measures addObject:newMeasure];
+        
+        // Add notes that get turned on
+        int newMeasureIndex = [m_measures indexOfObject:newMeasure];
+        int newMeasureOffset = 16*newMeasureIndex;
+        
+        for(int s = 0; s < 6; s++){
+            for(int f = 0; f < 16; f++){
+                if([oldMeasure isNoteOnAtString:s andFret:f]){
+                    NSNote * note = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:f+newMeasureOffset];
+                    
+                    [self addNoteObject:note];
+                }
+            }
+        }
     }
     
     [self selectMeasure:selectedMeasureIndex+1];
@@ -225,6 +327,8 @@
     
     int difference = previousCount - measureCount;
     
+    [self removeAllInvalidNotes:measureCount];
+    
     for (int i=0;i<difference;i++){
         [m_measures removeLastObject];
     }
@@ -238,6 +342,7 @@
         NSMeasure * oldMeasure = [m_measures objectAtIndex:i];
         [oldMeasure setUpdateNotesOnMinimap:YES];
     }
+    
 }
 
 #pragma mark Clearing Measures

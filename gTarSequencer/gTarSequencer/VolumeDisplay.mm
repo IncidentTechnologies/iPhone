@@ -303,8 +303,8 @@
         [instrumentView addSubview:volumeSlider];
         
         // Link volume sliders to instruments
-        [track.m_instrument.audio releaseLevelSlider];
-        [track.m_instrument.audio commitLevelSlider:volumeSlider];
+        [track.m_instrument.m_sampler.audio releaseLevelSlider];
+        [track.m_instrument.m_sampler.audio commitLevelSlider:volumeSlider];
         
         i++;
     }

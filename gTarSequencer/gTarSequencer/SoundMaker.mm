@@ -95,7 +95,9 @@
             filepath[i] = (char *) [filename UTF8String];
             
         }else{
-            filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:audioStringSet[i] ofType:@"mp3"] UTF8String];
+            NSString * fname = [audioStringSet[i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            
+            filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:fname ofType:@"mp3"] UTF8String];
         }
         
         DLog(@"Loading sample %s",filepath[i]);

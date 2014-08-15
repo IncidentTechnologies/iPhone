@@ -72,10 +72,10 @@
         m_patterns = [[NSMutableArray alloc] init];
         
         // Add Four Patterns
-        NSPattern * patternA = [[NSPattern alloc] initWithName:@"A" on:YES];
-        NSPattern * patternB = [[NSPattern alloc] initWithName:@"B" on:NO];
-        NSPattern * patternC = [[NSPattern alloc] initWithName:@"C" on:NO];
-        NSPattern * patternD = [[NSPattern alloc] initWithName:@"D" on:NO];
+        NSPattern * patternA = [[NSPattern alloc] initWithName:@"-A" on:YES];
+        NSPattern * patternB = [[NSPattern alloc] initWithName:@"-B" on:NO];
+        NSPattern * patternC = [[NSPattern alloc] initWithName:@"-C" on:NO];
+        NSPattern * patternD = [[NSPattern alloc] initWithName:@"-D" on:NO];
         
         [self addPattern:patternA];
         [self addPattern:patternB];
@@ -143,6 +143,9 @@
 
 - (NSPattern *)selectPattern:(int)newSelection
 {
+    // -- clear the old one
+    selectedPattern.m_on = NO;
+    
     // -- update flag
     selectedPatternDidChange = YES;
     
@@ -152,6 +155,7 @@
     // -- formally select new beat seq
     selectedPatternIndex = newSelection;
     selectedPattern = [m_patterns objectAtIndex:selectedPatternIndex];
+    selectedPattern.m_on = YES;
     
     // -- update beat seq's flags
     [selectedPattern turnOnAllFlags];
@@ -167,7 +171,7 @@
 
 - (void)notePlayedAtString:(int)str andFret:(int)fret
 {
-    [selectedPattern changeNoteAtString:str andFret:fret];
+    [selectedPattern changeNoteAtString:str andFret:fret forMeasure:selectedPattern.selectedMeasure];
 }
 
 #pragma mark Measure Actions
@@ -209,12 +213,12 @@
 // Play audio:
 - (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)masteramplitude
 {
-    [m_instrument.audio updateMasterAmplitude:masteramplitude];
+    [m_instrument.m_sampler.audio updateMasterAmplitude:masteramplitude];
     
     if (sound && m_volume > 0)
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:m_instrument.m_id andAudio:m_instrument.audio withAmplitude:AMPLITUDE_SCALE*m_volume];
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:m_instrument.m_id andAudio:m_instrument.m_sampler.audio withAmplitude:AMPLITUDE_SCALE*m_volume];
     else
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:-1 andAudio:m_instrument.audio withAmplitude:0.0];
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:-1 andAudio:m_instrument.m_sampler.audio withAmplitude:0.0];
 }
 
 - (void)releaseSounds

@@ -11,6 +11,7 @@
 @implementation NSSampler
 
 @synthesize m_samples;
+@synthesize audio;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -48,6 +49,18 @@
     }
     
     return self;
+}
+
+- (void)initAudioWithInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster stringSet:(NSArray *)stringSet stringPaths:(NSArray *)stringPaths
+{
+    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths andIndex:index andSoundMaster:soundMaster];
+    
+    // Add all the samples
+    for(int i = 0; i < [stringSet count]; i++){
+        NSSample * sample = [[NSSample alloc] initWithName:[stringSet objectAtIndex:i] custom:[[stringPaths objectAtIndex:i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i]];
+        
+        [self addSample:sample];
+    }
 }
 
 -(XMPNode *)convertToXmp

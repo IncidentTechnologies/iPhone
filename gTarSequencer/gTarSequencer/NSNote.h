@@ -14,10 +14,12 @@
 {
     NSString * m_value;
     double m_beatstart;
+    long m_stringvalue;
 }
 
 @property (retain, nonatomic) NSString * m_value;
 @property (nonatomic) double m_beatstart;
+@property (nonatomic) long m_stringvalue;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
 

@@ -83,7 +83,7 @@
 
 - (void)update
 {
-    if(TESTMODE) DLog(@"Measure View update");
+    DLog(@"Measure View update");
     
     if (measure == nil)
         return;
@@ -110,7 +110,7 @@
 
 - (void)movePlayband {
     
-    if(TESTMODE)DLog(@"Move playband");
+    DLog(@"Move playband");
     
     if (measure.playband >= 0 && !isBlankMeasure) {
         CGRect newFrame = playbandView.frame;

@@ -12,6 +12,7 @@
 
 @synthesize m_value;
 @synthesize m_beatstart;
+@synthesize m_stringvalue;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -30,6 +31,8 @@
         
         [note GetAttributeValueWithName:@"beatstart"].GetValueDouble(&m_beatstart);
         
+        [note GetAttributeValueWithName:@"value"].GetValueInt(&m_stringvalue);
+        
     }
     
     return self;
@@ -43,6 +46,7 @@
 	if ( self )
     {
         m_value = value;
+        m_stringvalue = [value intValue];
         m_beatstart = beatstart;
     }
     

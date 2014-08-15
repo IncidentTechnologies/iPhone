@@ -32,9 +32,9 @@
         NSFileManager * fileManager = [NSFileManager defaultManager];
         
         if([fileManager fileExistsAtPath:bundleFilepath]){
-            DLog(@"The course exists in bundle");
+            //DLog(@"The course exists in bundle");
         }else{
-            DLog(@"The course does not exist in bundle");
+            //DLog(@"The course does not exist in bundle");
         }
         
         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -157,7 +157,7 @@
     node->AddChild(contentNode);
     
     XMPNode * tempNode = new XMPNode((char *)"name", headerNode);
-    tempNode->AppendContent((char*)[m_name UTF8String]);
+    tempNode->AppendContentNode((char*)[m_name UTF8String]);
     headerNode->AddChild(tempNode);
     
     tempNode = new XMPNode((char *)"tempo", headerNode);
@@ -173,6 +173,33 @@
     }
     
     return node;
+}
+
+-(void)saveToFile:(NSString *)filename
+{
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences"];
+    
+    NSError * err = NULL;
+    [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
+    
+    NSString * sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Sequences/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
+    
+    char * filepath = (char *)[sequenceFilepath UTF8String];
+  
+    XMPNode *node = NULL;
+    node = new XMPNode((char *)[@"xmp" UTF8String],NULL);
+    node->AddChild([self convertToXmp]);
+    
+    XMPTree tree = NULL;
+    
+    tree.AddChild(node);
+    
+    tree.SaveXMPToFile(filepath, YES);
+    
+    DLog(@"Saved to path %s",filepath);
+    
 }
 
 -(void)addTrack:(NSTrack *)track

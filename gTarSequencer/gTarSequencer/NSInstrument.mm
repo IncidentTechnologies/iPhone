@@ -15,10 +15,6 @@
 @synthesize m_iconName;
 @synthesize m_custom;
 @synthesize m_sampler;
-@synthesize audio;
-
-@synthesize stringPaths;
-@synthesize stringSet;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -47,7 +43,24 @@
     return self;
 }
 
--(id)initWithName:(NSString *)name id:(long)index iconName:(NSString *)iconName isCustom:(NSNumber *)isCustom
+-(id)init
+{
+    self = [super init];
+    
+	if ( self )
+    {
+        m_name = @"";
+        m_id = -1;
+        m_iconName = @"";
+        m_custom = NO;
+        
+        m_sampler = [[NSSampler alloc] init];
+    }
+    
+    return self;
+}
+
+-(id)initWithName:(NSString *)name id:(long)index iconName:(NSString *)iconName isCustom:(BOOL)isCustom
 {
     
     self = [super init];
@@ -65,11 +78,6 @@
     return self;
 }
 
-- (void)initAudioWithInstrumentName:(NSString *)instName andSoundMaster:(SoundMaster *)soundMaster
-{
-    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths andIndex:m_id andSoundMaster:soundMaster];
-}
-
 -(XMPNode *)convertToXmp
 {
     XMPNode *node = NULL;
@@ -84,14 +92,16 @@
     
     node->AddAttribute(new XMPAttribute((char *)"custom", m_custom));
     
-    node->AddChild([m_sampler convertToXmp]);
+    if(m_sampler != nil){
+        node->AddChild([m_sampler convertToXmp]);
+    }
     
     return node;
 }
 
 -(void)releaseSounds
 {
-    [audio releaseSounds];
+    [m_sampler.audio releaseSounds];
 }
 
 /*

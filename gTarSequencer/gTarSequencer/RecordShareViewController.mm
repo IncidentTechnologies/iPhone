@@ -1016,7 +1016,7 @@
                     NSString * strings = [f objectForKey:@"strings"];
                     for(int s = 0; s < STRINGS_ON_GTAR; s++){
                         if([strings characterAtIndex:s] == '1'){
-                            [inst.audio pluckString:s];
+                            [inst.m_sampler.audio pluckString:s];
                         }
                     }
                     

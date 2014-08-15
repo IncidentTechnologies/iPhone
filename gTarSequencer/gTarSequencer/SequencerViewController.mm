@@ -57,6 +57,12 @@
     // Load default set for FTU
     NSString * filePath = (isFirstLaunch) ? [self getDefaultSetFilepath] : nil;
     //[self loadStateFromDisk:filePath];
+    //
+    // SET DEFAULTS IF NOT LOADING STATE FROM DISK
+        [playControlViewController resetTempo];
+        [playControlViewController resetVolume];
+        [seqSetViewController resetSelectedInstrumentIndex];
+    //
     [self selectNavChoice:@"Set" withShift:NO];
     [self saveContext:nil force:NO];
     
@@ -88,15 +94,14 @@
     instrumentDataFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"sequencerCurrentState"];
     
     // Gtar delegate and connection spoof
-    if(TESTMODE) DLog(@"Setup and connect gTar");
+    DLog(@"Setup and connect gTar");
     //isConnected = NO;
     
     guitarView = [[GuitarView alloc] init];
     guitarView.delegate = self;
     
-    if(TESTMODE){
-        [NSTimer scheduledTimerWithTimeInterval:3.0 target:guitarView selector:@selector(observeGtar) userInfo:nil repeats:NO];
-    }
+    
+    [NSTimer scheduledTimerWithTimeInterval:3.0 target:guitarView selector:@selector(observeGtar) userInfo:nil repeats:NO];
     
     string = 0;
     fret = 0;
@@ -227,7 +232,7 @@
 
 - (void)closeLeftNavigator
 {
-    if(TESTMODE) DLog(@"Close left nav");
+    DLog(@"Close left nav");
     
     [seqSetViewController turnEditingOn];
     [UIView setAnimationsEnabled:YES];
@@ -242,7 +247,7 @@
 
 - (void)openLeftNavigator
 {
-    if(TESTMODE) DLog(@"Open left nav");
+    DLog(@"Open left nav");
     
     [instrumentViewController leftNavWillOpen];
     [seqSetViewController turnEditingOff];
@@ -553,6 +558,8 @@
 #pragma mark - Auto Save Load
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
+    [seqSetViewController saveContext:filepath force:forceSave];
+    
     /*
     if(saveContextTimer == nil || filepath != nil || forceSave){
         
@@ -674,7 +681,7 @@
 {
     if(playTimer == nil){
         
-        if(TESTMODE) DLog(@"Starting Background Loop with %f seconds per beat",[spb floatValue]);
+        DLog(@"Starting Background Loop with %f seconds per beat",[spb floatValue]);
         
         @synchronized(playTimer){
             [playTimer invalidate];
@@ -858,7 +865,7 @@
     
     [self increasePlayLocation];
     
-    if(TESTMODE) DLog(@"Main event loop");
+    DLog(@"Main event loop");
 }
 
 - (void)setRecordMode:(BOOL)record andAnimate:(BOOL)animate
@@ -1025,7 +1032,7 @@
 - (void)checkQueueForPatternsFromTrack:(NSTrack *)track
 {
     
-    if(TESTMODE) DLog(@"CHECK QUEUE FOR PATTERNS FROM INSTRUMENT");
+    DLog(@"CHECK QUEUE FOR PATTERNS FROM INSTRUMENT");
     
     NSMutableArray * objectsToRemove = [NSMutableArray array];
     
@@ -1038,7 +1045,7 @@
             NSTrack * nextPatternTrack = [patternToSelect objectForKey:@"Instrument"];
             
             if (track == nextPatternTrack){
-                if(TESTMODE) DLog(@"DEQUEUEING THE NEXT PATTERN");
+                DLog(@"DEQUEUEING THE NEXT PATTERN");
                 [objectsToRemove addObject:patternToSelect];
                 [seqSetViewController commitSelectingPatternAtIndex:nextPatternIndex forTrack:nextPatternTrack];
                 
@@ -1056,7 +1063,7 @@
 
 - (void)enqueuePattern:(NSMutableDictionary *)pattern
 {
-    if(TESTMODE) DLog(@"Enqueue a new pattern");
+    DLog(@"Enqueue a new pattern");
     // For now, clear all the queued patterns for the active instrument
     [self removeQueuedPatternForInstrumentAtIndex:[[seqSetViewController getCurrentTrack] m_instrument].m_id];
     
@@ -1064,7 +1071,7 @@
         [patternQueue addObject:pattern];
     }
     
-    if(TESTMODE)  DLog(@"Pattern Queue is: %@",patternQueue);
+    DLog(@"Pattern Queue is: %@",patternQueue);
 }
 
 -(void)dequeueAllPatternsForTrack:(NSTrack *)track
@@ -1094,7 +1101,7 @@
 
 - (void)dequeuePatternAtIndex:(int)instIndex
 {
-    if(TESTMODE) DLog(@"dequeuing pattern for instrument at index %i",instIndex);
+    DLog(@"dequeuing pattern for instrument at index %i",instIndex);
     [seqSetViewController clearQueuedPatternButtonAtIndex:instIndex];
 }
 
@@ -1212,7 +1219,7 @@
 
 - (void)increasePlayLocation
 {
-    if(TESTMODE) DLog(@"Increase play location");
+    DLog(@"Increase play location");
     
     currentFret++;
     
@@ -1440,7 +1447,7 @@
         return;
     }
     
-    if(TESTMODE) DLog(@"Valid selection & valid data, so playing");
+    DLog(@"Valid selection & valid data, so playing");
     
     SEQNote * note = [[SEQNote alloc] initWithString:str-1 andFret:fr-1];
     
@@ -1450,7 +1457,7 @@
 
 - (void)notePlayed:(SEQNote *)note
 {
-    if(TESTMODE) DLog(@"gTarSeq received note played message string %i and fret %i",note.string,note.fret);
+    DLog(@"gTarSeq received note played message string %i and fret %i",note.string,note.fret);
     
     // Pass note-played message onto the selected instrument
     [[seqSetViewController getCurrentTrack] notePlayedAtString:note.string andFret:note.fret];

@@ -76,7 +76,8 @@
 #pragma mark Save Context
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
-    [delegate saveContext:filepath force:forceSave];
+    //[delegate saveContext:filepath force:forceSave];
+    [sequence saveToFile:@"myfirstsequence"];
 }
 
 #pragma mark Instruments Data
@@ -288,7 +289,7 @@
 
 #pragma mark - Adding instruments
 
-- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIsCustom:(NSNumber *)isCustom
+- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIsCustom:(BOOL)isCustom
 {
     NSTrack * newTrack = [[NSTrack alloc] initWithName:instName volume:1.0 muted:NO];
     
@@ -301,11 +302,8 @@
     newInstrument.m_iconName = iconName;
     newInstrument.m_custom = isCustom;
     
-    newInstrument.stringSet = stringSet;
-    newInstrument.stringPaths = stringPaths;
-        
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [newInstrument initAudioWithInstrumentName:instName andSoundMaster:soundMaster];
+        [newInstrument.m_sampler initAudioWithInstrument:index andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths];
     });
     
     //[instruments addObject:newInstrument];
@@ -682,7 +680,7 @@
         NSArray * stringPaths = [dict objectForKey:@"StringPaths"];
         NSNumber * isCustom = [dict objectForKey:@"Custom"];
         
-        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet andStringPaths:stringPaths andIsCustom:isCustom];
+        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet andStringPaths:stringPaths andIsCustom:[isCustom boolValue]];
     }
 }
 
@@ -858,10 +856,8 @@
 
 - (NSTrack *)getCurrentTrack
 {
-    for (NSTrack * t in sequence.m_tracks){
-        if(t.m_instrument.m_id == selectedInstrumentIndex){
-            return t;
-        }
+    if(selectedInstrumentIndex < [sequence.m_tracks count]){
+        return [sequence.m_tracks objectAtIndex:selectedInstrumentIndex];
     }
     
     return nil;
@@ -881,7 +877,7 @@
         // Remove from data structure:
         [self removeSequencerWithIndex:pathToDelete.row];
         
-        if(TESTMODE) DLog(@"Removed from data structure");
+        DLog(@"Removed from data structure");
         
         SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
         
@@ -895,7 +891,7 @@
             [self removeCellAtRow:row andSection:section];
         }
         
-        if(TESTMODE) DLog(@"Deleted row");
+        DLog(@"Deleted row");
     }
 }
 
@@ -904,7 +900,7 @@
     
     [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:section]] withRowAnimation:UITableViewRowAnimationFade];
     
-    if(TESTMODE) DLog(@"Reload data");
+    DLog(@"Reload data");
     
     if ([sequence trackCount] == 0){
         [instrumentTable reloadData];
@@ -913,7 +909,7 @@
     // Remove any enqueued patterns
     [delegate removeQueuedPatternForInstrumentAtIndex:row];
     
-    if(TESTMODE)  DLog(@"Enqueued patterns removed");
+    DLog(@"Enqueued patterns removed");
     
     // Update cells:
     if([sequence trackCount] > 0){
@@ -938,7 +934,7 @@
 
 - (void)removeSequencerWithIndex:(long)indexToRemove
 {
-    if(TESTMODE) DLog(@"Remove sequencer with index %li",indexToRemove);
+    DLog(@"Remove sequencer with index %li",indexToRemove);
     
     // Remove object from array:
     NSTrack * removedTrack = [sequence.m_tracks objectAtIndex:indexToRemove];

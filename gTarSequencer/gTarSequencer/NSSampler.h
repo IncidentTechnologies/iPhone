@@ -11,16 +11,21 @@
 #import "XMPObject.h"
 #import "NSSample.h"
 
+#import "SoundMaker.h"
+
 @interface NSSampler : NSObject
 {
     NSMutableArray * m_samples;
 }
 
 @property (retain, nonatomic) NSMutableArray * m_samples;
+@property (retain, nonatomic) SoundMaker * audio;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
 
 -(id)init;
+
+- (void)initAudioWithInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster stringSet:(NSArray *)stringSet stringPaths:(NSArray *)stringPaths;
 
 -(XMPNode *)convertToXmp;
 

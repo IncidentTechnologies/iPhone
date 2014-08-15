@@ -348,13 +348,13 @@
 
 - (void)disableScroll
 {
-    if(TESTMODE) DLog(@"disable scroll");
+    DLog(@"disable scroll");
     loadTable.scrollEnabled = NO;
 }
 
 - (void)enableScroll
 {
-    if(TESTMODE) DLog(@"enable scroll");
+    DLog(@"enable scroll");
     loadTable.scrollEnabled = YES;
 }
 
@@ -429,7 +429,7 @@
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(TESTMODE) DLog(@"***** will begin editing row at index path");
+    DLog(@"***** will begin editing row at index path");
     
     OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
     [cell editingDidBegin];

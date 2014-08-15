@@ -258,7 +258,7 @@
 -(void)turnOnInstrumentView
 {
     
-    if(TESTMODE) DLog(@"*** UNMUTING ***");
+    DLog(@"*** UNMUTING ***");
     //[parent muteInstrument:self isMute:NO];
     [offMask setHidden:YES];
     if(volumeKnob && ![volumeKnob isEnabled]){
@@ -273,7 +273,7 @@
 
 -(void)turnOffInstrumentView
 {
-    if(TESTMODE) DLog(@"*** MUTING ***");
+    DLog(@"*** MUTING ***");
     //[parent muteInstrument:self isMute:YES];
     [offMask setHidden:NO];
     if(volumeKnob && [volumeKnob isEnabled]){
@@ -504,7 +504,7 @@
 
 - (void)update
 {
-    if(TESTMODE) DLog(@"Minimap update");
+    DLog(@"Minimap update");
     
     // update selected pattern:
     if ( track.selectedPatternDidChange )
@@ -554,7 +554,7 @@
 
 - (void)fillWithMeasures:(int)newCount
 {
-    if(TESTMODE) DLog(@"Fill with measures");
+    DLog(@"Fill with measures");
     
     for(int i = 0; i < NUM_MEASURES; i++){
         if(i < newCount){
@@ -571,7 +571,7 @@
 
 - (void)selectPatternButton:(int)index
 {
-    if(TESTMODE) DLog(@"Select pattern button");
+    DLog(@"Select pattern button");
     
     UIButton * newSelection = [patternButtons objectAtIndex:index];
     

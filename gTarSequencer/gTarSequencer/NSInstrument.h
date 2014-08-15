@@ -11,8 +11,6 @@
 #import "XMPObject.h"
 #import "NSSampler.h"
 
-#import "SoundMaker.h"
-
 @interface NSInstrument : NSObject
 {
     long m_id;
@@ -30,25 +28,15 @@
 
 @property (retain, nonatomic) NSSampler * m_sampler;
 
-@property (retain, nonatomic) SoundMaker * audio;
-
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
 
--(id)initWithName:(NSString *)name id:(long)index iconName:(NSString *)iconName isCustom:(NSNumber *)isCustom;
+-(id)initWithName:(NSString *)name id:(long)index iconName:(NSString *)iconName isCustom:(BOOL)isCustom;
 
-- (void)initAudioWithInstrumentName:(NSString *)instName andSoundMaster:(SoundMaster *)soundMaster;
+-(id)init;
 
 -(XMPNode *)convertToXmp;
 
 - (void)releaseSounds;
-
-/******** Archaic ********/
-
-// TODO: Convert to samples
-@property (retain, nonatomic) NSArray * stringSet;
-@property (retain, nonatomic) NSArray * stringPaths;
-
-/************************/
 
 
 
