@@ -558,47 +558,33 @@
 #pragma mark - Auto Save Load
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
-    [seqSetViewController saveContext:filepath force:forceSave];
-    
-    /*
     if(saveContextTimer == nil || filepath != nil || forceSave){
+        
+        // Save the sequence
+        [seqSetViewController saveContext:filepath force:forceSave];
         
         // Prevent from saving many times in a row, but never block a manual save
         [self clearSaveContextTimer];
         saveContextTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(clearSaveContextTimer) userInfo:nil repeats:NO];
         
-        if(filepath == nil){
-            filepath = instrumentDataFilePath;
-            DLog(@"Save state to disk");
-        }else{
-            DLog(@"Save state to disk at %@",filepath);
-        }
-        
-        NSData * instData = [NSKeyedArchiver archivedDataWithRootObject:[seqSetViewController getTracks]];
-        
-        NSNumber * tempoNumber = [NSNumber numberWithInt:[playControlViewController getTempo]];
-        
-        NSNumber * volumeNumber = [NSNumber numberWithDouble:[playControlViewController getVolume]];
-        
-        NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[seqSetViewController getSelectedInstrumentIndex]];
-        
-        [currentState setObject:instData forKey:@"Instruments Data"];
-        [currentState setObject:tempoNumber forKey:@"Tempo"];
-        [currentState setObject:volumeNumber forKey:@"Volume"];
-        [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
-        
-        if(activeSequencer){
-            [currentState setObject:activeSequencer forKey:@"Active Sequencer"];
-        }else{
-            [currentState setObject:@"" forKey:@"Active Sequencer"];
-        }
-        
-        BOOL success = [currentState writeToFile:filepath atomically:YES];
-        
-        DLog(@"Save success: %i", success);
-        
+        // Then save state
+        // Anything else to save?
+        /*
+            NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[seqSetViewController getSelectedInstrumentIndex]];
+            
+            [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
+            
+            if(activeSequencer){
+                [currentState setObject:activeSequencer forKey:@"Active Sequencer"];
+            }else{
+                [currentState setObject:@"" forKey:@"Active Sequencer"];
+            }
+            
+            BOOL success = [currentState writeToFile:instrumentDataFilePath atomically:YES];
+            
+            DLog(@"Save success: %i", success);
+        */
     }
-     */
 }
 
 - (void)clearSaveContextTimer

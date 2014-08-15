@@ -76,8 +76,11 @@
 #pragma mark Save Context
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
-    //[delegate saveContext:filepath force:forceSave];
-    [sequence saveToFile:@"myfirstsequence"];
+    if(filepath == nil){
+        filepath = @"unsavedSequence";
+    }
+    
+    [sequence saveToFile:filepath];
 }
 
 #pragma mark Instruments Data
