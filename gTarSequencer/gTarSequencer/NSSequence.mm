@@ -161,6 +161,14 @@
 
 -(void)saveToFile:(NSString *)filename
 {
+
+    // First change the name
+    NSString * sequenceName = [filename stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
+    
+    m_name = sequenceName;
+    
+    DLog(@"Name to %@",sequenceName);
+    
     NSFileManager * fileManager = [NSFileManager defaultManager];
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences"];

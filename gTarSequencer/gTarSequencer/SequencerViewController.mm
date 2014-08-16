@@ -477,13 +477,13 @@
     
     filename = [@"Sequences/usr_" stringByAppendingString:filename];
     filename = [filename stringByAppendingString:@".xml"];
-    newname = [@"Sequences/usr_" stringByAppendingString:newname];
-    newname = [newname stringByAppendingString:@".xml"];
+    NSString * newnamepath = [@"Sequences/usr_" stringByAppendingString:newname];
+    newnamepath = [newnamepath stringByAppendingString:@".xml"];
     
     // move
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * currentPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
-    NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newname];
+    NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newnamepath];
     NSError * error = NULL;
     
     BOOL result = [[NSFileManager defaultManager] moveItemAtPath:currentPath toPath:newPath error:&error];
@@ -491,6 +491,10 @@
     if(!result)
         DLog(@"Error moving");
     
+    
+    if(activeSequencer == newname){
+        [self saveContext:[@"usr_" stringByAppendingString:newname] force:YES];
+    }
     [self saveContext:nil force:YES];
 }
 

@@ -150,7 +150,7 @@
                 <pattern name="-C" on="0" />
                 <pattern name="-D" on="0" />
             </track>
-            <track name="GUITAR" volume="1.000000" muted="0">
+            <track name="GUITAR" volume="1.000000" muted="1">
                 <instrument name="GUITAR" iconname="Icon_Guitar" index="5" custom="0">
                     <sampler>
                         <sample name="Guitar_C" value="0" custom="0" />

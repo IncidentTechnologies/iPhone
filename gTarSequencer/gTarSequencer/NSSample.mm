@@ -65,8 +65,6 @@
     
     node->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_name UTF8String]));
     
-    DLog(@"Sample name is [%@]",m_name);
-    
     node->AddAttribute(new XMPAttribute((char *)"value", (char *)[m_value UTF8String]));
     
     node->AddAttribute(new XMPAttribute((char *)"custom", m_custom));
