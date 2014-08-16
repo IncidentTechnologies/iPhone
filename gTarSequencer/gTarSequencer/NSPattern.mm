@@ -184,12 +184,14 @@
     int measureIndex = [m_measures indexOfObject:measure];
     int measureOffset = FRETS_ON_GTAR*measureIndex;
     
+    NSMutableArray * notesToRemove = [[NSMutableArray alloc] init];
+    
     if([measure isNoteOnAtString:str andFret:fret]){
         
         // Remove from note array
         for(NSNote * note in m_notes){
             if(note.m_stringvalue == str && (floor(note.m_beatstart)-measureOffset) == fret){
-                [m_notes removeObject:note];
+                [notesToRemove addObject:note];
             }
         }
         
@@ -200,6 +202,8 @@
         
         [self addNoteObject:note];
     }
+    
+    [m_notes removeObjectsInArray:notesToRemove];
     
     [measure changeNoteAtString:str andFret:fret];
     
