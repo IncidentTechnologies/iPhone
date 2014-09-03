@@ -244,6 +244,8 @@
 		6D126A841970724200A2A612 /* Juno_F#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A781970724200A2A612 /* Juno_F#.mp3 */; };
 		6D126A851970724200A2A612 /* Juno_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A791970724200A2A612 /* Juno_G.mp3 */; };
 		6D126A861970724200A2A612 /* Juno_G#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A7A1970724200A2A612 /* Juno_G#.mp3 */; };
+		6D19EC3719B69CC200A963E4 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D19EC3519B69CC200A963E4 /* SignInViewController.m */; };
+		6D19EC3819B69CC200A963E4 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D19EC3619B69CC200A963E4 /* SignInViewController.xib */; };
 		6D3D9DC518BC0F890048E908 /* RecordRedo_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D9DC418BC0F890048E908 /* RecordRedo_Icon.png */; };
 		6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45318B58A6C00992D3D /* InfoViewController.xib */; };
 		6D44A45718B58C0000992D3D /* InfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D44A45618B58C0000992D3D /* InfoViewController.mm */; };
@@ -735,6 +737,9 @@
 		6D13E29D18EB6FA70081B378 /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Debug-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
 		6D13E2A118EB754C0081B378 /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Debug-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
 		6D17E55118EB691700FCB958 /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Debug-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
+		6D19EC3419B69CC200A963E4 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		6D19EC3519B69CC200A963E4 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		6D19EC3619B69CC200A963E4 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
 		6D3D9DC418BC0F890048E908 /* RecordRedo_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordRedo_Icon.png; sourceTree = "<group>"; };
 		6D44A45318B58A6C00992D3D /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		6D44A45518B58C0000992D3D /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
@@ -1377,6 +1382,7 @@
 				6DA724B018E25AB300872705 /* RecordShareViewController */,
 				580A52181864F7FC0077240B /* SeqSetViewController */,
 				6D44A44F18B58A3A00992D3D /* InfoViewController */,
+				6D19EC3319B69CAC00A963E4 /* SignInViewController */,
 				6DAF30D918D2466600036958 /* TutorialViewController */,
 			);
 			name = SequencerViewController;
@@ -1518,6 +1524,16 @@
 			);
 			name = Trumpet;
 			path = Trombone;
+			sourceTree = "<group>";
+		};
+		6D19EC3319B69CAC00A963E4 /* SignInViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D19EC3419B69CC200A963E4 /* SignInViewController.h */,
+				6D19EC3519B69CC200A963E4 /* SignInViewController.m */,
+				6D19EC3619B69CC200A963E4 /* SignInViewController.xib */,
+			);
+			name = SignInViewController;
 			sourceTree = "<group>";
 		};
 		6D44A44F18B58A3A00992D3D /* InfoViewController */ = {
@@ -2223,6 +2239,7 @@
 				6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */,
 				58D617261863B8D7001EB327 /* Images.xcassets in Resources */,
 				6DEAB4CA18D78FF800833D9C /* Chiptune_Snare.mp3 in Resources */,
+				6D19EC3819B69CC200A963E4 /* SignInViewController.xib in Resources */,
 				6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */,
 				6DAA158F18C12525003DAB30 /* Sequencer_Icon58px.png in Resources */,
 				6D1269C019706C3100A2A612 /* DoubleBass_F.mp3 in Resources */,
@@ -2470,6 +2487,7 @@
 				585916FE18774791002C21B9 /* MeasureView.m in Sources */,
 				58B1BE2A18AD52AB00A3C0CC /* OptionsViewCell.mm in Sources */,
 				5811AB49187B95BA00FC0BD2 /* SEQNote.m in Sources */,
+				6D19EC3719B69CC200A963E4 /* SignInViewController.m in Sources */,
 				581C31F0188F258F00D7AD79 /* CustomStringCell.mm in Sources */,
 				58B4D3C9186E1EC80035D9E5 /* Instrument.m in Sources */,
 				58B4D3D3186E1F7F0035D9E5 /* Measure.m in Sources */,

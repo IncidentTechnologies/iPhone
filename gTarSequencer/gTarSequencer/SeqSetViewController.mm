@@ -13,6 +13,7 @@
 
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
+#define DEFAULT_STATE_NAME @"sequenceCurrentState"
 
 @implementation SeqSetViewController
 
@@ -89,7 +90,58 @@
     }
 }
 
-#pragma mark Save Context
+#pragma mark - Load Context
+- (NSString *)loadStateFromDisk:(NSString *)filepath
+{
+    
+    if(filepath == nil){
+        filepath = DEFAULT_STATE_NAME;
+        DLog(@"Load state from disk");
+    }else{
+        DLog(@"Load sequencer from disk at %@", filepath);
+    }
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:filepath]) {
+        DLog(@"The sequencer save plist exists");
+    } else {
+        DLog(@"The sequencer save plist does not exist");
+    }
+    
+    // Read file load into all the things, make sure the data generates
+    [self initSequenceWithFilename:filepath];
+    
+    // Reset
+    if(filepath == nil){
+        
+        [self resetSelectedInstrumentIndex];
+        
+    }else{
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                             NSUserDomainMask, YES);
+        NSString * stateMetaDataPath = [[paths objectAtIndex:0]
+                                        stringByAppendingPathComponent:@"metadataCurrentState"];
+    
+         // Other state data
+         currentState = [[NSDictionary dictionaryWithContentsOfFile:stateMetaDataPath] mutableCopy];
+         
+        if (currentState == nil ){
+             currentState = [[NSMutableDictionary alloc] init];
+        }
+        
+        if ( [[currentState allKeys] count] > 0 )
+        {
+            // Decode selectedInstrumentIndex
+            [self setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
+        }
+        
+    }
+    
+    return sequence.m_name;
+
+}
+
+#pragma mark - Save Context
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
 {
     if(saveContextTimer == nil || filepath != nil || forceSave){
@@ -100,30 +152,26 @@
         
         // Save state instead of to file
         if(filepath == nil){
-            filepath = @"sequenceCurrentState";
+            
+            filepath = DEFAULT_STATE_NAME;
+            
+            //
+            // Any additional metadata to save for this state?
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                 NSUserDomainMask, YES);
+            NSString * stateMetaDataPath = [[paths objectAtIndex:0]
+                                            stringByAppendingPathComponent:@"metadataCurrentState"];
+            
+            [currentState setObject:[NSNumber numberWithInt:[self getSelectedInstrumentIndex]] forKey:@"Selected Instrument Index"];
+            
+            BOOL success = [currentState writeToFile:stateMetaDataPath atomically:YES];
+            
+            DLog(@"Save metadata success: %i", success);
+            
         }
         
         // Save the sequence
         [sequence saveToFile:filepath];
-        
-        
-        // Anything else to save?
-        /*
-         NSNumber * selectedInstIndexNumber = [NSNumber numberWithInt:[seqSetViewController getSelectedInstrumentIndex]];
-         
-         [currentState setObject:selectedInstIndexNumber forKey:@"Selected Instrument Index"];
-         
-         if(activeSequencer){
-         [currentState setObject:activeSequencer forKey:@"Active Sequencer"];
-         }else{
-         [currentState setObject:@"" forKey:@"Active Sequencer"];
-         }
-         
-         BOOL success = [currentState writeToFile:instrumentDataFilePath atomically:YES];
-         
-         DLog(@"Save success: %i", success);
-         */
-        
         
     }
 }

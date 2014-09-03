@@ -22,6 +22,7 @@
 
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
+#define DEFAULT_STATE_NAME @"sequenceCurrentState"
 
 @implementation SequencerViewController
 
@@ -32,7 +33,9 @@
 @synthesize playControlViewController;
 @synthesize infoViewController;
 @synthesize tutorialViewController;
+@synthesize signinViewController;
 @synthesize recordShareController;
+@synthesize cloudController;
 @synthesize leftNavigator;
 @synthesize setName;
 
@@ -54,9 +57,14 @@
     
     [self initSubviews];
     
+    // Check to remove the old FTU set?
+    BOOL convertTutorialSet = [[NSUserDefaults standardUserDefaults] boolForKey:@"ConvertTutorialSet"];
+    
     // Load default set for FTU
-    if(isFirstLaunch){
+    // Remove the old one if necessary
+    if(isFirstLaunch || !convertTutorialSet){
         [self copyTutorialFile];
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"ConvertTutorialSet"];
     }
     
     
@@ -67,6 +75,15 @@
     [self selectNavChoice:@"Set" withShift:NO];
     [self saveContext:nil force:NO];
     
+    // TODO: if we are not logged in but have cached creds, login
+    if(cloudController.m_loggedIn == NO){
+        
+        // logged out screen
+        [self showLoggedOutScreen];
+        
+    }
+    
+    // Overlay tutorial?
     if(isFirstLaunch){
         [self launchFTUTutorial];
     }
@@ -95,8 +112,9 @@
     guitarView = [[GuitarView alloc] init];
     guitarView.delegate = self;
     
+    cloudController = [[CloudController alloc] initWithServer:kServerAddress];
     
-    [NSTimer scheduledTimerWithTimeInterval:3.0 target:guitarView selector:@selector(observeGtar) userInfo:nil repeats:NO];
+    //[NSTimer scheduledTimerWithTimeInterval:3.0 target:guitarView selector:@selector(observeGtar) userInfo:nil repeats:NO];
     
     string = 0;
     fret = 0;
@@ -233,8 +251,11 @@
     NSError * err = NULL;
     [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
     
-    NSError * error;
-    if(![fileManager copyItemAtPath:defaultSetPath toPath:newDefaultSetPath error:&error]){
+    // Delete if it already exists
+    [fileManager removeItemAtPath:newDefaultSetPath error:&err];
+    
+    // Then copy it
+    if(![fileManager copyItemAtPath:defaultSetPath toPath:newDefaultSetPath error:&err]){
         DLog(@"Error copying");
     }
     
@@ -602,61 +623,19 @@
 
 - (void)loadStateFromDisk:(NSString *)filepath
 {
+    NSString * sequencerName = [seqSetViewController loadStateFromDisk:filepath];
     
-    if(filepath == nil){
-        filepath = @"sequenceCurrentState";
-        DLog(@"Load state from disk");
-    }else{
-        DLog(@"Load sequencer from disk at %@", filepath);
+    if(![sequencerName isEqualToString:@""] && ![sequencerName isEqualToString:DEFAULT_STATE_NAME]){
+        activeSequencer = sequencerName;
+        optionsViewController.activeSequencer = sequencerName;
     }
     
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:filepath]) {
-        DLog(@"The sequencer save plist exists");
-    } else {
-        DLog(@"The sequencer save plist does not exist");
-    }
-    
-    // Read file load into all the things, make sure the data generates
-    [seqSetViewController initSequenceWithFilename:filepath];
-    
+    // Reset
     if(filepath == nil){
         
         [playControlViewController resetTempo];
         [playControlViewController resetVolume];
-        [seqSetViewController resetSelectedInstrumentIndex];
-        
-    }else{
-        
-        /*
-         currentState = [[NSDictionary dictionaryWithContentsOfFile:filepath] mutableCopy];
-         
-         if (currentState == nil )
-         currentState = [[NSMutableDictionary alloc] init];
-         
-         if ( [[currentState allKeys] count] > 0 )
-         {
-         // Decode selectedInstrumentIndex
-         [seqSetViewController setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
-         
-         // Decode active sequencer filename
-         NSString * sequencerName = [currentState objectForKey:@"Active Sequencer"];
-         if(![sequencerName isEqualToString:@""]){
-         activeSequencer = sequencerName;
-         optionsViewController.activeSequencer = sequencerName;
-         }
-         
-         // Load icon into left navigator
-         
-         DLog(@"Get current instrument: Load Icon");
-         NSTrack * track = [seqSetViewController getCurrentTrack];
-         if(track != nil){
-         [leftNavigator enableInstrumentViewWithIcon:track.m_instrument.m_iconName showCustom:track.m_instrument.m_custom];
-         }
-         
-         }
-         */
-        
+            
     }
 }
 
@@ -1601,6 +1580,13 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+#pragma mark - Logged Out
+- (void)showLoggedOutScreen
+{
+    signinViewController = [[SignInViewController alloc] init];
+    
+    [self.view addSubview:signinViewController.view];
+}
 
 #pragma mark - FTU Tutorial
 

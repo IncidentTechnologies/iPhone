@@ -69,6 +69,8 @@
     BOOL canEdit;
     BOOL allowContentDrawing;
     
+    // State
+    NSMutableDictionary * currentState;
     
     NSTimer * saveContextTimer;
 }
@@ -130,6 +132,7 @@
 
 - (BOOL)isValidInstrumentIndex:(int)inst;
 
+- (NSString *)loadStateFromDisk:(NSString *)filepath;
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave;
 
 - (void)disableKnobIfEnabledForInstrument:(int)instIndex;

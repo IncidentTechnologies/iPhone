@@ -8,6 +8,7 @@
 
 #import "AppData.h"
 #import "GuitarView.h"
+#import "CloudController.h"
 #import "SoundMaker.h"
 #import "RadialButton.h"
 #import "ScrollingSelector.h"
@@ -20,6 +21,7 @@
 #import "InfoViewController.h"
 #import "TutorialViewController.h"
 #import "RecordShareViewController.h"
+#import "SignInViewController.h"
 #import "SCUI.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
@@ -52,9 +54,6 @@
     int startPatterns[5];
     BOOL forceRecord;
     
-    // State
-    NSMutableDictionary * currentState;
-    
     // Save/Load
     NSString * activeSequencer;
     NSString * sequencerToSave;
@@ -83,8 +82,10 @@
 @property (retain, nonatomic) InfoViewController * infoViewController;
 @property (retain, nonatomic) PlayControlViewController * playControlViewController;
 @property (retain, nonatomic) TutorialViewController * tutorialViewController;
+@property (retain, nonatomic) SignInViewController * signinViewController;
 @property (retain, nonatomic) LeftNavigatorViewController * leftNavigator;
 @property (retain, nonatomic) RecordShareViewController * recordShareController;
+@property (retain, nonatomic) CloudController * cloudController;
 
 @property (retain, nonatomic) UIButton * setName;
 
