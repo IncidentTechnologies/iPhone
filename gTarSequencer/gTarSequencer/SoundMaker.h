@@ -33,7 +33,4 @@
 - (void)releaseLevelSlider;
 - (void)commitLevelSlider:(UILevelSlider *)slider;
 
-- (void)startRecording;
-- (void)stopRecording;
-
 @end

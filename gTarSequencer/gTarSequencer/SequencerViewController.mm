@@ -8,6 +8,7 @@
 
 #import "SequencerViewController.h"
 #import "NSSequence.h"
+#import "CloudController.h"
 
 #define LAST_FRET 15
 #define LAST_MEASURE 3
@@ -33,9 +34,8 @@
 @synthesize playControlViewController;
 @synthesize infoViewController;
 @synthesize tutorialViewController;
-@synthesize signinViewController;
+@synthesize gatekeeperViewController;
 @synthesize recordShareController;
-@synthesize cloudController;
 @synthesize leftNavigator;
 @synthesize setName;
 
@@ -75,14 +75,6 @@
     [self selectNavChoice:@"Set" withShift:NO];
     [self saveContext:nil force:NO];
     
-    // TODO: if we are not logged in but have cached creds, login
-    if(cloudController.m_loggedIn == NO){
-        
-        // logged out screen
-        [self showLoggedOutScreen];
-        
-    }
-    
     // Overlay tutorial?
     if(isFirstLaunch){
         [self launchFTUTutorial];
@@ -111,8 +103,6 @@
     
     guitarView = [[GuitarView alloc] init];
     guitarView.delegate = self;
-    
-    cloudController = [[CloudController alloc] initWithServer:kServerAddress];
     
     //[NSTimer scheduledTimerWithTimeInterval:3.0 target:guitarView selector:@selector(observeGtar) userInfo:nil repeats:NO];
     
@@ -221,6 +211,17 @@
     leftNavOpen = false;
     
     [self.view addSubview:leftNavigator.view];
+    
+    //
+    // LOGGED OUT
+    //
+    
+    // TODO: if we are not logged in but have cached creds, login
+    if(g_cloudController.m_loggedIn == NO){
+        
+        // logged out screen
+        [self loggedOut];
+    }
     
     //
     // GTAR CONNECTED
@@ -1581,11 +1582,29 @@
 }
 
 #pragma mark - Logged Out
-- (void)showLoggedOutScreen
+- (void)loggedOut
 {
-    signinViewController = [[SignInViewController alloc] init];
+    gatekeeperViewController = [[GatekeeperViewController alloc] init];
     
-    [self.view addSubview:signinViewController.view];
+    gatekeeperViewController.delegate = self;
+    
+    [gatekeeperViewController.view setFrame:onScreenMainFrame];
+    [self.view addSubview:gatekeeperViewController.view];
+    
+    // Be sure tempo slider and other interferences get disabled
+    [playControlViewController.view setUserInteractionEnabled:NO];
+    
+    DLog(@"Logged Out");
+    
+}
+
+- (void)loggedIn
+{
+    DLog(@"Logged In");
+    
+    [gatekeeperViewController.view removeFromSuperview];
+    
+    [playControlViewController.view setUserInteractionEnabled:YES];
 }
 
 #pragma mark - FTU Tutorial

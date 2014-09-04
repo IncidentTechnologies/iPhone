@@ -12,6 +12,8 @@
 
 @synthesize window;
 
+CloudController * g_cloudController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
@@ -35,12 +37,15 @@
     
     // init nav controller and first view controller
     LoadingViewController *loadingViewController = [[LoadingViewController alloc] initWithNibName:nil bundle:nil];
-    
+
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loadingViewController];
     
     navigationController.navigationBarHidden = YES;
     
     [self.window setRootViewController: navigationController];
+    
+    // init the cloud controller
+    g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
     
     // display
     [self.window makeKeyAndVisible];

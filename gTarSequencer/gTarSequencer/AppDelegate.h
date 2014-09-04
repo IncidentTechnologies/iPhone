@@ -10,6 +10,8 @@
 #import "LoadingViewController.h"
 #import "TestFlight.h"
 #import "SCUI.h"
+#import "CloudController.h"
+#import "GtarController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {

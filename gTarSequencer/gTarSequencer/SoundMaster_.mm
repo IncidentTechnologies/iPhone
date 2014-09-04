@@ -44,7 +44,6 @@
 -(void)setChannelGain:(double)gain;
 -(void)setGain:(double)gain forSamplerBank:(SamplerBankNode *)m_samplerBank;
 
--(void)flushBuffer;
 //-(NSString *)showRecordingFilepath;
 
 @end
