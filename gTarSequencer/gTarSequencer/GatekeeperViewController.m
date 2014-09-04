@@ -26,6 +26,8 @@
 {
     UIView * _currentTopPanel;
     NSTimer *_textFieldSliderTimer;
+    
+    BOOL _waitingForFacebook;
 }
 
 @end
@@ -48,7 +50,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    g_facebook = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    // See if there are any cached credentials
+    if ( [settings objectForKey:@"FBAccessTokenKey"] && [settings objectForKey:@"FBExpirationDateKey"] )
+    {
+        g_facebook.accessToken = [settings objectForKey:@"FBAccessTokenKey"];
+        g_facebook.expirationDate = [settings objectForKey:@"FBExpirationDateKey"];
+    }
+    
     [self showTopPanel:_signinTopPanel];
+    
+    
 }
 
 #pragma mark - Panel handling
@@ -167,7 +181,66 @@
 - (IBAction)signupButtonClicked:(id)sender
 {
     
+    if ( _signupUsernameText.text == nil || [_signupUsernameText.text isEqualToString:@""] == YES )
+    {
+        [self displayNotification:SIGNUP_USERNAME_INVALID turnRed:YES];
+        
+        return;
+    }
+    
+    if ( _signupPasswordText.text == nil || [_signupPasswordText.text isEqualToString:@""] == YES )
+    {
+        [self displayNotification:SIGNUP_PASSWORD_INVALID turnRed:YES];
+        
+        return;
+    }
+    
+    //    NSCharacterSet * alphaNumChars = [NSCharacterSet alphanumericCharacterSet];
+    NSCharacterSet * alphaChars = [NSCharacterSet letterCharacterSet];
+    
+    NSString * firstChar = [_signupUsernameText.text substringToIndex:1];
+    
+    // The first char of the username must be a letter
+    if ( [firstChar rangeOfCharacterFromSet:alphaChars].location == NSNotFound )
+    {
+        [self displayNotification:SIGNUP_USERNAME_INVALID_FIRSTLETTER turnRed:YES];
+        
+        return;
+    }
+    
+    if ( [_signupPasswordText.text length] < 8 )
+    {
+        [self displayNotification:SIGNUP_PASSWORD_INVALID_LENGTH turnRed:YES];
+        
+        return;
+    }
+    
+    [self hideNotification];
+    
+    [self showTopPanel:_loadingTopPanel];
+    
+    [self disableButton:_loggedoutSigninButton];
+    [self disableButton:_loggedoutSignupButton];
+    
+    [g_cloudController requestRegisterUsername:_signupUsernameText.text andPassword:_signupPasswordText.text andEmail:_signupEmailText.text andCallbackObj:self andCallbackSel:@selector(signupCallback:)];
+    
 }
+
+
+- (IBAction)signinFacebookButtonClicked:(id)sender
+{
+    if ( _waitingForFacebook == YES )
+    {
+        return;
+    }
+    
+    _waitingForFacebook = YES;
+    
+    [g_facebook authorize:FACEBOOK_PERMISSIONS];
+    
+    [self showTopPanel:_loadingTopPanel];
+}
+
 
 #pragma mark - Callbacks
 
@@ -201,6 +274,108 @@
             [self enableButton:_loggedoutSignupButton];
         }
     }
+}
+
+- (void)signupCallback:(CloudResponse *)cloudResponse
+{
+    
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+    {
+        [delegate loggedIn];
+    }
+    else
+    {
+        // There was an error
+        [self displayNotification:cloudResponse.m_statusText turnRed:YES];
+        
+        [self showTopPanel:_signupTopPanel];
+        
+        // Renable buttons
+        [self enableButton:_loggedoutSignupButton];
+    }
+}
+
+
+- (void)facebookSigninCallback:(CloudResponse*)cloudResponse
+{
+    
+    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
+    {
+        //[self logLoginEvent];
+        
+        //[g_userController sendPendingUploads];
+        
+        [self hideNotification];
+        
+        [delegate loggedIn];
+        
+    }
+    else
+    {
+        // There was an error
+        [self displayNotification:cloudResponse.m_statusText turnRed:YES];
+        
+        [delegate loggedOut];
+        [self showTopPanel:_signinTopPanel];
+        
+        // Renable buttons
+        [self enableButton:_loggedoutSignupButton];
+    }
+}
+
+
+
+#pragma mark - FacebookDelegate
+
+- (void)fbDidLogin
+{
+    _waitingForFacebook = NO;
+    
+    // We save the access token to the user settings
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    [settings setObject:[g_facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [settings setObject:[g_facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    
+    [settings synchronize];
+    
+    [self hideNotification];
+    
+    // Log into our server
+    [g_cloudController requestFacebookLoginWithToken:g_facebook.accessToken andCallbackObj:self andCallbackSel:@selector(facebookSigninCallback:)];
+    
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled
+{
+    _waitingForFacebook = NO;
+    
+    [self showTopPanel:_signinTopPanel];
+    
+    [self displayNotification:FACEBOOK_INVALID turnRed:YES];
+}
+
+- (void)fbDidLogout
+{
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    // Clear cached data
+    [settings removeObjectForKey:@"FBAccessTokenKey"];
+    [settings removeObjectForKey:@"FBExpirationDateKey"];
+    
+    [settings synchronize];
+    
+    [delegate loggedOut];
+}
+
+- (void)fbSessionInvalidated
+{
+    [delegate loggedOut];
+}
+
+- (void)fbDidExtendToken:(NSString*)accessToken expiresAt:(NSDate*)expiresAt
+{
+    
 }
 
 

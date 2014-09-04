@@ -13,6 +13,7 @@
 @synthesize window;
 
 CloudController * g_cloudController;
+Facebook * g_facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

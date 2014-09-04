@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Facebook.h"
 #import "CloudController.h"
 #import "CloudRequest.h"
 #import "CloudResponse.h"
 #import "CyclingTextField.h"
 
 extern CloudController * g_cloudController;
+extern Facebook * g_facebook;
 
 
 @protocol GatekeeperDelegate <NSObject>
@@ -22,7 +24,7 @@ extern CloudController * g_cloudController;
 
 @end
 
-@interface GatekeeperViewController : UIViewController <UITextFieldDelegate>
+@interface GatekeeperViewController : UIViewController <UITextFieldDelegate,FBSessionDelegate>
 {
     
 }
@@ -60,5 +62,6 @@ extern CloudController * g_cloudController;
 
 - (IBAction)signupButtonClicked:(id)sender;
 - (IBAction)signinButtonClicked:(id)sender;
+- (IBAction)signinFacebookButtonClicked:(id)sender;
 
 @end

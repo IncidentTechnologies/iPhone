@@ -12,6 +12,7 @@
 #import "SCUI.h"
 #import "CloudController.h"
 #import "GtarController.h"
+#import "Facebook.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
