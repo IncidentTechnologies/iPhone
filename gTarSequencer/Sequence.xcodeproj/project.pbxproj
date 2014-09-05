@@ -42,10 +42,7 @@
 		58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */; };
 		58B1BE2718AD524900A3C0CC /* OptionsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */; };
 		58B1BE2A18AD52AB00A3C0CC /* OptionsViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 58B1BE2918AD52AB00A3C0CC /* OptionsViewCell.mm */; };
-		58B4D3C9186E1EC80035D9E5 /* Instrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B4D3C8186E1EC80035D9E5 /* Instrument.m */; };
 		58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 58B4D3CC186E1F210035D9E5 /* SoundMaker.mm */; };
-		58B4D3D0186E1F570035D9E5 /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B4D3CF186E1F570035D9E5 /* Pattern.m */; };
-		58B4D3D3186E1F7F0035D9E5 /* Measure.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B4D3D2186E1F7F0035D9E5 /* Measure.m */; };
 		58B4D3D5186E32AD0035D9E5 /* SeqSetViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B4D3D4186E32AD0035D9E5 /* SeqSetViewCell.xib */; };
 		58B7FDC6188A15A800A2C1B1 /* Icon_Bacon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B7FDC5188A15A700A2C1B1 /* Icon_Bacon.png */; };
 		58B9AD0E187B61C5001EDD33 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B9AD0D187B61C5001EDD33 /* libc++.dylib */; };
@@ -526,14 +523,8 @@
 		58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell.xib; sourceTree = "<group>"; };
 		58B1BE2818AD52AB00A3C0CC /* OptionsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewCell.h; sourceTree = "<group>"; };
 		58B1BE2918AD52AB00A3C0CC /* OptionsViewCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OptionsViewCell.mm; sourceTree = "<group>"; };
-		58B4D3C7186E1EC80035D9E5 /* Instrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instrument.h; sourceTree = "<group>"; };
-		58B4D3C8186E1EC80035D9E5 /* Instrument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instrument.m; sourceTree = "<group>"; };
 		58B4D3CB186E1F210035D9E5 /* SoundMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundMaker.h; sourceTree = "<group>"; };
 		58B4D3CC186E1F210035D9E5 /* SoundMaker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundMaker.mm; sourceTree = "<group>"; };
-		58B4D3CE186E1F570035D9E5 /* Pattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pattern.h; sourceTree = "<group>"; };
-		58B4D3CF186E1F570035D9E5 /* Pattern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pattern.m; sourceTree = "<group>"; };
-		58B4D3D1186E1F7F0035D9E5 /* Measure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Measure.h; sourceTree = "<group>"; };
-		58B4D3D2186E1F7F0035D9E5 /* Measure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Measure.m; sourceTree = "<group>"; };
 		58B4D3D4186E32AD0035D9E5 /* SeqSetViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeqSetViewCell.xib; sourceTree = "<group>"; };
 		58B7FDC5188A15A700A2C1B1 /* Icon_Bacon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Bacon.png; sourceTree = "<group>"; };
 		58B9AD0D187B61C5001EDD33 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -1200,6 +1191,8 @@
 				585916FD18774791002C21B9 /* MeasureView.m */,
 				6DC78A13199C00C3006B14F5 /* NSNote.h */,
 				6DC78A14199C00C3006B14F5 /* NSNote.mm */,
+				5811AB47187B95BA00FC0BD2 /* SEQNote.h */,
+				5811AB48187B95BA00FC0BD2 /* SEQNote.m */,
 			);
 			name = SequenceModel;
 			sourceTree = "<group>";
@@ -1319,7 +1312,6 @@
 				58D6171D1863B8D7001EB327 /* AppDelegate.mm */,
 				6DC789FA199BF933006B14F5 /* UIWidgets */,
 				6DC789FB199BFA23006B14F5 /* SoundMaster */,
-				6DC78A08199C0062006B14F5 /* SequenceArchaicModel */,
 				58B4D3CA186E1ECC0035D9E5 /* SequenceModel */,
 				58D617561863BD81001EB327 /* LoadingViewController */,
 				58D6960F1864D23100113AF2 /* SequencerViewController */,
@@ -1673,21 +1665,6 @@
 				6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */,
 			);
 			name = SoundMaster;
-			sourceTree = "<group>";
-		};
-		6DC78A08199C0062006B14F5 /* SequenceArchaicModel */ = {
-			isa = PBXGroup;
-			children = (
-				58B4D3C7186E1EC80035D9E5 /* Instrument.h */,
-				58B4D3C8186E1EC80035D9E5 /* Instrument.m */,
-				58B4D3CE186E1F570035D9E5 /* Pattern.h */,
-				58B4D3CF186E1F570035D9E5 /* Pattern.m */,
-				58B4D3D1186E1F7F0035D9E5 /* Measure.h */,
-				58B4D3D2186E1F7F0035D9E5 /* Measure.m */,
-				5811AB47187B95BA00FC0BD2 /* SEQNote.h */,
-				5811AB48187B95BA00FC0BD2 /* SEQNote.m */,
-			);
-			name = SequenceArchaicModel;
 			sourceTree = "<group>";
 		};
 		6DC9A2B619B8F4D20099372E /* GatekeeperViewController */ = {
@@ -2508,15 +2485,12 @@
 				6DA724B318E25B0700872705 /* RecordShareViewController.mm in Sources */,
 				58241D7B188DC46C00498DB5 /* CustomInstrumentSelector.mm in Sources */,
 				6D813EC918DA804100D29F48 /* VolumeKnobView.mm in Sources */,
-				58B4D3D0186E1F570035D9E5 /* Pattern.m in Sources */,
 				58CA4E6F18A174EA0026D83C /* VolumeDisplay.mm in Sources */,
 				6DC78A0C199C008C006B14F5 /* NSTrack.mm in Sources */,
 				585916FE18774791002C21B9 /* MeasureView.m in Sources */,
 				58B1BE2A18AD52AB00A3C0CC /* OptionsViewCell.mm in Sources */,
 				5811AB49187B95BA00FC0BD2 /* SEQNote.m in Sources */,
 				581C31F0188F258F00D7AD79 /* CustomStringCell.mm in Sources */,
-				58B4D3C9186E1EC80035D9E5 /* Instrument.m in Sources */,
-				58B4D3D3186E1F7F0035D9E5 /* Measure.m in Sources */,
 				6D72B28118BE7C7100969A8F /* CustomSampleCell.mm in Sources */,
 				587A91A818A5837300CFB154 /* CustomSoundRecorder.mm in Sources */,
 				5894D61A186505BD00849C71 /* SeqSetViewController.mm in Sources */,

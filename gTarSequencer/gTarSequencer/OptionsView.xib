@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OptionsViewController">
@@ -29,10 +29,10 @@
                         <outlet property="delegate" destination="-1" id="OIa-91-tm3"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWl-FN-uMc">
-                    <rect key="frame" x="0.0" y="0.0" width="142" height="55"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWl-FN-uMc" userLabel="BackButton">
+                    <rect key="frame" x="113" y="0.0" width="113" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.090196078431372548" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -42,8 +42,18 @@
                         <action selector="userDidSelectBack:" destination="-1" eventType="touchUpInside" id="1pH-eW-fAe"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRj-AQ-P9U">
-                    <rect key="frame" x="142" y="0.0" width="141" height="55"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7A-bz-l9Y" userLabel="ProfileButton">
+                    <rect key="frame" x="0.0" y="0.0" width="113" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRj-AQ-P9U" userLabel="SaveButton">
+                    <rect key="frame" x="227" y="0.0" width="113" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.090196078431372548" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
@@ -55,8 +65,8 @@
                         <action selector="userDidSelectSaveCurrent:" destination="-1" eventType="touchUpInside" id="gGD-Dc-YKl"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8r-7T-odk">
-                    <rect key="frame" x="284" y="0.0" width="142" height="55"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8r-7T-odk" userLabel="LoadButton">
+                    <rect key="frame" x="341" y="0.0" width="113" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.090196078431372548" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
@@ -68,8 +78,8 @@
                         <action selector="userDidSelectLoad:" destination="-1" eventType="touchUpInside" id="eX0-kn-E1z"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="llB-ay-7dV">
-                    <rect key="frame" x="426" y="0.0" width="142" height="55"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="llB-ay-7dV" userLabel="NewButton">
+                    <rect key="frame" x="455" y="0.0" width="113" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.090196078431372548" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal">
@@ -80,18 +90,23 @@
                         <action selector="userDidSelectCreateNew:" destination="-1" eventType="touchUpInside" id="Pja-iK-0ND"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tbd-pm-V05">
-                    <rect key="frame" x="284" y="0.0" width="1" height="55"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.32156862745098036" green="0.32156862745098036" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibe-g7-fU7">
-                    <rect key="frame" x="142" y="0.0" width="1" height="55"/>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfV-6I-LxA">
+                    <rect key="frame" x="112" y="0.0" width="1" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibe-g7-fU7">
+                    <rect key="frame" x="226" y="0.0" width="1" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tbd-pm-V05">
+                    <rect key="frame" x="340" y="0.0" width="1" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.32156862745098036" green="0.32156862745098036" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lX-3g-hLz">
-                    <rect key="frame" x="426" y="0.0" width="1" height="55"/>
+                    <rect key="frame" x="454" y="0.0" width="1" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
@@ -108,17 +123,21 @@
                 <constraint firstItem="fnS-0x-ggp" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="4DV-od-NTk"/>
                 <constraint firstAttribute="centerX" secondItem="oVT-z7-iuX" secondAttribute="centerX" id="5Bp-R3-dFf"/>
                 <constraint firstAttribute="trailing" secondItem="llB-ay-7dV" secondAttribute="trailing" id="9Pj-Yh-obd"/>
-                <constraint firstItem="e8r-7T-odk" firstAttribute="leading" secondItem="oRj-AQ-P9U" secondAttribute="trailing" id="9ug-5R-gda"/>
-                <constraint firstItem="TWl-FN-uMc" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="BpP-1a-lX7"/>
-                <constraint firstItem="llB-ay-7dV" firstAttribute="width" secondItem="oRj-AQ-P9U" secondAttribute="width" id="KaQ-nj-7oa"/>
-                <constraint firstItem="8lX-3g-hLz" firstAttribute="leading" secondItem="e8r-7T-odk" secondAttribute="trailing" constant="-1" id="fPp-YK-JX2"/>
-                <constraint firstAttribute="centerX" secondItem="tbd-pm-V05" secondAttribute="centerX" id="fzU-HK-K2U"/>
-                <constraint firstItem="llB-ay-7dV" firstAttribute="width" secondItem="e8r-7T-odk" secondAttribute="width" id="kXf-pg-Jyl"/>
+                <constraint firstItem="ibe-g7-fU7" firstAttribute="leading" secondItem="TWl-FN-uMc" secondAttribute="trailing" id="9zg-Jw-eIz"/>
+                <constraint firstItem="dfV-6I-LxA" firstAttribute="leading" secondItem="i7A-bz-l9Y" secondAttribute="trailing" constant="-1" id="FKw-MY-AmQ"/>
+                <constraint firstItem="oRj-AQ-P9U" firstAttribute="width" secondItem="llB-ay-7dV" secondAttribute="width" id="G0o-zt-GUH"/>
+                <constraint firstItem="TWl-FN-uMc" firstAttribute="leading" secondItem="i7A-bz-l9Y" secondAttribute="trailing" id="G1p-gh-gIJ"/>
+                <constraint firstItem="e8r-7T-odk" firstAttribute="leading" secondItem="oRj-AQ-P9U" secondAttribute="trailing" constant="1" id="RJo-Jd-9EG"/>
+                <constraint firstItem="oRj-AQ-P9U" firstAttribute="leading" secondItem="TWl-FN-uMc" secondAttribute="trailing" constant="1" id="Xwl-65-Xko"/>
+                <constraint firstItem="oRj-AQ-P9U" firstAttribute="width" secondItem="e8r-7T-odk" secondAttribute="width" id="bUt-la-Q4R"/>
+                <constraint firstItem="oRj-AQ-P9U" firstAttribute="width" secondItem="TWl-FN-uMc" secondAttribute="width" id="eeO-fK-mqm"/>
+                <constraint firstItem="8lX-3g-hLz" firstAttribute="leading" secondItem="e8r-7T-odk" secondAttribute="trailing" id="hDZ-EP-8BA"/>
+                <constraint firstAttribute="trailing" secondItem="llB-ay-7dV" secondAttribute="trailing" id="iPd-Vm-3wQ"/>
+                <constraint firstItem="oRj-AQ-P9U" firstAttribute="width" secondItem="i7A-bz-l9Y" secondAttribute="width" id="nAL-5X-pvg"/>
                 <constraint firstAttribute="trailing" secondItem="fnS-0x-ggp" secondAttribute="trailing" id="nmj-Xv-sab"/>
-                <constraint firstItem="ibe-g7-fU7" firstAttribute="leading" secondItem="TWl-FN-uMc" secondAttribute="trailing" id="oxC-W5-OgD"/>
-                <constraint firstItem="llB-ay-7dV" firstAttribute="leading" secondItem="e8r-7T-odk" secondAttribute="trailing" id="p4U-hO-IWd"/>
-                <constraint firstItem="llB-ay-7dV" firstAttribute="width" secondItem="TWl-FN-uMc" secondAttribute="width" id="uDq-I5-P1i"/>
-                <constraint firstItem="oRj-AQ-P9U" firstAttribute="leading" secondItem="TWl-FN-uMc" secondAttribute="trailing" id="xnw-yn-0Gr"/>
+                <constraint firstItem="llB-ay-7dV" firstAttribute="leading" secondItem="e8r-7T-odk" secondAttribute="trailing" constant="1" id="rxd-Rw-qQi"/>
+                <constraint firstItem="i7A-bz-l9Y" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="sJO-R7-x0O"/>
+                <constraint firstItem="tbd-pm-V05" firstAttribute="leading" secondItem="oRj-AQ-P9U" secondAttribute="trailing" id="yp8-e2-i5X"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

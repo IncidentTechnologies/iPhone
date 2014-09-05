@@ -709,7 +709,7 @@
 -(void)drawBackButton
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    float margin = (screenBounds.size.height == XBASE_LG) ? 54 : 43;
+    float margin = (screenBounds.size.height == XBASE_LG) ? 40 : 33;
     /*CGRect screenBounds = [[UIScreen mainScreen] bounds];
      float margin = (screenBounds.size.height == XBASE_LG) ? 12 : 0;
      
