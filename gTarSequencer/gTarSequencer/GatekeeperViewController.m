@@ -164,7 +164,6 @@
     [self disableButton:_loggedoutSignupButton];
     
     [g_cloudController requestLoginUsername:_signinUsernameText.text andPassword:_signinPasswordText.text andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
-
 }
 
 - (IBAction)signupButtonClicked:(id)sender
@@ -215,6 +214,16 @@
     
 }
 
+- (void)requestCachedLogin
+{
+    
+    NSLog(@"Uncaching %@ %@",g_loggedInUser.username,g_loggedInUser.password);
+    
+    // get user and password from cache
+    [g_cloudController requestLoginUsername:g_loggedInUser.username andPassword:g_loggedInUser.password andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
+    
+}
+
 #pragma mark - Callbacks
 
 - (void)signinCallback:(CloudResponse *)cloudResponse
@@ -224,6 +233,12 @@
     {
         [self hideNotification];
         
+        g_loggedInUser.username = cloudResponse.m_cloudRequest.m_username;
+        g_loggedInUser.password = cloudResponse.m_cloudRequest.m_password;
+        g_loggedInUser.email = cloudResponse.m_cloudRequest.m_email;
+        
+        [g_loggedInUser cache];
+        
         [delegate loggedIn];
        // [self loggedinScreen];
         
@@ -231,21 +246,15 @@
         
         // There was an error
         
-        if ( (_loggedInFacebookToken != nil ||
-              _loggedInUsername != nil) )
-        {
-            // We didn't log in, but we have before, so we won't lock them out yet..
-            
-        }else{
-            [delegate loggedOut];
-            //[self loggedoutScreen];
-            
-            [self displayNotification:cloudResponse.m_statusText turnRed:YES];
-            [self showTopPanel:_signinTopPanel];
-            //[self swapRightPanel:_signinRightPanel];
-            
-            [self enableButton:_loggedoutSignupButton];
-        }
+        [delegate loggedOut];
+        //[self loggedoutScreen];
+        
+        [self displayNotification:cloudResponse.m_statusText turnRed:YES];
+        [self showTopPanel:_signinTopPanel];
+        //[self swapRightPanel:_signinRightPanel];
+        
+        [self enableButton:_loggedoutSignupButton];
+    
     }
 }
 
@@ -254,11 +263,20 @@
     
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
+        [self hideNotification];
+        
+        g_loggedInUser.username = cloudResponse.m_cloudRequest.m_username;
+        g_loggedInUser.password = cloudResponse.m_cloudRequest.m_password;
+        g_loggedInUser.email = cloudResponse.m_cloudRequest.m_email;
+        
+        [g_loggedInUser cache];
+        
         [delegate loggedIn];
     }
     else
     {
         // There was an error
+        
         [self displayNotification:cloudResponse.m_statusText turnRed:YES];
         
         [self showTopPanel:_signupTopPanel];
@@ -296,50 +314,12 @@
     }
 }
 
-
-
-#pragma mark - FacebookDelegate
-/*
-
-- (void)fbDidNotLogin:(BOOL)cancelled
-{
-    _waitingForFacebook = NO;
-    
-    [self showTopPanel:_signinTopPanel];
-    
-    [self displayNotification:FACEBOOK_INVALID turnRed:YES];
-}
-
-- (void)fbDidLogout
-{
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    
-    // Clear cached data
-    [settings removeObjectForKey:@"FBAccessTokenKey"];
-    [settings removeObjectForKey:@"FBExpirationDateKey"];
-    
-    [settings synchronize];
-    
-    [delegate loggedOut];
-}
-
-- (void)fbSessionInvalidated
-{
-    [delegate loggedOut];
-}
-
-- (void)fbDidExtendToken:(NSString*)accessToken expiresAt:(NSDate*)expiresAt
-{
-    
-}
-
-*/
-
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
 {
     NSLog(@"Login view fetched user info");
     
-    _loggedInUsername = user.username;
+    g_loggedInUser.username = user.username;
+    // Make sure cloud controller gets informed
     
     [delegate loggedIn];
 }

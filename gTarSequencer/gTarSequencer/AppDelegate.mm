@@ -13,6 +13,7 @@
 @synthesize window;
 
 CloudController * g_cloudController;
+NSUser * g_loggedInUser;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -46,6 +47,9 @@ CloudController * g_cloudController;
     
     // init the cloud controller
     g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
+    
+    // init the logged in user
+    g_loggedInUser = [[NSUser alloc] init];
     
     // display
     [self.window makeKeyAndVisible];

@@ -12,9 +12,10 @@
 #import "CloudRequest.h"
 #import "CloudResponse.h"
 #import "CyclingTextField.h"
+#import "NSUser.h"
 
 extern CloudController * g_cloudController;
-
+extern NSUser * g_loggedInUser;
 
 @protocol GatekeeperDelegate <NSObject>
 
@@ -53,16 +54,12 @@ extern CloudController * g_cloudController;
 
 @property (weak, nonatomic) IBOutlet FBLoginView * loginView;
 
-// TODO: add these to a user object
-@property (strong, nonatomic) NSString * loggedInFacebookToken;
-@property (strong, nonatomic) NSString * loggedInUsername;
-@property (strong, nonatomic) NSString * loggedInPassword;
-@property (strong, nonatomic) NSString * loggedInEmail;
-
 - (IBAction)loggedoutSigninButtonClicked:(id)sender;
 - (IBAction)loggedoutSignupButtonClicked:(id)sender;
 
 - (IBAction)signupButtonClicked:(id)sender;
 - (IBAction)signinButtonClicked:(id)sender;
+
+- (void)requestCachedLogin;
 
 @end

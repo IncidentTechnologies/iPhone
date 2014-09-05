@@ -290,6 +290,7 @@
 		6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAF30D718D2207700036958 /* Icon_Trumpet.png */; };
 		6DAF30DC18D2468500036958 /* TutorialViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAF30DB18D2468500036958 /* TutorialViewController.mm */; };
 		6DC4963019B930D5000FAA01 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC4962F19B930D5000FAA01 /* FacebookSDK.framework */; };
+		6DC4966819B93C9F000FAA01 /* NSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC4966719B93C9F000FAA01 /* NSUser.m */; };
 		6DC78A01199BFEC5006B14F5 /* NSSampler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A00199BFEC5006B14F5 /* NSSampler.mm */; };
 		6DC78A04199BFED1006B14F5 /* NSSample.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A03199BFED1006B14F5 /* NSSample.mm */; };
 		6DC78A07199BFEF7006B14F5 /* NSSequence.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A06199BFEF7006B14F5 /* NSSequence.mm */; };
@@ -821,6 +822,8 @@
 		6DAF30DA18D2468500036958 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
 		6DAF30DB18D2468500036958 /* TutorialViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TutorialViewController.mm; sourceTree = "<group>"; };
 		6DC4962F19B930D5000FAA01 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		6DC4966619B93C9F000FAA01 /* NSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUser.h; sourceTree = "<group>"; };
+		6DC4966719B93C9F000FAA01 /* NSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUser.m; sourceTree = "<group>"; };
 		6DC5013D18EF72E900385472 /* SoundCloudUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoundCloudUI.xcodeproj; path = ../CocoaSoundCloudUI/SoundCloudUI.xcodeproj; sourceTree = "<group>"; };
 		6DC789FF199BFEC5006B14F5 /* NSSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSampler.h; sourceTree = "<group>"; };
 		6DC78A00199BFEC5006B14F5 /* NSSampler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSSampler.mm; sourceTree = "<group>"; };
@@ -1177,6 +1180,8 @@
 		58B4D3CA186E1ECC0035D9E5 /* SequenceModel */ = {
 			isa = PBXGroup;
 			children = (
+				6DC4966619B93C9F000FAA01 /* NSUser.h */,
+				6DC4966719B93C9F000FAA01 /* NSUser.m */,
 				6DC78A05199BFEF7006B14F5 /* NSSequence.h */,
 				6DC78A06199BFEF7006B14F5 /* NSSequence.mm */,
 				6DC78A0A199C008C006B14F5 /* NSTrack.h */,
@@ -2517,6 +2522,7 @@
 				5894D61A186505BD00849C71 /* SeqSetViewController.mm in Sources */,
 				58547AE4186CD55C003638EF /* RadialButton.mm in Sources */,
 				6D6AFE48199D2F2D00BEBB9D /* NSMeasure.m in Sources */,
+				6DC4966819B93C9F000FAA01 /* NSUser.m in Sources */,
 				58F4B951189849BA0071609B /* OptionsViewController.mm in Sources */,
 				6DC78A15199C00C3006B14F5 /* NSNote.mm in Sources */,
 				58547AEB186CD6AF003638EF /* ScrollingSelector.mm in Sources */,

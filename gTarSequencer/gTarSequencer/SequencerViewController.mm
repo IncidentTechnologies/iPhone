@@ -216,8 +216,19 @@
     // LOGGED OUT
     //
     
+    gatekeeperViewController = [[GatekeeperViewController alloc] init];
+    
+    gatekeeperViewController.delegate = self;
+    
     // TODO: if we are not logged in but have cached creds, login
-    if(g_cloudController.m_loggedIn == NO){
+    if(g_cloudController.m_loggedIn == NO && g_loggedInUser.username != nil){
+        
+        [gatekeeperViewController requestCachedLogin];
+        
+        // If we are not logged in but have cached credits, login
+        [self loggedIn];
+        
+    }else if(g_cloudController.m_loggedIn == NO){
         
         // logged out screen
         [self loggedOut];
@@ -370,7 +381,7 @@
     }
     
     // Hover set name?
-    if([nav isEqualToString:@"Set"] && !isTutorialOpen){
+    if([nav isEqualToString:@"Set"] && !isTutorialOpen && g_cloudController.m_loggedIn == YES){
         [self hoverSetName];
     }else{
         [self hideSetName];
@@ -1584,11 +1595,9 @@
 #pragma mark - Logged Out
 - (void)loggedOut
 {
-    gatekeeperViewController = [[GatekeeperViewController alloc] init];
-    
-    gatekeeperViewController.delegate = self;
     
     [gatekeeperViewController.view setFrame:onScreenMainFrame];
+    
     [self.view addSubview:gatekeeperViewController.view];
     
     // Be sure tempo slider and other interferences get disabled
