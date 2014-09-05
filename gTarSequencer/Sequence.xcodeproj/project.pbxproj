@@ -289,6 +289,7 @@
 		6DAD2B3E18CFA0CE00228F08 /* SoundMaster_.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */; };
 		6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAF30D718D2207700036958 /* Icon_Trumpet.png */; };
 		6DAF30DC18D2468500036958 /* TutorialViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAF30DB18D2468500036958 /* TutorialViewController.mm */; };
+		6DC4963019B930D5000FAA01 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC4962F19B930D5000FAA01 /* FacebookSDK.framework */; };
 		6DC78A01199BFEC5006B14F5 /* NSSampler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A00199BFEC5006B14F5 /* NSSampler.mm */; };
 		6DC78A04199BFED1006B14F5 /* NSSample.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A03199BFED1006B14F5 /* NSSample.mm */; };
 		6DC78A07199BFEF7006B14F5 /* NSSequence.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A06199BFEF7006B14F5 /* NSSequence.mm */; };
@@ -819,6 +820,7 @@
 		6DAF30D718D2207700036958 /* Icon_Trumpet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trumpet.png; sourceTree = "<group>"; };
 		6DAF30DA18D2468500036958 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
 		6DAF30DB18D2468500036958 /* TutorialViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TutorialViewController.mm; sourceTree = "<group>"; };
+		6DC4962F19B930D5000FAA01 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		6DC5013D18EF72E900385472 /* SoundCloudUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoundCloudUI.xcodeproj; path = ../CocoaSoundCloudUI/SoundCloudUI.xcodeproj; sourceTree = "<group>"; };
 		6DC789FF199BFEC5006B14F5 /* NSSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSampler.h; sourceTree = "<group>"; };
 		6DC78A00199BFEC5006B14F5 /* NSSampler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSSampler.mm; sourceTree = "<group>"; };
@@ -914,6 +916,7 @@
 				6D02290518F31D6A000E2DE4 /* libOAuth2Client.a in Frameworks */,
 				6D02290618F31D6A000E2DE4 /* libOHAttributedLabel.a in Frameworks */,
 				6D02290718F31D6A000E2DE4 /* libSoundCloudAPI.a in Frameworks */,
+				6DC4963019B930D5000FAA01 /* FacebookSDK.framework in Frameworks */,
 				6D02290818F31D6A000E2DE4 /* libSoundCloudUI.a in Frameworks */,
 				6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */,
 				587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */,
@@ -1253,6 +1256,7 @@
 		58D6170C1863B8D6001EB327 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DC4962F19B930D5000FAA01 /* FacebookSDK.framework */,
 				6DED45D2199C4E4400E4AF08 /* MessageUI.framework */,
 				6DA8571E18EF44A400CCA191 /* Security.framework */,
 				6DA8571C18EF449E00CCA191 /* QuartzCore.framework */,
@@ -2672,6 +2676,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kateschnippering/Documents/Sites/incident/FacebookSDK,
+				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";
@@ -2712,6 +2720,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kateschnippering/Documents/Sites/incident/FacebookSDK,
+				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";

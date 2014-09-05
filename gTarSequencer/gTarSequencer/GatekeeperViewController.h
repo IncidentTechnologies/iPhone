@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Facebook.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "CloudController.h"
 #import "CloudRequest.h"
 #import "CloudResponse.h"
 #import "CyclingTextField.h"
 
 extern CloudController * g_cloudController;
-extern Facebook * g_facebook;
 
 
 @protocol GatekeeperDelegate <NSObject>
@@ -24,7 +23,7 @@ extern Facebook * g_facebook;
 
 @end
 
-@interface GatekeeperViewController : UIViewController <UITextFieldDelegate,FBSessionDelegate>
+@interface GatekeeperViewController : UIViewController <UITextFieldDelegate,FBLoginViewDelegate>
 {
     
 }
@@ -52,16 +51,18 @@ extern Facebook * g_facebook;
 
 @property (strong, nonatomic) IBOutlet UIView * view;
 
+@property (weak, nonatomic) IBOutlet FBLoginView * loginView;
+
 // TODO: add these to a user object
 @property (strong, nonatomic) NSString * loggedInFacebookToken;
 @property (strong, nonatomic) NSString * loggedInUsername;
 @property (strong, nonatomic) NSString * loggedInPassword;
+@property (strong, nonatomic) NSString * loggedInEmail;
 
 - (IBAction)loggedoutSigninButtonClicked:(id)sender;
 - (IBAction)loggedoutSignupButtonClicked:(id)sender;
 
 - (IBAction)signupButtonClicked:(id)sender;
 - (IBAction)signinButtonClicked:(id)sender;
-- (IBAction)signinFacebookButtonClicked:(id)sender;
 
 @end

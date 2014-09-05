@@ -19,8 +19,7 @@
 #define SIGNIN_PASSWORD_INVALID @"Invalid Password"
 #define FACEBOOK_INVALID @"Facebook failed to login"
 
-#define FACEBOOK_CLIENT_ID @"285410511522607"
-#define FACEBOOK_PERMISSIONS [NSArray arrayWithObjects:@"email", nil]
+#define FACEBOOK_PERMISSIONS [NSArray arrayWithObjects: @"public_profile", @"email", nil]
 
 @interface GatekeeperViewController ()
 {
@@ -50,19 +49,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    g_facebook = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    
-    // See if there are any cached credentials
-    if ( [settings objectForKey:@"FBAccessTokenKey"] && [settings objectForKey:@"FBExpirationDateKey"] )
-    {
-        g_facebook.accessToken = [settings objectForKey:@"FBAccessTokenKey"];
-        g_facebook.expirationDate = [settings objectForKey:@"FBExpirationDateKey"];
-    }
-    
     [self showTopPanel:_signinTopPanel];
     
-    
+    _loginView.readPermissions = FACEBOOK_PERMISSIONS;
 }
 
 #pragma mark - Panel handling
@@ -226,22 +215,6 @@
     
 }
 
-
-- (IBAction)signinFacebookButtonClicked:(id)sender
-{
-    if ( _waitingForFacebook == YES )
-    {
-        return;
-    }
-    
-    _waitingForFacebook = YES;
-    
-    [g_facebook authorize:FACEBOOK_PERMISSIONS];
-    
-    [self showTopPanel:_loadingTopPanel];
-}
-
-
 #pragma mark - Callbacks
 
 - (void)signinCallback:(CloudResponse *)cloudResponse
@@ -326,25 +299,7 @@
 
 
 #pragma mark - FacebookDelegate
-
-- (void)fbDidLogin
-{
-    _waitingForFacebook = NO;
-    
-    // We save the access token to the user settings
-    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    
-    [settings setObject:[g_facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [settings setObject:[g_facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    
-    [settings synchronize];
-    
-    [self hideNotification];
-    
-    // Log into our server
-    [g_cloudController requestFacebookLoginWithToken:g_facebook.accessToken andCallbackObj:self andCallbackSel:@selector(facebookSigninCallback:)];
-    
-}
+/*
 
 - (void)fbDidNotLogin:(BOOL)cancelled
 {
@@ -376,6 +331,32 @@
 - (void)fbDidExtendToken:(NSString*)accessToken expiresAt:(NSDate*)expiresAt
 {
     
+}
+
+*/
+
+- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
+{
+    NSLog(@"Login view fetched user info");
+    
+    _loggedInUsername = user.username;
+    
+    [delegate loggedIn];
+}
+
+- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
+{
+    NSLog(@"Logged in user");
+}
+
+- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
+{
+    NSLog(@"Logged out user");
+}
+
+- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
+{
+    [self displayNotification:FACEBOOK_INVALID turnRed:YES];
 }
 
 
