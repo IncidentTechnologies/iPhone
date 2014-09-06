@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "TestFlightSDK3.0.0/TestFlight.h"
+#import "NSUser.h"
+#import "CloudController.h"
+#import "GtarController.h"
+#import "FileController.h"
+#import "CloudRequest.h"
+#import "CloudResponse.h"
 
 #ifdef DEBUG
 #define DLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)

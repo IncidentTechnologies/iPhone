@@ -23,7 +23,6 @@
 #import "GatekeeperViewController.h"
 #import "CloudController.h"
 #import "SCUI.h"
-#import "NSUser.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MessageUI.h>

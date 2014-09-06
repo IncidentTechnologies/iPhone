@@ -19,8 +19,6 @@
 #define SIGNIN_PASSWORD_INVALID @"Invalid Password"
 #define FACEBOOK_INVALID @"Facebook failed to login"
 
-#define FACEBOOK_PERMISSIONS [NSArray arrayWithObjects: @"public_profile", @"email", nil]
-
 @interface GatekeeperViewController ()
 {
     UIView * _currentTopPanel;
@@ -28,7 +26,6 @@
     
     BOOL _waitingForFacebook;
 }
-
 @end
 
 @implementation GatekeeperViewController
@@ -49,9 +46,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self resetScreen];
+    
+    _loginView.readPermissions = @[@"public_profile",@"email"];
+}
+
+- (void)resetScreen
+{
+    
     [self showTopPanel:_signinTopPanel];
     
-    _loginView.readPermissions = FACEBOOK_PERMISSIONS;
 }
 
 #pragma mark - Panel handling
@@ -59,10 +63,6 @@
 - (void)showTopPanel:(UIView *)panel
 {
     [_currentTopPanel setHidden:YES];
-        
-    //[panel setFrame:CGRectMake(0, 0, _topPanel.frame.size.width, _topPanel.frame.size.height )];
-    
-    //[_topPanel addSubview:panel];
     
     [panel setHidden:NO];
     
@@ -75,7 +75,7 @@
     [self enableButton:_loggedoutSignupButton];
     [self disableButton:_loggedoutSigninButton];
     
-    //[self hideNotification];
+    [self hideNotification];
     
     [self showTopPanel:_signinTopPanel];
     
@@ -86,7 +86,7 @@
     [self enableButton:_loggedoutSigninButton];
     [self disableButton:_loggedoutSignupButton];
     
-    //[self hideNotification];
+    [self hideNotification];
     
     [self showTopPanel:_signupTopPanel];
 }
@@ -217,12 +217,23 @@
 - (void)requestCachedLogin
 {
     
-    NSLog(@"Uncaching %@ %@",g_loggedInUser.username,g_loggedInUser.password);
+    NSLog(@"Uncaching %@ %@",g_loggedInUser.m_username,g_loggedInUser.m_password);
     
     // get user and password from cache
-    [g_cloudController requestLoginUsername:g_loggedInUser.username andPassword:g_loggedInUser.password andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
+    [g_cloudController requestLoginUsername:g_loggedInUser.m_username andPassword:g_loggedInUser.m_password andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
     
 }
+
+- (void)requestLogout
+{
+    // Clear facebook if active
+    [FBSession.activeSession closeAndClearTokenInformation];
+    
+    if(g_cloudController.m_loggedIn){
+        [g_cloudController requestLogoutCallbackObj:self andCallbackSel:@selector(logoutCallback:)];
+    }
+}
+
 
 #pragma mark - Callbacks
 
@@ -233,25 +244,20 @@
     {
         [self hideNotification];
         
-        g_loggedInUser.username = cloudResponse.m_cloudRequest.m_username;
-        g_loggedInUser.password = cloudResponse.m_cloudRequest.m_password;
-        g_loggedInUser.email = cloudResponse.m_cloudRequest.m_email;
+        [g_loggedInUser loadWithId:cloudResponse.m_responseUserId Name:cloudResponse.m_cloudRequest.m_username Password:cloudResponse.m_cloudRequest.m_password Email:cloudResponse.m_cloudRequest.m_email Image:cloudResponse.m_responseFileId Profile:cloudResponse.m_responseUserProfile];
         
         [g_loggedInUser cache];
         
-        [delegate loggedIn];
-       // [self loggedinScreen];
+        [delegate loggedIn:YES];
         
     }else{
         
         // There was an error
         
-        [delegate loggedOut];
-        //[self loggedoutScreen];
+        [delegate loggedOut:NO];
         
         [self displayNotification:cloudResponse.m_statusText turnRed:YES];
         [self showTopPanel:_signinTopPanel];
-        //[self swapRightPanel:_signinRightPanel];
         
         [self enableButton:_loggedoutSignupButton];
     
@@ -265,13 +271,11 @@
     {
         [self hideNotification];
         
-        g_loggedInUser.username = cloudResponse.m_cloudRequest.m_username;
-        g_loggedInUser.password = cloudResponse.m_cloudRequest.m_password;
-        g_loggedInUser.email = cloudResponse.m_cloudRequest.m_email;
+        [g_loggedInUser loadWithId:cloudResponse.m_responseUserId Name:cloudResponse.m_cloudRequest.m_username Password:cloudResponse.m_cloudRequest.m_password Email:cloudResponse.m_cloudRequest.m_email Image:cloudResponse.m_responseFileId Profile:cloudResponse.m_responseUserProfile];
         
         [g_loggedInUser cache];
         
-        [delegate loggedIn];
+        [delegate loggedIn:YES];
     }
     else
     {
@@ -286,42 +290,47 @@
     }
 }
 
-
-- (void)facebookSigninCallback:(CloudResponse*)cloudResponse
+- (void)facebookCallback:(CloudResponse *)cloudResponse
 {
-    
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
-        //[self logLoginEvent];
-        
-        //[g_userController sendPendingUploads];
-        
         [self hideNotification];
         
-        [delegate loggedIn];
+        DLog(@"Facebook callback login success");
         
+        [g_loggedInUser loadWithId:cloudResponse.m_responseUserId Name:cloudResponse.m_cloudRequest.m_username Password:cloudResponse.m_cloudRequest.m_password Email:cloudResponse.m_cloudRequest.m_email Image:cloudResponse.m_responseFileId Profile:cloudResponse.m_responseUserProfile];
+        
+        [g_loggedInUser cache];
+        
+        [delegate loggedIn:YES];
     }
     else
     {
         // There was an error
+        
+        DLog(@"Facebook callback login error");
+        
         [self displayNotification:cloudResponse.m_statusText turnRed:YES];
         
-        [delegate loggedOut];
-        [self showTopPanel:_signinTopPanel];
+        [self showTopPanel:_signupTopPanel];
         
         // Renable buttons
         [self enableButton:_loggedoutSignupButton];
     }
 }
 
+- (void)logoutCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Logged Out");
+}
+
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
 {
-    NSLog(@"Login view fetched user info");
+    DLog(@"Login view fetched user info %@ access token %@",user.name,[[[FBSession activeSession] accessTokenData] accessToken]);
     
-    g_loggedInUser.username = user.username;
-    // Make sure cloud controller gets informed
+    [g_cloudController requestFacebookLoginWithToken:[[[FBSession activeSession] accessTokenData] accessToken] andCallbackObj:self andCallbackSel:@selector(facebookCallback:)];
     
-    [delegate loggedIn];
+    [delegate loggedIn:YES];
 }
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView

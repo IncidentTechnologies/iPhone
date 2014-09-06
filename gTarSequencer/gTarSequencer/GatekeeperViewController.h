@@ -6,21 +6,17 @@
 //  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "CloudController.h"
-#import "CloudRequest.h"
-#import "CloudResponse.h"
 #import "CyclingTextField.h"
-#import "NSUser.h"
 
 extern CloudController * g_cloudController;
 extern NSUser * g_loggedInUser;
 
 @protocol GatekeeperDelegate <NSObject>
 
-- (void) loggedIn;
-- (void) loggedOut;
+- (void) loggedIn:(BOOL)animate;
+- (void) loggedOut:(BOOL)animate;
 
 @end
 
@@ -60,6 +56,9 @@ extern NSUser * g_loggedInUser;
 - (IBAction)signupButtonClicked:(id)sender;
 - (IBAction)signinButtonClicked:(id)sender;
 
+- (void)requestLogout;
 - (void)requestCachedLogin;
+
+- (void)resetScreen;
 
 @end

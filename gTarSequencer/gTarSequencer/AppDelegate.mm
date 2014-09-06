@@ -13,6 +13,7 @@
 @synthesize window;
 
 CloudController * g_cloudController;
+FileController * g_fileController;
 NSUser * g_loggedInUser;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -47,6 +48,9 @@ NSUser * g_loggedInUser;
     
     // init the cloud controller
     g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
+    
+    // init the file controller
+    g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
     
     // init the logged in user
     g_loggedInUser = [[NSUser alloc] init];

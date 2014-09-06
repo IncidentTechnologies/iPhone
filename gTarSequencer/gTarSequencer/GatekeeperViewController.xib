@@ -28,22 +28,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJl-iw-Nyi" userLabel="LoadingTopPanel">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sPb-rC-bmz">
-                            <rect key="frame" x="222" y="98" width="37" height="37"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.16078431369999999" green="0.41960784309999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="sPb-rC-bmz" firstAttribute="centerX" secondItem="iJl-iw-Nyi" secondAttribute="centerX" id="GcG-5C-MCG"/>
-                        <constraint firstItem="sPb-rC-bmz" firstAttribute="centerY" secondItem="iJl-iw-Nyi" secondAttribute="centerY" id="UwC-ID-vJs"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZR1-cf-B3x" userLabel="SignupTopPanel">
+                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZR1-cf-B3x" userLabel="SignupTopPanel">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -183,6 +168,21 @@
                     </constraints>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJl-iw-Nyi" userLabel="LoadingTopPanel">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sPb-rC-bmz">
+                            <rect key="frame" x="222" y="98" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.16078431369999999" green="0.41960784309999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="sPb-rC-bmz" firstAttribute="centerX" secondItem="iJl-iw-Nyi" secondAttribute="centerX" id="GcG-5C-MCG"/>
+                        <constraint firstItem="sPb-rC-bmz" firstAttribute="centerY" secondItem="iJl-iw-Nyi" secondAttribute="centerY" id="UwC-ID-vJs"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CHX-BN-3aQ" userLabel="SigninTopPanel">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -191,7 +191,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lx5-sM-4gG" customClass="FBLoginView">
+                                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lx5-sM-4gG" customClass="FBLoginView">
                                     <rect key="frame" x="50" y="172" width="380" height="41"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -203,7 +203,7 @@
                                         <outlet property="delegate" destination="-1" id="Z3T-15-vRd"/>
                                     </connections>
                                 </view>
-                                <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoB-Fq-Euu" userLabel="FacebookView">
+                                <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoB-Fq-Euu" userLabel="FacebookView">
                                     <rect key="frame" x="50" y="172" width="380" height="41"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -255,7 +255,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-a1-jIv" userLabel="UsernameView">
-                                    <rect key="frame" x="50" y="29" width="380" height="41"/>
+                                    <rect key="frame" x="50" y="52" width="380" height="41"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ncC-r3-a2D" customClass="CyclingTextField">
@@ -286,7 +286,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5A2-x1-5XL" userLabel="PasswordView">
-                                    <rect key="frame" x="50" y="72" width="380" height="41"/>
+                                    <rect key="frame" x="50" y="95" width="380" height="41"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Siu-JM-nWA" customClass="CyclingTextField">
@@ -318,7 +318,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGM-RX-q70">
-                                    <rect key="frame" x="50" y="122" width="380" height="41"/>
+                                    <rect key="frame" x="50" y="145" width="380" height="41"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" red="0.16862745100000001" green="0.77647058820000003" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>

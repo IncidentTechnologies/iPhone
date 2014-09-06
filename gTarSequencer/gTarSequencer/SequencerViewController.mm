@@ -221,17 +221,17 @@
     gatekeeperViewController.delegate = self;
     
     // TODO: if we are not logged in but have cached creds, login
-    if(g_cloudController.m_loggedIn == NO && g_loggedInUser.username != nil){
+    if(g_cloudController.m_loggedIn == NO && g_loggedInUser.m_username != nil){
         
         [gatekeeperViewController requestCachedLogin];
         
         // If we are not logged in but have cached credits, login
-        [self loggedIn];
+        [self loggedIn:NO];
         
     }else if(g_cloudController.m_loggedIn == NO){
         
         // logged out screen
-        [self loggedOut];
+        [self loggedOut:NO];
     }
     
     //
@@ -342,6 +342,7 @@
     if([nav isEqualToString:@"Options"]){
         
         [optionsViewController reloadFileTable];
+        [optionsViewController reloadUserProfile];
         activeMainView = optionsViewController.view;
         
     }else if([nav isEqualToString:@"Set"]){
@@ -1593,27 +1594,39 @@
 }
 
 #pragma mark - Logged Out
-- (void)loggedOut
+- (void)loggedOut:(BOOL)animate
 {
-    
     [gatekeeperViewController.view setFrame:onScreenMainFrame];
     
     [self.view addSubview:gatekeeperViewController.view];
     
+    [self presentGatekeeper:animate];
+    
     // Be sure tempo slider and other interferences get disabled
     [playControlViewController.view setUserInteractionEnabled:NO];
     
+    [gatekeeperViewController requestLogout];
+    
     DLog(@"Logged Out");
+    
+    // Clear the cache
+    [g_loggedInUser clear];
     
 }
 
-- (void)loggedIn
+
+- (void)loggedIn:(BOOL)animate
 {
     DLog(@"Logged In");
     
-    [gatekeeperViewController.view removeFromSuperview];
+    double duration = animate ? 0.5 : 0.0;
     
-    [playControlViewController.view setUserInteractionEnabled:YES];
+    [UIView animateWithDuration:duration animations:^(void){
+        [gatekeeperViewController.view setAlpha:0.0];
+    }completion:^(BOOL finished){
+        [gatekeeperViewController.view removeFromSuperview];
+        [playControlViewController.view setUserInteractionEnabled:YES];
+    }];
 }
 
 #pragma mark - FTU Tutorial
@@ -1655,6 +1668,9 @@
     isTutorialOpen = YES;
     
     [self stopGestures];
+    
+    // Hide login during tutorial
+    [gatekeeperViewController.view setHidden:YES];
 }
 
 - (void)endTutorialIfOpen
@@ -1673,6 +1689,21 @@
 - (void)forceToPlay
 {
     [self startAll];
+}
+
+- (void)presentGatekeeper:(BOOL)animate
+{
+    double duration = (animate) ? 0.5 : 0.0;
+ 
+    [gatekeeperViewController resetScreen];
+    
+    [gatekeeperViewController.view setAlpha:0.0];
+    [gatekeeperViewController.view setHidden:NO];
+    [self.view bringSubviewToFront:gatekeeperViewController.view];
+    
+    [UIView animateWithDuration:duration animations:^(void){
+        [gatekeeperViewController.view setAlpha:1.0];
+    }];
 }
 
 @end

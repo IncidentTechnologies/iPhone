@@ -370,6 +370,7 @@
         
     }else if(screenIndex == tutorialTotalSteps){
         
+        [delegate presentGatekeeper:YES];
         [self stopLeftSwipeGesture];
         [self startSwipeToPlayGesture];
         

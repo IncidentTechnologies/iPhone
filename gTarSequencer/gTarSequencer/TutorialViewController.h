@@ -17,6 +17,7 @@
 - (void) notifyTutorialEnded;
 - (void) forceToPlay;
 - (void) closeLeftNavigator;
+- (void) presentGatekeeper:(BOOL)animate;
 
 @end
 

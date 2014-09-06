@@ -25,7 +25,17 @@
 @synthesize saveCurrentButton;
 @synthesize backButton;
 @synthesize loadButton;
+@synthesize profileButton;
+@synthesize profileSetIcon;
+@synthesize profileInstrumentIcon;
+@synthesize profileSoundIcon;
+@synthesize profileSetLabel;
+@synthesize profileInstrumentLabel;
+@synthesize profileSoundLabel;
+@synthesize profileNameLabel;
+@synthesize profileLogoutButton;
 @synthesize loadTable;
+@synthesize profileView;
 @synthesize selectMode;
 @synthesize noSetsLabel;
 
@@ -57,6 +67,7 @@
     
     selectMode = nil;
     
+    [self drawProfileButtonsAndLabels];
     [self drawBackButton];
     [self drawNewPlusButton];
     
@@ -251,23 +262,6 @@
     //[delegate viewSeqSetWithAnimation:YES];
 }
 
-/*
- - (IBAction)userDidSelectRename:(id)sender
- {
- 
- DLog(@"User did select rename");
- 
- BOOL buttonChanged = [self setSelectedButtonTo:sender];
- if(!buttonChanged) return;
- 
- selectMode = @"Rename";
- 
- [self showHideNewFileRow:YES];
- [loadTable reloadData];
- [self resetTableOffset:nil];
- 
- }
- */
 - (IBAction)userDidSelectSaveCurrent:(id)sender
 {
     
@@ -278,6 +272,7 @@
     
     selectMode = @"SaveCurrent";
     
+    [profileView setHidden:YES];
     [self showHideNewFileRow:NO];
     //NSMutableArray * tempFileLoadSet = [[NSMutableArray alloc] initWithArray:fileLoadSet copyItems:YES];
     //fileLoadSet = nil;
@@ -297,6 +292,7 @@
     
     selectMode = @"Load";
     
+    [profileView setHidden:YES];
     [self showHideNewFileRow:YES];
     //NSMutableArray * tempFileLoadSet = [[NSMutableArray alloc] initWithArray:fileLoadSet copyItems:YES];
     //fileLoadSet = nil;
@@ -305,6 +301,22 @@
     [self.loadTable reloadData];
     [self resetTableOffset:nil];
     
+}
+
+-(IBAction)userDidSelectProfile:(id)sender
+{
+    BOOL buttonChanged = [self setSelectedButtonTo:sender];
+    if(!buttonChanged) return;
+    
+    [profileView setHidden:NO];
+    [self unloadView];
+}
+
+- (IBAction)userDidLogout:(id)sender
+{
+    [delegate loggedOut:YES];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(userDidSelectBack:) userInfo:nil repeats:NO];
 }
 
 - (BOOL)setSelectedButtonTo:(UIButton *)button
@@ -706,40 +718,46 @@
 
 #pragma mark - Drawing
 
+- (void)reloadUserProfile
+{
+    UIImage * image = [UIImage imageNamed:@"Bear_Brown"];
+    
+    if(g_loggedInUser.m_image != nil && g_loggedInUser.m_userProfile.m_imgFileId > 1){
+        image = g_loggedInUser.m_image;
+        profileButton.imageView.layer.cornerRadius = 5.0;
+        profileButton.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+        profileButton.imageView.layer.borderWidth = 1.0;
+    }else{
+        profileButton.imageView.layer.cornerRadius = 0.0;
+        profileButton.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+        profileButton.imageView.layer.borderWidth = 0.0;
+    }
+    
+    [profileButton setImage:image forState:UIControlStateNormal];
+    
+    profileNameLabel.text = g_loggedInUser.m_username;
+}
+
+-(void)drawProfileButtonsAndLabels
+{
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    float margin = (screenBounds.size.height == XBASE_LG) ? 34 : 25;
+    
+    [profileButton setImageEdgeInsets:UIEdgeInsetsMake(5, margin, 5, margin)];
+    [profileButton setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
+    profileSetIcon.layer.cornerRadius = profileSetIcon.frame.size.width/2.0;
+    profileInstrumentIcon.layer.cornerRadius = profileInstrumentIcon.frame.size.width/2.0;
+    profileSoundIcon.layer.cornerRadius = profileSoundIcon.frame.size.width/2.0;
+    
+    [self reloadUserProfile];
+    
+}
+
 -(void)drawBackButton
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     float margin = (screenBounds.size.height == XBASE_LG) ? 40 : 33;
-    /*CGRect screenBounds = [[UIScreen mainScreen] bounds];
-     float margin = (screenBounds.size.height == XBASE_LG) ? 12 : 0;
-     
-     CGSize size = CGSizeMake(backButton.frame.size.width, backButton.frame.size.height);
-     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
-     
-     CGContextRef context = UIGraphicsGetCurrentContext();
-     
-     int playWidth = 13;
-     int playX = margin+backButton.frame.size.width/2 - playWidth/2;
-     int playY = 17;
-     CGFloat playHeight = backButton.frame.size.height - 2*playY;
-     
-     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-     
-     CGContextSetLineWidth(context, 4.0);
-     
-     CGContextMoveToPoint(context, playX, playY);
-     CGContextAddLineToPoint(context, playX-playWidth, playY+(playHeight/2));
-     CGContextAddLineToPoint(context, playX, playY+playHeight);
-     
-     CGContextStrokePath(context);
-     
-     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-     UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
-     
-     [backButton addSubview:image];
-     
-     UIGraphicsEndImageContext();*/
     
     [backButton setImage:[UIImage imageNamed:@"Set_Icon"] forState:UIControlStateNormal];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(15, margin, 15, margin)];
