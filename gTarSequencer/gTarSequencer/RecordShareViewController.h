@@ -8,6 +8,7 @@
 
 #import "AppData.h"
 #import "NSSequence.h"
+#import "NSSong.h"
 #import <AVFoundation/AVFoundation.h>
 //#import "SCUI.h"
 
@@ -36,6 +37,8 @@
 
 @end
 
+extern NSUser * g_loggedInUser;
+
 @interface RecordShareViewController : UIViewController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate>
 {
     NSMutableArray * loadedPattern;
@@ -50,6 +53,7 @@
     double prevTranspose[MAX_TRACKS];
     
     // Recording
+    NSSong * recordingSong;
     NSTimer * recordTimer;
     BOOL isWritingFile;
     
@@ -58,6 +62,7 @@
     
     float secondperbeat;
     
+    NSString * loadedSequence;
     float loadedTempo;
     SoundMaster * loadedSoundMaster;
     
@@ -78,7 +83,7 @@
 }
 
 - (void)reloadInstruments;
-- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster;
+- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence;
 - (IBAction)userDidBack:(id)sender;
 - (BOOL)showHideSessionOverlay;
 - (void)openShareScreen;

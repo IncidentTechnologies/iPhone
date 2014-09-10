@@ -54,9 +54,23 @@
     return self;
 }
 
--(XMPNode *)convertToXmp
+-(id)initWithValue:(NSString *)value beatstart:(double)beatstart duration:(double)duration
 {
+    self = [super init];
     
+	if ( self )
+    {
+        m_value = value;
+        m_stringvalue = [value intValue];
+        m_beatstart = beatstart;
+        m_duration = duration;
+    }
+    
+    return self;
+}
+
+-(XMPNode *)convertToSequenceXmp
+{
     XMPNode *node = NULL;
     
     node = new XMPNode((char *)[@"note" UTF8String],NULL);
@@ -64,6 +78,26 @@
     node->AddAttribute(new XMPAttribute((char *)"value", (char *)[m_value UTF8String]));
     
     node->AddAttribute(new XMPAttribute((char *)"beatstart", m_beatstart));
+    
+    return node;
+}
+
+-(XMPNode *)convertToSongXmp
+{
+    XMPNode *node = NULL;
+    
+    node = new XMPNode((char *)[@"note" UTF8String],NULL);
+    
+    node->AddAttribute(new XMPAttribute((char *)"value", (char *)[m_value UTF8String]));
+    
+    node->AddAttribute(new XMPAttribute((char *)"beatstart", m_beatstart));
+    
+    node->AddAttribute(new XMPAttribute((char *)"duration", m_duration));
+    
+    XMPNode *tempNode = new XMPNode((char *)"guitarposition", node);
+    tempNode->AddAttribute(new XMPAttribute((char *)"string", m_stringvalue));
+    tempNode->AddAttribute(new XMPAttribute((char *)"fret", 0));
+    node->AddChild(tempNode);
     
     return node;
 }

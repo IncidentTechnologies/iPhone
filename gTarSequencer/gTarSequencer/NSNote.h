@@ -14,17 +14,22 @@
 {
     NSString * m_value;
     double m_beatstart;
+    double m_duration;
     long m_stringvalue;
 }
 
 @property (retain, nonatomic) NSString * m_value;
 @property (nonatomic) double m_beatstart;
+@property (nonatomic) double m_duration;
 @property (nonatomic) long m_stringvalue;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
 
 -(id)initWithValue:(NSString *)value beatstart:(double)beatstart;
+-(id)initWithValue:(NSString *)value beatstart:(double)beatstart duration:(double)duration;
 
--(XMPNode *)convertToXmp;
+-(XMPNode *)convertToSequenceXmp;
+-(XMPNode *)convertToSongXmp;
+
 
 @end

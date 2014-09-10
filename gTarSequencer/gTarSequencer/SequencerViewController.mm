@@ -367,7 +367,7 @@
         
         if(patternData != nil){
             SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-            [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster];
+            [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:activeSequencer];
         }
         
         if([recordShareController showHideSessionOverlay]){
@@ -878,7 +878,7 @@
             
             if(patternData != nil){
                 SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-                [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster];
+                [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:activeSequencer];
             }
             
             if(animate){

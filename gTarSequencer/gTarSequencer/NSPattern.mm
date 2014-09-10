@@ -100,7 +100,7 @@
     node->AddAttribute(new XMPAttribute((char *)"on", m_on));
     
     for(NSNote * note in m_notes){
-        node->AddChild([note convertToXmp]);
+        node->AddChild([note convertToSequenceXmp]);
     }
     
     return node;

@@ -192,9 +192,8 @@
 
 - (BOOL)isValidInstrumentIndex:(int)inst
 {
-    
-    for(NSInstrument * i in instruments){
-        if(i.m_id == inst){
+    for(NSTrack * i in instruments){
+        if(i.m_instrument.m_id == inst){
             return YES;
         }
     }
@@ -205,8 +204,8 @@
 - (int)getIndexForInstrument:(int)inst
 {
     int k = 0;
-    for(NSInstrument * i in instruments){
-        if(i.m_id == inst){
+    for(NSTrack * i in instruments){
+        if(i.m_instrument.m_id == inst){
             return k;
         }
         k++;
@@ -215,7 +214,7 @@
     return -1;
 }
 
-- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster
+- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence
 {
     if([patternData count] > 0){
         [self hideNoSessionOverlay];
@@ -227,7 +226,7 @@
     [self drawPatternsOnMeasures:patternData];
     
     if(patternData != nil && [patternData count] > 0){
-        [self startRecording:patternData withTempo:tempo andSoundMaster:m_soundMaster];
+        [self startRecording:patternData withTempo:tempo andSoundMaster:m_soundMaster activeSequence:activeSequence];
     }
     
     [self resetProgressView];
@@ -935,7 +934,7 @@
 }
 
 #pragma mark - Recording
--(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster
+-(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence
 {
     if(loadedPattern != patternData){
         
@@ -944,6 +943,7 @@
         loadedPattern = patternData;
         loadedTempo = tempo;
         loadedSoundMaster = m_soundMaster;
+        loadedSequence = activeSequence;
         
         r_measure = 0;
         r_beat = 0;
@@ -960,6 +960,8 @@
 
 -(void)beginRecordSession
 {
+    recordingSong = [[NSSong alloc] initWithId:0 Title:loadedSequence author:g_loggedInUser.m_username description:@"" tempo:loadedTempo looping:false loopstart:0 loopend:0];
+    
     fileNode = [loadedSoundMaster generateFileoutNode:DEFAULT_SONG_NAME];
     
     // Then write the file
@@ -1004,7 +1006,9 @@
         for(NSDictionary * measureinst in measure){
             
             int instIndex = [[measureinst objectForKey:@"instrument"] intValue];
-            NSInstrument * inst = [instruments objectAtIndex:[self getIndexForInstrument:instIndex]];
+            NSTrack * track = [instruments objectAtIndex:[self getIndexForInstrument:instIndex]];
+            NSTrack * songTrack = [recordingSong trackWithName:track.m_name volume:track.m_volume mute:track.m_muted instrument:track.m_instrument];
+            NSClip * songClip = [songTrack firstClip];
             
             // fret for the beat
             NSMutableArray * frets = [measureinst objectForKey:@"frets"];
@@ -1016,7 +1020,13 @@
                     NSString * strings = [f objectForKey:@"strings"];
                     for(int s = 0; s < STRINGS_ON_GTAR; s++){
                         if([strings characterAtIndex:s] == '1'){
-                            [inst.m_sampler.audio pluckString:s];
+                            
+                            // Record to m4a file
+                            [track.m_instrument.m_sampler.audio pluckString:s];
+                            
+                            // Save to XMP
+                            NSNote * newNote = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:r_beat/4.0 duration:0.25];
+                            [songClip addNote:newNote];
                         }
                     }
                     
@@ -1027,6 +1037,7 @@
     
     // todo: buffer this
     fileNode->SaveSamples(secondperbeat);
+    
     
     r_beat++;
     if(r_beat%FRETS_ON_GTAR==FRETS_ON_GTAR-1){
@@ -1051,8 +1062,13 @@
     [recordTimer invalidate];
     recordTimer = nil;
     
+    // save XMP
+    //[recordingSong printTree];
+    [recordingSong saveToFile:recordingSong.m_title];
+    
     // release
     [self releaseFileoutNode];
+    
 }
 
 -(void)interruptRecording

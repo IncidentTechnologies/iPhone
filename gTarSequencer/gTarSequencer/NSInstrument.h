@@ -34,7 +34,8 @@
 
 -(id)init;
 
--(XMPNode *)convertToXmp;
+-(XMPNode *)convertToSequenceXmp;
+-(XMPNode *)convertToSongXmp;
 
 - (void)releaseSounds;
 

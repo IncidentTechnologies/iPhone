@@ -27,19 +27,19 @@
 
 @property (nonatomic) int m_selectedTrackIndex;
 
--(id)initWithXMPFilename:(NSString *)filename;
--(id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXMPFilename:(NSString *)filename;
+- (id)initWithXMPNode:(XMPNode *)xmpNode;
 
--(id)initWithName:(NSString *)name tempo:(double)tempo volume:(double)volume;
+- (id)initWithName:(NSString *)name tempo:(double)tempo volume:(double)volume;
 
 // convert from archaic format
--(id)initWithName:(NSString *)name tempo:(double)tempo volume:(double)volume instruments:(NSArray *)instruments;
+- (id)initWithName:(NSString *)name tempo:(double)tempo volume:(double)volume instruments:(NSArray *)instruments;
 
--(XMPNode *)convertToXmp;
--(void)saveToFile:(NSString *)filename;
+- (XMPNode *)convertToXmp;
+- (void)saveToFile:(NSString *)filename;
 
--(void)addTrack:(NSTrack *)track;
+- (void)addTrack:(NSTrack *)track;
 
--(int)trackCount;
+- (int)trackCount;
 
 @end

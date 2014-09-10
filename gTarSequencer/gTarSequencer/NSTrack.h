@@ -12,6 +12,7 @@
 #import "NSInstrument.h"
 #import "NSPattern.h"
 #import "NSMeasure.h"
+#import "NSClip.h"
 
 #define MAX_BEAT_SEQUENCES 4
 #define FIRST_FRET 0
@@ -25,10 +26,12 @@
     
     NSInstrument * m_instrument;
     NSMutableArray * m_patterns;
+    NSMutableArray * m_clips;
 }
 @property (retain, nonatomic) NSString * m_name;
 @property (retain, nonatomic) NSInstrument * m_instrument;
 @property (retain, nonatomic) NSMutableArray * m_patterns;
+@property (retain, nonatomic) NSMutableArray * m_clips;
 
 @property (nonatomic) double m_volume;
 @property (nonatomic) bool m_muted;
@@ -43,11 +46,16 @@
 
 - (id)initWithName:(NSString *)name volume:(double)volume muted:(bool)muted;
 
-- (XMPNode *)convertToXmp;
+- (XMPNode *)convertToSongXmp;
+- (XMPNode *)convertToSequenceXmp;
 
 // Track Actions
 - (void)setSelected:(BOOL)selected;
 - (BOOL)isSelected;
+
+// Track's Clip Actions
+- (void)addClip:(NSClip *)clip;
+- (NSClip *)firstClip;
 
 // Track's Pattern Actions
 - (void)addPattern:(NSPattern *)pattern;

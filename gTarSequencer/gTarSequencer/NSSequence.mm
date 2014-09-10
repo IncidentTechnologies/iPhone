@@ -153,7 +153,7 @@
     headerNode->AddChild(tempNode);
     
     for(NSTrack * track in m_tracks){
-        contentNode->AddChild([track convertToXmp]);
+        contentNode->AddChild([track convertToSequenceXmp]);
     }
     
     return node;

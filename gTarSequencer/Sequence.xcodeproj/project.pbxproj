@@ -242,6 +242,8 @@
 		6D126A851970724200A2A612 /* Juno_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A791970724200A2A612 /* Juno_G.mp3 */; };
 		6D126A861970724200A2A612 /* Juno_G#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A7A1970724200A2A612 /* Juno_G#.mp3 */; };
 		6D19EC3A19B6A86700A963E4 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D19EC3919B6A86700A963E4 /* FacebookIcon.jpg */; };
+		6D1E5C1019C0D574005956F4 /* NSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C0F19C0D574005956F4 /* NSSong.m */; };
+		6D1E5C1A19C0D5E4005956F4 /* NSClip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C1919C0D5E4005956F4 /* NSClip.mm */; };
 		6D3D9DC518BC0F890048E908 /* RecordRedo_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D9DC418BC0F890048E908 /* RecordRedo_Icon.png */; };
 		6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45318B58A6C00992D3D /* InfoViewController.xib */; };
 		6D44A45718B58C0000992D3D /* InfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D44A45618B58C0000992D3D /* InfoViewController.mm */; };
@@ -734,6 +736,10 @@
 		6D13E2A118EB754C0081B378 /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Debug-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
 		6D17E55118EB691700FCB958 /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Debug-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
 		6D19EC3919B6A86700A963E4 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FacebookIcon.jpg; sourceTree = "<group>"; };
+		6D1E5C0E19C0D574005956F4 /* NSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSong.h; sourceTree = "<group>"; };
+		6D1E5C0F19C0D574005956F4 /* NSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSong.m; sourceTree = "<group>"; };
+		6D1E5C1819C0D5E4005956F4 /* NSClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSClip.h; sourceTree = "<group>"; };
+		6D1E5C1919C0D5E4005956F4 /* NSClip.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSClip.mm; sourceTree = "<group>"; };
 		6D3D9DC418BC0F890048E908 /* RecordRedo_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordRedo_Icon.png; sourceTree = "<group>"; };
 		6D44A45318B58A6C00992D3D /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		6D44A45518B58C0000992D3D /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
@@ -1174,28 +1180,9 @@
 		58B4D3CA186E1ECC0035D9E5 /* SequenceModel */ = {
 			isa = PBXGroup;
 			children = (
-				6DC4966619B93C9F000FAA01 /* NSUser.h */,
-				6DC4966719B93C9F000FAA01 /* NSUser.m */,
-				6DC78A05199BFEF7006B14F5 /* NSSequence.h */,
-				6DC78A06199BFEF7006B14F5 /* NSSequence.mm */,
-				6DC78A0A199C008C006B14F5 /* NSTrack.h */,
-				6DC78A0B199C008C006B14F5 /* NSTrack.mm */,
-				6DC78A0D199C0099006B14F5 /* NSInstrument.h */,
-				6DC78A0E199C0099006B14F5 /* NSInstrument.mm */,
-				6DC789FF199BFEC5006B14F5 /* NSSampler.h */,
-				6DC78A00199BFEC5006B14F5 /* NSSampler.mm */,
-				6DC78A02199BFED1006B14F5 /* NSSample.h */,
-				6DC78A03199BFED1006B14F5 /* NSSample.mm */,
-				6DC78A10199C00A9006B14F5 /* NSPattern.h */,
-				6DC78A11199C00A9006B14F5 /* NSPattern.mm */,
-				6D6AFE46199D2F2D00BEBB9D /* NSMeasure.h */,
-				6D6AFE47199D2F2D00BEBB9D /* NSMeasure.m */,
-				585916FC18774790002C21B9 /* MeasureView.h */,
-				585916FD18774791002C21B9 /* MeasureView.m */,
-				6DC78A13199C00C3006B14F5 /* NSNote.h */,
-				6DC78A14199C00C3006B14F5 /* NSNote.mm */,
-				5811AB47187B95BA00FC0BD2 /* SEQNote.h */,
-				5811AB48187B95BA00FC0BD2 /* SEQNote.m */,
+				6D1E5C1619C0D58D005956F4 /* Song */,
+				6D1E5C1519C0D580005956F4 /* Sequence */,
+				6D1E5C1719C0D597005956F4 /* User */,
 			);
 			name = SequenceModel;
 			sourceTree = "<group>";
@@ -1534,6 +1521,53 @@
 			);
 			name = Trumpet;
 			path = Trombone;
+			sourceTree = "<group>";
+		};
+		6D1E5C1519C0D580005956F4 /* Sequence */ = {
+			isa = PBXGroup;
+			children = (
+				6DC78A05199BFEF7006B14F5 /* NSSequence.h */,
+				6DC78A06199BFEF7006B14F5 /* NSSequence.mm */,
+				6DC78A0A199C008C006B14F5 /* NSTrack.h */,
+				6DC78A0B199C008C006B14F5 /* NSTrack.mm */,
+				6DC78A0D199C0099006B14F5 /* NSInstrument.h */,
+				6DC78A0E199C0099006B14F5 /* NSInstrument.mm */,
+				6DC789FF199BFEC5006B14F5 /* NSSampler.h */,
+				6DC78A00199BFEC5006B14F5 /* NSSampler.mm */,
+				6DC78A02199BFED1006B14F5 /* NSSample.h */,
+				6DC78A03199BFED1006B14F5 /* NSSample.mm */,
+				6DC78A10199C00A9006B14F5 /* NSPattern.h */,
+				6DC78A11199C00A9006B14F5 /* NSPattern.mm */,
+				6D6AFE46199D2F2D00BEBB9D /* NSMeasure.h */,
+				6D6AFE47199D2F2D00BEBB9D /* NSMeasure.m */,
+				585916FC18774790002C21B9 /* MeasureView.h */,
+				585916FD18774791002C21B9 /* MeasureView.m */,
+				6DC78A13199C00C3006B14F5 /* NSNote.h */,
+				6DC78A14199C00C3006B14F5 /* NSNote.mm */,
+				5811AB47187B95BA00FC0BD2 /* SEQNote.h */,
+				5811AB48187B95BA00FC0BD2 /* SEQNote.m */,
+			);
+			name = Sequence;
+			sourceTree = "<group>";
+		};
+		6D1E5C1619C0D58D005956F4 /* Song */ = {
+			isa = PBXGroup;
+			children = (
+				6D1E5C0E19C0D574005956F4 /* NSSong.h */,
+				6D1E5C0F19C0D574005956F4 /* NSSong.m */,
+				6D1E5C1819C0D5E4005956F4 /* NSClip.h */,
+				6D1E5C1919C0D5E4005956F4 /* NSClip.mm */,
+			);
+			name = Song;
+			sourceTree = "<group>";
+		};
+		6D1E5C1719C0D597005956F4 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				6DC4966619B93C9F000FAA01 /* NSUser.h */,
+				6DC4966719B93C9F000FAA01 /* NSUser.m */,
+			);
+			name = User;
 			sourceTree = "<group>";
 		};
 		6D44A44F18B58A3A00992D3D /* InfoViewController */ = {
@@ -2504,6 +2538,7 @@
 				58F4B951189849BA0071609B /* OptionsViewController.mm in Sources */,
 				6DC78A15199C00C3006B14F5 /* NSNote.mm in Sources */,
 				58547AEB186CD6AF003638EF /* ScrollingSelector.mm in Sources */,
+				6D1E5C1A19C0D5E4005956F4 /* NSClip.mm in Sources */,
 				6DC78A12199C00A9006B14F5 /* NSPattern.mm in Sources */,
 				6D44A45718B58C0000992D3D /* InfoViewController.mm in Sources */,
 				58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */,
@@ -2512,6 +2547,7 @@
 				58868EDA187619ED00B469C2 /* PlayControlViewController.mm in Sources */,
 				6DC78A04199BFED1006B14F5 /* NSSample.mm in Sources */,
 				6DC78A0F199C0099006B14F5 /* NSInstrument.mm in Sources */,
+				6D1E5C1019C0D574005956F4 /* NSSong.m in Sources */,
 				58429A1B18A1C09300BDD09B /* InstrumentViewController.mm in Sources */,
 				6DC9A2BA19B8F4E80099372E /* GatekeeperViewController.m in Sources */,
 				58D6960D1864D20A00113AF2 /* SequencerViewController.mm in Sources */,

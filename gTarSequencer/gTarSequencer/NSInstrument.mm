@@ -78,7 +78,7 @@
     return self;
 }
 
--(XMPNode *)convertToXmp
+-(XMPNode *)convertToSequenceXmp
 {
     XMPNode *node = NULL;
     
@@ -95,6 +95,19 @@
     if(m_sampler != nil){
         node->AddChild([m_sampler convertToXmp]);
     }
+    
+    return node;
+}
+
+-(XMPNode *)convertToSongXmp
+{
+    XMPNode *node = NULL;
+    
+    node = new XMPNode((char *)[@"instrument" UTF8String],NULL);
+    
+    node->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_name UTF8String]));
+    
+    node->AddAttribute(new XMPAttribute((char *)"xmpid", m_id));
     
     return node;
 }

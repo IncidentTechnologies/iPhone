@@ -42,6 +42,7 @@
         m_instrument = [[NSInstrument alloc] initWithXMPNode:xmpNode->FindChildByName((char *)"instrument")];
         
         m_patterns = [[NSMutableArray alloc] init];
+        m_clips = [[NSMutableArray alloc] init];
         
         selectedPatternDidChange = NO;
         isSelected = NO;
@@ -67,6 +68,13 @@
                 }
                 
                 patternIndex++;
+                
+            }else if(strcmp(m_it->GetName(),"clip") == 0){
+                
+                NSClip * clip = [[NSClip alloc] initWithXMPNode:m_it];
+                
+                [self addClip:clip];
+                
             }
         }
         
@@ -86,6 +94,8 @@
         m_instrument = [[NSInstrument alloc] init];
         
         m_patterns = [[NSMutableArray alloc] init];
+        
+        m_clips = [[NSMutableArray alloc] init];
         
         // Add Four Patterns
         NSPattern * patternA = [[NSPattern alloc] initWithName:@"-A" on:YES];
@@ -113,7 +123,7 @@
     
 }
 
--(XMPNode *)convertToXmp
+-(XMPNode *)convertToSequenceXmp
 {
     XMPNode *node = NULL;
     
@@ -125,7 +135,7 @@
     
     node->AddAttribute(new XMPAttribute((char *)"muted", m_muted));
     
-    node->AddChild([m_instrument convertToXmp]);
+    node->AddChild([m_instrument convertToSequenceXmp]);
     
     for(NSPattern * pattern in m_patterns){
         node->AddChild([pattern convertToXmp]);
@@ -134,9 +144,50 @@
     return node;
 }
 
+-(XMPNode *)convertToSongXmp
+{
+    XMPNode *node = NULL;
+    
+    node = new XMPNode((char *)[@"track" UTF8String],NULL);
+    
+    node->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_name UTF8String]));
+    
+    node->AddAttribute(new XMPAttribute((char *)"volume", m_volume));
+    
+    node->AddAttribute(new XMPAttribute((char *)"muted", m_muted));
+    
+    node->AddChild([m_instrument convertToSongXmp]);
+    
+    for(NSClip * clip in m_clips){
+        node->AddChild([clip convertToSongXmp]);
+    }
+    
+    return node;
+}
+
 -(void)addPattern:(NSPattern *)pattern
 {
     [m_patterns addObject:pattern];
+}
+
+#pragma mark - Clip Actions
+
+-(void)addClip:(NSClip *)clip
+{
+    [m_clips addObject:clip];
+}
+
+-(NSClip *)firstClip
+{
+    if([m_clips count] > 0){
+        return [m_clips firstObject];
+    }
+    
+    NSClip * newClip = [[NSClip alloc] initWithName:@"clip" startbeat:0 endBeat:0 clipLength:0 clipStart:0 looping:NO loopStart:0 looplength:0 color:@"#FFFFFF"];
+    [self addClip:newClip];
+    
+    return newClip;
+    
 }
 
 #pragma mark Track Actions
@@ -247,5 +298,6 @@
     for (NSMeasure * m in selectedPattern.m_measures)
         [m setUpdateNotesOnMinimap:YES];
 }
+
 
 @end
