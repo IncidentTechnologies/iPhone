@@ -60,7 +60,14 @@
         
     }else{
         
-        sequence = [[NSSequence alloc] initWithName:DEFAULT_SET_NAME tempo:DEFAULT_TEMPO volume:DEFAULT_VOLUME];
+        sequence = [[NSSequence alloc] initWithXMPFilename:@"usr_Tutorial"];
+        
+        [self setInstrumentsFromData];
+        
+        [delegate setTempo:DEFAULT_TEMPO];
+        [delegate setVolume:DEFAULT_VOLUME];
+        
+        //sequence = [[NSSequence alloc] initWithName:DEFAULT_SET_NAME tempo:DEFAULT_TEMPO volume:DEFAULT_VOLUME];
     }
     
 }
@@ -106,13 +113,14 @@
         DLog(@"The sequencer save plist exists");
     } else {
         DLog(@"The sequencer save plist does not exist");
+        filepath = nil;
     }
     
     // Read file load into all the things, make sure the data generates
     [self initSequenceWithFilename:filepath];
     
     // Reset
-    if(filepath == nil){
+    if([filepath isEqualToString:DEFAULT_STATE_NAME]){
         
         [self resetSelectedInstrumentIndex];
         
@@ -270,6 +278,16 @@
 - (long)countTracks
 {
     return [sequence trackCount];
+}
+
+- (int)countMasterInstrumentOptions
+{
+    return [masterInstrumentOptions count];
+}
+
+- (int)countSamples
+{
+    return [customSelector countSamples];
 }
 
 - (NSSequence *)getSequence

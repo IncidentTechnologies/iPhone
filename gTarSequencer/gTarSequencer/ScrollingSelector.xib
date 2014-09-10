@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScrollingSelector">
@@ -19,11 +19,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="480" height="265"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </scrollView>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTw-8F-jZr">
-                    <rect key="frame" x="0.0" y="264" width="480" height="1"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ncg-Hf-mOe">
                     <rect key="frame" x="112" y="290" width="256" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -33,13 +28,10 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="bh2-F9-jet" secondAttribute="trailing" id="5FJ-MW-Pbc"/>
                 <constraint firstItem="bh2-F9-jet" firstAttribute="top" secondItem="1" secondAttribute="top" id="ASJ-Dh-ip1"/>
-                <constraint firstItem="qTw-8F-jZr" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="FuB-LZ-zub"/>
                 <constraint firstItem="bh2-F9-jet" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="TyK-qP-7s6"/>
-                <constraint firstAttribute="trailing" secondItem="qTw-8F-jZr" secondAttribute="trailing" id="XA6-Tp-MJd"/>
                 <constraint firstAttribute="centerX" secondItem="ncg-Hf-mOe" secondAttribute="centerX" id="bWg-jo-ZnL"/>
                 <constraint firstAttribute="centerX" secondItem="bh2-F9-jet" secondAttribute="centerX" id="cWo-d6-A04"/>
                 <constraint firstAttribute="bottom" secondItem="bh2-F9-jet" secondAttribute="bottom" constant="55" id="dfv-wV-Elw"/>
-                <constraint firstAttribute="bottom" secondItem="qTw-8F-jZr" secondAttribute="bottom" constant="55" id="qdV-08-VnP"/>
                 <constraint firstAttribute="bottom" secondItem="ncg-Hf-mOe" secondAttribute="bottom" id="zBJ-l3-aMO"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

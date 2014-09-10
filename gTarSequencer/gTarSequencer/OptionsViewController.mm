@@ -34,6 +34,9 @@
 @synthesize profileSoundLabel;
 @synthesize profileNameLabel;
 @synthesize profileLogoutButton;
+@synthesize profileSetNameLabel;
+@synthesize profileInstrumentNameLabel;
+@synthesize profileSoundNameLabel;
 @synthesize loadTable;
 @synthesize profileView;
 @synthesize selectMode;
@@ -733,9 +736,14 @@
         profileButton.imageView.layer.borderWidth = 0.0;
     }
     
+    // User info
     [profileButton setImage:image forState:UIControlStateNormal];
-    
     profileNameLabel.text = g_loggedInUser.m_username;
+    
+    // Counts
+    [self showSetCount];
+    [self showInstrumentCount];
+    [self showSoundCount];
 }
 
 -(void)drawProfileButtonsAndLabels
@@ -751,6 +759,35 @@
     profileSoundIcon.layer.cornerRadius = profileSoundIcon.frame.size.width/2.0;
     
     [self reloadUserProfile];
+    
+}
+
+- (void)showSetCount
+{
+    [profileSetLabel setText:[NSString stringWithFormat:@"%i",[fileLoadSet count]+1]];
+    
+    if([fileLoadSet count] > 0){
+        [profileSetNameLabel setText:@"sets"];
+    }else{
+        [profileSetNameLabel setText:@"set"];
+    }
+    
+}
+
+- (void)showInstrumentCount
+{
+    // Subtract the custom instrument creator
+    int instrumentCount = [delegate countInstruments]-1;
+    
+    [profileInstrumentLabel setText:[NSString stringWithFormat:@"%i",instrumentCount]];
+    
+}
+
+- (void)showSoundCount
+{
+    int soundCount = [delegate countSounds];
+    
+    [profileSoundLabel setText:[NSString stringWithFormat:@"%i",soundCount]];
     
 }
 

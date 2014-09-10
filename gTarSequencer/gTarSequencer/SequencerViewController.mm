@@ -471,6 +471,18 @@
     [soundMaster commitMasterLevelSlider:masterSlider];
 }
 
+#pragma mark - Options View Controller Delegate
+
+- (int)countInstruments
+{
+    return [seqSetViewController countMasterInstrumentOptions];
+}
+
+- (int)countSounds
+{
+    return [seqSetViewController countSamples];
+}
+
 #pragma mark - Save Load Delegate
 
 - (void)userDidLoadSequenceOptions

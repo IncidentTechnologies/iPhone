@@ -317,4 +317,5 @@ typedef enum GtarControllerEffect GtarControllerEffect;
  */
 - (GtarControllerStatus)turnOnEffect:(GtarControllerEffect)effect withColor:(GtarLedColor)color;
 
+
 @end

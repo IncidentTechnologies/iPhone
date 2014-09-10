@@ -21,6 +21,9 @@
 
 - (void) loggedOut:(BOOL)animate;
 
+- (int) countInstruments;
+- (int) countSounds;
+
 @end
 
 extern NSUser * g_loggedInUser;
@@ -90,6 +93,9 @@ extern NSUser * g_loggedInUser;
 @property (weak, nonatomic) IBOutlet UILabel * profileSetLabel;
 @property (weak, nonatomic) IBOutlet UILabel * profileInstrumentLabel;
 @property (weak, nonatomic) IBOutlet UILabel * profileSoundLabel;
+@property (weak, nonatomic) IBOutlet UILabel * profileSetNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel * profileInstrumentNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel * profileSoundNameLabel;
 
 @end
 

@@ -123,6 +123,26 @@
     }
 }
 
+- (int)countSampleTree:(NSArray *)tree
+{
+    int count = 0;
+    
+    for(NSDictionary * dict in tree){
+        if([dict valueForKey:@"Sampleset"] != nil){
+            count += [[dict valueForKey:@"Sampleset"] count];
+        }else if([dict valueForKey:@"Sectionset"]){
+            count += [self countSampleTree:[dict valueForKey:@"Sectionset"]];
+        }
+    }
+    
+    return count;
+}
+
+- (int)countSamples
+{
+    return [self countSampleTree:sampleList];
+}
+
 - (void)initSubtables
 {
     

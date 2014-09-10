@@ -14,12 +14,15 @@
                 <outlet property="profileButton" destination="i7A-bz-l9Y" id="aOQ-tq-5UL"/>
                 <outlet property="profileInstrumentIcon" destination="E9o-2x-rMt" id="Uee-pz-EDQ"/>
                 <outlet property="profileInstrumentLabel" destination="1NA-yo-23l" id="Udj-rZ-hen"/>
+                <outlet property="profileInstrumentNameLabel" destination="Knh-VD-07q" id="PJc-zW-jNt"/>
                 <outlet property="profileLogoutButton" destination="KyL-fE-1WF" id="u96-En-d4c"/>
                 <outlet property="profileNameLabel" destination="fdf-nv-1EH" id="WBC-Zg-xcG"/>
                 <outlet property="profileSetIcon" destination="RWp-fA-wwN" id="4zk-sD-mRq"/>
                 <outlet property="profileSetLabel" destination="5E9-10-fwT" id="AN5-Gb-Epq"/>
+                <outlet property="profileSetNameLabel" destination="aj7-Lp-mjT" id="seg-ne-jhT"/>
                 <outlet property="profileSoundIcon" destination="Qkj-G0-eWN" id="2gP-cG-iLD"/>
                 <outlet property="profileSoundLabel" destination="aL2-zX-dnu" id="HaT-b2-Msf"/>
+                <outlet property="profileSoundNameLabel" destination="Cm4-Rb-Eey" id="Oy4-9V-5ne"/>
                 <outlet property="profileView" destination="gQO-Fw-ug4" id="oce-Cs-G9o"/>
                 <outlet property="saveCurrentButton" destination="oRj-AQ-P9U" id="EWR-U6-CDL"/>
                 <outlet property="view" destination="1" id="D7F-KJ-coZ"/>

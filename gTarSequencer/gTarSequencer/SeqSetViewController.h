@@ -123,6 +123,8 @@
 - (NSMutableArray *)getTracks;
 
 - (long)countTracks;
+- (int)countMasterInstrumentOptions;
+- (int)countSamples;
 
 - (NSTrack *)getCurrentTrack;
 - (NSTrack *)getTrackAtIndex:(int)index;

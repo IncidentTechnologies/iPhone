@@ -82,6 +82,8 @@
 - (void)launchSelectorView;
 - (IBAction)reverseSampleStack:(id)sender;
 
+- (int)countSamples;
+
 @property (nonatomic) BOOL isFirstLaunch;
 
 @property (retain, nonatomic) TutorialViewController * tutorialViewController;

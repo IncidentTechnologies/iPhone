@@ -95,6 +95,7 @@
 
 -(void)skipTutorial
 {
+    [delegate presentGatekeeper:YES];
     [self end];
     //tutorialStep = tutorialTotalSteps;
     //[self drawTutorialScreenForStep:tutorialStep isReverseDirection:NO];
