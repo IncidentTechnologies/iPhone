@@ -1105,28 +1105,59 @@
         
         isAudioPlaying = YES;
         
+        [self initSongModel];
         [self startPlaybandAnimation];
         
     }else{
         [self resumePlaybandAnimation];
     }
     
-    [audioPlayer play];
+    [delegate startSoundMaster];
+    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+    
+    //[audioPlayer play];
+    
     
 }
 
 -(void)pauseRecordPlayback
 {
-    [audioPlayer pause];
+    [delegate stopSoundMaster];
+    [self stopMainEventLoop];
+    
+    //[audioPlayer pause];
     [self pausePlaybandAnimation];
 }
 
 -(void)stopRecordPlayback
 {
+    [delegate stopSoundMaster];
+    [self stopMainEventLoop];
+    
     isAudioPlaying = NO;
     [self stopPlaybandAnimation];
-    [audioPlayer stop];
+    //[audioPlayer stop];
     [delegate recordPlaybackDidEnd];
+}
+
+- (void)songModelEndOfSong
+{
+    [self stopRecordPlayback];
+}
+
+- (void)initSongModel
+{
+    
+    DLog(@"recordingSong is %@",recordingSong);
+    
+    songModel = [[NSSongModel alloc] initWithSong:recordingSong andInstruments:instruments];
+    
+    [songModel startWithDelegate:self];
+}
+
+- (void)mainEventLoop
+{
+    [songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
 }
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag

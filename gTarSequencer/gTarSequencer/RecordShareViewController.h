@@ -9,6 +9,8 @@
 #import "AppData.h"
 #import "NSSequence.h"
 #import "NSSong.h"
+#import "NSSongModel.h"
+#import "MainEventController.h"
 #import <AVFoundation/AVFoundation.h>
 //#import "SCUI.h"
 
@@ -35,11 +37,14 @@
 
 - (NSMutableArray *)getTracks;
 
+- (void)startSoundMaster;
+- (void)stopSoundMaster;
+
 @end
 
 extern NSUser * g_loggedInUser;
 
-@interface RecordShareViewController : UIViewController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate>
+@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,NSSongModelDelegate>
 {
     NSMutableArray * loadedPattern;
     NSMutableArray * instruments;
@@ -56,6 +61,7 @@ extern NSUser * g_loggedInUser;
     NSSong * recordingSong;
     NSTimer * recordTimer;
     BOOL isWritingFile;
+    NSSongModel * songModel;
     
     int r_measure;
     int r_beat;

@@ -244,6 +244,8 @@
 		6D19EC3A19B6A86700A963E4 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D19EC3919B6A86700A963E4 /* FacebookIcon.jpg */; };
 		6D1E5C1019C0D574005956F4 /* NSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C0F19C0D574005956F4 /* NSSong.m */; };
 		6D1E5C1A19C0D5E4005956F4 /* NSClip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C1919C0D5E4005956F4 /* NSClip.mm */; };
+		6D1E5C1E19C127DA005956F4 /* MainEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C1D19C127DA005956F4 /* MainEventController.m */; };
+		6D1E5C2119C12908005956F4 /* NSSongModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C2019C12908005956F4 /* NSSongModel.mm */; };
 		6D3D9DC518BC0F890048E908 /* RecordRedo_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D9DC418BC0F890048E908 /* RecordRedo_Icon.png */; };
 		6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45318B58A6C00992D3D /* InfoViewController.xib */; };
 		6D44A45718B58C0000992D3D /* InfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D44A45618B58C0000992D3D /* InfoViewController.mm */; };
@@ -740,6 +742,10 @@
 		6D1E5C0F19C0D574005956F4 /* NSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSong.m; sourceTree = "<group>"; };
 		6D1E5C1819C0D5E4005956F4 /* NSClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSClip.h; sourceTree = "<group>"; };
 		6D1E5C1919C0D5E4005956F4 /* NSClip.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSClip.mm; sourceTree = "<group>"; };
+		6D1E5C1C19C127DA005956F4 /* MainEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainEventController.h; sourceTree = "<group>"; };
+		6D1E5C1D19C127DA005956F4 /* MainEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainEventController.m; sourceTree = "<group>"; };
+		6D1E5C1F19C12908005956F4 /* NSSongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSongModel.h; sourceTree = "<group>"; };
+		6D1E5C2019C12908005956F4 /* NSSongModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSSongModel.mm; sourceTree = "<group>"; };
 		6D3D9DC418BC0F890048E908 /* RecordRedo_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordRedo_Icon.png; sourceTree = "<group>"; };
 		6D44A45318B58A6C00992D3D /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		6D44A45518B58C0000992D3D /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
@@ -1553,6 +1559,8 @@
 		6D1E5C1619C0D58D005956F4 /* Song */ = {
 			isa = PBXGroup;
 			children = (
+				6D1E5C1F19C12908005956F4 /* NSSongModel.h */,
+				6D1E5C2019C12908005956F4 /* NSSongModel.mm */,
 				6D1E5C0E19C0D574005956F4 /* NSSong.h */,
 				6D1E5C0F19C0D574005956F4 /* NSSong.m */,
 				6D1E5C1819C0D5E4005956F4 /* NSClip.h */,
@@ -1568,6 +1576,15 @@
 				6DC4966719B93C9F000FAA01 /* NSUser.m */,
 			);
 			name = User;
+			sourceTree = "<group>";
+		};
+		6D1E5C1B19C127BB005956F4 /* MainEventController */ = {
+			isa = PBXGroup;
+			children = (
+				6D1E5C1C19C127DA005956F4 /* MainEventController.h */,
+				6D1E5C1D19C127DA005956F4 /* MainEventController.m */,
+			);
+			name = MainEventController;
 			sourceTree = "<group>";
 		};
 		6D44A44F18B58A3A00992D3D /* InfoViewController */ = {
@@ -1602,6 +1619,7 @@
 		6DA724B018E25AB300872705 /* RecordShareViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6D1E5C1B19C127BB005956F4 /* MainEventController */,
 				6DA724B118E25B0700872705 /* RecordShareViewController.h */,
 				6DA724B218E25B0700872705 /* RecordShareViewController.mm */,
 				6DA724B418E25B2B00872705 /* RecordShareView_4.xib */,
@@ -2551,6 +2569,8 @@
 				58429A1B18A1C09300BDD09B /* InstrumentViewController.mm in Sources */,
 				6DC9A2BA19B8F4E80099372E /* GatekeeperViewController.m in Sources */,
 				58D6960D1864D20A00113AF2 /* SequencerViewController.mm in Sources */,
+				6D1E5C2119C12908005956F4 /* NSSongModel.mm in Sources */,
+				6D1E5C1E19C127DA005956F4 /* MainEventController.m in Sources */,
 				58D6171A1863B8D7001EB327 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

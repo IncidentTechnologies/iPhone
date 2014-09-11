@@ -853,8 +853,6 @@
     [guitarView update];
     
     [self increasePlayLocation];
-    
-    DLog(@"Main event loop");
 }
 
 - (void)setRecordMode:(BOOL)record andAnimate:(BOOL)animate
@@ -1160,6 +1158,17 @@
     [playControlViewController showSessionOverlay];
 }
 
+- (void)stopSoundMaster
+{
+    [seqSetViewController stopSoundMaster];
+    [seqSetViewController resetSoundMaster];
+}
+
+- (void)startSoundMaster
+{
+    [seqSetViewController startSoundMaster];
+}
+
 - (void)stopAllPlaying
 {
     if(isRecording){
@@ -1209,8 +1218,6 @@
 
 - (void)increasePlayLocation
 {
-    DLog(@"Increase play location");
-    
     currentFret++;
     
     if (currentFret > LAST_FRET){

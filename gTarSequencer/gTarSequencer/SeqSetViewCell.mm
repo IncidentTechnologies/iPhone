@@ -505,8 +505,6 @@
 
 - (void)update
 {
-    DLog(@"Minimap update");
-    
     // update selected pattern:
     if ( track.selectedPatternDidChange )
     {

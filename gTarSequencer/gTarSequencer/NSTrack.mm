@@ -11,6 +11,7 @@
 @implementation NSTrack
 
 @synthesize m_patterns;
+@synthesize m_clips;
 @synthesize m_name;
 @synthesize m_volume;
 @synthesize m_muted;
@@ -184,6 +185,7 @@
     }
     
     NSClip * newClip = [[NSClip alloc] initWithName:@"clip" startbeat:0 endBeat:0 clipLength:0 clipStart:0 looping:NO loopStart:0 looplength:0 color:@"#FFFFFF"];
+    
     [self addClip:newClip];
     
     return newClip;

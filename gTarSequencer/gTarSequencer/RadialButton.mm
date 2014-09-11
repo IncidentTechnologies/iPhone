@@ -13,7 +13,7 @@
 
 #define ZOOMFACTOR 2
 #define ZOOM_FONT 40
-#define NORMAL_FONT 17
+#define NORMAL_FONT 18
 #define LARGE_FONT 30
 
 #define FONT_DEFAULT @"Avenir Next"
