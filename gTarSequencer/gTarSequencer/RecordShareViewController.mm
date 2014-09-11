@@ -826,7 +826,6 @@
 #pragma mark - Playband
 -(void)resetPlayband
 {
-    DLog(@"Reset playband");
     measurePlaybandView.userInteractionEnabled = NO;
     
     if(!isPlaybandAnimating){
@@ -1131,17 +1130,22 @@
 
 -(void)stopRecordPlayback
 {
-    [delegate stopSoundMaster];
-    [self stopMainEventLoop];
-    
     isAudioPlaying = NO;
     [self stopPlaybandAnimation];
     //[audioPlayer stop];
     [delegate recordPlaybackDidEnd];
 }
 
+- (void)delayedStopSound
+{
+    [delegate stopSoundMaster];
+    [self stopMainEventLoop];
+}
+
 - (void)songModelEndOfSong
 {
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(delayedStopSound) userInfo:nil repeats:NO];
+    
     [self stopRecordPlayback];
 }
 
@@ -1150,8 +1154,10 @@
     
     DLog(@"recordingSong is %@",recordingSong);
     
-    songModel = [[NSSongModel alloc] initWithSong:recordingSong andInstruments:instruments];
-    
+    if(songModel == nil){
+        songModel = [[NSSongModel alloc] initWithSong:recordingSong andInstruments:instruments];
+    }
+        
     [songModel startWithDelegate:self];
 }
 

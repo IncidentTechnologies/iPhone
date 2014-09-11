@@ -257,7 +257,7 @@
     activeSequencer = nil;
     
     //[self reloadFileTable];
-    [self showHideNewFileRow:YES];
+    [self showSelectionToggle:YES];
     
     //[loadTable reloadData];
     [self resetTableOffset:nil];
@@ -276,7 +276,7 @@
     selectMode = @"SaveCurrent";
     
     [profileView setHidden:YES];
-    [self showHideNewFileRow:NO];
+    [self showSelectionToggle:NO];
     //NSMutableArray * tempFileLoadSet = [[NSMutableArray alloc] initWithArray:fileLoadSet copyItems:YES];
     //fileLoadSet = nil;
     //[self.loadTable reloadData];
@@ -296,7 +296,7 @@
     selectMode = @"Load";
     
     [profileView setHidden:YES];
-    [self showHideNewFileRow:YES];
+    [self showSelectionToggle:YES];
     //NSMutableArray * tempFileLoadSet = [[NSMutableArray alloc] initWithArray:fileLoadSet copyItems:YES];
     //fileLoadSet = nil;
     //[self.loadTable reloadData];
@@ -353,8 +353,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(hideNewFileRow && indexPath.row == 0){
-        return 0;
+    if(showSelectionToggle && indexPath.row == 0){
+        return ROW_HEIGHT;
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && ![fileLoadSet[indexPath.row-1] isEqualToString:activeSequencer]){
         return 0;
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileLoadSet[indexPath.row-1] isEqualToString:DEFAULT_SET_NAME]){
@@ -388,7 +388,7 @@
     
     cell.parent = self;
     
-    if(indexPath.row > 0){
+    if(indexPath.row > 0 && indexPath.row <= [fileLoadSet count]){
         
         // Rows for previous files
         
@@ -414,9 +414,15 @@
         cell.isRenamable = YES;
     }
     
+    [cell.setButton setHidden:YES];
+    [cell.songButton setHidden:YES];
+    
     // iOS 7.1 seems to ignore heights
-    if(hideNewFileRow && indexPath.row == 0){
-        [cell setHidden:YES];
+    if((showSelectionToggle && indexPath.row == 0)){
+        cell.isRenamable = NO;
+        [cell.setButton setHidden:NO];
+        [cell.songButton setHidden:NO];
+        //[cell setHidden:YES];
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && ![fileLoadSet[indexPath.row-1] isEqualToString:activeSequencer]){
         [cell setHidden:YES];
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileLoadSet[indexPath.row-1] isEqualToString:DEFAULT_SET_NAME]){
@@ -573,25 +579,21 @@
 {
     int firstIndex = 0;
     
-    if([selectMode isEqualToString:@"Load"]){
-        firstIndex = 1;
-    }
-    
     if([fileLoadSet count] > firstIndex){
         [loadTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:firstIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
     }
 }
 
--(void)showHideNewFileRow:(BOOL)isHidden
+-(void)showSelectionToggle:(BOOL)isHidden
 {
-    hideNewFileRow = isHidden;
+    showSelectionToggle = isHidden;
 }
 
 -(void)deselectAllRows
 {
     DLog(@"Deselect all rows");
     @synchronized(self){
-        for(int i = 0; i < [loadTable numberOfRowsInSection:0]; i++){
+        for(int i = 0; i < [fileLoadSet count]+1; i++){
             NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
             [loadTable deselectRowAtIndexPath:indexPath animated:NO];
         }
@@ -604,11 +606,12 @@
     
     DLog(@"Deselect all rows except %i",cellToIgnore.row);
     
+    // TODO: figure out why this fails during scrolling - max 3 rows/screen?
     for(int i = 0; i < [loadTable numberOfRowsInSection:0]; i++){
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         OptionsViewCell * cellToCheck = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
         
-        if(cellToCheck != cell && cellToCheck.isSelected){
+        if(cellToCheck != nil && cellToCheck != cell && cellToCheck.isSelected){
             [loadTable deselectRowAtIndexPath:indexPath animated:NO];
             [cellToCheck setSelected:NO animated:NO];
         }

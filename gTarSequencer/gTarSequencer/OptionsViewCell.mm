@@ -28,6 +28,8 @@
 @synthesize deleteButton;
 @synthesize isNameEditing;
 @synthesize scroller;
+@synthesize setButton;
+@synthesize songButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -165,7 +167,7 @@
             [self showHideButton:fileLoad isHidden:NO withSelector:@selector(userDidSaveLoad) withAnimation:NO];
         }
         
-        [parent deselectAllRowsExcept:self];
+        //[parent deselectAllRowsExcept:self];
         
     }else{
         
@@ -389,6 +391,7 @@
     }
     
     [self resetFileNameIfBlank];
+    [parent enableScroll];
 }
 
 -(void)resetFileNameIfBlank
@@ -512,7 +515,7 @@
     
     if([parent.selectMode isEqualToString:@"Load"]){
         
-        if(![fileText.text isEqualToString:DEFAULT_SET_NAME]){
+        if(![fileText.text isEqualToString:DEFAULT_SET_NAME] && [setButton isHidden]){
             fileName.text = fileText.text;
             
             [fileText setHidden:YES];
@@ -544,6 +547,27 @@
 -(NSString *)getNameForFile
 {
     return fileText.text;
+}
+
+#pragma mark - Set and Song toggle
+
+- (IBAction)userDidSelectSetButton:(id)sender
+{
+    [setButton setBackgroundColor:darkGrayColor];
+    [setButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [songButton setBackgroundColor:[UIColor whiteColor]];
+    [songButton setTitleColor:darkGrayColor forState:UIControlStateNormal];
+}
+
+- (IBAction)userDidSelectSongButton:(id)sender
+{
+    [songButton setBackgroundColor:darkGrayColor];
+    [songButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [setButton setBackgroundColor:[UIColor whiteColor]];
+    [setButton setTitleColor:darkGrayColor forState:UIControlStateNormal];
+    
 }
 
 @end

@@ -108,8 +108,12 @@
         DLog(@"Load sequencer from disk at %@", filepath);
     }
     
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString * sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Sequences/" stringByAppendingString:[filepath stringByAppendingString:@".xml"]]];
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:filepath]) {
+    if ([fileManager fileExistsAtPath:sequenceFilepath]) {
         DLog(@"The sequencer save plist exists");
     } else {
         DLog(@"The sequencer save plist does not exist");

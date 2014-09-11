@@ -34,7 +34,7 @@ extern NSUser * g_loggedInUser;
     NSMutableArray * fileLoadSet;
     NSMutableArray * fileDateSet;
     
-    BOOL hideNewFileRow;
+    BOOL showSelectionToggle;
     
     UIButton * selectedButton;
     

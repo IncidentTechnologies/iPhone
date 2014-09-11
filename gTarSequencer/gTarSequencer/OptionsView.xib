@@ -6,12 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OptionsViewController">
             <connections>
-                <outlet property="backButton" destination="TWl-FN-uMc" id="9H1-Je-iv3"/>
+                <outlet property="backButton" destination="i7A-bz-l9Y" id="k6j-LS-bpv"/>
                 <outlet property="createNewButton" destination="llB-ay-7dV" id="N56-E8-QTs"/>
                 <outlet property="loadButton" destination="e8r-7T-odk" id="7Ra-CJ-8R0"/>
                 <outlet property="loadTable" destination="fnS-0x-ggp" id="9Sb-3t-0vH"/>
                 <outlet property="noSetsLabel" destination="oVT-z7-iuX" id="dNE-Es-KFG"/>
-                <outlet property="profileButton" destination="i7A-bz-l9Y" id="aOQ-tq-5UL"/>
+                <outlet property="profileButton" destination="TWl-FN-uMc" id="HdK-yF-3Bm"/>
                 <outlet property="profileInstrumentIcon" destination="E9o-2x-rMt" id="Uee-pz-EDQ"/>
                 <outlet property="profileInstrumentLabel" destination="1NA-yo-23l" id="Udj-rZ-hen"/>
                 <outlet property="profileInstrumentNameLabel" destination="Knh-VD-07q" id="PJc-zW-jNt"/>
@@ -42,32 +42,31 @@
                         <outlet property="delegate" destination="-1" id="OIa-91-tm3"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWl-FN-uMc" userLabel="BackButton">
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWl-FN-uMc" userLabel="ProfileButton">
                     <rect key="frame" x="114" y="0.0" width="114" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="userDidSelectBack:" destination="-1" eventType="touchUpInside" id="1pH-eW-fAe"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7A-bz-l9Y" userLabel="ProfileButton">
-                    <rect key="frame" x="0.0" y="0.0" width="114" height="55"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="55" id="IbK-11-6WC"/>
+                        <constraint firstAttribute="height" constant="55" id="w9P-A7-2DO"/>
                     </constraints>
                     <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="userDidSelectProfile:" destination="-1" eventType="touchUpInside" id="acM-wX-DF9"/>
+                        <action selector="userDidSelectProfile:" destination="-1" eventType="touchUpInside" id="uaY-3i-Qfv"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7A-bz-l9Y" userLabel="BackButton">
+                    <rect key="frame" x="0.0" y="0.0" width="114" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="IbK-11-6WC"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="userDidSelectBack:" destination="-1" eventType="touchUpInside" id="UQF-d3-2Lh"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRj-AQ-P9U" userLabel="SaveButton">

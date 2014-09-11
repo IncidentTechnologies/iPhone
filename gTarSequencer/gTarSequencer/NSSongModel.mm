@@ -11,6 +11,7 @@
 #import "NSNote.h"
 #import "NSSong.h"
 
+
 @implementation NSSongModel
 
 @synthesize m_song;
@@ -22,7 +23,7 @@
 @synthesize m_startBeat;
 @synthesize m_endBeat;
 
-#define SONG_MODEL_NOTE_FRAME_WIDTH (0.1f)
+#define SONG_MODEL_NOTE_FRAME_WIDTH (1.0 / 50.0)
 
 #define SCROLLING_BEATS_PER_SECOND 1.0
 #define LOOP_GAP 2.0
@@ -70,7 +71,7 @@
 
 - (void)startWithDelegate:(id)delegate
 {
-    [self startWithDelegate:delegate andBeatOffset:0 fastForward:NO isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
+    [self startWithDelegate:delegate andBeatOffset:-0.97 fastForward:NO isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
 }
 
 - (void)startWithDelegate:(id)delegate
@@ -154,9 +155,6 @@
 
 - (double)incrementTimeSerialAccess:(double)delta
 {
-    
-    DLog(@"Increment time serial access with BPS %f",m_beatsPerSecond);
-    
     m_currentBeat += (delta * m_beatsPerSecond);
     m_percentageComplete = m_currentBeat / m_lengthBeats;
     
@@ -198,8 +196,6 @@
 
 - (void)checkFrames
 {
-    DLog(@"Current beat is %f",m_currentBeat);
-    
     for(NSTrack * track in m_song.m_tracks){
     
         // Get corresponding instrument
@@ -219,14 +215,10 @@
             
             for(NSNote * note in clip.m_notes){
                 
-                if(m_currentBeat > note.m_beatstart - SONG_MODEL_NOTE_FRAME_WIDTH/2.0 && m_currentBeat < note.m_beatstart + SONG_MODEL_NOTE_FRAME_WIDTH/2.0){
+                if(m_currentBeat >= note.m_beatstart - SONG_MODEL_NOTE_FRAME_WIDTH && m_currentBeat <= note.m_beatstart + SONG_MODEL_NOTE_FRAME_WIDTH){
                     
                     [instTrack.m_instrument.m_sampler.audio pluckString:note.m_stringvalue];
                     
-                    // PLAY THE NOTE
-                    DLog(@"Play the note at %@",note.m_value);
-                    
-                    // MARK THAT IT'S PLAYED
                     
                 }
             }

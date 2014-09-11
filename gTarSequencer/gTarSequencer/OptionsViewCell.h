@@ -44,9 +44,15 @@
 
 @property (weak, nonatomic) IBOutlet UIButton * deleteButton;
 
+@property (weak, nonatomic) IBOutlet UIButton * setButton;
+@property (weak, nonatomic) IBOutlet UIButton * songButton;
+
 @property (nonatomic) UIScrollView * scroller;
 @property (nonatomic) BOOL isRenamable;
 @property (nonatomic) BOOL isNameEditing;
 @property (nonatomic) int rowid;
+
+- (IBAction)userDidSelectSetButton:(id)sender;
+- (IBAction)userDidSelectSongButton:(id)sender;
 
 @end

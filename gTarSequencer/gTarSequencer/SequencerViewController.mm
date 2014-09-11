@@ -501,6 +501,8 @@
 
 - (void)loadFromName:(NSString *)filename
 {
+    DLog(@"Load from name %@",filename);
+    
     // First clear any sound playing
     [seqSetViewController resetSoundMaster];
     
@@ -1166,6 +1168,7 @@
 
 - (void)startSoundMaster
 {
+    [seqSetViewController resetSoundMaster];
     [seqSetViewController startSoundMaster];
 }
 
