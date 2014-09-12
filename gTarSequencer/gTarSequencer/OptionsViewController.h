@@ -12,12 +12,13 @@
 @protocol OptionsDelegate <NSObject>
 
 - (void) saveWithName:(NSString *)filename;
-- (void) loadFromName:(NSString *)filename;
+- (void) loadFromName:(NSString *)filename andType:(NSString *)type;
 - (void) renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
 - (void) createNewSaveName:(NSString *)filename;
 - (void) deleteWithName:(NSString *)filename andType:(NSString *)type;
 
 - (void) viewSeqSetWithAnimation:(BOOL)animate;
+- (void) viewRecordShareWithAnimation:(BOOL)animate;
 
 - (void) loggedOut:(BOOL)animate;
 
@@ -75,6 +76,7 @@ extern NSUser * g_loggedInUser;
 @property (nonatomic) BOOL isFirstLaunch;
 
 @property (retain, nonatomic) NSString * activeSequencer;
+@property (retain, nonatomic) NSString * activeSong;
 
 @property (weak, nonatomic) id<OptionsDelegate> delegate;
 

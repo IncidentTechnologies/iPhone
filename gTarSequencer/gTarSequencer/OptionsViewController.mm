@@ -23,6 +23,7 @@
 @synthesize isFirstLaunch;
 @synthesize delegate;
 @synthesize activeSequencer;
+@synthesize activeSong;
 @synthesize createNewButton;
 @synthesize saveCurrentButton;
 @synthesize backButton;
@@ -152,7 +153,7 @@
     
     if([fileLoadSet count] > 0){
         [self userDidSelectLoad:loadButton];
-        [self highlightActiveSequencer];
+        [self highlightActive];
         [self hideNoSetsLabel];
     }else{
         [self userDidSelectLoad:loadButton];
@@ -201,12 +202,22 @@
 #pragma mark - Save Load Actions
 - (void)userDidLoadFile:(NSString *)filename
 {
-    DLog(@"user did load %@",filename);
-    
-    activeSequencer = filename;
-    [delegate loadFromName:filename];
-    
-    [delegate viewSeqSetWithAnimation:YES];
+    if([loadedTableType isEqualToString:TABLE_SETS]){
+        DLog(@"user did load SET %@",filename);
+        
+        activeSequencer = filename;
+        [delegate loadFromName:filename andType:loadedTableType];
+        
+        [delegate viewSeqSetWithAnimation:YES];
+    }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+        DLog(@"user did load SONG %@",filename);
+        
+        activeSong = filename;
+        [delegate loadFromName:filename andType:loadedTableType];
+        
+        [delegate viewRecordShareWithAnimation:YES];
+        
+    }
 }
 
 - (void)userDidSaveFile:(NSString *)filename
@@ -227,24 +238,48 @@
 
 - (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname
 {
-    // move file to newname
-    DLog(@"user did move %@ to %@",filename,newname);
-    
-    if([activeSequencer isEqualToString:filename]){
-        activeSequencer = newname;
+    if([loadedTableType isEqualToString:TABLE_SETS]){
+        
+        DLog(@"user did move set %@ to %@",filename,newname);
+        
+        if([activeSequencer isEqualToString:filename]){
+            activeSequencer = newname;
+        }
+        
+    }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+        
+        DLog(@"user did move song %@ to %@",filename,newname);
+        
+        if([activeSong isEqualToString:filename]){
+            activeSong = newname;
+        }
+        
     }
     
     [delegate renameFromName:filename toName:newname andType:loadedTableType];
     [self reloadFileTable];
+    
 }
 
 - (void)userDidDeleteFile:(NSString *)filename
 {
-    DLog(@"user did delete as %@",filename);
-    if([activeSequencer isEqualToString:filename]){
-        activeSequencer = @"";
+    if([loadedTableType isEqualToString:TABLE_SETS]){
+        
+        DLog(@"user did delete as %@",filename);
+        if([activeSequencer isEqualToString:filename]){
+            activeSequencer = @"";
+        }
+    }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+        
+        
+        DLog(@"user did delete as %@",filename);
+        if([activeSong isEqualToString:filename]){
+            activeSong = @"";
+        }
     }
+    
     [delegate deleteWithName:filename andType:loadedTableType];
+    
     
 }
 
@@ -408,10 +443,19 @@
         cell.fileDate.text = dateString;
         cell.isRenamable = NO;
         
-        if([cell.fileText.text isEqualToString:activeSequencer]){
-            [cell setAsActiveSequencer];
-        }else{
-            [cell unsetAsActiveSequencer];
+        if([loadedTableType isEqualToString:TABLE_SETS]){
+            if([cell.fileText.text isEqualToString:activeSequencer]){
+                [cell setAsActiveSequencer];
+            }else{
+                [cell unsetAsActiveSequencer];
+            }
+        }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+            if([cell.fileText.text isEqualToString:activeSong]){
+                [cell setAsActiveSong];
+            }else{
+                [cell unsetAsActiveSong];
+            }
+
         }
         
     }else{
@@ -569,15 +613,23 @@
     
 }
 
--(void)highlightActiveSequencer
+-(void)highlightActive
 {
     for(NSIndexPath * indexPath in loadTable.indexPathsForVisibleRows){
         OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
         
-        if([cell.fileText.text isEqualToString:activeSequencer]){
-            [cell setAsActiveSequencer];
-        }else if(!cell.isSelected){
-            [cell unsetAsActiveSequencer];
+        if([loadedTableType isEqualToString:TABLE_SETS]){
+            if([cell.fileText.text isEqualToString:activeSequencer]){
+                [cell setAsActiveSequencer];
+            }else if(!cell.isSelected){
+                [cell unsetAsActiveSequencer];
+            }
+        }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+            if([cell.fileText.text isEqualToString:activeSong]){
+                [cell setAsActiveSong];
+            }else if(!cell.isSelected){
+                [cell unsetAsActiveSong];
+            }
         }
     }
 }

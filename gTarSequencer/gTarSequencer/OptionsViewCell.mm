@@ -65,6 +65,7 @@
 - (void)sharedInit
 {
     isActiveSequencer = NO;
+    isActiveSong = NO;
     isEditingMode = NO;
     
     darkGrayColor = [UIColor colorWithRed:50/255.0 green:56/255.0 blue:59/255.0 alpha:1.0];
@@ -111,15 +112,39 @@
 {
     if(!isRenamable){
         isActiveSequencer = YES;
-        fileText.textColor = activeColor;
-        [self applyBoldFont:YES toLabel:fileText];
-        [activeIndicator setBackgroundColor:blueColor];
+        [self setActive];
     }
 }
 
 - (void)unsetAsActiveSequencer
 {
     isActiveSequencer = NO;
+    [self unsetActive];
+}
+
+- (void)setAsActiveSong
+{
+    if(!isRenamable){
+        isActiveSong = YES;
+        [self setActive];
+    }
+}
+
+- (void)unsetAsActiveSong
+{
+    isActiveSong = NO;
+    [self unsetActive];
+}
+
+- (void)setActive
+{
+    fileText.textColor = activeColor;
+    [self applyBoldFont:YES toLabel:fileText];
+    [activeIndicator setBackgroundColor:blueColor];
+}
+
+- (void)unsetActive
+{
     if(self.isSelected){
         fileText.textColor = [UIColor whiteColor];
     }else{
@@ -149,7 +174,7 @@
         self.contentView.backgroundColor = darkGrayColor;
         self.backgroundColor = darkGrayColor;
         
-        fileText.textColor = (isActiveSequencer && !isRenamable) ? activeColor : [UIColor whiteColor];
+        fileText.textColor = ((isActiveSequencer || isActiveSong) && !isRenamable) ? activeColor : [UIColor whiteColor];
         
         [fileLoad setHidden:NO];
         [self setImageForFileLoad:parent.selectMode];
@@ -188,7 +213,7 @@
                 self.backgroundColor = [UIColor whiteColor];
             }
             
-            fileText.textColor = (isActiveSequencer && !isRenamable) ? activeColor : darkGrayColor;
+            fileText.textColor = ((isActiveSequencer || isActiveSong) && !isRenamable) ? activeColor : darkGrayColor;
             [fileLoad setHidden:YES];
             
             [fileText setHidden:NO];
@@ -205,7 +230,7 @@
     }
     
     // Check font for active sequencer
-    if(isActiveSequencer && !isRenamable){
+    if((isActiveSequencer || isActiveSong) && !isRenamable){
         [self applyBoldFont:YES toLabel:fileText];
     }else{
         [self applyBoldFont:NO toLabel:fileText];

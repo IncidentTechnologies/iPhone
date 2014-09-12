@@ -222,4 +222,10 @@
     return newTrack;
 }
 
+- (void)renameToName:(NSString *)name andDescription:(NSString *)description
+{
+    m_title = name;
+    m_description = description;
+}
+
 @end

@@ -15,6 +15,7 @@
 @interface OptionsViewCell : UITableViewCell <UITextFieldDelegate>
 {
     BOOL isActiveSequencer;
+    BOOL isActiveSong;
     BOOL isEditingMode;
     
     UIColor * activeColor;
@@ -31,6 +32,8 @@
 - (void)endNameEditing;
 - (void)setAsActiveSequencer;
 - (void)unsetAsActiveSequencer;
+- (void)setAsActiveSong;
+- (void)unsetAsActiveSong;
 - (NSString *)getNameForFile;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 

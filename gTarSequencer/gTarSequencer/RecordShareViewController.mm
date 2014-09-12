@@ -38,9 +38,6 @@
 @synthesize shareEmailButton;
 @synthesize shareSMSButton;
 @synthesize shareSoundcloudButton;
-@synthesize shareEmailSelector;
-@synthesize shareSMSSelector;
-@synthesize shareSoundcloudSelector;
 @synthesize shareView;
 @synthesize shareScreen;
 @synthesize cancelButton;
@@ -214,7 +211,7 @@
     return -1;
 }
 
-- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence
+- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence activeSong:(NSString *)activeSong
 {
     if([patternData count] > 0){
         [self hideNoSessionOverlay];
@@ -226,7 +223,7 @@
     [self drawPatternsOnMeasures:patternData];
     
     if(patternData != nil && [patternData count] > 0){
-        [self startRecording:patternData withTempo:tempo andSoundMaster:m_soundMaster activeSequence:activeSequence];
+        [self startRecording:patternData withTempo:tempo andSoundMaster:m_soundMaster activeSequence:activeSequence activeSong:nil];
     }
     
     [self resetProgressView];
@@ -640,21 +637,9 @@
     [self drawBackButtonForView:shareView withX:shareScreen.frame.origin.x];
     
     // Setup buttons
-    shareEmailButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    shareEmailButton.layer.borderWidth = 1.0f;
-    shareEmailButton.layer.cornerRadius = 5.0;
-    
-    shareSMSButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    shareSMSButton.layer.borderWidth = 1.0f;
-    shareSMSButton.layer.cornerRadius = 5.0;
-    
-    shareSoundcloudButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    shareSoundcloudButton.layer.borderWidth = 1.0f;
-    shareSoundcloudButton.layer.cornerRadius = 5.0;
-    
-    shareEmailSelector.layer.cornerRadius = 5.0;
-    shareSMSSelector.layer.cornerRadius = 5.0;
-    shareSoundcloudSelector.layer.cornerRadius = 5.0;
+    shareEmailButton.layer.cornerRadius = 35.0;
+    shareSMSButton.layer.cornerRadius = 35.0;
+    shareSoundcloudButton.layer.cornerRadius = 35.0;
     
     selectedShareType = @"Email";
     
@@ -688,31 +673,30 @@
         [shareScreen setFrame:onScreenFrame];
     }];
     
+    [self setRecordDefaultText];
+    
 }
 
 - (IBAction)userDidSelectShare:(id)sender
 {
     UIButton * senderButton = (UIButton *)sender;
     
-    // reset selector backgrounds
-    [shareEmailSelector setBackgroundColor:[UIColor colorWithRed:36/255.0 green:36/255.0 blue:36/255.0 alpha:1.0]];
-    [shareSMSSelector setBackgroundColor:[UIColor colorWithRed:36/255.0 green:36/255.0 blue:36/255.0 alpha:1.0]];
-    [shareSoundcloudSelector setBackgroundColor:[UIColor colorWithRed:36/255.0 green:36/255.0 blue:36/255.0 alpha:1.0]];
+    NSString * songname = [[self renameSongToSongname] stringByAppendingString:@".m4a"];
     
-    if(senderButton == shareEmailButton || senderButton == shareEmailSelector){
+    if(senderButton == shareEmailButton){
         
         selectedShareType = @"Email";
-        [shareEmailSelector setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        [delegate userDidLaunchEmailWithAttachment:songname];
         
-    }else if(senderButton == shareSMSButton || senderButton == shareSMSSelector){
+    }else if(senderButton == shareSMSButton){
         
         selectedShareType = @"SMS";
-        [shareSMSSelector setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        [delegate userDidLaunchSMSWithAttachment:songname];
         
-    }else if(senderButton == shareSoundcloudButton || senderButton == shareSoundcloudSelector){
+    }else if(senderButton == shareSoundcloudButton){
         
         selectedShareType = @"SoundCloud";
-        [shareSoundcloudSelector setBackgroundColor:[UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:1.0]];
+        [delegate userDidLaunchSoundCloudAuthWithFile:songname];
         
     }
 }
@@ -740,25 +724,6 @@
     
 }
 
-- (void)userDidShare:(id)sender
-{
-    
-    NSString * songname = [[self renameSongToSongname] stringByAppendingString:@".m4a"];
-    
-    if([selectedShareType isEqualToString:@"Email"]){
-        
-        [delegate userDidLaunchEmailWithAttachment:songname];
-        
-    }else if([selectedShareType isEqualToString:@"SMS"]){
-        
-        [delegate userDidLaunchSMSWithAttachment:songname];
-        
-    }else if([selectedShareType isEqualToString:@"SoundCloud"]){
-        
-        [delegate userDidLaunchSoundCloudAuthWithFile:songname];
-        
-    }
-}
 
 #pragma mark - Drawing
 - (void)initRoundedCorners:(UIView *)view
@@ -933,7 +898,7 @@
 }
 
 #pragma mark - Recording
--(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence
+-(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence activeSong:(NSString *)activeSong
 {
     if(loadedPattern != patternData){
         
@@ -959,7 +924,7 @@
 
 -(void)beginRecordSession
 {
-    recordingSong = [[NSSong alloc] initWithId:0 Title:loadedSequence author:g_loggedInUser.m_username description:@"" tempo:loadedTempo looping:false loopstart:0 loopend:0];
+    recordingSong = [[NSSong alloc] initWithId:0 Title:[self generateNextRecordedSongName] author:g_loggedInUser.m_username description:@"" tempo:loadedTempo looping:false loopstart:0 loopend:0];
     
     fileNode = [loadedSoundMaster generateFileoutNode:DEFAULT_SONG_NAME];
     
@@ -1222,19 +1187,24 @@
     
     //[self checkIfRecordingNameReady];
     
-    /*if(!isRecordingNameReady){
+    //if(!isRecordingNameReady){
      
      if([self checkDuplicateSongName:songNameField.text]){
-     [self alertDuplicateSoundName];
+         [self alertDuplicateSongName];
      }
      
-     [self resetSongNameIfBlank];
-     }*/
+     //[self resetSongNameIfBlank];
+     //}
     
     [self resetSongNameIfBlank];
     
     // hide styles
     [self clearAttributedStringForText:songNameField];
+    
+    [delegate renameFromName:recordingSong.m_title toName:songNameField.text andType:@"Songs"];
+    [recordingSong renameToName:songNameField.text andDescription:@"Description"];
+    [recordingSong saveToFile:recordingSong.m_title];
+    
 }
 
 -(void)resetSongNameIfBlank
@@ -1270,52 +1240,85 @@
 
 -(BOOL)checkDuplicateSongName:(NSString *)filename
 {
-    /*NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
-     
-     for(int i = 0; i < [tempList count]; i++){
-     if([tempList[i] isEqualToString:filename]){
-     return YES;
-     }
-     }*/
+    NSArray * tempList = [self getRecordedSongSet];
     
+    for(NSString * tempname in tempList){
+        
+        NSString * comparename = [tempname stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
+        comparename = [comparename stringByReplacingOccurrencesOfString:@".xml" withString:@""];
+        
+        if([comparename isEqualToString:filename] && ![comparename isEqualToString:recordingSong.m_title]){
+            return YES;
+        }
+        
+    }
     return NO;
+}
+
+-(void)alertDuplicateSongName
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duplicate Song Name" message:@"Cannot override an existing song." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 - (void)setRecordDefaultText
 {
-    /*
-     NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
-     
-     DLog(@"CustomSampleList is %@",tempList);
-     
-     int customCount = 0;
-     
-     // Look through Samples, get the max CustomXXXX name and label +1
-     for(NSString * filename in tempList){
-     
-     if(!([filename rangeOfString:@"Song"].location == NSNotFound)){
-     
-     NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Song"] withString:@""];
-     int numFromSuffix = [customSuffix intValue];
-     
-     customCount = MAX(customCount,numFromSuffix);
-     }
-     }
-     
-     customCount++;
-     */
+    songNameField.text = recordingSong.m_title;
+    
+}
+
+- (NSArray *)getRecordedSongSet
+{
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSError * error;
+    NSString * directoryPath = [paths objectAtIndex:0];
+    directoryPath = [directoryPath stringByAppendingPathComponent:@"Songs"];
+    
+    NSArray * tempList = (NSArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
+    
+    return tempList;
+}
+
+- (NSString *)generateNextRecordedSongName
+{
+    NSArray * tempList = [self getRecordedSongSet];
+    
+    DLog(@"SongList is %@",tempList);
+    
+    int customCount = 0;
+    
+    // Look through Samples, get the max CustomXXXX name and label +1
+    for(NSString * filename in tempList){
+        
+        if(!([filename rangeOfString:@"Song"].location == NSNotFound)){
+            
+            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Song"] withString:@""];
+            customSuffix = [customSuffix stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
+            customSuffix = [customSuffix stringByReplacingOccurrencesOfString:@".xml" withString:@""];
+            int numFromSuffix = [customSuffix intValue];
+            
+            customCount = MAX(customCount,numFromSuffix);
+        }
+    }
+    
+    customCount++;
+    
+    //
     
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPaddingCharacter:@"0"];
     [numberFormatter setPaddingPosition:NSNumberFormatterPadBeforePrefix];
     [numberFormatter setMinimumIntegerDigits:3];
     
-    NSNumber * number = [NSNumber numberWithInt:1];
+    NSNumber * number = [NSNumber numberWithInt:customCount];
     
     NSString * numberString = [numberFormatter stringFromNumber:number];
     
-    songNameField.text = [@"Song" stringByAppendingString:numberString];
+    NSLog(@"Name to %@",[@"Song" stringByAppendingString:numberString]);
     
+    return [@"Song" stringByAppendingString:numberString];
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

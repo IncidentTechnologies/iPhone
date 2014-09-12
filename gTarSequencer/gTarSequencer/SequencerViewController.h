@@ -58,6 +58,7 @@ extern NSUser * g_loggedInUser;
     BOOL forceRecord;
     
     // Save/Load
+    NSString * activeSong;
     NSString * activeSequencer;
     NSString * sequencerToSave;
     

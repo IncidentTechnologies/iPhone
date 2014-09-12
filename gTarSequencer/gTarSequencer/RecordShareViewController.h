@@ -29,6 +29,8 @@
 - (void) userDidLaunchSMSWithAttachment:(NSString *)filename;
 - (void) userDidLaunchSoundCloudAuthWithFile:(NSString *)filename;
 
+- (void) renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
+
 - (void) forceShowSessionOverlay;
 - (void) forceHideSessionOverlay;
 
@@ -89,7 +91,7 @@ extern NSUser * g_loggedInUser;
 }
 
 - (void)reloadInstruments;
-- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence;
+- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence activeSong:(NSString *)activeSong;
 - (IBAction)userDidBack:(id)sender;
 - (BOOL)showHideSessionOverlay;
 - (void)openShareScreen;
@@ -101,7 +103,6 @@ extern NSUser * g_loggedInUser;
 - (void)interruptRecording;
 
 - (IBAction)userDidSelectShare:(id)sender;
-- (IBAction)userDidShare:(id)sender;
 
 @property (weak, nonatomic) id<RecordShareDelegate> delegate;
 
@@ -119,11 +120,6 @@ extern NSUser * g_loggedInUser;
 @property (weak, nonatomic) IBOutlet UIButton * shareSMSButton;
 @property (weak, nonatomic) IBOutlet UIButton * shareSoundcloudButton;
 //@property (weak, nonatomic) IBOutlet UIButton * shareFacebookButton;
-
-@property (weak, nonatomic) IBOutlet UIButton * shareEmailSelector;
-@property (weak, nonatomic) IBOutlet UIButton * shareSMSSelector;
-@property (weak, nonatomic) IBOutlet UIButton * shareSoundcloudSelector;
-//@property (weak, nonatomic) IBOutlet UIButton * shareFacebookSelector;
 
 @property (retain, nonatomic) UIButton * cancelButton;
 

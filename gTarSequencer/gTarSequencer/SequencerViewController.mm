@@ -24,6 +24,8 @@
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
 #define DEFAULT_STATE_NAME @"sequenceCurrentState"
+#define TABLE_SETS @"Sequences"
+#define TABLE_SONGS @"Songs"
 
 @implementation SequencerViewController
 
@@ -364,7 +366,7 @@
         
         if(patternData != nil){
             SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-            [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:activeSequencer];
+            [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:activeSequencer activeSong:activeSong];
         }
         
         if([recordShareController showHideSessionOverlay]){
@@ -441,6 +443,19 @@
     
 }
 
+- (void)viewRecordShareWithAnimation:(BOOL)animate
+{
+    if(animate){
+        [UIView animateWithDuration:0.3 animations:^(void){
+            [activeMainView setAlpha:0.0];
+        } completion:^(BOOL finished){
+            [self selectNavChoice:@"Share" withShift:NO];
+        }];
+    }else{
+        [self selectNavChoice:@"Share" withShift:NO];
+    }
+}
+
 - (void)viewSelectedInstrument
 {
     [self selectNavChoice:@"Instrument" withShift:NO];
@@ -496,28 +511,46 @@
     [self saveContext:nil force:YES];
 }
 
-- (void)loadFromName:(NSString *)filename
+- (void)loadFromName:(NSString *)filename andType:(NSString *)type
 {
-    DLog(@"Load from name %@",filename);
-    
-    // First clear any sound playing
-    [seqSetViewController resetSoundMaster];
-    
-    activeSequencer = filename;
-    filename = [@"usr_" stringByAppendingString:filename];
-    
-    [self loadStateFromDisk:filename];
-    [self saveContext:nil force:YES];
-    
-    if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
-        [self relaunchFTUTutorial];
+    if([type isEqualToString:TABLE_SETS]){
+        DLog(@"Load set from name %@",filename);
+        
+        // First clear any sound playing
+        [seqSetViewController resetSoundMaster];
+        
+        activeSequencer = filename;
+        filename = [@"usr_" stringByAppendingString:filename];
+        
+        [self loadStateFromDisk:filename];
+        [self saveContext:nil force:YES];
+        
+        if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
+            [self relaunchFTUTutorial];
+        }
+    }else if([type isEqualToString:TABLE_SONGS]){
+        DLog(@"Load song from name %@",filename);
+        
+        // First clear any sound playing
+        [seqSetViewController resetSoundMaster];
+        
+        activeSong = filename;
+        filename = [@"usr_" stringByAppendingString:filename];
+        
+        // TODO: load song into record share view
     }
 }
 
 - (void)renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type
 {
-    if([activeSequencer isEqualToString:filename]){
-        activeSequencer = newname;
+    if([type isEqualToString:TABLE_SETS]){
+        if([activeSequencer isEqualToString:filename]){
+            activeSequencer = newname;
+        }
+    }else if([type isEqualToString:TABLE_SONGS]){
+        if([activeSong isEqualToString:filename]){
+            activeSong = newname;
+        }
     }
     
     filename = [@"usr_" stringByAppendingString:filename];
@@ -538,8 +571,10 @@
     if(!result)
         DLog(@"Error moving");
     
-    if([activeSequencer isEqualToString:newname]){
-        [self saveContext:[@"usr_" stringByAppendingString:newname] force:YES];
+    if([type isEqualToString:TABLE_SETS]){
+        if([activeSequencer isEqualToString:newname]){
+            [self saveContext:[@"usr_" stringByAppendingString:newname] force:YES];
+        }
     }
     [self saveContext:nil force:YES];
 }
@@ -877,7 +912,7 @@
             
             if(patternData != nil){
                 SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-                [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:activeSequencer];
+                [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:activeSequencer activeSong:activeSong];
             }
             
             if(animate){
