@@ -14,6 +14,7 @@
 @synthesize m_name;
 @synthesize m_tempo;
 @synthesize m_volume;
+@synthesize m_id;
 @synthesize m_selectedTrackIndex;
 
 #define DEFAULT_STATE_NAME @"sequenceCurrentState"
@@ -69,6 +70,8 @@
         
         [[[sequence GetChildWithName:@"header"] GetChildWithName:@"volume"] GetAttributeValueWithName:@"value"].GetValueDouble(&m_volume);
         
+        [[[sequence GetChildWithName:@"header"] GetChildWithName:@"id"] GetAttributeValueWithName:@"value"].GetValueInt(&m_id);
+        
         m_tracks = [[NSMutableArray alloc] init];
         
         m_selectedTrackIndex = 0;
@@ -102,6 +105,9 @@
         m_name = name;
         m_tempo = tempo;
         m_volume = volume;
+        
+        // TODO: get from server
+        m_id = 0;
         
         m_selectedTrackIndex = 0;
 	}
@@ -153,6 +159,11 @@
     tempNode = new XMPNode((char *)"volume", headerNode);
     tempNode->AddAttribute(new XMPAttribute((char *)"value", m_volume));
     headerNode->AddChild(tempNode);
+    
+    tempNode = new XMPNode((char *)"id", headerNode);
+    tempNode->AddAttribute(new XMPAttribute((char *)"value", m_id));
+    headerNode->AddChild(tempNode);
+    
     
     for(NSTrack * track in m_tracks){
         contentNode->AddChild([track convertToSequenceXmp]);

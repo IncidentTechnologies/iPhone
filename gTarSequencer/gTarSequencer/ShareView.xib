@@ -9,6 +9,7 @@
                 <outlet property="shareEmailButton" destination="nGk-Vj-O73" id="1VL-C4-6mz"/>
                 <outlet property="shareSMSButton" destination="DbZ-mL-NMT" id="IaS-JQ-b2f"/>
                 <outlet property="shareSoundcloudButton" destination="Omu-VE-57I" id="ByX-cI-th3"/>
+                <outlet property="songDescriptionField" destination="Vsp-Ox-0D9" id="dsn-jq-RaV"/>
                 <outlet property="songNameField" destination="YWl-xD-DCd" id="DFr-HV-xvY"/>
             </connections>
         </placeholder>

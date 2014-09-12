@@ -42,6 +42,7 @@
 @synthesize shareScreen;
 @synthesize cancelButton;
 @synthesize songNameField;
+@synthesize songDescriptionField;
 @synthesize playbandView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -211,7 +212,7 @@
     return -1;
 }
 
-- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence activeSong:(NSString *)activeSong
+- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
 {
     if([patternData count] > 0){
         [self hideNoSessionOverlay];
@@ -652,6 +653,8 @@
     
     [songNameField setFont:[UIFont fontWithName:FONT_DEFAULT size:22.0]];
     
+    songDescriptionField.delegate = self;
+    
     [shareView setHidden:YES];
     
 }
@@ -898,7 +901,7 @@
 }
 
 #pragma mark - Recording
--(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence activeSong:(NSString *)activeSong
+-(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
 {
     if(loadedPattern != patternData){
         
@@ -924,7 +927,7 @@
 
 -(void)beginRecordSession
 {
-    recordingSong = [[NSSong alloc] initWithId:0 Title:[self generateNextRecordedSongName] author:g_loggedInUser.m_username description:@"" tempo:loadedTempo looping:false loopstart:0 loopend:0];
+    recordingSong = [[NSSong alloc] initWithTitle:[self generateNextRecordedSongName] author:g_loggedInUser.m_username description:@"" tempo:loadedTempo looping:false loopstart:0 loopend:0 sequenceName:loadedSequence.m_name sequenceId:loadedSequence.m_id];
     
     fileNode = [loadedSoundMaster generateFileoutNode:DEFAULT_SONG_NAME];
     
@@ -1137,6 +1140,38 @@
     [self stopRecordPlayback];
 }
 
+#pragma mark - Song Description Field
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [songDescriptionField resignFirstResponder];
+    
+    [recordingSong renameToName:recordingSong.m_title andDescription:songDescriptionField.text];
+    [recordingSong saveToFile:recordingSong.m_title];
+    
+}
+- (void)textViewDidChange:(UITextView *)textView
+{
+    int maxLength = 200;
+    
+    if([songDescriptionField.text length] > maxLength){
+        songDescriptionField.text = [songDescriptionField.text substringToIndex:maxLength];
+    }
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if([text isEqualToString:@"\n"]){
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - Song Name Field
 - (void)songNameFieldStartEdit:(id)sender
 {
@@ -1163,6 +1198,7 @@
     [textField setTextColor:[UIColor whiteColor]];
     [textField setAttributedText:str];
 }
+
 
 -(void)songNameFieldDidChange:(id)sender
 {
@@ -1202,7 +1238,7 @@
     [self clearAttributedStringForText:songNameField];
     
     [delegate renameFromName:recordingSong.m_title toName:songNameField.text andType:@"Songs"];
-    [recordingSong renameToName:songNameField.text andDescription:@"Description"];
+    [recordingSong renameToName:songNameField.text andDescription:songDescriptionField.text];
     [recordingSong saveToFile:recordingSong.m_title];
     
 }

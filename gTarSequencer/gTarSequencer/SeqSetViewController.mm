@@ -119,6 +119,7 @@
         filepath = DEFAULT_STATE_NAME;
         DLog(@"Load state from disk");
     }else{
+        filepath = [@"usr_" stringByAppendingString:filepath];
         DLog(@"Load sequencer from disk at %@", filepath);
     }
     

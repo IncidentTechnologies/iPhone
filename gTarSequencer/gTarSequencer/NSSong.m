@@ -21,7 +21,41 @@
 @synthesize m_looping;
 @synthesize m_loopstart;
 @synthesize m_loopend;
+@synthesize m_sequenceName;
+@synthesize m_sequenceId;
 
+- (id)initWithXMPFilename:(NSString *)filename
+{
+    if(filename == nil || [filename length] == 0){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if(self){
+        
+        // check mainbundle
+        
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        
+        NSString * sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Songs/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
+        
+        char * filepath = (char *)[sequenceFilepath UTF8String];
+        
+        DLog(@"initWithXMPFilename Songs/%@.xml",filename);
+        
+        XMPTree MyTree(filepath);
+        
+        XMPNode * root = MyTree.GetRootNode()->FindChildByName((char *)"xmp")->FindChildByName((char *)"song");
+        
+        self = [self initWithXMPNode:root];
+        
+        DLog(@"Finished init?");
+        
+    }
+    
+    return self;
+}
 
 - (id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -51,14 +85,20 @@
         
         [[[m_song GetChildWithName:@"header"] GetChildWithName:@"loopsettings"] GetAttributeValueWithName:@"loopend"].GetValueInt(&m_loopend);
         
+        [[[m_song GetChildWithName:@"header"] GetChildWithName:@"sequence"] GetAttributeValueWithName:@"xmpid"].GetValueInt(&m_sequenceId);
+        
+        m_sequenceName = [[NSString alloc] initWithUTF8String:[[[m_song GetChildWithName:@"header"] GetChildWithName:@"sequence"] GetAttributeValueWithName:@"name"].GetPszValue()];
+        
         DLog(@"SONG id | %li",m_id);
         DLog(@"SONG title | %@",m_title);
         DLog(@"SONG author | %@",m_author);
         DLog(@"SONG description | %@",m_description);
         DLog(@"SONG tempo | %li",m_tempo);
-        DLog(@"SONG looping | %i",m_looping);
-        DLog(@"SONG loopstart | %li",m_loopstart);
-        DLog(@"SONG loopend | %li",m_loopend);
+        DLog(@"SONG loopsettings looping | %i",m_looping);
+        DLog(@"SONG loopsettings loopstart | %li",m_loopstart);
+        DLog(@"SONG loopsettings loopend | %li",m_loopend);
+        DLog(@"SONG sequence name | %@",m_sequenceName);
+        DLog(@"SONG sequence xmpid | %li",m_sequenceId);
         
         // Init the narrative/input children
         m_tracks = [[NSMutableArray alloc] init];
@@ -122,6 +162,11 @@
     tempNode->AddAttribute(new XMPAttribute((char *)"loopend", m_loopend));
     headerNode->AddChild(tempNode);
     
+    tempNode = new XMPNode((char *)"sequence", headerNode);
+    tempNode->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_sequenceName UTF8String]));
+    tempNode->AddAttribute(new XMPAttribute((char *)"xmpid", m_sequenceId));
+    headerNode->AddChild(tempNode);
+    
     for(NSTrack * track in m_tracks){
         contentNode->AddChild([track convertToSongXmp]);
     }
@@ -171,7 +216,7 @@
 
 }
 
-- (id)initWithId:(long)sid Title:(NSString *)title author:(NSString *)author description:(NSString *)description tempo:(long)tempo looping:(bool)looping loopstart:(long)loopstart loopend:(long)loopend
+- (id)initWithTitle:(NSString *)title author:(NSString *)author description:(NSString *)description tempo:(long)tempo looping:(bool)looping loopstart:(long)loopstart loopend:(long)loopend sequenceName:(NSString *)sequenceName sequenceId:(long)sequenceId
 {
 	
     self = [super init];
@@ -181,7 +226,9 @@
 		
 		m_tracks = [[NSMutableArray alloc] init];
 		
-        m_id = sid;
+        // TODO: get from server
+        m_id = 0;
+        
         m_title = title;
         m_author = author;
         m_description = description;
@@ -189,6 +236,9 @@
         m_looping = looping;
         m_loopstart = loopstart;
         m_loopend = loopend;
+        
+        m_sequenceName = sequenceName;
+        m_sequenceId = sequenceId;
 	}
 	
 	return self;

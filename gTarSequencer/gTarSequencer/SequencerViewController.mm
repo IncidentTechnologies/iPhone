@@ -366,7 +366,7 @@
         
         if(patternData != nil){
             SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-            [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:activeSequencer activeSong:activeSong];
+            [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
         }
         
         if([recordShareController showHideSessionOverlay]){
@@ -520,7 +520,6 @@
         [seqSetViewController resetSoundMaster];
         
         activeSequencer = filename;
-        filename = [@"usr_" stringByAppendingString:filename];
         
         [self loadStateFromDisk:filename];
         [self saveContext:nil force:YES];
@@ -538,6 +537,12 @@
         filename = [@"usr_" stringByAppendingString:filename];
         
         // TODO: load song into record share view
+        NSSong * loadedSong = [[NSSong alloc] initWithXMPFilename:filename];
+        
+        // Set the active sequencer accordingly
+        [self loadStateFromDisk:loadedSong.m_sequenceName];
+        [self saveContext:nil force:YES];
+        
     }
 }
 
@@ -912,7 +917,7 @@
             
             if(patternData != nil){
                 SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-                [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:activeSequencer activeSong:activeSong];
+                [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
             }
             
             if(animate){

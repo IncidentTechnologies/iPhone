@@ -16,6 +16,7 @@
     NSString * m_name;
     double m_tempo;
     double m_volume;
+    long m_id;
     
     NSMutableArray * m_tracks;
 }
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) NSString * m_name;
 @property (nonatomic) double m_tempo;
 @property (nonatomic) double m_volume;
+@property (nonatomic) long m_id;
 
 @property (nonatomic) int m_selectedTrackIndex;
 

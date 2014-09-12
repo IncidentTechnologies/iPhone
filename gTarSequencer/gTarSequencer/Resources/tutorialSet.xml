@@ -6,6 +6,7 @@
             </name>
             <tempo value="120.000000" />
             <volume value="0.384348" />
+            <id value="0"/>
         </header>
         <content>
             <track name="ROCK" volume="1.000000" muted="0">

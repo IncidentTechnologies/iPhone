@@ -46,7 +46,7 @@
 
 extern NSUser * g_loggedInUser;
 
-@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,NSSongModelDelegate>
+@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate>
 {
     NSMutableArray * loadedPattern;
     NSMutableArray * instruments;
@@ -70,7 +70,7 @@ extern NSUser * g_loggedInUser;
     
     float secondperbeat;
     
-    NSString * loadedSequence;
+    NSSequence * loadedSequence;
     float loadedTempo;
     SoundMaster * loadedSoundMaster;
     
@@ -91,7 +91,7 @@ extern NSUser * g_loggedInUser;
 }
 
 - (void)reloadInstruments;
-- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSString *)activeSequence activeSong:(NSString *)activeSong;
+- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
 - (IBAction)userDidBack:(id)sender;
 - (BOOL)showHideSessionOverlay;
 - (void)openShareScreen;
@@ -127,6 +127,7 @@ extern NSUser * g_loggedInUser;
 @property (retain, nonatomic) UIView * shareView;
 
 @property (nonatomic, weak) IBOutlet UITextField * songNameField;
+@property (nonatomic, weak) IBOutlet UITextView * songDescriptionField;
 
 @property (nonatomic, weak) IBOutlet UIView * playbandView;
 

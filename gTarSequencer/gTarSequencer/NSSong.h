@@ -23,6 +23,9 @@
     long m_loopstart;
     long m_loopend;
     
+    NSString * m_sequenceName;
+    long m_sequenceId;
+    
     // TODO: loopsettings
     
     NSMutableArray * m_tracks;
@@ -37,6 +40,8 @@
 @property (nonatomic) bool m_looping;
 @property (nonatomic) long m_loopstart;
 @property (nonatomic) long m_loopend;
+@property (nonatomic, readonly) NSString * m_sequenceName;
+@property (nonatomic) long m_sequenceId;
 
 @property (nonatomic, readonly) NSMutableArray * m_tracks;
 
@@ -44,13 +49,14 @@
 
 @property (nonatomic, assign) double duration;
 
+- (id)initWithXMPFilename:(NSString *)filename;
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
 
 - (XMPNode *)convertToXmp;
 - (void)printTree;
 - (void)saveToFile:(NSString *)filename;
 
-- (id)initWithId:(long)sid Title:(NSString *)title author:(NSString *)author description:(NSString *)description tempo:(long)tempo looping:(bool)looping loopstart:(long)loopstart loopend:(long)loopend;
+- (id)initWithTitle:(NSString *)title author:(NSString *)author description:(NSString *)description tempo:(long)tempo looping:(bool)looping loopstart:(long)loopstart loopend:(long)loopend sequenceName:(NSString *)sequenceName sequenceId:(long)sequenceId;
 
 - (void)addTrack:(NSTrack *)track;
 - (NSTrack *)trackWithName:(NSString *)name volume:(double)volume mute:(bool)mute instrument:(NSInstrument *)inst;
