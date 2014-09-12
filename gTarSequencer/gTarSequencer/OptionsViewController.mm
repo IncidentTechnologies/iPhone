@@ -15,6 +15,8 @@
 
 #define DEFAULT_SET_NAME @"Tutorial"
 #define DEFAULT_FILE_TEXT @"Save as"
+#define TABLE_SETS @"Sequences"
+#define TABLE_SONGS @"Songs"
 
 @implementation OptionsViewController
 
@@ -89,6 +91,7 @@
 
 - (void)initOptions
 {
+    loadedTableType = TABLE_SETS;
     
     // Check for first launch
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOptions"]){
@@ -101,24 +104,17 @@
 
 - (void)reloadFileTable
 {
-    [self loadWithSets];
-    
-    if([fileLoadSet count] > 0){
-        [self userDidSelectLoad:loadButton];
-        [self highlightActiveSequencer];
-        [self hideNoSetsLabel];
-    }else{
-        [self userDidSelectLoad:loadButton];
-        [self showNoSetsLabel];
-    }
+    [self loadTableWith:loadedTableType];
 }
 
-- (void)loadWithSets
+- (void)loadTableWith:(NSString *)type
 {
+    loadedTableType = type;
+    
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSError * error;
     NSString * directoryPath = [paths objectAtIndex:0];
-    directoryPath = [directoryPath stringByAppendingPathComponent:@"Sequences"];
+    directoryPath = [directoryPath stringByAppendingPathComponent:type];
     
     //fileSet = [[NSMutableDictionary alloc] init];
     
@@ -153,49 +149,17 @@
     }
     
     [loadTable reloadData];
+    
+    if([fileLoadSet count] > 0){
+        [self userDidSelectLoad:loadButton];
+        [self highlightActiveSequencer];
+        [self hideNoSetsLabel];
+    }else{
+        [self userDidSelectLoad:loadButton];
+        [self showNoSetsLabel];
+    }
 }
 
-- (void)loadWithSongs
-{
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSError * error;
-    NSString * directoryPath = [paths objectAtIndex:0];
-    directoryPath = [directoryPath stringByAppendingPathComponent:@"Songs"];
-    
-    //fileSet = [[NSMutableDictionary alloc] init];
-    
-    fileDateSet = [[NSMutableArray alloc] init];
-    fileLoadSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
-    
-    // Exclude unrelated files
-    for(int i = 0; i < [fileLoadSet count]; i++){
-        if([fileLoadSet[i] rangeOfString:@"usr_song_"].location == NSNotFound){
-            
-            [fileLoadSet removeObjectAtIndex:i--];
-            
-        }else{
-            
-            NSString * filePath = [directoryPath stringByAppendingString:@"/"];
-            filePath = [filePath stringByAppendingString:fileLoadSet[i]];
-            NSDictionary * attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
-            
-            // remove usr_ prefix
-            fileLoadSet[i] = [fileLoadSet[i] stringByReplacingCharactersInRange:[fileLoadSet[i] rangeOfString:@"usr_song_"] withString:@""];
-            
-            fileLoadSet[i] = [fileLoadSet[i] stringByReplacingCharactersInRange:[fileLoadSet[i] rangeOfString:@".xml"] withString:@""];
-            
-            fileDateSet[i] = [attrs objectForKey:NSFileModificationDate];
-            
-        }
-    }
-    
-    // Sort by date order
-    if([fileLoadSet count] > 0){
-        [self sortFilesByDates];
-    }
-    
-    [loadTable reloadData];
-}
 
 // TODO: this can probably be done nicer with comparators
 - (void)sortFilesByDates
@@ -270,7 +234,7 @@
         activeSequencer = newname;
     }
     
-    [delegate renameFromName:filename toName:newname];
+    [delegate renameFromName:filename toName:newname andType:loadedTableType];
     [self reloadFileTable];
 }
 
@@ -280,7 +244,7 @@
     if([activeSequencer isEqualToString:filename]){
         activeSequencer = @"";
     }
-    [delegate deleteWithName:filename];
+    [delegate deleteWithName:filename andType:loadedTableType];
     
 }
 

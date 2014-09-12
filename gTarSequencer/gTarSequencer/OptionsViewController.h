@@ -13,9 +13,9 @@
 
 - (void) saveWithName:(NSString *)filename;
 - (void) loadFromName:(NSString *)filename;
-- (void) renameFromName:(NSString *)filename toName:(NSString *)newname;
+- (void) renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
 - (void) createNewSaveName:(NSString *)filename;
-- (void) deleteWithName:(NSString *)filename;
+- (void) deleteWithName:(NSString *)filename andType:(NSString *)type;
 
 - (void) viewSeqSetWithAnimation:(BOOL)animate;
 
@@ -39,6 +39,8 @@ extern NSUser * g_loggedInUser;
     UIButton * selectedButton;
     
     OptionsViewCell * cellToDeselect;
+    
+    NSString * loadedTableType;
 }
 
 - (IBAction)userDidSelectCreateNew:(id)sender;
@@ -59,8 +61,7 @@ extern NSUser * g_loggedInUser;
 - (void)reloadUserProfile;
 - (void)reloadFileTable;
 - (void)unloadView;
-- (void)loadWithSets;
-- (void)loadWithSongs;
+- (void)loadTableWith:(NSString *)type;
 
 - (void)deselectAllRowsExcept:(OptionsViewCell *)cell;
 

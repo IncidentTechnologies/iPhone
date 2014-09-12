@@ -144,9 +144,7 @@
     
     DLog(@"Name to %@",m_title);
     
-    filename = [@"usr_song_" stringByAppendingString:filename];
-    filename = [filename stringByAppendingString:@"_"];
-    filename = [filename stringByAppendingString:[NSString stringWithFormat:@"%li",m_id]];
+    filename = [@"usr_" stringByAppendingString:filename];
     
     NSFileManager * fileManager = [NSFileManager defaultManager];
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

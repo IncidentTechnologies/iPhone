@@ -272,10 +272,7 @@
     }
     
     DLog(@"Copied tutorial file from %@ to %@",defaultSetPath,newDefaultSetPath);
-    
-    
 }
-
 
 #pragma mark - Left Navigator Delegate
 
@@ -517,21 +514,23 @@
     }
 }
 
-- (void)renameFromName:(NSString *)filename toName:(NSString *)newname
+- (void)renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type
 {
     if([activeSequencer isEqualToString:filename]){
         activeSequencer = newname;
     }
     
-    filename = [@"Sequences/usr_" stringByAppendingString:filename];
+    filename = [@"usr_" stringByAppendingString:filename];
     filename = [filename stringByAppendingString:@".xml"];
-    NSString * newnamepath = [@"Sequences/usr_" stringByAppendingString:newname];
+    
+    NSString * newnamepath = [@"usr_" stringByAppendingString:newname];
     newnamepath = [newnamepath stringByAppendingString:@".xml"];
     
     // move
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * currentPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
-    NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newnamepath];
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:type];
+    NSString * currentPath = [directory stringByAppendingPathComponent:filename];
+    NSString * newPath = [directory stringByAppendingPathComponent:newnamepath];
     NSError * error = NULL;
     
     BOOL result = [[NSFileManager defaultManager] moveItemAtPath:currentPath toPath:newPath error:&error];
@@ -592,7 +591,7 @@
     }
 }
 
-- (void)deleteWithName:(NSString *)filename
+- (void)deleteWithName:(NSString *)filename andType:(NSString *)type
 {
     /*NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
      NSError * error;
@@ -611,7 +610,8 @@
     filename = [@"usr_" stringByAppendingString:filename];
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * currentPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:filename];
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:type];
+    NSString * currentPath = [[directory stringByAppendingPathComponent:filename] stringByAppendingString:@".xml"];
     NSError * error = NULL;
     
     BOOL result = [[NSFileManager defaultManager] removeItemAtPath:currentPath error:&error];

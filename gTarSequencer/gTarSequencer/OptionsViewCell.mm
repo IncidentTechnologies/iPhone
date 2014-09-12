@@ -14,6 +14,8 @@
 
 //#define DEFAULT_SET_NAME @"Tutorial"
 #define DEFAULT_FILE_TEXT @"Save as"
+#define TABLE_SETS @"Sequences"
+#define TABLE_SONGS @"Songs"
 
 @implementation OptionsViewCell
 
@@ -568,7 +570,7 @@
     [songButton setTitleColor:darkGrayColor forState:UIControlStateNormal];
     [[songButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:18.0]];
     
-    [parent loadWithSets];
+    [parent loadTableWith:TABLE_SETS];
 }
 
 - (IBAction)userDidSelectSongButton:(id)sender
@@ -581,7 +583,7 @@
     [setButton setTitleColor:darkGrayColor forState:UIControlStateNormal];
     [[setButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:18.0]];
     
-    [parent loadWithSongs];
+    [parent loadTableWith:TABLE_SONGS];
     
 }
 
