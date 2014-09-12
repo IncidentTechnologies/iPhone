@@ -16,6 +16,8 @@
 @synthesize m_volume;
 @synthesize m_selectedTrackIndex;
 
+#define DEFAULT_STATE_NAME @"sequenceCurrentState"
+
 - (id)initWithXMPFilename:(NSString *)filename
 {
     if(filename == nil || [filename length] == 0){
@@ -161,13 +163,14 @@
 
 -(void)saveToFile:(NSString *)filename
 {
-
     // First change the name
-    NSString * sequenceName = [filename stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
-    
-    m_name = sequenceName;
-    
-    DLog(@"Name to %@",sequenceName);
+    if(![filename isEqualToString:DEFAULT_STATE_NAME]){
+        NSString * sequenceName = [filename stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
+        
+        m_name = sequenceName;
+        
+        DLog(@"Name to %@",sequenceName);
+    }
     
     NSFileManager * fileManager = [NSFileManager defaultManager];
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

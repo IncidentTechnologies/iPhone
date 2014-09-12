@@ -101,7 +101,7 @@
 
 - (void)reloadFileTable
 {
-    [self loadFileSet];
+    [self loadWithSets];
     
     if([fileLoadSet count] > 0){
         [self userDidSelectLoad:loadButton];
@@ -113,7 +113,7 @@
     }
 }
 
-- (void)loadFileSet
+- (void)loadWithSets
 {
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSError * error;
@@ -151,6 +151,50 @@
     if([fileLoadSet count] > 0){
         [self sortFilesByDates];
     }
+    
+    [loadTable reloadData];
+}
+
+- (void)loadWithSongs
+{
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSError * error;
+    NSString * directoryPath = [paths objectAtIndex:0];
+    directoryPath = [directoryPath stringByAppendingPathComponent:@"Songs"];
+    
+    //fileSet = [[NSMutableDictionary alloc] init];
+    
+    fileDateSet = [[NSMutableArray alloc] init];
+    fileLoadSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
+    
+    // Exclude unrelated files
+    for(int i = 0; i < [fileLoadSet count]; i++){
+        if([fileLoadSet[i] rangeOfString:@"usr_song_"].location == NSNotFound){
+            
+            [fileLoadSet removeObjectAtIndex:i--];
+            
+        }else{
+            
+            NSString * filePath = [directoryPath stringByAppendingString:@"/"];
+            filePath = [filePath stringByAppendingString:fileLoadSet[i]];
+            NSDictionary * attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
+            
+            // remove usr_ prefix
+            fileLoadSet[i] = [fileLoadSet[i] stringByReplacingCharactersInRange:[fileLoadSet[i] rangeOfString:@"usr_song_"] withString:@""];
+            
+            fileLoadSet[i] = [fileLoadSet[i] stringByReplacingCharactersInRange:[fileLoadSet[i] rangeOfString:@".xml"] withString:@""];
+            
+            fileDateSet[i] = [attrs objectForKey:NSFileModificationDate];
+            
+        }
+    }
+    
+    // Sort by date order
+    if([fileLoadSet count] > 0){
+        [self sortFilesByDates];
+    }
+    
+    [loadTable reloadData];
 }
 
 // TODO: this can probably be done nicer with comparators

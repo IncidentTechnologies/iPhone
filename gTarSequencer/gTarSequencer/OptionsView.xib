@@ -60,7 +60,7 @@
                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7A-bz-l9Y" userLabel="BackButton">
                     <rect key="frame" x="0.0" y="0.0" width="114" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.20784313725490194" green="0.63921568627450975" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="IbK-11-6WC"/>
                     </constraints>

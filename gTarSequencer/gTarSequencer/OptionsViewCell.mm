@@ -333,6 +333,14 @@
 {
     isNameEditing = NO;
     
+    // hide keyboard
+    if([fileName isFirstResponder]){
+        
+        [fileName resignFirstResponder];
+        [parent resetTableOffset:self];
+        [parent enableScroll];
+    }
+    
     // save a rename
     if([parent.selectMode isEqualToString:@"Load"] && ![fileName.text isEqualToString:@""] && ![fileName.text isEqualToString:DEFAULT_SET_NAME]){
         
@@ -352,7 +360,6 @@
         [self setSelected:NO animated:NO];
     }
     
-    // hide keyboard
     [self endNameEditing];
     [self clearFileAttributedString];
 }
@@ -405,10 +412,10 @@
         fileName.text = previousNameText;
     }else if([emptyName isEqualToString:@""]){
         fileName.text = DEFAULT_FILE_TEXT;
-    }else if([parent isDuplicateFilename:nameString]){
+    }/*else if([parent isDuplicateFilename:nameString]){
         fileName.text = [parent generateNextSetName];
         [self checkIfNameReady];
-    }
+    }*/
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -555,18 +562,26 @@
 {
     [setButton setBackgroundColor:darkGrayColor];
     [setButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [[setButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:22.0]];
     
     [songButton setBackgroundColor:[UIColor whiteColor]];
     [songButton setTitleColor:darkGrayColor forState:UIControlStateNormal];
+    [[songButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:18.0]];
+    
+    [parent loadWithSets];
 }
 
 - (IBAction)userDidSelectSongButton:(id)sender
 {
     [songButton setBackgroundColor:darkGrayColor];
     [songButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [[songButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:22.0]];
     
     [setButton setBackgroundColor:[UIColor whiteColor]];
     [setButton setTitleColor:darkGrayColor forState:UIControlStateNormal];
+    [[setButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:18.0]];
+    
+    [parent loadWithSongs];
     
 }
 

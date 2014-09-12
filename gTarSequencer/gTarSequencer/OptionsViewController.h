@@ -59,6 +59,8 @@ extern NSUser * g_loggedInUser;
 - (void)reloadUserProfile;
 - (void)reloadFileTable;
 - (void)unloadView;
+- (void)loadWithSets;
+- (void)loadWithSongs;
 
 - (void)deselectAllRowsExcept:(OptionsViewCell *)cell;
 

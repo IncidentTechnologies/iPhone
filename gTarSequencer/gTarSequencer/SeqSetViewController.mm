@@ -53,6 +53,8 @@
         
         sequence = [[NSSequence alloc] initWithXMPFilename:filename];
         
+        [self refreshSequenceName:filename];
+        
         [self setInstrumentsFromData];
         
         [delegate setTempo:sequence.m_tempo];
@@ -94,6 +96,18 @@
         [self launchFTUTutorial];
     }else{
         [self endTutorialIfOpen];
+    }
+}
+
+- (void)refreshSequenceName:(NSString *)filename
+{
+    if(![filename isEqualToString:DEFAULT_STATE_NAME]){
+        // Refresh the name in case it's been updated
+        NSString * sequenceName = [filename stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
+        sequence.m_name = sequenceName;
+        
+        [self saveContext:filename force:YES];
+        [self saveContext:nil force:YES];
     }
 }
 

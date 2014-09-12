@@ -539,8 +539,7 @@
     if(!result)
         DLog(@"Error moving");
     
-    
-    if(activeSequencer == newname){
+    if([activeSequencer isEqualToString:newname]){
         [self saveContext:[@"usr_" stringByAppendingString:newname] force:YES];
     }
     [self saveContext:nil force:YES];
