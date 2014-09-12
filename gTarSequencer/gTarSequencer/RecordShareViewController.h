@@ -48,7 +48,7 @@ extern NSUser * g_loggedInUser;
 
 @interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate>
 {
-    NSMutableArray * loadedPattern;
+    //NSMutableArray * loadedPattern;
     NSMutableArray * instruments;
     NSMutableArray * tracks;
     NSMutableArray * tickmarks;
@@ -60,7 +60,7 @@ extern NSUser * g_loggedInUser;
     double prevTranspose[MAX_TRACKS];
     
     // Recording
-    NSSong * recordingSong;
+    NSSong * recordingSong;    
     NSTimer * recordTimer;
     BOOL isWritingFile;
     NSSongModel * songModel;
@@ -91,6 +91,8 @@ extern NSUser * g_loggedInUser;
 }
 
 - (void)reloadInstruments;
+- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
+
 - (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
 - (IBAction)userDidBack:(id)sender;
 - (BOOL)showHideSessionOverlay;

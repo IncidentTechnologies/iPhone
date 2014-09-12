@@ -184,12 +184,37 @@
         return [m_clips firstObject];
     }
     
-    NSClip * newClip = [[NSClip alloc] initWithName:@"clip" startbeat:0 endBeat:0 clipLength:0 clipStart:0 looping:NO loopStart:0 looplength:0 color:@"#FFFFFF"];
+    NSClip * newClip = [[NSClip alloc] initWithName:@"clip" startbeat:0 endBeat:0 clipLength:0 clipStart:0 looping:NO loopStart:0 looplength:0 color:@"#FFFFFF" muted:NO];
     
     [self addClip:newClip];
     
     return newClip;
     
+}
+
+- (NSClip *)lastClipComparePattern:(NSString *)pattern andMuted:(BOOL)muted
+{
+    NSClip * newClip = [[NSClip alloc] initWithName:pattern startbeat:0 endBeat:0 clipLength:0 clipStart:0 looping:NO loopStart:0 looplength:0 color:@"#FFFFFF" muted:muted];
+    
+    if([m_clips count] == 0){
+        
+        [self addClip:newClip];
+        
+        return newClip;
+        
+    }else{
+        
+        NSClip * currentClip = [m_clips lastObject];
+        
+        if(currentClip.m_muted != muted || ![currentClip.m_name isEqualToString:pattern]){
+            
+            [self addClip:newClip];
+            
+            return newClip;
+        }
+        
+        return currentClip;
+    }
 }
 
 #pragma mark Track Actions

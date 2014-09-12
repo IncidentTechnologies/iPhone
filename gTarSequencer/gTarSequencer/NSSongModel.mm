@@ -213,13 +213,15 @@
         
         for(NSClip * clip in track.m_clips){
             
-            for(NSNote * note in clip.m_notes){
-                
-                if(m_currentBeat >= note.m_beatstart - SONG_MODEL_NOTE_FRAME_WIDTH && m_currentBeat <= note.m_beatstart + SONG_MODEL_NOTE_FRAME_WIDTH){
+            if(!clip.m_muted){
+                for(NSNote * note in clip.m_notes){
                     
-                    [instTrack.m_instrument.m_sampler.audio pluckString:note.m_stringvalue];
-                    
-                    
+                    if(m_currentBeat >= note.m_beatstart - SONG_MODEL_NOTE_FRAME_WIDTH && m_currentBeat <= note.m_beatstart + SONG_MODEL_NOTE_FRAME_WIDTH){
+                        
+                        [instTrack.m_instrument.m_sampler.audio pluckString:note.m_stringvalue];
+                        
+                        
+                    }
                 }
             }
         }

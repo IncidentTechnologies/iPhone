@@ -20,6 +20,7 @@
 @synthesize m_looping;
 @synthesize m_loopstart;
 @synthesize m_looplength;
+@synthesize m_muted;
 
 
 - (id)initWithXMPNode:(XMPNode *)xmpNode
@@ -54,6 +55,8 @@
         
         [m_clip GetAttributeValueWithName:@"looplength"].GetValueInt(&m_looplength);
         
+        [m_clip GetAttributeValueWithName:@"muted"].GetValueBool(&m_muted);
+        
         DLog(@"CLIP name | %@",m_name);
         DLog(@"CLIP color | %@",m_color);
         DLog(@"CLIP startbeat | %li",m_startbeat);
@@ -63,6 +66,7 @@
         DLog(@"CLIP looping | %i",m_looping);
         DLog(@"CLIP loopstart | %li",m_loopstart);
         DLog(@"CLIP looplength | %li",m_looplength);
+        DLog(@"CLIP muted | %i",m_muted);
         
         m_notes = [[NSMutableArray alloc] init];
         
@@ -82,7 +86,7 @@
     
 }
 
-- (id)initWithName:(NSString *)name startbeat:(long)startbeat endBeat:(long)endbeat clipLength:(long)cliplength clipStart:(long)clipstart looping:(bool)looping loopStart:(long)loopstart looplength:(long)looplength color:(NSString *)color
+- (id)initWithName:(NSString *)name startbeat:(long)startbeat endBeat:(long)endbeat clipLength:(long)cliplength clipStart:(long)clipstart looping:(bool)looping loopStart:(long)loopstart looplength:(long)looplength color:(NSString *)color muted:(bool)muted
 {
 	
     self = [super init];
@@ -100,6 +104,7 @@
         m_looping = looping;
         m_loopstart = loopstart;
         m_looplength = looplength;
+        m_muted = muted;
         
         m_color = color;
         
@@ -132,6 +137,8 @@
     
     node->AddAttribute(new XMPAttribute((char *)"color", (char *)[m_color UTF8String]));
     
+    node->AddAttribute(new XMPAttribute((char *)"muted", m_muted));
+    
     for(NSNote * note in m_notes){
         node->AddChild([note convertToSongXmp]);
     }
@@ -144,5 +151,9 @@
     [m_notes addObject:note];
 }
 
+- (void)setMute:(bool)muted
+{
+    m_muted = muted;
+}
 
 @end

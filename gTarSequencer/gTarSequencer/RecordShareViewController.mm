@@ -212,9 +212,33 @@
     return -1;
 }
 
+- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
+{
+    if(song != nil){
+        recordingSong = song;
+        [self hideNoSessionOverlay];
+    }else{
+        [self showNoSessionOverlay];
+    }
+    
+    
+    
+    [self setMeasures:[self countMeasuresFromRecordedSong]];
+    [self drawPatternsOnMeasures];
+    
+    if(song != nil){
+        [self startRecording:nil withTempo:song.m_tempo andSoundMaster:m_soundMaster activeSequence:activeSequence activeSong:nil];
+    }
+    
+    [self resetProgressView];
+    
+    // ensure record playback gets refreshed
+    [self stopRecordPlayback];
+}
+
 - (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
 {
-    if([patternData count] > 0){
+    /*if([patternData count] > 0){
         [self hideNoSessionOverlay];
     }else{
         [self showNoSessionOverlay];
@@ -230,7 +254,7 @@
     [self resetProgressView];
     
     // ensure record playback gets refreshed
-    [self stopRecordPlayback];
+    [self stopRecordPlayback];*/
 }
 
 - (void)setMeasures:(int)newNumMeasures
@@ -261,6 +285,28 @@
         [t setFrame:CGRectMake(t.frame.origin.x, t.frame.origin.y, newContentSize.width+2, t.frame.size.height)];
     }
     //}
+}
+
+- (int)countMeasuresFromRecordedSong
+{
+    float maxMeasure = 0;
+    
+    for(NSTrack * track in recordingSong.m_tracks){
+        for(NSClip * clip in track.m_clips){
+            for(NSNote * note in clip.m_notes){
+                maxMeasure = MAX(maxMeasure,note.m_beatstart);
+            }
+        }
+    }
+    
+    maxMeasure /= 4.0;
+    
+    return (int) ceil(maxMeasure);
+}
+
+- (void)drawPatternsOnMeasures
+{
+    
 }
 
 -(void)drawPatternsOnMeasures:(NSMutableArray *)patternData
@@ -850,7 +896,8 @@
         playMeasure++;
     }
     
-    if(playMeasure > [loadedPattern count]){
+    if(playMeasure > [self countMeasuresFromRecordedSong]){
+    //if(playMeasure > [loadedPattern count]){
         [self stopPlaybandAnimation];
     }
 }
@@ -895,19 +942,22 @@
     
     // Animate to the end
     isPlaybandAnimating = NO;
-    [self movePlaybandToMeasure:[loadedPattern count]-1 andFret:FRETS_ON_GTAR-1 andHide:YES];
-    
+    //[self movePlaybandToMeasure:[loadedPattern count]-1 andFret:FRETS_ON_GTAR-1 andHide:YES];
+    [self movePlaybandToMeasure:[self countMeasuresFromRecordedSong]-1 andFret:FRETS_ON_GTAR-1 andHide:YES];
     
 }
 
 #pragma mark - Recording
 -(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
 {
-    if(loadedPattern != patternData){
+    //if(loadedPattern != patternData){
+    
+    // TODO: reinstate this?
+    //if(![activeSong isEqualToString:recordingSong.m_title]){
         
         isWritingFile = YES;
         
-        loadedPattern = patternData;
+        //loadedPattern = patternData;
         loadedTempo = tempo;
         loadedSoundMaster = m_soundMaster;
         loadedSequence = activeSequence;
@@ -915,19 +965,20 @@
         r_measure = 0;
         r_beat = 0;
         
-        DLog(@"Start recording %@",loadedPattern);
+        //DLog(@"Start recording %@",loadedPattern);
         [self showProcessingOverlay];
         [delegate forceShowSessionOverlay];
         
         [self resetAudio];
         [self showRecordOverlay];
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(beginRecordSession) userInfo:nil repeats:NO];
-    }
+    //}
+    //}
 }
 
 -(void)beginRecordSession
 {
-    recordingSong = [[NSSong alloc] initWithTitle:[self generateNextRecordedSongName] author:g_loggedInUser.m_username description:@"" tempo:loadedTempo looping:false loopstart:0 loopend:0 sequenceName:loadedSequence.m_name sequenceId:loadedSequence.m_id];
+    //recordingSong = [[NSSong alloc] initWithTitle:[self generateNextRecordedSongName] author:g_loggedInUser.m_username description:@"" tempo:loadedTempo looping:false loopstart:0 loopend:0 sequenceName:loadedSequence.m_name sequenceId:loadedSequence.m_id];
     
     fileNode = [loadedSoundMaster generateFileoutNode:DEFAULT_SONG_NAME];
     
@@ -966,52 +1017,37 @@
 
 -(void)recordToFile
 {
-    NSArray * measure = [loadedPattern objectAtIndex:r_measure];
     
-    // loop through measures
-    @synchronized(measure){
-        for(NSDictionary * measureinst in measure){
-            
-            int instIndex = [[measureinst objectForKey:@"instrument"] intValue];
-            NSTrack * track = [instruments objectAtIndex:[self getIndexForInstrument:instIndex]];
-            NSTrack * songTrack = [recordingSong trackWithName:track.m_name volume:track.m_volume mute:track.m_muted instrument:track.m_instrument];
-            NSClip * songClip = [songTrack firstClip];
-            
-            // fret for the beat
-            NSMutableArray * frets = [measureinst objectForKey:@"frets"];
-            for(NSDictionary * f in frets){
-                int fretindex = [[f objectForKey:@"fretindex"] intValue];
-                if(fretindex == r_beat%FRETS_ON_GTAR && ![[f objectForKey:@"ismuted"] boolValue]){
-                    
-                    // strings for the fret
-                    NSString * strings = [f objectForKey:@"strings"];
-                    for(int s = 0; s < STRINGS_ON_GTAR; s++){
-                        if([strings characterAtIndex:s] == '1'){
+    @synchronized(recordingSong){
+        for(NSTrack * track in recordingSong.m_tracks){
+            for(NSClip * clip in track.m_clips){
+                if(!clip.m_muted){
+                    for(NSNote * note in clip.m_notes){
+                        
+                        if(note.m_beatstart == r_beat/4.0){
+                            
+                            NSTrack * instTrack = [instruments objectAtIndex:[self getIndexForInstrument:track.m_instrument.m_id]];
                             
                             // Record to m4a file
-                            [track.m_instrument.m_sampler.audio pluckString:s];
-                            
-                            // Save to XMP
-                            NSNote * newNote = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:r_beat/4.0 duration:0.25];
-                            [songClip addNote:newNote];
+                            [instTrack.m_instrument.m_sampler.audio pluckString:note.m_stringvalue];
+                                
                         }
                     }
-                    
                 }
             }
         }
+        
     }
     
     // todo: buffer this
     fileNode->SaveSamples(secondperbeat);
-    
     
     r_beat++;
     if(r_beat%FRETS_ON_GTAR==FRETS_ON_GTAR-1){
         r_measure++;
     }
     
-    if(r_measure == [loadedPattern count]){
+    if(r_measure == [self countMeasuresFromRecordedSong]){
         [self stopRecording];
     }
     
@@ -1079,20 +1115,20 @@
         [self resumePlaybandAnimation];
     }
     
-    [delegate startSoundMaster];
-    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+    //[delegate startSoundMaster];
+    //[self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
     
-    //[audioPlayer play];
+    [audioPlayer play];
     
     
 }
 
 -(void)pauseRecordPlayback
 {
-    [delegate stopSoundMaster];
-    [self stopMainEventLoop];
+    //[delegate stopSoundMaster];
+    //[self stopMainEventLoop];
     
-    //[audioPlayer pause];
+    [audioPlayer pause];
     [self pausePlaybandAnimation];
 }
 
@@ -1100,7 +1136,7 @@
 {
     isAudioPlaying = NO;
     [self stopPlaybandAnimation];
-    //[audioPlayer stop];
+    [audioPlayer stop];
     [delegate recordPlaybackDidEnd];
 }
 
@@ -1119,7 +1155,6 @@
 
 - (void)initSongModel
 {
-    
     DLog(@"recordingSong is %@",recordingSong);
     
     if(songModel == nil){

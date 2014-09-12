@@ -364,9 +364,9 @@
         [recordShareController reloadInstruments];
         [self stopAll];
         
-        if(patternData != nil){
-            SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-            [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+        if(recordingSong != nil){
+            //SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+            //[recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
         }
         
         if([recordShareController showHideSessionOverlay]){
@@ -775,70 +775,14 @@
                 [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
             }
             
-            
-            //
-            // RECORD
-            //
+            // RECORD XMP
             if(isRecording){
                 
-                int patternIndex = trackToPlay.selectedPatternIndex;
-                if(trackToPlay.m_muted){
-                    patternIndex = 4;
-                }
+                NSTrack * songTrack = [recordingSong trackWithName:trackToPlay.m_name volume:trackToPlay.m_volume mute:trackToPlay.m_muted instrument:trackToPlay.m_instrument];
+                NSClip * songClip = [songTrack lastClipComparePattern:trackToPlay.selectedPattern.m_name andMuted:trackToPlay.m_muted];
                 
-                BOOL patternRepeat = NO;
-                if(trackToPlay.selectedPattern.measureCount-1 == realMeasure && !trackToPlay.m_muted){
-                    patternRepeat = YES;
-                }
+                //NSClip * songClip = [songTrack firstClip];
                 
-                BOOL updateMeasure = FALSE;
-                
-                int startPattern = -1;
-                double deltaI = -1;
-                int delta = -1;
-                
-                if(currentFret == 0){
-                    
-                    startPattern = patternIndex;
-                    deltaI = 0;
-                    updateMeasure = TRUE;
-                    
-                    //[self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:patternIndex andDeltaI:0 andDelta:-1 andPatternRepeat:patternRepeat addFret:nil];
-                    
-                    
-                    startPatterns[i] = patternIndex;
-                    
-                }else{
-                    
-                    // if the instrument is toggled off
-                    if(startPatterns[i] != patternIndex){
-                        
-                        deltaI = currentFret/16.0;
-                        delta = patternIndex;
-                        updateMeasure = TRUE;
-                        
-                        //[self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:(currentFret/16.0) andDelta:patternIndex andPatternRepeat:patternRepeat addFret:nil];
-                        
-                        startPatterns[i] = patternIndex;
-                    }
-                    
-                    // last fret, about to change patterns
-                    if(currentFret == 15 && [self getQueuedPatternIndexForTrack:trackToPlay] > -1){
-                        
-                        patternRepeat = NO;
-                        updateMeasure = TRUE;
-                        //[self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:NO addFret:nil];
-                        
-                        // pattern repeat may change if measures are added/subtracted
-                    }else if(currentFret == 15 && patternRepeat != [[tempMeasures[i] objectForKey:@"patternrepeat"] boolValue]){
-                        
-                        updateMeasure = TRUE;
-                        
-                        //[[self updateMeasureDictionaryForInstrumentIndex:instToPlay.instrument withStartingPattern:-1 andDeltaI:-1 andDelta:-1 andPatternRepeat:patternRepeat addFret:nil];
-                    }
-                }
-                
-                // Add notes at fret
                 NSString * strings = @"";
                 for(int s = 0; s < STRINGS_ON_GTAR; s++){
                     BOOL isStringOn = [trackToPlay.selectedPattern.m_measures[realMeasure] isNoteOnAtString:s andFret:currentFret];
@@ -846,47 +790,13 @@
                     strings = [strings stringByAppendingString:((isStringOn) ? @"1" : @"0")];
                     
                     if(isStringOn){
-                        updateMeasure = TRUE;
+                        NSNote * newNote = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:r_beat/4.0 duration:0.25];
+                        [songClip addNote:newNote];
                     }
                 }
-                
-                if(updateMeasure){
-                    NSArray * patternNames = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"OFF", nil];
-                    NSString * fretPattern = [patternNames objectAtIndex:trackToPlay.selectedPatternIndex];
-                    
-                    NSArray * fretObjArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentFret],strings,[NSNumber numberWithBool:trackToPlay.m_muted],[NSNumber numberWithDouble:trackToPlay.m_volume],fretPattern,nil];
-                    
-                    NSArray * fretKeyArray = [NSArray arrayWithObjects:@"fretindex",@"strings",@"ismuted",@"amplitude",@"pattern",nil];
-                    
-                    NSDictionary * fretDict = [[NSDictionary alloc] initWithObjects:fretObjArray forKeys:fretKeyArray];
-                    
-                    [self updateMeasureDictionaryForInstrumentIndex:trackToPlay.m_instrument.m_id withStartingPattern:startPattern andDeltaI:deltaI andDelta:delta andPatternRepeat:patternRepeat addFret:fretDict];
-                }
-            }
-        }
-    }
-    //}
-    
-    if(isRecording && (currentFret == 15 || forceRecord)){
-        
-        NSMutableArray * newMeasure = [[NSMutableArray alloc] init];
-        NSMutableArray * measureForIndex = [[NSMutableArray alloc] init];
-        
-        for(int i = 0; i < MAX_TRACKS; i++){
-            
-            int instIndex = [[tempMeasures[i] objectForKey:@"instrument"] intValue];
-            
-            // Check that it's a valid instrument and hasn't already been added
-            if([seqSetViewController isValidInstrumentIndex:instIndex] && [measureForIndex indexOfObject:[NSNumber numberWithInt:instIndex]] == NSNotFound){
-                [newMeasure addObject:[NSMutableDictionary dictionaryWithDictionary:tempMeasures[i]]];
-                [measureForIndex addObject:[NSNumber numberWithInt:instIndex]];
             }
             
-            // Clear temp data
-            [self clearMeasureDictionary:i];
         }
-        
-        [self addMeasureToPattern:newMeasure];
     }
     
     [seqSetViewController updateAllVisibleCells];
@@ -915,9 +825,16 @@
             [recordShareController reloadInstruments];
             [self stopAll];
             
-            if(patternData != nil){
+            if(recordingSong != nil){
+                
+                DLog(@"Record did end");
+                
+                // XMP recording
+                [recordingSong printTree];
+                
                 SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-                [recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+                
+                [recordShareController loadSong:recordingSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
             }
             
             if(animate){
@@ -963,96 +880,10 @@
 #pragma mark - Record
 - (void)resetPatternData
 {
-    patternData = [[NSMutableArray alloc] init];
-    tempMeasures = [[NSMutableArray alloc] init];
+    recordingSong = [[NSSong alloc] initWithTitle:@"Song001" author:g_loggedInUser.m_username description:@"" tempo:[playControlViewController getTempo] looping:false loopstart:0 loopend:0 sequenceName:[seqSetViewController getSequence].m_name sequenceId:[seqSetViewController getSequence].m_id];
     
-    for(int i = 0; i < MAX_TRACKS; i++){
-        
-        NSMutableArray * fretArray = [[NSMutableArray alloc] init];
-        
-        NSArray * objArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:-1],
-                              @"",
-                              [NSNumber numberWithInt:-1],
-                              @"",
-                              @"",
-                              fretArray,nil];
-        
-        NSArray * keyArray = [NSArray arrayWithObjects:@"instrument",
-                              @"start",
-                              @"deltai",
-                              @"delta",
-                              @"patternrepeat",
-                              @"frets",nil];
-        
-        [tempMeasures addObject:[NSMutableDictionary dictionaryWithObjects:objArray forKeys:keyArray]];
-    }
+    r_beat = 0;
     
-}
-
-- (void)updateMeasureDictionaryForInstrumentIndex:(int)inst withStartingPattern:(int)startIndex andDeltaI:(double)deltai andDelta:(int)delta andPatternRepeat:(BOOL)patternrepeat addFret:(NSDictionary *)newfret
-{
-    @synchronized(tempMeasures){
-        
-        NSArray * patternNames = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"OFF", nil];
-        
-        int m = [self chooseMeasureIndexForInstrument:inst];
-        
-        if(inst > -1){
-            [tempMeasures[m] setObject:[NSNumber numberWithInt:inst] forKey:@"instrument"];
-        }
-        
-        if(startIndex > -1){
-            [tempMeasures[m] setObject:patternNames[startIndex] forKey:@"start"];
-        }
-        
-        if(deltai > -1){
-            [tempMeasures[m] setObject:[NSNumber numberWithDouble:deltai] forKey:@"deltai"];
-        }
-        
-        if(delta > -1) {
-            NSString * deltaName = (delta < 0) ? @"" : patternNames[delta];
-            [tempMeasures[m] setObject:deltaName forKey:@"delta"];
-        }
-        
-        [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithBool:patternrepeat] forKey:@"patternrepeat"];
-        
-        if(newfret != nil){
-            [[tempMeasures[m] objectForKey:@"frets"] addObject:newfret];
-        }
-    }
-}
-
-- (int)chooseMeasureIndexForInstrument:(int)instIndex
-{
-    int i = 0;
-    for(; i < MAX_TRACKS; i++){
-        
-        int tempInst = [[tempMeasures[i] objectForKey:@"instrument"] intValue];
-        if(tempInst == -1 || tempInst == instIndex){
-            break;
-        }
-    }
-    
-    return i;
-}
-
-- (void)clearMeasureDictionary:(int)m
-{
-    @synchronized(tempMeasures){
-        
-        [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithInt:-1] forKey:@"instrument"];
-        [[tempMeasures objectAtIndex:m] setObject:@"" forKey:@"start"];
-        [[tempMeasures objectAtIndex:m] setObject:[NSNumber numberWithInt:-1] forKey:@"deltai"];
-        [[tempMeasures objectAtIndex:m] setObject:@"" forKey:@"delta"];
-        [[tempMeasures objectAtIndex:m] setObject:@"" forKey:@"patternrepeat"];
-        [[tempMeasures objectAtIndex:m] setObject:[[NSMutableArray alloc] init] forKey:@"frets"];
-        
-    }
-}
-
-- (void)addMeasureToPattern:(NSMutableArray *)m
-{
-    [patternData addObject:m];
 }
 
 #pragma mark - Pattern Queue
@@ -1261,6 +1092,7 @@
 - (void)increasePlayLocation
 {
     currentFret++;
+    r_beat++;
     
     if (currentFret > LAST_FRET){
         currentFret = 0;

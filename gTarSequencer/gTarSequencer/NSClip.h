@@ -22,6 +22,7 @@
     bool m_looping;
     long m_loopstart;
     long m_looplength;
+    bool m_muted;
     
     NSString * m_color;
     
@@ -39,6 +40,7 @@
 @property (nonatomic, assign) bool m_looping;
 @property (nonatomic, assign) long m_loopstart;
 @property (nonatomic, assign) long m_looplength;
+@property (nonatomic, assign) bool m_muted;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
 
@@ -50,10 +52,13 @@
            looping:(bool)looping
          loopStart:(long)loopstart
         looplength:(long)looplength
-             color:(NSString *)color;
+             color:(NSString *)color
+             muted:(bool)muted;
 
 -(XMPNode *)convertToSongXmp;
 
 -(void)addNote:(NSNote *)note;
+
+-(void)setMute:(bool)muted;
 
 @end

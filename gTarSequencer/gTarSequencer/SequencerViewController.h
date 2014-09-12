@@ -53,10 +53,11 @@ extern NSUser * g_loggedInUser;
     
     // Record
     BOOL isRecording;
-    NSMutableArray * patternData;
     NSMutableArray * tempMeasures;
     int startPatterns[5];
     BOOL forceRecord;
+    NSSong * recordingSong;
+    int r_beat;
     
     // Save/Load
     NSString * activeSong;
