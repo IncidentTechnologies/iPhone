@@ -220,7 +220,6 @@
                         
                         [instTrack.m_instrument.m_sampler.audio pluckString:note.m_stringvalue];
                         
-                        
                     }
                 }
             }

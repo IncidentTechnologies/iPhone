@@ -56,7 +56,7 @@
 // Track's Clip Actions
 - (void)addClip:(NSClip *)clip;
 - (NSClip *)firstClip;
-- (NSClip *)lastClipComparePattern:(NSString *)pattern andMuted:(BOOL)muted;
+- (NSClip *)lastClipComparePattern:(NSString *)pattern andMuted:(BOOL)muted atBeat:(double)beat;
 
 // Track's Pattern Actions
 - (void)addPattern:(NSPattern *)pattern;

@@ -13,6 +13,10 @@
 #import "SoundMaster_.mm"
 
 #define DEFAULT_SONG_NAME @"RecordedSessionPlaceholder.m4a"
+#define PATTERN_A @"-A"
+#define PATTERN_B @"-B"
+#define PATTERN_C @"-C"
+#define PATTERN_D @"-D"
 
 @interface RecordShareViewController ()
 {
@@ -221,40 +225,20 @@
         [self showNoSessionOverlay];
     }
     
-    
-    
+    [self removeDeletedMeasuresFromRecordedSong];
     [self setMeasures:[self countMeasuresFromRecordedSong]];
     [self drawPatternsOnMeasures];
     
+    // record the m4a
     if(song != nil){
         [self startRecording:nil withTempo:song.m_tempo andSoundMaster:m_soundMaster activeSequence:activeSequence activeSong:nil];
     }
     
+    // reset the progress bar on top
     [self resetProgressView];
     
     // ensure record playback gets refreshed
     [self stopRecordPlayback];
-}
-
-- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
-{
-    /*if([patternData count] > 0){
-        [self hideNoSessionOverlay];
-    }else{
-        [self showNoSessionOverlay];
-    }
-    
-    [self setMeasures:[patternData count]];
-    [self drawPatternsOnMeasures:patternData];
-    
-    if(patternData != nil && [patternData count] > 0){
-        [self startRecording:patternData withTempo:tempo andSoundMaster:m_soundMaster activeSequence:activeSequence activeSong:nil];
-    }
-    
-    [self resetProgressView];
-    
-    // ensure record playback gets refreshed
-    [self stopRecordPlayback];*/
 }
 
 - (void)setMeasures:(int)newNumMeasures
@@ -287,6 +271,23 @@
     //}
 }
 
+- (void)removeDeletedMeasuresFromRecordedSong
+{
+    
+    NSMutableArray * tracksToRemove = [[NSMutableArray alloc] init];
+    
+    for(NSTrack * track in recordingSong.m_tracks){
+        int instrumentIndex = track.m_instrument.m_id;
+        
+        if(![self isValidInstrumentIndex:instrumentIndex]){
+            [tracksToRemove addObject:track];
+        }
+    }
+    
+    [recordingSong.m_tracks removeObjectsInArray:tracksToRemove];
+    
+}
+
 - (int)countMeasuresFromRecordedSong
 {
     float maxMeasure = 0;
@@ -306,9 +307,127 @@
 
 - (void)drawPatternsOnMeasures
 {
+    UIColor * aColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:0.5];
+    UIColor * bColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.5];
+    UIColor * cColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:0.5];
+    UIColor * dColor = [UIColor colorWithRed:137/255.0 green:225/255.0 blue:247/255.0 alpha:0.5];
+    UIColor * offColor = [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:0.5];
     
+    UIColor * aColorSolid = [UIColor colorWithRed:76/255.0 green:146/255.0 blue:163/255.0 alpha:1.0];
+    UIColor * bColorSolid = [UIColor colorWithRed:71/255.0 green:161/255.0 blue:184/255.0 alpha:1.0];
+    UIColor * cColorSolid = [UIColor colorWithRed:64/255.0 green:145/255.0 blue:175/255.0 alpha:1.0];
+    UIColor * dColorSolid = [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0];
+    UIColor * offColorSolid = [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0];
+    
+    //
+    // Draw measure content
+    //
+    
+    float measureHeight = trackView.frame.size.height / MAX_TRACKS;
+    CGRect clipFrame;
+    
+    float trackPosition = 0;
+    for(NSTrack * track in recordingSong.m_tracks){
+        
+        for(NSClip * clip in track.m_clips){
+            
+            //
+            // Draw each clip segment
+            //
+            double clipStart = [self getXPositionForClipBeat:[self getFirstBeatFromClip:clip]];
+            double clipEnd = [self getXPositionForClipBeat:[self getLastBeatFromClip:clip]];
+            
+            // Revise clip end if it's the last measure
+            // (or first measure just to be safe)
+            if(clip == [track.m_clips firstObject]){
+                clipStart = [self getXPositionForClipBeat:0];
+            }
+            
+            if(clip == [track.m_clips lastObject]){
+                clipEnd = [self getXPositionForClipBeat:[self countMeasuresFromRecordedSong]*4.0];
+            }
+            
+            clipFrame = CGRectMake(clipStart,trackPosition * measureHeight+1,clipEnd - clipStart,measureHeight);
+            
+            UIView * clipView = [[UIView alloc] initWithFrame:clipFrame];
+            
+            // Color according to the pattern
+            if(clip.m_muted == true){
+                [clipView setBackgroundColor:offColor];
+            }else if([clip.m_name isEqualToString:PATTERN_A]){
+                [clipView setBackgroundColor:aColor];
+            }else if([clip.m_name isEqualToString:PATTERN_B]){
+                [clipView setBackgroundColor:bColor];
+            }else if([clip.m_name isEqualToString:PATTERN_C]){
+                [clipView setBackgroundColor:cColor];
+            }else if([clip.m_name isEqualToString:PATTERN_D]){
+                [clipView setBackgroundColor:dColor];
+            }
+            
+            [trackView addSubview:clipView];
+            
+            //
+            // Draw the pattern letters
+            //
+            
+            float patternLetterWidth = 30;
+            float patternLetterIndent = 10;
+            
+            CGRect patternLetterFrame = CGRectMake(patternLetterIndent,0,patternLetterWidth,measureHeight);
+            
+            UILabel * patternLetter = [[UILabel alloc] initWithFrame:patternLetterFrame];
+            [patternLetter setText:[clip.m_name stringByReplacingOccurrencesOfString:@"-" withString:@""]];
+            [patternLetter setTextColor:[UIColor whiteColor]];
+            [patternLetter setAlpha:0.5];
+            [patternLetter setFont:[UIFont fontWithName:FONT_BOLD size:20.0]];
+            
+            if(!clip.m_muted){
+                [clipView addSubview:patternLetter];
+            }
+
+            //
+            // Draw the top progress view
+            //
+            
+            // ...
+            
+            //
+            // Draw the repeat tickmarks
+            //
+            
+            // ...
+        }
+        
+        trackPosition++;
+    }
 }
 
+- (float)getFirstBeatFromClip:(NSClip *)clip
+{
+    return clip.m_startbeat;
+    //NSNote * firstNote = [clip.m_notes firstObject];
+    
+    //return firstNote.m_beatstart + firstNote.m_duration;
+}
+
+- (float)getLastBeatFromClip:(NSClip *)clip
+{
+    return clip.m_endbeat;
+    //NSNote * lastNote = [clip.m_notes lastObject];
+    
+    //return lastNote.m_beatstart + lastNote.m_duration;
+}
+
+-(float)getXPositionForClipBeat:(float)beat
+{
+    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    
+    double x = beat * measureWidth / 4.0;
+    
+    return x;
+}
+
+/*
 -(void)drawPatternsOnMeasures:(NSMutableArray *)patternData
 {
     
@@ -570,6 +689,8 @@
         [trackView addSubview:tick];
     }
 }
+ 
+ */
 
 #pragma mark - Scrolling and Progress View
 -(void)resetProgressView

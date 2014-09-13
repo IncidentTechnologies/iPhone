@@ -14,8 +14,8 @@
 #import <AVFoundation/AVFoundation.h>
 //#import "SCUI.h"
 
-#define MAX_TRACKS 5
-#define MIN_MEASURES 8
+#define MAX_TRACKS 5.0
+#define MIN_MEASURES 8.0
 #define MEASURES_PER_SCREEN 8.0
 
 #define FONT_DEFAULT @"Avenir Next"
@@ -55,10 +55,6 @@ extern NSUser * g_loggedInUser;
     
     int numMeasures;
     
-    NSString * prevPattern[MAX_TRACKS];
-    NSString * prevInterruptPattern[MAX_TRACKS];
-    double prevTranspose[MAX_TRACKS];
-    
     // Recording
     NSSong * recordingSong;    
     NSTimer * recordTimer;
@@ -93,7 +89,6 @@ extern NSUser * g_loggedInUser;
 - (void)reloadInstruments;
 - (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
 
-- (void)loadPattern:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
 - (IBAction)userDidBack:(id)sender;
 - (BOOL)showHideSessionOverlay;
 - (void)openShareScreen;

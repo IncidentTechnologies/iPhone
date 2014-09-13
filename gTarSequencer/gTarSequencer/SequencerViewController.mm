@@ -361,7 +361,7 @@
     }else if([nav isEqualToString:@"Share"]){
         
         activeMainView = recordShareController.view;
-        [recordShareController reloadInstruments];
+        //[recordShareController reloadInstruments];
         [self stopAll];
         
         if(recordingSong != nil){
@@ -779,9 +779,7 @@
             if(isRecording){
                 
                 NSTrack * songTrack = [recordingSong trackWithName:trackToPlay.m_name volume:trackToPlay.m_volume mute:trackToPlay.m_muted instrument:trackToPlay.m_instrument];
-                NSClip * songClip = [songTrack lastClipComparePattern:trackToPlay.selectedPattern.m_name andMuted:trackToPlay.m_muted];
-                
-                //NSClip * songClip = [songTrack firstClip];
+                NSClip * songClip = [songTrack lastClipComparePattern:trackToPlay.selectedPattern.m_name andMuted:trackToPlay.m_muted atBeat:r_beat/4.0];
                 
                 NSString * strings = @"";
                 for(int s = 0; s < STRINGS_ON_GTAR; s++){
