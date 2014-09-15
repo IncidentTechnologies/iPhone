@@ -63,4 +63,6 @@
 
 -(void)setEndbeat:(double)beat;
 
+-(double)getMeasureForBeat:(double)beat;
+
 @end

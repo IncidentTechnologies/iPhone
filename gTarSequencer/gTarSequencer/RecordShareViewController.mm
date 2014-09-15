@@ -319,13 +319,15 @@
     //UIColor * dColorSolid = [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0];
     //UIColor * offColorSolid = [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0];
    
-    
     //
     // Draw measure content
     //
     
     int numTracks = [recordingSong.m_tracks count];
+    
+    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     float measureHeight = trackView.frame.size.height / MAX_TRACKS;
+    
     CGRect clipFrame;
     
     float trackPosition = 0;
@@ -412,7 +414,37 @@
             // Draw the repeat tickmarks
             //
             
-            // ...
+            NSTrack * instTrack = [instruments objectAtIndex:[self getIndexForInstrument:track.m_instrument.m_id]];
+            
+            // Length of pattern
+            int patternLength = [instTrack getPatternLengthByName:clip.m_name];
+            int clipStartMeasure = (int)[clip getMeasureForBeat:clip.m_startbeat]; // Start measure
+            int clipEndMeasure = (int)[clip getMeasureForBeat:clip.m_endbeat];
+            int fillMeasures = clipEndMeasure - clipStartMeasure; // Total measures
+            
+            int fillOffset = patternLength - clipStartMeasure % patternLength;
+            
+            DLog(@"Pattern %@ %i measures; start at %i+%i fill %i measures",clip.m_name,patternLength,clipStartMeasure,fillOffset, fillMeasures);
+            
+            // Start filling every % patternLength == 0 measures;
+            for(int m = clipStartMeasure+fillOffset; m <= clipStartMeasure+fillMeasures; m+= patternLength)
+            {
+                UIView * t = [tracks objectAtIndex:trackPosition];
+                
+                CGRect topTickFrame = CGRectMake((m-1)*measureWidth+measureWidth,t.frame.origin.y,1,12);
+                CGRect bottomTickFrame = CGRectMake((m-1)*measureWidth+measureWidth,t.frame.origin.y+t.frame.size.height-12,1,12);
+                
+                UIView * topTick = [[UIView alloc] initWithFrame:topTickFrame];
+                UIView * bottomTick = [[UIView alloc] initWithFrame:bottomTickFrame];
+                
+                [topTick setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
+                [bottomTick setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
+                
+                if(!clip.m_muted){
+                    [tickmarks addObject:topTick];
+                    [tickmarks addObject:bottomTick];
+                }
+            }
             
         }
         
@@ -424,19 +456,25 @@
     // Draw overlaying dark horizontal lines
     //
     
-    trackPosition = 0;
-    for(NSTrack * track in recordingSong.m_tracks){
+    for(trackPosition = 0; trackPosition < [recordingSong.m_tracks count]; trackPosition++){
         
         UIView * t = [tracks objectAtIndex:trackPosition];
         
-        CGRect overlayLine = CGRectMake(0,t.frame.origin.y, trackView.frame.size.width,1);
+        CGRect overlayLine = CGRectMake(0,t.frame.origin.y, numMeasures*measureWidth,1);
         
         UIView * overlayLineView = [[UIView alloc] initWithFrame:overlayLine];
         [overlayLineView setBackgroundColor:[UIColor darkGrayColor]];
         
         [trackView addSubview:overlayLineView];
     
-        trackPosition++;
+    }
+    
+    //
+    // Draw overlaying pattern tickmarks
+    //
+    
+    for(UIView * tick in tickmarks){
+        [trackView addSubview:tick];
     }
     
 }
@@ -444,17 +482,11 @@
 - (float)getFirstBeatFromClip:(NSClip *)clip
 {
     return clip.m_startbeat;
-    //NSNote * firstNote = [clip.m_notes firstObject];
-    
-    //return firstNote.m_beatstart + firstNote.m_duration;
 }
 
 - (float)getLastBeatFromClip:(NSClip *)clip
 {
     return clip.m_endbeat;
-    //NSNote * lastNote = [clip.m_notes lastObject];
-    
-    //return lastNote.m_beatstart + lastNote.m_duration;
 }
 
 -(float)getXPositionForClipBeat:(float)beat
@@ -474,75 +506,6 @@
     
     return x;
 }
-
-/*
--(void)drawPatternsOnMeasures:(NSMutableArray *)patternData
-{
-    
-    UIColor * aColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:0.5];
-    UIColor * bColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.5];
-    UIColor * cColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:0.5];
-    UIColor * dColor = [UIColor colorWithRed:137/255.0 green:225/255.0 blue:247/255.0 alpha:0.5];
-    UIColor * offColor = [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:0.5];
-    
-    
-    UIColor * aColorSolid = [UIColor colorWithRed:76/255.0 green:146/255.0 blue:163/255.0 alpha:1.0];
-    UIColor * bColorSolid = [UIColor colorWithRed:71/255.0 green:161/255.0 blue:184/255.0 alpha:1.0];
-    UIColor * cColorSolid = [UIColor colorWithRed:64/255.0 green:145/255.0 blue:175/255.0 alpha:1.0];
-    UIColor * dColorSolid = [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0];
-    UIColor * offColorSolid = [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0];
-    
-    
-    //
-    // Draw measure content
-    //
-    
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
-    
-    // clear prev patterns
-    for(int j = 0; j < MAX_TRACKS; j++){
-        prevPattern[j] = @"";
-        prevInterruptPattern[j] = nil;
-        prevTranspose[j] = 0;
-    }
-    
-    DLog(@"pattern data is %@",patternData);
-    
-    int i = 0;
-    for(NSMutableArray * measure in patternData){
-        for(NSMutableDictionary * measureData in measure){
- 
-            
-            // Draw pattern end markers
-            BOOL patternend = [[measureData objectForKey:@"patternrepeat"] boolValue];
-            
-            if(patternend && i < [patternData count]-1 && ![interruptPattern isEqualToString:@"OFF"] && ![pattern isEqualToString:@"OFF"] && ![pattern isEqualToString:@""]){
-                
-                CGRect topTickFrame = CGRectMake(i*measureWidth+measureWidth,track.frame.origin.y,1,12);
-                CGRect bottomTickFrame = CGRectMake(i*measureWidth+measureWidth,track.frame.origin.y+track.frame.size.height-12,1,12);
-                
-                UIView * topTick = [[UIView alloc] initWithFrame:topTickFrame];
-                UIView * bottomTick = [[UIView alloc] initWithFrame:bottomTickFrame];
-                
-                [topTick setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
-                [bottomTick setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
-                
-                [tickmarks addObject:topTick];
-                [tickmarks addObject:bottomTick];
-                
-            }
-        }
-        
-        i++;
-    }
-    
-    // Draw tickmarks on top
-    for(UIView * tick in tickmarks){
-        [trackView addSubview:tick];
-    }
-}
- 
- */
 
 #pragma mark - Scrolling and Progress View
 -(void)resetProgressView

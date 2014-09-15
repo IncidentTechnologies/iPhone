@@ -285,6 +285,17 @@
     [selectedPattern changeNoteAtString:str andFret:fret forMeasure:selectedPattern.selectedMeasure];
 }
 
+- (int)getPatternLengthByName:(NSString *)patternname
+{
+    for(NSPattern * pattern in m_patterns){
+        if([pattern.m_name isEqualToString:patternname]){
+            return [pattern.m_measures count];
+        }
+    }
+    
+    return 0;
+}
+
 #pragma mark Measure Actions
 
 - (NSMeasure *)selectMeasure:(int)newSelection {

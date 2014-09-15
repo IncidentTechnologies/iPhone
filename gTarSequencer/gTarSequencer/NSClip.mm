@@ -167,5 +167,10 @@
     return numMeasures * 4.0;
 }
 
+- (double)getMeasureForBeat:(double)beat
+{
+    double numMeasures = ceil(beat / 4.0);
+    return numMeasures;
+}
 
 @end
