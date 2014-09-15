@@ -826,6 +826,7 @@
             if(recordingSong != nil){
                 
                 DLog(@"Record did end");
+                [recordingSong finishTracks];
                 
                 // XMP recording
                 [recordingSong printTree];

@@ -15,13 +15,13 @@
 {
     NSString * m_name;
     
-    long m_startbeat;
-    long m_endbeat;
-    long m_cliplength;
-    long m_clipstart;
+    double m_startbeat;
+    double m_endbeat;
+    double m_cliplength;
+    double m_clipstart;
     bool m_looping;
-    long m_loopstart;
-    long m_looplength;
+    double m_loopstart;
+    double m_looplength;
     bool m_muted;
     
     NSString * m_color;
@@ -33,25 +33,25 @@
 @property (nonatomic, readonly) NSString * m_color;
 @property (nonatomic, readonly) NSMutableArray * m_notes;
 
-@property (nonatomic, assign) long m_startbeat;
-@property (nonatomic, assign) long m_endbeat;
-@property (nonatomic, assign) long m_cliplength;
-@property (nonatomic, assign) long m_clipstart;
+@property (nonatomic, assign) double m_startbeat;
+@property (nonatomic, assign) double m_endbeat;
+@property (nonatomic, assign) double m_cliplength;
+@property (nonatomic, assign) double m_clipstart;
 @property (nonatomic, assign) bool m_looping;
-@property (nonatomic, assign) long m_loopstart;
-@property (nonatomic, assign) long m_looplength;
+@property (nonatomic, assign) double m_loopstart;
+@property (nonatomic, assign) double m_looplength;
 @property (nonatomic, assign) bool m_muted;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
 
 - (id)initWithName:(NSString *)name
-         startbeat:(long)startbeat
-           endBeat:(long)endbeat
-        clipLength:(long)cliplength
-         clipStart:(long)clipstart
+         startbeat:(double)startbeat
+           endBeat:(double)endbeat
+        clipLength:(double)cliplength
+         clipStart:(double)clipstart
            looping:(bool)looping
-         loopStart:(long)loopstart
-        looplength:(long)looplength
+         loopStart:(double)loopstart
+        looplength:(double)looplength
              color:(NSString *)color
              muted:(bool)muted;
 
@@ -60,5 +60,7 @@
 -(void)addNote:(NSNote *)note;
 
 -(void)setMute:(bool)muted;
+
+-(void)setEndbeat:(double)beat;
 
 @end

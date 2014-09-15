@@ -60,6 +60,7 @@
 
 - (void)addTrack:(NSTrack *)track;
 - (NSTrack *)trackWithName:(NSString *)name volume:(double)volume mute:(bool)mute instrument:(NSInstrument *)inst;
+- (void)finishTracks;
 
 - (void)renameToName:(NSString *)name andDescription:(NSString *)description;
 

@@ -272,6 +272,25 @@
     return newTrack;
 }
 
+- (void)finishTracks
+{
+    // Get the last beat and set as endbeat for all
+    double lastBeat = 0.0;
+    
+    for(NSTrack * track in m_tracks){
+        for(NSClip * clip in track.m_clips){
+            for(NSNote * note in clip.m_notes){
+                lastBeat = MAX(lastBeat,note.m_beatstart + note.m_duration);
+            }
+        }
+    }
+    
+    // Set the endbeat for all the last tracks
+    for(NSTrack * track in m_tracks){
+        [[track.m_clips lastObject] setEndbeat:lastBeat];
+    }
+}
+
 - (void)renameToName:(NSString *)name andDescription:(NSString *)description
 {
     m_title = name;

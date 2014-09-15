@@ -208,10 +208,10 @@
         
         if(currentClip.m_muted != muted || ![currentClip.m_name isEqualToString:pattern]){
             
-            currentClip.m_endbeat = [self roundBeatDownToMeasure:beat];
+            currentClip.m_endbeat = beat;
             currentClip.m_cliplength = currentClip.m_endbeat - currentClip.m_startbeat;
             
-            NSClip * newClip = [[NSClip alloc] initWithName:pattern startbeat:[self roundBeatDownToMeasure:beat] endBeat:0 clipLength:0 clipStart:0 looping:NO loopStart:0 looplength:0 color:@"#FFFFFF" muted:muted];
+            NSClip * newClip = [[NSClip alloc] initWithName:pattern startbeat:beat endBeat:0 clipLength:0 clipStart:0 looping:NO loopStart:0 looplength:0 color:@"#FFFFFF" muted:muted];
     
             [self addClip:newClip];
             

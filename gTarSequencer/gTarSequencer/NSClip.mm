@@ -41,31 +41,31 @@
         
         m_color = [[NSString alloc] initWithUTF8String:[m_clip GetAttributeValueWithName:@"color"].GetPszValue()];
         
-        [m_clip GetAttributeValueWithName:@"startbeat"].GetValueInt(&m_startbeat);
+        [m_clip GetAttributeValueWithName:@"startbeat"].GetValueDouble(&m_startbeat);
         
-        [m_clip GetAttributeValueWithName:@"endbeat"].GetValueInt(&m_endbeat);
+        [m_clip GetAttributeValueWithName:@"endbeat"].GetValueDouble(&m_endbeat);
         
-        [m_clip GetAttributeValueWithName:@"cliplength"].GetValueInt(&m_cliplength);
+        [m_clip GetAttributeValueWithName:@"cliplength"].GetValueDouble(&m_cliplength);
         
-        [m_clip GetAttributeValueWithName:@"clipstart"].GetValueInt(&m_clipstart);
+        [m_clip GetAttributeValueWithName:@"clipstart"].GetValueDouble(&m_clipstart);
         
         [m_clip GetAttributeValueWithName:@"looping"].GetValueBool(&m_looping);
         
-        [m_clip GetAttributeValueWithName:@"loopstart"].GetValueInt(&m_loopstart);
+        [m_clip GetAttributeValueWithName:@"loopstart"].GetValueDouble(&m_loopstart);
         
-        [m_clip GetAttributeValueWithName:@"looplength"].GetValueInt(&m_looplength);
+        [m_clip GetAttributeValueWithName:@"looplength"].GetValueDouble(&m_looplength);
         
         [m_clip GetAttributeValueWithName:@"muted"].GetValueBool(&m_muted);
         
         DLog(@"CLIP name | %@",m_name);
         DLog(@"CLIP color | %@",m_color);
-        DLog(@"CLIP startbeat | %li",m_startbeat);
-        DLog(@"CLIP endbeat | %li",m_endbeat);
-        DLog(@"CLIP cliplength | %li",m_cliplength);
-        DLog(@"CLIP clipstart | %li",m_clipstart);
+        DLog(@"CLIP startbeat | %f",m_startbeat);
+        DLog(@"CLIP endbeat | %f",m_endbeat);
+        DLog(@"CLIP cliplength | %f",m_cliplength);
+        DLog(@"CLIP clipstart | %f",m_clipstart);
         DLog(@"CLIP looping | %i",m_looping);
-        DLog(@"CLIP loopstart | %li",m_loopstart);
-        DLog(@"CLIP looplength | %li",m_looplength);
+        DLog(@"CLIP loopstart | %f",m_loopstart);
+        DLog(@"CLIP looplength | %f",m_looplength);
         DLog(@"CLIP muted | %i",m_muted);
         
         m_notes = [[NSMutableArray alloc] init];
@@ -86,7 +86,7 @@
     
 }
 
-- (id)initWithName:(NSString *)name startbeat:(long)startbeat endBeat:(long)endbeat clipLength:(long)cliplength clipStart:(long)clipstart looping:(bool)looping loopStart:(long)loopstart looplength:(long)looplength color:(NSString *)color muted:(bool)muted
+- (id)initWithName:(NSString *)name startbeat:(double)startbeat endBeat:(double)endbeat clipLength:(double)cliplength clipStart:(double)clipstart looping:(bool)looping loopStart:(double)loopstart looplength:(double)looplength color:(NSString *)color muted:(bool)muted
 {
 	
     self = [super init];
@@ -155,5 +155,17 @@
 {
     m_muted = muted;
 }
+
+- (void)setEndbeat:(double)beat
+{
+    m_endbeat = [self roundBeatUpToMeasure:beat];
+}
+
+- (double)roundBeatUpToMeasure:(double)beat
+{
+    double numMeasures = ceil(beat / 4.0);
+    return numMeasures * 4.0;
+}
+
 
 @end

@@ -313,16 +313,18 @@
     UIColor * dColor = [UIColor colorWithRed:137/255.0 green:225/255.0 blue:247/255.0 alpha:0.5];
     UIColor * offColor = [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:0.5];
     
-    UIColor * aColorSolid = [UIColor colorWithRed:76/255.0 green:146/255.0 blue:163/255.0 alpha:1.0];
-    UIColor * bColorSolid = [UIColor colorWithRed:71/255.0 green:161/255.0 blue:184/255.0 alpha:1.0];
-    UIColor * cColorSolid = [UIColor colorWithRed:64/255.0 green:145/255.0 blue:175/255.0 alpha:1.0];
-    UIColor * dColorSolid = [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0];
-    UIColor * offColorSolid = [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0];
+    //UIColor * aColorSolid = [UIColor colorWithRed:76/255.0 green:146/255.0 blue:163/255.0 alpha:1.0];
+    //UIColor * bColorSolid = [UIColor colorWithRed:71/255.0 green:161/255.0 blue:184/255.0 alpha:1.0];
+    //UIColor * cColorSolid = [UIColor colorWithRed:64/255.0 green:145/255.0 blue:175/255.0 alpha:1.0];
+    //UIColor * dColorSolid = [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0];
+    //UIColor * offColorSolid = [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0];
+   
     
     //
     // Draw measure content
     //
     
+    int numTracks = [recordingSong.m_tracks count];
     float measureHeight = trackView.frame.size.height / MAX_TRACKS;
     CGRect clipFrame;
     
@@ -334,20 +336,23 @@
             //
             // Draw each clip segment
             //
-            double clipStart = [self getXPositionForClipBeat:[self getFirstBeatFromClip:clip]];
-            double clipEnd = [self getXPositionForClipBeat:[self getLastBeatFromClip:clip]];
+            double firstBeat = [self getFirstBeatFromClip:clip];
+            double lastBeat = [self getLastBeatFromClip:clip];
             
             // Revise clip end if it's the last measure
             // (or first measure just to be safe)
             if(clip == [track.m_clips firstObject]){
-                clipStart = [self getXPositionForClipBeat:0];
+                firstBeat = 0.0;
             }
             
             if(clip == [track.m_clips lastObject]){
-                clipEnd = [self getXPositionForClipBeat:[self countMeasuresFromRecordedSong]*4.0];
+                lastBeat = [self countMeasuresFromRecordedSong]*4.0;
             }
             
-            clipFrame = CGRectMake(clipStart,trackPosition * measureHeight+1,clipEnd - clipStart,measureHeight);
+            double clipStart = [self getXPositionForClipBeat:firstBeat];
+            double clipEnd = [self getXPositionForClipBeat:lastBeat];
+            
+            clipFrame = CGRectMake(clipStart,trackPosition * measureHeight + 1,clipEnd - clipStart,measureHeight);
             
             UIView * clipView = [[UIView alloc] initWithFrame:clipFrame];
             
@@ -388,18 +393,52 @@
             //
             // Draw the top progress view
             //
+            float measureHeight = progressView.frame.size.height / (double)numTracks;
+            double progressClipStart = [self getProgressXPositionForClipBeat:firstBeat];
+            double progressClipEnd = [self getProgressXPositionForClipBeat:lastBeat];
             
-            // ...
+            DLog(@"Clip start %f end %f beats %f to %f numMeasures %i",progressClipStart,progressClipEnd,firstBeat,lastBeat,numMeasures);
+            
+            CGRect clipProgressFrame = CGRectMake(progressClipStart,trackPosition * measureHeight + measureHeight / 2.0,progressClipEnd - progressClipStart,1);
+            
+            UIView * progressClip = [[UIView alloc] initWithFrame:clipProgressFrame];
+            [progressClip setBackgroundColor:[UIColor whiteColor]];
+            
+            if(!clip.m_muted){
+                [progressView addSubview:progressClip];
+            }
             
             //
             // Draw the repeat tickmarks
             //
             
             // ...
+            
         }
         
         trackPosition++;
     }
+    
+    
+    //
+    // Draw overlaying dark horizontal lines
+    //
+    
+    trackPosition = 0;
+    for(NSTrack * track in recordingSong.m_tracks){
+        
+        UIView * t = [tracks objectAtIndex:trackPosition];
+        
+        CGRect overlayLine = CGRectMake(0,t.frame.origin.y, trackView.frame.size.width,1);
+        
+        UIView * overlayLineView = [[UIView alloc] initWithFrame:overlayLine];
+        [overlayLineView setBackgroundColor:[UIColor darkGrayColor]];
+        
+        [trackView addSubview:overlayLineView];
+    
+        trackPosition++;
+    }
+    
 }
 
 - (float)getFirstBeatFromClip:(NSClip *)clip
@@ -421,6 +460,15 @@
 -(float)getXPositionForClipBeat:(float)beat
 {
     float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    
+    double x = beat * measureWidth / 4.0;
+    
+    return x;
+}
+
+-(float)getProgressXPositionForClipBeat:(float)beat
+{
+    float measureWidth = progressView.frame.size.width / numMeasures;
     
     double x = beat * measureWidth / 4.0;
     
@@ -463,176 +511,7 @@
     int i = 0;
     for(NSMutableArray * measure in patternData){
         for(NSMutableDictionary * measureData in measure){
-            
-            int instrumentIndex = [[measureData objectForKey:@"instrument"] intValue];
-            
-            // First make sure the instrument hasn't been deleted
-            if(![self isValidInstrumentIndex:instrumentIndex]){
-                
-                continue;
-            }
-            
-            int k = [self getIndexForInstrument:instrumentIndex];
-            
-            UIView * track = [tracks objectAtIndex:k];
-            
-            CGRect measureBarFrame;
-            CGRect measureBarInterruptFrame;
-            
-            // Check for measure interruption
-            NSString * interruptMeasure = [measureData objectForKey:@"delta"];
-            if(![interruptMeasure isEqualToString:@""]){
-                
-                double deltai = [[measureData objectForKey:@"deltai"] doubleValue];
-                
-                measureBarFrame = CGRectMake(i*measureWidth, track.frame.origin.y+1, measureWidth*deltai, track.frame.size.height-2);
-                measureBarInterruptFrame = CGRectMake(i*measureWidth+measureWidth*deltai, track.frame.origin.y+1, measureWidth - measureWidth*deltai, track.frame.size.height-2);
-                
-            }else{
-                measureBarFrame = CGRectMake(i*measureWidth, track.frame.origin.y+1, measureWidth, track.frame.size.height-2);
-                measureBarInterruptFrame = CGRectNull;
-            }
-            
-            UIView * measureBar = [[UIView alloc] initWithFrame:measureBarFrame];
-            
-            NSString * pattern = [measureData objectForKey:@"start"];
-            
-            // Color the starting measure
-            if([pattern isEqualToString:@"A"]){
-                [measureBar setBackgroundColor:aColor];
-            }else if([pattern isEqualToString:@"B"]){
-                [measureBar setBackgroundColor:bColor];
-            }else if([pattern isEqualToString:@"C"]){
-                [measureBar setBackgroundColor:cColor];
-            }else if([pattern isEqualToString:@"D"]){
-                [measureBar setBackgroundColor:dColor];
-            }else{
-                [measureBar setBackgroundColor:offColor];
-            }
-            
-            [trackView addSubview:measureBar];
-            
-            // Draw progress marker
-            if(![pattern isEqualToString:@"OFF"]){
-                if(CGRectIsNull(measureBarInterruptFrame)){
-                    [self drawProgressMarkerForMeasure:i inRow:k startAt:0.0 withWidth:1.0];
-                }else{
-                    [self drawProgressMarkerForMeasure:i inRow:k startAt:0.0 withWidth:[[measureData objectForKey:@"deltai"] doubleValue]];
-                }
-            }
-            
-            // Draw interrupt measure
-            NSString * interruptPattern = [measureData objectForKey:@"delta"];
-            double interruptTranspose = 0;
-            
-            if(!CGRectIsNull(measureBarInterruptFrame)){
-                
-                UIView * measureInterruptBar = [[UIView alloc] initWithFrame:measureBarInterruptFrame];
-                
-                interruptTranspose = measureBarInterruptFrame.size.width;
-                
-                if([interruptPattern isEqualToString:@"A"]){
-                    [measureInterruptBar setBackgroundColor:aColor];
-                }else if([interruptPattern isEqualToString:@"B"]){
-                    [measureInterruptBar setBackgroundColor:bColor];
-                }else if([interruptPattern isEqualToString:@"C"]){
-                    [measureInterruptBar setBackgroundColor:cColor];
-                }else if([interruptPattern isEqualToString:@"D"]){
-                    [measureInterruptBar setBackgroundColor:dColor];
-                }else{
-                    [measureInterruptBar setBackgroundColor:offColor];
-                }
-                
-                [trackView addSubview:measureInterruptBar];
-                
-                if(![interruptPattern isEqualToString:@"OFF"]){
-                    double deltai = [[measureData objectForKey:@"deltai"] doubleValue];
-                    [self drawProgressMarkerForMeasure:i inRow:k startAt:deltai withWidth:(1.0-deltai)];
-                }
-            }
-            
-            
-            // Draw fret before interrupt pattern
-            NSMutableArray * frets = [measureData objectForKey:@"frets"];
-            NSMutableDictionary * tempPattern = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:-1],[NSNumber numberWithInt:-1],@"",@"",nil] forKeys:[NSArray arrayWithObjects:@"start",@"end",@"ismute",@"pattern",nil, nil]];
-            NSMutableArray * tempFretPatterns = [[NSMutableArray alloc] init];
-            
-            for(NSDictionary * fret in frets){
-                
-                // Mute -> Unmute before off
-                if(![[fret objectForKey:@"ismuted"] boolValue] && [pattern isEqualToString:@"OFF"] && [[tempPattern objectForKey:@"start"] intValue] == -1){
-                    
-                    // Start a temp pattern
-                    [tempPattern setObject:[fret objectForKey:@"fretindex"] forKey:@"start"];
-                    [tempPattern setObject:[NSNumber numberWithBool:false] forKey:@"ismute"];
-                    [tempPattern setObject:[fret objectForKey:@"pattern"] forKey:@"pattern"];
-                    
-                }else if([[fret objectForKey:@"ismuted"] boolValue] && ![pattern isEqualToString:@"OFF"] && [[tempPattern objectForKey:@"start"] intValue] == -1){
-                    
-                    // Start a temp pattern
-                    [tempPattern setObject:[fret objectForKey:@"fretindex"] forKey:@"start"];
-                    [tempPattern setObject:[NSNumber numberWithBool:true] forKey:@"ismute"];
-                    [tempPattern setObject:@"OFF" forKey:@"pattern"];
-                }
-                
-                // Reached the end
-                if([[fret objectForKey:@"fretindex"] intValue] > [[tempPattern objectForKey:@"start"] intValue] && [[tempPattern objectForKey:@"start"] intValue] > -1 && ((![[fret objectForKey:@"ismuted"] boolValue] && ![pattern isEqualToString:@"OFF"]) || ([[fret objectForKey:@"ismuted"] boolValue] && [pattern isEqualToString:@"OFF"]))){
-                    
-                    [tempPattern setObject:[fret objectForKey:@"fretindex"] forKey:@"end"];
-                    [tempFretPatterns addObject:tempPattern];
-                    
-                    tempPattern = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:-1],[NSNumber numberWithInt:-1],@"",@"",nil] forKeys:[NSArray arrayWithObjects:@"start",@"end",@"ismute",@"pattern",nil, nil]];
-                    
-                }
-                
-                if(((double)[[fret objectForKey:@"fretindex"] intValue])/FRETS_ON_GTAR >= [[measureData objectForKey:@"deltai"] doubleValue]){
-                    
-                    //DLog(@"Return at fret %i",[[fret objectForKey:@"fretindex"] intValue]);
-                    break;
-                }
-            }
-            
-            // Draw the fret patterns
-            double fretWidth = measureWidth/FRETS_ON_GTAR;
-            for(int t = 0; t < [tempFretPatterns count]; t++){
-                
-                int start = [[[tempFretPatterns objectAtIndex:t] objectForKey:@"start"] intValue];
-                int end = [[[tempFretPatterns objectAtIndex:t] objectForKey:@"end"] intValue];
-                int fretslong = end - start;
-                
-                CGRect fretFrame = CGRectMake(measureBarFrame.origin.x+fretWidth*start,measureBarFrame.origin.y,fretslong*fretWidth,measureBarFrame.size.height);
-                
-                UIView * tempFret = [[UIView alloc] initWithFrame:fretFrame];
-                double deltastart = ((double)start)/FRETS_ON_GTAR;
-                double deltawidth = ((double)(end-start))/FRETS_ON_GTAR;
-                
-                if([[[tempFretPatterns objectAtIndex:t] objectForKey:@"ismute"] boolValue]){
-                    
-                    [tempFret setBackgroundColor:offColorSolid];
-                    
-                    [self eraseProgressMarkerForMeasure:i inRow:k startAt:deltastart withWidth:deltawidth];
-                    
-                }else{
-                    // record the color and get it
-                    NSString * fretPattern = [[tempFretPatterns objectAtIndex:t] objectForKey:@"pattern"];
-                    if([fretPattern isEqualToString:@"A"]){
-                        [tempFret setBackgroundColor:aColorSolid];
-                    }else if([fretPattern isEqualToString:@"B"]){
-                        [tempFret setBackgroundColor:bColorSolid];
-                    }else if([fretPattern isEqualToString:@"C"]){
-                        [tempFret setBackgroundColor:cColorSolid];
-                    }else if([fretPattern isEqualToString:@"D"]){
-                        [tempFret setBackgroundColor:dColorSolid];
-                    }else{
-                        [tempFret setBackgroundColor:offColor];
-                    }
-                    
-                    [self drawProgressMarkerForMeasure:i inRow:k startAt:deltastart withWidth:deltawidth];
-                }
-                
-                [trackView addSubview:tempFret];
-            }
-            
+ 
             
             // Draw pattern end markers
             BOOL patternend = [[measureData objectForKey:@"patternrepeat"] boolValue];
@@ -652,33 +531,6 @@
                 [tickmarks addObject:bottomTick];
                 
             }
-            
-            // Indicate letter
-            if(![prevPattern[k] isEqualToString:pattern] && ![pattern isEqualToString:@"OFF"] && ([interruptPattern isEqualToString:@""] || interruptPattern == nil)){
-                
-                CGRect patternLetterFrame;
-                float patternLetterWidth = 30;
-                float patternLetterIndent = 10;
-                
-                if(prevInterruptPattern != nil && [prevInterruptPattern[k] isEqualToString:pattern]){
-                    patternLetterFrame = CGRectMake(measureBar.frame.origin.x+patternLetterIndent-prevTranspose[k],track.frame.origin.y+track.frame.size.height/2-patternLetterWidth/2,patternLetterWidth,patternLetterWidth);
-                }else{
-                    patternLetterFrame = CGRectMake(measureBar.frame.origin.x+patternLetterIndent,track.frame.origin.y+track.frame.size.height/2-patternLetterWidth/2,patternLetterWidth,patternLetterWidth);
-                }
-                
-                UILabel * patternLetter = [[UILabel alloc] initWithFrame:patternLetterFrame];
-                [patternLetter setText:pattern];
-                [patternLetter setTextColor:[UIColor whiteColor]];
-                [patternLetter setAlpha:0.5];
-                [patternLetter setFont:[UIFont fontWithName:FONT_BOLD size:20.0]];
-                
-                [trackView addSubview:patternLetter];
-            }
-            
-            prevPattern[k] = pattern;
-            prevInterruptPattern[k] = interruptPattern;
-            prevTranspose[k] = interruptTranspose;
-            
         }
         
         i++;
@@ -711,33 +563,6 @@
     double newIndicatorX = progressView.frame.size.width * percentMoved;
     
     [progressViewIndicator setFrame:CGRectMake(newIndicatorX, 0, progressViewIndicator.frame.size.width, progressViewIndicator.frame.size.height)];
-}
-
--(void)drawProgressMarkerForMeasure:(int)m inRow:(int)row startAt:(double)start withWidth:(double)width
-{
-    float measureWidth = progressView.frame.size.width / numMeasures;
-    float rowHeight = (progressView.frame.size.height-10) / MAX_TRACKS;
-    
-    CGRect markerFrame = CGRectMake(m*measureWidth+measureWidth*start,row*rowHeight+5,width*measureWidth,1.0);
-    
-    UIView * marker = [[UIView alloc] initWithFrame:markerFrame];
-    [marker setBackgroundColor:[UIColor whiteColor]];
-    
-    [progressView addSubview:marker];
-    
-}
-
--(void)eraseProgressMarkerForMeasure:(int)m inRow:(int)row startAt:(double)start withWidth:(double)width
-{
-    float measureWidth = progressView.frame.size.width / numMeasures;
-    float rowHeight = (progressView.frame.size.height-10) / MAX_TRACKS;
-    
-    CGRect markerFrame = CGRectMake(m*measureWidth+measureWidth*start,row*rowHeight+5,width*measureWidth,1.0);
-    
-    UIView * marker = [[UIView alloc] initWithFrame:markerFrame];
-    [marker setBackgroundColor:[UIColor colorWithRed:105/255.0 green:214/255.0 blue:90/255.0 alpha:1.0]];
-    
-    [progressView addSubview:marker];
 }
 
 #pragma mark - No Session Overlay
