@@ -254,7 +254,7 @@
     [m_tracks addObject:track];
 }
 
-- (NSTrack *)trackWithName:(NSString *)name volume:(double)volume mute:(bool)mute instrument:(NSInstrument *)inst
+- (NSTrack *)trackWithName:(NSString *)name level:(double)level mute:(bool)mute instrument:(NSInstrument *)inst
 {
     if(name == nil || [name length] == 0){
         return nil;
@@ -267,7 +267,7 @@
     }
     
     // not found, create
-    NSTrack * newTrack = [[NSTrack alloc] initWithName:name volume:volume muted:mute];
+    NSTrack * newTrack = [[NSTrack alloc] initWithName:name level:level muted:mute];
     newTrack.m_instrument.m_id = inst.m_id;
     newTrack.m_instrument.m_name = inst.m_name;
     

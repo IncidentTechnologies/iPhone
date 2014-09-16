@@ -288,7 +288,7 @@
         CGRect levelSliderFrame = CGRectMake(instrumentFrame.size.width/2 - levelSliderWidth/2,90,levelSliderWidth,levelSliderHeight);
         UILevelSlider * volumeSlider = [[UILevelSlider alloc] initWithFrame:levelSliderFrame];
         [volumeSlider setBackgroundColor:[UIColor clearColor]];
-        [volumeSlider setSliderValue:(1-track.m_volume)];
+        [volumeSlider setSliderValue:(1-track.m_level)];
         
         [volumeSlider setRedColor:[UIColor colorWithRed:203/255.0 green:81/255.0 blue:26/255.0 alpha:1.0]];
         [volumeSlider setGreenColor:[UIColor colorWithRed:5/255.0 green:195/255.0 blue:77/255.0 alpha:1.0]];
@@ -430,7 +430,7 @@
     for(NSNumber * key in sliders){
         if(levelSender == [sliders objectForKey:key]){
             track = [tracks objectAtIndex:[key intValue]];
-            track.m_volume = newValue;
+            track.m_level = newValue;
             return;
         }
     }

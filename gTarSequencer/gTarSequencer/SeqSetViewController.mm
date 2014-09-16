@@ -448,7 +448,7 @@
 
 - (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIsCustom:(BOOL)isCustom
 {
-    NSTrack * newTrack = [[NSTrack alloc] initWithName:instName volume:1.0 muted:NO];
+    NSTrack * newTrack = [[NSTrack alloc] initWithName:instName level:1.0 muted:NO];
     
     // Add Track
     [sequence addTrack:newTrack];

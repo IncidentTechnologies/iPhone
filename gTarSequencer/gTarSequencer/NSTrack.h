@@ -21,7 +21,7 @@
 @interface NSTrack : NSObject
 {
     NSString * m_name;
-    double m_volume;
+    double m_level;
     bool m_muted;
     
     NSInstrument * m_instrument;
@@ -33,7 +33,7 @@
 @property (retain, nonatomic) NSMutableArray * m_patterns;
 @property (retain, nonatomic) NSMutableArray * m_clips;
 
-@property (nonatomic) double m_volume;
+@property (nonatomic) double m_level;
 @property (nonatomic) bool m_muted;
 
 // TODO: use a separate context save for these
@@ -44,7 +44,7 @@
 
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
 
-- (id)initWithName:(NSString *)name volume:(double)volume muted:(bool)muted;
+- (id)initWithName:(NSString *)name level:(double)level muted:(bool)muted;
 
 - (XMPNode *)convertToSongXmp;
 - (XMPNode *)convertToSequenceXmp;

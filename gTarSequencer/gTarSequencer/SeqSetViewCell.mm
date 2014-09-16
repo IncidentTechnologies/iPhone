@@ -699,7 +699,7 @@
         [offButton addSubview:volumeKnob];
         
         [volumeKnob EnableKnob];
-        [volumeKnob SetValue:track.m_volume];
+        [volumeKnob SetValue:track.m_level];
         
         DLog(@"init volume is %f",[volumeKnob GetValue]);
         
@@ -714,7 +714,7 @@
 
 -(void)resetVolume
 {
-    [volumeKnob SetValue:track.m_volume];
+    [volumeKnob SetValue:track.m_level];
 }
 
 - (void)drawVolumeOverlay
@@ -763,7 +763,7 @@
 
 -(void)trackingDidChange
 {
-    track.m_volume = [tempVolumeKnob GetValue];
+    track.m_level = [tempVolumeKnob GetValue];
 }
 
 -(void)trackingDidEnd
@@ -773,7 +773,7 @@
     [volumeKnob SetValue:[tempVolumeKnob GetValue]];
     
     DLog(@"new volume is %f",[volumeKnob GetValue]);
-    track.m_volume = [volumeKnob GetValue];
+    track.m_level = [volumeKnob GetValue];
     
     [volumeBg removeFromSuperview];
     [volumeKnob setHidden:NO];

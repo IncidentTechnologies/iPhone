@@ -318,7 +318,7 @@
         [self enqueuePatternButton:queuedIndex];
     }
     
-    [volumeKnob SetValue:currentTrack.m_volume];
+    [volumeKnob SetValue:currentTrack.m_level];
     
     // Determine on or off
     isMute = toMute;
@@ -1528,7 +1528,7 @@
         [volumeKnob setUserInteractionEnabled:NO];
         [offButton addSubview:volumeKnob];
         
-        [volumeKnob SetValue:currentTrack.m_volume];
+        [volumeKnob SetValue:currentTrack.m_level];
         
         volumeKnobView.delegate = self;
         
@@ -1543,7 +1543,7 @@
 
 - (void)resetVolume
 {
-    [volumeKnob SetValue:currentTrack.m_volume];
+    [volumeKnob SetValue:currentTrack.m_level];
 }
 
 - (void)knobRegionHit
@@ -1599,7 +1599,7 @@
 
 -(void)trackingDidChange
 {
-    currentTrack.m_volume = [tempVolumeKnob GetValue];
+    currentTrack.m_level = [tempVolumeKnob GetValue];
 }
 
 -(void)trackingDidEnd
@@ -1609,7 +1609,7 @@
     [volumeKnob SetValue:[tempVolumeKnob GetValue]];
     
     DLog(@"new volume is %f",[volumeKnob GetValue]);
-    currentTrack.m_volume = [volumeKnob GetValue];
+    currentTrack.m_level = [volumeKnob GetValue];
     
     [volumeBg removeFromSuperview];
     [volumeKnob setHidden:NO];

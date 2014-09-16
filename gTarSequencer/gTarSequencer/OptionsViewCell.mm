@@ -161,6 +161,8 @@
     }else{
         [text setFont:[UIFont fontWithName:FONT_DEFAULT size:18.0]];
     }
+    
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

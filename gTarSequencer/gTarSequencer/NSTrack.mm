@@ -13,7 +13,7 @@
 @synthesize m_patterns;
 @synthesize m_clips;
 @synthesize m_name;
-@synthesize m_volume;
+@synthesize m_level;
 @synthesize m_muted;
 @synthesize m_instrument;
 
@@ -36,7 +36,7 @@
         
         m_name = [[NSString alloc] initWithUTF8String:[track GetAttributeValueWithName:@"name"].GetPszValue()];
         
-        [track GetAttributeValueWithName:@"volume"].GetValueDouble(&m_volume);
+        [track GetAttributeValueWithName:@"level"].GetValueDouble(&m_level);
         
         [track GetAttributeValueWithName:@"muted"].GetValueBool(&m_muted);
         
@@ -84,7 +84,7 @@
     return self;
 }
 
--(id)initWithName:(NSString *)name volume:(double)volume muted:(bool)muted
+-(id)initWithName:(NSString *)name level:(double)level muted:(bool)muted
 {
     
     self = [super init];
@@ -110,7 +110,7 @@
         [self addPattern:patternD];
 
         m_name = name;
-        m_volume = volume;
+        m_level = level;
         m_muted = muted;
         
         selectedPattern = patternA;
@@ -132,7 +132,7 @@
     
     node->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_name UTF8String]));
     
-    node->AddAttribute(new XMPAttribute((char *)"volume", m_volume));
+    node->AddAttribute(new XMPAttribute((char *)"level", m_level));
     
     node->AddAttribute(new XMPAttribute((char *)"muted", m_muted));
     
@@ -153,7 +153,7 @@
     
     node->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_name UTF8String]));
     
-    node->AddAttribute(new XMPAttribute((char *)"volume", m_volume));
+    node->AddAttribute(new XMPAttribute((char *)"level", m_level));
     
     node->AddAttribute(new XMPAttribute((char *)"muted", m_muted));
     
@@ -337,8 +337,8 @@
 {
     [m_instrument.m_sampler.audio updateMasterAmplitude:masteramplitude];
     
-    if (sound && m_volume > 0)
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:m_instrument.m_id andAudio:m_instrument.m_sampler.audio withAmplitude:AMPLITUDE_SCALE*m_volume];
+    if (sound && m_level > 0)
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:m_instrument.m_id andAudio:m_instrument.m_sampler.audio withAmplitude:AMPLITUDE_SCALE*m_level];
     else
         [selectedPattern playFret:fret inRealMeasure:measure withInstrument:-1 andAudio:m_instrument.m_sampler.audio withAmplitude:0.0];
 }

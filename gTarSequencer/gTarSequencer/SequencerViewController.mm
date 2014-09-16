@@ -41,9 +41,6 @@
 @synthesize leftNavigator;
 @synthesize setName;
 
-//@synthesize yesButton;
-//@synthesize noButton;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -250,6 +247,7 @@
     
 }
 
+#pragma mark - File Management
 
 -(void)copyTutorialFile
 {
@@ -276,7 +274,7 @@
     DLog(@"Copied tutorial file from %@ to %@",defaultSetPath,newDefaultSetPath);
 }
 
-#pragma mark - Left Navigator Delegate
+#pragma mark - Left Navigator
 
 - (BOOL)isLeftNavOpen
 {
@@ -485,7 +483,7 @@
     [soundMaster commitMasterLevelSlider:masterSlider];
 }
 
-#pragma mark - Options View Controller Delegate
+#pragma mark - Options View Controller
 
 - (int)countInstruments
 {
@@ -497,7 +495,7 @@
     return [seqSetViewController countSamples];
 }
 
-#pragma mark - Save Load Delegate
+#pragma mark - Save Load
 
 - (void)userDidLoadSequenceOptions
 {
@@ -506,7 +504,7 @@
 
 - (void)saveWithName:(NSString *)filename
 {
-    activeSequencer = filename;
+    [self setActiveSequence:filename];
     filename = [@"usr_" stringByAppendingString:filename];
     
     [self saveContext:filename force:YES];
@@ -521,7 +519,7 @@
         // First clear any sound playing
         [seqSetViewController resetSoundMaster];
         
-        activeSequencer = filename;
+        [self setActiveSequence:filename];
         
         [self loadStateFromDisk:filename];
         [self saveContext:nil force:YES];
@@ -536,7 +534,7 @@
         [seqSetViewController stopSoundMaster];
         [seqSetViewController resetSoundMaster];
         
-        activeSong = filename;
+        [self setActiveSong:filename];
         filename = [@"usr_" stringByAppendingString:filename];
         
         // Init the song
@@ -559,11 +557,11 @@
 {
     if([type isEqualToString:TABLE_SETS]){
         if([activeSequencer isEqualToString:filename]){
-            activeSequencer = newname;
+            [self setActiveSequence:newname];
         }
     }else if([type isEqualToString:TABLE_SONGS]){
         if([activeSong isEqualToString:filename]){
-            activeSong = newname;
+            [self setActiveSong:newname];
         }
     }
     
@@ -614,7 +612,7 @@
 
 - (void)createNewSet
 {
-    activeSequencer = @"";
+    [self setActiveSequence:@""];
     
     // Delete all cells
     [seqSetViewController deleteAllCells];
@@ -642,20 +640,14 @@
 
 - (void)deleteWithName:(NSString *)filename andType:(NSString *)type
 {
-    /*NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-     NSError * error;
-     NSString * directoryPath = [paths objectAtIndex:0];
-     
-     NSMutableArray * fileSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
-     
-     // Exclude four default files
-     for(NSString * path in fileSet){
-     
-     NSString * fullPath = [directoryPath stringByAppendingPathComponent:path];
-     [[NSFileManager defaultManager] removeItemAtPath:fullPath error:&error];
-     
-     }*/
+    // Reset active if it's being deleted
+    if([type isEqualToString:TABLE_SETS] && [filename isEqualToString:activeSequencer]){
+        [self setActiveSequence:@""];
+    }else if([type isEqualToString:TABLE_SONGS] && [filename isEqualToString:activeSong]){
+        [self setActiveSong:@""];
+    }
     
+    // Then delete
     filename = [@"usr_" stringByAppendingString:filename];
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -669,6 +661,20 @@
         DLog(@"Error deleting");
     
     [self saveContext:nil force:YES];
+}
+
+#pragma mark - Active Sequence / Active Song
+
+- (void)setActiveSequence:(NSString *)sequence
+{
+    activeSequencer = sequence;
+    [optionsViewController setActiveSequencer:sequence];
+}
+
+- (void)setActiveSong:(NSString *)song
+{
+    activeSong = song;
+    [optionsViewController setActiveSong:song];
 }
 
 - (NSString *)getActiveSongName
@@ -706,9 +712,9 @@
     NSString * sequencerName = [seqSetViewController loadStateFromDisk:filepath];
     
     if(![sequencerName isEqualToString:@""] && ![sequencerName isEqualToString:DEFAULT_STATE_NAME]){
-        activeSequencer = sequencerName;
-        optionsViewController.activeSequencer = sequencerName;
-        optionsViewController.activeSong = activeSong;
+        
+        [self setActiveSequence:sequencerName];
+        [self setActiveSong:activeSong];
     }
     
     // Reset
@@ -793,7 +799,7 @@
             // RECORD XMP
             if(isRecording){
                 
-                NSTrack * songTrack = [recordingSong trackWithName:trackToPlay.m_name volume:trackToPlay.m_volume mute:trackToPlay.m_muted instrument:trackToPlay.m_instrument];
+                NSTrack * songTrack = [recordingSong trackWithName:trackToPlay.m_name level:trackToPlay.m_level mute:trackToPlay.m_muted instrument:trackToPlay.m_instrument];
                 NSClip * songClip = [songTrack lastClipComparePattern:trackToPlay.selectedPattern.m_name andMuted:trackToPlay.m_muted atBeat:r_beat/4.0];
                 
                 NSString * strings = @"";
@@ -849,6 +855,8 @@
                 SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
                 
                 [recordShareController loadSong:recordingSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+                
+                [self setActiveSong:recordingSong.m_title];
             }
             
             if(animate){

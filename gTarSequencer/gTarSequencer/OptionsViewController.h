@@ -73,6 +73,9 @@ extern NSUser * g_loggedInUser;
 - (void)disableScroll;
 - (void)enableScroll;
 
+- (void)setActiveSequencer:(NSString *)sequence;
+- (void)setActiveSong:(NSString *)song;
+
 @property (nonatomic) BOOL isFirstLaunch;
 
 @property (retain, nonatomic) NSString * activeSequencer;

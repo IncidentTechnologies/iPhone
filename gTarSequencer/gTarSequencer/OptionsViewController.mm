@@ -205,16 +205,15 @@
     if([loadedTableType isEqualToString:TABLE_SETS]){
         DLog(@"user did load SET %@",filename);
         
-        activeSequencer = filename;
+        // delegate calls back to set activeSequencer
         [delegate loadFromName:filename andType:loadedTableType];
-        
         [delegate viewSeqSetWithAnimation:YES];
+        
     }else if([loadedTableType isEqualToString:TABLE_SONGS]){
         DLog(@"user did load SONG %@",filename);
         
-        activeSong = filename;
+        // delegate calls back to set activeSong
         [delegate loadFromName:filename andType:loadedTableType];
-        
         [delegate viewRecordShareWithAnimation:YES];
         
     }
@@ -229,33 +228,21 @@
     if([emptyName isEqualToString:@""]){
         DLog(@"Error: trying to save with blank set name");
     }else{
-        activeSequencer = filename;
+        // delegate calls back to set activeSequencer
         [delegate saveWithName:filename];
-        
         [delegate viewSeqSetWithAnimation:YES];
     }
 }
 
 - (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname
 {
-    if([loadedTableType isEqualToString:TABLE_SETS]){
-        
-        DLog(@"user did move set %@ to %@",filename,newname);
-        
-        if([activeSequencer isEqualToString:filename]){
-            activeSequencer = newname;
-        }
-        
-    }else if([loadedTableType isEqualToString:TABLE_SONGS]){
-        
-        DLog(@"user did move song %@ to %@",filename,newname);
-        
-        if([activeSong isEqualToString:filename]){
-            activeSong = newname;
-        }
-        
+    DLog(@"user did move set/song %@ to %@",filename,newname);
+    
+    if([activeSong isEqualToString:filename]){
+        activeSong = newname;
     }
     
+    // Delegate sets activeSequencer/activeSong
     [delegate renameFromName:filename toName:newname andType:loadedTableType];
     [self reloadFileTable];
     
@@ -263,23 +250,10 @@
 
 - (void)userDidDeleteFile:(NSString *)filename
 {
-    if([loadedTableType isEqualToString:TABLE_SETS]){
-        
-        DLog(@"user did delete as %@",filename);
-        if([activeSequencer isEqualToString:filename]){
-            activeSequencer = @"";
-        }
-    }else if([loadedTableType isEqualToString:TABLE_SONGS]){
-        
-        
-        DLog(@"user did delete as %@",filename);
-        if([activeSong isEqualToString:filename]){
-            activeSong = @"";
-        }
-    }
+    DLog(@"user did delete as %@",filename);
     
+    // Delegate sets activeSequencer/activeSong
     [delegate deleteWithName:filename andType:loadedTableType];
-    
     
 }
 
@@ -296,8 +270,8 @@
     
     NSString * newSet = ([activeSequencer isEqualToString:@""] || activeSequencer == nil || [activeSequencer isEqualToString:DEFAULT_SET_NAME]) ? [self generateNextSetName] : activeSequencer;
     
+    // delegate sets activeSequencer
     [delegate createNewSaveName:newSet];
-    activeSequencer = nil;
     
     //[self reloadFileTable];
     [self showSelectionToggle:YES];
@@ -444,12 +418,14 @@
         cell.isRenamable = NO;
         
         if([loadedTableType isEqualToString:TABLE_SETS]){
+            [cell unsetAsActiveSong];
             if([cell.fileText.text isEqualToString:activeSequencer]){
                 [cell setAsActiveSequencer];
             }else{
                 [cell unsetAsActiveSequencer];
             }
         }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+            [cell unsetAsActiveSequencer];
             if([cell.fileText.text isEqualToString:activeSong]){
                 [cell setAsActiveSong];
             }else{
@@ -611,6 +587,22 @@
     
     return dateString;
     
+}
+
+#pragma mark - Active Sequence / Song
+
+-(void)setActiveSequencer:(NSString *)sequence
+{
+    activeSequencer = sequence;
+    
+    [self loadTableWith:loadedTableType];
+}
+
+-(void)setActiveSong:(NSString *)song
+{
+    activeSong = song;
+    
+    [self loadTableWith:loadedTableType];
 }
 
 -(void)highlightActive
