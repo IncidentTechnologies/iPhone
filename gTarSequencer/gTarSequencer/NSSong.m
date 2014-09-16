@@ -149,7 +149,11 @@
     headerNode->AddChild(tempNode);
     
     tempNode = new XMPNode((char *)"description", headerNode);
-    tempNode->AppendContentNode((char*)[m_description UTF8String]);
+    if(m_description != nil){
+        tempNode->AppendContentNode((char*)[m_description UTF8String]);
+    }else{
+        tempNode->AppendContentNode((char*)[@"" UTF8String]);
+    }
     headerNode->AddChild(tempNode);
     
     tempNode = new XMPNode((char *)"tempo", headerNode);

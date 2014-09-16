@@ -48,7 +48,6 @@ extern NSUser * g_loggedInUser;
 
 @interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate>
 {
-    //NSMutableArray * loadedPattern;
     NSMutableArray * instruments;
     NSMutableArray * tracks;
     NSMutableArray * tickmarks;
@@ -56,10 +55,8 @@ extern NSUser * g_loggedInUser;
     int numMeasures;
     
     // Recording
-    NSSong * recordingSong;    
     NSTimer * recordTimer;
     BOOL isWritingFile;
-    NSSongModel * songModel;
     
     int r_measure;
     int r_beat;
@@ -87,7 +84,9 @@ extern NSUser * g_loggedInUser;
 }
 
 - (void)reloadInstruments;
-- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
+- (void)loadSongFromXml:(NSString *)songPath andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
+
+- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
 
 - (IBAction)userDidBack:(id)sender;
 - (BOOL)showHideSessionOverlay;
@@ -98,6 +97,8 @@ extern NSUser * g_loggedInUser;
 - (void)pauseRecordPlayback;
 
 - (void)interruptRecording;
+
+- (NSString *)generateNextRecordedSongName;
 
 - (IBAction)userDidSelectShare:(id)sender;
 
@@ -127,5 +128,8 @@ extern NSUser * g_loggedInUser;
 @property (nonatomic, weak) IBOutlet UITextView * songDescriptionField;
 
 @property (nonatomic, weak) IBOutlet UIView * playbandView;
+
+@property (retain, nonatomic) NSSong * recordingSong;
+@property (retain, nonatomic) NSSongModel * songModel;
 
 @end

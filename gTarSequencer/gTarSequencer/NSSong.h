@@ -43,7 +43,7 @@
 @property (nonatomic, readonly) NSString * m_sequenceName;
 @property (nonatomic) long m_sequenceId;
 
-@property (nonatomic, readonly) NSMutableArray * m_tracks;
+@property (nonatomic, retain) NSMutableArray * m_tracks;
 
 @property (nonatomic, assign) double startbeat;
 

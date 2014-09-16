@@ -536,12 +536,19 @@
         activeSong = filename;
         filename = [@"usr_" stringByAppendingString:filename];
         
-        // TODO: load song into record share view
+        // Init the song
         NSSong * loadedSong = [[NSSong alloc] initWithXMPFilename:filename];
         
         // Set the active sequencer accordingly
         [self loadStateFromDisk:loadedSong.m_sequenceName];
         [self saveContext:nil force:YES];
+        
+        // Load into record share view
+        SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+        
+        //[recordShareController loadSongFromXml:filename andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+        
+        [recordShareController loadSong:loadedSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
         
     }
 }
@@ -879,7 +886,9 @@
 #pragma mark - Record
 - (void)resetPatternData
 {
-    recordingSong = [[NSSong alloc] initWithTitle:@"Song001" author:g_loggedInUser.m_username description:@"" tempo:[playControlViewController getTempo] looping:false loopstart:0 loopend:0 sequenceName:[seqSetViewController getSequence].m_name sequenceId:[seqSetViewController getSequence].m_id];
+    NSString * nextSongName = [recordShareController generateNextRecordedSongName];
+    
+    recordingSong = [[NSSong alloc] initWithTitle:nextSongName author:g_loggedInUser.m_username description:@"" tempo:[playControlViewController getTempo] looping:false loopstart:0 loopend:0 sequenceName:[seqSetViewController getSequence].m_name sequenceId:[seqSetViewController getSequence].m_id];
     
     r_beat = 0;
     

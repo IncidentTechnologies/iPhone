@@ -14,6 +14,7 @@
 @interface NSInstrument : NSObject
 {
     long m_id;
+    long m_xmpid;
     NSString * m_name;
     NSString * m_iconName;
     bool m_custom;
@@ -22,6 +23,7 @@
 }
 
 @property (nonatomic) long m_id;
+@property (nonatomic) long m_xmpid;
 @property (retain, nonatomic) NSString * m_name;
 @property (retain, nonatomic) NSString * m_iconName;
 @property (nonatomic) bool m_custom;

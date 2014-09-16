@@ -48,6 +48,8 @@
 @synthesize songNameField;
 @synthesize songDescriptionField;
 @synthesize playbandView;
+@synthesize recordingSong;
+@synthesize songModel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -216,7 +218,14 @@
     return -1;
 }
 
-- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
+/*- (void)loadSongFromXml:(NSString *)songPath andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
+{
+    recordingSong = [[NSSong alloc] initWithXMPFilename:songPath];
+    
+    [self loadSong:recordingSong andSoundMaster:soundMaster activeSequence:activeSequence activeSong:activeSong];
+}*/
+
+- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
 {
     if(song != nil){
         recordingSong = song;
@@ -225,19 +234,25 @@
         [self showNoSessionOverlay];
     }
     
+    DLog(@"Song is %@, sequence is %@",recordingSong,activeSequence);
+    
+    [self reloadInstruments];
+    
     [self removeDeletedMeasuresFromRecordedSong];
+    
     [self setMeasures:[self countMeasuresFromRecordedSong]];
+    
     [self drawPatternsOnMeasures];
     
     // record the m4a
-    if(song != nil){
-        [self startRecording:nil withTempo:song.m_tempo andSoundMaster:m_soundMaster activeSequence:activeSequence activeSong:nil];
-    }
+    //if(song != nil){
+        [self startRecording:nil withTempo:song.m_tempo andSoundMaster:soundMaster activeSequence:activeSequence activeSong:nil];
+    //}
     
     // reset the progress bar on top
     [self resetProgressView];
     
-    // ensure record playback gets refreshed
+    // ensure record playback gbegets refreshed
     [self stopRecordPlayback];
 }
 
@@ -280,6 +295,7 @@
         int instrumentIndex = track.m_instrument.m_id;
         
         if(![self isValidInstrumentIndex:instrumentIndex]){
+            DLog(@"Invalid instrument index %i",instrumentIndex);
             [tracksToRemove addObject:track];
         }
     }
@@ -423,8 +439,6 @@
             int fillMeasures = clipEndMeasure - clipStartMeasure; // Total measures
             
             int fillOffset = patternLength - clipStartMeasure % patternLength;
-            
-            DLog(@"Pattern %@ %i measures; start at %i+%i fill %i measures",clip.m_name,patternLength,clipStartMeasure,fillOffset, fillMeasures);
             
             // Start filling every % patternLength == 0 measures;
             for(int m = clipStartMeasure+fillOffset; m <= clipStartMeasure+fillMeasures; m+= patternLength)
@@ -664,7 +678,6 @@
     // Wrap up song name editing in progress
     [self songNameFieldDoneEditing:songNameField];
     
-    
     // Get dimensions
     float y = [[UIScreen mainScreen] bounds].size.width;
     
@@ -700,7 +713,6 @@
     view.clipsToBounds = YES;
     view.layer.masksToBounds = YES;
 }
-
 
 - (void)drawBackButtonForView:(UIView *)view withX:(int)x
 {
@@ -863,7 +875,7 @@
     
     // TODO: reinstate this?
     //if(![activeSong isEqualToString:recordingSong.m_title]){
-        
+    
         isWritingFile = YES;
         
         //loadedPattern = patternData;
@@ -887,7 +899,8 @@
 
 -(void)beginRecordSession
 {
-    //recordingSong = [[NSSong alloc] initWithTitle:[self generateNextRecordedSongName] author:g_loggedInUser.m_username description:@"" tempo:loadedTempo looping:false loopstart:0 loopend:0 sequenceName:loadedSequence.m_name sequenceId:loadedSequence.m_id];
+    
+    DLog(@"Recording song is %@",recordingSong);
     
     fileNode = [loadedSoundMaster generateFileoutNode:DEFAULT_SONG_NAME];
     
@@ -926,7 +939,6 @@
 
 -(void)recordToFile
 {
-    
     @synchronized(recordingSong){
         for(NSTrack * track in recordingSong.m_tracks){
             for(NSClip * clip in track.m_clips){
@@ -976,6 +988,8 @@
     
     // save XMP
     //[recordingSong printTree];
+    DLog(@"RecordingSong is %@",recordingSong);
+    
     [recordingSong saveToFile:recordingSong.m_title];
     
     // release

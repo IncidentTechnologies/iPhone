@@ -11,6 +11,7 @@
 @implementation NSInstrument
 
 @synthesize m_id;
+@synthesize m_xmpid;
 @synthesize m_name;
 @synthesize m_iconName;
 @synthesize m_custom;
@@ -34,6 +35,11 @@
         
         [instrument GetAttributeValueWithName:@"index"].GetValueInt(&m_id);
         
+        if(m_id <= 0){
+            [instrument GetAttributeValueWithName:@"xmpid"].GetValueInt(&m_xmpid);
+            m_id = m_xmpid;
+        }
+        
         [instrument GetAttributeValueWithName:@"custom"].GetValueBool(&m_custom);
         
         m_sampler = [[NSSampler alloc] initWithXMPNode:xmpNode->FindChildByName((char *)"sampler")];
@@ -51,6 +57,7 @@
     {
         m_name = @"";
         m_id = -1;
+        m_xmpid = -1;
         m_iconName = @"";
         m_custom = NO;
         
@@ -69,6 +76,7 @@
     {
         m_name = name;
         m_id = index;
+        m_xmpid = m_id;
         m_iconName = iconName;
         m_custom = isCustom;
         
