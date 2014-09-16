@@ -567,11 +567,20 @@
 // Prevent bouncing
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    scroller = scrollView;
+    if(![setButton isHidden]){
+        
+        // Ensure no scrolling happens accidentally
+        scrollView.contentOffset = CGPointMake(0,0);
+        
+    }else{
+        
+        scroller = scrollView;
+        
+        static CGFloat targetOffset = 62;
+        if(scrollView.contentOffset.x >= targetOffset){
+            scrollView.contentOffset = CGPointMake(targetOffset, 0.0);
+        }
     
-    static CGFloat targetOffset = 62;
-    if(scrollView.contentOffset.x >= targetOffset){
-        scrollView.contentOffset = CGPointMake(targetOffset, 0.0);
     }
 }
 
@@ -589,6 +598,21 @@
 
 - (IBAction)userDidSelectSetButton:(id)sender
 {
+    [self highlightSetButton];
+    
+    [parent loadTableWith:TABLE_SETS];
+}
+
+- (IBAction)userDidSelectSongButton:(id)sender
+{
+    [self highlightSongButton];
+    
+    [parent loadTableWith:TABLE_SONGS];
+    
+}
+
+- (void)highlightSetButton
+{
     [setButton setBackgroundColor:darkGrayColor];
     [setButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [[setButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:22.0]];
@@ -596,11 +620,9 @@
     [songButton setBackgroundColor:[UIColor whiteColor]];
     [songButton setTitleColor:darkGrayColor forState:UIControlStateNormal];
     [[songButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:18.0]];
-    
-    [parent loadTableWith:TABLE_SETS];
 }
 
-- (IBAction)userDidSelectSongButton:(id)sender
+- (void)highlightSongButton
 {
     [songButton setBackgroundColor:darkGrayColor];
     [songButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -609,8 +631,6 @@
     [setButton setBackgroundColor:[UIColor whiteColor]];
     [setButton setTitleColor:darkGrayColor forState:UIControlStateNormal];
     [[setButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:18.0]];
-    
-    [parent loadTableWith:TABLE_SONGS];
     
 }
 

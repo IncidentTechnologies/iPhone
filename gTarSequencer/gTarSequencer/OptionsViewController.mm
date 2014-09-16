@@ -452,6 +452,13 @@
         cell.isRenamable = NO;
         [cell.setButton setHidden:NO];
         [cell.songButton setHidden:NO];
+        
+        if([loadedTableType isEqualToString:TABLE_SETS]){
+            [cell highlightSetButton];
+        }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+            [cell highlightSongButton];
+        }
+        
         //[cell setHidden:YES];
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && ![fileLoadSet[indexPath.row-1] isEqualToString:activeSequencer]){
         [cell setHidden:YES];

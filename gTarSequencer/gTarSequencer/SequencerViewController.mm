@@ -895,7 +895,12 @@
 -(void)addFinalRecordedPartialMeasure
 {
     forceRecord = YES;
+    
+    // Ensure volume has been set
+    playVolume = (playVolume == 0) ? DEFAULT_VOLUME : playVolume;
+    
     [self mainEventLoop];
+    
     forceRecord = NO;
 }
 

@@ -37,6 +37,9 @@
 - (NSString *)getNameForFile;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 
+- (void)highlightSetButton;
+- (void)highlightSongButton;
+
 @property (weak, nonatomic) OptionsViewController * parent;
 
 @property (weak, nonatomic) IBOutlet UILabel * fileText;

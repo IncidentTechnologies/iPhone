@@ -33,7 +33,7 @@
     
     root->ConnectInput(0, m_samplerNode, 0);
     
-    [audioController startAUGraph];
+    [self start];
 }
 
 -(void)start

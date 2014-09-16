@@ -986,7 +986,7 @@
     
     // release
     [self releaseFileoutNode];
-    
+    [self resetAudio];
 }
 
 -(void)interruptRecording
@@ -1030,20 +1030,34 @@
         [self resumePlaybandAnimation];
     }
     
-    //[delegate startSoundMaster];
-    //[self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+    [delegate startSoundMaster];
+    [self performSelectorInBackground:@selector(startBackgroundLoop:) withObject:[NSNumber numberWithFloat:SECONDS_PER_EVENT_LOOP]];
     
-    [audioPlayer play];
+    
+    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+    
+    //[audioPlayer play];
     
     
 }
 
+- (void)startBackgroundLoop:(NSNumber *)spb
+{
+    DLog(@"Starting Background Loop with %f seconds per beat",[spb floatValue]);
+
+    NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
+
+    [self startMainEventLoop:[spb floatValue]];
+    
+    [runLoop run];
+}
+
 -(void)pauseRecordPlayback
 {
-    //[delegate stopSoundMaster];
-    //[self stopMainEventLoop];
+    [delegate stopSoundMaster];
+    [self stopMainEventLoop];
     
-    [audioPlayer pause];
+    //[audioPlayer pause];
     [self pausePlaybandAnimation];
 }
 
@@ -1051,7 +1065,7 @@
 {
     isAudioPlaying = NO;
     [self stopPlaybandAnimation];
-    [audioPlayer stop];
+    //[audioPlayer stop];
     [delegate recordPlaybackDidEnd];
 }
 
