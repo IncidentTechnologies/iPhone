@@ -244,8 +244,10 @@
     
     // Delegate sets activeSequencer/activeSong
     [delegate renameFromName:filename toName:newname andType:loadedTableType];
-    [self reloadFileTable];
+    //[self reloadFileTable];
     
+    // Delay reload
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reloadFileTable) userInfo:nil repeats:NO];
 }
 
 - (void)userDidDeleteFile:(NSString *)filename
