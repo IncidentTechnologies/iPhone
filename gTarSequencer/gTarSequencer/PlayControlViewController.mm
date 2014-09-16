@@ -562,11 +562,13 @@
 
 -(void)showRecordOverlay
 {
+    [disablePlay setHidden:NO];
     [disableRecord setHidden:NO];
 }
 
 -(void)hideRecordOverlay
 {
+    [disablePlay setHidden:YES];
     [disableRecord setHidden:YES];
 }
 

@@ -335,7 +335,9 @@
     
     // Do any view unloading
     [optionsViewController unloadView];
-    [playControlViewController hideSessionOverlay];
+    if(!isRecording){
+        [playControlViewController hideSessionOverlay];
+    }
     
     // Switch to new main subview
     if([nav isEqualToString:@"Options"]){
@@ -531,6 +533,7 @@
         DLog(@"Load song from name %@",filename);
         
         // First clear any sound playing
+        [seqSetViewController stopSoundMaster];
         [seqSetViewController resetSoundMaster];
         
         activeSong = filename;
@@ -546,8 +549,7 @@
         // Load into record share view
         SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
         
-        //[recordShareController loadSongFromXml:filename andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
-        
+        isRecording = TRUE;
         [recordShareController loadSong:loadedSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
         
     }
@@ -669,6 +671,11 @@
     [self saveContext:nil force:YES];
 }
 
+- (NSString *)getActiveSongName
+{
+    return activeSong;
+}
+
 
 #pragma mark - Auto Save Load
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
@@ -701,6 +708,7 @@
     if(![sequencerName isEqualToString:@""] && ![sequencerName isEqualToString:DEFAULT_STATE_NAME]){
         activeSequencer = sequencerName;
         optionsViewController.activeSequencer = sequencerName;
+        optionsViewController.activeSong = activeSong;
     }
     
     // Reset

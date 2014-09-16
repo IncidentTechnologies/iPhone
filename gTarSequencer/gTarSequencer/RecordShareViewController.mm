@@ -217,14 +217,6 @@
     
     return -1;
 }
-
-/*- (void)loadSongFromXml:(NSString *)songPath andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
-{
-    recordingSong = [[NSSong alloc] initWithXMPFilename:songPath];
-    
-    [self loadSong:recordingSong andSoundMaster:soundMaster activeSequence:activeSequence activeSong:activeSong];
-}*/
-
 - (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
 {
     if(song != nil){

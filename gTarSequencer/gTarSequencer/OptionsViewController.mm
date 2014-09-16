@@ -496,7 +496,7 @@
 {
     OptionsViewCell * cell = (OptionsViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     
-    if([selectMode isEqualToString:@"Load"] && !cell.isNameEditing && ![cell.fileText.text isEqualToString:DEFAULT_SET_NAME]){
+    if([selectMode isEqualToString:@"Load"] && !cell.isNameEditing && ![cell.fileText.text isEqualToString:DEFAULT_SET_NAME] && [cell.setButton isHidden]){
         return YES;
     }else{
         return NO;

@@ -114,7 +114,6 @@
 #pragma mark - Load Context
 - (NSString *)loadStateFromDisk:(NSString *)filepath
 {
-    
     if(filepath == nil){
         filepath = DEFAULT_STATE_NAME;
         DLog(@"Load state from disk");
@@ -127,6 +126,9 @@
     
     NSString * sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Sequences/" stringByAppendingString:[filepath stringByAppendingString:@".xml"]]];
     
+    NSString * stateMetaDataPath = [[paths objectAtIndex:0]
+                                    stringByAppendingPathComponent:@"metadataCurrentState"];
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:sequenceFilepath]) {
         DLog(@"The sequencer save plist exists");
@@ -135,32 +137,45 @@
         filepath = nil;
     }
     
-    // Read file load into all the things, make sure the data generates
-    [self initSequenceWithFilename:filepath];
+    
+    // Other state data
+    currentState = [[NSDictionary dictionaryWithContentsOfFile:stateMetaDataPath] mutableCopy];
+    
+    if (currentState == nil ){
+        currentState = [[NSMutableDictionary alloc] init];
+    }
     
     // Reset
-    if([filepath isEqualToString:DEFAULT_STATE_NAME]){
+    //if([filepath isEqualToString:DEFAULT_STATE_NAME]){
         
-        [self resetSelectedInstrumentIndex];
+        //[self resetSelectedInstrumentIndex];
         
-    }else{
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                             NSUserDomainMask, YES);
-        NSString * stateMetaDataPath = [[paths objectAtIndex:0]
-                                        stringByAppendingPathComponent:@"metadataCurrentState"];
+    //}else{
     
-         // Other state data
-         currentState = [[NSDictionary dictionaryWithContentsOfFile:stateMetaDataPath] mutableCopy];
-         
-        if (currentState == nil ){
-             currentState = [[NSMutableDictionary alloc] init];
-        }
+    BOOL loadSequence = true;
         
         if ( [[currentState allKeys] count] > 0 )
         {
             // Decode selectedInstrumentIndex
             [self setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
+            
+            if([filepath isEqualToString:DEFAULT_STATE_NAME]){
+                
+                NSString * activeSong = [currentState objectForKey:@"Active Song"];
+                
+                if(activeSong != nil && ![activeSong isEqualToString:@""]){
+                    loadSequence = false;
+                    [delegate loadFromName:activeSong andType:@"Songs"];
+                }
+            }
         }
+        
+    //}
+    
+    if(loadSequence){
+        
+        // Read file load into all the things, make sure the data generates
+        [self initSequenceWithFilename:filepath];
         
     }
     
@@ -190,6 +205,11 @@
                                             stringByAppendingPathComponent:@"metadataCurrentState"];
             
             [currentState setObject:[NSNumber numberWithInt:[self getSelectedInstrumentIndex]] forKey:@"Selected Instrument Index"];
+            
+            NSString * activeSong = [delegate getActiveSongName];
+            if(activeSong != nil){
+                [currentState setObject:[delegate getActiveSongName] forKey:@"Active Song"];
+            }
             
             BOOL success = [currentState writeToFile:stateMetaDataPath atomically:YES];
             

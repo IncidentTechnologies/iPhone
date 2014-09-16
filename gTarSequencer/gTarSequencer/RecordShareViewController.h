@@ -84,8 +84,6 @@ extern NSUser * g_loggedInUser;
 }
 
 - (void)reloadInstruments;
-- (void)loadSongFromXml:(NSString *)songPath andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
-
 - (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
 
 - (IBAction)userDidBack:(id)sender;

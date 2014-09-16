@@ -32,7 +32,6 @@
 - (void) updateGuitarView;
 - (void) updatePlaybandForTrack:(NSTrack *)track;
 
-
 - (void) numInstrumentsDidChange:(int)numInstruments;
 
 - (void) updateSelectedInstrument;
@@ -41,6 +40,8 @@
 - (void) setTempo:(int)tempo;
 - (void) setVolume:(double)volume;
 
+- (void)loadFromName:(NSString *)filename andType:(NSString *)type;
+- (NSString *)getActiveSongName;
 
 @end
 
