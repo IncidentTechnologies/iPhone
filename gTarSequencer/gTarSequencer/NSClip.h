@@ -65,4 +65,6 @@
 
 -(double)getMeasureForBeat:(double)beat;
 
+-(void)changePattern:(NSString *)newPattern;
+
 @end

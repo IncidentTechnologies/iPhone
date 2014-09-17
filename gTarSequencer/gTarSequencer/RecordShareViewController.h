@@ -74,6 +74,8 @@ extern NSUser * g_loggedInUser;
     UIView * editingClipView;
     UIView * editingClipLeftSlider;
     UIView * editingClipRightSlider;
+    UILabel * editingPatternLetter;
+    UIButton * editingPatternLetterOverlay;
     
     // Playback
     AVAudioPlayer * audioPlayer;

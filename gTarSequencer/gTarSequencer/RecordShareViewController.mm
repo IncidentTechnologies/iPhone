@@ -17,6 +17,7 @@
 #define PATTERN_B @"-B"
 #define PATTERN_C @"-C"
 #define PATTERN_D @"-D"
+#define PATTERN_OFF @"-ø"
 
 #define PATTERN_LETTER_WIDTH 30.0
 #define PATTERN_LETTER_INDENT 10.0
@@ -1466,6 +1467,8 @@
     
     editingClip = nil;
     editingClipView = nil;
+    editingPatternLetter = nil;
+    editingPatternLetterOverlay = nil;
     
 }
 
@@ -1509,30 +1512,56 @@
 
 - (void)resetEditingClipPattern
 {
-    UILabel * patternLetter = (UILabel *)[editingClipView.subviews firstObject];
+    [editingPatternLetterOverlay removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     
-    //patternLetter.text = [editingClip.m_name stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    UILabel * labelToFadeOut = editingPatternLetter;
     
-    [UIView animateWithDuration:0.1 animations:^(void){
+    if(editingClip.m_muted){
         
-        [patternLetter setAlpha:0.5];
-        [patternLetter setFont:[UIFont fontWithName:FONT_BOLD size:20.0]];
+        // Fade text out
+        [UIView animateWithDuration:0.1 animations:^(void){
+            [labelToFadeOut setAlpha:0.0];
+        } completion:^(BOOL finished){
+            labelToFadeOut.text = @"";
+            [labelToFadeOut setAlpha:1.0];
+        }];
         
-        [patternLetter setFrame:CGRectMake(PATTERN_LETTER_INDENT,0,PATTERN_LETTER_WIDTH,patternLetter.frame.size.height)];
-    }];
+    }else{
+        
+        // Shrink and realign text
+        [UIView animateWithDuration:0.1 animations:^(void){
+            
+            [labelToFadeOut setAlpha:0.5];
+            [labelToFadeOut setFont:[UIFont fontWithName:FONT_BOLD size:20.0]];
+            
+            [labelToFadeOut setFrame:CGRectMake(PATTERN_LETTER_INDENT,0,PATTERN_LETTER_WIDTH,labelToFadeOut.frame.size.height)];
+        }];
+    }
     
 }
 
 - (void)initEditingClipPattern
 {
-    UILabel * patternLetter = (UILabel *)[editingClipView.subviews firstObject];
+    editingPatternLetter = (UILabel *)[editingClipView.subviews firstObject];
+    
+    // Use overlay because treating the letter as a button does not work
+    // with the animation and listener simultaneously
+    editingPatternLetterOverlay = [[UIButton alloc] initWithFrame:CGRectMake(2*PATTERN_LETTER_INDENT,0,1.5*PATTERN_LETTER_WIDTH,editingPatternLetter.frame.size.height)];
+    
+    [editingPatternLetterOverlay addTarget:self action:@selector(changeLetterPattern:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [editingClipView addSubview:editingPatternLetterOverlay];
+    
+    if([editingPatternLetter.text isEqualToString:@""]){
+        editingPatternLetter.text = [PATTERN_OFF stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    }
     
     [UIView animateWithDuration:0.1 animations:^(void){
         
-        [patternLetter setAlpha:0.8];
-        [patternLetter setFont:[UIFont fontWithName:FONT_BOLD size:28.0]];
+        [editingPatternLetter setAlpha:0.8];
+        [editingPatternLetter setFont:[UIFont fontWithName:FONT_BOLD size:28.0]];
         
-        [patternLetter setFrame:CGRectMake(3*PATTERN_LETTER_INDENT,0,PATTERN_LETTER_WIDTH,patternLetter.frame.size.height)];
+        [editingPatternLetter setFrame:CGRectMake(3*PATTERN_LETTER_INDENT,0,PATTERN_LETTER_WIDTH,editingPatternLetter.frame.size.height)];
         
     } completion:^(BOOL finished){
         
@@ -1549,11 +1578,9 @@
         return;
     }
     
-    UILabel * patternLetter = (UILabel *)[editingClipView.subviews firstObject];
-
     [UIView animateWithDuration:0.4 delay:0.3 options:nil animations:^(void){
         
-        [patternLetter setAlpha:0.3];
+        [editingPatternLetter setAlpha:0.3];
         
     }completion:^(BOOL finished){
         
@@ -1568,17 +1595,42 @@
         return;
     }
     
-    UILabel * patternLetter = (UILabel *)[editingClipView.subviews firstObject];
-    
     [UIView animateWithDuration:0.4 delay:0.1 options:nil animations:^(void){
         
-        [patternLetter setAlpha:0.8];
+        [editingPatternLetter setAlpha:0.8];
         
     }completion:^(BOOL finished){
         
         [self blinkEditingClipOff];
     }];
     
+}
+
+- (void)changeLetterPattern:(id)sender
+{
+    NSString * newPattern;
+    
+    if(editingClip.m_muted){
+        newPattern = PATTERN_A;
+        [editingClip changePattern:PATTERN_A];
+        editingClip.m_muted = NO;
+    }else if([editingClip.m_name isEqualToString:PATTERN_A]){
+        newPattern = PATTERN_B;
+        [editingClip changePattern:PATTERN_B];
+    }else if([editingClip.m_name isEqualToString:PATTERN_B]){
+        newPattern = PATTERN_C;
+        [editingClip changePattern:PATTERN_C];
+    }else if([editingClip.m_name isEqualToString:PATTERN_C]){
+        newPattern = PATTERN_D;
+        [editingClip changePattern:PATTERN_D];
+    }else if([editingClip.m_name isEqualToString:PATTERN_D]){
+        newPattern = PATTERN_OFF;
+        editingClip.m_muted = YES;
+    }
+    
+    newPattern = [newPattern stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    [editingPatternLetter setText:newPattern];
 }
 
 @end

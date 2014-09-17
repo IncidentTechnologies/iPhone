@@ -173,4 +173,9 @@
     return numMeasures;
 }
 
+- (void)changePattern:(NSString *)newPattern
+{
+    m_name = newPattern;
+}
+
 @end
