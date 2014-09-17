@@ -254,6 +254,22 @@
     [m_tracks addObject:track];
 }
 
+- (NSTrack *)trackWithName:(NSString *)name
+{
+    
+    if(name == nil || [name length] == 0){
+        return nil;
+    }
+    
+    for(NSTrack * track in m_tracks){
+        if([track.m_name isEqualToString:name]){
+            return track;
+        }
+    }
+    
+    return nil;
+}
+
 - (NSTrack *)trackWithName:(NSString *)name level:(double)level mute:(bool)mute instrument:(NSInstrument *)inst
 {
     if(name == nil || [name length] == 0){

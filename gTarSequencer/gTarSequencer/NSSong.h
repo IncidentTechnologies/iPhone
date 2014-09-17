@@ -59,6 +59,7 @@
 - (id)initWithTitle:(NSString *)title author:(NSString *)author description:(NSString *)description tempo:(long)tempo looping:(bool)looping loopstart:(long)loopstart loopend:(long)loopend sequenceName:(NSString *)sequenceName sequenceId:(long)sequenceId;
 
 - (void)addTrack:(NSTrack *)track;
+- (NSTrack *)trackWithName:(NSString *)name;
 - (NSTrack *)trackWithName:(NSString *)name level:(double)level mute:(bool)mute instrument:(NSInstrument *)inst;
 - (void)finishTracks;
 

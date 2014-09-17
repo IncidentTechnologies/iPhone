@@ -18,6 +18,22 @@
 #define PATTERN_C @"-C"
 #define PATTERN_D @"-D"
 
+#define PATTERN_LETTER_WIDTH 30.0
+#define PATTERN_LETTER_INDENT 10.0
+
+#define A_COLOR [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:0.5]
+#define B_COLOR [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.5]
+#define C_COLOR [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:0.5]
+#define D_COLOR [UIColor colorWithRed:137/255.0 green:225/255.0 blue:247/255.0 alpha:0.5]
+#define OFF_COLOR [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:0.5]
+
+#define EDITING_COLOR [UIColor colorWithRed:148/255.0 green:102/255.0 blue:176/255.0 alpha:0.5]
+#define A_COLOR_SOLID [UIColor colorWithRed:76/255.0 green:146/255.0 blue:163/255.0 alpha:1.0]
+#define B_COLOR_SOLID [UIColor colorWithRed:71/255.0 green:161/255.0 blue:184/255.0 alpha:1.0]
+#define C_COLOR_SOLID [UIColor colorWithRed:64/255.0 green:145/255.0 blue:175/255.0 alpha:1.0]
+#define D_COLOR_SOLID [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0]
+#define OFF_COLOR_SOLID [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0]
+
 @interface RecordShareViewController ()
 {
     
@@ -59,6 +75,7 @@
         
         tracks = [[NSMutableArray alloc] init];
         tickmarks = [[NSMutableArray alloc] init];
+        trackclips = [[NSMutableDictionary alloc] init];
         isAudioPlaying = NO;
         isWritingFile = NO;
         
@@ -77,6 +94,7 @@
     [self showNoSessionOverlay];
     
     [self initShareScreen];
+    
 }
 
 - (void)clearAllSubviews
@@ -98,6 +116,7 @@
     }
     
     [tickmarks removeAllObjects];
+    [trackclips removeAllObjects];
 }
 
 - (void)reloadInstruments
@@ -315,18 +334,6 @@
 
 - (void)drawPatternsOnMeasures
 {
-    UIColor * aColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:0.5];
-    UIColor * bColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.5];
-    UIColor * cColor = [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:0.5];
-    UIColor * dColor = [UIColor colorWithRed:137/255.0 green:225/255.0 blue:247/255.0 alpha:0.5];
-    UIColor * offColor = [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:0.5];
-    
-    //UIColor * aColorSolid = [UIColor colorWithRed:76/255.0 green:146/255.0 blue:163/255.0 alpha:1.0];
-    //UIColor * bColorSolid = [UIColor colorWithRed:71/255.0 green:161/255.0 blue:184/255.0 alpha:1.0];
-    //UIColor * cColorSolid = [UIColor colorWithRed:64/255.0 green:145/255.0 blue:175/255.0 alpha:1.0];
-    //UIColor * dColorSolid = [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0];
-    //UIColor * offColorSolid = [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0];
-   
     //
     // Draw measure content
     //
@@ -341,6 +348,7 @@
     float trackPosition = 0;
     for(NSTrack * track in recordingSong.m_tracks){
         
+        int clipIndex = 0;
         for(NSClip * clip in track.m_clips){
             
             //
@@ -368,27 +376,34 @@
             
             // Color according to the pattern
             if(clip.m_muted == true){
-                [clipView setBackgroundColor:offColor];
+                [clipView setBackgroundColor:OFF_COLOR];
             }else if([clip.m_name isEqualToString:PATTERN_A]){
-                [clipView setBackgroundColor:aColor];
+                [clipView setBackgroundColor:A_COLOR];
             }else if([clip.m_name isEqualToString:PATTERN_B]){
-                [clipView setBackgroundColor:bColor];
+                [clipView setBackgroundColor:B_COLOR];
             }else if([clip.m_name isEqualToString:PATTERN_C]){
-                [clipView setBackgroundColor:cColor];
+                [clipView setBackgroundColor:C_COLOR];
             }else if([clip.m_name isEqualToString:PATTERN_D]){
-                [clipView setBackgroundColor:dColor];
+                [clipView setBackgroundColor:D_COLOR];
             }
             
             [trackView addSubview:clipView];
+            [self addLongPressGestureToView:clipView];
+            
+            // Create a dictionary mapping track info to the views
+            if([trackclips objectForKey:track.m_name]){
+                NSMutableDictionary * clipDict = [trackclips objectForKey:track.m_name];
+                [clipDict setObject:clipView forKey:[NSNumber numberWithInt:clipIndex]];
+            }else{
+                NSMutableDictionary * clipDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:clipView,[NSNumber numberWithInt:clipIndex], nil];
+                [trackclips setObject:clipDict forKey:track.m_name];
+            }
             
             //
             // Draw the pattern letters
             //
             
-            float patternLetterWidth = 30;
-            float patternLetterIndent = 10;
-            
-            CGRect patternLetterFrame = CGRectMake(patternLetterIndent,0,patternLetterWidth,measureHeight);
+            CGRect patternLetterFrame = CGRectMake(PATTERN_LETTER_INDENT,0,PATTERN_LETTER_WIDTH,measureHeight);
             
             UILabel * patternLetter = [[UILabel alloc] initWithFrame:patternLetterFrame];
             [patternLetter setText:[clip.m_name stringByReplacingOccurrencesOfString:@"-" withString:@""]];
@@ -396,10 +411,12 @@
             [patternLetter setAlpha:0.5];
             [patternLetter setFont:[UIFont fontWithName:FONT_BOLD size:20.0]];
             
-            if(!clip.m_muted){
-                [clipView addSubview:patternLetter];
+            if(clip.m_muted){
+                [patternLetter setText:@""];
             }
 
+            [clipView addSubview:patternLetter];
+            
             //
             // Draw the top progress view
             //
@@ -452,6 +469,7 @@
                 }
             }
             
+            clipIndex++;
         }
         
         trackPosition++;
@@ -483,6 +501,14 @@
         [trackView addSubview:tick];
     }
     
+}
+
+- (void)addLongPressGestureToView:(UIView *)view
+{
+    UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressEvent:)];
+    longPress.minimumPressDuration = 0.5;
+    
+    [view addGestureRecognizer:longPress];
 }
 
 - (float)getFirstBeatFromClip:(NSClip *)clip
@@ -1038,7 +1064,6 @@
     
     //[audioPlayer play];
     
-    
 }
 
 - (void)startBackgroundLoop:(NSNumber *)spb
@@ -1376,6 +1401,184 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Editing
+
+- (void)longPressEvent:(UILongPressGestureRecognizer *)recognizer
+{
+    UIView * pressedTrack = (UIView *)recognizer.view;
+
+    if(pressedTrack != editingClipView){
+        
+        [self deactivateEditingClip];
+        
+        for(id t in trackclips){
+            NSMutableDictionary * clipDict = [trackclips objectForKey:t];
+            NSString * trackName = (NSString *)t;
+            
+            for(id c in clipDict){
+                UIView * v = [clipDict objectForKey:c];
+                NSNumber * clipIndex = (NSNumber *)c;
+                
+                if(v == pressedTrack){
+                    
+                    NSTrack * editingTrack = [recordingSong trackWithName:trackName];
+                    
+                    editingClip = [editingTrack.m_clips objectAtIndex:[clipIndex intValue]];
+                    editingClipView = pressedTrack;
+                    
+                    DLog(@"Editing track %@ at clip %i with name %@",trackName,[clipIndex intValue],editingClip.m_name);
+                }
+            }
+        }
+        
+        if(editingClipView != nil){
+            [self activateEditingClip];
+        }
+    }
+}
+
+- (void)deactivateEditingClip
+{
+    // Deactivate
+    UIColor * oldColor;
+    if(editingClip.m_muted){
+        oldColor = OFF_COLOR;
+    }else if([editingClip.m_name isEqualToString:PATTERN_A]){
+        oldColor = A_COLOR;
+    }else if([editingClip.m_name isEqualToString:PATTERN_B]){
+        oldColor = B_COLOR;
+    }else if([editingClip.m_name isEqualToString:PATTERN_C]){
+        oldColor = C_COLOR;
+    }else if([editingClip.m_name isEqualToString:PATTERN_D]){
+        oldColor = D_COLOR;
+    }
+    
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [editingClipView setBackgroundColor:oldColor];
+    }];
+    
+    [self resetEditingClipPattern];
+    
+    [editingClipLeftSlider removeFromSuperview];
+    [editingClipRightSlider removeFromSuperview];
+    
+    editingClip = nil;
+    editingClipView = nil;
+    
+}
+
+- (void)activateEditingClip
+{
+    // Activate
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [editingClipView setBackgroundColor:EDITING_COLOR];
+    }];
+    
+    // Draw sliders
+    [self initEditingClipSliders];
+    
+    // Blink the letter label
+    [self initEditingClipPattern];
+}
+
+- (void)initEditingClipSliders
+{
+    double sliderWidth = trackView.frame.size.height / MAX_TRACKS;
+    
+    editingClipLeftSlider = [[UIView alloc] initWithFrame:CGRectMake(- sliderWidth/2.0,0,sliderWidth,sliderWidth)];
+    
+    editingClipRightSlider = [[UIView alloc] initWithFrame:CGRectMake(editingClipView.frame.size.width - sliderWidth/2.0,0,sliderWidth,sliderWidth)];
+    
+    
+    editingClipLeftSlider.layer.cornerRadius = sliderWidth/2.0;
+    editingClipRightSlider.layer.cornerRadius = sliderWidth/2.0;
+    
+    [editingClipLeftSlider setBackgroundColor:[UIColor whiteColor]];
+    [editingClipRightSlider setBackgroundColor:[UIColor whiteColor]];
+    
+    [editingClipLeftSlider setAlpha:0.5];
+    [editingClipRightSlider setAlpha:0.5];
+    
+    [editingClipView addSubview:editingClipLeftSlider];
+    [editingClipView addSubview:editingClipRightSlider];
+
+    // TODO: add listeners
+}
+
+- (void)resetEditingClipPattern
+{
+    UILabel * patternLetter = (UILabel *)[editingClipView.subviews firstObject];
+    
+    //patternLetter.text = [editingClip.m_name stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    [UIView animateWithDuration:0.1 animations:^(void){
+        
+        [patternLetter setAlpha:0.5];
+        [patternLetter setFont:[UIFont fontWithName:FONT_BOLD size:20.0]];
+        
+        [patternLetter setFrame:CGRectMake(PATTERN_LETTER_INDENT,0,PATTERN_LETTER_WIDTH,patternLetter.frame.size.height)];
+    }];
+    
+}
+
+- (void)initEditingClipPattern
+{
+    UILabel * patternLetter = (UILabel *)[editingClipView.subviews firstObject];
+    
+    [UIView animateWithDuration:0.1 animations:^(void){
+        
+        [patternLetter setAlpha:0.8];
+        [patternLetter setFont:[UIFont fontWithName:FONT_BOLD size:28.0]];
+        
+        [patternLetter setFrame:CGRectMake(3*PATTERN_LETTER_INDENT,0,PATTERN_LETTER_WIDTH,patternLetter.frame.size.height)];
+        
+    } completion:^(BOOL finished){
+        
+        blinkingClip = editingClip;
+        [self blinkEditingClipOff];
+        
+    }];
+    
+}
+
+- (void)blinkEditingClipOff
+{
+    if(editingClip != blinkingClip){
+        return;
+    }
+    
+    UILabel * patternLetter = (UILabel *)[editingClipView.subviews firstObject];
+
+    [UIView animateWithDuration:0.4 delay:0.3 options:nil animations:^(void){
+        
+        [patternLetter setAlpha:0.3];
+        
+    }completion:^(BOOL finished){
+        
+        [self blinkEditingClipOn];
+    }];
+    
+}
+
+- (void)blinkEditingClipOn
+{
+    if(editingClip != blinkingClip){
+        return;
+    }
+    
+    UILabel * patternLetter = (UILabel *)[editingClipView.subviews firstObject];
+    
+    [UIView animateWithDuration:0.4 delay:0.1 options:nil animations:^(void){
+        
+        [patternLetter setAlpha:0.8];
+        
+    }completion:^(BOOL finished){
+        
+        [self blinkEditingClipOff];
+    }];
+    
 }
 
 @end

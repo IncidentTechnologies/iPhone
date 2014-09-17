@@ -51,6 +51,7 @@ extern NSUser * g_loggedInUser;
     NSMutableArray * instruments;
     NSMutableArray * tracks;
     NSMutableArray * tickmarks;
+    NSMutableDictionary * trackclips;
     
     int numMeasures;
     
@@ -66,6 +67,13 @@ extern NSUser * g_loggedInUser;
     NSSequence * loadedSequence;
     float loadedTempo;
     SoundMaster * loadedSoundMaster;
+    
+    // Editing
+    NSClip * editingClip;
+    NSClip * blinkingClip;
+    UIView * editingClipView;
+    UIView * editingClipLeftSlider;
+    UIView * editingClipRightSlider;
     
     // Playback
     AVAudioPlayer * audioPlayer;
