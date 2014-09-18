@@ -35,7 +35,7 @@
 #define D_COLOR_SOLID [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0]
 #define OFF_COLOR_SOLID [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0]
 
-#define MIN_TRACK_WIDTH 5.0
+#define MIN_TRACK_WIDTH 10.0
 
 @interface RecordShareViewController ()
 {
@@ -279,7 +279,7 @@
     float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     
     numMeasures = newNumMeasures;
-    numMeasures = MAX(numMeasures,MIN_MEASURES);
+    numMeasures = MAX(numMeasures,MIN_MEASURES) + 1;
     
     CGSize newContentSize = CGSizeMake(numMeasures*measureWidth,trackView.frame.size.height);
     
@@ -302,6 +302,8 @@
 
 - (void)removeDeletedMeasuresFromRecordedSong
 {
+    
+    DLog(@"Remove deleted measures from recorded song");
     
     NSMutableArray * tracksToRemove = [[NSMutableArray alloc] init];
     
@@ -375,51 +377,13 @@
             
             clipFrame = CGRectMake(clipStart,trackPosition * measureHeight + 1,clipEnd - clipStart,measureHeight);
             
-            UIView * clipView = [[UIView alloc] initWithFrame:clipFrame];
-            
-            // Color according to the pattern
-            if(clip.m_muted == true){
-                [clipView setBackgroundColor:OFF_COLOR];
-            }else if([clip.m_name isEqualToString:PATTERN_A]){
-                [clipView setBackgroundColor:A_COLOR];
-            }else if([clip.m_name isEqualToString:PATTERN_B]){
-                [clipView setBackgroundColor:B_COLOR];
-            }else if([clip.m_name isEqualToString:PATTERN_C]){
-                [clipView setBackgroundColor:C_COLOR];
-            }else if([clip.m_name isEqualToString:PATTERN_D]){
-                [clipView setBackgroundColor:D_COLOR];
-            }
-            
-            [trackView addSubview:clipView];
-            [self addLongPressGestureToView:clipView];
-            
-            // Create a dictionary mapping track info to the views
-            if([trackclips objectForKey:track.m_name]){
-                NSMutableArray * clipDict = [trackclips objectForKey:track.m_name];
-                [clipDict addObject:clipView];
-            }else{
-                NSMutableArray * clipDict = [[NSMutableArray alloc] init];
-                [clipDict addObject:clipView];
-                [trackclips setObject:clipDict forKey:track.m_name];
-            }
+            UIView * clipView = [self drawClipViewForClip:clip track:track inFrame:clipFrame atIndex:-1];
             
             //
             // Draw the pattern letters
             //
             
-            CGRect patternLetterFrame = CGRectMake(PATTERN_LETTER_INDENT,0,PATTERN_LETTER_WIDTH,measureHeight);
-            
-            UILabel * patternLetter = [[UILabel alloc] initWithFrame:patternLetterFrame];
-            [patternLetter setText:[clip.m_name stringByReplacingOccurrencesOfString:@"-" withString:@""]];
-            [patternLetter setTextColor:[UIColor whiteColor]];
-            [patternLetter setAlpha:0.5];
-            [patternLetter setFont:[UIFont fontWithName:FONT_BOLD size:20.0]];
-            
-            if(clip.m_muted){
-                [patternLetter setText:@""];
-            }
-
-            [clipView addSubview:patternLetter];
+            [self drawPatternLetterForClip:clip inView:clipView];
             
             //
             // Draw the top progress view
@@ -507,6 +471,83 @@
     
 }
 
+- (UIView *)drawClipViewForClip:(NSClip *)clip track:(NSTrack *)track inFrame:(CGRect)frame atIndex:(int)index;
+{
+    UIView * clipView = [[UIView alloc] initWithFrame:frame];
+    
+    // Color according to the pattern
+    if(clip.m_muted == true){
+        [clipView setBackgroundColor:OFF_COLOR];
+    }else if([clip.m_name isEqualToString:PATTERN_A]){
+        [clipView setBackgroundColor:A_COLOR];
+    }else if([clip.m_name isEqualToString:PATTERN_B]){
+        [clipView setBackgroundColor:B_COLOR];
+    }else if([clip.m_name isEqualToString:PATTERN_C]){
+        [clipView setBackgroundColor:C_COLOR];
+    }else if([clip.m_name isEqualToString:PATTERN_D]){
+        [clipView setBackgroundColor:D_COLOR];
+    }
+    
+    [trackView addSubview:clipView];
+    [self addLongPressGestureToView:clipView];
+    
+    // Create a dictionary mapping track info to the views
+    if([trackclips objectForKey:track.m_name]){
+        
+        NSMutableArray * clipDict = [trackclips objectForKey:track.m_name];
+        
+        // Add the view at a specific index
+        if(index >= 0){
+            
+            NSMutableArray * newClipDict = [[NSMutableArray alloc] init];
+            
+            for(int i = 0; i < [clipDict count]; i++){
+                if(i < index){
+                    [newClipDict addObject:[clipDict objectAtIndex:i]];
+                }else if(i == index){
+                    [newClipDict addObject:clipView];
+                }else{
+                    [newClipDict addObject:[clipDict objectAtIndex:i-1]];
+                }
+            }
+            
+            [trackclips setObject:newClipDict forKey:track.m_name];
+            
+        }else{
+            
+            // Add it to the end
+            [clipDict addObject:clipView];
+        }
+        
+    }else{
+        
+        // Create a new array
+        NSMutableArray * clipDict = [[NSMutableArray alloc] init];
+        [clipDict addObject:clipView];
+        [trackclips setObject:clipDict forKey:track.m_name];
+    }
+    
+    
+    return clipView;
+}
+
+- (void)drawPatternLetterForClip:(NSClip *)clip inView:(UIView *)view
+{
+    CGRect patternLetterFrame = CGRectMake(PATTERN_LETTER_INDENT,0,PATTERN_LETTER_WIDTH,view.frame.size.height);
+    
+    UILabel * patternLetter = [[UILabel alloc] initWithFrame:patternLetterFrame];
+    [patternLetter setText:[clip.m_name stringByReplacingOccurrencesOfString:@"-" withString:@""]];
+    [patternLetter setTextColor:[UIColor whiteColor]];
+    [patternLetter setAlpha:0.5];
+    [patternLetter setFont:[UIFont fontWithName:FONT_BOLD size:20.0]];
+    
+    if(clip.m_muted){
+        [patternLetter setText:@""];
+    }
+    
+    [view addSubview:patternLetter];
+}
+
 - (void)addLongPressGestureToView:(UIView *)view
 {
     UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressEvent:)];
@@ -538,9 +579,18 @@
 {
     float measureWidth = progressView.frame.size.width / numMeasures;
     
-    double x = beat * measureWidth / 4.0;
+    float x = beat * measureWidth / 4.0;
     
     return x;
+}
+
+-(float)getBeatFromXPosition:(float)x
+{
+    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    
+    float beat = x * 4.0 / measureWidth;
+    
+    return beat;
 }
 
 #pragma mark - Scrolling and Progress View
@@ -1660,18 +1710,35 @@
     
     // Trim the leftward clip in track
     if(editingClipIndex > 0){
-        UIView * clipView = [clipDict objectAtIndex:editingClipIndex-1];
+        UIView * leftClipView = [clipDict objectAtIndex:editingClipIndex-1];
     
-        [clipView setFrame:CGRectMake(clipView.frame.origin.x,clipView.frame.origin.y,clipView.frame.size.width+(diff-lastDiff),clipView.frame.size.height)];
-    
-        if(editingClipView.frame.origin.x < clipView.frame.origin.x){
-            [self removeClipInEditing:clipView];
+        [leftClipView setFrame:CGRectMake(leftClipView.frame.origin.x,leftClipView.frame.origin.y,leftClipView.frame.size.width+(diff-lastDiff),leftClipView.frame.size.height)];
+        
+        if(editingClipView.frame.origin.x <= leftClipView.frame.origin.x){
+            [self removeClipInEditing:leftClipView];
+        }else{
+            
+            // Set beats for left clip
+            NSClip * leftClip = [editingTrack.m_clips objectAtIndex:editingClipIndex-1];
+            [self setBeatsForClip:leftClip withView:leftClipView];
+            
         }
         
     }
     
+    // Create new muted clip to the left
+    if(editingClipIndex == 0 && editingClipView.frame.origin.x > 0){
+        [self createNewMutedClipFrom:0.0 to:editingClipView.frame.origin.x];
+    }
+    
+    // Delete the measure if it's been shrunken too much
     if(editingClipView.frame.size.width < MIN_TRACK_WIDTH){
         [self removeClipInEditing:editingClipView];
+    }
+    
+    // Set beats for editing clip
+    if(editingClipView != nil){
+        [self setBeatsForClip:editingClip withView:editingClipView];
     }
     
     lastDiff = diff;
@@ -1688,11 +1755,20 @@
         
         if(clipView.frame.origin.x > editingClipView.frame.origin.x){
             [clipView setFrame:CGRectMake(clipView.frame.origin.x+(diff-lastDiff),clipView.frame.origin.y,clipView.frame.size.width,clipView.frame.size.height)];
+            
+            // Set beats
+            NSClip * rightClip = [editingTrack.m_clips objectAtIndex:c];
+            [self setBeatsForClip:rightClip withView:clipView];
         }
     }
     
     if(editingClipView.frame.size.width < MIN_TRACK_WIDTH){
         [self removeClipInEditing:editingClipView];
+    }
+    
+    // Set beats for editing clip
+    if(editingClipView != nil){
+        [self setBeatsForClip:editingClip withView:editingClipView];
     }
     
     
@@ -1710,6 +1786,16 @@
     lastDiff = 0;
 }
 
+- (void)setBeatsForClip:(NSClip *)clip withView:(UIView *)view
+{
+    double startbeat = [self getBeatFromXPosition:view.frame.origin.x];
+    double endbeat = [self getBeatFromXPosition:view.frame.origin.x+view.frame.size.width];
+    
+    [clip setTempStartbeat:startbeat tempEndbeat:endbeat];
+    
+    DLog(@"Set temp beats for clip %@ from %f to %f",clip.m_name,startbeat,endbeat);
+}
+
 #pragma mark - Track Editing Actions
 
 //
@@ -1717,6 +1803,8 @@
 //
 - (void)removeClipInEditing:(UIView *)clipToRemove
 {
+    DLog(@"Remove clip in editing");
+    
     // Update dictionaries
     NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
     
@@ -1759,9 +1847,16 @@
         // Or stretch out the previous track if there is no next track
         UIView * prevTrack = [clipDict objectAtIndex:clipToRemoveIndex-1];
         
-        [prevTrack setFrame:CGRectMake(prevTrack.frame.origin.x,prevTrack.frame.origin.y,clipToRemove.frame.origin.x-prevTrack.frame.origin.x+clipToRemove.frame.size.width,prevTrack.frame.size.height)];
+        [prevTrack setFrame:CGRectMake(prevTrack.frame.origin.x,prevTrack.frame.origin.y,clipToRemove.frame.origin.x-prevTrack.frame.origin.x+clipToRemove.frame.size.width+MIN_TRACK_WIDTH,prevTrack.frame.size.height)];
         
     }
+    
+    // Remove from clips
+    
+    DLog(@"TODO: update the timing data from deleted tracks");
+    NSClip * clip = [editingTrack.m_clips objectAtIndex:clipToRemoveIndex];
+    
+    [editingTrack.m_clips removeObject:clip];
     
     // Remove from superview
     
@@ -1771,11 +1866,6 @@
     }
     
     [clipToRemove removeFromSuperview];
-    
-    DLog(@"TODO: update the timing data from deleted tracks");
-    NSClip * clip = [editingTrack.m_clips objectAtIndex:clipToRemoveIndex];
-    
-    [editingTrack.m_clips removeObject:clip];
     
     [self mergeNeighboringIdenticalClips];
     [self correctMeasureLengths];
@@ -1787,17 +1877,19 @@
 //
 - (void)mergeNeighboringIdenticalClips
 {
+ 
     NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
     
     if([clipDict count] <= 1 || [editingTrack.m_clips count] <= 1){
         return;
     }
     
+    DLog(@"Merge neighboring identical clips");
+    
     NSMutableArray * trackClipsToRemove = [[NSMutableArray alloc] init];
     NSMutableArray * trackClipViewsToRemove = [[NSMutableArray alloc] init];
-    NSMutableArray * viewsToRemove = [[NSMutableArray alloc] init];
     
-    for(int i = [clipDict count]-1; i > 0 ; i--){
+    for(int i = [editingTrack.m_clips count]-1; i > 0 ; i--){
         UIView * firstClipView = [clipDict objectAtIndex:i-1];
         UIView * nextClipView = [clipDict objectAtIndex:i];
         
@@ -1805,12 +1897,15 @@
         NSClip * nextClip = [editingTrack.m_clips objectAtIndex:i];
         
         // Case to merge!
-        if([firstClip.m_name isEqualToString:nextClip.m_name]){
+        if([firstClip.m_name isEqualToString:nextClip.m_name] && firstClip.m_muted == nextClip.m_muted){
             [firstClipView setFrame:CGRectMake(firstClipView.frame.origin.x,firstClipView.frame.origin.y,firstClipView.frame.size.width+nextClipView.frame.size.width,firstClipView.frame.size.height)];
             
             [trackClipsToRemove addObject:nextClip];
-            [trackClipViewsToRemove addObject:[NSNumber numberWithInt:i+1]];
-            [viewsToRemove addObject:nextClipView];
+            [trackClipViewsToRemove addObject:nextClipView];
+            
+            // Set beats
+            [self setBeatsForClip:firstClip withView:firstClipView];
+            [firstClip setTempStartbeat:firstClip.m_startbeat tempEndbeat:nextClip.m_endbeat];
             
         }
     }
@@ -1820,13 +1915,9 @@
     [clipDict removeObjectsInArray:trackClipViewsToRemove];
     
     // Remove UIViews
-    for(UIView * v in viewsToRemove){
+    for(UIView * v in trackClipViewsToRemove){
         [v removeFromSuperview];
     }
-    
-    // TODO: check all the data comes out right
-    
-    DLog(@"TODO: update the data to merge neighboring identical clips");
 }
 
 //
@@ -1834,7 +1925,146 @@
 //
 - (void)correctMeasureLengths
 {
-    DLog(@"TODO: correct measure lengths after editing");
+    DLog(@"Correct measure lengths after editing");
+    
+    if(editingTrack == nil){
+        DLog(@"ERROR: editingTrack is nil");
+        return;
+    }
+    
+    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    
+    NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
+    
+    NSTrack * instTrack = [instruments objectAtIndex:[self getIndexForInstrument:editingTrack.m_instrument.m_id]];
+    
+    for(int c = 0; c < [clipDict count]; c++){
+        UIView * clipView = [clipDict objectAtIndex:c];
+        NSClip * clip = [editingTrack.m_clips objectAtIndex:c];
+        
+        // No adjustments if the measure is muted
+        if(clip.m_muted){
+            continue;
+        }
+        
+        int patternLength = [instTrack getPatternLengthByName:clip.m_name];
+        
+        if(patternLength == 0){
+            DLog(@"ERROR: pattern length 0");
+            return;
+        }
+        
+        BOOL measureBeforeIsMuted = (c > 0) ? [[editingTrack.m_clips objectAtIndex:c-1] m_muted]: false;
+        BOOL measureAfterIsMuted = (c < [clipDict count]-1) ? [[editingTrack.m_clips objectAtIndex:c+1] m_muted] : false;
+        
+        // Get current start measure/end measure
+        int clipStartMeasure;
+        int clipEndMeasure;
+        
+        // Round up or round down
+        if(clip.m_startbeat - 4.0*[clip getDownMeasureForBeat:clip.m_startbeat] < 2.0){
+            clipStartMeasure = (int)[clip getDownMeasureForBeat:clip.m_startbeat];
+        }else{
+            clipStartMeasure = (int)[clip getMeasureForBeat:clip.m_startbeat];
+        }
+        
+        if(clip.m_endbeat - 4.0*[clip getDownMeasureForBeat:clip.m_endbeat] < 2.0){
+            clipEndMeasure = (int)[clip getDownMeasureForBeat:clip.m_endbeat];
+        }else{
+            clipEndMeasure = (int)[clip getMeasureForBeat:clip.m_endbeat];
+        }
+        
+        //
+        
+        double diffBeats = 0;
+        
+        // Validate ... and adjust ...
+        
+        // Start it on a valid measure
+        if(!measureBeforeIsMuted){
+            if(fabs(clip.m_startbeat - 4.0*clipStartMeasure) > 0.05 || clipStartMeasure % patternLength != 0){
+                
+                DLog(@" *** absmath = %f, modmath = %i",clip.m_startbeat - 4.0*clipStartMeasure,clipStartMeasure % patternLength);
+                
+                int patternOffset = (clipEndMeasure % patternLength == 0) ? 0 : patternLength - clipStartMeasure % patternLength;
+                int targetMeasure = clipStartMeasure + patternOffset;
+                double targetStartbeat = targetMeasure * 4.0;
+                double targetStartX = targetMeasure * measureWidth;
+                double targetEndbeat = clip.m_endbeat + targetStartX - clip.m_startbeat;
+                diffBeats = targetStartbeat - clip.m_startbeat;
+                
+                [clipView setFrame:CGRectMake(targetStartX, clipView.frame.origin.y, clipView.frame.size.width, clipView.frame.size.height)];
+                
+                DLog(@" *** SHIFT UP RESET CLIP %i STARTBEAT from %f to %f",c,clip.m_startbeat,targetStartbeat);
+                
+                [clip setTempStartbeat:targetStartbeat tempEndbeat:targetEndbeat];
+            
+            }
+        }
+        
+        // End it on a valid measure
+        if(!measureAfterIsMuted && c < [clipDict count] - 1){
+            if(fabs(clip.m_endbeat - 4.0*clipEndMeasure) > 0.05 || clipEndMeasure % patternLength != 0){
+                
+                DLog(@" *** absmath = %f, modmath = %i",clip.m_endbeat - 4.0*clipEndMeasure,clipEndMeasure % patternLength);
+                
+                int patternOffset = (clipEndMeasure % patternLength == 0) ? 0 : patternLength - clipEndMeasure % patternLength;
+                int targetMeasure = clipEndMeasure + patternOffset;
+                double targetEndbeat = targetMeasure * 4.0;
+                double targetEndX = targetMeasure * measureWidth;
+                diffBeats = targetEndbeat - clip.m_endbeat;
+                
+                [clipView setFrame:CGRectMake(clipView.frame.origin.x, clipView.frame.origin.y, targetEndX-clipView.frame.origin.x, clipView.frame.size.height)];
+                
+                DLog(@" *** SHIFT UP RESET CLIP %i ENDBEAT from %f to %f, targetEndX: %f (MW:%f)",c,clip.m_endbeat,targetEndbeat,targetEndX,measureWidth);
+                
+                [clip setEndbeat:targetEndbeat];
+            
+            }
+        }
+        
+        // Shift over everything that follows
+        if(diffBeats > 0){
+            
+            for(int k = c+1; k < [clipDict count]; k++){
+                NSClip * nextClip = [editingTrack.m_clips objectAtIndex:k];
+                UIView * nextClipView = [clipDict objectAtIndex:k];
+                [nextClip setTempStartbeat:nextClip.m_startbeat+diffBeats tempEndbeat:nextClip.m_endbeat+diffBeats];
+                
+                double targetStartX = [self getXPositionForClipBeat:nextClip.m_startbeat];
+                double targetEndX = [self getXPositionForClipBeat:nextClip.m_endbeat];
+                
+                [nextClipView setFrame:CGRectMake(targetStartX,nextClipView.frame.origin.y,targetEndX-targetStartX,nextClipView.frame.size.height)];
+                
+                DLog(@"SHIFT OVER CLIP %i BY %f BEATS redraw starting X to %f",k,diffBeats,targetStartX);
+            }
+        }
+    }
+}
+
+//
+// Create new muted measure
+//
+- (void)createNewMutedClipFrom:(float)fromX to:(float)toX
+{
+    DLog(@"Create new muted clip from %f to %f",fromX,toX);
+    
+    NSClip * newClip = [[NSClip alloc] initWithName:PATTERN_A startbeat:0.0 endBeat:0.0 clipLength:0.0 clipStart:0.0 looping:false loopStart:0.0 looplength:0.0 color:@"" muted:YES];
+    
+    DLog(@"TODO: more cleverly determine index of new muted clip");
+    [editingTrack addClip:newClip atIndex:0];
+    
+    // Create the clip
+    CGRect newClipFrame = CGRectMake(fromX,editingClipView.frame.origin.y,toX-fromX,editingClipView.frame.size.height);
+    
+    UIView * newClipView = [self drawClipViewForClip:newClip track:editingTrack inFrame:newClipFrame atIndex:0];
+    
+    // Draw the pattern letters
+    [self drawPatternLetterForClip:newClip inView:newClipView];
+    
+    // Set beats
+    [self setBeatsForClip:newClip withView:newClipView];
+    
 }
 
 @end

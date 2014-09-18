@@ -178,6 +178,33 @@
     [m_clips addObject:clip];
 }
 
+-(void)addClip:(NSClip *)clip atIndex:(int)index
+{
+    if(index >= [m_clips count] || index < 0){
+        
+        [self addClip:clip];
+        
+    }else{
+        
+        NSMutableArray * newClipArray = [[NSMutableArray alloc] init];
+        
+        for(int i = 0; i < [m_clips count]; i++){
+            
+            if(i < index){
+                [newClipArray addObject:[m_clips objectAtIndex:i]];
+            }else if(i == index){
+                [newClipArray addObject:clip];
+            }else{
+                [newClipArray addObject:[m_clips objectAtIndex:i-1]];
+            }
+            
+        }
+        
+        m_clips = newClipArray;
+        
+    }
+}
+
 -(NSClip *)firstClip
 {
     if([m_clips count] > 0){

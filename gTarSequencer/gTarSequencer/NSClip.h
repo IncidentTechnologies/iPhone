@@ -61,9 +61,13 @@
 
 -(void)setMute:(bool)muted;
 
+- (void)setTempStartbeat:(double)startbeat tempEndbeat:(double)endbeat;
+
 -(void)setEndbeat:(double)beat;
 
 -(double)getMeasureForBeat:(double)beat;
+
+-(double)getDownMeasureForBeat:(double)beat;
 
 -(void)changePattern:(NSString *)newPattern;
 

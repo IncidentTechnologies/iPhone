@@ -156,6 +156,12 @@
     m_muted = muted;
 }
 
+- (void)setTempStartbeat:(double)startbeat tempEndbeat:(double)endbeat
+{
+    m_startbeat = startbeat;
+    m_endbeat = endbeat;
+}
+
 - (void)setEndbeat:(double)beat
 {
     m_endbeat = [self roundBeatUpToMeasure:beat];
@@ -170,6 +176,12 @@
 - (double)getMeasureForBeat:(double)beat
 {
     double numMeasures = ceil(beat / 4.0);
+    return numMeasures;
+}
+
+- (double)getDownMeasureForBeat:(double)beat
+{
+    double numMeasures = floor(beat / 4.0);
     return numMeasures;
 }
 
