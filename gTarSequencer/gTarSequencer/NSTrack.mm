@@ -188,7 +188,7 @@
         
         NSMutableArray * newClipArray = [[NSMutableArray alloc] init];
         
-        for(int i = 0; i < [m_clips count]; i++){
+        for(int i = 0; i <= [m_clips count]; i++){
             
             if(i < index){
                 [newClipArray addObject:[m_clips objectAtIndex:i]];

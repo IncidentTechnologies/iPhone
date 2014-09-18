@@ -35,7 +35,7 @@
 #define D_COLOR_SOLID [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0]
 #define OFF_COLOR_SOLID [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0]
 
-#define MIN_TRACK_WIDTH 10.0
+#define MIN_TRACK_WIDTH 15.0
 
 @interface RecordShareViewController ()
 {
@@ -501,7 +501,7 @@
             
             NSMutableArray * newClipDict = [[NSMutableArray alloc] init];
             
-            for(int i = 0; i < [clipDict count]; i++){
+            for(int i = 0; i <= [clipDict count]; i++){
                 if(i < index){
                     [newClipDict addObject:[clipDict objectAtIndex:i]];
                 }else if(i == index){
@@ -512,6 +512,8 @@
             }
             
             [trackclips setObject:newClipDict forKey:track.m_name];
+            
+            DLog(@"trackClips is %@",trackclips);
             
         }else{
             
@@ -1808,7 +1810,7 @@
     // Update dictionaries
     NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
     
-    int clipToRemoveIndex = 0;
+    int clipToRemoveIndex = -1;
     for(int c = 0; c < [clipDict count]; c++){
         UIView * clipView = [clipDict objectAtIndex:c];
         
@@ -1818,44 +1820,43 @@
         }
     }
     
-    NSMutableArray * newClipDict = [[NSMutableArray alloc] init];
-    
-    for(int c = 0; c < [clipDict count]; c++){
-        
-        int newIndex = c;
-        
-        if(c > clipToRemoveIndex){
-            newIndex = c - 1;
-        }
-        
-        if(c != clipToRemoveIndex){
-            [newClipDict addObject:[clipDict objectAtIndex:c]];
-        }
+    if(clipToRemoveIndex < 0){
+        return;
     }
     
-    // Overwrite
-    [trackclips setObject:newClipDict forKey:editingTrack.m_name];
-    clipDict = newClipDict;
+    NSClip * clip = [editingTrack.m_clips objectAtIndex:clipToRemoveIndex];
+    
+    [clipDict removeObjectAtIndex:clipToRemoveIndex];
     
     // Start the next track in its place
-    if(clipToRemoveIndex < [trackclips count]){
+    if(clipToRemoveIndex < [clipDict count]){
+        
+        DLog(@"Start the next track in its place %i",clipToRemoveIndex);
+        
         UIView * nextTrack = [clipDict objectAtIndex:clipToRemoveIndex];
+        NSClip * nextTrackClip = [editingTrack.m_clips objectAtIndex:clipToRemoveIndex+1];
         
         [nextTrack setFrame:CGRectMake(clipToRemove.frame.origin.x,nextTrack.frame.origin.y,nextTrack.frame.size.width,nextTrack.frame.size.height)];
+        
+        [nextTrackClip setTempStartbeat:clip.m_startbeat tempEndbeat:nextTrackClip.m_endbeat];
+        
     }else if(clipToRemoveIndex > 0){
+        
+        DLog(@"Stretch out the previous track %i",clipToRemoveIndex-1);
         
         // Or stretch out the previous track if there is no next track
         UIView * prevTrack = [clipDict objectAtIndex:clipToRemoveIndex-1];
+        NSClip * prevTrackClip = [editingTrack.m_clips objectAtIndex:clipToRemoveIndex-1];
         
-        [prevTrack setFrame:CGRectMake(prevTrack.frame.origin.x,prevTrack.frame.origin.y,clipToRemove.frame.origin.x-prevTrack.frame.origin.x+clipToRemove.frame.size.width+MIN_TRACK_WIDTH,prevTrack.frame.size.height)];
+        [prevTrack setFrame:CGRectMake(prevTrack.frame.origin.x,prevTrack.frame.origin.y,clipToRemove.frame.origin.x-prevTrack.frame.origin.x+clipToRemove.frame.size.width,prevTrack.frame.size.height)];
+        
+        [prevTrackClip setTempStartbeat:prevTrackClip.m_startbeat tempEndbeat:clip.m_endbeat];
         
     }
     
     // Remove from clips
     
-    DLog(@"TODO: update the timing data from deleted tracks");
-    NSClip * clip = [editingTrack.m_clips objectAtIndex:clipToRemoveIndex];
-    
+    DLog(@"TODO: update the pattern data from deleted tracks");
     [editingTrack.m_clips removeObject:clip];
     
     // Remove from superview
@@ -2047,17 +2048,19 @@
 //
 - (void)createNewMutedClipFrom:(float)fromX to:(float)toX
 {
+    int newIndex = 0;
+    
     DLog(@"Create new muted clip from %f to %f",fromX,toX);
     
     NSClip * newClip = [[NSClip alloc] initWithName:PATTERN_A startbeat:0.0 endBeat:0.0 clipLength:0.0 clipStart:0.0 looping:false loopStart:0.0 looplength:0.0 color:@"" muted:YES];
     
     DLog(@"TODO: more cleverly determine index of new muted clip");
-    [editingTrack addClip:newClip atIndex:0];
+    [editingTrack addClip:newClip atIndex:newIndex];
     
     // Create the clip
     CGRect newClipFrame = CGRectMake(fromX,editingClipView.frame.origin.y,toX-fromX,editingClipView.frame.size.height);
     
-    UIView * newClipView = [self drawClipViewForClip:newClip track:editingTrack inFrame:newClipFrame atIndex:0];
+    UIView * newClipView = [self drawClipViewForClip:newClip track:editingTrack inFrame:newClipFrame atIndex:newIndex];
     
     // Draw the pattern letters
     [self drawPatternLetterForClip:newClip inView:newClipView];
