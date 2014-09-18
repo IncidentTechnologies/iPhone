@@ -13,6 +13,7 @@
 #import "CustomSampleCell.h"
 #import "CustomSoundRecorder.h"
 #import "TutorialViewController.h"
+#import "HorizontalAdjustor.h"
 
 @protocol CustomInstrumentSelectorDelegate <NSObject>
 
@@ -27,7 +28,7 @@
 
 @end
 
-@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate>
+@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate,HorizontalAdjustorDelegate>
 {
     int viewState;
     
@@ -72,9 +73,6 @@
     BOOL pausePlaying;
     
     float timePlayed;
-    float leftFirstX;
-    float rightFirstX;
-    float progressBarDefaultWidth;
     
 }
 
@@ -120,8 +118,8 @@
 @property (nonatomic, weak) IBOutlet UIView * playBar;
 @property (nonatomic, weak) IBOutlet UIView * recordLine;
 @property (nonatomic, weak) IBOutlet UITextField * recordingNameField;
-@property (nonatomic) UIButton * leftAdjustor;
-@property (nonatomic) UIButton * rightAdjustor;
+
+@property (nonatomic, retain) HorizontalAdjustor * horizontalAdjustor;
 
 @property (retain, nonatomic) UIButton * cancelButton;
 

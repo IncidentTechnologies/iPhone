@@ -12,6 +12,7 @@
 #import "NSSongModel.h"
 #import "MainEventController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "HorizontalAdjustor.h"
 //#import "SCUI.h"
 
 #define MAX_TRACKS 5.0
@@ -46,7 +47,7 @@
 
 extern NSUser * g_loggedInUser;
 
-@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate>
+@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,HorizontalAdjustorDelegate>
 {
     NSMutableArray * instruments;
     NSMutableArray * tracks;
@@ -69,6 +70,7 @@ extern NSUser * g_loggedInUser;
     SoundMaster * loadedSoundMaster;
     
     // Editing
+    NSTrack * editingTrack;
     NSClip * editingClip;
     NSClip * blinkingClip;
     UIView * editingClipView;
@@ -76,6 +78,8 @@ extern NSUser * g_loggedInUser;
     UIView * editingClipRightSlider;
     UILabel * editingPatternLetter;
     UIButton * editingPatternLetterOverlay;
+    HorizontalAdjustor * horizontalAdjustor;
+    float lastDiff;
     
     // Playback
     AVAudioPlayer * audioPlayer;

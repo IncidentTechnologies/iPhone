@@ -35,6 +35,8 @@
 #define D_COLOR_SOLID [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0]
 #define OFF_COLOR_SOLID [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0]
 
+#define MIN_TRACK_WIDTH 5.0
+
 @interface RecordShareViewController ()
 {
     
@@ -393,10 +395,11 @@
             
             // Create a dictionary mapping track info to the views
             if([trackclips objectForKey:track.m_name]){
-                NSMutableDictionary * clipDict = [trackclips objectForKey:track.m_name];
-                [clipDict setObject:clipView forKey:[NSNumber numberWithInt:clipIndex]];
+                NSMutableArray * clipDict = [trackclips objectForKey:track.m_name];
+                [clipDict addObject:clipView];
             }else{
-                NSMutableDictionary * clipDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:clipView,[NSNumber numberWithInt:clipIndex], nil];
+                NSMutableArray * clipDict = [[NSMutableArray alloc] init];
+                [clipDict addObject:clipView];
                 [trackclips setObject:clipDict forKey:track.m_name];
             }
             
@@ -1404,8 +1407,11 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Editing
+#pragma mark - Track Editing Interface
 
+//
+// UI Action to initiate the editing
+//
 - (void)longPressEvent:(UILongPressGestureRecognizer *)recognizer
 {
     UIView * pressedTrack = (UIView *)recognizer.view;
@@ -1415,21 +1421,20 @@
         [self deactivateEditingClip];
         
         for(id t in trackclips){
-            NSMutableDictionary * clipDict = [trackclips objectForKey:t];
+            NSMutableArray * clipDict = [trackclips objectForKey:t];
             NSString * trackName = (NSString *)t;
             
-            for(id c in clipDict){
-                UIView * v = [clipDict objectForKey:c];
-                NSNumber * clipIndex = (NSNumber *)c;
+            for(int c = 0; c < [clipDict count]; c++){
+                UIView * v = [clipDict objectAtIndex:c];
                 
                 if(v == pressedTrack){
                     
-                    NSTrack * editingTrack = [recordingSong trackWithName:trackName];
+                    editingTrack = [recordingSong trackWithName:trackName];
                     
-                    editingClip = [editingTrack.m_clips objectAtIndex:[clipIndex intValue]];
+                    editingClip = [editingTrack.m_clips objectAtIndex:c];
                     editingClipView = pressedTrack;
                     
-                    DLog(@"Editing track %@ at clip %i with name %@",trackName,[clipIndex intValue],editingClip.m_name);
+                    DLog(@"Editing track %@ at clip %i with name %@",trackName,c,editingClip.m_name);
                 }
             }
         }
@@ -1440,38 +1445,49 @@
     }
 }
 
+// End the editing on another clip
 - (void)deactivateEditingClip
 {
-    // Deactivate
-    UIColor * oldColor;
-    if(editingClip.m_muted){
-        oldColor = OFF_COLOR;
-    }else if([editingClip.m_name isEqualToString:PATTERN_A]){
-        oldColor = A_COLOR;
-    }else if([editingClip.m_name isEqualToString:PATTERN_B]){
-        oldColor = B_COLOR;
-    }else if([editingClip.m_name isEqualToString:PATTERN_C]){
-        oldColor = C_COLOR;
-    }else if([editingClip.m_name isEqualToString:PATTERN_D]){
-        oldColor = D_COLOR;
+    [horizontalAdjustor hideControls];
+    
+    DLog(@"TODO: update the data on patterns that have changed");
+    
+    [self mergeNeighboringIdenticalClips];
+    [self correctMeasureLengths];
+    
+    if(editingClipView != nil){
+        
+        // Deactivate
+        UIColor * oldColor;
+        if(editingClip.m_muted){
+            oldColor = OFF_COLOR;
+        }else if([editingClip.m_name isEqualToString:PATTERN_A]){
+            oldColor = A_COLOR;
+        }else if([editingClip.m_name isEqualToString:PATTERN_B]){
+            oldColor = B_COLOR;
+        }else if([editingClip.m_name isEqualToString:PATTERN_C]){
+            oldColor = C_COLOR;
+        }else if([editingClip.m_name isEqualToString:PATTERN_D]){
+            oldColor = D_COLOR;
+        }
+    
+        [UIView animateWithDuration:0.3 animations:^(void){
+            [editingClipView setBackgroundColor:oldColor];
+        }];
+        
+        [self resetEditingClipPattern];
     }
     
-    [UIView animateWithDuration:0.3 animations:^(void){
-        [editingClipView setBackgroundColor:oldColor];
-    }];
-    
-    [self resetEditingClipPattern];
-    
-    [editingClipLeftSlider removeFromSuperview];
-    [editingClipRightSlider removeFromSuperview];
-    
+    editingTrack = nil;
     editingClip = nil;
     editingClipView = nil;
     editingPatternLetter = nil;
     editingPatternLetterOverlay = nil;
+    horizontalAdjustor = nil;
     
 }
 
+// Start editing a clip
 - (void)activateEditingClip
 {
     // Activate
@@ -1486,30 +1502,22 @@
     [self initEditingClipPattern];
 }
 
+// Init horizontal trimming sliders
 - (void)initEditingClipSliders
 {
-    double sliderWidth = trackView.frame.size.height / MAX_TRACKS;
+    horizontalAdjustor = [[HorizontalAdjustor alloc] initWithContainer:trackView background:trackView bar:editingClipView];
     
-    editingClipLeftSlider = [[UIView alloc] initWithFrame:CGRectMake(- sliderWidth/2.0,0,sliderWidth,sliderWidth)];
+    horizontalAdjustor.delegate = self;
     
-    editingClipRightSlider = [[UIView alloc] initWithFrame:CGRectMake(editingClipView.frame.size.width - sliderWidth/2.0,0,sliderWidth,sliderWidth)];
+    [horizontalAdjustor setBarDefaultWidth:trackView.contentSize.width minWidth:MIN_TRACK_WIDTH];
     
+    [horizontalAdjustor showControlsRelativeToView:editingClipView];
     
-    editingClipLeftSlider.layer.cornerRadius = sliderWidth/2.0;
-    editingClipRightSlider.layer.cornerRadius = sliderWidth/2.0;
+    lastDiff = 0;
     
-    [editingClipLeftSlider setBackgroundColor:[UIColor whiteColor]];
-    [editingClipRightSlider setBackgroundColor:[UIColor whiteColor]];
-    
-    [editingClipLeftSlider setAlpha:0.5];
-    [editingClipRightSlider setAlpha:0.5];
-    
-    [editingClipView addSubview:editingClipLeftSlider];
-    [editingClipView addSubview:editingClipRightSlider];
-
-    // TODO: add listeners
 }
 
+// Reset the pattern name from editing
 - (void)resetEditingClipPattern
 {
     [editingPatternLetterOverlay removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
@@ -1540,6 +1548,7 @@
     
 }
 
+// Start editing the pattern name
 - (void)initEditingClipPattern
 {
     editingPatternLetter = (UILabel *)[editingClipView.subviews firstObject];
@@ -1631,6 +1640,201 @@
     newPattern = [newPattern stringByReplacingOccurrencesOfString:@"-" withString:@""];
     
     [editingPatternLetter setText:newPattern];
+}
+
+#pragma mark - Pan Gesture Reactions
+
+- (void)panLeft:(float)diff
+{
+    NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
+    
+    int editingClipIndex = 0;
+    for(int c = 0; c < [clipDict count]; c++){
+        UIView * clipView = [clipDict objectAtIndex:c];
+        
+        if(clipView == editingClipView){
+            editingClipIndex = c;
+            break;
+        }
+    }
+    
+    // Trim the leftward clip in track
+    if(editingClipIndex > 0){
+        UIView * clipView = [clipDict objectAtIndex:editingClipIndex-1];
+    
+        [clipView setFrame:CGRectMake(clipView.frame.origin.x,clipView.frame.origin.y,clipView.frame.size.width+(diff-lastDiff),clipView.frame.size.height)];
+    
+        if(editingClipView.frame.origin.x < clipView.frame.origin.x){
+            [self removeClipInEditing:clipView];
+        }
+        
+    }
+    
+    if(editingClipView.frame.size.width < MIN_TRACK_WIDTH){
+        [self removeClipInEditing:editingClipView];
+    }
+    
+    lastDiff = diff;
+}
+
+- (void)panRight:(float)diff
+{
+    // Move all rightward clips in the track
+    
+    NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
+    
+    for(int c = 0; c < [clipDict count]; c++){
+        UIView * clipView = [clipDict objectAtIndex:c];
+        
+        if(clipView.frame.origin.x > editingClipView.frame.origin.x){
+            [clipView setFrame:CGRectMake(clipView.frame.origin.x+(diff-lastDiff),clipView.frame.origin.y,clipView.frame.size.width,clipView.frame.size.height)];
+        }
+    }
+    
+    if(editingClipView.frame.size.width < MIN_TRACK_WIDTH){
+        [self removeClipInEditing:editingClipView];
+    }
+    
+    
+    lastDiff = diff;
+    
+}
+
+- (void)endPanLeft
+{
+    lastDiff = 0;
+}
+
+- (void)endPanRight
+{
+    lastDiff = 0;
+}
+
+#pragma mark - Track Editing Actions
+
+//
+// Delete Track
+//
+- (void)removeClipInEditing:(UIView *)clipToRemove
+{
+    // Update dictionaries
+    NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
+    
+    int clipToRemoveIndex = 0;
+    for(int c = 0; c < [clipDict count]; c++){
+        UIView * clipView = [clipDict objectAtIndex:c];
+        
+        if(clipView == clipToRemove){
+            clipToRemoveIndex = c;
+            break;
+        }
+    }
+    
+    NSMutableArray * newClipDict = [[NSMutableArray alloc] init];
+    
+    for(int c = 0; c < [clipDict count]; c++){
+        
+        int newIndex = c;
+        
+        if(c > clipToRemoveIndex){
+            newIndex = c - 1;
+        }
+        
+        if(c != clipToRemoveIndex){
+            [newClipDict addObject:[clipDict objectAtIndex:c]];
+        }
+    }
+    
+    // Overwrite
+    [trackclips setObject:newClipDict forKey:editingTrack.m_name];
+    clipDict = newClipDict;
+    
+    // Start the next track in its place
+    if(clipToRemoveIndex < [trackclips count]){
+        UIView * nextTrack = [clipDict objectAtIndex:clipToRemoveIndex];
+        
+        [nextTrack setFrame:CGRectMake(clipToRemove.frame.origin.x,nextTrack.frame.origin.y,nextTrack.frame.size.width,nextTrack.frame.size.height)];
+    }else if(clipToRemoveIndex > 0){
+        
+        // Or stretch out the previous track if there is no next track
+        UIView * prevTrack = [clipDict objectAtIndex:clipToRemoveIndex-1];
+        
+        [prevTrack setFrame:CGRectMake(prevTrack.frame.origin.x,prevTrack.frame.origin.y,clipToRemove.frame.origin.x-prevTrack.frame.origin.x+clipToRemove.frame.size.width,prevTrack.frame.size.height)];
+        
+    }
+    
+    // Remove from superview
+    
+    if(clipToRemove == editingClipView){
+        editingClipView = nil;
+        [self deactivateEditingClip];
+    }
+    
+    [clipToRemove removeFromSuperview];
+    
+    DLog(@"TODO: update the timing data from deleted tracks");
+    NSClip * clip = [editingTrack.m_clips objectAtIndex:clipToRemoveIndex];
+    
+    [editingTrack.m_clips removeObject:clip];
+    
+    [self mergeNeighboringIdenticalClips];
+    [self correctMeasureLengths];
+    
+}
+
+//
+// Merge Tracks
+//
+- (void)mergeNeighboringIdenticalClips
+{
+    NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
+    
+    if([clipDict count] <= 1 || [editingTrack.m_clips count] <= 1){
+        return;
+    }
+    
+    NSMutableArray * trackClipsToRemove = [[NSMutableArray alloc] init];
+    NSMutableArray * trackClipViewsToRemove = [[NSMutableArray alloc] init];
+    NSMutableArray * viewsToRemove = [[NSMutableArray alloc] init];
+    
+    for(int i = [clipDict count]-1; i > 0 ; i--){
+        UIView * firstClipView = [clipDict objectAtIndex:i-1];
+        UIView * nextClipView = [clipDict objectAtIndex:i];
+        
+        NSClip * firstClip = [editingTrack.m_clips objectAtIndex:i-1];
+        NSClip * nextClip = [editingTrack.m_clips objectAtIndex:i];
+        
+        // Case to merge!
+        if([firstClip.m_name isEqualToString:nextClip.m_name]){
+            [firstClipView setFrame:CGRectMake(firstClipView.frame.origin.x,firstClipView.frame.origin.y,firstClipView.frame.size.width+nextClipView.frame.size.width,firstClipView.frame.size.height)];
+            
+            [trackClipsToRemove addObject:nextClip];
+            [trackClipViewsToRemove addObject:[NSNumber numberWithInt:i+1]];
+            [viewsToRemove addObject:nextClipView];
+            
+        }
+    }
+    
+    // Remove from track clips
+    [editingTrack.m_clips removeObjectsInArray:trackClipsToRemove];
+    [clipDict removeObjectsInArray:trackClipViewsToRemove];
+    
+    // Remove UIViews
+    for(UIView * v in viewsToRemove){
+        [v removeFromSuperview];
+    }
+    
+    // TODO: check all the data comes out right
+    
+    DLog(@"TODO: update the data to merge neighboring identical clips");
+}
+
+//
+// Correct measure lengths after editing
+//
+- (void)correctMeasureLengths
+{
+    DLog(@"TODO: correct measure lengths after editing");
 }
 
 @end

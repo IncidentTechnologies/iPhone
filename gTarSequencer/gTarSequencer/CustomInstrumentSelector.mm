@@ -58,8 +58,7 @@
 @synthesize recordLine;
 @synthesize playBar;
 @synthesize recordingNameField;
-@synthesize leftAdjustor;
-@synthesize rightAdjustor;
+@synthesize horizontalAdjustor;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -840,7 +839,7 @@
     [self userDidEndRecord];
     
     [self showRecordEditingButtons];
-    [self setProgressBarDefaultWidth];
+    [horizontalAdjustor setBarDefaultWidth:progressBar.frame.size.width minWidth:ADJUSTOR_SIZE/2];
     
     // Init Sampler
     [self showRecordProcessing];
@@ -1213,140 +1212,55 @@
 
 -(void)initRecordEditingButtons
 {
-    leftAdjustor = [[UIButton alloc] initWithFrame:CGRectMake(-1*ADJUSTOR_SIZE/2,progressBarContainer.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE)];
-    rightAdjustor = [[UIButton alloc] initWithFrame:CGRectMake(50,progressBarContainer.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE)];
+    horizontalAdjustor = [[HorizontalAdjustor alloc] initWithContainer:progressBarContainer background:backgroundView bar:progressBar];
     
-    leftAdjustor.backgroundColor = [UIColor whiteColor];
-    rightAdjustor.backgroundColor = [UIColor whiteColor];
+    [horizontalAdjustor setDelegate:self];
     
-    leftAdjustor.layer.cornerRadius = ADJUSTOR_SIZE/2;
-    rightAdjustor.layer.cornerRadius = ADJUSTOR_SIZE/2;
-    
-    [leftAdjustor setAlpha:0.3];
-    [rightAdjustor setAlpha:0.3];
-    
-    [leftAdjustor setHidden:YES];
-    [rightAdjustor setHidden:YES];
-    
-    [progressBarContainer addSubview:leftAdjustor];
-    [progressBarContainer addSubview:rightAdjustor];
-    
-    // Add gesture recognizers
-    UIPanGestureRecognizer * leftPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecordLeft:)];
-    UIPanGestureRecognizer * rightPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecordRight:)];
-    
-    [leftAdjustor addGestureRecognizer:leftPan];
-    [rightAdjustor addGestureRecognizer:rightPan];
-    
+    [horizontalAdjustor hideControls];
 }
 
 -(void)showRecordEditingButtons
 {
-    CGRect newLeftFrame = CGRectMake(progressBar.frame.origin.x-ADJUSTOR_SIZE/2,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
-    
-    CGRect newRightFrame = CGRectMake(progressBar.frame.origin.x+progressBar.frame.size.width-ADJUSTOR_SIZE/2,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
-    
-    [leftAdjustor setFrame:newLeftFrame];
-    [rightAdjustor setFrame:newRightFrame];
-    
-    [leftAdjustor setHidden:NO];
-    [rightAdjustor setHidden:NO];
+    [horizontalAdjustor showControlsRelativeToView:progressBar];
 }
 
 -(void)hideRecordEditingButtons
 {
-    [leftAdjustor setHidden:YES];
-    [rightAdjustor setHidden:YES];
+    [horizontalAdjustor hideControls];
 }
 
--(void)panRecordLeft:(UIPanGestureRecognizer *)sender
+-(void)endPanLeft
 {
-    CGPoint newPoint = [sender translationInView:backgroundView];
+    // Adjust the audio
+    float totalLength = recordLine.frame.size.width;
+    float lengthRemoved = progressBar.frame.origin.x;
+    float sampleLength = [customSoundRecorder getSampleLength];
+    float newStart = sampleLength*lengthRemoved/totalLength;
+    newStart = MAX(1,newStart);
     
-    if([sender state] == UIGestureRecognizerStateBegan){
-        leftFirstX = leftAdjustor.frame.origin.x;
-        [leftAdjustor setAlpha:0.8];
-    }
+    [customSoundRecorder setSampleStart:newStart];
+}
+
+-(void)endPanRight
+{
+    // Adjust the audio
+    float totalLength = recordLine.frame.size.width;
+    float newLengthEnd = progressBar.frame.origin.x+progressBar.frame.size.width;
+    float sampleLength = [customSoundRecorder getSampleLength];
+    float newEnd = sampleLength*newLengthEnd/totalLength;
+    newEnd = MIN(newEnd,sampleLength-1);
     
-    float minX = 0 - ADJUSTOR_SIZE/2;
-    float maxX = rightAdjustor.frame.origin.x - 0.5*ADJUSTOR_SIZE/2;
-    float newX = newPoint.x + leftFirstX;
-    
-    // wrap to boundary
-    if(newX < minX || newX < minX+0.2*ADJUSTOR_SIZE/2){
-        newX=minX;
-    }
-    
-    if(newX >= minX && newX <= maxX){
-        CGRect newLeftFrame = CGRectMake(newX,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
-        
-        [leftAdjustor setFrame:newLeftFrame];
-        
-        CGRect newProgressBarFrame = CGRectMake(newX+ADJUSTOR_SIZE/2, 0, rightAdjustor.frame.origin.x-leftAdjustor.frame.origin.x, progressBar.frame.size.height);
-        
-        [progressBar setFrame:newProgressBarFrame];
-    }
-    
-    if([sender state] == UIGestureRecognizerStateEnded){
-        [leftAdjustor setAlpha:0.3];
-        
-        // Adjust the audio
-        float totalLength = recordLine.frame.size.width;
-        float lengthRemoved = progressBar.frame.origin.x;
-        float sampleLength = [customSoundRecorder getSampleLength];
-        float newStart = sampleLength*lengthRemoved/totalLength;
-        newStart = MAX(1,newStart);
-        
-        [customSoundRecorder setSampleStart:newStart];
-    }
+    [customSoundRecorder setSampleEnd:newEnd];
+}
+
+- (void)panRight:(float)diff
+{
     
 }
 
--(void)panRecordRight:(UIPanGestureRecognizer *)sender
+- (void)panLeft:(float)diff
 {
-    CGPoint newPoint = [sender translationInView:backgroundView];
     
-    if([sender state] == UIGestureRecognizerStateBegan){
-        rightFirstX = rightAdjustor.frame.origin.x;
-        [rightAdjustor setAlpha:0.8];
-    }
-    
-    float minX = leftAdjustor.frame.origin.x + 0.5*ADJUSTOR_SIZE/2;
-    float maxX = progressBarDefaultWidth - ADJUSTOR_SIZE/2;
-    float newX = newPoint.x + rightFirstX;
-    
-    // wrap to boundary
-    if(newX > maxX || newX > maxX-0.2*ADJUSTOR_SIZE/2){
-        newX=maxX;
-    }
-    
-    if(newX >= minX && newX <= maxX){
-        CGRect newRightFrame = CGRectMake(newX,progressBar.frame.size.height/2-ADJUSTOR_SIZE/2,ADJUSTOR_SIZE,ADJUSTOR_SIZE);
-        
-        [rightAdjustor setFrame:newRightFrame];
-        
-        CGRect newProgressBarFrame = CGRectMake(progressBar.frame.origin.x, 0, rightAdjustor.frame.origin.x-leftAdjustor.frame.origin.x, progressBar.frame.size.height);
-        
-        [progressBar setFrame:newProgressBarFrame];
-    }
-    
-    if([sender state] == UIGestureRecognizerStateEnded){
-        [rightAdjustor setAlpha:0.3];
-        
-        // Adjust the audio
-        float totalLength = recordLine.frame.size.width;
-        float newLengthEnd = progressBar.frame.origin.x+progressBar.frame.size.width;
-        float sampleLength = [customSoundRecorder getSampleLength];
-        float newEnd = sampleLength*newLengthEnd/totalLength;
-        newEnd = MIN(newEnd,sampleLength-1);
-        
-        [customSoundRecorder setSampleEnd:newEnd];
-    }
-}
-
-- (void)setProgressBarDefaultWidth
-{
-    progressBarDefaultWidth = progressBar.frame.size.width;
 }
 
 #pragma mark - Record Processing
