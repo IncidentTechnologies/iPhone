@@ -36,13 +36,14 @@
 
 @synthesize delegate;
 
-- (id)initWithScrollView:(UIScrollView *)scrollView
+- (id)initWithScrollView:(UIScrollView *)scrollView progressView:(UIView *)progress
 {
     self = [super init];
     
     if ( self )
     {
         trackView = scrollView;
+        progressView = progress;
         
         trackclips = [[NSMutableDictionary alloc] init];
     }
@@ -52,7 +53,14 @@
 
 - (void)clearAllSubviews
 {
+    [self clearProgressView];
+    
     [trackclips removeAllObjects];
+}
+
+- (void)setMeasures:(int)measures
+{
+    numMeasures = measures;
 }
 
 #pragma mark - Drawing
@@ -136,6 +144,24 @@
     [view addSubview:patternLetter];
 }
 
+- (void)drawProgressBarForClip:(NSClip *)clip atIndex:(float)trackIndex
+{
+    float measureHeight = progressView.frame.size.height / (float)MAX_TRACKS;
+    double progressClipStart = [self getProgressXPositionForClipBeat:clip.m_startbeat];
+    double progressClipEnd = [self getProgressXPositionForClipBeat:clip.m_endbeat];
+    
+    DLog(@"Clip start %f end %f beats %f to %f numMeasures %i",progressClipStart,progressClipEnd,clip.m_startbeat,clip.m_endbeat,numMeasures);
+    
+    CGRect clipProgressFrame = CGRectMake(progressClipStart,trackIndex * measureHeight + measureHeight / 2.0,progressClipEnd - progressClipStart,1);
+    
+    UIView * progressClip = [[UIView alloc] initWithFrame:clipProgressFrame];
+    [progressClip setBackgroundColor:[UIColor whiteColor]];
+    
+    if(!clip.m_muted){
+        [progressView addSubview:progressClip];
+    }
+    
+}
 
 - (void)addLongPressGestureToView:(UIView *)view
 {
@@ -145,6 +171,20 @@
     [view addGestureRecognizer:longPress];
 }
 
+#pragma mark - Progress View
+
+- (void)clearProgressView
+{
+    for(UIView * v in progressView.subviews){
+        [v removeFromSuperview];
+    }
+}
+
+- (void)refreshProgressView
+{
+    [self clearProgressView];
+    [delegate redrawProgressView];
+}
 
 #pragma mark - Track Editing Interface
 
@@ -168,7 +208,6 @@
                 
                 if(v == pressedTrack){
                     
-                    //editingTrack = [recordingSong trackWithName:trackName];
                     editingTrack = [delegate trackWithName:trackName];
                     
                     editingClip = [editingTrack.m_clips objectAtIndex:c];
@@ -194,6 +233,7 @@
     
     [self mergeNeighboringIdenticalClips];
     [self correctMeasureLengths];
+    [self refreshProgressView];
     
     if(editingClipView != nil){
         
@@ -560,6 +600,7 @@
     
     [self mergeNeighboringIdenticalClips];
     [self correctMeasureLengths];
+    [self refreshProgressView];
     
 }
 
@@ -780,5 +821,14 @@
     return x;
 }
 
+
+-(float)getProgressXPositionForClipBeat:(float)beat
+{
+    float measureWidth = progressView.frame.size.width / numMeasures;
+    
+    float x = beat * measureWidth / 4.0;
+    
+    return x;
+}
 
 @end

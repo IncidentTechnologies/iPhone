@@ -68,7 +68,7 @@
 	trackView.bounces = NO;
     [trackView setDelegate:self];
     
-    recordEditor = [[RecordEditor alloc] initWithScrollView:trackView];
+    recordEditor = [[RecordEditor alloc] initWithScrollView:trackView progressView:progressView];
     recordEditor.delegate = self;
     
     [self reloadInstruments];
@@ -82,10 +82,6 @@
 - (void)clearAllSubviews
 {
     for(UIView * v in instrumentView.subviews){
-        [v removeFromSuperview];
-    }
-    
-    for(UIView * v in progressView.subviews){
         [v removeFromSuperview];
     }
     
@@ -260,6 +256,8 @@
     numMeasures = newNumMeasures;
     numMeasures = MAX(numMeasures,MIN_MEASURES) + 1;
     
+    [recordEditor setMeasures:numMeasures];
+    
     CGSize newContentSize = CGSizeMake(numMeasures*measureWidth,trackView.frame.size.height);
     
     for(int i = 0; i < numMeasures; i++){
@@ -320,8 +318,6 @@
     // Draw measure content
     //
     
-    int numTracks = [recordingSong.m_tracks count];
-    
     float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     float measureHeight = trackView.frame.size.height / MAX_TRACKS;
     
@@ -336,21 +332,19 @@
             //
             // Draw each clip segment
             //
-            double firstBeat = [self getFirstBeatFromClip:clip];
-            double lastBeat = [self getLastBeatFromClip:clip];
             
             // Revise clip end if it's the last measure
             // (or first measure just to be safe)
             if(clip == [track.m_clips firstObject]){
-                firstBeat = 0.0;
+                clip.m_startbeat = 0.0;
             }
             
             if(clip == [track.m_clips lastObject]){
-                lastBeat = [self countMeasuresFromRecordedSong]*4.0;
+                clip.m_endbeat = [self countMeasuresFromRecordedSong]*4.0;
             }
             
-            double clipStart = [recordEditor getXPositionForClipBeat:firstBeat];
-            double clipEnd = [recordEditor getXPositionForClipBeat:lastBeat];
+            double clipStart = [recordEditor getXPositionForClipBeat:clip.m_startbeat];
+            double clipEnd = [recordEditor getXPositionForClipBeat:clip.m_endbeat];
             
             clipFrame = CGRectMake(clipStart,trackPosition * measureHeight + 1,clipEnd - clipStart,measureHeight);
             
@@ -365,20 +359,8 @@
             //
             // Draw the top progress view
             //
-            float measureHeight = progressView.frame.size.height / (double)numTracks;
-            double progressClipStart = [self getProgressXPositionForClipBeat:firstBeat];
-            double progressClipEnd = [self getProgressXPositionForClipBeat:lastBeat];
             
-            DLog(@"Clip start %f end %f beats %f to %f numMeasures %i",progressClipStart,progressClipEnd,firstBeat,lastBeat,numMeasures);
-            
-            CGRect clipProgressFrame = CGRectMake(progressClipStart,trackPosition * measureHeight + measureHeight / 2.0,progressClipEnd - progressClipStart,1);
-            
-            UIView * progressClip = [[UIView alloc] initWithFrame:clipProgressFrame];
-            [progressClip setBackgroundColor:[UIColor whiteColor]];
-            
-            if(!clip.m_muted){
-                [progressView addSubview:progressClip];
-            }
+            [recordEditor drawProgressBarForClip:clip atIndex:trackPosition];
             
             //
             // Draw the repeat tickmarks
@@ -448,26 +430,21 @@
     
 }
 
-- (float)getFirstBeatFromClip:(NSClip *)clip
-{
-    return clip.m_startbeat;
-}
-
-- (float)getLastBeatFromClip:(NSClip *)clip
-{
-    return clip.m_endbeat;
-}
-
--(float)getProgressXPositionForClipBeat:(float)beat
-{
-    float measureWidth = progressView.frame.size.width / numMeasures;
-    
-    float x = beat * measureWidth / 4.0;
-    
-    return x;
-}
-
 #pragma mark - Scrolling and Progress View
+- (void)redrawProgressView
+{
+    float trackPosition = 0;
+    for(NSTrack * track in recordingSong.m_tracks){
+        
+        for(NSClip * clip in track.m_clips){
+            
+            [recordEditor drawProgressBarForClip:clip atIndex:trackPosition];
+        }
+        
+        trackPosition++;
+    }
+}
+
 -(void)resetProgressView
 {
     float indicatorWidth = (MEASURES_PER_SCREEN/numMeasures) * progressView.frame.size.width;
