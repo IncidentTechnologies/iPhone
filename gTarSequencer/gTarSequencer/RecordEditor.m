@@ -31,7 +31,7 @@
 #define D_COLOR_SOLID [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0]
 #define OFF_COLOR_SOLID [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0]
 
-#define MIN_TRACK_WIDTH 15.0
+#define MIN_TRACK_WIDTH 30.0
 
 @implementation RecordEditor
 
@@ -453,6 +453,8 @@
     newPattern = [newPattern stringByReplacingOccurrencesOfString:@"-" withString:@""];
     
     [editingPatternLetter setText:newPattern];
+    
+    [delegate drawTickmarks];
 }
 
 #pragma mark - Pan Gesture Reactions
@@ -476,7 +478,7 @@
 {
     NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
     
-    int editingClipIndex = 0;
+    int editingClipIndex = -1;
     for(int c = 0; c < [clipDict count]; c++){
         UIView * clipView = [clipDict objectAtIndex:c];
         
@@ -486,13 +488,18 @@
         }
     }
     
+    if(editingClipIndex < 0){
+        DLog(@"ERROR: editing clip not valid");
+        return;
+    }
+    
     // Trim the leftward clip in track
     if(editingClipIndex > 0){
         UIView * leftClipView = [clipDict objectAtIndex:editingClipIndex-1];
         
         [leftClipView setFrame:CGRectMake(leftClipView.frame.origin.x,leftClipView.frame.origin.y,leftClipView.frame.size.width+(diff-lastDiff),leftClipView.frame.size.height)];
         
-        if(editingClipView.frame.origin.x <= leftClipView.frame.origin.x){
+        if(editingClipView.frame.origin.x <= leftClipView.frame.origin.x+MIN_TRACK_WIDTH){
             
             [self removeClipInEditing:leftClipView];
             
@@ -653,8 +660,6 @@
     
     [clipToRemove removeFromSuperview];
     
-    [self mergeNeighboringIdenticalClips];
-    [self correctMeasureLengths];
     [self shrinkExpandMeasuresOnScreen];
     [delegate drawTickmarks];
     [self refreshProgressView];
