@@ -24,6 +24,7 @@
 #define OFF_COLOR [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:0.5]
 
 #define EDITING_COLOR [UIColor colorWithRed:148/255.0 green:102/255.0 blue:176/255.0 alpha:0.5]
+#define ADDING_COLOR [UIColor colorWithRed:204/255.0 green:234/255.0 blue:0/255.0 alpha:0.8]
 #define A_COLOR_SOLID [UIColor colorWithRed:76/255.0 green:146/255.0 blue:163/255.0 alpha:1.0]
 #define B_COLOR_SOLID [UIColor colorWithRed:71/255.0 green:161/255.0 blue:184/255.0 alpha:1.0]
 #define C_COLOR_SOLID [UIColor colorWithRed:64/255.0 green:145/255.0 blue:175/255.0 alpha:1.0]
@@ -43,9 +44,16 @@
     if ( self )
     {
         trackView = scrollView;
+        
+        measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+        measureHeight = trackView.frame.size.height / MAX_TRACKS;
+        
         progressView = progress;
         
         trackclips = [[NSMutableDictionary alloc] init];
+        
+        trackaddclips = [[NSMutableDictionary alloc] init];
+        
     }
     
     return self;
@@ -146,20 +154,52 @@
 
 - (void)drawProgressBarForClip:(NSClip *)clip atIndex:(float)trackIndex
 {
-    float measureHeight = progressView.frame.size.height / (float)MAX_TRACKS;
+    float progressMeasureHeight = progressView.frame.size.height / (float)MAX_TRACKS;
     double progressClipStart = [self getProgressXPositionForClipBeat:clip.m_startbeat];
     double progressClipEnd = [self getProgressXPositionForClipBeat:clip.m_endbeat];
     
     DLog(@"Clip start %f end %f beats %f to %f numMeasures %i",progressClipStart,progressClipEnd,clip.m_startbeat,clip.m_endbeat,numMeasures);
     
-    CGRect clipProgressFrame = CGRectMake(progressClipStart,trackIndex * measureHeight + measureHeight / 2.0,progressClipEnd - progressClipStart,1);
+    CGRect clipProgressFrame = CGRectMake(progressClipStart,trackIndex * progressMeasureHeight + progressMeasureHeight / 2.0,progressClipEnd - progressClipStart,1);
     
     UIView * progressClip = [[UIView alloc] initWithFrame:clipProgressFrame];
     [progressClip setBackgroundColor:[UIColor whiteColor]];
     
+    [progressClip setUserInteractionEnabled:NO];
+    
     if(!clip.m_muted){
         [progressView addSubview:progressClip];
     }
+    
+}
+
+- (void)drawAddClipMeasureForTrack:(NSString *)trackName
+{
+    NSMutableArray * clipArray = [trackclips objectForKey:trackName];
+    UIView * lastClipView = [clipArray lastObject];
+    
+    UIButton * addClipMeasure = [[UIButton alloc] initWithFrame:CGRectMake(lastClipView.frame.origin.x+lastClipView.frame.size.width,lastClipView.frame.origin.y,measureWidth,measureHeight)];
+    
+    [addClipMeasure setBackgroundColor:ADDING_COLOR];
+    
+    [addClipMeasure setTitle:@"+" forState:UIControlStateNormal];
+    [addClipMeasure.titleLabel setFont:[UIFont fontWithName:FONT_BOLD size:30.0]];
+    
+    [addClipMeasure setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [lastClipView.superview addSubview:addClipMeasure];
+    
+    // Left border
+    UIView * addClipLeftBorder = [[UIView alloc] initWithFrame:CGRectMake(0,0,1,measureHeight)];
+    
+    [addClipLeftBorder setBackgroundColor:[UIColor darkGrayColor]];
+    
+    [addClipMeasure addSubview:addClipLeftBorder];
+    
+    // Add to data
+    [trackaddclips setObject:addClipMeasure forKey:trackName];
+    
+    [addClipMeasure addTarget:self action:@selector(addClipInEditingFromButton:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -194,7 +234,11 @@
 - (void)longPressEvent:(UILongPressGestureRecognizer *)recognizer
 {
     UIView * pressedTrack = (UIView *)recognizer.view;
-    
+    [self trackPressed:pressedTrack];
+}
+
+- (void)trackPressed:(UIView *)pressedTrack
+{
     if(pressedTrack != editingClipView){
         
         [self deactivateEditingClip];
@@ -233,6 +277,8 @@
     
     [self mergeNeighboringIdenticalClips];
     [self correctMeasureLengths];
+    [self shrinkExpandMeasuresOnScreen];
+    [delegate drawTickmarks];
     [self refreshProgressView];
     
     if(editingClipView != nil){
@@ -447,7 +493,9 @@
         [leftClipView setFrame:CGRectMake(leftClipView.frame.origin.x,leftClipView.frame.origin.y,leftClipView.frame.size.width+(diff-lastDiff),leftClipView.frame.size.height)];
         
         if(editingClipView.frame.origin.x <= leftClipView.frame.origin.x){
+            
             [self removeClipInEditing:leftClipView];
+            
         }else{
             
             // Set beats for left clip
@@ -460,7 +508,7 @@
     
     // Create new muted clip to the left
     if(editingClipIndex == 0 && editingClipView.frame.origin.x > 0){
-        [self createNewMutedClipFrom:0.0 to:editingClipView.frame.origin.x];
+        [self createNewClipFrom:0.0 to:editingClipView.frame.origin.x at:editingClipView.frame.origin.y forTrack:editingTrack.m_name startEditing:NO isMuted:YES];
     }
     
     // Delete the measure if it's been shrunken too much
@@ -472,6 +520,9 @@
     if(editingClipView != nil){
         [self setBeatsForClip:editingClip withView:editingClipView];
     }
+    
+    // Redraw tickmarks
+    [delegate drawTickmarks];
     
     lastDiff = diff;
 }
@@ -491,6 +542,7 @@
             // Set beats
             NSClip * rightClip = [editingTrack.m_clips objectAtIndex:c];
             [self setBeatsForClip:rightClip withView:clipView];
+            
         }
     }
     
@@ -503,6 +555,9 @@
         [self setBeatsForClip:editingClip withView:editingClipView];
     }
     
+    // Adjust add clip measure
+    [self shrinkExpandMeasuresOnScreen];
+    [delegate drawTickmarks];
     
     lastDiff = diff;
     
@@ -600,7 +655,39 @@
     
     [self mergeNeighboringIdenticalClips];
     [self correctMeasureLengths];
+    [self shrinkExpandMeasuresOnScreen];
+    [delegate drawTickmarks];
     [self refreshProgressView];
+    
+}
+
+//
+// Add Tracks
+//
+- (void)addClipInEditingFromButton:(id)sender
+{
+    DLog(@"Add a clip at the end of the measure of the track and set it editing");
+    
+    UIButton * senderButton = (UIButton *)sender;
+    NSString * senderTrackName = nil;
+    
+    for(id trackName in trackaddclips){
+        DLog(@"trackName is %@",(NSString *)trackName);
+        if((UIButton *)[trackaddclips objectForKey:trackName] == senderButton){
+            senderTrackName = (NSString *)trackName;
+            break;
+        }
+    }
+    
+    UIView * lastClipInTrack = [[trackclips objectForKey:senderTrackName] lastObject];
+    
+    if(senderTrackName != nil){
+        float startX = lastClipInTrack.frame.origin.x+lastClipInTrack.frame.size.width;
+        float endX = startX+measureWidth;
+        [self createNewClipFrom:startX to:endX at:lastClipInTrack.frame.origin.y forTrack:senderTrackName startEditing:YES isMuted:NO];
+    }else{
+        DLog(@"ERROR: Sender Track Name is nil");
+    }
     
 }
 
@@ -663,8 +750,6 @@
         DLog(@"ERROR: editingTrack is nil");
         return;
     }
-    
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     
     NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
     
@@ -777,21 +862,40 @@
 //
 // Create new muted measure
 //
-- (void)createNewMutedClipFrom:(float)fromX to:(float)toX
+- (void)createNewClipFrom:(float)fromX to:(float)toX at:(float)atY forTrack:(NSString *)trackName startEditing:(BOOL)edit isMuted:(BOOL)muted
 {
-    int newIndex = 0;
+    NSTrack * track = [delegate trackWithName:trackName];
     
-    DLog(@"Create new muted clip from %f to %f",fromX,toX);
+    // Determine the new index
+    NSMutableArray * clipArray = [trackclips objectForKey:trackName];
     
-    NSClip * newClip = [[NSClip alloc] initWithName:PATTERN_A startbeat:0.0 endBeat:0.0 clipLength:0.0 clipStart:0.0 looping:false loopStart:0.0 looplength:0.0 color:@"" muted:YES];
+    int clipIndex = 0;
+    for(UIView * clipView in clipArray){
     
-    DLog(@"TODO: more cleverly determine index of new muted clip");
-    [editingTrack addClip:newClip atIndex:newIndex];
+        if(fromX < clipView.frame.origin.x){
+            break;
+        }
+        
+        clipIndex++;
+    }
+    
+    int newIndex = clipIndex;
+    
+    DLog(@"Create new muted clip from %f to %f at index %i",fromX,toX,newIndex);
+    
+    double startBeat = [self getBeatFromXPosition:fromX];
+    double endBeat = [self getBeatFromXPosition:toX];
+    
+    NSClip * newClip = [[NSClip alloc] initWithName:PATTERN_A startbeat:startBeat endBeat:endBeat clipLength:0.0 clipStart:0.0 looping:false loopStart:0.0 looplength:0.0 color:@"" muted:muted];
+    
+    [track addClip:newClip atIndex:newIndex];
     
     // Create the clip
-    CGRect newClipFrame = CGRectMake(fromX,editingClipView.frame.origin.y,toX-fromX,editingClipView.frame.size.height);
+    CGRect newClipFrame = CGRectMake(fromX,atY,toX-fromX,measureHeight);
     
-    UIView * newClipView = [self drawClipViewForClip:newClip track:editingTrack inFrame:newClipFrame atIndex:newIndex];
+    DLog(@"newClipFrame is %f %f %f %f",newClipFrame.origin.x,newClipFrame.origin.y,newClipFrame.size.width,newClipFrame.size.height);
+    
+    UIView * newClipView = [self drawClipViewForClip:newClip track:track inFrame:newClipFrame atIndex:newIndex];
     
     // Draw the pattern letters
     [self drawPatternLetterForClip:newClip inView:newClipView];
@@ -799,14 +903,61 @@
     // Set beats
     [self setBeatsForClip:newClip withView:newClipView];
     
+    // Start editing?
+    if(edit){
+        [self trackPressed:newClipView];
+    }
+    
+}
+
+//
+// Adjust the number of measures on screen to reflect changing lengths
+//
+- (void)shrinkExpandMeasuresOnScreen
+{
+    DLog(@"Shrink expand measures on screen");
+    
+    int newNumMeasures = 0.0;
+    float maxBeat = 0.0;
+    
+    // count the maximum measure
+    // make sure it's not muted
+    for(id trackName in trackclips){
+        NSMutableArray * clipArray = [trackclips objectForKey:trackName];
+        
+        NSClip * lastClip = [[[delegate trackWithName:(NSString *)trackName] m_clips] lastObject];
+        UIView * lastClipView = [clipArray lastObject];
+            
+        if(!lastClip.m_muted){
+            maxBeat = MAX(maxBeat, [self getBeatFromXPosition:lastClipView.frame.origin.x+lastClipView.frame.size.width]);
+        }
+        
+    }
+    
+    newNumMeasures = ceil(maxBeat / 4.0);
+    
+    // call delegate set measures
+    if(newNumMeasures != numMeasures-1){
+        [delegate setMeasures:newNumMeasures drawGrid:NO];
+        
+        DLog(@"TODO: crop all the muted end measures");
+        
+        // move over all the add clip buttons
+        for(id trackName in trackaddclips){
+            UIButton * addClipButton = [trackaddclips objectForKey:trackName];
+            [addClipButton setFrame:CGRectMake([self getXPositionForClipBeat:newNumMeasures*4.0], addClipButton.frame.origin.y, addClipButton.frame.size.width, addClipButton.frame.size.height)];
+        }
+        
+        // bring grid lines forward
+        [delegate drawGridOverlayLines];
+    }
+    
 }
 
 #pragma mark - Beats in view arithmetic
 
 -(float)getBeatFromXPosition:(float)x
 {
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
-    
     float beat = x * 4.0 / measureWidth;
     
     return beat;
@@ -814,19 +965,16 @@
 
 -(float)getXPositionForClipBeat:(float)beat
 {
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
-    
     double x = beat * measureWidth / 4.0;
     
     return x;
 }
 
-
 -(float)getProgressXPositionForClipBeat:(float)beat
 {
-    float measureWidth = progressView.frame.size.width / numMeasures;
+    float progressMeasureWidth = progressView.frame.size.width / (numMeasures-1);
     
-    float x = beat * measureWidth / 4.0;
+    float x = beat * progressMeasureWidth / 4.0;
     
     return x;
 }

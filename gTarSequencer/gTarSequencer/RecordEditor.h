@@ -25,6 +25,9 @@
 
 // Super-drawing
 - (void)redrawProgressView;
+- (void)drawGridOverlayLines;
+- (void)drawTickmarks;
+- (void)setMeasures:(int)newNumMeasures drawGrid:(BOOL)drawGrid;
 
 @end
 
@@ -34,7 +37,11 @@
     UIScrollView * trackView;
     UIView * progressView;
     NSMutableDictionary * trackclips;
+    NSMutableDictionary * trackaddclips;
     int numMeasures;
+    
+    float measureWidth;
+    float measureHeight;
     
     // Editing
     NSTrack * editingTrack;
@@ -52,13 +59,14 @@
 
 - (id)initWithScrollView:(UIScrollView *)scrollView progressView:(UIView *)progress;
 - (void)clearAllSubviews;
-- (void)longPressEvent:(UILongPressGestureRecognizer *)recognizer;
+- (void)deactivateEditingClip;
 
 - (void)setMeasures:(int)measures;
 
 - (UIView *)drawClipViewForClip:(NSClip *)clip track:(NSTrack *)track inFrame:(CGRect)frame atIndex:(int)index;
 - (void)drawPatternLetterForClip:(NSClip *)clip inView:(UIView *)view;
 - (void)drawProgressBarForClip:(NSClip *)clip atIndex:(float)trackIndex;
+- (void)drawAddClipMeasureForTrack:(NSString *)trackName;
 
 - (float)getXPositionForClipBeat:(float)beat;
 - (float)getProgressXPositionForClipBeat:(float)beat;

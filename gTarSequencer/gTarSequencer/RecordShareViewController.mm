@@ -14,6 +14,8 @@
 
 #define DEFAULT_SONG_NAME @"RecordedSessionPlaceholder.m4a"
 
+#define TICK_COLOR [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]
+
 @interface RecordShareViewController ()
 {
     FileoutNode *fileNode;
@@ -68,11 +70,16 @@
 	trackView.bounces = NO;
     [trackView setDelegate:self];
     
+    // Supports all the editing and some of the drawing functionality
     recordEditor = [[RecordEditor alloc] initWithScrollView:trackView progressView:progressView];
     recordEditor.delegate = self;
     
+    // Add touch controls to end any editing
+    [self addLongPressGestureEndEditingToView:progressView];
+    [self addLongPressGestureEndEditingToView:instrumentView];
+    
     [self reloadInstruments];
-    [self setMeasures:MIN_MEASURES];
+    [self setMeasures:MIN_MEASURES drawGrid:YES];
     [self showNoSessionOverlay];
     
     [self initShareScreen];
@@ -89,11 +96,7 @@
         [v removeFromSuperview];
     }
     
-    for(UIView * v in tickmarks){
-        [v removeFromSuperview];
-    }
-    
-    [tickmarks removeAllObjects];
+    [self clearTickmarks];
     [recordEditor clearAllSubviews];
 }
 
@@ -185,9 +188,10 @@
         
         [tracks addObject:track];
         
+        [self addLongPressGestureEndEditingToView:track];
     }
     
-    [self setMeasures:MIN_MEASURES];
+    [self setMeasures:MIN_MEASURES drawGrid:YES];
     
 }
 
@@ -229,7 +233,7 @@
     
     [self removeDeletedMeasuresFromRecordedSong];
     
-    [self setMeasures:[self countMeasuresFromRecordedSong]];
+    [self setMeasures:[self countMeasuresFromRecordedSong] drawGrid:YES];
     
     [self drawPatternsOnMeasures];
     
@@ -245,7 +249,7 @@
     [self stopRecordPlayback];
 }
 
-- (void)setMeasures:(int)newNumMeasures
+- (void)setMeasures:(int)newNumMeasures drawGrid:(BOOL)drawGrid
 {
     //
     // Draw measures
@@ -260,21 +264,22 @@
     
     CGSize newContentSize = CGSizeMake(numMeasures*measureWidth,trackView.frame.size.height);
     
-    for(int i = 0; i < numMeasures; i++){
-        CGRect measureLineFrame = CGRectMake(i*measureWidth, 0, 1, trackView.frame.size.height);
-        UIView * measureLine = [[UIView alloc] initWithFrame:measureLineFrame];
-        [measureLine setBackgroundColor:[UIColor darkGrayColor]];
-        
-        [trackView addSubview:measureLine];
+    // Vertical lines faded out in grid
+    if(drawGrid){
+        for(int i = 0; i < MAX_MEASURES; i++){
+            CGRect measureLineFrame = CGRectMake(i*measureWidth, 0, 1, trackView.frame.size.height);
+            UIView * measureLine = [[UIView alloc] initWithFrame:measureLineFrame];
+            [measureLine setBackgroundColor:[UIColor darkGrayColor]];
+            
+            [trackView addSubview:measureLine];
+        }
     }
-    //if(newContentSize.width > trackView.frame.size.width){
-    // for some reason this needs extra padding
+    
     [trackView setContentSize:newContentSize];
     
     for(UIView * t in tracks){
         [t setFrame:CGRectMake(t.frame.origin.x, t.frame.origin.y, newContentSize.width+2, t.frame.size.height)];
     }
-    //}
 }
 
 - (void)removeDeletedMeasuresFromRecordedSong
@@ -318,7 +323,6 @@
     // Draw measure content
     //
     
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     float measureHeight = trackView.frame.size.height / MAX_TRACKS;
     
     CGRect clipFrame;
@@ -362,9 +366,93 @@
             
             [recordEditor drawProgressBarForClip:clip atIndex:trackPosition];
             
-            //
-            // Draw the repeat tickmarks
-            //
+            clipIndex++;
+        }
+        
+        //
+        // Draw add measure button at the end of each track
+        //
+        
+        [recordEditor drawAddClipMeasureForTrack:track.m_name];
+        
+        trackPosition++;
+    }
+    
+    
+    //
+    // Draw overlaying dark horizontal lines
+    //
+    
+    [self drawGridOverlayLines];
+    
+    //
+    // Draw overlaying pattern tickmarks
+    //
+    
+    [self drawTickmarks];
+    
+}
+
+#pragma mark - Grid View
+
+- (void)drawGridOverlayLines
+{
+    
+    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    
+    if(gridOverlayLines == nil){
+        
+        // Draw all the lines
+        gridOverlayLines = [[NSMutableArray alloc] init];
+        
+        for(int p = 0; p < [recordingSong.m_tracks count]; p++){
+            
+            UIView * t = [tracks objectAtIndex:p];
+            
+            CGRect overlayLine = CGRectMake(0,t.frame.origin.y, MAX_MEASURES*measureWidth,1);
+            
+            UIView * overlayLineView = [[UIView alloc] initWithFrame:overlayLine];
+            [overlayLineView setBackgroundColor:[UIColor darkGrayColor]];
+            
+            [trackView addSubview:overlayLineView];
+            
+            [gridOverlayLines addObject:overlayLineView];
+            
+        }
+    
+    }else{
+        
+        // Bring the lines forward
+        for(UIView * line in gridOverlayLines){
+            [line.superview bringSubviewToFront:line];
+        }
+        
+    }
+    
+}
+
+- (void)clearTickmarks
+{
+    for(UIView * v in tickmarks){
+        [v removeFromSuperview];
+    }
+    
+    [tickmarks removeAllObjects];
+}
+
+- (void)drawTickmarks
+{
+    [self clearTickmarks];
+    
+    // Regenerate tickmarks
+    
+    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    
+    float trackPosition = 0;
+    for(NSTrack * track in recordingSong.m_tracks){
+        
+        int clipIndex = 0;
+        for(NSClip * clip in track.m_clips){
             
             NSTrack * instTrack = [instruments objectAtIndex:[self getIndexForInstrument:track.m_instrument.m_id]];
             
@@ -381,18 +469,36 @@
             {
                 UIView * t = [tracks objectAtIndex:trackPosition];
                 
-                CGRect topTickFrame = CGRectMake((m-1)*measureWidth+measureWidth,t.frame.origin.y,1,12);
-                CGRect bottomTickFrame = CGRectMake((m-1)*measureWidth+measureWidth,t.frame.origin.y+t.frame.size.height-12,1,12);
-                
-                UIView * topTick = [[UIView alloc] initWithFrame:topTickFrame];
-                UIView * bottomTick = [[UIView alloc] initWithFrame:bottomTickFrame];
-                
-                [topTick setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
-                [bottomTick setBackgroundColor:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]];
-                
-                if(!clip.m_muted){
-                    [tickmarks addObject:topTick];
-                    [tickmarks addObject:bottomTick];
+                if(m == clipStartMeasure+fillMeasures){
+                    
+                    // Draw last tickmark for pattern as full bar
+                    CGRect tickFrame = CGRectMake((m-1)*measureWidth+measureWidth,t.frame.origin.y,1,t.frame.size.height);
+                    
+                    UIView * tick = [[UIView alloc] initWithFrame:tickFrame];
+                    
+                    [tick setBackgroundColor:TICK_COLOR];
+                    
+                    if(!clip.m_muted){
+                        [tickmarks addObject:tick];
+                    }
+                    
+                }else{
+                    
+                    // Draw top+bottom tickmarks where patern repeats
+                    
+                    CGRect topTickFrame = CGRectMake((m-1)*measureWidth+measureWidth,t.frame.origin.y,1,12);
+                    CGRect bottomTickFrame = CGRectMake((m-1)*measureWidth+measureWidth,t.frame.origin.y+t.frame.size.height-12,1,12);
+                    
+                    UIView * topTick = [[UIView alloc] initWithFrame:topTickFrame];
+                    UIView * bottomTick = [[UIView alloc] initWithFrame:bottomTickFrame];
+                    
+                    [topTick setBackgroundColor:TICK_COLOR];
+                    [bottomTick setBackgroundColor:TICK_COLOR];
+                    
+                    if(!clip.m_muted){
+                        [tickmarks addObject:topTick];
+                        [tickmarks addObject:bottomTick];
+                    }
                 }
             }
             
@@ -402,32 +508,9 @@
         trackPosition++;
     }
     
-    
-    //
-    // Draw overlaying dark horizontal lines
-    //
-    
-    for(trackPosition = 0; trackPosition < [recordingSong.m_tracks count]; trackPosition++){
-        
-        UIView * t = [tracks objectAtIndex:trackPosition];
-        
-        CGRect overlayLine = CGRectMake(0,t.frame.origin.y, numMeasures*measureWidth,1);
-        
-        UIView * overlayLineView = [[UIView alloc] initWithFrame:overlayLine];
-        [overlayLineView setBackgroundColor:[UIColor darkGrayColor]];
-        
-        [trackView addSubview:overlayLineView];
-    
-    }
-    
-    //
-    // Draw overlaying pattern tickmarks
-    //
-    
     for(UIView * tick in tickmarks){
         [trackView addSubview:tick];
     }
-    
 }
 
 #pragma mark - Scrolling and Progress View
@@ -443,22 +526,28 @@
         
         trackPosition++;
     }
+    
+    [self resetProgressView];
 }
 
 -(void)resetProgressView
 {
-    float indicatorWidth = (MEASURES_PER_SCREEN/numMeasures) * progressView.frame.size.width;
+    float indicatorWidth = (MEASURES_PER_SCREEN/(numMeasures-1)) * progressView.frame.size.width;
     
     CGRect progressViewIndicatorFrame = CGRectMake(0, 0, indicatorWidth, progressView.frame.size.height);
     progressViewIndicator = [[UIView alloc] initWithFrame:progressViewIndicatorFrame];
     [progressViewIndicator setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3]];
+    
+    [progressViewIndicator setUserInteractionEnabled:NO];
     
     [progressView addSubview:progressViewIndicator];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    double percentMoved = scrollView.contentOffset.x / scrollView.contentSize.width;
+    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    
+    double percentMoved = scrollView.contentOffset.x / (scrollView.contentSize.width-measureWidth);
     
     double newIndicatorX = progressView.frame.size.width * percentMoved;
     
@@ -553,6 +642,9 @@
 
 -(void)openShareScreen
 {
+    // End any editing
+    [recordEditor deactivateEditingClip];
+    
     // Get dimensions
     float y = [[UIScreen mainScreen] bounds].size.width;
     
@@ -1317,6 +1409,14 @@
 - (NSTrack *)instTrackAtId:(long)instId
 {
     return [instruments objectAtIndex:[self getIndexForInstrument:instId]];
+}
+
+- (void)addLongPressGestureEndEditingToView:(UIView *)view
+{
+    UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:recordEditor action:@selector(deactivateEditingClip)];
+    longPress.minimumPressDuration = 0.1;
+    
+    [view addGestureRecognizer:longPress];
 }
 
 

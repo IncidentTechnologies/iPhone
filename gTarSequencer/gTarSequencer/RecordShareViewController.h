@@ -18,6 +18,7 @@
 
 #define MAX_TRACKS 5.0
 #define MIN_MEASURES 8.0
+#define MAX_MEASURES 1000
 #define MEASURES_PER_SCREEN 8.0
 
 #define FONT_DEFAULT @"Avenir Next"
@@ -71,16 +72,7 @@ extern NSUser * g_loggedInUser;
     
     // Editing
     RecordEditor * recordEditor;
-    NSTrack * editingTrack;
-    NSClip * editingClip;
-    NSClip * blinkingClip;
-    UIView * editingClipView;
-    UIView * editingClipLeftSlider;
-    UIView * editingClipRightSlider;
-    UILabel * editingPatternLetter;
-    UIButton * editingPatternLetterOverlay;
-    HorizontalAdjustor * horizontalAdjustor;
-    float lastDiff;
+    NSMutableArray * gridOverlayLines;
     
     // Playback
     AVAudioPlayer * audioPlayer;
