@@ -692,7 +692,7 @@
     
     if(senderTrackName != nil){
         float startX = lastClipInTrack.frame.origin.x+lastClipInTrack.frame.size.width;
-        float endX = startX+measureWidth;
+        float endX = MAX(startX+measureWidth,senderButton.frame.origin.x);
         [self createNewClipFrom:startX to:endX at:lastClipInTrack.frame.origin.y forTrack:senderTrackName startEditing:YES isMuted:NO];
     }else{
         DLog(@"ERROR: Sender Track Name is nil");
