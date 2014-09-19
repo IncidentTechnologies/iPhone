@@ -13,6 +13,7 @@
 #import "MainEventController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "HorizontalAdjustor.h"
+#import "RecordEditor.h"
 //#import "SCUI.h"
 
 #define MAX_TRACKS 5.0
@@ -47,12 +48,11 @@
 
 extern NSUser * g_loggedInUser;
 
-@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,HorizontalAdjustorDelegate>
+@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,RecordEditorDelegate>
 {
     NSMutableArray * instruments;
     NSMutableArray * tracks;
     NSMutableArray * tickmarks;
-    NSMutableDictionary * trackclips;
     
     int numMeasures;
     
@@ -70,6 +70,7 @@ extern NSUser * g_loggedInUser;
     SoundMaster * loadedSoundMaster;
     
     // Editing
+    RecordEditor * recordEditor;
     NSTrack * editingTrack;
     NSClip * editingClip;
     NSClip * blinkingClip;

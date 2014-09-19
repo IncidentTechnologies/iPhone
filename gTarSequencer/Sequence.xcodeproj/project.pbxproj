@@ -98,6 +98,7 @@
 		6D02290718F31D6A000E2DE4 /* libSoundCloudAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA856E318EF43AF00CCA191 /* libSoundCloudAPI.a */; };
 		6D02290818F31D6A000E2DE4 /* libSoundCloudUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC5014318EF72E900385472 /* libSoundCloudUI.a */; };
 		6D030C9219CA0E1300BFC44D /* HorizontalAdjustor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D030C9119CA0E1300BFC44D /* HorizontalAdjustor.m */; };
+		6D03F58219CBA4DE00451CFD /* RecordEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03F58119CBA4DE00451CFD /* RecordEditor.m */; };
 		6D12695819706B0F00A2A612 /* Piano_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D12694C19706B0F00A2A612 /* Piano_A.mp3 */; };
 		6D12695919706B0F00A2A612 /* Piano_A#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D12694D19706B0F00A2A612 /* Piano_A#.mp3 */; };
 		6D12695A19706B0F00A2A612 /* Piano_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D12694E19706B0F00A2A612 /* Piano_B.mp3 */; };
@@ -593,6 +594,8 @@
 		58F6167B188F5E2700020A74 /* Icon_Violin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Violin.png; sourceTree = "<group>"; };
 		6D030C9019CA0E1300BFC44D /* HorizontalAdjustor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalAdjustor.h; sourceTree = "<group>"; };
 		6D030C9119CA0E1300BFC44D /* HorizontalAdjustor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalAdjustor.m; sourceTree = "<group>"; };
+		6D03F58019CBA4DE00451CFD /* RecordEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordEditor.h; sourceTree = "<group>"; };
+		6D03F58119CBA4DE00451CFD /* RecordEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordEditor.m; sourceTree = "<group>"; };
 		6D12694C19706B0F00A2A612 /* Piano_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_A.mp3; sourceTree = "<group>"; };
 		6D12694D19706B0F00A2A612 /* Piano_A#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano_A#.mp3"; sourceTree = "<group>"; };
 		6D12694E19706B0F00A2A612 /* Piano_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_B.mp3; sourceTree = "<group>"; };
@@ -1414,6 +1417,15 @@
 			name = HorizontalAdjustor;
 			sourceTree = "<group>";
 		};
+		6D03F57B19CBA48900451CFD /* RecordEditor */ = {
+			isa = PBXGroup;
+			children = (
+				6D03F58019CBA4DE00451CFD /* RecordEditor.h */,
+				6D03F58119CBA4DE00451CFD /* RecordEditor.m */,
+			);
+			name = RecordEditor;
+			sourceTree = "<group>";
+		};
 		6D1268501970675E00A2A612 /* Synths */ = {
 			isa = PBXGroup;
 			children = (
@@ -1631,6 +1643,7 @@
 		6DA724B018E25AB300872705 /* RecordShareViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6D03F57B19CBA48900451CFD /* RecordEditor */,
 				6D1E5C1B19C127BB005956F4 /* MainEventController */,
 				6DA724B118E25B0700872705 /* RecordShareViewController.h */,
 				6DA724B218E25B0700872705 /* RecordShareViewController.mm */,
@@ -2578,6 +2591,7 @@
 				58D6171E1863B8D7001EB327 /* AppDelegate.mm in Sources */,
 				58868EDA187619ED00B469C2 /* PlayControlViewController.mm in Sources */,
 				6DC78A04199BFED1006B14F5 /* NSSample.mm in Sources */,
+				6D03F58219CBA4DE00451CFD /* RecordEditor.m in Sources */,
 				6DC78A0F199C0099006B14F5 /* NSInstrument.mm in Sources */,
 				6D1E5C1019C0D574005956F4 /* NSSong.m in Sources */,
 				58429A1B18A1C09300BDD09B /* InstrumentViewController.mm in Sources */,
