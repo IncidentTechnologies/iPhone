@@ -201,6 +201,7 @@
     
     [addClipMeasure addTarget:self action:@selector(addClipInEditingFromButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    [delegate drawGridOverlayLines];
 }
 
 - (void)addLongPressGestureToView:(UIView *)view
@@ -279,6 +280,7 @@
     [self correctMeasureLengths];
     [self shrinkExpandMeasuresOnScreen];
     [delegate drawTickmarks];
+    [delegate drawGridOverlayLines];
     [self refreshProgressView];
     
     if(editingClipView != nil){
@@ -632,7 +634,9 @@
         
         [nextTrackClip setTempStartbeat:clip.m_startbeat tempEndbeat:nextTrackClip.m_endbeat];
         
-    }else if(clipToRemoveIndex > 0){
+    }
+    
+    if(clipToRemoveIndex > 0){
         
         DLog(@"Stretch out the previous track %i",clipToRemoveIndex-1);
         
@@ -802,8 +806,23 @@
         
         // Validate ... and adjust ...
         
+        // Start it at the end of the previous measure
+        if(c > 0){
+            NSClip * prevClip = [editingTrack.m_clips objectAtIndex:c-1];
+            if(prevClip.m_endbeat != clip.m_startbeat){
+                
+                double targetStartX = [self getXPositionForClipBeat:prevClip.m_endbeat];
+                double targetEndbeat = clip.m_endbeat - (clip.m_startbeat - prevClip.m_endbeat);
+                diffBeats = clip.m_endbeat - targetEndbeat;
+                
+                [clipView setFrame:CGRectMake(targetStartX, clipView.frame.origin.y, clipView.frame.size.width, clipView.frame.size.height)];
+                
+                [clip setTempStartbeat:prevClip.m_endbeat tempEndbeat:targetEndbeat];
+            }
+        }
+        
         // Start it on a valid measure
-        if(!measureBeforeIsMuted){
+        /*if(!measureBeforeIsMuted){
             if(fabs(clip.m_startbeat - 4.0*clipStartMeasure) > 0.05 || clipStartMeasure % patternLength != 0){
                 
                 DLog(@" *** absmath = %f, modmath = %i",clip.m_startbeat - 4.0*clipStartMeasure,clipStartMeasure % patternLength);
@@ -822,7 +841,7 @@
                 [clip setTempStartbeat:targetStartbeat tempEndbeat:targetEndbeat];
                 
             }
-        }
+        }*/
         
         // End it on a valid measure
         if(!measureAfterIsMuted && c < [clipDict count] - 1){
@@ -943,8 +962,11 @@
     
     // call delegate set measures
     if(newNumMeasures != numMeasures-1){
+    
         [delegate setMeasures:newNumMeasures drawGrid:NO];
         
+        [horizontalAdjustor setBarDefaultWidth:trackView.contentSize.width minWidth:MIN_TRACK_WIDTH];
+       
         DLog(@"TODO: crop all the muted end measures");
         
         // move over all the add clip buttons

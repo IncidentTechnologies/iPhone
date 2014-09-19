@@ -397,7 +397,6 @@
 
 - (void)drawGridOverlayLines
 {
-    
     float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     
     if(gridOverlayLines == nil){

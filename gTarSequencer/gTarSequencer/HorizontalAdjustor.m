@@ -36,9 +36,9 @@
 
 - (void)initAdjustors
 {
-    leftAdjustor = [[UIButton alloc] initWithFrame:CGRectMake(-1*adjustorSize/2,m_container.frame.size.height/2-adjustorSize/2,adjustorSize,adjustorSize)];
+    leftAdjustor = [[UIButton alloc] initWithFrame:CGRectMake(-1*adjustorSize/2,m_container.frame.size.height/2-adjustorSize/2,adjustorSize-1,adjustorSize)];
     
-    rightAdjustor = [[UIButton alloc] initWithFrame:CGRectMake(50,m_container.frame.size.height/2-adjustorSize/2,adjustorSize,adjustorSize)];
+    rightAdjustor = [[UIButton alloc] initWithFrame:CGRectMake(50,m_container.frame.size.height/2-adjustorSize/2,adjustorSize-1,adjustorSize)];
     
     leftAdjustor.backgroundColor = [UIColor whiteColor];
     rightAdjustor.backgroundColor = [UIColor whiteColor];
