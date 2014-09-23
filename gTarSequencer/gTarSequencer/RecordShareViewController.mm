@@ -36,6 +36,7 @@
 @synthesize noSessionOverlay;
 @synthesize noSessionLabel;
 @synthesize processingLabel;
+@synthesize processingScreen;
 @synthesize shareEmailButton;
 @synthesize shareSMSButton;
 @synthesize shareSoundcloudButton;
@@ -150,6 +151,9 @@
         
         [tracks addObject:track];
         
+        // Behind the clips
+        [self addLongPressGestureEndEditingToView:track];
+        
         i++;
     }
     
@@ -220,8 +224,14 @@
 }
 - (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
 {
+    
+    loadedSequence = activeSequence;
+    loadedSoundMaster = soundMaster;
+
     if(song != nil){
         recordingSong = song;
+        loadedTempo = song.m_tempo;
+
         [self hideNoSessionOverlay];
     }else{
         [self showNoSessionOverlay];
@@ -238,15 +248,37 @@
     [self drawPatternsOnMeasures];
     
     // record the m4a
-    //if(song != nil){
-        [self startRecording:nil withTempo:song.m_tempo andSoundMaster:soundMaster activeSequence:activeSequence activeSong:nil];
-    //}
+    // [self recordActiveSongToFileWithTempo:song.m_tempo];
     
     // reset the progress bar on top
     [self resetProgressView];
     
     // ensure record playback gbegets refreshed
     [self stopRecordPlayback];
+}
+
+- (void)regenerateDataForTrack:(NSTrack *)track
+{
+    // Track passed in is already pointing to a track of recordingSong
+    DLog(@"instrument tracks is %@",instruments);
+    
+    NSTrack * instTrack;
+    for(NSTrack * t in instruments){
+        if(t.m_instrument.m_id == track.m_instrument.m_id){
+            instTrack = t;
+        }
+    }
+    
+    if(instTrack == nil){
+        DLog(@"ERROR: trying to generate track with invalid instrument");
+        return;
+    }
+    
+    DLog(@" **** Regenerate Track %@ Data **** ",track.m_name);
+    
+    // regenerate the data
+    [track regenerateSongWithInstrumentTrack:instTrack];
+    
 }
 
 - (void)setMeasures:(int)newNumMeasures drawGrid:(BOOL)drawGrid
@@ -307,7 +339,9 @@
     for(NSTrack * track in recordingSong.m_tracks){
         for(NSClip * clip in track.m_clips){
             for(NSNote * note in clip.m_notes){
-                maxMeasure = MAX(maxMeasure,note.m_beatstart);
+                if(note != nil){
+                    maxMeasure = MAX(maxMeasure,note.m_beatstart);
+                }
             }
         }
     }
@@ -527,6 +561,8 @@
     }
     
     [self resetProgressView];
+    
+    [self scrollViewDidScroll:trackView];
 }
 
 -(void)resetProgressView
@@ -540,6 +576,7 @@
     [progressViewIndicator setUserInteractionEnabled:NO];
     
     [progressView addSubview:progressViewIndicator];
+    
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -574,11 +611,18 @@
     return [noSessionOverlay isHidden];
 }
 
+-(void)hideProcessingOverlay
+{
+    [processingScreen setHidden:YES];
+}
+
 -(void)showProcessingOverlay
 {
-    [noSessionOverlay setHidden:NO];
-    [noSessionLabel setHidden:YES];
-    [processingLabel setHidden:NO];
+    [processingScreen setHidden:NO];
+    
+    //[noSessionOverlay setHidden:NO];
+    //[noSessionLabel setHidden:YES];
+    //[processingLabel setHidden:NO];
 }
 
 -(void)showRecordOverlay
@@ -641,8 +685,14 @@
 
 -(void)openShareScreen
 {
+    // End any song playing
+    [self stopRecordPlaybackAnimatePlayband:NO];
+    
     // End any editing
     [recordEditor deactivateEditingClip];
+    
+    // Record the m4a
+    [self recordActiveSongToFile];
     
     // Get dimensions
     float y = [[UIScreen mainScreen] bounds].size.width;
@@ -689,6 +739,9 @@
 
 - (void)userDidCloseShare
 {
+    // Stop recording m4a file
+    //[self stopRecording];
+    
     // Wrap up song name editing in progress
     [self songNameFieldDoneEditing:songNameField];
     
@@ -833,7 +886,7 @@
     
     if(playMeasure > [self countMeasuresFromRecordedSong]){
     //if(playMeasure > [loadedPattern count]){
-        [self stopPlaybandAnimation];
+        [self stopPlaybandWithAnimation:YES];
     }
 }
 
@@ -870,45 +923,45 @@
     playbandTimer = nil;
 }
 
--(void)stopPlaybandAnimation
+-(void)stopPlaybandWithAnimation:(BOOL)animate
 {
     [playbandTimer invalidate];
     playbandTimer = nil;
     
     // Animate to the end
     isPlaybandAnimating = NO;
-    //[self movePlaybandToMeasure:[loadedPattern count]-1 andFret:FRETS_ON_GTAR-1 andHide:YES];
-    [self movePlaybandToMeasure:[self countMeasuresFromRecordedSong]-1 andFret:FRETS_ON_GTAR-1 andHide:YES];
+    
+    if(animate){
+        [self movePlaybandToMeasure:[self countMeasuresFromRecordedSong]-1 andFret:FRETS_ON_GTAR-1 andHide:YES];
+    }else{
+        [self resetPlayband];
+    }
     
 }
 
 #pragma mark - Recording
--(void)startRecording:(NSMutableArray *)patternData withTempo:(int)tempo andSoundMaster:(SoundMaster *)m_soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
+-(void)recordActiveSongToFile
 {
-    //if(loadedPattern != patternData){
+    DLog(@"Start recording song to m4a file");
     
-    // TODO: reinstate this?
-    //if(![activeSong isEqualToString:recordingSong.m_title]){
+    [cancelButton setAlpha:0.2];
+    [cancelButton setUserInteractionEnabled:NO];
+
+    isWritingFile = YES;
+
+    r_measure = 0;
+    r_beat = 0;
+
+    [self showProcessingOverlay];
     
-        isWritingFile = YES;
-        
-        //loadedPattern = patternData;
-        loadedTempo = tempo;
-        loadedSoundMaster = m_soundMaster;
-        loadedSequence = activeSequence;
-        
-        r_measure = 0;
-        r_beat = 0;
-        
-        //DLog(@"Start recording %@",loadedPattern);
-        [self showProcessingOverlay];
-        [delegate forceShowSessionOverlay];
-        
-        [self resetAudio];
-        [self showRecordOverlay];
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(beginRecordSession) userInfo:nil repeats:NO];
-    //}
-    //}
+    // Hide the status bar in case user exits the overlay
+    //[delegate forceShowSessionOverlay];
+    //[delegate showRecordOverlay];
+    
+    [self resetAudio];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(beginRecordSession) userInfo:nil repeats:NO];
+
 }
 
 -(void)beginRecordSession
@@ -992,10 +1045,12 @@
 {
     isWritingFile = NO;
     
-    DLog(@"Stop recording");
-    [self hideNoSessionOverlay];
+    [self hideProcessingOverlay];
     [self hideRecordOverlay];
     [delegate forceHideSessionOverlay];
+    
+    [cancelButton setAlpha:1.0];
+    [cancelButton setUserInteractionEnabled:YES];
     
     [recordTimer invalidate];
     recordTimer = nil;
@@ -1009,8 +1064,13 @@
     // release
     [self releaseFileoutNode];
     [self resetAudio];
+    
+    DLog(@"Stop recording");
+    [delegate stopSoundMaster];
+    
 }
 
+/*
 -(void)interruptRecording
 {
     if(isWritingFile){
@@ -1019,7 +1079,7 @@
     }else{
         DLog(@"Ignore interrupt recording");
     }
-}
+}*/
 
 -(void)releaseFileoutNode
 {
@@ -1032,16 +1092,21 @@
 #pragma mark - Record Playback
 -(void)playRecordPlayback
 {
+    // End any editing
+    [recordEditor deactivateEditingClip];
+    
+    DLog(@"is audio playing? %i",isAudioPlaying);
+    
     if(!isAudioPlaying){
         
         DLog(@"Play record playback");
         
-        NSURL * url = [NSURL fileURLWithPath:sessionFilepath];
+        //NSURL * url = [NSURL fileURLWithPath:sessionFilepath];
         
-        NSError * error;
-        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        audioPlayer.numberOfLoops = 0;
-        audioPlayer.delegate = self;
+        //NSError * error;
+        //audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        //audioPlayer.numberOfLoops = 0;
+        //audioPlayer.delegate = self;
         
         isAudioPlaying = YES;
         
@@ -1054,7 +1119,6 @@
     
     [delegate startSoundMaster];
     [self performSelectorInBackground:@selector(startBackgroundLoop:) withObject:[NSNumber numberWithFloat:SECONDS_PER_EVENT_LOOP]];
-    
     
     [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
     
@@ -1082,10 +1146,18 @@
     [self pausePlaybandAnimation];
 }
 
--(void)stopRecordPlayback
+- (void)stopRecordPlayback
 {
+    [self stopRecordPlaybackAnimatePlayband:YES];
+}
+
+-(void)stopRecordPlaybackAnimatePlayband:(BOOL)animatePlayband
+{
+    [delegate stopSoundMaster];
+    [self stopMainEventLoop];
+    
     isAudioPlaying = NO;
-    [self stopPlaybandAnimation];
+    [self stopPlaybandWithAnimation:animatePlayband];
     //[audioPlayer stop];
     [delegate recordPlaybackDidEnd];
 }
@@ -1105,7 +1177,7 @@
 
 - (void)initSongModel
 {
-    DLog(@"recordingSong is %@",recordingSong);
+    DLog(@"Init Song Model for Recording Song: %@",recordingSong);
     
     if(songModel == nil){
         songModel = [[NSSongModel alloc] initWithSong:recordingSong andInstruments:instruments];

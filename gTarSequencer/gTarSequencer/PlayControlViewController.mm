@@ -51,8 +51,8 @@
     // Hide share button
     [self setShareMode:NO];
     
-    isPlaying = FALSE;
-    isPlaybackPlaying = FALSE;
+    isPlaying = NO;
+    isPlaybackPlaying = NO;
     
     [self hideSessionOverlay];
     [self hideRecordOverlay];
@@ -355,6 +355,8 @@
 #pragma mark - Record Playback
 -(IBAction)startStopRecordPlayback:(id)sender
 {
+    DLog(@"is playback playing? %i",isPlaybackPlaying);
+    
     if(isPlaybackPlaying){
         
         [self clearButton:recordPlaybackButton];

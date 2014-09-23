@@ -158,8 +158,6 @@
     double progressClipStart = [self getProgressXPositionForClipBeat:clip.m_startbeat];
     double progressClipEnd = [self getProgressXPositionForClipBeat:clip.m_endbeat];
     
-    DLog(@"Clip start %f end %f beats %f to %f numMeasures %i",progressClipStart,progressClipEnd,clip.m_startbeat,clip.m_endbeat,numMeasures);
-    
     CGRect clipProgressFrame = CGRectMake(progressClipStart,trackIndex * progressMeasureHeight + progressMeasureHeight / 2.0,progressClipEnd - progressClipStart,1);
     
     UIView * progressClip = [[UIView alloc] initWithFrame:clipProgressFrame];
@@ -283,6 +281,12 @@
     [delegate drawGridOverlayLines];
     [self refreshProgressView];
     
+    if(editingTrack != nil){
+        
+        [delegate regenerateDataForTrack:editingTrack];
+        
+    }
+    
     if(editingClipView != nil){
         
         // Deactivate
@@ -318,6 +322,8 @@
 // Start editing a clip
 - (void)activateEditingClip
 {
+    [delegate stopRecordPlaybackAnimatePlayband:NO];
+    
     // Activate
     [UIView animateWithDuration:0.3 animations:^(void){
         [editingClipView setBackgroundColor:EDITING_COLOR];
@@ -589,7 +595,7 @@
     
     [clip setTempStartbeat:startbeat tempEndbeat:endbeat];
     
-    DLog(@"Set temp beats for clip %@ from %f to %f",clip.m_name,startbeat,endbeat);
+    //DLog(@"Set temp beats for clip %@ from %f to %f",clip.m_name,startbeat,endbeat);
 }
 
 #pragma mark - Track Editing Actions

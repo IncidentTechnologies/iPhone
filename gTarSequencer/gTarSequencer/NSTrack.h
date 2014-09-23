@@ -77,4 +77,7 @@
 - (void)displayAllNotes;
 - (void)releaseSounds;
 
+// Track song data
+- (void)regenerateSongWithInstrumentTrack:(NSTrack *)instTrack;
+
 @end

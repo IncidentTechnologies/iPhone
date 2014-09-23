@@ -151,6 +151,11 @@
     [m_notes addObject:note];
 }
 
+- (void)clearNotes
+{
+    [m_notes removeAllObjects];
+}
+
 - (void)setMute:(bool)muted
 {
     m_muted = muted;

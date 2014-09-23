@@ -22,12 +22,15 @@
 // Data access
 - (NSTrack *)trackWithName:(NSString *)trackName;
 - (NSTrack *)instTrackAtId:(long)instId;
+- (void)regenerateDataForTrack:(NSTrack *)track;
 
 // Super-drawing
 - (void)redrawProgressView;
 - (void)drawGridOverlayLines;
 - (void)drawTickmarks;
 - (void)setMeasures:(int)newNumMeasures drawGrid:(BOOL)drawGrid;
+
+- (void)stopRecordPlaybackAnimatePlayband:(BOOL)animate;
 
 @end
 

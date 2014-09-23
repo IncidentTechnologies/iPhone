@@ -381,5 +381,58 @@
         [m setUpdateNotesOnMinimap:YES];
 }
 
+#pragma mark - Regenerate Song Data
+
+- (void)regenerateSongWithInstrumentTrack:(NSTrack *)instTrack
+{
+    
+    for(NSClip * clip in self.m_clips){
+        
+        [clip clearNotes];
+        
+        // Get the pattern data
+        NSPattern * clipPattern;
+        float patternLength = 0;
+        
+        for(NSPattern * p in instTrack.m_patterns){
+            if([clip.m_name isEqualToString:p.m_name]){
+                clipPattern = p;
+                patternLength = (float)[instTrack getPatternLengthByName:p.m_name];
+            }
+        }
+        
+        patternLength *= 4.0; // count beats instead of measures
+        float patternStartbeat = floor(clip.m_startbeat/patternLength) * patternLength;
+        float patternEndbeat = ceil(clip.m_endbeat/patternLength) * patternLength;
+        float patternBeat = patternStartbeat;
+        
+        DLog(@"Pattern Startbeat to Endbeat is %f to %f with length %f",patternStartbeat,patternEndbeat,patternLength);
+        
+        // Cycle through the pattern for the duration of the clip, but offset the start
+        for(patternBeat = patternStartbeat; patternBeat < patternEndbeat; patternBeat += patternLength){
+            
+            // Generate the notes and add them
+            for(NSNote * n in clipPattern.m_notes){
+                
+                float noteStartbeat = patternBeat + (n.m_beatstart/4.0); // Use beat rather than 1-16 value
+                
+                if(noteStartbeat >= clip.m_startbeat && noteStartbeat <= clip.m_endbeat){
+                    
+                    NSNote * clipNote = [[NSNote alloc] initWithValue:n.m_value beatstart:noteStartbeat duration:n.m_duration];
+                    [clip addNote:clipNote];
+                    
+                }
+                
+            }
+        }
+        
+        //DLog(@"Pattern %@ from beat %f to %f",clip.m_name,clip.m_startbeat,clip.m_endbeat);
+        
+    }
+    
+    //DLog(@"Track is now %@",self);
+    
+}
+
 
 @end

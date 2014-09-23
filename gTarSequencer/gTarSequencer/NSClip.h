@@ -57,18 +57,20 @@
 
 -(XMPNode *)convertToSongXmp;
 
--(void)addNote:(NSNote *)note;
+- (void)addNote:(NSNote *)note;
 
--(void)setMute:(bool)muted;
+- (void)clearNotes;
+
+- (void)setMute:(bool)muted;
 
 - (void)setTempStartbeat:(double)startbeat tempEndbeat:(double)endbeat;
 
--(void)setEndbeat:(double)beat;
+- (void)setEndbeat:(double)beat;
 
--(double)getMeasureForBeat:(double)beat;
+- (double)getMeasureForBeat:(double)beat;
 
--(double)getDownMeasureForBeat:(double)beat;
+- (double)getDownMeasureForBeat:(double)beat;
 
--(void)changePattern:(NSString *)newPattern;
+- (void)changePattern:(NSString *)newPattern;
 
 @end

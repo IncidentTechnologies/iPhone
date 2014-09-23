@@ -393,12 +393,13 @@
     }else{
         [playControlViewController setShareMode:NO];
         [recordShareController stopRecordPlayback];
+        [seqSetViewController startSoundMaster];
     }
     
     // Lock record?
     if([nav isEqualToString:@"Options"]){
         if(isRecording){
-            [recordShareController interruptRecording];
+            //[recordShareController interruptRecording];
             [playControlViewController stopPlayRecordAndAnimate:NO showEndScreen:NO];
             
             DLog(@"IS Recording is %i",isRecording);
@@ -831,7 +832,7 @@
     
     if(isRecording){
         
-        [recordShareController interruptRecording];
+        //[recordShareController interruptRecording];
         
         if(activeMainView != seqSetViewController.view && activeMainView != instrumentViewController.view){
             [self selectNavChoice:@"Set" withShift:NO];

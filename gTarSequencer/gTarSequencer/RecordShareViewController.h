@@ -128,6 +128,7 @@ extern NSUser * g_loggedInUser;
 
 @property (retain, nonatomic) UIView * shareScreen;
 @property (retain, nonatomic) UIView * shareView;
+@property (retain, nonatomic) IBOutlet UIView * processingScreen;
 
 @property (nonatomic, weak) IBOutlet UITextField * songNameField;
 @property (nonatomic, weak) IBOutlet UITextView * songDescriptionField;
