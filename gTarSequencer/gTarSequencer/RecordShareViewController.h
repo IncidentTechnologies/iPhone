@@ -20,6 +20,7 @@
 #define MIN_MEASURES 8.0
 #define MAX_MEASURES 1000
 #define MEASURES_PER_SCREEN 8.0
+#define MEASURE_BEATS 4.0
 
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"

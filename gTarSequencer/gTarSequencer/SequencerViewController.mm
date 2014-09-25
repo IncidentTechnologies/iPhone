@@ -541,15 +541,17 @@
         // Init the song
         NSSong * loadedSong = [[NSSong alloc] initWithXMPFilename:filename];
         
-        // Set the active sequencer accordingly
-        [self loadStateFromDisk:loadedSong.m_sequenceName];
-        [self saveContext:nil force:YES];
+        if(loadedSong != nil){
+            // Set the active sequencer accordingly
+            [self loadStateFromDisk:loadedSong.m_sequenceName];
+            [self saveContext:nil force:YES];
         
-        // Load into record share view
-        SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-        
-        isRecording = TRUE;
-        [recordShareController loadSong:loadedSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+            // Load into record share view
+            SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+            
+            isRecording = TRUE;
+            [recordShareController loadSong:loadedSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+        }
         
     }
 }

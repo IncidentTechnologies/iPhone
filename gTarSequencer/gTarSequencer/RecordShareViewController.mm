@@ -239,6 +239,8 @@
     
     DLog(@"Song is %@, sequence is %@",recordingSong,activeSequence);
     
+    [self resetSongModel];
+    
     [self reloadInstruments];
     
     [self removeDeletedMeasuresFromRecordedSong];
@@ -279,6 +281,9 @@
     // regenerate the data
     [track regenerateSongWithInstrumentTrack:instTrack];
     
+    // reset the song model
+    [self resetSongModel];
+    
 }
 
 - (void)setMeasures:(int)newNumMeasures drawGrid:(BOOL)drawGrid
@@ -291,6 +296,8 @@
     
     numMeasures = newNumMeasures;
     numMeasures = MAX(numMeasures,MIN_MEASURES) + 1;
+    
+    DLog(@"NUM MEASURES SET TO %i",numMeasures);
     
     [recordEditor setMeasures:numMeasures];
     
@@ -343,10 +350,11 @@
                     maxMeasure = MAX(maxMeasure,note.m_beatstart);
                 }
             }
+            maxMeasure = MAX(maxMeasure,clip.m_endbeat);
         }
     }
     
-    maxMeasure /= 4.0;
+    maxMeasure /= MEASURE_BEATS;
     
     return (int) ceil(maxMeasure);
 }
@@ -358,6 +366,8 @@
     //
     
     float measureHeight = trackView.frame.size.height / MAX_TRACKS;
+    
+    DLog(@"Song is %@",recordingSong);
     
     CGRect clipFrame;
     
@@ -378,7 +388,12 @@
             }
             
             if(clip == [track.m_clips lastObject]){
-                clip.m_endbeat = [self countMeasuresFromRecordedSong]*4.0;
+                clip.m_endbeat = [self countMeasuresFromRecordedSong]*MEASURE_BEATS;
+            }
+            
+            // Empty last measure, space out for 1 measure
+            if(clip.m_startbeat == clip.m_endbeat){
+                clip.m_endbeat += MEASURE_BEATS;
             }
             
             double clipStart = [recordEditor getXPositionForClipBeat:clip.m_startbeat];
@@ -853,7 +868,7 @@
     float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     float fretWidth = measureWidth / FRETS_ON_GTAR;
     
-    float pb_x = ((m*measureWidth+f*fretWidth)/(numMeasures*measureWidth))*playbandView.superview.frame.size.width;
+    float pb_x = ((m*measureWidth+f*fretWidth)/((numMeasures-1)*measureWidth))*playbandView.superview.frame.size.width;
     float mpb_x = m*measureWidth+f*fretWidth;
     
     [UIView animateWithDuration:0.1 animations:^(void){
@@ -1012,7 +1027,7 @@
                 if(!clip.m_muted){
                     for(NSNote * note in clip.m_notes){
                         
-                        if(note.m_beatstart == r_beat/4.0){
+                        if(note.m_beatstart == r_beat/MEASURE_BEATS){
                             
                             NSTrack * instTrack = [instruments objectAtIndex:[self getIndexForInstrument:track.m_instrument.m_id]];
                             
@@ -1054,12 +1069,6 @@
     
     [recordTimer invalidate];
     recordTimer = nil;
-    
-    // save XMP
-    //[recordingSong printTree];
-    DLog(@"RecordingSong is %@",recordingSong);
-    
-    [recordingSong saveToFile:recordingSong.m_title];
     
     // release
     [self releaseFileoutNode];
@@ -1175,15 +1184,29 @@
     [self stopRecordPlayback];
 }
 
+- (void)resetSongModel
+{
+    songModel = nil;
+    gridOverlayLines = nil;
+}
+
 - (void)initSongModel
 {
+    // This is called when the play button is hit, the data gets reset when
+    // changes are made
+    
     DLog(@"Init Song Model for Recording Song: %@",recordingSong);
     
     if(songModel == nil){
         songModel = [[NSSongModel alloc] initWithSong:recordingSong andInstruments:instruments];
+        
+        // Save XMP
+        // [recordingSong printTree];
+        [recordingSong saveToFile:recordingSong.m_title];
     }
         
     [songModel startWithDelegate:self];
+    
 }
 
 - (void)mainEventLoop

@@ -28,6 +28,8 @@
 #define SCROLLING_BEATS_PER_SECOND 1.0
 #define LOOP_GAP 2.0
 
+#define MIN_BEATS 4.0
+
 - (id)initWithSong:(NSSong*)song andInstruments:(NSArray *)instruments
 {
     
@@ -56,7 +58,7 @@
 
 - (void)calculateBeatLength
 {
-    m_lengthBeats = 0;
+    m_lengthBeats = MIN_BEATS;
     
     for(NSTrack * track in m_song.m_tracks){
         

@@ -42,15 +42,27 @@
         
         char * filepath = (char *)[sequenceFilepath UTF8String];
         
-        DLog(@"initWithXMPFilename Songs/%@.xml",filename);
+        // First check it's a valid filepath
         
-        XMPTree MyTree(filepath);
+        if([[NSFileManager defaultManager] fileExistsAtPath:sequenceFilepath]){
         
-        XMPNode * root = MyTree.GetRootNode()->FindChildByName((char *)"xmp")->FindChildByName((char *)"song");
-        
-        self = [self initWithXMPNode:root];
-        
-        DLog(@"Finished init?");
+            DLog(@"initWithXMPFilename Songs/%@.xml",filename);
+            
+            XMPTree MyTree(filepath);
+            
+            XMPNode * root = MyTree.GetRootNode()->FindChildByName((char *)"xmp")->FindChildByName((char *)"song");
+            
+            self = [self initWithXMPNode:root];
+            
+            DLog(@"Finished init?");
+            
+        }else{
+            
+            DLog(@"ERROR: Attempting to load Song XMP that does not exist.");
+            
+            return nil;
+            
+        }
         
     }
     

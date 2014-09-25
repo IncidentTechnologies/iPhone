@@ -32,6 +32,7 @@
 #define OFF_COLOR_SOLID [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0]
 
 #define MIN_TRACK_WIDTH 30.0
+#define MIN_LEFT_TRACK_WIDTH 5.0
 
 @implementation RecordEditor
 
@@ -507,7 +508,7 @@
         
         [leftClipView setFrame:CGRectMake(leftClipView.frame.origin.x,leftClipView.frame.origin.y,leftClipView.frame.size.width+(diff-lastDiff),leftClipView.frame.size.height)];
         
-        if(editingClipView.frame.origin.x <= leftClipView.frame.origin.x+MIN_TRACK_WIDTH){
+        if((editingClipIndex > 1 && editingClipView.frame.origin.x <= leftClipView.frame.origin.x+MIN_TRACK_WIDTH) || (editingClipIndex == 1 && editingClipView.frame.origin.x <= leftClipView.frame.origin.x+MIN_LEFT_TRACK_WIDTH)){
             
             [self removeClipInEditing:leftClipView];
             
@@ -776,6 +777,17 @@
         
         // No adjustments if the measure is muted
         if(clip.m_muted){
+            
+            // Unless it is the first measure
+            if(c == 0){
+                
+                // Remove if it's too small
+                if(clipView.frame.size.width <= MIN_TRACK_WIDTH){
+                    [self removeClipInEditing:clipView];
+                }
+                
+            }
+            
             continue;
         }
         
@@ -941,6 +953,40 @@
 }
 
 //
+// Crop muted end measures when the (+)measure gets adjusted
+//
+- (void)cropMutedEndMeasures:(int)newNumMeasures
+{
+    // Adjust view
+    // Then call setBeatsForClip:(NSClip)withView:
+    
+    // First adjust the view
+    
+    DLog(@"NumMeasures is %i",newNumMeasures);
+    
+    for(id trackName in trackclips){
+        
+        NSTrack * track = [delegate trackWithName:trackName];
+        
+        NSClip * clip = [track.m_clips lastObject];
+        
+        if(clip.m_muted){
+            
+            UIView * lastClipView = [[trackclips objectForKey:trackName] lastObject];
+            
+            double newClipEndX = [self getXPositionForClipBeat:newNumMeasures*4.0];
+            double newClipWidth = newClipEndX - lastClipView.frame.origin.x;
+            
+            [lastClipView setFrame:CGRectMake(lastClipView.frame.origin.x, lastClipView.frame.origin.y, newClipWidth, lastClipView.frame.size.height)];
+         
+            [self setBeatsForClip:clip withView:lastClipView];
+                
+        }
+        
+    }
+}
+
+//
 // Adjust the number of measures on screen to reflect changing lengths
 //
 - (void)shrinkExpandMeasuresOnScreen
@@ -959,7 +1005,8 @@
         UIView * lastClipView = [clipArray lastObject];
             
         if(!lastClip.m_muted){
-            maxBeat = MAX(maxBeat, [self getBeatFromXPosition:lastClipView.frame.origin.x+lastClipView.frame.size.width]);
+            //[self getBeatFromXPosition:lastClipView.frame.origin.x+lastClipView.frame.size.width]
+            maxBeat = MAX(maxBeat, lastClip.m_endbeat);
         }
         
     }
@@ -972,8 +1019,8 @@
         [delegate setMeasures:newNumMeasures drawGrid:NO];
         
         [horizontalAdjustor setBarDefaultWidth:trackView.contentSize.width minWidth:MIN_TRACK_WIDTH];
-       
-        DLog(@"TODO: crop all the muted end measures");
+    
+        [self cropMutedEndMeasures:newNumMeasures];
         
         // move over all the add clip buttons
         for(id trackName in trackaddclips){

@@ -30,6 +30,7 @@
 - (void)drawTickmarks;
 - (void)setMeasures:(int)newNumMeasures drawGrid:(BOOL)drawGrid;
 
+// Playback
 - (void)stopRecordPlaybackAnimatePlayband:(BOOL)animate;
 
 @end
