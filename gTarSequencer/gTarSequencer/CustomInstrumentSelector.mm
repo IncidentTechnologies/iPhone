@@ -13,6 +13,8 @@
 #define RECORD_DRAW_INTERVAL 0.001
 #define ADJUSTOR_SIZE 50.0
 
+#define EDITING_FRAME_OFFSET 60.0
+
 #define VIEW_CUSTOM_INST 0
 #define VIEW_CUSTOM_NAME 1
 #define VIEW_CUSTOM_RECORD 2
@@ -417,7 +419,7 @@
 {
     DLog(@"Name field start edit");
     
-    float frameOffset = 60.0;
+    float frameOffset = EDITING_FRAME_OFFSET;
     CGRect prevIconFrame = customIcon.frame;
     CGRect prevTextFrame = nameField.frame;
     
@@ -460,7 +462,7 @@
 -(void)nameFieldDoneEditing:(id)sender
 {
     // return icon and name to position
-    float frameOffset = 35.0;
+    float frameOffset = EDITING_FRAME_OFFSET;
     CGRect prevIconFrame = customIcon.frame;
     CGRect prevTextFrame = nameField.frame;
     

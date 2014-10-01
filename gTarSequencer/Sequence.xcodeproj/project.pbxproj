@@ -40,7 +40,6 @@
 		5894D61A186505BD00849C71 /* SeqSetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5894D619186505BD00849C71 /* SeqSetViewController.mm */; };
 		58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */; };
 		58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */; };
-		58B1BE2718AD524900A3C0CC /* OptionsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */; };
 		58B1BE2A18AD52AB00A3C0CC /* OptionsViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 58B1BE2918AD52AB00A3C0CC /* OptionsViewCell.mm */; };
 		58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 58B4D3CC186E1F210035D9E5 /* SoundMaker.mm */; };
 		58B4D3D5186E32AD0035D9E5 /* SeqSetViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B4D3D4186E32AD0035D9E5 /* SeqSetViewCell.xib */; };
@@ -255,6 +254,7 @@
 		6D44A45B18B5937B00992D3D /* InfogTar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45918B5937B00992D3D /* InfogTar.png */; };
 		6D44A45D18B686C400992D3D /* G_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45C18B686C400992D3D /* G_Icon.png */; };
 		6D5FD01F18D12B5C00ED96F6 /* Tutorial_Dock.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D5FD01E18D12B5C00ED96F6 /* Tutorial_Dock.png */; };
+		6D62EFAC19DC900F001B8E18 /* OptionsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D62EFAA19DC900F001B8E18 /* OptionsViewCell.xib */; };
 		6D6AFE48199D2F2D00BEBB9D /* NSMeasure.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6AFE47199D2F2D00BEBB9D /* NSMeasure.m */; };
 		6D72B28118BE7C7100969A8F /* CustomSampleCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D72B28018BE7C7100969A8F /* CustomSampleCell.mm */; };
 		6D72B28318BE7C8400969A8F /* CustomSampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D72B28218BE7C8400969A8F /* CustomSampleCell.xib */; };
@@ -364,7 +364,6 @@
 		6DEAB50B18D7BB7C00833D9C /* HandDrum_Clink.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB50518D7BB7C00833D9C /* HandDrum_Clink.mp3 */; };
 		6DED45D3199C4E4400E4AF08 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DED45D2199C4E4400E4AF08 /* MessageUI.framework */; };
 		6DF6BC7518CE5E1800D20EC7 /* tutorialSet.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6BC7418CE5E1800D20EC7 /* tutorialSet.xml */; };
-		6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */; };
 		6DFDB02018C0278D004D573B /* BottomBar_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB01F18C0278D004D573B /* BottomBar_4.xib */; };
 		6DFDB02218C02BB2004D573B /* SeqSetViewCell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB02118C02BB2004D573B /* SeqSetViewCell_4.xib */; };
 		6DFDB02418C0346B004D573B /* InstrumentViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFDB02318C0346B004D573B /* InstrumentViewController_4.xib */; };
@@ -528,7 +527,6 @@
 		58A59521188619C100696614 /* libGtarControllerDeploy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGtarControllerDeploy.a; path = "../../../../Library/Developer/Xcode/DerivedData/gTarSequencer-dutfggipzljevjdgnkoekhszrhrw/Build/Products/Debug-iphoneos/libGtarControllerDeploy.a"; sourceTree = "<group>"; };
 		58B006DC1864CC0F00C2D08F /* gTarbyIncidentLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoading.png; sourceTree = "<group>"; };
 		58B006DD1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarbyIncidentLoadingWide.png; sourceTree = "<group>"; };
-		58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell.xib; sourceTree = "<group>"; };
 		58B1BE2818AD52AB00A3C0CC /* OptionsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewCell.h; sourceTree = "<group>"; };
 		58B1BE2918AD52AB00A3C0CC /* OptionsViewCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OptionsViewCell.mm; sourceTree = "<group>"; };
 		58B4D3CB186E1F210035D9E5 /* SoundMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundMaker.h; sourceTree = "<group>"; };
@@ -774,6 +772,7 @@
 		6D5F9B4218ECCAA30027C5B9 /* libSoundCloudAPI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudAPI.a; path = "../CocoaSoundCloudAPI/build/Debug-iphoneos/libSoundCloudAPI.a"; sourceTree = "<group>"; };
 		6D5F9B4318ECCAA30027C5B9 /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Debug-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
 		6D5FD01E18D12B5C00ED96F6 /* Tutorial_Dock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial_Dock.png; sourceTree = "<group>"; };
+		6D62EFAA19DC900F001B8E18 /* OptionsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell.xib; sourceTree = "<group>"; };
 		6D6AFE46199D2F2D00BEBB9D /* NSMeasure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMeasure.h; sourceTree = "<group>"; };
 		6D6AFE47199D2F2D00BEBB9D /* NSMeasure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMeasure.m; sourceTree = "<group>"; };
 		6D72B27F18BE7C7100969A8F /* CustomSampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSampleCell.h; sourceTree = "<group>"; };
@@ -916,7 +915,6 @@
 		6DEAB50518D7BB7C00833D9C /* HandDrum_Clink.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HandDrum_Clink.mp3; sourceTree = "<group>"; };
 		6DED45D2199C4E4400E4AF08 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6DF6BC7418CE5E1800D20EC7 /* tutorialSet.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = tutorialSet.xml; path = ../tutorialSet.xml; sourceTree = "<group>"; };
-		6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewCell_4.xib; sourceTree = "<group>"; };
 		6DFDB01F18C0278D004D573B /* BottomBar_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomBar_4.xib; sourceTree = "<group>"; };
 		6DFDB02118C02BB2004D573B /* SeqSetViewCell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeqSetViewCell_4.xib; sourceTree = "<group>"; };
 		6DFDB02318C0346B004D573B /* InstrumentViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentViewController_4.xib; sourceTree = "<group>"; };
@@ -1184,8 +1182,7 @@
 		58B1BE2518AD522200A3C0CC /* OptionsViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				6DFDB01D18C024CD004D573B /* OptionsViewCell_4.xib */,
-				58B1BE2618AD524900A3C0CC /* OptionsViewCell.xib */,
+				6D62EFAA19DC900F001B8E18 /* OptionsViewCell.xib */,
 				58B1BE2818AD52AB00A3C0CC /* OptionsViewCell.h */,
 				58B1BE2918AD52AB00A3C0CC /* OptionsViewCell.mm */,
 			);
@@ -2329,10 +2326,8 @@
 				580A52011864DFF50077240B /* gTarConnectedLogo.png in Resources */,
 				6D72B28318BE7C8400969A8F /* CustomSampleCell.xib in Resources */,
 				6D1269BE19706C3100A2A612 /* DoubleBass_D#.mp3 in Resources */,
-				58B1BE2718AD524900A3C0CC /* OptionsViewCell.xib in Resources */,
 				5840858618652D9000BFF3C5 /* SeqSetView.xib in Resources */,
 				6DEAB4D518D78FF800833D9C /* House_Kick.mp3 in Resources */,
-				6DFDB01E18C024CD004D573B /* OptionsViewCell_4.xib in Resources */,
 				58D617261863B8D7001EB327 /* Images.xcassets in Resources */,
 				6DEAB4CA18D78FF800833D9C /* Chiptune_Snare.mp3 in Resources */,
 				6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */,
@@ -2447,6 +2442,7 @@
 				6D1269D319706C7100A2A612 /* Acoustic_B.mp3 in Resources */,
 				6D126A6E1970722900A2A612 /* Ladder_G#.mp3 in Resources */,
 				6D126A801970724200A2A612 /* Juno_D.mp3 in Resources */,
+				6D62EFAC19DC900F001B8E18 /* OptionsViewCell.xib in Resources */,
 				6DEAB4BE18D78FF800833D9C /* Rock_Snare.mp3 in Resources */,
 				6D12697519706B1900A2A612 /* Vibraphone_D.mp3 in Resources */,
 				6DAB0CEB18C7B8F400FFBDE6 /* release_notes.md in Resources */,

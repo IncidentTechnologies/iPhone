@@ -66,6 +66,8 @@ extern NSUser * g_loggedInUser;
 - (void)unloadView;
 - (void)loadTableWith:(NSString *)type;
 
+
+- (void)deleteCell:(OptionsViewCell *)cell;
 - (void)deselectAllRowsExcept:(OptionsViewCell *)cell;
 
 - (void)deselectAllRows;

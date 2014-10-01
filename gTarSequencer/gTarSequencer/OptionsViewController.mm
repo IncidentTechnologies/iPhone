@@ -59,14 +59,7 @@
     FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     isScreenLarge = [frameGenerator isScreenLarge];
     
-    // Check screen size for nib
-    NSString * nibname = @"OptionsViewCell";
-    if(isScreenLarge){
-        nibname = @"OptionsViewCell_4";
-    }
-    
-    UINib *nib = [UINib nibWithNibName:nibname bundle:nil];
-    [loadTable registerNib:nib forCellReuseIdentifier:@"LoadCell"];
+    [loadTable registerNib:[UINib nibWithNibName:@"OptionsViewCell" bundle:nil] forCellReuseIdentifier:@"LoadCell"];
     
     //loadTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     loadTable.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -454,7 +447,8 @@
         cell.isRenamable = NO;
         [cell.setButton setHidden:NO];
         [cell.songButton setHidden:NO];
-        [cell resetContentOffset];
+        cell.fileText.text = @"";
+        //[cell resetContentOffset];
         
         if([loadedTableType isEqualToString:TABLE_SETS]){
             [cell highlightSetButton];
@@ -482,45 +476,7 @@
 #pragma mark - Cell editing
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OptionsViewCell * cell = (OptionsViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    
-    if([selectMode isEqualToString:@"Load"] && !cell.isNameEditing && ![cell.fileText.text isEqualToString:DEFAULT_SET_NAME] && [cell.setButton isHidden]){
-        return YES;
-    }else{
-        return NO;
-    }
-}
-
-- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    DLog(@"***** will begin editing row at index path");
-    
-    OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
-    [cell editingDidBegin];
-    
-    // always select the cell being edited
-    [cell setSelected:YES animated:NO];
-    if(cellToDeselect != nil){
-        [cellToDeselect setSelected:NO animated:NO];
-    }
-    cellToDeselect = cell;
-}
-
-- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
-    [cell editingDidEnd];
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
-    [cell editingDidEnd];
-    
-    if(editingStyle == UITableViewCellEditingStyleDelete){
-        [self deleteCellAtIndexPath:indexPath];
-    }
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -532,9 +488,9 @@
     }
 }
 
-- (void)deleteCellAtIndexPath:(NSIndexPath *)indexPath
+- (void)deleteCell:(OptionsViewCell *)cell
 {
-    OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
+    NSIndexPath * indexPath = [loadTable indexPathForCell:cell];
     NSString * filename = [cell getNameForFile];
     
     [cell unsetAsActiveSequencer];
@@ -568,7 +524,13 @@
         // schedule this because the table loading inevitably has a delay
         [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(showNoSetsLabel) userInfo:nil repeats:NO];
     }
-    
+
+}
+
+- (void)deleteCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
+    [self deleteCell:cell];
 }
 
 #pragma mark - Custom logic for cell display
@@ -758,9 +720,11 @@
 
 - (void)showNoSetsLabel
 {
-    [noSetsLabel setHidden:NO];
-    [noSetsLabel setAlpha:0.0];
-    [UIView animateWithDuration:0.5 animations:^(void){[noSetsLabel setAlpha:1.0];}];
+    if([noSetsLabel isHidden]){
+        [noSetsLabel setHidden:NO];
+        [noSetsLabel setAlpha:0.0];
+        [UIView animateWithDuration:0.5 animations:^(void){[noSetsLabel setAlpha:1.0];}];
+    }
 }
 
 - (void)hideNoSetsLabel

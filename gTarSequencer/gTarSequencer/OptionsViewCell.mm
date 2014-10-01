@@ -27,11 +27,10 @@
 @synthesize activeIndicator;
 @synthesize isRenamable;
 @synthesize rowid;
-@synthesize deleteButton;
 @synthesize isNameEditing;
-@synthesize scroller;
 @synthesize setButton;
 @synthesize songButton;
+@synthesize deleteButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -61,6 +60,28 @@
     }
     return self;
 }
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+
+    // Adjust layout to phone size
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    float x = [frameGenerator getFullscreenWidth];
+    
+    [self setFrame:CGRectMake(self.frame.origin.x,self.frame.origin.y,x,self.frame.size.height)];
+    
+    _setButtonWidth.constant = x/2.0;
+    _songButtonWidth.constant = x/2.0;
+    _songButtonLeftConstraint.constant = x/2.0;
+    
+    // Add swipe recognizer for deleting
+    self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panCell:)];
+    self.panRecognizer.delegate = self;
+    
+    [self.container addGestureRecognizer:self.panRecognizer];
+}
+
 
 - (void)sharedInit
 {
@@ -173,8 +194,7 @@
         
         DLog(@"Selecting cell at row %i",rowid);
         
-        self.contentView.backgroundColor = darkGrayColor;
-        self.backgroundColor = darkGrayColor;
+        self.container.backgroundColor = darkGrayColor;
         
         fileText.textColor = ((isActiveSequencer || isActiveSong) && !isRenamable) ? activeColor : [UIColor whiteColor];
         
@@ -200,19 +220,16 @@
         
     }else{
         
-        if(!isEditingMode){
+        //if(!isEditingMode){
             
             DLog(@"Deselecting cell %i",rowid);
             
             [self endNameEditing];
             
             if([parent.selectMode isEqualToString:@"SaveCurrent"] && isRenamable){
-                self.contentView.backgroundColor = [UIColor grayColor];
-                self.backgroundColor = [UIColor grayColor];
-                
+                self.container.backgroundColor = [UIColor grayColor];
             }else{
-                self.contentView.backgroundColor = [UIColor whiteColor];
-                self.backgroundColor = [UIColor whiteColor];
+                self.container.backgroundColor = [UIColor whiteColor];
             }
             
             fileText.textColor = ((isActiveSequencer || isActiveSong) && !isRenamable) ? activeColor : darkGrayColor;
@@ -220,16 +237,14 @@
             
             [fileText setHidden:NO];
             [fileName setHidden:YES];
-        }else{
+        //}else{
             
-            DLog(@"*** Not deselecting cell %i",rowid);
-        }
+        //    DLog(@"*** Not deselecting cell %i",rowid);
+        //}
         
     }
     
-    if(scroller != nil && !isEditingMode){
-        [self resetContentOffset];
-    }
+    // TODO: reset any content offset
     
     // Check font for active sequencer
     if((isActiveSequencer || isActiveSong) && !isRenamable){
@@ -563,34 +578,6 @@
     }
 }
 
-#pragma mark - Deleting
-// Prevent bouncing
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if(![setButton isHidden]){
-        
-        // Ensure no scrolling happens accidentally
-        [self resetContentOffset];
-        
-        // Redundant?
-        scrollView.contentOffset = CGPointMake(0,0);
-        
-    }else{
-        
-        scroller = scrollView;
-        
-        static CGFloat targetOffset = 62;
-        if(scrollView.contentOffset.x >= targetOffset){
-            scrollView.contentOffset = CGPointMake(targetOffset, 0.0);
-        }
-    
-    }
-}
-
--(void)resetContentOffset
-{
-    scroller.contentOffset = CGPointMake(0,0);
-}
 
 -(NSString *)getNameForFile
 {
@@ -636,5 +623,127 @@
     [[setButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:18.0]];
     
 }
+
+#pragma mark - Editing
+
+
+- (void)panCell:(UIPanGestureRecognizer *)recognizer
+{
+    if(![setButton isHidden] || [fileText.text isEqualToString:DEFAULT_SET_NAME]){
+        return;
+    }
+    
+    switch (recognizer.state) {
+            
+        case UIGestureRecognizerStateBegan:
+        {
+            self.panStartPoint = [recognizer translationInView:self.container];
+            self.startingLeftConstraint = self.leftConstraint.constant;
+            NSLog(@"Pan Began at %@", NSStringFromCGPoint(self.panStartPoint));
+            
+            [self editingDidBegin];
+            
+            break;
+        }
+        case UIGestureRecognizerStateChanged:
+        {
+            
+            CGPoint currentPoint = [recognizer translationInView:self.container];
+            CGFloat deltaX = currentPoint.x - self.panStartPoint.x;
+            
+            NSLog(@"Pan Moved %f", deltaX);
+            BOOL panningLeft = NO;
+            if (currentPoint.x < self.panStartPoint.x) {
+                panningLeft = YES;
+            }
+            
+            //if (self.contentViewLeftConstraint == 0) { //2
+            //The cell was closed and is now opening
+            if (!panningLeft) {
+                CGFloat constant = deltaX;
+                if (constant > 0) {
+                    [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:NO];
+                } else {
+                    self.leftConstraint.constant = constant;
+                    self.rightConstraint.constant = -1 * [self buttonTotalWidth] - constant;
+                }
+            } else {
+                CGFloat constant = deltaX;
+                if (constant <= -1 * [self buttonTotalWidth]) {
+                    [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:NO];
+                } else {
+                    self.leftConstraint.constant = constant;
+                    self.rightConstraint.constant = -1 * [self buttonTotalWidth] - constant;
+                }
+            }
+            //}
+            
+            break;
+        }
+        case UIGestureRecognizerStateEnded:
+            
+            if (self.leftConstraint.constant < 0) {
+                //Cell was opening
+                CGFloat halfButton = -1 * [self buttonTotalWidth] / 2.0;
+                if (self.leftConstraint.constant < halfButton) {
+                    //Open all the way
+                    [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:YES];
+                } else {
+                    //Re-close
+                    [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
+                }
+            }else{
+                // Re-close
+                [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
+            }
+            
+            NSLog(@"Pan Ended");
+            break;
+            
+        case UIGestureRecognizerStateCancelled:
+            
+            if (self.startingLeftConstraint == 0) {
+                //Cell was closed - reset everything to 0
+                [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
+            } else {
+                //Cell was open - reset to the open state
+                [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:YES];
+            }
+            NSLog(@"Pan Cancelled");
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+- (CGFloat)buttonTotalWidth {
+    return deleteButton.frame.size.width;
+}
+
+- (void)resetConstraintContstantsToZero:(BOOL)animated notifyDelegateDidClose:(BOOL)endEditing
+{
+    self.leftConstraint.constant = 0.0;
+    self.rightConstraint.constant = -1 * [self buttonTotalWidth];
+    
+    [self editingDidEnd];
+}
+
+- (void)setConstraintsToShowAllButtons:(BOOL)animated notifyDelegateDidOpen:(BOOL)notifyDelegate
+{
+    self.leftConstraint.constant = -1 * [self buttonTotalWidth];
+    self.rightConstraint.constant = 0.0;
+}
+
+- (IBAction)userDidSelectDeleteButton:(id)sender
+{
+    DLog(@"Delete cell!");
+    
+    [parent deleteCell:self];
+    
+    [self editingDidEnd];
+}
+
 
 @end
