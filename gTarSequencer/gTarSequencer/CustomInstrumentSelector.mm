@@ -741,7 +741,6 @@
     NSError * error = nil;
     NSURL * url = [NSURL fileURLWithPath:path];
     
-    
     DLog(@"Playing URL %@",url);
     
     self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -1680,7 +1679,11 @@
     
     sampleTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     stringTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    sampleTable.separatorInset = UIEdgeInsetsZero;
+    sampleTable.separatorInset = UIEdgeInsetsZero; // iOS 7
+    
+    if([sampleTable respondsToSelector:@selector(setLayoutMargins:)]){
+        sampleTable.layoutMargins = UIEdgeInsetsZero; // iOS 8+
+    }
     
     // do custom work
     if(tableView == sampleTable){
@@ -1691,6 +1694,11 @@
         if (cell == nil) cell = [[CustomSampleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         cell.parentCategory = [sampleStack lastObject];
+        cell.separatorInset = UIEdgeInsetsZero;
+        if([cell respondsToSelector:@selector(setLayoutMargins:)]){
+            cell.layoutMargins = UIEdgeInsetsZero; // iOS 8+
+        }
+        cell.delegate = self;
         
         [cell.sampleTitle setText:[self getSampleFromIndex:indexPath]];
         [cell setBackgroundColor:[UIColor clearColor]];
@@ -1836,34 +1844,19 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: change logic to test if custom sample
-    if([self isCustomInstrumentList]){
-        return YES;
-    }else{
-        return NO;
-    }
+    // Necessary for custom delete
+    return NO;
 }
 
-
-- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)deleteCustomSampleCell:(id)cell
 {
+    CustomSampleCell * sampleCell = (CustomSampleCell *)cell;
     
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(editingStyle == UITableViewCellEditingStyleDelete){
-        [self deleteCell:indexPath];
-    }
-}
-
-- (void)deleteCell:(NSIndexPath *)pathToDelete
-{
+    NSIndexPath * pathToDelete = [sampleTable indexPathForCell:sampleCell];
+    
+    NSString * filename = sampleCell.sampleTitle.text;
+    
     DLog(@"Delete cell at section %i index %i",pathToDelete.section,pathToDelete.row);
-    
-    CustomSampleCell * cell = (CustomSampleCell *)[sampleTable cellForRowAtIndexPath:pathToDelete];
-    
-    NSString * filename = cell.sampleTitle.text;
     
     // Remove the data
     BOOL deleteCell = [self userDidDeleteRecord:filename];

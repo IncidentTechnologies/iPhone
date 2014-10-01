@@ -28,7 +28,7 @@
 
 @end
 
-@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate,HorizontalAdjustorDelegate>
+@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate,HorizontalAdjustorDelegate,CustomSampleCellDelegate>
 {
     int viewState;
     

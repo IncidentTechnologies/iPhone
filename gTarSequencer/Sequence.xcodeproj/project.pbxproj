@@ -347,9 +347,9 @@
 		6DEAB4DF18D78FF800833D9C /* Sounds_-con.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48A18D78FF800833D9C /* Sounds_-con.mp3 */; };
 		6DEAB4E018D78FF800833D9C /* Sounds_Ba-.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48B18D78FF800833D9C /* Sounds_Ba-.mp3 */; };
 		6DEAB4E118D78FF800833D9C /* Sounds_Bacon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48C18D78FF800833D9C /* Sounds_Bacon.mp3 */; };
-		6DEAB4E218D78FF800833D9C /* Sounds_I'm Bacon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48D18D78FF800833D9C /* Sounds_I'm Bacon.mp3 */; };
+		6DEAB4E218D78FF800833D9C /* Sounds_I'mBacon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48D18D78FF800833D9C /* Sounds_I'mBacon.mp3 */; };
 		6DEAB4E318D78FF800833D9C /* Sounds_I'm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48E18D78FF800833D9C /* Sounds_I'm.mp3 */; };
-		6DEAB4E418D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48F18D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 */; };
+		6DEAB4E418D78FF800833D9C /* Sounds_ReverseI'mBacon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB48F18D78FF800833D9C /* Sounds_ReverseI'mBacon.mp3 */; };
 		6DEAB4EC18D790F800833D9C /* Trombone_A.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4E618D790F800833D9C /* Trombone_A.mp3 */; };
 		6DEAB4ED18D790F800833D9C /* Trombone_B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4E718D790F800833D9C /* Trombone_B.mp3 */; };
 		6DEAB4EE18D790F800833D9C /* Trombone_C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB4E818D790F800833D9C /* Trombone_C.mp3 */; };
@@ -898,9 +898,9 @@
 		6DEAB48A18D78FF800833D9C /* Sounds_-con.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_-con.mp3"; sourceTree = "<group>"; };
 		6DEAB48B18D78FF800833D9C /* Sounds_Ba-.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_Ba-.mp3"; sourceTree = "<group>"; };
 		6DEAB48C18D78FF800833D9C /* Sounds_Bacon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sounds_Bacon.mp3; sourceTree = "<group>"; };
-		6DEAB48D18D78FF800833D9C /* Sounds_I'm Bacon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_I'm Bacon.mp3"; sourceTree = "<group>"; };
+		6DEAB48D18D78FF800833D9C /* Sounds_I'mBacon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_I'mBacon.mp3"; sourceTree = "<group>"; };
 		6DEAB48E18D78FF800833D9C /* Sounds_I'm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_I'm.mp3"; sourceTree = "<group>"; };
-		6DEAB48F18D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_Reverse I'm Bacon.mp3"; sourceTree = "<group>"; };
+		6DEAB48F18D78FF800833D9C /* Sounds_ReverseI'mBacon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sounds_ReverseI'mBacon.mp3"; sourceTree = "<group>"; };
 		6DEAB4E618D790F800833D9C /* Trombone_A.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trombone_A.mp3; sourceTree = "<group>"; };
 		6DEAB4E718D790F800833D9C /* Trombone_B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trombone_B.mp3; sourceTree = "<group>"; };
 		6DEAB4E818D790F800833D9C /* Trombone_C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Trombone_C.mp3; sourceTree = "<group>"; };
@@ -2036,9 +2036,9 @@
 				6DEAB48A18D78FF800833D9C /* Sounds_-con.mp3 */,
 				6DEAB48B18D78FF800833D9C /* Sounds_Ba-.mp3 */,
 				6DEAB48C18D78FF800833D9C /* Sounds_Bacon.mp3 */,
-				6DEAB48D18D78FF800833D9C /* Sounds_I'm Bacon.mp3 */,
+				6DEAB48D18D78FF800833D9C /* Sounds_I'mBacon.mp3 */,
 				6DEAB48E18D78FF800833D9C /* Sounds_I'm.mp3 */,
-				6DEAB48F18D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 */,
+				6DEAB48F18D78FF800833D9C /* Sounds_ReverseI'mBacon.mp3 */,
 			);
 			path = Bacon;
 			sourceTree = "<group>";
@@ -2291,7 +2291,7 @@
 				6D1269D719706C7100A2A612 /* Acoustic_D.mp3 in Resources */,
 				6D126A551970720900A2A612 /* MiniBass_G.mp3 in Resources */,
 				6DEAB50618D7BB7C00833D9C /* HandDrum_DjembeKick.mp3 in Resources */,
-				6DEAB4E218D78FF800833D9C /* Sounds_I'm Bacon.mp3 in Resources */,
+				6DEAB4E218D78FF800833D9C /* Sounds_I'mBacon.mp3 in Resources */,
 				6D126A6C1970722900A2A612 /* Ladder_F#.mp3 in Resources */,
 				6D126A2019706F5E00A2A612 /* Trumpet_D.mp3 in Resources */,
 				6D1269DC19706C7100A2A612 /* Acoustic_G.mp3 in Resources */,
@@ -2301,7 +2301,7 @@
 				6D126A1D19706F5E00A2A612 /* Trumpet_B.mp3 in Resources */,
 				6D12698E19706C2600A2A612 /* Violin_D#.mp3 in Resources */,
 				6D126A7C1970724200A2A612 /* Juno_A#.mp3 in Resources */,
-				6DEAB4E418D78FF800833D9C /* Sounds_Reverse I'm Bacon.mp3 in Resources */,
+				6DEAB4E418D78FF800833D9C /* Sounds_ReverseI'mBacon.mp3 in Resources */,
 				580A52091864DFF50077240B /* Icon_WubWub.png in Resources */,
 				6DEAB4D018D78FF800833D9C /* Dubstep_Shaker.mp3 in Resources */,
 				6D1269C319706C3100A2A612 /* DoubleBass_G#.mp3 in Resources */,
