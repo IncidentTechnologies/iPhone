@@ -244,7 +244,7 @@
         
     }
     
-    // TODO: reset any content offset
+    [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
     
     // Check font for active sequencer
     if((isActiveSequencer || isActiveSong) && !isRenamable){
@@ -626,6 +626,16 @@
 
 #pragma mark - Editing
 
+// Allow the table to scroll vertically
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    [self resetConstraintContstantsToZero:NO notifyDelegateDidClose:NO];
+}
 
 - (void)panCell:(UIPanGestureRecognizer *)recognizer
 {
@@ -639,7 +649,7 @@
         {
             self.panStartPoint = [recognizer translationInView:self.container];
             self.startingLeftConstraint = self.leftConstraint.constant;
-            NSLog(@"Pan Began at %@", NSStringFromCGPoint(self.panStartPoint));
+            DLog(@"Pan Began at %@", NSStringFromCGPoint(self.panStartPoint));
             
             [self editingDidBegin];
             
@@ -651,7 +661,7 @@
             CGPoint currentPoint = [recognizer translationInView:self.container];
             CGFloat deltaX = currentPoint.x - self.panStartPoint.x;
             
-            NSLog(@"Pan Moved %f", deltaX);
+            DLog(@"Pan Moved %f", deltaX);
             BOOL panningLeft = NO;
             if (currentPoint.x < self.panStartPoint.x) {
                 panningLeft = YES;
@@ -697,7 +707,7 @@
                 [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
             }
             
-            NSLog(@"Pan Ended");
+            DLog(@"Pan Ended");
             break;
             
         case UIGestureRecognizerStateCancelled:
@@ -709,7 +719,7 @@
                 //Cell was open - reset to the open state
                 [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:YES];
             }
-            NSLog(@"Pan Cancelled");
+            DLog(@"Pan Cancelled");
             break;
             
         default:
@@ -727,7 +737,9 @@
     self.leftConstraint.constant = 0.0;
     self.rightConstraint.constant = -1 * [self buttonTotalWidth];
     
-    [self editingDidEnd];
+    if(endEditing){
+        [self editingDidEnd];
+    }
 }
 
 - (void)setConstraintsToShowAllButtons:(BOOL)animated notifyDelegateDidOpen:(BOOL)notifyDelegate
@@ -738,7 +750,7 @@
 
 - (IBAction)userDidSelectDeleteButton:(id)sender
 {
-    DLog(@"Delete cell!");
+    DLog(@"Delete cell");
     
     [parent deleteCell:self];
     

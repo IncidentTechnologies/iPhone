@@ -260,6 +260,8 @@
 - (void)expand
 {
     
+    //[radialDisplay beginContext];
+    
     // Animate...
     [UIView animateWithDuration:ANIMATION_DURATION
                           delay:0.0
@@ -270,12 +272,14 @@
                          valueDisplay.textAlignment = NSTextAlignmentCenter;
                          valueDisplay.font = [[self.valueDisplay font] fontWithSize:ZOOM_FONT];
                          
+                         
                      }
                      completion:nil];
 }
 
 - (void)contract
 {
+    //[radialDisplay endContext];
     
     [UIView animateWithDuration:ANIMATION_DURATION
                           delay:0.0

@@ -916,6 +916,7 @@
     
     [audioLoadTimer invalidate];
     audioLoadTimer = nil;
+     
 }
 
 -(void)clearAudioDrawing
@@ -974,6 +975,8 @@
 
 -(void)userDidStartRecord
 {
+    DLog(@"Start record");
+    
     // Pause any playing
     if([delegate checkIsPlaying]){
         if([delegate checkIsRecording]){
@@ -1277,6 +1280,7 @@
     
     [recordProcessing setHidden:NO];
     [recordProcessing setText:@""];
+
     
     /*recordProcessingCounter = 0;
      [self animateRecordProcessing];
@@ -1526,13 +1530,16 @@
 {
     if(recordState == RECORD_STATE_RECORDING){
         
-        int progressBarX = MIN(progressBarContainer.frame.size.width*percent,progressBarContainer.frame.size.width);
-        
-        CGRect newProgressBarFrame = CGRectMake(0, 0, progressBarX, progressBar.frame.size.height);
-        CGRect newRecordLineFrame = CGRectMake(0,recordLine.frame.origin.y,progressBarX,recordLine.frame.size.height);
-        
-        progressBar.frame = newProgressBarFrame;
-        recordLine.frame = newRecordLineFrame;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            int progressBarX = MIN(progressBarContainer.frame.size.width*percent,progressBarContainer.frame.size.width);
+            
+            CGRect newProgressBarFrame = CGRectMake(0, 0, progressBarX, progressBarContainer.frame.size.height);
+            CGRect newRecordLineFrame = CGRectMake(0,recordLine.frame.origin.y,progressBarX,recordLine.frame.size.height);
+            
+            [progressBar setFrame:newProgressBarFrame];
+            [recordLine setFrame:newRecordLineFrame];
+            
+        });
         
     }
 }

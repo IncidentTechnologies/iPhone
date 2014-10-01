@@ -62,8 +62,8 @@
     [self addSubview:filling];
     
     // Get dimensions for filling
-    CGSize fullScreen = CGSizeMake(x, 320);
-    UIGraphicsBeginImageContextWithOptions(fullScreen, NO, 0);
+    //CGSize fullScreen = CGSizeMake(x, 320);
+    //UIGraphicsBeginImageContextWithOptions(fullScreen, NO, 0);
     
     // Prepare for touches
     zeroPosition.x = self.frame.size.width / 2;

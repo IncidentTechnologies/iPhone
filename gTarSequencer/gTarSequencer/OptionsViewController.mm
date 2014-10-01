@@ -448,7 +448,6 @@
         [cell.setButton setHidden:NO];
         [cell.songButton setHidden:NO];
         cell.fileText.text = @"";
-        //[cell resetContentOffset];
         
         if([loadedTableType isEqualToString:TABLE_SETS]){
             [cell highlightSetButton];

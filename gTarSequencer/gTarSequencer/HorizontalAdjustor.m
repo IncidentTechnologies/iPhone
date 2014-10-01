@@ -26,7 +26,11 @@
         m_background = background;
         m_bar = bar;
         
-        adjustorSize = MIN(m_bar.frame.size.height,ADJUSTOR_MAX_SIZE);
+        if(m_bar.frame.size.height > 0){
+            adjustorSize = MIN(m_bar.frame.size.height,ADJUSTOR_MAX_SIZE);
+        }else{
+            adjustorSize = ADJUSTOR_MAX_SIZE;
+        }
         
         [self initAdjustors];
         

@@ -2769,6 +2769,7 @@
 					"../CocoaSoundCloudAPI/**",
 				);
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					/Users/kateschnippering/Documents/Sites/incident/Sequence/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
 					/Users/kateschnippering/Documents/Sites/incident/Sequence/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
@@ -2812,6 +2813,7 @@
 					"../CocoaSoundCloudUI/**",
 				);
 				INFOPLIST_FILE = "gTarSequencer/Sequence-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					/Users/kateschnippering/Documents/Sites/incident/Sequence/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,
 					/Users/kateschnippering/Documents/Sites/incident/Sequence/gTarSequencer/gTarSequencer/TestFlightSDK3.0.0,

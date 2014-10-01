@@ -11,7 +11,7 @@
                 <outlet property="progressBarContainer" destination="8Tz-1A-xDq" id="UoZ-4S-eWF"/>
                 <outlet property="recordClearButton" destination="RYr-Lt-RjT" id="rTU-Vk-WLA"/>
                 <outlet property="recordLine" destination="Ur3-zo-gKs" id="JU5-JF-mty"/>
-                <outlet property="recordProcessing" destination="cCg-XS-zC6" id="XOg-aC-6J2"/>
+                <outlet property="recordProcessing" destination="cCg-XS-zC6" id="bwn-dK-ujS"/>
                 <outlet property="recordRecordButton" destination="ghM-qU-e1I" id="lWg-ZV-rLa"/>
                 <outlet property="recordSaveButton" destination="0kb-XA-lfj" id="met-Aq-7gl"/>
                 <outlet property="recordingNameField" destination="DpB-VA-JKR" id="YOV-p7-mwF"/>
@@ -84,7 +84,9 @@
                         <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="usI-8H-Aue" userLabel="playBar">
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ur3-zo-gKs" userLabel="recordLine"/>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ur3-zo-gKs" userLabel="recordLine">
+                            <rect key="frame" x="0.0" y="0.0" width="151" height="151"/>
+                        </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCg-XS-zC6">
                             <rect key="frame" x="125" y="64" width="115" height="21"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
