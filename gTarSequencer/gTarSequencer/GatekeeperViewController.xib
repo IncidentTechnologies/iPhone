@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GatekeeperViewController">
@@ -13,6 +13,7 @@
                 <outlet property="loginView" destination="lx5-sM-4gG" id="CQA-UW-vwq"/>
                 <outlet property="notificationLabel" destination="GLx-cz-jov" id="kpv-EJ-V0b"/>
                 <outlet property="notificationView" destination="pba-jQ-lAW" id="tfd-7L-yyL"/>
+                <outlet property="reloadTutorialButton" destination="iBn-LB-SqX" id="FGg-By-xNJ"/>
                 <outlet property="signinPasswordText" destination="Siu-JM-nWA" id="K60-Ql-6Ep"/>
                 <outlet property="signinTopPanel" destination="CHX-BN-3aQ" id="Btv-lb-ufg"/>
                 <outlet property="signinUsernameText" destination="ncC-r3-a2D" id="kMn-Hg-Es6"/>
@@ -30,15 +31,12 @@
             <subviews>
                 <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZR1-cf-B3x" userLabel="SignupTopPanel">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zIJ-c4-Q9p" userLabel="SignupRightPanelInner">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="66" verticalCompressionResistancePriority="746" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VI2-Tz-GJu">
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="66" verticalCompressionResistancePriority="746" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VI2-Tz-GJu">
                                     <rect key="frame" x="50" y="165" width="380" height="43"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.16862745100000001" green="0.77647058820000003" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="EFJ-Bj-4VN"/>
@@ -57,13 +55,11 @@
                                         <action selector="signupButtonClicked:" destination="-1" eventType="touchUpInside" id="t6j-25-0Et"/>
                                     </connections>
                                 </button>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T1c-dC-BJZ" userLabel="UsernameView">
+                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T1c-dC-BJZ" userLabel="UsernameView">
                                     <rect key="frame" x="50" y="29" width="380" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1mv-Va-4ec" customClass="CyclingTextField">
                                             <rect key="frame" x="10" y="0.0" width="360" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
@@ -88,13 +84,11 @@
                                         <constraint firstItem="1mv-Va-4ec" firstAttribute="leading" secondItem="T1c-dC-BJZ" secondAttribute="leading" constant="10" id="z5N-eu-PIR"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G96-xS-3B1" userLabel="PasswordView">
+                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G96-xS-3B1" userLabel="PasswordView">
                                     <rect key="frame" x="50" y="72" width="380" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qXX-J5-yKQ" customClass="CyclingTextField">
                                             <rect key="frame" x="10" y="0.0" width="360" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
@@ -119,13 +113,11 @@
                                         <constraint firstItem="qXX-J5-yKQ" firstAttribute="leading" secondItem="G96-xS-3B1" secondAttribute="leading" constant="10" id="zLJ-Mh-GDO"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2so-JR-QXl" userLabel="EmailView">
+                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2so-JR-QXl" userLabel="EmailView">
                                     <rect key="frame" x="50" y="115" width="380" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cNk-3P-zCf" customClass="CyclingTextField">
                                             <rect key="frame" x="10" y="0.0" width="360" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
@@ -166,15 +158,12 @@
                         <constraint firstItem="zIJ-c4-Q9p" firstAttribute="leading" secondItem="ZR1-cf-B3x" secondAttribute="leading" id="e0U-Dg-Q18"/>
                         <constraint firstAttribute="trailing" secondItem="zIJ-c4-Q9p" secondAttribute="trailing" id="wTE-UV-8GG"/>
                     </constraints>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJl-iw-Nyi" userLabel="LoadingTopPanel">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sPb-rC-bmz">
                             <rect key="frame" x="222" y="98" width="37" height="37"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" red="0.16078431369999999" green="0.41960784309999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -185,15 +174,12 @@
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CHX-BN-3aQ" userLabel="SigninTopPanel">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1H-Qv-cyy" userLabel="SigninRightPanelInner">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p1H-Qv-cyy" userLabel="SigninRightPanelInner">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lx5-sM-4gG" customClass="FBLoginView">
+                                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lx5-sM-4gG" customClass="FBLoginView">
                                     <rect key="frame" x="50" y="172" width="380" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="41" id="Hbh-Bo-2Mc"/>
@@ -203,17 +189,14 @@
                                         <outlet property="delegate" destination="-1" id="Z3T-15-vRd"/>
                                     </connections>
                                 </view>
-                                <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoB-Fq-Euu" userLabel="FacebookView">
+                                <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoB-Fq-Euu" userLabel="FacebookView">
                                     <rect key="frame" x="50" y="172" width="380" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YXN-Wl-m8Z">
                                             <rect key="frame" x="0.0" y="0.0" width="380" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sign In with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRy-dl-EHQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="41"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="380" id="apC-55-Gxq"/>
                                                         <constraint firstAttribute="height" constant="41" id="fct-81-Ffr"/>
@@ -222,9 +205,8 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRg-7x-vj8">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRg-7x-vj8">
                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="41"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="380" id="F4x-Gx-8Md"/>
                                                         <constraint firstAttribute="height" constant="41" id="Zys-ds-Mjz"/>
@@ -254,13 +236,11 @@
                                         <constraint firstAttribute="width" constant="380" id="dvv-WJ-RTy"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-a1-jIv" userLabel="UsernameView">
+                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-a1-jIv" userLabel="UsernameView">
                                     <rect key="frame" x="50" y="52" width="380" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ncC-r3-a2D" customClass="CyclingTextField">
                                             <rect key="frame" x="10" y="0.0" width="360" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
@@ -285,13 +265,11 @@
                                         <constraint firstAttribute="trailing" secondItem="ncC-r3-a2D" secondAttribute="trailing" constant="10" id="hOM-MC-p5c"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5A2-x1-5XL" userLabel="PasswordView">
+                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5A2-x1-5XL" userLabel="PasswordView">
                                     <rect key="frame" x="50" y="95" width="380" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Siu-JM-nWA" customClass="CyclingTextField">
                                             <rect key="frame" x="10" y="0.0" width="360" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.090196078430000007" green="0.63921568630000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" white="0.87" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -317,9 +295,8 @@
                                         <constraint firstAttribute="height" constant="41" id="z8X-Wp-6hh"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGM-RX-q70">
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGM-RX-q70">
                                     <rect key="frame" x="50" y="145" width="380" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" red="0.16862745100000001" green="0.77647058820000003" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="380" id="Jyw-2m-Fy3"/>
@@ -357,15 +334,12 @@
                         <constraint firstItem="p1H-Qv-cyy" firstAttribute="leading" secondItem="CHX-BN-3aQ" secondAttribute="leading" id="q0I-x9-xtQ"/>
                         <constraint firstItem="p1H-Qv-cyy" firstAttribute="top" secondItem="CHX-BN-3aQ" secondAttribute="top" id="qMd-nH-DDv"/>
                     </constraints>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v2M-jV-jGH" userLabel="BottomPanel">
                     <rect key="frame" x="0.0" y="234" width="480" height="86"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="hX2-F1-Gcb">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="hX2-F1-Gcb">
                             <rect key="frame" x="162" y="14" width="156" height="58"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.16078431369999999" green="0.41960784309999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="58" id="ENm-bN-G6E"/>
@@ -381,9 +355,8 @@
                                 <action selector="loggedoutSigninButtonClicked:" destination="-1" eventType="touchUpInside" id="y1N-AV-X9i"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1Ns-mA-Bbd">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1Ns-mA-Bbd">
                             <rect key="frame" x="162" y="14" width="156" height="58"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.16078431369999999" green="0.41960784309999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="156" id="3If-tw-OXK"/>
@@ -399,21 +372,35 @@
                                 <action selector="loggedoutSignupButtonClicked:" destination="-1" eventType="touchUpInside" id="i7q-5t-1VV"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBn-LB-SqX">
+                            <rect key="frame" x="13" y="57" width="123" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="XIG-tt-eri"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                            <state key="normal" title="TUTORIAL">
+                                <color key="titleColor" red="0.086274509799999996" green="0.59999999999999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="reloadTutorialButtonClicked:" destination="-1" eventType="touchUpInside" id="4jY-Ja-szr"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.094117647060000004" green="0.31764705879999999" blue="0.39607843139999999" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="1Ns-mA-Bbd" secondAttribute="centerX" id="2RC-Ea-ws8"/>
                         <constraint firstItem="1Ns-mA-Bbd" firstAttribute="width" secondItem="hX2-F1-Gcb" secondAttribute="width" id="3DN-hS-lat"/>
+                        <constraint firstItem="iBn-LB-SqX" firstAttribute="leading" secondItem="v2M-jV-jGH" secondAttribute="leading" constant="13" id="QKQ-9g-DT4"/>
                         <constraint firstAttribute="centerX" secondItem="hX2-F1-Gcb" secondAttribute="centerX" id="iSf-48-CQK"/>
+                        <constraint firstAttribute="bottom" secondItem="iBn-LB-SqX" secondAttribute="bottom" constant="14" id="wbz-Gr-2X5"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pba-jQ-lAW" userLabel="LoginError">
                     <rect key="frame" x="0.0" y="-48" width="480" height="48"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLx-cz-jov">
                             <rect key="frame" x="20" y="13" width="440" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -438,6 +425,7 @@
                 <constraint firstAttribute="trailing" secondItem="iJl-iw-Nyi" secondAttribute="trailing" id="jvV-8k-nNV"/>
                 <constraint firstItem="ZR1-cf-B3x" firstAttribute="leading" secondItem="7QA-ym-l0U" secondAttribute="leading" id="xWk-Rj-06p"/>
             </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
@@ -445,4 +433,9 @@
     <resources>
         <image name="FacebookIcon.jpg" width="25" height="48"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

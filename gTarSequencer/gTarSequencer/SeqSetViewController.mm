@@ -78,9 +78,12 @@
 {
     [super viewDidLoad];
     
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    BOOL isScreenLarge = [frameGenerator isScreenLarge];
+    
     // Check screen size for nib
     NSString * nibname = @"SeqSetViewCell";
-    if([[UIScreen mainScreen] bounds].size.height == XBASE_LG){
+    if(isScreenLarge){
         nibname = @"SeqSetViewCell_4";
     }
     
@@ -530,10 +533,11 @@
 
 - (void)enforceTableWidth
 {
-    int screenHeight = [[UIScreen mainScreen] bounds].size.height;
-    int tableWidth = (screenHeight >= XBASE_LG) ? XBASE_LG : XBASE_SM;
     
-    [self.view setFrame:CGRectMake(0, 0, tableWidth, self.view.frame.size.height)];
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    float x = [frameGenerator getFullscreenWidth];
+    
+    [self.view setFrame:CGRectMake(0, 0, x, self.view.frame.size.height)];
     
 }
 
@@ -736,9 +740,11 @@
 - (void)initInstrumentSelector
 {
     
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
     // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    float y = [frameGenerator getFullscreenHeight];
+    float x = [frameGenerator getFullscreenWidth];
     
     // construct selector:
     CGFloat selectorWidth = 364;
@@ -881,9 +887,11 @@
     // TODO: figure out positioning for 4"
     DLog(@"Init custom instrument selector");
     
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
     // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    float y = [frameGenerator getFullscreenHeight];
+    float x = [frameGenerator getFullscreenWidth];
     
     // construct selector:
     CGFloat selectorWidth = 364;
@@ -1449,8 +1457,11 @@
 - (void)launchFTUTutorial
 {
     
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    // Get dimensions
+    float y = [frameGenerator getFullscreenHeight];
+    float x = [frameGenerator getFullscreenWidth];
     
     DLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     

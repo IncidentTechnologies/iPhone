@@ -22,10 +22,12 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-        
+    
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
     // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    float y = [frameGenerator getFullscreenHeight];
+    float x = [frameGenerator getFullscreenWidth];
     
     CGRect wholeScreen = CGRectMake(0, 0, x, y);
     

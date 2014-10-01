@@ -76,7 +76,7 @@ extern NSUser * g_loggedInUser;
     UISwipeGestureRecognizer * swipeRight;
     
     // Screen
-    BOOL isScreenLarge;
+    FrameGenerator * frameGenerator;
     CGRect setNameOnScreenFrame;
     CGRect setNameOffScreenFrame;
 }
@@ -93,6 +93,8 @@ extern NSUser * g_loggedInUser;
 @property (retain, nonatomic) GatekeeperViewController * gatekeeperViewController;
 
 @property (retain, nonatomic) UIButton * setName;
+
+@property (retain, nonatomic) NSSong * loadedSong;
 
 // FTU Tutorial
 //@property (weak, nonatomic) IBOutlet UIButton * yesButton;

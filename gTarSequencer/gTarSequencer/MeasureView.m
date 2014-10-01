@@ -184,7 +184,7 @@
     
     // Update all the notes:
     int f, s;
-    for (f = 0; f < FRETS_ON_GTAR; f++)
+    for (f = 0, s = 0; f < FRETS_ON_GTAR; f++)
     {
         CGContextMoveToPoint(context, f*noteFrameWidth, 0);
         CGContextAddLineToPoint(context, f*noteFrameWidth, s*noteFrameHeight);

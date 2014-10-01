@@ -12,16 +12,28 @@
 	<dict>
 		<key>0F5B0999-D922-4A62-AA50-B67DB8347722</key>
 		<string>git://github.com/soundcloud/CocoaSoundCloudUI.git</string>
+		<key>2F16ABB5253C8A53BD834DD2135B7E534A667AC1</key>
+		<string>git://github.com/soundcloud/CocoaSoundCloudUI.git</string>
 		<key>32E6AC5C-A329-42C5-8CEA-8DD989A63345</key>
+		<string>git://github.com/soundcloud/CocoaSoundCloudAPI.git</string>
+		<key>48734AC5978E47BCAB24F1E9699B65204C5FF04A</key>
+		<string>git://github.com/nxtbgthng/OHAttributedLabel.git</string>
+		<key>4DFCCBAAFC97C65D80F81B0E4894DA70B64A77E3</key>
 		<string>git://github.com/soundcloud/CocoaSoundCloudAPI.git</string>
 		<key>4E34EBC8-EAC1-48C1-AE8B-0B2D2AB6F820</key>
 		<string>git://github.com/nxtbgthng/OHAttributedLabel.git</string>
 		<key>61A9A811-C2F8-47EC-A8B4-A43BA8EF2D96</key>
 		<string>git://github.com/nxtbgthng/JSONKit.git</string>
-		<key>ADA20FCA-2FC9-4EDE-AA40-E728AE845EEC</key>
+		<key>A6F490F1D9601CEC3F9BF0306F5B8BB7D28DA10F</key>
 		<string>https://github.com/IncidentTechnologies/IncidentPlatform.git</string>
+		<key>C7E848553941E33F073157F9182D2ADDA0C73264</key>
+		<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 		<key>DDC78E2E-7CE9-404D-9948-EAA41A68F9C0</key>
 		<string>https://github.com/IncidentTechnologies/iPhone.git</string>
+		<key>EB5674475998A0DD33CD59076628ED3B93CBE9CA</key>
+		<string>git://github.com/nxtbgthng/OAuth2Client.git</string>
+		<key>EF51387A5AF28E4351AFB0302884600583A438B5</key>
+		<string>git://github.com/nxtbgthng/JSONKit.git</string>
 		<key>EF7363C3-7C00-479B-8FED-27E3E50D3735</key>
 		<string>git://github.com/nxtbgthng/OAuth2Client.git</string>
 	</dict>
@@ -30,26 +42,38 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0F5B0999-D922-4A62-AA50-B67DB8347722</key>
-		<string>../../CocoaSoundCloudUI</string>
+		<string>../../../iPhone/CocoaSoundCloudUI</string>
+		<key>2F16ABB5253C8A53BD834DD2135B7E534A667AC1</key>
+		<string>../..CocoaSoundCloudUI</string>
 		<key>32E6AC5C-A329-42C5-8CEA-8DD989A63345</key>
-		<string>../../CocoaSoundCloudAPI</string>
+		<string>../../../iPhone/CocoaSoundCloudAPI</string>
+		<key>48734AC5978E47BCAB24F1E9699B65204C5FF04A</key>
+		<string>../..OHAttributedLabel</string>
+		<key>4DFCCBAAFC97C65D80F81B0E4894DA70B64A77E3</key>
+		<string>../..CocoaSoundCloudAPI</string>
 		<key>4E34EBC8-EAC1-48C1-AE8B-0B2D2AB6F820</key>
-		<string>../../OHAttributedLabel</string>
+		<string>../../../iPhone/OHAttributedLabel</string>
 		<key>61A9A811-C2F8-47EC-A8B4-A43BA8EF2D96</key>
-		<string>../../JSONKit</string>
-		<key>ADA20FCA-2FC9-4EDE-AA40-E728AE845EEC</key>
+		<string>../../../iPhone/JSONKit</string>
+		<key>A6F490F1D9601CEC3F9BF0306F5B8BB7D28DA10F</key>
 		<string>../../../IncidentPlatform</string>
-		<key>DDC78E2E-7CE9-404D-9948-EAA41A68F9C0</key>
+		<key>C7E848553941E33F073157F9182D2ADDA0C73264</key>
 		<string>../..</string>
+		<key>DDC78E2E-7CE9-404D-9948-EAA41A68F9C0</key>
+		<string>../../../iPhone</string>
+		<key>EB5674475998A0DD33CD59076628ED3B93CBE9CA</key>
+		<string>../..OAuth2Client</string>
+		<key>EF51387A5AF28E4351AFB0302884600583A438B5</key>
+		<string>../..JSONKit</string>
 		<key>EF7363C3-7C00-479B-8FED-27E3E50D3735</key>
-		<string>../../OAuth2Client</string>
+		<string>../../../iPhone/OAuth2Client</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DDC78E2E-7CE9-404D-9948-EAA41A68F9C0</string>
+	<string>C7E848553941E33F073157F9182D2ADDA0C73264</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -72,7 +96,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>ADA20FCA-2FC9-4EDE-AA40-E728AE845EEC</string>
+			<string>A6F490F1D9601CEC3F9BF0306F5B8BB7D28DA10F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>IncidentPlatform</string>
 		</dict>
@@ -107,6 +131,54 @@
 			<string>4E34EBC8-EAC1-48C1-AE8B-0B2D2AB6F820</string>
 			<key>IDESourceControlWCCName</key>
 			<string>OHAttributedLabel</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C7E848553941E33F073157F9182D2ADDA0C73264</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Sequence</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4DFCCBAAFC97C65D80F81B0E4894DA70B64A77E3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SequenceCocoaSoundCloudAPI</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2F16ABB5253C8A53BD834DD2135B7E534A667AC1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SequenceCocoaSoundCloudUI</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EF51387A5AF28E4351AFB0302884600583A438B5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SequenceJSONKit</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EB5674475998A0DD33CD59076628ED3B93CBE9CA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SequenceOAuth2Client</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>48734AC5978E47BCAB24F1E9699B65204C5FF04A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SequenceOHAttributedLabel</string>
 		</dict>
 	</array>
 </dict>

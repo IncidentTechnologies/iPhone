@@ -42,6 +42,8 @@ extern NSUser * g_loggedInUser;
     OptionsViewCell * cellToDeselect;
     
     NSString * loadedTableType;
+    
+    BOOL isScreenLarge;
 }
 
 - (IBAction)userDidSelectCreateNew:(id)sender;

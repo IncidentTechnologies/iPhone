@@ -64,9 +64,10 @@
 - (id)initWithFrame:(CGRect)frame
 {
     
-    // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
     
     CGRect wholeScreen = CGRectMake(0, 0, x, y);
     
@@ -172,8 +173,11 @@
 
 -(void)launchFTUTutorial
 {
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
     
     DLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
@@ -413,7 +417,7 @@
 {
     DLog(@"Name field start edit");
     
-    float frameOffset = 35.0;
+    float frameOffset = 60.0;
     CGRect prevIconFrame = customIcon.frame;
     CGRect prevTextFrame = nameField.frame;
     

@@ -23,6 +23,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        
     }
     return self;
 }
@@ -39,6 +40,7 @@
 -(void)layoutSubviews
 {
     [self drawStringIndicator];
+    
 }
 
 // Overriding this for custom behavior
@@ -117,7 +119,6 @@
     int playY = 12;
     CGFloat playHeight = stringBox.frame.size.height - 2*playY;
     
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
     
     CGContextSetLineWidth(context, 2.0);
@@ -130,13 +131,10 @@
     CGContextFillPath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIImageView * image = [[UIImageView alloc] initWithImage:newImage];
     
-    [image setAlpha:0.3];
+    [stringImage setImage:newImage];
     
-    stringImage = image;
-    
-    [stringBox addSubview:image];
+    [stringImage setAlpha:0.3];
     
     UIGraphicsEndImageContext();
 }
@@ -144,30 +142,34 @@
 - (void)showPlayButton
 {
     [UIView animateWithDuration:0.3 animations:^(void){
+        
         [stringImage setAlpha:1.0];
         
-        [stringBox setBounds:CGRectMake(stringBox.bounds.origin.x,stringBox.bounds.origin.y,40,stringBox.bounds.size.height)];
-        [stringBox setFrame:CGRectMake(stringBox.frame.origin.x,stringBox.frame.origin.y,40,stringBox.frame.size.height)];
+        _stringBoxWidthConstraint.constant = 30.0;
+        _stringImageMarginLeftConstraint.constant = 10.0;
+        _stringLabelMarignLeftConstraint.constant = 30.0;
         
-        [stringImage setFrame:CGRectMake(25,stringImage.frame.origin.y,stringImage.frame.size.width,stringImage.frame.size.height)];
+        [self.contentView layoutIfNeeded];
         
-        [stringLabel setFrame:CGRectMake(30,stringLabel.frame.origin.y,stringLabel.frame.size.width,stringLabel.frame.size.height)];
-    } completion:^(BOOL finished){
+    }completion:^(BOOL finished){
+        
         [stringBox addTarget:self action:@selector(playAudioForSampleFile) forControlEvents:UIControlEventTouchUpInside];
+    
     }];
 }
 
 - (void)hidePlayButton
 {
     [UIView animateWithDuration:0.3 animations:^(void){
+        
         [stringImage setAlpha:0.3];
         
-        [stringBox setBounds:CGRectMake(stringBox.bounds.origin.x,stringBox.bounds.origin.y,10,stringBox.bounds.size.height)];
-        [stringBox setFrame:CGRectMake(stringBox.frame.origin.x,stringBox.frame.origin.y,10,stringBox.frame.size.height)];
+        _stringBoxWidthConstraint.constant = 10.0;
+        _stringImageMarginLeftConstraint.constant = 0.0;
+        _stringLabelMarignLeftConstraint.constant = 18.0;
         
-        [stringImage setFrame:CGRectMake(0,stringImage.frame.origin.y,stringImage.frame.size.width,stringImage.frame.size.height)];
-        
-        [stringLabel setFrame:CGRectMake(18,stringLabel.frame.origin.y,stringLabel.frame.size.width,stringLabel.frame.size.height)];
+        [self.contentView layoutIfNeeded];
+    
     } completion:^(BOOL finished){
         [stringBox removeTarget:self action:@selector(playAudioForSampleFile) forControlEvents:UIControlEventTouchUpInside];
     }];
@@ -184,6 +186,8 @@
         return;
     }
     
+    sampleFilename = [sampleFilename stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
     if(useCustomPath){
         
         // different filetype and location
@@ -193,6 +197,12 @@
     }else{
         
         path = [[NSBundle mainBundle] pathForResource:sampleFilename ofType:@"mp3"];
+    }
+    
+    if(path == nil){
+        
+        DLog(@"ERROR path is nil for sampleFilename %@",sampleFilename);
+        return;
     }
     
     NSError * error = nil;

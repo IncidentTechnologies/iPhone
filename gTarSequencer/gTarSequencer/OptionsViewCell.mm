@@ -570,6 +570,9 @@
     if(![setButton isHidden]){
         
         // Ensure no scrolling happens accidentally
+        [self resetContentOffset];
+        
+        // Redundant?
         scrollView.contentOffset = CGPointMake(0,0);
         
     }else{

@@ -14,6 +14,8 @@
 @interface CustomStringCell : UITableViewCell
 {
     BOOL cellSelected;
+    
+    
 }
 
 - (void)notifySelected:(BOOL)isSelected;
@@ -27,8 +29,12 @@
 @property (nonatomic) int index;
 @property (weak, nonatomic) IBOutlet UIButton * stringBox;
 @property (weak, nonatomic) IBOutlet UILabel * stringLabel;
-@property (weak, nonatomic) IBOutlet UIImageView * stringImage;
+@property (retain, nonatomic) IBOutlet UIImageView * stringImage;
 @property (nonatomic) BOOL useCustomPath;
 @property (nonatomic) UIColor * stringColor;
+
+@property (retain, nonatomic) IBOutlet NSLayoutConstraint * stringBoxWidthConstraint;
+@property (retain, nonatomic) IBOutlet NSLayoutConstraint * stringLabelMarignLeftConstraint;
+@property (retain, nonatomic) IBOutlet NSLayoutConstraint * stringImageMarginLeftConstraint;
 
 @end

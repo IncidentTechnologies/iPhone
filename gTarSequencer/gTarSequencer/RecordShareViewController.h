@@ -21,6 +21,7 @@
 #define MAX_MEASURES 1000
 #define MEASURES_PER_SCREEN 8.0
 #define MEASURE_BEATS 4.0
+#define EDITING_OFFSET 65.0
 
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
@@ -74,6 +75,7 @@ extern NSUser * g_loggedInUser;
     // Editing
     RecordEditor * recordEditor;
     NSMutableArray * gridOverlayLines;
+    BOOL isEditingOffset;
     
     // Playback
     AVAudioPlayer * audioPlayer;

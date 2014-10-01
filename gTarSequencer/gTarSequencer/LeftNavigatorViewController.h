@@ -49,4 +49,6 @@
 @property (weak, nonatomic) IBOutlet UIView * leftSlider;
 @property (weak, nonatomic) IBOutlet UIView * customIndicator;
 
+@property (weak, nonatomic) UIImage * instrumentButtonImage;
+
 @end

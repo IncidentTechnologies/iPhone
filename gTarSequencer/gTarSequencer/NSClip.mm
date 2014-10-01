@@ -22,6 +22,8 @@
 @synthesize m_looplength;
 @synthesize m_muted;
 
+@synthesize m_clip;
+
 
 - (id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -35,7 +37,7 @@
     
     if ( self )
     {
-        XMPObject * m_clip = [[XMPObject alloc] initWithXMPNode:xmpNode];
+        m_clip = [[XMPObject alloc] initWithXMPNode:xmpNode];
         
         m_name = [[NSString alloc] initWithUTF8String:[m_clip GetAttributeValueWithName:@"name"].GetPszValue()];
         

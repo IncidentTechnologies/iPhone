@@ -18,6 +18,8 @@ extern NSUser * g_loggedInUser;
 - (void) loggedIn:(BOOL)animate;
 - (void) loggedOut:(BOOL)animate;
 
+- (void) relaunchFTUTutorial;
+
 @end
 
 @interface GatekeeperViewController : UIViewController <UITextFieldDelegate,FBLoginViewDelegate>
@@ -42,6 +44,7 @@ extern NSUser * g_loggedInUser;
 @property (strong, nonatomic) IBOutlet CyclingTextField *signupEmailText;
 
 @property (strong, nonatomic) IBOutlet UIView * bottomPanel;
+@property (strong, nonatomic) IBOutlet UIButton * reloadTutorialButton;
 
 @property (strong, nonatomic) IBOutlet UIButton * loggedoutSigninButton;
 @property (strong, nonatomic) IBOutlet UIButton * loggedoutSignupButton;
@@ -52,6 +55,8 @@ extern NSUser * g_loggedInUser;
 
 - (IBAction)loggedoutSigninButtonClicked:(id)sender;
 - (IBAction)loggedoutSignupButtonClicked:(id)sender;
+
+- (IBAction)reloadTutorialButtonClicked:(id)sender;
 
 - (IBAction)signupButtonClicked:(id)sender;
 - (IBAction)signinButtonClicked:(id)sender;

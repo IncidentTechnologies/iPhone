@@ -1417,8 +1417,11 @@
 
 - (float)getMeasureMargin
 {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    float measureMargin = (screenBounds.size.height == XBASE_LG) ? MEASURE_MARGIN_LG : MEASURE_MARGIN_SM;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    BOOL isScreenLarge = [frameGenerator isScreenLarge];
+    
+    
+    float measureMargin = (isScreenLarge) ? MEASURE_MARGIN_LG : MEASURE_MARGIN_SM;
     
     return measureMargin;
 }
@@ -1482,9 +1485,10 @@
 
 - (void)launchFTUTutorial
 {
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
     
     DLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
@@ -1558,17 +1562,13 @@
     DLog(@"volume tracking began");
     isTracking = YES;
     
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    BOOL isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
     
     // Set up radial display:
-    CGRect wholeScreen;
-    if(isScreenLarge){
-        wholeScreen = CGRectMake(0, 0, XBASE_LG, YBASE-1);
-    }else{
-        wholeScreen = CGRectMake(0, 0, XBASE_SM, YBASE-1);
-    }
-    
+    CGRect wholeScreen = CGRectMake(0, 0, x, y-1);
     volumeBg = [[UIView alloc] initWithFrame:wholeScreen];
     [volumeBg setBackgroundColor:[UIColor clearColor]];
     

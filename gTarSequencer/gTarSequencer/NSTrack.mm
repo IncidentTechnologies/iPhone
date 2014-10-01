@@ -22,6 +22,8 @@
 @synthesize selectedPatternDidChange;
 @synthesize isSelected;
 
+@synthesize m_track;
+
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
     if (xmpNode == nil){
@@ -32,13 +34,13 @@
     
     if( self )
     {
-        XMPObject * track = [[XMPObject alloc] initWithXMPNode:xmpNode];
+        m_track = [[XMPObject alloc] initWithXMPNode:xmpNode];
         
-        m_name = [[NSString alloc] initWithUTF8String:[track GetAttributeValueWithName:@"name"].GetPszValue()];
+        m_name = [[NSString alloc] initWithUTF8String:[m_track GetAttributeValueWithName:@"name"].GetPszValue()];
         
-        [track GetAttributeValueWithName:@"level"].GetValueDouble(&m_level);
+        [m_track GetAttributeValueWithName:@"level"].GetValueDouble(&m_level);
         
-        [track GetAttributeValueWithName:@"muted"].GetValueBool(&m_muted);
+        [m_track GetAttributeValueWithName:@"muted"].GetValueBool(&m_muted);
         
         m_instrument = [[NSInstrument alloc] initWithXMPNode:xmpNode->FindChildByName((char *)"instrument")];
         
@@ -48,7 +50,7 @@
         selectedPatternDidChange = NO;
         isSelected = NO;
         
-        DLog(@"TRACK");
+        DLog(@"TRACK %@",m_instrument.m_name);
         
         list<XMPNode *>* t_patterns = xmpNode->GetChildren();
         

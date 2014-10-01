@@ -42,9 +42,10 @@
 - (void)sharedInit
 {
     
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
     // Get dimensions
-    //float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    float x = [frameGenerator getFullscreenWidth];
     
     self.userInteractionEnabled = NO;
     

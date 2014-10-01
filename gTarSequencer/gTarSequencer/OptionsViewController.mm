@@ -56,10 +56,12 @@
 
 - (void)viewDidLoad
 {
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    isScreenLarge = [frameGenerator isScreenLarge];
     
     // Check screen size for nib
     NSString * nibname = @"OptionsViewCell";
-    if([[UIScreen mainScreen] bounds].size.height == XBASE_LG){
+    if(isScreenLarge){
         nibname = @"OptionsViewCell_4";
     }
     
@@ -452,6 +454,7 @@
         cell.isRenamable = NO;
         [cell.setButton setHidden:NO];
         [cell.songButton setHidden:NO];
+        [cell resetContentOffset];
         
         if([loadedTableType isEqualToString:TABLE_SETS]){
             [cell highlightSetButton];
@@ -534,20 +537,32 @@
     OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
     NSString * filename = [cell getNameForFile];
     
+    [cell unsetAsActiveSequencer];
+    [cell unsetAsActiveSong];
+    [cell setSelected:NO];
+    
+    int indexToRemove = -1;
     for(int i = 0; i < [fileLoadSet count]; i++){
         if([[fileLoadSet objectAtIndex:i] isEqualToString:filename]){
-            [fileLoadSet removeObjectAtIndex:i];
-            [fileDateSet removeObjectAtIndex:i];
+            indexToRemove = i;
         }
     }
     
-    // delete the data
-    [self userDidDeleteFile:filename];
+    // Remove object at index
+    if(indexToRemove >= 0 && indexToRemove < [fileLoadSet count]){
+        [fileLoadSet removeObjectAtIndex:indexToRemove];
+        [fileDateSet removeObjectAtIndex:indexToRemove];
+    }
     
     // remove from table
     [loadTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
-    [loadTable reloadData];
+    
+    // delete the data
+    [self userDidDeleteFile:filename];
+    
+    //[loadTable reloadData];
+    [self reloadFileTable];
     
     if([fileLoadSet count] == 0){
         // schedule this because the table loading inevitably has a delay
@@ -812,8 +827,7 @@
 
 -(void)drawProfileButtonsAndLabels
 {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    float margin = (screenBounds.size.height == XBASE_LG) ? 34 : 25;
+    float margin = (isScreenLarge) ? 34 : 25;
     
     [profileButton setImageEdgeInsets:UIEdgeInsetsMake(5, margin, 5, margin)];
     [profileButton setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
@@ -857,8 +871,7 @@
 
 -(void)drawBackButton
 {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    float margin = (screenBounds.size.height == XBASE_LG) ? 40 : 33;
+    float margin = (isScreenLarge) ? 40 : 33;
     
     [backButton setImage:[UIImage imageNamed:@"Set_Icon"] forState:UIControlStateNormal];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(15, margin, 15, margin)];
@@ -868,9 +881,7 @@
 
 -(void)drawNewPlusButton
 {
-    
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    float margin = (screenBounds.size.height == XBASE_LG) ? 12 : 0;
+    float margin = (isScreenLarge) ? 12 : 0;
     
     CGSize size = CGSizeMake(createNewButton.frame.size.width, createNewButton.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias

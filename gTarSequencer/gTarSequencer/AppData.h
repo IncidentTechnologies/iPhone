@@ -15,6 +15,7 @@
 #import "FileController.h"
 #import "CloudRequest.h"
 #import "CloudResponse.h"
+#import "FrameGenerator.h"
 
 #ifdef DEBUG
 #define DLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
@@ -24,9 +25,6 @@
 
 #define CUSTOMINSTRUMENT 1
 
-#define XBASE_LG 568
-#define XBASE_SM 480
-#define XBASE 480
 #define YBASE 320
 #define BOTTOMBAR_HEIGHT 55
 

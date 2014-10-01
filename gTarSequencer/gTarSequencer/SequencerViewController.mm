@@ -41,6 +41,8 @@
 @synthesize leftNavigator;
 @synthesize setName;
 
+@synthesize loadedSong;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -113,12 +115,13 @@
 
 - (void)initSubviews
 {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
-    int screensize = (isScreenLarge) ? XBASE_LG : XBASE_SM;
+    frameGenerator = [[FrameGenerator alloc] init];
     
-    onScreenMainFrame = CGRectMake(0,0,screensize,TABLEHEIGHT);
-    overScreenMainFrame = CGRectMake(NAVWIDTH-NAVTAB,0,screensize,TABLEHEIGHT);
+    bool isScreenLarge = [frameGenerator isScreenLarge];
+    float x = [frameGenerator getFullscreenWidth];
+    
+    onScreenMainFrame = CGRectMake(0,0,x,TABLEHEIGHT);
+    overScreenMainFrame = CGRectMake(NAVWIDTH-NAVTAB,0,x,TABLEHEIGHT);
     
     //
     // SUBVIEW: OPTIONS
@@ -190,7 +193,7 @@
     
     NSString * playControlNibName = (isScreenLarge) ? @"BottomBar_4" : @"BottomBar";
     playControlViewController = [[PlayControlViewController alloc] initWithNibName:playControlNibName bundle:nil];
-    [playControlViewController.view setFrame:CGRectMake(0,TABLEHEIGHT-4,screenBounds.size.height,YBASE-TABLEHEIGHT+3)];
+    [playControlViewController.view setFrame:CGRectMake(0,TABLEHEIGHT-4,[frameGenerator getFullscreenWidth],YBASE-TABLEHEIGHT+3)];
     [playControlViewController setDelegate:self];
     
     isPlaying = NO;
@@ -539,7 +542,7 @@
         filename = [@"usr_" stringByAppendingString:filename];
         
         // Init the song
-        NSSong * loadedSong = [[NSSong alloc] initWithXMPFilename:filename];
+        loadedSong = [[NSSong alloc] initWithXMPFilename:filename];
         
         if(loadedSong != nil){
             // Set the active sequencer accordingly
@@ -1147,7 +1150,7 @@
 {
     NSString * setNameText = ([activeSequencer isEqualToString:@""] || activeSequencer == nil) ? @"New set" : activeSequencer;
     
-    float x = (isScreenLarge) ? XBASE_LG : XBASE_SM;
+    float x = [frameGenerator getFullscreenWidth];
     float setNameWidth = [setNameText length];
     if([setNameText length] < 11){
         setNameWidth *= 14;
@@ -1521,7 +1524,12 @@
 #pragma mark - Logged Out
 - (void)loggedOut:(BOOL)animate
 {
-    [gatekeeperViewController.view setFrame:onScreenMainFrame];
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
+    
+    [gatekeeperViewController.view setFrame:CGRectMake(0,0,x,y)];
     
     [self.view addSubview:gatekeeperViewController.view];
     
@@ -1571,13 +1579,14 @@
 
 - (void)launchFTUTutorial
 {
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
     
     DLog(@" *** Launch FTU Tutorial *** %f %f",x,y);
     
     CGRect tutorialFrame = CGRectMake(0,0,x,y);
-    
     
     if(tutorialViewController){
         [tutorialViewController clear];

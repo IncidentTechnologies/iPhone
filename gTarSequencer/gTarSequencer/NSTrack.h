@@ -28,6 +28,9 @@
     NSMutableArray * m_patterns;
     NSMutableArray * m_clips;
 }
+
+@property (nonatomic) XMPObject * m_track;
+
 @property (retain, nonatomic) NSString * m_name;
 @property (retain, nonatomic) NSInstrument * m_instrument;
 @property (retain, nonatomic) NSMutableArray * m_patterns;

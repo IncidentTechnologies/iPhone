@@ -59,6 +59,7 @@
         tickmarks = [[NSMutableArray alloc] init];
         isAudioPlaying = NO;
         isWritingFile = NO;
+        isEditingOffset = NO;
         
     }
     return self;
@@ -229,6 +230,7 @@
     loadedSoundMaster = soundMaster;
 
     if(song != nil){
+    
         recordingSong = song;
         loadedTempo = song.m_tempo;
 
@@ -653,11 +655,12 @@
 #pragma mark - Share Screen
 -(void)initShareScreen
 {
-    // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
-    CGRect wholeScreen = CGRectMake(0, 0, x, y);
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
+    
+    CGRect wholeScreen = CGRectMake(0,0,x,y);
     
     shareView = [[UIView alloc] initWithFrame:wholeScreen];
     [shareView setBackgroundColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7]];
@@ -710,10 +713,10 @@
     [self recordActiveSongToFile];
     
     // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
     CGRect offScreenFrame = shareScreen.frame;
-    CGRect onScreenFrame = CGRectMake(shareScreen.frame.origin.x,shareScreen.frame.origin.y-y,shareScreen.frame.size.width,shareScreen.frame.size.height);
+    CGRect onScreenFrame = CGRectMake(shareScreen.frame.origin.x,shareScreen.frame.origin.y-[frameGenerator getFullscreenHeight],shareScreen.frame.size.width,shareScreen.frame.size.height);
     
     [shareView setHidden:NO];
     
@@ -760,8 +763,14 @@
     // Wrap up song name editing in progress
     [self songNameFieldDoneEditing:songNameField];
     
+    // Wrap up song description editing in progress
+    [self textViewDidEndEditing:songDescriptionField];
+    
     // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    // Get dimensions
+    float y = [frameGenerator getFullscreenHeight];
     
     CGRect onScreenFrame = shareScreen.frame;
     CGRect offScreenFrame = CGRectMake(shareScreen.frame.origin.x,y+shareScreen.frame.origin.y,shareScreen.frame.size.width,shareScreen.frame.size.height);
@@ -870,6 +879,14 @@
     
     float pb_x = ((m*measureWidth+f*fretWidth)/((numMeasures-1)*measureWidth))*playbandView.superview.frame.size.width;
     float mpb_x = m*measureWidth+f*fretWidth;
+    
+    float max_measure = [self countMeasuresFromRecordedSong]-1;
+    float max_fret = FRETS_ON_GTAR-1.0;
+    float pb_max_x = (((max_measure)*measureWidth+max_fret*fretWidth)/((numMeasures-1.0)*measureWidth)) * playbandView.superview.frame.size.width;
+    float mpb_max_x = max_measure*measureWidth+max_fret*fretWidth;
+    
+    pb_x = MIN(pb_x,pb_max_x);
+    mpb_x = MIN(mpb_x,mpb_max_x);
     
     [UIView animateWithDuration:0.1 animations:^(void){
         
@@ -1223,6 +1240,7 @@
 #pragma mark - Song Description Field
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    [self adjustDownShareSongView];
     [songDescriptionField resignFirstResponder];
     
     [recordingSong renameToName:recordingSong.m_title andDescription:songDescriptionField.text];
@@ -1240,7 +1258,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    
+    [self adjustUpShareSongView];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -1250,6 +1268,28 @@
         return NO;
     }
     return YES;
+}
+
+- (void)adjustDownShareSongView
+{
+    if(isEditingOffset){
+        isEditingOffset = NO;
+        CGRect shareDownFrame = CGRectMake(shareScreen.frame.origin.x,shareScreen.frame.origin.y+EDITING_OFFSET,shareScreen.frame.size.width,shareScreen.frame.size.height);
+        
+        [UIView animateWithDuration:0.4f animations:^(void){
+            [shareScreen setFrame:shareDownFrame];
+        }];
+    }
+}
+
+- (void)adjustUpShareSongView
+{
+    isEditingOffset = YES;
+    CGRect shareUpFrame = CGRectMake(shareScreen.frame.origin.x,shareScreen.frame.origin.y-EDITING_OFFSET,shareScreen.frame.size.width,shareScreen.frame.size.height);
+    
+    [UIView animateWithDuration:0.4f animations:^(void){
+        [shareScreen setFrame:shareUpFrame];
+    }];
 }
 
 #pragma mark - Song Name Field

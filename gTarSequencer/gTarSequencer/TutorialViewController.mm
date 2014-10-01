@@ -40,11 +40,12 @@
 {
     self = [self initWithFrame:frame];
     
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
-    screenX = screenBounds.size.height;
-    screenY = screenBounds.size.width;
+    isScreenLarge = [frameGenerator isScreenLarge];
+    
+    screenX = [frameGenerator getFullscreenWidth];
+    screenY = [frameGenerator getFullscreenHeight];;
     
     tutorialName = tutorial;
     

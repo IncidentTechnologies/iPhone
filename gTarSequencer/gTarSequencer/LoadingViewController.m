@@ -29,10 +29,10 @@
 // Initialize and trigger the animation
 - (void)viewDidAppear:(BOOL)animated
 {
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
-    // Get dimensions
-    float y = [[UIScreen mainScreen] bounds].size.width;
-    float x = [[UIScreen mainScreen] bounds].size.height;
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
     
     [self initAnimation:x y:y];
     

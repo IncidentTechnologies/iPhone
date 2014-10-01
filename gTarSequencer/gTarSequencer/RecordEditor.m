@@ -409,7 +409,7 @@
         return;
     }
     
-    [UIView animateWithDuration:0.4 delay:0.3 options:nil animations:^(void){
+    [UIView animateWithDuration:0.4 delay:0.3 options:NULL animations:^(void){
         
         [editingPatternLetter setAlpha:0.3];
         
@@ -426,7 +426,7 @@
         return;
     }
     
-    [UIView animateWithDuration:0.4 delay:0.1 options:nil animations:^(void){
+    [UIView animateWithDuration:0.4 delay:0.1 options:NULL animations:^(void){
         
         [editingPatternLetter setAlpha:0.8];
         

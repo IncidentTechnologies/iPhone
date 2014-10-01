@@ -13,6 +13,9 @@
 @synthesize m_value;
 @synthesize m_beatstart;
 @synthesize m_stringvalue;
+@synthesize m_duration;
+
+@synthesize m_note;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -25,13 +28,13 @@
     
     if( self )
     {
-        XMPObject * note = [[XMPObject alloc] initWithXMPNode:xmpNode];
+        m_note = [[XMPObject alloc] initWithXMPNode:xmpNode];
         
-        m_value = [[NSString alloc] initWithUTF8String:[note GetAttributeValueWithName:@"value"].GetPszValue()];
+        m_value = [[NSString alloc] initWithUTF8String:[m_note GetAttributeValueWithName:@"value"].GetPszValue()];
         
-        [note GetAttributeValueWithName:@"beatstart"].GetValueDouble(&m_beatstart);
+        [m_note GetAttributeValueWithName:@"beatstart"].GetValueDouble(&m_beatstart);
         
-        [note GetAttributeValueWithName:@"value"].GetValueInt(&m_stringvalue);
+        [m_note GetAttributeValueWithName:@"value"].GetValueInt(&m_stringvalue);
         
         DLog(@"NOTE");
     }

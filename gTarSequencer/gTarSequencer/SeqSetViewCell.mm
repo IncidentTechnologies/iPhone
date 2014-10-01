@@ -722,16 +722,10 @@
     DLog(@"volume tracking began");
     isTracking = YES;
     
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    BOOL isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
     // Set up radial display:
-    CGRect wholeScreen;
-    if(isScreenLarge){
-        wholeScreen = CGRectMake(0, 0, XBASE_LG, YBASE-1);
-    }else{
-        wholeScreen = CGRectMake(0, 0, XBASE_SM, YBASE-1);
-    }
+    CGRect wholeScreen = CGRectMake(0, 0, [frameGenerator getFullscreenWidth], [frameGenerator getFullscreenHeight]);
     
     volumeBg = [[UIView alloc] initWithFrame:wholeScreen];
     [volumeBg setBackgroundColor:[UIColor clearColor]];

@@ -29,6 +29,8 @@
     NSMutableArray * m_notes;
 }
 
+@property (nonatomic) XMPObject * m_clip;
+
 @property (nonatomic, readonly) NSString * m_name;
 @property (nonatomic, readonly) NSString * m_color;
 @property (nonatomic, readonly) NSMutableArray * m_notes;

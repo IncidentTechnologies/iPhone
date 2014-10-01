@@ -14,6 +14,7 @@
 @synthesize optionsButton;
 @synthesize seqSetButton;
 @synthesize instrumentButton;
+@synthesize instrumentButtonImage;
 @synthesize shareButton;
 @synthesize connectedButton;
 @synthesize leftSlider;
@@ -210,7 +211,9 @@
 
 -(void)setInstrumentIcon:(NSString *)instIcon showCustom:(BOOL)isCustom
 {
-    [instrumentButton setImage:[UIImage imageNamed:instIcon] forState:UIControlStateNormal];
+    instrumentButtonImage = [UIImage imageNamed:instIcon];
+    
+    [instrumentButton setImage:instrumentButtonImage forState:UIControlStateNormal];
     
     if(isCustom){
         [self showCustomIndicator];

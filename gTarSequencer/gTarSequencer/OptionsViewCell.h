@@ -40,6 +40,8 @@
 - (void)highlightSetButton;
 - (void)highlightSongButton;
 
+- (void)resetContentOffset;
+
 @property (weak, nonatomic) OptionsViewController * parent;
 
 @property (weak, nonatomic) IBOutlet UILabel * fileText;

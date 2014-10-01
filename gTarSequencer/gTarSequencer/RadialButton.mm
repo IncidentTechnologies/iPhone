@@ -72,16 +72,13 @@
 
 - (void)initSubviews
 {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    BOOL isScreenLarge = (screenBounds.size.height == XBASE_LG) ? YES : NO;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
-    // Set up radial display:
-    CGRect wholeScreen;
-    if(isScreenLarge){
-        wholeScreen = CGRectMake(0, 0, XBASE_LG, YBASE-1);
-    }else{
-        wholeScreen = CGRectMake(0, 0, XBASE_SM, YBASE-1);
-    }
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
+    bool isScreenLarge = [frameGenerator isScreenLarge];
+    
+    CGRect wholeScreen = CGRectMake(0,0,x,y-1);
     
     radialDisplay = [[RadialDisplay alloc] initWithFrame:wholeScreen];
     radialDisplay.userInteractionEnabled = NO;
@@ -125,10 +122,12 @@
 {
     double origin = self.frame.origin.x;
     
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    int screensize = screenBounds.size.height;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
-    double distanceRight = screensize - ( origin + zeroPosition.x);
+    // Get dimensions
+    float x = [frameGenerator getFullscreenWidth];
+    
+    double distanceRight = x - ( origin + zeroPosition.x);
     double distanceLeft = zeroPosition.x + self.frame.origin.x;
     
     int rangeOfValuesUp = MAX_TEMPO - startingValue;

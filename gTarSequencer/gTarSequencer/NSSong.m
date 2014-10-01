@@ -24,6 +24,8 @@
 @synthesize m_sequenceName;
 @synthesize m_sequenceId;
 
+@synthesize m_song;
+
 - (id)initWithXMPFilename:(NSString *)filename
 {
     if(filename == nil || [filename length] == 0){
@@ -50,9 +52,9 @@
             
             XMPTree MyTree(filepath);
             
-            XMPNode * root = MyTree.GetRootNode()->FindChildByName((char *)"xmp")->FindChildByName((char *)"song");
+            XMPNode * rootNode = MyTree.GetRootNode()->FindChildByName((char *)"xmp")->FindChildByName((char *)"song");
             
-            self = [self initWithXMPNode:root];
+            self = [self initWithXMPNode:rootNode];
             
             DLog(@"Finished init?");
             
@@ -81,7 +83,7 @@
     
     if ( self )
     {
-        XMPObject * m_song = [[XMPObject alloc] initWithXMPNode:xmpNode];
+        m_song = [[XMPObject alloc] initWithXMPNode:xmpNode];
         
         [[[m_song GetChildWithName:@"header"] GetChildWithName:@"id"] GetAttributeValueWithName:@"value"].GetValueInt(&m_id);
         
@@ -112,9 +114,11 @@
         DLog(@"SONG sequence name | %@",m_sequenceName);
         DLog(@"SONG sequence xmpid | %li",m_sequenceId);
         
+        DLog(@"SONG is %@",m_song);
+        
         // Init the narrative/input children
         m_tracks = [[NSMutableArray alloc] init];
-        
+
         list<XMPNode *>* t_sections = xmpNode->FindChildByName((char *)"content")->GetChildren();
         
         for(list<XMPNode *>::iterator it = t_sections->First(); it != NULL; it++){
@@ -129,7 +133,6 @@
                 
             }
         }
-        
     }
     
     return self;

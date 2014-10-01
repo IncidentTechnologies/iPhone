@@ -18,6 +18,8 @@
     long m_stringvalue;
 }
 
+@property (nonatomic) XMPObject * m_note;
+
 @property (retain, nonatomic) NSString * m_value;
 @property (nonatomic) double m_beatstart;
 @property (nonatomic) double m_duration;

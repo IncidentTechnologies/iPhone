@@ -101,6 +101,13 @@
     [button setEnabled:NO];
 }
 
+#pragma mark - Tutorial Reload
+
+- (IBAction)reloadTutorialButtonClicked:(id)sender
+{
+    [delegate relaunchFTUTutorial];
+}
+
 #pragma mark - Notification management
 
 // This changes the top bar notification

@@ -31,6 +31,7 @@
     NSMutableArray * m_tracks;
 }
 
+@property (nonatomic) XMPObject * m_song;
 
 @property (nonatomic) long m_id;
 @property (nonatomic, readonly) NSString * m_title;
