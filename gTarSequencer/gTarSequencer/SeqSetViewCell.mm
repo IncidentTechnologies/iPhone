@@ -77,6 +77,32 @@
     return self;
 }
 
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    // Adjust layout to phone size
+    /*
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    float x = [frameGenerator getFullscreenWidth];
+    
+    [self setFrame:CGRectMake(self.frame.origin.x,self.frame.origin.y,x,self.frame.size.height)];
+    
+    _setButtonWidth.constant = x/2.0;
+    _songButtonWidth.constant = x/2.0;
+    _songButtonLeftConstraint.constant = x/2.0;
+    */
+    
+    // Add swipe recognizer for deleting
+    self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panCell:)];
+    self.panRecognizer.delegate = self;
+    
+    [self.patternContainer addGestureRecognizer:self.panRecognizer];
+}
+
+
+
 - (void)sharedInit
 {
     isSelected = NO;
@@ -832,5 +858,157 @@
     [self selectNewPattern:offButton];
     [self turnOffInstrumentView];
 }
+
+
+#pragma mark - Editing
+
+// Allow the table to scroll vertically
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if(!deleteMode){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    [self resetConstraintContstantsToZero:NO notifyDelegateDidClose:NO];
+}
+
+- (void)editingDidBegin
+{
+    deleteMode = YES;
+}
+
+- (void)editingDidEnd
+{
+    deleteMode = NO;
+}
+
+- (void)panCell:(UIPanGestureRecognizer *)recognizer
+{
+    if([parent isLeftNavOpen]){
+        return;
+    }
+    
+    
+    switch (recognizer.state) {
+            
+        case UIGestureRecognizerStateBegan:
+        {
+            self.panStartPoint = [recognizer translationInView:self.patternContainer];
+            self.startingLeftConstraint = self.leftConstraint.constant;
+            DLog(@"Pan Began at %@", NSStringFromCGPoint(self.panStartPoint));
+            
+            break;
+        }
+        case UIGestureRecognizerStateChanged:
+        {
+            
+            CGPoint currentPoint = [recognizer translationInView:self.patternContainer];
+            CGFloat deltaX = currentPoint.x - self.panStartPoint.x;
+            
+            DLog(@"Pan Moved %f", deltaX);
+            BOOL panningLeft = NO;
+            if (currentPoint.x < self.panStartPoint.x) {
+                panningLeft = YES;
+            }
+            
+            if (!panningLeft) {
+                
+                // Close the cell
+                
+                CGFloat constant = deltaX;
+                if (constant > 0) {
+                    [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:NO];
+                } else {
+                    self.leftConstraint.constant = constant;
+                    self.rightConstraint.constant = -1 * [self buttonTotalWidth] - constant;
+                }
+            } else if (fabs(self.leftConstraint.constant) < [self buttonTotalWidth]){
+                
+                // Open the cell
+                
+                CGFloat constant = deltaX;
+                
+                [self editingDidBegin];
+                
+                if (constant <= -1 * [self buttonTotalWidth]) {
+                    [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:NO];
+                } else {
+                    self.leftConstraint.constant = constant;
+                    self.rightConstraint.constant = -1 * [self buttonTotalWidth] - constant;
+                }
+            }
+            
+            break;
+        }
+        case UIGestureRecognizerStateEnded:
+            
+            if (self.leftConstraint.constant < 0) {
+                //Cell was opening
+                CGFloat halfButton = -1 * [self buttonTotalWidth] / 2.0;
+                if (self.leftConstraint.constant < halfButton) {
+                    //Open all the way
+                    [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:YES];
+                } else {
+                    //Re-close
+                    [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
+                }
+            }else{
+                // Re-close
+                [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
+            }
+            
+            DLog(@"Pan Ended");
+            break;
+            
+        case UIGestureRecognizerStateCancelled:
+            
+            if (self.startingLeftConstraint == 0) {
+                //Cell was closed - reset everything to 0
+                [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
+            } else {
+                //Cell was open - reset to the open state
+                [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:YES];
+            }
+            DLog(@"Pan Cancelled");
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+- (CGFloat)buttonTotalWidth {
+    return deleteButton.frame.size.width;
+}
+
+- (void)resetConstraintContstantsToZero:(BOOL)animated notifyDelegateDidClose:(BOOL)endEditing
+{
+    self.leftConstraint.constant = 0.0;
+    self.rightConstraint.constant = -1 * [self buttonTotalWidth];
+    
+    if(endEditing){
+        [self editingDidEnd];
+    }
+}
+
+- (void)setConstraintsToShowAllButtons:(BOOL)animated notifyDelegateDidOpen:(BOOL)notifyDelegate
+{
+    self.leftConstraint.constant = -1 * [self buttonTotalWidth];
+    self.rightConstraint.constant = 0.0;
+}
+
+- (IBAction)userDidSelectDeleteButton:(id)sender
+{
+    DLog(@"Delete cell");
+    [parent deleteSeqSetViewCell:self];
+    
+}
+
 
 @end

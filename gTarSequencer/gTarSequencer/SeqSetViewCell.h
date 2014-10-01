@@ -73,9 +73,20 @@
 @property (weak, nonatomic) NSPattern * patternToDisplay;
 @property (retain, nonatomic) NSMutableArray * measureViews;
 @property (retain, nonatomic) NSMutableArray * measureBorders;
-
-@property (weak, nonatomic) IBOutlet UIView * patternContainer;
 @property (weak, nonatomic) IBOutlet UIView * borderContainer;
+
+// Slide to delete
+@property (weak, nonatomic) IBOutlet UIView * patternContainer;
+@property (nonatomic, strong) UIPanGestureRecognizer * panRecognizer;
+@property (nonatomic, assign) CGPoint panStartPoint;
+@property (nonatomic, assign) CGFloat startingLeftConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint * rightConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint * leftConstraint;
+
+@property (weak, nonatomic) IBOutlet UIButton * deleteButton;
+
+- (IBAction)userDidSelectDeleteButton:(id)sender;
+
 
 // cell elements
 @property (weak, nonatomic) IBOutlet UIImageView * instrumentIconView;
@@ -93,7 +104,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton * addMeasuresButton;
 @property (weak, nonatomic) IBOutlet UIButton * removeMeasuresButton;
-@property (weak, nonatomic) IBOutlet UIButton * deleteButton;
 
 @property (weak, nonatomic) IBOutlet MeasureView * measureOne;
 @property (weak, nonatomic) IBOutlet MeasureView * measureTwo;

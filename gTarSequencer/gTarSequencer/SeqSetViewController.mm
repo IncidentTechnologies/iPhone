@@ -624,11 +624,16 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == [sequence trackCount]){
+    //if(indexPath.row == [sequence trackCount]){
         return NO;
-    }else{
-        return canEdit;
-    }
+    //}else{
+    //    return canEdit;
+    //}
+}
+
+- (BOOL)isLeftNavOpen
+{
+    return [delegate isLeftNavOpen];
 }
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
@@ -659,6 +664,14 @@
     [self updateAllVisibleCells];
 }
 
+- (void)deleteSeqSetViewCell:(UITableViewCell *)cell
+{
+    SeqSetViewCell * seqCell = (SeqSetViewCell *)cell;
+    
+    [self endTutorialIfOpen];
+    [self deleteCell:seqCell withAnimation:YES];
+}
+/*
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // make sure the cell is open
@@ -669,7 +682,7 @@
         [self deleteCell:[tableView cellForRowAtIndexPath:indexPath] withAnimation:YES];
     }
 }
-
+*/
 - (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset
 {
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];

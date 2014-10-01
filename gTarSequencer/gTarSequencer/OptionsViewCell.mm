@@ -629,7 +629,11 @@
 // Allow the table to scroll vertically
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    return YES;
+    if(!isEditingMode){
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 - (void)prepareForReuse {
@@ -639,7 +643,7 @@
 
 - (void)panCell:(UIPanGestureRecognizer *)recognizer
 {
-    if(![setButton isHidden] || [fileText.text isEqualToString:DEFAULT_SET_NAME]){
+    if(![setButton isHidden] || [fileText.text isEqualToString:DEFAULT_SET_NAME] || [parent isLeftNavOpen]){
         return;
     }
     
@@ -650,8 +654,6 @@
             self.panStartPoint = [recognizer translationInView:self.container];
             self.startingLeftConstraint = self.leftConstraint.constant;
             DLog(@"Pan Began at %@", NSStringFromCGPoint(self.panStartPoint));
-            
-            [self editingDidBegin];
             
             break;
         }
@@ -667,9 +669,10 @@
                 panningLeft = YES;
             }
             
-            //if (self.contentViewLeftConstraint == 0) { //2
-            //The cell was closed and is now opening
             if (!panningLeft) {
+                
+                // Close the cell
+                
                 CGFloat constant = deltaX;
                 if (constant > 0) {
                     [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:NO];
@@ -677,8 +680,14 @@
                     self.leftConstraint.constant = constant;
                     self.rightConstraint.constant = -1 * [self buttonTotalWidth] - constant;
                 }
-            } else {
+            } else if (fabs(self.leftConstraint.constant) < [self buttonTotalWidth]){
+                
+                // Open the cell
+                
                 CGFloat constant = deltaX;
+                
+                [self editingDidBegin];
+                
                 if (constant <= -1 * [self buttonTotalWidth]) {
                     [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:NO];
                 } else {
@@ -686,7 +695,6 @@
                     self.rightConstraint.constant = -1 * [self buttonTotalWidth] - constant;
                 }
             }
-            //}
             
             break;
         }

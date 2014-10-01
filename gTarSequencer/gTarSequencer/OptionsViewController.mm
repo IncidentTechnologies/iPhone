@@ -532,6 +532,11 @@
     [self deleteCell:cell];
 }
 
+- (BOOL)isLeftNavOpen
+{
+    return [delegate isLeftNavOpen];
+}
+
 #pragma mark - Custom logic for cell display
 
 -(NSString *)displayTimeFromPriorDate:(NSDate *)priorDate

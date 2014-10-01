@@ -43,6 +43,8 @@
 - (void)loadFromName:(NSString *)filename andType:(NSString *)type;
 - (NSString *)getActiveSongName;
 
+- (BOOL)isLeftNavOpen;
+
 @end
 
 @interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate,TutorialDelegate>
@@ -97,7 +99,7 @@
 - (void)turnContentDrawingOff;
 
 - (void)commitSelectingPatternAtIndex:(int)indexToSelect forTrack:(NSTrack *)track;
-- (void)deleteCell:(id)sender withAnimation:(BOOL)animate;
+- (void)deleteSeqSetViewCell:(UITableViewCell *)cell;
 - (void)deleteAllCells;
 
 - (void)reloadTableData;
@@ -140,5 +142,7 @@
 
 - (void)disableKnobIfEnabledForInstrument:(int)instIndex;
 - (void)enableKnobIfDisabledForInstrument:(int)instIndex;
+
+- (BOOL)isLeftNavOpen;
 
 @end

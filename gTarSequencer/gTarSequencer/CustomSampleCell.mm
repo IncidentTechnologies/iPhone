@@ -103,7 +103,7 @@
                     self.leftConstraint.constant = constant;
                     self.rightConstraint.constant = -1 * [self buttonTotalWidth] - constant;
                 }
-            } else {
+            } else if (fabs(self.leftConstraint.constant) < [self buttonTotalWidth]){
                 CGFloat constant = deltaX;
                 if (constant <= -1 * [self buttonTotalWidth]) {
                     [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:NO];

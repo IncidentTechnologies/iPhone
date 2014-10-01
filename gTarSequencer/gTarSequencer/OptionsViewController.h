@@ -25,6 +25,8 @@
 - (int) countInstruments;
 - (int) countSounds;
 
+- (BOOL) isLeftNavOpen;
+
 @end
 
 extern NSUser * g_loggedInUser;
@@ -66,6 +68,7 @@ extern NSUser * g_loggedInUser;
 - (void)unloadView;
 - (void)loadTableWith:(NSString *)type;
 
+- (BOOL)isLeftNavOpen;
 
 - (void)deleteCell:(OptionsViewCell *)cell;
 - (void)deselectAllRowsExcept:(OptionsViewCell *)cell;
