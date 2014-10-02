@@ -67,6 +67,7 @@
 - (NSPattern *)selectPattern:(int)newSelection;
 - (void)turnOnAllFlags;
 - (void)notePlayedAtString:(int)str andFret:(int)fret;
+- (NSPattern *)getPatternByName:(NSString *)patternname;
 - (int)getPatternLengthByName:(NSString *)patternname;
 
 // Track's Pattern's Measure Actions

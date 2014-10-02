@@ -55,9 +55,24 @@
         
         trackaddclips = [[NSMutableDictionary alloc] init];
         
+        [self initColors];
     }
     
     return self;
+}
+
+- (void)initColors
+{
+    CGFloat initColors[STRINGS_ON_GTAR][4] = {
+        {148/255.0, 102/255.0, 177/255.0, 1},
+        {0/255.0, 141/255.0, 218/255.0, 1},
+        {43/255.0, 198/255.0, 34/255.0, 1},
+        {204/255.0, 234/255.0, 0/255.0, 1},
+        {234/255.0, 154/255.0, 41/255.0, 1},
+        {239/255.0, 92/255.0, 53/255.0, 1}
+    };
+    
+    memcpy(colors, initColors, sizeof(initColors));
 }
 
 - (void)clearAllSubviews
@@ -151,6 +166,141 @@
     }
     
     [view addSubview:patternLetter];
+}
+
+- (void)drawPatternNotesForClip:(NSClip *)clip inView:(UIView *)view
+{
+    if(clip.m_muted){
+        return;
+    }
+    
+    CGSize size = CGSizeMake(view.frame.size.width, view.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size,NO,0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    double lineWidth = 0.2;
+    
+    CGFloat noteFrameWidth = measureWidth / FRETS_ON_GTAR;
+    CGFloat noteFrameHeight = view.frame.size.height / STRINGS_ON_GTAR;
+    CGFloat noteSquare = MIN(noteFrameWidth,noteFrameHeight);
+    CGFloat noteVerticalPadding = (noteFrameHeight > noteFrameWidth) ? (noteFrameHeight-noteFrameWidth)/2.0 : 0;
+    
+    CGRect noteFrame = CGRectMake(0, 0, noteSquare, noteSquare);
+    
+    // Set line width:
+    CGContextSetLineWidth(context, lineWidth);
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    // Update all the notes:
+    int f, s;
+    for(NSNote * note in clip.m_notes){
+        
+        s = STRINGS_ON_GTAR - 1 - note.m_stringvalue;
+        f = (int)(note.m_beatstart * 4.0);
+        
+        // Adjust frame:
+        noteFrame.origin.x = f*noteFrameWidth+1.0;
+        noteFrame.origin.y = s*noteFrameHeight+noteVerticalPadding;
+        
+        /*CGContextSetFillColorWithColor(context, [UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]].CGColor);  // Get color for that string and fill
+        */
+        CGContextSetFillColorWithColor(context,[UIColor colorWithRed:1 green:1 blue:1 alpha:0.3].CGColor);
+        
+        CGContextFillEllipseInRect(context, noteFrame);
+    }
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,view.frame.size.width,view.frame.size.height)];
+    [imageView setImage:newImage];
+    
+    [view addSubview:imageView];
+    UIGraphicsEndImageContext();
+    
+}
+
+
+- (void)drawTempPatternNotesForClip:(NSClip *)clip inView:(UIView *)view withPattern:(NSPattern *)pattern patternLength:(float)patternLength
+{
+    if(clip.m_muted){
+        return;
+    }
+    
+    CGSize size = CGSizeMake(view.frame.size.width, view.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size,NO,0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    double lineWidth = 0.2;
+    
+    CGFloat noteFrameWidth = measureWidth / FRETS_ON_GTAR;
+    CGFloat noteFrameHeight = view.frame.size.height / STRINGS_ON_GTAR;
+    CGFloat noteSquare = MIN(noteFrameWidth,noteFrameHeight);
+    CGFloat noteVerticalPadding = (noteFrameHeight > noteFrameWidth) ? (noteFrameHeight-noteFrameWidth)/2.0 : 0;
+    
+    CGRect noteFrame = CGRectMake(0, 0, noteSquare, noteSquare);
+    
+    // Set line width:
+    CGContextSetLineWidth(context, lineWidth);
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    // Update all the notes:
+    int f, s;
+    for(float relBeat = 0.0, patternRepeat = 0.0; relBeat < clip.m_endbeat-clip.m_startbeat; relBeat += 4.0*patternLength){
+        
+        for(NSNote * note in pattern.m_notes){
+            
+            if(note.m_beatstart + patternRepeat*(FRETS_ON_GTAR)*patternLength < 4.0*(clip.m_endbeat-clip.m_startbeat)){
+                
+                s = STRINGS_ON_GTAR - 1 - note.m_stringvalue;
+                f = note.m_beatstart + patternRepeat*(FRETS_ON_GTAR)*patternLength; // Pattern notes have this set differently than song notes
+                
+                // Adjust frame:
+                noteFrame.origin.x = f*noteFrameWidth+1.0;
+                noteFrame.origin.y = s*noteFrameHeight+noteVerticalPadding;
+                
+                CGContextSetFillColorWithColor(context,[UIColor colorWithRed:1 green:1 blue:1 alpha:0.3].CGColor);
+                
+                CGContextFillEllipseInRect(context, noteFrame);
+                    
+            }else{
+                break;
+            }
+        }
+        
+        patternRepeat += 1.0;
+    }
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,view.frame.size.width,view.frame.size.height)];
+    [imageView setImage:newImage];
+    
+    [view addSubview:imageView];
+    UIGraphicsEndImageContext();
+    
+}
+
+- (void)clearPatternNotesForEditingClip
+{
+    for(UIView * subview in editingClipView.subviews){
+        if([subview isKindOfClass:[UIImageView class]]){
+            [subview removeFromSuperview];
+        }
+    }
+}
+
+- (void)redrawEditingPatternNotesWithPattern:(NSString *)newPattern
+{
+    
+    [self clearPatternNotesForEditingClip];
+    
+    if(!editingClip.m_muted){
+        
+        NSTrack * instTrack = [delegate instTrackAtId:editingTrack.m_instrument.m_id];
+        
+        [self drawTempPatternNotesForClip:editingClip inView:editingClipView withPattern:[instTrack getPatternByName:newPattern] patternLength:[instTrack getPatternLengthByName:newPattern]];
+    }
+    
 }
 
 - (void)drawProgressBarForClip:(NSClip *)clip atIndex:(float)trackIndex
@@ -458,6 +608,8 @@
         newPattern = PATTERN_OFF;
         editingClip.m_muted = YES;
     }
+    
+    [self redrawEditingPatternNotesWithPattern:newPattern];
     
     newPattern = [newPattern stringByReplacingOccurrencesOfString:@"-" withString:@""];
     

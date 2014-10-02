@@ -325,6 +325,17 @@
     return 0;
 }
 
+- (NSPattern *)getPatternByName:(NSString *)patternname
+{
+    for(NSPattern * pattern in m_patterns){
+        if([pattern.m_name isEqualToString:patternname]){
+            return pattern;
+        }
+    }
+    
+    return nil;
+}
+
 #pragma mark Measure Actions
 
 - (NSMeasure *)selectMeasure:(int)newSelection {

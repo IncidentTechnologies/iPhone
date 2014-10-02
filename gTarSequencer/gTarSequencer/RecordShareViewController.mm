@@ -412,6 +412,11 @@
             [recordEditor drawPatternLetterForClip:clip inView:clipView];
             
             //
+            // Draw the pattern notes
+            //
+            [recordEditor drawPatternNotesForClip:clip inView:clipView];
+            
+            //
             // Draw the top progress view
             //
             

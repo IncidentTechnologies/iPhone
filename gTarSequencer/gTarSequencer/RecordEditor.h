@@ -59,6 +59,8 @@
     HorizontalAdjustor * horizontalAdjustor;
     float lastDiff;
     
+    CGFloat colors[STRINGS_ON_GTAR][4];
+    
 }
 
 - (id)initWithScrollView:(UIScrollView *)scrollView progressView:(UIView *)progress;
@@ -69,6 +71,7 @@
 
 - (UIView *)drawClipViewForClip:(NSClip *)clip track:(NSTrack *)track inFrame:(CGRect)frame atIndex:(int)index;
 - (void)drawPatternLetterForClip:(NSClip *)clip inView:(UIView *)view;
+- (void)drawPatternNotesForClip:(NSClip *)clip inView:(UIView *)view;
 - (void)drawProgressBarForClip:(NSClip *)clip atIndex:(float)trackIndex;
 - (void)drawAddClipMeasureForTrack:(NSString *)trackName;
 
