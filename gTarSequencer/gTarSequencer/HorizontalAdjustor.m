@@ -34,6 +34,8 @@
         
         [self initAdjustors];
         
+        [self unsetAbsoluteMaxWidth];
+        
     }
     return self;
 }
@@ -152,12 +154,12 @@
     }
     
     float minX = leftAdjustor.frame.origin.x + 0.5*barMinWidth;
-    float maxX = barDefaultWidth - adjustorSize/2;
+    float maxX = (requireAbsoluteMaxWidth) ? absoluteMaxWidth : barDefaultWidth - adjustorSize/2;
     float newX = newPoint.x + rightFirstX;
     
     // Ensure if the bar gets stopped the slider stops too
-    /*if(newX - adjustorSize/2 > m_bar.frame.size.width && newX >= rightAdjustor.frame.origin.x){
-        maxX = m_bar.frame.size.width - adjustorSize/2;
+    /*if(newX > m_bar.frame.origin.x + m_bar.frame.size.width - adjustorSize/2 && newX > rightAdjustor.frame.origin.x){
+        newX = maxX = m_bar.frame.origin.x + m_bar.frame.size.width - adjustorSize/2;
     }*/
     
     // wrap to boundary
@@ -186,6 +188,17 @@
         
     }
     
+}
+
+- (void)setAbsoluteMaxWidth:(float)maxX
+{
+    requireAbsoluteMaxWidth = YES;
+    absoluteMaxWidth = maxX - adjustorSize/2;
+}
+
+- (void)unsetAbsoluteMaxWidth
+{
+    requireAbsoluteMaxWidth = NO;
 }
 
 @end

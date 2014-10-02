@@ -515,6 +515,7 @@
     
     // Blink the letter label
     [self initEditingClipPattern];
+    
 }
 
 #pragma mark - Pattern Editing
@@ -663,6 +664,10 @@
     
     lastDiff = 0;
     
+    // Ensure that the last muted clip doesn't get overflowing adjustors
+    if(editingClip.m_muted && editingClip == [editingTrack.m_clips lastObject]){
+        [horizontalAdjustor setAbsoluteMaxWidth:measureWidth*(ceil([self getSongMaxBeat] / 4.0))];
+    }
 }
 
 - (void)panLeft:(float)diff
@@ -887,7 +892,8 @@
     if(senderTrackName != nil){
         float startX = lastClipInTrack.frame.origin.x+lastClipInTrack.frame.size.width;
         float endX = MAX(startX+measureWidth,senderButton.frame.origin.x);
-        [self createNewClipFrom:startX to:endX at:lastClipInTrack.frame.origin.y forTrack:senderTrackName startEditing:YES isMuted:NO];
+        [self createNewClipFrom:startX to:endX at:senderButton.frame.origin.y forTrack:senderTrackName startEditing:YES isMuted:NO];
+        [self redrawAllPatternNotes];
     }else{
         DLog(@"ERROR: Sender Track Name is nil");
     }
@@ -1109,6 +1115,7 @@
     }
     
     int newIndex = clipIndex;
+    //int newIndex = [track.m_clips count];
     
     DLog(@"Create new muted clip from %f to %f at index %i",fromX,toX,newIndex);
     
@@ -1177,12 +1184,8 @@
     }
 }
 
-//
-// Adjust the number of measures on screen to reflect changing lengths
-//
-- (void)shrinkExpandMeasuresOnScreen
+- (float)getSongMaxBeat
 {
-    DLog(@"Shrink expand measures on screen");
     
     int newNumMeasures = 0.0;
     float maxBeat = 0.0;
@@ -1190,7 +1193,7 @@
     // count the maximum measure
     // make sure it's not muted
     for(id trackName in trackclips){
-       // NSMutableArray * clipArray = [trackclips objectForKey:trackName];
+        // NSMutableArray * clipArray = [trackclips objectForKey:trackName];
         
         NSMutableArray * clipArray = [[delegate trackWithName:(NSString *)trackName] m_clips];
         NSClip * lastClip = [clipArray lastObject];
@@ -1208,7 +1211,40 @@
         
     }
     
-    newNumMeasures = ceil(maxBeat / 4.0);
+    return maxBeat;
+}
+
+//
+// Adjust the number of measures on screen to reflect changing lengths
+//
+- (void)shrinkExpandMeasuresOnScreen
+{
+    DLog(@"Shrink expand measures on screen");
+    
+    float maxBeat = [self getSongMaxBeat];
+    int newNumMeasures = ceil(maxBeat / 4.0);
+    
+    // count the maximum measure
+    // make sure it's not muted
+    /*for(id trackName in trackclips){
+       // NSMutableArray * clipArray = [trackclips objectForKey:trackName];
+        
+        NSMutableArray * clipArray = [[delegate trackWithName:(NSString *)trackName] m_clips];
+        NSClip * lastClip = [clipArray lastObject];
+        //UIView * lastClipView = [clipArray lastObject];
+        
+        // Use the second to last muted clip if a lot of editing is going on
+        if(lastClip.m_muted && [clipArray count] > 1){
+            lastClip = [clipArray objectAtIndex:([clipArray count]-2)];
+        }
+        
+        if(!lastClip.m_muted){
+            //[self getBeatFromXPosition:lastClipView.frame.origin.x+lastClipView.frame.size.width]
+            maxBeat = MAX(maxBeat, lastClip.m_endbeat);
+        }
+        
+    }
+    */
     
     
     // call delegate set measures

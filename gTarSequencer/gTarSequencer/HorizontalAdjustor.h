@@ -31,6 +31,9 @@
     
     float adjustorSize;
     
+    BOOL requireAbsoluteMaxWidth;
+    float absoluteMaxWidth;
+    
     UIGestureRecognizer * leftPan;
     UIGestureRecognizer * rightPan;
 }
@@ -40,6 +43,8 @@
 - (void)hideControls;
 - (void)showControlsRelativeToView:(UIView *)view;
 - (void)setBarDefaultWidth:(float)width minWidth:(float)minWidth;
+- (void)setAbsoluteMaxWidth:(float)maxX;
+- (void)unsetAbsoluteMaxWidth;
 
 @property (nonatomic) UIButton * leftAdjustor;
 @property (nonatomic) UIButton * rightAdjustor;
