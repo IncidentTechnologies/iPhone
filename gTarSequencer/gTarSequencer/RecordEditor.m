@@ -289,9 +289,23 @@
     }
 }
 
+- (void)clearPatternNotesForTrackClips
+{
+    NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
+    
+    for(int c = 0; c < [clipDict count]; c++){
+        UIView * v = [clipDict objectAtIndex:c];
+        
+        for(UIView * subview in v.subviews){
+            if([subview isKindOfClass:[UIImageView class]]){
+                [subview removeFromSuperview];
+            }
+        }
+    }
+}
+
 - (void)redrawEditingPatternNotesWithPattern:(NSString *)newPattern
 {
-    
     [self clearPatternNotesForEditingClip];
     
     if(!editingClip.m_muted){
@@ -300,7 +314,23 @@
         
         [self drawTempPatternNotesForClip:editingClip inView:editingClipView withPattern:[instTrack getPatternByName:newPattern] patternLength:[instTrack getPatternLengthByName:newPattern]];
     }
+}
+
+- (void)redrawAllPatternNotes
+{
+    [self clearPatternNotesForTrackClips];
     
+    NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
+    
+    for(int c = 0; c < [clipDict count]; c++){
+        NSClip * clip = [editingTrack.m_clips objectAtIndex:c];
+        UIView * clipView = [clipDict objectAtIndex:c];
+        NSTrack * instTrack = [delegate instTrackAtId:editingTrack.m_instrument.m_id];
+        //NSString * clipPattern = (clip == editingClip) ? newPattern : clip.m_name;
+        NSString * clipPattern = clip.m_name;
+        
+        [self drawTempPatternNotesForClip:clip inView:clipView withPattern:[instTrack getPatternByName:clipPattern] patternLength:[instTrack getPatternLengthByName:clipPattern]];
+    }
 }
 
 - (void)drawProgressBarForClip:(NSClip *)clip atIndex:(float)trackIndex
@@ -1183,6 +1213,8 @@
         // bring grid lines forward
         [delegate drawGridOverlayLines];
     }
+    
+    [self redrawAllPatternNotes];
     
 }
 
