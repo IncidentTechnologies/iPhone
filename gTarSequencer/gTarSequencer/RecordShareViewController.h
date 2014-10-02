@@ -17,7 +17,7 @@
 //#import "SCUI.h"
 
 #define MAX_TRACKS 5.0
-#define MIN_MEASURES 8.0
+#define MIN_MEASURES 7.0
 #define MAX_MEASURES 1000
 #define MEASURES_PER_SCREEN 8.0
 #define MEASURE_BEATS 4.0

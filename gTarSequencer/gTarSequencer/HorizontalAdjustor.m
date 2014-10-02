@@ -155,6 +155,11 @@
     float maxX = barDefaultWidth - adjustorSize/2;
     float newX = newPoint.x + rightFirstX;
     
+    // Ensure if the bar gets stopped the slider stops too
+    /*if(newX - adjustorSize/2 > m_bar.frame.size.width && newX >= rightAdjustor.frame.origin.x){
+        maxX = m_bar.frame.size.width - adjustorSize/2;
+    }*/
+    
     // wrap to boundary
     if(newX > maxX || newX > maxX-0.2*adjustorSize/2){
         newX=maxX;

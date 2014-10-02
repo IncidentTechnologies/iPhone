@@ -722,6 +722,9 @@
     // Redraw tickmarks
     [delegate drawTickmarks];
     
+    // Redraw pattern notes
+    [self redrawAllPatternNotes];
+    
     lastDiff = diff;
 }
 
@@ -825,7 +828,8 @@
         
     }
     
-    if(clipToRemoveIndex > 0){
+    // Don't do this for the last clip if it's muted
+    if(clipToRemoveIndex > 0 && !(clip.m_muted && clipToRemoveIndex == [clipDict count])){
         
         DLog(@"Stretch out the previous track %i",clipToRemoveIndex-1);
         
@@ -842,6 +846,7 @@
     // Remove from clips
     
     DLog(@"TODO: update the pattern data from deleted tracks");
+    
     [editingTrack.m_clips removeObject:clip];
     
     // Remove from superview
@@ -980,7 +985,7 @@
             return;
         }
         
-        BOOL measureBeforeIsMuted = (c > 0) ? [[editingTrack.m_clips objectAtIndex:c-1] m_muted]: false;
+        //BOOL measureBeforeIsMuted = (c > 0) ? [[editingTrack.m_clips objectAtIndex:c-1] m_muted]: false;
         BOOL measureAfterIsMuted = (c < [clipDict count]-1) ? [[editingTrack.m_clips objectAtIndex:c+1] m_muted] : false;
         
         // Get current start measure/end measure
@@ -1137,14 +1142,9 @@
 //
 // Crop muted end measures when the (+)measure gets adjusted
 //
-- (void)cropMutedEndMeasures:(int)newNumMeasures
+- (void)cropMutedEndMeasures:(int)newNumMeasures withMaxBeat:(float)maxBeat
 {
-    // Adjust view
-    // Then call setBeatsForClip:(NSClip)withView:
-    
     // First adjust the view
-    
-    DLog(@"NumMeasures is %i",newNumMeasures);
     
     for(id trackName in trackclips){
         
@@ -1152,17 +1152,26 @@
         
         NSClip * clip = [track.m_clips lastObject];
         
-        if(clip.m_muted){
+        if(clip.m_muted && clip.m_endbeat > maxBeat){
             
             UIView * lastClipView = [[trackclips objectForKey:trackName] lastObject];
             
             double newClipEndX = [self getXPositionForClipBeat:newNumMeasures*4.0];
             double newClipWidth = newClipEndX - lastClipView.frame.origin.x;
             
-            [lastClipView setFrame:CGRectMake(lastClipView.frame.origin.x, lastClipView.frame.origin.y, newClipWidth, lastClipView.frame.size.height)];
-         
-            [self setBeatsForClip:clip withView:lastClipView];
+            DLog(@"newClipWidth is %f",newClipWidth);
+            
+            if(newClipWidth > MIN_TRACK_WIDTH){
                 
+                [lastClipView setFrame:CGRectMake(lastClipView.frame.origin.x, lastClipView.frame.origin.y, newClipWidth, lastClipView.frame.size.height)];
+                
+                [self setBeatsForClip:clip withView:lastClipView];
+                
+            }else{
+                
+                [self removeClipInEditing:lastClipView];
+                
+            }
         }
         
     }
@@ -1181,11 +1190,17 @@
     // count the maximum measure
     // make sure it's not muted
     for(id trackName in trackclips){
-        NSMutableArray * clipArray = [trackclips objectForKey:trackName];
+       // NSMutableArray * clipArray = [trackclips objectForKey:trackName];
         
-        NSClip * lastClip = [[[delegate trackWithName:(NSString *)trackName] m_clips] lastObject];
-        UIView * lastClipView = [clipArray lastObject];
-            
+        NSMutableArray * clipArray = [[delegate trackWithName:(NSString *)trackName] m_clips];
+        NSClip * lastClip = [clipArray lastObject];
+        //UIView * lastClipView = [clipArray lastObject];
+        
+        // Use the second to last muted clip if a lot of editing is going on
+        if(lastClip.m_muted && [clipArray count] > 1){
+            lastClip = [clipArray objectAtIndex:([clipArray count]-2)];
+        }
+        
         if(!lastClip.m_muted){
             //[self getBeatFromXPosition:lastClipView.frame.origin.x+lastClipView.frame.size.width]
             maxBeat = MAX(maxBeat, lastClip.m_endbeat);
@@ -1195,15 +1210,17 @@
     
     newNumMeasures = ceil(maxBeat / 4.0);
     
+    
     // call delegate set measures
-    if(newNumMeasures != numMeasures-1){
+    // even if it's redundant, because editing might be processing
+    //if(newNumMeasures != numMeasures-1 || newNumMeasures == MIN_MEASURES){
     
         [delegate setMeasures:newNumMeasures drawGrid:NO];
         
         [horizontalAdjustor setBarDefaultWidth:trackView.contentSize.width minWidth:MIN_TRACK_WIDTH];
     
-        [self cropMutedEndMeasures:newNumMeasures];
-        
+        [self cropMutedEndMeasures:newNumMeasures withMaxBeat:maxBeat];
+    
         // move over all the add clip buttons
         for(id trackName in trackaddclips){
             UIButton * addClipButton = [trackaddclips objectForKey:trackName];
@@ -1212,7 +1229,7 @@
         
         // bring grid lines forward
         [delegate drawGridOverlayLines];
-    }
+    //}
     
     [self redrawAllPatternNotes];
     
