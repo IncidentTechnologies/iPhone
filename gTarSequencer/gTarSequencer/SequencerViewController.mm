@@ -343,8 +343,6 @@
     // Switch to new main subview
     if([nav isEqualToString:@"Options"]){
         
-        [optionsViewController reloadFileTable];
-        [optionsViewController reloadUserProfile];
         activeMainView = optionsViewController.view;
         
     }else if([nav isEqualToString:@"Set"]){

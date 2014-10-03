@@ -72,8 +72,12 @@
     [self drawBackButton];
     [self drawNewPlusButton];
     
+}
+
+- (void)viewDidLayoutSubviews
+{
     [self reloadFileTable];
-    
+    [self reloadUserProfile];
 }
 
 - (void)unloadView
