@@ -38,7 +38,7 @@
 
 @synthesize delegate;
 
-- (id)initWithScrollView:(UIScrollView *)scrollView progressView:(UIView *)progress
+- (id)initWithScrollView:(UIScrollView *)scrollView progressView:(UIView *)progress editingPanel:(UIView *)editingView instrumentPanel:(UIView *)instrumentView
 {
     self = [super init];
     
@@ -46,7 +46,11 @@
     {
         trackView = scrollView;
         
-        measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+        
+        FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+        
+        measureWidth = [frameGenerator getRecordedTrackScreenWidth] / MEASURES_PER_SCREEN;
+        
         measureHeight = trackView.frame.size.height / MAX_TRACKS;
         
         progressView = progress;
@@ -55,7 +59,12 @@
         
         trackaddclips = [[NSMutableDictionary alloc] init];
         
+        editingPanel = editingView;
+        
+        instrumentPanel = instrumentView;
+        
         [self initColors];
+        
     }
     
     return self;
@@ -81,6 +90,7 @@
     
     [trackclips removeAllObjects];
 }
+
 
 - (void)setMeasures:(int)measures
 {
@@ -351,7 +361,7 @@
     }
     
 }
-
+/*
 - (void)drawAddClipMeasureForTrack:(NSString *)trackName
 {
     NSMutableArray * clipArray = [trackclips objectForKey:trackName];
@@ -382,6 +392,7 @@
     
     [delegate drawGridOverlayLines];
 }
+*/
 
 - (void)addLongPressGestureToView:(UIView *)view
 {
@@ -453,8 +464,6 @@
 {
     [horizontalAdjustor hideControls];
     
-    DLog(@"TODO: update the data on patterns that have changed");
-    
     [self mergeNeighboringIdenticalClips];
     [self correctMeasureLengths];
     [self shrinkExpandMeasuresOnScreen];
@@ -500,9 +509,20 @@
     
 }
 
+- (void)deactivateEditingClipUnfocusTrack:(UILongPressGestureRecognizer *)sender
+{
+    if(sender.state == UIGestureRecognizerStateBegan){
+        [self unfocusTrackHideEditingPanel];
+        
+        [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(deactivateEditingClip) userInfo:nil repeats:NO];
+    }
+}
+
 // Start editing a clip
 - (void)activateEditingClip
 {
+    DLog(@"Activate editing clip");
+    
     [delegate stopRecordPlaybackAnimatePlayband:NO];
     
     // Activate
@@ -515,6 +535,9 @@
     
     // Blink the letter label
     [self initEditingClipPattern];
+    
+    // Focus the track and show editing panel
+    [self focusTrackShowEditingPanel];
     
 }
 
@@ -649,11 +672,74 @@
     [delegate drawTickmarks];
 }
 
+- (void)initEditingPanelPosition
+{
+    [editingPanel setFrame:CGRectMake(editingPanel.frame.origin.x, 320, editingPanel.frame.size.width, editingPanel.frame.size.height)];
+}
+
+- (void)focusTrackShowEditingPanel
+{
+    if([editingPanel isHidden]){
+        [self initEditingPanelPosition];
+    }
+    
+    [editingPanel setAlpha:1.0];
+    [editingPanel setHidden:NO];
+    
+    [UIView animateWithDuration:0.3 animations:^(void){
+        
+        // slide up the track
+        [delegate setContentVerticalOffset:editingClipView.frame.origin.y-1];
+        
+        // slide up the instrument panel subviews
+        int index = 0;
+        for(UIView * subview in instrumentPanel.subviews){
+            [subview setFrame:CGRectMake(subview.frame.origin.x,index*measureHeight-editingClipView.frame.origin.y+1,subview.frame.size.width,subview.frame.size.height)];
+            index++;
+        }
+        
+        // slide up the editing panel
+        [editingPanel setFrame:CGRectMake(editingPanel.frame.origin.x, 80, editingPanel.frame.size.width, editingPanel.frame.size.height)];
+        
+        
+    }completion:^(BOOL finished){
+        
+    }];
+
+}
+
+- (void)unfocusTrackHideEditingPanel
+{
+    [UIView animateWithDuration:0.3 animations:^(void){
+        
+        // slide down the track
+        [delegate setContentVerticalOffset:0.0];
+        
+        // slide up the instrument panel subviews
+        int index = 0;
+        for(UIView * subview in instrumentPanel.subviews){
+            [subview setFrame:CGRectMake(subview.frame.origin.x,index*measureHeight,subview.frame.size.width,subview.frame.size.height)];
+            index++;
+        }
+        
+        [editingPanel setAlpha:0.0];
+        
+        // TODO: figure out why this repeat-flashes
+        // slide down editing panel
+        //[editingPanel setFrame:CGRectMake(editingPanel.frame.origin.x, 320, editingPanel.frame.size.width, editingPanel.frame.size.height)];
+        
+    }completion:^(BOOL finished){
+        [editingPanel setHidden:YES];
+    }];
+}
+
 #pragma mark - Pan Gesture Reactions
 
 // Init horizontal trimming sliders
 - (void)initEditingClipSliders
 {
+    DLog(@"Init Editing Clip Sliders");
+    
     horizontalAdjustor = [[HorizontalAdjustor alloc] initWithContainer:trackView background:trackView bar:editingClipView];
     
     horizontalAdjustor.delegate = self;
@@ -859,6 +945,7 @@
     if(clipToRemove == editingClipView){
         editingClipView = nil;
         [self deactivateEditingClip];
+        [self unfocusTrackHideEditingPanel];
     }
     
     [clipToRemove removeFromSuperview];
@@ -870,34 +957,22 @@
 }
 
 //
-// Add Tracks
+// Add Clips
 //
-- (void)addClipInEditingFromButton:(id)sender
+- (void)addClipInEditing
 {
-    DLog(@"Add a clip at the end of the measure of the track and set it editing");
-    
-    UIButton * senderButton = (UIButton *)sender;
-    NSString * senderTrackName = nil;
-    
-    for(id trackName in trackaddclips){
-        DLog(@"trackName is %@",(NSString *)trackName);
-        if((UIButton *)[trackaddclips objectForKey:trackName] == senderButton){
-            senderTrackName = (NSString *)trackName;
-            break;
-        }
-    }
+    NSString * senderTrackName = editingTrack.m_name;
     
     UIView * lastClipInTrack = [[trackclips objectForKey:senderTrackName] lastObject];
     
     if(senderTrackName != nil){
         float startX = lastClipInTrack.frame.origin.x+lastClipInTrack.frame.size.width;
-        float endX = MAX(startX+measureWidth,senderButton.frame.origin.x);
-        [self createNewClipFrom:startX to:endX at:senderButton.frame.origin.y forTrack:senderTrackName startEditing:YES isMuted:NO];
+        float endX = startX+measureWidth;
+        [self createNewClipFrom:startX to:endX at:lastClipInTrack.frame.origin.y forTrack:senderTrackName startEditing:YES isMuted:NO];
         [self redrawAllPatternNotes];
     }else{
         DLog(@"ERROR: Sender Track Name is nil");
     }
-    
 }
 
 //
@@ -1099,6 +1174,13 @@
 //
 - (void)createNewClipFrom:(float)fromX to:(float)toX at:(float)atY forTrack:(NSString *)trackName startEditing:(BOOL)edit isMuted:(BOOL)muted
 {
+    
+    if(edit){
+        if(editingClip != nil){
+            [self deactivateEditingClip];
+        }
+    }
+    
     NSTrack * track = [delegate trackWithName:trackName];
     
     // Determine the new index
@@ -1143,6 +1225,18 @@
     if(edit){
         [self trackPressed:newClipView];
     }
+    
+    // Scroll to new measure
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    float offsetX = MIN(fromX,trackView.contentSize.width-[frameGenerator getRecordedTrackScreenWidth]);
+    
+    [UIView animateWithDuration:0.3 delay:0.3 options:NULL animations:^(void){
+        
+        [trackView setContentOffset:CGPointMake(offsetX,trackView.contentOffset.y)];
+        
+    }completion:^(BOOL finished){
+        
+    }];
     
 }
 
@@ -1289,7 +1383,10 @@
 
 -(float)getProgressXPositionForClipBeat:(float)beat
 {
-    float progressMeasureWidth = progressView.frame.size.width / (numMeasures-1);
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    float progressMeasureWidth = [frameGenerator getRecordedTrackScreenWidth] / numMeasures;
+    //float progressMeasureWidth = progressView.frame.size.width / (numMeasures);
     
     float x = beat * progressMeasureWidth / 4.0;
     

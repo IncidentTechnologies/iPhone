@@ -168,8 +168,7 @@
     // SUBVIEW: RECORD SHARE
     //
     
-    NSString * recordShareNibName = (isScreenLarge) ? @"RecordShareView_4" : @"RecordShareView";
-    recordShareController = [[RecordShareViewController alloc] initWithNibName:recordShareNibName bundle:nil];
+    recordShareController = [[RecordShareViewController alloc] initWithNibName:@"RecordShareView" bundle:nil];
     [recordShareController.view setFrame:onScreenMainFrame];
     [recordShareController setDelegate:self];
     

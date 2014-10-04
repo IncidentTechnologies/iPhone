@@ -31,11 +31,11 @@
 @synthesize backButton;
 @synthesize progressView;
 @synthesize instrumentView;
+@synthesize editingView;
 @synthesize trackView;
 @synthesize progressViewIndicator;
 @synthesize noSessionOverlay;
 @synthesize noSessionLabel;
-@synthesize processingLabel;
 @synthesize processingScreen;
 @synthesize shareEmailButton;
 @synthesize shareSMSButton;
@@ -61,6 +61,7 @@
         isWritingFile = NO;
         isEditingOffset = NO;
         
+        
     }
     return self;
 }
@@ -69,11 +70,16 @@
 {
     [super viewDidLoad];
     
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    measureWidth = [frameGenerator getRecordedTrackScreenWidth] / MEASURES_PER_SCREEN;
+    
 	trackView.bounces = NO;
     [trackView setDelegate:self];
+    trackViewVerticalOffset = 0.0;
     
     // Supports all the editing and some of the drawing functionality
-    recordEditor = [[RecordEditor alloc] initWithScrollView:trackView progressView:progressView];
+    recordEditor = [[RecordEditor alloc] initWithScrollView:trackView progressView:progressView editingPanel:editingView instrumentPanel:instrumentView];
     recordEditor.delegate = self;
     
     // Add touch controls to end any editing
@@ -85,6 +91,8 @@
     [self showNoSessionOverlay];
     
     [self initShareScreen];
+    
+    [self initEditScreen];
     
 }
 
@@ -127,6 +135,7 @@
         
         UIButton * instView = [[UIButton alloc] initWithFrame:instFrame];
         [instView setImage:[UIImage imageNamed:inst.m_iconName] forState:UIControlStateNormal];
+        [instView setBackgroundColor:[UIColor colorWithRed:23/255.0 green:160/255.0 blue:195/255.0 alpha:1.0]];
         [instView setUserInteractionEnabled:NO];
         [instView setImageEdgeInsets:UIEdgeInsetsMake(5,14,5,14)];
         
@@ -294,8 +303,6 @@
     // Draw measures
     //
     
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
-    
     numMeasures = newNumMeasures;
     numMeasures = MAX(numMeasures,MIN_MEASURES) + 1;
     
@@ -429,7 +436,7 @@
         // Draw add measure button at the end of each track
         //
         
-        [recordEditor drawAddClipMeasureForTrack:track.m_name];
+        //[recordEditor drawAddClipMeasureForTrack:track.m_name];
         
         trackPosition++;
     }
@@ -453,8 +460,6 @@
 
 - (void)drawGridOverlayLines
 {
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
-    
     if(gridOverlayLines == nil){
         
         // Draw all the lines
@@ -500,8 +505,6 @@
     [self clearTickmarks];
     
     // Regenerate tickmarks
-    
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
     
     float trackPosition = 0;
     for(NSTrack * track in recordingSong.m_tracks){
@@ -589,7 +592,11 @@
 
 -(void)resetProgressView
 {
-    float indicatorWidth = (MEASURES_PER_SCREEN/(numMeasures-1)) * progressView.frame.size.width;
+    
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    float indicatorWidth = (MEASURES_PER_SCREEN/(numMeasures)) * [frameGenerator getRecordedTrackScreenWidth];
+    
+    //float indicatorWidth = (MEASURES_PER_SCREEN/(numMeasures)) * progressView.frame.size.width;
     
     CGRect progressViewIndicatorFrame = CGRectMake(0, 0, indicatorWidth, progressView.frame.size.height);
     progressViewIndicator = [[UIView alloc] initWithFrame:progressViewIndicatorFrame];
@@ -601,13 +608,25 @@
     
 }
 
+- (void)setContentVerticalOffset:(float)offsetY
+{
+    trackViewVerticalOffset = offsetY;
+    
+    [trackView setContentOffset:CGPointMake(trackView.contentOffset.x,offsetY)];
+}
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x,trackViewVerticalOffset)];
     
     double percentMoved = scrollView.contentOffset.x / (scrollView.contentSize.width-measureWidth);
     
-    double newIndicatorX = progressView.frame.size.width * percentMoved;
+    //double newIndicatorX = progressView.frame.size.width * percentMoved;
+    
+    double newIndicatorX = [frameGenerator getRecordedTrackScreenWidth] * percentMoved;
     
     [progressViewIndicator setFrame:CGRectMake(newIndicatorX, 0, progressViewIndicator.frame.size.width, progressViewIndicator.frame.size.height)];
 }
@@ -618,7 +637,6 @@
 {
     [noSessionOverlay setHidden:NO];
     [noSessionLabel setHidden:NO];
-    [processingLabel setHidden:YES];
 }
 
 -(void)hideNoSessionOverlay
@@ -644,7 +662,6 @@
     
     //[noSessionOverlay setHidden:NO];
     //[noSessionLabel setHidden:YES];
-    //[processingLabel setHidden:NO];
 }
 
 -(void)showRecordOverlay
@@ -713,6 +730,7 @@
     
     // End any editing
     [recordEditor deactivateEditingClip];
+    [recordEditor unfocusTrackHideEditingPanel];
     
     // Record the m4a
     [self recordActiveSongToFile];
@@ -788,6 +806,37 @@
     } completion:^(BOOL finished){
         [shareView setHidden:YES];
     }];
+    
+}
+
+#pragma mark - Edit Screen
+
+-(void)initEditScreen
+{
+    _addMeasureWidth.constant = measureWidth;
+    _duplicateMeasureWidth.constant = measureWidth;
+    _pasteMeasureWidth.constant = measureWidth;
+    _editMeasureWidth.constant = measureWidth;
+    _saveTrackWidth.constant = measureWidth;
+    
+    [_duplicateMeasureButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_pasteMeasureButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_editMeasureButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_saveTrackButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
+    _addMeasureButton.layer.borderWidth = 1.0f;
+    _duplicateMeasureButton.layer.borderWidth = 1.0f;
+    _pasteMeasureButton.layer.borderWidth = 1.0f;
+    _editMeasureButton.layer.borderWidth = 1.0f;
+    _saveTrackButton.layer.borderWidth = 1.0f;
+    
+    _addMeasureButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    _duplicateMeasureButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    _pasteMeasureButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    _editMeasureButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    _saveTrackButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    [self disablePaste];
     
 }
 
@@ -879,15 +928,17 @@
 
 -(void)movePlaybandToMeasure:(int)m andFret:(int)f andHide:(BOOL)hide
 {
-    float measureWidth = trackView.frame.size.width / MEASURES_PER_SCREEN;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    float containerWidth = [frameGenerator getRecordedTrackScreenWidth];
+    
     float fretWidth = measureWidth / FRETS_ON_GTAR;
     
-    float pb_x = ((m*measureWidth+f*fretWidth)/((numMeasures-1)*measureWidth))*playbandView.superview.frame.size.width;
+    float pb_x = ((m*measureWidth+f*fretWidth)/((numMeasures)*measureWidth))*containerWidth;
     float mpb_x = m*measureWidth+f*fretWidth;
     
     float max_measure = [self countMeasuresFromRecordedSong]-1;
     float max_fret = FRETS_ON_GTAR-1.0;
-    float pb_max_x = (((max_measure)*measureWidth+max_fret*fretWidth)/((numMeasures-1.0)*measureWidth)) * playbandView.superview.frame.size.width;
+    float pb_max_x = (((max_measure)*measureWidth+max_fret*fretWidth)/((numMeasures)*measureWidth)) * containerWidth;
     float mpb_max_x = max_measure*measureWidth+max_fret*fretWidth;
     
     pb_x = MIN(pb_x,pb_max_x);
@@ -1125,6 +1176,7 @@
 {
     // End any editing
     [recordEditor deactivateEditingClip];
+    [recordEditor unfocusTrackHideEditingPanel];
     
     DLog(@"is audio playing? %i",isAudioPlaying);
     
@@ -1552,10 +1604,57 @@
 
 - (void)addLongPressGestureEndEditingToView:(UIView *)view
 {
-    UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:recordEditor action:@selector(deactivateEditingClip)];
-    longPress.minimumPressDuration = 0.1;
+    UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:recordEditor action:@selector(deactivateEditingClipUnfocusTrack:)];
+    
+    longPress.minimumPressDuration = 0.3;
     
     [view addGestureRecognizer:longPress];
+    
+}
+
+#pragma mark - Editing Menu Actions
+
+- (IBAction)userDidAddMeasure:(id)sender
+{
+    DLog(@"User did add measure");
+    [recordEditor addClipInEditing];
+}
+
+- (IBAction)userDidCopyMeasure:(id)sender
+{
+    DLog(@"User did copy measure");
+    [self enablePaste];
+}
+
+- (IBAction)userDidPasteMeasure:(id)sender
+{
+    DLog(@"User did paste measure");
+    [self disablePaste];
+}
+
+- (IBAction)userDidEditMeasure:(id)sender
+{
+    DLog(@"User did edit measure");
+}
+
+- (IBAction)userDidSaveTrack:(id)sender
+{
+    DLog(@"User did save track");
+    
+    [recordEditor unfocusTrackHideEditingPanel];
+    [recordEditor deactivateEditingClip];
+}
+
+- (void)disablePaste
+{
+    [_pasteMeasureButton setEnabled:NO];
+    [_pasteMeasureButton setAlpha:0.5];
+}
+
+- (void)enablePaste
+{
+    [_pasteMeasureButton setEnabled:YES];
+    [_pasteMeasureButton setAlpha:1.0];
 }
 
 

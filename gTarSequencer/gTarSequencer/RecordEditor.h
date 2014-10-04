@@ -29,6 +29,7 @@
 - (void)drawGridOverlayLines;
 - (void)drawTickmarks;
 - (void)setMeasures:(int)newNumMeasures drawGrid:(BOOL)drawGrid;
+- (void)setContentVerticalOffset:(float)offsetY;
 
 // Playback
 - (void)stopRecordPlaybackAnimatePlayband:(BOOL)animate;
@@ -51,6 +52,8 @@
     NSTrack * editingTrack;
     NSClip * editingClip;
     NSClip * blinkingClip;
+    UIView * instrumentPanel;
+    UIView * editingPanel;
     UIView * editingClipView;
     UIView * editingClipLeftSlider;
     UIView * editingClipRightSlider;
@@ -63,9 +66,12 @@
     
 }
 
-- (id)initWithScrollView:(UIScrollView *)scrollView progressView:(UIView *)progress;
+- (id)initWithScrollView:(UIScrollView *)scrollView progressView:(UIView *)progress editingPanel:(UIView *)editingView instrumentPanel:(UIView *)instrumentView;
 - (void)clearAllSubviews;
+
 - (void)deactivateEditingClip;
+- (void)deactivateEditingClipUnfocusTrack:(UILongPressGestureRecognizer *)sender;
+- (void)unfocusTrackHideEditingPanel;
 
 - (void)setMeasures:(int)measures;
 
@@ -77,6 +83,8 @@
 
 - (float)getXPositionForClipBeat:(float)beat;
 - (float)getProgressXPositionForClipBeat:(float)beat;
+
+- (void)addClipInEditing;
 
 @property (weak, nonatomic) id<RecordEditorDelegate> delegate;
 

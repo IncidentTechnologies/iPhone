@@ -37,7 +37,7 @@
     }
 }
 
-- (bool)isScreenLarge
+- (BOOL)isScreenLarge
 {
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1) {
         
@@ -46,6 +46,15 @@
     }else{
         
         return [[UIScreen mainScreen] bounds].size.height == XBASE_LG;
+    }
+}
+
+- (float)getRecordedTrackScreenWidth
+{
+    if([self isScreenLarge]){
+        return 503.0;
+    }else{
+        return 415.0;
     }
 }
 

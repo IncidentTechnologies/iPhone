@@ -14,4 +14,6 @@
 - (float)getFullscreenHeight;
 - (BOOL)isScreenLarge;
 
+- (float)getRecordedTrackScreenWidth;
+
 @end

@@ -262,7 +262,6 @@
 		6D813EC918DA804100D29F48 /* VolumeKnobView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D813EC818DA804100D29F48 /* VolumeKnobView.mm */; };
 		6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704618CAAE560068CC92 /* Pinch_Icon.png */; };
 		6DA724B318E25B0700872705 /* RecordShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DA724B218E25B0700872705 /* RecordShareViewController.mm */; };
-		6DA724B518E25B2B00872705 /* RecordShareView_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B418E25B2B00872705 /* RecordShareView_4.xib */; };
 		6DA724B718E35C8700872705 /* RecordShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B618E35C8700872705 /* RecordShareView.xib */; };
 		6DA724B918E4D72F00872705 /* Share_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B818E4D72F00872705 /* Share_Icon.png */; };
 		6DA724BE18E6479500872705 /* Social_Email_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724BA18E6479500872705 /* Social_Email_Icon.png */; };
@@ -305,6 +304,9 @@
 		6DC9A2BA19B8F4E80099372E /* GatekeeperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC9A2B819B8F4E80099372E /* GatekeeperViewController.m */; };
 		6DC9A2BB19B8F4E80099372E /* GatekeeperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DC9A2B919B8F4E80099372E /* GatekeeperViewController.xib */; };
 		6DC9A2BF19B912850099372E /* CyclingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC9A2BE19B912850099372E /* CyclingTextField.m */; };
+		6DD142A719DF562B00E24384 /* Copy_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD142A519DF562B00E24384 /* Copy_Icon.png */; };
+		6DD142A819DF562B00E24384 /* Notes_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD142A619DF562B00E24384 /* Notes_Icon.png */; };
+		6DD142AC19DF5A7300E24384 /* Paste_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD142AA19DF5A7300E24384 /* Paste_Icon.png */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DEAB4BA18D78FF800833D9C /* Rock_ClosedHat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAB45D18D78FF700833D9C /* Rock_ClosedHat.mp3 */; };
@@ -784,7 +786,6 @@
 		6D85704618CAAE560068CC92 /* Pinch_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pinch_Icon.png; sourceTree = "<group>"; };
 		6DA724B118E25B0700872705 /* RecordShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordShareViewController.h; sourceTree = "<group>"; };
 		6DA724B218E25B0700872705 /* RecordShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordShareViewController.mm; sourceTree = "<group>"; };
-		6DA724B418E25B2B00872705 /* RecordShareView_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView_4.xib; sourceTree = "<group>"; };
 		6DA724B618E35C8700872705 /* RecordShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView.xib; sourceTree = "<group>"; };
 		6DA724B818E4D72F00872705 /* Share_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_Icon.png; sourceTree = "<group>"; };
 		6DA724BA18E6479500872705 /* Social_Email_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Social_Email_Icon.png; sourceTree = "<group>"; };
@@ -856,6 +857,9 @@
 		6DC9A2B919B8F4E80099372E /* GatekeeperViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GatekeeperViewController.xib; sourceTree = "<group>"; };
 		6DC9A2BD19B912850099372E /* CyclingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CyclingTextField.h; sourceTree = "<group>"; };
 		6DC9A2BE19B912850099372E /* CyclingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CyclingTextField.m; sourceTree = "<group>"; };
+		6DD142A519DF562B00E24384 /* Copy_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Copy_Icon.png; sourceTree = "<group>"; };
+		6DD142A619DF562B00E24384 /* Notes_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Notes_Icon.png; sourceTree = "<group>"; };
+		6DD142AA19DF5A7300E24384 /* Paste_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paste_Icon.png; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6DEAB45D18D78FF700833D9C /* Rock_ClosedHat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Rock_ClosedHat.mp3; sourceTree = "<group>"; };
@@ -1022,6 +1026,9 @@
 		580A52111864E0430077240B /* Logos | Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6DD142AA19DF5A7300E24384 /* Paste_Icon.png */,
+				6DD142A519DF562B00E24384 /* Copy_Icon.png */,
+				6DD142A619DF562B00E24384 /* Notes_Icon.png */,
 				6DFF6A0A19BA7505001A7E23 /* Bear_Brown.png */,
 				6D19EC3919B6A86700A963E4 /* FacebookIcon.jpg */,
 				6DA724BA18E6479500872705 /* Social_Email_Icon.png */,
@@ -1647,7 +1654,6 @@
 				6D1E5C1B19C127BB005956F4 /* MainEventController */,
 				6DA724B118E25B0700872705 /* RecordShareViewController.h */,
 				6DA724B218E25B0700872705 /* RecordShareViewController.mm */,
-				6DA724B418E25B2B00872705 /* RecordShareView_4.xib */,
 				6DA724B618E35C8700872705 /* RecordShareView.xib */,
 				6DA724C218E6493A00872705 /* ShareView.xib */,
 			);
@@ -2330,6 +2336,7 @@
 				6DEAB4D518D78FF800833D9C /* House_Kick.mp3 in Resources */,
 				58D617261863B8D7001EB327 /* Images.xcassets in Resources */,
 				6DEAB4CA18D78FF800833D9C /* Chiptune_Snare.mp3 in Resources */,
+				6DD142A819DF562B00E24384 /* Notes_Icon.png in Resources */,
 				6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */,
 				6DAA158F18C12525003DAB30 /* Sequencer_Icon58px.png in Resources */,
 				6D1269C019706C3100A2A612 /* DoubleBass_F.mp3 in Resources */,
@@ -2424,6 +2431,7 @@
 				6D126A521970720900A2A612 /* MiniBass_E.mp3 in Resources */,
 				6DEAB4C218D78FF800833D9C /* 808_Kick.mp3 in Resources */,
 				6DEAB4C018D78FF800833D9C /* 808_Clap.mp3 in Resources */,
+				6DD142AC19DF5A7300E24384 /* Paste_Icon.png in Resources */,
 				6D126A36197071D400A2A612 /* Pluck_C.mp3 in Resources */,
 				6DEAB4EE18D790F800833D9C /* Trombone_C.mp3 in Resources */,
 				6D126A811970724200A2A612 /* Juno_D#.mp3 in Resources */,
@@ -2505,13 +2513,13 @@
 				6D1269D119706C7100A2A612 /* Acoustic_A#.mp3 in Resources */,
 				6DEAB4C918D78FF800833D9C /* Chiptune_Siren.mp3 in Resources */,
 				6D1269AB19706C2C00A2A612 /* Guitar_G#.mp3 in Resources */,
+				6DD142A719DF562B00E24384 /* Copy_Icon.png in Resources */,
 				6D3D9DC518BC0F890048E908 /* RecordRedo_Icon.png in Resources */,
 				6DEAB4F118D790F800833D9C /* Trombone_G.mp3 in Resources */,
 				58241D7D188DE31000498DB5 /* sampleList.plist in Resources */,
 				6D12695E19706B0F00A2A612 /* Piano_D#.mp3 in Resources */,
 				6DEAB50818D7BB7C00833D9C /* HandDrum_Tom.mp3 in Resources */,
 				6D126A7F1970724200A2A612 /* Juno_C#.mp3 in Resources */,
-				6DA724B518E25B2B00872705 /* RecordShareView_4.xib in Resources */,
 				6D126A861970724200A2A612 /* Juno_G#.mp3 in Resources */,
 				6DEAB4CC18D78FF800833D9C /* Dubstep_Clap.mp3 in Resources */,
 				6D1269D219706C7100A2A612 /* Acoustic_A.mp3 in Resources */,

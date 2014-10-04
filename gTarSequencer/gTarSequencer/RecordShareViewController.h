@@ -76,6 +76,8 @@ extern NSUser * g_loggedInUser;
     RecordEditor * recordEditor;
     NSMutableArray * gridOverlayLines;
     BOOL isEditingOffset;
+    float measureWidth;
+    float trackViewVerticalOffset;
     
     // Playback
     AVAudioPlayer * audioPlayer;
@@ -115,12 +117,12 @@ extern NSUser * g_loggedInUser;
 @property (weak, nonatomic) IBOutlet UIButton * backButton;
 @property (weak, nonatomic) IBOutlet UIView * progressView;
 @property (weak, nonatomic) IBOutlet UIView * instrumentView;
+@property (weak, nonatomic) IBOutlet UIView * editingView;
 @property (weak, nonatomic) IBOutlet UIScrollView * trackView;
 @property (retain, nonatomic) UIView * progressViewIndicator;
 
 @property (weak, nonatomic) IBOutlet UIView * noSessionOverlay;
 @property (weak, nonatomic) IBOutlet UILabel * noSessionLabel;
-@property (weak, nonatomic) IBOutlet UILabel * processingLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton * shareEmailButton;
 @property (weak, nonatomic) IBOutlet UIButton * shareSMSButton;
@@ -140,5 +142,24 @@ extern NSUser * g_loggedInUser;
 
 @property (retain, nonatomic) NSSong * recordingSong;
 @property (retain, nonatomic) NSSongModel * songModel;
+
+// Editing panel
+@property (retain, nonatomic) IBOutlet UIButton * addMeasureButton;
+@property (retain, nonatomic) IBOutlet UIButton * duplicateMeasureButton;
+@property (retain, nonatomic) IBOutlet UIButton * pasteMeasureButton;
+@property (retain, nonatomic) IBOutlet UIButton * editMeasureButton;
+@property (retain, nonatomic) IBOutlet UIButton * saveTrackButton;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint * addMeasureWidth;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint * duplicateMeasureWidth;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint * pasteMeasureWidth;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint * editMeasureWidth;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint * saveTrackWidth;
+
+- (IBAction)userDidAddMeasure:(id)sender;
+- (IBAction)userDidCopyMeasure:(id)sender;
+- (IBAction)userDidPasteMeasure:(id)sender;
+- (IBAction)userDidEditMeasure:(id)sender;
+- (IBAction)userDidSaveTrack:(id)sender;
 
 @end
