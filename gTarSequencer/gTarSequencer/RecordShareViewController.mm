@@ -108,6 +108,7 @@
     
     [self clearTickmarks];
     [recordEditor clearAllSubviews];
+    [tracks removeAllObjects];
 }
 
 - (void)reloadInstruments
@@ -162,7 +163,8 @@
         [tracks addObject:track];
         
         // Behind the clips
-        [self addLongPressGestureEndEditingToView:track];
+        [self addLongPressGestureBeginEditingToView:track];
+        //[self addLongPressGestureEndEditingToView:track];
         
         i++;
     }
@@ -202,7 +204,7 @@
         
         [tracks addObject:track];
         
-        [self addLongPressGestureEndEditingToView:track];
+        //[self addLongPressGestureEndEditingToView:track];
     }
     
     [self setMeasures:MIN_MEASURES drawGrid:YES];
@@ -1605,6 +1607,40 @@
     return [instruments objectAtIndex:[self getIndexForInstrument:instId]];
 }
 
+- (NSString *)trackNameFromView:(UIView *)track
+{
+    int i = 0;
+    for(; i < [tracks count]; i++){
+        UIView * tv = [tracks objectAtIndex:i];
+        
+        if(tv == track){
+            break;
+        }
+    }
+    
+    if(i > [recordingSong.m_tracks count]){
+        return nil;
+    }else{
+        return [[recordingSong.m_tracks objectAtIndex:i] m_name];
+    }
+}
+
+- (UIView *)trackViewWithName:(NSString *)trackName
+{
+    int i = 0;
+    for(; i < [recordingSong.m_tracks count]; i++){
+        if([[[recordingSong.m_tracks objectAtIndex:i] m_name] isEqualToString:trackName]){
+            break;
+        }
+    }
+    
+    if(i >= [tracks count]){
+        return nil;
+    }else{
+        return [tracks objectAtIndex:i];
+    }
+}
+
 - (void)addLongPressGestureEndEditingToView:(UIView *)view
 {
     UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:recordEditor action:@selector(deactivateEditingClipUnfocusTrack:)];
@@ -1613,6 +1649,15 @@
     
     [view addGestureRecognizer:longPress];
     
+}
+
+- (void)addLongPressGestureBeginEditingToView:(UIView *)view
+{
+    UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:recordEditor action:@selector(trackLongPressEvent:)];
+    
+    longPress.minimumPressDuration = 0.3;
+    
+    [view addGestureRecognizer:longPress];
 }
 
 #pragma mark - Editing Menu Actions

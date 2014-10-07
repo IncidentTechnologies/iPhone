@@ -405,7 +405,7 @@
         
         // Don't reset custom pattern
         if([clip.m_name isEqualToString:PATTERN_E]){
-            break;
+            continue;
         }
         
         [clip clearNotes];

@@ -21,8 +21,10 @@
 
 // Data access
 - (NSTrack *)trackWithName:(NSString *)trackName;
+- (UIView *)trackViewWithName:(NSString *)trackName;
 - (NSTrack *)instTrackAtId:(long)instId;
 - (void)regenerateDataForTrack:(NSTrack *)track;
+- (NSString *)trackNameFromView:(UIView *)track;
 
 // Super-drawing
 - (void)redrawProgressView;
@@ -57,6 +59,7 @@
     NSClip * blinkingClip;
     UIView * instrumentPanel;
     UIView * editingPanel;
+    UIView * editingTrackView;
     UIView * editingClipView;
     UIView * editingClipLeftSlider;
     UIView * editingClipRightSlider;
@@ -69,6 +72,8 @@
     float editingMeasurePanFirstX;
     NSMutableArray * editingMeasureNoteButtons;
     NSMutableArray * editingMeasureNoteOn;
+    
+    BOOL isTrackViewPressed;
     
     HorizontalAdjustor * horizontalAdjustor;
     float lastDiff;
@@ -97,6 +102,8 @@
 
 - (void)addClipInEditing;
 - (void)selectMeasureInEditing;
+
+- (void)trackLongPressEvent:(UILongPressGestureRecognizer *)recognizer;
 
 @property (weak, nonatomic) id<RecordEditorDelegate> delegate;
 
