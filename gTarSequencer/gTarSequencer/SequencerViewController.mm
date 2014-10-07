@@ -395,6 +395,7 @@
         [playControlViewController setShareMode:NO];
         [recordShareController stopRecordPlayback];
         [seqSetViewController startSoundMaster];
+        [recordShareController userDidSaveTrack:nil];
     }
     
     // Lock record?

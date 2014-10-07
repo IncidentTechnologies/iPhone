@@ -265,6 +265,7 @@
     
     // ensure record playback gbegets refreshed
     [self stopRecordPlayback];
+
 }
 
 - (void)regenerateDataForTrack:(NSTrack *)track
@@ -1584,6 +1585,7 @@
 #pragma mark - Other Listeners
 - (IBAction)userDidBack:(id)sender
 {
+    [self userDidSaveTrack:nil];
     [delegate viewSeqSetWithAnimation:NO];
 }
 

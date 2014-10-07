@@ -99,6 +99,7 @@ extern NSUser * g_loggedInUser;
 - (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
 
 - (IBAction)userDidBack:(id)sender;
+- (IBAction)userDidSaveTrack:(id)sender;
 - (BOOL)showHideSessionOverlay;
 - (void)openShareScreen;
 
