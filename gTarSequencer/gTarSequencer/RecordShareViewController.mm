@@ -910,16 +910,19 @@
 #pragma mark - Playband
 -(void)resetPlayband
 {
+    float fretWidth = measureWidth / FRETS_ON_GTAR;
+    
     measurePlaybandView.userInteractionEnabled = NO;
     
     if(!isPlaybandAnimating){
-        [playbandView setFrame:CGRectMake(0,0,playbandView.frame.size.width,playbandView.frame.size.height)];
+        // Start offscreen
+        [playbandView setFrame:CGRectMake(-1*fretWidth,0,playbandView.frame.size.width,playbandView.frame.size.height)];
         
         if(measurePlaybandView){
             [measurePlaybandView removeFromSuperview];
         }
         
-        CGRect measurePlaybandViewFrame = CGRectMake(0,1,4,trackView.frame.size.height);
+        CGRect measurePlaybandViewFrame = CGRectMake(-1*fretWidth,1,4,trackView.frame.size.height);
         measurePlaybandView = [[UIView alloc] initWithFrame:measurePlaybandViewFrame];
         [measurePlaybandView setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.7]];
         [trackView addSubview:measurePlaybandView];
@@ -937,8 +940,8 @@
     
     float fretWidth = measureWidth / FRETS_ON_GTAR;
     
-    float pb_x = ((m*measureWidth+f*fretWidth)/((numMeasures)*measureWidth))*containerWidth;
-    float mpb_x = m*measureWidth+f*fretWidth;
+    float pb_x = ((m*measureWidth+(f-1)*fretWidth)/((numMeasures)*measureWidth))*containerWidth;
+    float mpb_x = m*measureWidth+(f-1)*fretWidth;
     
     float max_measure = [self countMeasuresFromRecordedSong]-1;
     float max_fret = FRETS_ON_GTAR-1.0;
@@ -1024,7 +1027,7 @@
     isPlaybandAnimating = NO;
     
     if(animate){
-        [self movePlaybandToMeasure:[self countMeasuresFromRecordedSong]-1 andFret:FRETS_ON_GTAR-1 andHide:YES];
+        [self movePlaybandToMeasure:[self countMeasuresFromRecordedSong]-1 andFret:FRETS_ON_GTAR andHide:YES];
     }else{
         [self resetPlayband];
     }

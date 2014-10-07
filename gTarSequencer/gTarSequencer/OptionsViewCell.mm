@@ -653,7 +653,7 @@
         {
             self.panStartPoint = [recognizer translationInView:self.container];
             self.startingLeftConstraint = self.leftConstraint.constant;
-            DLog(@"Pan Began at %@", NSStringFromCGPoint(self.panStartPoint));
+            //DLog(@"Pan Began at %@", NSStringFromCGPoint(self.panStartPoint));
             
             break;
         }
@@ -663,7 +663,7 @@
             CGPoint currentPoint = [recognizer translationInView:self.container];
             CGFloat deltaX = currentPoint.x - self.panStartPoint.x;
             
-            DLog(@"Pan Moved %f", deltaX);
+            //DLog(@"Pan Moved %f", deltaX);
             BOOL panningLeft = NO;
             if (currentPoint.x < self.panStartPoint.x) {
                 panningLeft = YES;
@@ -715,7 +715,7 @@
                 [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
             }
             
-            DLog(@"Pan Ended");
+            //DLog(@"Pan Ended");
             break;
             
         case UIGestureRecognizerStateCancelled:
@@ -727,7 +727,7 @@
                 //Cell was open - reset to the open state
                 [self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:YES];
             }
-            DLog(@"Pan Cancelled");
+            //DLog(@"Pan Cancelled");
             break;
             
         default:
