@@ -260,9 +260,6 @@
     
     [self drawPatternsOnMeasures];
     
-    // record the m4a
-    // [self recordActiveSongToFileWithTempo:song.m_tempo];
-    
     // reset the progress bar on top
     [self resetProgressView];
     
@@ -520,7 +517,11 @@
             int clipEndMeasure = (int)[clip getMeasureForBeat:clip.m_endbeat];
             int fillMeasures = clipEndMeasure - clipStartMeasure; // Total measures
             
-            int fillOffset = patternLength - clipStartMeasure % patternLength;
+            // Adjust for edited pattern
+            patternLength = (patternLength == 0) ? (clipEndMeasure-clipStartMeasure) : patternLength;
+            
+            // Redraw tickmarks while deleting
+            int fillOffset = (patternLength == 0) ? 1.0 : patternLength - clipStartMeasure % patternLength;
             
             // Start filling every % patternLength == 0 measures;
             for(int m = clipStartMeasure+fillOffset; m <= clipStartMeasure+fillMeasures; m+= patternLength)
@@ -1635,6 +1636,8 @@
 - (IBAction)userDidEditMeasure:(id)sender
 {
     DLog(@"User did edit measure");
+    [recordEditor selectMeasureInEditing];
+    [self disableEdit];
 }
 
 - (IBAction)userDidSaveTrack:(id)sender
@@ -1643,6 +1646,7 @@
     
     [recordEditor unfocusTrackHideEditingPanel];
     [recordEditor deactivateEditingClip];
+    [self enableEdit];
 }
 
 - (void)disablePaste
@@ -1655,6 +1659,18 @@
 {
     [_pasteMeasureButton setEnabled:YES];
     [_pasteMeasureButton setAlpha:1.0];
+}
+
+- (void)disableEdit
+{
+    [_editMeasureButton setEnabled:NO];
+    [_editMeasureButton setAlpha:0.5];
+}
+
+- (void)enableEdit
+{
+    [_editMeasureButton setEnabled:YES];
+    [_editMeasureButton setAlpha:1.0];
 }
 
 

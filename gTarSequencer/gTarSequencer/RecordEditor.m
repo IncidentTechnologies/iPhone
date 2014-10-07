@@ -12,6 +12,8 @@
 #define PATTERN_B @"-B"
 #define PATTERN_C @"-C"
 #define PATTERN_D @"-D"
+#define PATTERN_E @"-★" // Custom
+#define PATTERN_E_PENDING @"-E" // Custom pending
 #define PATTERN_OFF @"-ø"
 
 #define PATTERN_LETTER_WIDTH 30.0
@@ -21,6 +23,7 @@
 #define B_COLOR [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.5]
 #define C_COLOR [UIColor colorWithRed:0/255.0 green:161/255.0 blue:222/255.0 alpha:0.5]
 #define D_COLOR [UIColor colorWithRed:137/255.0 green:225/255.0 blue:247/255.0 alpha:0.5]
+#define E_COLOR [UIColor colorWithRed:0/255.0 green:140/255.0 blue:217/255.0 alpha:0.5]
 #define OFF_COLOR [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:0.5]
 
 #define EDITING_COLOR [UIColor colorWithRed:148/255.0 green:102/255.0 blue:176/255.0 alpha:0.5]
@@ -29,6 +32,7 @@
 #define B_COLOR_SOLID [UIColor colorWithRed:71/255.0 green:161/255.0 blue:184/255.0 alpha:1.0]
 #define C_COLOR_SOLID [UIColor colorWithRed:64/255.0 green:145/255.0 blue:175/255.0 alpha:1.0]
 #define D_COLOR_SOLID [UIColor colorWithRed:133/255.0 green:177/255.0 blue:188/255.0 alpha:1.0]
+#define E_COLOR_SOLID [UIColor colorWithRed:0/255.0 green:140/255.0 blue:217/255.0 alpha:1.0]
 #define OFF_COLOR_SOLID [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1.0]
 
 #define MIN_TRACK_WIDTH 30.0
@@ -114,6 +118,8 @@
         [clipView setBackgroundColor:C_COLOR];
     }else if([clip.m_name isEqualToString:PATTERN_D]){
         [clipView setBackgroundColor:D_COLOR];
+    }else{
+        [clipView setBackgroundColor:E_COLOR];
     }
     
     [trackView addSubview:clipView];
@@ -178,8 +184,10 @@
     [view addSubview:patternLetter];
 }
 
+// Draw all the notes from a clip
 - (void)drawPatternNotesForClip:(NSClip *)clip inView:(UIView *)view
 {
+    
     if(clip.m_muted){
         return;
     }
@@ -206,18 +214,20 @@
     int f, s;
     for(NSNote * note in clip.m_notes){
         
-        s = STRINGS_ON_GTAR - 1 - note.m_stringvalue;
-        f = (int)(note.m_beatstart * 4.0);
-        
-        // Adjust frame:
-        noteFrame.origin.x = f*noteFrameWidth+1.0;
-        noteFrame.origin.y = s*noteFrameHeight+noteVerticalPadding;
-        
-        /*CGContextSetFillColorWithColor(context, [UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]].CGColor);  // Get color for that string and fill
-        */
-        CGContextSetFillColorWithColor(context,[UIColor colorWithRed:1 green:1 blue:1 alpha:0.3].CGColor);
-        
-        CGContextFillEllipseInRect(context, noteFrame);
+        if(note.m_beatstart < clip.m_endbeat){
+            s = STRINGS_ON_GTAR - 1 - note.m_stringvalue;
+            f = (int)((note.m_beatstart - clip.m_startbeat) * 4.0);
+            
+            // Adjust frame:
+            noteFrame.origin.x = f*noteFrameWidth+1.0;
+            noteFrame.origin.y = s*noteFrameHeight+noteVerticalPadding;
+            
+            //CGContextSetFillColorWithColor(context, [UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]].CGColor);  // Get color for that string and fill
+            
+            CGContextSetFillColorWithColor(context,[UIColor colorWithRed:1 green:1 blue:1 alpha:0.3].CGColor);
+            
+            CGContextFillEllipseInRect(context, noteFrame);
+        }
     }
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -229,7 +239,7 @@
     
 }
 
-
+// Draw notes from a pattern without finalizing beat situation
 - (void)drawTempPatternNotesForClip:(NSClip *)clip inView:(UIView *)view withPattern:(NSPattern *)pattern patternLength:(float)patternLength
 {
     if(clip.m_muted){
@@ -322,7 +332,11 @@
         
         NSTrack * instTrack = [delegate instTrackAtId:editingTrack.m_instrument.m_id];
         
-        [self drawTempPatternNotesForClip:editingClip inView:editingClipView withPattern:[instTrack getPatternByName:newPattern] patternLength:[instTrack getPatternLengthByName:newPattern]];
+        NSPattern * pattern = [instTrack getPatternByName:newPattern];
+        
+        if(pattern != nil){
+            [self drawTempPatternNotesForClip:editingClip inView:editingClipView withPattern:[instTrack getPatternByName:newPattern] patternLength:[instTrack getPatternLengthByName:newPattern]];
+        }
     }
 }
 
@@ -339,7 +353,15 @@
         //NSString * clipPattern = (clip == editingClip) ? newPattern : clip.m_name;
         NSString * clipPattern = clip.m_name;
         
-        [self drawTempPatternNotesForClip:clip inView:clipView withPattern:[instTrack getPatternByName:clipPattern] patternLength:[instTrack getPatternLengthByName:clipPattern]];
+        if(![clipPattern isEqualToString:PATTERN_E]){
+        
+            [self drawTempPatternNotesForClip:clip inView:clipView withPattern:[instTrack getPatternByName:clipPattern] patternLength:[instTrack getPatternLengthByName:clipPattern]];
+            
+        }else{
+            
+            [self drawPatternNotesForClip:clip inView:clipView];
+            
+        }
     }
 }
 
@@ -464,6 +486,7 @@
 {
     [horizontalAdjustor hideControls];
     
+    [self clearEditingMeasure:YES];
     [self mergeNeighboringIdenticalClips];
     [self correctMeasureLengths];
     [self shrinkExpandMeasuresOnScreen];
@@ -491,6 +514,8 @@
             oldColor = C_COLOR;
         }else if([editingClip.m_name isEqualToString:PATTERN_D]){
             oldColor = D_COLOR;
+        }else{
+            oldColor = E_COLOR;
         }
         
         [UIView animateWithDuration:0.3 animations:^(void){
@@ -645,7 +670,11 @@
 {
     NSString * newPattern;
     
-    if(editingClip.m_muted){
+    if([editingClip.m_name isEqualToString:PATTERN_E_PENDING]){
+        newPattern = PATTERN_E;
+        [editingClip changePattern:PATTERN_E];
+        editingClip.m_muted = NO;
+    }else if(editingClip.m_muted){
         newPattern = PATTERN_A;
         [editingClip changePattern:PATTERN_A];
         editingClip.m_muted = NO;
@@ -661,9 +690,16 @@
     }else if([editingClip.m_name isEqualToString:PATTERN_D]){
         newPattern = PATTERN_OFF;
         editingClip.m_muted = YES;
+    }else if([editingClip.m_name isEqualToString:PATTERN_E]){
+        newPattern = PATTERN_A;
+        [editingClip changePattern:PATTERN_A];
+        [self clearEditingMeasure:YES];
     }
     
-    [self redrawEditingPatternNotesWithPattern:newPattern];
+    // Don't override data for custom pattern
+    if(![newPattern isEqualToString:PATTERN_E]){
+        [self redrawEditingPatternNotesWithPattern:newPattern];
+    }
     
     newPattern = [newPattern stringByReplacingOccurrencesOfString:@"-" withString:@""];
     
@@ -816,6 +852,9 @@
     // Redraw pattern notes
     [self redrawAllPatternNotes];
     
+    // Clear editing measure
+    [self clearEditingMeasure:YES];
+    
     lastDiff = diff;
 }
 
@@ -850,6 +889,9 @@
     // Adjust add clip measure
     [self shrinkExpandMeasuresOnScreen];
     [delegate drawTickmarks];
+    
+    // Clear editing measure
+    [self clearEditingMeasure:YES];
     
     lastDiff = diff;
     
@@ -972,6 +1014,179 @@
         [self redrawAllPatternNotes];
     }else{
         DLog(@"ERROR: Sender Track Name is nil");
+    }
+}
+
+//
+// Edit Clips
+//
+- (void)clearEditingMeasure:(BOOL)hideInterface
+{
+    if(editingMeasureOverlay != nil){
+        [editingMeasureOverlay removeGestureRecognizer:editingMeasurePan];
+        [editingMeasureOverlay removeFromSuperview];
+        editingMeasureOverlay = nil;
+    }
+    
+    if(hideInterface){
+        [self hideEditingMeasureInterface];
+    }
+        
+    [delegate enableEdit];
+}
+
+- (void)selectMeasureInEditing
+{
+    // Clear the pattern preset
+    [editingClip changePattern:PATTERN_E_PENDING];
+    
+    [self changeLetterPattern:nil];
+    
+    // Select a draggable region to edit
+    [self clearEditingMeasure:NO];
+    
+    CGRect editingMeasureOverlayFrame = CGRectMake(0,0,MIN(measureWidth,editingClipView.frame.size.width)+1.0,measureHeight);
+    editingMeasureOverlay = [[UIView alloc] initWithFrame:editingMeasureOverlayFrame];
+    
+    [editingMeasureOverlay setBackgroundColor:E_COLOR];
+    
+    [editingClipView addSubview:editingMeasureOverlay];
+    
+    // Add drag gesture
+    editingMeasurePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panEditingMeasure:)];
+    [editingMeasureOverlay addGestureRecognizer:editingMeasurePan];
+    
+    // Show editing interface with selected region
+    [self showEditingMeasureInterface];
+    
+}
+
+- (void)showEditingMeasureInterface
+{
+    if(editingMeasureInterface == nil){
+        
+        [self initEditingMeasureOverlay];
+        
+    }
+    
+    [self drawEditingMeasureNotes];
+
+    // Fade in
+    [editingMeasureInterface setAlpha:0.0];
+    [editingMeasureInterface setHidden:NO];
+    
+    [UIView animateWithDuration:0.5 animations:^(void){
+        [editingMeasureInterface setAlpha:1.0];
+    }completion:^(BOOL finished){
+        
+    }];
+}
+
+- (void)drawEditingMeasureNotes
+{
+    
+    [self clearEditingMeasureNotes];
+    
+    // Turn on/off notes for the appropriate measure
+    float measureStartbeat = [self getBeatFromXPosition:editingMeasureOverlay.frame.origin.x+editingClipView.frame.origin.x];
+    
+    float measureEndbeat = measureStartbeat+4.0;
+    
+    for(NSNote * note in editingClip.m_notes){
+        if(note.m_beatstart >= measureStartbeat && note.m_beatstart <= measureEndbeat){
+            
+            int s = STRINGS_ON_GTAR - 1 - note.m_stringvalue;
+            int f = (int)((note.m_beatstart - measureStartbeat) * 4.0);
+            
+            DLog(@"Note on at %i, %i",s,f);
+            
+            UIButton * noteButton = [editingMeasureNoteButtons objectForKey:[NSString stringWithFormat:@"s%if%i",s,f]];
+            
+            [noteButton setBackgroundColor:[UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]]];
+            
+        }
+    }
+    
+}
+
+- (void)initEditingMeasureOverlay
+{
+    float interfaceHeight = 63.0;
+    float interfacePadding = 7.0;
+    float interfaceBottomPadding = 7.0;
+    
+    CGRect interfaceFrame = CGRectMake(instrumentPanel.frame.size.width+interfacePadding,interfaceHeight,editingPanel.frame.size.width-instrumentPanel.frame.size.width-2*interfacePadding,editingPanel.frame.size.height-interfaceHeight-interfaceBottomPadding);
+    
+    editingMeasureNoteButtons = [[NSMutableDictionary alloc] init];
+    editingMeasureInterface = [[UIView alloc] initWithFrame:interfaceFrame];
+    
+    [editingPanel addSubview:editingMeasureInterface];
+    
+    // Add buttons
+    float notePad = 1.0;
+    float noteWidth = interfaceFrame.size.width/FRETS_ON_GTAR - notePad;
+    float noteHeight = interfaceFrame.size.height/STRINGS_ON_GTAR - notePad;
+    
+    for(int s = 0; s < STRINGS_ON_GTAR; s++){
+        for(int f = 0; f < FRETS_ON_GTAR; f++){
+            UIButton * noteButton = [[UIButton alloc] initWithFrame:CGRectMake(f*noteWidth+f*notePad,s*noteHeight+s*notePad,noteWidth,noteHeight)];
+            
+            noteButton.layer.cornerRadius = 1.0f;
+            
+            [editingMeasureInterface addSubview:noteButton];
+            
+            [editingMeasureNoteButtons setObject:noteButton forKey:[NSString stringWithFormat:@"s%if%i",s,f]];
+        }
+    }
+}
+
+- (void)clearEditingMeasureNotes
+{
+    for(id nb in editingMeasureNoteButtons){
+        
+        UIButton * measureButton = [editingMeasureNoteButtons objectForKey:nb];
+        
+        [measureButton setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]];
+    }
+}
+
+- (void)hideEditingMeasureInterface
+{
+    // Fade out
+    [UIView animateWithDuration:0.5 animations:^(void){
+        [editingMeasureInterface setAlpha:0.0];
+    }completion:^(BOOL finished){
+        [editingMeasureInterface setHidden:YES];
+    }];
+}
+
+- (void)panEditingMeasure:(UIPanGestureRecognizer *)sender
+{
+    CGPoint newPoint = [sender translationInView:editingClipView];
+    
+    if([sender state] == UIGestureRecognizerStateBegan){
+        editingMeasurePanFirstX = editingMeasureOverlay.frame.origin.x;
+    }
+    
+    float minX = 0.0;
+    float maxX = MAX(editingClipView.frame.size.width-measureWidth,0.0);
+    float newX = newPoint.x + editingMeasurePanFirstX;
+    
+    // wrap to boundaries
+    if(newX < minX){
+        newX=minX;
+    }
+    
+    if(newX > maxX){
+        newX=maxX;
+    }
+    
+    [self drawEditingMeasureNotes];
+    
+    if(newX >= minX && newX <= maxX){
+        CGRect newFrame = CGRectMake(newX,editingMeasureOverlay.frame.origin.y,editingMeasureOverlay.frame.size.width,editingMeasureOverlay.frame.size.height);
+        
+        [editingMeasureOverlay setFrame:newFrame];
     }
 }
 
@@ -1317,29 +1532,6 @@
     
     float maxBeat = [self getSongMaxBeat];
     int newNumMeasures = ceil(maxBeat / 4.0);
-    
-    // count the maximum measure
-    // make sure it's not muted
-    /*for(id trackName in trackclips){
-       // NSMutableArray * clipArray = [trackclips objectForKey:trackName];
-        
-        NSMutableArray * clipArray = [[delegate trackWithName:(NSString *)trackName] m_clips];
-        NSClip * lastClip = [clipArray lastObject];
-        //UIView * lastClipView = [clipArray lastObject];
-        
-        // Use the second to last muted clip if a lot of editing is going on
-        if(lastClip.m_muted && [clipArray count] > 1){
-            lastClip = [clipArray objectAtIndex:([clipArray count]-2)];
-        }
-        
-        if(!lastClip.m_muted){
-            //[self getBeatFromXPosition:lastClipView.frame.origin.x+lastClipView.frame.size.width]
-            maxBeat = MAX(maxBeat, lastClip.m_endbeat);
-        }
-        
-    }
-    */
-    
     
     // call delegate set measures
     // even if it's redundant, because editing might be processing

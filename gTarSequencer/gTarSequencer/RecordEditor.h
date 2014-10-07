@@ -34,6 +34,9 @@
 // Playback
 - (void)stopRecordPlaybackAnimatePlayband:(BOOL)animate;
 
+// Editing panel
+- (void)enableEdit;
+
 @end
 
 @interface RecordEditor : NSObject <HorizontalAdjustorDelegate>
@@ -59,6 +62,13 @@
     UIView * editingClipRightSlider;
     UILabel * editingPatternLetter;
     UIButton * editingPatternLetterOverlay;
+    
+    UIView * editingMeasureOverlay;
+    UIView * editingMeasureInterface;
+    UIPanGestureRecognizer * editingMeasurePan;
+    float editingMeasurePanFirstX;
+    NSMutableDictionary * editingMeasureNoteButtons;
+    
     HorizontalAdjustor * horizontalAdjustor;
     float lastDiff;
     
@@ -85,6 +95,7 @@
 - (float)getProgressXPositionForClipBeat:(float)beat;
 
 - (void)addClipInEditing;
+- (void)selectMeasureInEditing;
 
 @property (weak, nonatomic) id<RecordEditorDelegate> delegate;
 

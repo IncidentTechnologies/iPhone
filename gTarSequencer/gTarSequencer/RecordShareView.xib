@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -78,7 +79,7 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41Y-tr-F90">
                                     <rect key="frame" x="16" y="8" width="70" height="46"/>
-                                    <color key="backgroundColor" red="0.74117647058823533" green="0.83529411764705885" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.41176470588235292" green="0.83921568627450982" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="46" id="fnN-xn-0rk"/>
                                         <constraint firstAttribute="width" constant="70" id="tqw-tI-MsU"/>
@@ -123,7 +124,7 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UpY-k3-0jr">
                                     <rect key="frame" x="250" y="8" width="70" height="46"/>
-                                    <color key="backgroundColor" red="0.41176470590000003" green="0.83921568629999999" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.27058823529411763" green="0.49803921568627452" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="70" id="FFN-pZ-7Fp"/>
                                         <constraint firstAttribute="height" constant="46" id="mLK-kM-kAv"/>
@@ -232,6 +233,8 @@
             <constraints>
                 <constraint firstItem="ylG-Ho-17g" firstAttribute="leading" secondItem="TgF-Au-e5Z" secondAttribute="leading" id="0gD-Fp-OgN"/>
                 <constraint firstItem="I49-dW-8TD" firstAttribute="leading" secondItem="TgF-Au-e5Z" secondAttribute="leading" constant="62" id="0z8-W9-nSU"/>
+                <constraint firstItem="occ-jE-SpO" firstAttribute="leading" secondItem="TgF-Au-e5Z" secondAttribute="leading" id="7f8-Uo-wNy"/>
+                <constraint firstAttribute="trailing" secondItem="occ-jE-SpO" secondAttribute="trailing" id="AQ3-AW-R80"/>
                 <constraint firstAttribute="trailing" secondItem="jJW-vp-Zbc" secondAttribute="trailing" id="CPY-8Q-Hd2"/>
                 <constraint firstItem="jJW-vp-Zbc" firstAttribute="leading" secondItem="TgF-Au-e5Z" secondAttribute="leading" constant="66" id="Tbu-vh-Wab"/>
                 <constraint firstAttribute="trailing" secondItem="ylG-Ho-17g" secondAttribute="trailing" id="jqV-0t-rut"/>

@@ -364,9 +364,10 @@
         //[recordShareController reloadInstruments];
         [self stopAll];
         
-        if(recordingSong != nil){
-            //SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-            //[recordShareController loadPattern:patternData withTempo:[playControlViewController getTempo] andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+        // Recording song will otherwise get loaded
+        // && recordingSong == nil
+        if(loadedSong != nil){
+            [recordShareController loadSong:loadedSong andSoundMaster:[seqSetViewController getSoundMaster] activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
         }
         
         if([recordShareController showHideSessionOverlay]){
@@ -859,7 +860,11 @@
                 
                 [recordShareController loadSong:recordingSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
                 
+                loadedSong = recordingSong;
+                recordingSong = nil;
+                
                 [self setActiveSong:recordingSong.m_title];
+
             }
             
             if(animate){

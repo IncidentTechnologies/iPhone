@@ -24,6 +24,8 @@
 
 @synthesize m_track;
 
+#define PATTERN_E @"-★" // Custom
+
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
     if (xmpNode == nil){
@@ -400,6 +402,11 @@
 {
     
     for(NSClip * clip in self.m_clips){
+        
+        // Don't reset custom pattern
+        if([clip.m_name isEqualToString:PATTERN_E]){
+            break;
+        }
         
         [clip clearNotes];
         
