@@ -1098,11 +1098,16 @@
             int s = STRINGS_ON_GTAR - 1 - note.m_stringvalue;
             int f = (int)((note.m_beatstart - measureStartbeat) * 4.0);
             
-            DLog(@"Note on at %i, %i",s,f);
-            
-            UIButton * noteButton = [editingMeasureNoteButtons objectForKey:[NSString stringWithFormat:@"s%if%i",s,f]];
-            
-            [noteButton setBackgroundColor:[UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]]];
+            if(s < STRINGS_ON_GTAR && f < FRETS_ON_GTAR){
+                
+                //DLog(@"Note on at %i, %i",s,f);
+                
+                UIButton * noteButton = [editingMeasureNoteButtons objectAtIndex:s*FRETS_ON_GTAR+f];
+                
+                [noteButton setBackgroundColor:[UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]]];
+                
+                [editingMeasureNoteOn setObject:[NSNumber numberWithBool:YES] atIndexedSubscript:s*FRETS_ON_GTAR+f];
+            }
             
         }
     }
@@ -1117,7 +1122,8 @@
     
     CGRect interfaceFrame = CGRectMake(instrumentPanel.frame.size.width+interfacePadding,interfaceHeight,editingPanel.frame.size.width-instrumentPanel.frame.size.width-2*interfacePadding,editingPanel.frame.size.height-interfaceHeight-interfaceBottomPadding);
     
-    editingMeasureNoteButtons = [[NSMutableDictionary alloc] init];
+    editingMeasureNoteOn = [[NSMutableArray alloc] init];
+    editingMeasureNoteButtons = [[NSMutableArray alloc] init];
     editingMeasureInterface = [[UIView alloc] initWithFrame:interfaceFrame];
     
     [editingPanel addSubview:editingMeasureInterface];
@@ -1135,18 +1141,23 @@
             
             [editingMeasureInterface addSubview:noteButton];
             
-            [editingMeasureNoteButtons setObject:noteButton forKey:[NSString stringWithFormat:@"s%if%i",s,f]];
+            [editingMeasureNoteButtons addObject:noteButton];
+            [editingMeasureNoteOn addObject:[NSNumber numberWithBool:NO]];
+            
+            [noteButton addTarget:self action:@selector(toggleMeasureNote:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
 }
 
 - (void)clearEditingMeasureNotes
 {
-    for(id nb in editingMeasureNoteButtons){
-        
-        UIButton * measureButton = [editingMeasureNoteButtons objectForKey:nb];
+    for(UIButton * measureButton in editingMeasureNoteButtons){
         
         [measureButton setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]];
+    }
+    
+    for(int i = 0; i < [editingMeasureNoteOn count]; i++){
+        [editingMeasureNoteOn setObject:[NSNumber numberWithBool:NO] atIndexedSubscript:i];
     }
 }
 
@@ -1158,6 +1169,37 @@
     }completion:^(BOOL finished){
         [editingMeasureInterface setHidden:YES];
     }];
+}
+
+- (void)toggleMeasureNote:(id)sender
+{
+    int buttonIndex = [editingMeasureNoteButtons indexOfObject:sender];
+    
+    int s = floor(buttonIndex / FRETS_ON_GTAR);
+    int f = buttonIndex - s * FRETS_ON_GTAR;
+    
+    float fretWidth = editingMeasureOverlay.frame.size.width / FRETS_ON_GTAR;
+    float frameBase = round(editingMeasureOverlay.frame.origin.x / fretWidth) * fretWidth;
+    
+    float beat = [self getBeatFromXPosition:editingClipView.frame.origin.x+frameBase+f*fretWidth];
+
+    
+    BOOL noteOn = [[editingMeasureNoteOn objectAtIndex:s*FRETS_ON_GTAR+f] boolValue];
+    
+    if(noteOn){
+        [sender setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]];
+        [self turnNoteOffForEditingClipAtBeat:beat atString:s];
+    }else{
+        [sender setBackgroundColor:[UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]]];
+        [self turnNoteOnForEditingClipAtBeat:beat atString:s];
+    }
+    
+    [editingMeasureNoteOn setObject:[NSNumber numberWithBool:!noteOn] atIndexedSubscript:s*FRETS_ON_GTAR+f];
+    
+    // Redraw pattern
+    [self clearPatternNotesForEditingClip];
+    [self drawPatternNotesForClip:editingClip inView:editingClipView];
+    
 }
 
 - (void)panEditingMeasure:(UIPanGestureRecognizer *)sender
@@ -1172,6 +1214,14 @@
     float maxX = MAX(editingClipView.frame.size.width-measureWidth,0.0);
     float newX = newPoint.x + editingMeasurePanFirstX;
     
+    if([sender state] == UIGestureRecognizerStateEnded){
+        
+        float fretWidth = editingMeasureOverlay.frame.size.width / FRETS_ON_GTAR;
+        float frameBase = round(editingMeasureOverlay.frame.origin.x / fretWidth) * fretWidth;
+        
+        newX = frameBase;
+    }
+    
     // wrap to boundaries
     if(newX < minX){
         newX=minX;
@@ -1184,10 +1234,31 @@
     [self drawEditingMeasureNotes];
     
     if(newX >= minX && newX <= maxX){
+        
         CGRect newFrame = CGRectMake(newX,editingMeasureOverlay.frame.origin.y,editingMeasureOverlay.frame.size.width,editingMeasureOverlay.frame.size.height);
         
         [editingMeasureOverlay setFrame:newFrame];
     }
+    
+    
+}
+
+- (void)turnNoteOnForEditingClipAtBeat:(float)beat atString:(long)string
+{
+    DLog(@"Add note for string %li at beat %f",string,beat);
+    
+    NSNote * newNote = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%li",STRINGS_ON_GTAR-string-1] beatstart:beat];
+    
+    [editingClip addNote:newNote];
+    
+    
+}
+
+- (void)turnNoteOffForEditingClipAtBeat:(float)beat atString:(long)string
+{
+    DLog(@"Remove note at beat %f for string %li",beat,string);
+    
+    [editingClip removeNoteAtBeat:beat atValue:STRINGS_ON_GTAR-string-1];
 }
 
 //

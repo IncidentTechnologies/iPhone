@@ -61,6 +61,8 @@
 
 - (void)addNote:(NSNote *)note;
 
+- (void)removeNoteAtBeat:(float)beat atValue:(long)value;
+
 - (void)clearNotes;
 
 - (void)setMute:(bool)muted;

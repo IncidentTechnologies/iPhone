@@ -67,7 +67,8 @@
     UIView * editingMeasureInterface;
     UIPanGestureRecognizer * editingMeasurePan;
     float editingMeasurePanFirstX;
-    NSMutableDictionary * editingMeasureNoteButtons;
+    NSMutableArray * editingMeasureNoteButtons;
+    NSMutableArray * editingMeasureNoteOn;
     
     HorizontalAdjustor * horizontalAdjustor;
     float lastDiff;
