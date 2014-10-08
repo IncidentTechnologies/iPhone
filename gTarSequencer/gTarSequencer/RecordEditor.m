@@ -1294,7 +1294,6 @@
 
 - (void)drawEditingMeasureNotes
 {
-    
     [self clearEditingMeasureNotes];
     
     // Turn on/off notes for the appropriate measure
@@ -1306,7 +1305,7 @@
         if(note.m_beatstart >= measureStartbeat && note.m_beatstart <= measureEndbeat){
             
             int s = STRINGS_ON_GTAR - 1 - note.m_stringvalue;
-            int f = (int)((note.m_beatstart - measureStartbeat) * 4.0);
+            int f = floorf((note.m_beatstart - measureStartbeat) * 4.0);
             
             if(s < STRINGS_ON_GTAR && f < FRETS_ON_GTAR){
                 
@@ -1386,11 +1385,12 @@
     int s = floor(buttonIndex / FRETS_ON_GTAR);
     int f = buttonIndex - s * FRETS_ON_GTAR;
     
-    float fretWidth = editingMeasureOverlay.frame.size.width / FRETS_ON_GTAR;
-    float frameBase = round(editingMeasureOverlay.frame.origin.x / fretWidth) * fretWidth;
+    float fretWidth = measureWidth / FRETS_ON_GTAR;
+    float frameBase = ceilf(editingMeasureOverlay.frame.origin.x / fretWidth) * fretWidth;
     
-    float beat = [self getBeatFromXPosition:editingClipView.frame.origin.x+frameBase+f*fretWidth];
-
+    float beat = editingClip.m_startbeat + [self getBeatFromXPosition:frameBase+f*fretWidth];
+    
+    DLog(@"Beat is %f",beat);
     
     BOOL noteOn = [[editingMeasureNoteOn objectAtIndex:s*FRETS_ON_GTAR+f] boolValue];
     
@@ -1418,17 +1418,11 @@
         editingMeasurePanFirstX = editingMeasureOverlay.frame.origin.x;
     }
     
+    float fretWidth = measureWidth / FRETS_ON_GTAR;
     float minX = 0.0;
     float maxX = MAX(editingClipView.frame.size.width-measureWidth,0.0);
     float newX = newPoint.x + editingMeasurePanFirstX;
-    
-    if([sender state] == UIGestureRecognizerStateEnded){
-        
-        float fretWidth = editingMeasureOverlay.frame.size.width / FRETS_ON_GTAR;
-        float frameBase = round(editingMeasureOverlay.frame.origin.x / fretWidth) * fretWidth;
-        
-        newX = frameBase;
-    }
+    newX = roundf(newX / fretWidth) * fretWidth;
     
     // wrap to boundaries
     if(newX < minX){
