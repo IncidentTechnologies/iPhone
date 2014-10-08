@@ -51,7 +51,7 @@
 
 extern NSUser * g_loggedInUser;
 
-@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,RecordEditorDelegate>
+@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,RecordEditorDelegate,UIGestureRecognizerDelegate>
 {
     NSMutableArray * instruments;
     NSMutableArray * tracks;
@@ -90,6 +90,9 @@ extern NSUser * g_loggedInUser;
     int playMeasure;
     int playFret;
     BOOL isPlaybandAnimating;
+    
+    UIPanGestureRecognizer * panProgressView;
+    float panProgressViewFirstX;
     
     // Sharing
     NSString * selectedShareType;

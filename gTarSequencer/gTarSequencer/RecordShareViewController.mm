@@ -612,13 +612,20 @@
     
     //float indicatorWidth = (MEASURES_PER_SCREEN/(numMeasures)) * progressView.frame.size.width;
     
+    if(progressViewIndicator != nil){
+        [progressViewIndicator removeFromSuperview];
+        [progressViewIndicator removeGestureRecognizer:panProgressView];
+    }
+    
     CGRect progressViewIndicatorFrame = CGRectMake(0, 0, indicatorWidth, progressView.frame.size.height);
     progressViewIndicator = [[UIView alloc] initWithFrame:progressViewIndicatorFrame];
     [progressViewIndicator setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3]];
     
-    [progressViewIndicator setUserInteractionEnabled:NO];
+    //[progressViewIndicator setUserInteractionEnabled:NO];
     
     [progressView addSubview:progressViewIndicator];
+    
+    [self addPanToScrollGestureToView:progressViewIndicator];
     
 }
 
@@ -635,13 +642,48 @@
     
     [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x,trackViewVerticalOffset)];
     
-    double percentMoved = scrollView.contentOffset.x / (scrollView.contentSize.width-measureWidth);
+    double percentMoved = scrollView.contentOffset.x / (scrollView.contentSize.width);
     
     //double newIndicatorX = progressView.frame.size.width * percentMoved;
     
     double newIndicatorX = [frameGenerator getRecordedTrackScreenWidth] * percentMoved;
     
     [progressViewIndicator setFrame:CGRectMake(newIndicatorX, 0, progressViewIndicator.frame.size.width, progressViewIndicator.frame.size.height)];
+}
+
+-(void)panScrollView:(UIPanGestureRecognizer *)sender
+{
+    CGPoint newPoint = [sender translationInView:progressView];
+    
+    if([sender state] == UIGestureRecognizerStateBegan){
+        panProgressViewFirstX = progressViewIndicator.frame.origin.x;
+    }
+    
+    float minX = 0.0;
+    float maxX = progressView.frame.size.width-progressViewIndicator.frame.size.width;
+    float newIndicatorX = newPoint.x + panProgressViewFirstX;
+    
+    // wrap to boundaries
+    if(newIndicatorX < minX){
+        newIndicatorX=minX;
+    }
+    
+    if(newIndicatorX > maxX){
+        newIndicatorX=maxX;
+    }
+    
+    if(newIndicatorX >= newIndicatorX && newIndicatorX <= maxX){
+        
+        double percentMoved = newIndicatorX / (progressView.frame.size.width);
+        
+        double trackViewX = trackView.contentSize.width * percentMoved;
+        
+        [progressViewIndicator setFrame:CGRectMake(newIndicatorX, 0, progressViewIndicator.frame.size.width, progressViewIndicator.frame.size.height)];
+        
+        [trackView setContentOffset:CGPointMake(trackViewX,trackView.contentOffset.y)];
+        
+    }
+    
 }
 
 #pragma mark - No Session Overlay
@@ -1670,6 +1712,13 @@
     longPress.minimumPressDuration = 0.3;
     
     [view addGestureRecognizer:longPress];
+}
+
+- (void)addPanToScrollGestureToView:(UIView *)view
+{
+    panProgressView = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panScrollView:)];
+    
+    [view addGestureRecognizer:panProgressView];
 }
 
 #pragma mark - Editing Menu Actions
