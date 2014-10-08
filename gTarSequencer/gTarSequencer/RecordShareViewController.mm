@@ -262,6 +262,8 @@
     
     [self drawPatternsOnMeasures];
     
+    [self refreshAllLoadedTracks];
+    
     // reset the progress bar on top
     [self resetProgressView];
     
@@ -454,6 +456,14 @@
     
     [self drawTickmarks];
     
+}
+
+// Called once on song load when the Record Share view loads
+- (void)refreshAllLoadedTracks
+{
+    for(NSTrack * track in recordingSong.m_tracks){
+        [recordEditor refreshLoadedTrack:track];
+    }
 }
 
 #pragma mark - Grid View

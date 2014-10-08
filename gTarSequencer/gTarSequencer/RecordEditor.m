@@ -96,10 +96,26 @@
     [trackclips removeAllObjects];
 }
 
-
 - (void)setMeasures:(int)measures
 {
     numMeasures = measures;
+}
+
+- (void)refreshLoadedTrack:(NSTrack *)track
+{
+    editingTrack = track;
+    
+    // Ensure data is up to date
+    [self mergeNeighboringIdenticalClips];
+    [self correctMeasureLengths];
+    [self shrinkExpandMeasuresOnScreen];
+    [delegate drawTickmarks];
+    [delegate drawGridOverlayLines];
+    [self refreshProgressView];
+    [delegate regenerateDataForTrack:editingTrack];
+    
+    track = nil;
+    
 }
 
 #pragma mark - Drawing
@@ -1617,6 +1633,13 @@
             // Set beats
             [self setBeatsForClip:firstClip withView:firstClipView];
             [firstClip setTempStartbeat:firstClip.m_startbeat tempEndbeat:nextClip.m_endbeat];
+            
+            // If it's a custom pattern copy the notes over
+            if([firstClip.m_name isEqualToString:PATTERN_E]){
+                for(NSNote * note in nextClip.m_notes){
+                    [firstClip addNote:note];
+                }
+            }
             
         }
     }

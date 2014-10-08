@@ -110,6 +110,8 @@
 
 - (void)trackLongPressEvent:(UILongPressGestureRecognizer *)recognizer;
 
+- (void)refreshLoadedTrack:(NSTrack *)track;
+
 @property (weak, nonatomic) id<RecordEditorDelegate> delegate;
 
 @end
