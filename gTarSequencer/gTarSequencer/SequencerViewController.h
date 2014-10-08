@@ -21,14 +21,13 @@
 #import "TutorialViewController.h"
 #import "RecordShareViewController.h"
 #import "GatekeeperViewController.h"
-#import "CloudController.h"
 #import "SCUI.h"
 #import "NSSong.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MessageUI.h>
 
-extern CloudController * g_cloudController;
+extern OphoCloudController * g_ophoCloudController;
 extern NSUser * g_loggedInUser;
 
 @interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate,RecordShareDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,GatekeeperDelegate> {

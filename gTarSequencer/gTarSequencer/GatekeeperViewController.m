@@ -170,7 +170,7 @@
     [self disableButton:_loggedoutSigninButton];
     [self disableButton:_loggedoutSignupButton];
     
-    [g_cloudController requestLoginUsername:_signinUsernameText.text andPassword:_signinPasswordText.text andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
+    [g_ophoCloudController requestLoginUsername:_signinUsernameText.text andPassword:_signinPasswordText.text andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
 }
 
 - (IBAction)signupButtonClicked:(id)sender
@@ -217,7 +217,7 @@
     [self disableButton:_loggedoutSigninButton];
     [self disableButton:_loggedoutSignupButton];
     
-    [g_cloudController requestRegisterUsername:_signupUsernameText.text andPassword:_signupPasswordText.text andEmail:_signupEmailText.text andCallbackObj:self andCallbackSel:@selector(signupCallback:)];
+    [g_ophoCloudController requestRegisterUsername:_signupUsernameText.text andPassword:_signupPasswordText.text andEmail:_signupEmailText.text andCallbackObj:self andCallbackSel:@selector(signupCallback:)];
     
 }
 
@@ -227,7 +227,7 @@
     NSLog(@"Uncaching %@ %@",g_loggedInUser.m_username,g_loggedInUser.m_password);
     
     // get user and password from cache
-    [g_cloudController requestLoginUsername:g_loggedInUser.m_username andPassword:g_loggedInUser.m_password andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
+    [g_ophoCloudController requestLoginUsername:g_loggedInUser.m_username andPassword:g_loggedInUser.m_password andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
     
 }
 
@@ -236,8 +236,8 @@
     // Clear facebook if active
     [FBSession.activeSession closeAndClearTokenInformation];
     
-    if(g_cloudController.m_loggedIn){
-        [g_cloudController requestLogoutCallbackObj:self andCallbackSel:@selector(logoutCallback:)];
+    if(g_ophoCloudController.m_loggedIn){
+        [g_ophoCloudController requestLogoutCallbackObj:self andCallbackSel:@selector(logoutCallback:)];
     }
 }
 
@@ -335,7 +335,7 @@
 {
     DLog(@"Login view fetched user info %@ access token %@",user.name,[[[FBSession activeSession] accessTokenData] accessToken]);
     
-    [g_cloudController requestFacebookLoginWithToken:[[[FBSession activeSession] accessTokenData] accessToken] andCallbackObj:self andCallbackSel:@selector(facebookCallback:)];
+    //[g_cloudController requestFacebookLoginWithToken:[[[FBSession activeSession] accessTokenData] accessToken] andCallbackObj:self andCallbackSel:@selector(facebookCallback:)];
     
     [delegate loggedIn:YES];
 }

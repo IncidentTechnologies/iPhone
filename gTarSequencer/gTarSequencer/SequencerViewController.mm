@@ -8,7 +8,6 @@
 
 #import "SequencerViewController.h"
 #import "NSSequence.h"
-#import "CloudController.h"
 
 #define LAST_FRET 15
 #define LAST_MEASURE 3
@@ -222,14 +221,14 @@
     gatekeeperViewController.delegate = self;
     
     // TODO: if we are not logged in but have cached creds, login
-    if(g_cloudController.m_loggedIn == NO && g_loggedInUser.m_username != nil){
+    if(g_ophoCloudController.m_loggedIn == NO && g_loggedInUser.m_username != nil){
         
         [gatekeeperViewController requestCachedLogin];
         
         // If we are not logged in but have cached credits, login
         [self loggedIn:NO];
         
-    }else if(g_cloudController.m_loggedIn == NO){
+    }else if(g_ophoCloudController.m_loggedIn == NO){
         
         // logged out screen
         [self loggedOut:NO];
@@ -382,7 +381,7 @@
     }
     
     // Hover set name?
-    if([nav isEqualToString:@"Set"] && !isTutorialOpen && g_cloudController.m_loggedIn == YES){
+    if([nav isEqualToString:@"Set"] && !isTutorialOpen && g_ophoCloudController.m_loggedIn == YES){
         [self hoverSetName];
     }else{
         [self hideSetName];

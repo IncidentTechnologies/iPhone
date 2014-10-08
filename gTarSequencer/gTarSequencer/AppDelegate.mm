@@ -12,8 +12,9 @@
 
 @synthesize window;
 
-CloudController * g_cloudController;
-FileController * g_fileController;
+OphoCloudController * g_ophoCloudController;
+//CloudController * g_cloudController;
+//FileController * g_fileController;
 NSUser * g_loggedInUser;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -47,10 +48,11 @@ NSUser * g_loggedInUser;
     [self.window setRootViewController: navigationController];
     
     // init the cloud controller
-    g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
+    //g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
+    g_ophoCloudController = [[OphoCloudController alloc] initWithServer:kServerAddress];
     
     // init the file controller
-    g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
+    //g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
     
     // init the logged in user
     g_loggedInUser = [[NSUser alloc] init];

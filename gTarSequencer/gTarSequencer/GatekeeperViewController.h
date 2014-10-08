@@ -10,7 +10,8 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "CyclingTextField.h"
 
-extern CloudController * g_cloudController;
+//extern CloudController * g_cloudController;
+extern OphoCloudController * g_ophoCloudController;
 extern NSUser * g_loggedInUser;
 
 @protocol GatekeeperDelegate <NSObject>

@@ -10,8 +10,8 @@
 
 #define DEFAULT_IMAGE @"Bear_Brown"
 
-extern CloudController * g_cloudController;
-extern FileController * g_fileController;
+//extern CloudController * g_cloudController;
+//extern FileController * g_fileController;
 
 @implementation NSUser
 {
@@ -97,7 +97,7 @@ extern FileController * g_fileController;
     m_userId = userid;
     m_userProfile = profile;
     
-    [g_fileController getFileOrDownloadAsync:m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
+    //[g_fileController getFileOrDownloadAsync:m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
     
 }
 
