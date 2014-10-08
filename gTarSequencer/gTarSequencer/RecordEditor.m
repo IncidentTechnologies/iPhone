@@ -37,6 +37,7 @@
 
 #define MIN_TRACK_WIDTH 30.0
 #define MIN_LEFT_TRACK_WIDTH 5.0
+#define MAX_MOVING_MEASURES 5.0
 
 @implementation RecordEditor
 
@@ -423,30 +424,36 @@
     if(pressedClipView != editingClipView){
         
         [self deactivateEditingClip];
+
+        [self startClipViewEditing:pressedClipView];
+    }
+}
+
+- (void)startClipViewEditing:(UIView *)clipView
+{
+    
+    for(id t in trackclips){
+        NSMutableArray * clipDict = [trackclips objectForKey:t];
+        NSString * trackName = (NSString *)t;
         
-        for(id t in trackclips){
-            NSMutableArray * clipDict = [trackclips objectForKey:t];
-            NSString * trackName = (NSString *)t;
+        for(int c = 0; c < [clipDict count]; c++){
+            UIView * v = [clipDict objectAtIndex:c];
             
-            for(int c = 0; c < [clipDict count]; c++){
-                UIView * v = [clipDict objectAtIndex:c];
+            if(v == clipView){
                 
-                if(v == pressedClipView){
-                    
-                    editingTrack = [delegate trackWithName:trackName];
-                    
-                    editingClip = [editingTrack.m_clips objectAtIndex:c];
-                    editingClipView = pressedClipView;
-                    editingTrackView = [delegate trackViewWithName:trackName];
-                    
-                    DLog(@"Editing track %@ at clip %i with name %@",trackName,c,editingClip.m_name);
-                }
+                editingTrack = [delegate trackWithName:trackName];
+                
+                editingClip = [editingTrack.m_clips objectAtIndex:c];
+                editingClipView = clipView;
+                editingTrackView = [delegate trackViewWithName:trackName];
+                
+                DLog(@"Editing track %@ at clip %i with name %@",trackName,c,editingClip.m_name);
             }
         }
-        
-        if(editingClipView != nil){
-            [self activateEditingClip];
-        }
+    }
+    
+    if(editingClipView != nil){
+        [self activateEditingClip];
     }
 }
 
@@ -520,6 +527,8 @@
     
     if(editingClipView != nil){
         
+        [editingClipView removeGestureRecognizer:moveClipPan];
+        
         // Deactivate
         UIColor * oldColor;
         if(editingClip.m_muted){
@@ -555,8 +564,7 @@
 {
     if(sender.state == UIGestureRecognizerStateBegan){
         [self unfocusTrackHideEditingPanel];
-        
-        [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(deactivateEditingClip) userInfo:nil repeats:NO];
+        [self deactivateEditingClip];
     }
 }
 
@@ -581,6 +589,14 @@
     // Focus the track and show editing panel
     [self focusTrackShowEditingPanel];
     
+    // Select measure for editing
+    [self selectDefaultMeasureInEditing];
+    
+    // Add pan to move selection
+    moveClipPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panEditingClip:)];
+    moveClipPan.delegate = self;
+    [editingClipView addGestureRecognizer:moveClipPan];
+    
 }
 
 // Start editing a track
@@ -594,6 +610,88 @@
     
     [self focusTrackShowEditingPanel];
     
+}
+
+// Allow the table to scroll during editing
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    // Not the left nav
+    if([otherGestureRecognizer isMemberOfClass:[UISwipeGestureRecognizer class]]){
+        return NO;
+    }
+    
+    if(editingClipView.frame.size.width > MAX_MOVING_MEASURES*measureWidth){
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+#pragma mark - Measure Moving
+
+- (void)panEditingClip:(UIPanGestureRecognizer *)sender
+{
+    // Only small clips are mobile
+    if(editingClipView.frame.size.width > MAX_MOVING_MEASURES*measureWidth){
+        return;
+    }
+    
+    CGPoint newPoint = [sender translationInView:editingTrackView];
+    
+    if([sender state] == UIGestureRecognizerStateBegan){
+        moveClipPanFirstX = editingClipView.frame.origin.x;
+        
+        moveClipPhantom = [[UIView alloc] initWithFrame:editingClipView.frame];
+        
+        [moveClipPhantom setBackgroundColor:[UIColor whiteColor]];
+        
+        [moveClipPhantom setAlpha:0.3];
+        
+        [editingClipView.superview addSubview:moveClipPhantom];
+    }
+    
+    float minX = 0.0;
+    float maxX = MAX(editingTrackView.frame.size.width-editingClipView.frame.size.width-measureWidth,0.0);
+    float newX = newPoint.x + moveClipPanFirstX;
+    
+    // wrap to boundaries
+    if(newX < minX){
+        newX=minX;
+    }
+    
+    if(newX > maxX){
+        newX=maxX;
+    }
+    
+    if(newX >= minX && newX <= maxX){
+        
+        // Show a ghost
+        CGRect newPhantomFrame = CGRectMake(newX, moveClipPhantom.frame.origin.y, moveClipPhantom.frame.size.width, moveClipPhantom.frame.size.height);
+        
+        [moveClipPhantom setFrame:newPhantomFrame];
+        
+    }
+    
+    if([sender state] == UIGestureRecognizerStateEnded){
+        
+        [self moveClip:editingClip toStartbeat:[self getBeatFromXPosition:newX] forTrack:editingTrack];
+        
+        // Ensure data is up to date
+        [self mergeNeighboringIdenticalClips];
+        [self correctMeasureLengths];
+        [self shrinkExpandMeasuresOnScreen];
+        [delegate drawTickmarks];
+        [delegate drawGridOverlayLines];
+        [self refreshProgressView];
+        [delegate regenerateDataForTrack:editingTrack];
+        
+        // Move the clip, adjust timings
+        [horizontalAdjustor showControlsRelativeToView:editingClipView];
+        
+        [moveClipPhantom removeFromSuperview];
+        moveClipPhantom = nil;
+    }
 }
 
 #pragma mark - Pattern Editing
@@ -776,9 +874,6 @@
 
 - (void)unfocusTrackHideEditingPanel
 {
-    editingTrack = nil;
-    editingTrackView = nil;
-    
     [UIView animateWithDuration:0.3 animations:^(void){
         
         // slide down the track
@@ -799,6 +894,9 @@
         
     }completion:^(BOOL finished){
         [editingPanel setHidden:YES];
+        editingTrack = nil;
+        editingTrackView = nil;
+        
     }];
 }
 
@@ -866,7 +964,7 @@
     
     // Create new muted clip to the left
     if(editingClipIndex == 0 && editingClipView.frame.origin.x > 0){
-        [self createNewClipFrom:0.0 to:editingClipView.frame.origin.x at:editingClipView.frame.origin.y forTrack:editingTrack.m_name startEditing:NO isMuted:YES];
+        [self createNewClipFrom:0.0 to:editingClipView.frame.origin.x at:editingClipView.frame.origin.y forTrack:editingTrack.m_name startEditing:NO isMuted:YES withPattern:PATTERN_A];
     }
     
     // Delete the measure if it's been shrunken too much
@@ -942,6 +1040,12 @@
     [delegate drawGridOverlayLines];
     [self refreshProgressView];
     [delegate regenerateDataForTrack:editingTrack];
+    
+    [horizontalAdjustor showControlsRelativeToView:editingClipView];
+    
+    // Select measure for editing
+    [self selectDefaultMeasureInEditing];
+    
 }
 
 - (void)endPanRight
@@ -956,6 +1060,11 @@
     [delegate drawGridOverlayLines];
     [self refreshProgressView];
     [delegate regenerateDataForTrack:editingTrack];
+    
+    [horizontalAdjustor showControlsRelativeToView:editingClipView];
+    
+    // Select measure for editing
+    [self selectDefaultMeasureInEditing];
     
 }
 
@@ -1074,7 +1183,7 @@
             
         }
         
-        [self createNewClipFrom:startX to:endX at:atY forTrack:senderTrackName startEditing:YES isMuted:NO];
+        [self createNewClipFrom:startX to:endX at:atY forTrack:senderTrackName startEditing:YES isMuted:NO withPattern:PATTERN_A];
         [self redrawAllPatternNotes];
         
     }else{
@@ -1102,11 +1211,6 @@
 
 - (void)selectMeasureInEditing
 {
-    // Clear the pattern preset
-    [editingClip changePattern:PATTERN_E_PENDING];
-    
-    [self changeLetterPattern:nil];
-    
     // Select a draggable region to edit
     [self clearEditingMeasure:NO];
     
@@ -1124,6 +1228,34 @@
     // Show editing interface with selected region
     [self showEditingMeasureInterface];
     
+    [delegate disableEdit];
+    
+}
+
+// Don't enable unless it's large enough
+// This is called by various actions around the view
+- (void)selectDefaultMeasureInEditing
+{
+    if(editingClipView.frame.size.width > measureWidth){
+        [self selectMeasureInEditing];
+    }
+}
+
+// Start editing when the user initiates
+- (void)forceSelectMeasureInEditing
+{
+    [self selectMeasureInEditing];
+    [self startEditingClipCustomPattern];
+}
+
+- (void)startEditingClipCustomPattern
+{
+    if(![editingClip.m_name isEqualToString:PATTERN_E]){
+        // Clear the pattern preset
+        [editingClip changePattern:PATTERN_E_PENDING];
+        
+        [self changeLetterPattern:nil];
+    }
 }
 
 - (void)showEditingMeasureInterface
@@ -1140,15 +1272,8 @@
     
     [self drawEditingMeasureNotes];
 
-    // Fade in
-    [editingMeasureInterface setAlpha:0.0];
+    [editingMeasureInterface setAlpha:1.0];
     [editingMeasureInterface setHidden:NO];
-    
-    [UIView animateWithDuration:0.5 animations:^(void){
-        [editingMeasureInterface setAlpha:1.0];
-    }completion:^(BOOL finished){
-        
-    }];
 }
 
 - (void)drawEditingMeasureNotes
@@ -1232,16 +1357,14 @@
 
 - (void)hideEditingMeasureInterface
 {
-    // Fade out
-    [UIView animateWithDuration:0.5 animations:^(void){
-        [editingMeasureInterface setAlpha:0.0];
-    }completion:^(BOOL finished){
-        [editingMeasureInterface setHidden:YES];
-    }];
+    [editingMeasureInterface setAlpha:0.0];
 }
 
 - (void)toggleMeasureNote:(id)sender
 {
+    // Change A-D to a star
+    [self startEditingClipCustomPattern];
+    
     int buttonIndex = [editingMeasureNoteButtons indexOfObject:sender];
     
     int s = floor(buttonIndex / FRETS_ON_GTAR);
@@ -1331,10 +1454,140 @@
 }
 
 //
-// Merge Tracks
+// Move Clip
+//
+- (void)moveClip:(NSClip *)clip toStartbeat:(float)startbeat forTrack:(NSTrack *)track
+{
+    float diff = startbeat - clip.m_startbeat;
+    float neighbordiff = clip.m_endbeat-clip.m_startbeat;
+    
+    //DLog(@"Move original clip from %f to %f (diff of %f, width of %f, neighbor moves %f)",clip.m_startbeat,startbeat,diff,clip.m_endbeat-clip.m_startbeat,neighbordiff);
+
+    [self offsetClip:clip byDifference:diff forTrack:track];
+    
+    // Adjust surrounding clips
+    BOOL splitDown = (diff > 0) ? TRUE : FALSE;
+    
+    NSMutableArray * clipsToSplit = [[NSMutableArray alloc] init];
+    
+    for(NSClip * neighbor in track.m_clips){
+        // Overlap
+        if(neighbor != clip && neighbor.m_startbeat < clip.m_endbeat && neighbor.m_endbeat > clip.m_startbeat){
+            
+            [clipsToSplit addObject:neighbor];
+        }
+    }
+    
+    for(NSClip * neighbor in clipsToSplit){
+        
+        if(splitDown){
+            [neighbor setTempStartbeat:neighbor.m_startbeat-neighbordiff tempEndbeat:neighbor.m_endbeat-neighbordiff];
+            [self adjustViewForClip:neighbor inTrack:track];
+        }
+        
+        [self splitClip:neighbor atBeat:clip.m_startbeat toBeat:clip.m_endbeat forTrack:editingTrack splitDown:splitDown];
+        
+    }
+    
+    [self removeShrinkingClipsForTrack:(NSTrack *)track];
+}
+
+- (void)offsetClip:(NSClip *)clip byDifference:(float)diff forTrack:(NSTrack *)track
+{
+    DLog(@"Offset clip %@ by %f",clip.m_name,diff);
+    
+    [clip setTempStartbeat:clip.m_startbeat+diff tempEndbeat:clip.m_endbeat+diff];
+    
+    // Adjust view
+    [self adjustViewForClip:clip inTrack:track];
+    
+    // Adjust notes
+    for(NSNote * note in clip.m_notes){
+        note.m_beatstart += diff;
+    }
+}
+
+- (void)adjustViewForClip:(NSClip *)clip inTrack:(NSTrack *)track
+{
+    // Adjust view
+    int clipIndex = [track getClipIndexForClip:clip];
+    
+    if(clipIndex >= 0){
+        
+        DLog(@"Adjust view for clip at index %i",clipIndex);
+        
+        UIView * clipView = [[trackclips objectForKey:track.m_name] objectAtIndex:clipIndex];
+        
+        float newX = [self getXPositionForClipBeat:clip.m_startbeat];
+        float endX = [self getXPositionForClipBeat:clip.m_endbeat];
+        float newWidth = endX-newX;
+        
+        CGRect newFrame = CGRectMake(newX,clipView.frame.origin.y,newWidth,clipView.frame.size.height);
+        
+        [clipView setFrame:newFrame];
+    }
+}
+
+- (void)splitClip:(NSClip *)clip atBeat:(float)splitBeat toBeat:(float)newBeat forTrack:(NSTrack *)track splitDown:(BOOL)splitDown
+{
+    DLog(@"Split clip at %f to %f",splitBeat,newBeat);
+    
+    float firstClipXA = [self getXPositionForClipBeat:clip.m_startbeat];
+    float firstClipXZ = [self getXPositionForClipBeat:splitBeat];
+    float secondClipXA = [self getXPositionForClipBeat:newBeat];
+    float secondClipXZ = [self getXPositionForClipBeat:(newBeat+clip.m_endbeat-splitBeat)];
+    
+    if(splitDown){
+        
+        DLog(@"SPLIT DOWN");
+        
+        [self createNewClipFrom:firstClipXA to:firstClipXZ at:editingClipView.frame.origin.y forTrack:track.m_name startEditing:NO isMuted:clip.m_muted withPattern:clip.m_name];
+        
+        [clip setTempStartbeat:newBeat tempEndbeat:(newBeat+clip.m_endbeat-splitBeat)];
+        
+        [self adjustViewForClip:clip inTrack:track];
+        
+    }else{
+        DLog(@"SPLIT UP");
+        
+        [self createNewClipFrom:secondClipXA to:secondClipXZ at:editingClipView.frame.origin.y forTrack:track.m_name startEditing:NO isMuted:clip.m_muted withPattern:clip.m_name];
+        
+        [clip setTempStartbeat:clip.m_startbeat tempEndbeat:splitBeat];
+        
+        [self adjustViewForClip:clip inTrack:track];
+        
+    }
+    
+    // TODO: adjust notes
+    
+    
+}
+
+// Remove shrunken measures after moving
+- (void)removeShrinkingClipsForTrack:(NSTrack *)track
+{
+    [self reorderTrackClipsForTrack:track];
+    
+    NSMutableArray * clipsToRemove = [[NSMutableArray alloc] init];
+    
+    for(UIView * clip in [trackclips objectForKey:track.m_name]){
+        if(clip.frame.size.width < MIN_TRACK_WIDTH){
+            [clipsToRemove addObject:clip];
+        }
+    }
+    
+    for(UIView * clip in clipsToRemove){
+        [self removeClipInEditing:clip];
+    }
+}
+
+//
+// Merge Clips
 //
 - (void)mergeNeighboringIdenticalClips
 {
+    // Ensure all the indices are correct
+    [self reorderTrackClipsForTrack:editingTrack];
     
     NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
     
@@ -1376,6 +1629,44 @@
     for(UIView * v in trackClipViewsToRemove){
         [v removeFromSuperview];
     }
+}
+
+//
+// Reorder track clips
+//
+- (void)reorderTrackClipsForTrack:(NSTrack *)track
+{
+    if(track == nil){
+        return;
+    }
+    
+    NSMutableArray * newClipArray = [[NSMutableArray alloc] init];
+    NSMutableArray * oldClipArray = [trackclips objectForKey:track.m_name];
+    
+    int numClips = [oldClipArray count];
+    
+    for(int i = 0; i < numClips; i++){
+        [newClipArray addObject:[self removeMinViewFromArray:oldClipArray]];
+    }
+    
+    [trackclips setObject:newClipArray forKey:track.m_name];
+    
+    [track sortClipsByBeat];
+    
+}
+
+- (UIView *)removeMinViewFromArray:(NSMutableArray *)array
+{
+    UIView * minView = [array firstObject];
+    for(UIView * v in array){
+        if(v.frame.origin.x < minView.frame.origin.x){
+            minView = v;
+        }
+    }
+    
+    [array removeObject:minView];
+    
+    return minView;
 }
 
 //
@@ -1527,7 +1818,7 @@
 //
 // Create new muted measure
 //
-- (void)createNewClipFrom:(float)fromX to:(float)toX at:(float)atY forTrack:(NSString *)trackName startEditing:(BOOL)edit isMuted:(BOOL)muted
+- (NSClip *)createNewClipFrom:(float)fromX to:(float)toX at:(float)atY forTrack:(NSString *)trackName startEditing:(BOOL)edit isMuted:(BOOL)muted withPattern:(NSString *)patternName
 {
     
     if(edit){
@@ -1559,7 +1850,7 @@
     double startBeat = [self getBeatFromXPosition:fromX];
     double endBeat = [self getBeatFromXPosition:toX];
     
-    NSClip * newClip = [[NSClip alloc] initWithName:PATTERN_A startbeat:startBeat endBeat:endBeat clipLength:0.0 clipStart:0.0 looping:false loopStart:0.0 looplength:0.0 color:@"" muted:muted];
+    NSClip * newClip = [[NSClip alloc] initWithName:patternName startbeat:startBeat endBeat:endBeat clipLength:0.0 clipStart:0.0 looping:false loopStart:0.0 looplength:0.0 color:@"" muted:muted];
     
     [track addClip:newClip atIndex:newIndex];
     
@@ -1578,21 +1869,25 @@
     
     // Start editing?
     if(edit){
-        [self clipViewPressed:newClipView];
+        [self startClipViewEditing:newClipView];
+        
+        // Scroll to measure
+        FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+        float offsetX = MIN(fromX,trackView.contentSize.width-[frameGenerator getRecordedTrackScreenWidth]);
+        
+        [UIView animateWithDuration:0.3 delay:0.3 options:NULL animations:^(void){
+            
+            [trackView setContentOffset:CGPointMake(offsetX,trackView.contentOffset.y)];
+            
+        }completion:^(BOOL finished){
+            
+        }];
     }
     
-    // Scroll to new measure
-    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
-    float offsetX = MIN(fromX,trackView.contentSize.width-[frameGenerator getRecordedTrackScreenWidth]);
+    // Ensure all the indices are correct
+    [self reorderTrackClipsForTrack:track];
     
-    [UIView animateWithDuration:0.3 delay:0.3 options:NULL animations:^(void){
-        
-        [trackView setContentOffset:CGPointMake(offsetX,trackView.contentOffset.y)];
-        
-    }completion:^(BOOL finished){
-        
-    }];
-    
+    return newClip;
 }
 
 //

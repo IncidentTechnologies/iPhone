@@ -253,6 +253,20 @@
     }
 }
 
+
+- (int)getClipIndexForClip:(NSClip *)clip
+{
+    int clipIndex = 0;
+    
+    for(; clipIndex < [m_clips count]; clipIndex++){
+        if([m_clips objectAtIndex:clipIndex] == clip){
+            return clipIndex;
+        }
+    }
+    
+    return -1;
+}
+
 - (double)roundBeatDownToMeasure:(double)beat
 {
     double numMeasures = ceil(beat / 4.0) - 1.0;
@@ -264,6 +278,36 @@
     double numMeasures = ceil(beat / 4.0);
     return numMeasures * 4.0;
 }
+
+- (void)sortClipsByBeat
+{
+    NSMutableArray * newClips = [[NSMutableArray alloc] init];
+    NSMutableArray * oldClips = m_clips;
+    
+    int numClips = [oldClips count];
+    
+    for(int i = 0; i < numClips; i++){
+        [newClips addObject:[self removeMinClipFromArray:oldClips]];
+    }
+    
+    m_clips = newClips;
+    
+}
+
+- (NSClip *)removeMinClipFromArray:(NSMutableArray *)array
+{
+    NSClip * minClip = [array firstObject];
+    for(NSClip * c in array){
+        if(c.m_startbeat < minClip.m_startbeat){
+            minClip = c;
+        }
+    }
+    
+    [array removeObject:minClip];
+    
+    return minClip;
+}
+
 
 #pragma mark Track Actions
 - (void)setSelected:(BOOL)selected

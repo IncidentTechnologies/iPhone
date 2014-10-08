@@ -273,7 +273,7 @@
 - (void)regenerateDataForTrack:(NSTrack *)track
 {
     // Track passed in is already pointing to a track of recordingSong
-    DLog(@"instrument tracks is %@",instruments);
+    //DLog(@"instrument tracks is %@",instruments);
     
     NSTrack * instTrack;
     for(NSTrack * t in instruments){
@@ -621,7 +621,6 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
     FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
     [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x,trackViewVerticalOffset)];
@@ -1686,7 +1685,7 @@
 - (IBAction)userDidEditMeasure:(id)sender
 {
     DLog(@"User did edit measure");
-    [recordEditor selectMeasureInEditing];
+    [recordEditor forceSelectMeasureInEditing];
     [self disableEdit];
 }
 

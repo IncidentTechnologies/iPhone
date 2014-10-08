@@ -38,10 +38,11 @@
 
 // Editing panel
 - (void)enableEdit;
+- (void)disableEdit;
 
 @end
 
-@interface RecordEditor : NSObject <HorizontalAdjustorDelegate>
+@interface RecordEditor : NSObject <HorizontalAdjustorDelegate,UIGestureRecognizerDelegate>
 {
     // Drawing
     UIScrollView * trackView;
@@ -68,10 +69,14 @@
     
     UIView * editingMeasureOverlay;
     UIView * editingMeasureInterface;
-    UIPanGestureRecognizer * editingMeasurePan;
-    float editingMeasurePanFirstX;
     NSMutableArray * editingMeasureNoteButtons;
     NSMutableArray * editingMeasureNoteOn;
+    
+    UIView * moveClipPhantom;
+    UIPanGestureRecognizer * editingMeasurePan;
+    UIPanGestureRecognizer * moveClipPan;
+    float editingMeasurePanFirstX;
+    float moveClipPanFirstX;
     
     BOOL isTrackViewPressed;
     
@@ -101,7 +106,7 @@
 - (float)getProgressXPositionForClipBeat:(float)beat;
 
 - (void)addClipInEditing;
-- (void)selectMeasureInEditing;
+- (void)forceSelectMeasureInEditing;
 
 - (void)trackLongPressEvent:(UILongPressGestureRecognizer *)recognizer;
 

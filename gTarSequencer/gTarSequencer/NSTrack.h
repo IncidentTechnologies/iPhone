@@ -61,6 +61,8 @@
 - (void)addClip:(NSClip *)clip atIndex:(int)index;
 - (NSClip *)firstClip;
 - (NSClip *)lastClipComparePattern:(NSString *)pattern andMuted:(BOOL)muted atBeat:(double)beat;
+- (int)getClipIndexForClip:(NSClip *)clip;
+- (void)sortClipsByBeat;
 
 // Track's Pattern Actions
 - (void)addPattern:(NSPattern *)pattern;
