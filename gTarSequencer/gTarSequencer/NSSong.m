@@ -202,7 +202,7 @@
     tree.PrintXMPTree();
 }
 
-- (void)saveToFile:(NSString *)filename
+- (NSData *)saveToFile:(NSString *)filename
 {
     m_title = filename;
     
@@ -232,6 +232,10 @@
     tree.SaveXMPToFile(filepath, YES);
     
     DLog(@"Saved to path %s",filepath);
+    
+    NSData * songFile = [[NSData alloc] initWithContentsOfFile:songFilepath];
+    
+    return songFile;
 
 }
 

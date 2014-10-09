@@ -55,7 +55,7 @@
 
 - (XMPNode *)convertToXmp;
 - (void)printTree;
-- (void)saveToFile:(NSString *)filename;
+- (NSData *)saveToFile:(NSString *)filename;
 
 - (id)initWithTitle:(NSString *)title author:(NSString *)author description:(NSString *)description tempo:(long)tempo looping:(bool)looping loopstart:(long)loopstart loopend:(long)loopend sequenceName:(NSString *)sequenceName sequenceId:(long)sequenceId;
 

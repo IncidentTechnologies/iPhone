@@ -1332,9 +1332,7 @@
     if(songModel == nil){
         songModel = [[NSSongModel alloc] initWithSong:recordingSong andInstruments:instruments];
         
-        // Save XMP
-        // [recordingSong printTree];
-        [recordingSong saveToFile:recordingSong.m_title];
+        [self saveRecordingSongToXmp];
     }
         
     [songModel startWithDelegate:self];
@@ -1352,6 +1350,27 @@
     [self stopRecordPlayback];
 }
 
+- (void)saveRecordingSongToXmp
+{
+    // Save XMP
+    // [recordingSong printTree];
+    NSData * songData = [recordingSong saveToFile:recordingSong.m_title];
+    
+    [g_ophoCloudController requestSaveXmpWithId:recordingSongXmpId andXmpFile:songData andXmpData:nil andCallbackObj:self andCallbackSel:@selector(requestSaveXmpCallback)];
+    
+    // TODO: delete temporary file after generating
+    
+}
+
+- (void)requestSaveXmpCallback
+{
+    DLog(@"Request Save Song XMP Callback");
+    
+    // TODO: fetch the ID (and other stuff)
+    recordingSongXmpId = 1;
+}
+
+
 #pragma mark - Song Description Field
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
@@ -1359,7 +1378,7 @@
     [songDescriptionField resignFirstResponder];
     
     [recordingSong renameToName:recordingSong.m_title andDescription:songDescriptionField.text];
-    [recordingSong saveToFile:recordingSong.m_title];
+    [self saveRecordingSongToXmp];
     
 }
 - (void)textViewDidChange:(UITextView *)textView
@@ -1474,7 +1493,8 @@
     
     [delegate renameFromName:recordingSong.m_title toName:songNameField.text andType:@"Songs"];
     [recordingSong renameToName:songNameField.text andDescription:songDescriptionField.text];
-    [recordingSong saveToFile:recordingSong.m_title];
+    
+    [self saveRecordingSongToXmp];
     
 }
 
@@ -1755,6 +1775,8 @@
     [recordEditor unfocusTrackHideEditingPanel];
     [recordEditor deactivateEditingClip];
     [self enableEdit];
+    
+    [self saveRecordingSongToXmp];
 }
 
 - (void)disablePaste

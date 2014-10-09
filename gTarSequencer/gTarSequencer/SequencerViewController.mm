@@ -518,6 +518,10 @@
     if([type isEqualToString:TABLE_SETS]){
         DLog(@"Load set from name %@",filename);
         
+        // TODO: pass the ID, handle the data
+        
+        [g_ophoCloudController requestGetXmpWithId:0 isXmpOnly:true andCallbackObj:self andCallbackSel:@selector(requestLoadSequenceXmpCallback)];
+        
         // First clear any sound playing
         [seqSetViewController resetSoundMaster];
         
@@ -529,8 +533,13 @@
         if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
             [self relaunchFTUTutorial];
         }
+        
     }else if([type isEqualToString:TABLE_SONGS]){
         DLog(@"Load song from name %@",filename);
+        
+        // TODO: pass the ID, handle the data
+        
+        [g_ophoCloudController requestGetXmpWithId:0 isXmpOnly:true andCallbackObj:self andCallbackSel:@selector(requestLoadSongXmpCallback)];
         
         // First clear any sound playing
         [seqSetViewController stopSoundMaster];
@@ -555,6 +564,19 @@
         }
         
     }
+}
+
+
+- (void)requestLoadSequenceXmpCallback
+{
+    DLog(@"Request Load Sequence Xmp Callback");
+    
+}
+
+- (void)requestLoadSongXmpCallback
+{
+    DLog(@"Request Load Song Xmp Callback");
+    
 }
 
 - (void)renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type

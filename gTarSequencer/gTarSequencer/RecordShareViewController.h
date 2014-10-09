@@ -49,6 +49,7 @@
 
 @end
 
+extern OphoCloudController * g_ophoCloudController;
 extern NSUser * g_loggedInUser;
 
 @interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,RecordEditorDelegate,UIGestureRecognizerDelegate>
@@ -96,6 +97,9 @@ extern NSUser * g_loggedInUser;
     
     // Sharing
     NSString * selectedShareType;
+    
+    // Saving
+    int recordingSongXmpId;
 }
 
 - (void)reloadInstruments;

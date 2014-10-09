@@ -172,7 +172,7 @@
     return node;
 }
 
--(void)saveToFile:(NSString *)filename
+-(NSData *)saveToFile:(NSString *)filename
 {
     // First change the name
     if(![filename isEqualToString:DEFAULT_STATE_NAME]){
@@ -205,6 +205,10 @@
     tree.SaveXMPToFile(filepath, YES);
     
     DLog(@"Saved to path %s",filepath);
+    
+    NSData * sequenceFile = [[NSData alloc] initWithContentsOfFile:sequenceFilepath];
+    
+    return sequenceFile;
     
 }
 

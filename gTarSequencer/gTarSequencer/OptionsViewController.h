@@ -29,6 +29,7 @@
 
 @end
 
+extern OphoCloudController * g_ophoCloudController;
 extern NSUser * g_loggedInUser;
 
 @interface OptionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>

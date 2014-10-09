@@ -221,9 +221,21 @@
         }
         
         // Save the sequence
-        [sequence saveToFile:filepath];
+        NSData * sequenceData = [sequence saveToFile:filepath];
         
+        // Don't upload saved state to backend
+        if([filepath isEqualToString:DEFAULT_STATE_NAME]){
+            [g_ophoCloudController requestSaveXmpWithId:activeSequenceXmpId andXmpFile:sequenceData andXmpData:nil andCallbackObj:self andCallbackSel:@selector(requestSaveXmpCallback)];
+        }
     }
+}
+
+- (void)requestSaveXmpCallback
+{
+    DLog(@"Request Save Sequence XMP Callback");
+    
+    // TODO: fetch the ID (and other stuff)
+    activeSequenceXmpId = 1;
 }
 
 - (void)clearSaveContextTimer

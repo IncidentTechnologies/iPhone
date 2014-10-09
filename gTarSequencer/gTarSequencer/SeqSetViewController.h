@@ -47,6 +47,8 @@
 
 @end
 
+extern OphoCloudController * g_ophoCloudController;
+
 @interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate,TutorialDelegate>
 {
     SoundMaster * soundMaster;
@@ -74,6 +76,7 @@
     
     // State
     NSMutableDictionary * currentState;
+    int activeSequenceXmpId;
     
     NSTimer * saveContextTimer;
 }

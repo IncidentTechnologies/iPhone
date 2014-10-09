@@ -111,10 +111,28 @@
 {
     loadedTableType = type;
     
+    if([loadedTableType isEqualToString:TABLE_SETS]){
+        
+        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSequence andUserId:g_loggedInUser.m_userId andAppId:0 andPermission:PERMISSIONS_OPEN andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback)];
+        
+        
+    }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+        
+        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:g_loggedInUser.m_userId andAppId:0 andPermission:PERMISSIONS_OPEN andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback)];
+        
+    }
+}
+
+- (void)requestGetXmpListCallback
+{
+    DLog(@"Request Get Xmp List Callback");
+    
+    // TODO: use this to generate fileDateSet and fileLoadSet and display available sets/songs
+    
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSError * error;
     NSString * directoryPath = [paths objectAtIndex:0];
-    directoryPath = [directoryPath stringByAppendingPathComponent:type];
+    directoryPath = [directoryPath stringByAppendingPathComponent:loadedTableType];
     
     //fileSet = [[NSMutableDictionary alloc] init];
     
@@ -206,6 +224,8 @@
         
         // delegate calls back to set activeSequencer
         [delegate loadFromName:filename andType:loadedTableType];
+        
+        // Delegate sets activeSequencer/activeSong
         [delegate viewSeqSetWithAnimation:YES];
         
     }else if([loadedTableType isEqualToString:TABLE_SONGS]){
@@ -217,6 +237,7 @@
         
     }
 }
+
 
 - (void)userDidSaveFile:(NSString *)filename
 {
@@ -255,6 +276,16 @@
     
     // Delegate sets activeSequencer/activeSong
     [delegate deleteWithName:filename andType:loadedTableType];
+    
+    // TODO: pass the ID for the file to delete
+    
+    [g_ophoCloudController requestDeleteXmpWithId:0 andCallbackObj:self andCallbackSel:@selector(requestDeleteXmpCallback)];
+    
+}
+
+- (void)requestDeleteXmpCallback
+{
+    DLog(@"Request Delete XMP Callback");
     
 }
 
