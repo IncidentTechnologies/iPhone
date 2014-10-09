@@ -113,22 +113,42 @@
     
     if([loadedTableType isEqualToString:TABLE_SETS]){
         
-        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSequence andUserId:g_loggedInUser.m_userId andAppId:0 andPermission:PERMISSIONS_OPEN andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback)];
+        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSequence andUserId:g_loggedInUser.m_userId andAppId:0 andPermission:PERMISSIONS_OPEN andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback:)];
         
         
     }else if([loadedTableType isEqualToString:TABLE_SONGS]){
         
-        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:g_loggedInUser.m_userId andAppId:0 andPermission:PERMISSIONS_OPEN andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback)];
+        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:g_loggedInUser.m_userId andAppId:0 andPermission:PERMISSIONS_OPEN andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback:)];
         
     }
 }
 
-- (void)requestGetXmpListCallback
+- (void)requestGetXmpListCallback:(CloudResponse *)cloudResponse
 {
+    // TODO: figure out where to add tutorial song
+    
     DLog(@"Request Get Xmp List Callback");
     
-    // TODO: use this to generate fileDateSet and fileLoadSet and display available sets/songs
+    NSArray * xmpList = cloudResponse.m_xmpList;
     
+    fileLoadSet = [[NSMutableArray alloc] init];
+    fileDateSet = [[NSMutableArray alloc] init];
+    NSDateFormatter * df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    for(XmlDom * xmp in xmpList){
+        NSString * name = [xmp getTextFromChildWithName:@"xmp_name"];
+        NSDate * date = [df dateFromString:[xmp getTextFromChildWithName:@"xmp_create_date"]];
+        
+        DLog(@"Date is %@",date);
+        
+        [fileLoadSet addObject:name];
+        [fileDateSet addObject:date];
+    }
+    
+    DLog(@"FileLoadSet %@ FileDateSet %@",fileLoadSet,fileDateSet);
+    
+    /*
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSError * error;
     NSString * directoryPath = [paths objectAtIndex:0];
@@ -160,6 +180,7 @@
             
         }
     }
+    */
     
     // Sort by date order
     if([fileLoadSet count] > 0){

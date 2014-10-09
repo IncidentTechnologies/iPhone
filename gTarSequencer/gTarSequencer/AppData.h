@@ -16,6 +16,7 @@
 #import "CloudRequest.h"
 #import "CloudResponse.h"
 #import "FrameGenerator.h"
+#import "XmlDom.h"
 
 #ifdef DEBUG
 #define DLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
