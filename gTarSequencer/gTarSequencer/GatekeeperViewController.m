@@ -31,6 +31,8 @@
 @implementation GatekeeperViewController
 
 @synthesize delegate;
+@synthesize notificationView;
+@synthesize notificationVerticalSpace;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +51,11 @@
     [self resetScreen];
     
     _loginView.readPermissions = @[@"public_profile",@"email"];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self loggedoutSigninButtonClicked:nil];
 }
 
 - (void)resetScreen
@@ -114,36 +121,33 @@
 - (void)displayNotification:(NSString *)notification turnRed:(BOOL)red {
     
     [_notificationLabel setText:NSLocalizedString(notification, NULL)];
-    [_notificationView setHidden:NO];
     
-    [UIView animateWithDuration:0.5 animations:^(void){
-        [_notificationView setFrame:CGRectMake(0, 0, _notificationView.frame.size.width, _notificationView.frame.size.height)];
+    [UIView animateWithDuration:0.2 animations:^(void){
+        
+        notificationVerticalSpace.constant = 0.0;
+        
+        [notificationView layoutIfNeeded];
+        
     }completion:^(BOOL finished){
+        
         // Trigger minimize
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(minimizeNotification) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
     }];
 }
 
 - (void)hideNotification {
     
-    CGRect notifyOffFrame = CGRectMake(0,-1*_notificationView.frame.size.height,_notificationView.frame.size.width,_notificationView.frame.size.height);
-    
-    [_notificationView setFrame:notifyOffFrame];
-    
-    [_notificationView setHidden:YES];
-    
-}
-
-
-- (void)minimizeNotification {
-    
-    [UIView animateWithDuration:0.5 animations:^(void){
-        [_notificationView setFrame:CGRectMake(0, -1*_notificationView.frame.size.height, _notificationView.frame.size.width, _notificationView.frame.size.height)];
+    [UIView animateWithDuration:0.2 animations:^(void){
+        
+        notificationVerticalSpace.constant = -1 * notificationView.frame.size.height;;
+        
+        [notificationView layoutIfNeeded];
+        
     }completion:^(BOOL finished){
-        [_notificationView setHidden:YES];
+        
     }];
+    
 }
-
 
 #pragma mark - Actions
 
@@ -331,6 +335,7 @@
     DLog(@"Logged Out");
 }
 
+/*
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
 {
     DLog(@"Login view fetched user info %@ access token %@",user.name,[[[FBSession activeSession] accessTokenData] accessToken]);
@@ -339,6 +344,7 @@
     
     [delegate loggedIn:YES];
 }
+*/
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {

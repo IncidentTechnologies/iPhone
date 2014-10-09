@@ -32,6 +32,7 @@ extern NSUser * g_loggedInUser;
 
 @property (strong, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (strong, nonatomic) IBOutlet UIView * notificationView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint * notificationVerticalSpace;
 
 @property (strong, nonatomic) IBOutlet UIView * signupTopPanel;
 @property (strong, nonatomic) IBOutlet UIView * signinTopPanel;
