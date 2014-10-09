@@ -269,13 +269,13 @@
 
 - (double)roundBeatDownToMeasure:(double)beat
 {
-    double numMeasures = ceil(beat / 4.0) - 1.0;
+    double numMeasures = ceilf(beat / 4.0) - 1.0;
     return numMeasures * 4.0;
 }
 
 - (double)roundBeatUpToMeasure:(double)beat
 {
-    double numMeasures = ceil(beat / 4.0);
+    double numMeasures = ceilf(beat / 4.0);
     return numMeasures * 4.0;
 }
 
@@ -466,11 +466,14 @@
         }
         
         patternLength *= 4.0; // count beats instead of measures
-        float patternStartbeat = floor(clip.m_startbeat/patternLength) * patternLength;
-        float patternEndbeat = ceil(clip.m_endbeat/patternLength) * patternLength;
-        float patternBeat = patternStartbeat;
         
-        DLog(@"Pattern Startbeat to Endbeat is %f to %f with length %f",patternStartbeat,patternEndbeat,patternLength);
+        // get the closest start <= clip.m_startbeat
+        float patternStartbeat = floorf(clip.m_startbeat/patternLength) * patternLength;
+        float patternEndbeat = ceilf(clip.m_endbeat/patternLength) * patternLength;
+        
+        float patternBeat;
+        
+        DLog(@"Pattern startbeat is %f, clip startbeat is %f",patternStartbeat,clip.m_startbeat);
         
         // Cycle through the pattern for the duration of the clip, but offset the start
         for(patternBeat = patternStartbeat; patternBeat < patternEndbeat; patternBeat += patternLength){

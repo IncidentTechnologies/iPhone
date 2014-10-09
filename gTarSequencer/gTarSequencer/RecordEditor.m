@@ -114,6 +114,8 @@
     [self refreshProgressView];
     [delegate regenerateDataForTrack:editingTrack];
     
+    [self redrawAllPatternNotes];
+    
     track = nil;
     
 }
@@ -281,16 +283,24 @@
     CGContextSetLineWidth(context, lineWidth);
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     
+    float patternStartbeat = 4.0*floorf(clip.m_startbeat/(4.0*patternLength))*patternLength;
+    float patternBeatsOffset = clip.m_startbeat - patternStartbeat;
+    float patternOffset = 4.0*patternBeatsOffset;
+    
+    float clipWidth = clip.m_endbeat - clip.m_startbeat;
+    
     // Update all the notes:
     int f, s;
-    for(float relBeat = 0.0, patternRepeat = 0.0; relBeat < clip.m_endbeat-clip.m_startbeat; relBeat += 4.0*patternLength){
+    for(float relBeat = 0.0, patternRepeat = 0.0; relBeat < clipWidth+patternOffset; relBeat += 4.0*patternLength){
         
         for(NSNote * note in pattern.m_notes){
             
-            if(note.m_beatstart + patternRepeat*(FRETS_ON_GTAR)*patternLength < 4.0*(clip.m_endbeat-clip.m_startbeat)){
+            float noteBeat = note.m_beatstart + patternRepeat*(FRETS_ON_GTAR)*patternLength - patternOffset;
+            
+            if(noteBeat >= 0.0 && noteBeat < 4.0*(clipWidth)){
                 
                 s = STRINGS_ON_GTAR - 1 - note.m_stringvalue;
-                f = note.m_beatstart + patternRepeat*(FRETS_ON_GTAR)*patternLength; // Pattern notes have this set differently than song notes
+                f = noteBeat; // Pattern notes have this set differently than song notes
                 
                 // Adjust frame:
                 noteFrame.origin.x = f*noteFrameWidth+1.0;
@@ -301,7 +311,7 @@
                 CGContextFillEllipseInRect(context, noteFrame);
                     
             }else{
-                break;
+                continue;
             }
         }
         
@@ -538,6 +548,8 @@
     if(editingTrack != nil){
         
         [delegate regenerateDataForTrack:editingTrack];
+        
+        [self redrawAllPatternNotes];
         
     }
     
@@ -935,7 +947,7 @@
     
     // Ensure that the last muted clip doesn't get overflowing adjustors
     if(editingClip.m_muted && editingClip == [editingTrack.m_clips lastObject]){
-        [horizontalAdjustor setAbsoluteMaxWidth:measureWidth*(ceil([self getSongMaxBeat] / 4.0))];
+        [horizontalAdjustor setAbsoluteMaxWidth:measureWidth*(ceilf([self getSongMaxBeat] / 4.0))];
     }
 }
 
@@ -1057,6 +1069,8 @@
     [self refreshProgressView];
     [delegate regenerateDataForTrack:editingTrack];
     
+    [self redrawAllPatternNotes];
+    
     [horizontalAdjustor showControlsRelativeToView:editingClipView];
     
     // Select measure for editing
@@ -1076,6 +1090,8 @@
     [delegate drawGridOverlayLines];
     [self refreshProgressView];
     [delegate regenerateDataForTrack:editingTrack];
+    
+    [self redrawAllPatternNotes];
     
     [horizontalAdjustor showControlsRelativeToView:editingClipView];
     
