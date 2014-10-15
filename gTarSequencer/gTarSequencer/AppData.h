@@ -10,7 +10,8 @@
 #import <Foundation/Foundation.h>
 #import "TestFlightSDK3.0.0/TestFlight.h"
 #import "NSUser.h"
-#import "OphoCloudController.h"
+#import "OphoMaster.h"
+//#import "OphoCloudController.h"
 #import "GtarController.h"
 //#import "FileController.h"
 #import "CloudRequest.h"

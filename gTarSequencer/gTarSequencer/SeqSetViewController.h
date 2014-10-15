@@ -47,7 +47,7 @@
 
 @end
 
-extern OphoCloudController * g_ophoCloudController;
+extern OphoMaster * g_ophoMaster;
 
 @interface SeqSetViewController : UITableViewController <ScrollingSelectorDelegate,CustomInstrumentSelectorDelegate,TutorialDelegate>
 {

@@ -221,14 +221,14 @@
     gatekeeperViewController.delegate = self;
     
     // TODO: if we are not logged in but have cached creds, login
-    if(g_ophoCloudController.m_loggedIn == NO && g_loggedInUser.m_username != nil){
+    if(![g_ophoMaster loggedIn] && g_loggedInUser.m_username != nil){
         
         [gatekeeperViewController requestCachedLogin];
         
         // If we are not logged in but have cached credits, login
         [self loggedIn:NO];
         
-    }else if(g_ophoCloudController.m_loggedIn == NO){
+    }else if(![g_ophoMaster loggedIn]){
         
         // logged out screen
         [self loggedOut:NO];
@@ -381,7 +381,7 @@
     }
     
     // Hover set name?
-    if([nav isEqualToString:@"Set"] && !isTutorialOpen && g_ophoCloudController.m_loggedIn == YES){
+    if([nav isEqualToString:@"Set"] && !isTutorialOpen && [g_ophoMaster loggedIn]){
         [self hoverSetName];
     }else{
         [self hideSetName];
@@ -520,8 +520,7 @@
         DLog(@"Load set from %i",xmpId);
         
         // TODO: pass the ID, handle the data
-        
-        [g_ophoCloudController requestGetXmpWithId:xmpId isXmpOnly:false andCallbackObj:self andCallbackSel:@selector(requestLoadSequenceXmpCallback:)];
+        [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(requestLoadSequenceXmpCallback:)];
         
         // First clear any sound playing
         [seqSetViewController resetSoundMaster];
@@ -541,19 +540,16 @@
     }else if([type isEqualToString:TABLE_SONGS]){
         DLog(@"Load song from %i",xmpId);
         
-        [g_ophoCloudController requestGetXmpWithId:xmpId isXmpOnly:false andCallbackObj:self andCallbackSel:@selector(requestLoadSongXmpCallback:)];
+        [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(requestLoadSongXmpCallback:)];
         
     }
 }
 
+// TODO: get rid of this
 - (void)loadFromName:(NSString *)filename andType:(NSString *)type
 {
     if([type isEqualToString:TABLE_SETS]){
         DLog(@"Load set from name %@",filename);
-        
-        // TODO: pass the ID, handle the data
-        
-        //[g_ophoCloudController requestGetXmpWithId:0 isXmpOnly:true andCallbackObj:self andCallbackSel:@selector(requestLoadSequenceXmpCallback)];
         
         // First clear any sound playing
         [seqSetViewController resetSoundMaster];
@@ -570,33 +566,6 @@
     }else if([type isEqualToString:TABLE_SONGS]){
         DLog(@"Load song from name %@",filename);
         
-        // TODO: pass the ID, handle the data
-        
-        //[g_ophoCloudController requestGetXmpWithId:0 isXmpOnly:true andCallbackObj:self andCallbackSel:@selector(requestLoadSongXmpCallback)];
-        
-        // First clear any sound playing
-        /*
-        [seqSetViewController stopSoundMaster];
-        [seqSetViewController resetSoundMaster];
-        
-        [self setActiveSong:filename];
-        filename = [@"usr_" stringByAppendingString:filename];
-        
-        // Init the song
-        loadedSong = [[NSSong alloc] initWithXMPFilename:filename];
-        
-        if(loadedSong != nil){
-            // Set the active sequencer accordingly
-            [self loadStateFromDisk:loadedSong.m_sequenceName];
-            [self saveContext:nil force:YES];
-        
-            // Load into record share view
-            SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-            
-            isRecording = TRUE;
-            [recordShareController loadSong:loadedSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
-        }
-        */
     }
 }
 

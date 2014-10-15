@@ -34,13 +34,27 @@
 @synthesize notificationView;
 @synthesize notificationVerticalSpace;
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self commonInit];
     }
     return self;
+}
+
+- (void)commonInit
+{
+    g_ophoMaster.loginDelegate = self;
 }
 
 - (void)viewDidLoad
@@ -174,7 +188,7 @@
     [self disableButton:_loggedoutSigninButton];
     [self disableButton:_loggedoutSignupButton];
     
-    [g_ophoCloudController requestLoginUsername:_signinUsernameText.text andPassword:_signinPasswordText.text andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
+    [g_ophoMaster loginWithUsername:_signinUsernameText.text password:_signinPasswordText.text];
 }
 
 - (IBAction)signupButtonClicked:(id)sender
@@ -221,60 +235,44 @@
     [self disableButton:_loggedoutSigninButton];
     [self disableButton:_loggedoutSignupButton];
     
-    [g_ophoCloudController requestRegisterUsername:_signupUsernameText.text andPassword:_signupPasswordText.text andEmail:_signupEmailText.text andCallbackObj:self andCallbackSel:@selector(signupCallback:)];
+    [g_ophoMaster registerWithUsername:_signupUsernameText.text password:_signupPasswordText.text email:_signupEmailText.text];
     
 }
 
 - (void)requestCachedLogin
 {
-    
     NSLog(@"Uncaching %@ %@",g_loggedInUser.m_username,g_loggedInUser.m_password);
     
     // get user and password from cache
-    [g_ophoCloudController requestLoginUsername:g_loggedInUser.m_username andPassword:g_loggedInUser.m_password andCallbackObj:self andCallbackSel:@selector(signinCallback:)];
-    
+    [g_ophoMaster loginWithUsername:g_loggedInUser.m_username password:g_loggedInUser.m_password];
 }
 
 - (void)requestLogout
 {
-    // Clear facebook if active
-    [FBSession.activeSession closeAndClearTokenInformation];
-    
-    if(g_ophoCloudController.m_loggedIn){
-        [g_ophoCloudController requestLogoutCallbackObj:self andCallbackSel:@selector(logoutCallback:)];
-    }
+    [g_ophoMaster logout];
 }
 
 
 #pragma mark - Callbacks
 
-- (void)signinCallback:(CloudResponse *)cloudResponse
+- (void)loggedInCallback
 {
+    [self hideNotification];
     
-    if ( cloudResponse.m_status == CloudResponseStatusSuccess )
-    {
-        [self hideNotification];
-        
-        [g_loggedInUser loadWithId:cloudResponse.m_responseUserId Name:cloudResponse.m_cloudRequest.m_username Password:cloudResponse.m_cloudRequest.m_password Email:cloudResponse.m_cloudRequest.m_email Image:cloudResponse.m_responseFileId Profile:cloudResponse.m_responseUserProfile];
-        
-        [g_loggedInUser cache];
-        
-        [delegate loggedIn:YES];
-        
-    }else{
-        
-        // There was an error
-        
-        [delegate loggedOut:NO];
-        
-        [self displayNotification:cloudResponse.m_statusText turnRed:YES];
-        [self showTopPanel:_signinTopPanel];
-        
-        [self enableButton:_loggedoutSignupButton];
-    
-    }
+    [delegate loggedIn:YES];
 }
 
+- (void)loginFailedCallback:(NSString *)error
+{
+    [delegate loggedOut:NO];
+    
+    [self displayNotification:error turnRed:YES];
+    [self showTopPanel:_signinTopPanel];
+    
+    [self enableButton:_loggedoutSignupButton];
+}
+
+/*
 - (void)signupCallback:(CloudResponse *)cloudResponse
 {
     
@@ -301,6 +299,7 @@
     }
 }
 
+ 
 - (void)facebookCallback:(CloudResponse *)cloudResponse
 {
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
@@ -329,13 +328,7 @@
         [self enableButton:_loggedoutSignupButton];
     }
 }
-
-- (void)logoutCallback:(CloudResponse *)cloudResponse
-{
-    DLog(@"Logged Out");
-}
-
-/*
+ 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
 {
     DLog(@"Login view fetched user info %@ access token %@",user.name,[[[FBSession activeSession] accessTokenData] accessToken]);

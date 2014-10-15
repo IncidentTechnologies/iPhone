@@ -111,92 +111,20 @@
 {
     loadedTableType = type;
     
+    NSDictionary * listData;
+    
     if([loadedTableType isEqualToString:TABLE_SETS]){
         
-        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeAppDefined andUserId:g_loggedInUser.m_userId andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback:)];
-        
+        listData = [g_ophoMaster getSequenceList];
         
     }else if([loadedTableType isEqualToString:TABLE_SONGS]){
         
-        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:g_loggedInUser.m_userId andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback:)];
-        
-    }
-}
-
-- (void)requestGetXmpListCallback:(CloudResponse *)cloudResponse
-{
-    // TODO: figure out where to add tutorial song
-    
-    DLog(@"Request Get Xmp List Callback");
-    
-    NSArray * xmpList = cloudResponse.m_xmpList;
-    
-    fileIdSet = [[NSMutableArray alloc] init];
-    fileLoadSet = [[NSMutableArray alloc] init];
-    fileDateSet = [[NSMutableArray alloc] init];
-    NSDateFormatter * df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    for(XmlDom * xmp in xmpList){
-        NSInteger xmpid = [[xmp getTextFromChildWithName:@"xmp_id"] intValue];
-        NSString * name = [xmp getTextFromChildWithName:@"xmp_name"];
-        NSDate * date = [df dateFromString:[xmp getTextFromChildWithName:@"xmp_create_date"]];
-        
-        DLog(@"Date is %@",date);
-        
-        if(xmpid > 0){
-            [fileIdSet addObject:[NSNumber numberWithInt:xmpid]];
-        }
-        
-        if(name != nil){
-            [fileLoadSet addObject:name];
-        }
-        
-        if(date != nil){
-            [fileDateSet addObject:date];
-        }
+        listData = [g_ophoMaster getSongList];
     }
     
-    DLog(@"FileIdSet %@ FileLoadSet %@ FileDateSet %@",fileIdSet, fileLoadSet,fileDateSet);
-    
-    /*
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSError * error;
-    NSString * directoryPath = [paths objectAtIndex:0];
-    directoryPath = [directoryPath stringByAppendingPathComponent:loadedTableType];
-    
-    //fileSet = [[NSMutableDictionary alloc] init];
-    
-    fileDateSet = [[NSMutableArray alloc] init];
-    fileLoadSet = (NSMutableArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
-    
-    // Exclude unrelated files
-    for(int i = 0; i < [fileLoadSet count]; i++){
-        if([fileLoadSet[i] rangeOfString:@"usr_"].location == NSNotFound){
-            
-            [fileLoadSet removeObjectAtIndex:i--];
-            
-        }else{
-            
-            NSString * filePath = [directoryPath stringByAppendingString:@"/"];
-            filePath = [filePath stringByAppendingString:fileLoadSet[i]];
-            NSDictionary * attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
-            
-            // remove usr_ prefix
-            fileLoadSet[i] = [fileLoadSet[i] stringByReplacingCharactersInRange:[fileLoadSet[i] rangeOfString:@"usr_"] withString:@""];
-            
-            fileLoadSet[i] = [fileLoadSet[i] stringByReplacingCharactersInRange:[fileLoadSet[i] rangeOfString:@".xml"] withString:@""];
-            
-            fileDateSet[i] = [attrs objectForKey:NSFileModificationDate];
-            
-        }
-    }
-    */
-    
-    // Sort by date order
-    if([fileLoadSet count] > 0){
-        [self sortFilesByDates];
-    }
+    fileIdSet = [[NSMutableArray alloc] initWithArray:[listData objectForKey:OPHO_LIST_IDS]];
+    fileLoadSet = [[NSMutableArray alloc] initWithArray:[listData objectForKey:OPHO_LIST_NAMES]];
+    fileDateSet = [[NSMutableArray alloc] initWithArray:[listData objectForKey:OPHO_LIST_DATES]];
     
     [loadTable reloadData];
     
@@ -210,49 +138,6 @@
     }
 }
 
-
-// TODO: this can probably be done nicer with comparators
-- (void)sortFilesByDates
-{
-    
-    //NSMutableArray * newFileLoadSet = [[NSMutableArray alloc] init];
-    //NSMutableArray * newFileDateSet = [[NSMutableArray alloc] init];
-    NSString * newFileLoadSet[[fileDateSet count]];
-    NSDate * newFileDateSet[[fileDateSet count]];
-    NSNumber * newFileIdSet[[fileDateSet count]];
-    
-    NSDate * maxDate;
-    int maxDateIndex;
-    
-    @synchronized(self){
-        for(int i = 0; i < [fileDateSet count]; i++){
-            
-            maxDateIndex = i;
-            maxDate = fileDateSet[i];
-            //fileDateSet[j] > maxDate
-            for(int j = 0; j < [fileDateSet count]; j++){
-                if([(NSDate *)fileDateSet[j] compare:maxDate] == NSOrderedDescending){
-                    maxDateIndex = j;
-                    maxDate = fileDateSet[j];
-                }
-            }
-            
-            DLog(@"Max date index %i",maxDateIndex);
-            newFileDateSet[i] = fileDateSet[maxDateIndex];
-            newFileLoadSet[i] = fileLoadSet[maxDateIndex];
-            newFileIdSet[i] = fileIdSet[maxDateIndex];
-            
-            fileDateSet[maxDateIndex] = [NSDate distantPast];
-        }
-    }
-    
-    for(int i = 0; i < [fileDateSet count]; i++){
-        [fileLoadSet setObject:newFileLoadSet[i] atIndexedSubscript:i];
-        [fileDateSet setObject:newFileDateSet[i] atIndexedSubscript:i];
-        [fileIdSet setObject:newFileIdSet[i] atIndexedSubscript:i];
-    }
-}
-
 #pragma mark - Save Load Actions
 - (void)userDidLoadFile:(NSInteger)xmpId
 {
@@ -260,7 +145,6 @@
         DLog(@"user did load SET %i",xmpId);
         
         // delegate calls back to set activeSequencer
-        //[delegate loadFromName:filename andType:loadedTableType];
         [delegate loadFromXmpId:xmpId andType:loadedTableType];
         
         // Delegate sets activeSequencer/activeSong
@@ -270,7 +154,6 @@
         DLog(@"user did load SONG %i",xmpId);
         
         // delegate calls back to set activeSong
-        //[delegate loadFromName:filename andType:loadedTableType];
         [delegate loadFromXmpId:xmpId andType:loadedTableType];
         
         [delegate viewRecordShareWithAnimation:YES];
@@ -315,13 +198,7 @@
 {
     DLog(@"user did delete %i",xmpId);
     
-    [g_ophoCloudController requestDeleteXmpWithId:xmpId andCallbackObj:self andCallbackSel:@selector(requestDeleteXmpCallback)];
-    
-}
-
-- (void)requestDeleteXmpCallback
-{
-    DLog(@"Delete XMP Callback");
+    [g_ophoMaster deleteWithId:xmpId];
     
 }
 

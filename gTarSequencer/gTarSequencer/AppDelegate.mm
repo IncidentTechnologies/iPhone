@@ -12,8 +12,7 @@
 
 @synthesize window;
 
-OphoCloudController * g_ophoCloudController;
-//CloudController * g_cloudController;
+OphoMaster * g_ophoMaster;
 //FileController * g_fileController;
 NSUser * g_loggedInUser;
 
@@ -48,8 +47,7 @@ NSUser * g_loggedInUser;
     [self.window setRootViewController: navigationController];
     
     // init the cloud controller
-    //g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
-    g_ophoCloudController = [[OphoCloudController alloc] initWithServer:kServerAddress];
+    g_ophoMaster = [[OphoMaster alloc] init];
     
     // init the file controller
     //g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];

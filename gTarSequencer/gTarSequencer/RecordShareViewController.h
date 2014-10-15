@@ -49,7 +49,7 @@
 
 @end
 
-extern OphoCloudController * g_ophoCloudController;
+extern OphoMaster * g_ophoMaster;
 extern NSUser * g_loggedInUser;
 
 @interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,RecordEditorDelegate,UIGestureRecognizerDelegate>

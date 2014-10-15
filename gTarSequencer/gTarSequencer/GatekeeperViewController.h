@@ -10,8 +10,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "CyclingTextField.h"
 
-//extern CloudController * g_cloudController;
-extern OphoCloudController * g_ophoCloudController;
+extern OphoMaster * g_ophoMaster;
 extern NSUser * g_loggedInUser;
 
 @protocol GatekeeperDelegate <NSObject>
@@ -23,7 +22,7 @@ extern NSUser * g_loggedInUser;
 
 @end
 
-@interface GatekeeperViewController : UIViewController <UITextFieldDelegate,FBLoginViewDelegate>
+@interface GatekeeperViewController : UIViewController <UITextFieldDelegate,FBLoginViewDelegate, OphoLoginDelegate>
 {
     
 }
@@ -67,5 +66,4 @@ extern NSUser * g_loggedInUser;
 - (void)requestCachedLogin;
 
 - (void)resetScreen;
-
 @end

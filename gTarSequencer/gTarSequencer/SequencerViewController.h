@@ -27,7 +27,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MessageUI.h>
 
-extern OphoCloudController * g_ophoCloudController;
+extern OphoMaster * g_ophoMaster;
 extern NSUser * g_loggedInUser;
 
 @interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate,RecordShareDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,GatekeeperDelegate> {

@@ -30,12 +30,11 @@
 
 @end
 
-extern OphoCloudController * g_ophoCloudController;
+extern OphoMaster * g_ophoMaster;
 extern NSUser * g_loggedInUser;
 
 @interface OptionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 {
-    //NSMutableDictionary * fileSet;
     NSMutableArray * fileIdSet;
     NSMutableArray * fileLoadSet;
     NSMutableArray * fileDateSet;

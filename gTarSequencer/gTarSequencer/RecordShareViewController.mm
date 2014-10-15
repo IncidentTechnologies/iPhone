@@ -1356,7 +1356,7 @@
     if(recordingSong.m_id <= 0){
         
         // Generate an ID
-        [g_ophoCloudController requestNewXmpWithFolderId:0 andName:recordingSong.m_title andCallbackObj:self andCallbackSel:@selector(requestSaveFirstSongXmpCallback:)];
+        [g_ophoMaster saveToNewWithName:recordingSong.m_title callbackObj:self selector:@selector(requestSaveFirstSongXmpCallback:)];
         
     }else{
         
@@ -1382,10 +1382,7 @@
     // [recordingSong printTree];
     NSString * songData = [recordingSong saveToFile:recordingSong.m_title];
     
-    // TODO: delete temporary file after generating
-    
-    [g_ophoCloudController requestSaveXmpWithId:recordingSong.m_id andXmpFile:nil andXmpData:songData andCallbackObj:self andCallbackSel:@selector(requestSaveSongXmpCallback)];
-    
+    [g_ophoMaster saveToId:recordingSong.m_id withData:songData callbackObj:self selector:@selector(requestSaveSongXmpCallback)];
 }
 
 - (void)requestSaveSongXmpCallback
@@ -1588,15 +1585,7 @@
 
 - (NSArray *)getRecordedSongSet
 {
-    
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSError * error;
-    NSString * directoryPath = [paths objectAtIndex:0];
-    directoryPath = [directoryPath stringByAppendingPathComponent:@"Songs"];
-    
-    NSArray * tempList = (NSArray *)[[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
-    
-    return tempList;
+    return [[g_ophoMaster getSongList] objectForKey:OPHO_LIST_NAMES];
 }
 
 - (NSString *)generateNextRecordedSongName
@@ -1613,8 +1602,6 @@
         if(!([filename rangeOfString:@"Song"].location == NSNotFound)){
             
             NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Song"] withString:@""];
-            customSuffix = [customSuffix stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
-            customSuffix = [customSuffix stringByReplacingOccurrencesOfString:@".xml" withString:@""];
             int numFromSuffix = [customSuffix intValue];
             
             customCount = MAX(customCount,numFromSuffix);

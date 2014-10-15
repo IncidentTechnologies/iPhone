@@ -243,6 +243,7 @@
 		6D126A851970724200A2A612 /* Juno_G.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A791970724200A2A612 /* Juno_G.mp3 */; };
 		6D126A861970724200A2A612 /* Juno_G#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D126A7A1970724200A2A612 /* Juno_G#.mp3 */; };
 		6D19EC3A19B6A86700A963E4 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D19EC3919B6A86700A963E4 /* FacebookIcon.jpg */; };
+		6D1C776819EEF0CA002AD74A /* OphoMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C776719EEF0CA002AD74A /* OphoMaster.m */; };
 		6D1E5C1019C0D574005956F4 /* NSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C0F19C0D574005956F4 /* NSSong.m */; };
 		6D1E5C1A19C0D5E4005956F4 /* NSClip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C1919C0D5E4005956F4 /* NSClip.mm */; };
 		6D1E5C1E19C127DA005956F4 /* MainEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C1D19C127DA005956F4 /* MainEventController.m */; };
@@ -745,6 +746,8 @@
 		6D13E2A118EB754C0081B378 /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Debug-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
 		6D17E55118EB691700FCB958 /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Debug-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
 		6D19EC3919B6A86700A963E4 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FacebookIcon.jpg; sourceTree = "<group>"; };
+		6D1C776619EEF0CA002AD74A /* OphoMaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OphoMaster.h; sourceTree = "<group>"; };
+		6D1C776719EEF0CA002AD74A /* OphoMaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OphoMaster.m; sourceTree = "<group>"; };
 		6D1E5C0E19C0D574005956F4 /* NSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSong.h; sourceTree = "<group>"; };
 		6D1E5C0F19C0D574005956F4 /* NSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSong.m; sourceTree = "<group>"; };
 		6D1E5C1819C0D5E4005956F4 /* NSClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSClip.h; sourceTree = "<group>"; };
@@ -1320,6 +1323,7 @@
 				58D6171C1863B8D7001EB327 /* AppDelegate.h */,
 				58D6171D1863B8D7001EB327 /* AppDelegate.mm */,
 				6DC789FA199BF933006B14F5 /* UIWidgets */,
+				6D1C776119EEF0B1002AD74A /* OphoMaster */,
 				6DC789FB199BFA23006B14F5 /* SoundMaster */,
 				58B4D3CA186E1ECC0035D9E5 /* SequenceModel */,
 				58D617561863BD81001EB327 /* LoadingViewController */,
@@ -1558,6 +1562,15 @@
 			);
 			name = Trumpet;
 			path = Trombone;
+			sourceTree = "<group>";
+		};
+		6D1C776119EEF0B1002AD74A /* OphoMaster */ = {
+			isa = PBXGroup;
+			children = (
+				6D1C776619EEF0CA002AD74A /* OphoMaster.h */,
+				6D1C776719EEF0CA002AD74A /* OphoMaster.m */,
+			);
+			name = OphoMaster;
 			sourceTree = "<group>";
 		};
 		6D1E5C1519C0D580005956F4 /* Sequence */ = {
@@ -2580,6 +2593,7 @@
 				58CA4E7D18A19C8A0026D83C /* LeftNavigatorViewController.m in Sources */,
 				6DC78A01199BFEC5006B14F5 /* NSSampler.mm in Sources */,
 				6DAD2B3E18CFA0CE00228F08 /* SoundMaster_.mm in Sources */,
+				6D1C776819EEF0CA002AD74A /* OphoMaster.m in Sources */,
 				58547AE8186CD5EF003638EF /* RadialDisplay.mm in Sources */,
 				6DA724B318E25B0700872705 /* RecordShareViewController.mm in Sources */,
 				58241D7B188DC46C00498DB5 /* CustomInstrumentSelector.mm in Sources */,
