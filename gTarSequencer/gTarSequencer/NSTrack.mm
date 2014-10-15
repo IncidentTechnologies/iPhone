@@ -473,7 +473,7 @@
         
         float patternBeat;
         
-        DLog(@"Pattern startbeat is %f, clip startbeat is %f",patternStartbeat,clip.m_startbeat);
+        //DLog(@"Pattern startbeat is %f, clip startbeat is %f",patternStartbeat,clip.m_startbeat);
         
         // Cycle through the pattern for the duration of the clip, but offset the start
         for(patternBeat = patternStartbeat; patternBeat < patternEndbeat; patternBeat += patternLength){

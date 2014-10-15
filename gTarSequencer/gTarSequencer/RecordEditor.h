@@ -75,6 +75,7 @@
     UIView * moveClipPhantom;
     UIPanGestureRecognizer * editingMeasurePan;
     UIPanGestureRecognizer * moveClipPan;
+    UILongPressGestureRecognizer * editingMeasureLetter;
     float editingMeasurePanFirstX;
     float moveClipPanFirstX;
     

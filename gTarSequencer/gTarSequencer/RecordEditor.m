@@ -106,7 +106,7 @@
     editingTrack = track;
     
     // Ensure data is up to date
-    [self mergeNeighboringIdenticalClips];
+    [self mergeNeighboringIdenticalClips:YES];
     [self correctMeasureLengths];
     [self shrinkExpandMeasuresOnScreen];
     [delegate drawTickmarks];
@@ -210,7 +210,7 @@
     if(clip.m_muted){
         return;
     }
-    
+ 
     CGSize size = CGSizeMake(view.frame.size.width, view.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size,NO,0);
     
@@ -363,6 +363,10 @@
         
         if(pattern != nil){
             [self drawTempPatternNotesForClip:editingClip inView:editingClipView withPattern:[instTrack getPatternByName:newPattern] patternLength:[instTrack getPatternLengthByName:newPattern]];
+        }else{
+            
+            [self drawPatternNotesForClip:editingClip inView:editingClipView];
+            
         }
     }
 }
@@ -538,7 +542,7 @@
     [horizontalAdjustor hideControls];
     
     [self clearEditingMeasure:YES];
-    [self mergeNeighboringIdenticalClips];
+    [self mergeNeighboringIdenticalClips:YES];
     [self correctMeasureLengths];
     [self shrinkExpandMeasuresOnScreen];
     [delegate drawTickmarks];
@@ -555,7 +559,7 @@
     
     if(editingClipView != nil){
         
-        [editingClipView removeGestureRecognizer:moveClipPan];
+        //[editingClipView removeGestureRecognizer:moveClipPan];
         
         // Deactivate
         UIColor * oldColor;
@@ -621,9 +625,9 @@
     [self selectDefaultMeasureInEditing];
     
     // Add pan to move selection
-    moveClipPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panEditingClip:)];
-    moveClipPan.delegate = self;
-    [editingClipView addGestureRecognizer:moveClipPan];
+    //moveClipPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panEditingClip:)];
+    //moveClipPan.delegate = self;
+    //[editingClipView addGestureRecognizer:moveClipPan];
     
 }
 
@@ -645,25 +649,30 @@
 {
     // Not the left nav
     if([otherGestureRecognizer isMemberOfClass:[UISwipeGestureRecognizer class]]){
+        DLog(@"RETURN NO 1");
         return NO;
     }
     
-    if(editingClipView.frame.size.width > MAX_MOVING_MEASURES*measureWidth){
+    if(gestureRecognizer != editingMeasurePan && editingClipView.frame.size.width > MAX_MOVING_MEASURES*measureWidth){
+        DLog(@"RETURN YES 1");
         return YES;
     }
     
+    DLog(@"RETURN NO 2");
     return NO;
 }
 
 
 #pragma mark - Measure Moving
-
+/*
 - (void)panEditingClip:(UIPanGestureRecognizer *)sender
 {
     // Only small clips are mobile
     if(editingClipView.frame.size.width > MAX_MOVING_MEASURES*measureWidth){
         return;
     }
+    
+    DLog(@"Pan editing clip");
     
     CGPoint newPoint = [sender translationInView:editingTrackView];
     
@@ -721,6 +730,7 @@
         moveClipPhantom = nil;
     }
 }
+ */
 
 #pragma mark - Pattern Editing
 
@@ -728,6 +738,8 @@
 - (void)resetEditingClipPattern
 {
     [editingPatternLetterOverlay removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    
+    //[editingPatternLetterOverlay removeGestureRecognizer:editingPatternPressGesture];
     
     UILabel * labelToFadeOut = editingPatternLetter;
     
@@ -824,6 +836,7 @@
 
 - (void)changeLetterPattern:(id)sender
 {
+    
     NSString * newPattern;
     
     if([editingClip.m_name isEqualToString:PATTERN_E_PENDING]){
@@ -853,15 +866,22 @@
     }
     
     // Don't override data for custom pattern
-    if(![newPattern isEqualToString:PATTERN_E]){
+    //if(![newPattern isEqualToString:PATTERN_E]){
+    
+        // TODO: figure out how to not clear new track with data made custom
+    
+        [delegate regenerateDataForTrack:editingTrack];
         [self redrawEditingPatternNotesWithPattern:newPattern];
-    }
+        [self drawEditingMeasureNotes];
+        
+    //}
     
     newPattern = [newPattern stringByReplacingOccurrencesOfString:@"-" withString:@""];
     
     [editingPatternLetter setText:newPattern];
     
     [delegate drawTickmarks];
+    
 }
 
 - (void)initEditingPanelPosition
@@ -881,7 +901,7 @@
     [UIView animateWithDuration:0.3 animations:^(void){
         
         // slide up the track
-        [delegate setContentVerticalOffset:editingTrackView.frame.origin.y-1];
+        [delegate setContentVerticalOffset:editingTrackView.frame.origin.y];
         
         // slide up the instrument panel subviews
         int index = 0;
@@ -970,11 +990,16 @@
         return;
     }
     
+    // Set beats for editing clip
+    if(editingClipView != nil){
+        [self setLeftBeatsForClip:editingClip withView:editingClipView];
+    }
+    
     // Trim the leftward clip in track
     if(editingClipIndex > 0){
         UIView * leftClipView = [clipDict objectAtIndex:editingClipIndex-1];
         
-        [leftClipView setFrame:CGRectMake(leftClipView.frame.origin.x,leftClipView.frame.origin.y,leftClipView.frame.size.width+(diff-lastDiff),leftClipView.frame.size.height)];
+        [leftClipView setFrame:CGRectMake(leftClipView.frame.origin.x,leftClipView.frame.origin.y,editingClipView.frame.origin.x-leftClipView.frame.origin.x,leftClipView.frame.size.height)];
         
         if((editingClipIndex > 1 && editingClipView.frame.origin.x <= leftClipView.frame.origin.x+MIN_TRACK_WIDTH) || (editingClipIndex == 1 && editingClipView.frame.origin.x <= leftClipView.frame.origin.x+MIN_LEFT_TRACK_WIDTH)){
             
@@ -984,7 +1009,7 @@
             
             // Set beats for left clip
             NSClip * leftClip = [editingTrack.m_clips objectAtIndex:editingClipIndex-1];
-            [self setBeatsForClip:leftClip withView:leftClipView];
+            [self setLeftBeatsForClip:leftClip withView:leftClipView];
             
         }
         
@@ -992,17 +1017,12 @@
     
     // Create new muted clip to the left
     if(editingClipIndex == 0 && editingClipView.frame.origin.x > 0){
-        [self createNewClipFrom:0.0 to:editingClipView.frame.origin.x at:editingClipView.frame.origin.y forTrack:editingTrack.m_name startEditing:NO isMuted:YES withPattern:PATTERN_A];
+        [self createNewClipFrom:0.0 to:editingClipView.frame.origin.x at:editingClipView.frame.origin.y forTrack:editingTrack.m_name startEditing:NO isMuted:YES withPattern:PATTERN_E];
     }
     
     // Delete the measure if it's been shrunken too much
     if(editingClipView.frame.size.width < MIN_TRACK_WIDTH){
         [self removeClipInEditing:editingClipView];
-    }
-    
-    // Set beats for editing clip
-    if(editingClipView != nil){
-        [self setBeatsForClip:editingClip withView:editingClipView];
     }
     
     // Redraw tickmarks
@@ -1023,26 +1043,58 @@
     
     NSMutableArray * clipDict = [trackclips objectForKey:editingTrack.m_name];
     
+    int editingClipIndex = -1;
     for(int c = 0; c < [clipDict count]; c++){
         UIView * clipView = [clipDict objectAtIndex:c];
         
-        if(clipView.frame.origin.x > editingClipView.frame.origin.x){
-            [clipView setFrame:CGRectMake(clipView.frame.origin.x+(diff-lastDiff),clipView.frame.origin.y,clipView.frame.size.width,clipView.frame.size.height)];
+        if(clipView == editingClipView){
+            editingClipIndex = c;
+            break;
+        }
+    }
+    
+    // Set beats for editing clip
+    if(editingClipView != nil){
+        [self setLeftBeatsForClip:editingClip withView:editingClipView];
+    }
+    
+    // Fill right blank
+    if(editingClipIndex < [clipDict count] - 1){
+        UIView * nextClipView = [clipDict objectAtIndex:editingClipIndex+1];
+        NSClip * nextClip = [editingTrack.m_clips objectAtIndex:editingClipIndex+1];
+        
+        if(nextClip.m_muted || diff > 0){
             
-            // Set beats
-            NSClip * rightClip = [editingTrack.m_clips objectAtIndex:c];
-            [self setBeatsForClip:rightClip withView:clipView];
+            DLog(@"Next clip muted or diff up");
             
+            float newWidth = nextClipView.frame.origin.x+nextClipView.frame.size.width-(editingClipView.frame.origin.x+editingClipView.frame.size.width);
+            [nextClipView setFrame:CGRectMake(editingClipView.frame.origin.x+editingClipView.frame.size.width,nextClipView.frame.origin.y,newWidth,nextClipView.frame.size.height)];
+            
+            [self setLeftBeatsForClip:nextClip withView:nextClipView];
+            
+            if(diff > 0 && nextClipView.frame.size.width < MIN_TRACK_WIDTH){
+                
+                DLog(@"Remove next clip");
+                
+                [self removeClipInEditing:nextClipView];
+            }
+            
+        }else if(editingClip.m_muted && diff < 0){
+            
+            DLog(@"Editing clip muted, diff down");
+            
+            float newWidth = nextClipView.frame.origin.x+nextClipView.frame.size.width-(editingClipView.frame.origin.x+editingClipView.frame.size.width);
+            [nextClipView setFrame:CGRectMake(editingClipView.frame.origin.x+editingClipView.frame.size.width,nextClipView.frame.origin.y,newWidth,nextClipView.frame.size.height)];
+            
+            [self setLeftBeatsForClip:nextClip withView:nextClipView];
+            
+        }else if(!editingClip.m_muted && diff < 0){
+            [self createNewClipFrom:editingClipView.frame.origin.x+editingClipView.frame.size.width to:nextClipView.frame.origin.x at:editingClipView.frame.origin.y forTrack:editingTrack.m_name startEditing:NO isMuted:YES withPattern:PATTERN_E];
         }
     }
     
     if(editingClipView.frame.size.width < MIN_TRACK_WIDTH){
         [self removeClipInEditing:editingClipView];
-    }
-    
-    // Set beats for editing clip
-    if(editingClipView != nil){
-        [self setBeatsForClip:editingClip withView:editingClipView];
     }
     
     // Adjust add clip measure
@@ -1061,7 +1113,7 @@
     lastDiff = 0;
     
     // Ensure data is up to date
-    [self mergeNeighboringIdenticalClips];
+    [self mergeNeighboringIdenticalClips:NO];
     [self correctMeasureLengths];
     [self shrinkExpandMeasuresOnScreen];
     [delegate drawTickmarks];
@@ -1083,7 +1135,7 @@
     lastDiff = 0;
     
     // Ensure data is up to date
-    [self mergeNeighboringIdenticalClips];
+    [self mergeNeighboringIdenticalClips:NO];
     [self correctMeasureLengths];
     [self shrinkExpandMeasuresOnScreen];
     [delegate drawTickmarks];
@@ -1106,8 +1158,38 @@
     double endbeat = [self getBeatFromXPosition:view.frame.origin.x+view.frame.size.width];
     
     [clip setTempStartbeat:startbeat tempEndbeat:endbeat];
-    
+
     //DLog(@"Set temp beats for clip %@ from %f to %f",clip.m_name,startbeat,endbeat);
+   
+}
+
+// Set beats and round left for fret origin
+- (void)setLeftBeatsForClip:(NSClip *)clip withView:(UIView *)view
+{
+    double prevStartbeat = clip.m_startbeat;
+    
+    [self setBeatsForClip:clip withView:view];
+    
+    // Ensure that the start beat is rounded to a fret
+    double roundstart = [self getXPositionForClipBeat:clip.m_startbeat];
+    double roundend = [self getXPositionForClipBeat:clip.m_endbeat];
+    
+    [view setFrame:CGRectMake(roundstart, view.frame.origin.y, roundend-roundstart, view.frame.size.height)];
+    
+    // Adjust all the notes for a custom pattern if startbeat moves
+    double noteDiff = clip.m_startbeat-prevStartbeat;
+    [self moveNotesForClip:clip byDiff:noteDiff];
+
+}
+
+- (void)moveNotesForClip:(NSClip *)clip byDiff:(float)noteDiff
+{
+    NSString * clipPattern = clip.m_name;
+    if([clipPattern isEqualToString:PATTERN_E]){
+        for(NSNote * note in clip.m_notes){
+            note.m_beatstart += noteDiff;
+        }
+    }
 }
 
 #pragma mark - Track Editing Actions
@@ -1140,15 +1222,34 @@
     
     [clipDict removeObjectAtIndex:clipToRemoveIndex];
     
-    // Start the next track in its place
-    if(clipToRemoveIndex < [clipDict count]){
+    // If possible end the previous track in its place
+    if(clipToRemoveIndex > 0 && clipToRemoveIndex < [clipDict count]){
+        
+        DLog(@"End the previous track in its place %i",clipToRemoveIndex);
+        
+        UIView * prevTrack = [clipDict objectAtIndex:clipToRemoveIndex-1];
+        UIView * nextTrack = [clipDict objectAtIndex:clipToRemoveIndex];
+        
+        NSClip * prevTrackClip = [editingTrack.m_clips objectAtIndex:clipToRemoveIndex-1];
+        
+        [prevTrack setFrame:CGRectMake(prevTrack.frame.origin.x, prevTrack.frame.origin.y, nextTrack.frame.origin.x-prevTrack.frame.origin.x, prevTrack.frame.size.height)];
+        
+        [prevTrackClip setTempStartbeat:prevTrackClip.m_startbeat tempEndbeat:clip.m_endbeat];
+        
+        
+    }else if(clipToRemoveIndex < [clipDict count]){
+        
+        // Otherwise start the next track in its place
         
         DLog(@"Start the next track in its place %i",clipToRemoveIndex);
         
         UIView * nextTrack = [clipDict objectAtIndex:clipToRemoveIndex];
+        UIView * nextNextTrack = (clipToRemoveIndex+1 < [clipDict count]) ? [clipDict objectAtIndex:clipToRemoveIndex+1] : nil;
         NSClip * nextTrackClip = [editingTrack.m_clips objectAtIndex:clipToRemoveIndex+1];
         
-        [nextTrack setFrame:CGRectMake(clipToRemove.frame.origin.x,nextTrack.frame.origin.y,nextTrack.frame.size.width,nextTrack.frame.size.height)];
+        float newWidth = (nextNextTrack == nil) ? nextTrack.frame.size.width : nextNextTrack.frame.origin.x-clipToRemove.frame.origin.x;
+        
+        [nextTrack setFrame:CGRectMake(clipToRemove.frame.origin.x,nextTrack.frame.origin.y,newWidth,nextTrack.frame.size.height)];
         
         [nextTrackClip setTempStartbeat:clip.m_startbeat tempEndbeat:nextTrackClip.m_endbeat];
         
@@ -1230,6 +1331,7 @@
 {
     if(editingMeasureOverlay != nil){
         [editingMeasureOverlay removeGestureRecognizer:editingMeasurePan];
+        [editingMeasureOverlay removeGestureRecognizer:editingMeasureLetter];
         [editingMeasureOverlay removeFromSuperview];
         editingMeasureOverlay = nil;
     }
@@ -1255,7 +1357,12 @@
     
     // Add drag gesture
     editingMeasurePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panEditingMeasure:)];
+    editingMeasurePan.delegate = self;
     [editingMeasureOverlay addGestureRecognizer:editingMeasurePan];
+    
+    editingMeasureLetter = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(changeLetterPatternFromOverlay:)];
+    editingMeasureLetter.minimumPressDuration = 0.2;
+    [editingMeasureOverlay addGestureRecognizer:editingMeasureLetter];
     
     // Show editing interface with selected region
     [self showEditingMeasureInterface];
@@ -1283,9 +1390,9 @@
 - (void)startEditingClipCustomPattern
 {
     if(![editingClip.m_name isEqualToString:PATTERN_E]){
+        
         // Clear the pattern preset
         [editingClip changePattern:PATTERN_E_PENDING];
-        
         [self changeLetterPattern:nil];
     }
 }
@@ -1426,8 +1533,21 @@
     
 }
 
+- (void)changeLetterPatternFromOverlay:(UILongPressGestureRecognizer *)sender
+{
+    if([sender state] == UIGestureRecognizerStateBegan){
+        if(editingMeasureOverlay.frame.origin.x < editingPatternLetter.frame.origin.x){
+            
+            DLog(@"Change letter pattern from overlay");
+        
+            [self changeLetterPattern:nil];
+        }
+    }
+}
+
 - (void)panEditingMeasure:(UIPanGestureRecognizer *)sender
 {
+    
     CGPoint newPoint = [sender translationInView:editingClipView];
     
     if([sender state] == UIGestureRecognizerStateBegan){
@@ -1457,7 +1577,6 @@
         
         [editingMeasureOverlay setFrame:newFrame];
     }
-    
     
 }
 
@@ -1610,7 +1729,7 @@
 //
 // Merge Clips
 //
-- (void)mergeNeighboringIdenticalClips
+- (void)mergeNeighboringIdenticalClips:(BOOL)mergeEditing
 {
     // Ensure all the indices are correct
     [self reorderTrackClipsForTrack:editingTrack];
@@ -1633,6 +1752,11 @@
         NSClip * firstClip = [editingTrack.m_clips objectAtIndex:i-1];
         NSClip * nextClip = [editingTrack.m_clips objectAtIndex:i];
         
+        // Be careful not to merge the clip while editing
+        if(!mergeEditing && (firstClip == editingClip || nextClip == editingClip)){
+            continue;
+        }
+        
         // Case to merge!
         if([firstClip.m_name isEqualToString:nextClip.m_name] && firstClip.m_muted == nextClip.m_muted){
             [firstClipView setFrame:CGRectMake(firstClipView.frame.origin.x,firstClipView.frame.origin.y,firstClipView.frame.size.width+nextClipView.frame.size.width,firstClipView.frame.size.height)];
@@ -1641,7 +1765,7 @@
             [trackClipViewsToRemove addObject:nextClipView];
             
             // Set beats
-            [self setBeatsForClip:firstClip withView:firstClipView];
+            [self setLeftBeatsForClip:firstClip withView:firstClipView];
             [firstClip setTempStartbeat:firstClip.m_startbeat tempEndbeat:nextClip.m_endbeat];
             
             // If it's a custom pattern copy the notes over
@@ -1723,20 +1847,22 @@
         NSClip * clip = [editingTrack.m_clips objectAtIndex:c];
         
         // No adjustments if the measure is muted
-        if(clip.m_muted){
+        //if(clip.m_muted){
             
-            // Unless it is the first measure
-            if(c == 0){
+            // If it is the first measure?
+            //if(c == 0){
                 
                 // Remove if it's too small
                 if(clipView.frame.size.width <= MIN_TRACK_WIDTH){
+                    
                     [self removeClipInEditing:clipView];
+                    
+                    continue;
                 }
                 
-            }
-            
-            continue;
-        }
+            //}
+        
+        //}
         
         int patternLength = [instTrack getPatternLengthByName:clip.m_name];
         
@@ -1898,7 +2024,7 @@
     [self drawPatternLetterForClip:newClip inView:newClipView];
     
     // Set beats
-    [self setBeatsForClip:newClip withView:newClipView];
+    [self setLeftBeatsForClip:newClip withView:newClipView];
     
     // Start editing?
     if(edit){
@@ -1930,6 +2056,8 @@
 {
     // First adjust the view
     
+    NSMutableArray * clipViewsToRemove = [[NSMutableArray alloc] init];
+    
     for(id trackName in trackclips){
         
         NSTrack * track = [delegate trackWithName:trackName];
@@ -1949,15 +2077,21 @@
                 
                 [lastClipView setFrame:CGRectMake(lastClipView.frame.origin.x, lastClipView.frame.origin.y, newClipWidth, lastClipView.frame.size.height)];
                 
-                [self setBeatsForClip:clip withView:lastClipView];
+                [self setLeftBeatsForClip:clip withView:lastClipView];
                 
             }else{
                 
-                [self removeClipInEditing:lastClipView];
+                [clipViewsToRemove addObject:lastClipView];
+                
+                //[self removeClipInEditing:lastClipView];
                 
             }
         }
         
+    }
+    
+    for(UIView * v in clipViewsToRemove){
+        [self removeClipInEditing:v];
     }
 }
 
@@ -2003,23 +2137,14 @@
     
     // call delegate set measures
     // even if it's redundant, because editing might be processing
-    //if(newNumMeasures != numMeasures-1 || newNumMeasures == MIN_MEASURES){
+    [delegate setMeasures:newNumMeasures drawGrid:NO];
     
-        [delegate setMeasures:newNumMeasures drawGrid:NO];
-        
-        [horizontalAdjustor setBarDefaultWidth:trackView.contentSize.width minWidth:MIN_TRACK_WIDTH];
-    
-        [self cropMutedEndMeasures:newNumMeasures withMaxBeat:maxBeat];
-    
-        // move over all the add clip buttons
-        for(id trackName in trackaddclips){
-            UIButton * addClipButton = [trackaddclips objectForKey:trackName];
-            [addClipButton setFrame:CGRectMake([self getXPositionForClipBeat:newNumMeasures*4.0], addClipButton.frame.origin.y, addClipButton.frame.size.width, addClipButton.frame.size.height)];
-        }
-        
-        // bring grid lines forward
-        [delegate drawGridOverlayLines];
-    //}
+    [horizontalAdjustor setBarDefaultWidth:trackView.contentSize.width minWidth:MIN_TRACK_WIDTH];
+
+    [self cropMutedEndMeasures:newNumMeasures withMaxBeat:maxBeat];
+
+    // bring grid lines forward
+    [delegate drawGridOverlayLines];
     
     [self redrawAllPatternNotes];
     
@@ -2029,8 +2154,12 @@
 
 -(float)getBeatFromXPosition:(float)x
 {
-    float beat = x * 4.0 / measureWidth;
+    float fretWidth = measureWidth / FRETS_ON_GTAR;
+    //float beat = x * 4.0 / measureWidth;
     
+    // round to fret
+    float beat = (fretWidth*floorf(x/fretWidth)) * 4.0 / measureWidth;
+
     return beat;
 }
 

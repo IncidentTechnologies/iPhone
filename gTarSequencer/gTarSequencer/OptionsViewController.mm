@@ -142,8 +142,13 @@
         
         DLog(@"Date is %@",date);
         
-        [fileLoadSet addObject:name];
-        [fileDateSet addObject:date];
+        if(name != nil){
+            [fileLoadSet addObject:name];
+        }
+        
+        if(date != nil){
+            [fileDateSet addObject:date];
+        }
     }
     
     DLog(@"FileLoadSet %@ FileDateSet %@",fileLoadSet,fileDateSet);
