@@ -113,12 +113,12 @@
     
     if([loadedTableType isEqualToString:TABLE_SETS]){
         
-        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSequence andUserId:g_loggedInUser.m_userId andAppId:0 andPermission:PERMISSIONS_OPEN andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback:)];
+        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeAppDefined andUserId:g_loggedInUser.m_userId andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback:)];
         
         
     }else if([loadedTableType isEqualToString:TABLE_SONGS]){
         
-        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:g_loggedInUser.m_userId andAppId:0 andPermission:PERMISSIONS_OPEN andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback:)];
+        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:g_loggedInUser.m_userId andCallbackObj:self andCallbackSel:@selector(requestGetXmpListCallback:)];
         
     }
 }
@@ -131,16 +131,22 @@
     
     NSArray * xmpList = cloudResponse.m_xmpList;
     
+    fileIdSet = [[NSMutableArray alloc] init];
     fileLoadSet = [[NSMutableArray alloc] init];
     fileDateSet = [[NSMutableArray alloc] init];
     NSDateFormatter * df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     for(XmlDom * xmp in xmpList){
+        NSInteger xmpid = [[xmp getTextFromChildWithName:@"xmp_id"] intValue];
         NSString * name = [xmp getTextFromChildWithName:@"xmp_name"];
         NSDate * date = [df dateFromString:[xmp getTextFromChildWithName:@"xmp_create_date"]];
         
         DLog(@"Date is %@",date);
+        
+        if(xmpid > 0){
+            [fileIdSet addObject:[NSNumber numberWithInt:xmpid]];
+        }
         
         if(name != nil){
             [fileLoadSet addObject:name];
@@ -151,7 +157,7 @@
         }
     }
     
-    DLog(@"FileLoadSet %@ FileDateSet %@",fileLoadSet,fileDateSet);
+    DLog(@"FileIdSet %@ FileLoadSet %@ FileDateSet %@",fileIdSet, fileLoadSet,fileDateSet);
     
     /*
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -209,8 +215,11 @@
 - (void)sortFilesByDates
 {
     
-    NSDate * newFileLoadSet[[fileDateSet count]];
+    //NSMutableArray * newFileLoadSet = [[NSMutableArray alloc] init];
+    //NSMutableArray * newFileDateSet = [[NSMutableArray alloc] init];
+    NSString * newFileLoadSet[[fileDateSet count]];
     NSDate * newFileDateSet[[fileDateSet count]];
+    NSNumber * newFileIdSet[[fileDateSet count]];
     
     NSDate * maxDate;
     int maxDateIndex;
@@ -231,34 +240,39 @@
             DLog(@"Max date index %i",maxDateIndex);
             newFileDateSet[i] = fileDateSet[maxDateIndex];
             newFileLoadSet[i] = fileLoadSet[maxDateIndex];
+            newFileIdSet[i] = fileIdSet[maxDateIndex];
             
             fileDateSet[maxDateIndex] = [NSDate distantPast];
         }
     }
     
     for(int i = 0; i < [fileDateSet count]; i++){
-        fileLoadSet[i] = newFileLoadSet[i];
-        fileDateSet[i] = newFileDateSet[i];
+        [fileLoadSet setObject:newFileLoadSet[i] atIndexedSubscript:i];
+        [fileDateSet setObject:newFileDateSet[i] atIndexedSubscript:i];
+        [fileIdSet setObject:newFileIdSet[i] atIndexedSubscript:i];
     }
 }
 
 #pragma mark - Save Load Actions
-- (void)userDidLoadFile:(NSString *)filename
+- (void)userDidLoadFile:(NSInteger)xmpId
 {
     if([loadedTableType isEqualToString:TABLE_SETS]){
-        DLog(@"user did load SET %@",filename);
+        DLog(@"user did load SET %i",xmpId);
         
         // delegate calls back to set activeSequencer
-        [delegate loadFromName:filename andType:loadedTableType];
+        //[delegate loadFromName:filename andType:loadedTableType];
+        [delegate loadFromXmpId:xmpId andType:loadedTableType];
         
         // Delegate sets activeSequencer/activeSong
         [delegate viewSeqSetWithAnimation:YES];
         
     }else if([loadedTableType isEqualToString:TABLE_SONGS]){
-        DLog(@"user did load SONG %@",filename);
+        DLog(@"user did load SONG %i",xmpId);
         
         // delegate calls back to set activeSong
-        [delegate loadFromName:filename andType:loadedTableType];
+        //[delegate loadFromName:filename andType:loadedTableType];
+        [delegate loadFromXmpId:xmpId andType:loadedTableType];
+        
         [delegate viewRecordShareWithAnimation:YES];
         
     }
@@ -296,22 +310,18 @@
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reloadFileTable) userInfo:nil repeats:NO];
 }
 
-- (void)userDidDeleteFile:(NSString *)filename
+//- (void)userDidDeleteFile:(NSString *)filename
+- (void)userDidDeleteFile:(NSInteger)xmpId
 {
-    DLog(@"user did delete as %@",filename);
+    DLog(@"user did delete %i",xmpId);
     
-    // Delegate sets activeSequencer/activeSong
-    [delegate deleteWithName:filename andType:loadedTableType];
-    
-    // TODO: pass the ID for the file to delete
-    
-    [g_ophoCloudController requestDeleteXmpWithId:0 andCallbackObj:self andCallbackSel:@selector(requestDeleteXmpCallback)];
+    [g_ophoCloudController requestDeleteXmpWithId:xmpId andCallbackObj:self andCallbackSel:@selector(requestDeleteXmpCallback)];
     
 }
 
 - (void)requestDeleteXmpCallback
 {
-    DLog(@"Request Delete XMP Callback");
+    DLog(@"Delete XMP Callback");
     
 }
 
@@ -474,6 +484,7 @@
         cell.fileText.text = title;
         cell.fileDate.text = dateString;
         cell.isRenamable = NO;
+        cell.xmpId = [fileIdSet[indexPath.row-1] intValue];
         
         if([loadedTableType isEqualToString:TABLE_SETS]){
             [cell unsetAsActiveSong];
@@ -568,6 +579,7 @@
     if(indexToRemove >= 0 && indexToRemove < [fileLoadSet count]){
         [fileLoadSet removeObjectAtIndex:indexToRemove];
         [fileDateSet removeObjectAtIndex:indexToRemove];
+        [fileIdSet removeObjectAtIndex:indexToRemove];
     }
     
     // remove from table
@@ -575,7 +587,7 @@
     
     
     // delete the data
-    [self userDidDeleteFile:filename];
+    [self userDidDeleteFile:cell.xmpId];
     
     //[loadTable reloadData];
     [self reloadFileTable];

@@ -7,6 +7,7 @@
 //
 
 #import "AppData.h"
+#import "XmlDom.h"
 #import "XMPNode.h"
 #import "XMPObject.h"
 #import "NSTrack.h"
@@ -52,10 +53,12 @@
 
 - (id)initWithXMPFilename:(NSString *)filename;
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXmlDom:(XmlDom *)dom;
 
 - (XMPNode *)convertToXmp;
 - (void)printTree;
-- (NSData *)saveToFile:(NSString *)filename;
+- (NSString *)saveToFile:(NSString *)filename;
+- (void)deleteFile;
 
 - (id)initWithTitle:(NSString *)title author:(NSString *)author description:(NSString *)description tempo:(long)tempo looping:(bool)looping loopstart:(long)loopstart loopend:(long)loopend sequenceName:(NSString *)sequenceName sequenceId:(long)sequenceId;
 

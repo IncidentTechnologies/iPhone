@@ -22,6 +22,7 @@
 @property (retain, nonatomic) SoundMaker * audio;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXmlDom:(XmlDom *)dom;
 
 -(id)init;
 

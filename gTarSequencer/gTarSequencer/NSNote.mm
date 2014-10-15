@@ -43,6 +43,29 @@
     
 }
 
+-(id)initWithXmlDom:(XmlDom *)dom
+{
+    if(dom == nil){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if ( self )
+    {
+        DLog(@"NOTE");
+        
+        m_value = [dom getTextFromChildWithName:@"value"];
+        
+        m_beatstart = [[dom getTextFromChildWithName:@"beatstart"] doubleValue];
+        
+        m_stringvalue = [[dom getTextFromChildWithName:@"value"] intValue];
+    }
+    
+    return self;
+}
+
+
 -(id)initWithValue:(NSString *)value beatstart:(double)beatstart
 {
     self = [super init];

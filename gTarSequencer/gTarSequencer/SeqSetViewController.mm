@@ -140,7 +140,6 @@
         filepath = nil;
     }
     
-    
     // Other state data
     currentState = [[NSDictionary dictionaryWithContentsOfFile:stateMetaDataPath] mutableCopy];
     
@@ -168,7 +167,7 @@
                 
                 if(activeSong != nil && ![activeSong isEqualToString:@""]){
                     loadSequence = false;
-                    [delegate loadFromName:activeSong andType:@"Songs"];
+                    //[delegate loadFromName:activeSong andType:@"Songs"];
                 }
             }
         }
@@ -225,7 +224,7 @@
         
         // Don't upload saved state to backend
         if([filepath isEqualToString:DEFAULT_STATE_NAME]){
-            [g_ophoCloudController requestSaveXmpWithId:activeSequenceXmpId andXmpFile:sequenceData andXmpData:nil andCallbackObj:self andCallbackSel:@selector(requestSaveXmpCallback)];
+            //[g_ophoCloudController requestSaveXmpWithId:activeSequenceXmpId andXmpFile:sequenceData andXmpData:nil andCallbackObj:self andCallbackSel:@selector(requestSaveXmpCallback)];
         }
     }
 }

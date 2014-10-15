@@ -88,6 +88,67 @@
     return self;
 }
 
+-(id)initWithXmlDom:(XmlDom *)dom
+{
+    if(dom == nil){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if ( self )
+    {
+        m_name = [dom getTextFromChildWithName:@"name"];
+        
+        m_level = [[dom getTextFromChildWithName:@"level"] doubleValue];
+        
+        m_muted = [[dom getTextFromChildWithName:@"muted"] boolValue];
+        
+        m_instrument = [[NSInstrument alloc] initWithXmlDom:[dom getChildWithName:@"instrument"]];
+        
+        DLog(@"TRACK name | %@",m_name);
+        DLog(@"TRACK level | %f",m_level);
+        DLog(@"TRACK muted | %i",m_muted);
+        
+        m_patterns = [[NSMutableArray alloc] init];
+        m_clips = [[NSMutableArray alloc] init];
+        
+        selectedPatternDidChange = NO;
+        isSelected = NO;
+        
+        // Init the narrative/input children
+        m_patterns = [[NSMutableArray alloc] init];
+        
+        NSArray * patternchildren = [dom getChildArrayWithName:@"pattern"];
+        NSArray * clipchildren = [dom getChildArrayWithName:@"clip"];
+        
+        int patternIndex = 0;
+        
+        for(XmlDom * child in patternchildren){
+            
+            NSPattern * pattern = [[NSPattern alloc] initWithXmlDom:child];
+            
+            [self addPattern:pattern];
+            
+            if(pattern.m_on){
+                selectedPattern = pattern;
+                selectedPatternIndex = patternIndex;
+            }
+            
+            patternIndex++;
+        }
+        
+        for(XmlDom * child in clipchildren){
+           
+            NSClip * clip = [[NSClip alloc] initWithXmlDom:child];
+            
+            [self addClip:clip];
+        }
+    }
+    
+    return self;
+}
+
 -(id)initWithName:(NSString *)name level:(double)level muted:(bool)muted
 {
     

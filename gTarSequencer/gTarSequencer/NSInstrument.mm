@@ -49,6 +49,41 @@
     return self;
 }
 
+-(id)initWithXmlDom:(XmlDom *)dom
+{
+    if(dom == nil){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if ( self )
+    {
+        
+        m_name = [dom getTextFromChildWithName:@"name"];
+        
+        m_iconName = [dom getTextFromChildWithName:@"iconname"];
+        
+        m_id = [dom getIntegerFromChildWithName:@"index"];
+        
+        if(m_id <= 0){
+            m_xmpid = [dom getIntegerFromChildWithName:@"xmpid"];
+            m_id = m_xmpid;
+        }
+        
+        m_custom = [[dom getTextFromChildWithName:@"custom"] boolValue];
+        
+        m_sampler = [[NSSampler alloc] initWithXmlDom:[dom getChildWithName:@"sampler"]];
+        
+        DLog(@"INSTRUMENT name | %@",m_name);
+        
+        DLog(@"INSTRUMENT id | %i",m_id);
+    }
+    
+    return self;
+}
+
+
 -(id)init
 {
     self = [super init];

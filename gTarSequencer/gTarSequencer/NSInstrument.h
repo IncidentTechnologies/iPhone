@@ -31,6 +31,7 @@
 @property (retain, nonatomic) NSSampler * m_sampler;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXmlDom:(XmlDom *)dom;
 
 -(id)initWithName:(NSString *)name id:(long)index iconName:(NSString *)iconName isCustom:(BOOL)isCustom;
 

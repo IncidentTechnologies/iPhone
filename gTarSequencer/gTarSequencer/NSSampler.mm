@@ -43,6 +43,33 @@
     return self;
 }
 
+-(id)initWithXmlDom:(XmlDom *)dom
+{
+    if(dom == nil){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if ( self )
+    {
+        DLog(@"SAMPLER");
+        
+        m_samples = [[NSMutableArray alloc] init];
+        
+        NSArray * samplechildren = [dom getChildArrayWithName:@"sample"];
+        
+        for(XmlDom * child in samplechildren){
+            
+            NSSample * sample = [[NSSample alloc] initWithXmlDom:child];
+            
+            [self addSample:sample];
+        }
+    }
+    
+    return self;
+}
+
 -(id)init
 {
     self = [super init];

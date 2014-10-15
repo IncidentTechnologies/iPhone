@@ -77,6 +77,8 @@
 @property (nonatomic) BOOL isNameEditing;
 @property (nonatomic) int rowid;
 
+@property (assign, nonatomic) NSInteger xmpId;
+
 - (IBAction)userDidSelectSetButton:(id)sender;
 - (IBAction)userDidSelectSongButton:(id)sender;
 

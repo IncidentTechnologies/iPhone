@@ -513,6 +513,39 @@
     [self saveContext:nil force:YES];
 }
 
+- (void)loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type
+{
+    
+    if([type isEqualToString:TABLE_SETS]){
+        DLog(@"Load set from %i",xmpId);
+        
+        // TODO: pass the ID, handle the data
+        
+        [g_ophoCloudController requestGetXmpWithId:xmpId isXmpOnly:false andCallbackObj:self andCallbackSel:@selector(requestLoadSequenceXmpCallback:)];
+        
+        // First clear any sound playing
+        [seqSetViewController resetSoundMaster];
+        
+        // Do all this in the callback:
+        NSString * filename = DEFAULT_SET_NAME;
+        
+        [self setActiveSequence:filename];
+        
+        [self loadStateFromDisk:filename];
+        [self saveContext:nil force:YES];
+        
+        if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
+            [self relaunchFTUTutorial];
+        }
+        
+    }else if([type isEqualToString:TABLE_SONGS]){
+        DLog(@"Load song from %i",xmpId);
+        
+        [g_ophoCloudController requestGetXmpWithId:xmpId isXmpOnly:false andCallbackObj:self andCallbackSel:@selector(requestLoadSongXmpCallback:)];
+        
+    }
+}
+
 - (void)loadFromName:(NSString *)filename andType:(NSString *)type
 {
     if([type isEqualToString:TABLE_SETS]){
@@ -520,7 +553,7 @@
         
         // TODO: pass the ID, handle the data
         
-        [g_ophoCloudController requestGetXmpWithId:0 isXmpOnly:true andCallbackObj:self andCallbackSel:@selector(requestLoadSequenceXmpCallback)];
+        //[g_ophoCloudController requestGetXmpWithId:0 isXmpOnly:true andCallbackObj:self andCallbackSel:@selector(requestLoadSequenceXmpCallback)];
         
         // First clear any sound playing
         [seqSetViewController resetSoundMaster];
@@ -539,9 +572,10 @@
         
         // TODO: pass the ID, handle the data
         
-        [g_ophoCloudController requestGetXmpWithId:0 isXmpOnly:true andCallbackObj:self andCallbackSel:@selector(requestLoadSongXmpCallback)];
+        //[g_ophoCloudController requestGetXmpWithId:0 isXmpOnly:true andCallbackObj:self andCallbackSel:@selector(requestLoadSongXmpCallback)];
         
         // First clear any sound playing
+        /*
         [seqSetViewController stopSoundMaster];
         [seqSetViewController resetSoundMaster];
         
@@ -562,20 +596,46 @@
             isRecording = TRUE;
             [recordShareController loadSong:loadedSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
         }
-        
+        */
     }
 }
 
 
-- (void)requestLoadSequenceXmpCallback
+- (void)requestLoadSequenceXmpCallback:(CloudResponse *)cloudResponse
 {
     DLog(@"Request Load Sequence Xmp Callback");
     
 }
 
-- (void)requestLoadSongXmpCallback
+- (void)requestLoadSongXmpCallback:(CloudResponse *)cloudResponse
 {
     DLog(@"Request Load Song Xmp Callback");
+    
+    XmlDom * songXmp = cloudResponse.m_xmpDom;
+    
+    NSString * filename = [[[songXmp getChildWithName:@"song"] getChildWithName:@"header"] getTextFromChildWithName:@"title"];
+    
+    DLog(@"Filename is %@, songXmp %@",filename,songXmp);
+    
+    [seqSetViewController stopSoundMaster];
+    [seqSetViewController resetSoundMaster];
+    
+    [self setActiveSong:filename];
+    
+    // Init the song
+    loadedSong = [[NSSong alloc] initWithXmlDom:songXmp];
+    
+    if(loadedSong != nil){
+        // Set the active sequencer accordingly
+        [self loadStateFromDisk:loadedSong.m_sequenceName];
+        [self saveContext:nil force:YES];
+        
+        // Load into record share view
+        SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+        
+        isRecording = TRUE;
+        [recordShareController loadSong:loadedSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+    }
     
 }
 

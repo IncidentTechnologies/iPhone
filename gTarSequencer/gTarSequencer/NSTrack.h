@@ -46,6 +46,7 @@
 @property (nonatomic) BOOL isSelected;
 
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXmlDom:(XmlDom *)dom;
 
 - (id)initWithName:(NSString *)name level:(double)level muted:(bool)muted;
 

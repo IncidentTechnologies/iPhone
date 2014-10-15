@@ -42,6 +42,28 @@
     
 }
 
+-(id)initWithXmlDom:(XmlDom *)dom
+{
+    if(dom == nil){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if ( self )
+    {
+        m_name = [dom getTextFromChildWithName:@"name"];
+        
+        m_value = [dom getTextFromChildWithName:@"value"];
+        
+        m_custom = [[dom getTextFromChildWithName:@"custom"] boolValue];
+        
+        DLog(@"SAMPLE %@",m_name);
+    }
+    
+    return self;
+}
+
 -(id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value
 {
     self = [super init];

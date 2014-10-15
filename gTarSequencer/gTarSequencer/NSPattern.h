@@ -42,6 +42,7 @@
 @property (nonatomic, readonly) NSMutableArray * m_measures;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXmlDom:(XmlDom *)dom;
 
 -(id)initWithName:(NSString *)name on:(bool)on;
 

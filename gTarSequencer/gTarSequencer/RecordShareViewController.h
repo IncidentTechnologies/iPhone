@@ -98,8 +98,6 @@ extern NSUser * g_loggedInUser;
     // Sharing
     NSString * selectedShareType;
     
-    // Saving
-    int recordingSongXmpId;
 }
 
 - (void)reloadInstruments;

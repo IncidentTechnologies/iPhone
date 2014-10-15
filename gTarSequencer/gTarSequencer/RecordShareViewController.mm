@@ -1353,21 +1353,48 @@
 - (void)saveRecordingSongToXmp
 {
     // Save XMP
-    // [recordingSong printTree];
-    NSData * songData = [recordingSong saveToFile:recordingSong.m_title];
+    if(recordingSong.m_id <= 0){
+        
+        // Generate an ID
+        [g_ophoCloudController requestNewXmpWithFolderId:0 andName:recordingSong.m_title andCallbackObj:self andCallbackSel:@selector(requestSaveFirstSongXmpCallback:)];
+        
+    }else{
+        
+        [self saveRecordingSongWithId:recordingSong.m_id];
+        
+    }
+}
+
+- (void)requestSaveFirstSongXmpCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Request Save First Song Xmp Callback %@",cloudResponse);
     
-    [g_ophoCloudController requestSaveXmpWithId:recordingSongXmpId andXmpFile:songData andXmpData:nil andCallbackObj:self andCallbackSel:@selector(requestSaveXmpCallback)];
-    
-    // TODO: delete temporary file after generating
+    [self saveRecordingSongWithId:(long)cloudResponse.m_id];
     
 }
 
-- (void)requestSaveXmpCallback
+- (void)saveRecordingSongWithId:(long)newId
+{
+    recordingSong.m_id = newId;
+    
+    DLog(@"ID is now %li",recordingSong.m_id);
+    
+    // [recordingSong printTree];
+    NSString * songData = [recordingSong saveToFile:recordingSong.m_title];
+    
+    // TODO: delete temporary file after generating
+    
+    [g_ophoCloudController requestSaveXmpWithId:recordingSong.m_id andXmpFile:nil andXmpData:songData andCallbackObj:self andCallbackSel:@selector(requestSaveSongXmpCallback)];
+    
+}
+
+- (void)requestSaveSongXmpCallback
 {
     DLog(@"Request Save Song XMP Callback");
     
-    // TODO: fetch the ID (and other stuff)
-    recordingSongXmpId = 1;
+    // delete temporary file after generating
+    [recordingSong deleteFile];
+    
 }
 
 

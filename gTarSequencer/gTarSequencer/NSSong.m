@@ -71,6 +71,63 @@
     return self;
 }
 
+- (id)initWithXmlDom:(XmlDom *)dom
+{
+    if(dom == nil){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if ( self )
+    {
+        XmlDom * header = [[dom getChildWithName:@"song"] getChildWithName:@"header"];
+        XmlDom * content = [[dom getChildWithName:@"song"] getChildWithName:@"content"];
+        
+        m_title = [header getTextFromChildWithName:@"title"];
+        m_author = [header getTextFromChildWithName:@"author"];
+        m_description = [header getTextFromChildWithName:@"description"];
+        m_id = [[header getValueFromChildWithName:@"id"] intValue];
+        m_tempo = [[header getValueFromChildWithName:@"tempo"] intValue];
+        
+        m_looping = [[header getAttribute:@"looping" fromChildWithName:@"loopsettings"] boolValue];
+        
+        m_loopstart = [[header getAttribute:@"loopstart" fromChildWithName:@"loopsettings"] intValue];
+        
+        m_loopend = [[header getAttribute:@"loopend" fromChildWithName:@"loopsettings"] intValue];
+        
+        m_sequenceId = [[header getAttribute:@"xmpid" fromChildWithName:@"sequence"] intValue];
+        
+        m_sequenceName = [header getAttribute:@"name" fromChildWithName:@"sequence"];
+        
+        DLog(@"SONG id | %li",m_id);
+        DLog(@"SONG title | %@",m_title);
+        DLog(@"SONG author | %@",m_author);
+        DLog(@"SONG description | %@",m_description);
+        DLog(@"SONG tempo | %li",m_tempo);
+        DLog(@"SONG loopsettings looping | %i",m_looping);
+        DLog(@"SONG loopsettings loopstart | %li",m_loopstart);
+        DLog(@"SONG loopsettings loopend | %li",m_loopend);
+        DLog(@"SONG sequence name | %@",m_sequenceName);
+        DLog(@"SONG sequence xmpid | %li",m_sequenceId);
+        
+        // Init the narrative/input children
+        m_tracks = [[NSMutableArray alloc] init];
+        
+        NSArray * children = [content getChildArrayWithName:@"track"];
+        
+        for(XmlDom * child in children){
+            
+            NSTrack * m_track = [[NSTrack alloc] initWithXmlDom:child];
+            
+            [self addTrack:m_track];
+            
+        }
+    }
+    
+    return self;
+}
+
 - (id)initWithXMPNode:(XMPNode *)xmpNode
 {
     
@@ -202,7 +259,7 @@
     tree.PrintXMPTree();
 }
 
-- (NSData *)saveToFile:(NSString *)filename
+- (NSString *)saveToFile:(NSString *)filename
 {
     m_title = filename;
     
@@ -233,10 +290,25 @@
     
     DLog(@"Saved to path %s",filepath);
     
-    NSData * songFile = [[NSData alloc] initWithContentsOfFile:songFilepath];
+    //NSData * songFile = [NSData dataWithContentsOfFile:songFilepath];
+    NSString * songFile = [NSString stringWithContentsOfFile:songFilepath encoding:NSASCIIStringEncoding error:nil];
     
     return songFile;
 
+}
+
+- (void)deleteFile
+{
+    NSString * filename = [@"usr_" stringByAppendingString:m_title];
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * songFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Songs/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
+    
+    NSError * error = NULL;
+    BOOL result = [[NSFileManager defaultManager] removeItemAtPath:songFilepath error:&error];
+    
+    if(!result)
+        DLog(@"Error deleting");
 }
 
 - (id)initWithTitle:(NSString *)title author:(NSString *)author description:(NSString *)description tempo:(long)tempo looping:(bool)looping loopstart:(long)loopstart loopend:(long)loopend sequenceName:(NSString *)sequenceName sequenceId:(long)sequenceId

@@ -45,6 +45,7 @@
 @property (nonatomic, assign) bool m_muted;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXmlDom:(XmlDom *)dom;
 
 - (id)initWithName:(NSString *)name
          startbeat:(double)startbeat

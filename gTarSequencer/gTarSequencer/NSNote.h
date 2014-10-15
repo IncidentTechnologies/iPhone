@@ -26,6 +26,7 @@
 @property (nonatomic) long m_stringvalue;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXmlDom:(XmlDom *)dom;
 
 -(id)initWithValue:(NSString *)value beatstart:(double)beatstart;
 -(id)initWithValue:(NSString *)value beatstart:(double)beatstart duration:(double)duration;

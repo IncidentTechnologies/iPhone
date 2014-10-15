@@ -12,6 +12,7 @@
 @protocol OptionsDelegate <NSObject>
 
 - (void) saveWithName:(NSString *)filename;
+- (void) loadFromXmpId:(NSInteger)xmpId andType:loadedTableType;
 - (void) loadFromName:(NSString *)filename andType:(NSString *)type;
 - (void) renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
 - (void) createNewSaveName:(NSString *)filename;
@@ -35,6 +36,7 @@ extern NSUser * g_loggedInUser;
 @interface OptionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 {
     //NSMutableDictionary * fileSet;
+    NSMutableArray * fileIdSet;
     NSMutableArray * fileLoadSet;
     NSMutableArray * fileDateSet;
     
@@ -56,7 +58,7 @@ extern NSUser * g_loggedInUser;
 - (IBAction)userDidSelectProfile:(id)sender;
 - (IBAction)userDidLogout:(id)sender;
 
-- (void)userDidLoadFile:(NSString *)filename;
+- (void)userDidLoadFile:(NSInteger)xmpId;
 - (void)userDidSaveFile:(NSString *)filename;
 - (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname;
 - (void)userDidCreateNewFile:(NSString *)filename;

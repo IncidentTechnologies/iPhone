@@ -31,6 +31,7 @@
 @synthesize setButton;
 @synthesize songButton;
 @synthesize deleteButton;
+@synthesize xmpId;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -260,10 +261,10 @@
 {
     if([parent.selectMode isEqualToString:@"Load"]){
         
-        DLog(@"Load file %@",fileText.text);
+        DLog(@"Load file %i",xmpId);
         
         // Load
-        [parent userDidLoadFile:fileText.text];
+        [parent userDidLoadFile:xmpId];
         
     }else if([parent.selectMode isEqualToString:@"SaveCurrent"]){
         

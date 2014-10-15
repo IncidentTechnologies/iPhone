@@ -22,6 +22,7 @@
 @property (nonatomic) bool m_custom;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXmlDom:(XmlDom *)dom;
 
 -(id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value;
 

@@ -56,6 +56,40 @@
     return self;
 }
 
+-(id)initWithXmlDom:(XmlDom *)dom
+{
+    if(dom == nil){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if ( self )
+    {
+    
+        m_name = [dom getTextFromChildWithName:@"name"];
+        
+        m_on = [[dom getTextFromChildWithName:@"on"] boolValue];
+        
+        DLog(@"PATTERN %@",m_name);
+        
+        [self initFirstMeasure];
+        
+        NSArray * notechildren = [dom getChildArrayWithName:@"note"];
+        
+        for(XmlDom * child in notechildren){
+            
+            NSNote * note = [[NSNote alloc] initWithXmlDom:child];
+            
+            [self addNote:note];
+        }
+        
+    }
+    
+    return self;
+}
+
+
 -(id)initWithName:(NSString *)name on:(bool)on
 {
     self = [super init];
