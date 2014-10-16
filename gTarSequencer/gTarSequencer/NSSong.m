@@ -111,7 +111,7 @@
         DLog(@"SONG sequence name | %@",m_sequenceName);
         DLog(@"SONG sequence xmpid | %li",m_sequenceId);
         
-        // Init the narrative/input children
+        // Init the track children
         m_tracks = [[NSMutableArray alloc] init];
         
         NSArray * children = [content getChildArrayWithName:@"track"];
@@ -265,11 +265,9 @@
     
     DLog(@"Name to %@",m_title);
     
-    filename = [@"usr_" stringByAppendingString:filename];
-    
     NSFileManager * fileManager = [NSFileManager defaultManager];
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Songs"];
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:TYPE_SONG];
     
     NSError * err = NULL;
     [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
@@ -299,7 +297,7 @@
 
 - (void)deleteFile
 {
-    NSString * filename = [@"usr_" stringByAppendingString:m_title];
+    NSString * filename = m_title;
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * songFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Songs/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];

@@ -90,7 +90,7 @@
             NSString * path = [paths objectAtIndex:0];
             NSString * filename = [path stringByAppendingPathComponent:@"Samples"];
             filename = [filename stringByAppendingPathComponent:audioStringSet[i]];
-            filename = [filename stringByAppendingString:@".m4a"];
+            filename = [filename stringByAppendingString:@".wav"];
             
             filepath[i] = (char *) [filename UTF8String];
             

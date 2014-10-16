@@ -47,30 +47,25 @@
     return self;
 }
 
-- (void)initSequenceWithFilename:(NSString *)filename
+- (void)initSequenceWithSequence:(NSSequence *)newsequence
 {
-    if(filename != nil){
-        
-        sequence = [[NSSequence alloc] initWithXMPFilename:filename];
-        
-        [self refreshSequenceName:filename];
-        
-        [self setInstrumentsFromData];
-        
-        [delegate setTempo:sequence.m_tempo];
-        [delegate setVolume:sequence.m_volume];
-        
-    }else{
-        
-        sequence = [[NSSequence alloc] initWithXMPFilename:@"usr_Tutorial"];
-        
-        [self setInstrumentsFromData];
+    sequence = newsequence;
+    
+    [self refreshSequenceName:sequence.m_name];
+    
+    [self setInstrumentsFromData];
+    
+    if([sequence.m_name isEqualToString:DEFAULT_SET_NAME]){
         
         [delegate setTempo:DEFAULT_TEMPO];
         [delegate setVolume:DEFAULT_VOLUME];
         
-        //sequence = [[NSSequence alloc] initWithName:DEFAULT_SET_NAME tempo:DEFAULT_TEMPO volume:DEFAULT_VOLUME];
+    }else{
+        
+        [delegate setTempo:sequence.m_tempo];
+        [delegate setVolume:sequence.m_volume];
     }
+    
     
 }
 
@@ -105,9 +100,9 @@
 - (void)refreshSequenceName:(NSString *)filename
 {
     if(![filename isEqualToString:DEFAULT_STATE_NAME]){
+        
         // Refresh the name in case it's been updated
-        NSString * sequenceName = [filename stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
-        sequence.m_name = sequenceName;
+        sequence.m_name = filename;
         
         [self saveContext:filename force:YES];
         [self saveContext:nil force:YES];
@@ -121,7 +116,6 @@
         filepath = DEFAULT_STATE_NAME;
         DLog(@"Load state from disk");
     }else{
-        filepath = [@"usr_" stringByAppendingString:filepath];
         DLog(@"Load sequencer from disk at %@", filepath);
     }
     
@@ -147,13 +141,6 @@
         currentState = [[NSMutableDictionary alloc] init];
     }
     
-    // Reset
-    //if([filepath isEqualToString:DEFAULT_STATE_NAME]){
-        
-        //[self resetSelectedInstrumentIndex];
-        
-    //}else{
-    
     BOOL loadSequence = true;
         
         if ( [[currentState allKeys] count] > 0 )
@@ -163,11 +150,11 @@
             
             if([filepath isEqualToString:DEFAULT_STATE_NAME]){
                 
-                NSString * activeSong = [currentState objectForKey:@"Active Song"];
+                NSInteger activeSong = [[currentState objectForKey:@"Active Song"] intValue];
                 
-                if(activeSong != nil && ![activeSong isEqualToString:@""]){
+                if(activeSong){
                     loadSequence = false;
-                    //[delegate loadFromName:activeSong andType:@"Songs"];
+                    [delegate loadFromXmpId:activeSong andType:TYPE_SONG];
                 }
             }
         }
@@ -177,7 +164,7 @@
     if(loadSequence){
         
         // Read file load into all the things, make sure the data generates
-        [self initSequenceWithFilename:filepath];
+        //[self initSequenceWithFilename:filepath];
         
     }
     
@@ -196,7 +183,7 @@
         
         // Save state instead of to file
         if(filepath == nil){
-            
+            /*
             filepath = DEFAULT_STATE_NAME;
             
             //
@@ -208,24 +195,25 @@
             
             [currentState setObject:[NSNumber numberWithInt:[self getSelectedInstrumentIndex]] forKey:@"Selected Instrument Index"];
             
-            NSString * activeSong = [delegate getActiveSongName];
-            if(activeSong != nil){
-                [currentState setObject:[delegate getActiveSongName] forKey:@"Active Song"];
+            NSInteger activeSong = [delegate getActiveSongId];
+            if(activeSong){
+                [currentState setObject:[NSNumber numberWithInt:activeSong] forKey:@"Active Song"];
             }
             
             BOOL success = [currentState writeToFile:stateMetaDataPath atomically:YES];
             
             DLog(@"Save metadata success: %i", success);
+             */
             
         }
         
         // Save the sequence
-        NSData * sequenceData = [sequence saveToFile:filepath];
-        
-        // Don't upload saved state to backend
-        if([filepath isEqualToString:DEFAULT_STATE_NAME]){
-            //[g_ophoCloudController requestSaveXmpWithId:activeSequenceXmpId andXmpFile:sequenceData andXmpData:nil andCallbackObj:self andCallbackSel:@selector(requestSaveXmpCallback)];
+        // TODO: don't upload saved state to backend, or tutorial changes
+        if(filepath != nil && ![filepath isEqualToString:DEFAULT_SET_NAME]){
+            [sequence renameToName:filepath];
+            [g_ophoMaster saveSequence:sequence];
         }
+        
     }
 }
 

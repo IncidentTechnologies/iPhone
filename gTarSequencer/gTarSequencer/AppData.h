@@ -47,3 +47,6 @@
 #define NUM_MEASURES 4
 
 #define DEFAULT_SET_NAME @"Tutorial"
+
+#define TYPE_SEQUENCE @"Sequences"
+#define TYPE_SONG @"Songs"

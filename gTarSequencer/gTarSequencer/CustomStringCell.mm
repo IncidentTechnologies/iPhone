@@ -192,7 +192,7 @@
         
         // different filetype and location
         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Samples/" stringByAppendingString:[sampleFilename stringByAppendingString:@".m4a"]]];
+        path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Samples/" stringByAppendingString:[sampleFilename stringByAppendingString:@".wav"]]];
         
     }else{
         

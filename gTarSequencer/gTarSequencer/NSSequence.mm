@@ -92,6 +92,50 @@
     return self;
 }
 
+
+- (id)initWithXmlDom:(XmlDom *)dom
+{
+    if(dom == nil){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if ( self )
+    {
+        XmlDom * header = [[[dom getChildWithName:@"custom"]  getChildWithName:@"sequence"] getChildWithName:@"header"];
+        XmlDom * content = [[[dom getChildWithName:@"custom"]  getChildWithName:@"sequence"] getChildWithName:@"content"];
+        
+        m_name = [header getTextFromChildWithName:@"name"];
+        m_id = [[header getValueFromChildWithName:@"id"] intValue];
+        m_tempo = [[header getValueFromChildWithName:@"tempo"] floatValue];
+        m_volume = [[header getValueFromChildWithName:@"volume"] floatValue];
+        
+        DLog(@"SEQUENCE id | %li",m_id);
+        DLog(@"SEQUENCE name | %@",m_name);
+        DLog(@"SEQUENCE tempo | %f",m_tempo);
+        DLog(@"SEQUENCE volume | %f",m_volume);
+        
+        // Init the track children
+        m_tracks = [[NSMutableArray alloc] init];
+        
+        m_selectedTrackIndex = 0;
+        
+        NSArray * children = [content getChildArrayWithName:@"track"];
+        
+        for(XmlDom * child in children){
+            
+            NSTrack * m_track = [[NSTrack alloc] initWithXmlDom:child];
+            
+            [self addTrack:m_track];
+            
+        }
+    }
+    
+    return self;
+}
+
+
 -(id)initWithName:(NSString *)name tempo:(double)tempo volume:(double)volume
 {
 	
@@ -172,20 +216,19 @@
     return node;
 }
 
--(NSData *)saveToFile:(NSString *)filename
+-(NSString *)saveToFile:(NSString *)filename
 {
     // First change the name
     if(![filename isEqualToString:DEFAULT_STATE_NAME]){
-        NSString * sequenceName = [filename stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
         
-        m_name = sequenceName;
+        m_name = filename;
         
-        DLog(@"Name to %@",sequenceName);
+        DLog(@"Name to %@",filename);
     }
     
     NSFileManager * fileManager = [NSFileManager defaultManager];
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences"];
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:TYPE_SEQUENCE];
     
     NSError * err = NULL;
     [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
@@ -195,8 +238,11 @@
     char * filepath = (char *)[sequenceFilepath UTF8String];
   
     XMPNode *node = NULL;
+    XMPNode *custom = NULL;
     node = new XMPNode((char *)[@"xmp" UTF8String],NULL);
-    node->AddChild([self convertToXmp]);
+    custom = new XMPNode((char *)[@"custom" UTF8String],NULL);
+    node->AddChild(custom);
+    custom->AddChild([self convertToXmp]);
     
     XMPTree tree = NULL;
     
@@ -206,10 +252,25 @@
     
     DLog(@"Saved to path %s",filepath);
     
-    NSData * sequenceFile = [[NSData alloc] initWithContentsOfFile:sequenceFilepath];
+   // NSData * sequenceFile = [[NSData alloc] initWithContentsOfFile:sequenceFilepath];
+    NSString * sequenceFile = [NSString stringWithContentsOfFile:sequenceFilepath encoding:NSASCIIStringEncoding error:nil];
     
     return sequenceFile;
     
+}
+
+- (void)deleteFile
+{
+    NSString * filename = m_name;
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Sequences/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
+    
+    NSError * error = NULL;
+    BOOL result = [[NSFileManager defaultManager] removeItemAtPath:sequenceFilepath error:&error];
+    
+    if(!result)
+        DLog(@"Error deleting");
 }
 
 -(void)addTrack:(NSTrack *)track
@@ -220,6 +281,11 @@
 -(int)trackCount
 {
     return [m_tracks count];
+}
+
+- (void)renameToName:(NSString *)newName
+{
+    m_name = newName;
 }
 
 @end

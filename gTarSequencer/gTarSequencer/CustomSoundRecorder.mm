@@ -32,7 +32,7 @@
     self = [super init];
     if (self)
     {
-        defaultFilename = @"CustomSoundPlaceholder.m4a";
+        defaultFilename = @"CustomSoundPlaceholder.wav";
         
         NSArray * pathComponents = [NSArray arrayWithObjects:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject], defaultFilename, nil];
         
@@ -47,7 +47,7 @@
         // Define recorder setting
         NSMutableDictionary * recordSetting = [[NSMutableDictionary alloc] init];
         
-        [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+        [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
         [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
         [recordSetting setValue:[NSNumber numberWithInt:1] forKey:AVNumberOfChannelsKey];
         [recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
@@ -163,11 +163,11 @@
 - (void)renameRecordingToFilename:(NSString *)filename;
 {
     // Create a subfolder Samples/{Category} if it doesn't exist yet
-    DLog(@"Moving file from %@ to %@.m4a",defaultFilename,filename);
+    DLog(@"Moving file from %@ to %@.wav",defaultFilename,filename);
     
     NSString * newFilename = filename;
     newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
-    newFilename = [newFilename stringByAppendingString:@".m4a"];
+    newFilename = [newFilename stringByAppendingString:@".wav"];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Samples"];
@@ -192,7 +192,7 @@
 {
     NSString * newFilename = filename;
     newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
-    newFilename = [newFilename stringByAppendingString:@".m4a"];
+    newFilename = [newFilename stringByAppendingString:@".wav"];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Samples"];
@@ -227,11 +227,11 @@
     if(filename != nil && [filename length] > 0){
         
         // Create a subfolder Samples/{Category} if it doesn't exist yet
-        DLog(@"Deleting file %@.m4a",filename);
+        DLog(@"Deleting file %@.wav",filename);
         
         NSString * newFilename = filename;
         newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
-        newFilename = [newFilename stringByAppendingString:@".m4a"];
+        newFilename = [newFilename stringByAppendingString:@".wav"];
         
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         

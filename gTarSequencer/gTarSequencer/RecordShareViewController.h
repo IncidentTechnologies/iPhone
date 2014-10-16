@@ -34,7 +34,7 @@
 - (void) userDidLaunchSMSWithAttachment:(NSString *)filename;
 - (void) userDidLaunchSoundCloudAuthWithFile:(NSString *)filename;
 
-- (void) renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
+- (void) renameForXmpId:(NSInteger)xmpId FromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
 
 - (void) forceShowSessionOverlay;
 - (void) forceHideSessionOverlay;
@@ -101,7 +101,7 @@ extern NSUser * g_loggedInUser;
 }
 
 - (void)reloadInstruments;
-- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong;
+- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence;
 
 - (IBAction)userDidBack:(id)sender;
 - (IBAction)userDidSaveTrack:(id)sender;

@@ -13,6 +13,9 @@
 #define OPHO_LIST_NAMES @"names"
 #define OPHO_LIST_DATES @"dates"
 
+@class NSSong;
+@class NSSequence;
+
 @protocol OphoLoginDelegate <NSObject>
 
 - (void)loggedInCallback;
@@ -33,9 +36,13 @@
     NSMutableArray * sequenceIdSet;
     NSMutableArray * sequenceLoadSet;
     NSMutableArray * sequenceDateSet;
+    
 }
 
 @property (weak, nonatomic) id <OphoLoginDelegate> loginDelegate;
+@property (strong, nonatomic) NSSong * savingSong;
+@property (strong, nonatomic) NSSequence * savingSequence;
+
 
 - (id)init;
 
@@ -46,14 +53,16 @@
 - (BOOL)loggedIn;
 
 // XMP
-- (void)getSongListForCallbackObj:(id)callbackObj selector:(SEL)selector;
-- (void)getSequenceListForCallbackObj:(id)callbackObj selector:(SEL)selector;
+- (void)saveSequence:(NSSequence *)sequence;
+- (void)saveSong:(NSSong *)song;
 
-- (void)saveToNewWithName:(NSString *)name callbackObj:(id)callbackObj selector:(SEL)selector;
-- (void)saveToId:(NSInteger)xmpId withData:(NSString *)data callbackObj:(id)callbackObj selector:(SEL)selector;
+- (void)renameSongWithId:(NSInteger)xmpId toName:(NSString *)name;
+- (void)renameSequenceWithId:(NSInteger)xmpId toName:(NSString *)name;
+
 - (void)loadFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector;
 
 - (void)deleteWithId:(NSInteger)xmpId;
+
 
 // Acces pregenerated data
 - (NSDictionary *)getSongList;

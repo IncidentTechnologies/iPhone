@@ -13,10 +13,7 @@
 #define TABLE_HEIGHT 209
 #define TABLE_MIN_HEIGHT 103
 
-#define DEFAULT_SET_NAME @"Tutorial"
 #define DEFAULT_FILE_TEXT @"Save as"
-#define TABLE_SETS @"Sequences"
-#define TABLE_SONGS @"Songs"
 
 @implementation OptionsViewController
 
@@ -91,7 +88,7 @@
 
 - (void)initOptions
 {
-    loadedTableType = TABLE_SETS;
+    loadedTableType = TYPE_SEQUENCE;
     
     // Check for first launch
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOptions"]){
@@ -113,11 +110,11 @@
     
     NSDictionary * listData;
     
-    if([loadedTableType isEqualToString:TABLE_SETS]){
+    if([loadedTableType isEqualToString:TYPE_SEQUENCE]){
         
         listData = [g_ophoMaster getSequenceList];
         
-    }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+    }else if([loadedTableType isEqualToString:TYPE_SONG]){
         
         listData = [g_ophoMaster getSongList];
     }
@@ -141,30 +138,40 @@
 #pragma mark - Save Load Actions
 - (void)userDidLoadFile:(NSInteger)xmpId
 {
-    if([loadedTableType isEqualToString:TABLE_SETS]){
+    if([loadedTableType isEqualToString:TYPE_SEQUENCE]){
         DLog(@"user did load SET %i",xmpId);
         
         // delegate calls back to set activeSequencer
         [delegate loadFromXmpId:xmpId andType:loadedTableType];
         
         // Delegate sets activeSequencer/activeSong
-        [delegate viewSeqSetWithAnimation:YES];
+        [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(loadSetView) userInfo:nil repeats:NO];
         
-    }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+    }else if([loadedTableType isEqualToString:TYPE_SONG]){
         DLog(@"user did load SONG %i",xmpId);
         
         // delegate calls back to set activeSong
         [delegate loadFromXmpId:xmpId andType:loadedTableType];
         
-        [delegate viewRecordShareWithAnimation:YES];
+        [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(loadSongView) userInfo:nil repeats:NO];
         
     }
 }
 
-
-- (void)userDidSaveFile:(NSString *)filename
+- (void)loadSetView
 {
-    DLog(@"user did save as %@",filename);
+    [delegate viewSeqSetWithAnimation:YES];
+}
+
+- (void)loadSongView
+{
+    [delegate viewRecordShareWithAnimation:YES];
+}
+
+
+- (void)userDidSaveFile:(NSInteger)xmpId toName:(NSString *)filename
+{
+    DLog(@"user did save as %@ for xmpId %i",filename, xmpId);
     
     NSString * emptyName = [filename stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
@@ -172,34 +179,30 @@
         DLog(@"Error: trying to save with blank set name");
     }else{
         // delegate calls back to set activeSequencer
-        [delegate saveWithName:filename];
+        [delegate saveSequenceWithId:xmpId andName:filename];
         [delegate viewSeqSetWithAnimation:YES];
     }
 }
 
-- (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname
+- (void)userDidRenameFile:(NSInteger)xmpId fromName:(NSString *)filename toName:(NSString *)newname
 {
     DLog(@"user did move set/song %@ to %@",filename,newname);
     
-    if([activeSong isEqualToString:filename]){
-        activeSong = newname;
-    }
-    
     // Delegate sets activeSequencer/activeSong
-    [delegate renameFromName:filename toName:newname andType:loadedTableType];
-    //[self reloadFileTable];
+    [delegate renameForXmpId:xmpId FromName:filename toName:newname andType:loadedTableType];
     
     // Delay reload
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reloadFileTable) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(reloadFileTable) userInfo:nil repeats:NO];
 }
 
-//- (void)userDidDeleteFile:(NSString *)filename
 - (void)userDidDeleteFile:(NSInteger)xmpId
 {
     DLog(@"user did delete %i",xmpId);
     
     [g_ophoMaster deleteWithId:xmpId];
     
+    // Delay reload
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(reloadFileTable) userInfo:nil repeats:NO];
 }
 
 #pragma mark - Button Actions
@@ -213,7 +216,7 @@
 {
     selectMode = @"Load";
     
-    NSString * newSet = ([activeSequencer isEqualToString:@""] || activeSequencer == nil || [activeSequencer isEqualToString:DEFAULT_SET_NAME]) ? [self generateNextSetName] : activeSequencer;
+    NSString * newSet = (!activeSequencer) ? [self generateNextSetName] : DEFAULT_SET_NAME;
     
     // delegate sets activeSequencer
     [delegate createNewSaveName:newSet];
@@ -317,7 +320,7 @@
 {
     if(showSelectionToggle && indexPath.row == 0){
         return ROW_HEIGHT;
-    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && ![fileLoadSet[indexPath.row-1] isEqualToString:activeSequencer]){
+    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileIdSet[indexPath.row-1] intValue] != activeSequencer){
         return 0;
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileLoadSet[indexPath.row-1] isEqualToString:DEFAULT_SET_NAME]){
         return 0;
@@ -363,16 +366,16 @@
         cell.isRenamable = NO;
         cell.xmpId = [fileIdSet[indexPath.row-1] intValue];
         
-        if([loadedTableType isEqualToString:TABLE_SETS]){
+        if([loadedTableType isEqualToString:TYPE_SEQUENCE]){
             [cell unsetAsActiveSong];
-            if([cell.fileText.text isEqualToString:activeSequencer]){
+            if(cell.xmpId == activeSequencer){
                 [cell setAsActiveSequencer];
             }else{
                 [cell unsetAsActiveSequencer];
             }
-        }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+        }else if([loadedTableType isEqualToString:TYPE_SONG]){
             [cell unsetAsActiveSequencer];
-            if([cell.fileText.text isEqualToString:activeSong]){
+            if(cell.xmpId == activeSong){
                 [cell setAsActiveSong];
             }else{
                 [cell unsetAsActiveSong];
@@ -398,14 +401,14 @@
         [cell.songButton setHidden:NO];
         cell.fileText.text = @"";
         
-        if([loadedTableType isEqualToString:TABLE_SETS]){
+        if([loadedTableType isEqualToString:TYPE_SEQUENCE]){
             [cell highlightSetButton];
-        }else if([loadedTableType isEqualToString:TABLE_SONGS]){
+        }else if([loadedTableType isEqualToString:TYPE_SONG]){
             [cell highlightSongButton];
         }
         
         //[cell setHidden:YES];
-    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && ![fileLoadSet[indexPath.row-1] isEqualToString:activeSequencer]){
+    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileIdSet[indexPath.row-1] intValue] != activeSequencer){
         [cell setHidden:YES];
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileLoadSet[indexPath.row-1] isEqualToString:DEFAULT_SET_NAME]){
         [cell setHidden:YES];
@@ -531,14 +534,14 @@
 
 #pragma mark - Active Sequence / Song
 
--(void)setActiveSequencer:(NSString *)sequence
+-(void)setActiveSequencer:(NSInteger)sequence
 {
     activeSequencer = sequence;
     
     [self loadTableWith:loadedTableType];
 }
 
--(void)setActiveSong:(NSString *)song
+-(void)setActiveSong:(NSInteger)song
 {
     activeSong = song;
     
@@ -550,14 +553,14 @@
     for(NSIndexPath * indexPath in loadTable.indexPathsForVisibleRows){
         OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
         
-        if([loadedTableType isEqualToString:TABLE_SETS]){
-            if([cell.fileText.text isEqualToString:activeSequencer]){
+        if([loadedTableType isEqualToString:TYPE_SEQUENCE]){
+            if(cell.xmpId == activeSequencer){
                 [cell setAsActiveSequencer];
             }else if(!cell.isSelected){
                 [cell unsetAsActiveSequencer];
             }
-        }else if([loadedTableType isEqualToString:TABLE_SONGS]){
-            if([cell.fileText.text isEqualToString:activeSong]){
+        }else if([loadedTableType isEqualToString:TYPE_SONG]){
+            if(cell.xmpId == activeSong){
                 [cell setAsActiveSong];
             }else if(!cell.isSelected){
                 [cell unsetAsActiveSong];

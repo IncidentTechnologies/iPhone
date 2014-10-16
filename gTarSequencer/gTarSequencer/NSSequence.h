@@ -10,6 +10,7 @@
 #import "XMPNode.h"
 #import "XMPObject.h"
 #import "NSTrack.h"
+#import "XmlDom.h"
 
 @interface NSSequence : NSObject
 {
@@ -31,6 +32,7 @@
 
 - (id)initWithXMPFilename:(NSString *)filename;
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
+- (id)initWithXmlDom:(XmlDom *)dom;
 
 - (id)initWithName:(NSString *)name tempo:(double)tempo volume:(double)volume;
 
@@ -38,10 +40,13 @@
 - (id)initWithName:(NSString *)name tempo:(double)tempo volume:(double)volume instruments:(NSArray *)instruments;
 
 - (XMPNode *)convertToXmp;
-- (NSData *)saveToFile:(NSString *)filename;
+- (NSString *)saveToFile:(NSString *)filename;
+- (void)deleteFile;
 
 - (void)addTrack:(NSTrack *)track;
 
 - (int)trackCount;
+
+- (void)renameToName:(NSString *)newName;
 
 @end

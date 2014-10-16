@@ -14,8 +14,6 @@
 
 //#define DEFAULT_SET_NAME @"Tutorial"
 #define DEFAULT_FILE_TEXT @"Save as"
-#define TABLE_SETS @"Sequences"
-#define TABLE_SONGS @"Songs"
 
 @implementation OptionsViewCell
 
@@ -275,7 +273,7 @@
             fileText.text = fileName.text;
         }
         
-        [parent userDidSaveFile:fileText.text];
+        [parent userDidSaveFile:xmpId toName:fileText.text];
         
         [self endNameEditing];
         
@@ -287,7 +285,7 @@
 - (void)userDidRename
 {
     // Rename
-    [parent userDidRenameFile:fileText.text toName:fileName.text];
+    [parent userDidRenameFile:xmpId fromName:fileText.text toName:fileName.text];
     fileText.text = fileName.text;
     
     // end name editing happens automatically
@@ -391,7 +389,6 @@
         
         // auto rename if duplicate
         if([parent isDuplicateFilename:fileName.text] && ![fileName.text isEqualToString:previousNameText]){
-            //fileName.text = [parent generateNextSetName];
             fileName.text = previousNameText;
             [parent alertDuplicateFilename];
         }else if([parent isDuplicateFilename:fileName.text]){
@@ -591,14 +588,14 @@
 {
     [self highlightSetButton];
     
-    [parent loadTableWith:TABLE_SETS];
+    [parent loadTableWith:TYPE_SEQUENCE];
 }
 
 - (IBAction)userDidSelectSongButton:(id)sender
 {
     [self highlightSongButton];
     
-    [parent loadTableWith:TABLE_SONGS];
+    [parent loadTableWith:TYPE_SONG];
     
 }
 

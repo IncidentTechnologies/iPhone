@@ -11,12 +11,10 @@
 
 @protocol OptionsDelegate <NSObject>
 
-- (void) saveWithName:(NSString *)filename;
-- (void) loadFromXmpId:(NSInteger)xmpId andType:loadedTableType;
-- (void) loadFromName:(NSString *)filename andType:(NSString *)type;
-- (void) renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
+- (void) saveSequenceWithId:(NSInteger)xmpId andName:(NSString *)filename;
+- (void) loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type;
+- (void) renameForXmpId:(NSInteger)xmpId FromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
 - (void) createNewSaveName:(NSString *)filename;
-- (void) deleteWithName:(NSString *)filename andType:(NSString *)type;
 
 - (void) viewSeqSetWithAnimation:(BOOL)animate;
 - (void) viewRecordShareWithAnimation:(BOOL)animate;
@@ -58,9 +56,8 @@ extern NSUser * g_loggedInUser;
 - (IBAction)userDidLogout:(id)sender;
 
 - (void)userDidLoadFile:(NSInteger)xmpId;
-- (void)userDidSaveFile:(NSString *)filename;
-- (void)userDidRenameFile:(NSString *)filename toName:(NSString *)newname;
-- (void)userDidCreateNewFile:(NSString *)filename;
+- (void)userDidSaveFile:(NSInteger)xmpId toName:(NSString *)filename;
+- (void)userDidRenameFile:(NSInteger)xmpId fromName:(NSString *)filename toName:(NSString *)newname;
 
 - (void)offsetTable:(id)sender;
 - (void)resetTableOffset:(id)sender;
@@ -82,13 +79,13 @@ extern NSUser * g_loggedInUser;
 - (void)disableScroll;
 - (void)enableScroll;
 
-- (void)setActiveSequencer:(NSString *)sequence;
-- (void)setActiveSong:(NSString *)song;
+- (void)setActiveSequencer:(NSInteger)sequence;
+- (void)setActiveSong:(NSInteger)song;
 
 @property (nonatomic) BOOL isFirstLaunch;
 
-@property (retain, nonatomic) NSString * activeSequencer;
-@property (retain, nonatomic) NSString * activeSong;
+@property (assign, nonatomic) NSInteger activeSequencer;
+@property (assign, nonatomic) NSInteger activeSong;
 
 @property (weak, nonatomic) id<OptionsDelegate> delegate;
 

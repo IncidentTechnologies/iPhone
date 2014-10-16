@@ -23,8 +23,6 @@
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
 #define DEFAULT_STATE_NAME @"sequenceCurrentState"
-#define TABLE_SETS @"Sequences"
-#define TABLE_SONGS @"Songs"
 
 @implementation SequencerViewController
 
@@ -68,7 +66,7 @@
     }
     
     
-    NSString * filePath = (isFirstLaunch) ? @"usr_Tutorial" : nil;
+    NSString * filePath = (isFirstLaunch) ? DEFAULT_SET_NAME : nil;
     
     [self loadStateFromDisk:filePath];
     
@@ -255,11 +253,11 @@
     NSString * defaultSetPath = [[NSBundle mainBundle] pathForResource:@"tutorialSet" ofType:@"xml"];
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * newDefaultSetPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences/usr_Tutorial.xml"];
+    NSString * newDefaultSetPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences/Tutorial.xml"];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences"];
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:TYPE_SEQUENCE];
     
     NSError * err = NULL;
     [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
@@ -365,8 +363,9 @@
         
         // Recording song will otherwise get loaded
         // && recordingSong == nil
+        
         if(loadedSong != nil){
-            [recordShareController loadSong:loadedSong andSoundMaster:[seqSetViewController getSoundMaster] activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+            [recordShareController loadSong:loadedSong andSoundMaster:[seqSetViewController getSoundMaster] activeSequence:[seqSetViewController getSequence]];
         }
         
         if([recordShareController showHideSessionOverlay]){
@@ -506,38 +505,34 @@
 
 - (void)saveWithName:(NSString *)filename
 {
-    [self setActiveSequence:filename];
-    filename = [@"usr_" stringByAppendingString:filename];
+    //[self setActiveSequence:filename];
     
     [self saveContext:filename force:YES];
     [self saveContext:nil force:YES];
 }
 
+- (void)saveSequenceWithId:(NSInteger)xmpId andName:(NSString *)filename
+{
+    NSSequence * sequence = [seqSetViewController getSequence];
+    
+    if(sequence.m_id == xmpId){
+        [self saveContext:filename force:YES];
+        [self saveContext:nil force:YES];
+        
+        [self setActiveSequence:xmpId];
+    }
+}
+
 - (void)loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type
 {
     
-    if([type isEqualToString:TABLE_SETS]){
+    if([type isEqualToString:TYPE_SEQUENCE]){
         DLog(@"Load set from %i",xmpId);
         
-        // TODO: pass the ID, handle the data
         [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(requestLoadSequenceXmpCallback:)];
         
-        // First clear any sound playing
-        [seqSetViewController resetSoundMaster];
         
-        // Do all this in the callback:
-        NSString * filename = DEFAULT_SET_NAME;
-        
-        [self setActiveSequence:filename];
-        
-        [self loadStateFromDisk:filename];
-        [self saveContext:nil force:YES];
-        
-        if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
-            [self relaunchFTUTutorial];
-        }
-        
-    }else if([type isEqualToString:TABLE_SONGS]){
+    }else if([type isEqualToString:TYPE_SONG]){
         DLog(@"Load song from %i",xmpId);
         
         [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(requestLoadSongXmpCallback:)];
@@ -545,35 +540,35 @@
     }
 }
 
-// TODO: get rid of this
-- (void)loadFromName:(NSString *)filename andType:(NSString *)type
-{
-    if([type isEqualToString:TABLE_SETS]){
-        DLog(@"Load set from name %@",filename);
-        
-        // First clear any sound playing
-        [seqSetViewController resetSoundMaster];
-        
-        [self setActiveSequence:filename];
-        
-        [self loadStateFromDisk:filename];
-        [self saveContext:nil force:YES];
-        
-        if([activeSequencer isEqualToString:DEFAULT_SET_NAME]){
-            [self relaunchFTUTutorial];
-        }
-        
-    }else if([type isEqualToString:TABLE_SONGS]){
-        DLog(@"Load song from name %@",filename);
-        
-    }
-}
-
-
 - (void)requestLoadSequenceXmpCallback:(CloudResponse *)cloudResponse
 {
     DLog(@"Request Load Sequence Xmp Callback");
     
+    XmlDom * sequenceXmp = cloudResponse.m_xmpDom;
+    
+    NSSequence * sequence = [[NSSequence alloc] initWithXmlDom:sequenceXmp];
+    
+    [seqSetViewController initSequenceWithSequence:sequence];
+    
+    // First clear any sound playing
+    [seqSetViewController resetSoundMaster];
+    
+    [self setActiveSequence:sequence.m_id];
+    
+    if([sequence.m_name isEqualToString:DEFAULT_SET_NAME]){
+        [self relaunchFTUTutorial];
+    }
+    
+    // May have loaded the sequence after a song
+    if(loadedSong != nil){
+        
+        // Load into record share view
+        SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+        
+        isRecording = TRUE;
+        [recordShareController loadSong:loadedSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence]];
+        
+    }
 }
 
 - (void)requestLoadSongXmpCallback:(CloudResponse *)cloudResponse
@@ -582,68 +577,32 @@
     
     XmlDom * songXmp = cloudResponse.m_xmpDom;
     
-    NSString * filename = [[[songXmp getChildWithName:@"song"] getChildWithName:@"header"] getTextFromChildWithName:@"title"];
-    
-    DLog(@"Filename is %@, songXmp %@",filename,songXmp);
-    
     [seqSetViewController stopSoundMaster];
     [seqSetViewController resetSoundMaster];
-    
-    [self setActiveSong:filename];
     
     // Init the song
     loadedSong = [[NSSong alloc] initWithXmlDom:songXmp];
     
+    [self setActiveSong:loadedSong.m_id];
+    
     if(loadedSong != nil){
+        
+        DLog(@"Loading sequence ID %li for song %li",loadedSong.m_sequenceId,loadedSong.m_id);
+        
         // Set the active sequencer accordingly
-        [self loadStateFromDisk:loadedSong.m_sequenceName];
-        [self saveContext:nil force:YES];
+        [self loadFromXmpId:loadedSong.m_sequenceId andType:TYPE_SEQUENCE];
         
-        // Load into record share view
-        SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
-        
-        isRecording = TRUE;
-        [recordShareController loadSong:loadedSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
     }
     
 }
 
-- (void)renameFromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type
+- (void)renameForXmpId:(NSInteger)xmpId FromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type
 {
-    if([type isEqualToString:TABLE_SETS]){
-        if([activeSequencer isEqualToString:filename]){
-            [self setActiveSequence:newname];
-        }
-    }else if([type isEqualToString:TABLE_SONGS]){
-        if([activeSong isEqualToString:filename]){
-            [self setActiveSong:newname];
-        }
+    if([type isEqualToString:TYPE_SEQUENCE]){
+        [g_ophoMaster renameSequenceWithId:xmpId toName:newname];
+    }else if([type isEqualToString:TYPE_SONG]){
+        [g_ophoMaster renameSongWithId:xmpId toName:newname];
     }
-    
-    filename = [@"usr_" stringByAppendingString:filename];
-    filename = [filename stringByAppendingString:@".xml"];
-    
-    NSString * newnamepath = [@"usr_" stringByAppendingString:newname];
-    newnamepath = [newnamepath stringByAppendingString:@".xml"];
-    
-    // move
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:type];
-    NSString * currentPath = [directory stringByAppendingPathComponent:filename];
-    NSString * newPath = [directory stringByAppendingPathComponent:newnamepath];
-    NSError * error = NULL;
-    
-    BOOL result = [[NSFileManager defaultManager] moveItemAtPath:currentPath toPath:newPath error:&error];
-    
-    if(!result)
-        DLog(@"Error moving");
-    
-    if([type isEqualToString:TABLE_SETS]){
-        if([activeSequencer isEqualToString:newname]){
-            [self saveContext:[@"usr_" stringByAppendingString:newname] force:YES];
-        }
-    }
-    [self saveContext:nil force:YES];
 }
 
 - (void)createNewSaveName:(NSString *)filename
@@ -667,7 +626,7 @@
 
 - (void)createNewSet
 {
-    [self setActiveSequence:@""];
+    [self setActiveSequence:0];
     
     // Delete all cells
     [seqSetViewController deleteAllCells];
@@ -679,7 +638,8 @@
 
 - (void)createNewSetAndSave
 {
-    [self saveWithName:sequencerToSave];
+    NSSequence * sequence = [seqSetViewController getSequence];
+    [self saveSequenceWithId:sequence.m_id andName:sequencerToSave];
     sequencerToSave = @"";
     [self createNewSet];
 }
@@ -693,50 +653,24 @@
     }
 }
 
-- (void)deleteWithName:(NSString *)filename andType:(NSString *)type
-{
-    // Reset active if it's being deleted
-    if([type isEqualToString:TABLE_SETS] && [filename isEqualToString:activeSequencer]){
-        [self setActiveSequence:@""];
-    }else if([type isEqualToString:TABLE_SONGS] && [filename isEqualToString:activeSong]){
-        [self setActiveSong:@""];
-    }
-    
-    // Then delete
-    filename = [@"usr_" stringByAppendingString:filename];
-    
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:type];
-    NSString * currentPath = [[directory stringByAppendingPathComponent:filename] stringByAppendingString:@".xml"];
-    NSError * error = NULL;
-    
-    BOOL result = [[NSFileManager defaultManager] removeItemAtPath:currentPath error:&error];
-    
-    if(!result)
-        DLog(@"Error deleting");
-    
-    [self saveContext:nil force:YES];
-}
-
 #pragma mark - Active Sequence / Active Song
 
-- (void)setActiveSequence:(NSString *)sequence
+- (void)setActiveSequence:(NSInteger)sequence
 {
     activeSequencer = sequence;
     [optionsViewController setActiveSequencer:sequence];
 }
 
-- (void)setActiveSong:(NSString *)song
+- (void)setActiveSong:(NSInteger)song
 {
     activeSong = song;
     [optionsViewController setActiveSong:song];
 }
 
-- (NSString *)getActiveSongName
+- (NSInteger)getActiveSongId
 {
     return activeSong;
 }
-
 
 #pragma mark - Auto Save Load
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
@@ -768,7 +702,7 @@
     
     if(![sequencerName isEqualToString:@""] && ![sequencerName isEqualToString:DEFAULT_STATE_NAME]){
         
-        [self setActiveSequence:sequencerName];
+        //[self setActiveSequence:sequencerName];
         [self setActiveSong:activeSong];
     }
     
@@ -909,12 +843,12 @@
                 
                 SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
                 
-                [recordShareController loadSong:recordingSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence] activeSong:activeSong];
+                [recordShareController loadSong:recordingSong andSoundMaster:soundMaster activeSequence:[seqSetViewController getSequence]];
                 
                 loadedSong = recordingSong;
                 recordingSong = nil;
                 
-                [self setActiveSong:recordingSong.m_title];
+                [self setActiveSong:recordingSong.m_id];
 
             }
             
@@ -1201,7 +1135,7 @@
 #pragma mark - Hover Set Name
 - (void)hoverSetName
 {
-    NSString * setNameText = ([activeSequencer isEqualToString:@""] || activeSequencer == nil) ? @"New set" : activeSequencer;
+    NSString * setNameText = (activeSequencer == 0) ? @"New set" : DEFAULT_SET_NAME; // use sequencer name
     
     float x = [frameGenerator getFullscreenWidth];
     float setNameWidth = [setNameText length];
@@ -1475,7 +1409,7 @@
     NSString * filepath = [documentsDirectory stringByAppendingPathComponent:filename];
     NSData * fileData = [NSData dataWithContentsOfFile:filepath];
     
-    [email addAttachmentData:fileData mimeType:@"audio/m4a" fileName:filename];
+    [email addAttachmentData:fileData mimeType:@"audio/wav" fileName:filename];
     
     [self.navigationController presentViewController:email animated:YES completion:nil];
     

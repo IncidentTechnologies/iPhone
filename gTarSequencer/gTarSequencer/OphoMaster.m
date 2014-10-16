@@ -7,6 +7,8 @@
 //
 
 #import "OphoMaster.h"
+#import "NSSong.h"
+#import "NSSequence.h"
 
 #define OPHO_CALL_LOGIN @"OphoCallLogin"
 #define OPHO_CALL_LOGOUT @"OphoCallLogout"
@@ -16,6 +18,8 @@
 extern NSUser * g_loggedInUser;
 
 @synthesize loginDelegate;
+@synthesize savingSong;
+@synthesize savingSequence;
 
 - (id)init
 {
@@ -51,7 +55,7 @@ extern NSUser * g_loggedInUser;
         
         [loginDelegate loggedInCallback];
         
-        [self pregenerateDataOnLogin];
+        [self regenerateData];
         
     }else{
         
@@ -90,15 +94,135 @@ extern NSUser * g_loggedInUser;
 }
 
 #pragma mark - XMP Save
+// Sequences
+- (void)saveSequence:(NSSequence *)sequence
+{   
+    if(savingSequence == nil && sequence.m_name != nil && ![sequence.m_name isEqualToString:@""]){
+        
+        DLog(@"Saving to name %@",sequence.m_name);
+        
+        savingSequence = sequence;
+        
+        if(savingSequence.m_id <= 0){
+            [self saveToNewWithName:sequence.m_name callbackObj:self selector:@selector(saveNewSequenceCallback:)];
+        }else{
+            [self saveSequenceToId:sequence.m_id];
+        }
+        
+    }
+}
 
+- (void)saveNewSequenceCallback:(CloudResponse *)cloudResponse
+{
+    [self saveSequenceToId:(long)cloudResponse.m_id];
+}
+
+- (void)saveSequenceToId:(long)newId
+{
+    savingSequence.m_id = newId;
+    
+    DLog(@"Sequence ID is now %li",savingSequence.m_id);
+    
+    NSString * sequenceData = [savingSequence saveToFile:savingSequence.m_name];
+    
+    [self saveToId:savingSequence.m_id withData:sequenceData];
+}
+
+// Songs
+- (void)saveSong:(NSSong *)song
+{
+    DLog(@"Song is %@",song);
+    
+    if(savingSong == nil && song != nil){
+        
+        savingSong = song;
+        
+        if(savingSong.m_id <= 0){
+            [self saveToNewWithName:song.m_title callbackObj:self selector:@selector(saveNewSongCallback:)];
+        }else{
+            [self saveSongToId:song.m_id];
+        }
+        
+    }
+}
+
+- (void)saveNewSongCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Cloud response id is %i",cloudResponse.m_id);
+    
+    [self saveSongToId:(long)cloudResponse.m_id];
+}
+
+- (void)saveSongToId:(long)newId
+{
+    savingSong.m_id = newId;
+    
+    DLog(@"Song ID is now %li %@",savingSong.m_id,savingSong);
+    
+    NSString * songData = [savingSong saveToFile:savingSong.m_title];
+    
+    [self saveToId:savingSong.m_id withData:songData];
+    
+}
+
+// Generic
 - (void)saveToNewWithName:(NSString *)name callbackObj:(id)callbackObj selector:(SEL)selector
 {
     [ophoCloudController requestNewXmpWithFolderId:0 andName:name andCallbackObj:callbackObj andCallbackSel:selector];
 }
 
-- (void)saveToId:(NSInteger)xmpId withData:(NSString *)data callbackObj:(id)callbackObj selector:(SEL)selector
+- (void)saveToId:(NSInteger)xmpId withData:(NSString *)data
 {
-    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFile:nil andXmpData:data andCallbackObj:callbackObj andCallbackSel:selector];
+    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFile:nil andXmpData:data andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
+}
+
+- (void)saveCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Opho Callback | Save XMP");
+    
+    // delete temporary data
+    // TODO: beware race conditions
+    if(savingSong != nil){
+        [savingSong deleteFile];
+        savingSong = nil;
+        [self loadSongList];
+    }
+    
+    if(savingSequence != nil){
+        [savingSequence deleteFile];
+        savingSequence = nil;
+        [self loadSequenceList];
+    }
+    
+}
+
+#pragma mark - XMP Rename
+
+- (void)renameSongWithId:(NSInteger)xmpId toName:(NSString *)name
+{
+    [ophoCloudController requestSetXmpNameWithId:xmpId andName:name andCallbackObj:self andCallbackSel:@selector(renameSongCallback:)];
+    
+}
+
+- (void)renameSequenceWithId:(NSInteger)xmpId toName:(NSString *)name
+{
+    [ophoCloudController requestSetXmpNameWithId:xmpId andName:name andCallbackObj:self andCallbackSel:@selector(renameSequenceCallback:)];
+}
+
+- (void)renameSongCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Calling song rename callback");
+    
+    [self loadSongList];
+    
+}
+
+- (void)renameSequenceCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Calling sequence rename callback");
+    
+    [self loadSequenceList];
+    
 }
 
 #pragma mark - XMP Load
@@ -118,6 +242,8 @@ extern NSUser * g_loggedInUser;
 - (void)deleteCallback:(CloudResponse *)cloudResponse
 {
     DLog(@"Opho Callback | Delete XMP");
+    
+    [self regenerateData];
 }
 
 #pragma mark - Access Pregenerated XMP Data
@@ -138,7 +264,7 @@ extern NSUser * g_loggedInUser;
 
 #pragma mark - Pregenerate XMP Data
 
-- (void)pregenerateDataOnLogin
+- (void)regenerateData
 {
     [self loadSongList];
     [self loadSequenceList];

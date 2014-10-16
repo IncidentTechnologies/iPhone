@@ -40,8 +40,9 @@
 - (void) setTempo:(int)tempo;
 - (void) setVolume:(double)volume;
 
-- (void)loadFromName:(NSString *)filename andType:(NSString *)type;
-- (NSString *)getActiveSongName;
+
+- (void)loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type;
+- (NSInteger)getActiveSongId;
 
 - (BOOL)isLeftNavOpen;
 
@@ -124,7 +125,8 @@ extern OphoMaster * g_ophoMaster;
 
 - (void)setInstrumentsFromData;
 
-- (void)initSequenceWithFilename:(NSString *)filename;
+//- (void)initSequenceWithFilename:(NSString *)filename;
+- (void)initSequenceWithSequence:(NSSequence *)newsequence;
 - (NSSequence *)getSequence;
 - (NSMutableArray *)getTracks;
 

@@ -12,7 +12,7 @@
 #import "AudioNodeCommon.h"
 #import "SoundMaster_.mm"
 
-#define DEFAULT_SONG_NAME @"RecordedSessionPlaceholder.m4a"
+#define DEFAULT_SONG_NAME @"RecordedSessionPlaceholder.wav"
 
 #define TICK_COLOR [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]
 
@@ -234,7 +234,7 @@
     
     return -1;
 }
-- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence activeSong:(NSString *)activeSong
+- (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence
 {
     
     loadedSequence = activeSequence;
@@ -255,6 +255,9 @@
     [self resetSongModel];
     
     [self reloadInstruments];
+    
+    DLog(@"Instruments is %@",instruments);
+    
     
     [self removeDeletedMeasuresFromRecordedSong];
     
@@ -787,7 +790,7 @@
     [recordEditor deactivateEditingClip];
     [recordEditor unfocusTrackHideEditingPanel];
     
-    // Record the m4a
+    // Record the wav
     [self recordActiveSongToFile];
     
     // Get dimensions
@@ -813,7 +816,7 @@
 {
     UIButton * senderButton = (UIButton *)sender;
     
-    NSString * songname = [[self renameSongToSongname] stringByAppendingString:@".m4a"];
+    NSString * songname = [[self renameSongToSongname] stringByAppendingString:@".wav"];
     
     if(senderButton == shareEmailButton){
         
@@ -835,7 +838,7 @@
 
 - (void)userDidCloseShare
 {
-    // Stop recording m4a file
+    // Stop recording wav file
     //[self stopRecording];
     
     // Wrap up song name editing in progress
@@ -1088,7 +1091,7 @@
 #pragma mark - Recording
 -(void)recordActiveSongToFile
 {
-    DLog(@"Start recording song to m4a file");
+    DLog(@"Start recording song to wav file");
     
     [cancelButton setAlpha:0.2];
     [cancelButton setUserInteractionEnabled:NO];
@@ -1162,7 +1165,7 @@
                             
                             NSTrack * instTrack = [instruments objectAtIndex:[self getIndexForInstrument:track.m_instrument.m_id]];
                             
-                            // Record to m4a file
+                            // Record to wav file
                             [instTrack.m_instrument.m_sampler.audio pluckString:note.m_stringvalue];
                                 
                         }
@@ -1352,48 +1355,8 @@
 
 - (void)saveRecordingSongToXmp
 {
-    // Save XMP
-    if(recordingSong.m_id <= 0){
-        
-        // Generate an ID
-        [g_ophoMaster saveToNewWithName:recordingSong.m_title callbackObj:self selector:@selector(requestSaveFirstSongXmpCallback:)];
-        
-    }else{
-        
-        [self saveRecordingSongWithId:recordingSong.m_id];
-        
-    }
+    [g_ophoMaster saveSong:recordingSong];
 }
-
-- (void)requestSaveFirstSongXmpCallback:(CloudResponse *)cloudResponse
-{
-    DLog(@"Request Save First Song Xmp Callback %@",cloudResponse);
-    
-    [self saveRecordingSongWithId:(long)cloudResponse.m_id];
-    
-}
-
-- (void)saveRecordingSongWithId:(long)newId
-{
-    recordingSong.m_id = newId;
-    
-    DLog(@"ID is now %li",recordingSong.m_id);
-    
-    // [recordingSong printTree];
-    NSString * songData = [recordingSong saveToFile:recordingSong.m_title];
-    
-    [g_ophoMaster saveToId:recordingSong.m_id withData:songData callbackObj:self selector:@selector(requestSaveSongXmpCallback)];
-}
-
-- (void)requestSaveSongXmpCallback
-{
-    DLog(@"Request Save Song XMP Callback");
-    
-    // delete temporary file after generating
-    [recordingSong deleteFile];
-    
-}
-
 
 #pragma mark - Song Description Field
 - (void)textViewDidEndEditing:(UITextView *)textView
@@ -1515,7 +1478,8 @@
     // hide styles
     [self clearAttributedStringForText:songNameField];
     
-    [delegate renameFromName:recordingSong.m_title toName:songNameField.text andType:@"Songs"];
+    [delegate renameForXmpId:recordingSong.m_id FromName:recordingSong.m_title toName:songNameField.text andType:TYPE_SONG];
+    
     [recordingSong renameToName:songNameField.text andDescription:songDescriptionField.text];
     
     [self saveRecordingSongToXmp];
@@ -1557,10 +1521,7 @@
 {
     NSArray * tempList = [self getRecordedSongSet];
     
-    for(NSString * tempname in tempList){
-        
-        NSString * comparename = [tempname stringByReplacingOccurrencesOfString:@"usr_" withString:@""];
-        comparename = [comparename stringByReplacingOccurrencesOfString:@".xml" withString:@""];
+    for(NSString * comparename in tempList){
         
         if([comparename isEqualToString:filename] && ![comparename isEqualToString:recordingSong.m_title]){
             return YES;
@@ -1644,9 +1605,9 @@
     NSString * songname = songNameField.text;
     
     // Create a subfolder Samples/{Category} if it doesn't exist yet
-    DLog(@"Copying file from %@ to %@.m4a",DEFAULT_SONG_NAME,songname);
+    DLog(@"Copying file from %@ to %@.wav",DEFAULT_SONG_NAME,songname);
     
-    NSString * newFilename = [songname stringByAppendingString:@".m4a"];
+    NSString * newFilename = [songname stringByAppendingString:@".wav"];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
