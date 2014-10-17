@@ -94,8 +94,6 @@
         
         viewFrame = frame;
         
-        [self retrieveSampleList];
-        
     }
     return self;
 }
@@ -112,6 +110,8 @@
 
 - (void)launchSelectorView
 {
+    
+    [self retrieveSampleList];
     
     // draw main window
     [self setBackgroundViewFromNib:@"CustomInstrumentSelector" withFrame:viewFrame andRemove:nil forViewState:VIEW_CUSTOM_INST];
@@ -677,7 +677,7 @@
         
         if(!([filename rangeOfString:@"Sound"].location == NSNotFound)){
             
-            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Sound"] withString:@""];
+            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Custom_Sound"] withString:@""];
             int numFromSuffix = [customSuffix intValue];
             
             customCount = MAX(customCount,numFromSuffix);
@@ -965,7 +965,8 @@
     NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
     
     for(int i = 0; i < [tempList count]; i++){
-        if([tempList[i] isEqualToString:filename]){
+        NSString * tempString = [tempList[i] stringByReplacingCharactersInRange:[tempList[i] rangeOfString:@"Custom_"] withString:@""];
+        if([tempString isEqualToString:filename]){
             return YES;
         }
     }
@@ -1192,13 +1193,13 @@
     // Remove from sampleList happens by reference
     
     // Remove the sound file
-    [self checkInitCustomSoundRecorder];
-    [customSoundRecorder deleteRecordingFilename:filename];
+    //[self checkInitCustomSoundRecorder];
+    //[customSoundRecorder deleteRecordingFilename:filename];
     
     // Check if custom sample set is empty
     if([customSampleSet count] == 0){
         
-        [self removeCustomSampleList];
+        //[self removeCustomSampleList];
         
         [sampleList removeObjectAtIndex:0];
         
@@ -1208,7 +1209,7 @@
         
     }else{
         
-        [self saveCustomSampleList];
+        //[self saveCustomSampleList];
         
         return YES;
     }
@@ -1577,6 +1578,8 @@
 - (NSString *)getSampleFromIndex:(NSIndexPath *)indexPath
 {
     
+    DLog(@"SampleList is %@",sampleList);
+    
     if([sampleStack count] == 0){
         
         // check sampleStack
@@ -1698,6 +1701,8 @@
             cell.layoutMargins = UIEdgeInsetsZero; // iOS 8+
         }
         cell.delegate = self;
+        
+        DLog(@"Text is %@",[self getSampleFromIndex:indexPath]);
         
         [cell.sampleTitle setText:[self getSampleFromIndex:indexPath]];
         [cell setBackgroundColor:[UIColor clearColor]];
@@ -1854,6 +1859,18 @@
     NSIndexPath * pathToDelete = [sampleTable indexPathForCell:sampleCell];
     
     NSString * filename = sampleCell.sampleTitle.text;
+    
+    // Remove the XMP
+    // Get the ID
+    NSArray * names = [customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES];
+    NSArray * ids = [customSampleOphoDictionary objectForKey:OPHO_LIST_IDS];
+    
+    for(int i = 0; i < [names count]; i++){
+        if([names[i] isEqualToString:filename]){
+            [g_ophoMaster deleteWithId:[ids[i] intValue]];
+            break;
+        }
+    }
     
     DLog(@"Delete cell at section %i index %i",pathToDelete.section,pathToDelete.row);
     
@@ -2233,10 +2250,12 @@
 
 - (void)retrieveSampleList
 {
+    customSampleOphoDictionary = [NSMutableDictionary dictionaryWithDictionary:[g_ophoMaster getSampleList]];
+    NSMutableDictionary * customList = [NSMutableDictionary dictionaryWithObjectsAndKeys:[customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES],@"Sampleset",@"Custom",@"Section", nil];
     
     // Init
     sampleList = [[NSMutableArray alloc] init];
-    customSampleList = [[NSMutableArray alloc] init];
+    customSampleList = [[NSMutableArray alloc] initWithObjects:customList, nil];
     sampleStack = [[NSMutableArray alloc] init];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"sampleList" ofType:@"plist"];
@@ -2251,24 +2270,19 @@
     
     NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
-    // Check for local custom sample list
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    customSampleListPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"customSampleList.plist"];
     
     // Append a second local custom sounds pList to the regular sample list
-    if ([fileManager fileExistsAtPath:customSampleListPath]) {
-        DLog(@"The custom sample plist exists");
-        NSMutableDictionary * customDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:customSampleListPath];
+    if ([[customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES] count] > 0) {
         
-        [customSampleList addObjectsFromArray:[customDictionary objectForKey:@"Samples"]];
+        DLog(@"Custom samples found");
         
-        // First section of the sampleList is the customSampleList
-        [sampleList addObjectsFromArray:customSampleList];
+        [sampleList addObject:customList];
         [sampleList addObjectsFromArray:[plistDictionary objectForKey:@"Samples"]];
         
         
     } else {
-        DLog(@"The custom sample plist does not exist");
+        
+        DLog(@"There are no custom samples");
         
         sampleList = [plistDictionary objectForKey:@"Samples"];
         customSampleList = nil;
@@ -2277,6 +2291,7 @@
     
 }
 
+/*
 - (void)removeCustomSampleList
 {
     customSampleList = nil;
@@ -2291,12 +2306,16 @@
     if(!result)
         DLog(@"Error deleting");
 }
+*/
 
 - (void)updateCustomSampleListWithSample:(NSString *)filename
 {
     
     DLog(@"Adding %@ to custom sample list",filename);
     
+    [self retrieveSampleList];
+    
+    /*
     // Init the custom sample list pList
     if(customSampleList == nil){
         
@@ -2321,11 +2340,12 @@
     // Also update the subset list for viewing if appropriate
     if([self isCustomInstrumentList]){
         [[[sampleListSubset objectAtIndex:0] objectForKey:@"Leafsampleset"] addObject:filename];
-    }
+    }*/
     
-    [self saveCustomSampleList];
+    //[self saveCustomSampleList];
 }
 
+/*
 - (void)saveCustomSampleList
 {
     NSMutableDictionary * wrapperDict = [[NSMutableDictionary alloc] init];
@@ -2344,6 +2364,7 @@
     }
     
 }
+ */
 
 
 /*

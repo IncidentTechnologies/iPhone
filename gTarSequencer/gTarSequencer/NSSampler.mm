@@ -87,7 +87,7 @@
     if([m_samples count] == 0){
         // Add all the samples for a new track
         for(int i = 0; i < [stringSet count]; i++){
-            NSSample * sample = [[NSSample alloc] initWithName:[stringSet objectAtIndex:i] custom:[[stringPaths objectAtIndex:i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i] encoding:@"wav"];
+            NSSample * sample = [[NSSample alloc] initWithName:[stringSet objectAtIndex:i] custom:[[stringPaths objectAtIndex:i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i] encoding:@"wav" xmpFileId:0];
             
             [self addSample:sample];
         }

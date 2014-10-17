@@ -14,7 +14,7 @@
 @synthesize m_value;
 @synthesize m_custom;
 @synthesize m_encoding;
-@synthesize m_data;
+@synthesize m_xmpFileId;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -37,11 +37,9 @@
         
         [sample GetAttributeValueWithName:@"custom"].GetValueBool(&m_custom);
         
-        DLog(@"SAMPLE %@",m_name);
+        [sample GetAttributeValueWithName:@"xmpfileid"].GetValueInt(&m_xmpFileId);
         
-        if(xmpNode->HasChild((char*)"data")){
-            m_data = [[NSSampleData alloc] initWithXMPNode:xmpNode->FindChildByName((char *)"data")];
-        }
+        DLog(@"SAMPLE %@",m_name);
         
     }
     
@@ -67,9 +65,7 @@
         
         m_custom = [[dom getTextFromChildWithName:@"custom"] boolValue];
         
-        if([dom getChildWithName:@"data"] != nil){
-            m_data = [[NSSampleData alloc] initWithXmlDom:[dom getChildWithName:@"data"]];
-        }
+        m_xmpFileId = [[dom getTextFromChildWithName:@"xmpfileid"] intValue];
         
         DLog(@"SAMPLE %@",m_name);
     }
@@ -77,7 +73,7 @@
     return self;
 }
 
--(id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value encoding:(NSString *)encoding
+-(id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value encoding:(NSString *)encoding xmpFileId:(long)xmpFileId
 {
     self = [super init];
     
@@ -87,26 +83,7 @@
         m_value = value;
         m_custom = custom;
         m_encoding = encoding;
-        
-        m_data = [[NSSampleData alloc] init];
-    }
-    
-    return self;
-}
-
-- (id)initWithData:(NSSampleData *)data Name:(NSString *)name custom:(bool)custom value:(NSString *)value encoding:(NSString *)encoding
-{
-    self = [super init];
-    
-    if ( self )
-    {
-        m_name = name;
-        m_value = value;
-        m_custom = custom;
-        m_encoding = encoding;
-        
-        m_data = data;
-        
+        m_xmpFileId = xmpFileId;
     }
     
     return self;
@@ -155,7 +132,7 @@
     
     node->AddAttribute(new XMPAttribute((char *)"custom", m_custom));
     
-    node->AddChild([m_data convertToXmp]);
+    node->AddAttribute(new XMPAttribute((char *)"xmpfileid", m_xmpFileId));
     
     return node;
 }

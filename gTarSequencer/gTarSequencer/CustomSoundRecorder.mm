@@ -163,6 +163,7 @@
 
 - (void)saveRecordingToFilename:(NSString *)filename
 {
+    /*
     NSString * newFilename = filename;
     newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
     newFilename = [newFilename stringByAppendingString:@".wav"];
@@ -184,24 +185,25 @@
     
     m_sampNode->SaveToFile(pathName, YES);
     
-    NSData * data = [NSData dataWithContentsOfFile:newPath];
+    */
     
-    NSSampleData * sampleData = [[NSSampleData alloc] initWithData:data dataName:filename dataId:0 dataSize:0 dataEncoding:@"wav"];
+    DLog(@"Save recording to filename %@",filename);
     
-    NSSample * xmpSample = [[NSSample alloc] initWithData:sampleData Name:filename custom:YES value:@"0" encoding:@"wav"];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * path = [paths objectAtIndex:0];
+    NSString * newPath = [path stringByAppendingPathComponent:defaultFilename];
     
-    [xmpSample saveToFile];
+    NSData * data = [[NSData alloc] initWithContentsOfFile:newPath];
     
+    NSSample * xmpSample = [[NSSample alloc] initWithName:[NSString stringWithFormat:@"Custom_%@.wav",filename] custom:YES value:@"0" encoding:@"wav" xmpFileId:0];
     
+    [g_ophoMaster saveSample:xmpSample withFile:data];
     
-    // Print directory
+    // Delete after recording
+    [self deleteRecordingFilename:defaultFilename];
+
     
-    NSArray * contents = [fm contentsOfDirectoryAtPath:directory error:&err];
-    
-    for(int i = 0; i < [contents count]; i++){
-        DLog(@"%@",contents[i]);
-    }
-    
+    // Still need this?
     [self releaseAudioBank];
 }
 
@@ -213,8 +215,8 @@
         DLog(@"Deleting file %@.wav",filename);
         
         NSString * newFilename = filename;
-        newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
-        newFilename = [newFilename stringByAppendingString:@".wav"];
+        //newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
+        //newFilename = [newFilename stringByAppendingString:@".wav"];
         
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         
@@ -268,7 +270,6 @@
     
     
 }
-
 
 - (unsigned long int)fetchAudioBufferSize
 {

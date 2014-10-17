@@ -9,7 +9,6 @@
 #import "AppData.h"
 #import "XMPNode.h"
 #import "XMPObject.h"
-#import "NSSampleData.h"
 
 @interface NSSample : NSObject
 {
@@ -18,23 +17,20 @@
     NSString * m_encoding;
     bool m_custom;
     
-    NSSampleData * m_data;
+    long m_xmpFileId;
 }
 
 @property (retain, nonatomic) NSString * m_name;
 @property (retain, nonatomic) NSString * m_value;
 @property (retain, nonatomic) NSString * m_encoding;
 @property (nonatomic) bool m_custom;
-
-@property (retain, nonatomic) NSSampleData * m_data;
+@property (nonatomic, assign) long m_xmpFileId;
 
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
 
 - (id)initWithXmlDom:(XmlDom *)dom;
 
-- (id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value encoding:(NSString *)encoding;
-
-- (id)initWithData:(NSSampleData *)data Name:(NSString *)name custom:(bool)custom value:(NSString *)value encoding:(NSString *)encoding;
+- (id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value encoding:(NSString *)encoding xmpFileId:(long)xmpFileId;
 
 - (void)saveToFile;
 

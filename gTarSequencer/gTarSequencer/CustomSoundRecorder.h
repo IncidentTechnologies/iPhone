@@ -16,6 +16,8 @@
 
 @end
 
+extern OphoMaster * g_ophoMaster;
+
 @interface CustomSoundRecorder : NSObject <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {
     NSString * defaultFilename;

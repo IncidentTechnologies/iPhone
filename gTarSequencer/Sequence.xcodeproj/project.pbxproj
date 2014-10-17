@@ -362,7 +362,6 @@
 		6DDF538F19F04636002EB720 /* Sounds_I'm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52C919F04636002EB720 /* Sounds_I'm.wav */; };
 		6DDF539019F04636002EB720 /* Sounds_I'mBacon.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52CA19F04636002EB720 /* Sounds_I'mBacon.wav */; };
 		6DDF539119F04636002EB720 /* Sounds_ReverseI'mBacon.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52CB19F04636002EB720 /* Sounds_ReverseI'mBacon.wav */; };
-		6DDF539419F066A3002EB720 /* NSSampleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF539319F066A3002EB720 /* NSSampleData.m */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DED45D3199C4E4400E4AF08 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DED45D2199C4E4400E4AF08 /* MessageUI.framework */; };
@@ -917,8 +916,6 @@
 		6DDF52C919F04636002EB720 /* Sounds_I'm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sounds_I'm.wav"; sourceTree = "<group>"; };
 		6DDF52CA19F04636002EB720 /* Sounds_I'mBacon.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sounds_I'mBacon.wav"; sourceTree = "<group>"; };
 		6DDF52CB19F04636002EB720 /* Sounds_ReverseI'mBacon.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sounds_ReverseI'mBacon.wav"; sourceTree = "<group>"; };
-		6DDF539219F066A3002EB720 /* NSSampleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSampleData.h; sourceTree = "<group>"; };
-		6DDF539319F066A3002EB720 /* NSSampleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSampleData.m; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6DED45D2199C4E4400E4AF08 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -1449,8 +1446,6 @@
 				6DC78A00199BFEC5006B14F5 /* NSSampler.mm */,
 				6DC78A02199BFED1006B14F5 /* NSSample.h */,
 				6DC78A03199BFED1006B14F5 /* NSSample.mm */,
-				6DDF539219F066A3002EB720 /* NSSampleData.h */,
-				6DDF539319F066A3002EB720 /* NSSampleData.m */,
 				6DC78A10199C00A9006B14F5 /* NSPattern.h */,
 				6DC78A11199C00A9006B14F5 /* NSPattern.mm */,
 				6D6AFE46199D2F2D00BEBB9D /* NSMeasure.h */,
@@ -2584,7 +2579,6 @@
 			files = (
 				6DC78A07199BFEF7006B14F5 /* NSSequence.mm in Sources */,
 				6DC9A2BF19B912850099372E /* CyclingTextField.m in Sources */,
-				6DDF539419F066A3002EB720 /* NSSampleData.m in Sources */,
 				58D617241863B8D7001EB327 /* LoadingViewController.m in Sources */,
 				6DAD2B3B18CF9B5500228F08 /* SoundMaster.mm in Sources */,
 				5840858D18653B5C00BFF3C5 /* SeqSetViewCell.mm in Sources */,

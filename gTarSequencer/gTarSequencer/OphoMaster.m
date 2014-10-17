@@ -9,6 +9,7 @@
 #import "OphoMaster.h"
 #import "NSSong.h"
 #import "NSSequence.h"
+#import "NSSample.h"
 
 #define OPHO_CALL_LOGIN @"OphoCallLogin"
 #define OPHO_CALL_LOGOUT @"OphoCallLogout"
@@ -22,6 +23,8 @@ extern NSUser * g_loggedInUser;
 @synthesize tutorialDelegate;
 @synthesize savingSong;
 @synthesize savingSequence;
+@synthesize savingSample;
+@synthesize savingSampleData;
 
 - (id)init
 {
@@ -96,6 +99,11 @@ extern NSUser * g_loggedInUser;
     [ophoCloudController requestGetXmpListWithType:OphoXmpTypeAppDefined andUserId:g_loggedInUser.m_userId andCallbackObj:callbackObj andCallbackSel:selector];
 }
 
+- (void)getSampleListForCallbackObj:(id)callbackObj selector:(SEL)selector
+{
+    [ophoCloudController requestGetXmpListWithType:OphoXmpTypeXMPSample andUserId:g_loggedInUser.m_userId andCallbackObj:callbackObj andCallbackSel:selector];
+}
+
 #pragma mark - XMP Save
 // Sequences
 - (void)saveSequence:(NSSequence *)sequence
@@ -128,7 +136,7 @@ extern NSUser * g_loggedInUser;
     
     NSString * sequenceData = [savingSequence saveToFile:savingSequence.m_name];
     
-    [self saveToId:savingSequence.m_id withData:sequenceData];
+    [self saveToId:savingSequence.m_id withData:sequenceData withName:savingSequence.m_name];
 }
 
 // Songs
@@ -164,8 +172,43 @@ extern NSUser * g_loggedInUser;
     
     NSString * songData = [savingSong saveToFile:savingSong.m_title];
     
-    [self saveToId:savingSong.m_id withData:songData];
+    [self saveToId:savingSong.m_id withData:songData withName:savingSong.m_title];
     
+}
+
+// Samples
+
+- (void)saveSample:(NSSample *)sample withFile:(NSData *)data
+{
+    DLog(@"Sample is %@",sample);
+    
+    if(savingSample == nil && sample != nil){
+        
+        savingSample = sample;
+        savingSampleData = data;
+        
+        if(savingSample.m_xmpFileId <= 0){
+            [self saveToNewWithName:sample.m_name callbackObj:self selector:@selector(saveNewSampleCallback:)];
+        }else{
+            [self saveSampleToId:sample.m_xmpFileId];
+        }
+    }
+}
+
+-(void)saveNewSampleCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Cloud respones id is %i",cloudResponse.m_id);
+    
+    [self saveSampleToId:(long)cloudResponse.m_id];
+}
+
+-(void)saveSampleToId:(long)newId
+{
+    savingSample.m_xmpFileId = newId;
+    
+    DLog(@"Sample ID is now %li %@",savingSample.m_xmpFileId,savingSample);
+    
+    [self saveToId:savingSample.m_xmpFileId withFile:savingSampleData withName:savingSample.m_name];
 }
 
 // Generic
@@ -174,9 +217,14 @@ extern NSUser * g_loggedInUser;
     [ophoCloudController requestNewXmpWithFolderId:0 andName:name andCallbackObj:callbackObj andCallbackSel:selector];
 }
 
-- (void)saveToId:(NSInteger)xmpId withData:(NSString *)data
+- (void)saveToId:(NSInteger)xmpId withFile:(NSData *)data withName:(NSString *)name
 {
-    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFile:nil andXmpData:data andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
+    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFile:data andXmpData:nil andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
+}
+
+- (void)saveToId:(NSInteger)xmpId withData:(NSString *)data withName:(NSString *)name
+{
+    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFile:nil andXmpData:data andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
 }
 
 - (void)saveCallback:(CloudResponse *)cloudResponse
@@ -195,6 +243,11 @@ extern NSUser * g_loggedInUser;
         [savingSequence deleteFile];
         savingSequence = nil;
         [self loadSequenceList];
+    }
+    
+    if(savingSample != nil){
+        savingSample = nil;
+        savingSampleData = nil;
     }
     
 }
@@ -239,6 +292,8 @@ extern NSUser * g_loggedInUser;
 
 - (void)deleteWithId:(NSInteger)xmpId
 {
+    DLog(@"Delete with ID %i",xmpId);
+    
     [ophoCloudController requestDeleteXmpWithId:xmpId andCallbackObj:self andCallbackSel:@selector(deleteCallback:)];
 }
 
@@ -265,12 +320,20 @@ extern NSUser * g_loggedInUser;
     return sequenceList;
 }
 
+- (NSDictionary *)getSampleList
+{
+    NSDictionary * sampleList = [NSDictionary dictionaryWithObjectsAndKeys:sampleIdSet,OPHO_LIST_IDS,sampleLoadSet,OPHO_LIST_NAMES,sampleDateSet,OPHO_LIST_DATES, nil];
+    
+    return sampleList;
+}
+
 #pragma mark - Pregenerate XMP Data
 
 - (void)regenerateData
 {
     [self loadSongList];
     [self loadSequenceList];
+    [self loadSampleList];
 
 }
 
@@ -290,6 +353,15 @@ extern NSUser * g_loggedInUser;
     sequenceDateSet = [[NSMutableArray alloc] init];
     
     [self getSequenceListForCallbackObj:self selector:@selector(requestGetXmpSequenceListCallback:)];
+}
+
+- (void)loadSampleList
+{
+    sampleIdSet = [[NSMutableArray alloc] init];
+    sampleLoadSet = [[NSMutableArray alloc] init];
+    sampleDateSet = [[NSMutableArray alloc] init];
+    
+    [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:)];
 }
 
 - (void)requestGetXmpSongListCallback:(CloudResponse *)cloudResponse
@@ -321,6 +393,15 @@ extern NSUser * g_loggedInUser;
         [self launchPendingTutorial];
     }
     
+}
+
+- (void)requestGetXmpSampleListCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Request Get Xmp Sample List Callback");
+    
+    NSArray * xmpList = cloudResponse.m_xmpList;
+    
+    [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet];
 }
 
 - (BOOL)defaultSetExists

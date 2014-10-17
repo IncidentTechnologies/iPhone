@@ -15,6 +15,7 @@
 
 @class NSSong;
 @class NSSequence;
+@class NSSample;
 
 @protocol OphoLoginDelegate <NSObject>
 
@@ -42,6 +43,9 @@
     NSMutableArray * sequenceIdSet;
     NSMutableArray * sequenceLoadSet;
     NSMutableArray * sequenceDateSet;
+    NSMutableArray * sampleIdSet;
+    NSMutableArray * sampleLoadSet;
+    NSMutableArray * sampleDateSet;
     
     BOOL pendingLoadTutorial;
     
@@ -51,6 +55,8 @@
 @property (weak, nonatomic) id <OphoTutorialDelegate> tutorialDelegate;
 @property (strong, nonatomic) NSSong * savingSong;
 @property (strong, nonatomic) NSSequence * savingSequence;
+@property (strong, nonatomic) NSSample * savingSample;
+@property (strong, nonatomic) NSData * savingSampleData;
 
 
 - (id)init;
@@ -64,6 +70,7 @@
 // XMP
 - (void)saveSequence:(NSSequence *)sequence;
 - (void)saveSong:(NSSong *)song;
+- (void)saveSample:(NSSample *)sample withFile:(NSData *)data;
 
 - (void)renameSongWithId:(NSInteger)xmpId toName:(NSString *)name;
 - (void)renameSequenceWithId:(NSInteger)xmpId toName:(NSString *)name;
@@ -76,9 +83,9 @@
 - (void)loadTutorialSequenceWhenReady;
 - (void)copyTutorialFile;
 
-
 // Acces pregenerated data
 - (NSDictionary *)getSongList;
 - (NSDictionary *)getSequenceList;
+- (NSDictionary *)getSampleList;
 
 @end

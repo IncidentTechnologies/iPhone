@@ -1402,7 +1402,7 @@
     NSData * fileData = [NSData dataWithContentsOfFile:filepath];
     
     //kUTTypeMPEG4Audio
-    [message addAttachmentData:fileData typeIdentifier:@"kUTTypeMPEG4Audio" filename:filename];
+    [message addAttachmentData:fileData typeIdentifier:@"kUTTypeAudio" filename:filename];
     
     if(message != nil){
         [self.navigationController presentViewController:message animated:YES completion:nil];

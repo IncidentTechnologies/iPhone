@@ -34,6 +34,10 @@
     
     // Sample and string lists
     UIView * backgroundView;
+    
+    NSMutableDictionary * customSampleOphoDictionary;
+    NSMutableDictionary * allSampleOphoDictionary;
+    
     NSMutableArray * sampleList;
     NSMutableArray * customSampleList;
     NSMutableArray * sampleStack;
