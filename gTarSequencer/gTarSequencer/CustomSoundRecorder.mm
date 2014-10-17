@@ -160,33 +160,6 @@
 }
 
 #pragma mark - File System
-- (void)renameRecordingToFilename:(NSString *)filename;
-{
-    // Create a subfolder Samples/{Category} if it doesn't exist yet
-    DLog(@"Moving file from %@ to %@.wav",defaultFilename,filename);
-    
-    NSString * newFilename = filename;
-    newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
-    newFilename = [newFilename stringByAppendingString:@".wav"];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Samples"];
-    
-    NSError * err = NULL;
-    NSFileManager * fm = [[NSFileManager alloc] init];
-    
-    [fm createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
-    
-    NSString * currentPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:defaultFilename];
-    NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newFilename];
-    
-    BOOL result = [fm moveItemAtPath:currentPath toPath:newPath error:&err];
-    
-    if(!result)
-        DLog(@"Error moving");
-    
-    [self releaseAudioBank];
-}
 
 - (void)saveRecordingToFilename:(NSString *)filename
 {
@@ -210,6 +183,16 @@
     DLog(@"Save path is %@",newPath);
     
     m_sampNode->SaveToFile(pathName, YES);
+    
+    NSData * data = [NSData dataWithContentsOfFile:newPath];
+    
+    NSSampleData * sampleData = [[NSSampleData alloc] initWithData:data dataName:filename dataId:0 dataSize:0 dataEncoding:@"wav"];
+    
+    NSSample * xmpSample = [[NSSample alloc] initWithData:sampleData Name:filename custom:YES value:@"0" encoding:@"wav"];
+    
+    [xmpSample saveToFile];
+    
+    
     
     // Print directory
     

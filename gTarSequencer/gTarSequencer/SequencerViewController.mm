@@ -55,20 +55,8 @@
     
     [self initSubviews];
     
-    // Check to remove the old FTU set?
-    BOOL convertTutorialSet = [[NSUserDefaults standardUserDefaults] boolForKey:@"ConvertTutorialSet"];
-    
-    // Load default set for FTU
-    // Remove the old one if necessary
-    if(isFirstLaunch || !convertTutorialSet){
-        [self copyTutorialFile];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"ConvertTutorialSet"];
-    }
-    
-    
-    NSString * filePath = (isFirstLaunch) ? DEFAULT_SET_NAME : nil;
-    
-    [self loadStateFromDisk:filePath];
+    // Load locally saved state
+    [self loadStateFromDisk];
     
     [self selectNavChoice:@"Set" withShift:NO];
     [self saveContext:nil force:NO];
@@ -108,6 +96,9 @@
     fret = 0;
     
     patternQueue = [NSMutableArray array];
+    
+    g_ophoMaster.tutorialDelegate = self;
+    
 }
 
 - (void)initSubviews
@@ -244,33 +235,6 @@
     
     [self startGestures];
     
-}
-
-#pragma mark - File Management
-
--(void)copyTutorialFile
-{
-    NSString * defaultSetPath = [[NSBundle mainBundle] pathForResource:@"tutorialSet" ofType:@"xml"];
-    
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * newDefaultSetPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences/Tutorial.xml"];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:TYPE_SEQUENCE];
-    
-    NSError * err = NULL;
-    [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
-    
-    // Delete if it already exists
-    [fileManager removeItemAtPath:newDefaultSetPath error:&err];
-    
-    // Then copy it
-    if(![fileManager copyItemAtPath:defaultSetPath toPath:newDefaultSetPath error:&err]){
-        DLog(@"Error copying");
-    }
-    
-    DLog(@"Copied tutorial file from %@ to %@",defaultSetPath,newDefaultSetPath);
 }
 
 #pragma mark - Left Navigator
@@ -523,6 +487,11 @@
     }
 }
 
+- (void)tutorialReady:(NSInteger)xmpId
+{
+    [self loadFromXmpId:xmpId andType:TYPE_SEQUENCE];
+}
+
 - (void)loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type
 {
     
@@ -555,9 +524,9 @@
     
     [self setActiveSequence:sequence.m_id];
     
-    if([sequence.m_name isEqualToString:DEFAULT_SET_NAME]){
+    /*if([sequence.m_name isEqualToString:DEFAULT_SET_NAME]){
         [self relaunchFTUTutorial];
-    }
+    }*/
     
     // May have loaded the sequence after a song
     if(loadedSong != nil){
@@ -696,9 +665,9 @@
     [playControlViewController setVolume:volume];
 }
 
-- (void)loadStateFromDisk:(NSString *)filepath
+- (void)loadStateFromDisk
 {
-    NSString * sequencerName = [seqSetViewController loadStateFromDisk:filepath];
+    NSString * sequencerName = [seqSetViewController loadStateFromDisk];
     
     if(![sequencerName isEqualToString:@""] && ![sequencerName isEqualToString:DEFAULT_STATE_NAME]){
         
@@ -707,12 +676,12 @@
     }
     
     // Reset
-    if(filepath == nil){
+    /*if(filepath == nil){
         
         [playControlViewController resetTempo];
         [playControlViewController resetVolume];
             
-    }
+    }*/
 }
 
 #pragma mark - Play Events
@@ -1566,6 +1535,8 @@
 
 - (void)launchFTUTutorial
 {
+    [g_ophoMaster loadTutorialSequenceWhenReady];
+    
     FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
     float x = [frameGenerator getFullscreenWidth];

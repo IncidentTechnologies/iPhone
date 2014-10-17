@@ -196,7 +196,7 @@
         
     }else{
         
-        path = [[NSBundle mainBundle] pathForResource:sampleFilename ofType:@"mp3"];
+        path = [[NSBundle mainBundle] pathForResource:sampleFilename ofType:@"wav"];
     }
     
     if(path == nil){

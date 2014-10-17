@@ -1427,7 +1427,7 @@
     
     // Reload sound into bank after new record
     char * filepath = (char *)malloc(sizeof(char) * 1024);
-    filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Vibraphone_C" ofType:@"mp3"] UTF8String];
+    filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Vibraphone_C" ofType:@"wav"] UTF8String];
     
     m_bankNode->LoadSampleIntoBank(filepath, m_sampNode);
     

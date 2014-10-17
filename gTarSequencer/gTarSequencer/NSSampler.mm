@@ -84,14 +84,19 @@
 
 - (void)initAudioWithInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster stringSet:(NSArray *)stringSet stringPaths:(NSArray *)stringPaths
 {
-    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths andIndex:index andSoundMaster:soundMaster];
-    
-    // Add all the samples
-    for(int i = 0; i < [stringSet count]; i++){
-        NSSample * sample = [[NSSample alloc] initWithName:[stringSet objectAtIndex:i] custom:[[stringPaths objectAtIndex:i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i]];
-        
-        [self addSample:sample];
+    if([m_samples count] == 0){
+        // Add all the samples for a new track
+        for(int i = 0; i < [stringSet count]; i++){
+            NSSample * sample = [[NSSample alloc] initWithName:[stringSet objectAtIndex:i] custom:[[stringPaths objectAtIndex:i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i] encoding:@"wav"];
+            
+            [self addSample:sample];
+        }
     }
+    
+    audio = [[SoundMaker alloc] initWithStringSamples:m_samples andInstrument:index andSoundMaster:soundMaster];
+    
+    DLog(@"Samples count is %i",[m_samples count]);
+    
 }
 
 -(XMPNode *)convertToXmp

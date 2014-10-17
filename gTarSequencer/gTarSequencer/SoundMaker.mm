@@ -11,6 +11,7 @@
 #import "AudioController.h"
 #import "AUNodeNetwork.h"
 #import "AudioNodeCommon.h"
+#import "NSSample.h"
 
 #define GTAR_NUM_STRINGS 6
 
@@ -25,6 +26,7 @@
     char * filepath[6];
     NSArray * audioStringSet;
     NSArray * audioStringPaths;
+    NSArray * audioStringSamples;
     
     double gain;
     double bankgain;
@@ -44,13 +46,13 @@
     return self;
 }
 
-- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index andSoundMaster:(SoundMaster *)soundMaster
+
+- (id)initWithStringSamples:(NSArray *)stringSet andInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster
 {
     self = [super init];
     if(self){
         
-        audioStringSet = stringSet;
-        audioStringPaths = stringPaths;
+        audioStringSamples = stringSet;
         
         instIndex = index;
         
@@ -63,17 +65,17 @@
             
             DLog(@"Loading files in background");
             
-            [self loadStringSetAndStringPaths];
+            [self loadStringSamples];
             
         });
+        
     }
     
     return self;
 }
 
-- (void)loadStringSetAndStringPaths
+- (void)loadStringSamples
 {
-    
     for(int i = 0; i < GTAR_NUM_STRINGS; i++){
         filepath[i] = (char *)malloc(sizeof(char) * 1024);
     }
@@ -82,22 +84,25 @@
     
     for(int i = 0; i < GTAR_NUM_STRINGS; i++){
         
+        NSSample * sample = audioStringSamples[i];
+        
         // Determine filetype
-        if([audioStringPaths[i] isEqualToString:@"Custom"]){
+        if(sample.m_custom){
             
             // local sound
             NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             NSString * path = [paths objectAtIndex:0];
             NSString * filename = [path stringByAppendingPathComponent:@"Samples"];
-            filename = [filename stringByAppendingPathComponent:audioStringSet[i]];
-            filename = [filename stringByAppendingString:@".wav"];
+            filename = [filename stringByAppendingPathComponent:sample.m_name];
+            filename = [filename stringByAppendingString:@"."];
+            filename = [filename stringByAppendingString:sample.m_encoding];
             
             filepath[i] = (char *) [filename UTF8String];
             
         }else{
-            NSString * fname = [audioStringSet[i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString * fname = [sample.m_name stringByReplacingOccurrencesOfString:@" " withString:@""];
             
-            filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:fname ofType:@"mp3"] UTF8String];
+            filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:fname ofType:sample.m_encoding] UTF8String];
         }
         
         DLog(@"Loading sample %s",filepath[i]);

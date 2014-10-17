@@ -735,7 +735,7 @@
         
     }else{
         
-        path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp3"];
+        path = [[NSBundle mainBundle] pathForResource:filename ofType:@"wav"];
     }
     
     NSError * error = nil;
@@ -1152,7 +1152,6 @@
     
     // Rename the file and save in Documents/Samples/ subdirectory
     [customSoundRecorder saveRecordingToFilename:filename];
-    //[customSoundRecorder renameRecordingToFilename:filename];
     
     // Add to customSampleList.pList
     [self updateCustomSampleListWithSample:filename];

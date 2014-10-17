@@ -783,32 +783,34 @@
 
 -(void)openShareScreen
 {
-    // End any song playing
-    [self stopRecordPlaybackAnimatePlayband:NO];
-    
-    // End any editing
-    [recordEditor deactivateEditingClip];
-    [recordEditor unfocusTrackHideEditingPanel];
-    
-    // Record the wav
-    [self recordActiveSongToFile];
-    
-    // Get dimensions
-    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
-    
-    CGRect offScreenFrame = shareScreen.frame;
-    CGRect onScreenFrame = CGRectMake(shareScreen.frame.origin.x,shareScreen.frame.origin.y-[frameGenerator getFullscreenHeight],shareScreen.frame.size.width,shareScreen.frame.size.height);
-    
-    [shareView setHidden:NO];
-    
-    [shareView setAlpha:0.0];
-    [shareScreen setFrame:offScreenFrame];
-    [UIView animateWithDuration:0.4f animations:^(void){
-        [shareView setAlpha:1.0];
-        [shareScreen setFrame:onScreenFrame];
-    }];
-    
-    [self setRecordDefaultText];
+    if([recordingSong.m_tracks count] > 0){
+        // End any song playing
+        [self stopRecordPlaybackAnimatePlayband:NO];
+        
+        // End any editing
+        [recordEditor deactivateEditingClip];
+        [recordEditor unfocusTrackHideEditingPanel];
+        
+        // Record the wav
+        [self recordActiveSongToFile];
+        
+        // Get dimensions
+        FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+        
+        CGRect offScreenFrame = shareScreen.frame;
+        CGRect onScreenFrame = CGRectMake(shareScreen.frame.origin.x,shareScreen.frame.origin.y-[frameGenerator getFullscreenHeight],shareScreen.frame.size.width,shareScreen.frame.size.height);
+        
+        [shareView setHidden:NO];
+        
+        [shareView setAlpha:0.0];
+        [shareScreen setFrame:offScreenFrame];
+        [UIView animateWithDuration:0.4f animations:^(void){
+            [shareView setAlpha:1.0];
+            [shareScreen setFrame:onScreenFrame];
+        }];
+        
+        [self setRecordDefaultText];
+    }
     
 }
 

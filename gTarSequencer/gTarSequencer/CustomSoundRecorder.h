@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "AppData.h"
 #import <AVFoundation/AVFoundation.h>
+#import "NSSample.h"
 
 @protocol CustomSoundDelegate <NSObject>
 
@@ -32,7 +33,6 @@
 - (void)startPlayback;
 - (void)pausePlayback:(float)ms;
 - (void)unpausePlayback;
-- (void)renameRecordingToFilename:(NSString *)filename;
 - (void)saveRecordingToFilename:(NSString *)filename;
 - (void)deleteRecordingFilename:(NSString *)filename;
 - (void)initAudioForSample;

@@ -47,6 +47,19 @@
     return self;
 }
 
+
+// Load state from disk
+- (void)initSequenceWithFilename:(NSString *)filename
+{
+    if(filename != nil){
+        sequence = [[NSSequence alloc] initWithXMPFilename:filename];
+        [self refreshSequenceName:filename];
+        [self setInstrumentsFromData];
+        [delegate setTempo:sequence.m_tempo];
+        [delegate setVolume:sequence.m_volume];
+    }
+}
+
 - (void)initSequenceWithSequence:(NSSequence *)newsequence
 {
     sequence = newsequence;
@@ -110,14 +123,12 @@
 }
 
 #pragma mark - Load Context
-- (NSString *)loadStateFromDisk:(NSString *)filepath
+- (NSString *)loadStateFromDisk
 {
-    if(filepath == nil){
-        filepath = DEFAULT_STATE_NAME;
-        DLog(@"Load state from disk");
-    }else{
-        DLog(@"Load sequencer from disk at %@", filepath);
-    }
+    DLog(@"Load state from disk");
+    
+    // sequenceCurrentState
+    NSString * filepath = DEFAULT_STATE_NAME;
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
@@ -128,10 +139,10 @@
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:sequenceFilepath]) {
-        DLog(@"The sequencer save plist exists");
+        DLog(@"The state XML exists");
     } else {
-        DLog(@"The sequencer save plist does not exist");
-        filepath = nil;
+        DLog(@"The state XML does not exist");
+        return nil;
     }
     
     // Other state data
@@ -143,29 +154,24 @@
     
     BOOL loadSequence = true;
         
-        if ( [[currentState allKeys] count] > 0 )
-        {
-            // Decode selectedInstrumentIndex
-            [self setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
+    if ( [[currentState allKeys] count] > 0 )
+    {
+        // Decode selectedInstrumentIndex
+        [self setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
+        
+        if([filepath isEqualToString:DEFAULT_STATE_NAME]){
             
-            if([filepath isEqualToString:DEFAULT_STATE_NAME]){
-                
-                NSInteger activeSong = [[currentState objectForKey:@"Active Song"] intValue];
-                
-                if(activeSong){
-                    loadSequence = false;
-                    [delegate loadFromXmpId:activeSong andType:TYPE_SONG];
-                }
+            NSInteger activeSong = [[currentState objectForKey:@"Active Song"] intValue];
+            
+            if(activeSong){
+                loadSequence = false;
+                [delegate loadFromXmpId:activeSong andType:TYPE_SONG];
             }
         }
-        
-    //}
+    }
     
     if(loadSequence){
-        
-        // Read file load into all the things, make sure the data generates
-        //[self initSequenceWithFilename:filepath];
-        
+        [self initSequenceWithFilename:filepath];
     }
     
     return sequence.m_name;
@@ -183,10 +189,9 @@
         
         // Save state instead of to file
         if(filepath == nil){
-            /*
+            
             filepath = DEFAULT_STATE_NAME;
             
-            //
             // Any additional metadata to save for this state?
             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                                  NSUserDomainMask, YES);
@@ -203,13 +208,12 @@
             BOOL success = [currentState writeToFile:stateMetaDataPath atomically:YES];
             
             DLog(@"Save metadata success: %i", success);
-             */
             
         }
         
         // Save the sequence
         // TODO: don't upload saved state to backend, or tutorial changes
-        if(filepath != nil && ![filepath isEqualToString:DEFAULT_SET_NAME]){
+        if(filepath != nil && ![filepath isEqualToString:DEFAULT_SET_NAME] && ![filepath isEqualToString:DEFAULT_STATE_NAME]){
             [sequence renameToName:filepath];
             [g_ophoMaster saveSequence:sequence];
         }

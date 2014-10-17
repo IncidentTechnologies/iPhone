@@ -125,7 +125,7 @@ extern OphoMaster * g_ophoMaster;
 
 - (void)setInstrumentsFromData;
 
-//- (void)initSequenceWithFilename:(NSString *)filename;
+- (void)initSequenceWithFilename:(NSString *)filename;
 - (void)initSequenceWithSequence:(NSSequence *)newsequence;
 - (NSSequence *)getSequence;
 - (NSMutableArray *)getTracks;
@@ -142,7 +142,7 @@ extern OphoMaster * g_ophoMaster;
 
 - (BOOL)isValidInstrumentIndex:(int)inst;
 
-- (NSString *)loadStateFromDisk:(NSString *)filepath;
+- (NSString *)loadStateFromDisk;
 - (void)saveContext:(NSString *)filepath force:(BOOL)forceSave;
 
 - (void)disableKnobIfEnabledForInstrument:(int)instIndex;

@@ -641,7 +641,7 @@
 
 - (void)panCell:(UIPanGestureRecognizer *)recognizer
 {
-    if(![setButton isHidden] || [fileText.text isEqualToString:DEFAULT_SET_NAME] || [parent isLeftNavOpen]){
+    if(![setButton isHidden] || [parent isLeftNavOpen]){
         return;
     }
     

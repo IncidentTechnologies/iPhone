@@ -20,7 +20,7 @@
     int instIndex;
 }
 
-- (id)initWithStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIndex:(int)index andSoundMaster:(SoundMaster *)soundMaster;
+- (id)initWithStringSamples:(NSArray *)stringSet andInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster;
 
 - (void)pluckString:(int)str;
 - (void)flushBuffer;

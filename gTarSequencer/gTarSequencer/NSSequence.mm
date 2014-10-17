@@ -16,8 +16,10 @@
 @synthesize m_volume;
 @synthesize m_id;
 @synthesize m_selectedTrackIndex;
+@synthesize m_originSequenceRoot;
 
 #define DEFAULT_STATE_NAME @"sequenceCurrentState"
+
 
 - (id)initWithXMPFilename:(NSString *)filename
 {
@@ -29,15 +31,17 @@
     
     if(self){
         
-        // check mainbundle
-        
+        /*
         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         
         NSString * sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Sequences/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
+        */
+        
+        NSString * sequenceFilepath = [[NSBundle mainBundle] pathForResource:filename ofType:@"xml"];
         
         char * filepath = (char *)[sequenceFilepath UTF8String];
         
-        DLog(@"initWithXMPFilename Sequences/%@.xml",filename);
+        DLog(@"initWithXMPFilename %@.xml",filename);
         
         XMPTree MyTree(filepath);
         
@@ -71,6 +75,8 @@
         [[[sequence GetChildWithName:@"header"] GetChildWithName:@"volume"] GetAttributeValueWithName:@"value"].GetValueDouble(&m_volume);
         
         [[[sequence GetChildWithName:@"header"] GetChildWithName:@"id"] GetAttributeValueWithName:@"value"].GetValueInt(&m_id);
+        
+        [[[sequence GetChildWithName:@"header"] GetChildWithName:@"origin-sequence-root"] GetAttributeValueWithName:@"value"].GetValueBool(&m_originSequenceRoot);
         
         m_tracks = [[NSMutableArray alloc] init];
         
@@ -110,6 +116,7 @@
         m_id = [[header getValueFromChildWithName:@"id"] intValue];
         m_tempo = [[header getValueFromChildWithName:@"tempo"] floatValue];
         m_volume = [[header getValueFromChildWithName:@"volume"] floatValue];
+        m_originSequenceRoot = [[header getValueFromChildWithName:@"origin-sequence-root"] boolValue];
         
         DLog(@"SEQUENCE id | %li",m_id);
         DLog(@"SEQUENCE name | %@",m_name);
@@ -149,11 +156,13 @@
         m_name = name;
         m_tempo = tempo;
         m_volume = volume;
+        m_originSequenceRoot = false;
         
         // TODO: get from server
         m_id = 0;
         
         m_selectedTrackIndex = 0;
+        
 	}
 	
 	return self;
@@ -171,6 +180,7 @@
         m_name = name;
         m_tempo = tempo;
         m_volume = volume;
+        m_originSequenceRoot = false;
         
         m_selectedTrackIndex = 0;
         
@@ -208,6 +218,9 @@
     tempNode->AddAttribute(new XMPAttribute((char *)"value", m_id));
     headerNode->AddChild(tempNode);
     
+    tempNode = new XMPNode((char *)"origin-sequence-root", headerNode);
+    tempNode->AddAttribute(new XMPAttribute((char *)"value", m_originSequenceRoot));
+    headerNode->AddChild(tempNode);
     
     for(NSTrack * track in m_tracks){
         contentNode->AddChild([track convertToSequenceXmp]);

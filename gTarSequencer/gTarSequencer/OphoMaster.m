@@ -12,12 +12,14 @@
 
 #define OPHO_CALL_LOGIN @"OphoCallLogin"
 #define OPHO_CALL_LOGOUT @"OphoCallLogout"
+#define DEFAULT_SET_PATH @"tutorialSet"
 
 @implementation OphoMaster
 
 extern NSUser * g_loggedInUser;
 
 @synthesize loginDelegate;
+@synthesize tutorialDelegate;
 @synthesize savingSong;
 @synthesize savingSequence;
 
@@ -27,6 +29,7 @@ extern NSUser * g_loggedInUser;
     if ( self )
     {
         ophoCloudController = [[OphoCloudController alloc] initWithServer:kServerAddress];
+        pendingLoadTutorial = NO;
         
     }
     return self;
@@ -268,6 +271,7 @@ extern NSUser * g_loggedInUser;
 {
     [self loadSongList];
     [self loadSequenceList];
+
 }
 
 - (void)loadSongList
@@ -304,6 +308,30 @@ extern NSUser * g_loggedInUser;
     NSArray * xmpList = cloudResponse.m_xmpList;
     
     [self buildSortedXmpList:xmpList withIds:sequenceIdSet withData:sequenceLoadSet withDates:sequenceDateSet];
+    
+    // Check that TUTORIAL has been copied over
+    BOOL convertTutorialSet = [[NSUserDefaults standardUserDefaults] boolForKey:@"ConvertTutorialSet"];
+    
+    if(![self defaultSetExists] && !convertTutorialSet){
+        [self copyTutorialFile];
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"ConvertTutorialSet"];
+    }
+    
+    if(pendingLoadTutorial){
+        [self launchPendingTutorial];
+    }
+    
+}
+
+- (BOOL)defaultSetExists
+{
+    for(NSString * setName in sequenceLoadSet){
+        if([setName isEqualToString:DEFAULT_SET_NAME]){
+            return TRUE;
+        }
+    }
+    
+    return FALSE;
 }
 
 - (void)buildSortedXmpList:(NSArray *)xmpList withIds:(NSMutableArray *)fileIdSet withData:(NSMutableArray *)fileLoadSet withDates:(NSMutableArray *)fileDateSet;
@@ -380,6 +408,35 @@ extern NSUser * g_loggedInUser;
         [fileDateSet setObject:newFileDateSet[i] atIndexedSubscript:i];
         [fileIdSet setObject:newFileIdSet[i] atIndexedSubscript:i];
     }
+}
+
+#pragma mark - Default Tutorial File
+
+- (void)loadTutorialSequenceWhenReady
+{
+    pendingLoadTutorial = YES;
+}
+
+- (void)copyTutorialFile
+{
+    NSSequence * tutorialSequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH];
+    
+    [self saveSequence:tutorialSequence];
+}
+
+- (void)launchPendingTutorial
+{
+    pendingLoadTutorial = NO;
+    
+    NSInteger xmpId;
+    
+    for(int i = 0; i < [sequenceLoadSet count]; i++){
+        if([sequenceLoadSet[i] isEqualToString:DEFAULT_SET_NAME]){
+            xmpId = [sequenceIdSet[i] intValue];
+        }
+    }
+    
+    [tutorialDelegate tutorialReady:xmpId];
 }
 
 

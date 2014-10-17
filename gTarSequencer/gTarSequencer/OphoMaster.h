@@ -23,6 +23,12 @@
 
 @end
 
+@protocol OphoTutorialDelegate <NSObject>
+
+- (void)tutorialReady:(NSInteger)xmpId;
+
+@end
+
 @interface OphoMaster : NSObject
 {
     OphoCloudController * ophoCloudController;
@@ -37,9 +43,12 @@
     NSMutableArray * sequenceLoadSet;
     NSMutableArray * sequenceDateSet;
     
+    BOOL pendingLoadTutorial;
+    
 }
 
 @property (weak, nonatomic) id <OphoLoginDelegate> loginDelegate;
+@property (weak, nonatomic) id <OphoTutorialDelegate> tutorialDelegate;
 @property (strong, nonatomic) NSSong * savingSong;
 @property (strong, nonatomic) NSSequence * savingSequence;
 
@@ -62,6 +71,10 @@
 - (void)loadFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector;
 
 - (void)deleteWithId:(NSInteger)xmpId;
+
+// Tutorial
+- (void)loadTutorialSequenceWhenReady;
+- (void)copyTutorialFile;
 
 
 // Acces pregenerated data

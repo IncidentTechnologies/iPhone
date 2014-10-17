@@ -17,6 +17,7 @@
     NSString * m_name;
     double m_tempo;
     double m_volume;
+    bool m_originSequenceRoot;
     long m_id;
     
     NSMutableArray * m_tracks;
@@ -27,6 +28,7 @@
 @property (nonatomic) double m_tempo;
 @property (nonatomic) double m_volume;
 @property (nonatomic) long m_id;
+@property (nonatomic, readonly) bool m_originSequenceRoot;
 
 @property (nonatomic) int m_selectedTrackIndex;
 
