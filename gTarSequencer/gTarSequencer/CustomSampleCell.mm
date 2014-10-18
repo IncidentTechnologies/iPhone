@@ -15,12 +15,15 @@
 @synthesize sampleTitle;
 @synthesize sampleArrow;
 @synthesize parentCategory;
+@synthesize xmpId;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        
+        xmpId = -3;
     }
     return self;
 }

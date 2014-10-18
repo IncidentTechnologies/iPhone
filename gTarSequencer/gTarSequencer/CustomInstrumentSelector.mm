@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
+#import "SoundMaster_.mm"
 #import "CustomInstrumentSelector.h"
 
 #define GTAR_NUM_STRINGS 6
@@ -26,6 +27,15 @@
 
 #define FONT_DEFAULT @"Avenir Next"
 #define FONT_BOLD @"AvenirNext-Bold"
+
+@interface CustomInstrumentSelector(){
+    
+    SoundMaster * soundMaster;
+    SamplerBankNode * m_bankNode;
+    SampleNode * m_sampNode;
+}
+
+@end
 
 @implementation CustomInstrumentSelector
 
@@ -677,7 +687,7 @@
         
         if(!([filename rangeOfString:@"Sound"].location == NSNotFound)){
             
-            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Custom_Sound"] withString:@""];
+            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Sound"] withString:@""];
             int numFromSuffix = [customSuffix intValue];
             
             customCount = MAX(customCount,numFromSuffix);
@@ -715,9 +725,8 @@
 }
 
 // single sample audio player
-- (void)playAudioForFile:(NSString *)filename withCustomPath:(BOOL)useCustomPath
+- (void)playAudioForFile:(NSString *)filename withCustomPath:(BOOL)useCustomPath xmpId:(NSInteger)xmpId;
 {
-    
     NSString * path;
     
     if(filename == nil){
@@ -729,23 +738,59 @@
     
     if(useCustomPath){
         
-        // different filetype and location
-        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Samples/" stringByAppendingString:[filename stringByAppendingString:@".wav"]]];
+        DLog(@"Play audio for XMP ID %i",xmpId);
+        
+        [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
         
     }else{
         
         path = [[NSBundle mainBundle] pathForResource:filename ofType:@"wav"];
+        
+        NSError * error = nil;
+        NSURL * url = [NSURL fileURLWithPath:path];
+        
+        DLog(@"Playing URL %@",url);
+        
+        self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+                
+        [self.audio play];
     }
     
-    NSError * error = nil;
-    NSURL * url = [NSURL fileURLWithPath:path];
+}
+
+- (void)playOphoAudio:(CloudResponse *)cloudResponse
+{
+    XmlDom * xmp = cloudResponse.m_xmpDom;
+    XmlDom * sampleXmp = [xmp getChildWithName:@"sample"];
     
-    DLog(@"Playing URL %@",url);
+    NSString * datastring = [sampleXmp getText];
+    //NSData * data = [datastring dataUsingEncoding:NSUTF8StringEncoding];
     
-    self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    //NSURL * URL = [NSURL URLWithString:[NSString stringWithFormat:@"data:application/octet-stream;base64,%@",[sampleXmp getText]]];
+    //NSData * data = [NSData dataWithContentsOfURL:URL];
     
-    [self.audio play];
+    // Add to sample buffer create from base 64 string
+    
+    if(!soundMaster){
+        soundMaster = [[SoundMaster alloc] init];
+    }
+    
+    m_bankNode = [soundMaster generateBank];
+    
+    // Reload sound into bank after new record
+    char * filepath = (char *)malloc(sizeof(char) * 1024);
+    
+    filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Vibraphone_C" ofType:@"wav"] UTF8String];
+    
+    m_bankNode->LoadSampleIntoBank(filepath, m_sampNode);
+    
+    m_bankNode->TriggerSample(0);
+    
+    
+    //self.audio = [[AVAudioPlayer alloc] initWithData:data error:nil];
+    
+    //[self.audio play];
+    
 }
 
 #pragma mark - Record
@@ -1176,6 +1221,7 @@
     for(int i = 0; i < [sampleSubset count]; i++){
         if([[sampleSubset objectAtIndex:i] isEqualToString:filename]){
             [[sampleListSubset[0] objectForKey:@"Leafsampleset"] removeObjectAtIndex:i];
+            [[sampleListSubset[0] objectForKey:@"Leafidset"] removeObjectAtIndex:i];
         }
     }
     
@@ -1575,7 +1621,39 @@
     }
 }
 
-- (NSString *)getSampleFromIndex:(NSIndexPath *)indexPath
+- (NSInteger)getSampleIndexFromIndexPath:(NSIndexPath *)indexPath
+{
+    DLog(@"SampleList is %@",sampleList);
+    
+    if([sampleStack count] == 0){
+        
+        /*
+        // check sampleStack
+        long sectionindex = indexPath.section;
+        long i = indexPath.row;
+        
+        if(i == 0){
+            return [sampleList[sectionindex] objectForKey:@"Section"];
+        }
+        
+        NSArray * section = [sampleList[sectionindex] objectForKey:@"Sampleset"];
+        */
+        
+        return -1;
+        
+    }else{
+        
+        NSDictionary * dict = [sampleListSubset objectAtIndex:indexPath.section];
+        if([dict objectForKey:@"Sampleset"] || [dict objectForKey:@"Sectionset"]){
+            return -2;
+        }else{
+            return [[[dict objectForKey:@"Leafidset"] objectAtIndex:indexPath.row] intValue];
+        }
+        
+    }
+}
+
+- (NSString *)getSampleFromIndexPath:(NSIndexPath *)indexPath
 {
     
     DLog(@"SampleList is %@",sampleList);
@@ -1657,12 +1735,14 @@
                 
                 NSMutableArray * newSampleset = [[NSMutableArray alloc] initWithArray:[[sampleListSubset objectAtIndex:j] objectForKey:@"Sampleset"] copyItems:YES];
                 
+                NSMutableArray * newIdset = [[NSMutableArray alloc] initWithArray:[[sampleListSubset objectAtIndex:j] objectForKey:@"XmpIdSet"] copyItems:YES];
+                
                 [sampleListSubset removeAllObjects];
                 [sampleListSubset addObjectsFromArray:newSectionset];
                 
                 // Leaf of the tree
                 if([sampleListSubset count] == 0){
-                    [sampleListSubset addObject:[NSMutableDictionary dictionaryWithObject:newSampleset forKey:@"Leafsampleset"]];
+                    [sampleListSubset addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:newSampleset,@"Leafsampleset",newIdset,@"Leafidset", nil]];
                 }
             }
         }
@@ -1701,10 +1781,11 @@
             cell.layoutMargins = UIEdgeInsetsZero; // iOS 8+
         }
         cell.delegate = self;
+        cell.xmpId = [self getSampleIndexFromIndexPath:indexPath];
         
-        DLog(@"Text is %@",[self getSampleFromIndex:indexPath]);
+        DLog(@"Text is %@",[self getSampleFromIndexPath:indexPath]);
         
-        [cell.sampleTitle setText:[self getSampleFromIndex:indexPath]];
+        [cell.sampleTitle setText:[self getSampleFromIndexPath:indexPath]];
         [cell setBackgroundColor:[UIColor clearColor]];
         
         [self clearImagesForCell:cell];
@@ -2199,7 +2280,7 @@
         BOOL isCustom = ([self isCustomInstrumentList]) ? TRUE : FALSE;
         NSString * filename = [cell.parentCategory stringByAppendingString:@"_"];
         filename = [filename stringByAppendingString:cell.sampleTitle.text];
-        [self playAudioForFile:filename withCustomPath:isCustom];
+        [self playAudioForFile:filename withCustomPath:isCustom xmpId:cell.xmpId];
         
         return YES;
     }
@@ -2251,7 +2332,7 @@
 - (void)retrieveSampleList
 {
     customSampleOphoDictionary = [NSMutableDictionary dictionaryWithDictionary:[g_ophoMaster getSampleList]];
-    NSMutableDictionary * customList = [NSMutableDictionary dictionaryWithObjectsAndKeys:[customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES],@"Sampleset",@"Custom",@"Section", nil];
+    NSMutableDictionary * customList = [NSMutableDictionary dictionaryWithObjectsAndKeys:[customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES],@"Sampleset",[customSampleOphoDictionary objectForKey:OPHO_LIST_IDS],@"XmpIdSet",@"Custom",@"Section", nil];
     
     // Init
     sampleList = [[NSMutableArray alloc] init];

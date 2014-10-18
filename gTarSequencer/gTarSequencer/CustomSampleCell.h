@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel * sampleTitle;
 @property (weak, nonatomic) IBOutlet UIImageView * sampleArrow;
 @property (nonatomic) NSString * parentCategory;
+@property (assign, nonatomic) NSInteger xmpId;
 
 
 // Slide to delete

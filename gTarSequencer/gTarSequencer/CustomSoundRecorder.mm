@@ -195,7 +195,7 @@
     
     NSData * data = [[NSData alloc] initWithContentsOfFile:newPath];
     
-    NSSample * xmpSample = [[NSSample alloc] initWithName:[NSString stringWithFormat:@"Custom_%@.wav",filename] custom:YES value:@"0" encoding:@"wav" xmpFileId:0];
+    NSSample * xmpSample = [[NSSample alloc] initWithName:[NSString stringWithFormat:@"%@.wav",filename] custom:YES value:@"0" encoding:@"wav" xmpFileId:0];
     
     [g_ophoMaster saveSample:xmpSample withFile:data];
     
@@ -319,7 +319,6 @@
 
 - (float)getSampleRelativeLength
 {
-    
     float sampleRelativeLength = sampleEnd - sampleStart;
     
     DLog(@"sampleRelativeLength is now %f with sampleEnd %f and sampleStart %f",sampleRelativeLength,sampleEnd,sampleStart);
@@ -328,9 +327,7 @@
         return [self getSampleLength]-sampleStart;
     }else{
         return sampleRelativeLength;
-    }
-    
-    
+    }    
 }
 
 
