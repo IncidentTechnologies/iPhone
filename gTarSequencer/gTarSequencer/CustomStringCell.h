@@ -7,22 +7,24 @@
 //
 
 #import "AppData.h"
-#import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
-#import <AudioToolbox/AudioToolbox.h>
+
+@protocol CustomStringCellDelegate <NSObject>
+
+- (void)playAudioForFile:(NSString *)filename withCustomPath:(BOOL)useCustomPath xmpId:(NSInteger)xmpId;
+
+@end
 
 @interface CustomStringCell : UITableViewCell
 {
     BOOL cellSelected;
-    
-    
 }
 
 - (void)notifySelected:(BOOL)isSelected;
-- (void)updateFilename:(NSString *)newFilename isCustom:(BOOL)isCustom;
+- (void)updateFilename:(NSString *)newFilename xmpId:(NSInteger)newXmpId isCustom:(BOOL)isCustom;
 - (BOOL)isSet;
 
-@property (retain) AVAudioPlayer * audio;
+@property (weak, nonatomic) id<CustomStringCellDelegate> delegate;
+
 @property (nonatomic) NSString * sampleFilename;
 @property (nonatomic) NSString * sampleDisplayname;
 @property (nonatomic) UIColor * defaultFontColor;
@@ -32,6 +34,7 @@
 @property (retain, nonatomic) IBOutlet UIImageView * stringImage;
 @property (nonatomic) BOOL useCustomPath;
 @property (nonatomic) UIColor * stringColor;
+@property (assign, nonatomic) NSInteger xmpId;
 
 @property (retain, nonatomic) IBOutlet NSLayoutConstraint * stringBoxWidthConstraint;
 @property (retain, nonatomic) IBOutlet NSLayoutConstraint * stringLabelMarignLeftConstraint;

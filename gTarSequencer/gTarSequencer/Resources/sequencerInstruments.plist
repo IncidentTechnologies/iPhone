@@ -31,6 +31,15 @@
 				<string>Default</string>
 				<string>Default</string>
 			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -58,6 +67,15 @@
 				<string>Default</string>
 				<string>Default</string>
 				<string>Default</string>
+			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
 			</array>
 		</dict>
 		<dict>
@@ -87,6 +105,15 @@
 				<string>Default</string>
 				<string>Default</string>
 			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -114,6 +141,15 @@
 				<string>Default</string>
 				<string>Default</string>
 				<string>Default</string>
+			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
 			</array>
 		</dict>
 		<dict>
@@ -143,6 +179,15 @@
 				<string>Default</string>
 				<string>Default</string>
 			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -170,6 +215,15 @@
 				<string>Default</string>
 				<string>Default</string>
 				<string>Default</string>
+			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
 			</array>
 		</dict>
 		<dict>
@@ -199,6 +253,15 @@
 				<string>Default</string>
 				<string>Default</string>
 			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -226,6 +289,15 @@
 				<string>Default</string>
 				<string>Default</string>
 				<string>Default</string>
+			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
 			</array>
 		</dict>
 		<dict>
@@ -255,6 +327,15 @@
 				<string>Default</string>
 				<string>Default</string>
 			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -282,6 +363,15 @@
 				<string>Default</string>
 				<string>Default</string>
 				<string>Default</string>
+			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
 			</array>
 		</dict>
 		<dict>
@@ -311,6 +401,15 @@
 				<string>Default</string>
 				<string>Default</string>
 			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -338,6 +437,15 @@
 				<string>Default</string>
 				<string>Default</string>
 				<string>Default</string>
+			</array>
+			<key>StringXmpIds</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
 			</array>
 		</dict>
 	</array>

@@ -78,8 +78,11 @@
         [delegate setTempo:sequence.m_tempo];
         [delegate setVolume:sequence.m_volume];
     }
-    
-    
+}
+
+- (void)initFirstSequence
+{
+    sequence = [[NSSequence alloc] initWithName:BLANK_SET_NAME tempo:DEFAULT_TEMPO volume:DEFAULT_VOLUME];
 }
 
 - (void)viewDidLoad
@@ -455,6 +458,11 @@
 - (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIsCustom:(BOOL)isCustom
 {
     NSTrack * newTrack = [[NSTrack alloc] initWithName:instName level:1.0 muted:NO];
+    
+    // Ensure sequence exists
+    if(sequence == nil){
+        [self initFirstSequence];
+    }
     
     // Add Track
     [sequence addTrack:newTrack];
@@ -965,7 +973,7 @@
 }
 
 // save a new instrument
-- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName
+- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet stringIds:(NSArray *)stringIdSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName
 {
     NSNumber * newIndex = [NSNumber numberWithInt:[self getCustomInstrumentsNewIndex]];
     
@@ -976,6 +984,7 @@
     [dict setValue:instName forKey:@"Name"];
     [dict setValue:stringSet forKey:@"Strings"];
     [dict setValue:stringPaths forKey:@"StringPaths"];
+    [dict setValue:stringIdSet forKey:@"StringXmpIds"];
     
     [masterInstrumentOptions addObject:dict];
     [remainingInstrumentOptions addObject:dict];

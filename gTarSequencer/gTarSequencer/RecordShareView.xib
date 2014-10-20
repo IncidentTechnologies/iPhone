@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecordShareViewController">
             <connections>
                 <outlet property="addMeasureButton" destination="41Y-tr-F90" id="8Mv-w2-qJT"/>
-                <outlet property="addMeasureWidth" destination="tqw-tI-MsU" id="iBq-Ef-aTG"/>
                 <outlet property="backButton" destination="fEJ-tc-Thx" id="cBs-lZ-5nt"/>
                 <outlet property="duplicateMeasureButton" destination="ecy-RF-BjL" id="oel-z0-TS2"/>
-                <outlet property="duplicateMeasureWidth" destination="gu3-Z8-NeH" id="i48-EG-WjW"/>
                 <outlet property="editMeasureButton" destination="UpY-k3-0jr" id="3rS-kJ-6tT"/>
-                <outlet property="editMeasureWidth" destination="FFN-pZ-7Fp" id="iEv-09-qtU"/>
                 <outlet property="editingView" destination="ylG-Ho-17g" id="cAt-Ns-46W"/>
                 <outlet property="instrumentView" destination="Vcg-LX-MnW" id="98z-4b-Q0j"/>
                 <outlet property="noSessionLabel" destination="XeH-Bb-MNN" id="Nmo-b7-gcF"/>
                 <outlet property="noSessionOverlay" destination="occ-jE-SpO" id="Cyl-aD-MXp"/>
                 <outlet property="pasteMeasureButton" destination="Mse-rK-ggo" id="49H-En-I7Q"/>
-                <outlet property="pasteMeasureWidth" destination="yrm-6U-9dq" id="AkQ-mu-Cs2"/>
                 <outlet property="playbandView" destination="gYc-2q-ZJs" id="PXi-8N-8DF"/>
                 <outlet property="progressView" destination="jJW-vp-Zbc" id="d0F-Nx-vTh"/>
                 <outlet property="saveTrackButton" destination="Ts6-XT-7xV" id="TX7-JK-rZn"/>
-                <outlet property="saveTrackWidth" destination="qIJ-q7-2Cz" id="pe1-gQ-Etv"/>
                 <outlet property="trackView" destination="Fz4-u1-MZo" id="pJd-qQ-lY4"/>
                 <outlet property="view" destination="TgF-Au-e5Z" id="Dvy-L1-QCW"/>
             </connections>
@@ -120,28 +116,9 @@
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wnv-Ue-Ggh">
                             <rect key="frame" x="65" y="1" width="415" height="183"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41Y-tr-F90">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecy-RF-BjL">
                                     <rect key="frame" x="16" y="8" width="70" height="33"/>
-                                    <color key="backgroundColor" red="0.41176470588235292" green="0.83921568627450982" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="33" id="lOe-zn-eM4"/>
-                                        <constraint firstAttribute="width" constant="70" id="tqw-tI-MsU"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <inset key="imageEdgeInsets" minX="15" minY="13" maxX="15" maxY="13"/>
-                                    <state key="normal" title="+"/>
-                                    <connections>
-                                        <action selector="userDidAddMeasure:" destination="-1" eventType="touchUpInside" id="ETT-o9-0VT"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecy-RF-BjL">
-                                    <rect key="frame" x="94" y="8" width="70" height="33"/>
                                     <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="33" id="8ZN-KY-SYG"/>
-                                        <constraint firstAttribute="width" constant="70" id="gu3-Z8-NeH"/>
-                                    </constraints>
                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
@@ -153,13 +130,9 @@
                                         <action selector="userDidCopyMeasure:" destination="-1" eventType="touchUpInside" id="qpo-7i-R7h"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mse-rK-ggo">
-                                    <rect key="frame" x="172" y="8" width="70" height="33"/>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mse-rK-ggo">
+                                    <rect key="frame" x="328" y="8" width="70" height="33"/>
                                     <color key="backgroundColor" red="0.91764705879999997" green="0.60392156860000001" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="33" id="Pwc-Tx-WLz"/>
-                                        <constraint firstAttribute="width" constant="70" id="yrm-6U-9dq"/>
-                                    </constraints>
                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
@@ -170,13 +143,13 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UpY-k3-0jr">
-                                    <rect key="frame" x="250" y="8" width="70" height="33"/>
+                                    <rect key="frame" x="158" y="8" width="100" height="33"/>
                                     <color key="backgroundColor" red="0.27058823529411763" green="0.49803921568627452" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="33" id="7eg-Bv-eGU"/>
-                                        <constraint firstAttribute="width" constant="70" id="FFN-pZ-7Fp"/>
+                                        <constraint firstAttribute="width" constant="100" id="PSq-T7-nfn"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="EDIT"/>
@@ -185,11 +158,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ts6-XT-7xV" userLabel="SAVE">
-                                    <rect key="frame" x="328" y="8" width="70" height="33"/>
+                                    <rect key="frame" x="266" y="8" width="100" height="33"/>
                                     <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="33" id="9Kh-Wm-Gqn"/>
-                                        <constraint firstAttribute="width" constant="70" id="qIJ-q7-2Cz"/>
+                                        <constraint firstAttribute="width" constant="100" id="rMt-e6-c4P"/>
                                     </constraints>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
@@ -198,13 +171,26 @@
                                         <action selector="userDidSaveTrack:" destination="-1" eventType="touchUpInside" id="3Ig-FS-NZf"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41Y-tr-F90">
+                                    <rect key="frame" x="50" y="8" width="100" height="33"/>
+                                    <color key="backgroundColor" red="0.41176470588235292" green="0.83921568627450982" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="L3P-C9-G53"/>
+                                        <constraint firstAttribute="height" constant="33" id="lOe-zn-eM4"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <inset key="imageEdgeInsets" minX="15" minY="13" maxX="15" maxY="13"/>
+                                    <state key="normal" title="+"/>
+                                    <connections>
+                                        <action selector="userDidAddMeasure:" destination="-1" eventType="touchUpInside" id="ETT-o9-0VT"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="ecy-RF-BjL" firstAttribute="leading" secondItem="41Y-tr-F90" secondAttribute="trailing" constant="8" id="4CO-8f-Ksy"/>
-                                <constraint firstItem="Ts6-XT-7xV" firstAttribute="leading" secondItem="UpY-k3-0jr" secondAttribute="trailing" constant="8" id="Cp6-lc-07E"/>
-                                <constraint firstItem="Mse-rK-ggo" firstAttribute="leading" secondItem="ecy-RF-BjL" secondAttribute="trailing" constant="8" id="Evj-IR-yE2"/>
-                                <constraint firstItem="UpY-k3-0jr" firstAttribute="leading" secondItem="Mse-rK-ggo" secondAttribute="trailing" constant="8" id="Jog-un-UIP"/>
-                                <constraint firstAttribute="centerX" secondItem="Mse-rK-ggo" secondAttribute="centerX" id="PUO-qe-07l"/>
+                                <constraint firstItem="Ts6-XT-7xV" firstAttribute="leading" secondItem="UpY-k3-0jr" secondAttribute="trailing" constant="8" id="NPl-iY-h1B"/>
+                                <constraint firstItem="UpY-k3-0jr" firstAttribute="leading" secondItem="41Y-tr-F90" secondAttribute="trailing" constant="8" id="ptq-DS-t1D"/>
+                                <constraint firstAttribute="centerX" secondItem="UpY-k3-0jr" secondAttribute="centerX" id="rem-lb-tVr"/>
                             </constraints>
                         </view>
                     </subviews>

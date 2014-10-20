@@ -409,7 +409,7 @@
 {
     NSString * filename = nameField.text;
     
-    [delegate saveCustomInstrumentWithStrings:stringSet andName:filename andStringPaths:stringPaths andIcon:[customIconSet objectAtIndex:customIconCounter]];
+    [delegate saveCustomInstrumentWithStrings:stringSet stringIds:stringIdSet andName:filename andStringPaths:stringPaths andIcon:[customIconSet objectAtIndex:customIconCounter]];
 }
 
 - (void)userDidCancel:(id)sender
@@ -778,18 +778,22 @@
     m_bankNode = [soundMaster generateBank];
     
     // Reload sound into bank after new record
-    char * filepath = (char *)malloc(sizeof(char) * 1024);
+    //char * filepath = (char *)malloc(sizeof(char) * 1024);
     
-    filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Vibraphone_C" ofType:@"wav"] UTF8String];
+    //filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Vibraphone_C" ofType:@"wav"] UTF8String];
     
-    m_bankNode->LoadSampleIntoBank(filepath, m_sampNode);
+    //m_bankNode->LoadSampleIntoBank(filepath, m_sampNode);
+    
+    // Base 64 decode
+    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:datastring options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    
+    unsigned long int length = [decodedData length];
+    
+    DLog(@"Length of decoded data is %lu",length);
+    
+    m_bankNode->LoadSampleStringIntoBank([decodedData bytes], length, m_sampNode);
     
     m_bankNode->TriggerSample(0);
-    
-    
-    //self.audio = [[AVAudioPlayer alloc] initWithData:data error:nil];
-    
-    //[self.audio play];
     
 }
 
@@ -1627,29 +1631,16 @@
     
     if([sampleStack count] == 0){
         
-        /*
-        // check sampleStack
-        long sectionindex = indexPath.section;
-        long i = indexPath.row;
-        
-        if(i == 0){
-            return [sampleList[sectionindex] objectForKey:@"Section"];
-        }
-        
-        NSArray * section = [sampleList[sectionindex] objectForKey:@"Sampleset"];
-        */
-        
-        return -1;
+        return 0;
         
     }else{
         
         NSDictionary * dict = [sampleListSubset objectAtIndex:indexPath.section];
         if([dict objectForKey:@"Sampleset"] || [dict objectForKey:@"Sectionset"]){
-            return -2;
+            return 0;
         }else{
             return [[[dict objectForKey:@"Leafidset"] objectAtIndex:indexPath.row] intValue];
         }
-        
     }
 }
 
@@ -1822,10 +1813,13 @@
         
         // customize cells
         cell.index = GTAR_NUM_STRINGS - indexPath.row - 1;
+        cell.delegate = self;
         
         if(cell.sampleFilename!= nil){
+            cell.xmpId = [self getSampleIndexFromIndexPath:0]; // TODO: get from name
             cell.stringLabel.text = cell.sampleFilename;
         }else{
+            cell.xmpId = 0;
             cell.stringLabel.text = @"";
             cell.defaultFontColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3];
         }
@@ -1891,7 +1885,7 @@
         NSString * filename = selectedSampleCell.parentCategory;
         filename = [filename stringByAppendingString:@"_"];
         filename = [filename stringByAppendingString:selectedSampleCell.sampleTitle.text];
-        [selectedStringCell updateFilename:filename isCustom:useCustomPath];
+        [selectedStringCell updateFilename:filename xmpId:selectedSampleCell.xmpId isCustom:useCustomPath];
         
         // turn off sample to avoid reselecting
         [self styleSampleCell:nil turnOff:selectedSampleCell];
@@ -1917,7 +1911,7 @@
 - (void)deselectString:(CustomStringCell *)cell
 {
     [cell notifySelected:NO];
-    [cell updateFilename:nil isCustom:FALSE];
+    [cell updateFilename:nil xmpId:0 isCustom:FALSE];
     [self toggleStringCellAtIndexPath:[stringTable indexPathForCell:cell]];
     
     // encapsulate this in cell
@@ -2055,6 +2049,7 @@
 {
     stringSet = [NSMutableArray array];
     stringPaths = [NSMutableArray array];
+    stringIdSet = [NSMutableArray array];
     
     for(int i = GTAR_NUM_STRINGS-1; i >= 0; i--){
         
@@ -2062,6 +2057,7 @@
         
         if(cell.sampleFilename != nil){
             [stringSet addObject:cell.sampleFilename];
+            [stringIdSet addObject:[NSNumber numberWithInt:cell.xmpId]];
             
             // Determine which directory (and filetype) to use
             if(cell.useCustomPath){
@@ -2094,7 +2090,7 @@
                 useCustomPath = TRUE;
             }
             
-            [cell updateFilename:stringSet[GTAR_NUM_STRINGS-i-1] isCustom:useCustomPath];
+            [cell updateFilename:stringSet[GTAR_NUM_STRINGS-i-1] xmpId:[stringIdSet[GTAR_NUM_STRINGS-i-1] intValue] isCustom:useCustomPath];
         }
     }
     

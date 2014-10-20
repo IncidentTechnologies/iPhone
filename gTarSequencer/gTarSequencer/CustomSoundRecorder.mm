@@ -163,35 +163,11 @@
 
 - (void)saveRecordingToFilename:(NSString *)filename
 {
-    /*
-    NSString * newFilename = filename;
-    newFilename = [@"Samples/Custom_" stringByAppendingString:filename];
-    newFilename = [newFilename stringByAppendingString:@".wav"];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Samples"];
-    
-    NSError * err = NULL;
-    NSFileManager * fm = [[NSFileManager alloc] init];
-    
-    [fm createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
-    
-    NSString * newPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newFilename];
-    
-    char * pathName = (char *)malloc(sizeof(char) * [newPath length]);
-    pathName = (char *) [newPath UTF8String];
-    
-    DLog(@"Save path is %@",newPath);
-    
-    m_sampNode->SaveToFile(pathName, YES);
-    
-    */
-    
-    DLog(@"Save recording to filename %@",filename);
-    
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * path = [paths objectAtIndex:0];
     NSString * newPath = [path stringByAppendingPathComponent:defaultFilename];
+    
+    DLog(@"Save recording to filename %@ at temp path %@",filename,newPath);
     
     NSData * data = [[NSData alloc] initWithContentsOfFile:newPath];
     
@@ -201,7 +177,6 @@
     
     // Delete after recording
     [self deleteRecordingFilename:defaultFilename];
-
     
     // Still need this?
     [self releaseAudioBank];

@@ -9,6 +9,7 @@
 #import "CustomStringCell.h"
 
 @implementation CustomStringCell
+@synthesize delegate;
 @synthesize index;
 @synthesize stringLabel;
 @synthesize stringBox;
@@ -18,6 +19,7 @@
 @synthesize useCustomPath;
 @synthesize stringColor;
 @synthesize stringImage;
+@synthesize xmpId;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -58,9 +60,11 @@
     [self updateSelectedUI];
 }
 
-- (void)updateFilename:(NSString *)newFilename isCustom:(BOOL)isCustom
+- (void)updateFilename:(NSString *)newFilename xmpId:(NSInteger)newXmpId isCustom:(BOOL)isCustom
 {
     sampleFilename = newFilename;
+    
+    xmpId = newXmpId;
     
     // parse _ to /
     newFilename = [newFilename stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
@@ -175,10 +179,11 @@
     }];
 }
 
-// TODO: share this with the audio on Custom Instrument Selector
 - (void)playAudioForSampleFile
 {
-    
+
+    [delegate playAudioForFile:sampleFilename withCustomPath:useCustomPath xmpId:xmpId];
+    /*
     NSString * path;
     
     if(sampleFilename == nil){
@@ -211,6 +216,7 @@
     self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
     
     [self.audio play];
+     */
 }
 
 @end

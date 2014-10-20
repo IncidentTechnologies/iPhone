@@ -18,7 +18,7 @@
 @protocol CustomInstrumentSelectorDelegate <NSObject>
 
 - (void)closeCustomInstrumentSelectorAndScroll:(BOOL)scroll;
-- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName;
+- (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet stringIds:(NSArray *)stringIdSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName;
 - (NSMutableArray *)getCustomInstrumentOptions;
 
 - (void)stopAllPlaying;
@@ -28,7 +28,7 @@
 
 @end
 
-@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate,HorizontalAdjustorDelegate,CustomSampleCellDelegate>
+@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate,HorizontalAdjustorDelegate,CustomSampleCellDelegate,CustomStringCellDelegate>
 {
     int viewState;
     
@@ -45,6 +45,7 @@
     
     NSMutableArray * stringSet;
     NSMutableArray * stringPaths;
+    NSMutableArray * stringIdSet;
     NSArray * colorList;
     NSString * customSampleListPath;
     
