@@ -459,10 +459,6 @@
 {
     NSTrack * newTrack = [[NSTrack alloc] initWithName:instName level:1.0 muted:NO];
     
-    // Ensure sequence exists
-    if(sequence == nil){
-        [self initFirstSequence];
-    }
     
     // Add Track
     [sequence addTrack:newTrack];

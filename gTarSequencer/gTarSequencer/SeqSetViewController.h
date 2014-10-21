@@ -123,6 +123,7 @@ extern OphoMaster * g_ophoMaster;
 - (void)clearQueuedPatternButtonAtIndex:(int)index;
 - (void)dequeueAllPatternsForTrack:(id)sender;
 
+- (void)initFirstSequence;
 - (void)setInstrumentsFromData;
 
 - (void)initSequenceWithFilename:(NSString *)filename;

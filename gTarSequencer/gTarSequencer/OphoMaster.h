@@ -30,6 +30,12 @@
 
 @end
 
+@protocol OphoSampleDelegate <NSObject>
+
+- (void)customSampleSavedWithId:(NSInteger)xmpId andName:(NSString *)xmpName;
+
+@end
+
 @interface OphoMaster : NSObject
 {
     OphoCloudController * ophoCloudController;
@@ -53,6 +59,7 @@
 
 @property (weak, nonatomic) id <OphoLoginDelegate> loginDelegate;
 @property (weak, nonatomic) id <OphoTutorialDelegate> tutorialDelegate;
+@property (weak, nonatomic) id <OphoSampleDelegate> sampleDelegate;
 @property (strong, nonatomic) NSSong * savingSong;
 @property (strong, nonatomic) NSSequence * savingSequence;
 @property (strong, nonatomic) NSSample * savingSample;

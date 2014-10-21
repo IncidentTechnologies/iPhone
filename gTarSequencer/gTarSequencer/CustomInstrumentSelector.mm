@@ -120,6 +120,7 @@
 
 - (void)launchSelectorView
 {
+    g_ophoMaster.sampleDelegate = self;
     
     [self retrieveSampleList];
     
@@ -232,9 +233,12 @@
         
         // back from save
         if(viewState == VIEW_CUSTOM_NAME){
+            
             // remember instrument name
             instName = nameField.text;
+            
         }
+        
         // else back from record
         
         CGRect newFrame = backgroundView.frame;
@@ -1203,8 +1207,8 @@
     // Rename the file and save in Documents/Samples/ subdirectory
     [customSoundRecorder saveRecordingToFilename:filename];
     
-    // Add to customSampleList.pList
-    [self updateCustomSampleListWithSample:filename];
+    // ID is asynchronously generated, so wait for delegate callback
+    //[self updateCustomSampleListWithSample:filename];
     
     // Go back
     [self userDidBack:sender];
@@ -1217,6 +1221,7 @@
     for(int i = 0; i < [customSampleSet count]; i++){
         if([[customSampleSet objectAtIndex:i] isEqualToString:filename]){
             [[customSampleList[0] objectForKey:@"Sampleset"] removeObjectAtIndex:i];
+            [[customSampleList[0] objectForKey:@"XmpIdSet"] removeObjectAtIndex:i];
         }
     }
     
@@ -1237,19 +1242,16 @@
         if([cell.sampleFilename isEqualToString:filename]){
             [self deselectString:cell];
             cell.stringLabel.text = @"";
+            cell.xmpId = 0;
         }
     }
     
     // Remove from sampleList happens by reference
     
-    // Remove the sound file
-    //[self checkInitCustomSoundRecorder];
-    //[customSoundRecorder deleteRecordingFilename:filename];
-    
     // Check if custom sample set is empty
     if([customSampleSet count] == 0){
         
-        //[self removeCustomSampleList];
+        [self removeCustomSampleList];
         
         [sampleList removeObjectAtIndex:0];
         
@@ -1937,8 +1939,8 @@
     
     // Remove the XMP
     // Get the ID
-    NSArray * names = [customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES];
-    NSArray * ids = [customSampleOphoDictionary objectForKey:OPHO_LIST_IDS];
+    NSArray * names = [[g_ophoMaster getSampleList] objectForKey:OPHO_LIST_NAMES];
+    NSArray * ids = [[g_ophoMaster getSampleList] objectForKey:OPHO_LIST_IDS];
     
     for(int i = 0; i < [names count]; i++){
         if([names[i] isEqualToString:filename]){
@@ -1947,7 +1949,7 @@
         }
     }
     
-    DLog(@"Delete cell at section %i index %i",pathToDelete.section,pathToDelete.row);
+    DLog(@"Delete cell XMP ID %li at section %li index %li",sampleCell.xmpId,pathToDelete.section,pathToDelete.row);
     
     // Remove the data
     BOOL deleteCell = [self userDidDeleteRecord:filename];
@@ -2327,7 +2329,7 @@
 
 - (void)retrieveSampleList
 {
-    customSampleOphoDictionary = [NSMutableDictionary dictionaryWithDictionary:[g_ophoMaster getSampleList]];
+    NSMutableDictionary * customSampleOphoDictionary = [NSMutableDictionary dictionaryWithDictionary:[g_ophoMaster getSampleList]];
     NSMutableDictionary * customList = [NSMutableDictionary dictionaryWithObjectsAndKeys:[customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES],@"Sampleset",[customSampleOphoDictionary objectForKey:OPHO_LIST_IDS],@"XmpIdSet",@"Custom",@"Section", nil];
     
     // Init
@@ -2365,14 +2367,13 @@
         customSampleList = nil;
         
     }
-    
 }
 
-/*
 - (void)removeCustomSampleList
 {
     customSampleList = nil;
     
+    /*
     DLog(@"Deleting custom sample list");
     
     NSError * err = NULL;
@@ -2382,9 +2383,71 @@
     
     if(!result)
         DLog(@"Error deleting");
+    */
 }
-*/
 
+-(void)customSampleSavedWithId:(NSInteger)xmpId andName:(NSString *)xmpName
+{
+    DLog(@"Custom sample saved with ID %li and Name %@",xmpId,xmpName);
+    
+    NSString * filename = [xmpName stringByReplacingOccurrencesOfString:@".wav" withString:@""];
+    
+    // Init the custom sample list if it's the first sample
+    if(customSampleList == nil){
+        
+        NSArray * keys = [[NSArray alloc] initWithObjects:@"Sampleset",@"XmpIdSet",@"Section",nil];
+        NSArray * objects = [[NSArray alloc] initWithObjects:[[NSMutableArray alloc] initWithObjects:filename,nil],[[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInteger:xmpId], nil],@"Custom",nil];
+        
+        NSMutableDictionary * sampleDictionary = [[NSMutableDictionary alloc] initWithObjects:objects forKeys:keys];
+        customSampleList = [[NSMutableArray alloc] initWithObjects:sampleDictionary, nil];
+        
+        NSArray * tempSampleList = [[NSArray alloc] initWithArray:sampleList];
+        [sampleList removeAllObjects];
+        [sampleList addObjectsFromArray:customSampleList];
+        [sampleList addObjectsFromArray:tempSampleList];
+        
+        DLog(@"Custom sample list is %@",customSampleList);
+    
+    }else{
+        // Add to customSampleList, automatically added to sampleList
+        NSMutableArray * sampleSetArray = [customSampleList[0] objectForKey:@"Sampleset"];
+        NSMutableArray * sampleIdArray = [customSampleList[0] objectForKey:@"XmpIdSet"];
+        [customSampleList[0] setObject:[self addObject:filename toTopOfList:sampleSetArray] forKey:@"Sampleset"];
+        
+        [customSampleList[0] setObject:[self addObject:[NSNumber numberWithInteger:xmpId] toTopOfList:sampleIdArray] forKey:@"XmpIdSet"];
+        
+    }
+    
+    if([self isCustomInstrumentList]){
+        
+        NSMutableArray * leafSampleSetArray = [[sampleListSubset objectAtIndex:0] objectForKey:@"Leafsampleset"];
+        NSMutableArray * leafSampleIdArray = [[sampleListSubset objectAtIndex:0] objectForKey:@"Leafidset"];
+        
+        [[sampleListSubset objectAtIndex:0] setObject:[self addObject:filename toTopOfList:leafSampleSetArray] forKey:@"Leafsampleset"];
+        
+        [[sampleListSubset objectAtIndex:0] setObject:[self addObject:[NSNumber numberWithInteger:xmpId] toTopOfList:leafSampleIdArray] forKey:@"Leafidset"];
+    }
+    
+    [sampleTable reloadData];
+    
+}
+
+- (NSMutableArray *)addObject:(id)object toTopOfList:(NSMutableArray *)list
+{
+    NSMutableArray * tempList = [[NSMutableArray alloc] init];
+    
+    [tempList addObject:object];
+    
+    for(int i = 0; i < [list count]; i++){
+        [tempList addObject:[list objectAtIndex:i]];
+    }
+    
+    DLog(@"Templist is %@",tempList);
+    
+    return tempList;
+}
+
+/*
 - (void)updateCustomSampleListWithSample:(NSString *)filename
 {
     
@@ -2392,7 +2455,8 @@
     
     [self retrieveSampleList];
     
-    /*
+    [sampleTable reloadData];
+    
     // Init the custom sample list pList
     if(customSampleList == nil){
         
@@ -2417,12 +2481,12 @@
     // Also update the subset list for viewing if appropriate
     if([self isCustomInstrumentList]){
         [[[sampleListSubset objectAtIndex:0] objectForKey:@"Leafsampleset"] addObject:filename];
-    }*/
+    }
     
     //[self saveCustomSampleList];
 }
 
-/*
+
 - (void)saveCustomSampleList
 {
     NSMutableDictionary * wrapperDict = [[NSMutableDictionary alloc] init];

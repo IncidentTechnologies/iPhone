@@ -57,7 +57,7 @@
     
     // Load locally saved state
     [self loadStateFromDisk];
-    
+        
     [self selectNavChoice:@"Set" withShift:NO];
     [self saveContext:nil force:NO];
     
@@ -675,13 +675,12 @@
         [self setActiveSong:activeSong];
     }
     
-    // Reset
-    /*if(filepath == nil){
-        
+    // Ensure sequence exists or is created
+    if([seqSetViewController getSequence] == nil){
+        [seqSetViewController initFirstSequence];
         [playControlViewController resetTempo];
         [playControlViewController resetVolume];
-            
-    }*/
+    }
 }
 
 #pragma mark - Play Events

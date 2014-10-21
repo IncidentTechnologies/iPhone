@@ -28,15 +28,12 @@
 
 @end
 
-@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate,HorizontalAdjustorDelegate,CustomSampleCellDelegate,CustomStringCellDelegate>
+@interface CustomInstrumentSelector : UIView <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomSoundDelegate,TutorialDelegate,HorizontalAdjustorDelegate,CustomSampleCellDelegate,CustomStringCellDelegate,OphoSampleDelegate>
 {
     int viewState;
     
     // Sample and string lists
     UIView * backgroundView;
-    
-    NSMutableDictionary * customSampleOphoDictionary;
-    NSMutableDictionary * allSampleOphoDictionary;
     
     NSMutableArray * sampleList;
     NSMutableArray * customSampleList;

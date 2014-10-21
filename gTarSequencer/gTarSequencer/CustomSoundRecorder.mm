@@ -163,12 +163,17 @@
 
 - (void)saveRecordingToFilename:(NSString *)filename
 {
+    // Save editing changes to file
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * path = [paths objectAtIndex:0];
     NSString * newPath = [path stringByAppendingPathComponent:defaultFilename];
     
-    DLog(@"Save recording to filename %@ at temp path %@",filename,newPath);
+    char * pathName = (char *)malloc(sizeof(char) * [newPath length]);
+    pathName = (char *) [newPath UTF8String];
     
+    m_sampNode->SaveToFile(pathName, YES);
+    
+    // Then get data and upload
     NSData * data = [[NSData alloc] initWithContentsOfFile:newPath];
     
     NSSample * xmpSample = [[NSSample alloc] initWithName:[NSString stringWithFormat:@"%@.wav",filename] custom:YES value:@"0" encoding:@"wav" xmpFileId:0];

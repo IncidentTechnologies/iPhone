@@ -21,6 +21,7 @@ extern NSUser * g_loggedInUser;
 
 @synthesize loginDelegate;
 @synthesize tutorialDelegate;
+@synthesize sampleDelegate;
 @synthesize savingSong;
 @synthesize savingSequence;
 @synthesize savingSample;
@@ -200,6 +201,8 @@ extern NSUser * g_loggedInUser;
     DLog(@"Cloud respones id is %i",cloudResponse.m_id);
     
     [self saveSampleToId:(long)cloudResponse.m_id];
+    
+    [sampleDelegate customSampleSavedWithId:cloudResponse.m_id andName:cloudResponse.m_xmpName];
 }
 
 -(void)saveSampleToId:(long)newId
