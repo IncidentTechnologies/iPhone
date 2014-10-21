@@ -257,14 +257,17 @@
 
 - (void)userDidSaveLoad
 {
+    
     if([parent.selectMode isEqualToString:@"Load"]){
         
-        DLog(@"Load file %i",xmpId);
+        DLog(@"Load file %li",xmpId);
         
         // Load
         [parent userDidLoadFile:xmpId];
         
     }else if([parent.selectMode isEqualToString:@"SaveCurrent"]){
+        
+        DLog(@"User did save current");
         
         // Save Current
         NSString * emptyName = [fileName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

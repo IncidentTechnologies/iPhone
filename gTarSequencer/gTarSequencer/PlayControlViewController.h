@@ -23,7 +23,7 @@
 - (void) playRecordPlayback;
 - (void) pauseRecordPlayback;
 
-- (void) saveContext:(NSString *)filepath force:(BOOL)forceSave;
+- (void) saveStateToDiskWithForce:(BOOL)forceSave;
 - (void) userDidLoadSequenceOptions;
 
 - (void) stopGestures;

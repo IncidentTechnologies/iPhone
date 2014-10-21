@@ -20,8 +20,7 @@
 
 #define DEFAULT_STATE_NAME @"sequenceCurrentState"
 
-
-- (id)initWithXMPFilename:(NSString *)filename
+- (id)initWithXMPFilename:(NSString *)filename fromBundle:(BOOL)fromBundle
 {
     if(filename == nil || [filename length] == 0){
         return nil;
@@ -31,13 +30,15 @@
     
     if(self){
         
-        /*
-        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * sequenceFilepath;
         
-        NSString * sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Sequences/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
-        */
-        
-        NSString * sequenceFilepath = [[NSBundle mainBundle] pathForResource:filename ofType:@"xml"];
+        if(fromBundle){
+            sequenceFilepath = [[NSBundle mainBundle] pathForResource:filename ofType:@"xml"];
+        }else{
+            NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            
+            sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Sequences/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
+        }
         
         char * filepath = (char *)[sequenceFilepath UTF8String];
         
@@ -45,11 +46,11 @@
         
         XMPTree MyTree(filepath);
         
-        XMPNode * root = MyTree.GetRootNode()->FindChildByName((char *)"xmp")->FindChildByName((char *)"sequence");
+        XMPNode * root = MyTree.GetRootNode()->FindChildByName((char *)"xmp")->FindChildByName((char *)"custom")->FindChildByName((char *)"sequence");
         
         self = [self initWithXMPNode:root];
         
-        DLog(@"Finished init?");
+        DLog(@"Finished XMP init");
         
     }
     
@@ -299,6 +300,16 @@
 - (void)renameToName:(NSString *)newName
 {
     m_name = newName;
+}
+
+- (void)giveAppOwnership
+{
+    m_originSequenceRoot = YES;
+}
+
+- (void)giveUserOwnership
+{
+    m_originSequenceRoot = NO;
 }
 
 @end

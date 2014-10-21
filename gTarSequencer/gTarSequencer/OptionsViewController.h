@@ -8,6 +8,7 @@
 
 #import "AppData.h"
 #import "OptionsViewCell.h"
+#import "NSSequence.h"
 
 @protocol OptionsDelegate <NSObject>
 
@@ -79,12 +80,12 @@ extern NSUser * g_loggedInUser;
 - (void)disableScroll;
 - (void)enableScroll;
 
-- (void)setActiveSequencer:(NSInteger)sequence;
+- (void)setActiveSequence:(NSSequence *)sequence;
 - (void)setActiveSong:(NSInteger)song;
 
 @property (nonatomic) BOOL isFirstLaunch;
 
-@property (assign, nonatomic) NSInteger activeSequencer;
+@property (retain, nonatomic) NSSequence * activeSequence;
 @property (assign, nonatomic) NSInteger activeSong;
 
 @property (weak, nonatomic) id<OptionsDelegate> delegate;

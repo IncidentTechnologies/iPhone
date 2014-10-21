@@ -60,7 +60,6 @@ extern NSUser * g_loggedInUser;
     
     // Save/Load
     NSInteger activeSong;
-    NSInteger activeSequencer;
     NSString * sequencerToSave;
     
     // Left nav

@@ -294,7 +294,7 @@
     track.m_muted = NO;
     isMute = NO;
     
-    [parent saveContext:nil force:YES];
+    [parent saveStateToDiskWithForce:YES];
 }
 
 -(void)turnOffInstrumentView
@@ -308,7 +308,7 @@
     track.m_muted = YES;
     isMute = YES;
     
-    [parent saveContext:nil force:YES];
+    [parent saveStateToDiskWithForce:YES];
 }
 
 - (void)updatePatternButton:(UIButton *)newButton playState:(BOOL)isPlaying
@@ -798,7 +798,7 @@
     [volumeBg removeFromSuperview];
     [volumeKnob setHidden:NO];
     
-    [parent saveContext:nil force:NO];
+    [parent saveStateToDiskWithForce:NO];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event

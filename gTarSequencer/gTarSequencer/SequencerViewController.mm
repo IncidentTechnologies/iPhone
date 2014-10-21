@@ -57,9 +57,8 @@
     
     // Load locally saved state
     [self loadStateFromDisk];
-        
+    
     [self selectNavChoice:@"Set" withShift:NO];
-    [self saveContext:nil force:NO];
     
     // Overlay tutorial?
     if(isFirstLaunch){
@@ -462,29 +461,19 @@
 
 #pragma mark - Save Load
 
-- (void)userDidLoadSequenceOptions
-{
-    //[optionsViewController userDidSaveSequence];
-}
-
-- (void)saveWithName:(NSString *)filename
-{
-    //[self setActiveSequence:filename];
-    
-    [self saveContext:filename force:YES];
-    [self saveContext:nil force:YES];
-}
-
 - (void)saveSequenceWithId:(NSInteger)xmpId andName:(NSString *)filename
 {
     NSSequence * sequence = [seqSetViewController getSequence];
     
-    if(sequence.m_id == xmpId){
-        [self saveContext:filename force:YES];
-        [self saveContext:nil force:YES];
-        
-        [self setActiveSequence:xmpId];
+    // Options View Controller forks from an existing sequence, or perhaps overwrites
+    if(sequence.m_originSequenceRoot || ![sequence.m_name isEqualToString:filename]){
+        xmpId = 0;
     }
+    
+    [self saveChangesToActiveSequence:filename withId:xmpId];
+    [self saveStateToDiskWithForce:YES];
+    
+    [self refreshActiveSequence];
 }
 
 - (void)tutorialReady:(NSInteger)xmpId
@@ -522,7 +511,7 @@
     // First clear any sound playing
     [seqSetViewController resetSoundMaster];
     
-    [self setActiveSequence:sequence.m_id];
+    [self refreshActiveSequence];
     
     /*if([sequence.m_name isEqualToString:DEFAULT_SET_NAME]){
         [self relaunchFTUTutorial];
@@ -576,6 +565,7 @@
 
 - (void)createNewSaveName:(NSString *)filename
 {
+    DLog(@"Create new save name: %@",filename);
     
     // Save previous set if not blank
     if([seqSetViewController countTracks] > 0 && ![filename isEqualToString:DEFAULT_SET_NAME]){
@@ -595,7 +585,9 @@
 
 - (void)createNewSet
 {
-    [self setActiveSequence:0];
+    [seqSetViewController initFirstSequence];
+    
+    [self refreshActiveSequence];
     
     // Delete all cells
     [seqSetViewController deleteAllCells];
@@ -608,6 +600,9 @@
 - (void)createNewSetAndSave
 {
     NSSequence * sequence = [seqSetViewController getSequence];
+    
+    DLog(@"Create new set and save for sequence ID %li, name %@",sequence.m_id,sequencerToSave);
+    
     [self saveSequenceWithId:sequence.m_id andName:sequencerToSave];
     sequencerToSave = @"";
     [self createNewSet];
@@ -624,10 +619,11 @@
 
 #pragma mark - Active Sequence / Active Song
 
-- (void)setActiveSequence:(NSInteger)sequence
+- (void)refreshActiveSequence
 {
-    activeSequencer = sequence;
-    [optionsViewController setActiveSequencer:sequence];
+    NSSequence * sequence = [seqSetViewController getSequence];
+    
+    [optionsViewController setActiveSequence:sequence];
 }
 
 - (void)setActiveSong:(NSInteger)song
@@ -642,10 +638,15 @@
 }
 
 #pragma mark - Auto Save Load
-- (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
+- (void)saveChangesToActiveSequence:(NSString *)newName withId:(NSInteger)xmpId
+{
+    [seqSetViewController saveChangesToActiveSequence:newName withId:xmpId];
+}
+
+- (void)saveStateToDiskWithForce:(BOOL)forceSave
 {
     // Save the sequence
-    [seqSetViewController saveContext:filepath force:forceSave];
+    [seqSetViewController saveStateToDiskWithForce:forceSave];
 
 }
 
@@ -667,15 +668,14 @@
 
 - (void)loadStateFromDisk
 {
-    NSString * sequencerName = [seqSetViewController loadStateFromDisk];
+    BOOL loaded = [seqSetViewController loadStateFromDisk];
     
-    if(![sequencerName isEqualToString:@""] && ![sequencerName isEqualToString:DEFAULT_STATE_NAME]){
-        
-        //[self setActiveSequence:sequencerName];
-        [self setActiveSong:activeSong];
-    }
+    // TODO: on callback refresh active sequence
+
+    [self setActiveSong:activeSong];
     
     // Ensure sequence exists or is created
+    //!loaded && 
     if([seqSetViewController getSequence] == nil){
         [seqSetViewController initFirstSequence];
         [playControlViewController resetTempo];
@@ -1103,7 +1103,9 @@
 #pragma mark - Hover Set Name
 - (void)hoverSetName
 {
-    NSString * setNameText = (activeSequencer == 0) ? @"New set" : DEFAULT_SET_NAME; // use sequencer name
+    NSSequence * activeSequence = [seqSetViewController getSequence];
+    
+    NSString * setNameText = (activeSequence.m_id == 0) ? @"New set" : activeSequence.m_name;
     
     float x = [frameGenerator getFullscreenWidth];
     float setNameWidth = [setNameText length];
@@ -1328,7 +1330,7 @@
     
     [guitarView update];
     
-    [self saveContext:nil force:NO];
+    [self saveStateToDiskWithForce:NO];
 }
 
 #pragma mark - gTar Connected

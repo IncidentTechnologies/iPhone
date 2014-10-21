@@ -52,7 +52,7 @@
 - (void)initSequenceWithFilename:(NSString *)filename
 {
     if(filename != nil){
-        sequence = [[NSSequence alloc] initWithXMPFilename:filename];
+        sequence = [[NSSequence alloc] initWithXMPFilename:filename fromBundle:NO];
         [self refreshSequenceName:filename];
         [self setInstrumentsFromData];
         [delegate setTempo:sequence.m_tempo];
@@ -118,15 +118,15 @@
     if(![filename isEqualToString:DEFAULT_STATE_NAME]){
         
         // Refresh the name in case it's been updated
-        sequence.m_name = filename;
+        //sequence.m_name = filename;
         
-        [self saveContext:filename force:YES];
-        [self saveContext:nil force:YES];
+        [self saveChangesToActiveSequence:filename withId:sequence.m_id];
+        [self saveStateToDiskWithForce:YES];
     }
 }
 
 #pragma mark - Load Context
-- (NSString *)loadStateFromDisk
+- (BOOL)loadStateFromDisk
 {
     DLog(@"Load state from disk");
     
@@ -145,7 +145,7 @@
         DLog(@"The state XML exists");
     } else {
         DLog(@"The state XML does not exist");
-        return nil;
+        return FALSE;
     }
     
     // Other state data
@@ -162,64 +162,77 @@
         // Decode selectedInstrumentIndex
         [self setSelectedInstrumentIndex:[[currentState objectForKey:@"Selected Instrument Index"] intValue]];
         
-        if([filepath isEqualToString:DEFAULT_STATE_NAME]){
-            
-            NSInteger activeSong = [[currentState objectForKey:@"Active Song"] intValue];
-            
-            if(activeSong){
-                loadSequence = false;
-                [delegate loadFromXmpId:activeSong andType:TYPE_SONG];
-            }
+        NSInteger activeSong = [[currentState objectForKey:@"Active Song"] intValue];
+        
+        if(activeSong){
+            // Sequence will automatically load
+            loadSequence = false;
+            [delegate loadFromXmpId:activeSong andType:TYPE_SONG];
         }
     }
     
     if(loadSequence){
+        // Load as edited from disk
         [self initSequenceWithFilename:filepath];
     }
     
-    return sequence.m_name;
+    return TRUE;
 
 }
 
 #pragma mark - Save Context
-- (void)saveContext:(NSString *)filepath force:(BOOL)forceSave
+- (void)saveChangesToActiveSequence:(NSString *)newName withId:(NSInteger)xmpId
 {
-    if(saveContextTimer == nil || filepath != nil || forceSave){
+    DLog(@"Save changes to active sequence");
+    
+    if(![newName isEqualToString:DEFAULT_SET_NAME]){
+        
+        // If ID is 0, save as new set (empty one will be loaded in after)
+        if(xmpId == 0){
+            sequence.m_id = 0;
+        }
+        
+        if(xmpId > 0 && xmpId != sequence.m_id){
+            DLog(@"ERROR SAVING: XMP ID mismatch");
+            return;
+        }
+        
+        // Save the sequence
+        [sequence renameToName:newName];
+        [g_ophoMaster saveSequence:sequence];
+    }
+    
+}
+
+- (void)saveStateToDiskWithForce:(BOOL)forceSave
+{
+    if(saveContextTimer == nil || forceSave){
         
         // Prevent from saving many times in a row, but never block a manual save
         [self clearSaveContextTimer];
         saveContextTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(clearSaveContextTimer) userInfo:nil repeats:NO];
         
-        // Save state instead of to file
-        if(filepath == nil){
-            
-            filepath = DEFAULT_STATE_NAME;
-            
-            // Any additional metadata to save for this state?
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                                 NSUserDomainMask, YES);
-            NSString * stateMetaDataPath = [[paths objectAtIndex:0]
-                                            stringByAppendingPathComponent:@"metadataCurrentState"];
-            
-            [currentState setObject:[NSNumber numberWithInt:[self getSelectedInstrumentIndex]] forKey:@"Selected Instrument Index"];
-            
-            NSInteger activeSong = [delegate getActiveSongId];
-            if(activeSong){
-                [currentState setObject:[NSNumber numberWithInt:activeSong] forKey:@"Active Song"];
-            }
-            
-            BOOL success = [currentState writeToFile:stateMetaDataPath atomically:YES];
-            
-            DLog(@"Save metadata success: %i", success);
-            
+        NSString * filepath = DEFAULT_STATE_NAME;
+        
+        // Any additional metadata to save for this state?
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                             NSUserDomainMask, YES);
+        NSString * stateMetaDataPath = [[paths objectAtIndex:0]
+                                        stringByAppendingPathComponent:@"metadataCurrentState"];
+        
+        [currentState setObject:[NSNumber numberWithInteger:[self getSelectedInstrumentIndex]] forKey:@"Selected Instrument Index"];
+        
+        NSInteger activeSong = [delegate getActiveSongId];
+        if(activeSong){
+            [currentState setObject:[NSNumber numberWithInteger:activeSong] forKey:@"Active Song"];
         }
         
-        // Save the sequence
-        // TODO: don't upload saved state to backend, or tutorial changes
-        if(filepath != nil && ![filepath isEqualToString:DEFAULT_SET_NAME] && ![filepath isEqualToString:DEFAULT_STATE_NAME]){
-            [sequence renameToName:filepath];
-            [g_ophoMaster saveSequence:sequence];
-        }
+        BOOL success = [currentState writeToFile:stateMetaDataPath atomically:YES];
+        
+        DLog(@"Save metadata success: %i", success);
+        
+        // Save to file on disk
+        [sequence saveToFile:filepath];
         
     }
 }
@@ -500,7 +513,7 @@
     }
     
     [delegate numInstrumentsDidChange:[sequence trackCount]];
-    [delegate saveContext:nil force:YES];
+    [self saveStateToDiskWithForce:YES];
 }
 
 #pragma mark Table View Protocol
@@ -1107,7 +1120,7 @@
     }
     
     [delegate numInstrumentsDidChange:[sequence trackCount]];
-    [delegate saveContext:nil force:YES];
+    [self saveStateToDiskWithForce:YES];
 }
 
 - (void)deleteAllCells
@@ -1303,22 +1316,6 @@
         return NO;
     }
 }
-/*
- #pragma mark Mute Unmute Instrument Update View
- - (void)muteInstrument:(SeqSetViewCell *)sender isMute:(BOOL)isMute
- {
- if(isMute == YES) DLog(@"Mute instrument");
- else DLog(@"Unmute instrument");
- 
- long senderIndex = [instrumentTable indexPathForCell:sender].row;
- 
- NSInstrument * tempInst = [instruments objectAtIndex:senderIndex];
- 
- tempInst.isMuted = isMute;
- 
- [delegate saveContext:nil];
- }
- */
 
 #pragma mark UI Input
 
@@ -1370,7 +1367,7 @@
         [self updateAllVisibleCells];
     }
     
-    [delegate saveContext:nil force:NO];
+    [self saveStateToDiskWithForce:NO];
 }
 
 - (void)userDidSelectMeasure:(SeqSetViewCell *)sender atIndex:(int)index
@@ -1390,7 +1387,7 @@
         [self updateAllVisibleCells];
     }
     
-    [delegate saveContext:nil force:NO];
+    [self saveStateToDiskWithForce:NO];
     
 }
 
@@ -1409,7 +1406,7 @@
         [self updateAllVisibleCells];
     }
     
-    [delegate saveContext:nil force:YES];
+    [self saveStateToDiskWithForce:YES];
     
 }
 
@@ -1426,7 +1423,7 @@
     
     [delegate setMeasureAndUpdate:trackAtIndex.selectedPattern.selectedMeasure checkNotPlaying:FALSE];
     
-    [delegate saveContext:nil force:YES];
+    [self saveStateToDiskWithForce:YES];
 }
 
 - (void)updateAllVisibleCells

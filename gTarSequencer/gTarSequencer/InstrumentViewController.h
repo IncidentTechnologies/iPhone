@@ -14,7 +14,7 @@
 
 @protocol InstrumentDelegate <NSObject>
 
-- (void) saveContext:(NSString *)filepath force:(BOOL)forceSave;
+- (void) saveStateToDiskWithForce:(BOOL)force;
 - (BOOL) checkIsPlaying;
 - (void) enqueuePattern:(NSMutableDictionary *)pattern;
 - (void) dequeueAllPatternsForTrack:(NSTrack *)track;

@@ -19,7 +19,7 @@
 
 @synthesize isFirstLaunch;
 @synthesize delegate;
-@synthesize activeSequencer;
+@synthesize activeSequence;
 @synthesize activeSong;
 @synthesize createNewButton;
 @synthesize saveCurrentButton;
@@ -171,13 +171,14 @@
 
 - (void)userDidSaveFile:(NSInteger)xmpId toName:(NSString *)filename
 {
-    DLog(@"user did save as %@ for xmpId %i",filename, xmpId);
+    DLog(@"user did save as %@ for xmpId %li",filename, xmpId);
     
     NSString * emptyName = [filename stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if([emptyName isEqualToString:@""]){
         DLog(@"Error: trying to save with blank set name");
     }else{
+        
         // delegate calls back to set activeSequencer
         [delegate saveSequenceWithId:xmpId andName:filename];
         [delegate viewSeqSetWithAnimation:YES];
@@ -216,7 +217,7 @@
 {
     selectMode = @"Load";
     
-    NSString * newSet = (!activeSequencer) ? [self generateNextSetName] : DEFAULT_SET_NAME;
+    NSString * newSet = (activeSequence.m_originSequenceRoot || activeSequence.m_name == nil) ? [self generateNextSetName] : activeSequence.m_name;
     
     // delegate sets activeSequencer
     [delegate createNewSaveName:newSet];
@@ -320,7 +321,7 @@
 {
     if(showSelectionToggle && indexPath.row == 0){
         return ROW_HEIGHT;
-    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileIdSet[indexPath.row-1] intValue] != activeSequencer){
+    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileIdSet[indexPath.row-1] intValue] != activeSequence.m_id){
         return 0;
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileLoadSet[indexPath.row-1] isEqualToString:DEFAULT_SET_NAME]){
         return 0;
@@ -368,7 +369,7 @@
         
         if([loadedTableType isEqualToString:TYPE_SEQUENCE]){
             [cell unsetAsActiveSong];
-            if(cell.xmpId == activeSequencer){
+            if(cell.xmpId == activeSequence.m_id){
                 [cell setAsActiveSequencer];
             }else{
                 [cell unsetAsActiveSequencer];
@@ -408,7 +409,7 @@
         }
         
         //[cell setHidden:YES];
-    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileIdSet[indexPath.row-1] intValue] != activeSequencer){
+    }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileIdSet[indexPath.row-1] intValue] != activeSequence.m_id){
         [cell setHidden:YES];
     }else if(indexPath.row > 0 && [selectMode isEqualToString:@"SaveCurrent"] && [fileLoadSet[indexPath.row-1] isEqualToString:DEFAULT_SET_NAME]){
         [cell setHidden:YES];
@@ -534,9 +535,9 @@
 
 #pragma mark - Active Sequence / Song
 
--(void)setActiveSequencer:(NSInteger)sequence
+-(void)setActiveSequence:(NSSequence *)sequence
 {
-    activeSequencer = sequence;
+    activeSequence = sequence;
     
     [self loadTableWith:loadedTableType];
 }
@@ -554,7 +555,7 @@
         OptionsViewCell * cell = (OptionsViewCell *)[loadTable cellForRowAtIndexPath:indexPath];
         
         if([loadedTableType isEqualToString:TYPE_SEQUENCE]){
-            if(cell.xmpId == activeSequencer){
+            if(cell.xmpId == activeSequence.m_id){
                 [cell setAsActiveSequencer];
             }else if(!cell.isSelected){
                 [cell unsetAsActiveSequencer];

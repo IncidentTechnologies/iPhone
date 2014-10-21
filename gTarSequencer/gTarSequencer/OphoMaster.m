@@ -114,6 +114,7 @@ extern NSUser * g_loggedInUser;
         DLog(@"Saving to name %@",sequence.m_name);
         
         savingSequence = sequence;
+        [savingSequence giveUserOwnership]; // May be an edited preset
         
         if(savingSequence.m_id <= 0){
             [self saveToNewWithName:sequence.m_name callbackObj:self selector:@selector(saveNewSequenceCallback:)];
@@ -503,7 +504,7 @@ extern NSUser * g_loggedInUser;
 
 - (void)copyTutorialFile
 {
-    NSSequence * tutorialSequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH];
+    NSSequence * tutorialSequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:YES];
     
     [self saveSequence:tutorialSequence];
 }

@@ -347,7 +347,7 @@
     [self scrollToAndSetActiveMeasure:measureIndex scrollSlow:isSlow];
     
     // SAVE CONTEXT
-    [delegate saveContext:nil force:NO];
+    [delegate saveStateToDiskWithForce:NO];
 }
 
 - (void)drawMeasuresForPattern:(int)patternIndex
@@ -475,7 +475,7 @@
         [self changeActiveMeasureToMeasure:tappedIndex scrollSlow:YES];
         
         // SAVE CONTEXT
-        [delegate saveContext:nil force:NO];
+        [delegate saveStateToDiskWithForce:NO];
     }
 }
 
@@ -613,7 +613,7 @@
         [self hideDeleteForMeasure:tappedIndex];
         
         // SAVE CONTEXT
-        [delegate saveContext:nil force:NO];
+        [delegate saveStateToDiskWithForce:NO];
     }
 }
 
@@ -860,7 +860,7 @@
     currentTrack.m_muted = NO;
     isMute = NO;
     
-    [delegate saveContext:nil force:NO];
+    [delegate saveStateToDiskWithForce:YES];
 }
 
 - (void)turnOffInstrumentView
@@ -873,7 +873,7 @@
     currentTrack.m_muted = YES;
     isMute = YES;
     
-    [delegate saveContext:nil force:NO];
+    [delegate saveStateToDiskWithForce:YES];
 }
 
 
@@ -916,7 +916,7 @@
     [self updateGuitarView];
     
     // SAVE CONTEXT
-    [delegate saveContext:nil force:YES];
+    [delegate saveStateToDiskWithForce:YES];
 }
 
 #pragma mark - Playband
@@ -1614,7 +1614,7 @@
     [volumeBg removeFromSuperview];
     [volumeKnob setHidden:NO];
     
-    [delegate saveContext:nil force:NO];
+    [delegate saveStateToDiskWithForce:NO];
 }
 
 

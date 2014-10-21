@@ -14,7 +14,6 @@
 
 @protocol SeqSetDelegate <NSObject>
 
-- (void) saveContext:(NSString *)filepath force:(BOOL)forceSave;
 - (void) resetPlayLocation;
 
 - (void) stopAll;
@@ -143,8 +142,10 @@ extern OphoMaster * g_ophoMaster;
 
 - (BOOL)isValidInstrumentIndex:(int)inst;
 
-- (NSString *)loadStateFromDisk;
-- (void)saveContext:(NSString *)filepath force:(BOOL)forceSave;
+- (BOOL)loadStateFromDisk;
+
+- (void)saveChangesToActiveSequence:(NSString *)newName withId:(NSInteger)xmpId;
+- (void)saveStateToDiskWithForce:(BOOL)forceSave;
 
 - (void)disableKnobIfEnabledForInstrument:(int)instIndex;
 - (void)enableKnobIfDisabledForInstrument:(int)instIndex;

@@ -32,7 +32,7 @@
 
 @property (nonatomic) int m_selectedTrackIndex;
 
-- (id)initWithXMPFilename:(NSString *)filename;
+- (id)initWithXMPFilename:(NSString *)filename fromBundle:(BOOL)fromBundle;
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
 - (id)initWithXmlDom:(XmlDom *)dom;
 
@@ -50,5 +50,8 @@
 - (int)trackCount;
 
 - (void)renameToName:(NSString *)newName;
+
+- (void)giveUserOwnership;
+- (void)giveAppOwnership;
 
 @end

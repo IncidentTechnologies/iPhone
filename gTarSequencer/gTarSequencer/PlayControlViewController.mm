@@ -116,7 +116,7 @@
         [delegate updateTempo:newValue];
         
         if(save){
-            [delegate saveContext:nil force:NO];
+            [delegate saveStateToDiskWithForce:NO];
         }
     }
 }
@@ -162,8 +162,14 @@
 
 - (void)setTempo:(int)newTempo
 {
-    tempo = newTempo;
-    [tempoSlider setToValue:tempo];
+    if(newTempo > 0){
+        
+        DLog(@"Set tempo to %i",newTempo);
+        
+        tempo = newTempo;
+        [tempoSlider setToValue:tempo];
+            
+    }
 }
 
 #pragma mark - Volume Slider Delegate
@@ -203,7 +209,7 @@
     }
     
     if(save){
-        [delegate saveContext:nil force:NO];
+        [delegate saveStateToDiskWithForce:NO];
     }
 }
 
@@ -429,14 +435,6 @@
         [delegate setRecordMode:isRecording andAnimate:animate];
     }
     [self drawRecordButton];
-}
-
-
-#pragma mark - Save / Load
-
-- (IBAction)userDidLoadOptions:(id)sender
-{
-    [delegate userDidLoadSequenceOptions];
 }
 
 #pragma mark - Drawing
