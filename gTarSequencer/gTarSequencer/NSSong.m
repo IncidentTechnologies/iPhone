@@ -12,6 +12,7 @@
 
 @synthesize m_id;
 @synthesize m_title;
+@synthesize m_xmpName;
 @synthesize m_author;
 @synthesize m_description;
 @synthesize m_tempo;
@@ -145,6 +146,7 @@
         [[[m_song GetChildWithName:@"header"] GetChildWithName:@"id"] GetAttributeValueWithName:@"value"].GetValueInt(&m_id);
         
         m_title = [[m_song GetChildWithName:@"header"] GetChildTextWithName:@"title"];
+        m_xmpName = m_title;
         m_author = [[m_song GetChildWithName:@"header"] GetChildTextWithName:@"author"];
         m_description = [[m_song GetChildWithName:@"header"] GetChildTextWithName:@"description"];
         
@@ -261,6 +263,11 @@
 
 - (NSString *)saveToFile:(NSString *)filename
 {
+    if(filename == nil){
+        DLog(@"ERROR: trying to save song to nil filename");
+        return nil;
+    }
+    
     m_title = filename;
     
     DLog(@"Name to %@",m_title);
@@ -323,6 +330,7 @@
         m_id = 0;
         
         m_title = title;
+        m_xmpName = m_title;
         m_author = author;
         m_description = description;
         m_tempo = tempo;
@@ -403,6 +411,7 @@
 - (void)renameToName:(NSString *)name andDescription:(NSString *)description
 {
     m_title = name;
+    m_xmpName = name;
     m_description = description;
 }
 

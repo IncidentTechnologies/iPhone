@@ -49,6 +49,14 @@
 
 
 // Load state from disk
+- (void)initTempTutorialSequence
+{
+    sequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:YES];
+    [self setInstrumentsFromData];
+    [delegate setTempo:sequence.m_tempo];
+    [delegate setVolume:sequence.m_volume];
+}
+
 - (void)initSequenceWithFilename:(NSString *)filename
 {
     if(filename != nil){
@@ -64,11 +72,25 @@
 {
     sequence = newsequence;
     
-    [self refreshSequenceName:sequence.m_name];
+    // Compare to list to get xmpName
+    NSDictionary * sequenceList = [g_ophoMaster getSequenceList];
+    NSArray * sequenceIds = [sequenceList objectForKey:OPHO_LIST_IDS];
+    NSArray * sequenceNames = [sequenceList objectForKey:OPHO_LIST_NAMES];
+    
+    NSString * xmpName = sequence.m_xmpName;
+    
+    for(int i = 0; i < [sequenceIds count]; i++){
+        if([[sequenceIds objectAtIndex:i] intValue] == sequence.m_id){
+            xmpName = [sequenceNames objectAtIndex:i];
+            break;
+        }
+    }
+    
+    [self refreshSequenceName:xmpName];
     
     [self setInstrumentsFromData];
     
-    if([sequence.m_name isEqualToString:DEFAULT_SET_NAME]){
+    if([sequence.m_xmpName isEqualToString:DEFAULT_SET_NAME]){
         
         [delegate setTempo:DEFAULT_TEMPO];
         [delegate setVolume:DEFAULT_VOLUME];
@@ -119,6 +141,8 @@
         
         // Refresh the name in case it's been updated
         //sequence.m_name = filename;
+        
+        [sequence renameToName:filename];
         
         [self saveChangesToActiveSequence:filename withId:sequence.m_id];
         [self saveStateToDiskWithForce:YES];

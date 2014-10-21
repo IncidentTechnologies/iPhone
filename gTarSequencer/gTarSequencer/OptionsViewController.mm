@@ -133,6 +133,10 @@
         [self userDidSelectLoad:loadButton];
         [self showNoSetsLabel];
     }
+    
+    if(![noSetsLabel isHidden]){
+        [self refreshTextForNoSetsLabel];
+    }
 }
 
 #pragma mark - Save Load Actions
@@ -217,7 +221,7 @@
 {
     selectMode = @"Load";
     
-    NSString * newSet = (activeSequence.m_originSequenceRoot || activeSequence.m_name == nil) ? [self generateNextSetName] : activeSequence.m_name;
+    NSString * newSet = (activeSequence.m_originSequenceRoot || activeSequence.m_xmpName == nil) ? [self generateNextSetName] : activeSequence.m_xmpName;
     
     // delegate sets activeSequencer
     [delegate createNewSaveName:newSet];
@@ -376,7 +380,7 @@
             }
         }else if([loadedTableType isEqualToString:TYPE_SONG]){
             [cell unsetAsActiveSequencer];
-            if(cell.xmpId == activeSong){
+            if(cell.xmpId == activeSong.m_id){
                 [cell setAsActiveSong];
             }else{
                 [cell unsetAsActiveSong];
@@ -542,7 +546,7 @@
     [self loadTableWith:loadedTableType];
 }
 
--(void)setActiveSong:(NSInteger)song
+-(void)setActiveSong:(NSSong *)song
 {
     activeSong = song;
     
@@ -561,7 +565,7 @@
                 [cell unsetAsActiveSequencer];
             }
         }else if([loadedTableType isEqualToString:TYPE_SONG]){
-            if(cell.xmpId == activeSong){
+            if(cell.xmpId == activeSong.m_id){
                 [cell setAsActiveSong];
             }else if(!cell.isSelected){
                 [cell unsetAsActiveSong];
@@ -678,6 +682,8 @@
 
 - (void)showNoSetsLabel
 {
+    [self refreshTextForNoSetsLabel];
+    
     if([noSetsLabel isHidden]){
         [noSetsLabel setHidden:NO];
         [noSetsLabel setAlpha:0.0];
@@ -688,6 +694,19 @@
 - (void)hideNoSetsLabel
 {
     [noSetsLabel setHidden:YES];
+}
+
+- (void)refreshTextForNoSetsLabel
+{
+    if([loadedTableType isEqualToString:TYPE_SEQUENCE]){
+        
+        [noSetsLabel setText:@"No saved sets."];
+        
+    }else if([loadedTableType isEqualToString:TYPE_SONG]){
+        
+        [noSetsLabel setText:@"No saved songs."];
+        
+    }
 }
 
 - (NSString *)generateNextSetName

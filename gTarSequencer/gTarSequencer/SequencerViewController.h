@@ -59,7 +59,7 @@ extern NSUser * g_loggedInUser;
     int r_beat;
     
     // Save/Load
-    NSInteger activeSong;
+    NSSong * activeSong;
     NSString * sequencerToSave;
     
     // Left nav

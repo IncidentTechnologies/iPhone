@@ -13,7 +13,6 @@
 
 #define OPHO_CALL_LOGIN @"OphoCallLogin"
 #define OPHO_CALL_LOGOUT @"OphoCallLogout"
-#define DEFAULT_SET_PATH @"tutorialSet"
 
 @implementation OphoMaster
 
@@ -117,9 +116,9 @@ extern NSUser * g_loggedInUser;
         [savingSequence giveUserOwnership]; // May be an edited preset
         
         if(savingSequence.m_id <= 0){
-            [self saveToNewWithName:sequence.m_name callbackObj:self selector:@selector(saveNewSequenceCallback:)];
+            [self saveToNewWithName:sequence.m_xmpName callbackObj:self selector:@selector(saveNewSequenceCallback:)];
         }else{
-            [self saveSequenceToId:sequence.m_id];
+            [self saveSequenceToId:sequence.m_id withName:sequence.m_xmpName];
         }
         
     }
@@ -127,12 +126,13 @@ extern NSUser * g_loggedInUser;
 
 - (void)saveNewSequenceCallback:(CloudResponse *)cloudResponse
 {
-    [self saveSequenceToId:(long)cloudResponse.m_id];
+    [self saveSequenceToId:(long)cloudResponse.m_id withName:cloudResponse.m_xmpName];
 }
 
-- (void)saveSequenceToId:(long)newId
+- (void)saveSequenceToId:(long)newId withName:(NSString *)name
 {
     savingSequence.m_id = newId;
+    [savingSequence renameToName:name];
     
     DLog(@"Sequence ID is now %li",savingSequence.m_id);
     
@@ -151,30 +151,30 @@ extern NSUser * g_loggedInUser;
         savingSong = song;
         
         if(savingSong.m_id <= 0){
-            [self saveToNewWithName:song.m_title callbackObj:self selector:@selector(saveNewSongCallback:)];
+            [self saveToNewWithName:song.m_xmpName callbackObj:self selector:@selector(saveNewSongCallback:)];
         }else{
-            [self saveSongToId:song.m_id];
+            [self saveSongToId:song.m_id withName:song.m_xmpName];
         }
-        
     }
 }
 
 - (void)saveNewSongCallback:(CloudResponse *)cloudResponse
 {
-    DLog(@"Cloud response id is %i",cloudResponse.m_id);
+    DLog(@"Cloud response id is %li",cloudResponse.m_id);
     
-    [self saveSongToId:(long)cloudResponse.m_id];
+    [self saveSongToId:(long)cloudResponse.m_id withName:cloudResponse.m_xmpName];
 }
 
-- (void)saveSongToId:(long)newId
+- (void)saveSongToId:(long)newId withName:(NSString *)name
 {
     savingSong.m_id = newId;
+    [savingSong renameToName:name andDescription:savingSong.m_description];
     
     DLog(@"Song ID is now %li %@",savingSong.m_id,savingSong);
     
-    NSString * songData = [savingSong saveToFile:savingSong.m_title];
+    NSString * songData = [savingSong saveToFile:savingSong.m_xmpName];
     
-    [self saveToId:savingSong.m_id withData:songData withName:savingSong.m_title];
+    [self saveToId:savingSong.m_id withData:songData withName:savingSong.m_xmpName];
     
 }
 
@@ -182,6 +182,8 @@ extern NSUser * g_loggedInUser;
 
 - (void)saveSample:(NSSample *)sample withFile:(NSData *)data
 {
+    // Samples can't currently be renamed, so it's OK to track m_name instead of m_xmpName
+    
     DLog(@"Sample is %@",sample);
     
     if(savingSample == nil && sample != nil){
@@ -192,22 +194,23 @@ extern NSUser * g_loggedInUser;
         if(savingSample.m_xmpFileId <= 0){
             [self saveToNewWithName:sample.m_name callbackObj:self selector:@selector(saveNewSampleCallback:)];
         }else{
-            [self saveSampleToId:sample.m_xmpFileId];
+            [self saveSampleToId:sample.m_xmpFileId withName:sample.m_name];
         }
     }
 }
 
 -(void)saveNewSampleCallback:(CloudResponse *)cloudResponse
 {
-    DLog(@"Cloud respones id is %i",cloudResponse.m_id);
+    DLog(@"Cloud respones id is %li",cloudResponse.m_id);
     
-    [self saveSampleToId:(long)cloudResponse.m_id];
+    [self saveSampleToId:(long)cloudResponse.m_id withName:cloudResponse.m_xmpName];
     
     [sampleDelegate customSampleSavedWithId:cloudResponse.m_id andName:cloudResponse.m_xmpName];
 }
 
--(void)saveSampleToId:(long)newId
+-(void)saveSampleToId:(long)newId withName:(NSString *)name
 {
+    savingSample.m_name = name;
     savingSample.m_xmpFileId = newId;
     
     DLog(@"Sample ID is now %li %@",savingSample.m_xmpFileId,savingSample);
@@ -479,7 +482,6 @@ extern NSUser * g_loggedInUser;
                 }
             }
             
-            DLog(@"Max date index %i",maxDateIndex);
             newFileDateSet[i] = fileDateSet[maxDateIndex];
             newFileLoadSet[i] = fileLoadSet[maxDateIndex];
             newFileIdSet[i] = fileIdSet[maxDateIndex];

@@ -28,6 +28,7 @@
 
 @protocol RecordShareDelegate <NSObject>
 
+- (void) refreshSong:(NSSong *)song;
 - (void) viewSeqSetWithAnimation:(BOOL)animate;
 - (void) recordPlaybackDidEnd;
 - (void) userDidLaunchEmailWithAttachment:(NSString *)filename;

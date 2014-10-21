@@ -12,6 +12,7 @@
 
 @synthesize m_tracks;
 @synthesize m_name;
+@synthesize m_xmpName;
 @synthesize m_tempo;
 @synthesize m_volume;
 @synthesize m_id;
@@ -70,6 +71,7 @@
         XMPObject * sequence = [[XMPObject alloc] initWithXMPNode:xmpNode];
         
         m_name = [[sequence GetChildWithName:@"header"] GetChildTextWithName:@"name"];
+        m_xmpName = m_name;
         
         [[[sequence GetChildWithName:@"header"] GetChildWithName:@"tempo"] GetAttributeValueWithName:@"value"].GetValueDouble(&m_tempo);
         
@@ -155,6 +157,7 @@
 		m_tracks = [[NSMutableArray alloc] init];
 		
         m_name = name;
+        m_xmpName = name;
         m_tempo = tempo;
         m_volume = volume;
         m_originSequenceRoot = false;
@@ -179,6 +182,7 @@
 		m_tracks = [[NSMutableArray alloc] init];
 		
         m_name = name;
+        m_xmpName = name;
         m_tempo = tempo;
         m_volume = volume;
         m_originSequenceRoot = false;
@@ -236,6 +240,7 @@
     if(![filename isEqualToString:DEFAULT_STATE_NAME]){
         
         m_name = filename;
+        m_xmpName = filename;
         
         DLog(@"Name to %@",filename);
     }
@@ -300,6 +305,7 @@
 - (void)renameToName:(NSString *)newName
 {
     m_name = newName;
+    m_xmpName = newName;
 }
 
 - (void)giveAppOwnership

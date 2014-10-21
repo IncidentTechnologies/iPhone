@@ -303,6 +303,7 @@
     if([nav isEqualToString:@"Options"]){
         
         activeMainView = optionsViewController.view;
+        [optionsViewController reloadFileTable];
         
     }else if([nav isEqualToString:@"Set"]){
         
@@ -466,7 +467,7 @@
     NSSequence * sequence = [seqSetViewController getSequence];
     
     // Options View Controller forks from an existing sequence, or perhaps overwrites
-    if(sequence.m_originSequenceRoot || ![sequence.m_name isEqualToString:filename]){
+    if(sequence.m_originSequenceRoot || ![sequence.m_xmpName isEqualToString:filename]){
         xmpId = 0;
     }
     
@@ -513,10 +514,6 @@
     
     [self refreshActiveSequence];
     
-    /*if([sequence.m_name isEqualToString:DEFAULT_SET_NAME]){
-        [self relaunchFTUTutorial];
-    }*/
-    
     // May have loaded the sequence after a song
     if(loadedSong != nil){
         
@@ -541,7 +538,7 @@
     // Init the song
     loadedSong = [[NSSong alloc] initWithXmlDom:songXmp];
     
-    [self setActiveSong:loadedSong.m_id];
+    [self setActiveSong:loadedSong];
     
     if(loadedSong != nil){
         
@@ -557,8 +554,20 @@
 - (void)renameForXmpId:(NSInteger)xmpId FromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type
 {
     if([type isEqualToString:TYPE_SEQUENCE]){
+        
+        NSSequence * activeSequence = [seqSetViewController getSequence];
+        if(activeSequence.m_id == xmpId){
+            [activeSequence renameToName:newname];
+        }
+        
         [g_ophoMaster renameSequenceWithId:xmpId toName:newname];
+        
     }else if([type isEqualToString:TYPE_SONG]){
+        
+        if(activeSong.m_id == xmpId){
+            [activeSong renameToName:newname andDescription:activeSong.m_description];
+        }
+        
         [g_ophoMaster renameSongWithId:xmpId toName:newname];
     }
 }
@@ -626,15 +635,41 @@
     [optionsViewController setActiveSequence:sequence];
 }
 
-- (void)setActiveSong:(NSInteger)song
+- (void)refreshSong:(NSSong *)song
+{
+    // Compare to list to get xmpName
+    NSDictionary * songList = [g_ophoMaster getSongList];
+    NSArray * songIds = [songList objectForKey:OPHO_LIST_IDS];
+    NSArray * songNames = [songList objectForKey:OPHO_LIST_NAMES];
+    
+    NSString * xmpName = song.m_xmpName;
+    
+    for(int i = 0; i < [songIds count]; i++){
+        if([[songIds objectAtIndex:i] intValue] == song.m_id){
+            xmpName = [songNames objectAtIndex:i];
+            break;
+        }
+    }
+    
+    // Refresh song name
+    if(![xmpName isEqualToString:song.m_title]){
+        // Ensure any renaming gets mapped over
+        [song renameToName:xmpName andDescription:song.m_description];
+    }
+}
+
+- (void)setActiveSong:(NSSong *)song
 {
     activeSong = song;
+    
+    [self refreshSong:activeSong];
+    
     [optionsViewController setActiveSong:song];
 }
 
 - (NSInteger)getActiveSongId
 {
-    return activeSong;
+    return activeSong.m_id;
 }
 
 #pragma mark - Auto Save Load
@@ -807,7 +842,7 @@
                 [recordingSong finishTracks];
                 
                 // XMP recording
-                [recordingSong printTree];
+                //[recordingSong printTree];
                 
                 SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
                 
@@ -816,7 +851,7 @@
                 loadedSong = recordingSong;
                 recordingSong = nil;
                 
-                [self setActiveSong:recordingSong.m_id];
+                [self setActiveSong:recordingSong];
 
             }
             
@@ -870,7 +905,7 @@
 {
     NSString * nextSongName = [recordShareController generateNextRecordedSongName];
     
-    recordingSong = [[NSSong alloc] initWithTitle:nextSongName author:g_loggedInUser.m_username description:@"" tempo:[playControlViewController getTempo] looping:false loopstart:0 loopend:0 sequenceName:[seqSetViewController getSequence].m_name sequenceId:[seqSetViewController getSequence].m_id];
+    recordingSong = [[NSSong alloc] initWithTitle:nextSongName author:g_loggedInUser.m_username description:@"" tempo:[playControlViewController getTempo] looping:false loopstart:0 loopend:0 sequenceName:[seqSetViewController getSequence].m_xmpName sequenceId:[seqSetViewController getSequence].m_id];
     
     r_beat = 0;
     
@@ -1105,7 +1140,7 @@
 {
     NSSequence * activeSequence = [seqSetViewController getSequence];
     
-    NSString * setNameText = (activeSequence.m_id == 0) ? @"New set" : activeSequence.m_name;
+    NSString * setNameText = (activeSequence.m_id == 0) ? @"New set" : activeSequence.m_xmpName;
     
     float x = [frameGenerator getFullscreenWidth];
     float setNameWidth = [setNameText length];
@@ -1536,6 +1571,9 @@
 
 - (void)launchFTUTutorial
 {
+    // Temporarily launch from file
+    [seqSetViewController initTempTutorialSequence];
+    
     [g_ophoMaster loadTutorialSequenceWhenReady];
     
     FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];

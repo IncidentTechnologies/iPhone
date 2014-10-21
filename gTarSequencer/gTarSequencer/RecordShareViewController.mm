@@ -236,6 +236,7 @@
 }
 - (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence
 {
+    [delegate refreshSong:song];
     
     loadedSequence = activeSequence;
     loadedSoundMaster = soundMaster;
@@ -257,7 +258,6 @@
     [self reloadInstruments];
     
     DLog(@"Instruments is %@",instruments);
-    
     
     [self removeDeletedMeasuresFromRecordedSong];
     
@@ -1366,7 +1366,7 @@
     [self adjustDownShareSongView];
     [songDescriptionField resignFirstResponder];
     
-    [recordingSong renameToName:recordingSong.m_title andDescription:songDescriptionField.text];
+    [recordingSong renameToName:recordingSong.m_xmpName andDescription:songDescriptionField.text];
     [self saveRecordingSongToXmp];
     
 }
@@ -1480,7 +1480,7 @@
     // hide styles
     [self clearAttributedStringForText:songNameField];
     
-    [delegate renameForXmpId:recordingSong.m_id FromName:recordingSong.m_title toName:songNameField.text andType:TYPE_SONG];
+    [delegate renameForXmpId:recordingSong.m_id FromName:recordingSong.m_xmpName toName:songNameField.text andType:TYPE_SONG];
     
     [recordingSong renameToName:songNameField.text andDescription:songDescriptionField.text];
     
@@ -1525,7 +1525,7 @@
     
     for(NSString * comparename in tempList){
         
-        if([comparename isEqualToString:filename] && ![comparename isEqualToString:recordingSong.m_title]){
+        if([comparename isEqualToString:filename] && ![comparename isEqualToString:recordingSong.m_xmpName]){
             return YES;
         }
         
@@ -1542,7 +1542,7 @@
 
 - (void)setRecordDefaultText
 {
-    songNameField.text = recordingSong.m_title;
+    songNameField.text = recordingSong.m_xmpName;
     
 }
 

@@ -15,6 +15,7 @@
 @interface NSSequence : NSObject
 {
     NSString * m_name;
+    NSString * m_xmpName;
     double m_tempo;
     double m_volume;
     bool m_originSequenceRoot;
@@ -25,6 +26,7 @@
 
 @property (nonatomic, readonly) NSMutableArray * m_tracks;
 @property (nonatomic, strong) NSString * m_name;
+@property (nonatomic, strong) NSString * m_xmpName;
 @property (nonatomic) double m_tempo;
 @property (nonatomic) double m_volume;
 @property (nonatomic) long m_id;

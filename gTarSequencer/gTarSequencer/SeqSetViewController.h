@@ -125,6 +125,7 @@ extern OphoMaster * g_ophoMaster;
 - (void)initFirstSequence;
 - (void)setInstrumentsFromData;
 
+- (void)initTempTutorialSequence;
 - (void)initSequenceWithFilename:(NSString *)filename;
 - (void)initSequenceWithSequence:(NSSequence *)newsequence;
 - (NSSequence *)getSequence;
