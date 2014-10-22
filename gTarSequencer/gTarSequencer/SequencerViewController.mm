@@ -37,6 +37,7 @@
 @synthesize recordShareController;
 @synthesize leftNavigator;
 @synthesize setName;
+@synthesize loadingOverlay;
 
 @synthesize loadedSong;
 
@@ -97,6 +98,7 @@
     patternQueue = [NSMutableArray array];
     
     g_ophoMaster.tutorialDelegate = self;
+    g_ophoMaster.loadingDelegate = self;
     
 }
 
@@ -233,6 +235,27 @@
     //
     
     [self startGestures];
+    
+}
+
+
+#pragma mark - Opho Loading
+
+- (void)loadingBegan
+{
+    DLog(@"Loading began");
+    
+    [loadingOverlay setHidden:NO];
+    
+    [self.view bringSubviewToFront:loadingOverlay];
+    
+}
+
+- (void)loadingEnded
+{
+    DLog(@"Loading ended");
+    
+    [loadingOverlay setHidden:YES];
     
 }
 

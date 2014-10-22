@@ -37,6 +37,13 @@
 
 @end
 
+@protocol OphoLoadingDelegate <NSObject>
+
+- (void)loadingBegan;
+- (void)loadingEnded;
+
+@end
+
 @interface OphoMaster : NSObject
 {
     OphoCloudController * ophoCloudController;
@@ -65,6 +72,7 @@
 @property (weak, nonatomic) id <OphoLoginDelegate> loginDelegate;
 @property (weak, nonatomic) id <OphoTutorialDelegate> tutorialDelegate;
 @property (weak, nonatomic) id <OphoSampleDelegate> sampleDelegate;
+@property (weak, nonatomic) id <OphoLoadingDelegate> loadingDelegate;
 @property (strong, nonatomic) NSSong * savingSong;
 @property (strong, nonatomic) NSSequence * savingSequence;
 @property (strong, nonatomic) NSSample * savingSample;

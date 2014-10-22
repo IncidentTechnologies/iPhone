@@ -30,7 +30,7 @@
 extern OphoMaster * g_ophoMaster;
 extern NSUser * g_loggedInUser;
 
-@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate,RecordShareDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,GatekeeperDelegate,OphoTutorialDelegate> {
+@interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate,RecordShareDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,GatekeeperDelegate,OphoTutorialDelegate,OphoLoadingDelegate> {
     
     // tutorial
     BOOL isTutorialOpen;
@@ -93,6 +93,8 @@ extern NSUser * g_loggedInUser;
 @property (retain, nonatomic) UIButton * setName;
 
 @property (retain, nonatomic) NSSong * loadedSong;
+
+@property (strong, nonatomic) IBOutlet UIView * loadingOverlay;
 
 // FTU Tutorial
 //@property (weak, nonatomic) IBOutlet UIButton * yesButton;

@@ -21,6 +21,7 @@ extern NSUser * g_loggedInUser;
 @synthesize loginDelegate;
 @synthesize tutorialDelegate;
 @synthesize sampleDelegate;
+@synthesize loadingDelegate;
 @synthesize savingSong;
 @synthesize savingSequence;
 @synthesize savingSample;
@@ -360,6 +361,8 @@ extern NSUser * g_loggedInUser;
         return;
     }
     
+    [loadingDelegate loadingBegan];
+    
     DLog(@"Load samples from instrument %i, %@",instrumentId,samples);
     
     // Create an entry
@@ -388,6 +391,11 @@ extern NSUser * g_loggedInUser;
     DLog(@"Opho Instruments is %@ | %@",ophoInstruments,ophoLoadingInstrumentQueue);
     
     NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
+    
+    if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
+        // work already done
+        return;
+    }
     
     for(id instId in ophoLoadingInstrumentQueue){
         
@@ -422,6 +430,10 @@ extern NSUser * g_loggedInUser;
     }
     
     [ophoLoadingInstrumentQueue removeObjectsForKeys:keysToRemove];
+    
+    if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
+        [loadingDelegate loadingEnded];
+    }
     
 }
 
