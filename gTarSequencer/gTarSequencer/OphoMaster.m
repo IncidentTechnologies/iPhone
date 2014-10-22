@@ -25,6 +25,7 @@ extern NSUser * g_loggedInUser;
 @synthesize savingSequence;
 @synthesize savingSample;
 @synthesize savingSampleData;
+@synthesize savingInstrument;
 
 - (id)init
 {
@@ -33,6 +34,9 @@ extern NSUser * g_loggedInUser;
     {
         ophoCloudController = [[OphoCloudController alloc] initWithServer:kServerAddress];
         pendingLoadTutorial = NO;
+        
+        ophoInstruments = [[NSMutableDictionary alloc] init];
+        ophoLoadingInstrumentQueue = [[NSMutableDictionary alloc] init];
         
     }
     return self;
@@ -104,6 +108,11 @@ extern NSUser * g_loggedInUser;
     [ophoCloudController requestGetXmpListWithType:OphoXmpTypeXMPSample andUserId:g_loggedInUser.m_userId andCallbackObj:callbackObj andCallbackSel:selector];
 }
 
+- (void)getInstrumentListForCallbackObj:(id)callbackObj selector:(SEL)selector
+{
+    [ophoCloudController requestGetXmpListWithType:OphoXmpTypeXMPInstrument andUserId:g_loggedInUser.m_userId andCallbackObj:callbackObj andCallbackSel:selector];
+}
+
 #pragma mark - XMP Save
 // Sequences
 - (void)saveSequence:(NSSequence *)sequence
@@ -160,7 +169,7 @@ extern NSUser * g_loggedInUser;
 
 - (void)saveNewSongCallback:(CloudResponse *)cloudResponse
 {
-    DLog(@"Cloud response id is %li",cloudResponse.m_id);
+    DLog(@"Cloud response id is %i",cloudResponse.m_id);
     
     [self saveSongToId:(long)cloudResponse.m_id withName:cloudResponse.m_xmpName];
 }
@@ -201,7 +210,7 @@ extern NSUser * g_loggedInUser;
 
 -(void)saveNewSampleCallback:(CloudResponse *)cloudResponse
 {
-    DLog(@"Cloud respones id is %li",cloudResponse.m_id);
+    DLog(@"Cloud respones id is %i",cloudResponse.m_id);
     
     [self saveSampleToId:(long)cloudResponse.m_id withName:cloudResponse.m_xmpName];
     
@@ -217,6 +226,44 @@ extern NSUser * g_loggedInUser;
     
     [self saveToId:savingSample.m_xmpFileId withFile:savingSampleData withName:savingSample.m_name];
 }
+
+// Instruments
+
+- (void)saveInstrument:(NSInstrument *)instrument
+{
+    DLog(@"Instrument is %@",instrument);
+    
+    if(savingInstrument == nil && instrument != nil){
+        
+        savingInstrument = instrument;
+        
+        if(savingInstrument.m_id <= 0){
+            [self saveToNewWithName:instrument.m_name callbackObj:self selector:@selector(saveNewInstrumentCallback:)];
+        }else{
+            [self saveInstrumentToId:savingInstrument.m_id withName:savingInstrument.m_name];
+        }
+    }
+}
+
+-(void)saveNewInstrumentCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Cloud respones id is %i",cloudResponse.m_id);
+    
+    [self saveInstrumentToId:(long)cloudResponse.m_id withName:cloudResponse.m_xmpName];
+}
+
+-(void)saveInstrumentToId:(long)newId withName:(NSString *)name
+{
+    savingInstrument.m_name = name;
+    savingInstrument.m_id = newId;
+    
+    DLog(@"Instrument ID is now %li",savingInstrument.m_id);
+    
+    NSString * instrumentData = [savingInstrument saveToFile:savingInstrument.m_name];
+    
+    [self saveToId:savingInstrument.m_id withData:instrumentData withName:savingInstrument.m_name];
+}
+
 
 // Generic
 - (void)saveToNewWithName:(NSString *)name callbackObj:(id)callbackObj selector:(SEL)selector
@@ -255,6 +302,13 @@ extern NSUser * g_loggedInUser;
     if(savingSample != nil){
         savingSample = nil;
         savingSampleData = nil;
+        [self loadSampleList];
+    }
+    
+    if(savingInstrument != nil){
+        [savingInstrument deleteFile];
+        savingInstrument = nil;
+        [self loadInstrumentList];
     }
     
 }
@@ -293,6 +347,82 @@ extern NSUser * g_loggedInUser;
 - (void)loadFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector
 {
     [ophoCloudController requestGetXmpWithId:xmpId isXmpOnly:false andCallbackObj:callbackObj andCallbackSel:selector];
+}
+
+- (void)loadSamplesForInstrument:(NSInteger)instrumentId andName:(NSString *)instrumentName andSamples:(NSArray *)samples callbackObj:(id)object selector:(SEL)selector
+{
+    // Check for an entry
+    if([ophoInstruments objectForKey:instrumentName] != nil){
+        DLog(@"Instrument already loaded");
+        
+        [object performSelector:selector withObject:[ophoInstruments objectForKey:[NSNumber numberWithInt:instrumentId]] afterDelay:0.0];
+        
+        return;
+    }
+    
+    DLog(@"Load samples from instrument %i, %@",instrumentId,samples);
+    
+    // Create an entry
+    NSMutableArray * instrumentStrings = [[NSMutableArray alloc] initWithObjects:@"",@"",@"",@"",@"",@"", nil];
+    [ophoInstruments setObject:instrumentStrings forKey:[NSNumber numberWithInt:instrumentId]];
+    
+    [ophoLoadingInstrumentQueue setObject:[NSArray arrayWithObjects:samples,object,NSStringFromSelector(selector), nil] forKey:[NSNumber numberWithInt:instrumentId]];
+    
+    // Then load al the samples asynchronously
+    for(NSSample * sample in samples){
+        int xmpId = (sample.m_xmpFileId == 0) ? DEFAULT_STRING_ID : sample.m_xmpFileId;
+        sample.m_xmpFileId = DEFAULT_STRING_ID;
+        [self loadFromId:xmpId callbackObj:self selector:@selector(addSampleXmpToOphoInstrument:)];
+    }
+}
+
+- (void)addSampleXmpToOphoInstrument:(CloudResponse *)cloudResponse
+{
+    NSInteger xmpId = cloudResponse.m_id;
+    
+    XmlDom * xmp = cloudResponse.m_xmpDom;
+    XmlDom * sampleXmp = [xmp getChildWithName:@"sample"];
+    
+    NSString * datastring = [sampleXmp getText];
+    
+    DLog(@"Opho Instruments is %@ | %@",ophoInstruments,ophoLoadingInstrumentQueue);
+    
+    NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
+    
+    for(id instId in ophoLoadingInstrumentQueue){
+        
+        NSArray * samples = [[ophoLoadingInstrumentQueue objectForKey:instId] objectAtIndex:0];
+        id object = [[ophoLoadingInstrumentQueue objectForKey:instId] objectAtIndex:1];
+        SEL selector = NSSelectorFromString([[ophoLoadingInstrumentQueue objectForKey:instId] objectAtIndex:2]) ;
+        
+        for(NSSample * sample in samples){
+            
+            DLog(@"Attempting samples, %li == %li",(long)xmpId,sample.m_xmpFileId);
+            
+            if((long)xmpId == sample.m_xmpFileId){
+                
+                // Stash the sound data
+                [[ophoInstruments objectForKey:instId] setObject:datastring atIndexedSubscript:[sample.m_value intValue]];
+            }
+        }
+        
+        // If done, empty queue and call delegate
+        BOOL isComplete = true;
+        for(int i = 0 ; i < STRINGS_ON_GTAR; i++){
+            if([[[ophoInstruments objectForKey:instId] objectAtIndex:i] isEqualToString:@""]){
+                isComplete = false;
+            }
+        }
+        
+        if(isComplete){
+            
+            [object performSelector:selector withObject:[ophoInstruments objectForKey:instId] afterDelay:0.0];
+            [keysToRemove addObject:instId];
+        }
+    }
+    
+    [ophoLoadingInstrumentQueue removeObjectsForKeys:keysToRemove];
+    
 }
 
 #pragma mark - XMP Delete
@@ -334,6 +464,13 @@ extern NSUser * g_loggedInUser;
     return sampleList;
 }
 
+- (NSDictionary *)getInstrumentList
+{
+    NSDictionary * instrumentList = [NSDictionary dictionaryWithObjectsAndKeys:instrumentIdSet,OPHO_LIST_IDS,instrumentLoadSet,OPHO_LIST_NAMES,instrumentDateSet,OPHO_LIST_DATES, nil];
+    
+    return instrumentList;
+}
+
 #pragma mark - Pregenerate XMP Data
 
 - (void)regenerateData
@@ -341,7 +478,8 @@ extern NSUser * g_loggedInUser;
     [self loadSongList];
     [self loadSequenceList];
     [self loadSampleList];
-
+    [self loadInstrumentList];
+    
 }
 
 - (void)loadSongList
@@ -371,6 +509,15 @@ extern NSUser * g_loggedInUser;
     [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:)];
 }
 
+- (void)loadInstrumentList
+{
+    instrumentIdSet = [[NSMutableArray alloc] init];
+    instrumentLoadSet = [[NSMutableArray alloc] init];
+    instrumentDateSet = [[NSMutableArray alloc] init];
+    
+    [self getInstrumentListForCallbackObj:self selector:@selector(requestGetXmpInstrumentListCallback:)];
+}
+
 - (void)requestGetXmpSongListCallback:(CloudResponse *)cloudResponse
 {
     DLog(@"Request Get Xmp Song List Callback");
@@ -378,6 +525,15 @@ extern NSUser * g_loggedInUser;
     NSArray * xmpList = cloudResponse.m_xmpList;
     
     [self buildSortedXmpList:xmpList withIds:songIdSet withData:songLoadSet withDates:songDateSet];
+}
+
+- (void)requestGetXmpInstrumentListCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Request Get Xmp Instrument List Callback");
+    
+    NSArray * xmpList = cloudResponse.m_xmpList;
+    
+    [self buildSortedXmpList:xmpList withIds:instrumentIdSet withData:instrumentLoadSet withDates:instrumentDateSet];
 }
 
 - (void)requestGetXmpSequenceListCallback:(CloudResponse *)cloudResponse

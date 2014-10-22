@@ -768,10 +768,6 @@
     XmlDom * sampleXmp = [xmp getChildWithName:@"sample"];
     
     NSString * datastring = [sampleXmp getText];
-    //NSData * data = [datastring dataUsingEncoding:NSUTF8StringEncoding];
-    
-    //NSURL * URL = [NSURL URLWithString:[NSString stringWithFormat:@"data:application/octet-stream;base64,%@",[sampleXmp getText]]];
-    //NSData * data = [NSData dataWithContentsOfURL:URL];
     
     // Add to sample buffer create from base 64 string
     
@@ -781,12 +777,10 @@
     
     m_bankNode = [soundMaster generateBank];
     
-    // Reload sound into bank after new record
-    //char * filepath = (char *)malloc(sizeof(char) * 1024);
-    
-    //filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Vibraphone_C" ofType:@"wav"] UTF8String];
-    
-    //m_bankNode->LoadSampleIntoBank(filepath, m_sampNode);
+    if(datastring == nil || [datastring length] == 0){
+        DLog(@"ERROR: attempting to play string with empty name");
+        return;
+    }
     
     // Base 64 decode
     NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:datastring options:NSDataBase64DecodingIgnoreUnknownCharacters];
@@ -1018,7 +1012,8 @@
     NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
     
     for(int i = 0; i < [tempList count]; i++){
-        NSString * tempString = [tempList[i] stringByReplacingCharactersInRange:[tempList[i] rangeOfString:@"Custom_"] withString:@""];
+        //NSString * tempString = [tempList[i] stringByReplacingCharactersInRange:[tempList[i] rangeOfString:@"Custom_"] withString:@""];
+        NSString * tempString = tempList[i];
         if([tempString isEqualToString:filename]){
             return YES;
         }
@@ -1331,87 +1326,11 @@
     
     [recordProcessing setHidden:NO];
     [recordProcessing setText:@""];
-
-    
-    /*recordProcessingCounter = 0;
-     [self animateRecordProcessing];
-     
-     if(recordProcessingTimer == nil){
-     DLog(@"Init record processing timer");
-     recordProcessingCounter = 0;
-     [recordProcessing setHidden:NO];
-     
-     recordProcessingTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(animateRecordProcessing) userInfo:nil repeats:YES];
-     }*/
-    
 }
-/*
- -(void)animateRecordProcessing
- {
- 
- UIView * recordProcessingInner = [[recordProcessing subviews] firstObject];
- 
- recordProcessing.layer.borderWidth = 10.0;
- recordProcessing.layer.cornerRadius = recordProcessing.frame.size.width/2;
- recordProcessing.layer.borderColor = [UIColor whiteColor].CGColor;
- 
- recordProcessingInner.layer.borderWidth = 5.0;
- recordProcessingInner.layer.cornerRadius = recordProcessingInner.frame.size.width/2;
- recordProcessingInner.layer.borderColor = [UIColor whiteColor].CGColor;
- 
- [recordProcessing setAlpha:1.0];
- [recordProcessingInner setAlpha:0.5];
- 
- //DLog(@"Switch on %i",recordProcessingCounter);
- 
- switch(recordProcessingCounter){
- case 0:
- [recordProcessing setAlpha:0.0];
- [recordProcessingInner setAlpha:0.5];
- break;
- case 1:
- [recordProcessing setAlpha:0.0];
- [recordProcessingInner setAlpha:1.0];
- break;
- case 2:
- [recordProcessing setAlpha:0.5];
- [recordProcessingInner setAlpha:1.0];
- break;
- case 3:
- [recordProcessing setAlpha:1.0];
- [recordProcessingInner setAlpha:1.0];
- break;
- case 4:
- [recordProcessing setAlpha:0.5];
- [recordProcessingInner setAlpha:1.0];
- break;
- case 5:
- [recordProcessing setAlpha:0.0];
- [recordProcessingInner setAlpha:1.0];
- break;
- case 6:
- [recordProcessing setAlpha:0.0];
- [recordProcessingInner setAlpha:0.5];
- break;
- case 7:
- [recordProcessing setAlpha:0.0];
- [recordProcessingInner setAlpha:0.0];
- break;
- }
- 
- DLog(@"Switched");
- 
- recordProcessingCounter++;
- recordProcessingCounter %= 8;
- 
- }
- */
 
 -(void)hideRecordProcessing
 {
     DLog(@"Hide record processing");
-    //[recordProcessingTimer invalidate];
-    //recordProcessingTimer = nil;
     
     [recordProcessing setHidden:YES];
     [recordProcessing setText:@""];

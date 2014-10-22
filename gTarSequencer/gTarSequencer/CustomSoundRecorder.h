@@ -18,7 +18,7 @@
 
 extern OphoMaster * g_ophoMaster;
 
-@interface CustomSoundRecorder : NSObject <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+@interface CustomSoundRecorder : NSObject <AVAudioRecorderDelegate>
 {
     NSString * defaultFilename;
     
@@ -49,7 +49,6 @@ extern OphoMaster * g_ophoMaster;
 
 @property (weak, nonatomic) id<CustomSoundDelegate> delegate;
 @property (retain) AVAudioRecorder * recorder;
-@property (retain) AVAudioPlayer * player;
 
 
 @end

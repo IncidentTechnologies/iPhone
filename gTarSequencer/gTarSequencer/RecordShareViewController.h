@@ -11,7 +11,6 @@
 #import "NSSong.h"
 #import "NSSongModel.h"
 #import "MainEventController.h"
-#import <AVFoundation/AVFoundation.h>
 #import "HorizontalAdjustor.h"
 #import "RecordEditor.h"
 //#import "SCUI.h"
@@ -53,7 +52,7 @@
 extern OphoMaster * g_ophoMaster;
 extern NSUser * g_loggedInUser;
 
-@interface RecordShareViewController : MainEventController <UIScrollViewDelegate,AVAudioPlayerDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,RecordEditorDelegate,UIGestureRecognizerDelegate>
+@interface RecordShareViewController : MainEventController <UIScrollViewDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,RecordEditorDelegate,UIGestureRecognizerDelegate>
 {
     NSMutableArray * instruments;
     NSMutableArray * tracks;
@@ -72,6 +71,7 @@ extern NSUser * g_loggedInUser;
     
     NSSequence * loadedSequence;
     float loadedTempo;
+    double secondsPerBeat;
     SoundMaster * loadedSoundMaster;
     
     // Editing
@@ -82,7 +82,7 @@ extern NSUser * g_loggedInUser;
     float trackViewVerticalOffset;
     
     // Playback
-    AVAudioPlayer * audioPlayer;
+    NSTimer * playTimer;
     NSString * sessionFilepath;
     BOOL isAudioPlaying;
     

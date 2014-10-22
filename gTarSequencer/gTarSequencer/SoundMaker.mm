@@ -28,6 +28,8 @@
     NSArray * audioStringPaths;
     NSArray * audioStringSamples;
     
+    NSArray * audioSampleSet;
+    
     double gain;
     double bankgain;
 }
@@ -47,6 +49,50 @@
 }
 
 
+- (id)initWithInstrumentId:(NSInteger)instId andName:(NSString *)instName andSamples:(NSArray *)instSamples andSoundMaster:(SoundMaster *)soundMaster
+{
+    self = [super init];
+    if(self){
+        
+        instIndex = instId;
+        
+        gain = DEFAULT_VOLUME;
+        bankgain = AMPLITUDE_SCALE;
+        
+        m_soundMaster = soundMaster;
+        
+        DLog(@"Load instrument %i",instId);
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            
+            DLog(@"Loading files in background");
+            
+            [g_ophoMaster loadSamplesForInstrument:instId andName:instName andSamples:instSamples callbackObj:self selector:@selector(instrumentLoadedWithSamples:)];
+            
+        });
+        
+    }
+    
+    return self;
+}
+
+- (void)instrumentLoadedWithSamples:(NSArray *)samples
+{
+    audioSampleSet = [[NSArray alloc] initWithArray:samples];
+    
+    m_samplerBank = [m_soundMaster generateBank];
+    
+    for(int i = 0; i < GTAR_NUM_STRINGS; i++){
+        NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:samples[i] options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        
+        unsigned long int length = [decodedData length];
+        
+        m_samplerBank->LoadSampleStringIntoBank([decodedData bytes], length, m_sampNode);
+    }
+
+}
+
+/*
 - (id)initWithStringSamples:(NSArray *)stringSet andInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster
 {
     self = [super init];
@@ -73,7 +119,9 @@
     
     return self;
 }
+*/
 
+/*
 - (void)loadStringSamples
 {
     for(int i = 0; i < GTAR_NUM_STRINGS; i++){
@@ -112,7 +160,8 @@
         }
     }
 }
-
+*/
+ 
 - (void)flushBuffer
 {
     m_samplerBank->StopAllSamples();

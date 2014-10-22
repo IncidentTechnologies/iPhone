@@ -23,7 +23,7 @@
 @synthesize m_startBeat;
 @synthesize m_endBeat;
 
-#define SONG_MODEL_NOTE_FRAME_WIDTH (1.0 / 50.0)
+#define SONG_MODEL_NOTE_FRAME_WIDTH (1.0 / 10.0)
 
 #define SCROLLING_BEATS_PER_SECOND 1.0
 #define LOOP_GAP 2.0
@@ -73,7 +73,7 @@
 
 - (void)startWithDelegate:(id)delegate
 {
-    [self startWithDelegate:delegate andBeatOffset:-0.97 fastForward:NO isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
+    [self startWithDelegate:delegate andBeatOffset:-1.0 fastForward:NO isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
 }
 
 - (void)startWithDelegate:(id)delegate
@@ -134,6 +134,7 @@
     return 0;
 }
 
+/*
 - (void)incrementBeatSerialAccess:(double)delta
 {
     
@@ -154,10 +155,11 @@
     [self checkFrames];
     
 }
+*/
 
 - (double)incrementTimeSerialAccess:(double)delta
 {
-    m_currentBeat += (delta * m_beatsPerSecond);
+    m_currentBeat += delta; //quarterbeat
     m_percentageComplete = m_currentBeat / m_lengthBeats;
     
     if ( m_percentageComplete < 0.0 )

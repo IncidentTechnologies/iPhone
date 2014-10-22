@@ -304,6 +304,12 @@
 
 - (void)deleteFile
 {
+    if(m_title == nil){
+        DLog(@"ERROR: attempting to delete nil file");
+        return;
+    }
+    
+    
     NSString * filename = m_title;
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

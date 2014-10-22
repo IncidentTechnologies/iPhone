@@ -62,7 +62,7 @@
 - (void)startWithDelegate:(id)delegate;
 - (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isScrolling:(BOOL)scolling withTempoPercent:(double)tempoPercent fromStart:(double)start toEnd:(double)end withLoops:(int)loops;
 
-- (void)incrementBeatSerialAccess:(double)delta;
+//- (void)incrementBeatSerialAccess:(double)delta;
 - (double)incrementTimeSerialAccess:(double)delta;
 - (void)changeBeatRandomAccess:(double)beat;
 - (void)changePercentageComplete:(double)percentage;

@@ -155,6 +155,59 @@
     return node;
 }
 
+
+-(NSString *)saveToFile:(NSString *)filename
+{
+    m_name = filename;
+    
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:TYPE_INSTRUMENT];
+    
+    NSError * err = NULL;
+    [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
+    
+    NSString * instrumentFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Instruments/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
+    
+    char * filepath = (char *)[instrumentFilepath UTF8String];
+    
+    XMPNode *node = NULL;
+    XMPNode *custom = NULL;
+    node = new XMPNode((char *)[@"xmp" UTF8String],NULL);
+    //custom = new XMPNode((char *)[@"custom" UTF8String],NULL);
+    //node->AddChild(custom);
+    custom->AddChild([self convertToSequenceXmp]);
+    
+    XMPTree tree = NULL;
+    
+    tree.AddChild(node);
+    
+    tree.SaveXMPToFile(filepath, YES);
+    
+    DLog(@"Saved to path %s",filepath);
+    
+    NSString * instrumentFile = [NSString stringWithContentsOfFile:instrumentFilepath encoding:NSASCIIStringEncoding error:nil];
+    
+    return instrumentFile;
+    
+}
+
+
+- (void)deleteFile
+{
+    NSString * filename = m_name;
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Instruments/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
+    
+    NSError * error = NULL;
+    BOOL result = [[NSFileManager defaultManager] removeItemAtPath:sequenceFilepath error:&error];
+    
+    if(!result)
+        DLog(@"Error deleting");
+}
+
+
 -(void)releaseSounds
 {
     [m_sampler.audio releaseSounds];
@@ -173,7 +226,6 @@
  [aCoder encodeObject:iconName forKey:@"Icon Name"];
  [aCoder encodeBool:isSelected forKey:@"Is Selected"];
  [aCoder encodeObject:stringSet forKey:@"Strings"];
- [aCoder encodeObject:stringPaths forKey:@"StringPaths"];
  [aCoder encodeBool:isMuted forKey:@"Is Muted"];
  [aCoder encodeObject:isCustom forKey:@"Custom"];
  [aCoder encodeDouble:amplitude forKey:@"Amplitude"];

@@ -49,6 +49,11 @@
 #define DEFAULT_SET_NAME @"Tutorial"
 #define BLANK_SET_NAME @"New Set"
 #define DEFAULT_SET_PATH @"tutorialSet"
+#define DEFAULT_STRING_ID 424
 
 #define TYPE_SEQUENCE @"Sequences"
 #define TYPE_SONG @"Songs"
+#define TYPE_INSTRUMENT @"Instruments"
+
+#define DEFAULT_TEMPO 120
+#define SECONDS_PER_MIN 60.0

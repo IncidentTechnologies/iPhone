@@ -16,6 +16,7 @@
 @class NSSong;
 @class NSSequence;
 @class NSSample;
+@class NSInstrument;
 
 @protocol OphoLoginDelegate <NSObject>
 
@@ -40,7 +41,8 @@
 {
     OphoCloudController * ophoCloudController;
     
-    NSMutableDictionary * ophoQueueDict;
+    NSMutableDictionary * ophoInstruments;
+    NSMutableDictionary * ophoLoadingInstrumentQueue;
     
     // Preloaded Data
     NSMutableArray * songIdSet;
@@ -52,7 +54,10 @@
     NSMutableArray * sampleIdSet;
     NSMutableArray * sampleLoadSet;
     NSMutableArray * sampleDateSet;
-    
+    NSMutableArray * instrumentIdSet;
+    NSMutableArray * instrumentLoadSet;
+    NSMutableArray * instrumentDateSet;
+
     BOOL pendingLoadTutorial;
     
 }
@@ -64,7 +69,7 @@
 @property (strong, nonatomic) NSSequence * savingSequence;
 @property (strong, nonatomic) NSSample * savingSample;
 @property (strong, nonatomic) NSData * savingSampleData;
-
+@property (strong, nonatomic) NSInstrument * savingInstrument;
 
 - (id)init;
 
@@ -78,11 +83,14 @@
 - (void)saveSequence:(NSSequence *)sequence;
 - (void)saveSong:(NSSong *)song;
 - (void)saveSample:(NSSample *)sample withFile:(NSData *)data;
+- (void)saveInstrument:(NSInstrument *)instrument;
 
 - (void)renameSongWithId:(NSInteger)xmpId toName:(NSString *)name;
 - (void)renameSequenceWithId:(NSInteger)xmpId toName:(NSString *)name;
 
 - (void)loadFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector;
+
+- (void)loadSamplesForInstrument:(NSInteger)instrumentId andName:(NSString *)instrumentName andSamples:(NSArray *)samples callbackObj:(id)object selector:(SEL)selector;
 
 - (void)deleteWithId:(NSInteger)xmpId;
 
@@ -94,5 +102,6 @@
 - (NSDictionary *)getSongList;
 - (NSDictionary *)getSequenceList;
 - (NSDictionary *)getSampleList;
+- (NSDictionary *)getInstrumentList;
 
 @end

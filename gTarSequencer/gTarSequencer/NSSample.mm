@@ -13,7 +13,6 @@
 @synthesize m_name;
 @synthesize m_value;
 @synthesize m_custom;
-@synthesize m_encoding;
 @synthesize m_xmpFileId;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode
@@ -32,8 +31,6 @@
         m_name = [[NSString alloc] initWithUTF8String:[sample GetAttributeValueWithName:@"name"].GetPszValue()];
         
         m_value = [[NSString alloc] initWithUTF8String:[sample GetAttributeValueWithName:@"value"].GetPszValue()];
-        
-        m_encoding = [[NSString alloc] initWithUTF8String:[sample GetAttributeValueWithName:@"encoding"].GetPszValue()];
         
         [sample GetAttributeValueWithName:@"custom"].GetValueBool(&m_custom);
         
@@ -61,8 +58,6 @@
         
         m_value = [dom getTextFromChildWithName:@"value"];
         
-        m_encoding = [dom getTextFromChildWithName:@"encoding"];
-        
         m_custom = [[dom getTextFromChildWithName:@"custom"] boolValue];
         
         m_xmpFileId = [[dom getTextFromChildWithName:@"xmpfileid"] intValue];
@@ -73,7 +68,7 @@
     return self;
 }
 
--(id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value encoding:(NSString *)encoding xmpFileId:(long)xmpFileId
+-(id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value xmpFileId:(long)xmpFileId
 {
     self = [super init];
     
@@ -82,7 +77,6 @@
         m_name = name;
         m_value = value;
         m_custom = custom;
-        m_encoding = encoding;
         m_xmpFileId = xmpFileId;
     }
     
@@ -127,8 +121,6 @@
     node->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_name UTF8String]));
     
     node->AddAttribute(new XMPAttribute((char *)"value", (char *)[m_value UTF8String]));
-    
-    node->AddAttribute(new XMPAttribute((char *)"encoding", (char *)[m_encoding UTF8String]));
     
     node->AddAttribute(new XMPAttribute((char *)"custom", m_custom));
     

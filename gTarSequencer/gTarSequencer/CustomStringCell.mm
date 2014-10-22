@@ -181,42 +181,7 @@
 
 - (void)playAudioForSampleFile
 {
-
     [delegate playAudioForFile:sampleFilename withCustomPath:useCustomPath xmpId:xmpId];
-    /*
-    NSString * path;
-    
-    if(sampleFilename == nil){
-        DLog(@"Trying to play nil file");
-        return;
-    }
-    
-    sampleFilename = [sampleFilename stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    if(useCustomPath){
-        
-        // different filetype and location
-        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Samples/" stringByAppendingString:[sampleFilename stringByAppendingString:@".wav"]]];
-        
-    }else{
-        
-        path = [[NSBundle mainBundle] pathForResource:sampleFilename ofType:@"wav"];
-    }
-    
-    if(path == nil){
-        
-        DLog(@"ERROR path is nil for sampleFilename %@",sampleFilename);
-        return;
-    }
-    
-    NSError * error = nil;
-    NSURL * url = [NSURL fileURLWithPath:path];
-    
-    self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    
-    [self.audio play];
-     */
 }
 
 @end

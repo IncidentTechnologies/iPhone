@@ -7,7 +7,6 @@
 //
 
 #import <AppData.h>
-#import <AVFoundation/AVAudioPlayer.h>
 #import "UIKnob.h"
 
 #define NUM_SEQUENCE_NOTES 8

@@ -1247,13 +1247,6 @@
         
         DLog(@"Play record playback");
         
-        //NSURL * url = [NSURL fileURLWithPath:sessionFilepath];
-        
-        //NSError * error;
-        //audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        //audioPlayer.numberOfLoops = 0;
-        //audioPlayer.delegate = self;
-        
         isAudioPlaying = YES;
         
         [self initSongModel];
@@ -1264,23 +1257,29 @@
     }
     
     [delegate startSoundMaster];
-    [self performSelectorInBackground:@selector(startBackgroundLoop:) withObject:[NSNumber numberWithFloat:SECONDS_PER_EVENT_LOOP]];
     
-    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-    
-    //[audioPlayer play];
-    
+    secondsPerBeat = 1.0/(4.0*loadedTempo/SECONDS_PER_MIN);
+    [self performSelectorInBackground:@selector(startBackgroundLoop:) withObject:[NSNumber numberWithFloat:secondsPerBeat]];
+        
 }
 
 - (void)startBackgroundLoop:(NSNumber *)spb
 {
     DLog(@"Starting Background Loop with %f seconds per beat",[spb floatValue]);
 
-    NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
-
-    [self startMainEventLoop:[spb floatValue]];
-    
-    [runLoop run];
+    if(playTimer == nil){
+        
+        @synchronized(playTimer){
+            [playTimer invalidate];
+            
+            NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
+            
+            playTimer = [NSTimer scheduledTimerWithTimeInterval:[spb floatValue] target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
+            
+            [runLoop run];
+        }
+        
+    }
 }
 
 -(void)pauseRecordPlayback
@@ -1288,12 +1287,17 @@
     [delegate stopSoundMaster];
     [self stopMainEventLoop];
     
-    //[audioPlayer pause];
+    [playTimer invalidate];
+    playTimer = nil;
+    
     [self pausePlaybandAnimation];
 }
 
 - (void)stopRecordPlayback
 {
+    [playTimer invalidate];
+    playTimer = nil;
+    
     [self stopRecordPlaybackAnimatePlayband:YES];
 }
 
@@ -1304,7 +1308,6 @@
     
     isAudioPlaying = NO;
     [self stopPlaybandWithAnimation:animatePlayband];
-    //[audioPlayer stop];
     [delegate recordPlaybackDidEnd];
 }
 
@@ -1346,13 +1349,7 @@
 
 - (void)mainEventLoop
 {
-    [songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP];
-}
-
--(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
-    DLog(@"Audio player did finish");
-    [self stopRecordPlayback];
+    [songModel incrementTimeSerialAccess:0.25]; // quarter beat
 }
 
 - (void)saveRecordingSongToXmp

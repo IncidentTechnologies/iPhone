@@ -9,7 +9,10 @@
 #import "AppData.h"
 #import "SoundMaster.h"
 #import "UILevelSlider.h"
+//#import "NSInstrument.h"
+
 @class AudioController;
+extern OphoMaster * g_ophoMaster;
 
 // Serves as a wrapper class for the AudioController, because
 //      whoever #imports the AC (or a file that #imports the AC)
@@ -19,6 +22,8 @@
 {
     int instIndex;
 }
+
+- (id)initWithInstrumentId:(NSInteger)instId andName:(NSString *)instName andSamples:(NSArray *)instSamples andSoundMaster:(SoundMaster *)soundMaster;
 
 - (id)initWithStringSamples:(NSArray *)stringSet andInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster;
 

@@ -51,10 +51,11 @@
 // Load state from disk
 - (void)initTempTutorialSequence
 {
-    sequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:YES];
+    /*sequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:YES];
     [self setInstrumentsFromData];
     [delegate setTempo:sequence.m_tempo];
     [delegate setVolume:sequence.m_volume];
+     */
 }
 
 - (void)initSequenceWithFilename:(NSString *)filename
@@ -338,14 +339,16 @@
                 
                 NSMutableArray * stringPaths = [[NSMutableArray alloc] init];
                 NSMutableArray * stringSet = [[NSMutableArray alloc] init];
+                NSMutableArray * stringIdSet = [[NSMutableArray alloc] init];
                 
                 for(NSSample * sample in inst.m_sampler.m_samples){
                     NSString * isCustom = (sample.m_custom) ? @"Custom" : @"Default";
                     [stringSet addObject:sample.m_name];
                     [stringPaths addObject:isCustom];
+                    [stringIdSet addObject:[NSNumber numberWithInt:sample.m_xmpFileId]];
                 }
                 
-                [inst.m_sampler initAudioWithInstrument:inst.m_id andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths];
+                [inst.m_sampler initAudioWithInstrument:inst.m_id andName:inst.m_name andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths stringIds:stringIdSet];
                 [dictionariesToRemove addObject:dict];
             }
         }
@@ -492,7 +495,7 @@
 
 #pragma mark - Adding instruments
 
-- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andIsCustom:(BOOL)isCustom
+- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andStringIds:(NSArray *)stringIds andIsCustom:(BOOL)isCustom
 {
     NSTrack * newTrack = [[NSTrack alloc] initWithName:instName level:1.0 muted:NO];
     
@@ -507,7 +510,7 @@
     newInstrument.m_custom = isCustom;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [newInstrument.m_sampler initAudioWithInstrument:index andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths];
+        [newInstrument.m_sampler initAudioWithInstrument:index andName:newInstrument.m_name andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths stringIds:stringIds];
     });
     
     //[instruments addObject:newInstrument];
@@ -898,9 +901,10 @@
         NSString * iconName = [dict objectForKey:@"IconName"];
         NSArray * stringSet = [dict objectForKey:@"Strings"];
         NSArray * stringPaths = [dict objectForKey:@"StringPaths"];
+        NSArray * stringIds = [dict objectForKey:@"StringXmpIds"];
         NSNumber * isCustom = [dict objectForKey:@"Custom"];
         
-        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet andStringPaths:stringPaths andIsCustom:[isCustom boolValue]];
+        [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet andStringPaths:stringPaths andStringIds:stringIds andIsCustom:[isCustom boolValue]];
     }
 }
 

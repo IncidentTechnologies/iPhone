@@ -8,9 +8,6 @@
 
 #import "PlayControlViewController.h"
 
-#define DEFAULT_TEMPO 120
-#define SECONDS_PER_MIN 60.0
-
 @implementation PlayControlViewController
 
 @synthesize tempoSlider;

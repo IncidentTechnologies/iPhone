@@ -65,7 +65,6 @@
     NSTimer * playBarTimer;
     NSTimer * playResetTimer;
     NSTimer * audioLoadTimer;
-    //NSTimer * recordProcessingTimer;
     
     int recordProcessingCounter;
     
