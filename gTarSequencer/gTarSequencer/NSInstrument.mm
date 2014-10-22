@@ -176,7 +176,7 @@
     node = new XMPNode((char *)[@"xmp" UTF8String],NULL);
     //custom = new XMPNode((char *)[@"custom" UTF8String],NULL);
     //node->AddChild(custom);
-    custom->AddChild([self convertToSequenceXmp]);
+    node->AddChild([self convertToSequenceXmp]);
     
     XMPTree tree = NULL;
     

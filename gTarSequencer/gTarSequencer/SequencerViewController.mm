@@ -1577,6 +1577,11 @@
     }];
 }
 
+- (void)instrumentListLoaded
+{
+    [seqSetViewController initInstrumentOptions];
+}
+
 #pragma mark - FTU Tutorial
 
 -(void)relaunchFTUTutorial

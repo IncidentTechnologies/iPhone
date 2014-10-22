@@ -156,7 +156,7 @@
         NSString * name = [dict objectForKey:@"Name"];
         [names addObject:name];
         
-        NSString * iconName = [dict objectForKey:@"IconName"];
+        NSString * iconName = @"Icon_Trumpet";//[dict objectForKey:@"IconName"]
         
         UIImage * normalImage = [UIImage imageNamed:iconName];
         [images addObject:normalImage];

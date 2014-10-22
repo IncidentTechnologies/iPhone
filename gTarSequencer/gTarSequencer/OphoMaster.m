@@ -546,6 +546,8 @@ extern NSUser * g_loggedInUser;
     NSArray * xmpList = cloudResponse.m_xmpList;
     
     [self buildSortedXmpList:xmpList withIds:instrumentIdSet withData:instrumentLoadSet withDates:instrumentDateSet];
+    
+    [loadingDelegate instrumentListLoaded];
 }
 
 - (void)requestGetXmpSequenceListCallback:(CloudResponse *)cloudResponse

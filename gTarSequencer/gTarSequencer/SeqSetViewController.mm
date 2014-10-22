@@ -32,13 +32,14 @@
         soundMaster = [[SoundMaster alloc] init];
         
         // get instruments
-        [self retrieveInstrumentOptions];
+/*        [self retrieveInstrumentOptions];
         
         // load instrument selector
         [self initInstrumentSelector];
         
         // load custom instrument selector
         [self initCustomInstrumentSelector];
+        */
         
         self.tableView.bounces = NO;
         [self turnContentDrawingOn];
@@ -278,9 +279,25 @@
 
 #pragma mark Instruments Data
 
-- (void)retrieveInstrumentOptions
+- (void)initInstrumentOptions
 {
     
+    // get instruments
+    [self retrieveInstrumentOptions];
+    
+    // load instrument selector
+    [self initInstrumentSelector];
+    
+    // load custom instrument selector
+    [self initCustomInstrumentSelector];
+    
+    [instrumentTable reloadData];
+    
+}
+
+
+- (void)retrieveInstrumentOptions
+{
     // Init
     customInstrumentOptions = [[NSMutableArray alloc] init];
     masterInstrumentOptions = [[NSMutableArray alloc] init];
@@ -288,27 +305,31 @@
     
     NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:sequencerInstrumentsPath];
     
-    // Check for the local custom instrument list
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    customInstrumentsPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"customSequencerInstruments.plist"];
     
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // Get instrument list from the server
+    NSDictionary * customInstDictionary = [g_ophoMaster getInstrumentList];
+    NSArray * customInstIds = [customInstDictionary objectForKey:OPHO_LIST_IDS];
+    NSArray * customInstNames = [customInstDictionary objectForKey:OPHO_LIST_NAMES];
     
-    // If it exists append it to the regular list
-    if([fileManager fileExistsAtPath:customInstrumentsPath]){
+    [masterInstrumentOptions addObjectsFromArray:[plistDictionary objectForKey:@"Instruments"]];
+    
+    if([customInstIds count] > 0){
         DLog(@"The custom instruments plist exists");
         
-        NSMutableDictionary * customDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:customInstrumentsPath];
+        for(int i = 0; i < [customInstIds count]; i++){
+            
+            NSMutableDictionary * instDict = [[NSMutableDictionary alloc] init];
+            [instDict setObject:customInstIds[i] forKey:@"Index"];
+            [instDict setObject:customInstNames[i] forKey:@"Name"];
+            [instDict setObject:[NSNumber numberWithBool:true] forKey:@"Custom"];
+            
+            [customInstrumentOptions addObject:instDict];
+            [masterInstrumentOptions addObject:instDict];
+            
+        }
         
-        [customInstrumentOptions addObjectsFromArray:[customDictionary objectForKey:@"Instruments"]];
+        DLog(@"Custom Inst Dictionary is %@",customInstDictionary);
         
-        [masterInstrumentOptions addObjectsFromArray:[plistDictionary objectForKey:@"Instruments"]];
-        [masterInstrumentOptions addObjectsFromArray:customInstrumentOptions];
-        
-        
-    }else{
-        DLog(@"The custom instruments plist does not exist");
-        masterInstrumentOptions = [plistDictionary objectForKey:@"Instruments"];
     }
     
     [self setRemainingInstrumentOptionsFromMasterOptions];
@@ -495,25 +516,42 @@
 
 #pragma mark - Adding instruments
 
-- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andStringIds:(NSArray *)stringIds andIsCustom:(BOOL)isCustom
+- (void)addNewInstrumentWithXmpId:(NSInteger)xmpId
 {
-    NSTrack * newTrack = [[NSTrack alloc] initWithName:instName level:1.0 muted:NO];
+    [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(addNewInstrumentFromServer:)];
     
+}
+
+- (void)addNewInstrumentFromServer:(CloudResponse *)cloudResponse
+{
+    DLog(@"Request Load Instrument XMP Callback");
+    
+    XmlDom * instrumentXmp = [cloudResponse.m_xmpDom getChildWithName:@"instrument"];
+    
+    NSInstrument * instrument = [[NSInstrument alloc] initWithXmlDom:instrumentXmp];
+    
+    NSMutableArray * stringPaths = [[NSMutableArray alloc] init];
+    NSMutableArray * stringSet = [[NSMutableArray alloc] init];
+    NSMutableArray * stringIdSet = [[NSMutableArray alloc] init];
+    
+    for(NSSample * sample in instrument.m_sampler.m_samples){
+        NSString * isCustom = (sample.m_custom) ? @"Custom" : @"Default";
+        [stringSet addObject:sample.m_name];
+        [stringPaths addObject:isCustom];
+        [stringIdSet addObject:[NSNumber numberWithInt:sample.m_xmpFileId]];
+    }
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [instrument.m_sampler initAudioWithInstrument:instrument.m_xmpid andName:instrument.m_name andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths stringIds:stringIdSet];
+    });
+    
+    
+    NSTrack * newTrack = [[NSTrack alloc] initWithName:instrument.m_name level:1.0 muted:NO];
+    
+    newTrack.m_instrument = instrument;
     
     // Add Track
     [sequence addTrack:newTrack];
-
-    NSInstrument * newInstrument = newTrack.m_instrument;
-    newInstrument.m_id = index;
-    newInstrument.m_name= instName;
-    newInstrument.m_iconName = iconName;
-    newInstrument.m_custom = isCustom;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [newInstrument.m_sampler initAudioWithInstrument:index andName:newInstrument.m_name andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths stringIds:stringIds];
-    });
-    
-    //[instruments addObject:newInstrument];
     
     [self selectInstrument:[sequence trackCount] - 1];
     
@@ -543,6 +581,55 @@
     [self saveStateToDiskWithForce:YES];
 }
 
+/*
+- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andStringIds:(NSArray *)stringIds andIsCustom:(BOOL)isCustom
+{
+    NSTrack * newTrack = [[NSTrack alloc] initWithName:instName level:1.0 muted:NO];
+    
+    
+    // Add Track
+    [sequence addTrack:newTrack];
+
+    NSInstrument * newInstrument = newTrack.m_instrument;
+    newInstrument.m_id = index;
+    newInstrument.m_name= instName;
+    newInstrument.m_iconName = iconName;
+    newInstrument.m_custom = isCustom;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [newInstrument.m_sampler initAudioWithInstrument:index andName:newInstrument.m_name andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths stringIds:stringIds];
+    });
+    
+    [self selectInstrument:[sequence trackCount] - 1];
+    
+    // insert cell:
+    if ([sequence trackCount] == 1){
+        
+        [delegate turnOffGuitarEffects];
+        
+        // Reloading data forcibly resizes the add inst button
+        [instrumentTable reloadData];
+        
+    }else{
+        
+        // If there are no more options in the options array, then reload the table to get rid of the +inst cell.
+        if ([remainingInstrumentOptions count] == 0){
+            [instrumentTable reloadData];
+        }else{
+            [instrumentTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sequence trackCount] -1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+            
+            if(![delegate checkIsPlaying]){
+                [self updateAllVisibleCells];
+            }
+        }
+    }
+    
+    [delegate numInstrumentsDidChange:[sequence trackCount]];
+    [self saveStateToDiskWithForce:YES];
+}
+*/
+ 
+ 
 #pragma mark Table View Protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -897,6 +984,10 @@
         [remainingInstrumentOptions removeObjectAtIndex:indexSelected];
         
         NSNumber * instIndex = [dict objectForKey:@"Index"];
+        
+        [self addNewInstrumentWithXmpId:[instIndex intValue]];
+        
+        /*
         NSString * instName = [dict objectForKey:@"Name"];
         NSString * iconName = [dict objectForKey:@"IconName"];
         NSArray * stringSet = [dict objectForKey:@"Strings"];
@@ -905,6 +996,7 @@
         NSNumber * isCustom = [dict objectForKey:@"Custom"];
         
         [self addNewInstrumentWithIndex:[instIndex intValue] andName:instName andIconName:iconName andStringSet:stringSet andStringPaths:stringPaths andStringIds:stringIds andIsCustom:[isCustom boolValue]];
+         */
     }
 }
 
@@ -915,6 +1007,8 @@
         // Remove that instrument from the array:
         NSDictionary * instOption = [remainingInstrumentOptions objectAtIndex:indexSelected];
         NSNumber * instIndex = [instOption objectForKey:@"Index"];
+        
+        [g_ophoMaster deleteWithId:[instIndex intValue]];
         
         DLog(@"Remove instrument at selected index %i",indexSelected);
         
@@ -937,7 +1031,7 @@
         instrumentSelector.options = remainingInstrumentOptions;
         
         // Resave pList
-        [self saveCustomInstrumentToPlist:customInstrumentOptions];
+        //[self saveCustomInstrumentToPlist:customInstrumentOptions];
         
     }
 }
@@ -1012,6 +1106,18 @@
 // save a new instrument
 - (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet stringIds:(NSArray *)stringIdSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName
 {
+    NSInstrument * instrument = [[NSInstrument alloc] initWithName:instName id:0 iconName:iconName isCustom:TRUE];
+    
+    for(int i = 0; i < [stringSet count]; i++){
+        NSSample * sample = [[NSSample alloc] initWithName:stringSet[i] custom:[stringPaths[i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i] xmpFileId:[stringIdSet[i] intValue]];
+        
+        [instrument.m_sampler addSample:sample];
+    }
+    
+    [g_ophoMaster saveInstrument:instrument];
+    
+    /*
+    
     NSNumber * newIndex = [NSNumber numberWithInt:[self getCustomInstrumentsNewIndex]];
     
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
@@ -1028,27 +1134,10 @@
     [customInstrumentOptions addObject:dict];
     
     [self saveCustomInstrumentToPlist:customInstrumentOptions];
+    
+    */
+    
     [self closeCustomInstrumentSelectorAndScroll:NO];
-}
-
-- (int)getCustomInstrumentsNewIndex
-{
-    
-    if([customInstrumentOptions count] > 0){
-        NSMutableDictionary * lastInst = [customInstrumentOptions lastObject];
-        return [[lastInst objectForKey:@"Index"] intValue]+1;
-    }else{
-        return [masterInstrumentOptions count];
-    }
-}
-
-- (void)saveCustomInstrumentToPlist:(NSArray *)options
-{
-    
-    NSMutableDictionary * wrapperDict = [[NSMutableDictionary alloc] init];
-    [wrapperDict setValue:options forKey:@"Instruments"];
-    
-    [wrapperDict writeToFile:customInstrumentsPath atomically:YES];
 }
 
 

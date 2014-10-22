@@ -41,6 +41,7 @@
 
 - (void)loadingBegan;
 - (void)loadingEnded;
+- (void)instrumentListLoaded;
 
 @end
 

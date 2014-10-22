@@ -89,6 +89,7 @@ extern OphoMaster * g_ophoMaster;
 
 @property (nonatomic) BOOL isFirstLaunch;
 
+- (void)initInstrumentOptions;
 
 - (void)startSoundMaster;
 - (void)stopSoundMaster;
