@@ -8,6 +8,6 @@
       location = "group:../gTarAppCore/gTarAppCore/gTarAppCore.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:gTarPlay/gTarPlay.xcodeproj">
+      location = "group:keysPlay/keysPlay.xcodeproj">
    </FileRef>
 </Workspace>

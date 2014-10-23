@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9D335F42-89B2-45C0-8497-F3C8F4D7C094</string>
+	<key>IDESourceControlProjectName</key>
+	<string>keysPlay</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A6F490F1D9601CEC3F9BF0306F5B8BB7D28DA10F</key>
+		<string>https://github.com/IncidentTechnologies/IncidentPlatform.git</string>
+		<key>C7E848553941E33F073157F9182D2ADDA0C73264</key>
+		<string>https://github.com/IncidentTechnologies/iPhone.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>keysPlay/keysPlay.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A6F490F1D9601CEC3F9BF0306F5B8BB7D28DA10F</key>
+		<string>../../../IncidentPlatform</string>
+		<key>C7E848553941E33F073157F9182D2ADDA0C73264</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/IncidentTechnologies/iPhone.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C7E848553941E33F073157F9182D2ADDA0C73264</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A6F490F1D9601CEC3F9BF0306F5B8BB7D28DA10F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IncidentPlatform</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C7E848553941E33F073157F9182D2ADDA0C73264</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Keys</string>
+		</dict>
+	</array>
+</dict>
+</plist>
