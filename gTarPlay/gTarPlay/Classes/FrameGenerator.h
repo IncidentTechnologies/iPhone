@@ -14,5 +14,6 @@
 - (float)getFullscreenWidth;
 - (float)getFullscreenHeight;
 - (BOOL)isScreenLarge;
+- (BOOL)startOffscreen;
 
 @end

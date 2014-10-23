@@ -650,7 +650,9 @@ extern GtarController *g_gtarController;
     // Disable instrument menu until instrument has loaded
     [_instrumentButton setEnabled:NO];
     
-    [self presentViewController:_songOptionsModal animated:YES completion:nil];
+    [_songOptionsModal setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    
+    [self presentViewController:_songOptionsModal animated:NO completion:nil];
 }
 
 // This function catches any selections

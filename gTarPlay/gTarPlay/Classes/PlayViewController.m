@@ -1718,7 +1718,7 @@ extern UserController * g_userController;
 #pragma mark - Main event loop
 
 - (void)mainEventLoop {
-    /*
+    
 #ifdef Debug_BUILD
     if(g_gtarController.connected) {
         
@@ -1755,7 +1755,7 @@ extern UserController * g_userController;
         }
     }
 #endif
-     */
+    
     
     // Advance song model and recorder
     
@@ -3018,9 +3018,9 @@ extern UserController * g_userController;
     
     // Debug
 #ifdef Debug_BUILD
-    //if(g_gtarController.connected){
-        //_skipNotes = YES;
-    //}
+    if(g_gtarController.connected){
+        _skipNotes = YES;
+    }
 #endif
 }
 

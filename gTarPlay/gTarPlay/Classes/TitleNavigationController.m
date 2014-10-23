@@ -918,7 +918,10 @@ extern Facebook * g_facebook;
 {
     
     [tableView setSeparatorInset:UIEdgeInsetsZero];
-    [tableView setLayoutMargins:UIEdgeInsetsZero];
+    
+    if([tableView respondsToSelector:@selector(setLayoutMargins:)]){
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
     
     static NSString * CellIdentifier = @"ActivityFeedCell";
 	ActivityFeedCell *tempCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -937,7 +940,10 @@ extern Facebook * g_facebook;
     // Clear these in case this cell was previously selected
     tempCell.highlighted = NO;
     tempCell.selected = NO;
-    tempCell.layoutMargins = UIEdgeInsetsZero;
+    
+    if([tempCell respondsToSelector:@selector(setLayoutMargins:)]){
+        tempCell.layoutMargins = UIEdgeInsetsZero;
+    }
     
     NSInteger row = [indexPath row];
     
@@ -1068,7 +1074,9 @@ extern Facebook * g_facebook;
     
     _sessionViewController.userSongSession = session;
     
-    [self presentViewController:_sessionViewController animated:YES completion:^{ [cell.activityView stopAnimating]; }];
+    [_sessionViewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    
+    [self presentViewController:_sessionViewController animated:NO completion:^{ [cell.activityView stopAnimating]; _displayingCell = NO; }];
     
 }
 
@@ -1276,9 +1284,11 @@ extern Facebook * g_facebook;
         
         rpvc.delegate = self;
         
+        [rpvc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        
         // if anything is up, hide it, then show register prompt
         [self dismissViewControllerAnimated:NO completion:NULL];
-        [self presentViewController:rpvc animated:YES completion:^(void){}];
+        [self presentViewController:rpvc animated:NO completion:^(void){}];
     }
 }
 

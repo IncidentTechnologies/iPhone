@@ -238,11 +238,6 @@ UserController * g_userController;
     return [g_facebook handleOpenURL:url]; 
 }
 
-- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
-{
-    return UIInterfaceOrientationMaskLandscape;
-}
-
 
 #pragma mark -
 #pragma mark Globals

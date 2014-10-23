@@ -598,7 +598,9 @@ extern FileController *g_fileController;
     // Disable instrument menu until instrument has loaded
     [_instrumentButton setEnabled:NO];
     
-    [self presentViewController:_songOptionsModal animated:YES completion:nil];
+    [_songOptionsModal setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    
+    [self presentViewController:_songOptionsModal animated:NO completion:nil];
 }
 
 - (void)playerLoaded
@@ -675,7 +677,9 @@ extern FileController *g_fileController;
     [invocation setSelector:@selector(playerLoaded)];
     
     _playerViewController.loadedInvocation = invocation;
-    
+     
+     [_songOptionsModal setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+     
     [self presentViewController:_songOptionsModal animated:YES completion:nil];
     */
     

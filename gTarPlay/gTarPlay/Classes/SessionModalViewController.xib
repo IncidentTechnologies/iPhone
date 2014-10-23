@@ -27,16 +27,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="178" userLabel="FauxContentView">
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="178" userLabel="FauxContentView">
                     <rect key="frame" x="30" y="30" width="420" height="290"/>
                     <subviews>
-                        <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86" userLabel="ContentView">
+                        <view autoresizesSubviews="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="86" userLabel="ContentView">
                             <rect key="frame" x="0.0" y="0.0" width="420" height="140"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="139" userLabel="TopContainer">
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="139" userLabel="TopContainer">
                                     <rect key="frame" x="8" y="46" width="404" height="86"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="140" userLabel="SongPlayerView">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="140" userLabel="SongPlayerView">
                                             <rect key="frame" x="0.0" y="13" width="404" height="60"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <constraints>
@@ -51,7 +51,7 @@
                                         <constraint firstItem="140" firstAttribute="centerY" secondItem="139" secondAttribute="centerY" id="143"/>
                                     </constraints>
                                 </view>
-                                <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96" userLabel="BlackButton">
+                                <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96" userLabel="BlackButton">
                                     <rect key="frame" x="8" y="0.0" width="404" height="132"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -70,7 +70,7 @@
                                         <action selector="blackButtonClicked:" destination="-1" eventType="touchUpInside" id="175"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="101" userLabel="MenuButton" customClass="IconButton">
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="101" userLabel="MenuButton" customClass="IconButton">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="46"/>
                                     <color key="backgroundColor" red="0.0" green="0.62745098039215685" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -84,7 +84,7 @@
                                         <action selector="closeButtonClicked:" destination="-1" eventType="touchUpInside" id="165"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="100" userLabel="VolumeButton" customClass="IconButton">
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="100" userLabel="VolumeButton" customClass="IconButton">
                                     <rect key="frame" x="100" y="0.0" width="100" height="46"/>
                                     <color key="backgroundColor" red="0.65098039215686276" green="0.79607843137254897" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -98,7 +98,7 @@
                                         <action selector="volumeButtonClicked:" destination="-1" eventType="touchUpInside" id="172"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99" userLabel="ShortcutButton" customClass="IconButton">
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99" userLabel="ShortcutButton" customClass="IconButton">
                                     <rect key="frame" x="200" y="0.0" width="220" height="46"/>
                                     <color key="backgroundColor" red="0.92941176470588238" green="0.51764705882352935" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -112,11 +112,11 @@
                                         <action selector="shortcutButtonClicked:" destination="-1" eventType="touchUpInside" id="173"/>
                                     </connections>
                                 </button>
-                                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="102" userLabel="VolumeView">
+                                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="102" userLabel="VolumeView">
                                     <rect key="frame" x="100" y="46" width="100" height="244"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97" userLabel="InstrumentView">
+                                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97" userLabel="InstrumentView">
                                     <rect key="frame" x="200" y="46" width="220" height="244"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -165,77 +165,16 @@
                 <constraint firstItem="87" firstAttribute="leading" secondItem="85" secondAttribute="leading" id="89"/>
                 <constraint firstItem="87" firstAttribute="trailing" secondItem="85" secondAttribute="trailing" id="90"/>
                 <constraint firstItem="87" firstAttribute="bottom" secondItem="85" secondAttribute="bottom" id="91"/>
-                <constraint firstItem="178" firstAttribute="bottom" secondItem="85" secondAttribute="bottom" id="196"/>
                 <constraint firstItem="178" firstAttribute="centerX" secondItem="87" secondAttribute="centerX" id="197"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
-        <view contentMode="scaleToFill" id="138" userLabel="LikeContainer">
-            <rect key="frame" x="0.0" y="0.0" width="404" height="45"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="151">
-                    <rect key="frame" x="204" y="4" width="196" height="37"/>
-                    <color key="backgroundColor" red="0.60392156860000001" green="0.72156862749999995" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="196" id="152"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                    <state key="normal" title="COMMENT">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="0.2240248631" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="145">
-                    <rect key="frame" x="4" y="4" width="196" height="37"/>
-                    <color key="backgroundColor" red="0.60392156860000001" green="0.72156862749999995" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="37" id="153"/>
-                        <constraint firstAttribute="width" constant="196" id="154"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                    <inset key="contentEdgeInsets" minX="25" minY="6" maxX="65" maxY="6"/>
-                    <inset key="titleEdgeInsets" minX="-110" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="56" minY="0.0" maxX="19" maxY="0.0"/>
-                    <state key="normal" title="999" image="LikeOFF.png">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" image="LikeON.png"/>
-                    <state key="highlighted">
-                        <color key="titleColor" white="0.2240248631" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-            </subviews>
-            <color key="backgroundColor" red="0.46666666670000001" green="0.56862745100000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-            <constraints>
-                <constraint firstItem="145" firstAttribute="bottom" secondItem="151" secondAttribute="bottom" id="146"/>
-                <constraint firstItem="145" firstAttribute="top" secondItem="151" secondAttribute="top" id="147"/>
-                <constraint firstItem="145" firstAttribute="leading" secondItem="138" secondAttribute="leading" constant="4" id="148"/>
-                <constraint firstAttribute="trailing" secondItem="151" secondAttribute="trailing" constant="4" id="149"/>
-                <constraint firstItem="145" firstAttribute="centerY" secondItem="138" secondAttribute="centerY" id="192"/>
-            </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-        </view>
-        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="98" userLabel="Comment Table View">
-            <rect key="frame" x="0.0" y="0.0" width="404" height="110"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-        </tableView>
     </objects>
     <resources>
         <image name="CloseXButton.png" width="57" height="58"/>
         <image name="InstrumentIcon.png" width="67" height="60"/>
-        <image name="LikeOFF.png" width="75" height="75"/>
-        <image name="LikeON.png" width="75" height="75"/>
         <image name="VolumeIcon.png" width="57" height="49"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -33,6 +33,7 @@ extern FileController *g_fileController;
         [g_soundMaster start];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
+        
     }
     return self;
 }
@@ -58,6 +59,7 @@ extern FileController *g_fileController;
     _instrumentViewController = [[SlidingInstrumentViewController alloc] initWithNibName:nil bundle:nil];
     [_instrumentViewController setDelegate:self];
     [_instrumentViewController attachToSuperview:self.contentView withFrame:_instrumentView.frame];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -90,6 +92,12 @@ extern FileController *g_fileController;
     
     [self updateAudioState:isSpeakerRoute];
     
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -98,6 +106,7 @@ extern FileController *g_fileController;
     
 //    [_volumeViewController setFrame:_volumeView.frame];
 //    [_instrumentViewController setFrame:_instrumentView.frame];
+
 }
 
 - (void)didReceiveMemoryWarning

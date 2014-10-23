@@ -318,7 +318,10 @@ extern Facebook *g_facebook;
 {
     
     [tableView setSeparatorInset:UIEdgeInsetsZero];
-    [tableView setLayoutMargins:UIEdgeInsetsZero];
+    
+    if([tableView respondsToSelector:@selector(setLayoutMargins:)]){
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
     
     NSInteger row = [indexPath row];
     
@@ -364,7 +367,9 @@ extern Facebook *g_facebook;
         
         [tempCell updateCell];
         
-        tempCell.layoutMargins = UIEdgeInsetsZero;
+        if([tempCell respondsToSelector:@selector(setLayoutMargins:)]){
+            tempCell.layoutMargins = UIEdgeInsetsZero;
+        }
         
         return tempCell;
     }
@@ -404,7 +409,9 @@ extern Facebook *g_facebook;
         
         [cell updateCell];
         
-        cell.layoutMargins = UIEdgeInsetsZero;
+        if([cell respondsToSelector:@selector(setLayoutMargins:)]){
+            cell.layoutMargins = UIEdgeInsetsZero;
+        }
         
         return cell;
     }
@@ -429,7 +436,9 @@ extern Facebook *g_facebook;
     
     [cell updateCell];
     
-    cell.layoutMargins = UIEdgeInsetsZero;
+    if([cell respondsToSelector:@selector(setLayoutMargins:)]){
+        cell.layoutMargins = UIEdgeInsetsZero;
+    }
     
     return cell;
 }
@@ -467,7 +476,9 @@ extern Facebook *g_facebook;
     
     //[tempCell updateCell];
     
-    tempCell.layoutMargins = UIEdgeInsetsZero;
+    if([tempCell respondsToSelector:@selector(setLayoutMargins:)]){
+        tempCell.layoutMargins = UIEdgeInsetsZero;
+    }
     
     return tempCell;
 }
@@ -494,7 +505,10 @@ extern Facebook *g_facebook;
         
         _sessionViewController.userSongSession = session;
         
-        [self presentViewController:_sessionViewController animated:YES completion:^{
+        
+        [_sessionViewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    
+        [self presentViewController:_sessionViewController animated:NO completion:^{
 //            [cell.activityView stopAnimating];
         }];
     }

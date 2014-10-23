@@ -49,4 +49,14 @@
     }
 }
 
+- (BOOL)startOffscreen
+{
+    
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1) {
+        return TRUE;
+    }else{
+        return FALSE;
+    }
+}
+
 @end

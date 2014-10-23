@@ -31,7 +31,6 @@
     self = [super initWithCoder:aDecoder];
     if ( self )
     {
-        // Custom initialization
     }
     return self;
 }
@@ -41,6 +40,20 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // Needs to be on screen to measure components
+    
+    // Custom initialization
+    frameGenerator = [[FrameGenerator alloc] init];
+    
+    double screenWidth = [frameGenerator getFullscreenWidth];
+    double contentWidth = _contentView.frame.size.width;
+    double onY = _contentView.frame.origin.y;
+    double offY = _contentView.frame.size.height;
+    
+    onFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, onY, contentWidth, _contentView.frame.size.height);
+    
+    offFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, offY, contentWidth, _contentView.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,36 +71,40 @@
 {
 }
 
+- (void)viewDidLayoutSubviews
+{
+    // For some reason, in iOS 8+ it needs to start off screen and in iOS 7 this breaks...
+    
+    if([frameGenerator startOffscreen]){
+        [_contentView setFrame:offFrame];
+    }
+}
+
 - (IBAction)closeButtonClicked:(id)sender
 {
     [self startSlideDown];
+    //[self.presentingViewController dismissViewControllerAnimated:NO completion:NULL];
 }
 
 - (void)startSlideUp
 {
+    
     [UIView setAnimationsEnabled:YES];
     
-    // Needs to be on screen to measure components
-    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
-    
-    double screenWidth = [frameGenerator getFullscreenWidth];
-    double contentWidth = _contentView.frame.size.width;
-    
-    onFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, _contentView.frame.origin.y, contentWidth, _contentView.frame.size.height);
-    
-    offFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, _contentView.frame.size.height, contentWidth, _contentView.frame.size.height);
-    
     // Start off screen
-    [_contentView setHidden:NO];
     [_contentView setFrame:offFrame];
+    [_contentView setHidden:NO];
+    
     
     [UIView animateWithDuration:0.3 animations:^(void){
         [_contentView setFrame:onFrame];
     }completion:^(BOOL finished){}];
+    
 }
 
 - (void)startSlideDown
 {
+    
     [UIView setAnimationsEnabled:YES];
     
     // Start on screen
@@ -96,14 +113,17 @@
     [UIView animateWithDuration:0.3 animations:^(void){
         [_contentView setFrame:offFrame];
     }completion:^(BOOL finished){[self endSlideDown];}];
+    
 }
 
 - (void)endSlideDown
 {
+    
     [_contentView setHidden:YES];
     [_contentView setFrame:onFrame];
     
     [self.presentingViewController dismissViewControllerAnimated:NO completion:NULL];
+    
 }
 
 @end

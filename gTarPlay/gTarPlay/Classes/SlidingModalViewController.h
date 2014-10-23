@@ -13,6 +13,8 @@
 {
     CGRect onFrame;
     CGRect offFrame;
+    
+    FrameGenerator * frameGenerator;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;

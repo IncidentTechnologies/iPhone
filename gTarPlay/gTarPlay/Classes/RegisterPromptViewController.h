@@ -19,6 +19,8 @@
 {
     CGRect onFrame;
     CGRect offFrame;
+    
+    FrameGenerator * frameGenerator;
 }
 
 @property (weak, nonatomic) id <RegisterPromptDelegate> delegate;

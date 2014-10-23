@@ -31,6 +31,18 @@
     [super viewDidLoad];
     
     [self localizeViews];
+    
+    frameGenerator = [[FrameGenerator alloc] init];
+    
+    double screenWidth = [frameGenerator getFullscreenWidth];
+    double contentWidth = _contentView.frame.size.width;
+    double onY = _contentView.frame.origin.y;
+    double offY = 1.7*_contentView.frame.size.height;
+    
+    onFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, onY, contentWidth, _contentView.frame.size.height);
+    
+    offFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, 1.7*offY, contentWidth, _contentView.frame.size.height);
+    
 }
 
 
@@ -70,18 +82,18 @@
     
 }
 
+- (void)viewDidLayoutSubviews
+{
+    // For some reason, in iOS 8+ it needs to start off screen and in iOS 7 this breaks...
+    
+    if([frameGenerator startOffscreen]){
+        [_contentView setFrame:offFrame];
+    }
+}
+
 - (void)startSlideUp
 {
     [UIView setAnimationsEnabled:YES];
-    
-    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
-    
-    double screenWidth = [frameGenerator getFullscreenWidth];
-    double contentWidth = _contentView.frame.size.width;
-    
-    onFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, _contentView.frame.origin.y, contentWidth, _contentView.frame.size.height);
-    
-    offFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, 1.7*_contentView.frame.size.height, contentWidth, _contentView.frame.size.height);
     
     [_contentView setFrame:offFrame];
     
