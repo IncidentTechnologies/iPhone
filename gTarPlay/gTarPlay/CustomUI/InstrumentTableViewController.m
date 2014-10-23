@@ -67,6 +67,7 @@
     self.tableView.clearsContextBeforeDrawing = YES;
     
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     
     self.tableView.showsVerticalScrollIndicator = NO;
     
@@ -131,6 +132,8 @@
     [cell.textLabel setFont:[UIFont fontWithName:@"Avenir Next" size:17.0]];
     cell.textLabel.text = NSLocalizedString([self.instruments objectAtIndex:indexPath.row], NULL);  // will localize the string
     cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    
+    cell.layoutMargins = UIEdgeInsetsZero;
     
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(132/255.0) blue:(53/255.0) alpha:1];

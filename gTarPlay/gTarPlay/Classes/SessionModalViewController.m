@@ -63,7 +63,7 @@ extern FileController *g_fileController;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+        
     if ( _userSongSession.m_xmpBlob == nil )
     {
         NSString * xmpBlob = [g_fileController getFileOrDownloadSync:_userSongSession.m_xmpFileId];

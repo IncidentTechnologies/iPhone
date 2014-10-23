@@ -49,6 +49,7 @@
     [self.tableView reloadData];
     
     [tableView setSeparatorInset:UIEdgeInsetsZero];
+    [tableView setLayoutMargins:UIEdgeInsetsZero];
     
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
@@ -95,6 +96,7 @@
     selectionColor.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(162/255.0) blue:(54/255.0) alpha:1];
     cell.selectedBackgroundView = selectionColor;
     
+    cell.layoutMargins = UIEdgeInsetsZero;
     
     // Add on/off button to accessory view (right)
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

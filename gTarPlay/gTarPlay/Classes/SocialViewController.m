@@ -318,6 +318,7 @@ extern Facebook *g_facebook;
 {
     
     [tableView setSeparatorInset:UIEdgeInsetsZero];
+    [tableView setLayoutMargins:UIEdgeInsetsZero];
     
     NSInteger row = [indexPath row];
     
@@ -362,6 +363,9 @@ extern Facebook *g_facebook;
             tempCell.userSongSession = nil;
         
         [tempCell updateCell];
+        
+        tempCell.layoutMargins = UIEdgeInsetsZero;
+        
         return tempCell;
     }
 	else
@@ -400,6 +404,8 @@ extern Facebook *g_facebook;
         
         [cell updateCell];
         
+        cell.layoutMargins = UIEdgeInsetsZero;
+        
         return cell;
     }
 }
@@ -422,6 +428,8 @@ extern Facebook *g_facebook;
     cell.isUser = cell.userProfile.m_userId == g_userController.m_loggedInUserProfile.m_userId;
     
     [cell updateCell];
+    
+    cell.layoutMargins = UIEdgeInsetsZero;
     
     return cell;
 }
@@ -458,6 +466,9 @@ extern Facebook *g_facebook;
     }
     
     //[tempCell updateCell];
+    
+    tempCell.layoutMargins = UIEdgeInsetsZero;
+    
     return tempCell;
 }
 

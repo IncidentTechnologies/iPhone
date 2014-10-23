@@ -918,6 +918,7 @@ extern Facebook * g_facebook;
 {
     
     [tableView setSeparatorInset:UIEdgeInsetsZero];
+    [tableView setLayoutMargins:UIEdgeInsetsZero];
     
     static NSString * CellIdentifier = @"ActivityFeedCell";
 	ActivityFeedCell *tempCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -936,6 +937,7 @@ extern Facebook * g_facebook;
     // Clear these in case this cell was previously selected
     tempCell.highlighted = NO;
     tempCell.selected = NO;
+    tempCell.layoutMargins = UIEdgeInsetsZero;
     
     NSInteger row = [indexPath row];
     

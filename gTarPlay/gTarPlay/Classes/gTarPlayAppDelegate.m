@@ -111,6 +111,10 @@ UserController * g_userController;
     // We need this in other parts of the app to properly display modals with transparent backgrounds
     m_window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
     
+    //application.statusBarOrientation = UIInterfaceOrientationLandscapeLeft;
+    
+    [self.m_window setFrame:[[UIScreen mainScreen] bounds]];
+    [m_navigationController.view setFrame:[[UIScreen mainScreen] bounds]];
     [self.m_window addSubview:m_navigationController.view];
     [self.m_window makeKeyAndVisible];
 
@@ -233,6 +237,12 @@ UserController * g_userController;
 {
     return [g_facebook handleOpenURL:url]; 
 }
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
 
 #pragma mark -
 #pragma mark Globals

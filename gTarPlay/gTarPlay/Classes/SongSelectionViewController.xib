@@ -508,6 +508,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <size key="freeformSize" width="480" height="320"/>
             <connections>
                 <outlet property="blackButtonOrig" destination="997" id="1046"/>
                 <outlet property="contentView" destination="450" id="466"/>
