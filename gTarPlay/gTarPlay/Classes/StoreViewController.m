@@ -103,8 +103,12 @@ extern FileController *g_fileController;
     m_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSearchBar)];
     [self.view addGestureRecognizer:m_tapRecognizer];
     
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    double screenWidth = [frameGenerator getFullscreenWidth];
+    
     // Add shadow and placement to header bar
-    CGRect shadowRect = CGRectMake(0.0f, 0.0f, [[UIScreen mainScreen ] bounds].size.height, _viewTopBar.frame.size.height);
+    CGRect shadowRect = CGRectMake(0.0f, 0.0f, screenWidth, _viewTopBar.frame.size.height);
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:shadowRect];
     _viewTopBar.layer.masksToBounds = NO;
     _viewTopBar.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -116,23 +120,23 @@ extern FileController *g_fileController;
     
     // Add bottom border
     CALayer *bottomBorder = [CALayer layer];
-    bottomBorder.frame = CGRectMake(0.0f, _viewTopBar.frame.size.height, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    bottomBorder.frame = CGRectMake(0.0f, _viewTopBar.frame.size.height, screenWidth + 1.0f, 1.0f);
     bottomBorder.backgroundColor = [UIColor colorWithRed:(102.0f/255.0f) green:(104.0f/255.0f) blue:(105.0f/255.0f) alpha:1.0f].CGColor;
     [_viewTopBar.layer addSublayer:bottomBorder];
     
     // Add divider borders in column headers
     CALayer *bottomBorderHeader = [CALayer layer];
-    bottomBorderHeader.frame = CGRectMake(0.0f, _colBar.frame.size.height, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    bottomBorderHeader.frame = CGRectMake(0.0f, _colBar.frame.size.height, screenWidth + 1.0f, 1.0f);
     bottomBorderHeader.backgroundColor = [UIColor colorWithWhite:(192.0f/255.0f) alpha:1.0f].CGColor;
     [_colBar.layer addSublayer:bottomBorderHeader];
     
     CALayer *borderTitleArtist = [CALayer layer];
-    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 132.0f, 0.0f, 1.0f, _colBar.frame.size.height);
+    borderTitleArtist.frame = CGRectMake(screenWidth - 132.0f, 0.0f, 1.0f, _colBar.frame.size.height);
     borderTitleArtist.backgroundColor = [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f].CGColor;
     [_colBar.layer addSublayer:borderTitleArtist];
     
     CALayer *borderSkill = [CALayer layer];
-    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 66.0f, 0.0f, 1.0f, _colBar.frame.size.height);
+    borderSkill.frame = CGRectMake(screenWidth - 66.0f, 0.0f, 1.0f, _colBar.frame.size.height);
     borderSkill.backgroundColor = [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f].CGColor;
     [_colBar.layer addSublayer:borderSkill];
     

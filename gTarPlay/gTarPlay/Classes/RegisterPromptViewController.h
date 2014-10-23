@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FrameGenerator.h"
 
 @protocol RegisterPromptDelegate <NSObject>
 

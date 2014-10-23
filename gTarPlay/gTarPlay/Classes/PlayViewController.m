@@ -28,6 +28,7 @@
 #import "Mixpanel.h"
 #import "SongDisplayController.h"
 #import "UIButton+Gtar.h"
+#import "FrameGenerator.h"
 
 //#define FRAME_TIMER_DURATION_MED (0.40f) // seconds
 //#define FRAME_TIMER_DURATION_EASY (0.06f) // seconds
@@ -175,8 +176,12 @@ extern UserController * g_userController;
     
     [self localizeViews];
     
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    CGRect fullScreen = CGRectMake(0,0,screenBounds.size.height,screenBounds.size.width);
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    float x = [frameGenerator getFullscreenWidth];
+    float y = [frameGenerator getFullscreenHeight];
+    
+    CGRect fullScreen = CGRectMake(0,0,x,y);
     
     // Setup the menu
     [self.view addSubview:_menuView];
@@ -909,7 +914,8 @@ extern UserController * g_userController;
     
     markerButtons = [[NSMutableArray alloc] init];
     
-    double mapWidth = [[UIScreen mainScreen] bounds].size.height - 34;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    double mapWidth = [frameGenerator getFullscreenWidth] - 34;
     
     NSLog(@"MapWidth is %f",mapWidth);
     

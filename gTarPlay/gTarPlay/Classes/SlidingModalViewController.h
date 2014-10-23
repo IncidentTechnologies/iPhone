@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FrameGenerator.h"
 
 @interface SlidingModalViewController : UIViewController
 {

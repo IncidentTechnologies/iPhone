@@ -47,7 +47,7 @@ UserController * g_userController;
     self = [super init];
     
     if ( self )
-    {
+    {        
         // Init the cloud controller
         g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
         
@@ -79,7 +79,7 @@ UserController * g_userController;
         [g_gtarController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
-        //[NSTimer scheduledTimerWithTimeInterval:3.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
         //[NSTimer scheduledTimerWithTimeInterval:7.0 target:g_gtarController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
 #endif
         

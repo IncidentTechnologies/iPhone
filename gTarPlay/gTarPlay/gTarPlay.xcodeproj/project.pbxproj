@@ -30,6 +30,7 @@
 		6D62271F191D84D9003D8534 /* Metronome.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D62271E191D84D9003D8534 /* Metronome.mp3 */; };
 		6D6C5E2F192C0AD40039A85F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C5E2E192C0AD40039A85F /* SettingsViewController.xib */; };
 		6D6C5E32192C0B1F0039A85F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C5E31192C0B1F0039A85F /* SettingsViewController.m */; };
+		6D7159E019F885FE00138DBB /* FrameGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7159DF19F885FE00138DBB /* FrameGenerator.m */; };
 		6D72F22018FF1EC100D68394 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */; };
 		6D7D46F31919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */; };
 		6D7D46F41919BA0F00EF8C75 /* FullScreenActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46E41919BA0F00EF8C75 /* FullScreenActivityView.m */; };
@@ -1520,6 +1521,8 @@
 		6D6C5E2E192C0AD40039A85F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		6D6C5E30192C0B1F0039A85F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		6D6C5E31192C0B1F0039A85F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		6D7159DE19F885FE00138DBB /* FrameGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameGenerator.h; sourceTree = "<group>"; };
+		6D7159DF19F885FE00138DBB /* FrameGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameGenerator.m; sourceTree = "<group>"; };
 		6D72F21F18FF1EC100D68394 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = FacebookIcon.jpg; path = Resources/Images/Title/FacebookIcon.jpg; sourceTree = SOURCE_ROOT; };
 		6D7D46E11919BA0F00EF8C75 /* ExpandingRoundedRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpandingRoundedRectangleView.h; path = CustomUI/ExpandingRoundedRectangleView.h; sourceTree = SOURCE_ROOT; };
 		6D7D46E21919BA0F00EF8C75 /* ExpandingRoundedRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpandingRoundedRectangleView.m; path = CustomUI/ExpandingRoundedRectangleView.m; sourceTree = SOURCE_ROOT; };
@@ -2574,6 +2577,15 @@
 			name = SettingsViewController;
 			sourceTree = "<group>";
 		};
+		6D7159DD19F885EB00138DBB /* FrameGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				6D7159DE19F885FE00138DBB /* FrameGenerator.h */,
+				6D7159DF19F885FE00138DBB /* FrameGenerator.m */,
+			);
+			name = FrameGenerator;
+			sourceTree = "<group>";
+		};
 		6D7D46E01919B9A200EF8C75 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -3472,6 +3484,7 @@
 		EC0BAD8116F1791300E567A6 /* UI Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				6D7159DD19F885EB00138DBB /* FrameGenerator */,
 				6D7D47021919BB7F00EF8C75 /* TimeFormatter */,
 				6D7D46E01919B9A200EF8C75 /* CustomUI */,
 				9DDB4E7117A2005400499808 /* PlayerViewController */,
@@ -5405,6 +5418,7 @@
 				EC0BAD9E16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */,
 				ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */,
 				ECE9D23A16FBB7C900BB6C53 /* SongListCell.m in Sources */,
+				6D7159E019F885FE00138DBB /* FrameGenerator.m in Sources */,
 				ECE9D24216FBDA9200BB6C53 /* ExpandableSearchBar.m in Sources */,
 				9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */,
 				9DA313831704DDD900CFF104 /* LightsViewController.m in Sources */,
@@ -5617,7 +5631,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E301996F-FDF7-48D8-97F1-611BB2AAEA2D";
+				PROVISIONING_PROFILE = "51c4bb02-c885-4ee2-bd79-21729ffb6642";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5653,7 +5667,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E301996F-FDF7-48D8-97F1-611BB2AAEA2D";
+				PROVISIONING_PROFILE = "51c4bb02-c885-4ee2-bd79-21729ffb6642";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

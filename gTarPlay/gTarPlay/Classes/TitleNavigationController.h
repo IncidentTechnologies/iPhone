@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TestFlight.h"
 
 #import "GtarController.h"
 #import "GtarControllerInternal.h"

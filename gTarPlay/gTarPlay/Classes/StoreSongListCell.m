@@ -158,24 +158,28 @@
 {
     [self setUserInteractionEnabled:YES];
     
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    double screenWidth = [frameGenerator getFullscreenWidth];
+    
     // Add Borders
     CALayer *topBorder = [CALayer layer];
-    topBorder.frame = CGRectMake(0.0f, -1.0f, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    topBorder.frame = CGRectMake(0.0f, -1.0f, screenWidth + 1.0f, 1.0f);
     topBorder.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
     [self.layer addSublayer:topBorder];
     
     CALayer *bottomBorder = [CALayer layer];
-    bottomBorder.frame = CGRectMake(0.0f, 60.0f, [[UIScreen mainScreen] bounds].size.height + 1.0f, 1.0f);
+    bottomBorder.frame = CGRectMake(0.0f, 60.0f, screenWidth+ 1.0f, 1.0f);
     bottomBorder.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
     [self.layer addSublayer:bottomBorder];
     
     CALayer *borderTitleArtist = [CALayer layer];
-    borderTitleArtist.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 132.0f, 0.0f, 1.0f, 60.0f);
+    borderTitleArtist.frame = CGRectMake(screenWidth - 132.0f, 0.0f, 1.0f, 60.0f);
     borderTitleArtist.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
     [self.layer addSublayer:borderTitleArtist];
     
     CALayer *borderSkill = [CALayer layer];
-    borderSkill.frame = CGRectMake([[UIScreen mainScreen] bounds].size.height - 66.0f, 0.0f, 1.0f, 60.0f);
+    borderSkill.frame = CGRectMake(screenWidth - 66.0f, 0.0f, 1.0f, 60.0f);
     borderSkill.backgroundColor = [UIColor colorWithWhite:(212.0f/255.0f) alpha:1.0f].CGColor;
     [self.layer addSublayer:borderSkill];
     

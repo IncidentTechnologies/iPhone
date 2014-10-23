@@ -68,7 +68,9 @@
     [UIView setAnimationsEnabled:YES];
     
     // Needs to be on screen to measure components
-    double screenWidth = [[UIScreen mainScreen] bounds].size.height;
+    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    
+    double screenWidth = [frameGenerator getFullscreenWidth];
     double contentWidth = _contentView.frame.size.width;
     
     onFrame = CGRectMake(screenWidth/2.0 - contentWidth/2.0, _contentView.frame.origin.y, contentWidth, _contentView.frame.size.height);

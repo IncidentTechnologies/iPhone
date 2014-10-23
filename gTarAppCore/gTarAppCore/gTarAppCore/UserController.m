@@ -483,6 +483,7 @@
     
 }
 
+/*
 - (void)requestLoginUserFacebookToken:(NSString*)facebookToken andCallbackObj:(id)obj andCallbackSel:(SEL)sel
 {
     
@@ -508,10 +509,11 @@
     CloudRequest * cloudRequest = [m_cloudController requestFacebookLoginWithToken:facebookToken
                                                                     andCallbackObj:self
                                                                     andCallbackSel:@selector(requestLoginUserFacebookTokenCallback:)];
-    
+ 
     [m_cloudToUserRequest setObject:userRequest forKey:[NSValue valueWithNonretainedObject:cloudRequest]];
-    
+ 
 }
+ */
 
 - (void)requestLoginUserFacebookTokenCallback:(CloudResponse*)cloudResponse
 {

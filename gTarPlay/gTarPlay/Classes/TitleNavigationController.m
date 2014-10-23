@@ -90,6 +90,7 @@ extern Facebook * g_facebook;
     
     BOOL _displayingCell;
     BOOL _waitingForFacebook;
+    BOOL _pendingFirmwareUpdate;
     
     NSInteger _firmwareFileId;
 }
@@ -495,6 +496,20 @@ extern Facebook * g_facebook;
     
     if(g_gtarController.connected){
         [self promptGtarRegistration];
+    }
+    
+    if(_pendingFirmwareUpdate){
+        
+        if(self.presentedViewController != _firmwareViewController){
+            
+            TFLog(@"Expecting firmware update, rerequest now | logged in %i",g_cloudController.m_loggedIn);
+            
+            [g_gtarController sendRequestFirmwareVersion];
+            
+        }
+        
+        _pendingFirmwareUpdate = NO;
+        
     }
     
 }
@@ -1772,9 +1787,21 @@ extern Facebook * g_facebook;
         {
             _firmwareFileId = cloudResponse.m_responseFileId;
             
-            if(self.presentedViewController != _firmwareViewController){
-                [self presentViewController:_firmwareViewController animated:YES completion:nil];
+            // Confirm whether logged in
+            if(g_cloudController.m_loggedIn){
+                
+                if(self.presentedViewController != _firmwareViewController){
+                    [self presentViewController:_firmwareViewController animated:YES completion:nil];
+                }
+                
+                _pendingFirmwareUpdate = NO;
+                
+            }else{
+                
+                _pendingFirmwareUpdate = YES;
+                
             }
+            
             
             _firmwareViewController.currentFirmwareVersion = [NSString stringWithFormat:@"%u.%u", g_gtarController.m_firmwareMajorVersion, g_gtarController.m_firmwareMinorVersion];
             _firmwareViewController.availableFirmwareVersion = [NSString stringWithFormat:@"%u.%u", cloudResponse.m_responseFirmwareMajorVersion, cloudResponse.m_responseFirmwareMinorVersion];
@@ -1783,6 +1810,8 @@ extern Facebook * g_facebook;
         }else{
             
             [_settingsViewController noUpdates];
+            
+            _pendingFirmwareUpdate = NO;
         }
     }
     else
@@ -1791,6 +1820,8 @@ extern Facebook * g_facebook;
         NSLog(@"Failed to get available firmware version");
         
         [_settingsViewController noUpdates];
+        
+        _pendingFirmwareUpdate = NO;
     }
 }
 
@@ -1932,7 +1963,12 @@ extern Facebook * g_facebook;
         return;
     }
     
-    if ( [g_gtarController sendFirmwareUpdate:firmware] == YES )
+    TFLog(@"About to send firmware update");
+    TFLog(@"Logged in? %i",g_cloudController.m_loggedIn);
+    TFLog(@"Firmware data %@",firmware);
+    
+    // Double check it's actually passing data
+    if ( ![firmware isKindOfClass:[NSString class]] && [g_gtarController sendFirmwareUpdate:firmware] == YES )
     {
         NSLog(@"Update begun");
     }
