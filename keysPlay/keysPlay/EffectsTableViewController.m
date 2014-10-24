@@ -1,6 +1,6 @@
 //
 //  EffectsTableViewController.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Franco on 4/8/13.
 //

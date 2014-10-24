@@ -1,13 +1,13 @@
 //
 //  SettingsViewController.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Kate Schnippering on 5/20/14.
 //
 //
 
 #import "SettingsViewController.h"
-#import "UIButton+Gtar.h"
+#import "UIButton+Keys.h"
 
 BOOL g_fPendingAction = false;
 unsigned char g_sensitivity[6];
@@ -45,12 +45,12 @@ unsigned char g_sensitivity[6];
     
     [self localizeViews];
     
-    [g_gtarController addObserver:self];
+    [g_keysController addObserver:self];
     
-    [_settingsSelector setTitles:[NSArray arrayWithObjects:NSLocalizedString(@"GTAR",NULL), NSLocalizedString(@"CALIBRATE",NULL), NSLocalizedString(@"CONTROLS",NULL), nil]];
+    [_settingsSelector setTitles:[NSArray arrayWithObjects:NSLocalizedString(@"KEYS",NULL), NSLocalizedString(@"CALIBRATE",NULL), NSLocalizedString(@"CONTROLS",NULL), nil]];
     [_topBar addShadow];
     
-    [self updateGtarRegistered];
+    [self updateKeysRegistered];
     [self updateCalibrate];
     [self updateFirmwareVersion];
     [self updateSerialNumber];
@@ -63,7 +63,7 @@ unsigned char g_sensitivity[6];
 
 - (void)dealloc
 {
-    [g_gtarController removeObserver:self];
+    [g_keysController removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,7 +76,7 @@ unsigned char g_sensitivity[6];
 {
     _settingsLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Settings", NULL)];
     
-    _gtarSerialLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"gTar Serial", NULL)];
+    _keysSerialLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Keys Serial", NULL)];
     _firmwareVersionLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Firmware", NULL)];
     
     [_updateButton setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"CHECK FOR UPDATES", NULL)] forState:UIControlStateNormal];
@@ -114,16 +114,16 @@ unsigned char g_sensitivity[6];
     if(!m_isRegistered){
         [delegate registerDevice];
         
-        [self updateGtarRegistered];
+        [self updateKeysRegistered];
     }
 }
 
 - (IBAction)updateButtonClicked:(id)sender
 {
-    [g_gtarController sendRequestFirmwareVersion];
+    [g_keysController sendRequestFirmwareVersion];
 }
 
-- (void)updateGtarRegistered
+- (void)updateKeysRegistered
 {
     
     if([delegate isDeviceRegistered]){
@@ -149,9 +149,9 @@ unsigned char g_sensitivity[6];
 - (void)updateSerialNumber
 {
     
-    if(g_gtarController.connected){
+    if(g_keysController.connected){
         
-        NSString * serialNumber = [g_gtarController GetSerialNumber];
+        NSString * serialNumber = [g_keysController GetSerialNumber];
         
         _serialNumber = serialNumber;
         
@@ -190,12 +190,12 @@ unsigned char g_sensitivity[6];
 - (void)updateFirmwareVersion
 {
     // Update in settings
-    if(g_gtarController.connected){
+    if(g_keysController.connected){
         
-        NSString * currentVersion = [NSLocalizedString(@"version", NULL) stringByAppendingFormat:@" %u.%u", g_gtarController.m_firmwareMajorVersion, g_gtarController.m_firmwareMinorVersion];
+        NSString * currentVersion = [NSLocalizedString(@"version", NULL) stringByAppendingFormat:@" %u.%u", g_keysController.m_firmwareMajorVersion, g_keysController.m_firmwareMinorVersion];
         
         _firmwareVersion = currentVersion;
-            
+        
     }else{
         
         _firmwareVersion = nil;
@@ -231,26 +231,26 @@ unsigned char g_sensitivity[6];
 {
     if(_settingsSelector.selectedIndex == 0){
         
-        // gtar
-        [_gtarView setHidden:NO];
+        // keys
+        [_keysView setHidden:NO];
         [_calibrateView setHidden:YES];
         [_controlsView setHidden:YES];
         
     }else if(_settingsSelector.selectedIndex == 1){
         
         // calibrate
-        [_gtarView setHidden:YES];
+        [_keysView setHidden:YES];
         [_calibrateView setHidden:NO];
         [_controlsView setHidden:YES];
         
     }else{
         
         // settings
-        [_gtarView setHidden:YES];
+        [_keysView setHidden:YES];
         [_calibrateView setHidden:YES];
         [_controlsView setHidden:NO];
     }
-
+    
 }
 
 - (IBAction)feedSwitchChanged:(id)sender
@@ -272,17 +272,17 @@ unsigned char g_sensitivity[6];
     [settings synchronize];
 }
 
-- (void)gtarConnected
+- (void)keysConnected
 {
-    [self updateGtarRegistered];
+    [self updateKeysRegistered];
     [self updateCalibrate];
     [self updateFirmwareVersion];
     [self updateSerialNumber];
 }
 
-- (void)gtarDisconnected
+- (void)keysDisconnected
 {
-    [self updateGtarRegistered];
+    [self updateKeysRegistered];
     [self updateCalibrate];
     [self updateFirmwareVersion];
     [self updateSerialNumber];
@@ -294,9 +294,6 @@ unsigned char g_sensitivity[6];
 
 - (void)initCalibration
 {
-    
-    // Attached gTar Controller Delegate to self
-    //g_gtarController.m_delegate = self;
     
     pendingLock = [NSLock new];
     //memset(g_sensitivity, 0, sizeof(unsigned char) * 6);
@@ -319,7 +316,7 @@ unsigned char g_sensitivity[6];
         for(int j = 0; j < 6; j++) {
             CGRect newFrame = CGRectMake(i * colDiv, j * rowDiv, colDiv, rowDiv);
             m_ppCTSettingsButtons[i][j] = [[UIButton alloc] initWithFrame:newFrame];
-            [m_ppCTSettingsButtons[i][j] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_gtarController GetCTMatrixRow:i Column:j]] forState:UIControlStateNormal];
+            [m_ppCTSettingsButtons[i][j] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_keysController GetCTMatrixRow:i Column:j]] forState:UIControlStateNormal];
             [m_ppCTSettingsButtons[i][j] addTarget:self action:@selector(OnCTButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             
             [_piezoCTView addSubview:m_ppCTSettingsButtons[i][j]];
@@ -332,7 +329,7 @@ unsigned char g_sensitivity[6];
     for(int i = 0; i < 6; i++) {
         CGRect newFrame = CGRectMake(0.0f, i * rowDiv, colDiv, rowDiv);
         m_pSensSettingsButtons[i] = [[UIButton alloc] initWithFrame:newFrame];
-        [m_pSensSettingsButtons[i] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_gtarController GetSensitivityString:i]] forState:UIControlStateNormal];
+        [m_pSensSettingsButtons[i] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_keysController GetSensitivityString:i]] forState:UIControlStateNormal];
         [m_pSensSettingsButtons[i] addTarget:self action:@selector(OnSensButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         [_piezoSensView addSubview:m_pSensSettingsButtons[i]];
@@ -345,7 +342,7 @@ unsigned char g_sensitivity[6];
 
 - (void)updateCalibrate
 {
-    if(g_gtarController.connected){
+    if(g_keysController.connected){
         
         [_incButton setEnabled:YES];
         [_decButton setEnabled:YES];
@@ -384,7 +381,7 @@ unsigned char g_sensitivity[6];
     }
 }
 
-#pragma mark - gTar Delegate Functions
+#pragma mark - keys Delegate Functions
 - (void)receivedCTMatrixValue:(unsigned char)value row:(unsigned char)row col:(unsigned char)col {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         m_ctmatrix[col][row] = value;
@@ -433,11 +430,11 @@ unsigned char g_sensitivity[6];
     for(int i = 0; i < 6; i++) {
         for(int j = 0; j < 6; j++) {
             [m_ppCTSettingsButtons[j][i] setAttributedTitle:NULL forState:UIControlStateNormal];
-            [m_ppCTSettingsButtons[j][i] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_gtarController GetCTMatrixRow:i Column:j]] forState:UIControlStateNormal];
+            [m_ppCTSettingsButtons[j][i] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_keysController GetCTMatrixRow:i Column:j]] forState:UIControlStateNormal];
         }
         
         [m_pSensSettingsButtons[i] setAttributedTitle:NULL forState:UIControlStateNormal];
-        [m_pSensSettingsButtons[i] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_gtarController GetSensitivityString:i]] forState:UIControlStateNormal];
+        [m_pSensSettingsButtons[i] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_keysController GetSensitivityString:i]] forState:UIControlStateNormal];
     }
     
     [self stopAllLoading];
@@ -459,23 +456,23 @@ unsigned char g_sensitivity[6];
 - (void) UpdateSelectedView {
     if(m_selectedCol != -1 && m_selectedRow != -1) {
         [m_ppCTSettingsButtons[m_selectedCol][m_selectedRow] setAttributedTitle:NULL forState:UIControlStateNormal];
-        [m_ppCTSettingsButtons[m_selectedCol][m_selectedRow] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_gtarController GetCTMatrixRow:m_selectedRow Column:m_selectedCol]] forState:UIControlStateNormal];
+        [m_ppCTSettingsButtons[m_selectedCol][m_selectedRow] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_keysController GetCTMatrixRow:m_selectedRow Column:m_selectedCol]] forState:UIControlStateNormal];
         [m_ppCTSettingsButtons[m_selectedCol][m_selectedRow] setBackgroundColor:highlightColor];
         
         // Load in value widget
         NSString *labelString = [[NSString alloc] initWithFormat:@"CT str:%d to %d", m_selectedRow, m_selectedCol];
-        NSString *labelValue = [[NSString alloc] initWithFormat:@"%d", [g_gtarController GetCTMatrixRow:m_selectedRow Column:m_selectedCol]];
+        NSString *labelValue = [[NSString alloc] initWithFormat:@"%d", [g_keysController GetCTMatrixRow:m_selectedRow Column:m_selectedCol]];
         [_selectedCtrlLabel setText:labelString];
         [_selectedCtrlValue setText:labelValue];
     }
     else if(m_selectedSensString != -1){
         [m_pSensSettingsButtons[m_selectedSensString] setAttributedTitle:NULL forState:UIControlStateNormal];
-        [m_pSensSettingsButtons[m_selectedSensString] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_gtarController GetSensitivityString:m_selectedSensString]] forState:UIControlStateNormal];
+        [m_pSensSettingsButtons[m_selectedSensString] setTitle:[[NSString alloc] initWithFormat:@"%d", [g_keysController GetSensitivityString:m_selectedSensString]] forState:UIControlStateNormal];
         [m_pSensSettingsButtons[m_selectedSensString] setBackgroundColor:highlightColor];
         
         // Load in value widget
         NSString *labelString = [[NSString alloc] initWithFormat:NSLocalizedString(@"String %d Sensitivity", NULL), m_selectedSensString];
-        NSString *labelValue = [[NSString alloc] initWithFormat:@"%d", [g_gtarController GetSensitivityString:m_selectedSensString]];
+        NSString *labelValue = [[NSString alloc] initWithFormat:@"%d", [g_keysController GetSensitivityString:m_selectedSensString]];
         [_selectedCtrlLabel setText:labelString];
         [_selectedCtrlValue setText:labelValue];
     }
@@ -485,7 +482,7 @@ unsigned char g_sensitivity[6];
     int retVal = -1;
     
     if(m_selectedCol != -1 && m_selectedRow != -1) {
-        unsigned char curVal = [g_gtarController GetCTMatrixRow:m_selectedRow Column:m_selectedCol];
+        unsigned char curVal = [g_keysController GetCTMatrixRow:m_selectedRow Column:m_selectedCol];
         curVal = (fIncrement == true) ? curVal + 5 : curVal - 5;
         
         // clamp
@@ -494,11 +491,11 @@ unsigned char g_sensitivity[6];
         else if(curVal < 30)
             curVal = 30;
         
-        [g_gtarController sendPiezoCrossTalkMatrixRow:m_selectedRow Column:m_selectedCol value:curVal];
+        [g_keysController sendPiezoCrossTalkMatrixRow:m_selectedRow Column:m_selectedCol value:curVal];
         retVal = curVal;
     }
     else if(m_selectedSensString != -1){
-        unsigned char curVal = [g_gtarController GetSensitivityString:m_selectedSensString];
+        unsigned char curVal = [g_keysController GetSensitivityString:m_selectedSensString];
         curVal = (fIncrement == true) ? curVal + 1 : curVal - 1;
         
         // clamp
@@ -507,7 +504,7 @@ unsigned char g_sensitivity[6];
         else if(curVal < 3)
             curVal = 3;
         
-        [g_gtarController sendPiezoSensitivityString:m_selectedSensString thresh:curVal];
+        [g_keysController sendPiezoSensitivityString:m_selectedSensString thresh:curVal];
         retVal = curVal;
     }
     
@@ -522,8 +519,8 @@ unsigned char g_sensitivity[6];
     int row, col;
     BOOL fFound = false;
     
-    //if(g_gtarController.m_delegate != self)
-    //    g_gtarController.m_delegate = self;
+    //if(g_keysController.m_delegate != self)
+    //    g_keysController.m_delegate = self;
     
     for(int i = 0; i < 6; i++) {
         for(int j = 0; j < 6; j++) {
@@ -539,7 +536,7 @@ unsigned char g_sensitivity[6];
     }
     
     NSLog(@"CT button clicked row %d col %d", row, col);
-    [g_gtarController sendRequestPiezoCrossTalkMatrixRow:row Column:col];
+    [g_keysController sendRequestPiezoCrossTalkMatrixRow:row Column:col];
     [NSThread sleepForTimeInterval:SCAN_INT];
     
     [self loseFocusSelected];
@@ -553,15 +550,15 @@ unsigned char g_sensitivity[6];
 - (IBAction)OnSensButtonClicked:(id)sender {
     int str;
     
-    //if(g_gtarController.m_delegate != self)
-    //    g_gtarController.m_delegate = self;
+    //if(g_keysController.m_delegate != self)
+    //    g_keysController.m_delegate = self;
     
     for(str = 0; str < 6; str++)
         if((id)(m_pSensSettingsButtons[str]) == sender)
             break;
     
     NSLog(@"Sens button clicked string %d", str);
-    [g_gtarController sendRequestPiezoSensitivityString:str];
+    [g_keysController sendRequestPiezoSensitivityString:str];
     [NSThread sleepForTimeInterval:SCAN_INT];
     
     [self loseFocusSelected];
@@ -575,30 +572,30 @@ unsigned char g_sensitivity[6];
 - (IBAction)OnCommitFWClicked:(id)sender {
     NSLog(@"Commit FW");
     
-    //if(g_gtarController.m_delegate != self)
-    //    g_gtarController.m_delegate = self;
+    //if(g_keysController.m_delegate != self)
+    //    g_keysController.m_delegate = self;
     
     // Loading
     [self startLoading:_buttonCommitFW];
     
-    [g_gtarController sendRequestCommitUserspace];
+    [g_keysController sendRequestCommitUserspace];
 }
 
 - (IBAction)OnResetFactoryClicked:(id)sender {
     NSLog(@"Reset Userspace");
     
-    //if(g_gtarController.m_delegate != self)
-    //    g_gtarController.m_delegate = self;
+    //if(g_keysController.m_delegate != self)
+    //    g_keysController.m_delegate = self;
     
     // Loading
     [self startLoading:_buttonResetFactory];
     
-    [g_gtarController sendRequestResetUserspace];
+    [g_keysController sendRequestResetUserspace];
 }
 
 - (IBAction)OnLoadValuesClicked:(id)sender {
-    //if(g_gtarController.m_delegate != self)
-    //    g_gtarController.m_delegate = self;
+    //if(g_keysController.m_delegate != self)
+    //    g_keysController.m_delegate = self;
     
     // Loading
     [self startLoading:_buttonLoadValues];
@@ -608,11 +605,11 @@ unsigned char g_sensitivity[6];
     [_buttonLoadValues setTitle:@"" forState:UIControlStateNormal];
     
     for(int i = 0; i < 6; i++) {
-        [g_gtarController sendRequestPiezoSensitivityString:i];
+        [g_keysController sendRequestPiezoSensitivityString:i];
         [NSThread sleepForTimeInterval:SCAN_INT];
         
         for(int j = 0; j < 6; j++) {
-            [g_gtarController sendRequestPiezoCrossTalkMatrixRow:i Column:j];
+            [g_keysController sendRequestPiezoCrossTalkMatrixRow:i Column:j];
             [NSThread sleepForTimeInterval:SCAN_INT];
         }
     }
@@ -624,15 +621,15 @@ unsigned char g_sensitivity[6];
 }
 
 - (IBAction)OnIncButtonClicked:(id)sender {
-    //if(g_gtarController.m_delegate != self)
-    //    g_gtarController.m_delegate = self;
+    //if(g_keysController.m_delegate != self)
+    //    g_keysController.m_delegate = self;
     
     [self nudgeSelectedValuefIncrement:true];
 }
 
 - (IBAction)OnDecButtonClicked:(id)sender {
-    //if(g_gtarController.m_delegate != self)
-    //    g_gtarController.m_delegate = self;
+    //if(g_keysController.m_delegate != self)
+    //    g_keysController.m_delegate = self;
     
     [self nudgeSelectedValuefIncrement:false];
 }

@@ -1,6 +1,6 @@
 //
 //  SongSelectionViewController.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 3/21/13.
 //
@@ -14,7 +14,7 @@ extern FileController *g_fileController;
 extern CloudController *g_cloudController;
 //extern AudioController *g_audioController;
 extern UserController *g_userController;
-extern GtarController *g_gtarController;
+extern KeysController *g_keysController;
 
 @interface SongSelectionViewController ()
 {
@@ -124,7 +124,7 @@ extern GtarController *g_gtarController;
         [self downloadUserSongs];
     }
     
-    [g_gtarController addObserver:self];
+    [g_keysController addObserver:self];
     
     // Initialize sorting order
     
@@ -234,7 +234,7 @@ extern GtarController *g_gtarController;
 
 - (void)dealloc
 {
-    [g_gtarController removeObserver:self];
+    [g_keysController removeObserver:self];
     //[g_soundMaster releaseAfterUse];
     //[_sortByTitleArrow release];
     //[_sortByArtistArrow release];
@@ -681,7 +681,7 @@ extern GtarController *g_gtarController;
 {
     _playViewController = nil;
     
-    _playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected practiceMode:practiceMode];
+    _playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_keysController.connected practiceMode:practiceMode];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.
@@ -725,9 +725,9 @@ extern GtarController *g_gtarController;
 //    [_playbackController pauseSong];
 //}
 
-#pragma mark - GtarControllerObserver
+#pragma mark - KeysControllerObserver
 
-- (void)gtarDisconnected
+- (void)keysDisconnected
 {
     /*if ( self.presentedViewController != nil )
     {

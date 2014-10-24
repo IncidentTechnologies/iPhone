@@ -1,6 +1,6 @@
 //
 //  ExpandableSearchBar.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 3/21/13.
 //
@@ -8,7 +8,7 @@
 
 #import "ExpandableSearchBar.h"
 
-#import "UIImage+Gtar.h"
+#import "UIImage+Keys.h"
 
 #define CANCEL_BUTTON_HEIGHT _expandedFrame.size.height
 #define CANCEL_BUTTON_BUFFER (_expandedFrame.size.height + 6)

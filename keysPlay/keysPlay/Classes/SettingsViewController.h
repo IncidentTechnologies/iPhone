@@ -1,6 +1,6 @@
 //
 //  SettingsViewController.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Kate Schnippering on 5/20/14.
 //
@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "SelectorControl.h"
-#import "UIView+Gtar.h"
-#import "GtarController.h"
-#import "GtarControllerInternal.h"
+#import "UIView+Keys.h"
+#import "KeysController.h"
+#import "KeysControllerInternal.h"
 
 @class SelectorControl;
 
-extern GtarController *g_gtarController;
+extern KeysController *g_keysController;
 
 @protocol SettingsDelegate <NSObject>
 
@@ -24,7 +24,7 @@ extern GtarController *g_gtarController;
 
 @end
 
-@interface SettingsViewController : UIViewController <GtarControllerObserver>
+@interface SettingsViewController : UIViewController <KeysControllerObserver>
 {
     
     UIButton *m_ppCTSettingsButtons[6][6];
@@ -48,14 +48,14 @@ extern GtarController *g_gtarController;
 @property (nonatomic, strong) NSString *serialNumber;
 
 @property (nonatomic, strong) IBOutlet UIView *topBar;
-@property (nonatomic, strong) IBOutlet UIView *gtarView;
+@property (nonatomic, strong) IBOutlet UIView *keysView;
 @property (nonatomic, strong) IBOutlet UIView *calibrateView;
 @property (nonatomic, strong) IBOutlet UIView *controlsView;
 @property (nonatomic, strong) IBOutlet UILabel *settingsLabel;
 @property (strong, nonatomic) IBOutlet SelectorControl *settingsSelector;
 
-// gTar
-@property (nonatomic, strong) IBOutlet UILabel *gtarSerialLabel;
+// keys
+@property (nonatomic, strong) IBOutlet UILabel *keysSerialLabel;
 @property (nonatomic, strong) IBOutlet UILabel *serialLabel;
 @property (nonatomic, strong) IBOutlet UILabel *firmwareVersionLabel;
 @property (nonatomic, strong) IBOutlet UILabel *versionLabel;
@@ -85,7 +85,7 @@ extern GtarController *g_gtarController;
 @property (nonatomic, retain) IBOutlet UIView *piezoCTView;
 @property (nonatomic, retain) IBOutlet UIView *piezoSensView;
 
-// gTar
+// keys
 - (IBAction)settingsSelectorChanged:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;
 - (IBAction)registerButtonClicked:(id)sender;
@@ -112,7 +112,7 @@ extern GtarController *g_gtarController;
 - (void) UpdateSelectedView;
 - (int) nudgeSelectedValuefIncrement:(BOOL)fIncrement;
 
-// gTar Delegate Functions
+// keys Delegate Functions
 - (void)receivedCTMatrixValue:(unsigned char)value row:(unsigned char)row col:(unsigned char)col;
 - (void)receivedSensitivityValue:(unsigned char)value string:(unsigned char)str;
 - (void)receivedPiezoWindow:(unsigned char)value;
@@ -120,7 +120,7 @@ extern GtarController *g_gtarController;
 - (void)receivedResetUserspaceAck:(unsigned char)status;
 - (void)receivedSerialNumber:(unsigned char *)number;
 
-// gTar Functions
+// keys Functions
 - (void)updateSerialNumber;
 - (void)updateFirmwareVersion;
 - (void)noUpdates;

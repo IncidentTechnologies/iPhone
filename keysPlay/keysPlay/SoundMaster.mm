@@ -13,15 +13,15 @@
 
 #define FLATSAMPLER
 
-#define GTAR_NUM_STRINGS 6
-#define GTAR_NUM_FRETS 17
+#define KEYS_NUM_STRINGS 6
+#define KEYS_NUM_FRETS 17
 
-#define GTAR_NOTE_DURATION 1.0
-#define GTAR_FRET_DOWN_DURATION 0.005
-#define GTAR_FRET_UP_DURATION 0.005
-#define GTAR_STOP_FRET_DURATION 0.01
-#define GTAR_SLIDE_FRET_DURATION 0.015
-//#define GTAR_SLIDE_FRET_DURATION 0.1
+#define KEYS_NOTE_DURATION 1.0
+#define KEYS_FRET_DOWN_DURATION 0.005
+#define KEYS_FRET_UP_DURATION 0.005
+#define KEYS_STOP_FRET_DURATION 0.01
+#define KEYS_SLIDE_FRET_DURATION 0.015
+//#define KEYS_SLIDE_FRET_DURATION 0.1
 
 #define GRAPH_SAMPLE_RATE 44100.0f
 
@@ -43,7 +43,7 @@
     AudioNode * root;
     
     SamplerNode * m_samplerNode;
-    GtarSamplerNode * m_gtarSamplerNode;
+    GtarSamplerNode * m_keysSamplerNode;
     int m_activeBankNode;
     int m_metronome;
     
@@ -61,14 +61,14 @@
     // Slides and fret tracking
     BOOL isSlideEnabled;
     
-    int activeFretOnString[GTAR_NUM_STRINGS];
-    int pendingFretOnString[GTAR_NUM_STRINGS];
-    int fretsPressedDown[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
+    int activeFretOnString[KEYS_NUM_STRINGS];
+    int pendingFretOnString[KEYS_NUM_STRINGS];
+    int fretsPressedDown[KEYS_NUM_STRINGS][KEYS_NUM_FRETS];
     
     BOOL blockContinuousPluckString;
     
-    NSTimer * continuousFretTimer[GTAR_NUM_STRINGS];
-    NSTimer * playingNotesTimers[GTAR_NUM_STRINGS][GTAR_NUM_FRETS];
+    NSTimer * continuousFretTimer[KEYS_NUM_STRINGS];
+    NSTimer * playingNotesTimers[KEYS_NUM_STRINGS][KEYS_NUM_FRETS];
     
 }
 @end
@@ -108,22 +108,22 @@
 - (BOOL)initAudio
 {
     NSLog(@" **** Init Sound Master **** ");
-
+    
     m_standardTuning = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:0],
-                         [NSNumber numberWithInt:5],
-                         [NSNumber numberWithInt:10],
-                         [NSNumber numberWithInt:15],
-                         [NSNumber numberWithInt:19],
-                         [NSNumber numberWithInt:24],
-                         nil];
+                        [NSNumber numberWithInt:5],
+                        [NSNumber numberWithInt:10],
+                        [NSNumber numberWithInt:15],
+                        [NSNumber numberWithInt:19],
+                        [NSNumber numberWithInt:24],
+                        nil];
     
     audioController = [AudioController sharedAudioController];
     root = [[audioController GetNodeNetwork] GetRootNode];
     
-    m_gtarSamplerNode = new GtarSamplerNode;
+    m_keysSamplerNode = new GtarSamplerNode;
     [self setChannelGain:DEFAULT_GAIN];
     
-    //root->ConnectInput(0, m_gtarSamplerNode, 0);
+    //root->ConnectInput(0, m_keysSamplerNode, 0);
     
     if(!m_instruments && ![self loadInstrumentArray]){
         NSLog(@"Failed to load instrument array from instrument.plist");
@@ -143,8 +143,8 @@
 
 - (void)initTimers
 {
-    for(int s = 0; s < GTAR_NUM_STRINGS; s++){
-        for(int f = 0; f < GTAR_NUM_FRETS; f++){
+    for(int s = 0; s < KEYS_NUM_STRINGS; s++){
+        for(int f = 0; f < KEYS_NUM_FRETS; f++){
             playingNotesTimers[s][f] = nil;
         }
     }
@@ -152,8 +152,8 @@
 
 - (void)releaseAllTimers
 {
-    for(int s = 0; s < GTAR_NUM_STRINGS; s++){
-        for(int f = 0; f < GTAR_NUM_FRETS; f++){
+    for(int s = 0; s < KEYS_NUM_STRINGS; s++){
+        for(int f = 0; f < KEYS_NUM_FRETS; f++){
             [playingNotesTimers[s][f] invalidate];
             playingNotesTimers[s][f] = nil;
         }
@@ -175,15 +175,15 @@
 {
     NSLog(@"Generate bank %i",bank);
     
-    return m_gtarSamplerNode->CreateNewBank(bank,numSamples);
-
+    return m_keysSamplerNode->CreateNewBank(bank,numSamples);
+    
 }
 
 - (void)releaseBank:(int)bank
 {
     NSLog(@"Release bank");
     
-    m_gtarSamplerNode->ReleaseBank(bank);
+    m_keysSamplerNode->ReleaseBank(bank);
 }
 
 - (void)start
@@ -199,12 +199,12 @@
     NSLog(@"Stop");
     
     // End all samples that might be playing
-    if(m_gtarSamplerNode != nil){
-        int numSamples = m_gtarSamplerNode->m_numSamples[m_activeBankNode];
+    if(m_keysSamplerNode != nil){
+        int numSamples = m_keysSamplerNode->m_numSamples[m_activeBankNode];
         for(int i = 0; i < numSamples; i++){
-            m_gtarSamplerNode->StopSample(m_activeBankNode,i);
+            m_keysSamplerNode->StopSample(m_activeBankNode,i);
         }
-        m_gtarSamplerNode->StopSample(m_metronome, 0);
+        m_keysSamplerNode->StopSample(m_metronome, 0);
     }
     
     [audioController stopAUGraph];
@@ -263,11 +263,11 @@
 - (void) setChannelGain:(float)gain
 {
     NSLog(@"Set channel gain to %f",gain*GAIN_MULTIPLIER);
-
+    
     m_channelGain = gain * GAIN_MULTIPLIER;
     
-    m_gtarSamplerNode->SetChannelGain(m_channelGain, CONN_OUT);
-
+    m_keysSamplerNode->SetChannelGain(m_channelGain, CONN_OUT);
+    
     
 }
 
@@ -293,32 +293,32 @@
     return true;
 }
 /*
-- (bool) SetBWOrder:(int)order
-{
-    return false;
-}
-
-- (bool) SetKSBWCutoff:(double)cutoff
-{
-    bool retVal = true;
-    
-    for(int i = 0; i < m_pksobjects_n; i++)
-        if(!(retVal = m_pksobjects[i].SetBWFilterCutoff(cutoff)))
-            break;
-    
-    return retVal;
-}
-
-- (bool) SetKSBWOrder:(int)order
-{
-    bool retVal = true;
-    
-    for(int i = 0; i < m_pksobjects_n; i++)
-        if(!(retVal = m_pksobjects[i].SetBWFilterOrder(order)))
-            break;
-    
-    return retVal;
-}*/
+ - (bool) SetBWOrder:(int)order
+ {
+ return false;
+ }
+ 
+ - (bool) SetKSBWCutoff:(double)cutoff
+ {
+ bool retVal = true;
+ 
+ for(int i = 0; i < m_pksobjects_n; i++)
+ if(!(retVal = m_pksobjects[i].SetBWFilterCutoff(cutoff)))
+ break;
+ 
+ return retVal;
+ }
+ 
+ - (bool) SetKSBWOrder:(int)order
+ {
+ bool retVal = true;
+ 
+ for(int i = 0; i < m_pksobjects_n; i++)
+ if(!(retVal = m_pksobjects[i].SetBWFilterOrder(order)))
+ break;
+ 
+ return retVal;
+ }*/
 
 #pragma mark - Instrument
 - (void) loadInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender
@@ -326,7 +326,7 @@
     
     if(index == currentInstrumentIndex){
         NSLog(@"Instrument already loaded");
-
+        
         // Callback
         if(sender != nil){
             [sender performSelectorInBackground:cb withObject:[NSNumber numberWithBool:TRUE]];
@@ -367,11 +367,11 @@
     NSLog(@"Load samples for instrument %i",index);
     
     // Reset active frets
-    for(int i = 0; i < GTAR_NUM_STRINGS; i++){
+    for(int i = 0; i < KEYS_NUM_STRINGS; i++){
         activeFretOnString[i] = -1;
         pendingFretOnString[i] = -1;
         
-        for(int j = 0; j < GTAR_NUM_FRETS; j++){
+        for(int j = 0; j < KEYS_NUM_FRETS; j++){
             fretsPressedDown[i][j] = 0;
         }
     }
@@ -393,7 +393,7 @@
                 if(currentInstrumentIndex == index){
                     char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:[instrumentName stringByAppendingFormat:@" %i",j] ofType:@"mp3"] UTF8String];
                     
-                    m_gtarSamplerNode->LoadSampleIntoBank(m_activeBankNode,filepath);
+                    m_keysSamplerNode->LoadSampleIntoBank(m_activeBankNode,filepath);
                 }
             }
             
@@ -427,13 +427,13 @@
     }else{
         
         NSLog(@"Cannot load samples for instrument %i",index);
-    
+        
     }
 }
 
 - (BOOL) isAnyFretDownOnString:(int)string
 {
-    for(int f = 1; f < GTAR_NUM_FRETS; f++){
+    for(int f = 1; f < KEYS_NUM_FRETS; f++){
         
         if(fretsPressedDown[string][f] == 1){
             return YES;
@@ -446,7 +446,7 @@
 
 - (int) highestFretDownIndexForString:(int)string
 {
-    for(int f = GTAR_NUM_FRETS-1; f >= 0; f--){
+    for(int f = KEYS_NUM_FRETS-1; f >= 0; f--){
         if(fretsPressedDown[string][f] == 1){
             return f;
         }
@@ -509,7 +509,7 @@
 - (void) didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
     NSLog(@"SoundMaster didSelectInstrument %@",instrumentName);
-        
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
         NSInteger newInstrument = [self getIndexForInstrument:instrumentName];
@@ -567,20 +567,20 @@
     for(int i = 0; i < numInstruments; i++){
         [instrumentNames addObject:[[m_instruments objectAtIndex:i] objectForKey:@"Name"]];
     }
-
+    
     return [NSArray arrayWithArray:instrumentNames];
 }
 
-#pragma mark - gTar
+#pragma mark - keys
 - (void) PluckString:(int)string atFret:(int)fret
 {
     if(!isLoadingInstrument){
         
         // Ensure it's a valid string + fret
-        if(string >= 0 && string < GTAR_NUM_STRINGS && fret >= 0 && fret < GTAR_NUM_FRETS){
-                        
+        if(string >= 0 && string < KEYS_NUM_STRINGS && fret >= 0 && fret < KEYS_NUM_FRETS){
+            
             // Ensure there's a valid instrument enabled
-            if(m_gtarSamplerNode == nil){
+            if(m_keysSamplerNode == nil){
                 [self setCurrentInstrument:0 withSelector:nil andOwner:nil];
                 return;
             }
@@ -600,10 +600,10 @@
             }
             
             // Trigger the note
-            m_gtarSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
+            m_keysSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
             
             // Set a timer to keep the note short
-            playingNotesTimers[string][fret] = [NSTimer scheduledTimerWithTimeInterval:GTAR_NOTE_DURATION target:self selector:@selector(EndPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:fret],@"Fret", nil] repeats:NO];
+            playingNotesTimers[string][fret] = [NSTimer scheduledTimerWithTimeInterval:KEYS_NOTE_DURATION target:self selector:@selector(EndPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:fret],@"Fret", nil] repeats:NO];
         }
     }
 }
@@ -641,12 +641,12 @@
         
         if(pendingIndex > 0){
             
-            //m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
+            //m_keysSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
             
             //activeFretOnString[string] = highestFret;
             //pendingFretOnString[string] = -1;
-        
-            [NSTimer scheduledTimerWithTimeInterval:GTAR_SLIDE_FRET_DURATION target:self selector:@selector(EndBlockContinuousPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:fret],@"Fret", nil] repeats:NO];
+            
+            [NSTimer scheduledTimerWithTimeInterval:KEYS_SLIDE_FRET_DURATION target:self selector:@selector(EndBlockContinuousPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:fret],@"Fret", nil] repeats:NO];
             
             //blockContinuousPluckString = false;
             
@@ -654,7 +654,7 @@
             blockContinuousPluckString = false;
         }
     }
-
+    
 }
 
 - (void)EndBlockContinuousPluckString:(NSTimer *)timer
@@ -673,17 +673,17 @@
         activeFretOnString[string] = highestFret;
         pendingFretOnString[string] = -1;
         
-        m_gtarSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
-    
+        m_keysSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
+        
     }
 }
 
 - (void) PluckMutedString:(int)string
 {
     if(!isLoadingInstrument){
-        if(string >= 0 && string < GTAR_NUM_STRINGS){
+        if(string >= 0 && string < KEYS_NUM_STRINGS){
             
-            if(m_gtarSamplerNode == nil){
+            if(m_keysSamplerNode == nil){
                 [self setCurrentInstrument:0 withSelector:nil andOwner:nil];
             }
             
@@ -693,7 +693,7 @@
             
             NSLog(@"Muted note at index %i",noteIndex);
             
-            m_gtarSamplerNode->TriggerMutedSample(m_activeBankNode,noteIndex);
+            m_keysSamplerNode->TriggerMutedSample(m_activeBankNode,noteIndex);
         }
     }
 }
@@ -709,7 +709,7 @@
     }
     
     // Make sure it's not playing on another string
-    for(int s = 0; s < GTAR_NUM_STRINGS; s++){
+    for(int s = 0; s < KEYS_NUM_STRINGS; s++){
         if(s != string && [self noteIndexForString:s andFret:activeFretOnString[s]] == stopIndex){
             overlapNotePlaying = YES;
             break;
@@ -727,7 +727,7 @@
 - (bool) FretDown:(int)fret onString:(int)string
 {
     if(!isLoadingInstrument){
-    
+        
         fretsPressedDown[string][fret] = 1;
         
         int activeFret = activeFretOnString[string];
@@ -740,11 +740,11 @@
         }else if(activeFret > 0){
             
             /*if(continuousFretTimer[string] == nil && isSlideEnabled){
-                
-                // Slide Up or Hammer On
-                continuousFretTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_DOWN_DURATION target:self selector:@selector(EndContinuousFretWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
-                
-            }*/
+             
+             // Slide Up or Hammer On
+             continuousFretTimer[string] = [NSTimer scheduledTimerWithTimeInterval:KEYS_FRET_DOWN_DURATION target:self selector:@selector(EndContinuousFretWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
+             
+             }*/
             
             if(isSlideEnabled){
                 pendingFretOnString[string] = [self highestFretDownIndexForString:string];
@@ -767,7 +767,7 @@
     
     pendingFretOnString[s] = highestFret;
     [self PluckContinuousString:s atFret:activeFretOnString[s]];
-
+    
     [continuousFretTimer[s] invalidate];
     continuousFretTimer[s] = nil;
     
@@ -790,13 +790,13 @@
         
         // Consider stopping the string
         if(![self isAnyFretDownOnString:string]){
-            [NSTimer scheduledTimerWithTimeInterval:GTAR_STOP_FRET_DURATION target:self selector:@selector(EndStopStringWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
+            [NSTimer scheduledTimerWithTimeInterval:KEYS_STOP_FRET_DURATION target:self selector:@selector(EndStopStringWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
         }
         
         if(isSlideEnabled){
             
             if(fret == activeFretOnString[string]){
-            
+                
                 int highestFret = [self highestFretDownIndexForString:string];
                 
                 if(highestFret <= 0){
@@ -808,9 +808,9 @@
                     
                     /*if(continuousFretTimer[string] == nil){
                      
-                        // Slide Down or Pull Off
-                        continuousFretTimer[string] = [NSTimer scheduledTimerWithTimeInterval:GTAR_FRET_UP_DURATION target:self selector:@selector(EndContinuousFretWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
-                    }*/
+                     // Slide Down or Pull Off
+                     continuousFretTimer[string] = [NSTimer scheduledTimerWithTimeInterval:KEYS_FRET_UP_DURATION target:self selector:@selector(EndContinuousFretWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
+                     }*/
                     
                     pendingFretOnString[string] = [self highestFretDownIndexForString:string];
                     [self PluckContinuousString:string atFret:activeFretOnString[string]];
@@ -839,10 +839,10 @@
 {
     int noteIndex = [self noteIndexForString:string andFret:fret];
     
-    return m_gtarSamplerNode->IsNoteOn(m_activeBankNode, noteIndex);
+    return m_keysSamplerNode->IsNoteOn(m_activeBankNode, noteIndex);
 }
 
-// Gtar Note Off At String
+// Keys Note Off At String
 - (bool) NoteOffAtString:(int)string andFret:(int)fret
 {
     if(!isLoadingInstrument){
@@ -875,7 +875,7 @@
     
     if(stopIndex >= 0){
         
-        m_gtarSamplerNode->NoteOff(m_activeBankNode, stopIndex);
+        m_keysSamplerNode->NoteOff(m_activeBankNode, stopIndex);
         
     }
 }
@@ -885,7 +885,7 @@
     int stopIndex = [self noteIndexForString:string andFret:fret];
     
     if(stopIndex >= 0){
-        m_gtarSamplerNode->StopNote(m_activeBankNode, stopIndex);
+        m_keysSamplerNode->StopNote(m_activeBankNode, stopIndex);
     }
     
 }
@@ -915,8 +915,8 @@
     
     char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Metronome" ofType:@"mp3"] UTF8String];
     
-    m_gtarSamplerNode->LoadSampleIntoBank(m_metronome, filepath);
-
+    m_keysSamplerNode->LoadSampleIntoBank(m_metronome, filepath);
+    
 }
 
 - (void)releaseMetronome
@@ -926,7 +926,7 @@
 
 - (void)playMetronomeTick
 {
-    m_gtarSamplerNode->TriggerSample(m_metronome,0);
+    m_keysSamplerNode->TriggerSample(m_metronome,0);
 }
 
 #pragma mark - Effects
@@ -955,7 +955,7 @@
                     [NSNumber numberWithBool:NO],nil];
     
     numEffects = [effectNames count];
-
+    
     // Chorus
     //
     m_chorusEffectNode = new ChorusEffectNode(25,               // delay
@@ -964,7 +964,7 @@
                                               3.0,              // frequency
                                               1.0,              // wet
                                               GRAPH_SAMPLE_RATE);
-    m_chorusEffectNode->ConnectInput(0, m_gtarSamplerNode, 0);
+    m_chorusEffectNode->ConnectInput(0, m_keysSamplerNode, 0);
     m_chorusEffectNode->SetPassThru(YES);
     
     // Delay
@@ -990,7 +990,7 @@
     m_distortionNode->ConnectInput(0, m_reverbNode, 0);
     root->ConnectInput(0, m_distortionNode, 0);
     m_distortionNode->SetPassThru(YES);
-
+    
 #endif
     
 }
@@ -1012,7 +1012,7 @@
 
 - (void)toggleEffect:(NSInteger)index isOn:(BOOL)on
 {
-
+    
 #ifdef EFFECTS_AVAILABLE
     BOOL isOn = [[effectStatus objectAtIndex:index] boolValue];
     
@@ -1142,19 +1142,19 @@
         secondary = m_delayNode->getSecondaryParam();
         
     }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)]){
-    
+        
         primary = m_chorusEffectNode->getPrimaryParam();
         secondary = m_chorusEffectNode->getSecondaryParam();
         
     }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)]){
-    
+        
         primary = m_distortionNode->getPrimaryParam();
         secondary = m_distortionNode->getSecondaryParam();
         
     }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
         
-        primary = m_gtarSamplerNode->getPrimaryParam();
-        secondary = m_gtarSamplerNode->getSecondaryParam();
+        primary = m_keysSamplerNode->getPrimaryParam();
+        secondary = m_keysSamplerNode->getSecondaryParam();
         
     }else{
         
@@ -1200,21 +1200,21 @@
         
         primary = m_delayNode->getPrimaryParam();
         secondary = m_delayNode->getSecondaryParam();
-     
+        
     }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)]){
         
         primary = m_chorusEffectNode->getPrimaryParam();
         secondary = m_chorusEffectNode->getSecondaryParam();
-    
+        
     }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)]){
         
         primary = m_distortionNode->getPrimaryParam();
         secondary = m_distortionNode->getSecondaryParam();
-    
+        
     }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
         
-        primary = m_gtarSamplerNode->getPrimaryParam();
-        secondary = m_gtarSamplerNode->getSecondaryParam();
+        primary = m_keysSamplerNode->getPrimaryParam();
+        secondary = m_keysSamplerNode->getSecondaryParam();
         
     }else{
         
@@ -1250,11 +1250,11 @@
         
         m_distortionNode->setPrimaryParam(pnew);
         m_distortionNode->setSecondaryParam(snew);
-
+        
     }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
         
-        m_gtarSamplerNode->setPrimaryParam(pnew);
-        m_gtarSamplerNode->setSecondaryParam(snew);
+        m_keysSamplerNode->setPrimaryParam(pnew);
+        m_keysSamplerNode->setSecondaryParam(snew);
         
     }
     

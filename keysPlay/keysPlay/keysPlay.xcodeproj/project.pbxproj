@@ -22,6 +22,7 @@
 		6D26A81718F3794300887E40 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81618F3794300887E40 /* libc++.dylib */; };
 		6D26A81918F3794900887E40 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81818F3794900887E40 /* libz.dylib */; };
 		6D26A81B18F3797200887E40 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81A18F3797200887E40 /* libIncidentPlatform.a */; };
+		6D34E73E19F9CDCD001D8EF6 /* Keys_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D34E73D19F9CDCD001D8EF6 /* Keys_Logo.png */; };
 		6D3D06D618F4A870007683DB /* SoundMaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D3D06D518F4A870007683DB /* SoundMaster.mm */; };
 		6D3D06DE18F4D2E8007683DB /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3D06D818F4D2E8007683DB /* libTestFlight.a */; };
 		6D3D06DF18F4D2E8007683DB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06D918F4D2E8007683DB /* README.md */; };
@@ -736,7 +737,7 @@
 		EC24DC28161A847A00016B78 /* libgTarAppCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24DC25161A847A00016B78 /* libgTarAppCore.a */; };
 		EC24DC2A161A84F300016B78 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EC2F25C51468B3C100D0FC7F /* Default.png */; };
 		EC24DC2B161A84F500016B78 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC9A92021468BB33009CAC83 /* Default@2x.png */; };
-		EC24DC37161A895000016B78 /* gTarPlayAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */; };
+		EC24DC37161A895000016B78 /* keysPlayAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* keysPlayAppDelegate.m */; };
 		EC24DC38161A895000016B78 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		EC24DC44161A896B00016B78 /* CustomComboBox.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E4B2E14F1EED0008663B1 /* CustomComboBox.m */; };
 		EC24DC45161A896E00016B78 /* JamPad.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAB6D89143E48F9001729A3 /* JamPad.m */; };
@@ -1004,7 +1005,6 @@
 		EC24DF73161A8A4800016B78 /* WhiteBackArrow_UP.png in Resources */ = {isa = PBXBuildFile; fileRef = EC9A92111468BC80009CAC83 /* WhiteBackArrow_UP.png */; };
 		EC24DF74161A8A4800016B78 /* WhiteBackArrow_LEFT.png in Resources */ = {isa = PBXBuildFile; fileRef = EC9A92121468BC80009CAC83 /* WhiteBackArrow_LEFT.png */; };
 		EC24DF75161A8A4800016B78 /* XButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC8EFE94146DC0CA00F92F70 /* XButton.png */; };
-		EC24DFC3161A8A6500016B78 /* preloaded-content.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC995EB114DB3CBF00C86824 /* preloaded-content.plist */; };
 		EC24DFC4161A8A6700016B78 /* instrumentList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DE6576714C902770034F437 /* instrumentList.plist */; };
 		EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		EC26A3A516CB198F006E97E2 /* DefaultRot.png in Resources */ = {isa = PBXBuildFile; fileRef = EC26A3A316CB198E006E97E2 /* DefaultRot.png */; };
@@ -1015,10 +1015,10 @@
 		EC3415D5172F3E4900501AF4 /* SocialUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3415D3172F3E4900501AF4 /* SocialUserCell.m */; };
 		EC3415F8173863AD00501AF4 /* SocialUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC3415F7173863AD00501AF4 /* SocialUserCell.xib */; };
 		EC3415F9173863AD00501AF4 /* SocialUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC3415F7173863AD00501AF4 /* SocialUserCell.xib */; };
-		EC34160C173894B600501AF4 /* UIView+Gtar.m in Sources */ = {isa = PBXBuildFile; fileRef = EC341609173894B600501AF4 /* UIView+Gtar.m */; };
-		EC34160D173894B600501AF4 /* UIView+Gtar.m in Sources */ = {isa = PBXBuildFile; fileRef = EC341609173894B600501AF4 /* UIView+Gtar.m */; };
-		EC34160E173894B600501AF4 /* UIImage+Gtar.m in Sources */ = {isa = PBXBuildFile; fileRef = EC34160B173894B600501AF4 /* UIImage+Gtar.m */; };
-		EC34160F173894B600501AF4 /* UIImage+Gtar.m in Sources */ = {isa = PBXBuildFile; fileRef = EC34160B173894B600501AF4 /* UIImage+Gtar.m */; };
+		EC34160C173894B600501AF4 /* UIView+Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = EC341609173894B600501AF4 /* UIView+Keys.m */; };
+		EC34160D173894B600501AF4 /* UIView+Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = EC341609173894B600501AF4 /* UIView+Keys.m */; };
+		EC34160E173894B600501AF4 /* UIImage+Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = EC34160B173894B600501AF4 /* UIImage+Keys.m */; };
+		EC34160F173894B600501AF4 /* UIImage+Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = EC34160B173894B600501AF4 /* UIImage+Keys.m */; };
 		EC3416131739976900501AF4 /* SocialSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3416121739976800501AF4 /* SocialSongCell.m */; };
 		EC3416141739976900501AF4 /* SocialSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3416121739976800501AF4 /* SocialSongCell.m */; };
 		EC3416161739983800501AF4 /* SocialSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC3416151739983800501AF4 /* SocialSongCell.xib */; };
@@ -1053,11 +1053,11 @@
 		EC7CAE8B174DA940004E26DE /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CAE7F174DA940004E26DE /* Mixpanel.m */; };
 		EC7CAE8F174DAEA1004E26DE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE8E174DAEA1004E26DE /* SystemConfiguration.framework */; };
 		EC7CAE91174DAEAC004E26DE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7CAE90174DAEAC004E26DE /* CoreTelephony.framework */; };
-		EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
-		EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */; };
+		EC7D887C1651CE86002E2F77 /* keysNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* keysNavigationController.m */; };
+		EC7D887D1651CE86002E2F77 /* keysNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D887B1651CE86002E2F77 /* keysNavigationController.m */; };
 		ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */; };
-		ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC11D7816264220001A231A /* gTarPlayApplication.m */; };
-		ECC11DF9162D07AD001A231A /* gTarPlayAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */; };
+		ECC11D7916264220001A231A /* keysPlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC11D7816264220001A231A /* keysPlayApplication.m */; };
+		ECC11DF9162D07AD001A231A /* keysPlayAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* keysPlayAppDelegate.m */; };
 		ECC11DFA162D07AD001A231A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		ECC11E06162D07AD001A231A /* CustomComboBox.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E4B2E14F1EED0008663B1 /* CustomComboBox.m */; };
 		ECC11E07162D07AD001A231A /* JamPad.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAB6D89143E48F9001729A3 /* JamPad.m */; };
@@ -1069,7 +1069,7 @@
 		ECC11E15162D07AD001A231A /* SongDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6BD1D813F070660068E25C /* SongDisplayController.m */; };
 		ECC11E16162D07AD001A231A /* SongES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6BD1DD13F073FD0068E25C /* SongES1Renderer.m */; };
 		ECC11E1F162D07AD001A231A /* PullToUpdateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1E4DF21549E2AD0033F904 /* PullToUpdateTableView.m */; };
-		ECC11E45162D07AD001A231A /* gTarPlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC11D7816264220001A231A /* gTarPlayApplication.m */; };
+		ECC11E45162D07AD001A231A /* keysPlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC11D7816264220001A231A /* keysPlayApplication.m */; };
 		ECC11E47162D07AD001A231A /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24DC24161A847A00016B78 /* libAudioController.a */; };
 		ECC11E48162D07AD001A231A /* libgTarAppCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24DC25161A847A00016B78 /* libgTarAppCore.a */; };
 		ECC11E49162D07AD001A231A /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC24DC26161A847A00016B78 /* libGtarController.a */; };
@@ -1340,7 +1340,6 @@
 		ECC12143162D07AD001A231A /* WhiteBackArrow_UP.png in Resources */ = {isa = PBXBuildFile; fileRef = EC9A92111468BC80009CAC83 /* WhiteBackArrow_UP.png */; };
 		ECC12144162D07AD001A231A /* WhiteBackArrow_LEFT.png in Resources */ = {isa = PBXBuildFile; fileRef = EC9A92121468BC80009CAC83 /* WhiteBackArrow_LEFT.png */; };
 		ECC12145162D07AD001A231A /* XButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EC8EFE94146DC0CA00F92F70 /* XButton.png */; };
-		ECC12193162D07AD001A231A /* preloaded-content.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC995EB114DB3CBF00C86824 /* preloaded-content.plist */; };
 		ECC12194162D07AD001A231A /* instrumentList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DE6576714C902770034F437 /* instrumentList.plist */; };
 		ECC121C2162D07AD001A231A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		ECC121C7162D07AD001A231A /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */; };
@@ -1398,8 +1397,8 @@
 		ECDF7F63173D590F003E51EC /* SocialCameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ECDF7F5E173D590F003E51EC /* SocialCameraIcon.png */; };
 		ECDF7F6E173D5A72003E51EC /* IconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDF7F6D173D5A72003E51EC /* IconButton.m */; };
 		ECDF7F6F173D5A72003E51EC /* IconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDF7F6D173D5A72003E51EC /* IconButton.m */; };
-		ECDF7F73173DFB38003E51EC /* UIButton+Gtar.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDF7F72173DFB38003E51EC /* UIButton+Gtar.m */; };
-		ECDF7F74173DFB38003E51EC /* UIButton+Gtar.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDF7F72173DFB38003E51EC /* UIButton+Gtar.m */; };
+		ECDF7F73173DFB38003E51EC /* UIButton+Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDF7F72173DFB38003E51EC /* UIButton+Keys.m */; };
+		ECDF7F74173DFB38003E51EC /* UIButton+Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDF7F72173DFB38003E51EC /* UIButton+Keys.m */; };
 		ECE831FB171764C0006E2391 /* UserCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE831FA171764C0006E2391 /* UserCommentCell.m */; };
 		ECE831FC171764C0006E2391 /* UserCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE831FA171764C0006E2391 /* UserCommentCell.m */; };
 		ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE831FE1717653E006E2391 /* UserCommentCell.xib */; };
@@ -1475,8 +1474,8 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* gTarPlayAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gTarPlayAppDelegate.h; path = Classes/gTarPlayAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = gTarPlayAppDelegate.m; path = Classes/gTarPlayAppDelegate.m; sourceTree = "<group>"; };
+		1D3623240D0F684500981E51 /* keysPlayAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = keysPlayAppDelegate.h; path = Classes/keysPlayAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* keysPlayAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = keysPlayAppDelegate.m; path = Classes/keysPlayAppDelegate.m; sourceTree = "<group>"; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		260AFCC31814757700F7536A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		260CF0B318EBEFDF0083903A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1497,13 +1496,14 @@
 		26D4B17218F62062003380BF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		26F85ED718146FA500326CE7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlay_Prefix.pch; sourceTree = "<group>"; };
+		28A0AAE50D9B0CCF005BE974 /* keysPlay_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keysPlay_Prefix.pch; sourceTree = "<group>"; };
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6D20EF5E191AA68600E78A9D /* PreviewIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviewIcon.png; path = Resources/Images/General/Player/PreviewIcon.png; sourceTree = SOURCE_ROOT; };
 		6D26A81618F3794300887E40 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D26A81818F3794900887E40 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6D26A81A18F3797200887E40 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
+		6D34E73D19F9CDCD001D8EF6 /* Keys_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Keys_Logo.png; path = Resources/Images/Title/Keys_Logo.png; sourceTree = "<group>"; };
 		6D3D06D418F4A870007683DB /* SoundMaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundMaster.h; path = ../SoundMaster.h; sourceTree = "<group>"; };
 		6D3D06D518F4A870007683DB /* SoundMaster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoundMaster.mm; path = ../SoundMaster.mm; sourceTree = "<group>"; };
 		6D3D06D818F4D2E8007683DB /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -2250,10 +2250,10 @@
 		EC3415D2172F3E4900501AF4 /* SocialUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialUserCell.h; sourceTree = "<group>"; };
 		EC3415D3172F3E4900501AF4 /* SocialUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialUserCell.m; sourceTree = "<group>"; };
 		EC3415F7173863AD00501AF4 /* SocialUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialUserCell.xib; sourceTree = "<group>"; };
-		EC341608173894B600501AF4 /* UIView+Gtar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Gtar.h"; sourceTree = "<group>"; };
-		EC341609173894B600501AF4 /* UIView+Gtar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Gtar.m"; sourceTree = "<group>"; };
-		EC34160A173894B600501AF4 /* UIImage+Gtar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Gtar.h"; sourceTree = "<group>"; };
-		EC34160B173894B600501AF4 /* UIImage+Gtar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Gtar.m"; sourceTree = "<group>"; };
+		EC341608173894B600501AF4 /* UIView+Keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Keys.h"; sourceTree = "<group>"; };
+		EC341609173894B600501AF4 /* UIView+Keys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Keys.m"; sourceTree = "<group>"; };
+		EC34160A173894B600501AF4 /* UIImage+Keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Keys.h"; sourceTree = "<group>"; };
+		EC34160B173894B600501AF4 /* UIImage+Keys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Keys.m"; sourceTree = "<group>"; };
 		EC3416111739976800501AF4 /* SocialSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialSongCell.h; sourceTree = "<group>"; };
 		EC3416121739976800501AF4 /* SocialSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialSongCell.m; sourceTree = "<group>"; };
 		EC3416151739983800501AF4 /* SocialSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialSongCell.xib; sourceTree = "<group>"; };
@@ -2272,7 +2272,7 @@
 		EC6BD1D813F070660068E25C /* SongDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDisplayController.m; sourceTree = "<group>"; };
 		EC6BD1DC13F073FD0068E25C /* SongES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongES1Renderer.h; sourceTree = "<group>"; };
 		EC6BD1DD13F073FD0068E25C /* SongES1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongES1Renderer.m; sourceTree = "<group>"; };
-		EC6BD1FF13F44E130068E25C /* gTarColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarColors.h; sourceTree = "<group>"; };
+		EC6BD1FF13F44E130068E25C /* keysColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keysColors.h; sourceTree = "<group>"; };
 		EC71FA5A1429D17B00F06996 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		EC7CAE72174DA940004E26DE /* MPCJSONDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCJSONDataSerializer.h; sourceTree = "<group>"; };
 		EC7CAE73174DA940004E26DE /* MPCJSONDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCJSONDataSerializer.m; sourceTree = "<group>"; };
@@ -2289,13 +2289,11 @@
 		EC7CAE8C174DAE97004E26DE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		EC7CAE8E174DAEA1004E26DE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EC7CAE90174DAEAC004E26DE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		EC7D887A1651CE86002E2F77 /* gTarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarNavigationController.h; sourceTree = "<group>"; };
-		EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarNavigationController.m; sourceTree = "<group>"; };
+		EC7D887A1651CE86002E2F77 /* keysNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keysNavigationController.h; sourceTree = "<group>"; };
+		EC7D887B1651CE86002E2F77 /* keysNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = keysNavigationController.m; sourceTree = "<group>"; };
 		EC87F39E132AE0E8007DAEC9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		EC87F3BA132AE2E2007DAEC9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		EC8EFE94146DC0CA00F92F70 /* XButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XButton.png; sourceTree = "<group>"; };
-		EC995EA514DA253E00C86824 /* UserSongsList.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = UserSongsList.xml; path = Resources/PreloadedContent/UserSongsList.xml; sourceTree = "<group>"; };
-		EC995EB114DB3CBF00C86824 /* preloaded-content.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "preloaded-content.plist"; path = "Resources/PreloadedContent/preloaded-content.plist"; sourceTree = "<group>"; };
 		EC9A92021468BB33009CAC83 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		EC9A920B1468BC80009CAC83 /* BlackBackArrow_DOWN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlackBackArrow_DOWN.png; sourceTree = "<group>"; };
 		EC9A920C1468BC80009CAC83 /* BlackBackArrow_RIGHT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlackBackArrow_RIGHT.png; sourceTree = "<group>"; };
@@ -2310,8 +2308,8 @@
 		ECAB6D88143E48F9001729A3 /* JamPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JamPad.h; sourceTree = "<group>"; };
 		ECAB6D89143E48F9001729A3 /* JamPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JamPad.m; sourceTree = "<group>"; };
 		ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreePlayController.xib; sourceTree = "<group>"; };
-		ECC11D7716264220001A231A /* gTarPlayApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gTarPlayApplication.h; sourceTree = "<group>"; };
-		ECC11D7816264220001A231A /* gTarPlayApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gTarPlayApplication.m; sourceTree = "<group>"; };
+		ECC11D7716264220001A231A /* keysPlayApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keysPlayApplication.h; sourceTree = "<group>"; };
+		ECC11D7816264220001A231A /* keysPlayApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = keysPlayApplication.m; sourceTree = "<group>"; };
 		ECC121CB162D07AD001A231A /* keysPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = keysPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCC0304170A2B8C0021DB00 /* NoteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteModel.h; sourceTree = "<group>"; };
 		ECCC0305170A2B8C0021DB00 /* NoteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteModel.m; sourceTree = "<group>"; };
@@ -2347,8 +2345,8 @@
 		ECDF7F5E173D590F003E51EC /* SocialCameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SocialCameraIcon.png; path = Resources/Images/Social/SocialCameraIcon.png; sourceTree = SOURCE_ROOT; };
 		ECDF7F6C173D5A72003E51EC /* IconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconButton.h; sourceTree = "<group>"; };
 		ECDF7F6D173D5A72003E51EC /* IconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconButton.m; sourceTree = "<group>"; };
-		ECDF7F71173DFB38003E51EC /* UIButton+Gtar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Gtar.h"; sourceTree = "<group>"; };
-		ECDF7F72173DFB38003E51EC /* UIButton+Gtar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Gtar.m"; sourceTree = "<group>"; };
+		ECDF7F71173DFB38003E51EC /* UIButton+Keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Keys.h"; sourceTree = "<group>"; };
+		ECDF7F72173DFB38003E51EC /* UIButton+Keys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Keys.m"; sourceTree = "<group>"; };
 		ECE3FC9F132CA6E5002812B6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ECE831F9171764C0006E2391 /* UserCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCommentCell.h; sourceTree = "<group>"; };
 		ECE831FA171764C0006E2391 /* UserCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCommentCell.m; sourceTree = "<group>"; };
@@ -2484,7 +2482,7 @@
 				260CF0B418EBEFDF0083903A /* Localizable.strings */,
 				9DCC3B6E1790DACD00DDD603 /* gTarIcon_114x114.png */,
 				9DCC3B6A1790D8B700DDD603 /* gTarIcon_57x57.png */,
-				EC6BD1FF13F44E130068E25C /* gTarColors.h */,
+				EC6BD1FF13F44E130068E25C /* keysColors.h */,
 				EC7CAE6F174DA940004E26DE /* Mixpanel */,
 				080E96DDFE201D6D7F000001 /* App Source */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -2497,14 +2495,14 @@
 		29B97315FDCFA39411CA2CEA /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				28A0AAE50D9B0CCF005BE974 /* gTarPlay_Prefix.pch */,
+				28A0AAE50D9B0CCF005BE974 /* keysPlay_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
-				ECC11D7716264220001A231A /* gTarPlayApplication.h */,
-				ECC11D7816264220001A231A /* gTarPlayApplication.m */,
-				1D3623240D0F684500981E51 /* gTarPlayAppDelegate.h */,
-				1D3623250D0F684500981E51 /* gTarPlayAppDelegate.m */,
-				EC7D887A1651CE86002E2F77 /* gTarNavigationController.h */,
-				EC7D887B1651CE86002E2F77 /* gTarNavigationController.m */,
+				ECC11D7716264220001A231A /* keysPlayApplication.h */,
+				ECC11D7816264220001A231A /* keysPlayApplication.m */,
+				1D3623240D0F684500981E51 /* keysPlayAppDelegate.h */,
+				1D3623250D0F684500981E51 /* keysPlayAppDelegate.m */,
+				EC7D887A1651CE86002E2F77 /* keysNavigationController.h */,
+				EC7D887B1651CE86002E2F77 /* keysNavigationController.m */,
 			);
 			name = AppDelegate;
 			path = ..;
@@ -3599,12 +3597,12 @@
 		EC341610173894D100501AF4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				EC341608173894B600501AF4 /* UIView+Gtar.h */,
-				EC341609173894B600501AF4 /* UIView+Gtar.m */,
-				EC34160A173894B600501AF4 /* UIImage+Gtar.h */,
-				EC34160B173894B600501AF4 /* UIImage+Gtar.m */,
-				ECDF7F71173DFB38003E51EC /* UIButton+Gtar.h */,
-				ECDF7F72173DFB38003E51EC /* UIButton+Gtar.m */,
+				EC341608173894B600501AF4 /* UIView+Keys.h */,
+				EC341609173894B600501AF4 /* UIView+Keys.m */,
+				EC34160A173894B600501AF4 /* UIImage+Keys.h */,
+				EC34160B173894B600501AF4 /* UIImage+Keys.m */,
+				ECDF7F71173DFB38003E51EC /* UIButton+Keys.h */,
+				ECDF7F72173DFB38003E51EC /* UIButton+Keys.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -3733,6 +3731,7 @@
 		EC995E9B14DA1E6900C86824 /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6D34E73D19F9CDCD001D8EF6 /* Keys_Logo.png */,
 				EC0BAD3316EE93AC00E567A6 /* Default-568h@2x.png */,
 				ECE832281718BE81006E2391 /* Default-568hRot.png */,
 				EC2F25C51468B3C100D0FC7F /* Default.png */,
@@ -3746,8 +3745,6 @@
 		EC995EA014DA229C00C86824 /* PreloadedContent */ = {
 			isa = PBXGroup;
 			children = (
-				EC995EA514DA253E00C86824 /* UserSongsList.xml */,
-				EC995EB114DB3CBF00C86824 /* preloaded-content.plist */,
 			);
 			name = PreloadedContent;
 			sourceTree = "<group>";
@@ -4403,7 +4400,6 @@
 				6DAD0B2B19187F1F005B3807 /* Warm Analogue 66.mp3 in Resources */,
 				6DAD0B1C19187F1F005B3807 /* Warm Analogue 51.mp3 in Resources */,
 				6DB286061921915600B3D14C /* Electric Guitar 9.mp3 in Resources */,
-				EC24DFC3161A8A6500016B78 /* preloaded-content.plist in Resources */,
 				EC24DFC4161A8A6700016B78 /* instrumentList.plist in Resources */,
 				EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */,
 				6DB285C11921915600B3D14C /* Electric Guitar 27.mp3 in Resources */,
@@ -4555,6 +4551,7 @@
 				9D054CC8174C68E000FA3239 /* Bowed Strings 53.mp3 in Resources */,
 				9D054CCA174C68E000FA3239 /* Bowed Strings 54.mp3 in Resources */,
 				9D054CCC174C68E000FA3239 /* Bowed Strings 55.mp3 in Resources */,
+				6D34E73E19F9CDCD001D8EF6 /* Keys_Logo.png in Resources */,
 				9D054CCE174C68E000FA3239 /* Bowed Strings 56.mp3 in Resources */,
 				6DB286041921915600B3D14C /* Electric Guitar 88.mp3 in Resources */,
 				9D054CD0174C68E000FA3239 /* Bowed Strings 57.mp3 in Resources */,
@@ -5064,7 +5061,6 @@
 				ECC12143162D07AD001A231A /* WhiteBackArrow_UP.png in Resources */,
 				ECC12144162D07AD001A231A /* WhiteBackArrow_LEFT.png in Resources */,
 				ECC12145162D07AD001A231A /* XButton.png in Resources */,
-				ECC12193162D07AD001A231A /* preloaded-content.plist in Resources */,
 				ECC12194162D07AD001A231A /* instrumentList.plist in Resources */,
 				ECC121C2162D07AD001A231A /* MainWindow.xib in Resources */,
 				ECC121C7162D07AD001A231A /* FreePlayController.xib in Resources */,
@@ -5385,7 +5381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC24DC37161A895000016B78 /* gTarPlayAppDelegate.m in Sources */,
+				EC24DC37161A895000016B78 /* keysPlayAppDelegate.m in Sources */,
 				EC24DC38161A895000016B78 /* main.m in Sources */,
 				EC24DC44161A896B00016B78 /* CustomComboBox.m in Sources */,
 				EC24DC45161A896E00016B78 /* JamPad.m in Sources */,
@@ -5399,9 +5395,9 @@
 				EC24DC5D161A898700016B78 /* PullToUpdateTableView.m in Sources */,
 				6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */,
 				6D6C5E32192C0B1F0039A85F /* SettingsViewController.m in Sources */,
-				ECC11D7916264220001A231A /* gTarPlayApplication.m in Sources */,
+				ECC11D7916264220001A231A /* keysPlayApplication.m in Sources */,
 				6D7D46F41919BA0F00EF8C75 /* FullScreenActivityView.m in Sources */,
-				EC7D887C1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
+				EC7D887C1651CE86002E2F77 /* keysNavigationController.m in Sources */,
 				6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */,
 				EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
 				EC0BAD8416F18AA000E567A6 /* ActivityFeedCell.m in Sources */,
@@ -5434,12 +5430,12 @@
 				EC48665417287E8D0066194D /* SlidingViewController.m in Sources */,
 				EC48665A172889CA0066194D /* SlidingInstrumentViewController.m in Sources */,
 				EC3415D4172F3E4900501AF4 /* SocialUserCell.m in Sources */,
-				EC34160C173894B600501AF4 /* UIView+Gtar.m in Sources */,
-				EC34160E173894B600501AF4 /* UIImage+Gtar.m in Sources */,
+				EC34160C173894B600501AF4 /* UIView+Keys.m in Sources */,
+				EC34160E173894B600501AF4 /* UIImage+Keys.m in Sources */,
 				EC3416131739976900501AF4 /* SocialSongCell.m in Sources */,
 				EC34161B1739ADA600501AF4 /* SessionModalViewController.m in Sources */,
 				ECDF7F6E173D5A72003E51EC /* IconButton.m in Sources */,
-				ECDF7F73173DFB38003E51EC /* UIButton+Gtar.m in Sources */,
+				ECDF7F73173DFB38003E51EC /* UIButton+Keys.m in Sources */,
 				ECFF773417440BA9002D7D40 /* FirmwareModalViewController.m in Sources */,
 				EC7CAE80174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */,
 				EC7CAE82174DA940004E26DE /* MPCJSONSerializer.m in Sources */,
@@ -5467,7 +5463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECC11DF9162D07AD001A231A /* gTarPlayAppDelegate.m in Sources */,
+				ECC11DF9162D07AD001A231A /* keysPlayAppDelegate.m in Sources */,
 				ECC11DFA162D07AD001A231A /* main.m in Sources */,
 				ECC11E06162D07AD001A231A /* CustomComboBox.m in Sources */,
 				ECC11E07162D07AD001A231A /* JamPad.m in Sources */,
@@ -5479,8 +5475,8 @@
 				ECC11E15162D07AD001A231A /* SongDisplayController.m in Sources */,
 				ECC11E16162D07AD001A231A /* SongES1Renderer.m in Sources */,
 				ECC11E1F162D07AD001A231A /* PullToUpdateTableView.m in Sources */,
-				ECC11E45162D07AD001A231A /* gTarPlayApplication.m in Sources */,
-				EC7D887D1651CE86002E2F77 /* gTarNavigationController.m in Sources */,
+				ECC11E45162D07AD001A231A /* keysPlayApplication.m in Sources */,
+				EC7D887D1651CE86002E2F77 /* keysNavigationController.m in Sources */,
 				EC0BAD3016EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
 				EC0BAD8516F18AA000E567A6 /* ActivityFeedCell.m in Sources */,
 				EC0BAD9516F2472900E567A6 /* SelectorControl.m in Sources */,
@@ -5505,12 +5501,12 @@
 				EC48665517287E8D0066194D /* SlidingViewController.m in Sources */,
 				EC48665B172889CA0066194D /* SlidingInstrumentViewController.m in Sources */,
 				EC3415D5172F3E4900501AF4 /* SocialUserCell.m in Sources */,
-				EC34160D173894B600501AF4 /* UIView+Gtar.m in Sources */,
-				EC34160F173894B600501AF4 /* UIImage+Gtar.m in Sources */,
+				EC34160D173894B600501AF4 /* UIView+Keys.m in Sources */,
+				EC34160F173894B600501AF4 /* UIImage+Keys.m in Sources */,
 				EC3416141739976900501AF4 /* SocialSongCell.m in Sources */,
 				EC34161C1739ADA600501AF4 /* SessionModalViewController.m in Sources */,
 				ECDF7F6F173D5A72003E51EC /* IconButton.m in Sources */,
-				ECDF7F74173DFB38003E51EC /* UIButton+Gtar.m in Sources */,
+				ECDF7F74173DFB38003E51EC /* UIButton+Keys.m in Sources */,
 				ECFF773517440BA9002D7D40 /* FirmwareModalViewController.m in Sources */,
 				EC7CAE81174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */,
 				EC7CAE83174DA940004E26DE /* MPCJSONSerializer.m in Sources */,

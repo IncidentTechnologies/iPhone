@@ -8,7 +8,7 @@
 
 #import "SlidingInstrumentViewController.h"
 
-#import "UIView+Gtar.h"
+#import "UIView+Keys.h"
 
 //extern AudioController *g_audioController;
 

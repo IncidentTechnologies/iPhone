@@ -1,6 +1,6 @@
 //
 //  SessionModalViewController.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 5/7/13.
 //
@@ -11,7 +11,7 @@
 #import "PlayerViewController.h"
 #import "VolumeViewController.h"
 #import "SlidingInstrumentViewController.h"
-#import "UIView+Gtar.h"
+#import "UIView+Keys.h"
 #import "FileController.h"
 #import "UserSong.h"
 #import "UserSongSession.h"

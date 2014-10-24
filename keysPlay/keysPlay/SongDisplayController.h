@@ -26,7 +26,7 @@
 #import <gTarAppCore/NSSongModel.h>
 #import <gTarAppCore/NSNoteFrame.h>
 
-#import "gTarColors.h"
+#import "keysColors.h"
 
 #import "PlayViewController.h"
 

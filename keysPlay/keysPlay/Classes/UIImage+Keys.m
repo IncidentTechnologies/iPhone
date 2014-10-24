@@ -1,14 +1,14 @@
 //
-//  UIImage+Gtar.m
-//  gTarPlay
+//  UIImage+Keys.m
+//  keysPlay
 //
 //  Created by Marty Greenia on 5/6/13.
 //
 //
 
-#import "UIImage+Gtar.h"
+#import "UIImage+Keys.h"
 
-@implementation UIImage (Gtar)
+@implementation UIImage (Keys)
 
 - (UIImage *)resizeImage:(CGSize)size
 {

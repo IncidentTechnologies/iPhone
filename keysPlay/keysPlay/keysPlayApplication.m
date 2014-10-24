@@ -1,16 +1,16 @@
 //
-//  gTarPlayApplication.m
-//  gTarPlay
+//  keysPlayApplication.m
+//  keysPlay
 //
 //  Created by Marty Greenia on 10/10/12.
 //  Copyright (c) 2012 Incident Technologies. All rights reserved.
 //
 
-#import "gTarPlayApplication.h"
+#import "keysPlayApplication.h"
 
 #define IDLE_TIMEOUT 120
 
-@implementation gTarPlayApplication
+@implementation keysPlayApplication
 
 #pragma mark -
 #pragma mark UIApplication

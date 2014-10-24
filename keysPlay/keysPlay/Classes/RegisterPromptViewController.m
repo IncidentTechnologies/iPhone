@@ -1,6 +1,6 @@
 //
 //  RegisterPromptViewController.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Kate Schnippering on 5/20/14.
 //
@@ -52,7 +52,7 @@
     
     _freeSongsLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Get %u free songs.", NULL), numFreeSongs];
     
-    _registerLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Register your gTar.", NULL)];
+    _registerLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Register Keys.", NULL)];
     
     [_laterButton setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"LATER", NULL)] forState:UIControlStateNormal];
     [_registerButton setTitle:[[NSString alloc] initWithString:NSLocalizedString(@"REGISTER", NULL)] forState:UIControlStateNormal];

@@ -1,6 +1,6 @@
 //
 //  SongSelectionViewController.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 3/21/13.
 //
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "GtarController.h"
+#import "KeysController.h"
 #import "CloudController.h"
 #import "CloudResponse.h"
 #import "CloudRequest.h"
@@ -25,8 +25,8 @@
 #import "VolumeViewController.h"
 #import "SlidingInstrumentViewController.h"
 #import "PlayerViewController.h"
-#import "UIView+Gtar.h"
-#import "UIButton+Gtar.h"
+#import "UIView+Keys.h"
+#import "UIButton+Keys.h"
 #import "PullToUpdateTableView.h"
 #import "ExpandableSearchBar.h"
 #import "SoundMaster.h"
@@ -49,7 +49,7 @@ struct SongSortOrder {
 @class SlidingModalViewController;
 @class UserSong;
 
-@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, GtarControllerObserver, ExpandableSearchBarDelegate,SlidingInstrumentDelegate, PlayerViewDelegate>
+@interface SongSelectionViewController : UIViewController <PullToUpdateTableViewDelegate, KeysControllerObserver, ExpandableSearchBarDelegate,SlidingInstrumentDelegate, PlayerViewDelegate>
 
 // Audio Controller
 @property (strong, nonatomic) SoundMaster *g_soundMaster;

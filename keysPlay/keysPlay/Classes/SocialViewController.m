@@ -15,8 +15,8 @@
 #import "SessionModalViewController.h"
 #import "PullToUpdateTableView.h"
 
-#import "UIView+Gtar.h"
-#import "UIButton+Gtar.h"
+#import "UIView+Keys.h"
+#import "UIButton+Keys.h"
 
 #import <gTarAppCore/UserController.h>
 #import "UserProfile.h"
@@ -136,7 +136,7 @@ extern Facebook *g_facebook;
 {
     [g_userController requestLogoutUserCallbackObj:nil andCallbackSel:nil];
     
-    [g_facebook logout];
+    //[g_facebook logout];
 
     [self.navigationController popViewControllerAnimated:YES];
 }

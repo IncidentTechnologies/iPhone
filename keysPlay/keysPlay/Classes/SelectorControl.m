@@ -1,6 +1,6 @@
 //
 //  SelectorControl.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 3/14/13.
 //

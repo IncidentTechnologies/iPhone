@@ -9,7 +9,7 @@
 #import "PlayViewController.h"
 #import "VolumeViewController.h"
 
-#import "GtarController.h"
+#import "KeysController.h"
 
 #import "CloudController.h"
 #import <gTarAppCore/UserController.h>
@@ -27,7 +27,7 @@
 
 #import "Mixpanel.h"
 #import "SongDisplayController.h"
-#import "UIButton+Gtar.h"
+#import "UIButton+Keys.h"
 #import "FrameGenerator.h"
 
 //#define FRAME_TIMER_DURATION_MED (0.40f) // seconds
@@ -50,7 +50,7 @@
 #define TEMP_BASE_SCORE 10
 
 extern CloudController * g_cloudController;
-extern GtarController * g_gtarController;
+extern KeysController * g_keysController;
 extern UserController * g_userController;
 //extern AudioController * g_audioController;
 //extern TelemetryController * g_telemetryController;
@@ -83,12 +83,12 @@ extern UserController * g_userController;
     NSTimer *_delayedChordTimer;
     NSTimer *_metronomeTimer;
     
-    GtarString _previousChordPluckString;
-    GtarPluckVelocity _previousChordPluckVelocity;
+    KeysString _previousChordPluckString;
+    KeysPluckVelocity _previousChordPluckVelocity;
     NSInteger _previousChordPluckDirection;
     
     NSInteger _delayedChordsCount;
-    GtarFret _delayedChords[GTAR_GUITAR_STRING_COUNT];
+    KeysFret _delayedChords[KEYS_GUITAR_STRING_COUNT];
     
     NSMutableArray *_deferredNotesQueue;
     
@@ -284,9 +284,9 @@ extern UserController * g_userController;
 
 - (void) setStandalone
 {
-    if(g_gtarController.connected == NO){
+    if(g_keysController.connected == NO){
         
-        NSLog(@"GTAR DISCONNECTED USE STANDALONE");
+        NSLog(@"KEYS DISCONNECTED USE STANDALONE");
         
         isStandalone = YES;
         [self standaloneReady];
@@ -297,7 +297,7 @@ extern UserController * g_userController;
         
     }else{
         
-        NSLog(@"GTAR IS CONNECTED USE NORMAL");
+        NSLog(@"KEYS IS CONNECTED USE NORMAL");
         
         isStandalone = NO;
         
@@ -406,7 +406,7 @@ extern UserController * g_userController;
     
     // Observe the global guitar controller. This will call guitarConnected when it is connected.
     // This in turn starts the game mode.
-    [g_gtarController addObserver:self];
+    [g_keysController addObserver:self];
     
 }
 
@@ -431,10 +431,10 @@ extern UserController * g_userController;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AudioRouteChange" object:nil];
     
-    if(g_gtarController.connected){
-        [g_gtarController turnOffAllLeds];
+    if(g_keysController.connected){
+        [g_keysController turnOffAllLeds];
     }
-    [g_gtarController removeObserver:self];
+    [g_keysController removeObserver:self];
     
     [_displayController cancelPreloading];
     
@@ -548,8 +548,8 @@ extern UserController * g_userController;
         [self restartSong:NO];
         
         // return LEDs to off
-        if(g_gtarController.connected == YES){
-            [g_gtarController turnOffAllLeds];
+        if(g_keysController.connected == YES){
+            [g_keysController turnOffAllLeds];
         }
         
     }else{
@@ -629,7 +629,7 @@ extern UserController * g_userController;
     isScrolling = [_tempoButton.titleLabel.text isEqualToString:NSLocalizedString(@"NONE", NULL)] ? NO : YES;
     double tempoPercent = 1.0;
     [self setScrolling:isScrolling];
-    [self setRestrictPlayFrame:(isScrolling && g_gtarController.connected)];
+    [self setRestrictPlayFrame:(isScrolling && g_keysController.connected)];
     
     if(isScrolling){
         tempoPercent = [[_tempoButton.titleLabel.text stringByReplacingOccurrencesOfString:@"%" withString:@""] doubleValue]/100;
@@ -796,8 +796,8 @@ extern UserController * g_userController;
         [self uploadUserSongSession];
     }
     
-    if(g_gtarController.connected == YES){
-        [g_gtarController turnOffAllLeds];
+    if(g_keysController.connected == YES){
+        [g_keysController turnOffAllLeds];
     }
     [_displayController shiftView:0];
     
@@ -1693,7 +1693,7 @@ extern UserController * g_userController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
-    //    [g_telemetryController logEvent:GtarPlaySongShared
+    //    [g_telemetryController logEvent:KeysPlaySongShared
     //                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
     //                                     [NSNumber numberWithInteger:delta], @"PlayTime",
     //                                     [NSNumber numberWithInteger:_userSong.m_songId], @"SongId",
@@ -1720,7 +1720,7 @@ extern UserController * g_userController;
 - (void)mainEventLoop {
     
 #ifdef Debug_BUILD
-    if(g_gtarController.connected) {
+    if(g_keysController.connected) {
         
         // DEBUG tapping screen hits the current notes (see: touchesbegan)
         if ( _skipNotes == YES ) {
@@ -1731,23 +1731,23 @@ extern UserController * g_userController;
                 
                 NSNote * note = [_songModel.m_currentFrame.m_notesPending objectAtIndex:0];
                 
-                GtarPluck pluck;
-                pluck.velocity = GtarMaxPluckVelocity;
+                KeysPluck pluck;
+                pluck.velocity = KeysMaxPluckVelocity;
                 pluck.position.fret = note.m_fret;
                 pluck.position.string = note.m_string;
                 
-                [self gtarNoteOn:pluck forFrame:nil];
+                [self keysNoteOn:pluck forFrame:nil];
                 
             } else if ( [_songModel.m_nextFrame.m_notesPending count] > 0 ) {
                 
                 NSNote * note = [_songModel.m_nextFrame.m_notesPending objectAtIndex:0];
                 
-                GtarPluck pluck;
-                pluck.velocity = GtarMaxPluckVelocity;
+                KeysPluck pluck;
+                pluck.velocity = KeysMaxPluckVelocity;
                 pluck.position.fret = note.m_fret;
                 pluck.position.string = note.m_string;
                 
-                [self gtarNoteOn:pluck forFrame:nil];
+                [self keysNoteOn:pluck forFrame:nil];
             }
             
             _refreshDisplay = YES;
@@ -1782,27 +1782,27 @@ extern UserController * g_userController;
         
         [self updateProgressDisplay];
     }
-	
+    
 }
 
 #pragma mark - GuitarControllerObserver
 
-- (void)gtarFretDown:(GtarPosition)position
+- (void)keysFretDown:(KeysPosition)position
 {
     
 }
 
-- (void)gtarFretUp:(GtarPosition)position
+- (void)keysFretUp:(KeysPosition)position
 {
     
 }
 
-- (void)gtarNoteOn:(GtarPluck)pluck
+- (void)keysNoteOn:(KeysPluck)pluck
 {
-    [self gtarNoteOn:pluck forFrame:nil];
+    [self keysNoteOn:pluck forFrame:nil];
 }
 
-- (void)gtarNoteOn:(GtarPluck)pluck forFrame:(NSNoteFrame*)frameToPlay
+- (void)keysNoteOn:(KeysPluck)pluck forFrame:(NSNoteFrame*)frameToPlay
 {
     // If we are not running (i.e. paused) then we ignore input from the midi
     if ( m_isRunning == NO )
@@ -1819,9 +1819,9 @@ extern UserController * g_userController;
         return;
     }
     
-    GtarFret fret = pluck.position.fret;
-    GtarString str = pluck.position.string;
-    GtarPluckVelocity velocity = pluck.velocity;
+    KeysFret fret = pluck.position.fret;
+    KeysString str = pluck.position.string;
+    KeysPluckVelocity velocity = pluck.velocity;
     
     if ( _currentFrame == nil && frameToPlay == nil && !isRestrictPlayFrame)
     {
@@ -1851,7 +1851,7 @@ extern UserController * g_userController;
     }
     else if ( hit != nil )
     {
-        [self pluckString:hit.m_string andFret:hit.m_fret andVelocity:GtarMaxPluckVelocity];
+        [self pluckString:hit.m_string andFret:hit.m_fret andVelocity:KeysMaxPluckVelocity];
         
         fret = hit.m_fret;
     }
@@ -1906,7 +1906,7 @@ extern UserController * g_userController;
     }
 }
 
-- (void)gtarNoteOff:(GtarPosition)position
+- (void)keysNoteOff:(KeysPosition)position
 {
     
     // Always mute notes on note-off for hard
@@ -1921,8 +1921,8 @@ extern UserController * g_userController;
             NSNumber * fretNumber = [pluck objectForKey:@"Fret"];
             NSNumber * strNumber = [pluck objectForKey:@"String"];
             
-            GtarFret fret = [fretNumber charValue];
-            GtarString str = [strNumber charValue];
+            KeysFret fret = [fretNumber charValue];
+            KeysString str = [strNumber charValue];
             
             // If this is a cancelation, kill this timer.
             // Break out of the loop because the for(...) doesn't like
@@ -1963,7 +1963,7 @@ extern UserController * g_userController;
     
 }
 
-- (void)gtarConnected
+- (void)keysConnected
 {
     // Standalone -> Normal
     NSLog(@"SongViewController: gTar has been connected");
@@ -1980,7 +1980,7 @@ extern UserController * g_userController;
         
     }else{
         
-        [g_gtarController setMinimumInterarrivalTime:0.10f];
+        [g_keysController setMinimumInterarrivalTime:0.10f];
         
         if(!isPracticeMode){
             [self startWithSongXmlDom];
@@ -2003,7 +2003,7 @@ extern UserController * g_userController;
     
 }
 
-- (void)gtarDisconnected
+- (void)keysDisconnected
 {
     
     // Normal -> Standalone
@@ -2036,8 +2036,8 @@ extern UserController * g_userController;
 #pragma mark - Gameplay related helpers
 - (void)initSongModel
 {
-    if(g_gtarController.connected){
-        [g_gtarController turnOffAllLeds];
+    if(g_keysController.connected){
+        [g_keysController turnOffAllLeds];
     }
     [_displayController cancelPreloading];
     
@@ -2177,7 +2177,7 @@ extern UserController * g_userController;
     [_songModel startWithDelegate:self andBeatOffset:-4 fastForward:YES isScrolling:(isScrolling || isStandalone) withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
     
     // Light up the first frame
-    //if(g_gtarController.connected == YES){
+    //if(g_keysController.connected == YES){
     [self turnOnFrame:_songModel.m_nextFrame];
     //}
     
@@ -2237,9 +2237,9 @@ extern UserController * g_userController;
     NSNumber * strNumber = [pluck objectForKey:@"String"];
     NSNumber * velNumber = [pluck objectForKey:@"Velocity"];
     
-    GtarFret fret = [fretNumber charValue];
-    GtarString str = [strNumber charValue];
-    GtarPluckVelocity velocity = [velNumber charValue];
+    KeysFret fret = [fretNumber charValue];
+    KeysString str = [strNumber charValue];
+    KeysPluckVelocity velocity = [velNumber charValue];
     
     @synchronized ( _deferredNotesQueue )
     {
@@ -2273,7 +2273,7 @@ extern UserController * g_userController;
 
 // These functions need to be called from the main thread RunLoop.
 // If they are called from a MIDI interrupt thread, stuff won't work properly.
-- (void)correctHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity
+- (void)correctHitFret:(KeysFret)fret andString:(KeysString)str andVelocity:(KeysPluckVelocity)velocity
 {
     
     // set it to the correct attenuation
@@ -2314,9 +2314,9 @@ extern UserController * g_userController;
         if ( _interFrameDelayTimer == nil )
         {
             
-            for ( NSInteger index = 0; index < GTAR_GUITAR_STRING_COUNT; index++ )
+            for ( NSInteger index = 0; index < KEYS_GUITAR_STRING_COUNT; index++ )
             {
-                _delayedChords[index] = GTAR_GUITAR_NOTE_OFF;
+                _delayedChords[index] = KEYS_GUITAR_NOTE_OFF;
             }
             
             _delayedChordsCount = 0;
@@ -2339,14 +2339,14 @@ extern UserController * g_userController;
                     NSNumber * fretNumber = [pluck objectForKey:@"Fret"];
                     NSNumber * strNumber = [pluck objectForKey:@"String"];
                     
-                    GtarFret fret = [fretNumber charValue];
-                    GtarString str = [strNumber charValue];
+                    KeysFret fret = [fretNumber charValue];
+                    KeysString str = [strNumber charValue];
                     
                     // This one is queues up, so don't play it
                     if ( _delayedChords[str-1] == fret )
                     {
                         NSLog(@"Aborted delayed");
-                        _delayedChords[str-1] = GTAR_GUITAR_NOTE_OFF;
+                        _delayedChords[str-1] = KEYS_GUITAR_NOTE_OFF;
                     }
                 }
             }
@@ -2376,7 +2376,7 @@ extern UserController * g_userController;
     }
 }
 
-- (void)incorrectHitFret:(GtarFret)fret andString:(GtarString)str andVelocity:(GtarPluckVelocity)velocity
+- (void)incorrectHitFret:(KeysFret)fret andString:(KeysString)str andVelocity:(KeysPluckVelocity)velocity
 {
     
     // See if we are trying to play a new chord
@@ -2397,7 +2397,7 @@ extern UserController * g_userController;
     
 }
 
-- (void)handleDirectionChange:(GtarString)str
+- (void)handleDirectionChange:(KeysString)str
 {
     
     // Check for direction changes
@@ -2463,18 +2463,18 @@ extern UserController * g_userController;
         return;
     }
     
-    GtarString str = _delayedChordsCount;
+    KeysString str = _delayedChordsCount;
     
     _delayedChordsCount--;
     
-    GtarFret fret = _delayedChords[str-1];
+    KeysFret fret = _delayedChords[str-1];
     
     if ( _delayedChordsCount > 0 )
     {
         _delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
     }
     
-    if ( fret != GTAR_GUITAR_NOTE_OFF )
+    if ( fret != KEYS_GUITAR_NOTE_OFF )
     {
         
         // Play the note
@@ -2484,7 +2484,7 @@ extern UserController * g_userController;
         }
         else
         {
-            [self pluckString:str andFret:fret andVelocity:GtarMaxPluckVelocity];
+            [self pluckString:str andFret:fret andVelocity:KeysMaxPluckVelocity];
         }
         
         // Record the note
@@ -2523,61 +2523,61 @@ extern UserController * g_userController;
     
 }
 
-- (void)turnOnString:(GtarString)str andFret:(GtarFret)fret
+- (void)turnOnString:(KeysString)str andFret:(KeysFret)fret
 {
-    if(g_gtarController.connected){
+    if(g_keysController.connected){
         
-        if ( fret == GTAR_GUITAR_FRET_MUTED )
+        if ( fret == KEYS_GUITAR_FRET_MUTED )
         {
-            [g_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(0, str)];
+            [g_keysController turnOnLedAtPositionWithColorMap:KeysPositionMake(0, str)];
         }
         else
         {
-            [g_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(fret, str)];
+            [g_keysController turnOnLedAtPositionWithColorMap:KeysPositionMake(fret, str)];
         }
         
     }
 }
 
-- (void)turnOnWhiteString:(GtarString)str andFret:(GtarFret)fret
+- (void)turnOnWhiteString:(KeysString)str andFret:(KeysFret)fret
 {
     
-    if(g_gtarController.connected){
+    if(g_keysController.connected){
         
-        if ( fret == GTAR_GUITAR_FRET_MUTED )
+        if ( fret == KEYS_GUITAR_FRET_MUTED )
         {
-            [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, str)
-                                        withColor:GtarLedColorMake(3, 3, 3)];
+            [g_keysController turnOnLedAtPosition:KeysPositionMake(0, str)
+                                        withColor:KeysLedColorMake(3, 3, 3)];
         }
         else
         {
-            [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, str)
-                                        withColor:GtarLedColorMake(3, 3, 3)];
+            [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, str)
+                                        withColor:KeysLedColorMake(3, 3, 3)];
         }
         
     }
     
 }
 
-- (void)turnOffString:(GtarString)str andFret:(GtarFret)fret
+- (void)turnOffString:(KeysString)str andFret:(KeysFret)fret
 {
-    if(g_gtarController.connected){
-        if ( fret == GTAR_GUITAR_FRET_MUTED )
+    if(g_keysController.connected){
+        if ( fret == KEYS_GUITAR_FRET_MUTED )
         {
-            [g_gtarController turnOffLedAtPosition:GtarPositionMake(0, str)];
+            [g_keysController turnOffLedAtPosition:KeysPositionMake(0, str)];
         }
         else
         {
-            [g_gtarController turnOffLedAtPosition:GtarPositionMake(fret, str)];
+            [g_keysController turnOffLedAtPosition:KeysPositionMake(fret, str)];
         }
     }
     
 }
 
-- (void)pluckString:(GtarString)str andFret:(GtarFret)fret andVelocity:(GtarPluckVelocity)velocity
+- (void)pluckString:(KeysString)str andFret:(KeysFret)fret andVelocity:(KeysPluckVelocity)velocity
 {
     
-    if ( fret == GTAR_GUITAR_FRET_MUTED )
+    if ( fret == KEYS_GUITAR_FRET_MUTED )
     {
         NSLog(@"Play View Controller Pluck Muted String");
         [g_soundMaster PluckMutedString:str-1];
@@ -2652,7 +2652,7 @@ extern UserController * g_userController;
     if(!isRestrictPlayFrame){
         [self turnOnFrame:_nextFrame];
     }
-        
+    
     [self disableInput];
     
     _refreshDisplay = YES;
@@ -2681,7 +2681,7 @@ extern UserController * g_userController;
         // On easy mode, we play the notes that haven't been hit yet
         for ( NSNote * note in frame.m_notesPending )
         {
-            [self pluckString:note.m_string andFret:note.m_fret andVelocity:GtarMaxPluckVelocity];
+            [self pluckString:note.m_string andFret:note.m_fret andVelocity:KeysMaxPluckVelocity];
         }
         
         [self songModelExitFrame:_currentFrame];
@@ -2810,28 +2810,28 @@ extern UserController * g_userController;
         double trimmedSliceExtra = 0;
         
         //if((double)f/(double)numSlices >= m_loopStart && (double)f/(double)numSlices < m_loopEnd){
+        
+        if(g < [frameHits count]){
+            accuracy = [[frameHits objectAtIndex:g] doubleValue];
             
-            if(g < [frameHits count]){
-                accuracy = [[frameHits objectAtIndex:g] doubleValue];
-                
-                if(accuracy < 0.5){
-                    accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*115.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
-                }else{
-                    accuracyColor = [UIColor colorWithRed:2.0*(1.0-accuracy)*255.0/255.0 green:180/255.0 blue:50/255.0 alpha:0.9];
-                }
-                
+            if(accuracy < 0.5){
+                accuracyColor = [UIColor colorWithRed:1.0 green:((2.0*accuracy)*115.0+65.0)/255.0 blue:50/255.0 alpha:0.9];
             }else{
-                accuracyColor = [UIColor blackColor];
+                accuracyColor = [UIColor colorWithRed:2.0*(1.0-accuracy)*255.0/255.0 green:180/255.0 blue:50/255.0 alpha:0.9];
             }
             
-            g++;
-            
-            // Ensure that wide frames don't go over the expected area
-            //if(m_loopEnd < 1 && sliceWidth*f+sliceWidth+0.25 > _heatMapView.frame.size.width * m_loopEnd){
-                //trimmedSliceWidth = _heatMapView.frame.size.width * m_loopEnd - sliceWidth*f;
-                //trimmedSliceExtra = sliceWidth+0.25 - trimmedSliceWidth;
-            //}
-            
+        }else{
+            accuracyColor = [UIColor blackColor];
+        }
+        
+        g++;
+        
+        // Ensure that wide frames don't go over the expected area
+        //if(m_loopEnd < 1 && sliceWidth*f+sliceWidth+0.25 > _heatMapView.frame.size.width * m_loopEnd){
+        //trimmedSliceWidth = _heatMapView.frame.size.width * m_loopEnd - sliceWidth*f;
+        //trimmedSliceExtra = sliceWidth+0.25 - trimmedSliceWidth;
+        //}
+        
         //}
         
         CGRect sliceRect = CGRectMake(sliceWidth*f,0,trimmedSliceWidth,_heatMapView.frame.size.height);
@@ -2842,13 +2842,13 @@ extern UserController * g_userController;
         
         // Add in extra filler if area gets cropped
         /*if(trimmedSliceExtra > 0){
-            
-            CGRect sliceExtraRect = CGRectMake(sliceWidth*f+trimmedSliceWidth,0,trimmedSliceExtra,_heatMapView.frame.size.height);
-            
-            CGContextAddRect(context,sliceExtraRect);
-            CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
-            CGContextFillRect(context, sliceExtraRect);
-        }*/
+         
+         CGRect sliceExtraRect = CGRectMake(sliceWidth*f+trimmedSliceWidth,0,trimmedSliceExtra,_heatMapView.frame.size.height);
+         
+         CGContextAddRect(context,sliceExtraRect);
+         CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+         CGContextFillRect(context, sliceExtraRect);
+         }*/
         
     }
     
@@ -2943,8 +2943,8 @@ extern UserController * g_userController;
     [self drawHeatMap];
     
     // Turn of the LEDs
-    if(g_gtarController.connected){
-        [g_gtarController turnOffAllLeds];
+    if(g_keysController.connected){
+        [g_keysController turnOffAllLeds];
     }
     
     [_songRecorder finishSong];
@@ -2994,8 +2994,8 @@ extern UserController * g_userController;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	// For now we just want to recognize that a touch (any touch) occurred
-	UITouch * touch = [[touches allObjects] objectAtIndex:0];
+    // For now we just want to recognize that a touch (any touch) occurred
+    UITouch * touch = [[touches allObjects] objectAtIndex:0];
     
     CGPoint touchPoint = [touch locationInView:self.glView];
     initPoint = touchPoint;
@@ -3018,7 +3018,7 @@ extern UserController * g_userController;
     
     // Debug
 #ifdef Debug_BUILD
-    if(g_gtarController.connected){
+    if(g_keysController.connected){
         _skipNotes = YES;
     }
 #endif
@@ -3027,7 +3027,7 @@ extern UserController * g_userController;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-	UITouch * touch = [[touches allObjects] objectAtIndex:0];
+    UITouch * touch = [[touches allObjects] objectAtIndex:0];
     CGPoint currentPoint = [touch locationInView:self.view];
     CGPoint previousPoint = [touch previousLocationInView:self.view];
     
@@ -3248,8 +3248,8 @@ extern UserController * g_userController;
             @synchronized(tappedFrame.m_notesPending){
                 for(NSNote * nn in tappedFrame.m_notesPending){
                     
-                    GtarPluck pluck;
-                    pluck.velocity = GtarMaxPluckVelocity;
+                    KeysPluck pluck;
+                    pluck.velocity = KeysMaxPluckVelocity;
                     pluck.position.fret = nn.m_fret;
                     pluck.position.string = nn.m_string;
                     
@@ -3257,7 +3257,7 @@ extern UserController * g_userController;
                     
                     [_displayController hitNote:nn];
                     
-                    [self gtarNoteOn:pluck forFrame:tappedFrame];
+                    [self keysNoteOn:pluck forFrame:tappedFrame];
                     
                     [notesToRemove addObject:nn];
                     
@@ -3266,8 +3266,8 @@ extern UserController * g_userController;
             
             /*}else{
              
-             GtarPluck pluck;
-             pluck.velocity = GtarMaxPluckVelocity;
+             KeysPluck pluck;
+             pluck.velocity = KeysMaxPluckVelocity;
              pluck.position.fret = n.m_fret;
              pluck.position.string = n.m_string;
              
@@ -3275,7 +3275,7 @@ extern UserController * g_userController;
              
              [_displayController hitNote:n];
              
-             [self gtarNoteOn:pluck forFrame:tappedFrame];
+             [self keysNoteOn:pluck forFrame:tappedFrame];
              
              [notesToRemove addObject:n];
              

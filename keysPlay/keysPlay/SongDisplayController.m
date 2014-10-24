@@ -45,7 +45,7 @@
         
         m_noteModelDictionary = [[NSMutableDictionary alloc] init];
         m_noteModelUniversalDictionary = [[NSMutableDictionary alloc] init];
-
+        
         m_numberModels = [[NSMutableArray alloc] init];
         
         m_songModel = song;
@@ -54,7 +54,7 @@
         
         m_allFrames = [[NSMutableArray alloc] initWithArray:m_songModel.m_noteFrames];
         
-		m_glView = glView;
+        m_glView = glView;
         
         m_beatsToPreloadSync = SONG_BEATS_PER_SCREEN;
         m_beatsToPreloadAsync = SONG_BEATS_PER_SCREEN * 4;
@@ -68,15 +68,15 @@
         m_loops = numLoops;
         
         //
-		// Create a renderer and give it to the view, or reuse an existing one.
+        // Create a renderer and give it to the view, or reuse an existing one.
         // Don't forget to layout the subviews on the GLView or it will be black.
         //
         if ( m_glView.m_renderer == nil )
         {
             m_renderer = [[SongES1Renderer alloc] init];
-		
+            
             m_glView.m_renderer = m_renderer;
-
+            
             m_renderer.m_offset = (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
             
             [m_glView layoutSubviews];
@@ -86,13 +86,13 @@
         }
         
         //[self cancelPreloading];
-    
+        
         [self createNoteTexture];
         
         [self createNumberModels];
         
         [self createLineModels];
-    
+        
         [self preloadFrames:PRELOAD_INCREMENT*4];
         
         [self createLoopModels];
@@ -104,7 +104,7 @@
         fretThree = NO;
         
     }
-
+    
     return self;
     
 }
@@ -118,7 +118,7 @@
             
             // Remove all displayed notes
             NSArray * displayedNotesKeys = [m_noteModelDictionary allKeys];
-
+            
             NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
             
             for ( NSValue * key in displayedNotesKeys )
@@ -154,7 +154,7 @@
 
 - (void)renderImage
 {
-
+    
     m_framesDisplayed++;
     
     [self updateDisplayedFrames];
@@ -163,7 +163,7 @@
     
     // pull down the shift as time goes by
     double end = [self calculateMaxShiftCoordSpace:isStandalone];
-
+    
     // Don't pass the end
     if(m_renderer.m_viewShift < end){
         m_renderer.m_viewShift = end;
@@ -200,7 +200,7 @@
     {
         
         NSNote * note = [key nonretainedObjectValue];
-            
+        
         if ( note.m_absoluteBeatStart < ( currentBeat - SONG_BEAT_OFFSET ) )
         {
             
@@ -230,7 +230,7 @@
             {
                 
                 //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    [self displayFrame:frame];
+                [self displayFrame:frame];
                 //});
                 
                 [framesToRemove addObject:frame];
@@ -243,7 +243,7 @@
             }
             
         }
-
+        
         [m_undisplayedFrames removeObjectsInArray:framesToRemove];
         
     }
@@ -284,23 +284,23 @@
         for ( NSNoteFrame * frame in m_undisplayedFrames )
         {
             [self displayFrame:frame];
-                
+            
             [framesToRemove addObject:frame];
-                
+            
             framesLoaded++;
             
             if ( framesLoaded == count )
             {
                 break;
             }
-
+            
         }
         
         [m_undisplayedFrames removeObjectsInArray:framesToRemove];
         
     }
     
-
+    
 }
 
 - (void)displayFrame:(NSNoteFrame*)frame
@@ -309,9 +309,9 @@
     //NSLog(@"Frame is %@",frame);
     
     NSMutableDictionary * standaloneNotesForStrings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-               [NSNull null],[NSNumber numberWithInt:1],
-               [NSNull null],[NSNumber numberWithInt:2],
-               [NSNull null],[NSNumber numberWithInt:3], nil];
+                                                       [NSNull null],[NSNumber numberWithInt:1],
+                                                       [NSNull null],[NSNumber numberWithInt:2],
+                                                       [NSNull null],[NSNumber numberWithInt:3], nil];
     
     //NSLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
     
@@ -325,7 +325,7 @@
     NSNote * firstNote = nil;
     
     for ( NSNote * note in frame.m_notes )
-    //for(int k = [frame.m_notes count]-1; k >= 0; k--)
+        //for(int k = [frame.m_notes count]-1; k >= 0; k--)
     {
         
         //NSNote * note = [frame.m_notes objectAtIndex:k];
@@ -346,21 +346,21 @@
         //NSLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
         
         CGPoint center;
-		center.x = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone];
-		center.y = [self convertStringToCoordSpace:note.m_string isStandalone:isStandalone];
-		
-		// number texture overlay
-		NumberModel * overlay;
+        center.x = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone];
+        center.y = [self convertStringToCoordSpace:note.m_string isStandalone:isStandalone];
+        
+        // number texture overlay
+        NumberModel * overlay;
         
         if(isStandalone){
             overlay = nil;
-        }else if ( note.m_fret == GTAR_GUITAR_FRET_MUTED)
+        }else if ( note.m_fret == KEYS_GUITAR_FRET_MUTED)
         {
             overlay = m_mutedTexture;
         }
         else
         {
-            overlay = [m_numberModels objectAtIndex:(note.m_fret%GTAR_GUITAR_FRET_COUNT) ];
+            overlay = [m_numberModels objectAtIndex:(note.m_fret%KEYS_GUITAR_FRET_COUNT) ];
         }
         
         NoteModel * model;
@@ -453,7 +453,7 @@
 - (void)activateNoteAnimation:(NSNote*)note
 {
     // this is disabled for now for performance reasons.
-#if 0 
+#if 0
     NSValue * key = [NSValue valueWithNonretainedObject:note];
     
     NoteAnimation * animation = [m_noteAnimationDictionary objectForKey:key];
@@ -479,13 +479,13 @@
     double end = [self calculateMaxShiftCoordSpace:isStandalone];
     
     /*if ( m_viewShift < 0.0 )
-    {
-        m_viewShift = 0.0;
-    }
-    else if ( end < m_viewShift )
-    {
-        m_viewShift = end;
-    }*/
+     {
+     m_viewShift = 0.0;
+     }
+     else if ( end < m_viewShift )
+     {
+     m_viewShift = end;
+     }*/
     
     if( m_viewShift > 0.0)
     {
@@ -498,7 +498,7 @@
     
     double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift isStandalone:isStandalone] + SONG_BEATS_PER_SCREEN;
     
-//    if ( viewShiftBeats > m_beatsToPreload )
+    //    if ( viewShiftBeats > m_beatsToPreload )
     {
         m_beatsToPreloadSync = MAX(m_beatsToPreloadSync, viewShiftBeats);
         m_beatsToPreloadAsync = MAX(m_beatsToPreloadSync, m_beatsToPreloadAsync);
@@ -510,20 +510,20 @@
 
 - (void)shiftViewDelta:(double)shift
 {
-
+    
     m_viewShift += shift;
     
     // Let us shift through the entire song .. but nothing more.
     double end = [self calculateMaxShiftCoordSpace:isStandalone];
     
     /*if ( m_viewShift < 0.0 )
-    {
-        m_viewShift = 0.0;
-    }
-    else if ( end < m_viewShift )
-    {
-        m_viewShift = end;
-    }*/
+     {
+     m_viewShift = 0.0;
+     }
+     else if ( end < m_viewShift )
+     {
+     m_viewShift = end;
+     }*/
     
     if(m_viewShift > 0.0)
     {
@@ -536,7 +536,7 @@
     
     double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift isStandalone:isStandalone] + SONG_BEATS_PER_SCREEN;
     
-//    if ( viewShiftBeats > m_beatsToPreload )
+    //    if ( viewShiftBeats > m_beatsToPreload )
     {
         m_beatsToPreloadSync = MAX(m_beatsToPreloadSync, viewShiftBeats);
         m_beatsToPreloadAsync = MAX(m_beatsToPreloadSync, m_beatsToPreloadAsync);
@@ -548,25 +548,25 @@
 
 
 #pragma mark - Init models
-    
+
 - (void)createLineModels
 {
-
+    
     //
-	// Create the seek line
+    // Create the seek line
     //
     
-	CGSize size;
+    CGSize size;
     //if(isStandalone){
     //    size.width = GL_NOTE_HEIGHT;
     //    size.height = GL_SCREEN_HEIGHT;
     //}else{
-        size.width = GL_NOTE_HEIGHT / 3.0;
-        size.height = GL_SCREEN_HEIGHT;
+    size.width = GL_NOTE_HEIGHT / 3.0;
+    size.height = GL_SCREEN_HEIGHT;
     //}
     
     // The center will automatically be offset in the rendering
-	CGPoint center;
+    CGPoint center;
     if(isStandalone){
         center.y = GL_SCREEN_HEIGHT / 2.0;
         center.x = - (GL_SCREEN_SEEK_LINE_MARGIN - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN);
@@ -575,21 +575,21 @@
         center.x = 0;
     }
     
-	m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
+    m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
     
     // Draw a wider seek line area for standalone
     /*if(isStandalone){
-        
-        size.width = GL_NOTE_HEIGHT * 3;
-        size.height = GL_SCREEN_HEIGHT;
-        
-        m_renderer.m_seekLineStandaloneModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparentLight] autorelease];
-        
-    }else{
-        
-        m_renderer.m_seekLineStandaloneModel = nil;
-        
-    }*/
+     
+     size.width = GL_NOTE_HEIGHT * 3;
+     size.height = GL_SCREEN_HEIGHT;
+     
+     m_renderer.m_seekLineStandaloneModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparentLight] autorelease];
+     
+     }else{
+     
+     m_renderer.m_seekLineStandaloneModel = nil;
+     
+     }*/
     
     m_renderer.m_seekLineStandaloneModel = nil;
     
@@ -597,17 +597,17 @@
     
     //
     // Create the strings
-    // 
-        
+    //
+    
     center.x = GL_SCREEN_WIDTH / 2.0;
     
     size.width = GL_SCREEN_WIDTH;
     
-    for ( unsigned int i = 0; i < GTAR_GUITAR_STRING_COUNT; i++ )
+    for ( unsigned int i = 0; i < KEYS_GUITAR_STRING_COUNT; i++ )
     {
         
         // strings number and size are inversely proportional -- get slightly bigger
-        size.height = GL_STRING_HEIGHT + (GTAR_GUITAR_STRING_COUNT - 1 - i) * GL_STRING_HEIGHT_INCREMENT;
+        size.height = GL_STRING_HEIGHT + (KEYS_GUITAR_STRING_COUNT - 1 - i) * GL_STRING_HEIGHT_INCREMENT;
         center.y = [self convertStringToCoordSpace:(i+1) isStandalone:isStandalone];
         
         
@@ -626,7 +626,7 @@
 - (void)createLoopModels
 {
     CGSize size;
-	CGPoint center;
+    CGPoint center;
     
     //
     // Create the loop indicators
@@ -655,23 +655,23 @@
 
 - (void)createNumberModels
 {
-	
-	CGSize size;
-	size.width = GL_NOTE_HEIGHT;
-	size.height = GL_NOTE_HEIGHT-3;
-	
+    
+    CGSize size;
+    size.width = GL_NOTE_HEIGHT;
+    size.height = GL_NOTE_HEIGHT-3;
+    
     // Create number models for 0..16
-	for ( unsigned int i = 0; i < (GTAR_GUITAR_FRET_COUNT+1); i++ )
-	{
-		
-		NumberModel * numberModel = [[NumberModel alloc] initWithCenter:CGPointMake(0, 0)
+    for ( unsigned int i = 0; i < (KEYS_GUITAR_FRET_COUNT+1); i++ )
+    {
+        
+        NumberModel * numberModel = [[NumberModel alloc] initWithCenter:CGPointMake(0, 0)
                                                                 andSize:size
                                                                andColor:g_whiteColor
                                                                andValue:i];
-		
-		[m_numberModels addObject:numberModel];
-		
-	}
+        
+        [m_numberModels addObject:numberModel];
+        
+    }
     
     
     m_mutedTexture = [[NumberModel alloc] initWithCenter:CGPointMake(0, 0)
@@ -691,11 +691,11 @@
     
     UIGraphicsBeginImageContext(size);
     [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    scaledImage = UIGraphicsGetImageFromCurrentImageContext();    
+    scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-
+    
     m_noteTexture = [[Texture2D alloc] initWithImage:scaledImage];
-     
+    
 }
 
 #pragma mark - Helpers
@@ -704,10 +704,10 @@
 {
     return [self convertBeatToCoordSpace:(m_songModel.m_beatsPerSecond * delta) isStandalone:standalone];
 }
- 
+
 - (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone
 {
-	//return (beat/(GLfloat)SONG_BEATS_PER_SCREEN) * GL_SCREEN_WIDTH;
+    //return (beat/(GLfloat)SONG_BEATS_PER_SCREEN) * GL_SCREEN_WIDTH;
     //double beatsPerScreen = (isStandalone) ? 3.0*SONG_BEATS_PER_SCREEN/4.0 : SONG_BEATS_PER_SCREEN;
     
     double beatsPerScreen = SONG_BEATS_PER_SCREEN;
@@ -717,7 +717,7 @@
 
 - (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone
 {
-	//return coord * ((GLfloat)SONG_BEATS_PER_SCREEN / GL_SCREEN_WIDTH);
+    //return coord * ((GLfloat)SONG_BEATS_PER_SCREEN / GL_SCREEN_WIDTH);
     
     return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN) / GL_SCREEN_WIDTH;
 }
@@ -728,16 +728,16 @@
         str = [self getMappedStringFromString:str];
     }
     
-	GLfloat effectiveScreenHeight = (GL_SCREEN_HEIGHT) - (GL_SCREEN_TOP_BUFFER + GL_SCREEN_BOTTOM_BUFFER);
-	
-	GLfloat heightPerString = effectiveScreenHeight / ((GLfloat)GTAR_GUITAR_STRING_COUNT-1);
+    GLfloat effectiveScreenHeight = (GL_SCREEN_HEIGHT) - (GL_SCREEN_TOP_BUFFER + GL_SCREEN_BOTTOM_BUFFER);
+    
+    GLfloat heightPerString = effectiveScreenHeight / ((GLfloat)KEYS_GUITAR_STRING_COUNT-1);
     
     if(standalone){
         heightPerString *= 2;
     }
-	
+    
     // bias it down to zero-base it
-	return GL_SCREEN_BOTTOM_BUFFER + ( (str-1) * heightPerString );
+    return GL_SCREEN_BOTTOM_BUFFER + ( (str-1) * heightPerString );
 }
 
 - (double)calculateMaxShiftCoordSpace:(BOOL)standalone
@@ -815,7 +815,7 @@
             float noteCenter = beatMinusBeat - marginoffset;
             float noteMin = noteCenter - GL_NOTE_HEIGHT/2.0 - touchBuffer;
             float noteMax = noteCenter + GL_NOTE_HEIGHT/2.0 + touchBuffer;
-           
+            
             //NSLog(@"Touchpoint x is %f in note range %f to %f",touchPoint.x,noteMin,noteMax);
             
             if(touchPoint.x >= noteMin && touchPoint.x <= noteMax){
@@ -840,17 +840,17 @@
     
     // Determine string
     
-	GLfloat effectiveScreenHeight = (GL_SCREEN_HEIGHT) - (GL_SCREEN_TOP_BUFFER + GL_SCREEN_BOTTOM_BUFFER);
-	
-	GLfloat heightPerString = effectiveScreenHeight / ((GLfloat)GTAR_GUITAR_STRING_COUNT-1);
+    GLfloat effectiveScreenHeight = (GL_SCREEN_HEIGHT) - (GL_SCREEN_TOP_BUFFER + GL_SCREEN_BOTTOM_BUFFER);
+    
+    GLfloat heightPerString = effectiveScreenHeight / ((GLfloat)KEYS_GUITAR_STRING_COUNT-1);
     heightPerString *= 2;
-
+    
     double stringBuffer = 15;
     
     double string1Center = heightPerString;
     double string2Center = 2*heightPerString;
     double string3Center = 3*heightPerString;
-
+    
     NSMutableDictionary * frameWithString = [[NSMutableDictionary alloc] initWithObjectsAndKeys:activeFrame,@"Frame",[NSNumber numberWithInt:-1],@"String",nil];
     
     // Top string
@@ -944,7 +944,7 @@
         
         [notehit attemptNote];
     }
-
+    
     // set a timer to unset the attempt highlight if not yet green
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(unattemptFrame:) userInfo:frame repeats:NO];
 }

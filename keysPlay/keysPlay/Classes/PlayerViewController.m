@@ -1,6 +1,6 @@
 //
 //  PlayerViewController.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 4/8/13.
 //
@@ -8,7 +8,7 @@
 
 #import "PlayerViewController.h"
 
-#import "UIView+Gtar.h"
+#import "UIView+Keys.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -16,13 +16,9 @@
 #import "UserSong.h"
 #import <gTarAppCore/NSSong.h>
 
-#import "UIButton+Gtar.h"
+#import "UIButton+Keys.h"
 
-//@class AudioController;
-@class GtarController;
-
-//extern AudioController *g_audioController;
-//extern GtarController *g_gtarController;
+@class KeysController;
 
 @interface PlayerViewController ()
 {
@@ -104,7 +100,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-//    [_songPlaybackController ignoreGtarController:g_gtarController];
     
     _songPlaybackController = nil;
 }
@@ -117,10 +112,7 @@
 
 - (void)dealloc
 {
-//    [_songPlaybackController ignoreGtarController:g_gtarController];
     _songPlaybackController = nil;
-    
-    //[g_soundMaster releaseAfterUse];
     
 }
 
@@ -310,10 +302,7 @@
                 //[_playButton setSelected:YES];
                 [_playButton setImage:[UIImage imageNamed:@"PauseButtonVideo.png"] forState:UIControlStateNormal];
                 
-//                _init = YES;
-                
                 [_songPlaybackController playSong];
-//                [_songPlaybackController observeGtarController:g_gtarController];
                 
                 [self startUpdating];
             }

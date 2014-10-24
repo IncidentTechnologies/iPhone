@@ -1,7 +1,7 @@
 
 //
 //  InAppPurchaseManager.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Franco on 8/28/13.
 //

@@ -1,6 +1,6 @@
 //
 //  JamPad.m
-//  gTar
+//  keysPlay
 //
 //  Created by Marty Greenia on 2/16/11.
 //  Copyright 2011 IncidentTech. All rights reserved.

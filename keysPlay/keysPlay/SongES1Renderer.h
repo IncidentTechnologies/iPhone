@@ -1,6 +1,6 @@
 //
 //  SongES1Renderer.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 8/8/11.
 //  Copyright 2011 Incident Technologies. All rights reserved.

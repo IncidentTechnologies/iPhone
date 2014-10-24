@@ -26,7 +26,7 @@
 #import "SocialViewController.h"
 #import "VolumeViewController.h"
 #import "SlidingInstrumentViewController.h"
-#import "UIView+Gtar.h"
+#import "UIView+Keys.h"
 #import "Mixpanel.h"
 
 #import "ActivityFeedCell.h"
@@ -41,9 +41,9 @@
 
 extern CloudController * g_cloudController;
 extern FileController * g_fileController;
-extern GtarController * g_gtarController;
+extern KeysController * g_keysController;
 extern UserController * g_userController;
-extern Facebook * g_facebook;
+//extern Facebook * g_facebook;
 //extern TelemetryController * g_telemetryController;
 
 #define NOTIFICATION_GATEKEEPER_SIGNIN @"Please connect your gTar to sign up for an account."
@@ -121,7 +121,7 @@ extern Facebook * g_facebook;
     _globalFeedCurrentPage = 1;
     _friendFeedCurrentPage = 1;
     
-    g_facebook = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
+    //g_facebook = [[Facebook alloc] initWithAppId:FACEBOOK_CLIENT_ID andDelegate:self];
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
     // draw profile label button
@@ -135,13 +135,13 @@ extern Facebook * g_facebook;
     // See if there are any cached credentials
     if ( [settings objectForKey:@"FBAccessTokenKey"] && [settings objectForKey:@"FBExpirationDateKey"] )
     {
-        g_facebook.accessToken = [settings objectForKey:@"FBAccessTokenKey"];
-        g_facebook.expirationDate = [settings objectForKey:@"FBExpirationDateKey"];
+        //g_facebook.accessToken = [settings objectForKey:@"FBAccessTokenKey"];
+        //g_facebook.expirationDate = [settings objectForKey:@"FBExpirationDateKey"];
     }
     
     // Add shadows
     [_topBarView addShadow];
-        
+    
     [_gtarLogoImage addShadow];
     //[_loggedoutSigninButton addShadow];
     //[_loggedoutSignupButton addShadow];
@@ -186,13 +186,13 @@ extern Facebook * g_facebook;
     }
     
     [self hideNotification];
-
+    
     // Assume we are logged in at first, since this will be the common case
     [self swapLeftPanel:_menuLeftPanel];
     [self swapRightPanel:_feedRightPanel];
     
     // Now connect to the device
-    [g_gtarController addObserver:self];
+    [g_keysController addObserver:self];
 }
 
 - (void)initSoundMaster
@@ -213,7 +213,7 @@ extern Facebook * g_facebook;
     // Gate keeper
     [_gatekeeperSigninButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
     [_gatekeeperSignupButton setTitle:NSLocalizedString(@"SIGN UP", NULL) forState:UIControlStateNormal];
-    [_gatekeeperWebsiteButton setTitle:NSLocalizedString(@"INCIDENTGTAR.COM", NULL) forState:UIControlStateNormal];
+    [_gatekeeperWebsiteButton setTitle:NSLocalizedString(@"INCIDENTKEYS.COM", NULL) forState:UIControlStateNormal];
     
     [_signinButton setTitle:NSLocalizedString(@"SIGN IN", NULL) forState:UIControlStateNormal];
     [_signupButton setTitle:NSLocalizedString(@"SIGN UP", NULL) forState:UIControlStateNormal];
@@ -233,7 +233,7 @@ extern Facebook * g_facebook;
     
     [_signinUsernameText setPlaceholder:NSLocalizedString(@"Username", NULL)];
     [_signinPasswordText setPlaceholder:NSLocalizedString(@"Password", NULL)];
- 
+    
     [_signupUsernameText setPlaceholder:NSLocalizedString(@"Username", NULL)];
     [_signupPasswordText setPlaceholder:NSLocalizedString(@"Password", NULL)];
     [_signupEmailText setPlaceholder:NSLocalizedString(@"Email", NULL)];
@@ -245,22 +245,22 @@ extern Facebook * g_facebook;
 {
     //- (void)viewWillAppear:(BOOL)animated
     //{
-        //if(g_soundMaster != nil){
-        //    [self releaseSoundMaster];
-        //}
-        
-        if(g_soundMaster == nil){
-            [self performSelectorInBackground:@selector(initSoundMaster) withObject:nil];
-        }
+    //if(g_soundMaster != nil){
+    //    [self releaseSoundMaster];
     //}
-
+    
+    if(g_soundMaster == nil){
+        [self performSelectorInBackground:@selector(initSoundMaster) withObject:nil];
+    }
+    //}
+    
     
     // Set up the modals
     _sessionViewController = [[SessionModalViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster];
     _firmwareViewController = [[FirmwareModalViewController alloc] initWithNibName:nil bundle:nil];
     _settingsViewController = [[SettingsViewController alloc] initWithNibName:nil bundle:nil];
     _settingsViewController.delegate = self;
-        
+    
     _displayingCell = NO;
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
@@ -331,7 +331,7 @@ extern Facebook * g_facebook;
 {
     
     // Show Free Play if/if not standalone
-    if(g_gtarController.connected){
+    if(g_keysController.connected){
         
         [_menuStandalonePlayButton setHidden:YES];
         [_menuStandaloneStoreButton setHidden:YES];
@@ -383,8 +383,8 @@ extern Facebook * g_facebook;
     [_currentRightPanel removeFromSuperview];
     [_fullScreenButton removeFromSuperview];
     
-    g_facebook = nil;
-
+    //g_facebook = nil;
+    
     //[super dealloc];
 }
 
@@ -464,14 +464,14 @@ extern Facebook * g_facebook;
 }
 
 - (void)loggedinScreen {
-
+    
     [self swapLeftPanel:_menuLeftPanel];
     
     [self swapRightPanel:_feedRightPanel];
     
     [self enableButton:_menuPlayButton];
     [self enableButton:_menuFreePlayButton];
-//    [self enableButton:_menuStoreButton];
+    //    [self enableButton:_menuStoreButton];
     
     //[self showHideFreePlay];
     
@@ -494,8 +494,8 @@ extern Facebook * g_facebook;
         [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
     }
     
-    if(g_gtarController.connected){
-        [self promptGtarRegistration];
+    if(g_keysController.connected){
+        [self promptKeysRegistration];
     }
     
     if(_pendingFirmwareUpdate){
@@ -504,7 +504,7 @@ extern Facebook * g_facebook;
             
             TFLog(@"Expecting firmware update, rerequest now | logged in %i",g_cloudController.m_loggedIn);
             
-            [g_gtarController sendRequestFirmwareVersion];
+            [g_keysController sendRequestFirmwareVersion];
             
         }
         
@@ -601,8 +601,8 @@ extern Facebook * g_facebook;
 
 - (IBAction)gatekeeperWebsiteButtonClicked:(id)sender
 {
-    // Show them where they can buy a gtar!
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.incidentgtar.com/"]];
+    // Show them where they can buy a keys!
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.incidentkeys.com/"]];
 }
 
 - (IBAction)menuPlayButtonClicked:(id)sender
@@ -616,9 +616,9 @@ extern Facebook * g_facebook;
 {
     // Start free play mode
     FreePlayController * fpc = [[FreePlayController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster];
-	
-	[self.navigationController pushViewController:fpc animated:YES];
-	
+    
+    [self.navigationController pushViewController:fpc animated:YES];
+    
 }
 
 - (IBAction)menuSettingsButtonClicked:(id)sender
@@ -631,7 +631,7 @@ extern Facebook * g_facebook;
     StoreViewController *svc = [[StoreViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster];
     
     [self.navigationController pushViewController:svc animated:YES];
-	
+    
     
 }
 
@@ -699,7 +699,7 @@ extern Facebook * g_facebook;
         return;
     }
     
-//    NSCharacterSet * alphaNumChars = [NSCharacterSet alphanumericCharacterSet];
+    //    NSCharacterSet * alphaNumChars = [NSCharacterSet alphanumericCharacterSet];
     NSCharacterSet * alphaChars = [NSCharacterSet letterCharacterSet];
     
     NSString * firstChar = [_signupUsernameText.text substringToIndex:1];
@@ -731,7 +731,7 @@ extern Facebook * g_facebook;
                                andEmail:_signupEmailText.text
                          andCallbackObj:self
                          andCallbackSel:@selector(signupCallback:)];
-
+    
 }
 
 - (IBAction)signupFacebookButtonClicked:(id)sender
@@ -782,7 +782,7 @@ extern Facebook * g_facebook;
     
     _waitingForFacebook = YES;
     
-    [g_facebook authorize:FACEBOOK_PERMISSIONS];
+    //[g_facebook authorize:FACEBOOK_PERMISSIONS];
     
     [self swapRightPanel:_loadingRightPanel];
 }
@@ -867,7 +867,7 @@ extern Facebook * g_facebook;
 - (void)moviePlayerPlaybackStateChanged:(NSNotification *)notification
 {
     MPMoviePlaybackState playbackState = _moviePlayer.playbackState;
-
+    
     if ( playbackState == MPMoviePlaybackStateInterrupted )
     {
         [_moviePlayer setFullscreen:NO];
@@ -885,8 +885,8 @@ extern Facebook * g_facebook;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	// Return the number of sections.
-	return 1;
+    // Return the number of sections.
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -924,10 +924,10 @@ extern Facebook * g_facebook;
     }
     
     static NSString * CellIdentifier = @"ActivityFeedCell";
-	ActivityFeedCell *tempCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	
-	if (tempCell == NULL)
-	{
+    ActivityFeedCell *tempCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (tempCell == NULL)
+    {
         NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityFeedCell" owner:nil options:nil];
         for (UIView *view in views)
             if([view isKindOfClass:[UITableViewCell class]])
@@ -968,35 +968,35 @@ extern Facebook * g_facebook;
     tempCell.userSongSession = session;
     [tempCell updateCell];
     return tempCell;
-
-//    if ( tableView == _commentTable )
-//    {
-//        static NSString *CommentCellIdentifier = @"UserCommentCell";
-//        
-//        UserCommentCell *cell = (UserCommentCell *)[tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier];
-//        
-//        if (cell == nil)
-//        {
-//            cell = [[[UserCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier] autorelease];
-//            
-//            [[NSBundle mainBundle] loadNibNamed:@"UserCommentCell" owner:cell options:nil];
-//            
-//            [cell setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _feedTable.rowHeight-1)];
-//            [cell.accessoryView setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _commentTable.rowHeight-1)];
-//        }
-//        
-//        // Clear these in case this cell was previously selected
-//        cell.highlighted = NO;
-//        cell.selected = NO;
-//        
-//        NSInteger row = [indexPath row];
-//        
-//        // get stuff
-//        
-//        [cell updateCell];
-//        
-//        return cell;
-//    }
+    
+    //    if ( tableView == _commentTable )
+    //    {
+    //        static NSString *CommentCellIdentifier = @"UserCommentCell";
+    //
+    //        UserCommentCell *cell = (UserCommentCell *)[tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier];
+    //
+    //        if (cell == nil)
+    //        {
+    //            cell = [[[UserCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier] autorelease];
+    //
+    //            [[NSBundle mainBundle] loadNibNamed:@"UserCommentCell" owner:cell options:nil];
+    //
+    //            [cell setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _feedTable.rowHeight-1)];
+    //            [cell.accessoryView setFrame:CGRectMake(0, 0, _commentTable.frame.size.width, _commentTable.rowHeight-1)];
+    //        }
+    //
+    //        // Clear these in case this cell was previously selected
+    //        cell.highlighted = NO;
+    //        cell.selected = NO;
+    //
+    //        NSInteger row = [indexPath row];
+    //
+    //        // get stuff
+    //
+    //        [cell updateCell];
+    //
+    //        return cell;
+    //    }
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1061,12 +1061,12 @@ extern Facebook * g_facebook;
         [cell.activityView stopAnimating];
         _displayingCell = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                         message:@"Cannot connect to server"
-                                                        delegate:nil
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil];
+                                                        message:@"Cannot connect to server"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
         [alert show];
-
+        
         return;
     }
     
@@ -1133,7 +1133,7 @@ extern Facebook * g_facebook;
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     _textFieldSliderTimer = [NSTimer scheduledTimerWithTimeInterval:0.0f target:self selector:@selector(delayedTextFieldSlider:) userInfo:textField repeats:NO];
-
+    
     return YES;
 }
 
@@ -1174,88 +1174,88 @@ extern Facebook * g_facebook;
         [cyclingTextField resignFirstResponder];
     }
     
-	return NO;
+    return NO;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
-//    NSCharacterSet * usernameSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
-//    NSCharacterSet * passwordSet =[[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789!@#$%^&*+-/=?^_`|~.[]{}()"] invertedSet];
-//    
-//    // Backspace character
-//    if ( [string length] == 0 )
-//    {
-//        return YES;
-//    }
-//    
-//    // The username needs alpha num only
-//    if ( textField == m_usernameTextField &&
-//        [string rangeOfCharacterFromSet:usernameSet].location != NSNotFound )
-//    {
-//        [m_statusLabel setText:@"Invalid character"];
-//        [m_statusLabel setHidden:NO];
-//        return NO;
-//    }
-//    
-//    if ( textField == m_passwordTextField &&
-//        [string rangeOfCharacterFromSet:passwordSet].location != NSNotFound )
-//    {
-//        [m_statusLabel setText:@"Invalid character"];
-//        [m_statusLabel setHidden:NO];
-//        return NO;
-//    }
-//    
-//    [m_statusLabel setHidden:YES];
+    //    NSCharacterSet * usernameSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
+    //    NSCharacterSet * passwordSet =[[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789!@#$%^&*+-/=?^_`|~.[]{}()"] invertedSet];
+    //
+    //    // Backspace character
+    //    if ( [string length] == 0 )
+    //    {
+    //        return YES;
+    //    }
+    //
+    //    // The username needs alpha num only
+    //    if ( textField == m_usernameTextField &&
+    //        [string rangeOfCharacterFromSet:usernameSet].location != NSNotFound )
+    //    {
+    //        [m_statusLabel setText:@"Invalid character"];
+    //        [m_statusLabel setHidden:NO];
+    //        return NO;
+    //    }
+    //
+    //    if ( textField == m_passwordTextField &&
+    //        [string rangeOfCharacterFromSet:passwordSet].location != NSNotFound )
+    //    {
+    //        [m_statusLabel setText:@"Invalid character"];
+    //        [m_statusLabel setHidden:NO];
+    //        return NO;
+    //    }
+    //
+    //    [m_statusLabel setHidden:YES];
     
     return YES;
 }
 
-#pragma mark - GtarControllerObserver
+#pragma mark - KeysControllerObserver
 
-- (void)gtarConnected {
+- (void)keysConnected {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    BOOL gtarConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
+    BOOL keysConnectedBefore = [settings boolForKey:@"GuitarConnectedBefore"];
     
     // First log in, show the welcome screens
-	if ( gtarConnectedBefore == NO ) {
+    if ( keysConnectedBefore == NO ) {
         [settings setBool:YES forKey:@"GuitarConnectedBefore"];
         [settings synchronize];
     }
     
-    [g_gtarController turnOffAllEffects];
-    [g_gtarController turnOffAllLeds];
-    [g_gtarController sendDisableDebug];
+    [g_keysController turnOffAllEffects];
+    [g_keysController turnOffAllLeds];
+    [g_keysController sendDisableDebug];
     
     if ( g_cloudController.m_loggedIn == YES ) {
         [self loggedinScreen];
         
-        if(!gtarConnectedBefore){
-            [self promptGtarRegistration];
+        if(!keysConnectedBefore){
+            [self promptKeysRegistration];
         }
     }
     else {
         [self loggedoutScreen];
     }
     
-    g_gtarController.m_delegate = self;
-    [g_gtarController sendRequestFirmwareVersion];
+    g_keysController.m_delegate = self;
+    [g_keysController sendRequestFirmwareVersion];
     
-//    [self playStartupLightSequence];
-//    
-//    [self checkCurrentFirmwareVersion];
+    //    [self playStartupLightSequence];
+    //
+    //    [self checkCurrentFirmwareVersion];
     
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ { [NSThread sleepForTimeInterval:WAIT_INT]; }];
-    [g_gtarController InitiateSerialNumberRequest];
+    [g_keysController InitiateSerialNumberRequest];
     
     [self showHideFreePlay];
     [g_soundMaster routeToDefault];
 }
 
-- (void)gtarDisconnected
+- (void)keysDisconnected
 {
     
-    [g_gtarController InterruptSerialNumberRequest];
+    [g_keysController InterruptSerialNumberRequest];
     
     // Pull down the firmare view controller after disconnection
     if ( self.presentedViewController == _firmwareViewController )
@@ -1266,17 +1266,17 @@ extern Facebook * g_facebook;
     [self showHideFreePlay];
 }
 
-- (void)promptGtarRegistration
+- (void)promptKeysRegistration
 {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    BOOL gtarRegistered = [settings boolForKey:@"GtarRegistered"];
-    BOOL gtarRegisterPromptShown = [settings boolForKey:@"GtarRegisterPrompt"];
+    BOOL keysRegistered = [settings boolForKey:@"KeysRegistered"];
+    BOOL keysRegisterPromptShown = [settings boolForKey:@"KeysRegisterPrompt"];
     
     // First log in, show the welcome screens
-	if ( gtarRegistered == NO && gtarRegisterPromptShown == NO )
-	{
+    if ( keysRegistered == NO && keysRegisterPromptShown == NO )
+    {
         
-        [settings setBool:YES forKey:@"GtarRegisterPrompt"];
+        [settings setBool:YES forKey:@"KeysRegisterPrompt"];
         [settings synchronize];
         
         // Prompt registration
@@ -1297,15 +1297,15 @@ extern Facebook * g_facebook;
     
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     
-    BOOL gtarRegistered = [settings boolForKey:@"GtarRegistered"];
+    BOOL keysRegistered = [settings boolForKey:@"KeysRegistered"];
     
-    if(!gtarRegistered){
+    if(!keysRegistered){
         
-        [settings setBool:YES forKey:@"GtarRegistered"];
+        [settings setBool:YES forKey:@"KeysRegistered"];
         [settings synchronize];
-    
-        NSString * serialNumberUpper = [g_gtarController GetSerialNumberUpper];
-        NSString * serialNumberLower = [g_gtarController GetSerialNumberLower];
+        
+        NSString * serialNumberUpper = [g_keysController GetSerialNumberUpper];
+        NSString * serialNumberLower = [g_keysController GetSerialNumberLower];
         
         NSLog(@"Register device serial number %@, %@",serialNumberLower, serialNumberLower);
         
@@ -1324,12 +1324,12 @@ extern Facebook * g_facebook;
 {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     
-    return [settings boolForKey:@"GtarRegistered"];
+    return [settings boolForKey:@"KeysRegistered"];
     
     // TODO: cloud controller call
 }
 
-#pragma mark - GtarControllerDelegate
+#pragma mark - KeysControllerDelegate
 
 - (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
 {
@@ -1343,12 +1343,6 @@ extern Facebook * g_facebook;
     NSString * msg = @"Firmware update succeeded";
     
     NSLog(@"%@", msg);
-    
-//    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     msg, @"Status",
-//                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-//                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -1365,10 +1359,10 @@ extern Facebook * g_facebook;
     [self dismissViewControllerAnimated:YES completion:nil];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
-                                                     message:@"Update Succeeded"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
+                                                    message:@"Update Succeeded"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
     [alert show];
 }
 
@@ -1378,11 +1372,6 @@ extern Facebook * g_facebook;
     
     NSLog(@"%@", msg);
     
-//    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     msg, @"Status",
-//                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-//                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -1390,18 +1379,18 @@ extern Facebook * g_facebook;
                                                           msg, @"Status",
                                                           [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
                                                           nil]];
-
+    
     [self performSelectorOnMainThread:@selector(receivedFirmwareUpdateStatusFailedMain) withObject:nil waitUntilDone:YES];
 }
 
 - (void)receivedFirmwareUpdateStatusFailedMain {
-//    [self dismissViewControllerAnimated:YES completion:nil];
+    //    [self dismissViewControllerAnimated:YES completion:nil];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                     message:@"Update Failed -- Restart the gTar"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
+                                                    message:@"Update Failed -- Restart Keys"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
     [alert show];
 }
 
@@ -1459,15 +1448,11 @@ extern Facebook * g_facebook;
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         // we are logged in
-//        [g_telemetryController logEvent:GtarPlayAppLogin
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
-//                                         nil]];
         [self logLoginEvent];
-
+        
         [g_userController sendPendingUploads];
         
-//        [g_telemetryController uploadLogMessages];
+        //        [g_telemetryController uploadLogMessages];
         
         [self hideNotification];
         
@@ -1507,15 +1492,11 @@ extern Facebook * g_facebook;
     if ( userResponse.m_status == UserResponseStatusSuccess )
     {
         // we are logged in
-//        [g_telemetryController logEvent:GtarPlayAppLogin
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         [NSString stringWithFormat:@"%@",  g_cloudController.m_username], @"Username",
-//                                         nil]];
         [self logLoginEvent];
         
         [g_userController sendPendingUploads];
         
-//        [g_telemetryController uploadLogMessages];
+        //        [g_telemetryController uploadLogMessages];
         
         [self hideNotification];
         
@@ -1546,7 +1527,7 @@ extern Facebook * g_facebook;
         {
             [self displayNotification:userResponse.m_statusText turnRed:YES];
             [self swapRightPanel:_signinRightPanel];
-        
+            
             // Renable buttons
             [self enableButton:_gatekeeperSignupButton];
             [self enableButton:_gatekeeperWebsiteButton];
@@ -1628,7 +1609,7 @@ extern Facebook * g_facebook;
     {
         [_feedTable stopAnimating];
     }
-
+    
 }
 
 - (void)userUpdateSucceeded:(CloudResponse *)cloudResponse
@@ -1680,7 +1661,7 @@ extern Facebook * g_facebook;
     {
         [_feedTable stopAnimating];
     }
-
+    
 }
 
 - (void)userUpdateFailed:(NSString *)reason
@@ -1725,7 +1706,7 @@ extern Facebook * g_facebook;
 }
 
 #pragma mark - FacebookDelegate
-
+/*
 - (void)fbDidLogin
 {
     _waitingForFacebook = NO;
@@ -1733,8 +1714,8 @@ extern Facebook * g_facebook;
     // We save the access token to the user settings
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
-    [settings setObject:[g_facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [settings setObject:[g_facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    //[settings setObject:[g_facebook accessToken] forKey:@"FBAccessTokenKey"];
+    //[settings setObject:[g_facebook expirationDate] forKey:@"FBExpirationDateKey"];
     
     [settings synchronize];
     
@@ -1778,24 +1759,21 @@ extern Facebook * g_facebook;
 {
     
 }
+ */
 
 #pragma mark - CloudController Callbacks
 
 - (void)receivedAvailableFirmwareVersion:(CloudResponse*)cloudResponse
 {
     
-    /*UIAlertView * alertview = [[UIAlertView alloc] initWithTitle:@"Firmware Version" message:[NSString stringWithFormat:@"Received: %u.%u | gTar: %u.%u",cloudResponse.m_responseFirmwareMajorVersion,cloudResponse.m_responseFirmwareMinorVersion,g_gtarController.m_firmwareMajorVersion,g_gtarController.m_firmwareMinorVersion] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    
-    [alertview show];*/
-    
     [_settingsViewController updateFirmwareVersion];
     
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
         // Check if available version > installed version.
-        if ( (cloudResponse.m_responseFirmwareMajorVersion > g_gtarController.m_firmwareMajorVersion) ||
-            ((cloudResponse.m_responseFirmwareMajorVersion == g_gtarController.m_firmwareMajorVersion) &&
-             (cloudResponse.m_responseFirmwareMinorVersion > g_gtarController.m_firmwareMinorVersion)) )
+        if ( (cloudResponse.m_responseFirmwareMajorVersion > g_keysController.m_firmwareMajorVersion) ||
+            ((cloudResponse.m_responseFirmwareMajorVersion == g_keysController.m_firmwareMajorVersion) &&
+             (cloudResponse.m_responseFirmwareMinorVersion > g_keysController.m_firmwareMinorVersion)) )
         {
             _firmwareFileId = cloudResponse.m_responseFileId;
             
@@ -1815,7 +1793,7 @@ extern Facebook * g_facebook;
             }
             
             
-            _firmwareViewController.currentFirmwareVersion = [NSString stringWithFormat:@"%u.%u", g_gtarController.m_firmwareMajorVersion, g_gtarController.m_firmwareMinorVersion];
+            _firmwareViewController.currentFirmwareVersion = [NSString stringWithFormat:@"%u.%u", g_keysController.m_firmwareMajorVersion, g_keysController.m_firmwareMinorVersion];
             _firmwareViewController.availableFirmwareVersion = [NSString stringWithFormat:@"%u.%u", cloudResponse.m_responseFirmwareMajorVersion, cloudResponse.m_responseFirmwareMinorVersion];
             
             [g_fileController getFileOrDownloadAsync:_firmwareFileId callbackObject:self callbackSelector:@selector(firmwareDownloadFinished:)];
@@ -1883,7 +1861,7 @@ extern Facebook * g_facebook;
     // Log out of everything
     [g_userController requestLogoutUserCallbackObj:nil andCallbackSel:nil];
     
-    [g_facebook logout];
+    //[g_facebook logout];
     
     [self swapLeftPanel:_loggedoutLeftPanel];
     [self swapRightPanel:_loggedoutSigninButton];
@@ -1928,11 +1906,6 @@ extern Facebook * g_facebook;
     
     NSLog(@"%@", msg);
     
-//    [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     msg, @"Status",
-//                                     [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-//                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -1950,26 +1923,21 @@ extern Facebook * g_facebook;
         
         NSLog(@"%@", msg);
         
-//        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         msg, @"Status",
-//                                         [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-//                                         nil]];
-
+        
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
         [mixpanel track:@"Firmware update status" properties:[NSDictionary dictionaryWithObjectsAndKeys:
                                                               msg, @"Status",
                                                               [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
                                                               nil]];
-
+        
         [self dismissViewControllerAnimated:YES completion:nil];
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed"
-                                                         message:@"Failed to download firmware"
-                                                        delegate:nil
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil];
+                                                        message:@"Failed to download firmware"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
         [alert show];
         
         return;
@@ -1980,7 +1948,7 @@ extern Facebook * g_facebook;
     TFLog(@"Firmware data %@",firmware);
     
     // Double check it's actually passing data
-    if ( ![firmware isKindOfClass:[NSString class]] && [g_gtarController sendFirmwareUpdate:firmware] == YES )
+    if ( ![firmware isKindOfClass:[NSString class]] && [g_keysController sendFirmwareUpdate:firmware] == YES )
     {
         NSLog(@"Update begun");
     }
@@ -1990,12 +1958,6 @@ extern Facebook * g_facebook;
         NSString * msg = [[NSString alloc] initWithFormat:@"Update failed to start"];
         
         NSLog(@"%@", msg);
-        
-//        [g_telemetryController logEvent:GtarFirmwareUpdateStatus
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         msg, @"Status",
-//                                         [NSNumber numberWithInteger:_firmwareFileId], @"FileId",
-//                                         nil]];
         
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
@@ -2007,13 +1969,13 @@ extern Facebook * g_facebook;
         [self dismissViewControllerAnimated:YES completion:nil];
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed"
-                                                         message:@"Failed to update firmware"
-                                                        delegate:nil
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil];
+                                                        message:@"Failed to update firmware"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
         [alert show];
     }
-
+    
 }
 
 @end

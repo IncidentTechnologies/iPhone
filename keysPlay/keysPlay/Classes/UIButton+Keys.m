@@ -1,14 +1,14 @@
 //
-//  UIButton+Gtar.m
-//  gTarPlay
+//  UIButton+Keys.m
+//  keysPlay
 //
 //  Created by Marty Greenia on 5/10/13.
 //
 //
 
-#import "UIButton+Gtar.h"
+#import "UIButton+Keys.h"
 
-@implementation UIButton (Gtar)
+@implementation UIButton (Keys)
 
 - (void)startActivityIndicator
 {

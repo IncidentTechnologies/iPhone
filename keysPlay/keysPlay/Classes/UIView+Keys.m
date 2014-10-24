@@ -1,16 +1,16 @@
 //
-//  UIView+Gtar.m
-//  gTarPlay
+//  UIView+Keys.m
+//  keysPlay
 //
 //  Created by Marty Greenia on 4/10/13.
 //
 //
 
-#import "UIView+Gtar.h"
+#import "UIView+Keys.h"
 
 #import <QuartzCore/QuartzCore.h>
 
-@implementation UIView (Gtar)
+@implementation UIView (Keys)
 
 - (void)addShadow
 {

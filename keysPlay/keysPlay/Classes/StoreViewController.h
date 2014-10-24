@@ -1,6 +1,6 @@
 //
 //  StoreViewController.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Franco on 8/28/13.
 //
@@ -13,7 +13,7 @@
 #import "ExpandableSearchBar.h"
 
 #import "SoundMaster.h"
-#import "GtarController.h"
+#import "KeysController.h"
 #import "SlidingInstrumentViewController.h"
 
 #import "PlayViewController.h"
@@ -39,7 +39,7 @@ struct StoreSortOrder {
 
 @class SlidingModalViewController;
 
-@interface StoreViewController : UIViewController <GtarControllerObserver, PullToUpdateTableViewDelegate, ExpandableSearchBarDelegate,SlidingInstrumentDelegate, PlayerViewDelegate> {
+@interface StoreViewController : UIViewController <KeysControllerObserver, PullToUpdateTableViewDelegate, ExpandableSearchBarDelegate,SlidingInstrumentDelegate, PlayerViewDelegate> {
 
 }
 

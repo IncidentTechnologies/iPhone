@@ -1,6 +1,6 @@
 //
 //  MarqueeExpandingRoundedRectangleView.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 4/20/11.
 //  Copyright 2011 Msft. All rights reserved.

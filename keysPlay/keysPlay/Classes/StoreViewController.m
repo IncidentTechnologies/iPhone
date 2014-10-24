@@ -1,6 +1,6 @@
 //
 //  StoreViewController.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Franco on 8/28/13.
 //
@@ -21,12 +21,11 @@
 #import "SongSelectionViewController.h"
 #import "StoreSongListCell.h"
 
-
-#import "UIButton+Gtar.h"
+#import "UIButton+Keys.h"
 
 #define kStoreSongCacheKey @"StoreSongArray"
 
-extern GtarController * g_gtarController;
+extern KeysController * g_keysController;
 extern CloudController *g_cloudController;
 extern FileController *g_fileController;
 
@@ -62,7 +61,7 @@ extern FileController *g_fileController;
     if (self)
     {
         // See if we have any cached songs from previous runs
-        // Do we want it to cache?        
+        // Do we want it to cache?
         NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
         NSData *songArrayData = [settings objectForKey:kStoreSongCacheKey];
         NSArray *storeSongArray;
@@ -200,7 +199,7 @@ extern FileController *g_fileController;
         [_instrumentViewController attachToSuperview:_songOptionsModal.contentView withFrame:_instrumentView.frame];
     }
     
-    [g_gtarController addObserver:self];
+    [g_keysController addObserver:self];
 }
 
 - (void)localizeViews {
@@ -237,11 +236,11 @@ extern FileController *g_fileController;
 
 - (void)dealloc
 {
-    [g_gtarController removeObserver:self];
+    [g_keysController removeObserver:self];
     
     // Turn off all LEDs
-    if(g_gtarController.connected){
-        [g_gtarController turnOffAllLeds];
+    if(g_keysController.connected){
+        [g_keysController turnOffAllLeds];
     }
 }
 
@@ -363,19 +362,19 @@ extern FileController *g_fileController;
 }
 
 /*
-- (IBAction)fullscreenButtonClicked:(id)sender
-{
-    [_searchBar endSearch];
-    [_fullscreenButton setHidden:YES];
-}
+ - (IBAction)fullscreenButtonClicked:(id)sender
+ {
+ [_searchBar endSearch];
+ [_fullscreenButton setHidden:YES];
+ }
  */
 
 #pragma mark - ViewController stuff
 
 - (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty practiceMode:(BOOL)practiceMode
 {
-    // TODO: pass gTarController
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_gtarController.connected practiceMode:practiceMode];
+    // TODO: pass keysController
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_keysController.connected practiceMode:practiceMode];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.
@@ -463,7 +462,7 @@ extern FileController *g_fileController;
 }
 
 -(IBAction)onTitleArtistClick:(id)sender
-{    
+{
     switch(m_storeSortOrder.type) {
         case SORT_TITLE: {
             if(m_storeSortOrder.fAscending) {
@@ -474,7 +473,7 @@ extern FileController *g_fileController;
                 m_storeSortOrder.fAscending = TRUE;
             }
         } break;
-        
+            
         case SORT_ARTIST: {
             if(m_storeSortOrder.fAscending) {
                 m_storeSortOrder.fAscending = FALSE;
@@ -490,7 +489,7 @@ extern FileController *g_fileController;
             m_storeSortOrder.fAscending = TRUE;
         } break;
     }
-        
+    
     [self updateTopHeaderTextFormatting];
     [self refreshDisplayedStoreSongList];
 }
@@ -566,7 +565,7 @@ extern FileController *g_fileController;
         m_displayedStoreSongArray = m_searchedStoreSongArray;
     else
         m_displayedStoreSongArray = m_storeSongArray;
-
+    
     
     [self sortSongList];
     [_pullToUpdateSongList reloadData];
@@ -652,36 +651,36 @@ extern FileController *g_fileController;
 {
     
     /*
-    if ( _songOptionsModal.presentingViewController != nil )
-    {
-        // We only want to present it once, otherwise it will crash
-        return;
-    }
-    
-	NSInteger row = [indexPath row];
-    UserSong *userSong = [_displayedUserSongArray objectAtIndex:row];
-    
-    _currentUserSong = userSong;
-    
-    [_startButton startActivityIndicator];
-    
-    NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
-    
-    _playerViewController.userSong = userSong;
-    _playerViewController.xmpBlob = songString;
-    
-    NSMethodSignature *signature = [SongSelectionViewController instanceMethodSignatureForSelector:@selector(playerLoaded)];
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-    
-    [invocation setTarget:self];
-    [invocation setSelector:@selector(playerLoaded)];
-    
-    _playerViewController.loadedInvocation = invocation;
+     if ( _songOptionsModal.presentingViewController != nil )
+     {
+     // We only want to present it once, otherwise it will crash
+     return;
+     }
+     
+     NSInteger row = [indexPath row];
+     UserSong *userSong = [_displayedUserSongArray objectAtIndex:row];
+     
+     _currentUserSong = userSong;
+     
+     [_startButton startActivityIndicator];
+     
+     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
+     
+     _playerViewController.userSong = userSong;
+     _playerViewController.xmpBlob = songString;
+     
+     NSMethodSignature *signature = [SongSelectionViewController instanceMethodSignatureForSelector:@selector(playerLoaded)];
+     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+     
+     [invocation setTarget:self];
+     [invocation setSelector:@selector(playerLoaded)];
+     
+     _playerViewController.loadedInvocation = invocation;
      
      [_songOptionsModal setModalPresentationStyle:UIModalPresentationOverCurrentContext];
      
-    [self presentViewController:_songOptionsModal animated:YES completion:nil];
-    */
+     [self presentViewController:_songOptionsModal animated:YES completion:nil];
+     */
     
     NSLog(@"Table view row selected!");
 }
@@ -695,8 +694,8 @@ extern FileController *g_fileController;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	// Return the number of sections.
-	return 1;
+    // Return the number of sections.
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -709,10 +708,10 @@ extern FileController *g_fileController;
     static NSString *CellIdentifier = @"StoreSongListCell";
     StoreSongListCell *tempCell = [_pullToUpdateSongList dequeueReusableCellWithIdentifier:CellIdentifier];
     
-	if (tempCell == NULL)
+    if (tempCell == NULL)
     {
-		//tempCell = [[StoreSongListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-		// [NSBundle mainBundle] loadNibNamed:@"StoreSongListCell" owner:tempCell options:nil];
+        //tempCell = [[StoreSongListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        // [NSBundle mainBundle] loadNibNamed:@"StoreSongListCell" owner:tempCell options:nil];
         
         NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"StoreSongListCell" owner:nil options:nil];
         for (UIView *view in views)
@@ -732,11 +731,11 @@ extern FileController *g_fileController;
         //[tempCell.titleArtistView setFrame:CGRectMake(0.0f, 0.0f, _buttonTitleArtist.frame.size.width, cellHeight)];
         //[tempCell.skillView setFrame:CGRectMake(_buttonSkill.frame.origin.x, 0.0f, _buttonSkill.frame.size.width, cellHeight)];
         //[tempCell.purchaseSongView setFrame:CGRectMake(_buttonBuy.frame.origin.x, 0.0f, _buttonBuy.frame.size.width, cellHeight)];
-	}
-	
-	// Clear these in case this cell was previously selected
-	tempCell.highlighted = NO;
-	tempCell.selected = NO;
+    }
+    
+    // Clear these in case this cell was previously selected
+    tempCell.highlighted = NO;
+    tempCell.selected = NO;
     
     // iOS 7 check
     if([tempCell respondsToSelector:@selector(setSeparatorInset:)])
@@ -748,7 +747,7 @@ extern FileController *g_fileController;
     tempCell.userSong = userSong;
     [tempCell updateCell];
     
-	return tempCell;
+    return tempCell;
 }
 
 #pragma mark - ExpandableSearchBarDelegate
@@ -819,14 +818,14 @@ extern FileController *g_fileController;
         // refresh table data
         UserSongs *userSongs = cloudResponse.m_responseUserSongs;
         [self setStoreSongArray:userSongs.m_songsArray];
-    
+        
         NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
         
         /*
-        // If we have cached data, clobber it (doesn't seem to look at the data itself sometimes)
-        if ( [settings objectForKey:kStoreSongCacheKey] != nil )
-            [settings removeObjectForKey:kStoreSongCacheKey];
-        */
+         // If we have cached data, clobber it (doesn't seem to look at the data itself sometimes)
+         if ( [settings objectForKey:kStoreSongCacheKey] != nil )
+         [settings removeObjectForKey:kStoreSongCacheKey];
+         */
         
         // Archive the new array to standardUserDefaults
         [settings setObject:[NSKeyedArchiver archivedDataWithRootObject:m_storeSongArray] forKey:kStoreSongCacheKey];
@@ -840,9 +839,9 @@ extern FileController *g_fileController;
     {
         // Something bad happened, and we don't have any data to show
         /*if ( [_userSongArray count] == 0 )
-        {
-            [self backButtonClicked:nil];
-        }*/
+         {
+         [self backButtonClicked:nil];
+         }*/
         
         NSLog(@"Something bad happened, no data to show");
     }
@@ -878,4 +877,4 @@ extern FileController *g_fileController;
 }
 
 @end
-    
+

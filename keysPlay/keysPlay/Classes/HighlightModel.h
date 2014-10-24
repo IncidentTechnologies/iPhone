@@ -1,6 +1,6 @@
 //
 //  HighlightModel.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Kate Schnippering on 4/24/14.
 //

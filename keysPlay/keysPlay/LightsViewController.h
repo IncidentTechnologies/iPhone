@@ -1,17 +1,17 @@
 //
 //  LightsViewController.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Franco on 3/28/13.
 //
 //
 
-#import "GtarController.h"
+#import "KeysController.h"
 #import "RGBColor.h"
 #import <gTarAppCore/AppCore.h>
 #import <UIKit/UIKit.h>
 
-extern GtarController * g_gtarController;
+extern KeysController * g_keysController;
 
 typedef enum
 {
@@ -65,7 +65,7 @@ typedef enum
 
 @end
 
-@interface LightsViewController : UIViewController <GtarControllerObserver> {
+@interface LightsViewController : UIViewController <KeysControllerObserver> {
  
     LEDMode _LEDMode;
     

@@ -6,6 +6,38 @@
 	<array>
 		<dict>
 			<key>Name</key>
+			<string>Piano</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Rhodes</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Marimba</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Muted Clav</string>
+			<key>FirstNoteMidiNum</key>
+			<integer>40</integer>
+			<key>NumNotes</key>
+			<integer>41</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>Electric Guitar</string>
 			<key>FirstNoteMidiNum</key>
 			<integer>2</integer>
@@ -49,39 +81,7 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Piano</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Rhodes</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Muted Clav</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>Bowed Strings</string>
-			<key>FirstNoteMidiNum</key>
-			<integer>40</integer>
-			<key>NumNotes</key>
-			<integer>41</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Marimba</string>
 			<key>FirstNoteMidiNum</key>
 			<integer>40</integer>
 			<key>NumNotes</key>

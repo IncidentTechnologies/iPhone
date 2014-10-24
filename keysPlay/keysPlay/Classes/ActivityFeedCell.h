@@ -1,6 +1,6 @@
 //
 //  ActivityFeedCell.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 3/13/13.
 //

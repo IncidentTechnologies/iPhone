@@ -1,6 +1,6 @@
 //
-//  gTarPlayApplication.h
-//  gTarPlay
+//  keysPlayApplication.h
+//  keysPlay
 //
 //  Created by Marty Greenia on 10/10/12.
 //  Copyright (c) 2012 Incident Technologies. All rights reserved.
@@ -10,7 +10,7 @@
 
 #define ENABLE_TIMEOUT false
 
-@interface gTarPlayApplication : UIApplication
+@interface keysPlayApplication : UIApplication
 {
     NSTimer * m_idleTimer;
 }

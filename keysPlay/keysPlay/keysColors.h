@@ -1,6 +1,6 @@
 //
-//  gTarColors.h
-//  gTarPlay
+//  keysColors.h
+//  keysPlay
 //
 //  Created by Marty Greenia on 8/11/11.
 //  Copyright 2011 Incident Technologies. All rights reserved.

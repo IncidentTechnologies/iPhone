@@ -1,6 +1,6 @@
 //
 //  FreePlayAudioController.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Kate Schnippering on 4/8/14.
 //

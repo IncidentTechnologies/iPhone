@@ -1,6 +1,6 @@
 //
 //  NoteModel.h
-//  gTar
+//  keysPlay
 //
 //  Created by wuda on 12/21/10.
 //  Copyright 2010 IncidentTech. All rights reserved.
@@ -9,7 +9,7 @@
 //#import "Texture2D.h"
 #import <gTarAppCore/Model.h>
 #import "HighlightModel.h"
-#import "gTarColors.h"
+#import "keysColors.h"
 
 @interface NoteModel : Model
 {

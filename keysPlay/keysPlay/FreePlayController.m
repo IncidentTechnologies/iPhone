@@ -1,16 +1,16 @@
 //
 //  FreePlayController.m
-//  gTarPlay
+//  keysPlay
 //
-//  Created by Marty Greenia on 3/15/11.
-//  Copyright 2011 Msft. All rights reserved.
+//  Created by Kate Schnippering on 10/23/14.
+//  Copyright 2014 Incident Technologies. All rights reserved.
 //
 
 
 #import "FreePlayController.h"
 
 
-extern GtarController * g_gtarController;
+extern KeysController * g_keysController;
 //extern SoundMaster * g_soundMaster;
 //extern AudioController * g_audioController;
 //extern TelemetryController * g_telemetryConstroller;
@@ -102,7 +102,7 @@ extern GtarController * g_gtarController;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if ( self )
-    {        
+    {
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
         
@@ -138,7 +138,7 @@ extern GtarController * g_gtarController;
         {
             m_effectTimeStart[effect] = [NSDate date];
         }
-
+        
         m_playTimeAdjustment = 0;
         
         // Create audio controller
@@ -195,7 +195,7 @@ extern GtarController * g_gtarController;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SlideHammerStateChange" object:nil];
     
-    [g_gtarController removeObserver:self];
+    [g_keysController removeObserver:self];
     
     
     //[m_volumeView release];
@@ -210,15 +210,15 @@ extern GtarController * g_gtarController;
     {
         [m_LEDTimer invalidate];
     }
-
+    
     //[m_audioRouteSwitch release];
     
     
     // Turn off all LEDs
-    if(g_gtarController.connected){
-        [g_gtarController turnOffAllLeds];
+    if(g_keysController.connected){
+        [g_keysController turnOffAllLeds];
     }
-        
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -242,7 +242,7 @@ extern GtarController * g_gtarController;
     [_arrowEffects addShadow];
     [_arrowInstruments addShadow];
     [_menuBarDropShadowView addShadow];
-
+    
     // images for slider
     //UIImage *sliderTrackMinImage = [[UIImage imageNamed: @"SliderEndMin.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
     //UIImage *sliderTrackMaxImage = [[UIImage imageNamed: @"SliderEndMax.png"] stretchableImageWithLeftCapWidth: 1 topCapHeight: 0];
@@ -257,9 +257,9 @@ extern GtarController * g_gtarController;
     //CGRect menuTabFrame = m_menuTab.frame;
     CGRect largeTabFrame = m_LEDTab.frame;
     
-    smallTabFrame.origin.x = -105; 
+    smallTabFrame.origin.x = -105;
     //menuTabFrame.origin.x = -328;
-    largeTabFrame.origin.x = -446; 
+    largeTabFrame.origin.x = -446;
     // move tab up to align with wet/dry frame
     smallTabFrame.origin.y = 0;
     largeTabFrame.origin.y = 0;
@@ -269,17 +269,17 @@ extern GtarController * g_gtarController;
     //[m_menuTab setFrame:menuTabFrame];
     [m_LEDTab setFrame:largeTabFrame];
     
-    [m_effectsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_effectsTab.frame.size.width yMin:80 yMax:m_effectsTab.frame.size.height]; 
+    [m_effectsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_effectsTab.frame.size.width yMin:80 yMax:m_effectsTab.frame.size.height];
     [m_instrumentsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_instrumentsTab.frame.size.width yMin:0 yMax:80];
     [m_instrumentsTab addTransparentAreaWithXmin:(m_instrumentsTab.frame.size.width - 30) xMax:m_instrumentsTab.frame.size.width yMin:155 yMax:m_instrumentsTab.frame.size.height];
     [m_LEDTab addTransparentAreaWithXmin:m_LEDTab.frame.size.width - 30 xMax:m_LEDTab.frame.size.width yMin:0 yMax:155];
     [m_LEDTab addTransparentAreaWithXmin:m_LEDTab.frame.size.width - 30 xMax:m_LEDTab.frame.size.width yMin:225 yMax:m_LEDTab.frame.size.height];
     //[m_menuTab addTransparentAreaWithXmin:(m_menuTab.frame.size.width - 30) xMax:m_menuTab.frame.size.width yMin:0 yMax:225];
-
+    
     /*[self.view addSubview:m_effectsTab];
-    [self.view addSubview:m_instrumentsTab];
-    [self.view addSubview:m_LEDTab];
-    [self.view addSubview:m_menuTab];*/
+     [self.view addSubview:m_instrumentsTab];
+     [self.view addSubview:m_LEDTab];
+     [self.view addSubview:m_menuTab];*/
     
     [m_instrumentsScroll setBackgroundColor:[UIColor clearColor]];
     
@@ -299,7 +299,7 @@ extern GtarController * g_gtarController;
     
     [m_effect4OnOff setImage:[UIImage imageNamed:@"EffectOnButton.png"] forState:UIControlStateSelected];
     [m_effect4Select setImage:[UIImage imageNamed:@"EffectSelectOnButton.png"] forState:UIControlStateSelected];
-
+    
     // set custom images for sliders
     //UIImage *sliderKnobImage = [UIImage imageNamed: @"Knob_BlueLine.png"];
     
@@ -325,7 +325,7 @@ extern GtarController * g_gtarController;
     //NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     //[settings synchronize];
     // temporarily set the bool to the opposite of the actual value
-     //m_bSpeakerRoute = ![settings boolForKey:@"RouteToSpeaker"];
+    //m_bSpeakerRoute = ![settings boolForKey:@"RouteToSpeaker"];
     // toogle the route so that its what we actually want
     //[self toggleAudioRoute:self];
     //m_bSpeakerRoute = !m_bSpeakerRoute;
@@ -343,7 +343,7 @@ extern GtarController * g_gtarController;
     m_jamPad.transform = CGAffineTransformMakeScale(1, -1);
     m_jamPad.m_delegate = self;
     // Initialize jam pad with first effect in list
-//    [self setupJamPadWithEffectAtIndex:0];
+    //    [self setupJamPadWithEffectAtIndex:0];
     
     // Setup LED light tab
     [m_LEDGeneralSurface setBackgroundColor:[UIColor clearColor]];
@@ -358,13 +358,13 @@ extern GtarController * g_gtarController;
     m_LEDShape = LEDShapeDot;
     m_LEDLoop = NUM_LEDLoop_ENTRIES;
     
-    // Start activity spinner while we connect to gtar
-//    if ( g_gtarController.m_connected == NO )
-//    {
-//        //[self.view addSubview:m_connectingView];
-//    }
+    // Start activity spinner while we connect to keys
+    //    if ( g_keysController.m_connected == NO )
+    //    {
+    //        //[self.view addSubview:m_connectingView];
+    //    }
     
-    [g_gtarController addObserver:self];
+    [g_keysController addObserver:self];
     
     [g_soundMaster start];
     
@@ -414,7 +414,7 @@ extern GtarController * g_gtarController;
     //self.m_volumeView = nil;
     self.m_activityIndicatorView = nil;
     self.m_connectingView = nil;
-
+    
     [self setM_effectsTab:nil];
     [self setM_effect1OnOff:nil];
     [self setM_effect2OnOff:nil];
@@ -475,11 +475,11 @@ extern GtarController * g_gtarController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_audioRouteTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-//    [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     route, @"AudioRoute",
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     nil]];
+    //    [g_telemetryController logEvent:KeysFreePlayToggleFeature
+    //                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+    //                                     route, @"AudioRoute",
+    //                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+    //                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -487,16 +487,16 @@ extern GtarController * g_gtarController;
                                                            route, @"AudioRoute",
                                                            [NSNumber numberWithInteger:delta], @"PlayTime",
                                                            nil]];
-
+    
     NSString *instrumentName = [m_instrumentsScroll getNameAtIndex:[g_soundMaster getCurrentInstrument]];
     
     delta = [[NSDate date] timeIntervalSince1970] - [m_instrumentTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-//    [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     instrumentName, @"Instrument",
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     nil]];
+    //    [g_telemetryController logEvent:KeysFreePlayToggleFeature
+    //                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+    //                                     instrumentName, @"Instrument",
+    //                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+    //                                     nil]];
     
     [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
                                                            instrumentName, @"Instrument",
@@ -514,11 +514,11 @@ extern GtarController * g_gtarController;
         
         if ( [effectButtons[effect] isSelected] == YES )
         {
-//            [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                             withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                             @"Off", name,
-//                                             [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                             nil]];
+            //            [g_telemetryController logEvent:KeysFreePlayToggleFeature
+            //                             withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+            //                                             @"Off", name,
+            //                                             [NSNumber numberWithInteger:delta], @"PlayTime",
+            //                                             nil]];
             [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                    @"Off", name,
                                                                    [NSNumber numberWithInteger:delta], @"PlayTime",
@@ -544,9 +544,9 @@ extern GtarController * g_gtarController;
 //
 //}
 
-#pragma mark - GtarObserverProtocol
+#pragma mark - KeysObserverProtocol
 
-- (void)gtarFretDown:(GtarPosition)position
+- (void)keysFretDown:(KeysPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
     if (_isSlideEnabled)
@@ -555,7 +555,7 @@ extern GtarController * g_gtarController;
     }
 }
 
-- (void)gtarFretUp:(GtarPosition)position
+- (void)keysFretUp:(KeysPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
     if (_isSlideEnabled)
@@ -564,41 +564,41 @@ extern GtarController * g_gtarController;
     }
 }
 
-- (void)gtarNoteOn:(GtarPluck)pluck
+- (void)keysNoteOn:(KeysPluck)pluck
 {
-    GtarFret fret = pluck.position.fret;
-    GtarString str = pluck.position.string-1;
+    KeysFret fret = pluck.position.fret;
+    KeysString str = pluck.position.string-1;
     
     /*
-    // zero base the string
-    str--;
-    
-    if (0 !=  m_harmonizerValue)
-    {        
-        NSDictionary *harmonizedValues = [m_harmonizer getHarmonizedValuesForString:str andFret:fret];
-        
-        str = [[harmonizedValues valueForKey:@"String"] intValue];
-        fret = [[harmonizedValues valueForKey:@"Fret"] intValue];
-    }
+     // zero base the string
+     str--;
+     
+     if (0 !=  m_harmonizerValue)
+     {
+     NSDictionary *harmonizedValues = [m_harmonizer getHarmonizedValuesForString:str andFret:fret];
+     
+     str = [[harmonizedValues valueForKey:@"String"] intValue];
+     fret = [[harmonizedValues valueForKey:@"Fret"] intValue];
+     }
      */
     
     [g_soundMaster NoteOnAtString:str andFret:fret];
 }
 
-- (void)gtarNoteOff:(GtarPosition)position
+- (void)keysNoteOff:(KeysPosition)position
 {
     [g_soundMaster NoteOffAtString:position.string-1 andFret:position.fret];
 }
 
-- (void)gtarConnected
+- (void)keysConnected
 {
     
-//    [m_activityIndicatorView stopAnimating];
+    //    [m_activityIndicatorView stopAnimating];
     [m_connectingView removeFromSuperview];
     
-    [g_gtarController turnOffAllEffects];
-    [g_gtarController turnOffAllLeds];
-    [g_gtarController setMinimumInterarrivalTime:0.05f];
+    [g_keysController turnOffAllEffects];
+    [g_keysController turnOffAllLeds];
+    [g_keysController setMinimumInterarrivalTime:0.05f];
     
     [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
     
@@ -606,7 +606,7 @@ extern GtarController * g_gtarController;
     
 }
 
-- (void)gtarDisconnected
+- (void)keysDisconnected
 {
     
     if (m_LEDTimer != nil)
@@ -617,10 +617,10 @@ extern GtarController * g_gtarController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-//    [g_telemetryController logEvent:GtarFreePlayDisconnected
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     nil]];
+    //    [g_telemetryController logEvent:KeysFreePlayDisconnected
+    //                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+    //                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+    //                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -633,9 +633,9 @@ extern GtarController * g_gtarController;
     [g_soundMaster disableSliding];
     [g_soundMaster stopAllEffects];
     [g_soundMaster stop];
-
+    
     [self.navigationController popViewControllerAnimated:YES];
-
+    
 }
 
 // selector to update the slide/hammer state when NSNotification is received
@@ -643,7 +643,7 @@ extern GtarController * g_gtarController;
 {
     NSDictionary *data = [notification userInfo];
     _isSlideEnabled = [[data objectForKey:@"isSlideEnabled"] boolValue];
-
+    
     if(_isSlideEnabled){
         [g_soundMaster enableSliding];
     }else{
@@ -655,9 +655,9 @@ extern GtarController * g_gtarController;
 #pragma mark - Touches
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{    
-	// For now we just want to recognize that a touch (any touch) occurred
-	UITouch * touch = [[touches allObjects] objectAtIndex:0];
+{
+    // For now we just want to recognize that a touch (any touch) occurred
+    UITouch * touch = [[touches allObjects] objectAtIndex:0];
     
     if (LEDColorRoatating == m_LEDColorMode)
     {
@@ -690,27 +690,27 @@ extern GtarController * g_gtarController;
         
 #ifdef Debug_BUILD
         CGPoint point = [touch locationInView:self.view];
-    
-    if(point.y > 60 && point.y < 202 && point.x > 15 && point.x < 410){
-    
-        int str = GTAR_GUITAR_STRING_COUNT - ceil((point.y-60) / (143/GTAR_GUITAR_STRING_COUNT));
-        if (str >= GTAR_GUITAR_STRING_COUNT){
-            str = (GTAR_GUITAR_STRING_COUNT-1);
+        
+        if(point.y > 60 && point.y < 202 && point.x > 15 && point.x < 410){
+            
+            int str = KEYS_GUITAR_STRING_COUNT - ceil((point.y-60) / (143/KEYS_GUITAR_STRING_COUNT));
+            if (str >= KEYS_GUITAR_STRING_COUNT){
+                str = (KEYS_GUITAR_STRING_COUNT-1);
+            }
+            
+            int fret = KEYS_GUITAR_FRET_COUNT - (point.x-15)/(395/KEYS_GUITAR_FRET_COUNT);
+            if(fret >= KEYS_GUITAR_FRET_COUNT){
+                fret = (KEYS_GUITAR_FRET_COUNT-1);
+            }
+            
+            KeysPluck pluck;
+            pluck.velocity = KeysMaxPluckVelocity;
+            pluck.position.fret = (KEYS_GUITAR_FRET_COUNT-fret-1);
+            pluck.position.string = (str+1);
+            
+            [self keysNoteOn:pluck];
+            
         }
-        
-        int fret = GTAR_GUITAR_FRET_COUNT - (point.x-15)/(395/GTAR_GUITAR_FRET_COUNT);
-        if(fret >= GTAR_GUITAR_FRET_COUNT){
-            fret = (GTAR_GUITAR_FRET_COUNT-1);
-        }
-        
-        GtarPluck pluck;
-        pluck.velocity = GtarMaxPluckVelocity;
-        pluck.position.fret = (GTAR_GUITAR_FRET_COUNT-fret-1);
-        pluck.position.string = (str+1);
-        
-        [self gtarNoteOn:pluck];
-        
-    }
 #endif
         
         m_LEDTouchArea = LEDTouchNone;
@@ -759,12 +759,12 @@ extern GtarController * g_gtarController;
     }
     
     RGBColor *color = [m_colors objectAtIndex:m_currentColorIndex];
-
+    
     // string and fret position, 1 based. A value of 0 for string/fret
     // indicates all strings/frets respectively on the specified fret/string
     int string, fret;
     
-    for (UITouch *touch in touches) 
+    for (UITouch *touch in touches)
     {
         CGPoint stringFret = [self getFretPositionFromTouch:touch];
         
@@ -825,24 +825,24 @@ extern GtarController * g_gtarController;
             
             point = [touch locationInView:self.m_LEDGeneralSurface];
             
-            string = (point.y / (m_LEDGeneralSurface.frame.size.height/GTAR_GUITAR_STRING_COUNT)) + 1;
+            string = (point.y / (m_LEDGeneralSurface.frame.size.height/KEYS_GUITAR_STRING_COUNT)) + 1;
             if (string < 1)
             {
                 string = 1;
             }
-            else if ( string > GTAR_GUITAR_STRING_COUNT)
+            else if ( string > KEYS_GUITAR_STRING_COUNT)
             {
-                string = (GTAR_GUITAR_STRING_COUNT);
+                string = (KEYS_GUITAR_STRING_COUNT);
             }
             
-            fret = (point.x / (m_LEDGeneralSurface.frame.size.width/GTAR_GUITAR_FRET_COUNT)) + 1;
+            fret = (point.x / (m_LEDGeneralSurface.frame.size.width/KEYS_GUITAR_FRET_COUNT)) + 1;
             if (fret < 1)
             {
                 fret = 1;
             }
-            else if ( fret > GTAR_GUITAR_FRET_COUNT ) 
+            else if ( fret > KEYS_GUITAR_FRET_COUNT )
             {
-                fret = (GTAR_GUITAR_FRET_COUNT);
+                fret = (KEYS_GUITAR_FRET_COUNT);
             }
             
             break;
@@ -850,14 +850,14 @@ extern GtarController * g_gtarController;
         case LEDTouchFret:
             point = [touch locationInView:self.m_LEDFretSurface];
             
-            fret = (point.x / (m_LEDFretSurface.frame.size.width/GTAR_GUITAR_FRET_COUNT)) + 1;
-            if ( fret < 1 ) 
+            fret = (point.x / (m_LEDFretSurface.frame.size.width/KEYS_GUITAR_FRET_COUNT)) + 1;
+            if ( fret < 1 )
             {
                 fret = 1;
             }
-            else if ( fret > GTAR_GUITAR_FRET_COUNT ) 
+            else if ( fret > KEYS_GUITAR_FRET_COUNT )
             {
-                fret = (GTAR_GUITAR_FRET_COUNT);
+                fret = (KEYS_GUITAR_FRET_COUNT);
             }
             
             // Light up this fret across all strings
@@ -868,14 +868,14 @@ extern GtarController * g_gtarController;
         case LEDTouchString:
             point = [touch locationInView:self.m_LEDStringSurface];
             
-            string = (point.y / (m_LEDStringSurface.frame.size.height/GTAR_GUITAR_STRING_COUNT)) + 1;
+            string = (point.y / (m_LEDStringSurface.frame.size.height/KEYS_GUITAR_STRING_COUNT)) + 1;
             if (string < 1)
             {
                 string = 1;
             }
-            else if ( string > GTAR_GUITAR_STRING_COUNT)
+            else if ( string > KEYS_GUITAR_STRING_COUNT)
             {
-                string = (GTAR_GUITAR_STRING_COUNT);
+                string = (KEYS_GUITAR_STRING_COUNT);
             }
             
             // Light up this string on all frets
@@ -903,52 +903,52 @@ extern GtarController * g_gtarController;
 - (void) turnONLED:(int)string AndFret:(int)fret WithColorRed:(int)red AndGreen:(int)green AndBlue:(int)blue
 {
     // Regardless of shape we will turn on the touch point.
-    [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string)
-                                withColor:GtarLedColorMake(red, green, blue)];
+    [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string)
+                                withColor:KeysLedColorMake(red, green, blue)];
     
     switch (m_LEDShape)
     {
         case LEDShapeCross:
             // Turn on adjacent leds to make a + shape
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string+1)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             if (string - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string-1)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string-1)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
-            if (fret + 1 < GTAR_GUITAR_FRET_COUNT + 1)
+            if (fret + 1 < KEYS_GUITAR_FRET_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret+1, string)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret+1, string)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             if (fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             
             break;
             
         case LEDShapeSquare:
             
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string+1)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             if (fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1 && fret - 1 > 0)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1 && fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string+1)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string+1)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             
             break;
@@ -992,52 +992,52 @@ extern GtarController * g_gtarController;
 - (void) turnOffLEDByShape:(int)string AndFret:(int)fret
 {
     // Regardless of shape we will turn off the touch point.
-    [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string)
-                                withColor:GtarLedColorMake(0, 0, 0)];
+    [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string)
+                                withColor:KeysLedColorMake(0, 0, 0)];
     
     switch (m_LEDShape)
     {
         case LEDShapeCross:
             // Turn on adjacent leds to make a + shape
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string+1)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             if (string - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string-1)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string-1)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
-            if (fret + 1 < GTAR_GUITAR_FRET_COUNT + 1)
+            if (fret + 1 < KEYS_GUITAR_FRET_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret+1, string)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret+1, string)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             if (fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             
             break;
             
         case LEDShapeSquare:
             
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string+1)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             if (fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1 && fret - 1 > 0)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1 && fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string+1)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string+1)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             break;
             
@@ -1094,15 +1094,15 @@ extern GtarController * g_gtarController;
 
 - (IBAction)clearAllLEDs:(id)sender
 {
-    [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0)
-                                withColor:GtarLedColorMake(0, 0, 0)];
+    [g_keysController turnOnLedAtPosition:KeysPositionMake(0, 0)
+                                withColor:KeysLedColorMake(0, 0, 0)];
 }
 
 - (IBAction)autoPlayLEDs:(id)sender
 {
     // TODO: fix this
     if(m_LEDLoop >= NUM_LEDLoop_ENTRIES)
-    //if (++m_LEDLoop >= NUM_LEDLoop_ENTRIES)
+        //if (++m_LEDLoop >= NUM_LEDLoop_ENTRIES)
     {
         m_LEDLoop = LEDLoopSolid;
     }
@@ -1155,9 +1155,9 @@ extern GtarController * g_gtarController;
 - (void) turnOnAllLEDRandom
 {
     RGBColor *color;
-    for (int fret = 1; fret <= GTAR_GUITAR_FRET_COUNT; fret++)
+    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret++)
     {
-        for (int string = 1; string <= GTAR_GUITAR_STRING_COUNT; string++)
+        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string++)
         {
             m_currentColorIndex = arc4random_uniform([m_colors count]);
             
@@ -1169,11 +1169,11 @@ extern GtarController * g_gtarController;
 }
 
 - (void) LEDRainbow
-{    
+{
     RGBColor *color;
-    for (int fret = 1; fret <= GTAR_GUITAR_FRET_COUNT; fret++)
+    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret++)
     {
-        for (int string = 1; string <= GTAR_GUITAR_STRING_COUNT; string++)
+        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string++)
         {
             color = [m_colors objectAtIndex:m_currentColorIndex];
             
@@ -1191,16 +1191,16 @@ extern GtarController * g_gtarController;
 - (void) LEDSquarePatches
 {
     RGBColor *color;
-    for (int fret = 1; fret <= GTAR_GUITAR_FRET_COUNT; fret = fret+2)
+    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret = fret+2)
     {
-        for (int string = 1; string <= GTAR_GUITAR_STRING_COUNT; string=string+2)
+        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string=string+2)
         {
             color = [m_colors objectAtIndex:m_currentColorIndex];
             
             [self turnONLED:string AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
             [self turnONLED:string AndFret:fret+1 WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
             [self turnONLED:string+1 AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
-            [self turnONLED:string+1 AndFret:fret+1 WithColorRed:color.R AndGreen:color.G AndBlue:color.B]; 
+            [self turnONLED:string+1 AndFret:fret+1 WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
             
             if (++m_currentColorIndex >= [m_colors count])
             {
@@ -1212,11 +1212,11 @@ extern GtarController * g_gtarController;
 }
 
 - (void) LEDLgSquarePatches
-{    
+{
     RGBColor *color;
-    for (int fret = 1; fret <= GTAR_GUITAR_FRET_COUNT; fret = fret+3)
+    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret = fret+3)
     {
-        for (int string = 1; string <= GTAR_GUITAR_STRING_COUNT; string=string+3)
+        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string=string+3)
         {
             color = [m_colors objectAtIndex:m_currentColorIndex];
             
@@ -1252,7 +1252,7 @@ extern GtarController * g_gtarController;
         }
     }
 }
-                      
+
 - (void) animateLEDs:(NSTimer*)theTimer
 {
     RGBColor *color;
@@ -1276,8 +1276,8 @@ extern GtarController * g_gtarController;
             
             color = [m_colors objectAtIndex:m_currentColorIndex];
             
-            int static fret = GTAR_GUITAR_FRET_COUNT;
-
+            int static fret = KEYS_GUITAR_FRET_COUNT;
+            
             [self turnONLED:0 AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
             
             if (--fret < 1)
@@ -1299,7 +1299,7 @@ extern GtarController * g_gtarController;
             
             [self turnONLED:string AndFret:0 WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
             
-            if (++string > GTAR_GUITAR_STRING_COUNT)
+            if (++string > KEYS_GUITAR_STRING_COUNT)
             {
                 string = 1;
                 if (++m_currentColorIndex >= [m_colors count])
@@ -1349,11 +1349,11 @@ extern GtarController * g_gtarController;
     // Avoid the first setting
     if ( delta > 0 )
     {
-//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         instrumentName, @"Instrument",
-//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                         nil]];
+        //        [g_telemetryController logEvent:KeysFreePlayToggleFeature
+        //                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+        //                                         instrumentName, @"Instrument",
+        //                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+        //                                         nil]];
         
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
@@ -1361,7 +1361,7 @@ extern GtarController * g_gtarController;
                                                                instrumentName, @"Instrument",
                                                                [NSNumber numberWithInteger:delta], @"PlayTime",
                                                                nil]];
-
+        
         m_instrumentTimeStart = [NSDate date];
     }
     
@@ -1381,7 +1381,7 @@ extern GtarController * g_gtarController;
 
 // -(void)backButtonClicked
 - (IBAction)backButtonClicked:(id)sender
-{   
+{
     if (m_LEDTimer != nil)
     {
         [m_LEDTimer invalidate];
@@ -1390,19 +1390,19 @@ extern GtarController * g_gtarController;
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_playTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
     
-//    [g_telemetryController logEvent:GtarFreePlayCompleted
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                     nil]];
+    //    [g_telemetryController logEvent:KeysFreePlayCompleted
+    //                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+    //                                     [NSNumber numberWithInteger:delta], @"PlayTime",
+    //                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
     [mixpanel track:@"FreePlay completed" properties:[NSDictionary dictionaryWithObjectsAndKeys:
                                                       [NSNumber numberWithInteger:delta], @"PlayTime",
                                                       nil]];
-
+    
     [self finalLogging];
-
+    
     [g_soundMaster disableSliding];
     [g_soundMaster stopAllEffects];
     [g_soundMaster stop];
@@ -1468,7 +1468,7 @@ extern GtarController * g_gtarController;
             // Turn on LED for each fret position that should be on
             while (fret <= 16 )
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1) withColor:GtarLedColorMake(0, 0, 3)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string+1) withColor:KeysLedColorMake(0, 0, 3)];
                 
                 index++;
                 fret = m_ScaleArray[index] - stringOffset[string - 1];
@@ -1487,24 +1487,24 @@ extern GtarController * g_gtarController;
     else
     {
         // Turn off all LEDs on the fret board
-        [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0) withColor:GtarLedColorMake(0, 0, 0)];
+        [g_keysController turnOnLedAtPosition:KeysPositionMake(0, 0) withColor:KeysLedColorMake(0, 0, 0)];
     }
     
     // Telemetetry log
     if ( [m_scaleSwitch isSelected] )
     {
         
-//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         @"On", @"ScaleLights",
-//                                         nil]];
+        //        [g_telemetryController logEvent:KeysFreePlayToggleFeature
+        //                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+        //                                         @"On", @"ScaleLights",
+        //                                         nil]];
         
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
         [mixpanel track:@"FreePlay toggle feature" properties:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                @"On", @"ScaleLights",
                                                                nil]];
-
+        
         m_scaleTimeStart = [NSDate date];
         
     }
@@ -1512,12 +1512,12 @@ extern GtarController * g_gtarController;
     {
         
         NSInteger delta = [[NSDate date] timeIntervalSince1970] - [m_scaleTimeStart timeIntervalSince1970] + m_playTimeAdjustment;
-    
-//        [g_telemetryController logEvent:GtarFreePlayToggleFeature
-//                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                         @"Off", @"ScaleLights",
-//                                         [NSNumber numberWithInteger:delta], @"PlayTime",
-//                                         nil]];
+        
+        //        [g_telemetryController logEvent:KeysFreePlayToggleFeature
+        //                         withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+        //                                         @"Off", @"ScaleLights",
+        //                                         [NSNumber numberWithInteger:delta], @"PlayTime",
+        //                                         nil]];
         
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
@@ -1525,7 +1525,7 @@ extern GtarController * g_gtarController;
                                                                @"Off", @"ScaleLights",
                                                                [NSNumber numberWithInteger:delta], @"PlayTime",
                                                                nil]];
-
+        
         m_scaleTimeStart = [NSDate date];
         
     }
@@ -1559,13 +1559,13 @@ extern GtarController * g_gtarController;
     [self addChildViewController:newVC];
     
     [self transitionFromViewController:oldVC  toViewController:newVC duration:0.25
-        options:UIViewAnimationOptionTransitionCrossDissolve
-        animations:nil
-        completion:^(BOOL finished) {
-            [oldVC removeFromParentViewController];
-            [newVC didMoveToParentViewController:self];
-            _currentMainContentVC = newVC;
-        }];
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:nil
+                            completion:^(BOOL finished) {
+                                [oldVC removeFromParentViewController];
+                                [newVC didMoveToParentViewController:self];
+                                _currentMainContentVC = newVC;
+                            }];
 }
 
 
@@ -1581,17 +1581,17 @@ extern GtarController * g_gtarController;
     // translate the normalized value the JamPad position to a range
     // in [min, max] for the respective parameter
     /*
-    Parameter *p = &(m_selectedEffect->getPrimaryParam());
-    float min = p->getMin();
-    float max = p->getMax();
-    float newVal = position.x*(max - min) + min;
-    m_selectedEffect->setPrimaryParam(newVal);
-    
-    p = &(m_selectedEffect->getSecondaryParam());
-    min = p->getMin();
-    max = p->getMax();
-    newVal = position.y*(max - min) + min;
-    m_selectedEffect->setSecondaryParam(newVal);
+     Parameter *p = &(m_selectedEffect->getPrimaryParam());
+     float min = p->getMin();
+     float max = p->getMax();
+     float newVal = position.x*(max - min) + min;
+     m_selectedEffect->setPrimaryParam(newVal);
+     
+     p = &(m_selectedEffect->getSecondaryParam());
+     min = p->getMin();
+     max = p->getMax();
+     newVal = position.y*(max - min) + min;
+     m_selectedEffect->setSecondaryParam(newVal);
      */
 }
 

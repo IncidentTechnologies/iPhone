@@ -58,19 +58,19 @@
 
 - (void)dealloc {
     
-    [m_gtarController removeObserver:self];
+    [m_keysController removeObserver:self];
     
     
     /*if([g_soundMaster respondsToSelector:@selector(disconnectAndRelease)]){
-        [g_soundMaster disconnectAndRelease];
-        [g_soundMaster release];
-        g_soundMaster = nil;
-    }*/
+     [g_soundMaster disconnectAndRelease];
+     [g_soundMaster release];
+     g_soundMaster = nil;
+     }*/
     
     //[g_soundMaster releaseAfterUse];
-        
     
-	[m_eventLoopTimer invalidate];
+    
+    [m_eventLoopTimer invalidate];
     m_eventLoopTimer = nil;
     
     [m_audioTrailOffTimer invalidate];
@@ -94,32 +94,32 @@
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
-    // Double tempo because for some reason it's incredibly slow in playback    
+    // Double tempo because for some reason it's incredibly slow in playback
     [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:2.0 fromStart:0 toEnd:-1 withLoops:0];
     
     [self startMainEventLoop];
     
 }
 /*
-- (void)startWithUserSong:(UserSong*)userSong
-{
-    // TODO This function doesn't work right now because the m_xmlDom doesn't have the XMP in it
-    if ( userSong == nil )
-        return;
-    
-    [g_soundMaster reset];
-    
-    // release the old song
-    
-    NSSong * song = [[NSSong alloc] initWithXmlDom:userSong.m_xmlDom];
-    
-    m_songModel = [[NSSongModel alloc] initWithSong:song];
-    
-    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
-    
-    [self startMainEventLoop];
-}
-*/
+ - (void)startWithUserSong:(UserSong*)userSong
+ {
+ // TODO This function doesn't work right now because the m_xmlDom doesn't have the XMP in it
+ if ( userSong == nil )
+ return;
+ 
+ [g_soundMaster reset];
+ 
+ // release the old song
+ 
+ NSSong * song = [[NSSong alloc] initWithXmlDom:userSong.m_xmlDom];
+ 
+ m_songModel = [[NSSongModel alloc] initWithSong:song];
+ 
+ [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
+ 
+ [self startMainEventLoop];
+ }
+ */
 - (void)playSong {
     
     NSLog(@"Song Playback Controller: play song");
@@ -143,30 +143,30 @@
     
 }
 
-- (void)observeGtarController:(GtarController*)gtarController {
-    m_gtarController = gtarController;
+- (void)observeKeysController:(KeysController*)keysController {
+    m_keysController = keysController;
     
     // Register ourself as an observer
-    [m_gtarController addObserver:self];
+    [m_keysController addObserver:self];
     
-    if(m_gtarController.connected){
-        [m_gtarController turnOffAllEffects];
-        [m_gtarController turnOffAllLeds];
+    if(m_keysController.connected){
+        [m_keysController turnOffAllEffects];
+        [m_keysController turnOffAllLeds];
     }
     
 }
 
-- (void)ignoreGtarController:(GtarController*)gtarController {
-    if(m_gtarController.connected){
-        [m_gtarController turnOffAllEffects];
-        [m_gtarController turnOffAllLeds];
+- (void)ignoreKeysController:(KeysController*)keysController {
+    if(m_keysController.connected){
+        [m_keysController turnOffAllEffects];
+        [m_keysController turnOffAllLeds];
     }
     
     // Remove ourself as an observer
-    [m_gtarController removeObserver:self];
+    [m_keysController removeObserver:self];
     
     
-    m_gtarController = nil;
+    m_keysController = nil;
     
 }
 
@@ -180,7 +180,7 @@
     [m_eventLoopTimer invalidate];
     
     m_eventLoopTimer = nil;
-	
+    
     [m_audioTrailOffTimer invalidate];
     
     m_audioTrailOffTimer = nil;
@@ -189,15 +189,15 @@
     [g_soundMaster start];
     
     //[m_songModel skipToNextFrame];
-	m_eventLoopTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)SECONDS_PER_EVENT_LOOP target:self selector:@selector(mainEventLoop) userInfo:nil repeats:TRUE];
+    m_eventLoopTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)SECONDS_PER_EVENT_LOOP target:self selector:@selector(mainEventLoop) userInfo:nil repeats:TRUE];
     
 }
 
 - (void)stopMainEventLoop {
-	if ( m_eventLoopTimer != nil ) {
-		[m_eventLoopTimer invalidate];
-		m_eventLoopTimer = nil;
-	}
+    if ( m_eventLoopTimer != nil ) {
+        [m_eventLoopTimer invalidate];
+        m_eventLoopTimer = nil;
+    }
 }
 
 - (void)audioTrailOffEvent {
@@ -210,16 +210,16 @@
 }
 - (void)mainEventLoop {
     
-	[m_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP isRestrictFrame:NO];
+    [m_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP isRestrictFrame:NO];
 }
 
 #pragma mark - GuitarControllerObserver
 
-- (void)gtarNoteOn:(GtarPluck)pluck {
-    GtarFret fret = pluck.position.fret;
-    GtarString str = pluck.position.string;
+- (void)keysNoteOn:(KeysPluck)pluck {
+    KeysFret fret = pluck.position.fret;
+    KeysString str = pluck.position.string;
     
-    GtarPluckVelocity velocity = pluck.velocity;
+    KeysPluckVelocity velocity = pluck.velocity;
     
     //[m_audioController PluckString:str-1 atFret:fret withAmplitude:(float)velocity/127.0f];
     
@@ -232,7 +232,7 @@
     NSLog(@"Song playback controller: song model enter frame");
     
     for ( NSNote * note in frame.m_notes ) {
-        if ( note.m_fret == GTAR_GUITAR_FRET_MUTED ) {
+        if ( note.m_fret == KEYS_GUITAR_FRET_MUTED ) {
             
             NSLog(@"pluck muted string %i",note.m_string-1);
             
@@ -241,10 +241,10 @@
         }
         else {
             NSLog(@"pluck string %i %i",note.m_string-1,note.m_fret);
-  
+            
             [g_soundMaster PluckString:note.m_string-1 atFret:note.m_fret];
             
-            //[m_gtarController turnOnLedAtPosition:GtarPositionMake(note.m_fret, note.m_string) withColor:GtarLedColorMake(GtarMaxLedIntensity, GtarMaxLedIntensity, GtarMaxLedIntensity)];
+            //[m_keysController turnOnLedAtPosition:KeysPositionMake(note.m_fret, note.m_string) withColor:KeysLedColorMake(KeysMaxLedIntensity, KeysMaxLedIntensity, KeysMaxLedIntensity)];
             
             //[self performSelector:@selector(delayedTurnLedOff:) withObject:note afterDelay:0.1];
         }
@@ -253,33 +253,33 @@
 
 
 - (void)songModelExitFrame:(NSNoteFrame*)frame {
- 
+    
 }
 
 
 - (void)delayedTurnLedOff:(NSNote *)note
 {
-    [m_gtarController turnOffLedAtPosition:GtarPositionMake(note.m_fret, note.m_string)];
+    [m_keysController turnOffLedAtPosition:KeysPositionMake(note.m_fret, note.m_string)];
 }
 
 - (void)songModelNextFrame:(NSNoteFrame*)frame
 {
-    if(m_gtarController.connected){
-        [m_gtarController turnOffAllLeds];
+    if(m_keysController.connected){
+        [m_keysController turnOffAllLeds];
     }
     
     for ( NSNote * note in frame.m_notes )
     {
         
-        if(m_gtarController.connected){
+        if(m_keysController.connected){
             
-            if ( note.m_fret == GTAR_GUITAR_FRET_MUTED )
+            if ( note.m_fret == KEYS_GUITAR_FRET_MUTED )
             {
-                [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(0, note.m_string)];
+                [m_keysController turnOnLedAtPositionWithColorMap:KeysPositionMake(0, note.m_string)];
             }
             else
             {
-                [m_gtarController turnOnLedAtPositionWithColorMap:GtarPositionMake(note.m_fret, note.m_string)];
+                [m_keysController turnOnLedAtPositionWithColorMap:KeysPositionMake(note.m_fret, note.m_string)];
             }
             
         }
@@ -294,10 +294,10 @@
 
 - (void)songModelEndOfSong {
     
-    if(m_gtarController.connected){
-        [m_gtarController turnOffAllLeds];
+    if(m_keysController.connected){
+        [m_keysController turnOffAllLeds];
     }
-        
+    
     [self stopMainEventLoop];
     
     m_audioTrailOffTimer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(audioTrailOffEvent) userInfo:nil repeats:NO];
@@ -312,18 +312,18 @@
 // Not sure if percentComplete is the most intuitive
 // parameter to seek on, but worth trying it out.
 /*- (void)seekToLocation:(double)percentComplete {
-    double newBeat;
-    
-    if ( percentComplete < 0.01 )
-        newBeat = 0;           // reset to the beginning at this point
-    else if ( percentComplete > 1.0 )
-        newBeat = 1.0;
-    else
-        newBeat= m_songModel.m_lengthBeats * percentComplete;
-    
-    [m_songModel changeBeatRandomAccess:newBeat];
-    
-}*/
+ double newBeat;
+ 
+ if ( percentComplete < 0.01 )
+ newBeat = 0;           // reset to the beginning at this point
+ else if ( percentComplete > 1.0 )
+ newBeat = 1.0;
+ else
+ newBeat= m_songModel.m_lengthBeats * percentComplete;
+ 
+ [m_songModel changeBeatRandomAccess:newBeat];
+ 
+ }*/
 
 - (BOOL)isPlaying {
     

@@ -1,15 +1,15 @@
 //
 //  FreePlayController.h
-//  gTarPlay
+//  keysPlay
 //
-//  Created by Marty Greenia on 3/15/11.
-//  Copyright 2011 Msft. All rights reserved.
+//  Created by Kate Schnippering on 10/23/14.
+//  Copyright 2014 Incident Technologies. All rights reserved.
 //
 
 #import <gTarAppCore/MainEventController.h>
 
 #import "SoundMaster.h"
-#import "GtarController.h"
+#import "KeysController.h"
 
 #import "JamPad.h"
 
@@ -28,7 +28,7 @@
 
 #import <gTarAppCore/AppCore.h>
 
-#import "UIView+Gtar.h"
+#import "UIView+Keys.h"
 #import "Mixpanel.h"
 
 #define FREE_PLAY_EFFECT_COUNT 4
@@ -86,7 +86,7 @@ typedef enum
 } LEDLoop;
  */
 
-@interface FreePlayController: MainEventController <GtarControllerObserver, XYInputViewDelegate, LightsViewDelegate, FPMenuDelegate>
+@interface FreePlayController: MainEventController <KeysControllerObserver, XYInputViewDelegate, LightsViewDelegate, FPMenuDelegate>
 {
     IBOutlet UIActivityIndicatorView * m_activityIndicatorView;
     IBOutlet UIView * m_connectingView;

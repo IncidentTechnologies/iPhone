@@ -1,6 +1,6 @@
 //
 //  RoundedRectangleView.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 4/19/11.
 //  Copyright 2011 Msft. All rights reserved.
@@ -61,13 +61,6 @@
     m_gradColor[1] = 0.25f;
     m_gradColor[2] = 0.35f;
     m_gradColor[3] = 1.0f;
-
-    // gtar (peacock) blue 4/66/115
-    // consider trying the lighter, 7/124/216 version
-//    m_fillColor[0] = 7.0/256.0;
-//    m_fillColor[1] = 124.0/256.0;
-//    m_fillColor[2] = 216.0/256.0;
-//    m_fillColor[3] = 1.0f;
 
     m_strokeColor[0] = 1.0f;
     m_strokeColor[1] = 1.0f;

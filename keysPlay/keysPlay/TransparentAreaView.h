@@ -1,6 +1,6 @@
 //
 //  TransparentAreaView.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Franco Cedano on 12/13/11.
 //  Copyright (c) 2011 Incident. All rights reserved.

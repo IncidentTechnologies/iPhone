@@ -1,6 +1,6 @@
 //
 //  TitleNavigationController.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 3/11/13.
 //
@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "TestFlight.h"
 
-#import "GtarController.h"
-#import "GtarControllerInternal.h"
-#import <gTarAppCore/Facebook.h>
+#import "KeysController.h"
+#import "KeysControllerInternal.h"
+//#import <gTarAppCore/Facebook.h>
 
 #import "PaginatedPullToUpdateTableView.h"
 #import "RegisterPromptViewController.h"
@@ -23,7 +23,7 @@
 @class SlidingModalViewController;
 @class CyclingTextField;
 
-@interface TitleNavigationController : UIViewController <UITableViewDataSource, PaginatedPullToUpdateTableViewDelegate, UITextFieldDelegate, GtarControllerObserver, GtarControllerDelegate, FBSessionDelegate, RegisterPromptDelegate, SettingsDelegate>
+@interface TitleNavigationController : UIViewController <UITableViewDataSource, PaginatedPullToUpdateTableViewDelegate, UITextFieldDelegate, KeysControllerObserver, KeysControllerDelegate, RegisterPromptDelegate, SettingsDelegate>
 
 // Audio Controller
 @property (strong, nonatomic) SoundMaster *g_soundMaster;

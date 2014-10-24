@@ -1,6 +1,6 @@
 //
 //  PlayViewController.h
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Marty Greenia on 3/28/13.
 //
@@ -10,7 +10,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import "GtarController.h"
+#import "KeysController.h"
 #import "SoundMaster.h"
 //#import <gTarAppCore/AppCore.h>
 #import <gTarAppCore/MainEventController.h>
@@ -43,7 +43,7 @@ enum PlayViewControllerDifficulty
     PlayViewControllerDifficultyHard
 };
 
-@interface PlayViewController : MainEventController <GtarControllerObserver, NSSongModelDelegate>
+@interface PlayViewController : MainEventController <KeysControllerObserver, NSSongModelDelegate>
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode;
 

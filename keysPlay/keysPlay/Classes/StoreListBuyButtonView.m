@@ -1,6 +1,6 @@
 //
 //  StoreListBuyButtonView.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Idan Beck on 8/31/13.
 //

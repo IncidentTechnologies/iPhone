@@ -1,6 +1,6 @@
 //
-//  UIView+Gtar.h
-//  gTarPlay
+//  UIView+Keys.h
+//  keysPlay
 //
 //  Created by Marty Greenia on 4/10/13.
 //
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (Gtar)
+@interface UIView (Keys)
 
 - (void)addShadow;
 

@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Gtar.h"
-#import "GtarController.h"
+#import "Keys.h"
+#import "KeysController.h"
 #import <gTarAppCore/NSSongModel.h>
 
 #import <gTarAppCore/AppCore.h>
@@ -29,14 +29,14 @@
 // Functionally similar to the MainEventController but based on a NSObject
 // instead of a UIViewController. Both have their own uses.
 //
-@interface SongPlaybackController : NSObject <GtarControllerObserver, NSSongModelDelegate>
+@interface SongPlaybackController : NSObject <KeysControllerObserver, NSSongModelDelegate>
 {
     
     // Loop timer
     NSTimer * m_eventLoopTimer;
     
-    // GuitarModel
-	GtarController * m_gtarController;
+    
+	KeysController * m_keysController;
 	
     // NSSongModel
     NSSongModel * m_songModel;
@@ -61,8 +61,8 @@
 - (void)pauseSong;
 - (void)endSong;
 
-- (void)observeGtarController:(GtarController*)gtarController;
-- (void)ignoreGtarController:(GtarController*)gtarController;
+- (void)observeKeysController:(KeysController*)keysController;
+- (void)ignoreKeysController:(KeysController*)keysController;
 
 - (void)mainEventLoop;
 - (void)startMainEventLoop;

@@ -1,6 +1,6 @@
 //
-//  gTarPlayAppDelegate.m
-//  gTarPlay
+//  keysPlayAppDelegate.m
+//  keysPlay
 //
 //  Created by Marty Greenia on 3/8/11.
 //  Copyright 2011 Msft. All rights reserved.
@@ -8,8 +8,8 @@
 
 #import "TestFlight.h"
 
-#import "gTarPlayAppDelegate.h"
-#import "gTarPlayApplication.h"
+#import "keysPlayAppDelegate.h"
+#import "keysPlayApplication.h"
 
 #import <CoreFoundation/CoreFoundation.h>
 
@@ -24,16 +24,16 @@
 
 #define MIXPANEL_TOKEN @"da24d59140097cb9672b348ef05c6fab"
 
-Facebook *g_facebook;
+//Facebook *g_facebook;
 
 CloudController * g_cloudController;
 //AudioController * g_audioController;
 FileController * g_fileController;
-GtarController * g_gtarController;
+KeysController * g_keysController;
 UserController * g_userController;
 //TelemetryController * g_telemetryController;
 
-@implementation gTarPlayAppDelegate
+@implementation keysPlayAppDelegate
 
 @synthesize m_window;
 @synthesize m_navigationController;
@@ -47,7 +47,7 @@ UserController * g_userController;
     self = [super init];
     
     if ( self )
-    {        
+    {
         // Init the cloud controller
         g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
         
@@ -70,17 +70,17 @@ UserController * g_userController;
         Mixpanel *mixpanel = [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
 #endif
         
-        // Connect to the gtar device
-        g_gtarController = [[GtarController alloc] init];
-        g_gtarController.responseThread = GtarControllerThreadMain;
+        // Connect to the keys device
+        g_keysController = [[KeysController alloc] init];
+        g_keysController.responseThread = KeysControllerThreadMain;
         
         // By default it just outputs 'LevelError'
-        g_gtarController.logLevel = GtarControllerLogLevelAll;        
-        [g_gtarController addObserver:self];
+        g_keysController.logLevel = KeysControllerLogLevelAll;
+        [g_keysController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
-        [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_gtarController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
-        //[NSTimer scheduledTimerWithTimeInterval:7.0 target:g_gtarController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        //[NSTimer scheduledTimerWithTimeInterval:7.0 target:g_keysController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
 #endif
         
 #if Debug_BUILD
@@ -103,7 +103,7 @@ UserController * g_userController;
     //[TestFlight takeOff:@"ad6b7150-d397-4188-9f1a-58f56c83d967"];
     
     // Override point for customization after application launch.
-	m_navigationController.navigationBarHidden = YES;
+    m_navigationController.navigationBarHidden = YES;
     
     // Add the navigation controller's view to the window and display.
     m_window.rootViewController = m_navigationController;
@@ -117,20 +117,15 @@ UserController * g_userController;
     [m_navigationController.view setFrame:[[UIScreen mainScreen] bounds]];
     [self.m_window addSubview:m_navigationController.view];
     [self.m_window makeKeyAndVisible];
-
+    
     // We never want to rotate
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    
-//    [g_telemetryController logEvent:GtarPlayAppOpened
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     @"Application launched", @"Detail",
-//                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Application launched"];
     [mixpanel.people increment:@"Application opens" by:[NSNumber numberWithInteger:1]];
     
-    self.m_playApplication = (gTarPlayApplication*)application;
+    self.m_playApplication = (keysPlayApplication*)application;
     [self.m_playApplication resetIdleTimer];
     
     // Delay load some things
@@ -149,7 +144,7 @@ UserController * g_userController;
     // This gets called when the home button is pressed
     
     // abort a firmware update, if in progress
-    [g_gtarController sendFirmwareUpdateCancelation];
+    [g_keysController sendFirmwareUpdateCancelation];
     
 }
 
@@ -157,21 +152,16 @@ UserController * g_userController;
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
     
     // This gets called when the home button is pushed
-    
-//    [g_telemetryController logEvent:GtarPlayAppClosed
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     @"Application did enter background", @"Detail",
-//                                     nil]];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Application background"];
     [mixpanel.people increment:@"Application closes" by:[NSNumber numberWithInteger:1]];
-
-//    [g_telemetryController synchronize];
+    
+    //    [g_telemetryController synchronize];
 }
 
 
@@ -180,12 +170,6 @@ UserController * g_userController;
     /*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
-    
-    // This gets called when the app is re-started
-//    [g_telemetryController logEvent:GtarPlayAppOpened
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     @"Application will enter foreground", @"Detail",
-//                                     nil]];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Application foreground"];
@@ -206,8 +190,8 @@ UserController * g_userController;
     
     [g_fileController checkCacheSize];
     
-    [g_facebook extendAccessTokenIfNeeded];
-
+    //[g_facebook extendAccessTokenIfNeeded];
+    
 }
 
 
@@ -217,12 +201,6 @@ UserController * g_userController;
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
-//    [g_telemetryController logEvent:GtarPlayAppClosed
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     @"Application will terminate", @"Detail",
-//                                     nil]];
-//    
-//    [g_telemetryController synchronize];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Application terminated"];
@@ -230,14 +208,15 @@ UserController * g_userController;
 }
 
 // For handling facebook URLs
+/*
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    return [g_facebook handleOpenURL:url]; 
+    return [g_facebook handleOpenURL:url];
 }
-
+*/
 
 #pragma mark -
 #pragma mark Globals
@@ -252,57 +231,30 @@ UserController * g_userController;
     
     // Clear the cache if this changes in the background
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-
+    
     [settings synchronize];
     
     BOOL clearCache = [settings boolForKey:@"ClearCache"];
-//    BOOL runBefore = [settings boolForKey:@"RunBefore"];
+    //    BOOL runBefore = [settings boolForKey:@"RunBefore"];
     
     if ( clearCache == YES )
     {
         // Clear the cache and then re-install the preloaded content
         [g_fileController clearCache];
         [g_userController clearCache];
-        [g_facebook logout];
+        //[g_facebook logout];
         
         [settings setBool:NO forKey:@"ClearCache"];
         
         [settings synchronize];
         
     }
-//    else if ( runBefore == NO )
-//    {
-//        // If this is the first time we run, preinstall the content
-//    }
+    //    else if ( runBefore == NO )
+    //    {
+    //        // If this is the first time we run, preinstall the content
+    //    }
     
 }
-
-//- (void)installPreloadedContent
-//{
-//    
-//    // 'install' the preloaded content into the FileController
-//    NSString * plistName = [[NSBundle mainBundle] pathForResource:@"preloaded-content" ofType:@"plist"];
-//    NSDictionary * preloadedContentDict = [NSDictionary dictionaryWithContentsOfFile:plistName];
-//    NSArray * preloadedContentArray = [preloadedContentDict objectForKey:@"PreloadedContent"];
-//    
-//    for ( NSString * fileName in preloadedContentArray )
-//    {
-//        
-//        NSString * filePath = [[NSBundle mainBundle] pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]];
-//        
-//        NSLog(@"Installing %@", filePath);
-//        
-//        // this gets us the file id
-//        NSString * fileIdStr = [[fileName lastPathComponent] stringByDeletingPathExtension];
-//        
-//        BOOL result = [g_fileController saveFilePath:filePath withFileId:[fileIdStr integerValue]];
-//        
-//        if ( result == NO )
-//        {
-//            NSLog(@"Failed to install fileid %@ %@", fileIdStr, filePath);
-//        }
-//    }
-//}
 
 - (NSString*)generateUUID
 {
@@ -325,7 +277,7 @@ UserController * g_userController;
     [settings setObject:uuidString forKey:@"UUIDString"];
     
     [settings synchronize];
-
+    
     CFRelease(uuid);
     CFRelease(uuidCFString);
     
@@ -345,16 +297,16 @@ UserController * g_userController;
     TitleNavigationController *titleController = (TitleNavigationController*)m_navigationController.visibleViewController;
     [titleController delayLoadingComplete];
     
-//    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
-//    
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:1.0f];
-//    [UIView setAnimationDelegate:delayLoadView];
-//    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
-//
-//    delayLoadView.alpha = 0.0f;
-//    
-//    [UIView commitAnimations];
+    //    UIView * delayLoadView = ((RootViewController*)m_navigationController.visibleViewController).m_delayLoadView;
+    //
+    //    [UIView beginAnimations:nil context:NULL];
+    //    [UIView setAnimationDuration:1.0f];
+    //    [UIView setAnimationDelegate:delayLoadView];
+    //    [UIView setAnimationDidStopSelector:@selector(removeFromSuperview)];
+    //
+    //    delayLoadView.alpha = 0.0f;
+    //
+    //    [UIView commitAnimations];
     
 }
 
@@ -366,10 +318,6 @@ UserController * g_userController;
     /*
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
-//    [g_telemetryController logEvent:GtarPlayAppMemWarning
-//                     withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                     @"Application did receive memory warning", @"Detail",
-//                                     nil]];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
     [mixpanel track:@"Application memory warning"];
@@ -379,9 +327,9 @@ UserController * g_userController;
 
 
 #pragma mark -
-#pragma mark GtarControllerObserver
+#pragma mark KeysControllerObserver
 
-- (void)gtarNoteOn:(GtarPluck)pluck
+- (void)keysNoteOn:(KeysPluck)pluck
 {
     [m_playApplication resetIdleTimer];
 }

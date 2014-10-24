@@ -1,6 +1,6 @@
 //
-//  gTarPlayAppDelegate.h
-//  gTarPlay
+//  keysPlayAppDelegate.h
+//  keysPlay
 //
 //  Created by Marty Greenia on 3/8/11.
 //  Copyright 2011 Msft. All rights reserved.
@@ -8,23 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "TestFlight.h"
-#import "GtarController.h"
-#import "gTarNavigationController.h"
+#import "KeysController.h"
+#import "keysNavigationController.h"
 
 //#import <gTarAppCore/Facebbok/FBConnect.h>
 
-@class gTarPlayApplication;
+@class keysPlayApplication;
 
-@interface gTarPlayAppDelegate : NSObject <UIApplicationDelegate, GtarControllerObserver>
+@interface keysPlayAppDelegate : NSObject <UIApplicationDelegate, KeysControllerObserver>
 {
     UIWindow * m_window;
-    gTarNavigationController * m_navigationController;
-    gTarPlayApplication * __weak m_playApplication;
+    keysNavigationController * m_navigationController;
+    keysPlayApplication * __weak m_playApplication;
 }
 
 @property (nonatomic, strong) IBOutlet UIWindow * m_window;
 @property (nonatomic, strong) IBOutlet UINavigationController * m_navigationController;
-@property (nonatomic, weak) gTarPlayApplication * m_playApplication;
+@property (nonatomic, weak) keysPlayApplication * m_playApplication;
 
 - (void)checkAndClearCache;
 //- (void)installPreloadedContent;

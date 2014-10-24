@@ -1,6 +1,6 @@
 //
 //  LightsViewController.m
-//  gTarPlay
+//  keysPlay
 //
 //  Created by Franco on 3/28/13.
 //
@@ -18,7 +18,7 @@
     if (self) {
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willExitFreePlay:) name:@"ExitFreePlay" object:nil];
-
+        
         RGBColor *white = [[RGBColor alloc] initWithRed:3 Green:3 Blue:3];
         RGBColor *red = [[RGBColor alloc] initWithRed:3 Green:0 Blue:0];
         RGBColor *green = [[RGBColor alloc] initWithRed:0 Green:3 Blue:0];
@@ -51,7 +51,7 @@
     _arrowStringsBottom.transform = CGAffineTransformMakeRotation(-M_PI_2);
     _arrowStringsTop.transform = CGAffineTransformMakeRotation(M_PI_2);
     
-    [g_gtarController addObserver:self];
+    [g_keysController addObserver:self];
     
     _modeSingleButton.selected = YES;
     _colorWhite.selected = YES;
@@ -105,7 +105,7 @@
 
 - (void)dealloc
 {
-    [g_gtarController removeObserver:self];
+    [g_keysController removeObserver:self];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ExitFreePlay" object:nil];
     
@@ -183,8 +183,8 @@
     
     [delegate touchesBegan:touches withEvent:event];
     
-	// For now we just want to recognize that a touch (any touch) occurred
-	UITouch * touch = [[touches allObjects] objectAtIndex:0];
+    // For now we just want to recognize that a touch (any touch) occurred
+    UITouch * touch = [[touches allObjects] objectAtIndex:0];
     
     if (LEDColorRoatating == _LEDColorMode)
     {
@@ -319,24 +319,24 @@
         case LEDTouchGeneral:
             point = [touch locationInView:_generalSurface];
             
-            string = (point.y / (_generalSurface.frame.size.height/GTAR_GUITAR_STRING_COUNT)) + 1;
+            string = (point.y / (_generalSurface.frame.size.height/KEYS_GUITAR_STRING_COUNT)) + 1;
             if (string < 1)
             {
                 string = 1;
             }
-            else if ( string > GTAR_GUITAR_STRING_COUNT)
+            else if ( string > KEYS_GUITAR_STRING_COUNT)
             {
-                string = (GTAR_GUITAR_STRING_COUNT);
+                string = (KEYS_GUITAR_STRING_COUNT);
             }
             
-            fret = (point.x / (_generalSurface.frame.size.width/GTAR_GUITAR_FRET_COUNT)) + 1;
+            fret = (point.x / (_generalSurface.frame.size.width/KEYS_GUITAR_FRET_COUNT)) + 1;
             if (fret < 1)
             {
                 fret = 1;
             }
-            else if ( fret > GTAR_GUITAR_FRET_COUNT )
+            else if ( fret > KEYS_GUITAR_FRET_COUNT )
             {
-                fret = (GTAR_GUITAR_FRET_COUNT);
+                fret = (KEYS_GUITAR_FRET_COUNT);
             }
             
             break;
@@ -344,14 +344,14 @@
         case LEDTouchFret:
             point = [touch locationInView:_fretSurface];
             
-            fret = (point.x / (_fretSurface.frame.size.width/GTAR_GUITAR_FRET_COUNT)) + 1;
+            fret = (point.x / (_fretSurface.frame.size.width/KEYS_GUITAR_FRET_COUNT)) + 1;
             if ( fret < 1 )
             {
                 fret = 1;
             }
-            else if ( fret > GTAR_GUITAR_FRET_COUNT )
+            else if ( fret > KEYS_GUITAR_FRET_COUNT )
             {
-                fret = (GTAR_GUITAR_FRET_COUNT);
+                fret = (KEYS_GUITAR_FRET_COUNT);
             }
             
             // Light up this fret across all strings
@@ -362,14 +362,14 @@
         case LEDTouchString:
             point = [touch locationInView:_stringSurface];
             
-            string = (point.y / (_stringSurface.frame.size.height/GTAR_GUITAR_STRING_COUNT)) + 1;
+            string = (point.y / (_stringSurface.frame.size.height/KEYS_GUITAR_STRING_COUNT)) + 1;
             if (string < 1)
             {
                 string = 1;
             }
-            else if ( string > GTAR_GUITAR_STRING_COUNT)
+            else if ( string > KEYS_GUITAR_STRING_COUNT)
             {
-                string = (GTAR_GUITAR_STRING_COUNT);
+                string = (KEYS_GUITAR_STRING_COUNT);
             }
             
             // Light up this string on all frets
@@ -397,52 +397,52 @@
 - (void) turnONLED:(int)string AndFret:(int)fret WithColorRed:(int)red AndGreen:(int)green AndBlue:(int)blue
 {
     // Regardless of shape we will turn on the touch point.
-    [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string)
-                                withColor:GtarLedColorMake(red, green, blue)];
+    [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string)
+                                withColor:KeysLedColorMake(red, green, blue)];
     
     switch (_LEDShape)
     {
         case LEDShapeCross:
             // Turn on adjacent leds to make a + shape
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string+1)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             if (string - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string-1)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string-1)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
-            if (fret + 1 < GTAR_GUITAR_FRET_COUNT + 1)
+            if (fret + 1 < KEYS_GUITAR_FRET_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret+1, string)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret+1, string)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             if (fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             
             break;
             
         case LEDShapeSquare:
             
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string+1)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             if (fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1 && fret - 1 > 0)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1 && fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string+1)
-                                            withColor:GtarLedColorMake(red, green, blue)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string+1)
+                                            withColor:KeysLedColorMake(red, green, blue)];
             }
             
             break;
@@ -486,52 +486,52 @@
 - (void) turnOffLEDByShape:(int)string AndFret:(int)fret
 {
     // Regardless of shape we will turn off the touch point.
-    [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string)
-                                withColor:GtarLedColorMake(0, 0, 0)];
+    [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string)
+                                withColor:KeysLedColorMake(0, 0, 0)];
     
     switch (_LEDShape)
     {
         case LEDShapeCross:
             // Turn on adjacent leds to make a + shape
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string+1)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             if (string - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string-1)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string-1)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
-            if (fret + 1 < GTAR_GUITAR_FRET_COUNT + 1)
+            if (fret + 1 < KEYS_GUITAR_FRET_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret+1, string)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret+1, string)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             if (fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             
             break;
             
         case LEDShapeSquare:
             
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret, string+1)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string+1)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             if (fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
-            if (string + 1 < GTAR_GUITAR_STRING_COUNT + 1 && fret - 1 > 0)
+            if (string + 1 < KEYS_GUITAR_STRING_COUNT + 1 && fret - 1 > 0)
             {
-                [g_gtarController turnOnLedAtPosition:GtarPositionMake(fret-1, string+1)
-                                            withColor:GtarLedColorMake(0, 0, 0)];
+                [g_keysController turnOnLedAtPosition:KeysPositionMake(fret-1, string+1)
+                                            withColor:KeysLedColorMake(0, 0, 0)];
             }
             break;
             
@@ -615,8 +615,8 @@
 {
     [self stopLoop];
     
-    [g_gtarController turnOnLedAtPosition:GtarPositionMake(0, 0)
-                                withColor:GtarLedColorMake(0, 0, 0)];
+    [g_keysController turnOnLedAtPosition:KeysPositionMake(0, 0)
+                                withColor:KeysLedColorMake(0, 0, 0)];
 }
 
 - (IBAction)playLoop:(id)sender
@@ -683,9 +683,9 @@
 - (void) turnOnAllLEDRandom
 {
     RGBColor *color;
-    for (int fret = 1; fret <= GTAR_GUITAR_FRET_COUNT; fret++)
+    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret++)
     {
-        for (int string = 1; string <= GTAR_GUITAR_STRING_COUNT; string++)
+        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string++)
         {
             _currentColorIndex = arc4random_uniform([_colors count]);
             
@@ -699,9 +699,9 @@
 - (void) LEDRainbow
 {
     RGBColor *color;
-    for (int fret = 1; fret <= GTAR_GUITAR_FRET_COUNT; fret++)
+    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret++)
     {
-        for (int string = 1; string <= GTAR_GUITAR_STRING_COUNT; string++)
+        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string++)
         {
             color = [_colors objectAtIndex:_currentColorIndex];
             
@@ -719,9 +719,9 @@
 - (void) LEDSquarePatches
 {
     RGBColor *color;
-    for (int fret = 1; fret <= GTAR_GUITAR_FRET_COUNT; fret = fret+2)
+    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret = fret+2)
     {
-        for (int string = 1; string <= GTAR_GUITAR_STRING_COUNT; string=string+2)
+        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string=string+2)
         {
             color = [_colors objectAtIndex:_currentColorIndex];
             
@@ -742,9 +742,9 @@
 - (void) LEDLgSquarePatches
 {
     RGBColor *color;
-    for (int fret = 1; fret <= GTAR_GUITAR_FRET_COUNT; fret = fret+3)
+    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret = fret+3)
     {
-        for (int string = 1; string <= GTAR_GUITAR_STRING_COUNT; string=string+3)
+        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string=string+3)
         {
             color = [_colors objectAtIndex:_currentColorIndex];
             
@@ -804,7 +804,7 @@
             
             color = [_colors objectAtIndex:_currentColorIndex];
             
-            int static fret = GTAR_GUITAR_FRET_COUNT;
+            int static fret = KEYS_GUITAR_FRET_COUNT;
             
             [self turnONLED:0 AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
             
@@ -827,7 +827,7 @@
             
             [self turnONLED:string AndFret:0 WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
             
-            if (++string > GTAR_GUITAR_STRING_COUNT)
+            if (++string > KEYS_GUITAR_STRING_COUNT)
             {
                 string = 1;
                 if (++_currentColorIndex >= [_colors count])
@@ -859,9 +859,9 @@
     }
 }
 
-#pragma mark - GtarControllerObserver
+#pragma mark - KeysControllerObserver
 
-- (void)gtarDisconnected
+- (void)keysDisconnected
 {
     [self stopLoop];
 }
