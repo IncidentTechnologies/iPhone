@@ -19,7 +19,7 @@
 #import "UserSongSessions.h"
 #import "UserProfile.h"
 #import "CloudResponse.h"
-#import <gTarAppCore/Facebook.h>
+//#import <gTarAppCore/Facebook.h>
 
 #import "TitleNavigationController.h"
 #import "SongSelectionViewController.h"

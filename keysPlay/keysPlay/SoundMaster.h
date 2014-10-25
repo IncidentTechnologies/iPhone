@@ -54,30 +54,19 @@
 - (float) getChannelGain;
 
 - (void) playMetronomeTick;
-- (void) PluckString:(int)string atFret:(int)fret;
-- (void) PluckMutedString:(int)string;
+- (void) playKey:(int)key;
+- (void) playMutedKey:(int)key;
+
 
 - (void) enableSliding;
 - (void) disableSliding;
 - (BOOL) isSlideEnabled;
 
-// TODO: go into BW filter
-- (bool) SetBWCutoff:(double)cutoff;
-// - (bool) SetBWOrder:(int)order;
-
-// TODO: go into KS BW filter
-// - (bool) SetKSBWCutoff:(double)cutoff;
-// - (bool) SetKSBWOrder:(int)order;
-
-// TODO: go into guitar model
- - (bool) FretDown:(int)fret onString:(int)string;
- - (bool) FretUp:(int)fret onString:(int)string;
-
- - (bool) NoteOnAtString:(int)string andFret:(int)fret;
- - (bool) NoteOffAtString:(int)string andFret:(int)fret;
+ - (bool) NoteOnForKey:(int)key;
+ - (bool) NoteOffForKey:(int)key;
 
 @property (strong) NSArray *m_instruments;
-@property (strong) NSArray *m_tuning;
-@property (strong) NSArray *m_standardTuning;
+//@property (strong) NSArray *m_tuning;
+//@property (strong) NSArray *m_standardTuning;
 
 @end

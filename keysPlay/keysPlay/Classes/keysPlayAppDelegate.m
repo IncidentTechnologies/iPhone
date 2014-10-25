@@ -79,7 +79,7 @@ UserController * g_userController;
         [g_keysController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
-        [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        //[NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
         //[NSTimer scheduledTimerWithTimeInterval:7.0 target:g_keysController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
 #endif
         
@@ -329,7 +329,7 @@ UserController * g_userController;
 #pragma mark -
 #pragma mark KeysControllerObserver
 
-- (void)keysNoteOn:(KeysPluck)pluck
+- (void)keysNoteOn:(KeysPress)press
 {
     [m_playApplication resetIdleTimer];
 }

@@ -82,7 +82,7 @@
 
 - (void)drawWithHighlights:(BOOL)highlight highlightColor:(GLubyte *)color recolorNote:(BOOL)recolor
 {
-	if(_m_standalonefret >= 0){
+	if(_m_standalonekey >= 0){
         
         // Recolor notes on hit, ensure opaque
         if(recolor){

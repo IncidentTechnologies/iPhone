@@ -39,7 +39,7 @@ static unsigned char g_stringColorsOriginal[6][4] =
 	{ 128, 0, 128, 255 } // P
 };
 */
-static unsigned char g_stringColors[6][4] =
+static unsigned char g_keyColors[6][4] =
 {
 	{ 214, 10, 1, 255 }, // R
 	{ 234, 154, 17, 255 }, // O
@@ -48,16 +48,8 @@ static unsigned char g_stringColors[6][4] =
 	{ 0, 141, 218, 255 }, // B
 	{ 167, 102, 179, 255 } // P
 };
-static unsigned char g_standaloneStringColors[6][4] =
-{
-	{ 255, 255, 255, 255 }, // W
-	{ 255, 255, 255, 255 }, // W
-	{ 255, 255, 255, 255 }, // W
-	{ 255, 255, 255, 255 }, // W
-	{ 255, 255, 255, 255 }, // W
-	{ 255, 255, 255, 255 }  // W
-};
-static unsigned char g_standaloneFretColors[17][4] =
+
+static unsigned char g_standaloneKeyColors[17][4] =
 {
     { 225, 255, 255, 255}, // W 0
 	{ 239, 92, 53, 255 },  // R 1
@@ -95,20 +87,4 @@ static unsigned char g_standaloneMissFretColor[4] =
 static unsigned char g_standaloneClearColor[4] =
     { 1, 1, 1, 0}; // Clear
 
-/*
-static unsigned char g_stringColorsQuads[6][16] =
-{ 
-	{ 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255 }, // red
-	{ 255, 128, 0, 255, 255, 128, 0, 255, 255, 128, 0, 255, 255, 128, 0, 255 }, //oran
-	{ 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255 }, //yelo
-	{ 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255 }, // gre
-	{ 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255 }, // blue 
-	{ 128, 0, 128, 255, 128, 0, 128, 255, 128, 0, 128, 255, 128, 0, 128, 255 } //pur
-};
 
-static unsigned char g_measureColors[4] = 
-{ 192, 192, 0, 255 };
-
-static unsigned char g_beatColors[4] =
-{ 128, 64, 0, 255 };
-*/

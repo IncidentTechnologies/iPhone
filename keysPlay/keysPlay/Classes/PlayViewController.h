@@ -14,7 +14,7 @@
 #import "SoundMaster.h"
 //#import <gTarAppCore/AppCore.h>
 #import <gTarAppCore/MainEventController.h>
-#import <gTarAppCore/NSSongModel.h>
+#import "NSSongModel.h"
 
 #define MARKER_SIZE 10.0
 #define MARKER_HEIGHT 18.0

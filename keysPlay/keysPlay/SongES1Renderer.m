@@ -331,7 +331,7 @@
                 }
                 
                 // Which fret to show?
-                if(fretOne && model.m_standalonefret == 1){
+                if(fretOne && model.m_standalonekey == 1){
                     
                     // Unhighlight if fretTwo || fretThree and no notes in the chord
                     // Unhighlight if !fretTwo || !fretThree and expecting notes in the chord
@@ -341,7 +341,7 @@
                         [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[1] recolorNote:NO];
                     }
                     
-                }else if(fretTwo && model.m_standalonefret == 2){
+                }else if(fretTwo && model.m_standalonekey == 2){
                     
                     // Unhighlight if fretOne || fretThree and notecount for 1+3 == 0
                     // Unhighlight if !fretOne || !fretThree and expecting notes in the chord
@@ -351,7 +351,7 @@
                         [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[2] recolorNote:NO];
                     }
                 
-                }else if(fretThree && model.m_standalonefret == 3){
+                }else if(fretThree && model.m_standalonekey == 3){
                     
                     // Unhighlight if fretOne || fretTwo and notecount for 1+2 == 0
                     // Unhighlight if !fretOne || !fretTwo and expecting notes in the chord
@@ -361,7 +361,7 @@
                         [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[3] recolorNote:NO];
                     }
                     
-                }else if(model.m_standalonefret == 0){
+                }else if(model.m_standalonekey == 0){
                     
                     // Still ensure the fretting is correct before highlighting
                     if((fretOne && fretNoteCounts[1] == 0) || (fretTwo && fretNoteCounts[2] == 0) || (fretThree && fretNoteCounts[3] == 0) || (!fretOne && fretNoteCounts[1] > 0) || (!fretTwo && fretNoteCounts[2] > 0) || (!fretThree && fretNoteCounts[3] > 0)){

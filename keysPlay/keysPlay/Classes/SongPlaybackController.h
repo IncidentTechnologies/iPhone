@@ -10,14 +10,14 @@
 
 #import "Keys.h"
 #import "KeysController.h"
-#import <gTarAppCore/NSSongModel.h>
+#import "NSSongModel.h"
 
 #import <gTarAppCore/AppCore.h>
 
 #import "UserSong.h"
-#import <gTarAppCore/NSSong.h>
-#import <gTarAppCore/NSNoteFrame.h>
-#import <gTarAppCore/NSNote.h>
+#import "NSSong.h"
+#import "NSNoteFrame.h"
+#import "NSNote.h"
 #import "XmlDom.h"
 
 #import "SoundMaster.h"

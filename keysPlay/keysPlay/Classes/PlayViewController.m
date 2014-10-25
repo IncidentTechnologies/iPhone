@@ -17,13 +17,13 @@
 #import "UserSongSession.h"
 #import "UserSong.h"
 #import <gTarAppCore/SongRecorder.h>
-#import <gTarAppCore/NSSongCreator.h>
-#import <gTarAppCore/NSSongModel.h>
-#import <gTarAppCore/NSNote.h>
-#import <gTarAppCore/NSSong.h>
-#import <gTarAppCore/NSNoteFrame.h>
-#import <gTarAppCore/NSScoreTracker.h>
-#import <gTarAppCore/NSMarker.h>
+#import "NSSongCreator.h"
+#import "NSSongModel.h"
+#import "NSNote.h"
+#import "NSSong.h"
+#import "NSNoteFrame.h"
+#import "NSScoreTracker.h"
+#import "NSMarker.h"
 
 #import "Mixpanel.h"
 #import "SongDisplayController.h"
@@ -83,12 +83,12 @@ extern UserController * g_userController;
     NSTimer *_delayedChordTimer;
     NSTimer *_metronomeTimer;
     
-    KeysString _previousChordPluckString;
-    KeysPluckVelocity _previousChordPluckVelocity;
+    KeyPosition _previousChordPluckKey;
+    KeysPressVelocity _previousChordPluckVelocity;
     NSInteger _previousChordPluckDirection;
     
     NSInteger _delayedChordsCount;
-    KeysFret _delayedChords[KEYS_GUITAR_STRING_COUNT];
+    //KeysFret _delayedChords[KEYS_GUITAR_STRING_COUNT];
     
     NSMutableArray *_deferredNotesQueue;
     
@@ -1731,23 +1731,21 @@ extern UserController * g_userController;
                 
                 NSNote * note = [_songModel.m_currentFrame.m_notesPending objectAtIndex:0];
                 
-                KeysPluck pluck;
-                pluck.velocity = KeysMaxPluckVelocity;
-                pluck.position.fret = note.m_fret;
-                pluck.position.string = note.m_string;
+                KeysPress press;
+                press.velocity = KeysMaxPressVelocity;
+                press.position = note.m_key;
                 
-                [self keysNoteOn:pluck forFrame:nil];
+                [self keysNoteOn:press forFrame:nil];
                 
             } else if ( [_songModel.m_nextFrame.m_notesPending count] > 0 ) {
                 
                 NSNote * note = [_songModel.m_nextFrame.m_notesPending objectAtIndex:0];
                 
-                KeysPluck pluck;
-                pluck.velocity = KeysMaxPluckVelocity;
-                pluck.position.fret = note.m_fret;
-                pluck.position.string = note.m_string;
+                KeysPress press;
+                press.velocity = KeysMaxPressVelocity;
+                press.position = note.m_key;
                 
-                [self keysNoteOn:pluck forFrame:nil];
+                [self keysNoteOn:press forFrame:nil];
             }
             
             _refreshDisplay = YES;
@@ -1787,22 +1785,22 @@ extern UserController * g_userController;
 
 #pragma mark - GuitarControllerObserver
 
-- (void)keysFretDown:(KeysPosition)position
+- (void)keyDown:(KeyPosition)position
 {
     
 }
 
-- (void)keysFretUp:(KeysPosition)position
+- (void)keyUp:(KeyPosition)position
 {
     
 }
 
-- (void)keysNoteOn:(KeysPluck)pluck
+- (void)keysNoteOn:(KeysPress)press
 {
-    [self keysNoteOn:pluck forFrame:nil];
+    [self keysNoteOn:press forFrame:nil];
 }
 
-- (void)keysNoteOn:(KeysPluck)pluck forFrame:(NSNoteFrame*)frameToPlay
+- (void)keysNoteOn:(KeysPress)press forFrame:(NSNoteFrame*)frameToPlay
 {
     // If we are not running (i.e. paused) then we ignore input from the midi
     if ( m_isRunning == NO )
@@ -1819,9 +1817,8 @@ extern UserController * g_userController;
         return;
     }
     
-    KeysFret fret = pluck.position.fret;
-    KeysString str = pluck.position.string;
-    KeysPluckVelocity velocity = pluck.velocity;
+    KeyPosition key = press.position;
+    KeysPressVelocity velocity = press.velocity;
     
     if ( _currentFrame == nil && frameToPlay == nil && !isRestrictPlayFrame)
     {
@@ -1835,25 +1832,16 @@ extern UserController * g_userController;
     // Play a pluck noise immediately
     NSNote * hit;
     
-    if ( _difficulty == PlayViewControllerDifficultyEasy )
-    {
-        hit = [frameToPlay testString:str];
-    }
-    else
-    {
-        hit = [frameToPlay testString:str andFret:fret];
-    }
+    hit = [frameToPlay testKey:key];
     
     // Play the note.
     if ( _difficulty == PlayViewControllerDifficultyHard )
     {
-        [self pluckString:str andFret:fret andVelocity:velocity];
+        [self pressKey:key andVelocity:velocity];
     }
     else if ( hit != nil )
     {
-        [self pluckString:hit.m_string andFret:hit.m_fret andVelocity:KeysMaxPluckVelocity];
-        
-        fret = hit.m_fret;
+        [self pressKey:key andVelocity:KeysMaxPressVelocity];
     }
     
     if(isStandalone && hit != nil){
@@ -1862,7 +1850,7 @@ extern UserController * g_userController;
         // Standalone Song Recorder
         //
         
-        [_songRecorder playString:str andFret:fret];
+        //[_songRecorder playString:str andFret:fret];
         
     }else{
         
@@ -1872,15 +1860,14 @@ extern UserController * g_userController;
         
         // If this is called from the midi thread, there won't be an autorelease pool in place.
         // I'll handle all the alloc's manually just in case.
-        NSNumber * fretNumber = [[NSNumber alloc] initWithChar:fret];
-        NSNumber * strNumber = [[NSNumber alloc] initWithChar:str];
+        //NSNumber * fretNumber = [[NSNumber alloc] initWithChar:fret];
+        NSNumber * keyNumber = [[NSNumber alloc] initWithChar:key];
         NSNumber * velNumber = [[NSNumber alloc] initWithChar:velocity];
         
         NSDate * when = [[NSDate alloc] initWithTimeIntervalSinceNow:NOTE_DEFERMENT_TIME];
         
         NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                            fretNumber, @"Fret",
-                                            strNumber, @"String",
+                                            keyNumber, @"Key",
                                             velNumber, @"Velocity",
                                             nil];
         
@@ -1906,11 +1893,11 @@ extern UserController * g_userController;
     }
 }
 
-- (void)keysNoteOff:(KeysPosition)position
+- (void)keysNoteOff:(KeyPosition)position
 {
     
     // Always mute notes on note-off for hard
-    [g_soundMaster NoteOffAtString:position.string-1 andFret:position.fret];
+    [g_soundMaster NoteOffForKey:position];
     
     @synchronized ( _deferredNotesQueue )
     {
@@ -1918,16 +1905,14 @@ extern UserController * g_userController;
         
         for ( NSDictionary * pluck in _deferredNotesQueue )
         {
-            NSNumber * fretNumber = [pluck objectForKey:@"Fret"];
-            NSNumber * strNumber = [pluck objectForKey:@"String"];
+            NSNumber * keyNumber = [pluck objectForKey:@"Key"];
             
-            KeysFret fret = [fretNumber charValue];
-            KeysString str = [strNumber charValue];
+            KeyPosition key = [keyNumber charValue];
             
             // If this is a cancelation, kill this timer.
             // Break out of the loop because the for(...) doesn't like
             // the array object mutating under it.
-            if ( fret == position.fret && str == position.string )
+            if ( key == position)
             {
                 canceledPluck = pluck;
                 break;
@@ -2233,13 +2218,11 @@ extern UserController * g_userController;
     
     NSDictionary * pluck = timer.userInfo;
     
-    NSNumber * fretNumber = [pluck objectForKey:@"Fret"];
-    NSNumber * strNumber = [pluck objectForKey:@"String"];
+    NSNumber * keyNumber = [pluck objectForKey:@"Key"];
     NSNumber * velNumber = [pluck objectForKey:@"Velocity"];
     
-    KeysFret fret = [fretNumber charValue];
-    KeysString str = [strNumber charValue];
-    KeysPluckVelocity velocity = [velNumber charValue];
+    KeyPosition key = [keyNumber charValue];
+    KeysPressVelocity velocity = [velNumber charValue];
     
     @synchronized ( _deferredNotesQueue )
     {
@@ -2250,40 +2233,33 @@ extern UserController * g_userController;
     
     NSNote * hit;
     
-    if ( _difficulty == PlayViewControllerDifficultyEasy )
-    {
-        hit = [_currentFrame hitTestAndRemoveStringOnly:str];
-    }
-    else
-    {
-        hit = [_currentFrame hitTestAndRemoveString:str andFret:fret];
-    }
+    hit = [_currentFrame hitTestAndRemoveKey:key];
     
     // Handle the hit
     if ( hit != nil )
     {
-        [self correctHitFret:hit.m_fret andString:hit.m_string andVelocity:velocity];
+        [self correctHitKey:key andVelocity:velocity];
     }
     else
     {
-        [self incorrectHitFret:fret andString:str andVelocity:velocity];
+        [self incorrectHitKey:key andVelocity:velocity];
     }
     
 }
 
 // These functions need to be called from the main thread RunLoop.
 // If they are called from a MIDI interrupt thread, stuff won't work properly.
-- (void)correctHitFret:(KeysFret)fret andString:(KeysString)str andVelocity:(KeysPluckVelocity)velocity
+- (void)correctHitKey:(KeyPosition)key andVelocity:(KeysPressVelocity)velocity
 {
     
     // set it to the correct attenuation
     if ( _interFrameDelayTimer == nil )
     {
         // Record the note
-        [_songRecorder playString:str andFret:fret];
+        //[_songRecorder playString:str andFret:fret];
     }
     
-    [self turnOffString:str andFret:fret];
+    [self turnOffKey:key];
     
     //
     // Frame ended
@@ -2305,6 +2281,7 @@ extern UserController * g_userController;
         }
         
     }else if (_autocomplete || _difficulty == PlayViewControllerDifficultyEasy){
+        /*
         
         //
         // Autocomplete chords
@@ -2336,11 +2313,9 @@ extern UserController * g_userController;
                 for ( NSDictionary * pluck in _deferredNotesQueue )
                 {
                     
-                    NSNumber * fretNumber = [pluck objectForKey:@"Fret"];
-                    NSNumber * strNumber = [pluck objectForKey:@"String"];
+                    NSNumber * keyNumber = [pluck objectForKey:@"Key"];
                     
-                    KeysFret fret = [fretNumber charValue];
-                    KeysString str = [strNumber charValue];
+                    KeyPosition key = [keyNumber charValue];
                     
                     // This one is queues up, so don't play it
                     if ( _delayedChords[str-1] == fret )
@@ -2365,38 +2340,41 @@ extern UserController * g_userController;
             // if another chord doesn't come in.
             _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
             
+        
+         
         }
         else
         {
             // See if we are changing the direction
             [self handleDirectionChange:str];
             
-        }
+        }*/
         
     }
 }
 
-- (void)incorrectHitFret:(KeysFret)fret andString:(KeysString)str andVelocity:(KeysPluckVelocity)velocity
+- (void)incorrectHitKey:(KeyPosition)key andVelocity:(KeysPressVelocity)velocity
 {
     
     // See if we are trying to play a new chord
     if ( _interFrameDelayTimer != nil )
     {
-        [self handleDirectionChange:str];
+        //[self handleDirectionChange:str];
     }
     
     if ( _difficulty == PlayViewControllerDifficultyHard )
     {
         // Play the note at normal intensity
         //        [self pluckString:str andFret:fret andVelocity:velocity];
-        [g_soundMaster NoteOffAtString:str-1 andFret:fret];
+        [g_soundMaster NoteOnForKey:key];
         
         // Record the note
-        [_songRecorder playString:str andFret:fret];
+        //[_songRecorder playString:str andFret:fret];
     }
     
 }
 
+/*
 - (void)handleDirectionChange:(KeysString)str
 {
     
@@ -2451,10 +2429,11 @@ extern UserController * g_userController;
     }
     
 }
+ */
 
 - (void)handleDelayedChord
 {
-    
+    /*
     [_delayedChordTimer invalidate];
     _delayedChordTimer = nil;
     
@@ -2484,13 +2463,13 @@ extern UserController * g_userController;
         }
         else
         {
-            [self pluckString:str andFret:fret andVelocity:KeysMaxPluckVelocity];
+            [self pluckString:str andFret:fret andVelocity:KeysMaxPressVelocity];
         }
         
         // Record the note
         [_songRecorder playString:str andFret:fret];
     }
-    
+    */
 }
 
 - (void)turnOnFrame:(NSNoteFrame*)frame
@@ -2498,17 +2477,7 @@ extern UserController * g_userController;
     
     for ( NSNote * note in frame.m_notes )
     {
-        [self turnOnString:note.m_string andFret:note.m_fret];
-    }
-    
-}
-
-- (void)turnOnFrameWhite:(NSNoteFrame*)frame
-{
-    
-    for ( NSNote * note in frame.m_notes )
-    {
-        [self turnOnWhiteString:note.m_string andFret:note.m_fret];
+        [self turnOnKey:note.m_key];
     }
     
 }
@@ -2518,74 +2487,50 @@ extern UserController * g_userController;
     
     for ( NSNote * note in frame.m_notes )
     {
-        [self turnOffString:note.m_string andFret:note.m_fret];
+        [self turnOffKey:note.m_key];
     }
     
 }
 
-- (void)turnOnString:(KeysString)str andFret:(KeysFret)fret
+- (void)turnOnKey:(KeyPosition)key
 {
     if(g_keysController.connected){
         
-        if ( fret == KEYS_GUITAR_FRET_MUTED )
+        if ( key == KEYS_KEY_MUTED )
         {
-            [g_keysController turnOnLedAtPositionWithColorMap:KeysPositionMake(0, str)];
+            [g_keysController turnOnLedAtPositionWithColorMap:key];
         }
         else
         {
-            [g_keysController turnOnLedAtPositionWithColorMap:KeysPositionMake(fret, str)];
+            [g_keysController turnOnLedAtPositionWithColorMap:key];
         }
         
     }
 }
 
-- (void)turnOnWhiteString:(KeysString)str andFret:(KeysFret)fret
-{
-    
-    if(g_keysController.connected){
-        
-        if ( fret == KEYS_GUITAR_FRET_MUTED )
-        {
-            [g_keysController turnOnLedAtPosition:KeysPositionMake(0, str)
-                                        withColor:KeysLedColorMake(3, 3, 3)];
-        }
-        else
-        {
-            [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, str)
-                                        withColor:KeysLedColorMake(3, 3, 3)];
-        }
-        
-    }
-    
-}
-
-- (void)turnOffString:(KeysString)str andFret:(KeysFret)fret
+- (void)turnOffKey:(KeyPosition)key
 {
     if(g_keysController.connected){
-        if ( fret == KEYS_GUITAR_FRET_MUTED )
-        {
-            [g_keysController turnOffLedAtPosition:KeysPositionMake(0, str)];
-        }
-        else
-        {
-            [g_keysController turnOffLedAtPosition:KeysPositionMake(fret, str)];
-        }
+        
+        [g_keysController turnOffLedAtPosition:key];
+        
     }
     
 }
 
-- (void)pluckString:(KeysString)str andFret:(KeysFret)fret andVelocity:(KeysPluckVelocity)velocity
+- (void)pressKey:(KeyPosition)key andVelocity:(KeysPressVelocity)velocity
 {
-    
-    if ( fret == KEYS_GUITAR_FRET_MUTED )
+    if ( key == KEYS_KEY_MUTED )
     {
         NSLog(@"Play View Controller Pluck Muted String");
-        [g_soundMaster PluckMutedString:str-1];
+        [g_soundMaster playMutedKey:key];
+//        [g_soundMaster PluckMutedString:key-1];
     }
     else
     {
         NSLog(@"Play View Controller Pluck String");
-        [g_soundMaster PluckString:str-1 atFret:fret];
+        [g_soundMaster playKey:key];
+//        [g_soundMaster PluckString:key-1 atFret:0];
     }
     
 }
@@ -2681,7 +2626,7 @@ extern UserController * g_userController;
         // On easy mode, we play the notes that haven't been hit yet
         for ( NSNote * note in frame.m_notesPending )
         {
-            [self pluckString:note.m_string andFret:note.m_fret andVelocity:KeysMaxPluckVelocity];
+            [self pressKey:note.m_key andVelocity:KeysMaxPressVelocity];
         }
         
         [self songModelExitFrame:_currentFrame];
@@ -3065,24 +3010,26 @@ extern UserController * g_userController;
 {
     CGPoint touchPoint = [touchPointVaue CGPointValue];
     
-    NSMutableDictionary * frameWithString = [_displayController getStringPluckFromTap:touchPoint];
+    NSMutableDictionary * frameWithString = [_displayController getKeyPressFromTap:touchPoint];
     
     if(frameWithString == nil){
         return;
     }
     
-    int tappedString = [[frameWithString objectForKey:@"String"] intValue];
+    int tappedKey = [[frameWithString objectForKey:@"Key"] intValue];
     NSNoteFrame * tappedFrame = [frameWithString objectForKey:@"Frame"];
     
-    if(tappedString >= 0 && [tappedFrame.m_notesPending count] == 1){
-        [self playNoteOnString:tappedString atFrame:tappedFrame];
-    }else if(tappedString >= 0 && [tappedFrame.m_notesPending count] == 2){
+    if(tappedKey >= 0 && [tappedFrame.m_notesPending count] == 1){
+    
+        [self playNoteForKey:tappedKey atFrame:tappedFrame];
+
+    }else if(tappedKey >= 0 && [tappedFrame.m_notesPending count] == 2){
         
         NSNote * firstNote = [tappedFrame.m_notesPending objectAtIndex:0];
         NSNote * secondNote = [tappedFrame.m_notesPending objectAtIndex:1];
         
-        if([_displayController getMappedStringFromString:firstNote.m_string] == [_displayController getMappedStringFromString:secondNote.m_string]){
-            [self playNoteOnString:tappedString atFrame:tappedFrame];
+        if([_displayController getMappedKeyFromKey:firstNote.m_key] == [_displayController getMappedKeyFromKey:secondNote.m_key]){
+            [self playNoteForKey:tappedKey atFrame:tappedFrame];
         }
         
     }
@@ -3093,22 +3040,23 @@ extern UserController * g_userController;
 {
     CGPoint touchPoint = [touchPointValue CGPointValue];
     
-    NSMutableDictionary * frameWithString = [_displayController getStringPluckFromTap:touchPoint];
+    NSMutableDictionary * frameWithString = [_displayController getKeyPressFromTap:touchPoint];
     
     if(frameWithString == nil){
         return;
     }
     
-    int tappedString = [[frameWithString objectForKey:@"String"] intValue];
+    int tappedKey = [[frameWithString objectForKey:@"Key"] intValue];
     NSNoteFrame * tappedFrame = [frameWithString objectForKey:@"Frame"];
     
-    if(tappedString >= 0 && [tappedFrame.m_notesPending count] > 0){
-        [self playNoteOnString:tappedString atFrame:tappedFrame];
+    if(tappedKey >= 0 && [tappedFrame.m_notesPending count] > 0){
+        [self playNoteForKey:tappedKey atFrame:tappedFrame];
     }
 }
 
 // Standalone
-- (void)playNoteOnString:(int)tappedString atFrame:(NSNoteFrame*)tappedFrame
+//- (void)playNoteOnString:(int)tappedString atFrame:(NSNoteFrame*)tappedFrame
+- (void)playNoteForKey:(int)tappedKey atFrame:(NSNoteFrame *)tappedFrame;
 {
     
     NSNote * firstNote = nil;
@@ -3128,9 +3076,9 @@ extern UserController * g_userController;
                 continue;
             }
             
-            int fret = [_displayController getStandaloneFretFromFret:n.m_fret];
+            int key = [_displayController getStandaloneKeyFromKey:n.m_key];
             
-            switch(fret){
+            switch(key){
                 case 1:
                     if(!playFretOne) fretsOn++;
                     playFretOne = TRUE;
@@ -3202,9 +3150,9 @@ extern UserController * g_userController;
                 continue;
             }
             
-            int fret = [_displayController getStandaloneFretFromFret:firstNote.m_fret];
+            int key = [_displayController getStandaloneKeyFromKey:firstNote.m_key];
             
-            switch (fret) {
+            switch (key) {
                 case 0:
                     if(fretOneOn || fretTwoOn || fretThreeOn){
                         [_displayController attemptFrame:tappedFrame];
@@ -3239,7 +3187,7 @@ extern UserController * g_userController;
     
     for(NSNote * n in tappedFrame.m_notesPending){
         
-        if([_displayController getMappedStringFromString:n.m_string] == tappedString){
+        if([_displayController getMappedKeyFromKey:n.m_key] == tappedKey){
             
             // Strummed with the right fretting, autocomplete
             
@@ -3248,16 +3196,15 @@ extern UserController * g_userController;
             @synchronized(tappedFrame.m_notesPending){
                 for(NSNote * nn in tappedFrame.m_notesPending){
                     
-                    KeysPluck pluck;
-                    pluck.velocity = KeysMaxPluckVelocity;
-                    pluck.position.fret = nn.m_fret;
-                    pluck.position.string = nn.m_string;
+                    KeysPress press;
+                    press.velocity = KeysMaxPressVelocity;
+                    press.position = nn.m_key;
                     
-                    NSLog(@"Pluck string %i",nn.m_string);
+                    NSLog(@"Play key %i",nn.m_key);
                     
                     [_displayController hitNote:nn];
                     
-                    [self keysNoteOn:pluck forFrame:tappedFrame];
+                    [self keysNoteOn:press forFrame:tappedFrame];
                     
                     [notesToRemove addObject:nn];
                     
@@ -3266,16 +3213,16 @@ extern UserController * g_userController;
             
             /*}else{
              
-             KeysPluck pluck;
-             pluck.velocity = KeysMaxPluckVelocity;
-             pluck.position.fret = n.m_fret;
-             pluck.position.string = n.m_string;
+             KeysPress press;
+             press.velocity = KeysMaxPressVelocity;
+             press.position.fret = n.m_fret;
+             press.position.string = n.m_string;
              
              NSLog(@"Pluck string %i",n.m_string);
              
              [_displayController hitNote:n];
              
-             [self keysNoteOn:pluck forFrame:tappedFrame];
+             [self keysNoteOn:press forFrame:tappedFrame];
              
              [notesToRemove addObject:n];
              
@@ -3287,7 +3234,7 @@ extern UserController * g_userController;
     
     @synchronized(tappedFrame.m_notesPending){
         for(NSNote * nnn in notesToRemove){
-            [tappedFrame removeString:nnn.m_string andFret:nnn.m_fret];
+            [tappedFrame removeKey:nnn.m_key];
         }
     }
     

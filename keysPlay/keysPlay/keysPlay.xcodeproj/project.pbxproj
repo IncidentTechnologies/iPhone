@@ -28,6 +28,14 @@
 		6D3D06DF18F4D2E8007683DB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06D918F4D2E8007683DB /* README.md */; };
 		6D3D06E018F4D2E8007683DB /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06DA18F4D2E8007683DB /* release_notes.md */; };
 		6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D594C101909BCF900CF3128 /* HighlightModel.m */; };
+		6D61D1DA19FB07C5008CFA5A /* NSMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1CB19FB07C5008CFA5A /* NSMarker.m */; };
+		6D61D1DB19FB07C5008CFA5A /* NSMeasure.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1CD19FB07C5008CFA5A /* NSMeasure.m */; };
+		6D61D1DC19FB07C5008CFA5A /* NSNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1CF19FB07C5008CFA5A /* NSNote.m */; };
+		6D61D1DD19FB07C5008CFA5A /* NSNoteFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1D119FB07C5008CFA5A /* NSNoteFrame.m */; };
+		6D61D1DE19FB07C5008CFA5A /* NSScoreTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1D319FB07C5008CFA5A /* NSScoreTracker.m */; };
+		6D61D1DF19FB07C5008CFA5A /* NSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1D519FB07C5008CFA5A /* NSSong.m */; };
+		6D61D1E019FB07C5008CFA5A /* NSSongCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1D719FB07C5008CFA5A /* NSSongCreator.m */; };
+		6D61D1E119FB07C5008CFA5A /* NSSongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1D919FB07C5008CFA5A /* NSSongModel.m */; };
 		6D62271F191D84D9003D8534 /* Metronome.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D62271E191D84D9003D8534 /* Metronome.mp3 */; };
 		6D6C5E2F192C0AD40039A85F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C5E2E192C0AD40039A85F /* SettingsViewController.xib */; };
 		6D6C5E32192C0B1F0039A85F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C5E31192C0B1F0039A85F /* SettingsViewController.m */; };
@@ -1514,6 +1522,22 @@
 		6D3D06DD18F4D2E8007683DB /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		6D594C0F1909BCF900CF3128 /* HighlightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightModel.h; sourceTree = "<group>"; };
 		6D594C101909BCF900CF3128 /* HighlightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightModel.m; sourceTree = "<group>"; };
+		6D61D1CA19FB07C5008CFA5A /* NSMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMarker.h; path = SongModel/NSMarker.h; sourceTree = SOURCE_ROOT; };
+		6D61D1CB19FB07C5008CFA5A /* NSMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSMarker.m; path = SongModel/NSMarker.m; sourceTree = SOURCE_ROOT; };
+		6D61D1CC19FB07C5008CFA5A /* NSMeasure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMeasure.h; path = SongModel/NSMeasure.h; sourceTree = SOURCE_ROOT; };
+		6D61D1CD19FB07C5008CFA5A /* NSMeasure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSMeasure.m; path = SongModel/NSMeasure.m; sourceTree = SOURCE_ROOT; };
+		6D61D1CE19FB07C5008CFA5A /* NSNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSNote.h; path = SongModel/NSNote.h; sourceTree = SOURCE_ROOT; };
+		6D61D1CF19FB07C5008CFA5A /* NSNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSNote.m; path = SongModel/NSNote.m; sourceTree = SOURCE_ROOT; };
+		6D61D1D019FB07C5008CFA5A /* NSNoteFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSNoteFrame.h; path = SongModel/NSNoteFrame.h; sourceTree = SOURCE_ROOT; };
+		6D61D1D119FB07C5008CFA5A /* NSNoteFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSNoteFrame.m; path = SongModel/NSNoteFrame.m; sourceTree = SOURCE_ROOT; };
+		6D61D1D219FB07C5008CFA5A /* NSScoreTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSScoreTracker.h; path = SongModel/NSScoreTracker.h; sourceTree = SOURCE_ROOT; };
+		6D61D1D319FB07C5008CFA5A /* NSScoreTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSScoreTracker.m; path = SongModel/NSScoreTracker.m; sourceTree = SOURCE_ROOT; };
+		6D61D1D419FB07C5008CFA5A /* NSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSSong.h; path = SongModel/NSSong.h; sourceTree = SOURCE_ROOT; };
+		6D61D1D519FB07C5008CFA5A /* NSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSSong.m; path = SongModel/NSSong.m; sourceTree = SOURCE_ROOT; };
+		6D61D1D619FB07C5008CFA5A /* NSSongCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSSongCreator.h; path = SongModel/NSSongCreator.h; sourceTree = SOURCE_ROOT; };
+		6D61D1D719FB07C5008CFA5A /* NSSongCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSSongCreator.m; path = SongModel/NSSongCreator.m; sourceTree = SOURCE_ROOT; };
+		6D61D1D819FB07C5008CFA5A /* NSSongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSSongModel.h; path = SongModel/NSSongModel.h; sourceTree = SOURCE_ROOT; };
+		6D61D1D919FB07C5008CFA5A /* NSSongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSSongModel.m; path = SongModel/NSSongModel.m; sourceTree = SOURCE_ROOT; };
 		6D62271E191D84D9003D8534 /* Metronome.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Metronome.mp3; sourceTree = "<group>"; };
 		6D622720191DA91E003D8534 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D6C5E2E192C0AD40039A85F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -2449,6 +2473,7 @@
 			isa = PBXGroup;
 			children = (
 				9D85CD2917CE8BB50064CE79 /* Store */,
+				6D61D1C919FB07B3008CFA5A /* Song Model */,
 				EC0BAD8116F1791300E567A6 /* UI Widgets */,
 				29B97315FDCFA39411CA2CEA /* AppDelegate */,
 				EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */,
@@ -2559,6 +2584,29 @@
 				6D3D06DD18F4D2E8007683DB /* TestFlight.h */,
 			);
 			path = TestFlightSDK3.0.0;
+			sourceTree = "<group>";
+		};
+		6D61D1C919FB07B3008CFA5A /* Song Model */ = {
+			isa = PBXGroup;
+			children = (
+				6D61D1CA19FB07C5008CFA5A /* NSMarker.h */,
+				6D61D1CB19FB07C5008CFA5A /* NSMarker.m */,
+				6D61D1CC19FB07C5008CFA5A /* NSMeasure.h */,
+				6D61D1CD19FB07C5008CFA5A /* NSMeasure.m */,
+				6D61D1CE19FB07C5008CFA5A /* NSNote.h */,
+				6D61D1CF19FB07C5008CFA5A /* NSNote.m */,
+				6D61D1D019FB07C5008CFA5A /* NSNoteFrame.h */,
+				6D61D1D119FB07C5008CFA5A /* NSNoteFrame.m */,
+				6D61D1D219FB07C5008CFA5A /* NSScoreTracker.h */,
+				6D61D1D319FB07C5008CFA5A /* NSScoreTracker.m */,
+				6D61D1D419FB07C5008CFA5A /* NSSong.h */,
+				6D61D1D519FB07C5008CFA5A /* NSSong.m */,
+				6D61D1D619FB07C5008CFA5A /* NSSongCreator.h */,
+				6D61D1D719FB07C5008CFA5A /* NSSongCreator.m */,
+				6D61D1D819FB07C5008CFA5A /* NSSongModel.h */,
+				6D61D1D919FB07C5008CFA5A /* NSSongModel.m */,
+			);
+			name = "Song Model";
 			sourceTree = "<group>";
 		};
 		6D6C5E2D192C0AA50039A85F /* SettingsViewController */ = {
@@ -5401,18 +5449,22 @@
 				6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */,
 				EC0BAD2F16EE8E3C00E567A6 /* TitleNavigationController.m in Sources */,
 				EC0BAD8416F18AA000E567A6 /* ActivityFeedCell.m in Sources */,
+				6D61D1DE19FB07C5008CFA5A /* NSScoreTracker.m in Sources */,
 				EC0BAD9416F2472900E567A6 /* SelectorControl.m in Sources */,
 				6DA8C1F8192C2C8400182BCF /* RegisterPromptViewController.m in Sources */,
 				EC0BAD9916F2784800E567A6 /* CyclingTextField.m in Sources */,
 				6D3D06D618F4A870007683DB /* SoundMaster.mm in Sources */,
 				EC0BAD9E16F2A4CF00E567A6 /* SlidingModalViewController.m in Sources */,
 				ECE9D23316FBAF2500BB6C53 /* SongSelectionViewController.m in Sources */,
+				6D61D1DC19FB07C5008CFA5A /* NSNote.m in Sources */,
 				ECE9D23A16FBB7C900BB6C53 /* SongListCell.m in Sources */,
 				6D7159E019F885FE00138DBB /* FrameGenerator.m in Sources */,
 				ECE9D24216FBDA9200BB6C53 /* ExpandableSearchBar.m in Sources */,
 				9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */,
+				6D61D1E019FB07C5008CFA5A /* NSSongCreator.m in Sources */,
 				9DA313831704DDD900CFF104 /* LightsViewController.m in Sources */,
 				9DA313911704FA3100CFF104 /* FPMenuViewController.m in Sources */,
+				6D61D1DA19FB07C5008CFA5A /* NSMarker.m in Sources */,
 				6D7D47051919BB8D00EF8C75 /* TimeFormatter.m in Sources */,
 				ECE9D2481705133900BB6C53 /* PlayViewController.m in Sources */,
 				ECCC030E170A2B900021DB00 /* NoteModel.m in Sources */,
@@ -5427,10 +5479,13 @@
 				ECE831FB171764C0006E2391 /* UserCommentCell.m in Sources */,
 				6D7D46F51919BA0F00EF8C75 /* InstrumentTableViewController.m in Sources */,
 				ECE8323C1718EA34006E2391 /* SocialViewController.m in Sources */,
+				6D61D1E119FB07C5008CFA5A /* NSSongModel.m in Sources */,
 				EC48665417287E8D0066194D /* SlidingViewController.m in Sources */,
+				6D61D1DB19FB07C5008CFA5A /* NSMeasure.m in Sources */,
 				EC48665A172889CA0066194D /* SlidingInstrumentViewController.m in Sources */,
 				EC3415D4172F3E4900501AF4 /* SocialUserCell.m in Sources */,
 				EC34160C173894B600501AF4 /* UIView+Keys.m in Sources */,
+				6D61D1DF19FB07C5008CFA5A /* NSSong.m in Sources */,
 				EC34160E173894B600501AF4 /* UIImage+Keys.m in Sources */,
 				EC3416131739976900501AF4 /* SocialSongCell.m in Sources */,
 				EC34161B1739ADA600501AF4 /* SessionModalViewController.m in Sources */,
@@ -5452,6 +5507,7 @@
 				9D85CD3317CE8F890064CE79 /* StoreViewController.m in Sources */,
 				26868D8617D2A46500DC990F /* StoreSongListCell.m in Sources */,
 				26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */,
+				6D61D1DD19FB07C5008CFA5A /* NSNoteFrame.m in Sources */,
 				6D7D46F81919BA0F00EF8C75 /* RoundedRectangleButton.m in Sources */,
 				26868D8E17D6C5AB00DC990F /* SongPurchaseRequest.m in Sources */,
 				6D7D46FB1919BA0F00EF8C75 /* TransitionRectangleViewController.m in Sources */,

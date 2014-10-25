@@ -13,8 +13,7 @@
 
 #define FLATSAMPLER
 
-#define KEYS_NUM_STRINGS 6
-#define KEYS_NUM_FRETS 17
+#define KEYS_NUM_KEYS 127
 
 #define KEYS_NOTE_DURATION 1.0
 #define KEYS_FRET_DOWN_DURATION 0.005
@@ -61,14 +60,14 @@
     // Slides and fret tracking
     BOOL isSlideEnabled;
     
-    int activeFretOnString[KEYS_NUM_STRINGS];
-    int pendingFretOnString[KEYS_NUM_STRINGS];
-    int fretsPressedDown[KEYS_NUM_STRINGS][KEYS_NUM_FRETS];
+    //int activeFretOnString[KEYS_NUM_STRINGS];
+    //int pendingFretOnString[KEYS_NUM_STRINGS];
+    //int fretsPressedDown[KEYS_NUM_STRINGS][KEYS_NUM_FRETS];
     
-    BOOL blockContinuousPluckString;
+    //BOOL blockContinuousPluckString;
     
-    NSTimer * continuousFretTimer[KEYS_NUM_STRINGS];
-    NSTimer * playingNotesTimers[KEYS_NUM_STRINGS][KEYS_NUM_FRETS];
+   // NSTimer * continuousFretTimer[KEYS_NUM_STRINGS];
+    NSTimer * playingNotesTimers[KEYS_NUM_KEYS];
     
 }
 @end
@@ -76,8 +75,8 @@
 @implementation SoundMaster
 
 @synthesize m_instruments;
-@synthesize m_tuning;
-@synthesize m_standardTuning;
+//@synthesize m_tuning;
+//@synthesize m_standardTuning;
 
 - (id)init
 {
@@ -109,13 +108,13 @@
 {
     NSLog(@" **** Init Sound Master **** ");
     
-    m_standardTuning = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:0],
+    /*m_standardTuning = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:0],
                         [NSNumber numberWithInt:5],
                         [NSNumber numberWithInt:10],
                         [NSNumber numberWithInt:15],
                         [NSNumber numberWithInt:19],
                         [NSNumber numberWithInt:24],
-                        nil];
+                        nil];*/
     
     audioController = [AudioController sharedAudioController];
     root = [[audioController GetNodeNetwork] GetRootNode];
@@ -143,21 +142,21 @@
 
 - (void)initTimers
 {
-    for(int s = 0; s < KEYS_NUM_STRINGS; s++){
+    /*for(int s = 0; s < KEYS_NUM_STRINGS; s++){
         for(int f = 0; f < KEYS_NUM_FRETS; f++){
             playingNotesTimers[s][f] = nil;
         }
-    }
+    }*/
 }
 
 - (void)releaseAllTimers
 {
-    for(int s = 0; s < KEYS_NUM_STRINGS; s++){
+    /*for(int s = 0; s < KEYS_NUM_STRINGS; s++){
         for(int f = 0; f < KEYS_NUM_FRETS; f++){
             [playingNotesTimers[s][f] invalidate];
             playingNotesTimers[s][f] = nil;
         }
-    }
+    }*/
 }
 
 - (void)reset
@@ -367,14 +366,14 @@
     NSLog(@"Load samples for instrument %i",index);
     
     // Reset active frets
-    for(int i = 0; i < KEYS_NUM_STRINGS; i++){
+    /*for(int i = 0; i < KEYS_NUM_STRINGS; i++){
         activeFretOnString[i] = -1;
         pendingFretOnString[i] = -1;
         
         for(int j = 0; j < KEYS_NUM_FRETS; j++){
             fretsPressedDown[i][j] = 0;
         }
-    }
+    }*/
     
     if(m_instruments && index < [m_instruments count] && index > -1){
         
@@ -409,11 +408,11 @@
             [self start];
             
             // Determine the tuning
-            if([instrument objectForKey:@"Tuning"]){
+            /*if([instrument objectForKey:@"Tuning"]){
                 m_tuning = [[NSArray alloc] initWithArray:[instrument objectForKey:@"Tuning"]];
             }else{
                 m_tuning = [[NSArray alloc] initWithArray:m_standardTuning];
-            }
+            }*/
             
             dispatch_semaphore_signal([audioController TakeSemaphore]);
             
@@ -431,7 +430,7 @@
     }
 }
 
-- (BOOL) isAnyFretDownOnString:(int)string
+/*- (BOOL) isAnyFretDownOnString:(int)string
 {
     for(int f = 1; f < KEYS_NUM_FRETS; f++){
         
@@ -442,8 +441,9 @@
     }
     
     return NO;
-}
+}*/
 
+/*
 - (int) highestFretDownIndexForString:(int)string
 {
     for(int f = KEYS_NUM_FRETS-1; f >= 0; f--){
@@ -454,14 +454,19 @@
     
     return -1;
 }
+ */
 
-- (int) noteIndexForString:(int)string andFret:(int)fret
+- (int) noteIndexForKey:(int)key
 {
-    if(fret < 0){
+    /*if(fret < 0){
         return -1;
     }
     
-    return [[m_tuning objectAtIndex:string] intValue] + fret;
+    return [[m_tuning objectAtIndex:string] intValue] + fret;*/
+    
+    // TODO: samples should range 0-127
+    
+    return key;
 }
 
 - (void) releaseInstrument:(NSInteger)index
@@ -572,12 +577,13 @@
 }
 
 #pragma mark - keys
-- (void) PluckString:(int)string atFret:(int)fret
+//- (void) PluckString:(int)string atFret:(int)fret
+- (void) playKey:(int)key
 {
     if(!isLoadingInstrument){
         
         // Ensure it's a valid string + fret
-        if(string >= 0 && string < KEYS_NUM_STRINGS && fret >= 0 && fret < KEYS_NUM_FRETS){
+        if(key >= 0 && key < KEYS_NUM_KEYS){
             
             // Ensure there's a valid instrument enabled
             if(m_keysSamplerNode == nil){
@@ -586,47 +592,47 @@
             }
             
             // Stop anything playing on the string
-            [self stopString:string setFret:fret];
-            activeFretOnString[string] = fret;
+            //[self stopString:string setFret:fret];
+            //activeFretOnString[string] = fret;
             
             // Get note index
-            int noteIndex = [self noteIndexForString:string andFret:fret];
+            int noteIndex = [self noteIndexForKey:key];
             
             NSLog(@"Note at index %i",noteIndex);
             
             // First check if there's a timer on the note already (playing again before it's timed out) and stop it
-            if(playingNotesTimers[string][fret] != nil){
-                [self EndPluckString:playingNotesTimers[string][fret]];
+            if(playingNotesTimers[key] != nil){
+                [self EndPlayKey:playingNotesTimers[key]];
             }
             
             // Trigger the note
             m_keysSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
             
             // Set a timer to keep the note short
-            playingNotesTimers[string][fret] = [NSTimer scheduledTimerWithTimeInterval:KEYS_NOTE_DURATION target:self selector:@selector(EndPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:fret],@"Fret", nil] repeats:NO];
+            playingNotesTimers[key] = [NSTimer scheduledTimerWithTimeInterval:KEYS_NOTE_DURATION target:self selector:@selector(EndPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:key],@"Key", nil] repeats:NO];
         }
     }
 }
 
-// Timer End Pluck String
-- (void) EndPluckString:(NSTimer *)timer
+// Timer End Play Key
+- (void) EndPlayKey:(NSTimer *)timer
 {
     NSDictionary * info = [timer userInfo];
     
-    int string = [[info objectForKey:@"String"] intValue];
-    int fret = [[info objectForKey:@"Fret"] intValue];
+    int key = [[info objectForKey:@"Key"] intValue];
     
-    int stopIndex = [self noteIndexForString:string andFret:fret];
+    int stopIndex = [self noteIndexForKey:key];
     
-    if(stopIndex >= 0 && [self IsNoteOnAtString:string andFret:fret]){
-        [self EndNoteOnString:string andFret:fret];
+    if(stopIndex >= 0 && [self IsNoteOnForKey:key]){
+        [self EndNoteForKey:key];
     }
     
-    [playingNotesTimers[string][fret] invalidate];
-    playingNotesTimers[string][fret] = nil;
+    [playingNotesTimers[key] invalidate];
+    playingNotesTimers[key] = nil;
     
 }
 
+/*
 - (void) PluckContinuousString:(int)string atFret:(int)fret
 {
     if(!blockContinuousPluckString){
@@ -654,9 +660,10 @@
             blockContinuousPluckString = false;
         }
     }
-    
 }
+ */
 
+/*
 - (void)EndBlockContinuousPluckString:(NSTimer *)timer
 {
     int string = [[[timer userInfo] objectForKey:@"String"] intValue];
@@ -677,19 +684,20 @@
         
     }
 }
-
-- (void) PluckMutedString:(int)string
+*/
+ 
+- (void) playMutedKey:(int)key
 {
     if(!isLoadingInstrument){
-        if(string >= 0 && string < KEYS_NUM_STRINGS){
+        if(key >= 0 && key < KEYS_NUM_KEYS){
             
             if(m_keysSamplerNode == nil){
                 [self setCurrentInstrument:0 withSelector:nil andOwner:nil];
             }
             
-            [self stopString:string setFret:0];
+            //[self stopString:string setFret:0];
             
-            int noteIndex = [self noteIndexForString:string andFret:0];
+            int noteIndex = [self noteIndexForKey:key];
             
             NSLog(@"Muted note at index %i",noteIndex);
             
@@ -698,6 +706,7 @@
     }
 }
 
+/*
 - (void) stopString:(int)string setFret:(int)fret
 {
     // Stop all other notes playing on that string by keeping an active note per string
@@ -723,41 +732,10 @@
     
     activeFretOnString[string] = fret;
 }
+ */
 
-- (bool) FretDown:(int)fret onString:(int)string
-{
-    if(!isLoadingInstrument){
-        
-        fretsPressedDown[string][fret] = 1;
-        
-        int activeFret = activeFretOnString[string];
-        
-        if(activeFret <= 0){
-            
-            //activeFretOnString[string] = highestFret;
-            //[self NoteOffAtString:s andFret:activeFret];
-            
-        }else if(activeFret > 0){
-            
-            /*if(continuousFretTimer[string] == nil && isSlideEnabled){
-             
-             // Slide Up or Hammer On
-             continuousFretTimer[string] = [NSTimer scheduledTimerWithTimeInterval:KEYS_FRET_DOWN_DURATION target:self selector:@selector(EndContinuousFretWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
-             
-             }*/
-            
-            if(isSlideEnabled){
-                pendingFretOnString[string] = [self highestFretDownIndexForString:string];
-                [self PluckContinuousString:string atFret:activeFretOnString[string]];
-            }
-            
-        }
-        
-    }
-    
-    return YES;
-}
 
+/*
 - (void) EndContinuousFretWindow:(NSTimer *)timer
 {
     
@@ -772,7 +750,9 @@
     continuousFretTimer[s] = nil;
     
 }
+*/
 
+/*
 - (void) EndStopStringWindow:(NSTimer *)timer
 {
     int s = [[[timer userInfo] objectForKey:@"String"] intValue];
@@ -781,83 +761,41 @@
         [self stopString:s setFret:-1];
     }
 }
+*/
 
-- (bool) FretUp:(int)fret onString:(int)string
+- (bool) NoteOnForKey:(int)key
 {
     if(!isLoadingInstrument){
         
-        fretsPressedDown[string][fret] = 0;
-        
-        // Consider stopping the string
-        if(![self isAnyFretDownOnString:string]){
-            [NSTimer scheduledTimerWithTimeInterval:KEYS_STOP_FRET_DURATION target:self selector:@selector(EndStopStringWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
-        }
-        
-        if(isSlideEnabled){
-            
-            if(fret == activeFretOnString[string]){
-                
-                int highestFret = [self highestFretDownIndexForString:string];
-                
-                if(highestFret <= 0){
-                    
-                    //pendingFretOnString[string] = -1;
-                    //activeFretOnString[string] = -1;
-                    
-                }else{
-                    
-                    /*if(continuousFretTimer[string] == nil){
-                     
-                     // Slide Down or Pull Off
-                     continuousFretTimer[string] = [NSTimer scheduledTimerWithTimeInterval:KEYS_FRET_UP_DURATION target:self selector:@selector(EndContinuousFretWindow:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String", nil] repeats:NO];
-                     }*/
-                    
-                    pendingFretOnString[string] = [self highestFretDownIndexForString:string];
-                    [self PluckContinuousString:string atFret:activeFretOnString[string]];
-                    
-                }
-                
-            }
-            
-        }
-    }
-    
-    return NO;
-}
-
-- (bool) NoteOnAtString:(int)string andFret:(int)fret
-{
-    if(!isLoadingInstrument){
-        
-        [self PluckString:string atFret:fret];
+        [self playKey:key];
         
     }
     return YES;
 }
 
-- (bool) IsNoteOnAtString:(int)string andFret:(int)fret
+- (bool) IsNoteOnForKey:(int)key
 {
-    int noteIndex = [self noteIndexForString:string andFret:fret];
+    int noteIndex = [self noteIndexForKey:key];
     
     return m_keysSamplerNode->IsNoteOn(m_activeBankNode, noteIndex);
 }
 
 // Keys Note Off At String
-- (bool) NoteOffAtString:(int)string andFret:(int)fret
+- (bool) NoteOffForKey:(int)key
 {
     if(!isLoadingInstrument){
         
-        int stopIndex = [self noteIndexForString:string andFret:fret];
+        int stopIndex = [self noteIndexForKey:key];
         
-        if(stopIndex >= 0 && [self IsNoteOnAtString:string andFret:fret]){
+        if(stopIndex >= 0 && [self IsNoteOnForKey:key]){
             
-            if(playingNotesTimers[string][fret] != nil){
-                [self EndPluckString:playingNotesTimers[string][fret]];
+            if(playingNotesTimers[key] != nil){
+                [self EndPlayKey:playingNotesTimers[key]];
                 
                 return YES;
                 
             }else{
-                [self EndNoteOnString:string andFret:fret];
+                [self EndNoteForKey:key];
                 
                 return YES;
             }
@@ -869,25 +807,15 @@
 }
 
 // Note Off Event
-- (void) EndNoteOnString:(int)string andFret:(int)fret
+- (void) EndNoteForKey:(int)key
 {
-    int stopIndex = [self noteIndexForString:string andFret:fret];
+    int stopIndex = [self noteIndexForKey:key];
     
     if(stopIndex >= 0){
         
         m_keysSamplerNode->NoteOff(m_activeBankNode, stopIndex);
         
     }
-}
-
-- (void) StopNoteOnString:(int)string andFret:(int)fret
-{
-    int stopIndex = [self noteIndexForString:string andFret:fret];
-    
-    if(stopIndex >= 0){
-        m_keysSamplerNode->StopNote(m_activeBankNode, stopIndex);
-    }
-    
 }
 
 #pragma mark - Sliding

@@ -240,7 +240,7 @@
     if (LEDTouchNone != _LEDTouchArea && LEDTouchAll != _LEDTouchArea)
     {
         // Turn off last LED touch point when finger touch ends
-        [self turnOffLED:_lastLEDTouch.x AndFret:_lastLEDTouch.y];
+        //[self turnOffLED:_lastLEDTouch.x AndFret:_lastLEDTouch.y];
     }
     
     // reset the last touch point
@@ -262,6 +262,7 @@
     
     for (UITouch *touch in touches)
     {
+        /*
         CGPoint stringFret = [self getFretPositionFromTouch:touch];
         
         string = stringFret.x;
@@ -292,7 +293,7 @@
         }
         else
         {
-            [self turnONLED:string AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
+            [self turnOnLED:string AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
         }
         
         // if color mode is 'random' rotate colors on every new led position
@@ -304,6 +305,7 @@
                 _currentColorIndex = 0;
             }
         }
+         */
     }
 }
 
@@ -394,12 +396,13 @@
 
 // turns on the LED at the specified string and fret based on the current
 // _LEDShape value
-- (void) turnONLED:(int)string AndFret:(int)fret WithColorRed:(int)red AndGreen:(int)green AndBlue:(int)blue
+- (void) turnOnLED:(int)key WithColorRed:(int)red AndGreen:(int)green AndBlue:(int)blue
 {
     // Regardless of shape we will turn on the touch point.
-    [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string)
+    [g_keysController turnOnLedAtPosition:key
                                 withColor:KeysLedColorMake(red, green, blue)];
     
+    /*
     switch (_LEDShape)
     {
         case LEDShapeCross:
@@ -450,21 +453,21 @@
         default:
             break;
     }
+     */
 }
 
 // handles turning off LEDs based on the current _LEDMode
-- (void) turnOffLED:(int)string AndFret:(int)fret
+- (void) turnOffLED:(int)key
 {
     if (LEDModeSingle == _LEDMode)
     {
-        [self turnOffLEDByShape:string AndFret:fret];
+        [self turnOffLEDByShape:key];
     }
     else if (LEDModeTrail == _LEDMode)
     {
         // Turn off LED after a delay to create a trailing effect
         NSArray *params = [NSArray arrayWithObjects:
-                           [NSNumber numberWithInt:string],
-                           [NSNumber numberWithInt:fret],
+                           [NSNumber numberWithInt:key],
                            nil];
         
         [self performSelector:@selector(turnOffLEDDelayed:) withObject:params afterDelay:0.4];
@@ -477,18 +480,18 @@
 - (void) turnOffLEDDelayed:(NSArray *)params
 {
     [[params objectAtIndex:0] intValue];
-    [self turnOffLEDByShape:[[params objectAtIndex:0] intValue]
-                    AndFret:[[params objectAtIndex:1] intValue]];
+    [self turnOffLEDByShape:[[params objectAtIndex:0] intValue]];
 }
 
 // turns off the LED at the specified string and fret based on the current
 // _LEDShape value
-- (void) turnOffLEDByShape:(int)string AndFret:(int)fret
+- (void) turnOffLEDByShape:(int)key
 {
     // Regardless of shape we will turn off the touch point.
-    [g_keysController turnOnLedAtPosition:KeysPositionMake(fret, string)
+    [g_keysController turnOnLedAtPosition:key
                                 withColor:KeysLedColorMake(0, 0, 0)];
     
+    /*
     switch (_LEDShape)
     {
         case LEDShapeCross:
@@ -538,6 +541,7 @@
         default:
             break;
     }
+     */
 }
 
 - (IBAction)setLEDMode:(UIButton*)sender
@@ -615,7 +619,7 @@
 {
     [self stopLoop];
     
-    [g_keysController turnOnLedAtPosition:KeysPositionMake(0, 0)
+    [g_keysController turnOnLedAtPosition:0
                                 withColor:KeysLedColorMake(0, 0, 0)];
 }
 
@@ -683,41 +687,36 @@
 - (void) turnOnAllLEDRandom
 {
     RGBColor *color;
-    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret++)
+    for (int key = 1; key <= KEYS_KEY_COUNT; key++)
     {
-        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string++)
-        {
-            _currentColorIndex = arc4random_uniform([_colors count]);
-            
-            color = [_colors objectAtIndex:_currentColorIndex];
-            
-            [self turnONLED:string AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
-        }
+        _currentColorIndex = arc4random_uniform([_colors count]);
+        
+        color = [_colors objectAtIndex:_currentColorIndex];
+        
+        [self turnOnLED:key WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
     }
 }
 
 - (void) LEDRainbow
 {
     RGBColor *color;
-    for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret++)
+    for (int key = 1; key <= KEYS_KEY_COUNT; key++)
     {
-        for (int string = 1; string <= KEYS_GUITAR_STRING_COUNT; string++)
+        color = [_colors objectAtIndex:_currentColorIndex];
+        
+        [self turnOnLED:key WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
+        
+        if (++_currentColorIndex >= [_colors count])
         {
-            color = [_colors objectAtIndex:_currentColorIndex];
-            
-            [self turnONLED:string AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
-            
-            if (++_currentColorIndex >= [_colors count])
-            {
-                // loop starting at 1, skip 0 (white) for the full fretboard random display
-                _currentColorIndex = 1;
-            }
+            // loop starting at 1, skip 0 (white) for the full fretboard random display
+            _currentColorIndex = 1;
         }
     }
 }
 
 - (void) LEDSquarePatches
 {
+    /*
     RGBColor *color;
     for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret = fret+2)
     {
@@ -737,10 +736,12 @@
             }
         }
     }
+     */
 }
 
 - (void) LEDLgSquarePatches
 {
+    /*
     RGBColor *color;
     for (int fret = 1; fret <= KEYS_GUITAR_FRET_COUNT; fret = fret+3)
     {
@@ -779,6 +780,7 @@
             break;
         }
     }
+     */
 }
 
 - (void) animateLEDs:(NSTimer*)theTimer
@@ -791,7 +793,7 @@
             
             color = [_colors objectAtIndex:_currentColorIndex];
             
-            [self turnONLED:0 AndFret:0 WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
+            [self turnOnLED:0 WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
             
             if (++_currentColorIndex >= [_colors count])
             {
@@ -802,11 +804,12 @@
             
         case LEDLoopUp:
             
+            /*
             color = [_colors objectAtIndex:_currentColorIndex];
             
             int static fret = KEYS_GUITAR_FRET_COUNT;
             
-            [self turnONLED:0 AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
+            [self turnOnLED:0 WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
             
             if (--fret < 1)
             {
@@ -816,11 +819,13 @@
                     _currentColorIndex = 0;
                 }
             }
+             */
             
             break;
             
         case LEDLoopSide:
             
+            /*
             color = [_colors objectAtIndex:_currentColorIndex];
             
             int static string = 1;
@@ -835,6 +840,7 @@
                     _currentColorIndex = 0;
                 }
             }
+             */
             
             break;
             

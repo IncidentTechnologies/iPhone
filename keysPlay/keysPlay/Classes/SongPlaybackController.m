@@ -215,11 +215,11 @@
 
 #pragma mark - GuitarControllerObserver
 
-- (void)keysNoteOn:(KeysPluck)pluck {
-    KeysFret fret = pluck.position.fret;
-    KeysString str = pluck.position.string;
+- (void)keysNoteOn:(KeysPress)press {
+    //KeysFret fret = press.position.fret;
+    //KeysString str = press.position.string;
     
-    KeysPluckVelocity velocity = pluck.velocity;
+    //KeysPressVelocity velocity = press.velocity;
     
     //[m_audioController PluckString:str-1 atFret:fret withAmplitude:(float)velocity/127.0f];
     
@@ -232,17 +232,17 @@
     NSLog(@"Song playback controller: song model enter frame");
     
     for ( NSNote * note in frame.m_notes ) {
-        if ( note.m_fret == KEYS_GUITAR_FRET_MUTED ) {
+        if ( note.m_key == KEYS_KEY_MUTED ) {
             
-            NSLog(@"pluck muted string %i",note.m_string-1);
+            NSLog(@"play muted key %i",note.m_key-1);
             
-            [g_soundMaster PluckMutedString:note.m_string-1];
+            [g_soundMaster playMutedKey:note.m_key-1];
             
         }
         else {
-            NSLog(@"pluck string %i %i",note.m_string-1,note.m_fret);
+            NSLog(@"pluck string %i",note.m_key-1);
             
-            [g_soundMaster PluckString:note.m_string-1 atFret:note.m_fret];
+            [g_soundMaster playKey:note.m_key-1];
             
             //[m_keysController turnOnLedAtPosition:KeysPositionMake(note.m_fret, note.m_string) withColor:KeysLedColorMake(KeysMaxLedIntensity, KeysMaxLedIntensity, KeysMaxLedIntensity)];
             
@@ -259,7 +259,7 @@
 
 - (void)delayedTurnLedOff:(NSNote *)note
 {
-    [m_keysController turnOffLedAtPosition:KeysPositionMake(note.m_fret, note.m_string)];
+    [m_keysController turnOffLedAtPosition:note.m_key];
 }
 
 - (void)songModelNextFrame:(NSNoteFrame*)frame
@@ -273,13 +273,13 @@
         
         if(m_keysController.connected){
             
-            if ( note.m_fret == KEYS_GUITAR_FRET_MUTED )
+            if ( note.m_key == KEYS_KEY_MUTED )
             {
-                [m_keysController turnOnLedAtPositionWithColorMap:KeysPositionMake(0, note.m_string)];
+                [m_keysController turnOnLedAtPositionWithColorMap:note.m_key];
             }
             else
             {
-                [m_keysController turnOnLedAtPositionWithColorMap:KeysPositionMake(note.m_fret, note.m_string)];
+                [m_keysController turnOnLedAtPositionWithColorMap:note.m_key];
             }
             
         }

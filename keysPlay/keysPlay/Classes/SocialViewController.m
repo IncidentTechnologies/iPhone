@@ -9,7 +9,7 @@
 #import "SocialViewController.h"
 
 #import "SelectorControl.h"
-#import <gTarAppCore/Facebook.h>
+//#import <gTarAppCore/Facebook.h>
 #import "SocialSongCell.h"
 #import "SocialUserCell.h"
 #import "SessionModalViewController.h"
@@ -30,7 +30,7 @@
 
 extern UserController *g_userController;
 extern FileController *g_fileController;
-extern Facebook *g_facebook;
+//extern Facebook *g_facebook;
 
 @interface SocialViewController ()
 {

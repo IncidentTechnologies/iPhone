@@ -191,10 +191,10 @@ typedef enum
 // LED methods
 - (void) touchedLEDs:(NSSet *)touches;
 - (CGPoint) getFretPositionFromTouch:(UITouch *)touch;
-- (void) turnONLED:(int)string AndFret:(int)fret WithColorRed:(int)red AndGreen:(int)green AndBlue:(int)blue;
-- (void) turnOffLED:(int)string AndFret:(int)fret;
+- (void) turnOnLED:(int)key WithColorRed:(int)red AndGreen:(int)green AndBlue:(int)blue;
+- (void) turnOffLED:(int)key;
 - (void) turnOffLEDDelayed:(NSArray *)params;
-- (void) turnOffLEDByShape:(int)string AndFret:(int)fret;
+- (void) turnOffLEDByShape:(int)key;
 - (void) LEDRainbow;
 - (void) LEDSquarePatches;
 - (void) LEDLgSquarePatches;

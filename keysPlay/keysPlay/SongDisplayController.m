@@ -335,7 +335,7 @@
         }
         
         // Determine if active for standalone (first in a row)
-        int standalonestring = [self getMappedStringFromString:note.m_string];
+        int standalonestring = [self getMappedKeyFromKey:note.m_key];
         if([standaloneNotesForStrings objectForKey:[NSNumber numberWithInt:standalonestring]] == [NSNull null]){
             [standaloneNotesForStrings setObject:note forKey:[NSNumber numberWithInt:standalonestring]];
             note.m_standaloneActive = YES;
@@ -347,20 +347,20 @@
         
         CGPoint center;
         center.x = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone];
-        center.y = [self convertStringToCoordSpace:note.m_string isStandalone:isStandalone];
+        center.y = [self convertKeyToCoordSpace:note.m_key isStandalone:isStandalone];
         
         // number texture overlay
         NumberModel * overlay;
         
         if(isStandalone){
             overlay = nil;
-        }else if ( note.m_fret == KEYS_GUITAR_FRET_MUTED)
+        }else if ( note.m_key == KEYS_KEY_MUTED)
         {
             overlay = m_mutedTexture;
         }
         else
         {
-            overlay = [m_numberModels objectAtIndex:(note.m_fret%KEYS_GUITAR_FRET_COUNT) ];
+            overlay = [m_numberModels objectAtIndex:(note.m_key%KEYS_GUITAR_FRET_COUNT) ];
         }
         
         NoteModel * model;
@@ -370,31 +370,31 @@
         
         if(!isStandalone){
             
-            noteColor = g_stringColors[note.m_string - 1];
+            noteColor = g_keyColors[note.m_key - 1];
             
         }else if(difficulty == PlayViewControllerDifficultyEasy){ // Easy
             
-            noteColor = g_standaloneFretColors[0];
+            noteColor = g_standaloneKeyColors[0];
             
         }else if(difficulty == PlayViewControllerDifficultyMedium){ // Medium
             
-            noteColor = g_standaloneFretColors[firstNote.m_fret];
+            noteColor = g_standaloneKeyColors[firstNote.m_key];
             
             if(note.m_standaloneActive){
-                if(firstNote.m_fret > 0){
+                if(firstNote.m_key > 0){
                     countFrets[0]++;
-                    countFrets[[self getStandaloneFretFromFret:firstNote.m_fret]]++;
+                    countFrets[[self getStandaloneKeyFromKey:firstNote.m_key]]++;
                 }
             }
             
         }else{ // Hard
             
-            noteColor = g_standaloneFretColors[note.m_fret];
+            noteColor = g_standaloneKeyColors[note.m_key];
             
             if(note.m_standaloneActive){
-                if(note.m_fret > 0){
+                if(note.m_key > 0){
                     countFrets[0]++;
-                    countFrets[[self getStandaloneFretFromFret:note.m_fret]]++;
+                    countFrets[[self getStandaloneKeyFromKey:note.m_key]]++;
                 }
             }
             
@@ -402,21 +402,21 @@
         
         model = [[NoteModel alloc] initWithCenter:center andColor:noteColor andTexture:m_noteTexture andOverlay:overlay];
         
-        model.m_fret = note.m_fret;
+        model.m_key = note.m_key;
         
         if(isStandalone){
             
             if(note.m_standaloneActive == NO){
                 
-                model.m_standalonefret = -1;
+                model.m_standalonekey = -1;
                 
             }else{
                 if(difficulty == PlayViewControllerDifficultyEasy){
-                    model.m_standalonefret = 0;
+                    model.m_standalonekey = 0;
                 }else if(difficulty == PlayViewControllerDifficultyMedium){
-                    model.m_standalonefret = [self getStandaloneFretFromFret:firstNote.m_fret];
+                    model.m_standalonekey = [self getStandaloneKeyFromKey:firstNote.m_key];
                 }else if(difficulty == PlayViewControllerDifficultyHard){
-                    model.m_standalonefret = [self getStandaloneFretFromFret:note.m_fret];
+                    model.m_standalonekey = [self getStandaloneKeyFromKey:note.m_key];
                 }
             }
         }
@@ -603,15 +603,15 @@
     
     size.width = GL_SCREEN_WIDTH;
     
-    for ( unsigned int i = 0; i < KEYS_GUITAR_STRING_COUNT; i++ )
+    for ( unsigned int i = 0; i < KEYS_KEY_COUNT; i++ )
     {
         
         // strings number and size are inversely proportional -- get slightly bigger
         size.height = GL_STRING_HEIGHT + (KEYS_GUITAR_STRING_COUNT - 1 - i) * GL_STRING_HEIGHT_INCREMENT;
-        center.y = [self convertStringToCoordSpace:(i+1) isStandalone:isStandalone];
+        center.y = [self convertKeyToCoordSpace:(i+1) isStandalone:isStandalone];
         
         
-        GLubyte * stringColor = (isStandalone) ? g_standaloneStringColors[i] : g_stringColors[i];
+        GLubyte * stringColor = (isStandalone) ? g_standaloneKeyColors[i] : g_keyColors[i];
         
         StringModel * stringModel = [[StringModel alloc] initWithCenter:center andSize:size andColor:stringColor];
         
@@ -722,10 +722,10 @@
     return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN) / GL_SCREEN_WIDTH;
 }
 
-- (double)convertStringToCoordSpace:(NSInteger)str isStandalone:(BOOL)standalone
+- (double)convertKeyToCoordSpace:(NSInteger)key isStandalone:(BOOL)standalone
 {
     if(standalone){
-        str = [self getMappedStringFromString:str];
+        key = [self getMappedKeyFromKey:key];
     }
     
     GLfloat effectiveScreenHeight = (GL_SCREEN_HEIGHT) - (GL_SCREEN_TOP_BUFFER + GL_SCREEN_BOTTOM_BUFFER);
@@ -737,7 +737,7 @@
     }
     
     // bias it down to zero-base it
-    return GL_SCREEN_BOTTOM_BUFFER + ( (str-1) * heightPerString );
+    return GL_SCREEN_BOTTOM_BUFFER + ( (key-1) * heightPerString );
 }
 
 - (double)calculateMaxShiftCoordSpace:(BOOL)standalone
@@ -770,13 +770,13 @@
     }
 }
 
--(int)getMappedStringFromString:(int)str
+-(int)getMappedKeyFromKey:(int)key
 {
-    int newstr = floor(((double)str-1)/2.0) + 1;
+    int newstr = floor(((double)key-1)/2.0) + 1;
     return newstr;
 }
 
-- (NSMutableDictionary *)getStringPluckFromTap:(CGPoint)touchPoint
+- (NSMutableDictionary *)getKeyPressFromTap:(CGPoint)touchPoint
 {
     if(!isStandalone){
         return nil;

@@ -14,7 +14,7 @@
 
 #import "SongPlaybackController.h"
 #import "UserSong.h"
-#import <gTarAppCore/NSSong.h>
+#import "NSSong.h"
 
 #import "UIButton+Keys.h"
 

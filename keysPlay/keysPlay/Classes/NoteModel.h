@@ -28,8 +28,8 @@
 - (void)setFretNoteCount:(int)count AtIndex:(int)index;
 - (int)getFretNoteCountAtIndex:(int)index;
 
-@property (nonatomic, assign) int m_fret;
-@property (nonatomic, assign) int m_standalonefret;
+@property (nonatomic, assign) int m_key;
+@property (nonatomic, assign) int m_standalonekey;
 @property (nonatomic, assign) double m_hit;
 @property (nonatomic, retain) HighlightModel * m_highlightModel;
 

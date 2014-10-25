@@ -20,11 +20,11 @@
 #import "StringModel.h"
 #import "NumberModel.h"
 
-#import <gTarAppCore/NSNote.h>
-#import <gTarAppCore/NSSong.h>
-#import <gTarAppCore/NSMeasure.h>
-#import <gTarAppCore/NSSongModel.h>
-#import <gTarAppCore/NSNoteFrame.h>
+#import "NSNote.h"
+#import "NSSong.h"
+#import "NSMeasure.h"
+#import "NSSongModel.h"
+#import "NSNoteFrame.h"
 
 #import "keysColors.h"
 
@@ -97,11 +97,11 @@
 - (void)shiftView:(double)shift;
 - (void)shiftViewDelta:(double)shift;
 
-- (int)getStandaloneFretFromFret:(int)fret;
+- (int)getStandaloneKeyFromKey:(int)key;
 - (double)convertTimeToCoordSpace:(double)dealta isStandalone:(BOOL)standalone;
 - (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone;
 - (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone;
-- (double)convertStringToCoordSpace:(NSInteger)str isStandalone:(BOOL)standalone;
+- (double)convertKeyToCoordSpace:(NSInteger)key isStandalone:(BOOL)standalone;
 - (double)calculateMaxShiftCoordSpace:(BOOL)standalone;
 
 - (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn;
@@ -113,7 +113,7 @@
 - (void)setNoteHit:(NSNote*)note toValue:(double)hit;
 
 // Standalone
-- (int)getMappedStringFromString:(int)str;
-- (NSMutableDictionary*)getStringPluckFromTap:(CGPoint)touchPoint;
+- (int)getMappedKeyFromKey:(int)key;
+- (NSMutableDictionary*)getKeyPressFromTap:(CGPoint)touchPoint;
 
 @end

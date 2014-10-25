@@ -29,4 +29,6 @@
 
 #define KEYS_GUITAR_NOTE_OFF ((GtarFret)-1)
 #define KEYS_GUITAR_FRET_UP (-1)
-#define KEYS_GUITAR_FRET_MUTED ((GtarFret)-2)
+#define KEYS_KEY_MUTED ((GtarFret)-2)
+
+#define KEYS_KEY_COUNT 127
