@@ -11,7 +11,7 @@
 #import <gTarAppCore/ES1Renderer.h>
 
 @class LineModel;
-@class StringModel;
+@class KeyPathModel;
 @class NoteAnimation;
 @class NoteModel;
 @class Model;
@@ -26,7 +26,7 @@
 	NSMutableArray * m_noteAnimations;
     NSMutableArray * m_noteModels;
 	
-	NSMutableArray * m_stringModels;	
+	NSMutableArray * m_keyPathModels;
 	NSMutableArray * m_lineModels;
     NSMutableArray * m_loopModels;
 
@@ -49,8 +49,8 @@
 - (void)removeAnimation:(NoteAnimation*)animation;
 - (void)addModel:(NoteModel*)model;
 - (void)removeModel:(NoteModel*)model;
-- (void)addString:(StringModel*)str;
-- (void)removeString:(StringModel*)str;
+- (void)addKeyPath:(KeyPathModel*)str;
+- (void)removeKeyPath:(KeyPathModel*)str;
 - (void)addLoop:(LineModel*)loop;
 - (void)removeLoop:(LineModel*)loop;
 - (void)addLine:(LineModel*)line;

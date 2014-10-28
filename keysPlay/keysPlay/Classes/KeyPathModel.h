@@ -1,14 +1,14 @@
 //
-//  StringModel.h
+//  KeyPathModel.h
 //  gTarAppCore
 //
-//  Created by Marty Greenia on 3/10/11.
-//  Copyright 2011 Msft. All rights reserved.
+//  Created by Kate Schnippering on 10/27/14.
+//  Copyright 2014 Msft. All rights reserved.
 //
 
 #import <gTarAppCore/Model.h>
 
-@interface StringModel : Model
+@interface KeyPathModel : Model
 {
 
 }

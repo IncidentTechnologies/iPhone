@@ -17,7 +17,7 @@
 #import <gTarAppCore/NoteAnimation.h>
 #import "NoteModel.h"
 #import "LineModel.h"
-#import "StringModel.h"
+#import "KeyPathModel.h"
 #import "NumberModel.h"
 
 #import "NSNote.h"

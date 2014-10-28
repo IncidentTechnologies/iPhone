@@ -150,6 +150,11 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UIButton *fretTwo;
 @property (strong, nonatomic) IBOutlet UIButton *fretThree;
 
+@property (strong, nonatomic) IBOutlet UIView * keyboardStandaloneEasy;
+@property (strong, nonatomic) IBOutlet UIView * keyboardStandaloneMedium;
+@property (strong, nonatomic) IBOutlet UIView * keyboardStandaloneHard;
+@property (strong, nonatomic) IBOutlet UIView * keyboard;
+
 @property (nonatomic, weak) NSNoteFrame * lastTappedFrame;
 @property (nonatomic, assign) enum PlayViewControllerDifficulty difficulty;
 @property (nonatomic, assign) double tempoModifier;

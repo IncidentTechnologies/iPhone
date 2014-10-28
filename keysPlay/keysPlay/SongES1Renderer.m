@@ -9,7 +9,7 @@
 #import "SongES1Renderer.h"
 
 #import "LineModel.h"
-#import "StringModel.h"
+#import "KeyPathModel.h"
 #import "NoteModel.h"
 #import <gTarAppCore/NoteAnimation.h>
 #import <gTarAppCore/Model.h>
@@ -41,7 +41,7 @@
         m_noteAnimations = [[NSMutableArray alloc] init];
         m_noteModels = [[NSMutableArray alloc] init];
         
-        m_stringModels = [[NSMutableArray alloc] init];
+        m_keyPathModels = [[NSMutableArray alloc] init];
         m_lineModels = [[NSMutableArray alloc] init];
         m_loopModels = [[NSMutableArray alloc] init];
         
@@ -74,14 +74,14 @@
     [m_noteModels removeObject:model];
 }
 
-- (void)addString:(StringModel*)str
+- (void)addKeyPath:(KeyPathModel*)str
 {
-    [m_stringModels addObject:str];
+    [m_keyPathModels addObject:str];
 }
 
-- (void)removeString:(StringModel*)str
+- (void)removeKeyPath:(KeyPathModel*)str
 {
-    [m_stringModels removeObject:str];
+    [m_keyPathModels removeObject:str];
 }
 
 - (void)addLoop:(LineModel *)loop
@@ -109,19 +109,19 @@
     
     [m_noteModels removeAllObjects];
     [m_noteAnimations removeAllObjects];
-    [m_stringModels removeAllObjects];
+    [m_keyPathModels removeAllObjects];
     [m_lineModels removeAllObjects];
     [m_loopModels removeAllObjects];
     
     m_noteAnimations = nil;
     m_noteModels = nil;
-    m_stringModels = nil;
+    m_keyPathModels = nil;
     m_lineModels = nil;
     
     m_noteAnimations = [[NSMutableArray alloc] init];
     m_noteModels = [[NSMutableArray alloc] init];
     
-    m_stringModels = [[NSMutableArray alloc] init];
+    m_keyPathModels = [[NSMutableArray alloc] init];
     m_lineModels = [[NSMutableArray alloc] init];
     
     m_seekLineModel = nil;
@@ -230,8 +230,8 @@
     // First translate for the measure lines -- view shift + position
     //
     
-    glTranslatef( -m_viewShift, 0.0f, 0.0f);
-	glTranslatef( m_offset - m_currentPosition, 0.0f, 0.0f);
+    glTranslatef( 0.0f, -m_viewShift, 0.0f);
+	glTranslatef( 0.0f, m_offset - m_currentPosition, 0.0f);
     
 	// draw measure lines
     for ( LineModel * lineModel in m_lineModels )
@@ -239,30 +239,31 @@
 		[lineModel draw];
 	}
     
-    glTranslatef( -(m_offset - m_currentPosition), 0.0f, 0.0f);
+    glTranslatef( 0.0f, -(m_offset - m_currentPosition), 0.0f);
     
     // draw the seek line(s)
-	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
+	/*[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
     
     if(m_seekLineStandaloneModel != nil){
         [m_seekLineStandaloneModel drawWithOffset:CGPointMake(m_offset, 0)];
     }
+     */
         
     // The strings are fixed, so undo any translattion
-    glTranslatef( +m_viewShift, 0.0f, 0.0f);
+    glTranslatef( 0.0f, +m_viewShift, 0.0f);
     
     //
-	// Draw strings -- these do not move
+	// Draw key paths -- these do not move
     //
-    for ( LineModel * stringModel in m_stringModels )
+    for ( LineModel * keyPathModel in m_keyPathModels )
     {
-		[stringModel draw];
+		[keyPathModel draw];
 	}
     
     //    //
     //    // Translate the view to draw the seek line
     //    //
-    glTranslatef( -m_viewShift, 0.0f, 0.0f);
+    glTranslatef( 0.0f, -m_viewShift, 0.0f);
     //
     //	// draw the seek line
     //	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
@@ -281,7 +282,7 @@
     //
     // Now we translate forward for the notes
     //
-    glTranslatef( m_offset - m_currentPosition, 0.0f, 0.0f);
+    glTranslatef( 0.0f, m_offset - m_currentPosition, 0.0f);
     
 	// draw notes
     for ( Animation * animation in m_noteAnimations )

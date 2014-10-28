@@ -17,16 +17,14 @@
 #define GL_SCREEN_WIDTH (m_glView.frame.size.width)
 
 // empirically determined ratios defining screen layout for what looks good.
-#define GL_SCREEN_TOP_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
-#define GL_SCREEN_BOTTOM_BUFFER ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN ( GL_SCREEN_WIDTH / 12.0 )
 #define GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN )
 #define GL_SCREEN_SEEK_LINE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
 #define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_MARGIN )
 
 #define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 7.0 )
-#define GL_STRING_HEIGHT ( GL_SCREEN_HEIGHT / 60.0 )
-#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 )
+#define GL_STRING_WIDTH ( GL_SCREEN_HEIGHT / 60.0 )
+//#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 )
 
 #define SONG_BEATS_PER_SCREEN 3.0
 #define SONG_BEAT_OFFSET (SONG_BEATS_PER_SCREEN * GL_SCREEN_SEEK_LINE_OFFSET / GL_SCREEN_WIDTH )
@@ -46,7 +44,7 @@
         m_noteModelDictionary = [[NSMutableDictionary alloc] init];
         m_noteModelUniversalDictionary = [[NSMutableDictionary alloc] init];
         
-        m_numberModels = [[NSMutableArray alloc] init];
+        //m_numberModels = [[NSMutableArray alloc] init];
         
         m_songModel = song;
         
@@ -89,13 +87,13 @@
         
         [self createNoteTexture];
         
-        [self createNumberModels];
+        //[self createNumberModels];
         
         [self createLineModels];
         
         [self preloadFrames:PRELOAD_INCREMENT*4];
         
-        [self createLoopModels];
+        //[self createLoopModels];
         
         m_preloadTimer = [NSTimer scheduledTimerWithTimeInterval:PRELOAD_TIMER_DURATION target:self selector:@selector(preloadFramesTimer) userInfo:nil repeats:YES];
         
@@ -346,8 +344,10 @@
         //NSLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
         
         CGPoint center;
-        center.x = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone];
-        center.y = [self convertKeyToCoordSpace:note.m_key isStandalone:isStandalone];
+        center.y = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone];
+        center.x = [self convertKeyToCoordSpace:note.m_key isStandalone:isStandalone];
+        
+        //NSLog(@"Center is %f, %f",center.x,center.y);
         
         // number texture overlay
         NumberModel * overlay;
@@ -358,10 +358,10 @@
         {
             overlay = m_mutedTexture;
         }
-        else
-        {
-            overlay = [m_numberModels objectAtIndex:(note.m_key%KEYS_GUITAR_FRET_COUNT) ];
-        }
+        //else
+        //{
+        //    overlay = [m_numberModels objectAtIndex:(note.m_key%KEYS_GUITAR_FRET_COUNT) ];
+        //}
         
         NoteModel * model;
         
@@ -370,7 +370,7 @@
         
         if(!isStandalone){
             
-            noteColor = g_keyColors[note.m_key - 1];
+            noteColor = g_keyColors[note.m_key%KEYS_OCTAVE_COUNT];
             
         }else if(difficulty == PlayViewControllerDifficultyEasy){ // Easy
             
@@ -378,7 +378,7 @@
             
         }else if(difficulty == PlayViewControllerDifficultyMedium){ // Medium
             
-            noteColor = g_standaloneKeyColors[firstNote.m_key];
+            noteColor = g_standaloneKeyColors[firstNote.m_key%KEYS_OCTAVE_COUNT];
             
             if(note.m_standaloneActive){
                 if(firstNote.m_key > 0){
@@ -389,7 +389,7 @@
             
         }else{ // Hard
             
-            noteColor = g_standaloneKeyColors[note.m_key];
+            noteColor = g_standaloneKeyColors[note.m_key%KEYS_OCTAVE_COUNT];
             
             if(note.m_standaloneActive){
                 if(note.m_key > 0){
@@ -575,22 +575,9 @@
         center.x = 0;
     }
     
-    m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
+    //m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
     
-    // Draw a wider seek line area for standalone
-    /*if(isStandalone){
-     
-     size.width = GL_NOTE_HEIGHT * 3;
-     size.height = GL_SCREEN_HEIGHT;
-     
-     m_renderer.m_seekLineStandaloneModel = [[[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparentLight] autorelease];
-     
-     }else{
-     
-     m_renderer.m_seekLineStandaloneModel = nil;
-     
-     }*/
-    
+    m_renderer.m_seekLineModel = nil;
     m_renderer.m_seekLineStandaloneModel = nil;
     
     
@@ -599,23 +586,22 @@
     // Create the strings
     //
     
-    center.x = GL_SCREEN_WIDTH / 2.0;
     
-    size.width = GL_SCREEN_WIDTH;
-    
-    for ( unsigned int i = 0; i < KEYS_KEY_COUNT; i++ )
+    for ( unsigned int i = 0; i < KEYS_OCTAVE_COUNT; i++ )
     {
-        
         // strings number and size are inversely proportional -- get slightly bigger
-        size.height = GL_STRING_HEIGHT + (KEYS_GUITAR_STRING_COUNT - 1 - i) * GL_STRING_HEIGHT_INCREMENT;
-        center.y = [self convertKeyToCoordSpace:(i+1) isStandalone:isStandalone];
+        center.x = [self convertKeyToCoordSpace:i isStandalone:isStandalone];
         
+        center.y = GL_SCREEN_HEIGHT / 2.0;
         
-        GLubyte * stringColor = (isStandalone) ? g_standaloneKeyColors[i] : g_keyColors[i];
+        size.width = GL_STRING_WIDTH;
+        size.height = GL_SCREEN_HEIGHT;
         
-        StringModel * stringModel = [[StringModel alloc] initWithCenter:center andSize:size andColor:stringColor];
+        GLubyte * stringColor = g_standaloneKeyColors[0]; // all white
         
-        [m_renderer addString:stringModel];
+        KeyPathModel * stringModel = [[KeyPathModel alloc] initWithCenter:center andSize:size andColor:stringColor];
+        
+        [m_renderer addKeyPath:stringModel];
         
         
     }
@@ -625,6 +611,7 @@
 
 - (void)createLoopModels
 {
+    /*
     CGSize size;
     CGPoint center;
     
@@ -651,11 +638,12 @@
         [m_renderer addLoop:loopModel];
         
     }
+    */
 }
 
 - (void)createNumberModels
 {
-    
+    /*
     CGSize size;
     size.width = GL_NOTE_HEIGHT;
     size.height = GL_NOTE_HEIGHT-3;
@@ -678,6 +666,7 @@
                                                  andSize:size
                                                 andColor:g_whiteColor
                                                 andValue:-1];
+     */
 }
 
 - (void)createNoteTexture
@@ -707,37 +696,86 @@
 
 - (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone
 {
-    //return (beat/(GLfloat)SONG_BEATS_PER_SCREEN) * GL_SCREEN_WIDTH;
-    //double beatsPerScreen = (isStandalone) ? 3.0*SONG_BEATS_PER_SCREEN/4.0 : SONG_BEATS_PER_SCREEN;
-    
     double beatsPerScreen = SONG_BEATS_PER_SCREEN;
     
-    return GL_SCREEN_WIDTH - (beat/(GLfloat)beatsPerScreen) * GL_SCREEN_WIDTH;
+    return GL_SCREEN_HEIGHT - (beat/(GLfloat)beatsPerScreen) * GL_SCREEN_HEIGHT;
 }
 
 - (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone
 {
-    //return coord * ((GLfloat)SONG_BEATS_PER_SCREEN / GL_SCREEN_WIDTH);
-    
-    return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN) / GL_SCREEN_WIDTH;
+    return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN) / GL_SCREEN_HEIGHT;
 }
 
 - (double)convertKeyToCoordSpace:(NSInteger)key isStandalone:(BOOL)standalone
 {
-    if(standalone){
-        key = [self getMappedKeyFromKey:key];
+    key = [self getMappedKeyFromKey:key];
+    
+    // WHITE KEYS
+    float numWhiteKeys = KEYS_WHITE_KEY_HARD_COUNT;
+    if(isStandalone && difficulty == PlayViewControllerDifficultyMedium) numWhiteKeys = KEYS_WHITE_KEY_MED_COUNT;
+    if(isStandalone && difficulty == PlayViewControllerDifficultyEasy) numWhiteKeys = KEYS_WHITE_KEY_EASY_COUNT;
+    
+    GLfloat effectiveScreenWidth = (GL_SCREEN_WIDTH);
+    GLfloat widthPerWhiteKey = effectiveScreenWidth / ((GLfloat)numWhiteKeys);
+    
+    if(!isStandalone || difficulty == PlayViewControllerDifficultyHard){
+        
+        int whiteKeys[KEYS_WHITE_KEY_HARD_COUNT] = {0,2,4,5,7,9,11};
+        int blackKeys[KEYS_BLACK_KEY_HARD_COUNT] = {1,3,6,8,10};
+        int blackKeyPositions[KEYS_BLACK_KEY_HARD_COUNT] = {1,2,4,5,6};
+        
+        for(int k = 0; k < KEYS_WHITE_KEY_HARD_COUNT; k++){
+            if(whiteKeys[k] == key){
+                return (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
+            }
+        }
+        
+        for (int j = 0; j < KEYS_BLACK_KEY_HARD_COUNT; j++){
+            if(blackKeys[j] == key){
+                return blackKeyPositions[j] * widthPerWhiteKey;
+            }
+        }
+        
+    }else if(difficulty == PlayViewControllerDifficultyMedium){
+        
+        int whiteKeys[KEYS_WHITE_KEY_MED_COUNT] = {0,2,4,5,7};
+        int blackKeys[KEYS_BLACK_KEY_MED_COUNT] = {1,3,6};
+        int blackKeyPositions[KEYS_BLACK_KEY_MED_COUNT] = {1,2,4};
+        
+        for(int k = 0; k < KEYS_WHITE_KEY_MED_COUNT; k++){
+            if(whiteKeys[k] == key){
+                return (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
+            }
+        }
+        
+        for (int j = 0; j < KEYS_BLACK_KEY_MED_COUNT; j++){
+            if(blackKeys[j] == key){
+                return blackKeyPositions[j] * widthPerWhiteKey;
+            }
+        }
+        
+    }else{
+        
+        int whiteKeys[KEYS_WHITE_KEY_EASY_COUNT] = {0,2,4};
+        int blackKeys[KEYS_BLACK_KEY_EASY_COUNT] = {1,3};
+        int blackKeyPositions[KEYS_BLACK_KEY_EASY_COUNT] = {1,2};
+        
+        for(int k = 0; k < KEYS_WHITE_KEY_EASY_COUNT; k++){
+            if(whiteKeys[k] == key){
+                return (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
+            }
+        }
+        
+        for (int j = 0; j < KEYS_BLACK_KEY_EASY_COUNT; j++){
+            if(blackKeys[j] == key){
+                return blackKeyPositions[j] * widthPerWhiteKey;
+            }
+        }
+        
     }
     
-    GLfloat effectiveScreenHeight = (GL_SCREEN_HEIGHT) - (GL_SCREEN_TOP_BUFFER + GL_SCREEN_BOTTOM_BUFFER);
-    
-    GLfloat heightPerString = effectiveScreenHeight / ((GLfloat)KEYS_GUITAR_STRING_COUNT-1);
-    
-    if(standalone){
-        heightPerString *= 2;
-    }
-    
-    // bias it down to zero-base it
-    return GL_SCREEN_BOTTOM_BUFFER + ( (key-1) * heightPerString );
+    // Error!
+    return 0;
 }
 
 - (double)calculateMaxShiftCoordSpace:(BOOL)standalone
@@ -751,29 +789,26 @@
     if(m_songModel.m_lengthBeats - m_songModel.m_currentBeat <= SONG_BEATS_PER_SCREEN){
         return end;
     }else{
-        return end+GL_SCREEN_WIDTH;
+        return end+GL_SCREEN_HEIGHT;
     }
 }
 
 #pragma mark - Standalone helper functions
-// To adjust fret coloring, refer to this mapping function and g_standaloneFretColors
-- (int)getStandaloneFretFromFret:(int)fret
+// To adjust key coloring, refer to this mapping function and g_standaloneKeyColors
+- (int)getStandaloneKeyFromKey:(int)key
 {
-    if(fret == 0){
-        return 0;
-    }else if(fret == 1 || fret == 4 || fret == 7 || fret == 10 || fret == 13){
-        return 1;
-    }else if(fret == 2 || fret == 5 || fret == 8 || fret == 11 || fret == 14){
-        return 2;
-    }else{
-        return 3;
-    }
+    return [self getMappedKeyFromKey:key];
 }
 
 -(int)getMappedKeyFromKey:(int)key
 {
-    int newstr = floor(((double)key-1)/2.0) + 1;
-    return newstr;
+    if(!isStandalone || difficulty == PlayViewControllerDifficultyHard){
+        return key % KEYS_OCTAVE_COUNT;
+    }else if(difficulty == PlayViewControllerDifficultyMedium){
+        return key % 8;
+    }else{
+        return key % 5;
+    }
 }
 
 - (NSMutableDictionary *)getKeyPressFromTap:(CGPoint)touchPoint
@@ -840,16 +875,16 @@
     
     // Determine string
     
-    GLfloat effectiveScreenHeight = (GL_SCREEN_HEIGHT) - (GL_SCREEN_TOP_BUFFER + GL_SCREEN_BOTTOM_BUFFER);
+    GLfloat effectiveScreenWidth = GL_SCREEN_WIDTH;
     
-    GLfloat heightPerString = effectiveScreenHeight / ((GLfloat)KEYS_GUITAR_STRING_COUNT-1);
-    heightPerString *= 2;
+    GLfloat widthPerString = effectiveScreenWidth / ((GLfloat)KEYS_OCTAVE_COUNT-1.0);
+    widthPerString *= 2;
     
     double stringBuffer = 15;
     
-    double string1Center = heightPerString;
-    double string2Center = 2*heightPerString;
-    double string3Center = 3*heightPerString;
+    double string1Center = widthPerString;
+    double string2Center = 2*widthPerString;
+    double string3Center = 3*widthPerString;
     
     NSMutableDictionary * frameWithString = [[NSMutableDictionary alloc] initWithObjectsAndKeys:activeFrame,@"Frame",[NSNumber numberWithInt:-1],@"String",nil];
     

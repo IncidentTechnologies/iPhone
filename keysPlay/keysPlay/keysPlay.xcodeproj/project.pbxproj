@@ -1353,8 +1353,8 @@
 		ECC121C7162D07AD001A231A /* FreePlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECBBBF6F161CF25C00BC5BE2 /* FreePlayController.xib */; };
 		ECCC030E170A2B900021DB00 /* NoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0305170A2B8C0021DB00 /* NoteModel.m */; };
 		ECCC030F170A2B900021DB00 /* NoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0305170A2B8C0021DB00 /* NoteModel.m */; };
-		ECCC0310170A2B900021DB00 /* StringModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0307170A2B8D0021DB00 /* StringModel.m */; };
-		ECCC0311170A2B900021DB00 /* StringModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0307170A2B8D0021DB00 /* StringModel.m */; };
+		ECCC0310170A2B900021DB00 /* KeyPathModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0307170A2B8D0021DB00 /* KeyPathModel.m */; };
+		ECCC0311170A2B900021DB00 /* KeyPathModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0307170A2B8D0021DB00 /* KeyPathModel.m */; };
 		ECCC0312170A2B900021DB00 /* LineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0309170A2B8F0021DB00 /* LineModel.m */; };
 		ECCC0313170A2B900021DB00 /* LineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC0309170A2B8F0021DB00 /* LineModel.m */; };
 		ECCC0314170A2B900021DB00 /* NumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCC030B170A2B8F0021DB00 /* NumberModel.m */; };
@@ -2337,8 +2337,8 @@
 		ECC121CB162D07AD001A231A /* keysPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = keysPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCC0304170A2B8C0021DB00 /* NoteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteModel.h; sourceTree = "<group>"; };
 		ECCC0305170A2B8C0021DB00 /* NoteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteModel.m; sourceTree = "<group>"; };
-		ECCC0306170A2B8C0021DB00 /* StringModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringModel.h; sourceTree = "<group>"; };
-		ECCC0307170A2B8D0021DB00 /* StringModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringModel.m; sourceTree = "<group>"; };
+		ECCC0306170A2B8C0021DB00 /* KeyPathModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyPathModel.h; sourceTree = "<group>"; };
+		ECCC0307170A2B8D0021DB00 /* KeyPathModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyPathModel.m; sourceTree = "<group>"; };
 		ECCC0308170A2B8F0021DB00 /* LineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineModel.h; sourceTree = "<group>"; };
 		ECCC0309170A2B8F0021DB00 /* LineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineModel.m; sourceTree = "<group>"; };
 		ECCC030A170A2B8F0021DB00 /* NumberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberModel.h; sourceTree = "<group>"; };
@@ -3813,8 +3813,8 @@
 			children = (
 				ECCC0304170A2B8C0021DB00 /* NoteModel.h */,
 				ECCC0305170A2B8C0021DB00 /* NoteModel.m */,
-				ECCC0306170A2B8C0021DB00 /* StringModel.h */,
-				ECCC0307170A2B8D0021DB00 /* StringModel.m */,
+				ECCC0306170A2B8C0021DB00 /* KeyPathModel.h */,
+				ECCC0307170A2B8D0021DB00 /* KeyPathModel.m */,
 				ECCC0308170A2B8F0021DB00 /* LineModel.h */,
 				ECCC0309170A2B8F0021DB00 /* LineModel.m */,
 				ECCC030A170A2B8F0021DB00 /* NumberModel.h */,
@@ -5468,7 +5468,7 @@
 				6D7D47051919BB8D00EF8C75 /* TimeFormatter.m in Sources */,
 				ECE9D2481705133900BB6C53 /* PlayViewController.m in Sources */,
 				ECCC030E170A2B900021DB00 /* NoteModel.m in Sources */,
-				ECCC0310170A2B900021DB00 /* StringModel.m in Sources */,
+				ECCC0310170A2B900021DB00 /* KeyPathModel.m in Sources */,
 				ECCC0312170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0314170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0316170A2B900021DB00 /* TextModel.m in Sources */,
@@ -5546,7 +5546,7 @@
 				9DA313921704FA3100CFF104 /* FPMenuViewController.m in Sources */,
 				ECE9D2491705133900BB6C53 /* PlayViewController.m in Sources */,
 				ECCC030F170A2B900021DB00 /* NoteModel.m in Sources */,
-				ECCC0311170A2B900021DB00 /* StringModel.m in Sources */,
+				ECCC0311170A2B900021DB00 /* KeyPathModel.m in Sources */,
 				ECCC0313170A2B900021DB00 /* LineModel.m in Sources */,
 				ECCC0315170A2B900021DB00 /* NumberModel.m in Sources */,
 				ECCC0317170A2B900021DB00 /* TextModel.m in Sources */,

@@ -609,7 +609,7 @@
             m_keysSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
             
             // Set a timer to keep the note short
-            playingNotesTimers[key] = [NSTimer scheduledTimerWithTimeInterval:KEYS_NOTE_DURATION target:self selector:@selector(EndPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:key],@"Key", nil] repeats:NO];
+            playingNotesTimers[key] = [NSTimer scheduledTimerWithTimeInterval:KEYS_NOTE_DURATION target:self selector:@selector(EndPlayKey:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:key],@"Key", nil] repeats:NO];
         }
     }
 }

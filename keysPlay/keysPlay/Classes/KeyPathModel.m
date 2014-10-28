@@ -6,10 +6,10 @@
 //  Copyright 2011 Msft. All rights reserved.
 //
 
-#import "StringModel.h"
+#import "KeyPathModel.h"
 
 
-@implementation StringModel
+@implementation KeyPathModel
 
 - (id)initWithCenter:(CGPoint)center andSize:(CGSize)size andColor:(GLubyte*)color
 {

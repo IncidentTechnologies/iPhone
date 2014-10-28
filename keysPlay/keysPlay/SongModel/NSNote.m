@@ -77,14 +77,38 @@
 		self.m_value = value;
 		self.m_measureStart = measureStart;
 		self.m_absoluteBeatStart = absoluteBeatStart;
-		self.m_key = key;
+        self.m_key = [self convertValueToKey:value];
 		
+        NSLog(@"NOTE VALUE IS %@ KEY IS %i",m_value,m_key);
+        
 	}
 	
 	return self;
 	
 }
 
+- (int)convertValueToKey:(NSString *)value
+{
+    int keyValue = 0;
+    NSArray * letterValues = [[NSArray alloc] initWithObjects:@"C",@"C#",@"D",@"D#",@"E",@"F",@"F#",@"G",@"G#",@"A",@"A#",@"B", nil];
+    
+    // Value is composed of A-G, #?, and 0-10
+    // These don't appear to include flats?
+    NSString * octaveValue = [[value componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+    
+    NSString * noteValue = [[value componentsSeparatedByCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] componentsJoinedByString:@""];
+    
+    keyValue += KEYS_OCTAVE_COUNT * [octaveValue intValue];
+    
+    for(int k = 0; k < [letterValues count]; k++){
+        if([noteValue isEqualToString:letterValues[k]]){
+            keyValue += k;
+            break;
+        }
+    }
+    
+    return keyValue;
+}
 
 - (NSComparisonResult)compare:(NSNote*)note
 {

@@ -138,6 +138,10 @@ extern UserController * g_userController;
 @implementation PlayViewController
 
 @synthesize g_soundMaster;
+@synthesize keyboardStandaloneEasy;
+@synthesize keyboardStandaloneMedium;
+@synthesize keyboardStandaloneHard;
+@synthesize keyboard;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode
 {
@@ -1456,8 +1460,9 @@ extern UserController * g_userController;
 }
 
 - (void)updateDifficultyDisplay
-{
-    [self hideFrets];
+{    
+    [self hideAllKeyboards];
+    [self showKeyboard:_difficulty];
     
     [_displayController updateDifficulty:_difficulty];
     
@@ -1484,10 +1489,6 @@ extern UserController * g_userController;
             _scoreDifficultyLabel.text = NSLocalizedString(@"Medium", NULL);
             _practiceDifficultyLabel.text = NSLocalizedString(@"Medium", NULL);
             
-            if(isStandalone){
-                [self showFrets];
-            }
-            
         } break;
             
         case PlayViewControllerDifficultyHard:
@@ -1499,38 +1500,51 @@ extern UserController * g_userController;
             _scoreDifficultyLabel.text = NSLocalizedString(@"Hard", NULL);
             _practiceDifficultyLabel.text = NSLocalizedString(@"Hard", NULL);
             
-            if(isStandalone){
-                [self showFrets];
-            }
-            
         } break;
     }
 }
 
-- (void)hideFrets
+- (void)hideAllKeyboards
 {
     fretOneOn = NO;
     fretTwoOn = NO;
     fretThreeOn = NO;
     
-    [_fretOne setHidden:YES];
-    [_fretTwo setHidden:YES];
-    [_fretThree setHidden:YES];
+    [keyboard setHidden:YES];
+    [keyboardStandaloneEasy setHidden:YES];
+    [keyboardStandaloneMedium setHidden:YES];
+    [keyboardStandaloneHard setHidden:YES];
+
 }
 
-- (void)showFrets
+- (void)showKeyboard:(PlayViewControllerDifficulty)difficulty
 {
     fretOneOn = NO;
     fretTwoOn = NO;
     fretThreeOn = NO;
     
-    [_fretOne setHidden:NO];
-    [_fretTwo setHidden:NO];
-    [_fretThree setHidden:NO];
+    if(!isStandalone){
+        
+        [keyboard setHidden:NO];
+        
+    }else{
+        
+        switch (_difficulty) {
+            case PlayViewControllerDifficultyEasy:
+                [keyboardStandaloneEasy setHidden:NO];
+                break;
+            
+            case PlayViewControllerDifficultyMedium:
+                [keyboardStandaloneMedium setHidden:NO];
+                break;
+                
+            case PlayViewControllerDifficultyHard:
+                [keyboardStandaloneHard setHidden:NO];
+                break;
+        }
+        
+    }
     
-    _fretOne.layer.cornerRadius = 50.0;
-    _fretTwo.layer.cornerRadius = 50.0;
-    _fretThree.layer.cornerRadius = 50.0;
 }
 
 - (void)updateScoreDisplayWithAccuracy:(double)accuracy
@@ -1624,11 +1638,14 @@ extern UserController * g_userController;
 
 - (void)updateProgressDisplay
 {
-    CGFloat delta = _songModel.m_percentageComplete * _progressFillView.frame.size.width;
+    
+    //  _progressFillView.frame.size.height
+    CGFloat delta = _songModel.m_percentageComplete * 275;
     
     [_progressFillView setHidden:NO];
     
-    _progressFillView.layer.transform = CATransform3DMakeTranslation( -_progressFillView.frame.size.width + delta, 0, 0 );
+    [_progressFillView setFrame:CGRectMake(_progressFillView.frame.origin.x, _progressFillView.frame.origin.y, _progressFillView.frame.size.width, delta)];
+    
 }
 
 - (void)finalLogging
@@ -2976,22 +2993,22 @@ extern UserController * g_userController;
     CGPoint currentPoint = [touch locationInView:self.view];
     CGPoint previousPoint = [touch previousLocationInView:self.view];
     
-    CGFloat deltaX = currentPoint.x - previousPoint.x;
+    CGFloat deltaY = currentPoint.y - previousPoint.y;
     
     // Only shift render view if delta x is large enough
     if(!isScrolling){
-        if(abs(initPoint.x - currentPoint.x) > 50){
-            [_displayController shiftViewDelta:-deltaX];
+        if(abs(initPoint.y - currentPoint.y) > 50){
+            [_displayController shiftViewDelta:-deltaY];
         }
     }
     
     // If delta y is large enough then strum
-    if(isStandalone && abs(initPoint.y - currentPoint.y) > 10 && !_songIsPaused){
+    /*if(isStandalone && abs(initPoint.y - currentPoint.y) > 10 && !_songIsPaused){
         
         CGPoint touchPoint = [touch locationInView:self.glView];
         [self strumNoteFromTouchPoint:[NSValue valueWithCGPoint:touchPoint]];
         
-    }
+    }*/
     
     _refreshDisplay = YES;
     
@@ -3279,7 +3296,7 @@ extern UserController * g_userController;
 {
     UIButton * fret = (UIButton *)sender;
     
-    [fret setAlpha:1.0];
+    [fret setAlpha:0.5];
     
     if(fret == _fretOne){
         fretOneOn = YES;
@@ -3318,7 +3335,7 @@ extern UserController * g_userController;
 {
     UIButton * fret = (UIButton *)sender;
     
-    [fret setAlpha:0.5];
+    [fret setAlpha:1.0];
     
     if(fret == _fretOne){
         fretOneOn = NO;
