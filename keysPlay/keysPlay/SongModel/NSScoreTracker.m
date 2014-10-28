@@ -12,7 +12,7 @@
 
 #define SCORE_TRACKER_HITS_PER_MULTIPLIER 4
 #define SCORE_TRACKER_MULTIPLIER_MAX 4
-#define STANDALONE_SONG_BEATS_PER_SCREEN 3.0
+#define SONG_BEATS_PER_SCREEN 1.5
 #define NOTE_MAX_POINTS 100.0
 
 @implementation NSScoreTracker
@@ -99,7 +99,7 @@
         //
         
         // Compare note start to beat hit
-        percentAccuracy = (STANDALONE_SONG_BEATS_PER_SCREEN-frame.m_absoluteBeatStart+beat)/STANDALONE_SONG_BEATS_PER_SCREEN;
+        percentAccuracy = (SONG_BEATS_PER_SCREEN-frame.m_absoluteBeatStart+beat)/SONG_BEATS_PER_SCREEN;
         
     }else{
         

@@ -22,12 +22,14 @@
 //#define GL_SCREEN_SEEK_LINE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
 //#define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_MARGIN )
 
+#define GL_SEEK_LINE_Y 46.0
+
 #define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_STRING_WIDTH ( GL_SCREEN_HEIGHT / 60.0 )
 //#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 )
 
-#define SONG_BEATS_PER_SCREEN 3.0
-#define SONG_BEAT_OFFSET 0.0
+#define SONG_BEATS_PER_SCREEN 1.5
+#define SONG_BEAT_OFFSET 0.5
 
 @implementation SongDisplayController
 
@@ -75,7 +77,7 @@
             
             m_glView.m_renderer = m_renderer;
             
-            m_renderer.m_offset = 46.0; // (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
+            m_renderer.m_offset = GL_SEEK_LINE_Y; // (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
             
             [m_glView layoutSubviews];
             
@@ -89,7 +91,7 @@
         
         //[self createNumberModels];
         
-        [self createLineModels];
+        //[self createLineModels];
         
         [self preloadFrames:PRELOAD_INCREMENT*4];
         
@@ -152,7 +154,6 @@
 
 - (void)renderImage
 {
-    
     m_framesDisplayed++;
     
     [self updateDisplayedFrames];
@@ -174,17 +175,12 @@
     
     [m_renderer updatePositionAndRender:position];
     
-    //if(isStandalone){
-    //    [m_glView drawViewWithHighlightsFretOne:fretOne fretTwo:fretTwo fretThree:fretThree];
-    //}else{
-        [m_glView drawView];
-    //}
+    [m_glView drawViewWithHighlightsFretOne:fretOne fretTwo:fretTwo fretThree:fretThree];
     
 }
 
 - (void)updateDisplayedFrames
 {
-    
     double currentBeat = m_songModel.m_currentBeat;
     
     NSArray * displayedNotesKeys = [m_noteModelDictionary allKeys];
@@ -272,7 +268,6 @@
 
 - (void)preloadFrames:(NSInteger)count
 {
-    
     NSMutableArray * framesToRemove = [[NSMutableArray alloc] init];
     
     NSInteger framesLoaded = 0;
@@ -322,6 +317,8 @@
     
     NSNote * firstNote = nil;
     
+    NSMutableArray * drawnNoteCentersForFrame = [[NSMutableArray alloc] init];
+    
     for ( NSNote * note in frame.m_notes )
         //for(int k = [frame.m_notes count]-1; k >= 0; k--)
     {
@@ -348,7 +345,28 @@
         center.y = [self convertBeatToCoordSpace:note.m_absoluteBeatStart];
         center.x = [self convertKeyToCoordSpace:note.m_key];
         
-        NSLog(@"Note at %f, %f",center.x,center.y);
+        
+        // These notes will still be sounded, but do not draw multiple notes in the same place for standalone in order to preserve highlight transparency
+        if(isStandalone){
+            
+            BOOL skipNoteInFrame = false;
+            
+            for(int i = 0; i < [drawnNoteCentersForFrame count]; i++){
+                CGPoint noteCenter = [[drawnNoteCentersForFrame objectAtIndex:i] CGPointValue];
+                
+                if(noteCenter.x == center.x && noteCenter.y == center.y){
+                    skipNoteInFrame = true;
+                }
+            }
+            
+            if(skipNoteInFrame){
+                NSLog(@"SKIPPING Note at %f, %f",center.x,center.y);
+                continue;
+            }else{
+                NSLog(@"Note at %f, %f",center.x,center.y);
+                [drawnNoteCentersForFrame addObject:[NSValue valueWithCGPoint:center]];
+            }
+        }
         
         // number texture overlay
         NumberModel * overlay = nil;
@@ -362,7 +380,13 @@
             
             noteColor = g_keyColors[note.m_key%KEYS_OCTAVE_COUNT];
             
-        }else if(difficulty == PlayViewControllerDifficultyEasy){ // Easy
+        }else{
+            
+            noteColor = [m_renderer getHighlightColorForMappedKey:[self getMappedKeyFromKey:note.m_key]];
+            
+        }
+        
+        /*}else if(difficulty == PlayViewControllerDifficultyEasy){ // Easy
             
             noteColor = g_standaloneKeyColors[0];
             
@@ -388,28 +412,12 @@
                 }
             }
             
-        }
+        }*/
         
         model = [[NoteModel alloc] initWithCenter:center andColor:noteColor andTexture:m_noteTexture andOverlay:overlay];
         
         model.m_key = note.m_key;
-        
-        if(isStandalone){
-            
-            if(note.m_standaloneActive == NO){
-                
-                model.m_standalonekey = -1;
-                
-            }else{
-                if(difficulty == PlayViewControllerDifficultyEasy){
-                    model.m_standalonekey = 0;
-                }else if(difficulty == PlayViewControllerDifficultyMedium){
-                    model.m_standalonekey = [self getStandaloneKeyFromKey:firstNote.m_key];
-                }else if(difficulty == PlayViewControllerDifficultyHard){
-                    model.m_standalonekey = [self getStandaloneKeyFromKey:note.m_key];
-                }
-            }
-        }
+        model.m_standalonekey = (isStandalone) ? [self getMappedKeyFromKey:note.m_key] : KEYS_OCTAVE_COUNT;
         
         NSValue * key = [NSValue valueWithNonretainedObject:note];
         
@@ -423,7 +431,7 @@
     }
     
     // Set the note counts for the model
-    if(isStandalone){
+    /*if(isStandalone){
         for ( NSNote * note in frame.m_notes )
         {
             if(note.m_standaloneActive){
@@ -436,7 +444,7 @@
                 }
             }
         }
-    }
+    }*/
     
 }
 

@@ -137,7 +137,7 @@
     
     m_currentPosition = position;
     
-    NSLog(@"Current position is %f",m_currentPosition);
+    //NSLog(@"Current position is %f",m_currentPosition);
     
     //
     // This is for the initial offset, which is currently negative.
@@ -319,6 +319,7 @@
                 
             }else{
                 
+                /*
                 int fretNoteCounts[4];
                 for(int f = 0; f < 4; f++){
                     fretNoteCounts[f] = [model getFretNoteCountAtIndex:f];
@@ -369,12 +370,38 @@
                 }else{
                     [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
                 }
+                 
+                 */
+                
+                if(model.m_standalonekey < KEYS_OCTAVE_COUNT){
+                    [model drawWithHighlights:highlights highlightColor:[self getHighlightColorForMappedKey:model.m_standalonekey] recolorNote:NO];
+                }else{
+                    [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
+                }
             }
             
         }else{
+        
             [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
         }
     }
 }
+
+- (GLubyte *)getHighlightColorForMappedKey:(int)mappedKey
+{
+    GLubyte * noteColor;
+    
+    if((mappedKey < 5 && mappedKey%2==0) || (mappedKey >= 5 && mappedKey%2==1)){
+        // WHITE
+        noteColor = g_standaloneKeyColors[0];
+    }else{
+        // BLACK
+        noteColor = g_standaloneKeyColors[1];
+    }
+    
+    return noteColor;
+}
+
+
 
 @end

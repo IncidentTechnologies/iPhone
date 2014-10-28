@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import <gTarAppCore/ES1Renderer.h>
+#import <gTarAppCore/AppCore.h>
 
 @class LineModel;
 @class KeyPathModel;
@@ -56,6 +57,7 @@
 - (void)addLine:(LineModel*)line;
 - (void)removeLine:(LineModel*)line;
 - (void)clearModelData;
+- (GLubyte *)getHighlightColorForMappedKey:(int)mappedKey;
 
 - (void)updatePositionAndRender:(double)position;
 
