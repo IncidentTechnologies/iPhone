@@ -229,7 +229,7 @@
 
 - (void)songModelEnterFrame:(NSNoteFrame*)frame {
     
-    NSLog(@"Song playback controller: song model enter frame");
+    //NSLog(@"Song playback controller: song model enter frame");
     
     for ( NSNote * note in frame.m_notes ) {
         if ( note.m_key == KEYS_KEY_MUTED ) {

@@ -201,8 +201,8 @@ extern UserController * g_userController;
     [_practiceView setFrame:fullScreen];
     [_practiceView setBounds:fullScreen];
     
-    _menuView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
-    _songScoreView.transform = CGAffineTransformMakeTranslation( 0, -self.view.frame.size.height );
+    _menuView.transform = CGAffineTransformMakeTranslation( 0, self.view.frame.size.height );
+    _songScoreView.transform = CGAffineTransformMakeTranslation( 0, self.view.frame.size.height );
     
     _practiceViewOpen = NO;
     _menuIsOpen = NO;
@@ -715,7 +715,7 @@ extern UserController * g_userController;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3f];
         
-        menu.transform = CGAffineTransformMakeTranslation(0,-46);
+        menu.transform = CGAffineTransformMakeTranslation(0,46);
         
         [UIView commitAnimations];
         
@@ -733,7 +733,7 @@ extern UserController * g_userController;
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDidStopSelector:@selector(menuSlideComplete)];
         
-        menu.transform = CGAffineTransformMakeTranslation( 0, -menu.frame.size.height );
+        menu.transform = CGAffineTransformMakeTranslation( 0, menu.frame.size.height );
         
         [UIView commitAnimations];
     }
@@ -803,7 +803,7 @@ extern UserController * g_userController;
     if(g_keysController.connected == YES){
         [g_keysController turnOffAllLeds];
     }
-    [_displayController shiftView:0];
+    //[_displayController shiftView:0];
     
     NSInteger delta = [[NSDate date] timeIntervalSince1970] - [_playTimeStart timeIntervalSince1970] + _playTimeAdjustment;
     
@@ -1519,26 +1519,32 @@ extern UserController * g_userController;
 
 - (void)showKeyboard:(PlayViewControllerDifficulty)difficulty
 {
+    float keyboardOnAlpha = 0.9;
+    
     fretOneOn = NO;
     fretTwoOn = NO;
     fretThreeOn = NO;
     
     if(!isStandalone){
         
+        [keyboard setAlpha:keyboardOnAlpha];
         [keyboard setHidden:NO];
         
     }else{
         
         switch (_difficulty) {
             case PlayViewControllerDifficultyEasy:
+                [keyboardStandaloneEasy setAlpha:keyboardOnAlpha];
                 [keyboardStandaloneEasy setHidden:NO];
                 break;
             
             case PlayViewControllerDifficultyMedium:
+                [keyboardStandaloneMedium setAlpha:keyboardOnAlpha];
                 [keyboardStandaloneMedium setHidden:NO];
                 break;
                 
             case PlayViewControllerDifficultyHard:
+                [keyboardStandaloneHard setAlpha:keyboardOnAlpha];
                 [keyboardStandaloneHard setHidden:NO];
                 break;
         }
@@ -2556,7 +2562,7 @@ extern UserController * g_userController;
 
 - (void)songModelEnterFrame:(NSNoteFrame*)frame
 {
-    NSLog(@"Song model enter frame");
+   // NSLog(@"Song model enter frame");
     
     _currentFrame = frame;
     
@@ -2581,7 +2587,7 @@ extern UserController * g_userController;
 
 - (void)songModelExitFrame:(NSNoteFrame*)frame
 {
-    NSLog(@"Song model exit frame");
+    // NSLog(@"Song model exit frame");
     
     // Miss all the remaining notes
     for(NSNote * n in frame.m_notesPending){

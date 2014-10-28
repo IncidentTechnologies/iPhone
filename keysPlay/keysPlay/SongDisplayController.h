@@ -98,10 +98,10 @@
 - (void)shiftViewDelta:(double)shift;
 
 - (int)getStandaloneKeyFromKey:(int)key;
-- (double)convertTimeToCoordSpace:(double)dealta isStandalone:(BOOL)standalone;
-- (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone;
-- (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone;
-- (double)convertKeyToCoordSpace:(NSInteger)key isStandalone:(BOOL)standalone;
+- (double)convertTimeToCoordSpace:(double)delta;
+- (double)convertBeatToCoordSpace:(double)beat;
+- (double)convertCoordSpaceToBeat:(double)coord;
+- (double)convertKeyToCoordSpace:(NSInteger)key;
 - (double)calculateMaxShiftCoordSpace:(BOOL)standalone;
 
 - (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn;

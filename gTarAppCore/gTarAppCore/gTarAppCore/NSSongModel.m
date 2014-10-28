@@ -207,6 +207,8 @@
 
 - (double)getFirstAudibleBeat:(NSArray *)notesArray
 {
+    return 0;
+    
     if([notesArray count] > 0){
         
         NSNote * note = [notesArray objectAtIndex:0];

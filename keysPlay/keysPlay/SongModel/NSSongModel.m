@@ -162,8 +162,6 @@
         }
     }
     
-    NSLog(@"NoteFrames is %@ between %f and %f",m_noteFrames,m_startBeat,m_endBeat);
-    
     // Control the tempo throughout Standalone
     if(isScrolling) {
         m_beatsPerSecond = MIN((m_song.m_tempo * 0.75f) / 60.0, SCROLLING_BEATS_PER_SECOND);

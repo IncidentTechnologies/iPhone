@@ -137,13 +137,15 @@
     
     m_currentPosition = position;
     
+    NSLog(@"Current position is %f",m_currentPosition);
+    
     //
     // This is for the initial offset, which is currently negative.
     // 
-    if ( position < 0 && position < -m_backgroundOffset )
+    /*if ( position < 0 && position < -m_backgroundOffset )
     {
         m_backgroundOffset = -position;
-    }
+    }*/
     
 //    [self render];
     
@@ -151,14 +153,11 @@
 
 - (void)render
 {
-
     [self startRender];
 	
     [self renderNoteModelsWithHighlights:NO fretOne:NO fretTwo:NO fretThree:NO];
     
     [self endRender];
-    
-    
 }
 
 - (void)renderWithHighlights:(BOOL)highlight fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree
@@ -170,12 +169,6 @@
 
 - (void)startRender
 {
-    
-    
-	// update model
-    //	[self updateCurrentPosition];
-    //    NSLog(@"Rendering GL frame");
-    
 	// init stuff
 	[EAGLContext setCurrentContext:m_context];
     
@@ -230,7 +223,7 @@
     // First translate for the measure lines -- view shift + position
     //
     
-    glTranslatef( 0.0f, -m_viewShift, 0.0f);
+     /*glTranslatef( 0.0f, -m_viewShift, 0.0f);*/
 	glTranslatef( 0.0f, m_offset - m_currentPosition, 0.0f);
     
 	// draw measure lines
@@ -250,7 +243,7 @@
      */
         
     // The strings are fixed, so undo any translattion
-    glTranslatef( 0.0f, +m_viewShift, 0.0f);
+      /*glTranslatef( 0.0f, +m_viewShift, 0.0f);*/
     
     //
 	// Draw key paths -- these do not move
@@ -263,7 +256,7 @@
     //    //
     //    // Translate the view to draw the seek line
     //    //
-    glTranslatef( 0.0f, -m_viewShift, 0.0f);
+      /*glTranslatef( 0.0f, -m_viewShift, 0.0f);*/
     //
     //	// draw the seek line
     //	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
@@ -283,12 +276,12 @@
     // Now we translate forward for the notes
     //
     glTranslatef( 0.0f, m_offset - m_currentPosition, 0.0f);
-    
+    /*
 	// draw notes
     for ( Animation * animation in m_noteAnimations )
     {
 		[animation drawCurrentFrameAndAdvanceFrame];
-	}
+	}*/
 }
 
 - (void)endRender

@@ -17,17 +17,17 @@
 #define GL_SCREEN_WIDTH (m_glView.frame.size.width)
 
 // empirically determined ratios defining screen layout for what looks good.
-#define GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN ( GL_SCREEN_WIDTH / 12.0 )
-#define GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN )
-#define GL_SCREEN_SEEK_LINE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
-#define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_MARGIN )
+//#define GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN ( GL_SCREEN_WIDTH / 12.0 )
+//#define GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN )
+//#define GL_SCREEN_SEEK_LINE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
+//#define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_MARGIN )
 
 #define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_STRING_WIDTH ( GL_SCREEN_HEIGHT / 60.0 )
 //#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 )
 
 #define SONG_BEATS_PER_SCREEN 3.0
-#define SONG_BEAT_OFFSET (SONG_BEATS_PER_SCREEN * GL_SCREEN_SEEK_LINE_OFFSET / GL_SCREEN_WIDTH )
+#define SONG_BEAT_OFFSET 0.0
 
 @implementation SongDisplayController
 
@@ -75,7 +75,7 @@
             
             m_glView.m_renderer = m_renderer;
             
-            m_renderer.m_offset = (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
+            m_renderer.m_offset = 46.0; // (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
             
             [m_glView layoutSubviews];
             
@@ -157,10 +157,10 @@
     
     [self updateDisplayedFrames];
     
-    double position = [self convertBeatToCoordSpace:m_songModel.m_currentBeat isStandalone:isStandalone];
+    double position = [self convertBeatToCoordSpace:m_songModel.m_currentBeat];
     
     // pull down the shift as time goes by
-    double end = [self calculateMaxShiftCoordSpace:isStandalone];
+    double end = [self calculateMaxShiftCoordSpace];
     
     // Don't pass the end
     if(m_renderer.m_viewShift < end){
@@ -174,11 +174,11 @@
     
     [m_renderer updatePositionAndRender:position];
     
-    if(isStandalone){
-        [m_glView drawViewWithHighlightsFretOne:fretOne fretTwo:fretTwo fretThree:fretThree];
-    }else{
+    //if(isStandalone){
+    //    [m_glView drawViewWithHighlightsFretOne:fretOne fretTwo:fretTwo fretThree:fretThree];
+    //}else{
         [m_glView drawView];
-    }
+    //}
     
 }
 
@@ -333,35 +333,25 @@
         }
         
         // Determine if active for standalone (first in a row)
-        int standalonestring = [self getMappedKeyFromKey:note.m_key];
+        /*int standalonestring = [self getMappedKeyFromKey:note.m_key];
         if([standaloneNotesForStrings objectForKey:[NSNumber numberWithInt:standalonestring]] == [NSNull null]){
             [standaloneNotesForStrings setObject:note forKey:[NSNumber numberWithInt:standalonestring]];
             note.m_standaloneActive = YES;
         }else{
             note.m_standaloneActive = NO;
         }
+         */
         
-        //NSLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
+        note.m_standaloneActive = NO;
         
         CGPoint center;
-        center.y = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone];
-        center.x = [self convertKeyToCoordSpace:note.m_key isStandalone:isStandalone];
+        center.y = [self convertBeatToCoordSpace:note.m_absoluteBeatStart];
+        center.x = [self convertKeyToCoordSpace:note.m_key];
         
-        //NSLog(@"Center is %f, %f",center.x,center.y);
+        NSLog(@"Note at %f, %f",center.x,center.y);
         
         // number texture overlay
-        NumberModel * overlay;
-        
-        if(isStandalone){
-            overlay = nil;
-        }else if ( note.m_key == KEYS_KEY_MUTED)
-        {
-            overlay = m_mutedTexture;
-        }
-        //else
-        //{
-        //    overlay = [m_numberModels objectAtIndex:(note.m_key%KEYS_GUITAR_FRET_COUNT) ];
-        //}
+        NumberModel * overlay = nil;
         
         NoteModel * model;
         
@@ -476,7 +466,7 @@
     m_viewShift = shift;
     
     // Let us shift through the entire song .. but nothing more.
-    double end = [self calculateMaxShiftCoordSpace:isStandalone];
+    double end = [self calculateMaxShiftCoordSpace];
     
     /*if ( m_viewShift < 0.0 )
      {
@@ -496,7 +486,7 @@
         m_viewShift = end;
     }
     
-    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift isStandalone:isStandalone] + SONG_BEATS_PER_SCREEN;
+    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
     
     //    if ( viewShiftBeats > m_beatsToPreload )
     {
@@ -514,16 +504,7 @@
     m_viewShift += shift;
     
     // Let us shift through the entire song .. but nothing more.
-    double end = [self calculateMaxShiftCoordSpace:isStandalone];
-    
-    /*if ( m_viewShift < 0.0 )
-     {
-     m_viewShift = 0.0;
-     }
-     else if ( end < m_viewShift )
-     {
-     m_viewShift = end;
-     }*/
+    double end = [self calculateMaxShiftCoordSpace];
     
     if(m_viewShift > 0.0)
     {
@@ -534,7 +515,7 @@
         m_viewShift = end;
     }
     
-    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift isStandalone:isStandalone] + SONG_BEATS_PER_SCREEN;
+    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
     
     //    if ( viewShiftBeats > m_beatsToPreload )
     {
@@ -567,13 +548,13 @@
     
     // The center will automatically be offset in the rendering
     CGPoint center;
-    if(isStandalone){
+    /*if(isStandalone){
         center.y = GL_SCREEN_HEIGHT / 2.0;
         center.x = - (GL_SCREEN_SEEK_LINE_MARGIN - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN);
     }else{
         center.y = GL_SCREEN_HEIGHT / 2.0;
         center.x = 0;
-    }
+    }*/
     
     //m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
     
@@ -590,7 +571,7 @@
     for ( unsigned int i = 0; i < KEYS_OCTAVE_COUNT; i++ )
     {
         // strings number and size are inversely proportional -- get slightly bigger
-        center.x = [self convertKeyToCoordSpace:i isStandalone:isStandalone];
+        center.x = [self convertKeyToCoordSpace:i];
         
         center.y = GL_SCREEN_HEIGHT / 2.0;
         
@@ -689,26 +670,26 @@
 
 #pragma mark - Helpers
 
-- (double)convertTimeToCoordSpace:(double)delta isStandalone:(BOOL)standalone
+- (double)convertTimeToCoordSpace:(double)delta
 {
-    return [self convertBeatToCoordSpace:(m_songModel.m_beatsPerSecond * delta) isStandalone:standalone];
+    return [self convertBeatToCoordSpace:(m_songModel.m_beatsPerSecond * delta)];
 }
 
-- (double)convertBeatToCoordSpace:(double)beat isStandalone:(BOOL)standalone
+- (double)convertBeatToCoordSpace:(double)beat
 {
     double beatsPerScreen = SONG_BEATS_PER_SCREEN;
     
-    return GL_SCREEN_HEIGHT - (beat/(GLfloat)beatsPerScreen) * GL_SCREEN_HEIGHT;
+    return -(GL_SCREEN_HEIGHT - (beat/(GLfloat)beatsPerScreen) * GL_SCREEN_HEIGHT);
 }
 
-- (double)convertCoordSpaceToBeat:(double)coord isStandalone:(BOOL)standalone
+- (double)convertCoordSpaceToBeat:(double)coord
 {
     return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN) / GL_SCREEN_HEIGHT;
 }
 
-- (double)convertKeyToCoordSpace:(NSInteger)key isStandalone:(BOOL)standalone
+- (double)convertKeyToCoordSpace:(NSInteger)key
 {
-    key = [self getMappedKeyFromKey:key];
+    double mappedKey = [self getMappedKeyFromKey:key];
     
     // WHITE KEYS
     float numWhiteKeys = KEYS_WHITE_KEY_HARD_COUNT;
@@ -725,13 +706,13 @@
         int blackKeyPositions[KEYS_BLACK_KEY_HARD_COUNT] = {1,2,4,5,6};
         
         for(int k = 0; k < KEYS_WHITE_KEY_HARD_COUNT; k++){
-            if(whiteKeys[k] == key){
+            if(whiteKeys[k] == mappedKey){
                 return (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
             }
         }
         
         for (int j = 0; j < KEYS_BLACK_KEY_HARD_COUNT; j++){
-            if(blackKeys[j] == key){
+            if(blackKeys[j] == mappedKey){
                 return blackKeyPositions[j] * widthPerWhiteKey;
             }
         }
@@ -743,13 +724,13 @@
         int blackKeyPositions[KEYS_BLACK_KEY_MED_COUNT] = {1,2,4};
         
         for(int k = 0; k < KEYS_WHITE_KEY_MED_COUNT; k++){
-            if(whiteKeys[k] == key){
+            if(whiteKeys[k] == mappedKey){
                 return (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
             }
         }
         
         for (int j = 0; j < KEYS_BLACK_KEY_MED_COUNT; j++){
-            if(blackKeys[j] == key){
+            if(blackKeys[j] == mappedKey){
                 return blackKeyPositions[j] * widthPerWhiteKey;
             }
         }
@@ -761,13 +742,13 @@
         int blackKeyPositions[KEYS_BLACK_KEY_EASY_COUNT] = {1,2};
         
         for(int k = 0; k < KEYS_WHITE_KEY_EASY_COUNT; k++){
-            if(whiteKeys[k] == key){
+            if(whiteKeys[k] == mappedKey){
                 return (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
             }
         }
         
         for (int j = 0; j < KEYS_BLACK_KEY_EASY_COUNT; j++){
-            if(blackKeys[j] == key){
+            if(blackKeys[j] == mappedKey){
                 return blackKeyPositions[j] * widthPerWhiteKey;
             }
         }
@@ -778,13 +759,11 @@
     return 0;
 }
 
-- (double)calculateMaxShiftCoordSpace:(BOOL)standalone
+- (double)calculateMaxShiftCoordSpace
 {
-    //double beatsToShift = m_songModel.m_lengthBeats - m_songModel.m_currentBeat - SONG_BEATS_PER_SCREEN + SONG_BEAT_OFFSET;
-    
     double beatsToShift = ceil(m_songModel.m_lengthBeats) - m_songModel.m_currentBeat + SONG_BEATS_PER_SCREEN;
     
-    double end = [self convertBeatToCoordSpace:MAX(beatsToShift,0) isStandalone:standalone];
+    double end = [self convertBeatToCoordSpace:MAX(beatsToShift,0)];
     
     if(m_songModel.m_lengthBeats - m_songModel.m_currentBeat <= SONG_BEATS_PER_SCREEN){
         return end;
@@ -813,15 +792,17 @@
 
 - (NSMutableDictionary *)getKeyPressFromTap:(CGPoint)touchPoint
 {
-    if(!isStandalone){
+    //if(!isStandalone){
         return nil;
-    }
+    //}
     
     // Make sure x is on the touchband
     double touchBuffer = 5;
     
-    double xmax = GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET + [m_renderer.m_seekLineStandaloneModel getCenter].x + [m_renderer.m_seekLineStandaloneModel getSize].width/2 + touchBuffer;
-    double xmin = GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET + [m_renderer.m_seekLineStandaloneModel getCenter].x - [m_renderer.m_seekLineStandaloneModel getSize].width/2 - touchBuffer;
+    
+    //GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET +
+    double xmax = 0 + [m_renderer.m_seekLineStandaloneModel getCenter].x + [m_renderer.m_seekLineStandaloneModel getSize].width/2 + touchBuffer;
+    double xmin = 0 + [m_renderer.m_seekLineStandaloneModel getCenter].x - [m_renderer.m_seekLineStandaloneModel getSize].width/2 - touchBuffer;
     
     //if(touchPoint.x > xmax || touchPoint.x < xmin){
     //    return nil;
@@ -843,10 +824,10 @@
             
         }else if(m_songModel.m_currentBeat <= frame.m_absoluteBeatStart){
             
-            float beatMinusBeat = [self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat isStandalone:isStandalone];
+            float beatMinusBeat = [self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat];
             
             // what is renderer offset?
-            float marginoffset = (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN : GL_SCREEN_SEEK_LINE_MARGIN;
+            float marginoffset =  0.0; //(isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN : GL_SCREEN_SEEK_LINE_MARGIN;
             float noteCenter = beatMinusBeat - marginoffset;
             float noteMin = noteCenter - GL_NOTE_HEIGHT/2.0 - touchBuffer;
             float noteMax = noteCenter + GL_NOTE_HEIGHT/2.0 + touchBuffer;
