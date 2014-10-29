@@ -51,9 +51,9 @@
 
 }
 
-- (void)drawViewWithHighlights
+- (void)drawViewWithHighlightsHitCorrect:(float)hitCorrect hitNear:(float)hitNear hitIncorrect:(float)hitIncorrect
 {
-    [m_renderer renderWithHighlights:YES];
+    [m_renderer renderWithHighlights:YES hitCorrect:hitCorrect hitNear:hitNear hitIncorrect:hitIncorrect];
 }
 
 - (void)drawViewWithHighlightsFretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree

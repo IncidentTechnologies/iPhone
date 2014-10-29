@@ -155,15 +155,15 @@
 {
     [self startRender];
 	
-    [self renderNoteModelsWithHighlights:NO];
+    [self renderNoteModelsWithHighlights:NO hitCorrect:0.0 hitNear:0.0 hitIncorrect:0.0];
     
     [self endRender];
 }
 
-- (void)renderWithHighlights:(BOOL)highlight
+- (void)renderWithHighlights:(BOOL)highlight hitCorrect:(float)hitCorrect hitNear:(float)hitNear hitIncorrect:(float)hitIncorrect
 {
     [self startRender];
-    [self renderNoteModelsWithHighlights:YES];
+    [self renderNoteModelsWithHighlights:YES hitCorrect:hitCorrect hitNear:hitNear hitIncorrect:hitIncorrect];
     [self endRender];
 }
 
@@ -297,8 +297,9 @@
     [m_context presentRenderbuffer: GL_RENDERBUFFER_OES ];
 }
 
-- (void)renderNoteModelsWithHighlights:(BOOL)highlights
+- (void)renderNoteModelsWithHighlights:(BOOL)highlights hitCorrect:(float)hitCorrect hitNear:(float)hitNear hitIncorrect:(float)hitIncorrect
 {
+    
     for(int n = [m_noteModels count] - 1; n >= 0; n--){
         
         NoteModel * model = [m_noteModels objectAtIndex:n];
@@ -309,15 +310,15 @@
         
         if(highlights){
             
-            if(model.m_hit > 0.85){
+            if(model.m_hit > hitCorrect){
                 
                 [model drawWithHighlights:highlights highlightColor:g_standaloneHitKeyCorrectColor recolorNote:YES];
             
-            }else if(model.m_hit > 0.65){
+            }else if(model.m_hit > hitNear){
                 
                 [model drawWithHighlights:highlights highlightColor:g_standaloneHitKeyNearColor recolorNote:YES];
                 
-            }else if(model.m_hit > 0){
+            }else if(model.m_hit > hitIncorrect){
                 
                 [model drawWithHighlights:highlights highlightColor:g_standaloneHitKeyIncorrectColor recolorNote:YES];
                 

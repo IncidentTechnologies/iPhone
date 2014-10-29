@@ -17,7 +17,7 @@
 
 - (void)drawView;
 - (void)drawViewWithHighlightsFretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree;
-- (void)drawViewWithHighlights;
+- (void)drawViewWithHighlightsHitCorrect:(float)hitCorrect hitNear:(float)hitNear hitIncorrect:(float)hitIncorrect;
 - (void)layoutSubviews;
 
 @end

@@ -33,6 +33,19 @@
 #define SONG_BEATS_PER_SCREEN 1.5
 #define SONG_BEAT_OFFSET 0.5
 
+#define TOUCH_HIT_EASY_CORRECT 0.85
+#define TOUCH_HIT_EASY_NEAR 0.65
+#define TOUCH_HIT_EASY_INCORRECT 0.0
+
+#define TOUCH_HIT_MEDIUM_CORRECT 0.9
+#define TOUCH_HIT_MEDIUM_NEAR 0.8
+#define TOUCH_HIT_MEDIUM_INCORRECT 0.0
+
+#define TOUCH_HIT_HARD_CORRECT 0.95
+#define TOUCH_HIT_HARD_NEAR 0.85
+#define TOUCH_HIT_HARD_INCORRECT 0.0
+
+
 @implementation SongDisplayController
 
 - (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops
@@ -173,7 +186,22 @@
     
     [m_renderer updatePositionAndRender:position];
     
-    [m_glView drawViewWithHighlights];
+    
+    float hitCorrect = TOUCH_HIT_EASY_CORRECT;
+    float hitNear = TOUCH_HIT_EASY_NEAR;
+    float hitIncorrect = TOUCH_HIT_EASY_INCORRECT;
+    
+    if(difficulty == PlayViewControllerDifficultyMedium){
+        hitCorrect = TOUCH_HIT_MEDIUM_CORRECT;
+        hitNear = TOUCH_HIT_MEDIUM_NEAR;
+        hitIncorrect = TOUCH_HIT_MEDIUM_INCORRECT;
+    }else if(difficulty == PlayViewControllerDifficultyHard){
+        hitCorrect = TOUCH_HIT_HARD_CORRECT;
+        hitNear = TOUCH_HIT_HARD_NEAR;
+        hitIncorrect = TOUCH_HIT_HARD_INCORRECT;
+    }
+    
+    [m_glView drawViewWithHighlightsHitCorrect:hitCorrect hitNear:hitNear hitIncorrect:hitIncorrect];
     
 }
 
