@@ -150,6 +150,7 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UIView * keyboardStandaloneMedium;
 @property (strong, nonatomic) IBOutlet UIView * keyboardStandaloneHard;
 @property (strong, nonatomic) IBOutlet UIView * keyboard;
+@property (strong, nonatomic) UIView * selectedKeyboard;
 
 @property (nonatomic, weak) NSNoteFrame * lastTappedFrame;
 @property (nonatomic, assign) enum PlayViewControllerDifficulty difficulty;

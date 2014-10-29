@@ -138,6 +138,7 @@ extern UserController * g_userController;
 @synthesize keyboardStandaloneMedium;
 @synthesize keyboardStandaloneHard;
 @synthesize keyboard;
+@synthesize selectedKeyboard;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode
 {
@@ -1518,6 +1519,7 @@ extern UserController * g_userController;
         
         [keyboard setAlpha:keyboardOnAlpha];
         [keyboard setHidden:NO];
+        selectedKeyboard = keyboard;
         
     }else{
         
@@ -1525,16 +1527,19 @@ extern UserController * g_userController;
             case PlayViewControllerDifficultyEasy:
                 [keyboardStandaloneEasy setAlpha:keyboardOnAlpha];
                 [keyboardStandaloneEasy setHidden:NO];
+                selectedKeyboard = keyboardStandaloneEasy;
                 break;
             
             case PlayViewControllerDifficultyMedium:
                 [keyboardStandaloneMedium setAlpha:keyboardOnAlpha];
                 [keyboardStandaloneMedium setHidden:NO];
+                selectedKeyboard = keyboardStandaloneMedium;
                 break;
                 
             case PlayViewControllerDifficultyHard:
                 [keyboardStandaloneHard setAlpha:keyboardOnAlpha];
                 [keyboardStandaloneHard setHidden:NO];
+                selectedKeyboard = keyboardStandaloneHard;
                 break;
         }
         
@@ -2970,7 +2975,8 @@ extern UserController * g_userController;
     // Determine whether to play the tapped string
     if(isStandalone && !_songIsPaused){
         //[self performSelectorInBackground:@selector(tapNoteFromTouchPoint:) withObject:[NSValue valueWithCGPoint:touchPoint]];
-        [self tapNoteFromTouchPoint:[NSValue valueWithCGPoint:touchPoint]];
+        
+        [self tapNoteFromTouchPoint:[NSValue valueWithCGPoint:touchPoint] withNumberOfTouches:[[event allTouches] count]];
     }
     
     // Debug
@@ -3007,27 +3013,85 @@ extern UserController * g_userController;
     
 }
 
-
 #pragma mark - Standalone logic
 // Standalone
-- (void)tapNoteFromTouchPoint:(NSValue *)touchPointVaue
+- (void)tapNoteFromTouchPoint:(NSValue *)touchPointVaue withNumberOfTouches:(int)numberOfTouches
 {
     CGPoint touchPoint = [touchPointVaue CGPointValue];
     
-    NSMutableDictionary * frameWithKey = [_displayController getKeyPressFromTap:touchPoint];
+    NSMutableDictionary * frameWithKey = [_displayController getKeyPressFromTap:touchPoint withNumberOfTouches:numberOfTouches];
     
-    if(frameWithKey == nil){
-        return;
+    double accuracy = -1;
+    
+    if(frameWithKey != nil){
+        
+        int tappedKey = [[frameWithKey objectForKey:@"Key"] intValue];
+        NSNoteFrame * tappedFrame = [frameWithKey objectForKey:@"Frame"];
+        accuracy = [[frameWithKey objectForKey:@"Accuracy"] doubleValue];
+        
+        DLog(@"Play note for key? %i with accuracy %f",tappedKey,accuracy);
+        
+        [self playNoteForKey:tappedKey atFrame:tappedFrame withAccuracy:accuracy];
+        
     }
     
-    int tappedKey = [[frameWithKey objectForKey:@"Key"] intValue];
-    double accuracy = [[frameWithKey objectForKey:@"Accuracy"] doubleValue];
-    NSNoteFrame * tappedFrame = [frameWithKey objectForKey:@"Frame"];
+    float screenTopBuffer = 46.0;
     
-    DLog(@"Play note for key? %i with accuracy %f",tappedKey,accuracy);
-    
-    [self playNoteForKey:tappedKey atFrame:tappedFrame withAccuracy:accuracy];
+    // Get the UIView that was hit
+    UIView * minHeightSubview;
+    for(UIView * subview in selectedKeyboard.subviews){
+        
+        if(touchPoint.x > subview.frame.origin.x && touchPoint.x < subview.frame.origin.x+subview.frame.size.width && touchPoint.y < (selectedKeyboard.frame.origin.y-screenTopBuffer)+subview.frame.size.height){
+            
+            if(minHeightSubview == nil || subview.frame.size.height < minHeightSubview.frame.size.height){
+                minHeightSubview = subview;
+            }
+        }
+        
+    }
 
+    [self colorKeyOnTap:minHeightSubview withAccuracy:accuracy];
+
+}
+
+- (void)colorKeyOnTap:(UIView *)key withAccuracy:(float)accuracy
+{
+    float hitCorrect = TOUCH_HIT_EASY_CORRECT;
+    float hitNear = TOUCH_HIT_EASY_NEAR;
+    float hitIncorrect = TOUCH_HIT_EASY_INCORRECT;
+    
+    if(_difficulty == PlayViewControllerDifficultyMedium){
+        hitCorrect = TOUCH_HIT_MEDIUM_CORRECT;
+        hitNear = TOUCH_HIT_MEDIUM_NEAR;
+        hitIncorrect = TOUCH_HIT_MEDIUM_INCORRECT;
+    }else if(_difficulty == PlayViewControllerDifficultyHard){
+        hitCorrect = TOUCH_HIT_HARD_CORRECT;
+        hitNear = TOUCH_HIT_HARD_NEAR;
+        hitIncorrect = TOUCH_HIT_HARD_INCORRECT;
+    }
+    
+    UIColor * uncolored = key.backgroundColor;
+    UIColor * accuracyColor = [UIColor colorWithRed:154/255.0 green:184/255.0 blue:195/255.0 alpha:1.0];
+    
+    if(accuracy > hitCorrect){
+        //accuracyColor = [UIColor colorWithRed:31/255.0 green:195/255.0 blue:72/266.0 alpha:1.0];
+        accuracyColor = [UIColor colorWithRed:31/255.0 green:227/255.0 blue:84/266.0 alpha:1.0];
+    }else if(accuracy > hitNear){
+        //accuracyColor = [UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1.0];
+        accuracyColor = [UIColor colorWithRed:255/255.0 green:235/255.0 blue:66/255.0 alpha:1.0];
+    }else if(accuracy > hitIncorrect){
+        //accuracyColor = [UIColor colorWithRed:239/255.0 green:92/255.0 blue:53/255.0 alpha:1.0];
+        accuracyColor = [UIColor colorWithRed:255/255.0 green:113/255.0 blue:66/255.0 alpha:1.0];
+    }
+    
+    [UIView animateWithDuration:0.2 animations:^(void){
+        [key setBackgroundColor:accuracyColor];
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:0.2 delay:0.1 options:nil animations:^(void){
+            [key setBackgroundColor:uncolored];
+        }completion:nil];
+    }];
+    
 }
 
 // Standalone

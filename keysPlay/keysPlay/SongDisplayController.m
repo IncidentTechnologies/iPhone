@@ -33,18 +33,6 @@
 #define SONG_BEATS_PER_SCREEN 1.5
 #define SONG_BEAT_OFFSET 0.5
 
-#define TOUCH_HIT_EASY_CORRECT 0.85
-#define TOUCH_HIT_EASY_NEAR 0.65
-#define TOUCH_HIT_EASY_INCORRECT 0.0
-
-#define TOUCH_HIT_MEDIUM_CORRECT 0.9
-#define TOUCH_HIT_MEDIUM_NEAR 0.8
-#define TOUCH_HIT_MEDIUM_INCORRECT 0.0
-
-#define TOUCH_HIT_HARD_CORRECT 0.95
-#define TOUCH_HIT_HARD_NEAR 0.85
-#define TOUCH_HIT_HARD_INCORRECT 0.0
-
 
 @implementation SongDisplayController
 
@@ -824,7 +812,7 @@
     }
 }
 
-- (NSMutableDictionary *)getKeyPressFromTap:(CGPoint)touchPoint
+- (NSMutableDictionary *)getKeyPressFromTap:(CGPoint)touchPoint withNumberOfTouches:(int)numberOfTouches
 {
     if(!isStandalone){
         return nil;
@@ -844,9 +832,6 @@
     }
     
     
-    // subtract GL_SCREEN_TOP_BUFFER?
-    // factor in the negatives
-    
     // Get the frame from the touchpoint so we know note they tried to play
         // Since it's in our touchzone we'll score it
         // (If it's in our special touchzone we'll score it 100%)
@@ -863,18 +848,18 @@
             continue;
             //return nil;
             
-        }else if(m_songModel.m_currentBeat - SONG_BEAT_OFFSET <= frame.m_absoluteBeatStart){
+        }else if(m_songModel.m_currentBeat - SONG_BEAT_OFFSET/2.0 <= frame.m_absoluteBeatStart && [frame.m_notesPending count] > 0){
             
             // Check everything upcoming
             
-            float yForBeat = -1*[self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat+1.1]; // Not sure why an added beat is needed here?
+            float yForBeat = -1*[self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat+0.5]; // how to reach further up the screen?
             
             DLog(@"Checking frame at %f on screen of %f",yForBeat,GL_SCREEN_HEIGHT);
             
             // what is renderer offset?
             //float marginoffset =  0.0; //GL_SEEK_LINE_Y?
             float noteCenter = yForBeat; //- marginoffset;
-            float noteMax = GL_SCREEN_HEIGHT - (noteCenter - GL_NOTE_HEIGHT/2.0 - touchBuffer);
+            float noteMax = GL_SCREEN_HEIGHT;// - (noteCenter - GL_NOTE_HEIGHT/2.0 - touchBuffer);
             float noteMin = GL_SCREEN_HEIGHT - (noteCenter + GL_NOTE_HEIGHT/2.0 + touchBuffer);
             
             DLog(@"Touchpoint y is %f in note range %f to %f",touchPoint.y,noteMin,noteMax);
@@ -895,7 +880,7 @@
         
     }else{
         
-        DLog(@"Found frame %@",activeFrame);
+        DLog(@"Found frame %@ | number of touches is %i",activeFrame,numberOfTouches);
     }
     
 
