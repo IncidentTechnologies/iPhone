@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -12,9 +13,6 @@
                 <outlet property="finishButton" destination="357" id="360"/>
                 <outlet property="finishPracticeButton" destination="VcZ-NW-bfr" id="H9t-si-TM5"/>
                 <outlet property="finishRestartButton" destination="COZ-pp-yg8" id="hQD-EL-FFx"/>
-                <outlet property="fretOne" destination="YcU-bH-EMw" id="eMl-Yb-97L"/>
-                <outlet property="fretThree" destination="CQe-0N-uf7" id="9Z9-Ji-6Zm"/>
-                <outlet property="fretTwo" destination="gjn-4W-ltn" id="U8f-0J-hpD"/>
                 <outlet property="glView" destination="4" id="333"/>
                 <outlet property="heatMapView" destination="TRh-Rs-Ysj" id="ovo-ir-Lt9"/>
                 <outlet property="instrumentButton" destination="737" id="1185"/>
@@ -141,41 +139,41 @@
                     <subviews>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e8l-47-box">
                             <rect key="frame" x="0.0" y="0.0" width="91" height="46"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qDZ-fQ-TNv">
                             <rect key="frame" x="92" y="0.0" width="91" height="46"/>
-                            <color key="backgroundColor" red="0.91764705879999997" green="0.60392156860000001" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Xs-Mf-l78">
                             <rect key="frame" x="184" y="0.0" width="91" height="46"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qp0-tI-tEm">
                             <rect key="frame" x="276" y="0.0" width="91" height="46"/>
-                            <color key="backgroundColor" red="0.91764705879999997" green="0.60392156860000001" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kyq-53-4w4">
                             <rect key="frame" x="368" y="0.0" width="92" height="46"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bir-z3-gzl">
                             <rect key="frame" x="57" y="0.0" width="70" height="23"/>
-                            <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="jhR-kS-zc0"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1tH-yF-igA">
                             <rect key="frame" x="149" y="0.0" width="70" height="23"/>
-                            <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="6Fc-gi-Mkc"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gqa-Bf-3cr">
                             <rect key="frame" x="333" y="0.0" width="70" height="23"/>
-                            <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="zDU-30-h9s"/>
                             </constraints>
@@ -203,51 +201,51 @@
                     <subviews>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TXZ-a0-WLA">
                             <rect key="frame" x="0.0" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WL8-15-wmh">
                             <rect key="frame" x="66" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" red="0.91764705879999997" green="0.60392156860000001" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JIH-L1-YQz">
                             <rect key="frame" x="132" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eSL-8M-11l">
                             <rect key="frame" x="198" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" red="0.91764705879999997" green="0.60392156860000001" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="URL-Bv-Gwo">
                             <rect key="frame" x="264" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UQo-CR-opK">
                             <rect key="frame" x="330" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" red="0.91764705879999997" green="0.60392156860000001" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phl-Iy-wUb">
                             <rect key="frame" x="396" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AMJ-yO-0ym">
                             <rect key="frame" x="43" y="0.0" width="45" height="23"/>
-                            <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R1t-Q6-kAc">
                             <rect key="frame" x="109" y="0.0" width="45" height="23"/>
-                            <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3r-6c-Pn3">
                             <rect key="frame" x="241" y="0.0" width="45" height="23"/>
-                            <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Low-jy-jVy">
                             <rect key="frame" x="307" y="0.0" width="45" height="23"/>
-                            <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n3P-Eb-OaQ">
                             <rect key="frame" x="373" y="0.0" width="45" height="23"/>
-                            <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -288,7 +286,7 @@
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQL-Zd-q4x">
                             <rect key="frame" x="66" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ULE-cU-NAo">
                             <rect key="frame" x="132" y="0.0" width="65" height="46"/>
@@ -296,7 +294,7 @@
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w60-hT-dh6">
                             <rect key="frame" x="198" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F9y-wY-vfA">
                             <rect key="frame" x="264" y="0.0" width="65" height="46"/>
@@ -304,7 +302,7 @@
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lF-V0-TVb">
                             <rect key="frame" x="330" y="0.0" width="65" height="46"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hFl-0c-mrD">
                             <rect key="frame" x="396" y="0.0" width="65" height="46"/>
@@ -363,71 +361,43 @@
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Kr-Xm-nzI" userLabel="Keyboard-Easy">
                     <rect key="frame" x="0.0" y="274" width="460" height="46"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YcU-bH-EMw">
-                            <rect key="frame" x="307" y="0.0" width="153" height="46"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="fretDown:" destination="-1" eventType="touchDown" id="s56-td-rY3"/>
-                                <action selector="fretUp:" destination="-1" eventType="touchUpOutside" id="JAs-yG-xmY"/>
-                                <action selector="fretUp:" destination="-1" eventType="touchUpInside" id="omA-qy-tZE"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjn-4W-ltn">
-                            <rect key="frame" x="154" y="0.0" width="152" height="46"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="fretDown:" destination="-1" eventType="touchDown" id="jLy-JV-73j"/>
-                                <action selector="fretUp:" destination="-1" eventType="touchUpInside" id="3lb-Pk-UCR"/>
-                                <action selector="fretUp:" destination="-1" eventType="touchUpOutside" id="AdE-d5-fcr"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQe-0N-uf7">
+                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZE-Xi-GF6">
                             <rect key="frame" x="0.0" y="0.0" width="153" height="46"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="fretDown:" destination="-1" eventType="touchDown" id="zRv-Ou-Py4"/>
-                                <action selector="fretUp:" destination="-1" eventType="touchUpInside" id="NAP-T2-16s"/>
-                                <action selector="fretUp:" destination="-1" eventType="touchUpOutside" id="xl1-xM-nNP"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2e-AW-a53">
+                        </view>
+                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8sy-N8-WMD">
+                            <rect key="frame" x="154" y="0.0" width="153" height="46"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VFn-vb-ai5">
+                            <rect key="frame" x="308" y="0.0" width="153" height="46"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SZj-rZ-OcW">
                             <rect key="frame" x="105" y="0.0" width="100" height="23"/>
                             <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eGv-x1-G6d">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="CIX-ne-8kg"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mpY-wV-S27">
                             <rect key="frame" x="257" y="0.0" width="100" height="23"/>
                             <color key="backgroundColor" red="0.20784313730000001" green="0.76078431369999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="100" id="Qlj-bw-yl2"/>
+                                <constraint firstAttribute="width" constant="100" id="3tP-zU-uHK"/>
                             </constraints>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="YcU-bH-EMw" secondAttribute="trailing" id="KLM-WW-XjT"/>
-                        <constraint firstItem="gjn-4W-ltn" firstAttribute="leading" secondItem="D2e-AW-a53" secondAttribute="trailing" constant="-51" id="QQj-63-EGn"/>
-                        <constraint firstItem="CQe-0N-uf7" firstAttribute="leading" secondItem="5Kr-Xm-nzI" secondAttribute="leading" id="ST8-KM-Mq6"/>
-                        <constraint firstItem="eGv-x1-G6d" firstAttribute="leading" secondItem="gjn-4W-ltn" secondAttribute="trailing" constant="-49" id="a0m-tM-vZq"/>
-                        <constraint firstItem="gjn-4W-ltn" firstAttribute="leading" secondItem="CQe-0N-uf7" secondAttribute="trailing" constant="1" id="fQp-fd-PbS"/>
-                        <constraint firstAttribute="centerX" secondItem="gjn-4W-ltn" secondAttribute="centerX" id="pCV-Ux-rex"/>
-                        <constraint firstItem="CQe-0N-uf7" firstAttribute="width" secondItem="gjn-4W-ltn" secondAttribute="width" id="vmm-ac-ijF"/>
-                        <constraint firstItem="eGv-x1-G6d" firstAttribute="width" secondItem="D2e-AW-a53" secondAttribute="width" id="ygK-fB-0D4"/>
-                        <constraint firstItem="YcU-bH-EMw" firstAttribute="leading" secondItem="gjn-4W-ltn" secondAttribute="trailing" constant="1" id="yyt-hp-nYo"/>
+                        <constraint firstItem="SZj-rZ-OcW" firstAttribute="leading" secondItem="mZE-Xi-GF6" secondAttribute="trailing" constant="-48" id="4gQ-nA-W3X"/>
+                        <constraint firstItem="8sy-N8-WMD" firstAttribute="width" secondItem="VFn-vb-ai5" secondAttribute="width" id="4qq-oS-Cbz"/>
+                        <constraint firstItem="VFn-vb-ai5" firstAttribute="leading" secondItem="8sy-N8-WMD" secondAttribute="trailing" constant="1" id="6MX-cf-v7e"/>
+                        <constraint firstItem="mpY-wV-S27" firstAttribute="leading" secondItem="8sy-N8-WMD" secondAttribute="trailing" constant="-50" id="8gL-G0-mVT"/>
+                        <constraint firstItem="8sy-N8-WMD" firstAttribute="width" secondItem="mZE-Xi-GF6" secondAttribute="width" id="BqH-Us-cEi"/>
+                        <constraint firstItem="8sy-N8-WMD" firstAttribute="leading" secondItem="mZE-Xi-GF6" secondAttribute="trailing" constant="1" id="Zpn-A2-PxW"/>
+                        <constraint firstAttribute="trailing" secondItem="VFn-vb-ai5" secondAttribute="trailing" constant="-1" id="aQk-MA-d7Q"/>
+                        <constraint firstItem="mZE-Xi-GF6" firstAttribute="leading" secondItem="5Kr-Xm-nzI" secondAttribute="leading" id="dcA-Bt-GaW"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="209" userLabel="TopBar">
@@ -651,7 +621,7 @@
                     </constraints>
                 </view>
                 <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+500" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omb-lG-EjK">
-                    <rect key="frame" x="373" y="50" width="81" height="28"/>
+                    <rect key="frame" x="373" y="50" width="81" height="27.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="81" id="3Wq-3z-sCo"/>
                     </constraints>

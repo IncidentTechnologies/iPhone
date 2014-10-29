@@ -146,10 +146,6 @@ enum PlayViewControllerDifficulty
 @property (strong, nonatomic) IBOutlet UILabel *restartLabel;
 @property (strong, nonatomic) IBOutlet UILabel *menuMetronomeLabel;
 
-@property (strong, nonatomic) IBOutlet UIButton *fretOne;
-@property (strong, nonatomic) IBOutlet UIButton *fretTwo;
-@property (strong, nonatomic) IBOutlet UIButton *fretThree;
-
 @property (strong, nonatomic) IBOutlet UIView * keyboardStandaloneEasy;
 @property (strong, nonatomic) IBOutlet UIView * keyboardStandaloneMedium;
 @property (strong, nonatomic) IBOutlet UIView * keyboardStandaloneHard;
@@ -183,8 +179,5 @@ enum PlayViewControllerDifficulty
 - (IBAction)instrumentButtonClicked:(id)sender;
 - (IBAction)repeatButtonClicked:(id)sender;
 - (IBAction)tempoButtonClicked:(id)sender;
-
-- (IBAction)fretDown:(id)sender;
-- (IBAction)fretUp:(id)sender;
 
 @end

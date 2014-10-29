@@ -22,7 +22,9 @@
 //#define GL_SCREEN_SEEK_LINE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
 //#define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_MARGIN )
 
+#define GL_SCREEN_TOP_BUFFER 46.0
 #define GL_SEEK_LINE_Y 46.0
+#define GL_TOUCH_AREA_HEIGHT 100.0
 
 #define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_STRING_WIDTH ( GL_SCREEN_HEIGHT / 60.0 )
@@ -360,10 +362,10 @@
             }
             
             if(skipNoteInFrame){
-                NSLog(@"SKIPPING Note at %f, %f",center.x,center.y);
+                //NSLog(@"SKIPPING Note at %f, %f",center.x,center.y);
                 continue;
             }else{
-                NSLog(@"Note at %f, %f",center.x,center.y);
+                //NSLog(@"Note at %f, %f",center.x,center.y);
                 [drawnNoteCentersForFrame addObject:[NSValue valueWithCGPoint:center]];
             }
         }
@@ -800,51 +802,62 @@
 
 - (NSMutableDictionary *)getKeyPressFromTap:(CGPoint)touchPoint
 {
-    //if(!isStandalone){
+    if(!isStandalone){
         return nil;
-    //}
+    }
     
-    // Make sure x is on the touchband
-    double touchBuffer = 5;
+    // Make sure touch is within the allowed area near the keyboard
+    double touchBuffer = 50.0;
+    
+    double ymax = GL_SCREEN_HEIGHT;
+    double ymin = GL_SCREEN_HEIGHT - GL_TOUCH_AREA_HEIGHT;
+    
+    double xmax = GL_SCREEN_WIDTH;
+    double xmin = 0;
+    
+    if(touchPoint.x > xmax || touchPoint.x < xmin || touchPoint.y > ymax || touchPoint.y < ymin){
+        return nil;
+    }
     
     
-    //GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET +
-    double xmax = 0 + [m_renderer.m_seekLineStandaloneModel getCenter].x + [m_renderer.m_seekLineStandaloneModel getSize].width/2 + touchBuffer;
-    double xmin = 0 + [m_renderer.m_seekLineStandaloneModel getCenter].x - [m_renderer.m_seekLineStandaloneModel getSize].width/2 - touchBuffer;
+    // subtract GL_SCREEN_TOP_BUFFER?
+    // factor in the negatives
     
-    //if(touchPoint.x > xmax || touchPoint.x < xmin){
-    //    return nil;
-    //}
+    // Get the frame from the touchpoint so we know note they tried to play
+        // Since it's in our touchzone we'll score it
+        // (If it's in our special touchzone we'll score it 100%)
     
-    // TODO: get the frame from the touchpoint so we know note they tried to play
-    // Since it's in our touchzone we'll score it
-    // (If it's in our special touchzone we'll score it 100%)
-    // Do we care about currentFrame?
     
-    // Determine which frame was played
+    // Determine which frame was played by Y intersection
     NSNoteFrame * activeFrame = nil;
     
     for(NSNoteFrame * frame in m_songModel.m_noteFrames){
         
         if(frame.m_absoluteBeatStart > m_songModel.m_currentBeat + SONG_BEATS_PER_SCREEN){
             
-            return nil;
+            // Too late
+            continue;
+            //return nil;
             
-        }else if(m_songModel.m_currentBeat <= frame.m_absoluteBeatStart){
+        }else if(m_songModel.m_currentBeat - SONG_BEAT_OFFSET <= frame.m_absoluteBeatStart){
             
-            float beatMinusBeat = [self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat];
+            // Check everything upcoming
+            
+            float yForBeat = -1*[self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat+1.1]; // Not sure why an added beat is needed here?
+            
+            NSLog(@"Checking frame at %f on screen of %f",yForBeat,GL_SCREEN_HEIGHT);
             
             // what is renderer offset?
-            float marginoffset =  0.0; //(isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN : GL_SCREEN_SEEK_LINE_MARGIN;
-            float noteCenter = beatMinusBeat - marginoffset;
-            float noteMin = noteCenter - GL_NOTE_HEIGHT/2.0 - touchBuffer;
-            float noteMax = noteCenter + GL_NOTE_HEIGHT/2.0 + touchBuffer;
+            //float marginoffset =  0.0; //GL_SEEK_LINE_Y?
+            float noteCenter = yForBeat; //- marginoffset;
+            float noteMax = GL_SCREEN_HEIGHT - (noteCenter - GL_NOTE_HEIGHT/2.0 - touchBuffer);
+            float noteMin = GL_SCREEN_HEIGHT - (noteCenter + GL_NOTE_HEIGHT/2.0 + touchBuffer);
             
-            //NSLog(@"Touchpoint x is %f in note range %f to %f",touchPoint.x,noteMin,noteMax);
+            NSLog(@"Touchpoint y is %f in note range %f to %f",touchPoint.y,noteMin,noteMax);
             
-            if(touchPoint.x >= noteMin && touchPoint.x <= noteMax){
+            if(touchPoint.y >= noteMin && touchPoint.y <= noteMax){
                 
-                //NSLog(@"Touchpoint x is %f in note range %f to %f",touchPoint.x,noteMin,noteMax);
+                NSLog(@"Setting as active frame");
                 
                 activeFrame = frame;
                 break;
@@ -859,66 +872,43 @@
     }else{
         
         NSLog(@"Found frame %@",activeFrame);
-        
     }
     
-    // Determine string
+
+    // Calculate all the accuracies
+    double maxAccuracy = 0.0;
+    int maxAccuracyKey = -1;
     
-    GLfloat effectiveScreenWidth = GL_SCREEN_WIDTH;
-    
-    GLfloat widthPerString = effectiveScreenWidth / ((GLfloat)KEYS_OCTAVE_COUNT-1.0);
-    widthPerString *= 2;
-    
-    double stringBuffer = 15;
-    
-    double string1Center = widthPerString;
-    double string2Center = 2*widthPerString;
-    double string3Center = 3*widthPerString;
-    
-    NSMutableDictionary * frameWithString = [[NSMutableDictionary alloc] initWithObjectsAndKeys:activeFrame,@"Frame",[NSNumber numberWithInt:-1],@"String",nil];
-    
-    // Top string
-    if(touchPoint.y > string1Center-stringBuffer && touchPoint.y < string1Center+stringBuffer){
+    for(NSNote * note in activeFrame.m_notesPending){
         
-        //NSLog(@"*** hit string 1 *** ");
+        // Get accuracy of hit compared to note, then pick the closest
+        double noteX = [self convertKeyToCoordSpace:note.m_key];
+        double accuracy = noteX / touchPoint.x;
         
-        [frameWithString setObject:[NSNumber numberWithInt:3] forKey:@"String"];
-        
-        // return 3;
+        if(accuracy > maxAccuracy){
+            maxAccuracy = accuracy;
+            maxAccuracyKey = note.m_key;
+        }
     }
     
-    // Middle string
-    if(touchPoint.y > string2Center-stringBuffer && touchPoint.y < string2Center+stringBuffer){
-        
-        //NSLog(@"*** hit string 2 *** ");
-        
-        [frameWithString setObject:[NSNumber numberWithInt:2] forKey:@"String"];
-        
-        //return 2;
-    }
+    NSLog(@"Using note %i with accuracy %f",maxAccuracyKey,maxAccuracy);
     
-    // Bottom string
-    if(touchPoint.y > string3Center-stringBuffer && touchPoint.y < string3Center+stringBuffer){
-        
-        //NSLog(@"*** hit string 3 *** ");
-        
-        [frameWithString setObject:[NSNumber numberWithInt:1] forKey:@"String"];
-        
-        //return 1;
-    }
+    // Determine key hit
+    NSMutableDictionary * frameWithKey = [[NSMutableDictionary alloc] initWithObjectsAndKeys:activeFrame,@"Frame",[NSNumber numberWithInt:maxAccuracyKey],@"Key",[NSNumber numberWithFloat:maxAccuracy],@"Accuracy",nil];
     
-    return frameWithString;
+    return frameWithKey;
 }
 
 #pragma mark - Live Info from Play Controller
 
-
+/*
 - (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn
 {
     fretOne = fretOneOn;
     fretTwo = fretTwoOn;
     fretThree = fretThreeOn;
 }
+ */
 
 - (void)hitNote:(NSNote *)note
 {

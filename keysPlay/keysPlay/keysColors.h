@@ -58,7 +58,7 @@ static unsigned char g_keyColors[12][4] =
 static unsigned char g_standaloneKeyColors[2][4] =
 {
     { 225, 255, 255, 255}, // W 0
-	{ 0, 141, 218, 255 }   // B 1
+	{ 35, 194, 238, 255 }   // B 1
 };
 static unsigned char g_standaloneHighlightColors[4][4] =
 {

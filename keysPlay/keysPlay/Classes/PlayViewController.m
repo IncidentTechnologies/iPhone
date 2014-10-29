@@ -3008,14 +3008,6 @@ extern UserController * g_userController;
         }
     }
     
-    // If delta y is large enough then strum
-    /*if(isStandalone && abs(initPoint.y - currentPoint.y) > 10 && !_songIsPaused){
-        
-        CGPoint touchPoint = [touch locationInView:self.glView];
-        [self strumNoteFromTouchPoint:[NSValue valueWithCGPoint:touchPoint]];
-        
-    }*/
-    
     _refreshDisplay = YES;
     
 }
@@ -3033,190 +3025,36 @@ extern UserController * g_userController;
 {
     CGPoint touchPoint = [touchPointVaue CGPointValue];
     
-    NSMutableDictionary * frameWithString = [_displayController getKeyPressFromTap:touchPoint];
+    NSMutableDictionary * frameWithKey = [_displayController getKeyPressFromTap:touchPoint];
     
-    if(frameWithString == nil){
+    if(frameWithKey == nil){
         return;
     }
     
-    int tappedKey = [[frameWithString objectForKey:@"Key"] intValue];
-    NSNoteFrame * tappedFrame = [frameWithString objectForKey:@"Frame"];
+    int tappedKey = [[frameWithKey objectForKey:@"Key"] intValue];
+    NSNoteFrame * tappedFrame = [frameWithKey objectForKey:@"Frame"];
     
-    if(tappedKey >= 0 && [tappedFrame.m_notesPending count] == 1){
+    NSLog(@"Play note for key? %i",tappedKey);
     
-        [self playNoteForKey:tappedKey atFrame:tappedFrame];
+    [self playNoteForKey:tappedKey atFrame:tappedFrame];
 
-    }else if(tappedKey >= 0 && [tappedFrame.m_notesPending count] == 2){
-        
-        NSNote * firstNote = [tappedFrame.m_notesPending objectAtIndex:0];
-        NSNote * secondNote = [tappedFrame.m_notesPending objectAtIndex:1];
-        
-        if([_displayController getMappedKeyFromKey:firstNote.m_key] == [_displayController getMappedKeyFromKey:secondNote.m_key]){
-            [self playNoteForKey:tappedKey atFrame:tappedFrame];
-        }
-        
-    }
 }
 
 // Standalone
-- (void)strumNoteFromTouchPoint:(NSValue *)touchPointValue
-{
-    CGPoint touchPoint = [touchPointValue CGPointValue];
-    
-    NSMutableDictionary * frameWithString = [_displayController getKeyPressFromTap:touchPoint];
-    
-    if(frameWithString == nil){
-        return;
-    }
-    
-    int tappedKey = [[frameWithString objectForKey:@"Key"] intValue];
-    NSNoteFrame * tappedFrame = [frameWithString objectForKey:@"Frame"];
-    
-    if(tappedKey >= 0 && [tappedFrame.m_notesPending count] > 0){
-        [self playNoteForKey:tappedKey atFrame:tappedFrame];
-    }
-}
-
-// Standalone
-//- (void)playNoteOnString:(int)tappedString atFrame:(NSNoteFrame*)tappedFrame
 - (void)playNoteForKey:(int)tappedKey atFrame:(NSNoteFrame *)tappedFrame;
 {
     
-    NSNote * firstNote = nil;
-    
-    if(_difficulty == PlayViewControllerDifficultyHard){
-        
-        BOOL playFretOne = FALSE;
-        BOOL playFretTwo = FALSE;
-        BOOL playFretThree = FALSE;
-        int fretsOn = 0;
-        
-        // Hard: make sure the exact right fretting is held
-        for(NSNote * n in tappedFrame.m_notes){
-            
-            // Ignore hidden notes
-            if(!n.m_standaloneActive){
-                continue;
-            }
-            
-            int key = [_displayController getStandaloneKeyFromKey:n.m_key];
-            
-            switch(key){
-                case 1:
-                    if(!playFretOne) fretsOn++;
-                    playFretOne = TRUE;
-                    break;
-                case 2:
-                    if(!playFretTwo) fretsOn++;
-                    playFretTwo = TRUE;
-                    break;
-                case 3:
-                    if(!playFretThree) fretsOn++;
-                    playFretThree = TRUE;
-                    break;
-            }
-        }
-        
-        // Look at expected fretting and return if held fret combo violates
-        switch(fretsOn){
-            case 0:
-                if(fretOneOn || fretTwoOn || fretThreeOn){
-                    [_displayController attemptFrame:tappedFrame];
-                    return;
-                }
-                break;
-            case 1:
-                if(playFretOne && (!fretOneOn || fretTwoOn || fretThreeOn)){
-                    [_displayController attemptFrame:tappedFrame];
-                    return;
-                }else if(playFretTwo && (!fretTwoOn || fretOneOn || fretThreeOn)){
-                    [_displayController attemptFrame:tappedFrame];
-                    return;
-                }else if(playFretThree && (!fretThreeOn || fretOneOn || fretTwoOn)){
-                    [_displayController attemptFrame:tappedFrame];
-                    return;
-                }
-                break;
-            case 2:
-                if(playFretOne && playFretTwo && (!fretOneOn || !fretTwoOn || fretThreeOn)){
-                    [_displayController attemptFrame:tappedFrame];
-                    return;
-                }else if(playFretOne && playFretThree && (!fretOneOn || !fretThreeOn || fretTwoOn)){
-                    [_displayController attemptFrame:tappedFrame];
-                    return;
-                }else if(playFretTwo && playFretThree && (!fretTwoOn || !fretThreeOn || fretOneOn)){
-                    [_displayController attemptFrame:tappedFrame];
-                    return;
-                }
-                break;
-            case 3:
-                if(!fretOneOn || !fretTwoOn || !fretThreeOn){
-                    [_displayController attemptFrame:tappedFrame];
-                    return;
-                }
-                break;
-                
-        }
-        
-    }else if(_difficulty == PlayViewControllerDifficultyMedium){
-        
-        // Medium: make sure the fret for the first note is held
-        // (UI ensures only 1 fret down at a time)
-        for(NSNote * n in tappedFrame.m_notes){
-            
-            if(!firstNote){
-                firstNote = n;
-            }
-            
-            // Ignore hidden notes
-            if(!n.m_standaloneActive){
-                continue;
-            }
-            
-            int key = [_displayController getStandaloneKeyFromKey:firstNote.m_key];
-            
-            switch (key) {
-                case 0:
-                    if(fretOneOn || fretTwoOn || fretThreeOn){
-                        [_displayController attemptFrame:tappedFrame];
-                        return;
-                    }
-                    break;
-                case 1:
-                    if(!fretOneOn){
-                        [_displayController attemptFrame:tappedFrame];
-                        return;
-                    }
-                    break;
-                case 2:
-                    if(!fretTwoOn){
-                        [_displayController attemptFrame:tappedFrame];
-                        return;
-                    }
-                    break;
-                case 3:
-                    if(!fretThreeOn){
-                        [_displayController attemptFrame:tappedFrame];
-                        return;
-                    }
-                    break;
-            }
-        }
-    }
-    
+    //[_displayController attemptFrame:tappedFrame];
     
     // Go through and play the notes if the string mapping is correct
     NSMutableArray * notesToRemove = [[NSMutableArray alloc] init];
     
     for(NSNote * n in tappedFrame.m_notesPending){
         
-        if([_displayController getMappedKeyFromKey:n.m_key] == tappedKey){
-            
-            // Strummed with the right fretting, autocomplete
-            
-            //if(_difficulty == PlayViewControllerDifficultyEasy || _difficulty == PlayViewControllerDifficultyMedium){
+        if(n.m_key == tappedKey){
             
             @synchronized(tappedFrame.m_notesPending){
+                // Autocompletes
                 for(NSNote * nn in tappedFrame.m_notesPending){
                     
                     KeysPress press;
@@ -3233,23 +3071,6 @@ extern UserController * g_userController;
                     
                 }
             }
-            
-            /*}else{
-             
-             KeysPress press;
-             press.velocity = KeysMaxPressVelocity;
-             press.position.fret = n.m_fret;
-             press.position.string = n.m_string;
-             
-             NSLog(@"Pluck string %i",n.m_string);
-             
-             [_displayController hitNote:n];
-             
-             [self keysNoteOn:press forFrame:tappedFrame];
-             
-             [notesToRemove addObject:n];
-             
-             }*/
             
             break;
         }
@@ -3294,64 +3115,6 @@ extern UserController * g_userController;
         _lastTappedFrame = tappedFrame;
         
     }
-    
-}
-
-// Standalone
-- (void)fretDown:(id)sender
-{
-    UIButton * fret = (UIButton *)sender;
-    
-    [fret setAlpha:0.5];
-    
-    if(fret == _fretOne){
-        fretOneOn = YES;
-        
-        // highlight one fret at a time on Medium
-        if(_difficulty == PlayViewControllerDifficultyMedium){
-            [self fretUp:_fretTwo];
-            [self fretUp:_fretThree];
-        }
-        
-    }else if(fret == _fretTwo){
-        fretTwoOn = YES;
-        
-        // highlight one fret at a time on Medium
-        if(_difficulty == PlayViewControllerDifficultyMedium){
-            [self fretUp:_fretOne];
-            [self fretUp:_fretThree];
-        }
-        
-    }else if(fret == _fretThree){
-        fretThreeOn = YES;
-        
-        // highlight one fret at a time on Medium
-        if(_difficulty == PlayViewControllerDifficultyMedium){
-            [self fretUp:_fretOne];
-            [self fretUp:_fretTwo];
-        }
-    }
-    
-    [_displayController fretsDownOne:fretOneOn fretTwo:fretTwoOn fretThree:fretThreeOn];
-    
-}
-
-// Standalone
-- (void)fretUp:(id)sender
-{
-    UIButton * fret = (UIButton *)sender;
-    
-    [fret setAlpha:1.0];
-    
-    if(fret == _fretOne){
-        fretOneOn = NO;
-    }else if(fret == _fretTwo){
-        fretTwoOn = NO;
-    }else if(fret == _fretThree){
-        fretThreeOn = NO;
-    }
-    
-    [_displayController fretsDownOne:fretOneOn fretTwo:fretTwoOn fretThree:fretThreeOn];
     
 }
 

@@ -104,7 +104,7 @@
 - (double)convertKeyToCoordSpace:(NSInteger)key;
 - (double)calculateMaxShiftCoordSpace:(BOOL)standalone;
 
-- (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn;
+//- (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn;
 
 - (double)getNoteHit:(NSNote*)note;
 - (void)hitNote:(NSNote*)note;
