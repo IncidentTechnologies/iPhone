@@ -108,6 +108,6 @@
 
 // Standalone
 - (int)getMappedKeyFromKey:(int)key;
-- (NSMutableDictionary*)getKeyPressFromTap:(CGPoint)touchPoint withNumberOfTouches:(int)numberOfTouches;
+- (NSMutableDictionary*)getKeyPressFromTap:(NSMutableArray *)touchPoints;
 
 @end

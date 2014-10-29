@@ -812,7 +812,7 @@
     }
 }
 
-- (NSMutableDictionary *)getKeyPressFromTap:(CGPoint)touchPoint withNumberOfTouches:(int)numberOfTouches
+- (NSMutableDictionary *)getKeyPressFromTap:(NSMutableArray *)touchPoints
 {
     if(!isStandalone){
         return nil;
@@ -827,10 +827,12 @@
     double xmax = GL_SCREEN_WIDTH;
     double xmin = 0;
     
-    if(touchPoint.x > xmax || touchPoint.x < xmin || touchPoint.y > ymax || touchPoint.y < ymin){
+    // All touchpoints have to be in range, so mostly look at the first touchpoint
+    
+    CGPoint firstTouchPoint = [[touchPoints firstObject] CGPointValue];
+    if(firstTouchPoint.x > xmax || firstTouchPoint.x < xmin || firstTouchPoint.y > ymax || firstTouchPoint.y < ymin){
         return nil;
     }
-    
     
     // Get the frame from the touchpoint so we know note they tried to play
         // Since it's in our touchzone we'll score it
@@ -862,9 +864,9 @@
             float noteMax = GL_SCREEN_HEIGHT;// - (noteCenter - GL_NOTE_HEIGHT/2.0 - touchBuffer);
             float noteMin = GL_SCREEN_HEIGHT - (noteCenter + GL_NOTE_HEIGHT/2.0 + touchBuffer);
             
-            DLog(@"Touchpoint y is %f in note range %f to %f",touchPoint.y,noteMin,noteMax);
+            DLog(@"First touchpoint y is %f in note range %f to %f",firstTouchPoint.y,noteMin,noteMax);
             
-            if(touchPoint.y >= noteMin && touchPoint.y <= noteMax){
+            if(firstTouchPoint.y >= noteMin && firstTouchPoint.y <= noteMax){
                 
                 DLog(@"Setting as active frame");
                 
@@ -880,32 +882,52 @@
         
     }else{
         
-        DLog(@"Found frame %@ | number of touches is %i",activeFrame,numberOfTouches);
+        DLog(@"Found frame %@ | number of touches is %i",activeFrame,[touchPoints count]);
     }
     
 
     // Calculate all the accuracies
-    double maxAccuracy = 0.0;
-    int maxAccuracyKey = -1;
+    NSMutableArray * notesHit = [[NSMutableArray alloc] init];
     
+    // For each note get the best touchpoint accuracy
+    double averageAccuracy = 0.0;
     for(NSNote * note in activeFrame.m_notesPending){
         
-        // Get accuracy of hit compared to note, then pick the closest
+        double noteAccuracy = [self getAccuracyForNote:note withTouchPoints:touchPoints];
+        averageAccuracy += noteAccuracy;
+        
+        if(noteAccuracy > 0.0){ // Minimum threshold to hit a note
+            [notesHit addObject:[NSNumber numberWithInt:note.m_key]];
+        }
+    }
+    
+    averageAccuracy /= [activeFrame.m_notesPending count];
+    
+    DLog(@"Using average accuracy %f with %i notes hit",averageAccuracy,[notesHit count]);
+    
+    // Determine keys hit
+    NSMutableDictionary * frameWithKey = [[NSMutableDictionary alloc] initWithObjectsAndKeys:activeFrame,@"Frame",notesHit,@"Key",[NSNumber numberWithFloat:averageAccuracy],@"Accuracy",nil];
+    
+    return frameWithKey;
+}
+
+- (double)getAccuracyForNote:(NSNote *)note withTouchPoints:(NSMutableArray *)touchPoints
+{
+    double maxAccuracy = 0.0;
+    
+    for(NSValue * touchPointValue in touchPoints){
+        CGPoint touchPoint = [touchPointValue CGPointValue];
+        
         double noteX = [self convertKeyToCoordSpace:note.m_key];
         double accuracy = 1.0 - fabs(touchPoint.x - noteX) / GL_SCREEN_WIDTH;
         
         if(accuracy > maxAccuracy){
             maxAccuracy = accuracy;
-            maxAccuracyKey = note.m_key;
         }
+        
     }
     
-    DLog(@"Using note %i with accuracy %f",maxAccuracyKey,maxAccuracy);
-    
-    // Determine key hit
-    NSMutableDictionary * frameWithKey = [[NSMutableDictionary alloc] initWithObjectsAndKeys:activeFrame,@"Frame",[NSNumber numberWithInt:maxAccuracyKey],@"Key",[NSNumber numberWithFloat:maxAccuracy],@"Accuracy",nil];
-    
-    return frameWithKey;
+    return maxAccuracy;
 }
 
 #pragma mark - Live Info from Play Controller

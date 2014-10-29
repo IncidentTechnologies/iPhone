@@ -112,6 +112,7 @@ extern UserController * g_userController;
     BOOL isScrolling;
     BOOL isStandalone;
     BOOL isRestrictPlayFrame;
+    BOOL isTouching;
     
     // Practice
     NSMutableArray * markerButtons;
@@ -2956,40 +2957,56 @@ extern UserController * g_userController;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // For now we just want to recognize that a touch (any touch) occurred
-    UITouch * touch = [[touches allObjects] objectAtIndex:0];
-    
-    CGPoint touchPoint = [touch locationInView:self.glView];
-    initPoint = touchPoint;
-    
-    // If double-tap reset the shift to zero
-    if ( [touch tapCount] == 2 )
-    {
-        [_displayController shiftView:0];
-        _refreshDisplay = YES;
-    }
-    
-    //DLog(@"Touch is %f %f",touchPoint.x,touchPoint.y);
-    //DLog(@"Current frame is %@",_currentFrame);
-    
-    // Determine whether to play the tapped string
-    if(isStandalone && !_songIsPaused){
-        //[self performSelectorInBackground:@selector(tapNoteFromTouchPoint:) withObject:[NSValue valueWithCGPoint:touchPoint]];
+    if(!isTouching){
         
-        [self tapNoteFromTouchPoint:[NSValue valueWithCGPoint:touchPoint] withNumberOfTouches:[[event allTouches] count]];
+        isTouching = true;
+        
+        // Gather all the touches
+        NSMutableArray * touchPoints = [[NSMutableArray alloc] init];
+        
+        for(UITouch * touch in [event allTouches]){
+            CGPoint touchPoint = [touch locationInView:self.glView];
+        
+            [touchPoints addObject:[NSValue valueWithCGPoint:touchPoint]];
+        }
+        
+        //UITouch * touch = [[touches allObjects] objectAtIndex:0];
+        
+        //CGPoint touchPoint = [touch locationInView:self.glView];
+        
+        
+        //initPoint = touchPoint;
+        
+        // If double-tap reset the shift to zero
+        /*if ( [touch tapCount] == 2 )
+        {
+            [_displayController shiftView:0];
+            _refreshDisplay = YES;
+        }*/
+        
+        //DLog(@"Touch is %f %f",touchPoint.x,touchPoint.y);
+        //DLog(@"Current frame is %@",_currentFrame);
+        
+        // Determine whether to play the tapped string
+        if(isStandalone && !_songIsPaused){
+            [self performSelectorInBackground:@selector(tapNoteFromTouchPoint:) withObject:touchPoints];
+            
+            //[self tapNoteFromTouchPoint:touchPoints];
+        }
+        
+        // Debug
+    #ifdef Debug_BUILD
+        if(g_keysController.connected){
+            _skipNotes = YES;
+        }
+    #endif
+            
     }
-    
-    // Debug
-#ifdef Debug_BUILD
-    if(g_keysController.connected){
-        _skipNotes = YES;
-    }
-#endif
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+    /*
     UITouch * touch = [[touches allObjects] objectAtIndex:0];
     CGPoint currentPoint = [touch locationInView:self.view];
     CGPoint previousPoint = [touch previousLocationInView:self.view];
@@ -3004,28 +3021,31 @@ extern UserController * g_userController;
     }
     
     _refreshDisplay = YES;
+     */
     
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+    isTouching = false;
     
 }
 
 #pragma mark - Standalone logic
 // Standalone
-- (void)tapNoteFromTouchPoint:(NSValue *)touchPointVaue withNumberOfTouches:(int)numberOfTouches
+- (void)tapNoteFromTouchPoint:(NSMutableArray *)touchPoints
 {
-    CGPoint touchPoint = [touchPointVaue CGPointValue];
-    
-    NSMutableDictionary * frameWithKey = [_displayController getKeyPressFromTap:touchPoint withNumberOfTouches:numberOfTouches];
+    NSMutableDictionary * frameWithKey = [_displayController getKeyPressFromTap:touchPoints];
     
     double accuracy = -1;
     
     if(frameWithKey != nil){
         
-        int tappedKey = [[frameWithKey objectForKey:@"Key"] intValue];
+        // @"Key" is now an array of all tapped keys
+        // Since it autocompletes
+        NSMutableArray * keysHit = [frameWithKey objectForKey:@"Key"];
+        
+        int tappedKey = [[keysHit firstObject] intValue];
         NSNoteFrame * tappedFrame = [frameWithKey objectForKey:@"Frame"];
         accuracy = [[frameWithKey objectForKey:@"Accuracy"] doubleValue];
         
@@ -3037,20 +3057,25 @@ extern UserController * g_userController;
     
     float screenTopBuffer = 46.0;
     
-    // Get the UIView that was hit
-    UIView * minHeightSubview;
-    for(UIView * subview in selectedKeyboard.subviews){
+    // Get the UIViews that were hit
+    for(NSValue * touchPointValue in touchPoints){
         
-        if(touchPoint.x > subview.frame.origin.x && touchPoint.x < subview.frame.origin.x+subview.frame.size.width && touchPoint.y < (selectedKeyboard.frame.origin.y-screenTopBuffer)+subview.frame.size.height){
+        CGPoint touchPoint = [touchPointValue CGPointValue];
+        
+        UIView * minHeightSubview;
+        for(UIView * subview in selectedKeyboard.subviews){
             
-            if(minHeightSubview == nil || subview.frame.size.height < minHeightSubview.frame.size.height){
-                minHeightSubview = subview;
+            if(touchPoint.x > subview.frame.origin.x && touchPoint.x < subview.frame.origin.x+subview.frame.size.width){
+                
+                if(minHeightSubview == nil || subview.frame.size.height < minHeightSubview.frame.size.height){
+                    minHeightSubview = subview;
+                }
             }
+            
         }
-        
-    }
 
-    [self colorKeyOnTap:minHeightSubview withAccuracy:accuracy];
+        [self colorKeyOnTap:minHeightSubview withAccuracy:accuracy];
+    }
 
 }
 
