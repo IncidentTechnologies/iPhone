@@ -46,6 +46,7 @@
 @property (nonatomic, assign) GLfloat m_viewShift;
 
 - (void)renderWithHighlights:(BOOL)highlight fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree;
+- (void)renderWithHighlights:(BOOL)highlight;
 - (void)addAnimation:(NoteAnimation*)animation;
 - (void)removeAnimation:(NoteAnimation*)animation;
 - (void)addModel:(NoteModel*)model;

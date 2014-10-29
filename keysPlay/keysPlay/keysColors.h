@@ -68,10 +68,16 @@ static unsigned char g_standaloneHighlightColors[4][4] =
 	{ 0, 141, 218, 130 }    // B
 };
 
-static unsigned char g_standaloneHitFretColor[4] =
+static unsigned char g_standaloneHitKeyCorrectColor[4] =
     { 31, 195, 72, 130 }; // Green
 
-static unsigned char g_standaloneMissFretColor[4] =
+static unsigned char g_standaloneHitKeyNearColor[4] =
+    { 238, 188, 53, 130 }; // Yellow
+
+static unsigned char g_standaloneHitKeyIncorrectColor[4] =
+    { 239, 92, 53, 130 }; // Red
+
+static unsigned char g_standaloneMissKeyColor[4] =
     { 0, 0, 0, 255 }; // Black
     //{ 38, 45, 51, 255 }; // Black
 

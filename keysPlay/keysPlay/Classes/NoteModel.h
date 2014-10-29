@@ -21,7 +21,7 @@
 - (NoteModel*)initWithCenter:(CGPoint)center andColor:(GLubyte*)color andTexture:(Texture2D*)texture andOverlay:(Model*)overlay;
 
 - (void)drawWithHighlights:(BOOL)highlight highlightColor:(GLubyte*)color recolorNote:(BOOL)recolor;
-- (void)hitNote;
+- (void)hitNoteWithAccuracy:(double)accuracy;
 - (void)missNote;
 - (void)attemptNote;
 - (void)unattemptNote;

@@ -72,10 +72,6 @@
     
     PlayViewControllerDifficulty difficulty;
     
-    BOOL fretOne;
-    BOOL fretTwo;
-    BOOL fretThree;
-    
     int m_loops;
     
 }
@@ -104,10 +100,8 @@
 - (double)convertKeyToCoordSpace:(NSInteger)key;
 - (double)calculateMaxShiftCoordSpace:(BOOL)standalone;
 
-//- (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn;
-
 - (double)getNoteHit:(NSNote*)note;
-- (void)hitNote:(NSNote*)note;
+- (void)hitNote:(NSNote *)note withAccuracy:(double)accuracy;
 - (void)missNote:(NSNote*)note;
 - (void)attemptFrame:(NSNoteFrame *)frame;
 - (void)setNoteHit:(NSNote*)note toValue:(double)hit;

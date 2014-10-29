@@ -29,7 +29,7 @@
         
         m_highlightModel = [[HighlightModel alloc] initWithCenter:m_center andSize:CGSizeMake(25, 25) andColor:g_standaloneClearColor andShape:@"Round"];
         
-        m_hit = 0;
+        m_hit = -1;
         
         l_color = color;
         
@@ -39,27 +39,27 @@
     return self;
 }
 
-- (void)hitNote
+- (void)hitNoteWithAccuracy:(double)accuracy
 {
-    m_hit = 1;
+    m_hit = accuracy;
 }
 
 - (void)missNote
 {
-    if(!m_hit){
-        m_hit = -1;
+    if(m_hit < 0){
+        m_hit = 0;
     }
 }
 
 - (void)attemptNote
 {
-    m_hit = -1;
+    m_hit = 0;
 }
 
 - (void)unattemptNote
 {
-    if(m_hit == -1){
-        m_hit = 0;
+    if(m_hit == 0){
+        m_hit = -1;
     }
 }
 

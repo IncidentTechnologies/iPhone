@@ -15,9 +15,14 @@
 	// virtual
 }
 
-- (void)renderWithHighlights:(BOOL)highlight fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree
+- (void)renderWithHighlights:(BOOL)highlight
 {
     // virtual
+}
+
+- (void)renderWithHighlights:(BOOL)highlight fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree
+{
+    [self renderWithHighlights:highlight];
 }
 
 - (BOOL)resizeFromLayer:(CALayer *)layer

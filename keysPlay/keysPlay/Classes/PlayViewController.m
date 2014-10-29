@@ -113,10 +113,6 @@ extern UserController * g_userController;
     BOOL isStandalone;
     BOOL isRestrictPlayFrame;
     
-    BOOL fretOneOn;
-    BOOL fretTwoOn;
-    BOOL fretThreeOn;
-    
     // Practice
     NSMutableArray * markerButtons;
     int m_loops;
@@ -1506,9 +1502,6 @@ extern UserController * g_userController;
 
 - (void)hideAllKeyboards
 {
-    fretOneOn = NO;
-    fretTwoOn = NO;
-    fretThreeOn = NO;
     
     [keyboard setHidden:YES];
     [keyboardStandaloneEasy setHidden:YES];
@@ -1520,10 +1513,6 @@ extern UserController * g_userController;
 - (void)showKeyboard:(PlayViewControllerDifficulty)difficulty
 {
     float keyboardOnAlpha = 0.9;
-    
-    fretOneOn = NO;
-    fretTwoOn = NO;
-    fretThreeOn = NO;
     
     if(!isStandalone){
         
@@ -3032,16 +3021,17 @@ extern UserController * g_userController;
     }
     
     int tappedKey = [[frameWithKey objectForKey:@"Key"] intValue];
+    double accuracy = [[frameWithKey objectForKey:@"Accuracy"] doubleValue];
     NSNoteFrame * tappedFrame = [frameWithKey objectForKey:@"Frame"];
     
-    NSLog(@"Play note for key? %i",tappedKey);
+    NSLog(@"Play note for key? %i with accuracy %f",tappedKey,accuracy);
     
-    [self playNoteForKey:tappedKey atFrame:tappedFrame];
+    [self playNoteForKey:tappedKey atFrame:tappedFrame withAccuracy:accuracy];
 
 }
 
 // Standalone
-- (void)playNoteForKey:(int)tappedKey atFrame:(NSNoteFrame *)tappedFrame;
+- (void)playNoteForKey:(int)tappedKey atFrame:(NSNoteFrame *)tappedFrame withAccuracy:(double)accuracy;
 {
     
     //[_displayController attemptFrame:tappedFrame];
@@ -3063,7 +3053,7 @@ extern UserController * g_userController;
                     
                     NSLog(@"Play key %i",nn.m_key);
                     
-                    [_displayController hitNote:nn];
+                    [_displayController hitNote:nn withAccuracy:accuracy];
                     
                     [self keysNoteOn:press forFrame:tappedFrame];
                     
@@ -3085,11 +3075,7 @@ extern UserController * g_userController;
     // Prepare data to score
     if([tappedFrame.m_notesHit count] > 0){
         
-        // Count number of frets on
-        int numFretsOn = 0;
-        if(fretOneOn) numFretsOn++;
-        if(fretTwoOn) numFretsOn++;
-        if(fretThreeOn) numFretsOn++;
+        // Count the number of frets on?
         
         // Check if the streak ends
         // Check everything between a frame hit and the last hit frame
@@ -3103,12 +3089,12 @@ extern UserController * g_userController;
             }
         }
         
-        double accuracy = [_scoreTracker scoreFrame:tappedFrame onBeat:_songModel.m_currentBeat withComplexity:numFretsOn endStreak:endStreak isStandalone:isStandalone forLoop:MIN([_songModel getLoopForBeat:tappedFrame.m_absoluteBeatStart],m_loops)];
+        double accuracy = [_scoreTracker scoreFrame:tappedFrame onBeat:_songModel.m_currentBeat withComplexity:1 endStreak:endStreak isStandalone:isStandalone forLoop:MIN([_songModel getLoopForBeat:tappedFrame.m_absoluteBeatStart],m_loops)];
         
         // Save the accuracy in note.m_hit
-        for(NSNote * nn in tappedFrame.m_notes){
-            [_displayController setNoteHit:nn toValue:accuracy];
-        }
+        //for(NSNote * nn in tappedFrame.m_notes){
+        //    [_displayController setNoteHit:nn toValue:accuracy];
+        //}
         
         [self updateScoreDisplayWithAccuracy:accuracy];
         

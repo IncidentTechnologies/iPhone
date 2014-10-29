@@ -51,6 +51,11 @@
 
 }
 
+- (void)drawViewWithHighlights
+{
+    [m_renderer renderWithHighlights:YES];
+}
+
 - (void)drawViewWithHighlightsFretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree
 {
     [m_renderer renderWithHighlights:YES fretOne:fretOne fretTwo:fretTwo fretThree:fretThree];

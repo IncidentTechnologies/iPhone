@@ -101,10 +101,6 @@
         
         m_preloadTimer = [NSTimer scheduledTimerWithTimeInterval:PRELOAD_TIMER_DURATION target:self selector:@selector(preloadFramesTimer) userInfo:nil repeats:YES];
         
-        fretOne = NO;
-        fretTwo = NO;
-        fretThree = NO;
-        
     }
     
     return self;
@@ -177,7 +173,7 @@
     
     [m_renderer updatePositionAndRender:position];
     
-    [m_glView drawViewWithHighlightsFretOne:fretOne fretTwo:fretTwo fretThree:fretThree];
+    [m_glView drawViewWithHighlights];
     
 }
 
@@ -883,7 +879,7 @@
         
         // Get accuracy of hit compared to note, then pick the closest
         double noteX = [self convertKeyToCoordSpace:note.m_key];
-        double accuracy = noteX / touchPoint.x;
+        double accuracy = 1.0 - fabs(touchPoint.x - noteX) / GL_SCREEN_WIDTH;
         
         if(accuracy > maxAccuracy){
             maxAccuracy = accuracy;
@@ -901,21 +897,12 @@
 
 #pragma mark - Live Info from Play Controller
 
-/*
-- (void)fretsDownOne:(BOOL)fretOneOn fretTwo:(BOOL)fretTwoOn fretThree:(BOOL)fretThreeOn
-{
-    fretOne = fretOneOn;
-    fretTwo = fretTwoOn;
-    fretThree = fretThreeOn;
-}
- */
-
-- (void)hitNote:(NSNote *)note
+- (void)hitNote:(NSNote *)note withAccuracy:(double)accuracy
 {
     NSValue * key = [NSValue valueWithNonretainedObject:note];
     NoteModel * notehit = [m_noteModelDictionary objectForKey:key];
     if(notehit != nil){
-        [notehit hitNote];
+        [notehit hitNoteWithAccuracy:accuracy];
     }
 }
 

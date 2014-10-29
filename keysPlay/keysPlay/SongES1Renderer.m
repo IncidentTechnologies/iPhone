@@ -155,15 +155,15 @@
 {
     [self startRender];
 	
-    [self renderNoteModelsWithHighlights:NO fretOne:NO fretTwo:NO fretThree:NO];
+    [self renderNoteModelsWithHighlights:NO];
     
     [self endRender];
 }
 
-- (void)renderWithHighlights:(BOOL)highlight fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree
+- (void)renderWithHighlights:(BOOL)highlight
 {
     [self startRender];
-    [self renderNoteModelsWithHighlights:YES fretOne:fretOne fretTwo:fretTwo fretThree:fretThree];
+    [self renderNoteModelsWithHighlights:YES];
     [self endRender];
 }
 
@@ -297,7 +297,7 @@
     [m_context presentRenderbuffer: GL_RENDERBUFFER_OES ];
 }
 
-- (void)renderNoteModelsWithHighlights:(BOOL)highlights fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree
+- (void)renderNoteModelsWithHighlights:(BOOL)highlights
 {
     for(int n = [m_noteModels count] - 1; n >= 0; n--){
         
@@ -309,69 +309,23 @@
         
         if(highlights){
             
-            if(model.m_hit > 0){
+            if(model.m_hit > 0.85){
                 
-                [model drawWithHighlights:highlights highlightColor:g_standaloneHitFretColor recolorNote:YES];
+                [model drawWithHighlights:highlights highlightColor:g_standaloneHitKeyCorrectColor recolorNote:YES];
+            
+            }else if(model.m_hit > 0.65){
                 
-            }else if(model.m_hit < 0){
+                [model drawWithHighlights:highlights highlightColor:g_standaloneHitKeyNearColor recolorNote:YES];
                 
-                [model drawWithHighlights:highlights highlightColor:g_standaloneMissFretColor recolorNote:NO];
+            }else if(model.m_hit > 0){
+                
+                [model drawWithHighlights:highlights highlightColor:g_standaloneHitKeyIncorrectColor recolorNote:YES];
+                
+            }else if(model.m_hit == 0){
+                
+                [model drawWithHighlights:highlights highlightColor:g_standaloneMissKeyColor recolorNote:NO];
                 
             }else{
-                
-                /*
-                int fretNoteCounts[4];
-                for(int f = 0; f < 4; f++){
-                    fretNoteCounts[f] = [model getFretNoteCountAtIndex:f];
-                }
-                
-                // Which fret to show?
-                if(fretOne && model.m_standalonekey == 1){
-                    
-                    // Unhighlight if fretTwo || fretThree and no notes in the chord
-                    // Unhighlight if !fretTwo || !fretThree and expecting notes in the chord
-                    if((fretTwo && fretNoteCounts[2] == 0) || (fretThree && fretNoteCounts[3] == 0) || (!fretTwo && fretNoteCounts[2] > 0) || (!fretThree && fretNoteCounts[3] > 0)){
-                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
-                    }else{
-                        [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[1] recolorNote:NO];
-                    }
-                    
-                }else if(fretTwo && model.m_standalonekey == 2){
-                    
-                    // Unhighlight if fretOne || fretThree and notecount for 1+3 == 0
-                    // Unhighlight if !fretOne || !fretThree and expecting notes in the chord
-                    if((fretOne && fretNoteCounts[1] == 0) || (fretThree && fretNoteCounts[3] == 0) || (!fretOne && fretNoteCounts[1] > 0) || (!fretThree && fretNoteCounts[3] > 0)){
-                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
-                    }else{
-                        [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[2] recolorNote:NO];
-                    }
-                
-                }else if(fretThree && model.m_standalonekey == 3){
-                    
-                    // Unhighlight if fretOne || fretTwo and notecount for 1+2 == 0
-                    // Unhighlight if !fretOne || !fretTwo and expecting notes in the chord
-                    if((fretOne && fretNoteCounts[1] == 0) || (fretTwo && fretNoteCounts[2] == 0) || (!fretOne && fretNoteCounts[1] > 0) || (!fretTwo && fretNoteCounts[2] > 0)){
-                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
-                    }else{
-                        [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[3] recolorNote:NO];
-                    }
-                    
-                }else if(model.m_standalonekey == 0){
-                    
-                    // Still ensure the fretting is correct before highlighting
-                    if((fretOne && fretNoteCounts[1] == 0) || (fretTwo && fretNoteCounts[2] == 0) || (fretThree && fretNoteCounts[3] == 0) || (!fretOne && fretNoteCounts[1] > 0) || (!fretTwo && fretNoteCounts[2] > 0) || (!fretThree && fretNoteCounts[3] > 0)){
-                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
-                    }else if((fretNoteCounts[0] == 0 && !fretOne && !fretTwo && !fretThree) || (fretNoteCounts[0] > 0)){
-                        [model drawWithHighlights:highlights highlightColor:g_standaloneHighlightColors[0] recolorNote:NO];
-                    }else{
-                        [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
-                    }
-                    
-                }else{
-                    [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
-                }
-                 
-                 */
                 
                 if(model.m_standalonekey < KEYS_OCTAVE_COUNT){
                     [model drawWithHighlights:highlights highlightColor:[self getHighlightColorForMappedKey:model.m_standalonekey] recolorNote:NO];

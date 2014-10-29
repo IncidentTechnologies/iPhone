@@ -17,6 +17,7 @@
 
 - (void)drawView;
 - (void)drawViewWithHighlightsFretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree;
+- (void)drawViewWithHighlights;
 - (void)layoutSubviews;
 
 @end
